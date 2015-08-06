@@ -9,12 +9,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
  * 時効起算日管理テーブルのエンティティクラスです。
  */
 public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023JikoKisambiKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4023JikoKisambiKanri");
 
@@ -27,9 +31,9 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleDate choteiNendo;
     @PrimaryKey
@@ -37,7 +41,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     @PrimaryKey
     private RString tokucho_FuchoKubun;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private RString shuno_Ki_Tsuki;
     @PrimaryKey
@@ -47,7 +51,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -56,7 +60,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -65,7 +69,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,17 +78,16 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,43 +96,43 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleDate getChoteiNendo() {
@@ -138,7 +141,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleDate choteiNendo) {
@@ -147,7 +150,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleDate getFukaNendo() {
@@ -156,7 +159,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleDate fukaNendo) {
@@ -166,9 +169,10 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     /**
      * 特徴・普徴区分のgetメソッドです。
      * <br/>
-     * <br/>1：特別徴収
+     * <br/>1：特別徴収
+     *
      * <br/>2：普通徴収
-     * 
+     *
      * @return 特徴・普徴区分
      */
     public RString getTokucho_FuchoKubun() {
@@ -178,9 +182,10 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
     /**
      * 特徴・普徴区分のsetメソッドです。
      * <br/>
-     * <br/>1：特別徴収
+     * <br/>1：特別徴収
+     *
      * <br/>2：普通徴収
-     * 
+     *
      * @param tokucho_FuchoKubun 特徴・普徴区分
      */
     public void setTokucho_FuchoKubun(RString tokucho_FuchoKubun) {
@@ -189,25 +194,25 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 収納期・月のgetメソッドです。
-     * 
+     *
      * @return 収納期・月
      */
     public RString getShuno_Ki_Tsuki() {
@@ -216,7 +221,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 収納期・月のsetメソッドです。
-     * 
+     *
      * @param shuno_Ki_Tsuki 収納期・月
      */
     public void setShuno_Ki_Tsuki(RString shuno_Ki_Tsuki) {
@@ -225,7 +230,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -234,7 +239,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -243,7 +248,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 時効起算年月日のgetメソッドです。
-     * 
+     *
      * @return 時効起算年月日
      */
     public FlexibleDate getJikoKisanYMD() {
@@ -252,7 +257,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * 時効起算年月日のsetメソッドです。
-     * 
+     *
      * @param jikoKisanYMD 時効起算年月日
      */
     public void setJikoKisanYMD(FlexibleDate jikoKisanYMD) {
@@ -263,7 +268,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 時効起算日区分のgetメソッドです。
      * <br/>
      * <br/>1:納期限翌日（収）,2:督促状発行日（収）,3:収入日（収）,4:債務者の債務の承認,5:差押,6:仮差押,7:仮処分,8:裁判上の請求等、被保険者に対する請求,9:不明（調定無し）（収）,A:その他,B:分納契約日（収）
-     * 
+     *
      * @return 時効起算日区分
      */
     public RString getJikoKisanYMDKubun() {
@@ -274,7 +279,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
      * 時効起算日区分のsetメソッドです。
      * <br/>
      * <br/>1:納期限翌日（収）,2:督促状発行日（収）,3:収入日（収）,4:債務者の債務の承認,5:差押,6:仮差押,7:仮処分,8:裁判上の請求等、被保険者に対する請求,9:不明（調定無し）（収）,A:その他,B:分納契約日（収）
-     * 
+     *
      * @param jikoKisanYMDKubun 時効起算日区分
      */
     public void setJikoKisanYMDKubun(RString jikoKisanYMDKubun) {
@@ -283,9 +288,9 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * このエンティティの主キーが他の{@literal DbT4023JikoKisambiKanriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4023JikoKisambiKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -339,6 +344,7 @@ public class DbT4023JikoKisambiKanriEntity extends DbTableEntityBase<DbT4023Jiko
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

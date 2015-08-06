@@ -8,12 +8,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 特別地域加算減免テーブルのエンティティクラスです。
  */
 public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<DbT4020TokubetsuchiikiKasanGemmenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4020TokubetsuchiikiKasanGemmen");
 
@@ -26,18 +30,18 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private RString shinseiJiyu;
-    private DbUDD011HokenKyufuRitsu keigenritsu;
+    private HokenKyufuRitsu keigenritsu;
     private RString kakuninNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -46,7 +50,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -55,7 +59,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -64,17 +68,16 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,43 +86,43 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -128,7 +131,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -137,7 +140,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -146,7 +149,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -155,25 +158,25 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 減額率のgetメソッドです。
-     * 
+     *
      * @return 減額率
      */
-    public DbUDD011HokenKyufuRitsu getKeigenritsu() {
+    public HokenKyufuRitsu getKeigenritsu() {
         return keigenritsu;
     }
 
     /**
      * 減額率のsetメソッドです。
-     * 
+     *
      * @param keigenritsu 減額率
      */
-    public void setKeigenritsu(DbUDD011HokenKyufuRitsu keigenritsu) {
+    public void setKeigenritsu(HokenKyufuRitsu keigenritsu) {
         this.keigenritsu = keigenritsu;
     }
 
     /**
      * 確認番号のgetメソッドです。
-     * 
+     *
      * @return 確認番号
      */
     public RString getKakuninNo() {
@@ -182,7 +185,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * 確認番号のsetメソッドです。
-     * 
+     *
      * @param kakuninNo 確認番号
      */
     public void setKakuninNo(RString kakuninNo) {
@@ -191,9 +194,9 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT4020TokubetsuchiikiKasanGemmenEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4020TokubetsuchiikiKasanGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -228,6 +231,7 @@ public class DbT4020TokubetsuchiikiKasanGemmenEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

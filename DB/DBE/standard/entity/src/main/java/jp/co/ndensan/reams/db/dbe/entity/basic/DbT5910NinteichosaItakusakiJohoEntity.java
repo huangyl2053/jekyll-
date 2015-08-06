@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 
 /**
  * 認定調査委託先情報テーブルのエンティティクラスです。
  */
 public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT5910NinteichosaItakusakiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5910NinteichosaItakusakiJoho");
 
@@ -34,7 +36,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
     private LasdecCode shichosonCode;
     @PrimaryKey
     private RString ninteichosaItakusakiCode;
-    private DbUDD004JigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     private RString jigyoshaMeisho;
     private RString jigyoshaMeishoKana;
     private YubinNo yubinNo;
@@ -51,7 +53,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,7 +62,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -69,7 +71,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -78,17 +80,16 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -97,7 +98,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -106,7 +107,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -115,7 +116,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 認定調査委託先コードのgetメソッドです。
-     * 
+     *
      * @return 認定調査委託先コード
      */
     public RString getNinteichosaItakusakiCode() {
@@ -124,7 +125,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 認定調査委託先コードのsetメソッドです。
-     * 
+     *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
     public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
@@ -135,10 +136,10 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
      * 事業者番号のgetメソッドです。
      * <br/>
      * <br/>URを参照する場合のみ設定
-     * 
+     *
      * @return 事業者番号
      */
-    public DbUDD004JigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -146,16 +147,16 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
      * 事業者番号のsetメソッドです。
      * <br/>
      * <br/>URを参照する場合のみ設定
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(DbUDD004JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
      * 事業者名称のgetメソッドです。
-     * 
+     *
      * @return 事業者名称
      */
     public RString getJigyoshaMeisho() {
@@ -164,7 +165,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 事業者名称のsetメソッドです。
-     * 
+     *
      * @param jigyoshaMeisho 事業者名称
      */
     public void setJigyoshaMeisho(RString jigyoshaMeisho) {
@@ -173,7 +174,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 事業者名称カナのgetメソッドです。
-     * 
+     *
      * @return 事業者名称カナ
      */
     public RString getJigyoshaMeishoKana() {
@@ -182,7 +183,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 事業者名称カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshaMeishoKana 事業者名称カナ
      */
     public void setJigyoshaMeishoKana(RString jigyoshaMeishoKana) {
@@ -191,7 +192,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     public YubinNo getYubinNo() {
@@ -200,7 +201,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -209,7 +210,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 住所のgetメソッドです。
-     * 
+     *
      * @return 住所
      */
     public RString getJusho() {
@@ -218,7 +219,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 住所のsetメソッドです。
-     * 
+     *
      * @param jusho 住所
      */
     public void setJusho(RString jusho) {
@@ -227,7 +228,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     public TelNo getTelNo() {
@@ -236,7 +237,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -245,7 +246,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * FAX番号のgetメソッドです。
-     * 
+     *
      * @return FAX番号
      */
     public TelNo getFaxNo() {
@@ -254,7 +255,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * FAX番号のsetメソッドです。
-     * 
+     *
      * @param faxNo FAX番号
      */
     public void setFaxNo(TelNo faxNo) {
@@ -263,7 +264,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 代表者名のgetメソッドです。
-     * 
+     *
      * @return 代表者名
      */
     public AtenaMeisho getDaihyoshaName() {
@@ -272,7 +273,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 代表者名のsetメソッドです。
-     * 
+     *
      * @param daihyoshaName 代表者名
      */
     public void setDaihyoshaName(AtenaMeisho daihyoshaName) {
@@ -281,7 +282,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 調査委託区分のgetメソッドです。
-     * 
+     *
      * @return 調査委託区分
      */
     public RString getChosaItakuKubun() {
@@ -290,7 +291,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 調査委託区分のsetメソッドです。
-     * 
+     *
      * @param chosaItakuKubun 調査委託区分
      */
     public void setChosaItakuKubun(RString chosaItakuKubun) {
@@ -299,7 +300,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 割付定員のgetメソッドです。
-     * 
+     *
      * @return 割付定員
      */
     public int getWaritsukeTeiin() {
@@ -308,7 +309,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 割付定員のsetメソッドです。
-     * 
+     *
      * @param waritsukeTeiin 割付定員
      */
     public void setWaritsukeTeiin(int waritsukeTeiin) {
@@ -317,7 +318,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 割付地区のgetメソッドです。
-     * 
+     *
      * @return 割付地区
      */
     public ChikuCode getWaritsukeChiku() {
@@ -326,7 +327,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 割付地区のsetメソッドです。
-     * 
+     *
      * @param waritsukeChiku 割付地区
      */
     public void setWaritsukeChiku(ChikuCode waritsukeChiku) {
@@ -335,7 +336,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 自動割付フラグのgetメソッドです。
-     * 
+     *
      * @return 自動割付フラグ
      */
     public boolean getAutoWaritsukeFlag() {
@@ -344,7 +345,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 自動割付フラグのsetメソッドです。
-     * 
+     *
      * @param autoWaritsukeFlag 自動割付フラグ
      */
     public void setAutoWaritsukeFlag(boolean autoWaritsukeFlag) {
@@ -353,7 +354,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 機関の区分のgetメソッドです。
-     * 
+     *
      * @return 機関の区分
      */
     public RString getKikanKubun() {
@@ -362,7 +363,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 機関の区分のsetメソッドです。
-     * 
+     *
      * @param kikanKubun 機関の区分
      */
     public void setKikanKubun(RString kikanKubun) {
@@ -371,7 +372,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 状況フラグのgetメソッドです。
-     * 
+     *
      * @return 状況フラグ
      */
     public boolean getJokyoFlag() {
@@ -380,7 +381,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * 状況フラグのsetメソッドです。
-     * 
+     *
      * @param jokyoFlag 状況フラグ
      */
     public void setJokyoFlag(boolean jokyoFlag) {
@@ -389,9 +390,9 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * このエンティティの主キーが他の{@literal DbT5910NinteichosaItakusakiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5910NinteichosaItakusakiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -433,6 +434,7 @@ public class DbT5910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

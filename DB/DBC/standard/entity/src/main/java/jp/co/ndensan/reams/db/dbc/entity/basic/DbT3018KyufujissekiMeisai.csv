@@ -1,11 +1,11 @@
 ﻿kokanJohoShikibetsuNo,DbUDD009KokanShikibetsuNo,KokanShikibetsuNo,,,,,交換情報識別番号,A
-inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,RString,,,,,入力識別番号,A
+inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,NyuryokuShikibetsuNo,,,,,入力識別番号,A
 recodeShubetsuCode,varchar,RString,,,,,レコード種別コード,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,被保険者番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業所番号,A
-toshiNo,varchar,ToshiNo,,,,,通し番号,A
+toshiNo,varchar,RString,,,,,通し番号,A
 serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
 serviceKomokuCode,DbUDD006ServiceKomokuCode,ServiceKomokuCode,,,,,サービス項目コード,A
 tanisu,int2,Decimal,,,,,単位数,A

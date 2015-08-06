@@ -19,7 +19,7 @@ public final class DbT7006RoreiFukushiNenkinJukyushaEntityGenerator {
 
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final FlexibleDate DEFAULT_受給開始日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_受給廃止日 = new FlexibleDate("20140502");
+    public static final FlexibleDate DEFAULT_受給終了日 = new FlexibleDate("20140502");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02552"));
 
     /**
@@ -32,7 +32,7 @@ public final class DbT7006RoreiFukushiNenkinJukyushaEntityGenerator {
         DbT7006RoreiFukushiNenkinJukyushaEntity entity = new DbT7006RoreiFukushiNenkinJukyushaEntity();
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setJukyuKaishiYMD(DEFAULT_受給開始日);
-        entity.setJukyuHaishiYMD(DEFAULT_受給廃止日);
+        entity.setJukyuShuryoYMD(DEFAULT_受給終了日);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         return entity;
     }

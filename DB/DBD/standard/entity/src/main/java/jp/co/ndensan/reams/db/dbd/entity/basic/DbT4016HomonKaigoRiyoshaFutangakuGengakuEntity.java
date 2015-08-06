@@ -9,12 +9,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 訪問介護利用者負担額減額テーブルのエンティティクラスです。
  */
 public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4016HomonKaigoRiyoshaFutangakuGengaku");
 
@@ -27,9 +31,9 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private RString hobetsuKubun;
@@ -38,13 +42,13 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     private RString shogaishaTechoNo;
     private FlexibleDate shogaishaTechoKofuYMD;
     private RString shinseiJiyu;
-    private DbUDD011HokenKyufuRitsu kyufuritsu;
+    private HokenKyufuRitsu kyufuritsu;
     private RString kohiFutanshaNo;
     private RString kohiJukyushaNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +57,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +66,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,17 +75,16 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,43 +93,43 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -135,7 +138,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -145,10 +148,12 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     /**
      * 法別区分のgetメソッドです。
      * <br/>
-     * <br/>施行時ホームヘルプ(56)
-     * <br/>障害時ホームヘルプ(57)
+     * <br/>施行時ホームヘルプ(56)
+     *
+     * <br/>障害時ホームヘルプ(57)
+     *
      * <br/>障害ヘルプ全額免除(58)
-     * 
+     *
      * @return 法別区分
      */
     public RString getHobetsuKubun() {
@@ -158,10 +163,12 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     /**
      * 法別区分のsetメソッドです。
      * <br/>
-     * <br/>施行時ホームヘルプ(56)
-     * <br/>障害時ホームヘルプ(57)
+     * <br/>施行時ホームヘルプ(56)
+     *
+     * <br/>障害時ホームヘルプ(57)
+     *
      * <br/>障害ヘルプ全額免除(58)
-     * 
+     *
      * @param hobetsuKubun 法別区分
      */
     public void setHobetsuKubun(RString hobetsuKubun) {
@@ -171,9 +178,10 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     /**
      * 障害者手帳有無のgetメソッドです。
      * <br/>
-     * <br/>1：有
+     * <br/>1：有
+     *
      * <br/>0：無
-     * 
+     *
      * @return 障害者手帳有無
      */
     public boolean getShogaishaTechoUmu() {
@@ -183,9 +191,10 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
     /**
      * 障害者手帳有無のsetメソッドです。
      * <br/>
-     * <br/>1：有
+     * <br/>1：有
+     *
      * <br/>0：無
-     * 
+     *
      * @param shogaishaTechoUmu 障害者手帳有無
      */
     public void setShogaishaTechoUmu(boolean shogaishaTechoUmu) {
@@ -194,7 +203,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳等級のgetメソッドです。
-     * 
+     *
      * @return 障害者手帳等級
      */
     public RString getShogaishaTechoTokyu() {
@@ -203,7 +212,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳等級のsetメソッドです。
-     * 
+     *
      * @param shogaishaTechoTokyu 障害者手帳等級
      */
     public void setShogaishaTechoTokyu(RString shogaishaTechoTokyu) {
@@ -212,7 +221,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳番号のgetメソッドです。
-     * 
+     *
      * @return 障害者手帳番号
      */
     public RString getShogaishaTechoNo() {
@@ -221,7 +230,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳番号のsetメソッドです。
-     * 
+     *
      * @param shogaishaTechoNo 障害者手帳番号
      */
     public void setShogaishaTechoNo(RString shogaishaTechoNo) {
@@ -230,7 +239,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳交付年月日のgetメソッドです。
-     * 
+     *
      * @return 障害者手帳交付年月日
      */
     public FlexibleDate getShogaishaTechoKofuYMD() {
@@ -239,7 +248,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 障害者手帳交付年月日のsetメソッドです。
-     * 
+     *
      * @param shogaishaTechoKofuYMD 障害者手帳交付年月日
      */
     public void setShogaishaTechoKofuYMD(FlexibleDate shogaishaTechoKofuYMD) {
@@ -248,7 +257,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -257,7 +266,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -266,25 +275,25 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 給付率のgetメソッドです。
-     * 
+     *
      * @return 給付率
      */
-    public DbUDD011HokenKyufuRitsu getKyufuritsu() {
+    public HokenKyufuRitsu getKyufuritsu() {
         return kyufuritsu;
     }
 
     /**
      * 給付率のsetメソッドです。
-     * 
+     *
      * @param kyufuritsu 給付率
      */
-    public void setKyufuritsu(DbUDD011HokenKyufuRitsu kyufuritsu) {
+    public void setKyufuritsu(HokenKyufuRitsu kyufuritsu) {
         this.kyufuritsu = kyufuritsu;
     }
 
     /**
      * 公費負担者番号のgetメソッドです。
-     * 
+     *
      * @return 公費負担者番号
      */
     public RString getKohiFutanshaNo() {
@@ -293,7 +302,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 公費負担者番号のsetメソッドです。
-     * 
+     *
      * @param kohiFutanshaNo 公費負担者番号
      */
     public void setKohiFutanshaNo(RString kohiFutanshaNo) {
@@ -302,7 +311,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 公費受給者番号のgetメソッドです。
-     * 
+     *
      * @return 公費受給者番号
      */
     public RString getKohiJukyushaNo() {
@@ -311,7 +320,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * 公費受給者番号のsetメソッドです。
-     * 
+     *
      * @param kohiJukyushaNo 公費受給者番号
      */
     public void setKohiJukyushaNo(RString kohiJukyushaNo) {
@@ -320,9 +329,9 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * このエンティティの主キーが他の{@literal DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -363,6 +372,7 @@ public class DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity extends DbTableEntit
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

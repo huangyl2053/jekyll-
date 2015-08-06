@@ -10,12 +10,15 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 支払方法変更減額テーブルのエンティティクラスです。
  */
 public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT4025ShiharaiHohoHenkoGengakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4025ShiharaiHohoHenkoGengaku");
 
@@ -28,9 +31,9 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kanriKubun;
     @PrimaryKey
@@ -45,7 +48,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +57,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +66,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,17 +75,16 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,37 +93,37 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -129,7 +131,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 管理区分のgetメソッドです。
      * <br/>
      * <br/>1：２号差止,2：１号償還払化,3：１号給付額減額
-     * 
+     *
      * @return 管理区分
      */
     public RString getKanriKubun() {
@@ -140,7 +142,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 管理区分のsetメソッドです。
      * <br/>
      * <br/>1：２号差止,2：１号償還払化,3：１号給付額減額
-     * 
+     *
      * @param kanriKubun 管理区分
      */
     public void setKanriKubun(RString kanriKubun) {
@@ -149,7 +151,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -158,7 +160,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -167,7 +169,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 滞納判定年月日のgetメソッドです。
-     * 
+     *
      * @return 滞納判定年月日
      */
     public FlexibleDate getTainoHanteiYMD() {
@@ -176,7 +178,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 滞納判定年月日のsetメソッドです。
-     * 
+     *
      * @param tainoHanteiYMD 滞納判定年月日
      */
     public void setTainoHanteiYMD(FlexibleDate tainoHanteiYMD) {
@@ -185,7 +187,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 判定基準年月日のgetメソッドです。
-     * 
+     *
      * @return 判定基準年月日
      */
     public FlexibleDate getHanteiKijunYMD() {
@@ -194,7 +196,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 判定基準年月日のsetメソッドです。
-     * 
+     *
      * @param hanteiKijunYMD 判定基準年月日
      */
     public void setHanteiKijunYMD(FlexibleDate hanteiKijunYMD) {
@@ -205,7 +207,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 徴収権消滅期間のgetメソッドです。
      * <br/>
      * <br/>年数で管理（1.511等と格納）
-     * 
+     *
      * @return 徴収権消滅期間
      */
     public Decimal getChoshukenShometsuKikan() {
@@ -216,7 +218,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 徴収権消滅期間のsetメソッドです。
      * <br/>
      * <br/>年数で管理（1.511等と格納）
-     * 
+     *
      * @param choshukenShometsuKikan 徴収権消滅期間
      */
     public void setChoshukenShometsuKikan(Decimal choshukenShometsuKikan) {
@@ -227,7 +229,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 納付済期間のgetメソッドです。
      * <br/>
      * <br/>年数で管理（3.738等と格納）
-     * 
+     *
      * @return 納付済期間
      */
     public Decimal getNofusumiKikan() {
@@ -238,7 +240,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 納付済期間のsetメソッドです。
      * <br/>
      * <br/>年数で管理（3.738等と格納）
-     * 
+     *
      * @param nofusumiKikan 納付済期間
      */
     public void setNofusumiKikan(Decimal nofusumiKikan) {
@@ -249,7 +251,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 納付済減額期間のgetメソッドです。
      * <br/>
      * <br/>月数で管理（2 等と格納）
-     * 
+     *
      * @return 納付済減額期間
      */
     public Decimal getNofusumiGengakuKikan() {
@@ -260,7 +262,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
      * 納付済減額期間のsetメソッドです。
      * <br/>
      * <br/>月数で管理（2 等と格納）
-     * 
+     *
      * @param nofusumiGengakuKikan 納付済減額期間
      */
     public void setNofusumiGengakuKikan(Decimal nofusumiGengakuKikan) {
@@ -269,7 +271,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 確定減額期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 確定減額期間開始年月日
      */
     public FlexibleDate getKakutei_GengakuKaishiYMD() {
@@ -278,7 +280,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 確定減額期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param kakutei_GengakuKaishiYMD 確定減額期間開始年月日
      */
     public void setKakutei_GengakuKaishiYMD(FlexibleDate kakutei_GengakuKaishiYMD) {
@@ -287,7 +289,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 確定減額期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 確定減額期間終了年月日
      */
     public FlexibleDate getKakutei_GengakuShuryoYMD() {
@@ -296,7 +298,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * 確定減額期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param kakutei_GengakuShuryoYMD 確定減額期間終了年月日
      */
     public void setKakutei_GengakuShuryoYMD(FlexibleDate kakutei_GengakuShuryoYMD) {
@@ -305,9 +307,9 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * このエンティティの主キーが他の{@literal DbT4025ShiharaiHohoHenkoGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4025ShiharaiHohoHenkoGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -350,6 +352,7 @@ public class DbT4025ShiharaiHohoHenkoGengakuEntity extends DbTableEntityBase<DbT
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

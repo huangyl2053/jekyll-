@@ -1,9 +1,0 @@
-﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
-rirekiNo,varchar,RString,,,,,履歴番号,A
-shikibetsuCodeSochiMoto,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード（措置元）,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-shichosonCodeSochiMoto,UDD023LasdecCode,LasdecCode,,,,,市町村コード（措置元）,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
-hihokenshaNoSochiMoto,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号（措置元）,A
-kaishiYMD,UDD015YMD,FlexibleDate,,,,,開始年月日,A
-shuryoYMD,UDD015YMD,FlexibleDate,,,,,終了年月日,A

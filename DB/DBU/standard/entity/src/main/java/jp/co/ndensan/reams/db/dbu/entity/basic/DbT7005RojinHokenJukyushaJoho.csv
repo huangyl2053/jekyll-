@@ -1,5 +1,0 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
-rojinHokenShichosonCode,UDD023LasdecCode,LasdecCode,,,,,老人保健市町村コード,A
-rojinHokenJukyushaNo,bpchar,RString,,,,,老人保健受給者番号,A

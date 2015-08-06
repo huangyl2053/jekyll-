@@ -10,12 +10,15 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 支払方法変更差止テーブルのエンティティクラスです。
  */
 public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<DbT4024ShiharaiHohoHenkoSashitomeEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4024ShiharaiHohoHenkoSashitome");
 
@@ -28,9 +31,9 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kanriKubun;
     @PrimaryKey
@@ -52,7 +55,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +64,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +73,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,17 +82,16 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,47 +100,49 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 管理区分のgetメソッドです。
      * <br/>
-     * <br/>1：２号差止
-     * <br/>2：１号償還払い化
+     * <br/>1：２号差止
+     *
+     * <br/>2：１号償還払い化
+     *
      * <br/>3：１号給付額減額
-     * 
+     *
      * @return 管理区分
      */
     public RString getKanriKubun() {
@@ -148,10 +152,12 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
     /**
      * 管理区分のsetメソッドです。
      * <br/>
-     * <br/>1：２号差止
-     * <br/>2：１号償還払い化
+     * <br/>1：２号差止
+     *
+     * <br/>2：１号償還払い化
+     *
      * <br/>3：１号給付額減額
-     * 
+     *
      * @param kanriKubun 管理区分
      */
     public void setKanriKubun(RString kanriKubun) {
@@ -160,7 +166,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return 差止サービス提供年月
      */
     public FlexibleYearMonth getSashitome_ServiceTeikyoYM() {
@@ -169,7 +175,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param sashitome_ServiceTeikyoYM 差止サービス提供年月
      */
     public void setSashitome_ServiceTeikyoYM(FlexibleYearMonth sashitome_ServiceTeikyoYM) {
@@ -178,7 +184,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止償還整理番号のgetメソッドです。
-     * 
+     *
      * @return 差止償還整理番号
      */
     public RString getSashitome_ShokanSeiriNo() {
@@ -187,7 +193,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止償還整理番号のsetメソッドです。
-     * 
+     *
      * @param sashitome_ShokanSeiriNo 差止償還整理番号
      */
     public void setSashitome_ShokanSeiriNo(RString sashitome_ShokanSeiriNo) {
@@ -196,7 +202,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -205,7 +211,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -216,7 +222,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 差止状況区分のgetメソッドです。
      * <br/>
      * <br/>1：差止登録,9：差止解除
-     * 
+     *
      * @return 差止状況区分
      */
     public RString getSashitome_JokyoKubun() {
@@ -227,7 +233,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 差止状況区分のsetメソッドです。
      * <br/>
      * <br/>1：差止登録,9：差止解除
-     * 
+     *
      * @param sashitome_JokyoKubun 差止状況区分
      */
     public void setSashitome_JokyoKubun(RString sashitome_JokyoKubun) {
@@ -236,7 +242,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止決定年月日のgetメソッドです。
-     * 
+     *
      * @return 差止決定年月日
      */
     public FlexibleDate getSashitome_KetteiYMD() {
@@ -245,7 +251,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止決定年月日のsetメソッドです。
-     * 
+     *
      * @param sashitome_KetteiYMD 差止決定年月日
      */
     public void setSashitome_KetteiYMD(FlexibleDate sashitome_KetteiYMD) {
@@ -254,7 +260,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 差止通知書発行年月日
      */
     public FlexibleDate getSashitome_TsuchiHakkoYMD() {
@@ -263,7 +269,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param sashitome_TsuchiHakkoYMD 差止通知書発行年月日
      */
     public void setSashitome_TsuchiHakkoYMD(FlexibleDate sashitome_TsuchiHakkoYMD) {
@@ -274,7 +280,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 差止通知書再発行フラグのgetメソッドです。
      * <br/>
      * <br/>1：再発行対象,0：再発行対象外
-     * 
+     *
      * @return 差止通知書再発行フラグ
      */
     public boolean getSashitome_TsuchiSaiHakkoFlag() {
@@ -285,7 +291,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 差止通知書再発行フラグのsetメソッドです。
      * <br/>
      * <br/>1：再発行対象,0：再発行対象外
-     * 
+     *
      * @param sashitome_TsuchiSaiHakkoFlag 差止通知書再発行フラグ
      */
     public void setSashitome_TsuchiSaiHakkoFlag(boolean sashitome_TsuchiSaiHakkoFlag) {
@@ -294,7 +300,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止納付期限のgetメソッドです。
-     * 
+     *
      * @return 差止納付期限
      */
     public FlexibleDate getSashitome_NofuYMD() {
@@ -303,7 +309,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止納付期限のsetメソッドです。
-     * 
+     *
      * @param sashitome_NofuYMD 差止納付期限
      */
     public void setSashitome_NofuYMD(FlexibleDate sashitome_NofuYMD) {
@@ -312,7 +318,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止解除年月日のgetメソッドです。
-     * 
+     *
      * @return 差止解除年月日
      */
     public FlexibleDate getSashitome_KaijoYMD() {
@@ -321,7 +327,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 差止解除年月日のsetメソッドです。
-     * 
+     *
      * @param sashitome_KaijoYMD 差止解除年月日
      */
     public void setSashitome_KaijoYMD(FlexibleDate sashitome_KaijoYMD) {
@@ -330,7 +336,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除決定年月日のgetメソッドです。
-     * 
+     *
      * @return 控除決定年月日
      */
     public FlexibleDate getKojo_KetteiYMD() {
@@ -339,7 +345,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除決定年月日のsetメソッドです。
-     * 
+     *
      * @param kojo_KetteiYMD 控除決定年月日
      */
     public void setKojo_KetteiYMD(FlexibleDate kojo_KetteiYMD) {
@@ -348,7 +354,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 控除通知書発行年月日
      */
     public FlexibleDate getKojo_TsuchiHakkoYMD() {
@@ -357,7 +363,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param kojo_TsuchiHakkoYMD 控除通知書発行年月日
      */
     public void setKojo_TsuchiHakkoYMD(FlexibleDate kojo_TsuchiHakkoYMD) {
@@ -368,7 +374,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 控除通知書再発行フラグのgetメソッドです。
      * <br/>
      * <br/>1：再発行対象,0：再発行対象外
-     * 
+     *
      * @return 控除通知書再発行フラグ
      */
     public boolean getKojo_TsuchiSaiHakkoYMD() {
@@ -379,7 +385,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
      * 控除通知書再発行フラグのsetメソッドです。
      * <br/>
      * <br/>1：再発行対象,0：再発行対象外
-     * 
+     *
      * @param kojo_TsuchiSaiHakkoYMD 控除通知書再発行フラグ
      */
     public void setKojo_TsuchiSaiHakkoYMD(boolean kojo_TsuchiSaiHakkoYMD) {
@@ -388,7 +394,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除被保険者証提出期限のgetメソッドです。
-     * 
+     *
      * @return 控除被保険者証提出期限
      */
     public FlexibleDate getKojo_ShoTeishutsuYMD() {
@@ -397,7 +403,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * 控除被保険者証提出期限のsetメソッドです。
-     * 
+     *
      * @param kojo_ShoTeishutsuYMD 控除被保険者証提出期限
      */
     public void setKojo_ShoTeishutsuYMD(FlexibleDate kojo_ShoTeishutsuYMD) {
@@ -406,9 +412,9 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT4024ShiharaiHohoHenkoSashitomeEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4024ShiharaiHohoHenkoSashitomeEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -462,6 +468,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

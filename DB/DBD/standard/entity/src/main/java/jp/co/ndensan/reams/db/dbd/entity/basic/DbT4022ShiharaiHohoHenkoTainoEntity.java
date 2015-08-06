@@ -10,12 +10,16 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
  * 支払方法変更滞納テーブルのエンティティクラスです。
  */
 public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT4022ShiharaiHohoHenkoTainoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4022ShiharaiHohoHenkoTaino");
 
@@ -28,9 +32,9 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kanriKubun;
     @PrimaryKey
@@ -40,7 +44,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private RString Tokucho_fuchoKubun;
     @PrimaryKey
@@ -58,7 +62,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -67,7 +71,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -76,7 +80,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -85,17 +89,16 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -104,37 +107,37 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -142,7 +145,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 管理区分のgetメソッドです。
      * <br/>
      * <br/>1：２号差止,2：１号償還払化,3：１号給付額減額
-     * 
+     *
      * @return 管理区分
      */
     public RString getKanriKubun() {
@@ -153,7 +156,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 管理区分のsetメソッドです。
      * <br/>
      * <br/>1：２号差止,2：１号償還払化,3：１号給付額減額
-     * 
+     *
      * @param kanriKubun 管理区分
      */
     public void setKanriKubun(RString kanriKubun) {
@@ -164,7 +167,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 滞納判定区分のgetメソッドです。
      * <br/>
      * <br/>1:予告登録,2:償還払化登録,3:差止登録,4:控除登録,5:給付額減額登録
-     * 
+     *
      * @return 滞納判定区分
      */
     public RString getTainoHanteiKubun() {
@@ -175,7 +178,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 滞納判定区分のsetメソッドです。
      * <br/>
      * <br/>1:予告登録,2:償還払化登録,3:差止登録,4:控除登録,5:給付額減額登録
-     * 
+     *
      * @param tainoHanteiKubun 滞納判定区分
      */
     public void setTainoHanteiKubun(RString tainoHanteiKubun) {
@@ -184,7 +187,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -193,7 +196,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -202,7 +205,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -211,7 +214,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -220,19 +223,19 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
@@ -240,7 +243,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 特徴・普徴区分のgetメソッドです。
      * <br/>
      * <br/>1:特別徴収,2:普通徴収
-     * 
+     *
      * @return 特徴・普徴区分
      */
     public RString getTokucho_fuchoKubun() {
@@ -251,7 +254,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 特徴・普徴区分のsetメソッドです。
      * <br/>
      * <br/>1:特別徴収,2:普通徴収
-     * 
+     *
      * @param Tokucho_fuchoKubun 特徴・普徴区分
      */
     public void setTokucho_fuchoKubun(RString Tokucho_fuchoKubun) {
@@ -260,7 +263,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 収納期・月のgetメソッドです。
-     * 
+     *
      * @return 収納期・月
      */
     public RString getShuno_Ki_Tsuki() {
@@ -269,7 +272,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 収納期・月のsetメソッドです。
-     * 
+     *
      * @param shuno_Ki_Tsuki 収納期・月
      */
     public void setShuno_Ki_Tsuki(RString shuno_Ki_Tsuki) {
@@ -278,7 +281,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -287,7 +290,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -296,7 +299,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 滞納判定年月日のgetメソッドです。
-     * 
+     *
      * @return 滞納判定年月日
      */
     public FlexibleDate getTainoHanteiYMD() {
@@ -305,7 +308,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 滞納判定年月日のsetメソッドです。
-     * 
+     *
      * @param tainoHanteiYMD 滞納判定年月日
      */
     public void setTainoHanteiYMD(FlexibleDate tainoHanteiYMD) {
@@ -316,7 +319,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 判定基準年月日のgetメソッドです。
      * <br/>
      * <br/>当日以前の基準年月日（当日：判定処理日は収入が確定していないため含まない）
-     * 
+     *
      * @return 判定基準年月日
      */
     public FlexibleDate getHanteiKijunYMD() {
@@ -327,7 +330,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 判定基準年月日のsetメソッドです。
      * <br/>
      * <br/>当日以前の基準年月日（当日：判定処理日は収入が確定していないため含まない）
-     * 
+     *
      * @param hanteiKijunYMD 判定基準年月日
      */
     public void setHanteiKijunYMD(FlexibleDate hanteiKijunYMD) {
@@ -336,7 +339,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 時効起算年月日のgetメソッドです。
-     * 
+     *
      * @return 時効起算年月日
      */
     public FlexibleDate getJikoKisanYMD() {
@@ -345,7 +348,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 時効起算年月日のsetメソッドです。
-     * 
+     *
      * @param jikoKisanYMD 時効起算年月日
      */
     public void setJikoKisanYMD(FlexibleDate jikoKisanYMD) {
@@ -356,7 +359,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効起算日区分のgetメソッドです。
      * <br/>
      * <br/>1:納期限翌日（収）,2:督促状発行日（収）,3:収入日（収）,4:債務者の債務の承認,5:差押,6:仮差押,7:仮処分,8:裁判上の請求等、被保険者に対する請求,9:不明（調定無し）（収）,A:その他,B:分納契約日（収）
-     * 
+     *
      * @return 時効起算日区分
      */
     public RString getJikoKisanKubun() {
@@ -367,7 +370,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効起算日区分のsetメソッドです。
      * <br/>
      * <br/>1:納期限翌日（収）,2:督促状発行日（収）,3:収入日（収）,4:債務者の債務の承認,5:差押,6:仮差押,7:仮処分,8:裁判上の請求等、被保険者に対する請求,9:不明（調定無し）（収）,A:その他,B:分納契約日（収）
-     * 
+     *
      * @param jikoKisanKubun 時効起算日区分
      */
     public void setJikoKisanKubun(RString jikoKisanKubun) {
@@ -378,7 +381,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 完納・未納区分のgetメソッドです。
      * <br/>
      * <br/>1:完納,2:過納,3:未納有り,4:未来納期,9:0円調定／0円収入
-     * 
+     *
      * @return 完納・未納区分
      */
     public RString getKanno_MinoKubun() {
@@ -389,7 +392,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 完納・未納区分のsetメソッドです。
      * <br/>
      * <br/>1:完納,2:過納,3:未納有り,4:未来納期,9:0円調定／0円収入
-     * 
+     *
      * @param kanno_MinoKubun 完納・未納区分
      */
     public void setKanno_MinoKubun(RString kanno_MinoKubun) {
@@ -400,7 +403,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効区分のgetメソッドです。
      * <br/>
      * <br/>1:時効未到来,2:時効到来
-     * 
+     *
      * @return 時効区分
      */
     public RString getJikoKubun() {
@@ -411,7 +414,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効区分のsetメソッドです。
      * <br/>
      * <br/>1:時効未到来,2:時効到来
-     * 
+     *
      * @param jikoKubun 時効区分
      */
     public void setJikoKubun(RString jikoKubun) {
@@ -422,7 +425,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効後収入区分のgetメソッドです。
      * <br/>
      * <br/>1:時効後収入有り
-     * 
+     *
      * @return 時効後収入区分
      */
     public RString getJikoAtoShunyuKubun() {
@@ -433,7 +436,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
      * 時効後収入区分のsetメソッドです。
      * <br/>
      * <br/>1:時効後収入有り
-     * 
+     *
      * @param jikoAtoShunyuKubun 時効後収入区分
      */
     public void setJikoAtoShunyuKubun(RString jikoAtoShunyuKubun) {
@@ -442,7 +445,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 対象管理区分のgetメソッドです。
-     * 
+     *
      * @return 対象管理区分
      */
     public RString getTaishoKanriKubun() {
@@ -451,7 +454,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * 対象管理区分のsetメソッドです。
-     * 
+     *
      * @param taishoKanriKubun 対象管理区分
      */
     public void setTaishoKanriKubun(RString taishoKanriKubun) {
@@ -460,9 +463,9 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * このエンティティの主キーが他の{@literal DbT4022ShiharaiHohoHenkoTainoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4022ShiharaiHohoHenkoTainoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -530,6 +533,7 @@ public class DbT4022ShiharaiHohoHenkoTainoEntity extends DbTableEntityBase<DbT40
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

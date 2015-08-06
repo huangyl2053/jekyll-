@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7052KoseiShichosonShishoMasterEntityGenerator {
 
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("2"));
     public static final ShishoCode DEFAULT_支所コード = new ShishoCode(new RString("2"));
     public static final RString DEFAULT_支所名 = new RString("1");
 
@@ -28,7 +26,6 @@ public final class DbT7052KoseiShichosonShishoMasterEntityGenerator {
 
     public static DbT7052KoseiShichosonShishoMasterEntity createDbT7052KoseiShichosonShishoMasterEntity() {
         DbT7052KoseiShichosonShishoMasterEntity entity = new DbT7052KoseiShichosonShishoMasterEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setShishoCode(DEFAULT_支所コード);
         entity.setShishoMei(DEFAULT_支所名);
         return entity;
