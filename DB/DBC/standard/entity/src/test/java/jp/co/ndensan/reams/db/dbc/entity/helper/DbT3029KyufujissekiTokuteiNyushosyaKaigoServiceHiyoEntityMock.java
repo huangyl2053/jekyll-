@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -34,7 +34,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock {
     /**
      * DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityのSpiedInstanceを返します。
      *
-     * @return DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityのSpiedInstance
+     * @return
+     * DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityのSpiedInstance
      */
     public static DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity getSpiedInstance() {
         return spy(createEntity());
@@ -48,13 +49,13 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock {
     public static DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity createEntity() {
         DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = new DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity();
         entity.setKokanJohoShikibetsuNo(new KokanShikibetsuNo(new RString("1234")));
-        entity.setInputShikibetsuNo(new RString("0001"));
+        entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo("0001"));
         entity.setRecodeShubetsuCode(new RString("02"));
-        entity.setShokisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000003")));
+        entity.setShokisaiHokenshaNo(new HokenshaNo(new RString("00000003")));
         entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
-        entity.setToshiNo(new ToshiNo(new RString("0000000006")));
+        entity.setToshiNo(new RString("0000000006"));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("12")));
         entity.setServiceKomokuCode(new ServiceKomokuCode(new RString("3456")));
         entity.setFutanGendogaku(new Decimal(100));

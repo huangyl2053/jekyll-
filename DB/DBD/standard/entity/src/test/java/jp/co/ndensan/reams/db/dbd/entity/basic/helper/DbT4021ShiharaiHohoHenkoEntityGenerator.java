@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbd.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.BemmeiRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.BemmeiShinsaKekkaKubun;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohe
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -29,7 +29,7 @@ public final class DbT4021ShiharaiHohoHenkoEntityGenerator {
     public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("123456");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("012345");
     public static final KanriKubun DEFAULT_管理区分 = KanriKubun.ニ号差止;
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS("20140101102030");
+    public static final int DEFAULT_履歴番号 = 1;
     public static final TorokuKubun DEFAULT_登録区分 = TorokuKubun.二号予告登録者;
     public static final FlexibleDate DEFAULT_適用開始年月日 = new FlexibleDate("20140102");
     public static final FlexibleDate DEFAULT_適用終了年月日 = new FlexibleDate("20150102");
@@ -72,7 +72,7 @@ public final class DbT4021ShiharaiHohoHenkoEntityGenerator {
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setKanriKubun(DEFAULT_管理区分.code());
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setTorokuKubun(DEFAULT_登録区分.code());
         entity.setTekiyoKaishiYMD(DEFAULT_適用開始年月日);
         entity.setTekiyoShuryoYMD(DEFAULT_適用終了年月日);

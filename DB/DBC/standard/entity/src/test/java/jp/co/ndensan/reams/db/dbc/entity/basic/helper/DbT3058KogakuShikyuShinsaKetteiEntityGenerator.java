@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

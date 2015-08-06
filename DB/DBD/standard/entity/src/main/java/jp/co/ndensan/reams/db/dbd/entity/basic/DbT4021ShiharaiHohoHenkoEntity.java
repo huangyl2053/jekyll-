@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
  * 支払方法変更テーブルのエンティティクラスです。
  */
 public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021ShiharaiHohoHenkoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4021ShiharaiHohoHenko");
@@ -782,7 +782,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      * このエンティティの主キーが他の{@literal DbT4021ShiharaiHohoHenkoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4021ShiharaiHohoHenkoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

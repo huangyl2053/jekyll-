@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbe.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**

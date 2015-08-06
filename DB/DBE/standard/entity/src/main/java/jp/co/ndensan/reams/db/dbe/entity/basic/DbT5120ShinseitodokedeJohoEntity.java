@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
  * <br/> 申請届出情報を一元管理する
  */
 public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120ShinseitodokedeJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5120ShinseitodokedeJoho");
@@ -288,7 +288,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
      * このエンティティの主キーが他の{@literal DbT5120ShinseitodokedeJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5120ShinseitodokedeJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

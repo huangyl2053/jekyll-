@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
  * 高額介護サービス費支給審査決定テーブルのエンティティクラスです。
  */
 public class DbT3058KogakuShikyuShinsaKetteiEntity extends DbTableEntityBase<DbT3058KogakuShikyuShinsaKetteiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3058KogakuShikyuShinsaKettei");
@@ -260,7 +260,7 @@ public class DbT3058KogakuShikyuShinsaKetteiEntity extends DbTableEntityBase<DbT
      * このエンティティの主キーが他の{@literal DbT3058KogakuShikyuShinsaKetteiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3058KogakuShikyuShinsaKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
