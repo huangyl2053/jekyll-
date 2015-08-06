@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbu.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -30,7 +30,7 @@ public final class DbT7021JigyoHokokuTokeiDataEntityGenerator {
     public static final Code DEFAULT_集計単位 = new Code("3");
     public static final Decimal DEFAULT_縦番号 = new Decimal(1000);
     public static final Decimal DEFAULT_横番号 = new Decimal(1000);
-    public static final RDateTime DEFAULT_処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final Decimal DEFAULT_集計結果値 = new Decimal(10000);
     public static final Code DEFAULT_縦項目コード = new Code("13456");
     public static final Code DEFAULT_横項目コード = new Code("46621");
@@ -54,7 +54,7 @@ public final class DbT7021JigyoHokokuTokeiDataEntityGenerator {
         entity.setShukeiTani(DEFAULT_集計単位);
         entity.setTateNo(DEFAULT_縦番号);
         entity.setYokoNo(DEFAULT_横番号);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShukeiKekkaAtai(DEFAULT_集計結果値);
         entity.setTateKomokuCode(DEFAULT_縦項目コード);
         entity.setYokoKomokuCode(DEFAULT_横項目コード);
