@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibet
  * 給付実績緊急時施設療養テーブルのエンティティクラスです。
  */
 public class DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity extends DbTableEntityBase<DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3019KyufujissekiKinkyuShisetsuRyoyo");
@@ -1270,7 +1270,7 @@ public class DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity extends DbTableEntityB
      * このエンティティの主キーが他の{@literal DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

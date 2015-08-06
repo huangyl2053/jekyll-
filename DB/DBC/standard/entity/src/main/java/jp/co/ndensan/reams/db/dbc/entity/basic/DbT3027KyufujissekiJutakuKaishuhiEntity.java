@@ -11,18 +11,19 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 
 /**
  * DbT3027KyufujissekiJutakuKaishuhiの項目定義クラスです
  *
  */
 public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<DbT3027KyufujissekiJutakuKaishuhiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3027KyufujissekiJutakuKaishuhi");
@@ -38,11 +39,11 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @PrimaryKey
-    private RString inputShikibetsuNo;
+    private NyuryokuShikibetsuNo inputShikibetsuNo;
     @PrimaryKey
     private RString recodeShubetsuCode;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
@@ -50,10 +51,10 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private ToshiNo toshiNo;
+    private RString toshiNo;
     @PrimaryKey
     private RString meisaiNo;
-    private RString serviceCode;
+    private ServiceCode serviceCode;
     private FlexibleDate jutakuKaishuchakkoYMD;
     private RString jutakuKaishuJigyoshaName;
     private RString juutakukaishuJyutakuAdress;
@@ -130,7 +131,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @return 入力識別番号
      */
-    public RString getInputShikibetsuNo() {
+    public NyuryokuShikibetsuNo getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
@@ -139,7 +140,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(RString inputShikibetsuNo) {
+    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
@@ -166,7 +167,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
@@ -175,7 +176,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
@@ -238,7 +239,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @return 通し番号
      */
-    public ToshiNo getToshiNo() {
+    public RString getToshiNo() {
         return toshiNo;
     }
 
@@ -247,7 +248,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(ToshiNo toshiNo) {
+    public void setToshiNo(RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
@@ -274,7 +275,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @return サービスコード
      */
-    public RString getServiceCode() {
+    public ServiceCode getServiceCode() {
         return serviceCode;
     }
 
@@ -283,7 +284,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      *
      * @param serviceCode サービスコード
      */
-    public void setServiceCode(RString serviceCode) {
+    public void setServiceCode(ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
@@ -417,7 +418,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT3027KyufujissekiJutakuKaishuhiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3027KyufujissekiJutakuKaishuhiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibet
  * <br/> サービス提供年月が平成１５年４月以後の場合
  */
 public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTableEntityBase<DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyo");
@@ -915,7 +915,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      * このエンティティの主キーが他の{@literal DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override

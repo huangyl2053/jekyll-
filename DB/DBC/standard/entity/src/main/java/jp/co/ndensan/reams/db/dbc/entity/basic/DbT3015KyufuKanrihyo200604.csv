@@ -1,13 +1,13 @@
 ﻿shinsaYM,UDD014YM,FlexibleYearMonth,,,,,審査年月,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,RString,,,,,証記載保険者番号,A
-kyotakushienJigyoshoNo,DbUDD004JigyoshaNo,RString,,,,,居宅支援事業所番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+kyotakushienJigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,居宅支援事業所番号,A
 kyufuSakuseiKubunCode,varchar,RString,,,,,給付管理票情報作成区分コード,A
 kyufuSakuseiYMD,UDD015YMD,FlexibleDate,,,,,給付管理票作成年月日,A
 kyufuShubetsuKubunCode,varchar,RString,,,,,給付管理票種別区分コード,A
 kyufuMeisaiLineNo,varchar,RString,,,,,給付管理票明細行番号,A
-hokenshaNo,DbUDD003HokenshaNo,RString,,,,,保険者番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,RString,,,,,被保険者番号,A
+hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 hiHokenshaUmareYMD,UDD015YMD,FlexibleDate,,,,,被保険者生年月日,A
 seibetsuCode,varchar,RString,,,,,性別コード,A
 yoKaigoJotaiKubunCode,varchar,RString,,,,,要介護状態区分コード,A
@@ -15,16 +15,16 @@ gendogakuTekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,限度額適用開始年�
 gendogakuTekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,限度額適用終了年月,A
 kyotakuKaigoYoboShikyuGendogaku,int4,int,,,,,居宅・介護予防支給限度額,A
 kyotakuServicePlanSakuseiKubunCode,varchar,RString,,,,,居宅サービス計画作成区分コード,A
-serviceJigyoshoNo,DbUDD004JigyoshaNo,RString,,,,,サービス事業所番号,A
+serviceJigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,サービス事業所番号,A
 shiteiKijungaitoChiikimitchakuServiceShikibetsuCode,varchar,RString,,,,,指定/基準該当/地域密着型サービス識別コード,A
-serviceShuruiCode,DbUDD005ServiceShuruiCode,RString,,,,,サービス種類コード,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
 kyufuKeikakuTanisuNissu,int4,int,,,,,給付計画単位数／日数,A
 kyufuKeikakuNissu,int2,int,,,,,限度額管理期間における前月までの給付計画日数,A
 shiteiServiceSubTotal,int4,int,,,,,指定サービス分小計,A
 kijyunGaitoServiceSubTotal,int4,int,,,,,基準該当サービス分小計,A
 kyufuKeikakuTotalTanisuNissu,int4,int,,,,,給付計画合計単位数/日数,A
 tantoKaigoShienSemmoninNo,varchar,RString,,,,,担当介護支援専門員番号,A
-kaigoShienJigyoshaNo,DbUDD004JigyoshaNo,RString,,,,,委託先の居宅介護支援事業所番号,A
+kaigoShienJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,委託先の居宅介護支援事業所番号,A
 itakusakiTantoKaigoShienSemmoninNo,varchar,RString,,,,,委託先の担当介護支援専門員番号,A
 toshoTorokuYMD,UDD015YMD,FlexibleDate,,,,,当初登録年月日,A
 torikomiYM,UDD014YM,FlexibleYearMonth,,,,,取込年月,A

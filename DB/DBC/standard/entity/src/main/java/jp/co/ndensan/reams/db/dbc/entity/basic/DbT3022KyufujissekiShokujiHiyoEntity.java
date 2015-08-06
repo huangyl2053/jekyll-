@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibet
  * 給付実績食事費用テーブルのエンティティクラスです。
  */
 public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3022KyufujissekiShokujiHiyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3022KyufujissekiShokujiHiyo");
@@ -717,7 +717,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      * このエンティティの主キーが他の{@literal DbT3022KyufujissekiShokujiHiyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3022KyufujissekiShokujiHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
