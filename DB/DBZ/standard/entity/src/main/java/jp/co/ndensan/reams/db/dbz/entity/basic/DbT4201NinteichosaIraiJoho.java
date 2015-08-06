@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査依頼情報テーブルの項目定義クラスです。
  */
 public enum DbT4201NinteichosaIraiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * insertDantaiCd
      */
@@ -62,12 +62,12 @@ public enum DbT4201NinteichosaIraiJoho implements IColumnDefinition {
      * 認定調査員コード
      * <br/>認定調査員情報
      */
-    ninteiChousainCode(8, 0),
+    ninteiChosainCode(8, 0),
     /**
      * 認定調査依頼区分コード
      * <br/>Enum（DBE：認定調査依頼区分コード）初回・再依頼・再調査
      */
-    ninteichousaIraiKubunCode(2147483647, 0),
+    ninteichosaIraiKubunCode(2147483647, 0),
     /**
      * 認定調査回数
      */

@@ -2,8 +2,8 @@
 ninteichosaIraiRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
 koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
 ninteichosaItakusakiCode,DbUDD004JigyoshaNo,JigyoshaNo,,,,,認定調査委託先コード,A
-ninteiChousainCode,varchar,RString,,,,,認定調査員コード,A
-ninteichousaIraiKubunCode,UDD035Code,Code,,,,,認定調査依頼区分コード,A
+ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
+ninteichosaIraiKubunCode,UDD035Code,Code,,,,,認定調査依頼区分コード,A
 ninteichosaIraiKaisu,int2,int,,,,,認定調査回数,A
 ninteichosaIraiYMD,UDD015YMD,FlexibleDate,,,,,認定調査依頼年月日,A
 ninteichosaKigenYMD,UDD015YMD,FlexibleDate,,,,,認定調査期限年月日,A

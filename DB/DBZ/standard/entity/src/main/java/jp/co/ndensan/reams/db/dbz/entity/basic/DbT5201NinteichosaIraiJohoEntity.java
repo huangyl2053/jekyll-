@@ -1,23 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定調査依頼情報テーブルのエンティティクラスです。
  */
 public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201NinteichosaIraiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5201NinteichosaIraiJoho");
@@ -36,8 +36,8 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
     private int ninteichosaIraiRirekiNo;
     private Code koroshoIfShikibetsuCode;
     private JigyoshaNo ninteichosaItakusakiCode;
-    private RString ninteiChousainCode;
-    private Code ninteichousaIraiKubunCode;
+    private RString ninteiChosainCode;
+    private Code ninteichosaIraiKubunCode;
     private int ninteichosaIraiKaisu;
     private FlexibleDate ninteichosaIraiYMD;
     private FlexibleDate ninteichosaKigenYMD;
@@ -183,8 +183,8 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      *
      * @return 認定調査員コード
      */
-    public RString getNinteiChousainCode() {
-        return ninteiChousainCode;
+    public RString getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     /**
@@ -192,10 +192,10 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      * <br/>
      * <br/>認定調査員情報
      *
-     * @param ninteiChousainCode 認定調査員コード
+     * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChousainCode(RString ninteiChousainCode) {
-        this.ninteiChousainCode = ninteiChousainCode;
+    public void setNinteiChosainCode(RString ninteiChosainCode) {
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     /**
@@ -205,8 +205,8 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      *
      * @return 認定調査依頼区分コード
      */
-    public Code getNinteichousaIraiKubunCode() {
-        return ninteichousaIraiKubunCode;
+    public Code getNinteichosaIraiKubunCode() {
+        return ninteichosaIraiKubunCode;
     }
 
     /**
@@ -214,10 +214,10 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      * <br/>
      * <br/>Enum（DBE：認定調査依頼区分コード）初回・再依頼・再調査
      *
-     * @param ninteichousaIraiKubunCode 認定調査依頼区分コード
+     * @param ninteichosaIraiKubunCode 認定調査依頼区分コード
      */
-    public void setNinteichousaIraiKubunCode(Code ninteichousaIraiKubunCode) {
-        this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
+    public void setNinteichosaIraiKubunCode(Code ninteichosaIraiKubunCode) {
+        this.ninteichosaIraiKubunCode = ninteichosaIraiKubunCode;
     }
 
     /**
@@ -456,7 +456,7 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      * このエンティティの主キーが他の{@literal DbT5201NinteichosaIraiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5201NinteichosaIraiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -482,8 +482,8 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
         this.ninteichosaIraiRirekiNo = entity.ninteichosaIraiRirekiNo;
         this.koroshoIfShikibetsuCode = entity.koroshoIfShikibetsuCode;
         this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
-        this.ninteiChousainCode = entity.ninteiChousainCode;
-        this.ninteichousaIraiKubunCode = entity.ninteichousaIraiKubunCode;
+        this.ninteiChosainCode = entity.ninteiChosainCode;
+        this.ninteichosaIraiKubunCode = entity.ninteichosaIraiKubunCode;
         this.ninteichosaIraiKaisu = entity.ninteichosaIraiKaisu;
         this.ninteichosaIraiYMD = entity.ninteichosaIraiYMD;
         this.ninteichosaKigenYMD = entity.ninteichosaKigenYMD;
@@ -505,7 +505,7 @@ public class DbT5201NinteichosaIraiJohoEntity extends DbTableEntityBase<DbT5201N
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ninteichosaIraiRirekiNo, koroshoIfShikibetsuCode, ninteichosaItakusakiCode, ninteiChousainCode, ninteichousaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaIraiYMD, ninteichosaKigenYMD, iraishoShutsuryokuYMD, chosahyoTouShutsuryokuYMD, mobileDataShutsuryokuZumiFlag, jizenChosaFlag, ninteichosaTokusokuYMD, ninteichosaTokusokuHoho, ninteichosaTokusokuKaisu, ninteichosaTokusokuMemo, logicalDeletedFlag);
+        return super.toMd5(shinseishoKanriNo, ninteichosaIraiRirekiNo, koroshoIfShikibetsuCode, ninteichosaItakusakiCode, ninteiChosainCode, ninteichosaIraiKubunCode, ninteichosaIraiKaisu, ninteichosaIraiYMD, ninteichosaKigenYMD, iraishoShutsuryokuYMD, chosahyoTouShutsuryokuYMD, mobileDataShutsuryokuZumiFlag, jizenChosaFlag, ninteichosaTokusokuYMD, ninteichosaTokusokuHoho, ninteichosaTokusokuKaisu, ninteichosaTokusokuMemo, logicalDeletedFlag);
     }
 
 // </editor-fold>

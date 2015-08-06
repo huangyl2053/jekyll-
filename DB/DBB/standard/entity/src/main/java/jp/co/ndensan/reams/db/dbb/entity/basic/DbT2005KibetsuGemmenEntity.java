@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
  * 介護期別減免テーブルのエンティティクラスです。
  */
 public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005KibetsuGemmenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2005KibetsuGemmen");
 
@@ -33,7 +35,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private RDateTime shoriTimestamp;
     @PrimaryKey
@@ -45,7 +47,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +56,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +65,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,17 +74,16 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,7 +92,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -100,7 +101,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -109,7 +110,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -118,7 +119,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -127,25 +128,25 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 処理日時のgetメソッドです。
-     * 
+     *
      * @return 処理日時
      */
     public RDateTime getShoriTimestamp() {
@@ -154,7 +155,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 処理日時のsetメソッドです。
-     * 
+     *
      * @param shoriTimestamp 処理日時
      */
     public void setShoriTimestamp(RDateTime shoriTimestamp) {
@@ -163,7 +164,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 徴収方法のgetメソッドです。
-     * 
+     *
      * @return 徴収方法
      */
     public RString getChoshuHoho() {
@@ -172,7 +173,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 徴収方法のsetメソッドです。
-     * 
+     *
      * @param choshuHoho 徴収方法
      */
     public void setChoshuHoho(RString choshuHoho) {
@@ -181,7 +182,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 期のgetメソッドです。
-     * 
+     *
      * @return 期
      */
     public int getKi() {
@@ -190,7 +191,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 期のsetメソッドです。
-     * 
+     *
      * @param ki 期
      */
     public void setKi(int ki) {
@@ -199,7 +200,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 減免前期別介護保険料のgetメソッドです。
-     * 
+     *
      * @return 減免前期別介護保険料
      */
     public Decimal getGemmenMaeKibetsuGaku() {
@@ -208,7 +209,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 減免前期別介護保険料のsetメソッドです。
-     * 
+     *
      * @param gemmenMaeKibetsuGaku 減免前期別介護保険料
      */
     public void setGemmenMaeKibetsuGaku(Decimal gemmenMaeKibetsuGaku) {
@@ -217,7 +218,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 期別減免額のgetメソッドです。
-     * 
+     *
      * @return 期別減免額
      */
     public Decimal getKibetsugemmenGaku() {
@@ -226,7 +227,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * 期別減免額のsetメソッドです。
-     * 
+     *
      * @param KibetsugemmenGaku 期別減免額
      */
     public void setKibetsugemmenGaku(Decimal KibetsugemmenGaku) {
@@ -235,9 +236,9 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * このエンティティの主キーが他の{@literal DbT2005KibetsuGemmenEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT2005KibetsuGemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -286,6 +287,7 @@ public class DbT2005KibetsuGemmenEntity extends DbTableEntityBase<DbT2005Kibetsu
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
