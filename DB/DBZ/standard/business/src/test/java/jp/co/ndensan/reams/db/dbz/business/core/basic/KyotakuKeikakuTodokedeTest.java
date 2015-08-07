@@ -1,0 +1,265 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
+
+import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+/**
+ * {@link KyotakuKeikakuTodokede}のテストクラスです。
+ */
+@RunWith(Enclosed.class)
+public class KyotakuKeikakuTodokedeTest extends DbzTestBase {
+
+    private static DbT3005KyotakuKeikakuTodokedeEntity KyotakuKeikakuTodokedeEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+//TODO 主キー型と変数名を置換してください
+//TODO 主キーの数が足りない場合、追加してください。
+    private static 主キー型1 主キー名1;
+    private static 主キー型2 主キー名2;
+
+    @BeforeClass
+    public static void setUpClass() {
+//TODO 主キー値を適切な値に置換してください
+        主キー名1 = DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_主キー名1;
+        主キー名2 = DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_主キー名2;
+    }
+
+    public static class 主キーコンストラクタテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+        }
+
+//TODO 主キー名を置換してください
+        @Test(expected = NullPointerException.class)
+        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuTodokede(null, 主キー名2);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuTodokede(主キー名1, null);
+        }
+
+        @Test
+        public void 指定したキーが保持するDbT3005KyotakuKeikakuTodokedeEntityにセットされている() {
+            sut = new KyotakuKeikakuTodokede(主キー名1, 主キー名2);
+            assertThat(sut.get主キー名1(), is(主キー名1));
+            assertThat(sut.get主キー名2(), is(主キー名2));
+        }
+
+        @Test
+        public void 指定したキーが保持するKyotakuKeikakuTodokedeIdentifierにセットされている() {
+            sut = new KyotakuKeikakuTodokede(主キー名1, 主キー名2);
+            assertThat(sut.identifier().getXXX(), is(主キー名1));
+            assertThat(sut.identifier().getXXX(), is(主キー名2));
+        }
+    }
+
+    public static class Entityコンストラクタテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
+            sut = new KyotakuKeikakuTodokede(null);
+        }
+
+        @Test
+        public void 指定したDbT3005KyotakuKeikakuTodokedeEntityのキー情報を識別子が持つ() {
+
+            sut = new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
+
+            assertThat(sut.identifier().getXXX(), is(主キー名1));
+            assertThat(sut.identifier().getXXX(), is(主キー名2));
+        }
+    }
+
+    public static class getterテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+
+            sut = new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
+        }
+
+        @Test
+        public void get被保険者番号は_entityが持つ被保険者番号を返す() {
+            assertThat(sut.get被保険者番号(), is(KyotakuKeikakuTodokedeEntity.getHihokenshaNo()));
+        }
+
+        @Test
+        public void get対象年月は_entityが持つ対象年月を返す() {
+            assertThat(sut.get対象年月(), is(KyotakuKeikakuTodokedeEntity.getTaishoYM()));
+        }
+
+        @Test
+        public void get履歴番号は_entityが持つ履歴番号を返す() {
+            assertThat(sut.get履歴番号(), is(KyotakuKeikakuTodokedeEntity.getRirekiNo()));
+        }
+
+        @Test
+        public void get届出区分は_entityが持つ届出区分を返す() {
+            assertThat(sut.get届出区分(), is(KyotakuKeikakuTodokedeEntity.getTodokedeKubun()));
+        }
+
+        @Test
+        public void get届出年月日は_entityが持つ届出年月日を返す() {
+            assertThat(sut.get届出年月日(), is(KyotakuKeikakuTodokedeEntity.getTodokedeYMD()));
+        }
+
+        @Test
+        public void get届出者氏名は_entityが持つ届出者氏名を返す() {
+            assertThat(sut.get届出者氏名(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaShimei()));
+        }
+
+        @Test
+        public void get届出者氏名カナは_entityが持つ届出者氏名カナを返す() {
+            assertThat(sut.get届出者氏名カナ(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaShimeiKana()));
+        }
+
+        @Test
+        public void get届出者郵便番号は_entityが持つ届出者郵便番号を返す() {
+            assertThat(sut.get届出者郵便番号(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaYubinNo()));
+        }
+
+        @Test
+        public void get届出者住所は_entityが持つ届出者住所を返す() {
+            assertThat(sut.get届出者住所(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaJusho()));
+        }
+
+        @Test
+        public void get届出者電話番号は_entityが持つ届出者電話番号を返す() {
+            assertThat(sut.get届出者電話番号(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaTelNo()));
+        }
+
+        @Test
+        public void get届出者関係区分は_entityが持つ届出者関係区分を返す() {
+            assertThat(sut.get届出者関係区分(), is(KyotakuKeikakuTodokedeEntity.getTodokedeshaKankeiKubun()));
+        }
+
+        @Test
+        public void get暫定区分は_entityが持つ暫定区分を返す() {
+            assertThat(sut.get暫定区分(), is(KyotakuKeikakuTodokedeEntity.getZanteiKubun()));
+        }
+    }
+
+    public static class toEntityテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+
+            sut = new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
+        }
+
+        @Test
+        public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
+            assertThat(sut.toEntity(), not(KyotakuKeikakuTodokedeEntity));
+        }
+    }
+
+    public static class SerializationProxyテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+
+            sut = new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
+        }
+
+        @Test
+        public void シリアライズできる() {
+            assertThat(sut, is(serializable()));
+        }
+    }
+
+    public static class deletedテスト extends DbzTestBase {
+
+        private static KyotakuKeikakuTodokede sut;
+        private static KyotakuKeikakuTodokede result;
+
+        @Before
+        public void setUp() {
+            KyotakuKeikakuTodokedeEntity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名1);
+            KyotakuKeikakuTodokedeEntity.setXXX(主キー名2);
+
+        }
+
+        @Test
+        public void KyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりKyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがDeletedに指定されたKyotakuKeikakuTodokedeが返る() {
+            sut = TestSupport.setStateKyotakuKeikakuTodokede(EntityDataState.Unchanged);
+            result = sut.deleted();
+            assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
+        }
+
+        @Test
+        public void KyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりKyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがDeletedに指定されたKyotakuKeikakuTodokedeが返る() {
+            sut = TestSupport.setStateKyotakuKeikakuTodokede(EntityDataState.Modified);
+            result = sut.deleted();
+            assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
+        }
+
+        @Test
+        public void KyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりKyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがDeletedに指定されたKyotakuKeikakuTodokedeが返る() {
+            sut = TestSupport.setStateKyotakuKeikakuTodokede(EntityDataState.Deleted);
+            result = sut.deleted();
+            assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
+        }
+
+        @Test(expected = IllegalStateException.class)
+        public void KyotakuKeikakuTodokedeが保持するDbT3005KyotakuKeikakuTodokedeEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
+            sut = TestSupport.setStateKyotakuKeikakuTodokede(EntityDataState.Added);
+            result = sut.deleted();
+        }
+    }
+
+    private static class TestSupport {
+
+        public static KyotakuKeikakuTodokede setStateKyotakuKeikakuTodokede(EntityDataState parentState) {
+            KyotakuKeikakuTodokedeEntity.setState(parentState);
+            return new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
+        }
+    }
+}
