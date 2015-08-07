@@ -1,0 +1,71 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.entity.db.basic.helper;
+
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7122SogoJigyoServiceCodeEntity;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+
+/**
+ * 介護予防・日常生活支援総合事業サービスコードエンティティのテスト用インスタンスを作成する補助クラスです。
+ */
+public final class DbT7122SogoJigyoServiceCodeEntityGenerator {
+
+    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode(new RString("2"));
+    public static final ServiceKomokuCode DEFAULT_サービス項目コード = new ServiceKomokuCode(new RString("2"));
+    public static final FlexibleYearMonth DEFAULT_適用開始年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final int DEFAULT_履歴番号 = 1;
+    public static final FlexibleYearMonth DEFAULT_適用終了年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final RString DEFAULT_サービス名称 = new RString("1");
+    public static final Decimal DEFAULT_単位数 = new Decimal(1);
+    public static final RString DEFAULT_限度額対象外フラグ = new RString("1");
+    public static final RString DEFAULT_単位数識別コード = new RString("1");
+    public static final RString DEFAULT_外部サービス利用型区分 = new RString("1");
+    public static final RString DEFAULT_特別地域加算フラグ = new RString("1");
+    public static final RString DEFAULT_利用者負担定率／定額区分 = new RString("1");
+    public static final Decimal DEFAULT_利用者負担額 = new Decimal(1);
+    public static final HokenKyufuRitsu DEFAULT_給付率 = new HokenKyufuRitsu(new Decimal("2"));
+    public static final RString DEFAULT_二次予防事業対象者実施区分 = new RString("1");
+    public static final RString DEFAULT_要支援１受給者実施区分 = new RString("1");
+    public static final RString DEFAULT_要支援２受給者実施区分 = new RString("1");
+
+    /**
+     * インスタンス化を防ぐためのプライベートコンストラクタです。
+     */
+    private DbT7122SogoJigyoServiceCodeEntityGenerator() {
+    }
+
+    public static DbT7122SogoJigyoServiceCodeEntity createDbT7122SogoJigyoServiceCodeEntity() {
+        DbT7122SogoJigyoServiceCodeEntity entity = new DbT7122SogoJigyoServiceCodeEntity();
+        entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
+        entity.setServiceKomokuCode(DEFAULT_サービス項目コード);
+        entity.setTekiyoKaishiYM(DEFAULT_適用開始年月);
+        entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setTekiyoShuryoYM(DEFAULT_適用終了年月);
+        entity.setServiceMeisho(DEFAULT_サービス名称);
+        entity.setTaniSu(DEFAULT_単位数);
+        entity.setGendoGakuTaishogaiFlag(DEFAULT_限度額対象外フラグ);
+        entity.setTaniSuShikibetsuCode(DEFAULT_単位数識別コード);
+        entity.setGaibuServiceRiyoKubun(DEFAULT_外部サービス利用型区分);
+        entity.setTokubetsuChiikiKasanFlag(DEFAULT_特別地域加算フラグ);
+        entity.setTeiRitsu_TeiGakuKubun(DEFAULT_利用者負担定率／定額区分);
+        entity.setRiyoshaFutanGaku(DEFAULT_利用者負担額);
+        entity.setKyufuRitsu(DEFAULT_給付率);
+        entity.setNijiYoboTaishosha_JissiKubun(DEFAULT_二次予防事業対象者実施区分);
+        entity.setYoShien1_JisshiKubun(DEFAULT_要支援１受給者実施区分);
+        entity.setYoShien2_JisshiKubun(DEFAULT_要支援２受給者実施区分);
+        return entity;
+    }
+}
