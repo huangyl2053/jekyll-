@@ -2,17 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,17 +27,13 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7110TankiNyushoShikyuGendoGakuDac}のテストです。
- *
- * @author LDNS 宋文娟
  */
 @RunWith(Enclosed.class)
-public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbzTestDacBase {
+public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
+    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final RString 要介護状態区分 = new RString("2");
-    private static final RString 要介護状態区分3 = new RString("3");
     private static DbT7110TankiNyushoShikyuGendoGakuDac sut;
 
     @BeforeClass
@@ -44,42 +41,42 @@ public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbzTestDacBase {
         sut = InstanceProvider.create(DbT7110TankiNyushoShikyuGendoGakuDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbzTestDacBase {
+    public static class selectByKeyのテスト extends DbcTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
-                    要介護状態区分,
+                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 要介護状態区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 適用開始年月がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_要介護状態区分,
-                    null,
-                    DEFAULT_処理日時);
+                    DEFAULT_適用開始年月,
+                    DEFAULT_履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    null);
+                    DEFAULT_履歴番号);
         }
 
         @Test
@@ -87,32 +84,32 @@ public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbzTestDacBase {
             DbT7110TankiNyushoShikyuGendoGakuEntity insertedRecord = sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7110TankiNyushoShikyuGendoGakuEntity insertedRecord = sut.selectByKey(
-                    要介護状態区分3,
+                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    public static class selectAllのテスト extends DbzTestDacBase {
+    public static class selectAllのテスト extends DbcTestDacBase {
 
         @Test
         public void 短期入所系支給限度額が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    要介護状態区分,
+                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -122,69 +119,75 @@ public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbzTestDacBase {
+    public static class insertのテスト extends DbcTestDacBase {
 
         @Test
         public void 短期入所系支給限度額エンティティを渡すと_insertは_短期入所系支給限度額を追加する() {
             TestSupport.insert(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
 
             assertThat(sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_履歴番号), is(notNullValue()));
         }
     }
 
-    public static class updateのテスト extends DbzTestDacBase {
+    public static class updateのテスト extends DbcTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
         }
 
         @Test
         public void 短期入所系支給限度額エンティティを渡すと_updateは_短期入所系支給限度額を更新する() {
-            DbT7110TankiNyushoShikyuGendoGakuEntity updateRecord = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.createDbT7110TankiNyushoShikyuGendoGakuEntity();
-            // TODO 主キー以外の項目を変更してください
-            //updateRecord.set変更したい項目(75);
+            DbT7110TankiNyushoShikyuGendoGakuEntity updateRecord = sut.selectByKey(
+                    DEFAULT_要介護状態区分,
+                    DEFAULT_適用開始年月,
+                    DEFAULT_履歴番号);
+            updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7110TankiNyushoShikyuGendoGakuEntity updatedRecord = sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
-    public static class deleteのテスト extends DbzTestDacBase {
+    public static class deleteのテスト extends DbcTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号);
         }
 
         @Test
         public void 短期入所系支給限度額エンティティを渡すと_deleteは_短期入所系支給限度額を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7110TankiNyushoShikyuGendoGakuEntity deletedEntity = sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時));
+                    DEFAULT_履歴番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_履歴番号), is(nullValue()));
         }
     }
 
@@ -193,12 +196,12 @@ public class DbT7110TankiNyushoShikyuGendoGakuDacTest extends DbzTestDacBase {
         public static void insert(
                 RString 要介護状態区分,
                 FlexibleYearMonth 適用開始年月,
-                YMDHMS 処理日時) {
+                int 履歴番号) {
             DbT7110TankiNyushoShikyuGendoGakuEntity entity = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.createDbT7110TankiNyushoShikyuGendoGakuEntity();
             entity.setYoKaigoJotaiKubun(要介護状態区分);
             entity.setTekiyoKaishiYM(適用開始年月);
-            entity.setShoriTimestamp(処理日時);
-            sut.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            sut.save(entity);
         }
     }
 }

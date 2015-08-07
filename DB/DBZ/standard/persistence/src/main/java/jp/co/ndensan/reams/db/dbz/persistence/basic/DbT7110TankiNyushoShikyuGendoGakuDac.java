@@ -6,10 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankai.tekiyoKaishiYM;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJoho.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGaku;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGaku.shoriTimestamp;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGaku.tekiyoKaishiYM;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
