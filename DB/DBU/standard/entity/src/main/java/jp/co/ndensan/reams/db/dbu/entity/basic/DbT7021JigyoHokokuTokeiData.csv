@@ -9,7 +9,7 @@ shukeiNo,UDD035Code,Code,,,,,集計番号,A
 shukeiTani,UDD035Code,Code,,,,,集計単位,A
 tateNo,numeric,Decimal,,,,,縦番号,A
 yokoNo,numeric,Decimal,,,,,横番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
 shukeiKekkaAtai,numeric,Decimal,,,,,集計結果値,A
+shukeiKomokuMeisho,varchar,RString,,,,,集計項目名称,A
 tateKomokuCode,UDD035Code,Code,,,,,縦項目コード,A
 yokoKomokuCode,UDD035Code,Code,,,,,横項目コード,A
