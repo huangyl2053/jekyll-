@@ -88,12 +88,12 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgChiryoNaiyo"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
-            Controls.prototype.btnKoshin = function () {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            Controls.prototype.btnCansel = function () {
+                return new UZA.Button(this.convFiledName("btnCansel"));
             };
             return Controls;
         })();
