@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHokenshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7050KaigoHokensha");
@@ -30,11 +30,11 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private LasdecCode shichosonCode;
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private LasdecCode koikiHokenshaShichosonCode;
+    private ShoKisaiHokenshaNo koikiHokenshaNo;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -43,7 +43,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -52,7 +52,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -61,7 +61,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -70,7 +70,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -79,39 +79,39 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     }
 
     /**
-     * getShichosonCode
+     * 広域保険者市町村コードのgetメソッドです。
      *
-     * @return shichosonCode
+     * @return 広域保険者市町村コード
      */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
+    public LasdecCode getKoikiHokenshaShichosonCode() {
+        return koikiHokenshaShichosonCode;
     }
 
     /**
-     * setShichosonCode
+     * 広域保険者市町村コードのsetメソッドです。
      *
-     * @param shichosonCode shichosonCode
+     * @param koikiHokenshaShichosonCode 広域保険者市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
+    public void setKoikiHokenshaShichosonCode(LasdecCode koikiHokenshaShichosonCode) {
+        this.koikiHokenshaShichosonCode = koikiHokenshaShichosonCode;
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 広域保険者番号のgetメソッドです。
      *
-     * @return shoKisaiHokenshaNo
+     * @return 広域保険者番号
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
+    public ShoKisaiHokenshaNo getKoikiHokenshaNo() {
+        return koikiHokenshaNo;
     }
 
     /**
-     * setShoKisaiHokenshaNo
+     * 広域保険者番号のsetメソッドです。
      *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param koikiHokenshaNo 広域保険者番号
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    public void setKoikiHokenshaNo(ShoKisaiHokenshaNo koikiHokenshaNo) {
+        this.koikiHokenshaNo = koikiHokenshaNo;
     }
 
     /**
@@ -125,7 +125,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
+        if (!Objects.equals(this.koikiHokenshaShichosonCode, other.koikiHokenshaShichosonCode)) {
             return false;
         }
         return true;
@@ -136,8 +136,8 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
      */
     @Override
     public void shallowCopy(DbT7050KaigoHokenshaEntity entity) {
-        this.shichosonCode = entity.shichosonCode;
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
+        this.koikiHokenshaShichosonCode = entity.koikiHokenshaShichosonCode;
+        this.koikiHokenshaNo = entity.koikiHokenshaNo;
     }
 
     /**
@@ -147,7 +147,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shoKisaiHokenshaNo);
+        return super.toMd5(koikiHokenshaShichosonCode, koikiHokenshaNo);
     }
 
 // </editor-fold>

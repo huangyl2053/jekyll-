@@ -89,13 +89,13 @@ public enum DbT7021JigyoHokokuTokeiData implements IColumnDefinition {
      */
     yokoNo(4, 0),
     /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
-    /**
      * 集計結果値
      */
     shukeiKekkaAtai(14, 0),
+    /**
+     * 集計項目名称
+     */
+    shukeiKomokuMeisho(40, 0),
     /**
      * 縦項目コード
      */

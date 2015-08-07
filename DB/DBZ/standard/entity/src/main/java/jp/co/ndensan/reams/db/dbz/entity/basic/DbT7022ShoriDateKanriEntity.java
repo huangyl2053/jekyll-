@@ -19,7 +19,7 @@ import java.util.Objects;
  *
  */
 public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriDateKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7022ShoriDateKanri");
 
@@ -44,13 +44,15 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     @PrimaryKey
     private RString nendoNaiRenban;
     private FlexibleDate kijunYMD;
+    private YMDHMS kijunTimestamp;
     private FlexibleDate taishoKaishiYMD;
     private FlexibleDate taishoShuryoYMD;
     private YMDHMS taishoKaishiTimestamp;
     private YMDHMS taishoShuryoTimestamp;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +60,8 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +69,8 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,7 +78,8 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -83,7 +88,8 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,176 +97,228 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * getSubGyomuCode
-     * @return subGyomuCode
+     * サブ業務コードのgetメソッドです。
+     * 
+     * @return サブ業務コード
      */
     public SubGyomuCode getSubGyomuCode() {
         return subGyomuCode;
     }
 
     /**
-     * setSubGyomuCode
-     * @param subGyomuCode subGyomuCode
+     * サブ業務コードのsetメソッドです。
+     * 
+     * @param subGyomuCode サブ業務コード
      */
     public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
         this.subGyomuCode = subGyomuCode;
     }
 
     /**
-     * getShichosonCode
-     * @return shichosonCode
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
-     * setShichosonCode
-     * @param shichosonCode shichosonCode
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getShoriName
-     * @return shoriName
+     * 処理名のgetメソッドです。
+     * 
+     * @return 処理名
      */
     public RString getShoriName() {
         return shoriName;
     }
 
     /**
-     * setShoriName
-     * @param shoriName shoriName
+     * 処理名のsetメソッドです。
+     * 
+     * @param shoriName 処理名
      */
     public void setShoriName(RString shoriName) {
         this.shoriName = shoriName;
     }
 
     /**
-     * getShoriEdaban
-     * @return shoriEdaban
+     * 処理枝番のgetメソッドです。
+     * <br/>
+     * <br/>01から連番
+     * 
+     * @return 処理枝番
      */
     public RString getShoriEdaban() {
         return shoriEdaban;
     }
 
     /**
-     * setShoriEdaban
-     * @param shoriEdaban shoriEdaban
+     * 処理枝番のsetメソッドです。
+     * <br/>
+     * <br/>01から連番
+     * 
+     * @param shoriEdaban 処理枝番
      */
     public void setShoriEdaban(RString shoriEdaban) {
         this.shoriEdaban = shoriEdaban;
     }
 
     /**
-     * getNendo
-     * @return nendo
+     * 年度のgetメソッドです。
+     * <br/>
+     * <br/>使用しない場合は「0000」固定
+     * 
+     * @return 年度
      */
     public FlexibleYear getNendo() {
         return nendo;
     }
 
     /**
-     * setNendo
-     * @param nendo nendo
+     * 年度のsetメソッドです。
+     * <br/>
+     * <br/>使用しない場合は「0000」固定
+     * 
+     * @param nendo 年度
      */
     public void setNendo(FlexibleYear nendo) {
         this.nendo = nendo;
     }
 
     /**
-     * getNendoNaiRenban
-     * @return nendoNaiRenban
+     * 年度内連番のgetメソッドです。
+     * <br/>
+     * <br/>01から連番
+     * 
+     * @return 年度内連番
      */
     public RString getNendoNaiRenban() {
         return nendoNaiRenban;
     }
 
     /**
-     * setNendoNaiRenban
-     * @param nendoNaiRenban nendoNaiRenban
+     * 年度内連番のsetメソッドです。
+     * <br/>
+     * <br/>01から連番
+     * 
+     * @param nendoNaiRenban 年度内連番
      */
     public void setNendoNaiRenban(RString nendoNaiRenban) {
         this.nendoNaiRenban = nendoNaiRenban;
     }
 
     /**
-     * getKijunYMD
-     * @return kijunYMD
+     * 基準年月日のgetメソッドです。
+     * 
+     * @return 基準年月日
      */
     public FlexibleDate getKijunYMD() {
         return kijunYMD;
     }
 
     /**
-     * setKijunYMD
-     * @param kijunYMD kijunYMD
+     * 基準年月日のsetメソッドです。
+     * 
+     * @param kijunYMD 基準年月日
      */
     public void setKijunYMD(FlexibleDate kijunYMD) {
         this.kijunYMD = kijunYMD;
     }
 
     /**
-     * getTaishoKaishiYMD
-     * @return taishoKaishiYMD
+     * 基準日時のgetメソッドです。
+     * 
+     * @return 基準日時
+     */
+    public YMDHMS getKijunTimestamp() {
+        return kijunTimestamp;
+    }
+
+    /**
+     * 基準日時のsetメソッドです。
+     * 
+     * @param kijunTimestamp 基準日時
+     */
+    public void setKijunTimestamp(YMDHMS kijunTimestamp) {
+        this.kijunTimestamp = kijunTimestamp;
+    }
+
+    /**
+     * 対象開始年月日のgetメソッドです。
+     * 
+     * @return 対象開始年月日
      */
     public FlexibleDate getTaishoKaishiYMD() {
         return taishoKaishiYMD;
     }
 
     /**
-     * setTaishoKaishiYMD
-     * @param taishoKaishiYMD taishoKaishiYMD
+     * 対象開始年月日のsetメソッドです。
+     * 
+     * @param taishoKaishiYMD 対象開始年月日
      */
     public void setTaishoKaishiYMD(FlexibleDate taishoKaishiYMD) {
         this.taishoKaishiYMD = taishoKaishiYMD;
     }
 
     /**
-     * getTaishoShuryoYMD
-     * @return taishoShuryoYMD
+     * 対象終了年月日のgetメソッドです。
+     * 
+     * @return 対象終了年月日
      */
     public FlexibleDate getTaishoShuryoYMD() {
         return taishoShuryoYMD;
     }
 
     /**
-     * setTaishoShuryoYMD
-     * @param taishoShuryoYMD taishoShuryoYMD
+     * 対象終了年月日のsetメソッドです。
+     * 
+     * @param taishoShuryoYMD 対象終了年月日
      */
     public void setTaishoShuryoYMD(FlexibleDate taishoShuryoYMD) {
         this.taishoShuryoYMD = taishoShuryoYMD;
     }
 
     /**
-     * getTaishoKaishiTimestamp
-     * @return taishoKaishiTimestamp
+     * 対象開始日時のgetメソッドです。
+     * 
+     * @return 対象開始日時
      */
     public YMDHMS getTaishoKaishiTimestamp() {
         return taishoKaishiTimestamp;
     }
 
     /**
-     * setTaishoKaishiTimestamp
-     * @param taishoKaishiTimestamp taishoKaishiTimestamp
+     * 対象開始日時のsetメソッドです。
+     * 
+     * @param taishoKaishiTimestamp 対象開始日時
      */
     public void setTaishoKaishiTimestamp(YMDHMS taishoKaishiTimestamp) {
         this.taishoKaishiTimestamp = taishoKaishiTimestamp;
     }
 
     /**
-     * getTaishoShuryoTimestamp
-     * @return taishoShuryoTimestamp
+     * 対象終了日時のgetメソッドです。
+     * 
+     * @return 対象終了日時
      */
     public YMDHMS getTaishoShuryoTimestamp() {
         return taishoShuryoTimestamp;
     }
 
     /**
-     * setTaishoShuryoTimestamp
-     * @param taishoShuryoTimestamp taishoShuryoTimestamp
+     * 対象終了日時のsetメソッドです。
+     * 
+     * @param taishoShuryoTimestamp 対象終了日時
      */
     public void setTaishoShuryoTimestamp(YMDHMS taishoShuryoTimestamp) {
         this.taishoShuryoTimestamp = taishoShuryoTimestamp;
@@ -311,6 +369,7 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
         this.nendo = entity.nendo;
         this.nendoNaiRenban = entity.nendoNaiRenban;
         this.kijunYMD = entity.kijunYMD;
+        this.kijunTimestamp = entity.kijunTimestamp;
         this.taishoKaishiYMD = entity.taishoKaishiYMD;
         this.taishoShuryoYMD = entity.taishoShuryoYMD;
         this.taishoKaishiTimestamp = entity.taishoKaishiTimestamp;
@@ -323,9 +382,10 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, shichosonCode, shoriName, shoriEdaban, nendo, nendoNaiRenban, kijunYMD, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
+        return super.toMd5(subGyomuCode, shichosonCode, shoriName, shoriEdaban, nendo, nendoNaiRenban, kijunYMD, kijunTimestamp, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
     }
 
 // </editor-fold>
+
 
 }
