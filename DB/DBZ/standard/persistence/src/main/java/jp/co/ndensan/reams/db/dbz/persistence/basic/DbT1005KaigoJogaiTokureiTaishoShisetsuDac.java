@@ -7,27 +7,24 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護除外住所地特例対象施設のデータアクセスクラスです。
- *
- * @author LDNS 鄭雪双
  */
-public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements IModifiable<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> {
+public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -55,9 +52,9 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements IModifiable<Db
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
                 where(and(
-                                eq(jigyoshaShubetsu, 事業者種別),
-                                eq(jigyoshaNo, 事業者番号),
-                                eq(yukoKaishiYMD, 有効開始年月日))).
+                eq(jigyoshaShubetsu, 事業者種別),
+                eq(jigyoshaNo, 事業者番号),
+                eq(yukoKaishiYMD, 有効開始年月日))).
                 toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 
@@ -75,37 +72,18 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements IModifiable<Db
                 toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT1005KaigoJogaiTokureiTaishoShisetsuEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT1005KaigoJogaiTokureiTaishoShisetsuEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
