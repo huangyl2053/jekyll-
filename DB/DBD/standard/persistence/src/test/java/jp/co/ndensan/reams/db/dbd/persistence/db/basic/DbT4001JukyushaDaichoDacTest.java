@@ -2,20 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4001JukyushaDaichoEntity;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_枝番;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -23,26 +25,19 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT4001JukyushaDaichoDac}のテストです。
- *
- * @author n8235 船山洋介
  */
 @RunWith(Enclosed.class)
 public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
 
-    public static final LasdecCode OTHER_市町村コード = new LasdecCode("100001");
-    public static final HihokenshaNo OTHER_被保険者番号 = new HihokenshaNo("100000001");
-    public static final RString OTHER_履歴番号 = new RString("1001");
-    public static final RString OTHER_枝番 = new RString("11");
-    public static final Code OTHER_受給申請事由 = new Code("9");
-    public static final LasdecCode NotDEFAULT_市町村コード = new LasdecCode("999999");
-
+    private static final RString キー_01 = DEFAULT_キー;
+    private static final RString キー_02 = new RString("02");
+    private static final RString キー_03 = new RString("03");
     private static DbT4001JukyushaDaichoDac sut;
 
     @BeforeClass
@@ -61,17 +56,17 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
                     DEFAULT_枝番,
                     DEFAULT_受給申請事由);
             TestSupport.insert(
-                    OTHER_市町村コード,
-                    OTHER_被保険者番号,
-                    OTHER_履歴番号,
-                    OTHER_枝番,
-                    OTHER_受給申請事由);
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_履歴番号,
+                    DEFAULT_枝番,
+                    DEFAULT_受給申請事由);
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番,
@@ -82,7 +77,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null,
+                    DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番,
                     DEFAULT_受給申請事由);
@@ -93,7 +88,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    null,
+                    DEFAULT_履歴番号,
                     DEFAULT_枝番,
                     DEFAULT_受給申請事由);
         }
@@ -104,7 +99,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
                     DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
-                    null,
+                    DEFAULT_枝番,
                     DEFAULT_受給申請事由);
         }
 
@@ -115,7 +110,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番,
-                    null);
+                    DEFAULT_受給申請事由);
         }
 
         @Test
@@ -132,7 +127,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT4001JukyushaDaichoEntity insertedRecord = sut.selectByKey(
-                    NotDEFAULT_市町村コード,
+                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番,
@@ -141,7 +136,6 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
         }
     }
 
-    @Ignore("テストデータの件数は可変なので、エラーとしない")
     public static class selectAllのテスト extends DbdTestDacBase {
 
         @Test
@@ -153,11 +147,11 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
                     DEFAULT_枝番,
                     DEFAULT_受給申請事由);
             TestSupport.insert(
-                    OTHER_市町村コード,
-                    OTHER_被保険者番号,
-                    OTHER_履歴番号,
-                    OTHER_枝番,
-                    OTHER_受給申請事由);
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_履歴番号,
+                    DEFAULT_枝番,
+                    DEFAULT_受給申請事由);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -201,10 +195,15 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
 
         @Test
         public void 受給者台帳エンティティを渡すと_updateは_受給者台帳を更新する() {
-            DbT4001JukyushaDaichoEntity updateRecord = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
-            updateRecord.setShinseiRiyu(new RString("申請理由"));
+            DbT4001JukyushaDaichoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_履歴番号,
+                    DEFAULT_枝番,
+                    DEFAULT_受給申請事由);
+            updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT4001JukyushaDaichoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
@@ -213,7 +212,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
                     DEFAULT_枝番,
                     DEFAULT_受給申請事由);
 
-            assertThat(updateRecord.getShinseiRiyu(), is(updatedRecord.getShinseiRiyu()));
+            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -231,12 +230,16 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
 
         @Test
         public void 受給者台帳エンティティを渡すと_deleteは_受給者台帳を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT4001JukyushaDaichoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
                     DEFAULT_履歴番号,
                     DEFAULT_枝番,
-                    DEFAULT_受給申請事由));
+                    DEFAULT_受給申請事由);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
@@ -260,7 +263,7 @@ public class DbT4001JukyushaDaichoDacTest extends DbdTestDacBase {
             entity.setRirekiNo(履歴番号);
             entity.setEdaban(枝番);
             entity.setJukyuShinseiJiyu(受給申請事由);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }
