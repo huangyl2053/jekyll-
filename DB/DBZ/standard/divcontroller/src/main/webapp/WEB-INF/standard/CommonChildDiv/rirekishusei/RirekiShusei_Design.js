@@ -32,12 +32,12 @@ var DBZ;
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaJokyo"));
             };
 
-            Controls.prototype.btnOK = function () {
-                return new UZA.Button(this.convFiledName("btnOK"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
-            Controls.prototype.btnCansel = function () {
-                return new UZA.Button(this.convFiledName("btnCansel"));
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             };
             return Controls;
         })();

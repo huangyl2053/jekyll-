@@ -67,12 +67,12 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaJokyo"));
             }
 
-            public btnOK(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnOK"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
-            public btnCansel(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnCansel"));
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             }
 
         }

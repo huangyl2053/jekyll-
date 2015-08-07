@@ -48,10 +48,10 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("btnChosaJokyo")
     private ButtonDialog btnChosaJokyo;
-    @JsonProperty("btnOK")
-    private Button btnOK;
-    @JsonProperty("btnCansel")
-    private Button btnCansel;
+    @JsonProperty("btnKakutei")
+    private Button btnKakutei;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,24 +99,24 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
         this.btnChosaJokyo=btnChosaJokyo;
     }
 
-    @JsonProperty("btnOK")
-    public Button getBtnOK() {
-        return btnOK;
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
     }
 
-    @JsonProperty("btnOK")
-    public void setBtnOK(Button btnOK) {
-        this.btnOK=btnOK;
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei=btnKakutei;
     }
 
-    @JsonProperty("btnCansel")
-    public Button getBtnCansel() {
-        return btnCansel;
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
     }
 
-    @JsonProperty("btnCansel")
-    public void setBtnCansel(Button btnCansel) {
-        this.btnCansel=btnCansel;
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel=btnCancel;
     }
 
     // </editor-fold>
