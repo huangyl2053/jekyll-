@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitosha;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitosha.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitoshaEntity;
@@ -48,8 +49,8 @@ public class DbT1006KyokaisoGaitoshaDac implements ISaveable<DbT1006KyokaisoGait
         return accessor.select().
                 table(DbT1006KyokaisoGaitosha.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(rirekiNo, 履歴番号))).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT1006KyokaisoGaitoshaEntity.class);
     }
 

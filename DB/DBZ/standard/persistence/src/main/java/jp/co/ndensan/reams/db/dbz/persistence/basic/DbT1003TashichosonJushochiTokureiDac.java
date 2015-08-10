@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -52,9 +53,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                eq(shikibetsuCode, 識別コード),
-                eq(idoYMD, 異動日),
-                eq(edaNo, 枝番))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 

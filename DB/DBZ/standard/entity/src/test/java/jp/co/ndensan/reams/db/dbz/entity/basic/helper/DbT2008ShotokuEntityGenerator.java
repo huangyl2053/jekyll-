@@ -12,19 +12,17 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護所得エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT2008ShotokuEntityGenerator {
 
-    public static final FlexibleYear DEFAULT_所得年度 = new FlexibleYear("2014");
-    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
-    public static final int DEFAULT_履歴番号 = 1;
-    public static final RString DEFAULT_非課税区分_住民税減免前 = new RString("1");
-    public static final RString DEFAULT_非課税区分_住民税減免後 = new RString("1");
-    public static final Decimal DEFAULT_合計所得金額 = new Decimal(1);
-    public static final Decimal DEFAULT_公的年金収入額 = new Decimal(1);
-    public static final RString DEFAULT_激変緩和措置区分 = new RString("1");
+    public static final FlexibleYear DEFAULT_所得年度 = new FlexibleYear("1990");
+    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(1);
+    public static final RString DEFAULT_非課税区分_住民税減免前 = new RString("Data");
+    public static final RString DEFAULT_非課税区分_住民税減免後 = new RString("Data");
+    public static final Decimal DEFAULT_合計所得金額 = new Decimal(0);
+    public static final Decimal DEFAULT_公的年金収入額 = new Decimal(0);
+    public static final RString DEFAULT_激変緩和措置区分 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

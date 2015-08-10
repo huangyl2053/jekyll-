@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -41,7 +43,7 @@ public class DbT2008ShotokuDac implements ISaveable<DbT2008ShotokuEntity> {
     public DbT2008ShotokuEntity selectByKey(
             FlexibleYear 所得年度,
             ShikibetsuCode 識別コード,
-            int 履歴番号) throws NullPointerException {
+            Decimal 履歴番号) throws NullPointerException {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -51,9 +53,9 @@ public class DbT2008ShotokuDac implements ISaveable<DbT2008ShotokuEntity> {
         return accessor.select().
                 table(DbT2008Shotoku.class).
                 where(and(
-                eq(shotokuNendo, 所得年度),
-                eq(shikibetsuCode, 識別コード),
-                eq(rirekiNo, 履歴番号))).
+                                eq(shotokuNendo, 所得年度),
+                                eq(shikibetsuCode, 識別コード),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT2008ShotokuEntity.class);
     }
 

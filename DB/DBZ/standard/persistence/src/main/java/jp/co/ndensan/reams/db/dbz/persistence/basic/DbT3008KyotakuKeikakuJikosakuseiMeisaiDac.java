@@ -6,6 +6,10 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisai;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisai.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
@@ -65,13 +69,13 @@ public class DbT3008KyotakuKeikakuJikosakuseiMeisaiDac implements ISaveable<DbT3
         return accessor.select().
                 table(DbT3008KyotakuKeikakuJikosakuseiMeisai.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(taishoYM, 対象年月),
-                eq(rirekiNo, 履歴番号),
-                eq(kyotakuServiceKubun, 居宅サービス区分),
-                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
-                eq(serviceShuruiCode, サービス種類コード),
-                eq(serviceKomokuCode, サービス項目コード))).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号),
+                                eq(kyotakuServiceKubun, 居宅サービス区分),
+                                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(serviceKomokuCode, サービス項目コード))).
                 toObject(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity.class);
     }
 

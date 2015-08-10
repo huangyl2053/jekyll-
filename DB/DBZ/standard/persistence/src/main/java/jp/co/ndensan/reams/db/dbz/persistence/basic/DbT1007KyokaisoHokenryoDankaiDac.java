@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankai;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankai.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankaiEntity;
@@ -52,9 +53,9 @@ public class DbT1007KyokaisoHokenryoDankaiDac implements ISaveable<DbT1007Kyokai
         return accessor.select().
                 table(DbT1007KyokaisoHokenryoDankai.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(rirekiNo, 履歴番号),
-                eq(tekiyoKaishiYM, 適用開始年月))).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(rirekiNo, 履歴番号),
+                                eq(tekiyoKaishiYM, 適用開始年月))).
                 toObject(DbT1007KyokaisoHokenryoDankaiEntity.class);
     }
 
