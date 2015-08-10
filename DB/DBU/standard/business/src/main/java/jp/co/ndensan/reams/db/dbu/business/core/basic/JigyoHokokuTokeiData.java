@@ -327,9 +327,14 @@ public class JigyoHokokuTokeiData extends ParentModelBase<JigyoHokokuTokeiDataId
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1;// TODO serialVersionUIDを生成してください
         private final DbT7021JigyoHokokuTokeiDataEntity entity;
         private final JigyoHokokuTokeiDataIdentifier id;
 

@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7029ShinKyuChosa
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7029ShinKyuChosaItakusakiChosainNoHenkanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestDacBase {
@@ -47,7 +46,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new LasdecCode("564125"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
             TestSupport.insert(
@@ -59,7 +58,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
         }
@@ -68,7 +67,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
         public void 旧調査委託先番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null,
+                    DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
         }
 
@@ -77,7 +76,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
-                    null);
+                    DEFAULT_旧調査員番号);
         }
 
         @Test
@@ -92,7 +91,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity insertedRecord = sut.selectByKey(
-                    new LasdecCode("548796"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
             assertThat(insertedRecord, is(nullValue()));
@@ -104,7 +103,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
         @Test
         public void 新旧調査委託先調査員番号変換テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new LasdecCode("548776"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
             TestSupport.insert(
@@ -148,19 +147,22 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
 
         @Test
         public void 新旧調査委託先調査員番号変換テーブルエンティティを渡すと_updateは_新旧調査委託先調査員番号変換テーブルを更新する() {
-            DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity updateRecord = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.createDbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity();
-            //TODO  主キー以外の項目を変更してください
-//   updateRecord.set変更したい項目(75);
+            DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_旧調査委託先番号,
+                    DEFAULT_旧調査員番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
                     DEFAULT_旧調査員番号);
 
-            //TODO  主キー以外の項目を変更してください
-//   assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -176,10 +178,14 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
 
         @Test
         public void 新旧調査委託先調査員番号変換テーブルエンティティを渡すと_deleteは_新旧調査委託先調査員番号変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
-                    DEFAULT_旧調査員番号));
+                    DEFAULT_旧調査員番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧調査委託先番号,
@@ -197,7 +203,7 @@ public class DbT7029ShinKyuChosaItakusakiChosainNoHenkanDacTest extends DbzTestD
             entity.setShichosonCode(市町村コード);
             entity.setKyuChosaItakusakiNo(旧調査委託先番号);
             entity.setKyuChosainNo(旧調査員番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

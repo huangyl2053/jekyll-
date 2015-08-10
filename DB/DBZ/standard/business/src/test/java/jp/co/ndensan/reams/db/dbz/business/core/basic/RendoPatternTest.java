@@ -5,13 +5,12 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7035RendoPatternEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7035RendoPatternEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7035RendoPatternEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -40,11 +39,9 @@ public class RendoPatternTest extends DbzTestBase {
 
         private static RendoPattern sut;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
         }
 
 //TODO 主キー名を置換してください
@@ -77,11 +74,9 @@ public class RendoPatternTest extends DbzTestBase {
 
         private static RendoPattern sut;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -103,11 +98,9 @@ public class RendoPatternTest extends DbzTestBase {
 
         private static RendoPattern sut;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
 
             sut = new RendoPattern(RendoPatternEntity);
         }
@@ -187,11 +180,9 @@ public class RendoPatternTest extends DbzTestBase {
 
         private static RendoPattern sut;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
 
             sut = new RendoPattern(RendoPatternEntity);
         }
@@ -206,11 +197,9 @@ public class RendoPatternTest extends DbzTestBase {
 
         private static RendoPattern sut;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
 
             sut = new RendoPattern(RendoPatternEntity);
         }
@@ -226,11 +215,9 @@ public class RendoPatternTest extends DbzTestBase {
         private static RendoPattern sut;
         private static RendoPattern result;
 
-        @Before
-        public void setUp() {
+        @BeforeClass
+        public static void setUpClass() {
             RendoPatternEntity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
 
         }
 

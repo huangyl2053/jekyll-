@@ -28,19 +28,34 @@ public class RendoPattern extends ParentModelBase<RendoPatternIdentifier, DbT703
      * コンストラクタです。<br/>
      * 連動パターンの新規作成時に使用します。
      *
-     * @param 処理番号 処理番号
-     * @param 連番 連番
+     * @param 送信元市町村コード 送信元市町村コード
+     * @param 送信先市町村コード 送信先市町村コード
+     * @param 種別 種別
+     * @param 有効開始年月日 有効開始年月日
+     * @param 有効終了年月日 有効終了年月日
      */
-    public RendoPattern(LasdecCode 処理番号,
-            LasdecCode 連番) {
-        requireNonNull(処理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("処理番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+    public RendoPattern(LasdecCode 送信元市町村コード,
+            LasdecCode 送信先市町村コード,
+            RString 種別,
+            FlexibleDate 有効開始年月日,
+            FlexibleDate 有効終了年月日) {
+        requireNonNull(送信元市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("送信元市町村コード"));
+        requireNonNull(送信先市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("送信先市町村コード"));
+        requireNonNull(種別, UrSystemErrorMessages.値がnull.getReplacedMessage("種別"));
+        requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
+        requireNonNull(有効終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効終了年月日"));
         this.entity = new DbT7035RendoPatternEntity();
-        this.entity.setShoriNo(処理番号);
-        this.entity.setRenNo(連番);
+        this.entity.setMotoShichosonCode(送信元市町村コード);
+        this.entity.setSakiShichosonCode(送信先市町村コード);
+        this.entity.setShubetsu(種別);
+        this.entity.setYukoKaishiYMD(有効開始年月日);
+        this.entity.setYukoShuryoYMD(有効終了年月日);
         this.id = new RendoPatternIdentifier(
-                処理番号,
-                連番
+                送信元市町村コード,
+                送信先市町村コード,
+                種別,
+                有効開始年月日,
+                有効終了年月日
         );
     }
 
@@ -53,8 +68,11 @@ public class RendoPattern extends ParentModelBase<RendoPatternIdentifier, DbT703
     public RendoPattern(DbT7035RendoPatternEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("連動パターン"));
         this.id = new RendoPatternIdentifier(
-                entity.getShoriNo(),
-                entity.getRenNo());
+                entity.getMotoShichosonCode(),
+                entity.getSakiShichosonCode(),
+                entity.getShubetsu(),
+                entity.getYukoKaishiYMD(),
+                entity.getYukoShuryoYMD());
     }
 
     /**
@@ -260,9 +278,14 @@ public class RendoPattern extends ParentModelBase<RendoPatternIdentifier, DbT703
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1;// TODO serialVersionUIDを生成してください
         private final DbT7035RendoPatternEntity entity;
         private final RendoPatternIdentifier id;
 

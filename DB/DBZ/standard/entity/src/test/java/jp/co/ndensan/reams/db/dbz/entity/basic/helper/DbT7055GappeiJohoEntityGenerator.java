@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -13,8 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合併情報エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author N8187 久保田 英男
  */
 public final class DbT7055GappeiJohoEntityGenerator {
 
@@ -22,9 +19,9 @@ public final class DbT7055GappeiJohoEntityGenerator {
     public static final RString DEFAULT_地域番号 = new RString("01");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("000001");
     public static final RString DEFAULT_合併種類 = new RString("1");
-    public static final ShoKisaiHokenshaNo DEFAULT_保険者番号 = new ShoKisaiHokenshaNo("123465");
+    public static final HokenshaNo DEFAULT_保険者番号 = new HokenshaNo("123456");
     public static final FlexibleDate DEFAULT_旧市町村情報付与終了年月日 = new FlexibleDate("20150101");
-    public static final FlexibleDate DEFAULT_国保連データ連携開始年月日 = new FlexibleDate("20140102");
+    public static final FlexibleDate DEFAULT_国保連データ連携開始年月日 = new FlexibleDate("20150101");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -43,5 +40,4 @@ public final class DbT7055GappeiJohoEntityGenerator {
         entity.setKokuhorenDataFromYMD(DEFAULT_国保連データ連携開始年月日);
         return entity;
     }
-
 }

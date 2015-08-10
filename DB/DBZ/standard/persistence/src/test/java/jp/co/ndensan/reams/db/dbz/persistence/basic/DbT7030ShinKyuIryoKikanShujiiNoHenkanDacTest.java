@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7030ShinKyuIryoK
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7030ShinKyuIryoKikanShujiiNoHenkanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase {
@@ -47,7 +46,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new LasdecCode("874965"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
             TestSupport.insert(
@@ -59,7 +58,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
         }
@@ -68,7 +67,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
         public void 旧医療機関番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null,
+                    DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
         }
 
@@ -77,7 +76,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
-                    null);
+                    DEFAULT_旧主治医番号);
         }
 
         @Test
@@ -92,7 +91,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity insertedRecord = sut.selectByKey(
-                    new LasdecCode("548695"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
             assertThat(insertedRecord, is(nullValue()));
@@ -104,7 +103,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
         @Test
         public void 新旧医療機関主治医番号変換テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new LasdecCode("796481"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
             TestSupport.insert(
@@ -148,19 +147,22 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
 
         @Test
         public void 新旧医療機関主治医番号変換テーブルエンティティを渡すと_updateは_新旧医療機関主治医番号変換テーブルを更新する() {
-            DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity updateRecord = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            //TODO  主キー以外の項目を変更してください
-// updateRecord.set変更したい項目(75);
+            DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_旧医療機関番号,
+                    DEFAULT_旧主治医番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
                     DEFAULT_旧主治医番号);
 
-            //TODO  主キー以外の項目を変更してください
-// assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -176,10 +178,14 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
 
         @Test
         public void 新旧医療機関主治医番号変換テーブルエンティティを渡すと_deleteは_新旧医療機関主治医番号変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
-                    DEFAULT_旧主治医番号));
+                    DEFAULT_旧主治医番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧医療機関番号,
@@ -197,7 +203,7 @@ public class DbT7030ShinKyuIryoKikanShujiiNoHenkanDacTest extends DbzTestDacBase
             entity.setShichosonCode(市町村コード);
             entity.setKyuIryoKikanNo(旧医療機関番号);
             entity.setKyuShujiiNo(旧主治医番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

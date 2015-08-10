@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7006RoreiFukushiNenkinJukyushaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始年月日;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7006RoreiFukushiNenkinJukyushaDac}のテストです。
- *
- * @author LDNS 賈楽楽
  */
 @RunWith(Enclosed.class)
 public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
@@ -47,40 +46,40 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new ShikibetsuCode("5241611"),
-                    DEFAULT_受給開始日);
+                    DEFAULT_識別コード,
+                    DEFAULT_受給開始年月日);
             TestSupport.insert(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
         }
 
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
-                    DEFAULT_受給開始日);
+                    DEFAULT_識別コード,
+                    DEFAULT_受給開始年月日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 受給開始日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 受給開始年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_識別コード,
-                    null);
+                    DEFAULT_受給開始年月日);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7006RoreiFukushiNenkinJukyushaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7006RoreiFukushiNenkinJukyushaEntity insertedRecord = sut.selectByKey(
-                    new ShikibetsuCode("46542"),
-                    DEFAULT_受給開始日);
+                    DEFAULT_識別コード,
+                    DEFAULT_受給開始年月日);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -90,11 +89,11 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
         @Test
         public void 老齢福祉年金受給者が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new ShikibetsuCode("5241611"),
-                    DEFAULT_受給開始日);
+                    DEFAULT_識別コード,
+                    DEFAULT_受給開始年月日);
             TestSupport.insert(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -110,11 +109,11 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
         public void 老齢福祉年金受給者エンティティを渡すと_insertは_老齢福祉年金受給者を追加する() {
             TestSupport.insert(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
 
             assertThat(sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日), is(notNullValue()));
+                    DEFAULT_受給開始年月日), is(notNullValue()));
         }
     }
 
@@ -124,23 +123,25 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
         }
 
         @Test
         public void 老齢福祉年金受給者エンティティを渡すと_updateは_老齢福祉年金受給者を更新する() {
-            DbT7006RoreiFukushiNenkinJukyushaEntity updateRecord = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.createDbT7006RoreiFukushiNenkinJukyushaEntity();
-            //TODO  主キー以外の項目を変更してください
-// updateRecord.set変更したい項目(75);
+            DbT7006RoreiFukushiNenkinJukyushaEntity updateRecord = sut.selectByKey(
+                    DEFAULT_識別コード,
+                    DEFAULT_受給開始年月日);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7006RoreiFukushiNenkinJukyushaEntity updatedRecord = sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
 
-            //TODO  主キー以外の項目を変更してください
-//assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -150,17 +151,21 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日);
+                    DEFAULT_受給開始年月日);
         }
 
         @Test
         public void 老齢福祉年金受給者エンティティを渡すと_deleteは_老齢福祉年金受給者を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7006RoreiFukushiNenkinJukyushaEntity deletedEntity = sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日));
+                    DEFAULT_受給開始年月日);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_受給開始日), is(nullValue()));
+                    DEFAULT_受給開始年月日), is(nullValue()));
         }
     }
 
@@ -168,11 +173,11 @@ public class DbT7006RoreiFukushiNenkinJukyushaDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShikibetsuCode 識別コード,
-                FlexibleDate 受給開始日) {
+                FlexibleDate 受給開始年月日) {
             DbT7006RoreiFukushiNenkinJukyushaEntity entity = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.createDbT7006RoreiFukushiNenkinJukyushaEntity();
             entity.setShikibetsuCode(識別コード);
-            entity.setJukyuKaishiYMD(受給開始日);
-            sut.insert(entity);
+            entity.setJukyuKaishiYMD(受給開始年月日);
+            sut.save(entity);
         }
     }
 }

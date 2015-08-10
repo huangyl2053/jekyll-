@@ -13,18 +13,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合併内住特者新旧番号変換テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator {
 
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final RString DEFAULT_履歴番号 = new RString("1");
-    public static final ShikibetsuCode DEFAULT_識別コード_措置元 = new ShikibetsuCode("000001234567890");
+    public static final ShikibetsuCode DEFAULT_識別コード_措置元 = new ShikibetsuCode(
+            "000001234567890");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
-    public static final LasdecCode DEFAULT_市町村コード_措置元 = new LasdecCode("202011");
+    public static final LasdecCode DEFAULT_市町村コード_措置元 = new LasdecCode(
+            "202011");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final HihokenshaNo DEFAULT_被保険者番号_措置元 = new HihokenshaNo(new RString("2"));
+    public static final HihokenshaNo DEFAULT_被保険者番号_措置元 = new HihokenshaNo(
+            new RString("2"));
     public static final FlexibleDate DEFAULT_開始年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_終了年月日 = new FlexibleDate("20140402");
 

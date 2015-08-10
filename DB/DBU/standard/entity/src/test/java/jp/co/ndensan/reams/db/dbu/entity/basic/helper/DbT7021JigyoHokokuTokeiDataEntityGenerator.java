@@ -13,15 +13,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事業報告統計データエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7021JigyoHokokuTokeiDataEntityGenerator {
 
     public static final FlexibleYear DEFAULT_報告年 = new FlexibleYear("2014");
     public static final RString DEFAULT_報告月 = new RString("1");
     public static final FlexibleYear DEFAULT_集計対象年 = new FlexibleYear("2014");
-    public static final RString DEFAULT_集計対象月 = new RString("3");
+    public static final RString DEFAULT_集計対象月 = new RString("1");
     public static final RString DEFAULT_統計対象区分 = new RString("1");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final Code DEFAULT_表番号 = new Code("1003");
@@ -29,10 +27,10 @@ public final class DbT7021JigyoHokokuTokeiDataEntityGenerator {
     public static final Code DEFAULT_集計単位 = new Code("3");
     public static final Decimal DEFAULT_縦番号 = new Decimal(1000);
     public static final Decimal DEFAULT_横番号 = new Decimal(1000);
-    public static final int DEFAULT_履歴番号 = 1;
-    public static final Decimal DEFAULT_集計結果値 = new Decimal(10000);
+    public static final Decimal DEFAULT_集計結果値 = new Decimal(1000);
+    public static final RString DEFAULT_集計項目名称 = new RString("1");
     public static final Code DEFAULT_縦項目コード = new Code("13456");
-    public static final Code DEFAULT_横項目コード = new Code("46621");
+    public static final Code DEFAULT_横項目コード = new Code("13456");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -53,8 +51,8 @@ public final class DbT7021JigyoHokokuTokeiDataEntityGenerator {
         entity.setShukeiTani(DEFAULT_集計単位);
         entity.setTateNo(DEFAULT_縦番号);
         entity.setYokoNo(DEFAULT_横番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShukeiKekkaAtai(DEFAULT_集計結果値);
+        entity.setShukeiKomokuMeisho(DEFAULT_集計項目名称);
         entity.setTateKomokuCode(DEFAULT_縦項目コード);
         entity.setYokoKomokuCode(DEFAULT_横項目コード);
         return entity;

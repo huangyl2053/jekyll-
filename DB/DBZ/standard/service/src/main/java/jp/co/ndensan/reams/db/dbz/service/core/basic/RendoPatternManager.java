@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7035RendoPatternDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -42,20 +44,32 @@ public class RendoPatternManager {
     /**
      * 主キーに合致する連動パターンを返します。
      *
-     * @param 処理番号 ShoriNo
-     * @param 連番 RenNo
+     * @param 送信元市町村コード 送信元市町村コード
+     * @param 送信先市町村コード 送信先市町村コード
+     * @param 種別 種別
+     * @param 有効開始年月日 有効開始年月日
+     * @param 有効終了年月日 有効終了年月日
      * @return RendoPattern
      */
     @Transaction
     public RendoPattern get連動パターン(
-            LasdecCode 処理番号,
-            LasdecCode 連番) {
-        requireNonNull(処理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("処理番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+            LasdecCode 送信元市町村コード,
+            LasdecCode 送信先市町村コード,
+            RString 種別,
+            FlexibleDate 有効開始年月日,
+            FlexibleDate 有効終了年月日) {
+        requireNonNull(送信元市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("送信元市町村コード"));
+        requireNonNull(送信先市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("送信先市町村コード"));
+        requireNonNull(種別, UrSystemErrorMessages.値がnull.getReplacedMessage("種別"));
+        requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
+        requireNonNull(有効終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効終了年月日"));
 
         DbT7035RendoPatternEntity entity = dac.selectByKey(
-                処理番号,
-                連番);
+                送信元市町村コード,
+                送信先市町村コード,
+                種別,
+                有効開始年月日,
+                有効終了年月日);
         if (entity == null) {
             return null;
         }
@@ -66,7 +80,7 @@ public class RendoPatternManager {
     /**
      * 連動パターンを全件返します。
      *
-     * @return List<RendoPattern>
+     * @return RendoPatternの{@code list}
      */
     @Transaction
     public List<RendoPattern> get連動パターン一覧() {

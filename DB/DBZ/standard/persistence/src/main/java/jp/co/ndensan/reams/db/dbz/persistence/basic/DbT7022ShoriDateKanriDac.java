@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -6,29 +7,32 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.nendo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.nendoNaiRenban;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.shoriEdaban;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.shoriName;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.subGyomuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 処理日付管理マスタのデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKanriEntity> {
+public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanriEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -49,7 +53,7 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
     public DbT7022ShoriDateKanriEntity selectByKey(
             SubGyomuCode サブ業務コード,
             LasdecCode 市町村コード,
-            ShoriName 処理名,
+            RString 処理名,
             RString 処理枝番,
             FlexibleYear 年度,
             RString 年度内連番) throws NullPointerException {
@@ -67,7 +71,7 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
                 where(and(
                                 eq(subGyomuCode, サブ業務コード),
                                 eq(shichosonCode, 市町村コード),
-                                eq(shoriName, 処理名.toRString()),
+                                eq(shoriName, 処理名),
                                 eq(shoriEdaban, 処理枝番),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番))).
@@ -88,24 +92,18 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 
+    /**
+     * DbT7022ShoriDateKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
     @Transaction
     @Override
-    public int insert(DbT7022ShoriDateKanriEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7022ShoriDateKanriEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7022ShoriDateKanriEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
+    public int save(DbT7022ShoriDateKanriEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日付管理マスタエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

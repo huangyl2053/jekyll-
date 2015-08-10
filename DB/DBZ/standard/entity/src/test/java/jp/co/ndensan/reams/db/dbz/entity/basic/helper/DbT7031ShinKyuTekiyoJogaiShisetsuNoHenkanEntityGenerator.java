@@ -1,4 +1,4 @@
- a/*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,18 +10,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新旧適用除外施設番号変換テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
-
-
 public final class DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
-    public static final RString DEFAULT_新適用除外施設番号 = new RString("123");
-    public static final RString DEFAULT_旧適用除外施設番号 = new RString("123");
+    public static final RString DEFAULT_新適用除外施設番号 = new RString("1231");
+    public static final RString DEFAULT_旧適用除外施設番号 = new RString("1231");
     public static final LasdecCode DEFAULT_市町村コード２ = new LasdecCode("202011");
-    public static final RString DEFAULT_旧適用除外施設番号２ = new RString("123");
+    public static final RString DEFAULT_旧適用除外施設番号２ = new RString("1231");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

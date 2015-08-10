@@ -5,28 +5,43 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連動パターンの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+//@lombok.Value TODO
+//@lombok.AllArgsConstructor TODO
 public class RendoPatternIdentifier implements Serializable {
 
-    private final LasdecCode 処理番号;
-    private final LasdecCode 連番;
+    private final LasdecCode 送信元市町村コード;
+    private final LasdecCode 送信先市町村コード;
+    private final RString 種別;
+    private final FlexibleDate 有効開始年月日;
+    private final FlexibleDate 有効終了年月日;
 
     /**
      * コンストラクタです。
      *
-     * @param 処理番号 処理番号
-     * @param 連番 連番
+     * @param 送信元市町村コード 送信元市町村コード
+     * @param 送信先市町村コード 送信先市町村コード
+     * @param 種別 種別
+     * @param 有効開始年月日 有効開始年月日
+     * @param 有効終了年月日 有効終了年月日
      */
-    public RendoPatternIdentifier(LasdecCode 処理番号,
-            LasdecCode 連番) {
-        this.処理番号 = 処理番号;
-        this.連番 = 連番;
+    public RendoPatternIdentifier(LasdecCode 送信元市町村コード,
+            LasdecCode 送信先市町村コード,
+            RString 種別,
+            FlexibleDate 有効開始年月日,
+            FlexibleDate 有効終了年月日) {
+        this.送信元市町村コード = 送信元市町村コード;
+        this.送信先市町村コード = 送信先市町村コード;
+        this.種別 = 種別;
+        this.有効開始年月日 = 有効開始年月日;
+        this.有効終了年月日 = 有効終了年月日;
     }
 }

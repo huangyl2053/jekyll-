@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7033GappeiNaiJut
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -25,8 +26,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac}のテストです。
- *
- * @author LDNS 宋文娟
  */
 @RunWith(Enclosed.class)
 public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacBase {
@@ -34,8 +33,6 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000001234567899");
-    private static final ShikibetsuCode 識別コード2 = new ShikibetsuCode("000001234567898");
     private static DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac sut;
 
     @BeforeClass
@@ -48,7 +45,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
         @Before
         public void setUp() {
             TestSupport.insert(
-                    識別コード,
+                    DEFAULT_識別コード,
                     DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_識別コード,
@@ -58,7 +55,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_識別コード,
                     DEFAULT_履歴番号);
         }
 
@@ -66,7 +63,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
         public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_識別コード,
-                    null);
+                    DEFAULT_履歴番号);
         }
 
         @Test
@@ -80,7 +77,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity insertedRecord = sut.selectByKey(
-                    識別コード2,
+                    DEFAULT_識別コード,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -94,7 +91,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
             TestSupport.insert(
-                    識別コード,
+                    DEFAULT_識別コード,
                     DEFAULT_履歴番号);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -130,17 +127,20 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
 
         @Test
         public void 合併内住特者新旧番号変換テーブルエンティティを渡すと_updateは_合併内住特者新旧番号変換テーブルを更新する() {
-            DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity updateRecord = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            // TODO 主キー以外の項目を変更してください
-            //updateRecord.set変更したい項目(75);
+            DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_識別コード,
+                    DEFAULT_履歴番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -155,9 +155,13 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
 
         @Test
         public void 合併内住特者新旧番号変換テーブルエンティティを渡すと_deleteは_合併内住特者新旧番号変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_識別コード,
-                    DEFAULT_履歴番号));
+                    DEFAULT_履歴番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_識別コード,
                     DEFAULT_履歴番号), is(nullValue()));
@@ -172,7 +176,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDacTest extends DbzTestDacB
             DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

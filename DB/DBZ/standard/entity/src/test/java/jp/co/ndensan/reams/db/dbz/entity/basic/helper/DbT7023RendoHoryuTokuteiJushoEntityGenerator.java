@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連動保留特定住所マスタエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7023RendoHoryuTokuteiJushoEntityGenerator {
 

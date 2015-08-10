@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbu.entity.db.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator;
-import static jp.co.ndensan.reams.db.dbu.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7034KoikiGaijiHe
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -25,8 +26,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7034KoikiGaijiHenkanErrorLogDac}のテストです。
- *
- * @author LDNS 宋文娟
  */
 @RunWith(Enclosed.class)
 public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
@@ -34,8 +33,6 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final RString 処理番号 = new RString("2");
-    private static final RString 処理番号3 = new RString("3");
     private static DbT7034KoikiGaijiHenkanErrorLogDac sut;
 
     @BeforeClass
@@ -48,7 +45,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    処理番号,
+                    DEFAULT_処理番号,
                     DEFAULT_連番,
                     DEFAULT_エラー表示連番);
             TestSupport.insert(
@@ -60,7 +57,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 処理番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_処理番号,
                     DEFAULT_連番,
                     DEFAULT_エラー表示連番);
         }
@@ -69,7 +66,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
         public void 連番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_処理番号,
-                    null,
+                    DEFAULT_連番,
                     DEFAULT_エラー表示連番);
         }
 
@@ -78,7 +75,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_処理番号,
                     DEFAULT_連番,
-                    null);
+                    DEFAULT_エラー表示連番);
         }
 
         @Test
@@ -93,7 +90,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7034KoikiGaijiHenkanErrorLogEntity insertedRecord = sut.selectByKey(
-                    処理番号3,
+                    DEFAULT_処理番号,
                     DEFAULT_連番,
                     DEFAULT_エラー表示連番);
             assertThat(insertedRecord, is(nullValue()));
@@ -105,7 +102,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
         @Test
         public void 広域外字変換エラーログが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    処理番号,
+                    DEFAULT_処理番号,
                     DEFAULT_連番,
                     DEFAULT_エラー表示連番);
             TestSupport.insert(
@@ -149,18 +146,22 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
 
         @Test
         public void 広域外字変換エラーログエンティティを渡すと_updateは_広域外字変換エラーログを更新する() {
-            DbT7034KoikiGaijiHenkanErrorLogEntity updateRecord = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            // TODO 主キー以外の項目を変更してください
-            //updateRecord.set変更したい項目(75);
+            DbT7034KoikiGaijiHenkanErrorLogEntity updateRecord = sut.selectByKey(
+                    DEFAULT_処理番号,
+                    DEFAULT_連番,
+                    DEFAULT_エラー表示連番);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7034KoikiGaijiHenkanErrorLogEntity updatedRecord = sut.selectByKey(
                     DEFAULT_処理番号,
                     DEFAULT_連番,
                     DEFAULT_エラー表示連番);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -176,10 +177,14 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
 
         @Test
         public void 広域外字変換エラーログエンティティを渡すと_deleteは_広域外字変換エラーログを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7034KoikiGaijiHenkanErrorLogEntity deletedEntity = sut.selectByKey(
                     DEFAULT_処理番号,
                     DEFAULT_連番,
-                    DEFAULT_エラー表示連番));
+                    DEFAULT_エラー表示連番);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_処理番号,
                     DEFAULT_連番,
@@ -197,7 +202,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogDacTest extends DbzTestDacBase {
             entity.setShoriNo(処理番号);
             entity.setRenNo(連番);
             entity.setErrorHyojiRenban(エラー表示連番);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

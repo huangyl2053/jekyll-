@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -29,8 +30,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7035RendoPatternDac}のテストです。
- *
- * @author LDNS 宋文娟
  */
 @RunWith(Enclosed.class)
 public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
@@ -38,8 +37,6 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final LasdecCode 送信元市町村コード = new LasdecCode("202012");
-    private static final LasdecCode 送信元市町村コード202013 = new LasdecCode("202013");
     private static DbT7035RendoPatternDac sut;
 
     @BeforeClass
@@ -52,7 +49,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    送信元市町村コード,
+                    DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
@@ -68,7 +65,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 送信元市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
@@ -79,7 +76,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
         public void 送信先市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_送信元市町村コード,
-                    null,
+                    DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
                     DEFAULT_有効終了年月日);
@@ -90,7 +87,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
-                    null,
+                    DEFAULT_種別,
                     DEFAULT_有効開始年月日,
                     DEFAULT_有効終了年月日);
         }
@@ -101,7 +98,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
                     DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
-                    null,
+                    DEFAULT_有効開始年月日,
                     DEFAULT_有効終了年月日);
         }
 
@@ -112,7 +109,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
-                    null);
+                    DEFAULT_有効終了年月日);
         }
 
         @Test
@@ -129,7 +126,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7035RendoPatternEntity insertedRecord = sut.selectByKey(
-                    送信元市町村コード202013,
+                    DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
@@ -143,7 +140,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
         @Test
         public void 連動パターンが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    送信元市町村コード,
+                    DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
@@ -197,11 +194,16 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
 
         @Test
         public void 連動パターンエンティティを渡すと_updateは_連動パターンを更新する() {
-            DbT7035RendoPatternEntity updateRecord = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            // TODO 主キー以外の項目を変更してください
-            //updateRecord.set変更したい項目(75);
+            DbT7035RendoPatternEntity updateRecord = sut.selectByKey(
+                    DEFAULT_送信元市町村コード,
+                    DEFAULT_送信先市町村コード,
+                    DEFAULT_種別,
+                    DEFAULT_有効開始年月日,
+                    DEFAULT_有効終了年月日);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7035RendoPatternEntity updatedRecord = sut.selectByKey(
                     DEFAULT_送信元市町村コード,
@@ -210,7 +212,8 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
                     DEFAULT_有効開始年月日,
                     DEFAULT_有効終了年月日);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -228,12 +231,16 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
 
         @Test
         public void 連動パターンエンティティを渡すと_deleteは_連動パターンを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7035RendoPatternEntity deletedEntity = sut.selectByKey(
                     DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
                     DEFAULT_種別,
                     DEFAULT_有効開始年月日,
-                    DEFAULT_有効終了年月日));
+                    DEFAULT_有効終了年月日);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_送信元市町村コード,
                     DEFAULT_送信先市町村コード,
@@ -257,7 +264,7 @@ public class DbT7035RendoPatternDacTest extends DbzTestDacBase {
             entity.setShubetsu(種別);
             entity.setYukoKaishiYMD(有効開始年月日);
             entity.setYukoShuryoYMD(有効終了年月日);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

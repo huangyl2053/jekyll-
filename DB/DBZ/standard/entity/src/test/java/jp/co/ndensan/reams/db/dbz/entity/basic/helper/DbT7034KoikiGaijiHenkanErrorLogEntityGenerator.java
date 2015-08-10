@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域外字変換エラーログエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7034KoikiGaijiHenkanErrorLogEntityGenerator {
 

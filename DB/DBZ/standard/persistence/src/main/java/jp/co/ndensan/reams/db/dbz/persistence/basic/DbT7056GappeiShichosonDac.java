@@ -1,17 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.kyuShichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.chiikiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.gappeiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,15 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併市町村のデータアクセスクラスです。
- *
- * @author N8187 久保田 英男
  */
-public class DbT7056GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEntity> {
+public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichosonEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -35,9 +35,9 @@ public class DbT7056GappeiShichosonDac implements IModifiable<DbT7056GappeiShich
     /**
      * 主キーで合併市町村を取得します。
      *
-     * @param 合併年月日 FlexibleDate
-     * @param 地域番号 RString
-     * @param 旧市町村コード LasdecCode
+     * @param 合併年月日 GappeiYMD
+     * @param 地域番号 ChiikiNo
+     * @param 旧市町村コード KyuShichosonCode
      * @return DbT7056GappeiShichosonEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -76,55 +76,17 @@ public class DbT7056GappeiShichosonDac implements IModifiable<DbT7056GappeiShich
     }
 
     /**
-     * 合併市町村を追加します。
+     * DbT7056GappeiShichosonEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity 合併市町村
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
     @Override
-    public int insert(DbT7056GappeiShichosonEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+    public int save(DbT7056GappeiShichosonEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併市町村エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    /**
-     * 合併市町村をDBに更新します。
-     *
-     * @param entity 合併市町村
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int update(DbT7056GappeiShichosonEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    /**
-     * 合併市町村をDBから削除します。（論理削除）
-     *
-     * @param entity 合併市町村
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int delete(DbT7056GappeiShichosonEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 合併市町村を物理削除。
-     *
-     * @param entity 合併市町村
-     * @return 影響行数
-     */
-    @Transaction
-    public int deletePhysical(DbT7056GappeiShichosonEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
-    }
-
 }

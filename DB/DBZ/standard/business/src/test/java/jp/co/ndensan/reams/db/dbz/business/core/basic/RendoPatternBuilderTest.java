@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7035RendoPatternEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -43,8 +42,6 @@ public class RendoPatternBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             RendoPatternEntity = new DbT7035RendoPatternEntity();
-            RendoPatternEntity.setXXX(主キー名1);
-            RendoPatternEntity.setXXX(主キー名2);
 
             business = new RendoPattern(RendoPatternEntity);
 
