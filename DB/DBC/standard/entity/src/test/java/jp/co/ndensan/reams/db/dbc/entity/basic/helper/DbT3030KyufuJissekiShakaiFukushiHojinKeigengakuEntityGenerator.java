@@ -4,46 +4,44 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績社会福祉法人軽減額エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator {
 
-    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo(new RString("2"));
-    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo(new RString("2"));
-    public static final RString DEFAULT_レコード種別コード = new RString("1");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo(new RString("2"));
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo(new RString("2"));
-    public static final RString DEFAULT_通し番号 = new RString("1");
-    public static final Decimal DEFAULT_軽減率 = new Decimal(1);
-    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode(new RString("2"));
+    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo("012340123400001");
+    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo("012340123400001");
+    public static final RString DEFAULT_レコード種別コード = new RString("Data");
+    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_通し番号 = new RString("Data");
+    public static final Decimal DEFAULT_軽減率 = new Decimal(0);
+    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
     public static final Decimal DEFAULT_受領すべき利用者負担の総額 = new Decimal(1);
     public static final Decimal DEFAULT_軽減額 = new Decimal(1);
     public static final Decimal DEFAULT_軽減後利用者負担額 = new Decimal(1);
-    public static final RString DEFAULT_備考 = new RString("1");
+    public static final RString DEFAULT_備考 = new RString("Data");
     public static final Decimal DEFAULT_後_受領すべき利用者負担の総額 = new Decimal(1);
     public static final Decimal DEFAULT_後_軽減額 = new Decimal(1);
     public static final Decimal DEFAULT_後_軽減後利用者負担額 = new Decimal(1);
-    public static final int DEFAULT_再審査回数 = 1;
-    public static final int DEFAULT_過誤回数 = 1;
-    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final Decimal DEFAULT_再審査回数 = new Decimal(0);
+    public static final Decimal DEFAULT_過誤回数 = new Decimal(0);
+    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
+    public static final RString DEFAULT_整理番号 = new RString("Data");
+    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

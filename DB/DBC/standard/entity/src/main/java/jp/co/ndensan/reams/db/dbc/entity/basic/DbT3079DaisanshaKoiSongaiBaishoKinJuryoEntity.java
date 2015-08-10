@@ -36,7 +36,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
     @PrimaryKey
     private RString kyushoSeikyuNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate nyukinKakuninYMD;
     private FlexibleDate ryoshuYMD;
     private Decimal ryoshuKingaku;
@@ -147,7 +147,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -156,7 +156,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

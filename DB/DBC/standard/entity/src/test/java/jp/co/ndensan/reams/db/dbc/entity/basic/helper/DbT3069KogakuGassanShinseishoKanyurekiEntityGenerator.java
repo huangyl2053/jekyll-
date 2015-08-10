@@ -4,31 +4,29 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3069KogakuGassanShinseishoKanyurekiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額合算申請書加入歴エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 周杏月
  */
 public final class DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("2014");
-    public static final HokenshaNo DEFAULT_保険者番号 = new HokenshaNo(new RString("2"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final RString DEFAULT_加入歴番号 = new RString("1");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final RString DEFAULT_保険者名 = new RString("1");
-    public static final FlexibleDate DEFAULT_加入期間開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_加入期間終了年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("1990");
+    public static final HokenshaNo DEFAULT_保険者番号 = new HokenshaNo("1");
+    public static final RString DEFAULT_整理番号 = new RString("Data");
+    public static final RString DEFAULT_加入歴番号 = new RString("Data");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_保険者名 = new RString("Data");
+    public static final FlexibleDate DEFAULT_加入期間開始年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_加入期間終了年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -43,6 +41,7 @@ public final class DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator {
         entity.setHokenshaNo(DEFAULT_保険者番号);
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setKanyurekiNo(DEFAULT_加入歴番号);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setHokenshaMei(DEFAULT_保険者名);
         entity.setKanyuKaishiYMD(DEFAULT_加入期間開始年月日);
         entity.setKanyuShuryoYMD(DEFAULT_加入期間終了年月日);

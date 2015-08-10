@@ -53,12 +53,12 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
     private RString toshiNo;
     @PrimaryKey
     private ServiceShuruiCode serviceSyuruiCode;
-    private Integer serviceJitsunissu;
+    private Decimal serviceJitsunissu;
     private Decimal planTanisu;
     private Decimal gendogakuKanriTaishoTanisu;
     private Decimal gendogakuKanritaishogaiTanisu;
-    private Integer tankiNyushoPlanNissu;
-    private Integer tankiNyushoJitsunissu;
+    private Decimal tankiNyushoPlanNissu;
+    private Decimal tankiNyushoJitsunissu;
     private Decimal hokenTanisuTotal;
     private Decimal hokenTanisuTani;
     private Decimal hokenSeikyugaku;
@@ -84,7 +84,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
     private Decimal kohi3DekidakaTanisuTotal;
     private Decimal kohi3DekidakaSeikyugaku;
     private Decimal kohi3DekidakaIryohiRiyoshaFutangaku;
-    private Integer atoTankiNyushoJitsunissu;
+    private Decimal atoTankiNyushoJitsunissu;
     private Decimal atoHokenTanisuTotal;
     private Decimal atoHokenSeikyugaku;
     private Decimal atoKohi1TanisuTotal;
@@ -101,10 +101,10 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
     private Decimal atoKohi2DekidakaSeikyugaku;
     private Decimal atoKohi3DekidakaTanisuTotal;
     private Decimal atoKohi3DekidakaSeikyugaku;
-    private Integer saishinsaKaisu;
-    private Integer kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
-    private RString seiriNo;
+    private Decimal seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
@@ -319,7 +319,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return サービス実日数
      */
-    public Integer getServiceJitsunissu() {
+    public Decimal getServiceJitsunissu() {
         return serviceJitsunissu;
     }
 
@@ -328,7 +328,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param serviceJitsunissu サービス実日数
      */
-    public void setServiceJitsunissu(Integer serviceJitsunissu) {
+    public void setServiceJitsunissu(Decimal serviceJitsunissu) {
         this.serviceJitsunissu = serviceJitsunissu;
     }
 
@@ -391,7 +391,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 短期入所計画日数
      */
-    public Integer getTankiNyushoPlanNissu() {
+    public Decimal getTankiNyushoPlanNissu() {
         return tankiNyushoPlanNissu;
     }
 
@@ -400,7 +400,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param tankiNyushoPlanNissu 短期入所計画日数
      */
-    public void setTankiNyushoPlanNissu(Integer tankiNyushoPlanNissu) {
+    public void setTankiNyushoPlanNissu(Decimal tankiNyushoPlanNissu) {
         this.tankiNyushoPlanNissu = tankiNyushoPlanNissu;
     }
 
@@ -409,7 +409,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 短期入所実日数
      */
-    public Integer getTankiNyushoJitsunissu() {
+    public Decimal getTankiNyushoJitsunissu() {
         return tankiNyushoJitsunissu;
     }
 
@@ -418,7 +418,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param tankiNyushoJitsunissu 短期入所実日数
      */
-    public void setTankiNyushoJitsunissu(Integer tankiNyushoJitsunissu) {
+    public void setTankiNyushoJitsunissu(Decimal tankiNyushoJitsunissu) {
         this.tankiNyushoJitsunissu = tankiNyushoJitsunissu;
     }
 
@@ -877,7 +877,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 後・短期入所実日数
      */
-    public Integer getAtoTankiNyushoJitsunissu() {
+    public Decimal getAtoTankiNyushoJitsunissu() {
         return atoTankiNyushoJitsunissu;
     }
 
@@ -886,7 +886,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param atoTankiNyushoJitsunissu 後・短期入所実日数
      */
-    public void setAtoTankiNyushoJitsunissu(Integer atoTankiNyushoJitsunissu) {
+    public void setAtoTankiNyushoJitsunissu(Decimal atoTankiNyushoJitsunissu) {
         this.atoTankiNyushoJitsunissu = atoTankiNyushoJitsunissu;
     }
 
@@ -1183,7 +1183,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 再審査回数
      */
-    public Integer getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -1192,7 +1192,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -1201,7 +1201,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 過誤回数
      */
-    public Integer getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -1210,7 +1210,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Integer kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
@@ -1237,7 +1237,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @return 整理番号
      */
-    public RString getSeiriNo() {
+    public Decimal getSeiriNo() {
         return seiriNo;
     }
 
@@ -1246,7 +1246,7 @@ public class DbT3033KyufujissekiShukeiEntity extends DbTableEntityBase<DbT3033Ky
      *
      * @param seiriNo 整理番号
      */
-    public void setSeiriNo(RString seiriNo) {
+    public void setSeiriNo(Decimal seiriNo) {
         this.seiriNo = seiriNo;
     }
 

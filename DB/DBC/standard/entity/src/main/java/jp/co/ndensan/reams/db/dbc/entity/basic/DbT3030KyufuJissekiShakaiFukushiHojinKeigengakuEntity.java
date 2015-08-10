@@ -61,8 +61,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
     private Decimal atoRiyoshaFutanTotal;
     private Decimal atoKeigengaku;
     private Decimal atoKeigengoRiyoshaFutangaku;
-    private Integer saishinsaKaisu;
-    private Integer kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -423,7 +423,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
      *
      * @return 再審査回数
      */
-    public Integer getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -432,7 +432,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -441,7 +441,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
      *
      * @return 過誤回数
      */
-    public Integer getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -450,7 +450,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Integer kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

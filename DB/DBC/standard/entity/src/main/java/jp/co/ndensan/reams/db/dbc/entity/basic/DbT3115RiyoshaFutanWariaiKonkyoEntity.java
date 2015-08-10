@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -34,12 +35,12 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
-    private int edaNo;
+    private Decimal edaNo;
     @PrimaryKey
     private HihokenshaNo setaiinHihokenshaNo;
-    private int setaiinShotokuRirekiNo;
+    private Decimal setaiinShotokuRirekiNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -127,7 +128,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -136,7 +137,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -145,7 +146,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @return 枝番号
      */
-    public int getEdaNo() {
+    public Decimal getEdaNo() {
         return edaNo;
     }
 
@@ -154,7 +155,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @param edaNo 枝番号
      */
-    public void setEdaNo(int edaNo) {
+    public void setEdaNo(Decimal edaNo) {
         this.edaNo = edaNo;
     }
 
@@ -181,7 +182,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @return 世帯員所得履歴番号
      */
-    public int getSetaiinShotokuRirekiNo() {
+    public Decimal getSetaiinShotokuRirekiNo() {
         return setaiinShotokuRirekiNo;
     }
 
@@ -190,7 +191,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @param setaiinShotokuRirekiNo 世帯員所得履歴番号
      */
-    public void setSetaiinShotokuRirekiNo(int setaiinShotokuRirekiNo) {
+    public void setSetaiinShotokuRirekiNo(Decimal setaiinShotokuRirekiNo) {
         this.setaiinShotokuRirekiNo = setaiinShotokuRirekiNo;
     }
 

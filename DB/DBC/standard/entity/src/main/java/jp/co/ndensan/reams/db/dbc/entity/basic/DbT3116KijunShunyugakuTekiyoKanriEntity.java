@@ -144,7 +144,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -153,7 +153,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -382,7 +382,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @return 年少扶養控除（16歳未満）人数
      */
-    public int getNenshoFuyokojoUnder16Ninzu() {
+    public Decimal getNenshoFuyokojoUnder16Ninzu() {
         return nenshoFuyokojoUnder16Ninzu;
     }
 
@@ -391,7 +391,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @param nenshoFuyokojoUnder16Ninzu 年少扶養控除（16歳未満）人数
      */
-    public void setNenshoFuyokojoUnder16Ninzu(int nenshoFuyokojoUnder16Ninzu) {
+    public void setNenshoFuyokojoUnder16Ninzu(Decimal nenshoFuyokojoUnder16Ninzu) {
         this.nenshoFuyokojoUnder16Ninzu = nenshoFuyokojoUnder16Ninzu;
     }
 
@@ -400,7 +400,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @return 年少扶養控除（16～18歳未満）人数
      */
-    public int getNenshoFuyokojoOver16Ninzu() {
+    public Decimal getNenshoFuyokojoOver16Ninzu() {
         return nenshoFuyokojoOver16Ninzu;
     }
 
@@ -409,7 +409,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      *
      * @param nenshoFuyokojoOver16Ninzu 年少扶養控除（16～18歳未満）人数
      */
-    public void setNenshoFuyokojoOver16Ninzu(int nenshoFuyokojoOver16Ninzu) {
+    public void setNenshoFuyokojoOver16Ninzu(Decimal nenshoFuyokojoOver16Ninzu) {
         this.nenshoFuyokojoOver16Ninzu = nenshoFuyokojoOver16Ninzu;
     }
 

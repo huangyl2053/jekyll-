@@ -10,6 +10,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修理由書作成手数料請求決定テーブルのエンティティクラスです。
@@ -33,7 +34,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     @PrimaryKey
     private FlexibleDate ketteiYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shikyu_FushikyuKetteiYMD;
     private RString shikyu_FushikyuKubun;
     private RString fushikyuRiyu;
@@ -125,7 +126,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -134,7 +135,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

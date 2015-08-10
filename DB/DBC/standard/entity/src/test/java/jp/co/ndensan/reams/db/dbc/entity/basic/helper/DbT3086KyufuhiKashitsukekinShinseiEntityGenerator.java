@@ -4,53 +4,51 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3086KyufuhiKashitsukekinShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付費貸付金申請エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT3086KyufuhiKashitsukekinShinseiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_借入申請年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final YubinNo DEFAULT_申請者郵便番号 = new YubinNo(new RString("0220103"));
-    public static final RString DEFAULT_申請者住所 = new RString("123");
-    public static final AtenaKanaMeisho DEFAULT_申請者氏名カナ = new AtenaKanaMeisho("デンサンタロウ");
-    public static final AtenaMeisho DEFAULT_申請者氏名 = new AtenaMeisho("電算太郎");
-    public static final TelNo DEFAULT_申請者電話番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_申請者との関係 = new RString("123");
-    public static final FlexibleDate DEFAULT_借入利用期間開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_借入利用期間終了年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_貸付対象_高額介護サービス費等有無 = new RString("1");
-    public static final RString DEFAULT_貸付対象_住宅改修費等有無 = new RString("3");
-    public static final RString DEFAULT_貸付対象_福祉用具購入費等有無 = new RString("2");
-    public static final RString DEFAULT_貸付対象_特例介護サービス費等有無 = new RString("1");
-    public static final AtenaKanaMeisho DEFAULT_保証人氏名カナ = new AtenaKanaMeisho("デンサンタロウ");
-    public static final AtenaMeisho DEFAULT_保証人氏名 = new AtenaMeisho("電算太郎");
-    public static final FlexibleDate DEFAULT_保証人生年月日 = new FlexibleDate("20140402");
-    public static final Code DEFAULT_保証人性別 = new Code("3");
-    public static final YubinNo DEFAULT_保証人郵便番号 = new YubinNo(new RString("0261234"));
-    public static final RString DEFAULT_保証人住所 = new RString("123");
-    public static final TelNo DEFAULT_保証人電話番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_借入申請者との関係 = new RString("123");
-    public static final AtenaMeisho DEFAULT_保証人勤務先名称 = new AtenaMeisho("電算太郎");
-    public static final YubinNo DEFAULT_保証人勤務先郵便番号 = new YubinNo(new RString("0256487"));
-    public static final RString DEFAULT_保証人勤務先所在地 = new RString("123");
-    public static final TelNo DEFAULT_保証人勤務先電話番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_請求書_領収書の有無 = new RString("1");
-    public static final int DEFAULT_提出物管理番号 = 1;
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleDate DEFAULT_借入申請年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final YubinNo DEFAULT_申請者郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_申請者住所 = new RString("Data");
+    public static final AtenaKanaMeisho DEFAULT_申請者氏名カナ = new AtenaKanaMeisho("");
+    public static final AtenaMeisho DEFAULT_申請者氏名 = new AtenaMeisho("");
+    public static final TelNo DEFAULT_申請者電話番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_申請者との関係 = new RString("Data");
+    public static final FlexibleDate DEFAULT_借入利用期間開始年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_借入利用期間終了年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_貸付対象_高額介護サービス費等有無 = new RString("Data");
+    public static final RString DEFAULT_貸付対象_住宅改修費等有無 = new RString("Data");
+    public static final RString DEFAULT_貸付対象_福祉用具購入費等有無 = new RString("Data");
+    public static final RString DEFAULT_貸付対象_特例介護サービス費等有無 = new RString("Data");
+    public static final AtenaKanaMeisho DEFAULT_保証人氏名カナ = new AtenaKanaMeisho("");
+    public static final AtenaMeisho DEFAULT_保証人氏名 = new AtenaMeisho("");
+    public static final FlexibleDate DEFAULT_保証人生年月日 = new FlexibleDate("19900101");
+    public static final Code DEFAULT_保証人性別 = new Code();
+    public static final YubinNo DEFAULT_保証人郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_保証人住所 = new RString("Data");
+    public static final TelNo DEFAULT_保証人電話番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_借入申請者との関係 = new RString("Data");
+    public static final AtenaMeisho DEFAULT_保証人勤務先名称 = new AtenaMeisho("");
+    public static final YubinNo DEFAULT_保証人勤務先郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_保証人勤務先所在地 = new RString("Data");
+    public static final TelNo DEFAULT_保証人勤務先電話番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_請求書_領収書の有無 = new RString("Data");
+    public static final Decimal DEFAULT_提出物管理番号 = new Decimal(0);
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -62,6 +60,7 @@ public final class DbT3086KyufuhiKashitsukekinShinseiEntityGenerator {
         DbT3086KyufuhiKashitsukekinShinseiEntity entity = new DbT3086KyufuhiKashitsukekinShinseiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setKariireShinseiYMD(DEFAULT_借入申請年月日);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShinseishaYubinNo(DEFAULT_申請者郵便番号);
         entity.setShinseishaJusho(DEFAULT_申請者住所);
         entity.setShinseishaShimeiKana(DEFAULT_申請者氏名カナ);

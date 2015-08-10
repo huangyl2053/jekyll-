@@ -10,14 +10,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * ランク情報エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author N8156 宮本 康
  */
 public final class DbT2011RankJohoEntityGenerator {
 
-    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2000");
-    public static final RString DEFAULT_ランク区分 = new RString("01");
-    public static final RString DEFAULT_ランク名称 = new RString("ランク電算市");
+    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("1990");
+    public static final RString DEFAULT_ランク区分 = new RString("Data");
+    public static final RString DEFAULT_ランク名称 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

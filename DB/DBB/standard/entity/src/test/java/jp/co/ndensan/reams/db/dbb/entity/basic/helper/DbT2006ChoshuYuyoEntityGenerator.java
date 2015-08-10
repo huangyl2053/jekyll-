@@ -4,34 +4,33 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護賦課徴収猶予エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT2006ChoshuYuyoEntityGenerator {
 
-    public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("2014");
-    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
-    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo(new RString("2"));
-    public static final int DEFAULT_履歴番号 = 1;
-    public static final FlexibleDate DEFAULT_徴収猶予申請年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_徴収猶予決定年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_徴収猶予取消年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_徴収猶予状態区分 = new RString("1");
-    public static final RString DEFAULT_徴収猶予作成区分 = new RString("1");
-    public static final RString DEFAULT_申請事由 = new RString("1");
-    public static final Code DEFAULT_徴収猶予種類 = new Code("3");
-    public static final RString DEFAULT_徴収猶予事由 = new RString("1");
-    public static final Code DEFAULT_徴収猶予取消種類 = new Code("3");
-    public static final RString DEFAULT_徴収猶予取消事由 = new RString("1");
+    public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("1990");
+    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("1990");
+    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo("1");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final FlexibleDate DEFAULT_徴収猶予申請年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_徴収猶予決定年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_徴収猶予取消年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_徴収猶予状態区分 = new RString("Data");
+    public static final RString DEFAULT_徴収猶予作成区分 = new RString("Data");
+    public static final RString DEFAULT_申請事由 = new RString("Data");
+    public static final Code DEFAULT_徴収猶予種類コード = new Code();
+    public static final RString DEFAULT_徴収猶予事由 = new RString("Data");
+    public static final Code DEFAULT_徴収猶予取消種類コード = new Code();
+    public static final RString DEFAULT_徴収猶予取消事由 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -51,9 +50,9 @@ public final class DbT2006ChoshuYuyoEntityGenerator {
         entity.setJotaiKubun(DEFAULT_徴収猶予状態区分);
         entity.setSakuseiKubun(DEFAULT_徴収猶予作成区分);
         entity.setShinseiJiyu(DEFAULT_申請事由);
-        entity.setYuyoJiyuCode(DEFAULT_徴収猶予種類);
+        entity.setYuyoJiyuCode(DEFAULT_徴収猶予種類コード);
         entity.setYuyoJiyu(DEFAULT_徴収猶予事由);
-        entity.setYuyoTorikeshiJiyuCode(DEFAULT_徴収猶予取消種類);
+        entity.setYuyoTorikeshiJiyuCode(DEFAULT_徴収猶予取消種類コード);
         entity.setYuyoTorikeshiJiyu(DEFAULT_徴収猶予取消事由);
         return entity;
     }

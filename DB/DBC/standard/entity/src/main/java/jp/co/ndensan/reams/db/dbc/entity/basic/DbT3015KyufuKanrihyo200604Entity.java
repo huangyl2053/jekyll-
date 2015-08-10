@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT3015KyufuKanrihyo200604の項目定義クラスです
@@ -62,7 +63,7 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
     private RString shiteiKijungaitoChiikimitchakuServiceShikibetsuCode;
     private ServiceShuruiCode serviceShuruiCode;
     private int kyufuKeikakuTanisuNissu;
-    private int kyufuKeikakuNissu;
+    private Decimal kyufuKeikakuNissu;
     private int shiteiServiceSubTotal;
     private int kijyunGaitoServiceSubTotal;
     private int kyufuKeikakuTotalTanisuNissu;
@@ -513,7 +514,7 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
      *
      * @return 限度額管理期間における前月までの給付計画日数
      */
-    public int getKyufuKeikakuNissu() {
+    public Decimal getKyufuKeikakuNissu() {
         return kyufuKeikakuNissu;
     }
 
@@ -524,7 +525,7 @@ public class DbT3015KyufuKanrihyo200604Entity extends DbTableEntityBase<DbT3015K
      *
      * @param kyufuKeikakuNissu 限度額管理期間における前月までの給付計画日数
      */
-    public void setKyufuKeikakuNissu(int kyufuKeikakuNissu) {
+    public void setKyufuKeikakuNissu(Decimal kyufuKeikakuNissu) {
         this.kyufuKeikakuNissu = kyufuKeikakuNissu;
     }
 

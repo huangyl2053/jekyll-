@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求特定診療費テーブルのエンティティクラスです。
  */
 public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT3041ShokanTokuteiShinryohiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3041ShokanTokuteiShinryohi");
 
@@ -41,7 +43,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString shobyoName;
     private int shidoKanriryoTanisu;
     private int tanjunXsenTanisu;
@@ -71,7 +73,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -80,7 +82,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -89,7 +91,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -98,17 +100,16 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -117,7 +118,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -126,7 +127,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -135,7 +136,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -144,7 +145,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -153,7 +154,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -162,7 +163,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -171,7 +172,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -180,7 +181,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -189,7 +190,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -198,7 +199,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -209,7 +210,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
      * 順次番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @return 順次番号
      */
     public RString getJunjiNo() {
@@ -220,7 +221,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
      * 順次番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @param junjiNo 順次番号
      */
     public void setJunjiNo(RString junjiNo) {
@@ -229,25 +230,25 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 傷病名のgetメソッドです。
-     * 
+     *
      * @return 傷病名
      */
     public RString getShobyoName() {
@@ -256,7 +257,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 傷病名のsetメソッドです。
-     * 
+     *
      * @param shobyoName 傷病名
      */
     public void setShobyoName(RString shobyoName) {
@@ -265,7 +266,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 指導管理料等単位数のgetメソッドです。
-     * 
+     *
      * @return 指導管理料等単位数
      */
     public int getShidoKanriryoTanisu() {
@@ -274,7 +275,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 指導管理料等単位数のsetメソッドです。
-     * 
+     *
      * @param shidoKanriryoTanisu 指導管理料等単位数
      */
     public void setShidoKanriryoTanisu(int shidoKanriryoTanisu) {
@@ -283,7 +284,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 単純エックス線単位数のgetメソッドです。
-     * 
+     *
      * @return 単純エックス線単位数
      */
     public int getTanjunXsenTanisu() {
@@ -292,7 +293,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 単純エックス線単位数のsetメソッドです。
-     * 
+     *
      * @param tanjunXsenTanisu 単純エックス線単位数
      */
     public void setTanjunXsenTanisu(int tanjunXsenTanisu) {
@@ -301,7 +302,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * リハビリテーション単位数のgetメソッドです。
-     * 
+     *
      * @return リハビリテーション単位数
      */
     public int getRehabilitationTanisu() {
@@ -310,7 +311,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * リハビリテーション単位数のsetメソッドです。
-     * 
+     *
      * @param rehabilitationTanisu リハビリテーション単位数
      */
     public void setRehabilitationTanisu(int rehabilitationTanisu) {
@@ -319,7 +320,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 精神科専門療法単位数のgetメソッドです。
-     * 
+     *
      * @return 精神科専門療法単位数
      */
     public int getSeishinkaSemmonRyoyohouTanisu() {
@@ -328,7 +329,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 精神科専門療法単位数のsetメソッドです。
-     * 
+     *
      * @param seishinkaSemmonRyoyohouTanisu 精神科専門療法単位数
      */
     public void setSeishinkaSemmonRyoyohouTanisu(int seishinkaSemmonRyoyohouTanisu) {
@@ -337,7 +338,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 合計単位数のgetメソッドです。
-     * 
+     *
      * @return 合計単位数
      */
     public int getTotalTanisu() {
@@ -346,7 +347,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 合計単位数のsetメソッドです。
-     * 
+     *
      * @param TotalTanisu 合計単位数
      */
     public void setTotalTanisu(int TotalTanisu) {
@@ -355,7 +356,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１のgetメソッドです。
-     * 
+     *
      * @return 摘要１
      */
     public RString getTekiyo1() {
@@ -364,7 +365,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１のsetメソッドです。
-     * 
+     *
      * @param tekiyo1 摘要１
      */
     public void setTekiyo1(RString tekiyo1) {
@@ -373,7 +374,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要２のgetメソッドです。
-     * 
+     *
      * @return 摘要２
      */
     public RString getTekiyo2() {
@@ -382,7 +383,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要２のsetメソッドです。
-     * 
+     *
      * @param tekiyo2 摘要２
      */
     public void setTekiyo2(RString tekiyo2) {
@@ -391,7 +392,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要３のgetメソッドです。
-     * 
+     *
      * @return 摘要３
      */
     public RString getTekiyo3() {
@@ -400,7 +401,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要３のsetメソッドです。
-     * 
+     *
      * @param tekiyo3 摘要３
      */
     public void setTekiyo3(RString tekiyo3) {
@@ -409,7 +410,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要４のgetメソッドです。
-     * 
+     *
      * @return 摘要４
      */
     public RString getTekiyo4() {
@@ -418,7 +419,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要４のsetメソッドです。
-     * 
+     *
      * @param tekiyo4 摘要４
      */
     public void setTekiyo4(RString tekiyo4) {
@@ -427,7 +428,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要５のgetメソッドです。
-     * 
+     *
      * @return 摘要５
      */
     public RString getTekiyo5() {
@@ -436,7 +437,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要５のsetメソッドです。
-     * 
+     *
      * @param tekiyo5 摘要５
      */
     public void setTekiyo5(RString tekiyo5) {
@@ -445,7 +446,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要６のgetメソッドです。
-     * 
+     *
      * @return 摘要６
      */
     public RString getTekiyo6() {
@@ -454,7 +455,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要６のsetメソッドです。
-     * 
+     *
      * @param tekiyo6 摘要６
      */
     public void setTekiyo6(RString tekiyo6) {
@@ -463,7 +464,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要７のgetメソッドです。
-     * 
+     *
      * @return 摘要７
      */
     public RString getTekiyo7() {
@@ -472,7 +473,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要７のsetメソッドです。
-     * 
+     *
      * @param tekiyo7 摘要７
      */
     public void setTekiyo7(RString tekiyo7) {
@@ -481,7 +482,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要８のgetメソッドです。
-     * 
+     *
      * @return 摘要８
      */
     public RString getTekiyo8() {
@@ -490,7 +491,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要８のsetメソッドです。
-     * 
+     *
      * @param tekiyo8 摘要８
      */
     public void setTekiyo8(RString tekiyo8) {
@@ -499,7 +500,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要９のgetメソッドです。
-     * 
+     *
      * @return 摘要９
      */
     public RString getTekiyo9() {
@@ -508,7 +509,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要９のsetメソッドです。
-     * 
+     *
      * @param tekiyo9 摘要９
      */
     public void setTekiyo9(RString tekiyo9) {
@@ -517,7 +518,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１０のgetメソッドです。
-     * 
+     *
      * @return 摘要１０
      */
     public RString getTekiyo10() {
@@ -526,7 +527,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１０のsetメソッドです。
-     * 
+     *
      * @param tekiyo10 摘要１０
      */
     public void setTekiyo10(RString tekiyo10) {
@@ -535,7 +536,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１１のgetメソッドです。
-     * 
+     *
      * @return 摘要１１
      */
     public RString getTekiyo11() {
@@ -544,7 +545,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１１のsetメソッドです。
-     * 
+     *
      * @param tekiyo11 摘要１１
      */
     public void setTekiyo11(RString tekiyo11) {
@@ -553,7 +554,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１２のgetメソッドです。
-     * 
+     *
      * @return 摘要１２
      */
     public RString getTekiyo12() {
@@ -562,7 +563,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１２のsetメソッドです。
-     * 
+     *
      * @param tekiyo12 摘要１２
      */
     public void setTekiyo12(RString tekiyo12) {
@@ -571,7 +572,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１３のgetメソッドです。
-     * 
+     *
      * @return 摘要１３
      */
     public RString getTekiyo13() {
@@ -580,7 +581,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１３のsetメソッドです。
-     * 
+     *
      * @param tekiyo13 摘要１３
      */
     public void setTekiyo13(RString tekiyo13) {
@@ -589,7 +590,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１４のgetメソッドです。
-     * 
+     *
      * @return 摘要１４
      */
     public RString getTekiyo14() {
@@ -598,7 +599,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１４のsetメソッドです。
-     * 
+     *
      * @param tekiyo14 摘要１４
      */
     public void setTekiyo14(RString tekiyo14) {
@@ -607,7 +608,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１５のgetメソッドです。
-     * 
+     *
      * @return 摘要１５
      */
     public RString getTekiyo15() {
@@ -616,7 +617,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１５のsetメソッドです。
-     * 
+     *
      * @param tekiyo15 摘要１５
      */
     public void setTekiyo15(RString tekiyo15) {
@@ -625,7 +626,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１６のgetメソッドです。
-     * 
+     *
      * @return 摘要１６
      */
     public RString getTekiyo16() {
@@ -634,7 +635,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１６のsetメソッドです。
-     * 
+     *
      * @param tekiyo16 摘要１６
      */
     public void setTekiyo16(RString tekiyo16) {
@@ -643,7 +644,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１７のgetメソッドです。
-     * 
+     *
      * @return 摘要１７
      */
     public RString getTekiyo17() {
@@ -652,7 +653,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１７のsetメソッドです。
-     * 
+     *
      * @param tekiyo17 摘要１７
      */
     public void setTekiyo17(RString tekiyo17) {
@@ -661,7 +662,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１８のgetメソッドです。
-     * 
+     *
      * @return 摘要１８
      */
     public RString getTekiyo18() {
@@ -670,7 +671,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１８のsetメソッドです。
-     * 
+     *
      * @param tekiyo18 摘要１８
      */
     public void setTekiyo18(RString tekiyo18) {
@@ -679,7 +680,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１９のgetメソッドです。
-     * 
+     *
      * @return 摘要１９
      */
     public RString getTekiyo19() {
@@ -688,7 +689,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要１９のsetメソッドです。
-     * 
+     *
      * @param tekiyo19 摘要１９
      */
     public void setTekiyo19(RString tekiyo19) {
@@ -697,7 +698,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要２０のgetメソッドです。
-     * 
+     *
      * @return 摘要２０
      */
     public RString getTekiyo20() {
@@ -706,7 +707,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * 摘要２０のsetメソッドです。
-     * 
+     *
      * @param tekiyo20 摘要２０
      */
     public void setTekiyo20(RString tekiyo20) {
@@ -715,9 +716,9 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * このエンティティの主キーが他の{@literal DbT3041ShokanTokuteiShinryohiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3041ShokanTokuteiShinryohiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -791,6 +792,7 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -799,5 +801,4 @@ public class DbT3041ShokanTokuteiShinryohiEntity extends DbTableEntityBase<DbT30
     }
 
 // </editor-fold>
-
 }

@@ -41,7 +41,7 @@ public class DbT3071KogakuGassanJikoFutanGakuMeisaiEntity extends DbTableEntityB
     @PrimaryKey
     private RString taishoM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal jikoFutanGaku;
     private Decimal uchisu_70_74JikoFutanGaku;
     private Decimal under_70KogakuShikyuGaku;
@@ -201,7 +201,7 @@ public class DbT3071KogakuGassanJikoFutanGakuMeisaiEntity extends DbTableEntityB
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -210,7 +210,7 @@ public class DbT3071KogakuGassanJikoFutanGakuMeisaiEntity extends DbTableEntityB
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

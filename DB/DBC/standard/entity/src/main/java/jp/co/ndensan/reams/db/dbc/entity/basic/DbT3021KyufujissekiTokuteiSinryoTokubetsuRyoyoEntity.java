@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績特定診療費・特別療養費テーブルのエンティティクラスです。
@@ -53,35 +54,35 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
     private RString recodeJunjiNo;
     private RString shobyoName;
     private RString shikibetsuNo;
-    private int tanisu;
-    private int hokenKaisu;
+    private Decimal tanisu;
+    private Decimal hokenKaisu;
     private int hokenServiceTanisu;
     private int hokenTotalTanisu;
-    private int kohi1Kaisu;
+    private Decimal kohi1Kaisu;
     private int kohi1ServiceTanisu;
     private int kohi1TotalTanisu;
-    private int kohi2Kaisu;
+    private Decimal kohi2Kaisu;
     private int kohi2ServiceTanisu;
     private int kohi2TotalTanisu;
-    private int kohi3Kaisu;
+    private Decimal kohi3Kaisu;
     private int kohi3ServiceTanisu;
     private int kohi3TotalTanisu;
     private RString tekiyo;
-    private int atoTanisu;
-    private int atoHokenKaisu;
+    private Decimal atoTanisu;
+    private Decimal atoHokenKaisu;
     private int atoHokenServiceTanisu;
     private int atoHokenTotalTanisu;
-    private int atoKohi1Kaisu;
+    private Decimal atoKohi1Kaisu;
     private int atoKohi1ServiceTanisu;
     private int atoKohi1TotalTanisu;
-    private int atoKohi2Kaisu;
+    private Decimal atoKohi2Kaisu;
     private int atoKohi2ServiceTanisu;
     private int atoKohi2TotalTanisu;
-    private int atoKohi3Kaisu;
+    private Decimal atoKohi3Kaisu;
     private int atoKohi3ServiceTanisu;
     private int atoKohi3TotalTanisu;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -340,7 +341,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 単位数
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
@@ -349,7 +350,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param tanisu 単位数
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
@@ -358,7 +359,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 保険・回数
      */
-    public int getHokenKaisu() {
+    public Decimal getHokenKaisu() {
         return hokenKaisu;
     }
 
@@ -367,7 +368,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param hokenKaisu 保険・回数
      */
-    public void setHokenKaisu(int hokenKaisu) {
+    public void setHokenKaisu(Decimal hokenKaisu) {
         this.hokenKaisu = hokenKaisu;
     }
 
@@ -412,7 +413,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 公費１・回数
      */
-    public int getKohi1Kaisu() {
+    public Decimal getKohi1Kaisu() {
         return kohi1Kaisu;
     }
 
@@ -421,7 +422,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param kohi1Kaisu 公費１・回数
      */
-    public void setKohi1Kaisu(int kohi1Kaisu) {
+    public void setKohi1Kaisu(Decimal kohi1Kaisu) {
         this.kohi1Kaisu = kohi1Kaisu;
     }
 
@@ -466,7 +467,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 公費２・回数
      */
-    public int getKohi2Kaisu() {
+    public Decimal getKohi2Kaisu() {
         return kohi2Kaisu;
     }
 
@@ -475,7 +476,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param kohi2Kaisu 公費２・回数
      */
-    public void setKohi2Kaisu(int kohi2Kaisu) {
+    public void setKohi2Kaisu(Decimal kohi2Kaisu) {
         this.kohi2Kaisu = kohi2Kaisu;
     }
 
@@ -520,7 +521,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 公費３・回数
      */
-    public int getKohi3Kaisu() {
+    public Decimal getKohi3Kaisu() {
         return kohi3Kaisu;
     }
 
@@ -529,7 +530,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param kohi3Kaisu 公費３・回数
      */
-    public void setKohi3Kaisu(int kohi3Kaisu) {
+    public void setKohi3Kaisu(Decimal kohi3Kaisu) {
         this.kohi3Kaisu = kohi3Kaisu;
     }
 
@@ -592,7 +593,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 後・単位数
      */
-    public int getAtoTanisu() {
+    public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
@@ -601,7 +602,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param atoTanisu 後・単位数
      */
-    public void setAtoTanisu(int atoTanisu) {
+    public void setAtoTanisu(Decimal atoTanisu) {
         this.atoTanisu = atoTanisu;
     }
 
@@ -610,7 +611,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 後・保険・回数
      */
-    public int getAtoHokenKaisu() {
+    public Decimal getAtoHokenKaisu() {
         return atoHokenKaisu;
     }
 
@@ -619,7 +620,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param atoHokenKaisu 後・保険・回数
      */
-    public void setAtoHokenKaisu(int atoHokenKaisu) {
+    public void setAtoHokenKaisu(Decimal atoHokenKaisu) {
         this.atoHokenKaisu = atoHokenKaisu;
     }
 
@@ -664,7 +665,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 後・公費１・回数
      */
-    public int getAtoKohi1Kaisu() {
+    public Decimal getAtoKohi1Kaisu() {
         return atoKohi1Kaisu;
     }
 
@@ -673,7 +674,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param atoKohi1Kaisu 後・公費１・回数
      */
-    public void setAtoKohi1Kaisu(int atoKohi1Kaisu) {
+    public void setAtoKohi1Kaisu(Decimal atoKohi1Kaisu) {
         this.atoKohi1Kaisu = atoKohi1Kaisu;
     }
 
@@ -718,7 +719,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 後・公費２・回数
      */
-    public int getAtoKohi2Kaisu() {
+    public Decimal getAtoKohi2Kaisu() {
         return atoKohi2Kaisu;
     }
 
@@ -727,7 +728,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param atoKohi2Kaisu 後・公費２・回数
      */
-    public void setAtoKohi2Kaisu(int atoKohi2Kaisu) {
+    public void setAtoKohi2Kaisu(Decimal atoKohi2Kaisu) {
         this.atoKohi2Kaisu = atoKohi2Kaisu;
     }
 
@@ -772,7 +773,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 後・公費３・回数
      */
-    public int getAtoKohi3Kaisu() {
+    public Decimal getAtoKohi3Kaisu() {
         return atoKohi3Kaisu;
     }
 
@@ -781,7 +782,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param atoKohi3Kaisu 後・公費３・回数
      */
-    public void setAtoKohi3Kaisu(int atoKohi3Kaisu) {
+    public void setAtoKohi3Kaisu(Decimal atoKohi3Kaisu) {
         this.atoKohi3Kaisu = atoKohi3Kaisu;
     }
 
@@ -826,7 +827,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 再審査回数
      */
-    public int getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -835,7 +836,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -844,7 +845,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @return 過誤回数
      */
-    public int getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -853,7 +854,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity extends DbTabl
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

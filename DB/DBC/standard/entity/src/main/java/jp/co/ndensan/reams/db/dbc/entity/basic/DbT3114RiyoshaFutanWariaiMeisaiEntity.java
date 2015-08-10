@@ -37,15 +37,15 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
-    private int edaNo;
+    private Decimal edaNo;
     private RString shikakuKubun;
     private RString futanWariaiKubun;
     private FlexibleDate yukoKaishiYMD;
     private FlexibleDate yukoShuryoYMD;
     private Decimal honninGoukeiShotokuGaku;
-    private int setaiIchigouHihoknehsaSu;
+    private Decimal setaiIchigouHihoknehsaSu;
     private Decimal nenkinShunyuGoukei;
     private Decimal sonotanoGoukeiShotokuKingakuGoukei;
     private RString koseiRiyu;
@@ -137,7 +137,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -146,7 +146,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -155,7 +155,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @return 枝番号
      */
-    public int getEdaNo() {
+    public Decimal getEdaNo() {
         return edaNo;
     }
 
@@ -164,7 +164,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @param edaNo 枝番号
      */
-    public void setEdaNo(int edaNo) {
+    public void setEdaNo(Decimal edaNo) {
         this.edaNo = edaNo;
     }
 
@@ -279,7 +279,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @return 世帯１号被保険者数
      */
-    public int getSetaiIchigouHihoknehsaSu() {
+    public Decimal getSetaiIchigouHihoknehsaSu() {
         return setaiIchigouHihoknehsaSu;
     }
 
@@ -288,7 +288,7 @@ public class DbT3114RiyoshaFutanWariaiMeisaiEntity extends DbTableEntityBase<DbT
      *
      * @param setaiIchigouHihoknehsaSu 世帯１号被保険者数
      */
-    public void setSetaiIchigouHihoknehsaSu(int setaiIchigouHihoknehsaSu) {
+    public void setSetaiIchigouHihoknehsaSu(Decimal setaiIchigouHihoknehsaSu) {
         this.setaiIchigouHihoknehsaSu = setaiIchigouHihoknehsaSu;
     }
 

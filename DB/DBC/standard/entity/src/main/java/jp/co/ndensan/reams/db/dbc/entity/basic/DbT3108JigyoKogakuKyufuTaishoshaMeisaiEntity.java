@@ -40,7 +40,7 @@ public class DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityB
     @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal serviceHiyoGokeiGaku;
     private Decimal riyoshaFutanGaku;
     private RString jigyoKogakuKyufuKonkyo;
@@ -167,7 +167,7 @@ public class DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityB
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -176,7 +176,7 @@ public class DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityB
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

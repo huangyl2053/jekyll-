@@ -16,12 +16,14 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額介護サービス費支給申請テーブルのエンティティクラスです。
  */
 public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056KogakuShikyuShinseiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3056KogakuShikyuShinsei");
 
@@ -40,7 +42,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
     @PrimaryKey
     private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate uketsukeYMD;
     private FlexibleDate shinseiYMD;
     private RString shinseiRiyu;
@@ -62,7 +64,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -71,7 +73,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -80,7 +82,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -89,17 +91,16 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -108,7 +109,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -117,7 +118,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -126,7 +127,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -135,7 +136,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -144,7 +145,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
     public HokenshaNo getShoKisaiHokenshaNo() {
@@ -153,7 +154,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
@@ -162,25 +163,25 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 受付年月日のgetメソッドです。
-     * 
+     *
      * @return 受付年月日
      */
     public FlexibleDate getUketsukeYMD() {
@@ -189,7 +190,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 受付年月日のsetメソッドです。
-     * 
+     *
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -198,7 +199,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 申請年月日のgetメソッドです。
-     * 
+     *
      * @return 申請年月日
      */
     public FlexibleDate getShinseiYMD() {
@@ -207,7 +208,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 申請年月日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -216,7 +217,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 申請理由のgetメソッドです。
-     * 
+     *
      * @return 申請理由
      */
     public RString getShinseiRiyu() {
@@ -225,7 +226,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 申請理由のsetメソッドです。
-     * 
+     *
      * @param shinseiRiyu 申請理由
      */
     public void setShinseiRiyu(RString shinseiRiyu) {
@@ -236,7 +237,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者区分のgetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     * 
+     *
      * @return 申請者区分
      */
     public RString getShinseishaKubun() {
@@ -247,7 +248,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者区分のsetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     * 
+     *
      * @param shinseishaKubun 申請者区分
      */
     public void setShinseishaKubun(RString shinseishaKubun) {
@@ -258,7 +259,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者氏名のgetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @return 申請者氏名
      */
     public AtenaMeisho getShinseishaShimei() {
@@ -269,7 +270,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者氏名のsetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @param shinseishaShimei 申請者氏名
      */
     public void setShinseishaShimei(AtenaMeisho shinseishaShimei) {
@@ -280,7 +281,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者氏名カナのgetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @return 申請者氏名カナ
      */
     public AtenaKanaMeisho getShinseishaShimeiKana() {
@@ -291,7 +292,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者氏名カナのsetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @param shinseishaShimeiKana 申請者氏名カナ
      */
     public void setShinseishaShimeiKana(AtenaKanaMeisho shinseishaShimeiKana) {
@@ -302,7 +303,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者住所のgetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @return 申請者住所
      */
     public RString getShinseishaJusho() {
@@ -313,7 +314,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者住所のsetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @param shinseishaJusho 申請者住所
      */
     public void setShinseishaJusho(RString shinseishaJusho) {
@@ -324,7 +325,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者電話番号のgetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @return 申請者電話番号
      */
     public TelNo getShinseishaTelNo() {
@@ -335,7 +336,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請者電話番号のsetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合、設定不要
-     * 
+     *
      * @param shinseishaTelNo 申請者電話番号
      */
     public void setShinseishaTelNo(TelNo shinseishaTelNo) {
@@ -346,7 +347,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請事業者番号のgetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合のみ、設定
-     * 
+     *
      * @return 申請事業者番号
      */
     public JigyoshaNo getShinseiJigyoshaNo() {
@@ -357,7 +358,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 申請事業者番号のsetメソッドです。
      * <br/>
      * <br/>申請者区分が”3”の場合のみ、設定
-     * 
+     *
      * @param shinseiJigyoshaNo 申請事業者番号
      */
     public void setShinseiJigyoshaNo(JigyoshaNo shinseiJigyoshaNo) {
@@ -366,7 +367,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払方法区分コードのgetメソッドです。
-     * 
+     *
      * @return 支払方法区分コード
      */
     public RString getShiharaiHohoKubunCode() {
@@ -375,7 +376,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払方法区分コードのsetメソッドです。
-     * 
+     *
      * @param shiharaiHohoKubunCode 支払方法区分コード
      */
     public void setShiharaiHohoKubunCode(RString shiharaiHohoKubunCode) {
@@ -384,7 +385,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払場所のgetメソッドです。
-     * 
+     *
      * @return 支払場所
      */
     public RString getShiharaiBasho() {
@@ -393,7 +394,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払場所のsetメソッドです。
-     * 
+     *
      * @param shiharaiBasho 支払場所
      */
     public void setShiharaiBasho(RString shiharaiBasho) {
@@ -402,7 +403,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間開始年月日
      */
     public FlexibleDate getShiharaiKaishiYMD() {
@@ -411,7 +412,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param shiharaiKaishiYMD 支払期間開始年月日
      */
     public void setShiharaiKaishiYMD(FlexibleDate shiharaiKaishiYMD) {
@@ -420,7 +421,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間終了年月日
      */
     public FlexibleDate getShiharaiShuryoYMD() {
@@ -429,7 +430,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoYMD 支払期間終了年月日
      */
     public void setShiharaiShuryoYMD(FlexibleDate shiharaiShuryoYMD) {
@@ -438,7 +439,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 閉庁内容のgetメソッドです。
-     * 
+     *
      * @return 閉庁内容
      */
     public RString getHeichoNaiyo() {
@@ -447,7 +448,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 閉庁内容のsetメソッドです。
-     * 
+     *
      * @param heichoNaiyo 閉庁内容
      */
     public void setHeichoNaiyo(RString heichoNaiyo) {
@@ -456,7 +457,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払窓口開始時間のgetメソッドです。
-     * 
+     *
      * @return 支払窓口開始時間
      */
     public RString getShiharaiKaishiTime() {
@@ -465,7 +466,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払窓口開始時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiKaishiTime 支払窓口開始時間
      */
     public void setShiharaiKaishiTime(RString shiharaiKaishiTime) {
@@ -474,7 +475,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払窓口終了時間のgetメソッドです。
-     * 
+     *
      * @return 支払窓口終了時間
      */
     public RString getShiharaiShuryoTime() {
@@ -483,7 +484,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 支払窓口終了時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoTime 支払窓口終了時間
      */
     public void setShiharaiShuryoTime(RString shiharaiShuryoTime) {
@@ -494,7 +495,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 口座IDのgetメソッドです。
      * <br/>
      * <br/>口座テーブルとのリンクキー
-     * 
+     *
      * @return 口座ID
      */
     public long getKozaID() {
@@ -505,7 +506,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 口座IDのsetメソッドです。
      * <br/>
      * <br/>口座テーブルとのリンクキー
-     * 
+     *
      * @param kozaID 口座ID
      */
     public void setKozaID(long kozaID) {
@@ -514,7 +515,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 受領委任契約番号のgetメソッドです。
-     * 
+     *
      * @return 受領委任契約番号
      */
     public RString getJuryoininKeiyakuNo() {
@@ -523,7 +524,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * 受領委任契約番号のsetメソッドです。
-     * 
+     *
      * @param juryoininKeiyakuNo 受領委任契約番号
      */
     public void setJuryoininKeiyakuNo(RString juryoininKeiyakuNo) {
@@ -532,9 +533,9 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * このエンティティの主キーが他の{@literal DbT3056KogakuShikyuShinseiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3056KogakuShikyuShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -588,6 +589,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -596,5 +598,4 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
     }
 
 // </editor-fold>
-
 }

@@ -39,7 +39,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
     @PrimaryKey
     private RString kyushoSeikyuNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal kyufuGakuGokei;
     private Decimal kashitsuSosatsuGaku;
     private Decimal hokenKyufuSeikyuGaku;
@@ -155,7 +155,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -164,7 +164,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

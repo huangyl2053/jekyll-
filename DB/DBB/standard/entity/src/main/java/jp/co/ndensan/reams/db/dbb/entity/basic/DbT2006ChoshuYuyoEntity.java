@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -37,7 +38,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shinseiYMD;
     private FlexibleDate ketteiYMD;
     private FlexibleDate torikeshiYMD;
@@ -153,7 +154,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -162,7 +163,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -350,7 +351,8 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      * このエンティティの主キーが他の{@literal DbT2006ChoshuYuyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2006ChoshuYuyoEntity other) {
