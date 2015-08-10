@@ -33,7 +33,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shinseiYMD;
     private FlexibleDate uketsukeYMD;
     private RString shinsei_HaishiKubun;
@@ -119,7 +119,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -128,7 +128,7 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -346,7 +346,8 @@ public class DbT1013KyokaisoSochiShinseiEntity extends DbTableEntityBase<DbT1013
     /**
      * 利用者負担世帯合算額・減額自己負担月額のsetメソッドです。
      *
-     * @param riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku 利用者負担世帯合算額・減額自己負担月額
+     * @param riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku
+     * 利用者負担世帯合算額・減額自己負担月額
      */
     public void setRiyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku(Decimal riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku) {
         this.riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku = riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku;

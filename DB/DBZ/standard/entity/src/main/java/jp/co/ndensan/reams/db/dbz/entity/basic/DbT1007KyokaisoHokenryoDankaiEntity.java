@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT1007KyokaisoHokenryoDankaiの項目定義クラスです
@@ -32,7 +33,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     private FlexibleYearMonth tekiyoShuryoYM;
@@ -106,7 +107,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -115,7 +116,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
