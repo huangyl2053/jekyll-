@@ -8,18 +8,11 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbb.testhelper.DbbTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +30,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT2012HokenryoRankDac sut;
@@ -137,7 +129,7 @@ public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
             DbT2012HokenryoRankEntity updateRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
                     DEFAULT_市町村コード);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setRankKubun(new RString("3"));
 
             sut.save(updateRecord);
 
@@ -145,7 +137,7 @@ public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
                     DEFAULT_賦課年度,
                     DEFAULT_市町村コード);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getRankKubun(), is(updatedRecord.getRankKubun()));
         }
     }
 

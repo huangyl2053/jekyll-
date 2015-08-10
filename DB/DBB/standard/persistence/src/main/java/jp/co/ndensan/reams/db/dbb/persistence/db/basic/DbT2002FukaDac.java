@@ -4,29 +4,21 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.*;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka.*;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -64,10 +56,10 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                eq(choteiNendo, 調定年度),
-                eq(fukaNendo, 賦課年度),
-                eq(tsuchishoNo, 通知書番号),
-                eq(rirekiNo, 履歴番号))).
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
     }
 

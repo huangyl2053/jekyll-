@@ -4,29 +4,20 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.*;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankai;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankai.*;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -61,9 +52,9 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         return accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                eq(fukaNendo, 賦課年度),
-                eq(dankaiIndex, 段階インデックス),
-                eq(rankuKubun, ランク区分))).
+                                eq(fukaNendo, 賦課年度),
+                                eq(dankaiIndex, 段階インデックス),
+                                eq(rankuKubun, ランク区分))).
                 toObject(DbT2013HokenryoDankaiEntity.class);
     }
 
