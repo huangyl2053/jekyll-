@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績特定診療費テーブルのエンティティクラスです。
@@ -108,8 +109,8 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
     private int atoKohi3TanjunXsen;
     private int atoKohi3Rehabilitation;
     private int atoKohi3SeishinkaSemmonRyoho;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -1352,7 +1353,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
      *
      * @return 再審査回数
      */
-    public int getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -1361,7 +1362,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -1370,7 +1371,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
      *
      * @return 過誤回数
      */
-    public int getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -1379,7 +1380,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

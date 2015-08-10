@@ -34,7 +34,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
     @PrimaryKey
     private RString kashitsukeKanriNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString henkanKinKubun;
     private Decimal henkanKingaku;
     private FlexibleDate henkanKigenYMD;
@@ -126,7 +126,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -135,7 +135,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

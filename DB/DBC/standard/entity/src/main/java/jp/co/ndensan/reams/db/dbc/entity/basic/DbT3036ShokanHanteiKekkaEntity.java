@@ -19,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036ShokanHanteiKekkaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3036ShokanHanteiKekka");
 
@@ -37,7 +38,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
     @PrimaryKey
     private RString seiriNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private HokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate ketteiYMD;
     private RString shikyuHushikyuKetteiKubun;
@@ -47,7 +48,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -56,7 +57,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -65,7 +66,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,17 +75,16 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,7 +93,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -102,7 +102,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -111,7 +111,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -120,7 +120,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -129,7 +129,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -138,7 +138,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -147,25 +147,25 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
     public HokenshaNo getShoKisaiHokenshaNo() {
@@ -174,7 +174,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
@@ -183,7 +183,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 決定年月日のgetメソッドです。
-     * 
+     *
      * @return 決定年月日
      */
     public FlexibleDate getKetteiYMD() {
@@ -192,7 +192,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -201,7 +201,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支給・不支給決定区分のgetメソッドです。
-     * 
+     *
      * @return 支給・不支給決定区分
      */
     public RString getShikyuHushikyuKetteiKubun() {
@@ -210,7 +210,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支給・不支給決定区分のsetメソッドです。
-     * 
+     *
      * @param shikyuHushikyuKetteiKubun 支給・不支給決定区分
      */
     public void setShikyuHushikyuKetteiKubun(RString shikyuHushikyuKetteiKubun) {
@@ -219,7 +219,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支払金額のgetメソッドです。
-     * 
+     *
      * @return 支払金額
      */
     public Decimal getShiharaiKingaku() {
@@ -228,7 +228,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支払金額のsetメソッドです。
-     * 
+     *
      * @param shiharaiKingaku 支払金額
      */
     public void setShiharaiKingaku(Decimal shiharaiKingaku) {
@@ -237,7 +237,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支払金額内訳・利用者分のgetメソッドです。
-     * 
+     *
      * @return 支払金額内訳・利用者分
      */
     public Decimal getShiharaiKingakuUchiwakeRiyoshabun() {
@@ -246,7 +246,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 支払金額内訳・利用者分のsetメソッドです。
-     * 
+     *
      * @param shiharaiKingakuUchiwakeRiyoshabun 支払金額内訳・利用者分
      */
     public void setShiharaiKingakuUchiwakeRiyoshabun(Decimal shiharaiKingakuUchiwakeRiyoshabun) {
@@ -255,7 +255,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 決定一覧取込年月のgetメソッドです。
-     * 
+     *
      * @return 決定一覧取込年月
      */
     public FlexibleYearMonth getKetteiIchiranTorikomiYM() {
@@ -264,7 +264,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * 決定一覧取込年月のsetメソッドです。
-     * 
+     *
      * @param ketteiIchiranTorikomiYM 決定一覧取込年月
      */
     public void setKetteiIchiranTorikomiYM(FlexibleYearMonth ketteiIchiranTorikomiYM) {
@@ -273,9 +273,9 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * このエンティティの主キーが他の{@literal DbT3036ShokanHanteiKekkaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3036ShokanHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -317,6 +317,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -325,5 +326,4 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
     }
 
 // </editor-fold>
-
 }

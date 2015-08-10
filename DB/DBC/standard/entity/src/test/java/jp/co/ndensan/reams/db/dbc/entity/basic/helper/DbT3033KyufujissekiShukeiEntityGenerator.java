@@ -4,41 +4,39 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績集計エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 周杏月
  */
 public final class DbT3033KyufujissekiShukeiEntityGenerator {
 
-    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo(new RString("2"));
-    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo(new RString("2"));
-    public static final RString DEFAULT_レコード種別コード = new RString("1");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo(new RString("2"));
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo(new RString("2"));
-    public static final RString DEFAULT_通し番号 = new RString("1");
-    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode(new RString("2"));
-    public static final int DEFAULT_サービス実日数 = 1;
+    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo("012340123400001");
+    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo("012340123400001");
+    public static final RString DEFAULT_レコード種別コード = new RString("Data");
+    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_通し番号 = new RString("Data");
+    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
+    public static final Decimal DEFAULT_サービス実日数 = new Decimal(0);
     public static final Decimal DEFAULT_計画単位数 = new Decimal(1);
     public static final Decimal DEFAULT_限度額管理対象単位数 = new Decimal(1);
     public static final Decimal DEFAULT_限度額管理対象外単位数 = new Decimal(1);
-    public static final int DEFAULT_短期入所計画日数 = 1;
-    public static final int DEFAULT_短期入所実日数 = 1;
+    public static final Decimal DEFAULT_短期入所計画日数 = new Decimal(0);
+    public static final Decimal DEFAULT_短期入所実日数 = new Decimal(0);
     public static final Decimal DEFAULT_保険_単位数合計 = new Decimal(1);
-    public static final Decimal DEFAULT_保険_単位数単価 = new Decimal(1);
+    public static final Decimal DEFAULT_保険_単位数単価 = new Decimal(0);
     public static final Decimal DEFAULT_保険_請求額 = new Decimal(1);
     public static final Decimal DEFAULT_保険_利用者負担額 = new Decimal(1);
     public static final Decimal DEFAULT_公費１_単位数合計 = new Decimal(1);
@@ -62,7 +60,7 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final Decimal DEFAULT_公費３_出来高単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_公費３_出来高請求額 = new Decimal(1);
     public static final Decimal DEFAULT_公費３_出来高医療費本人負担額 = new Decimal(1);
-    public static final int DEFAULT_後_短期入所実日数 = 1;
+    public static final Decimal DEFAULT_後_短期入所実日数 = new Decimal(1);
     public static final Decimal DEFAULT_後_単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_後_保険請求分請求額 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費１_単位数合計 = new Decimal(1);
@@ -79,11 +77,11 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final Decimal DEFAULT_後_公費２_出来高請求額 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費３_出来高単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費３_出来高請求額 = new Decimal(1);
-    public static final int DEFAULT_再審査回数 = 1;
-    public static final int DEFAULT_過誤回数 = 1;
-    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final Decimal DEFAULT_再審査回数 = new Decimal(1);
+    public static final Decimal DEFAULT_過誤回数 = new Decimal(1);
+    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
+    public static final Decimal DEFAULT_整理番号 = new Decimal(1);
+    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

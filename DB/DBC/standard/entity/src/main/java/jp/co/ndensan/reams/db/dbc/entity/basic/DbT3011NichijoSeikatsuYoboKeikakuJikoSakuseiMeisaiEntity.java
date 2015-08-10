@@ -21,6 +21,7 @@ import java.util.Objects;
  */
 public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends DbTableEntityBase<DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai");
 
@@ -37,7 +38,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
     private RString kyotakuServiceKubun;
     @PrimaryKey
@@ -60,7 +61,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -69,7 +70,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -78,7 +79,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -87,17 +88,16 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -106,7 +106,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -115,7 +115,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -124,7 +124,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 対象年月のgetメソッドです。
-     * 
+     *
      * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
@@ -133,7 +133,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 対象年月のsetメソッドです。
-     * 
+     *
      * @param taishoYM 対象年月
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
@@ -142,19 +142,19 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -162,7 +162,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 居宅サービス区分のgetメソッドです。
      * <br/>
      * <br/>3:居宅サービス
-     * 
+     *
      * @return 居宅サービス区分
      */
     public RString getKyotakuServiceKubun() {
@@ -173,7 +173,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 居宅サービス区分のsetメソッドです。
      * <br/>
      * <br/>3:居宅サービス
-     * 
+     *
      * @param kyotakuServiceKubun 居宅サービス区分
      */
     public void setKyotakuServiceKubun(RString kyotakuServiceKubun) {
@@ -182,7 +182,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス提供事業者番号のgetメソッドです。
-     * 
+     *
      * @return サービス提供事業者番号
      */
     public JigyoshaNo getServiceTeikyoJigyoshaNo() {
@@ -191,7 +191,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス提供事業者番号のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoJigyoshaNo サービス提供事業者番号
      */
     public void setServiceTeikyoJigyoshaNo(JigyoshaNo serviceTeikyoJigyoshaNo) {
@@ -200,7 +200,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -209,7 +209,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -218,7 +218,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -227,7 +227,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode サービス項目コード
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -236,7 +236,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public Decimal getTaniSu() {
@@ -245,7 +245,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param taniSu 単位数
      */
     public void setTaniSu(Decimal taniSu) {
@@ -254,7 +254,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 回数・日数のgetメソッドです。
-     * 
+     *
      * @return 回数・日数
      */
     public Decimal getKaisu_Nissu() {
@@ -263,7 +263,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 回数・日数のsetメソッドです。
-     * 
+     *
      * @param kaisu_Nissu 回数・日数
      */
     public void setKaisu_Nissu(Decimal kaisu_Nissu) {
@@ -272,7 +272,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 種類限度内単位数・日数のgetメソッドです。
-     * 
+     *
      * @return 種類限度内単位数・日数
      */
     public Decimal getShuruiGendoNaiTaniSu_Nissu() {
@@ -281,7 +281,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 種類限度内単位数・日数のsetメソッドです。
-     * 
+     *
      * @param shuruiGendoNaiTaniSu_Nissu 種類限度内単位数・日数
      */
     public void setShuruiGendoNaiTaniSu_Nissu(Decimal shuruiGendoNaiTaniSu_Nissu) {
@@ -290,7 +290,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 種類限度超過単位数・日数のgetメソッドです。
-     * 
+     *
      * @return 種類限度超過単位数・日数
      */
     public Decimal getShuruiGendoChokaTaniSu_Nissu() {
@@ -299,7 +299,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 種類限度超過単位数・日数のsetメソッドです。
-     * 
+     *
      * @param shuruiGendoChokaTaniSu_Nissu 種類限度超過単位数・日数
      */
     public void setShuruiGendoChokaTaniSu_Nissu(Decimal shuruiGendoChokaTaniSu_Nissu) {
@@ -308,7 +308,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 区分限度内単位数・日数のgetメソッドです。
-     * 
+     *
      * @return 区分限度内単位数・日数
      */
     public Decimal getKubunGendoNaiTaniSu_Nissu() {
@@ -317,7 +317,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 区分限度内単位数・日数のsetメソッドです。
-     * 
+     *
      * @param kubunGendoNaiTaniSu_Nissu 区分限度内単位数・日数
      */
     public void setKubunGendoNaiTaniSu_Nissu(Decimal kubunGendoNaiTaniSu_Nissu) {
@@ -326,7 +326,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 区分限度超過単位数・日数のgetメソッドです。
-     * 
+     *
      * @return 区分限度超過単位数・日数
      */
     public Decimal getKubunGendoChokaTaniSu_Nissu() {
@@ -335,7 +335,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * 区分限度超過単位数・日数のsetメソッドです。
-     * 
+     *
      * @param kubunGendoChokaTaniSu_Nissu 区分限度超過単位数・日数
      */
     public void setKubunGendoChokaTaniSu_Nissu(Decimal kubunGendoChokaTaniSu_Nissu) {
@@ -346,7 +346,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 単位数単価のgetメソッドです。
      * <br/>
      * <br/>小数点第２位まで管理する
-     * 
+     *
      * @return 単位数単価
      */
     public Decimal getTaniSuTanka() {
@@ -357,7 +357,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 単位数単価のsetメソッドです。
      * <br/>
      * <br/>小数点第２位まで管理する
-     * 
+     *
      * @param taniSuTanka 単位数単価
      */
     public void setTaniSuTanka(Decimal taniSuTanka) {
@@ -368,7 +368,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 給付率のgetメソッドです。
      * <br/>
      * <br/>％
-     * 
+     *
      * @return 給付率
      */
     public HokenKyufuRitsu getKyufuRitsu() {
@@ -379,7 +379,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 給付率のsetメソッドです。
      * <br/>
      * <br/>％
-     * 
+     *
      * @param kyufuRitsu 給付率
      */
     public void setKyufuRitsu(HokenKyufuRitsu kyufuRitsu) {
@@ -390,7 +390,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 割引後適用率のgetメソッドです。
      * <br/>
      * <br/>居宅サービス区分が「3:居宅サービス」の場合に設定 ％
-     * 
+     *
      * @return 割引後適用率
      */
     public HokenKyufuRitsu getWaribikiGoTekiyoRitsu() {
@@ -401,7 +401,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 割引後適用率のsetメソッドです。
      * <br/>
      * <br/>居宅サービス区分が「3:居宅サービス」の場合に設定 ％
-     * 
+     *
      * @param waribikiGoTekiyoRitsu 割引後適用率
      */
     public void setWaribikiGoTekiyoRitsu(HokenKyufuRitsu waribikiGoTekiyoRitsu) {
@@ -412,7 +412,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 割引後適用単位数のgetメソッドです。
      * <br/>
      * <br/>居宅サービス区分が「3:居宅サービス」の場合に設定
-     * 
+     *
      * @return 割引後適用単位数
      */
     public Decimal getWaribikiGoTekiyoTaniSu() {
@@ -423,7 +423,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 割引後適用単位数のsetメソッドです。
      * <br/>
      * <br/>居宅サービス区分が「3:居宅サービス」の場合に設定
-     * 
+     *
      * @param waribikiGoTekiyoTaniSu 割引後適用単位数
      */
     public void setWaribikiGoTekiyoTaniSu(Decimal waribikiGoTekiyoTaniSu) {
@@ -434,7 +434,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 定額利用者負担単価金額のgetメソッドです。
      * <br/>
      * <br/>利用者負担額が定額である場合に設定
-     * 
+     *
      * @return 定額利用者負担単価金額
      */
     public Decimal getTeigakuRiyoshaFutanTankaKingaku() {
@@ -445,7 +445,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
      * 定額利用者負担単価金額のsetメソッドです。
      * <br/>
      * <br/>利用者負担額が定額である場合に設定
-     * 
+     *
      * @param teigakuRiyoshaFutanTankaKingaku 定額利用者負担単価金額
      */
     public void setTeigakuRiyoshaFutanTankaKingaku(Decimal teigakuRiyoshaFutanTankaKingaku) {
@@ -454,9 +454,9 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -515,6 +515,7 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -523,5 +524,4 @@ public class DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity extends Db
     }
 
 // </editor-fold>
-
 }

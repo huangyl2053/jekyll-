@@ -14,12 +14,14 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 共同処理用受給者異動基本送付テーブルのエンティティクラスです。
  */
 public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntityBase<DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3002KyodoShoriyoJukyushaIdoKihonSofu");
 
@@ -42,7 +44,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString hiHokenshaName;
     private YubinNo YubinNo;
     private RString ddressKana;
@@ -54,7 +56,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -63,7 +65,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -72,7 +74,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -81,17 +83,16 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -100,7 +101,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 異動年月日のgetメソッドです。
-     * 
+     *
      * @return 異動年月日
      */
     public FlexibleDate getIdoYMD() {
@@ -109,7 +110,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 異動年月日のsetメソッドです。
-     * 
+     *
      * @param idoYMD 異動年月日
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -120,7 +121,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 異動区分コードのgetメソッドです。
      * <br/>
      * <br/>1:新規,2:変更,3:終了
-     * 
+     *
      * @return 異動区分コード
      */
     public RString getIdoKubunCode() {
@@ -131,7 +132,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 異動区分コードのsetメソッドです。
      * <br/>
      * <br/>1:新規,2:変更,3:終了
-     * 
+     *
      * @param idoKubunCode 異動区分コード
      */
     public void setIdoKubunCode(RString idoKubunCode) {
@@ -142,7 +143,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 受給者異動事由のgetメソッドです。
      * <br/>
      * <br/>01:受給資格取得,02:受給資格喪失,03広域連合市町村間異動（政令市区間異動）,04:合併による新規,99:その他異動
-     * 
+     *
      * @return 受給者異動事由
      */
     public RString getJukyushaIdoJiyu() {
@@ -153,7 +154,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 受給者異動事由のsetメソッドです。
      * <br/>
      * <br/>01:受給資格取得,02:受給資格喪失,03広域連合市町村間異動（政令市区間異動）,04:合併による新規,99:その他異動
-     * 
+     *
      * @param jukyushaIdoJiyu 受給者異動事由
      */
     public void setJukyushaIdoJiyu(RString jukyushaIdoJiyu) {
@@ -164,7 +165,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 証記載保険者番号のgetメソッドです。
      * <br/>
      * <br/>Not（地方公共団体コード（導入団体）⇒保険者番号）
-     * 
+     *
      * @return 証記載保険者番号
      */
     public HokenshaNo getShoKisaiHokenshaNo() {
@@ -175,7 +176,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 証記載保険者番号のsetメソッドです。
      * <br/>
      * <br/>Not（地方公共団体コード（導入団体）⇒保険者番号）
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
@@ -184,7 +185,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -193,7 +194,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -202,19 +203,19 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -222,7 +223,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 被保険者氏名のgetメソッドです。
      * <br/>
      * <br/>氏名（漢字）
-     * 
+     *
      * @return 被保険者氏名
      */
     public RString getHiHokenshaName() {
@@ -233,7 +234,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 被保険者氏名のsetメソッドです。
      * <br/>
      * <br/>氏名（漢字）
-     * 
+     *
      * @param hiHokenshaName 被保険者氏名
      */
     public void setHiHokenshaName(RString hiHokenshaName) {
@@ -242,7 +243,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     public YubinNo getYubinNo() {
@@ -251,7 +252,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param YubinNo 郵便番号
      */
     public void setYubinNo(YubinNo YubinNo) {
@@ -260,7 +261,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 住所カナのgetメソッドです。
-     * 
+     *
      * @return 住所カナ
      */
     public RString getDdressKana() {
@@ -269,7 +270,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 住所カナのsetメソッドです。
-     * 
+     *
      * @param ddressKana 住所カナ
      */
     public void setDdressKana(RString ddressKana) {
@@ -280,7 +281,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 住所のgetメソッドです。
      * <br/>
      * <br/>住所（漢字）
-     * 
+     *
      * @return 住所
      */
     public RString getAddress() {
@@ -291,7 +292,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 住所のsetメソッドです。
      * <br/>
      * <br/>住所（漢字）
-     * 
+     *
      * @param address 住所
      */
     public void setAddress(RString address) {
@@ -300,7 +301,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     public TelNo getTelNo() {
@@ -309,7 +310,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -318,7 +319,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 帳票出力順序コードのgetメソッドです。
-     * 
+     *
      * @return 帳票出力順序コード
      */
     public RString getChohyoOutputJunjyoCode() {
@@ -327,7 +328,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 帳票出力順序コードのsetメソッドです。
-     * 
+     *
      * @param chohyoOutputJunjyoCode 帳票出力順序コード
      */
     public void setChohyoOutputJunjyoCode(RString chohyoOutputJunjyoCode) {
@@ -338,7 +339,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 訂正連絡票フラグのgetメソッドです。
      * <br/>
      * <br/>異動or訂正 訂正ならtrue
-     * 
+     *
      * @return 訂正連絡票フラグ
      */
     public boolean getTeiseiRenrakuhyoFlag() {
@@ -349,7 +350,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
      * 訂正連絡票フラグのsetメソッドです。
      * <br/>
      * <br/>異動or訂正 訂正ならtrue
-     * 
+     *
      * @param teiseiRenrakuhyoFlag 訂正連絡票フラグ
      */
     public void setTeiseiRenrakuhyoFlag(boolean teiseiRenrakuhyoFlag) {
@@ -358,7 +359,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 送付年月のgetメソッドです。
-     * 
+     *
      * @return 送付年月
      */
     public FlexibleYearMonth getSofuYM() {
@@ -367,7 +368,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * 送付年月のsetメソッドです。
-     * 
+     *
      * @param sofuYM 送付年月
      */
     public void setSofuYM(FlexibleYearMonth sofuYM) {
@@ -376,9 +377,9 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -430,6 +431,7 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -438,5 +440,4 @@ public class DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity extends DbTableEntity
     }
 
 // </editor-fold>
-
 }

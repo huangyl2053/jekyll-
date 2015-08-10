@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -45,11 +46,11 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private ServiceShuruiCode serviceShuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
-    private int tanisu;
-    private int nissuKaisu;
+    private Decimal tanisu;
+    private Decimal nissuKaisu;
     private int serviceTanisu;
     private ShoKisaiHokenshaNo shisetsuShozaiHokenshaNo;
     private RString tekiyo;
@@ -212,7 +213,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -221,7 +222,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -266,7 +267,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @return 単位数
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
@@ -275,7 +276,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @param tanisu 単位数
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
@@ -284,7 +285,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @return 日数・回数
      */
-    public int getNissuKaisu() {
+    public Decimal getNissuKaisu() {
         return nissuKaisu;
     }
 
@@ -293,7 +294,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiEntity extends DbTableEntityBase<
      *
      * @param nissuKaisu 日数・回数
      */
-    public void setNissuKaisu(int nissuKaisu) {
+    public void setNissuKaisu(Decimal nissuKaisu) {
         this.nissuKaisu = nissuKaisu;
     }
 

@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求特定入所者介護サービス費用テーブルのエンティティクラスです。
  */
 public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTableEntityBase<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo");
 
@@ -43,12 +45,12 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private ServiceShuruiCode serviceShuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
-    private int hiyoTanka;
-    private int futanGendogaku;
-    private int nissu;
+    private Decimal hiyoTanka;
+    private Decimal futanGendogaku;
+    private Decimal nissu;
     private int hiyogaku;
     private int hokenbunSeikyugaku;
     private int riyoshaFutangaku;
@@ -63,7 +65,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -72,7 +74,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -81,7 +83,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -90,17 +92,16 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -109,7 +110,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -118,7 +119,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -127,7 +128,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -136,7 +137,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -145,7 +146,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -154,7 +155,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -163,7 +164,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -172,7 +173,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -181,7 +182,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -190,7 +191,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -201,7 +202,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 順次番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @return 順次番号
      */
     public RString getJunjiNo() {
@@ -212,7 +213,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 順次番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @param junjiNo 順次番号
      */
     public void setJunjiNo(RString junjiNo) {
@@ -221,25 +222,25 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -248,7 +249,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -257,7 +258,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -266,7 +267,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode サービス項目コード
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -275,61 +276,61 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 費用単価のgetメソッドです。
-     * 
+     *
      * @return 費用単価
      */
-    public int getHiyoTanka() {
+    public Decimal getHiyoTanka() {
         return hiyoTanka;
     }
 
     /**
      * 費用単価のsetメソッドです。
-     * 
+     *
      * @param hiyoTanka 費用単価
      */
-    public void setHiyoTanka(int hiyoTanka) {
+    public void setHiyoTanka(Decimal hiyoTanka) {
         this.hiyoTanka = hiyoTanka;
     }
 
     /**
      * 負担限度額のgetメソッドです。
-     * 
+     *
      * @return 負担限度額
      */
-    public int getFutanGendogaku() {
+    public Decimal getFutanGendogaku() {
         return futanGendogaku;
     }
 
     /**
      * 負担限度額のsetメソッドです。
-     * 
+     *
      * @param futanGendogaku 負担限度額
      */
-    public void setFutanGendogaku(int futanGendogaku) {
+    public void setFutanGendogaku(Decimal futanGendogaku) {
         this.futanGendogaku = futanGendogaku;
     }
 
     /**
      * 日数のgetメソッドです。
-     * 
+     *
      * @return 日数
      */
-    public int getNissu() {
+    public Decimal getNissu() {
         return nissu;
     }
 
     /**
      * 日数のsetメソッドです。
-     * 
+     *
      * @param nissu 日数
      */
-    public void setNissu(int nissu) {
+    public void setNissu(Decimal nissu) {
         this.nissu = nissu;
     }
 
     /**
      * 費用額のgetメソッドです。
-     * 
+     *
      * @return 費用額
      */
     public int getHiyogaku() {
@@ -338,7 +339,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 費用額のsetメソッドです。
-     * 
+     *
      * @param hiyogaku 費用額
      */
     public void setHiyogaku(int hiyogaku) {
@@ -347,7 +348,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 保険分請求額のgetメソッドです。
-     * 
+     *
      * @return 保険分請求額
      */
     public int getHokenbunSeikyugaku() {
@@ -356,7 +357,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 保険分請求額のsetメソッドです。
-     * 
+     *
      * @param hokenbunSeikyugaku 保険分請求額
      */
     public void setHokenbunSeikyugaku(int hokenbunSeikyugaku) {
@@ -365,7 +366,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額
      */
     public int getRiyoshaFutangaku() {
@@ -374,7 +375,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 利用者負担額のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutangaku 利用者負担額
      */
     public void setRiyoshaFutangaku(int riyoshaFutangaku) {
@@ -385,7 +386,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 費用額合計のgetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @return 費用額合計
      */
     public int getHiyogakuTotal() {
@@ -396,7 +397,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 費用額合計のsetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @param hiyogakuTotal 費用額合計
      */
     public void setHiyogakuTotal(int hiyogakuTotal) {
@@ -407,7 +408,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 保険分請求額合計のgetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @return 保険分請求額合計
      */
     public int getHokenbunSeikyugakuTotal() {
@@ -418,7 +419,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 保険分請求額合計のsetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @param hokenbunSeikyugakuTotal 保険分請求額合計
      */
     public void setHokenbunSeikyugakuTotal(int hokenbunSeikyugakuTotal) {
@@ -429,7 +430,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 利用者負担額合計のgetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @return 利用者負担額合計
      */
     public int getRiyoshaFutangakuTotal() {
@@ -440,7 +441,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
      * 利用者負担額合計のsetメソッドです。
      * <br/>
      * <br/>順次番号が最大の情報にのみ設定
-     * 
+     *
      * @param riyoshaFutangakuTotal 利用者負担額合計
      */
     public void setRiyoshaFutangakuTotal(int riyoshaFutangakuTotal) {
@@ -449,7 +450,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 支給区分コードのgetメソッドです。
-     * 
+     *
      * @return 支給区分コード
      */
     public RString getShikyuKubunCode() {
@@ -458,7 +459,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 支給区分コードのsetメソッドです。
-     * 
+     *
      * @param shikyuKubunCode 支給区分コード
      */
     public void setShikyuKubunCode(RString shikyuKubunCode) {
@@ -467,7 +468,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 点数／金額のgetメソッドです。
-     * 
+     *
      * @return 点数／金額
      */
     public int getTensuKingaku() {
@@ -476,7 +477,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 点数／金額のsetメソッドです。
-     * 
+     *
      * @param tensuKingaku 点数／金額
      */
     public void setTensuKingaku(int tensuKingaku) {
@@ -485,7 +486,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 支給金額のgetメソッドです。
-     * 
+     *
      * @return 支給金額
      */
     public int getShikyuKingaku() {
@@ -494,7 +495,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 支給金額のsetメソッドです。
-     * 
+     *
      * @param shikyuKingaku 支給金額
      */
     public void setShikyuKingaku(int shikyuKingaku) {
@@ -503,7 +504,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 増減点のgetメソッドです。
-     * 
+     *
      * @return 増減点
      */
     public int getZougenten() {
@@ -512,7 +513,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 増減点のsetメソッドです。
-     * 
+     *
      * @param zougenten 増減点
      */
     public void setZougenten(int zougenten) {
@@ -521,7 +522,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 差額金額のgetメソッドです。
-     * 
+     *
      * @return 差額金額
      */
     public int getSagakuKingaku() {
@@ -530,7 +531,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * 差額金額のsetメソッドです。
-     * 
+     *
      * @param sagakuKingaku 差額金額
      */
     public void setSagakuKingaku(int sagakuKingaku) {
@@ -539,9 +540,9 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * このエンティティの主キーが他の{@literal DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -605,6 +606,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -613,5 +615,4 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity extends DbTable
     }
 
 // </editor-fold>
-
 }

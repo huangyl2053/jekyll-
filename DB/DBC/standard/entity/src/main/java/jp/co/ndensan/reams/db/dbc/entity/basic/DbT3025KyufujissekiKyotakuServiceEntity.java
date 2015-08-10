@@ -59,19 +59,19 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;
     private ServiceCode serviceCode;
     private Decimal tanisu;
-    private Integer kaisu;
+    private Decimal kaisu;
     private Decimal serviceTanisu;
     private Decimal serviceTanisuTotal;
     private Decimal seikyuKingaku;
     private RString tantouKaigoShienSemmoninNo;
     private RString tekiyo;
     private Decimal atoTanisu;
-    private Integer atoKaisu;
+    private Decimal atoKaisu;
     private Decimal atoServiceTanisu;
     private Decimal atoServiceTanisuTotal;
     private Decimal atoSeikyuKingaku;
-    private Integer saishinsaKaisu;
-    private Integer kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -384,7 +384,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @return 回数
      */
-    public Integer getKaisu() {
+    public Decimal getKaisu() {
         return kaisu;
     }
 
@@ -395,7 +395,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @param kaisu 回数
      */
-    public void setKaisu(Integer kaisu) {
+    public void setKaisu(Decimal kaisu) {
         this.kaisu = kaisu;
     }
 
@@ -522,7 +522,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @return 後・回数
      */
-    public Integer getAtoKaisu() {
+    public Decimal getAtoKaisu() {
         return atoKaisu;
     }
 
@@ -533,7 +533,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @param atoKaisu 後・回数
      */
-    public void setAtoKaisu(Integer atoKaisu) {
+    public void setAtoKaisu(Decimal atoKaisu) {
         this.atoKaisu = atoKaisu;
     }
 
@@ -604,7 +604,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @return 再審査回数
      */
-    public Integer getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -613,7 +613,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -622,7 +622,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @return 過誤回数
      */
-    public Integer getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -631,7 +631,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<D
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Integer kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

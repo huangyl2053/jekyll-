@@ -34,7 +34,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
     @PrimaryKey
     private RString hokenshaKubun;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private int kaigoKyufuhiKensu;
     private Decimal kaigoKyufuhiTanisu;
     private Decimal kaigoKyufuhiFutangaku;
@@ -120,7 +120,8 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * <br/>
      * <br/>1：保険者
      *
-     * <br/>2：公費負担者　     *
+     * <br/>2：公費負担者
+     *
      * <br/>3：総合事業費(経過措置)保険者
      *
      * <br/>4：総合事業費保険者
@@ -138,7 +139,8 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * <br/>
      * <br/>1：保険者
      *
-     * <br/>2：公費負担者　     *
+     * <br/>2：公費負担者
+     *
      * <br/>3：総合事業費(経過措置)保険者
      *
      * <br/>4：総合事業費保険者
@@ -156,7 +158,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -165,7 +167,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

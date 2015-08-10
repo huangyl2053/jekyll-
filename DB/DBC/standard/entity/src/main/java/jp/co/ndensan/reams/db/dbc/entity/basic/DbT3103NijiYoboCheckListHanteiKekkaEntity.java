@@ -37,7 +37,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal tensu_SeikatsuKinoZenpan;
     private Decimal tensu_UndokiKino;
     private Decimal tensu_Eiyo;
@@ -45,13 +45,13 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
     private Decimal tensu_Tojikomori;
     private Decimal tensu_NinchiNoryoku;
     private Decimal tensu_Utsu;
-    private int shien_SeikatsuKinoZenpan;
-    private int shien_UndokiKino;
-    private int shien_Eiyo;
-    private int shien_Koku;
-    private int shien_Tojikomori;
-    private int shien_NinchiNoryoku;
-    private int shien_Utsu;
+    private Decimal shien_SeikatsuKinoZenpan;
+    private Decimal shien_UndokiKino;
+    private Decimal shien_Eiyo;
+    private Decimal shien_Koku;
+    private Decimal shien_Tojikomori;
+    private Decimal shien_NinchiNoryoku;
+    private Decimal shien_Utsu;
     private RString nijiYobo_ShukantekiKenkouKan;
 
     /**
@@ -158,7 +158,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -167,7 +167,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -302,7 +302,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・生活機能全般
      */
-    public int getShien_SeikatsuKinoZenpan() {
+    public Decimal getShien_SeikatsuKinoZenpan() {
         return shien_SeikatsuKinoZenpan;
     }
 
@@ -311,7 +311,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_SeikatsuKinoZenpan 支援必要性・生活機能全般
      */
-    public void setShien_SeikatsuKinoZenpan(int shien_SeikatsuKinoZenpan) {
+    public void setShien_SeikatsuKinoZenpan(Decimal shien_SeikatsuKinoZenpan) {
         this.shien_SeikatsuKinoZenpan = shien_SeikatsuKinoZenpan;
     }
 
@@ -320,7 +320,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・運動器機能
      */
-    public int getShien_UndokiKino() {
+    public Decimal getShien_UndokiKino() {
         return shien_UndokiKino;
     }
 
@@ -329,7 +329,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_UndokiKino 支援必要性・運動器機能
      */
-    public void setShien_UndokiKino(int shien_UndokiKino) {
+    public void setShien_UndokiKino(Decimal shien_UndokiKino) {
         this.shien_UndokiKino = shien_UndokiKino;
     }
 
@@ -338,7 +338,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・栄養
      */
-    public int getShien_Eiyo() {
+    public Decimal getShien_Eiyo() {
         return shien_Eiyo;
     }
 
@@ -347,7 +347,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_Eiyo 支援必要性・栄養
      */
-    public void setShien_Eiyo(int shien_Eiyo) {
+    public void setShien_Eiyo(Decimal shien_Eiyo) {
         this.shien_Eiyo = shien_Eiyo;
     }
 
@@ -356,7 +356,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・口腔
      */
-    public int getShien_Koku() {
+    public Decimal getShien_Koku() {
         return shien_Koku;
     }
 
@@ -365,7 +365,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_Koku 支援必要性・口腔
      */
-    public void setShien_Koku(int shien_Koku) {
+    public void setShien_Koku(Decimal shien_Koku) {
         this.shien_Koku = shien_Koku;
     }
 
@@ -374,7 +374,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・閉じこもり
      */
-    public int getShien_Tojikomori() {
+    public Decimal getShien_Tojikomori() {
         return shien_Tojikomori;
     }
 
@@ -383,7 +383,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_Tojikomori 支援必要性・閉じこもり
      */
-    public void setShien_Tojikomori(int shien_Tojikomori) {
+    public void setShien_Tojikomori(Decimal shien_Tojikomori) {
         this.shien_Tojikomori = shien_Tojikomori;
     }
 
@@ -392,7 +392,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・認知能力
      */
-    public int getShien_NinchiNoryoku() {
+    public Decimal getShien_NinchiNoryoku() {
         return shien_NinchiNoryoku;
     }
 
@@ -401,7 +401,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_NinchiNoryoku 支援必要性・認知能力
      */
-    public void setShien_NinchiNoryoku(int shien_NinchiNoryoku) {
+    public void setShien_NinchiNoryoku(Decimal shien_NinchiNoryoku) {
         this.shien_NinchiNoryoku = shien_NinchiNoryoku;
     }
 
@@ -410,7 +410,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @return 支援必要性・うつ
      */
-    public int getShien_Utsu() {
+    public Decimal getShien_Utsu() {
         return shien_Utsu;
     }
 
@@ -419,7 +419,7 @@ public class DbT3103NijiYoboCheckListHanteiKekkaEntity extends DbTableEntityBase
      *
      * @param shien_Utsu 支援必要性・うつ
      */
-    public void setShien_Utsu(int shien_Utsu) {
+    public void setShien_Utsu(Decimal shien_Utsu) {
         this.shien_Utsu = shien_Utsu;
     }
 

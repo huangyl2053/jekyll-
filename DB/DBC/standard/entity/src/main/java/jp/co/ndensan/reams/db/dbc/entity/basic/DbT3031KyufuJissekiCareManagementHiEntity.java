@@ -59,22 +59,22 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
     private RString servicePlanhiMeisaiLineNo;
     private Decimal tanisuTanka;
     private ServiceCode serviceCode;
-    private int tanisu;
-    private int kaisu;
+    private Decimal tanisu;
+    private Decimal kaisu;
     private int serviceTanisu;
     private int serivceTanisuTotal;
     private int seikyuKingaku;
     private RString tantoKaigoShienSemmoninNo;
     private RString tekiyo;
     private int riyoushaFutangaku;
-    private int atoTanisu;
-    private int atoKaisu;
+    private Decimal atoTanisu;
+    private Decimal atoKaisu;
     private int atoServiceTanisu;
     private int atoServiceTanisuTotal;
     private int atoSeikyuKingaku;
     private int atoRiyoshaFutangaku;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -363,7 +363,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 単位数
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
@@ -372,7 +372,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param tanisu 単位数
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
@@ -381,7 +381,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 回数
      */
-    public int getKaisu() {
+    public Decimal getKaisu() {
         return kaisu;
     }
 
@@ -390,7 +390,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param kaisu 回数
      */
-    public void setKaisu(int kaisu) {
+    public void setKaisu(Decimal kaisu) {
         this.kaisu = kaisu;
     }
 
@@ -507,7 +507,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 後・単位数
      */
-    public int getAtoTanisu() {
+    public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
@@ -516,7 +516,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param atoTanisu 後・単位数
      */
-    public void setAtoTanisu(int atoTanisu) {
+    public void setAtoTanisu(Decimal atoTanisu) {
         this.atoTanisu = atoTanisu;
     }
 
@@ -525,7 +525,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 後・回数
      */
-    public int getAtoKaisu() {
+    public Decimal getAtoKaisu() {
         return atoKaisu;
     }
 
@@ -534,7 +534,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param atoKaisu 後・回数
      */
-    public void setAtoKaisu(int atoKaisu) {
+    public void setAtoKaisu(Decimal atoKaisu) {
         this.atoKaisu = atoKaisu;
     }
 
@@ -615,7 +615,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 再審査回数
      */
-    public int getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -624,7 +624,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -633,7 +633,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @return 過誤回数
      */
-    public int getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -642,7 +642,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

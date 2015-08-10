@@ -4,34 +4,32 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村単独助成金給付申請エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT3098TandokuJoseikinKyufuShinseiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_申請者区分 = new RString("1");
-    public static final JigyoshaNo DEFAULT_申請代行事業者番号 = new JigyoshaNo(new RString("02"));
-    public static final RString DEFAULT_事業者区分 = new RString("1");
-    public static final YubinNo DEFAULT_申請者郵便番号 = new YubinNo(new RString("0250301"));
-    public static final RString DEFAULT_申請者住所 = new RString("123");
-    public static final TelNo DEFAULT_申請者電話番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_申請理由 = new RString("1");
-    public static final RString DEFAULT_市町村単独助成種類 = new RString("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_申請者区分 = new RString("Data");
+    public static final JigyoshaNo DEFAULT_申請代行事業者番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_事業者区分 = new RString("Data");
+    public static final YubinNo DEFAULT_申請者郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_申請者住所 = new RString("Data");
+    public static final TelNo DEFAULT_申請者電話番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_申請理由 = new RString("Data");
+    public static final RString DEFAULT_市町村単独助成種類 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -43,6 +41,7 @@ public final class DbT3098TandokuJoseikinKyufuShinseiEntityGenerator {
         DbT3098TandokuJoseikinKyufuShinseiEntity entity = new DbT3098TandokuJoseikinKyufuShinseiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setUketsukeYMD(DEFAULT_受付年月日);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShinseiYMD(DEFAULT_申請年月日);
         entity.setShinseishaKubun(DEFAULT_申請者区分);
         entity.setDaikoJigyoshaNo(DEFAULT_申請代行事業者番号);

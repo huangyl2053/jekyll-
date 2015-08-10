@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求特定診療費・特別療養費テーブルのエンティティクラスです。
  */
 public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEntityBase<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3042ShokanTokuteiShinryoTokubetsuRyoyo");
 
@@ -41,18 +43,18 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString shobyoName;
     private RString shikibetsuNo;
-    private int tanisu;
-    private int kaisu;
+    private Decimal tanisu;
+    private Decimal kaisu;
     private int serviceTanisu;
     private int totalTanisu;
     private RString tekiyo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +63,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +72,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,17 +81,16 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,7 +99,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -107,7 +108,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -116,7 +117,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -125,7 +126,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -134,7 +135,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -143,7 +144,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -152,7 +153,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -161,7 +162,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -170,7 +171,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -179,7 +180,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -190,7 +191,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
      * 順次番号のgetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @return 順次番号
      */
     public RString getJunjiNo() {
@@ -201,7 +202,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
      * 順次番号のsetメソッドです。
      * <br/>
      * <br/>複数レコード対応のため
-     * 
+     *
      * @param junjiNo 順次番号
      */
     public void setJunjiNo(RString junjiNo) {
@@ -210,25 +211,25 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 傷病名のgetメソッドです。
-     * 
+     *
      * @return 傷病名
      */
     public RString getShobyoName() {
@@ -237,7 +238,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 傷病名のsetメソッドです。
-     * 
+     *
      * @param shobyoName 傷病名
      */
     public void setShobyoName(RString shobyoName) {
@@ -246,7 +247,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 識別番号のgetメソッドです。
-     * 
+     *
      * @return 識別番号
      */
     public RString getShikibetsuNo() {
@@ -255,7 +256,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 識別番号のsetメソッドです。
-     * 
+     *
      * @param shikibetsuNo 識別番号
      */
     public void setShikibetsuNo(RString shikibetsuNo) {
@@ -264,43 +265,43 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param tanisu 単位数
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
     /**
      * 回数のgetメソッドです。
-     * 
+     *
      * @return 回数
      */
-    public int getKaisu() {
+    public Decimal getKaisu() {
         return kaisu;
     }
 
     /**
      * 回数のsetメソッドです。
-     * 
+     *
      * @param kaisu 回数
      */
-    public void setKaisu(int kaisu) {
+    public void setKaisu(Decimal kaisu) {
         this.kaisu = kaisu;
     }
 
     /**
      * サービス単位数のgetメソッドです。
-     * 
+     *
      * @return サービス単位数
      */
     public int getServiceTanisu() {
@@ -309,7 +310,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * サービス単位数のsetメソッドです。
-     * 
+     *
      * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(int serviceTanisu) {
@@ -318,7 +319,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 合計単位数のgetメソッドです。
-     * 
+     *
      * @return 合計単位数
      */
     public int getTotalTanisu() {
@@ -327,7 +328,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 合計単位数のsetメソッドです。
-     * 
+     *
      * @param totalTanisu 合計単位数
      */
     public void setTotalTanisu(int totalTanisu) {
@@ -336,7 +337,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 摘要のgetメソッドです。
-     * 
+     *
      * @return 摘要
      */
     public RString getTekiyo() {
@@ -345,7 +346,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * 摘要のsetメソッドです。
-     * 
+     *
      * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
@@ -354,9 +355,9 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * このエンティティの主キーが他の{@literal DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -411,6 +412,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -419,5 +421,4 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity extends DbTableEnti
     }
 
 // </editor-fold>
-
 }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績所定疾患施設療養費等テーブルのエンティティクラスです。
@@ -57,12 +58,12 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
     private FlexibleDate kinkyuChiryoKaishiYMD1;
     private FlexibleDate kinkyuChiryoKaishiYMD2;
     private FlexibleDate kinkyuChiryoKaishiYMD3;
-    private int oshinNissu;
+    private Decimal oshinNissu;
     private RString oshinIryoKikanName;
-    private int tsuinNissu;
+    private Decimal tsuinNissu;
     private RString tsuinIryoKikanName;
     private int kinkyuChiryoKanriTanisu;
-    private int kinkyuChiryoKanriNissu;
+    private Decimal kinkyuChiryoKanriNissu;
     private int kinkyuChiryoKanriSubTotal;
     private int rehabilitationTensu;
     private int shochiTensu;
@@ -97,21 +98,21 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
     private FlexibleDate shoteiShikkanShisetsuRyoyohiKaishiYMD2;
     private FlexibleDate shoteiShikkanShisetsuRyoyohiKaishiYMD3;
     private int shoteiShikkanShisetsuRyoyohiTanisu;
-    private int shoteiShikkanShisetsuRyoyohiNissu;
+    private Decimal shoteiShikkanShisetsuRyoyohiNissu;
     private int shoteiShikkanShisetsuRyoyohiSubTotal;
-    private int atoOshinNissu;
-    private int atoTsuinNissu;
+    private Decimal atoOshinNissu;
+    private Decimal atoTsuinNissu;
     private int atoKinkyuChiryoKanriTanisu;
-    private int atoKinkyuChiryoKanriNissu;
+    private Decimal atoKinkyuChiryoKanriNissu;
     private int atoRehabilitationTensu;
     private int atoShochiTensu;
     private int atoShujutsuTensu;
     private int atoMasuiTensu;
     private int atoHoshasenChiryoTensu;
     private int atoShoteiShikkanShisetsuRyoyoHiTanisu;
-    private int atoShoteiShikkanShisetsuRyoyoHiNissu;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal atoShoteiShikkanShisetsuRyoyoHiNissu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -436,7 +437,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 往診日数
      */
-    public int getOshinNissu() {
+    public Decimal getOshinNissu() {
         return oshinNissu;
     }
 
@@ -445,7 +446,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param oshinNissu 往診日数
      */
-    public void setOshinNissu(int oshinNissu) {
+    public void setOshinNissu(Decimal oshinNissu) {
         this.oshinNissu = oshinNissu;
     }
 
@@ -472,7 +473,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 通院日数
      */
-    public int getTsuinNissu() {
+    public Decimal getTsuinNissu() {
         return tsuinNissu;
     }
 
@@ -481,7 +482,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param tsuinNissu 通院日数
      */
-    public void setTsuinNissu(int tsuinNissu) {
+    public void setTsuinNissu(Decimal tsuinNissu) {
         this.tsuinNissu = tsuinNissu;
     }
 
@@ -526,7 +527,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 緊急時治療管理日数
      */
-    public int getKinkyuChiryoKanriNissu() {
+    public Decimal getKinkyuChiryoKanriNissu() {
         return kinkyuChiryoKanriNissu;
     }
 
@@ -535,7 +536,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param kinkyuChiryoKanriNissu 緊急時治療管理日数
      */
-    public void setKinkyuChiryoKanriNissu(int kinkyuChiryoKanriNissu) {
+    public void setKinkyuChiryoKanriNissu(Decimal kinkyuChiryoKanriNissu) {
         this.kinkyuChiryoKanriNissu = kinkyuChiryoKanriNissu;
     }
 
@@ -1156,7 +1157,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 所定疾患施設療養費日数
      */
-    public int getShoteiShikkanShisetsuRyoyohiNissu() {
+    public Decimal getShoteiShikkanShisetsuRyoyohiNissu() {
         return shoteiShikkanShisetsuRyoyohiNissu;
     }
 
@@ -1165,7 +1166,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param shoteiShikkanShisetsuRyoyohiNissu 所定疾患施設療養費日数
      */
-    public void setShoteiShikkanShisetsuRyoyohiNissu(int shoteiShikkanShisetsuRyoyohiNissu) {
+    public void setShoteiShikkanShisetsuRyoyohiNissu(Decimal shoteiShikkanShisetsuRyoyohiNissu) {
         this.shoteiShikkanShisetsuRyoyohiNissu = shoteiShikkanShisetsuRyoyohiNissu;
     }
 
@@ -1192,7 +1193,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 後・往診日数
      */
-    public int getAtoOshinNissu() {
+    public Decimal getAtoOshinNissu() {
         return atoOshinNissu;
     }
 
@@ -1201,7 +1202,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param atoOshinNissu 後・往診日数
      */
-    public void setAtoOshinNissu(int atoOshinNissu) {
+    public void setAtoOshinNissu(Decimal atoOshinNissu) {
         this.atoOshinNissu = atoOshinNissu;
     }
 
@@ -1210,7 +1211,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 後・通院日数
      */
-    public int getAtoTsuinNissu() {
+    public Decimal getAtoTsuinNissu() {
         return atoTsuinNissu;
     }
 
@@ -1219,7 +1220,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param atoTsuinNissu 後・通院日数
      */
-    public void setAtoTsuinNissu(int atoTsuinNissu) {
+    public void setAtoTsuinNissu(Decimal atoTsuinNissu) {
         this.atoTsuinNissu = atoTsuinNissu;
     }
 
@@ -1246,7 +1247,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 後・緊急時治療管理日数
      */
-    public int getAtoKinkyuChiryoKanriNissu() {
+    public Decimal getAtoKinkyuChiryoKanriNissu() {
         return atoKinkyuChiryoKanriNissu;
     }
 
@@ -1255,7 +1256,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param atoKinkyuChiryoKanriNissu 後・緊急時治療管理日数
      */
-    public void setAtoKinkyuChiryoKanriNissu(int atoKinkyuChiryoKanriNissu) {
+    public void setAtoKinkyuChiryoKanriNissu(Decimal atoKinkyuChiryoKanriNissu) {
         this.atoKinkyuChiryoKanriNissu = atoKinkyuChiryoKanriNissu;
     }
 
@@ -1372,7 +1373,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 後・所定疾患施設療養費日数
      */
-    public int getAtoShoteiShikkanShisetsuRyoyoHiNissu() {
+    public Decimal getAtoShoteiShikkanShisetsuRyoyoHiNissu() {
         return atoShoteiShikkanShisetsuRyoyoHiNissu;
     }
 
@@ -1381,7 +1382,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param atoShoteiShikkanShisetsuRyoyoHiNissu 後・所定疾患施設療養費日数
      */
-    public void setAtoShoteiShikkanShisetsuRyoyoHiNissu(int atoShoteiShikkanShisetsuRyoyoHiNissu) {
+    public void setAtoShoteiShikkanShisetsuRyoyoHiNissu(Decimal atoShoteiShikkanShisetsuRyoyoHiNissu) {
         this.atoShoteiShikkanShisetsuRyoyoHiNissu = atoShoteiShikkanShisetsuRyoyoHiNissu;
     }
 
@@ -1390,7 +1391,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 再審査回数
      */
-    public int getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -1399,7 +1400,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -1408,7 +1409,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @return 過誤回数
      */
-    public int getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -1417,7 +1418,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity extends DbTable
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

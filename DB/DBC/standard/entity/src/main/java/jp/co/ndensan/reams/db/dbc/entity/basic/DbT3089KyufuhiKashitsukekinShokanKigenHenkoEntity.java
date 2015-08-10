@@ -40,7 +40,7 @@ public class DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity extends DbTableEn
     @PrimaryKey
     private FlexibleDate shokanKigenEnchoUketsukeYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shokanKigenEnchoShinseiYMD;
     private YubinNo kariukeninYubinNo;
     private RString kariukeninJusho;
@@ -160,7 +160,7 @@ public class DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity extends DbTableEn
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -169,7 +169,7 @@ public class DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity extends DbTableEn
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
