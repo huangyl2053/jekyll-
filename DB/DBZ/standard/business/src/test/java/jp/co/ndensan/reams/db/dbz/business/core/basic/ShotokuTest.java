@@ -8,8 +8,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +34,16 @@ public class ShotokuTest extends DbzTestBase {
     private static DbT2008ShotokuEntity ShotokuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 所得年度;
+    private static ShikibetsuCode 識別コード;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2008ShotokuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2008ShotokuEntityGenerator.DEFAULT_主キー名2;
+        所得年度 = DbT2008ShotokuEntityGenerator.DEFAULT_所得年度;
+        識別コード = DbT2008ShotokuEntityGenerator.DEFAULT_識別コード;
+        履歴番号 = DbT2008ShotokuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +53,41 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Shotoku(null, 主キー名2);
+        public void 所得年度がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new Shotoku(null, 識別コード, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Shotoku(主キー名1, null);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new Shotoku(所得年度, null, 履歴番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new Shotoku(所得年度, 識別コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT2008ShotokuEntityにセットされている() {
-            sut = new Shotoku(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new Shotoku(所得年度, 識別コード, 履歴番号);
+            assertThat(sut.get所得年度(), is(所得年度));
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するShotokuIdentifierにセットされている() {
-            sut = new Shotoku(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new Shotoku(所得年度, 識別コード, 履歴番号);
+            assertThat(sut.identifier().get所得年度(), is(所得年度));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -83,8 +98,9 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +113,9 @@ public class ShotokuTest extends DbzTestBase {
 
             sut = new Shotoku(ShotokuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get所得年度(), is(所得年度));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -109,8 +126,9 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
 
             sut = new Shotoku(ShotokuEntity);
         }
@@ -131,13 +149,13 @@ public class ShotokuTest extends DbzTestBase {
         }
 
         @Test
-        public void get非課税区分（住民税減免前）は_entityが持つ非課税区分（住民税減免前）を返す() {
-            assertThat(sut.get非課税区分（住民税減免前）(), is(ShotokuEntity.getHiKazeiKubun()));
+        public void get非課税区分_住民税減免前はentityが持つ非課税区分_住民税減免前を返す() {
+            assertThat(sut.get非課税区分_住民税減免前(), is(ShotokuEntity.getHiKazeiKubun()));
         }
 
         @Test
-        public void get非課税区分（住民税減免後）は_entityが持つ非課税区分（住民税減免後）を返す() {
-            assertThat(sut.get非課税区分（住民税減免後）(), is(ShotokuEntity.getHiKazeiKubunGemmenGo()));
+        public void get非課税区分_住民税減免後は_entityが持つ非課税区分_住民税減免後を返す() {
+            assertThat(sut.get非課税区分_住民税減免後(), is(ShotokuEntity.getHiKazeiKubunGemmenGo()));
         }
 
         @Test
@@ -163,8 +181,9 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
 
             sut = new Shotoku(ShotokuEntity);
         }
@@ -182,15 +201,16 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
 
             sut = new Shotoku(ShotokuEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -202,8 +222,9 @@ public class ShotokuTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShotokuEntity = DbT2008ShotokuEntityGenerator.createDbT2008ShotokuEntity();
-            ShotokuEntity.setXXX(主キー名1);
-            ShotokuEntity.setXXX(主キー名2);
+            ShotokuEntity.setShotokuNendo(所得年度);
+            ShotokuEntity.setShikibetsuCode(識別コード);
+            ShotokuEntity.setRirekiNo(履歴番号);
 
         }
 

@@ -5,11 +5,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJigyoshaSakusei;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +32,16 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
     private static DbT3006KyotakuKeikakuJigyoshaSakuseiEntity KyotakuKeikakuJigyoshaSakuseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth 対象年月;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_被保険者番号;
+        対象年月 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月;
+        履歴番号 = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +51,41 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuJigyoshaSakusei(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJigyoshaSakusei(null, 対象年月, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuJigyoshaSakusei(主キー名1, null);
+        public void 対象年月がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, null, 履歴番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, 対象年月, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT3006KyotakuKeikakuJigyoshaSakuseiEntityにセットされている() {
-            sut = new KyotakuKeikakuJigyoshaSakusei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, 対象年月, 履歴番号);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get対象年月(), is(対象年月));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するKyotakuKeikakuJigyoshaSakuseiIdentifierにセットされている() {
-            sut = new KyotakuKeikakuJigyoshaSakusei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, 対象年月, 履歴番号);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -83,8 +96,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +111,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
 
             sut = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -109,15 +124,16 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
         }
 
         @Test
         public void get被保険者番号は_entityが持つ被保険者番号を返す() {
-            assertThat(sut.get被保険者番号(), is(KyotakuKeikakuJigyoshaSakuseiEntity.getNone()));
+            assertThat(sut.get被保険者番号(), is(KyotakuKeikakuJigyoshaSakuseiEntity.getHihokenshano()));
         }
 
         @Test
@@ -173,8 +189,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
         }
@@ -192,15 +209,16 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -212,8 +230,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJigyoshaSakuseiEntity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJigyoshaSakuseiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setHihokenshano(被保険者番号);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJigyoshaSakuseiEntity.setRirekiNo(履歴番号);
 
         }
 

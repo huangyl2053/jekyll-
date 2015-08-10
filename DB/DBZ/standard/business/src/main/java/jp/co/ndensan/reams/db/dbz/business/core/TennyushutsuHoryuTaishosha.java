@@ -6,20 +6,29 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1010TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 転入保留対象者を管理するクラスです。
  */
-public class TennyushutsuHoryuTaishosha extends ParentModelBase<TennyushutsuHoryuTaishoshaIdentifier, DbT1010TennyushutsuHoryuTaishoshaEntity, TennyushutsuHoryuTaishosha> implements Serializable {
+public class TennyushutsuHoryuTaishosha extends ModelBase<TennyushutsuHoryuTaishoshaIdentifier, DbT1010TennyushutsuHoryuTaishoshaEntity, TennyushutsuHoryuTaishosha> implements Serializable {
 
     private final DbT1010TennyushutsuHoryuTaishoshaEntity entity;
     private final TennyushutsuHoryuTaishoshaIdentifier id;
@@ -32,16 +41,16 @@ public class TennyushutsuHoryuTaishosha extends ParentModelBase<TennyushutsuHory
      * @param 履歴番号 履歴番号
      */
     public TennyushutsuHoryuTaishosha(ShikibetsuCode 識別コード,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1010TennyushutsuHoryuTaishoshaEntity();
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new TennyushutsuHoryuTaishoshaIdentifier(
-        識別コード,
-        履歴番号
-                );
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
@@ -54,7 +63,8 @@ Decimal 履歴番号) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("転入保留対象者"));
         this.id = new TennyushutsuHoryuTaishoshaIdentifier(
                 entity.getShikibetsuCode(),
-                entity.getRirekiNo());
+                entity.getRirekiNo()
+        );
     }
 
     /**
@@ -372,22 +382,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 転入保留対象者のみを変更対象とします。<br/>
-     * {@link DbT1010TennyushutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TennyushutsuHoryuTaishosha}
-     */
-    @Override
-    public TennyushutsuHoryuTaishosha modifiedModel() {
-        DbT1010TennyushutsuHoryuTaishoshaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TennyushutsuHoryuTaishosha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する転入保留対象者を削除対象とします。<br/>
      * {@link DbT1010TennyushutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -404,6 +398,7 @@ Decimal 履歴番号) {
         }
         return new TennyushutsuHoryuTaishosha(deletedEntity, id);
     }
+
     /**
      * {@link TennyushutsuHoryuTaishosha}のシリアライズ形式を提供します。
      *
@@ -414,13 +409,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT1010TennyushutsuHoryuTaishoshaEntity entity;
         private final TennyushutsuHoryuTaishoshaIdentifier id;
 
-        private _SerializationProxy(DbT1010TennyushutsuHoryuTaishoshaEntity entity,TennyushutsuHoryuTaishoshaIdentifier id) {
+        private _SerializationProxy(DbT1010TennyushutsuHoryuTaishoshaEntity entity, TennyushutsuHoryuTaishoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

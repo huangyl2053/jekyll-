@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 他市町村住所地特例を管理するクラスです。
  */
-public class TashichosonJushochiTokurei extends ParentModelBase<TashichosonJushochiTokureiIdentifier, DbT1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokurei> implements Serializable {
+public class TashichosonJushochiTokurei extends ModelBase<TashichosonJushochiTokureiIdentifier, DbT1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokurei> implements Serializable {
 
     private final DbT1003TashichosonJushochiTokureiEntity entity;
     private final TashichosonJushochiTokureiIdentifier id;
@@ -33,8 +36,8 @@ public class TashichosonJushochiTokurei extends ParentModelBase<TashichosonJusho
      * @param 枝番 枝番
      */
     public TashichosonJushochiTokurei(ShikibetsuCode 識別コード,
-FlexibleDate 異動日,
-RString 枝番) {
+            FlexibleDate 異動日,
+            RString 枝番) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
@@ -43,10 +46,10 @@ RString 枝番) {
         this.entity.setIdoYMD(異動日);
         this.entity.setEdaNo(枝番);
         this.id = new TashichosonJushochiTokureiIdentifier(
-        識別コード,
-        異動日,
-        枝番
-                );
+                識別コード,
+                異動日,
+                枝番
+        );
     }
 
     /**
@@ -129,7 +132,7 @@ RString 枝番) {
      * @return 他市町村住所地特例適用事由コード
      */
     public RString get他市町村住所地特例適用事由コード() {
-        return entity.getTekiyoJiyuCode();
+        return entity.getTekiyoJiyuCode().getColumnValue().getColumnValue();
     }
 
     /**
@@ -165,7 +168,7 @@ RString 枝番) {
      * @return 他市町村住所地特例解除事由コード
      */
     public RString get他市町村住所地特例解除事由コード() {
-        return entity.getKaijoJiyuCode();
+        return entity.getKaijoJiyuCode().getColumnValue().getColumnValue();
     }
 
     /**
@@ -270,22 +273,6 @@ RString 枝番) {
     }
 
     /**
-     * 他市町村住所地特例のみを変更対象とします。<br/>
-     * {@link DbT1003TashichosonJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TashichosonJushochiTokurei}
-     */
-    @Override
-    public TashichosonJushochiTokurei modifiedModel() {
-        DbT1003TashichosonJushochiTokureiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TashichosonJushochiTokurei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する他市町村住所地特例を削除対象とします。<br/>
      * {@link DbT1003TashichosonJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -302,6 +289,7 @@ RString 枝番) {
         }
         return new TashichosonJushochiTokurei(deletedEntity, id);
     }
+
     /**
      * {@link TashichosonJushochiTokurei}のシリアライズ形式を提供します。
      *
@@ -312,13 +300,19 @@ RString 枝番) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1003TashichosonJushochiTokureiEntity entity;
         private final TashichosonJushochiTokureiIdentifier id;
 
-        private _SerializationProxy(DbT1003TashichosonJushochiTokureiEntity entity,TashichosonJushochiTokureiIdentifier id) {
+        private _SerializationProxy(DbT1003TashichosonJushochiTokureiEntity entity, TashichosonJushochiTokureiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

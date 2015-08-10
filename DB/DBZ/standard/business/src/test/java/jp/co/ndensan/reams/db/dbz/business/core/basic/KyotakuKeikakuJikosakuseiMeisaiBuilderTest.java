@@ -6,9 +6,18 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikosakuseiMeisaiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikosakuseiMeisai;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,17 +35,27 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilderTest extends DbzTestBase {
     private static DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity KyotakuKeikakuJikosakuseiMeisaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth 対象年月;
+    private static Decimal 履歴番号;
+    private static RString 居宅サービス区分;
+    private static JigyoshaNo サービス提供事業者;
+    private static ServiceShuruiCode サービス種類コード;
+    private static ServiceKomokuCode サービス項目コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_被保険者番号;
+        対象年月 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_対象年月;
+        履歴番号 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_履歴番号;
+        居宅サービス区分 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_居宅サービス区分;
+        サービス提供事業者 = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_サービス提供事業者番号;
+        サービス種類コード = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_サービス種類コード;
+        サービス項目コード = DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_サービス項目コード;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KyotakuKeikakuJikosakuseiMeisaiBuilder sut;
         private static KyotakuKeikakuJikosakuseiMeisai business;
@@ -44,14 +63,20 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikosakuseiMeisaiEntity = new DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity();
-            KyotakuKeikakuJikosakuseiMeisaiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikosakuseiMeisaiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setServiceTeikyoJigyoshaNo(サービス提供事業者);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setServiceShuruiCode(サービス種類コード);
+            KyotakuKeikakuJikosakuseiMeisaiEntity.setServiceKomokuCode(サービス項目コード);
 
             business = new KyotakuKeikakuJikosakuseiMeisai(KyotakuKeikakuJikosakuseiMeisaiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_被保険者番号).build();
@@ -101,33 +126,34 @@ public class KyotakuKeikakuJikosakuseiMeisaiBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の回数・日数は_設定した値と同じ回数・日数を返す() {
-            business = sut.set回数・日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_回数・日数).build();
-            assertThat(business.get回数・日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_回数・日数));
+        public void 戻り値の回数_日数は_設定した値と同じ回数_日数を返す() {
+            business = sut.set回数_日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_回数日数).build();
+            assertThat(business.get回数_日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_回数日数));
         }
 
         @Test
-        public void 戻り値の種類限度内単位数・日数は_設定した値と同じ種類限度内単位数・日数を返す() {
-            business = sut.set種類限度内単位数・日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度内単位数・日数).build();
-            assertThat(business.get種類限度内単位数・日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度内単位数・日数));
+        public void 戻り値の種類限度内単位数_日数は_設定した値と同じ種類限度内単位数_日数を返す() {
+            business = sut.set種類限度内単位数_日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度内単位数日数).build();
+            assertThat(business.get種類限度内単位数_日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度内単位数日数));
         }
 
         @Test
-        public void 戻り値の種類限度超過単位数・日数は_設定した値と同じ種類限度超過単位数・日数を返す() {
-            business = sut.set種類限度超過単位数・日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度超過単位数・日数).build();
-            assertThat(business.get種類限度超過単位数・日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度超過単位数・日数));
+        public void 戻り値の種類限度超過単位数_日数は_設定した値と同じ種類限度超過単位数_日数を返す() {
+            business = sut.set種類限度超過単位数_日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度超過単位数日数).build();
+            assertThat(business.get種類限度超過単位数_日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_種類限度超過単位数日数));
         }
 
         @Test
-        public void 戻り値の区分限度内単位数・日数は_設定した値と同じ区分限度内単位数・日数を返す() {
-            business = sut.set区分限度内単位数・日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度内単位数・日数).build();
-            assertThat(business.get区分限度内単位数・日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度内単位数・日数));
+        public void 戻り値の区分限度内単位数_日数は_設定した値と同じ区分限度内単位数_日数を返す() {
+            business = sut.set区分限度内単位数_日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度内単位数日数).build();
+            assertThat(business.get区分限度内単位数_日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度内単位数日数));
         }
 
         @Test
-        public void 戻り値の区分限度超過単位数・日数は_設定した値と同じ区分限度超過単位数・日数を返す() {
-            business = sut.set区分限度超過単位数・日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度超過単位数・日数).build();
-            assertThat(business.get区分限度超過単位数・日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度超過単位数・日数));
+        public void 戻り値の区分限度超過単位数_日数は_設定した値と同じ区分限度超過単位数_日数を返す() {
+            business = sut.set区分限度超過単位数_日数(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度超過単位数日数
+            ).build();
+            assertThat(business.get区分限度超過単位数_日数(), is(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator.DEFAULT_区分限度超過単位数日数));
         }
 
         @Test

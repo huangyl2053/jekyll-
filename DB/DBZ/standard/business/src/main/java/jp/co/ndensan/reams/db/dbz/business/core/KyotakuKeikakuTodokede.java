@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画届出を管理するクラスです。
  */
-public class KyotakuKeikakuTodokede extends ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
+public class KyotakuKeikakuTodokede extends ModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
 
     private final DbT3005KyotakuKeikakuTodokedeEntity entity;
     private final KyotakuKeikakuTodokedeIdentifier id;
@@ -33,8 +39,8 @@ public class KyotakuKeikakuTodokede extends ParentModelBase<KyotakuKeikakuTodoke
      * @param 履歴番号 履歴番号
      */
     public KyotakuKeikakuTodokede(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +49,10 @@ Decimal 履歴番号) {
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyotakuKeikakuTodokedeIdentifier(
-        被保険者番号,
-        対象年月,
-        履歴番号
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号
+        );
     }
 
     /**
@@ -207,22 +213,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 居宅給付計画届出のみを変更対象とします。<br/>
-     * {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyotakuKeikakuTodokede}
-     */
-    @Override
-    public KyotakuKeikakuTodokede modifiedModel() {
-        DbT3005KyotakuKeikakuTodokedeEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyotakuKeikakuTodokede(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する居宅給付計画届出を削除対象とします。<br/>
      * {@link DbT3005KyotakuKeikakuTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -239,6 +229,7 @@ Decimal 履歴番号) {
         }
         return new KyotakuKeikakuTodokede(deletedEntity, id);
     }
+
     /**
      * {@link KyotakuKeikakuTodokede}のシリアライズ形式を提供します。
      *
@@ -249,13 +240,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT3005KyotakuKeikakuTodokedeEntity entity;
         private final KyotakuKeikakuTodokedeIdentifier id;
 
-        private _SerializationProxy(DbT3005KyotakuKeikakuTodokedeEntity entity,KyotakuKeikakuTodokedeIdentifier id) {
+        private _SerializationProxy(DbT3005KyotakuKeikakuTodokedeEntity entity, KyotakuKeikakuTodokedeIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

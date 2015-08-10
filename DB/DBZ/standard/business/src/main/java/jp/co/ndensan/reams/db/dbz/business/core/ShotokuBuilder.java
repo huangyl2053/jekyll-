@@ -6,8 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link Shotoku}の編集を行うビルダークラスです。
@@ -65,7 +70,7 @@ public class ShotokuBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShotokuBuilder}
      */
-    public ShotokuBuilder set履歴番号(int 履歴番号) {
+    public ShotokuBuilder set履歴番号(Decimal 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -74,24 +79,24 @@ public class ShotokuBuilder {
     /**
      * 非課税区分（住民税減免前）を設定します。
      *
-     * @param 非課税区分（住民税減免前） 非課税区分（住民税減免前）
+     * @param 非課税区分_住民税減免前） 非課税区分（住民税減免前）
      * @return {@link ShotokuBuilder}
      */
-    public ShotokuBuilder set非課税区分（住民税減免前）(RString 非課税区分（住民税減免前）) {
-        requireNonNull(非課税区分（住民税減免前）, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免前）"));
-        entity.setHiKazeiKubun(非課税区分（住民税減免前）);
+    public ShotokuBuilder set非課税区分_住民税減免前(RString 非課税区分_住民税減免前) {
+        requireNonNull(非課税区分_住民税減免前, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免前）"));
+        entity.setHiKazeiKubun(非課税区分_住民税減免前);
         return this;
     }
 
     /**
      * 非課税区分（住民税減免後）を設定します。
      *
-     * @param 非課税区分（住民税減免後） 非課税区分（住民税減免後）
+     * @param 非課税区分_住民税減免後 非課税区分（住民税減免後）
      * @return {@link ShotokuBuilder}
      */
-    public ShotokuBuilder set非課税区分（住民税減免後）(RString 非課税区分（住民税減免後）) {
-        requireNonNull(非課税区分（住民税減免後）, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免後）"));
-        entity.setHiKazeiKubunGemmenGo(非課税区分（住民税減免後）);
+    public ShotokuBuilder set非課税区分_住民税減免後(RString 非課税区分_住民税減免後) {
+        requireNonNull(非課税区分_住民税減免後, UrSystemErrorMessages.値がnull.getReplacedMessage("非課税区分（住民税減免後）"));
+        entity.setHiKazeiKubunGemmenGo(非課税区分_住民税減免後);
         return this;
     }
 

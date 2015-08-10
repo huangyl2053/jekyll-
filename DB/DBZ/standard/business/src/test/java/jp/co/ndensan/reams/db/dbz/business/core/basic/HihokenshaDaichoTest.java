@@ -8,8 +8,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +35,16 @@ public class HihokenshaDaichoTest extends DbzTestBase {
     private static DbT1001HihokenshaDaichoEntity HihokenshaDaichoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
+        異動日 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_枝番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -45,34 +53,42 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity = new DbT1001HihokenshaDaichoEntity();
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaicho(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaicho(null, 異動日, 枝番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaicho(主キー名1, null);
+        public void 異動日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaicho(被保険者番号, null, 枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 枝番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaicho(被保険者番号, 異動日, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1001HihokenshaDaichoEntityにセットされている() {
-            sut = new HihokenshaDaicho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new HihokenshaDaicho(被保険者番号, 異動日, 枝番);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get異動日(), is(異動日));
+            assertThat(sut.get枝番(), is(枝番));
         }
 
         @Test
         public void 指定したキーが保持するHihokenshaDaichoIdentifierにセットされている() {
-            sut = new HihokenshaDaicho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new HihokenshaDaicho(被保険者番号, 異動日, 枝番);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -82,9 +98,10 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity = new DbT1001HihokenshaDaichoEntity();
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +114,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -109,8 +127,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Before
         public void setUp() {
             HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
         }
@@ -147,7 +166,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格取得事由コードは_entityが持つ資格取得事由コードを返す() {
-            assertThat(sut.get資格取得事由コード(), is(HihokenshaDaichoEntity.getShikakuShutokuJiyuCode()));
+            assertThat(sut.get資格取得事由コード(), is(HihokenshaDaichoEntity.getShikakuShutokuJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -172,7 +191,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格喪失事由コードは_entityが持つ資格喪失事由コードを返す() {
-            assertThat(sut.get資格喪失事由コード(), is(HihokenshaDaichoEntity.getShikakuSoshitsuJiyuCode()));
+            assertThat(sut.get資格喪失事由コード(), is(HihokenshaDaichoEntity.getShikakuSoshitsuJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -187,7 +206,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get資格変更事由コードは_entityが持つ資格変更事由コードを返す() {
-            assertThat(sut.get資格変更事由コード(), is(HihokenshaDaichoEntity.getShikakuHenkoJiyuCode()));
+            assertThat(sut.get資格変更事由コード(), is(HihokenshaDaichoEntity.getShikakuHenkoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -202,7 +221,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get住所地特例適用事由コードは_entityが持つ住所地特例適用事由コードを返す() {
-            assertThat(sut.get住所地特例適用事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiTekiyoJiyuCode()));
+            assertThat(sut.get住所地特例適用事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiTekiyoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -217,7 +236,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void get住所地特例解除事由コードは_entityが持つ住所地特例解除事由コードを返す() {
-            assertThat(sut.get住所地特例解除事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiKaijoJiyuCode()));
+            assertThat(sut.get住所地特例解除事由コード(), is(HihokenshaDaichoEntity.getJushochitokureiKaijoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -263,8 +282,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Before
         public void setUp() {
             HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
         }
@@ -282,15 +302,16 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Before
         public void setUp() {
             HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -302,8 +323,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Before
         public void setUp() {
             HihokenshaDaichoEntity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
 
         }
 

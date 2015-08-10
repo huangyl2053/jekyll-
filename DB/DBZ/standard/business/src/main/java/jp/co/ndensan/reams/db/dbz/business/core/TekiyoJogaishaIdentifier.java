@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -26,8 +29,8 @@ public class TekiyoJogaishaIdentifier implements Serializable {
      * @param 枝番 枝番
      */
     public TekiyoJogaishaIdentifier(ShikibetsuCode 識別コード,
-FlexibleDate 異動日,
-RString 枝番) {
+            FlexibleDate 異動日,
+            RString 枝番) {
         this.識別コード = 識別コード;
         this.異動日 = 異動日;
         this.枝番 = 枝番;

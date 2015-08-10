@@ -8,8 +8,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +33,16 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
     private static DbT1005KaigoJogaiTokureiTaishoShisetsuEntity KaigoJogaiTokureiTaishoShisetsuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 事業者種別;
+    private static RString 事業者番号;
+    private static FlexibleDate 有効開始日時;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー名2;
+        事業者種別 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+        事業者番号 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+        有効開始日時 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +52,41 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoJogaiTokureiTaishoShisetsu(null, 主キー名2);
+        public void 事業者種別がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoJogaiTokureiTaishoShisetsu(null, 事業者番号, 有効開始日時);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoJogaiTokureiTaishoShisetsu(主キー名1, null);
+        public void 事業者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoJogaiTokureiTaishoShisetsu(事業者種別, null, 有効開始日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 有効開始日時がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoJogaiTokureiTaishoShisetsu(事業者種別, 事業者番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1005KaigoJogaiTokureiTaishoShisetsuEntityにセットされている() {
-            sut = new KaigoJogaiTokureiTaishoShisetsu(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KaigoJogaiTokureiTaishoShisetsu(事業者種別, 事業者番号, 有効開始日時);
+            assertThat(sut.get事業者種別(), is(事業者種別));
+            assertThat(sut.get事業者番号(), is(事業者番号));
+            assertThat(sut.get有効開始年月日(), is(有効開始日時));
         }
 
         @Test
         public void 指定したキーが保持するKaigoJogaiTokureiTaishoShisetsuIdentifierにセットされている() {
-            sut = new KaigoJogaiTokureiTaishoShisetsu(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KaigoJogaiTokureiTaishoShisetsu(事業者種別, 事業者番号, 有効開始日時);
+            assertThat(sut.identifier().get事業者種別(), is(事業者種別));
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始日時));
         }
     }
 
@@ -83,8 +97,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +112,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
 
             sut = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get事業者種別(), is(事業者種別));
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始日時));
         }
     }
 
@@ -109,8 +125,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
 
             sut = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
         }
@@ -136,8 +153,8 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         }
 
         @Test
-        public void get管内・管外区分は_entityが持つ管内・管外区分を返す() {
-            assertThat(sut.get管内・管外区分(), is(KaigoJogaiTokureiTaishoShisetsuEntity.getKannaiKangaiKubun()));
+        public void get管内_管外区分は_entityが持つ管内_管外区分を返す() {
+            assertThat(sut.get管内_管外区分(), is(KaigoJogaiTokureiTaishoShisetsuEntity.getKannaiKangaiKubun()));
         }
 
         @Test
@@ -233,8 +250,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
 
             sut = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
         }
@@ -252,15 +270,16 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
 
             sut = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -272,8 +291,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
 
         }
 

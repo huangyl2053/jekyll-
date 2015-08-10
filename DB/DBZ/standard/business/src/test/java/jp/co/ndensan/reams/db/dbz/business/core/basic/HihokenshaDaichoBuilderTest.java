@@ -6,9 +6,12 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,17 +29,19 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
     private static DbT1001HihokenshaDaichoEntity HihokenshaDaichoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
+        異動日 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_枝番;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static HihokenshaDaichoBuilder sut;
         private static HihokenshaDaicho business;
@@ -44,14 +49,16 @@ public class HihokenshaDaichoBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             HihokenshaDaichoEntity = new DbT1001HihokenshaDaichoEntity();
-            HihokenshaDaichoEntity.setXXX(主キー名1);
-            HihokenshaDaichoEntity.setXXX(主キー名2);
+            HihokenshaDaichoEntity.setHihokenshaNo(被保険者番号);
+            HihokenshaDaichoEntity.setIdoYMD(異動日);
+            HihokenshaDaichoEntity.setEdaNo(枝番);
 
             business = new HihokenshaDaicho(HihokenshaDaichoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号).build();

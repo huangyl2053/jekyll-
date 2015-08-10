@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1008IryohokenKanyuJokyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1008IryohokenKanyuJokyoEntityGenerator;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +33,14 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
     private static DbT1008IryohokenKanyuJokyoEntity IryohokenKanyuJokyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_識別コード;
+        履歴番号 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +50,33 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new IryohokenKanyuJokyo(null, 主キー名2);
+            sut = new IryohokenKanyuJokyo(null, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new IryohokenKanyuJokyo(主キー名1, null);
+            sut = new IryohokenKanyuJokyo(識別コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1008IryohokenKanyuJokyoEntityにセットされている() {
-            sut = new IryohokenKanyuJokyo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new IryohokenKanyuJokyo(識別コード, 履歴番号);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するIryohokenKanyuJokyoIdentifierにセットされている() {
-            sut = new IryohokenKanyuJokyo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new IryohokenKanyuJokyo(識別コード, 履歴番号);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -83,8 +87,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +101,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
 
             sut = new IryohokenKanyuJokyo(IryohokenKanyuJokyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -109,8 +113,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
 
             sut = new IryohokenKanyuJokyo(IryohokenKanyuJokyoEntity);
         }
@@ -173,8 +177,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
 
             sut = new IryohokenKanyuJokyo(IryohokenKanyuJokyoEntity);
         }
@@ -192,15 +196,15 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
 
             sut = new IryohokenKanyuJokyo(IryohokenKanyuJokyoEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -212,8 +216,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Before
         public void setUp() {
             IryohokenKanyuJokyoEntity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            IryohokenKanyuJokyoEntity.setXXX(主キー名1);
-            IryohokenKanyuJokyoEntity.setXXX(主キー名2);
+            IryohokenKanyuJokyoEntity.setShikibetsuCode(識別コード);
+            IryohokenKanyuJokyoEntity.setRirekiNo(履歴番号);
 
         }
 

@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画自己作成明細を管理するクラスです。
  */
-public class KyotakuKeikakuJikosakuseiMeisai extends ParentModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, KyotakuKeikakuJikosakuseiMeisai> implements Serializable {
+public class KyotakuKeikakuJikosakuseiMeisai extends ModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, KyotakuKeikakuJikosakuseiMeisai> implements Serializable {
 
     private final DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity;
     private final KyotakuKeikakuJikosakuseiMeisaiIdentifier id;
@@ -37,12 +42,12 @@ public class KyotakuKeikakuJikosakuseiMeisai extends ParentModelBase<KyotakuKeik
      * @param サービス項目コード サービス項目コード
      */
     public KyotakuKeikakuJikosakuseiMeisai(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号,
-RString 居宅サービス区分,
-JigyoshaNo サービス提供事業者番号,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号,
+            RString 居宅サービス区分,
+            JigyoshaNo サービス提供事業者番号,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -59,21 +64,22 @@ ServiceKomokuCode サービス項目コード) {
         this.entity.setServiceShuruiCode(サービス種類コード);
         this.entity.setServiceKomokuCode(サービス項目コード);
         this.id = new KyotakuKeikakuJikosakuseiMeisaiIdentifier(
-        被保険者番号,
-        対象年月,
-        履歴番号,
-        居宅サービス区分,
-        サービス提供事業者番号,
-        サービス種類コード,
-        サービス項目コード
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号,
+                居宅サービス区分,
+                サービス提供事業者番号,
+                サービス種類コード,
+                サービス項目コード
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}より{@link KyotakuKeikakuJikosakuseiMeisai}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}
      */
     public KyotakuKeikakuJikosakuseiMeisai(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成明細"));
@@ -177,27 +183,27 @@ ServiceKomokuCode サービス項目コード) {
     /**
      * 回数・日数を返します。
      *
-     * @return 回数・日数
+     * @return 回数_日数
      */
-    public Decimal get回数・日数() {
+    public Decimal get回数_日数() {
         return entity.getKaisu_Nissu();
     }
 
     /**
      * 種類限度内単位数・日数を返します。
      *
-     * @return 種類限度内単位数・日数
+     * @return 種類限度内単位数_日数
      */
-    public Decimal get種類限度内単位数・日数() {
+    public Decimal get種類限度内単位数_日数() {
         return entity.getShuruiGendoNaiTaniSu_Nissu();
     }
 
     /**
      * 種類限度超過単位数・日数を返します。
      *
-     * @return 種類限度超過単位数・日数
+     * @return 種類限度超過単位数_日数
      */
-    public Decimal get種類限度超過単位数・日数() {
+    public Decimal get種類限度超過単位数_日数() {
         return entity.getShuruiGendoChokaTaniSu_Nissu();
     }
 
@@ -206,7 +212,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 区分限度内単位数・日数
      */
-    public Decimal get区分限度内単位数・日数() {
+    public Decimal get区分限度内単位数_日数() {
         return entity.getKubunGendoNaiTaniSu_Nissu();
     }
 
@@ -215,7 +221,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 区分限度超過単位数・日数
      */
-    public Decimal get区分限度超過単位数・日数() {
+    public Decimal get区分限度超過単位数_日数() {
         return entity.getKubunGendoChokaTaniSu_Nissu();
     }
 
@@ -285,22 +291,6 @@ ServiceKomokuCode サービス項目コード) {
     }
 
     /**
-     * 居宅給付計画自己作成明細のみを変更対象とします。<br/>
-     * {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyotakuKeikakuJikosakuseiMeisai}
-     */
-    @Override
-    public KyotakuKeikakuJikosakuseiMeisai modifiedModel() {
-        DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyotakuKeikakuJikosakuseiMeisai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する居宅給付計画自己作成明細を削除対象とします。<br/>
      * {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -317,6 +307,7 @@ ServiceKomokuCode サービス項目コード) {
         }
         return new KyotakuKeikakuJikosakuseiMeisai(deletedEntity, id);
     }
+
     /**
      * {@link KyotakuKeikakuJikosakuseiMeisai}のシリアライズ形式を提供します。
      *
@@ -327,13 +318,19 @@ ServiceKomokuCode サービス項目コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity;
         private final KyotakuKeikakuJikosakuseiMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity,KyotakuKeikakuJikosakuseiMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity, KyotakuKeikakuJikosakuseiMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

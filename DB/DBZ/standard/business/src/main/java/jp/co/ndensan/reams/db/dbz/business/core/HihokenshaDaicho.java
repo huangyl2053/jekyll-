@@ -6,12 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 被保険者台帳管理を管理するクラスです。
  */
-public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho> implements Serializable {
+public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho> implements Serializable {
 
     private final DbT1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoIdentifier id;
@@ -141,7 +140,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      * @return 資格取得事由コード
      */
     public RString get資格取得事由コード() {
-        return entity.getShikakuShutokuJiyuCode();
+        return entity.getShikakuShutokuJiyuCode().getColumnValue().getColumnValue();
     }
 
     /**
@@ -186,7 +185,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      * @return 資格喪失事由コード
      */
     public RString get資格喪失事由コード() {
-        return entity.getShikakuSoshitsuJiyuCode();
+        return entity.getShikakuSoshitsuJiyuCode().getMeisho();
     }
 
     /**
@@ -213,7 +212,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      * @return 資格変更事由コード
      */
     public RString get資格変更事由コード() {
-        return entity.getShikakuHenkoJiyuCode();
+        return entity.getShikakuHenkoJiyuCode().getMeisho();
     }
 
     /**
@@ -240,7 +239,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      * @return 住所地特例適用事由コード
      */
     public RString get住所地特例適用事由コード() {
-        return entity.getJushochitokureiTekiyoJiyuCode();
+        return entity.getJushochitokureiTekiyoJiyuCode().getMeisho();
     }
 
     /**
@@ -267,7 +266,7 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
      * @return 住所地特例解除事由コード
      */
     public RString get住所地特例解除事由コード() {
-        return entity.getJushochitokureiKaijoJiyuCode();
+        return entity.getJushochitokureiKaijoJiyuCode().getMeisho();
     }
 
     /**
@@ -354,22 +353,6 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
     }
 
     /**
-     * 被保険者台帳管理のみを変更対象とします。<br/>
-     * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link HihokenshaDaicho}
-     */
-    @Override
-    public HihokenshaDaicho modifiedModel() {
-        DbT1001HihokenshaDaichoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new HihokenshaDaicho(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する被保険者台帳管理を削除対象とします。<br/>
      * {@link DbT1001HihokenshaDaichoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -397,9 +380,15 @@ public class HihokenshaDaicho extends ParentModelBase<HihokenshaDaichoIdentifier
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1001HihokenshaDaichoEntity entity;
         private final HihokenshaDaichoIdentifier id;
 

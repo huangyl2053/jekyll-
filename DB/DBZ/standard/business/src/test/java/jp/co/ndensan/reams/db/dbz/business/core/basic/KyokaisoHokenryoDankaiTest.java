@@ -8,8 +8,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1007KyokaisoHokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +34,16 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
     private static DbT1007KyokaisoHokenryoDankaiEntity KyokaisoHokenryoDankaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static Decimal 履歴番号;
+    private static FlexibleYearMonth 適用開始年月日;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
+        履歴番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+        適用開始年月日 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +53,41 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoHokenryoDankai(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyokaisoHokenryoDankai(null, 履歴番号, 適用開始年月日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoHokenryoDankai(主キー名1, null);
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyokaisoHokenryoDankai(被保険者番号, null, 適用開始年月日);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 適用開始年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1007KyokaisoHokenryoDankaiEntityにセットされている() {
-            sut = new KyokaisoHokenryoDankai(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, 適用開始年月日);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get履歴番号(), is(履歴番号));
+            assertThat(sut.get適用開始年月(), is(適用開始年月日));
         }
 
         @Test
         public void 指定したキーが保持するKyokaisoHokenryoDankaiIdentifierにセットされている() {
-            sut = new KyokaisoHokenryoDankai(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, 適用開始年月日);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
         }
     }
 
@@ -83,8 +98,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +113,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
         }
     }
 
@@ -109,8 +126,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
         }
@@ -148,8 +166,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
         }
@@ -167,15 +186,16 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -187,8 +207,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名1);
-            KyokaisoHokenryoDankaiEntity.setXXX(主キー名2);
+            KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
+            KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
         }
 

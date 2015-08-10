@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画自己作成を管理するクラスです。
  */
-public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei> implements Serializable {
+public class KyotakuKeikakuJikoSakusei extends ModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei> implements Serializable {
 
     private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
     private final KyotakuKeikakuJikoSakuseiIdentifier id;
@@ -33,8 +35,8 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
      * @param 履歴番号 履歴番号
      */
     public KyotakuKeikakuJikoSakusei(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +45,10 @@ Decimal 履歴番号) {
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyotakuKeikakuJikoSakuseiIdentifier(
-        被保険者番号,
-        対象年月,
-        履歴番号
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号
+        );
     }
 
     /**
@@ -110,7 +112,7 @@ Decimal 履歴番号) {
      *
      * @return 居宅・総合事業区分
      */
-    public RString get居宅・総合事業区分() {
+    public RString get居宅_総合事業区分() {
         return entity.getKyotaku_SogoJigyoKubun();
     }
 
@@ -189,22 +191,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 居宅給付計画自己作成のみを変更対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
-     */
-    @Override
-    public KyotakuKeikakuJikoSakusei modifiedModel() {
-        DbT3007KyotakuKeikakuJikoSakuseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyotakuKeikakuJikoSakusei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する居宅給付計画自己作成を削除対象とします。<br/>
      * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -221,6 +207,7 @@ Decimal 履歴番号) {
         }
         return new KyotakuKeikakuJikoSakusei(deletedEntity, id);
     }
+
     /**
      * {@link KyotakuKeikakuJikoSakusei}のシリアライズ形式を提供します。
      *
@@ -231,13 +218,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
         private final KyotakuKeikakuJikoSakuseiIdentifier id;
 
-        private _SerializationProxy(DbT3007KyotakuKeikakuJikoSakuseiEntity entity,KyotakuKeikakuJikoSakuseiIdentifier id) {
+        private _SerializationProxy(DbT3007KyotakuKeikakuJikoSakuseiEntity entity, KyotakuKeikakuJikoSakuseiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

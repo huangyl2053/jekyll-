@@ -6,20 +6,21 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1007KyokaisoHokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankaiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 境界層保険料段階を管理するクラスです。
  */
-public class KyokaisoHokenryoDankai extends ParentModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai> implements Serializable {
+public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai> implements Serializable {
 
     private final DbT1007KyokaisoHokenryoDankaiEntity entity;
     private final KyokaisoHokenryoDankaiIdentifier id;
@@ -33,8 +34,8 @@ public class KyokaisoHokenryoDankai extends ParentModelBase<KyokaisoHokenryoDank
      * @param 適用開始年月 適用開始年月
      */
     public KyokaisoHokenryoDankai(HihokenshaNo 被保険者番号,
-Decimal 履歴番号,
-FlexibleYearMonth 適用開始年月) {
+            Decimal 履歴番号,
+            FlexibleYearMonth 適用開始年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
@@ -43,10 +44,10 @@ FlexibleYearMonth 適用開始年月) {
         this.entity.setRirekiNo(履歴番号);
         this.entity.setTekiyoKaishiYM(適用開始年月);
         this.id = new KyokaisoHokenryoDankaiIdentifier(
-        被保険者番号,
-        履歴番号,
-        適用開始年月
-                );
+                被保険者番号,
+                履歴番号,
+                適用開始年月
+        );
     }
 
     /**
@@ -60,7 +61,8 @@ FlexibleYearMonth 適用開始年月) {
         this.id = new KyokaisoHokenryoDankaiIdentifier(
                 entity.getHihokenshaNo(),
                 entity.getRirekiNo(),
-                entity.getTekiyoKaishiYM());
+                entity.getTekiyoKaishiYM()
+        );
     }
 
     /**
@@ -144,22 +146,6 @@ FlexibleYearMonth 適用開始年月) {
     }
 
     /**
-     * 境界層保険料段階のみを変更対象とします。<br/>
-     * {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyokaisoHokenryoDankai}
-     */
-    @Override
-    public KyokaisoHokenryoDankai modifiedModel() {
-        DbT1007KyokaisoHokenryoDankaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyokaisoHokenryoDankai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する境界層保険料段階を削除対象とします。<br/>
      * {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -176,6 +162,7 @@ FlexibleYearMonth 適用開始年月) {
         }
         return new KyokaisoHokenryoDankai(deletedEntity, id);
     }
+
     /**
      * {@link KyokaisoHokenryoDankai}のシリアライズ形式を提供します。
      *
@@ -186,13 +173,19 @@ FlexibleYearMonth 適用開始年月) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1007KyokaisoHokenryoDankaiEntity entity;
         private final KyokaisoHokenryoDankaiIdentifier id;
 
-        private _SerializationProxy(DbT1007KyokaisoHokenryoDankaiEntity entity,KyokaisoHokenryoDankaiIdentifier id) {
+        private _SerializationProxy(DbT1007KyokaisoHokenryoDankaiEntity entity, KyokaisoHokenryoDankaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

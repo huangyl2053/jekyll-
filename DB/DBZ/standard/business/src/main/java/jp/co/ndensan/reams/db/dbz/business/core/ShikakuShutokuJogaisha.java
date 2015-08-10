@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 資格取得除外者を管理するクラスです。
  */
-public class ShikakuShutokuJogaisha extends ParentModelBase<ShikakuShutokuJogaishaIdentifier, DbT1009ShikakuShutokuJogaishaEntity, ShikakuShutokuJogaisha> implements Serializable {
+public class ShikakuShutokuJogaisha extends ModelBase<ShikakuShutokuJogaishaIdentifier, DbT1009ShikakuShutokuJogaishaEntity, ShikakuShutokuJogaisha> implements Serializable {
 
     private final DbT1009ShikakuShutokuJogaishaEntity entity;
     private final ShikakuShutokuJogaishaIdentifier id;
@@ -32,16 +34,16 @@ public class ShikakuShutokuJogaisha extends ParentModelBase<ShikakuShutokuJogais
      * @param 履歴番号 履歴番号
      */
     public ShikakuShutokuJogaisha(ShikibetsuCode 識別コード,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1009ShikakuShutokuJogaishaEntity();
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShikakuShutokuJogaishaIdentifier(
-        識別コード,
-        履歴番号
-                );
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
@@ -147,22 +149,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 資格取得除外者のみを変更対象とします。<br/>
-     * {@link DbT1009ShikakuShutokuJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShikakuShutokuJogaisha}
-     */
-    @Override
-    public ShikakuShutokuJogaisha modifiedModel() {
-        DbT1009ShikakuShutokuJogaishaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShikakuShutokuJogaisha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する資格取得除外者を削除対象とします。<br/>
      * {@link DbT1009ShikakuShutokuJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -179,6 +165,7 @@ Decimal 履歴番号) {
         }
         return new ShikakuShutokuJogaisha(deletedEntity, id);
     }
+
     /**
      * {@link ShikakuShutokuJogaisha}のシリアライズ形式を提供します。
      *
@@ -189,13 +176,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT1009ShikakuShutokuJogaishaEntity entity;
         private final ShikakuShutokuJogaishaIdentifier id;
 
-        private _SerializationProxy(DbT1009ShikakuShutokuJogaishaEntity entity,ShikakuShutokuJogaishaIdentifier id) {
+        private _SerializationProxy(DbT1009ShikakuShutokuJogaishaEntity entity, ShikakuShutokuJogaishaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

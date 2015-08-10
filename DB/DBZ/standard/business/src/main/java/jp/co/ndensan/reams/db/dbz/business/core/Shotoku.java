@@ -6,20 +6,21 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護所得を管理するクラスです。
  */
-public class Shotoku extends ParentModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, Shotoku> implements Serializable {
+public class Shotoku extends ModelBase<ShotokuIdentifier, DbT2008ShotokuEntity, Shotoku> implements Serializable {
 
     private final DbT2008ShotokuEntity entity;
     private final ShotokuIdentifier id;
@@ -33,8 +34,8 @@ public class Shotoku extends ParentModelBase<ShotokuIdentifier, DbT2008ShotokuEn
      * @param 履歴番号 履歴番号
      */
     public Shotoku(FlexibleYear 所得年度,
-ShikibetsuCode 識別コード,
-int 履歴番号) {
+            ShikibetsuCode 識別コード,
+            Decimal 履歴番号) {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +44,10 @@ int 履歴番号) {
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShotokuIdentifier(
-        所得年度,
-        識別コード,
-        履歴番号
-                );
+                所得年度,
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
@@ -101,7 +102,7 @@ int 履歴番号) {
      *
      * @return 履歴番号
      */
-    public int get履歴番号() {
+    public Decimal get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -110,7 +111,7 @@ int 履歴番号) {
      *
      * @return 非課税区分（住民税減免前）
      */
-    public RString get非課税区分（住民税減免前）() {
+    public RString get非課税区分_住民税減免前() {
         return entity.getHiKazeiKubun();
     }
 
@@ -119,7 +120,7 @@ int 履歴番号) {
      *
      * @return 非課税区分（住民税減免後）
      */
-    public RString get非課税区分（住民税減免後）() {
+    public RString get非課税区分_住民税減免後() {
         return entity.getHiKazeiKubunGemmenGo();
     }
 
@@ -171,22 +172,6 @@ int 履歴番号) {
     }
 
     /**
-     * 介護所得のみを変更対象とします。<br/>
-     * {@link DbT2008ShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link Shotoku}
-     */
-    @Override
-    public Shotoku modifiedModel() {
-        DbT2008ShotokuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new Shotoku(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護所得を削除対象とします。<br/>
      * {@link DbT2008ShotokuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -203,6 +188,7 @@ int 履歴番号) {
         }
         return new Shotoku(deletedEntity, id);
     }
+
     /**
      * {@link Shotoku}のシリアライズ形式を提供します。
      *
@@ -213,13 +199,19 @@ int 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2008ShotokuEntity entity;
         private final ShotokuIdentifier id;
 
-        private _SerializationProxy(DbT2008ShotokuEntity entity,ShotokuIdentifier id) {
+        private _SerializationProxy(DbT2008ShotokuEntity entity, ShotokuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画事業者作成を管理するクラスです。
  */
-public class KyotakuKeikakuJigyoshaSakusei extends ParentModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei> implements Serializable {
+public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei> implements Serializable {
 
     private final DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity;
     private final KyotakuKeikakuJigyoshaSakuseiIdentifier id;
@@ -31,17 +34,20 @@ public class KyotakuKeikakuJigyoshaSakusei extends ParentModelBase<KyotakuKeikak
      * @param 対象年月 対象年月
      * @param 履歴番号 履歴番号
      */
-    public KyotakuKeikakuJigyoshaSakusei(FlexibleYearMonth 対象年月,
-Decimal 履歴番号) {
+    public KyotakuKeikakuJigyoshaSakusei(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
-        対象年月,
-        履歴番号
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号
+        );
     }
 
     /**
@@ -53,6 +59,7 @@ Decimal 履歴番号) {
     public KyotakuKeikakuJigyoshaSakusei(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画事業者作成"));
         this.id = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
+                entity.getHihokenshano(),
                 entity.getTaishoYM(),
                 entity.getRirekiNo());
     }
@@ -77,8 +84,8 @@ Decimal 履歴番号) {
      *
      * @return 被保険者番号
      */
-    public none get被保険者番号() {
-        return entity.getNone();
+    public HihokenshaNo get被保険者番号() {
+        return entity.getHihokenshano();
     }
 
     /**
@@ -183,22 +190,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 居宅給付計画事業者作成のみを変更対象とします。<br/>
-     * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyotakuKeikakuJigyoshaSakusei}
-     */
-    @Override
-    public KyotakuKeikakuJigyoshaSakusei modifiedModel() {
-        DbT3006KyotakuKeikakuJigyoshaSakuseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyotakuKeikakuJigyoshaSakusei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する居宅給付計画事業者作成を削除対象とします。<br/>
      * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -215,6 +206,7 @@ Decimal 履歴番号) {
         }
         return new KyotakuKeikakuJigyoshaSakusei(deletedEntity, id);
     }
+
     /**
      * {@link KyotakuKeikakuJigyoshaSakusei}のシリアライズ形式を提供します。
      *
@@ -225,13 +217,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity;
         private final KyotakuKeikakuJigyoshaSakuseiIdentifier id;
 
-        private _SerializationProxy(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity,KyotakuKeikakuJigyoshaSakuseiIdentifier id) {
+        private _SerializationProxy(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity, KyotakuKeikakuJigyoshaSakuseiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

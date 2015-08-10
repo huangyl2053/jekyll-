@@ -5,11 +5,16 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakuseiGokei;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +34,22 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
     private static DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity KyotakuKeikakuJikoSakuseiGokeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth 対象年月;
+    private static Decimal 履歴番号;
+    private static RString 居宅サービス区分;
+    private static JigyoshaNo 事業者番号;
+    private static ServiceShuruiCode サービス種類コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
+        対象年月 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
+        履歴番号 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号;
+        居宅サービス区分 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分;
+        事業者番号 = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号;
+        サービス種類コード = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +59,65 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuJikoSakuseiGokei(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(null, 対象年月, 履歴番号, 居宅サービス区分, 事業者番号, サービス種類コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuJikoSakuseiGokei(主キー名1, null);
+        public void 対象年月がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, null, 履歴番号, 居宅サービス区分, 事業者番号, サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, null, 居宅サービス区分, 事業者番号, サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 居宅サービス区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, 履歴番号, null, 事業者番号, サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 事業者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, 履歴番号, 居宅サービス区分, null, サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void サービス種類コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, 履歴番号, 居宅サービス区分, 事業者番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT3009KyotakuKeikakuJikoSakuseiGokeiEntityにセットされている() {
-            sut = new KyotakuKeikakuJikoSakuseiGokei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, 履歴番号, 居宅サービス区分, 事業者番号, サービス種類コード);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get対象年月(), is(対象年月));
+            assertThat(sut.get履歴番号(), is(履歴番号));
+            assertThat(sut.get居宅サービス区分(), is(居宅サービス区分));
+            assertThat(sut.getサービス提供事業者番号(), is(事業者番号));
+            assertThat(sut.getサービス種類コード(), is(サービス種類コード));
         }
 
         @Test
         public void 指定したキーが保持するKyotakuKeikakuJikoSakuseiGokeiIdentifierにセットされている() {
-            sut = new KyotakuKeikakuJikoSakuseiGokei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyotakuKeikakuJikoSakuseiGokei(被保険者番号, 対象年月, 履歴番号, 居宅サービス区分, 事業者番号, サービス種類コード);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
+            assertThat(sut.identifier().getサービス提供事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
         }
     }
 
@@ -83,8 +128,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,9 +145,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         public void 指定したDbT3009KyotakuKeikakuJikoSakuseiGokeiEntityのキー情報を識別子が持つ() {
 
             sut = new KyotakuKeikakuJikoSakuseiGokei(KyotakuKeikakuJikoSakuseiGokeiEntity);
-
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
+            assertThat(sut.identifier().getサービス提供事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
         }
     }
 
@@ -109,8 +161,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
 
             sut = new KyotakuKeikakuJikoSakuseiGokei(KyotakuKeikakuJikoSakuseiGokeiEntity);
         }
@@ -158,8 +214,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
 
             sut = new KyotakuKeikakuJikoSakuseiGokei(KyotakuKeikakuJikoSakuseiGokeiEntity);
         }
@@ -177,8 +237,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
 
             sut = new KyotakuKeikakuJikoSakuseiGokei(KyotakuKeikakuJikoSakuseiGokeiEntity);
         }
@@ -197,8 +261,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiGokeiEntity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setRirekiNo(履歴番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setKyotakuServiceKubun(居宅サービス区分);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceTeikyoJigyoshaNo(事業者番号);
+            KyotakuKeikakuJikoSakuseiGokeiEntity.setServiceShuruiCode(サービス種類コード);
 
         }
 

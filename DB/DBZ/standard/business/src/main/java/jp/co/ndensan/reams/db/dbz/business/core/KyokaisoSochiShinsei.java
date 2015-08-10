@@ -10,16 +10,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1013KyokaisoSochiShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1013KyokaisoSochiShinseiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 境界層措置申請を管理するクラスです。
  */
-public class KyokaisoSochiShinsei extends ParentModelBase<KyokaisoSochiShinseiIdentifier, DbT1013KyokaisoSochiShinseiEntity, KyokaisoSochiShinsei> implements Serializable {
+public class KyokaisoSochiShinsei extends ModelBase<KyokaisoSochiShinseiIdentifier, DbT1013KyokaisoSochiShinseiEntity, KyokaisoSochiShinsei> implements Serializable {
 
     private final DbT1013KyokaisoSochiShinseiEntity entity;
     private final KyokaisoSochiShinseiIdentifier id;
@@ -32,16 +36,16 @@ public class KyokaisoSochiShinsei extends ParentModelBase<KyokaisoSochiShinseiId
      * @param 履歴番号 履歴番号
      */
     public KyokaisoSochiShinsei(HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1013KyokaisoSochiShinseiEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyokaisoSochiShinseiIdentifier(
-        被保険者番号,
-        履歴番号
-                );
+                被保険者番号,
+                履歴番号
+        );
     }
 
     /**
@@ -111,18 +115,18 @@ Decimal 履歴番号) {
     /**
      * 申請・廃止区分を返します。
      *
-     * @return 申請・廃止区分
+     * @return 申請/廃止区分
      */
-    public RString get申請・廃止区分() {
+    public RString get申請_廃止区分() {
         return entity.getShinsei_HaishiKubun();
     }
 
     /**
      * 申請・廃止年月日を返します。
      *
-     * @return 申請・廃止年月日
+     * @return 申請/廃止年月日
      */
-    public FlexibleDate get申請・廃止年月日() {
+    public FlexibleDate get申請_廃止年月日() {
         return entity.getShinsei_HaishiYMD();
     }
 
@@ -147,63 +151,63 @@ Decimal 履歴番号) {
     /**
      * 給付額減額取消・減額自己負担月額を返します。
      *
-     * @return 給付額減額取消・減額自己負担月額
+     * @return 給付額減額取消/減額自己負担月額
      */
-    public Decimal get給付額減額取消・減額自己負担月額() {
+    public Decimal get給付額減額取消_減額自己負担月額() {
         return entity.getKyufuGengakuTorikeshi_GengakuJikofutanGetsugaku();
     }
 
     /**
      * 居住費軽減・減額自己負担月額を返します。
      *
-     * @return 居住費軽減・減額自己負担月額
+     * @return 居住費軽減/減額自己負担月額
      */
-    public Decimal get居住費軽減・減額自己負担月額() {
+    public Decimal get居住費軽減_減額自己負担月額() {
         return entity.getKyojuhiKeigen_GengakuJikofutanGetsugaku();
     }
 
     /**
      * 居住費軽減・負担限度額段階コードを返します。
      *
-     * @return 居住費軽減・負担限度額段階コード
+     * @return 居住費軽減/負担限度額段階コード
      */
-    public RString get居住費軽減・負担限度額段階コード() {
+    public RString get居住費軽減_負担限度額段階コード() {
         return entity.getKyojuhiKeigen_FutangendogakuDankaiCode();
     }
 
     /**
      * 食費軽減・減額自己負担月額を返します。
      *
-     * @return 食費軽減・減額自己負担月額
+     * @return 食費軽減/減額自己負担月額
      */
-    public Decimal get食費軽減・減額自己負担月額() {
+    public Decimal get食費軽減_減額自己負担月額() {
         return entity.getShokuhiKeigen_GengakuJikofutanGetsugaku();
     }
 
     /**
      * 食費軽減・負担限度額段階コードを返します。
      *
-     * @return 食費軽減・負担限度額段階コード
+     * @return 食費軽減/負担限度額段階コード
      */
-    public RString get食費軽減・負担限度額段階コード() {
+    public RString get食費軽減_負担限度額段階コード() {
         return entity.getShokuhiKeigen_FutangendogakuDankaiCode();
     }
 
     /**
      * 利用者負担世帯合算額・減額自己負担月額を返します。
      *
-     * @return 利用者負担世帯合算額・減額自己負担月額
+     * @return 利用者負担世帯合算額/減額自己負担月額
      */
-    public Decimal get利用者負担世帯合算額・減額自己負担月額() {
+    public Decimal get利用者負担世帯合算額_減額自己負担月額() {
         return entity.getRiyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku();
     }
 
     /**
      * 保険料減額・減額自己負担月額を返します。
      *
-     * @return 保険料減額・減額自己負担月額
+     * @return 保険料減額/減額自己負担月額
      */
-    public Decimal get保険料減額・減額自己負担月額() {
+    public Decimal get保険料減額_減額自己負担月額() {
         return entity.getHokenryoGengaku_GengakuJikofutanGetsugaku();
     }
 
@@ -228,9 +232,9 @@ Decimal 履歴番号) {
     /**
      * 措置該当・非該当区分を返します。
      *
-     * @return 措置該当・非該当区分
+     * @return 措置該当/非該当区分
      */
-    public RString get措置該当・非該当区分() {
+    public RString get措置該当_非該当区分() {
         return entity.getSochiGaito_HigaitoKubun();
     }
 
@@ -255,22 +259,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 境界層措置申請のみを変更対象とします。<br/>
-     * {@link DbT1013KyokaisoSochiShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyokaisoSochiShinsei}
-     */
-    @Override
-    public KyokaisoSochiShinsei modifiedModel() {
-        DbT1013KyokaisoSochiShinseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyokaisoSochiShinsei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する境界層措置申請を削除対象とします。<br/>
      * {@link DbT1013KyokaisoSochiShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -287,6 +275,7 @@ Decimal 履歴番号) {
         }
         return new KyokaisoSochiShinsei(deletedEntity, id);
     }
+
     /**
      * {@link KyokaisoSochiShinsei}のシリアライズ形式を提供します。
      *
@@ -297,13 +286,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1013KyokaisoSochiShinseiEntity entity;
         private final KyokaisoSochiShinseiIdentifier id;
 
-        private _SerializationProxy(DbT1013KyokaisoSochiShinseiEntity entity,KyokaisoSochiShinseiIdentifier id) {
+        private _SerializationProxy(DbT1013KyokaisoSochiShinseiEntity entity, KyokaisoSochiShinseiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

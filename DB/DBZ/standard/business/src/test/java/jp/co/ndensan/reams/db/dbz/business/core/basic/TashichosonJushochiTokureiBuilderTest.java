@@ -6,9 +6,12 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,17 +29,19 @@ public class TashichosonJushochiTokureiBuilderTest extends DbzTestBase {
     private static DbT1003TashichosonJushochiTokureiEntity TashichosonJushochiTokureiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+        異動日 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static TashichosonJushochiTokureiBuilder sut;
         private static TashichosonJushochiTokurei business;
@@ -44,14 +49,16 @@ public class TashichosonJushochiTokureiBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = new DbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
 
             business = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
             business = sut.set識別コード(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード).build();

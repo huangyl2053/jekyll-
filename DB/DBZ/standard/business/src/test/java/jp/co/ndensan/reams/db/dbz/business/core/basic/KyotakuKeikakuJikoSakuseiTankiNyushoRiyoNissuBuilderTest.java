@@ -6,9 +6,14 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,17 +31,19 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilderTest extends Db
     private static DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth 対象年月;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
+        対象年月 = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_対象年月;
+        履歴番号 = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilder sut;
         private static KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu business;
@@ -44,14 +51,16 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuBuilderTest extends Db
         @Before
         public void setUp() {
             KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity = new DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity();
-            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.setXXX(主キー名1);
-            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.setXXX(主キー名2);
+            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.setHihokenshaNo(被保険者番号);
+            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.setTaishoYM(対象年月);
+            KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity.setRirekiNo(履歴番号);
 
             business = new KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.DEFAULT_被保険者番号).build();

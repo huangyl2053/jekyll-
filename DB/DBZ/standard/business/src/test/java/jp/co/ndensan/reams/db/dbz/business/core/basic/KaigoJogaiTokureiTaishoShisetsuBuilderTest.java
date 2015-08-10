@@ -6,9 +6,13 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsuBuilder;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -26,17 +30,19 @@ public class KaigoJogaiTokureiTaishoShisetsuBuilderTest extends DbzTestBase {
     private static DbT1005KaigoJogaiTokureiTaishoShisetsuEntity KaigoJogaiTokureiTaishoShisetsuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 事業者種別;
+    private static RString 事業者番号;
+    private static FlexibleDate 有効開始日時;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー名2;
+        事業者種別 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+        事業者番号 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+        有効開始日時 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KaigoJogaiTokureiTaishoShisetsuBuilder sut;
         private static KaigoJogaiTokureiTaishoShisetsu business;
@@ -44,14 +50,16 @@ public class KaigoJogaiTokureiTaishoShisetsuBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoJogaiTokureiTaishoShisetsuEntity = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名1);
-            KaigoJogaiTokureiTaishoShisetsuEntity.setXXX(主キー名2);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaShubetsu(事業者種別);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setJigyoshaNo(事業者番号);
+            KaigoJogaiTokureiTaishoShisetsuEntity.setYukoKaishiYMD(有効開始日時);
 
             business = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の事業者種別は_設定した値と同じ事業者種別を返す() {
             business = sut.set事業者種別(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別).build();
@@ -77,9 +85,9 @@ public class KaigoJogaiTokureiTaishoShisetsuBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の管内・管外区分は_設定した値と同じ管内・管外区分を返す() {
-            business = sut.set管内・管外区分(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_管内・管外区分).build();
-            assertThat(business.get管内・管外区分(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_管内・管外区分));
+        public void 戻り値の管内_管外区分は_設定した値と同じ管内_管外区分を返す() {
+            business = sut.set管内_管外区分(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_管内管外区分).build();
+            assertThat(business.get管内_管外区分(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_管内管外区分));
         }
 
         @Test

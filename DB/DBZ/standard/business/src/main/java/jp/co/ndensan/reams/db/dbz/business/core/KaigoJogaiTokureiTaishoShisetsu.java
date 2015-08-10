@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護除外住所地特例対象施設を管理するクラスです。
  */
-public class KaigoJogaiTokureiTaishoShisetsu extends ParentModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, KaigoJogaiTokureiTaishoShisetsu> implements Serializable {
+public class KaigoJogaiTokureiTaishoShisetsu extends ModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, KaigoJogaiTokureiTaishoShisetsu> implements Serializable {
 
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
     private final KaigoJogaiTokureiTaishoShisetsuIdentifier id;
@@ -33,8 +35,8 @@ public class KaigoJogaiTokureiTaishoShisetsu extends ParentModelBase<KaigoJogaiT
      * @param 有効開始年月日 有効開始年月日
      */
     public KaigoJogaiTokureiTaishoShisetsu(RString 事業者種別,
-RString 事業者番号,
-FlexibleDate 有効開始年月日) {
+            RString 事業者番号,
+            FlexibleDate 有効開始年月日) {
         requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
@@ -43,17 +45,18 @@ FlexibleDate 有効開始年月日) {
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYukoKaishiYMD(有効開始年月日);
         this.id = new KaigoJogaiTokureiTaishoShisetsuIdentifier(
-        事業者種別,
-        事業者番号,
-        有効開始年月日
-                );
+                事業者種別,
+                事業者番号,
+                有効開始年月日
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}より{@link KaigoJogaiTokureiTaishoShisetsu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}
+     * @param entity
+     * DBより取得した{@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}
      */
     public KaigoJogaiTokureiTaishoShisetsu(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設"));
@@ -117,9 +120,9 @@ FlexibleDate 有効開始年月日) {
     /**
      * 管内・管外区分を返します。
      *
-     * @return 管内・管外区分
+     * @return 管内/管外区分
      */
-    public RString get管内・管外区分() {
+    public RString get管内_管外区分() {
         return entity.getKannaiKangaiKubun();
     }
 
@@ -289,46 +292,14 @@ FlexibleDate 有効開始年月日) {
     /**
      * 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}を返します。
      *
-     * @return 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}
+     * @return
+     * 介護除外住所地特例対象施設の識別子{@link KaigoJogaiTokureiTaishoShisetsuIdentifier}
      */
     @Override
     public KaigoJogaiTokureiTaishoShisetsuIdentifier identifier() {
         return this.id;
     }
 
-    /**
-     * 介護除外住所地特例対象施設のみを変更対象とします。<br/>
-     * {@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KaigoJogaiTokureiTaishoShisetsu}
-     */
-    @Override
-    public KaigoJogaiTokureiTaishoShisetsu modifiedModel() {
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KaigoJogaiTokureiTaishoShisetsu(
-                modifiedEntity, id);
-    }
-
-    /**
-     * 保持する介護除外住所地特例対象施設を削除対象とします。<br/>
-     * {@link DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     *
-     * @return 削除対象処理実施後の{@link KaigoJogaiTokureiTaishoShisetsu}
-     */
-    @Override
-    public KaigoJogaiTokureiTaishoShisetsu deleted() {
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
-        return new KaigoJogaiTokureiTaishoShisetsu(deletedEntity, id);
-    }
     /**
      * {@link KaigoJogaiTokureiTaishoShisetsu}のシリアライズ形式を提供します。
      *
@@ -339,13 +310,24 @@ FlexibleDate 有効開始年月日) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KaigoJogaiTokureiTaishoShisetsu deleted() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
         private final KaigoJogaiTokureiTaishoShisetsuIdentifier id;
 
-        private _SerializationProxy(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity,KaigoJogaiTokureiTaishoShisetsuIdentifier id) {
+        private _SerializationProxy(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity, KaigoJogaiTokureiTaishoShisetsuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -6,20 +6,21 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 適用除外者を管理するクラスです。
  */
-public class TekiyoJogaisha extends ParentModelBase<TekiyoJogaishaIdentifier, DbT1002TekiyoJogaishaEntity, TekiyoJogaisha> implements Serializable {
+public class TekiyoJogaisha extends ModelBase<TekiyoJogaishaIdentifier, DbT1002TekiyoJogaishaEntity, TekiyoJogaisha> implements Serializable {
 
     private final DbT1002TekiyoJogaishaEntity entity;
     private final TekiyoJogaishaIdentifier id;
@@ -33,8 +34,8 @@ public class TekiyoJogaisha extends ParentModelBase<TekiyoJogaishaIdentifier, Db
      * @param 枝番 枝番
      */
     public TekiyoJogaisha(ShikibetsuCode 識別コード,
-FlexibleDate 異動日,
-RString 枝番) {
+            FlexibleDate 異動日,
+            RString 枝番) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
@@ -43,10 +44,10 @@ RString 枝番) {
         this.entity.setIdoYMD(異動日);
         this.entity.setEdaNo(枝番);
         this.id = new TekiyoJogaishaIdentifier(
-        識別コード,
-        異動日,
-        枝番
-                );
+                識別コード,
+                異動日,
+                枝番
+        );
     }
 
     /**
@@ -129,7 +130,7 @@ RString 枝番) {
      * @return 適用除外適用事由コード
      */
     public RString get適用除外適用事由コード() {
-        return entity.getTekiyoJogaiTekiyoJiyuCode();
+        return entity.getTekiyoJogaiTekiyoJiyuCode().getColumnValue().getColumnValue();
     }
 
     /**
@@ -165,7 +166,7 @@ RString 枝番) {
      * @return 適用除外解除事由コード
      */
     public RString get適用除外解除事由コード() {
-        return entity.getTekiyoJogaikaijokaijoJiyuCode();
+        return entity.getTekiyoJogaikaijokaijoJiyuCode().getColumnValue().getColumnValue();
     }
 
     /**
@@ -252,22 +253,6 @@ RString 枝番) {
     }
 
     /**
-     * 適用除外者のみを変更対象とします。<br/>
-     * {@link DbT1002TekiyoJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TekiyoJogaisha}
-     */
-    @Override
-    public TekiyoJogaisha modifiedModel() {
-        DbT1002TekiyoJogaishaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TekiyoJogaisha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する適用除外者を削除対象とします。<br/>
      * {@link DbT1002TekiyoJogaishaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -284,6 +269,7 @@ RString 枝番) {
         }
         return new TekiyoJogaisha(deletedEntity, id);
     }
+
     /**
      * {@link TekiyoJogaisha}のシリアライズ形式を提供します。
      *
@@ -294,13 +280,19 @@ RString 枝番) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1002TekiyoJogaishaEntity entity;
         private final TekiyoJogaishaIdentifier id;
 
-        private _SerializationProxy(DbT1002TekiyoJogaishaEntity entity,TekiyoJogaishaIdentifier id) {
+        private _SerializationProxy(DbT1002TekiyoJogaishaEntity entity, TekiyoJogaishaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyokaisoSochiShinsei}の編集を行うビルダークラスです。
@@ -86,24 +90,24 @@ public class KyokaisoSochiShinseiBuilder {
     /**
      * 申請・廃止区分を設定します。
      *
-     * @param 申請・廃止区分 申請・廃止区分
+     * @param 申請_廃止区分 申請・廃止区分
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set申請・廃止区分(RString 申請・廃止区分) {
-        requireNonNull(申請・廃止区分, UrSystemErrorMessages.値がnull.getReplacedMessage("申請・廃止区分"));
-        entity.setShinsei_HaishiKubun(申請・廃止区分);
+    public KyokaisoSochiShinseiBuilder set申請_廃止区分(RString 申請_廃止区分) {
+        requireNonNull(申請_廃止区分, UrSystemErrorMessages.値がnull.getReplacedMessage("申請・廃止区分"));
+        entity.setShinsei_HaishiKubun(申請_廃止区分);
         return this;
     }
 
     /**
      * 申請・廃止年月日を設定します。
      *
-     * @param 申請・廃止年月日 申請・廃止年月日
+     * @param 申請_廃止年月日 申請・廃止年月日
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set申請・廃止年月日(FlexibleDate 申請・廃止年月日) {
-        requireNonNull(申請・廃止年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請・廃止年月日"));
-        entity.setShinsei_HaishiYMD(申請・廃止年月日);
+    public KyokaisoSochiShinseiBuilder set申請_廃止年月日(FlexibleDate 申請_廃止年月日) {
+        requireNonNull(申請_廃止年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請・廃止年月日"));
+        entity.setShinsei_HaishiYMD(申請_廃止年月日);
         return this;
     }
 
@@ -134,84 +138,84 @@ public class KyokaisoSochiShinseiBuilder {
     /**
      * 給付額減額取消・減額自己負担月額を設定します。
      *
-     * @param 給付額減額取消・減額自己負担月額 給付額減額取消・減額自己負担月額
+     * @param 給付額減額取消_減額自己負担月額 給付額減額取消・減額自己負担月額
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set給付額減額取消・減額自己負担月額(Decimal 給付額減額取消・減額自己負担月額) {
-        requireNonNull(給付額減額取消・減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額減額取消・減額自己負担月額"));
-        entity.setKyufuGengakuTorikeshi_GengakuJikofutanGetsugaku(給付額減額取消・減額自己負担月額);
+    public KyokaisoSochiShinseiBuilder set給付額減額取消_減額自己負担月額(Decimal 給付額減額取消_減額自己負担月額) {
+        requireNonNull(給付額減額取消_減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額減額取消・減額自己負担月額"));
+        entity.setKyufuGengakuTorikeshi_GengakuJikofutanGetsugaku(給付額減額取消_減額自己負担月額);
         return this;
     }
 
     /**
      * 居住費軽減・減額自己負担月額を設定します。
      *
-     * @param 居住費軽減・減額自己負担月額 居住費軽減・減額自己負担月額
+     * @param 居住費軽減_減額自己負担月額 居住費軽減・減額自己負担月額
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set居住費軽減・減額自己負担月額(Decimal 居住費軽減・減額自己負担月額) {
-        requireNonNull(居住費軽減・減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費軽減・減額自己負担月額"));
-        entity.setKyojuhiKeigen_GengakuJikofutanGetsugaku(居住費軽減・減額自己負担月額);
+    public KyokaisoSochiShinseiBuilder set居住費軽減_減額自己負担月額(Decimal 居住費軽減_減額自己負担月額) {
+        requireNonNull(居住費軽減_減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費軽減・減額自己負担月額"));
+        entity.setKyojuhiKeigen_GengakuJikofutanGetsugaku(居住費軽減_減額自己負担月額);
         return this;
     }
 
     /**
      * 居住費軽減・負担限度額段階コードを設定します。
      *
-     * @param 居住費軽減・負担限度額段階コード 居住費軽減・負担限度額段階コード
+     * @param 居住費軽減_負担限度額段階コード 居住費軽減・負担限度額段階コード
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set居住費軽減・負担限度額段階コード(RString 居住費軽減・負担限度額段階コード) {
-        requireNonNull(居住費軽減・負担限度額段階コード, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費軽減・負担限度額段階コード"));
-        entity.setKyojuhiKeigen_FutangendogakuDankaiCode(居住費軽減・負担限度額段階コード);
+    public KyokaisoSochiShinseiBuilder set居住費軽減_負担限度額段階コード(RString 居住費軽減_負担限度額段階コード) {
+        requireNonNull(居住費軽減_負担限度額段階コード, UrSystemErrorMessages.値がnull.getReplacedMessage("居住費軽減・負担限度額段階コード"));
+        entity.setKyojuhiKeigen_FutangendogakuDankaiCode(居住費軽減_負担限度額段階コード);
         return this;
     }
 
     /**
      * 食費軽減・減額自己負担月額を設定します。
      *
-     * @param 食費軽減・減額自己負担月額 食費軽減・減額自己負担月額
+     * @param 食費軽減_減額自己負担月額 食費軽減・減額自己負担月額
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set食費軽減・減額自己負担月額(Decimal 食費軽減・減額自己負担月額) {
-        requireNonNull(食費軽減・減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("食費軽減・減額自己負担月額"));
-        entity.setShokuhiKeigen_GengakuJikofutanGetsugaku(食費軽減・減額自己負担月額);
+    public KyokaisoSochiShinseiBuilder set食費軽減_減額自己負担月額(Decimal 食費軽減_減額自己負担月額) {
+        requireNonNull(食費軽減_減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("食費軽減・減額自己負担月額"));
+        entity.setShokuhiKeigen_GengakuJikofutanGetsugaku(食費軽減_減額自己負担月額);
         return this;
     }
 
     /**
      * 食費軽減・負担限度額段階コードを設定します。
      *
-     * @param 食費軽減・負担限度額段階コード 食費軽減・負担限度額段階コード
+     * @param 食費軽減_負担限度額段階コード 食費軽減・負担限度額段階コード
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set食費軽減・負担限度額段階コード(RString 食費軽減・負担限度額段階コード) {
-        requireNonNull(食費軽減・負担限度額段階コード, UrSystemErrorMessages.値がnull.getReplacedMessage("食費軽減・負担限度額段階コード"));
-        entity.setShokuhiKeigen_FutangendogakuDankaiCode(食費軽減・負担限度額段階コード);
+    public KyokaisoSochiShinseiBuilder set食費軽減_負担限度額段階コード(RString 食費軽減_負担限度額段階コード) {
+        requireNonNull(食費軽減_負担限度額段階コード, UrSystemErrorMessages.値がnull.getReplacedMessage("食費軽減・負担限度額段階コード"));
+        entity.setShokuhiKeigen_FutangendogakuDankaiCode(食費軽減_負担限度額段階コード);
         return this;
     }
 
     /**
      * 利用者負担世帯合算額・減額自己負担月額を設定します。
      *
-     * @param 利用者負担世帯合算額・減額自己負担月額 利用者負担世帯合算額・減額自己負担月額
+     * @param 利用者負担世帯合算額_減額自己負担月額 利用者負担世帯合算額・減額自己負担月額
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set利用者負担世帯合算額・減額自己負担月額(Decimal 利用者負担世帯合算額・減額自己負担月額) {
-        requireNonNull(利用者負担世帯合算額・減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担世帯合算額・減額自己負担月額"));
-        entity.setRiyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku(利用者負担世帯合算額・減額自己負担月額);
+    public KyokaisoSochiShinseiBuilder set利用者負担世帯合算額_減額自己負担月額(Decimal 利用者負担世帯合算額_減額自己負担月額) {
+        requireNonNull(利用者負担世帯合算額_減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担世帯合算額・減額自己負担月額"));
+        entity.setRiyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku(利用者負担世帯合算額_減額自己負担月額);
         return this;
     }
 
     /**
      * 保険料減額・減額自己負担月額を設定します。
      *
-     * @param 保険料減額・減額自己負担月額 保険料減額・減額自己負担月額
+     * @param 保険料減額_減額自己負担月額 保険料減額・減額自己負担月額
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set保険料減額・減額自己負担月額(Decimal 保険料減額・減額自己負担月額) {
-        requireNonNull(保険料減額・減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料減額・減額自己負担月額"));
-        entity.setHokenryoGengaku_GengakuJikofutanGetsugaku(保険料減額・減額自己負担月額);
+    public KyokaisoSochiShinseiBuilder set保険料減額_減額自己負担月額(Decimal 保険料減額_減額自己負担月額) {
+        requireNonNull(保険料減額_減額自己負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料減額・減額自己負担月額"));
+        entity.setHokenryoGengaku_GengakuJikofutanGetsugaku(保険料減額_減額自己負担月額);
         return this;
     }
 
@@ -240,14 +244,14 @@ public class KyokaisoSochiShinseiBuilder {
     }
 
     /**
-     * 措置該当・非該当区分を設定します。
+     * 措置該当_非該当区分を設定します。
      *
-     * @param 措置該当・非該当区分 措置該当・非該当区分
+     * @param 措置該当_非該当区分 措置該当・非該当区分
      * @return {@link KyokaisoSochiShinseiBuilder}
      */
-    public KyokaisoSochiShinseiBuilder set措置該当・非該当区分(RString 措置該当・非該当区分) {
-        requireNonNull(措置該当・非該当区分, UrSystemErrorMessages.値がnull.getReplacedMessage("措置該当・非該当区分"));
-        entity.setSochiGaito_HigaitoKubun(措置該当・非該当区分);
+    public KyokaisoSochiShinseiBuilder set措置該当_非該当区分(RString 措置該当_非該当区分) {
+        requireNonNull(措置該当_非該当区分, UrSystemErrorMessages.値がnull.getReplacedMessage("措置該当・非該当区分"));
+        entity.setSochiGaito_HigaitoKubun(措置該当_非該当区分);
         return this;
     }
 

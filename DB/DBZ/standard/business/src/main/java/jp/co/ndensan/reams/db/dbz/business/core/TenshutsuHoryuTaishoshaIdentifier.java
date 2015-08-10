@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -24,7 +26,7 @@ public class TenshutsuHoryuTaishoshaIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public TenshutsuHoryuTaishoshaIdentifier(ShikibetsuCode 識別コード,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }

@@ -6,8 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyotakuKeikakuJikoSakusei}の編集を行うビルダークラスです。
@@ -74,12 +79,12 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
     /**
      * 居宅・総合事業区分を設定します。
      *
-     * @param 居宅・総合事業区分 居宅・総合事業区分
+     * @param 居宅_総合事業区分 居宅・総合事業区分
      * @return {@link KyotakuKeikakuJikoSakuseiBuilder}
      */
-    public KyotakuKeikakuJikoSakuseiBuilder set居宅・総合事業区分(RString 居宅・総合事業区分) {
-        requireNonNull(居宅・総合事業区分, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・総合事業区分"));
-        entity.setKyotaku_SogoJigyoKubun(居宅・総合事業区分);
+    public KyotakuKeikakuJikoSakuseiBuilder set居宅_総合事業区分(RString 居宅_総合事業区分) {
+        requireNonNull(居宅_総合事業区分, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・総合事業区分"));
+        entity.setKyotaku_SogoJigyoKubun(居宅_総合事業区分);
         return this;
     }
 

@@ -6,20 +6,29 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1011TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 転出保留対象者を管理するクラスです。
  */
-public class TenshutsuHoryuTaishosha extends ParentModelBase<TenshutsuHoryuTaishoshaIdentifier, DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha> implements Serializable {
+public class TenshutsuHoryuTaishosha extends ModelBase<TenshutsuHoryuTaishoshaIdentifier, DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha> implements Serializable {
 
     private final DbT1011TenshutsuHoryuTaishoshaEntity entity;
     private final TenshutsuHoryuTaishoshaIdentifier id;
@@ -32,16 +41,16 @@ public class TenshutsuHoryuTaishosha extends ParentModelBase<TenshutsuHoryuTaish
      * @param 履歴番号 履歴番号
      */
     public TenshutsuHoryuTaishosha(ShikibetsuCode 識別コード,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1011TenshutsuHoryuTaishoshaEntity();
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new TenshutsuHoryuTaishoshaIdentifier(
-        識別コード,
-        履歴番号
-                );
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
@@ -372,22 +381,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 転出保留対象者のみを変更対象とします。<br/>
-     * {@link DbT1011TenshutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TenshutsuHoryuTaishosha}
-     */
-    @Override
-    public TenshutsuHoryuTaishosha modifiedModel() {
-        DbT1011TenshutsuHoryuTaishoshaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TenshutsuHoryuTaishosha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する転出保留対象者を削除対象とします。<br/>
      * {@link DbT1011TenshutsuHoryuTaishoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -404,6 +397,7 @@ Decimal 履歴番号) {
         }
         return new TenshutsuHoryuTaishosha(deletedEntity, id);
     }
+
     /**
      * {@link TenshutsuHoryuTaishosha}のシリアライズ形式を提供します。
      *
@@ -414,13 +408,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1011TenshutsuHoryuTaishoshaEntity entity;
         private final TenshutsuHoryuTaishoshaIdentifier id;
 
-        private _SerializationProxy(DbT1011TenshutsuHoryuTaishoshaEntity entity,TenshutsuHoryuTaishoshaIdentifier id) {
+        private _SerializationProxy(DbT1011TenshutsuHoryuTaishoshaEntity entity, TenshutsuHoryuTaishoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

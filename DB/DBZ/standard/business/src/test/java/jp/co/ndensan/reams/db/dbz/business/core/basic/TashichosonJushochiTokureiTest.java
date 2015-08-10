@@ -8,8 +8,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +34,16 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
     private static DbT1003TashichosonJushochiTokureiEntity TashichosonJushochiTokureiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+        異動日 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +53,41 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TashichosonJushochiTokurei(null, 主キー名2);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TashichosonJushochiTokurei(null, 異動日, 枝番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TashichosonJushochiTokurei(主キー名1, null);
+        public void 異動日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TashichosonJushochiTokurei(識別コード, null, 枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 枝番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TashichosonJushochiTokurei(識別コード, 異動日, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1003TashichosonJushochiTokureiEntityにセットされている() {
-            sut = new TashichosonJushochiTokurei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new TashichosonJushochiTokurei(識別コード, 異動日, 枝番);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get異動日(), is(異動日));
+            assertThat(sut.get枝番(), is(枝番));
         }
 
         @Test
         public void 指定したキーが保持するTashichosonJushochiTokureiIdentifierにセットされている() {
-            sut = new TashichosonJushochiTokurei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new TashichosonJushochiTokurei(識別コード, 異動日, 枝番);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -83,8 +98,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,9 +112,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         public void 指定したDbT1003TashichosonJushochiTokureiEntityのキー情報を識別子が持つ() {
 
             sut = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
-
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -109,8 +125,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
 
             sut = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
         }
@@ -142,7 +159,7 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
 
         @Test
         public void get他市町村住所地特例適用事由コードは_entityが持つ他市町村住所地特例適用事由コードを返す() {
-            assertThat(sut.get他市町村住所地特例適用事由コード(), is(TashichosonJushochiTokureiEntity.getTekiyoJiyuCode()));
+            assertThat(sut.get他市町村住所地特例適用事由コード(), is(TashichosonJushochiTokureiEntity.getTekiyoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -162,7 +179,7 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
 
         @Test
         public void get他市町村住所地特例解除事由コードは_entityが持つ他市町村住所地特例解除事由コードを返す() {
-            assertThat(sut.get他市町村住所地特例解除事由コード(), is(TashichosonJushochiTokureiEntity.getKaijoJiyuCode()));
+            assertThat(sut.get他市町村住所地特例解除事由コード(), is(TashichosonJushochiTokureiEntity.getKaijoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -218,8 +235,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
 
             sut = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
         }
@@ -237,15 +255,16 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
 
             sut = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -257,8 +276,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Before
         public void setUp() {
             TashichosonJushochiTokureiEntity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            TashichosonJushochiTokureiEntity.setXXX(主キー名1);
-            TashichosonJushochiTokureiEntity.setXXX(主キー名2);
+            TashichosonJushochiTokureiEntity.setShikibetsuCode(識別コード);
+            TashichosonJushochiTokureiEntity.setIdoYMD(異動日);
+            TashichosonJushochiTokureiEntity.setEdaNo(枝番);
 
         }
 

@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyotakuKeikakuJigyoshaSakusei}の編集を行うビルダークラスです。
@@ -41,9 +47,9 @@ public class KyotakuKeikakuJigyoshaSakuseiBuilder {
      * @param 被保険者番号 被保険者番号
      * @return {@link KyotakuKeikakuJigyoshaSakuseiBuilder}
      */
-    public KyotakuKeikakuJigyoshaSakuseiBuilder set被保険者番号(none 被保険者番号) {
+    public KyotakuKeikakuJigyoshaSakuseiBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setNone(被保険者番号);
+        entity.setHihokenshano(被保険者番号);
         return this;
     }
 

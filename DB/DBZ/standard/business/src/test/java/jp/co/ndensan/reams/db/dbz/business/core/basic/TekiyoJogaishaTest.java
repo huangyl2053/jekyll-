@@ -8,8 +8,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,14 +34,15 @@ public class TekiyoJogaishaTest extends DbzTestBase {
     private static DbT1002TekiyoJogaishaEntity TekiyoJogaishaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_識別コード;
+        異動日 = DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_枝番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,33 +52,41 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TekiyoJogaisha(null, 主キー名2);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TekiyoJogaisha(null, 異動日, 枝番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TekiyoJogaisha(主キー名1, null);
+        public void 異動日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TekiyoJogaisha(識別コード, null, 枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 枝番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new TekiyoJogaisha(識別コード, 異動日, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1002TekiyoJogaishaEntityにセットされている() {
-            sut = new TekiyoJogaisha(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new TekiyoJogaisha(識別コード, 異動日, 枝番);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get異動日(), is(異動日));
+            assertThat(sut.get枝番(), is(枝番));
         }
 
         @Test
         public void 指定したキーが保持するTekiyoJogaishaIdentifierにセットされている() {
-            sut = new TekiyoJogaisha(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new TekiyoJogaisha(識別コード, 異動日, 枝番);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -83,8 +97,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +112,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
             sut = new TekiyoJogaisha(TekiyoJogaishaEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -109,8 +125,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
 
             sut = new TekiyoJogaisha(TekiyoJogaishaEntity);
         }
@@ -142,7 +159,7 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
         @Test
         public void get適用除外適用事由コードは_entityが持つ適用除外適用事由コードを返す() {
-            assertThat(sut.get適用除外適用事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaiTekiyoJiyuCode()));
+            assertThat(sut.get適用除外適用事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaiTekiyoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -162,7 +179,7 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
         @Test
         public void get適用除外解除事由コードは_entityが持つ適用除外解除事由コードを返す() {
-            assertThat(sut.get適用除外解除事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaikaijokaijoJiyuCode()));
+            assertThat(sut.get適用除外解除事由コード(), is(TekiyoJogaishaEntity.getTekiyoJogaikaijokaijoJiyuCode().getColumnValue().getColumnValue()));
         }
 
         @Test
@@ -208,8 +225,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
 
             sut = new TekiyoJogaisha(TekiyoJogaishaEntity);
         }
@@ -227,15 +245,16 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
 
             sut = new TekiyoJogaisha(TekiyoJogaishaEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -247,8 +266,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Before
         public void setUp() {
             TekiyoJogaishaEntity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
-            TekiyoJogaishaEntity.setXXX(主キー名1);
-            TekiyoJogaishaEntity.setXXX(主キー名2);
+            TekiyoJogaishaEntity.setShikibetsuCode(識別コード);
+            TekiyoJogaishaEntity.setIdoYMD(異動日);
+            TekiyoJogaishaEntity.setEdaNo(枝番);
 
         }
 

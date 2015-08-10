@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護保険施設入退所を管理するクラスです。
  */
-public class ShisetsuNyutaisho extends ParentModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> implements Serializable {
+public class ShisetsuNyutaisho extends ModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> implements Serializable {
 
     private final DbT1004ShisetsuNyutaishoEntity entity;
     private final ShisetsuNyutaishoIdentifier id;
@@ -32,16 +35,16 @@ public class ShisetsuNyutaisho extends ParentModelBase<ShisetsuNyutaishoIdentifi
      * @param 履歴番号 履歴番号
      */
     public ShisetsuNyutaisho(ShikibetsuCode 識別コード,
-Decimal 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1004ShisetsuNyutaishoEntity();
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShisetsuNyutaishoIdentifier(
-        識別コード,
-        履歴番号
-                );
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
@@ -192,22 +195,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護保険施設入退所のみを変更対象とします。<br/>
-     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShisetsuNyutaisho}
-     */
-    @Override
-    public ShisetsuNyutaisho modifiedModel() {
-        DbT1004ShisetsuNyutaishoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShisetsuNyutaisho(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護保険施設入退所を削除対象とします。<br/>
      * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -224,6 +211,7 @@ Decimal 履歴番号) {
         }
         return new ShisetsuNyutaisho(deletedEntity, id);
     }
+
     /**
      * {@link ShisetsuNyutaisho}のシリアライズ形式を提供します。
      *
@@ -234,13 +222,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT1004ShisetsuNyutaishoEntity entity;
         private final ShisetsuNyutaishoIdentifier id;
 
-        private _SerializationProxy(DbT1004ShisetsuNyutaishoEntity entity,ShisetsuNyutaishoIdentifier id) {
+        private _SerializationProxy(DbT1004ShisetsuNyutaishoEntity entity, ShisetsuNyutaishoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

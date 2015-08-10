@@ -5,12 +5,16 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import static jp.co.ndensan.reams.db.dbz.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,22 +27,24 @@ public class TashichosonJushochiTokureiIdentifierTest extends DbzTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static FlexibleDate 異動日;
+    private static RString 枝番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+        異動日 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+        枝番 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            TashichosonJushochiTokureiIdentifier sut = new TashichosonJushochiTokureiIdentifier(主キー名1, 主キー名2);
-            assertThat(sut, is(serializable()));
+            TashichosonJushochiTokureiIdentifier sut = new TashichosonJushochiTokureiIdentifier(識別コード, 異動日, 枝番);
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 }

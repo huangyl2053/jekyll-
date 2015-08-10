@@ -6,8 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KaigoJogaiTokureiTaishoShisetsu}の編集を行うビルダークラスです。
@@ -86,12 +93,12 @@ public class KaigoJogaiTokureiTaishoShisetsuBuilder {
     /**
      * 管内・管外区分を設定します。
      *
-     * @param 管内・管外区分 管内・管外区分
+     * @param 管内_管外区分 管内/管外区分
      * @return {@link KaigoJogaiTokureiTaishoShisetsuBuilder}
      */
-    public KaigoJogaiTokureiTaishoShisetsuBuilder set管内・管外区分(RString 管内・管外区分) {
-        requireNonNull(管内・管外区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管内・管外区分"));
-        entity.setKannaiKangaiKubun(管内・管外区分);
+    public KaigoJogaiTokureiTaishoShisetsuBuilder set管内_管外区分(RString 管内_管外区分) {
+        requireNonNull(管内_管外区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管内・管外区分"));
+        entity.setKannaiKangaiKubun(管内_管外区分);
         return this;
     }
 

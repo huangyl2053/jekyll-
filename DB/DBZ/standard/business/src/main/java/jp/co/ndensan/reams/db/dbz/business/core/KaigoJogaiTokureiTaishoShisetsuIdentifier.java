@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -26,8 +28,8 @@ public class KaigoJogaiTokureiTaishoShisetsuIdentifier implements Serializable {
      * @param 有効開始年月日 有効開始年月日
      */
     public KaigoJogaiTokureiTaishoShisetsuIdentifier(RString 事業者種別,
-RString 事業者番号,
-FlexibleDate 有効開始年月日) {
+            RString 事業者番号,
+            FlexibleDate 有効開始年月日) {
         this.事業者種別 = 事業者種別;
         this.事業者番号 = 事業者番号;
         this.有効開始年月日 = 有効開始年月日;
