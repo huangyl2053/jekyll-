@@ -5,21 +5,18 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +34,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3011YoboKeikakuJikoSakuseiMeisaiDac sut;
@@ -155,7 +151,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity insertedRecord = sut.selectByKey(
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号,
@@ -168,7 +164,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity insertedRecord = sut.selectByKey(
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号,
@@ -249,7 +245,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
 
         @Test
         public void 予防給付計画自己作成明細エンティティを渡すと_updateは_予防給付計画自己作成明細を更新する() {
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity updateRecord = sut.selectByKey(
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity updateRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号,
@@ -257,11 +253,11 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供事業者番号,
                     DEFAULT_サービス種類コード,
                     DEFAULT_サービス項目コード);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setKaisu_Nissu(new Decimal(75));
 
             sut.save(updateRecord);
 
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity updatedRecord = sut.selectByKey(
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号,
@@ -270,7 +266,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス種類コード,
                     DEFAULT_サービス項目コード);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getKaisu_Nissu(), is(updatedRecord.getKaisu_Nissu()));
         }
     }
 
@@ -290,7 +286,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
 
         @Test
         public void 予防給付計画自己作成明細エンティティを渡すと_deleteは_予防給付計画自己作成明細を削除する() {
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity deletedEntity = sut.selectByKey(
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号,
@@ -323,7 +319,7 @@ public class DbT3011YoboKeikakuJikoSakuseiMeisaiDacTest extends DbcTestDacBase {
                 JigyoshaNo サービス提供事業者番号,
                 ServiceShuruiCode サービス種類コード,
                 ServiceKomokuCode サービス項目コード) {
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);

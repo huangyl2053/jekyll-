@@ -8,18 +8,14 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +33,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3028KyufujissekiKogakuKaigoServicehiDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3028KyufujissekiKogakuKaigoServicehiDac sut;
@@ -319,7 +314,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiDacTest extends DbcTestDacBa
                     DEFAULT_通し番号,
                     DEFAULT_給付実績情報作成区分コード,
                     DEFAULT_給付実績区分コード);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setKohi1FutanNo(new RString("12"));
 
             sut.save(updateRecord);
 
@@ -334,7 +329,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiDacTest extends DbcTestDacBa
                     DEFAULT_給付実績情報作成区分コード,
                     DEFAULT_給付実績区分コード);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getKohi1FutanNo(), is(updatedRecord.getKohi1FutanNo()));
         }
     }
 
@@ -386,8 +381,8 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiDacTest extends DbcTestDacBa
     private static class TestSupport {
 
         public static void insert(
-                KokanShikibetsuCode 交換情報識別番号,
-                NyuryokuShikibetsuCode 入力識別番号,
+                KokanShikibetsuNo 交換情報識別番号,
+                NyuryokuShikibetsuNo 入力識別番号,
                 RString レコード種別コード,
                 HokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,

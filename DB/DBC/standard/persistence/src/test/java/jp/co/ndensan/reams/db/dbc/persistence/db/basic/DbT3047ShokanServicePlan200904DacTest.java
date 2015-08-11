@@ -8,18 +8,14 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +33,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3047ShokanServicePlan200904Dac sut;
@@ -58,7 +53,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             TestSupport.insert(
@@ -68,7 +63,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -82,7 +77,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -96,7 +91,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -110,7 +105,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -124,7 +119,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -138,7 +133,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -152,13 +147,13 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 指定／基準該当事業者区分コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 指定_基準該当事業者区分コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
@@ -166,7 +161,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -180,7 +175,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -194,7 +189,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -208,7 +203,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             assertThat(insertedRecord, is(notNullValue()));
@@ -223,7 +218,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             assertThat(insertedRecord, is(nullValue()));
@@ -241,7 +236,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             TestSupport.insert(
@@ -251,7 +246,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             assertThat(sut.selectAll().size(), is(2));
@@ -274,7 +269,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
 
@@ -285,7 +280,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日), is(notNullValue()));
         }
@@ -302,7 +297,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -316,10 +311,10 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setKaisu(75);
 
             sut.save(updateRecord);
 
@@ -330,11 +325,11 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getKaisu(), is(updatedRecord.getKaisu()));
         }
     }
 
@@ -349,7 +344,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
         }
@@ -363,7 +358,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日);
             deletedEntity.setState(EntityDataState.Deleted);
@@ -377,7 +372,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
                     DEFAULT_履歴番号,
-                    DEFAULT_指定／基準該当事業者区分コード,
+                    DEFAULT_指定_基準該当事業者区分コード,
                     DEFAULT_明細行番号,
                     DEFAULT_居宅サービス計画作成依頼届出年月日), is(nullValue()));
         }
@@ -392,7 +387,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
                 JigyoshaNo 事業者番号,
                 RString 様式番号,
                 Decimal 履歴番号,
-                RString 指定／基準該当事業者区分コード,
+                RString 指定_基準該当事業者区分コード,
                 RString 明細行番号,
                 FlexibleDate 居宅サービス計画作成依頼届出年月日) {
             DbT3047ShokanServicePlan200904Entity entity = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
@@ -402,7 +397,7 @@ public class DbT3047ShokanServicePlan200904DacTest extends DbcTestDacBase {
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
             entity.setRirekiNo(履歴番号);
-            entity.setShiteiKijunGaitoJigyoshaKubunCode(指定／基準該当事業者区分コード);
+            entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当事業者区分コード);
             entity.setMeisaiLineNo(明細行番号);
             entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
             sut.save(entity);

@@ -5,8 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1011TenshutsuHoryuTaishoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1011TenshutsuHoryuTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,28 +43,28 @@ public class TenshutsuHoryuTaishoshaManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get転出保留対象者 extends FdaTestBase {
+    public static class get転出保留対象者 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー2;
+            Decimal 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             sut.get転出保留対象者(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー1;
+            ShikibetsuCode 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
             sut.get転出保留対象者(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー2;
+            ShikibetsuCode 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
+            Decimal 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             TenshutsuHoryuTaishosha result = sut.get転出保留対象者(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -62,18 +73,18 @@ public class TenshutsuHoryuTaishoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1011TenshutsuHoryuTaishoshaEntity entity = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.createDbT1011TenshutsuHoryuTaishoshaEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー2;
+            ShikibetsuCode 主キー1 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
+            Decimal 主キー2 = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             TenshutsuHoryuTaishosha result = sut.get転出保留対象者(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get識別コード().value(), is(DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get転出保留対象者一覧 extends FdaTestBase {
+    public static class get転出保留対象者一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +103,11 @@ public class TenshutsuHoryuTaishoshaManagerTest {
             List<TenshutsuHoryuTaishosha> result = sut.get転出保留対象者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT1011TenshutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
-    public static class save転出保留対象者 extends XxxTestBase {
+    public static class save転出保留対象者 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -125,7 +136,7 @@ public class TenshutsuHoryuTaishoshaManagerTest {
             DbT1011TenshutsuHoryuTaishoshaEntity entity = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.createDbT1011TenshutsuHoryuTaishoshaEntity();
             entity.initializeMd5();
             TenshutsuHoryuTaishosha 転出保留対象者 = new TenshutsuHoryuTaishosha(entity);
-            転出保留対象者 = 転出保留対象者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            転出保留対象者 = 転出保留対象者.createBuilderForEdit().set異動事由コード(new RString("3")).build();
 
             assertThat(sut.save転出保留対象者(転出保留対象者), is(true));
         }
@@ -137,7 +148,7 @@ public class TenshutsuHoryuTaishoshaManagerTest {
             DbT1011TenshutsuHoryuTaishoshaEntity entity = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.createDbT1011TenshutsuHoryuTaishoshaEntity();
             entity.initializeMd5();
             TenshutsuHoryuTaishosha 転出保留対象者 = new TenshutsuHoryuTaishosha(entity);
-            転出保留対象者 = 転出保留対象者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            転出保留対象者 = 転出保留対象者.createBuilderForEdit().set異動事由コード(new RString("3")).build();
 
             assertThat(sut.save転出保留対象者(転出保留対象者), is(false));
         }

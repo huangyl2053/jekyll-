@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3009KyotakuKeikakuJikoSakuseiG
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3009KyotakuKeikakuJikoSakuseiGokei.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,12 +64,12 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT30
         return accessor.select().
                 table(DbT3009KyotakuKeikakuJikoSakuseiGokei.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(taishoYM, 対象年月),
-                eq(rirekiNo, 履歴番号),
-                eq(kyotakuServiceKubun, 居宅サービス区分),
-                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
-                eq(serviceShuruiCode, サービス種類コード))).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号),
+                                eq(kyotakuServiceKubun, 居宅サービス区分),
+                                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
+                                eq(serviceShuruiCode, サービス種類コード))).
                 toObject(DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity.class);
     }
 

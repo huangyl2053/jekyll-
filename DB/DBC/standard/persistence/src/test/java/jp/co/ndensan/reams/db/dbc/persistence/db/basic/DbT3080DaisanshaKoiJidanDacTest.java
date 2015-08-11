@@ -8,18 +8,12 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3080DaisanshaKoiJidanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3080DaisanshaKoiJidanEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3080DaisanshaKoiJidanEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +31,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3080DaisanshaKoiJidanDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3080DaisanshaKoiJidanDac sut;
@@ -179,7 +172,7 @@ public class DbT3080DaisanshaKoiJidanDacTest extends DbcTestDacBase {
                     DEFAULT_第三者行為届出管理番号,
                     DEFAULT_示談報告書受付年月日,
                     DEFAULT_履歴番号);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setJidanHokokushoTeishutsuYMD(new FlexibleDate("20100110"));
 
             sut.save(updateRecord);
 
@@ -189,7 +182,7 @@ public class DbT3080DaisanshaKoiJidanDacTest extends DbcTestDacBase {
                     DEFAULT_示談報告書受付年月日,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getJidanHokokushoTeishutsuYMD(), is(updatedRecord.getJidanHokokushoTeishutsuYMD()));
         }
     }
 

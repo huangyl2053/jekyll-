@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

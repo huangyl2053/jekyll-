@@ -27,7 +27,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private Decimal updateCount = 0;
+    private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey

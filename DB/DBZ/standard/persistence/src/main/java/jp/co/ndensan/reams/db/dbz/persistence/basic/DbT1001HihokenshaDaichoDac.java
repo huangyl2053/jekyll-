@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,9 +52,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(idoYMD, 異動日),
-                eq(edaNo, 枝番))).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 

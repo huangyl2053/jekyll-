@@ -8,18 +8,16 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3062SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3062SaishinsaMoshitateEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3062SaishinsaMoshitateEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +35,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3062SaishinsaMoshitateDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3062SaishinsaMoshitateDac sut;
@@ -229,7 +226,7 @@ public class DbT3062SaishinsaMoshitateDacTest extends DbcTestDacBase {
                     DEFAULT_サービス種類コード,
                     DEFAULT_サービス項目コード,
                     DEFAULT_履歴番号);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setMoshitateYMD(new FlexibleDate("20100101"));
 
             sut.save(updateRecord);
 
@@ -241,7 +238,7 @@ public class DbT3062SaishinsaMoshitateDacTest extends DbcTestDacBase {
                     DEFAULT_サービス項目コード,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getMoshitateYMD(), is(updatedRecord.getMoshitateYMD()));
         }
     }
 

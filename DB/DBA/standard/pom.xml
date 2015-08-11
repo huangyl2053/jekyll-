@@ -24,6 +24,7 @@
         <module>realservice</module>
         <module>model</module>
         <module>divcontroller</module>
+        <module>service</module>
     </modules>
     <dependencyManagement>
         <dependencies>

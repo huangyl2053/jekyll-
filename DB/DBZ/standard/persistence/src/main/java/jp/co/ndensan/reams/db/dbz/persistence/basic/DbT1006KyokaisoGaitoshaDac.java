@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitosha;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitosha.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

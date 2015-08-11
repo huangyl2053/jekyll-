@@ -8,18 +8,13 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +32,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac sut;
@@ -183,7 +177,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
     public static class selectAllのテスト extends DbcTestDacBase {
 
         @Test
-        public void 償還払請求特定診療費・特別療養費が存在する場合_selectAllは_全件を返す() {
+        public void 償還払請求特定診療費_特別療養費が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
@@ -204,7 +198,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
         }
 
         @Test
-        public void 償還払請求特定診療費・特別療養費が存在しない場合_selectAllは_空のリストを返す() {
+        public void 償還払請求特定診療費_特別療養費が存在しない場合_selectAllは_空のリストを返す() {
             assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
@@ -212,7 +206,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
     public static class insertのテスト extends DbcTestDacBase {
 
         @Test
-        public void 償還払請求特定診療費・特別療養費エンティティを渡すと_insertは_償還払請求特定診療費・特別療養費を追加する() {
+        public void 償還払請求特定診療費_特別療養費エンティティを渡すと_insertは_償還払請求特定診療費_特別療養費を追加する() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
@@ -248,7 +242,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
         }
 
         @Test
-        public void 償還払請求特定診療費・特別療養費エンティティを渡すと_updateは_償還払請求特定診療費・特別療養費を更新する() {
+        public void 償還払請求特定診療費_特別療養費エンティティを渡すと_updateは_償還払請求特定診療費_特別療養費を更新する() {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity updateRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
@@ -257,7 +251,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
                     DEFAULT_様式番号,
                     DEFAULT_順次番号,
                     DEFAULT_履歴番号);
-            updateRecord.set変更したい項目(75);
+            updateRecord.setTotalTanisu(75);
 
             sut.save(updateRecord);
 
@@ -270,7 +264,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
                     DEFAULT_順次番号,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getTotalTanisu(), is(updatedRecord.getTotalTanisu()));
         }
     }
 
@@ -289,7 +283,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDacTest extends DbcTestDac
         }
 
         @Test
-        public void 償還払請求特定診療費・特別療養費エンティティを渡すと_deleteは_償還払請求特定診療費・特別療養費を削除する() {
+        public void 償還払請求特定診療費_特別療養費エンティティを渡すと_deleteは_償還払請求特定診療費_特別療養費を削除する() {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,

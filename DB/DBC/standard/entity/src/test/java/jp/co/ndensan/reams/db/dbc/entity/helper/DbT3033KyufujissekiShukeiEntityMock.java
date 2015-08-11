@@ -57,12 +57,12 @@ public class DbT3033KyufujissekiShukeiEntityMock {
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("01")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("11")));
-        entity.setServiceJitsunissu(new Integer(1));
+        entity.setServiceJitsunissu(new Decimal(1));
         entity.setPlanTanisu(new Decimal(200));
         entity.setGendogakuKanriTaishoTanisu(new Decimal(300));
         entity.setGendogakuKanritaishogaiTanisu(new Decimal(400));
-        entity.setTankiNyushoPlanNissu(new Integer(5));
-        entity.setTankiNyushoJitsunissu(new Integer(6));
+        entity.setTankiNyushoPlanNissu(new Decimal(5));
+        entity.setTankiNyushoJitsunissu(new Decimal(6));
         entity.setHokenTanisuTotal(new Decimal(100));
         entity.setHokenTanisuTani(new Decimal(101));
         entity.setHokenSeikyugaku(new Decimal(102));
@@ -88,7 +88,7 @@ public class DbT3033KyufujissekiShukeiEntityMock {
         entity.setKohi3DekidakaTanisuTotal(new Decimal(404));
         entity.setKohi3DekidakaSeikyugaku(new Decimal(405));
         entity.setKohi3DekidakaIryohiRiyoshaFutangaku(new Decimal(406));
-        entity.setAtoTankiNyushoJitsunissu(new Integer(7));
+        entity.setAtoTankiNyushoJitsunissu(new Decimal(7));
         entity.setAtoHokenTanisuTotal(new Decimal(110));
         entity.setAtoHokenSeikyugaku(new Decimal(112));
         entity.setAtoHokenDekidakaTanisuTotal(new Decimal(114));
@@ -105,8 +105,8 @@ public class DbT3033KyufujissekiShukeiEntityMock {
         entity.setAtoKohi3Seikyugaku(new Decimal(412));
         entity.setAtoKohi3DekidakaTanisuTotal(new Decimal(414));
         entity.setAtoKohi3DekidakaSeikyugaku(new Decimal(415));
-        entity.setSaishinsaKaisu(new Integer(12));
-        entity.setKagoKaisu(new Integer(13));
+        entity.setSaishinsaKaisu(new Decimal(12));
+        entity.setKagoKaisu(new Decimal(13));
         return entity;
     }
 }

@@ -4,36 +4,31 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokei;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokei.*;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokei.*;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokei;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 予防給付計画自己作成合計のデータアクセスクラスです。
  */
-public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012YoboKeikakuJikoSakuseiGokeiEntity> {
+public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -51,7 +46,7 @@ public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012Y
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT3012YoboKeikakuJikoSakuseiGokeiEntity selectByKey(
+    public DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号,
@@ -68,15 +63,15 @@ public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012Y
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3012YoboKeikakuJikoSakuseiGokei.class).
+                table(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokei.class).
                 where(and(
-                eq(hihokenshaNo, 被保険者番号),
-                eq(taishoYM, 対象年月),
-                eq(rirekiNo, 履歴番号),
-                eq(kyotakuServiceKubun, 居宅サービス区分),
-                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
-                eq(serviceShuruiCode, サービス種類コード))).
-                toObject(DbT3012YoboKeikakuJikoSakuseiGokeiEntity.class);
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号),
+                                eq(kyotakuServiceKubun, 居宅サービス区分),
+                                eq(serviceTeikyoJigyoshaNo, サービス提供事業者番号),
+                                eq(serviceShuruiCode, サービス種類コード))).
+                toObject(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity.class);
     }
 
     /**
@@ -85,12 +80,12 @@ public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012Y
      * @return List<DbT3012YoboKeikakuJikoSakuseiGokeiEntity>
      */
     @Transaction
-    public List<DbT3012YoboKeikakuJikoSakuseiGokeiEntity> selectAll() {
+    public List<DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3012YoboKeikakuJikoSakuseiGokei.class).
-                toList(DbT3012YoboKeikakuJikoSakuseiGokeiEntity.class);
+                table(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokei.class).
+                toList(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity.class);
     }
 
     /**
@@ -101,7 +96,7 @@ public class DbT3012YoboKeikakuJikoSakuseiGokeiDac implements ISaveable<DbT3012Y
      */
     @Transaction
     @Override
-    public int save(DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity) {
+    public int save(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成合計エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);

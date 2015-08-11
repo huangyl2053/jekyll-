@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2008ShotokuDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,9 +51,9 @@ public class ShotokuManager {
      */
     @Transaction
     public Shotoku get介護所得(
-             FlexibleYear 所得年度,
+            FlexibleYear 所得年度,
             ShikibetsuCode 識別コード,
-            int 履歴番号) {
+            Decimal 履歴番号) {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

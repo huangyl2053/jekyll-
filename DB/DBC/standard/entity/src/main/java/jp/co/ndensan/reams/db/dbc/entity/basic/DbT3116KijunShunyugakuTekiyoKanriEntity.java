@@ -37,7 +37,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
     @PrimaryKey
     private FlexibleYear nendo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
     private HokenshaNo hihokenshaNo;
     private Decimal kotekiNenkinShunyugaku;
@@ -51,8 +51,8 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
     private FlexibleDate shinseishoSakuseiSetaiKijunYMD;
     private FlexibleDate ketteiTsuchishoHakkoYMD;
     private boolean atesakiInjiTaishoshaFlag;
-    private int nenshoFuyokojoUnder16Ninzu;
-    private int nenshoFuyokojoOver16Ninzu;
+    private Decimal nenshoFuyokojoUnder16Ninzu;
+    private Decimal nenshoFuyokojoOver16Ninzu;
     private Decimal setaiinSoShunyugaku;
     private boolean setainushiFlag;
     private Decimal kazeiShotokugaku;

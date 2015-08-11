@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -49,8 +48,8 @@ public class DbT1009ShikakuShutokuJogaishaDac implements ISaveable<DbT1009Shikak
         return accessor.select().
                 table(DbT1009ShikakuShutokuJogaisha.class).
                 where(and(
-                eq(shikibetsuCode, 識別コード),
-                eq(rirekiNo, 履歴番号))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT1009ShikakuShutokuJogaishaEntity.class);
     }
 

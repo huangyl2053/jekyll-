@@ -5,8 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsu;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,29 +42,39 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護除外住所地特例対象施設 extends FdaTestBase {
+    public static class get介護除外住所地特例対象施設 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー2;
-            sut.get介護除外住所地特例対象施設(null, 主キー2);
+            RString 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+            FlexibleDate 主キー3 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
+            sut.get介護除外住所地特例対象施設(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー1;
-            sut.get介護除外住所地特例対象施設(主キー1, null);
+            RString 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+            FlexibleDate 主キー3 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
+            sut.get介護除外住所地特例対象施設(主キー1, null, 主キー3);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            RString 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+            RString 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+            sut.get介護除外住所地特例対象施設(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(FlexibleDate.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー2;
-            KaigoJogaiTokureiTaishoShisetsu result = sut.get介護除外住所地特例対象施設(主キー1, 主キー2);
+            RString 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+            RString 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+            FlexibleDate 主キー3 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
+            KaigoJogaiTokureiTaishoShisetsu result = sut.get介護除外住所地特例対象施設(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -62,18 +82,19 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(FlexibleDate.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー2;
-            KaigoJogaiTokureiTaishoShisetsu result = sut.get介護除外住所地特例対象施設(主キー1, 主キー2);
+            RString 主キー1 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別;
+            RString 主キー2 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者番号;
+            FlexibleDate 主キー3 = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_有効開始年月日;
+            KaigoJogaiTokureiTaishoShisetsu result = sut.get介護除外住所地特例対象施設(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get事業者種別(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護除外住所地特例対象施設一覧 extends FdaTestBase {
+    public static class get介護除外住所地特例対象施設一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +113,11 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest {
             List<KaigoJogaiTokureiTaishoShisetsu> result = sut.get介護除外住所地特例対象施設一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get事業者種別(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_事業者種別));
         }
     }
 
-    public static class save介護除外住所地特例対象施設 extends XxxTestBase {
+    public static class save介護除外住所地特例対象施設 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -125,7 +146,7 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest {
             DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
             entity.initializeMd5();
             KaigoJogaiTokureiTaishoShisetsu 介護除外住所地特例対象施設 = new KaigoJogaiTokureiTaishoShisetsu(entity);
-            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit().set異動事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護除外住所地特例対象施設(介護除外住所地特例対象施設), is(true));
         }
@@ -137,7 +158,7 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest {
             DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
             entity.initializeMd5();
             KaigoJogaiTokureiTaishoShisetsu 介護除外住所地特例対象施設 = new KaigoJogaiTokureiTaishoShisetsu(entity);
-            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護除外住所地特例対象施設 = 介護除外住所地特例対象施設.createBuilderForEdit().set異動事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護除外住所地特例対象施設(介護除外住所地特例対象施設), is(false));
         }

@@ -61,24 +61,24 @@ public class DbT3018KyufujissekiMeisaiEntityMock {
         entity.setServiceShuruiCode(new ServiceShuruiCode(new RString("11")));
         entity.setTekiyo(new RString("概要"));
         entity.setTanisu(new Decimal(1000));
-        entity.setNissuKaisu(new Integer(4));
-        entity.setKohi1TaishoNissuKaisu(new Integer(1));
-        entity.setKohi2TaishoNissuKaisu(new Integer(2));
-        entity.setKohi3TaishoNissuKaisu(new Integer(3));
+        entity.setNissuKaisu(new Decimal(4));
+        entity.setKohi1TaishoNissuKaisu(new Decimal(1));
+        entity.setKohi2TaishoNissuKaisu(new Decimal(2));
+        entity.setKohi3TaishoNissuKaisu(new Decimal(3));
         entity.setServiceTanisu(new Decimal(1500));
         entity.setKohi1TaishoServiceTanisu(new Decimal(1));
         entity.setKohi2TaishoServiceTanisu(new Decimal(2));
         entity.setKohi3TaishoServiceTanisu(new Decimal(3));
         entity.setAtoTanisu(new Decimal(1001));
-        entity.setAtoNissuKaisu(new Integer(41));
-        entity.setAtoKohi1TaishoNissuKaisu(new Integer(11));
-        entity.setAtoKohi2TaishoNissukaisu(new Integer(21));
-        entity.setAtoKohi3TaishoNissuKaisu(new Integer(31));
+        entity.setAtoNissuKaisu(new Decimal(41));
+        entity.setAtoKohi1TaishoNissuKaisu(new Decimal(11));
+        entity.setAtoKohi2TaishoNissukaisu(new Decimal(21));
+        entity.setAtoKohi3TaishoNissuKaisu(new Decimal(31));
         entity.setAtoKohi1TaishoServiceTanisu(new Decimal(11));
         entity.setAtoKohi2TaishoServiceTanisu(new Decimal(21));
         entity.setAtoKohi3TaishoServiceTanisu(new Decimal(31));
-        entity.setSaishinsaKaisu(new Integer(1500));
-        entity.setKagoKaisu(new Integer(2));
+        entity.setSaishinsaKaisu(new Decimal(1500));
+        entity.setKagoKaisu(new Decimal(2));
         return entity;
     }
 }
