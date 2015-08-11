@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShi
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -52,9 +51,9 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
                 where(and(
-                eq(jigyoshaShubetsu, 事業者種別),
-                eq(jigyoshaNo, 事業者番号),
-                eq(yukoKaishiYMD, 有効開始年月日))).
+                                eq(jigyoshaShubetsu, 事業者種別),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yukoKaishiYMD, 有効開始年月日))).
                 toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 

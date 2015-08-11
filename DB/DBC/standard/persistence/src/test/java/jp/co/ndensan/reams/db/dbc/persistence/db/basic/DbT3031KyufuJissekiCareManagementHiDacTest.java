@@ -8,18 +8,17 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3031KyufuJissekiCareManagementHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3031KyufuJissekiCareManagementHiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3031KyufuJissekiCareManagementHiEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +36,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3031KyufuJissekiCareManagementHiDac sut;
@@ -59,10 +57,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             TestSupport.insert(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_入力識別番号,
@@ -71,10 +70,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -87,10 +87,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -103,10 +104,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -119,10 +121,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -135,10 +138,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -151,10 +155,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -167,10 +172,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -183,14 +189,15 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
-        public void 指定／基準該当事業所区分コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 指定_基準該当事業所区分コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_入力識別番号,
@@ -199,10 +206,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -215,10 +223,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -231,10 +240,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -247,10 +257,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test
@@ -263,10 +274,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -280,10 +292,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -300,10 +313,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             TestSupport.insert(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_入力識別番号,
@@ -312,10 +326,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -337,10 +352,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
 
             assertThat(sut.selectByKey(
                     DEFAULT_交換情報識別番号,
@@ -350,10 +366,12 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号), is(notNullValue()));
+                    DEFAULT_サービス計画費明細行番号
+            ), is(notNullValue())
+            );
         }
     }
 
@@ -369,10 +387,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test
@@ -385,11 +404,12 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
-            updateRecord.set変更したい項目(75);
+                    DEFAULT_サービス計画費明細行番号
+            );
+            updateRecord.setAtoKaisu(new Decimal(5));
 
             sut.save(updateRecord);
 
@@ -401,12 +421,13 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getAtoKaisu(), is(updatedRecord.getAtoKaisu()));
         }
     }
 
@@ -422,10 +443,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
         }
 
         @Test
@@ -438,10 +460,11 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号);
+                    DEFAULT_サービス計画費明細行番号
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -454,24 +477,26 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
-                    DEFAULT_指定／基準該当事業所区分コード,
+                    DEFAULT_指定_基準該当事業所区分コード,
                     DEFAULT_居宅サービス計画作成依頼届出年月日,
                     DEFAULT_通し番号,
-                    DEFAULT_サービス計画費明細行番号), is(nullValue()));
+                    DEFAULT_サービス計画費明細行番号
+            ), is(nullValue())
+            );
         }
     }
 
     private static class TestSupport {
 
         public static void insert(
-                KokanShikibetsuCode 交換情報識別番号,
-                NyuryokuShikibetsuCode 入力識別番号,
+                KokanShikibetsuNo 交換情報識別番号,
+                NyuryokuShikibetsuNo 入力識別番号,
                 RString レコード種別コード,
                 HokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth サービス提供年月,
                 JigyoshaNo 事業所番号,
-                RString 指定／基準該当事業所区分コード,
+                RString 指定_基準該当事業所区分コード,
                 FlexibleDate 居宅サービス計画作成依頼届出年月日,
                 RString 通し番号,
                 RString サービス計画費明細行番号) {
@@ -483,7 +508,7 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
             entity.setJigyoshoNo(事業所番号);
-            entity.setShiteiKijungaitoJigyoshoKubunCode(指定／基準該当事業所区分コード);
+            entity.setShiteiKijungaitoJigyoshoKubunCode(指定_基準該当事業所区分コード);
             entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
             entity.setToshiNo(通し番号);
             entity.setServicePlanhiMeisaiLineNo(サービス計画費明細行番号);

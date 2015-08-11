@@ -4,29 +4,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904.*;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3047ShokanServicePlan200904;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3047ShokanServicePlan200904.*;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -47,7 +42,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 履歴番号 RirekiNo
-     * @param 指定／基準該当事業者区分コード ShiteiKijunGaitoJigyoshaKubunCode
+     * @param 指定_基準該当事業者区分コード ShiteiKijunGaitoJigyoshaKubunCode
      * @param 明細行番号 MeisaiLineNo
      * @param 居宅サービス計画作成依頼届出年月日 KyotakuServiceSakuseiIraiYMD
      * @return DbT3047ShokanServicePlan200904Entity
@@ -61,7 +56,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             JigyoshaNo 事業者番号,
             RString 様式番号,
             Decimal 履歴番号,
-            RString 指定／基準該当事業者区分コード,
+            RString 指定_基準該当事業者区分コード,
             RString 明細行番号,
             FlexibleDate 居宅サービス計画作成依頼届出年月日) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -70,7 +65,7 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(指定／基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード"));
+        requireNonNull(指定_基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード"));
         requireNonNull(明細行番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細行番号"));
         requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
 
@@ -79,15 +74,15 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
         return accessor.select().
                 table(DbT3047ShokanServicePlan200904.class).
                 where(and(
-                eq(hiHokenshaNo, 被保険者番号),
-                eq(serviceTeikyoYM, サービス提供年月),
-                eq(seiriNp, 整理番号),
-                eq(jigyoshaNo, 事業者番号),
-                eq(yoshikiNo, 様式番号),
-                eq(rirekiNo, 履歴番号),
-                eq(shiteiKijunGaitoJigyoshaKubunCode, 指定／基準該当事業者区分コード),
-                eq(meisaiLineNo, 明細行番号),
-                eq(kyotakuServiceSakuseiIraiYMD, 居宅サービス計画作成依頼届出年月日))).
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNp, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
+                                eq(rirekiNo, 履歴番号),
+                                eq(shiteiKijunGaitoJigyoshaKubunCode, 指定_基準該当事業者区分コード),
+                                eq(meisaiLineNo, 明細行番号),
+                                eq(kyotakuServiceSakuseiIraiYMD, 居宅サービス計画作成依頼届出年月日))).
                 toObject(DbT3047ShokanServicePlan200904Entity.class);
     }
 

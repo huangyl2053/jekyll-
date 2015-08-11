@@ -3,13 +3,13 @@
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
+
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -48,8 +48,8 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT300
         return accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
-                eq(taishoYM, 対象年月),
-                eq(rirekiNo, 履歴番号))).
+                                eq(taishoYM, 対象年月),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
     }
 

@@ -7,19 +7,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3046ShokanServicePlan200604EntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3046ShokanServicePlan200604EntityGenerator.*;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -37,7 +27,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_キー;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT3046ShokanServicePlan200604Dac sut;
@@ -51,25 +40,19 @@ public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
         @Before
         public void setUp() {
-            TestSupport.insert(
-);
-            TestSupport.insert(
-);
+            TestSupport.insert();
+            TestSupport.insert();
         }
-
-
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            DbT3046ShokanServicePlan200604Entity insertedRecord = sut.selectByKey(
-);
+            DbT3046ShokanServicePlan200604Entity insertedRecord = sut.selectByKey();
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            DbT3046ShokanServicePlan200604Entity insertedRecord = sut.selectByKey(
-);
+            DbT3046ShokanServicePlan200604Entity insertedRecord = sut.selectByKey();
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -78,10 +61,8 @@ public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
         @Test
         public void 償還払請求サービス計画200604が存在する場合_selectAllは_全件を返す() {
-            TestSupport.insert(
-);
-            TestSupport.insert(
-);
+            TestSupport.insert();
+            TestSupport.insert();
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -95,11 +76,9 @@ public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
         @Test
         public void 償還払請求サービス計画200604エンティティを渡すと_insertは_償還払請求サービス計画200604を追加する() {
-            TestSupport.insert(
-);
+            TestSupport.insert();
 
-            assertThat(sut.selectByKey(
-), is(notNullValue()));
+            assertThat(sut.selectByKey(), is(notNullValue()));
         }
     }
 
@@ -107,22 +86,19 @@ public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
         @Before
         public void setUp() {
-            TestSupport.insert(
-);
+            TestSupport.insert();
         }
 
         @Test
         public void 償還払請求サービス計画200604エンティティを渡すと_updateは_償還払請求サービス計画200604を更新する() {
-            DbT3046ShokanServicePlan200604Entity updateRecord = sut.selectByKey(
-);
-            updateRecord.set変更したい項目(75);
+            DbT3046ShokanServicePlan200604Entity updateRecord = sut.selectByKey();
+            updateRecord.setFushikyuRiyu(new RString("test"));
 
             sut.save(updateRecord);
 
-            DbT3046ShokanServicePlan200604Entity updatedRecord = sut.selectByKey(
-);
+            DbT3046ShokanServicePlan200604Entity updatedRecord = sut.selectByKey();
 
-            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getFushikyuRiyu(), is(updatedRecord.getFushikyuRiyu()));
         }
     }
 
@@ -130,27 +106,23 @@ public class DbT3046ShokanServicePlan200604DacTest extends DbcTestDacBase {
 
         @Before
         public void setUp() {
-            TestSupport.insert(
-);
+            TestSupport.insert();
         }
 
         @Test
         public void 償還払請求サービス計画200604エンティティを渡すと_deleteは_償還払請求サービス計画200604を削除する() {
-            DbT3046ShokanServicePlan200604Entity deletedEntity = sut.selectByKey(
-);
+            DbT3046ShokanServicePlan200604Entity deletedEntity = sut.selectByKey();
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
-            assertThat(sut.selectByKey(
-), is(nullValue()));
+            assertThat(sut.selectByKey(), is(nullValue()));
         }
     }
 
     private static class TestSupport {
 
-        public static void insert(
-) {
+        public static void insert() {
             DbT3046ShokanServicePlan200604Entity entity = DbT3046ShokanServicePlan200604EntityGenerator.createDbT3046ShokanServicePlan200604Entity();
 
             sut.save(entity);

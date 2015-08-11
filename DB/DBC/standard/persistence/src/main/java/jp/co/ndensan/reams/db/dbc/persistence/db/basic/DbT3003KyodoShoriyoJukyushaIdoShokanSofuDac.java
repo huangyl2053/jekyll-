@@ -4,29 +4,23 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofu;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofu.*;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofu;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofu.*;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -70,12 +64,12 @@ public class DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac implements ISaveable<Db
         return accessor.select().
                 table(DbT3003KyodoShoriyoJukyushaIdoShokanSofu.class).
                 where(and(
-                eq(idoYMD, 異動年月日),
-                eq(idoKubunCode, 異動区分コード),
-                eq(jukyushaIdoJiyu, 受給者異動事由),
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(hiHokenshaNo, 被保険者番号),
-                eq(rirekiNo, 履歴番号))).
+                                eq(idoYMD, 異動年月日),
+                                eq(idoKubunCode, 異動区分コード),
+                                eq(jukyushaIdoJiyu, 受給者異動事由),
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity.class);
     }
 

@@ -4,29 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.*;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3045ShokanServicePlan200004;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -41,21 +27,17 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
     /**
      * 主キーで償還払請求サービス計画200004を取得します。
      *
-
+     *
      * @return DbT3045ShokanServicePlan200004Entity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT3045ShokanServicePlan200004Entity selectByKey(
-) throws NullPointerException {
-
+    public DbT3045ShokanServicePlan200004Entity selectByKey() throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3045ShokanServicePlan200004.class).
-                where(and(
-)).
                 toObject(DbT3045ShokanServicePlan200004Entity.class);
     }
 
