@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import org.junit.Test;
@@ -31,7 +32,7 @@ import org.junit.runner.RunWith;
 public class FukaErrorInternalReportItemTest extends DbbTestBase {
 
     private static FukaErrorInternalReportItem sut;
-    private static FukaErrorModel model;
+    private static FukaErrorList model;
 
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
@@ -61,48 +62,48 @@ public class FukaErrorInternalReportItemTest extends DbbTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 賦課年度にnullが渡されたとき_NullPointerExceptionが発生する() {
-            model.set賦課年度(null);
+            model = model.createBuilderForEdit().set賦課年度(null).build();
             sut = new FukaErrorInternalReportItem(model);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 通知書番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            model.set通知書番号(null);
+            model = model.createBuilderForEdit().set通知書番号(null).build();
             sut = new FukaErrorInternalReportItem(model);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 処理区分にnullが渡されたとき_NullPointerExceptionが発生する() {
-            model.set処理区分(null);
+            model = model.createBuilderForEdit().set処理区分コード(null).build();
             sut = new FukaErrorInternalReportItem(model);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void エラーコードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            model.setエラーコード(null);
+            model = model.createBuilderForEdit().setエラーコード(null).build();
             sut = new FukaErrorInternalReportItem(model);
             fail();
         }
 
         @Test
         public void 必須項目に値が渡されたとき_インスタンスが生成される() {
-            model.set被保険者番号(null);
-            model.set識別コード(null);
+            model = model.createBuilderForEdit().set被保険者番号(null).build();
+            model = model.createBuilderForEdit().set識別コード(null).build();
             sut = new FukaErrorInternalReportItem(model);
             assertThat(sut, is(instanceOf(FukaErrorInternalReportItem.class)));
         }
     }
 
     private static void setDefaultData() {
-        model = new FukaErrorModel();
-        model.set賦課年度(new FlexibleYear(賦課年度.toDateString()));
-        model.set通知書番号(通知書番号);
-        model.setエラーコード(エラー内容.getCode());
-        model.set被保険者番号(被保険者番号);
-        model.set識別コード(識別コード);
-        model.set処理区分(処理区分);
+        model = new FukaErrorList(SubGyomuCode.DBA介護資格, RString.EMPTY, 賦課年度, 通知書番号);
+        model = model.createBuilderForEdit().set賦課年度(new FlexibleYear(賦課年度.toDateString())).build();
+        model = model.createBuilderForEdit().set通知書番号(通知書番号).build();
+        model = model.createBuilderForEdit().setエラーコード(エラー内容.getCode()).build();
+        model = model.createBuilderForEdit().set被保険者番号(被保険者番号).build();
+        model = model.createBuilderForEdit().set識別コード(識別コード).build();
+        model = model.createBuilderForEdit().set処理区分コード(処理区分.getCode()).build();
     }
 }

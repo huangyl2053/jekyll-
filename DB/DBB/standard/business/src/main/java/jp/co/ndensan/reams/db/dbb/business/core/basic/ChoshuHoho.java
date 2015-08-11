@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護徴収方法を管理するクラスです。
  */
-public class ChoshuHoho extends ParentModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHohoEntity, ChoshuHoho> implements Serializable {
+public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHohoEntity, ChoshuHoho> implements Serializable {
 
     private final DbT2001ChoshuHohoEntity entity;
     private final ChoshuHohoIdentifier id;
@@ -33,8 +35,8 @@ public class ChoshuHoho extends ParentModelBase<ChoshuHohoIdentifier, DbT2001Cho
      * @param 履歴番号 履歴番号
      */
     public ChoshuHoho(FlexibleYear 賦課年度,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +45,10 @@ Decimal 履歴番号) {
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ChoshuHohoIdentifier(
-        賦課年度,
-        被保険者番号,
-        履歴番号
-                );
+                賦課年度,
+                被保険者番号,
+                履歴番号
+        );
     }
 
     /**
@@ -272,7 +274,7 @@ Decimal 履歴番号) {
      *
      * @return 仮徴収・基礎年金番号
      */
-    public RString get仮徴収・基礎年金番号() {
+    public RString get仮徴収_基礎年金番号() {
         return entity.getKariNenkinNo();
     }
 
@@ -281,7 +283,7 @@ Decimal 履歴番号) {
      *
      * @return 仮徴収・年金コード
      */
-    public RString get仮徴収・年金コード() {
+    public RString get仮徴収_年金コード() {
         return entity.getKariNenkinCode();
     }
 
@@ -290,7 +292,7 @@ Decimal 履歴番号) {
      *
      * @return 仮徴収・捕捉月
      */
-    public RString get仮徴収・捕捉月() {
+    public RString get仮徴収_捕捉月() {
         return entity.getKariHosokuM();
     }
 
@@ -299,7 +301,7 @@ Decimal 履歴番号) {
      *
      * @return 本徴収・基礎年金番号
      */
-    public RString get本徴収・基礎年金番号() {
+    public RString get本徴収_基礎年金番号() {
         return entity.getHonNenkinNo();
     }
 
@@ -308,7 +310,7 @@ Decimal 履歴番号) {
      *
      * @return 本徴収・年金コード
      */
-    public RString get本徴収・年金コード() {
+    public RString get本徴収_年金コード() {
         return entity.getHonNenkinCode();
     }
 
@@ -317,7 +319,7 @@ Decimal 履歴番号) {
      *
      * @return 本徴収・捕捉月
      */
-    public RString get本徴収・捕捉月() {
+    public RString get本徴収_捕捉月() {
         return entity.getHonHosokuM();
     }
 
@@ -326,7 +328,7 @@ Decimal 履歴番号) {
      *
      * @return 翌年度仮徴収・基礎年金番号
      */
-    public RString get翌年度仮徴収・基礎年金番号() {
+    public RString get翌年度仮徴収_基礎年金番号() {
         return entity.getYokunendoKariNenkinNo();
     }
 
@@ -335,7 +337,7 @@ Decimal 履歴番号) {
      *
      * @return 翌年度仮徴収・年金コード
      */
-    public RString get翌年度仮徴収・年金コード() {
+    public RString get翌年度仮徴収_年金コード() {
         return entity.getYokunendoKariNenkinCode();
     }
 
@@ -344,7 +346,7 @@ Decimal 履歴番号) {
      *
      * @return 翌年度仮徴収・捕捉月
      */
-    public RString get翌年度仮徴収・捕捉月() {
+    public RString get翌年度仮徴収_捕捉月() {
         return entity.getYokunendoKariHosokuM();
     }
 
@@ -405,22 +407,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護徴収方法のみを変更対象とします。<br/>
-     * {@link DbT2001ChoshuHohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ChoshuHoho}
-     */
-    @Override
-    public ChoshuHoho modifiedModel() {
-        DbT2001ChoshuHohoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ChoshuHoho(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護徴収方法を削除対象とします。<br/>
      * {@link DbT2001ChoshuHohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -437,6 +423,7 @@ Decimal 履歴番号) {
         }
         return new ChoshuHoho(deletedEntity, id);
     }
+
     /**
      * {@link ChoshuHoho}のシリアライズ形式を提供します。
      *
@@ -447,13 +434,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT2001ChoshuHohoEntity entity;
         private final ChoshuHohoIdentifier id;
 
-        private _SerializationProxy(DbT2001ChoshuHohoEntity entity,ChoshuHohoIdentifier id) {
+        private _SerializationProxy(DbT2001ChoshuHohoEntity entity, ChoshuHohoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

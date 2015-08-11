@@ -6,20 +6,21 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護期別を管理するクラスです。
  */
-public class Kibetsu extends ParentModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, Kibetsu> implements Serializable {
+public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, Kibetsu> implements Serializable {
 
     private final DbT2003KibetsuEntity entity;
     private final KibetsuIdentifier id;
@@ -36,11 +37,11 @@ public class Kibetsu extends ParentModelBase<KibetsuIdentifier, DbT2003KibetsuEn
      * @param 期 期
      */
     public Kibetsu(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号,
+            RString 徴収方法,
+            int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -55,13 +56,13 @@ int 期) {
         this.entity.setChoshuHouhou(徴収方法);
         this.entity.setKi(期);
         this.id = new KibetsuIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号,
-        徴収方法,
-        期
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                徴収方法,
+                期
+        );
     }
 
     /**
@@ -180,22 +181,6 @@ int 期) {
     }
 
     /**
-     * 介護期別のみを変更対象とします。<br/>
-     * {@link DbT2003KibetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link Kibetsu}
-     */
-    @Override
-    public Kibetsu modifiedModel() {
-        DbT2003KibetsuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new Kibetsu(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護期別を削除対象とします。<br/>
      * {@link DbT2003KibetsuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -212,6 +197,7 @@ int 期) {
         }
         return new Kibetsu(deletedEntity, id);
     }
+
     /**
      * {@link Kibetsu}のシリアライズ形式を提供します。
      *
@@ -222,13 +208,19 @@ int 期) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2003KibetsuEntity entity;
         private final KibetsuIdentifier id;
 
-        private _SerializationProxy(DbT2003KibetsuEntity entity,KibetsuIdentifier id) {
+        private _SerializationProxy(DbT2003KibetsuEntity entity, KibetsuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

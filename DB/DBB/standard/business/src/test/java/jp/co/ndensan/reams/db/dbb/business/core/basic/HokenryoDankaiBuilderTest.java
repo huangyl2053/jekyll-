@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,18 @@ public class HokenryoDankaiBuilderTest extends DbbTestBase {
     private static DbT2013HokenryoDankaiEntity HokenryoDankaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 賦課年度;
+    private static RString 段階index;
+    private static RString ランク区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー名2;
+        賦課年度 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+        段階index = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static HokenryoDankaiBuilder sut;
         private static HokenryoDankai business;
@@ -42,14 +48,15 @@ public class HokenryoDankaiBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             HokenryoDankaiEntity = new DbT2013HokenryoDankaiEntity();
-            HokenryoDankaiEntity.setXXX(主キー名1);
-            HokenryoDankaiEntity.setXXX(主キー名2);
+            HokenryoDankaiEntity.setFukaNendo(賦課年度);
+            HokenryoDankaiEntity.setDankaiIndex(段階index);
 
             business = new HokenryoDankai(HokenryoDankaiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
             business = sut.set賦課年度(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度).build();

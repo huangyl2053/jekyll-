@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 保険料段階を管理するクラスです。
  */
-public class HokenryoDankai extends ParentModelBase<HokenryoDankaiIdentifier, DbT2013HokenryoDankaiEntity, HokenryoDankai> implements Serializable {
+public class HokenryoDankai extends ModelBase<HokenryoDankaiIdentifier, DbT2013HokenryoDankaiEntity, HokenryoDankai> implements Serializable {
 
     private final DbT2013HokenryoDankaiEntity entity;
     private final HokenryoDankaiIdentifier id;
@@ -33,8 +33,8 @@ public class HokenryoDankai extends ParentModelBase<HokenryoDankaiIdentifier, Db
      * @param ランク区分 ランク区分
      */
     public HokenryoDankai(FlexibleYear 賦課年度,
-RString 段階インデックス,
-RString ランク区分) {
+            RString 段階インデックス,
+            RString ランク区分) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
@@ -43,10 +43,10 @@ RString ランク区分) {
         this.entity.setDankaiIndex(段階インデックス);
         this.entity.setRankuKubun(ランク区分);
         this.id = new HokenryoDankaiIdentifier(
-        賦課年度,
-        段階インデックス,
-        ランク区分
-                );
+                賦課年度,
+                段階インデックス,
+                ランク区分
+        );
     }
 
     /**
@@ -153,22 +153,6 @@ RString ランク区分) {
     }
 
     /**
-     * 保険料段階のみを変更対象とします。<br/>
-     * {@link DbT2013HokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link HokenryoDankai}
-     */
-    @Override
-    public HokenryoDankai modifiedModel() {
-        DbT2013HokenryoDankaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new HokenryoDankai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する保険料段階を削除対象とします。<br/>
      * {@link DbT2013HokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -185,6 +169,7 @@ RString ランク区分) {
         }
         return new HokenryoDankai(deletedEntity, id);
     }
+
     /**
      * {@link HokenryoDankai}のシリアライズ形式を提供します。
      *
@@ -195,13 +180,19 @@ RString ランク区分) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2013HokenryoDankaiEntity entity;
         private final HokenryoDankaiIdentifier id;
 
-        private _SerializationProxy(DbT2013HokenryoDankaiEntity entity,HokenryoDankaiIdentifier id) {
+        private _SerializationProxy(DbT2013HokenryoDankaiEntity entity, HokenryoDankaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

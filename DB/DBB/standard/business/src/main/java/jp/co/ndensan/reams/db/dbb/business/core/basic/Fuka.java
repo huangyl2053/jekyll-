@@ -6,20 +6,28 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護賦課を管理するクラスです。
  */
-public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuka> implements Serializable {
+public class Fuka extends ModelBase<FukaIdentifier, DbT2002FukaEntity, Fuka> implements Serializable {
 
     private final DbT2002FukaEntity entity;
     private final FukaIdentifier id;
@@ -34,9 +42,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      * @param 履歴番号 履歴番号
      */
     public Fuka(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -47,11 +55,11 @@ Decimal 履歴番号) {
         this.entity.setTsuchishoNo(通知書番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new FukaIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号
+        );
     }
 
     /**
@@ -422,7 +430,7 @@ Decimal 履歴番号) {
      *
      * @return 減免前介護保険料（年額）
      */
-    public Decimal get減免前介護保険料（年額）() {
+    public Decimal get減免前介護保険料_年額() {
         return entity.getGemmenMaeHokenryo();
     }
 
@@ -440,7 +448,7 @@ Decimal 履歴番号) {
      *
      * @return 確定介護保険料（年額）
      */
-    public Decimal get確定介護保険料（年額）() {
+    public Decimal get確定介護保険料_年額() {
         return entity.getKakuteiHokenryo();
     }
 
@@ -449,7 +457,7 @@ Decimal 履歴番号) {
      *
      * @return 保険料段階（仮算定時）
      */
-    public RString get保険料段階（仮算定時）() {
+    public RString get保険料段階_仮算定時() {
         return entity.getHokenryoDankaiKarisanntei();
     }
 
@@ -528,22 +536,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護賦課のみを変更対象とします。<br/>
-     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link Fuka}
-     */
-    @Override
-    public Fuka modifiedModel() {
-        DbT2002FukaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new Fuka(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護賦課を削除対象とします。<br/>
      * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -560,6 +552,7 @@ Decimal 履歴番号) {
         }
         return new Fuka(deletedEntity, id);
     }
+
     /**
      * {@link Fuka}のシリアライズ形式を提供します。
      *
@@ -570,13 +563,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2002FukaEntity entity;
         private final FukaIdentifier id;
 
-        private _SerializationProxy(DbT2002FukaEntity entity,FukaIdentifier id) {
+        private _SerializationProxy(DbT2002FukaEntity entity, FukaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

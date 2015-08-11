@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護賦課減免を管理するクラスです。
  */
-public class Gemmen extends ParentModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gemmen> implements Serializable {
+public class Gemmen extends ModelBase<GemmenIdentifier, DbT2004GemmenEntity, Gemmen> implements Serializable {
 
     private final DbT2004GemmenEntity entity;
     private final GemmenIdentifier id;
@@ -34,9 +37,9 @@ public class Gemmen extends ParentModelBase<GemmenIdentifier, DbT2004GemmenEntit
      * @param 履歴番号 履歴番号
      */
     public Gemmen(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -47,11 +50,11 @@ Decimal 履歴番号) {
         this.entity.setTsuchishoNo(通知書番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new GemmenIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号
+        );
     }
 
     /**
@@ -258,22 +261,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護賦課減免のみを変更対象とします。<br/>
-     * {@link DbT2004GemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link Gemmen}
-     */
-    @Override
-    public Gemmen modifiedModel() {
-        DbT2004GemmenEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new Gemmen(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護賦課減免を削除対象とします。<br/>
      * {@link DbT2004GemmenEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -290,6 +277,7 @@ Decimal 履歴番号) {
         }
         return new Gemmen(deletedEntity, id);
     }
+
     /**
      * {@link Gemmen}のシリアライズ形式を提供します。
      *
@@ -300,13 +288,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2004GemmenEntity entity;
         private final GemmenIdentifier id;
 
-        private _SerializationProxy(DbT2004GemmenEntity entity,GemmenIdentifier id) {
+        private _SerializationProxy(DbT2004GemmenEntity entity, GemmenIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

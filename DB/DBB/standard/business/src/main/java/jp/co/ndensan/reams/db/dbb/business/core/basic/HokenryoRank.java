@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 保険料ランクを管理するクラスです。
  */
-public class HokenryoRank extends ParentModelBase<HokenryoRankIdentifier, DbT2012HokenryoRankEntity, HokenryoRank> implements Serializable {
+public class HokenryoRank extends ModelBase<HokenryoRankIdentifier, DbT2012HokenryoRankEntity, HokenryoRank> implements Serializable {
 
     private final DbT2012HokenryoRankEntity entity;
     private final HokenryoRankIdentifier id;
@@ -32,16 +32,16 @@ public class HokenryoRank extends ParentModelBase<HokenryoRankIdentifier, DbT201
      * @param 市町村コード 市町村コード
      */
     public HokenryoRank(FlexibleYear 賦課年度,
-LasdecCode 市町村コード) {
+            LasdecCode 市町村コード) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT2012HokenryoRankEntity();
         this.entity.setFukaNendo(賦課年度);
         this.entity.setShichosonCode(市町村コード);
         this.id = new HokenryoRankIdentifier(
-        賦課年度,
-        市町村コード
-                );
+                賦課年度,
+                市町村コード
+        );
     }
 
     /**
@@ -129,22 +129,6 @@ LasdecCode 市町村コード) {
     }
 
     /**
-     * 保険料ランクのみを変更対象とします。<br/>
-     * {@link DbT2012HokenryoRankEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link HokenryoRank}
-     */
-    @Override
-    public HokenryoRank modifiedModel() {
-        DbT2012HokenryoRankEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new HokenryoRank(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する保険料ランクを削除対象とします。<br/>
      * {@link DbT2012HokenryoRankEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -161,6 +145,7 @@ LasdecCode 市町村コード) {
         }
         return new HokenryoRank(deletedEntity, id);
     }
+
     /**
      * {@link HokenryoRank}のシリアライズ形式を提供します。
      *
@@ -171,13 +156,19 @@ LasdecCode 市町村コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2012HokenryoRankEntity entity;
         private final HokenryoRankIdentifier id;
 
-        private _SerializationProxy(DbT2012HokenryoRankEntity entity,HokenryoRankIdentifier id) {
+        private _SerializationProxy(DbT2012HokenryoRankEntity entity, HokenryoRankIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

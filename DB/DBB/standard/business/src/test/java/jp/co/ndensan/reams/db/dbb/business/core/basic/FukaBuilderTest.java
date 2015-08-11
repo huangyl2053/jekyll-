@@ -4,9 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +30,19 @@ public class FukaBuilderTest extends DbbTestBase {
     private static DbT2002FukaEntity FukaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 調停年度;
+    private static FlexibleYear 賦課年度;
+    private static TsuchishoNo 通知書番号;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2002FukaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2002FukaEntityGenerator.DEFAULT_主キー名2;
+        調停年度 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+        賦課年度 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static FukaBuilder sut;
         private static Fuka business;
@@ -42,14 +50,15 @@ public class FukaBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             FukaEntity = new DbT2002FukaEntity();
-            FukaEntity.setXXX(主キー名1);
-            FukaEntity.setXXX(主キー名2);
+            FukaEntity.setChoteiNendo(調停年度);
+            FukaEntity.setFukaNendo(賦課年度);
 
             business = new Fuka(FukaEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
             business = sut.set調定年度(DbT2002FukaEntityGenerator.DEFAULT_調定年度).build();
@@ -273,9 +282,9 @@ public class FukaBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の減免前介護保険料（年額）は_設定した値と同じ減免前介護保険料（年額）を返す() {
-            business = sut.set減免前介護保険料（年額）(DbT2002FukaEntityGenerator.DEFAULT_減免前介護保険料（年額）).build();
-            assertThat(business.get減免前介護保険料（年額）(), is(DbT2002FukaEntityGenerator.DEFAULT_減免前介護保険料（年額）));
+        public void 戻り値の減免前介護保険料_年額は_設定した値と同じ減免前介護保険料_年額を返す() {
+            business = sut.set減免前介護保険料_年額(DbT2002FukaEntityGenerator.DEFAULT_減免前介護保険料_年額).build();
+            assertThat(business.get減免前介護保険料_年額(), is(DbT2002FukaEntityGenerator.DEFAULT_減免前介護保険料_年額));
         }
 
         @Test
@@ -285,15 +294,15 @@ public class FukaBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の確定介護保険料（年額）は_設定した値と同じ確定介護保険料（年額）を返す() {
-            business = sut.set確定介護保険料（年額）(DbT2002FukaEntityGenerator.DEFAULT_確定介護保険料（年額）).build();
-            assertThat(business.get確定介護保険料（年額）(), is(DbT2002FukaEntityGenerator.DEFAULT_確定介護保険料（年額）));
+        public void 戻り値の確定介護保険料_年額は_設定した値と同じ確定介護保険料_年額を返す() {
+            business = sut.set確定介護保険料_年額(DbT2002FukaEntityGenerator.DEFAULT_確定介護保険料_年額).build();
+            assertThat(business.get確定介護保険料_年額(), is(DbT2002FukaEntityGenerator.DEFAULT_確定介護保険料_年額));
         }
 
         @Test
-        public void 戻り値の保険料段階（仮算定時）は_設定した値と同じ保険料段階（仮算定時）を返す() {
-            business = sut.set保険料段階（仮算定時）(DbT2002FukaEntityGenerator.DEFAULT_保険料段階（仮算定時）).build();
-            assertThat(business.get保険料段階（仮算定時）(), is(DbT2002FukaEntityGenerator.DEFAULT_保険料段階（仮算定時）));
+        public void 戻り値の保険料段階_仮算定時は_設定した値と同じ保険料段階_仮算定時を返す() {
+            business = sut.set保険料段階_仮算定時(DbT2002FukaEntityGenerator.DEFAULT_保険料段階_仮算定時).build();
+            assertThat(business.get保険料段階_仮算定時(), is(DbT2002FukaEntityGenerator.DEFAULT_保険料段階_仮算定時));
         }
 
         @Test

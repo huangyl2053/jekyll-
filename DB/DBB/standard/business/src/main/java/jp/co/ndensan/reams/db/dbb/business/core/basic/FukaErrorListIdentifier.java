@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -28,9 +32,9 @@ public class FukaErrorListIdentifier implements Serializable {
      * @param 通知書番号 通知書番号
      */
     public FukaErrorListIdentifier(SubGyomuCode サブ業務コード,
-RString 内部帳票ID,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号) {
+            RString 内部帳票ID,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
         this.サブ業務コード = サブ業務コード;
         this.内部帳票ID = 内部帳票ID;
         this.賦課年度 = 賦課年度;

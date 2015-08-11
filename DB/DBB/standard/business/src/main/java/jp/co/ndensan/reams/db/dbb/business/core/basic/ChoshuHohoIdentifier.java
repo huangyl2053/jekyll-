@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -26,8 +29,8 @@ public class ChoshuHohoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public ChoshuHohoIdentifier(FlexibleYear 賦課年度,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         this.賦課年度 = 賦課年度;
         this.被保険者番号 = 被保険者番号;
         this.履歴番号 = 履歴番号;

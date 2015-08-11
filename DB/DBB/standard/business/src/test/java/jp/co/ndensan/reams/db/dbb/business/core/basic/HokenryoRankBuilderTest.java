@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,17 @@ public class HokenryoRankBuilderTest extends DbbTestBase {
     private static DbT2012HokenryoRankEntity HokenryoRankEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 賦課年度;
+    private static LasdecCode 市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー名2;
+        賦課年度 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+        市町村コード = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static HokenryoRankBuilder sut;
         private static HokenryoRank business;
@@ -42,14 +47,15 @@ public class HokenryoRankBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             HokenryoRankEntity = new DbT2012HokenryoRankEntity();
-            HokenryoRankEntity.setXXX(主キー名1);
-            HokenryoRankEntity.setXXX(主キー名2);
+            HokenryoRankEntity.setFukaNendo(賦課年度);
+            HokenryoRankEntity.setShichosonCode(市町村コード);
 
             business = new HokenryoRank(HokenryoRankEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
             business = sut.set賦課年度(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度).build();

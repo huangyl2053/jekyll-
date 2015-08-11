@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,18 @@ public class ChoshuHohoBuilderTest extends DbbTestBase {
     private static DbT2001ChoshuHohoEntity ChoshuHohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 賦課年度;
+    private static HihokenshaNo 被保険者番号;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_主キー名2;
+        賦課年度 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
+        被保険者番号 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static ChoshuHohoBuilder sut;
         private static ChoshuHoho business;
@@ -42,14 +48,15 @@ public class ChoshuHohoBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             ChoshuHohoEntity = new DbT2001ChoshuHohoEntity();
-            ChoshuHohoEntity.setXXX(主キー名1);
-            ChoshuHohoEntity.setXXX(主キー名2);
+            ChoshuHohoEntity.setFukaNendo(賦課年度);
+            ChoshuHohoEntity.setHihokenshaNo(被保険者番号);
 
             business = new ChoshuHoho(ChoshuHohoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
             business = sut.set賦課年度(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度).build();
@@ -177,57 +184,57 @@ public class ChoshuHohoBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の仮徴収・基礎年金番号は_設定した値と同じ仮徴収・基礎年金番号を返す() {
-            business = sut.set仮徴収・基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・基礎年金番号).build();
-            assertThat(business.get仮徴収・基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・基礎年金番号));
+        public void 戻り値の仮徴収_基礎年金番号は_設定した値と同じ仮徴収_基礎年金番号を返す() {
+            business = sut.set仮徴収_基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収基礎年金番号).build();
+            assertThat(business.get仮徴収_基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収基礎年金番号));
         }
 
         @Test
-        public void 戻り値の仮徴収・年金コードは_設定した値と同じ仮徴収・年金コードを返す() {
-            business = sut.set仮徴収・年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・年金コード).build();
-            assertThat(business.get仮徴収・年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・年金コード));
+        public void 戻り値の仮徴収_年金コードは_設定した値と同じ仮徴収_年金コードを返す() {
+            business = sut.set仮徴収_年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収年金コード).build();
+            assertThat(business.get仮徴収_年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収年金コード));
         }
 
         @Test
-        public void 戻り値の仮徴収・捕捉月は_設定した値と同じ仮徴収・捕捉月を返す() {
-            business = sut.set仮徴収・捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・捕捉月).build();
-            assertThat(business.get仮徴収・捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収・捕捉月));
+        public void 戻り値の仮徴収_捕捉月は_設定した値と同じ仮徴収_捕捉月を返す() {
+            business = sut.set仮徴収_捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収捕捉月).build();
+            assertThat(business.get仮徴収_捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_仮徴収捕捉月));
         }
 
         @Test
-        public void 戻り値の本徴収・基礎年金番号は_設定した値と同じ本徴収・基礎年金番号を返す() {
-            business = sut.set本徴収・基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・基礎年金番号).build();
-            assertThat(business.get本徴収・基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・基礎年金番号));
+        public void 戻り値の本徴収_基礎年金番号は_設定した値と同じ本徴収_基礎年金番号を返す() {
+            business = sut.set本徴収_基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収基礎年金番号).build();
+            assertThat(business.get本徴収_基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収基礎年金番号));
         }
 
         @Test
-        public void 戻り値の本徴収・年金コードは_設定した値と同じ本徴収・年金コードを返す() {
-            business = sut.set本徴収・年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・年金コード).build();
-            assertThat(business.get本徴収・年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・年金コード));
+        public void 戻り値の本徴収_年金コードは_設定した値と同じ本徴収_年金コードを返す() {
+            business = sut.set本徴収_年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収年金コード).build();
+            assertThat(business.get本徴収_年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収年金コード));
         }
 
         @Test
-        public void 戻り値の本徴収・捕捉月は_設定した値と同じ本徴収・捕捉月を返す() {
-            business = sut.set本徴収・捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・捕捉月).build();
-            assertThat(business.get本徴収・捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収・捕捉月));
+        public void 戻り値の本徴収_捕捉月は_設定した値と同じ本徴収_捕捉月を返す() {
+            business = sut.set本徴収_捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収捕捉月).build();
+            assertThat(business.get本徴収_捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_本徴収捕捉月));
         }
 
         @Test
-        public void 戻り値の翌年度仮徴収・基礎年金番号は_設定した値と同じ翌年度仮徴収・基礎年金番号を返す() {
-            business = sut.set翌年度仮徴収・基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・基礎年金番号).build();
-            assertThat(business.get翌年度仮徴収・基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・基礎年金番号));
+        public void 戻り値の翌年度仮徴収_基礎年金番号は_設定した値と同じ翌年度仮徴収_基礎年金番号を返す() {
+            business = sut.set翌年度仮徴収_基礎年金番号(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収基礎年金番号).build();
+            assertThat(business.get翌年度仮徴収_基礎年金番号(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収基礎年金番号));
         }
 
         @Test
-        public void 戻り値の翌年度仮徴収・年金コードは_設定した値と同じ翌年度仮徴収・年金コードを返す() {
-            business = sut.set翌年度仮徴収・年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・年金コード).build();
-            assertThat(business.get翌年度仮徴収・年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・年金コード));
+        public void 戻り値の翌年度仮徴収_年金コードは_設定した値と同じ翌年度仮徴収_年金コードを返す() {
+            business = sut.set翌年度仮徴収_年金コード(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収年金コード).build();
+            assertThat(business.get翌年度仮徴収_年金コード(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収年金コード));
         }
 
         @Test
-        public void 戻り値の翌年度仮徴収・捕捉月は_設定した値と同じ翌年度仮徴収・捕捉月を返す() {
-            business = sut.set翌年度仮徴収・捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・捕捉月).build();
-            assertThat(business.get翌年度仮徴収・捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収・捕捉月));
+        public void 戻り値の翌年度仮徴収_捕捉月は_設定した値と同じ翌年度仮徴収_捕捉月を返す() {
+            business = sut.set翌年度仮徴収_捕捉月(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収捕捉月).build();
+            assertThat(business.get翌年度仮徴収_捕捉月(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_翌年度仮徴収捕捉月));
         }
 
         @Test

@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link Fuka}の編集を行うビルダークラスです。
@@ -482,12 +493,12 @@ public class FukaBuilder {
     /**
      * 減免前介護保険料（年額）を設定します。
      *
-     * @param 減免前介護保険料（年額） 減免前介護保険料（年額）
+     * @param 減免前介護保険料_年額 減免前介護保険料（年額）
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set減免前介護保険料（年額）(Decimal 減免前介護保険料（年額）) {
-        requireNonNull(減免前介護保険料（年額）, UrSystemErrorMessages.値がnull.getReplacedMessage("減免前介護保険料（年額）"));
-        entity.setGemmenMaeHokenryo(減免前介護保険料（年額）);
+    public FukaBuilder set減免前介護保険料_年額(Decimal 減免前介護保険料_年額) {
+        requireNonNull(減免前介護保険料_年額, UrSystemErrorMessages.値がnull.getReplacedMessage("減免前介護保険料（年額）"));
+        entity.setGemmenMaeHokenryo(減免前介護保険料_年額);
         return this;
     }
 
@@ -509,21 +520,21 @@ public class FukaBuilder {
      * @param 確定介護保険料（年額） 確定介護保険料（年額）
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set確定介護保険料（年額）(Decimal 確定介護保険料（年額）) {
-        requireNonNull(確定介護保険料（年額）, UrSystemErrorMessages.値がnull.getReplacedMessage("確定介護保険料（年額）"));
-        entity.setKakuteiHokenryo(確定介護保険料（年額）);
+    public FukaBuilder set確定介護保険料_年額(Decimal 確定介護保険料_年額) {
+        requireNonNull(確定介護保険料_年額, UrSystemErrorMessages.値がnull.getReplacedMessage("確定介護保険料（年額）"));
+        entity.setKakuteiHokenryo(確定介護保険料_年額);
         return this;
     }
 
     /**
      * 保険料段階（仮算定時）を設定します。
      *
-     * @param 保険料段階（仮算定時） 保険料段階（仮算定時）
+     * @param 保険料段階_仮算定時） 保険料段階（仮算定時）
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set保険料段階（仮算定時）(RString 保険料段階（仮算定時）) {
-        requireNonNull(保険料段階（仮算定時）, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階（仮算定時）"));
-        entity.setHokenryoDankaiKarisanntei(保険料段階（仮算定時）);
+    public FukaBuilder set保険料段階_仮算定時(RString 保険料段階_仮算定時) {
+        requireNonNull(保険料段階_仮算定時, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階（仮算定時）"));
+        entity.setHokenryoDankaiKarisanntei(保険料段階_仮算定時);
         return this;
     }
 

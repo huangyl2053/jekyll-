@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import lombok.Value;
 
 /**
@@ -24,7 +26,7 @@ public class HokenryoRankIdentifier implements Serializable {
      * @param 市町村コード 市町村コード
      */
     public HokenryoRankIdentifier(FlexibleYear 賦課年度,
-LasdecCode 市町村コード) {
+            LasdecCode 市町村コード) {
         this.賦課年度 = 賦課年度;
         this.市町村コード = 市町村コード;
     }

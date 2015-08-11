@@ -6,14 +6,16 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -36,11 +38,11 @@ public class KibetsuChoshuYuyo extends ParentModelBase<KibetsuChoshuYuyoIdentifi
      * @param 期 期
      */
     public KibetsuChoshuYuyo(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号,
+            RString 徴収方法,
+            int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -55,13 +57,13 @@ int 期) {
         this.entity.setChoshuHoho(徴収方法);
         this.entity.setKi(期);
         this.id = new KibetsuChoshuYuyoIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号,
-        徴収方法,
-        期
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                徴収方法,
+                期
+        );
     }
 
     /**
@@ -221,6 +223,7 @@ int 期) {
         }
         return new KibetsuChoshuYuyo(deletedEntity, id);
     }
+
     /**
      * {@link KibetsuChoshuYuyo}のシリアライズ形式を提供します。
      *
@@ -231,13 +234,19 @@ int 期) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2007KibetsuChoshuYuyoEntity entity;
         private final KibetsuChoshuYuyoIdentifier id;
 
-        private _SerializationProxy(DbT2007KibetsuChoshuYuyoEntity entity,KibetsuChoshuYuyoIdentifier id) {
+        private _SerializationProxy(DbT2007KibetsuChoshuYuyoEntity entity, KibetsuChoshuYuyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

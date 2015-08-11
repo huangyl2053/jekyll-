@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,21 @@ public class KibetsuChoshuYuyoBuilderTest extends DbbTestBase {
     private static DbT2007KibetsuChoshuYuyoEntity KibetsuChoshuYuyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 調定年度;
+    private static FlexibleYear 賦課年度;
+    private static TsuchishoNo 通知書番号;
+    private static Decimal 履歴番号;
+    private static RString 徴収方法;
+    private static int 期;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_主キー名2;
+        調定年度 = DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度;
+        賦課年度 = DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static KibetsuChoshuYuyoBuilder sut;
         private static KibetsuChoshuYuyo business;
@@ -42,14 +53,15 @@ public class KibetsuChoshuYuyoBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             KibetsuChoshuYuyoEntity = new DbT2007KibetsuChoshuYuyoEntity();
-            KibetsuChoshuYuyoEntity.setXXX(主キー名1);
-            KibetsuChoshuYuyoEntity.setXXX(主キー名2);
+            KibetsuChoshuYuyoEntity.setChoteiNendo(調定年度);
+            KibetsuChoshuYuyoEntity.setFukaNendo(賦課年度);
 
             business = new KibetsuChoshuYuyo(KibetsuChoshuYuyoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
             business = sut.set調定年度(DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度).build();

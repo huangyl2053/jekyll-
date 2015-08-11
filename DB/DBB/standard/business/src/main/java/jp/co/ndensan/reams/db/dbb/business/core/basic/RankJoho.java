@@ -6,20 +6,19 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * ランク情報を管理するクラスです。
  */
-public class RankJoho extends ParentModelBase<RankJohoIdentifier, DbT2011RankJohoEntity, RankJoho> implements Serializable {
+public class RankJoho extends ModelBase<RankJohoIdentifier, DbT2011RankJohoEntity, RankJoho> implements Serializable {
 
     private final DbT2011RankJohoEntity entity;
     private final RankJohoIdentifier id;
@@ -32,16 +31,16 @@ public class RankJoho extends ParentModelBase<RankJohoIdentifier, DbT2011RankJoh
      * @param ランク区分 ランク区分
      */
     public RankJoho(FlexibleYear 賦課年度,
-RString ランク区分) {
+            RString ランク区分) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         this.entity = new DbT2011RankJohoEntity();
         this.entity.setFukaNendo(賦課年度);
         this.entity.setRankKubun(ランク区分);
         this.id = new RankJohoIdentifier(
-        賦課年度,
-        ランク区分
-                );
+                賦課年度,
+                ランク区分
+        );
     }
 
     /**
@@ -120,22 +119,6 @@ RString ランク区分) {
     }
 
     /**
-     * ランク情報のみを変更対象とします。<br/>
-     * {@link DbT2011RankJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link RankJoho}
-     */
-    @Override
-    public RankJoho modifiedModel() {
-        DbT2011RankJohoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new RankJoho(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持するランク情報を削除対象とします。<br/>
      * {@link DbT2011RankJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -152,6 +135,7 @@ RString ランク区分) {
         }
         return new RankJoho(deletedEntity, id);
     }
+
     /**
      * {@link RankJoho}のシリアライズ形式を提供します。
      *
@@ -162,13 +146,19 @@ RString ランク区分) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT2011RankJohoEntity entity;
         private final RankJohoIdentifier id;
 
-        private _SerializationProxy(DbT2011RankJohoEntity entity,RankJohoIdentifier id) {
+        private _SerializationProxy(DbT2011RankJohoEntity entity, RankJohoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

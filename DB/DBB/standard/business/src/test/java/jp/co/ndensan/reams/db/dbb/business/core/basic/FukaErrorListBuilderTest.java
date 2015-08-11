@@ -4,9 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2010FukaErrorListEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +30,19 @@ public class FukaErrorListBuilderTest extends DbbTestBase {
     private static DbT2010FukaErrorListEntity FukaErrorListEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SubGyomuCode サブ業務コード;
+    private static RString 内部帳票ID;
+    private static FlexibleYear 賦課年度;
+    private static TsuchishoNo 通知書番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2010FukaErrorListEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2010FukaErrorListEntityGenerator.DEFAULT_主キー名2;
+        サブ業務コード = DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード;
+        内部帳票ID = DbT2010FukaErrorListEntityGenerator.DEFAULT_内部帳票ID;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static FukaErrorListBuilder sut;
         private static FukaErrorList business;
@@ -42,14 +50,15 @@ public class FukaErrorListBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             FukaErrorListEntity = new DbT2010FukaErrorListEntity();
-            FukaErrorListEntity.setXXX(主キー名1);
-            FukaErrorListEntity.setXXX(主キー名2);
+            FukaErrorListEntity.setSubGyomuCode(サブ業務コード);
+            FukaErrorListEntity.setInternalReportId(内部帳票ID);
 
             business = new FukaErrorList(FukaErrorListEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値のサブ業務コードは_設定した値と同じサブ業務コードを返す() {
             business = sut.setサブ業務コード(DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード).build();

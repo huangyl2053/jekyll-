@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChoshuHoho}の編集を行うビルダークラスです。
@@ -290,36 +296,36 @@ public class ChoshuHohoBuilder {
     /**
      * 仮徴収・基礎年金番号を設定します。
      *
-     * @param 仮徴収・基礎年金番号 仮徴収・基礎年金番号
+     * @param 仮徴収_基礎年金番号 仮徴収・基礎年金番号
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set仮徴収・基礎年金番号(RString 仮徴収・基礎年金番号) {
-        requireNonNull(仮徴収・基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・基礎年金番号"));
-        entity.setKariNenkinNo(仮徴収・基礎年金番号);
+    public ChoshuHohoBuilder set仮徴収_基礎年金番号(RString 仮徴収_基礎年金番号) {
+        requireNonNull(仮徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・基礎年金番号"));
+        entity.setKariNenkinNo(仮徴収_基礎年金番号);
         return this;
     }
 
     /**
      * 仮徴収・年金コードを設定します。
      *
-     * @param 仮徴収・年金コード 仮徴収・年金コード
+     * @param 仮徴収_年金コード 仮徴収・年金コード
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set仮徴収・年金コード(RString 仮徴収・年金コード) {
-        requireNonNull(仮徴収・年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・年金コード"));
-        entity.setKariNenkinCode(仮徴収・年金コード);
+    public ChoshuHohoBuilder set仮徴収_年金コード(RString 仮徴収_年金コード) {
+        requireNonNull(仮徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・年金コード"));
+        entity.setKariNenkinCode(仮徴収_年金コード);
         return this;
     }
 
     /**
      * 仮徴収・捕捉月を設定します。
      *
-     * @param 仮徴収・捕捉月 仮徴収・捕捉月
+     * @param 仮徴収_捕捉月 仮徴収・捕捉月
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set仮徴収・捕捉月(RString 仮徴収・捕捉月) {
-        requireNonNull(仮徴収・捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・捕捉月"));
-        entity.setKariHosokuM(仮徴収・捕捉月);
+    public ChoshuHohoBuilder set仮徴収_捕捉月(RString 仮徴収_捕捉月) {
+        requireNonNull(仮徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("仮徴収・捕捉月"));
+        entity.setKariHosokuM(仮徴収_捕捉月);
         return this;
     }
 
@@ -329,57 +335,57 @@ public class ChoshuHohoBuilder {
      * @param 本徴収・基礎年金番号 本徴収・基礎年金番号
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set本徴収・基礎年金番号(RString 本徴収・基礎年金番号) {
-        requireNonNull(本徴収・基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・基礎年金番号"));
-        entity.setHonNenkinNo(本徴収・基礎年金番号);
+    public ChoshuHohoBuilder set本徴収_基礎年金番号(RString 本徴収_基礎年金番号) {
+        requireNonNull(本徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・基礎年金番号"));
+        entity.setHonNenkinNo(本徴収_基礎年金番号);
         return this;
     }
 
     /**
      * 本徴収・年金コードを設定します。
      *
-     * @param 本徴収・年金コード 本徴収・年金コード
+     * @param 本徴収_年金コード 本徴収・年金コード
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set本徴収・年金コード(RString 本徴収・年金コード) {
-        requireNonNull(本徴収・年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・年金コード"));
-        entity.setHonNenkinCode(本徴収・年金コード);
+    public ChoshuHohoBuilder set本徴収_年金コード(RString 本徴収_年金コード) {
+        requireNonNull(本徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・年金コード"));
+        entity.setHonNenkinCode(本徴収_年金コード);
         return this;
     }
 
     /**
      * 本徴収・捕捉月を設定します。
      *
-     * @param 本徴収・捕捉月 本徴収・捕捉月
+     * @param 本徴収_捕捉月 本徴収・捕捉月
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set本徴収・捕捉月(RString 本徴収・捕捉月) {
-        requireNonNull(本徴収・捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・捕捉月"));
-        entity.setHonHosokuM(本徴収・捕捉月);
+    public ChoshuHohoBuilder set本徴収_捕捉月(RString 本徴収_捕捉月) {
+        requireNonNull(本徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("本徴収・捕捉月"));
+        entity.setHonHosokuM(本徴収_捕捉月);
         return this;
     }
 
     /**
      * 翌年度仮徴収・基礎年金番号を設定します。
      *
-     * @param 翌年度仮徴収・基礎年金番号 翌年度仮徴収・基礎年金番号
+     * @param 翌年度仮徴収_基礎年金番号 翌年度仮徴収・基礎年金番号
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set翌年度仮徴収・基礎年金番号(RString 翌年度仮徴収・基礎年金番号) {
-        requireNonNull(翌年度仮徴収・基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・基礎年金番号"));
-        entity.setYokunendoKariNenkinNo(翌年度仮徴収・基礎年金番号);
+    public ChoshuHohoBuilder set翌年度仮徴収_基礎年金番号(RString 翌年度仮徴収_基礎年金番号) {
+        requireNonNull(翌年度仮徴収_基礎年金番号, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・基礎年金番号"));
+        entity.setYokunendoKariNenkinNo(翌年度仮徴収_基礎年金番号);
         return this;
     }
 
     /**
      * 翌年度仮徴収・年金コードを設定します。
      *
-     * @param 翌年度仮徴収・年金コード 翌年度仮徴収・年金コード
+     * @param 翌年度仮徴収_年金コード 翌年度仮徴収・年金コード
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set翌年度仮徴収・年金コード(RString 翌年度仮徴収・年金コード) {
-        requireNonNull(翌年度仮徴収・年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・年金コード"));
-        entity.setYokunendoKariNenkinCode(翌年度仮徴収・年金コード);
+    public ChoshuHohoBuilder set翌年度仮徴収_年金コード(RString 翌年度仮徴収_年金コード) {
+        requireNonNull(翌年度仮徴収_年金コード, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・年金コード"));
+        entity.setYokunendoKariNenkinCode(翌年度仮徴収_年金コード);
         return this;
     }
 
@@ -389,9 +395,9 @@ public class ChoshuHohoBuilder {
      * @param 翌年度仮徴収・捕捉月 翌年度仮徴収・捕捉月
      * @return {@link ChoshuHohoBuilder}
      */
-    public ChoshuHohoBuilder set翌年度仮徴収・捕捉月(RString 翌年度仮徴収・捕捉月) {
-        requireNonNull(翌年度仮徴収・捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・捕捉月"));
-        entity.setYokunendoKariHosokuM(翌年度仮徴収・捕捉月);
+    public ChoshuHohoBuilder set翌年度仮徴収_捕捉月(RString 翌年度仮徴収_捕捉月) {
+        requireNonNull(翌年度仮徴収_捕捉月, UrSystemErrorMessages.値がnull.getReplacedMessage("翌年度仮徴収・捕捉月"));
+        entity.setYokunendoKariHosokuM(翌年度仮徴収_捕捉月);
         return this;
     }
 

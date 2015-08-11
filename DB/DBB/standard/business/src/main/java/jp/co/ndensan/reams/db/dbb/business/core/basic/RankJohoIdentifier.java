@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -24,7 +26,7 @@ public class RankJohoIdentifier implements Serializable {
      * @param ランク区分 ランク区分
      */
     public RankJohoIdentifier(FlexibleYear 賦課年度,
-RString ランク区分) {
+            RString ランク区分) {
         this.賦課年度 = 賦課年度;
         this.ランク区分 = ランク区分;
     }

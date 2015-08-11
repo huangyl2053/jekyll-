@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,17 @@ public class RankJohoBuilderTest extends DbbTestBase {
     private static DbT2011RankJohoEntity RankJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 賦課年度;
+    private static RString ランク区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT2011RankJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT2011RankJohoEntityGenerator.DEFAULT_主キー名2;
+        賦課年度 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
+        ランク区分 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static RankJohoBuilder sut;
         private static RankJoho business;
@@ -42,14 +47,15 @@ public class RankJohoBuilderTest extends DbbTestBase {
         @Before
         public void setUp() {
             RankJohoEntity = new DbT2011RankJohoEntity();
-            RankJohoEntity.setXXX(主キー名1);
-            RankJohoEntity.setXXX(主キー名2);
+            RankJohoEntity.setFukaNendo(賦課年度);
+            RankJohoEntity.setRankKubun(ランク区分);
 
             business = new RankJoho(RankJohoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
             business = sut.set賦課年度(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度).build();

@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護賦課徴収猶予を管理するクラスです。
  */
-public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006ChoshuYuyoEntity, ChoshuYuyo> implements Serializable {
+public class ChoshuYuyo extends ModelBase<ChoshuYuyoIdentifier, DbT2006ChoshuYuyoEntity, ChoshuYuyo> implements Serializable {
 
     private final DbT2006ChoshuYuyoEntity entity;
     private final ChoshuYuyoIdentifier id;
@@ -34,9 +37,9 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
      * @param 履歴番号 履歴番号
      */
     public ChoshuYuyo(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -47,11 +50,11 @@ Decimal 履歴番号) {
         this.entity.setTsuchishoNo(通知書番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ChoshuYuyoIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号
+        );
     }
 
     /**
@@ -231,22 +234,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護賦課徴収猶予のみを変更対象とします。<br/>
-     * {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ChoshuYuyo}
-     */
-    @Override
-    public ChoshuYuyo modifiedModel() {
-        DbT2006ChoshuYuyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ChoshuYuyo(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護賦課徴収猶予を削除対象とします。<br/>
      * {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -263,6 +250,7 @@ Decimal 履歴番号) {
         }
         return new ChoshuYuyo(deletedEntity, id);
     }
+
     /**
      * {@link ChoshuYuyo}のシリアライズ形式を提供します。
      *
@@ -273,13 +261,18 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT2006ChoshuYuyoEntity entity;
         private final ChoshuYuyoIdentifier id;
 
-        private _SerializationProxy(DbT2006ChoshuYuyoEntity entity,ChoshuYuyoIdentifier id) {
+        private _SerializationProxy(DbT2006ChoshuYuyoEntity entity, ChoshuYuyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

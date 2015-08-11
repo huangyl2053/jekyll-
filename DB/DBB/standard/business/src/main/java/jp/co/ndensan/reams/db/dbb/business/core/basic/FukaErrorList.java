@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbb.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.dbb.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 賦課エラー一覧を管理するクラスです。
  */
-public class FukaErrorList extends ParentModelBase<FukaErrorListIdentifier, DbT2010FukaErrorListEntity, FukaErrorList> implements Serializable {
+public class FukaErrorList extends ModelBase<FukaErrorListIdentifier, DbT2010FukaErrorListEntity, FukaErrorList> implements Serializable {
 
     private final DbT2010FukaErrorListEntity entity;
     private final FukaErrorListIdentifier id;
@@ -34,9 +39,9 @@ public class FukaErrorList extends ParentModelBase<FukaErrorListIdentifier, DbT2
      * @param 通知書番号 通知書番号
      */
     public FukaErrorList(SubGyomuCode サブ業務コード,
-RString 内部帳票ID,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号) {
+            RString 内部帳票ID,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(内部帳票ID, UrSystemErrorMessages.値がnull.getReplacedMessage("内部帳票ID"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -47,11 +52,11 @@ TsuchishoNo 通知書番号) {
         this.entity.setFukaNendo(賦課年度);
         this.entity.setTsuchishoNo(通知書番号);
         this.id = new FukaErrorListIdentifier(
-        サブ業務コード,
-        内部帳票ID,
-        賦課年度,
-        通知書番号
-                );
+                サブ業務コード,
+                内部帳票ID,
+                賦課年度,
+                通知書番号
+        );
     }
 
     /**
@@ -204,22 +209,6 @@ TsuchishoNo 通知書番号) {
     }
 
     /**
-     * 賦課エラー一覧のみを変更対象とします。<br/>
-     * {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link FukaErrorList}
-     */
-    @Override
-    public FukaErrorList modifiedModel() {
-        DbT2010FukaErrorListEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new FukaErrorList(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する賦課エラー一覧を削除対象とします。<br/>
      * {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -236,6 +225,7 @@ TsuchishoNo 通知書番号) {
         }
         return new FukaErrorList(deletedEntity, id);
     }
+
     /**
      * {@link FukaErrorList}のシリアライズ形式を提供します。
      *
@@ -246,13 +236,18 @@ TsuchishoNo 通知書番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT2010FukaErrorListEntity entity;
         private final FukaErrorListIdentifier id;
 
-        private _SerializationProxy(DbT2010FukaErrorListEntity entity,FukaErrorListIdentifier id) {
+        private _SerializationProxy(DbT2010FukaErrorListEntity entity, FukaErrorListIdentifier id) {
             this.entity = entity;
             this.id = id;
         }
