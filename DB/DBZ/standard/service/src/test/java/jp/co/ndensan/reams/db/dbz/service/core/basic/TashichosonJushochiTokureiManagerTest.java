@@ -5,8 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1003TashichosonJushochiTokureiDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,29 +43,39 @@ public class TashichosonJushochiTokureiManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get他市町村住所地特例 extends FdaTestBase {
+    public static class get他市町村住所地特例 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー2;
-            sut.get他市町村住所地特例(null, 主キー2);
+            FlexibleDate 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+            RString 主キー3 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
+            sut.get他市町村住所地特例(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー1;
-            sut.get他市町村住所地特例(主キー1, null);
+            ShikibetsuCode 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+            RString 主キー3 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
+            sut.get他市町村住所地特例(主キー1, null, 主キー3);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            ShikibetsuCode 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+            FlexibleDate 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+            sut.get他市町村住所地特例(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(FlexibleDate.class), any(RString.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー2;
-            TashichosonJushochiTokurei result = sut.get他市町村住所地特例(主キー1, 主キー2);
+            ShikibetsuCode 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+            FlexibleDate 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+            RString 主キー3 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
+            TashichosonJushochiTokurei result = sut.get他市町村住所地特例(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -62,18 +83,19 @@ public class TashichosonJushochiTokureiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1003TashichosonJushochiTokureiEntity entity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(FlexibleDate.class), any(RString.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー2;
-            TashichosonJushochiTokurei result = sut.get他市町村住所地特例(主キー1, 主キー2);
+            ShikibetsuCode 主キー1 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
+            FlexibleDate 主キー2 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+            RString 主キー3 = DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
+            TashichosonJushochiTokurei result = sut.get他市町村住所地特例(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get識別コード().value(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get他市町村住所地特例一覧 extends FdaTestBase {
+    public static class get他市町村住所地特例一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +114,11 @@ public class TashichosonJushochiTokureiManagerTest {
             List<TashichosonJushochiTokurei> result = sut.get他市町村住所地特例一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
-    public static class save他市町村住所地特例 extends XxxTestBase {
+    public static class save他市町村住所地特例 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -125,7 +147,7 @@ public class TashichosonJushochiTokureiManagerTest {
             DbT1003TashichosonJushochiTokureiEntity entity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
             entity.initializeMd5();
             TashichosonJushochiTokurei 他市町村住所地特例 = new TashichosonJushochiTokurei(entity);
-            他市町村住所地特例 = 他市町村住所地特例.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            他市町村住所地特例 = 他市町村住所地特例.createBuilderForEdit().set異動事由コード(new RString("4")).build();
 
             assertThat(sut.save他市町村住所地特例(他市町村住所地特例), is(true));
         }
@@ -137,7 +159,7 @@ public class TashichosonJushochiTokureiManagerTest {
             DbT1003TashichosonJushochiTokureiEntity entity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
             entity.initializeMd5();
             TashichosonJushochiTokurei 他市町村住所地特例 = new TashichosonJushochiTokurei(entity);
-            他市町村住所地特例 = 他市町村住所地特例.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            他市町村住所地特例 = 他市町村住所地特例.createBuilderForEdit().set異動事由コード(new RString("4")).build();
 
             assertThat(sut.save他市町村住所地特例(他市町村住所地特例), is(false));
         }
