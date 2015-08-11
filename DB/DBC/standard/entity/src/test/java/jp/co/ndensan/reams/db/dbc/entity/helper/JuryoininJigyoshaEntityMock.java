@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受領委任事業者Entityのテストヘルパーです。
@@ -26,7 +27,7 @@ public class JuryoininJigyoshaEntityMock {
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
         entity.setJigyoshaKeiyakuNo(契約番号.value());
         entity.setKaishiYMD(new FlexibleDate("20110303"));
-        entity.setRirekiNo(1);
+        entity.setRirekiNo(new Decimal(1));
         entity.setShuryoYMD(new FlexibleDate("20130303"));
         entity.setTodokedeYMD(new FlexibleDate("20110203"));
         entity.setTodokedeAddress(new RString("長野市高田"));
