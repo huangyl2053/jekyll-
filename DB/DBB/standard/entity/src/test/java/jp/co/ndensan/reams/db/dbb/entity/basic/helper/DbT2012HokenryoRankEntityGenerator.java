@@ -11,15 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 保険料ランクエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author N8156 宮本 康
  */
 public final class DbT2012HokenryoRankEntityGenerator {
 
-    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2000");
-    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("000006");
-    public static final RString DEFAULT_ランク区分 = new RString("01");
-    public static final FlexibleYear DEFAULT_遡及年度 = new FlexibleYear("2001");
+    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("1990");
+    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("209007");
+    public static final RString DEFAULT_ランク区分 = new RString("Data");
+    public static final FlexibleYear DEFAULT_遡及年度 = new FlexibleYear("1990");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

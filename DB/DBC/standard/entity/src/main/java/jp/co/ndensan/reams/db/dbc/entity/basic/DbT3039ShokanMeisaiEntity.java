@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求明細テーブルのエンティティクラスです。
  */
 public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMeisaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3039ShokanMeisai");
 
@@ -43,17 +45,17 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private ServiceShuruiCode serviceShuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
-    private int tanisu;
-    private int nissuKaisu;
+    private Decimal tanisu;
+    private Decimal nissuKaisu;
     private int serviceTanisu;
     private RString tekiyo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,17 +82,16 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -99,7 +100,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -108,7 +109,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -117,7 +118,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -126,7 +127,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -135,7 +136,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNp() {
@@ -144,7 +145,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNp 整理番号
      */
     public void setSeiriNp(RString seiriNp) {
@@ -153,7 +154,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -162,7 +163,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -171,7 +172,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -180,7 +181,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -189,7 +190,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 順次番号のgetメソッドです。
-     * 
+     *
      * @return 順次番号
      */
     public RString getJunjiNo() {
@@ -198,7 +199,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 順次番号のsetメソッドです。
-     * 
+     *
      * @param junjiNo 順次番号
      */
     public void setJunjiNo(RString junjiNo) {
@@ -207,25 +208,25 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -234,7 +235,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -243,7 +244,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -252,7 +253,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode サービス項目コード
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -261,43 +262,43 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param tanisu 単位数
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
     /**
      * 日数・回数のgetメソッドです。
-     * 
+     *
      * @return 日数・回数
      */
-    public int getNissuKaisu() {
+    public Decimal getNissuKaisu() {
         return nissuKaisu;
     }
 
     /**
      * 日数・回数のsetメソッドです。
-     * 
+     *
      * @param nissuKaisu 日数・回数
      */
-    public void setNissuKaisu(int nissuKaisu) {
+    public void setNissuKaisu(Decimal nissuKaisu) {
         this.nissuKaisu = nissuKaisu;
     }
 
     /**
      * サービス単位数のgetメソッドです。
-     * 
+     *
      * @return サービス単位数
      */
     public int getServiceTanisu() {
@@ -306,7 +307,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * サービス単位数のsetメソッドです。
-     * 
+     *
      * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(int serviceTanisu) {
@@ -315,7 +316,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 摘要のgetメソッドです。
-     * 
+     *
      * @return 摘要
      */
     public RString getTekiyo() {
@@ -324,7 +325,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * 摘要のsetメソッドです。
-     * 
+     *
      * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
@@ -333,9 +334,9 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * このエンティティの主キーが他の{@literal DbT3039ShokanMeisaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3039ShokanMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -389,6 +390,7 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -397,5 +399,4 @@ public class DbT3039ShokanMeisaiEntity extends DbTableEntityBase<DbT3039ShokanMe
     }
 
 // </editor-fold>
-
 }

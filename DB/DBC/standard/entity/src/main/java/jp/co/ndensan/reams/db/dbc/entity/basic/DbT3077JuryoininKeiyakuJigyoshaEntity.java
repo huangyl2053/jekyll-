@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受領委任契約事業者テーブルのエンティティクラスです。
@@ -38,7 +39,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     @PrimaryKey
     private FlexibleDate kaishiYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shuryoYMD;
     private FlexibleDate todokedeYMD;
     private RString todokedeAddress;
@@ -153,7 +154,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -162,7 +163,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

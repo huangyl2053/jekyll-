@@ -4,32 +4,31 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績特定診療費エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT3020KyufujissekiTokuteiSinryohiEntityGenerator {
 
-    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo(new RString("2"));
-    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo(new RString("2"));
-    public static final RString DEFAULT_レコード種別コード = new RString("1");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo(new RString("2"));
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo(new RString("2"));
-    public static final RString DEFAULT_通し番号 = new RString("1");
-    public static final RString DEFAULT_特定診療情報レコード順次番号 = new RString("1");
-    public static final RString DEFAULT_傷病名 = new RString("1");
+    public static final KokanShikibetsuNo DEFAULT_交換情報識別番号 = new KokanShikibetsuNo("012340123400001");
+    public static final NyuryokuShikibetsuNo DEFAULT_入力識別番号 = new NyuryokuShikibetsuNo("012340123400001");
+    public static final RString DEFAULT_レコード種別コード = new RString("Data");
+    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_通し番号 = new RString("Data");
+    public static final RString DEFAULT_特定診療情報レコード順次番号 = new RString("Data");
+    public static final RString DEFAULT_傷病名 = new RString("Data");
     public static final int DEFAULT_保険_指導管理料等 = 1;
     public static final int DEFAULT_保険_単純エックス線 = 1;
     public static final int DEFAULT_保険_リハビリテーション = 1;
@@ -50,26 +49,26 @@ public final class DbT3020KyufujissekiTokuteiSinryohiEntityGenerator {
     public static final int DEFAULT_公費３_リハビリテーション = 1;
     public static final int DEFAULT_公費３_精神科専門療法 = 1;
     public static final int DEFAULT_公費３_合計単位数 = 1;
-    public static final RString DEFAULT_摘要１ = new RString("1");
-    public static final RString DEFAULT_摘要２ = new RString("1");
-    public static final RString DEFAULT_摘要３ = new RString("1");
-    public static final RString DEFAULT_摘要４ = new RString("1");
-    public static final RString DEFAULT_摘要５ = new RString("1");
-    public static final RString DEFAULT_摘要６ = new RString("1");
-    public static final RString DEFAULT_摘要７ = new RString("1");
-    public static final RString DEFAULT_摘要８ = new RString("1");
-    public static final RString DEFAULT_摘要９ = new RString("1");
-    public static final RString DEFAULT_摘要１０ = new RString("1");
-    public static final RString DEFAULT_摘要１１ = new RString("1");
-    public static final RString DEFAULT_摘要１２ = new RString("1");
-    public static final RString DEFAULT_摘要１３ = new RString("1");
-    public static final RString DEFAULT_摘要１４ = new RString("1");
-    public static final RString DEFAULT_摘要１５ = new RString("1");
-    public static final RString DEFAULT_摘要１６ = new RString("1");
-    public static final RString DEFAULT_摘要１７ = new RString("1");
-    public static final RString DEFAULT_摘要１８ = new RString("1");
-    public static final RString DEFAULT_摘要１９ = new RString("1");
-    public static final RString DEFAULT_摘要２０ = new RString("1");
+    public static final RString DEFAULT_摘要１ = new RString("Data");
+    public static final RString DEFAULT_摘要２ = new RString("Data");
+    public static final RString DEFAULT_摘要３ = new RString("Data");
+    public static final RString DEFAULT_摘要４ = new RString("Data");
+    public static final RString DEFAULT_摘要５ = new RString("Data");
+    public static final RString DEFAULT_摘要６ = new RString("Data");
+    public static final RString DEFAULT_摘要７ = new RString("Data");
+    public static final RString DEFAULT_摘要８ = new RString("Data");
+    public static final RString DEFAULT_摘要９ = new RString("Data");
+    public static final RString DEFAULT_摘要１０ = new RString("Data");
+    public static final RString DEFAULT_摘要１１ = new RString("Data");
+    public static final RString DEFAULT_摘要１２ = new RString("Data");
+    public static final RString DEFAULT_摘要１３ = new RString("Data");
+    public static final RString DEFAULT_摘要１４ = new RString("Data");
+    public static final RString DEFAULT_摘要１５ = new RString("Data");
+    public static final RString DEFAULT_摘要１６ = new RString("Data");
+    public static final RString DEFAULT_摘要１７ = new RString("Data");
+    public static final RString DEFAULT_摘要１８ = new RString("Data");
+    public static final RString DEFAULT_摘要１９ = new RString("Data");
+    public static final RString DEFAULT_摘要２０ = new RString("Data");
     public static final int DEFAULT_後_保険_指導管理料等 = 1;
     public static final int DEFAULT_後_保険_単純エックス線 = 1;
     public static final int DEFAULT_後_保険_リハビリテーション = 1;
@@ -86,11 +85,11 @@ public final class DbT3020KyufujissekiTokuteiSinryohiEntityGenerator {
     public static final int DEFAULT_後_公費３_単純エックス線 = 1;
     public static final int DEFAULT_後_公費３_リハビリテーション = 1;
     public static final int DEFAULT_後_公費３_精神科専門療法 = 1;
-    public static final int DEFAULT_再審査回数 = 1;
-    public static final int DEFAULT_過誤回数 = 1;
-    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final Decimal DEFAULT_再審査回数 = new Decimal(0);
+    public static final Decimal DEFAULT_過誤回数 = new Decimal(0);
+    public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
+    public static final RString DEFAULT_整理番号 = new RString("Data");
+    public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

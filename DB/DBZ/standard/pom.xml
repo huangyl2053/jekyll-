@@ -24,6 +24,7 @@
         <module>divcontroller</module>
         <module>testhelper</module>
         <module>model</module>
+        <module>service</module>
     </modules>
     <dependencyManagement>
         <dependencies>

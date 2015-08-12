@@ -33,7 +33,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
     private FlexibleDate kyokaisoSochiKetteiYMD;
@@ -117,7 +117,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -126,7 +126,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -386,7 +386,8 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      * このエンティティの主キーが他の{@literal DbT1006KyokaisoGaitoshaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1006KyokaisoGaitoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT1006KyokaisoGaitoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1006KyokaisoGaitoshaEntity other) {

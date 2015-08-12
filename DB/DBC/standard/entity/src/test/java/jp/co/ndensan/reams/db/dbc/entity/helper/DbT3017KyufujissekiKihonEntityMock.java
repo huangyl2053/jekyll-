@@ -89,8 +89,8 @@ public class DbT3017KyufujissekiKihonEntityMock {
 
         entity.setNyushoYMD(new FlexibleDate("20140101"));
         entity.setTaishoYMD(new FlexibleDate("20140202"));
-        entity.setNyushoJitsunissu(10);
-        entity.setGaihakuNissu(30);
+        entity.setNyushoJitsunissu(new Decimal(10));
+        entity.setGaihakuNissu(new Decimal(30));
         entity.setTaishogoJotaiCode(new RString("3"));
 
         entity.setHokenKyufuritsu(new HokenKyufuRitsu(new Decimal(90)));

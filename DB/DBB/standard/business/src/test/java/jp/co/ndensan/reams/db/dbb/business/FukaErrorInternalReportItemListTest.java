@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -112,9 +113,9 @@ public class FukaErrorInternalReportItemListTest extends DbbTestBase {
     }
 
     private static FukaErrorInternalReportItem createItem(FlexibleYear fukaNendo, TsuchishoNo tsuchishoNo) {
-        FukaErrorModel model = new FukaErrorModel();
-        model.set賦課年度(fukaNendo);
-        model.set通知書番号(tsuchishoNo);
+        FukaErrorList model = new FukaErrorList(SubGyomuCode.DBZ介護共通, RString.EMPTY, fukaNendo, tsuchishoNo);
+        model = model.createBuilderForEdit().set賦課年度(fukaNendo).build();
+        model = model.createBuilderForEdit().set通知書番号(tsuchishoNo).build();
         return new FukaErrorInternalReportItem(model);
     }
 }

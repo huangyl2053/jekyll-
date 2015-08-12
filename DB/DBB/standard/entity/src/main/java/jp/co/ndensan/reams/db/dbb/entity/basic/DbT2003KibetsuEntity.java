@@ -36,7 +36,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     @PrimaryKey
     private RString choshuHouhou;
     @PrimaryKey
@@ -147,7 +147,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -156,7 +156,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -218,7 +218,8 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      * このエンティティの主キーが他の{@literal DbT2003KibetsuEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2003KibetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2003KibetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2003KibetsuEntity other) {

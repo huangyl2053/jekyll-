@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -19,55 +18,53 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額合算支給額計算結果エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 周杏月
  */
 public final class DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("2014");
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo(new RString("2"));
-    public static final RString DEFAULT_支給申請書整理番号 = new RString("1");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final RString DEFAULT_保険制度コード = new RString("1");
-    public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("1");
-    public static final FlexibleDate DEFAULT_対象計算期間開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_対象計算期間終了年月日 = new FlexibleDate("20140402");
-    public static final Decimal DEFAULT_世帯負担総額 = new Decimal(1);
-    public static final Decimal DEFAULT_介護等合算一部負担金等世帯合算額 = new Decimal(1);
-    public static final Decimal DEFAULT_70歳以上介護等合算一部負担金等世帯合算額 = new Decimal(1);
-    public static final RString DEFAULT_所得区分 = new RString("1");
-    public static final RString DEFAULT_70歳以上の者に係る所得区分 = new RString("1");
-    public static final Decimal DEFAULT_介護等合算算定基準額 = new Decimal(1);
-    public static final Decimal DEFAULT_70歳以上介護等合算算定基準額 = new Decimal(1);
-    public static final Decimal DEFAULT_世帯支給総額 = new Decimal(1);
-    public static final Decimal DEFAULT_うち70歳以上分世帯支給総額 = new Decimal(1);
-    public static final Decimal DEFAULT_按分後支給額 = new Decimal(1);
-    public static final Decimal DEFAULT_うち70歳以上分按分後支給額 = new Decimal(1);
-    public static final RString DEFAULT_介護低所得者Ⅰ再計算実施の有無 = new RString("1");
-    public static final RString DEFAULT_備考 = new RString("1");
-    public static final YubinNo DEFAULT_支給額計算結果連絡先郵便番号 = new YubinNo(new RString("123-1234"));
-    public static final RString DEFAULT_支給額計算結果連絡先住所 = new RString("1");
-    public static final RString DEFAULT_支給額計算結果連絡先名称1 = new RString("1");
-    public static final RString DEFAULT_支給額計算結果連絡先名称2 = new RString("1");
-    public static final FlexibleDate DEFAULT_通知年月日 = new FlexibleDate("20140402");
-    public static final AtenaMeisho DEFAULT_連絡票発行者名 = new AtenaMeisho("電算太郎");
-    public static final YubinNo DEFAULT_連絡票発行者郵便番号 = new YubinNo(new RString("123-1234"));
-    public static final RString DEFAULT_連絡票発行者住所 = new RString("1");
-    public static final YubinNo DEFAULT_問い合わせ先郵便番号 = new YubinNo(new RString("123-1234"));
-    public static final RString DEFAULT_問い合わせ先住所 = new RString("1");
-    public static final RString DEFAULT_問い合わせ先名称1 = new RString("1");
-    public static final RString DEFAULT_問い合わせ先名称2 = new RString("1");
-    public static final TelNo DEFAULT_問い合わせ先電話番号 = new TelNo("012-345-6789");
-    public static final Decimal DEFAULT_70歳以上負担額合計 = new Decimal(1);
-    public static final Decimal DEFAULT_70歳以上支給額合計 = new Decimal(1);
-    public static final Decimal DEFAULT_70歳未満負担額合計 = new Decimal(1);
-    public static final Decimal DEFAULT_負担額の合計額 = new Decimal(1);
-    public static final Decimal DEFAULT_70歳未満支給額合計 = new Decimal(1);
-    public static final Decimal DEFAULT_支給額合計額 = new Decimal(1);
-    public static final RString DEFAULT_データ区分 = new RString("1");
-    public static final FlexibleYearMonth DEFAULT_受取年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final FlexibleYearMonth DEFAULT_送付年月 = new FlexibleYearMonth(new RString("201406"));
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYear DEFAULT_対象年度 = new FlexibleYear("1990");
+    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final RString DEFAULT_支給申請書整理番号 = new RString("Data");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_保険制度コード = new RString("Data");
+    public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("Data");
+    public static final FlexibleDate DEFAULT_対象計算期間開始年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_対象計算期間終了年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_世帯負担総額 = new Decimal(0);
+    public static final Decimal DEFAULT_介護等合算一部負担金等世帯合算額 = new Decimal(0);
+    public static final Decimal DEFAULT_70歳以上介護等合算一部負担金等世帯合算額 = new Decimal(0);
+    public static final RString DEFAULT_所得区分 = new RString("Data");
+    public static final RString DEFAULT_70歳以上の者に係る所得区分 = new RString("Data");
+    public static final Decimal DEFAULT_介護等合算算定基準額 = new Decimal(0);
+    public static final Decimal DEFAULT_70歳以上介護等合算算定基準額 = new Decimal(0);
+    public static final Decimal DEFAULT_世帯支給総額 = new Decimal(0);
+    public static final Decimal DEFAULT_うち70歳以上分世帯支給総額 = new Decimal(0);
+    public static final Decimal DEFAULT_按分後支給額 = new Decimal(0);
+    public static final Decimal DEFAULT_うち70歳以上分按分後支給額 = new Decimal(0);
+    public static final RString DEFAULT_介護低所得者Ⅰ再計算実施の有無 = new RString("Data");
+    public static final RString DEFAULT_備考 = new RString("Data");
+    public static final YubinNo DEFAULT_支給額計算結果連絡先郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_支給額計算結果連絡先住所 = new RString("Data");
+    public static final RString DEFAULT_支給額計算結果連絡先名称1 = new RString("Data");
+    public static final RString DEFAULT_支給額計算結果連絡先名称2 = new RString("Data");
+    public static final FlexibleDate DEFAULT_通知年月日 = new FlexibleDate("19900101");
+    public static final AtenaMeisho DEFAULT_連絡票発行者名 = new AtenaMeisho("");
+    public static final YubinNo DEFAULT_連絡票発行者郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_連絡票発行者住所 = new RString("Data");
+    public static final YubinNo DEFAULT_問い合わせ先郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_問い合わせ先住所 = new RString("Data");
+    public static final RString DEFAULT_問い合わせ先名称1 = new RString("Data");
+    public static final RString DEFAULT_問い合わせ先名称2 = new RString("Data");
+    public static final TelNo DEFAULT_問い合わせ先電話番号 = new TelNo("08011112222");
+    public static final Decimal DEFAULT_70歳以上負担額合計 = new Decimal(0);
+    public static final Decimal DEFAULT_70歳以上支給額合計 = new Decimal(0);
+    public static final Decimal DEFAULT_70歳未満負担額合計 = new Decimal(0);
+    public static final Decimal DEFAULT_負担額の合計額 = new Decimal(0);
+    public static final Decimal DEFAULT_70歳未満支給額合計 = new Decimal(0);
+    public static final Decimal DEFAULT_支給額合計額 = new Decimal(0);
+    public static final RString DEFAULT_データ区分 = new RString("Data");
+    public static final FlexibleYearMonth DEFAULT_受取年月 = new FlexibleYearMonth("199001");
+    public static final FlexibleYearMonth DEFAULT_送付年月 = new FlexibleYearMonth("199001");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -81,6 +78,7 @@ public final class DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator {
         entity.setTaishoNendo(DEFAULT_対象年度);
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setShikyuShinseishoSeiriNo(DEFAULT_支給申請書整理番号);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setHokenSeidoCode(DEFAULT_保険制度コード);
         entity.setJikoFutanSeiriNo(DEFAULT_自己負担額証明書整理番号);
         entity.setTaishoKeisanKaishiYMD(DEFAULT_対象計算期間開始年月日);

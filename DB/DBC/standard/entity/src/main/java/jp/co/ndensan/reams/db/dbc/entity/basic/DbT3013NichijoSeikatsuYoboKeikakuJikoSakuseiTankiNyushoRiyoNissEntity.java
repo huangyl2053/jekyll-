@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity extends DbTableEntityBase<DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss");
 
@@ -33,13 +34,13 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal zenkaiRiyoNissu;
     private Decimal konkaiKeikakuRiyoNissu;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +49,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +58,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,17 +67,16 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,7 +85,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -94,7 +94,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -103,7 +103,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 対象年月のgetメソッドです。
-     * 
+     *
      * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
@@ -112,7 +112,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 対象年月のsetメソッドです。
-     * 
+     *
      * @param taishoYM 対象年月
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
@@ -121,25 +121,25 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 前回迄利用日数のgetメソッドです。
-     * 
+     *
      * @return 前回迄利用日数
      */
     public Decimal getZenkaiRiyoNissu() {
@@ -148,7 +148,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 前回迄利用日数のsetメソッドです。
-     * 
+     *
      * @param zenkaiRiyoNissu 前回迄利用日数
      */
     public void setZenkaiRiyoNissu(Decimal zenkaiRiyoNissu) {
@@ -157,7 +157,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 今回計画利用日数のgetメソッドです。
-     * 
+     *
      * @return 今回計画利用日数
      */
     public Decimal getKonkaiKeikakuRiyoNissu() {
@@ -166,7 +166,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * 今回計画利用日数のsetメソッドです。
-     * 
+     *
      * @param konkaiKeikakuRiyoNissu 今回計画利用日数
      */
     public void setKonkaiKeikakuRiyoNissu(Decimal konkaiKeikakuRiyoNissu) {
@@ -175,9 +175,9 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * このエンティティの主キーが他の{@literal DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -211,6 +211,7 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -219,5 +220,4 @@ public class DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEnti
     }
 
 // </editor-fold>
-
 }

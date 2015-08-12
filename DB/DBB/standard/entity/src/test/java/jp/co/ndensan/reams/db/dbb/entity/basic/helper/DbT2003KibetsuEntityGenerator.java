@@ -12,18 +12,16 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護期別エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author N8156 宮本 康
  */
 public final class DbT2003KibetsuEntityGenerator {
 
-    public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("2014");
-    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
-    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo("00000000000000000001");
-    public static final int DEFAULT_履歴番号 = 1;
-    public static final RString DEFAULT_徴収方法 = new RString("1");
+    public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("1990");
+    public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("1990");
+    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo("1");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_徴収方法 = new RString("Data");
     public static final int DEFAULT_期 = 1;
-    public static final Decimal DEFAULT_調定ID = new Decimal(1);
+    public static final Decimal DEFAULT_調定ID = new Decimal(0);
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

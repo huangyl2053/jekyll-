@@ -25,6 +25,7 @@
         <module>divcontroller</module>
         <module>workflowcontroller</module>
         <module>model</module>
+        <module>service</module>
     </modules>
     <dependencyManagement>
         <dependencies>

@@ -82,8 +82,8 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
     private RString chushiRiyuNyushomaeJyokyoCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
-    private Integer nyushoJitsunissu;
-    private Integer gaihakuNissu;
+    private Decimal nyushoJitsunissu;
+    private Decimal gaihakuNissu;
     private RString taishogoJotaiCode;
     private HokenKyufuRitsu hokenKyufuritsu;
     private HokenKyufuRitsu kohi1Kyufuritsu;
@@ -871,7 +871,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 入所（院）実日数
      */
-    public Integer getNyushoJitsunissu() {
+    public Decimal getNyushoJitsunissu() {
         return nyushoJitsunissu;
     }
 
@@ -880,7 +880,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param nyushoJitsunissu 入所（院）実日数
      */
-    public void setNyushoJitsunissu(Integer nyushoJitsunissu) {
+    public void setNyushoJitsunissu(Decimal nyushoJitsunissu) {
         this.nyushoJitsunissu = nyushoJitsunissu;
     }
 
@@ -889,7 +889,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @return 外泊日数
      */
-    public Integer getGaihakuNissu() {
+    public Decimal getGaihakuNissu() {
         return gaihakuNissu;
     }
 
@@ -898,7 +898,7 @@ public class DbT3017KyufujissekiKihonEntity extends DbTableEntityBase<DbT3017Kyu
      *
      * @param gaihakuNissu 外泊日数
      */
-    public void setGaihakuNissu(Integer gaihakuNissu) {
+    public void setGaihakuNissu(Decimal gaihakuNissu) {
         this.gaihakuNissu = gaihakuNissu;
     }
 

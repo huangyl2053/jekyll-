@@ -34,7 +34,7 @@ public class DbT3092KyufuhiKashitsukeKinChoshuEntity extends DbTableEntityBase<D
     @PrimaryKey
     private RString kashitsukeKanriNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString henkanChoshuHoho;
     private FlexibleDate HenkanChoshuYMD;
     private Decimal henkanChoshuKingaku;
@@ -126,7 +126,7 @@ public class DbT3092KyufuhiKashitsukeKinChoshuEntity extends DbTableEntityBase<D
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -135,7 +135,7 @@ public class DbT3092KyufuhiKashitsukeKinChoshuEntity extends DbTableEntityBase<D
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

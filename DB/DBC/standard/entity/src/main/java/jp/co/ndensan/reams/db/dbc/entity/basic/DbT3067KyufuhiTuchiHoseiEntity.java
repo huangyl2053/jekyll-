@@ -48,7 +48,7 @@ public class DbT3067KyufuhiTuchiHoseiEntity extends DbTableEntityBase<DbT3067Kyu
     @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal serviceHiyoTotal;
     private Decimal riyoshaFutangaku;
 
@@ -192,7 +192,7 @@ public class DbT3067KyufuhiTuchiHoseiEntity extends DbTableEntityBase<DbT3067Kyu
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -201,7 +201,7 @@ public class DbT3067KyufuhiTuchiHoseiEntity extends DbTableEntityBase<DbT3067Kyu
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
