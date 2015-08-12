@@ -10,15 +10,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新旧被保険者番号変換テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7026ShinKyuHihokenshaNoHenkanEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_新番号 = new RString("123");
     public static final RString DEFAULT_旧番号 = new RString("123");
-    public static final LasdecCode DEFAULT_旧市町村コード２ = new LasdecCode("202010");
+    public static final LasdecCode DEFAULT_旧市町村コード２ = new LasdecCode("202011");
     public static final RString DEFAULT_旧番号２ = new RString("123");
 
     /**

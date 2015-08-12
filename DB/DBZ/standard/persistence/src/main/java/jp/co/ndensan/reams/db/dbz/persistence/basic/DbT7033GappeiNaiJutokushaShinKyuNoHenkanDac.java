@@ -6,11 +6,10 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.rirekiNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkan;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkan.rirekiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkan.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -18,15 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併内住特者新旧番号変換テーブルのデータアクセスクラスです。
- *
- * @author LDNS 宋文娟
  */
-public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac implements IModifiable<DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity> {
+public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac implements ISaveable<DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -71,54 +69,17 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac implements IModifiable<
     }
 
     /**
-     * 合併内住特者新旧番号変換テーブルを追加します。
+     * DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity 合併内住特者新旧番号変換テーブル
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
     @Override
-    public int insert(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    /**
-     * 合併内住特者新旧番号変換テーブルをDBに更新します。
-     *
-     * @param entity 合併内住特者新旧番号変換テーブル
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int update(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    /**
-     * 合併内住特者新旧番号変換テーブルをDBから削除します。（論理削除）
-     *
-     * @param entity 合併内住特者新旧番号変換テーブル
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int delete(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 合併内住特者新旧番号変換テーブルを物理削除。
-     *
-     * @param entity 合併内住特者新旧番号変換テーブル
-     * @return 影響行数
-     */
-    @Transaction
-    public int deletePhysical(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    public int save(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併内住特者新旧番号変換テーブルエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

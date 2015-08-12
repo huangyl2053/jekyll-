@@ -1,5 +1,10 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
-setaiKijunYMD,UDD015YMD,FlexibleDate,,,,,世帯基準年月日,A
-renban,int4,int,,,,,連番,A
-shoriTimestamp,timestamp,RDateTime,,,,,処理日時,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+kanriShikibetsuKubun,varchar,RString,,,,,管理識別区分,A
+setaiHaakuKijunYMD,UDD015YMD,FlexibleDate,,,,,世帯把握基準年月日,A
+setaiInkanriRenban,int4,int,,,,,世帯員管理連番,A
 setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,世帯員識別コード,A
+honninKubun,varchar,RString,,,,,本人区分,A
+kazeiNendo,UDD012YSeireki,FlexibleYear,,,,,課税年度,A
+kazeiHikazeiKubun,varchar,RString,,,,,課税非課税区分,A
+gokeiShotokuKingaku,numeric,Decimal,,,,,合計所得金額,A
+kazeiNenkinShunyugaku,numeric,Decimal,,,,,課税年金収入額,A

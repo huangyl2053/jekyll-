@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域市町村管理コード変換パターンエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator {
 
@@ -19,7 +17,7 @@ public final class DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator {
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_コード区分 = new RString("1");
     public static final RString DEFAULT_コード変換テーブル使用区分 = new RString("1");
-    public static final RString DEFAULT_自動採番区分 = new RString("3");
+    public static final RString DEFAULT_自動採番区分 = new RString("1");
     public static final int DEFAULT_市町村用コード桁数 = 1;
     public static final int DEFAULT_市町村用コード開始位置 = 1;
     public static final int DEFAULT_市町村用コード使用桁数 = 1;

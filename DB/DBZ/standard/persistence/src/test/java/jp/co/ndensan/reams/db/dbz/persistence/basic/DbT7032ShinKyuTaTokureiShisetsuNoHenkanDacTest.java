@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7032ShinKyuTaTok
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -25,8 +26,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7032ShinKyuTaTokureiShisetsuNoHenkanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBase {
@@ -46,7 +45,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new LasdecCode("859412"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号);
             TestSupport.insert(
                     DEFAULT_市町村コード,
@@ -56,7 +55,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号);
         }
 
@@ -64,7 +63,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
         public void 旧他特例施設番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null);
+                    DEFAULT_旧他特例施設番号);
         }
 
         @Test
@@ -78,7 +77,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity insertedRecord = sut.selectByKey(
-                    new LasdecCode("854981"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,7 +88,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
         @Test
         public void 新旧他特例施設番号変換テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new LasdecCode("756614"),
+                    DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号);
             TestSupport.insert(
                     DEFAULT_市町村コード,
@@ -128,18 +127,20 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
 
         @Test
         public void 新旧他特例施設番号変換テーブルエンティティを渡すと_updateは_新旧他特例施設番号変換テーブルを更新する() {
-            DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity updateRecord = DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntityGenerator.createDbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity();
-            //TODO  主キー以外の項目を変更してください
-//      updateRecord.set変更したい項目(75);
+            DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_旧他特例施設番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号);
 
-            //TODO  主キー以外の項目を変更してください
-// assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -154,9 +155,13 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
 
         @Test
         public void 新旧他特例施設番号変換テーブルエンティティを渡すと_deleteは_新旧他特例施設番号変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_旧他特例施設番号));
+                    DEFAULT_旧他特例施設番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_旧他特例施設番号), is(nullValue()));
@@ -171,7 +176,7 @@ public class DbT7032ShinKyuTaTokureiShisetsuNoHenkanDacTest extends DbzTestDacBa
             DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity entity = DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntityGenerator.createDbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity();
             entity.setShichosonCode(市町村コード);
             entity.setKyuTaTokureiShisetsuNo(旧他特例施設番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

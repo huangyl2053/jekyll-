@@ -4,31 +4,29 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJoho.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJoho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJoho.shujiiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJoho.shujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.IShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 受給(DBD)用の主治医情報のデータアクセスクラスです。
- *
- * @author n8235 船山洋介
+ * 主治医情報のデータアクセスクラスです。
  */
-public class DbT4912ShujiiJohoDac implements IModifiable<IShujiiJohoEntity> {
+public class DbT4912ShujiiJohoDac implements ISaveable<DbT4912ShujiiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -36,14 +34,14 @@ public class DbT4912ShujiiJohoDac implements IModifiable<IShujiiJohoEntity> {
     /**
      * 主キーで主治医情報を取得します。
      *
-     * @param 市町村コード shichosonCode
-     * @param 主治医医療機関コード shujiiIryokikanCode
-     * @param 主治医コード shujiiCode
-     * @return Optional<DbT4912ShujiiJohoEntity>
+     * @param 市町村コード 市町村コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @param 主治医コード 主治医コード
+     * @return DbT4912ShujiiJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public Optional<DbT4912ShujiiJohoEntity> selectByKey(
+    public DbT4912ShujiiJohoEntity selectByKey(
             LasdecCode 市町村コード,
             ShujiiIryokikanCode 主治医医療機関コード,
             ShujiiCode 主治医コード) throws NullPointerException {
@@ -53,48 +51,41 @@ public class DbT4912ShujiiJohoDac implements IModifiable<IShujiiJohoEntity> {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return Optional.ofNullable(accessor.select().
+        return accessor.select().
                 table(DbT4912ShujiiJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(shujiiIryokikanCode, 主治医医療機関コード),
                                 eq(shujiiCode, 主治医コード))).
-                toObject(DbT4912ShujiiJohoEntity.class));
+                toObject(DbT4912ShujiiJohoEntity.class);
     }
 
     /**
      * 主治医情報を全件返します。
      *
-     * @return ItemList<DbT4912ShujiiJohoEntity>
+     * @return DbT4912ShujiiJohoEntityの{@code list}
      */
     @Transaction
-    public ItemList<DbT4912ShujiiJohoEntity> selectAll() {
+    public List<DbT4912ShujiiJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return ItemList.of(accessor.select().
+        return accessor.select().
                 table(DbT4912ShujiiJoho.class).
-                toList(DbT4912ShujiiJohoEntity.class));
+                toList(DbT4912ShujiiJohoEntity.class);
     }
 
+    /**
+     * DbT4912ShujiiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
     @Transaction
     @Override
-    public int insert(IShujiiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+    public int save(DbT4912ShujiiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    @Transaction
-    @Override
-    public int update(IShujiiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(IShujiiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
 }

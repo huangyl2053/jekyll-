@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7023RendoHoryuTo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -25,8 +26,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7023RendoHoryuTokuteiJushoDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
@@ -46,7 +45,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new RString("1222"),
+                    DEFAULT_管理番号,
                     DEFAULT_市町村コード);
             TestSupport.insert(
                     DEFAULT_管理番号,
@@ -56,7 +55,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 管理番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_管理番号,
                     DEFAULT_市町村コード);
         }
 
@@ -64,7 +63,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_管理番号,
-                    null);
+                    DEFAULT_市町村コード);
         }
 
         @Test
@@ -78,7 +77,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7023RendoHoryuTokuteiJushoEntity insertedRecord = sut.selectByKey(
-                    new RString("45612"),
+                    DEFAULT_管理番号,
                     DEFAULT_市町村コード);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,7 +88,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
         @Test
         public void 連動保留特定住所マスタが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new RString("45678"),
+                    DEFAULT_管理番号,
                     DEFAULT_市町村コード);
             TestSupport.insert(
                     DEFAULT_管理番号,
@@ -128,18 +127,20 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
 
         @Test
         public void 連動保留特定住所マスタエンティティを渡すと_updateは_連動保留特定住所マスタを更新する() {
-            DbT7023RendoHoryuTokuteiJushoEntity updateRecord = DbT7023RendoHoryuTokuteiJushoEntityGenerator.createDbT7023RendoHoryuTokuteiJushoEntity();
-            //TODO  主キー以外の項目を変更してください
-// updateRecord.set変更したい項目(75);
+            DbT7023RendoHoryuTokuteiJushoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_管理番号,
+                    DEFAULT_市町村コード);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7023RendoHoryuTokuteiJushoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_管理番号,
                     DEFAULT_市町村コード);
 
-            //TODO  主キー以外の項目を変更してください
-//  assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -154,9 +155,13 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
 
         @Test
         public void 連動保留特定住所マスタエンティティを渡すと_deleteは_連動保留特定住所マスタを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7023RendoHoryuTokuteiJushoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_管理番号,
-                    DEFAULT_市町村コード));
+                    DEFAULT_市町村コード);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_管理番号,
                     DEFAULT_市町村コード), is(nullValue()));
@@ -171,7 +176,7 @@ public class DbT7023RendoHoryuTokuteiJushoDacTest extends DbzTestDacBase {
             DbT7023RendoHoryuTokuteiJushoEntity entity = DbT7023RendoHoryuTokuteiJushoEntityGenerator.createDbT7023RendoHoryuTokuteiJushoEntity();
             entity.setKanriNo(管理番号);
             entity.setShichosonCode(市町村コード);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

@@ -4,31 +4,27 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho.shujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.IShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医医療機関情報のデータアクセスクラスです。
- *
- * @author n8235 船山洋介
  */
-public class DbT4911ShujiiIryoKikanJohoDac implements IModifiable<IShujiiIryoKikanJohoEntity> {
+public class DbT4911ShujiiIryoKikanJohoDac implements ISaveable<DbT4911ShujiiIryoKikanJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -36,13 +32,13 @@ public class DbT4911ShujiiIryoKikanJohoDac implements IModifiable<IShujiiIryoKik
     /**
      * 主キーで主治医医療機関情報を取得します。
      *
-     * @param 市町村コード shichosonCode
-     * @param 主治医医療機関コード shujiiIryokikanCode
-     * @return Optional<DbT4911ShujiiIryoKikanJohoEntity>
+     * @param 市町村コード 市町村コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @return DbT4911ShujiiIryoKikanJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public Optional<DbT4911ShujiiIryoKikanJohoEntity> selectByKey(
+    public DbT4911ShujiiIryoKikanJohoEntity selectByKey(
             LasdecCode 市町村コード,
             ShujiiIryokikanCode 主治医医療機関コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -50,76 +46,40 @@ public class DbT4911ShujiiIryoKikanJohoDac implements IModifiable<IShujiiIryoKik
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return Optional.ofNullable(accessor.select().
+        return accessor.select().
                 table(DbT4911ShujiiIryoKikanJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(shujiiIryokikanCode, 主治医医療機関コード))).
-                toObject(DbT4911ShujiiIryoKikanJohoEntity.class));
-    }
-
-    /**
-     * 主キーで主治医医療機関情報を取得します。
-     *
-     * @param 市町村コード shichosonCode
-     * @param 主治医医療機関コード shujiiIryokikanCode
-     * @param 状況フラグ jokyoFlag
-     * @return Optional<DbT4911ShujiiIryoKikanJohoEntity>
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public Optional<DbT4911ShujiiIryoKikanJohoEntity> selectByKey(
-            LasdecCode 市町村コード,
-            RString 主治医医療機関コード,
-            boolean 状況フラグ) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        requireNonNull(状況フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("状況フラグ"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return Optional.ofNullable(accessor.select().
-                table(DbT4911ShujiiIryoKikanJoho.class).
-                where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(shujiiIryokikanCode, 主治医医療機関コード),
-                                eq(jokyoFlag, 状況フラグ))).
-                toObject(DbT4911ShujiiIryoKikanJohoEntity.class));
+                toObject(DbT4911ShujiiIryoKikanJohoEntity.class);
     }
 
     /**
      * 主治医医療機関情報を全件返します。
      *
-     * @return ItemList<DbT4911ShujiiIryoKikanJohoEntity>
+     * @return DbT4911ShujiiIryoKikanJohoEntityの{@code list}
      */
     @Transaction
-    public ItemList<DbT4911ShujiiIryoKikanJohoEntity> selectAll() {
+    public List<DbT4911ShujiiIryoKikanJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return ItemList.of(accessor.select().
+        return accessor.select().
                 table(DbT4911ShujiiIryoKikanJoho.class).
-                toList(DbT4911ShujiiIryoKikanJohoEntity.class));
+                toList(DbT4911ShujiiIryoKikanJohoEntity.class);
     }
 
+    /**
+     * DbT4911ShujiiIryoKikanJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
     @Transaction
     @Override
-    public int insert(IShujiiIryoKikanJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+    public int save(DbT4911ShujiiIryoKikanJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    @Transaction
-    @Override
-    public int update(IShujiiIryoKikanJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(IShujiiIryoKikanJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
 }

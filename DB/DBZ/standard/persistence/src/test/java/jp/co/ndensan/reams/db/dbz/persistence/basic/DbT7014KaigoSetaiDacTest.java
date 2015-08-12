@@ -8,14 +8,20 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯基準年月日;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_処理日時;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_連番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -29,8 +35,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7014KaigoSetaiDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
@@ -50,61 +54,154 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new HihokenshaNo("78456"),
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 世帯基準年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 管理識別区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    null,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 世帯把握基準年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    null);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 世帯員管理連番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 世帯員識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 本人区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 課税年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 課税非課税区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7014KaigoSetaiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7014KaigoSetaiEntity insertedRecord = sut.selectByKey(
-                    new HihokenshaNo("123456"),
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -114,15 +211,23 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
         @Test
         public void 介護世帯が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new HihokenshaNo("789945"),
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -138,15 +243,23 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
         public void 介護世帯エンティティを渡すと_insertは_介護世帯を追加する() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分), is(notNullValue()));
         }
     }
 
@@ -156,27 +269,43 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test
         public void 介護世帯エンティティを渡すと_updateは_介護世帯を更新する() {
-            DbT7014KaigoSetaiEntity updateRecord = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            //TODO  主キー以外の項目を変更してください
-//   updateRecord.set変更したい項目(75);
+            DbT7014KaigoSetaiEntity updateRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7014KaigoSetaiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
 
-            //TODO  主キー以外の項目を変更してください
-//    assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -186,23 +315,39 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時);
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
         }
 
         @Test
         public void 介護世帯エンティティを渡すと_deleteは_介護世帯を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7014KaigoSetaiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時));
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_世帯基準年月日,
-                    DEFAULT_連番,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_管理識別区分,
+                    DEFAULT_世帯把握基準年月日,
+                    DEFAULT_世帯員管理連番,
+                    DEFAULT_世帯員識別コード,
+                    DEFAULT_本人区分,
+                    DEFAULT_課税年度,
+                    DEFAULT_課税非課税区分), is(nullValue()));
         }
     }
 
@@ -210,15 +355,23 @@ public class DbT7014KaigoSetaiDacTest extends DbzTestDacBase {
 
         public static void insert(
                 HihokenshaNo 被保険者番号,
-                FlexibleDate 世帯基準年月日,
-                int 連番,
-                RDateTime 処理日時) {
+                RString 管理識別区分,
+                FlexibleDate 世帯把握基準年月日,
+                int 世帯員管理連番,
+                ShikibetsuCode 世帯員識別コード,
+                RString 本人区分,
+                FlexibleYear 課税年度,
+                RString 課税非課税区分) {
             DbT7014KaigoSetaiEntity entity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
             entity.setHihokenshaNo(被保険者番号);
-            entity.setSetaiKijunYMD(世帯基準年月日);
-            entity.setRenban(連番);
-            entity.setShoriTimestamp(処理日時);
-            sut.insert(entity);
+            entity.setKanriShikibetsuKubun(管理識別区分);
+            entity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            entity.setSetaiInkanriRenban(世帯員管理連番);
+            entity.setSetaiInshikibetsuCode(世帯員識別コード);
+            entity.setHonninKubun(本人区分);
+            entity.setKazeiNendo(課税年度);
+            entity.setKazeiHikazeiKubun(課税非課税区分);
+            sut.save(entity);
         }
     }
 }

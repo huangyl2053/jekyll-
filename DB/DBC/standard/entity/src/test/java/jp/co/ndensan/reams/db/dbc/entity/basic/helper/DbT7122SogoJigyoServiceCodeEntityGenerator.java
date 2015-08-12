@@ -4,18 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護予防・日常生活支援総合事業サービスコードエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7122SogoJigyoServiceCodeEntityGenerator {
 

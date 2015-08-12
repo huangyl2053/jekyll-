@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 短期入所系支給限度額エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7110TankiNyushoShikyuGendoGakuEntityGenerator {
 

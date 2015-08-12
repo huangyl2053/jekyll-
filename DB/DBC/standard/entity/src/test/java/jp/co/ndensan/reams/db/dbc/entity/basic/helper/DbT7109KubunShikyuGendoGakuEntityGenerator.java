@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅サービス区分支給限度額エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7109KubunShikyuGendoGakuEntityGenerator {
 
