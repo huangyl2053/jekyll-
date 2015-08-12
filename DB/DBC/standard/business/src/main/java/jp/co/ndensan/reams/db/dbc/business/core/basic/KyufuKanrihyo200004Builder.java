@@ -6,8 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3014KyufuKanrihyo200004Entity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuKanrihyo200004}の編集を行うビルダークラスです。
@@ -192,38 +200,38 @@ public class KyufuKanrihyo200004Builder {
     }
 
     /**
-     * 限度額適用期間を設定します。
+     * 限度額適用期間の開始を設定します。
      *
-     * @param 限度額適用期間 限度額適用期間
+     * @param 限度額適用期間_開始 限度額適用期間の開始
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set限度額適用期間(FlexibleYearMonth 限度額適用期間) {
-        requireNonNull(限度額適用期間, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額適用期間"));
-        entity.setGendogakuTekiyoKaishiYM(限度額適用期間);
+    public KyufuKanrihyo200004Builder set限度額適用期間_開始(FlexibleYearMonth 限度額適用期間_開始) {
+        requireNonNull(限度額適用期間_開始, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額適用期間の開始"));
+        entity.setGendogakuTekiyoKaishiYM(限度額適用期間_開始);
         return this;
     }
 
     /**
-     * 限度額適用期間を設定します。
+     * 限度額適用期間の終了を設定します。
      *
-     * @param 限度額適用期間 限度額適用期間
+     * @param 限度額適用期間_終了 限度額適用期間の終了
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set限度額適用期間(FlexibleYearMonth 限度額適用期間) {
-        requireNonNull(限度額適用期間, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額適用期間"));
-        entity.setGendogakuTekiyoShuryoYM(限度額適用期間);
+    public KyufuKanrihyo200004Builder set限度額適用期間_終了(FlexibleYearMonth 限度額適用期間_終了) {
+        requireNonNull(限度額適用期間_終了, UrSystemErrorMessages.値がnull.getReplacedMessage("限度額適用期間"));
+        entity.setGendogakuTekiyoShuryoYM(限度額適用期間_終了);
         return this;
     }
 
     /**
      * 居宅・介護予防支給限度額を設定します。
      *
-     * @param 居宅・介護予防支給限度額 居宅・介護予防支給限度額
+     * @param 居宅_介護予防支給限度額 居宅・介護予防支給限度額
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set居宅・介護予防支給限度額(Decimal 居宅・介護予防支給限度額) {
-        requireNonNull(居宅・介護予防支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・介護予防支給限度額"));
-        entity.setKyotakuKaigoYoboShikyuGendogaku(居宅・介護予防支給限度額);
+    public KyufuKanrihyo200004Builder set居宅_介護予防支給限度額(Decimal 居宅_介護予防支給限度額) {
+        requireNonNull(居宅_介護予防支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・介護予防支給限度額"));
+        entity.setKyotakuKaigoYoboShikyuGendogaku(居宅_介護予防支給限度額);
         return this;
     }
 
@@ -257,9 +265,9 @@ public class KyufuKanrihyo200004Builder {
      * @param 指定/基準該当/地域密着型サービス識別コード 指定/基準該当/地域密着型サービス識別コード
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set指定/基準該当/地域密着型サービス識別コード(RString 指定/基準該当/地域密着型サービス識別コード) {
-        requireNonNull(指定/基準該当/地域密着型サービス識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定/基準該当/地域密着型サービス識別コード"));
-        entity.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(指定/基準該当/地域密着型サービス識別コード);
+    public KyufuKanrihyo200004Builder set指定_基準該当_地域密着型サービス識別コード(RString 指定_基準該当_地域密着型サービス識別コード) {
+        requireNonNull(指定_基準該当_地域密着型サービス識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定/基準該当/地域密着型サービス識別コード"));
+        entity.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(指定_基準該当_地域密着型サービス識別コード);
         return this;
     }
 
@@ -278,12 +286,12 @@ public class KyufuKanrihyo200004Builder {
     /**
      * 給付計画単位数／日数を設定します。
      *
-     * @param 給付計画単位数／日数 給付計画単位数／日数
+     * @param 給付計画単位数_日数 給付計画単位数／日数
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set給付計画単位数／日数(Decimal 給付計画単位数／日数) {
-        requireNonNull(給付計画単位数／日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画単位数／日数"));
-        entity.setKyufuKeikakuTanisuNissu(給付計画単位数／日数);
+    public KyufuKanrihyo200004Builder set給付計画単位数_日数(Decimal 給付計画単位数_日数) {
+        requireNonNull(給付計画単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画単位数／日数"));
+        entity.setKyufuKeikakuTanisuNissu(給付計画単位数_日数);
         return this;
     }
 
@@ -329,9 +337,9 @@ public class KyufuKanrihyo200004Builder {
      * @param 給付計画合計単位数/日数 給付計画合計単位数/日数
      * @return {@link KyufuKanrihyo200004Builder}
      */
-    public KyufuKanrihyo200004Builder set給付計画合計単位数/日数(Decimal 給付計画合計単位数/日数) {
-        requireNonNull(給付計画合計単位数/日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画合計単位数/日数"));
-        entity.setKyufuKeikakuTotalTanisuNissu(給付計画合計単位数/日数);
+    public KyufuKanrihyo200004Builder set給付計画合計単位数_日数(Decimal 給付計画合計単位数_日数) {
+        requireNonNull(給付計画合計単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画合計単位数/日数"));
+        entity.setKyufuKeikakuTotalTanisuNissu(給付計画合計単位数_日数);
         return this;
     }
 

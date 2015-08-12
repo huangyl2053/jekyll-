@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KagoKetteiMeisai}の編集を行うビルダークラスです。
@@ -192,14 +201,14 @@ public class KagoKetteiMeisaiBuilder {
     }
 
     /**
-     * 単位数（特定入所者介護費等）を設定します。
+     * 単位数_特定入所者介護費等を設定します。
      *
-     * @param 単位数（特定入所者介護費等） 単位数（特定入所者介護費等）
+     * @param 単位数_特定入所者介護費等 単位数_特定入所者介護費等
      * @return {@link KagoKetteiMeisaiBuilder}
      */
-    public KagoKetteiMeisaiBuilder set単位数（特定入所者介護費等）(Decimal 単位数（特定入所者介護費等）) {
-        requireNonNull(単位数（特定入所者介護費等）, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数（特定入所者介護費等）"));
-        entity.setTanisu(単位数（特定入所者介護費等）);
+    public KagoKetteiMeisaiBuilder set単位数_特定入所者介護費等(Decimal 単位数_特定入所者介護費等) {
+        requireNonNull(単位数_特定入所者介護費等, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数_特定入所者介護費等"));
+        entity.setTanisu(単位数_特定入所者介護費等);
         return this;
     }
 

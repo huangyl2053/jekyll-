@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額合算給付実績の識別子です。
@@ -14,7 +19,7 @@ import lombok.Value;
 @Value
 public class KogakuGassanKyufuJissekiIdentifier implements Serializable {
 
-    private final KokanShikibetsuCode 交換情報識別番号;
+    private final KokanShikibetsuNo 交換情報識別番号;
     private final HihokenshaNo 被保険者番号;
     private final RString 支給申請書整理番号;
     private final RString 整理番号;
@@ -29,11 +34,11 @@ public class KogakuGassanKyufuJissekiIdentifier implements Serializable {
      * @param 整理番号 整理番号
      * @param 履歴番号 履歴番号
      */
-    public KogakuGassanKyufuJissekiIdentifier(KokanShikibetsuCode 交換情報識別番号,
-HihokenshaNo 被保険者番号,
-RString 支給申請書整理番号,
-RString 整理番号,
-Decimal 履歴番号) {
+    public KogakuGassanKyufuJissekiIdentifier(KokanShikibetsuNo 交換情報識別番号,
+            HihokenshaNo 被保険者番号,
+            RString 支給申請書整理番号,
+            RString 整理番号,
+            Decimal 履歴番号) {
         this.交換情報識別番号 = 交換情報識別番号;
         this.被保険者番号 = 被保険者番号;
         this.支給申請書整理番号 = 支給申請書整理番号;

@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 受領委任契約事業者を管理するクラスです。
  */
-public class JuryoininKeiyakuJigyosha extends ParentModelBase<JuryoininKeiyakuJigyoshaIdentifier, DbT3077JuryoininKeiyakuJigyoshaEntity, JuryoininKeiyakuJigyosha> implements Serializable {
+public class JuryoininKeiyakuJigyosha extends ModelBase<JuryoininKeiyakuJigyoshaIdentifier, DbT3077JuryoininKeiyakuJigyoshaEntity, JuryoininKeiyakuJigyosha> implements Serializable {
 
     private final DbT3077JuryoininKeiyakuJigyoshaEntity entity;
     private final JuryoininKeiyakuJigyoshaIdentifier id;
@@ -33,8 +40,8 @@ public class JuryoininKeiyakuJigyosha extends ParentModelBase<JuryoininKeiyakuJi
      * @param 履歴番号 履歴番号
      */
     public JuryoininKeiyakuJigyosha(RString 事業者契約番号,
-FlexibleDate 開始年月日,
-Decimal 履歴番号) {
+            FlexibleDate 開始年月日,
+            Decimal 履歴番号) {
         requireNonNull(事業者契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者契約番号"));
         requireNonNull(開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +50,10 @@ Decimal 履歴番号) {
         this.entity.setKaishiYMD(開始年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new JuryoininKeiyakuJigyoshaIdentifier(
-        事業者契約番号,
-        開始年月日,
-        履歴番号
-                );
+                事業者契約番号,
+                開始年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -333,22 +340,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 受領委任契約事業者のみを変更対象とします。<br/>
-     * {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link JuryoininKeiyakuJigyosha}
-     */
-    @Override
-    public JuryoininKeiyakuJigyosha modifiedModel() {
-        DbT3077JuryoininKeiyakuJigyoshaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new JuryoininKeiyakuJigyosha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する受領委任契約事業者を削除対象とします。<br/>
      * {@link DbT3077JuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -365,6 +356,7 @@ Decimal 履歴番号) {
         }
         return new JuryoininKeiyakuJigyosha(deletedEntity, id);
     }
+
     /**
      * {@link JuryoininKeiyakuJigyosha}のシリアライズ形式を提供します。
      *
@@ -375,13 +367,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3077JuryoininKeiyakuJigyoshaEntity entity;
         private final JuryoininKeiyakuJigyoshaIdentifier id;
 
-        private _SerializationProxy(DbT3077JuryoininKeiyakuJigyoshaEntity entity,JuryoininKeiyakuJigyoshaIdentifier id) {
+        private _SerializationProxy(DbT3077JuryoininKeiyakuJigyoshaEntity entity, JuryoininKeiyakuJigyoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

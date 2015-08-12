@@ -6,8 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShikyuFushikyuKettei}の編集を行うビルダークラスです。
@@ -122,12 +130,12 @@ public class KogakuGassanShikyuFushikyuKetteiBuilder {
     /**
      * 国保 被保険者証記号を設定します。
      *
-     * @param 国保 被保険者証記号 国保 被保険者証記号
+     * @param 国保_被保険者証記号 国保 被保険者証記号
      * @return {@link KogakuGassanShikyuFushikyuKetteiBuilder}
      */
-    public KogakuGassanShikyuFushikyuKetteiBuilder set国保 被保険者証記号(RString 国保 被保険者証記号) {
-        requireNonNull(国保 被保険者証記号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保 被保険者証記号"));
-        entity.setKokuho_HihokenshaShoKigo(国保 被保険者証記号);
+    public KogakuGassanShikyuFushikyuKetteiBuilder set国保_被保険者証記号(RString 国保_被保険者証記号) {
+        requireNonNull(国保_被保険者証記号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保 被保険者証記号"));
+        entity.setKokuho_HihokenshaShoKigo(国保_被保険者証記号);
         return this;
     }
 

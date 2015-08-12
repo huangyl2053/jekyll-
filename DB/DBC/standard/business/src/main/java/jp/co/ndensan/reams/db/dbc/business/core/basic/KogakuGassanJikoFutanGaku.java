@@ -6,20 +6,29 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算自己負担額を管理するクラスです。
  */
-public class KogakuGassanJikoFutanGaku extends ParentModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku> implements Serializable {
+public class KogakuGassanJikoFutanGaku extends ModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku> implements Serializable {
 
     private final DbT3070KogakuGassanJikoFutanGakuEntity entity;
     private final KogakuGassanJikoFutanGakuIdentifier id;
@@ -35,10 +44,10 @@ public class KogakuGassanJikoFutanGaku extends ParentModelBase<KogakuGassanJikoF
      * @param 履歴番号 履歴番号
      */
     public KogakuGassanJikoFutanGaku(HihokenshaNo 被保険者番号,
-FlexibleYear 対象年度,
-HokenshaNo 保険者番号,
-RString 支給申請書整理番号,
-Decimal 履歴番号) {
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
@@ -51,12 +60,12 @@ Decimal 履歴番号) {
         this.entity.setShikyuShinseishoSeiriNo(支給申請書整理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuGassanJikoFutanGakuIdentifier(
-        被保険者番号,
-        対象年度,
-        保険者番号,
-        支給申請書整理番号,
-        履歴番号
-                );
+                被保険者番号,
+                対象年度,
+                保険者番号,
+                支給申請書整理番号,
+                履歴番号
+        );
     }
 
     /**
@@ -334,74 +343,74 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 合計・自己負担額を返します。
+     * 合計_自己負担額を返します。
      *
-     * @return 合計・自己負担額
+     * @return 合計_自己負担額
      */
-    public Decimal get合計・自己負担額() {
+    public Decimal get合計_自己負担額() {
         return entity.getGokei_JikoFutanGaku();
     }
 
     /**
-     * 合計・70-74自己負担額（内訳）を返します。
+     * 合計_70_74自己負担額_内訳を返します。
      *
-     * @return 合計・70-74自己負担額（内訳）
+     * @return 合計_70_74自己負担額_内訳
      */
-    public Decimal get合計・70-74自己負担額（内訳）() {
+    public Decimal get合計_70_74自己負担額_内訳() {
         return entity.getGokei_70_74JikoFutanGaku();
     }
 
     /**
-     * 合計・70未満高額支給額を返します。
+     * 合計_70未満高額支給額を返します。
      *
-     * @return 合計・70未満高額支給額
+     * @return 合計_70未満高額支給額
      */
-    public Decimal get合計・70未満高額支給額() {
+    public Decimal get合計_70未満高額支給額() {
         return entity.getGokei_Under70KogakuShikyuGaku();
     }
 
     /**
-     * 合計・70-74高額支給額を返します。
+     * 合計_70_74高額支給額を返します。
      *
-     * @return 合計・70-74高額支給額
+     * @return 合計_70_74高額支給額
      */
-    public Decimal get合計・70-74高額支給額() {
+    public Decimal get合計_70_74高額支給額() {
         return entity.getGokei_70_74KogakuShikyuGaku();
     }
 
     /**
-     * 補正済・合計・自己負担額を返します。
+     * 補正済_合計_自己負担額を返します。
      *
-     * @return 補正済・合計・自己負担額
+     * @return 補正済_合計_自己負担額
      */
-    public Decimal get補正済・合計・自己負担額() {
+    public Decimal get補正済_合計_自己負担額() {
         return entity.getSumi_Gokei_JikoFutanGaku();
     }
 
     /**
-     * 補正済・合計・70-74自己負担額（内訳）を返します。
+     * 補正済_合計_70_74自己負担額_内訳を返します。
      *
-     * @return 補正済・合計・70-74自己負担額（内訳）
+     * @return 補正済_合計_70_74自己負担額_内訳
      */
-    public Decimal get補正済・合計・70-74自己負担額（内訳）() {
+    public Decimal get補正済_合計_70_74自己負担額_内訳() {
         return entity.getSumi_Gokei_70_74JikoFutanGaku();
     }
 
     /**
-     * 補正済・合計・70未満高額支給額を返します。
+     * 補正済_合計_70未満高額支給額を返します。
      *
-     * @return 補正済・合計・70未満高額支給額
+     * @return 補正済_合計_70未満高額支給額
      */
-    public Decimal get補正済・合計・70未満高額支給額() {
+    public Decimal get補正済_合計_70未満高額支給額() {
         return entity.getSumi_Gokei_Under70KogakuShikyuGaku();
     }
 
     /**
-     * 補正済・合計・70-74高額支給額を返します。
+     * 補正済_合計_70_74高額支給額を返します。
      *
-     * @return 補正済・合計・70-74高額支給額
+     * @return 補正済_合計_70_74高額支給額
      */
-    public Decimal get補正済・合計・70-74高額支給額() {
+    public Decimal get補正済_合計_70_74高額支給額() {
         return entity.getSumi_Gokei_70_74KogakuShikyuGaku();
     }
 
@@ -577,11 +586,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 後期・国保処理区分を返します。
+     * 後期_国保処理区分を返します。
      *
-     * @return 後期・国保処理区分
+     * @return 後期_国保処理区分
      */
-    public RString get後期・国保処理区分() {
+    public RString get後期_国保処理区分() {
         return entity.getKoki_KokuhoShoriKubun();
     }
 
@@ -606,22 +615,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 高額合算自己負担額のみを変更対象とします。<br/>
-     * {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KogakuGassanJikoFutanGaku}
-     */
-    @Override
-    public KogakuGassanJikoFutanGaku modifiedModel() {
-        DbT3070KogakuGassanJikoFutanGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KogakuGassanJikoFutanGaku(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する高額合算自己負担額を削除対象とします。<br/>
      * {@link DbT3070KogakuGassanJikoFutanGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -638,6 +631,7 @@ Decimal 履歴番号) {
         }
         return new KogakuGassanJikoFutanGaku(deletedEntity, id);
     }
+
     /**
      * {@link KogakuGassanJikoFutanGaku}のシリアライズ形式を提供します。
      *
@@ -648,13 +642,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3070KogakuGassanJikoFutanGakuEntity entity;
         private final KogakuGassanJikoFutanGakuIdentifier id;
 
-        private _SerializationProxy(DbT3070KogakuGassanJikoFutanGakuEntity entity,KogakuGassanJikoFutanGakuIdentifier id) {
+        private _SerializationProxy(DbT3070KogakuGassanJikoFutanGakuEntity entity, KogakuGassanJikoFutanGakuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

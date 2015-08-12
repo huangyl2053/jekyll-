@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 基準収入額適用管理の識別子です。
@@ -28,9 +32,9 @@ public class KijunShunyugakuTekiyoKanriIdentifier implements Serializable {
      * @param 被保険者番号 被保険者番号
      */
     public KijunShunyugakuTekiyoKanriIdentifier(SetaiCode 世帯コード,
-FlexibleYear 年度,
-Decimal 履歴番号,
-HokenshaNo 被保険者番号) {
+            FlexibleYear 年度,
+            Decimal 履歴番号,
+            HokenshaNo 被保険者番号) {
         this.世帯コード = 世帯コード;
         this.年度 = 年度;
         this.履歴番号 = 履歴番号;

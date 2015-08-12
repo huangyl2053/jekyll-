@@ -6,6 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -36,13 +41,13 @@ public class KyufuKanrihyo200004Identifier implements Serializable {
      * @param 給付管理票明細行番号 給付管理票明細行番号
      */
     public KyufuKanrihyo200004Identifier(FlexibleYearMonth 審査年月,
-FlexibleYearMonth サービス提供年月,
-HokenshaNo 証記載保険者番号,
-JigyoshaNo 居宅支援事業所番号,
-RString 給付管理票情報作成区分コード,
-FlexibleDate 給付管理票作成年月日,
-RString 給付管理票種別区分コード,
-RString 給付管理票明細行番号) {
+            FlexibleYearMonth サービス提供年月,
+            HokenshaNo 証記載保険者番号,
+            JigyoshaNo 居宅支援事業所番号,
+            RString 給付管理票情報作成区分コード,
+            FlexibleDate 給付管理票作成年月日,
+            RString 給付管理票種別区分コード,
+            RString 給付管理票明細行番号) {
         this.審査年月 = 審査年月;
         this.サービス提供年月 = サービス提供年月;
         this.証記載保険者番号 = 証記載保険者番号;

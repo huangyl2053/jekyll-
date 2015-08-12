@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費貸付金償還期限変更を管理するクラスです。
  */
-public class KyufuhiKashitsukekinShokanKigenHenko extends ParentModelBase<KyufuhiKashitsukekinShokanKigenHenkoIdentifier, DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity, KyufuhiKashitsukekinShokanKigenHenko> implements Serializable {
+public class KyufuhiKashitsukekinShokanKigenHenko extends ModelBase<KyufuhiKashitsukekinShokanKigenHenkoIdentifier, DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity, KyufuhiKashitsukekinShokanKigenHenko> implements Serializable {
 
     private final DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity;
     private final KyufuhiKashitsukekinShokanKigenHenkoIdentifier id;
@@ -34,9 +40,9 @@ public class KyufuhiKashitsukekinShokanKigenHenko extends ParentModelBase<Kyufuh
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukekinShokanKigenHenko(HihokenshaNo 被保険者番号,
-RString 貸付管理番号,
-FlexibleDate 償還期限延長受付年月日,
-Decimal 履歴番号) {
+            RString 貸付管理番号,
+            FlexibleDate 償還期限延長受付年月日,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(貸付管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付管理番号"));
         requireNonNull(償還期限延長受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("償還期限延長受付年月日"));
@@ -47,18 +53,19 @@ Decimal 履歴番号) {
         this.entity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiKashitsukekinShokanKigenHenkoIdentifier(
-        被保険者番号,
-        貸付管理番号,
-        償還期限延長受付年月日,
-        履歴番号
-                );
+                被保険者番号,
+                貸付管理番号,
+                償還期限延長受付年月日,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity}より{@link KyufuhiKashitsukekinShokanKigenHenko}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity}
      */
     public KyufuhiKashitsukekinShokanKigenHenko(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費貸付金償還期限変更"));
@@ -224,7 +231,7 @@ Decimal 履歴番号) {
      *
      * @return 償還期限変更承認・不承認区分
      */
-    public RString get償還期限変更承認・不承認区分() {
+    public RString get償還期限変更承認_不承認区分() {
         return entity.getHenkoShonin_FuShoninKubun();
     }
 
@@ -259,27 +266,12 @@ Decimal 履歴番号) {
     /**
      * 給付費貸付金償還期限変更の識別子{@link KyufuhiKashitsukekinShokanKigenHenkoIdentifier}を返します。
      *
-     * @return 給付費貸付金償還期限変更の識別子{@link KyufuhiKashitsukekinShokanKigenHenkoIdentifier}
+     * @return
+     * 給付費貸付金償還期限変更の識別子{@link KyufuhiKashitsukekinShokanKigenHenkoIdentifier}
      */
     @Override
     public KyufuhiKashitsukekinShokanKigenHenkoIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付費貸付金償還期限変更のみを変更対象とします。<br/>
-     * {@link DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiKashitsukekinShokanKigenHenko}
-     */
-    @Override
-    public KyufuhiKashitsukekinShokanKigenHenko modifiedModel() {
-        DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiKashitsukekinShokanKigenHenko(
-                modifiedEntity, id);
     }
 
     /**
@@ -299,6 +291,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiKashitsukekinShokanKigenHenko(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiKashitsukekinShokanKigenHenko}のシリアライズ形式を提供します。
      *
@@ -309,13 +302,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity;
         private final KyufuhiKashitsukekinShokanKigenHenkoIdentifier id;
 
-        private _SerializationProxy(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity,KyufuhiKashitsukekinShokanKigenHenkoIdentifier id) {
+        private _SerializationProxy(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity, KyufuhiKashitsukekinShokanKigenHenkoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

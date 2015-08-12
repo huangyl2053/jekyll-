@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3043ShokanShokujiHiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShokujiHiyo}の編集を行うビルダークラスです。
@@ -204,14 +210,14 @@ public class ShokanShokujiHiyoBuilder {
     }
 
     /**
-     * 標準負担額（月額）を設定します。
+     * 標準負担額_月額を設定します。
      *
-     * @param 標準負担額（月額） 標準負担額（月額）
+     * @param 標準負担額_月額 標準負担額_月額
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set標準負担額（月額）(int 標準負担額（月額）) {
-        requireNonNull(標準負担額（月額）, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額（月額）"));
-        entity.setGetsugakuHyojunFutangaku(標準負担額（月額）);
+    public ShokanShokujiHiyoBuilder set標準負担額_月額(int 標準負担額_月額) {
+        requireNonNull(標準負担額_月額, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額_月額"));
+        entity.setGetsugakuHyojunFutangaku(標準負担額_月額);
         return this;
     }
 
@@ -228,14 +234,14 @@ public class ShokanShokujiHiyoBuilder {
     }
 
     /**
-     * 標準負担額（日額）を設定します。
+     * 標準負担額_日額を設定します。
      *
-     * @param 標準負担額（日額） 標準負担額（日額）
+     * @param 標準負担額_日額 標準負担額_日額
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set標準負担額（日額）(Decimal 標準負担額（日額）) {
-        requireNonNull(標準負担額（日額）, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額（日額）"));
-        entity.setNichigakuHyojunFutangaku(標準負担額（日額）);
+    public ShokanShokujiHiyoBuilder set標準負担額_日額(Decimal 標準負担額_日額) {
+        requireNonNull(標準負担額_日額, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額_日額"));
+        entity.setNichigakuHyojunFutangaku(標準負担額_日額);
         return this;
     }
 
@@ -252,14 +258,14 @@ public class ShokanShokujiHiyoBuilder {
     }
 
     /**
-     * 点数／金額を設定します。
+     * 点数_金額を設定します。
      *
-     * @param 点数／金額 点数／金額
+     * @param 点数_金額 点数_金額
      * @return {@link ShokanShokujiHiyoBuilder}
      */
-    public ShokanShokujiHiyoBuilder set点数／金額(int 点数／金額) {
-        requireNonNull(点数／金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数／金額"));
-        entity.setTensuKingaku(点数／金額);
+    public ShokanShokujiHiyoBuilder set点数_金額(int 点数_金額) {
+        requireNonNull(点数_金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数_金額"));
+        entity.setTensuKingaku(点数_金額);
         return this;
     }
 

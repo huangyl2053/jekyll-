@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShichosonTokubetsuKyufuJigyosha}の編集を行うビルダークラスです。
@@ -132,26 +141,26 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilder {
     }
 
     /**
-     * 申請者氏名（漢字）を設定します。
+     * 申請者氏名_漢字を設定します。
      *
-     * @param 申請者氏名（漢字） 申請者氏名（漢字）
+     * @param 申請者氏名_漢字 申請者氏名_漢字
      * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
      */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者氏名（漢字）(RString 申請者氏名（漢字）) {
-        requireNonNull(申請者氏名（漢字）, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名（漢字）"));
-        entity.setShinseishaNameKanji(申請者氏名（漢字）);
+    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者氏名_漢字(RString 申請者氏名_漢字) {
+        requireNonNull(申請者氏名_漢字, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名_漢字"));
+        entity.setShinseishaNameKanji(申請者氏名_漢字);
         return this;
     }
 
     /**
-     * 申請者氏名（カナ）を設定します。
+     * 申請者氏名_カナを設定します。
      *
-     * @param 申請者氏名（カナ） 申請者氏名（カナ）
+     * @param 申請者氏名_カナ 申請者氏名_カナ
      * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
      */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者氏名（カナ）(RString 申請者氏名（カナ）) {
-        requireNonNull(申請者氏名（カナ）, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名（カナ）"));
-        entity.setShinseishaNameKana(申請者氏名（カナ）);
+    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者氏名_カナ(RString 申請者氏名_カナ) {
+        requireNonNull(申請者氏名_カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名_カナ"));
+        entity.setShinseishaNameKana(申請者氏名_カナ);
         return this;
     }
 
@@ -180,14 +189,14 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilder {
     }
 
     /**
-     * 申請者住所（カナ）を設定します。
+     * 申請者住所_カナを設定します。
      *
-     * @param 申請者住所（カナ） 申請者住所（カナ）
+     * @param 申請者住所_カナ 申請者住所_カナ
      * @return {@link ShichosonTokubetsuKyufuJigyoshaBuilder}
      */
-    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者住所（カナ）(RString 申請者住所（カナ）) {
-        requireNonNull(申請者住所（カナ）, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者住所（カナ）"));
-        entity.setShinseishaAddressKana(申請者住所（カナ）);
+    public ShichosonTokubetsuKyufuJigyoshaBuilder set申請者住所_カナ(RString 申請者住所_カナ) {
+        requireNonNull(申請者住所_カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者住所_カナ"));
+        entity.setShinseishaAddressKana(申請者住所_カナ);
         return this;
     }
 

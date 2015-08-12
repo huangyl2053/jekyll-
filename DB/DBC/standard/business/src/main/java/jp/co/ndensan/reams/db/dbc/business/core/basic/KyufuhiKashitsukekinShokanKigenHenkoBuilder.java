@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuhiKashitsukekinShokanKigenHenko}の編集を行うビルダークラスです。
@@ -218,12 +227,12 @@ public class KyufuhiKashitsukekinShokanKigenHenkoBuilder {
     /**
      * 償還期限変更承認・不承認区分を設定します。
      *
-     * @param 償還期限変更承認・不承認区分 償還期限変更承認・不承認区分
+     * @param 償還期限変更承認_不承認区分 償還期限変更承認・不承認区分
      * @return {@link KyufuhiKashitsukekinShokanKigenHenkoBuilder}
      */
-    public KyufuhiKashitsukekinShokanKigenHenkoBuilder set償還期限変更承認・不承認区分(RString 償還期限変更承認・不承認区分) {
-        requireNonNull(償還期限変更承認・不承認区分, UrSystemErrorMessages.値がnull.getReplacedMessage("償還期限変更承認・不承認区分"));
-        entity.setHenkoShonin_FuShoninKubun(償還期限変更承認・不承認区分);
+    public KyufuhiKashitsukekinShokanKigenHenkoBuilder set償還期限変更承認_不承認区分(RString 償還期限変更承認_不承認区分) {
+        requireNonNull(償還期限変更承認_不承認区分, UrSystemErrorMessages.値がnull.getReplacedMessage("償還期限変更承認・不承認区分"));
+        entity.setHenkoShonin_FuShoninKubun(償還期限変更承認_不承認区分);
         return this;
     }
 

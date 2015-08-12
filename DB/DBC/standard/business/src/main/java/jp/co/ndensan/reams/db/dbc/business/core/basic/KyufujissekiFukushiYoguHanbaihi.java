@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績福祉用具販売費を管理するクラスです。
  */
-public class KyufujissekiFukushiYoguHanbaihi extends ParentModelBase<KyufujissekiFukushiYoguHanbaihiIdentifier, DbT3026KyufujissekiFukushiYoguHanbaihiEntity, KyufujissekiFukushiYoguHanbaihi> implements Serializable {
+public class KyufujissekiFukushiYoguHanbaihi extends ModelBase<KyufujissekiFukushiYoguHanbaihiIdentifier, DbT3026KyufujissekiFukushiYoguHanbaihiEntity, KyufujissekiFukushiYoguHanbaihi> implements Serializable {
 
     private final DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity;
     private final KyufujissekiFukushiYoguHanbaihiIdentifier id;
@@ -38,15 +45,15 @@ public class KyufujissekiFukushiYoguHanbaihi extends ParentModelBase<Kyufujissek
      * @param 通し番号 通し番号
      * @param 明細番号 明細番号
      */
-    public KyufujissekiFukushiYoguHanbaihi(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-RString 明細番号) {
+    public KyufujissekiFukushiYoguHanbaihi(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            RString 明細番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,23 +74,24 @@ RString 明細番号) {
         this.entity.setToshiNo(通し番号);
         this.entity.setMeisaiNo(明細番号);
         this.id = new KyufujissekiFukushiYoguHanbaihiIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        明細番号
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                明細番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3026KyufujissekiFukushiYoguHanbaihiEntity}より{@link KyufujissekiFukushiYoguHanbaihi}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3026KyufujissekiFukushiYoguHanbaihiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3026KyufujissekiFukushiYoguHanbaihiEntity}
      */
     public KyufujissekiFukushiYoguHanbaihi(DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績福祉用具販売費"));
@@ -119,7 +127,7 @@ RString 明細番号) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +136,7 @@ RString 明細番号) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -254,7 +262,7 @@ RString 明細番号) {
      *
      * @return 販売金額
      */
-    public int get販売金額() {
+    public Decimal get販売金額() {
         return entity.getHanbaiKingaku();
     }
 
@@ -263,7 +271,7 @@ RString 明細番号) {
      *
      * @return 摘要（品目コード）
      */
-    public RString get摘要（品目コード）() {
+    public RString get摘要_品目コード() {
         return entity.getTekiyo();
     }
 
@@ -315,22 +323,6 @@ RString 明細番号) {
     }
 
     /**
-     * 給付実績福祉用具販売費のみを変更対象とします。<br/>
-     * {@link DbT3026KyufujissekiFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiFukushiYoguHanbaihi}
-     */
-    @Override
-    public KyufujissekiFukushiYoguHanbaihi modifiedModel() {
-        DbT3026KyufujissekiFukushiYoguHanbaihiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiFukushiYoguHanbaihi(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付実績福祉用具販売費を削除対象とします。<br/>
      * {@link DbT3026KyufujissekiFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -347,6 +339,7 @@ RString 明細番号) {
         }
         return new KyufujissekiFukushiYoguHanbaihi(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiFukushiYoguHanbaihi}のシリアライズ形式を提供します。
      *
@@ -357,13 +350,19 @@ RString 明細番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity;
         private final KyufujissekiFukushiYoguHanbaihiIdentifier id;
 
-        private _SerializationProxy(DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity,KyufujissekiFukushiYoguHanbaihiIdentifier id) {
+        private _SerializationProxy(DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity, KyufujissekiFukushiYoguHanbaihiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

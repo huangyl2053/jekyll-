@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3086KyufuhiKashitsukekinShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuhiKashitsukekinShinsei}の編集を行うビルダークラスです。
@@ -168,50 +178,50 @@ public class KyufuhiKashitsukekinShinseiBuilder {
     }
 
     /**
-     * 貸付対象・高額介護サービス費等有無を設定します。
+     * 貸付対象_高額介護サービス費等有無を設定します。
      *
-     * @param 貸付対象・高額介護サービス費等有無 貸付対象・高額介護サービス費等有無
+     * @param 貸付対象_高額介護サービス費等有無 貸付対象_高額介護サービス費等有無
      * @return {@link KyufuhiKashitsukekinShinseiBuilder}
      */
-    public KyufuhiKashitsukekinShinseiBuilder set貸付対象・高額介護サービス費等有無(RString 貸付対象・高額介護サービス費等有無) {
-        requireNonNull(貸付対象・高額介護サービス費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象・高額介護サービス費等有無"));
-        entity.setKashitsuke_KogakuUmu(貸付対象・高額介護サービス費等有無);
+    public KyufuhiKashitsukekinShinseiBuilder set貸付対象_高額介護サービス費等有無(RString 貸付対象_高額介護サービス費等有無) {
+        requireNonNull(貸付対象_高額介護サービス費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象_高額介護サービス費等有無"));
+        entity.setKashitsuke_KogakuUmu(貸付対象_高額介護サービス費等有無);
         return this;
     }
 
     /**
-     * 貸付対象・住宅改修費等有無を設定します。
+     * 貸付対象_住宅改修費等有無を設定します。
      *
-     * @param 貸付対象・住宅改修費等有無 貸付対象・住宅改修費等有無
+     * @param 貸付対象_住宅改修費等有無 貸付対象_住宅改修費等有無
      * @return {@link KyufuhiKashitsukekinShinseiBuilder}
      */
-    public KyufuhiKashitsukekinShinseiBuilder set貸付対象・住宅改修費等有無(RString 貸付対象・住宅改修費等有無) {
-        requireNonNull(貸付対象・住宅改修費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象・住宅改修費等有無"));
-        entity.setKashitsuke_JutakuKaishuUmu(貸付対象・住宅改修費等有無);
+    public KyufuhiKashitsukekinShinseiBuilder set貸付対象_住宅改修費等有無(RString 貸付対象_住宅改修費等有無) {
+        requireNonNull(貸付対象_住宅改修費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象_住宅改修費等有無"));
+        entity.setKashitsuke_JutakuKaishuUmu(貸付対象_住宅改修費等有無);
         return this;
     }
 
     /**
-     * 貸付対象・福祉用具購入費等有無を設定します。
+     * 貸付対象_福祉用具購入費等有無を設定します。
      *
-     * @param 貸付対象・福祉用具購入費等有無 貸付対象・福祉用具購入費等有無
+     * @param 貸付対象_福祉用具購入費等有無 貸付対象_福祉用具購入費等有無
      * @return {@link KyufuhiKashitsukekinShinseiBuilder}
      */
-    public KyufuhiKashitsukekinShinseiBuilder set貸付対象・福祉用具購入費等有無(RString 貸付対象・福祉用具購入費等有無) {
-        requireNonNull(貸付対象・福祉用具購入費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象・福祉用具購入費等有無"));
-        entity.setKahitsuke_YoguKonyuUmu(貸付対象・福祉用具購入費等有無);
+    public KyufuhiKashitsukekinShinseiBuilder set貸付対象_福祉用具購入費等有無(RString 貸付対象_福祉用具購入費等有無) {
+        requireNonNull(貸付対象_福祉用具購入費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象_福祉用具購入費等有無"));
+        entity.setKahitsuke_YoguKonyuUmu(貸付対象_福祉用具購入費等有無);
         return this;
     }
 
     /**
-     * 貸付対象・特例介護サービス費等有無を設定します。
+     * 貸付対象_特例介護サービス費等有無を設定します。
      *
-     * @param 貸付対象・特例介護サービス費等有無 貸付対象・特例介護サービス費等有無
+     * @param 貸付対象_特例介護サービス費等有無 貸付対象_特例介護サービス費等有無
      * @return {@link KyufuhiKashitsukekinShinseiBuilder}
      */
-    public KyufuhiKashitsukekinShinseiBuilder set貸付対象・特例介護サービス費等有無(RString 貸付対象・特例介護サービス費等有無) {
-        requireNonNull(貸付対象・特例介護サービス費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象・特例介護サービス費等有無"));
-        entity.setKashitsuke_TokureiServiceUmu(貸付対象・特例介護サービス費等有無);
+    public KyufuhiKashitsukekinShinseiBuilder set貸付対象_特例介護サービス費等有無(RString 貸付対象_特例介護サービス費等有無) {
+        requireNonNull(貸付対象_特例介護サービス費等有無, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付対象_特例介護サービス費等有無"));
+        entity.setKashitsuke_TokureiServiceUmu(貸付対象_特例介護サービス費等有無);
         return this;
     }
 
@@ -360,14 +370,14 @@ public class KyufuhiKashitsukekinShinseiBuilder {
     }
 
     /**
-     * 請求書・領収書の有無を設定します。
+     * 請求書_領収書の有無を設定します。
      *
-     * @param 請求書・領収書の有無 請求書・領収書の有無
+     * @param 請求書_領収書の有無 請求書_領収書の有無
      * @return {@link KyufuhiKashitsukekinShinseiBuilder}
      */
-    public KyufuhiKashitsukekinShinseiBuilder set請求書・領収書の有無(RString 請求書・領収書の有無) {
-        requireNonNull(請求書・領収書の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("請求書・領収書の有無"));
-        entity.setSeikyusho_RyoshushoUmu(請求書・領収書の有無);
+    public KyufuhiKashitsukekinShinseiBuilder set請求書_領収書の有無(RString 請求書_領収書の有無) {
+        requireNonNull(請求書_領収書の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("請求書_領収書の有無"));
+        entity.setSeikyusho_RyoshushoUmu(請求書_領収書の有無);
         return this;
     }
 

@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 二次予防基本チェックリストを管理するクラスです。
  */
-public class NijiYoboKihonCheckList extends ParentModelBase<NijiYoboKihonCheckListIdentifier, DbT3101NijiYoboKihonCheckListEntity, NijiYoboKihonCheckList> implements Serializable {
+public class NijiYoboKihonCheckList extends ModelBase<NijiYoboKihonCheckListIdentifier, DbT3101NijiYoboKihonCheckListEntity, NijiYoboKihonCheckList> implements Serializable {
 
     private final DbT3101NijiYoboKihonCheckListEntity entity;
     private final NijiYoboKihonCheckListIdentifier id;
@@ -34,9 +36,9 @@ public class NijiYoboKihonCheckList extends ParentModelBase<NijiYoboKihonCheckLi
      * @param 履歴番号 履歴番号
      */
     public NijiYoboKihonCheckList(ShikibetsuCode 識別コード,
-HihokenshaNo 被保険者番号,
-FlexibleDate 受付年月日,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 受付年月日,
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
@@ -47,11 +49,11 @@ Decimal 履歴番号) {
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new NijiYoboKihonCheckListIdentifier(
-        識別コード,
-        被保険者番号,
-        受付年月日,
-        履歴番号
-                );
+                識別コード,
+                被保険者番号,
+                受付年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -384,22 +386,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 二次予防基本チェックリストのみを変更対象とします。<br/>
-     * {@link DbT3101NijiYoboKihonCheckListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link NijiYoboKihonCheckList}
-     */
-    @Override
-    public NijiYoboKihonCheckList modifiedModel() {
-        DbT3101NijiYoboKihonCheckListEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new NijiYoboKihonCheckList(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する二次予防基本チェックリストを削除対象とします。<br/>
      * {@link DbT3101NijiYoboKihonCheckListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -416,6 +402,7 @@ Decimal 履歴番号) {
         }
         return new NijiYoboKihonCheckList(deletedEntity, id);
     }
+
     /**
      * {@link NijiYoboKihonCheckList}のシリアライズ形式を提供します。
      *
@@ -426,13 +413,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3101NijiYoboKihonCheckListEntity entity;
         private final NijiYoboKihonCheckListIdentifier id;
 
-        private _SerializationProxy(DbT3101NijiYoboKihonCheckListEntity entity,NijiYoboKihonCheckListIdentifier id) {
+        private _SerializationProxy(DbT3101NijiYoboKihonCheckListEntity entity, NijiYoboKihonCheckListIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

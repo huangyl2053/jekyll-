@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 再審査決定集計の識別子です。
@@ -26,8 +29,8 @@ public class SaishinsaKetteiShukeiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public SaishinsaKetteiShukeiIdentifier(FlexibleYearMonth 取扱年月,
-RString 保険者区分,
-Decimal 履歴番号) {
+            RString 保険者区分,
+            Decimal 履歴番号) {
         this.取扱年月 = 取扱年月;
         this.保険者区分 = 保険者区分;
         this.履歴番号 = 履歴番号;

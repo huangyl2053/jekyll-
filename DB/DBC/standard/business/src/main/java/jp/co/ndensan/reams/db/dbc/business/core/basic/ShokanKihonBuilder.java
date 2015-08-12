@@ -6,8 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanKihon}の編集を行うビルダークラスです。
@@ -168,50 +176,50 @@ public class ShokanKihonBuilder {
     }
 
     /**
-     * 中止理由・入所（院）前の状況コードを設定します。
+     * 中止理由_入所_院前の状況コードを設定します。
      *
-     * @param 中止理由・入所（院）前の状況コード 中止理由・入所（院）前の状況コード
+     * @param 中止理由_入所_院前の状況コード 中止理由_入所_院前の状況コード
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set中止理由・入所（院）前の状況コード(RString 中止理由・入所（院）前の状況コード) {
-        requireNonNull(中止理由・入所（院）前の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("中止理由・入所（院）前の状況コード"));
-        entity.setChushiRiyuNyushomaeJyokyoCode(中止理由・入所（院）前の状況コード);
+    public ShokanKihonBuilder set中止理由_入所_院前の状況コード(RString 中止理由_入所_院前の状況コード) {
+        requireNonNull(中止理由_入所_院前の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("中止理由_入所_院前の状況コード"));
+        entity.setChushiRiyuNyushomaeJyokyoCode(中止理由_入所_院前の状況コード);
         return this;
     }
 
     /**
-     * 入所（院）年月日を設定します。
+     * 入所_院年月日を設定します。
      *
-     * @param 入所（院）年月日 入所（院）年月日
+     * @param 入所_院年月日 入所_院年月日
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set入所（院）年月日(FlexibleDate 入所（院）年月日) {
-        requireNonNull(入所（院）年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）年月日"));
-        entity.setNyushoYMD(入所（院）年月日);
+    public ShokanKihonBuilder set入所_院年月日(FlexibleDate 入所_院年月日) {
+        requireNonNull(入所_院年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院年月日"));
+        entity.setNyushoYMD(入所_院年月日);
         return this;
     }
 
     /**
-     * 退所（院）年月日を設定します。
+     * 退所_院年月日を設定します。
      *
-     * @param 退所（院）年月日 退所（院）年月日
+     * @param 退所_院年月日 退所_院年月日
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set退所（院）年月日(FlexibleDate 退所（院）年月日) {
-        requireNonNull(退所（院）年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）年月日"));
-        entity.setTaishoYMD(退所（院）年月日);
+    public ShokanKihonBuilder set退所_院年月日(FlexibleDate 退所_院年月日) {
+        requireNonNull(退所_院年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所_院年月日"));
+        entity.setTaishoYMD(退所_院年月日);
         return this;
     }
 
     /**
-     * 入所（院）実日数を設定します。
+     * 入所_院実日数を設定します。
      *
-     * @param 入所（院）実日数 入所（院）実日数
+     * @param 入所_院実日数 入所_院実日数
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set入所（院）実日数(Decimal 入所（院）実日数) {
-        requireNonNull(入所（院）実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）実日数"));
-        entity.setNyushoJitsuNissu(入所（院）実日数);
+    public ShokanKihonBuilder set入所_院実日数(Decimal 入所_院実日数) {
+        requireNonNull(入所_院実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院実日数"));
+        entity.setNyushoJitsuNissu(入所_院実日数);
         return this;
     }
 
@@ -228,14 +236,14 @@ public class ShokanKihonBuilder {
     }
 
     /**
-     * 退所（院）後の状態コードを設定します。
+     * 退所_院後の状態コードを設定します。
      *
-     * @param 退所（院）後の状態コード 退所（院）後の状態コード
+     * @param 退所_院後の状態コード 退所_院後の状態コード
      * @return {@link ShokanKihonBuilder}
      */
-    public ShokanKihonBuilder set退所（院）後の状態コード(RString 退所（院）後の状態コード) {
-        requireNonNull(退所（院）後の状態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）後の状態コード"));
-        entity.setTaishogoJotaiCode(退所（院）後の状態コード);
+    public ShokanKihonBuilder set退所_院後の状態コード(RString 退所_院後の状態コード) {
+        requireNonNull(退所_院後の状態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("退所_院後の状態コード"));
+        entity.setTaishogoJotaiCode(退所_院後の状態コード);
         return this;
     }
 

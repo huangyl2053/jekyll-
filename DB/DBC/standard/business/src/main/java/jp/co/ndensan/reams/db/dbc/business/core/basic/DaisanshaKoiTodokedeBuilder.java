@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3084DaisanshaKoiTodokedeEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link DaisanshaKoiTodokede}の編集を行うビルダークラスです。
@@ -398,12 +408,12 @@ public class DaisanshaKoiTodokedeBuilder {
     /**
      * 発病原因・負傷時状況を設定します。
      *
-     * @param 発病原因・負傷時状況 発病原因・負傷時状況
+     * @param 発病原因_負傷時状況 発病原因・負傷時状況
      * @return {@link DaisanshaKoiTodokedeBuilder}
      */
-    public DaisanshaKoiTodokedeBuilder set発病原因・負傷時状況(RString 発病原因・負傷時状況) {
-        requireNonNull(発病原因・負傷時状況, UrSystemErrorMessages.値がnull.getReplacedMessage("発病原因・負傷時状況"));
-        entity.setHasshoGeiin_FushoJiJokyo(発病原因・負傷時状況);
+    public DaisanshaKoiTodokedeBuilder set発病原因_負傷時状況(RString 発病原因_負傷時状況) {
+        requireNonNull(発病原因_負傷時状況, UrSystemErrorMessages.値がnull.getReplacedMessage("発病原因・負傷時状況"));
+        entity.setHasshoGeiin_FushoJiJokyo(発病原因_負傷時状況);
         return this;
     }
 

@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額受領委任契約事業者を管理するクラスです。
  */
-public class KogakuJuryoininKeiyakuJigyosha extends ParentModelBase<KogakuJuryoininKeiyakuJigyoshaIdentifier, DbT3076KogakuJuryoininKeiyakuJigyoshaEntity, KogakuJuryoininKeiyakuJigyosha> implements Serializable {
+public class KogakuJuryoininKeiyakuJigyosha extends ModelBase<KogakuJuryoininKeiyakuJigyoshaIdentifier, DbT3076KogakuJuryoininKeiyakuJigyoshaEntity, KogakuJuryoininKeiyakuJigyosha> implements Serializable {
 
     private final DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity;
     private final KogakuJuryoininKeiyakuJigyoshaIdentifier id;
@@ -33,8 +36,8 @@ public class KogakuJuryoininKeiyakuJigyosha extends ParentModelBase<KogakuJuryoi
      * @param 履歴番号 履歴番号
      */
     public KogakuJuryoininKeiyakuJigyosha(HihokenshaNo 被保険者番号,
-FlexibleDate 受付年月日,
-Decimal 履歴番号) {
+            FlexibleDate 受付年月日,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +46,10 @@ Decimal 履歴番号) {
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuJuryoininKeiyakuJigyoshaIdentifier(
-        被保険者番号,
-        受付年月日,
-        履歴番号
-                );
+                被保険者番号,
+                受付年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -225,22 +228,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 高額受領委任契約事業者のみを変更対象とします。<br/>
-     * {@link DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KogakuJuryoininKeiyakuJigyosha}
-     */
-    @Override
-    public KogakuJuryoininKeiyakuJigyosha modifiedModel() {
-        DbT3076KogakuJuryoininKeiyakuJigyoshaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KogakuJuryoininKeiyakuJigyosha(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する高額受領委任契約事業者を削除対象とします。<br/>
      * {@link DbT3076KogakuJuryoininKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -257,6 +244,7 @@ Decimal 履歴番号) {
         }
         return new KogakuJuryoininKeiyakuJigyosha(deletedEntity, id);
     }
+
     /**
      * {@link KogakuJuryoininKeiyakuJigyosha}のシリアライズ形式を提供します。
      *
@@ -267,13 +255,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity;
         private final KogakuJuryoininKeiyakuJigyoshaIdentifier id;
 
-        private _SerializationProxy(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity,KogakuJuryoininKeiyakuJigyoshaIdentifier id) {
+        private _SerializationProxy(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity, KogakuJuryoininKeiyakuJigyoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -7,6 +7,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 再審査申立の識別子です。
@@ -32,11 +39,11 @@ public class SaishinsaMoshitateIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public SaishinsaMoshitateIdentifier(JigyoshaNo 事業所番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード,
+            Decimal 履歴番号) {
         this.事業所番号 = 事業所番号;
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;

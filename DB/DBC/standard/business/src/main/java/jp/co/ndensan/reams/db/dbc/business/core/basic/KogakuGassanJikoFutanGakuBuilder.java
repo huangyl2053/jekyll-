@@ -6,8 +6,20 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanJikoFutanGaku}の編集を行うビルダークラスです。
@@ -194,12 +206,12 @@ public class KogakuGassanJikoFutanGakuBuilder {
     /**
      * 70歳以上の者に係る所得区分を設定します。
      *
-     * @param 70歳以上の者に係る所得区分 70歳以上の者に係る所得区分
+     * @param 所得区分_70歳以上の者に係る 70歳以上の者に係る所得区分
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set70歳以上の者に係る所得区分(RString 70歳以上の者に係る所得区分) {
-        requireNonNull(70歳以上の者に係る所得区分, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
-        entity.setOver70_ShotokuKubun(70歳以上の者に係る所得区分);
+    public KogakuGassanJikoFutanGakuBuilder set所得区分_70歳以上の者に係る(RString 所得区分_70歳以上の者に係る) {
+        requireNonNull(所得区分_70歳以上の者に係る, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
+        entity.setOver70_ShotokuKubun(所得区分_70歳以上の者に係る);
         return this;
     }
 
@@ -360,98 +372,98 @@ public class KogakuGassanJikoFutanGakuBuilder {
     }
 
     /**
-     * 合計・自己負担額を設定します。
+     * 合計_自己負担額を設定します。
      *
-     * @param 合計・自己負担額 合計・自己負担額
+     * @param 合計_自己負担額 合計_自己負担額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set合計・自己負担額(Decimal 合計・自己負担額) {
-        requireNonNull(合計・自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計・自己負担額"));
-        entity.setGokei_JikoFutanGaku(合計・自己負担額);
+    public KogakuGassanJikoFutanGakuBuilder set合計_自己負担額(Decimal 合計_自己負担額) {
+        requireNonNull(合計_自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計_自己負担額"));
+        entity.setGokei_JikoFutanGaku(合計_自己負担額);
         return this;
     }
 
     /**
-     * 合計・70-74自己負担額（内訳）を設定します。
+     * 合計_70_74自己負担額_内訳を設定します。
      *
-     * @param 合計・70-74自己負担額（内訳） 合計・70-74自己負担額（内訳）
+     * @param 合計_70_74自己負担額_内訳 合計_70_74自己負担額_内訳
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set合計・70-74自己負担額（内訳）(Decimal 合計・70-74自己負担額（内訳）) {
-        requireNonNull(合計・70-74自己負担額（内訳）, UrSystemErrorMessages.値がnull.getReplacedMessage("合計・70-74自己負担額（内訳）"));
-        entity.setGokei_70_74JikoFutanGaku(合計・70-74自己負担額（内訳）);
+    public KogakuGassanJikoFutanGakuBuilder set合計_70_74自己負担額_内訳(Decimal 合計_70_74自己負担額_内訳) {
+        requireNonNull(合計_70_74自己負担額_内訳, UrSystemErrorMessages.値がnull.getReplacedMessage("合計_70_74自己負担額_内訳"));
+        entity.setGokei_70_74JikoFutanGaku(合計_70_74自己負担額_内訳);
         return this;
     }
 
     /**
-     * 合計・70未満高額支給額を設定します。
+     * 合計_70未満高額支給額を設定します。
      *
-     * @param 合計・70未満高額支給額 合計・70未満高額支給額
+     * @param 合計_70未満高額支給額 合計_70未満高額支給額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set合計・70未満高額支給額(Decimal 合計・70未満高額支給額) {
-        requireNonNull(合計・70未満高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計・70未満高額支給額"));
-        entity.setGokei_Under70KogakuShikyuGaku(合計・70未満高額支給額);
+    public KogakuGassanJikoFutanGakuBuilder set合計_70未満高額支給額(Decimal 合計_70未満高額支給額) {
+        requireNonNull(合計_70未満高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計_70未満高額支給額"));
+        entity.setGokei_Under70KogakuShikyuGaku(合計_70未満高額支給額);
         return this;
     }
 
     /**
-     * 合計・70-74高額支給額を設定します。
+     * 合計_70_74高額支給額を設定します。
      *
-     * @param 合計・70-74高額支給額 合計・70-74高額支給額
+     * @param 合計_70_74高額支給額 合計_70_74高額支給額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set合計・70-74高額支給額(Decimal 合計・70-74高額支給額) {
-        requireNonNull(合計・70-74高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計・70-74高額支給額"));
-        entity.setGokei_70_74KogakuShikyuGaku(合計・70-74高額支給額);
+    public KogakuGassanJikoFutanGakuBuilder set合計_70_74高額支給額(Decimal 合計_70_74高額支給額) {
+        requireNonNull(合計_70_74高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("合計_70_74高額支給額"));
+        entity.setGokei_70_74KogakuShikyuGaku(合計_70_74高額支給額);
         return this;
     }
 
     /**
-     * 補正済・合計・自己負担額を設定します。
+     * 補正済_合計_自己負担額を設定します。
      *
-     * @param 補正済・合計・自己負担額 補正済・合計・自己負担額
+     * @param 補正済_合計_自己負担額 補正済_合計_自己負担額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set補正済・合計・自己負担額(Decimal 補正済・合計・自己負担額) {
-        requireNonNull(補正済・合計・自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済・合計・自己負担額"));
-        entity.setSumi_Gokei_JikoFutanGaku(補正済・合計・自己負担額);
+    public KogakuGassanJikoFutanGakuBuilder set補正済_合計_自己負担額(Decimal 補正済_合計_自己負担額) {
+        requireNonNull(補正済_合計_自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_合計_自己負担額"));
+        entity.setSumi_Gokei_JikoFutanGaku(補正済_合計_自己負担額);
         return this;
     }
 
     /**
-     * 補正済・合計・70-74自己負担額（内訳）を設定します。
+     * 補正済_合計_70_74自己負担額_内訳を設定します。
      *
-     * @param 補正済・合計・70-74自己負担額（内訳） 補正済・合計・70-74自己負担額（内訳）
+     * @param 補正済_合計_70_74自己負担額_内訳 補正済_合計_70_74自己負担額_内訳
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set補正済・合計・70-74自己負担額（内訳）(Decimal 補正済・合計・70-74自己負担額（内訳）) {
-        requireNonNull(補正済・合計・70-74自己負担額（内訳）, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済・合計・70-74自己負担額（内訳）"));
-        entity.setSumi_Gokei_70_74JikoFutanGaku(補正済・合計・70-74自己負担額（内訳）);
+    public KogakuGassanJikoFutanGakuBuilder set補正済_合計_70_74自己負担額_内訳(Decimal 補正済_合計_70_74自己負担額_内訳) {
+        requireNonNull(補正済_合計_70_74自己負担額_内訳, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_合計_70_74自己負担額_内訳"));
+        entity.setSumi_Gokei_70_74JikoFutanGaku(補正済_合計_70_74自己負担額_内訳);
         return this;
     }
 
     /**
-     * 補正済・合計・70未満高額支給額を設定します。
+     * 補正済_合計_70未満高額支給額を設定します。
      *
-     * @param 補正済・合計・70未満高額支給額 補正済・合計・70未満高額支給額
+     * @param 補正済_合計_70未満高額支給額 補正済_合計_70未満高額支給額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set補正済・合計・70未満高額支給額(Decimal 補正済・合計・70未満高額支給額) {
-        requireNonNull(補正済・合計・70未満高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済・合計・70未満高額支給額"));
-        entity.setSumi_Gokei_Under70KogakuShikyuGaku(補正済・合計・70未満高額支給額);
+    public KogakuGassanJikoFutanGakuBuilder set補正済_合計_70未満高額支給額(Decimal 補正済_合計_70未満高額支給額) {
+        requireNonNull(補正済_合計_70未満高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_合計_70未満高額支給額"));
+        entity.setSumi_Gokei_Under70KogakuShikyuGaku(補正済_合計_70未満高額支給額);
         return this;
     }
 
     /**
-     * 補正済・合計・70-74高額支給額を設定します。
+     * 補正済_合計_70_74高額支給額を設定します。
      *
-     * @param 補正済・合計・70-74高額支給額 補正済・合計・70-74高額支給額
+     * @param 補正済_合計_70_74高額支給額 補正済_合計_70_74高額支給額
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set補正済・合計・70-74高額支給額(Decimal 補正済・合計・70-74高額支給額) {
-        requireNonNull(補正済・合計・70-74高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済・合計・70-74高額支給額"));
-        entity.setSumi_Gokei_70_74KogakuShikyuGaku(補正済・合計・70-74高額支給額);
+    public KogakuGassanJikoFutanGakuBuilder set補正済_合計_70_74高額支給額(Decimal 補正済_合計_70_74高額支給額) {
+        requireNonNull(補正済_合計_70_74高額支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("補正済_合計_70_74高額支給額"));
+        entity.setSumi_Gokei_70_74KogakuShikyuGaku(補正済_合計_70_74高額支給額);
         return this;
     }
 
@@ -684,14 +696,14 @@ public class KogakuGassanJikoFutanGakuBuilder {
     }
 
     /**
-     * 後期・国保処理区分を設定します。
+     * 後期_国保処理区分を設定します。
      *
-     * @param 後期・国保処理区分 後期・国保処理区分
+     * @param 後期_国保処理区分 後期_国保処理区分
      * @return {@link KogakuGassanJikoFutanGakuBuilder}
      */
-    public KogakuGassanJikoFutanGakuBuilder set後期・国保処理区分(RString 後期・国保処理区分) {
-        requireNonNull(後期・国保処理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("後期・国保処理区分"));
-        entity.setKoki_KokuhoShoriKubun(後期・国保処理区分);
+    public KogakuGassanJikoFutanGakuBuilder set後期_国保処理区分(RString 後期_国保処理区分) {
+        requireNonNull(後期_国保処理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("後期_国保処理区分"));
+        entity.setKoki_KokuhoShoriKubun(後期_国保処理区分);
         return this;
     }
 

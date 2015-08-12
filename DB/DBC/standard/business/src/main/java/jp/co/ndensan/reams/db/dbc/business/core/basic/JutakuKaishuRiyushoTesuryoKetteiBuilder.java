@@ -6,8 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JutakuKaishuRiyushoTesuryoKettei}の編集を行うビルダークラスです。
@@ -72,26 +77,26 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
     }
 
     /**
-     * 支給・不支給決定年月日を設定します。
+     * 支給_不支給決定年月日を設定します。
      *
-     * @param 支給・不支給決定年月日 支給・不支給決定年月日
+     * @param 支給_不支給決定年月日 支給_不支給決定年月日
      * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoKetteiBuilder set支給・不支給決定年月日(FlexibleDate 支給・不支給決定年月日) {
-        requireNonNull(支給・不支給決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支給・不支給決定年月日"));
-        entity.setShikyu_FushikyuKetteiYMD(支給・不支給決定年月日);
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set支給_不支給決定年月日(FlexibleDate 支給_不支給決定年月日) {
+        requireNonNull(支給_不支給決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給決定年月日"));
+        entity.setShikyu_FushikyuKetteiYMD(支給_不支給決定年月日);
         return this;
     }
 
     /**
-     * 支給・不支給区分を設定します。
+     * 支給_不支給区分を設定します。
      *
-     * @param 支給・不支給区分 支給・不支給区分
+     * @param 支給_不支給区分 支給_不支給区分
      * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoKetteiBuilder set支給・不支給区分(RString 支給・不支給区分) {
-        requireNonNull(支給・不支給区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給・不支給区分"));
-        entity.setShikyu_FushikyuKubun(支給・不支給区分);
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set支給_不支給区分(RString 支給_不支給区分) {
+        requireNonNull(支給_不支給区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給区分"));
+        entity.setShikyu_FushikyuKubun(支給_不支給区分);
         return this;
     }
 

@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3062SaishinsaMoshitateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3062SaishinsaMoshitateEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 再審査申立を管理するクラスです。
  */
-public class SaishinsaMoshitate extends ParentModelBase<SaishinsaMoshitateIdentifier, DbT3062SaishinsaMoshitateEntity, SaishinsaMoshitate> implements Serializable {
+public class SaishinsaMoshitate extends ModelBase<SaishinsaMoshitateIdentifier, DbT3062SaishinsaMoshitateEntity, SaishinsaMoshitate> implements Serializable {
 
     private final DbT3062SaishinsaMoshitateEntity entity;
     private final SaishinsaMoshitateIdentifier id;
@@ -36,11 +43,11 @@ public class SaishinsaMoshitate extends ParentModelBase<SaishinsaMoshitateIdenti
      * @param 履歴番号 履歴番号
      */
     public SaishinsaMoshitate(JigyoshaNo 事業所番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード,
+            Decimal 履歴番号) {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
@@ -55,13 +62,13 @@ Decimal 履歴番号) {
         this.entity.setServiceKomokuCode(サービス項目コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new SaishinsaMoshitateIdentifier(
-        事業所番号,
-        被保険者番号,
-        サービス提供年月,
-        サービス種類コード,
-        サービス項目コード,
-        履歴番号
-                );
+                事業所番号,
+                被保険者番号,
+                サービス提供年月,
+                サービス種類コード,
+                サービス項目コード,
+                履歴番号
+        );
     }
 
     /**
@@ -243,22 +250,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 再審査申立のみを変更対象とします。<br/>
-     * {@link DbT3062SaishinsaMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link SaishinsaMoshitate}
-     */
-    @Override
-    public SaishinsaMoshitate modifiedModel() {
-        DbT3062SaishinsaMoshitateEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new SaishinsaMoshitate(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する再審査申立を削除対象とします。<br/>
      * {@link DbT3062SaishinsaMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -275,6 +266,7 @@ Decimal 履歴番号) {
         }
         return new SaishinsaMoshitate(deletedEntity, id);
     }
+
     /**
      * {@link SaishinsaMoshitate}のシリアライズ形式を提供します。
      *
@@ -285,13 +277,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3062SaishinsaMoshitateEntity entity;
         private final SaishinsaMoshitateIdentifier id;
 
-        private _SerializationProxy(DbT3062SaishinsaMoshitateEntity entity,SaishinsaMoshitateIdentifier id) {
+        private _SerializationProxy(DbT3062SaishinsaMoshitateEntity entity, SaishinsaMoshitateIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

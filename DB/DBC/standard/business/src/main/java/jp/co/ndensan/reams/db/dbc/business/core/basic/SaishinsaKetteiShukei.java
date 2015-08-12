@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3063SaishinsaKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3063SaishinsaKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 再審査決定集計を管理するクラスです。
  */
-public class SaishinsaKetteiShukei extends ParentModelBase<SaishinsaKetteiShukeiIdentifier, DbT3063SaishinsaKetteiShukeiEntity, SaishinsaKetteiShukei> implements Serializable {
+public class SaishinsaKetteiShukei extends ModelBase<SaishinsaKetteiShukeiIdentifier, DbT3063SaishinsaKetteiShukeiEntity, SaishinsaKetteiShukei> implements Serializable {
 
     private final DbT3063SaishinsaKetteiShukeiEntity entity;
     private final SaishinsaKetteiShukeiIdentifier id;
@@ -33,8 +35,8 @@ public class SaishinsaKetteiShukei extends ParentModelBase<SaishinsaKetteiShukei
      * @param 履歴番号 履歴番号
      */
     public SaishinsaKetteiShukei(FlexibleYearMonth 取扱年月,
-RString 保険者区分,
-Decimal 履歴番号) {
+            RString 保険者区分,
+            Decimal 履歴番号) {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +45,10 @@ Decimal 履歴番号) {
         this.entity.setHokenshaKubun(保険者区分);
         this.entity.setRirekiNo(履歴番号);
         this.id = new SaishinsaKetteiShukeiIdentifier(
-        取扱年月,
-        保険者区分,
-        履歴番号
-                );
+                取扱年月,
+                保険者区分,
+                履歴番号
+        );
     }
 
     /**
@@ -106,164 +108,164 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護給付費・請求・件数を返します。
+     * 介護給付費_請求_件数を返します。
      *
-     * @return 介護給付費・請求・件数
+     * @return 介護給付費_請求_件数
      */
-    public int get介護給付費・請求・件数() {
+    public int get介護給付費_請求_件数() {
         return entity.getKaigoKyufuhiSeikyuKensu();
     }
 
     /**
-     * 介護給付費・請求・単位数を返します。
+     * 介護給付費_請求_単位数を返します。
      *
-     * @return 介護給付費・請求・単位数
+     * @return 介護給付費_請求_単位数
      */
-    public Decimal get介護給付費・請求・単位数() {
+    public Decimal get介護給付費_請求_単位数() {
         return entity.getKaigoKyufuhiSeikyuTanisu();
     }
 
     /**
-     * 介護給付費・請求・保険者負担額を返します。
+     * 介護給付費_請求_保険者負担額を返します。
      *
-     * @return 介護給付費・請求・保険者負担額
+     * @return 介護給付費_請求_保険者負担額
      */
-    public Decimal get介護給付費・請求・保険者負担額() {
+    public Decimal get介護給付費_請求_保険者負担額() {
         return entity.getKaigoKyufuhiSeikyuFutangaku();
     }
 
     /**
-     * 介護給付費・決定・件数を返します。
+     * 介護給付費_決定_件数を返します。
      *
-     * @return 介護給付費・決定・件数
+     * @return 介護給付費_決定_件数
      */
-    public int get介護給付費・決定・件数() {
+    public int get介護給付費_決定_件数() {
         return entity.getKaigoKyufuhiKetteiKensu();
     }
 
     /**
-     * 介護給付費・決定・単位数を返します。
+     * 介護給付費_決定_単位数を返します。
      *
-     * @return 介護給付費・決定・単位数
+     * @return 介護給付費_決定_単位数
      */
-    public Decimal get介護給付費・決定・単位数() {
+    public Decimal get介護給付費_決定_単位数() {
         return entity.getKaigoKyufuhiKetteiTanisu();
     }
 
     /**
-     * 介護給付費・決定・保険者負担額を返します。
+     * 介護給付費_決定_保険者負担額を返します。
      *
-     * @return 介護給付費・決定・保険者負担額
+     * @return 介護給付費_決定_保険者負担額
      */
-    public Decimal get介護給付費・決定・保険者負担額() {
+    public Decimal get介護給付費_決定_保険者負担額() {
         return entity.getKaigoKyufuhiKetteiFutangaku();
     }
 
     /**
-     * 介護給付費・調整・件数を返します。
+     * 介護給付費_調整_件数を返します。
      *
-     * @return 介護給付費・調整・件数
+     * @return 介護給付費_調整_件数
      */
-    public int get介護給付費・調整・件数() {
+    public int get介護給付費_調整_件数() {
         return entity.getKaigoKyufuhiChoseiKensu();
     }
 
     /**
-     * 介護給付費・調整・単位数を返します。
+     * 介護給付費_調整_単位数を返します。
      *
-     * @return 介護給付費・調整・単位数
+     * @return 介護給付費_調整_単位数
      */
-    public Decimal get介護給付費・調整・単位数() {
+    public Decimal get介護給付費_調整_単位数() {
         return entity.getKaigoKyufuhiChoseiTanisu();
     }
 
     /**
-     * 介護給付費・調整・保険者負担額を返します。
+     * 介護給付費_調整_保険者負担額を返します。
      *
-     * @return 介護給付費・調整・保険者負担額
+     * @return 介護給付費_調整_保険者負担額
      */
-    public Decimal get介護給付費・調整・保険者負担額() {
+    public Decimal get介護給付費_調整_保険者負担額() {
         return entity.getKaigoKyufuhiChoseiFutangaku();
     }
 
     /**
-     * 高額介護サービス費・請求・件数を返します。
+     * 高額介護サービス費_請求_件数を返します。
      *
-     * @return 高額介護サービス費・請求・件数
+     * @return 高額介護サービス費_請求_件数
      */
-    public int get高額介護サービス費・請求・件数() {
+    public int get高額介護サービス費_請求_件数() {
         return entity.getKogakuKaigoServicehiSeikyuKensu();
     }
 
     /**
-     * 高額介護サービス費・請求・単位数を返します。
+     * 高額介護サービス費_請求_単位数を返します。
      *
-     * @return 高額介護サービス費・請求・単位数
+     * @return 高額介護サービス費_請求_単位数
      */
-    public Decimal get高額介護サービス費・請求・単位数() {
+    public Decimal get高額介護サービス費_請求_単位数() {
         return entity.getKogakuKaigoServicehiSeikyuTanisu();
     }
 
     /**
-     * 高額介護サービス費・請求・保険者負担額を返します。
+     * 高額介護サービス費_請求_保険者負担額を返します。
      *
-     * @return 高額介護サービス費・請求・保険者負担額
+     * @return 高額介護サービス費_請求_保険者負担額
      */
-    public Decimal get高額介護サービス費・請求・保険者負担額() {
+    public Decimal get高額介護サービス費_請求_保険者負担額() {
         return entity.getKogakuKaigoServicehiSeikyuFutangaku();
     }
 
     /**
-     * 高額介護サービス費・決定・件数を返します。
+     * 高額介護サービス費_決定_件数を返します。
      *
-     * @return 高額介護サービス費・決定・件数
+     * @return 高額介護サービス費_決定_件数
      */
-    public int get高額介護サービス費・決定・件数() {
+    public int get高額介護サービス費_決定_件数() {
         return entity.getKogakuKaigoServicehiKetteiKensu();
     }
 
     /**
-     * 高額介護サービス費・決定・単位数を返します。
+     * 高額介護サービス費_決定_単位数を返します。
      *
-     * @return 高額介護サービス費・決定・単位数
+     * @return 高額介護サービス費_決定_単位数
      */
-    public Decimal get高額介護サービス費・決定・単位数() {
+    public Decimal get高額介護サービス費_決定_単位数() {
         return entity.getKogakuKaigoServicehiKetteiTanisu();
     }
 
     /**
-     * 高額介護サービス費・決定・保険者負担額を返します。
+     * 高額介護サービス費_決定_保険者負担額を返します。
      *
-     * @return 高額介護サービス費・決定・保険者負担額
+     * @return 高額介護サービス費_決定_保険者負担額
      */
-    public Decimal get高額介護サービス費・決定・保険者負担額() {
+    public Decimal get高額介護サービス費_決定_保険者負担額() {
         return entity.getKogakuKaigoServicehiKetteiFutangaku();
     }
 
     /**
-     * 高額介護サービス費・調整・件数を返します。
+     * 高額介護サービス費_調整_件数を返します。
      *
-     * @return 高額介護サービス費・調整・件数
+     * @return 高額介護サービス費_調整_件数
      */
-    public int get高額介護サービス費・調整・件数() {
+    public int get高額介護サービス費_調整_件数() {
         return entity.getKogakuKaigoServicehiChoseiKensu();
     }
 
     /**
-     * 高額介護サービス費・調整・単位数を返します。
+     * 高額介護サービス費_調整_単位数を返します。
      *
-     * @return 高額介護サービス費・調整・単位数
+     * @return 高額介護サービス費_調整_単位数
      */
-    public Decimal get高額介護サービス費・調整・単位数() {
+    public Decimal get高額介護サービス費_調整_単位数() {
         return entity.getKogakuKaigoServicehiChoseiTanisu();
     }
 
     /**
-     * 高額介護サービス費・調整・保険者負担額を返します。
+     * 高額介護サービス費_調整_保険者負担額を返します。
      *
-     * @return 高額介護サービス費・調整・保険者負担額
+     * @return 高額介護サービス費_調整_保険者負担額
      */
-    public Decimal get高額介護サービス費・調整・保険者負担額() {
+    public Decimal get高額介護サービス費_調整_保険者負担額() {
         return entity.getKogakuKaigoServicehiChoseiFutangaku();
     }
 
@@ -324,22 +326,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 再審査決定集計のみを変更対象とします。<br/>
-     * {@link DbT3063SaishinsaKetteiShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link SaishinsaKetteiShukei}
-     */
-    @Override
-    public SaishinsaKetteiShukei modifiedModel() {
-        DbT3063SaishinsaKetteiShukeiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new SaishinsaKetteiShukei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する再審査決定集計を削除対象とします。<br/>
      * {@link DbT3063SaishinsaKetteiShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -356,6 +342,7 @@ Decimal 履歴番号) {
         }
         return new SaishinsaKetteiShukei(deletedEntity, id);
     }
+
     /**
      * {@link SaishinsaKetteiShukei}のシリアライズ形式を提供します。
      *
@@ -366,13 +353,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3063SaishinsaKetteiShukeiEntity entity;
         private final SaishinsaKetteiShukeiIdentifier id;
 
-        private _SerializationProxy(DbT3063SaishinsaKetteiShukeiEntity entity,SaishinsaKetteiShukeiIdentifier id) {
+        private _SerializationProxy(DbT3063SaishinsaKetteiShukeiEntity entity, SaishinsaKetteiShukeiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

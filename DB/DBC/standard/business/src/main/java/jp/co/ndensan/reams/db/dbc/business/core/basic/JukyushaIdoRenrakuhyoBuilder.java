@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link JukyushaIdoRenrakuhyo}の編集を行うビルダークラスです。
@@ -206,12 +215,12 @@ public class JukyushaIdoRenrakuhyoBuilder {
     /**
      * 広域連合（政令市）保険者番号を設定します。
      *
-     * @param 広域連合（政令市）保険者番号 広域連合（政令市）保険者番号
+     * @param 広域連合_政令市_保険者番号 広域連合（政令市）保険者番号
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set広域連合（政令市）保険者番号(HokenshaNo 広域連合（政令市）保険者番号) {
-        requireNonNull(広域連合（政令市）保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域連合（政令市）保険者番号"));
-        entity.setKoikiRengoHokenshaNo(広域連合（政令市）保険者番号);
+    public JukyushaIdoRenrakuhyoBuilder set広域連合_政令市_保険者番号(HokenshaNo 広域連合_政令市_保険者番号) {
+        requireNonNull(広域連合_政令市_保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域連合（政令市）保険者番号"));
+        entity.setKoikiRengoHokenshaNo(広域連合_政令市_保険者番号);
         return this;
     }
 
@@ -938,36 +947,36 @@ public class JukyushaIdoRenrakuhyoBuilder {
     /**
      * 居宅費（新１）負担限度額を設定します。
      *
-     * @param 居宅費（新１）負担限度額 居宅費（新１）負担限度額
+     * @param 居宅費_新１_負担限度額 居宅費（新１）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費（新１）負担限度額(Decimal 居宅費（新１）負担限度額) {
-        requireNonNull(居宅費（新１）負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新１）負担限度額"));
-        entity.setKyotakuhiShin1FutanGendogaku(居宅費（新１）負担限度額);
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新１_負担限度額(Decimal 居宅費_新１_負担限度額) {
+        requireNonNull(居宅費_新１_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新１）負担限度額"));
+        entity.setKyotakuhiShin1FutanGendogaku(居宅費_新１_負担限度額);
         return this;
     }
 
     /**
      * 居宅費（新２）負担限度額を設定します。
      *
-     * @param 居宅費（新２）負担限度額 居宅費（新２）負担限度額
+     * @param 居宅費_新２_負担限度額 居宅費（新２）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費（新２）負担限度額(Decimal 居宅費（新２）負担限度額) {
-        requireNonNull(居宅費（新２）負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新２）負担限度額"));
-        entity.setKyotakuhiShin2FutanGendogaku(居宅費（新２）負担限度額);
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新２_負担限度額(Decimal 居宅費_新２_負担限度額) {
+        requireNonNull(居宅費_新２_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新２）負担限度額"));
+        entity.setKyotakuhiShin2FutanGendogaku(居宅費_新２_負担限度額);
         return this;
     }
 
     /**
      * 居宅費（新３）負担限度額を設定します。
      *
-     * @param 居宅費（新３）負担限度額 居宅費（新３）負担限度額
+     * @param 居宅費_新３_負担限度額 居宅費（新３）負担限度額
      * @return {@link JukyushaIdoRenrakuhyoBuilder}
      */
-    public JukyushaIdoRenrakuhyoBuilder set居宅費（新３）負担限度額(Decimal 居宅費（新３）負担限度額) {
-        requireNonNull(居宅費（新３）負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新３）負担限度額"));
-        entity.setKyotakuhiShin3FutanGendogaku(居宅費（新３）負担限度額);
+    public JukyushaIdoRenrakuhyoBuilder set居宅費_新３_負担限度額(Decimal 居宅費_新３_負担限度額) {
+        requireNonNull(居宅費_新３_負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅費（新３）負担限度額"));
+        entity.setKyotakuhiShin3FutanGendogaku(居宅費_新３_負担限度額);
         return this;
     }
 

@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShinseisho}の編集を行うビルダークラスです。
@@ -266,12 +277,12 @@ public class KogakuGassanShinseishoBuilder {
     /**
      * 70歳以上の者に係る所得区分を設定します。
      *
-     * @param 70歳以上の者に係る所得区分 70歳以上の者に係る所得区分
+     * @param 所得区分_70歳以上の者に係る 70歳以上の者に係る所得区分
      * @return {@link KogakuGassanShinseishoBuilder}
      */
-    public KogakuGassanShinseishoBuilder set70歳以上の者に係る所得区分(RString 70歳以上の者に係る所得区分) {
-        requireNonNull(70歳以上の者に係る所得区分, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
-        entity.setOver70_ShotokuKubun(70歳以上の者に係る所得区分);
+    public KogakuGassanShinseishoBuilder set所得区分_70歳以上の者に係る(RString 所得区分_70歳以上の者に係る) {
+        requireNonNull(所得区分_70歳以上の者に係る, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
+        entity.setOver70_ShotokuKubun(所得区分_70歳以上の者に係る);
         return this;
     }
 

@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事業高額介護サービス費給付対象者明細の識別子です。
@@ -30,10 +35,10 @@ public class JigyoKogakuKyufuTaishoshaMeisaiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public JigyoKogakuKyufuTaishoshaMeisaiIdentifier(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業者番号,
-ServiceShuruiCode サービス種類コード,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業者番号,
+            ServiceShuruiCode サービス種類コード,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.事業者番号 = 事業者番号;

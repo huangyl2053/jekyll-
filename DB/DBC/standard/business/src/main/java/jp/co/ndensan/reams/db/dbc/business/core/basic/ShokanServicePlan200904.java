@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求サービス計画200904を管理するクラスです。
  */
-public class ShokanServicePlan200904 extends ParentModelBase<ShokanServicePlan200904Identifier, DbT3047ShokanServicePlan200904Entity, ShokanServicePlan200904> implements Serializable {
+public class ShokanServicePlan200904 extends ModelBase<ShokanServicePlan200904Identifier, DbT3047ShokanServicePlan200904Entity, ShokanServicePlan200904> implements Serializable {
 
     private final DbT3047ShokanServicePlan200904Entity entity;
     private final ShokanServicePlan200904Identifier id;
@@ -34,26 +39,26 @@ public class ShokanServicePlan200904 extends ParentModelBase<ShokanServicePlan20
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
      * @param 履歴番号 履歴番号
-     * @param 指定／基準該当事業者区分コード 指定／基準該当事業者区分コード
+     * @param 指定_基準該当事業者区分コード 指定_基準該当事業者区分コード
      * @param 明細行番号 明細行番号
      * @param 居宅サービス計画作成依頼届出年月日 居宅サービス計画作成依頼届出年月日
      */
     public ShokanServicePlan200904(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-Decimal 履歴番号,
-RString 指定／基準該当事業者区分コード,
-RString 明細行番号,
-FlexibleDate 居宅サービス計画作成依頼届出年月日) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            Decimal 履歴番号,
+            RString 指定_基準該当事業者区分コード,
+            RString 明細行番号,
+            FlexibleDate 居宅サービス計画作成依頼届出年月日) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(指定／基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード"));
+        requireNonNull(指定_基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定_基準該当事業者区分コード"));
         requireNonNull(明細行番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細行番号"));
         requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
         this.entity = new DbT3047ShokanServicePlan200904Entity();
@@ -63,20 +68,20 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
         this.entity.setRirekiNo(履歴番号);
-        this.entity.setShiteiKijunGaitoJigyoshaKubunCode(指定／基準該当事業者区分コード);
+        this.entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当事業者区分コード);
         this.entity.setMeisaiLineNo(明細行番号);
         this.entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
         this.id = new ShokanServicePlan200904Identifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        履歴番号,
-        指定／基準該当事業者区分コード,
-        明細行番号,
-        居宅サービス計画作成依頼届出年月日
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                履歴番号,
+                指定_基準該当事業者区分コード,
+                明細行番号,
+                居宅サービス計画作成依頼届出年月日
+        );
     }
 
     /**
@@ -169,11 +174,11 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
     }
 
     /**
-     * 指定／基準該当事業者区分コードを返します。
+     * 指定_基準該当事業者区分コードを返します。
      *
-     * @return 指定／基準該当事業者区分コード
+     * @return 指定_基準該当事業者区分コード
      */
-    public RString get指定／基準該当事業者区分コード() {
+    public RString get指定_基準該当事業者区分コード() {
         return entity.getShiteiKijunGaitoJigyoshaKubunCode();
     }
 
@@ -304,11 +309,11 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
     }
 
     /**
-     * 点数／金額を返します。
+     * 点数_金額を返します。
      *
-     * @return 点数／金額
+     * @return 点数_金額
      */
-    public int get点数／金額() {
+    public int get点数_金額() {
         return entity.getTensuKingaku();
     }
 
@@ -358,11 +363,11 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
     }
 
     /**
-     * 購入・改修履歴等を返します。
+     * 購入_改修履歴等を返します。
      *
-     * @return 購入・改修履歴等
+     * @return 購入_改修履歴等
      */
-    public RString get購入・改修履歴等() {
+    public RString get購入_改修履歴等() {
         return entity.getKounyuKaishuRireki();
     }
 
@@ -387,22 +392,6 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
     }
 
     /**
-     * 償還払請求サービス計画200904のみを変更対象とします。<br/>
-     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanServicePlan200904}
-     */
-    @Override
-    public ShokanServicePlan200904 modifiedModel() {
-        DbT3047ShokanServicePlan200904Entity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanServicePlan200904(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求サービス計画200904を削除対象とします。<br/>
      * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -419,6 +408,7 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
         }
         return new ShokanServicePlan200904(deletedEntity, id);
     }
+
     /**
      * {@link ShokanServicePlan200904}のシリアライズ形式を提供します。
      *
@@ -429,13 +419,19 @@ FlexibleDate 居宅サービス計画作成依頼届出年月日) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3047ShokanServicePlan200904Entity entity;
         private final ShokanServicePlan200904Identifier id;
 
-        private _SerializationProxy(DbT3047ShokanServicePlan200904Entity entity,ShokanServicePlan200904Identifier id) {
+        private _SerializationProxy(DbT3047ShokanServicePlan200904Entity entity, ShokanServicePlan200904Identifier id) {
             this.entity = entity;
             this.id = id;
         }

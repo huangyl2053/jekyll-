@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求集計を管理するクラスです。
  */
-public class ShokanShukei extends ParentModelBase<ShokanShukeiIdentifier, DbT3053ShokanShukeiEntity, ShokanShukei> implements Serializable {
+public class ShokanShukei extends ModelBase<ShokanShukeiIdentifier, DbT3053ShokanShukeiEntity, ShokanShukei> implements Serializable {
 
     private final DbT3053ShokanShukeiEntity entity;
     private final ShokanShukeiIdentifier id;
@@ -37,12 +41,12 @@ public class ShokanShukei extends ParentModelBase<ShokanShukeiIdentifier, DbT305
      * @param 履歴番号 履歴番号
      */
     public ShokanShukei(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-RString 順次番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 順次番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -59,14 +63,14 @@ Decimal 履歴番号) {
         this.entity.setJunjiNo(順次番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShukeiIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        順次番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                順次番号,
+                履歴番号
+        );
     }
 
     /**
@@ -319,11 +323,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 点数／金額を返します。
+     * 点数_金額を返します。
      *
-     * @return 点数／金額
+     * @return 点数_金額
      */
-    public int get点数／金額() {
+    public int get点数_金額() {
         return entity.getTensuKingaku();
     }
 
@@ -382,11 +386,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 購入・改修履歴等を返します。
+     * 購入_改修履歴等を返します。
      *
-     * @return 購入・改修履歴等
+     * @return 購入_改修履歴等
      */
-    public RString get購入・改修履歴等() {
+    public RString get購入_改修履歴等() {
         return entity.getKounyuKaishuRireki();
     }
 
@@ -411,22 +415,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 償還払請求集計のみを変更対象とします。<br/>
-     * {@link DbT3053ShokanShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanShukei}
-     */
-    @Override
-    public ShokanShukei modifiedModel() {
-        DbT3053ShokanShukeiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanShukei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求集計を削除対象とします。<br/>
      * {@link DbT3053ShokanShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -443,6 +431,7 @@ Decimal 履歴番号) {
         }
         return new ShokanShukei(deletedEntity, id);
     }
+
     /**
      * {@link ShokanShukei}のシリアライズ形式を提供します。
      *
@@ -453,13 +442,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3053ShokanShukeiEntity entity;
         private final ShokanShukeiIdentifier id;
 
-        private _SerializationProxy(DbT3053ShokanShukeiEntity entity,ShokanShukeiIdentifier id) {
+        private _SerializationProxy(DbT3053ShokanShukeiEntity entity, ShokanShukeiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

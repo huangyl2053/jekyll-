@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanJutakuKaishuJizenShinsei}の編集を行うビルダークラスです。
@@ -276,50 +286,50 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
-     * 給付額等・費用額合計を設定します。
+     * 給付額等_費用額合計を設定します。
      *
-     * @param 給付額等・費用額合計 給付額等・費用額合計
+     * @param 給付額等_費用額合計 給付額等_費用額合計
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等・費用額合計(int 給付額等・費用額合計) {
-        requireNonNull(給付額等・費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等・費用額合計"));
-        entity.setKyufugakuHiyogakuTotal(給付額等・費用額合計);
+    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等_費用額合計(int 給付額等_費用額合計) {
+        requireNonNull(給付額等_費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等_費用額合計"));
+        entity.setKyufugakuHiyogakuTotal(給付額等_費用額合計);
         return this;
     }
 
     /**
-     * 給付額等・保険対象費用額を設定します。
+     * 給付額等_保険対象費用額を設定します。
      *
-     * @param 給付額等・保険対象費用額 給付額等・保険対象費用額
+     * @param 給付額等_保険対象費用額 給付額等_保険対象費用額
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等・保険対象費用額(int 給付額等・保険対象費用額) {
-        requireNonNull(給付額等・保険対象費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等・保険対象費用額"));
-        entity.setKyufugakuHokenTaishoHiyogaku(給付額等・保険対象費用額);
+    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等_保険対象費用額(int 給付額等_保険対象費用額) {
+        requireNonNull(給付額等_保険対象費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等_保険対象費用額"));
+        entity.setKyufugakuHokenTaishoHiyogaku(給付額等_保険対象費用額);
         return this;
     }
 
     /**
-     * 給付額等・利用者自己負担額を設定します。
+     * 給付額等_利用者自己負担額を設定します。
      *
-     * @param 給付額等・利用者自己負担額 給付額等・利用者自己負担額
+     * @param 給付額等_利用者自己負担額 給付額等_利用者自己負担額
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等・利用者自己負担額(int 給付額等・利用者自己負担額) {
-        requireNonNull(給付額等・利用者自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等・利用者自己負担額"));
-        entity.setKyufugakuRiyoshaJikofutangaku(給付額等・利用者自己負担額);
+    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等_利用者自己負担額(int 給付額等_利用者自己負担額) {
+        requireNonNull(給付額等_利用者自己負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等_利用者自己負担額"));
+        entity.setKyufugakuRiyoshaJikofutangaku(給付額等_利用者自己負担額);
         return this;
     }
 
     /**
-     * 給付額等・保険給付費額を設定します。
+     * 給付額等_保険給付費額を設定します。
      *
-     * @param 給付額等・保険給付費額 給付額等・保険給付費額
+     * @param 給付額等_保険給付費額 給付額等_保険給付費額
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等・保険給付費額(int 給付額等・保険給付費額) {
-        requireNonNull(給付額等・保険給付費額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等・保険給付費額"));
-        entity.setKyufugakuHokenkyufuhigaku(給付額等・保険給付費額);
+    public ShokanJutakuKaishuJizenShinseiBuilder set給付額等_保険給付費額(int 給付額等_保険給付費額) {
+        requireNonNull(給付額等_保険給付費額, UrSystemErrorMessages.値がnull.getReplacedMessage("給付額等_保険給付費額"));
+        entity.setKyufugakuHokenkyufuhigaku(給付額等_保険給付費額);
         return this;
     }
 

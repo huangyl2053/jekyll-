@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiKyotakuService}の編集を行うビルダークラスです。
@@ -41,7 +52,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiKyotakuServiceBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +64,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiKyotakuServiceBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -144,14 +155,14 @@ public class KyufujissekiKyotakuServiceBuilder {
     }
 
     /**
-     * 指定／基準該当等事業所区分コードを設定します。
+     * 指定_基準該当等事業所区分コードを設定します。
      *
-     * @param 指定／基準該当等事業所区分コード 指定／基準該当等事業所区分コード
+     * @param 指定_基準該当等事業所区分コード 指定_基準該当等事業所区分コード
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set指定／基準該当等事業所区分コード(RString 指定／基準該当等事業所区分コード) {
-        requireNonNull(指定／基準該当等事業所区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当等事業所区分コード"));
-        entity.setShiteiKijunGaitoJigyoshaKubunCode(指定／基準該当等事業所区分コード);
+    public KyufujissekiKyotakuServiceBuilder set指定_基準該当等事業所区分コード(RString 指定_基準該当等事業所区分コード) {
+        requireNonNull(指定_基準該当等事業所区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定_基準該当等事業所区分コード"));
+        entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当等事業所区分コード);
         return this;
     }
 
@@ -221,7 +232,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param サービス単位数 サービス単位数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder setサービス単位数(int サービス単位数) {
+    public KyufujissekiKyotakuServiceBuilder setサービス単位数(Decimal サービス単位数) {
         requireNonNull(サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス単位数"));
         entity.setServiceTanisu(サービス単位数);
         return this;
@@ -233,7 +244,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param サービス単位数合計 サービス単位数合計
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder setサービス単位数合計(int サービス単位数合計) {
+    public KyufujissekiKyotakuServiceBuilder setサービス単位数合計(Decimal サービス単位数合計) {
         requireNonNull(サービス単位数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス単位数合計"));
         entity.setServiceTanisuTotal(サービス単位数合計);
         return this;
@@ -245,7 +256,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 請求金額 請求金額
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set請求金額(int 請求金額) {
+    public KyufujissekiKyotakuServiceBuilder set請求金額(Decimal 請求金額) {
         requireNonNull(請求金額, UrSystemErrorMessages.値がnull.getReplacedMessage("請求金額"));
         entity.setSeikyuKingaku(請求金額);
         return this;
@@ -276,62 +287,62 @@ public class KyufujissekiKyotakuServiceBuilder {
     }
 
     /**
-     * 後・単位数を設定します。
+     * 後_単位数を設定します。
      *
-     * @param 後・単位数 後・単位数
+     * @param 後_単位数 後_単位数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後・単位数(Decimal 後・単位数) {
-        requireNonNull(後・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・単位数"));
-        entity.setAtoTanisu(後・単位数);
+    public KyufujissekiKyotakuServiceBuilder set後_単位数(Decimal 後_単位数) {
+        requireNonNull(後_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_単位数"));
+        entity.setAtoTanisu(後_単位数);
         return this;
     }
 
     /**
-     * 後・回数を設定します。
+     * 後_回数を設定します。
      *
-     * @param 後・回数 後・回数
+     * @param 後_回数 後_回数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後・回数(Decimal 後・回数) {
-        requireNonNull(後・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・回数"));
-        entity.setAtoKaisu(後・回数);
+    public KyufujissekiKyotakuServiceBuilder set後_回数(Decimal 後_回数) {
+        requireNonNull(後_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_回数"));
+        entity.setAtoKaisu(後_回数);
         return this;
     }
 
     /**
-     * 後・サービス単位数を設定します。
+     * 後_サービス単位数を設定します。
      *
-     * @param 後・サービス単位数 後・サービス単位数
+     * @param 後_サービス単位数 後_サービス単位数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後・サービス単位数(int 後・サービス単位数) {
-        requireNonNull(後・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・サービス単位数"));
-        entity.setAtoServiceTanisu(後・サービス単位数);
+    public KyufujissekiKyotakuServiceBuilder set後_サービス単位数(Decimal 後_サービス単位数) {
+        requireNonNull(後_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_サービス単位数"));
+        entity.setAtoServiceTanisu(後_サービス単位数);
         return this;
     }
 
     /**
-     * 後・サービス単位数合計を設定します。
+     * 後_サービス単位数合計を設定します。
      *
-     * @param 後・サービス単位数合計 後・サービス単位数合計
+     * @param 後_サービス単位数合計 後_サービス単位数合計
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後・サービス単位数合計(int 後・サービス単位数合計) {
-        requireNonNull(後・サービス単位数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・サービス単位数合計"));
-        entity.setAtoServiceTanisuTotal(後・サービス単位数合計);
+    public KyufujissekiKyotakuServiceBuilder set後_サービス単位数合計(Decimal 後_サービス単位数合計) {
+        requireNonNull(後_サービス単位数合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_サービス単位数合計"));
+        entity.setAtoServiceTanisuTotal(後_サービス単位数合計);
         return this;
     }
 
     /**
-     * 後・請求金額を設定します。
+     * 後_請求金額を設定します。
      *
-     * @param 後・請求金額 後・請求金額
+     * @param 後_請求金額 後_請求金額
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後・請求金額(int 後・請求金額) {
-        requireNonNull(後・請求金額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・請求金額"));
-        entity.setAtoSeikyuKingaku(後・請求金額);
+    public KyufujissekiKyotakuServiceBuilder set後_請求金額(Decimal 後_請求金額) {
+        requireNonNull(後_請求金額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_請求金額"));
+        entity.setAtoSeikyuKingaku(後_請求金額);
         return this;
     }
 

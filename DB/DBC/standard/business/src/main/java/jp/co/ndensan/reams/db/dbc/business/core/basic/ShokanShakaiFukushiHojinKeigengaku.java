@@ -6,13 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -37,12 +41,12 @@ public class ShokanShakaiFukushiHojinKeigengaku extends ParentModelBase<ShokanSh
      * @param 履歴番号 履歴番号
      */
     public ShokanShakaiFukushiHojinKeigengaku(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-RString 順次番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 順次番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -59,21 +63,22 @@ Decimal 履歴番号) {
         this.entity.setJunjiNo(順次番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShakaiFukushiHojinKeigengakuIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        順次番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                順次番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}より{@link ShokanShakaiFukushiHojinKeigengaku}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}
      */
     public ShokanShakaiFukushiHojinKeigengaku(DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求社会福祉法人軽減額"));
@@ -232,7 +237,8 @@ Decimal 履歴番号) {
     /**
      * 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}を返します。
      *
-     * @return 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}
+     * @return
+     * 償還払請求社会福祉法人軽減額の識別子{@link ShokanShakaiFukushiHojinKeigengakuIdentifier}
      */
     @Override
     public ShokanShakaiFukushiHojinKeigengakuIdentifier identifier() {
@@ -272,6 +278,7 @@ Decimal 履歴番号) {
         }
         return new ShokanShakaiFukushiHojinKeigengaku(deletedEntity, id);
     }
+
     /**
      * {@link ShokanShakaiFukushiHojinKeigengaku}のシリアライズ形式を提供します。
      *
@@ -282,13 +289,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity;
         private final ShokanShakaiFukushiHojinKeigengakuIdentifier id;
 
-        private _SerializationProxy(DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity,ShokanShakaiFukushiHojinKeigengakuIdentifier id) {
+        private _SerializationProxy(DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity, ShokanShakaiFukushiHojinKeigengakuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

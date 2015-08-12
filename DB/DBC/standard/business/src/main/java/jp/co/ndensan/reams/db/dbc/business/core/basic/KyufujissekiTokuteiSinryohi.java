@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3020KyufujissekiTokuteiSinryohiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績特定診療費を管理するクラスです。
  */
-public class KyufujissekiTokuteiSinryohi extends ParentModelBase<KyufujissekiTokuteiSinryohiIdentifier, DbT3020KyufujissekiTokuteiSinryohiEntity, KyufujissekiTokuteiSinryohi> implements Serializable {
+public class KyufujissekiTokuteiSinryohi extends ModelBase<KyufujissekiTokuteiSinryohiIdentifier, DbT3020KyufujissekiTokuteiSinryohiEntity, KyufujissekiTokuteiSinryohi> implements Serializable {
 
     private final DbT3020KyufujissekiTokuteiSinryohiEntity entity;
     private final KyufujissekiTokuteiSinryohiIdentifier id;
@@ -38,15 +43,15 @@ public class KyufujissekiTokuteiSinryohi extends ParentModelBase<KyufujissekiTok
      * @param 通し番号 通し番号
      * @param 特定診療情報レコード順次番号 特定診療情報レコード順次番号
      */
-    public KyufujissekiTokuteiSinryohi(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-RString 特定診療情報レコード順次番号) {
+    public KyufujissekiTokuteiSinryohi(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            RString 特定診療情報レコード順次番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,16 +72,16 @@ RString 特定診療情報レコード順次番号) {
         this.entity.setToshiNo(通し番号);
         this.entity.setRecodeJunjiNo(特定診療情報レコード順次番号);
         this.id = new KyufujissekiTokuteiSinryohiIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        特定診療情報レコード順次番号
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                特定診療情報レコード順次番号
+        );
     }
 
     /**
@@ -119,7 +124,7 @@ RString 特定診療情報レコード順次番号) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +133,7 @@ RString 特定診療情報レコード順次番号) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -205,182 +210,182 @@ RString 特定診療情報レコード順次番号) {
     }
 
     /**
-     * 保険・指導管理料等を返します。
+     * 保険_指導管理料等を返します。
      *
-     * @return 保険・指導管理料等
+     * @return 保険_指導管理料等
      */
-    public int get保険・指導管理料等() {
+    public int get保険_指導管理料等() {
         return entity.getHokenShidoKanriryo();
     }
 
     /**
-     * 保険・単純エックス線を返します。
+     * 保険_単純エックス線を返します。
      *
-     * @return 保険・単純エックス線
+     * @return 保険_単純エックス線
      */
-    public int get保険・単純エックス線() {
+    public int get保険_単純エックス線() {
         return entity.getHokenTanjunXsen();
     }
 
     /**
-     * 保険・リハビリテーションを返します。
+     * 保険_リハビリテーションを返します。
      *
-     * @return 保険・リハビリテーション
+     * @return 保険_リハビリテーション
      */
-    public int get保険・リハビリテーション() {
+    public int get保険_リハビリテーション() {
         return entity.getHokenRehabilitation();
     }
 
     /**
-     * 保険・精神科専門療法を返します。
+     * 保険_精神科専門療法を返します。
      *
-     * @return 保険・精神科専門療法
+     * @return 保険_精神科専門療法
      */
-    public int get保険・精神科専門療法() {
+    public int get保険_精神科専門療法() {
         return entity.getHokenSeishinkaSemmonRyoho();
     }
 
     /**
-     * 保険・合計単位数を返します。
+     * 保険_合計単位数を返します。
      *
-     * @return 保険・合計単位数
+     * @return 保険_合計単位数
      */
-    public int get保険・合計単位数() {
+    public int get保険_合計単位数() {
         return entity.getHokenTotalTanisu();
     }
 
     /**
-     * 公費１・指導管理料等を返します。
+     * 公費１_指導管理料等を返します。
      *
-     * @return 公費１・指導管理料等
+     * @return 公費１_指導管理料等
      */
-    public int get公費１・指導管理料等() {
+    public int get公費１_指導管理料等() {
         return entity.getKohi1ShidoKanriryo();
     }
 
     /**
-     * 公費１・単純エックス線を返します。
+     * 公費１_単純エックス線を返します。
      *
-     * @return 公費１・単純エックス線
+     * @return 公費１_単純エックス線
      */
-    public int get公費１・単純エックス線() {
+    public int get公費１_単純エックス線() {
         return entity.getKohi1TanjunXsen();
     }
 
     /**
-     * 公費１・リハビリテーションを返します。
+     * 公費１_リハビリテーションを返します。
      *
-     * @return 公費１・リハビリテーション
+     * @return 公費１_リハビリテーション
      */
-    public int get公費１・リハビリテーション() {
+    public int get公費１_リハビリテーション() {
         return entity.getKohi1Rehabilitation();
     }
 
     /**
-     * 公費１・精神科専門療法を返します。
+     * 公費１_精神科専門療法を返します。
      *
-     * @return 公費１・精神科専門療法
+     * @return 公費１_精神科専門療法
      */
-    public int get公費１・精神科専門療法() {
+    public int get公費１_精神科専門療法() {
         return entity.getKohi1SeishinkaSemmonRyoho();
     }
 
     /**
-     * 公費１・合計単位数を返します。
+     * 公費１_合計単位数を返します。
      *
-     * @return 公費１・合計単位数
+     * @return 公費１_合計単位数
      */
-    public int get公費１・合計単位数() {
+    public int get公費１_合計単位数() {
         return entity.getKohi1TotalTanisu();
     }
 
     /**
-     * 公費２・指導管理料等を返します。
+     * 公費２_指導管理料等を返します。
      *
-     * @return 公費２・指導管理料等
+     * @return 公費２_指導管理料等
      */
-    public int get公費２・指導管理料等() {
+    public int get公費２_指導管理料等() {
         return entity.getKohi2ShidoKanriryo();
     }
 
     /**
-     * 公費２・単純エックス線を返します。
+     * 公費２_単純エックス線を返します。
      *
-     * @return 公費２・単純エックス線
+     * @return 公費２_単純エックス線
      */
-    public int get公費２・単純エックス線() {
+    public int get公費２_単純エックス線() {
         return entity.getKohi2TanjunXsen();
     }
 
     /**
-     * 公費２・リハビリテーションを返します。
+     * 公費２_リハビリテーションを返します。
      *
-     * @return 公費２・リハビリテーション
+     * @return 公費２_リハビリテーション
      */
-    public int get公費２・リハビリテーション() {
+    public int get公費２_リハビリテーション() {
         return entity.getKohi2Rehabilitation();
     }
 
     /**
-     * 公費２・精神科専門療法を返します。
+     * 公費２_精神科専門療法を返します。
      *
-     * @return 公費２・精神科専門療法
+     * @return 公費２_精神科専門療法
      */
-    public int get公費２・精神科専門療法() {
+    public int get公費２_精神科専門療法() {
         return entity.getKohi2SeishinkaSemmonRyoho();
     }
 
     /**
-     * 公費２・合計単位数を返します。
+     * 公費２_合計単位数を返します。
      *
-     * @return 公費２・合計単位数
+     * @return 公費２_合計単位数
      */
-    public int get公費２・合計単位数() {
+    public int get公費２_合計単位数() {
         return entity.getKohi2TotalTanisu();
     }
 
     /**
-     * 公費３・指導管理料等を返します。
+     * 公費３_指導管理料等を返します。
      *
-     * @return 公費３・指導管理料等
+     * @return 公費３_指導管理料等
      */
-    public int get公費３・指導管理料等() {
+    public int get公費３_指導管理料等() {
         return entity.getKohi3ShidoKanriryo();
     }
 
     /**
-     * 公費３・単純エックス線を返します。
+     * 公費３_単純エックス線を返します。
      *
-     * @return 公費３・単純エックス線
+     * @return 公費３_単純エックス線
      */
-    public int get公費３・単純エックス線() {
+    public int get公費３_単純エックス線() {
         return entity.getKohi3TanjunXsen();
     }
 
     /**
-     * 公費３・リハビリテーションを返します。
+     * 公費３_リハビリテーションを返します。
      *
-     * @return 公費３・リハビリテーション
+     * @return 公費３_リハビリテーション
      */
-    public int get公費３・リハビリテーション() {
+    public int get公費３_リハビリテーション() {
         return entity.getKohi3Rehabilitation();
     }
 
     /**
-     * 公費３・精神科専門療法を返します。
+     * 公費３_精神科専門療法を返します。
      *
-     * @return 公費３・精神科専門療法
+     * @return 公費３_精神科専門療法
      */
-    public int get公費３・精神科専門療法() {
+    public int get公費３_精神科専門療法() {
         return entity.getKohi3SeishinkaSemmonRyoho();
     }
 
     /**
-     * 公費３・合計単位数を返します。
+     * 公費３_合計単位数を返します。
      *
-     * @return 公費３・合計単位数
+     * @return 公費３_合計単位数
      */
-    public int get公費３・合計単位数() {
+    public int get公費３_合計単位数() {
         return entity.getKohi3TotalTanisu();
     }
 
@@ -565,146 +570,146 @@ RString 特定診療情報レコード順次番号) {
     }
 
     /**
-     * 後・保険・指導管理料等を返します。
+     * 後_保険_指導管理料等を返します。
      *
-     * @return 後・保険・指導管理料等
+     * @return 後_保険_指導管理料等
      */
-    public int get後・保険・指導管理料等() {
+    public int get後_保険_指導管理料等() {
         return entity.getAtoHokenShidoKanriryo();
     }
 
     /**
-     * 後・保険・単純エックス線を返します。
+     * 後_保険_単純エックス線を返します。
      *
-     * @return 後・保険・単純エックス線
+     * @return 後_保険_単純エックス線
      */
-    public int get後・保険・単純エックス線() {
+    public int get後_保険_単純エックス線() {
         return entity.getAtoHokenTanjunXsen();
     }
 
     /**
-     * 後・保険・リハビリテーションを返します。
+     * 後_保険_リハビリテーションを返します。
      *
-     * @return 後・保険・リハビリテーション
+     * @return 後_保険_リハビリテーション
      */
-    public int get後・保険・リハビリテーション() {
+    public int get後_保険_リハビリテーション() {
         return entity.getAtoHokenRehabilitation();
     }
 
     /**
-     * 後・保険・精神科専門療法を返します。
+     * 後_保険_精神科専門療法を返します。
      *
-     * @return 後・保険・精神科専門療法
+     * @return 後_保険_精神科専門療法
      */
-    public int get後・保険・精神科専門療法() {
+    public int get後_保険_精神科専門療法() {
         return entity.getAtoHokenSeishinkaSemmonRyoho();
     }
 
     /**
-     * 後・公費１・指導管理料等を返します。
+     * 後_公費１_指導管理料等を返します。
      *
-     * @return 後・公費１・指導管理料等
+     * @return 後_公費１_指導管理料等
      */
-    public int get後・公費１・指導管理料等() {
+    public int get後_公費１_指導管理料等() {
         return entity.getAtoKohi1ShidoKanriryo();
     }
 
     /**
-     * 後・公費１・単純エックス線を返します。
+     * 後_公費１_単純エックス線を返します。
      *
-     * @return 後・公費１・単純エックス線
+     * @return 後_公費１_単純エックス線
      */
-    public int get後・公費１・単純エックス線() {
+    public int get後_公費１_単純エックス線() {
         return entity.getAtoKohi1TanjunXsen();
     }
 
     /**
-     * 後・公費１・リハビリテーションを返します。
+     * 後_公費１_リハビリテーションを返します。
      *
-     * @return 後・公費１・リハビリテーション
+     * @return 後_公費１_リハビリテーション
      */
-    public int get後・公費１・リハビリテーション() {
+    public int get後_公費１_リハビリテーション() {
         return entity.getAtoKohi1Rehabilitation();
     }
 
     /**
-     * 後・公費１・精神科専門療法を返します。
+     * 後_公費１_精神科専門療法を返します。
      *
-     * @return 後・公費１・精神科専門療法
+     * @return 後_公費１_精神科専門療法
      */
-    public int get後・公費１・精神科専門療法() {
+    public int get後_公費１_精神科専門療法() {
         return entity.getAtoKohi1SeishinkaSemmonRyoho();
     }
 
     /**
-     * 後・公費２・指導管理料等を返します。
+     * 後_公費２_指導管理料等を返します。
      *
-     * @return 後・公費２・指導管理料等
+     * @return 後_公費２_指導管理料等
      */
-    public int get後・公費２・指導管理料等() {
+    public int get後_公費２_指導管理料等() {
         return entity.getAtoKohi2ShidoKanriryo();
     }
 
     /**
-     * 後・公費２・単純エックス線を返します。
+     * 後_公費２_単純エックス線を返します。
      *
-     * @return 後・公費２・単純エックス線
+     * @return 後_公費２_単純エックス線
      */
-    public int get後・公費２・単純エックス線() {
+    public int get後_公費２_単純エックス線() {
         return entity.getAtoKohi2TanjunXsen();
     }
 
     /**
-     * 後・公費２・リハビリテーションを返します。
+     * 後_公費２_リハビリテーションを返します。
      *
-     * @return 後・公費２・リハビリテーション
+     * @return 後_公費２_リハビリテーション
      */
-    public int get後・公費２・リハビリテーション() {
+    public int get後_公費２_リハビリテーション() {
         return entity.getAtoKohi2Rehabilitation();
     }
 
     /**
-     * 後・公費２・精神科専門療法を返します。
+     * 後_公費２_精神科専門療法を返します。
      *
-     * @return 後・公費２・精神科専門療法
+     * @return 後_公費２_精神科専門療法
      */
-    public int get後・公費２・精神科専門療法() {
+    public int get後_公費２_精神科専門療法() {
         return entity.getAtoKohi2SeishinkaSemmonRyoho();
     }
 
     /**
-     * 後・公費３・指導管理料等を返します。
+     * 後_公費３_指導管理料等を返します。
      *
-     * @return 後・公費３・指導管理料等
+     * @return 後_公費３_指導管理料等
      */
-    public int get後・公費３・指導管理料等() {
+    public int get後_公費３_指導管理料等() {
         return entity.getAtoKohi3ShidoKanriryo();
     }
 
     /**
-     * 後・公費３・単純エックス線を返します。
+     * 後_公費３_単純エックス線を返します。
      *
-     * @return 後・公費３・単純エックス線
+     * @return 後_公費３_単純エックス線
      */
-    public int get後・公費３・単純エックス線() {
+    public int get後_公費３_単純エックス線() {
         return entity.getAtoKohi3TanjunXsen();
     }
 
     /**
-     * 後・公費３・リハビリテーションを返します。
+     * 後_公費３_リハビリテーションを返します。
      *
-     * @return 後・公費３・リハビリテーション
+     * @return 後_公費３_リハビリテーション
      */
-    public int get後・公費３・リハビリテーション() {
+    public int get後_公費３_リハビリテーション() {
         return entity.getAtoKohi3Rehabilitation();
     }
 
     /**
-     * 後・公費３・精神科専門療法を返します。
+     * 後_公費３_精神科専門療法を返します。
      *
-     * @return 後・公費３・精神科専門療法
+     * @return 後_公費３_精神科専門療法
      */
-    public int get後・公費３・精神科専門療法() {
+    public int get後_公費３_精神科専門療法() {
         return entity.getAtoKohi3SeishinkaSemmonRyoho();
     }
 
@@ -774,22 +779,6 @@ RString 特定診療情報レコード順次番号) {
     }
 
     /**
-     * 給付実績特定診療費のみを変更対象とします。<br/>
-     * {@link DbT3020KyufujissekiTokuteiSinryohiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiTokuteiSinryohi}
-     */
-    @Override
-    public KyufujissekiTokuteiSinryohi modifiedModel() {
-        DbT3020KyufujissekiTokuteiSinryohiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiTokuteiSinryohi(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付実績特定診療費を削除対象とします。<br/>
      * {@link DbT3020KyufujissekiTokuteiSinryohiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -806,6 +795,7 @@ RString 特定診療情報レコード順次番号) {
         }
         return new KyufujissekiTokuteiSinryohi(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiTokuteiSinryohi}のシリアライズ形式を提供します。
      *
@@ -816,13 +806,19 @@ RString 特定診療情報レコード順次番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3020KyufujissekiTokuteiSinryohiEntity entity;
         private final KyufujissekiTokuteiSinryohiIdentifier id;
 
-        private _SerializationProxy(DbT3020KyufujissekiTokuteiSinryohiEntity entity,KyufujissekiTokuteiSinryohiIdentifier id) {
+        private _SerializationProxy(DbT3020KyufujissekiTokuteiSinryohiEntity entity, KyufujissekiTokuteiSinryohiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 二次予防チェックリスト判定結果を管理するクラスです。
  */
-public class NijiYoboCheckListHanteiKekka extends ParentModelBase<NijiYoboCheckListHanteiKekkaIdentifier, DbT3103NijiYoboCheckListHanteiKekkaEntity, NijiYoboCheckListHanteiKekka> implements Serializable {
+public class NijiYoboCheckListHanteiKekka extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier, DbT3103NijiYoboCheckListHanteiKekkaEntity, NijiYoboCheckListHanteiKekka> implements Serializable {
 
     private final DbT3103NijiYoboCheckListHanteiKekkaEntity entity;
     private final NijiYoboCheckListHanteiKekkaIdentifier id;
@@ -34,9 +37,9 @@ public class NijiYoboCheckListHanteiKekka extends ParentModelBase<NijiYoboCheckL
      * @param 履歴番号 履歴番号
      */
     public NijiYoboCheckListHanteiKekka(ShikibetsuCode 識別コード,
-HihokenshaNo 被保険者番号,
-FlexibleDate 受付年月日,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 受付年月日,
+            Decimal 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
@@ -47,11 +50,11 @@ Decimal 履歴番号) {
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new NijiYoboCheckListHanteiKekkaIdentifier(
-        識別コード,
-        被保険者番号,
-        受付年月日,
-        履歴番号
-                );
+                識別コード,
+                被保険者番号,
+                受付年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -121,137 +124,137 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 点数・生活機能全般を返します。
+     * 点数_生活機能全般を返します。
      *
-     * @return 点数・生活機能全般
+     * @return 点数_生活機能全般
      */
-    public Decimal get点数・生活機能全般() {
+    public Decimal get点数_生活機能全般() {
         return entity.getTensu_SeikatsuKinoZenpan();
     }
 
     /**
-     * 点数・運動器機能を返します。
+     * 点数_運動器機能を返します。
      *
-     * @return 点数・運動器機能
+     * @return 点数_運動器機能
      */
-    public Decimal get点数・運動器機能() {
+    public Decimal get点数_運動器機能() {
         return entity.getTensu_UndokiKino();
     }
 
     /**
-     * 点数・栄養を返します。
+     * 点数_栄養を返します。
      *
-     * @return 点数・栄養
+     * @return 点数_栄養
      */
-    public Decimal get点数・栄養() {
+    public Decimal get点数_栄養() {
         return entity.getTensu_Eiyo();
     }
 
     /**
-     * 点数・口腔を返します。
+     * 点数_口腔を返します。
      *
-     * @return 点数・口腔
+     * @return 点数_口腔
      */
-    public Decimal get点数・口腔() {
+    public Decimal get点数_口腔() {
         return entity.getTensu_Koku();
     }
 
     /**
-     * 点数・閉じこもりを返します。
+     * 点数_閉じこもりを返します。
      *
-     * @return 点数・閉じこもり
+     * @return 点数_閉じこもり
      */
-    public Decimal get点数・閉じこもり() {
+    public Decimal get点数_閉じこもり() {
         return entity.getTensu_Tojikomori();
     }
 
     /**
-     * 点数・認知能力を返します。
+     * 点数_認知能力を返します。
      *
-     * @return 点数・認知能力
+     * @return 点数_認知能力
      */
-    public Decimal get点数・認知能力() {
+    public Decimal get点数_認知能力() {
         return entity.getTensu_NinchiNoryoku();
     }
 
     /**
-     * 点数・うつを返します。
+     * 点数_うつを返します。
      *
-     * @return 点数・うつ
+     * @return 点数_うつ
      */
-    public Decimal get点数・うつ() {
+    public Decimal get点数_うつ() {
         return entity.getTensu_Utsu();
     }
 
     /**
-     * 支援必要性・生活機能全般を返します。
+     * 支援必要性_生活機能全般を返します。
      *
-     * @return 支援必要性・生活機能全般
+     * @return 支援必要性_生活機能全般
      */
-    public Decimal get支援必要性・生活機能全般() {
+    public Decimal get支援必要性_生活機能全般() {
         return entity.getShien_SeikatsuKinoZenpan();
     }
 
     /**
-     * 支援必要性・運動器機能を返します。
+     * 支援必要性_運動器機能を返します。
      *
-     * @return 支援必要性・運動器機能
+     * @return 支援必要性_運動器機能
      */
-    public Decimal get支援必要性・運動器機能() {
+    public Decimal get支援必要性_運動器機能() {
         return entity.getShien_UndokiKino();
     }
 
     /**
-     * 支援必要性・栄養を返します。
+     * 支援必要性_栄養を返します。
      *
-     * @return 支援必要性・栄養
+     * @return 支援必要性_栄養
      */
-    public Decimal get支援必要性・栄養() {
+    public Decimal get支援必要性_栄養() {
         return entity.getShien_Eiyo();
     }
 
     /**
-     * 支援必要性・口腔を返します。
+     * 支援必要性_口腔を返します。
      *
-     * @return 支援必要性・口腔
+     * @return 支援必要性_口腔
      */
-    public Decimal get支援必要性・口腔() {
+    public Decimal get支援必要性_口腔() {
         return entity.getShien_Koku();
     }
 
     /**
-     * 支援必要性・閉じこもりを返します。
+     * 支援必要性_閉じこもりを返します。
      *
-     * @return 支援必要性・閉じこもり
+     * @return 支援必要性_閉じこもり
      */
-    public Decimal get支援必要性・閉じこもり() {
+    public Decimal get支援必要性_閉じこもり() {
         return entity.getShien_Tojikomori();
     }
 
     /**
-     * 支援必要性・認知能力を返します。
+     * 支援必要性_認知能力を返します。
      *
-     * @return 支援必要性・認知能力
+     * @return 支援必要性_認知能力
      */
-    public Decimal get支援必要性・認知能力() {
+    public Decimal get支援必要性_認知能力() {
         return entity.getShien_NinchiNoryoku();
     }
 
     /**
-     * 支援必要性・うつを返します。
+     * 支援必要性_うつを返します。
      *
-     * @return 支援必要性・うつ
+     * @return 支援必要性_うつ
      */
-    public Decimal get支援必要性・うつ() {
+    public Decimal get支援必要性_うつ() {
         return entity.getShien_Utsu();
     }
 
     /**
-     * 二次予防・主観的健康感を返します。
+     * 二次予防_主観的健康感を返します。
      *
-     * @return 二次予防・主観的健康感
+     * @return 二次予防_主観的健康感
      */
-    public RString get二次予防・主観的健康感() {
+    public RString get二次予防_主観的健康感() {
         return entity.getNijiYobo_ShukantekiKenkouKan();
     }
 
@@ -276,22 +279,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 二次予防チェックリスト判定結果のみを変更対象とします。<br/>
-     * {@link DbT3103NijiYoboCheckListHanteiKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link NijiYoboCheckListHanteiKekka}
-     */
-    @Override
-    public NijiYoboCheckListHanteiKekka modifiedModel() {
-        DbT3103NijiYoboCheckListHanteiKekkaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new NijiYoboCheckListHanteiKekka(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する二次予防チェックリスト判定結果を削除対象とします。<br/>
      * {@link DbT3103NijiYoboCheckListHanteiKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -308,6 +295,7 @@ Decimal 履歴番号) {
         }
         return new NijiYoboCheckListHanteiKekka(deletedEntity, id);
     }
+
     /**
      * {@link NijiYoboCheckListHanteiKekka}のシリアライズ形式を提供します。
      *
@@ -318,13 +306,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3103NijiYoboCheckListHanteiKekkaEntity entity;
         private final NijiYoboCheckListHanteiKekkaIdentifier id;
 
-        private _SerializationProxy(DbT3103NijiYoboCheckListHanteiKekkaEntity entity,NijiYoboCheckListHanteiKekkaIdentifier id) {
+        private _SerializationProxy(DbT3103NijiYoboCheckListHanteiKekkaEntity entity, NijiYoboCheckListHanteiKekkaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

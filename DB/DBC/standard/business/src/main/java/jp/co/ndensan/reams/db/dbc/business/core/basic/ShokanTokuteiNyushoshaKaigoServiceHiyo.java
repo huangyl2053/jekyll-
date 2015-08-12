@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求特定入所者介護サービス費用を管理するクラスです。
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ParentModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
     private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;
@@ -37,12 +41,12 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ParentModelBase<Shok
      * @param 履歴番号 履歴番号
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyo(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-RString 順次番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 順次番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -59,21 +63,22 @@ Decimal 履歴番号) {
         this.entity.setJunjiNo(順次番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        順次番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                順次番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}より{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyo(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定入所者介護サービス費用"));
@@ -278,7 +283,7 @@ Decimal 履歴番号) {
      *
      * @return 点数／金額
      */
-    public int get点数／金額() {
+    public int get点数_金額() {
         return entity.getTensuKingaku();
     }
 
@@ -322,27 +327,12 @@ Decimal 履歴番号) {
     /**
      * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}を返します。
      *
-     * @return 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
+     * @return
+     * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
      */
     @Override
     public ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 償還払請求特定入所者介護サービス費用のみを変更対象とします。<br/>
-     * {@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}
-     */
-    @Override
-    public ShokanTokuteiNyushoshaKaigoServiceHiyo modifiedModel() {
-        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanTokuteiNyushoshaKaigoServiceHiyo(
-                modifiedEntity, id);
     }
 
     /**
@@ -362,6 +352,7 @@ Decimal 履歴番号) {
         }
         return new ShokanTokuteiNyushoshaKaigoServiceHiyo(deletedEntity, id);
     }
+
     /**
      * {@link ShokanTokuteiNyushoshaKaigoServiceHiyo}のシリアライズ形式を提供します。
      *
@@ -372,13 +363,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
         private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity,ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id) {
+        private _SerializationProxy(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity, ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

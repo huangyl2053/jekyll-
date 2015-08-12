@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3067KyufuhiTuchiHoseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3067KyufuhiTuchiHoseiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費通知補正を管理するクラスです。
  */
-public class KyufuhiTuchiHosei extends ParentModelBase<KyufuhiTuchiHoseiIdentifier, DbT3067KyufuhiTuchiHoseiEntity, KyufuhiTuchiHosei> implements Serializable {
+public class KyufuhiTuchiHosei extends ModelBase<KyufuhiTuchiHoseiIdentifier, DbT3067KyufuhiTuchiHoseiEntity, KyufuhiTuchiHosei> implements Serializable {
 
     private final DbT3067KyufuhiTuchiHoseiEntity entity;
     private final KyufuhiTuchiHoseiIdentifier id;
@@ -36,11 +41,11 @@ public class KyufuhiTuchiHosei extends ParentModelBase<KyufuhiTuchiHoseiIdentifi
      * @param 履歴番号 履歴番号
      */
     public KyufuhiTuchiHosei(HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-ServiceShuruiCode サービス種類コード,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            ServiceShuruiCode サービス種類コード,
+            Decimal 履歴番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
@@ -55,13 +60,13 @@ Decimal 履歴番号) {
         this.entity.setServiceShuruiCode(サービス種類コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiTuchiHoseiIdentifier(
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        サービス種類コード,
-        履歴番号
-                );
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                サービス種類コード,
+                履歴番号
+        );
     }
 
     /**
@@ -189,22 +194,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 給付費通知補正のみを変更対象とします。<br/>
-     * {@link DbT3067KyufuhiTuchiHoseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiTuchiHosei}
-     */
-    @Override
-    public KyufuhiTuchiHosei modifiedModel() {
-        DbT3067KyufuhiTuchiHoseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiTuchiHosei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付費通知補正を削除対象とします。<br/>
      * {@link DbT3067KyufuhiTuchiHoseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -221,6 +210,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiTuchiHosei(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiTuchiHosei}のシリアライズ形式を提供します。
      *
@@ -231,13 +221,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3067KyufuhiTuchiHoseiEntity entity;
         private final KyufuhiTuchiHoseiIdentifier id;
 
-        private _SerializationProxy(DbT3067KyufuhiTuchiHoseiEntity entity,KyufuhiTuchiHoseiIdentifier id) {
+        private _SerializationProxy(DbT3067KyufuhiTuchiHoseiEntity entity, KyufuhiTuchiHoseiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

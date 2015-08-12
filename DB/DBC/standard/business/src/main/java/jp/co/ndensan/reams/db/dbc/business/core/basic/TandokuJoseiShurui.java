@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3099TandokuJoseiShuruiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3099TandokuJoseiShuruiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村単独助成種類を管理するクラスです。
  */
-public class TandokuJoseiShurui extends ParentModelBase<TandokuJoseiShuruiIdentifier, DbT3099TandokuJoseiShuruiEntity, TandokuJoseiShurui> implements Serializable {
+public class TandokuJoseiShurui extends ModelBase<TandokuJoseiShuruiIdentifier, DbT3099TandokuJoseiShuruiEntity, TandokuJoseiShurui> implements Serializable {
 
     private final DbT3099TandokuJoseiShuruiEntity entity;
     private final TandokuJoseiShuruiIdentifier id;
@@ -34,9 +36,9 @@ public class TandokuJoseiShurui extends ParentModelBase<TandokuJoseiShuruiIdenti
      * @param 履歴番号 履歴番号
      */
     public TandokuJoseiShurui(RString 市町村単独助成種類,
-ServiceShuruiCode 助成サービス種類コード,
-FlexibleYearMonth 適用開始年月,
-Decimal 履歴番号) {
+            ServiceShuruiCode 助成サービス種類コード,
+            FlexibleYearMonth 適用開始年月,
+            Decimal 履歴番号) {
         requireNonNull(市町村単独助成種類, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村単独助成種類"));
         requireNonNull(助成サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("助成サービス種類コード"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
@@ -47,11 +49,11 @@ Decimal 履歴番号) {
         this.entity.setTekiyoKaishiYM(適用開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new TandokuJoseiShuruiIdentifier(
-        市町村単独助成種類,
-        助成サービス種類コード,
-        適用開始年月,
-        履歴番号
-                );
+                市町村単独助成種類,
+                助成サービス種類コード,
+                適用開始年月,
+                履歴番号
+        );
     }
 
     /**
@@ -177,22 +179,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 市町村単独助成種類のみを変更対象とします。<br/>
-     * {@link DbT3099TandokuJoseiShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TandokuJoseiShurui}
-     */
-    @Override
-    public TandokuJoseiShurui modifiedModel() {
-        DbT3099TandokuJoseiShuruiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TandokuJoseiShurui(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する市町村単独助成種類を削除対象とします。<br/>
      * {@link DbT3099TandokuJoseiShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -209,6 +195,7 @@ Decimal 履歴番号) {
         }
         return new TandokuJoseiShurui(deletedEntity, id);
     }
+
     /**
      * {@link TandokuJoseiShurui}のシリアライズ形式を提供します。
      *
@@ -219,13 +206,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3099TandokuJoseiShuruiEntity entity;
         private final TandokuJoseiShuruiIdentifier id;
 
-        private _SerializationProxy(DbT3099TandokuJoseiShuruiEntity entity,TandokuJoseiShuruiIdentifier id) {
+        private _SerializationProxy(DbT3099TandokuJoseiShuruiEntity entity, TandokuJoseiShuruiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 過誤申立の識別子です。
@@ -28,9 +32,9 @@ public class KagoMoshitateIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public KagoMoshitateIdentifier(JigyoshaNo 事業所番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            Decimal 履歴番号) {
         this.事業所番号 = 事業所番号;
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;

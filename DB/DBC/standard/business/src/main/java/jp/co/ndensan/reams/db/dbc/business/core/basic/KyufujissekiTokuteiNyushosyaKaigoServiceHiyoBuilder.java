@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}の編集を行うビルダークラスです。
@@ -20,7 +31,8 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
     /**
      * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}より{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
+     * @param entity
+     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
      * @param id {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
      *
      */
@@ -41,7 +53,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +65,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -245,7 +257,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 費用額 費用額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set費用額(int 費用額) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set費用額(Decimal 費用額) {
         requireNonNull(費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("費用額"));
         entity.setHiyogaku(費用額);
         return this;
@@ -257,45 +269,45 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 保険分請求額 保険分請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set保険分請求額(int 保険分請求額) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set保険分請求額(Decimal 保険分請求額) {
         requireNonNull(保険分請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険分請求額"));
         entity.setHokenbunSeikyugaku(保険分請求額);
         return this;
     }
 
     /**
-     * 公費１負担額（明細）を設定します。
+     * 公費１負担額_明細を設定します。
      *
-     * @param 公費１負担額（明細） 公費１負担額（明細）
+     * @param 公費１負担額_明細 公費１負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１負担額（明細）(int 公費１負担額（明細）) {
-        requireNonNull(公費１負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１負担額（明細）"));
-        entity.setKohi1Futangaku(公費１負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１負担額_明細(Decimal 公費１負担額_明細) {
+        requireNonNull(公費１負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１負担額_明細"));
+        entity.setKohi1Futangaku(公費１負担額_明細);
         return this;
     }
 
     /**
-     * 公費２負担額（明細）を設定します。
+     * 公費２負担額_明細を設定します。
      *
-     * @param 公費２負担額（明細） 公費２負担額（明細）
+     * @param 公費２負担額_明細 公費２負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２負担額（明細）(int 公費２負担額（明細）) {
-        requireNonNull(公費２負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２負担額（明細）"));
-        entity.setKohi2Futangaku(公費２負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２負担額_明細(Decimal 公費２負担額_明細) {
+        requireNonNull(公費２負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２負担額_明細"));
+        entity.setKohi2Futangaku(公費２負担額_明細);
         return this;
     }
 
     /**
-     * 公費３負担額（明細）を設定します。
+     * 公費３負担額_明細を設定します。
      *
-     * @param 公費３負担額（明細） 公費３負担額（明細）
+     * @param 公費３負担額_明細 公費３負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３負担額（明細）(int 公費３負担額（明細）) {
-        requireNonNull(公費３負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３負担額（明細）"));
-        entity.setKohi3Futangaku(公費３負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３負担額_明細(Decimal 公費３負担額_明細) {
+        requireNonNull(公費３負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３負担額_明細"));
+        entity.setKohi3Futangaku(公費３負担額_明細);
         return this;
     }
 
@@ -305,7 +317,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 利用者負担額 利用者負担額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set利用者負担額(int 利用者負担額) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set利用者負担額(Decimal 利用者負担額) {
         requireNonNull(利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額"));
         entity.setRiyoshaFutangaku(利用者負担額);
         return this;
@@ -317,7 +329,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 費用額合計 費用額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set費用額合計(int 費用額合計) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set費用額合計(Decimal 費用額合計) {
         requireNonNull(費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("費用額合計"));
         entity.setHiyogakuTotal(費用額合計);
         return this;
@@ -329,7 +341,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 保険分請求額合計 保険分請求額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set保険分請求額合計(int 保険分請求額合計) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set保険分請求額合計(Decimal 保険分請求額合計) {
         requireNonNull(保険分請求額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("保険分請求額合計"));
         entity.setHokenbunSeikyugakuTotal(保険分請求額合計);
         return this;
@@ -341,393 +353,393 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 利用者負担額合計 利用者負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set利用者負担額合計(int 利用者負担額合計) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set利用者負担額合計(Decimal 利用者負担額合計) {
         requireNonNull(利用者負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額合計"));
         entity.setRiyoshaFutangakuTotal(利用者負担額合計);
         return this;
     }
 
     /**
-     * 公費１・負担額合計を設定します。
+     * 公費１_負担額合計を設定します。
      *
-     * @param 公費１・負担額合計 公費１・負担額合計
+     * @param 公費１_負担額合計 公費１_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１・負担額合計(int 公費１・負担額合計) {
-        requireNonNull(公費１・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・負担額合計"));
-        entity.setKohi1FutangakuTotal(公費１・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１_負担額合計(Decimal 公費１_負担額合計) {
+        requireNonNull(公費１_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_負担額合計"));
+        entity.setKohi1FutangakuTotal(公費１_負担額合計);
         return this;
     }
 
     /**
-     * 公費１・請求額を設定します。
+     * 公費１_請求額を設定します。
      *
-     * @param 公費１・請求額 公費１・請求額
+     * @param 公費１_請求額 公費１_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１・請求額(int 公費１・請求額) {
-        requireNonNull(公費１・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・請求額"));
-        entity.setKohi1Seikyugaku(公費１・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１_請求額(Decimal 公費１_請求額) {
+        requireNonNull(公費１_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_請求額"));
+        entity.setKohi1Seikyugaku(公費１_請求額);
         return this;
     }
 
     /**
-     * 公費１・本人負担月額を設定します。
+     * 公費１_本人負担月額を設定します。
      *
-     * @param 公費１・本人負担月額 公費１・本人負担月額
+     * @param 公費１_本人負担月額 公費１_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１・本人負担月額(int 公費１・本人負担月額) {
-        requireNonNull(公費１・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・本人負担月額"));
-        entity.setKohi1HonninFutanGetsugaku(公費１・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１_本人負担月額(Decimal 公費１_本人負担月額) {
+        requireNonNull(公費１_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_本人負担月額"));
+        entity.setKohi1HonninFutanGetsugaku(公費１_本人負担月額);
         return this;
     }
 
     /**
-     * 公費２・負担額合計を設定します。
+     * 公費２_負担額合計を設定します。
      *
-     * @param 公費２・負担額合計 公費２・負担額合計
+     * @param 公費２_負担額合計 公費２_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２・負担額合計(int 公費２・負担額合計) {
-        requireNonNull(公費２・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・負担額合計"));
-        entity.setKohi2FutangakuTotal(公費２・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２_負担額合計(Decimal 公費２_負担額合計) {
+        requireNonNull(公費２_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_負担額合計"));
+        entity.setKohi2FutangakuTotal(公費２_負担額合計);
         return this;
     }
 
     /**
-     * 公費２・請求額を設定します。
+     * 公費２_請求額を設定します。
      *
-     * @param 公費２・請求額 公費２・請求額
+     * @param 公費２_請求額 公費２_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２・請求額(int 公費２・請求額) {
-        requireNonNull(公費２・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・請求額"));
-        entity.setKohi2Seikyugaku(公費２・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２_請求額(Decimal 公費２_請求額) {
+        requireNonNull(公費２_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_請求額"));
+        entity.setKohi2Seikyugaku(公費２_請求額);
         return this;
     }
 
     /**
-     * 公費２・本人負担月額を設定します。
+     * 公費２_本人負担月額を設定します。
      *
-     * @param 公費２・本人負担月額 公費２・本人負担月額
+     * @param 公費２_本人負担月額 公費２_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２・本人負担月額(int 公費２・本人負担月額) {
-        requireNonNull(公費２・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・本人負担月額"));
-        entity.setKohi2HonninFutanGetsugaku(公費２・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２_本人負担月額(Decimal 公費２_本人負担月額) {
+        requireNonNull(公費２_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_本人負担月額"));
+        entity.setKohi2HonninFutanGetsugaku(公費２_本人負担月額);
         return this;
     }
 
     /**
-     * 公費３・負担額合計を設定します。
+     * 公費３_負担額合計を設定します。
      *
-     * @param 公費３・負担額合計 公費３・負担額合計
+     * @param 公費３_負担額合計 公費３_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３・負担額合計(int 公費３・負担額合計) {
-        requireNonNull(公費３・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・負担額合計"));
-        entity.setKohi3FutangakuTotal(公費３・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３_負担額合計(Decimal 公費３_負担額合計) {
+        requireNonNull(公費３_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_負担額合計"));
+        entity.setKohi3FutangakuTotal(公費３_負担額合計);
         return this;
     }
 
     /**
-     * 公費３・請求額を設定します。
+     * 公費３_請求額を設定します。
      *
-     * @param 公費３・請求額 公費３・請求額
+     * @param 公費３_請求額 公費３_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３・請求額(int 公費３・請求額) {
-        requireNonNull(公費３・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・請求額"));
-        entity.setKohi3Seikyugaku(公費３・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３_請求額(Decimal 公費３_請求額) {
+        requireNonNull(公費３_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_請求額"));
+        entity.setKohi3Seikyugaku(公費３_請求額);
         return this;
     }
 
     /**
-     * 公費３・本人負担月額を設定します。
+     * 公費３_本人負担月額を設定します。
      *
-     * @param 公費３・本人負担月額 公費３・本人負担月額
+     * @param 公費３_本人負担月額 公費３_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３・本人負担月額(int 公費３・本人負担月額) {
-        requireNonNull(公費３・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・本人負担月額"));
-        entity.setKohi3HonninFutanGetsugaku(公費３・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３_本人負担月額(Decimal 公費３_本人負担月額) {
+        requireNonNull(公費３_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_本人負担月額"));
+        entity.setKohi3HonninFutanGetsugaku(公費３_本人負担月額);
         return this;
     }
 
     /**
-     * 後・費用単価を設定します。
+     * 後_費用単価を設定します。
      *
-     * @param 後・費用単価 後・費用単価
+     * @param 後_費用単価 後_費用単価
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・費用単価(Decimal 後・費用単価) {
-        requireNonNull(後・費用単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後・費用単価"));
-        entity.setAtoHiyoTanka(後・費用単価);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_費用単価(Decimal 後_費用単価) {
+        requireNonNull(後_費用単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後_費用単価"));
+        entity.setAtoHiyoTanka(後_費用単価);
         return this;
     }
 
     /**
-     * 後・日数を設定します。
+     * 後_日数を設定します。
      *
-     * @param 後・日数 後・日数
+     * @param 後_日数 後_日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・日数(Decimal 後・日数) {
-        requireNonNull(後・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・日数"));
-        entity.setAtoNissu(後・日数);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_日数(Decimal 後_日数) {
+        requireNonNull(後_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_日数"));
+        entity.setAtoNissu(後_日数);
         return this;
     }
 
     /**
-     * 後・公費１日数を設定します。
+     * 後_公費１日数を設定します。
      *
-     * @param 後・公費１日数 後・公費１日数
+     * @param 後_公費１日数 後_公費１日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費１日数(Decimal 後・公費１日数) {
-        requireNonNull(後・公費１日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１日数"));
-        entity.setAtoKohi1Nissu(後・公費１日数);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１日数(Decimal 後_公費１日数) {
+        requireNonNull(後_公費１日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１日数"));
+        entity.setAtoKohi1Nissu(後_公費１日数);
         return this;
     }
 
     /**
-     * 後・公費２日数を設定します。
+     * 後_公費２日数を設定します。
      *
-     * @param 後・公費２日数 後・公費２日数
+     * @param 後_公費２日数 後_公費２日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費２日数(Decimal 後・公費２日数) {
-        requireNonNull(後・公費２日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２日数"));
-        entity.setAtoKohi2Nissu(後・公費２日数);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２日数(Decimal 後_公費２日数) {
+        requireNonNull(後_公費２日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２日数"));
+        entity.setAtoKohi2Nissu(後_公費２日数);
         return this;
     }
 
     /**
-     * 後・公費３日数を設定します。
+     * 後_公費３日数を設定します。
      *
-     * @param 後・公費３日数 後・公費３日数
+     * @param 後_公費３日数 後_公費３日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費３日数(Decimal 後・公費３日数) {
-        requireNonNull(後・公費３日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３日数"));
-        entity.setAtoKohi3Nissu(後・公費３日数);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３日数(Decimal 後_公費３日数) {
+        requireNonNull(後_公費３日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３日数"));
+        entity.setAtoKohi3Nissu(後_公費３日数);
         return this;
     }
 
     /**
-     * 後・費用額を設定します。
+     * 後_費用額を設定します。
      *
-     * @param 後・費用額 後・費用額
+     * @param 後_費用額 後_費用額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・費用額(int 後・費用額) {
-        requireNonNull(後・費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・費用額"));
-        entity.setAtoHiyogaku(後・費用額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_費用額(Decimal 後_費用額) {
+        requireNonNull(後_費用額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_費用額"));
+        entity.setAtoHiyogaku(後_費用額);
         return this;
     }
 
     /**
-     * 後・保険分請求額を設定します。
+     * 後_保険分請求額を設定します。
      *
-     * @param 後・保険分請求額 後・保険分請求額
+     * @param 後_保険分請求額 後_保険分請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・保険分請求額(int 後・保険分請求額) {
-        requireNonNull(後・保険分請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険分請求額"));
-        entity.setAtoHokenbunSeikyugaku(後・保険分請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_保険分請求額(Decimal 後_保険分請求額) {
+        requireNonNull(後_保険分請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険分請求額"));
+        entity.setAtoHokenbunSeikyugaku(後_保険分請求額);
         return this;
     }
 
     /**
-     * 後・公費１負担額（明細）を設定します。
+     * 後_公費１負担額_明細を設定します。
      *
-     * @param 後・公費１負担額（明細） 後・公費１負担額（明細）
+     * @param 後_公費１負担額_明細 後_公費１負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費１負担額（明細）(int 後・公費１負担額（明細）) {
-        requireNonNull(後・公費１負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１負担額（明細）"));
-        entity.setAtoKohi1Futangaku(後・公費１負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１負担額_明細(Decimal 後_公費１負担額_明細) {
+        requireNonNull(後_公費１負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１負担額_明細"));
+        entity.setAtoKohi1Futangaku(後_公費１負担額_明細);
         return this;
     }
 
     /**
-     * 後・公費２負担額（明細）を設定します。
+     * 後_公費２負担額_明細を設定します。
      *
-     * @param 後・公費２負担額（明細） 後・公費２負担額（明細）
+     * @param 後_公費２負担額_明細 後_公費２負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費２負担額（明細）(int 後・公費２負担額（明細）) {
-        requireNonNull(後・公費２負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２負担額（明細）"));
-        entity.setAtoKohi2Futangaku(後・公費２負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２負担額_明細(Decimal 後_公費２負担額_明細) {
+        requireNonNull(後_公費２負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２負担額_明細"));
+        entity.setAtoKohi2Futangaku(後_公費２負担額_明細);
         return this;
     }
 
     /**
-     * 後・公費３負担額（明細）を設定します。
+     * 後_公費３負担額_明細を設定します。
      *
-     * @param 後・公費３負担額（明細） 後・公費３負担額（明細）
+     * @param 後_公費３負担額_明細 後_公費３負担額_明細
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費３負担額（明細）(int 後・公費３負担額（明細）) {
-        requireNonNull(後・公費３負担額（明細）, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３負担額（明細）"));
-        entity.setAtoKohi3Futangaku(後・公費３負担額（明細）);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３負担額_明細(Decimal 後_公費３負担額_明細) {
+        requireNonNull(後_公費３負担額_明細, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３負担額_明細"));
+        entity.setAtoKohi3Futangaku(後_公費３負担額_明細);
         return this;
     }
 
     /**
-     * 後・利用者負担額を設定します。
+     * 後_利用者負担額を設定します。
      *
-     * @param 後・利用者負担額 後・利用者負担額
+     * @param 後_利用者負担額 後_利用者負担額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・利用者負担額(int 後・利用者負担額) {
-        requireNonNull(後・利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・利用者負担額"));
-        entity.setAtoRiyoshaFutangaku(後・利用者負担額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_利用者負担額(Decimal 後_利用者負担額) {
+        requireNonNull(後_利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_利用者負担額"));
+        entity.setAtoRiyoshaFutangaku(後_利用者負担額);
         return this;
     }
 
     /**
-     * 後・費用額合計を設定します。
+     * 後_費用額合計を設定します。
      *
-     * @param 後・費用額合計 後・費用額合計
+     * @param 後_費用額合計 後_費用額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・費用額合計(int 後・費用額合計) {
-        requireNonNull(後・費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・費用額合計"));
-        entity.setAtoHiyogakuTotal(後・費用額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_費用額合計(Decimal 後_費用額合計) {
+        requireNonNull(後_費用額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_費用額合計"));
+        entity.setAtoHiyogakuTotal(後_費用額合計);
         return this;
     }
 
     /**
-     * 後・保険分請求額合計を設定します。
+     * 後_保険分請求額合計を設定します。
      *
-     * @param 後・保険分請求額合計 後・保険分請求額合計
+     * @param 後_保険分請求額合計 後_保険分請求額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・保険分請求額合計(int 後・保険分請求額合計) {
-        requireNonNull(後・保険分請求額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険分請求額合計"));
-        entity.setAtoHokenbunSeikyugakuTotal(後・保険分請求額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_保険分請求額合計(Decimal 後_保険分請求額合計) {
+        requireNonNull(後_保険分請求額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険分請求額合計"));
+        entity.setAtoHokenbunSeikyugakuTotal(後_保険分請求額合計);
         return this;
     }
 
     /**
-     * 後・利用者負担額合計を設定します。
+     * 後_利用者負担額合計を設定します。
      *
-     * @param 後・利用者負担額合計 後・利用者負担額合計
+     * @param 後_利用者負担額合計 後_利用者負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・利用者負担額合計(int 後・利用者負担額合計) {
-        requireNonNull(後・利用者負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・利用者負担額合計"));
-        entity.setAtoRiyoshaFutangakuTotal(後・利用者負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_利用者負担額合計(Decimal 後_利用者負担額合計) {
+        requireNonNull(後_利用者負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_利用者負担額合計"));
+        entity.setAtoRiyoshaFutangakuTotal(後_利用者負担額合計);
         return this;
     }
 
     /**
-     * 後・公費１・負担額合計を設定します。
+     * 後_公費１_負担額合計を設定します。
      *
-     * @param 後・公費１・負担額合計 後・公費１・負担額合計
+     * @param 後_公費１_負担額合計 後_公費１_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費１・負担額合計(int 後・公費１・負担額合計) {
-        requireNonNull(後・公費１・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・負担額合計"));
-        entity.setAtoKohi1FutangakuTotal(後・公費１・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１_負担額合計(Decimal 後_公費１_負担額合計) {
+        requireNonNull(後_公費１_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_負担額合計"));
+        entity.setAtoKohi1FutangakuTotal(後_公費１_負担額合計);
         return this;
     }
 
     /**
-     * 後・公費１・請求額を設定します。
+     * 後_公費１_請求額を設定します。
      *
-     * @param 後・公費１・請求額 後・公費１・請求額
+     * @param 後_公費１_請求額 後_公費１_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費１・請求額(int 後・公費１・請求額) {
-        requireNonNull(後・公費１・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・請求額"));
-        entity.setAtoKohi1Seikyugaku(後・公費１・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１_請求額(Decimal 後_公費１_請求額) {
+        requireNonNull(後_公費１_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_請求額"));
+        entity.setAtoKohi1Seikyugaku(後_公費１_請求額);
         return this;
     }
 
     /**
-     * 後・公費１・本人負担月額を設定します。
+     * 後_公費１_本人負担月額を設定します。
      *
-     * @param 後・公費１・本人負担月額 後・公費１・本人負担月額
+     * @param 後_公費１_本人負担月額 後_公費１_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費１・本人負担月額(int 後・公費１・本人負担月額) {
-        requireNonNull(後・公費１・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・本人負担月額"));
-        entity.setAtoKohi1HonninFutanGetsugaku(後・公費１・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１_本人負担月額(Decimal 後_公費１_本人負担月額) {
+        requireNonNull(後_公費１_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_本人負担月額"));
+        entity.setAtoKohi1HonninFutanGetsugaku(後_公費１_本人負担月額);
         return this;
     }
 
     /**
-     * 後・公費２・負担額合計を設定します。
+     * 後_公費２_負担額合計を設定します。
      *
-     * @param 後・公費２・負担額合計 後・公費２・負担額合計
+     * @param 後_公費２_負担額合計 後_公費２_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費２・負担額合計(int 後・公費２・負担額合計) {
-        requireNonNull(後・公費２・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・負担額合計"));
-        entity.setAtoKohi2FutangakuTotal(後・公費２・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２_負担額合計(Decimal 後_公費２_負担額合計) {
+        requireNonNull(後_公費２_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_負担額合計"));
+        entity.setAtoKohi2FutangakuTotal(後_公費２_負担額合計);
         return this;
     }
 
     /**
-     * 後・公費２・請求額を設定します。
+     * 後_公費２_請求額を設定します。
      *
-     * @param 後・公費２・請求額 後・公費２・請求額
+     * @param 後_公費２_請求額 後_公費２_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費２・請求額(int 後・公費２・請求額) {
-        requireNonNull(後・公費２・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・請求額"));
-        entity.setAtoKohi2Seikyugaku(後・公費２・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２_請求額(Decimal 後_公費２_請求額) {
+        requireNonNull(後_公費２_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_請求額"));
+        entity.setAtoKohi2Seikyugaku(後_公費２_請求額);
         return this;
     }
 
     /**
-     * 後・公費２・本人負担月額を設定します。
+     * 後_公費２_本人負担月額を設定します。
      *
-     * @param 後・公費２・本人負担月額 後・公費２・本人負担月額
+     * @param 後_公費２_本人負担月額 後_公費２_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費２・本人負担月額(int 後・公費２・本人負担月額) {
-        requireNonNull(後・公費２・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・本人負担月額"));
-        entity.setAtoKohi2HonninFutanGetsugaku(後・公費２・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２_本人負担月額(Decimal 後_公費２_本人負担月額) {
+        requireNonNull(後_公費２_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_本人負担月額"));
+        entity.setAtoKohi2HonninFutanGetsugaku(後_公費２_本人負担月額);
         return this;
     }
 
     /**
-     * 後・公費３・負担額合計を設定します。
+     * 後_公費３_負担額合計を設定します。
      *
-     * @param 後・公費３・負担額合計 後・公費３・負担額合計
+     * @param 後_公費３_負担額合計 後_公費３_負担額合計
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費３・負担額合計(int 後・公費３・負担額合計) {
-        requireNonNull(後・公費３・負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・負担額合計"));
-        entity.setAtoKohi3FutangakuTotal(後・公費３・負担額合計);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３_負担額合計(Decimal 後_公費３_負担額合計) {
+        requireNonNull(後_公費３_負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_負担額合計"));
+        entity.setAtoKohi3FutangakuTotal(後_公費３_負担額合計);
         return this;
     }
 
     /**
-     * 後・公費３・請求額を設定します。
+     * 後_公費３_請求額を設定します。
      *
-     * @param 後・公費３・請求額 後・公費３・請求額
+     * @param 後_公費３_請求額 後_公費３_請求額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費３・請求額(int 後・公費３・請求額) {
-        requireNonNull(後・公費３・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・請求額"));
-        entity.setAtoKohi3Seikyugaku(後・公費３・請求額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３_請求額(Decimal 後_公費３_請求額) {
+        requireNonNull(後_公費３_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_請求額"));
+        entity.setAtoKohi3Seikyugaku(後_公費３_請求額);
         return this;
     }
 
     /**
-     * 後・公費３・本人負担月額を設定します。
+     * 後_公費３_本人負担月額を設定します。
      *
-     * @param 後・公費３・本人負担月額 後・公費３・本人負担月額
+     * @param 後_公費３_本人負担月額 後_公費３_本人負担月額
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後・公費３・本人負担月額(int 後・公費３・本人負担月額) {
-        requireNonNull(後・公費３・本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・本人負担月額"));
-        entity.setAtoKohi3HonninFutanGetsugaku(後・公費３・本人負担月額);
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３_本人負担月額(Decimal 後_公費３_本人負担月額) {
+        requireNonNull(後_公費３_本人負担月額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_本人負担月額"));
+        entity.setAtoKohi3HonninFutanGetsugaku(後_公費３_本人負担月額);
         return this;
     }
 

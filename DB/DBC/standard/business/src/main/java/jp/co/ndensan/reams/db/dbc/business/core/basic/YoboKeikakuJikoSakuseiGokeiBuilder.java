@@ -6,15 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link YoboKeikakuJikoSakuseiGokei}の編集を行うビルダークラスです。
  */
 public class YoboKeikakuJikoSakuseiGokeiBuilder {
 
-    private final DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity;
+    private final DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity;
     private final YoboKeikakuJikoSakuseiGokeiIdentifier id;
 
     /**
@@ -25,7 +32,7 @@ public class YoboKeikakuJikoSakuseiGokeiBuilder {
      *
      */
     YoboKeikakuJikoSakuseiGokeiBuilder(
-            DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity,
+            DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity,
             YoboKeikakuJikoSakuseiGokeiIdentifier id
     ) {
         this.entity = entity.clone();

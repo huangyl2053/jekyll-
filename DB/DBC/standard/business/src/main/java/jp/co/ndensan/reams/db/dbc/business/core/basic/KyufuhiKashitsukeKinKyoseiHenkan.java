@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費貸付金強制返還を管理するクラスです。
  */
-public class KyufuhiKashitsukeKinKyoseiHenkan extends ParentModelBase<KyufuhiKashitsukeKinKyoseiHenkanIdentifier, DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity, KyufuhiKashitsukeKinKyoseiHenkan> implements Serializable {
+public class KyufuhiKashitsukeKinKyoseiHenkan extends ModelBase<KyufuhiKashitsukeKinKyoseiHenkanIdentifier, DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity, KyufuhiKashitsukeKinKyoseiHenkan> implements Serializable {
 
     private final DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity;
     private final KyufuhiKashitsukeKinKyoseiHenkanIdentifier id;
@@ -33,8 +35,8 @@ public class KyufuhiKashitsukeKinKyoseiHenkan extends ParentModelBase<KyufuhiKas
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukeKinKyoseiHenkan(HihokenshaNo 被保険者番号,
-RString 貸付管理番号,
-Decimal 履歴番号) {
+            RString 貸付管理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(貸付管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付管理番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,17 +45,18 @@ Decimal 履歴番号) {
         this.entity.setKashitsukeKanriNo(貸付管理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiKashitsukeKinKyoseiHenkanIdentifier(
-        被保険者番号,
-        貸付管理番号,
-        履歴番号
-                );
+                被保険者番号,
+                貸付管理番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}より{@link KyufuhiKashitsukeKinKyoseiHenkan}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}
+     * @param entity
+     * DBより取得した{@link DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}
      */
     public KyufuhiKashitsukeKinKyoseiHenkan(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費貸付金強制返還"));
@@ -162,22 +165,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 給付費貸付金強制返還のみを変更対象とします。<br/>
-     * {@link DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiKashitsukeKinKyoseiHenkan}
-     */
-    @Override
-    public KyufuhiKashitsukeKinKyoseiHenkan modifiedModel() {
-        DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiKashitsukeKinKyoseiHenkan(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付費貸付金強制返還を削除対象とします。<br/>
      * {@link DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -194,6 +181,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiKashitsukeKinKyoseiHenkan(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiKashitsukeKinKyoseiHenkan}のシリアライズ形式を提供します。
      *
@@ -204,13 +192,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity;
         private final KyufuhiKashitsukeKinKyoseiHenkanIdentifier id;
 
-        private _SerializationProxy(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity,KyufuhiKashitsukeKinKyoseiHenkanIdentifier id) {
+        private _SerializationProxy(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity, KyufuhiKashitsukeKinKyoseiHenkanIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

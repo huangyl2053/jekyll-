@@ -6,20 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3110JigyoKogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3110JigyoKogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業高額介護サービス費支給申請を管理するクラスです。
  */
-public class JigyoKogakuShikyuShinsei extends ParentModelBase<JigyoKogakuShikyuShinseiIdentifier, DbT3110JigyoKogakuShikyuShinseiEntity, JigyoKogakuShikyuShinsei> implements Serializable {
+public class JigyoKogakuShikyuShinsei extends ModelBase<JigyoKogakuShikyuShinseiIdentifier, DbT3110JigyoKogakuShikyuShinseiEntity, JigyoKogakuShikyuShinsei> implements Serializable {
 
     private final DbT3110JigyoKogakuShikyuShinseiEntity entity;
     private final JigyoKogakuShikyuShinseiIdentifier id;
@@ -34,9 +42,9 @@ public class JigyoKogakuShikyuShinsei extends ParentModelBase<JigyoKogakuShikyuS
      * @param 履歴番号 履歴番号
      */
     public JigyoKogakuShikyuShinsei(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-HokenshaNo 証記載保険者番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            HokenshaNo 証記載保険者番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
@@ -47,11 +55,11 @@ Decimal 履歴番号) {
         this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new JigyoKogakuShikyuShinseiIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        証記載保険者番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                証記載保険者番号,
+                履歴番号
+        );
     }
 
     /**
@@ -303,22 +311,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 事業高額介護サービス費支給申請のみを変更対象とします。<br/>
-     * {@link DbT3110JigyoKogakuShikyuShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link JigyoKogakuShikyuShinsei}
-     */
-    @Override
-    public JigyoKogakuShikyuShinsei modifiedModel() {
-        DbT3110JigyoKogakuShikyuShinseiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new JigyoKogakuShikyuShinsei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する事業高額介護サービス費支給申請を削除対象とします。<br/>
      * {@link DbT3110JigyoKogakuShikyuShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -335,6 +327,7 @@ Decimal 履歴番号) {
         }
         return new JigyoKogakuShikyuShinsei(deletedEntity, id);
     }
+
     /**
      * {@link JigyoKogakuShikyuShinsei}のシリアライズ形式を提供します。
      *
@@ -345,13 +338,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3110JigyoKogakuShikyuShinseiEntity entity;
         private final JigyoKogakuShikyuShinseiIdentifier id;
 
-        private _SerializationProxy(DbT3110JigyoKogakuShikyuShinseiEntity entity,JigyoKogakuShikyuShinseiIdentifier id) {
+        private _SerializationProxy(DbT3110JigyoKogakuShikyuShinseiEntity entity, JigyoKogakuShikyuShinseiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

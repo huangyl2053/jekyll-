@@ -6,6 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -34,12 +41,12 @@ public class YoboKeikakuJikoSakuseiMeisaiIdentifier implements Serializable {
      * @param サービス項目コード サービス項目コード
      */
     public YoboKeikakuJikoSakuseiMeisaiIdentifier(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号,
-RString 居宅サービス区分,
-JigyoshaNo サービス提供事業者番号,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号,
+            RString 居宅サービス区分,
+            JigyoshaNo サービス提供事業者番号,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード) {
         this.被保険者番号 = 被保険者番号;
         this.対象年月 = 対象年月;
         this.履歴番号 = 履歴番号;

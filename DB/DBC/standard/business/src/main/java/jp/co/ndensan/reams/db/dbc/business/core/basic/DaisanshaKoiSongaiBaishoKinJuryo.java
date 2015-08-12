@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護第三者行為損害賠償金受領を管理するクラスです。
  */
-public class DaisanshaKoiSongaiBaishoKinJuryo extends ParentModelBase<DaisanshaKoiSongaiBaishoKinJuryoIdentifier, DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity, DaisanshaKoiSongaiBaishoKinJuryo> implements Serializable {
+public class DaisanshaKoiSongaiBaishoKinJuryo extends ModelBase<DaisanshaKoiSongaiBaishoKinJuryoIdentifier, DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity, DaisanshaKoiSongaiBaishoKinJuryo> implements Serializable {
 
     private final DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity;
     private final DaisanshaKoiSongaiBaishoKinJuryoIdentifier id;
@@ -34,9 +36,9 @@ public class DaisanshaKoiSongaiBaishoKinJuryo extends ParentModelBase<DaisanshaK
      * @param 履歴番号 履歴番号
      */
     public DaisanshaKoiSongaiBaishoKinJuryo(HihokenshaNo 被保険者番号,
-RString 第三者行為届出管理番号,
-RString 第三者行為求償請求番号,
-Decimal 履歴番号) {
+            RString 第三者行為届出管理番号,
+            RString 第三者行為求償請求番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(第三者行為届出管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("第三者行為届出管理番号"));
         requireNonNull(第三者行為求償請求番号, UrSystemErrorMessages.値がnull.getReplacedMessage("第三者行為求償請求番号"));
@@ -47,18 +49,19 @@ Decimal 履歴番号) {
         this.entity.setKyushoSeikyuNo(第三者行為求償請求番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new DaisanshaKoiSongaiBaishoKinJuryoIdentifier(
-        被保険者番号,
-        第三者行為届出管理番号,
-        第三者行為求償請求番号,
-        履歴番号
-                );
+                被保険者番号,
+                第三者行為届出管理番号,
+                第三者行為求償請求番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}より{@link DaisanshaKoiSongaiBaishoKinJuryo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}
      */
     public DaisanshaKoiSongaiBaishoKinJuryo(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護第三者行為損害賠償金受領"));
@@ -178,27 +181,12 @@ Decimal 履歴番号) {
     /**
      * 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}を返します。
      *
-     * @return 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}
+     * @return
+     * 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}
      */
     @Override
     public DaisanshaKoiSongaiBaishoKinJuryoIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 介護第三者行為損害賠償金受領のみを変更対象とします。<br/>
-     * {@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link DaisanshaKoiSongaiBaishoKinJuryo}
-     */
-    @Override
-    public DaisanshaKoiSongaiBaishoKinJuryo modifiedModel() {
-        DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new DaisanshaKoiSongaiBaishoKinJuryo(
-                modifiedEntity, id);
     }
 
     /**
@@ -218,6 +206,7 @@ Decimal 履歴番号) {
         }
         return new DaisanshaKoiSongaiBaishoKinJuryo(deletedEntity, id);
     }
+
     /**
      * {@link DaisanshaKoiSongaiBaishoKinJuryo}のシリアライズ形式を提供します。
      *
@@ -228,13 +217,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity;
         private final DaisanshaKoiSongaiBaishoKinJuryoIdentifier id;
 
-        private _SerializationProxy(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity,DaisanshaKoiSongaiBaishoKinJuryoIdentifier id) {
+        private _SerializationProxy(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity, DaisanshaKoiSongaiBaishoKinJuryoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -6,8 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanHanteiKekka}の編集を行うビルダークラスです。
@@ -108,14 +115,14 @@ public class ShokanHanteiKekkaBuilder {
     }
 
     /**
-     * 支給・不支給決定区分を設定します。
+     * 支給_不支給決定区分を設定します。
      *
-     * @param 支給・不支給決定区分 支給・不支給決定区分
+     * @param 支給_不支給決定区分 支給_不支給決定区分
      * @return {@link ShokanHanteiKekkaBuilder}
      */
-    public ShokanHanteiKekkaBuilder set支給・不支給決定区分(RString 支給・不支給決定区分) {
-        requireNonNull(支給・不支給決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給・不支給決定区分"));
-        entity.setShikyuHushikyuKetteiKubun(支給・不支給決定区分);
+    public ShokanHanteiKekkaBuilder set支給_不支給決定区分(RString 支給_不支給決定区分) {
+        requireNonNull(支給_不支給決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給決定区分"));
+        entity.setShikyuHushikyuKetteiKubun(支給_不支給決定区分);
         return this;
     }
 
@@ -132,14 +139,14 @@ public class ShokanHanteiKekkaBuilder {
     }
 
     /**
-     * 支払金額内訳・利用者分を設定します。
+     * 支払金額内訳_利用者分を設定します。
      *
-     * @param 支払金額内訳・利用者分 支払金額内訳・利用者分
+     * @param 支払金額内訳_利用者分 支払金額内訳_利用者分
      * @return {@link ShokanHanteiKekkaBuilder}
      */
-    public ShokanHanteiKekkaBuilder set支払金額内訳・利用者分(Decimal 支払金額内訳・利用者分) {
-        requireNonNull(支払金額内訳・利用者分, UrSystemErrorMessages.値がnull.getReplacedMessage("支払金額内訳・利用者分"));
-        entity.setShiharaiKingakuUchiwakeRiyoshabun(支払金額内訳・利用者分);
+    public ShokanHanteiKekkaBuilder set支払金額内訳_利用者分(Decimal 支払金額内訳_利用者分) {
+        requireNonNull(支払金額内訳_利用者分, UrSystemErrorMessages.値がnull.getReplacedMessage("支払金額内訳_利用者分"));
+        entity.setShiharaiKingakuUchiwakeRiyoshabun(支払金額内訳_利用者分);
         return this;
     }
 

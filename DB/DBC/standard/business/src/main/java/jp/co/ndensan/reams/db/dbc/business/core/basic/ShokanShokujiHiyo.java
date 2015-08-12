@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求食事費用を管理するクラスです。
  */
-public class ShokanShokujiHiyo extends ParentModelBase<ShokanShokujiHiyoIdentifier, DbT3043ShokanShokujiHiyoEntity, ShokanShokujiHiyo> implements Serializable {
+public class ShokanShokujiHiyo extends ModelBase<ShokanShokujiHiyoIdentifier, DbT3043ShokanShokujiHiyoEntity, ShokanShokujiHiyo> implements Serializable {
 
     private final DbT3043ShokanShokujiHiyoEntity entity;
     private final ShokanShokujiHiyoIdentifier id;
@@ -36,11 +38,11 @@ public class ShokanShokujiHiyo extends ParentModelBase<ShokanShokujiHiyoIdentifi
      * @param 履歴番号 履歴番号
      */
     public ShokanShokujiHiyo(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -55,13 +57,13 @@ Decimal 履歴番号) {
         this.entity.setYoshikiNo(様式番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShokujiHiyoIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                履歴番号
+        );
     }
 
     /**
@@ -223,11 +225,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 標準負担額（月額）を返します。
+     * 標準負担額_月額を返します。
      *
-     * @return 標準負担額（月額）
+     * @return 標準負担額_月額
      */
-    public int get標準負担額（月額）() {
+    public int get標準負担額_月額() {
         return entity.getGetsugakuHyojunFutangaku();
     }
 
@@ -241,11 +243,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 標準負担額（日額）を返します。
+     * 標準負担額_日額を返します。
      *
-     * @return 標準負担額（日額）
+     * @return 標準負担額_日額
      */
-    public Decimal get標準負担額（日額）() {
+    public Decimal get標準負担額_日額() {
         return entity.getNichigakuHyojunFutangaku();
     }
 
@@ -259,11 +261,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 点数／金額を返します。
+     * 点数_金額を返します。
      *
-     * @return 点数／金額
+     * @return 点数_金額
      */
-    public int get点数／金額() {
+    public int get点数_金額() {
         return entity.getTensuKingaku();
     }
 
@@ -306,22 +308,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 償還払請求食事費用のみを変更対象とします。<br/>
-     * {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanShokujiHiyo}
-     */
-    @Override
-    public ShokanShokujiHiyo modifiedModel() {
-        DbT3043ShokanShokujiHiyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanShokujiHiyo(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求食事費用を削除対象とします。<br/>
      * {@link DbT3043ShokanShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -338,6 +324,7 @@ Decimal 履歴番号) {
         }
         return new ShokanShokujiHiyo(deletedEntity, id);
     }
+
     /**
      * {@link ShokanShokujiHiyo}のシリアライズ形式を提供します。
      *
@@ -348,13 +335,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3043ShokanShokujiHiyoEntity entity;
         private final ShokanShokujiHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3043ShokanShokujiHiyoEntity entity,ShokanShokujiHiyoIdentifier id) {
+        private _SerializationProxy(DbT3043ShokanShokujiHiyoEntity entity, ShokanShokujiHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

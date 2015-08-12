@@ -7,6 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求サービス計画200904の識別子です。
@@ -20,7 +26,7 @@ public class ShokanServicePlan200904Identifier implements Serializable {
     private final JigyoshaNo 事業者番号;
     private final RString 様式番号;
     private final Decimal 履歴番号;
-    private final RString 指定／基準該当事業者区分コード;
+    private final RString 指定_基準該当事業者区分コード;
     private final RString 明細行番号;
     private final FlexibleDate 居宅サービス計画作成依頼届出年月日;
 
@@ -33,26 +39,26 @@ public class ShokanServicePlan200904Identifier implements Serializable {
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
      * @param 履歴番号 履歴番号
-     * @param 指定／基準該当事業者区分コード 指定／基準該当事業者区分コード
+     * @param 指定_基準該当事業者区分コード 指定／基準該当事業者区分コード
      * @param 明細行番号 明細行番号
      * @param 居宅サービス計画作成依頼届出年月日 居宅サービス計画作成依頼届出年月日
      */
     public ShokanServicePlan200904Identifier(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-Decimal 履歴番号,
-RString 指定／基準該当事業者区分コード,
-RString 明細行番号,
-FlexibleDate 居宅サービス計画作成依頼届出年月日) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            Decimal 履歴番号,
+            RString 指定_基準該当事業者区分コード,
+            RString 明細行番号,
+            FlexibleDate 居宅サービス計画作成依頼届出年月日) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;
         this.事業者番号 = 事業者番号;
         this.様式番号 = 様式番号;
         this.履歴番号 = 履歴番号;
-        this.指定／基準該当事業者区分コード = 指定／基準該当事業者区分コード;
+        this.指定_基準該当事業者区分コード = 指定_基準該当事業者区分コード;
         this.明細行番号 = 明細行番号;
         this.居宅サービス計画作成依頼届出年月日 = 居宅サービス計画作成依頼届出年月日;
     }

@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3066ShichosonTokubetuKyufuServiceEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * {@link ShichosonTokubetuKyufuService}の編集を行うビルダークラスです。
@@ -72,26 +76,26 @@ public class ShichosonTokubetuKyufuServiceBuilder {
     }
 
     /**
-     * 市町村特別給付用サービス名（正式名称）を設定します。
+     * 市町村特別給付用サービス名_正式名称を設定します。
      *
-     * @param 市町村特別給付用サービス名（正式名称） 市町村特別給付用サービス名（正式名称）
+     * @param 市町村特別給付用サービス名_正式名称 市町村特別給付用サービス名_正式名称
      * @return {@link ShichosonTokubetuKyufuServiceBuilder}
      */
-    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用サービス名（正式名称）(RString 市町村特別給付用サービス名（正式名称）) {
-        requireNonNull(市町村特別給付用サービス名（正式名称）, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス名（正式名称）"));
-        entity.setServiceSeishikiName(市町村特別給付用サービス名（正式名称）);
+    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用サービス名_正式名称(RString 市町村特別給付用サービス名_正式名称) {
+        requireNonNull(市町村特別給付用サービス名_正式名称, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス名_正式名称"));
+        entity.setServiceSeishikiName(市町村特別給付用サービス名_正式名称);
         return this;
     }
 
     /**
-     * 市町村特別給付用サービス名（略称）を設定します。
+     * 市町村特別給付用サービス名_略称を設定します。
      *
-     * @param 市町村特別給付用サービス名（略称） 市町村特別給付用サービス名（略称）
+     * @param 市町村特別給付用サービス名_略称 市町村特別給付用サービス名_略称
      * @return {@link ShichosonTokubetuKyufuServiceBuilder}
      */
-    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用サービス名（略称）(RString 市町村特別給付用サービス名（略称）) {
-        requireNonNull(市町村特別給付用サービス名（略称）, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス名（略称）"));
-        entity.setServiceRyakushoName(市町村特別給付用サービス名（略称）);
+    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用サービス名_略称(RString 市町村特別給付用サービス名_略称) {
+        requireNonNull(市町村特別給付用サービス名_略称, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス名_略称"));
+        entity.setServiceRyakushoName(市町村特別給付用サービス名_略称);
         return this;
     }
 
@@ -120,14 +124,14 @@ public class ShichosonTokubetuKyufuServiceBuilder {
     }
 
     /**
-     * 市町村特別給付用単位・日数を設定します。
+     * 市町村特別給付用単位_日数を設定します。
      *
-     * @param 市町村特別給付用単位・日数 市町村特別給付用単位・日数
+     * @param 市町村特別給付用単位_日数 市町村特別給付用単位_日数
      * @return {@link ShichosonTokubetuKyufuServiceBuilder}
      */
-    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用単位・日数(Decimal 市町村特別給付用単位・日数) {
-        requireNonNull(市町村特別給付用単位・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用単位・日数"));
-        entity.setTanisuNissu(市町村特別給付用単位・日数);
+    public ShichosonTokubetuKyufuServiceBuilder set市町村特別給付用単位_日数(Decimal 市町村特別給付用単位_日数) {
+        requireNonNull(市町村特別給付用単位_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用単位_日数"));
+        entity.setTanisuNissu(市町村特別給付用単位_日数);
         return this;
     }
 

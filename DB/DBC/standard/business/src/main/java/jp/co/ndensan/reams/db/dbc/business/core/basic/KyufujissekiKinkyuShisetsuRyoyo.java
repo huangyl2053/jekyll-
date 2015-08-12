@@ -10,16 +10,25 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績緊急時施設療養を管理するクラスです。
  */
-public class KyufujissekiKinkyuShisetsuRyoyo extends ParentModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier, DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity, KyufujissekiKinkyuShisetsuRyoyo> implements Serializable {
+public class KyufujissekiKinkyuShisetsuRyoyo extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier, DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity, KyufujissekiKinkyuShisetsuRyoyo> implements Serializable {
 
     private final DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity;
     private final KyufujissekiKinkyuShisetsuRyoyoIdentifier id;
@@ -38,15 +47,15 @@ public class KyufujissekiKinkyuShisetsuRyoyo extends ParentModelBase<Kyufujissek
      * @param 通し番号 通し番号
      * @param 緊急時施設療養情報レコード順次番号 緊急時施設療養情報レコード順次番号
      */
-    public KyufujissekiKinkyuShisetsuRyoyo(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-RString 緊急時施設療養情報レコード順次番号) {
+    public KyufujissekiKinkyuShisetsuRyoyo(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            RString 緊急時施設療養情報レコード順次番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,23 +76,24 @@ RString 緊急時施設療養情報レコード順次番号) {
         this.entity.setToshiNo(通し番号);
         this.entity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
         this.id = new KyufujissekiKinkyuShisetsuRyoyoIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        緊急時施設療養情報レコード順次番号
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                緊急時施設療養情報レコード順次番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}より{@link KyufujissekiKinkyuShisetsuRyoyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}
      */
     public KyufujissekiKinkyuShisetsuRyoyo(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績緊急時施設療養"));
@@ -119,7 +129,7 @@ RString 緊急時施設療養情報レコード順次番号) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +138,7 @@ RString 緊急時施設療養情報レコード順次番号) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -547,83 +557,83 @@ RString 緊急時施設療養情報レコード順次番号) {
     }
 
     /**
-     * 後・往診日数を返します。
+     * 後_往診日数を返します。
      *
-     * @return 後・往診日数
+     * @return 後_往診日数
      */
-    public Decimal get後・往診日数() {
+    public Decimal get後_往診日数() {
         return entity.getAtoOshinNissu();
     }
 
     /**
-     * 後・通院日数を返します。
+     * 後_通院日数を返します。
      *
-     * @return 後・通院日数
+     * @return 後_通院日数
      */
-    public Decimal get後・通院日数() {
+    public Decimal get後_通院日数() {
         return entity.getAtoTsuinNissu();
     }
 
     /**
-     * 後・緊急時治療管理単位数を返します。
+     * 後_緊急時治療管理単位数を返します。
      *
-     * @return 後・緊急時治療管理単位数
+     * @return 後_緊急時治療管理単位数
      */
-    public int get後・緊急時治療管理単位数() {
+    public int get後_緊急時治療管理単位数() {
         return entity.getAtoKinkyuChiryoKanriTanisu();
     }
 
     /**
-     * 後・緊急時治療管理日数を返します。
+     * 後_緊急時治療管理日数を返します。
      *
-     * @return 後・緊急時治療管理日数
+     * @return 後_緊急時治療管理日数
      */
-    public Decimal get後・緊急時治療管理日数() {
+    public Decimal get後_緊急時治療管理日数() {
         return entity.getAtoKinkyuChiryoKanriNissu();
     }
 
     /**
-     * 後・リハビリテーション点数を返します。
+     * 後_リハビリテーション点数を返します。
      *
-     * @return 後・リハビリテーション点数
+     * @return 後_リハビリテーション点数
      */
-    public int get後・リハビリテーション点数() {
+    public int get後_リハビリテーション点数() {
         return entity.getAtoRehabilitationTensu();
     }
 
     /**
-     * 後・処置点数を返します。
+     * 後_処置点数を返します。
      *
-     * @return 後・処置点数
+     * @return 後_処置点数
      */
-    public int get後・処置点数() {
+    public int get後_処置点数() {
         return entity.getAtoShochiTensu();
     }
 
     /**
-     * 後・手術点数を返します。
+     * 後_手術点数を返します。
      *
-     * @return 後・手術点数
+     * @return 後_手術点数
      */
-    public int get後・手術点数() {
+    public int get後_手術点数() {
         return entity.getAtoShujutsuTensu();
     }
 
     /**
-     * 後・麻酔点数を返します。
+     * 後_麻酔点数を返します。
      *
-     * @return 後・麻酔点数
+     * @return 後_麻酔点数
      */
-    public int get後・麻酔点数() {
+    public int get後_麻酔点数() {
         return entity.getAtoMasuiTensu();
     }
 
     /**
-     * 後・放射線治療点数を返します。
+     * 後_放射線治療点数を返します。
      *
-     * @return 後・放射線治療点数
+     * @return 後_放射線治療点数
      */
-    public int get後・放射線治療点数() {
+    public int get後_放射線治療点数() {
         return entity.getAtoHoshasenChiryoTensu();
     }
 
@@ -693,22 +703,6 @@ RString 緊急時施設療養情報レコード順次番号) {
     }
 
     /**
-     * 給付実績緊急時施設療養のみを変更対象とします。<br/>
-     * {@link DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiKinkyuShisetsuRyoyo}
-     */
-    @Override
-    public KyufujissekiKinkyuShisetsuRyoyo modifiedModel() {
-        DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiKinkyuShisetsuRyoyo(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付実績緊急時施設療養を削除対象とします。<br/>
      * {@link DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -725,6 +719,7 @@ RString 緊急時施設療養情報レコード順次番号) {
         }
         return new KyufujissekiKinkyuShisetsuRyoyo(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiKinkyuShisetsuRyoyo}のシリアライズ形式を提供します。
      *
@@ -735,13 +730,19 @@ RString 緊急時施設療養情報レコード順次番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity;
         private final KyufujissekiKinkyuShisetsuRyoyoIdentifier id;
 
-        private _SerializationProxy(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity,KyufujissekiKinkyuShisetsuRyoyoIdentifier id) {
+        private _SerializationProxy(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity, KyufujissekiKinkyuShisetsuRyoyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

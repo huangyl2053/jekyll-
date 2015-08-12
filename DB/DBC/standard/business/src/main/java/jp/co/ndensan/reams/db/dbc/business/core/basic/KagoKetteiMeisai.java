@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 過誤決定明細を管理するクラスです。
  */
-public class KagoKetteiMeisai extends ParentModelBase<KagoKetteiMeisaiIdentifier, DbT3061KagoKetteiMeisaiEntity, KagoKetteiMeisai> implements Serializable {
+public class KagoKetteiMeisai extends ModelBase<KagoKetteiMeisaiIdentifier, DbT3061KagoKetteiMeisaiEntity, KagoKetteiMeisai> implements Serializable {
 
     private final DbT3061KagoKetteiMeisaiEntity entity;
     private final KagoKetteiMeisaiIdentifier id;
@@ -33,8 +39,8 @@ public class KagoKetteiMeisai extends ParentModelBase<KagoKetteiMeisaiIdentifier
      * @param 履歴番号 履歴番号
      */
     public KagoKetteiMeisai(FlexibleYearMonth 取扱年月,
-RString 保険者区分,
-Decimal 履歴番号) {
+            RString 保険者区分,
+            Decimal 履歴番号) {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +49,10 @@ Decimal 履歴番号) {
         this.entity.setHokenshaKubun(保険者区分);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KagoKetteiMeisaiIdentifier(
-        取扱年月,
-        保険者区分,
-        履歴番号
-                );
+                取扱年月,
+                保険者区分,
+                履歴番号
+        );
     }
 
     /**
@@ -200,7 +206,7 @@ Decimal 履歴番号) {
      *
      * @return 単位数（特定入所者介護費等）
      */
-    public Decimal get単位数（特定入所者介護費等）() {
+    public Decimal get単位数_特定入所者介護費等() {
         return entity.getTanisu();
     }
 
@@ -234,22 +240,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 過誤決定明細のみを変更対象とします。<br/>
-     * {@link DbT3061KagoKetteiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KagoKetteiMeisai}
-     */
-    @Override
-    public KagoKetteiMeisai modifiedModel() {
-        DbT3061KagoKetteiMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KagoKetteiMeisai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する過誤決定明細を削除対象とします。<br/>
      * {@link DbT3061KagoKetteiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -266,6 +256,7 @@ Decimal 履歴番号) {
         }
         return new KagoKetteiMeisai(deletedEntity, id);
     }
+
     /**
      * {@link KagoKetteiMeisai}のシリアライズ形式を提供します。
      *
@@ -276,13 +267,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3061KagoKetteiMeisaiEntity entity;
         private final KagoKetteiMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3061KagoKetteiMeisaiEntity entity,KagoKetteiMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3061KagoKetteiMeisaiEntity entity, KagoKetteiMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

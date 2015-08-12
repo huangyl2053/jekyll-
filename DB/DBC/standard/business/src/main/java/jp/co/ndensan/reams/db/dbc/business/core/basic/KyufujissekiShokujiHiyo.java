@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3022KyufujissekiShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3022KyufujissekiShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績食事費用を管理するクラスです。
  */
-public class KyufujissekiShokujiHiyo extends ParentModelBase<KyufujissekiShokujiHiyoIdentifier, DbT3022KyufujissekiShokujiHiyoEntity, KyufujissekiShokujiHiyo> implements Serializable {
+public class KyufujissekiShokujiHiyo extends ModelBase<KyufujissekiShokujiHiyoIdentifier, DbT3022KyufujissekiShokujiHiyoEntity, KyufujissekiShokujiHiyo> implements Serializable {
 
     private final DbT3022KyufujissekiShokujiHiyoEntity entity;
     private final KyufujissekiShokujiHiyoIdentifier id;
@@ -37,14 +42,14 @@ public class KyufujissekiShokujiHiyo extends ParentModelBase<KyufujissekiShokuji
      * @param 事業所番号 事業所番号
      * @param 通し番号 通し番号
      */
-    public KyufujissekiShokujiHiyo(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号) {
+    public KyufujissekiShokujiHiyo(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -63,15 +68,15 @@ RString 通し番号) {
         this.entity.setJigyoshoNo(事業所番号);
         this.entity.setToshiNo(通し番号);
         this.id = new KyufujissekiShokujiHiyoIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号
+        );
     }
 
     /**
@@ -113,7 +118,7 @@ RString 通し番号) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -122,7 +127,7 @@ RString 通し番号) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -181,56 +186,56 @@ RString 通し番号) {
     }
 
     /**
-     * 基本・提供日数を返します。
+     * 基本_提供日数を返します。
      *
-     * @return 基本・提供日数
+     * @return 基本_提供日数
      */
-    public Decimal get基本・提供日数() {
+    public Decimal get基本_提供日数() {
         return entity.getKihonTeikyoNissu();
     }
 
     /**
-     * 基本・提供単価を返します。
+     * 基本_提供単価を返します。
      *
-     * @return 基本・提供単価
+     * @return 基本_提供単価
      */
-    public Decimal get基本・提供単価() {
+    public Decimal get基本_提供単価() {
         return entity.getKihonTeikyoTanka();
     }
 
     /**
-     * 基本・提供金額を返します。
+     * 基本_提供金額を返します。
      *
-     * @return 基本・提供金額
+     * @return 基本_提供金額
      */
-    public Decimal get基本・提供金額() {
+    public Decimal get基本_提供金額() {
         return entity.getKihonTeikyoKingaku();
     }
 
     /**
-     * 特別・提供日数を返します。
+     * 特別_提供日数を返します。
      *
-     * @return 特別・提供日数
+     * @return 特別_提供日数
      */
-    public Decimal get特別・提供日数() {
+    public Decimal get特別_提供日数() {
         return entity.getTokubestuTeikyoNissu();
     }
 
     /**
-     * 特別・提供単価を返します。
+     * 特別_提供単価を返します。
      *
-     * @return 特別・提供単価
+     * @return 特別_提供単価
      */
-    public Decimal get特別・提供単価() {
+    public Decimal get特別_提供単価() {
         return entity.getTokubestuTeikyoTanka();
     }
 
     /**
-     * 特別・提供金額を返します。
+     * 特別_提供金額を返します。
      *
-     * @return 特別・提供金額
+     * @return 特別_提供金額
      */
-    public Decimal get特別・提供金額() {
+    public Decimal get特別_提供金額() {
         return entity.getTokubestuTeikyoKingaku();
     }
 
@@ -280,11 +285,11 @@ RString 通し番号) {
     }
 
     /**
-     * 標準負担額（月額）を返します。
+     * 標準負担額_月額を返します。
      *
-     * @return 標準負担額（月額）
+     * @return 標準負担額_月額
      */
-    public Decimal get標準負担額（月額）() {
+    public Decimal get標準負担額_月額() {
         return entity.getGetsugakuHyojunFutanGaku();
     }
 
@@ -325,38 +330,38 @@ RString 通し番号) {
     }
 
     /**
-     * 標準負担額（日額）を返します。
+     * 標準負担額_日額を返します。
      *
-     * @return 標準負担額（日額）
+     * @return 標準負担額_日額
      */
-    public Decimal get標準負担額（日額）() {
+    public Decimal get標準負担額_日額() {
         return entity.getNichigakuHyojunFutanGaku();
     }
 
     /**
-     * 後・基本食提供費用提供単価を返します。
+     * 後_基本食提供費用提供単価を返します。
      *
-     * @return 後・基本食提供費用提供単価
+     * @return 後_基本食提供費用提供単価
      */
-    public Decimal get後・基本食提供費用提供単価() {
+    public Decimal get後_基本食提供費用提供単価() {
         return entity.getAtoKihonTeikyoTanka();
     }
 
     /**
-     * 後・特別食提供費用提供単価を返します。
+     * 後_特別食提供費用提供単価を返します。
      *
-     * @return 後・特別食提供費用提供単価
+     * @return 後_特別食提供費用提供単価
      */
-    public Decimal get後・特別食提供費用提供単価() {
+    public Decimal get後_特別食提供費用提供単価() {
         return entity.getAtoTokubestuTeikyoTanka();
     }
 
     /**
-     * 後・食事提供費請求額を返します。
+     * 後_食事提供費請求額を返します。
      *
-     * @return 後・食事提供費請求額
+     * @return 後_食事提供費請求額
      */
-    public Decimal get後・食事提供費請求額() {
+    public Decimal get後_食事提供費請求額() {
         return entity.getAtoSyokujiTeikyohiSeikyugaku();
     }
 
@@ -426,22 +431,6 @@ RString 通し番号) {
     }
 
     /**
-     * 給付実績食事費用のみを変更対象とします。<br/>
-     * {@link DbT3022KyufujissekiShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiShokujiHiyo}
-     */
-    @Override
-    public KyufujissekiShokujiHiyo modifiedModel() {
-        DbT3022KyufujissekiShokujiHiyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiShokujiHiyo(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付実績食事費用を削除対象とします。<br/>
      * {@link DbT3022KyufujissekiShokujiHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -458,6 +447,7 @@ RString 通し番号) {
         }
         return new KyufujissekiShokujiHiyo(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiShokujiHiyo}のシリアライズ形式を提供します。
      *
@@ -468,13 +458,19 @@ RString 通し番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3022KyufujissekiShokujiHiyoEntity entity;
         private final KyufujissekiShokujiHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3022KyufujissekiShokujiHiyoEntity entity,KyufujissekiShokujiHiyoIdentifier id) {
+        private _SerializationProxy(DbT3022KyufujissekiShokujiHiyoEntity entity, KyufujissekiShokujiHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

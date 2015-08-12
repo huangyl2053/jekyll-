@@ -6,22 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 予防給付計画自己作成明細を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai> implements Serializable {
+public class YoboKeikakuJikoSakuseiMeisai extends ModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai> implements Serializable {
 
-    private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
+    private final DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
 
     /**
@@ -37,12 +42,12 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
      * @param サービス項目コード サービス項目コード
      */
     public YoboKeikakuJikoSakuseiMeisai(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号,
-RString 居宅サービス区分,
-JigyoshaNo サービス提供事業者番号,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号,
+            RString 居宅サービス区分,
+            JigyoshaNo サービス提供事業者番号,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -50,7 +55,7 @@ ServiceKomokuCode サービス項目コード) {
         requireNonNull(サービス提供事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
-        this.entity = new DbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
+        this.entity = new DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
@@ -59,14 +64,14 @@ ServiceKomokuCode サービス項目コード) {
         this.entity.setServiceShuruiCode(サービス種類コード);
         this.entity.setServiceKomokuCode(サービス項目コード);
         this.id = new YoboKeikakuJikoSakuseiMeisaiIdentifier(
-        被保険者番号,
-        対象年月,
-        履歴番号,
-        居宅サービス区分,
-        サービス提供事業者番号,
-        サービス種類コード,
-        サービス項目コード
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号,
+                居宅サービス区分,
+                サービス提供事業者番号,
+                サービス種類コード,
+                サービス項目コード
+        );
     }
 
     /**
@@ -75,7 +80,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @param entity DBより取得した{@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}
      */
-    public YoboKeikakuJikoSakuseiMeisai(DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity) {
+    public YoboKeikakuJikoSakuseiMeisai(DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成明細"));
         this.id = new YoboKeikakuJikoSakuseiMeisaiIdentifier(
                 entity.getHihokenshaNo(),
@@ -94,7 +99,7 @@ ServiceKomokuCode サービス項目コード) {
      * @param id {@link YoboKeikakuJikoSakuseiMeisaiIdentifier}
      */
     YoboKeikakuJikoSakuseiMeisai(
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity,
             YoboKeikakuJikoSakuseiMeisaiIdentifier id
     ) {
         this.entity = entity;
@@ -179,7 +184,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 回数・日数
      */
-    public Decimal get回数・日数() {
+    public Decimal get回数_日数() {
         return entity.getKaisu_Nissu();
     }
 
@@ -188,7 +193,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 種類限度内単位数・日数
      */
-    public Decimal get種類限度内単位数・日数() {
+    public Decimal get種類限度内単位数_日数() {
         return entity.getShuruiGendoNaiTaniSu_Nissu();
     }
 
@@ -197,7 +202,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 種類限度超過単位数・日数
      */
-    public Decimal get種類限度超過単位数・日数() {
+    public Decimal get種類限度超過単位数_日数() {
         return entity.getShuruiGendoChokaTaniSu_Nissu();
     }
 
@@ -206,7 +211,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 区分限度内単位数・日数
      */
-    public Decimal get区分限度内単位数・日数() {
+    public Decimal get区分限度内単位数_日数() {
         return entity.getKubunGendoNaiTaniSu_Nissu();
     }
 
@@ -215,7 +220,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 区分限度超過単位数・日数
      */
-    public Decimal get区分限度超過単位数・日数() {
+    public Decimal get区分限度超過単位数_日数() {
         return entity.getKubunGendoChokaTaniSu_Nissu();
     }
 
@@ -270,7 +275,7 @@ ServiceKomokuCode サービス項目コード) {
      * @return {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}のクローン
      */
     @Override
-    public DbT3011YoboKeikakuJikoSakuseiMeisaiEntity toEntity() {
+    public DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity toEntity() {
         return this.entity.clone();
     }
 
@@ -285,22 +290,6 @@ ServiceKomokuCode サービス項目コード) {
     }
 
     /**
-     * 予防給付計画自己作成明細のみを変更対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
-     */
-    @Override
-    public YoboKeikakuJikoSakuseiMeisai modifiedModel() {
-        DbT3011YoboKeikakuJikoSakuseiMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new YoboKeikakuJikoSakuseiMeisai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する予防給付計画自己作成明細を削除対象とします。<br/>
      * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -308,7 +297,7 @@ ServiceKomokuCode サービス項目コード) {
      */
     @Override
     public YoboKeikakuJikoSakuseiMeisai deleted() {
-        DbT3011YoboKeikakuJikoSakuseiMeisaiEntity deletedEntity = this.toEntity();
+        DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -317,6 +306,7 @@ ServiceKomokuCode サービス項目コード) {
         }
         return new YoboKeikakuJikoSakuseiMeisai(deletedEntity, id);
     }
+
     /**
      * {@link YoboKeikakuJikoSakuseiMeisai}のシリアライズ形式を提供します。
      *
@@ -327,13 +317,19 @@ ServiceKomokuCode サービス項目コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
-        private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
+        private static final long serialVersionUID = 1L;
+
+        private final DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity;
         private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,YoboKeikakuJikoSakuseiMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity, YoboKeikakuJikoSakuseiMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

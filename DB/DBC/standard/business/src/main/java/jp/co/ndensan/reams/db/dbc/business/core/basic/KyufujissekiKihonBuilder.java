@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 
 /**
  * {@link KyufujissekiKihon}の編集を行うビルダークラスです。
@@ -41,7 +51,7 @@ public class KyufujissekiKihonBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiKihonBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +63,7 @@ public class KyufujissekiKihonBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiKihonBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -156,74 +166,86 @@ public class KyufujissekiKihonBuilder {
     }
 
     /**
-     * 公費１・負担者番号を設定します。
+     * 公費１_負担者番号を設定します。
      *
-     * @param 公費１・負担者番号 公費１・負担者番号
+     * @param 公費１_負担者番号 公費１_負担者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費１・負担者番号(RString 公費１・負担者番号) {
-        requireNonNull(公費１・負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・負担者番号"));
-        entity.setKohi1FutanshaNo(公費１・負担者番号);
+    public KyufujissekiKihonBuilder set公費１負担者番号(RString 公費１_負担者番号) {
+        requireNonNull(公費１_負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_負担者番号")
+        );
+        entity.setKohi1FutanshaNo(公費１_負担者番号
+        );
         return this;
     }
 
     /**
-     * 公費１・受給者番号を設定します。
+     * 公費１_受給者番号を設定します。
      *
-     * @param 公費１・受給者番号 公費１・受給者番号
+     * @param 公費１_受給者番号 公費１_受給者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費１・受給者番号(RString 公費１・受給者番号) {
-        requireNonNull(公費１・受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・受給者番号"));
-        entity.setKohi1JukyushaNo(公費１・受給者番号);
+    public KyufujissekiKihonBuilder set公費１_受給者番号(RString 公費１_受給者番号) {
+        requireNonNull(公費１_受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_受給者番号")
+        );
+        entity.setKohi1JukyushaNo(公費１_受給者番号
+        );
         return this;
     }
 
     /**
-     * 公費２・負担者番号を設定します。
+     * 公費２_負担者番号を設定します。
      *
-     * @param 公費２・負担者番号 公費２・負担者番号
+     * @param 公費２_負担者番号 公費２_負担者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費２・負担者番号(RString 公費２・負担者番号) {
-        requireNonNull(公費２・負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・負担者番号"));
-        entity.setKohi2FutanshaNo(公費２・負担者番号);
+    public KyufujissekiKihonBuilder set公費２_負担者番号(RString 公費２_負担者番号) {
+        requireNonNull(公費２_負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_負担者番号")
+        );
+        entity.setKohi2FutanshaNo(公費２_負担者番号
+        );
         return this;
     }
 
     /**
-     * 公費２・受給者番号を設定します。
+     * 公費２_受給者番号を設定します。
      *
-     * @param 公費２・受給者番号 公費２・受給者番号
+     * @param 公費２_受給者番号 公費２_受給者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費２・受給者番号(RString 公費２・受給者番号) {
-        requireNonNull(公費２・受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・受給者番号"));
-        entity.setKohi2JukyushaNo(公費２・受給者番号);
+    public KyufujissekiKihonBuilder set公費２_受給者番号(RString 公費２_受給者番号) {
+        requireNonNull(公費２_受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_受給者番号")
+        );
+        entity.setKohi2JukyushaNo(公費２_受給者番号
+        );
         return this;
     }
 
     /**
-     * 公費３・負担者番号を設定します。
+     * 公費３_負担者番号を設定します。
      *
-     * @param 公費３・負担者番号 公費３・負担者番号
+     * @param 公費３_負担者番号 公費３_負担者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費３・負担者番号(RString 公費３・負担者番号) {
-        requireNonNull(公費３・負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・負担者番号"));
-        entity.setKohi3FutanshaNo(公費３・負担者番号);
+    public KyufujissekiKihonBuilder set公費３_負担者番号(RString 公費３_負担者番号) {
+        requireNonNull(公費３_負担者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_負担者番号")
+        );
+        entity.setKohi3FutanshaNo(公費３_負担者番号
+        );
         return this;
     }
 
     /**
-     * 公費３・受給者番号を設定します。
+     * 公費３_受給者番号を設定します。
      *
-     * @param 公費３・受給者番号 公費３・受給者番号
+     * @param 公費３_受給者番号 公費３_受給者番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set公費３・受給者番号(RString 公費３・受給者番号) {
-        requireNonNull(公費３・受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・受給者番号"));
-        entity.setKohi3JukyushaNo(公費３・受給者番号);
+    public KyufujissekiKihonBuilder set公費３_受給者番号(RString 公費３_受給者番号) {
+        requireNonNull(公費３_受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_受給者番号")
+        );
+        entity.setKohi3JukyushaNo(公費３_受給者番号
+        );
         return this;
     }
 
@@ -276,26 +298,30 @@ public class KyufujissekiKihonBuilder {
     }
 
     /**
-     * 認定有効期間・開始年月日を設定します。
+     * 認定有効期間_開始年月日を設定します。
      *
-     * @param 認定有効期間・開始年月日 認定有効期間・開始年月日
+     * @param 認定有効期間_開始年月日 認定有効期間_開始年月日
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set認定有効期間・開始年月日(FlexibleDate 認定有効期間・開始年月日) {
-        requireNonNull(認定有効期間・開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間・開始年月日"));
-        entity.setNinteiYukoKaishiYMD(認定有効期間・開始年月日);
+    public KyufujissekiKihonBuilder set認定有効期間_開始年月日(FlexibleDate 認定有効期間_開始年月日) {
+        requireNonNull(認定有効期間_開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間_開始年月日")
+        );
+        entity.setNinteiYukoKaishiYMD(認定有効期間_開始年月日
+        );
         return this;
     }
 
     /**
-     * 認定有功期間・終了年月日を設定します。
+     * 認定有功期間_終了年月日を設定します。
      *
-     * @param 認定有功期間・終了年月日 認定有功期間・終了年月日
+     * @param 認定有功期間_終了年月日 認定有功期間_終了年月日
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set認定有功期間・終了年月日(FlexibleDate 認定有功期間・終了年月日) {
-        requireNonNull(認定有功期間・終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有功期間・終了年月日"));
-        entity.setNinteiYukoShuryoYMD(認定有功期間・終了年月日);
+    public KyufujissekiKihonBuilder set認定有功期間_終了年月日(FlexibleDate 認定有功期間_終了年月日) {
+        requireNonNull(認定有功期間_終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有功期間_終了年月日")
+        );
+        entity.setNinteiYukoShuryoYMD(認定有功期間_終了年月日
+        );
         return this;
     }
 
@@ -326,24 +352,26 @@ public class KyufujissekiKihonBuilder {
     /**
      * 保険者番号（後期）を設定します。
      *
-     * @param 保険者番号（後期） 保険者番号（後期）
+     * @param 保険者番号_後期） 保険者番号（後期）
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set保険者番号（後期）(RString 保険者番号（後期）) {
-        requireNonNull(保険者番号（後期）, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号（後期）"));
-        entity.setKokiHokenshaNo(保険者番号（後期）);
+    public KyufujissekiKihonBuilder set保険者番号_後期(RString 保険者番号_後期) {
+        requireNonNull(保険者番号_後期, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号（後期）")
+        );
+        entity.setKokiHokenshaNo(保険者番号_後期);
         return this;
     }
 
     /**
      * 被保険者番号（後期）を設定します。
      *
-     * @param 被保険者番号（後期） 被保険者番号（後期）
+     * @param 被保険者番号_後期） 被保険者番号（後期）
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set被保険者番号（後期）(RString 被保険者番号（後期）) {
-        requireNonNull(被保険者番号（後期）, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号（後期）"));
-        entity.setKokiHiHokenshaNo(被保険者番号（後期）);
+    public KyufujissekiKihonBuilder set被保険者番号_後期(RString 被保険者番号_後期) {
+        requireNonNull(被保険者番号_後期, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号（後期）")
+        );
+        entity.setKokiHiHokenshaNo(被保険者番号_後期);
         return this;
     }
 
@@ -353,9 +381,10 @@ public class KyufujissekiKihonBuilder {
      * @param 保険者番号（国保） 保険者番号（国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set保険者番号（国保）(RString 保険者番号（国保）) {
-        requireNonNull(保険者番号（国保）, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号（国保）"));
-        entity.setKokuhoHokenshaNo(保険者番号（国保）);
+    public KyufujissekiKihonBuilder set保険者番号_国保(RString 保険者番号_国保) {
+        requireNonNull(保険者番号_国保, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号（国保）")
+        );
+        entity.setKokuhoHokenshaNo(保険者番号_国保);
         return this;
     }
 
@@ -365,21 +394,23 @@ public class KyufujissekiKihonBuilder {
      * @param 被保険者証番号（国保） 被保険者証番号（国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set被保険者証番号（国保）(RString 被保険者証番号（国保）) {
-        requireNonNull(被保険者証番号（国保）, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者証番号（国保）"));
-        entity.setKokuhoHiHokenshashoNo(被保険者証番号（国保）);
+    public KyufujissekiKihonBuilder set被保険者証番号_国保(RString 被保険者証番号_国保) {
+        requireNonNull(被保険者証番号_国保, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者証番号（国保）")
+        );
+        entity.setKokuhoHiHokenshashoNo(被保険者証番号_国保);
         return this;
     }
 
     /**
      * 個人番号（国保）を設定します。
      *
-     * @param 個人番号（国保） 個人番号（国保）
+     * @param 個人番号_国保） 個人番号_国保）
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set個人番号（国保）(RString 個人番号（国保）) {
-        requireNonNull(個人番号（国保）, UrSystemErrorMessages.値がnull.getReplacedMessage("個人番号（国保）"));
-        entity.setKokuhoKojinNo(個人番号（国保）);
+    public KyufujissekiKihonBuilder set個人番号_国保(RString 個人番号_国保) {
+        requireNonNull(個人番号_国保, UrSystemErrorMessages.値がnull.getReplacedMessage("個人番号（国保）")
+        );
+        entity.setKokuhoKojinNo(個人番号_国保);
         return this;
     }
 
@@ -398,10 +429,10 @@ public class KyufujissekiKihonBuilder {
     /**
      * 事業所番号を設定します。
      *
-     * @param 事業所番号 事業所番号
+     * @param 事業所番号 居宅介護支援事業所番号
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set事業所番号(JigyoshaNo 事業所番号) {
+    public KyufujissekiKihonBuilder set居宅介護支援事業所番号(JigyoshaNo 事業所番号) {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
         entity.setKyotakuKaigoShienJigyoshoNo(事業所番号);
         return this;
@@ -432,50 +463,55 @@ public class KyufujissekiKihonBuilder {
     }
 
     /**
-     * 中止理由・入所（院）前の状況コードを設定します。
+     * 中止理由_入所（院）前の状況コードを設定します。
      *
-     * @param 中止理由・入所（院）前の状況コード 中止理由・入所（院）前の状況コード
+     * @param 中止理由_入所_院_前の状況コード 中止理由_入所（院）前の状況コード
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set中止理由・入所（院）前の状況コード(RString 中止理由・入所（院）前の状況コード) {
-        requireNonNull(中止理由・入所（院）前の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("中止理由・入所（院）前の状況コード"));
-        entity.setChushiRiyuNyushomaeJyokyoCode(中止理由・入所（院）前の状況コード);
+    public KyufujissekiKihonBuilder set中止理由_入所_院_前の状況コード(RString 中止理由_入所_院_前の状況コード) {
+        requireNonNull(中止理由_入所_院_前の状況コード, UrSystemErrorMessages.値がnull.getReplacedMessage("中止理由_入所（院）前の状況コード")
+        );
+        entity.setChushiRiyuNyushomaeJyokyoCode(中止理由_入所_院_前の状況コード
+        );
         return this;
     }
 
     /**
      * 入所（院）年月日を設定します。
      *
-     * @param 入所（院）年月日 入所（院）年月日
+     * @param 入所_院_年月日 入所（院）年月日
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set入所（院）年月日(FlexibleDate 入所（院）年月日) {
-        requireNonNull(入所（院）年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）年月日"));
-        entity.setNyushoYMD(入所（院）年月日);
+    public KyufujissekiKihonBuilder set入所_院_年月日(FlexibleDate 入所_院_年月日) {
+        requireNonNull(入所_院_年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）年月日")
+        );
+        entity.setNyushoYMD(入所_院_年月日
+        );
         return this;
     }
 
     /**
      * 退所（院）年月日を設定します。
      *
-     * @param 退所（院）年月日 退所（院）年月日
+     * @param 退所_院_年月日 退所（院）年月日
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set退所（院）年月日(FlexibleDate 退所（院）年月日) {
-        requireNonNull(退所（院）年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）年月日"));
-        entity.setTaishoYMD(退所（院）年月日);
+    public KyufujissekiKihonBuilder set退所_院_年月日(FlexibleDate 退所_院_年月日) {
+        requireNonNull(退所_院_年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）年月日")
+        );
+        entity.setTaishoYMD(退所_院_年月日);
         return this;
     }
 
     /**
      * 入所（院）実日数を設定します。
      *
-     * @param 入所（院）実日数 入所（院）実日数
+     * @param 入所_院_実日数 入所（院）実日数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set入所（院）実日数(Decimal 入所（院）実日数) {
-        requireNonNull(入所（院）実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）実日数"));
-        entity.setNyushoJitsunissu(入所（院）実日数);
+    public KyufujissekiKihonBuilder set入所_院_実日数(Decimal 入所_院_実日数) {
+        requireNonNull(入所_院_実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所（院）実日数"));
+        entity.setNyushoJitsunissu(入所_院_実日数);
         return this;
     }
 
@@ -494,12 +530,14 @@ public class KyufujissekiKihonBuilder {
     /**
      * 退所（院）後の状態コードを設定します。
      *
-     * @param 退所（院）後の状態コード 退所（院）後の状態コード
+     * @param 退所_院_後の状態コード 退所（院）後の状態コード
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set退所（院）後の状態コード(RString 退所（院）後の状態コード) {
-        requireNonNull(退所（院）後の状態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）後の状態コード"));
-        entity.setTaishogoJotaiCode(退所（院）後の状態コード);
+    public KyufujissekiKihonBuilder set退所_院_後の状態コード(RString 退所_院_後の状態コード) {
+        requireNonNull(退所_院_後の状態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("退所（院）後の状態コード")
+        );
+        entity.setTaishogoJotaiCode(退所_院_後の状態コード
+        );
         return this;
     }
 
@@ -552,578 +590,670 @@ public class KyufujissekiKihonBuilder {
     }
 
     /**
-     * 前・保険・サービス単位数を設定します。
+     * 前_保険_サービス単位数を設定します。
      *
-     * @param 前・保険・サービス単位数 前・保険・サービス単位数
+     * @param 前_保険_サービス単位数 前_保険_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・サービス単位数(int 前・保険・サービス単位数) {
-        requireNonNull(前・保険・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・サービス単位数"));
-        entity.setMaeHokenServiceTanisu(前・保険・サービス単位数);
+    public KyufujissekiKihonBuilder set前_保険_サービス単位数(Decimal 前_保険_サービス単位数) {
+        requireNonNull(前_保険_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_サービス単位数")
+        );
+        entity.setMaeHokenServiceTanisu(前_保険_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 前・保険・請求額を設定します。
+     * 前_保険_請求額を設定します。
      *
-     * @param 前・保険・請求額 前・保険・請求額
+     * @param 前_保険_請求額 前_保険_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・請求額(Decimal 前・保険・請求額) {
-        requireNonNull(前・保険・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・請求額"));
-        entity.setMaeHokenSeikyugaku(前・保険・請求額);
+    public KyufujissekiKihonBuilder set前_保険_請求額(Decimal 前_保険_請求額) {
+        requireNonNull(前_保険_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_請求額"));
+        entity.setMaeHokenSeikyugaku(前_保険_請求額);
         return this;
     }
 
     /**
-     * 前・保険・利用者負担額を設定します。
+     * 前_保険_利用者負担額を設定します。
      *
-     * @param 前・保険・利用者負担額 前・保険・利用者負担額
+     * @param 前_保険_利用者負担額 前_保険_利用者負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・利用者負担額(int 前・保険・利用者負担額) {
-        requireNonNull(前・保険・利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・利用者負担額"));
-        entity.setMaeHokenRiyoshaFutangaku(前・保険・利用者負担額);
+    public KyufujissekiKihonBuilder set前_保険_利用者負担額(Decimal 前_保険_利用者負担額) {
+        requireNonNull(前_保険_利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_利用者負担額")
+        );
+        entity.setMaeHokenRiyoshaFutangaku(前_保険_利用者負担額
+        );
         return this;
     }
 
     /**
-     * 前・保険・緊急時施設療養費請求額を設定します。
+     * 前_保険_緊急時施設療養費請求額を設定します。
      *
-     * @param 前・保険・緊急時施設療養費請求額 前・保険・緊急時施設療養費請求額
+     * @param 前_保険_緊急時施設療養費請求額 前_保険_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・緊急時施設療養費請求額(Decimal 前・保険・緊急時施設療養費請求額) {
-        requireNonNull(前・保険・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・緊急時施設療養費請求額"));
-        entity.setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(前・保険・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set前_保険_緊急時施設療養費請求額(Decimal 前_保険_緊急時施設療養費請求額) {
+        requireNonNull(前_保険_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_緊急時施設療養費請求額")
+        );
+        entity.setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(前_保険_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 前・保険・特定診療費請求額を設定します。
+     * 前_保険_特定診療費請求額を設定します。
      *
-     * @param 前・保険・特定診療費請求額 前・保険・特定診療費請求額
+     * @param 前_保険_特定診療費請求額 前_保険_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・特定診療費請求額(Decimal 前・保険・特定診療費請求額) {
-        requireNonNull(前・保険・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・特定診療費請求額"));
-        entity.setMaeHokenTokuteiShinryohiSeikyugaku(前・保険・特定診療費請求額);
+    public KyufujissekiKihonBuilder set前_保険_特定診療費請求額(Decimal 前_保険_特定診療費請求額) {
+        requireNonNull(前_保険_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_特定診療費請求額")
+        );
+        entity.setMaeHokenTokuteiShinryohiSeikyugaku(前_保険_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 前・保険・特定入所者介護サービス費等請求額を設定します。
+     * 前_保険_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 前・保険・特定入所者介護サービス費等請求額 前・保険・特定入所者介護サービス費等請求額
+     * @param 前_保険_特定入所者介護サービス費等請求額 前_保険_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・保険・特定入所者介護サービス費等請求額(int 前・保険・特定入所者介護サービス費等請求額) {
-        requireNonNull(前・保険・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・保険・特定入所者介護サービス費等請求額"));
-        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(前・保険・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set前_保険_特定入所者介護サービス費等請求額(Decimal 前_保険_特定入所者介護サービス費等請求額) {
+        requireNonNull(前_保険_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_保険_特定入所者介護サービス費等請求額")
+        );
+        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(前_保険_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費１・サービス単位数を設定します。
+     * 前_公費１_サービス単位数を設定します。
      *
-     * @param 前・公費１・サービス単位数 前・公費１・サービス単位数
+     * @param 前_公費１_サービス単位数 前_公費１_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・サービス単位数(int 前・公費１・サービス単位数) {
-        requireNonNull(前・公費１・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・サービス単位数"));
-        entity.setMaeKohi1ServiceTanisu(前・公費１・サービス単位数);
+    public KyufujissekiKihonBuilder set前_公費１_サービス単位数(Decimal 前_公費１_サービス単位数) {
+        requireNonNull(前_公費１_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_サービス単位数")
+        );
+        entity.setMaeKohi1ServiceTanisu(前_公費１_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 前・公費１・請求額を設定します。
+     * 前_公費１_請求額を設定します。
      *
-     * @param 前・公費１・請求額 前・公費１・請求額
+     * @param 前_公費１_請求額 前_公費１_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・請求額(int 前・公費１・請求額) {
-        requireNonNull(前・公費１・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・請求額"));
-        entity.setMaeKohi1Seikyugaku(前・公費１・請求額);
+    public KyufujissekiKihonBuilder set前_公費１_請求額(Decimal 前_公費１_請求額) {
+        requireNonNull(前_公費１_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_請求額")
+        );
+        entity.setMaeKohi1Seikyugaku(前_公費１_請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費１・本人負担額を設定します。
+     * 前_公費１_本人負担額を設定します。
      *
-     * @param 前・公費１・本人負担額 前・公費１・本人負担額
+     * @param 前_公費１_本人負担額 前_公費１_本人負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・本人負担額(int 前・公費１・本人負担額) {
-        requireNonNull(前・公費１・本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・本人負担額"));
-        entity.setMaeKohi1RiyoshaFutangaku(前・公費１・本人負担額);
+    public KyufujissekiKihonBuilder set前_公費１_本人負担額(Decimal 前_公費１_本人負担額) {
+        requireNonNull(前_公費１_本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_本人負担額")
+        );
+        entity.setMaeKohi1RiyoshaFutangaku(前_公費１_本人負担額
+        );
         return this;
     }
 
     /**
-     * 前・公費１・緊急時施設療養費請求額を設定します。
+     * 前_公費１_緊急時施設療養費請求額を設定します。
      *
-     * @param 前・公費１・緊急時施設療養費請求額 前・公費１・緊急時施設療養費請求額
+     * @param 前_公費１_緊急時施設療養費請求額 前_公費１_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・緊急時施設療養費請求額(int 前・公費１・緊急時施設療養費請求額) {
-        requireNonNull(前・公費１・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・緊急時施設療養費請求額"));
-        entity.setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(前・公費１・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set前_公費１_緊急時施設療養費請求額(Decimal 前_公費１_緊急時施設療養費請求額) {
+        requireNonNull(前_公費１_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_緊急時施設療養費請求額")
+        );
+        entity.setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(前_公費１_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費１・特定診療費請求額を設定します。
+     * 前_公費１_特定診療費請求額を設定します。
      *
-     * @param 前・公費１・特定診療費請求額 前・公費１・特定診療費請求額
+     * @param 前_公費１_特定診療費請求額 前_公費１_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・特定診療費請求額(int 前・公費１・特定診療費請求額) {
-        requireNonNull(前・公費１・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・特定診療費請求額"));
-        entity.setMaeKohi1TokuteiShinryohiSeikyugaku(前・公費１・特定診療費請求額);
+    public KyufujissekiKihonBuilder set前_公費１_特定診療費請求額(Decimal 前_公費１_特定診療費請求額) {
+        requireNonNull(前_公費１_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_特定診療費請求額")
+        );
+        entity.setMaeKohi1TokuteiShinryohiSeikyugaku(前_公費１_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費１・特定入所者介護サービス費等請求額を設定します。
+     * 前_公費１_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 前・公費１・特定入所者介護サービス費等請求額 前・公費１・特定入所者介護サービス費等請求額
+     * @param 前_公費１_特定入所者介護サービス費等請求額 前_公費１_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費１・特定入所者介護サービス費等請求額(int 前・公費１・特定入所者介護サービス費等請求額) {
-        requireNonNull(前・公費１・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費１・特定入所者介護サービス費等請求額"));
-        entity.setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(前・公費１・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set前_公費１_特定入所者介護サービス費等請求額(Decimal 前_公費１_特定入所者介護サービス費等請求額) {
+        requireNonNull(前_公費１_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費１_特定入所者介護サービス費等請求額")
+        );
+        entity.setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(前_公費１_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費２・サービス単位数を設定します。
+     * 前_公費２_サービス単位数を設定します。
      *
-     * @param 前・公費２・サービス単位数 前・公費２・サービス単位数
+     * @param 前_公費２_サービス単位数 前_公費２_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・サービス単位数(int 前・公費２・サービス単位数) {
-        requireNonNull(前・公費２・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・サービス単位数"));
-        entity.setMaeKohi2ServiceTanisu(前・公費２・サービス単位数);
+    public KyufujissekiKihonBuilder set前_公費２_サービス単位数(Decimal 前_公費２_サービス単位数) {
+        requireNonNull(前_公費２_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_サービス単位数")
+        );
+        entity.setMaeKohi2ServiceTanisu(前_公費２_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 前・公費２・請求額を設定します。
+     * 前_公費２_請求額を設定します。
      *
-     * @param 前・公費２・請求額 前・公費２・請求額
+     * @param 前_公費２_請求額 前_公費２_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・請求額(int 前・公費２・請求額) {
-        requireNonNull(前・公費２・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・請求額"));
-        entity.setMaeKohi2Seikyugaku(前・公費２・請求額);
+    public KyufujissekiKihonBuilder set前_公費２_請求額(Decimal 前_公費２_請求額) {
+        requireNonNull(前_公費２_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_請求額")
+        );
+        entity.setMaeKohi2Seikyugaku(前_公費２_請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費２・本人負担額を設定します。
+     * 前_公費２_本人負担額を設定します。
      *
-     * @param 前・公費２・本人負担額 前・公費２・本人負担額
+     * @param 前_公費２_本人負担額 前_公費２_本人負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・本人負担額(int 前・公費２・本人負担額) {
-        requireNonNull(前・公費２・本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・本人負担額"));
-        entity.setMaeKohi2RiyoshaFutangaku(前・公費２・本人負担額);
+    public KyufujissekiKihonBuilder set前_公費２_本人負担額(Decimal 前_公費２_本人負担額) {
+        requireNonNull(前_公費２_本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_本人負担額")
+        );
+        entity.setMaeKohi2RiyoshaFutangaku(前_公費２_本人負担額
+        );
         return this;
     }
 
     /**
-     * 前・公費２・緊急時施設療養費請求額を設定します。
+     * 前_公費２_緊急時施設療養費請求額を設定します。
      *
-     * @param 前・公費２・緊急時施設療養費請求額 前・公費２・緊急時施設療養費請求額
+     * @param 前_公費２_緊急時施設療養費請求額 前_公費２_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・緊急時施設療養費請求額(int 前・公費２・緊急時施設療養費請求額) {
-        requireNonNull(前・公費２・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・緊急時施設療養費請求額"));
-        entity.setMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(前・公費２・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set前_公費２_緊急時施設療養費請求額(Decimal 前_公費２_緊急時施設療養費請求額) {
+        requireNonNull(前_公費２_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_緊急時施設療養費請求額")
+        );
+        entity.setMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(前_公費２_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費２・特定診療費請求額を設定します。
+     * 前_公費２_特定診療費請求額を設定します。
      *
-     * @param 前・公費２・特定診療費請求額 前・公費２・特定診療費請求額
+     * @param 前_公費２_特定診療費請求額 前_公費２_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・特定診療費請求額(int 前・公費２・特定診療費請求額) {
-        requireNonNull(前・公費２・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・特定診療費請求額"));
-        entity.setMaeKohi2TokuteiShinryohiSeikyugaku(前・公費２・特定診療費請求額);
+    public KyufujissekiKihonBuilder set前_公費２_特定診療費請求額(Decimal 前_公費２_特定診療費請求額) {
+        requireNonNull(前_公費２_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_特定診療費請求額")
+        );
+        entity.setMaeKohi2TokuteiShinryohiSeikyugaku(前_公費２_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費２・特定入所者介護サービス費等請求額を設定します。
+     * 前_公費２_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 前・公費２・特定入所者介護サービス費等請求額 前・公費２・特定入所者介護サービス費等請求額
+     * @param 前_公費２_特定入所者介護サービス費等請求額 前_公費２_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費２・特定入所者介護サービス費等請求額(int 前・公費２・特定入所者介護サービス費等請求額) {
-        requireNonNull(前・公費２・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費２・特定入所者介護サービス費等請求額"));
-        entity.setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(前・公費２・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set前_公費２特定入所者介護サービス費等請求額(Decimal 前_公費２_特定入所者介護サービス費等請求額) {
+        requireNonNull(前_公費２_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費２_特定入所者介護サービス費等請求額")
+        );
+        entity.setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(前_公費２_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費３・サービス単位数を設定します。
+     * 前_公費３_サービス単位数を設定します。
      *
-     * @param 前・公費３・サービス単位数 前・公費３・サービス単位数
+     * @param 前_公費３_サービス単位数 前_公費３_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・サービス単位数(int 前・公費３・サービス単位数) {
-        requireNonNull(前・公費３・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・サービス単位数"));
-        entity.setMaeKohi3ServiceTanisu(前・公費３・サービス単位数);
+    public KyufujissekiKihonBuilder set前_公費３_サービス単位数(Decimal 前_公費３_サービス単位数) {
+        requireNonNull(前_公費３_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_サービス単位数")
+        );
+        entity.setMaeKohi3ServiceTanisu(前_公費３_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 前・公費３・請求額を設定します。
+     * 前_公費３_請求額を設定します。
      *
-     * @param 前・公費３・請求額 前・公費３・請求額
+     * @param 前_公費３_請求額 前_公費３_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・請求額(int 前・公費３・請求額) {
-        requireNonNull(前・公費３・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・請求額"));
-        entity.setMaeKohi3Seikyugaku(前・公費３・請求額);
+    public KyufujissekiKihonBuilder set前_公費３_請求額(Decimal 前_公費３_請求額) {
+        requireNonNull(前_公費３_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_請求額")
+        );
+        entity.setMaeKohi3Seikyugaku(前_公費３_請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費３・本人負担額を設定します。
+     * 前_公費３_本人負担額を設定します。
      *
-     * @param 前・公費３・本人負担額 前・公費３・本人負担額
+     * @param 前_公費３_本人負担額 前_公費３_本人負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・本人負担額(int 前・公費３・本人負担額) {
-        requireNonNull(前・公費３・本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・本人負担額"));
-        entity.setMaeKohi3RiyoshaFutangaku(前・公費３・本人負担額);
+    public KyufujissekiKihonBuilder set前_公費３_本人負担額(Decimal 前_公費３_本人負担額) {
+        requireNonNull(前_公費３_本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_本人負担額")
+        );
+        entity.setMaeKohi3RiyoshaFutangaku(前_公費３_本人負担額
+        );
         return this;
     }
 
     /**
-     * 前・公費３・緊急時施設療養費請求額を設定します。
+     * 前_公費３_緊急時施設療養費請求額を設定します。
      *
-     * @param 前・公費３・緊急時施設療養費請求額 前・公費３・緊急時施設療養費請求額
+     * @param 前_公費３_緊急時施設療養費請求額 前_公費３_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・緊急時施設療養費請求額(int 前・公費３・緊急時施設療養費請求額) {
-        requireNonNull(前・公費３・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・緊急時施設療養費請求額"));
-        entity.setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(前・公費３・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set前_公費３_緊急時施設療養費請求額(Decimal 前_公費３_緊急時施設療養費請求額) {
+        requireNonNull(前_公費３_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_緊急時施設療養費請求額")
+        );
+        entity.setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(前_公費３_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費３・特定診療費請求額を設定します。
+     * 前_公費３_特定診療費請求額を設定します。
      *
-     * @param 前・公費３・特定診療費請求額 前・公費３・特定診療費請求額
+     * @param 前_公費３_特定診療費請求額 前_公費３_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・特定診療費請求額(int 前・公費３・特定診療費請求額) {
-        requireNonNull(前・公費３・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・特定診療費請求額"));
-        entity.setMaeKohi3TokuteiShinryohiSeikyugaku(前・公費３・特定診療費請求額);
+    public KyufujissekiKihonBuilder set前_公費３_特定診療費請求額(Decimal 前_公費３_特定診療費請求額) {
+        requireNonNull(前_公費３_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_特定診療費請求額")
+        );
+        entity.setMaeKohi3TokuteiShinryohiSeikyugaku(前_公費３_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 前・公費３・特定入所者介護サービス費等請求額を設定します。
+     * 前_公費３_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 前・公費３・特定入所者介護サービス費等請求額 前・公費３・特定入所者介護サービス費等請求額
+     * @param 前_公費３_特定入所者介護サービス費等請求額 前_公費３_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set前・公費３・特定入所者介護サービス費等請求額(int 前・公費３・特定入所者介護サービス費等請求額) {
-        requireNonNull(前・公費３・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前・公費３・特定入所者介護サービス費等請求額"));
-        entity.setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(前・公費３・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set前_公費３_特定入所者介護サービス費等請求額(Decimal 前_公費３_特定入所者介護サービス費等請求額) {
+        requireNonNull(前_公費３_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("前_公費３_特定入所者介護サービス費等請求額")
+        );
+        entity.setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(前_公費３_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 後・保険・サービス単位数を設定します。
+     * 後_保険_サービス単位数を設定します。
      *
-     * @param 後・保険・サービス単位数 後・保険・サービス単位数
+     * @param 後_保険_サービス単位数 後_保険_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・保険・サービス単位数(int 後・保険・サービス単位数) {
-        requireNonNull(後・保険・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・サービス単位数"));
-        entity.setAtoHokenServiceTanisu(後・保険・サービス単位数);
+    public KyufujissekiKihonBuilder set後_保険_サービス単位数(Decimal 後_保険_サービス単位数) {
+        requireNonNull(後_保険_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_サービス単位数")
+        );
+        entity.setAtoHokenServiceTanisu(後_保険_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 後・保険・請求額を設定します。
+     * 後_保険_請求額を設定します。
      *
-     * @param 後・保険・請求額 後・保険・請求額
+     * @param 後_保険_請求額 後_保険_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・保険・請求額(Decimal 後・保険・請求額) {
-        requireNonNull(後・保険・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・請求額"));
-        entity.setAtoHokenSeikyugaku(後・保険・請求額);
+    public KyufujissekiKihonBuilder set後_保険_請求額(Decimal 後_保険_請求額) {
+        requireNonNull(後_保険_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_請求額")
+        );
+        entity.setAtoHokenSeikyugaku(後_保険_請求額
+        );
         return this;
     }
 
     /**
-     * 後・保険・利用者負担額を設定します。
+     * 後_保険_利用者負担額を設定します。
      *
-     * @param 後・保険・利用者負担額 後・保険・利用者負担額
+     * @param 後_保険_利用者負担額 後_保険_利用者負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・保険・利用者負担額(int 後・保険・利用者負担額) {
-        requireNonNull(後・保険・利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・利用者負担額"));
-        entity.setAtoHokenRiyoshaFutangaku(後・保険・利用者負担額);
+    public KyufujissekiKihonBuilder set後_保険_利用者負担額(Decimal 後_保険_利用者負担額) {
+        requireNonNull(後_保険_利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_利用者負担額")
+        );
+        entity.setAtoHokenRiyoshaFutangaku(後_保険_利用者負担額
+        );
         return this;
     }
 
     /**
-     * 後・緊急時施設療養費請求額を設定します。
+     * 後_緊急時施設療養費請求額を設定します。
      *
-     * @param 後・緊急時施設療養費請求額 後・緊急時施設療養費請求額
+     * @param 後_緊急時施設療養費請求額 後_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・緊急時施設療養費請求額(Decimal 後・緊急時施設療養費請求額) {
-        requireNonNull(後・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・緊急時施設療養費請求額"));
-        entity.setAtoHokenKinkyuShisetsuRyoyoSeikyugaku(後・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set後_緊急時施設療養費請求額(Decimal 後_緊急時施設療養費請求額) {
+        requireNonNull(後_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_緊急時施設療養費請求額")
+        );
+        entity.setAtoHokenKinkyuShisetsuRyoyoSeikyugaku(後_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 後・保険・特定診療費請求額を設定します。
+     * 後_保険_特定診療費請求額を設定します。
      *
-     * @param 後・保険・特定診療費請求額 後・保険・特定診療費請求額
+     * @param 後_保険_特定診療費請求額 後_保険_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・保険・特定診療費請求額(Decimal 後・保険・特定診療費請求額) {
-        requireNonNull(後・保険・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・特定診療費請求額"));
-        entity.setAtoHokenTokuteiShinryohiSeikyugaku(後・保険・特定診療費請求額);
+    public KyufujissekiKihonBuilder set後_保険_特定診療費請求額(Decimal 後_保険_特定診療費請求額) {
+        requireNonNull(後_保険_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_特定診療費請求額")
+        );
+        entity.setAtoHokenTokuteiShinryohiSeikyugaku(後_保険_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 後・保険・特定入所者介護サービス費等請求額を設定します。
+     * 後_保険_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 後・保険・特定入所者介護サービス費等請求額 後・保険・特定入所者介護サービス費等請求額
+     * @param 後_保険_特定入所者介護サービス費等請求額 後_保険_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・保険・特定入所者介護サービス費等請求額(int 後・保険・特定入所者介護サービス費等請求額) {
-        requireNonNull(後・保険・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・特定入所者介護サービス費等請求額"));
-        entity.setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(後・保険・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set後_保険_特定入所者介護サービス費等請求額(Decimal 後_保険_特定入所者介護サービス費等請求額) {
+        requireNonNull(後_保険_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_特定入所者介護サービス費等請求額")
+        );
+        entity.setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(後_保険_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費１・サービス単位数を設定します。
+     * 後_公費１_サービス単位数を設定します。
      *
-     * @param 後・公費１・サービス単位数 後・公費１・サービス単位数
+     * @param 後_公費１_サービス単位数 後_公費１_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・サービス単位数(int 後・公費１・サービス単位数) {
-        requireNonNull(後・公費１・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・サービス単位数"));
-        entity.setAtoKohi1ServiceTanisu(後・公費１・サービス単位数);
+    public KyufujissekiKihonBuilder set後_公費１_サービス単位数(Decimal 後_公費１_サービス単位数) {
+        requireNonNull(後_公費１_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_サービス単位数")
+        );
+        entity.setAtoKohi1ServiceTanisu(後_公費１_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 後・公費１・請求額を設定します。
+     * 後_公費１_請求額を設定します。
      *
-     * @param 後・公費１・請求額 後・公費１・請求額
+     * @param 後_公費１_請求額 後_公費１_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・請求額(int 後・公費１・請求額) {
-        requireNonNull(後・公費１・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・請求額"));
-        entity.setAtoKohi1Seikyugaku(後・公費１・請求額);
+    public KyufujissekiKihonBuilder set後_公費１_請求額(Decimal 後_公費１_請求額) {
+        requireNonNull(後_公費１_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_請求額")
+        );
+        entity.setAtoKohi1Seikyugaku(後_公費１_請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費１・本人負担額を設定します。
+     * 後_公費１_本人負担額を設定します。
      *
-     * @param 後・公費１・本人負担額 後・公費１・本人負担額
+     * @param 後_公費１_本人負担額 後_公費１_本人負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・本人負担額(int 後・公費１・本人負担額) {
-        requireNonNull(後・公費１・本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・本人負担額"));
-        entity.setAtoKohi1RiyoshaFutangaku(後・公費１・本人負担額);
+    public KyufujissekiKihonBuilder set後_公費１_本人負担額(Decimal 後_公費１_本人負担額) {
+        requireNonNull(後_公費１_本人負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_本人負担額")
+        );
+        entity.setAtoKohi1RiyoshaFutangaku(後_公費１_本人負担額
+        );
         return this;
     }
 
     /**
-     * 後・公費１・緊急時施設療養費請求額を設定します。
+     * 後_公費１_緊急時施設療養費請求額を設定します。
      *
-     * @param 後・公費１・緊急時施設療養費請求額 後・公費１・緊急時施設療養費請求額
+     * @param 後_公費１_緊急時施設療養費請求額 後_公費１_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・緊急時施設療養費請求額(int 後・公費１・緊急時施設療養費請求額) {
-        requireNonNull(後・公費１・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・緊急時施設療養費請求額"));
-        entity.setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(後・公費１・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set後_公費１_緊急時施設療養費請求額(Decimal 後_公費１_緊急時施設療養費請求額) {
+        requireNonNull(後_公費１_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_緊急時施設療養費請求額")
+        );
+        entity.setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(後_公費１_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費１・特定診療費請求額を設定します。
+     * 後_公費１_特定診療費請求額を設定します。
      *
-     * @param 後・公費１・特定診療費請求額 後・公費１・特定診療費請求額
+     * @param 後_公費１_特定診療費請求額 後_公費１_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・特定診療費請求額(int 後・公費１・特定診療費請求額) {
-        requireNonNull(後・公費１・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・特定診療費請求額"));
-        entity.setAtoKohi1TokuteiShinryohiSeikyugaku(後・公費１・特定診療費請求額);
+    public KyufujissekiKihonBuilder set後_公費１_特定診療費請求額(Decimal 後_公費１_特定診療費請求額) {
+        requireNonNull(後_公費１_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_特定診療費請求額")
+        );
+        entity.setAtoKohi1TokuteiShinryohiSeikyugaku(後_公費１_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費１・特定入所者介護サービス費等請求額を設定します。
+     * 後_公費１_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 後・公費１・特定入所者介護サービス費等請求額 後・公費１・特定入所者介護サービス費等請求額
+     * @param 後_公費１_特定入所者介護サービス費等請求額 後_公費１_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費１・特定入所者介護サービス費等請求額(int 後・公費１・特定入所者介護サービス費等請求額) {
-        requireNonNull(後・公費１・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・特定入所者介護サービス費等請求額"));
-        entity.setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(後・公費１・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set後_公費１_特定入所者介護サービス費等請求額(Decimal 後_公費１_特定入所者介護サービス費等請求額) {
+        requireNonNull(後_公費１_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_特定入所者介護サービス費等請求額")
+        );
+        entity.setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(後_公費１_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費２・サービス単位数を設定します。
+     * 後_公費２_サービス単位数を設定します。
      *
-     * @param 後・公費２・サービス単位数 後・公費２・サービス単位数
+     * @param 後_公費２_サービス単位数 後_公費２_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・サービス単位数(int 後・公費２・サービス単位数) {
-        requireNonNull(後・公費２・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・サービス単位数"));
-        entity.setAtoKohi2ServiceTanisu(後・公費２・サービス単位数);
+    public KyufujissekiKihonBuilder set後_公費２_サービス単位数(Decimal 後_公費２_サービス単位数) {
+        requireNonNull(後_公費２_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_サービス単位数")
+        );
+        entity.setAtoKohi2ServiceTanisu(後_公費２_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 後・公費２・請求額を設定します。
+     * 後_公費２_請求額を設定します。
      *
-     * @param 後・公費２・請求額 後・公費２・請求額
+     * @param 後_公費２_請求額 後_公費２_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・請求額(int 後・公費２・請求額) {
-        requireNonNull(後・公費２・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・請求額"));
-        entity.setAtoKohi2Seikyugaku(後・公費２・請求額);
+    public KyufujissekiKihonBuilder set後_公費２_請求額(Decimal 後_公費２_請求額) {
+        requireNonNull(後_公費２_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_請求額")
+        );
+        entity.setAtoKohi2Seikyugaku(後_公費２_請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費２・利用者負担額を設定します。
+     * 後_公費２_利用者負担額を設定します。
      *
-     * @param 後・公費２・利用者負担額 後・公費２・利用者負担額
+     * @param 後_公費２_利用者負担額 後_公費２_利用者負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・利用者負担額(int 後・公費２・利用者負担額) {
-        requireNonNull(後・公費２・利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・利用者負担額"));
-        entity.setAtoKohi2RiyoshaFutangaku(後・公費２・利用者負担額);
+    public KyufujissekiKihonBuilder set後_公費２_利用者負担額(Decimal 後_公費２_利用者負担額) {
+        requireNonNull(後_公費２_利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_利用者負担額")
+        );
+        entity.setAtoKohi2RiyoshaFutangaku(後_公費２_利用者負担額
+        );
         return this;
     }
 
     /**
-     * 後・公費２・緊急時施設療養費請求額を設定します。
+     * 後_公費２_緊急時施設療養費請求額を設定します。
      *
-     * @param 後・公費２・緊急時施設療養費請求額 後・公費２・緊急時施設療養費請求額
+     * @param 後_公費２_緊急時施設療養費請求額 後_公費２_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・緊急時施設療養費請求額(int 後・公費２・緊急時施設療養費請求額) {
-        requireNonNull(後・公費２・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・緊急時施設療養費請求額"));
-        entity.setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(後・公費２・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set後_公費２_緊急時施設療養費請求額(Decimal 後_公費２_緊急時施設療養費請求額) {
+        requireNonNull(後_公費２_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_緊急時施設療養費請求額")
+        );
+        entity.setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(後_公費２_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費２・特定診療費請求額を設定します。
+     * 後_公費２_特定診療費請求額を設定します。
      *
-     * @param 後・公費２・特定診療費請求額 後・公費２・特定診療費請求額
+     * @param 後_公費２_特定診療費請求額 後_公費２_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・特定診療費請求額(int 後・公費２・特定診療費請求額) {
-        requireNonNull(後・公費２・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・特定診療費請求額"));
-        entity.setAtoKohi2TokuteiShinryohiSeikyugaku(後・公費２・特定診療費請求額);
+    public KyufujissekiKihonBuilder set後_公費２_特定診療費請求額(Decimal 後_公費２_特定診療費請求額) {
+        requireNonNull(後_公費２_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_特定診療費請求額")
+        );
+        entity.setAtoKohi2TokuteiShinryohiSeikyugaku(後_公費２_特定診療費請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費２・特定入所者介護サービス費等請求額を設定します。
+     * 後_公費２_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 後・公費２・特定入所者介護サービス費等請求額 後・公費２・特定入所者介護サービス費等請求額
+     * @param 後_公費２_特定入所者介護サービス費等請求額 後_公費２_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費２・特定入所者介護サービス費等請求額(int 後・公費２・特定入所者介護サービス費等請求額) {
-        requireNonNull(後・公費２・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・特定入所者介護サービス費等請求額"));
-        entity.setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(後・公費２・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set後_公費２_特定入所者介護サービス費等請求額(Decimal 後_公費２_特定入所者介護サービス費等請求額) {
+        requireNonNull(後_公費２_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_特定入所者介護サービス費等請求額")
+        );
+        entity.setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(後_公費２_特定入所者介護サービス費等請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費３・サービス単位数を設定します。
+     * 後_公費３_サービス単位数を設定します。
      *
-     * @param 後・公費３・サービス単位数 後・公費３・サービス単位数
+     * @param 後_公費３_サービス単位数 後_公費３_サービス単位数
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・サービス単位数(int 後・公費３・サービス単位数) {
-        requireNonNull(後・公費３・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・サービス単位数"));
-        entity.setAtoKohi3ServiceTanisu(後・公費３・サービス単位数);
+    public KyufujissekiKihonBuilder set後_公費３_サービス単位数(Decimal 後_公費３_サービス単位数) {
+        requireNonNull(後_公費３_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_サービス単位数")
+        );
+        entity.setAtoKohi3ServiceTanisu(後_公費３_サービス単位数
+        );
         return this;
     }
 
     /**
-     * 後・公費３・請求額を設定します。
+     * 後_公費３_請求額を設定します。
      *
-     * @param 後・公費３・請求額 後・公費３・請求額
+     * @param 後_公費３_請求額 後_公費３_請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・請求額(int 後・公費３・請求額) {
-        requireNonNull(後・公費３・請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・請求額"));
-        entity.setAtoKohi3Seikyugaku(後・公費３・請求額);
+    public KyufujissekiKihonBuilder set後_公費３_請求額(Decimal 後_公費３_請求額) {
+        requireNonNull(後_公費３_請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_請求額")
+        );
+        entity.setAtoKohi3Seikyugaku(後_公費３_請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費３・利用者負担額を設定します。
+     * 後_公費３_利用者負担額を設定します。
      *
-     * @param 後・公費３・利用者負担額 後・公費３・利用者負担額
+     * @param 後_公費３_利用者負担額 後_公費３_利用者負担額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・利用者負担額(int 後・公費３・利用者負担額) {
-        requireNonNull(後・公費３・利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・利用者負担額"));
-        entity.setAtoKohi3RiyoshaFutangaku(後・公費３・利用者負担額);
+    public KyufujissekiKihonBuilder set後_公費３_利用者負担額(Decimal 後_公費３_利用者負担額) {
+        requireNonNull(後_公費３_利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_利用者負担額")
+        );
+        entity.setAtoKohi3RiyoshaFutangaku(後_公費３_利用者負担額
+        );
         return this;
     }
 
     /**
-     * 後・公費３・緊急時施設療養費請求額を設定します。
+     * 後_公費３_緊急時施設療養費請求額を設定します。
      *
-     * @param 後・公費３・緊急時施設療養費請求額 後・公費３・緊急時施設療養費請求額
+     * @param 後_公費３_緊急時施設療養費請求額 後_公費３_緊急時施設療養費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・緊急時施設療養費請求額(int 後・公費３・緊急時施設療養費請求額) {
-        requireNonNull(後・公費３・緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・緊急時施設療養費請求額"));
-        entity.setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(後・公費３・緊急時施設療養費請求額);
+    public KyufujissekiKihonBuilder set後_公費３_緊急時施設療養費請求額(Decimal 後_公費３_緊急時施設療養費請求額) {
+        requireNonNull(後_公費３_緊急時施設療養費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_緊急時施設療養費請求額")
+        );
+        entity.setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(後_公費３_緊急時施設療養費請求額
+        );
         return this;
     }
 
     /**
-     * 後・公費３・特定診療費請求額を設定します。
+     * 後_公費３_特定診療費請求額を設定します。
      *
-     * @param 後・公費３・特定診療費請求額 後・公費３・特定診療費請求額
+     * @param 後_公費３_特定診療費請求額 後_公費３_特定診療費請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・特定診療費請求額(int 後・公費３・特定診療費請求額) {
-        requireNonNull(後・公費３・特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・特定診療費請求額"));
-        entity.setAtoKohi3TokuteiShinryohiSeikyugaku(後・公費３・特定診療費請求額);
+    public KyufujissekiKihonBuilder set後_公費３_特定診療費請求額(Decimal 後_公費３_特定診療費請求額) {
+        requireNonNull(後_公費３_特定診療費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_特定診療費請求額")
+        );
+        entity.setAtoKohi3TokuteiShinryohiSeikyugaku(後_公費３_特定診療費請求額);
         return this;
     }
 
     /**
-     * 後・公費３・特定入所者介護サービス費等請求額を設定します。
+     * 後_公費３_特定入所者介護サービス費等請求額を設定します。
      *
-     * @param 後・公費３・特定入所者介護サービス費等請求額 後・公費３・特定入所者介護サービス費等請求額
+     * @param 後_公費３_特定入所者介護サービス費等請求額 後_公費３_特定入所者介護サービス費等請求額
      * @return {@link KyufujissekiKihonBuilder}
      */
-    public KyufujissekiKihonBuilder set後・公費３・特定入所者介護サービス費等請求額(int 後・公費３・特定入所者介護サービス費等請求額) {
-        requireNonNull(後・公費３・特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・特定入所者介護サービス費等請求額"));
-        entity.setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(後・公費３・特定入所者介護サービス費等請求額);
+    public KyufujissekiKihonBuilder set後_公費３_特定入所者介護サービス費等請求額(Decimal 後_公費３_特定入所者介護サービス費等請求額) {
+        requireNonNull(後_公費３_特定入所者介護サービス費等請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_特定入所者介護サービス費等請求額")
+        );
+        entity.setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(後_公費３_特定入所者介護サービス費等請求額);
         return this;
     }
 

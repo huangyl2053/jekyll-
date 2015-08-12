@@ -6,6 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -32,11 +37,11 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuIdentifier implements Serializable
      * @param 履歴番号 履歴番号
      */
     public KyodoShoriyoJukyushaIdoKogakuSofuIdentifier(FlexibleDate 異動年月日,
-RString 異動区分コード,
-RString 受給者異動事由,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            RString 異動区分コード,
+            RString 受給者異動事由,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         this.異動年月日 = 異動年月日;
         this.異動区分コード = 異動区分コード;
         this.受給者異動事由 = 受給者異動事由;

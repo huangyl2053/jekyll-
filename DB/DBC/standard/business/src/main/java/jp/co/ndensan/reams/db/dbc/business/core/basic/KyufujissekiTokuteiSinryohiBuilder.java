@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiTokuteiSinryohi}の編集を行うビルダークラスです。
@@ -41,7 +50,7 @@ public class KyufujissekiTokuteiSinryohiBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiTokuteiSinryohiBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +62,7 @@ public class KyufujissekiTokuteiSinryohiBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiTokuteiSinryohiBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -156,242 +165,242 @@ public class KyufujissekiTokuteiSinryohiBuilder {
     }
 
     /**
-     * 保険・指導管理料等を設定します。
+     * 保険_指導管理料等を設定します。
      *
-     * @param 保険・指導管理料等 保険・指導管理料等
+     * @param 保険_指導管理料等 保険_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set保険・指導管理料等(int 保険・指導管理料等) {
-        requireNonNull(保険・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("保険・指導管理料等"));
-        entity.setHokenShidoKanriryo(保険・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set保険_指導管理料等(int 保険_指導管理料等) {
+        requireNonNull(保険_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_指導管理料等"));
+        entity.setHokenShidoKanriryo(保険_指導管理料等);
         return this;
     }
 
     /**
-     * 保険・単純エックス線を設定します。
+     * 保険_単純エックス線を設定します。
      *
-     * @param 保険・単純エックス線 保険・単純エックス線
+     * @param 保険_単純エックス線 保険_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set保険・単純エックス線(int 保険・単純エックス線) {
-        requireNonNull(保険・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("保険・単純エックス線"));
-        entity.setHokenTanjunXsen(保険・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set保険_単純エックス線(int 保険_単純エックス線) {
+        requireNonNull(保険_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_単純エックス線"));
+        entity.setHokenTanjunXsen(保険_単純エックス線);
         return this;
     }
 
     /**
-     * 保険・リハビリテーションを設定します。
+     * 保険_リハビリテーションを設定します。
      *
-     * @param 保険・リハビリテーション 保険・リハビリテーション
+     * @param 保険_リハビリテーション 保険_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set保険・リハビリテーション(int 保険・リハビリテーション) {
-        requireNonNull(保険・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("保険・リハビリテーション"));
-        entity.setHokenRehabilitation(保険・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set保険_リハビリテーション(int 保険_リハビリテーション) {
+        requireNonNull(保険_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_リハビリテーション"));
+        entity.setHokenRehabilitation(保険_リハビリテーション);
         return this;
     }
 
     /**
-     * 保険・精神科専門療法を設定します。
+     * 保険_精神科専門療法を設定します。
      *
-     * @param 保険・精神科専門療法 保険・精神科専門療法
+     * @param 保険_精神科専門療法 保険_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set保険・精神科専門療法(int 保険・精神科専門療法) {
-        requireNonNull(保険・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("保険・精神科専門療法"));
-        entity.setHokenSeishinkaSemmonRyoho(保険・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set保険_精神科専門療法(int 保険_精神科専門療法) {
+        requireNonNull(保険_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_精神科専門療法"));
+        entity.setHokenSeishinkaSemmonRyoho(保険_精神科専門療法);
         return this;
     }
 
     /**
-     * 保険・合計単位数を設定します。
+     * 保険_合計単位数を設定します。
      *
-     * @param 保険・合計単位数 保険・合計単位数
+     * @param 保険_合計単位数 保険_合計単位数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set保険・合計単位数(int 保険・合計単位数) {
-        requireNonNull(保険・合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("保険・合計単位数"));
-        entity.setHokenTotalTanisu(保険・合計単位数);
+    public KyufujissekiTokuteiSinryohiBuilder set保険_合計単位数(int 保険_合計単位数) {
+        requireNonNull(保険_合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_合計単位数"));
+        entity.setHokenTotalTanisu(保険_合計単位数);
         return this;
     }
 
     /**
-     * 公費１・指導管理料等を設定します。
+     * 公費１_指導管理料等を設定します。
      *
-     * @param 公費１・指導管理料等 公費１・指導管理料等
+     * @param 公費１_指導管理料等 公費１_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費１・指導管理料等(int 公費１・指導管理料等) {
-        requireNonNull(公費１・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・指導管理料等"));
-        entity.setKohi1ShidoKanriryo(公費１・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set公費１_指導管理料等(int 公費１_指導管理料等) {
+        requireNonNull(公費１_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_指導管理料等"));
+        entity.setKohi1ShidoKanriryo(公費１_指導管理料等);
         return this;
     }
 
     /**
-     * 公費１・単純エックス線を設定します。
+     * 公費１_単純エックス線を設定します。
      *
-     * @param 公費１・単純エックス線 公費１・単純エックス線
+     * @param 公費１_単純エックス線 公費１_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費１・単純エックス線(int 公費１・単純エックス線) {
-        requireNonNull(公費１・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・単純エックス線"));
-        entity.setKohi1TanjunXsen(公費１・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set公費１_単純エックス線(int 公費１_単純エックス線) {
+        requireNonNull(公費１_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_単純エックス線"));
+        entity.setKohi1TanjunXsen(公費１_単純エックス線);
         return this;
     }
 
     /**
-     * 公費１・リハビリテーションを設定します。
+     * 公費１_リハビリテーションを設定します。
      *
-     * @param 公費１・リハビリテーション 公費１・リハビリテーション
+     * @param 公費１_リハビリテーション 公費１_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費１・リハビリテーション(int 公費１・リハビリテーション) {
-        requireNonNull(公費１・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・リハビリテーション"));
-        entity.setKohi1Rehabilitation(公費１・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set公費１_リハビリテーション(int 公費１_リハビリテーション) {
+        requireNonNull(公費１_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_リハビリテーション"));
+        entity.setKohi1Rehabilitation(公費１_リハビリテーション);
         return this;
     }
 
     /**
-     * 公費１・精神科専門療法を設定します。
+     * 公費１_精神科専門療法を設定します。
      *
-     * @param 公費１・精神科専門療法 公費１・精神科専門療法
+     * @param 公費１_精神科専門療法 公費１_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費１・精神科専門療法(int 公費１・精神科専門療法) {
-        requireNonNull(公費１・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・精神科専門療法"));
-        entity.setKohi1SeishinkaSemmonRyoho(公費１・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set公費１_精神科専門療法(int 公費１_精神科専門療法) {
+        requireNonNull(公費１_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_精神科専門療法"));
+        entity.setKohi1SeishinkaSemmonRyoho(公費１_精神科専門療法);
         return this;
     }
 
     /**
-     * 公費１・合計単位数を設定します。
+     * 公費１_合計単位数を設定します。
      *
-     * @param 公費１・合計単位数 公費１・合計単位数
+     * @param 公費１_合計単位数 公費１_合計単位数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費１・合計単位数(int 公費１・合計単位数) {
-        requireNonNull(公費１・合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１・合計単位数"));
-        entity.setKohi1TotalTanisu(公費１・合計単位数);
+    public KyufujissekiTokuteiSinryohiBuilder set公費１_合計単位数(int 公費１_合計単位数) {
+        requireNonNull(公費１_合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_合計単位数"));
+        entity.setKohi1TotalTanisu(公費１_合計単位数);
         return this;
     }
 
     /**
-     * 公費２・指導管理料等を設定します。
+     * 公費２_指導管理料等を設定します。
      *
-     * @param 公費２・指導管理料等 公費２・指導管理料等
+     * @param 公費２_指導管理料等 公費２_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費２・指導管理料等(int 公費２・指導管理料等) {
-        requireNonNull(公費２・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・指導管理料等"));
-        entity.setKohi2ShidoKanriryo(公費２・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set公費２_指導管理料等(int 公費２_指導管理料等) {
+        requireNonNull(公費２_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_指導管理料等"));
+        entity.setKohi2ShidoKanriryo(公費２_指導管理料等);
         return this;
     }
 
     /**
-     * 公費２・単純エックス線を設定します。
+     * 公費２_単純エックス線を設定します。
      *
-     * @param 公費２・単純エックス線 公費２・単純エックス線
+     * @param 公費２_単純エックス線 公費２_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費２・単純エックス線(int 公費２・単純エックス線) {
-        requireNonNull(公費２・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・単純エックス線"));
-        entity.setKohi2TanjunXsen(公費２・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set公費２_単純エックス線(int 公費２_単純エックス線) {
+        requireNonNull(公費２_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_単純エックス線"));
+        entity.setKohi2TanjunXsen(公費２_単純エックス線);
         return this;
     }
 
     /**
-     * 公費２・リハビリテーションを設定します。
+     * 公費２_リハビリテーションを設定します。
      *
-     * @param 公費２・リハビリテーション 公費２・リハビリテーション
+     * @param 公費２_リハビリテーション 公費２_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費２・リハビリテーション(int 公費２・リハビリテーション) {
-        requireNonNull(公費２・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・リハビリテーション"));
-        entity.setKohi2Rehabilitation(公費２・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set公費２_リハビリテーション(int 公費２_リハビリテーション) {
+        requireNonNull(公費２_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_リハビリテーション"));
+        entity.setKohi2Rehabilitation(公費２_リハビリテーション);
         return this;
     }
 
     /**
-     * 公費２・精神科専門療法を設定します。
+     * 公費２_精神科専門療法を設定します。
      *
-     * @param 公費２・精神科専門療法 公費２・精神科専門療法
+     * @param 公費２_精神科専門療法 公費２_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費２・精神科専門療法(int 公費２・精神科専門療法) {
-        requireNonNull(公費２・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・精神科専門療法"));
-        entity.setKohi2SeishinkaSemmonRyoho(公費２・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set公費２_精神科専門療法(int 公費２_精神科専門療法) {
+        requireNonNull(公費２_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_精神科専門療法"));
+        entity.setKohi2SeishinkaSemmonRyoho(公費２_精神科専門療法);
         return this;
     }
 
     /**
-     * 公費２・合計単位数を設定します。
+     * 公費２_合計単位数を設定します。
      *
-     * @param 公費２・合計単位数 公費２・合計単位数
+     * @param 公費２_合計単位数 公費２_合計単位数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費２・合計単位数(int 公費２・合計単位数) {
-        requireNonNull(公費２・合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２・合計単位数"));
-        entity.setKohi2TotalTanisu(公費２・合計単位数);
+    public KyufujissekiTokuteiSinryohiBuilder set公費２_合計単位数(int 公費２_合計単位数) {
+        requireNonNull(公費２_合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_合計単位数"));
+        entity.setKohi2TotalTanisu(公費２_合計単位数);
         return this;
     }
 
     /**
-     * 公費３・指導管理料等を設定します。
+     * 公費３_指導管理料等を設定します。
      *
-     * @param 公費３・指導管理料等 公費３・指導管理料等
+     * @param 公費３_指導管理料等 公費３_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費３・指導管理料等(int 公費３・指導管理料等) {
-        requireNonNull(公費３・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・指導管理料等"));
-        entity.setKohi3ShidoKanriryo(公費３・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set公費３_指導管理料等(int 公費３_指導管理料等) {
+        requireNonNull(公費３_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_指導管理料等"));
+        entity.setKohi3ShidoKanriryo(公費３_指導管理料等);
         return this;
     }
 
     /**
-     * 公費３・単純エックス線を設定します。
+     * 公費３_単純エックス線を設定します。
      *
-     * @param 公費３・単純エックス線 公費３・単純エックス線
+     * @param 公費３_単純エックス線 公費３_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費３・単純エックス線(int 公費３・単純エックス線) {
-        requireNonNull(公費３・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・単純エックス線"));
-        entity.setKohi3TanjunXsen(公費３・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set公費３_単純エックス線(int 公費３_単純エックス線) {
+        requireNonNull(公費３_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_単純エックス線"));
+        entity.setKohi3TanjunXsen(公費３_単純エックス線);
         return this;
     }
 
     /**
-     * 公費３・リハビリテーションを設定します。
+     * 公費３_リハビリテーションを設定します。
      *
-     * @param 公費３・リハビリテーション 公費３・リハビリテーション
+     * @param 公費３_リハビリテーション 公費３_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費３・リハビリテーション(int 公費３・リハビリテーション) {
-        requireNonNull(公費３・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・リハビリテーション"));
-        entity.setKohi3Rehabilitation(公費３・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set公費３_リハビリテーション(int 公費３_リハビリテーション) {
+        requireNonNull(公費３_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_リハビリテーション"));
+        entity.setKohi3Rehabilitation(公費３_リハビリテーション);
         return this;
     }
 
     /**
-     * 公費３・精神科専門療法を設定します。
+     * 公費３_精神科専門療法を設定します。
      *
-     * @param 公費３・精神科専門療法 公費３・精神科専門療法
+     * @param 公費３_精神科専門療法 公費３_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費３・精神科専門療法(int 公費３・精神科専門療法) {
-        requireNonNull(公費３・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・精神科専門療法"));
-        entity.setKohi3SeishinkaSemmonRyoho(公費３・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set公費３_精神科専門療法(int 公費３_精神科専門療法) {
+        requireNonNull(公費３_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_精神科専門療法"));
+        entity.setKohi3SeishinkaSemmonRyoho(公費３_精神科専門療法);
         return this;
     }
 
     /**
-     * 公費３・合計単位数を設定します。
+     * 公費３_合計単位数を設定します。
      *
-     * @param 公費３・合計単位数 公費３・合計単位数
+     * @param 公費３_合計単位数 公費３_合計単位数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set公費３・合計単位数(int 公費３・合計単位数) {
-        requireNonNull(公費３・合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３・合計単位数"));
-        entity.setKohi3TotalTanisu(公費３・合計単位数);
+    public KyufujissekiTokuteiSinryohiBuilder set公費３_合計単位数(int 公費３_合計単位数) {
+        requireNonNull(公費３_合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_合計単位数"));
+        entity.setKohi3TotalTanisu(公費３_合計単位数);
         return this;
     }
 
@@ -636,194 +645,194 @@ public class KyufujissekiTokuteiSinryohiBuilder {
     }
 
     /**
-     * 後・保険・指導管理料等を設定します。
+     * 後_保険_指導管理料等を設定します。
      *
-     * @param 後・保険・指導管理料等 後・保険・指導管理料等
+     * @param 後_保険_指導管理料等 後_保険_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・保険・指導管理料等(int 後・保険・指導管理料等) {
-        requireNonNull(後・保険・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・指導管理料等"));
-        entity.setAtoHokenShidoKanriryo(後・保険・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set後_保険_指導管理料等(int 後_保険_指導管理料等) {
+        requireNonNull(後_保険_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_指導管理料等"));
+        entity.setAtoHokenShidoKanriryo(後_保険_指導管理料等);
         return this;
     }
 
     /**
-     * 後・保険・単純エックス線を設定します。
+     * 後_保険_単純エックス線を設定します。
      *
-     * @param 後・保険・単純エックス線 後・保険・単純エックス線
+     * @param 後_保険_単純エックス線 後_保険_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・保険・単純エックス線(int 後・保険・単純エックス線) {
-        requireNonNull(後・保険・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・単純エックス線"));
-        entity.setAtoHokenTanjunXsen(後・保険・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set後_保険_単純エックス線(int 後_保険_単純エックス線) {
+        requireNonNull(後_保険_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_単純エックス線"));
+        entity.setAtoHokenTanjunXsen(後_保険_単純エックス線);
         return this;
     }
 
     /**
-     * 後・保険・リハビリテーションを設定します。
+     * 後_保険_リハビリテーションを設定します。
      *
-     * @param 後・保険・リハビリテーション 後・保険・リハビリテーション
+     * @param 後_保険_リハビリテーション 後_保険_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・保険・リハビリテーション(int 後・保険・リハビリテーション) {
-        requireNonNull(後・保険・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・リハビリテーション"));
-        entity.setAtoHokenRehabilitation(後・保険・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set後_保険_リハビリテーション(int 後_保険_リハビリテーション) {
+        requireNonNull(後_保険_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_リハビリテーション"));
+        entity.setAtoHokenRehabilitation(後_保険_リハビリテーション);
         return this;
     }
 
     /**
-     * 後・保険・精神科専門療法を設定します。
+     * 後_保険_精神科専門療法を設定します。
      *
-     * @param 後・保険・精神科専門療法 後・保険・精神科専門療法
+     * @param 後_保険_精神科専門療法 後_保険_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・保険・精神科専門療法(int 後・保険・精神科専門療法) {
-        requireNonNull(後・保険・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後・保険・精神科専門療法"));
-        entity.setAtoHokenSeishinkaSemmonRyoho(後・保険・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set後_保険_精神科専門療法(int 後_保険_精神科専門療法) {
+        requireNonNull(後_保険_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_精神科専門療法"));
+        entity.setAtoHokenSeishinkaSemmonRyoho(後_保険_精神科専門療法);
         return this;
     }
 
     /**
-     * 後・公費１・指導管理料等を設定します。
+     * 後_公費１_指導管理料等を設定します。
      *
-     * @param 後・公費１・指導管理料等 後・公費１・指導管理料等
+     * @param 後_公費１_指導管理料等 後_公費１_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費１・指導管理料等(int 後・公費１・指導管理料等) {
-        requireNonNull(後・公費１・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・指導管理料等"));
-        entity.setAtoKohi1ShidoKanriryo(後・公費１・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費１_指導管理料等(int 後_公費１_指導管理料等) {
+        requireNonNull(後_公費１_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_指導管理料等"));
+        entity.setAtoKohi1ShidoKanriryo(後_公費１_指導管理料等);
         return this;
     }
 
     /**
-     * 後・公費１・単純エックス線を設定します。
+     * 後_公費１_単純エックス線を設定します。
      *
-     * @param 後・公費１・単純エックス線 後・公費１・単純エックス線
+     * @param 後_公費１_単純エックス線 後_公費１_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費１・単純エックス線(int 後・公費１・単純エックス線) {
-        requireNonNull(後・公費１・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・単純エックス線"));
-        entity.setAtoKohi1TanjunXsen(後・公費１・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費１_単純エックス線(int 後_公費１_単純エックス線) {
+        requireNonNull(後_公費１_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_単純エックス線"));
+        entity.setAtoKohi1TanjunXsen(後_公費１_単純エックス線);
         return this;
     }
 
     /**
-     * 後・公費１・リハビリテーションを設定します。
+     * 後_公費１_リハビリテーションを設定します。
      *
-     * @param 後・公費１・リハビリテーション 後・公費１・リハビリテーション
+     * @param 後_公費１_リハビリテーション 後_公費１_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費１・リハビリテーション(int 後・公費１・リハビリテーション) {
-        requireNonNull(後・公費１・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・リハビリテーション"));
-        entity.setAtoKohi1Rehabilitation(後・公費１・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費１_リハビリテーション(int 後_公費１_リハビリテーション) {
+        requireNonNull(後_公費１_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_リハビリテーション"));
+        entity.setAtoKohi1Rehabilitation(後_公費１_リハビリテーション);
         return this;
     }
 
     /**
-     * 後・公費１・精神科専門療法を設定します。
+     * 後_公費１_精神科専門療法を設定します。
      *
-     * @param 後・公費１・精神科専門療法 後・公費１・精神科専門療法
+     * @param 後_公費１_精神科専門療法 後_公費１_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費１・精神科専門療法(int 後・公費１・精神科専門療法) {
-        requireNonNull(後・公費１・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１・精神科専門療法"));
-        entity.setAtoKohi1SeishinkaSemmonRyoho(後・公費１・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費１_精神科専門療法(int 後_公費１_精神科専門療法) {
+        requireNonNull(後_公費１_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_精神科専門療法"));
+        entity.setAtoKohi1SeishinkaSemmonRyoho(後_公費１_精神科専門療法);
         return this;
     }
 
     /**
-     * 後・公費２・指導管理料等を設定します。
+     * 後_公費２_指導管理料等を設定します。
      *
-     * @param 後・公費２・指導管理料等 後・公費２・指導管理料等
+     * @param 後_公費２_指導管理料等 後_公費２_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費２・指導管理料等(int 後・公費２・指導管理料等) {
-        requireNonNull(後・公費２・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・指導管理料等"));
-        entity.setAtoKohi2ShidoKanriryo(後・公費２・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費２_指導管理料等(int 後_公費２_指導管理料等) {
+        requireNonNull(後_公費２_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_指導管理料等"));
+        entity.setAtoKohi2ShidoKanriryo(後_公費２_指導管理料等);
         return this;
     }
 
     /**
-     * 後・公費２・単純エックス線を設定します。
+     * 後_公費２_単純エックス線を設定します。
      *
-     * @param 後・公費２・単純エックス線 後・公費２・単純エックス線
+     * @param 後_公費２_単純エックス線 後_公費２_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費２・単純エックス線(int 後・公費２・単純エックス線) {
-        requireNonNull(後・公費２・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・単純エックス線"));
-        entity.setAtoKohi2TanjunXsen(後・公費２・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費２_単純エックス線(int 後_公費２_単純エックス線) {
+        requireNonNull(後_公費２_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_単純エックス線"));
+        entity.setAtoKohi2TanjunXsen(後_公費２_単純エックス線);
         return this;
     }
 
     /**
-     * 後・公費２・リハビリテーションを設定します。
+     * 後_公費２_リハビリテーションを設定します。
      *
-     * @param 後・公費２・リハビリテーション 後・公費２・リハビリテーション
+     * @param 後_公費２_リハビリテーション 後_公費２_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費２・リハビリテーション(int 後・公費２・リハビリテーション) {
-        requireNonNull(後・公費２・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・リハビリテーション"));
-        entity.setAtoKohi2Rehabilitation(後・公費２・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費２_リハビリテーション(int 後_公費２_リハビリテーション) {
+        requireNonNull(後_公費２_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_リハビリテーション"));
+        entity.setAtoKohi2Rehabilitation(後_公費２_リハビリテーション);
         return this;
     }
 
     /**
-     * 後・公費２・精神科専門療法を設定します。
+     * 後_公費２_精神科専門療法を設定します。
      *
-     * @param 後・公費２・精神科専門療法 後・公費２・精神科専門療法
+     * @param 後_公費２_精神科専門療法 後_公費２_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費２・精神科専門療法(int 後・公費２・精神科専門療法) {
-        requireNonNull(後・公費２・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２・精神科専門療法"));
-        entity.setAtoKohi2SeishinkaSemmonRyoho(後・公費２・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費２_精神科専門療法(int 後_公費２_精神科専門療法) {
+        requireNonNull(後_公費２_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_精神科専門療法"));
+        entity.setAtoKohi2SeishinkaSemmonRyoho(後_公費２_精神科専門療法);
         return this;
     }
 
     /**
-     * 後・公費３・指導管理料等を設定します。
+     * 後_公費３_指導管理料等を設定します。
      *
-     * @param 後・公費３・指導管理料等 後・公費３・指導管理料等
+     * @param 後_公費３_指導管理料等 後_公費３_指導管理料等
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費３・指導管理料等(int 後・公費３・指導管理料等) {
-        requireNonNull(後・公費３・指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・指導管理料等"));
-        entity.setAtoKohi3ShidoKanriryo(後・公費３・指導管理料等);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費３_指導管理料等(int 後_公費３_指導管理料等) {
+        requireNonNull(後_公費３_指導管理料等, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_指導管理料等"));
+        entity.setAtoKohi3ShidoKanriryo(後_公費３_指導管理料等);
         return this;
     }
 
     /**
-     * 後・公費３・単純エックス線を設定します。
+     * 後_公費３_単純エックス線を設定します。
      *
-     * @param 後・公費３・単純エックス線 後・公費３・単純エックス線
+     * @param 後_公費３_単純エックス線 後_公費３_単純エックス線
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費３・単純エックス線(int 後・公費３・単純エックス線) {
-        requireNonNull(後・公費３・単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・単純エックス線"));
-        entity.setAtoKohi3TanjunXsen(後・公費３・単純エックス線);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費３_単純エックス線(int 後_公費３_単純エックス線) {
+        requireNonNull(後_公費３_単純エックス線, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_単純エックス線"));
+        entity.setAtoKohi3TanjunXsen(後_公費３_単純エックス線);
         return this;
     }
 
     /**
-     * 後・公費３・リハビリテーションを設定します。
+     * 後_公費３_リハビリテーションを設定します。
      *
-     * @param 後・公費３・リハビリテーション 後・公費３・リハビリテーション
+     * @param 後_公費３_リハビリテーション 後_公費３_リハビリテーション
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費３・リハビリテーション(int 後・公費３・リハビリテーション) {
-        requireNonNull(後・公費３・リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・リハビリテーション"));
-        entity.setAtoKohi3Rehabilitation(後・公費３・リハビリテーション);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費３_リハビリテーション(int 後_公費３_リハビリテーション) {
+        requireNonNull(後_公費３_リハビリテーション, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_リハビリテーション"));
+        entity.setAtoKohi3Rehabilitation(後_公費３_リハビリテーション);
         return this;
     }
 
     /**
-     * 後・公費３・精神科専門療法を設定します。
+     * 後_公費３_精神科専門療法を設定します。
      *
-     * @param 後・公費３・精神科専門療法 後・公費３・精神科専門療法
+     * @param 後_公費３_精神科専門療法 後_公費３_精神科専門療法
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set後・公費３・精神科専門療法(int 後・公費３・精神科専門療法) {
-        requireNonNull(後・公費３・精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３・精神科専門療法"));
-        entity.setAtoKohi3SeishinkaSemmonRyoho(後・公費３・精神科専門療法);
+    public KyufujissekiTokuteiSinryohiBuilder set後_公費３_精神科専門療法(int 後_公費３_精神科専門療法) {
+        requireNonNull(後_公費３_精神科専門療法, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_精神科専門療法"));
+        entity.setAtoKohi3SeishinkaSemmonRyoho(後_公費３_精神科専門療法);
         return this;
     }
 

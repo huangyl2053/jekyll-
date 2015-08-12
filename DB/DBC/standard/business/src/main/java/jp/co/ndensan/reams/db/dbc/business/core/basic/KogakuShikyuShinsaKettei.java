@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3112KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3112KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業高額介護サービス費支給審査決定を管理するクラスです。
  */
-public class KogakuShikyuShinsaKettei extends ParentModelBase<KogakuShikyuShinsaKetteiIdentifier, DbT3112KogakuShikyuShinsaKetteiEntity, KogakuShikyuShinsaKettei> implements Serializable {
+public class KogakuShikyuShinsaKettei extends ModelBase<KogakuShikyuShinsaKetteiIdentifier, DbT3112KogakuShikyuShinsaKetteiEntity, KogakuShikyuShinsaKettei> implements Serializable {
 
     private final DbT3112KogakuShikyuShinsaKetteiEntity entity;
     private final KogakuShikyuShinsaKetteiIdentifier id;
@@ -35,10 +38,10 @@ public class KogakuShikyuShinsaKettei extends ParentModelBase<KogakuShikyuShinsa
      * @param 通知書番号 通知書番号
      */
     public KogakuShikyuShinsaKettei(FlexibleYearMonth 決定者受取年月,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 通知書番号) {
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 通知書番号) {
         requireNonNull(決定者受取年月, UrSystemErrorMessages.値がnull.getReplacedMessage("決定者受取年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -51,12 +54,12 @@ RString 通知書番号) {
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setTsuchishoNo(通知書番号);
         this.id = new KogakuShikyuShinsaKetteiIdentifier(
-        決定者受取年月,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        通知書番号
-                );
+                決定者受取年月,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                通知書番号
+        );
     }
 
     /**
@@ -192,22 +195,6 @@ RString 通知書番号) {
     }
 
     /**
-     * 事業高額介護サービス費支給審査決定のみを変更対象とします。<br/>
-     * {@link DbT3112KogakuShikyuShinsaKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KogakuShikyuShinsaKettei}
-     */
-    @Override
-    public KogakuShikyuShinsaKettei modifiedModel() {
-        DbT3112KogakuShikyuShinsaKetteiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KogakuShikyuShinsaKettei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する事業高額介護サービス費支給審査決定を削除対象とします。<br/>
      * {@link DbT3112KogakuShikyuShinsaKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -224,6 +211,7 @@ RString 通知書番号) {
         }
         return new KogakuShikyuShinsaKettei(deletedEntity, id);
     }
+
     /**
      * {@link KogakuShikyuShinsaKettei}のシリアライズ形式を提供します。
      *
@@ -234,13 +222,19 @@ RString 通知書番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3112KogakuShikyuShinsaKetteiEntity entity;
         private final KogakuShikyuShinsaKetteiIdentifier id;
 
-        private _SerializationProxy(DbT3112KogakuShikyuShinsaKetteiEntity entity,KogakuShikyuShinsaKetteiIdentifier id) {
+        private _SerializationProxy(DbT3112KogakuShikyuShinsaKetteiEntity entity, KogakuShikyuShinsaKetteiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

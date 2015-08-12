@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3015KyufuKanrihyo200604Entity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuKanrihyo200604}の編集を行うビルダークラスです。
@@ -221,9 +230,9 @@ public class KyufuKanrihyo200604Builder {
      * @param 居宅・介護予防支給限度額 居宅・介護予防支給限度額
      * @return {@link KyufuKanrihyo200604Builder}
      */
-    public KyufuKanrihyo200604Builder set居宅・介護予防支給限度額(int 居宅・介護予防支給限度額) {
-        requireNonNull(居宅・介護予防支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・介護予防支給限度額"));
-        entity.setKyotakuKaigoYoboShikyuGendogaku(居宅・介護予防支給限度額);
+    public KyufuKanrihyo200604Builder set居宅_介護予防支給限度額(int 居宅_介護予防支給限度額) {
+        requireNonNull(居宅_介護予防支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅・介護予防支給限度額"));
+        entity.setKyotakuKaigoYoboShikyuGendogaku(居宅_介護予防支給限度額);
         return this;
     }
 
@@ -254,12 +263,12 @@ public class KyufuKanrihyo200604Builder {
     /**
      * 指定/基準該当/地域密着型サービス識別コードを設定します。
      *
-     * @param 指定/基準該当/地域密着型サービス識別コード 指定/基準該当/地域密着型サービス識別コード
+     * @param 指定_基準該当_地域密着型サービス識別コード 指定/基準該当/地域密着型サービス識別コード
      * @return {@link KyufuKanrihyo200604Builder}
      */
-    public KyufuKanrihyo200604Builder set指定/基準該当/地域密着型サービス識別コード(RString 指定/基準該当/地域密着型サービス識別コード) {
-        requireNonNull(指定/基準該当/地域密着型サービス識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定/基準該当/地域密着型サービス識別コード"));
-        entity.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(指定/基準該当/地域密着型サービス識別コード);
+    public KyufuKanrihyo200604Builder set指定_基準該当_地域密着型サービス識別コード(RString 指定_基準該当_地域密着型サービス識別コード) {
+        requireNonNull(指定_基準該当_地域密着型サービス識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定/基準該当/地域密着型サービス識別コード"));
+        entity.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(指定_基準該当_地域密着型サービス識別コード);
         return this;
     }
 
@@ -281,9 +290,9 @@ public class KyufuKanrihyo200604Builder {
      * @param 給付計画単位数／日数 給付計画単位数／日数
      * @return {@link KyufuKanrihyo200604Builder}
      */
-    public KyufuKanrihyo200604Builder set給付計画単位数／日数(int 給付計画単位数／日数) {
-        requireNonNull(給付計画単位数／日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画単位数／日数"));
-        entity.setKyufuKeikakuTanisuNissu(給付計画単位数／日数);
+    public KyufuKanrihyo200604Builder set給付計画単位数_日数(int 給付計画単位数_日数) {
+        requireNonNull(給付計画単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画単位数／日数"));
+        entity.setKyufuKeikakuTanisuNissu(給付計画単位数_日数);
         return this;
     }
 
@@ -329,9 +338,9 @@ public class KyufuKanrihyo200604Builder {
      * @param 給付計画合計単位数/日数 給付計画合計単位数/日数
      * @return {@link KyufuKanrihyo200604Builder}
      */
-    public KyufuKanrihyo200604Builder set給付計画合計単位数/日数(int 給付計画合計単位数/日数) {
-        requireNonNull(給付計画合計単位数/日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画合計単位数/日数"));
-        entity.setKyufuKeikakuTotalTanisuNissu(給付計画合計単位数/日数);
+    public KyufuKanrihyo200604Builder set給付計画合計単位数_日数(int 給付計画合計単位数_日数) {
+        requireNonNull(給付計画合計単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("給付計画合計単位数/日数"));
+        entity.setKyufuKeikakuTotalTanisuNissu(給付計画合計単位数_日数);
         return this;
     }
 

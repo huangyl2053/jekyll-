@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求基本を管理するクラスです。
  */
-public class ShokanKihon extends ParentModelBase<ShokanKihonIdentifier, DbT3038ShokanKihonEntity, ShokanKihon> implements Serializable {
+public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanKihonEntity, ShokanKihon> implements Serializable {
 
     private final DbT3038ShokanKihonEntity entity;
     private final ShokanKihonIdentifier id;
@@ -36,11 +41,11 @@ public class ShokanKihon extends ParentModelBase<ShokanKihonIdentifier, DbT3038S
      * @param 履歴番号 履歴番号
      */
     public ShokanKihon(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -55,13 +60,13 @@ Decimal 履歴番号) {
         this.entity.setYoshikiNo(様式番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanKihonIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                履歴番号
+        );
     }
 
     /**
@@ -196,38 +201,38 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 中止理由・入所（院）前の状況コードを返します。
+     * 中止理由_入所_院前の状況コードを返します。
      *
-     * @return 中止理由・入所（院）前の状況コード
+     * @return 中止理由_入所_院前の状況コード
      */
-    public RString get中止理由・入所（院）前の状況コード() {
+    public RString get中止理由_入所_院前の状況コード() {
         return entity.getChushiRiyuNyushomaeJyokyoCode();
     }
 
     /**
-     * 入所（院）年月日を返します。
+     * 入所_院年月日を返します。
      *
-     * @return 入所（院）年月日
+     * @return 入所_院年月日
      */
-    public FlexibleDate get入所（院）年月日() {
+    public FlexibleDate get入所_院年月日() {
         return entity.getNyushoYMD();
     }
 
     /**
-     * 退所（院）年月日を返します。
+     * 退所_院年月日を返します。
      *
-     * @return 退所（院）年月日
+     * @return 退所_院年月日
      */
-    public FlexibleDate get退所（院）年月日() {
+    public FlexibleDate get退所_院年月日() {
         return entity.getTaishoYMD();
     }
 
     /**
-     * 入所（院）実日数を返します。
+     * 入所_院実日数を返します。
      *
-     * @return 入所（院）実日数
+     * @return 入所_院実日数
      */
-    public Decimal get入所（院）実日数() {
+    public Decimal get入所_院実日数() {
         return entity.getNyushoJitsuNissu();
     }
 
@@ -241,11 +246,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 退所（院）後の状態コードを返します。
+     * 退所_院後の状態コードを返します。
      *
-     * @return 退所（院）後の状態コード
+     * @return 退所_院後の状態コード
      */
-    public RString get退所（院）後の状態コード() {
+    public RString get退所_院後の状態コード() {
         return entity.getTaishogoJotaiCode();
     }
 
@@ -333,22 +338,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 償還払請求基本のみを変更対象とします。<br/>
-     * {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanKihon}
-     */
-    @Override
-    public ShokanKihon modifiedModel() {
-        DbT3038ShokanKihonEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanKihon(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求基本を削除対象とします。<br/>
      * {@link DbT3038ShokanKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -365,6 +354,7 @@ Decimal 履歴番号) {
         }
         return new ShokanKihon(deletedEntity, id);
     }
+
     /**
      * {@link ShokanKihon}のシリアライズ形式を提供します。
      *
@@ -375,13 +365,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3038ShokanKihonEntity entity;
         private final ShokanKihonIdentifier id;
 
-        private _SerializationProxy(DbT3038ShokanKihonEntity entity,ShokanKihonIdentifier id) {
+        private _SerializationProxy(DbT3038ShokanKihonEntity entity, ShokanKihonIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

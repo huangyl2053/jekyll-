@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村単独助成種類の識別子です。
@@ -28,9 +32,9 @@ public class TandokuJoseiShuruiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public TandokuJoseiShuruiIdentifier(RString 市町村単独助成種類,
-ServiceShuruiCode 助成サービス種類コード,
-FlexibleYearMonth 適用開始年月,
-Decimal 履歴番号) {
+            ServiceShuruiCode 助成サービス種類コード,
+            FlexibleYearMonth 適用開始年月,
+            Decimal 履歴番号) {
         this.市町村単独助成種類 = 市町村単独助成種類;
         this.助成サービス種類コード = 助成サービス種類コード;
         this.適用開始年月 = 適用開始年月;

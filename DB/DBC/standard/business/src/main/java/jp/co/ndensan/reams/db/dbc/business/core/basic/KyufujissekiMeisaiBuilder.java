@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiMeisai}の編集を行うビルダークラスです。
@@ -41,7 +52,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiMeisaiBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +64,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiMeisaiBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -168,50 +179,50 @@ public class KyufujissekiMeisaiBuilder {
     }
 
     /**
-     * 日数・回数を設定します。
+     * 日数_回数を設定します。
      *
-     * @param 日数・回数 日数・回数
+     * @param 日数_回数 日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set日数・回数(Decimal 日数・回数) {
-        requireNonNull(日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数・回数"));
-        entity.setNissuKaisu(日数・回数);
+    public KyufujissekiMeisaiBuilder set日数_回数(Decimal 日数_回数) {
+        requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
+        entity.setNissuKaisu(日数_回数);
         return this;
     }
 
     /**
-     * 公費１対象日数・回数を設定します。
+     * 公費１対象日数_回数を設定します。
      *
-     * @param 公費１対象日数・回数 公費１対象日数・回数
+     * @param 公費１対象日数_回数 公費１対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費１対象日数・回数(Decimal 公費１対象日数・回数) {
-        requireNonNull(公費１対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１対象日数・回数"));
-        entity.setKohi1TaishoNissuKaisu(公費１対象日数・回数);
+    public KyufujissekiMeisaiBuilder set公費１対象日数_回数(Decimal 公費１対象日数_回数) {
+        requireNonNull(公費１対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１対象日数_回数"));
+        entity.setKohi1TaishoNissuKaisu(公費１対象日数_回数);
         return this;
     }
 
     /**
-     * 公費２対象日数・回数を設定します。
+     * 公費２対象日数_回数を設定します。
      *
-     * @param 公費２対象日数・回数 公費２対象日数・回数
+     * @param 公費２対象日数_回数 公費２対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費２対象日数・回数(Decimal 公費２対象日数・回数) {
-        requireNonNull(公費２対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２対象日数・回数"));
-        entity.setKohi2TaishoNissuKaisu(公費２対象日数・回数);
+    public KyufujissekiMeisaiBuilder set公費２対象日数_回数(Decimal 公費２対象日数_回数) {
+        requireNonNull(公費２対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２対象日数_回数"));
+        entity.setKohi2TaishoNissuKaisu(公費２対象日数_回数);
         return this;
     }
 
     /**
-     * 公費３対象日数・回数を設定します。
+     * 公費３対象日数_回数を設定します。
      *
-     * @param 公費３対象日数・回数 公費３対象日数・回数
+     * @param 公費３対象日数_回数 公費３対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費３対象日数・回数(Decimal 公費３対象日数・回数) {
-        requireNonNull(公費３対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３対象日数・回数"));
-        entity.setKohi3TaishoNissuKaisu(公費３対象日数・回数);
+    public KyufujissekiMeisaiBuilder set公費３対象日数_回数(Decimal 公費３対象日数_回数) {
+        requireNonNull(公費３対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３対象日数_回数"));
+        entity.setKohi3TaishoNissuKaisu(公費３対象日数_回数);
         return this;
     }
 
@@ -221,7 +232,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param サービス単位数 サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder setサービス単位数(int サービス単位数) {
+    public KyufujissekiMeisaiBuilder setサービス単位数(Decimal サービス単位数) {
         requireNonNull(サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス単位数"));
         entity.setServiceTanisu(サービス単位数);
         return this;
@@ -233,7 +244,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費１対象サービス単位数 公費１対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費１対象サービス単位数(int 公費１対象サービス単位数) {
+    public KyufujissekiMeisaiBuilder set公費１対象サービス単位数(Decimal 公費１対象サービス単位数) {
         requireNonNull(公費１対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１対象サービス単位数"));
         entity.setKohi1TaishoServiceTanisu(公費１対象サービス単位数);
         return this;
@@ -245,7 +256,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費２対象サービス単位数 公費２対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費２対象サービス単位数(int 公費２対象サービス単位数) {
+    public KyufujissekiMeisaiBuilder set公費２対象サービス単位数(Decimal 公費２対象サービス単位数) {
         requireNonNull(公費２対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２対象サービス単位数"));
         entity.setKohi2TaishoServiceTanisu(公費２対象サービス単位数);
         return this;
@@ -257,7 +268,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費３対象サービス単位数 公費３対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費３対象サービス単位数(int 公費３対象サービス単位数) {
+    public KyufujissekiMeisaiBuilder set公費３対象サービス単位数(Decimal 公費３対象サービス単位数) {
         requireNonNull(公費３対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３対象サービス単位数"));
         entity.setKohi3TaishoServiceTanisu(公費３対象サービス単位数);
         return this;
@@ -276,110 +287,110 @@ public class KyufujissekiMeisaiBuilder {
     }
 
     /**
-     * 後・単位数を設定します。
+     * 後_単位数を設定します。
      *
-     * @param 後・単位数 後・単位数
+     * @param 後_単位数 後_単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・単位数(Decimal 後・単位数) {
-        requireNonNull(後・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・単位数"));
-        entity.setAtoTanisu(後・単位数);
+    public KyufujissekiMeisaiBuilder set後_単位数(Decimal 後_単位数) {
+        requireNonNull(後_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_単位数"));
+        entity.setAtoTanisu(後_単位数);
         return this;
     }
 
     /**
-     * 後・日数・回数を設定します。
+     * 後_日数_回数を設定します。
      *
-     * @param 後・日数・回数 後・日数・回数
+     * @param 後_日数_回数 後_日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・日数・回数(Decimal 後・日数・回数) {
-        requireNonNull(後・日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・日数・回数"));
-        entity.setAtoNissuKaisu(後・日数・回数);
+    public KyufujissekiMeisaiBuilder set後_日数_回数(Decimal 後_日数_回数) {
+        requireNonNull(後_日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_日数_回数"));
+        entity.setAtoNissuKaisu(後_日数_回数);
         return this;
     }
 
     /**
-     * 後・公費１対象日数・回数を設定します。
+     * 後_公費１対象日数_回数を設定します。
      *
-     * @param 後・公費１対象日数・回数 後・公費１対象日数・回数
+     * @param 後_公費１対象日数_回数 後_公費１対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費１対象日数・回数(Decimal 後・公費１対象日数・回数) {
-        requireNonNull(後・公費１対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１対象日数・回数"));
-        entity.setAtoKohi1TaishoNissuKaisu(後・公費１対象日数・回数);
+    public KyufujissekiMeisaiBuilder set後_公費１対象日数_回数(Decimal 後_公費１対象日数_回数) {
+        requireNonNull(後_公費１対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１対象日数_回数"));
+        entity.setAtoKohi1TaishoNissuKaisu(後_公費１対象日数_回数);
         return this;
     }
 
     /**
-     * 後・公費２対象日数・回数を設定します。
+     * 後_公費２対象日数_回数を設定します。
      *
-     * @param 後・公費２対象日数・回数 後・公費２対象日数・回数
+     * @param 後_公費２対象日数_回数 後_公費２対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費２対象日数・回数(Decimal 後・公費２対象日数・回数) {
-        requireNonNull(後・公費２対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２対象日数・回数"));
-        entity.setAtoKohi2TaishoNissukaisu(後・公費２対象日数・回数);
+    public KyufujissekiMeisaiBuilder set後_公費２対象日数_回数(Decimal 後_公費２対象日数_回数) {
+        requireNonNull(後_公費２対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２対象日数_回数"));
+        entity.setAtoKohi2TaishoNissukaisu(後_公費２対象日数_回数);
         return this;
     }
 
     /**
-     * 後・公費３対象日数・回数を設定します。
+     * 後_公費３対象日数_回数を設定します。
      *
-     * @param 後・公費３対象日数・回数 後・公費３対象日数・回数
+     * @param 後_公費３対象日数_回数 後_公費３対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費３対象日数・回数(Decimal 後・公費３対象日数・回数) {
-        requireNonNull(後・公費３対象日数・回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３対象日数・回数"));
-        entity.setAtoKohi3TaishoNissuKaisu(後・公費３対象日数・回数);
+    public KyufujissekiMeisaiBuilder set後_公費３対象日数_回数(Decimal 後_公費３対象日数_回数) {
+        requireNonNull(後_公費３対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３対象日数_回数"));
+        entity.setAtoKohi3TaishoNissuKaisu(後_公費３対象日数_回数);
         return this;
     }
 
     /**
-     * 後・サービス単位数を設定します。
+     * 後_サービス単位数を設定します。
      *
-     * @param 後・サービス単位数 後・サービス単位数
+     * @param 後_サービス単位数 後_サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・サービス単位数(int 後・サービス単位数) {
-        requireNonNull(後・サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・サービス単位数"));
-        entity.setAtoServiceTanisu(後・サービス単位数);
+    public KyufujissekiMeisaiBuilder set後_サービス単位数(Decimal 後_サービス単位数) {
+        requireNonNull(後_サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_サービス単位数"));
+        entity.setAtoServiceTanisu(後_サービス単位数);
         return this;
     }
 
     /**
-     * 後・公費１対象サービス単位数を設定します。
+     * 後_公費１対象サービス単位数を設定します。
      *
-     * @param 後・公費１対象サービス単位数 後・公費１対象サービス単位数
+     * @param 後_公費１対象サービス単位数 後_公費１対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費１対象サービス単位数(int 後・公費１対象サービス単位数) {
-        requireNonNull(後・公費１対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費１対象サービス単位数"));
-        entity.setAtoKohi1TaishoServiceTanisu(後・公費１対象サービス単位数);
+    public KyufujissekiMeisaiBuilder set後_公費１対象サービス単位数(Decimal 後_公費１対象サービス単位数) {
+        requireNonNull(後_公費１対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１対象サービス単位数"));
+        entity.setAtoKohi1TaishoServiceTanisu(後_公費１対象サービス単位数);
         return this;
     }
 
     /**
-     * 後・公費２対象サービス単位数を設定します。
+     * 後_公費２対象サービス単位数を設定します。
      *
-     * @param 後・公費２対象サービス単位数 後・公費２対象サービス単位数
+     * @param 後_公費２対象サービス単位数 後_公費２対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費２対象サービス単位数(int 後・公費２対象サービス単位数) {
-        requireNonNull(後・公費２対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費２対象サービス単位数"));
-        entity.setAtoKohi2TaishoServiceTanisu(後・公費２対象サービス単位数);
+    public KyufujissekiMeisaiBuilder set後_公費２対象サービス単位数(Decimal 後_公費２対象サービス単位数) {
+        requireNonNull(後_公費２対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２対象サービス単位数"));
+        entity.setAtoKohi2TaishoServiceTanisu(後_公費２対象サービス単位数);
         return this;
     }
 
     /**
-     * 後・公費３対象サービス単位数を設定します。
+     * 後_公費３対象サービス単位数を設定します。
      *
-     * @param 後・公費３対象サービス単位数 後・公費３対象サービス単位数
+     * @param 後_公費３対象サービス単位数 後_公費３対象サービス単位数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後・公費３対象サービス単位数(int 後・公費３対象サービス単位数) {
-        requireNonNull(後・公費３対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・公費３対象サービス単位数"));
-        entity.setAtoKohi3TaishoServiceTanisu(後・公費３対象サービス単位数);
+    public KyufujissekiMeisaiBuilder set後_公費３対象サービス単位数(Decimal 後_公費３対象サービス単位数) {
+        requireNonNull(後_公費３対象サービス単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３対象サービス単位数"));
+        entity.setAtoKohi3TaishoServiceTanisu(後_公費３対象サービス単位数);
         return this;
     }
 
