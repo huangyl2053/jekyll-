@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiKashitsukekinShakuyoshoJuri;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3088KyufuhiKashitsukekinShakuyoshoJuriDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,7 +51,7 @@ public class KyufuhiKashitsukekinShakuyoshoJuriManager {
      */
     @Transaction
     public KyufuhiKashitsukekinShakuyoshoJuri get給付費貸付金借用書受理(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 借入申請年月日,
             Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

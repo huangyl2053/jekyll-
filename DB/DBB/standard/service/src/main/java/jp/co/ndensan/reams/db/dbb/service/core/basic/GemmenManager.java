@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbb.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +52,7 @@ public class GemmenManager {
      */
     @Transaction
     public Gemmen get介護賦課減免(
-             FlexibleYear 調定年度,
+            FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             Decimal 履歴番号) {

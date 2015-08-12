@@ -5,8 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,29 +44,52 @@ public class FukaManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護賦課 extends FdaTestBase {
+    public static class get介護賦課 extends DbbTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_主キー2;
-            sut.get介護賦課(null, 主キー2);
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            sut.get介護賦課(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_主キー1;
-            sut.get介護賦課(主キー1, null);
+            FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            sut.get介護賦課(主キー1, null, 主キー3, 主キー4);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            sut.get介護賦課(主キー1, 主キー2, null, 主キー4);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+            FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            sut.get介護賦課(主キー1, 主キー2, 主キー3, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(Decimal.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_主キー2;
-            Fuka result = sut.get介護賦課(主キー1, 主キー2);
+            FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            Fuka result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
         }
@@ -62,18 +97,20 @@ public class FukaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(Decimal.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_主キー2;
-            Fuka result = sut.get介護賦課(主キー1, 主キー2);
+            FlexibleYear 主キー1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
+            FlexibleYear 主キー2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+            TsuchishoNo 主キー3 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
+            Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
+            Fuka result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT2002FukaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護賦課一覧 extends FdaTestBase {
+    public static class get介護賦課一覧 extends DbbTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +129,11 @@ public class FukaManagerTest {
             List<Fuka> result = sut.get介護賦課一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2002FukaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
-    public static class save介護賦課 extends XxxTestBase {
+    public static class save介護賦課 extends DbbTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -125,7 +162,7 @@ public class FukaManagerTest {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.initializeMd5();
             Fuka 介護賦課 = new Fuka(entity);
-            介護賦課 = 介護賦課.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課 = 介護賦課.createBuilderForEdit().set保険料段階(new RString("1")).build();
 
             assertThat(sut.save介護賦課(介護賦課), is(true));
         }
@@ -137,7 +174,7 @@ public class FukaManagerTest {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.initializeMd5();
             Fuka 介護賦課 = new Fuka(entity);
-            介護賦課 = 介護賦課.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課 = 介護賦課.createBuilderForEdit().set保険料段階(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課(介護賦課), is(false));
         }

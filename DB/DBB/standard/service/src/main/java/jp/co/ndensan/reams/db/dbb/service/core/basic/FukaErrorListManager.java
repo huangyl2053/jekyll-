@@ -8,7 +8,14 @@ package jp.co.ndensan.reams.db.dbb.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +53,7 @@ public class FukaErrorListManager {
      */
     @Transaction
     public FukaErrorList get賦課エラー一覧(
-             SubGyomuCode サブ業務コード,
+            SubGyomuCode サブ業務コード,
             RString 内部帳票ID,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) {

@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3046ShokanServicePlan200604Dac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -38,16 +41,13 @@ public class ShokanServicePlan200604Manager {
     /**
      * 主キーに合致する償還払請求サービス計画200604を返します。
      *
-
+     *
      * @return ShokanServicePlan200604
      */
     @Transaction
-    public ShokanServicePlan200604 get償還払請求サービス計画200604(
- ) {
+    public ShokanServicePlan200604 get償還払請求サービス計画200604() {
 
-
-        DbT3046ShokanServicePlan200604Entity entity = dac.selectByKey(
-);
+        DbT3046ShokanServicePlan200604Entity entity = dac.selectByKey();
         if (entity == null) {
             return null;
         }

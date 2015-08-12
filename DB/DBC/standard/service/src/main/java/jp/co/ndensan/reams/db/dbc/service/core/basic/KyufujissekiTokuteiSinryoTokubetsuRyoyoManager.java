@@ -8,12 +8,22 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoTokubetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 給付実績特定診療費・特別療養費を管理するクラスです。
+ * 給付実績特定診療費_特別療養費を管理するクラスです。
  */
 public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManager {
 
@@ -36,7 +46,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 主キーに合致する給付実績特定診療費・特別療養費を返します。
+     * 主キーに合致する給付実績特定診療費_特別療養費を返します。
      *
      * @param 交換情報識別番号 KokanJohoShikibetsuNo
      * @param 入力識別番号 InputShikibetsuNo
@@ -50,9 +60,9 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManager {
      * @return KyufujissekiTokuteiSinryoTokubetsuRyoyo
      */
     @Transaction
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyo get給付実績特定診療費・特別療養費(
-             KokanShikibetsuCode 交換情報識別番号,
-            NyuryokuShikibetsuCode 入力識別番号,
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyo get給付実績特定診療費_特別療養費(
+            KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
             RString レコード種別コード,
             HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
@@ -88,12 +98,12 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 給付実績特定診療費・特別療養費を全件返します。
+     * 給付実績特定診療費_特別療養費を全件返します。
      *
      * @return List<KyufujissekiTokuteiSinryoTokubetsuRyoyo>
      */
     @Transaction
-    public List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> get給付実績特定診療費・特別療養費一覧() {
+    public List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> get給付実績特定診療費_特別療養費一覧() {
         List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> businessList = new ArrayList<>();
 
         for (DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity : dac.selectAll()) {
@@ -105,17 +115,18 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 給付実績特定診療費・特別療養費{@link KyufujissekiTokuteiSinryoTokubetsuRyoyo}を保存します。
+     * 給付実績特定診療費_特別療養費{@link KyufujissekiTokuteiSinryoTokubetsuRyoyo}を保存します。
      *
-     * @param 給付実績特定診療費・特別療養費 {@link KyufujissekiTokuteiSinryoTokubetsuRyoyo}
+     * @param 給付実績特定診療費_特別療養費 {@link KyufujissekiTokuteiSinryoTokubetsuRyoyo}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save給付実績特定診療費・特別療養費(KyufujissekiTokuteiSinryoTokubetsuRyoyo 給付実績特定診療費・特別療養費) {
-        requireNonNull(給付実績特定診療費・特別療養費, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績特定診療費・特別療養費"));
-        if (!給付実績特定診療費・特別療養費.hasChanged()) {
+    public boolean save給付実績特定診療費_特別療養費(KyufujissekiTokuteiSinryoTokubetsuRyoyo 給付実績特定診療費_特別療養費) {
+        requireNonNull(給付実績特定診療費_特別療養費, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績特定診療費_特別療養費")
+        );
+        if (!給付実績特定診療費_特別療養費.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(給付実績特定診療費・特別療養費.toEntity());
+        return 1 == dac.save(給付実績特定診療費_特別療養費.toEntity());
     }
 }
