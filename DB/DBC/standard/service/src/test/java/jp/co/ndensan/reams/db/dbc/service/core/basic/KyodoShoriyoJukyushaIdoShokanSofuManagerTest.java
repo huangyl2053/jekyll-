@@ -5,8 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoShokanSofu;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,7 +41,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get共同処理用受給者異動償還送付 extends FdaTestBase {
+    public static class get共同処理用受給者異動償還送付 extends DbcTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -73,7 +82,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get共同処理用受給者異動償還送付一覧 extends FdaTestBase {
+    public static class get共同処理用受給者異動償還送付一覧 extends DbcTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -96,7 +105,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
         }
     }
 
-    public static class save共同処理用受給者異動償還送付 extends XxxTestBase {
+    public static class save共同処理用受給者異動償還送付 extends DbcTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

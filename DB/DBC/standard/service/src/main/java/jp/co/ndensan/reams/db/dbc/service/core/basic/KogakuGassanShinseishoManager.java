@@ -8,7 +8,15 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseisho;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3068KogakuGassanShinseishoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3068KogakuGassanShinseishoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -47,7 +55,7 @@ public class KogakuGassanShinseishoManager {
      */
     @Transaction
     public KogakuGassanShinseisho get高額合算申請書(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleYear 対象年度,
             HokenshaNo 保険者番号,
             RString 整理番号,

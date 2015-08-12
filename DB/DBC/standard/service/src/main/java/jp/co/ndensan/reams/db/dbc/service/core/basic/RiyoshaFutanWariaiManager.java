@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariai;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3113RiyoshaFutanWariaiEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3113RiyoshaFutanWariaiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,7 +51,7 @@ public class RiyoshaFutanWariaiManager {
      */
     @Transaction
     public RiyoshaFutanWariai get利用者負担割合(
-             FlexibleYear 年度,
+            FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
             Decimal 履歴番号) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));

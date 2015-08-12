@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.DaisanshaKoiSongaiBaishoKinJuryo;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3079DaisanshaKoiSongaiBaishoKinJuryoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +52,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryoManager {
      */
     @Transaction
     public DaisanshaKoiSongaiBaishoKinJuryo get介護第三者行為損害賠償金受領(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             RString 第三者行為届出管理番号,
             RString 第三者行為求償請求番号,
             Decimal 履歴番号) {

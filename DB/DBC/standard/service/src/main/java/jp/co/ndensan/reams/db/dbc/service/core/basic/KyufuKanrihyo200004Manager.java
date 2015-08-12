@@ -8,7 +8,15 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuKanrihyo200004;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3014KyufuKanrihyo200004Entity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3014KyufuKanrihyo200004Dac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -50,7 +58,7 @@ public class KyufuKanrihyo200004Manager {
      */
     @Transaction
     public KyufuKanrihyo200004 get給付管理票200004(
-             FlexibleYearMonth 審査年月,
+            FlexibleYearMonth 審査年月,
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
             JigyoshaNo 居宅支援事業所番号,

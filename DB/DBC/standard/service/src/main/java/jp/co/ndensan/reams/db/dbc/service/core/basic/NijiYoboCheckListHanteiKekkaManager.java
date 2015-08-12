@@ -8,7 +8,14 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.NijiYoboCheckListHanteiKekka;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3103NijiYoboCheckListHanteiKekkaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +53,7 @@ public class NijiYoboCheckListHanteiKekkaManager {
      */
     @Transaction
     public NijiYoboCheckListHanteiKekka get二次予防チェックリスト判定結果(
-             ShikibetsuCode 識別コード,
+            ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号,
             FlexibleDate 受付年月日,
             Decimal 履歴番号) {

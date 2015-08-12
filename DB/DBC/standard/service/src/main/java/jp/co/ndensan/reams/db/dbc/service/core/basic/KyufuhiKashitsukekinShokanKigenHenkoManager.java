@@ -8,7 +8,14 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiKashitsukekinShokanKigenHenko;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +53,7 @@ public class KyufuhiKashitsukekinShokanKigenHenkoManager {
      */
     @Transaction
     public KyufuhiKashitsukekinShokanKigenHenko get給付費貸付金償還期限変更(
-             HihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             RString 貸付管理番号,
             FlexibleDate 償還期限延長受付年月日,
             Decimal 履歴番号) {

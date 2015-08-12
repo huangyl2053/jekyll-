@@ -8,7 +8,17 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3106KyufujissekiMeisaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3106KyufujissekiMeisaiJushochiTokureiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -51,8 +61,10 @@ public class KyufujissekiMeisaiJushochiTokureiManager {
      * @return KyufujissekiMeisaiJushochiTokurei
      */
     @Transaction
-    public KyufujissekiMeisaiJushochiTokurei get給付実績明細・住所地特例(
-             KokanShikibetsuCode 交換情報識別番号,
+    public KyufujissekiMeisaiJushochiTokurei get給付実績明細
+
+    ・住所地特例(
+            KokanShikibetsuCode 交換情報識別番号,
             NyuryokuShikibetsuCode 入力識別番号,
             RString レコード種別コード,
             HokenshaNo 証記載保険者番号,
@@ -97,7 +109,9 @@ public class KyufujissekiMeisaiJushochiTokureiManager {
      * @return List<KyufujissekiMeisaiJushochiTokurei>
      */
     @Transaction
-    public List<KyufujissekiMeisaiJushochiTokurei> get給付実績明細・住所地特例一覧() {
+    public List<KyufujissekiMeisaiJushochiTokurei> get給付実績明細
+
+    ・住所地特例一覧() {
         List<KyufujissekiMeisaiJushochiTokurei> businessList = new ArrayList<>();
 
         for (DbT3106KyufujissekiMeisaiJushochiTokureiEntity entity : dac.selectAll()) {
@@ -115,11 +129,25 @@ public class KyufujissekiMeisaiJushochiTokureiManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save給付実績明細・住所地特例(KyufujissekiMeisaiJushochiTokurei 給付実績明細・住所地特例) {
-        requireNonNull(給付実績明細・住所地特例, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績明細・住所地特例"));
-        if (!給付実績明細・住所地特例.hasChanged()) {
+    public boolean save給付実績明細
+
+    ・住所地特例(KyufujissekiMeisaiJushochiTokurei 給付実績明細
+        ・住所地特例) {
+        requireNonNull(給付実績明細・住所地特例
+        , UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績明細・住所地特例")
+        );
+        if (!給付実績明細 {
+
+        }
+        ・住所地特例.hasChanged()
+
+            ) {
             return false;
         }
-        return 1 == dac.save(給付実績明細・住所地特例.toEntity());
+        return 1 == dac.save(給付実績明細
+        ・住所地特例.toEntity()
+
+
+);
     }
 }

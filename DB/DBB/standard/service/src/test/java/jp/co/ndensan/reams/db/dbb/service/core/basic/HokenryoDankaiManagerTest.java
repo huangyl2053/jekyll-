@@ -5,8 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,29 +42,39 @@ public class HokenryoDankaiManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get保険料段階 extends FdaTestBase {
+    public static class get保険料段階 extends DbbTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー2;
-            sut.get保険料段階(null, 主キー2);
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            sut.get保険料段階(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー1;
-            sut.get保険料段階(主キー1, null);
+            FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            sut.get保険料段階(主キー1, null, 主キー3);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            sut.get保険料段階(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class), any(RString.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー2;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2);
+            FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -62,18 +82,18 @@ public class HokenryoDankaiManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class), any(RString.class))).thenReturn(entity);
+            FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+            RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
+            RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
-            主キー型1 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー2;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get保険料段階一覧 extends FdaTestBase {
+    public static class get保険料段階一覧 extends DbbTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +112,11 @@ public class HokenryoDankaiManagerTest {
             List<HokenryoDankai> result = sut.get保険料段階一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.value()));
         }
     }
 
-    public static class save保険料段階 extends XxxTestBase {
+    public static class save保険料段階 extends DbbTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

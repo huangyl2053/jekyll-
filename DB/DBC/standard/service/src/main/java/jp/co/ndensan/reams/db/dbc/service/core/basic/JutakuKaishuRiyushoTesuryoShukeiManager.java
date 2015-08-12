@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JutakuKaishuRiyushoTesuryoShukei;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3096JutakuKaishuRiyushoTesuryoShukeiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,7 +51,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiManager {
      */
     @Transaction
     public JutakuKaishuRiyushoTesuryoShukei get住宅改修理由書作成手数料請求集計(
-             HokenshaNo 証記載保険者番号,
+            HokenshaNo 証記載保険者番号,
             FlexibleYearMonth 集計開始年月,
             Decimal 履歴番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));

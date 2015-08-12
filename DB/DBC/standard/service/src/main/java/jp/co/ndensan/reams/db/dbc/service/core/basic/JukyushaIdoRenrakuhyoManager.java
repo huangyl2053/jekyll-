@@ -8,7 +8,15 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -48,7 +56,7 @@ public class JukyushaIdoRenrakuhyoManager {
      */
     @Transaction
     public JukyushaIdoRenrakuhyo get受給者異動送付(
-             FlexibleDate 異動年月日,
+            FlexibleDate 異動年月日,
             RString 異動区分コード,
             RString 受給者異動事由,
             HokenshaNo 証記載保険者番号,

@@ -5,8 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoRank;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,28 +43,28 @@ public class HokenryoRankManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get保険料ランク extends FdaTestBase {
+    public static class get保険料ランク extends DbbTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー2;
+            LasdecCode 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
             sut.get保険料ランク(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー1;
+            FlexibleYear 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
             sut.get保険料ランク(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(LasdecCode.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー2;
+            FlexibleYear 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+            LasdecCode 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
             HokenryoRank result = sut.get保険料ランク(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -62,18 +73,18 @@ public class HokenryoRankManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(LasdecCode.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー2;
+            FlexibleYear 主キー1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+            LasdecCode 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
             HokenryoRank result = sut.get保険料ランク(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get主キー1().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get保険料ランク一覧 extends FdaTestBase {
+    public static class get保険料ランク一覧 extends DbbTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +103,11 @@ public class HokenryoRankManagerTest {
             List<HokenryoRank> result = sut.get保険料ランク一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get主キー1().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
-    public static class save保険料ランク extends XxxTestBase {
+    public static class save保険料ランク extends DbbTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
