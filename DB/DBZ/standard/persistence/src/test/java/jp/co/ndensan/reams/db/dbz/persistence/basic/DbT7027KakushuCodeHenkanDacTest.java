@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7027KakushuCodeH
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7027KakushuCodeHenkanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
@@ -47,7 +46,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new LasdecCode("456152"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分,
                     DEFAULT_外部コード);
             TestSupport.insert(
@@ -59,7 +58,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分,
                     DEFAULT_外部コード);
         }
@@ -68,7 +67,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
         public void コード区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null,
+                    DEFAULT_コード区分,
                     DEFAULT_外部コード);
         }
 
@@ -77,7 +76,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分,
-                    null);
+                    DEFAULT_外部コード);
         }
 
         @Test
@@ -92,7 +91,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7027KakushuCodeHenkanEntity insertedRecord = sut.selectByKey(
-                    new LasdecCode("462154"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分,
                     DEFAULT_外部コード);
             assertThat(insertedRecord, is(nullValue()));
@@ -104,7 +103,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
         @Test
         public void 各種コード変換テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new LasdecCode("789421"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分,
                     DEFAULT_外部コード);
             TestSupport.insert(
@@ -148,19 +147,22 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
 
         @Test
         public void 各種コード変換テーブルエンティティを渡すと_updateは_各種コード変換テーブルを更新する() {
-            DbT7027KakushuCodeHenkanEntity updateRecord = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            //TODO  主キー以外の項目を変更してください
-//            updateRecord.set変更したい項目(75);
+            DbT7027KakushuCodeHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_コード区分,
+                    DEFAULT_外部コード);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7027KakushuCodeHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分,
                     DEFAULT_外部コード);
 
-            //TODO  主キー以外の項目を変更してください
-// assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -176,10 +178,14 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
 
         @Test
         public void 各種コード変換テーブルエンティティを渡すと_deleteは_各種コード変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7027KakushuCodeHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分,
-                    DEFAULT_外部コード));
+                    DEFAULT_外部コード);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分,
@@ -197,7 +203,7 @@ public class DbT7027KakushuCodeHenkanDacTest extends DbzTestDacBase {
             entity.setShichosonCode(市町村コード);
             entity.setCodeKubun(コード区分);
             entity.setGaibuCode(外部コード);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

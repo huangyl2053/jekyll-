@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域番号発番テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7025KoikiNoHatsubanEntityGenerator {
 

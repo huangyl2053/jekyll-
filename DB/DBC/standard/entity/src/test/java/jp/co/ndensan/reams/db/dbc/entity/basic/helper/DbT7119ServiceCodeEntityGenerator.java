@@ -4,18 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * サービスコードエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7119ServiceCodeEntityGenerator {
 
@@ -53,8 +51,7 @@ public final class DbT7119ServiceCodeEntityGenerator {
         entity.setTaniSuShikibetsuCode(DEFAULT_単位数識別コード);
         entity.setGaibuServiceRiyogataKubun(DEFAULT_外部サービス利用型区分);
         entity.setTokubetsuChiikiKasanFlag(DEFAULT_特別地域加算フラグ);
-        entity.setTeiRitsu_TeiGakuKubun(DEFAULT_利用者負担定率_定額区分
-        );
+        entity.setTeiRitsu_TeiGakuKubun(DEFAULT_利用者負担定率_定額区分);
         entity.setRiyoshaFutanGaku(DEFAULT_利用者負担額);
         entity.setKyufuRitsu(DEFAULT_給付率);
         return entity;

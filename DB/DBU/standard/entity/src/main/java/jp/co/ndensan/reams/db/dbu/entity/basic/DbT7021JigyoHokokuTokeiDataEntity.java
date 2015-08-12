@@ -51,9 +51,8 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
     private Decimal tateNo;
     @PrimaryKey
     private Decimal yokoNo;
-    @PrimaryKey
-    private int rirekiNo;
     private Decimal shukeiKekkaAtai;
+    private RString shukeiKomokuMeisho;
     private Code tateKomokuCode;
     private Code yokoKomokuCode;
 
@@ -322,24 +321,6 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
     }
 
     /**
-     * 履歴番号のgetメソッドです。
-     * 
-     * @return 履歴番号
-     */
-    public int getRirekiNo() {
-        return rirekiNo;
-    }
-
-    /**
-     * 履歴番号のsetメソッドです。
-     * 
-     * @param rirekiNo 履歴番号
-     */
-    public void setRirekiNo(int rirekiNo) {
-        this.rirekiNo = rirekiNo;
-    }
-
-    /**
      * 集計結果値のgetメソッドです。
      * 
      * @return 集計結果値
@@ -355,6 +336,24 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
      */
     public void setShukeiKekkaAtai(Decimal shukeiKekkaAtai) {
         this.shukeiKekkaAtai = shukeiKekkaAtai;
+    }
+
+    /**
+     * 集計項目名称のgetメソッドです。
+     * 
+     * @return 集計項目名称
+     */
+    public RString getShukeiKomokuMeisho() {
+        return shukeiKomokuMeisho;
+    }
+
+    /**
+     * 集計項目名称のsetメソッドです。
+     * 
+     * @param shukeiKomokuMeisho 集計項目名称
+     */
+    public void setShukeiKomokuMeisho(RString shukeiKomokuMeisho) {
+        this.shukeiKomokuMeisho = shukeiKomokuMeisho;
     }
 
     /**
@@ -438,9 +437,6 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
         if (!Objects.equals(this.yokoNo, other.yokoNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
-            return false;
-        }
         return true;
     }
 
@@ -460,8 +456,8 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
         this.shukeiTani = entity.shukeiTani;
         this.tateNo = entity.tateNo;
         this.yokoNo = entity.yokoNo;
-        this.rirekiNo = entity.rirekiNo;
         this.shukeiKekkaAtai = entity.shukeiKekkaAtai;
+        this.shukeiKomokuMeisho = entity.shukeiKomokuMeisho;
         this.tateKomokuCode = entity.tateKomokuCode;
         this.yokoKomokuCode = entity.yokoKomokuCode;
     }
@@ -472,10 +468,11 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hokokuYSeireki, hokokuM, shukeiTaishoYSeireki, shukeiTaishoM, toukeiTaishoKubun, shichosonCode, hyoNo, shukeiNo, shukeiTani, tateNo, yokoNo, rirekiNo, shukeiKekkaAtai, tateKomokuCode, yokoKomokuCode);
+        return super.toMd5(hokokuYSeireki, hokokuM, shukeiTaishoYSeireki, shukeiTaishoM, toukeiTaishoKubun, shichosonCode, hyoNo, shukeiNo, shukeiTani, tateNo, yokoNo, shukeiKekkaAtai, shukeiKomokuMeisho, tateKomokuCode, yokoKomokuCode);
     }
 
 // </editor-fold>
+
 
 
 }

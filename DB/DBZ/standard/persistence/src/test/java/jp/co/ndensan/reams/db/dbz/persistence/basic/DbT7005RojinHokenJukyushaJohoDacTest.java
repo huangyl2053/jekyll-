@@ -5,14 +5,13 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_証記載保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +25,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7005RojinHokenJukyushaJohoDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
@@ -47,31 +44,20 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
                     DEFAULT_識別コード);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    null,
                     DEFAULT_識別コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
-                    null);
+                    DEFAULT_識別コード);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7005RojinHokenJukyushaJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -79,7 +65,6 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7005RojinHokenJukyushaJohoEntity insertedRecord = sut.selectByKey(
-                    new ShoKisaiHokenshaNo(キー_03),
                     DEFAULT_識別コード);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -90,10 +75,8 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Test
         public void 老人保健受給者情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
                     DEFAULT_識別コード);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -109,11 +92,9 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Test
         public void 老人保健受給者情報エンティティを渡すと_insertは_老人保健受給者情報を追加する() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード), is(notNullValue()));
         }
     }
@@ -123,24 +104,23 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
         }
 
         @Test
         public void 老人保健受給者情報エンティティを渡すと_updateは_老人保健受給者情報を更新する() {
-            DbT7005RojinHokenJukyushaJohoEntity updateRecord = DbT7005RojinHokenJukyushaJohoEntityGenerator.createDbT7005RojinHokenJukyushaJohoEntity();
-            //TODO  主キー以外の項目を変更してください
-//    updateRecord.set変更したい項目(75);
+            DbT7005RojinHokenJukyushaJohoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_識別コード);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7005RojinHokenJukyushaJohoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
 
-            //TODO  主キー以外の項目を変更してください
-//assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -149,17 +129,18 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード);
         }
 
         @Test
         public void 老人保健受給者情報エンティティを渡すと_deleteは_老人保健受給者情報を削除する() {
-            sut.delete(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード));
+            DbT7005RojinHokenJukyushaJohoEntity deletedEntity = sut.selectByKey(
+                    DEFAULT_識別コード);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード), is(nullValue()));
         }
     }
@@ -167,12 +148,10 @@ public class DbT7005RojinHokenJukyushaJohoDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShoKisaiHokenshaNo 証記載保険者番号,
                 ShikibetsuCode 識別コード) {
             DbT7005RojinHokenJukyushaJohoEntity entity = DbT7005RojinHokenJukyushaJohoEntityGenerator.createDbT7005RojinHokenJukyushaJohoEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShikibetsuCode(識別コード);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

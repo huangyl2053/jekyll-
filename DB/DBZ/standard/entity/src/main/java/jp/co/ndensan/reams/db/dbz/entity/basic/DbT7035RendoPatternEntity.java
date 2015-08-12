@@ -1,15 +1,15 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * DbT7035RendoPatternの項目定義クラスです
@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPatternEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7035RendoPattern");
 
@@ -50,6 +51,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,6 +60,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,6 +69,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,15 +78,16 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,6 +96,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getMotoShichosonCode
+     *
      * @return motoShichosonCode
      */
     public LasdecCode getMotoShichosonCode() {
@@ -99,6 +105,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setMotoShichosonCode
+     *
      * @param motoShichosonCode motoShichosonCode
      */
     public void setMotoShichosonCode(LasdecCode motoShichosonCode) {
@@ -107,6 +114,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getSakiShichosonCode
+     *
      * @return sakiShichosonCode
      */
     public LasdecCode getSakiShichosonCode() {
@@ -115,6 +123,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setSakiShichosonCode
+     *
      * @param sakiShichosonCode sakiShichosonCode
      */
     public void setSakiShichosonCode(LasdecCode sakiShichosonCode) {
@@ -123,6 +132,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getShubetsu
+     *
      * @return shubetsu
      */
     public RString getShubetsu() {
@@ -131,6 +141,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setShubetsu
+     *
      * @param shubetsu shubetsu
      */
     public void setShubetsu(RString shubetsu) {
@@ -139,6 +150,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getYukoKaishiYMD
+     *
      * @return yukoKaishiYMD
      */
     public FlexibleDate getYukoKaishiYMD() {
@@ -147,6 +159,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setYukoKaishiYMD
+     *
      * @param yukoKaishiYMD yukoKaishiYMD
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -155,6 +168,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getYukoShuryoYMD
+     *
      * @return yukoShuryoYMD
      */
     public FlexibleDate getYukoShuryoYMD() {
@@ -163,6 +177,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setYukoShuryoYMD
+     *
      * @param yukoShuryoYMD yukoShuryoYMD
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -171,6 +186,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getRendoKeitaiCode
+     *
      * @return rendoKeitaiCode
      */
     public RString getRendoKeitaiCode() {
@@ -179,6 +195,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setRendoKeitaiCode
+     *
      * @param rendoKeitaiCode rendoKeitaiCode
      */
     public void setRendoKeitaiCode(RString rendoKeitaiCode) {
@@ -187,6 +204,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getMotoFormatVersion
+     *
      * @return motoFormatVersion
      */
     public RString getMotoFormatVersion() {
@@ -195,6 +213,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setMotoFormatVersion
+     *
      * @param motoFormatVersion motoFormatVersion
      */
     public void setMotoFormatVersion(RString motoFormatVersion) {
@@ -203,6 +222,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getMotoEncodeKeitai
+     *
      * @return motoEncodeKeitai
      */
     public RString getMotoEncodeKeitai() {
@@ -211,6 +231,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setMotoEncodeKeitai
+     *
      * @param motoEncodeKeitai motoEncodeKeitai
      */
     public void setMotoEncodeKeitai(RString motoEncodeKeitai) {
@@ -219,6 +240,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getSakiFormatVersion
+     *
      * @return sakiFormatVersion
      */
     public RString getSakiFormatVersion() {
@@ -227,6 +249,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setSakiFormatVersion
+     *
      * @param sakiFormatVersion sakiFormatVersion
      */
     public void setSakiFormatVersion(RString sakiFormatVersion) {
@@ -235,6 +258,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getSakiEncodeKeitai
+     *
      * @return sakiEncodeKeitai
      */
     public RString getSakiEncodeKeitai() {
@@ -243,6 +267,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setSakiEncodeKeitai
+     *
      * @param sakiEncodeKeitai sakiEncodeKeitai
      */
     public void setSakiEncodeKeitai(RString sakiEncodeKeitai) {
@@ -251,6 +276,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getCodeHenkanKubun
+     *
      * @return codeHenkanKubun
      */
     public RString getCodeHenkanKubun() {
@@ -259,6 +285,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setCodeHenkanKubun
+     *
      * @param codeHenkanKubun codeHenkanKubun
      */
     public void setCodeHenkanKubun(RString codeHenkanKubun) {
@@ -267,6 +294,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getGaijiHenkanKubun
+     *
      * @return gaijiHenkanKubun
      */
     public RString getGaijiHenkanKubun() {
@@ -275,6 +303,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setGaijiHenkanKubun
+     *
      * @param gaijiHenkanKubun gaijiHenkanKubun
      */
     public void setGaijiHenkanKubun(RString gaijiHenkanKubun) {
@@ -283,6 +312,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getZenkenRendoKubun
+     *
      * @return zenkenRendoKubun
      */
     public RString getZenkenRendoKubun() {
@@ -291,6 +321,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setZenkenRendoKubun
+     *
      * @param zenkenRendoKubun zenkenRendoKubun
      */
     public void setZenkenRendoKubun(RString zenkenRendoKubun) {
@@ -299,6 +330,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * getRendoKubun
+     *
      * @return rendoKubun
      */
     public RString getRendoKubun() {
@@ -307,6 +339,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * setRendoKubun
+     *
      * @param rendoKubun rendoKubun
      */
     public void setRendoKubun(RString rendoKubun) {
@@ -315,10 +348,9 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * このエンティティの主キーが他の{@literal DbT7035RendoPatternEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7035RendoPatternEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7035RendoPatternEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7035RendoPatternEntity other) {
@@ -366,6 +398,7 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -374,7 +407,4 @@ public class DbT7035RendoPatternEntity extends DbTableEntityBase<DbT7035RendoPat
     }
 
 // </editor-fold>
-
-
-
 }

@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7025KoikiNoHatsu
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -25,8 +26,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7025KoikiNoHatsubanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
@@ -46,7 +45,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new LasdecCode("213645"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分);
             TestSupport.insert(
                     DEFAULT_市町村コード,
@@ -56,7 +55,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分);
         }
 
@@ -64,7 +63,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
         public void コード区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null);
+                    DEFAULT_コード区分);
         }
 
         @Test
@@ -78,7 +77,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7025KoikiNoHatsubanEntity insertedRecord = sut.selectByKey(
-                    new LasdecCode("797466"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,7 +88,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
         @Test
         public void 広域番号発番テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new LasdecCode("456254"),
+                    DEFAULT_市町村コード,
                     DEFAULT_コード区分);
             TestSupport.insert(
                     DEFAULT_市町村コード,
@@ -128,18 +127,20 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
 
         @Test
         public void 広域番号発番テーブルエンティティを渡すと_updateは_広域番号発番テーブルを更新する() {
-            DbT7025KoikiNoHatsubanEntity updateRecord = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
-            //TODO  主キー以外の項目を変更してください
-//updateRecord.set変更したい項目(75);
+            DbT7025KoikiNoHatsubanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_コード区分);
 
-            sut.update(updateRecord);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
+            sut.save(updateRecord);
 
             DbT7025KoikiNoHatsubanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分);
 
-            //TODO  主キー以外の項目を変更してください
-// assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -154,9 +155,13 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
 
         @Test
         public void 広域番号発番テーブルエンティティを渡すと_deleteは_広域番号発番テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7025KoikiNoHatsubanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_コード区分));
+                    DEFAULT_コード区分);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_コード区分), is(nullValue()));
@@ -171,7 +176,7 @@ public class DbT7025KoikiNoHatsubanDacTest extends DbzTestDacBase {
             DbT7025KoikiNoHatsubanEntity entity = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
             entity.setShichosonCode(市町村コード);
             entity.setCodeKubun(コード区分);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

@@ -4,17 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7121ChiikiMitchakuServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7121ChiikiMitchakuServiceCodeEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 地域密着型介護サービスコードエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7121ChiikiMitchakuServiceCodeEntityGenerator {
 

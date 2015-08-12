@@ -7,27 +7,25 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkan;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkan.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkan.kyuNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkan.noKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkanEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 各種新旧番号変換テーブルのデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7028KakushuShinKyuNoHenkanDac implements IModifiable<DbT7028KakushuShinKyuNoHenkanEntity> {
+public class DbT7028KakushuShinKyuNoHenkanDac implements ISaveable<DbT7028KakushuShinKyuNoHenkanEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -75,37 +73,18 @@ public class DbT7028KakushuShinKyuNoHenkanDac implements IModifiable<DbT7028Kaku
                 toList(DbT7028KakushuShinKyuNoHenkanEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT7028KakushuShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7028KakushuShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7028KakushuShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT7028KakushuShinKyuNoHenkanEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT7028KakushuShinKyuNoHenkanEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT7028KakushuShinKyuNoHenkanEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT7028KakushuShinKyuNoHenkanEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("各種新旧番号変換テーブルエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

@@ -4,22 +4,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4102HokenshaNinteiKekkaJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4102NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

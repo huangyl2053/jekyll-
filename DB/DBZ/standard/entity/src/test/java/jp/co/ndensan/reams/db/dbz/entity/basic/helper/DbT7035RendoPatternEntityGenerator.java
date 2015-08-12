@@ -11,16 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連動パターンエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7035RendoPatternEntityGenerator {
 
     public static final LasdecCode DEFAULT_送信元市町村コード = new LasdecCode("202011");
     public static final LasdecCode DEFAULT_送信先市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_種別 = new RString("1");
-    public static final FlexibleDate DEFAULT_有効開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_有効終了年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_有効開始年月日 = new FlexibleDate("20150808");
+    public static final FlexibleDate DEFAULT_有効終了年月日 = new FlexibleDate("20150808");
     public static final RString DEFAULT_連動形態コード = new RString("1");
     public static final RString DEFAULT_送信元フォーマットバージョン = new RString("1");
     public static final RString DEFAULT_送信元エンコーディング = new RString("1");
