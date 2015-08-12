@@ -10,8 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KoikiNoHatsuban;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7025KoikiNoHatsubanEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7025KoikiNoHatsubanEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7025KoikiNoHatsubanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7025KoikiNoHatsubanDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,28 +42,27 @@ public class KoikiNoHatsubanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get広域番号発番テーブル extends FdaTestBase {
+    public static class get広域番号発番テーブル extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー2;
+            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
             sut.get広域番号発番テーブル(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー1;
+            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
             sut.get広域番号発番テーブル(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(null);
+            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
             KoikiNoHatsuban result = sut.get広域番号発番テーブル(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -70,18 +71,17 @@ public class KoikiNoHatsubanManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7025KoikiNoHatsubanEntity entity = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
-
-            主キー型1 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(entity);
+            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
             KoikiNoHatsuban result = sut.get広域番号発番テーブル(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get広域番号発番テーブル一覧 extends FdaTestBase {
+    public static class get広域番号発番テーブル一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +100,11 @@ public class KoikiNoHatsubanManagerTest {
             List<KoikiNoHatsuban> result = sut.get広域番号発番テーブル一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save広域番号発番テーブル extends XxxTestBase {
+    public static class save広域番号発番テーブル extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

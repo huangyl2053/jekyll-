@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoSetai;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7014KaigoSetaiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7014KaigoSetaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

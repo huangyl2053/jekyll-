@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KoikiGaijiHenkanErrorLog;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7034KoikiGaijiHenkanErrorLogDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7034KoikiGaijiHenkanErrorLogDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

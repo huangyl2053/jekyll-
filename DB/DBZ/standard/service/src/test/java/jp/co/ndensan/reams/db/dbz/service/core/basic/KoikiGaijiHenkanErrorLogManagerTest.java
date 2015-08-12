@@ -11,7 +11,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KoikiGaijiHenkanErrorLog;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7034KoikiGaijiHenkanErrorLogEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7034KoikiGaijiHenkanErrorLogDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7034KoikiGaijiHenkanErrorLogDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +41,38 @@ public class KoikiGaijiHenkanErrorLogManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get広域外字変換エラーログ extends FdaTestBase {
+    public static class get広域外字変換エラーログ extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー2;
-            sut.get広域外字変換エラーログ(null, 主キー2);
+            RString 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+            RString 主キー3 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
+            sut.get広域外字変換エラーログ(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー1;
-            sut.get広域外字変換エラーログ(主キー1, null);
+            RString 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+            RString 主キー3 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
+            sut.get広域外字変換エラーログ(主キー1, null, 主キー3);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            RString 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+            RString 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+            sut.get広域外字変換エラーログ(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー2;
-            KoikiGaijiHenkanErrorLog result = sut.get広域外字変換エラーログ(主キー1, 主キー2);
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(RString.class))).thenReturn(null);
+            RString 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+            RString 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+            RString 主キー3 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
+            KoikiGaijiHenkanErrorLog result = sut.get広域外字変換エラーログ(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +80,18 @@ public class KoikiGaijiHenkanErrorLogManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7034KoikiGaijiHenkanErrorLogEntity entity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(RString.class))).thenReturn(entity);
+            RString 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+            RString 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+            RString 主キー3 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
+            KoikiGaijiHenkanErrorLog result = sut.get広域外字変換エラーログ(主キー1, 主キー2, 主キー3);
 
-            主キー型1 主キー1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー2;
-            KoikiGaijiHenkanErrorLog result = sut.get広域外字変換エラーログ(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get処理番号(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get広域外字変換エラーログ一覧 extends FdaTestBase {
+    public static class get広域外字変換エラーログ一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +110,11 @@ public class KoikiGaijiHenkanErrorLogManagerTest {
             List<KoikiGaijiHenkanErrorLog> result = sut.get広域外字変換エラーログ一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get処理番号(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号));
         }
     }
 
-    public static class save広域外字変換エラーログ extends XxxTestBase {
+    public static class save広域外字変換エラーログ extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +143,7 @@ public class KoikiGaijiHenkanErrorLogManagerTest {
             DbT7034KoikiGaijiHenkanErrorLogEntity entity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
             entity.initializeMd5();
             KoikiGaijiHenkanErrorLog 広域外字変換エラーログ = new KoikiGaijiHenkanErrorLog(entity);
-            広域外字変換エラーログ = 広域外字変換エラーログ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域外字変換エラーログ = 広域外字変換エラーログ.createBuilderForEdit().set種別(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save広域外字変換エラーログ(広域外字変換エラーログ), is(true));
         }
@@ -145,7 +155,7 @@ public class KoikiGaijiHenkanErrorLogManagerTest {
             DbT7034KoikiGaijiHenkanErrorLogEntity entity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
             entity.initializeMd5();
             KoikiGaijiHenkanErrorLog 広域外字変換エラーログ = new KoikiGaijiHenkanErrorLog(entity);
-            広域外字変換エラーログ = 広域外字変換エラーログ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域外字変換エラーログ = 広域外字変換エラーログ.createBuilderForEdit().set種別(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save広域外字変換エラーログ(広域外字変換エラーログ), is(false));
         }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -43,7 +44,7 @@ public class DbT5115ImageDac implements ISaveable<DbT5115ImageEntity> {
     @Transaction
     public DbT5115ImageEntity selectByKey(
             ShinseishoKanriNo 申請書管理番号,
-            int 取込ページ番号,
+            Decimal 取込ページ番号,
             Code 原本マスク分) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(取込ページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込ページ番号"));

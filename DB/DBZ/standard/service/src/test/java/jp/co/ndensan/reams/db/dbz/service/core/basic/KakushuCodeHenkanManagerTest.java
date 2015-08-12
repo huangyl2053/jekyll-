@@ -10,9 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KakushuCodeHenkan;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkanEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7027KakushuCodeHenkanEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7027KakushuCodeHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7027KakushuCodeHenkanDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.poi.ss.formula.functions.Code;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -40,29 +43,38 @@ public class KakushuCodeHenkanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get各種コード変換テーブル extends FdaTestBase {
+    public static class get各種コード変換テーブル extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー2;
-            sut.get各種コード変換テーブル(null, 主キー2);
+            RString 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_コード区分;
+            RString 主キー3 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_外部コード;
+            sut.get各種コード変換テーブル(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー1;
-            sut.get各種コード変換テーブル(主キー1, null);
+            LasdecCode 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー3 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_外部コード;
+            sut.get各種コード変換テーブル(主キー1, null, 主キー3);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_コード区分;
+            sut.get各種コード変換テーブル(主キー1, 主キー2, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー2;
-            KakushuCodeHenkan result = sut.get各種コード変換テーブル(主キー1, 主キー2);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(null);
+            LasdecCode 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_コード区分;
+            RString 主キー3 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_外部コード;
+            KakushuCodeHenkan result = sut.get各種コード変換テーブル(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +82,18 @@ public class KakushuCodeHenkanManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7027KakushuCodeHenkanEntity entity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(entity);
+            LasdecCode 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_コード区分;
+            RString 主キー3 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_外部コード;
+            KakushuCodeHenkan result = sut.get各種コード変換テーブル(主キー1, 主キー2, 主キー3);
 
-            主キー型1 主キー1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー2;
-            KakushuCodeHenkan result = sut.get各種コード変換テーブル(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get市町村コード().value(), is(DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get各種コード変換テーブル一覧 extends FdaTestBase {
+    public static class get各種コード変換テーブル一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +112,11 @@ public class KakushuCodeHenkanManagerTest {
             List<KakushuCodeHenkan> result = sut.get各種コード変換テーブル一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save各種コード変換テーブル extends XxxTestBase {
+    public static class save各種コード変換テーブル extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +145,7 @@ public class KakushuCodeHenkanManagerTest {
             DbT7027KakushuCodeHenkanEntity entity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
             entity.initializeMd5();
             KakushuCodeHenkan 各種コード変換テーブル = new KakushuCodeHenkan(entity);
-            各種コード変換テーブル = 各種コード変換テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            各種コード変換テーブル = 各種コード変換テーブル.createBuilderForEdit().set内部番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save各種コード変換テーブル(各種コード変換テーブル), is(true));
         }
@@ -145,7 +157,7 @@ public class KakushuCodeHenkanManagerTest {
             DbT7027KakushuCodeHenkanEntity entity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
             entity.initializeMd5();
             KakushuCodeHenkan 各種コード変換テーブル = new KakushuCodeHenkan(entity);
-            各種コード変換テーブル = 各種コード変換テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            各種コード変換テーブル = 各種コード変換テーブル.createBuilderForEdit().set内部番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save各種コード変換テーブル(各種コード変換テーブル), is(false));
         }

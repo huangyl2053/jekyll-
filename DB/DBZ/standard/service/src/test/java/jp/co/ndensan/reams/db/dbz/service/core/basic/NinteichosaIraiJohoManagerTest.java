@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5201NinteichosaIraiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5201NinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -81,7 +82,7 @@ public class NinteichosaIraiJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査依頼情報一覧 extends FdaTestBase {
+    public static class get認定調査依頼情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -104,7 +105,7 @@ public class NinteichosaIraiJohoManagerTest {
         }
     }
 
-    public static class save認定調査依頼情報 extends XxxTestBase {
+    public static class save認定調査依頼情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

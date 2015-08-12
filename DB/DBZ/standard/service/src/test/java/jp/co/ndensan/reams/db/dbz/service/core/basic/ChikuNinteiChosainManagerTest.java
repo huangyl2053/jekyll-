@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5223ChikuNinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5223ChikuNinteiChosainEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5223ChikuNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -46,24 +48,45 @@ public class ChikuNinteiChosainManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー2;
-            sut.get地区認定調査員(null, 主キー2);
+            RString 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 主キー3 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+            LasdecCode 主キー4 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
+            sut.get地区認定調査員(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー1;
-            sut.get地区認定調査員(主キー1, null);
+            Code 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+            RString 主キー3 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+            LasdecCode 主キー4 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
+            sut.get地区認定調査員(主キー1, null, 主キー3, 主キー4);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            Code 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+            RString 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+            LasdecCode 主キー4 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
+            sut.get地区認定調査員(主キー1, 主キー2, null, 主キー4);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+            Code 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+            RString 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 主キー3 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+            sut.get地区認定調査員(主キー1, 主キー2, 主キー3, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー2;
-            ChikuNinteiChosain result = sut.get地区認定調査員(主キー1, 主キー2);
+            when(dac.selectByKey(any(Code.class), any(RString.class), any(RString.class), any(LasdecCode.class))).thenReturn(null);
+            Code 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+            RString 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 主キー3 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+            LasdecCode 主キー4 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
+            ChikuNinteiChosain result = sut.get地区認定調査員(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
         }
@@ -71,13 +94,14 @@ public class ChikuNinteiChosainManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5223ChikuNinteiChosainEntity entity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(Code.class), any(RString.class), any(RString.class), any(LasdecCode.class))).thenReturn(entity);
+            Code 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+            RString 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+            RString 主キー3 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+            LasdecCode 主キー4 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
+            ChikuNinteiChosain result = sut.get地区認定調査員(主キー1, 主キー2, 主キー3, 主キー4);
 
-            主キー型1 主キー1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー2;
-            ChikuNinteiChosain result = sut.get地区認定調査員(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get調査地区コード().value(), is(DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード.value()));
         }
     }
 
@@ -101,7 +125,7 @@ public class ChikuNinteiChosainManagerTest {
             List<ChikuNinteiChosain> result = sut.get地区認定調査員一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get調査地区コード().value(), is(DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード.value()));
         }
     }
 
@@ -134,7 +158,7 @@ public class ChikuNinteiChosainManagerTest {
             DbT5223ChikuNinteiChosainEntity entity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
             entity.initializeMd5();
             ChikuNinteiChosain 地区認定調査員 = new ChikuNinteiChosain(entity);
-            地区認定調査員 = 地区認定調査員.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            地区認定調査員 = 地区認定調査員.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save地区認定調査員(地区認定調査員), is(true));
         }
@@ -146,7 +170,7 @@ public class ChikuNinteiChosainManagerTest {
             DbT5223ChikuNinteiChosainEntity entity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
             entity.initializeMd5();
             ChikuNinteiChosain 地区認定調査員 = new ChikuNinteiChosain(entity);
-            地区認定調査員 = 地区認定調査員.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            地区認定調査員 = 地区認定調査員.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save地区認定調査員(地区認定調査員), is(false));
         }

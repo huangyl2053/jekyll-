@@ -11,7 +11,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5222NinteiChosaScheduleMemoDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -39,18 +43,22 @@ public class NinteiChosaScheduleMemoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査スケジュールメモ情報 extends FdaTestBase {
+    public static class get認定調査スケジュールメモ情報 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー2;
+            FlexibleDate 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+            Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+            Decimal 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
             sut.get認定調査スケジュールメモ情報(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー1;
+            FlexibleDate 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+            Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+            Decimal 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
             sut.get認定調査スケジュールメモ情報(主キー1, null);
         }
 
@@ -59,8 +67,9 @@ public class NinteiChosaScheduleMemoManagerTest {
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー2;
+            FlexibleDate 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+            Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+            Decimal 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
             NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -71,8 +80,9 @@ public class NinteiChosaScheduleMemoManagerTest {
             DbT5222NinteiChosaScheduleMemoEntity entity = DbT5222NinteiChosaScheduleMemoEntityGenerator.createDbT5222NinteiChosaScheduleMemoEntity();
             when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー2;
+            FlexibleDate 主キー1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+            Code 主キー2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+            Decimal 主キー3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
             NinteiChosaScheduleMemo result = sut.get認定調査スケジュールメモ情報(主キー1, 主キー2);
 
             assertThat(result.get主キー1().value(), is(DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー1.value()));
@@ -80,7 +90,7 @@ public class NinteiChosaScheduleMemoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査スケジュールメモ情報一覧 extends FdaTestBase {
+    public static class get認定調査スケジュールメモ情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -103,7 +113,7 @@ public class NinteiChosaScheduleMemoManagerTest {
         }
     }
 
-    public static class save認定調査スケジュールメモ情報 extends XxxTestBase {
+    public static class save認定調査スケジュールメモ情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

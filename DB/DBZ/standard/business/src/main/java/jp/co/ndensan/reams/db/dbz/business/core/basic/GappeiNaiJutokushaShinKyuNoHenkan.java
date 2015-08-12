@@ -32,23 +32,24 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      * @param 履歴番号 履歴番号
      */
     public GappeiNaiJutokushaShinKyuNoHenkan(ShikibetsuCode 識別コード,
-RString 履歴番号) {
+            RString 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new GappeiNaiJutokushaShinKyuNoHenkanIdentifier(
-        識別コード,
-        履歴番号
-                );
+                識別コード,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}より{@link GappeiNaiJutokushaShinKyuNoHenkan}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
+     * @param entity
+     * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
      */
     public GappeiNaiJutokushaShinKyuNoHenkan(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併内住特者新旧番号変換テーブル"));
@@ -95,7 +96,11 @@ RString 履歴番号) {
      *
      * @return 識別コード（措置元）
      */
-    public ShikibetsuCode get識別コード（措置元）() {
+    public ShikibetsuCode get識別コード
+    （措置元
+
+
+        ）() {
         return entity.getShikibetsuCodeSochiMoto();
     }
 
@@ -113,7 +118,11 @@ RString 履歴番号) {
      *
      * @return 市町村コード（措置元）
      */
-    public LasdecCode get市町村コード（措置元）() {
+    public LasdecCode get市町村コード
+    （措置元
+
+
+        ）() {
         return entity.getShichosonCodeSochiMoto();
     }
 
@@ -131,7 +140,11 @@ RString 履歴番号) {
      *
      * @return 被保険者番号（措置元）
      */
-    public HihokenshaNo get被保険者番号（措置元）() {
+    public HihokenshaNo get被保険者番号
+    （措置元
+
+
+        ）() {
         return entity.getHihokenshaNoSochiMoto();
     }
 
@@ -166,7 +179,8 @@ RString 履歴番号) {
     /**
      * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}を返します。
      *
-     * @return 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
+     * @return
+     * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
      */
     @Override
     public GappeiNaiJutokushaShinKyuNoHenkanIdentifier identifier() {
@@ -206,6 +220,7 @@ RString 履歴番号) {
         }
         return new GappeiNaiJutokushaShinKyuNoHenkan(deletedEntity, id);
     }
+
     /**
      * {@link GappeiNaiJutokushaShinKyuNoHenkan}のシリアライズ形式を提供します。
      *
@@ -222,7 +237,7 @@ RString 履歴番号) {
         private final DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity;
         private final GappeiNaiJutokushaShinKyuNoHenkanIdentifier id;
 
-        private _SerializationProxy(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity,GappeiNaiJutokushaShinKyuNoHenkanIdentifier id) {
+        private _SerializationProxy(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity, GappeiNaiJutokushaShinKyuNoHenkanIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

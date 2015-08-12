@@ -10,8 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,7 +41,7 @@ public class NinteiKekkaJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get要介護認定結果情報 extends FdaTestBase {
+    public static class get要介護認定結果情報 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -81,7 +82,7 @@ public class NinteiKekkaJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get要介護認定結果情報一覧 extends FdaTestBase {
+    public static class get要介護認定結果情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -104,7 +105,7 @@ public class NinteiKekkaJohoManagerTest {
         }
     }
 
-    public static class save要介護認定結果情報 extends XxxTestBase {
+    public static class save要介護認定結果情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

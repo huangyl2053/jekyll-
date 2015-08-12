@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.hos.common.image.Image;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5115ImageDac;

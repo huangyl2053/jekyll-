@@ -10,8 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7068ChohyoBunruiKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7068ChohyoBunruiKanriDac;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7068ChohyoBunruiKanriDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,28 +43,27 @@ public class ChohyoBunruiKanriManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票分類管理 extends FdaTestBase {
+    public static class get帳票分類管理 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー2;
+            ReportId 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_帳票ID;
             sut.get帳票分類管理(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー1;
+            SubGyomuCode 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード;
             sut.get帳票分類管理(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class))).thenReturn(null);
+            SubGyomuCode 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード;
+            ReportId 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_帳票ID;
             ChohyoBunruiKanri result = sut.get帳票分類管理(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -70,18 +72,17 @@ public class ChohyoBunruiKanriManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7068ChohyoBunruiKanriEntity entity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
-
-            主キー型1 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class))).thenReturn(entity);
+            SubGyomuCode 主キー1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード;
+            ReportId 主キー2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_帳票ID;
             ChohyoBunruiKanri result = sut.get帳票分類管理(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.getサブ業務コード().value(), is(DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票分類管理一覧 extends FdaTestBase {
+    public static class get帳票分類管理一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +101,11 @@ public class ChohyoBunruiKanriManagerTest {
             List<ChohyoBunruiKanri> result = sut.get帳票分類管理一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).getサブ業務コード().value(), is(DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
-    public static class save帳票分類管理 extends XxxTestBase {
+    public static class save帳票分類管理 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +134,7 @@ public class ChohyoBunruiKanriManagerTest {
             DbT7068ChohyoBunruiKanriEntity entity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
             entity.initializeMd5();
             ChohyoBunruiKanri 帳票分類管理 = new ChohyoBunruiKanri(entity);
-            帳票分類管理 = 帳票分類管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            帳票分類管理 = 帳票分類管理.createBuilderForEdit().set帳票分類ID(new ReportId("12")).build();
 
             assertThat(sut.save帳票分類管理(帳票分類管理), is(true));
         }
@@ -145,7 +146,7 @@ public class ChohyoBunruiKanriManagerTest {
             DbT7068ChohyoBunruiKanriEntity entity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
             entity.initializeMd5();
             ChohyoBunruiKanri 帳票分類管理 = new ChohyoBunruiKanri(entity);
-            帳票分類管理 = 帳票分類管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            帳票分類管理 = 帳票分類管理.createBuilderForEdit().set帳票分類ID(new ReportId("12")).build();
 
             assertThat(sut.save帳票分類管理(帳票分類管理), is(false));
         }

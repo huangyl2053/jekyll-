@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4116IchijiHanteiKekkaJohoDac;

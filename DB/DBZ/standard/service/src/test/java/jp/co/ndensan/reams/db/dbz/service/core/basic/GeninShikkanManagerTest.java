@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.GeninShikkan;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5300GeninShikkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5300GeninShikkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5300GeninShikkanDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,7 +41,7 @@ public class GeninShikkanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get原因疾患 extends FdaTestBase {
+    public static class get原因疾患 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -81,7 +82,7 @@ public class GeninShikkanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get原因疾患一覧 extends FdaTestBase {
+    public static class get原因疾患一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -104,7 +105,7 @@ public class GeninShikkanManagerTest {
         }
     }
 
-    public static class save原因疾患 extends XxxTestBase {
+    public static class save原因疾患 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

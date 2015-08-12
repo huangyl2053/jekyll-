@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5115ImageEntityG
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -198,7 +199,7 @@ public class DbT5115ImageDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShinseishoKanriNo 申請書管理番号,
-                int 取込ページ番号,
+                Decimal 取込ページ番号,
                 Code 原本マスク分) {
             DbT5115ImageEntity entity = DbT5115ImageEntityGenerator.createDbT5115ImageEntity();
             entity.setShinseishoKanriNo(申請書管理番号);

@@ -5,8 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.GappeiNaiJutokushaShinKyuNoHenkan;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -32,28 +43,29 @@ public class GappeiNaiJutokushaShinKyuNoHenkanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get合併内住特者新旧番号変換テーブル extends FdaTestBase {
+    public static class get合併内住特者新旧番号変換テーブル extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー2;
+            ShikibetsuCode 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+            RString 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
             sut.get合併内住特者新旧番号変換テーブル(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー1;
+            ShikibetsuCode 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+            RString 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
             sut.get合併内住特者新旧番号変換テーブル(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(RString.class))).thenReturn(null);
+            ShikibetsuCode 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+            RString 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
             GappeiNaiJutokushaShinKyuNoHenkan result = sut.get合併内住特者新旧番号変換テーブル(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -62,18 +74,17 @@ public class GappeiNaiJutokushaShinKyuNoHenkanManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
-
-            主キー型1 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(RString.class))).thenReturn(entity);
+            ShikibetsuCode 主キー1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+            RString 主キー2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
             GappeiNaiJutokushaShinKyuNoHenkan result = sut.get合併内住特者新旧番号変換テーブル(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get主キー1().value(), is(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get合併内住特者新旧番号変換テーブル一覧 extends FdaTestBase {
+    public static class get合併内住特者新旧番号変換テーブル一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +103,11 @@ public class GappeiNaiJutokushaShinKyuNoHenkanManagerTest {
             List<GappeiNaiJutokushaShinKyuNoHenkan> result = sut.get合併内住特者新旧番号変換テーブル一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get主キー1().value(), is(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
-    public static class save合併内住特者新旧番号変換テーブル extends XxxTestBase {
+    public static class save合併内住特者新旧番号変換テーブル extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
