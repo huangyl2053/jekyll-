@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiOnseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5512ShinsakaiOnseiJohoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -40,28 +40,14 @@ public class ShinsakaiOnseiJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護認定審査会音声情報 extends FdaTestBase {
-
-        // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー2;
-            sut.get介護認定審査会音声情報(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー1;
-            sut.get介護認定審査会音声情報(主キー1, null);
-        }
+    public static class get介護認定審査会音声情報 extends DbeTestBase {
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(int.class), any(int.class))).thenReturn(null);
+            int 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            int 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
             ShinsakaiOnseiJoho result = sut.get介護認定審査会音声情報(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -70,18 +56,17 @@ public class ShinsakaiOnseiJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
-
-            主キー型1 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(int.class), any(int.class))).thenReturn(entity);
+            int 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            int 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
             ShinsakaiOnseiJoho result = sut.get介護認定審査会音声情報(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get介護認定審査会開催番号(), is(DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護認定審査会音声情報一覧 extends FdaTestBase {
+    public static class get介護認定審査会音声情報一覧 extends DbeTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +85,11 @@ public class ShinsakaiOnseiJohoManagerTest {
             List<ShinsakaiOnseiJoho> result = sut.get介護認定審査会音声情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get介護認定審査会開催番号(), is(DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号));
         }
     }
 
-    public static class save介護認定審査会音声情報 extends XxxTestBase {
+    public static class save介護認定審査会音声情報 extends DbeTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +118,7 @@ public class ShinsakaiOnseiJohoManagerTest {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
             entity.initializeMd5();
             ShinsakaiOnseiJoho 介護認定審査会音声情報 = new ShinsakaiOnseiJoho(entity);
-            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(1).build();
 
             assertThat(sut.save介護認定審査会音声情報(介護認定審査会音声情報), is(true));
         }
@@ -145,7 +130,7 @@ public class ShinsakaiOnseiJohoManagerTest {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
             entity.initializeMd5();
             ShinsakaiOnseiJoho 介護認定審査会音声情報 = new ShinsakaiOnseiJoho(entity);
-            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(1).build();
 
             assertThat(sut.save介護認定審査会音声情報(介護認定審査会音声情報), is(false));
         }

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5914SonotaKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5914SonotaKikanJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,28 +42,27 @@ public class SonotaKikanJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class getその他機関情報 extends FdaTestBase {
+    public static class getその他機関情報 extends DbeTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー2;
+            RString 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_その他機関コード;
             sut.getその他機関情報(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー1;
+            ShoKisaiHokenshaNo 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号;
             sut.getその他機関情報(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(null);
+            ShoKisaiHokenshaNo 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号;
+            RString 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_その他機関コード;
             SonotaKikanJoho result = sut.getその他機関情報(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -70,18 +71,17 @@ public class SonotaKikanJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5914SonotaKikanJohoEntity entity = DbT5914SonotaKikanJohoEntityGenerator.createDbT5914SonotaKikanJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
-
-            主キー型1 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー2;
+            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(entity);
+            ShoKisaiHokenshaNo 主キー1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号;
+            RString 主キー2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_その他機関コード;
             SonotaKikanJoho result = sut.getその他機関情報(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get証記載保険者番号().value(), is(DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class getその他機関情報一覧 extends FdaTestBase {
+    public static class getその他機関情報一覧 extends DbeTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +100,11 @@ public class SonotaKikanJohoManagerTest {
             List<SonotaKikanJoho> result = sut.getその他機関情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
-    public static class saveその他機関情報 extends XxxTestBase {
+    public static class saveその他機関情報 extends DbeTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +133,7 @@ public class SonotaKikanJohoManagerTest {
             DbT5914SonotaKikanJohoEntity entity = DbT5914SonotaKikanJohoEntityGenerator.createDbT5914SonotaKikanJohoEntity();
             entity.initializeMd5();
             SonotaKikanJoho その他機関情報 = new SonotaKikanJoho(entity);
-            その他機関情報 = その他機関情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            その他機関情報 = その他機関情報.createBuilderForEdit().set機関名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveその他機関情報(その他機関情報), is(true));
         }
@@ -145,7 +145,7 @@ public class SonotaKikanJohoManagerTest {
             DbT5914SonotaKikanJohoEntity entity = DbT5914SonotaKikanJohoEntityGenerator.createDbT5914SonotaKikanJohoEntity();
             entity.initializeMd5();
             SonotaKikanJoho その他機関情報 = new SonotaKikanJoho(entity);
-            その他機関情報 = その他機関情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            その他機関情報 = その他機関情報.createBuilderForEdit().set機関名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveその他機関情報(その他機関情報), is(false));
         }

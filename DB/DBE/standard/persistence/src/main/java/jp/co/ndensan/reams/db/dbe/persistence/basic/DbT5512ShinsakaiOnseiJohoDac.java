@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -10,8 +10,8 @@ import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIin
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5111ShinsakaiOnseiJoho.renban;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;

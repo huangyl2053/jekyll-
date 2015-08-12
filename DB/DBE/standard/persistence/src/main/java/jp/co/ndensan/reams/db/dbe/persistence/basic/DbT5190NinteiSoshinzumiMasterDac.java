@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5190NinteiSoshinzumiMaster;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5190NinteiSoshinzumiMasterEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5190NinteiSoshinzumiMaster.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -43,8 +43,7 @@ public class DbT5190NinteiSoshinzumiMasterDac implements ISaveable<DbT5190Nintei
 
         return accessor.select().
                 table(DbT5190NinteiSoshinzumiMaster.class).
-                where(and(
-                                eq(shinseishoKanriNo, 申請書管理番号))).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
                 toObject(DbT5190NinteiSoshinzumiMasterEntity.class);
     }
 

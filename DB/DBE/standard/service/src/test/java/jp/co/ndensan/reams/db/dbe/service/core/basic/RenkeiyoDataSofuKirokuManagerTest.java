@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.RenkeiyoDataSofuKiroku;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.RenkeiyoDataSofuKiroku;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5191RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5191RenkeiyoDataSofuKirokuEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5191RenkeiyoDataSofuKirokuDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -46,23 +48,23 @@ public class RenkeiyoDataSofuKirokuManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー2;
+            FlexibleDate 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_資料作成日;
             sut.get連携用データ送付記録(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー1;
+            ShinseishoKanriNo 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号;
             sut.get連携用データ送付記録(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(FlexibleDate.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー2;
+            ShinseishoKanriNo 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号;
+            FlexibleDate 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_資料作成日;
             RenkeiyoDataSofuKiroku result = sut.get連携用データ送付記録(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -71,18 +73,18 @@ public class RenkeiyoDataSofuKirokuManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5191RenkeiyoDataSofuKirokuEntity entity = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.createDbT5191RenkeiyoDataSofuKirokuEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(FlexibleDate.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー2;
+            ShinseishoKanriNo 主キー1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号;
+            FlexibleDate 主キー2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_資料作成日;
             RenkeiyoDataSofuKiroku result = sut.get連携用データ送付記録(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get申請書管理番号().value(), is(DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get連携用データ送付記録一覧 extends FdaTestBase {
+    public static class get連携用データ送付記録一覧 extends DbeTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -101,11 +103,11 @@ public class RenkeiyoDataSofuKirokuManagerTest {
             List<RenkeiyoDataSofuKiroku> result = sut.get連携用データ送付記録一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get申請書管理番号().value(), is(DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
-    public static class save連携用データ送付記録 extends XxxTestBase {
+    public static class save連携用データ送付記録 extends DbeTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

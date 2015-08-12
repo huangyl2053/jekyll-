@@ -8,7 +8,12 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5052KoseiShichosonShishoMasterDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,7 +49,7 @@ public class KoseiShichosonShishoMasterManager {
      */
     @Transaction
     public KoseiShichosonShishoMaster get構成市町村支所マスタ(
-             LasdecCode 市町村コード,
+            LasdecCode 市町村コード,
             ShishoCode 支所コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));

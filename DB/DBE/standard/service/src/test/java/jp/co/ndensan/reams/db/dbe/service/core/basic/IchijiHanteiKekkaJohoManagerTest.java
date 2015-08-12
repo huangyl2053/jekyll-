@@ -43,27 +43,11 @@ public class IchijiHanteiKekkaJohoManagerTest {
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
     public static class get要介護認定一次判定結果情報 extends DbeTestBase {
 
-        // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー2;
-            sut.get要介護認定一次判定結果情報(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー1;
-            sut.get要介護認定一次判定結果情報(主キー1, null);
-        }
-
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー2;
-            IchijiHanteiKekkaJoho result = sut.get要介護認定一次判定結果情報(主キー1, 主キー2);
+            when(dac.selectByKey()).thenReturn(null);
+            IchijiHanteiKekkaJoho result = sut.get要介護認定一次判定結果情報();
 
             assertThat(result, is(nullValue()));
         }
@@ -71,18 +55,15 @@ public class IchijiHanteiKekkaJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5116IchijiHanteiKekkaJohoEntity entity = DbT5116IchijiHanteiKekkaJohoEntityGenerator.createDbT5116IchijiHanteiKekkaJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey()).thenReturn(entity);
+            IchijiHanteiKekkaJoho result = sut.get要介護認定一次判定結果情報();
 
-            主キー型1 主キー1 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー2;
-            IchijiHanteiKekkaJoho result = sut.get要介護認定一次判定結果情報(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.getチャート(), is(DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_チャート));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get要介護認定一次判定結果情報一覧 extends FdaTestBase {
+    public static class get要介護認定一次判定結果情報一覧 extends DbeTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -101,11 +82,11 @@ public class IchijiHanteiKekkaJohoManagerTest {
             List<IchijiHanteiKekkaJoho> result = sut.get要介護認定一次判定結果情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).getチャート(), is(DbT5116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_チャート));
         }
     }
 
-    public static class save要介護認定一次判定結果情報 extends XxxTestBase {
+    public static class save要介護認定一次判定結果情報 extends DbeTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -134,7 +115,7 @@ public class IchijiHanteiKekkaJohoManagerTest {
             DbT5116IchijiHanteiKekkaJohoEntity entity = DbT5116IchijiHanteiKekkaJohoEntityGenerator.createDbT5116IchijiHanteiKekkaJohoEntity();
             entity.initializeMd5();
             IchijiHanteiKekkaJoho 要介護認定一次判定結果情報 = new IchijiHanteiKekkaJoho(entity);
-            要介護認定一次判定結果情報 = 要介護認定一次判定結果情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            要介護認定一次判定結果情報 = 要介護認定一次判定結果情報.createBuilderForEdit().setチャート(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save要介護認定一次判定結果情報(要介護認定一次判定結果情報), is(true));
         }
@@ -146,7 +127,7 @@ public class IchijiHanteiKekkaJohoManagerTest {
             DbT5116IchijiHanteiKekkaJohoEntity entity = DbT5116IchijiHanteiKekkaJohoEntityGenerator.createDbT5116IchijiHanteiKekkaJohoEntity();
             entity.initializeMd5();
             IchijiHanteiKekkaJoho 要介護認定一次判定結果情報 = new IchijiHanteiKekkaJoho(entity);
-            要介護認定一次判定結果情報 = 要介護認定一次判定結果情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            要介護認定一次判定結果情報 = 要介護認定一次判定結果情報.createBuilderForEdit().setチャート(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save要介護認定一次判定結果情報(要介護認定一次判定結果情報), is(false));
         }

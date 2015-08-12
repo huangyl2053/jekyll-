@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiChosaHoshuTanka;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5031NinteiChosaHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5031NinteiChosaHoshuTankaDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +43,64 @@ public class NinteiChosaHoshuTankaManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査報酬単価 extends FdaTestBase {
+    public static class get認定調査報酬単価 extends DbeTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー2;
-            sut.get認定調査報酬単価(null, 主キー2);
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            sut.get認定調査報酬単価(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー1;
-            sut.get認定調査報酬単価(主キー1, null);
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            sut.get認定調査報酬単価(主キー1, null, 主キー3, 主キー4, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            sut.get認定調査報酬単価(主キー1, 主キー2, null, 主キー4, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            sut.get認定調査報酬単価(主キー1, 主キー2, 主キー3, null, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            sut.get認定調査報酬単価(主キー1, 主キー2, 主キー3, 主キー4, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー2;
-            NinteiChosaHoshuTanka result = sut.get認定調査報酬単価(主キー1, 主キー2);
+            when(dac.selectByKey(any(Code.class), any(Code.class), any(Code.class), any(FlexibleYearMonth.class), any(FlexibleYearMonth.class))).thenReturn(null);
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            NinteiChosaHoshuTanka result = sut.get認定調査報酬単価(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +108,20 @@ public class NinteiChosaHoshuTankaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(Code.class), any(Code.class), any(Code.class), any(FlexibleYearMonth.class), any(FlexibleYearMonth.class))).thenReturn(entity);
+            Code 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
+            Code 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
+            Code 主キー3 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
+            FlexibleYearMonth 主キー4 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月;
+            FlexibleYearMonth 主キー5 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
+            NinteiChosaHoshuTanka result = sut.get認定調査報酬単価(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            主キー型1 主キー1 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー2;
-            NinteiChosaHoshuTanka result = sut.get認定調査報酬単価(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get調査区分().value(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査報酬単価一覧 extends FdaTestBase {
+    public static class get認定調査報酬単価一覧 extends DbeTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +140,11 @@ public class NinteiChosaHoshuTankaManagerTest {
             List<NinteiChosaHoshuTanka> result = sut.get認定調査報酬単価一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get調査区分().value(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分.value()));
         }
     }
 
-    public static class save認定調査報酬単価 extends XxxTestBase {
+    public static class save認定調査報酬単価 extends DbeTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +173,7 @@ public class NinteiChosaHoshuTankaManagerTest {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
             entity.initializeMd5();
             NinteiChosaHoshuTanka 認定調査報酬単価 = new NinteiChosaHoshuTanka(entity);
-            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set意見書入手パターン(new Code("3")).build();
 
             assertThat(sut.save認定調査報酬単価(認定調査報酬単価), is(true));
         }
@@ -145,7 +185,7 @@ public class NinteiChosaHoshuTankaManagerTest {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
             entity.initializeMd5();
             NinteiChosaHoshuTanka 認定調査報酬単価 = new NinteiChosaHoshuTanka(entity);
-            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査報酬単価 = 認定調査報酬単価.createBuilderForEdit().set意見書入手パターン(new Code("3")).build();
 
             assertThat(sut.save認定調査報酬単価(認定調査報酬単価), is(false));
         }
