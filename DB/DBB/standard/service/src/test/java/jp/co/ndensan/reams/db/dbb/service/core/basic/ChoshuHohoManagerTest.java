@@ -91,7 +91,7 @@ public class ChoshuHohoManagerTest {
             Decimal 主キー3 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_履歴番号;
             ChoshuHoho result = sut.get介護徴収方法(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get賦課年度().toDateString(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -115,7 +115,7 @@ public class ChoshuHohoManagerTest {
             List<ChoshuHoho> result = sut.get介護徴収方法一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get(0).get賦課年度().toDateString(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -148,7 +148,7 @@ public class ChoshuHohoManagerTest {
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
             entity.initializeMd5();
             ChoshuHoho 介護徴収方法 = new ChoshuHoho(entity);
-            介護徴収方法 = 介護徴収方法.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護徴収方法 = 介護徴収方法.createBuilderForEdit().set徴収方法1月(new RString("特徴")).build();
 
             assertThat(sut.save介護徴収方法(介護徴収方法), is(true));
         }
@@ -160,7 +160,7 @@ public class ChoshuHohoManagerTest {
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
             entity.initializeMd5();
             ChoshuHoho 介護徴収方法 = new ChoshuHoho(entity);
-            介護徴収方法 = 介護徴収方法.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護徴収方法 = 介護徴収方法.createBuilderForEdit().set徴収方法1月(new RString("特徴")).build();
 
             assertThat(sut.save介護徴収方法(介護徴収方法), is(false));
         }

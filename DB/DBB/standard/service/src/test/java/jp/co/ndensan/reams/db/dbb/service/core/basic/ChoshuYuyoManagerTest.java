@@ -104,7 +104,7 @@ public class ChoshuYuyoManagerTest {
             Decimal 主キー4 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
             ChoshuYuyo result = sut.get介護賦課徴収猶予(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -128,7 +128,7 @@ public class ChoshuYuyoManagerTest {
             List<ChoshuYuyo> result = sut.get介護賦課徴収猶予一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -161,7 +161,7 @@ public class ChoshuYuyoManagerTest {
             DbT2006ChoshuYuyoEntity entity = DbT2006ChoshuYuyoEntityGenerator.createDbT2006ChoshuYuyoEntity();
             entity.initializeMd5();
             ChoshuYuyo 介護賦課徴収猶予 = new ChoshuYuyo(entity);
-            介護賦課徴収猶予 = 介護賦課徴収猶予.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課徴収猶予 = 介護賦課徴収猶予.createBuilderForEdit().set徴収猶予事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課徴収猶予(介護賦課徴収猶予), is(true));
         }
@@ -173,7 +173,7 @@ public class ChoshuYuyoManagerTest {
             DbT2006ChoshuYuyoEntity entity = DbT2006ChoshuYuyoEntityGenerator.createDbT2006ChoshuYuyoEntity();
             entity.initializeMd5();
             ChoshuYuyo 介護賦課徴収猶予 = new ChoshuYuyo(entity);
-            介護賦課徴収猶予 = 介護賦課徴収猶予.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課徴収猶予 = 介護賦課徴収猶予.createBuilderForEdit().set徴収猶予事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課徴収猶予(介護賦課徴収猶予), is(false));
         }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3047ShokanServicePlan2
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -52,7 +53,7 @@ public class ShokanServicePlan200904Manager {
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 履歴番号 RirekiNo
-     * @param 指定／基準該当事業者区分コード ShiteiKijunGaitoJigyoshaKubunCode
+     * @param 指定_基準該当事業者区分コード ShiteiKijunGaitoJigyoshaKubunCode
      * @param 明細行番号 MeisaiLineNo
      * @param 居宅サービス計画作成依頼届出年月日 KyotakuServiceSakuseiIraiYMD
      * @return ShokanServicePlan200904
@@ -65,8 +66,7 @@ public class ShokanServicePlan200904Manager {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             Decimal 履歴番号,
-            RString 指定
-        ／基準該当事業者区分コード,
+            RString 指定_基準該当事業者区分コード,
             RString 明細行番号,
             FlexibleDate 居宅サービス計画作成依頼届出年月日) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -75,8 +75,7 @@ public class ShokanServicePlan200904Manager {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(指定／基準該当事業者区分コード
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード")
+        requireNonNull(指定_基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定_基準該当事業者区分コード")
         );
         requireNonNull(明細行番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細行番号"));
         requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
@@ -88,7 +87,7 @@ public class ShokanServicePlan200904Manager {
                 事業者番号,
                 様式番号,
                 履歴番号,
-                指定／基準該当事業者区分コード,
+                指定_基準該当事業者区分コード,
                 明細行番号,
                 居宅サービス計画作成依頼届出年月日
         );

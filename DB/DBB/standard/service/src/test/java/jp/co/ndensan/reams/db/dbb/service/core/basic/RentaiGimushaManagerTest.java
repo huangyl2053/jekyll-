@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2009RentaiGimushaEntity
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2009RentaiGimushaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
@@ -79,7 +80,7 @@ public class RentaiGimushaManagerTest {
             Decimal 主キー2 = DbT2009RentaiGimushaEntityGenerator.DEFAULT_履歴番号;
             RentaiGimusha result = sut.get連帯納付義務者(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT2009RentaiGimushaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT2009RentaiGimushaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -103,7 +104,7 @@ public class RentaiGimushaManagerTest {
             List<RentaiGimusha> result = sut.get連帯納付義務者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2009RentaiGimushaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT2009RentaiGimushaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -136,7 +137,7 @@ public class RentaiGimushaManagerTest {
             DbT2009RentaiGimushaEntity entity = DbT2009RentaiGimushaEntityGenerator.createDbT2009RentaiGimushaEntity();
             entity.initializeMd5();
             RentaiGimusha 連帯納付義務者 = new RentaiGimusha(entity);
-            連帯納付義務者 = 連帯納付義務者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連帯納付義務者 = 連帯納付義務者.createBuilderForEdit().set終了年月日(new FlexibleDate("20101231")).build();
 
             assertThat(sut.save連帯納付義務者(連帯納付義務者), is(true));
         }
@@ -148,7 +149,7 @@ public class RentaiGimushaManagerTest {
             DbT2009RentaiGimushaEntity entity = DbT2009RentaiGimushaEntityGenerator.createDbT2009RentaiGimushaEntity();
             entity.initializeMd5();
             RentaiGimusha 連帯納付義務者 = new RentaiGimusha(entity);
-            連帯納付義務者 = 連帯納付義務者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連帯納付義務者 = 連帯納付義務者.createBuilderForEdit().set終了年月日(new FlexibleDate("20101231")).build();
 
             assertThat(sut.save連帯納付義務者(連帯納付義務者), is(false));
         }

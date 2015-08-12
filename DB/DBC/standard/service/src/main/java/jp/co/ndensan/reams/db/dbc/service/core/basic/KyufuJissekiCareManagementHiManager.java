@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3031KyufuJissekiCareMa
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -53,7 +56,7 @@ public class KyufuJissekiCareManagementHiManager {
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
      * @param 事業所番号 JigyoshoNo
-     * @param 指定／基準該当事業所区分コード ShiteiKijungaitoJigyoshoKubunCode
+     * @param 指定_基準該当事業所区分コード ShiteiKijungaitoJigyoshoKubunCode
      * @param 居宅サービス計画作成依頼届出年月日 KyotakuServiceSakuseiIraiYMD
      * @param 通し番号 ToshiNo
      * @param サービス計画費明細行番号 ServicePlanhiMeisaiLineNo
@@ -61,15 +64,14 @@ public class KyufuJissekiCareManagementHiManager {
      */
     @Transaction
     public KyufuJissekiCareManagementHi get給付実績ケアマネジメント費(
-            KokanShikibetsuCode 交換情報識別番号,
-            NyuryokuShikibetsuCode 入力識別番号,
+            KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
             RString レコード種別コード,
             HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業所番号,
-            RString 指定
-        ／基準該当事業所区分コード,
+            RString 指定_基準該当事業所区分コード,
             FlexibleDate 居宅サービス計画作成依頼届出年月日,
             RString 通し番号,
             RString サービス計画費明細行番号) {
@@ -80,8 +82,7 @@ public class KyufuJissekiCareManagementHiManager {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
-        requireNonNull(指定／基準該当事業所区分コード
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業所区分コード")
+        requireNonNull(指定_基準該当事業所区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業所区分コード")
         );
         requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
         requireNonNull(通し番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通し番号"));
@@ -95,7 +96,7 @@ public class KyufuJissekiCareManagementHiManager {
                 被保険者番号,
                 サービス提供年月,
                 事業所番号,
-                指定／基準該当事業所区分コード,
+                指定_基準該当事業所区分コード,
                 居宅サービス計画作成依頼届出年月日,
                 通し番号,
                 サービス計画費明細行番号

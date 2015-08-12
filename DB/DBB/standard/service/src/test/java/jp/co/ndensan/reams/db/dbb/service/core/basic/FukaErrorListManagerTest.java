@@ -104,7 +104,7 @@ public class FukaErrorListManagerTest {
             TsuchishoNo 主キー4 = DbT2010FukaErrorListEntityGenerator.DEFAULT_通知書番号;
             FukaErrorList result = sut.get賦課エラー一覧(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード.value()));
+            assertThat(result.getサブ業務コード().value(), is(DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
@@ -128,7 +128,7 @@ public class FukaErrorListManagerTest {
             List<FukaErrorList> result = sut.get賦課エラー一覧一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード.value()));
+            assertThat(result.get(0).getサブ業務コード().value(), is(DbT2010FukaErrorListEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
@@ -161,7 +161,7 @@ public class FukaErrorListManagerTest {
             DbT2010FukaErrorListEntity entity = DbT2010FukaErrorListEntityGenerator.createDbT2010FukaErrorListEntity();
             entity.initializeMd5();
             FukaErrorList 賦課エラー一覧 = new FukaErrorList(entity);
-            賦課エラー一覧 = 賦課エラー一覧.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            賦課エラー一覧 = 賦課エラー一覧.createBuilderForEdit().setバッチID(new RString("012345")).build();
 
             assertThat(sut.save賦課エラー一覧(賦課エラー一覧), is(true));
         }
@@ -173,7 +173,7 @@ public class FukaErrorListManagerTest {
             DbT2010FukaErrorListEntity entity = DbT2010FukaErrorListEntityGenerator.createDbT2010FukaErrorListEntity();
             entity.initializeMd5();
             FukaErrorList 賦課エラー一覧 = new FukaErrorList(entity);
-            賦課エラー一覧 = 賦課エラー一覧.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            賦課エラー一覧 = 賦課エラー一覧.createBuilderForEdit().setバッチID(new RString("012345")).build();
 
             assertThat(sut.save賦課エラー一覧(賦課エラー一覧), is(false));
         }

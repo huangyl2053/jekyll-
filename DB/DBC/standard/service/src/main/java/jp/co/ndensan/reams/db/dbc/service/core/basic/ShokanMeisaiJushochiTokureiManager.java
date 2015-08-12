@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 償還払請求明細・住所地特例を管理するクラスです。
+ * 償還払請求明細_住所地特例を管理するクラスです。
  */
 public class ShokanMeisaiJushochiTokureiManager {
 
@@ -44,7 +44,7 @@ public class ShokanMeisaiJushochiTokureiManager {
     }
 
     /**
-     * 主キーに合致する償還払請求明細・住所地特例を返します。
+     * 主キーに合致する償還払請求明細_住所地特例を返します。
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
@@ -56,9 +56,7 @@ public class ShokanMeisaiJushochiTokureiManager {
      * @return ShokanMeisaiJushochiTokurei
      */
     @Transaction
-    public ShokanMeisaiJushochiTokurei get償還払請求明細
-
-    ・住所地特例(
+    public ShokanMeisaiJushochiTokurei get償還払請求明細_住所地特例(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -90,14 +88,12 @@ public class ShokanMeisaiJushochiTokureiManager {
     }
 
     /**
-     * 償還払請求明細・住所地特例を全件返します。
+     * 償還払請求明細_住所地特例を全件返します。
      *
      * @return List<ShokanMeisaiJushochiTokurei>
      */
     @Transaction
-    public List<ShokanMeisaiJushochiTokurei> get償還払請求明細
-
-    ・住所地特例一覧() {
+    public List<ShokanMeisaiJushochiTokurei> get償還払請求明細_住所地特例一覧() {
         List<ShokanMeisaiJushochiTokurei> businessList = new ArrayList<>();
 
         for (DbT3107ShokanMeisaiJushochiTokureiEntity entity : dac.selectAll()) {
@@ -109,31 +105,19 @@ public class ShokanMeisaiJushochiTokureiManager {
     }
 
     /**
-     * 償還払請求明細・住所地特例{@link ShokanMeisaiJushochiTokurei}を保存します。
+     * 償還払請求明細_住所地特例{@link ShokanMeisaiJushochiTokurei}を保存します。
      *
-     * @param 償還払請求明細・住所地特例 {@link ShokanMeisaiJushochiTokurei}
+     * @param 償還払請求明細_住所地特例 {@link ShokanMeisaiJushochiTokurei}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save償還払請求明細
-
-    ・住所地特例(ShokanMeisaiJushochiTokurei 償還払請求明細
-        ・住所地特例) {
-        requireNonNull(償還払請求明細・住所地特例
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求明細・住所地特例")
+    public boolean save償還払請求明細_住所地特例(ShokanMeisaiJushochiTokurei 償還払請求明細_住所地特例) {
+        requireNonNull(償還払請求明細_住所地特例, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求明細_住所地特例")
         );
-        if (!償還払請求明細 {
-
-        }
-        ・住所地特例.hasChanged()
-
-            ) {
+        if (!償還払請求明細_住所地特例.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(償還払請求明細
-        ・住所地特例.toEntity()
-
-
-);
+        return 1 == dac.save(償還払請求明細_住所地特例.toEntity()
+        );
     }
 }

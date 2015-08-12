@@ -104,7 +104,7 @@ public class GemmenManagerTest {
             Decimal 主キー4 = DbT2004GemmenEntityGenerator.DEFAULT_履歴番号;
             Gemmen result = sut.get介護賦課減免(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT2004GemmenEntityGenerator.DEFAULT_調定年度.toDateString()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2004GemmenEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -128,7 +128,7 @@ public class GemmenManagerTest {
             List<Gemmen> result = sut.get介護賦課減免一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT2004GemmenEntityGenerator.DEFAULT_調定年度.toDateString()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2004GemmenEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -161,7 +161,7 @@ public class GemmenManagerTest {
             DbT2004GemmenEntity entity = DbT2004GemmenEntityGenerator.createDbT2004GemmenEntity();
             entity.initializeMd5();
             Gemmen 介護賦課減免 = new Gemmen(entity);
-            介護賦課減免 = 介護賦課減免.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課減免 = 介護賦課減免.createBuilderForEdit().set申請事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課減免(介護賦課減免), is(true));
         }
@@ -173,7 +173,7 @@ public class GemmenManagerTest {
             DbT2004GemmenEntity entity = DbT2004GemmenEntityGenerator.createDbT2004GemmenEntity();
             entity.initializeMd5();
             Gemmen 介護賦課減免 = new Gemmen(entity);
-            介護賦課減免 = 介護賦課減免.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課減免 = 介護賦課減免.createBuilderForEdit().set申請事由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課減免(介護賦課減免), is(false));
         }

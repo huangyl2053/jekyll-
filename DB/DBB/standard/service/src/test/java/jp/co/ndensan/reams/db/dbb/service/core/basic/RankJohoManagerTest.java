@@ -78,7 +78,7 @@ public class RankJohoManagerTest {
             RString 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
             RankJoho result = sut.getランク情報(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get賦課年度().toDateString(), is(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -102,7 +102,7 @@ public class RankJohoManagerTest {
             List<RankJoho> result = sut.getランク情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get(0).get賦課年度().toDateString(), is(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -135,7 +135,7 @@ public class RankJohoManagerTest {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
             entity.initializeMd5();
             RankJoho ランク情報 = new RankJoho(entity);
-            ランク情報 = ランク情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            ランク情報 = ランク情報.createBuilderForEdit().setランク名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveランク情報(ランク情報), is(true));
         }
@@ -147,7 +147,7 @@ public class RankJohoManagerTest {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
             entity.initializeMd5();
             RankJoho ランク情報 = new RankJoho(entity);
-            ランク情報 = ランク情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            ランク情報 = ランク情報.createBuilderForEdit().setランク名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveランク情報(ランク情報), is(false));
         }

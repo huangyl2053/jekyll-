@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3019KyufujissekiKinkyu
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -59,8 +61,8 @@ public class KyufujissekiKinkyuShisetsuRyoyoManager {
      */
     @Transaction
     public KyufujissekiKinkyuShisetsuRyoyo get給付実績緊急時施設療養(
-            KokanShikibetsuCode 交換情報識別番号,
-            NyuryokuShikibetsuCode 入力識別番号,
+            KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
             RString レコード種別コード,
             HokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,

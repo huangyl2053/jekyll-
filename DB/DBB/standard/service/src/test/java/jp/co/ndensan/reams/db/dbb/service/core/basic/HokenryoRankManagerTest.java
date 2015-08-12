@@ -79,7 +79,7 @@ public class HokenryoRankManagerTest {
             LasdecCode 主キー2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
             HokenryoRank result = sut.get保険料ランク(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get賦課年度().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -103,7 +103,7 @@ public class HokenryoRankManagerTest {
             List<HokenryoRank> result = sut.get保険料ランク一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
+            assertThat(result.get(0).get賦課年度().toDateString(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -136,7 +136,7 @@ public class HokenryoRankManagerTest {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
             entity.initializeMd5();
             HokenryoRank 保険料ランク = new HokenryoRank(entity);
-            保険料ランク = 保険料ランク.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save保険料ランク(保険料ランク), is(true));
         }
@@ -148,7 +148,7 @@ public class HokenryoRankManagerTest {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
             entity.initializeMd5();
             HokenryoRank 保険料ランク = new HokenryoRank(entity);
-            保険料ランク = 保険料ランク.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save保険料ランク(保険料ランク), is(false));
         }

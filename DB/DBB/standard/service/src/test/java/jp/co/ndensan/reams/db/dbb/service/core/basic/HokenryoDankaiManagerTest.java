@@ -88,7 +88,7 @@ public class HokenryoDankaiManagerTest {
             RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
             HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.value()));
+            assertThat(result.get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -112,7 +112,7 @@ public class HokenryoDankaiManagerTest {
             List<HokenryoDankai> result = sut.get保険料段階一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.value()));
+            assertThat(result.get(0).get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }
     }
 
@@ -145,7 +145,7 @@ public class HokenryoDankaiManagerTest {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.initializeMd5();
             HokenryoDankai 保険料段階 = new HokenryoDankai(entity);
-            保険料段階 = 保険料段階.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RString("3")).build();
 
             assertThat(sut.save保険料段階(保険料段階), is(true));
         }
@@ -157,7 +157,7 @@ public class HokenryoDankaiManagerTest {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.initializeMd5();
             HokenryoDankai 保険料段階 = new HokenryoDankai(entity);
-            保険料段階 = 保険料段階.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            保険料段階 = 保険料段階.createBuilderForEdit().setランク区分(new RString("3")).build();
 
             assertThat(sut.save保険料段階(保険料段階), is(false));
         }

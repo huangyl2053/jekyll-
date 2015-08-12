@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 償還払請求特定診療費・特別療養費を管理するクラスです。
+ * 償還払請求特定診療費_特別療養費を管理するクラスです。
  */
 public class ShokanTokuteiShinryoTokubetsuRyoyoManager {
 
@@ -44,7 +44,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 主キーに合致する償還払請求特定診療費・特別療養費を返します。
+     * 主キーに合致する償還払請求特定診療費_特別療養費を返します。
      *
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
@@ -56,9 +56,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManager {
      * @return ShokanTokuteiShinryoTokubetsuRyoyo
      */
     @Transaction
-    public ShokanTokuteiShinryoTokubetsuRyoyo get償還払請求特定診療費
-
-    ・特別療養費(
+    public ShokanTokuteiShinryoTokubetsuRyoyo get償還払請求特定診療費_特別療養費(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -90,14 +88,12 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 償還払請求特定診療費・特別療養費を全件返します。
+     * 償還払請求特定診療費_特別療養費を全件返します。
      *
      * @return List<ShokanTokuteiShinryoTokubetsuRyoyo>
      */
     @Transaction
-    public List<ShokanTokuteiShinryoTokubetsuRyoyo> get償還払請求特定診療費
-
-    ・特別療養費一覧() {
+    public List<ShokanTokuteiShinryoTokubetsuRyoyo> get償還払請求特定診療費_特別療養費一覧() {
         List<ShokanTokuteiShinryoTokubetsuRyoyo> businessList = new ArrayList<>();
 
         for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity : dac.selectAll()) {
@@ -109,31 +105,17 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManager {
     }
 
     /**
-     * 償還払請求特定診療費・特別療養費{@link ShokanTokuteiShinryoTokubetsuRyoyo}を保存します。
+     * 償還払請求特定診療費_特別療養費{@link ShokanTokuteiShinryoTokubetsuRyoyo}を保存します。
      *
-     * @param 償還払請求特定診療費・特別療養費 {@link ShokanTokuteiShinryoTokubetsuRyoyo}
+     * @param 償還払請求特定診療費_特別療養費 {@link ShokanTokuteiShinryoTokubetsuRyoyo}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save償還払請求特定診療費
-
-    ・特別療養費(ShokanTokuteiShinryoTokubetsuRyoyo 償還払請求特定診療費
-        ・特別療養費) {
-        requireNonNull(償還払請求特定診療費・特別療養費
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定診療費・特別療養費")
-        );
-        if (!償還払請求特定診療費 {
-
-        }
-        ・特別療養費.hasChanged()
-
-            ) {
+    public boolean save償還払請求特定診療費_特別療養費(ShokanTokuteiShinryoTokubetsuRyoyo 償還払請求特定診療費_特別療養費) {
+        requireNonNull(償還払請求特定診療費_特別療養費, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定診療費_特別療養費"));
+        if (!償還払請求特定診療費_特別療養費.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(償還払請求特定診療費
-        ・特別療養費.toEntity()
-
-
-);
+        return 1 == dac.save(償還払請求特定診療費_特別療養費.toEntity());
     }
 }

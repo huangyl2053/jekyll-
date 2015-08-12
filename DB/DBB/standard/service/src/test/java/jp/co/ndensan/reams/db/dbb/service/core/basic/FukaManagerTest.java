@@ -105,7 +105,7 @@ public class FukaManagerTest {
             Decimal 主キー4 = DbT2002FukaEntityGenerator.DEFAULT_履歴番号;
             Fuka result = sut.get介護賦課(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -129,7 +129,7 @@ public class FukaManagerTest {
             List<Fuka> result = sut.get介護賦課一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -162,7 +162,7 @@ public class FukaManagerTest {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.initializeMd5();
             Fuka 介護賦課 = new Fuka(entity);
-            介護賦課 = 介護賦課.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課 = 介護賦課.createBuilderForEdit().set保険料段階(new RString("1")).build();
 
             assertThat(sut.save介護賦課(介護賦課), is(true));
         }
@@ -174,7 +174,7 @@ public class FukaManagerTest {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.initializeMd5();
             Fuka 介護賦課 = new Fuka(entity);
-            介護賦課 = 介護賦課.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護賦課 = 介護賦課.createBuilderForEdit().set保険料段階(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護賦課(介護賦課), is(false));
         }

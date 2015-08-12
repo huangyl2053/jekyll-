@@ -128,7 +128,7 @@ public class KibetsuChoshuYuyoManagerTest {
             int 主キー6 = DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_期;
             KibetsuChoshuYuyo result = sut.get介護期別徴収猶予(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -152,7 +152,7 @@ public class KibetsuChoshuYuyoManagerTest {
             List<KibetsuChoshuYuyo> result = sut.get介護期別徴収猶予一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度.value()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2007KibetsuChoshuYuyoEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -185,7 +185,7 @@ public class KibetsuChoshuYuyoManagerTest {
             DbT2007KibetsuChoshuYuyoEntity entity = DbT2007KibetsuChoshuYuyoEntityGenerator.createDbT2007KibetsuChoshuYuyoEntity();
             entity.initializeMd5();
             KibetsuChoshuYuyo 介護期別徴収猶予 = new KibetsuChoshuYuyo(entity);
-            介護期別徴収猶予 = 介護期別徴収猶予.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護期別徴収猶予 = 介護期別徴収猶予.createBuilderForEdit().set徴収方法(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護期別徴収猶予(介護期別徴収猶予), is(true));
         }
@@ -197,7 +197,7 @@ public class KibetsuChoshuYuyoManagerTest {
             DbT2007KibetsuChoshuYuyoEntity entity = DbT2007KibetsuChoshuYuyoEntityGenerator.createDbT2007KibetsuChoshuYuyoEntity();
             entity.initializeMd5();
             KibetsuChoshuYuyo 介護期別徴収猶予 = new KibetsuChoshuYuyo(entity);
-            介護期別徴収猶予 = 介護期別徴収猶予.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護期別徴収猶予 = 介護期別徴収猶予.createBuilderForEdit().set徴収方法(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護期別徴収猶予(介護期別徴収猶予), is(false));
         }

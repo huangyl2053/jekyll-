@@ -128,7 +128,7 @@ public class KibetsuManagerTest {
             int 主キー6 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
             Kibetsu result = sut.get介護期別(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度.toDateString()));
+            assertThat(result.get調定年度().toDateString(), is(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -152,7 +152,7 @@ public class KibetsuManagerTest {
             List<Kibetsu> result = sut.get介護期別一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度.toDateString()));
+            assertThat(result.get(0).get調定年度().toDateString(), is(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度.toDateString()));
         }
     }
 
@@ -185,7 +185,7 @@ public class KibetsuManagerTest {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
             entity.initializeMd5();
             Kibetsu 介護期別 = new Kibetsu(entity);
-            介護期別 = 介護期別.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護期別 = 介護期別.createBuilderForEdit().set調定ID(new Decimal(123)).build();
 
             assertThat(sut.save介護期別(介護期別), is(true));
         }
@@ -197,7 +197,7 @@ public class KibetsuManagerTest {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
             entity.initializeMd5();
             Kibetsu 介護期別 = new Kibetsu(entity);
-            介護期別 = 介護期別.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護期別 = 介護期別.createBuilderForEdit().set調定ID(new Decimal(123)).build();
 
             assertThat(sut.save介護期別(介護期別), is(false));
         }
