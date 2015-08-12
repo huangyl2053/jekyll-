@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkan.c
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkan.gaibuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -13,7 +13,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5223ChikuNinteiChosain.
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5223ChikuNinteiChosain.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5223ChikuNinteiChosainEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

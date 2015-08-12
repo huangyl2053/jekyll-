@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.chiikiNo
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.gappeiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -16,7 +16,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.shor
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.subGyomuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

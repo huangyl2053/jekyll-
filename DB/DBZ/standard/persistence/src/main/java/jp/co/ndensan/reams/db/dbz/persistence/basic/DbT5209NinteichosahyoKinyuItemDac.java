@@ -13,7 +13,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5209NinteichosahyoKinyu
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5209NinteichosahyoKinyuItem.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5209NinteichosahyoKinyuItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;

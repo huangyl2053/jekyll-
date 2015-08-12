@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJoho.k
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJoho.ketteiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

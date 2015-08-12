@@ -18,7 +18,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiInk
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiInshikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

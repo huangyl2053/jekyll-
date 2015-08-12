@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5304ShujiiIkenshoIkenItemEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
-    public static final int DEFAULT_主治医意見書作成依頼履歴番号 = new int(1);
-    public static final int DEFAULT_連番 = new int(1);
+    public static final int DEFAULT_主治医意見書作成依頼履歴番号 = 1;
+    public static final int DEFAULT_連番 = 1;
     public static final Code DEFAULT_厚労省IF識別コード = new Code("01");
     public static final RString DEFAULT_意見項目 = new RString("名称");
 

@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7068ChohyoBunruiKanri.c
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7069KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7069KaigoToiawasesakiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
