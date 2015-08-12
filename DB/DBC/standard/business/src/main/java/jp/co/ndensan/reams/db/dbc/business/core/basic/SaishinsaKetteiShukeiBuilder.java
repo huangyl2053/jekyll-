@@ -6,8 +6,13 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3063SaishinsaKetteiShukeiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link SaishinsaKetteiShukei}の編集を行うビルダークラスです。
@@ -72,218 +77,218 @@ public class SaishinsaKetteiShukeiBuilder {
     }
 
     /**
-     * 介護給付費・請求・件数を設定します。
+     * 介護給付費_請求_件数を設定します。
      *
-     * @param 介護給付費・請求・件数 介護給付費・請求・件数
+     * @param 介護給付費_請求_件数 介護給付費_請求_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・請求・件数(int 介護給付費・請求・件数) {
-        requireNonNull(介護給付費・請求・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・請求・件数"));
-        entity.setKaigoKyufuhiSeikyuKensu(介護給付費・請求・件数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_請求_件数(int 介護給付費_請求_件数) {
+        requireNonNull(介護給付費_請求_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_請求_件数"));
+        entity.setKaigoKyufuhiSeikyuKensu(介護給付費_請求_件数);
         return this;
     }
 
     /**
-     * 介護給付費・請求・単位数を設定します。
+     * 介護給付費_請求_単位数を設定します。
      *
-     * @param 介護給付費・請求・単位数 介護給付費・請求・単位数
+     * @param 介護給付費_請求_単位数 介護給付費_請求_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・請求・単位数(Decimal 介護給付費・請求・単位数) {
-        requireNonNull(介護給付費・請求・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・請求・単位数"));
-        entity.setKaigoKyufuhiSeikyuTanisu(介護給付費・請求・単位数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_請求_単位数(Decimal 介護給付費_請求_単位数) {
+        requireNonNull(介護給付費_請求_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_請求_単位数"));
+        entity.setKaigoKyufuhiSeikyuTanisu(介護給付費_請求_単位数);
         return this;
     }
 
     /**
-     * 介護給付費・請求・保険者負担額を設定します。
+     * 介護給付費_請求_保険者負担額を設定します。
      *
-     * @param 介護給付費・請求・保険者負担額 介護給付費・請求・保険者負担額
+     * @param 介護給付費_請求_保険者負担額 介護給付費_請求_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・請求・保険者負担額(Decimal 介護給付費・請求・保険者負担額) {
-        requireNonNull(介護給付費・請求・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・請求・保険者負担額"));
-        entity.setKaigoKyufuhiSeikyuFutangaku(介護給付費・請求・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_請求_保険者負担額(Decimal 介護給付費_請求_保険者負担額) {
+        requireNonNull(介護給付費_請求_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_請求_保険者負担額"));
+        entity.setKaigoKyufuhiSeikyuFutangaku(介護給付費_請求_保険者負担額);
         return this;
     }
 
     /**
-     * 介護給付費・決定・件数を設定します。
+     * 介護給付費_決定_件数を設定します。
      *
-     * @param 介護給付費・決定・件数 介護給付費・決定・件数
+     * @param 介護給付費_決定_件数 介護給付費_決定_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・決定・件数(int 介護給付費・決定・件数) {
-        requireNonNull(介護給付費・決定・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・決定・件数"));
-        entity.setKaigoKyufuhiKetteiKensu(介護給付費・決定・件数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_決定_件数(int 介護給付費_決定_件数) {
+        requireNonNull(介護給付費_決定_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_決定_件数"));
+        entity.setKaigoKyufuhiKetteiKensu(介護給付費_決定_件数);
         return this;
     }
 
     /**
-     * 介護給付費・決定・単位数を設定します。
+     * 介護給付費_決定_単位数を設定します。
      *
-     * @param 介護給付費・決定・単位数 介護給付費・決定・単位数
+     * @param 介護給付費_決定_単位数 介護給付費_決定_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・決定・単位数(Decimal 介護給付費・決定・単位数) {
-        requireNonNull(介護給付費・決定・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・決定・単位数"));
-        entity.setKaigoKyufuhiKetteiTanisu(介護給付費・決定・単位数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_決定_単位数(Decimal 介護給付費_決定_単位数) {
+        requireNonNull(介護給付費_決定_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_決定_単位数"));
+        entity.setKaigoKyufuhiKetteiTanisu(介護給付費_決定_単位数);
         return this;
     }
 
     /**
-     * 介護給付費・決定・保険者負担額を設定します。
+     * 介護給付費_決定_保険者負担額を設定します。
      *
-     * @param 介護給付費・決定・保険者負担額 介護給付費・決定・保険者負担額
+     * @param 介護給付費_決定_保険者負担額 介護給付費_決定_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・決定・保険者負担額(Decimal 介護給付費・決定・保険者負担額) {
-        requireNonNull(介護給付費・決定・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・決定・保険者負担額"));
-        entity.setKaigoKyufuhiKetteiFutangaku(介護給付費・決定・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_決定_保険者負担額(Decimal 介護給付費_決定_保険者負担額) {
+        requireNonNull(介護給付費_決定_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_決定_保険者負担額"));
+        entity.setKaigoKyufuhiKetteiFutangaku(介護給付費_決定_保険者負担額);
         return this;
     }
 
     /**
-     * 介護給付費・調整・件数を設定します。
+     * 介護給付費_調整_件数を設定します。
      *
-     * @param 介護給付費・調整・件数 介護給付費・調整・件数
+     * @param 介護給付費_調整_件数 介護給付費_調整_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・調整・件数(int 介護給付費・調整・件数) {
-        requireNonNull(介護給付費・調整・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・調整・件数"));
-        entity.setKaigoKyufuhiChoseiKensu(介護給付費・調整・件数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_調整_件数(int 介護給付費_調整_件数) {
+        requireNonNull(介護給付費_調整_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_調整_件数"));
+        entity.setKaigoKyufuhiChoseiKensu(介護給付費_調整_件数);
         return this;
     }
 
     /**
-     * 介護給付費・調整・単位数を設定します。
+     * 介護給付費_調整_単位数を設定します。
      *
-     * @param 介護給付費・調整・単位数 介護給付費・調整・単位数
+     * @param 介護給付費_調整_単位数 介護給付費_調整_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・調整・単位数(Decimal 介護給付費・調整・単位数) {
-        requireNonNull(介護給付費・調整・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・調整・単位数"));
-        entity.setKaigoKyufuhiChoseiTanisu(介護給付費・調整・単位数);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_調整_単位数(Decimal 介護給付費_調整_単位数) {
+        requireNonNull(介護給付費_調整_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_調整_単位数"));
+        entity.setKaigoKyufuhiChoseiTanisu(介護給付費_調整_単位数);
         return this;
     }
 
     /**
-     * 介護給付費・調整・保険者負担額を設定します。
+     * 介護給付費_調整_保険者負担額を設定します。
      *
-     * @param 介護給付費・調整・保険者負担額 介護給付費・調整・保険者負担額
+     * @param 介護給付費_調整_保険者負担額 介護給付費_調整_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set介護給付費・調整・保険者負担額(Decimal 介護給付費・調整・保険者負担額) {
-        requireNonNull(介護給付費・調整・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費・調整・保険者負担額"));
-        entity.setKaigoKyufuhiChoseiFutangaku(介護給付費・調整・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set介護給付費_調整_保険者負担額(Decimal 介護給付費_調整_保険者負担額) {
+        requireNonNull(介護給付費_調整_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護給付費_調整_保険者負担額"));
+        entity.setKaigoKyufuhiChoseiFutangaku(介護給付費_調整_保険者負担額);
         return this;
     }
 
     /**
-     * 高額介護サービス費・請求・件数を設定します。
+     * 高額介護サービス費_請求_件数を設定します。
      *
-     * @param 高額介護サービス費・請求・件数 高額介護サービス費・請求・件数
+     * @param 高額介護サービス費_請求_件数 高額介護サービス費_請求_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・請求・件数(int 高額介護サービス費・請求・件数) {
-        requireNonNull(高額介護サービス費・請求・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・請求・件数"));
-        entity.setKogakuKaigoServicehiSeikyuKensu(高額介護サービス費・請求・件数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_請求_件数(int 高額介護サービス費_請求_件数) {
+        requireNonNull(高額介護サービス費_請求_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_請求_件数"));
+        entity.setKogakuKaigoServicehiSeikyuKensu(高額介護サービス費_請求_件数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・請求・単位数を設定します。
+     * 高額介護サービス費_請求_単位数を設定します。
      *
-     * @param 高額介護サービス費・請求・単位数 高額介護サービス費・請求・単位数
+     * @param 高額介護サービス費_請求_単位数 高額介護サービス費_請求_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・請求・単位数(Decimal 高額介護サービス費・請求・単位数) {
-        requireNonNull(高額介護サービス費・請求・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・請求・単位数"));
-        entity.setKogakuKaigoServicehiSeikyuTanisu(高額介護サービス費・請求・単位数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_請求_単位数(Decimal 高額介護サービス費_請求_単位数) {
+        requireNonNull(高額介護サービス費_請求_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_請求_単位数"));
+        entity.setKogakuKaigoServicehiSeikyuTanisu(高額介護サービス費_請求_単位数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・請求・保険者負担額を設定します。
+     * 高額介護サービス費_請求_保険者負担額を設定します。
      *
-     * @param 高額介護サービス費・請求・保険者負担額 高額介護サービス費・請求・保険者負担額
+     * @param 高額介護サービス費_請求_保険者負担額 高額介護サービス費_請求_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・請求・保険者負担額(Decimal 高額介護サービス費・請求・保険者負担額) {
-        requireNonNull(高額介護サービス費・請求・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・請求・保険者負担額"));
-        entity.setKogakuKaigoServicehiSeikyuFutangaku(高額介護サービス費・請求・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_請求_保険者負担額(Decimal 高額介護サービス費_請求_保険者負担額) {
+        requireNonNull(高額介護サービス費_請求_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_請求_保険者負担額"));
+        entity.setKogakuKaigoServicehiSeikyuFutangaku(高額介護サービス費_請求_保険者負担額);
         return this;
     }
 
     /**
-     * 高額介護サービス費・決定・件数を設定します。
+     * 高額介護サービス費_決定_件数を設定します。
      *
-     * @param 高額介護サービス費・決定・件数 高額介護サービス費・決定・件数
+     * @param 高額介護サービス費_決定_件数 高額介護サービス費_決定_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・決定・件数(int 高額介護サービス費・決定・件数) {
-        requireNonNull(高額介護サービス費・決定・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・決定・件数"));
-        entity.setKogakuKaigoServicehiKetteiKensu(高額介護サービス費・決定・件数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_決定_件数(int 高額介護サービス費_決定_件数) {
+        requireNonNull(高額介護サービス費_決定_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_決定_件数"));
+        entity.setKogakuKaigoServicehiKetteiKensu(高額介護サービス費_決定_件数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・決定・単位数を設定します。
+     * 高額介護サービス費_決定_単位数を設定します。
      *
-     * @param 高額介護サービス費・決定・単位数 高額介護サービス費・決定・単位数
+     * @param 高額介護サービス費_決定_単位数 高額介護サービス費_決定_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・決定・単位数(Decimal 高額介護サービス費・決定・単位数) {
-        requireNonNull(高額介護サービス費・決定・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・決定・単位数"));
-        entity.setKogakuKaigoServicehiKetteiTanisu(高額介護サービス費・決定・単位数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_決定_単位数(Decimal 高額介護サービス費_決定_単位数) {
+        requireNonNull(高額介護サービス費_決定_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_決定_単位数"));
+        entity.setKogakuKaigoServicehiKetteiTanisu(高額介護サービス費_決定_単位数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・決定・保険者負担額を設定します。
+     * 高額介護サービス費_決定_保険者負担額を設定します。
      *
-     * @param 高額介護サービス費・決定・保険者負担額 高額介護サービス費・決定・保険者負担額
+     * @param 高額介護サービス費_決定_保険者負担額 高額介護サービス費_決定_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・決定・保険者負担額(Decimal 高額介護サービス費・決定・保険者負担額) {
-        requireNonNull(高額介護サービス費・決定・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・決定・保険者負担額"));
-        entity.setKogakuKaigoServicehiKetteiFutangaku(高額介護サービス費・決定・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_決定_保険者負担額(Decimal 高額介護サービス費_決定_保険者負担額) {
+        requireNonNull(高額介護サービス費_決定_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_決定_保険者負担額"));
+        entity.setKogakuKaigoServicehiKetteiFutangaku(高額介護サービス費_決定_保険者負担額);
         return this;
     }
 
     /**
-     * 高額介護サービス費・調整・件数を設定します。
+     * 高額介護サービス費_調整_件数を設定します。
      *
-     * @param 高額介護サービス費・調整・件数 高額介護サービス費・調整・件数
+     * @param 高額介護サービス費_調整_件数 高額介護サービス費_調整_件数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・調整・件数(int 高額介護サービス費・調整・件数) {
-        requireNonNull(高額介護サービス費・調整・件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・調整・件数"));
-        entity.setKogakuKaigoServicehiChoseiKensu(高額介護サービス費・調整・件数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_調整_件数(int 高額介護サービス費_調整_件数) {
+        requireNonNull(高額介護サービス費_調整_件数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_調整_件数"));
+        entity.setKogakuKaigoServicehiChoseiKensu(高額介護サービス費_調整_件数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・調整・単位数を設定します。
+     * 高額介護サービス費_調整_単位数を設定します。
      *
-     * @param 高額介護サービス費・調整・単位数 高額介護サービス費・調整・単位数
+     * @param 高額介護サービス費_調整_単位数 高額介護サービス費_調整_単位数
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・調整・単位数(Decimal 高額介護サービス費・調整・単位数) {
-        requireNonNull(高額介護サービス費・調整・単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・調整・単位数"));
-        entity.setKogakuKaigoServicehiChoseiTanisu(高額介護サービス費・調整・単位数);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_調整_単位数(Decimal 高額介護サービス費_調整_単位数) {
+        requireNonNull(高額介護サービス費_調整_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_調整_単位数"));
+        entity.setKogakuKaigoServicehiChoseiTanisu(高額介護サービス費_調整_単位数);
         return this;
     }
 
     /**
-     * 高額介護サービス費・調整・保険者負担額を設定します。
+     * 高額介護サービス費_調整_保険者負担額を設定します。
      *
-     * @param 高額介護サービス費・調整・保険者負担額 高額介護サービス費・調整・保険者負担額
+     * @param 高額介護サービス費_調整_保険者負担額 高額介護サービス費_調整_保険者負担額
      * @return {@link SaishinsaKetteiShukeiBuilder}
      */
-    public SaishinsaKetteiShukeiBuilder set高額介護サービス費・調整・保険者負担額(Decimal 高額介護サービス費・調整・保険者負担額) {
-        requireNonNull(高額介護サービス費・調整・保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費・調整・保険者負担額"));
-        entity.setKogakuKaigoServicehiChoseiFutangaku(高額介護サービス費・調整・保険者負担額);
+    public SaishinsaKetteiShukeiBuilder set高額介護サービス費_調整_保険者負担額(Decimal 高額介護サービス費_調整_保険者負担額) {
+        requireNonNull(高額介護サービス費_調整_保険者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("高額介護サービス費_調整_保険者負担額"));
+        entity.setKogakuKaigoServicehiChoseiFutangaku(高額介護サービス費_調整_保険者負担額);
         return this;
     }
 

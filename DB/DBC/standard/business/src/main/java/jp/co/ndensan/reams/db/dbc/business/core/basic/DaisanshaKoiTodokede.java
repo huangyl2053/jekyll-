@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3084DaisanshaKoiTodokedeEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3084DaisanshaKoiTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護第三者行為届出を管理するクラスです。
  */
-public class DaisanshaKoiTodokede extends ParentModelBase<DaisanshaKoiTodokedeIdentifier, DbT3084DaisanshaKoiTodokedeEntity, DaisanshaKoiTodokede> implements Serializable {
+public class DaisanshaKoiTodokede extends ModelBase<DaisanshaKoiTodokedeIdentifier, DbT3084DaisanshaKoiTodokedeEntity, DaisanshaKoiTodokede> implements Serializable {
 
     private final DbT3084DaisanshaKoiTodokedeEntity entity;
     private final DaisanshaKoiTodokedeIdentifier id;
@@ -33,8 +40,8 @@ public class DaisanshaKoiTodokede extends ParentModelBase<DaisanshaKoiTodokedeId
      * @param 履歴番号 履歴番号
      */
     public DaisanshaKoiTodokede(HihokenshaNo 被保険者番号,
-RString 第三者行為届出管理番号,
-Decimal 履歴番号) {
+            RString 第三者行為届出管理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(第三者行為届出管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("第三者行為届出管理番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +50,10 @@ Decimal 履歴番号) {
         this.entity.setTodokedeKanriNo(第三者行為届出管理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new DaisanshaKoiTodokedeIdentifier(
-        被保険者番号,
-        第三者行為届出管理番号,
-        履歴番号
-                );
+                被保険者番号,
+                第三者行為届出管理番号,
+                履歴番号
+        );
     }
 
     /**
@@ -353,7 +360,7 @@ Decimal 履歴番号) {
      *
      * @return 発病原因・負傷時状況
      */
-    public RString get発病原因・負傷時状況() {
+    public RString get発病原因_負傷時状況() {
         return entity.getHasshoGeiin_FushoJiJokyo();
     }
 
@@ -558,22 +565,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 介護第三者行為届出のみを変更対象とします。<br/>
-     * {@link DbT3084DaisanshaKoiTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link DaisanshaKoiTodokede}
-     */
-    @Override
-    public DaisanshaKoiTodokede modifiedModel() {
-        DbT3084DaisanshaKoiTodokedeEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new DaisanshaKoiTodokede(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する介護第三者行為届出を削除対象とします。<br/>
      * {@link DbT3084DaisanshaKoiTodokedeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -590,6 +581,7 @@ Decimal 履歴番号) {
         }
         return new DaisanshaKoiTodokede(deletedEntity, id);
     }
+
     /**
      * {@link DaisanshaKoiTodokede}のシリアライズ形式を提供します。
      *
@@ -600,13 +592,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3084DaisanshaKoiTodokedeEntity entity;
         private final DaisanshaKoiTodokedeIdentifier id;
 
-        private _SerializationProxy(DbT3084DaisanshaKoiTodokedeEntity entity,DaisanshaKoiTodokedeIdentifier id) {
+        private _SerializationProxy(DbT3084DaisanshaKoiTodokedeEntity entity, DaisanshaKoiTodokedeIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

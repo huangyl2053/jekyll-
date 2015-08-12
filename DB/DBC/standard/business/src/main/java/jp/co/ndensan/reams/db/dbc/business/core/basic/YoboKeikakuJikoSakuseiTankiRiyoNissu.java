@@ -6,22 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 予防給付計画自己作成短期利用日数を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ParentModelBase<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu> implements Serializable {
+public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ModelBase<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity, YoboKeikakuJikoSakuseiTankiRiyoNissu> implements Serializable {
 
-    private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity;
+    private final DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity;
     private final YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id;
 
     /**
@@ -33,29 +33,30 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissu extends ParentModelBase<YoboKe
      * @param 履歴番号 履歴番号
      */
     public YoboKeikakuJikoSakuseiTankiRiyoNissu(HihokenshaNo 被保険者番号,
-FlexibleYearMonth 対象年月,
-Decimal 履歴番号) {
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        this.entity = new DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+        this.entity = new DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setTaishoYM(対象年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier(
-        被保険者番号,
-        対象年月,
-        履歴番号
-                );
+                被保険者番号,
+                対象年月,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}より{@link YoboKeikakuJikoSakuseiTankiRiyoNissu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}
      */
-    public YoboKeikakuJikoSakuseiTankiRiyoNissu(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity) {
+    public YoboKeikakuJikoSakuseiTankiRiyoNissu(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成短期利用日数"));
         this.id = new YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier(
                 entity.getHihokenshaNo(),
@@ -70,7 +71,7 @@ Decimal 履歴番号) {
      * @param id {@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
      */
     YoboKeikakuJikoSakuseiTankiRiyoNissu(
-            DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity,
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity,
             YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id
     ) {
         this.entity = entity;
@@ -129,34 +130,19 @@ Decimal 履歴番号) {
      * @return {@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}のクローン
      */
     @Override
-    public DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity toEntity() {
+    public DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity toEntity() {
         return this.entity.clone();
     }
 
     /**
      * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}を返します。
      *
-     * @return 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
+     * @return
+     * 予防給付計画自己作成短期利用日数の識別子{@link YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier}
      */
     @Override
     public YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 予防給付計画自己作成短期利用日数のみを変更対象とします。<br/>
-     * {@link DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link YoboKeikakuJikoSakuseiTankiRiyoNissu}
-     */
-    @Override
-    public YoboKeikakuJikoSakuseiTankiRiyoNissu modifiedModel() {
-        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new YoboKeikakuJikoSakuseiTankiRiyoNissu(
-                modifiedEntity, id);
     }
 
     /**
@@ -167,7 +153,7 @@ Decimal 履歴番号) {
      */
     @Override
     public YoboKeikakuJikoSakuseiTankiRiyoNissu deleted() {
-        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity deletedEntity = this.toEntity();
+        DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -176,6 +162,7 @@ Decimal 履歴番号) {
         }
         return new YoboKeikakuJikoSakuseiTankiRiyoNissu(deletedEntity, id);
     }
+
     /**
      * {@link YoboKeikakuJikoSakuseiTankiRiyoNissu}のシリアライズ形式を提供します。
      *
@@ -186,13 +173,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
-        private final DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity;
+        private static final long serialVersionUID = 1L;
+
+        private final DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity;
         private final YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id;
 
-        private _SerializationProxy(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity,YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id) {
+        private _SerializationProxy(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity, YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

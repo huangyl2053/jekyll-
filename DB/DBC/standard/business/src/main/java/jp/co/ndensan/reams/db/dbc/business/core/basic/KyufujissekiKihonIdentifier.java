@@ -6,7 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 
 /**
  * 給付実績基本の識別子です。
@@ -14,8 +22,8 @@ import lombok.Value;
 @Value
 public class KyufujissekiKihonIdentifier implements Serializable {
 
-    private final KokanShikibetsuCode 交換情報識別番号;
-    private final NyuryokuShikibetsuCode 入力識別番号;
+    private final KokanShikibetsuNo 交換情報識別番号;
+    private final NyuryokuShikibetsuNo 入力識別番号;
     private final RString レコード種別コード;
     private final RString 給付実績情報作成区分コード;
     private final HokenshaNo 証記載保険者番号;
@@ -39,16 +47,16 @@ public class KyufujissekiKihonIdentifier implements Serializable {
      * @param 事業所番号 事業所番号
      * @param 通し番号 通し番号
      */
-    public KyufujissekiKihonIdentifier(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-RString 給付実績情報作成区分コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 給付実績区分コード,
-JigyoshaNo 事業所番号,
-RString 通し番号) {
+    public KyufujissekiKihonIdentifier(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            RString 給付実績情報作成区分コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 給付実績区分コード,
+            JigyoshaNo 事業所番号,
+            RString 通し番号) {
         this.交換情報識別番号 = 交換情報識別番号;
         this.入力識別番号 = 入力識別番号;
         this.レコード種別コード = レコード種別コード;

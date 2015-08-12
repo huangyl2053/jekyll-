@@ -6,8 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShukei}の編集を行うビルダークラスです。
@@ -324,14 +331,14 @@ public class ShokanShukeiBuilder {
     }
 
     /**
-     * 点数／金額を設定します。
+     * 点数_金額を設定します。
      *
-     * @param 点数／金額 点数／金額
+     * @param 点数_金額 点数_金額
      * @return {@link ShokanShukeiBuilder}
      */
-    public ShokanShukeiBuilder set点数／金額(int 点数／金額) {
-        requireNonNull(点数／金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数／金額"));
-        entity.setTensuKingaku(点数／金額);
+    public ShokanShukeiBuilder set点数_金額(int 点数_金額) {
+        requireNonNull(点数_金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数_金額"));
+        entity.setTensuKingaku(点数_金額);
         return this;
     }
 
@@ -408,14 +415,14 @@ public class ShokanShukeiBuilder {
     }
 
     /**
-     * 購入・改修履歴等を設定します。
+     * 購入_改修履歴等を設定します。
      *
-     * @param 購入・改修履歴等 購入・改修履歴等
+     * @param 購入_改修履歴等 購入_改修履歴等
      * @return {@link ShokanShukeiBuilder}
      */
-    public ShokanShukeiBuilder set購入・改修履歴等(RString 購入・改修履歴等) {
-        requireNonNull(購入・改修履歴等, UrSystemErrorMessages.値がnull.getReplacedMessage("購入・改修履歴等"));
-        entity.setKounyuKaishuRireki(購入・改修履歴等);
+    public ShokanShukeiBuilder set購入_改修履歴等(RString 購入_改修履歴等) {
+        requireNonNull(購入_改修履歴等, UrSystemErrorMessages.値がnull.getReplacedMessage("購入_改修履歴等"));
+        entity.setKounyuKaishuRireki(購入_改修履歴等);
         return this;
     }
 

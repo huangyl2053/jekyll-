@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3064SaishinsaKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3064SaishinsaKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 再審査決定明細を管理するクラスです。
  */
-public class SaishinsaKetteiMeisai extends ParentModelBase<SaishinsaKetteiMeisaiIdentifier, DbT3064SaishinsaKetteiMeisaiEntity, SaishinsaKetteiMeisai> implements Serializable {
+public class SaishinsaKetteiMeisai extends ModelBase<SaishinsaKetteiMeisaiIdentifier, DbT3064SaishinsaKetteiMeisaiEntity, SaishinsaKetteiMeisai> implements Serializable {
 
     private final DbT3064SaishinsaKetteiMeisaiEntity entity;
     private final SaishinsaKetteiMeisaiIdentifier id;
@@ -33,8 +38,8 @@ public class SaishinsaKetteiMeisai extends ParentModelBase<SaishinsaKetteiMeisai
      * @param 履歴番号 履歴番号
      */
     public SaishinsaKetteiMeisai(FlexibleYearMonth 取扱年月,
-RString 保険者区分,
-Decimal 履歴番号) {
+            RString 保険者区分,
+            Decimal 履歴番号) {
         requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +48,10 @@ Decimal 履歴番号) {
         this.entity.setHokenshaKubun(保険者区分);
         this.entity.setRirekiNo(履歴番号);
         this.id = new SaishinsaKetteiMeisaiIdentifier(
-        取扱年月,
-        保険者区分,
-        履歴番号
-                );
+                取扱年月,
+                保険者区分,
+                履歴番号
+        );
     }
 
     /**
@@ -288,22 +293,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 再審査決定明細のみを変更対象とします。<br/>
-     * {@link DbT3064SaishinsaKetteiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link SaishinsaKetteiMeisai}
-     */
-    @Override
-    public SaishinsaKetteiMeisai modifiedModel() {
-        DbT3064SaishinsaKetteiMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new SaishinsaKetteiMeisai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する再審査決定明細を削除対象とします。<br/>
      * {@link DbT3064SaishinsaKetteiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -320,6 +309,7 @@ Decimal 履歴番号) {
         }
         return new SaishinsaKetteiMeisai(deletedEntity, id);
     }
+
     /**
      * {@link SaishinsaKetteiMeisai}のシリアライズ形式を提供します。
      *
@@ -330,13 +320,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3064SaishinsaKetteiMeisaiEntity entity;
         private final SaishinsaKetteiMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3064SaishinsaKetteiMeisaiEntity entity,SaishinsaKetteiMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3064SaishinsaKetteiMeisaiEntity entity, SaishinsaKetteiMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

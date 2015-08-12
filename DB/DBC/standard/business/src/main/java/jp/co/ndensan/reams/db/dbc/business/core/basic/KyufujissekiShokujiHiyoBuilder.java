@@ -6,8 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3022KyufujissekiShokujiHiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiShokujiHiyo}の編集を行うビルダークラスです。
@@ -41,7 +50,7 @@ public class KyufujissekiShokujiHiyoBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiShokujiHiyoBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +62,7 @@ public class KyufujissekiShokujiHiyoBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiShokujiHiyoBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -132,74 +141,74 @@ public class KyufujissekiShokujiHiyoBuilder {
     }
 
     /**
-     * 基本・提供日数を設定します。
+     * 基本_提供日数を設定します。
      *
-     * @param 基本・提供日数 基本・提供日数
+     * @param 基本_提供日数 基本_提供日数
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set基本・提供日数(Decimal 基本・提供日数) {
-        requireNonNull(基本・提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("基本・提供日数"));
-        entity.setKihonTeikyoNissu(基本・提供日数);
+    public KyufujissekiShokujiHiyoBuilder set基本_提供日数(Decimal 基本_提供日数) {
+        requireNonNull(基本_提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("基本_提供日数"));
+        entity.setKihonTeikyoNissu(基本_提供日数);
         return this;
     }
 
     /**
-     * 基本・提供単価を設定します。
+     * 基本_提供単価を設定します。
      *
-     * @param 基本・提供単価 基本・提供単価
+     * @param 基本_提供単価 基本_提供単価
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set基本・提供単価(Decimal 基本・提供単価) {
-        requireNonNull(基本・提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("基本・提供単価"));
-        entity.setKihonTeikyoTanka(基本・提供単価);
+    public KyufujissekiShokujiHiyoBuilder set基本_提供単価(Decimal 基本_提供単価) {
+        requireNonNull(基本_提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("基本_提供単価"));
+        entity.setKihonTeikyoTanka(基本_提供単価);
         return this;
     }
 
     /**
-     * 基本・提供金額を設定します。
+     * 基本_提供金額を設定します。
      *
-     * @param 基本・提供金額 基本・提供金額
+     * @param 基本_提供金額 基本_提供金額
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set基本・提供金額(Decimal 基本・提供金額) {
-        requireNonNull(基本・提供金額, UrSystemErrorMessages.値がnull.getReplacedMessage("基本・提供金額"));
-        entity.setKihonTeikyoKingaku(基本・提供金額);
+    public KyufujissekiShokujiHiyoBuilder set基本_提供金額(Decimal 基本_提供金額) {
+        requireNonNull(基本_提供金額, UrSystemErrorMessages.値がnull.getReplacedMessage("基本_提供金額"));
+        entity.setKihonTeikyoKingaku(基本_提供金額);
         return this;
     }
 
     /**
-     * 特別・提供日数を設定します。
+     * 特別_提供日数を設定します。
      *
-     * @param 特別・提供日数 特別・提供日数
+     * @param 特別_提供日数 特別_提供日数
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set特別・提供日数(Decimal 特別・提供日数) {
-        requireNonNull(特別・提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("特別・提供日数"));
-        entity.setTokubestuTeikyoNissu(特別・提供日数);
+    public KyufujissekiShokujiHiyoBuilder set特別_提供日数(Decimal 特別_提供日数) {
+        requireNonNull(特別_提供日数, UrSystemErrorMessages.値がnull.getReplacedMessage("特別_提供日数"));
+        entity.setTokubestuTeikyoNissu(特別_提供日数);
         return this;
     }
 
     /**
-     * 特別・提供単価を設定します。
+     * 特別_提供単価を設定します。
      *
-     * @param 特別・提供単価 特別・提供単価
+     * @param 特別_提供単価 特別_提供単価
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set特別・提供単価(Decimal 特別・提供単価) {
-        requireNonNull(特別・提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("特別・提供単価"));
-        entity.setTokubestuTeikyoTanka(特別・提供単価);
+    public KyufujissekiShokujiHiyoBuilder set特別_提供単価(Decimal 特別_提供単価) {
+        requireNonNull(特別_提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("特別_提供単価"));
+        entity.setTokubestuTeikyoTanka(特別_提供単価);
         return this;
     }
 
     /**
-     * 特別・提供金額を設定します。
+     * 特別_提供金額を設定します。
      *
-     * @param 特別・提供金額 特別・提供金額
+     * @param 特別_提供金額 特別_提供金額
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set特別・提供金額(Decimal 特別・提供金額) {
-        requireNonNull(特別・提供金額, UrSystemErrorMessages.値がnull.getReplacedMessage("特別・提供金額"));
-        entity.setTokubestuTeikyoKingaku(特別・提供金額);
+    public KyufujissekiShokujiHiyoBuilder set特別_提供金額(Decimal 特別_提供金額) {
+        requireNonNull(特別_提供金額, UrSystemErrorMessages.値がnull.getReplacedMessage("特別_提供金額"));
+        entity.setTokubestuTeikyoKingaku(特別_提供金額);
         return this;
     }
 
@@ -264,14 +273,14 @@ public class KyufujissekiShokujiHiyoBuilder {
     }
 
     /**
-     * 標準負担額（月額）を設定します。
+     * 標準負担額_月額を設定します。
      *
-     * @param 標準負担額（月額） 標準負担額（月額）
+     * @param 標準負担額_月額 標準負担額_月額
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set標準負担額（月額）(Decimal 標準負担額（月額）) {
-        requireNonNull(標準負担額（月額）, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額（月額）"));
-        entity.setGetsugakuHyojunFutanGaku(標準負担額（月額）);
+    public KyufujissekiShokujiHiyoBuilder set標準負担額_月額(Decimal 標準負担額_月額) {
+        requireNonNull(標準負担額_月額, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額_月額"));
+        entity.setGetsugakuHyojunFutanGaku(標準負担額_月額);
         return this;
     }
 
@@ -324,50 +333,50 @@ public class KyufujissekiShokujiHiyoBuilder {
     }
 
     /**
-     * 標準負担額（日額）を設定します。
+     * 標準負担額_日額を設定します。
      *
-     * @param 標準負担額（日額） 標準負担額（日額）
+     * @param 標準負担額_日額 標準負担額_日額
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set標準負担額（日額）(Decimal 標準負担額（日額）) {
-        requireNonNull(標準負担額（日額）, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額（日額）"));
-        entity.setNichigakuHyojunFutanGaku(標準負担額（日額）);
+    public KyufujissekiShokujiHiyoBuilder set標準負担額_日額(Decimal 標準負担額_日額) {
+        requireNonNull(標準負担額_日額, UrSystemErrorMessages.値がnull.getReplacedMessage("標準負担額_日額"));
+        entity.setNichigakuHyojunFutanGaku(標準負担額_日額);
         return this;
     }
 
     /**
-     * 後・基本食提供費用提供単価を設定します。
+     * 後_基本食提供費用提供単価を設定します。
      *
-     * @param 後・基本食提供費用提供単価 後・基本食提供費用提供単価
+     * @param 後_基本食提供費用提供単価 後_基本食提供費用提供単価
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set後・基本食提供費用提供単価(Decimal 後・基本食提供費用提供単価) {
-        requireNonNull(後・基本食提供費用提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後・基本食提供費用提供単価"));
-        entity.setAtoKihonTeikyoTanka(後・基本食提供費用提供単価);
+    public KyufujissekiShokujiHiyoBuilder set後_基本食提供費用提供単価(Decimal 後_基本食提供費用提供単価) {
+        requireNonNull(後_基本食提供費用提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後_基本食提供費用提供単価"));
+        entity.setAtoKihonTeikyoTanka(後_基本食提供費用提供単価);
         return this;
     }
 
     /**
-     * 後・特別食提供費用提供単価を設定します。
+     * 後_特別食提供費用提供単価を設定します。
      *
-     * @param 後・特別食提供費用提供単価 後・特別食提供費用提供単価
+     * @param 後_特別食提供費用提供単価 後_特別食提供費用提供単価
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set後・特別食提供費用提供単価(Decimal 後・特別食提供費用提供単価) {
-        requireNonNull(後・特別食提供費用提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後・特別食提供費用提供単価"));
-        entity.setAtoTokubestuTeikyoTanka(後・特別食提供費用提供単価);
+    public KyufujissekiShokujiHiyoBuilder set後_特別食提供費用提供単価(Decimal 後_特別食提供費用提供単価) {
+        requireNonNull(後_特別食提供費用提供単価, UrSystemErrorMessages.値がnull.getReplacedMessage("後_特別食提供費用提供単価"));
+        entity.setAtoTokubestuTeikyoTanka(後_特別食提供費用提供単価);
         return this;
     }
 
     /**
-     * 後・食事提供費請求額を設定します。
+     * 後_食事提供費請求額を設定します。
      *
-     * @param 後・食事提供費請求額 後・食事提供費請求額
+     * @param 後_食事提供費請求額 後_食事提供費請求額
      * @return {@link KyufujissekiShokujiHiyoBuilder}
      */
-    public KyufujissekiShokujiHiyoBuilder set後・食事提供費請求額(Decimal 後・食事提供費請求額) {
-        requireNonNull(後・食事提供費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・食事提供費請求額"));
-        entity.setAtoSyokujiTeikyohiSeikyugaku(後・食事提供費請求額);
+    public KyufujissekiShokujiHiyoBuilder set後_食事提供費請求額(Decimal 後_食事提供費請求額) {
+        requireNonNull(後_食事提供費請求額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_食事提供費請求額"));
+        entity.setAtoSyokujiTeikyohiSeikyugaku(後_食事提供費請求額);
         return this;
     }
 

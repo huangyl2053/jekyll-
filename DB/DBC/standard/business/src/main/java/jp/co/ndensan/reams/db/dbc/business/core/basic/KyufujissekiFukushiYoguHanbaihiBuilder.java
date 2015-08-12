@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiFukushiYoguHanbaihi}の編集を行うビルダークラスです。
@@ -41,7 +52,7 @@ public class KyufujissekiFukushiYoguHanbaihiBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiFukushiYoguHanbaihiBuilder}
      */
-    public KyufujissekiFukushiYoguHanbaihiBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiFukushiYoguHanbaihiBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +64,7 @@ public class KyufujissekiFukushiYoguHanbaihiBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiFukushiYoguHanbaihiBuilder}
      */
-    public KyufujissekiFukushiYoguHanbaihiBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiFukushiYoguHanbaihiBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -221,7 +232,7 @@ public class KyufujissekiFukushiYoguHanbaihiBuilder {
      * @param 販売金額 販売金額
      * @return {@link KyufujissekiFukushiYoguHanbaihiBuilder}
      */
-    public KyufujissekiFukushiYoguHanbaihiBuilder set販売金額(int 販売金額) {
+    public KyufujissekiFukushiYoguHanbaihiBuilder set販売金額(Decimal 販売金額) {
         requireNonNull(販売金額, UrSystemErrorMessages.値がnull.getReplacedMessage("販売金額"));
         entity.setHanbaiKingaku(販売金額);
         return this;
@@ -233,9 +244,9 @@ public class KyufujissekiFukushiYoguHanbaihiBuilder {
      * @param 摘要（品目コード） 摘要（品目コード）
      * @return {@link KyufujissekiFukushiYoguHanbaihiBuilder}
      */
-    public KyufujissekiFukushiYoguHanbaihiBuilder set摘要（品目コード）(RString 摘要（品目コード）) {
-        requireNonNull(摘要（品目コード）, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要（品目コード）"));
-        entity.setTekiyo(摘要（品目コード）);
+    public KyufujissekiFukushiYoguHanbaihiBuilder set摘要_品目コード(RString 摘要_品目コード) {
+        requireNonNull(摘要_品目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要_品目コード"));
+        entity.setTekiyo(摘要_品目コード);
         return this;
     }
 

@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村特別給付サービス事業者を管理するクラスです。
  */
-public class ShichosonTokubetsuKyufuJigyosha extends ParentModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha> implements Serializable {
+public class ShichosonTokubetsuKyufuJigyosha extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha> implements Serializable {
 
     private final DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity;
     private final ShichosonTokubetsuKyufuJigyoshaIdentifier id;
@@ -33,8 +39,8 @@ public class ShichosonTokubetsuKyufuJigyosha extends ParentModelBase<ShichosonTo
      * @param 履歴番号 履歴番号
      */
     public ShichosonTokubetsuKyufuJigyosha(JigyoshaNo 市町村特別給付用事業者番号,
-ServiceCode 市町村特別給付用サービスコード,
-Decimal 履歴番号) {
+            ServiceCode 市町村特別給付用サービスコード,
+            Decimal 履歴番号) {
         requireNonNull(市町村特別給付用事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用事業者番号"));
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,17 +49,18 @@ Decimal 履歴番号) {
         this.entity.setServiceCode(市町村特別給付用サービスコード);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShichosonTokubetsuKyufuJigyoshaIdentifier(
-        市町村特別給付用事業者番号,
-        市町村特別給付用サービスコード,
-        履歴番号
-                );
+                市町村特別給付用事業者番号,
+                市町村特別給付用サービスコード,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}より{@link ShichosonTokubetsuKyufuJigyosha}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
+     * @param entity
+     * DBより取得した{@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}
      */
     public ShichosonTokubetsuKyufuJigyosha(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付サービス事業者"));
@@ -155,7 +162,7 @@ Decimal 履歴番号) {
      *
      * @return 申請者氏名（漢字）
      */
-    public RString get申請者氏名（漢字）() {
+    public RString get申請者氏名_漢字() {
         return entity.getShinseishaNameKanji();
     }
 
@@ -164,7 +171,7 @@ Decimal 履歴番号) {
      *
      * @return 申請者氏名（カナ）
      */
-    public RString get申請者氏名（カナ）() {
+    public RString get申請者氏名_カナ() {
         return entity.getShinseishaNameKana();
     }
 
@@ -191,7 +198,7 @@ Decimal 履歴番号) {
      *
      * @return 申請者住所（カナ）
      */
-    public RString get申請者住所（カナ）() {
+    public RString get申請者住所_カナ() {
         return entity.getShinseishaAddressKana();
     }
 
@@ -487,27 +494,12 @@ Decimal 履歴番号) {
     /**
      * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}を返します。
      *
-     * @return 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
+     * @return
+     * 市町村特別給付サービス事業者の識別子{@link ShichosonTokubetsuKyufuJigyoshaIdentifier}
      */
     @Override
     public ShichosonTokubetsuKyufuJigyoshaIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 市町村特別給付サービス事業者のみを変更対象とします。<br/>
-     * {@link DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShichosonTokubetsuKyufuJigyosha}
-     */
-    @Override
-    public ShichosonTokubetsuKyufuJigyosha modifiedModel() {
-        DbT3065ShichosonTokubetsuKyufuJigyoshaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShichosonTokubetsuKyufuJigyosha(
-                modifiedEntity, id);
     }
 
     /**
@@ -527,6 +519,7 @@ Decimal 履歴番号) {
         }
         return new ShichosonTokubetsuKyufuJigyosha(deletedEntity, id);
     }
+
     /**
      * {@link ShichosonTokubetsuKyufuJigyosha}のシリアライズ形式を提供します。
      *
@@ -537,13 +530,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity;
         private final ShichosonTokubetsuKyufuJigyoshaIdentifier id;
 
-        private _SerializationProxy(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity,ShichosonTokubetsuKyufuJigyoshaIdentifier id) {
+        private _SerializationProxy(DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity, ShichosonTokubetsuKyufuJigyoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

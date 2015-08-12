@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3092KyufuhiKashitsukeKinChoshuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3092KyufuhiKashitsukeKinChoshuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費貸付金徴収を管理するクラスです。
  */
-public class KyufuhiKashitsukeKinChoshu extends ParentModelBase<KyufuhiKashitsukeKinChoshuIdentifier, DbT3092KyufuhiKashitsukeKinChoshuEntity, KyufuhiKashitsukeKinChoshu> implements Serializable {
+public class KyufuhiKashitsukeKinChoshu extends ModelBase<KyufuhiKashitsukeKinChoshuIdentifier, DbT3092KyufuhiKashitsukeKinChoshuEntity, KyufuhiKashitsukeKinChoshu> implements Serializable {
 
     private final DbT3092KyufuhiKashitsukeKinChoshuEntity entity;
     private final KyufuhiKashitsukeKinChoshuIdentifier id;
@@ -33,8 +35,8 @@ public class KyufuhiKashitsukeKinChoshu extends ParentModelBase<KyufuhiKashitsuk
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukeKinChoshu(HihokenshaNo 被保険者番号,
-RString 貸付管理番号,
-Decimal 履歴番号) {
+            RString 貸付管理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(貸付管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付管理番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +45,10 @@ Decimal 履歴番号) {
         this.entity.setKashitsukeKanriNo(貸付管理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiKashitsukeKinChoshuIdentifier(
-        被保険者番号,
-        貸付管理番号,
-        履歴番号
-                );
+                被保険者番号,
+                貸付管理番号,
+                履歴番号
+        );
     }
 
     /**
@@ -162,22 +164,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 給付費貸付金徴収のみを変更対象とします。<br/>
-     * {@link DbT3092KyufuhiKashitsukeKinChoshuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiKashitsukeKinChoshu}
-     */
-    @Override
-    public KyufuhiKashitsukeKinChoshu modifiedModel() {
-        DbT3092KyufuhiKashitsukeKinChoshuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiKashitsukeKinChoshu(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付費貸付金徴収を削除対象とします。<br/>
      * {@link DbT3092KyufuhiKashitsukeKinChoshuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -194,6 +180,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiKashitsukeKinChoshu(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiKashitsukeKinChoshu}のシリアライズ形式を提供します。
      *
@@ -204,13 +191,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3092KyufuhiKashitsukeKinChoshuEntity entity;
         private final KyufuhiKashitsukeKinChoshuIdentifier id;
 
-        private _SerializationProxy(DbT3092KyufuhiKashitsukeKinChoshuEntity entity,KyufuhiKashitsukeKinChoshuIdentifier id) {
+        private _SerializationProxy(DbT3092KyufuhiKashitsukeKinChoshuEntity entity, KyufuhiKashitsukeKinChoshuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

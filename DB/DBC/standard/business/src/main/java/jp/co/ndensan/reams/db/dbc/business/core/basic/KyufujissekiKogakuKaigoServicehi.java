@@ -10,16 +10,24 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付実績高額介護サービス費を管理するクラスです。
  */
-public class KyufujissekiKogakuKaigoServicehi extends ParentModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi> implements Serializable {
+public class KyufujissekiKogakuKaigoServicehi extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi> implements Serializable {
 
     private final DbT3028KyufujissekiKogakuKaigoServicehiEntity entity;
     private final KyufujissekiKogakuKaigoServicehiIdentifier id;
@@ -38,15 +46,15 @@ public class KyufujissekiKogakuKaigoServicehi extends ParentModelBase<Kyufujisse
      * @param 給付実績情報作成区分コード 給付実績情報作成区分コード
      * @param 給付実績区分コード 給付実績区分コード
      */
-    public KyufujissekiKogakuKaigoServicehi(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 通し番号,
-RString 給付実績情報作成区分コード,
-RString 給付実績区分コード) {
+    public KyufujissekiKogakuKaigoServicehi(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 通し番号,
+            RString 給付実績情報作成区分コード,
+            RString 給付実績区分コード) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,23 +75,24 @@ RString 給付実績区分コード) {
         this.entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
         this.entity.setKyufuJissekiKubunCode(給付実績区分コード);
         this.id = new KyufujissekiKogakuKaigoServicehiIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        通し番号,
-        給付実績情報作成区分コード,
-        給付実績区分コード
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                通し番号,
+                給付実績情報作成区分コード,
+                給付実績区分コード
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}より{@link KyufujissekiKogakuKaigoServicehi}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}
      */
     public KyufujissekiKogakuKaigoServicehi(DbT3028KyufujissekiKogakuKaigoServicehiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績高額介護サービス費"));
@@ -119,7 +128,7 @@ RString 給付実績区分コード) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +137,7 @@ RString 給付実績区分コード) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -388,27 +397,12 @@ RString 給付実績区分コード) {
     /**
      * 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}を返します。
      *
-     * @return 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}
+     * @return
+     * 給付実績高額介護サービス費の識別子{@link KyufujissekiKogakuKaigoServicehiIdentifier}
      */
     @Override
     public KyufujissekiKogakuKaigoServicehiIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付実績高額介護サービス費のみを変更対象とします。<br/>
-     * {@link DbT3028KyufujissekiKogakuKaigoServicehiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiKogakuKaigoServicehi}
-     */
-    @Override
-    public KyufujissekiKogakuKaigoServicehi modifiedModel() {
-        DbT3028KyufujissekiKogakuKaigoServicehiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiKogakuKaigoServicehi(
-                modifiedEntity, id);
     }
 
     /**
@@ -428,6 +422,7 @@ RString 給付実績区分コード) {
         }
         return new KyufujissekiKogakuKaigoServicehi(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiKogakuKaigoServicehi}のシリアライズ形式を提供します。
      *
@@ -438,13 +433,19 @@ RString 給付実績区分コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3028KyufujissekiKogakuKaigoServicehiEntity entity;
         private final KyufujissekiKogakuKaigoServicehiIdentifier id;
 
-        private _SerializationProxy(DbT3028KyufujissekiKogakuKaigoServicehiEntity entity,KyufujissekiKogakuKaigoServicehiIdentifier id) {
+        private _SerializationProxy(DbT3028KyufujissekiKogakuKaigoServicehiEntity entity, KyufujissekiKogakuKaigoServicehiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

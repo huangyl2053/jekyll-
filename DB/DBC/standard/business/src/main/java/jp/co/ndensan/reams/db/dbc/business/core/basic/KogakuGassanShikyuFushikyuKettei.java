@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給不支給決定を管理するクラスです。
  */
-public class KogakuGassanShikyuFushikyuKettei extends ParentModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei> implements Serializable {
+public class KogakuGassanShikyuFushikyuKettei extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei> implements Serializable {
 
     private final DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity;
     private final KogakuGassanShikyuFushikyuKetteiIdentifier id;
@@ -35,10 +39,10 @@ public class KogakuGassanShikyuFushikyuKettei extends ParentModelBase<KogakuGass
      * @param 履歴番号 履歴番号
      */
     public KogakuGassanShikyuFushikyuKettei(HihokenshaNo 被保険者番号,
-FlexibleYear 対象年度,
-HokenshaNo 保険者番号,
-RString 支給申請書整理番号,
-Decimal 履歴番号) {
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
@@ -51,19 +55,20 @@ Decimal 履歴番号) {
         this.entity.setShikyuSeiriNo(支給申請書整理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuGassanShikyuFushikyuKetteiIdentifier(
-        被保険者番号,
-        対象年度,
-        保険者番号,
-        支給申請書整理番号,
-        履歴番号
-                );
+                被保険者番号,
+                対象年度,
+                保険者番号,
+                支給申請書整理番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}より{@link KogakuGassanShikyuFushikyuKettei}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}
      */
     public KogakuGassanShikyuFushikyuKettei(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給不支給決定"));
@@ -158,7 +163,7 @@ Decimal 履歴番号) {
      *
      * @return 国保 被保険者証記号
      */
-    public RString get国保 被保険者証記号() {
+    public RString get国保_被保険者証記号() {
         return entity.getKokuho_HihokenshaShoKigo();
     }
 
@@ -363,22 +368,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 高額合算支給不支給決定のみを変更対象とします。<br/>
-     * {@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KogakuGassanShikyuFushikyuKettei}
-     */
-    @Override
-    public KogakuGassanShikyuFushikyuKettei modifiedModel() {
-        DbT3074KogakuGassanShikyuFushikyuKetteiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KogakuGassanShikyuFushikyuKettei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する高額合算支給不支給決定を削除対象とします。<br/>
      * {@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -395,6 +384,7 @@ Decimal 履歴番号) {
         }
         return new KogakuGassanShikyuFushikyuKettei(deletedEntity, id);
     }
+
     /**
      * {@link KogakuGassanShikyuFushikyuKettei}のシリアライズ形式を提供します。
      *
@@ -405,13 +395,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity;
         private final KogakuGassanShikyuFushikyuKetteiIdentifier id;
 
-        private _SerializationProxy(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity,KogakuGassanShikyuFushikyuKetteiIdentifier id) {
+        private _SerializationProxy(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity, KogakuGassanShikyuFushikyuKetteiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

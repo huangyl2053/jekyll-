@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求緊急時施設療養を管理するクラスです。
  */
-public class ShokanKinkyuShisetsuRyoyo extends ParentModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, DbT3040ShokanKinkyuShisetsuRyoyoEntity, ShokanKinkyuShisetsuRyoyo> implements Serializable {
+public class ShokanKinkyuShisetsuRyoyo extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, DbT3040ShokanKinkyuShisetsuRyoyoEntity, ShokanKinkyuShisetsuRyoyo> implements Serializable {
 
     private final DbT3040ShokanKinkyuShisetsuRyoyoEntity entity;
     private final ShokanKinkyuShisetsuRyoyoIdentifier id;
@@ -37,12 +41,12 @@ public class ShokanKinkyuShisetsuRyoyo extends ParentModelBase<ShokanKinkyuShise
      * @param 履歴番号 履歴番号
      */
     public ShokanKinkyuShisetsuRyoyo(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-RString 順次番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 順次番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -59,14 +63,14 @@ Decimal 履歴番号) {
         this.entity.setJunjiNo(順次番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanKinkyuShisetsuRyoyoIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        順次番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                順次番号,
+                履歴番号
+        );
     }
 
     /**
@@ -537,22 +541,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 償還払請求緊急時施設療養のみを変更対象とします。<br/>
-     * {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanKinkyuShisetsuRyoyo}
-     */
-    @Override
-    public ShokanKinkyuShisetsuRyoyo modifiedModel() {
-        DbT3040ShokanKinkyuShisetsuRyoyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanKinkyuShisetsuRyoyo(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求緊急時施設療養を削除対象とします。<br/>
      * {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -569,6 +557,7 @@ Decimal 履歴番号) {
         }
         return new ShokanKinkyuShisetsuRyoyo(deletedEntity, id);
     }
+
     /**
      * {@link ShokanKinkyuShisetsuRyoyo}のシリアライズ形式を提供します。
      *
@@ -579,13 +568,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3040ShokanKinkyuShisetsuRyoyoEntity entity;
         private final ShokanKinkyuShisetsuRyoyoIdentifier id;
 
-        private _SerializationProxy(DbT3040ShokanKinkyuShisetsuRyoyoEntity entity,ShokanKinkyuShisetsuRyoyoIdentifier id) {
+        private _SerializationProxy(DbT3040ShokanKinkyuShisetsuRyoyoEntity entity, ShokanKinkyuShisetsuRyoyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

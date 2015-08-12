@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
 /**
@@ -24,7 +26,7 @@ public class KokuhorenInterfaceKanriIdentifier implements Serializable {
      * @param 交換情報識別番号 交換情報識別番号
      */
     public KokuhorenInterfaceKanriIdentifier(FlexibleYearMonth 処理年月,
-RString 交換情報識別番号) {
+            RString 交換情報識別番号) {
         this.処理年月 = 処理年月;
         this.交換情報識別番号 = 交換情報識別番号;
     }

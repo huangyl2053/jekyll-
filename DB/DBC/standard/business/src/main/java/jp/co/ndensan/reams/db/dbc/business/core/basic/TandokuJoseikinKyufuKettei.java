@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3097TandokuJoseikinKyufuKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3097TandokuJoseikinKyufuKetteiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村単独助成金給付決定を管理するクラスです。
  */
-public class TandokuJoseikinKyufuKettei extends ParentModelBase<TandokuJoseikinKyufuKetteiIdentifier, DbT3097TandokuJoseikinKyufuKetteiEntity, TandokuJoseikinKyufuKettei> implements Serializable {
+public class TandokuJoseikinKyufuKettei extends ModelBase<TandokuJoseikinKyufuKetteiIdentifier, DbT3097TandokuJoseikinKyufuKetteiEntity, TandokuJoseikinKyufuKettei> implements Serializable {
 
     private final DbT3097TandokuJoseikinKyufuKetteiEntity entity;
     private final TandokuJoseikinKyufuKetteiIdentifier id;
@@ -33,8 +36,8 @@ public class TandokuJoseikinKyufuKettei extends ParentModelBase<TandokuJoseikinK
      * @param 履歴番号 履歴番号
      */
     public TandokuJoseikinKyufuKettei(HihokenshaNo 被保険者番号,
-FlexibleDate 受付年月日,
-Decimal 履歴番号) {
+            FlexibleDate 受付年月日,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受付年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +46,10 @@ Decimal 履歴番号) {
         this.entity.setUketsukeYMD(受付年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new TandokuJoseikinKyufuKetteiIdentifier(
-        被保険者番号,
-        受付年月日,
-        履歴番号
-                );
+                被保険者番号,
+                受付年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -137,7 +140,7 @@ Decimal 履歴番号) {
      *
      * @return 利用者負担・決定区分
      */
-    public RString get利用者負担・決定区分() {
+    public RString get利用者負担_決定区分() {
         return entity.getRiyoshaFutan_KetteiKubun();
     }
 
@@ -146,7 +149,7 @@ Decimal 履歴番号) {
      *
      * @return 利用者負担・不承認理由
      */
-    public RString get利用者負担・不承認理由() {
+    public RString get利用者負担_不承認理由() {
         return entity.getRiyoshaFutan_FuShoninRiyu();
     }
 
@@ -227,7 +230,7 @@ Decimal 履歴番号) {
      *
      * @return 保留区分・滞納
      */
-    public RString get保留区分・滞納() {
+    public RString get保留区分_滞納() {
         return entity.getTaino_HoryuKubun();
     }
 
@@ -236,7 +239,7 @@ Decimal 履歴番号) {
      *
      * @return 保留区分・認定申請中
      */
-    public RString get保留区分・認定申請中() {
+    public RString get保留区分_認定申請中() {
         return entity.getNinteiShinseichu_HoryuKubun();
     }
 
@@ -245,7 +248,7 @@ Decimal 履歴番号) {
      *
      * @return 保留区分・認定有効期限切れ
      */
-    public RString get保留区分・認定有効期限切れ() {
+    public RString get保留区分_認定有効期限切れ() {
         return entity.getNinteiKigenGire_HoryuKubun();
     }
 
@@ -270,22 +273,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 市町村単独助成金給付決定のみを変更対象とします。<br/>
-     * {@link DbT3097TandokuJoseikinKyufuKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TandokuJoseikinKyufuKettei}
-     */
-    @Override
-    public TandokuJoseikinKyufuKettei modifiedModel() {
-        DbT3097TandokuJoseikinKyufuKetteiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TandokuJoseikinKyufuKettei(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する市町村単独助成金給付決定を削除対象とします。<br/>
      * {@link DbT3097TandokuJoseikinKyufuKetteiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -302,6 +289,7 @@ Decimal 履歴番号) {
         }
         return new TandokuJoseikinKyufuKettei(deletedEntity, id);
     }
+
     /**
      * {@link TandokuJoseikinKyufuKettei}のシリアライズ形式を提供します。
      *
@@ -312,13 +300,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3097TandokuJoseikinKyufuKetteiEntity entity;
         private final TandokuJoseikinKyufuKetteiIdentifier id;
 
-        private _SerializationProxy(DbT3097TandokuJoseikinKyufuKetteiEntity entity,TandokuJoseikinKyufuKetteiIdentifier id) {
+        private _SerializationProxy(DbT3097TandokuJoseikinKyufuKetteiEntity entity, TandokuJoseikinKyufuKetteiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

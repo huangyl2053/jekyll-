@@ -6,8 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShikyuGakuKeisanKekka}の編集を行うビルダークラスです。
@@ -170,12 +181,12 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳以上介護等合算一部負担金等世帯合算額を設定します。
      *
-     * @param 70歳以上介護等合算一部負担金等世帯合算額 70歳以上介護等合算一部負担金等世帯合算額
+     * @param 介護等合算一部負担金等世帯合算額_70歳以上 70歳以上介護等合算一部負担金等世帯合算額
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上介護等合算一部負担金等世帯合算額(Decimal 70歳以上介護等合算一部負担金等世帯合算額) {
-        requireNonNull(70歳以上介護等合算一部負担金等世帯合算額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上介護等合算一部負担金等世帯合算額"));
-        entity.setOver70_SetaiGassanGaku(70歳以上介護等合算一部負担金等世帯合算額);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上介護等合算一部負担金等世帯合算額(Decimal 介護等合算一部負担金等世帯合算額_70歳以上) {
+        requireNonNull(介護等合算一部負担金等世帯合算額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上介護等合算一部負担金等世帯合算額"));
+        entity.setOver70_SetaiGassanGaku(介護等合算一部負担金等世帯合算額_70歳以上);
         return this;
     }
 
@@ -194,12 +205,12 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
     /**
      * 70歳以上の者に係る所得区分を設定します。
      *
-     * @param 70歳以上の者に係る所得区分 70歳以上の者に係る所得区分
+     * @param 所得区分_70歳以上の者に係る 70歳以上の者に係る所得区分
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上の者に係る所得区分(RString 70歳以上の者に係る所得区分) {
-        requireNonNull(70歳以上の者に係る所得区分, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
-        entity.setOver70_ShotokuKubun(70歳以上の者に係る所得区分);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上の者に係る所得区分(RString 所得区分_70歳以上の者に係る) {
+        requireNonNull(所得区分_70歳以上の者に係る, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上の者に係る所得区分"));
+        entity.setOver70_ShotokuKubun(所得区分_70歳以上の者に係る);
         return this;
     }
 
@@ -221,9 +232,9 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
      * @param 70歳以上介護等合算算定基準額 70歳以上介護等合算算定基準額
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上介護等合算算定基準額(Decimal 70歳以上介護等合算算定基準額) {
-        requireNonNull(70歳以上介護等合算算定基準額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上介護等合算算定基準額"));
-        entity.setOver70_SanteiKijyunGaku(70歳以上介護等合算算定基準額);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上介護等合算算定基準額(Decimal 介護等合算算定基準額_70歳以上) {
+        requireNonNull(介護等合算算定基準額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上介護等合算算定基準額"));
+        entity.setOver70_SanteiKijyunGaku(介護等合算算定基準額_70歳以上);
         return this;
     }
 
@@ -461,21 +472,21 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
      * @param 70歳以上負担額合計 70歳以上負担額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上負担額合計(Decimal 70歳以上負担額合計) {
-        requireNonNull(70歳以上負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上負担額合計"));
-        entity.setOver70_FutangakuGokei(70歳以上負担額合計);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上負担額合計(Decimal 負担額合計_70歳以上) {
+        requireNonNull(負担額合計_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上負担額合計"));
+        entity.setOver70_FutangakuGokei(負担額合計_70歳以上);
         return this;
     }
 
     /**
      * 70歳以上支給額合計を設定します。
      *
-     * @param 70歳以上支給額合計 70歳以上支給額合計
+     * @param 支給額合計_70歳以上 70歳以上支給額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上支給額合計(Decimal 70歳以上支給額合計) {
-        requireNonNull(70歳以上支給額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上支給額合計"));
-        entity.setOver70_ShikyugakuGokei(70歳以上支給額合計);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳以上支給額合計(Decimal 支給額合計_70歳以上) {
+        requireNonNull(支給額合計_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上支給額合計"));
+        entity.setOver70_ShikyugakuGokei(支給額合計_70歳以上);
         return this;
     }
 
@@ -485,9 +496,9 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
      * @param 70歳未満負担額合計 70歳未満負担額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満負担額合計(Decimal 70歳未満負担額合計) {
-        requireNonNull(70歳未満負担額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満負担額合計"));
-        entity.setUnder70_FutangakuGokei(70歳未満負担額合計);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満負担額合計(Decimal 負担額合計_70歳未満) {
+        requireNonNull(負担額合計_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満負担額合計"));
+        entity.setUnder70_FutangakuGokei(負担額合計_70歳未満);
         return this;
     }
 
@@ -509,9 +520,9 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilder {
      * @param 70歳未満支給額合計 70歳未満支給額合計
      * @return {@link KogakuGassanShikyuGakuKeisanKekkaBuilder}
      */
-    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満支給額合計(Decimal 70歳未満支給額合計) {
-        requireNonNull(70歳未満支給額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満支給額合計"));
-        entity.setUnder70_ShikyugakuGokei(70歳未満支給額合計);
+    public KogakuGassanShikyuGakuKeisanKekkaBuilder set70歳未満支給額合計(Decimal 支給額合計_70歳未満) {
+        requireNonNull(支給額合計_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満支給額合計"));
+        entity.setUnder70_ShikyugakuGokei(支給額合計_70歳未満);
         return this;
     }
 

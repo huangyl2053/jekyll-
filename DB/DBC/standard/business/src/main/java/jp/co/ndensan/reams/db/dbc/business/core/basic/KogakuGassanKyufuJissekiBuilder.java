@@ -6,8 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanKyufuJisseki}の編集を行うビルダークラスです。
@@ -41,7 +49,7 @@ public class KogakuGassanKyufuJissekiBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KogakuGassanKyufuJissekiBuilder}
      */
-    public KogakuGassanKyufuJissekiBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KogakuGassanKyufuJissekiBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -149,9 +157,9 @@ public class KogakuGassanKyufuJissekiBuilder {
      * @param 国保 被保険者証記号 国保 被保険者証記号
      * @return {@link KogakuGassanKyufuJissekiBuilder}
      */
-    public KogakuGassanKyufuJissekiBuilder set国保 被保険者証記号(RString 国保 被保険者証記号) {
-        requireNonNull(国保 被保険者証記号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保 被保険者証記号"));
-        entity.setKokuho_HihokenshaShoKigo(国保 被保険者証記号);
+    public KogakuGassanKyufuJissekiBuilder set国保_被保険者証記号(RString 国保_被保険者証記号) {
+        requireNonNull(国保_被保険者証記号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保 被保険者証記号"));
+        entity.setKokuho_HihokenshaShoKigo(国保_被保険者証記号);
         return this;
     }
 

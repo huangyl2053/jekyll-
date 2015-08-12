@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -26,8 +29,8 @@ public class KyufuhiKashitsukekinShinseiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukekinShinseiIdentifier(HihokenshaNo 被保険者番号,
-FlexibleDate 借入申請年月日,
-Decimal 履歴番号) {
+            FlexibleDate 借入申請年月日,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.借入申請年月日 = 借入申請年月日;
         this.履歴番号 = 履歴番号;

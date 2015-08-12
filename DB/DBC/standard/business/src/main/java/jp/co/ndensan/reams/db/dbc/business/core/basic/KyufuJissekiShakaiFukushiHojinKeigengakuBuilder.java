@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuJissekiShakaiFukushiHojinKeigengaku}の編集を行うビルダークラスです。
@@ -20,7 +30,8 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
     /**
      * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}より{@link KyufuJissekiShakaiFukushiHojinKeigengaku}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
+     * @param entity
+     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
      * @param id {@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
      *
      */
@@ -41,7 +52,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +64,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -161,7 +172,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
      * @param 受領すべき利用者負担の総額 受領すべき利用者負担の総額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set受領すべき利用者負担の総額(int 受領すべき利用者負担の総額) {
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set受領すべき利用者負担の総額(Decimal 受領すべき利用者負担の総額) {
         requireNonNull(受領すべき利用者負担の総額, UrSystemErrorMessages.値がnull.getReplacedMessage("受領すべき利用者負担の総額"));
         entity.setRiyoshaFutanTotal(受領すべき利用者負担の総額);
         return this;
@@ -173,7 +184,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
      * @param 軽減額 軽減額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set軽減額(int 軽減額) {
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set軽減額(Decimal 軽減額) {
         requireNonNull(軽減額, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減額"));
         entity.setKeigengaku(軽減額);
         return this;
@@ -185,7 +196,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
      * @param 軽減後利用者負担額 軽減後利用者負担額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set軽減後利用者負担額(int 軽減後利用者負担額) {
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set軽減後利用者負担額(Decimal 軽減後利用者負担額) {
         requireNonNull(軽減後利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("軽減後利用者負担額"));
         entity.setKeigengoRiyoshaFutangaku(軽減後利用者負担額);
         return this;
@@ -204,38 +215,38 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuBuilder {
     }
 
     /**
-     * 後・受領すべき利用者負担の総額を設定します。
+     * 後_受領すべき利用者負担の総額を設定します。
      *
-     * @param 後・受領すべき利用者負担の総額 後・受領すべき利用者負担の総額
+     * @param 後_受領すべき利用者負担の総額 後_受領すべき利用者負担の総額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後・受領すべき利用者負担の総額(int 後・受領すべき利用者負担の総額) {
-        requireNonNull(後・受領すべき利用者負担の総額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・受領すべき利用者負担の総額"));
-        entity.setAtoRiyoshaFutanTotal(後・受領すべき利用者負担の総額);
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後_受領すべき利用者負担の総額(Decimal 後_受領すべき利用者負担の総額) {
+        requireNonNull(後_受領すべき利用者負担の総額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_受領すべき利用者負担の総額"));
+        entity.setAtoRiyoshaFutanTotal(後_受領すべき利用者負担の総額);
         return this;
     }
 
     /**
-     * 後・軽減額を設定します。
+     * 後_軽減額を設定します。
      *
-     * @param 後・軽減額 後・軽減額
+     * @param 後_軽減額 後_軽減額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後・軽減額(int 後・軽減額) {
-        requireNonNull(後・軽減額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・軽減額"));
-        entity.setAtoKeigengaku(後・軽減額);
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後_軽減額(Decimal 後_軽減額) {
+        requireNonNull(後_軽減額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_軽減額"));
+        entity.setAtoKeigengaku(後_軽減額);
         return this;
     }
 
     /**
-     * 後・軽減後利用者負担額を設定します。
+     * 後_軽減後利用者負担額を設定します。
      *
-     * @param 後・軽減後利用者負担額 後・軽減後利用者負担額
+     * @param 後_軽減後利用者負担額 後_軽減後利用者負担額
      * @return {@link KyufuJissekiShakaiFukushiHojinKeigengakuBuilder}
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後・軽減後利用者負担額(int 後・軽減後利用者負担額) {
-        requireNonNull(後・軽減後利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後・軽減後利用者負担額"));
-        entity.setAtoKeigengoRiyoshaFutangaku(後・軽減後利用者負担額);
+    public KyufuJissekiShakaiFukushiHojinKeigengakuBuilder set後_軽減後利用者負担額(Decimal 後_軽減後利用者負担額) {
+        requireNonNull(後_軽減後利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("後_軽減後利用者負担額"));
+        entity.setAtoKeigengoRiyoshaFutangaku(後_軽減後利用者負担額);
         return this;
     }
 

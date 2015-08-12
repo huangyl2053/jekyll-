@@ -6,8 +6,18 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufujissekiKinkyuShisetsuRyoyo}の編集を行うビルダークラスです。
@@ -41,7 +51,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 交換情報識別番号 交換情報識別番号
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set交換情報識別番号(KokanShikibetsuCode 交換情報識別番号) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set交換情報識別番号(KokanShikibetsuNo 交換情報識別番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         entity.setKokanJohoShikibetsuNo(交換情報識別番号);
         return this;
@@ -53,7 +63,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 入力識別番号 入力識別番号
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set入力識別番号(NyuryokuShikibetsuCode 入力識別番号) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set入力識別番号(NyuryokuShikibetsuNo 入力識別番号) {
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         entity.setInputShikibetsuNo(入力識別番号);
         return this;
@@ -612,110 +622,110 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
     }
 
     /**
-     * 後・往診日数を設定します。
+     * 後_往診日数を設定します。
      *
-     * @param 後・往診日数 後・往診日数
+     * @param 後_往診日数 後_往診日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・往診日数(Decimal 後・往診日数) {
-        requireNonNull(後・往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・往診日数"));
-        entity.setAtoOshinNissu(後・往診日数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_往診日数(Decimal 後_往診日数) {
+        requireNonNull(後_往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_往診日数"));
+        entity.setAtoOshinNissu(後_往診日数);
         return this;
     }
 
     /**
-     * 後・通院日数を設定します。
+     * 後_通院日数を設定します。
      *
-     * @param 後・通院日数 後・通院日数
+     * @param 後_通院日数 後_通院日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・通院日数(Decimal 後・通院日数) {
-        requireNonNull(後・通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・通院日数"));
-        entity.setAtoTsuinNissu(後・通院日数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_通院日数(Decimal 後_通院日数) {
+        requireNonNull(後_通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_通院日数"));
+        entity.setAtoTsuinNissu(後_通院日数);
         return this;
     }
 
     /**
-     * 後・緊急時治療管理単位数を設定します。
+     * 後_緊急時治療管理単位数を設定します。
      *
-     * @param 後・緊急時治療管理単位数 後・緊急時治療管理単位数
+     * @param 後_緊急時治療管理単位数 後_緊急時治療管理単位数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・緊急時治療管理単位数(int 後・緊急時治療管理単位数) {
-        requireNonNull(後・緊急時治療管理単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・緊急時治療管理単位数"));
-        entity.setAtoKinkyuChiryoKanriTanisu(後・緊急時治療管理単位数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_緊急時治療管理単位数(int 後_緊急時治療管理単位数) {
+        requireNonNull(後_緊急時治療管理単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_緊急時治療管理単位数"));
+        entity.setAtoKinkyuChiryoKanriTanisu(後_緊急時治療管理単位数);
         return this;
     }
 
     /**
-     * 後・緊急時治療管理日数を設定します。
+     * 後_緊急時治療管理日数を設定します。
      *
-     * @param 後・緊急時治療管理日数 後・緊急時治療管理日数
+     * @param 後_緊急時治療管理日数 後_緊急時治療管理日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・緊急時治療管理日数(Decimal 後・緊急時治療管理日数) {
-        requireNonNull(後・緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・緊急時治療管理日数"));
-        entity.setAtoKinkyuChiryoKanriNissu(後・緊急時治療管理日数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_緊急時治療管理日数(Decimal 後_緊急時治療管理日数) {
+        requireNonNull(後_緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_緊急時治療管理日数"));
+        entity.setAtoKinkyuChiryoKanriNissu(後_緊急時治療管理日数);
         return this;
     }
 
     /**
-     * 後・リハビリテーション点数を設定します。
+     * 後_リハビリテーション点数を設定します。
      *
-     * @param 後・リハビリテーション点数 後・リハビリテーション点数
+     * @param 後_リハビリテーション点数 後_リハビリテーション点数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・リハビリテーション点数(int 後・リハビリテーション点数) {
-        requireNonNull(後・リハビリテーション点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・リハビリテーション点数"));
-        entity.setAtoRehabilitationTensu(後・リハビリテーション点数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_リハビリテーション点数(int 後_リハビリテーション点数) {
+        requireNonNull(後_リハビリテーション点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_リハビリテーション点数"));
+        entity.setAtoRehabilitationTensu(後_リハビリテーション点数);
         return this;
     }
 
     /**
-     * 後・処置点数を設定します。
+     * 後_処置点数を設定します。
      *
-     * @param 後・処置点数 後・処置点数
+     * @param 後_処置点数 後_処置点数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・処置点数(int 後・処置点数) {
-        requireNonNull(後・処置点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・処置点数"));
-        entity.setAtoShochiTensu(後・処置点数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_処置点数(int 後_処置点数) {
+        requireNonNull(後_処置点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_処置点数"));
+        entity.setAtoShochiTensu(後_処置点数);
         return this;
     }
 
     /**
-     * 後・手術点数を設定します。
+     * 後_手術点数を設定します。
      *
-     * @param 後・手術点数 後・手術点数
+     * @param 後_手術点数 後_手術点数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・手術点数(int 後・手術点数) {
-        requireNonNull(後・手術点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・手術点数"));
-        entity.setAtoShujutsuTensu(後・手術点数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_手術点数(int 後_手術点数) {
+        requireNonNull(後_手術点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_手術点数"));
+        entity.setAtoShujutsuTensu(後_手術点数);
         return this;
     }
 
     /**
-     * 後・麻酔点数を設定します。
+     * 後_麻酔点数を設定します。
      *
-     * @param 後・麻酔点数 後・麻酔点数
+     * @param 後_麻酔点数 後_麻酔点数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・麻酔点数(int 後・麻酔点数) {
-        requireNonNull(後・麻酔点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・麻酔点数"));
-        entity.setAtoMasuiTensu(後・麻酔点数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_麻酔点数(int 後_麻酔点数) {
+        requireNonNull(後_麻酔点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_麻酔点数"));
+        entity.setAtoMasuiTensu(後_麻酔点数);
         return this;
     }
 
     /**
-     * 後・放射線治療点数を設定します。
+     * 後_放射線治療点数を設定します。
      *
-     * @param 後・放射線治療点数 後・放射線治療点数
+     * @param 後_放射線治療点数 後_放射線治療点数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後・放射線治療点数(int 後・放射線治療点数) {
-        requireNonNull(後・放射線治療点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後・放射線治療点数"));
-        entity.setAtoHoshasenChiryoTensu(後・放射線治療点数);
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_放射線治療点数(int 後_放射線治療点数) {
+        requireNonNull(後_放射線治療点数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_放射線治療点数"));
+        entity.setAtoHoshasenChiryoTensu(後_放射線治療点数);
         return this;
     }
 

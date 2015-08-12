@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanShokujiHiyoSagakuShikyu}の編集を行うビルダークラスです。
@@ -132,14 +138,14 @@ public class ShokanShokujiHiyoSagakuShikyuBuilder {
     }
 
     /**
-     * 点数／金額を設定します。
+     * 点数_金額を設定します。
      *
-     * @param 点数／金額 点数／金額
+     * @param 点数_金額 点数_金額
      * @return {@link ShokanShokujiHiyoSagakuShikyuBuilder}
      */
-    public ShokanShokujiHiyoSagakuShikyuBuilder set点数／金額(int 点数／金額) {
-        requireNonNull(点数／金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数／金額"));
-        entity.setTensuKingaku(点数／金額);
+    public ShokanShokujiHiyoSagakuShikyuBuilder set点数_金額(int 点数_金額) {
+        requireNonNull(点数_金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数_金額"));
+        entity.setTensuKingaku(点数_金額);
         return this;
     }
 
@@ -156,14 +162,14 @@ public class ShokanShokujiHiyoSagakuShikyuBuilder {
     }
 
     /**
-     * 支給・不支給理由を設定します。
+     * 支給_不支給理由を設定します。
      *
-     * @param 支給・不支給理由 支給・不支給理由
+     * @param 支給_不支給理由 支給_不支給理由
      * @return {@link ShokanShokujiHiyoSagakuShikyuBuilder}
      */
-    public ShokanShokujiHiyoSagakuShikyuBuilder set支給・不支給理由(RString 支給・不支給理由) {
-        requireNonNull(支給・不支給理由, UrSystemErrorMessages.値がnull.getReplacedMessage("支給・不支給理由"));
-        entity.setShikyuFushikyuRiyu(支給・不支給理由);
+    public ShokanShokujiHiyoSagakuShikyuBuilder set支給_不支給理由(RString 支給_不支給理由) {
+        requireNonNull(支給_不支給理由, UrSystemErrorMessages.値がnull.getReplacedMessage("支給_不支給理由"));
+        entity.setShikyuFushikyuRiyu(支給_不支給理由);
         return this;
     }
 

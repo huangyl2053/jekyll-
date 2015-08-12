@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額合算支給額計算結果の識別子です。
@@ -30,10 +35,10 @@ public class KogakuGassanShikyuGakuKeisanKekkaIdentifier implements Serializable
      * @param 履歴番号 履歴番号
      */
     public KogakuGassanShikyuGakuKeisanKekkaIdentifier(HihokenshaNo 被保険者番号,
-FlexibleYear 対象年度,
-HokenshaNo 証記載保険者番号,
-RString 支給申請書整理番号,
-Decimal 履歴番号) {
+            FlexibleYear 対象年度,
+            HokenshaNo 証記載保険者番号,
+            RString 支給申請書整理番号,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.対象年度 = 対象年度;
         this.証記載保険者番号 = 証記載保険者番号;

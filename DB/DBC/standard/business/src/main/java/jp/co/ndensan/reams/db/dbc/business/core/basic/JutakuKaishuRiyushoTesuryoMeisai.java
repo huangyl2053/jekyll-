@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 住宅改修理由書作成手数料請求明細を管理するクラスです。
  */
-public class JutakuKaishuRiyushoTesuryoMeisai extends ParentModelBase<JutakuKaishuRiyushoTesuryoMeisaiIdentifier, DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity, JutakuKaishuRiyushoTesuryoMeisai> implements Serializable {
+public class JutakuKaishuRiyushoTesuryoMeisai extends ModelBase<JutakuKaishuRiyushoTesuryoMeisaiIdentifier, DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity, JutakuKaishuRiyushoTesuryoMeisai> implements Serializable {
 
     private final DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity;
     private final JutakuKaishuRiyushoTesuryoMeisaiIdentifier id;
@@ -33,8 +40,8 @@ public class JutakuKaishuRiyushoTesuryoMeisai extends ParentModelBase<JutakuKais
      * @param 履歴番号 履歴番号
      */
     public JutakuKaishuRiyushoTesuryoMeisai(HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,17 +50,18 @@ Decimal 履歴番号) {
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new JutakuKaishuRiyushoTesuryoMeisaiIdentifier(
-        証記載保険者番号,
-        被保険者番号,
-        履歴番号
-                );
+                証記載保険者番号,
+                被保険者番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}より{@link JutakuKaishuRiyushoTesuryoMeisai}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}
      */
     public JutakuKaishuRiyushoTesuryoMeisai(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修理由書作成手数料請求明細"));
@@ -164,7 +172,7 @@ Decimal 履歴番号) {
      *
      * @return 改修内容・箇所及び規模
      */
-    public RString get改修内容・箇所及び規模() {
+    public RString get改修内容_箇所及び規模() {
         return entity.getKaishuNaiyo_kasho_Kibo();
     }
 
@@ -235,27 +243,12 @@ Decimal 履歴番号) {
     /**
      * 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}を返します。
      *
-     * @return 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}
+     * @return
+     * 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}
      */
     @Override
     public JutakuKaishuRiyushoTesuryoMeisaiIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 住宅改修理由書作成手数料請求明細のみを変更対象とします。<br/>
-     * {@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link JutakuKaishuRiyushoTesuryoMeisai}
-     */
-    @Override
-    public JutakuKaishuRiyushoTesuryoMeisai modifiedModel() {
-        DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new JutakuKaishuRiyushoTesuryoMeisai(
-                modifiedEntity, id);
     }
 
     /**
@@ -275,6 +268,7 @@ Decimal 履歴番号) {
         }
         return new JutakuKaishuRiyushoTesuryoMeisai(deletedEntity, id);
     }
+
     /**
      * {@link JutakuKaishuRiyushoTesuryoMeisai}のシリアライズ形式を提供します。
      *
@@ -285,13 +279,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity;
         private final JutakuKaishuRiyushoTesuryoMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity,JutakuKaishuRiyushoTesuryoMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity, JutakuKaishuRiyushoTesuryoMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

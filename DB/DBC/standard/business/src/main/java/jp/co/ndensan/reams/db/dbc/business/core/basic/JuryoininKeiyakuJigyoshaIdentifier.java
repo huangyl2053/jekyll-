@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受領委任契約事業者の識別子です。
@@ -26,8 +29,8 @@ public class JuryoininKeiyakuJigyoshaIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public JuryoininKeiyakuJigyoshaIdentifier(RString 事業者契約番号,
-FlexibleDate 開始年月日,
-Decimal 履歴番号) {
+            FlexibleDate 開始年月日,
+            Decimal 履歴番号) {
         this.事業者契約番号 = 事業者契約番号;
         this.開始年月日 = 開始年月日;
         this.履歴番号 = 履歴番号;

@@ -6,20 +6,27 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績明細を管理するクラスです。
  */
-public class KyufujissekiMeisai extends ParentModelBase<KyufujissekiMeisaiIdentifier, DbT3018KyufujissekiMeisaiEntity, KyufujissekiMeisai> implements Serializable {
+public class KyufujissekiMeisai extends ModelBase<KyufujissekiMeisaiIdentifier, DbT3018KyufujissekiMeisaiEntity, KyufujissekiMeisai> implements Serializable {
 
     private final DbT3018KyufujissekiMeisaiEntity entity;
     private final KyufujissekiMeisaiIdentifier id;
@@ -39,16 +46,16 @@ public class KyufujissekiMeisai extends ParentModelBase<KyufujissekiMeisaiIdenti
      * @param サービス種類コード サービス種類コード
      * @param サービス項目コード サービス項目コード
      */
-    public KyufujissekiMeisai(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-ServiceShuruiCode サービス種類コード,
-ServiceKomokuCode サービス項目コード) {
+    public KyufujissekiMeisai(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            ServiceShuruiCode サービス種類コード,
+            ServiceKomokuCode サービス項目コード) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -71,17 +78,17 @@ ServiceKomokuCode サービス項目コード) {
         this.entity.setServiceShuruiCode(サービス種類コード);
         this.entity.setServiceKomokuCode(サービス項目コード);
         this.id = new KyufujissekiMeisaiIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        サービス種類コード,
-        サービス項目コード
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                サービス種類コード,
+                サービス項目コード
+        );
     }
 
     /**
@@ -125,7 +132,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -134,7 +141,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -220,38 +227,38 @@ ServiceKomokuCode サービス項目コード) {
     }
 
     /**
-     * 日数・回数を返します。
+     * 日数_回数を返します。
      *
-     * @return 日数・回数
+     * @return 日数_回数
      */
-    public Decimal get日数・回数() {
+    public Decimal get日数_回数() {
         return entity.getNissuKaisu();
     }
 
     /**
-     * 公費１対象日数・回数を返します。
+     * 公費１対象日数_回数を返します。
      *
-     * @return 公費１対象日数・回数
+     * @return 公費１対象日数_回数
      */
-    public Decimal get公費１対象日数・回数() {
+    public Decimal get公費１対象日数_回数() {
         return entity.getKohi1TaishoNissuKaisu();
     }
 
     /**
-     * 公費２対象日数・回数を返します。
+     * 公費２対象日数_回数を返します。
      *
-     * @return 公費２対象日数・回数
+     * @return 公費２対象日数_回数
      */
-    public Decimal get公費２対象日数・回数() {
+    public Decimal get公費２対象日数_回数() {
         return entity.getKohi2TaishoNissuKaisu();
     }
 
     /**
-     * 公費３対象日数・回数を返します。
+     * 公費３対象日数_回数を返します。
      *
-     * @return 公費３対象日数・回数
+     * @return 公費３対象日数_回数
      */
-    public Decimal get公費３対象日数・回数() {
+    public Decimal get公費３対象日数_回数() {
         return entity.getKohi3TaishoNissuKaisu();
     }
 
@@ -260,7 +267,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return サービス単位数
      */
-    public int getサービス単位数() {
+    public Decimal getサービス単位数() {
         return entity.getServiceTanisu();
     }
 
@@ -269,7 +276,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 公費１対象サービス単位数
      */
-    public int get公費１対象サービス単位数() {
+    public Decimal get公費１対象サービス単位数() {
         return entity.getKohi1TaishoServiceTanisu();
     }
 
@@ -278,7 +285,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 公費２対象サービス単位数
      */
-    public int get公費２対象サービス単位数() {
+    public Decimal get公費２対象サービス単位数() {
         return entity.getKohi2TaishoServiceTanisu();
     }
 
@@ -287,7 +294,7 @@ ServiceKomokuCode サービス項目コード) {
      *
      * @return 公費３対象サービス単位数
      */
-    public int get公費３対象サービス単位数() {
+    public Decimal get公費３対象サービス単位数() {
         return entity.getKohi3TaishoServiceTanisu();
     }
 
@@ -301,83 +308,83 @@ ServiceKomokuCode サービス項目コード) {
     }
 
     /**
-     * 後・単位数を返します。
+     * 後_単位数を返します。
      *
-     * @return 後・単位数
+     * @return 後_単位数
      */
-    public Decimal get後・単位数() {
+    public Decimal get後_単位数() {
         return entity.getAtoTanisu();
     }
 
     /**
-     * 後・日数・回数を返します。
+     * 後_日数_回数を返します。
      *
-     * @return 後・日数・回数
+     * @return 後_日数_回数
      */
-    public Decimal get後・日数・回数() {
+    public Decimal get後_日数_回数() {
         return entity.getAtoNissuKaisu();
     }
 
     /**
-     * 後・公費１対象日数・回数を返します。
+     * 後_公費１対象日数_回数を返します。
      *
-     * @return 後・公費１対象日数・回数
+     * @return 後_公費１対象日数_回数
      */
-    public Decimal get後・公費１対象日数・回数() {
+    public Decimal get後_公費１対象日数_回数() {
         return entity.getAtoKohi1TaishoNissuKaisu();
     }
 
     /**
-     * 後・公費２対象日数・回数を返します。
+     * 後_公費２対象日数_回数を返します。
      *
-     * @return 後・公費２対象日数・回数
+     * @return 後_公費２対象日数_回数
      */
-    public Decimal get後・公費２対象日数・回数() {
+    public Decimal get後_公費２対象日数_回数() {
         return entity.getAtoKohi2TaishoNissukaisu();
     }
 
     /**
-     * 後・公費３対象日数・回数を返します。
+     * 後_公費３対象日数_回数を返します。
      *
-     * @return 後・公費３対象日数・回数
+     * @return 後_公費３対象日数_回数
      */
-    public Decimal get後・公費３対象日数・回数() {
+    public Decimal get後_公費３対象日数_回数() {
         return entity.getAtoKohi3TaishoNissuKaisu();
     }
 
     /**
-     * 後・サービス単位数を返します。
+     * 後_サービス単位数を返します。
      *
-     * @return 後・サービス単位数
+     * @return 後_サービス単位数
      */
-    public int get後・サービス単位数() {
+    public Decimal get後_サービス単位数() {
         return entity.getAtoServiceTanisu();
     }
 
     /**
-     * 後・公費１対象サービス単位数を返します。
+     * 後_公費１対象サービス単位数を返します。
      *
-     * @return 後・公費１対象サービス単位数
+     * @return 後_公費１対象サービス単位数
      */
-    public int get後・公費１対象サービス単位数() {
+    public Decimal get後_公費１対象サービス単位数() {
         return entity.getAtoKohi1TaishoServiceTanisu();
     }
 
     /**
-     * 後・公費２対象サービス単位数を返します。
+     * 後_公費２対象サービス単位数を返します。
      *
-     * @return 後・公費２対象サービス単位数
+     * @return 後_公費２対象サービス単位数
      */
-    public int get後・公費２対象サービス単位数() {
+    public Decimal get後_公費２対象サービス単位数() {
         return entity.getAtoKohi2TaishoServiceTanisu();
     }
 
     /**
-     * 後・公費３対象サービス単位数を返します。
+     * 後_公費３対象サービス単位数を返します。
      *
-     * @return 後・公費３対象サービス単位数
+     * @return 後_公費３対象サービス単位数
      */
-    public int get後・公費３対象サービス単位数() {
+    public Decimal get後_公費３対象サービス単位数() {
         return entity.getAtoKohi3TaishoServiceTanisu();
     }
 
@@ -447,22 +454,6 @@ ServiceKomokuCode サービス項目コード) {
     }
 
     /**
-     * 給付実績明細のみを変更対象とします。<br/>
-     * {@link DbT3018KyufujissekiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiMeisai}
-     */
-    @Override
-    public KyufujissekiMeisai modifiedModel() {
-        DbT3018KyufujissekiMeisaiEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiMeisai(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する給付実績明細を削除対象とします。<br/>
      * {@link DbT3018KyufujissekiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -479,6 +470,7 @@ ServiceKomokuCode サービス項目コード) {
         }
         return new KyufujissekiMeisai(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiMeisai}のシリアライズ形式を提供します。
      *
@@ -489,13 +481,19 @@ ServiceKomokuCode サービス項目コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3018KyufujissekiMeisaiEntity entity;
         private final KyufujissekiMeisaiIdentifier id;
 
-        private _SerializationProxy(DbT3018KyufujissekiMeisaiEntity entity,KyufujissekiMeisaiIdentifier id) {
+        private _SerializationProxy(DbT3018KyufujissekiMeisaiEntity entity, KyufujissekiMeisaiIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

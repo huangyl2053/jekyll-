@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3080DaisanshaKoiJidanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link DaisanshaKoiJidan}の編集を行うビルダークラスです。
@@ -144,26 +150,26 @@ public class DaisanshaKoiJidanBuilder {
     }
 
     /**
-     * 過失割合・加害者を設定します。
+     * 過失割合_加害者を設定します。
      *
-     * @param 過失割合・加害者 過失割合・加害者
+     * @param 過失割合_加害者 過失割合_加害者
      * @return {@link DaisanshaKoiJidanBuilder}
      */
-    public DaisanshaKoiJidanBuilder set過失割合・加害者(RString 過失割合・加害者) {
-        requireNonNull(過失割合・加害者, UrSystemErrorMessages.値がnull.getReplacedMessage("過失割合・加害者"));
-        entity.setKashitsuWariai_Kagaisha(過失割合・加害者);
+    public DaisanshaKoiJidanBuilder set過失割合_加害者(RString 過失割合_加害者) {
+        requireNonNull(過失割合_加害者, UrSystemErrorMessages.値がnull.getReplacedMessage("過失割合_加害者"));
+        entity.setKashitsuWariai_Kagaisha(過失割合_加害者);
         return this;
     }
 
     /**
-     * 過失割合・被害者を設定します。
+     * 過失割合_被害者を設定します。
      *
-     * @param 過失割合・被害者 過失割合・被害者
+     * @param 過失割合_被害者 過失割合_被害者
      * @return {@link DaisanshaKoiJidanBuilder}
      */
-    public DaisanshaKoiJidanBuilder set過失割合・被害者(RString 過失割合・被害者) {
-        requireNonNull(過失割合・被害者, UrSystemErrorMessages.値がnull.getReplacedMessage("過失割合・被害者"));
-        entity.setKashitsuWariai_Higaisha(過失割合・被害者);
+    public DaisanshaKoiJidanBuilder set過失割合_被害者(RString 過失割合_被害者) {
+        requireNonNull(過失割合_被害者, UrSystemErrorMessages.値がnull.getReplacedMessage("過失割合_被害者"));
+        entity.setKashitsuWariai_Higaisha(過失割合_被害者);
         return this;
     }
 

@@ -156,7 +156,7 @@ public class KyufujissekiKihonTest extends DbcTestBase {
 
         @Test
         public void get事業所番号は_entityが持つ事業所番号を返す() {
-            assertThat(sut.get事業所番号(), is(KyufujissekiKihonEntity.getJigyoshoNo()));
+            assertThat(sut.get居宅介護支援事業所番号(), is(KyufujissekiKihonEntity.getJigyoshoNo()));
         }
 
         @Test
@@ -266,7 +266,7 @@ public class KyufujissekiKihonTest extends DbcTestBase {
 
         @Test
         public void get事業所番号は_entityが持つ事業所番号を返す() {
-            assertThat(sut.get事業所番号(), is(KyufujissekiKihonEntity.getKyotakuKaigoShienJigyoshoNo()));
+            assertThat(sut.get居宅介護支援事業所番号(), is(KyufujissekiKihonEntity.getKyotakuKaigoShienJigyoshoNo()));
         }
 
         @Test

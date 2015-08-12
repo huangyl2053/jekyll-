@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還受領委任契約者の識別子です。
@@ -28,9 +32,9 @@ public class ShokanJuryoininKeiyakushaIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public ShokanJuryoininKeiyakushaIdentifier(HihokenshaNo 被保険者番号,
-ShoKisaiHokenshaNo 証記載保険者番号,
-FlexibleDate 受付年月日,
-Decimal 履歴番号) {
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            FlexibleDate 受付年月日,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.証記載保険者番号 = 証記載保険者番号;
         this.受付年月日 = 受付年月日;

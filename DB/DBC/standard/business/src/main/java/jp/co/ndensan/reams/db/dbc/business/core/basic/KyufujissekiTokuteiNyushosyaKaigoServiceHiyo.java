@@ -6,20 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績特定入所者介護サービス費用を管理するクラスです。
  */
-public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo extends ParentModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
+public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
     private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;
@@ -38,15 +46,15 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo extends ParentModelBas
      * @param 通し番号 通し番号
      * @param 特定入所者介護サービス費用情報レコード順次番号 特定入所者介護サービス費用情報レコード順次番号
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-RString 特定入所者介護サービス費用情報レコード順次番号) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            RString 特定入所者介護サービス費用情報レコード順次番号) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,23 +75,24 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
         this.entity.setToshiNo(通し番号);
         this.entity.setRecodeJunjiNo(特定入所者介護サービス費用情報レコード順次番号);
         this.id = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        特定入所者介護サービス費用情報レコード順次番号
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                特定入所者介護サービス費用情報レコード順次番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}より{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
      */
     public KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績特定入所者介護サービス費用"));
@@ -102,7 +111,8 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
+     * @param entity
+     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}
      * @param id {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
      */
     KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(
@@ -119,7 +129,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +138,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -272,7 +282,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 費用額
      */
-    public int get費用額() {
+    public Decimal get費用額() {
         return entity.getHiyogaku();
     }
 
@@ -281,34 +291,34 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 保険分請求額
      */
-    public int get保険分請求額() {
+    public Decimal get保険分請求額() {
         return entity.getHokenbunSeikyugaku();
     }
 
     /**
-     * 公費１負担額（明細）を返します。
+     * 公費１負担額_明細を返します。
      *
-     * @return 公費１負担額（明細）
+     * @return 公費１負担額_明細
      */
-    public int get公費１負担額（明細）() {
+    public Decimal get公費１負担額_明細() {
         return entity.getKohi1Futangaku();
     }
 
     /**
-     * 公費２負担額（明細）を返します。
+     * 公費２負担額_明細を返します。
      *
-     * @return 公費２負担額（明細）
+     * @return 公費２負担額_明細
      */
-    public int get公費２負担額（明細）() {
+    public Decimal get公費２負担額_明細() {
         return entity.getKohi2Futangaku();
     }
 
     /**
-     * 公費３負担額（明細）を返します。
+     * 公費３負担額_明細を返します。
      *
-     * @return 公費３負担額（明細）
+     * @return 公費３負担額_明細
      */
-    public int get公費３負担額（明細）() {
+    public Decimal get公費３負担額_明細() {
         return entity.getKohi3Futangaku();
     }
 
@@ -317,7 +327,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 利用者負担額
      */
-    public int get利用者負担額() {
+    public Decimal get利用者負担額() {
         return entity.getRiyoshaFutangaku();
     }
 
@@ -326,7 +336,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 費用額合計
      */
-    public int get費用額合計() {
+    public Decimal get費用額合計() {
         return entity.getHiyogakuTotal();
     }
 
@@ -335,7 +345,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 保険分請求額合計
      */
-    public int get保険分請求額合計() {
+    public Decimal get保険分請求額合計() {
         return entity.getHokenbunSeikyugakuTotal();
     }
 
@@ -344,295 +354,295 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
      *
      * @return 利用者負担額合計
      */
-    public int get利用者負担額合計() {
+    public Decimal get利用者負担額合計() {
         return entity.getRiyoshaFutangakuTotal();
     }
 
     /**
-     * 公費１・負担額合計を返します。
+     * 公費１_負担額合計を返します。
      *
-     * @return 公費１・負担額合計
+     * @return 公費１_負担額合計
      */
-    public int get公費１・負担額合計() {
+    public Decimal get公費１_負担額合計() {
         return entity.getKohi1FutangakuTotal();
     }
 
     /**
-     * 公費１・請求額を返します。
+     * 公費１_請求額を返します。
      *
-     * @return 公費１・請求額
+     * @return 公費１_請求額
      */
-    public int get公費１・請求額() {
+    public Decimal get公費１_請求額() {
         return entity.getKohi1Seikyugaku();
     }
 
     /**
-     * 公費１・本人負担月額を返します。
+     * 公費１_本人負担月額を返します。
      *
-     * @return 公費１・本人負担月額
+     * @return 公費１_本人負担月額
      */
-    public int get公費１・本人負担月額() {
+    public Decimal get公費１_本人負担月額() {
         return entity.getKohi1HonninFutanGetsugaku();
     }
 
     /**
-     * 公費２・負担額合計を返します。
+     * 公費２_負担額合計を返します。
      *
-     * @return 公費２・負担額合計
+     * @return 公費２_負担額合計
      */
-    public int get公費２・負担額合計() {
+    public Decimal get公費２_負担額合計() {
         return entity.getKohi2FutangakuTotal();
     }
 
     /**
-     * 公費２・請求額を返します。
+     * 公費２_請求額を返します。
      *
-     * @return 公費２・請求額
+     * @return 公費２_請求額
      */
-    public int get公費２・請求額() {
+    public Decimal get公費２_請求額() {
         return entity.getKohi2Seikyugaku();
     }
 
     /**
-     * 公費２・本人負担月額を返します。
+     * 公費２_本人負担月額を返します。
      *
-     * @return 公費２・本人負担月額
+     * @return 公費２_本人負担月額
      */
-    public int get公費２・本人負担月額() {
+    public Decimal get公費２_本人負担月額() {
         return entity.getKohi2HonninFutanGetsugaku();
     }
 
     /**
-     * 公費３・負担額合計を返します。
+     * 公費３_負担額合計を返します。
      *
-     * @return 公費３・負担額合計
+     * @return 公費３_負担額合計
      */
-    public int get公費３・負担額合計() {
+    public Decimal get公費３_負担額合計() {
         return entity.getKohi3FutangakuTotal();
     }
 
     /**
-     * 公費３・請求額を返します。
+     * 公費３_請求額を返します。
      *
-     * @return 公費３・請求額
+     * @return 公費３_請求額
      */
-    public int get公費３・請求額() {
+    public Decimal get公費３_請求額() {
         return entity.getKohi3Seikyugaku();
     }
 
     /**
-     * 公費３・本人負担月額を返します。
+     * 公費３_本人負担月額を返します。
      *
-     * @return 公費３・本人負担月額
+     * @return 公費３_本人負担月額
      */
-    public int get公費３・本人負担月額() {
+    public Decimal get公費３_本人負担月額() {
         return entity.getKohi3HonninFutanGetsugaku();
     }
 
     /**
-     * 後・費用単価を返します。
+     * 後_費用単価を返します。
      *
-     * @return 後・費用単価
+     * @return 後_費用単価
      */
-    public Decimal get後・費用単価() {
+    public Decimal get後_費用単価() {
         return entity.getAtoHiyoTanka();
     }
 
     /**
-     * 後・日数を返します。
+     * 後_日数を返します。
      *
-     * @return 後・日数
+     * @return 後_日数
      */
-    public Decimal get後・日数() {
+    public Decimal get後_日数() {
         return entity.getAtoNissu();
     }
 
     /**
-     * 後・公費１日数を返します。
+     * 後_公費１日数を返します。
      *
-     * @return 後・公費１日数
+     * @return 後_公費１日数
      */
-    public Decimal get後・公費１日数() {
+    public Decimal get後_公費１日数() {
         return entity.getAtoKohi1Nissu();
     }
 
     /**
-     * 後・公費２日数を返します。
+     * 後_公費２日数を返します。
      *
-     * @return 後・公費２日数
+     * @return 後_公費２日数
      */
-    public Decimal get後・公費２日数() {
+    public Decimal get後_公費２日数() {
         return entity.getAtoKohi2Nissu();
     }
 
     /**
-     * 後・公費３日数を返します。
+     * 後_公費３日数を返します。
      *
-     * @return 後・公費３日数
+     * @return 後_公費３日数
      */
-    public Decimal get後・公費３日数() {
+    public Decimal get後_公費３日数() {
         return entity.getAtoKohi3Nissu();
     }
 
     /**
-     * 後・費用額を返します。
+     * 後_費用額を返します。
      *
-     * @return 後・費用額
+     * @return 後_費用額
      */
-    public int get後・費用額() {
+    public Decimal get後_費用額() {
         return entity.getAtoHiyogaku();
     }
 
     /**
-     * 後・保険分請求額を返します。
+     * 後_保険分請求額を返します。
      *
-     * @return 後・保険分請求額
+     * @return 後_保険分請求額
      */
-    public int get後・保険分請求額() {
+    public Decimal get後_保険分請求額() {
         return entity.getAtoHokenbunSeikyugaku();
     }
 
     /**
-     * 後・公費１負担額（明細）を返します。
+     * 後_公費１負担額_明細を返します。
      *
-     * @return 後・公費１負担額（明細）
+     * @return 後_公費１負担額_明細
      */
-    public int get後・公費１負担額（明細）() {
+    public Decimal get後_公費１負担額_明細() {
         return entity.getAtoKohi1Futangaku();
     }
 
     /**
-     * 後・公費２負担額（明細）を返します。
+     * 後_公費２負担額_明細を返します。
      *
-     * @return 後・公費２負担額（明細）
+     * @return 後_公費２負担額_明細
      */
-    public int get後・公費２負担額（明細）() {
+    public Decimal get後_公費２負担額_明細() {
         return entity.getAtoKohi2Futangaku();
     }
 
     /**
-     * 後・公費３負担額（明細）を返します。
+     * 後_公費３負担額_明細を返します。
      *
-     * @return 後・公費３負担額（明細）
+     * @return 後_公費３負担額_明細
      */
-    public int get後・公費３負担額（明細）() {
+    public Decimal get後_公費３負担額_明細() {
         return entity.getAtoKohi3Futangaku();
     }
 
     /**
-     * 後・利用者負担額を返します。
+     * 後_利用者負担額を返します。
      *
-     * @return 後・利用者負担額
+     * @return 後_利用者負担額
      */
-    public int get後・利用者負担額() {
+    public Decimal get後_利用者負担額() {
         return entity.getAtoRiyoshaFutangaku();
     }
 
     /**
-     * 後・費用額合計を返します。
+     * 後_費用額合計を返します。
      *
-     * @return 後・費用額合計
+     * @return 後_費用額合計
      */
-    public int get後・費用額合計() {
+    public Decimal get後_費用額合計() {
         return entity.getAtoHiyogakuTotal();
     }
 
     /**
-     * 後・保険分請求額合計を返します。
+     * 後_保険分請求額合計を返します。
      *
-     * @return 後・保険分請求額合計
+     * @return 後_保険分請求額合計
      */
-    public int get後・保険分請求額合計() {
+    public Decimal get後_保険分請求額合計() {
         return entity.getAtoHokenbunSeikyugakuTotal();
     }
 
     /**
-     * 後・利用者負担額合計を返します。
+     * 後_利用者負担額合計を返します。
      *
-     * @return 後・利用者負担額合計
+     * @return 後_利用者負担額合計
      */
-    public int get後・利用者負担額合計() {
+    public Decimal get後_利用者負担額合計() {
         return entity.getAtoRiyoshaFutangakuTotal();
     }
 
     /**
-     * 後・公費１・負担額合計を返します。
+     * 後_公費１_負担額合計を返します。
      *
-     * @return 後・公費１・負担額合計
+     * @return 後_公費１_負担額合計
      */
-    public int get後・公費１・負担額合計() {
+    public Decimal get後_公費１_負担額合計() {
         return entity.getAtoKohi1FutangakuTotal();
     }
 
     /**
-     * 後・公費１・請求額を返します。
+     * 後_公費１_請求額を返します。
      *
-     * @return 後・公費１・請求額
+     * @return 後_公費１_請求額
      */
-    public int get後・公費１・請求額() {
+    public Decimal get後_公費１_請求額() {
         return entity.getAtoKohi1Seikyugaku();
     }
 
     /**
-     * 後・公費１・本人負担月額を返します。
+     * 後_公費１_本人負担月額を返します。
      *
-     * @return 後・公費１・本人負担月額
+     * @return 後_公費１_本人負担月額
      */
-    public int get後・公費１・本人負担月額() {
+    public Decimal get後_公費１_本人負担月額() {
         return entity.getAtoKohi1HonninFutanGetsugaku();
     }
 
     /**
-     * 後・公費２・負担額合計を返します。
+     * 後_公費２_負担額合計を返します。
      *
-     * @return 後・公費２・負担額合計
+     * @return 後_公費２_負担額合計
      */
-    public int get後・公費２・負担額合計() {
+    public Decimal get後_公費２_負担額合計() {
         return entity.getAtoKohi2FutangakuTotal();
     }
 
     /**
-     * 後・公費２・請求額を返します。
+     * 後_公費２_請求額を返します。
      *
-     * @return 後・公費２・請求額
+     * @return 後_公費２_請求額
      */
-    public int get後・公費２・請求額() {
+    public Decimal get後_公費２_請求額() {
         return entity.getAtoKohi2Seikyugaku();
     }
 
     /**
-     * 後・公費２・本人負担月額を返します。
+     * 後_公費２_本人負担月額を返します。
      *
-     * @return 後・公費２・本人負担月額
+     * @return 後_公費２_本人負担月額
      */
-    public int get後・公費２・本人負担月額() {
+    public Decimal get後_公費２_本人負担月額() {
         return entity.getAtoKohi2HonninFutanGetsugaku();
     }
 
     /**
-     * 後・公費３・負担額合計を返します。
+     * 後_公費３_負担額合計を返します。
      *
-     * @return 後・公費３・負担額合計
+     * @return 後_公費３_負担額合計
      */
-    public int get後・公費３・負担額合計() {
+    public Decimal get後_公費３_負担額合計() {
         return entity.getAtoKohi3FutangakuTotal();
     }
 
     /**
-     * 後・公費３・請求額を返します。
+     * 後_公費３_請求額を返します。
      *
-     * @return 後・公費３・請求額
+     * @return 後_公費３_請求額
      */
-    public int get後・公費３・請求額() {
+    public Decimal get後_公費３_請求額() {
         return entity.getAtoKohi3Seikyugaku();
     }
 
     /**
-     * 後・公費３・本人負担月額を返します。
+     * 後_公費３_本人負担月額を返します。
      *
-     * @return 後・公費３・本人負担月額
+     * @return 後_公費３_本人負担月額
      */
-    public int get後・公費３・本人負担月額() {
+    public Decimal get後_公費３_本人負担月額() {
         return entity.getAtoKohi3HonninFutanGetsugaku();
     }
 
@@ -684,7 +694,8 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
     /**
      * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローンを返します。
      *
-     * @return {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローン
+     * @return
+     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}のクローン
      */
     @Override
     public DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity toEntity() {
@@ -694,27 +705,12 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
     /**
      * 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}を返します。
      *
-     * @return 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
+     * @return
+     * 給付実績特定入所者介護サービス費用の識別子{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier}
      */
     @Override
     public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付実績特定入所者介護サービス費用のみを変更対象とします。<br/>
-     * {@link DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}
-     */
-    @Override
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyo modifiedModel() {
-        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(
-                modifiedEntity, id);
     }
 
     /**
@@ -734,6 +730,7 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
         }
         return new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(deletedEntity, id);
     }
+
     /**
      * {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyo}のシリアライズ形式を提供します。
      *
@@ -744,13 +741,19 @@ RString 特定入所者介護サービス費用情報レコード順次番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
         private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity,KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id) {
+        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

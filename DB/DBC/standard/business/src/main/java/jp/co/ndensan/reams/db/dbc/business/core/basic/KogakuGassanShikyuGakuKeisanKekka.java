@@ -6,20 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給額計算結果を管理するクラスです。
  */
-public class KogakuGassanShikyuGakuKeisanKekka extends ParentModelBase<KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka> implements Serializable {
+public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka> implements Serializable {
 
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
     private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
@@ -35,10 +43,10 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ParentModelBase<KogakuGas
      * @param 履歴番号 履歴番号
      */
     public KogakuGassanShikyuGakuKeisanKekka(HihokenshaNo 被保険者番号,
-FlexibleYear 対象年度,
-HokenshaNo 証記載保険者番号,
-RString 支給申請書整理番号,
-Decimal 履歴番号) {
+            FlexibleYear 対象年度,
+            HokenshaNo 証記載保険者番号,
+            RString 支給申請書整理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
@@ -51,19 +59,20 @@ Decimal 履歴番号) {
         this.entity.setShikyuShinseishoSeiriNo(支給申請書整理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KogakuGassanShikyuGakuKeisanKekkaIdentifier(
-        被保険者番号,
-        対象年度,
-        証記載保険者番号,
-        支給申請書整理番号,
-        履歴番号
-                );
+                被保険者番号,
+                対象年度,
+                証記載保険者番号,
+                支給申請書整理番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}より{@link KogakuGassanShikyuGakuKeisanKekka}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
+     * @param entity
+     * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
      */
     public KogakuGassanShikyuGakuKeisanKekka(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
@@ -499,27 +508,12 @@ Decimal 履歴番号) {
     /**
      * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}を返します。
      *
-     * @return 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
+     * @return
+     * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
      */
     @Override
     public KogakuGassanShikyuGakuKeisanKekkaIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 高額合算支給額計算結果のみを変更対象とします。<br/>
-     * {@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KogakuGassanShikyuGakuKeisanKekka}
-     */
-    @Override
-    public KogakuGassanShikyuGakuKeisanKekka modifiedModel() {
-        DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KogakuGassanShikyuGakuKeisanKekka(
-                modifiedEntity, id);
     }
 
     /**
@@ -539,6 +533,7 @@ Decimal 履歴番号) {
         }
         return new KogakuGassanShikyuGakuKeisanKekka(deletedEntity, id);
     }
+
     /**
      * {@link KogakuGassanShikyuGakuKeisanKekka}のシリアライズ形式を提供します。
      *
@@ -549,13 +544,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
         private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
 
-        private _SerializationProxy(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity,KogakuGassanShikyuGakuKeisanKekkaIdentifier id) {
+        private _SerializationProxy(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity, KogakuGassanShikyuGakuKeisanKekkaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

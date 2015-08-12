@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3097TandokuJoseikinKyufuKetteiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link TandokuJoseikinKyufuKettei}の編集を行うビルダークラスです。
@@ -108,26 +114,26 @@ public class TandokuJoseikinKyufuKetteiBuilder {
     }
 
     /**
-     * 利用者負担・決定区分を設定します。
+     * 利用者負担_決定区分を設定します。
      *
-     * @param 利用者負担・決定区分 利用者負担・決定区分
+     * @param 利用者負担_決定区分 利用者負担_決定区分
      * @return {@link TandokuJoseikinKyufuKetteiBuilder}
      */
-    public TandokuJoseikinKyufuKetteiBuilder set利用者負担・決定区分(RString 利用者負担・決定区分) {
-        requireNonNull(利用者負担・決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担・決定区分"));
-        entity.setRiyoshaFutan_KetteiKubun(利用者負担・決定区分);
+    public TandokuJoseikinKyufuKetteiBuilder set利用者負担_決定区分(RString 利用者負担_決定区分) {
+        requireNonNull(利用者負担_決定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担_決定区分"));
+        entity.setRiyoshaFutan_KetteiKubun(利用者負担_決定区分);
         return this;
     }
 
     /**
-     * 利用者負担・不承認理由を設定します。
+     * 利用者負担_不承認理由を設定します。
      *
-     * @param 利用者負担・不承認理由 利用者負担・不承認理由
+     * @param 利用者負担_不承認理由 利用者負担_不承認理由
      * @return {@link TandokuJoseikinKyufuKetteiBuilder}
      */
-    public TandokuJoseikinKyufuKetteiBuilder set利用者負担・不承認理由(RString 利用者負担・不承認理由) {
-        requireNonNull(利用者負担・不承認理由, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担・不承認理由"));
-        entity.setRiyoshaFutan_FuShoninRiyu(利用者負担・不承認理由);
+    public TandokuJoseikinKyufuKetteiBuilder set利用者負担_不承認理由(RString 利用者負担_不承認理由) {
+        requireNonNull(利用者負担_不承認理由, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担_不承認理由"));
+        entity.setRiyoshaFutan_FuShoninRiyu(利用者負担_不承認理由);
         return this;
     }
 
@@ -228,38 +234,38 @@ public class TandokuJoseikinKyufuKetteiBuilder {
     }
 
     /**
-     * 保留区分・滞納を設定します。
+     * 保留区分_滞納を設定します。
      *
-     * @param 保留区分・滞納 保留区分・滞納
+     * @param 保留区分_滞納 保留区分_滞納
      * @return {@link TandokuJoseikinKyufuKetteiBuilder}
      */
-    public TandokuJoseikinKyufuKetteiBuilder set保留区分・滞納(RString 保留区分・滞納) {
-        requireNonNull(保留区分・滞納, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分・滞納"));
-        entity.setTaino_HoryuKubun(保留区分・滞納);
+    public TandokuJoseikinKyufuKetteiBuilder set保留区分_滞納(RString 保留区分_滞納) {
+        requireNonNull(保留区分_滞納, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分_滞納"));
+        entity.setTaino_HoryuKubun(保留区分_滞納);
         return this;
     }
 
     /**
-     * 保留区分・認定申請中を設定します。
+     * 保留区分_認定申請中を設定します。
      *
-     * @param 保留区分・認定申請中 保留区分・認定申請中
+     * @param 保留区分_認定申請中 保留区分_認定申請中
      * @return {@link TandokuJoseikinKyufuKetteiBuilder}
      */
-    public TandokuJoseikinKyufuKetteiBuilder set保留区分・認定申請中(RString 保留区分・認定申請中) {
-        requireNonNull(保留区分・認定申請中, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分・認定申請中"));
-        entity.setNinteiShinseichu_HoryuKubun(保留区分・認定申請中);
+    public TandokuJoseikinKyufuKetteiBuilder set保留区分_認定申請中(RString 保留区分_認定申請中) {
+        requireNonNull(保留区分_認定申請中, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分_認定申請中"));
+        entity.setNinteiShinseichu_HoryuKubun(保留区分_認定申請中);
         return this;
     }
 
     /**
-     * 保留区分・認定有効期限切れを設定します。
+     * 保留区分_認定有効期限切れを設定します。
      *
-     * @param 保留区分・認定有効期限切れ 保留区分・認定有効期限切れ
+     * @param 保留区分_認定有効期限切れ 保留区分_認定有効期限切れ
      * @return {@link TandokuJoseikinKyufuKetteiBuilder}
      */
-    public TandokuJoseikinKyufuKetteiBuilder set保留区分・認定有効期限切れ(RString 保留区分・認定有効期限切れ) {
-        requireNonNull(保留区分・認定有効期限切れ, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分・認定有効期限切れ"));
-        entity.setNinteiKigenGire_HoryuKubun(保留区分・認定有効期限切れ);
+    public TandokuJoseikinKyufuKetteiBuilder set保留区分_認定有効期限切れ(RString 保留区分_認定有効期限切れ) {
+        requireNonNull(保留区分_認定有効期限切れ, UrSystemErrorMessages.値がnull.getReplacedMessage("保留区分_認定有効期限切れ"));
+        entity.setNinteiKigenGire_HoryuKubun(保留区分_認定有効期限切れ);
         return this;
     }
 

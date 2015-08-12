@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 高額介護サービス費給付対象者合計の識別子です。
@@ -26,8 +29,8 @@ public class KogakuKyufuTaishoshaGokeiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public KogakuKyufuTaishoshaGokeiIdentifier(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.履歴番号 = 履歴番号;

@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績社会福祉法人軽減額を管理するクラスです。
  */
-public class KyufuJissekiShakaiFukushiHojinKeigengaku extends ParentModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
+public class KyufuJissekiShakaiFukushiHojinKeigengaku extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
 
     private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
     private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
@@ -38,15 +44,15 @@ public class KyufuJissekiShakaiFukushiHojinKeigengaku extends ParentModelBase<Ky
      * @param 通し番号 通し番号
      * @param サービス種類コード サービス種類コード
      */
-    public KyufuJissekiShakaiFukushiHojinKeigengaku(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 通し番号,
-ServiceShuruiCode サービス種類コード) {
+    public KyufuJissekiShakaiFukushiHojinKeigengaku(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 通し番号,
+            ServiceShuruiCode サービス種類コード) {
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
         requireNonNull(レコード種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("レコード種別コード"));
@@ -67,23 +73,24 @@ ServiceShuruiCode サービス種類コード) {
         this.entity.setToshiNo(通し番号);
         this.entity.setServiceSyuruiCode(サービス種類コード);
         this.id = new KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier(
-        交換情報識別番号,
-        入力識別番号,
-        レコード種別コード,
-        証記載保険者番号,
-        被保険者番号,
-        サービス提供年月,
-        事業所番号,
-        通し番号,
-        サービス種類コード
-                );
+                交換情報識別番号,
+                入力識別番号,
+                レコード種別コード,
+                証記載保険者番号,
+                被保険者番号,
+                サービス提供年月,
+                事業所番号,
+                通し番号,
+                サービス種類コード
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}より{@link KyufuJissekiShakaiFukushiHojinKeigengaku}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
      */
     public KyufuJissekiShakaiFukushiHojinKeigengaku(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績社会福祉法人軽減額"));
@@ -102,7 +109,8 @@ ServiceShuruiCode サービス種類コード) {
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
+     * @param entity
+     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}
      * @param id {@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
      */
     KyufuJissekiShakaiFukushiHojinKeigengaku(
@@ -119,7 +127,7 @@ ServiceShuruiCode サービス種類コード) {
      *
      * @return 交換情報識別番号
      */
-    public KokanShikibetsuCode get交換情報識別番号() {
+    public KokanShikibetsuNo get交換情報識別番号() {
         return entity.getKokanJohoShikibetsuNo();
     }
 
@@ -128,7 +136,7 @@ ServiceShuruiCode サービス種類コード) {
      *
      * @return 入力識別番号
      */
-    public NyuryokuShikibetsuCode get入力識別番号() {
+    public NyuryokuShikibetsuNo get入力識別番号() {
         return entity.getInputShikibetsuNo();
     }
 
@@ -209,7 +217,7 @@ ServiceShuruiCode サービス種類コード) {
      *
      * @return 受領すべき利用者負担の総額
      */
-    public int get受領すべき利用者負担の総額() {
+    public Decimal get受領すべき利用者負担の総額() {
         return entity.getRiyoshaFutanTotal();
     }
 
@@ -218,7 +226,7 @@ ServiceShuruiCode サービス種類コード) {
      *
      * @return 軽減額
      */
-    public int get軽減額() {
+    public Decimal get軽減額() {
         return entity.getKeigengaku();
     }
 
@@ -227,7 +235,7 @@ ServiceShuruiCode サービス種類コード) {
      *
      * @return 軽減後利用者負担額
      */
-    public int get軽減後利用者負担額() {
+    public Decimal get軽減後利用者負担額() {
         return entity.getKeigengoRiyoshaFutangaku();
     }
 
@@ -241,29 +249,29 @@ ServiceShuruiCode サービス種類コード) {
     }
 
     /**
-     * 後・受領すべき利用者負担の総額を返します。
+     * 後_受領すべき利用者負担の総額を返します。
      *
-     * @return 後・受領すべき利用者負担の総額
+     * @return 後_受領すべき利用者負担の総額
      */
-    public int get後・受領すべき利用者負担の総額() {
+    public Decimal get後_受領すべき利用者負担の総額() {
         return entity.getAtoRiyoshaFutanTotal();
     }
 
     /**
-     * 後・軽減額を返します。
+     * 後_軽減額を返します。
      *
-     * @return 後・軽減額
+     * @return 後_軽減額
      */
-    public int get後・軽減額() {
+    public Decimal get後_軽減額() {
         return entity.getAtoKeigengaku();
     }
 
     /**
-     * 後・軽減後利用者負担額を返します。
+     * 後_軽減後利用者負担額を返します。
      *
-     * @return 後・軽減後利用者負担額
+     * @return 後_軽減後利用者負担額
      */
-    public int get後・軽減後利用者負担額() {
+    public Decimal get後_軽減後利用者負担額() {
         return entity.getAtoKeigengoRiyoshaFutangaku();
     }
 
@@ -315,7 +323,8 @@ ServiceShuruiCode サービス種類コード) {
     /**
      * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローンを返します。
      *
-     * @return {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローン
+     * @return
+     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}のクローン
      */
     @Override
     public DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity toEntity() {
@@ -325,27 +334,12 @@ ServiceShuruiCode サービス種類コード) {
     /**
      * 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}を返します。
      *
-     * @return 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
+     * @return
+     * 給付実績社会福祉法人軽減額の識別子{@link KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier}
      */
     @Override
     public KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付実績社会福祉法人軽減額のみを変更対象とします。<br/>
-     * {@link DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuJissekiShakaiFukushiHojinKeigengaku}
-     */
-    @Override
-    public KyufuJissekiShakaiFukushiHojinKeigengaku modifiedModel() {
-        DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuJissekiShakaiFukushiHojinKeigengaku(
-                modifiedEntity, id);
     }
 
     /**
@@ -365,6 +359,7 @@ ServiceShuruiCode サービス種類コード) {
         }
         return new KyufuJissekiShakaiFukushiHojinKeigengaku(deletedEntity, id);
     }
+
     /**
      * {@link KyufuJissekiShakaiFukushiHojinKeigengaku}のシリアライズ形式を提供します。
      *
@@ -375,13 +370,19 @@ ServiceShuruiCode サービス種類コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
         private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
 
-        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity,KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id) {
+        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity, KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

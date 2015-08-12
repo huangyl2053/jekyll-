@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
@@ -113,9 +114,15 @@ public class ShokanServicePlan200004Builder {
      * @param 指定／基準該当事業者区分コード 指定／基準該当事業者区分コード
      * @return {@link ShokanServicePlan200004Builder}
      */
-    public ShokanServicePlan200004Builder set指定／基準該当事業者区分コード(RString 指定／基準該当事業者区分コード) {
-        requireNonNull(指定／基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード"));
-        entity.setShiteiKijunGaitoJigyoshaKubunCode(指定／基準該当事業者区分コード);
+    public ShokanServicePlan200004Builder set指定
+
+    ／基準該当事業者区分コード(RString 指定
+        ／基準該当事業者区分コード) {
+        requireNonNull(指定／基準該当事業者区分コード
+        , UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード")
+        );
+        entity.setShiteiKijunGaitoJigyoshaKubunCode(指定／基準該当事業者区分コード
+        );
         return this;
     }
 
@@ -221,9 +228,15 @@ public class ShokanServicePlan200004Builder {
      * @param 点数／金額 点数／金額
      * @return {@link ShokanServicePlan200004Builder}
      */
-    public ShokanServicePlan200004Builder set点数／金額(int 点数／金額) {
-        requireNonNull(点数／金額, UrSystemErrorMessages.値がnull.getReplacedMessage("点数／金額"));
-        entity.setTensuKingaku(点数／金額);
+    public ShokanServicePlan200004Builder set点数
+
+    ／金額(int 点数
+        ／金額) {
+        requireNonNull(点数／金額
+        , UrSystemErrorMessages.値がnull.getReplacedMessage("点数／金額")
+        );
+        entity.setTensuKingaku(点数／金額
+        );
         return this;
     }
 
@@ -293,9 +306,15 @@ public class ShokanServicePlan200004Builder {
      * @param 購入・改修履歴等 購入・改修履歴等
      * @return {@link ShokanServicePlan200004Builder}
      */
-    public ShokanServicePlan200004Builder set購入・改修履歴等(RString 購入・改修履歴等) {
-        requireNonNull(購入・改修履歴等, UrSystemErrorMessages.値がnull.getReplacedMessage("購入・改修履歴等"));
-        entity.setKounyuKaishuRireki(購入・改修履歴等);
+    public ShokanServicePlan200004Builder set購入
+
+    ・改修履歴等(RString 購入
+        ・改修履歴等) {
+        requireNonNull(購入・改修履歴等
+        , UrSystemErrorMessages.値がnull.getReplacedMessage("購入・改修履歴等")
+        );
+        entity.setKounyuKaishuRireki(購入・改修履歴等
+        );
         return this;
     }
 

@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3066ShichosonTokubetuKyufuServiceEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3066ShichosonTokubetuKyufuServiceEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村特別給付サービス内容を管理するクラスです。
  */
-public class ShichosonTokubetuKyufuService extends ParentModelBase<ShichosonTokubetuKyufuServiceIdentifier, DbT3066ShichosonTokubetuKyufuServiceEntity, ShichosonTokubetuKyufuService> implements Serializable {
+
+
+public class ShichosonTokubetuKyufuService extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier, DbT3066ShichosonTokubetuKyufuServiceEntity, ShichosonTokubetuKyufuService> implements Serializable {
 
     private final DbT3066ShichosonTokubetuKyufuServiceEntity entity;
     private final ShichosonTokubetuKyufuServiceIdentifier id;
@@ -33,8 +37,8 @@ public class ShichosonTokubetuKyufuService extends ParentModelBase<ShichosonToku
      * @param 履歴番号 履歴番号
      */
     public ShichosonTokubetuKyufuService(RString 市町村特別給付用サービスコード,
-FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-Decimal 履歴番号) {
+            FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
+            Decimal 履歴番号) {
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(市町村特別給付用サービス有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス有効期間開始年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,10 +47,10 @@ Decimal 履歴番号) {
         this.entity.setServiceYukoKikanKaishiYMD(市町村特別給付用サービス有効期間開始年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShichosonTokubetuKyufuServiceIdentifier(
-        市町村特別給付用サービスコード,
-        市町村特別給付用サービス有効期間開始年月日,
-        履歴番号
-                );
+                市町村特別給付用サービスコード,
+                市町村特別給付用サービス有効期間開始年月日,
+                履歴番号
+        );
     }
 
     /**
@@ -106,20 +110,20 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 市町村特別給付用サービス名（正式名称）を返します。
+     * 市町村特別給付用サービス名_正式名称を返します。
      *
-     * @return 市町村特別給付用サービス名（正式名称）
+     * @return 市町村特別給付用サービス名_正式名称
      */
-    public RString get市町村特別給付用サービス名（正式名称）() {
+    public RString get市町村特別給付用サービス名_正式名称() {
         return entity.getServiceSeishikiName();
     }
 
     /**
-     * 市町村特別給付用サービス名（略称）を返します。
+     * 市町村特別給付用サービス名_略称を返します。
      *
-     * @return 市町村特別給付用サービス名（略称）
+     * @return 市町村特別給付用サービス名_略称
      */
-    public RString get市町村特別給付用サービス名（略称）() {
+    public RString get市町村特別給付用サービス名_略称() {
         return entity.getServiceRyakushoName();
     }
 
@@ -142,11 +146,11 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 市町村特別給付用単位・日数を返します。
+     * 市町村特別給付用単位_日数を返します。
      *
-     * @return 市町村特別給付用単位・日数
+     * @return 市町村特別給付用単位_日数
      */
-    public Decimal get市町村特別給付用単位・日数() {
+    public Decimal get市町村特別給付用単位_日数() {
         return entity.getTanisuNissu();
     }
 
@@ -207,22 +211,6 @@ Decimal 履歴番号) {
     }
 
     /**
-     * 市町村特別給付サービス内容のみを変更対象とします。<br/>
-     * {@link DbT3066ShichosonTokubetuKyufuServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShichosonTokubetuKyufuService}
-     */
-    @Override
-    public ShichosonTokubetuKyufuService modifiedModel() {
-        DbT3066ShichosonTokubetuKyufuServiceEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShichosonTokubetuKyufuService(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する市町村特別給付サービス内容を削除対象とします。<br/>
      * {@link DbT3066ShichosonTokubetuKyufuServiceEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -239,6 +227,7 @@ Decimal 履歴番号) {
         }
         return new ShichosonTokubetuKyufuService(deletedEntity, id);
     }
+
     /**
      * {@link ShichosonTokubetuKyufuService}のシリアライズ形式を提供します。
      *
@@ -249,13 +238,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3066ShichosonTokubetuKyufuServiceEntity entity;
         private final ShichosonTokubetuKyufuServiceIdentifier id;
 
-        private _SerializationProxy(DbT3066ShichosonTokubetuKyufuServiceEntity entity,ShichosonTokubetuKyufuServiceIdentifier id) {
+        private _SerializationProxy(DbT3066ShichosonTokubetuKyufuServiceEntity entity, ShichosonTokubetuKyufuServiceIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

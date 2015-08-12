@@ -6,20 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費貸付金借用書受理を管理するクラスです。
  */
-public class KyufuhiKashitsukekinShakuyoshoJuri extends ParentModelBase<KyufuhiKashitsukekinShakuyoshoJuriIdentifier, DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity, KyufuhiKashitsukekinShakuyoshoJuri> implements Serializable {
+public class KyufuhiKashitsukekinShakuyoshoJuri extends ModelBase<KyufuhiKashitsukekinShakuyoshoJuriIdentifier, DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity, KyufuhiKashitsukekinShakuyoshoJuri> implements Serializable {
 
     private final DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity;
     private final KyufuhiKashitsukekinShakuyoshoJuriIdentifier id;
@@ -33,8 +39,8 @@ public class KyufuhiKashitsukekinShakuyoshoJuri extends ParentModelBase<KyufuhiK
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukekinShakuyoshoJuri(HihokenshaNo 被保険者番号,
-FlexibleDate 借入申請年月日,
-Decimal 履歴番号) {
+            FlexibleDate 借入申請年月日,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(借入申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("借入申請年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,17 +49,18 @@ Decimal 履歴番号) {
         this.entity.setKariireShinseiYMD(借入申請年月日);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiKashitsukekinShakuyoshoJuriIdentifier(
-        被保険者番号,
-        借入申請年月日,
-        履歴番号
-                );
+                被保険者番号,
+                借入申請年月日,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}より{@link KyufuhiKashitsukekinShakuyoshoJuri}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}
+     * @param entity
+     * DBより取得した{@link DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}
      */
     public KyufuhiKashitsukekinShakuyoshoJuri(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費貸付金借用書受理"));
@@ -217,27 +224,12 @@ Decimal 履歴番号) {
     /**
      * 給付費貸付金借用書受理の識別子{@link KyufuhiKashitsukekinShakuyoshoJuriIdentifier}を返します。
      *
-     * @return 給付費貸付金借用書受理の識別子{@link KyufuhiKashitsukekinShakuyoshoJuriIdentifier}
+     * @return
+     * 給付費貸付金借用書受理の識別子{@link KyufuhiKashitsukekinShakuyoshoJuriIdentifier}
      */
     @Override
     public KyufuhiKashitsukekinShakuyoshoJuriIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付費貸付金借用書受理のみを変更対象とします。<br/>
-     * {@link DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiKashitsukekinShakuyoshoJuri}
-     */
-    @Override
-    public KyufuhiKashitsukekinShakuyoshoJuri modifiedModel() {
-        DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiKashitsukekinShakuyoshoJuri(
-                modifiedEntity, id);
     }
 
     /**
@@ -257,6 +249,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiKashitsukekinShakuyoshoJuri(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiKashitsukekinShakuyoshoJuri}のシリアライズ形式を提供します。
      *
@@ -267,13 +260,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity;
         private final KyufuhiKashitsukekinShakuyoshoJuriIdentifier id;
 
-        private _SerializationProxy(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity,KyufuhiKashitsukekinShakuyoshoJuriIdentifier id) {
+        private _SerializationProxy(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity, KyufuhiKashitsukekinShakuyoshoJuriIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

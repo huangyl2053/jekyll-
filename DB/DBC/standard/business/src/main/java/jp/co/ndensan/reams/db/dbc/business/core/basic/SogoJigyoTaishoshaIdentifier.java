@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 総合事業対象者の識別子です。
@@ -26,8 +29,8 @@ public class SogoJigyoTaishoshaIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public SogoJigyoTaishoshaIdentifier(HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.履歴番号 = 履歴番号;

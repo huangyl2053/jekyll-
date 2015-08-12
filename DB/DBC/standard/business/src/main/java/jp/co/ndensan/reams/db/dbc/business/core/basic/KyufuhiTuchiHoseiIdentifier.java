@@ -7,6 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付費通知補正の識別子です。
@@ -32,11 +38,11 @@ public class KyufuhiTuchiHoseiIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public KyufuhiTuchiHoseiIdentifier(HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-ServiceShuruiCode サービス種類コード,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            ServiceShuruiCode サービス種類コード,
+            Decimal 履歴番号) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;

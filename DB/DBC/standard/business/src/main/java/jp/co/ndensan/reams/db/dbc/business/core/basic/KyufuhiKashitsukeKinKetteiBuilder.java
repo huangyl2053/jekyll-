@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3087KyufuhiKashitsukeKinKetteiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyufuhiKashitsukeKinKettei}の編集を行うビルダークラスです。
@@ -86,12 +92,12 @@ public class KyufuhiKashitsukeKinKetteiBuilder {
     /**
      * 貸付承認・不承認区分を設定します。
      *
-     * @param 貸付承認・不承認区分 貸付承認・不承認区分
+     * @param 貸付承認_不承認区分 貸付承認・不承認区分
      * @return {@link KyufuhiKashitsukeKinKetteiBuilder}
      */
-    public KyufuhiKashitsukeKinKetteiBuilder set貸付承認・不承認区分(RString 貸付承認・不承認区分) {
-        requireNonNull(貸付承認・不承認区分, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付承認・不承認区分"));
-        entity.setKashitsukeShonin_FuShoninKubun(貸付承認・不承認区分);
+    public KyufuhiKashitsukeKinKetteiBuilder set貸付承認_不承認区分(RString 貸付承認_不承認区分) {
+        requireNonNull(貸付承認_不承認区分, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付承認・不承認区分"));
+        entity.setKashitsukeShonin_FuShoninKubun(貸付承認_不承認区分);
         return this;
     }
 

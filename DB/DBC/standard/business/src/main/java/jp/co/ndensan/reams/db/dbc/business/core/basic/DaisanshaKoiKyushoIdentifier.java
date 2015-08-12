@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護第三者行為求償の識別子です。
@@ -28,9 +31,9 @@ public class DaisanshaKoiKyushoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public DaisanshaKoiKyushoIdentifier(HihokenshaNo 被保険者番号,
-RString 第三者行為届出管理番号,
-RString 第三者行為求償請求番号,
-Decimal 履歴番号) {
+            RString 第三者行為届出管理番号,
+            RString 第三者行為求償請求番号,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.第三者行為届出管理番号 = 第三者行為届出管理番号;
         this.第三者行為求償請求番号 = 第三者行為求償請求番号;

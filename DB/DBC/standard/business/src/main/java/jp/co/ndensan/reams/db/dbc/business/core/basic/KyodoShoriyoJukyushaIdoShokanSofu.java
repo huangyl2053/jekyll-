@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 共同処理用受給者異動償還送付を管理するクラスです。
  */
-public class KyodoShoriyoJukyushaIdoShokanSofu extends ParentModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier, DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, KyodoShoriyoJukyushaIdoShokanSofu> implements Serializable {
+public class KyodoShoriyoJukyushaIdoShokanSofu extends ModelBase<KyodoShoriyoJukyushaIdoShokanSofuIdentifier, DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity, KyodoShoriyoJukyushaIdoShokanSofu> implements Serializable {
 
     private final DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity;
     private final KyodoShoriyoJukyushaIdoShokanSofuIdentifier id;
@@ -36,11 +39,11 @@ public class KyodoShoriyoJukyushaIdoShokanSofu extends ParentModelBase<KyodoShor
      * @param 履歴番号 履歴番号
      */
     public KyodoShoriyoJukyushaIdoShokanSofu(FlexibleDate 異動年月日,
-RString 異動区分コード,
-RString 受給者異動事由,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-Decimal 履歴番号) {
+            RString 異動区分コード,
+            RString 受給者異動事由,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            Decimal 履歴番号) {
         requireNonNull(異動年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動年月日"));
         requireNonNull(異動区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("異動区分コード"));
         requireNonNull(受給者異動事由, UrSystemErrorMessages.値がnull.getReplacedMessage("受給者異動事由"));
@@ -55,20 +58,21 @@ Decimal 履歴番号) {
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyodoShoriyoJukyushaIdoShokanSofuIdentifier(
-        異動年月日,
-        異動区分コード,
-        受給者異動事由,
-        証記載保険者番号,
-        被保険者番号,
-        履歴番号
-                );
+                異動年月日,
+                異動区分コード,
+                受給者異動事由,
+                証記載保険者番号,
+                被保険者番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}より{@link KyodoShoriyoJukyushaIdoShokanSofu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}
      */
     public KyodoShoriyoJukyushaIdoShokanSofu(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("共同処理用受給者異動償還送付"));
@@ -217,27 +221,12 @@ Decimal 履歴番号) {
     /**
      * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}を返します。
      *
-     * @return 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
+     * @return
+     * 共同処理用受給者異動償還送付の識別子{@link KyodoShoriyoJukyushaIdoShokanSofuIdentifier}
      */
     @Override
     public KyodoShoriyoJukyushaIdoShokanSofuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 共同処理用受給者異動償還送付のみを変更対象とします。<br/>
-     * {@link DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyodoShoriyoJukyushaIdoShokanSofu}
-     */
-    @Override
-    public KyodoShoriyoJukyushaIdoShokanSofu modifiedModel() {
-        DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyodoShoriyoJukyushaIdoShokanSofu(
-                modifiedEntity, id);
     }
 
     /**
@@ -257,6 +246,7 @@ Decimal 履歴番号) {
         }
         return new KyodoShoriyoJukyushaIdoShokanSofu(deletedEntity, id);
     }
+
     /**
      * {@link KyodoShoriyoJukyushaIdoShokanSofu}のシリアライズ形式を提供します。
      *
@@ -267,13 +257,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity;
         private final KyodoShoriyoJukyushaIdoShokanSofuIdentifier id;
 
-        private _SerializationProxy(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity,KyodoShoriyoJukyushaIdoShokanSofuIdentifier id) {
+        private _SerializationProxy(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity, KyodoShoriyoJukyushaIdoShokanSofuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

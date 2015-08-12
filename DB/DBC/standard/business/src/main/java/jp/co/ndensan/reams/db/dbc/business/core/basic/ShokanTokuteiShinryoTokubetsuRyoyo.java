@@ -6,20 +6,23 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求特定診療費・特別療養費を管理するクラスです。
  */
-public class ShokanTokuteiShinryoTokubetsuRyoyo extends ParentModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
+public class ShokanTokuteiShinryoTokubetsuRyoyo extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
     private final ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id;
@@ -37,12 +40,12 @@ public class ShokanTokuteiShinryoTokubetsuRyoyo extends ParentModelBase<ShokanTo
      * @param 履歴番号 履歴番号
      */
     public ShokanTokuteiShinryoTokubetsuRyoyo(HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-RString 整理番号,
-JigyoshaNo 事業者番号,
-RString 様式番号,
-RString 順次番号,
-Decimal 履歴番号) {
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 順次番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
@@ -59,21 +62,22 @@ Decimal 履歴番号) {
         this.entity.setJunjiNo(順次番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanTokuteiShinryoTokubetsuRyoyoIdentifier(
-        被保険者番号,
-        サービス提供年月,
-        整理番号,
-        事業者番号,
-        様式番号,
-        順次番号,
-        履歴番号
-                );
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                順次番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}より{@link ShokanTokuteiShinryoTokubetsuRyoyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}
      */
     public ShokanTokuteiShinryoTokubetsuRyoyo(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定診療費・特別療養費"));
@@ -241,27 +245,12 @@ Decimal 履歴番号) {
     /**
      * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}を返します。
      *
-     * @return 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
+     * @return
+     * 償還払請求特定診療費・特別療養費の識別子{@link ShokanTokuteiShinryoTokubetsuRyoyoIdentifier}
      */
     @Override
     public ShokanTokuteiShinryoTokubetsuRyoyoIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 償還払請求特定診療費・特別療養費のみを変更対象とします。<br/>
-     * {@link DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanTokuteiShinryoTokubetsuRyoyo}
-     */
-    @Override
-    public ShokanTokuteiShinryoTokubetsuRyoyo modifiedModel() {
-        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanTokuteiShinryoTokubetsuRyoyo(
-                modifiedEntity, id);
     }
 
     /**
@@ -281,6 +270,7 @@ Decimal 履歴番号) {
         }
         return new ShokanTokuteiShinryoTokubetsuRyoyo(deletedEntity, id);
     }
+
     /**
      * {@link ShokanTokuteiShinryoTokubetsuRyoyo}のシリアライズ形式を提供します。
      *
@@ -291,13 +281,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
         private final ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id;
 
-        private _SerializationProxy(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity,ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id) {
+        private _SerializationProxy(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity, ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

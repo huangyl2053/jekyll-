@@ -6,15 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link YoboKeikakuJikoSakuseiMeisai}の編集を行うビルダークラスです。
  */
 public class YoboKeikakuJikoSakuseiMeisaiBuilder {
 
-    private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
+    private final DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
 
     /**
@@ -25,7 +34,7 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      *
      */
     YoboKeikakuJikoSakuseiMeisaiBuilder(
-            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
+            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity,
             YoboKeikakuJikoSakuseiMeisaiIdentifier id
     ) {
         this.entity = entity.clone();
@@ -134,24 +143,24 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
     /**
      * 回数・日数を設定します。
      *
-     * @param 回数・日数 回数・日数
+     * @param 回数_日数 回数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set回数・日数(Decimal 回数・日数) {
-        requireNonNull(回数・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数・日数"));
-        entity.setKaisu_Nissu(回数・日数);
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set回数_日数(Decimal 回数_日数) {
+        requireNonNull(回数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数・日数"));
+        entity.setKaisu_Nissu(回数_日数);
         return this;
     }
 
     /**
      * 種類限度内単位数・日数を設定します。
      *
-     * @param 種類限度内単位数・日数 種類限度内単位数・日数
+     * @param 種類限度内単位数_日数 種類限度内単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set種類限度内単位数・日数(Decimal 種類限度内単位数・日数) {
-        requireNonNull(種類限度内単位数・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("種類限度内単位数・日数"));
-        entity.setShuruiGendoNaiTaniSu_Nissu(種類限度内単位数・日数);
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set種類限度内単位数_日数(Decimal 種類限度内単位数_日数) {
+        requireNonNull(種類限度内単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("種類限度内単位数・日数"));
+        entity.setShuruiGendoNaiTaniSu_Nissu(種類限度内単位数_日数);
         return this;
     }
 
@@ -161,9 +170,9 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @param 種類限度超過単位数・日数 種類限度超過単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set種類限度超過単位数・日数(Decimal 種類限度超過単位数・日数) {
-        requireNonNull(種類限度超過単位数・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("種類限度超過単位数・日数"));
-        entity.setShuruiGendoChokaTaniSu_Nissu(種類限度超過単位数・日数);
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set種類限度超過単位数_日数(Decimal 種類限度超過単位数_日数) {
+        requireNonNull(種類限度超過単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("種類限度超過単位数・日数"));
+        entity.setShuruiGendoChokaTaniSu_Nissu(種類限度超過単位数_日数);
         return this;
     }
 
@@ -173,9 +182,9 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @param 区分限度内単位数・日数 区分限度内単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度内単位数・日数(Decimal 区分限度内単位数・日数) {
-        requireNonNull(区分限度内単位数・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("区分限度内単位数・日数"));
-        entity.setKubunGendoNaiTaniSu_Nissu(区分限度内単位数・日数);
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度内単位数_日数(Decimal 区分限度内単位数_日数) {
+        requireNonNull(区分限度内単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("区分限度内単位数・日数"));
+        entity.setKubunGendoNaiTaniSu_Nissu(区分限度内単位数_日数);
         return this;
     }
 
@@ -185,9 +194,9 @@ public class YoboKeikakuJikoSakuseiMeisaiBuilder {
      * @param 区分限度超過単位数・日数 区分限度超過単位数・日数
      * @return {@link YoboKeikakuJikoSakuseiMeisaiBuilder}
      */
-    public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度超過単位数・日数(Decimal 区分限度超過単位数・日数) {
-        requireNonNull(区分限度超過単位数・日数, UrSystemErrorMessages.値がnull.getReplacedMessage("区分限度超過単位数・日数"));
-        entity.setKubunGendoChokaTaniSu_Nissu(区分限度超過単位数・日数);
+    public YoboKeikakuJikoSakuseiMeisaiBuilder set区分限度超過単位数_日数(Decimal 区分限度超過単位数_日数) {
+        requireNonNull(区分限度超過単位数_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("区分限度超過単位数・日数"));
+        entity.setKubunGendoChokaTaniSu_Nissu(区分限度超過単位数_日数);
         return this;
     }
 

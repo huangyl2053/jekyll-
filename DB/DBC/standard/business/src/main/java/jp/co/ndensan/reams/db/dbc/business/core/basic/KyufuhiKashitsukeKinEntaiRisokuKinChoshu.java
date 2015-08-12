@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付費貸付金延滞利息金徴収を管理するクラスです。
  */
-public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu extends ParentModelBase<KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier, DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity, KyufuhiKashitsukeKinEntaiRisokuKinChoshu> implements Serializable {
+public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu extends ModelBase<KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier, DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity, KyufuhiKashitsukeKinEntaiRisokuKinChoshu> implements Serializable {
 
     private final DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity;
     private final KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id;
@@ -33,8 +35,8 @@ public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu extends ParentModelBase<Ky
      * @param 履歴番号 履歴番号
      */
     public KyufuhiKashitsukeKinEntaiRisokuKinChoshu(HihokenshaNo 被保険者番号,
-RString 貸付管理番号,
-Decimal 履歴番号) {
+            RString 貸付管理番号,
+            Decimal 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(貸付管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("貸付管理番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -43,17 +45,18 @@ Decimal 履歴番号) {
         this.entity.setKashitsukeKanriNo(貸付管理番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier(
-        被保険者番号,
-        貸付管理番号,
-        履歴番号
-                );
+                被保険者番号,
+                貸付管理番号,
+                履歴番号
+        );
     }
 
     /**
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}より{@link KyufuhiKashitsukeKinEntaiRisokuKinChoshu}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}
+     * @param entity
+     * DBより取得した{@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}
      */
     public KyufuhiKashitsukeKinEntaiRisokuKinChoshu(DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("給付費貸付金延滞利息金徴収"));
@@ -66,7 +69,8 @@ Decimal 履歴番号) {
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}
+     * @param entity
+     * {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}
      * @param id {@link KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier}
      */
     KyufuhiKashitsukeKinEntaiRisokuKinChoshu(
@@ -126,7 +130,8 @@ Decimal 履歴番号) {
     /**
      * {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}のクローンを返します。
      *
-     * @return {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}のクローン
+     * @return
+     * {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}のクローン
      */
     @Override
     public DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity toEntity() {
@@ -136,27 +141,12 @@ Decimal 履歴番号) {
     /**
      * 給付費貸付金延滞利息金徴収の識別子{@link KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier}を返します。
      *
-     * @return 給付費貸付金延滞利息金徴収の識別子{@link KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier}
+     * @return
+     * 給付費貸付金延滞利息金徴収の識別子{@link KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier}
      */
     @Override
     public KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 給付費貸付金延滞利息金徴収のみを変更対象とします。<br/>
-     * {@link DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KyufuhiKashitsukeKinEntaiRisokuKinChoshu}
-     */
-    @Override
-    public KyufuhiKashitsukeKinEntaiRisokuKinChoshu modifiedModel() {
-        DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KyufuhiKashitsukeKinEntaiRisokuKinChoshu(
-                modifiedEntity, id);
     }
 
     /**
@@ -176,6 +166,7 @@ Decimal 履歴番号) {
         }
         return new KyufuhiKashitsukeKinEntaiRisokuKinChoshu(deletedEntity, id);
     }
+
     /**
      * {@link KyufuhiKashitsukeKinEntaiRisokuKinChoshu}のシリアライズ形式を提供します。
      *
@@ -186,13 +177,19 @@ Decimal 履歴番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity;
         private final KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id;
 
-        private _SerializationProxy(DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity,KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id) {
+        private _SerializationProxy(DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity, KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

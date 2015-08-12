@@ -6,20 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 国保連インターフェース管理を管理するクラスです。
  */
-public class KokuhorenInterfaceKanri extends ParentModelBase<KokuhorenInterfaceKanriIdentifier, DbT3104KokuhorenInterfaceKanriEntity, KokuhorenInterfaceKanri> implements Serializable {
+public class KokuhorenInterfaceKanri extends ModelBase<KokuhorenInterfaceKanriIdentifier, DbT3104KokuhorenInterfaceKanriEntity, KokuhorenInterfaceKanri> implements Serializable {
 
     private final DbT3104KokuhorenInterfaceKanriEntity entity;
     private final KokuhorenInterfaceKanriIdentifier id;
@@ -32,16 +34,16 @@ public class KokuhorenInterfaceKanri extends ParentModelBase<KokuhorenInterfaceK
      * @param 交換情報識別番号 交換情報識別番号
      */
     public KokuhorenInterfaceKanri(FlexibleYearMonth 処理年月,
-RString 交換情報識別番号) {
+            RString 交換情報識別番号) {
         requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
         this.entity = new DbT3104KokuhorenInterfaceKanriEntity();
         this.entity.setShoriYM(処理年月);
         this.entity.setKokanShikibetsuNo(交換情報識別番号);
         this.id = new KokuhorenInterfaceKanriIdentifier(
-        処理年月,
-        交換情報識別番号
-                );
+                処理年月,
+                交換情報識別番号
+        );
     }
 
     /**
@@ -318,22 +320,6 @@ RString 交換情報識別番号) {
     }
 
     /**
-     * 国保連インターフェース管理のみを変更対象とします。<br/>
-     * {@link DbT3104KokuhorenInterfaceKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KokuhorenInterfaceKanri}
-     */
-    @Override
-    public KokuhorenInterfaceKanri modifiedModel() {
-        DbT3104KokuhorenInterfaceKanriEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KokuhorenInterfaceKanri(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する国保連インターフェース管理を削除対象とします。<br/>
      * {@link DbT3104KokuhorenInterfaceKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -350,6 +336,7 @@ RString 交換情報識別番号) {
         }
         return new KokuhorenInterfaceKanri(deletedEntity, id);
     }
+
     /**
      * {@link KokuhorenInterfaceKanri}のシリアライズ形式を提供します。
      *
@@ -360,13 +347,19 @@ RString 交換情報識別番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3104KokuhorenInterfaceKanriEntity entity;
         private final KokuhorenInterfaceKanriIdentifier id;
 
-        private _SerializationProxy(DbT3104KokuhorenInterfaceKanriEntity entity,KokuhorenInterfaceKanriIdentifier id) {
+        private _SerializationProxy(DbT3104KokuhorenInterfaceKanriEntity entity, KokuhorenInterfaceKanriIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修理由書作成手数料請求決定の識別子です。
@@ -26,8 +29,8 @@ public class JutakuKaishuRiyushoTesuryoKetteiIdentifier implements Serializable 
      * @param 履歴番号 履歴番号
      */
     public JutakuKaishuRiyushoTesuryoKetteiIdentifier(JigyoshaNo 介護住宅改修理由書作成事業者番号,
-FlexibleDate 決定年月日,
-Decimal 履歴番号) {
+            FlexibleDate 決定年月日,
+            Decimal 履歴番号) {
         this.介護住宅改修理由書作成事業者番号 = 介護住宅改修理由書作成事業者番号;
         this.決定年月日 = 決定年月日;
         this.履歴番号 = 履歴番号;

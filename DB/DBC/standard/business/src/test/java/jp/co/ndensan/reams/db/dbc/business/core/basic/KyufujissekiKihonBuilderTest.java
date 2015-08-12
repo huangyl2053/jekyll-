@@ -101,7 +101,7 @@ public class KyufujissekiKihonBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の事業所番号は_設定した値と同じ事業所番号を返す() {
             business = sut.set事業所番号(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号).build();
-            assertThat(business.get事業所番号(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号));
+            assertThat(business.get居宅介護支援事業所番号(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号));
         }
 
         @Test
@@ -233,7 +233,7 @@ public class KyufujissekiKihonBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の事業所番号は_設定した値と同じ事業所番号を返す() {
             business = sut.set事業所番号(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号).build();
-            assertThat(business.get事業所番号(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号));
+            assertThat(business.get居宅介護支援事業所番号(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号));
         }
 
         @Test

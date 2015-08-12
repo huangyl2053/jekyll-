@@ -6,8 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KogakuGassanShikyugakuKeisanKekkaMeisai}の編集を行うビルダークラスです。
@@ -20,7 +27,8 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
     /**
      * {@link DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity}より{@link KogakuGassanShikyugakuKeisanKekkaMeisai}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity}
+     * @param entity
+     * {@link DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity}
      * @param id {@link KogakuGassanShikyugakuKeisanKekkaMeisaiIdentifier}
      *
      */
@@ -144,14 +152,14 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
     }
 
     /**
-     * 被保険者（証）番号を設定します。
+     * 被保険者_証番号を設定します。
      *
-     * @param 被保険者（証）番号 被保険者（証）番号
+     * @param 被保険者_証番号 被保険者_証番号
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set被保険者（証）番号(RString 被保険者（証）番号) {
-        requireNonNull(被保険者（証）番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者（証）番号"));
-        entity.setHiHokenshaShoNo(被保険者（証）番号);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set被保険者_証番号(RString 被保険者_証番号) {
+        requireNonNull(被保険者_証番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者_証番号"));
+        entity.setHiHokenshaShoNo(被保険者_証番号);
         return this;
     }
 
@@ -180,62 +188,62 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
     }
 
     /**
-     * 対象者氏名（漢字）を設定します。
+     * 対象者氏名_漢字を設定します。
      *
-     * @param 対象者氏名（漢字） 対象者氏名（漢字）
+     * @param 対象者氏名_漢字 対象者氏名_漢字
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set対象者氏名（漢字）(RString 対象者氏名（漢字）) {
-        requireNonNull(対象者氏名（漢字）, UrSystemErrorMessages.値がnull.getReplacedMessage("対象者氏名（漢字）"));
-        entity.setTaishoshaShimei(対象者氏名（漢字）);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set対象者氏名_漢字(RString 対象者氏名_漢字) {
+        requireNonNull(対象者氏名_漢字, UrSystemErrorMessages.値がnull.getReplacedMessage("対象者氏名_漢字"));
+        entity.setTaishoshaShimei(対象者氏名_漢字);
         return this;
     }
 
     /**
      * 70歳以上負担額を設定します。
      *
-     * @param 70歳以上負担額 70歳以上負担額
+     * @param 負担額_70歳以上 70歳以上負担額
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上負担額(RString 70歳以上負担額) {
-        requireNonNull(70歳以上負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上負担額"));
-        entity.setOver70_Futangaku(70歳以上負担額);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上負担額(RString 負担額_70歳以上) {
+        requireNonNull(負担額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上負担額"));
+        entity.setOver70_Futangaku(負担額_70歳以上);
         return this;
     }
 
     /**
      * 70歳以上按分率を設定します。
      *
-     * @param 70歳以上按分率 70歳以上按分率
+     * @param 按分率_70歳以上 70歳以上按分率
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上按分率(RString 70歳以上按分率) {
-        requireNonNull(70歳以上按分率, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上按分率"));
-        entity.setOver70_AmbunRitsu(70歳以上按分率);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上按分率(RString 按分率_70歳以上) {
+        requireNonNull(按分率_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上按分率"));
+        entity.setOver70_AmbunRitsu(按分率_70歳以上);
         return this;
     }
 
     /**
      * 70歳以上支給額を設定します。
      *
-     * @param 70歳以上支給額 70歳以上支給額
+     * @param 支給額_70歳以上 70歳以上支給額
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上支給額(RString 70歳以上支給額) {
-        requireNonNull(70歳以上支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上支給額"));
-        entity.setOver70_Shikyugaku(70歳以上支給額);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳以上支給額(RString 支給額_70歳以上) {
+        requireNonNull(支給額_70歳以上, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳以上支給額"));
+        entity.setOver70_Shikyugaku(支給額_70歳以上);
         return this;
     }
 
     /**
      * 70歳未満負担額を設定します。
      *
-     * @param 70歳未満負担額 70歳未満負担額
+     * @param 負担額_70歳未満 70歳未満負担額
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満負担額(RString 70歳未満負担額) {
-        requireNonNull(70歳未満負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満負担額"));
-        entity.setUnder70_Futangaku(70歳未満負担額);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満負担額(RString 負担額_70歳未満) {
+        requireNonNull(負担額_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満負担額"));
+        entity.setUnder70_Futangaku(負担額_70歳未満);
         return this;
     }
 
@@ -266,12 +274,12 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder {
     /**
      * 70歳未満支給額を設定します。
      *
-     * @param 70歳未満支給額 70歳未満支給額
+     * @param 支給額_70歳未満 70歳未満支給額
      * @return {@link KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder}
      */
-    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満支給額(RString 70歳未満支給額) {
-        requireNonNull(70歳未満支給額, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満支給額"));
-        entity.setUnder70_Shikyugaku(70歳未満支給額);
+    public KogakuGassanShikyugakuKeisanKekkaMeisaiBuilder set70歳未満支給額(RString 支給額_70歳未満) {
+        requireNonNull(支給額_70歳未満, UrSystemErrorMessages.値がnull.getReplacedMessage("70歳未満支給額"));
+        entity.setUnder70_Shikyugaku(支給額_70歳未満);
         return this;
     }
 

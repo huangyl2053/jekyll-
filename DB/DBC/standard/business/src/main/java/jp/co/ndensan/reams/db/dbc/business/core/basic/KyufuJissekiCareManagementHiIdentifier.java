@@ -7,6 +7,14 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付実績ケアマネジメント費の識別子です。
@@ -14,14 +22,14 @@ import lombok.Value;
 @Value
 public class KyufuJissekiCareManagementHiIdentifier implements Serializable {
 
-    private final KokanShikibetsuCode 交換情報識別番号;
-    private final NyuryokuShikibetsuCode 入力識別番号;
+    private final KokanShikibetsuNo 交換情報識別番号;
+    private final NyuryokuShikibetsuNo 入力識別番号;
     private final RString レコード種別コード;
     private final HokenshaNo 証記載保険者番号;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final JigyoshaNo 事業所番号;
-    private final RString 指定／基準該当事業所区分コード;
+    private final RString 指定_基準該当事業所区分コード;
     private final FlexibleDate 居宅サービス計画作成依頼届出年月日;
     private final RString 通し番号;
     private final RString サービス計画費明細行番号;
@@ -41,17 +49,17 @@ public class KyufuJissekiCareManagementHiIdentifier implements Serializable {
      * @param 通し番号 通し番号
      * @param サービス計画費明細行番号 サービス計画費明細行番号
      */
-    public KyufuJissekiCareManagementHiIdentifier(KokanShikibetsuCode 交換情報識別番号,
-NyuryokuShikibetsuCode 入力識別番号,
-RString レコード種別コード,
-HokenshaNo 証記載保険者番号,
-HihokenshaNo 被保険者番号,
-FlexibleYearMonth サービス提供年月,
-JigyoshaNo 事業所番号,
-RString 指定／基準該当事業所区分コード,
-FlexibleDate 居宅サービス計画作成依頼届出年月日,
-RString 通し番号,
-RString サービス計画費明細行番号) {
+    public KyufuJissekiCareManagementHiIdentifier(KokanShikibetsuNo 交換情報識別番号,
+            NyuryokuShikibetsuNo 入力識別番号,
+            RString レコード種別コード,
+            HokenshaNo 証記載保険者番号,
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号,
+            RString 指定_基準該当事業所区分コード,
+            FlexibleDate 居宅サービス計画作成依頼届出年月日,
+            RString 通し番号,
+            RString サービス計画費明細行番号) {
         this.交換情報識別番号 = 交換情報識別番号;
         this.入力識別番号 = 入力識別番号;
         this.レコード種別コード = レコード種別コード;
@@ -59,7 +67,7 @@ RString サービス計画費明細行番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.事業所番号 = 事業所番号;
-        this.指定／基準該当事業所区分コード = 指定／基準該当事業所区分コード;
+        this.指定_基準該当事業所区分コード = 指定_基準該当事業所区分コード;
         this.居宅サービス計画作成依頼届出年月日 = 居宅サービス計画作成依頼届出年月日;
         this.通し番号 = 通し番号;
         this.サービス計画費明細行番号 = サービス計画費明細行番号;

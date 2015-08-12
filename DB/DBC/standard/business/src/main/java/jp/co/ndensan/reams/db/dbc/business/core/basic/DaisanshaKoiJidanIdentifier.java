@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護第三者行為示談の識別子です。
@@ -28,9 +32,9 @@ public class DaisanshaKoiJidanIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public DaisanshaKoiJidanIdentifier(HihokenshaNo 被保険者番号,
-RString 第三者行為届出管理番号,
-FlexibleDate 示談報告書受付年月日,
-Decimal 履歴番号) {
+            RString 第三者行為届出管理番号,
+            FlexibleDate 示談報告書受付年月日,
+            Decimal 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.第三者行為届出管理番号 = 第三者行為届出管理番号;
         this.示談報告書受付年月日 = 示談報告書受付年月日;

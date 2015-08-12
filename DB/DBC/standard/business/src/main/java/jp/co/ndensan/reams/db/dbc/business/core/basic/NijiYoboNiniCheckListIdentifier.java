@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import lombok.Value;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防任意チェックリストの識別子です。
@@ -30,10 +34,10 @@ public class NijiYoboNiniCheckListIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public NijiYoboNiniCheckListIdentifier(ShikibetsuCode 識別コード,
-HihokenshaNo 被保険者番号,
-FlexibleDate 受付年月日,
-Decimal 任意質問番号,
-Decimal 履歴番号) {
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 受付年月日,
+            Decimal 任意質問番号,
+            Decimal 履歴番号) {
         this.識別コード = 識別コード;
         this.被保険者番号 = 被保険者番号;
         this.受付年月日 = 受付年月日;

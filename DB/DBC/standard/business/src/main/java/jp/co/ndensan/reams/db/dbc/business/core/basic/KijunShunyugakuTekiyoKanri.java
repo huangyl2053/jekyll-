@@ -6,20 +6,24 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 基準収入額適用管理を管理するクラスです。
  */
-public class KijunShunyugakuTekiyoKanri extends ParentModelBase<KijunShunyugakuTekiyoKanriIdentifier, DbT3116KijunShunyugakuTekiyoKanriEntity, KijunShunyugakuTekiyoKanri> implements Serializable {
+public class KijunShunyugakuTekiyoKanri extends ModelBase<KijunShunyugakuTekiyoKanriIdentifier, DbT3116KijunShunyugakuTekiyoKanriEntity, KijunShunyugakuTekiyoKanri> implements Serializable {
 
     private final DbT3116KijunShunyugakuTekiyoKanriEntity entity;
     private final KijunShunyugakuTekiyoKanriIdentifier id;
@@ -34,9 +38,9 @@ public class KijunShunyugakuTekiyoKanri extends ParentModelBase<KijunShunyugakuT
      * @param 被保険者番号 被保険者番号
      */
     public KijunShunyugakuTekiyoKanri(SetaiCode 世帯コード,
-FlexibleYear 年度,
-Decimal 履歴番号,
-HokenshaNo 被保険者番号) {
+            FlexibleYear 年度,
+            Decimal 履歴番号,
+            HokenshaNo 被保険者番号) {
         requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -47,11 +51,11 @@ HokenshaNo 被保険者番号) {
         this.entity.setRirekiNo(履歴番号);
         this.entity.setHihokenshaNo(被保険者番号);
         this.id = new KijunShunyugakuTekiyoKanriIdentifier(
-        世帯コード,
-        年度,
-        履歴番号,
-        被保険者番号
-                );
+                世帯コード,
+                年度,
+                履歴番号,
+                被保険者番号
+        );
     }
 
     /**
@@ -224,7 +228,7 @@ HokenshaNo 被保険者番号) {
      *
      * @return 年少扶養控除（16歳未満）人数
      */
-    public Decimal get年少扶養控除（16歳未満）人数() {
+    public Decimal get年少扶養控除_16歳未満人数() {
         return entity.getNenshoFuyokojoUnder16Ninzu();
     }
 
@@ -233,7 +237,7 @@ HokenshaNo 被保険者番号) {
      *
      * @return 年少扶養控除（16～18歳未満）人数
      */
-    public Decimal get年少扶養控除（16～18歳未満）人数() {
+    public Decimal get年少扶養控除_16から18歳未満人数() {
         return entity.getNenshoFuyokojoOver16Ninzu();
     }
 
@@ -269,7 +273,7 @@ HokenshaNo 被保険者番号) {
      *
      * @return 課税所得額（控除後）
      */
-    public Decimal get課税所得額（控除後）() {
+    public Decimal get課税所得額_控除後() {
         return entity.getKazeiShotokugakuKojogo();
     }
 
@@ -294,22 +298,6 @@ HokenshaNo 被保険者番号) {
     }
 
     /**
-     * 基準収入額適用管理のみを変更対象とします。<br/>
-     * {@link DbT3116KijunShunyugakuTekiyoKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link KijunShunyugakuTekiyoKanri}
-     */
-    @Override
-    public KijunShunyugakuTekiyoKanri modifiedModel() {
-        DbT3116KijunShunyugakuTekiyoKanriEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new KijunShunyugakuTekiyoKanri(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する基準収入額適用管理を削除対象とします。<br/>
      * {@link DbT3116KijunShunyugakuTekiyoKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -326,6 +314,7 @@ HokenshaNo 被保険者番号) {
         }
         return new KijunShunyugakuTekiyoKanri(deletedEntity, id);
     }
+
     /**
      * {@link KijunShunyugakuTekiyoKanri}のシリアライズ形式を提供します。
      *
@@ -336,13 +325,19 @@ HokenshaNo 被保険者番号) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3116KijunShunyugakuTekiyoKanriEntity entity;
         private final KijunShunyugakuTekiyoKanriIdentifier id;
 
-        private _SerializationProxy(DbT3116KijunShunyugakuTekiyoKanriEntity entity,KijunShunyugakuTekiyoKanriIdentifier id) {
+        private _SerializationProxy(DbT3116KijunShunyugakuTekiyoKanriEntity entity, KijunShunyugakuTekiyoKanriIdentifier id) {
             this.entity = entity;
             this.id = id;
         }
