@@ -4,30 +4,28 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.INinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5910NinteichosaItakusakiJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5910NinteichosaItakusakiJoho.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査委託先情報のデータアクセスクラスです。
- *
- * @author n8223 朴義一
  */
-public class DbT5910NinteichosaItakusakiJohoDac implements IModifiable<INinteichosaItakusakiJohoEntity> {
+public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910NinteichosaItakusakiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -35,13 +33,13 @@ public class DbT5910NinteichosaItakusakiJohoDac implements IModifiable<INinteich
     /**
      * 主キーで認定調査委託先情報を取得します。
      *
-     * @param 市町村コード LasdecCode
-     * @param 認定調査委託先コード NinteichosaItakusakiCode
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
      * @return DbT5910NinteichosaItakusakiJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public Optional<DbT5910NinteichosaItakusakiJohoEntity> selectByKey(
+    public DbT5910NinteichosaItakusakiJohoEntity selectByKey(
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -49,59 +47,40 @@ public class DbT5910NinteichosaItakusakiJohoDac implements IModifiable<INinteich
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return Optional.ofNullable(accessor.select().
+        return accessor.select().
                 table(DbT5910NinteichosaItakusakiJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(ninteichosaItakusakiCode, 認定調査委託先コード))).
-                toObject(DbT5910NinteichosaItakusakiJohoEntity.class));
+                toObject(DbT5910NinteichosaItakusakiJohoEntity.class);
     }
 
     /**
      * 認定調査委託先情報を全件返します。
      *
-     * @return List<DbT5910NinteichosaItakusakiJohoEntity>
+     * @return DbT5910NinteichosaItakusakiJohoEntityの{@code list}
      */
     @Transaction
-    public ItemList<DbT5910NinteichosaItakusakiJohoEntity> selectAll() {
+    public List<DbT5910NinteichosaItakusakiJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return ItemList.of(accessor.select().
+        return accessor.select().
                 table(DbT5910NinteichosaItakusakiJoho.class).
-                toList(DbT5910NinteichosaItakusakiJohoEntity.class));
+                toList(DbT5910NinteichosaItakusakiJohoEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(INinteichosaItakusakiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(INinteichosaItakusakiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(INinteichosaItakusakiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT5910NinteichosaItakusakiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity INinteichosaItakusakiJohoEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
-//    @Transaction
-//    public int deletePhysical(INinteichosaItakusakiJohoEntity entity) {
-//        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-//        return accessor.deletePhysical(entity).execute();
-//    }
+    @Transaction
+    @Override
+    public int save(DbT5910NinteichosaItakusakiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+    }
 }

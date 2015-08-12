@@ -1,5 +1,0 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
-ikenshoIraiRirekiNo,int2,int,,,,,主治医意見書作成依頼履歴番号,A
-remban,int2,int,,,,,連番,A
-koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
-ikenItem,bpchar,RString,,,,,意見項目,A
