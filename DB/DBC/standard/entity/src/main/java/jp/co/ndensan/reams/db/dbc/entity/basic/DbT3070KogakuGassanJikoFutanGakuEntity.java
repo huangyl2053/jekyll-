@@ -45,7 +45,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private RString shikyuShinseishoSeiriNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString hokenSeidoCode;
     private RString hokenshaMei;
     private RString kokuho_HihokenshaShoKigo;
@@ -223,7 +223,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -232,7 +232,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

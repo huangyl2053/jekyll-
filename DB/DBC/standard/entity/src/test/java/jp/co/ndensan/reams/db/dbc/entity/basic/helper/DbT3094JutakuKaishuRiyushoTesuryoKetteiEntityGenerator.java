@@ -4,26 +4,24 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 住宅改修理由書作成手数料請求決定エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator {
 
-    public static final JigyoshaNo DEFAULT_介護住宅改修理由書作成事業者番号 = new JigyoshaNo(new RString("0216"));
-    public static final FlexibleDate DEFAULT_決定年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final FlexibleDate DEFAULT_支給_不支給決定年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_支給_不支給区分 = new RString("3");
-    public static final RString DEFAULT_償還不支給理由等 = new RString("理由");
-    public static final FlexibleDate DEFAULT_住宅改修理由書作成手数料支払予定日 = new FlexibleDate("20140402");
+    public static final JigyoshaNo DEFAULT_介護住宅改修理由書作成事業者番号 = new JigyoshaNo("1");
+    public static final FlexibleDate DEFAULT_決定年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final FlexibleDate DEFAULT_支給_不支給決定年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_支給_不支給区分 = new RString("Data");
+    public static final RString DEFAULT_償還不支給理由等 = new RString("Data");
+    public static final FlexibleDate DEFAULT_住宅改修理由書作成手数料支払予定日 = new FlexibleDate("19900101");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -35,6 +33,7 @@ public final class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator {
         DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = new DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();
         entity.setRiyushoSakuseiJigyoshaNo(DEFAULT_介護住宅改修理由書作成事業者番号);
         entity.setKetteiYMD(DEFAULT_決定年月日);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShikyu_FushikyuKetteiYMD(DEFAULT_支給_不支給決定年月日);
         entity.setShikyu_FushikyuKubun(DEFAULT_支給_不支給区分);
         entity.setFushikyuRiyu(DEFAULT_償還不支給理由等);

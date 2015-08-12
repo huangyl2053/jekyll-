@@ -33,7 +33,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
     @PrimaryKey
     private FlexibleDate serviceYukoKikanKaishiYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString serviceSeishikiName;
     private RString serviceRyakushoName;
     private FlexibleDate serviceYukoKikanShuryoYMD;
@@ -130,7 +130,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -139,7 +139,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

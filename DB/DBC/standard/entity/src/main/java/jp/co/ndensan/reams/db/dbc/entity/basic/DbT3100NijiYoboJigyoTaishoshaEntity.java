@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防事業対象者テーブルのエンティティクラスです。
@@ -35,7 +36,7 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
     private ShikibetsuCode shikibetsuCode;
@@ -128,7 +129,7 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -137,7 +138,7 @@ public class DbT3100NijiYoboJigyoTaishoshaEntity extends DbTableEntityBase<DbT31
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

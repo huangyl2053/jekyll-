@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績食事費用テーブルのエンティティクラスです。
@@ -48,28 +49,28 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
     private RString toshiNo;
-    private int kihonTeikyoNissu;
-    private int kihonTeikyoTanka;
-    private int kihonTeikyoKingaku;
-    private int tokubestuTeikyoNissu;
-    private int tokubestuTeikyoTanka;
-    private int tokubestuTeikyoKingaku;
-    private int syokujiTeikyoNissu;
-    private int kohi1SyokujiTeikyoNissu;
-    private int kohi2SyokujiTeikyoNissu;
-    private int kohi3SyokujiTeikyoNissu;
-    private int syokujiTeikyohiTotal;
-    private int getsugakuHyojunFutanGaku;
-    private int syokujiTeikyohiSeikyugaku;
-    private int kohi1SyokujiTeikyohiSeikyugaku;
-    private int kohi2SyokujiTeikyohiSeikyugaku;
-    private int kohi3SyokujiTeikyohiSeikyugaku;
-    private int nichigakuHyojunFutanGaku;
-    private int atoKihonTeikyoTanka;
-    private int atoTokubestuTeikyoTanka;
-    private int atoSyokujiTeikyohiSeikyugaku;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal kihonTeikyoNissu;
+    private Decimal kihonTeikyoTanka;
+    private Decimal kihonTeikyoKingaku;
+    private Decimal tokubestuTeikyoNissu;
+    private Decimal tokubestuTeikyoTanka;
+    private Decimal tokubestuTeikyoKingaku;
+    private Decimal syokujiTeikyoNissu;
+    private Decimal kohi1SyokujiTeikyoNissu;
+    private Decimal kohi2SyokujiTeikyoNissu;
+    private Decimal kohi3SyokujiTeikyoNissu;
+    private Decimal syokujiTeikyohiTotal;
+    private Decimal getsugakuHyojunFutanGaku;
+    private Decimal syokujiTeikyohiSeikyugaku;
+    private Decimal kohi1SyokujiTeikyohiSeikyugaku;
+    private Decimal kohi2SyokujiTeikyohiSeikyugaku;
+    private Decimal kohi3SyokujiTeikyohiSeikyugaku;
+    private Decimal nichigakuHyojunFutanGaku;
+    private Decimal atoKihonTeikyoTanka;
+    private Decimal atoTokubestuTeikyoTanka;
+    private Decimal atoSyokujiTeikyohiSeikyugaku;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -268,7 +269,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 基本・提供日数
      */
-    public int getKihonTeikyoNissu() {
+    public Decimal getKihonTeikyoNissu() {
         return kihonTeikyoNissu;
     }
 
@@ -277,7 +278,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kihonTeikyoNissu 基本・提供日数
      */
-    public void setKihonTeikyoNissu(int kihonTeikyoNissu) {
+    public void setKihonTeikyoNissu(Decimal kihonTeikyoNissu) {
         this.kihonTeikyoNissu = kihonTeikyoNissu;
     }
 
@@ -286,7 +287,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 基本・提供単価
      */
-    public int getKihonTeikyoTanka() {
+    public Decimal getKihonTeikyoTanka() {
         return kihonTeikyoTanka;
     }
 
@@ -295,7 +296,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kihonTeikyoTanka 基本・提供単価
      */
-    public void setKihonTeikyoTanka(int kihonTeikyoTanka) {
+    public void setKihonTeikyoTanka(Decimal kihonTeikyoTanka) {
         this.kihonTeikyoTanka = kihonTeikyoTanka;
     }
 
@@ -304,7 +305,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 基本・提供金額
      */
-    public int getKihonTeikyoKingaku() {
+    public Decimal getKihonTeikyoKingaku() {
         return kihonTeikyoKingaku;
     }
 
@@ -313,7 +314,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kihonTeikyoKingaku 基本・提供金額
      */
-    public void setKihonTeikyoKingaku(int kihonTeikyoKingaku) {
+    public void setKihonTeikyoKingaku(Decimal kihonTeikyoKingaku) {
         this.kihonTeikyoKingaku = kihonTeikyoKingaku;
     }
 
@@ -322,7 +323,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 特別・提供日数
      */
-    public int getTokubestuTeikyoNissu() {
+    public Decimal getTokubestuTeikyoNissu() {
         return tokubestuTeikyoNissu;
     }
 
@@ -331,7 +332,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param tokubestuTeikyoNissu 特別・提供日数
      */
-    public void setTokubestuTeikyoNissu(int tokubestuTeikyoNissu) {
+    public void setTokubestuTeikyoNissu(Decimal tokubestuTeikyoNissu) {
         this.tokubestuTeikyoNissu = tokubestuTeikyoNissu;
     }
 
@@ -340,7 +341,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 特別・提供単価
      */
-    public int getTokubestuTeikyoTanka() {
+    public Decimal getTokubestuTeikyoTanka() {
         return tokubestuTeikyoTanka;
     }
 
@@ -349,7 +350,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param tokubestuTeikyoTanka 特別・提供単価
      */
-    public void setTokubestuTeikyoTanka(int tokubestuTeikyoTanka) {
+    public void setTokubestuTeikyoTanka(Decimal tokubestuTeikyoTanka) {
         this.tokubestuTeikyoTanka = tokubestuTeikyoTanka;
     }
 
@@ -358,7 +359,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 特別・提供金額
      */
-    public int getTokubestuTeikyoKingaku() {
+    public Decimal getTokubestuTeikyoKingaku() {
         return tokubestuTeikyoKingaku;
     }
 
@@ -367,7 +368,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param tokubestuTeikyoKingaku 特別・提供金額
      */
-    public void setTokubestuTeikyoKingaku(int tokubestuTeikyoKingaku) {
+    public void setTokubestuTeikyoKingaku(Decimal tokubestuTeikyoKingaku) {
         this.tokubestuTeikyoKingaku = tokubestuTeikyoKingaku;
     }
 
@@ -376,7 +377,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 食事提供延べ日数
      */
-    public int getSyokujiTeikyoNissu() {
+    public Decimal getSyokujiTeikyoNissu() {
         return syokujiTeikyoNissu;
     }
 
@@ -385,7 +386,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param syokujiTeikyoNissu 食事提供延べ日数
      */
-    public void setSyokujiTeikyoNissu(int syokujiTeikyoNissu) {
+    public void setSyokujiTeikyoNissu(Decimal syokujiTeikyoNissu) {
         this.syokujiTeikyoNissu = syokujiTeikyoNissu;
     }
 
@@ -394,7 +395,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費１対象食事提供延べ日数
      */
-    public int getKohi1SyokujiTeikyoNissu() {
+    public Decimal getKohi1SyokujiTeikyoNissu() {
         return kohi1SyokujiTeikyoNissu;
     }
 
@@ -403,7 +404,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi1SyokujiTeikyoNissu 公費１対象食事提供延べ日数
      */
-    public void setKohi1SyokujiTeikyoNissu(int kohi1SyokujiTeikyoNissu) {
+    public void setKohi1SyokujiTeikyoNissu(Decimal kohi1SyokujiTeikyoNissu) {
         this.kohi1SyokujiTeikyoNissu = kohi1SyokujiTeikyoNissu;
     }
 
@@ -412,7 +413,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費２対象食事提供延べ日数
      */
-    public int getKohi2SyokujiTeikyoNissu() {
+    public Decimal getKohi2SyokujiTeikyoNissu() {
         return kohi2SyokujiTeikyoNissu;
     }
 
@@ -421,7 +422,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi2SyokujiTeikyoNissu 公費２対象食事提供延べ日数
      */
-    public void setKohi2SyokujiTeikyoNissu(int kohi2SyokujiTeikyoNissu) {
+    public void setKohi2SyokujiTeikyoNissu(Decimal kohi2SyokujiTeikyoNissu) {
         this.kohi2SyokujiTeikyoNissu = kohi2SyokujiTeikyoNissu;
     }
 
@@ -430,7 +431,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費３対象食事提供延べ日数
      */
-    public int getKohi3SyokujiTeikyoNissu() {
+    public Decimal getKohi3SyokujiTeikyoNissu() {
         return kohi3SyokujiTeikyoNissu;
     }
 
@@ -439,7 +440,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi3SyokujiTeikyoNissu 公費３対象食事提供延べ日数
      */
-    public void setKohi3SyokujiTeikyoNissu(int kohi3SyokujiTeikyoNissu) {
+    public void setKohi3SyokujiTeikyoNissu(Decimal kohi3SyokujiTeikyoNissu) {
         this.kohi3SyokujiTeikyoNissu = kohi3SyokujiTeikyoNissu;
     }
 
@@ -448,7 +449,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 食事提供費合計
      */
-    public int getSyokujiTeikyohiTotal() {
+    public Decimal getSyokujiTeikyohiTotal() {
         return syokujiTeikyohiTotal;
     }
 
@@ -457,7 +458,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param syokujiTeikyohiTotal 食事提供費合計
      */
-    public void setSyokujiTeikyohiTotal(int syokujiTeikyohiTotal) {
+    public void setSyokujiTeikyohiTotal(Decimal syokujiTeikyohiTotal) {
         this.syokujiTeikyohiTotal = syokujiTeikyohiTotal;
     }
 
@@ -466,7 +467,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 標準負担額（月額）
      */
-    public int getGetsugakuHyojunFutanGaku() {
+    public Decimal getGetsugakuHyojunFutanGaku() {
         return getsugakuHyojunFutanGaku;
     }
 
@@ -475,7 +476,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param getsugakuHyojunFutanGaku 標準負担額（月額）
      */
-    public void setGetsugakuHyojunFutanGaku(int getsugakuHyojunFutanGaku) {
+    public void setGetsugakuHyojunFutanGaku(Decimal getsugakuHyojunFutanGaku) {
         this.getsugakuHyojunFutanGaku = getsugakuHyojunFutanGaku;
     }
 
@@ -484,7 +485,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 食事提供費請求額
      */
-    public int getSyokujiTeikyohiSeikyugaku() {
+    public Decimal getSyokujiTeikyohiSeikyugaku() {
         return syokujiTeikyohiSeikyugaku;
     }
 
@@ -493,7 +494,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param syokujiTeikyohiSeikyugaku 食事提供費請求額
      */
-    public void setSyokujiTeikyohiSeikyugaku(int syokujiTeikyohiSeikyugaku) {
+    public void setSyokujiTeikyohiSeikyugaku(Decimal syokujiTeikyohiSeikyugaku) {
         this.syokujiTeikyohiSeikyugaku = syokujiTeikyohiSeikyugaku;
     }
 
@@ -502,7 +503,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費１食事提供費請求額
      */
-    public int getKohi1SyokujiTeikyohiSeikyugaku() {
+    public Decimal getKohi1SyokujiTeikyohiSeikyugaku() {
         return kohi1SyokujiTeikyohiSeikyugaku;
     }
 
@@ -511,7 +512,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi1SyokujiTeikyohiSeikyugaku 公費１食事提供費請求額
      */
-    public void setKohi1SyokujiTeikyohiSeikyugaku(int kohi1SyokujiTeikyohiSeikyugaku) {
+    public void setKohi1SyokujiTeikyohiSeikyugaku(Decimal kohi1SyokujiTeikyohiSeikyugaku) {
         this.kohi1SyokujiTeikyohiSeikyugaku = kohi1SyokujiTeikyohiSeikyugaku;
     }
 
@@ -520,7 +521,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費２食事提供費請求額
      */
-    public int getKohi2SyokujiTeikyohiSeikyugaku() {
+    public Decimal getKohi2SyokujiTeikyohiSeikyugaku() {
         return kohi2SyokujiTeikyohiSeikyugaku;
     }
 
@@ -529,7 +530,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi2SyokujiTeikyohiSeikyugaku 公費２食事提供費請求額
      */
-    public void setKohi2SyokujiTeikyohiSeikyugaku(int kohi2SyokujiTeikyohiSeikyugaku) {
+    public void setKohi2SyokujiTeikyohiSeikyugaku(Decimal kohi2SyokujiTeikyohiSeikyugaku) {
         this.kohi2SyokujiTeikyohiSeikyugaku = kohi2SyokujiTeikyohiSeikyugaku;
     }
 
@@ -538,7 +539,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 公費３食事提供費請求額
      */
-    public int getKohi3SyokujiTeikyohiSeikyugaku() {
+    public Decimal getKohi3SyokujiTeikyohiSeikyugaku() {
         return kohi3SyokujiTeikyohiSeikyugaku;
     }
 
@@ -547,7 +548,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kohi3SyokujiTeikyohiSeikyugaku 公費３食事提供費請求額
      */
-    public void setKohi3SyokujiTeikyohiSeikyugaku(int kohi3SyokujiTeikyohiSeikyugaku) {
+    public void setKohi3SyokujiTeikyohiSeikyugaku(Decimal kohi3SyokujiTeikyohiSeikyugaku) {
         this.kohi3SyokujiTeikyohiSeikyugaku = kohi3SyokujiTeikyohiSeikyugaku;
     }
 
@@ -556,7 +557,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 標準負担額（日額）
      */
-    public int getNichigakuHyojunFutanGaku() {
+    public Decimal getNichigakuHyojunFutanGaku() {
         return nichigakuHyojunFutanGaku;
     }
 
@@ -565,7 +566,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param nichigakuHyojunFutanGaku 標準負担額（日額）
      */
-    public void setNichigakuHyojunFutanGaku(int nichigakuHyojunFutanGaku) {
+    public void setNichigakuHyojunFutanGaku(Decimal nichigakuHyojunFutanGaku) {
         this.nichigakuHyojunFutanGaku = nichigakuHyojunFutanGaku;
     }
 
@@ -574,7 +575,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 後・基本食提供費用提供単価
      */
-    public int getAtoKihonTeikyoTanka() {
+    public Decimal getAtoKihonTeikyoTanka() {
         return atoKihonTeikyoTanka;
     }
 
@@ -583,7 +584,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param atoKihonTeikyoTanka 後・基本食提供費用提供単価
      */
-    public void setAtoKihonTeikyoTanka(int atoKihonTeikyoTanka) {
+    public void setAtoKihonTeikyoTanka(Decimal atoKihonTeikyoTanka) {
         this.atoKihonTeikyoTanka = atoKihonTeikyoTanka;
     }
 
@@ -592,7 +593,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 後・特別食提供費用提供単価
      */
-    public int getAtoTokubestuTeikyoTanka() {
+    public Decimal getAtoTokubestuTeikyoTanka() {
         return atoTokubestuTeikyoTanka;
     }
 
@@ -601,7 +602,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param atoTokubestuTeikyoTanka 後・特別食提供費用提供単価
      */
-    public void setAtoTokubestuTeikyoTanka(int atoTokubestuTeikyoTanka) {
+    public void setAtoTokubestuTeikyoTanka(Decimal atoTokubestuTeikyoTanka) {
         this.atoTokubestuTeikyoTanka = atoTokubestuTeikyoTanka;
     }
 
@@ -610,7 +611,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 後・食事提供費請求額
      */
-    public int getAtoSyokujiTeikyohiSeikyugaku() {
+    public Decimal getAtoSyokujiTeikyohiSeikyugaku() {
         return atoSyokujiTeikyohiSeikyugaku;
     }
 
@@ -619,7 +620,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param atoSyokujiTeikyohiSeikyugaku 後・食事提供費請求額
      */
-    public void setAtoSyokujiTeikyohiSeikyugaku(int atoSyokujiTeikyohiSeikyugaku) {
+    public void setAtoSyokujiTeikyohiSeikyugaku(Decimal atoSyokujiTeikyohiSeikyugaku) {
         this.atoSyokujiTeikyohiSeikyugaku = atoSyokujiTeikyohiSeikyugaku;
     }
 
@@ -628,7 +629,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 再審査回数
      */
-    public int getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -637,7 +638,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -646,7 +647,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @return 過誤回数
      */
-    public int getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -655,7 +656,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 

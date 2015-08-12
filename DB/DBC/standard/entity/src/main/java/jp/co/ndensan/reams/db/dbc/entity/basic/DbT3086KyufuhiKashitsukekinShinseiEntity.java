@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付費貸付金申請テーブルのエンティティクラスです。
@@ -38,7 +39,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
     @PrimaryKey
     private FlexibleDate kariireShinseiYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private YubinNo shinseishaYubinNo;
     private RString shinseishaJusho;
     private AtenaKanaMeisho shinseishaShimeiKana;
@@ -64,7 +65,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
     private RString hoshonin_KinmusakiJusho;
     private TelNo hoshonin_KinmusakiTelNo;
     private RString seikyusho_RyoshushoUmu;
-    private int teishutsubutsuKanriNo;
+    private Decimal teishutsubutsuKanriNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -152,7 +153,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -161,7 +162,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -628,7 +629,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
      *
      * @return 提出物管理番号
      */
-    public int getTeishutsubutsuKanriNo() {
+    public Decimal getTeishutsubutsuKanriNo() {
         return teishutsubutsuKanriNo;
     }
 
@@ -637,7 +638,7 @@ public class DbT3086KyufuhiKashitsukekinShinseiEntity extends DbTableEntityBase<
      *
      * @param teishutsubutsuKanriNo 提出物管理番号
      */
-    public void setTeishutsubutsuKanriNo(int teishutsubutsuKanriNo) {
+    public void setTeishutsubutsuKanriNo(Decimal teishutsubutsuKanriNo) {
         this.teishutsubutsuKanriNo = teishutsubutsuKanriNo;
     }
 

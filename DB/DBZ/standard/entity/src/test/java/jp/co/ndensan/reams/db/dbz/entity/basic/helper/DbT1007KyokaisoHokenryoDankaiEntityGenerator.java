@@ -8,19 +8,18 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 境界層保険料段階エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT1007KyokaisoHokenryoDankaiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final int DEFAULT_履歴番号 = 1;
-    public static final FlexibleYearMonth DEFAULT_適用開始年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final FlexibleYearMonth DEFAULT_適用終了年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_保険料納付減額後保険料段階 = new RString("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final FlexibleYearMonth DEFAULT_適用開始年月 = new FlexibleYearMonth("199001");
+    public static final FlexibleYearMonth DEFAULT_適用終了年月 = new FlexibleYearMonth("199001");
+    public static final RString DEFAULT_保険料納付減額後保険料段階 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

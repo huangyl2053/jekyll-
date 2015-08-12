@@ -36,7 +36,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleYearMonth tekiyoShuryoYM;
     private RString joseiServiceShuriMeisho;
     private Decimal joseiTani;
@@ -146,7 +146,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -155,7 +155,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

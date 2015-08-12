@@ -19,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<DbT3054KogakuKyufuTaishoshaMeisaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3054KogakuKyufuTaishoshaMeisai");
 
@@ -39,14 +40,14 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal serviceHiyoGokeiGaku;
     private Decimal riyoshaFutanGaku;
     private RString kogakuKyufuKonkyo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,7 +56,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,7 +65,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,17 +74,16 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,7 +92,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -101,7 +101,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -110,7 +110,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -119,7 +119,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -128,7 +128,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -137,7 +137,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -146,7 +146,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -155,7 +155,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -164,25 +164,25 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * サービス費用合計額のgetメソッドです。
-     * 
+     *
      * @return サービス費用合計額
      */
     public Decimal getServiceHiyoGokeiGaku() {
@@ -191,7 +191,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * サービス費用合計額のsetメソッドです。
-     * 
+     *
      * @param serviceHiyoGokeiGaku サービス費用合計額
      */
     public void setServiceHiyoGokeiGaku(Decimal serviceHiyoGokeiGaku) {
@@ -200,7 +200,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額
      */
     public Decimal getRiyoshaFutanGaku() {
@@ -209,7 +209,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * 利用者負担額のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutanGaku 利用者負担額
      */
     public void setRiyoshaFutanGaku(Decimal riyoshaFutanGaku) {
@@ -220,7 +220,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 高額給付根拠のgetメソッドです。
      * <br/>
      * <br/>低所得者等識別、世帯合算状況等
-     * 
+     *
      * @return 高額給付根拠
      */
     public RString getKogakuKyufuKonkyo() {
@@ -231,7 +231,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 高額給付根拠のsetメソッドです。
      * <br/>
      * <br/>低所得者等識別、世帯合算状況等
-     * 
+     *
      * @param kogakuKyufuKonkyo 高額給付根拠
      */
     public void setKogakuKyufuKonkyo(RString kogakuKyufuKonkyo) {
@@ -240,9 +240,9 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT3054KogakuKyufuTaishoshaMeisaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3054KogakuKyufuTaishoshaMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -285,6 +285,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -293,5 +294,4 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
     }
 
 // </editor-fold>
-
 }

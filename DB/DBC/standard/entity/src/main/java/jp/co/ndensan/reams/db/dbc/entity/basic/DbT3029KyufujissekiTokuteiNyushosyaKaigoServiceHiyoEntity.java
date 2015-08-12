@@ -58,10 +58,10 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private ServiceKomokuCode serviceKomokuCode;
     private Decimal hiyoTanka;
     private Decimal futanGendogaku;
-    private Integer nissu;
-    private Integer kohi1Nissu;
-    private Integer kohi2Nissu;
-    private Integer kohi3Nissu;
+    private Decimal nissu;
+    private Decimal kohi1Nissu;
+    private Decimal kohi2Nissu;
+    private Decimal kohi3Nissu;
     private Decimal hiyogaku;
     private Decimal hokenbunSeikyugaku;
     private Decimal kohi1Futangaku;
@@ -81,10 +81,10 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private Decimal kohi3Seikyugaku;
     private Decimal kohi3HonninFutanGetsugaku;
     private Decimal atoHiyoTanka;
-    private Integer atoNissu;
-    private Integer atoKohi1Nissu;
-    private Integer atoKohi2Nissu;
-    private Integer atoKohi3Nissu;
+    private Decimal atoNissu;
+    private Decimal atoKohi1Nissu;
+    private Decimal atoKohi2Nissu;
+    private Decimal atoKohi3Nissu;
     private Decimal atoHiyogaku;
     private Decimal atoHokenbunSeikyugaku;
     private Decimal atoKohi1Futangaku;
@@ -103,8 +103,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private Decimal atoKohi3FutangakuTotal;
     private Decimal atoKohi3Seikyugaku;
     private Decimal atoKohi3HonninFutanGetsugaku;
-    private Integer saishinsaKaisu;
-    private Integer kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -393,7 +393,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 日数
      */
-    public Integer getNissu() {
+    public Decimal getNissu() {
         return nissu;
     }
 
@@ -402,7 +402,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param nissu 日数
      */
-    public void setNissu(Integer nissu) {
+    public void setNissu(Decimal nissu) {
         this.nissu = nissu;
     }
 
@@ -411,7 +411,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 公費１日数
      */
-    public Integer getKohi1Nissu() {
+    public Decimal getKohi1Nissu() {
         return kohi1Nissu;
     }
 
@@ -420,7 +420,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param kohi1Nissu 公費１日数
      */
-    public void setKohi1Nissu(Integer kohi1Nissu) {
+    public void setKohi1Nissu(Decimal kohi1Nissu) {
         this.kohi1Nissu = kohi1Nissu;
     }
 
@@ -429,7 +429,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 公費２日数
      */
-    public Integer getKohi2Nissu() {
+    public Decimal getKohi2Nissu() {
         return kohi2Nissu;
     }
 
@@ -438,7 +438,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param kohi2Nissu 公費２日数
      */
-    public void setKohi2Nissu(Integer kohi2Nissu) {
+    public void setKohi2Nissu(Decimal kohi2Nissu) {
         this.kohi2Nissu = kohi2Nissu;
     }
 
@@ -447,7 +447,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 公費３日数
      */
-    public Integer getKohi3Nissu() {
+    public Decimal getKohi3Nissu() {
         return kohi3Nissu;
     }
 
@@ -456,7 +456,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param kohi3Nissu 公費３日数
      */
-    public void setKohi3Nissu(Integer kohi3Nissu) {
+    public void setKohi3Nissu(Decimal kohi3Nissu) {
         this.kohi3Nissu = kohi3Nissu;
     }
 
@@ -807,7 +807,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 後・日数
      */
-    public Integer getAtoNissu() {
+    public Decimal getAtoNissu() {
         return atoNissu;
     }
 
@@ -816,7 +816,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param atoNissu 後・日数
      */
-    public void setAtoNissu(Integer atoNissu) {
+    public void setAtoNissu(Decimal atoNissu) {
         this.atoNissu = atoNissu;
     }
 
@@ -825,7 +825,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 後・公費１日数
      */
-    public Integer getAtoKohi1Nissu() {
+    public Decimal getAtoKohi1Nissu() {
         return atoKohi1Nissu;
     }
 
@@ -834,7 +834,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param atoKohi1Nissu 後・公費１日数
      */
-    public void setAtoKohi1Nissu(Integer atoKohi1Nissu) {
+    public void setAtoKohi1Nissu(Decimal atoKohi1Nissu) {
         this.atoKohi1Nissu = atoKohi1Nissu;
     }
 
@@ -843,7 +843,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 後・公費２日数
      */
-    public Integer getAtoKohi2Nissu() {
+    public Decimal getAtoKohi2Nissu() {
         return atoKohi2Nissu;
     }
 
@@ -852,7 +852,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param atoKohi2Nissu 後・公費２日数
      */
-    public void setAtoKohi2Nissu(Integer atoKohi2Nissu) {
+    public void setAtoKohi2Nissu(Decimal atoKohi2Nissu) {
         this.atoKohi2Nissu = atoKohi2Nissu;
     }
 
@@ -861,7 +861,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 後・公費３日数
      */
-    public Integer getAtoKohi3Nissu() {
+    public Decimal getAtoKohi3Nissu() {
         return atoKohi3Nissu;
     }
 
@@ -870,7 +870,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param atoKohi3Nissu 後・公費３日数
      */
-    public void setAtoKohi3Nissu(Integer atoKohi3Nissu) {
+    public void setAtoKohi3Nissu(Decimal atoKohi3Nissu) {
         this.atoKohi3Nissu = atoKohi3Nissu;
     }
 
@@ -1203,7 +1203,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 再審査回数
      */
-    public Integer getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -1212,7 +1212,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -1221,7 +1221,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @return 過誤回数
      */
-    public Integer getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -1230,7 +1230,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
      *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Integer kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
