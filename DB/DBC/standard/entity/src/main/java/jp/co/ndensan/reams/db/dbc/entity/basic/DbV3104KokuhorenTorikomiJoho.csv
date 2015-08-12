@@ -1,7 +1,7 @@
-﻿shoriYM,UDD014YM,FlexibleYearMonth,,,,,A
-kokanShikibetsuNo,varchar,RString,,,,,A
-shoriJotaiKubun,bpchar,RString,,,,,A
-zen_shorijotaikubun,bpchar,RString,,,,,A
-zenzen_shorijotaikubun,bpchar,RString,,,,,A
-tougetsushoridate,UDD018YMDHMS,YMDHMS,,,,,A
-saiShoriKahiKubun,bool,boolean,,,,,A
+﻿shoriYM,UDD014YM,FlexibleYearMonth,,,,,shoriYM,A
+kokanShikibetsuNo,varchar,RString,,,,,kokanShikibetsuNo,A
+shoriJotaiKubun,bpchar,RString,,,,,shoriJotaiKubun,A
+zen_shorijotaikubun,bpchar,RString,,,,,zen_shorijotaikubun,A
+zenzen_shorijotaikubun,bpchar,RString,,,,,zenzen_shorijotaikubun,A
+tougetsushoridate,UDD018YMDHMS,YMDHMS,,,,,tougetsushoridate,A
+saiShoriKahiKubun,bool,boolean,,,,,saiShoriKahiKubun,A

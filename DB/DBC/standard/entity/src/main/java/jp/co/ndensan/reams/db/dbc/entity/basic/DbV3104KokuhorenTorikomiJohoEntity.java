@@ -1,25 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * DbV3104KokuhorenTorikomiJohoの項目定義クラスです
  *
  */
 public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV3104KokuhorenTorikomiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbV3104KokuhorenTorikomiJoho");
 
-    private RYearMonth shoriYM;
+    private FlexibleYearMonth shoriYM;
     private RString kokanShikibetsuNo;
     private RString shoriJotaiKubun;
     private RString zen_shorijotaikubun;
@@ -28,25 +26,25 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     private boolean saiShoriKahiKubun;
 
     /**
-     * getShoriYM
+     * shoriYMのgetメソッドです。
      *
      * @return shoriYM
      */
-    public RYearMonth getShoriYM() {
+    public FlexibleYearMonth getShoriYM() {
         return shoriYM;
     }
 
     /**
-     * setShoriYM
+     * shoriYMのsetメソッドです。
      *
      * @param shoriYM shoriYM
      */
-    public void setShoriYM(RYearMonth shoriYM) {
+    public void setShoriYM(FlexibleYearMonth shoriYM) {
         this.shoriYM = shoriYM;
     }
 
     /**
-     * getKokanShikibetsuNo
+     * kokanShikibetsuNoのgetメソッドです。
      *
      * @return kokanShikibetsuNo
      */
@@ -55,7 +53,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setKokanShikibetsuNo
+     * kokanShikibetsuNoのsetメソッドです。
      *
      * @param kokanShikibetsuNo kokanShikibetsuNo
      */
@@ -64,7 +62,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * getShoriJotaiKubun
+     * shoriJotaiKubunのgetメソッドです。
      *
      * @return shoriJotaiKubun
      */
@@ -73,7 +71,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setShoriJotaiKubun
+     * shoriJotaiKubunのsetメソッドです。
      *
      * @param shoriJotaiKubun shoriJotaiKubun
      */
@@ -82,7 +80,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * getZen_shorijotaikubun
+     * zen_shorijotaikubunのgetメソッドです。
      *
      * @return zen_shorijotaikubun
      */
@@ -91,7 +89,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setZen_shorijotaikubun
+     * zen_shorijotaikubunのsetメソッドです。
      *
      * @param zen_shorijotaikubun zen_shorijotaikubun
      */
@@ -100,7 +98,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * getZenzen_shorijotaikubun
+     * zenzen_shorijotaikubunのgetメソッドです。
      *
      * @return zenzen_shorijotaikubun
      */
@@ -109,7 +107,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setZenzen_shorijotaikubun
+     * zenzen_shorijotaikubunのsetメソッドです。
      *
      * @param zenzen_shorijotaikubun zenzen_shorijotaikubun
      */
@@ -118,7 +116,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * getTougetsushoridate
+     * tougetsushoridateのgetメソッドです。
      *
      * @return tougetsushoridate
      */
@@ -127,7 +125,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setTougetsushoridate
+     * tougetsushoridateのsetメソッドです。
      *
      * @param tougetsushoridate tougetsushoridate
      */
@@ -136,7 +134,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * getSaiShoriKahiKubun
+     * saiShoriKahiKubunのgetメソッドです。
      *
      * @return saiShoriKahiKubun
      */
@@ -145,7 +143,7 @@ public class DbV3104KokuhorenTorikomiJohoEntity extends DbTableEntityBase<DbV310
     }
 
     /**
-     * setSaiShoriKahiKubun
+     * saiShoriKahiKubunのsetメソッドです。
      *
      * @param saiShoriKahiKubun saiShoriKahiKubun
      */

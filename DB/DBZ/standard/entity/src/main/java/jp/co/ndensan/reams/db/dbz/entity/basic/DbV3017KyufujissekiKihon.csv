@@ -1,0 +1,10 @@
+﻿kokanShikibetsuNo,DbUDD009KokanShikibetsuNo,ShikibetsuCode,,,,,kokanShikibetsuNo,A
+inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,ShikibetsuCode,,,,,inputShikibetsuNo,A
+recodeShubetsuCode,varchar,RString,,,,,recodeShubetsuCode,A
+hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,hokenshaNo,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hiHokenshaNo,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,serviceTeikyoYM,A
+jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,jigyoshoNo,A
+kyufuSakuseiKubunCode,varchar,RString,,,,,kyufuSakuseiKubunCode,A
+kyufuJissekiKubunCode,varchar,RString,,,,,kyufuJissekiKubunCode,A
+toshiNo,varchar,RString,,,,,toshiNo,A
