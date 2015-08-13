@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.ShinsakaiKoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbe.business.koseishichosonmaster.ShinsakaiKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;

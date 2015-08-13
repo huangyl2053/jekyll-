@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbe.business;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.IShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 申請履歴情報のビジネスクラスです。
@@ -32,16 +34,6 @@ public class ShinsakaiShinseiRirekiJoho implements Serializable, IShinseiRirekiJ
      */
     public ShinsakaiShinseiRirekiJoho(DbT5121ShinseiRirekiJohoEntity entity) {
         this.entity = entity;
-    }
-
-    /**
-     * DbT5121ShinseiRirekiJohoEntityを返します。
-     *
-     * @return DbT5121ShinseiRirekiJohoEntity
-     */
-    @Override
-    public DbT5121ShinseiRirekiJohoEntity getEntity() {
-        return entity;
     }
 
     /**
@@ -124,6 +116,11 @@ public class ShinsakaiShinseiRirekiJoho implements Serializable, IShinseiRirekiJ
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public IShinseiRirekiJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -209,13 +206,12 @@ public class ShinsakaiShinseiRirekiJoho implements Serializable, IShinseiRirekiJ
          */
         @Override
         public ShinsakaiShinseiRirekiJoho build() {
-            return new ShinsakaiShinseiRirekiJoho(this);
+            return new ShinsakaiShinseiRirekiJoho(this.entity);
         }
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

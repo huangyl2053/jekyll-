@@ -6,14 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT7024KoikiShichosonCodeHenkanPatternEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -33,8 +32,8 @@ public class KoikiShichosonCodeHenkanPattern extends ParentModelBase<KoikiShicho
      * @param コード区分 コード区分
      */
     public KoikiShichosonCodeHenkanPattern(RString 広域内市町村番号,
-LasdecCode 市町村コード,
-RString コード区分) {
+            LasdecCode 市町村コード,
+            RString コード区分) {
         requireNonNull(広域内市町村番号, UrSystemErrorMessages.値がnull.getReplacedMessage("広域内市町村番号"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(コード区分, UrSystemErrorMessages.値がnull.getReplacedMessage("コード区分"));
@@ -43,10 +42,10 @@ RString コード区分) {
         this.entity.setShichosonCode(市町村コード);
         this.entity.setCodeKubun(コード区分);
         this.id = new KoikiShichosonCodeHenkanPatternIdentifier(
-        広域内市町村番号,
-        市町村コード,
-        コード区分
-                );
+                広域内市町村番号,
+                市町村コード,
+                コード区分
+        );
     }
 
     /**
@@ -257,6 +256,7 @@ RString コード区分) {
         }
         return new KoikiShichosonCodeHenkanPattern(deletedEntity, id);
     }
+
     /**
      * {@link KoikiShichosonCodeHenkanPattern}のシリアライズ形式を提供します。
      *
@@ -267,13 +267,18 @@ RString コード区分) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7024KoikiShichosonCodeHenkanPatternEntity entity;
         private final KoikiShichosonCodeHenkanPatternIdentifier id;
 
-        private _SerializationProxy(DbT7024KoikiShichosonCodeHenkanPatternEntity entity,KoikiShichosonCodeHenkanPatternIdentifier id) {
+        private _SerializationProxy(DbT7024KoikiShichosonCodeHenkanPatternEntity entity, KoikiShichosonCodeHenkanPatternIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

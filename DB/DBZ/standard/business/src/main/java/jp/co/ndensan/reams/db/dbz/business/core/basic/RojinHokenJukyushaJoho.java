@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessa
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -107,7 +108,7 @@ public class RojinHokenJukyushaJoho extends ParentModelBase<RojinHokenJukyushaJo
      *
      * @return 老人保健受給者番号
      */
-    public Rstring get老人保健受給者番号() {
+    public RString get老人保健受給者番号() {
         return entity.getRojinHokenJukyushaNo();
     }
 
@@ -175,9 +176,14 @@ public class RojinHokenJukyushaJoho extends ParentModelBase<RojinHokenJukyushaJo
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7005RojinHokenJukyushaJohoEntity entity;
         private final RojinHokenJukyushaJohoIdentifier id;
 

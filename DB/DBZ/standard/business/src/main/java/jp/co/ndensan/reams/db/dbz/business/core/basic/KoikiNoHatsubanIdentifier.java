@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
-import lombok.Value;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域番号発番テーブルの識別子です。
@@ -24,7 +26,7 @@ public class KoikiNoHatsubanIdentifier implements Serializable {
      * @param コード区分 コード区分
      */
     public KoikiNoHatsubanIdentifier(LasdecCode 市町村コード,
-RString コード区分) {
+            RString コード区分) {
         this.市町村コード = 市町村コード;
         this.コード区分 = コード区分;
     }

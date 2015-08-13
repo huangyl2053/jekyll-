@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun.措置元;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -66,23 +65,14 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     }
 
     /**
-     * 識別コード（措置元）を設定します。
+     * 識別コード_措置元）を設定します。
      *
-     * @param 識別コード（措置元） 識別コード（措置元）
+     * @param 識別コード_措置元） 識別コード_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
-    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set識別コード
-    （措置元
-    ）(ShikibetsuCode 識別コード
-    （措置元
-
-
-        ）) {
-        requireNonNull(識別コード（措置元
-        ）, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード（措置元）")
-        );
-        entity.setShikibetsuCodeSochiMoto(識別コード（措置元
-        ）);
+    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set識別コード_措置元(ShikibetsuCode 識別コード_措置元) {
+        requireNonNull(識別コード_措置元, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード_措置元"));
+        entity.setShikibetsuCodeSochiMoto(識別コード_措置元);
         return this;
     }
 
@@ -99,23 +89,14 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     }
 
     /**
-     * 市町村コード（措置元）を設定します。
+     * 市町村コード_措置元）を設定します。
      *
-     * @param 市町村コード（措置元） 市町村コード（措置元）
+     * @param 市町村コード_措置元） 市町村コード_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
-    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set市町村コード
-    （措置元
-    ）(LasdecCode 市町村コード
-    （措置元
-
-
-        ）) {
-        requireNonNull(市町村コード（措置元
-        ）, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード（措置元）")
-        );
-        entity.setShichosonCodeSochiMoto(市町村コード（措置元
-        ）);
+    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set市町村コード_措置元(LasdecCode 市町村コード_措置元) {
+        requireNonNull(市町村コード_措置元, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード_措置元）"));
+        entity.setShichosonCodeSochiMoto(市町村コード_措置元);
         return this;
     }
 
@@ -132,23 +113,14 @@ public class GappeiNaiJutokushaShinKyuNoHenkanBuilder {
     }
 
     /**
-     * 被保険者番号（措置元）を設定します。
+     * 被保険者番号_措置元）を設定します。
      *
-     * @param 被保険者番号（措置元） 被保険者番号（措置元）
+     * @param 被保険者番号_措置元） 被保険者番号_措置元）
      * @return {@link GappeiNaiJutokushaShinKyuNoHenkanBuilder}
      */
-    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set被保険者番号
-    （措置元
-    ）(HihokenshaNo 被保険者番号
-    （措置元
-
-
-        ）) {
-        requireNonNull(被保険者番号（措置元
-        ）, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号（措置元）")
-        );
-        entity.setHihokenshaNoSochiMoto(被保険者番号（措置元
-        ）);
+    public GappeiNaiJutokushaShinKyuNoHenkanBuilder set被保険者番号_措置元(HihokenshaNo 被保険者番号_措置元) {
+        requireNonNull(被保険者番号_措置元, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号_措置元）"));
+        entity.setHihokenshaNoSochiMoto(被保険者番号_措置元);
         return this;
     }
 

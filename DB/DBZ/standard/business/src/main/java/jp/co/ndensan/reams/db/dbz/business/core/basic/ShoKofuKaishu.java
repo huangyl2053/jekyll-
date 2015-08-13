@@ -158,7 +158,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 交付理由
      */
-    public text get交付理由() {
+    public RString get交付理由() {
         return entity.getKofuRiyu();
     }
 
@@ -185,7 +185,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 回収理由
      */
-    public text get回収理由() {
+    public RString get回収理由() {
         return entity.getKaishuRiyu();
     }
 
@@ -296,9 +296,14 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT7037ShoKofuKaishuEntity entity;
         private final ShoKofuKaishuIdentifier id;
 

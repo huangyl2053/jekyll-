@@ -162,9 +162,14 @@ public class ChohyoBunruiKanri extends ParentModelBase<ChohyoBunruiKanriIdentifi
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7068ChohyoBunruiKanriEntity entity;
         private final ChohyoBunruiKanriIdentifier id;
 

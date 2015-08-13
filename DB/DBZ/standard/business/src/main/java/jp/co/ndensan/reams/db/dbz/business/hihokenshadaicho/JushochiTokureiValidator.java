@@ -6,14 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
@@ -35,7 +34,7 @@ public class JushochiTokureiValidator {
      * @param jushochiTokureiData 住所地特例情報
      * @return 住所地特例のListを設定するためのインターフェース
      */
-    public static IJushochiTokureiListSetter setJushochiTokureiData(HihokenshaDaichoModel jushochiTokureiData) {
+    public static IJushochiTokureiListSetter setJushochiTokureiData(HihokenshaDaicho jushochiTokureiData) {
         return new _JushochiTokureiValidator(jushochiTokureiData);
     }
 
@@ -50,26 +49,26 @@ public class JushochiTokureiValidator {
          * @param jushochiTokureiList 住所地特例List
          * @return バリデーションクラスを扱うインターフェース
          */
-        IValidatable setJushochiTokureiList(IItemList<HihokenshaDaichoModel> jushochiTokureiList);
+        IValidatable setJushochiTokureiList(IItemList<HihokenshaDaicho> jushochiTokureiList);
     }
 
     private static class _JushochiTokureiValidator implements IValidatable, IJushochiTokureiListSetter {
 
-        private final HihokenshaDaichoModel jushochiTokureiData;
-        private IItemList<HihokenshaDaichoModel> jushochiTokureiList;
+        private final HihokenshaDaicho jushochiTokureiData;
+        private IItemList<HihokenshaDaicho> jushochiTokureiList;
 
         /**
          * コンストラクタです。
          *
          * @param jushochiTokureiData 住所地特例情報
          */
-        public _JushochiTokureiValidator(HihokenshaDaichoModel jushochiTokureiData) {
+        public _JushochiTokureiValidator(HihokenshaDaicho jushochiTokureiData) {
             requireNonNull(jushochiTokureiData, UrSystemErrorMessages.値がnull.getReplacedMessage("登録する住所地特例情報"));
             this.jushochiTokureiData = jushochiTokureiData;
         }
 
         @Override
-        public IValidatable setJushochiTokureiList(IItemList<HihokenshaDaichoModel> jushochiTokureiList) {
+        public IValidatable setJushochiTokureiList(IItemList<HihokenshaDaicho> jushochiTokureiList) {
             requireNonNull(jushochiTokureiList, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例List"));
             this.jushochiTokureiList = jushochiTokureiList;
             return this;

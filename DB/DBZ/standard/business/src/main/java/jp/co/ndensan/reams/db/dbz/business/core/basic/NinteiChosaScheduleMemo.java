@@ -216,7 +216,7 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT5222NinteiChosaScheduleMemoEntity entity;
         private final NinteiChosaScheduleMemoIdentifier id;
 

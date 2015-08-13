@@ -2,25 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5120ShinsakaiShinseitodokedeJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5120ShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -115,7 +115,7 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDacTest extends DbdTestDacBase {
             DbT5120ShinseitodokedeJohoEntity updateRecord = DbT5120ShinseitodokedeJohoEntityGenerator.createDbT5120ShinseitodokedeJohoEntity();
             updateRecord.setShinseishoKanriNo(OTHER_DEFAULT_申請書管理番号);
 
-            sut.update(updateRecord);
+            sut.update((IShinseitodokedeJohoEntity) updateRecord);
 
             Optional<DbT5120ShinseitodokedeJohoEntity> updatedRecord = sut.selectByKey(
                     OTHER_DEFAULT_申請書管理番号);
@@ -134,13 +134,13 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 申請届出情報エンティティを渡すと_deleteは_申請届出情報を削除する() {
-            Optional<DbT5120ShinseitodokedeJohoEntity>   deleteRecord = sut.selectByKey(
+            Optional<DbT5120ShinseitodokedeJohoEntity> deleteRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号);
-           DbT5120ShinseitodokedeJohoEntity entity = new DbT5120ShinseitodokedeJohoEntity();
-           entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
-        
-           sut.delete(entity);
-           assertThat(sut.selectByKey(
+            DbT5120ShinseitodokedeJohoEntity entity = new DbT5120ShinseitodokedeJohoEntity();
+            entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
+
+            sut.delete((IShinseitodokedeJohoEntity) entity);
+            assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号), is(nullValue()));
         }
     }
@@ -151,7 +151,7 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDacTest extends DbdTestDacBase {
                 ShinseishoKanriNo 申請書管理番号) {
             DbT5120ShinseitodokedeJohoEntity entity = DbT5120ShinseitodokedeJohoEntityGenerator.createDbT5120ShinseitodokedeJohoEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
-            sut.insert(entity);
+            sut.insert((IShinseitodokedeJohoEntity) entity);
         }
     }
 }

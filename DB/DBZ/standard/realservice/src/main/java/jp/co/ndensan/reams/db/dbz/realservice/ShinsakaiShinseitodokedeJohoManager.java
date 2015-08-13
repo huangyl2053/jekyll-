@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.IShinseitodokedeJoho;
-import jp.co.ndensan.reams.db.dbz.business.ShinsakaiShinseitodokedeJoho;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5120ShinsakaiShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;

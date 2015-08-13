@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7005RojinHokenJukyushaJohoEnti
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link RojinHokenJukyushaJoho}の編集を行うビルダークラスです。
@@ -92,7 +93,7 @@ public class RojinHokenJukyushaJohoBuilder {
      * @param 老人保健受給者番号 老人保健受給者番号
      * @return {@link RojinHokenJukyushaJohoBuilder}
      */
-    public RojinHokenJukyushaJohoBuilder set老人保健受給者番号(Rstring 老人保健受給者番号) {
+    public RojinHokenJukyushaJohoBuilder set老人保健受給者番号(RString 老人保健受給者番号) {
         requireNonNull(老人保健受給者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健受給者番号"));
         entity.setRojinHokenJukyushaNo(老人保健受給者番号);
         return this;

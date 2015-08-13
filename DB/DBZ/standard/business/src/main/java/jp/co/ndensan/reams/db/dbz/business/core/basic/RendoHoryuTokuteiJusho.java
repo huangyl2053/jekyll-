@@ -39,7 +39,7 @@ public class RendoHoryuTokuteiJusho extends ParentModelBase<RendoHoryuTokuteiJus
         requireNonNull(管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("管理番号"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         this.entity = new DbT7023RendoHoryuTokuteiJushoEntity();
-        this.entity.setSubGyomuCode(管理番号);
+        this.entity.setKanriNo(管理番号);
         this.entity.setShichosonCode(市町村コード);
         this.id = new RendoHoryuTokuteiJushoIdentifier(
                 管理番号,
@@ -56,7 +56,7 @@ public class RendoHoryuTokuteiJusho extends ParentModelBase<RendoHoryuTokuteiJus
     public RendoHoryuTokuteiJusho(DbT7023RendoHoryuTokuteiJushoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("連動保留特定住所マスタ"));
         this.id = new RendoHoryuTokuteiJushoIdentifier(
-                entity.getSubGyomuCode(),
+                entity.getKanriNo(),
                 entity.getShichosonCode());
     }
 
@@ -229,9 +229,14 @@ public class RendoHoryuTokuteiJusho extends ParentModelBase<RendoHoryuTokuteiJus
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7023RendoHoryuTokuteiJushoEntity entity;
         private final RendoHoryuTokuteiJushoIdentifier id;
 

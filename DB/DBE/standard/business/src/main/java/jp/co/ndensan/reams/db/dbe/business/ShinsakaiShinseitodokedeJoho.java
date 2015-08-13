@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbe.business;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5120ShinseitodokedeJohoEntity;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbz.business.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -17,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
 
 /**
  * 申請届出情報のビジネスクラスです。
@@ -39,16 +41,6 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      */
     public ShinsakaiShinseitodokedeJoho(DbT5120ShinseitodokedeJohoEntity entity) {
         this.entity = entity;
-    }
-
-    /**
-     * DbT5120ShinseitodokedeJohoEntityを返します。
-     *
-     * @return DbT5120ShinseitodokedeJohoEntity
-     */
-    @Override
-    public DbT5120ShinseitodokedeJohoEntity getEntity() {
-        return entity;
     }
 
     /**
@@ -213,6 +205,11 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public IShinseitodokedeJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -402,13 +399,12 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          */
         @Override
         public ShinsakaiShinseitodokedeJoho build() {
-            return new ShinsakaiShinseitodokedeJoho(this);
+            return new ShinsakaiShinseitodokedeJoho(this.entity);
         }
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

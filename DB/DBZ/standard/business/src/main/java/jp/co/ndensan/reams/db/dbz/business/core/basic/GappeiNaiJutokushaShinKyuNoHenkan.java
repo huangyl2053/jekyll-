@@ -6,14 +6,16 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbz.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.dbz.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -48,8 +50,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}より{@link GappeiNaiJutokushaShinKyuNoHenkan}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
+     * @param entity DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
      */
     public GappeiNaiJutokushaShinKyuNoHenkan(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併内住特者新旧番号変換テーブル"));
@@ -96,11 +97,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      *
      * @return 識別コード（措置元）
      */
-    public ShikibetsuCode get識別コード
-    （措置元
-
-
-        ）() {
+    public ShikibetsuCode get識別コード_措置元() {
         return entity.getShikibetsuCodeSochiMoto();
     }
 
@@ -118,11 +115,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      *
      * @return 市町村コード（措置元）
      */
-    public LasdecCode get市町村コード
-    （措置元
-
-
-        ）() {
+    public LasdecCode get市町村コード_措置元() {
         return entity.getShichosonCodeSochiMoto();
     }
 
@@ -140,11 +133,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      *
      * @return 被保険者番号（措置元）
      */
-    public HihokenshaNo get被保険者番号
-    （措置元
-
-
-        ）() {
+    public HihokenshaNo get被保険者番号_措置元() {
         return entity.getHihokenshaNoSochiMoto();
     }
 
@@ -179,8 +168,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
     /**
      * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}を返します。
      *
-     * @return
-     * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
+     * @return 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
      */
     @Override
     public GappeiNaiJutokushaShinKyuNoHenkanIdentifier identifier() {
@@ -231,9 +219,14 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity;
         private final GappeiNaiJutokushaShinKyuNoHenkanIdentifier id;
 

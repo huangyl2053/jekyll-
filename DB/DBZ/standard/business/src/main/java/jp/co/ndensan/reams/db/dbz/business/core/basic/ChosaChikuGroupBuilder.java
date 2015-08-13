@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChosaChikuGroup}の編集を行うビルダークラスです。
@@ -93,7 +92,7 @@ public class ChosaChikuGroupBuilder {
      * @param 優先番号 優先番号
      * @return {@link ChosaChikuGroupBuilder}
      */
-    public ChosaChikuGroupBuilder set優先番号(Decimal 優先番号) {
+    public ChosaChikuGroupBuilder set優先番号(int 優先番号) {
         requireNonNull(優先番号, UrSystemErrorMessages.値がnull.getReplacedMessage("優先番号"));
         entity.setYusenNo(優先番号);
         return this;

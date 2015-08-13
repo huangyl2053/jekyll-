@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
 import java.util.TreeMap;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -21,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import static java.util.Objects.requireNonNull;
 
 /**
  * 旧市町村の被保険者情報を扱うクラスです。
@@ -30,7 +31,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class KyuShichosonShikaku {
 
-    private final List<HihokenshaDaichoModel> 被保険者台帳List;
+    private final List<HihokenshaDaicho> 被保険者台帳List;
 
     /**
      * コンストラクタです。
@@ -38,7 +39,7 @@ public class KyuShichosonShikaku {
      * @param 被保険者台帳List 被保険者台帳List（処理対象の被保険者一人分）
      * @throws NullPointerException 引数がnullの場合
      */
-    public KyuShichosonShikaku(List<HihokenshaDaichoModel> 被保険者台帳List) throws NullPointerException {
+    public KyuShichosonShikaku(List<HihokenshaDaicho> 被保険者台帳List) throws NullPointerException {
         this.被保険者台帳List = requireNonNull(被保険者台帳List, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳List"));
     }
 
@@ -54,7 +55,7 @@ public class KyuShichosonShikaku {
      * @throws NullPointerException 引数がnullの場合
      * @throws IllegalArgumentException 引数が不正な場合
      */
-    public Optional<HihokenshaDaichoModel> get最新旧市町村被保険者情報(FlexibleDate 基準年月日)
+    public Optional<HihokenshaDaicho> get最新旧市町村被保険者情報(FlexibleDate 基準年月日)
             throws NullPointerException, IllegalArgumentException {
 
         requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
@@ -78,7 +79,7 @@ public class KyuShichosonShikaku {
      * @throws NullPointerException 引数がnullの場合
      * @throws IllegalArgumentException 引数が不正な場合
      */
-    public IItemList<HihokenshaDaichoModel> get月別最新旧市町村被保険者情報(FlexibleYear 基準年度, int 基準日)
+    public IItemList<HihokenshaDaicho> get月別最新旧市町村被保険者情報(FlexibleYear 基準年度, int 基準日)
             throws NullPointerException, IllegalArgumentException {
 
         requireNonNull(基準年度, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年度"));
@@ -90,13 +91,13 @@ public class KyuShichosonShikaku {
         FlexibleDate 終了日 = get当月末日(開始日.plusMonth(11).getYearMonth());
         Range<FlexibleDate> 対象期間 = new Range<>(開始日, 終了日);
 
-        Map<FlexibleYearMonth, HihokenshaDaichoModel> map = new TreeMap<>();
-        for (HihokenshaDaichoModel 履歴 : 被保険者台帳List) {
+        Map<FlexibleYearMonth, HihokenshaDaicho> map = new TreeMap<>();
+        for (HihokenshaDaicho 履歴 : 被保険者台帳List) {
             FlexibleDate 取得日 = 履歴.get資格取得年月日();
             if (!対象期間.between(取得日) || 基準日 < 取得日.getDayValue()) {
                 continue;
             }
-            HihokenshaDaichoModel old履歴 = map.get(取得日.getYearMonth());
+            HihokenshaDaicho old履歴 = map.get(取得日.getYearMonth());
             if (old履歴 != null && !is新履歴(履歴, old履歴)) {
                 continue;
             }
@@ -115,7 +116,7 @@ public class KyuShichosonShikaku {
      *
      * @return 被保険者情報
      */
-    public Optional<HihokenshaDaichoModel> get最古旧市町村被保険者情報() {
+    public Optional<HihokenshaDaicho> get最古旧市町村被保険者情報() {
         return Optional.ofNullable(get最古履歴(null));
     }
 
@@ -136,7 +137,7 @@ public class KyuShichosonShikaku {
      * @throws NullPointerException 引数がnullの場合
      * @throws IllegalArgumentException 引数が不正な場合
      */
-    public Optional<HihokenshaDaichoModel> get旧市町村被保険者情報By月初月末指定(FlexibleYearMonth 基準年月, GesshoGetsumatsuKubun 月初月末区分)
+    public Optional<HihokenshaDaicho> get旧市町村被保険者情報By月初月末指定(FlexibleYearMonth 基準年月, GesshoGetsumatsuKubun 月初月末区分)
             throws NullPointerException, IllegalArgumentException {
 
         requireNonNull(基準年月, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月"));
@@ -144,7 +145,7 @@ public class KyuShichosonShikaku {
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("基準年月").evaluate());
         }
 
-        HihokenshaDaichoModel 対象履歴 = null;
+        HihokenshaDaicho 対象履歴 = null;
         switch (月初月末区分) {
             case 指定無:
             case 月初:
@@ -173,30 +174,31 @@ public class KyuShichosonShikaku {
      *
      * @return 編集後の被保険者情報
      */
-    public IItemList<HihokenshaDaichoModel> edit旧市町村被保険者情報() {
-        List<HihokenshaDaichoModel> edited履歴List = new ArrayList<>();
-        for (HihokenshaDaichoModel 編集元 : 被保険者台帳List) {
-            HihokenshaDaichoModel 対象履歴 = new HihokenshaDaichoModel(編集元.getEntity());
+    public IItemList<HihokenshaDaicho> edit旧市町村被保険者情報() {
+        List<HihokenshaDaicho> edited履歴List = new ArrayList<>();
+        for (HihokenshaDaicho 編集元 : 被保険者台帳List) {
+            HihokenshaDaicho 対象履歴 = new HihokenshaDaicho(編集元.toEntity());
+            HihokenshaDaichoBuilder 対象履歴Builder = 対象履歴.createBuilderForEdit();
             if (編集元.get旧市町村コード().isEmpty() && 編集元.get広住特措置元市町村コード().isEmpty()) {
-                対象履歴.set旧市町村コード(編集元.get市町村コード());
+                対象履歴Builder.set旧市町村コード(編集元.get市町村コード());
             }
             if (編集元.get旧市町村コード().isEmpty() && !編集元.get広住特措置元市町村コード().isEmpty()) {
-                対象履歴.set旧市町村コード(編集元.get広住特措置元市町村コード());
+                対象履歴Builder.set旧市町村コード(編集元.get広住特措置元市町村コード());
             }
             if (!編集元.get広住特措置元市町村コード().isEmpty()) {
-                対象履歴.set市町村コード(編集元.get広住特措置元市町村コード());
+                対象履歴Builder.set市町村コード(編集元.get広住特措置元市町村コード());
             }
             if (編集元.get資格喪失年月日().isEmpty()) {
-                対象履歴.set資格喪失年月日(new FlexibleDate("99999999"));
+                対象履歴Builder.set資格喪失年月日(new FlexibleDate("99999999"));
             }
-            edited履歴List.add(対象履歴);
+            edited履歴List.add(対象履歴Builder.build());
         }
         return ItemList.of(edited履歴List);
     }
 
-    private HihokenshaDaichoModel get最新履歴(FlexibleDate 基準年月日) {
-        HihokenshaDaichoModel 対象履歴 = null;
-        for (HihokenshaDaichoModel 履歴 : 被保険者台帳List) {
+    private HihokenshaDaicho get最新履歴(FlexibleDate 基準年月日) {
+        HihokenshaDaicho 対象履歴 = null;
+        for (HihokenshaDaicho 履歴 : 被保険者台帳List) {
             if (基準年月日 != null && !履歴.get資格取得年月日().isBeforeOrEquals(基準年月日)) {
                 continue;
             }
@@ -208,9 +210,9 @@ public class KyuShichosonShikaku {
         return 対象履歴;
     }
 
-    private HihokenshaDaichoModel get最古履歴(FlexibleYearMonth 基準年月) {
-        HihokenshaDaichoModel 対象履歴 = null;
-        for (HihokenshaDaichoModel 履歴 : 被保険者台帳List) {
+    private HihokenshaDaicho get最古履歴(FlexibleYearMonth 基準年月) {
+        HihokenshaDaicho 対象履歴 = null;
+        for (HihokenshaDaicho 履歴 : 被保険者台帳List) {
             if (基準年月 != null
                     && !(履歴.get資格取得年月日() != null && 履歴.get資格取得年月日().isValid() && 基準年月.equals(履歴.get資格取得年月日().getYearMonth()))
                     && !(履歴.get資格喪失年月日() != null && 履歴.get資格喪失年月日().isValid() && 基準年月.equals(履歴.get資格喪失年月日().getYearMonth()))) {
@@ -224,11 +226,11 @@ public class KyuShichosonShikaku {
         return 対象履歴;
     }
 
-    private boolean is新履歴(HihokenshaDaichoModel 対象, HihokenshaDaichoModel 比較先) {
+    private boolean is新履歴(HihokenshaDaicho 対象, HihokenshaDaicho 比較先) {
         return 比較先.get資格取得年月日().isBefore(対象.get資格取得年月日());
     }
 
-    private boolean is古履歴(HihokenshaDaichoModel 対象, HihokenshaDaichoModel 比較先) {
+    private boolean is古履歴(HihokenshaDaicho 対象, HihokenshaDaicho 比較先) {
         FlexibleDate 対象最古 = 対象.get資格取得年月日();
         if (対象.get資格喪失年月日() != null && 対象.get資格喪失年月日().isValid() && 対象.get資格喪失年月日().isBefore(対象.get資格取得年月日())) {
             対象最古 = 対象.get資格喪失年月日();
