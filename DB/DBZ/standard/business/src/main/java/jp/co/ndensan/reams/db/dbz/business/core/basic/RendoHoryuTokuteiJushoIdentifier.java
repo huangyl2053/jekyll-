@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 連動保留特定住所マスタの識別子です。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class RendoHoryuTokuteiJushoIdentifier implements Serializable {
 
     private final RString 管理番号;

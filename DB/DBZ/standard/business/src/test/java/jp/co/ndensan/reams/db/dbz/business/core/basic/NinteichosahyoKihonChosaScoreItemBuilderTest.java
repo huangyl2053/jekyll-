@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -24,14 +25,16 @@ public class NinteichosahyoKihonChosaScoreItemBuilderTest extends DbzTestBase {
     private static DbT5212NinteichosahyoKihonChosaScoreItemEntity NinteichosahyoKihonChosaScoreItemEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-//    private static 主キー型1 主キー名1;
-//    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static int 要介護認定調査履歴番号;
+    private static int 連番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-//        主キー名1 = DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator.DEFAULT_主キー名1;
-//        主キー名2 = DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator.DEFAULT_申請書管理番号;
+        要介護認定調査履歴番号 = DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator.DEFAULT_要介護認定調査履歴番号;
+        連番 = DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator.DEFAULT_連番;
     }
 
     public static class getterSetterTest extends DbzTestBase {
