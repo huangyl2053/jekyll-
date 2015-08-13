@@ -218,7 +218,7 @@ public class JukyushaDaichoAliveBuilder {
      * @param 二号特定疾病コード 2号特定疾病コード
      * @return {@link JukyushaDaichoAliveBuilder}
      */
-    public JukyushaDaichoAliveBuilder set二号特定疾病コード(Code 二号特定疾病コード) {
+    public JukyushaDaichoAliveBuilder set２号特定疾病コード(Code 二号特定疾病コード) {
         requireNonNull(二号特定疾病コード, UrSystemErrorMessages.値がnull.getReplacedMessage("二号特定疾病コード"));
         entity.setNigoTokuteiShippeiCode(二号特定疾病コード);
         return this;

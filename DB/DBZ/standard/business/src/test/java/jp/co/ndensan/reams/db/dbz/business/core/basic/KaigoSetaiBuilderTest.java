@@ -4,10 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +29,29 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
     private static DbT7014KaigoSetaiEntity KaigoSetaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 管理識別区分;
+    private static FlexibleDate 世帯把握基準年月日;
+    private static int 世帯員管理連番;
+    private static ShikibetsuCode 世帯員識別コード;
+    private static RString 本人区分;
+    private static FlexibleYear 課税年度;
+    private static RString 課税非課税区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
+        管理識別区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
+        世帯把握基準年月日 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
+        世帯員管理連番 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
+        世帯員識別コード = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
+        本人区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
+        課税年度 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
+        課税非課税区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KaigoSetaiBuilder sut;
         private static KaigoSetai business;
@@ -43,8 +59,14 @@ public class KaigoSetaiBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = new DbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             business = new KaigoSetai(KaigoSetaiEntity);
 

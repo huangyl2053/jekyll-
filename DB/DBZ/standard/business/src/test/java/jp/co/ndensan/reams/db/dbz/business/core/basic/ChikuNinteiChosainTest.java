@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5223ChikuNinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5223ChikuNinteiChosainEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -22,17 +26,18 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChikuNinteiChosainTest extends DbzTestBase {
 
-    private static DbT5223ChikuNinteiChosainEntity ChikuNinteiChosainEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static DbT5223ChikuNinteiChosainEntity chikuNinteiChosainEntity;
+    private static Code 調査地区コード;
+    private static RString 認定調査委託先コード;
+    private static RString 認定調査員コード;
+    private static LasdecCode 市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_主キー名2;
+        調査地区コード = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_調査地区コード;
+        認定調査委託先コード = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査委託先コード;
+        認定調査員コード = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_認定調査員コード;
+        市町村コード = DbT5223ChikuNinteiChosainEntityGenerator.DEFAULT_市町村コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -41,32 +46,43 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
         }
 
-//TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChikuNinteiChosain(null, 主キー名2);
+            sut = new ChikuNinteiChosain(null, 認定調査委託先コード, 認定調査員コード, 市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChikuNinteiChosain(主キー名1, null);
+            sut = new ChikuNinteiChosain(調査地区コード, null, 認定調査員コード, 市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 主キー名3がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ChikuNinteiChosain(調査地区コード, 認定調査委託先コード, null, 市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ChikuNinteiChosain(調査地区コード, 認定調査委託先コード, 認定調査員コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5223ChikuNinteiChosainEntityにセットされている() {
-            sut = new ChikuNinteiChosain(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ChikuNinteiChosain(調査地区コード, 認定調査委託先コード, 認定調査員コード, 市町村コード);
+            assertThat(sut.get調査地区コード(), is(調査地区コード));
+            assertThat(sut.get認定調査委託先コード(), is(認定調査委託先コード));
+            assertThat(sut.get認定調査員コード(), is(認定調査員コード));
+            assertThat(sut.get市町村コード(), is(市町村コード));
         }
 
         @Test
         public void 指定したキーが保持するChikuNinteiChosainIdentifierにセットされている() {
-            sut = new ChikuNinteiChosain(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ChikuNinteiChosain(調査地区コード, 認定調査委託先コード, 認定調査員コード, 市町村コード);
+//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
+//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
         }
     }
 
@@ -76,7 +92,7 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
         }
 
         @Test(expected = NullPointerException.class)
@@ -87,10 +103,10 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
         @Test
         public void 指定したDbT5223ChikuNinteiChosainEntityのキー情報を識別子が持つ() {
 
-            sut = new ChikuNinteiChosain(ChikuNinteiChosainEntity);
+            sut = new ChikuNinteiChosain(chikuNinteiChosainEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
+//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
         }
     }
 
@@ -100,39 +116,39 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
 
-            sut = new ChikuNinteiChosain(ChikuNinteiChosainEntity);
+            sut = new ChikuNinteiChosain(chikuNinteiChosainEntity);
         }
 
         @Test
         public void get調査地区コードは_entityが持つ調査地区コードを返す() {
-            assertThat(sut.get調査地区コード(), is(ChikuNinteiChosainEntity.getChosaChikuCode()));
+            assertThat(sut.get調査地区コード(), is(chikuNinteiChosainEntity.getChosaChikuCode()));
         }
 
         @Test
         public void get認定調査委託先コードは_entityが持つ認定調査委託先コードを返す() {
-            assertThat(sut.get認定調査委託先コード(), is(ChikuNinteiChosainEntity.getNinteiChosaItakusakiCode()));
+            assertThat(sut.get認定調査委託先コード(), is(chikuNinteiChosainEntity.getNinteiChosaItakusakiCode()));
         }
 
         @Test
         public void get認定調査員コードは_entityが持つ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(ChikuNinteiChosainEntity.getNinteiChosainCode()));
+            assertThat(sut.get認定調査員コード(), is(chikuNinteiChosainEntity.getNinteiChosainCode()));
         }
 
         @Test
         public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(ChikuNinteiChosainEntity.getShichosonCode()));
+            assertThat(sut.get市町村コード(), is(chikuNinteiChosainEntity.getShichosonCode()));
         }
 
         @Test
         public void get優先番号は_entityが持つ優先番号を返す() {
-            assertThat(sut.get優先番号(), is(ChikuNinteiChosainEntity.getYusenNo()));
+            assertThat(sut.get優先番号(), is(chikuNinteiChosainEntity.getYusenNo()));
         }
 
         @Test
         public void get備考は_entityが持つ備考を返す() {
-            assertThat(sut.get備考(), is(ChikuNinteiChosainEntity.getBiko()));
+            assertThat(sut.get備考(), is(chikuNinteiChosainEntity.getBiko()));
         }
     }
 
@@ -142,14 +158,14 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
 
-            sut = new ChikuNinteiChosain(ChikuNinteiChosainEntity);
+            sut = new ChikuNinteiChosain(chikuNinteiChosainEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(ChikuNinteiChosainEntity));
+            assertThat(sut.toEntity(), not(chikuNinteiChosainEntity));
         }
     }
 
@@ -159,9 +175,9 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
 
-            sut = new ChikuNinteiChosain(ChikuNinteiChosainEntity);
+            sut = new ChikuNinteiChosain(chikuNinteiChosainEntity);
         }
 
         @Test
@@ -177,7 +193,7 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
+            chikuNinteiChosainEntity = DbT5223ChikuNinteiChosainEntityGenerator.createDbT5223ChikuNinteiChosainEntity();
 
         }
 
@@ -212,8 +228,8 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
     private static class TestSupport {
 
         public static ChikuNinteiChosain setStateChikuNinteiChosain(EntityDataState parentState) {
-            ChikuNinteiChosainEntity.setState(parentState);
-            return new ChikuNinteiChosain(ChikuNinteiChosainEntity);
+            chikuNinteiChosainEntity.setState(parentState);
+            return new ChikuNinteiChosain(chikuNinteiChosainEntity);
         }
     }
 }

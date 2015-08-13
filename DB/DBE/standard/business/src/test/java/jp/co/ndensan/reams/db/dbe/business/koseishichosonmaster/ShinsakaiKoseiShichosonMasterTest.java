@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbe.business.koseishichosonmaster;
 
-import jp.co.ndensan.reams.db.dbe.business.koseishichosonmaster.ShinsakaiKoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -16,10 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

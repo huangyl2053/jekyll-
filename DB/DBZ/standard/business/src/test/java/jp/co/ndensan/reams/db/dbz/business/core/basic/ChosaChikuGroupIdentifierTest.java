@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.dbasic.helper.DbT5225ChosaChikuGroupEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -19,23 +21,20 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChosaChikuGroupIdentifierTest extends DbzTestBase {
 
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static Code 調査地区グループコード;
+    private static LasdecCode 市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_主キー名2;
+        調査地区グループコード = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード;
+        市町村コード = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            ChosaChikuGroupIdentifier sut = new ChosaChikuGroupIdentifier(主キー名1, 主キー名2);
+            ChosaChikuGroupIdentifier sut = new ChosaChikuGroupIdentifier(調査地区グループコード, 市町村コード);
             assertThat(sut, is(serializable()));
         }
     }

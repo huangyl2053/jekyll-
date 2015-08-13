@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7054KanrenHihokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7054KanrenHihokenshaNoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -26,14 +29,14 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
     private static DbT7054KanrenHihokenshaNoEntity KanrenHihokenshaNoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShoKisaiHokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 最新被保険者番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_主キー名2;
+        証記載保険者番号 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_証記載保険者番号;
+        最新被保険者番号 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_最新被保険者番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +46,33 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KanrenHihokenshaNo(null, 主キー名2);
+        public void 証記載保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KanrenHihokenshaNo(null, 最新被保険者番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KanrenHihokenshaNo(主キー名1, null);
+        public void 最新被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KanrenHihokenshaNo(証記載保険者番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7054KanrenHihokenshaNoEntityにセットされている() {
-            sut = new KanrenHihokenshaNo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KanrenHihokenshaNo(証記載保険者番号, 最新被保険者番号);
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.get最新被保険者番号(), is(最新被保険者番号));
         }
 
         @Test
         public void 指定したキーが保持するKanrenHihokenshaNoIdentifierにセットされている() {
-            sut = new KanrenHihokenshaNo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KanrenHihokenshaNo(証記載保険者番号, 最新被保険者番号);
+//            assertThat(sut.identifier().getXXX(), is(証記載保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(最新被保険者番号));
         }
     }
 
@@ -80,8 +83,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +97,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
 
             sut = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(証記載保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(最新被保険者番号));
         }
     }
 
@@ -106,8 +109,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
 
             sut = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
         }
@@ -140,8 +143,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
 
             sut = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
         }
@@ -159,8 +162,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
 
             sut = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
         }
@@ -179,8 +182,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
 
         }
 

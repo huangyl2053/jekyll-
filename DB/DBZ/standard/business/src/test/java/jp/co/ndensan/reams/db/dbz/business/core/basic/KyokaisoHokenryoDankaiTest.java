@@ -5,9 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1007KyokaisoHokenryoDankaiEntity;
@@ -85,9 +82,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyokaisoHokenryoDankaiIdentifierにセットされている() {
             sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, 適用開始年月日);
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
-            assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
+//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+//            assertThat(sut.identifier().getXXX(), is(適用開始年月日));
         }
     }
 
@@ -113,9 +110,9 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
 
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
-            assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
+//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+//            assertThat(sut.identifier().getXXX(), is(適用開始年月日));
         }
     }
 

@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7054KanrenHihokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7054KanrenHihokenshaNoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +26,17 @@ public class KanrenHihokenshaNoBuilderTest extends DbzTestBase {
     private static DbT7054KanrenHihokenshaNoEntity KanrenHihokenshaNoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShoKisaiHokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 最新被保険者番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_主キー名2;
+        証記載保険者番号 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_証記載保険者番号;
+        最新被保険者番号 = DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_最新被保険者番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KanrenHihokenshaNoBuilder sut;
         private static KanrenHihokenshaNo business;
@@ -43,8 +44,8 @@ public class KanrenHihokenshaNoBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KanrenHihokenshaNoEntity = new DbT7054KanrenHihokenshaNoEntity();
-            KanrenHihokenshaNoEntity.setXXX(主キー名1);
-            KanrenHihokenshaNoEntity.setXXX(主キー名2);
+            KanrenHihokenshaNoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            KanrenHihokenshaNoEntity.setSaishinHihokenshaNo(最新被保険者番号);
 
             business = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
 

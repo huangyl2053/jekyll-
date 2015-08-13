@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -23,17 +26,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GappeiJohoTest extends DbzTestBase {
 
-    private static DbT7055GappeiJohoEntity GappeiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static DbT7055GappeiJohoEntity gappeiJohoEntity;
+    private static FlexibleDate 合併年月日;
+    private static RString 地域番号;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7055GappeiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7055GappeiJohoEntityGenerator.DEFAULT_主キー名2;
+        合併年月日 = DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+        地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -42,34 +42,33 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
-        }
-
-//TODO 主キー名を置換してください
-        @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiJoho(null, 主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiJoho(主キー名1, null);
+        public void 合併年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiJoho(null, 地域番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 地域番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiJoho(合併年月日, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7055GappeiJohoEntityにセットされている() {
-            sut = new GappeiJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new GappeiJoho(合併年月日, 地域番号);
+            assertThat(sut.get合併年月日(), is(合併年月日));
+            assertThat(sut.get地域番号(), is(地域番号));
         }
 
         @Test
         public void 指定したキーが保持するGappeiJohoIdentifierにセットされている() {
-            sut = new GappeiJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new GappeiJoho(合併年月日, 地域番号);
+//            assertThat(sut.identifier().getXXX(), is(合併年月日));
+//            assertThat(sut.identifier().getXXX(), is(地域番号));
         }
     }
 
@@ -79,9 +78,9 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -92,10 +91,10 @@ public class GappeiJohoTest extends DbzTestBase {
         @Test
         public void 指定したDbT7055GappeiJohoEntityのキー情報を識別子が持つ() {
 
-            sut = new GappeiJoho(GappeiJohoEntity);
+            sut = new GappeiJoho(gappeiJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(合併年月日));
+//            assertThat(sut.identifier().getXXX(), is(地域番号));
         }
     }
 
@@ -105,46 +104,46 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(GappeiJohoEntity);
+            sut = new GappeiJoho(gappeiJohoEntity);
         }
 
         @Test
         public void get合併年月日は_entityが持つ合併年月日を返す() {
-            assertThat(sut.get合併年月日(), is(GappeiJohoEntity.getGappeiYMD()));
+            assertThat(sut.get合併年月日(), is(gappeiJohoEntity.getGappeiYMD()));
         }
 
         @Test
         public void get地域番号は_entityが持つ地域番号を返す() {
-            assertThat(sut.get地域番号(), is(GappeiJohoEntity.getChiikiNo()));
+            assertThat(sut.get地域番号(), is(gappeiJohoEntity.getChiikiNo()));
         }
 
         @Test
         public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(GappeiJohoEntity.getShichosonCode()));
+            assertThat(sut.get市町村コード(), is(gappeiJohoEntity.getShichosonCode()));
         }
 
         @Test
         public void get合併種類は_entityが持つ合併種類を返す() {
-            assertThat(sut.get合併種類(), is(GappeiJohoEntity.getGappeiShurui()));
+            assertThat(sut.get合併種類(), is(gappeiJohoEntity.getGappeiShurui()));
         }
 
         @Test
         public void get保険者番号は_entityが持つ保険者番号を返す() {
-            assertThat(sut.get保険者番号(), is(GappeiJohoEntity.getHokenshaNo()));
+            assertThat(sut.get保険者番号(), is(gappeiJohoEntity.getHokenshaNo()));
         }
 
         @Test
         public void get旧市町村情報付与終了年月日は_entityが持つ旧市町村情報付与終了年月日を返す() {
-            assertThat(sut.get旧市町村情報付与終了年月日(), is(GappeiJohoEntity.getKyuJohoFuyoToYMD()));
+            assertThat(sut.get旧市町村情報付与終了年月日(), is(gappeiJohoEntity.getKyuJohoFuyoToYMD()));
         }
 
         @Test
         public void get国保連データ連携開始年月日は_entityが持つ国保連データ連携開始年月日を返す() {
-            assertThat(sut.get国保連データ連携開始年月日(), is(GappeiJohoEntity.getKokuhorenDataFromYMD()));
+            assertThat(sut.get国保連データ連携開始年月日(), is(gappeiJohoEntity.getKokuhorenDataFromYMD()));
         }
     }
 
@@ -154,16 +153,16 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(GappeiJohoEntity);
+            sut = new GappeiJoho(gappeiJohoEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(GappeiJohoEntity));
+            assertThat(sut.toEntity(), not(gappeiJohoEntity));
         }
     }
 
@@ -173,11 +172,11 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(GappeiJohoEntity);
+            sut = new GappeiJoho(gappeiJohoEntity);
         }
 
         @Test
@@ -193,9 +192,9 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
 
         }
 
@@ -230,8 +229,8 @@ public class GappeiJohoTest extends DbzTestBase {
     private static class TestSupport {
 
         public static GappeiJoho setStateGappeiJoho(EntityDataState parentState) {
-            GappeiJohoEntity.setState(parentState);
-            return new GappeiJoho(GappeiJohoEntity);
+            gappeiJohoEntity.setState(parentState);
+            return new GappeiJoho(gappeiJohoEntity);
         }
     }
 }

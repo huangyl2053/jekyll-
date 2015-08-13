@@ -1,17 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 償還受領委任契約者テーブルのエンティティクラスです。
@@ -37,7 +37,7 @@ public class DbT3078ShokanJuryoininKeiyakushaEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate shinseiYMD;
     private RString jigyoshaKeiyakuNo;
     private RString keiyakuServiceShurui;
@@ -158,7 +158,7 @@ public class DbT3078ShokanJuryoininKeiyakushaEntity extends DbTableEntityBase<Db
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -167,7 +167,7 @@ public class DbT3078ShokanJuryoininKeiyakushaEntity extends DbTableEntityBase<Db
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

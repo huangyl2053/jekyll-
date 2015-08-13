@@ -4,8 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.view;
 
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV4001JukyushaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -23,17 +28,23 @@ public class JukyushaDaichoAliveBuilderTest extends DbzTestBase {
     private static DbV4001JukyushaDaichoEntity JukyushaDaichoAliveEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 市町村コード;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 履歴番号;
+    private static RString 枝番;
+    private static Code 受給申請事由;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_主キー名2;
+        市町村コード = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+        被保険者番号 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+        履歴番号 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+        枝番 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+        受給申請事由 = DbV4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static JukyushaDaichoAliveBuilder sut;
         private static JukyushaDaichoAlive business;
@@ -47,6 +58,7 @@ public class JukyushaDaichoAliveBuilderTest extends DbzTestBase {
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
             business = sut.set市町村コード(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード).build();
@@ -132,7 +144,7 @@ public class JukyushaDaichoAliveBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の２号特定疾病コードは_設定した値と同じ２号特定疾病コードを返す() {
+        public void 戻り値の二号特定疾病コードは_設定した値と同じ二号特定疾病コードを返す() {
             business = sut.set２号特定疾病コード(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_２号特定疾病コード).build();
             assertThat(business.get２号特定疾病コード(), is(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_２号特定疾病コード));
         }
@@ -462,8 +474,8 @@ public class JukyushaDaichoAliveBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の受給資格証明書発行年月日２は_設定した値と同じ受給資格証明書発行年月日２を返す() {
-            business = sut.set受給資格証明書発行年月日２(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_受給資格証明書発行年月日２).build();
+        public void 戻り値の受給資格証明書発行年月日２は_設定した値と同じ受給資格証明書発行年月日二を返す() {
+            business = sut.set受給資格証明書発行年月日2(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_受給資格証明書発行年月日２).build();
             assertThat(business.get受給資格証明書発行年月日２(), is(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_受給資格証明書発行年月日２));
         }
 
@@ -474,8 +486,8 @@ public class JukyushaDaichoAliveBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の２号申請受理通知書発行年月日は_設定した値と同じ２号申請受理通知書発行年月日を返す() {
-            business = sut.set２号申請受理通知書発行年月日(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_２号申請受理通知書発行年月日).build();
+        public void 戻り値の２号申請受理通知書発行年月日は_設定した値と同じ二号申請受理通知書発行年月日を返す() {
+            business = sut.set二号申請受理通知書発行年月日(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_２号申請受理通知書発行年月日).build();
             assertThat(business.get２号申請受理通知書発行年月日(), is(DbV4001JukyushaDaichoEntityGenerator.DEFAULT_２号申請受理通知書発行年月日));
         }
 

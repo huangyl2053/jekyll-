@@ -5,9 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KyokaisoSochiShinsei;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1013KyokaisoSochiShinseiEntity;
@@ -75,8 +72,8 @@ public class KyokaisoSochiShinseiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyokaisoSochiShinseiIdentifierにセットされている() {
             sut = new KyokaisoSochiShinsei(被保険者番号, 履歴番号);
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(履歴番号));
         }
     }
 
@@ -100,8 +97,8 @@ public class KyokaisoSochiShinseiTest extends DbzTestBase {
         public void 指定したDbT1013KyokaisoSochiShinseiEntityのキー情報を識別子が持つ() {
 
             sut = new KyokaisoSochiShinsei(KyokaisoSochiShinseiEntity);
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
+//            assertThat(sut.identifier().getXXX(), is(履歴番号));
         }
     }
 

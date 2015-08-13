@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
     private static DbT7024KoikiShichosonCodeHenkanPatternEntity KoikiShichosonCodeHenkanPatternEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 広域内市町村番号;
+    private static LasdecCode 市町村コード;
+    private static RString コード区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_主キー名2;
+        広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+        市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+        コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +48,39 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoikiShichosonCodeHenkanPattern(null, 主キー名2);
+        public void 広域内市町村番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiShichosonCodeHenkanPattern(null, 市町村コード, コード区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoikiShichosonCodeHenkanPattern(主キー名1, null);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiShichosonCodeHenkanPattern(広域内市町村番号, null, コード区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コード区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiShichosonCodeHenkanPattern(広域内市町村番号, 市町村コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7024KoikiShichosonCodeHenkanPatternEntityにセットされている() {
-            sut = new KoikiShichosonCodeHenkanPattern(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KoikiShichosonCodeHenkanPattern(広域内市町村番号, 市町村コード, コード区分);
+            assertThat(sut.get広域内市町村番号(), is(広域内市町村番号));
+            assertThat(sut.get市町村コード(), is(市町村コード));
         }
 
         @Test
         public void 指定したキーが保持するKoikiShichosonCodeHenkanPatternIdentifierにセットされている() {
-            sut = new KoikiShichosonCodeHenkanPattern(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KoikiShichosonCodeHenkanPattern(広域内市町村番号, 市町村コード, コード区分);
+//            assertThat(sut.identifier().getXXX(), is(広域内市町村番号));
+//            assertThat(sut.identifier().getXXX(), is(市町村コード));
         }
     }
 
@@ -80,8 +91,9 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +106,8 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
 
             sut = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(広域内市町村番号));
+//            assertThat(sut.identifier().getXXX(), is(市町村コード));
         }
     }
 
@@ -106,8 +118,9 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
 
             sut = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
         }
@@ -190,8 +203,9 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
 
             sut = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
         }
@@ -209,8 +223,9 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
 
             sut = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
         }
@@ -229,8 +244,9 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
 
         }
 

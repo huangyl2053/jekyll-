@@ -4,9 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7034KoikiGaijiHenkanErrorLogEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +28,16 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
     private static DbT7034KoikiGaijiHenkanErrorLogEntity KoikiGaijiHenkanErrorLogEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 処理番号;
+    private static RString 連番;
+    private static RString エラー表示連番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー名2;
+        処理番号 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+        連番 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+        エラー表示連番 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +47,39 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoikiGaijiHenkanErrorLog(null, 主キー名2);
+        public void 処理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiGaijiHenkanErrorLog(null, 連番, エラー表示連番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoikiGaijiHenkanErrorLog(主キー名1, null);
+        public void 連番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiGaijiHenkanErrorLog(処理番号, null, エラー表示連番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void エラー表示連番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KoikiGaijiHenkanErrorLog(処理番号, 連番, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7034KoikiGaijiHenkanErrorLogEntityにセットされている() {
-            sut = new KoikiGaijiHenkanErrorLog(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KoikiGaijiHenkanErrorLog(処理番号, 連番, エラー表示連番);
+            assertThat(sut.get処理番号(), is(処理番号));
+            assertThat(sut.get連番(), is(連番));
         }
 
         @Test
         public void 指定したキーが保持するKoikiGaijiHenkanErrorLogIdentifierにセットされている() {
-            sut = new KoikiGaijiHenkanErrorLog(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KoikiGaijiHenkanErrorLog(処理番号, 連番, エラー表示連番);
+//            assertThat(sut.identifier().getXXX(), is(処理番号));
+//            assertThat(sut.identifier().getXXX(), is(連番));
         }
     }
 
@@ -80,8 +90,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +105,8 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
 
             sut = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(処理番号));
+//            assertThat(sut.identifier().getXXX(), is(連番));
         }
     }
 
@@ -106,8 +117,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
 
             sut = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
         }
@@ -220,8 +232,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
 
             sut = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
         }
@@ -239,8 +252,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
 
             sut = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
         }
@@ -259,8 +273,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
 
         }
 

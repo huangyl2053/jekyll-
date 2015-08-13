@@ -4,8 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -21,21 +24,21 @@ public class GappeiNaiJutokushaShinKyuNoHenkanIdentifierTest extends DbzTestBase
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static RString 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+        履歴番号 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            GappeiNaiJutokushaShinKyuNoHenkanIdentifier sut = new GappeiNaiJutokushaShinKyuNoHenkanIdentifier(主キー名1, 主キー名2);
+            GappeiNaiJutokushaShinKyuNoHenkanIdentifier sut = new GappeiNaiJutokushaShinKyuNoHenkanIdentifier(識別コード, 履歴番号);
             assertThat(sut, is(serializable()));
         }
     }

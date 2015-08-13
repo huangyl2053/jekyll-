@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7027KakushuCodeHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
     private static DbT7027KakushuCodeHenkanEntity KakushuCodeHenkanEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 市町村コード;
+    private static RString コード区分;
+    private static RString 外部コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_主キー名2;
+        市町村コード = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_市町村コード;
+        コード区分 = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_コード区分;
+        外部コード = DbT7027KakushuCodeHenkanEntityGenerator.DEFAULT_外部コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +48,39 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KakushuCodeHenkan(null, 主キー名2);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuCodeHenkan(null, コード区分, 外部コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KakushuCodeHenkan(主キー名1, null);
+        public void コード区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuCodeHenkan(市町村コード, null, 外部コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 外部コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuCodeHenkan(市町村コード, コード区分, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7027KakushuCodeHenkanEntityにセットされている() {
-            sut = new KakushuCodeHenkan(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KakushuCodeHenkan(市町村コード, コード区分, 外部コード);
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.getコード区分(), is(コード区分));
         }
 
         @Test
         public void 指定したキーが保持するKakushuCodeHenkanIdentifierにセットされている() {
-            sut = new KakushuCodeHenkan(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KakushuCodeHenkan(市町村コード, コード区分, 外部コード);
+//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+//            assertThat(sut.identifier().getXXX(), is(コード区分));
         }
     }
 
@@ -80,8 +91,9 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +106,8 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
 
             sut = new KakushuCodeHenkan(KakushuCodeHenkanEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+//            assertThat(sut.identifier().getXXX(), is(コード区分));
         }
     }
 
@@ -106,8 +118,9 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
 
             sut = new KakushuCodeHenkan(KakushuCodeHenkanEntity);
         }
@@ -155,8 +168,9 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
 
             sut = new KakushuCodeHenkan(KakushuCodeHenkanEntity);
         }
@@ -174,8 +188,9 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
 
             sut = new KakushuCodeHenkan(KakushuCodeHenkanEntity);
         }
@@ -194,8 +209,9 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuCodeHenkanEntity = DbT7027KakushuCodeHenkanEntityGenerator.createDbT7027KakushuCodeHenkanEntity();
-            KakushuCodeHenkanEntity.setXXX(主キー名1);
-            KakushuCodeHenkanEntity.setXXX(主キー名2);
+            KakushuCodeHenkanEntity.setShichosonCode(市町村コード);
+            KakushuCodeHenkanEntity.setCodeKubun(コード区分);
+            KakushuCodeHenkanEntity.setGaibuCode(外部コード);
 
         }
 

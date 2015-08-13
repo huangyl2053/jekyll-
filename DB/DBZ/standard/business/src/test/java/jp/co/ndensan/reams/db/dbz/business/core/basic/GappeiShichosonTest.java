@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +30,16 @@ public class GappeiShichosonTest extends DbzTestBase {
     private static DbT7056GappeiShichosonEntity GappeiShichosonEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleDate 合併年月日;
+    private static RString 地域番号;
+    private static LasdecCode 旧市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_主キー名2;
+        合併年月日 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
+        地域番号 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
+        旧市町村コード = DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +49,40 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
+            GappeiShichosonEntity.setKyuShichosonCode(旧市町村コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiShichoson(null, 主キー名2);
+        public void 合併年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiShichoson(null, 地域番号, 旧市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiShichoson(主キー名1, null);
+        public void 地域番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiShichoson(合併年月日, null, 旧市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 旧市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiShichoson(合併年月日, 地域番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7056GappeiShichosonEntityにセットされている() {
-            sut = new GappeiShichoson(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new GappeiShichoson(合併年月日, 地域番号, 旧市町村コード);
+            assertThat(sut.get合併年月日(), is(合併年月日));
+            assertThat(sut.get地域番号(), is(地域番号));
+            assertThat(sut.get旧市町村コード(), is(旧市町村コード));
         }
 
         @Test
         public void 指定したキーが保持するGappeiShichosonIdentifierにセットされている() {
-            sut = new GappeiShichoson(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new GappeiShichoson(合併年月日, 地域番号, 旧市町村コード);
+//            assertThat(sut.identifier().getXXX(), is(合併年月日));
+//            assertThat(sut.identifier().getXXX(), is(地域番号));
         }
     }
 
@@ -80,8 +93,9 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
+            GappeiShichosonEntity.setKyuShichosonCode(旧市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +108,8 @@ public class GappeiShichosonTest extends DbzTestBase {
 
             sut = new GappeiShichoson(GappeiShichosonEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(合併年月日));
+//            assertThat(sut.identifier().getXXX(), is(地域番号));
         }
     }
 
@@ -106,8 +120,8 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
 
             sut = new GappeiShichoson(GappeiShichosonEntity);
         }
@@ -190,8 +204,8 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
 
             sut = new GappeiShichoson(GappeiShichosonEntity);
         }
@@ -209,8 +223,8 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
 
             sut = new GappeiShichoson(GappeiShichosonEntity);
         }
@@ -229,8 +243,8 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Before
         public void setUp() {
             GappeiShichosonEntity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
-            GappeiShichosonEntity.setXXX(主キー名1);
-            GappeiShichosonEntity.setXXX(主キー名2);
+            GappeiShichosonEntity.setGappeiYMD(合併年月日);
+            GappeiShichosonEntity.setChiikiNo(地域番号);
 
         }
 

@@ -5,14 +5,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -86,9 +82,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するHihokenshaDaichoIdentifierにセットされている() {
             sut = new HihokenshaDaicho(被保険者番号, 異動日, 枝番);
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get異動日(), is(異動日));
-            assertThat(sut.identifier().get枝番(), is(枝番));
+//            assertThat(sut.identifier().getxxx(), is(被保険者番号));
+//            assertThat(sut.identifier().getxxx(), is(異動日));
+//            assertThat(sut.identifier().getxxx(), is(枝番));
         }
     }
 
@@ -114,9 +110,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
 
-            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-            assertThat(sut.identifier().get異動日(), is(異動日));
-            assertThat(sut.identifier().get枝番(), is(枝番));
+//            assertThat(sut.identifier().getxxx(), is(被保険者番号));
+//            assertThat(sut.identifier().getxxx(), is(異動日));
+//            assertThat(sut.identifier().getxxx(), is(枝番));
         }
     }
 
