@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-//import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,11 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * 被保険者台帳の検索機能を他クラスに実装する場合は、メンバとしてこのクラスを持ち、それに処理を移譲するように実装します。
  *
  * @author n8178 城間篤人
- * @param <T>
- * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho IHihokenshaDaicho}を実装したクラス
+ * @param <T> {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho IHihokenshaDaicho}を実装したクラス
  */
 //public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
-public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
+public class HihokenshaDaichoFinderBase<T extends HihokenshaDaicho> {
 
     private final HihokenshaDaichoDac dac;
 
@@ -68,7 +66,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 市町村コード 市町村コード
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード) {
+    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード) {
         return dac.select被保険者台帳一覧(市町村コード);
     }
 
@@ -79,7 +77,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return dac.select被保険者台帳一覧(市町村コード, 被保険者番号);
 
     }

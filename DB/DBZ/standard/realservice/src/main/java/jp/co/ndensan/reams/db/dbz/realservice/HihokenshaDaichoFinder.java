@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
 
-    private final HihokenshaDaichoFinderBase<HihokenshaDaichoModel> finder;
+    private final HihokenshaDaichoFinderBase<HihokenshaDaicho> finder;
 
     /**
      * コンストラクタです。
