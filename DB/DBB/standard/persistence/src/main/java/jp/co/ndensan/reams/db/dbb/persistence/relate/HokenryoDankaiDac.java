@@ -2,23 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankai;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -32,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8156 宮本 康
  */
-public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
+public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -45,10 +44,10 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
      * @param 賦課年度 賦課年度
      * @param 段階インデックス 段階インデックス
      * @param ランク区分 ランク区分
-     * @return HokenryoDankaiModel
+     * @return DbT2013HokenryoDankaiEntity
      */
     @Transaction
-    public HokenryoDankaiModel select保険料段階ByKey(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
+    public DbT2013HokenryoDankaiEntity select保険料段階ByKey(FlexibleYear 賦課年度, RString 段階インデックス, RString ランク区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
@@ -61,20 +60,20 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
      * 引数に合致する保険料段階のリストを返します。
      *
      * @param 賦課年度 賦課年度
-     * @return List<HokenryoDankaiModel>
+     * @return List<DbT2013HokenryoDankaiEntity>
      */
     @Transaction
-    public List<HokenryoDankaiModel> select保険料段階一覧(FukaNendo 賦課年度) {
+    public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2013HokenryoDankaiEntity> 保険料段階List = accessor.select().
                 table(DbT2013HokenryoDankai.class).
-                where(eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度.value())).
+                where(eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度)).
                 toList(DbT2013HokenryoDankaiEntity.class);
 
-        List<HokenryoDankaiModel> modelList = new ArrayList<>();
+        List<DbT2013HokenryoDankaiEntity> modelList = new ArrayList<>();
 
         for (DbT2013HokenryoDankaiEntity 保険料段階 : 保険料段階List) {
             modelList.add(createModel(保険料段階));
@@ -88,10 +87,10 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
      *
      * @param 賦課年度 賦課年度
      * @param 段階区分 段階区分
-     * @return List<HokenryoDankaiModel>
+     * @return List<DbT2013HokenryoDankaiEntity>
      */
     @Transaction
-    public List<HokenryoDankaiModel> select保険料段階一覧(FukaNendo 賦課年度, RString 段階区分) {
+    public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度, RString 段階区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階区分, UrSystemErrorMessages.値がnull.getReplacedMessage("段階区分"));
@@ -100,11 +99,11 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
         List<DbT2013HokenryoDankaiEntity> 保険料段階List = accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                                eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度.value()),
+                                eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度),
                                 eq(DbT2013HokenryoDankai.dankaiKubun, 段階区分))).
                 toList(DbT2013HokenryoDankaiEntity.class);
 
-        List<HokenryoDankaiModel> modelList = new ArrayList<>();
+        List<DbT2013HokenryoDankaiEntity> modelList = new ArrayList<>();
 
         for (DbT2013HokenryoDankaiEntity 保険料段階 : 保険料段階List) {
             modelList.add(createModel(保険料段階));
@@ -119,10 +118,10 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
      * @param 賦課年度 賦課年度
      * @param 市町村コード 市町村コード
      * @param 段階区分 段階区分
-     * @return List<HokenryoDankaiModel>
+     * @return List<DbT2013HokenryoDankaiEntity>
      */
     @Transaction
-    public List<HokenryoDankaiModel> select保険料段階一覧(FukaNendo 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
+    public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -137,12 +136,12 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
         List<DbT2013HokenryoDankaiEntity> 保険料段階List = accessor.select().
                 table(DbT2013HokenryoDankai.class).
                 where(and(
-                                eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度.value()),
+                                eq(DbT2013HokenryoDankai.fukaNendo, 賦課年度),
                                 eq(DbT2013HokenryoDankai.rankuKubun, entity.getRankKubun()),
                                 eq(DbT2013HokenryoDankai.dankaiKubun, 段階区分))).
                 toList(DbT2013HokenryoDankaiEntity.class);
 
-        List<HokenryoDankaiModel> modelList = new ArrayList<>();
+        List<DbT2013HokenryoDankaiEntity> modelList = new ArrayList<>();
 
         for (DbT2013HokenryoDankaiEntity 保険料段階 : 保険料段階List) {
             modelList.add(createModel(保険料段階));
@@ -151,16 +150,16 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
         return modelList;
     }
 
-    private HokenryoDankaiModel createModel(DbT2013HokenryoDankaiEntity 保険料段階エンティティ) {
+    private DbT2013HokenryoDankaiEntity createModel(DbT2013HokenryoDankaiEntity 保険料段階エンティティ) {
         if (保険料段階エンティティ == null) {
             return null;
         }
 
-        return new HokenryoDankaiModel(保険料段階エンティティ);
+        return new DbT2013HokenryoDankaiEntity();
     }
 
     @Override
-    public int insert(HokenryoDankaiModel data) {
+    public int insert(DbT2013HokenryoDankaiEntity data) {
 
         int result = 0;
 
@@ -168,33 +167,33 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
             return result;
         }
 
-        result = 保険料段階Dac.insert(data.getEntity());
+        result = 保険料段階Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int update(HokenryoDankaiModel data) {
+    public int update(DbT2013HokenryoDankaiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 保険料段階Dac.update(data.getEntity());
+        result = 保険料段階Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int delete(HokenryoDankaiModel data) {
+    public int delete(DbT2013HokenryoDankaiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 保険料段階Dac.delete(data.getEntity());
+        result = 保険料段階Dac.save(data);
 
         return result;
     }
@@ -202,17 +201,17 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
     /**
      * 物理削除を行います。
      *
-     * @param data HokenryoDankaiModel
+     * @param data DbT2013HokenryoDankaiEntity
      * @return int 件数
      */
-    public int deletePhysical(HokenryoDankaiModel data) {
+    public int deletePhysical(DbT2013HokenryoDankaiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 保険料段階Dac.deletePhysical(data.getEntity());
+        result = 保険料段階Dac.save(data);
 
         return result;
     }

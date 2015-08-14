@@ -6,8 +6,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -31,13 +34,14 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT300
     /**
      * 主キーで居宅給付計画事業者作成を取得します。
      *
+     * @param 被保険者番号 被保険者番号
      * @param 対象年月 TaishoYM
      * @param 履歴番号 RirekiNo
      * @return DbT3006KyotakuKeikakuJigyoshaSakuseiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT3006KyotakuKeikakuJigyoshaSakuseiEntity selectByKey(
+    public DbT3006KyotakuKeikakuJigyoshaSakuseiEntity selectByKey(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号) throws NullPointerException {
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
@@ -48,6 +52,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDac implements ISaveable<DbT300
         return accessor.select().
                 table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                 where(and(
+                                eq(hihokenshano, 被保険者番号),
                                 eq(taishoYM, 対象年月),
                                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);

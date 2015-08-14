@@ -13,16 +13,17 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.届出日設定なし;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.取得日より前;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.喪失日より後;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と前の履歴データの変更日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と次の履歴データの変更日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と住所地特例履歴の期間が重複する履歴がある;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が未入力;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が１号到達以外年齢が40歳未満;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日が未入力;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と住所地特例履歴の期間が重複する履歴がある;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と前の履歴データの変更日の期間が重複;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と次の履歴データの変更日の期間が重複;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.届出日設定なし;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.最新の取得日として登録不可;
 import jp.co.ndensan.reams.ur.urz.model.context.IContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -36,9 +37,9 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
 
     private final ValidationSpec spec;
     private final ViewExecutionStatus state;
-    private final Optional<HihokenshaDaichoModel> 前履歴;
-    private final Optional<HihokenshaDaichoModel> 次履歴;
-    private final IItemList<HihokenshaDaichoModel> 全履歴;
+    private final Optional<DbT1001HihokenshaDaichoEntity> 前履歴;
+    private final Optional<DbT1001HihokenshaDaichoEntity> 次履歴;
+    private final IItemList<DbT1001HihokenshaDaichoEntity> 全履歴;
 
     /**
      * コンストラクタです。
@@ -49,7 +50,7 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
      * @param 全履歴 全履歴
      */
     public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state,
-            Optional<HihokenshaDaichoModel> 前履歴, Optional<HihokenshaDaichoModel> 次履歴, IItemList<HihokenshaDaichoModel> 全履歴) {
+            Optional<DbT1001HihokenshaDaichoEntity> 前履歴, Optional<DbT1001HihokenshaDaichoEntity> 次履歴, IItemList<DbT1001HihokenshaDaichoEntity> 全履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -64,7 +65,7 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
      * @param 前履歴 前履歴
      * @param 次履歴 次履歴
      */
-    public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state, Optional<HihokenshaDaichoModel> 前履歴, Optional<HihokenshaDaichoModel> 次履歴) {
+    public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state, Optional<DbT1001HihokenshaDaichoEntity> 前履歴, Optional<DbT1001HihokenshaDaichoEntity> 次履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -94,27 +95,27 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
     /**
      * 資格変更情報の前の（処理日時が古い）履歴を返します。
      *
-     * @return Optional<HihokenshaDaichoModel>
+     * @return Optional<DbT1001HihokenshaDaichoEntity>
      */
-    public Optional<HihokenshaDaichoModel> get前履歴() {
+    public Optional<DbT1001HihokenshaDaichoEntity> get前履歴() {
         return this.前履歴;
     }
 
     /**
      * 資格変更情報の次の（処理日時が新しい）履歴を表示します。
      *
-     * @return Optional<HihokenshaDaichoModel>
+     * @return Optional<DbT1001HihokenshaDaichoEntity>
      */
-    public Optional<HihokenshaDaichoModel> get次履歴() {
+    public Optional<DbT1001HihokenshaDaichoEntity> get次履歴() {
         return this.次履歴;
     }
 
     /**
      * 資格変更情報の全履歴を返します。
      *
-     * @return IItemList<HihokenshaDaichoModel>
+     * @return IItemList<DbT1001HihokenshaDaichoEntity>
      */
-    public IItemList<HihokenshaDaichoModel> get全履歴() {
+    public IItemList<DbT1001HihokenshaDaichoEntity> get全履歴() {
         return this.全履歴;
     }
 
