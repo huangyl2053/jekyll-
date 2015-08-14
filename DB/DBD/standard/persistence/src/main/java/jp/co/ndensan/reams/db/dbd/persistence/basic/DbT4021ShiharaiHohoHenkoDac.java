@@ -2,17 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenko;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenko.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenko.kanriKubun;
+import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenko.shoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenko;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenko.*;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import static jp.co.ndensan.reams.ur.urz.entity.basic.UrT0186Memo.shoriTimestamp;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

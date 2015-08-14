@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMaster.shishoCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMaster.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -34,16 +34,16 @@ public class DbT7052KoseiShichosonShishoMasterDac implements IModifiable<DbT7052
     /**
      * 主キーで構成市町村支所マスタを取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     * @param 市町村コード ShichosonCode
      * @param 支所コード ShishoCode
      * @return DbT7052KoseiShichosonShishoMasterEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT7052KoseiShichosonShishoMasterEntity selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号,
+            ShichosonCode 市町村コード,
             ShishoCode 支所コード) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -51,7 +51,7 @@ public class DbT7052KoseiShichosonShishoMasterDac implements IModifiable<DbT7052
         return accessor.select().
                 table(DbT7052KoseiShichosonShishoMaster.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(shichosonCode, 市町村コード),
                                 eq(shishoCode, 支所コード))).
                 toObject(DbT7052KoseiShichosonShishoMasterEntity.class);
     }

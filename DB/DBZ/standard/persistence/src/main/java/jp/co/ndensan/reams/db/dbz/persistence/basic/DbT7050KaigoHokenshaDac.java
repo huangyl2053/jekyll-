@@ -42,8 +42,7 @@ public class DbT7050KaigoHokenshaDac implements ISaveable<DbT7050KaigoHokenshaEn
 
         return accessor.select().
                 table(DbT7050KaigoHokensha.class).
-                where(and(
-                                eq(koikiHokenshaShichosonCode, 広域保険者市町村コード))).
+                where(eq(koikiHokenshaShichosonCode, 広域保険者市町村コード)).
                 toObject(DbT7050KaigoHokenshaEntity.class);
     }
 

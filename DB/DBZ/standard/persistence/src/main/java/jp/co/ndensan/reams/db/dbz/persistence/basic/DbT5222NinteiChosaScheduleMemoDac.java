@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import static java.util.Objects.requireNonNull;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV4001JukyushaDaicho.remban;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;

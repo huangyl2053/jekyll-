@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei.ketteishaUketoriYM;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei.serviceTeikyoYM;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei.shoKisaiHokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKettei.tsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.ketteishaUketoriYM;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.tsuchishoNo;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
