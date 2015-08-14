@@ -46,24 +46,24 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            LasdecCode 主キー2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
-            RString 主キー3 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
-            sut.get広域市町村管理コード変換パターン(null, 主キー2, 主キー3);
+        public void 引数の広域内市町村番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+            RString コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
+            sut.get広域市町村管理コード変換パターン(null, 市町村コード, コード区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
-            RString 主キー3 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
-            sut.get広域市町村管理コード変換パターン(主キー1, null, 主キー3);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            RString 広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+            RString コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
+            sut.get広域市町村管理コード変換パターン(広域内市町村番号, null, コード区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
-            LasdecCode 主キー2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
-            sut.get広域市町村管理コード変換パターン(主キー1, 主キー2, null);
+        public void 引数のコード区分にnullを指定した場合_NullPointerExceptionが発生する() {
+            RString 広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+            LasdecCode 市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+            sut.get広域市町村管理コード変換パターン(広域内市町村番号, 市町村コード, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
@@ -71,10 +71,10 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(RString.class), any(LasdecCode.class), any(RString.class))).thenReturn(null);
 
-            RString 主キー1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
-            LasdecCode 主キー2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
-            RString 主キー3 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
-            KoikiShichosonCodeHenkanPattern result = sut.get広域市町村管理コード変換パターン(主キー1, 主キー2, 主キー3);
+            RString 広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+            LasdecCode 市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+            RString コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
+            KoikiShichosonCodeHenkanPattern result = sut.get広域市町村管理コード変換パターン(広域内市町村番号, 市町村コード, コード区分);
 
             assertThat(result, is(nullValue()));
         }
@@ -83,12 +83,12 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
         public void 検索結果が存在する場合() {
             DbT7024KoikiShichosonCodeHenkanPatternEntity entity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
             when(dac.selectByKey(any(RString.class), any(LasdecCode.class), any(RString.class))).thenReturn(entity);
-            RString 主キー1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
-            LasdecCode 主キー2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
-            RString 主キー3 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
-            KoikiShichosonCodeHenkanPattern result = sut.get広域市町村管理コード変換パターン(主キー1, 主キー2, 主キー3);
+            RString 広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+            LasdecCode 市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+            RString コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
+            KoikiShichosonCodeHenkanPattern result = sut.get広域市町村管理コード変換パターン(広域内市町村番号, 市町村コード, コード区分);
 
-            assertThat(result.get主キー1().value(), is(DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号));
+            assertThat(result.get広域内市町村番号(), is(DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号));
         }
     }
 
@@ -112,7 +112,7 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
             List<KoikiShichosonCodeHenkanPattern> result = sut.get広域市町村管理コード変換パターン一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号));
+            assertThat(result.get(0).get広域内市町村番号(), is(DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号));
         }
     }
 
@@ -145,7 +145,7 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
             DbT7024KoikiShichosonCodeHenkanPatternEntity entity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
             entity.initializeMd5();
             KoikiShichosonCodeHenkanPattern 広域市町村管理コード変換パターン = new KoikiShichosonCodeHenkanPattern(entity);
-            広域市町村管理コード変換パターン = 広域市町村管理コード変換パターン.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域市町村管理コード変換パターン = 広域市町村管理コード変換パターン.createBuilderForEdit().set広域内市町村番号(new RString("広域内市町村番号を変更")).build();
 
             assertThat(sut.save広域市町村管理コード変換パターン(広域市町村管理コード変換パターン), is(true));
         }
@@ -157,7 +157,7 @@ public class KoikiShichosonCodeHenkanPatternManagerTest {
             DbT7024KoikiShichosonCodeHenkanPatternEntity entity = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.createDbT7024KoikiShichosonCodeHenkanPatternEntity();
             entity.initializeMd5();
             KoikiShichosonCodeHenkanPattern 広域市町村管理コード変換パターン = new KoikiShichosonCodeHenkanPattern(entity);
-            広域市町村管理コード変換パターン = 広域市町村管理コード変換パターン.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域市町村管理コード変換パターン = 広域市町村管理コード変換パターン.createBuilderForEdit().set広域内市町村番号(new RString("広域内市町村番号を変更")).build();
 
             assertThat(sut.save広域市町村管理コード変換パターン(広域市町村管理コード変換パターン), is(false));
         }

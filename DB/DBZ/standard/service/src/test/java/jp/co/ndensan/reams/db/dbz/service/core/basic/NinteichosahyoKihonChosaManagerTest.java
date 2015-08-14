@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5203NinteichosahyoKihonChosaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5203NinteichosahyoKihonChosaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -45,26 +45,20 @@ public class NinteichosahyoKihonChosaManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー2;
-            sut.get認定調査票_基本調査(null, 主キー2
+        public void 引数の申請書管理番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            int 要介護認定調査履歴番号 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_要介護認定調査履歴番号;
+            sut.get認定調査票_基本調査(null, 要介護認定調査履歴番号
             );
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー1;
-            sut.get認定調査票_基本調査(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー2;
-            NinteichosahyoKihonChosa result = sut.get認定調査票_基本調査(主キー1, 主キー2
+            ShinseishoKanriNo 申請書管理番号 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_申請書管理番号;
+            int 要介護認定調査履歴番号 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_要介護認定調査履歴番号;
+            NinteichosahyoKihonChosa result = sut.get認定調査票_基本調査(申請書管理番号, 要介護認定調査履歴番号
             );
 
             assertThat(result, is(nullValue()));
@@ -73,14 +67,14 @@ public class NinteichosahyoKihonChosaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5203NinteichosahyoKihonChosaEntity entity = DbT5203NinteichosahyoKihonChosaEntityGenerator.createDbT5203NinteichosahyoKihonChosaEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー2;
-            NinteichosahyoKihonChosa result = sut.get認定調査票_基本調査(主キー1, 主キー2
+            ShinseishoKanriNo 申請書管理番号 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_申請書管理番号;
+            int 要介護認定調査履歴番号 = DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_要介護認定調査履歴番号;
+            NinteichosahyoKihonChosa result = sut.get認定調査票_基本調査(申請書管理番号, 要介護認定調査履歴番号
             );
 
-            assertThat(result.get主キー1().value(), is(DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get申請書管理番号().value(), is(DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -104,7 +98,7 @@ public class NinteichosahyoKihonChosaManagerTest {
             List<NinteichosahyoKihonChosa> result = sut.get認定調査票_基本調査一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get申請書管理番号().value(), is(DbT5203NinteichosahyoKihonChosaEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -139,7 +133,7 @@ public class NinteichosahyoKihonChosaManagerTest {
             DbT5203NinteichosahyoKihonChosaEntity entity = DbT5203NinteichosahyoKihonChosaEntityGenerator.createDbT5203NinteichosahyoKihonChosaEntity();
             entity.initializeMd5();
             NinteichosahyoKihonChosa 認定調査票_基本調査 = new NinteichosahyoKihonChosa(entity);
-            認定調査票_基本調査 = 認定調査票_基本調査.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査票_基本調査 = 認定調査票_基本調査.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save認定調査票_基本調査(認定調査票_基本調査), is(true)
             );
@@ -152,7 +146,7 @@ public class NinteichosahyoKihonChosaManagerTest {
             DbT5203NinteichosahyoKihonChosaEntity entity = DbT5203NinteichosahyoKihonChosaEntityGenerator.createDbT5203NinteichosahyoKihonChosaEntity();
             entity.initializeMd5();
             NinteichosahyoKihonChosa 認定調査票_基本調査 = new NinteichosahyoKihonChosa(entity);
-            認定調査票_基本調査 = 認定調査票_基本調査.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査票_基本調査 = 認定調査票_基本調査.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save認定調査票_基本調査(認定調査票_基本調査), is(false)
             );

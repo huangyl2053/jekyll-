@@ -9,10 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5912ShujiiJohoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -40,29 +43,29 @@ public class ShujiiJohoManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get主治医情報 extends FdaTestBase {
+    public static class get主治医情報 extends DbzTestBase {
+
+        LasdecCode 市町村コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_市町村コード;
+        ShujiiIryokikanCode 主治医医療機関コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+        ShujiiCode 主治医コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医コード;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー2;
-            sut.get主治医情報(null, 主キー2);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get主治医情報(null, 主治医医療機関コード, 主治医コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー1;
-            sut.get主治医情報(主キー1, null);
+        public void 引数のShujiiIryokikanCodeにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get主治医情報(市町村コード, null, 主治医コード);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class), any(ShujiiCode.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiJoho result = sut.get主治医情報(主キー1, 主キー2);
+            ShujiiJoho result = sut.get主治医情報(市町村コード, 主治医医療機関コード, 主治医コード);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +73,16 @@ public class ShujiiJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5912ShujiiJohoEntity entity = DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class), any(ShujiiCode.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiJoho result = sut.get主治医情報(主キー1, 主キー2);
+            ShujiiJoho result = sut.get主治医情報(市町村コード, 主治医医療機関コード, 主治医コード);
 
-            assertThat(result.get主キー1().value(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get市町村コード().value(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get主治医情報一覧 extends FdaTestBase {
+    public static class get主治医情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +101,11 @@ public class ShujiiJohoManagerTest {
             List<ShujiiJoho> result = sut.get主治医情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save主治医情報 extends XxxTestBase {
+    public static class save主治医情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +134,7 @@ public class ShujiiJohoManagerTest {
             DbT5912ShujiiJohoEntity entity = DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity();
             entity.initializeMd5();
             ShujiiJoho 主治医情報 = new ShujiiJoho(entity);
-            主治医情報 = 主治医情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            主治医情報 = 主治医情報.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save主治医情報(主治医情報), is(true));
         }
@@ -145,7 +146,7 @@ public class ShujiiJohoManagerTest {
             DbT5912ShujiiJohoEntity entity = DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity();
             entity.initializeMd5();
             ShujiiJoho 主治医情報 = new ShujiiJoho(entity);
-            主治医情報 = 主治医情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            主治医情報 = 主治医情報.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save主治医情報(主治医情報), is(false));
         }

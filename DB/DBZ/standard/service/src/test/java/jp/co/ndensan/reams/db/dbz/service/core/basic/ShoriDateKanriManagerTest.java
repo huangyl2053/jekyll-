@@ -10,8 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +44,32 @@ public class ShoriDateKanriManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get処理日付管理マスタ extends FdaTestBase {
+    public static class get処理日付管理マスタ extends DbzTestBase {
+
+        SubGyomuCode サブ業務コード = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
+        LasdecCode 市町村コード = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_市町村コード;
+        RString 処理名 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理名;
+        RString 処理枝番 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理枝番;
+        FlexibleYear 年度 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度;
+        RString 年度内連番 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度内連番;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー2;
-            sut.get処理日付管理マスタ(null, 主キー2);
+        public void 引数のサブ業務コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get処理日付管理マスタ(null, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー1;
-            sut.get処理日付管理マスタ(主キー1, null);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get処理日付管理マスタ(サブ業務コード, null, 処理名, 処理枝番, 年度, 年度内連番);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(LasdecCode.class), any(RString.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー2;
-            ShoriDateKanri result = sut.get処理日付管理マスタ(主キー1, 主キー2);
+            ShoriDateKanri result = sut.get処理日付管理マスタ(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +77,16 @@ public class ShoriDateKanriManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7022ShoriDateKanriEntity entity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(LasdecCode.class), any(RString.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー2;
-            ShoriDateKanri result = sut.get処理日付管理マスタ(主キー1, 主キー2);
+            ShoriDateKanri result = sut.get処理日付管理マスタ(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
 
-            assertThat(result.get主キー1().value(), is(DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.getサブ業務コード().value(), is(DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get処理日付管理マスタ一覧 extends FdaTestBase {
+    public static class get処理日付管理マスタ一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +105,11 @@ public class ShoriDateKanriManagerTest {
             List<ShoriDateKanri> result = sut.get処理日付管理マスタ一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).getサブ業務コード().value(), is(DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
-    public static class save処理日付管理マスタ extends XxxTestBase {
+    public static class save処理日付管理マスタ extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +138,7 @@ public class ShoriDateKanriManagerTest {
             DbT7022ShoriDateKanriEntity entity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
             entity.initializeMd5();
             ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanri(entity);
-            処理日付管理マスタ = 処理日付管理マスタ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            処理日付管理マスタ = 処理日付管理マスタ.createBuilderForEdit().set処理名(new RString("処理名を変更")).build();
 
             assertThat(sut.save処理日付管理マスタ(処理日付管理マスタ), is(true));
         }
@@ -145,7 +150,7 @@ public class ShoriDateKanriManagerTest {
             DbT7022ShoriDateKanriEntity entity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
             entity.initializeMd5();
             ShoriDateKanri 処理日付管理マスタ = new ShoriDateKanri(entity);
-            処理日付管理マスタ = 処理日付管理マスタ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            処理日付管理マスタ = 処理日付管理マスタ.createBuilderForEdit().set処理名(new RString("処理名を変更")).build();
 
             assertThat(sut.save処理日付管理マスタ(処理日付管理マスタ), is(false));
         }

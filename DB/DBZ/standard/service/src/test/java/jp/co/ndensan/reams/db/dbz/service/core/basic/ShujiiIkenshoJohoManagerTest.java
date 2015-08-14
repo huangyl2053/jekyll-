@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5302ShujiiIkenshoJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5302ShujiiIkenshoJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -45,25 +45,19 @@ public class ShujiiIkenshoJohoManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー2;
-            sut.get要介護認定主治医意見書情報(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー1;
-            sut.get要介護認定主治医意見書情報(主キー1, null);
+        public void 引数の申請書管理番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            int 主治医意見書作成依頼履歴番号 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号;
+            sut.get要介護認定主治医意見書情報(null, 主治医意見書作成依頼履歴番号);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiIkenshoJoho result = sut.get要介護認定主治医意見書情報(主キー1, 主キー2);
+            ShinseishoKanriNo 申請書管理番号 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_申請書管理番号;
+            int 主治医意見書作成依頼履歴番号 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号;
+            ShujiiIkenshoJoho result = sut.get要介護認定主治医意見書情報(申請書管理番号, 主治医意見書作成依頼履歴番号);
 
             assertThat(result, is(nullValue()));
         }
@@ -71,13 +65,13 @@ public class ShujiiIkenshoJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5302ShujiiIkenshoJohoEntity entity = DbT5302ShujiiIkenshoJohoEntityGenerator.createDbT5302ShujiiIkenshoJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiIkenshoJoho result = sut.get要介護認定主治医意見書情報(主キー1, 主キー2);
+            ShinseishoKanriNo 申請書管理番号 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_申請書管理番号;
+            int 主治医意見書作成依頼履歴番号 = DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号;
+            ShujiiIkenshoJoho result = sut.get要介護認定主治医意見書情報(申請書管理番号, 主治医意見書作成依頼履歴番号);
 
-            assertThat(result.get主キー1().value(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get申請書管理番号().value(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -101,7 +95,7 @@ public class ShujiiIkenshoJohoManagerTest {
             List<ShujiiIkenshoJoho> result = sut.get要介護認定主治医意見書情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get申請書管理番号().value(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -134,7 +128,7 @@ public class ShujiiIkenshoJohoManagerTest {
             DbT5302ShujiiIkenshoJohoEntity entity = DbT5302ShujiiIkenshoJohoEntityGenerator.createDbT5302ShujiiIkenshoJohoEntity();
             entity.initializeMd5();
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(entity);
-            要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save要介護認定主治医意見書情報(要介護認定主治医意見書情報), is(true));
         }
@@ -146,7 +140,7 @@ public class ShujiiIkenshoJohoManagerTest {
             DbT5302ShujiiIkenshoJohoEntity entity = DbT5302ShujiiIkenshoJohoEntityGenerator.createDbT5302ShujiiIkenshoJohoEntity();
             entity.initializeMd5();
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(entity);
-            要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            要介護認定主治医意見書情報 = 要介護認定主治医意見書情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save要介護認定主治医意見書情報(要介護認定主治医意見書情報), is(false));
         }
