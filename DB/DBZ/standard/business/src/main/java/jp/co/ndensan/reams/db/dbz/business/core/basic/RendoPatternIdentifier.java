@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 連動パターンの識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value TODO
-//@lombok.AllArgsConstructor TODO
+@lombok.Value
 public class RendoPatternIdentifier implements Serializable {
 
     private final LasdecCode 送信元市町村コード;
