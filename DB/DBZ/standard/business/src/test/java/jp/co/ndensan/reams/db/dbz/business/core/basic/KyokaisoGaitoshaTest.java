@@ -72,8 +72,8 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyokaisoGaitoshaIdentifierにセットされている() {
             sut = new KyokaisoGaitosha(被保険者番号, 履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -98,8 +98,8 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
 
             sut = new KyokaisoGaitosha(KyokaisoGaitoshaEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

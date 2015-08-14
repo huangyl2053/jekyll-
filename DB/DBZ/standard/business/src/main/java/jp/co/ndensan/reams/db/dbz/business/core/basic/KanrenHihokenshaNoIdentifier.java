@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 /**
  * 関連被保険者番号の識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class KanrenHihokenshaNoIdentifier implements Serializable {
 
     private final ShoKisaiHokenshaNo 証記載保険者番号;

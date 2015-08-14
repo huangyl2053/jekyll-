@@ -71,8 +71,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKanrenHihokenshaNoIdentifierにセットされている() {
             sut = new KanrenHihokenshaNo(証記載保険者番号, 最新被保険者番号);
-//            assertThat(sut.identifier().getXXX(), is(証記載保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(最新被保険者番号));
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().get最新被保険者番号(), is(最新被保険者番号));
         }
     }
 
@@ -97,8 +97,8 @@ public class KanrenHihokenshaNoTest extends DbzTestBase {
 
             sut = new KanrenHihokenshaNo(KanrenHihokenshaNoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(証記載保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(最新被保険者番号));
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().get最新被保険者番号(), is(最新被保険者番号));
         }
     }
 

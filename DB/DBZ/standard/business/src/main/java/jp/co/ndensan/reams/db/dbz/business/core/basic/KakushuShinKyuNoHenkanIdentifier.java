@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 各種新旧番号変換テーブルの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class KakushuShinKyuNoHenkanIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

@@ -62,7 +62,7 @@ public class RojinHokenJukyushaJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するRojinHokenJukyushaJohoIdentifierにセットされている() {
             sut = new RojinHokenJukyushaJoho(識別コード);
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
         }
     }
 
@@ -87,7 +87,7 @@ public class RojinHokenJukyushaJohoTest extends DbzTestBase {
 
             sut = new RojinHokenJukyushaJoho(RojinHokenJukyushaJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
         }
     }
 

@@ -79,8 +79,8 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKakushuCodeHenkanIdentifierにセットされている() {
             sut = new KakushuCodeHenkan(市町村コード, コード区分, 外部コード);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(コード区分));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().getコード区分(), is(コード区分));
         }
     }
 
@@ -106,8 +106,8 @@ public class KakushuCodeHenkanTest extends DbzTestBase {
 
             sut = new KakushuCodeHenkan(KakushuCodeHenkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(コード区分));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().getコード区分(), is(コード区分));
         }
     }
 

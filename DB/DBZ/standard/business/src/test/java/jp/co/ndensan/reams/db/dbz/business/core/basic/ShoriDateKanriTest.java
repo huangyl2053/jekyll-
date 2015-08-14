@@ -80,13 +80,21 @@ public class ShoriDateKanriTest extends DbzTestBase {
             sut = new ShoriDateKanri(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
             assertThat(sut.getサブ業務コード(), is(サブ業務コード));
             assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get処理名(), is(処理名));
+            assertThat(sut.get処理枝番(), is(処理枝番));
+            assertThat(sut.get年度(), is(年度));
+            assertThat(sut.get年度内連番(), is(年度内連番));
         }
 
         @Test
         public void 指定したキーが保持するShoriDateKanriIdentifierにセットされている() {
             sut = new ShoriDateKanri(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get処理名(), is(処理名));
+            assertThat(sut.identifier().get処理枝番(), is(処理枝番));
+            assertThat(sut.identifier().get年度(), is(年度));
+            assertThat(sut.identifier().get年度内連番(), is(年度内連番));
         }
     }
 
@@ -115,8 +123,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
 
             sut = new ShoriDateKanri(ShoriDateKanriEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get処理名(), is(処理名));
+            assertThat(sut.identifier().get処理枝番(), is(処理枝番));
+            assertThat(sut.identifier().get年度(), is(年度));
+            assertThat(sut.identifier().get年度内連番(), is(年度内連番));
         }
     }
 

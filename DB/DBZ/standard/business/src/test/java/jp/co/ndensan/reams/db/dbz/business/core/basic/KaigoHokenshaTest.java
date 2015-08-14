@@ -62,7 +62,7 @@ public class KaigoHokenshaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKaigoHokenshaIdentifierにセットされている() {
             sut = new KaigoHokensha(広域保険者市町村コード);
-//            assertThat(sut.identifier().getXXX(), is(広域保険者市町村コード));
+            assertThat(sut.identifier().get広域保険者市町村コード(), is(広域保険者市町村コード));
         }
     }
 
@@ -87,7 +87,7 @@ public class KaigoHokenshaTest extends DbzTestBase {
 
             sut = new KaigoHokensha(KaigoHokenshaEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(広域保険者市町村コード));
+            assertThat(sut.identifier().get広域保険者市町村コード(), is(広域保険者市町村コード));
         }
     }
 

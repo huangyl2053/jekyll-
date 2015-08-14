@@ -73,8 +73,9 @@ public class ChosainJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するChosainJohoIdentifierにセットされている() {
             sut = new ChosainJoho(市町村コード, 認定調査委託先コード, 認定調査員コード);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get認定調査員コード(), is(認定調査員コード));
         }
     }
 
@@ -97,8 +98,9 @@ public class ChosainJohoTest extends DbzTestBase {
 
             sut = new ChosainJoho(chosainJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get認定調査員コード(), is(認定調査員コード));
         }
     }
 

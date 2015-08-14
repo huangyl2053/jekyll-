@@ -82,9 +82,9 @@ public class ShotokuTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するShotokuIdentifierにセットされている() {
             sut = new Shotoku(所得年度, 識別コード, 履歴番号);
-//            assertThat(sut.identifier().get所得年度(), is(所得年度));
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get所得年度(), is(所得年度));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -110,9 +110,9 @@ public class ShotokuTest extends DbzTestBase {
 
             sut = new Shotoku(ShotokuEntity);
 
-//            assertThat(sut.identifier().get所得年度(), is(所得年度));
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get所得年度(), is(所得年度));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

@@ -87,13 +87,21 @@ public class NinteichosahyoTokkijikoTest extends DbzTestBase {
             sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.get原本マスク区分(), is(原本マスク区分));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosahyoTokkijikoIdentifierにセットされている() {
             sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.identifier().get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.identifier().get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 
@@ -116,8 +124,12 @@ public class NinteichosahyoTokkijikoTest extends DbzTestBase {
 
             sut = new NinteichosahyoTokkijiko(NinteichosahyoTokkijikoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.identifier().get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.identifier().get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 

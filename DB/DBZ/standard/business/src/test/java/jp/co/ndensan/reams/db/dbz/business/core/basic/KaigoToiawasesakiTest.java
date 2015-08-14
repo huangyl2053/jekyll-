@@ -71,8 +71,8 @@ public class KaigoToiawasesakiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKaigoToiawasesakiIdentifierにセットされている() {
             sut = new KaigoToiawasesaki(サブ業務コード, 帳票分類ID);
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(帳票分類ID));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票分類ID(), is(帳票分類ID));
         }
     }
 
@@ -97,8 +97,8 @@ public class KaigoToiawasesakiTest extends DbzTestBase {
 
             sut = new KaigoToiawasesaki(KaigoToiawasesakiEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(帳票分類ID));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票分類ID(), is(帳票分類ID));
         }
     }
 

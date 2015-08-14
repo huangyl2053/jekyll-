@@ -82,9 +82,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するTashichosonJushochiTokureiIdentifierにセットされている() {
             sut = new TashichosonJushochiTokurei(識別コード, 異動日, 枝番);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get異動日(), is(異動日));
-//            assertThat(sut.identifier().get枝番(), is(枝番));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -109,9 +109,9 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         public void 指定したDbT1003TashichosonJushochiTokureiEntityのキー情報を識別子が持つ() {
 
             sut = new TashichosonJushochiTokurei(TashichosonJushochiTokureiEntity);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get異動日(), is(異動日));
-//            assertThat(sut.identifier().get枝番(), is(枝番));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 

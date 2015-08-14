@@ -79,8 +79,8 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKakushuShinKyuNoHenkanIdentifierにセットされている() {
             sut = new KakushuShinKyuNoHenkan(被保険者番号, 番号区分, 旧番号);
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(番号区分));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get番号区分(), is(番号区分));
         }
     }
 
@@ -106,8 +106,8 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
 
             sut = new KakushuShinKyuNoHenkan(KakushuShinKyuNoHenkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(番号区分));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get番号区分(), is(番号区分));
         }
     }
 

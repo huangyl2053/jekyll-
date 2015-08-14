@@ -60,7 +60,7 @@ public class NinteiKekkaJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteiKekkaJohoIdentifierにセットされている() {
             sut = new NinteiKekkaJoho(申請書管理番号);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 
@@ -84,7 +84,7 @@ public class NinteiKekkaJohoTest extends DbzTestBase {
 
             sut = new NinteiKekkaJoho(NinteiKekkaJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 

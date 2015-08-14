@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
@@ -18,13 +18,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Restrictions;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 合併市町村のデータアクセスクラスのテストクラスです。
@@ -102,7 +102,7 @@ public class GappeiShichosonDacTest extends DbzTestDacBase {
         entity.setKyuShichosonCode(new LasdecCode(String.format("%1$06d", no)));
         entity.setUnyoKaishiYMD(new FlexibleDate("20140201"));
         entity.setUnyoShuryoYMD(new FlexibleDate("20140301"));
-        entity.setKyuHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000001")));
+        entity.setKyuHokenshaNo(new HokenshaNo(new RString("00000001")));
         entity.setKyuShichosonMeisho(new RString("電算市"));
         entity.setTodofukenMeisho(new RString("電算県"));
         entity.setGunMeisho(new RString("電算郡"));

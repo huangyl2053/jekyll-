@@ -81,8 +81,10 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するChikuNinteiChosainIdentifierにセットされている() {
             sut = new ChikuNinteiChosain(調査地区コード, 認定調査委託先コード, 認定調査員コード, 市町村コード);
-//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get調査地区コード(), is(調査地区コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get認定調査員コード(), is(認定調査員コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -105,8 +107,10 @@ public class ChikuNinteiChosainTest extends DbzTestBase {
 
             sut = new ChikuNinteiChosain(chikuNinteiChosainEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get調査地区コード(), is(調査地区コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get認定調査員コード(), is(認定調査員コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 

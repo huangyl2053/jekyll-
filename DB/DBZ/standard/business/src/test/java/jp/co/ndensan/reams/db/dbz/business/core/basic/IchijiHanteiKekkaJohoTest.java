@@ -61,7 +61,7 @@ public class IchijiHanteiKekkaJohoTest extends DbzTestBase {
         public void 指定したキーが保持するIchijiHanteiKekkaJohoIdentifierにセットされている() {
             sut = new IchijiHanteiKekkaJoho(申請書管理番号);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 
@@ -85,7 +85,7 @@ public class IchijiHanteiKekkaJohoTest extends DbzTestBase {
 
             sut = new IchijiHanteiKekkaJoho(IchijiHanteiKekkaJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 

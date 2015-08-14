@@ -68,8 +68,8 @@ public class NinteichosaItakusakiJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteichosaItakusakiJohoIdentifierにセットされている() {
             sut = new NinteichosaItakusakiJoho(市町村コード, 認定調査委託先コード);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
         }
     }
 
@@ -92,8 +92,8 @@ public class NinteichosaItakusakiJohoTest extends DbzTestBase {
 
             sut = new NinteichosaItakusakiJoho(NinteichosaItakusakiJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(認定調査委託先コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
         }
     }
 

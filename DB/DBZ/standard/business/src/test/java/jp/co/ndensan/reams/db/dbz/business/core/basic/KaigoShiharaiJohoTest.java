@@ -80,8 +80,8 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKaigoShiharaiJohoIdentifierにセットされている() {
             sut = new KaigoShiharaiJoho(識別コード, 科目コード, 決定年月日);
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(科目コード));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get科目コード(), is(科目コード));
         }
     }
 
@@ -107,8 +107,8 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
 
             sut = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(科目コード));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get科目コード(), is(科目コード));
         }
     }
 

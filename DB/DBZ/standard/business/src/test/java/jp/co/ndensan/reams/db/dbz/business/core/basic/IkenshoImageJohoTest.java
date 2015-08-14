@@ -83,8 +83,11 @@ public class IkenshoImageJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するIkenshoImageJohoIdentifierにセットされている() {
             sut = new IkenshoImageJoho(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分, 取込みページ番号);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(帳票ID));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
+            assertThat(sut.identifier().getマスキングデータ区分(), is(マスキングデータ区分));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
+            assertThat(sut.identifier().get取込みページ番号(), is(取込みページ番号));
         }
     }
 

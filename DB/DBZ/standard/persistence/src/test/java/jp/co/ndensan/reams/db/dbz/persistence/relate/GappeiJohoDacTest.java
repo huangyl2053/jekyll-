@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiJohoModel;
@@ -99,7 +99,7 @@ public class GappeiJohoDacTest extends DbzTestDacBase {
         entity.setChiikiNo(new RString(String.format("%1$02d", no)));
         entity.setShichosonCode(new LasdecCode("000001"));
         entity.setGappeiShurui(new RString("1"));
-        entity.setHokenshaNo(new ShoKisaiHokenshaNo(new RString("000001")));
+        entity.setHokenshaNo(new HokenshaNo(new RString("000001")));
         entity.setKyuJohoFuyoToYMD(new FlexibleDate("20140201"));
         entity.setKokuhorenDataFromYMD(new FlexibleDate("20140301"));
         return entity;

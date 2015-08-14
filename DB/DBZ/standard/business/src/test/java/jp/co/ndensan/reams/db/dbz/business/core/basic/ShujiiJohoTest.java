@@ -71,13 +71,15 @@ public class ShujiiJohoTest extends DbzTestBase {
             sut = new ShujiiJoho(市町村コード, 主治医医療機関コード, 主治医コード);
             assertThat(sut.get市町村コード(), is(市町村コード));
             assertThat(sut.get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.get主治医コード(), is(主治医コード));
         }
 
         @Test
         public void 指定したキーが保持するShujiiJohoIdentifierにセットされている() {
             sut = new ShujiiJoho(市町村コード, 主治医医療機関コード, 主治医コード);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get主治医コード(), is(主治医コード));
         }
     }
 
@@ -100,8 +102,9 @@ public class ShujiiJohoTest extends DbzTestBase {
 
             sut = new ShujiiJoho(ShujiiJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get主治医コード(), is(主治医コード));
         }
     }
 

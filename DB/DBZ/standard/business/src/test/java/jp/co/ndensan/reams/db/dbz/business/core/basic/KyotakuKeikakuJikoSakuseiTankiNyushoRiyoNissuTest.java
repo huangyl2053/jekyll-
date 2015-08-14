@@ -83,9 +83,9 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuTest extends DbzTestBa
         @Test
         public void 指定したキーが保持するKyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifierにセットされている() {
             sut = new KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(被保険者番号, 対象年月, 履歴番号);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -110,9 +110,9 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuTest extends DbzTestBa
         public void 指定したDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityのキー情報を識別子が持つ() {
 
             sut = new KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

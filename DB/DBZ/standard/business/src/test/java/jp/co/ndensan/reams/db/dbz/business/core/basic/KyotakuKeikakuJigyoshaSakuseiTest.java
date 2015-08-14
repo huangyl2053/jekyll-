@@ -82,9 +82,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyotakuKeikakuJigyoshaSakuseiIdentifierにセットされている() {
             sut = new KyotakuKeikakuJigyoshaSakusei(被保険者番号, 対象年月, 履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(対象年月));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -110,9 +110,9 @@ public class KyotakuKeikakuJigyoshaSakuseiTest extends DbzTestBase {
 
             sut = new KyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakuseiEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(対象年月));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

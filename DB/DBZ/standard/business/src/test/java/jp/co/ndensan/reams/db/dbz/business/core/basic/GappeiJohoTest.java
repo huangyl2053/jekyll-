@@ -67,8 +67,8 @@ public class GappeiJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するGappeiJohoIdentifierにセットされている() {
             sut = new GappeiJoho(合併年月日, 地域番号);
-//            assertThat(sut.identifier().getXXX(), is(合併年月日));
-//            assertThat(sut.identifier().getXXX(), is(地域番号));
+            assertThat(sut.identifier().get合併年月日(), is(合併年月日));
+            assertThat(sut.identifier().get地域番号(), is(地域番号));
         }
     }
 
@@ -93,8 +93,8 @@ public class GappeiJohoTest extends DbzTestBase {
 
             sut = new GappeiJoho(gappeiJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(合併年月日));
-//            assertThat(sut.identifier().getXXX(), is(地域番号));
+            assertThat(sut.identifier().get合併年月日(), is(合併年月日));
+            assertThat(sut.identifier().get地域番号(), is(地域番号));
         }
     }
 

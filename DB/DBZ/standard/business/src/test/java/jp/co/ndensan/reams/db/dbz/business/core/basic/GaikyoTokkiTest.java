@@ -58,8 +58,8 @@ public class GaikyoTokkiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するGaikyoTokkiIdentifierにセットされている() {
             sut = new GaikyoTokki(申請書管理番号, 認定調査依頼履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 
@@ -82,8 +82,8 @@ public class GaikyoTokkiTest extends DbzTestBase {
 
             sut = new GaikyoTokki(gaikyoTokkiEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 

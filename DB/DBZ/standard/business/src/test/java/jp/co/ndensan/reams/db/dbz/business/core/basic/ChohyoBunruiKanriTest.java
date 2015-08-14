@@ -67,8 +67,8 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するChohyoBunruiKanriIdentifierにセットされている() {
             sut = new ChohyoBunruiKanri(サブ業務コード, 帳票ID);
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(帳票ID));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
         }
     }
 
@@ -93,8 +93,8 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
             sut = new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(サブ業務コード));
-//            assertThat(sut.identifier().getXXX(), is(帳票ID));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
         }
     }
 

@@ -117,8 +117,8 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKaigoSetaiIdentifierにセットされている() {
             sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(管理識別区分));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get管理識別区分(), is(管理識別区分));
         }
     }
 
@@ -149,8 +149,8 @@ public class KaigoSetaiTest extends DbzTestBase {
 
             sut = new KaigoSetai(KaigoSetaiEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(管理識別区分));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get管理識別区分(), is(管理識別区分));
         }
     }
 

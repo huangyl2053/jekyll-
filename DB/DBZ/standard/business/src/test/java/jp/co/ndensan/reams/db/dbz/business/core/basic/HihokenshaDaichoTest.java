@@ -82,9 +82,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するHihokenshaDaichoIdentifierにセットされている() {
             sut = new HihokenshaDaicho(被保険者番号, 異動日, 枝番);
-//            assertThat(sut.identifier().getxxx(), is(被保険者番号));
-//            assertThat(sut.identifier().getxxx(), is(異動日));
-//            assertThat(sut.identifier().getxxx(), is(枝番));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -110,9 +110,9 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
             sut = new HihokenshaDaicho(HihokenshaDaichoEntity);
 
-//            assertThat(sut.identifier().getxxx(), is(被保険者番号));
-//            assertThat(sut.identifier().getxxx(), is(異動日));
-//            assertThat(sut.identifier().getxxx(), is(枝番));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 

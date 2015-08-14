@@ -81,9 +81,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するTekiyoJogaishaIdentifierにセットされている() {
             sut = new TekiyoJogaisha(識別コード, 異動日, 枝番);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get異動日(), is(異動日));
-//            assertThat(sut.identifier().get枝番(), is(枝番));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 
@@ -109,9 +109,9 @@ public class TekiyoJogaishaTest extends DbzTestBase {
 
             sut = new TekiyoJogaisha(TekiyoJogaishaEntity);
 
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get異動日(), is(異動日));
-//            assertThat(sut.identifier().get枝番(), is(枝番));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get異動日(), is(異動日));
+            assertThat(sut.identifier().get枝番(), is(枝番));
         }
     }
 

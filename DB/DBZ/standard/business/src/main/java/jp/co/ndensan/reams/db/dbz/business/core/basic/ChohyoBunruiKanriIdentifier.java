@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 /**
  * 帳票分類管理の識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class ChohyoBunruiKanriIdentifier implements Serializable {
 
     private final SubGyomuCode サブ業務コード;

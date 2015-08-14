@@ -71,8 +71,8 @@ public class RendoHoryuTokuteiJushoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するRendoHoryuTokuteiJushoIdentifierにセットされている() {
             sut = new RendoHoryuTokuteiJusho(管理番号, 市町村コード);
-//            assertThat(sut.identifier().getXXX(), is(管理番号));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get管理番号(), is(管理番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -97,8 +97,8 @@ public class RendoHoryuTokuteiJushoTest extends DbzTestBase {
 
             sut = new RendoHoryuTokuteiJusho(RendoHoryuTokuteiJushoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(管理番号));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get管理番号(), is(管理番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 

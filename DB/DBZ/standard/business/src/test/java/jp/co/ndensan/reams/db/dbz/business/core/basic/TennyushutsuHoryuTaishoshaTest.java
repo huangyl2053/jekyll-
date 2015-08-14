@@ -72,8 +72,8 @@ public class TennyushutsuHoryuTaishoshaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するTennyushutsuHoryuTaishoshaIdentifierにセットされている() {
             sut = new TennyushutsuHoryuTaishosha(識別コード, 履歴番号);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -98,8 +98,8 @@ public class TennyushutsuHoryuTaishoshaTest extends DbzTestBase {
 
             sut = new TennyushutsuHoryuTaishosha(TennyushutsuHoryuTaishoshaEntity);
 
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

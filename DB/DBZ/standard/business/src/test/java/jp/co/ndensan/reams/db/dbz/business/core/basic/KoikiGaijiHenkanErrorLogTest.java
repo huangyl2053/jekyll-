@@ -73,13 +73,15 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
             sut = new KoikiGaijiHenkanErrorLog(処理番号, 連番, エラー表示連番);
             assertThat(sut.get処理番号(), is(処理番号));
             assertThat(sut.get連番(), is(連番));
+            assertThat(sut.getエラー表示連番(), is(エラー表示連番));
         }
 
         @Test
         public void 指定したキーが保持するKoikiGaijiHenkanErrorLogIdentifierにセットされている() {
             sut = new KoikiGaijiHenkanErrorLog(処理番号, 連番, エラー表示連番);
-//            assertThat(sut.identifier().getXXX(), is(処理番号));
-//            assertThat(sut.identifier().getXXX(), is(連番));
+            assertThat(sut.identifier().get処理番号(), is(処理番号));
+            assertThat(sut.identifier().get連番(), is(連番));
+            assertThat(sut.identifier().getエラー表示連番(), is(エラー表示連番));
         }
     }
 
@@ -105,8 +107,9 @@ public class KoikiGaijiHenkanErrorLogTest extends DbzTestBase {
 
             sut = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(処理番号));
-//            assertThat(sut.identifier().getXXX(), is(連番));
+            assertThat(sut.identifier().get処理番号(), is(処理番号));
+            assertThat(sut.identifier().get連番(), is(連番));
+            assertThat(sut.identifier().getエラー表示連番(), is(エラー表示連番));
         }
     }
 

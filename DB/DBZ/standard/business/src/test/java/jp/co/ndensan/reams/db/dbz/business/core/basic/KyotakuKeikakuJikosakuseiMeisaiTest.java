@@ -122,13 +122,13 @@ public class KyotakuKeikakuJikosakuseiMeisaiTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyotakuKeikakuJikosakuseiMeisaiIdentifierにセットされている() {
             sut = new KyotakuKeikakuJikosakuseiMeisai(被保険者番号, 対象年月, 履歴番号, 居宅サービス区分, サービス提供事業者, サービス種類コード, サービス項目コード);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
-//            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
-//            assertThat(sut.identifier().getサービス提供事業者番号(), is(サービス提供事業者));
-//            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
-//            assertThat(sut.identifier().getサービス項目コード(), is(サービス項目コード));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
+            assertThat(sut.identifier().getサービス提供事業者番号(), is(サービス提供事業者));
+            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
+            assertThat(sut.identifier().getサービス項目コード(), is(サービス項目コード));
         }
     }
 
@@ -157,13 +157,13 @@ public class KyotakuKeikakuJikosakuseiMeisaiTest extends DbzTestBase {
         public void 指定したDbT3008KyotakuKeikakuJikosakuseiMeisaiEntityのキー情報を識別子が持つ() {
 
             sut = new KyotakuKeikakuJikosakuseiMeisai(KyotakuKeikakuJikosakuseiMeisaiEntity);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
-//            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
-//            assertThat(sut.identifier().getサービス提供事業者番号(), is(サービス提供事業者));
-//            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
-//            assertThat(sut.identifier().getサービス項目コード(), is(サービス項目コード));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get居宅サービス区分(), is(居宅サービス区分));
+            assertThat(sut.identifier().getサービス提供事業者番号(), is(サービス提供事業者));
+            assertThat(sut.identifier().getサービス種類コード(), is(サービス種類コード));
+            assertThat(sut.identifier().getサービス項目コード(), is(サービス項目コード));
         }
     }
 

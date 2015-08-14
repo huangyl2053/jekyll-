@@ -64,8 +64,8 @@ public class NinteichosahyoShisetsuRiyoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteichosahyoShisetsuRiyoIdentifierにセットされている() {
             sut = new NinteichosahyoShisetsuRiyo(申請書管理番号, 認定調査依頼履歴番号, 連番);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 
@@ -88,8 +88,8 @@ public class NinteichosahyoShisetsuRiyoTest extends DbzTestBase {
 
             sut = new NinteichosahyoShisetsuRiyo(NinteichosahyoShisetsuRiyoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 

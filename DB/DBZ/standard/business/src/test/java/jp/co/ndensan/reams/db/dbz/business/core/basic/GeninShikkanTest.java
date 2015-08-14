@@ -62,8 +62,8 @@ public class GeninShikkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するGeninShikkanIdentifierにセットされている() {
             sut = new GeninShikkan(申請書管理番号, 連番);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(連番));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get連番(), is(連番));
         }
     }
 
@@ -86,8 +86,8 @@ public class GeninShikkanTest extends DbzTestBase {
 
             sut = new GeninShikkan(GeninShikkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(連番));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get連番(), is(連番));
         }
     }
 

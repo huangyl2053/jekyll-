@@ -72,8 +72,8 @@ public class ShikakuShutokuJogaishaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するShikakuShutokuJogaishaIdentifierにセットされている() {
             sut = new ShikakuShutokuJogaisha(識別コード, 履歴番号);
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -98,8 +98,8 @@ public class ShikakuShutokuJogaishaTest extends DbzTestBase {
 
             sut = new ShikakuShutokuJogaisha(ShikakuShutokuJogaishaEntity);
 
-//            assertThat(sut.identifier().get識別コード(), is(識別コード));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

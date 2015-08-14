@@ -71,8 +71,8 @@ public class ShinKyuHihokenshaNoHenkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するShinKyuHihokenshaNoHenkanIdentifierにセットされている() {
             sut = new ShinKyuHihokenshaNoHenkan(市町村コード, 旧番号);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(旧番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧番号(), is(旧番号));
         }
     }
 
@@ -97,8 +97,8 @@ public class ShinKyuHihokenshaNoHenkanTest extends DbzTestBase {
 
             sut = new ShinKyuHihokenshaNoHenkan(ShinKyuHihokenshaNoHenkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(旧番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧番号(), is(旧番号));
         }
     }
 

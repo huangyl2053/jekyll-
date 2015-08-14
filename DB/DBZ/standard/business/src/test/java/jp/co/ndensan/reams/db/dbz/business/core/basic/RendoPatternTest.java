@@ -85,13 +85,19 @@ public class RendoPatternTest extends DbzTestBase {
             sut = new RendoPattern(送信元市町村コード, 送信先市町村コード, 種別, 有効開始年月日, 有効終了年月日);
             assertThat(sut.get送信元市町村コード(), is(送信元市町村コード));
             assertThat(sut.get送信先市町村コード(), is(送信先市町村コード));
+            assertThat(sut.get種別(), is(種別));
+            assertThat(sut.get有効開始年月日(), is(有効開始年月日));
+            assertThat(sut.get有効終了年月日(), is(有効終了年月日));
         }
 
         @Test
         public void 指定したキーが保持するRendoPatternIdentifierにセットされている() {
             sut = new RendoPattern(送信元市町村コード, 送信先市町村コード, 種別, 有効開始年月日, 有効終了年月日);
-//            assertThat(sut.identifier().getXXX(), is(送信元市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(送信先市町村コード));
+            assertThat(sut.identifier().get送信元市町村コード(), is(送信元市町村コード));
+            assertThat(sut.identifier().get送信先市町村コード(), is(送信先市町村コード));
+            assertThat(sut.identifier().get種別(), is(種別));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始年月日));
+            assertThat(sut.identifier().get有効終了年月日(), is(有効終了年月日));
         }
     }
 
@@ -114,8 +120,11 @@ public class RendoPatternTest extends DbzTestBase {
 
             sut = new RendoPattern(RendoPatternEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(送信元市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(送信先市町村コード));
+            assertThat(sut.identifier().get送信元市町村コード(), is(送信元市町村コード));
+            assertThat(sut.identifier().get送信先市町村コード(), is(送信先市町村コード));
+            assertThat(sut.identifier().get種別(), is(種別));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始年月日));
+            assertThat(sut.identifier().get有効終了年月日(), is(有効終了年月日));
         }
     }
 

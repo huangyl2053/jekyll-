@@ -70,8 +70,8 @@ public class ImageTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するImageIdentifierにセットされている() {
             sut = new Image(申請書管理番号, 取込ページ番号, 原本マスク分);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(原本マスク分));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get原本マスク分(), is(原本マスク分));
         }
     }
 
@@ -94,8 +94,8 @@ public class ImageTest extends DbzTestBase {
 
             sut = new Image(ImageEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(原本マスク分));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get原本マスク分(), is(原本マスク分));
         }
     }
 

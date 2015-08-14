@@ -64,8 +64,8 @@ public class NinteichosahyoChosaItemTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteichosahyoChosaItemIdentifierにセットされている() {
             sut = new NinteichosahyoChosaItem(申請書管理番号, 要介護認定調査履歴番号, 連番);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
         }
     }
 
@@ -88,8 +88,8 @@ public class NinteichosahyoChosaItemTest extends DbzTestBase {
 
             sut = new NinteichosahyoChosaItem(NinteichosahyoChosaItemEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
         }
     }
 

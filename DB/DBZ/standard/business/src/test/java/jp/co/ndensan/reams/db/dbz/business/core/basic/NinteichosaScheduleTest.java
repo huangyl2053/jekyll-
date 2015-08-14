@@ -77,8 +77,8 @@ public class NinteichosaScheduleTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteichosaScheduleIdentifierにセットされている() {
             sut = new NinteichosaSchedule(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
-//            assertThat(sut.identifier().getXXX(), is(認定調査予定年月日));
-//            assertThat(sut.identifier().getXXX(), is(認定調査予定開始時間));
+            assertThat(sut.identifier().get認定調査予定年月日(), is(認定調査予定年月日));
+            assertThat(sut.identifier().get認定調査予定開始時間(), is(認定調査予定開始時間));
         }
     }
 
@@ -101,8 +101,8 @@ public class NinteichosaScheduleTest extends DbzTestBase {
 
             sut = new NinteichosaSchedule(NinteichosaScheduleEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(認定調査予定年月日));
-//            assertThat(sut.identifier().getXXX(), is(認定調査予定開始時間));
+            assertThat(sut.identifier().get認定調査予定年月日(), is(認定調査予定年月日));
+            assertThat(sut.identifier().get認定調査予定開始時間(), is(認定調査予定開始時間));
         }
     }
 

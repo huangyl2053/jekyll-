@@ -79,8 +79,8 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKoikiShichosonCodeHenkanPatternIdentifierにセットされている() {
             sut = new KoikiShichosonCodeHenkanPattern(広域内市町村番号, 市町村コード, コード区分);
-//            assertThat(sut.identifier().getXXX(), is(広域内市町村番号));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get広域内市町村番号(), is(広域内市町村番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -106,8 +106,8 @@ public class KoikiShichosonCodeHenkanPatternTest extends DbzTestBase {
 
             sut = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(広域内市町村番号));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get広域内市町村番号(), is(広域内市町村番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 

@@ -62,8 +62,8 @@ public class NinteichosahyoKihonChosaScoreTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するNinteichosahyoKihonChosaScoreIdentifierにセットされている() {
             sut = new NinteichosahyoKihonChosaScore(申請書管理番号, 要介護認定調査履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
         }
     }
 
@@ -86,8 +86,8 @@ public class NinteichosahyoKihonChosaScoreTest extends DbzTestBase {
 
             sut = new NinteichosahyoKihonChosaScore(NinteichosahyoKihonChosaScoreEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
         }
     }
 

@@ -72,8 +72,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するIryohokenKanyuJokyoIdentifierにセットされている() {
             sut = new IryohokenKanyuJokyo(識別コード, 履歴番号);
-//            assertThat(sut.identifier().getxxx(), is(識別コード));
-//            assertThat(sut.identifier().getxxx(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -98,8 +98,8 @@ public class IryohokenKanyuJokyoTest extends DbzTestBase {
 
             sut = new IryohokenKanyuJokyo(IryohokenKanyuJokyoEntity);
 
-//            assertThat(sut.identifier().getxxx(),is(識別コード));
-//            assertThat(sut.identifier().getxxx(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

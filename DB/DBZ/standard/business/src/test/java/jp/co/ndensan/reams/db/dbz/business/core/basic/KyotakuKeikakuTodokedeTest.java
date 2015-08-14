@@ -82,9 +82,9 @@ public class KyotakuKeikakuTodokedeTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKyotakuKeikakuTodokedeIdentifierにセットされている() {
             sut = new KyotakuKeikakuTodokede(被保険者番号, 対象年月, 履歴番号);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -109,9 +109,9 @@ public class KyotakuKeikakuTodokedeTest extends DbzTestBase {
         public void 指定したDbT3005KyotakuKeikakuTodokedeEntityのキー情報を識別子が持つ() {
 
             sut = new KyotakuKeikakuTodokede(KyotakuKeikakuTodokedeEntity);
-//            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
-//            assertThat(sut.identifier().get対象年月(), is(対象年月));
-//            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get対象年月(), is(対象年月));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

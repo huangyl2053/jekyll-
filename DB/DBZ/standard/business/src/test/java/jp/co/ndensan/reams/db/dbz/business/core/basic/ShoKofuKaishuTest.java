@@ -70,13 +70,15 @@ public class ShoKofuKaishuTest extends DbzTestBase {
             sut = new ShoKofuKaishu(被保険者番号, 交付証種類, 履歴番号);
             assertThat(sut.get被保険者番号(), is(被保険者番号));
             assertThat(sut.get交付証種類(), is(交付証種類));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するShoKofuKaishuIdentifierにセットされている() {
             sut = new ShoKofuKaishu(被保険者番号, 交付証種類, 履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(交付証種類));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get交付証種類(), is(交付証種類));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -102,8 +104,9 @@ public class ShoKofuKaishuTest extends DbzTestBase {
 
             sut = new ShoKofuKaishu(ShoKofuKaishuEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(被保険者番号));
-//            assertThat(sut.identifier().getXXX(), is(交付証種類));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get交付証種類(), is(交付証種類));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

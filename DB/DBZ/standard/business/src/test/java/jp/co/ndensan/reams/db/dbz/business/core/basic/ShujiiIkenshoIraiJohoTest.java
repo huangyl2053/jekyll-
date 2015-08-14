@@ -62,8 +62,8 @@ public class ShujiiIkenshoIraiJohoTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するShujiiIkenshoIraiJohoIdentifierにセットされている() {
             sut = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(主治医意見書作成依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
         }
     }
 
@@ -86,8 +86,8 @@ public class ShujiiIkenshoIraiJohoTest extends DbzTestBase {
 
             sut = new ShujiiIkenshoIraiJoho(ShujiiIkenshoIraiJohoEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-//            assertThat(sut.identifier().getXXX(), is(主治医意見書作成依頼履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
         }
     }
 

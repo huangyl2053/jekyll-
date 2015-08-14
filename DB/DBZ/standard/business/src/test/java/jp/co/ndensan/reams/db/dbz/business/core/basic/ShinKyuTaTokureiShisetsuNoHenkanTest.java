@@ -71,8 +71,8 @@ public class ShinKyuTaTokureiShisetsuNoHenkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するShinKyuTaTokureiShisetsuNoHenkanIdentifierにセットされている() {
             sut = new ShinKyuTaTokureiShisetsuNoHenkan(市町村コード, 旧他特例施設番号);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(旧他特例施設番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧他特例施設番号(), is(旧他特例施設番号));
         }
     }
 

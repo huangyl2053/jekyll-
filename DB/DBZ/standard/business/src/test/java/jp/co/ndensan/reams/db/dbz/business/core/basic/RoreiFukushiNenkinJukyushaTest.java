@@ -71,8 +71,8 @@ public class RoreiFukushiNenkinJukyushaTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するRoreiFukushiNenkinJukyushaIdentifierにセットされている() {
             sut = new RoreiFukushiNenkinJukyusha(識別コード, 受給開始年月日);
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(受給開始年月日));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get受給開始年月日(), is(受給開始年月日));
         }
     }
 
@@ -97,8 +97,8 @@ public class RoreiFukushiNenkinJukyushaTest extends DbzTestBase {
 
             sut = new RoreiFukushiNenkinJukyusha(RoreiFukushiNenkinJukyushaEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(受給開始年月日));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get受給開始年月日(), is(受給開始年月日));
         }
     }
 

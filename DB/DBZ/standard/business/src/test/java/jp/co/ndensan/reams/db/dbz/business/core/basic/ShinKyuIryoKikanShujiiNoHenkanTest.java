@@ -69,13 +69,15 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
             sut = new ShinKyuIryoKikanShujiiNoHenkan(市町村コード, 旧医療機関番号, 旧主治医番号);
             assertThat(sut.get市町村コード(), is(市町村コード));
             assertThat(sut.get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.get旧主治医番号(), is(旧主治医番号));
         }
 
         @Test
         public void 指定したキーが保持するShinKyuIryoKikanShujiiNoHenkanIdentifierにセットされている() {
             sut = new ShinKyuIryoKikanShujiiNoHenkan(市町村コード, 旧医療機関番号, 旧主治医番号);
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(旧医療機関番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.identifier().get旧主治医番号(), is(旧主治医番号));
         }
     }
 
@@ -101,8 +103,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
 
             sut = new ShinKyuIryoKikanShujiiNoHenkan(ShinKyuIryoKikanShujiiNoHenkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
-//            assertThat(sut.identifier().getXXX(), is(旧医療機関番号));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.identifier().get旧主治医番号(), is(旧主治医番号));
         }
     }
 

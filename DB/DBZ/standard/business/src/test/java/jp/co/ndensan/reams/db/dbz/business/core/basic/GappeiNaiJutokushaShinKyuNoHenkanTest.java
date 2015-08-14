@@ -71,8 +71,8 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するGappeiNaiJutokushaShinKyuNoHenkanIdentifierにセットされている() {
             sut = new GappeiNaiJutokushaShinKyuNoHenkan(識別コード, 履歴番号);
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -97,8 +97,8 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
             sut = new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(識別コード));
-//            assertThat(sut.identifier().getXXX(), is(履歴番号));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 

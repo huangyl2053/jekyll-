@@ -81,8 +81,9 @@ public class GappeiShichosonTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するGappeiShichosonIdentifierにセットされている() {
             sut = new GappeiShichoson(合併年月日, 地域番号, 旧市町村コード);
-//            assertThat(sut.identifier().getXXX(), is(合併年月日));
-//            assertThat(sut.identifier().getXXX(), is(地域番号));
+            assertThat(sut.identifier().get合併年月日(), is(合併年月日));
+            assertThat(sut.identifier().get地域番号(), is(地域番号));
+            assertThat(sut.identifier().get旧市町村コード(), is(旧市町村コード));
         }
     }
 
@@ -108,8 +109,9 @@ public class GappeiShichosonTest extends DbzTestBase {
 
             sut = new GappeiShichoson(GappeiShichosonEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(合併年月日));
-//            assertThat(sut.identifier().getXXX(), is(地域番号));
+            assertThat(sut.identifier().get合併年月日(), is(合併年月日));
+            assertThat(sut.identifier().get地域番号(), is(地域番号));
+            assertThat(sut.identifier().get旧市町村コード(), is(旧市町村コード));
         }
     }
 

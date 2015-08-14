@@ -81,9 +81,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するKaigoJogaiTokureiTaishoShisetsuIdentifierにセットされている() {
             sut = new KaigoJogaiTokureiTaishoShisetsu(事業者種別, 事業者番号, 有効開始日時);
-//            assertThat(sut.identifier().getXXX(), is(事業者種別));
-//            assertThat(sut.identifier().getXXX(), is(事業者番号));
-//            assertThat(sut.identifier().getXXX(), is(有効開始日時));
+            assertThat(sut.identifier().get事業者種別(), is(事業者種別));
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始日時));
         }
     }
 
@@ -109,9 +109,9 @@ public class KaigoJogaiTokureiTaishoShisetsuTest extends DbzTestBase {
 
             sut = new KaigoJogaiTokureiTaishoShisetsu(KaigoJogaiTokureiTaishoShisetsuEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(事業者種別));
-//            assertThat(sut.identifier().getXXX(), is(事業者番号));
-//            assertThat(sut.identifier().getXXX(), is(有効開始日時));
+            assertThat(sut.identifier().get事業者種別(), is(事業者種別));
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始年月日(), is(有効開始日時));
         }
     }
 

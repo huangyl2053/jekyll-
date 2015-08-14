@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @param <T> {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho IHihokenshaDaicho}を実装したクラス
  */
 //public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
-public class HihokenshaDaichoFinderBase<T extends HihokenshaDaicho> {
+public class HihokenshaDaichoFinderBase<T extends DbT1001HihokenshaDaichoEntity> {
 
     private final HihokenshaDaichoDac dac;
 
@@ -66,7 +66,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaicho> {
      * @param 市町村コード 市町村コード
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード) {
+    public IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List(LasdecCode 市町村コード) {
         return dac.select被保険者台帳一覧(市町村コード);
     }
 
@@ -77,7 +77,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaicho> {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return dac.select被保険者台帳一覧(市町村コード, 被保険者番号);
 
     }
@@ -126,7 +126,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaicho> {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳
      */
-    public Optional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<DbT1001HihokenshaDaichoEntity> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
         return dac.select最新被保険者台帳(被保険者番号);
 
     }

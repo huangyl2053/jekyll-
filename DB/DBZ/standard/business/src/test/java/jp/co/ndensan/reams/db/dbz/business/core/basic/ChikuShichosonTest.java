@@ -64,8 +64,8 @@ public class ChikuShichosonTest extends DbzTestBase {
         @Test
         public void 指定したキーが保持するChikuShichosonIdentifierにセットされている() {
             sut = new ChikuShichoson(調査地区コード, 市町村コード);
-//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get調査地区コード(), is(調査地区コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -88,8 +88,8 @@ public class ChikuShichosonTest extends DbzTestBase {
 
             sut = new ChikuShichoson(ChikuShichosonEntity);
 
-//            assertThat(sut.identifier().getXXX(), is(調査地区コード));
-//            assertThat(sut.identifier().getXXX(), is(市町村コード));
+            assertThat(sut.identifier().get調査地区コード(), is(調査地区コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 

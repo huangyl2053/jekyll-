@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -36,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8156 宮本 康
  */
-public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
+public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -48,10 +47,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @param 被保険者番号 被保険者番号
      * @param 異動日 異動日
      * @param 枝番 枝番
-     * @return {@code Optional<HihokenshaDaichoModel>}
+     * @return {@code Optional<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(HihokenshaNo 被保険者番号,
+    public Optional<DbT1001HihokenshaDaichoEntity> select被保険者台帳ByKey(HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
             RString 枝番) {
 
@@ -65,18 +64,18 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
     /**
      * 被保険者台帳を全件返します。
      *
-     * @return {@code IItemList<HihokenshaDaichoModel>}
+     * @return {@code IItemList<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public IItemList<HihokenshaDaichoModel> selectAll() {
+    public IItemList<DbT1001HihokenshaDaichoEntity> selectAll() {
 
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = 被保険者台帳Dac.selectAll();
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
 
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
             list.add(createModel(被保険者台帳));
         }
-        IItemList<HihokenshaDaichoModel> 台帳リスト = ItemList.of(list);
+        IItemList<DbT1001HihokenshaDaichoEntity> 台帳リスト = ItemList.of(list);
 
         return 台帳リスト;
     }
@@ -85,10 +84,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * 条件に合致する被保険者台帳のリストを返します。
      *
      * @param 市町村コード 市町村コード
-     * @return IItemList<HihokenshaDaichoModel>
+     * @return IItemList<DbT1001HihokenshaDaichoEntity>
      */
     @Transaction
-    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧(LasdecCode 市町村コード) {
+    public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧(LasdecCode 市町村コード) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
 
@@ -98,7 +97,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 where(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
 
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
             list.add(createModel(被保険者台帳));
@@ -112,10 +111,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return {@code IItemList<HihokenshaDaichoModel>}
+     * @return {@code IItemList<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -126,7 +125,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
 
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
             list.add(createModel(被保険者台帳));
@@ -140,10 +139,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return {@code IItemList<HihokenshaDaichoModel>}
+     * @return {@code IItemList<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -155,7 +154,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
 
         for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
             list.add(createModel(被保険者台帳));
@@ -169,10 +168,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
-     * @return {@code Optional<HihokenshaDaichoModel>}
+     * @return {@code Optional<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<DbT1001HihokenshaDaichoEntity> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
@@ -191,10 +190,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * 条件に合致する最新被保険者台帳を１件返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return {@code Optional<HihokenshaDaichoModel>}
+     * @return {@code Optional<DbT1001HihokenshaDaichoEntity>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<DbT1001HihokenshaDaichoEntity> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -208,47 +207,48 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         return Optional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
     }
 
-    private HihokenshaDaichoModel createModel(DbT1001HihokenshaDaichoEntity 被保険者台帳エンティティ) {
+    private DbT1001HihokenshaDaichoEntity createModel(DbT1001HihokenshaDaichoEntity 被保険者台帳エンティティ) {
         if (被保険者台帳エンティティ == null) {
             return null;
         }
-        return new HihokenshaDaichoModel(被保険者台帳エンティティ);
+        return new DbT1001HihokenshaDaichoEntity();
     }
 
     @Override
-    public int insert(HihokenshaDaichoModel data) {
+    public int insert(DbT1001HihokenshaDaichoEntity data) {
         if (data == null) {
             return 0;
         }
-        return 被保険者台帳Dac.insert(data.getEntity());
+        return 被保険者台帳Dac.save(data);
     }
 
     @Override
-    public int update(HihokenshaDaichoModel data) {
+    public int update(DbT1001HihokenshaDaichoEntity data) {
         if (data == null) {
             return 0;
         }
-        return 被保険者台帳Dac.update(data.getEntity());
+        return 被保険者台帳Dac.save(data);
     }
 
     @Override
-    public int delete(HihokenshaDaichoModel data) {
+    public int delete(DbT1001HihokenshaDaichoEntity data) {
         if (data == null) {
             return 0;
         }
-        return 被保険者台帳Dac.delete(data.getEntity());
+        return 被保険者台帳Dac.save(data);
     }
 
     /**
      * 物理削除を行います。
      *
-     * @param data HihokenshaDaichoModel
+     * @param data DbT1001HihokenshaDaichoEntity
      * @return int 件数
      */
-    public int deletePhysical(HihokenshaDaichoModel data) {
+    public int deletePhysical(DbT1001HihokenshaDaichoEntity data) {
         if (data == null) {
             return 0;
         }
-        return 被保険者台帳Dac.deletePhysical(data.getEntity());
+        return 被保険者台帳Dac.save(data);
     }
+
 }
