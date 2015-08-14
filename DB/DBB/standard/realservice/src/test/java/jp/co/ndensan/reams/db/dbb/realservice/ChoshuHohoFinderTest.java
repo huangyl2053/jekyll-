@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbb.realservice;
 
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -47,21 +48,21 @@ public class ChoshuHohoFinderTest {
 
         @Test
         public void find徴収方法は_該当の情報がない時_Optionalのemptyを返す() {
-            Optional<ChoshuHohoModel> empty = Optional.empty();
+            Optional<ChoshuHoho> empty = Optional.empty();
 
             when(dac.select徴収方法Recently(any(FukaNendo.class), any(HihokenshaNo.class))).thenReturn(empty);
-            Optional<ChoshuHohoModel> result = sut.find徴収方法(notFound賦課年度, DEFAULT_被保険者番号);
+            Optional<ChoshuHoho> result = sut.find徴収方法(notFound賦課年度, DEFAULT_被保険者番号);
 
             assertThat(result, is(empty));
         }
 
         @Test
         public void find徴収方法は_該当の情報がある時_該当情報を返す() {
-            Optional<ChoshuHohoModel> model = Optional.of(
-                    new ChoshuHohoModel(DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity()));
+            Optional<ChoshuHoho> model = Optional.of(
+                    new ChoshuHoho(DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity()));
 
             when(dac.select徴収方法Recently(賦課年度, DEFAULT_被保険者番号)).thenReturn(model);
-            Optional<ChoshuHohoModel> result = sut.find徴収方法(賦課年度, DEFAULT_被保険者番号);
+            Optional<ChoshuHoho> result = sut.find徴収方法(賦課年度, DEFAULT_被保険者番号);
 
             assertThat(result.get().get賦課年度(), is(賦課年度));
         }

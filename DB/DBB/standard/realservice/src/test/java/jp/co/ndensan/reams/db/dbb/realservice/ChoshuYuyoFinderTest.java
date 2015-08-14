@@ -3,28 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbb.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予状態区分;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuYuyoRelateDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuYuyoRelateDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -62,7 +65,7 @@ public class ChoshuYuyoFinderTest {
             when(dac.select徴収猶予RelateByKeyAndState(any(ChoteiNendo.class), any(FukaNendo.class),
                     any(TsuchishoNo.class), any(RDateTime.class), any(GemmenChoshuYuyoStateKubun.class))).thenReturn(empty);
             Optional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
-                    調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
+                    調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_履歴番号, 状態区分);
 
             assertThat(result, is(empty));
         }
@@ -72,10 +75,10 @@ public class ChoshuYuyoFinderTest {
             Optional<ChoshuYuyoRelateModel> model = Optional.of(createModel());
 
             when(dac.select徴収猶予RelateByKeyAndState(
-                    調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分)).thenReturn(model);
+                    調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_履歴番号, 状態区分)).thenReturn(model);
 
             Optional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
-                    調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
+                    調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_履歴番号, 状態区分);
 
             assertThat(result.get().get徴収猶予モデル().get賦課年度(), is(賦課年度));
         }

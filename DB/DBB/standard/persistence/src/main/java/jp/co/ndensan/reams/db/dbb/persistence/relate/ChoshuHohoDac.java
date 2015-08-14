@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2005KibetsuGemmen.shori
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;

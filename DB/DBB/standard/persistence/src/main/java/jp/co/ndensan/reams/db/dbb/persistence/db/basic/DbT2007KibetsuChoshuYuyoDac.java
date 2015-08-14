@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.*;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.choshuHoho;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.ki;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyo.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
@@ -99,5 +104,17 @@ public class DbT2007KibetsuChoshuYuyoDac implements ISaveable<DbT2007KibetsuChos
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    public void insert(DbT2007KibetsuChoshuYuyoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void update(DbT2007KibetsuChoshuYuyoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void deletePhysical(DbT2007KibetsuChoshuYuyoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

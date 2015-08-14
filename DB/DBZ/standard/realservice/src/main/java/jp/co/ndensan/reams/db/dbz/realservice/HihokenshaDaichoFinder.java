@@ -49,7 +49,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return finder.find被保険者台帳List(市町村コード, 被保険者番号);
     }
 
@@ -64,12 +64,27 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
     }
 
     @Override
-    public Optional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<HihokenshaDaicho> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
         return finder.find最新被保険者台帳(被保険者番号);
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> find直近被保険者台帳一覧(LasdecCode 市町村コード) {
+    public IItemList<HihokenshaDaicho> find直近被保険者台帳一覧(LasdecCode 市町村コード) {
         return finder.find被保険者台帳List(市町村コード);
+    }
+
+    @Override
+    public IItemList<HihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Optional<HihokenshaDaicho> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IItemList<HihokenshaDaicho> find直近被保険者台帳一覧(LasdecCode 市町村コード) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

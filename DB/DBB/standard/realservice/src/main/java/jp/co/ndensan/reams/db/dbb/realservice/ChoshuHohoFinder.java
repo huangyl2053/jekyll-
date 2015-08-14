@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbb.realservice;
 
+import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.ChoshuHohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

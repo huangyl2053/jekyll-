@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbb.realservice;
 
+import jp.co.ndensan.reams.db.dbb.realservice.HokenryoRankManager;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
