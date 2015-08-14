@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.ChoshuHohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

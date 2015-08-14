@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;

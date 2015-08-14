@@ -82,4 +82,20 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    public int insert(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int update(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int delete(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int deletePhysical(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

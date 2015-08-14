@@ -2,25 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRank;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRank;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
  * 保険料ランクのデータアクセスクラスです。
@@ -41,7 +42,7 @@ public class HokenryoRankDac implements IModifiable<HokenryoRankModel> {
      * @return HokenryoRankModel
      */
     @Transaction
-    public HokenryoRankModel select保険料ランクByKey(FukaNendo 賦課年度, LasdecCode 市町村コード) {
+    public HokenryoRankModel select保険料ランクByKey(FlexibleYear 賦課年度, LasdecCode 市町村コード) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));

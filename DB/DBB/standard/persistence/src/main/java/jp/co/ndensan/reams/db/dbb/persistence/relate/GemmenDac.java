@@ -3,20 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.jotaiKubun;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.tsuchishoNo;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004Gemmen;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004Gemmen.*;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
-import jp.co.ndensan.reams.db.dbz.model.fuka.GemmenModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -32,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N3317 塚田 萌
  */
-public class GemmenDac implements IModifiable<GemmenModel> {
+public class GemmenDac implements IModifiable<Gemmen> {
 
     @InjectSession
     private SqlSession session;
@@ -46,10 +50,10 @@ public class GemmenDac implements IModifiable<GemmenModel> {
      * @param 通知書番号 通知書番号
      * @param 処理日時 処理日時
      * @param 状態区分 状態区分
-     * @return GemmenModel
+     * @return Gemmen
      */
     @Transaction
-    public Optional<GemmenModel> select減免ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    public Optional<Gemmen> select減免ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -66,23 +70,23 @@ public class GemmenDac implements IModifiable<GemmenModel> {
                                 eq(choteiNendo, 調定年度.value()),
                                 eq(fukaNendo, 賦課年度.value()),
                                 eq(tsuchishoNo, 通知書番号),
-                                eq(shoriTimestamp, 処理日時),
+                                eq(rirekiNo, 処理日時),
                                 eq(jotaiKubun, 状態区分.code()))).
                 toObject(DbT2004GemmenEntity.class);
 
         return createModel(entity);
     }
 
-    private Optional<GemmenModel> createModel(DbT2004GemmenEntity 減免エンティティ) {
+    private Optional<Gemmen> createModel(DbT2004GemmenEntity 減免エンティティ) {
         if (減免エンティティ == null) {
             return Optional.empty();
         }
 
-        return Optional.of(new GemmenModel(減免エンティティ));
+        return Optional.of(new Gemmen(減免エンティティ));
     }
 
     @Override
-    public int insert(GemmenModel data) {
+    public int insert(Gemmen data) {
 
         int result = 0;
 
@@ -95,7 +99,7 @@ public class GemmenDac implements IModifiable<GemmenModel> {
     }
 
     @Override
-    public int update(GemmenModel data) {
+    public int update(Gemmen data) {
         int result = 0;
 
         if (data == null) {
@@ -107,7 +111,7 @@ public class GemmenDac implements IModifiable<GemmenModel> {
     }
 
     @Override
-    public int delete(GemmenModel data) {
+    public int delete(Gemmen data) {
         int result = 0;
 
         if (data == null) {

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.ChoshuYuyoRelateDac;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuYuyoRelateDac;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

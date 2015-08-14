@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGener
 import jp.co.ndensan.reams.db.dbz.model.fuka.RankJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.RankJohoDac;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

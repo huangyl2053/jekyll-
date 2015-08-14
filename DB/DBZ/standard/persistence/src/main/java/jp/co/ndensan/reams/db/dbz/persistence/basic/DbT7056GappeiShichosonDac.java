@@ -88,4 +88,20 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    public int insert(DbT7056GappeiShichosonEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int update(DbT7056GappeiShichosonEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int delete(DbT7056GappeiShichosonEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int deletePhysical(DbT7056GappeiShichosonEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

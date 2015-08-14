@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbd.persistence.relate.JukyushaDaichoDac;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;

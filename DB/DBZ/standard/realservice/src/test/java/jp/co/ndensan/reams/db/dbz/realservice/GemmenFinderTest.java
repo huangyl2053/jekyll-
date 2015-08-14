@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.model.fuka.GemmenModel;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.GemmenDac;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.GemmenDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;

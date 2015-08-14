@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2005KibetsuGemmen.shoriTimestamp;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.hihokenshaNo;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHoho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHoho.*;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -32,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n3317 塚田 萌
  */
-public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
+public class ChoshuHohoDac implements IModifiable<ChoshuHoho> {
 
     @InjectSession
     private SqlSession session;
@@ -43,10 +44,10 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
-     * @return ChoshuHohoModel
+     * @return ChoshuHoho
      */
     @Transaction
-    public Optional<ChoshuHohoModel> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
+    public Optional<ChoshuHoho> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -65,16 +66,16 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
         return createModel(entities.isEmpty() ? null : entities.get(0));
     }
 
-    private Optional<ChoshuHohoModel> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
+    private Optional<ChoshuHoho> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
         if (徴収方法エンティティ == null) {
             return Optional.empty();
         }
 
-        return Optional.of(new ChoshuHohoModel(徴収方法エンティティ));
+        return Optional.of(new ChoshuHoho(徴収方法エンティティ));
     }
 
     @Override
-    public int insert(ChoshuHohoModel data) {
+    public int insert(ChoshuHoho data) {
 
         int result = 0;
 
@@ -87,7 +88,7 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
     }
 
     @Override
-    public int update(ChoshuHohoModel data) {
+    public int update(ChoshuHoho data) {
         int result = 0;
 
         if (data == null) {
@@ -99,7 +100,7 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
     }
 
     @Override
-    public int delete(ChoshuHohoModel data) {
+    public int delete(ChoshuHoho data) {
         int result = 0;
 
         if (data == null) {

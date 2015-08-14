@@ -6,29 +6,30 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 被保険者台帳のデータアクセスクラスです。
@@ -44,19 +45,21 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
     /**
      * 被保険者台帳をキー検索で１件返します。
      *
-     * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @param 処理日時 処理日時
+     * @param 異動日 異動日
+     * @param 枝番 枝番
      * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
+    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(HihokenshaNo 被保険者番号,
+            FlexibleDate 異動日,
+            RString 枝番) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
-        return Optional.ofNullable(createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時)));
+        return Optional.ofNullable(createModel(被保険者台帳Dac.selectByKey(被保険者番号, 異動日, 枝番)));
     }
 
     /**
@@ -149,7 +152,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号))).
-                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         List<HihokenshaDaichoModel> list = new ArrayList<>();
@@ -178,7 +181,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.shikibetsuCode, 識別コード))).
-                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         return Optional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
@@ -199,7 +202,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号)).
-                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         return Optional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);

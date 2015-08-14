@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2007KibetsuChoshuYuyoEn
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.ChoshuYuyoRelateDac;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.ChoshuYuyoRelateDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
