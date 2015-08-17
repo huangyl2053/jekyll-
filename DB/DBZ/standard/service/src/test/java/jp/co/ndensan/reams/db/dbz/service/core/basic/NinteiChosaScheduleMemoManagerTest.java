@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5222NinteiChosaScheduleMemoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

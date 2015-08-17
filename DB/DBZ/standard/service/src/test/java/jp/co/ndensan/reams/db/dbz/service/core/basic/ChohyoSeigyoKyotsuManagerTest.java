@@ -5,14 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +41,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票制御共通 extends FdaTestBase {
+    public static class get帳票制御共通 extends DbzTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -73,7 +82,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票制御共通一覧 extends FdaTestBase {
+    public static class get帳票制御共通一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -96,7 +105,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
         }
     }
 
-    public static class save帳票制御共通 extends XxxTestBase {
+    public static class save帳票制御共通 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {

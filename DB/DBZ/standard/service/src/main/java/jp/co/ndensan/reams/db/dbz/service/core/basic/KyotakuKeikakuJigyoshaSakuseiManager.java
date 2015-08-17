@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJigyoshaSakusei;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -43,18 +44,22 @@ public class KyotakuKeikakuJigyoshaSakuseiManager {
     /**
      * 主キーに合致する居宅給付計画事業者作成を返します。
      *
+     * @param 被保険者番号 HihokenshaNo
      * @param 対象年月 TaishoYM
      * @param 履歴番号 RirekiNo
      * @return KyotakuKeikakuJigyoshaSakusei
      */
     @Transaction
     public KyotakuKeikakuJigyoshaSakusei get居宅給付計画事業者作成(
+            HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = dac.selectByKey(
+                被保険者番号,
                 対象年月,
                 履歴番号);
         if (entity == null) {

@@ -8,7 +8,12 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,7 +49,7 @@ public class ChohyoSeigyoKyotsuManager {
      */
     @Transaction
     public ChohyoSeigyoKyotsu get帳票制御共通(
-             SubGyomuCode サブ業務コード,
+            SubGyomuCode サブ業務コード,
             ReportId 帳票分類ID) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
