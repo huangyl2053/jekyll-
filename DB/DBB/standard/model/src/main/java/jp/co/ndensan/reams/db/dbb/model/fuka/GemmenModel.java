@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -92,15 +92,15 @@ public class GemmenModel implements Serializable {
         return entity.getTsuchishoNo();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
     /**
      * 減免申請年月日を返します。
      *
@@ -155,15 +155,15 @@ public class GemmenModel implements Serializable {
         return entity.getShinseiJiyu();
     }
 
-    /**
-     * 減免種類を返します。
-     *
-     * @return 減免種類
-     */
-    public HokenryoGemmenShurui get減免種類() {
-        return entity.getGemmenShuruiCode();
-    }
-
+//    /**
+//     * 減免種類を返します。
+//     *
+//     * @return 減免種類
+//     */
+//    public HokenryoGemmenShurui get減免種類() {
+//        return entity.getGemmenShuruiCode();
+//    }
+//
     /**
      * 減免事由を返します。
      *
@@ -173,15 +173,15 @@ public class GemmenModel implements Serializable {
         return entity.getGemmenJiyu();
     }
 
-    /**
-     * 減免取消種類を返します。
-     *
-     * @return 減免取消種類
-     */
-    public HokenryoGemmenTorikeshiShurui get減免取消種類() {
-        return entity.getGemmenTorikeshiShuruiCode();
-    }
-
+//    /**
+//     * 減免取消種類を返します。
+//     *
+//     * @return 減免取消種類
+//     */
+//    public HokenryoGemmenTorikeshiShurui get減免取消種類() {
+//        return entity.getGemmenTorikeshiShuruiCode();
+//    }
+//
     /**
      * 減免取消事由を返します。
      *
@@ -248,16 +248,16 @@ public class GemmenModel implements Serializable {
         entity.setTsuchishoNo(通知書番号);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
     /**
      * 減免申請年月日を設定します。
      *
@@ -318,16 +318,16 @@ public class GemmenModel implements Serializable {
         entity.setShinseiJiyu(申請事由);
     }
 
-    /**
-     * 減免種類を設定します。
-     *
-     * @param 減免種類 減免種類
-     */
-    public void set減免種類(HokenryoGemmenShurui 減免種類) {
-        requireNonNull(減免種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免種類"));
-        entity.setGemmenShuruiCode(減免種類);
-    }
-
+//    /**
+//     * 減免種類を設定します。
+//     *
+//     * @param 減免種類 減免種類
+//     */
+//    public void set減免種類(HokenryoGemmenShurui 減免種類) {
+//        requireNonNull(減免種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免種類"));
+//        entity.setGemmenShuruiCode(減免種類);
+//    }
+//
     /**
      * 減免事由を設定します。
      *
@@ -338,16 +338,16 @@ public class GemmenModel implements Serializable {
         entity.setGemmenJiyu(減免事由);
     }
 
-    /**
-     * 減免取消種類を設定します。
-     *
-     * @param 減免取消種類 減免取消種類
-     */
-    public void set減免取消種類(HokenryoGemmenTorikeshiShurui 減免取消種類) {
-        requireNonNull(減免取消種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免取消種類"));
-        entity.setGemmenTorikeshiShuruiCode(減免取消種類);
-    }
-
+//    /**
+//     * 減免取消種類を設定します。
+//     *
+//     * @param 減免取消種類 減免取消種類
+//     */
+//    public void set減免取消種類(HokenryoGemmenTorikeshiShurui 減免取消種類) {
+//        requireNonNull(減免取消種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免取消種類"));
+//        entity.setGemmenTorikeshiShuruiCode(減免取消種類);
+//    }
+//
     /**
      * 減免取消事由を設定します。
      *

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -86,24 +86,24 @@ public class KibetsuModel implements Serializable {
         return entity.getTsuchishoNo();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
-    /**
-     * 徴収方法を返します。
-     *
-     * @return 徴収方法
-     */
-    public ChoshuHohoKibetsu get徴収方法() {
-        return ChoshuHohoKibetsu.toValue(entity.getChoshuHoho());
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
+//    /**
+//     * 徴収方法を返します。
+//     *
+//     * @return 徴収方法
+//     */
+//    public ChoshuHohoKibetsu get徴収方法() {
+//        return ChoshuHohoKibetsu.toValue(entity.getChoshuHoho());
+//    }
+//
     /**
      * 期を返します。
      *
@@ -113,15 +113,15 @@ public class KibetsuModel implements Serializable {
         return entity.getKi();
     }
 
-    /**
-     * 調定IDを返します。
-     *
-     * @return 調定ID
-     */
-    public Long get調定ID() {
-        return entity.getChoteiId();
-    }
-
+//    /**
+//     * 調定IDを返します。
+//     *
+//     * @return 調定ID
+//     */
+//    public Long get調定ID() {
+//        return entity.getChoteiId();
+//    }
+//
     /**
      * 調定年度を設定します。
      *
@@ -152,26 +152,26 @@ public class KibetsuModel implements Serializable {
         entity.setTsuchishoNo(通知書番号);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
-    /**
-     * 徴収方法を設定します。
-     *
-     * @param 徴収方法 徴収方法
-     */
-    public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
-        requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        entity.setChoshuHoho(徴収方法.code());
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
+//    /**
+//     * 徴収方法を設定します。
+//     *
+//     * @param 徴収方法 徴収方法
+//     */
+//    public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
+//        requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
+//        entity.setChoshuHoho(徴収方法.code());
+//    }
+//
     /**
      * 期を設定します。
      *
@@ -182,16 +182,16 @@ public class KibetsuModel implements Serializable {
         entity.setKi(期);
     }
 
-    /**
-     * 調定IDを設定します。
-     *
-     * @param 調定ID 調定ID
-     */
-    public void set調定ID(Long 調定ID) {
-        requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
-        entity.setChoteiId(調定ID);
-    }
-
+//    /**
+//     * 調定IDを設定します。
+//     *
+//     * @param 調定ID 調定ID
+//     */
+//    public void set調定ID(Long 調定ID) {
+//        requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
+//        entity.setChoteiId(調定ID);
+//    }
+//
     /**
      * 状態に削除を設定します。
      *

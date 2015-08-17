@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
 
-import jp.co.ndensan.reams.db.dbz.business.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.business.FukaRireki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.model.relate.fuka;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;

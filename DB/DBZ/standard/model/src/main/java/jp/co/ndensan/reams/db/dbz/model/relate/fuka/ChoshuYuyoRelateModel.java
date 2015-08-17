@@ -10,8 +10,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.ChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 

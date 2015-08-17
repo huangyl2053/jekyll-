@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.TokubetsuChoshuTeishiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -79,15 +80,15 @@ public class ChoshuHohoModel implements Serializable {
         return entity.getHihokenshaNo();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
     /**
      * 徴収方法4月を返します。
      *
@@ -364,7 +365,7 @@ public class ChoshuHohoModel implements Serializable {
      * @return 特別徴収停止事由
      */
     public TokubetsuChoshuTeishiJiyu get特別徴収停止事由() {
-        return entity.getTokuchoTeishiJiyuCode();
+        return new TokubetsuChoshuTeishiJiyu(new Code(entity.getTokuchoTeishiJiyuCode()));
     }
 
     /**
@@ -387,16 +388,16 @@ public class ChoshuHohoModel implements Serializable {
         entity.setHihokenshaNo(被保険者番号);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
     /**
      * 徴収方法4月を設定します。
      *
@@ -704,7 +705,7 @@ public class ChoshuHohoModel implements Serializable {
      */
     public void set特別徴収停止事由(TokubetsuChoshuTeishiJiyu 特別徴収停止事由) {
         requireNonNull(特別徴収停止事由, UrSystemErrorMessages.値がnull.getReplacedMessage("特別徴収停止事由"));
-        entity.setTokuchoTeishiJiyuCode(特別徴収停止事由);
+        entity.setTokuchoTeishiJiyuCode(特別徴収停止事由.value().value());
     }
 
     /**

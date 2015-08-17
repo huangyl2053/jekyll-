@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
+import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;

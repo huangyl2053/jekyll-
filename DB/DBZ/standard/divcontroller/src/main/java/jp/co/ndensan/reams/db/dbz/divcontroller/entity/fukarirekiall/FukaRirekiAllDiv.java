@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jp.co.ndensan.reams.db.dbz.business.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.business.FukaRireki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.relate.fuka;
 
 import java.util.Iterator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.helper.fuka.ChoshuYuyoRelateModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

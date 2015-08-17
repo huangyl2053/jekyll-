@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -80,13 +80,13 @@ public class KiwarigakuCalculatorTest {
 
     private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
         KibetsuModel kibetsuModel = mock(KibetsuModel.class);
-        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
+//        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
 
         ChoteiKyotsuModel choteiKyotsuModel = mock(ChoteiKyotsuModel.class);
         when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));
 
         KibetsuChoteiKyotsuModel kibetsuChoteiKyotsuModel = mock(KibetsuChoteiKyotsuModel.class);
-        when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
+//        when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
         when(kibetsuChoteiKyotsuModel.get調定共通モデル()).thenReturn(choteiKyotsuModel);
 
         KiwarigakuMeisai kiwarigakuModel = mock(KiwarigakuMeisai.class);

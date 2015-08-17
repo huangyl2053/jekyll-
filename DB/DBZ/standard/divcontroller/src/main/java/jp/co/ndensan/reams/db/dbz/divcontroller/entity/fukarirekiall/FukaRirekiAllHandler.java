@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.business.FukaRireki;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;

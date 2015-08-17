@@ -2,13 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GaitoHigaitoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -56,12 +58,12 @@ public class FukaModelTest extends DbbTestBase {
             assertThat(sut.get通知書番号(), is(DbT2002FukaEntityGenerator.DEFAULT_通知書番号));
         }
 
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT2002FukaEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
+//            sut.set処理日時(DbT2002FukaEntityGenerator.DEFAULT_処理日時);
+//            assertThat(sut.get処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_処理日時));
+//        }
+//
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             sut.set被保険者番号(DbT2002FukaEntityGenerator.DEFAULT_被保険者番号);
@@ -82,8 +84,8 @@ public class FukaModelTest extends DbbTestBase {
 
         @Test
         public void 戻り値の世帯員数は_設定した値と同じ世帯員数を返す() {
-            sut.set世帯員数(DbT2002FukaEntityGenerator.DEFAULT_世帯員数);
-            assertThat(sut.get世帯員数(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯員数));
+            sut.set世帯員数(DbT2002FukaEntityGenerator.DEFAULT_世帯員数.intValue());
+            assertThat(sut.get世帯員数(), is(DbT2002FukaEntityGenerator.DEFAULT_世帯員数.intValue()));
         }
 
         @Test
@@ -232,26 +234,26 @@ public class FukaModelTest extends DbbTestBase {
 
         @Test
         public void 戻り値の調定事由1は_設定した値と同じ調定事由1を返す() {
-            sut.set調定事由1(DbT2002FukaEntityGenerator.DEFAULT_調定事由1);
-            assertThat(sut.get調定事由1(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由1));
+            sut.set調定事由1(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由1));
+            assertThat(sut.get調定事由1().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由1));
         }
 
         @Test
         public void 戻り値の調定事由2は_設定した値と同じ調定事由2を返す() {
-            sut.set調定事由2(DbT2002FukaEntityGenerator.DEFAULT_調定事由2);
-            assertThat(sut.get調定事由2(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由2));
+            sut.set調定事由2(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由2));
+            assertThat(sut.get調定事由2().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由2));
         }
 
         @Test
         public void 戻り値の調定事由3は_設定した値と同じ調定事由3を返す() {
-            sut.set調定事由3(DbT2002FukaEntityGenerator.DEFAULT_調定事由3);
-            assertThat(sut.get調定事由3(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由3));
+            sut.set調定事由3(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由3));
+            assertThat(sut.get調定事由3().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由3));
         }
 
         @Test
         public void 戻り値の調定事由4は_設定した値と同じ調定事由4を返す() {
-            sut.set調定事由4(DbT2002FukaEntityGenerator.DEFAULT_調定事由4);
-            assertThat(sut.get調定事由4(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由4));
+            sut.set調定事由4(new ChoteiJiyu(DbT2002FukaEntityGenerator.DEFAULT_調定事由4));
+            assertThat(sut.get調定事由4().value().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定事由4));
         }
 
         @Test
@@ -284,12 +286,12 @@ public class FukaModelTest extends DbbTestBase {
             assertThat(sut.get保険料段階_仮算定時(), is(DbT2002FukaEntityGenerator.DEFAULT_保険料段階_仮算定時));
         }
 
-        @Test
-        public void 戻り値の徴収方法処理日時は_設定した値と同じ徴収方法処理日時を返す() {
-            sut.set徴収方法処理日時(DbT2002FukaEntityGenerator.DEFAULT_徴収方法処理日時);
-            assertThat(sut.get徴収方法処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_徴収方法処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の徴収方法処理日時は_設定した値と同じ徴収方法処理日時を返す() {
+//            sut.set徴収方法処理日時(DbT2002FukaEntityGenerator.DEFAULT_徴収方法処理日時);
+//            assertThat(sut.get徴収方法処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_徴収方法処理日時));
+//        }
+//
         @Test
         public void 戻り値の異動基準日時は_設定した値と同じ異動基準日時を返す() {
             sut.set異動基準日時(DbT2002FukaEntityGenerator.DEFAULT_異動基準日時);

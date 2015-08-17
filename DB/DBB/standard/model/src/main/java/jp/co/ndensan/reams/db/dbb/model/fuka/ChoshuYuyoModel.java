@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -91,15 +91,15 @@ public class ChoshuYuyoModel implements Serializable {
         return entity.getTsuchishoNo();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
     /**
      * 徴収猶予申請年月日を返します。
      *
@@ -154,15 +154,15 @@ public class ChoshuYuyoModel implements Serializable {
         return entity.getShinseiJiyu();
     }
 
-    /**
-     * 徴収猶予種類を返します。
-     *
-     * @return 徴収猶予種類
-     */
-    public HokenryoChoshuYuyoShurui get徴収猶予種類() {
-        return entity.getYuyoShuruiCode();
-    }
-
+//    /**
+//     * 徴収猶予種類を返します。
+//     *
+//     * @return 徴収猶予種類
+//     */
+//    public HokenryoChoshuYuyoShurui get徴収猶予種類() {
+//        return entity.getYuyoShuruiCode();
+//    }
+//
     /**
      * 徴収猶予事由を返します。
      *
@@ -172,15 +172,15 @@ public class ChoshuYuyoModel implements Serializable {
         return entity.getYuyoJiyu();
     }
 
-    /**
-     * 徴収猶予取消種類を返します。
-     *
-     * @return 徴収猶予取消種類
-     */
-    public HokenryoChoshuYuyoTorikeshiShurui get徴収猶予取消種類() {
-        return entity.getYuyoTorikeshiShuruiCode();
-    }
-
+//    /**
+//     * 徴収猶予取消種類を返します。
+//     *
+//     * @return 徴収猶予取消種類
+//     */
+//    public HokenryoChoshuYuyoTorikeshiShurui get徴収猶予取消種類() {
+//        return entity.getYuyoTorikeshiShuruiCode();
+//    }
+//
     /**
      * 徴収猶予取消事由を返します。
      *
@@ -220,16 +220,16 @@ public class ChoshuYuyoModel implements Serializable {
         entity.setTsuchishoNo(通知書番号);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
     /**
      * 徴収猶予申請年月日を設定します。
      *
@@ -290,16 +290,16 @@ public class ChoshuYuyoModel implements Serializable {
         entity.setShinseiJiyu(申請事由);
     }
 
-    /**
-     * 徴収猶予種類を設定します。
-     *
-     * @param 徴収猶予種類 徴収猶予種類
-     */
-    public void set徴収猶予種類(HokenryoChoshuYuyoShurui 徴収猶予種類) {
-        requireNonNull(徴収猶予種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予種類"));
-        entity.setYuyoShuruiCode(徴収猶予種類);
-    }
-
+//    /**
+//     * 徴収猶予種類を設定します。
+//     *
+//     * @param 徴収猶予種類 徴収猶予種類
+//     */
+//    public void set徴収猶予種類(HokenryoChoshuYuyoShurui 徴収猶予種類) {
+//        requireNonNull(徴収猶予種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予種類"));
+//        entity.setYuyoShuruiCode(徴収猶予種類);
+//    }
+//
     /**
      * 徴収猶予事由を設定します。
      *
@@ -310,16 +310,16 @@ public class ChoshuYuyoModel implements Serializable {
         entity.setYuyoJiyu(徴収猶予事由);
     }
 
-    /**
-     * 徴収猶予取消種類を設定します。
-     *
-     * @param 徴収猶予取消種類 徴収猶予取消種類
-     */
-    public void set徴収猶予取消種類(HokenryoChoshuYuyoTorikeshiShurui 徴収猶予取消種類) {
-        requireNonNull(徴収猶予取消種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予取消種類"));
-        entity.setYuyoTorikeshiShuruiCode(徴収猶予取消種類);
-    }
-
+//    /**
+//     * 徴収猶予取消種類を設定します。
+//     *
+//     * @param 徴収猶予取消種類 徴収猶予取消種類
+//     */
+//    public void set徴収猶予取消種類(HokenryoChoshuYuyoTorikeshiShurui 徴収猶予取消種類) {
+//        requireNonNull(徴収猶予取消種類, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収猶予取消種類"));
+//        entity.setYuyoTorikeshiShuruiCode(徴収猶予取消種類);
+//    }
+//
     /**
      * 徴収猶予取消事由を設定します。
      *

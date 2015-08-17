@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import java.util.Collections;
 import java.util.Comparator;
 

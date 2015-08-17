@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModelComparators;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModelComparators;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -51,9 +51,9 @@ public class FukaRireki {
         for (FukaModel model : 賦課履歴明細) {
             RString key = createKey(model);
             FukaModel value = map.get(key);
-            if (value == null || value.get処理日時().isBefore(model.get処理日時())) {
-                map.put(key, model);
-            }
+//            if (value == null || value.get処理日時().isBefore(model.get処理日時())) {
+//                map.put(key, model);
+//            }
         }
         return sort(new ArrayList<>(map.values()));
     }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
+import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;

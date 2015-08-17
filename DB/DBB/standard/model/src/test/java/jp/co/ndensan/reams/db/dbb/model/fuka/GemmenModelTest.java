@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
+import jp.co.ndensan.reams.db.dbb.model.fuka.GemmenModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2004GemmenEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -54,28 +55,28 @@ public class GemmenModelTest extends DbzTestBase {
             assertThat(sut.get通知書番号(), is(DbT2004GemmenEntityGenerator.DEFAULT_通知書番号));
         }
 
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT2004GemmenEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT2004GemmenEntityGenerator.DEFAULT_処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
+//            sut.set処理日時(DbT2004GemmenEntityGenerator.DEFAULT_処理日時);
+//            assertThat(sut.get処理日時(), is(DbT2004GemmenEntityGenerator.DEFAULT_処理日時));
+//        }
+//
         @Test
         public void 戻り値の減免申請年月日は_設定した値と同じ減免申請年月日を返す() {
-            sut.set減免申請年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免申請年月日);
-            assertThat(sut.get減免申請年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免申請年月日));
+            sut.set減免申請年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免申請日);
+            assertThat(sut.get減免申請年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免申請日));
         }
 
         @Test
         public void 戻り値の減免決定年月日は_設定した値と同じ減免決定年月日を返す() {
-            sut.set減免決定年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免決定年月日);
-            assertThat(sut.get減免決定年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免決定年月日));
+            sut.set減免決定年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免決定日);
+            assertThat(sut.get減免決定年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免決定日));
         }
 
         @Test
         public void 戻り値の減免取消年月日は_設定した値と同じ減免取消年月日を返す() {
-            sut.set減免取消年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免取消年月日);
-            assertThat(sut.get減免取消年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消年月日));
+            sut.set減免取消年月日(DbT2004GemmenEntityGenerator.DEFAULT_減免取消日);
+            assertThat(sut.get減免取消年月日(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消日));
         }
 
         @Test
@@ -96,24 +97,24 @@ public class GemmenModelTest extends DbzTestBase {
             assertThat(sut.get申請事由(), is(DbT2004GemmenEntityGenerator.DEFAULT_申請事由));
         }
 
-        @Test
-        public void 戻り値の減免種類は_設定した値と同じ減免種類を返す() {
-            sut.set減免種類(DbT2004GemmenEntityGenerator.DEFAULT_減免種類);
-            assertThat(sut.get減免種類(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類));
-        }
-
+//        @Test
+//        public void 戻り値の減免種類は_設定した値と同じ減免種類を返す() {
+//            sut.set減免種類(DbT2004GemmenEntityGenerator.DEFAULT_減免種類);
+//            assertThat(sut.get減免種類(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免種類));
+//        }
+//
         @Test
         public void 戻り値の減免事由は_設定した値と同じ減免事由を返す() {
             sut.set減免事由(DbT2004GemmenEntityGenerator.DEFAULT_減免事由);
             assertThat(sut.get減免事由(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免事由));
         }
 
-        @Test
-        public void 戻り値の減免取消種類は_設定した値と同じ減免取消種類を返す() {
-            sut.set減免取消種類(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類);
-            assertThat(sut.get減免取消種類(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類));
-        }
-
+//        @Test
+//        public void 戻り値の減免取消種類は_設定した値と同じ減免取消種類を返す() {
+//            sut.set減免取消種類(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類);
+//            assertThat(sut.get減免取消種類(), is(DbT2004GemmenEntityGenerator.DEFAULT_減免取消種類));
+//        }
+//
         @Test
         public void 戻り値の減免取消事由は_設定した値と同じ減免取消事由を返す() {
             sut.set減免取消事由(DbT2004GemmenEntityGenerator.DEFAULT_減免取消事由);

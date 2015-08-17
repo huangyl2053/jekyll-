@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.ChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
 
 /**
