@@ -39,14 +39,14 @@ public class RoreiFukushiNenkinJukyushaModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の受給開始日は_設定した値と同じ受給開始日を返す() {
-            sut.set受給開始日(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始日);
-            assertThat(sut.get受給開始日(), is(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始日));
+            sut.set受給開始日(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始年月日);
+            assertThat(sut.get受給開始日(), is(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始年月日));
         }
 
         @Test
         public void 戻り値の受給廃止日は_設定した値と同じ受給廃止日を返す() {
-            sut.set受給廃止日(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給廃止日);
-            assertThat(sut.get受給廃止日(), is(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給廃止日));
+            sut.set受給廃止日(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給終了年月日);
+            assertThat(sut.get受給廃止日(), is(DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給終了年月日));
         }
 
         @Test

@@ -31,12 +31,12 @@ public class KoseiShichosonShishoMasterModelTest extends DbzTestBase {
             sut = new KoseiShichosonShishoMasterModel();
         }
 
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            sut.set証記載保険者番号(DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_証記載保険者番号);
-            assertThat(sut.get証記載保険者番号(), is(DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_証記載保険者番号));
-        }
-
+//        @Test
+//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
+//            sut.set証記載保険者番号(DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_証記載保険者番号);
+//            assertThat(sut.get証記載保険者番号(), is(DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_証記載保険者番号));
+//        }
+//
         @Test
         public void 戻り値の支所コードは_設定した値と同じ支所コードを返す() {
             sut.set支所コード(DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード);
@@ -59,7 +59,7 @@ public class KoseiShichosonShishoMasterModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // KoseiShichosonShishoMasterModel sut = new KoseiShichosonShishoMasterModel();
         //sut.setEntity(DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity());

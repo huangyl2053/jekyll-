@@ -33,8 +33,8 @@ public class RojinHokenJukyushaJohoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            sut.set証記載保険者番号(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_証記載保険者番号);
-            assertThat(sut.get証記載保険者番号(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_証記載保険者番号));
+            sut.set証記載保険者番号(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_市町村コード);
+            assertThat(sut.get証記載保険者番号(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_市町村コード));
         }
 
         @Test

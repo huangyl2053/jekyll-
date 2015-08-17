@@ -64,8 +64,8 @@ public class RojinHokenJukyushaJohoModel implements Serializable {
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+    public LasdecCode get証記載保険者番号() {
+        return entity.getShichosonCode();
     }
 
     /**
@@ -109,9 +109,9 @@ public class RojinHokenJukyushaJohoModel implements Serializable {
      *
      * @param 証記載保険者番号 証記載保険者番号
      */
-    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public void set証記載保険者番号(LasdecCode 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setShichosonCode(証記載保険者番号);
     }
 
     /**

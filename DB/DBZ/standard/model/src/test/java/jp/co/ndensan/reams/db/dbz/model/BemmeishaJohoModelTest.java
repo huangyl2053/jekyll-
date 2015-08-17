@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;

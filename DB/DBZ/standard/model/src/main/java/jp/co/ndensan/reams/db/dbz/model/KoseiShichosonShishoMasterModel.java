@@ -57,15 +57,15 @@ public class KoseiShichosonShishoMasterModel implements Serializable {
         this.entity = entity;
     }
 
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
+//    /**
+//     * 証記載保険者番号を返します。
+//     *
+//     * @return 証記載保険者番号
+//     */
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
+//
     /**
      * 支所コードを返します。
      *
@@ -84,16 +84,16 @@ public class KoseiShichosonShishoMasterModel implements Serializable {
         return entity.getShishoMei();
     }
 
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-    }
-
+//    /**
+//     * 証記載保険者番号を設定します。
+//     *
+//     * @param 証記載保険者番号 証記載保険者番号
+//     */
+//    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//    }
+//
     /**
      * 支所コードを設定します。
      *
