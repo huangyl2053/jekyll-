@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.realservice;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.relate.JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -71,10 +70,10 @@ public class JukyushaDaichoManager {
      * @return List<JukyushaDaicho>
      */
     @Transaction
-    public ItemList<JukyushaDaicho> get受給者台帳一覧() {
-        ArrayList<JukyushaDaicho> jukyushaDaichoList = new ArrayList<>();
+    public ItemList<DbT4001JukyushaDaichoEntity> get受給者台帳一覧() {
+        ArrayList<DbT4001JukyushaDaichoEntity> jukyushaDaichoList = new ArrayList<>();
         for (DbT4001JukyushaDaichoEntity entity : dac.selectAll()) {
-            jukyushaDaichoList.add(new JukyushaDaicho(entity));
+            jukyushaDaichoList.add(new DbT4001JukyushaDaichoEntity());
         }
 
         return ItemList.of(jukyushaDaichoList);
@@ -87,11 +86,11 @@ public class JukyushaDaichoManager {
      * @return List<JukyushaDaicho>
      */
     @Transaction
-    public IItemList<JukyushaDaicho> get受給者台帳履歴(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT4001JukyushaDaichoEntity> get受給者台帳履歴(HihokenshaNo 被保険者番号) {
 
-        ArrayList<JukyushaDaicho> jukyushaDaichoList = new ArrayList<>();
+        ArrayList<DbT4001JukyushaDaichoEntity> jukyushaDaichoList = new ArrayList<>();
         for (DbT4001JukyushaDaichoEntity entity : dac.select受給者台帳履歴By被保険者番号(被保険者番号)) {
-            jukyushaDaichoList.add(new JukyushaDaicho(entity));
+            jukyushaDaichoList.add(new DbT4001JukyushaDaichoEntity());
         }
         return ItemList.of(jukyushaDaichoList);
     }

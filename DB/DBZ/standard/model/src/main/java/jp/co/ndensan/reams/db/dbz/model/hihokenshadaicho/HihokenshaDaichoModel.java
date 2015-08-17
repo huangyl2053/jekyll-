@@ -65,5 +65,4 @@ public class HihokenshaDaichoModel implements Serializable {
     public void set資格喪失年月日(FlexibleDate 喪失日) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

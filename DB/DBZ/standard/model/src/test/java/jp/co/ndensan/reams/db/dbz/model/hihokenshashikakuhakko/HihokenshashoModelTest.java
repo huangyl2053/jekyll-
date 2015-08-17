@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -27,13 +27,13 @@ public class HihokenshashoModelTest {
 
     public static class constructor extends DbzTestBase {
 
-        private HihokenshaDaichoModel hihoDaicho;
+        private DbT1001HihokenshaDaichoEntity hihoDaicho;
         private IJukiKojin kojin;
         private HihokenshaShikakuHakkoModel shikakuHakko;
 
         @Before
         public void setUp() {
-            hihoDaicho = mock(HihokenshaDaichoModel.class);
+            hihoDaicho = mock(DbT1001HihokenshaDaichoEntity.class);
             kojin = mock(IJukiKojin.class);
             shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
         }
