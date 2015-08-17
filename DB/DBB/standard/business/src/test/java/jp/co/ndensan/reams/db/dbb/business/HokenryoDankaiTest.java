@@ -5,593 +5,102 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
+ * 保険料段階を扱うクラスのテストクラスです。
  *
- * @author N2810
+ * @author N8156 宮本 康
  */
+@RunWith(Enclosed.class)
 public class HokenryoDankaiTest {
 
-    public HokenryoDankaiTest() {
-    }
+    private static HokenryoDankai sut;
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+    private static final FlexibleYear 激変緩和開始年度 = new FlexibleYear("2006");
+    private static final FlexibleYear 激変緩和終了年度 = new FlexibleYear("2007");
+    private static final FukaNendo 賦課年度_第1期 = new FukaNendo("2000");
+    private static final FukaNendo 賦課年度_第2期 = new FukaNendo("2003");
+    private static final FukaNendo 賦課年度_第3期 = new FukaNendo("2006");
+    private static final FukaNendo 賦課年度_第5期 = new FukaNendo("2012");
+    private static final RString 段階区分_対象外 = new RString("000");
+    private static final RString 段階区分_第1段階 = new RString("010");
+    private static final RString 段階区分_第3段階1 = new RString("031");
+    private static final RString 段階区分_第4段階2 = new RString("042");
+    private static final RString 特例表記有り = new RString("(特例)");
+    private static final RString 特例表記無し = RString.EMPTY;
 
-    @Before
-    public void setUp() {
-    }
+    public static class コンストラクタ extends DbzTestBase {
 
-    /**
-     * Test of HokenryoDankaiHantei method, of class HokenryoDankai.
-     */
-    @Test
-    public void testHokenryoDankaiHantei2() {
-        System.out.println("2段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(100000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("2");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("2段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("2段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("2段階 特例対象failed");
+        @Test(expected = NullPointerException.class)
+        public void 保険料段階がnullの時_コンストラクタは_NullPointerExceptionを投げる() {
+            sut = new HokenryoDankai(null);
         }
 
-    }
-
-    @Test
-    public void testHokenryoDankaiHantei3() {
-        System.out.println("3段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(400000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("3");
-
-        expResult.get保険料段階01月().setTokureiTaisho(true);
-        expResult.get保険料段階02月().setTokureiTaisho(true);
-        expResult.get保険料段階03月().setTokureiTaisho(true);
-        expResult.get保険料段階04月().setTokureiTaisho(true);
-        expResult.get保険料段階05月().setTokureiTaisho(true);
-        expResult.get保険料段階06月().setTokureiTaisho(true);
-        expResult.get保険料段階07月().setTokureiTaisho(true);
-        expResult.get保険料段階08月().setTokureiTaisho(true);
-        expResult.get保険料段階09月().setTokureiTaisho(true);
-        expResult.get保険料段階10月().setTokureiTaisho(true);
-        expResult.get保険料段階11月().setTokureiTaisho(true);
-        expResult.get保険料段階12月().setTokureiTaisho(true);
-
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("3段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("3段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("3段階 特例対象failed");
+        @Test(expected = NullPointerException.class)
+        public void 保険料段階がnullの時_コンストラクタは_NullPointerExceptionを投げる2() {
+            sut = new HokenryoDankai(null, mock(FukaKeisanConfig.class));
         }
 
-    }
-
-    @Test
-    public void testHokenryoDankaiHantei4() {
-        System.out.println("4段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(800000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("4");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("4段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("4段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("4段階 特例対象failed");
+        @Test(expected = NullPointerException.class)
+        public void 賦課計算Configがnullの時_コンストラクタは_NullPointerExceptionを投げる() {
+            sut = new HokenryoDankai(mock(DbT2013HokenryoDankaiEntity.class), null);
         }
     }
 
-    @Test
-    public void testHokenryoDankaiHantei5() {
-        System.out.println("5段階");
+    public static class edit表示用保険料段階 extends DbzTestBase {
 
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(400000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(300000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("5");
-
-        expResult.get保険料段階01月().setTokureiTaisho(true);
-        expResult.get保険料段階02月().setTokureiTaisho(true);
-        expResult.get保険料段階03月().setTokureiTaisho(true);
-        expResult.get保険料段階04月().setTokureiTaisho(true);
-        expResult.get保険料段階05月().setTokureiTaisho(true);
-        expResult.get保険料段階06月().setTokureiTaisho(true);
-        expResult.get保険料段階07月().setTokureiTaisho(true);
-        expResult.get保険料段階08月().setTokureiTaisho(true);
-        expResult.get保険料段階09月().setTokureiTaisho(true);
-        expResult.get保険料段階10月().setTokureiTaisho(true);
-        expResult.get保険料段階11月().setTokureiTaisho(true);
-        expResult.get保険料段階12月().setTokureiTaisho(true);
-
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("5段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("5段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("5段階 特例対象failed");
+        @Test
+        public void 基本表記の時_edit表示用保険料段階は_基本表記の保険料段階を返す() {
+            sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第1期, 段階区分_第1段階, 特例表記無し), createFukaKeisanConfig());
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第1段階")));
         }
 
-    }
-
-    @Test
-    public void testHokenryoDankaiHantei6() {
-        System.out.println("6段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(600000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("6");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("6段階 保険料段階failed");
+        @Test
+        public void 対象外表記の時_edit表示用保険料段階は_対象外表記の保険料段階を返す() {
+            sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第2期, 段階区分_対象外, 特例表記無し), createFukaKeisanConfig());
+            assertThat(sut.edit表示用保険料段階(), is(new RString("-")));
         }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("6段階 システム段階failed");
+
+        @Test
+        public void 改正前表記の時_edit表示用保険料段階は_改正前表記の保険料段階を返す() {
+            sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第3期, 段階区分_第4段階2, 特例表記無し), createFukaKeisanConfig());
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第4段階(改正前2)")));
         }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("6段階 特例対象failed");
+
+        @Test
+        public void 特例表記の時_edit表示用保険料段階は_特例表記の保険料段階を返す() {
+            sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第5期, 段階区分_第3段階1, 特例表記有り), createFukaKeisanConfig());
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第3段階(特例)")));
         }
     }
 
-    @Test
-    public void testHokenryoDankaiHantei7() {
-        System.out.println("7段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(600000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("7");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("7段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("7段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("7段階 特例対象failed");
-        }
-
+    private static DbT2013HokenryoDankaiEntity createHokenryoDankaiModel(FukaNendo 賦課年度, RString 段階区分, RString 特例表記) {
+        DbT2013HokenryoDankaiEntity model = mock(DbT2013HokenryoDankaiEntity.class);
+        when(model.getFukaNendo()).thenReturn(賦課年度);
+        when(model.getDankaiKubun()).thenReturn(段階区分);
+        when(model.getTokureiHyoki()).thenReturn(特例表記);
+        return model;
     }
 
-    @Test
-    public void testHokenryoDankaiHantei8() {
-        System.out.println("8段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(1500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(300000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("8");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("8段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("8段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("8段階 特例対象failed");
-        }
+    private static FukaKeisanConfig createFukaKeisanConfig() {
+        FukaKeisanConfig config = mock(FukaKeisanConfig.class);
+        when(config.get激変緩和開始年度()).thenReturn(激変緩和開始年度);
+        when(config.get激変緩和終了年度()).thenReturn(激変緩和終了年度);
+        when(config.get激変緩和期間()).thenReturn(new Range(激変緩和開始年度, 激変緩和終了年度));
+        return config;
     }
-
-    @Test
-    public void testHokenryoDankaiHantei9() {
-        System.out.println("9段階");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(1500000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(600000));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("9");
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("9段階 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("9段階 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("9段階 特例対象failed");
-        }
-    }
-
-    @Test
-    public void testHokenryoDankaiHantei10() {
-        System.out.println("2段階_生保");
-
-        FukaKonkyo fukakonkyo = new FukaKonkyo();
-        SeigyoJoho seigyojoho = new SeigyoJoho();
-        HokenryoDankaiInput hokenryoDankaiInput;
-
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
-        fukakonkyo.setGokeiShotoku(new Decimal(100000));
-        fukakonkyo.setKotekiNenkinShunyu(new Decimal(600000));
-        fukakonkyo.setSeihoStartYMD(toDate("2011/02/06"));
-
-        seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
-        seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
-        seigyojoho.setKijunNenkinShunyu03(new Decimal(800000));
-
-        seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
-        seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
-
-        hokenryoDankaiInput = new HokenryoDankaiInput();
-        hokenryoDankaiInput.setFukaNendo("2014");
-        hokenryoDankaiInput.setFukaKonkyo(fukakonkyo);
-        hokenryoDankaiInput.setSeigyoJoho(seigyojoho);
-
-        HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
-        保険料段階 instance = new 保険料段階();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("1");
-
-        HokenryoDankaiOutput result = instance.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
-        if (!HokenryoDankaiEquals(expResult, result)) {
-            fail("2段階_生保 保険料段階failed");
-        }
-        if (!SystemDankaiEquals(expResult, result)) {
-            fail("2段階_生保 システム段階failed");
-        }
-        if (!TokureiTaishoEquals(expResult, result)) {
-            fail("2段階_生保 特例対象failed");
-
-        }
-
-    }
-
-    private boolean HokenryoDankaiEquals(HokenryoDankaiOutput input1, HokenryoDankaiOutput input2) {
-
-        boolean result = true;
-
-        if (!(input1.get保険料段階01月().getHokenryoDankai().equals(input2.get保険料段階01月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階02月().getHokenryoDankai().equals(input2.get保険料段階02月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階03月().getHokenryoDankai().equals(input2.get保険料段階03月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階04月().getHokenryoDankai().equals(input2.get保険料段階04月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階05月().getHokenryoDankai().equals(input2.get保険料段階05月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階06月().getHokenryoDankai().equals(input2.get保険料段階06月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階07月().getHokenryoDankai().equals(input2.get保険料段階07月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階08月().getHokenryoDankai().equals(input2.get保険料段階08月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階09月().getHokenryoDankai().equals(input2.get保険料段階09月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階10月().getHokenryoDankai().equals(input2.get保険料段階10月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階11月().getHokenryoDankai().equals(input2.get保険料段階11月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        if (!(input1.get保険料段階12月().getHokenryoDankai().equals(input2.get保険料段階12月().getHokenryoDankai()))) {
-            result = false;
-        }
-
-        return result;
-    }
-
-    private boolean SystemDankaiEquals(HokenryoDankaiOutput expResult, HokenryoDankaiOutput resultoutput) {
-
-        boolean result = true;
-
-        if (!(expResult.get保険料段階01月().getSystemDankai().equals(resultoutput.get保険料段階01月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階02月().getSystemDankai().equals(resultoutput.get保険料段階02月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階03月().getSystemDankai().equals(resultoutput.get保険料段階03月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階04月().getSystemDankai().equals(resultoutput.get保険料段階04月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階05月().getSystemDankai().equals(resultoutput.get保険料段階05月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階06月().getSystemDankai().equals(resultoutput.get保険料段階06月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階07月().getSystemDankai().equals(resultoutput.get保険料段階07月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階08月().getSystemDankai().equals(resultoutput.get保険料段階08月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階09月().getSystemDankai().equals(resultoutput.get保険料段階09月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階10月().getSystemDankai().equals(resultoutput.get保険料段階10月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階11月().getSystemDankai().equals(resultoutput.get保険料段階11月().getSystemDankai()))) {
-            result = false;
-        }
-
-        if (!(expResult.get保険料段階12月().getSystemDankai().equals(resultoutput.get保険料段階12月().getSystemDankai()))) {
-            result = false;
-        }
-
-        return result;
-    }
-
-    private boolean TokureiTaishoEquals(HokenryoDankaiOutput expResult, HokenryoDankaiOutput resultoutput) {
-
-        boolean result = true;
-
-        if (!(expResult.get保険料段階01月().isTokureiTaisho() == resultoutput.get保険料段階01月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階02月().isTokureiTaisho() == resultoutput.get保険料段階02月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階03月().isTokureiTaisho() == resultoutput.get保険料段階03月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階04月().isTokureiTaisho() == resultoutput.get保険料段階04月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階05月().isTokureiTaisho() == resultoutput.get保険料段階05月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階06月().isTokureiTaisho() == resultoutput.get保険料段階06月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階07月().isTokureiTaisho() == resultoutput.get保険料段階07月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階08月().isTokureiTaisho() == resultoutput.get保険料段階08月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階09月().isTokureiTaisho() == resultoutput.get保険料段階09月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階10月().isTokureiTaisho() == resultoutput.get保険料段階10月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階11月().isTokureiTaisho() == resultoutput.get保険料段階11月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(expResult.get保険料段階12月().isTokureiTaisho() == resultoutput.get保険料段階12月().isTokureiTaisho())) {
-            result = false;
-        }
-        return result;
-    }
-
-    protected static Date toDate(String str) {
-        Date date = null;
-        try {
-            date = DateFormat.getDateInstance().parse(str);
-        } catch (ParseException pe) {
-
-        }
-        return date;
-    }
-
 }

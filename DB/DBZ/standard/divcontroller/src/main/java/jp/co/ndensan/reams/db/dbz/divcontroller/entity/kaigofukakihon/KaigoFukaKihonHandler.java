@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 
-import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 
 /**
  * 介護賦課基本情報Divの操作を行うクラスです。

@@ -7,13 +7,14 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.TashichosonJushochiTokureiModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TashichosonJushochiTokureiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -44,15 +45,17 @@ public class TashichosonJushochiTokureiManager {
     /**
      * 主キーに合致する他市町村住所地特例Modelを返します。
      *
-     * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 YMDHMS
+     * @param 異動日 FlexibleDate
+     * @param 枝番 RString
      * @return TashichosonJushochiTokureiModelModel
      */
     @Transaction
-    public Optional<TashichosonJushochiTokureiModel> get他市町村住所地特例Model(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+    public Optional<DbT1003TashichosonJushochiTokureiEntity> get他市町村住所地特例Model(ShikibetsuCode 識別コード,
+            FlexibleDate 異動日,
+            RString 枝番) {
 
-        return Optional.of(dac.select他市町村住所地特例ModelByKey(市町村コード, 識別コード, 処理日時));
+        return Optional.of(dac.select他市町村住所地特例ModelByKey(識別コード, 異動日, 枝番));
     }
 
     /**
@@ -60,10 +63,10 @@ public class TashichosonJushochiTokureiManager {
      *
      * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @return List<TashichosonJushochiTokureiModel>
+     * @return List<DbT1003TashichosonJushochiTokureiEntity>
      */
     @Transaction
-    public IItemList<TashichosonJushochiTokureiModel> get他市町村住所地特例List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public IItemList<DbT1003TashichosonJushochiTokureiEntity> get他市町村住所地特例List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         return ItemList.of(dac.select他市町村住所地特例List(市町村コード, 識別コード));
     }
 
@@ -74,7 +77,7 @@ public class TashichosonJushochiTokureiManager {
      * @return 登録件数
      */
     @Transaction
-    public int save他市町村住所地特例Model(TashichosonJushochiTokureiModel 他市町村住所地特例Modelモデル) {
+    public int save他市町村住所地特例Model(DbT1003TashichosonJushochiTokureiEntity 他市町村住所地特例Modelモデル) {
 
         if (他市町村住所地特例Modelモデル.getState() == EntityDataState.Added) {
             return dac.insert(他市町村住所地特例Modelモデル);

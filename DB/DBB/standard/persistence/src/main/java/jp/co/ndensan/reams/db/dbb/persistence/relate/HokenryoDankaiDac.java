@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -47,7 +49,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
      * @return DbT2013HokenryoDankaiEntity
      */
     @Transaction
-    public DbT2013HokenryoDankaiEntity select保険料段階ByKey(FlexibleYear 賦課年度, RString 段階インデックス, RString ランク区分) {
+    public DbT2013HokenryoDankaiEntity select保険料段階ByKey(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));

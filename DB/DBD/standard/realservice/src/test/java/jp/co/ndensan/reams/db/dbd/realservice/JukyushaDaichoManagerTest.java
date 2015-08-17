@@ -3,32 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbd.realservice;
 
-import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.persistence.relate.JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,13 +37,13 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class JukyushaDaichoManagerTest {
 
-    private static DbT4001JukyushaDaichoDac dac;
+    private static JukyushaDaichoDac dac;
     private static JukyushaDaichoManager sut;
 
     @BeforeClass
     public static void test() {
-        dac = mock(DbT4001JukyushaDaichoDac.class);
-        sut = new JukyushaDaichoManager(dac);
+        dac = mock(JukyushaDaichoDac.class);
+//        sut = new JukyushaDaichoManager(dac);
     }
 
     public static class get受給者台帳Test extends DbdTestBase {
@@ -54,11 +51,11 @@ public class JukyushaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_受給者台帳が返る() {
 
-            DbT4001JukyushaDaichoEntity 受給者台帳モデル = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
+            Optional<DbT4001JukyushaDaichoEntity> 受給者台帳モデル = Optional.ofNullable(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
 
             when(dac.selectByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(受給者台帳モデル);
 
-            Optional<JukyushaDaicho> 受給者台帳 = sut.get受給者台帳(
+            Optional<DbT4001JukyushaDaichoEntity> 受給者台帳 = sut.get受給者台帳(
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号,

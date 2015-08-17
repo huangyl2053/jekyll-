@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
+import jp.co.ndensan.reams.db.dbd.realservice.JukyushaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
