@@ -218,4 +218,8 @@ public class ChoshuYuyoBuilder {
     public ChoshuYuyo build() {
         return new ChoshuYuyo(entity, id);
     }
+
+    public ChoshuYuyoBuilder setKibetsuChoshuYuyo(KibetsuChoshuYuyo createKibetsuChoshuYuyo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

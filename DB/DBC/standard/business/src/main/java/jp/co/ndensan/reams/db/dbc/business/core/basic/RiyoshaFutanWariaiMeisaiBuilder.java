@@ -218,4 +218,8 @@ public class RiyoshaFutanWariaiMeisaiBuilder {
     public RiyoshaFutanWariaiMeisai build() {
         return new RiyoshaFutanWariaiMeisai(entity, id);
     }
+
+    public RiyoshaFutanWariaiMeisaiBuilder setRiyoshaFutanWariaiKonkyo(RiyoshaFutanWariaiKonkyo createRiyoshaFutanWariaiKonkyo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

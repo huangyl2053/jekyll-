@@ -2,30 +2,36 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 弁明内容エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7002BemmeiNaiyoEntityGenerator {
 
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("02"));
-    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
-    public static final HihokenshaNo DEFAULT_原処分被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_審査請求届出日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_弁明書作成日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_審査請求に係る処分内容 = new RString("123");
-    public static final RString DEFAULT_弁明内容 = new RString("123");
-    public static final FlexibleDate DEFAULT_弁明書作成日提出日 = new FlexibleDate("20140402");
+    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("010101");
+    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
+    public static final HihokenshaNo DEFAULT_原処分被保険者番号 = new HihokenshaNo("010101");
+    public static final FlexibleDate DEFAULT_審査請求届出日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_弁明書作成日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_審査請求に係る処分内容 = new RString("Data");
+    public static final RString DEFAULT_弁明内容 = new RString("Data");
+    public static final FlexibleDate DEFAULT_弁明書作成日提出日 = new FlexibleDate("19900101");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

@@ -4,35 +4,39 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.bemmeishaEdaban;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.bemmeishoSakuseiYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.genshobunHihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.shinsaseikyuTodokedeYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJoho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 弁明者情報のデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7003BemmeishaJohoDac implements IModifiable<DbT7003BemmeishaJohoEntity> {
+public class DbT7003BemmeishaJohoDac implements ISaveable<DbT7003BemmeishaJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -56,7 +60,7 @@ public class DbT7003BemmeishaJohoDac implements IModifiable<DbT7003BemmeishaJoho
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日,
-            int 弁明者枝番) throws NullPointerException {
+            Decimal 弁明者枝番) throws NullPointerException {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
@@ -92,37 +96,18 @@ public class DbT7003BemmeishaJohoDac implements IModifiable<DbT7003BemmeishaJoho
                 toList(DbT7003BemmeishaJohoEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT7003BemmeishaJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7003BemmeishaJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7003BemmeishaJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT7003BemmeishaJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT7003BemmeishaJohoEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT7003BemmeishaJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT7003BemmeishaJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者情報エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
