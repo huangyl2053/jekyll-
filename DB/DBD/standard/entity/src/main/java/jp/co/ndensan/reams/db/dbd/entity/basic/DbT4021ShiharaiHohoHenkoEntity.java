@@ -1,17 +1,18 @@
 package jp.co.ndensan.reams.db.dbd.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 支払方法変更テーブルのエンティティクラスです。
@@ -35,7 +36,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private RString kanriKubun;
+    private KanriKubun kanriKubun;
     @PrimaryKey
     private int rirekiNo;
     private RString torokuKubun;
@@ -157,7 +158,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      *
      * @return 管理区分
      */
-    public RString getKanriKubun() {
+    public KanriKubun getKanriKubun() {
         return kanriKubun;
     }
 
@@ -168,7 +169,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      *
      * @param kanriKubun 管理区分
      */
-    public void setKanriKubun(RString kanriKubun) {
+    public void setKanriKubun(KanriKubun kanriKubun) {
         this.kanriKubun = kanriKubun;
     }
 
@@ -782,8 +783,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      * このエンティティの主キーが他の{@literal DbT4021ShiharaiHohoHenkoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4021ShiharaiHohoHenkoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4021ShiharaiHohoHenkoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4021ShiharaiHohoHenkoEntity other) {
