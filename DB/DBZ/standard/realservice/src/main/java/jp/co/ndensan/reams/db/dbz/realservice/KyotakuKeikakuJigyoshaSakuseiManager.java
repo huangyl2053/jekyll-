@@ -4,17 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJigyoshaSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -46,29 +44,25 @@ public class KyotakuKeikakuJigyoshaSakuseiManager {
      * 主キーに合致する居宅給付計画事業者作成を返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 識別コード 識別コード
      * @param 対象年月 対象年月
-     * @param 処理日時 処理日時
-     * @return KyotakuKeikakuJigyoshaSakuseiModel
+     * @param 履歴番号 履歴番号
+     * @return DbT3006KyotakuKeikakuJigyoshaSakuseiEntity
      */
     @Transaction
-    public Optional<KyotakuKeikakuJigyoshaSakuseiModel> get居宅給付計画事業者作成(HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            ShikibetsuCode 識別コード,
+    public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> get居宅給付計画事業者作成(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            YMDHMS 処理日時) {
+            Decimal 履歴番号) {
 
-        return dac.selectByKey(被保険者番号.value(), 証記載保険者番号.value(), 識別コード, 対象年月, 処理日時);
+        return dac.selectByKey(被保険者番号, 対象年月, 履歴番号);
     }
 
     /**
      * 居宅給付計画事業者作成の一覧を返します。
      *
-     * @return IItemList<KyotakuKeikakuJigyoshaSakuseiModel>
+     * @return IItemList<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity>
      */
     @Transaction
-    public IItemList<KyotakuKeikakuJigyoshaSakuseiModel> get居宅計画事業者作成一覧() {
+    public IItemList<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> get居宅計画事業者作成一覧() {
         return dac.selectAll();
     }
 
@@ -76,27 +70,25 @@ public class KyotakuKeikakuJigyoshaSakuseiManager {
      * 被保険者番号に合致する直近の居宅給付計画事業者作成を返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 識別コード 識別コード
      * @param 対象年月 対象年月
-     * @return KyotakuKeikakuJigyoshaSakuseiModel
+     * @param 履歴番号 履歴番号
+     * @return DbT3006KyotakuKeikakuJigyoshaSakuseiEntity
      */
     @Transaction
-    public Optional<KyotakuKeikakuJigyoshaSakuseiModel> get直近居宅計画事業者作成(HihokenshaNo 被保険者番号,
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            ShikibetsuCode 識別コード,
-            FlexibleYearMonth 対象年月) {
-        return dac.select直近居宅給付計画事業者作成(被保険者番号.value(), 証記載保険者番号.value(), 識別コード, 対象年月);
+    public Optional<DbT3006KyotakuKeikakuJigyoshaSakuseiEntity> get直近居宅計画事業者作成(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth 対象年月,
+            Decimal 履歴番号) {
+        return dac.select直近居宅給付計画事業者作成(被保険者番号, 対象年月, 履歴番号);
     }
 
     /**
      * 居宅給付計画事業者作成を登録します。
      *
-     * @param 居宅給付計画事業者作成モデル KyotakuKeikakuJigyoshaSakuseiModel
+     * @param 居宅給付計画事業者作成モデル DbT3006KyotakuKeikakuJigyoshaSakuseiEntity
      * @return 登録件数
      */
     @Transaction
-    public int save居宅給付計画事業者作成(KyotakuKeikakuJigyoshaSakuseiModel 居宅給付計画事業者作成モデル) {
+    public int save居宅給付計画事業者作成(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity 居宅給付計画事業者作成モデル) {
 
         if (居宅給付計画事業者作成モデル.getState() == EntityDataState.Added) {
             return dac.insert(居宅給付計画事業者作成モデル);

@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
-import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
+import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

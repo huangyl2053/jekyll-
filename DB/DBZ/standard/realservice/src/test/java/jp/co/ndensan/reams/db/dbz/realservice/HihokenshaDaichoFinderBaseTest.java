@@ -5,21 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -89,20 +89,20 @@ public class HihokenshaDaichoFinderBaseTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.of(createModel());
+            Optional<DbT1001HihokenshaDaichoEntity> 被保険者台帳モデル = Optional.of(createModel());
 
             when(dac.select最新被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
 
-            Optional<HihokenshaDaichoModel> 被保険者台帳 = sut.find最新被保険者台帳(
+            Optional<DbT1001HihokenshaDaichoEntity> 被保険者台帳 = sut.find最新被保険者台帳(
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(被保険者台帳.get().get市町村コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード));
+            assertThat(被保険者台帳.get().getHihokenshaNo(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号));
         }
     }
 
-    private static HihokenshaDaichoModel createModel() {
-        return new HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity());
+    private static DbT1001HihokenshaDaichoEntity createModel() {
+        return new DbT1001HihokenshaDaichoEntity();
     }
 
 }

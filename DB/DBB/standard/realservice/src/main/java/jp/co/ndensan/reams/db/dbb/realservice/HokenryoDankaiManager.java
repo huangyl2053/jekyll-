@@ -5,13 +5,15 @@
 package jp.co.ndensan.reams.db.dbb.realservice;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.relate.HokenryoDankaiDac;
-import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -57,7 +59,7 @@ public class HokenryoDankaiManager {
      * @return Optional<HokenryoDankaiModel>
      */
     @Transaction
-    public Optional<DbT2013HokenryoDankaiEntity> get保険料段階(FlexibleYear 賦課年度, RString 段階インデックス, RString ランク区分) {
+    public Optional<DbT2013HokenryoDankaiEntity> get保険料段階(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
         return Optional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
     }
 
@@ -77,7 +79,7 @@ public class HokenryoDankaiManager {
     }
 
     private boolean isランク対象(FlexibleYear 賦課年度, LasdecCode 市町村コード) {
-        return config.isランク有り() && new Range(config.getランク開始年度(), config.getランク終了年度()).between(賦課年度.value()) && 市町村コード != null;
+        return config.isランク有り() && new Range(config.getランク開始年度(), config.getランク終了年度()).between(賦課年度) && 市町村コード != null;
     }
 
     /**

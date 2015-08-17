@@ -6,26 +6,26 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.HokenshaShujiiJoho;
+import jp.co.ndensan.reams.db.dbz.business.IShujiiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.db.dbz.business.IShujiiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4912ShujiiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link HokenshaShujiiManager}のテストクラスです。
@@ -65,7 +65,7 @@ public class HokenshaShujiiManagerTest {
         @Test
         public void find認定申請情報は_該当の情報がない時_Optionalのemptyを返す() {
             Optional<IShujiiJoho> empty = Optional.empty();
-            Optional<DbT4912ShujiiJohoEntity> entity = Optional.empty();
+            DbT4912ShujiiJohoEntity entity = DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity();
             when(dac.selectByKey(notFound市町村コード, Found主治医医療機関コード, Found主治医コード)).thenReturn(entity);
             Optional<IShujiiJoho> result = sut.find主治医(notFound市町村コード, Found主治医医療機関コード, Found主治医コード);
 
@@ -75,7 +75,7 @@ public class HokenshaShujiiManagerTest {
         @Test
         public void find認定申請情報は_該当の情報がある時_該当情報を返す() {
             when(dac.selectByKey(Found市町村コード, Found主治医医療機関コード, Found主治医コード)).thenReturn(
-                    Optional.ofNullable(DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity()));
+                    DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity());
             Optional<IShujiiJoho> result = sut.find主治医(Found市町村コード, Found主治医医療機関コード, Found主治医コード);
             assertThat(result.get().get主治医コード(), is(createBusiness(Found市町村コード, Found主治医医療機関コード, Found主治医コード).get主治医コード()));
         }
@@ -85,7 +85,7 @@ public class HokenshaShujiiManagerTest {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
             HokenshaShujiiJoho shinsakaiShujiiJoho = new HokenshaShujiiJoho(DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity());
 
             assertThat(sut.save主治医機関情報(shinsakaiShujiiJoho), is(1));
@@ -93,7 +93,7 @@ public class HokenshaShujiiManagerTest {
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
 
             HokenshaShujiiJoho hokenshaShujiiJoho = new HokenshaShujiiJoho(DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity());
 
@@ -107,7 +107,7 @@ public class HokenshaShujiiManagerTest {
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4912ShujiiJohoEntity.class))).thenReturn(1);
 
             HokenshaShujiiJoho hokenshaShujiiJoho = new HokenshaShujiiJoho(DbT4912ShujiiJohoEntityGenerator.createDbT4912ShujiiJohoEntity());
             hokenshaShujiiJoho.getEntity().initializeMd5();

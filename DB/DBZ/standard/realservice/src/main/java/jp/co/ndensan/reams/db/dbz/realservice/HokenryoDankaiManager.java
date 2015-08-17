@@ -4,52 +4,48 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
-import jp.co.ndensan.reams.db.dbb.persistence.relate.HokenryoDankaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 保険料段階を管理するクラスです。
  *
  * @author N8156 宮本 康
+ * @deprecated dbb.realserviceを使用する。
  */
+// TODO n8300姜 dbb.realserviceパッケージに移動予定。
 public class HokenryoDankaiManager {
 
-    private final HokenryoDankaiDac dac;
+//    private final HokenryoDankaiDac dac;
     private final FukaKeisanConfig config;
 
     /**
      * コンストラクタです。
      */
     public HokenryoDankaiManager() {
-        dac = InstanceProvider.create(HokenryoDankaiDac.class);
+//        dac = InstanceProvider.create(HokenryoDankaiDac.class);
         config = new FukaKeisanConfig();
     }
 
-    /**
-     * 単体テスト用のコンストラクタです。
-     */
-    HokenryoDankaiManager(HokenryoDankaiDac dac, FukaKeisanConfig config) {
-        this.dac = dac;
-        this.config = config;
-    }
-
+//    /**
+//     * 単体テスト用のコンストラクタです。
+//     */
+//    HokenryoDankaiManager(HokenryoDankaiDac dac, FukaKeisanConfig config) {
+//        this.dac = dac;
+//        this.config = config;
+//    }
+//
     /**
      * 引数に合致する保険料段階を返します。
      *
@@ -59,9 +55,13 @@ public class HokenryoDankaiManager {
      * @return Optional<HokenryoDankaiModel>
      */
     @Transaction
-    public Optional<HokenryoDankaiModel> get保険料段階(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
-        return Optional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
+    public Optional<Object> get保険料段階(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
+        return Optional.ofNullable(null);
+//        return Optional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
     }
+//    public Optional<HokenryoDankaiModel> get保険料段階(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
+//        return Optional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
+//    }
 
     /**
      * 引数に合致する保険料段階を返します。
@@ -72,10 +72,11 @@ public class HokenryoDankaiManager {
      * @return Optional<HokenryoDankai>
      */
     public Optional<HokenryoDankai> get保険料段階(FukaNendo 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
-        List<HokenryoDankaiModel> modelList = isランク対象(賦課年度, 市町村コード)
-                ? dac.select保険料段階一覧(賦課年度, 市町村コード, 段階区分)
-                : dac.select保険料段階一覧(賦課年度, 段階区分);
-        return Optional.ofNullable(!modelList.isEmpty() ? new HokenryoDankai(modelList.get(0), config) : null);
+        return Optional.ofNullable(null);
+//        List<HokenryoDankaiModel> modelList = isランク対象(賦課年度, 市町村コード)
+//                ? dac.select保険料段階一覧(賦課年度, 市町村コード, 段階区分)
+//                : dac.select保険料段階一覧(賦課年度, 段階区分);
+//        return Optional.ofNullable(!modelList.isEmpty() ? new HokenryoDankai(modelList.get(0), config) : null);
     }
 
     private boolean isランク対象(FukaNendo 賦課年度, LasdecCode 市町村コード) {
@@ -89,8 +90,10 @@ public class HokenryoDankaiManager {
      * @return IItemList<HokenryoDankaiModel>
      */
     @Transaction
-    public IItemList<HokenryoDankaiModel> get保険料段階一覧(FukaNendo 賦課年度) {
-        return ItemList.of(dac.select保険料段階一覧(賦課年度));
+    public IItemList<Object> get保険料段階一覧(FukaNendo 賦課年度) {
+//        public IItemList<HokenryoDankaiModel> get保険料段階一覧(FukaNendo 賦課年度) {
+        return null;
+//        return ItemList.of(dac.select保険料段階一覧(賦課年度));
     }
 
     /**
@@ -100,16 +103,16 @@ public class HokenryoDankaiManager {
      * @return 登録件数
      */
     @Transaction
-    public int save保険料段階(HokenryoDankaiModel 保険料段階モデル) {
+    public int save保険料段階(Object 保険料段階モデル) {
+//        public int save保険料段階(HokenryoDankaiModel 保険料段階モデル) {
 
-        if (保険料段階モデル.getState() == EntityDataState.Added) {
-            return dac.insert(保険料段階モデル);
-        } else if (保険料段階モデル.getState() == EntityDataState.Modified) {
-            return dac.update(保険料段階モデル);
-        } else if (保険料段階モデル.getState() == EntityDataState.Deleted) {
-            return dac.delete(保険料段階モデル);
-        }
-
+//        if (保険料段階モデル.getState() == EntityDataState.Added) {
+//            return dac.insert(保険料段階モデル);
+//        } else if (保険料段階モデル.getState() == EntityDataState.Modified) {
+//            return dac.update(保険料段階モデル);
+//        } else if (保険料段階モデル.getState() == EntityDataState.Deleted) {
+//            return dac.delete(保険料段階モデル);
+//        }
         throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
     }
 }

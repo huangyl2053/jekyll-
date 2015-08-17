@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbd.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.KyotakuKeikakuFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiKekkaFinder;
+import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiKekkaFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ServiceShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;

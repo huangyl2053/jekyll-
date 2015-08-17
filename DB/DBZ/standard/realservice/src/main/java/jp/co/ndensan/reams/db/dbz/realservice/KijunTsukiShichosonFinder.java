@@ -8,19 +8,19 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KyuShichosonShikaku;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.realservice.gappei._GappeiShichosonFinder;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.realservice.gappei.IGappeiShichosonFinder;
+import jp.co.ndensan.reams.db.dbz.realservice.gappei._GappeiShichosonFinder;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -59,10 +59,10 @@ public class KijunTsukiShichosonFinder {
      * @return 合併市町村情報
      */
     public Optional<GappeiShichosonJohoModel> get基準月市町村情報(
-            List<HihokenshaDaichoModel> 被保険者情報List, FlexibleYearMonth 基準年月, GesshoGetsumatsuKubun 月初月末区分) {
+            List<HihokenshaDaicho> 被保険者情報List, FlexibleYearMonth 基準年月, GesshoGetsumatsuKubun 月初月末区分) {
 
         KyuShichosonShikaku 旧市町村資格 = new KyuShichosonShikaku(被保険者情報List);
-        Optional<HihokenshaDaichoModel> 被保険者台帳 = 旧市町村資格.get旧市町村被保険者情報By月初月末指定(基準年月, GesshoGetsumatsuKubun.指定無);
+        Optional<HihokenshaDaicho> 被保険者台帳 = 旧市町村資格.get旧市町村被保険者情報By月初月末指定(基準年月, GesshoGetsumatsuKubun.指定無);
         if (!被保険者台帳.isPresent()) {
             return Optional.empty();
         }

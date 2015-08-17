@@ -43,12 +43,12 @@ import static org.mockito.Mockito.when;
 //@RunWith(Enclosed.class)
 public class HihokenshaFinderTest extends DbzTestBase {
 
-    private static final HihokenshaDaichoManager hihokenshaDaicho;
+    private static final _HihokenshaDaichoManager hihokenshaDaicho;
     private static final IJukiKojinFinder profileSearcher;
     private static final HihokenshaFinder sut;
 
     static {
-        hihokenshaDaicho = mock(HihokenshaDaichoManager.class);
+        hihokenshaDaicho = mock(_HihokenshaDaichoManager.class);
         profileSearcher = mock(IJukiKojinFinder.class);
         sut = new HihokenshaFinder(hihokenshaDaicho, profileSearcher);
     }
@@ -285,7 +285,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
         IHihokenshaShikaku shikaku = createHihokenshaShikaku(lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaNo);
         when(hihokenshaDaicho.get直近被保険者資格(lasdecCode, shikibetsuCode)).thenReturn(shikaku);
         when(hihokenshaDaicho.get直近被保険者資格(lasdecCode, hihokenshaNo)).thenReturn(shikaku);
-        when(hihokenshaDaicho.get被保険者資格(lasdecCode, shikibetsuCode, shoriTimestamp)).thenReturn(shikaku);
+        when(hihokenshaDaicho.get被保険者資格(lasdecCode, shikibetsuCode)).thenReturn(shikaku);
     }
 
     private static void _setUpMockOfIKojinFinder_returnIKojinFor(ShikibetsuCode shikibetsuCode) {

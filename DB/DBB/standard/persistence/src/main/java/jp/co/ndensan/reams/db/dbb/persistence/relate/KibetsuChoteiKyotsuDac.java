@@ -6,30 +6,29 @@ package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003Kibetsu;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2003KibetsuDac;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
+import jp.co.ndensan.reams.ur.urc.entity.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
  * 介護期別調定共通のデータアクセスクラスです。
@@ -56,7 +55,7 @@ public class KibetsuChoteiKyotsuDac implements IPersistable<KibetsuChoteiKyotsuM
      */
     @Transaction
     public KibetsuChoteiKyotsuModel select介護期別調定共通ByKey(
-            ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時, RString 徴収方法, int 期) {
+            FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時, RString 徴収方法, int 期) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -78,7 +77,7 @@ public class KibetsuChoteiKyotsuDac implements IPersistable<KibetsuChoteiKyotsuM
      */
     @Transaction
     public List<KibetsuChoteiKyotsuModel> select介護期別調定共通一覧(
-            ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
+            FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
