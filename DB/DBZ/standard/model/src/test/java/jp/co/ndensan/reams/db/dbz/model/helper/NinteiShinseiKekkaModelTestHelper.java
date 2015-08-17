@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5002NinteiKekkaJohoEnti
 import jp.co.ndensan.reams.db.dbd.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
+import jp.co.ndensan.reams.db.dbd.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**

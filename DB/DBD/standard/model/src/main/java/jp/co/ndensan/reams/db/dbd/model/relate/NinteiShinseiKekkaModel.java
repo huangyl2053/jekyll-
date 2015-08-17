@@ -2,15 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.relate;
+package jp.co.ndensan.reams.db.dbd.model.relate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.model.JukyushaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class NinteiShinseiKekkaModel implements Serializable {
 
-    private JukyushaDaichoModel 受給者台帳モデル;
-    private Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル;
-    private Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル;
+    private DbT4001JukyushaDaichoEntity 受給者台帳モデル;
+    private Optional<DbT4101NinteiShinseiJohoEntity> 要介護認定申請情報モデル;
+    private Optional<DbT4102NinteiKekkaJohoEntity> 要介護認定結果情報モデル;
 
     /**
      * デフォルトコンストラクタです。
@@ -39,9 +39,9 @@ public class NinteiShinseiKekkaModel implements Serializable {
      * @param 要介護認定結果情報モデル 要介護認定結果情報モデル
      */
     public NinteiShinseiKekkaModel(
-            JukyushaDaichoModel 受給者台帳モデル,
-            Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル,
-            Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
+            DbT4001JukyushaDaichoEntity 受給者台帳モデル,
+            Optional<DbT4101NinteiShinseiJohoEntity> 要介護認定申請情報モデル,
+            Optional<DbT4102NinteiKekkaJohoEntity> 要介護認定結果情報モデル) {
         this.受給者台帳モデル = 受給者台帳モデル;
         this.要介護認定申請情報モデル = 要介護認定申請情報モデル;
         this.要介護認定結果情報モデル = 要介護認定結果情報モデル;
@@ -52,7 +52,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @return 受給者台帳モデル
      */
-    public JukyushaDaichoModel get受給者台帳モデル() {
+    public DbT4001JukyushaDaichoEntity get受給者台帳モデル() {
         return 受給者台帳モデル;
     }
 
@@ -61,7 +61,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @return 要介護認定申請情報モデル
      */
-    public Optional<NinteiShinseiJohoModel> get要介護認定申請情報モデル() {
+    public Optional<DbT4101NinteiShinseiJohoEntity> get要介護認定申請情報モデル() {
         return 要介護認定申請情報モデル;
     }
 
@@ -70,7 +70,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @return 要介護認定結果情報モデル
      */
-    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報モデル() {
+    public Optional<DbT4102NinteiKekkaJohoEntity> get要介護認定結果情報モデル() {
         return 要介護認定結果情報モデル;
     }
 
@@ -83,36 +83,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
         List<RString> result = new ArrayList<>();
 
         if (要介護認定結果情報モデル.isPresent()) {
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類01());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類02());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類03());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類04());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類05());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類06());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類07());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類08());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類09());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類10());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類11());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類12());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類13());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類14());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類15());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類16());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類17());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類18());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類19());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類20());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類21());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類22());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類23());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類24());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類25());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類26());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類27());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類28());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類29());
-            result.add(要介護認定結果情報モデル.get().get介護サービス種類30());
+            result.add(要介護認定結果情報モデル.get().getNinteishinsakaiIkenShurui());
         }
 
         return result;
@@ -123,7 +94,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @param 受給者台帳モデル 受給者台帳モデル
      */
-    public void set受給者台帳モデル(JukyushaDaichoModel 受給者台帳モデル) {
+    public void set受給者台帳モデル(DbT4001JukyushaDaichoEntity 受給者台帳モデル) {
         this.受給者台帳モデル = 受給者台帳モデル;
     }
 
@@ -132,7 +103,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @param 要介護認定申請情報モデル 要介護認定申請情報モデル
      */
-    public void set要介護認定申請情報モデル(Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル) {
+    public void set要介護認定申請情報モデル(Optional<DbT4101NinteiShinseiJohoEntity> 要介護認定申請情報モデル) {
         this.要介護認定申請情報モデル = 要介護認定申請情報モデル;
     }
 
@@ -141,7 +112,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @param 要介護認定結果情報モデル 要介護認定結果情報モデル
      */
-    public void set要介護認定結果情報モデル(Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
+    public void set要介護認定結果情報モデル(Optional<DbT4102NinteiKekkaJohoEntity> 要介護認定結果情報モデル) {
         this.要介護認定結果情報モデル = 要介護認定結果情報モデル;
     }
 

@@ -7,15 +7,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
-//import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -34,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel> {
+public class NinteiShinseiJohoDac implements IModifiable<DbT4101NinteiShinseiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -47,10 +45,10 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 処理日時 処理日時
-     * @return NinteiShinseiJohoModel
+     * @return DbT4101NinteiShinseiJohoEntity
      */
     @Transaction
-    public Optional<NinteiShinseiJohoModel> selectByKey(
+    public Optional<DbT4101NinteiShinseiJohoEntity> selectByKey(
             ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {
 
@@ -64,18 +62,18 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
     /**
      * 要介護認定申請情報のリストを返します。
      *
-     * @return IItemList<NinteiShinseiJohoModel>
+     * @return IItemList<DbT4101NinteiShinseiJohoEntity>
      */
     @Transaction
-    public IItemList<NinteiShinseiJohoModel> selectAll() {
+    public IItemList<DbT4101NinteiShinseiJohoEntity> selectAll() {
 //TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
 //        List<DbT5001NinteiShinseiJohoEntity> 要介護認定申請情報List = 要介護認定申請情報Dac.selectAll();
-        List<NinteiShinseiJohoModel> list = new ArrayList<>();
+        List<DbT4101NinteiShinseiJohoEntity> list = new ArrayList<>();
 
 //        for (DbT5001NinteiShinseiJohoEntity 要介護認定申請情報 : 要介護認定申請情報List) {
 //            list.add(createModel(要介護認定申請情報));
 //        }
-        IItemList<NinteiShinseiJohoModel> 台帳リスト = ItemList.of(list);
+        IItemList<DbT4101NinteiShinseiJohoEntity> 台帳リスト = ItemList.of(list);
 
         return 台帳リスト;
     }
@@ -84,10 +82,10 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      * 要介護認定申請情報の申請書管理番号を指定して、最新の１件を返します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @return NinteiShinseiJohoModel
+     * @return DbT4101NinteiShinseiJohoEntity
      */
     @Transaction
-    public Optional<NinteiShinseiJohoModel> select要介護認定申請情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+    public Optional<DbT4101NinteiShinseiJohoEntity> select要介護認定申請情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
@@ -104,16 +102,16 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
         return Optional.ofNullable(createModel(認定申請情報List.get(0)));
     }
 
-    private NinteiShinseiJohoModel createModel(DbT5001NinteiShinseiJohoEntity 要介護認定申請情報エンティティ) {
+    private DbT4101NinteiShinseiJohoEntity createModel(DbT5001NinteiShinseiJohoEntity 要介護認定申請情報エンティティ) {
         if (要介護認定申請情報エンティティ == null) {
             return null;
         }
 
-        return new NinteiShinseiJohoModel(要介護認定申請情報エンティティ);
+        return new DbT4101NinteiShinseiJohoEntity();
     }
 
     @Override
-    public int insert(NinteiShinseiJohoModel data) {
+    public int insert(DbT4101NinteiShinseiJohoEntity data) {
 
         int result = 0;
 
@@ -127,7 +125,7 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
     }
 
     @Override
-    public int update(NinteiShinseiJohoModel data) {
+    public int update(DbT4101NinteiShinseiJohoEntity data) {
         int result = 0;
 
         if (data == null) {
@@ -140,7 +138,7 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
     }
 
     @Override
-    public int delete(NinteiShinseiJohoModel data) {
+    public int delete(DbT4101NinteiShinseiJohoEntity data) {
         int result = 0;
 
         if (data == null) {
@@ -155,10 +153,10 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
     /**
      * 物理削除を行います。
      *
-     * @param data NinteiShinseiJohoModel
+     * @param data DbT4101NinteiShinseiJohoEntity
      * @return int 件数
      */
-    public int deletePhysical(NinteiShinseiJohoModel data) {
+    public int deletePhysical(DbT4101NinteiShinseiJohoEntity data) {
         int result = 0;
 
         if (data == null) {

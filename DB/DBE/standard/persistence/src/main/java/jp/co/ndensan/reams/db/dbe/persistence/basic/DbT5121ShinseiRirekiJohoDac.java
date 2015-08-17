@@ -5,27 +5,26 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.entity.basic.IShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
  * 申請履歴情報のデータアクセスクラスです。
  *
  * @author n8223 朴義一
  */
-public class DbT5121ShinseiRirekiJohoDac implements IModifiable<IShinseiRirekiJohoEntity> {
+public class DbT5121ShinseiRirekiJohoDac implements IModifiable<DbT5121ShinseiRirekiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -66,21 +65,21 @@ public class DbT5121ShinseiRirekiJohoDac implements IModifiable<IShinseiRirekiJo
 
     @Transaction
     @Override
-    public int insert(IShinseiRirekiJohoEntity entity) {
+    public int insert(DbT5121ShinseiRirekiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(IShinseiRirekiJohoEntity entity) {
+    public int update(DbT5121ShinseiRirekiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(IShinseiRirekiJohoEntity entity) {
+    public int delete(DbT5121ShinseiRirekiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

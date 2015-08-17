@@ -2,13 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.basic;
+package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5121ShinseiRirekiJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
@@ -16,11 +14,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -50,7 +48,7 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
             TestSupport.insert(
                     申請管理番号);
             TestSupport.insert(
-                    DEFAULT_申請管理番号);
+                    申請管理番号00000000001);
         }
 
         @Test(expected = NullPointerException.class)
@@ -62,7 +60,7 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             Optional<DbT5121ShinseiRirekiJohoEntity> insertedRecord = sut.selectByKey(
-                    DEFAULT_申請管理番号);
+                    申請管理番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -80,7 +78,7 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 申請履歴情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_申請管理番号);
+                    申請管理番号);
             assertThat(sut.selectAll().size(), is(1));
         }
 
@@ -95,10 +93,10 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 申請履歴情報エンティティを渡すと_insertは_申請履歴情報を追加する() {
             TestSupport.insert(
-                    DEFAULT_申請管理番号);
+                    申請管理番号);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_申請管理番号), is(notNullValue()));
+                    申請管理番号00000000001), is(notNullValue()));
         }
     }
 
@@ -129,15 +127,15 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_申請管理番号);
+                    申請管理番号);
         }
 
         @Test
         public void 申請履歴情報エンティティを渡すと_deleteは_申請履歴情報を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_申請管理番号).get());
+                    申請管理番号).get());
             assertThat(sut.selectByKey(
-                    DEFAULT_申請管理番号).isPresent(), is(false));
+                    申請管理番号00000000001).isPresent(), is(false));
         }
     }
 

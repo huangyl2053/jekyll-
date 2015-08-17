@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
+import jp.co.ndensan.reams.db.dbd.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.KyotakuKeikakuFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiKekkaFinder;
