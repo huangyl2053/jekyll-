@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.service.core.basic.YoboKeikakuJikoSakuseiMeisaiManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

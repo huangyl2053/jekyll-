@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -27,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護賦課を管理するクラスです。
  */
-public class Fuka extends ModelBase<FukaIdentifier, DbT2002FukaEntity, Fuka> implements Serializable {
+public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuka> implements Serializable {
 
     private final DbT2002FukaEntity entity;
     private final FukaIdentifier id;
@@ -565,6 +567,15 @@ public class Fuka extends ModelBase<FukaIdentifier, DbT2002FukaEntity, Fuka> imp
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Fuka modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Kibetsu> getKibetsuList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -145,4 +145,8 @@ public class NijiYoboJigyoTaishoshaBuilder {
     public NijiYoboJigyoTaishosha build() {
         return new NijiYoboJigyoTaishosha(entity, id);
     }
+
+    public NijiYoboJigyoTaishoshaBuilder setNijiYoboKihonCheckList(NijiYoboKihonCheckList createNijiYoboKihonCheckList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

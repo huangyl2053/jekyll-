@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護賦課徴収猶予を管理するクラスです。
  */
-public class ChoshuYuyo extends ModelBase<ChoshuYuyoIdentifier, DbT2006ChoshuYuyoEntity, ChoshuYuyo> implements Serializable {
+public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006ChoshuYuyoEntity, ChoshuYuyo> implements Serializable {
 
     private final DbT2006ChoshuYuyoEntity entity;
     private final ChoshuYuyoIdentifier id;
@@ -263,6 +264,14 @@ public class ChoshuYuyo extends ModelBase<ChoshuYuyoIdentifier, DbT2006ChoshuYuy
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ChoshuYuyo modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KibetsuChoshuYuyo> getKibetsuChoshuYuyoList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

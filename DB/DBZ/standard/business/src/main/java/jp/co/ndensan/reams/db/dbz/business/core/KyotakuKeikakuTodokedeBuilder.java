@@ -196,4 +196,12 @@ public class KyotakuKeikakuTodokedeBuilder {
     public KyotakuKeikakuTodokede build() {
         return new KyotakuKeikakuTodokede(entity, id);
     }
+
+    public KyotakuKeikakuTodokedeBuilder setKyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakusei createKyotakuKeikakuJigyoshaSakusei) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public KyotakuKeikakuTodokedeBuilder setKyotakuKeikakuJikoSakusei(KyotakuKeikakuJikoSakusei createKyotakuKeikakuJigyoshaSakusei) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
