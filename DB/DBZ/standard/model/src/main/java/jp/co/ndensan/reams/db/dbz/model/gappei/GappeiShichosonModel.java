@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -58,7 +58,7 @@ public class GappeiShichosonModel implements Serializable, IGappeiShichoson {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get旧保険者番号() {
+    public HokenshaNo get旧保険者番号() {
         return entity.getKyuHokenshaNo();
     }
 

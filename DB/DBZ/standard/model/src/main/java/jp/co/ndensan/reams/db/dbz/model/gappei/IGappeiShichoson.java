@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -59,7 +59,7 @@ public interface IGappeiShichoson {
      *
      * @return 旧保険者番号
      */
-    ShoKisaiHokenshaNo get旧保険者番号();
+    HokenshaNo get旧保険者番号();
 
     /**
      * 旧市町村名称を返します。
