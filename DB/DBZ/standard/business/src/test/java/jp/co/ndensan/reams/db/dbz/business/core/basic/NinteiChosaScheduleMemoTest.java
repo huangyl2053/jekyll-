@@ -31,7 +31,7 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleDate 主キー名1;
     private static Code 主キー名2;
-    private static Decimal 主キー名3;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
@@ -128,7 +128,7 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
 
         @Test
         public void get連番は_entityが持つ連番を返す() {
-            assertThat(sut.get連番(), is(new Decimal(NinteiChosaScheduleMemoEntity.getRemban())));
+            assertThat(sut.get連番(), is(NinteiChosaScheduleMemoEntity.getRemban()));
         }
 
         @Test

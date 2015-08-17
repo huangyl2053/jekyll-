@@ -35,14 +35,14 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
      */
     public NinteiChosaScheduleMemo(FlexibleDate メモ年月日,
             Code メモ区分,
-            Decimal 連番) {
+            int 連番) {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT5222NinteiChosaScheduleMemoEntity();
         this.entity.setMemoYMD(メモ年月日);
         this.entity.setMemoKubun(メモ区分);
-        this.entity.setRemban(連番.intValue());
+        this.entity.setRemban(連番);
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 メモ年月日,
                 メモ区分,
@@ -61,7 +61,7 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 entity.getMemoYMD(),
                 entity.getMemoKubun(),
-                new Decimal(entity.getRemban()));
+                entity.getRemban());
     }
 
     /**
@@ -111,8 +111,8 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
      *
      * @return 連番
      */
-    public Decimal get連番() {
-        return new Decimal(entity.getRemban());
+    public int get連番() {
+        return entity.getRemban();
     }
 
     /**

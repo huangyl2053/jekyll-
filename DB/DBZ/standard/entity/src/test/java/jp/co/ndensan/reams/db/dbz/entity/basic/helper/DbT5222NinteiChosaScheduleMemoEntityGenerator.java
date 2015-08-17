@@ -18,7 +18,7 @@ public final class DbT5222NinteiChosaScheduleMemoEntityGenerator {
     public static final FlexibleDate DEFAULT_メモ年月日 = new FlexibleDate("20141030");
     public static final Code DEFAULT_調査地区コード = new Code("01");
     public static final Code DEFAULT_メモ区分 = new Code("01");
-    public static final Decimal DEFAULT_連番 = new Decimal(1);
+    public static final int DEFAULT_連番 = 1;
     public static final Code DEFAULT_メモ指定調査地区コード = new Code("01");
     public static final RString DEFAULT_作成者 = new RString("名称");
     public static final Code DEFAULT_メモ重要度 = new Code("01");
@@ -35,7 +35,7 @@ public final class DbT5222NinteiChosaScheduleMemoEntityGenerator {
         entity.setMemoYMD(DEFAULT_メモ年月日);
         entity.setChosaChikuCode(DEFAULT_調査地区コード);
         entity.setMemoKubun(DEFAULT_メモ区分);
-        entity.setRemban(DEFAULT_連番.intValue());
+        entity.setRemban(DEFAULT_連番);
         entity.setMemoShiteiChosaChikuCode(DEFAULT_メモ指定調査地区コード);
         entity.setSakuseisha(DEFAULT_作成者);
         entity.setMemoPriority(DEFAULT_メモ重要度);

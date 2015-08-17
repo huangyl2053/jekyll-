@@ -29,7 +29,7 @@ public class NinteiChosaScheduleMemoBuilderTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleDate メモ年月日;
     private static Code メモ区分;
-    private static Decimal 連番;
+    private static int 連番;
 
     @BeforeClass
     public static void setUpClass() {

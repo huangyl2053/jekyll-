@@ -19,7 +19,7 @@ public class NinteiChosaScheduleMemoIdentifier implements Serializable {
 
     private final FlexibleDate メモ年月日;
     private final Code メモ区分;
-    private final Decimal 連番;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -30,7 +30,7 @@ public class NinteiChosaScheduleMemoIdentifier implements Serializable {
      */
     public NinteiChosaScheduleMemoIdentifier(FlexibleDate メモ年月日,
             Code メモ区分,
-            Decimal 連番) {
+            int 連番) {
         this.メモ年月日 = メモ年月日;
         this.メモ区分 = メモ区分;
         this.連番 = 連番;

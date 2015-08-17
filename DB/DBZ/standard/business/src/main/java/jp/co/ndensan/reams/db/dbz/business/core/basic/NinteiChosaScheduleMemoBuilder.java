@@ -81,9 +81,9 @@ public class NinteiChosaScheduleMemoBuilder {
      * @param 連番 連番
      * @return {@link NinteiChosaScheduleMemoBuilder}
      */
-    public NinteiChosaScheduleMemoBuilder set連番(Decimal 連番) {
+    public NinteiChosaScheduleMemoBuilder set連番(int 連番) {
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        entity.setRemban(連番.intValue());
+        entity.setRemban(連番);
         return this;
     }
 

@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.viewstate;
+package jp.co.ndensan.reams.db.dbb.business.viewstate;
 
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import static org.hamcrest.CoreMatchers.is;
@@ -42,7 +43,7 @@ public class FukaShokaiKeyTest extends DbzTestBase {
                     new ChoteiNendo(DEFAULT_調定年度),
                     new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
-                    DEFAULT_処理日時,
+                    DEFAULT_調定日時,
                     DEFAULT_被保険者番号,
                     DEFAULT_賦課期日,
                     DEFAULT_更正月,
@@ -68,11 +69,11 @@ public class FukaShokaiKeyTest extends DbzTestBase {
             assertThat(sut.get通知書番号(), is(DbT2002FukaEntityGenerator.DEFAULT_通知書番号));
         }
 
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            assertThat(sut.get処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
+//            assertThat(sut.get処理日時(), is(DbT2002FukaEntityGenerator.DEFAULT_処理日時));
+//        }
+//
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             assertThat(sut.get被保険者番号(), is(DbT2002FukaEntityGenerator.DEFAULT_被保険者番号));
