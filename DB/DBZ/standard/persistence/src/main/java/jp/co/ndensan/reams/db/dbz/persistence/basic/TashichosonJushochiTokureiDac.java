@@ -7,16 +7,16 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.idoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -36,29 +36,29 @@ public class TashichosonJushochiTokureiDac implements IPersistable<DbT1003Tashic
     /**
      * 主キーで他市町村住所地特例を取得します。
      *
-     * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 ShoriTimeStamp
+     * @param 異動日 FlexibleDate
+     * @param 枝番 RString
      * @return DbT1003TashichosonJushochiTokureiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1003TashichosonJushochiTokureiEntity selectByKey(
-            LasdecCode 市町村コード,
             ShikibetsuCode 識別コード,
-            YMDHMS 処理日時) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+            FlexibleDate 異動日,
+            RString 枝番) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(idoYMD, 処理日時))).
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 

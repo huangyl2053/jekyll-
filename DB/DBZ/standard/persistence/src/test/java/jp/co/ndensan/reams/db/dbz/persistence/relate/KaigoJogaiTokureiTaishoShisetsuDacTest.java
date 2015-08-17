@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -63,8 +62,8 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルを返す() {
-            Optional<KaigoJogaiTokureiTaishoShisetsuModel> model = sut.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
-            assertThat(model.get().get事業者種別(), is(事業者種別));
+            Optional<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> model = sut.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
+            assertThat(model.get().getJigyoshaShubetsu(), is(事業者種別));
         }
     }
 
@@ -82,9 +81,9 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            IItemList<KaigoJogaiTokureiTaishoShisetsuModel> modelList = sut.select介護除外住所地特例対象施設一覧By事業者種別(事業者種別);
+            IItemList<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> modelList = sut.select介護除外住所地特例対象施設一覧By事業者種別(事業者種別);
             assertThat(modelList.size(), is(1));
-            assertThat(modelList.toList().get(0).get事業者種別(), is(事業者種別));
+            assertThat(modelList.toList().get(0).getJigyoshaShubetsu(), is(事業者種別));
 
         }
 
@@ -106,8 +105,7 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
         @Test
         public void KaigoJogaiTokureiTaishoShisetsuModelを渡した時_insertは_1を返す() {
 
-            KaigoJogaiTokureiTaishoShisetsuModel model = new KaigoJogaiTokureiTaishoShisetsuModel(
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity());
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity model = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
 
             assertThat(sut.insert(model), is(notNullValue()));
         }
@@ -129,12 +127,11 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
         // TODO ShisetsuNyutaishoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。異なる状態を指定する。
         @Test
         public void モデルの状態がModifiedの時_updateは_1を返す() {
-            KaigoJogaiTokureiTaishoShisetsuModel model = new KaigoJogaiTokureiTaishoShisetsuModel(
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity());
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity model = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
 
             sut.insert(model);
-            model.getEntity().initializeMd5();
-            model.set事業者種別(事業者種別);
+            model.getOriginMd5();
+            model.setJigyoshaShubetsu(事業者種別);
 
         }
 
@@ -150,8 +147,7 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
         // TODO ShisetsuNyutaishoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。
         @Test
         public void KaigoJogaiTokureiTaishoShisetsuModelを渡した時_deleteは_1を返す() {
-            KaigoJogaiTokureiTaishoShisetsuModel model = new KaigoJogaiTokureiTaishoShisetsuModel(
-                    DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.createDbT1005KaigoJogaiTokureiTaishoShisetsuEntity());
+            DbT1005KaigoJogaiTokureiTaishoShisetsuEntity model = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
 
             sut.insert(model);
             assertThat(sut.delete(model), is(1));
@@ -168,7 +164,7 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
             entity.setJigyoshaShubetsu(事業者種別);
             entity.setJigyoshaNo(事業者番号);
             entity.setYukoKaishiYMD(有効開始年月日);
-            介護除外住所地特例対象施設Dac.insert(entity);
+            介護除外住所地特例対象施設Dac.save(entity);
         }
     }
 

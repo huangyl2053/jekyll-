@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -22,10 +22,12 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 広域構成市町村マスタのDACです。
@@ -55,7 +57,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
                     .where(not(eq(gappeiKyuShichosonKubun, GappeiKyuShichosonKubun.合併旧市町村.code())))
                     .toList(DbT7051KoseiShichosonMasterEntity.class);
         } else {
-            result = dac.selectAll().toList();
+            result = dac.selectAll();
         }
         return ItemList.of(result).map(toModel());
     }
@@ -121,7 +123,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         if (model == null) {
             return result;
         }
-        return dac.update(model.getEntity());
+        return dac.save(model.getEntity());
     }
 
     @Override
@@ -130,7 +132,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         if (model == null) {
             return result;
         }
-        result = dac.insert(model.getEntity());
+        result = dac.save(model.getEntity());
         return result;
     }
 
@@ -140,7 +142,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         if (model == null) {
             return result;
         }
-        result = dac.delete(model.getEntity());
+        result = dac.save(model.getEntity());
         return result;
     }
 }
