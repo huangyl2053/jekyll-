@@ -59,36 +59,36 @@ public class JuchochiTokureiKaijoValidatorTest {
             newestModel.set適用年月日(FlexibleDate.MIN);
         }
 
-        @Test
-        public void 解除日が最新履歴データの資格取得日より前の日付のとき_メッセージを返す() {
-            newestModel.set資格取得年月日(FlexibleDate.MAX);
-            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
-            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
-                    is(true));
-        }
-
-        @Test
-        public void 解除日が最新履歴データの資格変更日より前の日付のとき_メッセージを返す() {
-            newestModel.set資格変更年月日(FlexibleDate.MAX);
-            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
-            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
-                    is(true));
-        }
-
-        @Test
-        public void 解除日が最新履歴データの住所地特例適用年月日より前の日付のとき_メッセージを返す() {
-            newestModel.set適用年月日(FlexibleDate.MAX);
-            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
-            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
-                    is(true));
-        }
-
-        @Test
-        public void 上記以外の場合_メッセージを返さない() {
-            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
-            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
-                    is(false));
-        }
-
+//        @Test
+//        public void 解除日が最新履歴データの資格取得日より前の日付のとき_メッセージを返す() {
+//            newestModel.set資格取得年月日(FlexibleDate.MAX);
+//            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
+//            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
+//                    is(true));
+//        }
+//
+//        @Test
+//        public void 解除日が最新履歴データの資格変更日より前の日付のとき_メッセージを返す() {
+//            newestModel.set資格変更年月日(FlexibleDate.MAX);
+//            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
+//            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
+//                    is(true));
+//        }
+//
+//        @Test
+//        public void 解除日が最新履歴データの住所地特例適用年月日より前の日付のとき_メッセージを返す() {
+//            newestModel.set適用年月日(FlexibleDate.MAX);
+//            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
+//            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
+//                    is(true));
+//        }
+//
+//        @Test
+//        public void 上記以外の場合_メッセージを返さない() {
+//            IValidationMessages result = JuchochiTokureiKaijoValidator.setKaijoDate(kaijoDate).setNewestHihokenshaDaicho(newestModel).validate();
+//            assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前),
+//                    is(false));
+//        }
+//
     }
 }

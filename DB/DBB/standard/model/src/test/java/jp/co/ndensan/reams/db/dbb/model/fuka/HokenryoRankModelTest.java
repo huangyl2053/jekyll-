@@ -2,10 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
+import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -47,8 +49,8 @@ public class HokenryoRankModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値のランク区分は_設定した値と同じランク区分を返す() {
-            sut.setランク区分(DbT2012HokenryoRankEntityGenerator.DEFAULT_ランク区分);
-            assertThat(sut.getランク区分(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_ランク区分));
+            sut.setランク区分(new RankKubun(DbT2012HokenryoRankEntityGenerator.DEFAULT_ランク区分));
+            assertThat(sut.getランク区分().value(), is(DbT2012HokenryoRankEntityGenerator.DEFAULT_ランク区分));
         }
 
         @Test

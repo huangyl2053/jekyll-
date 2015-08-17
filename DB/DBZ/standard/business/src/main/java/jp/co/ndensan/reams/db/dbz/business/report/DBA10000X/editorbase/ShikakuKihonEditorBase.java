@@ -88,7 +88,8 @@ public class ShikakuKihonEditorBase {
      */
     public void set被保険者番号(IHihokenshashoCommonEditData source) {
         HihokenshaDaichoModel hihoDaicho = hihokenshashoModel.getHihokenshaDaicho();
-        RString hihoNo = hihoDaicho.get被保険者番号().value();
+        RString hihoNo = RString.EMPTY;
+//        RString hihoNo = hihoDaicho.get被保険者番号().value();
 
         switch (printConfig.get被保険者番号表示書式()) {
             case 前ゼロをスペースに変換:

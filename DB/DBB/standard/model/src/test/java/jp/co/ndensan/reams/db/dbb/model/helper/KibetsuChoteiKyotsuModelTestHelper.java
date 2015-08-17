@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.helper;
+package jp.co.ndensan.reams.db.dbb.model.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 
 /**
  * KibetsuChoteiKyotsuModelのテストデータ作成クラスです。

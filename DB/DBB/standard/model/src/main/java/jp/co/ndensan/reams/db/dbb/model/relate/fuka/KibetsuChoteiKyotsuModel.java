@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.relate.fuka;
+package jp.co.ndensan.reams.db.dbb.model.relate.fuka;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 

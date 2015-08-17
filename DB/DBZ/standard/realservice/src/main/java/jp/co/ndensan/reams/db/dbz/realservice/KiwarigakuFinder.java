@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbb.persistence.relate.KibetsuChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ca.cax.business.IShuno;

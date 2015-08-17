@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -74,7 +74,7 @@ public class HokenryoDankaiModel implements Serializable {
      * @return 段階インデックス
      */
     public DankaiIndex get段階インデックス() {
-        return entity.getDankaiIndex();
+        return new DankaiIndex(entity.getDankaiIndex());
     }
 
     /**
@@ -83,7 +83,7 @@ public class HokenryoDankaiModel implements Serializable {
      * @return ランク区分
      */
     public RankKubun getランク区分() {
-        return entity.getRankuKubun();
+        return new RankKubun(entity.getRankuKubun());
     }
 
     /**
@@ -130,7 +130,7 @@ public class HokenryoDankaiModel implements Serializable {
      */
     public void set段階インデックス(DankaiIndex 段階インデックス) {
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
-        entity.setDankaiIndex(段階インデックス);
+        entity.setDankaiIndex(段階インデックス.value());
     }
 
     /**
@@ -140,7 +140,7 @@ public class HokenryoDankaiModel implements Serializable {
      */
     public void setランク区分(RankKubun ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
-        entity.setRankuKubun(ランク区分);
+        entity.setRankuKubun(ランク区分.value());
     }
 
     /**

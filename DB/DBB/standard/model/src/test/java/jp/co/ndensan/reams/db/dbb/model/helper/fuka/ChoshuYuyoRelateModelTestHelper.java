@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.helper.fuka;
+package jp.co.ndensan.reams.db.dbb.model.helper.fuka;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.model.fuka.ChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuChoshuYuyoModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
+import jp.co.ndensan.reams.db.dbb.model.relate.fuka.ChoshuYuyoRelateModel;
 
 /**
  * ChoshuYuyoRelateModelのテストデータ作成クラスです。

@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -42,14 +44,14 @@ public class HokenryoDankaiModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の段階インデックスは_設定した値と同じ段階インデックスを返す() {
-            sut.set段階インデックス(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス);
-            assertThat(sut.get段階インデックス(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス));
+            sut.set段階インデックス(new DankaiIndex(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス));
+            assertThat(sut.get段階インデックス().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス));
         }
 
         @Test
         public void 戻り値のランク区分は_設定した値と同じランク区分を返す() {
-            sut.setランク区分(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分);
-            assertThat(sut.getランク区分(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分));
+            sut.setランク区分(new RankKubun(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分));
+            assertThat(sut.getランク区分().value(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分));
         }
 
         @Test

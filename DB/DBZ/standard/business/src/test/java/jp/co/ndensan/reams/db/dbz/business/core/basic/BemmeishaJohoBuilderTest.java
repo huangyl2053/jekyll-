@@ -93,8 +93,8 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の弁明者枝番は_設定した値と同じ弁明者枝番を返す() {
-            business = sut.set弁明者枝番(new Decimal(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番)).build();
-            assertThat(business.get弁明者枝番().intValue(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番));
+            business = sut.set弁明者枝番(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番).build();
+            assertThat(business.get弁明者枝番(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番));
         }
 
         @Test

@@ -278,7 +278,6 @@ public class ChohyoSeigyoKyotsuControl extends ModelBase<ChohyoSeigyoKyotsuContr
      *
      * @return 変更対象処理実施後の{@link ChohyoSeigyoKyotsuControl}
      */
-    @Override
     public ChohyoSeigyoKyotsuControl modifiedModel() {
         DbT7066ChohyoSeigyoKyotsuControlEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

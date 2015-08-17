@@ -3,57 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.fuka;
+package jp.co.ndensan.reams.db.dbb.model.fuka;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 
 /**
- * ランク情報のモデルクラスです。
+ * 保険料ランクのモデルクラスです。
  *
  * @author N8156 宮本 康
  */
-public class RankJohoModel implements Serializable {
+public class HokenryoRankModel implements Serializable {
 
-    private DbT2011RankJohoEntity entity;
+    private DbT2012HokenryoRankEntity entity;
 
     /**
      * コンストラクタです。
      */
-    public RankJohoModel() {
-        entity = new DbT2011RankJohoEntity();
+    public HokenryoRankModel() {
+        entity = new DbT2012HokenryoRankEntity();
     }
 
     /**
      * コンストラクタです。
      *
-     * @param entity DbT2011RankJohoEntity
+     * @param entity DbT2012HokenryoRankEntity
      */
-    public RankJohoModel(DbT2011RankJohoEntity entity) {
+    public HokenryoRankModel(DbT2012HokenryoRankEntity entity) {
         this.entity = entity;
     }
 
     /**
-     * DbT2011RankJohoEntityを返します。
+     * DbT2012HokenryoRankEntityを返します。
      *
-     * @return DbT2011RankJohoEntity
+     * @return DbT2012HokenryoRankEntity
      */
-    public DbT2011RankJohoEntity getEntity() {
+    public DbT2012HokenryoRankEntity getEntity() {
         return entity;
     }
 
     /**
-     * DbT2011RankJohoEntityを設定します。
+     * DbT2012HokenryoRankEntityを設定します。
      *
-     * @param entity DbT2011RankJohoEntity
+     * @param entity DbT2012HokenryoRankEntity
      */
-    public void setEntity(DbT2011RankJohoEntity entity) {
+    public void setEntity(DbT2012HokenryoRankEntity entity) {
         this.entity = entity;
     }
 
@@ -67,21 +68,30 @@ public class RankJohoModel implements Serializable {
     }
 
     /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * ランク区分を返します。
      *
      * @return ランク区分
      */
     public RankKubun getランク区分() {
-        return entity.getRankKubun();
+        return new RankKubun(entity.getRankKubun());
     }
 
     /**
-     * ランク名称を返します。
+     * 遡及年度を返します。
      *
-     * @return ランク名称
+     * @return 遡及年度
      */
-    public RString getランク名称() {
-        return entity.getRankName();
+    public FlexibleYear get遡及年度() {
+        return entity.getSokyuNendo();
     }
 
     /**
@@ -95,23 +105,33 @@ public class RankJohoModel implements Serializable {
     }
 
     /**
+     * 市町村コードを設定します。
+     *
+     * @param 市町村コード 市町村コード
+     */
+    public void set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        entity.setShichosonCode(市町村コード);
+    }
+
+    /**
      * ランク区分を設定します。
      *
      * @param ランク区分 ランク区分
      */
     public void setランク区分(RankKubun ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
-        entity.setRankKubun(ランク区分);
+        entity.setRankKubun(ランク区分.value());
     }
 
     /**
-     * ランク名称を設定します。
+     * 遡及年度を設定します。
      *
-     * @param ランク名称 ランク名称
+     * @param 遡及年度 遡及年度
      */
-    public void setランク名称(RString ランク名称) {
-        requireNonNull(ランク名称, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク名称"));
-        entity.setRankName(ランク名称);
+    public void set遡及年度(FlexibleYear 遡及年度) {
+        requireNonNull(遡及年度, UrSystemErrorMessages.値がnull.getReplacedMessage("遡及年度"));
+        entity.setSokyuNendo(遡及年度);
     }
 
     /**

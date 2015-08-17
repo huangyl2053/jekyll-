@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.relate.fuka;
+package jp.co.ndensan.reams.db.dbb.model.relate.fuka;
 
+import jp.co.ndensan.reams.db.dbb.model.relate.fuka.ChoshuYuyoRelateModel;
 import java.util.Iterator;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuChoshuYuyoModel;
-import jp.co.ndensan.reams.db.dbz.model.helper.fuka.ChoshuYuyoRelateModelTestHelper;
+import jp.co.ndensan.reams.db.dbb.model.helper.fuka.ChoshuYuyoRelateModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

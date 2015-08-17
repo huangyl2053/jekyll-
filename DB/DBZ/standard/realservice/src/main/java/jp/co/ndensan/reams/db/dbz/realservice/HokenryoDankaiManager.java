@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbb.persistence.relate.HokenryoDankaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

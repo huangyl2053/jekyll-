@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbb.persistence.relate.HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
