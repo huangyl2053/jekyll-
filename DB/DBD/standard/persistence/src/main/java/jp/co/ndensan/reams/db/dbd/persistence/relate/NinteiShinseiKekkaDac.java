@@ -2,21 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbd.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbd.persistence.relate.JukyushaDaichoDac;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbd.model.JukyushaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -63,7 +64,7 @@ public class NinteiShinseiKekkaDac {
     }
 
     private Optional<NinteiKekkaJohoModel> select要介護認定結果情報ByKey(ShinseishoKanriNo 申請書管理番号) {
-        Optional<NinteiKekkaJohoModel> model = 要介護認定結果情報Dac.select直近要介護認定結果情報By申請書管理番号(申請書管理番号);
+        Optional<DbT4102NinteiKekkaJohoEntity> model = 要介護認定結果情報Dac.select直近要介護認定結果情報By申請書管理番号(申請書管理番号);
 
         return model;
     }

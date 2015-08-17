@@ -5,14 +5,16 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemo.memoKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemo.memoYMD;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV4001JukyushaDaicho.remban;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -41,7 +43,7 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
     public DbT5222NinteiChosaScheduleMemoEntity selectByKey(
             FlexibleDate メモ年月日,
             Code メモ区分,
-            Decimal 連番) throws NullPointerException {
+            int 連番) throws NullPointerException {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));

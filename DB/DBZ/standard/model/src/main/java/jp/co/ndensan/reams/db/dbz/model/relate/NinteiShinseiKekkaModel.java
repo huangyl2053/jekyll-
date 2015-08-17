@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.relate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
+import jp.co.ndensan.reams.db.dbd.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;

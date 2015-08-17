@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  *
  * @author n8300　姜井図
  */
-class HihokenshaDaichoModel {
+public class HihokenshaDaichoModel implements Serializable {
 
     void set市町村コード(LasdecCode shichosonCode) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
