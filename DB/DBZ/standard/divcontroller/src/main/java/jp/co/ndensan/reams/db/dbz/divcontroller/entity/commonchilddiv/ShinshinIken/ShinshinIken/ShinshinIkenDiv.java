@@ -33,10 +33,10 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     private SonotaShojoDiv SonotaShojo;
     @JsonProperty("KaradaJotai")
     private KaradaJotaiDiv KaradaJotai;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
-    @JsonProperty("btnKoshin")
-    private Button btnKoshin;
+    @JsonProperty("btnKakutei")
+    private Button btnKakutei;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,24 +94,24 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
         this.KaradaJotai=KaradaJotai;
     }
 
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
+    @JsonProperty("btnKakutei")
+    public Button getBtnKakutei() {
+        return btnKakutei;
     }
 
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru=btnModoru;
+    @JsonProperty("btnKakutei")
+    public void setBtnKakutei(Button btnKakutei) {
+        this.btnKakutei=btnKakutei;
     }
 
-    @JsonProperty("btnKoshin")
-    public Button getBtnKoshin() {
-        return btnKoshin;
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
     }
 
-    @JsonProperty("btnKoshin")
-    public void setBtnKoshin(Button btnKoshin) {
-        this.btnKoshin=btnKoshin;
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel=btnCancel;
     }
 
     /*

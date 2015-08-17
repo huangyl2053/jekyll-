@@ -93,12 +93,12 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgChiryoNaiyo"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
-            public btnKoshin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            public btnCansel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCansel"));
             }
 
         }

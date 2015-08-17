@@ -1,0 +1,68 @@
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken;
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * EiyoShokuseikatsu のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+public class EiyoShokuseikatsuDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    /*
+     * [ private の作成 ]
+     * クライアント側から取得した情報を元にを検索を行い
+     * コントロール名とフィールド名を取得する
+     * private + コントロール名 + フィールド名 の文字列を作成
+     */
+    @JsonProperty("radShokujiKoi")
+    private RadioButton radShokujiKoi;
+    @JsonProperty("radGenzaiEiyoJotai")
+    private RadioButton radGenzaiEiyoJotai;
+    @JsonProperty("txtEiyoShokuseikatsuRyuiten")
+    private TextBox txtEiyoShokuseikatsuRyuiten;
+
+    /*
+     * [ GetterとSetterの作成 ]
+     * クライアント側から取得した情報を元に検索を行い
+     * コントロール名とフィールド名を取得する
+     * フィールド名のGetterとSetter を作成
+     */
+    @JsonProperty("radShokujiKoi")
+    public RadioButton getRadShokujiKoi() {
+        return radShokujiKoi;
+    }
+
+    @JsonProperty("radShokujiKoi")
+    public void setRadShokujiKoi(RadioButton radShokujiKoi) {
+        this.radShokujiKoi=radShokujiKoi;
+    }
+
+    @JsonProperty("radGenzaiEiyoJotai")
+    public RadioButton getRadGenzaiEiyoJotai() {
+        return radGenzaiEiyoJotai;
+    }
+
+    @JsonProperty("radGenzaiEiyoJotai")
+    public void setRadGenzaiEiyoJotai(RadioButton radGenzaiEiyoJotai) {
+        this.radGenzaiEiyoJotai=radGenzaiEiyoJotai;
+    }
+
+    @JsonProperty("txtEiyoShokuseikatsuRyuiten")
+    public TextBox getTxtEiyoShokuseikatsuRyuiten() {
+        return txtEiyoShokuseikatsuRyuiten;
+    }
+
+    @JsonProperty("txtEiyoShokuseikatsuRyuiten")
+    public void setTxtEiyoShokuseikatsuRyuiten(TextBox txtEiyoShokuseikatsuRyuiten) {
+        this.txtEiyoShokuseikatsuRyuiten=txtEiyoShokuseikatsuRyuiten;
+    }
+
+    // </editor-fold>
+}
