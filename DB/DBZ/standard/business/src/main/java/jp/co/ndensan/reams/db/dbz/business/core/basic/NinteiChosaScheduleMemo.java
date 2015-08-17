@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,7 +42,7 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
         this.entity = new DbT5222NinteiChosaScheduleMemoEntity();
         this.entity.setMemoYMD(メモ年月日);
         this.entity.setMemoKubun(メモ区分);
-        this.entity.setRemban(連番);
+        this.entity.setRemban(連番.intValue());
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 メモ年月日,
                 メモ区分,
@@ -60,7 +61,7 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 entity.getMemoYMD(),
                 entity.getMemoKubun(),
-                entity.getRemban());
+                new Decimal(entity.getRemban()));
     }
 
     /**
@@ -111,7 +112,7 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
      * @return 連番
      */
     public Decimal get連番() {
-        return entity.getRemban();
+        return new Decimal(entity.getRemban());
     }
 
     /**
@@ -212,6 +213,11 @@ public class NinteiChosaScheduleMemo extends ParentModelBase<NinteiChosaSchedule
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id);
 
+    }
+
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {

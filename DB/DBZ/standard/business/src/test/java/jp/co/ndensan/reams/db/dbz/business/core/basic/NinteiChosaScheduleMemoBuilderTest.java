@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -74,6 +75,7 @@ public class NinteiChosaScheduleMemoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の連番は_設定した値と同じ連番を返す() {
             business = sut.set連番(DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番).build();
+//            assertThat(business.get連番(), is(DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番));
             assertThat(business.get連番(), is(DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番));
         }
 

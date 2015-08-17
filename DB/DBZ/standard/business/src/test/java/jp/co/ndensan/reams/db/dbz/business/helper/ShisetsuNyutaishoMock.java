@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.*;
 
 /**
@@ -34,7 +35,8 @@ public class ShisetsuNyutaishoMock {
         return new ShisetsuNyutaisho(
                 new LasdecCode(new RString("123456")),
                 new ShikibetsuCode(new RString("1234567890")),
-                RDateTime.of(2014, 1, 10, 11, 12),
+                new Decimal(1),
+                //                RDateTime.of(2014, 1, 10, 11, 12),
                 DaichoType.他市町村住所地特例者,
                 create期間(),
                 create入所施設(),
