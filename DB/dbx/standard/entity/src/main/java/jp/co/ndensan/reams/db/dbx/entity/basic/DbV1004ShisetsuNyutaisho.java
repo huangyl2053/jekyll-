@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbx.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbV1004HihokenshaShisetsuNyutaishoテーブルの項目定義クラスです。
+ * 介護保険施設入退所Aliveテーブルの項目定義クラスです。
  */
-public enum DbV1004HihokenshaShisetsuNyutaisho implements IColumnDefinition {
+public enum DbV1004ShisetsuNyutaisho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * shikibetsuCode
@@ -32,18 +32,30 @@ public enum DbV1004HihokenshaShisetsuNyutaisho implements IColumnDefinition {
      */
     nyushoShisetsuCode(2147483647, 0),
     /**
+     * nyushoShoriYMD
+     */
+    nyushoShoriYMD(2147483647, 0),
+    /**
      * nyushoYMD
      */
     nyushoYMD(2147483647, 0),
     /**
+     * taishoShoriYMD
+     */
+    taishoShoriYMD(2147483647, 0),
+    /**
      * taishoYMD
      */
-    taishoYMD(2147483647, 0);
+    taishoYMD(2147483647, 0),
+    /**
+     * roomKigoNo
+     */
+    roomKigoNo(20, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbV1004HihokenshaShisetsuNyutaisho(int maxLength, int scale) {
+    private DbV1004ShisetsuNyutaisho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

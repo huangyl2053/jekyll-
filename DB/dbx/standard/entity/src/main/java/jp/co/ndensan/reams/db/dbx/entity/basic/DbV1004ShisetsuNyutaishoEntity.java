@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
 /**
- * DbV1004HihokenshaShisetsuNyutaishoテーブルのエンティティクラスです。
+ * 介護保険施設入退所Aliveテーブルのエンティティクラスです。
  */
-public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004HihokenshaShisetsuNyutaishoEntity> implements IDbAccessable {
+public class DbV1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004ShisetsuNyutaishoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
-    public static final RString TABLE_NAME = new RString("DbV1004HihokenshaShisetsuNyutaisho");
+    public static final RString TABLE_NAME = new RString("DbV1004ShisetsuNyutaisho");
 
     private ShikibetsuCode shikibetsuCode;
     private int rirekiNo;
@@ -24,8 +24,11 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
     private DbUDD004JigyoshaNo nyushoShisetsuCode;
+    private FlexibleDate nyushoShoriYMD;
     private FlexibleDate nyushoYMD;
+    private FlexibleDate taishoShoriYMD;
     private FlexibleDate taishoYMD;
+    private RString roomKigoNo;
 
     /**
      * shikibetsuCodeのgetメソッドです。
@@ -136,6 +139,24 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     }
 
     /**
+     * nyushoShoriYMDのgetメソッドです。
+     * 
+     * @return nyushoShoriYMD
+     */
+    public FlexibleDate getNyushoShoriYMD() {
+        return nyushoShoriYMD;
+    }
+
+    /**
+     * nyushoShoriYMDのsetメソッドです。
+     * 
+     * @param nyushoShoriYMD nyushoShoriYMD
+     */
+    public void setNyushoShoriYMD(FlexibleDate nyushoShoriYMD) {
+        this.nyushoShoriYMD = nyushoShoriYMD;
+    }
+
+    /**
      * nyushoYMDのgetメソッドです。
      * 
      * @return nyushoYMD
@@ -151,6 +172,24 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
         this.nyushoYMD = nyushoYMD;
+    }
+
+    /**
+     * taishoShoriYMDのgetメソッドです。
+     * 
+     * @return taishoShoriYMD
+     */
+    public FlexibleDate getTaishoShoriYMD() {
+        return taishoShoriYMD;
+    }
+
+    /**
+     * taishoShoriYMDのsetメソッドです。
+     * 
+     * @param taishoShoriYMD taishoShoriYMD
+     */
+    public void setTaishoShoriYMD(FlexibleDate taishoShoriYMD) {
+        this.taishoShoriYMD = taishoShoriYMD;
     }
 
     /**
@@ -172,14 +211,32 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbV1004HihokenshaShisetsuNyutaishoEntity}と等しいか判定します。
+     * roomKigoNoのgetメソッドです。
+     * 
+     * @return roomKigoNo
+     */
+    public RString getRoomKigoNo() {
+        return roomKigoNo;
+    }
+
+    /**
+     * roomKigoNoのsetメソッドです。
+     * 
+     * @param roomKigoNo roomKigoNo
+     */
+    public void setRoomKigoNo(RString roomKigoNo) {
+        this.roomKigoNo = roomKigoNo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbV1004ShisetsuNyutaishoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
      * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbV1004HihokenshaShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbV1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbV1004HihokenshaShisetsuNyutaishoEntity other) {
+    public boolean equalsPrimaryKeys(DbV1004ShisetsuNyutaishoEntity other) {
         if (other == null) {
             return false;
         }
@@ -190,15 +247,18 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbV1004HihokenshaShisetsuNyutaishoEntity entity) {
+    public void shallowCopy(DbV1004ShisetsuNyutaishoEntity entity) {
         this.shikibetsuCode = entity.shikibetsuCode;
         this.rirekiNo = entity.rirekiNo;
         this.shichosonCode = entity.shichosonCode;
         this.daichoShubetsu = entity.daichoShubetsu;
         this.nyushoShisetsuShurui = entity.nyushoShisetsuShurui;
         this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
+        this.nyushoShoriYMD = entity.nyushoShoriYMD;
         this.nyushoYMD = entity.nyushoYMD;
+        this.taishoShoriYMD = entity.taishoShoriYMD;
         this.taishoYMD = entity.taishoYMD;
+        this.roomKigoNo = entity.roomKigoNo;
     }
 
     /**
@@ -207,9 +267,8 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo);
     }
 
 // </editor-fold>
-
 }

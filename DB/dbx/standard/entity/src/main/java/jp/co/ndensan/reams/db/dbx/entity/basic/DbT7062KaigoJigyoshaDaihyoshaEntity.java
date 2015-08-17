@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -14,17 +15,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT7062KaigoJigyoshaDaihyoshaの項目定義クラスです
  *
  */
-@OnNextSchema("rgdb")
 public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT7062KaigoJigyoshaDaihyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7062KaigoJigyoshaDaihyosha");
 
@@ -55,8 +52,8 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     private TelNo kaisetsushaFaxNo;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -64,8 +61,8 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -73,8 +70,8 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -82,17 +79,18 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -100,281 +98,281 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getJigyoshaNo
-     *
-     * @return jigyoshaNo
+     * 事業者番号のgetメソッドです。
+     * 
+     * @return 事業者番号
      */
     public KaigoJigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
     /**
-     * setJigyoshaNo
-     *
-     * @param jigyoshaNo jigyoshaNo
+     * 事業者番号のsetメソッドです。
+     * 
+     * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
-     * getYukoKaishiYMD
-     *
-     * @return yukoKaishiYMD
+     * 有効開始日のgetメソッドです。
+     * 
+     * @return 有効開始日
      */
     public FlexibleDate getYukoKaishiYMD() {
         return yukoKaishiYMD;
     }
 
     /**
-     * setYukoKaishiYMD
-     *
-     * @param yukoKaishiYMD yukoKaishiYMD
+     * 有効開始日のsetメソッドです。
+     * 
+     * @param yukoKaishiYMD 有効開始日
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
         this.yukoKaishiYMD = yukoKaishiYMD;
     }
 
     /**
-     * getDaihyoshaShimei
-     *
-     * @return daihyoshaShimei
+     * 代表者名のgetメソッドです。
+     * 
+     * @return 代表者名
      */
     public AtenaMeisho getDaihyoshaShimei() {
         return daihyoshaShimei;
     }
 
     /**
-     * setDaihyoshaShimei
-     *
-     * @param daihyoshaShimei daihyoshaShimei
+     * 代表者名のsetメソッドです。
+     * 
+     * @param daihyoshaShimei 代表者名
      */
     public void setDaihyoshaShimei(AtenaMeisho daihyoshaShimei) {
         this.daihyoshaShimei = daihyoshaShimei;
     }
 
     /**
-     * getDaihyoshaKanaShimei
-     *
-     * @return daihyoshaKanaShimei
+     * 代表者名カナのgetメソッドです。
+     * 
+     * @return 代表者名カナ
      */
     public AtenaKanaMeisho getDaihyoshaKanaShimei() {
         return daihyoshaKanaShimei;
     }
 
     /**
-     * setDaihyoshaKanaShimei
-     *
-     * @param daihyoshaKanaShimei daihyoshaKanaShimei
+     * 代表者名カナのsetメソッドです。
+     * 
+     * @param daihyoshaKanaShimei 代表者名カナ
      */
     public void setDaihyoshaKanaShimei(AtenaKanaMeisho daihyoshaKanaShimei) {
         this.daihyoshaKanaShimei = daihyoshaKanaShimei;
     }
 
     /**
-     * getDaihyoshaYubinNo
-     *
-     * @return daihyoshaYubinNo
+     * 代表者郵便番号のgetメソッドです。
+     * 
+     * @return 代表者郵便番号
      */
     public YubinNo getDaihyoshaYubinNo() {
         return daihyoshaYubinNo;
     }
 
     /**
-     * setDaihyoshaYubinNo
-     *
-     * @param daihyoshaYubinNo daihyoshaYubinNo
+     * 代表者郵便番号のsetメソッドです。
+     * 
+     * @param daihyoshaYubinNo 代表者郵便番号
      */
     public void setDaihyoshaYubinNo(YubinNo daihyoshaYubinNo) {
         this.daihyoshaYubinNo = daihyoshaYubinNo;
     }
 
     /**
-     * getDaihyoshaJusho
-     *
-     * @return daihyoshaJusho
+     * 代表者住所のgetメソッドです。
+     * 
+     * @return 代表者住所
      */
     public AtenaJusho getDaihyoshaJusho() {
         return daihyoshaJusho;
     }
 
     /**
-     * setDaihyoshaJusho
-     *
-     * @param daihyoshaJusho daihyoshaJusho
+     * 代表者住所のsetメソッドです。
+     * 
+     * @param daihyoshaJusho 代表者住所
      */
     public void setDaihyoshaJusho(AtenaJusho daihyoshaJusho) {
         this.daihyoshaJusho = daihyoshaJusho;
     }
 
     /**
-     * getDaihyoshaKanaJusho
-     *
-     * @return daihyoshaKanaJusho
+     * 代表者住所カナのgetメソッドです。
+     * 
+     * @return 代表者住所カナ
      */
     public RString getDaihyoshaKanaJusho() {
         return daihyoshaKanaJusho;
     }
 
     /**
-     * setDaihyoshaKanaJusho
-     *
-     * @param daihyoshaKanaJusho daihyoshaKanaJusho
+     * 代表者住所カナのsetメソッドです。
+     * 
+     * @param daihyoshaKanaJusho 代表者住所カナ
      */
     public void setDaihyoshaKanaJusho(RString daihyoshaKanaJusho) {
         this.daihyoshaKanaJusho = daihyoshaKanaJusho;
     }
 
     /**
-     * getDaihyoshaYakushokuMei
-     *
-     * @return daihyoshaYakushokuMei
+     * 代表者役職名のgetメソッドです。
+     * 
+     * @return 代表者役職名
      */
     public RString getDaihyoshaYakushokuMei() {
         return daihyoshaYakushokuMei;
     }
 
     /**
-     * setDaihyoshaYakushokuMei
-     *
-     * @param daihyoshaYakushokuMei daihyoshaYakushokuMei
+     * 代表者役職名のsetメソッドです。
+     * 
+     * @param daihyoshaYakushokuMei 代表者役職名
      */
     public void setDaihyoshaYakushokuMei(RString daihyoshaYakushokuMei) {
         this.daihyoshaYakushokuMei = daihyoshaYakushokuMei;
     }
 
     /**
-     * getKaisetsushaShimei
-     *
-     * @return kaisetsushaShimei
+     * 開設者名称のgetメソッドです。
+     * 
+     * @return 開設者名称
      */
     public AtenaMeisho getKaisetsushaShimei() {
         return kaisetsushaShimei;
     }
 
     /**
-     * setKaisetsushaShimei
-     *
-     * @param kaisetsushaShimei kaisetsushaShimei
+     * 開設者名称のsetメソッドです。
+     * 
+     * @param kaisetsushaShimei 開設者名称
      */
     public void setKaisetsushaShimei(AtenaMeisho kaisetsushaShimei) {
         this.kaisetsushaShimei = kaisetsushaShimei;
     }
 
     /**
-     * getKaisetsushaKanaShimei
-     *
-     * @return kaisetsushaKanaShimei
+     * 開設者名称カナのgetメソッドです。
+     * 
+     * @return 開設者名称カナ
      */
     public AtenaKanaMeisho getKaisetsushaKanaShimei() {
         return kaisetsushaKanaShimei;
     }
 
     /**
-     * setKaisetsushaKanaShimei
-     *
-     * @param kaisetsushaKanaShimei kaisetsushaKanaShimei
+     * 開設者名称カナのsetメソッドです。
+     * 
+     * @param kaisetsushaKanaShimei 開設者名称カナ
      */
     public void setKaisetsushaKanaShimei(AtenaKanaMeisho kaisetsushaKanaShimei) {
         this.kaisetsushaKanaShimei = kaisetsushaKanaShimei;
     }
 
     /**
-     * getKaisetsushaYubinNo
-     *
-     * @return kaisetsushaYubinNo
+     * 開設者郵便番号のgetメソッドです。
+     * 
+     * @return 開設者郵便番号
      */
     public YubinNo getKaisetsushaYubinNo() {
         return kaisetsushaYubinNo;
     }
 
     /**
-     * setKaisetsushaYubinNo
-     *
-     * @param kaisetsushaYubinNo kaisetsushaYubinNo
+     * 開設者郵便番号のsetメソッドです。
+     * 
+     * @param kaisetsushaYubinNo 開設者郵便番号
      */
     public void setKaisetsushaYubinNo(YubinNo kaisetsushaYubinNo) {
         this.kaisetsushaYubinNo = kaisetsushaYubinNo;
     }
 
     /**
-     * getKaisetsushaJusho
-     *
-     * @return kaisetsushaJusho
+     * 開設者住所のgetメソッドです。
+     * 
+     * @return 開設者住所
      */
     public AtenaJusho getKaisetsushaJusho() {
         return kaisetsushaJusho;
     }
 
     /**
-     * setKaisetsushaJusho
-     *
-     * @param kaisetsushaJusho kaisetsushaJusho
+     * 開設者住所のsetメソッドです。
+     * 
+     * @param kaisetsushaJusho 開設者住所
      */
     public void setKaisetsushaJusho(AtenaJusho kaisetsushaJusho) {
         this.kaisetsushaJusho = kaisetsushaJusho;
     }
 
     /**
-     * getKaisetsushaKanaJusho
-     *
-     * @return kaisetsushaKanaJusho
+     * 開設者住所カナのgetメソッドです。
+     * 
+     * @return 開設者住所カナ
      */
     public RString getKaisetsushaKanaJusho() {
         return kaisetsushaKanaJusho;
     }
 
     /**
-     * setKaisetsushaKanaJusho
-     *
-     * @param kaisetsushaKanaJusho kaisetsushaKanaJusho
+     * 開設者住所カナのsetメソッドです。
+     * 
+     * @param kaisetsushaKanaJusho 開設者住所カナ
      */
     public void setKaisetsushaKanaJusho(RString kaisetsushaKanaJusho) {
         this.kaisetsushaKanaJusho = kaisetsushaKanaJusho;
     }
 
     /**
-     * getKaisetsushaTelNo
-     *
-     * @return kaisetsushaTelNo
+     * 開設者電話番号のgetメソッドです。
+     * 
+     * @return 開設者電話番号
      */
     public TelNo getKaisetsushaTelNo() {
         return kaisetsushaTelNo;
     }
 
     /**
-     * setKaisetsushaTelNo
-     *
-     * @param kaisetsushaTelNo kaisetsushaTelNo
+     * 開設者電話番号のsetメソッドです。
+     * 
+     * @param kaisetsushaTelNo 開設者電話番号
      */
     public void setKaisetsushaTelNo(TelNo kaisetsushaTelNo) {
         this.kaisetsushaTelNo = kaisetsushaTelNo;
     }
 
     /**
-     * getKaisetsushaFaxNo
-     *
-     * @return kaisetsushaFaxNo
+     * 開設者ＦＡＸ番号のgetメソッドです。
+     * 
+     * @return 開設者ＦＡＸ番号
      */
     public TelNo getKaisetsushaFaxNo() {
         return kaisetsushaFaxNo;
     }
 
     /**
-     * setKaisetsushaFaxNo
-     *
-     * @param kaisetsushaFaxNo kaisetsushaFaxNo
+     * 開設者ＦＡＸ番号のsetメソッドです。
+     * 
+     * @param kaisetsushaFaxNo 開設者ＦＡＸ番号
      */
     public void setKaisetsushaFaxNo(TelNo kaisetsushaFaxNo) {
         this.kaisetsushaFaxNo = kaisetsushaFaxNo;
     }
 
     /**
-     * このエンティティの主キーが他の{@literal UrT0520KaigoJigyoshaDaihyoshaEntity}と等しいか判定します。
-     *
+     * このエンティティの主キーが他の{@literal DbT7062KaigoJigyoshaDaihyoshaEntity}と等しいか判定します。
+     * 
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal UrT0520KaigoJigyoshaDaihyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7062KaigoJigyoshaDaihyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7062KaigoJigyoshaDaihyoshaEntity other) {
@@ -414,7 +412,6 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -423,4 +420,5 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
 // </editor-fold>
+
 }
