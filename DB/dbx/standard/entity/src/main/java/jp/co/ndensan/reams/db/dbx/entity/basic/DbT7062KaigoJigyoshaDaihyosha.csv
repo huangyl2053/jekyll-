@@ -1,0 +1,15 @@
+﻿jigyoshaNo,UDD060KaigoJigyoshaNo,KaigoJigyoshaNo,,,,,A
+yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+daihyoshaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+daihyoshaKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+daihyoshaYubinNo,UDD003YubinNo,YubinNo,,,,,A
+daihyoshaJusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+daihyoshaKanaJusho,varchar,RString,,,,,A
+daihyoshaYakushokuMei,varchar,RString,,,,,A
+kaisetsushaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+kaisetsushaKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+kaisetsushaYubinNo,UDD003YubinNo,YubinNo,,,,,A
+kaisetsushaJusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+kaisetsushaKanaJusho,varchar,RString,,,,,A
+kaisetsushaTelNo,UDD026TelNo,TelNo,,,,,A
+kaisetsushaFaxNo,UDD026TelNo,TelNo,,,,,A

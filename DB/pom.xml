@@ -21,6 +21,7 @@
         <module>DBE/standard</module>
         <module>DBU/standard</module>
         <module>DBZ/standard</module>
+        <module>DBX/standard</module>
     </modules>
 
 <repositories>
