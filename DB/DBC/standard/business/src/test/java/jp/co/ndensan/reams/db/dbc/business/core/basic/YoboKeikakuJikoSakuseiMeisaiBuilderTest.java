@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisaiBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
 import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

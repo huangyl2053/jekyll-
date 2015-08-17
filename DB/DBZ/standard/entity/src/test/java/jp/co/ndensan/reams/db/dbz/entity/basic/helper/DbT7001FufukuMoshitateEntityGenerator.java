@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -10,50 +10,55 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 不服審査申立情報エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7001FufukuMoshitateEntityGenerator {
 
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("02"));
-    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("001234567890");
-    public static final HihokenshaNo DEFAULT_原処分被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_審査請求届出日 = new FlexibleDate("20140402");
-    public static final YubinNo DEFAULT_原処分被保険者郵便番号 = new YubinNo(new RString("0100230"));
-    public static final AtenaJusho DEFAULT_原処分被保険者住所 = new AtenaJusho("申請書記載住所");
-    public static final AtenaMeisho DEFAULT_原処分被保険者氏名 = new AtenaMeisho("電算太郎");
-    public static final TelNo DEFAULT_原処分被保険者電話番号 = new TelNo("012-345-6789");
-    public static final FlexibleDate DEFAULT_原処分被保険者生年月日 = new FlexibleDate("20140402");
-    public static final YubinNo DEFAULT_審査請求人郵便番号 = new YubinNo(new RString("0103021"));
-    public static final AtenaJusho DEFAULT_審査請求人住所 = new AtenaJusho("申請書記載住所");
-    public static final AtenaMeisho DEFAULT_審査請求人氏名 = new AtenaMeisho("電算太郎");
-    public static final TelNo DEFAULT_審査請求人電話番号 = new TelNo("012-345-6789");
-    public static final Code DEFAULT_被保険者との関係コード = new Code("3");
-    public static final YubinNo DEFAULT_代理人郵便番号 = new YubinNo(new RString("0102012"));
-    public static final AtenaJusho DEFAULT_代理人住所 = new AtenaJusho("申請書記載住所");
-    public static final AtenaMeisho DEFAULT_代理人氏名 = new AtenaMeisho("電算太郎");
-    public static final TelNo DEFAULT_代理人電話番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_処分庁 = new RString("123");
-    public static final FlexibleDate DEFAULT_処分日 = new FlexibleDate("20140402");
-    public static final Code DEFAULT_処分種類コード = new Code("3");
-    public static final FlexibleDate DEFAULT_処分があったことを知った日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_審査請求の理由 = new RString("1");
-    public static final RString DEFAULT_処分庁教示の有無及び教示の内容 = new RString("1");
+    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("209007");
+    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
+    public static final HihokenshaNo DEFAULT_原処分被保険者番号 = new HihokenshaNo("010101");
+    public static final FlexibleDate DEFAULT_審査請求届出日 = new FlexibleDate("19900101");
+    public static final YubinNo DEFAULT_原処分被保険者郵便番号 = new YubinNo("0010001");
+    public static final AtenaJusho DEFAULT_原処分被保険者住所 = new AtenaJusho("");
+    public static final AtenaMeisho DEFAULT_原処分被保険者氏名 = new AtenaMeisho("");
+    public static final TelNo DEFAULT_原処分被保険者電話番号 = new TelNo("08011112222");
+    public static final FlexibleDate DEFAULT_原処分被保険者生年月日 = new FlexibleDate("19900101");
+    public static final YubinNo DEFAULT_審査請求人郵便番号 = new YubinNo("0010001");
+    public static final AtenaJusho DEFAULT_審査請求人住所 = new AtenaJusho("");
+    public static final AtenaMeisho DEFAULT_審査請求人氏名 = new AtenaMeisho("");
+    public static final TelNo DEFAULT_審査請求人電話番号 = new TelNo("08011112222");
+    public static final Code DEFAULT_被保険者との関係コード = new Code();
+    public static final YubinNo DEFAULT_代理人郵便番号 = new YubinNo("0010001");
+    public static final AtenaJusho DEFAULT_代理人住所 = new AtenaJusho("");
+    public static final AtenaMeisho DEFAULT_代理人氏名 = new AtenaMeisho("");
+    public static final TelNo DEFAULT_代理人電話番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_処分庁 = new RString("Data");
+    public static final FlexibleDate DEFAULT_処分日 = new FlexibleDate("19900101");
+    public static final Code DEFAULT_処分種類コード = new Code();
+    public static final FlexibleDate DEFAULT_処分があったことを知った日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_審査請求の理由 = new RString("Data");
+    public static final RString DEFAULT_処分庁教示の有無及び教示の内容 = new RString("Data");
     public static final boolean DEFAULT_添付書類等 = false;
-    public static final FlexibleDate DEFAULT_審査請求取下日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_審査請求取下日 = new FlexibleDate("19900101");
     public static final boolean DEFAULT_弁明書登録フラグ = false;
-    public static final FlexibleDate DEFAULT_弁明書作成日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_裁決日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_裁決結果 = new RString("1");
-    public static final RString DEFAULT_裁決理由 = new RString("2");
+    public static final FlexibleDate DEFAULT_弁明書作成日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_裁決日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_裁決結果 = new RString("Data");
+    public static final RString DEFAULT_裁決理由 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

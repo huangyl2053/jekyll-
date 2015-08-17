@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

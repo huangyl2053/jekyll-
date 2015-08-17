@@ -195,4 +195,8 @@ public class TandokuJoseikinKyufuShinseiBuilder {
     public TandokuJoseikinKyufuShinsei build() {
         return new TandokuJoseikinKyufuShinsei(entity, id);
     }
+
+    public TandokuJoseikinKyufuShinseiBuilder setTandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKettei createTandokuJoseikinKyufuKettei) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -420,4 +420,12 @@ public class NijiYoboKihonCheckListBuilder {
     public NijiYoboKihonCheckList build() {
         return new NijiYoboKihonCheckList(entity, id);
     }
+
+    public NijiYoboKihonCheckListBuilder setNijiYoboNiniCheckList(NijiYoboNiniCheckList createNijiYoboNiniCheckList) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public NijiYoboKihonCheckListBuilder setNijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekka createNijiYoboCheckListHanteiKekka) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

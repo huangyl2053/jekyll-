@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
@@ -231,6 +232,14 @@ public class RiyoshaFutanWariai extends ModelBase<RiyoshaFutanWariaiIdentifier, 
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public RiyoshaFutanWariai modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<RiyoshaFutanWariaiMeisai> getRiyoshaFutanWariaiMeisaiList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

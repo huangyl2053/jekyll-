@@ -16,6 +16,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.8</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>

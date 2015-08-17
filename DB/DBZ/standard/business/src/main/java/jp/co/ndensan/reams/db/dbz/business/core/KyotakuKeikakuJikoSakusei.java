@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画自己作成を管理するクラスです。
  */
-public class KyotakuKeikakuJikoSakusei extends ModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei> implements Serializable {
+public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei> implements Serializable {
 
     private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
     private final KyotakuKeikakuJikoSakuseiIdentifier id;
@@ -220,6 +222,23 @@ public class KyotakuKeikakuJikoSakusei extends ModelBase<KyotakuKeikakuJikoSakus
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KyotakuKeikakuJikoSakusei modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KyotakuKeikakuJikosakuseiMeisai> getKyotakuKeikakuJikosakuseiMeisaiList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<YoboKeikakuJikoSakuseiMeisai> getYoboKeikakuJikoSakuseiMeisaiList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public KyotakuKeikakuJikoSakusei modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
