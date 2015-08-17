@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaishaEnti
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1009ShikakuShutokuJogaishaDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -50,7 +49,7 @@ public class ShikakuShutokuJogaishaManager {
     @Transaction
     public ShikakuShutokuJogaisha get資格取得除外者(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 

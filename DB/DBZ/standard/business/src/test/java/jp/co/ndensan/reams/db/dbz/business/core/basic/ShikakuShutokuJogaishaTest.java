@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaishaEnti
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1009ShikakuShutokuJogaishaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -31,7 +30,7 @@ public class ShikakuShutokuJogaishaTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShikibetsuCode 識別コード;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -55,11 +54,6 @@ public class ShikakuShutokuJogaishaTest extends DbzTestBase {
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
             sut = new ShikakuShutokuJogaisha(null, 履歴番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShikakuShutokuJogaisha(識別コード, null);
         }
 
         @Test
