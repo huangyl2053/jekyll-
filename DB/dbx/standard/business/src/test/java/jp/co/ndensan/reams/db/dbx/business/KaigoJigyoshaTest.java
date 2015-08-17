@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbx.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.HojinsShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
@@ -191,8 +193,9 @@ public class KaigoJigyoshaTest extends DbxTestBase {
 
         @Test
         public void setShiteiKijungaitoJigyoshaKubunで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShiteiKijungaitoJigyoshaKubun(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分).build();
-            assertThat(result.get指定基準該当等事業所区分(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分));
+            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShiteiKijungaitoJigyoshaKubun(
+                    new ShiteiKijunGaitoJigyoshoKubun(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分.getColumnValue())).build();
+            assertThat(result.get指定基準該当等事業所区分().value(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分));
         }
 
         @Test
@@ -209,8 +212,9 @@ public class KaigoJigyoshaTest extends DbxTestBase {
 
         @Test
         public void setHojinShubetsuで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setHojinShubetsu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_法人等種別).build();
-            assertThat(result.get法人等種別(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_法人等種別));
+            KaigoJigyosha result = KaigoJigyosha.newBuilder().setHojinShubetsu(
+                    new HojinsShubetsu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_法人等種別)).build();
+            assertThat(result.get法人等種別().value(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_法人等種別));
         }
 
         @Test

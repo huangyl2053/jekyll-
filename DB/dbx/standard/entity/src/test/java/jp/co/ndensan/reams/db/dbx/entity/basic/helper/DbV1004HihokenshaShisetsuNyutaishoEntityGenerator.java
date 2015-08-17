@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,8 +25,8 @@ public final class DbV1004HihokenshaShisetsuNyutaishoEntityGenerator {
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("0000000001");
     public static final YMDHMS DEFAULT_処理日時 = new YMDHMS("20140901083000");
-    public static final Daicho DEFAULT_台帳種別 = new Daicho(new RString("1"));
-    public static final Shisetsu DEFAULT_入所施設種類 = new Shisetsu(new RString("11"));
+    public static final RString DEFAULT_台帳種別 = new RString("1");
+    public static final RString DEFAULT_入所施設種類 = new RString("11");
     public static final KaigoJigyoshaNo DEFAULT_入所施設コード = new KaigoJigyoshaNo("1234567890");
     public static final FlexibleDate DEFAULT_入所日 = new FlexibleDate("20101010");
     public static final FlexibleDate DEFAULT_退所日 = new FlexibleDate("20111010");
@@ -40,7 +41,7 @@ public final class DbV1004HihokenshaShisetsuNyutaishoEntityGenerator {
         DbV1004HihokenshaShisetsuNyutaishoEntity entity = new DbV1004HihokenshaShisetsuNyutaishoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
         entity.setShikibetsuCode(DEFAULT_識別コード);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+//        entity.setShoriTimestamp(DEFAULT_処理日時);
         entity.setDaichoShubetsu(DEFAULT_台帳種別);
         entity.setNyushoShisetsuShurui(DEFAULT_入所施設種類);
         entity.setNyushoShisetsuCode(DEFAULT_入所施設コード);

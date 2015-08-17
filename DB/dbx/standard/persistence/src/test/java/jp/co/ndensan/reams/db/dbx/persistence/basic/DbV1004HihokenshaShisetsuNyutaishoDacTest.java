@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -29,7 +30,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoDacTest extends DbxTestDacBase {
     private static DbV1004HihokenshaShisetsuNyutaishoDac sut;
     private static final LasdecCode 市町村コード = new LasdecCode("000001");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("001");
-    private static final RDateTime 処理日時 = RDateTime.MIN;
+    private static final Decimal 履歴番号 = Decimal.ONE;
 
     @BeforeClass
     public static void setUpClass() {
@@ -43,7 +44,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     null,
                     識別コード,
-                    処理日時);
+                    履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -51,7 +52,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     市町村コード,
                     null,
-                    処理日時);
+                    履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -67,7 +68,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoDacTest extends DbxTestDacBase {
             assertThat(sut.selectByKey(
                     市町村コード,
                     識別コード,
-                    処理日時), is(nullValue()));
+                    履歴番号), is(nullValue()));
         }
     }
 

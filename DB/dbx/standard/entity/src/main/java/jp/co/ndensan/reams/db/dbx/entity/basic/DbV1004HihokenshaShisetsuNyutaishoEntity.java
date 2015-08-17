@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * DbV1004HihokenshaShisetsuNyutaishoテーブルのエンティティクラスです。
  */
 public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004HihokenshaShisetsuNyutaishoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV1004HihokenshaShisetsuNyutaisho");
 
@@ -23,13 +25,13 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     private LasdecCode shichosonCode;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
-    private DbUDD004JigyoshaNo nyushoShisetsuCode;
+    private KaigoJigyoshaNo nyushoShisetsuCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -38,7 +40,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -47,7 +49,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     public int getRirekiNo() {
@@ -56,7 +58,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -65,7 +67,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * shichosonCodeのgetメソッドです。
-     * 
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -74,7 +76,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * shichosonCodeのsetメソッドです。
-     * 
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -83,7 +85,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * daichoShubetsuのgetメソッドです。
-     * 
+     *
      * @return daichoShubetsu
      */
     public RString getDaichoShubetsu() {
@@ -92,7 +94,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * daichoShubetsuのsetメソッドです。
-     * 
+     *
      * @param daichoShubetsu daichoShubetsu
      */
     public void setDaichoShubetsu(RString daichoShubetsu) {
@@ -101,7 +103,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * nyushoShisetsuShuruiのgetメソッドです。
-     * 
+     *
      * @return nyushoShisetsuShurui
      */
     public RString getNyushoShisetsuShurui() {
@@ -110,7 +112,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * nyushoShisetsuShuruiのsetメソッドです。
-     * 
+     *
      * @param nyushoShisetsuShurui nyushoShisetsuShurui
      */
     public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
@@ -119,25 +121,25 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * nyushoShisetsuCodeのgetメソッドです。
-     * 
+     *
      * @return nyushoShisetsuCode
      */
-    public DbUDD004JigyoshaNo getNyushoShisetsuCode() {
+    public KaigoJigyoshaNo getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
     /**
      * nyushoShisetsuCodeのsetメソッドです。
-     * 
+     *
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
-    public void setNyushoShisetsuCode(DbUDD004JigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(KaigoJigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     /**
      * nyushoYMDのgetメソッドです。
-     * 
+     *
      * @return nyushoYMD
      */
     public FlexibleDate getNyushoYMD() {
@@ -146,7 +148,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * nyushoYMDのsetメソッドです。
-     * 
+     *
      * @param nyushoYMD nyushoYMD
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -155,7 +157,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * taishoYMDのgetメソッドです。
-     * 
+     *
      * @return taishoYMD
      */
     public FlexibleDate getTaishoYMD() {
@@ -164,7 +166,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * taishoYMDのsetメソッドです。
-     * 
+     *
      * @param taishoYMD taishoYMD
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -173,9 +175,9 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * このエンティティの主キーが他の{@literal DbV1004HihokenshaShisetsuNyutaishoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV1004HihokenshaShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -203,6 +205,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -211,5 +214,4 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     }
 
 // </editor-fold>
-
 }

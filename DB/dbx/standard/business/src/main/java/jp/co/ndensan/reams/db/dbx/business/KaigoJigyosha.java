@@ -284,7 +284,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public KinyuKikanCode get銀行コード() {
-        return relateEntity.get事業者エンティティ().getGinkoCode();
+        return KinyuKikanCode.EMPTY;//relateEntity.get事業者エンティティ().getGinkoCode();
     }
 
     /**
@@ -294,7 +294,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public KinyuKikanShitenCode get支店コード() {
-        return relateEntity.get事業者エンティティ().getShitenCode();
+        return KinyuKikanShitenCode.EMPTY;//relateEntity.get事業者エンティティ().getShitenCode();
     }
 
     /**
@@ -304,7 +304,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public RString get口座種別() {
-        return relateEntity.get事業者エンティティ().getKozaShubetsu();
+        return RString.EMPTY;//relateEntity.get事業者エンティティ().getKozaShubetsu();
     }
 
     /**
@@ -314,7 +314,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public RString get口座番号() {
-        return relateEntity.get事業者エンティティ().getKozaNo();
+        return RString.EMPTY;//relateEntity.get事業者エンティティ().getKozaNo();
     }
 
     /**
@@ -324,7 +324,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public AtenaMeisho get口座名義人() {
-        return relateEntity.get事業者エンティティ().getKozaMeiginin();
+        return AtenaMeisho.EMPTY;//relateEntity.get事業者エンティティ().getKozaMeiginin();
     }
 
     /**
@@ -334,7 +334,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public AtenaKanaMeisho get口座名義人カナ() {
-        return relateEntity.get事業者エンティティ().getKozaMeigininKana();
+        return AtenaKanaMeisho.EMPTY;//relateEntity.get事業者エンティティ().getKozaMeigininKana();
     }
 
     /**
@@ -344,7 +344,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public ShiteiKijunGaitoJigyoshoKubun get指定基準該当等事業所区分() {
-        return relateEntity.get事業者エンティティ().getShiteiKijungaitoJigyoshaKubun();
+        return new ShiteiKijunGaitoJigyoshoKubun(relateEntity.get事業者エンティティ().getShiteiKijungaitoJigyoshaKubun());
     }
 
     /**
@@ -374,7 +374,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public HojinsShubetsu get法人等種別() {
-        return relateEntity.get事業者エンティティ().getHojinShubetsu();
+        return new HojinsShubetsu(relateEntity.get事業者エンティティ().getHojinShubetsu());
     }
 
     /**
@@ -721,7 +721,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setGinkoCode(KinyuKikanCode ginkoCode) {
             Objects.requireNonNull(ginkoCode);
-            this.relateEntity.get事業者エンティティ().setGinkoCode(ginkoCode);
+//            this.relateEntity.get事業者エンティティ().setGinkoCode(ginkoCode);
             return this;
         }
 
@@ -733,7 +733,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setShitenCode(KinyuKikanShitenCode shitenCode) {
             Objects.requireNonNull(shitenCode);
-            this.relateEntity.get事業者エンティティ().setShitenCode(shitenCode);
+//            this.relateEntity.get事業者エンティティ().setShitenCode(shitenCode);
             return this;
         }
 
@@ -745,7 +745,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setKozaShubetsu(RString kozaShubetsu) {
             Objects.requireNonNull(kozaShubetsu);
-            this.relateEntity.get事業者エンティティ().setKozaShubetsu(kozaShubetsu);
+//            this.relateEntity.get事業者エンティティ().setKozaShubetsu(kozaShubetsu);
             return this;
         }
 
@@ -757,7 +757,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setKozaNo(RString kozaNo) {
             Objects.requireNonNull(kozaNo);
-            this.relateEntity.get事業者エンティティ().setKozaNo(kozaNo);
+//            this.relateEntity.get事業者エンティティ().setKozaNo(kozaNo);
             return this;
         }
 
@@ -769,7 +769,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setKozaMeiginin(AtenaMeisho kozaMeiginin) {
             Objects.requireNonNull(kozaMeiginin);
-            this.relateEntity.get事業者エンティティ().setKozaMeiginin(kozaMeiginin);
+//            this.relateEntity.get事業者エンティティ().setKozaMeiginin(kozaMeiginin);
             return this;
         }
 
@@ -781,7 +781,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
             Objects.requireNonNull(kozaMeigininKana);
-            this.relateEntity.get事業者エンティティ().setKozaMeigininKana(kozaMeigininKana);
+//            this.relateEntity.get事業者エンティティ().setKozaMeigininKana(kozaMeigininKana);
             return this;
         }
 
@@ -793,7 +793,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setShiteiKijungaitoJigyoshaKubun(ShiteiKijunGaitoJigyoshoKubun shiteiKijungaitoJigyoshaKubun) {
             Objects.requireNonNull(shiteiKijungaitoJigyoshaKubun);
-            this.relateEntity.get事業者エンティティ().setShiteiKijungaitoJigyoshaKubun(shiteiKijungaitoJigyoshaKubun);
+            this.relateEntity.get事業者エンティティ().setShiteiKijungaitoJigyoshaKubun(shiteiKijungaitoJigyoshaKubun.getColumnValue());
             return this;
         }
 
@@ -829,7 +829,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          */
         public Builder setHojinShubetsu(HojinsShubetsu hojinShubetsu) {
             Objects.requireNonNull(hojinShubetsu);
-            this.relateEntity.get事業者エンティティ().setHojinShubetsu(hojinShubetsu);
+            this.relateEntity.get事業者エンティティ().setHojinShubetsu(hojinShubetsu.value());
             return this;
         }
 

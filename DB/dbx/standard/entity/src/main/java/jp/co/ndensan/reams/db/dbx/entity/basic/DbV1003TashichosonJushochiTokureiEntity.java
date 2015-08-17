@@ -15,6 +15,7 @@ import java.util.Objects;
  */
 public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<DbV1003TashichosonJushochiTokureiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV1003TashichosonJushochiTokurei");
 
@@ -31,8 +32,8 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
-    private DbUDD015ShoKisaiHokenshaNo sochiHokenshaNo;
-    private DbUDD002HihokenshaNo sochiHihokenshaNo;
+    private RString sochiHokenshaNo;
+    private RString sochiHihokenshaNo;
     private FlexibleDate tatokuRenrakuhyoHakkoYMD;
     private FlexibleDate shisetsuTaishoTsuchiHakkoYMD;
     private FlexibleDate shisetsuHenkoTsuchiHakkoYMD;
@@ -40,7 +41,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -49,7 +50,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -58,7 +59,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * idoYMDのgetメソッドです。
-     * 
+     *
      * @return idoYMD
      */
     public FlexibleDate getIdoYMD() {
@@ -67,7 +68,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * idoYMDのsetメソッドです。
-     * 
+     *
      * @param idoYMD idoYMD
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -76,7 +77,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * edaNoのgetメソッドです。
-     * 
+     *
      * @return edaNo
      */
     public RString getEdaNo() {
@@ -85,7 +86,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * edaNoのsetメソッドです。
-     * 
+     *
      * @param edaNo edaNo
      */
     public void setEdaNo(RString edaNo) {
@@ -94,7 +95,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * idoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return idoJiyuCode
      */
     public RString getIdoJiyuCode() {
@@ -103,7 +104,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * idoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param idoJiyuCode idoJiyuCode
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -112,7 +113,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shichosonCodeのgetメソッドです。
-     * 
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -121,7 +122,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shichosonCodeのsetメソッドです。
-     * 
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -130,7 +131,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return tekiyoJiyuCode
      */
     public RString getTekiyoJiyuCode() {
@@ -139,7 +140,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param tekiyoJiyuCode tekiyoJiyuCode
      */
     public void setTekiyoJiyuCode(RString tekiyoJiyuCode) {
@@ -148,7 +149,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoYMD
      */
     public FlexibleDate getTekiyoYMD() {
@@ -157,7 +158,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoYMD tekiyoYMD
      */
     public void setTekiyoYMD(FlexibleDate tekiyoYMD) {
@@ -166,7 +167,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoTodokedeYMD
      */
     public FlexibleDate getTekiyoTodokedeYMD() {
@@ -175,7 +176,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoTodokedeYMD tekiyoTodokedeYMD
      */
     public void setTekiyoTodokedeYMD(FlexibleDate tekiyoTodokedeYMD) {
@@ -184,7 +185,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoUketsukeYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoUketsukeYMD
      */
     public FlexibleDate getTekiyoUketsukeYMD() {
@@ -193,7 +194,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tekiyoUketsukeYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoUketsukeYMD tekiyoUketsukeYMD
      */
     public void setTekiyoUketsukeYMD(FlexibleDate tekiyoUketsukeYMD) {
@@ -202,7 +203,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return kaijoJiyuCode
      */
     public RString getKaijoJiyuCode() {
@@ -211,7 +212,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param kaijoJiyuCode kaijoJiyuCode
      */
     public void setKaijoJiyuCode(RString kaijoJiyuCode) {
@@ -220,7 +221,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoYMDのgetメソッドです。
-     * 
+     *
      * @return kaijoYMD
      */
     public FlexibleDate getKaijoYMD() {
@@ -229,7 +230,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoYMDのsetメソッドです。
-     * 
+     *
      * @param kaijoYMD kaijoYMD
      */
     public void setKaijoYMD(FlexibleDate kaijoYMD) {
@@ -238,7 +239,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return kaijoTodokedeYMD
      */
     public FlexibleDate getKaijoTodokedeYMD() {
@@ -247,7 +248,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param kaijoTodokedeYMD kaijoTodokedeYMD
      */
     public void setKaijoTodokedeYMD(FlexibleDate kaijoTodokedeYMD) {
@@ -256,7 +257,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoUketsukeYMDのgetメソッドです。
-     * 
+     *
      * @return kaijoUketsukeYMD
      */
     public FlexibleDate getKaijoUketsukeYMD() {
@@ -265,7 +266,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * kaijoUketsukeYMDのsetメソッドです。
-     * 
+     *
      * @param kaijoUketsukeYMD kaijoUketsukeYMD
      */
     public void setKaijoUketsukeYMD(FlexibleDate kaijoUketsukeYMD) {
@@ -274,43 +275,43 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * sochiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return sochiHokenshaNo
      */
-    public DbUDD015ShoKisaiHokenshaNo getSochiHokenshaNo() {
+    public RString getSochiHokenshaNo() {
         return sochiHokenshaNo;
     }
 
     /**
      * sochiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param sochiHokenshaNo sochiHokenshaNo
      */
-    public void setSochiHokenshaNo(DbUDD015ShoKisaiHokenshaNo sochiHokenshaNo) {
+    public void setSochiHokenshaNo(RString sochiHokenshaNo) {
         this.sochiHokenshaNo = sochiHokenshaNo;
     }
 
     /**
      * sochiHihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return sochiHihokenshaNo
      */
-    public DbUDD002HihokenshaNo getSochiHihokenshaNo() {
+    public RString getSochiHihokenshaNo() {
         return sochiHihokenshaNo;
     }
 
     /**
      * sochiHihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param sochiHihokenshaNo sochiHihokenshaNo
      */
-    public void setSochiHihokenshaNo(DbUDD002HihokenshaNo sochiHihokenshaNo) {
+    public void setSochiHihokenshaNo(RString sochiHihokenshaNo) {
         this.sochiHihokenshaNo = sochiHihokenshaNo;
     }
 
     /**
      * tatokuRenrakuhyoHakkoYMDのgetメソッドです。
-     * 
+     *
      * @return tatokuRenrakuhyoHakkoYMD
      */
     public FlexibleDate getTatokuRenrakuhyoHakkoYMD() {
@@ -319,7 +320,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * tatokuRenrakuhyoHakkoYMDのsetメソッドです。
-     * 
+     *
      * @param tatokuRenrakuhyoHakkoYMD tatokuRenrakuhyoHakkoYMD
      */
     public void setTatokuRenrakuhyoHakkoYMD(FlexibleDate tatokuRenrakuhyoHakkoYMD) {
@@ -328,7 +329,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shisetsuTaishoTsuchiHakkoYMDのgetメソッドです。
-     * 
+     *
      * @return shisetsuTaishoTsuchiHakkoYMD
      */
     public FlexibleDate getShisetsuTaishoTsuchiHakkoYMD() {
@@ -337,7 +338,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shisetsuTaishoTsuchiHakkoYMDのsetメソッドです。
-     * 
+     *
      * @param shisetsuTaishoTsuchiHakkoYMD shisetsuTaishoTsuchiHakkoYMD
      */
     public void setShisetsuTaishoTsuchiHakkoYMD(FlexibleDate shisetsuTaishoTsuchiHakkoYMD) {
@@ -346,7 +347,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shisetsuHenkoTsuchiHakkoYMDのgetメソッドです。
-     * 
+     *
      * @return shisetsuHenkoTsuchiHakkoYMD
      */
     public FlexibleDate getShisetsuHenkoTsuchiHakkoYMD() {
@@ -355,7 +356,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * shisetsuHenkoTsuchiHakkoYMDのsetメソッドです。
-     * 
+     *
      * @param shisetsuHenkoTsuchiHakkoYMD shisetsuHenkoTsuchiHakkoYMD
      */
     public void setShisetsuHenkoTsuchiHakkoYMD(FlexibleDate shisetsuHenkoTsuchiHakkoYMD) {
@@ -364,7 +365,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * logicalDeletedFlagのgetメソッドです。
-     * 
+     *
      * @return logicalDeletedFlag
      */
     public boolean getLogicalDeletedFlag() {
@@ -373,7 +374,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * logicalDeletedFlagのsetメソッドです。
-     * 
+     *
      * @param logicalDeletedFlag logicalDeletedFlag
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -382,9 +383,9 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbV1003TashichosonJushochiTokureiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV1003TashichosonJushochiTokureiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -423,6 +424,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

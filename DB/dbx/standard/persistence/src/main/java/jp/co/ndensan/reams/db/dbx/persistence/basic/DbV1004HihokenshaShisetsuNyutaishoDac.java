@@ -19,6 +19,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbx.entity.basic.DbV1004HihokenshaShisetsuNyutaisho.*;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 施設入退所のデータアクセスクラスです。
@@ -49,10 +50,10 @@ public class DbV1004HihokenshaShisetsuNyutaishoDac {
     public DbV1004HihokenshaShisetsuNyutaishoEntity selectByKey(
             LasdecCode 市町村コード,
             ShikibetsuCode 識別コード,
-            RDateTime 処理日時) throws NullPointerException {
+            Decimal 履歴番号) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("shichosonCode"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("shikibetsuCode"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("shoriTimestamp"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("shoriTimestamp"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -61,7 +62,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoDac {
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(shoriTimestamp, 処理日時))).
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbV1004HihokenshaShisetsuNyutaishoEntity.class);
     }
 
