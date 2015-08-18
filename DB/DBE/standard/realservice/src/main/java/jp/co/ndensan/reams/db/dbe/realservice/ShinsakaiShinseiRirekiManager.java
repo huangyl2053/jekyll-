@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbe.realservice;
 
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbz.business.ShinsakaiShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.IShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiManagerBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -67,19 +69,19 @@ public class ShinsakaiShinseiRirekiManager extends ShinseiRirekiManagerBase {
     @Transaction
     @Override
     public int save申請履歴(IShinseiRirekiJoho 申請履歴情報) {
+        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
+//        IShinseiRirekiJohoEntity entity = 申請履歴情報.getEntity();
 
-        IShinseiRirekiJohoEntity entity = 申請履歴情報.getEntity();
-
-        switch (申請履歴情報.getState()) {
-            case Added:
-                return dac.insert(entity);
-            case Modified:
-                return dac.update(entity);
-            case Deleted:
-                return dac.delete(entity);
-            default:
-                return 0;
-        }
+//        switch (申請履歴情報.getState()) {
+//            case Added:
+//                return dac.insert(entity);
+//            case Modified:
+//                return dac.update(entity);
+//            case Deleted:
+//                return dac.delete(entity);
+//            default:
+//                return 0;
+//        }
     }
 
 }

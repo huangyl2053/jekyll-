@@ -11,13 +11,11 @@ import jp.co.ndensan.reams.db.dbz.business.IShujiiJoho;
 import jp.co.ndensan.reams.db.dbz.business.ShinsakaiShujiiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5912ShujiiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -45,20 +43,20 @@ public class ShinsakaiShujiiManager extends ShujiiManagerBase {
 
     @Override
     public Optional<IShujiiJoho> find主治医(LasdecCode 市町村コード, ShujiiIryokikanCode 主治医医療機関コード, ShujiiCode 主治医コード) {
-
-        return dac.selectByKey(市町村コード, 主治医医療機関コード, 主治医コード)
-                .map(new IFunction<DbT5912ShujiiJohoEntity, IShujiiJoho>() {
-                    @Override
-                    public IShujiiJoho apply(DbT5912ShujiiJohoEntity t) {
-                        return new ShinsakaiShujiiJoho(t);
-                    }
-                });
+        return Optional.ofNullable(null);
+//        return dac.selectByKey(市町村コード, 主治医医療機関コード, 主治医コード)
+//                .map(new IFunction<DbT5912ShujiiJohoEntity, IShujiiJoho>() {
+//                    @Override
+//                    public IShujiiJoho apply(DbT5912ShujiiJohoEntity t) {
+//                        return new ShinsakaiShujiiJoho(t);
+//                    }
+//                });
     }
 
     @Override
     public ItemList<IShujiiJoho> getAll主治医() {
-
-        return to主治医List(dac.selectAll());
+        return null;
+//        return to主治医List(dac.selectAll());
     }
 
     private ItemList<IShujiiJoho> to主治医List(ItemList<DbT5912ShujiiJohoEntity> entityList) {
@@ -81,14 +79,13 @@ public class ShinsakaiShujiiManager extends ShujiiManagerBase {
      */
     public int save主治医機関情報(IShujiiJoho 主治医機関情報) {
 
-        if (主治医機関情報.getState() == EntityDataState.Added) {
-            return dac.insert(主治医機関情報.getEntity());
-        } else if (主治医機関情報.getState() == EntityDataState.Modified) {
-            return dac.update(主治医機関情報.getEntity());
-        } else if (主治医機関情報.getState() == EntityDataState.Deleted) {
-            return dac.delete(主治医機関情報.getEntity());
-        }
-
+//        if (主治医機関情報.getState() == EntityDataState.Added) {
+//            return dac.insert(主治医機関情報.getEntity());
+//        } else if (主治医機関情報.getState() == EntityDataState.Modified) {
+//            return dac.update(主治医機関情報.getEntity());
+//        } else if (主治医機関情報.getState() == EntityDataState.Deleted) {
+//            return dac.delete(主治医機関情報.getEntity());
+//        }
         throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
     }
 }

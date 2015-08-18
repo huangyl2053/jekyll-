@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbe.realservice;
 
+import jp.co.ndensan.reams.db.dbz.realservice.HokenshaShinseitodokedeJohoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.IShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
 /**

@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiShinseitodokedeJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5120ShinseitodokedeJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5120ShinsakaiShinseitodokedeJohoDac;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5120ShinsakaiShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseitodokedeJohoManagerBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
