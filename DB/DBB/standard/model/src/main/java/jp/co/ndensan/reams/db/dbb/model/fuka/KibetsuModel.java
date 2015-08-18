@@ -95,15 +95,15 @@ public class KibetsuModel implements Serializable {
 //        return entity.getShoriTimestamp();
 //    }
 //
-//    /**
-//     * 徴収方法を返します。
-//     *
-//     * @return 徴収方法
-//     */
-//    public ChoshuHohoKibetsu get徴収方法() {
-//        return ChoshuHohoKibetsu.toValue(entity.getChoshuHoho());
-//    }
-//
+    /**
+     * 徴収方法を返します。
+     *
+     * @return 徴収方法
+     */
+    public ChoshuHohoKibetsu get徴収方法() {
+        return ChoshuHohoKibetsu.toValue(entity.getChoshuHouhou());
+    }
+
     /**
      * 期を返します。
      *
@@ -162,16 +162,16 @@ public class KibetsuModel implements Serializable {
 //        entity.setShoriTimestamp(処理日時);
 //    }
 //
-//    /**
-//     * 徴収方法を設定します。
-//     *
-//     * @param 徴収方法 徴収方法
-//     */
-//    public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
-//        requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-//        entity.setChoshuHoho(徴収方法.code());
-//    }
-//
+    /**
+     * 徴収方法を設定します。
+     *
+     * @param 徴収方法 徴収方法
+     */
+    public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
+        requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
+        entity.setChoshuHouhou(徴収方法.code());
+    }
+
     /**
      * 期を設定します。
      *

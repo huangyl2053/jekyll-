@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.IShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
 import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
-import jp.co.ndensan.reams.db.dbe.realservice.ShinseitodokedeJohoFactory;
+// TODO n8187久保田 dbxのShinseitodokedeJohoFactoryに置換すること。
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseitodokedeJohoFactory;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

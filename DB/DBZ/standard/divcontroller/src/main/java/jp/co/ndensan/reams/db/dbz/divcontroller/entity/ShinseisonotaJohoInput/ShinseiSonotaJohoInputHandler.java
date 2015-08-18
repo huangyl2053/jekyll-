@@ -10,7 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SakujoJiyuCode;
-import jp.co.ndensan.reams.db.dbd.realservice.JukyushaDaichoManager;
+// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
+import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

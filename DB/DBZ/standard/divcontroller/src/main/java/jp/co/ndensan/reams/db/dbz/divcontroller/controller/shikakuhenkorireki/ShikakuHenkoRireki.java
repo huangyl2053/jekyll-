@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shikakuhenkorireki;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Add;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Delete;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.Shikak
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.dgHenko_Row;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
@@ -314,7 +317,16 @@ public class ShikakuHenkoRireki {
                 break;
         }
 
-        ShikakuHenkoRirekiKanriContext context = new ShikakuHenkoRirekiKanriContext(ViewExecutionStatus.toValue(rowState), 前履歴, 次履歴, 全履歴);
+        List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
+        for (HihokenshaDaichoModel model : 全履歴) {
+            全履歴modelList.add(model.getEntity());
+        }
+
+        ShikakuHenkoRirekiKanriContext context = new ShikakuHenkoRirekiKanriContext(
+                ViewExecutionStatus.toValue(rowState),
+                Optional.ofNullable(前履歴.get().getEntity()),
+                Optional.ofNullable(次履歴.get().getEntity()),
+                ItemList.of(全履歴modelList));
 
         //TODO テストのため、代入
         henkoRirekiDiv.setLatestSoshitsubi(new RString(""));

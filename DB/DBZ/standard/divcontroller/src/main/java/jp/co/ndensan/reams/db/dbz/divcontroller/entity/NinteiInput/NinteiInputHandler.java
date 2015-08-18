@@ -12,13 +12,15 @@ import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.Nintei
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
+// TODO n8187久保田 dbxのJukyushaDaichoに置換すること。
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbd.realservice.JukyushaDaichoManager;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
+// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
+import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

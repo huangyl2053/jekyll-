@@ -1,5 +1,5 @@
 /// <reference path='FukaRirekiAll_Design.ts' />
-module DBZ
+module DBB
 {
     export module FukaRirekiAll
     {
@@ -26,7 +26,7 @@ module DBZ
     }
 }
 
-module DBZ
+module DBB
 {
     export module FukaRirekiAll
     {

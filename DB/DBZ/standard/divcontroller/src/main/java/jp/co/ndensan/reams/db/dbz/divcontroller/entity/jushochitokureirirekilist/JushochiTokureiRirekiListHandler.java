@@ -29,13 +29,11 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
-import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -48,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -139,7 +138,8 @@ public class JushochiTokureiRirekiListHandler {
             }
         };
 
-        IItemList<HihokenshaDaichoModel> jutokuList = new HihokenshaDaichoList(getEditing被保険者台帳情報()).to住所地特例List();
+//        IItemList<HihokenshaDaichoModel> jutokuList = new HihokenshaDaichoList(getEditing被保険者台帳情報()).to住所地特例List();
+        IItemList<HihokenshaDaichoModel> jutokuList = getEditing被保険者台帳情報();
         IItemList<HihokenshaDaichoModel> jutokuOneSeason = jutokuList.filter(condition);
 
         for (HihokenshaDaichoModel model : jutokuOneSeason) {
@@ -154,11 +154,11 @@ public class JushochiTokureiRirekiListHandler {
     private void setTekiyoInputMeisai(HihokenshaDaichoModel model) {
         jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiShichosonCode(model.get市町村コード().getColumnValue());
         jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiHihokenshaNo(model.get被保険者番号().getColumnValue());
-        jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
+//        jutokuRirekiDiv.getJutokuTekiyoInput().setTekiyojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
 
         jutokuRirekiDiv.getTxtTekiyoDate().setValue(model.get適用年月日());
         jutokuRirekiDiv.getTxtTekiyoTodokedeDate().setValue(model.get適用届出年月日());
-        jutokuRirekiDiv.getDdlTekiyoJiyu().setSelectedKey(model.get住所地特例適用事由().getCode());
+        jutokuRirekiDiv.getDdlTekiyoJiyu().setSelectedKey(model.get住所地特例適用事由());
         jutokuRirekiDiv.getDdlTekiyojiSochimotoHokensha().setSelectedKey(model.get広住特措置元市町村コード().value());
         jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedKey(model.get旧市町村コード().value());
         //TODO n8178 城間篤人 宛名データの取得方を考える（DBから？宛名情報を引数から受け取って？）。とりあえず後で。 2014年12月11日まで
@@ -186,11 +186,11 @@ public class JushochiTokureiRirekiListHandler {
     private void setKaijoInputMeisai(HihokenshaDaichoModel model) {
         jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiShichosonCode(model.get市町村コード().getColumnValue());
         jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiHihokenshaNo(model.get被保険者番号().getColumnValue());
-        jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
+//        jutokuRirekiDiv.getJutokuKaijoInput().setKaijojiShoriDatetime(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
 
         jutokuRirekiDiv.getTxtKaijoDate().setValue(model.get解除年月日());
         jutokuRirekiDiv.getTxtKaijoTodokedeDate().setValue(model.get解除届出年月日());
-        jutokuRirekiDiv.getDdlKaijoJiyu().setSelectedKey(model.get住所地特例解除事由().getCode());
+        jutokuRirekiDiv.getDdlKaijoJiyu().setSelectedKey(model.get住所地特例解除事由());
         jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().setSelectedKey(model.get広住特措置元市町村コード().getColumnValue());
         jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setSelectedKey(model.get旧市町村コード().getColumnValue());
         //TODO n8178 城間篤人 宛名データの取得方を考える（DBから？宛名情報を引数から受け取って？）。とりあえず後で。 2014年12月11日まで
@@ -284,7 +284,7 @@ public class JushochiTokureiRirekiListHandler {
             switch (editingModel.getState()) {
                 case Modified:
                     HihokenshaDaichoModel addingModel = new HihokenshaDaichoModel(editingModel.getEntity());
-                    addingModel.get処理日時().plusSeconds(1);
+//                    addingModel.get処理日時().plusSeconds(1);
                     mergedList.add(addingModel);
                 case Deleted:
                     baseModel.setDeletedState(true);
@@ -322,7 +322,8 @@ public class JushochiTokureiRirekiListHandler {
      */
     public void mapping住所地特例履歴() {
         IItemList<HihokenshaDaichoModel> 被保険者台帳List = getEditing被保険者台帳情報();
-        IItemList<HihokenshaDaichoModel> 住所地特例List = new HihokenshaDaichoList(被保険者台帳List).to住所地特例List();
+//        IItemList<HihokenshaDaichoModel> 住所地特例List = new HihokenshaDaichoList(被保険者台帳List).to住所地特例List();
+        IItemList<HihokenshaDaichoModel> 住所地特例List = 被保険者台帳List;
 
         List<dgJutoku_Row> dataSource = new ArrayList<>();
         for (HihokenshaDaichoModel model : 住所地特例List) {
@@ -337,25 +338,25 @@ public class JushochiTokureiRirekiListHandler {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxDate());
 
         setRowState(row, model);
-        row.setShichosonCode(model.get市町村コード().getColumnValue());
-        row.setHihokenshaNo(model.get被保険者番号().getColumnValue());
-        row.setShoriTimestamp(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
-        row.getTekiyoDate().setValue(model.get適用年月日());
-        row.getTekiyoTodokedeDate().setValue(model.get適用届出年月日());
-        row.setTekiyoJiyuKey(model.get住所地特例適用事由().getName());
-        row.setTekiyoJiyu(model.get住所地特例適用事由().getShortName());
-        row.getKaijoDate().setValue(model.get解除年月日());
-        row.getKaijoTodokedeDate().setValue(model.get解除届出年月日());
-        if (model.getEntity().getJushochitokureiKaijoJiyuCode() == null
-                || !model.getEntity().getJushochitokureiKaijoJiyuCode().getColumnValue().isEmpty()) {
-            row.setKaijoJiyuKey(model.get住所地特例解除事由().getName());
-            row.setKaijoJiyu(model.get住所地特例解除事由().getShortName());
-        }
-        row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
-        row.setKyuHokensha(getKyuHokenshaName(model.get旧市町村コード()));
-        if (model.getEntity().getLastUpdateTimestamp() != null) {
-            row.getShoriDate().setValue((model.getEntity().getLastUpdateTimestamp().getDate()));
-        }
+//        row.setShichosonCode(model.get市町村コード().getColumnValue());
+//        row.setHihokenshaNo(model.get被保険者番号().getColumnValue());
+//        row.setShoriTimestamp(toRStringForYMDHMS(model.get処理日時().getColumnValue()));
+//        row.getTekiyoDate().setValue(model.get適用年月日());
+//        row.getTekiyoTodokedeDate().setValue(model.get適用届出年月日());
+//        row.setTekiyoJiyuKey(model.get住所地特例適用事由().getName());
+//        row.setTekiyoJiyu(model.get住所地特例適用事由().getShortName());
+//        row.getKaijoDate().setValue(model.get解除年月日());
+//        row.getKaijoTodokedeDate().setValue(model.get解除届出年月日());
+//        if (model.getEntity().getJushochitokureiKaijoJiyuCode() == null
+//                || !model.getEntity().getJushochitokureiKaijoJiyuCode().getColumnValue().isEmpty()) {
+//            row.setKaijoJiyuKey(model.get住所地特例解除事由().getName());
+//            row.setKaijoJiyu(model.get住所地特例解除事由().getShortName());
+//        }
+//        row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
+//        row.setKyuHokensha(getKyuHokenshaName(model.get旧市町村コード()));
+//        if (model.getEntity().getLastUpdateTimestamp() != null) {
+//            row.getShoriDate().setValue((model.getEntity().getLastUpdateTimestamp().getDate()));
+//        }
         return row;
     }
 
@@ -571,9 +572,9 @@ public class JushochiTokureiRirekiListHandler {
         ShoriTimestamp tekiyoDateShoriTime = ShoriTimestamp.of(dateTime);
 
         for (HihokenshaDaichoModel model : list) {
-            if (model.get処理日時().getColumnValue().isBeforeOrEquals(tekiyoDateShoriTime.getColumnValue())) {
-                return model;
-            }
+//            if (model.get処理日時().getColumnValue().isBeforeOrEquals(tekiyoDateShoriTime.getColumnValue())) {
+            return model;
+//            }
         }
         return null;
     }
@@ -889,11 +890,11 @@ public class JushochiTokureiRirekiListHandler {
 
         copy.setShichosonCode(new LasdecCode(entity.getShichosonCode().getColumnValue().toString()));
         copy.setHihokenshaNo(new HihokenshaNo(new RString(entity.getHihokenshaNo().getColumnValue().toString())));
-        RDateTime copyDateTime = entity.getShoriTimestamp().getColumnValue().getRDateTime();
-        copy.setShoriTimestamp(ShoriTimestamp.of(
-                RDateTime.of(copyDateTime.getYear(), copyDateTime.getMonth(), copyDateTime.getDayOfMonth(),
-                        copyDateTime.getHour(), copyDateTime.getMinute(), copyDateTime.getSecond())
-        ));
+//        RDateTime copyDateTime = entity.getShoriTimestamp().getColumnValue().getRDateTime();
+//        copy.setShoriTimestamp(ShoriTimestamp.of(
+//                RDateTime.of(copyDateTime.getYear(), copyDateTime.getMonth(), copyDateTime.getDayOfMonth(),
+//                        copyDateTime.getHour(), copyDateTime.getMinute(), copyDateTime.getSecond())
+//        ));
         copy.setShikibetsuCode(new ShikibetsuCode(entity.getShikibetsuCode().getColumnValue().toString()));
 
         copy.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(new Code(entity.getShikakuShutokuJiyuCode().getColumnValue().toString())));
@@ -926,9 +927,9 @@ public class JushochiTokureiRirekiListHandler {
         copy.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(entity.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue().toString()));
         copy.setKyuShichosonCode(new LasdecCode(entity.getKyuShichosonCode().getColumnValue().toString()));
 
-        copy.setSaikofuKubun(new RString(entity.getSaikofuKubun().toString()));
-        copy.setSaikofuJiyuCode(new RString(entity.getSaikofuJiyuCode().toString()));
-        copy.setChohyoKofuRirekiID(new RString(entity.getChohyoKofuRirekiID().toString()));
+//        copy.setSaikofuKubun(new RString(entity.getSaikofuKubun().toString()));
+//        copy.setSaikofuJiyuCode(new RString(entity.getSaikofuJiyuCode().toString()));
+//        copy.setChohyoKofuRirekiID(new RString(entity.getChohyoKofuRirekiID().toString()));
         return copy;
     }
 

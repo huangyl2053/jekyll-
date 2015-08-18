@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.fukarirekiall;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
+import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -19,18 +19,17 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -141,7 +140,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     private static HokenryoDankaiManager createDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
         Optional<HokenryoDankai> model = createHokenryoDankai();
-        when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
+        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
         return mock;
     }
 
@@ -169,7 +168,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static Optional<HokenryoDankai> createHokenryoDankai() {
         DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-        return Optional.ofNullable(new HokenryoDankai(new HokenryoDankaiModel(entity), createFukaKeisanConfig()));
+        return Optional.ofNullable(new HokenryoDankai(entity, createFukaKeisanConfig()));
     }
 
     private static Optional<Kiwarigaku> createKiwarigaku() {

@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBB;
+(function (DBB) {
     (function (FukaRirekiAll) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBZ;
             return ModeController;
         })();
         FukaRirekiAll.ModeController = ModeController;
-    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
-    var FukaRirekiAll = DBZ.FukaRirekiAll;
-})(DBZ || (DBZ = {}));
+    })(DBB.FukaRirekiAll || (DBB.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBB.FukaRirekiAll;
+})(DBB || (DBB = {}));
 
-var DBZ;
-(function (DBZ) {
+var DBB;
+(function (DBB) {
     (function (FukaRirekiAll) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBZ;
             return PublicProperties;
         })();
         FukaRirekiAll.PublicProperties = PublicProperties;
-    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
-    var FukaRirekiAll = DBZ.FukaRirekiAll;
-})(DBZ || (DBZ = {}));
+    })(DBB.FukaRirekiAll || (DBB.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBB.FukaRirekiAll;
+})(DBB || (DBB = {}));

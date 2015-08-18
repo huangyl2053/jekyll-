@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.fukarirekiall;
 
 import jp.co.ndensan.reams.db.dbb.business.FukaRireki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;

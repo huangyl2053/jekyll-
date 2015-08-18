@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBB;
+(function (DBB) {
     (function (FukaRirekiAll) {
         var Events = (function () {
             function Events() {
@@ -32,11 +32,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.FukaRirekiAll.Controls.myType();
+                return this._myName + "_" + DBB.FukaRirekiAll.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.FukaRirekiAll.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBB.FukaRirekiAll.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.FukaRirekiAll = function () {
@@ -49,6 +49,6 @@ var DBZ;
             return Controls;
         })();
         FukaRirekiAll.Controls = Controls;
-    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
-    var FukaRirekiAll = DBZ.FukaRirekiAll;
-})(DBZ || (DBZ = {}));
+    })(DBB.FukaRirekiAll || (DBB.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBB.FukaRirekiAll;
+})(DBB || (DBB = {}));
