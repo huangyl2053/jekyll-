@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 // TODO n8178 参照できないため、福祉を参考に一時的にpomを書き換えて見えるようにした。TsuchishoSofusakiSourceがModelに移動した後に修正する。 2015年2月末
 //import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 
 /**
  *

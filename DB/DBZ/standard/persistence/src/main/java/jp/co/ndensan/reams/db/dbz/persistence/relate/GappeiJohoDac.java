@@ -24,7 +24,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.*;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;

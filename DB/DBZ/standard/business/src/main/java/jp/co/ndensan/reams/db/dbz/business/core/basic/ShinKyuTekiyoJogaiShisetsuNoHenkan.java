@@ -9,8 +9,8 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -47,7 +47,8 @@ public class ShinKyuTekiyoJogaiShisetsuNoHenkan extends ParentModelBase<ShinKyuT
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntity}より{@link ShinKyuTekiyoJogaiShisetsuNoHenkan}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntity}
+     * @param entity
+     * DBより取得した{@link DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntity}
      */
     public ShinKyuTekiyoJogaiShisetsuNoHenkan(DbT7031ShinKyuTekiyoJogaiShisetsuNoHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("新旧適用除外施設番号変換テーブル"));
@@ -129,7 +130,8 @@ public class ShinKyuTekiyoJogaiShisetsuNoHenkan extends ParentModelBase<ShinKyuT
     /**
      * 新旧適用除外施設番号変換テーブルの識別子{@link ShinKyuTekiyoJogaiShisetsuNoHenkanIdentifier}を返します。
      *
-     * @return 新旧適用除外施設番号変換テーブルの識別子{@link ShinKyuTekiyoJogaiShisetsuNoHenkanIdentifier}
+     * @return
+     * 新旧適用除外施設番号変換テーブルの識別子{@link ShinKyuTekiyoJogaiShisetsuNoHenkanIdentifier}
      */
     @Override
     public ShinKyuTekiyoJogaiShisetsuNoHenkanIdentifier identifier() {

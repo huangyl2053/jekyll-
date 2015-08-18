@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -50,7 +50,8 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}より{@link GappeiNaiJutokushaShinKyuNoHenkan}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
+     * @param entity
+     * DBより取得した{@link DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}
      */
     public GappeiNaiJutokushaShinKyuNoHenkan(DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併内住特者新旧番号変換テーブル"));
@@ -168,7 +169,8 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
     /**
      * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}を返します。
      *
-     * @return 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
+     * @return
+     * 合併内住特者新旧番号変換テーブルの識別子{@link GappeiNaiJutokushaShinKyuNoHenkanIdentifier}
      */
     @Override
     public GappeiNaiJutokushaShinKyuNoHenkanIdentifier identifier() {

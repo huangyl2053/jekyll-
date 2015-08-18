@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4EditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.ur.urz.business.Association;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 被保険者証A4版に印字する情報を設定するEditorです。

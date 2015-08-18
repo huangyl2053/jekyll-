@@ -9,8 +9,8 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -52,7 +52,8 @@ public class KoikiShichosonCodeHenkanPattern extends ParentModelBase<KoikiShicho
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7024KoikiShichosonCodeHenkanPatternEntity}より{@link KoikiShichosonCodeHenkanPattern}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7024KoikiShichosonCodeHenkanPatternEntity}
+     * @param entity
+     * DBより取得した{@link DbT7024KoikiShichosonCodeHenkanPatternEntity}
      */
     public KoikiShichosonCodeHenkanPattern(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("広域市町村管理コード変換パターン"));
@@ -216,7 +217,8 @@ public class KoikiShichosonCodeHenkanPattern extends ParentModelBase<KoikiShicho
     /**
      * 広域市町村管理コード変換パターンの識別子{@link KoikiShichosonCodeHenkanPatternIdentifier}を返します。
      *
-     * @return 広域市町村管理コード変換パターンの識別子{@link KoikiShichosonCodeHenkanPatternIdentifier}
+     * @return
+     * 広域市町村管理コード変換パターンの識別子{@link KoikiShichosonCodeHenkanPatternIdentifier}
      */
     @Override
     public KoikiShichosonCodeHenkanPatternIdentifier identifier() {

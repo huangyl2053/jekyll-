@@ -13,13 +13,13 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4913ChosainJoho.ninteiC
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4913ChosainJoho.ninteichosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4913ChosainJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4913ChosainJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -86,6 +86,6 @@ public class DbT4913ChosainJohoDac implements ISaveable<DbT4913ChosainJohoEntity
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

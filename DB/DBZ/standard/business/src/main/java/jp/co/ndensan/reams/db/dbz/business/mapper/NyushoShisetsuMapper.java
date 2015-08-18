@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.mapper;
 import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 
 /**
  * 入所施設を作成するクラスです。

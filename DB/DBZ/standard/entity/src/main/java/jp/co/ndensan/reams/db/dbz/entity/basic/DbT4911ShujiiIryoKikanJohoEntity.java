@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 
 /**
  * 主治医医療機関情報（子）テーブルのエンティティクラスです。

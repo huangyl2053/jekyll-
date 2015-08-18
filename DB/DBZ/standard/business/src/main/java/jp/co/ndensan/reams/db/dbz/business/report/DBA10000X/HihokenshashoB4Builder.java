@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 
 /**
  * 被保険者証B4版発行のために必要な情報を元に、帳票ソースを作成するクラスです。

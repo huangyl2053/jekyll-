@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearchEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -154,7 +154,8 @@ public class FukaSearchAlive extends ParentModelBase<FukaSearchAliveIdentifier, 
     }
 
     /**
-     * 賦課検索Aliveのみを変更対象とします。<br/> {@link DbV7902FukaSearchEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 賦課検索Aliveのみを変更対象とします。<br/>
+     * {@link DbV7902FukaSearchEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link FukaSearchAlive}
      */
@@ -169,7 +170,8 @@ public class FukaSearchAlive extends ParentModelBase<FukaSearchAliveIdentifier, 
     }
 
     /**
-     * 保持する賦課検索Aliveを削除対象とします。<br/> {@link DbV7902FukaSearchEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する賦課検索Aliveを削除対象とします。<br/>
+     * {@link DbV7902FukaSearchEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link FukaSearchAlive}
      */

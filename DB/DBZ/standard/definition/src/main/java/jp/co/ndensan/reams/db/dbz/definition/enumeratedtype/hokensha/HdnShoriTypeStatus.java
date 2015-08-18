@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,23 +28,22 @@ public enum HdnShoriTypeStatus {
      * コード:"2"
      */
     NomalUpdateMode("2"),
-     /**
-      * 処理タイプモードのSeihoAddModeであることを表します。<br/>
+    /**
+     * 処理タイプモードのSeihoAddModeであることを表します。<br/>
      * コード:"3"
      */
     SeihoAddMode("3"),
-     /**
-      * 処理タイプモードのSeihoUpdateModeであることを表します。<br/>
+    /**
+     * 処理タイプモードのSeihoUpdateModeであることを表します。<br/>
      * コード:"4"
      */
     SeihoUpdateMode("4"),
-         /**
-      * 処理タイプモードのShokaiModeであることを表します。<br/>
+    /**
+     * 処理タイプモードのShokaiModeであることを表します。<br/>
      * コード:"4"
      */
     ShokaiMode("5");
-    
-    
+
     private final RString theCode;
 
     private HdnShoriTypeStatus(String code) {

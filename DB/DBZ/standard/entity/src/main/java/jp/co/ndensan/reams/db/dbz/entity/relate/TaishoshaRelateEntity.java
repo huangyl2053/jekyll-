@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.relate;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearchEntity;
-import jp.co.ndensan.reams.ua.uax.entity.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
  * 対象者のエンティティです。（資格系）

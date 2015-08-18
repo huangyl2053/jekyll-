@@ -14,7 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7108ShujiiIkenshoHoshuT
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7108ShujiiIkenshoHoshuTanakaJoho.ishiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7108ShujiiIkenshoHoshuTanakaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

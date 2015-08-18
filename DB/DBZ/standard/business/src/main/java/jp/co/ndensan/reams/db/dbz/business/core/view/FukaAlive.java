@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002FukaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -536,7 +536,8 @@ public class FukaAlive extends ParentModelBase<FukaAliveIdentifier, DbV2002FukaE
     }
 
     /**
-     * 賦課Aliveのみを変更対象とします。<br/> {@link DbV2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 賦課Aliveのみを変更対象とします。<br/>
+     * {@link DbV2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link FukaAlive}
      */
@@ -551,7 +552,8 @@ public class FukaAlive extends ParentModelBase<FukaAliveIdentifier, DbV2002FukaE
     }
 
     /**
-     * 保持する賦課Aliveを削除対象とします。<br/> {@link DbV2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する賦課Aliveを削除対象とします。<br/>
+     * {@link DbV2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link FukaAlive}
      */

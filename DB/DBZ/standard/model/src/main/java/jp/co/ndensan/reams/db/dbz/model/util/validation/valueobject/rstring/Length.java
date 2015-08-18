@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;

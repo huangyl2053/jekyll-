@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.mapper;
 
 import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
-import jp.co.ndensan.reams.db.dbz.business.mapper.NyushoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.business.helper.ShisetsuNyutaishoMock;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.view.ShikakuSearchAlive;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbV7901ShikakuSearchAliveDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 

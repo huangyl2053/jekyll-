@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -27,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItak
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 
 /**
  * 要介護認定申請情報のビジネスクラスです。

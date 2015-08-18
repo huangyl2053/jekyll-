@@ -12,13 +12,13 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearch.choteiNe
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearch.fukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearch.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearchEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -85,6 +85,6 @@ public class DbV7902FukaSearchAliveDac implements ISaveable<DbV7902FukaSearchEnt
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課検索Aliveエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

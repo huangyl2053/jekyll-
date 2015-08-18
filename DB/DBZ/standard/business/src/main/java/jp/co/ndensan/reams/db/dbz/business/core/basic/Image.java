@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5115ImageEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -135,7 +135,8 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
     }
 
     /**
-     * イメージ情報のみを変更対象とします。<br/> {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * イメージ情報のみを変更対象とします。<br/>
+     * {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link Image}
      */
@@ -150,7 +151,8 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
     }
 
     /**
-     * 保持するイメージ情報を削除対象とします。<br/> {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持するイメージ情報を削除対象とします。<br/>
+     * {@link DbT5115ImageEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link Image}
      */

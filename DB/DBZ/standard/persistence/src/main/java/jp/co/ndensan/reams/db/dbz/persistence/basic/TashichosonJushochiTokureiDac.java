@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochi
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
