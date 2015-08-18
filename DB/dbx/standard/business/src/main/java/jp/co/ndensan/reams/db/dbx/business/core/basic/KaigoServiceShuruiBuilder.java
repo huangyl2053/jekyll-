@@ -120,4 +120,8 @@ public class KaigoServiceShuruiBuilder {
     public KaigoServiceShurui build() {
         return new KaigoServiceShurui(entity, id);
     }
+
+    public KaigoServiceShuruiBuilder setKaigoServiceNaiyou(KaigoServiceNaiyou createKaigoServiceNaiyou) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

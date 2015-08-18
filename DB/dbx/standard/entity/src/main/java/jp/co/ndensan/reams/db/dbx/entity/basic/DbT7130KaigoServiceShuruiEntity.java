@@ -269,5 +269,4 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
         return super.toMd5(serviceShuruiCd, teikyoKaishiYM, teikyoshuryoYM, serviceShuruiMeisho, serviceShuruiRyakusho, serviceBunrruicode);
     }
 
-// </editor-fold>
 }

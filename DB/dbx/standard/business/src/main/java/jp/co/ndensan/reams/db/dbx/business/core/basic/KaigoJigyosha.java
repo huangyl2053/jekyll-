@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -26,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者を管理するクラスです。
  */
-public class KaigoJigyosha extends ModelBase<KaigoJigyoshaIdentifier, DbT7060KaigoJigyoshaEntity, KaigoJigyosha> implements Serializable {
+public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7060KaigoJigyoshaEntity, KaigoJigyosha> implements Serializable {
 
     private final DbT7060KaigoJigyoshaEntity entity;
     private final KaigoJigyoshaIdentifier id;
@@ -372,6 +374,19 @@ public class KaigoJigyosha extends ModelBase<KaigoJigyoshaIdentifier, DbT7060Kai
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KaigoJigyosha modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KaigoJigyoshaDaihyosha> getKaigoJigyoshaDaihyoshaList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KaigoJigyoshaShiteiService> getKaigoJigyoshaShiteiServiceList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

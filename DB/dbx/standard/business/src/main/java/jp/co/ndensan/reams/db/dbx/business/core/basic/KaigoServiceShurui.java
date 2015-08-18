@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -21,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス種類を管理するクラスです。
  */
-public class KaigoServiceShurui extends ModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui> implements Serializable {
+public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui> implements Serializable {
 
     private final DbT7130KaigoServiceShuruiEntity entity;
     private final KaigoServiceShuruiIdentifier id;
@@ -178,6 +180,15 @@ public class KaigoServiceShurui extends ModelBase<KaigoServiceShuruiIdentifier, 
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KaigoServiceShurui modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KaigoServiceNaiyou> getKaigoServiceNaiyouList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

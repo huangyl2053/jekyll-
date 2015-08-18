@@ -377,4 +377,12 @@ public class KaigoJigyoshaBuilder {
     public KaigoJigyosha build() {
         return new KaigoJigyosha(entity, id);
     }
+
+    public KaigoJigyoshaBuilder setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha createKaigoJigyoshaDaihyosha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public KaigoJigyoshaBuilder setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService createKaigoJigyoshaShiteiService) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
