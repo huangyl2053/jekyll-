@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbd.realservice;
 
+import jp.co.ndensan.reams.db.dbd.realservice.ShiharaiHohoHenkoManager;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
 import jp.co.ndensan.reams.db.dbd.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -54,13 +55,13 @@ public class ShiharaiHohoHenkoManagerTest {
 
             Optional<ShiharaiHohoHenkoModel> 支払方法変更モデル = Optional.ofNullable(createModel());
 
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(KanriKubun.class), any(YMDHMS.class))).thenReturn(支払方法変更モデル);
+            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(KanriKubun.class), any(int.class))).thenReturn(支払方法変更モデル);
 
             Optional<ShiharaiHohoHenkoModel> 支払方法変更 = sut.get支払方法変更(
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号,
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分,
-                    DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_処理日時);
+                    DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_履歴番号);
 
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(支払方法変更.get().is差止対象(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_差止対象フラグ));

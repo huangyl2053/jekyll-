@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbd.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
@@ -47,16 +47,16 @@ public class ShiharaiHohoHenkoManager {
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
      * @param 管理区分 管理区分
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
     public Optional<ShiharaiHohoHenkoModel> get支払方法変更(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             KanriKubun 管理区分,
-            YMDHMS 処理日時) {
+            int 履歴番号) {
 
-        return dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 処理日時);
+        return dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 履歴番号);
     }
 
     /**

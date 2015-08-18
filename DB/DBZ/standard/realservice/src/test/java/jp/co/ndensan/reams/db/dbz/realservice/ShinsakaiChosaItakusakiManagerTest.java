@@ -67,7 +67,7 @@ public class ShinsakaiChosaItakusakiManagerTest {
             Optional<DbT5910NinteichosaItakusakiJohoEntity> entity = Optional.empty();
             Optional<INinteichosaItakusakiJoho> business = Optional.empty();
 
-            when(dac.selectByKey(notFound市町村コード, notFound認定調査委託先コード)).thenReturn(entity);
+            when(dac.selectByKey(notFound市町村コード, notFound認定調査委託先コード)).thenReturn(entity.get());
             Optional<INinteichosaItakusakiJoho> result = sut.find調査委託先情報(notFound市町村コード, notFound認定調査委託先コード);
             assertThat(result, is(business));
         }
@@ -81,7 +81,7 @@ public class ShinsakaiChosaItakusakiManagerTest {
 
             Optional<DbT5910NinteichosaItakusakiJohoEntity> entity = Optional.ofNullable(DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity());
 
-            when(dac.selectByKey(市町村コード, 認定調査委託先コード)).thenReturn(entity);
+            when(dac.selectByKey(市町村コード, 認定調査委託先コード)).thenReturn(entity.get());
             Optional<INinteichosaItakusakiJoho> result = sut.find調査委託先情報(市町村コード, 認定調査委託先コード);
             assertThat(result.get().get市町村コード().value(), is(business.get市町村コード().value()));
         }
@@ -97,14 +97,14 @@ public class ShinsakaiChosaItakusakiManagerTest {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             INinteichosaItakusakiJoho shinsakaiNinteichosaItakusakiJoho = new ShinsakaiNinteichosaItakusakiJoho(DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity());
             assertThat(sut.save調査委託先(shinsakaiNinteichosaItakusakiJoho), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             ShinsakaiNinteichosaItakusakiJoho shinsakaiNinteichosaItakusakiJoho = new ShinsakaiNinteichosaItakusakiJoho(DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity());
             shinsakaiNinteichosaItakusakiJoho.getEntity().initializeMd5();
             //編集
@@ -116,7 +116,7 @@ public class ShinsakaiChosaItakusakiManagerTest {
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             ShinsakaiNinteichosaItakusakiJoho shinsakaiNinteichosaItakusakiJoho = new ShinsakaiNinteichosaItakusakiJoho(DbT5910NinteichosaItakusakiJohoEntityGenerator.createDbT5910NinteichosaItakusakiJohoEntity());
             shinsakaiNinteichosaItakusakiJoho.getEntity().initializeMd5();
             shinsakaiNinteichosaItakusakiJoho.setDeletedState(true);
