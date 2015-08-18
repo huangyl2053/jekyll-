@@ -1,32 +1,32 @@
-var DBZ;
-(function (DBZ) {
-    (function (Kiwarigaku) {
+var DBB;
+(function (DBB) {
+    (function (KaigoFukaKihon) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new Kiwarigaku.Controls(fieldName);
+                this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
             ModeController.prototype.PublicProperties = function () {
-                return new Kiwarigaku.PublicProperties(this.fieldName);
+                return new KaigoFukaKihon.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
-        Kiwarigaku.ModeController = ModeController;
-    })(DBZ.Kiwarigaku || (DBZ.Kiwarigaku = {}));
-    var Kiwarigaku = DBZ.Kiwarigaku;
-})(DBZ || (DBZ = {}));
+        KaigoFukaKihon.ModeController = ModeController;
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
+})(DBB || (DBB = {}));
 
-var DBZ;
-(function (DBZ) {
-    (function (Kiwarigaku) {
+var DBB;
+(function (DBB) {
+    (function (KaigoFukaKihon) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new Kiwarigaku.Controls(fieldName);
+                this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -35,7 +35,7 @@ var DBZ;
             };
             return PublicProperties;
         })();
-        Kiwarigaku.PublicProperties = PublicProperties;
-    })(DBZ.Kiwarigaku || (DBZ.Kiwarigaku = {}));
-    var Kiwarigaku = DBZ.Kiwarigaku;
-})(DBZ || (DBZ = {}));
+        KaigoFukaKihon.PublicProperties = PublicProperties;
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
+})(DBB || (DBB = {}));

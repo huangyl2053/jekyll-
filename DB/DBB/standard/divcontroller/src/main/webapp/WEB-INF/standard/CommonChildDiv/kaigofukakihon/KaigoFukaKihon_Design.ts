@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBZ {
+module DBB {
 
      export module KaigoFukaKihon {
 
@@ -22,11 +22,11 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType();
+                return this._myName + "_" + DBB.KaigoFukaKihon.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBB.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
             }
 
             public KaigoFukaKihon(): UZA.Panel {

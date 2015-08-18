@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBB;
+(function (DBB) {
     (function (KaigoFukaKihon) {
         var Events = (function () {
             function Events() {
@@ -17,11 +17,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType();
+                return this._myName + "_" + DBB.KaigoFukaKihon.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBB.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.KaigoFukaKihon = function () {
@@ -62,6 +62,6 @@ var DBZ;
             return Controls;
         })();
         KaigoFukaKihon.Controls = Controls;
-    })(DBZ.KaigoFukaKihon || (DBZ.KaigoFukaKihon = {}));
-    var KaigoFukaKihon = DBZ.KaigoFukaKihon;
-})(DBZ || (DBZ = {}));
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
+})(DBB || (DBB = {}));
