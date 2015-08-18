@@ -13,8 +13,8 @@ import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -588,7 +588,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> get資格関連異動履歴() {
+    public IItemList<DbT1001HihokenshaDaichoEntity> get資格関連異動履歴() {
         //TODO
         //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
@@ -596,7 +596,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @Override
-    public void set資格関連異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
+    public void set資格関連異動履歴(IItemList<DbT1001HihokenshaDaichoEntity> 被保険者台帳List) {
         //TODO
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。

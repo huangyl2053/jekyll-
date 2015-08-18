@@ -4,17 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.persistence.relate.FukaDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbb.persistence.relate.FukaDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -61,7 +61,7 @@ public class FukaManager {
      * @param 賦課年度 賦課年度
      * @return 全賦課履歴
      */
-    public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
+    public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
         return dac.select介護賦課一覧(被保険者番号, 賦課年度);
     }
 
@@ -71,13 +71,15 @@ public class FukaManager {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @return 賦課モデル
      */
-    public Optional<FukaModel> find賦課(ChoteiNendo 調定年度, FukaNendo 賦課年度,
-            TsuchishoNo 通知書番号, RDateTime 処理日時) {
+    public Optional<FukaModel> find賦課(FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
 
-        return dac.select賦課ByKey(調定年度, 賦課年度, 通知書番号, 処理日時);
+        return dac.select賦課ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号);
     }
 
     /**
@@ -86,13 +88,12 @@ public class FukaManager {
      * 通知書番号（降順）＞調定年度（降順）＞処理日時（降順）かつ　引数の処理日時　＞　対象データの処理日時
      *
      * @param 賦課年度 賦課年度
-     * @param 被保険者番号 被保険者番号
-     * @param 処理日時 処理日時
+     * @param 通知書番号 通知書番号
      * @return 直近賦課モデル
      */
-    public Optional<FukaModel> find賦課直近(FukaNendo 賦課年度, HihokenshaNo 被保険者番号, RDateTime 処理日時) {
+    public Optional<FukaModel> find賦課直近(FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
-        return dac.select賦課Recently(賦課年度, 被保険者番号, 処理日時);
+        return dac.select最新介護賦課(賦課年度, 通知書番号);
     }
 
     /**
@@ -116,7 +117,7 @@ public class FukaManager {
      * @param 通知書番号 通知書番号
      * @return 直近賦課モデル
      */
-    public IItemList<FukaModel> find賦課直近(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+    public IItemList<FukaModel> find賦課直近(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         return dac.selectRecently賦課(調定年度, 賦課年度, 通知書番号);
     }
 
@@ -129,7 +130,7 @@ public class FukaManager {
      * @return IItemList<FukaModel>
      */
     @Transaction
-    public IItemList<FukaModel> get介護賦課一覧(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+    public IItemList<FukaModel> get介護賦課一覧(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         return dac.select介護賦課一覧(調定年度, 賦課年度, 通知書番号);
     }
 
@@ -139,9 +140,9 @@ public class FukaManager {
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
      * @return Optional<FukaModel>
+     * @Transaction
      */
-    @Transaction
-    public Optional<FukaModel> get最新介護賦課(FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+    public Optional<FukaModel> get最新介護賦課(FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
         return dac.select最新介護賦課(賦課年度, 通知書番号);
     }
 

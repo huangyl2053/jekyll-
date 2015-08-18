@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

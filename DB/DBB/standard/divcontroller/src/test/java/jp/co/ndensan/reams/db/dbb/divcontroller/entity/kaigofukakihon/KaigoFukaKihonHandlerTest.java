@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -26,14 +25,16 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import org.junit.Ignore;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * 介護賦課基本情報Divの操作を行うクラスのテストクラスです。
@@ -45,7 +46,7 @@ import static org.mockito.Mockito.*;
 public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
     private static final TsuchishoNo 通知書番号 = new TsuchishoNo("0000000001");
-    private static final FukaNendo 賦課年度 = new FukaNendo("2014");
+    private static final FlexibleYear 賦課年度 = new FlexibleYear("2014");
     private static final LasdecCode 市町村コード = new LasdecCode("000001");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
     private static final RString 被保険者番号 = new RString("000003");
@@ -106,21 +107,21 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
     private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
         HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
         Optional<HihokenshaDaichoModel> hihokenshaDaicho = Optional.ofNullable(createHihokenshaDaicho());
-        when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
+//        when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
         return mock;
     }
 
     private static FukaManager createFukaManager() {
         FukaManager mock = mock(FukaManager.class);
         Optional<FukaModel> fuka = Optional.ofNullable(createFuka());
-        when(mock.get最新介護賦課(any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(fuka);
+        when(mock.get最新介護賦課(any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(fuka);
         return mock;
     }
 
     private static HokenryoDankaiManager createHokenryoDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
         Optional<HokenryoDankai> hokenryoDankai = Optional.ofNullable(createHokenryoDankai());
-        when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
+        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
         return mock;
     }
 

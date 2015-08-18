@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 
 /**
  * 介護賦課基本情報Divの操作を行うクラスです。
@@ -65,20 +64,22 @@ public class KaigoFukaKihonHandler {
 
         Optional<FukaModel> fuka = fukaManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
         if (fuka.isPresent()) {
+            // FlexibleYear 賦課年度, LasdecCode 市町村コード, RString 段階区分
             Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), searchKey.get市町村コード(), fuka.get().get保険料段階());
             if (dankai.isPresent()) {
                 div.getTxtHokenryoDankai().setValue(dankai.get().edit表示用保険料段階());
             }
         }
 
-        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(searchKey.get市町村コード(), searchKey.get識別コード());
-        if (daicho.isPresent()) {
-            HihokenshaDaichoModel daichoModel = daicho.get();
-            div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
-            div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
-            div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
-            div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
-            div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
-        }
+        //TODO n8300姜 ビルドエラー回避のために暫定対応
+//        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get保険料段階一覧(searchKey.get市町村コード(), searchKey.get識別コード());
+//        if (daicho.isPresent()) {
+//            HihokenshaDaichoModel daichoModel = daicho.get();
+//            div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
+//            div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
+//            div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
+//            div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
+//            div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
+//        }
     }
 }

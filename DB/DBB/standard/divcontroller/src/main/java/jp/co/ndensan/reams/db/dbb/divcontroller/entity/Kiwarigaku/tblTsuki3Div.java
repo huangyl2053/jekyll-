@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -12,27 +12,27 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblTsuki2 のクラスファイル 
+ * tblTsuki3 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tblTsuki2Div extends TablePanel {
+public class tblTsuki3Div extends TablePanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("celTsuki13")
-    private celTsuki13AttblTsuki2 celTsuki13;
+    @JsonProperty("celTsuki14")
+    private celTsuki14AttblTsuki3 celTsuki14;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
-    public Label getLblTsuki13() {
-        return this.celTsuki13.getLblTsuki13();
+    public Label getLblTsuki14() {
+        return this.celTsuki14.getLblTsuki14();
     }
 
     /*
@@ -41,34 +41,34 @@ public class tblTsuki2Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("celTsuki13")
-    private celTsuki13AttblTsuki2 getCelTsuki13() {
-        return celTsuki13;
+    @JsonProperty("celTsuki14")
+    private celTsuki14AttblTsuki3 getCelTsuki14() {
+        return celTsuki14;
     }
 
-    @JsonProperty("celTsuki13")
-    private void setCelTsuki13(celTsuki13AttblTsuki2 celTsuki13) {
-        this.celTsuki13=celTsuki13;
+    @JsonProperty("celTsuki14")
+    private void setCelTsuki14(celTsuki14AttblTsuki3 celTsuki14) {
+        this.celTsuki14=celTsuki14;
     }
 
 }
 /**
- * celTsuki13 のクラスファイル 
+ * celTsuki14 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTsuki13AttblTsuki2 extends TableCell {
-    @JsonProperty("lblTsuki13")
-    private Label lblTsuki13;
+class celTsuki14AttblTsuki3 extends TableCell {
+    @JsonProperty("lblTsuki14")
+    private Label lblTsuki14;
 
-    @JsonProperty("lblTsuki13")
-    public Label getLblTsuki13() {
-        return lblTsuki13;
+    @JsonProperty("lblTsuki14")
+    public Label getLblTsuki14() {
+        return lblTsuki14;
     }
 
-    @JsonProperty("lblTsuki13")
-    public void setLblTsuki13(Label lblTsuki13) {
-        this.lblTsuki13=lblTsuki13;
+    @JsonProperty("lblTsuki14")
+    public void setLblTsuki14(Label lblTsuki14) {
+        this.lblTsuki14=lblTsuki14;
     }
 
 }

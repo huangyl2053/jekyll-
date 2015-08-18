@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 
 /**
  * ビルドエラー回避のための暫定modelクラス
@@ -19,7 +21,7 @@ public class HihokendhaDaichoKey {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    HihokendhaDaichoKey(Object object, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
+    public IPredicate<DbT1001HihokenshaDaichoEntity> HihokendhaDaichoKey(Object object, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

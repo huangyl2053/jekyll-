@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
@@ -18,8 +20,6 @@ import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -186,7 +186,9 @@ public class KiwarigakuHandler {
 
         for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
 
-            ChoshuHohoKibetsu 徴収方法 = 明細.get期別調定共通().get介護期別モデル().get徴収方法();
+            // TODO n8300姜　ビルドエラー回避のために暫定対応
+            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.特別徴収;
+//            ChoshuHohoKibetsu 徴収方法 = 明細.get期別調定共通().get介護期別モデル().get徴収方法();
 //            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
             RString 期 = new RString(String.valueOf(明細.get期別調定共通().get介護期別モデル().get期()));
             Decimal 調定額 = 明細.get期別調定共通().get調定共通モデル().get調定額();

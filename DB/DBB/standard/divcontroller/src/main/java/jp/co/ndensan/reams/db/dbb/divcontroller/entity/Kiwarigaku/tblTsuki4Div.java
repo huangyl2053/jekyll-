@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -12,27 +12,27 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblTsuki3 のクラスファイル 
+ * tblTsuki4 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tblTsuki3Div extends TablePanel {
+public class tblTsuki4Div extends TablePanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("celTsuki14")
-    private celTsuki14AttblTsuki3 celTsuki14;
+    @JsonProperty("celTsukiGokei")
+    private celTsukiGokeiAttblTsuki4 celTsukiGokei;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
-    public Label getLblTsuki14() {
-        return this.celTsuki14.getLblTsuki14();
+    public Label getLblTsukiGokei() {
+        return this.celTsukiGokei.getLblTsukiGokei();
     }
 
     /*
@@ -41,34 +41,34 @@ public class tblTsuki3Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("celTsuki14")
-    private celTsuki14AttblTsuki3 getCelTsuki14() {
-        return celTsuki14;
+    @JsonProperty("celTsukiGokei")
+    private celTsukiGokeiAttblTsuki4 getCelTsukiGokei() {
+        return celTsukiGokei;
     }
 
-    @JsonProperty("celTsuki14")
-    private void setCelTsuki14(celTsuki14AttblTsuki3 celTsuki14) {
-        this.celTsuki14=celTsuki14;
+    @JsonProperty("celTsukiGokei")
+    private void setCelTsukiGokei(celTsukiGokeiAttblTsuki4 celTsukiGokei) {
+        this.celTsukiGokei=celTsukiGokei;
     }
 
 }
 /**
- * celTsuki14 のクラスファイル 
+ * celTsukiGokei のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTsuki14AttblTsuki3 extends TableCell {
-    @JsonProperty("lblTsuki14")
-    private Label lblTsuki14;
+class celTsukiGokeiAttblTsuki4 extends TableCell {
+    @JsonProperty("lblTsukiGokei")
+    private Label lblTsukiGokei;
 
-    @JsonProperty("lblTsuki14")
-    public Label getLblTsuki14() {
-        return lblTsuki14;
+    @JsonProperty("lblTsukiGokei")
+    public Label getLblTsukiGokei() {
+        return lblTsukiGokei;
     }
 
-    @JsonProperty("lblTsuki14")
-    public void setLblTsuki14(Label lblTsuki14) {
-        this.lblTsuki14=lblTsuki14;
+    @JsonProperty("lblTsukiGokei")
+    public void setLblTsukiGokei(Label lblTsukiGokei) {
+        this.lblTsukiGokei=lblTsukiGokei;
     }
 
 }
