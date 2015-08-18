@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbx.entity.db.relate.relate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 
 /**
  * 介護事業者RelateEntityクラスです。
@@ -16,38 +19,28 @@ import java.util.List;
 @lombok.Setter
 public class KaigoJigyoshaEntity implements Cloneable, Serializable {
 
-
     /**
-     * -- GETTER --
-     * 介護事業者Entityを返します。
+     * -- GETTER -- 介護事業者Entityを返します。
      *
-     * @return 介護事業者Entity
-     * -- SETTER --
-     * 介護事業者Entityを設定します。
+     * @return 介護事業者Entity -- SETTER -- 介護事業者Entityを設定します。
      *
      * @param 介護事業者Entity 介護事業者Entity
      */
     private DbT7060KaigoJigyoshaEntity 介護事業者Entity;
     //TODO List型が適切かどうか見直してください
     /**
-     * -- GETTER --
-     * 介護事業者代表者EntityListを返します。
+     * -- GETTER -- 介護事業者代表者EntityListを返します。
      *
-     * @return 介護事業者代表者EntityList
-     * -- SETTER --
-     * 介護事業者代表者EntityListを設定します。
+     * @return 介護事業者代表者EntityList -- SETTER -- 介護事業者代表者EntityListを設定します。
      *
      * @param 介護事業者代表者EntityList 介護事業者代表者EntityList
      */
     private List<DbT7062KaigoJigyoshaDaihyoshaEntity> 介護事業者代表者Entity;
     //TODO List型が適切かどうか見直してください
     /**
-     * -- GETTER --
-     * 介護事業者指定サービスEntityListを返します。
+     * -- GETTER -- 介護事業者指定サービスEntityListを返します。
      *
-     * @return 介護事業者指定サービスEntityList
-     * -- SETTER --
-     * 介護事業者指定サービスEntityListを設定します。
+     * @return 介護事業者指定サービスEntityList -- SETTER -- 介護事業者指定サービスEntityListを設定します。
      *
      * @param 介護事業者指定サービスEntityList 介護事業者指定サービスEntityList
      */

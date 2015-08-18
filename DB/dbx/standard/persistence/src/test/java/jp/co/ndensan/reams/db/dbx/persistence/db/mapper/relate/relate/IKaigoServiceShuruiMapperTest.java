@@ -4,6 +4,29 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.relate;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.relate.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.relate.KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
 /**
  * {@link IKaigoServiceShuruiMapper}のテストクラスです。
  */
@@ -15,10 +38,10 @@ public class IKaigoServiceShuruiMapperTest {
     private static DbT7131KaigoServiceNaiyouDac 介護サービス内容Dac;
     // TODO 主キー型と変数名と主キー値を適切な値に置換してください
     // TODO 主キーの数が足りない場合、追加してください。
-    private static final 主キー型1 主キー11 = XXXEntityGenerator.DEFAULT_主キー1;
-    private static final 主キー型1 主キー12 = new 主キー型1();
-    private static final 主キー型2 主キー21 = XXXEntityGenerator.DEFAULT_主キー2;
-    private static final 主キー型2 主キー22 = new 主キー型2();
+    private static final KaigoServiceShuruiCode 主キー11 = DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_サービス種類コード;
+    private static final KaigoServiceShuruiCode 主キー12 = new KaigoServiceShuruiCode("01");
+    private static final FlexibleYearMonth 主キー21 = DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_提供開始年月;
+    private static final FlexibleYearMonth 主キー22 = new FlexibleYearMonth("201509");
 
     @BeforeClass
     public static void setUpClass() {
@@ -47,14 +70,14 @@ public class IKaigoServiceShuruiMapperTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_介護サービス種類Entity返す() {
-            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createXXXParam(主キー11, 主キー21);
-            assertThat(sut.select介護サービス種類ByKey(介護サービス種類検索条件).getXXXEntity().get主キー型1(), is(主キー11));
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(主キー11, 主キー21);
+            assertThat(sut.select介護サービス種類ByKey(介護サービス種類検索条件).get介護サービス種類Entity().getServiceShuruiCd(), is(主キー11));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createXXXParam(new 主キー型1(), 主キー21);
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(new KaigoServiceShuruiCode("01"), 主キー21);
             assertThat(sut.select介護サービス種類ByKey(介護サービス種類検索条件), is(nullValue()));
         }
     }
@@ -78,18 +101,18 @@ public class IKaigoServiceShuruiMapperTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳Entityリストを返す() {
-            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createXXXParam(主キー11);
-            List<KaigoServiceShuruiEntity> entityList = sut.select介護サービス種類一覧By主キー(介護サービス種類検索条件);
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectListParam(主キー11);
+            List<KaigoServiceShuruiEntity> entityList = sut.select介護サービス種類リストBy主キー1(介護サービス種類検索条件);
             assertThat(entityList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(entityList.get(0).getXXXEntity().get主キー型1(), is(主キー11));
-            assertThat(entityList.get(1).getXXXEntity().get主キー型1(), is(主キー11));
+            assertThat(entityList.get(0).get介護サービス種類Entity().getServiceShuruiCd(), is(主キー11));
+            assertThat(entityList.get(1).get介護サービス種類Entity().getServiceShuruiCd(), is(主キー11));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-        KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createXXXParam(new 主キー型1());
-            assertThat(sut.select介護サービス種類一覧By主キー(介護サービス種類検索条件).isEmpty(), is(true));
+            KaigoServiceShuruiMapperParameter 介護サービス種類検索条件 = KaigoServiceShuruiMapperParameter.createSelectListParam(new KaigoServiceShuruiCode("01"));
+            assertThat(sut.select介護サービス種類リストBy主キー1(介護サービス種類検索条件).isEmpty(), is(true));
         }
     }
 
@@ -98,21 +121,21 @@ public class IKaigoServiceShuruiMapperTest {
     private static class TestSupport {
 
         public static void insertDbT7130(
-                主キー型1 主キー1,
-                主キー型2 主キー2) {
+                KaigoServiceShuruiCode 主キー1,
+                FlexibleYearMonth 主キー2) {
             DbT7130KaigoServiceShuruiEntity entity = DbT7130KaigoServiceShuruiEntityGenerator.createDbT7130KaigoServiceShuruiEntity();
-            entity.set主キー型1(主キー1);
-            entity.set主キー型2(主キー2);
+            entity.setServiceShuruiCd(主キー1);
+            entity.setTeikyoKaishiYM(主キー2);
             entity.setState(EntityDataState.Added);
             介護サービス種類Dac.save(entity);
         }
 
         public static void insertDbT7131(
-                主キー型1 主キー1,
-                主キー型2 主キー2) {
+                KaigoServiceShuruiCode 主キー1,
+                FlexibleYearMonth 主キー2) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            entity.set主キー型1(主キー1);
-            entity.set主キー型2(主キー2);
+            entity.setServiceShuruiCode(主キー1);
+            entity.setTeikyoKaishiYM(主キー2);
             entity.setState(EntityDataState.Added);
             介護サービス内容Dac.save(entity);
         }

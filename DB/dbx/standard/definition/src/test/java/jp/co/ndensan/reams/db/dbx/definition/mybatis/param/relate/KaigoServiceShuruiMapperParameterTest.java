@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatis.param.relate;
 
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -20,8 +23,8 @@ public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static final 主キー型1 主キー1 = ;
-    private static final 主キー型2 主キー2 = ;
+    private static final KaigoServiceShuruiCode 主キー1 = new KaigoServiceShuruiCode("01");
+    private static final FlexibleYearMonth 主キー2 = new FlexibleYearMonth("201509");
 
 // テストクラス名は適切に変更してください
     public static class createSelectByKeyParamテスト extends DbxTestBase {
@@ -42,8 +45,8 @@ public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
 
             assertThat(sut.get主キー1().value(), is(主キー1.value()));
             assertThat(sut.get主キー2(), is(主キー2));
-            assertThat(sut.uses主キー1(), is(true));
-            assertThat(sut.uses主キー2(), is(true));
+//            assertThat(sut.uses主キー1(), is(true));
+//            assertThat(sut.uses主キー2(), is(true));
         }
     }
 
@@ -61,8 +64,8 @@ public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
             KaigoServiceShuruiMapperParameter sut = KaigoServiceShuruiMapperParameter.createSelectListParam(主キー1);
 
             assertThat(sut.get主キー1().value(), is(主キー1.value()));
-            assertThat(sut.uses主キー1(), is(true));
-            assertThat(sut.uses主キー2(), is(false));
+//            assertThat(sut.uses主キー1(), is(true));
+//            assertThat(sut.uses主キー2(), is(false));
         }
     }
 

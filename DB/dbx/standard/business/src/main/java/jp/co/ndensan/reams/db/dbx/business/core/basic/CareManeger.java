@@ -1,0 +1,204 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbx.business.core.basic;
+
+import java.io.Serializable;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7064CareManegerEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+
+/**
+ * 介護支援専門員を管理するクラスです。
+ */
+public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareManegerEntity, CareManeger> implements Serializable {
+
+    private final DbT7064CareManegerEntity entity;
+    private final CareManegerIdentifier id;
+
+    /**
+     * コンストラクタです。<br/>
+     * 介護支援専門員の新規作成時に使用します。
+     *
+     * @param 介護支援専門員番号 介護支援専門員番号
+     */
+    public CareManeger(RString 介護支援専門員番号) {
+        requireNonNull(介護支援専門員番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護支援専門員番号"));
+        this.entity = new DbT7064CareManegerEntity();
+        this.entity.setKaigoShienSenmoninNo(介護支援専門員番号);
+        this.id = new CareManegerIdentifier(
+                介護支援専門員番号
+        );
+    }
+
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link DbT7064CareManegerEntity}より{@link CareManeger}を生成します。
+     *
+     * @param entity DBより取得した{@link DbT7064CareManegerEntity}
+     */
+    public CareManeger(DbT7064CareManegerEntity entity) {
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護支援専門員"));
+        this.id = new CareManegerIdentifier(
+                entity.getKaigoShienSenmoninNo());
+    }
+
+    /**
+     * シリアライズ、ビルダー用コンストラクタです。
+     *
+     * @param entity {@link DbT7064CareManegerEntity}
+     * @param id {@link CareManegerIdentifier}
+     */
+    CareManeger(
+            DbT7064CareManegerEntity entity,
+            CareManegerIdentifier id
+    ) {
+        this.entity = entity;
+        this.id = id;
+    }
+
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+    /**
+     * 介護支援専門員番号を返します。
+     *
+     * @return 介護支援専門員番号
+     */
+    public RString get介護支援専門員番号() {
+        return entity.getKaigoShienSenmoninNo();
+    }
+
+    /**
+     * 介護支援専門員名を返します。
+     *
+     * @return 介護支援専門員名
+     */
+    public AtenaMeisho get介護支援専門員名() {
+        return entity.getKaigoShienSenmoninMei();
+    }
+
+    /**
+     * 介護支援専門員名カナを返します。
+     *
+     * @return 介護支援専門員名カナ
+     */
+    public AtenaKanaMeisho get介護支援専門員名カナ() {
+        return entity.getKaigoShienSenmoninMeiKana();
+    }
+
+    /**
+     * 所属事業者番号を返します。
+     *
+     * @return 所属事業者番号
+     */
+    public KaigoJigyoshaNo get所属事業者番号() {
+        return entity.getShozokuJigyoshaNo();
+    }
+
+    /**
+     * 有効開始年月日を返します。
+     *
+     * @return 有効開始年月日
+     */
+    public FlexibleDate get有効開始年月日() {
+        return entity.getYukoKaishiDate();
+    }
+
+    /**
+     * 有効終了年月日を返します。
+     *
+     * @return 有効終了年月日
+     */
+    public FlexibleDate get有効終了年月日() {
+        return entity.getYukoShuryoDate();
+    }
+
+    /**
+     * {@link DbT7064CareManegerEntity}のクローンを返します。
+     *
+     * @return {@link DbT7064CareManegerEntity}のクローン
+     */
+    @Override
+    public DbT7064CareManegerEntity toEntity() {
+        return this.entity.clone();
+    }
+
+    /**
+     * 介護支援専門員の識別子{@link CareManegerIdentifier}を返します。
+     *
+     * @return 介護支援専門員の識別子{@link CareManegerIdentifier}
+     */
+    @Override
+    public CareManegerIdentifier identifier() {
+        return this.id;
+    }
+
+    /**
+     * 保持する介護支援専門員を削除対象とします。<br/>
+     * {@link DbT7064CareManegerEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return 削除対象処理実施後の{@link CareManeger}
+     */
+    @Override
+    public CareManeger deleted() {
+        DbT7064CareManegerEntity deletedEntity = this.toEntity();
+        if (deletedEntity.getState() != EntityDataState.Added) {
+            deletedEntity.setState(EntityDataState.Deleted);
+        } else {
+            //TODO メッセージの検討
+            throw new IllegalStateException(UrErrorMessages.不正.toString());
+        }
+        return new CareManeger(deletedEntity, id);
+    }
+
+    /**
+     * {@link CareManeger}のシリアライズ形式を提供します。
+     *
+     * @return {@link CareManeger}のシリアライズ形式
+     */
+    protected Object writeReplace() {
+        return new _SerializationProxy(entity, id);
+
+    }
+
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static final class _SerializationProxy implements Serializable {
+
+        private final DbT7064CareManegerEntity entity;
+        private final CareManegerIdentifier id;
+
+        private _SerializationProxy(DbT7064CareManegerEntity entity, CareManegerIdentifier id) {
+            this.entity = entity;
+            this.id = id;
+        }
+
+        private Object readResolve() {
+            return new CareManeger(this.entity, this.id);
+        }
+    }
+
+    /**
+     * このクラスの編集を行うBuilderを取得します。<br/>
+     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     *
+     * @return Builder
+     */
+    public CareManegerBuilder createBuilderForEdit() {
+        return new CareManegerBuilder(entity, id);
+    }
+
+//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+}

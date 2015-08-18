@@ -4,6 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.relate;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.relate.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.relate.KaigoServiceShuruiEntity;
+
 /**
  * 介護サービス種類のマッパーインタフェースです。
  */

@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbx.entity.db.relate.relate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity;
 
 /**
  * 介護サービス種類RelateEntityクラスです。
@@ -16,26 +18,19 @@ import java.util.List;
 @lombok.Setter
 public class KaigoServiceShuruiEntity implements Cloneable, Serializable {
 
-
     /**
-     * -- GETTER --
-     * 介護サービス種類Entityを返します。
+     * -- GETTER -- 介護サービス種類Entityを返します。
      *
-     * @return 介護サービス種類Entity
-     * -- SETTER --
-     * 介護サービス種類Entityを設定します。
+     * @return 介護サービス種類Entity -- SETTER -- 介護サービス種類Entityを設定します。
      *
      * @param 介護サービス種類Entity 介護サービス種類Entity
      */
     private DbT7130KaigoServiceShuruiEntity 介護サービス種類Entity;
     //TODO List型が適切かどうか見直してください
     /**
-     * -- GETTER --
-     * 介護サービス内容EntityListを返します。
+     * -- GETTER -- 介護サービス内容EntityListを返します。
      *
-     * @return 介護サービス内容EntityList
-     * -- SETTER --
-     * 介護サービス内容EntityListを設定します。
+     * @return 介護サービス内容EntityList -- SETTER -- 介護サービス内容EntityListを設定します。
      *
      * @param 介護サービス内容EntityList 介護サービス内容EntityList
      */
