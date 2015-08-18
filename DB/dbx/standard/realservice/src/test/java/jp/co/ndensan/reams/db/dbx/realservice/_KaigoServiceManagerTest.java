@@ -22,10 +22,8 @@ import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoServiceShuruiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuSanteiTani;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7130KaigoServiceShuruiDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -50,10 +48,10 @@ import static org.mockito.Mockito.any;
  */
 @RunWith(Enclosed.class)
 public class _KaigoServiceManagerTest extends DbxTestBase {
-    
+
     private static _KaigoServiceManager sut;
-    private static IDbT7131KaigoServiceNaiyouDac mockDbT7131KaigoServiceNaiyouDac;
-    private static IDbT7130KaigoServiceShuruiDac mockDbT7130KaigoServiceShuruiDac;
+    private static DbT7131KaigoServiceNaiyouDac mockDbT7131KaigoServiceNaiyouDac;
+    private static DbT7130KaigoServiceShuruiDac mockDbT7130KaigoServiceShuruiDac;
     private static IKaigoServiceShurui kaigoServiceShurui1;
     private static IKaigoServiceShurui kaigoServiceShurui2;
     private static IKaigoServiceShurui kaigoServiceShurui3;
@@ -379,7 +377,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス種類の更新が成功した時_save介護サービス内容は_1を返す() {
-            when(mockDbT7130KaigoServiceShuruiDac.insertOrUpdate(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7130KaigoServiceShuruiDac.save(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.save介護サービス種類(kaigoServiceShurui1);
             assertThat(result, is(1));
@@ -387,7 +385,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス種類の更新が成功しなかった時_save介護サービス内容は_0を返す() {
-            when(mockDbT7130KaigoServiceShuruiDac.insertOrUpdate(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7130KaigoServiceShuruiDac.save(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(FAILED_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.save介護サービス種類(kaigoServiceShurui1);
             assertThat(result, is(0));
@@ -398,7 +396,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス内容の更新が成功した時_save介護サービス内容は_1を返す() {
-            when(mockDbT7131KaigoServiceNaiyouDac.insertOrUpdate(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.save介護サービス内容(kaigoServiceNaiyo1);
             assertThat(result, is(1));
@@ -406,7 +404,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス内容の更新が成功しなかった時_save介護サービス内容は_0を返す() {
-            when(mockDbT7131KaigoServiceNaiyouDac.insertOrUpdate(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.save介護サービス内容(kaigoServiceNaiyo1);
             assertThat(result, is(0));
@@ -417,8 +415,8 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 同一のサービス種類コードのデータが介護サービス種類に1件_介護サービス内容に1件で介護サービス種類の削除が成功した時_remove介護サービス内容は_2を返す() {
-            when(mockDbT7130KaigoServiceShuruiDac.delete(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
-            when(mockDbT7131KaigoServiceNaiyouDac.delete(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7130KaigoServiceShuruiDac.save(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.remove介護サービス種類(kaigoServiceShurui1);
             assertThat(result, is(2));
@@ -426,8 +424,8 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス種類のみに存在するデータで_介護サービス種類の削除が成功した時_remove介護サービス内容は_1を返す() {
-            when(mockDbT7130KaigoServiceShuruiDac.delete(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
-            when(mockDbT7131KaigoServiceNaiyouDac.delete(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7130KaigoServiceShuruiDac.save(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.remove介護サービス種類(kaigoServiceShurui1);
             assertThat(result, is(1));
@@ -435,8 +433,8 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス種類の削除が成功した時_remove介護サービス内容は_0を返す() {
-            when(mockDbT7130KaigoServiceShuruiDac.delete(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(FAILED_NUMBER);
-            when(mockDbT7131KaigoServiceNaiyouDac.delete(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7130KaigoServiceShuruiDac.save(any(DbT7130KaigoServiceShuruiEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.remove介護サービス種類(kaigoServiceShurui1);
             assertThat(result, is(0));
@@ -447,7 +445,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス内容の削除が成功した時_remove介護サービス内容は_1を返す() {
-            when(mockDbT7131KaigoServiceNaiyouDac.delete(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(SUCCESS_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.remove介護サービス内容(kaigoServiceNaiyo1);
             assertThat(result, is(1));
@@ -455,7 +453,7 @@ public class _KaigoServiceManagerTest extends DbxTestBase {
 
         @Test
         public void 介護サービス内容の削除が成功した時_remove介護サービス内容は_0を返す() {
-            when(mockDbT7131KaigoServiceNaiyouDac.delete(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
+            when(mockDbT7131KaigoServiceNaiyouDac.save(any(DbT7131KaigoServiceNaiyouEntity.class))).thenReturn(FAILED_NUMBER);
             _KaigoServiceManager sut = new _KaigoServiceManager(mockDbT7130KaigoServiceShuruiDac, mockDbT7131KaigoServiceNaiyouDac);
             int result = sut.remove介護サービス内容(kaigoServiceNaiyo1);
             assertThat(result, is(0));

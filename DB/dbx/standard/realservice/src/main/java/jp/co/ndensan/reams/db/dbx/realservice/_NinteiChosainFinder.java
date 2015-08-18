@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbx.business.mapper.NinteiChosainMapper;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IChosainJohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.basic.ChosainJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -26,14 +26,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class _NinteiChosainFinder implements INinteiChosainFinder {
 
-    private final IChosainJohoDac dac;
+    private final ChosainJohoDac dac;
     private final IKaigoJigyoshaFinder finder;
 
     /**
      * 認定調査員検索クラスのコンストラクタです。
      */
     public _NinteiChosainFinder() {
-        dac = InstanceProvider.createWithCustomize(IChosainJohoDac.class);
+        dac = InstanceProvider.createWithCustomize(ChosainJohoDac.class);
         finder = KaigoJigyoshaFinderFactory.getInstance();
     }
 
@@ -43,7 +43,7 @@ public class _NinteiChosainFinder implements INinteiChosainFinder {
      * @param dac 調査員情報Dac
      * @param finder 事業者Finder
      */
-    _NinteiChosainFinder(IChosainJohoDac dac, IKaigoJigyoshaFinder finder) {
+    _NinteiChosainFinder(ChosainJohoDac dac, IKaigoJigyoshaFinder finder) {
         this.dac = dac;
         this.finder = finder;
     }

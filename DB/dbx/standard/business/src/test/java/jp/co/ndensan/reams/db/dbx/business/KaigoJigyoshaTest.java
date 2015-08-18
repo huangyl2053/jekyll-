@@ -9,9 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.HojinsShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.relate.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -156,49 +156,6 @@ public class KaigoJigyoshaTest extends DbxTestBase {
         }
 
         @Test
-        public void setGinkoCodeで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setGinkoCode(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_銀行コード).build();
-            assertThat(result.get銀行コード(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_銀行コード));
-        }
-
-        @Test
-        public void setShitenCodeで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShitenCode(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_支店コード).build();
-            assertThat(result.get支店コード(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_支店コード));
-        }
-
-        @Test
-        public void setKozaShubetsuで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setKozaShubetsu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座種別).build();
-            assertThat(result.get口座種別(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座種別));
-        }
-
-        @Test
-        public void setKozaNoで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setKozaNo(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座番号).build();
-            assertThat(result.get口座番号(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座番号));
-        }
-
-        @Test
-        public void setKozaMeigininで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setKozaMeiginin(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座名義人).build();
-            assertThat(result.get口座名義人(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座名義人));
-        }
-
-        @Test
-        public void setKozaMeigininKanaで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setKozaMeigininKana(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座名義人カナ).build();
-            assertThat(result.get口座名義人カナ(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_口座名義人カナ));
-        }
-
-        @Test
-        public void setShiteiKijungaitoJigyoshaKubunで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShiteiKijungaitoJigyoshaKubun(
-                    new ShiteiKijunGaitoJigyoshoKubun(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分.getColumnValue())).build();
-            assertThat(result.get指定基準該当等事業所区分().value(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_指定基準該当等事業所区分));
-        }
-
-        @Test
         public void setShozaiShichosonで設定した値を_生成された_KaigoJigyoshaも保持する() {
             KaigoJigyosha result = KaigoJigyosha.newBuilder().setShozaiShichoson(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所在市町村).build();
             assertThat(result.get所在市町村(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所在市町村));
@@ -219,20 +176,20 @@ public class KaigoJigyoshaTest extends DbxTestBase {
 
         @Test
         public void setBedSuで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setBedSu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_ベッド数).build();
-            assertThat(result.getベッド数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_ベッド数));
+            KaigoJigyosha result = KaigoJigyosha.newBuilder().setBedSu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_ベッド数.intValue()).build();
+            assertThat(result.getベッド数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_ベッド数.intValue()));
         }
 
         @Test
         public void setShozokuNinzuで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShozokuNinzu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所属人数).build();
-            assertThat(result.get所属人数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所属人数));
+            KaigoJigyosha result = KaigoJigyosha.newBuilder().setShozokuNinzu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所属人数.intValue()).build();
+            assertThat(result.get所属人数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_所属人数.intValue()));
         }
 
         @Test
         public void setRiyoshaSuで設定した値を_生成された_KaigoJigyoshaも保持する() {
-            KaigoJigyosha result = KaigoJigyosha.newBuilder().setRiyoshaSu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_利用者数).build();
-            assertThat(result.get利用者数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_利用者数));
+            KaigoJigyosha result = KaigoJigyosha.newBuilder().setRiyoshaSu(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_利用者数.intValue()).build();
+            assertThat(result.get利用者数(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_利用者数.intValue()));
         }
 
         @Test

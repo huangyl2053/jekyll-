@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護事業者の情報を扱うクラスです。
@@ -384,7 +385,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public int getベッド数() {
-        return relateEntity.get事業者エンティティ().getBedSu();
+        return relateEntity.get事業者エンティティ().getBedSu().intValue();
     }
 
     /**
@@ -394,7 +395,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public int get所属人数() {
-        return relateEntity.get事業者エンティティ().getShozokuNinzu();
+        return relateEntity.get事業者エンティティ().getShozokuNinzu().intValue();
     }
 
     /**
@@ -404,7 +405,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public int get利用者数() {
-        return relateEntity.get事業者エンティティ().getRiyoshaSu();
+        return relateEntity.get事業者エンティティ().getRiyoshaSu().intValue();
     }
 
     /**
@@ -840,7 +841,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          * @return builder
          */
         public Builder setBedSu(int bedSu) {
-            this.relateEntity.get事業者エンティティ().setBedSu(bedSu);
+            this.relateEntity.get事業者エンティティ().setBedSu(new Decimal(bedSu));
             return this;
         }
 
@@ -851,7 +852,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          * @return builder
          */
         public Builder setShozokuNinzu(int shozokuNinzu) {
-            this.relateEntity.get事業者エンティティ().setShozokuNinzu(shozokuNinzu);
+            this.relateEntity.get事業者エンティティ().setShozokuNinzu(new Decimal(shozokuNinzu));
             return this;
         }
 
@@ -862,7 +863,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
          * @return builder
          */
         public Builder setRiyoshaSu(int riyoshaSu) {
-            this.relateEntity.get事業者エンティティ().setRiyoshaSu(riyoshaSu);
+            this.relateEntity.get事業者エンティティ().setRiyoshaSu(new Decimal(riyoshaSu));
             return this;
         }
 

@@ -6,11 +6,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceTypeCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoJigyoshaMapper;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7063KaigoJigyoshaShiteiServiceDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -28,15 +30,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class _KaigoJigyoshaFinder implements IKaigoJigyoshaFinder {
 
-    private final IDbT7060KaigoJigyoshaDac 事業者Dac;
-    private final IDbT7063KaigoJigyoshaShiteiServiceDac 事業者指定サービスDac;
+    private final DbT7060KaigoJigyoshaDac 事業者Dac;
+    private final DbT7063KaigoJigyoshaShiteiServiceDac 事業者指定サービスDac;
 
     /**
      * コンストラクタです。
      */
     public _KaigoJigyoshaFinder() {
-        事業者Dac = InstanceProvider.createWithCustomize(IDbT7060KaigoJigyoshaDac.class);
-        事業者指定サービスDac = InstanceProvider.createWithCustomize(IDbT7063KaigoJigyoshaShiteiServiceDac.class);
+        事業者Dac = InstanceProvider.createWithCustomize(DbT7060KaigoJigyoshaDac.class);
+        事業者指定サービスDac = InstanceProvider.createWithCustomize(DbT7063KaigoJigyoshaShiteiServiceDac.class);
     }
 
     /**
@@ -45,7 +47,7 @@ public class _KaigoJigyoshaFinder implements IKaigoJigyoshaFinder {
      * @param 事業者Dac
      * @param 事業者指定サービスDac
      */
-    _KaigoJigyoshaFinder(IDbT7060KaigoJigyoshaDac 事業者Dac, IDbT7063KaigoJigyoshaShiteiServiceDac 事業者指定サービスDac) {
+    _KaigoJigyoshaFinder(DbT7060KaigoJigyoshaDac 事業者Dac, DbT7063KaigoJigyoshaShiteiServiceDac 事業者指定サービスDac) {
         this.事業者Dac = 事業者Dac;
         this.事業者指定サービスDac = 事業者指定サービスDac;
     }
@@ -63,7 +65,7 @@ public class _KaigoJigyoshaFinder implements IKaigoJigyoshaFinder {
             事業者番号s.add(指定サービス.get事業者番号());
         }
 
-        List<KaigoJigyoshaEntity> 事業者s = new ArrayList<>();
+        List<DbT7060KaigoJigyoshaEntity> 事業者s = new ArrayList<>();
         事業者s.addAll(事業者Dac.select特定の事業者番号の事業者List(事業者番号s));
 
         List<IKaigoJigyosha> 特定サービスを含む事業者s = KaigoJigyoshaMapper.toKaigoJigyoshas(事業者s);
@@ -77,7 +79,7 @@ public class _KaigoJigyoshaFinder implements IKaigoJigyoshaFinder {
 
     @Override
     public IKaigoJigyosha get特定の事業者番号の介護事業者(RString jigyoshaBango, FlexibleDate 有効開始年月日) {
-        KaigoJigyoshaEntity 特定の事業者種別かつ事業者番号の事業者 = 事業者Dac.select特定の事業者番号の事業者(jigyoshaBango, 有効開始年月日);
+        DbT7060KaigoJigyoshaEntity 特定の事業者種別かつ事業者番号の事業者 = 事業者Dac.selectByKey(new KaigoJigyoshaNo(jigyoshaBango), 有効開始年月日);
 
         if (特定の事業者種別かつ事業者番号の事業者 == null) {
             return null;
@@ -88,7 +90,7 @@ public class _KaigoJigyoshaFinder implements IKaigoJigyoshaFinder {
 
     @Override
     public IKaigoJigyosha get特定の事業者番号の介護事業者(RString jigyoshaBango) {
-        KaigoJigyoshaEntity 特定の事業者種別かつ事業者番号の事業者 = 事業者Dac.select特定の事業者番号の事業者(jigyoshaBango);
+        DbT7060KaigoJigyoshaEntity 特定の事業者種別かつ事業者番号の事業者 = 事業者Dac.selectByKey(new KaigoJigyoshaNo(jigyoshaBango), FlexibleDate.MIN);
 
         if (特定の事業者種別かつ事業者番号の事業者 == null) {
             return null;

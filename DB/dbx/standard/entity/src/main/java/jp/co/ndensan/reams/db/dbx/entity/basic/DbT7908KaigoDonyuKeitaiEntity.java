@@ -16,6 +16,7 @@ import java.util.Objects;
  */
 public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908KaigoDonyuKeitaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7908KaigoDonyuKeitai");
 
@@ -35,7 +36,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -44,7 +45,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -53,7 +54,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -62,17 +63,16 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,7 +81,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 業務分類のgetメソッドです。
-     * 
+     *
      * @return 業務分類
      */
     public RString getGyomuBunrui() {
@@ -90,7 +90,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 業務分類のsetメソッドです。
-     * 
+     *
      * @param gyomuBunrui 業務分類
      */
     public void setGyomuBunrui(RString gyomuBunrui) {
@@ -99,7 +99,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 導入形態コードのgetメソッドです。
-     * 
+     *
      * @return 導入形態コード
      */
     public Code getDonyuKeitaiCode() {
@@ -108,7 +108,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 導入形態コードのsetメソッドです。
-     * 
+     *
      * @param donyuKeitaiCode 導入形態コード
      */
     public void setDonyuKeitaiCode(Code donyuKeitaiCode) {
@@ -117,7 +117,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 支所管理有無フラグのgetメソッドです。
-     * 
+     *
      * @return 支所管理有無フラグ
      */
     public boolean getShishoKanriUmuFlag() {
@@ -126,7 +126,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * 支所管理有無フラグのsetメソッドです。
-     * 
+     *
      * @param shishoKanriUmuFlag 支所管理有無フラグ
      */
     public void setShishoKanriUmuFlag(boolean shishoKanriUmuFlag) {
@@ -135,9 +135,9 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * このエンティティの主キーが他の{@literal DbT7908KaigoDonyuKeitaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7908KaigoDonyuKeitaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -166,6 +166,7 @@ public class DbT7908KaigoDonyuKeitaiEntity extends DbTableEntityBase<DbT7908Kaig
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -10,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -39,29 +40,22 @@ public class KaigoJigyoshaMapperTest extends DbxTestBase {
 
         @Test
         public void LDNS_引数に空のリストを渡した場合_toKaigoJigyoshasは_0件のリストを返す() {
-            List<KaigoJigyoshaEntity> jigyoshas = new ArrayList<>();
+            List<DbT7060KaigoJigyoshaEntity> jigyoshas = new ArrayList<>();
             List<IKaigoJigyosha> result = KaigoJigyoshaMapper.toKaigoJigyoshas(jigyoshas);
             assertThat(result.size(), is(0));
         }
 
         @Test
         public void LDNS_引数を渡した場合_toKaigoJigyoshasは_1件のリストを返す() {
-            KaigoJigyoshaEntity jigyoshas;
-            jigyoshas = new KaigoJigyoshaEntity(new KaigoJigyoshaNo(new RString("0000000001")), new FlexibleDate("20130202"),
-                    new FlexibleDate("20150202"), new ShikibetsuCode("001"),
-                    new RString("事業者略称"), new RString("事業者略称カナ"), new RString("事業者住所カナ"),
-                    new RString("異動事由"), new FlexibleDate("20130303"), new RString("社会福祉法人軽減対象区分"),
-                    new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"),
-                    new RString("法人種別"), new FlexibleDate("20140404"), new FlexibleDate("20150404"),
-                    new FlexibleDate("20110512"), new FlexibleDate("20140302")
-            );
-            List<KaigoJigyoshaEntity> entity = new ArrayList<>();
+            DbT7060KaigoJigyoshaEntity jigyoshas;
+            jigyoshas = new DbT7060KaigoJigyoshaEntity();
+            List<DbT7060KaigoJigyoshaEntity> entity = new ArrayList<>();
             entity.add(jigyoshas);
             List<IKaigoJigyosha> result = KaigoJigyoshaMapper.toKaigoJigyoshas(entity);
             assertThat(result.size(), is(1));
         }
     }
-    
+
     public static class コンストラクタのテスト extends DbxTestBase {
 
         @Test(expected = InvocationTargetException.class)

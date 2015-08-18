@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.realservice;
 
 import jp.co.ndensan.reams.db.dbx.business.IKogakuKaigoServiceHi;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IKogakuKaigoServiceHiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.basic.KogakuKaigoServiceHiDac;
 import jp.co.ndensan.reams.db.dbx.realservice.helper.MockKogakuKaigoServiceHiEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -31,12 +31,12 @@ public class _KogakuKaigoServiceHiFinderTest extends DbxTestBase {
     public static class Get支給情報テスト extends DbxTestBase {
 
         IKogakuKaigoServiceHiFinder sut;
-        IKogakuKaigoServiceHiDac dac;
+        KogakuKaigoServiceHiDac dac;
         IKogakuKaigoServiceHi result;
 
         @Before
         public void setUp() {
-            dac = mock(IKogakuKaigoServiceHiDac.class);
+            dac = mock(KogakuKaigoServiceHiDac.class);
             sut = new _KogakuKaigoServiceHiFinder(dac);
         }
 

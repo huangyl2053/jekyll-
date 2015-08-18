@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 被保険者台帳管理Aliveテーブルのエンティティクラスです。
@@ -19,7 +20,7 @@ public class DbV1001HihokenshaDaichoEntity extends DbTableEntityBase<DbV1001Hiho
     @TableName
     public static final RString TABLE_NAME = new RString("DbV1001HihokenshaDaicho");
 
-    private RString hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private FlexibleDate idoYMD;
     private RString edaNo;
     private RString idoJiyuCode;
@@ -53,7 +54,7 @@ public class DbV1001HihokenshaDaichoEntity extends DbTableEntityBase<DbV1001Hiho
      *
      * @return hihokenshaNo
      */
-    public RString getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -62,7 +63,7 @@ public class DbV1001HihokenshaDaichoEntity extends DbTableEntityBase<DbV1001Hiho
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(RString hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

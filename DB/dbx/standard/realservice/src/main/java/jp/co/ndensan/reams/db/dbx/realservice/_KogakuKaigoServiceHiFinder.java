@@ -8,7 +8,6 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.business.IKogakuKaigoServiceHi;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbV3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.business.mapper.KogakuKaigoServiceHiMapper;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IKogakuKaigoServiceHiDac;
 import jp.co.ndensan.reams.db.dbx.persistence.basic.KogakuKaigoServiceHiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -27,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class _KogakuKaigoServiceHiFinder implements IKogakuKaigoServiceHiFinder {
 
-    private final IKogakuKaigoServiceHiDac kogakuKaigoServiceHiDac;
+    private final KogakuKaigoServiceHiDac kogakuKaigoServiceHiDac;
 
     /**
      * コンストラクター
@@ -41,7 +40,7 @@ public class _KogakuKaigoServiceHiFinder implements IKogakuKaigoServiceHiFinder 
      *
      * @param dac テスト用個人DAC
      */
-    _KogakuKaigoServiceHiFinder(IKogakuKaigoServiceHiDac dac) {
+    _KogakuKaigoServiceHiFinder(KogakuKaigoServiceHiDac dac) {
         this.kogakuKaigoServiceHiDac = dac;
     }
 

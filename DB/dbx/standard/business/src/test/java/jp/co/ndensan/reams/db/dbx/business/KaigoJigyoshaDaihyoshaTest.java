@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business;
 import java.lang.reflect.Constructor;
 import jp.co.ndensan.reams.db.dbx.business.KaigoJigyoshaDaihyosha.Builder;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -154,14 +154,14 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
 
         @Test
         public void setKaisetsushaShimeiで設定した値を_生成されたKaigoJigyoshaDaihyoshaも保持する() {
-            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaShimei(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名).build();
-            assertThat(result.get開設者名(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名));
+            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaShimei(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名称).build();
+            assertThat(result.get開設者名(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名称));
         }
 
         @Test
         public void setKaisetsushaKanaShimeiで設定した値を_生成されたKaigoJigyoshaDaihyoshaも保持する() {
-            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaKanaShimei(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名カナ).build();
-            assertThat(result.get開設者名カナ(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名カナ));
+            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaKanaShimei(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名称カナ).build();
+            assertThat(result.get開設者名カナ(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者名称カナ));
         }
 
         @Test
@@ -190,8 +190,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
 
         @Test
         public void setKaisetsushaFaxNoで設定した値を_生成されたKaigoJigyoshaDaihyoshaも保持する() {
-            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaFaxNo(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者FAX番号).build();
-            assertThat(result.get開設者FAX番号(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者FAX番号));
+            KaigoJigyoshaDaihyosha result = KaigoJigyoshaDaihyosha.newBuilder().setKaisetsushaFaxNo(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者ＦＡＸ番号).build();
+            assertThat(result.get開設者FAX番号(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_開設者ＦＡＸ番号));
         }
     }
 

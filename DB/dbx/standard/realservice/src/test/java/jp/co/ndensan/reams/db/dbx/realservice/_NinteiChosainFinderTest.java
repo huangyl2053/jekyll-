@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.entity.basic.ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IChosainJohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.basic.ChosainJohoDac;
 import jp.co.ndensan.reams.db.dbx.realservice.helper.MockChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -41,12 +41,12 @@ import static org.mockito.Mockito.when;
 public class _NinteiChosainFinderTest extends DbxTestBase {
 
     private static _NinteiChosainFinder sut;
-    private static IChosainJohoDac dac;
+    private static ChosainJohoDac dac;
     private static IKaigoJigyoshaFinder finder;
 
     @BeforeClass
     public static void test() {
-        dac = mock(IChosainJohoDac.class);
+        dac = mock(ChosainJohoDac.class);
         finder = mock(IKaigoJigyoshaFinder.class);
         sut = new _NinteiChosainFinder(dac, finder);
     }

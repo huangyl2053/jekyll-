@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoServiceMapper;
 import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoServiceNaiyoMapper;
 import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoServiceShuruiMapper;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7131KaigoServiceNaiyouDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.IDbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleYearMonthOperator;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
@@ -42,16 +42,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class _KaigoServiceManager implements IKaigoServiceManager {
 
-    private final IDbT7130KaigoServiceShuruiDac shuruiDac;
-    private final IDbT7131KaigoServiceNaiyouDac naiyoDac;
+    private final DbT7130KaigoServiceShuruiDac shuruiDac;
+    private final DbT7131KaigoServiceNaiyouDac naiyoDac;
     private final RString base_date = new RString("基準日");
 
     /**
      * 介護サービスマネージャークラスのコンストラクタです。
      */
     public _KaigoServiceManager() {
-        shuruiDac = InstanceProvider.createWithCustomize(IDbT7130KaigoServiceShuruiDac.class);
-        naiyoDac = InstanceProvider.createWithCustomize(IDbT7131KaigoServiceNaiyouDac.class);
+        shuruiDac = InstanceProvider.createWithCustomize(DbT7130KaigoServiceShuruiDac.class);
+        naiyoDac = InstanceProvider.createWithCustomize(DbT7131KaigoServiceNaiyouDac.class);
     }
 
     /**
@@ -60,7 +60,7 @@ public class _KaigoServiceManager implements IKaigoServiceManager {
      * @param shuruiDac 介護サービス種類Dacクラス
      * @param naiyoDac 介護サービス内容Dacクラス
      */
-    public _KaigoServiceManager(IDbT7130KaigoServiceShuruiDac shuruiDac, IDbT7131KaigoServiceNaiyouDac naiyoDac) {
+    public _KaigoServiceManager(DbT7130KaigoServiceShuruiDac shuruiDac, DbT7131KaigoServiceNaiyouDac naiyoDac) {
         this.shuruiDac = shuruiDac;
         this.naiyoDac = naiyoDac;
     }
@@ -69,8 +69,7 @@ public class _KaigoServiceManager implements IKaigoServiceManager {
     public List<IKaigoServiceShurui> get介護サービス種類All(FlexibleYearMonth 基準年月) {
         Objects.requireNonNull(基準年月, UrSystemErrorMessages.値がnull.getReplacedMessage(base_date.toString()));
 
-        List<DbT7130KaigoServiceShuruiEntity> entities = shuruiDac.selectList(makeShuruiConditions(基準年月,
-                KaigoServiceShuruiCode.EMPTY, RString.EMPTY));
+        List<DbT7130KaigoServiceShuruiEntity> entities = shuruiDac.selectList(makeShuruiConditions(基準年月, KaigoServiceShuruiCode.EMPTY, RString.EMPTY));
 
         return KaigoServiceShuruiMapper.to介護サービス種類リスト(entities);
     }
@@ -112,26 +111,26 @@ public class _KaigoServiceManager implements IKaigoServiceManager {
 
     @Override
     public int save介護サービス種類(IKaigoServiceShurui 介護サービス種類) {
-        return shuruiDac.insertOrUpdate(KaigoServiceShuruiMapper.to介護サービス種類Entity(介護サービス種類));
+        return shuruiDac.save(KaigoServiceShuruiMapper.to介護サービス種類Entity(介護サービス種類));
     }
 
     @Override
     public int save介護サービス内容(IKaigoServiceNaiyo 介護サービス内容) {
-        return naiyoDac.insertOrUpdate(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
+        return naiyoDac.save(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
     }
 
     @Override
     public int remove介護サービス種類(IKaigoServiceShurui 介護サービス種類) {
-        int removeShurui = shuruiDac.delete(KaigoServiceShuruiMapper.to介護サービス種類Entity(介護サービス種類));
+        int removeShurui = shuruiDac.save(KaigoServiceShuruiMapper.to介護サービス種類Entity(介護サービス種類));
         IKaigoServiceCode kaigoServiceCode = new _KaigoServiceCode(介護サービス種類.getサービス種類コード(), RString.EMPTY);
         IKaigoServiceNaiyo 介護サービス内容 = new _KaigoServiceNaiyo(kaigoServiceCode);
-        int removeNaiyo = naiyoDac.delete(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
+        int removeNaiyo = naiyoDac.save(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
         return removeShurui + removeNaiyo;
     }
 
     @Override
     public int remove介護サービス内容(IKaigoServiceNaiyo 介護サービス内容) {
-        return naiyoDac.delete(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
+        return naiyoDac.save(KaigoServiceNaiyoMapper.to介護サービス内容Entity(介護サービス内容));
     }
 
     private ITrueFalseCriteria makeShuruiConditions(FlexibleYearMonth 基準年月, KaigoServiceShuruiCode サービス種類, RString サービス分類) {

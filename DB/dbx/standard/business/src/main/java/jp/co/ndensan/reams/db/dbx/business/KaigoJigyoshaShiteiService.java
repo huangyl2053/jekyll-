@@ -119,6 +119,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -1018,7 +1019,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 介護支援専門員数_専従の常勤者
      */
-    public int get介護支援専門員数_専従の常勤者() {
+    public Decimal get介護支援専門員数_専従の常勤者() {
         return entity.getKaigoShienSemmoninSenjuJokinshaNinsu();
     }
 
@@ -1027,7 +1028,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 介護支援専門員数_専従の非常勤者
      */
-    public int get介護支援専門員数_専従の非常勤者() {
+    public Decimal get介護支援専門員数_専従の非常勤者() {
         return entity.getKaigoSienSemmoninSenjuHijokinshaNinsu();
     }
 
@@ -1036,7 +1037,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 介護支援専門員数_兼務の常勤者
      */
-    public int get介護支援専門員数_兼務の常勤者() {
+    public Decimal get介護支援専門員数_兼務の常勤者() {
         return entity.getKaigoSienSemmoninKemmuJokinshaNinsu();
     }
 
@@ -1045,7 +1046,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 介護支援専門員数_兼務の非常勤者
      */
-    public int get介護支援専門員数_兼務の非常勤者() {
+    public Decimal get介護支援専門員数_兼務の非常勤者() {
         return entity.getKaigoSienSemmoninKemmuHijokinshaNinsu();
     }
 
@@ -1054,7 +1055,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護サービス提供責任者数
      */
-    public int get訪問介護サービス提供責任者数() {
+    public Decimal get訪問介護サービス提供責任者数() {
         return entity.getHomonkaigoServiceTeikyoSekininshaNinsu();
     }
 
@@ -1063,7 +1064,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護員数_専従の常勤者
      */
-    public int get訪問介護員数_専従の常勤者() {
+    public Decimal get訪問介護員数_専従の常勤者() {
         return entity.getHomonkaigoSenjuJokinshaNinsu();
     }
 
@@ -1072,7 +1073,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護員数_専従の非常勤者
      */
-    public int get訪問介護員数_専従の非常勤者() {
+    public Decimal get訪問介護員数_専従の非常勤者() {
         return entity.getHomonkaigoSenjuHijokinshaNinsu();
     }
 
@@ -1081,7 +1082,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護員数_兼務の常勤者
      */
-    public int get訪問介護員数_兼務の常勤者() {
+    public Decimal get訪問介護員数_兼務の常勤者() {
         return entity.getHomonkaigoKemmuJokinshaNinsu();
     }
 
@@ -1090,7 +1091,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護員数_兼務の非常勤者
      */
-    public int get訪問介護員数_兼務の非常勤者() {
+    public Decimal get訪問介護員数_兼務の非常勤者() {
         return entity.getHomonkaigoKemmuHijokinshaNinsu();
     }
 
@@ -1099,7 +1100,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 訪問介護員数_常勤換算後の人数
      */
-    public int get訪問介護員数_常勤換算後の人数() {
+    public Decimal get訪問介護員数_常勤換算後の人数() {
         return entity.getHomonkaigoJokinKanzangoNinsu();
     }
 
@@ -1108,7 +1109,7 @@ public class KaigoJigyoshaShiteiService {
      *
      * @return 利用定員数
      */
-    public int get利用定員数() {
+    public Decimal get利用定員数() {
         return entity.getRiyoTeiinNinsu();
     }
 
@@ -2767,7 +2768,7 @@ public class KaigoJigyoshaShiteiService {
          * @param kaigoShienSemmoninSenjuJokinshaNinsu 介護支援専門員数_専従の常勤者
          * @return builder
          */
-        public Builder setKaigoShienSemmoninSenjuJokinshaNinsu(int kaigoShienSemmoninSenjuJokinshaNinsu) {
+        public Builder setKaigoShienSemmoninSenjuJokinshaNinsu(Decimal kaigoShienSemmoninSenjuJokinshaNinsu) {
             this.entity.setKaigoShienSemmoninSenjuJokinshaNinsu(kaigoShienSemmoninSenjuJokinshaNinsu);
             return this;
         }
@@ -2778,7 +2779,7 @@ public class KaigoJigyoshaShiteiService {
          * @param kaigoSienSemmoninSenjuHijokinshaNinsu 介護支援専門員数_専従の非常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninSenjuHijokinshaNinsu(int kaigoSienSemmoninSenjuHijokinshaNinsu) {
+        public Builder setKaigoSienSemmoninSenjuHijokinshaNinsu(Decimal kaigoSienSemmoninSenjuHijokinshaNinsu) {
             this.entity.setKaigoSienSemmoninSenjuHijokinshaNinsu(kaigoSienSemmoninSenjuHijokinshaNinsu);
             return this;
         }
@@ -2789,7 +2790,7 @@ public class KaigoJigyoshaShiteiService {
          * @param kaigoSienSemmoninKemmuJokinshaNinsu 介護支援専門員数_兼務の常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninKemmuJokinshaNinsu(int kaigoSienSemmoninKemmuJokinshaNinsu) {
+        public Builder setKaigoSienSemmoninKemmuJokinshaNinsu(Decimal kaigoSienSemmoninKemmuJokinshaNinsu) {
             this.entity.setKaigoSienSemmoninKemmuJokinshaNinsu(kaigoSienSemmoninKemmuJokinshaNinsu);
             return this;
         }
@@ -2800,7 +2801,7 @@ public class KaigoJigyoshaShiteiService {
          * @param kaigoSienSemmoninKemmuHijokinshaNinsu 介護支援専門員数_兼務の非常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninKemmuHijokinshaNinsu(int kaigoSienSemmoninKemmuHijokinshaNinsu) {
+        public Builder setKaigoSienSemmoninKemmuHijokinshaNinsu(Decimal kaigoSienSemmoninKemmuHijokinshaNinsu) {
             this.entity.setKaigoSienSemmoninKemmuHijokinshaNinsu(kaigoSienSemmoninKemmuHijokinshaNinsu);
             return this;
         }
@@ -2811,7 +2812,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoServiceTeikyoSekininshaNinsu 訪問介護サービス提供責任者数
          * @return builder
          */
-        public Builder setHomonkaigoServiceTeikyoSekininshaNinsu(int homonkaigoServiceTeikyoSekininshaNinsu) {
+        public Builder setHomonkaigoServiceTeikyoSekininshaNinsu(Decimal homonkaigoServiceTeikyoSekininshaNinsu) {
             this.entity.setHomonkaigoServiceTeikyoSekininshaNinsu(homonkaigoServiceTeikyoSekininshaNinsu);
             return this;
         }
@@ -2822,7 +2823,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoSenjuJokinshaNinsu 訪問介護員数_専従の常勤者
          * @return builder
          */
-        public Builder setHomonkaigoSenjuJokinshaNinsu(int homonkaigoSenjuJokinshaNinsu) {
+        public Builder setHomonkaigoSenjuJokinshaNinsu(Decimal homonkaigoSenjuJokinshaNinsu) {
             this.entity.setHomonkaigoSenjuJokinshaNinsu(homonkaigoSenjuJokinshaNinsu);
             return this;
         }
@@ -2833,7 +2834,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoSenjuHijokinshaNinsu 訪問介護員数_専従の非常勤者
          * @return builder
          */
-        public Builder setHomonkaigoSenjuHijokinshaNinsu(int homonkaigoSenjuHijokinshaNinsu) {
+        public Builder setHomonkaigoSenjuHijokinshaNinsu(Decimal homonkaigoSenjuHijokinshaNinsu) {
             this.entity.setHomonkaigoSenjuHijokinshaNinsu(homonkaigoSenjuHijokinshaNinsu);
             return this;
         }
@@ -2844,7 +2845,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoKemmuJokinshaNinsu 訪問介護員数_兼務の常勤者
          * @return builder
          */
-        public Builder setHomonkaigoKemmuJokinshaNinsu(int homonkaigoKemmuJokinshaNinsu) {
+        public Builder setHomonkaigoKemmuJokinshaNinsu(Decimal homonkaigoKemmuJokinshaNinsu) {
             this.entity.setHomonkaigoKemmuJokinshaNinsu(homonkaigoKemmuJokinshaNinsu);
             return this;
         }
@@ -2855,7 +2856,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoKemmuHijokinshaNinsu 訪問介護員数_兼務の非常勤者
          * @return builder
          */
-        public Builder setHomonkaigoKemmuHijokinshaNinsu(int homonkaigoKemmuHijokinshaNinsu) {
+        public Builder setHomonkaigoKemmuHijokinshaNinsu(Decimal homonkaigoKemmuHijokinshaNinsu) {
             this.entity.setHomonkaigoKemmuHijokinshaNinsu(homonkaigoKemmuHijokinshaNinsu);
             return this;
         }
@@ -2866,7 +2867,7 @@ public class KaigoJigyoshaShiteiService {
          * @param homonkaigoJokinKanzangoNinsu 訪問介護員数_常勤換算後の人数
          * @return builder
          */
-        public Builder setHomonkaigoJokinKanzangoNinsu(int homonkaigoJokinKanzangoNinsu) {
+        public Builder setHomonkaigoJokinKanzangoNinsu(Decimal homonkaigoJokinKanzangoNinsu) {
             this.entity.setHomonkaigoJokinKanzangoNinsu(homonkaigoJokinKanzangoNinsu);
             return this;
         }
@@ -2877,7 +2878,7 @@ public class KaigoJigyoshaShiteiService {
          * @param riyoTeiinNinsu 利用定員数
          * @return builder
          */
-        public Builder setRiyoTeiinNinsu(int riyoTeiinNinsu) {
+        public Builder setRiyoTeiinNinsu(Decimal riyoTeiinNinsu) {
             this.entity.setRiyoTeiinNinsu(riyoTeiinNinsu);
             return this;
         }

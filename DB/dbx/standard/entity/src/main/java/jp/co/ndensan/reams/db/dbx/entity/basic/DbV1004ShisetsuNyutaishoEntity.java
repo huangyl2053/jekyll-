@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護保険施設入退所Aliveテーブルのエンティティクラスです。
@@ -21,7 +22,7 @@ public class DbV1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004Shi
     public static final RString TABLE_NAME = new RString("DbV1004ShisetsuNyutaisho");
 
     private ShikibetsuCode shikibetsuCode;
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private LasdecCode shichosonCode;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
@@ -55,7 +56,7 @@ public class DbV1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004Shi
      *
      * @return rirekiNo
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -64,7 +65,7 @@ public class DbV1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbV1004Shi
      *
      * @param rirekiNo rirekiNo
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

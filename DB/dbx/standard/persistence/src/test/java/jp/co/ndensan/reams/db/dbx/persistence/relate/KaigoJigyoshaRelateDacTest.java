@@ -9,14 +9,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.relate.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.relate.helper.KaigoJigyoshaRelateEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7060KaigoJigyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.persistence.basic.helper.KaigoJigyoshaRelateEntityTestHelper;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
@@ -304,7 +304,7 @@ public class KaigoJigyoshaRelateDacTest extends DbxTestDacBase {
             DbT7060KaigoJigyoshaEntity entity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
             entity.setJigyoshaNo(事業者番号);
             entity.setYukoKaishiYMD(有効開始日);
-            介護事業者Dac.insert(entity);
+            介護事業者Dac.save(entity);
         }
 
         public static void insertUrT0520(
@@ -313,14 +313,14 @@ public class KaigoJigyoshaRelateDacTest extends DbxTestDacBase {
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
             entity.setJigyoshaNo(事業者番号);
             entity.setYukoKaishiYMD(有効開始日);
-            介護事業者代表者Dac.insert(entity);
+            介護事業者代表者Dac.save(entity);
         }
 
         public static void insertUrT0521(
                 KaigoJigyoshaNo 事業者番号) {
             DbT7063KaigoJigyoshaShiteiServiceEntity entity = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.createDbT7063KaigoJigyoshaShiteiServiceEntity();
             entity.setJigyoshaNo(事業者番号);
-            介護事業者指定サービスDac.insert(entity);
+            介護事業者指定サービスDac.save(entity);
         }
 
         public static void deleteData() {

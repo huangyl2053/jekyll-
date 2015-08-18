@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.relate.KaigoJigyoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7060KaigoJigyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.db.IModifiable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -89,14 +89,14 @@ public class KaigoJigyoshaRelateDac implements IModifiable<KaigoJigyoshaRelateEn
             return result;
         }
         if (data.get事業者エンティティ() != null) {
-            result = 介護事業者Dac.insert(data.get事業者エンティティ());
+            result = 介護事業者Dac.save(data.get事業者エンティティ());
         }
         if (data.get事業者代表者エンティティ() != null) {
-            介護事業者代表者Dac.insert(data.get事業者代表者エンティティ());
+            介護事業者代表者Dac.save(data.get事業者代表者エンティティ());
         }
         if (data.get事業者指定サービスエンティティリスト() != null) {
             for (DbT7063KaigoJigyoshaShiteiServiceEntity entity : data.get事業者指定サービスエンティティリスト()) {
-                介護事業者指定サービスDac.insert(entity);
+                介護事業者指定サービスDac.save(entity);
             }
         }
         return result;

@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbx.business;
 
 import java.lang.reflect.Constructor;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
@@ -201,14 +201,14 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setKanrishaNameで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKanrishaName(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者名).build();
-            assertThat(result.get管理者名(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者名));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKanrishaName(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者氏名).build();
+            assertThat(result.get管理者名(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者氏名));
         }
 
         @Test
         public void setKanrishaNameKanaで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKanrishaNameKana(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者名カナ).build();
-            assertThat(result.get管理者名カナ(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者名カナ));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKanrishaNameKana(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者氏名カナ).build();
+            assertThat(result.get管理者名カナ(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_管理者氏名カナ));
         }
 
         @Test
@@ -381,44 +381,44 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setRehaTeikyoTaisei_SogoRehaShisetsu_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SogoRehaShisetsu_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SogoRehaShisetsu_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_総合リハビリテーション施設_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_総合リハビリテーション施設_の有無));
         }
 
         @Test
         public void setRehaTeikyoTaisei_RigakuRyohoII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_RigakuRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_RigakuRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_理学療法Ⅱ_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_理学療法Ⅱ_の有無));
         }
 
         @Test
         public void setRehaTeikyoTaisei_RigakuRyohoIII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_RigakuRyohoIII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_RigakuRyohoIII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_理学療法Ⅲ_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_理学療法Ⅲ_の有無));
         }
 
         @Test
         public void setRehaTeikyoTaisei_SagyoRyohoII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SagyoRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SagyoRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_作業療法Ⅱ_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_作業療法Ⅱ_の有無));
         }
 
         @Test
         public void setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_精神科作業療法_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_精神科作業療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_精神科作業療法_の有無));
         }
 
         @Test
         public void setRehaTeikyoTaisei_Sonota_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_Sonota_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehaTeikyoTaisei_Sonota_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_その他_の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション提供体制_その他_の有無));
         }
 
         @Test
         public void setRehabilitationKasanJokyoで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehabilitationKasanJokyo(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝの加算状況の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝの加算状況の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝの加算状況の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehabilitationKasanJokyo(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーションの加算状況の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝの加算状況の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーションの加算状況の有無));
         }
 
         @Test
@@ -507,8 +507,8 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setKobetsuRehabilitationTeikyoTaiseiで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehabilitationTeikyoTaisei(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehabilitationTeikyoTaisei(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制));
         }
 
         @Test
@@ -525,44 +525,44 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setRehabilitationKinoKyoka_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehabilitationKinoKyoka_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ機能強化の有無).build();
-            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ機能強化の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ機能強化の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setRehabilitationKinoKyoka_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション機能強化の有無).build();
+            assertThat(result.getﾘﾊﾋﾞﾘﾃｰｼｮﾝ機能強化の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_リハビリテーション機能強化の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_総合リハビリテーション施設_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_総合ﾘﾊﾋﾞﾘﾃｰｼｮﾝ施設_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_総合リハビリテーション施設_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1で設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無1).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無1(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無1));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅱ_の有無1).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無1(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅱ_の有無1));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅲ_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅲ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅲ_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_作業療法Ⅱ_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_作業療法Ⅱ_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅰ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法Ⅱ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無));
         }
 
         @Test
@@ -801,32 +801,32 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅰ_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅰ_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2で設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅱ_の有無2).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_理学療法Ⅱ_の有無2));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_SagyoRyoho_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_作業療法_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_作業療法_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_言語聴覚療法_の有無));
         }
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_Sonota_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_Sonota_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_Sonota_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_その他_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_その他_の有無));
         }
 
         @Test
@@ -843,8 +843,8 @@ public class KaigoJigyoshaShiteiServiceTest extends DbxTestBase {
 
         @Test
         public void setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umuで設定した値を_生成されたKaigoJigyoshaShiteiServiceも保持する() {
-            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無).build();
-            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無));
+            KaigoJigyoshaShiteiService result = KaigoJigyoshaShiteiService.newBuilder().setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_リハビリテーション指導管理_の有無).build();
+            assertThat(result.get個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無(), is(DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_個別リハビリテーション提供体制_リハビリテーション指導管理_の有無));
         }
 
         @Test

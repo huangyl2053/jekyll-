@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.ICareManager;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7064CareManegerDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,11 +28,11 @@ import static org.mockito.Mockito.when;
 public class _CareManagerFinderTest extends DbxTestBase {
 
     _CareManagerFinder sut;
-    MockCareManagerDac dac;
+    DbT7064CareManegerDac dac;
 
     @Before
     public void setUp() {
-        dac = new MockCareManagerDac();
+        dac = new DbT7064CareManegerDac();
         sut = new _CareManagerFinder(dac);
     }
 

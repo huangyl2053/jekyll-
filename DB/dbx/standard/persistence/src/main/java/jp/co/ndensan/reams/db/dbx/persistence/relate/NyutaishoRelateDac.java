@@ -8,10 +8,10 @@ import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.relate.NyutaishoRelateEntity;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbV1004HihokenshaShisetsuNyutaishoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7060KaigoJigyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1004HihokenshaShisetsuNyutaishoAliveDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class NyutaishoRelateDac {
 
-    private final DbV1004HihokenshaShisetsuNyutaishoDac nyutaishoDac;
+    private final DbV1004HihokenshaShisetsuNyutaishoAliveDac nyutaishoDac;
     private final DbT7060KaigoJigyoshaDac jigyoshaDac;
     private final DbT7062KaigoJigyoshaDaihyoshaDac daihyoshaDac;
     private final DbT7063KaigoJigyoshaShiteiServiceDac shiteiServiceDac;
@@ -38,7 +38,7 @@ public class NyutaishoRelateDac {
      * コンストラクタです。
      */
     public NyutaishoRelateDac() {
-        nyutaishoDac = InstanceProvider.create(DbV1004HihokenshaShisetsuNyutaishoDac.class);
+        nyutaishoDac = InstanceProvider.create(DbV1004HihokenshaShisetsuNyutaishoAliveDac.class);
         jigyoshaDac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
         daihyoshaDac = InstanceProvider.create(DbT7062KaigoJigyoshaDaihyoshaDac.class);
         shiteiServiceDac = InstanceProvider.create(DbT7063KaigoJigyoshaShiteiServiceDac.class);
@@ -58,10 +58,10 @@ public class NyutaishoRelateDac {
         List<DbT7063KaigoJigyoshaShiteiServiceEntity> shiteiServiceEntity;
         DbT7062KaigoJigyoshaDaihyoshaEntity daihyoshaEntity;
 
-        List<DbV1004HihokenshaShisetsuNyutaishoEntity> nyutaishoEntityList = nyutaishoDac.select(識別コード);
+        List<DbV1004HihokenshaShisetsuNyutaishoEntity> nyutaishoEntityList = nyutaishoDac.selectBy識別コード(識別コード);
 
         for (DbV1004HihokenshaShisetsuNyutaishoEntity nyutaishoEntity : nyutaishoEntityList) {
-            jigyosha = jigyoshaDac.selectActive介護事業者Bykey(nyutaishoEntity.getNyushoShisetsuCode(), nyutaishoEntity.getNyushoYMD());
+            jigyosha = jigyoshaDac.selectByKey(nyutaishoEntity.getNyushoShisetsuCode(), nyutaishoEntity.getNyushoYMD());
             daihyoshaEntity = daihyoshaDac.selectByKey(jigyosha.getJigyoshaNo(), jigyosha.getYukoKaishiYMD());
             shiteiServiceEntity = shiteiServiceDac.selectBy事業者番号(jigyosha.getJigyoshaNo());
             list.add(new NyutaishoRelateEntity(jigyosha, nyutaishoEntity, shiteiServiceEntity, daihyoshaEntity));

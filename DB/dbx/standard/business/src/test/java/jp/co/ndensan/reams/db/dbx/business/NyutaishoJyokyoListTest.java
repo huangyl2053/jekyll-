@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbV1004HihokenshaShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbV1004HihokenshaShisetsuNyutaishoEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1004HihokenshaShisetsuNyutaishoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
@@ -44,9 +44,9 @@ public class NyutaishoJyokyoListTest extends DbxTestBase {
             assertThat(sut.get入所状況(foundDate).get識別コード(), is(DbV1004HihokenshaShisetsuNyutaishoEntityGenerator.DEFAULT_識別コード));
         }
     }
-    
+
     public static class iteratorTest extends DbxTestBase {
-        
+
         @Test
         public void LDNS_メソッドiteratorが呼び出される場合_iteratorは_trueを返す() {
             NyutaishoJyokyoList sut = createNyutaishoJyokyoList();

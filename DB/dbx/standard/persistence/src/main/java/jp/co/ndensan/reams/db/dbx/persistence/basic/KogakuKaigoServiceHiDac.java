@@ -27,12 +27,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  * @mainClass
  * @reference
  */
-public class KogakuKaigoServiceHiDac implements IKogakuKaigoServiceHiDac {
+public class KogakuKaigoServiceHiDac {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
     public DbV3057KogakuShikyuHanteiKekkaEntity select(RString 被保険者番号, FlexibleYearMonth 対象年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV3057KogakuShikyuHanteiKekkaEntity> result = accessor

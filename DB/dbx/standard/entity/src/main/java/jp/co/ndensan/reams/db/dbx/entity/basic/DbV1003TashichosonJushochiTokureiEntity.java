@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 他市町村住所地特例者台帳管理Aliveテーブルのエンティティクラスです。
@@ -32,8 +34,8 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
-    private RString sochiHokenshaNo;
-    private RString sochiHihokenshaNo;
+    private ShoKisaiHokenshaNo sochiHokenshaNo;
+    private HihokenshaNo sochiHihokenshaNo;
     private FlexibleDate tatokuRenrakuhyoHakkoYMD;
     private FlexibleDate shisetsuTaishoTsuchiHakkoYMD;
     private FlexibleDate shisetsuHenkoTsuchiHakkoYMD;
@@ -278,7 +280,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return sochiHokenshaNo
      */
-    public RString getSochiHokenshaNo() {
+    public ShoKisaiHokenshaNo getSochiHokenshaNo() {
         return sochiHokenshaNo;
     }
 
@@ -287,7 +289,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param sochiHokenshaNo sochiHokenshaNo
      */
-    public void setSochiHokenshaNo(RString sochiHokenshaNo) {
+    public void setSochiHokenshaNo(ShoKisaiHokenshaNo sochiHokenshaNo) {
         this.sochiHokenshaNo = sochiHokenshaNo;
     }
 
@@ -296,7 +298,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return sochiHihokenshaNo
      */
-    public RString getSochiHihokenshaNo() {
+    public HihokenshaNo getSochiHihokenshaNo() {
         return sochiHihokenshaNo;
     }
 
@@ -305,7 +307,7 @@ public class DbV1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param sochiHihokenshaNo sochiHihokenshaNo
      */
-    public void setSochiHihokenshaNo(RString sochiHihokenshaNo) {
+    public void setSochiHihokenshaNo(HihokenshaNo sochiHihokenshaNo) {
         this.sochiHihokenshaNo = sochiHihokenshaNo;
     }
 

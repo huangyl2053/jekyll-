@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT7060KaigoJigyoshaの項目定義クラスです
@@ -60,9 +61,9 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
     private RString shozaiShichoson;
     private RString serviceJisshiChiiki;
     private Code hojinShubetsu;
-    private int bedSu;
-    private int shozokuNinzu;
-    private int riyoshaSu;
+    private Decimal bedSu;
+    private Decimal shozokuNinzu;
+    private Decimal riyoshaSu;
     private RString biko;
 
     /**
@@ -633,7 +634,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return ベッド数
      */
-    public int getBedSu() {
+    public Decimal getBedSu() {
         return bedSu;
     }
 
@@ -642,7 +643,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param bedSu ベッド数
      */
-    public void setBedSu(int bedSu) {
+    public void setBedSu(Decimal bedSu) {
         this.bedSu = bedSu;
     }
 
@@ -651,7 +652,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 所属人数
      */
-    public int getShozokuNinzu() {
+    public Decimal getShozokuNinzu() {
         return shozokuNinzu;
     }
 
@@ -660,7 +661,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param shozokuNinzu 所属人数
      */
-    public void setShozokuNinzu(int shozokuNinzu) {
+    public void setShozokuNinzu(Decimal shozokuNinzu) {
         this.shozokuNinzu = shozokuNinzu;
     }
 
@@ -669,7 +670,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 利用者数
      */
-    public int getRiyoshaSu() {
+    public Decimal getRiyoshaSu() {
         return riyoshaSu;
     }
 
@@ -678,7 +679,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param riyoshaSu 利用者数
      */
-    public void setRiyoshaSu(int riyoshaSu) {
+    public void setRiyoshaSu(Decimal riyoshaSu) {
         this.riyoshaSu = riyoshaSu;
     }
 

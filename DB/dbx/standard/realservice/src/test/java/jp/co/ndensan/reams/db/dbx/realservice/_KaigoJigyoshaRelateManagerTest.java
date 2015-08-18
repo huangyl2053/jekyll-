@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbx.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.entity.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.relate.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.relate.helper.KaigoJigyoshaRelateEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.relate.KaigoJigyoshaRelateDac;

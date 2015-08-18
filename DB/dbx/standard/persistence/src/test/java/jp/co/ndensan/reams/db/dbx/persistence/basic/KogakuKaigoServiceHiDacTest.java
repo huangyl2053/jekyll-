@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KogakuKaigoServiceHiDacTest {
 
-    private static IKogakuKaigoServiceHiDac sut;
+    private static KogakuKaigoServiceHiDac sut;
     private static KogakuKaigoServiceHiInserter inserter;
 
     @BeforeClass
