@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -158,7 +158,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 交付理由
      */
-    public text get交付理由() {
+    public RString get交付理由() {
         return entity.getKofuRiyu();
     }
 
@@ -185,7 +185,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 回収理由
      */
-    public text get回収理由() {
+    public RString get回収理由() {
         return entity.getKaishuRiyu();
     }
 
@@ -255,7 +255,8 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
     }
 
     /**
-     * 証交付回収のみを変更対象とします。<br/> {@link DbT7037ShoKofuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 証交付回収のみを変更対象とします。<br/>
+     * {@link DbT7037ShoKofuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShoKofuKaishu}
      */
@@ -270,7 +271,8 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
     }
 
     /**
-     * 保持する証交付回収を削除対象とします。<br/> {@link DbT7037ShoKofuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する証交付回収を削除対象とします。<br/>
+     * {@link DbT7037ShoKofuKaishuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShoKofuKaishu}
      */
@@ -296,9 +298,14 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT7037ShoKofuKaishuEntity entity;
         private final ShoKofuKaishuIdentifier id;
 

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 新旧医療機関主治医番号変換テーブルの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class ShinKyuIryoKikanShujiiNoHenkanIdentifier implements Serializable {
 
     private final LasdecCode 市町村コード;

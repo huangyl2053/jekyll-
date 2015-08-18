@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5210NinteichosahyoShisetsuRiyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -25,14 +27,16 @@ public class NinteichosahyoShisetsuRiyoTest extends DbzTestBase {
     private static DbT5210NinteichosahyoShisetsuRiyoEntity NinteichosahyoShisetsuRiyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static int 認定調査依頼履歴番号;
+    private static int 連番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_申請書管理番号;
+        認定調査依頼履歴番号 = DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+        連番 = DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +50,22 @@ public class NinteichosahyoShisetsuRiyoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoShisetsuRiyo(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoShisetsuRiyo(主キー名1, null);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoShisetsuRiyo(null, 認定調査依頼履歴番号, 連番);
         }
 
         @Test
         public void 指定したキーが保持するDbT5210NinteichosahyoShisetsuRiyoEntityにセットされている() {
-            sut = new NinteichosahyoShisetsuRiyo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteichosahyoShisetsuRiyo(申請書管理番号, 認定調査依頼履歴番号, 連番);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosahyoShisetsuRiyoIdentifierにセットされている() {
-            sut = new NinteichosahyoShisetsuRiyo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteichosahyoShisetsuRiyo(申請書管理番号, 認定調査依頼履歴番号, 連番);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 
@@ -89,8 +88,8 @@ public class NinteichosahyoShisetsuRiyoTest extends DbzTestBase {
 
             sut = new NinteichosahyoShisetsuRiyo(NinteichosahyoShisetsuRiyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 

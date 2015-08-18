@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.shinsei;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

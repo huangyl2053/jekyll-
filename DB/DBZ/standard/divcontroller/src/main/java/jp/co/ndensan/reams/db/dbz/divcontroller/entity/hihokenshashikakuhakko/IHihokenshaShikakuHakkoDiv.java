@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -39,5 +39,5 @@ public interface IHihokenshaShikakuHakkoDiv {
      *
      * @return 被保険者証資格者証発行モデル
      */
-    HihokenshaShikakuHakkoModel create証発行情報();
+    HihokenshaShikakuHakko create証発行情報();
 }

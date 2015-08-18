@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.model.hokensha.IKoikiKoseiShichosonMaster;
-
 /**
  * 広域構成市町村であることを表します。<br/>
  * 現在、広域構成市町村マスタテーブルの情報を返す{@link IKoikiKoseiShichoson}と同じ情報しか扱いませんが、

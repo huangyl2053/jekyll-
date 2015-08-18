@@ -5,14 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,29 +43,28 @@ public class ChohyoSeigyoKyotsuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票制御共通 extends FdaTestBase {
+    public static class get帳票制御共通 extends DbzTestBase {
+
+        SubGyomuCode サブ業務コード = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_サブ業務コード;
+        ReportId 帳票分類ID = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_帳票分類ID;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー2;
-            sut.get帳票制御共通(null, 主キー2);
+            sut.get帳票制御共通(null, 帳票分類ID);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー1;
-            sut.get帳票制御共通(主キー1, null);
+            sut.get帳票制御共通(サブ業務コード, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー2;
-            ChohyoSeigyoKyotsu result = sut.get帳票制御共通(主キー1, 主キー2);
+            ChohyoSeigyoKyotsu result = sut.get帳票制御共通(サブ業務コード, 帳票分類ID);
 
             assertThat(result, is(nullValue()));
         }
@@ -62,18 +72,16 @@ public class ChohyoSeigyoKyotsuManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7065ChohyoSeigyoKyotsuEntity entity = DbT7065ChohyoSeigyoKyotsuEntityGenerator.createDbT7065ChohyoSeigyoKyotsuEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(SubGyomuCode.class), any(ReportId.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー2;
-            ChohyoSeigyoKyotsu result = sut.get帳票制御共通(主キー1, 主キー2);
+            ChohyoSeigyoKyotsu result = sut.get帳票制御共通(サブ業務コード, 帳票分類ID);
 
-            assertThat(result.get主キー1().value(), is(DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.getサブ業務コード().value(), is(DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get帳票制御共通一覧 extends FdaTestBase {
+    public static class get帳票制御共通一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -92,11 +100,11 @@ public class ChohyoSeigyoKyotsuManagerTest {
             List<ChohyoSeigyoKyotsu> result = sut.get帳票制御共通一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).getサブ業務コード().value(), is(DbT7065ChohyoSeigyoKyotsuEntityGenerator.DEFAULT_サブ業務コード.value()));
         }
     }
 
-    public static class save帳票制御共通 extends XxxTestBase {
+    public static class save帳票制御共通 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -125,7 +133,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
             DbT7065ChohyoSeigyoKyotsuEntity entity = DbT7065ChohyoSeigyoKyotsuEntityGenerator.createDbT7065ChohyoSeigyoKyotsuEntity();
             entity.initializeMd5();
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(entity);
-            帳票制御共通 = 帳票制御共通.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            帳票制御共通 = 帳票制御共通.createBuilderForEdit().set帳票分類名称(new RString("帳票分類名称を変更")).build();
 
             assertThat(sut.save帳票制御共通(帳票制御共通), is(true));
         }
@@ -137,7 +145,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
             DbT7065ChohyoSeigyoKyotsuEntity entity = DbT7065ChohyoSeigyoKyotsuEntityGenerator.createDbT7065ChohyoSeigyoKyotsuEntity();
             entity.initializeMd5();
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(entity);
-            帳票制御共通 = 帳票制御共通.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            帳票制御共通 = 帳票制御共通.createBuilderForEdit().set帳票分類名称(new RString("帳票分類名称を変更")).build();
 
             assertThat(sut.save帳票制御共通(帳票制御共通), is(false));
         }

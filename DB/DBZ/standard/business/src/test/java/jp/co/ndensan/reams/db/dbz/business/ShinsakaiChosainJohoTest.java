@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -80,8 +80,8 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
         }
 
         @Test
-        public void 引数に調査可能人数月を設定した場合_get地区コードと同じ調査可能人数月を返す() {
-            assertThat(sut.get調査可能人数月(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_調査可能人数月));
+        public void 引数に調査可能人数月を設定した場合_get地区コードと同じ調査可能人数_月を返す() {
+            assertThat(sut.get調査可能人数月(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_調査可能人数_月));
         }
 
         @Test
@@ -164,7 +164,7 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
         @Test
         public void setChosaKanoNinzuPerMonthで設定した値を＿生成されたChosainJohoJukyuも保持する() {
             ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setChosaKanoNinzuPerMonth(1).build();
-            assertThat(result.get調査可能人数月(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_調査可能人数月));
+            assertThat(result.get調査可能人数月(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_調査可能人数_月));
         }
 
         @Test

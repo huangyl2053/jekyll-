@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki;
 
-import jp.co.ndensan.reams.db.dbz.model.iryohokenkanyujokyo.IryoHokenKanyuJokyoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -30,12 +30,12 @@ public interface IIryoHokenRirekiDiv {
      *
      * @return 医療保険加入状況List
      */
-    IItemList<IryoHokenKanyuJokyoModel> get医療保険加入状況List();
+    IItemList<IryohokenKanyuJokyo> get医療保険加入状況List();
 
     /**
      * 医療保険履歴Divに対して、引数から医療保険加入状況の情報を設定します。
      *
      * @param 医療保険加入状況List 医療保険加入状況List
      */
-    void set医療保険加入状況List(IItemList<IryoHokenKanyuJokyoModel> 医療保険加入状況List);
+    void set医療保険加入状況List(IItemList<IryohokenKanyuJokyo> 医療保険加入状況List);
 }

@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo;
 
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtenaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtenaSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtenaSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IAtenaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 

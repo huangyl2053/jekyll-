@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7006RoreiFukushiNenkinJukyushaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +26,17 @@ public class RoreiFukushiNenkinJukyushaBuilderTest extends DbzTestBase {
     private static DbT7006RoreiFukushiNenkinJukyushaEntity RoreiFukushiNenkinJukyushaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static FlexibleDate 受給開始年月日;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_識別コード;
+        受給開始年月日 = DbT7006RoreiFukushiNenkinJukyushaEntityGenerator.DEFAULT_受給開始年月日;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static RoreiFukushiNenkinJukyushaBuilder sut;
         private static RoreiFukushiNenkinJukyusha business;
@@ -43,8 +44,8 @@ public class RoreiFukushiNenkinJukyushaBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             RoreiFukushiNenkinJukyushaEntity = new DbT7006RoreiFukushiNenkinJukyushaEntity();
-            RoreiFukushiNenkinJukyushaEntity.setXXX(主キー名1);
-            RoreiFukushiNenkinJukyushaEntity.setXXX(主キー名2);
+            RoreiFukushiNenkinJukyushaEntity.setShikibetsuCode(識別コード);
+            RoreiFukushiNenkinJukyushaEntity.setJukyuKaishiYMD(受給開始年月日);
 
             business = new RoreiFukushiNenkinJukyusha(RoreiFukushiNenkinJukyushaEntity);
 

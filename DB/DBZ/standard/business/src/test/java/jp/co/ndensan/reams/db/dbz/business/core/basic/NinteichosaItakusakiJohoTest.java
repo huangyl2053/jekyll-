@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +28,14 @@ public class NinteichosaItakusakiJohoTest extends DbzTestBase {
     private static DbT5910NinteichosaItakusakiJohoEntity NinteichosaItakusakiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 市町村コード;
+    private static ChosaItakusakiCode 認定調査委託先コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_主キー名2;
+        市町村コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_市町村コード;
+        認定調査委託先コード = DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_認定調査委託先コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +49,27 @@ public class NinteichosaItakusakiJohoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosaItakusakiJoho(null, 主キー名2);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosaItakusakiJoho(null, 認定調査委託先コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosaItakusakiJoho(主キー名1, null);
+        public void 認定調査委託先コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosaItakusakiJoho(市町村コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5910NinteichosaItakusakiJohoEntityにセットされている() {
-            sut = new NinteichosaItakusakiJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteichosaItakusakiJoho(市町村コード, 認定調査委託先コード);
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get認定調査委託先コード(), is(認定調査委託先コード));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosaItakusakiJohoIdentifierにセットされている() {
-            sut = new NinteichosaItakusakiJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteichosaItakusakiJoho(市町村コード, 認定調査委託先コード);
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
         }
     }
 
@@ -89,8 +92,8 @@ public class NinteichosaItakusakiJohoTest extends DbzTestBase {
 
             sut = new NinteichosaItakusakiJoho(NinteichosaItakusakiJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get認定調査委託先コード(), is(認定調査委託先コード));
         }
     }
 

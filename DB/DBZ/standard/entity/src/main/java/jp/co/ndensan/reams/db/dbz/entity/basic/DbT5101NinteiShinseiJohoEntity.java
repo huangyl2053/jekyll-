@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItak
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 
 /**
  * 要介護認定申請情報テーブルのエンティティクラスです。

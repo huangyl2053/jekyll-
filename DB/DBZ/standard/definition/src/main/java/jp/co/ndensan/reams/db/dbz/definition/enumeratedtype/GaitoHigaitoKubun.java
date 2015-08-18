@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GaitoHigaitoKubun.values;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 該当非該当区分の列挙型です。

@@ -3,18 +3,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.IShoKaishuKirokuKanriDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.ShoKaishuJokyoListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.IShoKaishuJokyoListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.IShoKaishuJokyoShosaiDiv;
-import jp.co.ndensan.reams.db.dbz.model.shokofukaishu.ShoKofuKaishuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -222,14 +220,14 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @Override
-    public IItemList<ShoKofuKaishuModel> get証交付回収履歴() {
+    public IItemList<ShoKofuKaishu> get証交付回収履歴() {
         //TODO
         //1),PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void set証交付回収履歴(IItemList<ShoKofuKaishuModel> 証交付回収履歴List) {
+    public void set証交付回収履歴(IItemList<ShoKofuKaishu> 証交付回収履歴List) {
         //TODO
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。

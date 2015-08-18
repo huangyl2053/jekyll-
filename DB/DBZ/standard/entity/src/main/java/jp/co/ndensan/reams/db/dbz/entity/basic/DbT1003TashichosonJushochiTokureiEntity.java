@@ -41,7 +41,6 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
-    @PrimaryKey
     private LasdecCode shichosonCode;
     private KaigoTatokuTekiyoJiyu tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;

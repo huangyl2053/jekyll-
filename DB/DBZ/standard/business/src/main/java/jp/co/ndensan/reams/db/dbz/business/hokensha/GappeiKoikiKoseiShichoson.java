@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ForeignersNameOutput;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
@@ -28,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.GappeiChiikiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.KokuhorenKoikiShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.RokenShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoikiKoseiShichosonMasterComparator;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

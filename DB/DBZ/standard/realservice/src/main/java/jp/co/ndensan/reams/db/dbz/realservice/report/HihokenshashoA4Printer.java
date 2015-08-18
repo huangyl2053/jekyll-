@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbz.realservice.report;
 
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoBuilderFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoA4;
+import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshasho;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
-import jp.co.ndensan.reams.ur.urz.business.Association;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 
 /**
  * 被保険者証A4版を発行するために使用するPrinterクラスです。
@@ -69,7 +69,7 @@ public class HihokenshashoA4Printer {
         RString reportId;
         IReportBuilder<IHihokenshasho> builder;
 
-        HihokenshaDaichoModel daichoModel = printerBase.getDaichoModel(hihokenshaNo);
+        DbT1001HihokenshaDaichoEntity daichoModel = printerBase.getDaichoModel(hihokenshaNo);
         IKojin kojin = printerBase.getKojin(daichoModel);
 
         HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);

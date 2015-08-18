@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7068ChohyoBunruiKanriEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -23,17 +26,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChohyoBunruiKanriTest extends DbzTestBase {
 
-    private static DbT7068ChohyoBunruiKanriEntity ChohyoBunruiKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static DbT7068ChohyoBunruiKanriEntity chohyoBunruiKanriEntity;
+    private static SubGyomuCode サブ業務コード;
+    private static ReportId 帳票ID;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー名2;
+        サブ業務コード = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード;
+        帳票ID = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_帳票ID;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -42,34 +42,33 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
-        }
-
-//TODO 主キー名を置換してください
-        @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChohyoBunruiKanri(null, 主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChohyoBunruiKanri(主キー名1, null);
+        public void サブ業務コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ChohyoBunruiKanri(null, 帳票ID);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 帳票IDがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ChohyoBunruiKanri(サブ業務コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7068ChohyoBunruiKanriEntityにセットされている() {
-            sut = new ChohyoBunruiKanri(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ChohyoBunruiKanri(サブ業務コード, 帳票ID);
+            assertThat(sut.getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.get帳票ID(), is(帳票ID));
         }
 
         @Test
         public void 指定したキーが保持するChohyoBunruiKanriIdentifierにセットされている() {
-            sut = new ChohyoBunruiKanri(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ChohyoBunruiKanri(サブ業務コード, 帳票ID);
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
         }
     }
 
@@ -79,9 +78,9 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
         }
 
         @Test(expected = NullPointerException.class)
@@ -92,10 +91,10 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
         @Test
         public void 指定したDbT7068ChohyoBunruiKanriEntityのキー情報を識別子が持つ() {
 
-            sut = new ChohyoBunruiKanri(ChohyoBunruiKanriEntity);
+            sut = new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
         }
     }
 
@@ -105,26 +104,26 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
 
-            sut = new ChohyoBunruiKanri(ChohyoBunruiKanriEntity);
+            sut = new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
         }
 
         @Test
         public void getサブ業務コードは_entityが持つサブ業務コードを返す() {
-            assertThat(sut.getサブ業務コード(), is(ChohyoBunruiKanriEntity.getSubGyomuCode()));
+            assertThat(sut.getサブ業務コード(), is(chohyoBunruiKanriEntity.getSubGyomuCode()));
         }
 
         @Test
         public void get帳票IDは_entityが持つ帳票IDを返す() {
-            assertThat(sut.get帳票ID(), is(ChohyoBunruiKanriEntity.getReportID()));
+            assertThat(sut.get帳票ID(), is(chohyoBunruiKanriEntity.getReportID()));
         }
 
         @Test
         public void get帳票分類IDは_entityが持つ帳票分類IDを返す() {
-            assertThat(sut.get帳票分類ID(), is(ChohyoBunruiKanriEntity.getChohyoBunruiID()));
+            assertThat(sut.get帳票分類ID(), is(chohyoBunruiKanriEntity.getChohyoBunruiID()));
         }
     }
 
@@ -134,16 +133,16 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
 
-            sut = new ChohyoBunruiKanri(ChohyoBunruiKanriEntity);
+            sut = new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(ChohyoBunruiKanriEntity));
+            assertThat(sut.toEntity(), not(chohyoBunruiKanriEntity));
         }
     }
 
@@ -153,11 +152,11 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
 
-            sut = new ChohyoBunruiKanri(ChohyoBunruiKanriEntity);
+            sut = new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
         }
 
         @Test
@@ -173,9 +172,9 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            ChohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
-            ChohyoBunruiKanriEntity.setXXX(主キー名1);
-            ChohyoBunruiKanriEntity.setXXX(主キー名2);
+            chohyoBunruiKanriEntity = DbT7068ChohyoBunruiKanriEntityGenerator.createDbT7068ChohyoBunruiKanriEntity();
+            chohyoBunruiKanriEntity.setSubGyomuCode(サブ業務コード);
+            chohyoBunruiKanriEntity.setReportID(帳票ID);
 
         }
 
@@ -210,8 +209,8 @@ public class ChohyoBunruiKanriTest extends DbzTestBase {
     private static class TestSupport {
 
         public static ChohyoBunruiKanri setStateChohyoBunruiKanri(EntityDataState parentState) {
-            ChohyoBunruiKanriEntity.setState(parentState);
-            return new ChohyoBunruiKanri(ChohyoBunruiKanriEntity);
+            chohyoBunruiKanriEntity.setState(parentState);
+            return new ChohyoBunruiKanri(chohyoBunruiKanriEntity);
         }
     }
 }

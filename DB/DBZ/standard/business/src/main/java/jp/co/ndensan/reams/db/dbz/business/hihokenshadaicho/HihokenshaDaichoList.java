@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModelComparators;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -21,19 +20,20 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
+public class HihokenshaDaichoList implements Iterable<HihokenshaDaicho> {
 
-    private final IItemList<HihokenshaDaichoModel> daichoList;
+    private final IItemList<HihokenshaDaicho> daichoList;
 
     /**
      * コンストラクタです。外部から受け取った被保険者台帳Listを、資格取得日の降順でメンバに登録します。
      *
      * @param daichoList 被保険者台帳List
      */
-    public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> daichoList) {
+    public HihokenshaDaichoList(IItemList<HihokenshaDaicho> daichoList) {
         requireNonNull(daichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
+//        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
+        this.daichoList = daichoList.sorted(null);
     }
 
     /**
@@ -42,9 +42,9 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @param 資格取得日 資格取得日
      * @return 1期間分の被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> toOneSeasonList(FlexibleDate 資格取得日) {
-        List<HihokenshaDaichoModel> onSeasonList = new ArrayList<>();
-        for (HihokenshaDaichoModel daicho : daichoList) {
+    public IItemList<HihokenshaDaicho> toOneSeasonList(FlexibleDate 資格取得日) {
+        List<HihokenshaDaicho> onSeasonList = new ArrayList<>();
+        for (HihokenshaDaicho daicho : daichoList) {
             if (daicho.get資格取得年月日().equals(資格取得日)) {
                 onSeasonList.add(daicho);
             }
@@ -57,8 +57,8 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> to資格得喪List() {
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+    public IItemList<HihokenshaDaicho> to資格得喪List() {
+        List<HihokenshaDaicho> list = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
         //  a, 同じ取得日を持つ情報の内、最新のデータ
@@ -81,10 +81,10 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> to住所地特例List() {
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+    public IItemList<HihokenshaDaicho> to住所地特例List() {
+        List<HihokenshaDaicho> list = new ArrayList<>();
         FlexibleDate tekiyoDate = null;
-        for (HihokenshaDaichoModel daicho : daichoList) {
+        for (HihokenshaDaicho daicho : daichoList) {
             if (!daicho.get解除年月日().isEmpty()) {
                 list.add(daicho);
                 continue;
@@ -107,11 +107,11 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
+    public IItemList<HihokenshaDaicho> to資格関連異動List() {
+        List<HihokenshaDaicho> list = new ArrayList<>();
 
         FlexibleDate henkoDate = null;
-        for (HihokenshaDaichoModel daicho : daichoList) {
+        for (HihokenshaDaicho daicho : daichoList) {
 
             if (daicho.get資格変更年月日().isEmpty()) {
                 continue;
@@ -126,7 +126,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
     }
 
     @Override
-    public Iterator<HihokenshaDaichoModel> iterator() {
+    public Iterator<HihokenshaDaicho> iterator() {
         return daichoList.iterator();
     }
 

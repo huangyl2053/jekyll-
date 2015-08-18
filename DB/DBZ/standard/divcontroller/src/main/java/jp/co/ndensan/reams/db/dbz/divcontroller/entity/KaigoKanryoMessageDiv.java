@@ -3,11 +3,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IKaigoKanryoMessageDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 

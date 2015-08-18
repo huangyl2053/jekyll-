@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7069KaigoToiawasesakiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7069KaigoToiawasesakiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7069KaigoToiawasesakiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +26,17 @@ public class KaigoToiawasesakiBuilderTest extends DbzTestBase {
     private static DbT7069KaigoToiawasesakiEntity KaigoToiawasesakiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SubGyomuCode サブ業務コード;
+    private static ReportId 帳票分類ID;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7069KaigoToiawasesakiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7069KaigoToiawasesakiEntityGenerator.DEFAULT_主キー名2;
+        サブ業務コード = DbT7069KaigoToiawasesakiEntityGenerator.DEFAULT_サブ業務コード;
+        帳票分類ID = DbT7069KaigoToiawasesakiEntityGenerator.DEFAULT_帳票分類ID;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KaigoToiawasesakiBuilder sut;
         private static KaigoToiawasesaki business;
@@ -43,8 +44,8 @@ public class KaigoToiawasesakiBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoToiawasesakiEntity = new DbT7069KaigoToiawasesakiEntity();
-            KaigoToiawasesakiEntity.setXXX(主キー名1);
-            KaigoToiawasesakiEntity.setXXX(主キー名2);
+            KaigoToiawasesakiEntity.setSubGyomuCode(サブ業務コード);
+            KaigoToiawasesakiEntity.setChohyoBunruiID(帳票分類ID);
 
             business = new KaigoToiawasesaki(KaigoToiawasesakiEntity);
 

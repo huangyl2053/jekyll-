@@ -15,15 +15,14 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1009ShikakuShutokuJogaish
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -48,23 +47,17 @@ public class ShikakuShutokuJogaishaManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
             sut.get資格取得除外者(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            ShikibetsuCode 主キー1 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_識別コード;
-            sut.get資格取得除外者(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(null);
 
             ShikibetsuCode 主キー1 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
             ShikakuShutokuJogaisha result = sut.get資格取得除外者(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -73,10 +66,10 @@ public class ShikakuShutokuJogaishaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1009ShikakuShutokuJogaishaEntity entity = DbT1009ShikakuShutokuJogaishaEntityGenerator.createDbT1009ShikakuShutokuJogaishaEntity();
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(entity);
 
             ShikibetsuCode 主キー1 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_履歴番号;
             ShikakuShutokuJogaisha result = sut.get資格取得除外者(主キー1, 主キー2);
 
             assertThat(result.get識別コード().value(), is(DbT1009ShikakuShutokuJogaishaEntityGenerator.DEFAULT_識別コード.value()));

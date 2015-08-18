@@ -5,8 +5,14 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -24,9 +30,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT5911ShujiiIryoKikanJohoDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final ShujiiIryokikanCode キー_01 = new ShujiiIryokikanCode("01");
+    private static final ShujiiIryokikanCode キー_02 = new ShujiiIryokikanCode("02");
+    private static final ShujiiIryokikanCode キー_03 = new ShujiiIryokikanCode("03");
     private static DbT5911ShujiiIryoKikanJohoDac sut;
 
     @BeforeClass
@@ -166,7 +172,7 @@ public class DbT5911ShujiiIryoKikanJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                RString 主治医医療機関コード) {
+                ShujiiIryokikanCode 主治医医療機関コード) {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShujiiIryokikanCode(主治医医療機関コード);

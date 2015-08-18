@@ -7,16 +7,16 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1009ShikakuShutokuJogaishaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -39,7 +39,7 @@ public class DbT1009ShikakuShutokuJogaishaDac implements ISaveable<DbT1009Shikak
     @Transaction
     public DbT1009ShikakuShutokuJogaishaEntity selectByKey(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -79,6 +79,6 @@ public class DbT1009ShikakuShutokuJogaishaDac implements ISaveable<DbT1009Shikak
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得除外者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

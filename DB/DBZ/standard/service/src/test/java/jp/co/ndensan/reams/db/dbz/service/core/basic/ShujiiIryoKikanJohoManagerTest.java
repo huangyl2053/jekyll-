@@ -9,10 +9,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5911ShujiiIryoKikanJohoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -44,25 +46,25 @@ public class ShujiiIryoKikanJohoManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー2;
-            sut.get主治医医療機関情報(null, 主キー2);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            sut.get主治医医療機関情報(null, 主治医医療機関コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー1;
-            sut.get主治医医療機関情報(主キー1, null);
+        public void 引数のShujiiIryokikanCodeにnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
+            sut.get主治医医療機関情報(市町村コード, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(主キー1, 主キー2);
+            LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(市町村コード, 主治医医療機関コード);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +72,18 @@ public class ShujiiIryoKikanJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー2;
-            ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(主キー1, 主キー2);
+            LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
+            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(市町村コード, 主治医医療機関コード);
 
-            assertThat(result.get主キー1().value(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get市町村コード().value(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get主治医医療機関情報一覧 extends FdaTestBase {
+    public static class get主治医医療機関情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +102,11 @@ public class ShujiiIryoKikanJohoManagerTest {
             List<ShujiiIryoKikanJoho> result = sut.get主治医医療機関情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save主治医医療機関情報 extends XxxTestBase {
+    public static class save主治医医療機関情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +135,7 @@ public class ShujiiIryoKikanJohoManagerTest {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
             entity.initializeMd5();
             ShujiiIryoKikanJoho 主治医医療機関情報 = new ShujiiIryoKikanJoho(entity);
-            主治医医療機関情報 = 主治医医療機関情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            主治医医療機関情報 = 主治医医療機関情報.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save主治医医療機関情報(主治医医療機関情報), is(true));
         }
@@ -145,7 +147,7 @@ public class ShujiiIryoKikanJohoManagerTest {
             DbT5911ShujiiIryoKikanJohoEntity entity = DbT5911ShujiiIryoKikanJohoEntityGenerator.createDbT5911ShujiiIryoKikanJohoEntity();
             entity.initializeMd5();
             ShujiiIryoKikanJoho 主治医医療機関情報 = new ShujiiIryoKikanJoho(entity);
-            主治医医療機関情報 = 主治医医療機関情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            主治医医療機関情報 = 主治医医療機関情報.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save主治医医療機関情報(主治医医療機関情報), is(false));
         }

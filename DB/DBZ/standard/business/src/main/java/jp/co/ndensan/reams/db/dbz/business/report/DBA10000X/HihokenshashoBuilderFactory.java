@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.ur.urz.business.Association;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 
 /**
  * 被保険者証B4版のBuilderを生成するファクトリクラスです。

@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5212NinteichosahyoKihonChosaScoreItemEntityGenerator;
@@ -63,13 +64,15 @@ public class NinteichosahyoKihonChosaScoreItemTest extends DbzTestBase {
             sut = new NinteichosahyoKihonChosaScoreItem(申請書管理番号, 要介護認定調査履歴番号, 連番);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
+            assertThat(sut.get連番(), is(連番));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosahyoKihonChosaScoreItemIdentifierにセットされている() {
             sut = new NinteichosahyoKihonChosaScoreItem(申請書管理番号, 要介護認定調査履歴番号, 連番);
-            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
-            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get連番(), is(連番));
         }
     }
 
@@ -92,8 +95,9 @@ public class NinteichosahyoKihonChosaScoreItemTest extends DbzTestBase {
 
             sut = new NinteichosahyoKihonChosaScoreItem(NinteichosahyoKihonChosaScoreItemEntity);
 
-            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
-            assertThat(sut.identifier().getXXX(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get要介護認定調査履歴番号(), is(要介護認定調査履歴番号));
+            assertThat(sut.identifier().get連番(), is(連番));
         }
     }
 

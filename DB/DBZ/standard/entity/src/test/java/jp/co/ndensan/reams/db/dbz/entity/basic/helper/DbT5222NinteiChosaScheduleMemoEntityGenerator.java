@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 認定調査スケジュールメモ情報エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -17,7 +17,7 @@ public final class DbT5222NinteiChosaScheduleMemoEntityGenerator {
     public static final FlexibleDate DEFAULT_メモ年月日 = new FlexibleDate("20141030");
     public static final Code DEFAULT_調査地区コード = new Code("01");
     public static final Code DEFAULT_メモ区分 = new Code("01");
-    public static final Decimal DEFAULT_連番 = new Decimal(1);
+    public static final int DEFAULT_連番 = 1;
     public static final Code DEFAULT_メモ指定調査地区コード = new Code("01");
     public static final RString DEFAULT_作成者 = new RString("名称");
     public static final Code DEFAULT_メモ重要度 = new Code("01");

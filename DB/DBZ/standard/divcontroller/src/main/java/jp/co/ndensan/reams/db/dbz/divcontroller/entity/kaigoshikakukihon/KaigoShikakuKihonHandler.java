@@ -5,28 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbx.business.IKobetsuJikoKaigoJukyu;
 import jp.co.ndensan.reams.db.dbx.realservice.IJukyuDaichoFinder;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護資格基本情報Divの操作を行うクラスです。
  *
  * @author N8156 宮本 康
  */
+//TODO n8300姜　ビルドエラー回避のために暫定対応
 //TODO n8178 城間篤人 IJukyoDaichoFinderが利用しているIKaigoHokenJukyoshaDacの具象クラスがインターフェースと同一パッケージに存在しないためエラーする。
 //urを修正した後にコメントアウトを解除する 2015年2月
 public class KaigoShikakuKihonHandler {
 
     private final KaigoShikakuKihonDiv div;
-    private final HihokenshaDaichoManager hihokenshaDaichoManager;
+//    private final HihokenshaDaichoManager hihokenshaDaichoManager;
 //    private final IJukyuDaichoFinder jukyuDaichoFinder;
 
     /**
@@ -36,7 +32,7 @@ public class KaigoShikakuKihonHandler {
      */
     public KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div) {
         this.div = div;
-        hihokenshaDaichoManager = new HihokenshaDaichoManager();
+//        hihokenshaDaichoManager = new HihokenshaDaichoManager();
 //        jukyuDaichoFinder = InstanceProvider.createWithCustomize(IJukyuDaichoFinder.class);
     }
 
@@ -49,7 +45,7 @@ public class KaigoShikakuKihonHandler {
      */
     KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager, IJukyuDaichoFinder jukyuDaichoFinder) {
         this.div = div;
-        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
+//        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
 //        this.jukyuDaichoFinder = jukyuDaichoFinder;
     }
 
@@ -62,19 +58,18 @@ public class KaigoShikakuKihonHandler {
     public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
-        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
-        if (!daicho.isPresent()) {
-            return;
-        }
+//        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
+//        if (!daicho.isPresent()) {
+//            return;
+//        }
 
-        HihokenshaDaichoModel daichoModel = daicho.get();
-        div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
-        div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
-        div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
-        div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
-        div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
-        div.getTxtJutokuKubun().setValue(daichoModel.get住所地特例者区分().getName());
-
+//        HihokenshaDaichoModel daichoModel = daicho.get();
+//        div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
+//        div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
+//        div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
+//        div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
+//        div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
+//        div.getTxtJutokuKubun().setValue(daichoModel.get住所地特例者区分().getName());
 //        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), daichoModel.get処理日時().getColumnValue().getDate());
 //
 //        if (jukyu != null) {

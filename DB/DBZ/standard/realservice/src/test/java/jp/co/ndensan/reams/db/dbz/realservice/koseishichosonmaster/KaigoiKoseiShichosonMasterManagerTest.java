@@ -14,15 +14,15 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterD
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
  * {link KaigoiKoseiShichosonMasterManager}のテストクラスです。
@@ -59,7 +59,7 @@ public class KaigoiKoseiShichosonMasterManagerTest extends DbzTestBase {
 
         @Test
         public void testFind構成市町村_該当の情報がないとき_Optionalのemptyを返す() {
-            Optional<DbT7051KoseiShichosonMasterEntity> entity = Optional.empty();
+            DbT7051KoseiShichosonMasterEntity entity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
             Optional<IKoseiShichosonMaster> business = Optional.empty();
 
             when(dac.selectByKey(notFound市町村識別ID)).thenReturn(entity);
@@ -73,7 +73,7 @@ public class KaigoiKoseiShichosonMasterManagerTest extends DbzTestBase {
             IKoseiShichosonMaster business = createBusines(DEFAULT_市町村識別ID);
 
             when(dac.selectByKey(市町村識別ID)).thenReturn(
-                    Optional.ofNullable(DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity()));
+                    DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity());
             Optional<IKoseiShichosonMaster> result = sut.find構成市町村(市町村識別ID);
             assertThat(result.get().get市町村識別ID(), is(business.get市町村識別ID()));
         }
@@ -89,14 +89,14 @@ public class KaigoiKoseiShichosonMasterManagerTest extends DbzTestBase {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
             IKoseiShichosonMaster kaigoKoseiShichosonMaster = new KaigoKoseiShichosonMaster(DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity());
             assertThat(sut.save構成市町村(kaigoKoseiShichosonMaster), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
             KaigoKoseiShichosonMaster kaigoKoseiShichosonMaster = new KaigoKoseiShichosonMaster(DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity());
             kaigoKoseiShichosonMaster.getEntity().initializeMd5();
             //編集
@@ -108,7 +108,7 @@ public class KaigoiKoseiShichosonMasterManagerTest extends DbzTestBase {
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT7051KoseiShichosonMasterEntity.class))).thenReturn(1);
             KaigoKoseiShichosonMaster kaigoKoseiShichosonMaster = new KaigoKoseiShichosonMaster(DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity());
             kaigoKoseiShichosonMaster.getEntity().initializeMd5();
             kaigoKoseiShichosonMaster.setDeletedState(true);

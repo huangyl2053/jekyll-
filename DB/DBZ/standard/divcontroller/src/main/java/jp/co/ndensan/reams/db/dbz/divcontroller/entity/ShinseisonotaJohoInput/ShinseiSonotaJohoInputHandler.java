@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SakujoJiyuCode;
-import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
+// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -55,12 +55,11 @@ public class ShinseiSonotaJohoInputHandler {
             return;
         }
 
-        JukyushaDaichoManager jukyushaDaichoManager = new JukyushaDaichoManager();
-        Optional<JukyushaDaicho> 直近受給者台帳 = jukyushaDaichoManager.get受給者台帳By申請書管理番号(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
-
-        if (直近受給者台帳.isPresent()) {
-            setChokkinJukyushaJoho(直近受給者台帳);
-        }
+//        JukyushaDaichoManager jukyushaDaichoManager = new JukyushaDaichoManager();
+//        Optional<JukyushaDaicho> 直近受給者台帳 = jukyushaDaichoManager.get受給者台帳By申請書管理番号(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
+//        if (直近受給者台帳.isPresent()) {
+//            setChokkinJukyushaJoho(直近受給者台帳);
+//        }
     }
 
     private void setChokkinJukyushaJoho(Optional<JukyushaDaicho> 直近受給者台帳) {

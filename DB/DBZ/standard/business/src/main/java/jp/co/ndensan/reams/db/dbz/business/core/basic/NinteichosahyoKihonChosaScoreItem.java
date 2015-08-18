@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -52,7 +52,8 @@ public class NinteichosahyoKihonChosaScoreItem extends ParentModelBase<Ninteicho
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT5212NinteichosahyoKihonChosaScoreItemEntity}より{@link NinteichosahyoKihonChosaScoreItem}を生成します。
      *
-     * @param entity DBより取得した{@link DbT5212NinteichosahyoKihonChosaScoreItemEntity}
+     * @param entity
+     * DBより取得した{@link DbT5212NinteichosahyoKihonChosaScoreItemEntity}
      */
     public NinteichosahyoKihonChosaScoreItem(DbT5212NinteichosahyoKihonChosaScoreItemEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票（基本調査素点項目）"));
@@ -135,7 +136,8 @@ public class NinteichosahyoKihonChosaScoreItem extends ParentModelBase<Ninteicho
     /**
      * 認定調査票（基本調査素点項目）の識別子{@link NinteichosahyoKihonChosaScoreItemIdentifier}を返します。
      *
-     * @return 認定調査票（基本調査素点項目）の識別子{@link NinteichosahyoKihonChosaScoreItemIdentifier}
+     * @return
+     * 認定調査票（基本調査素点項目）の識別子{@link NinteichosahyoKihonChosaScoreItemIdentifier}
      */
     @Override
     public NinteichosahyoKihonChosaScoreItemIdentifier identifier() {

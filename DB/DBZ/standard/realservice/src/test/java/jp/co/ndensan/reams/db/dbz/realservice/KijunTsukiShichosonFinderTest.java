@@ -9,35 +9,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.月初;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei.単一市町村;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei.広域市町村;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.realservice.gappei.IGappeiShichosonFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.*;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei.*;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -50,7 +50,7 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class KijunTsukiShichosonFinderTest extends DbzTestBase {
 
-    private static List<HihokenshaDaichoModel> 被保険者台帳List;
+    private static List<HihokenshaDaicho> 被保険者台帳List;
 
     private static Map<Integer, IGappeiJoho> 合併情報Map;
     private static Map<Integer, IGappeiShichoson> 合併市町村Map;
@@ -583,16 +583,13 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         return finder;
     }
 
-    private static HihokenshaDaichoModel createHihokenshaDaicho(
+    private static HihokenshaDaicho createHihokenshaDaicho(
             String 市町村コード, String 被保険者番号, String 処理日時, String 資格取得事由コード, String 資格取得日,
             String 資格喪失事由コード, String 資格喪失日, String 旧市町村コード) {
-        HihokenshaDaichoModel mock = mock(HihokenshaDaichoModel.class);
+        HihokenshaDaicho mock = mock(HihokenshaDaicho.class);
         when(mock.get市町村コード()).thenReturn(new LasdecCode(市町村コード));
         when(mock.get被保険者番号()).thenReturn(new HihokenshaNo(new RString(被保険者番号)));
-        when(mock.get処理日時()).thenReturn(ShoriTimestamp.of(new YMDHMS(処理日時)));
-        when(mock.get資格取得事由()).thenReturn(ShikakuShutokuJiyu.toValue(new RString(資格取得事由コード)));
         when(mock.get資格取得年月日()).thenReturn(new FlexibleDate(資格取得日));
-        when(mock.get資格喪失事由()).thenReturn(ShikakuSoshitsuJiyu.toValue(new RString(資格喪失事由コード)));
         when(mock.get資格喪失年月日()).thenReturn(new FlexibleDate(資格喪失日));
         when(mock.get旧市町村コード()).thenReturn(new LasdecCode(旧市町村コード));
         return mock;
@@ -616,7 +613,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         when(mock.get地域番号()).thenReturn(new RString(地域番号));
         when(mock.get市町村コード()).thenReturn(new LasdecCode(市町村コード));
         when(mock.get合併種類()).thenReturn(new RString(合併種類));
-        when(mock.get保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString(保険者番号)));
+        when(mock.get保険者番号()).thenReturn(new HokenshaNo(new RString(保険者番号)));
         when(mock.get旧市町村情報付与終了日()).thenReturn(new FlexibleDate(旧市町村情報付与終了日));
         when(mock.get国保連データ連携開始日()).thenReturn(new FlexibleDate(国保連データ連携開始日));
         return mock;
@@ -631,7 +628,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         when(mock.get旧市町村コード()).thenReturn(new LasdecCode(旧市町村コード));
         when(mock.get運用開始日()).thenReturn(new FlexibleDate(運用開始日));
         when(mock.get運用終了日()).thenReturn(new FlexibleDate(運用終了日));
-        when(mock.get旧保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString(旧保険者番号)));
+        when(mock.get旧保険者番号()).thenReturn(new HokenshaNo(new RString(旧保険者番号)));
         when(mock.get旧市町村名称()).thenReturn(new RString(旧市町村名称));
         when(mock.get表示有無()).thenReturn(new RString(表示有無));
         return mock;

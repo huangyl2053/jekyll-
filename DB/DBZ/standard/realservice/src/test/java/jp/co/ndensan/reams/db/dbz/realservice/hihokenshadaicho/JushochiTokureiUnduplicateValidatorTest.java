@@ -6,13 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.TashichosonJushochiTokureiModel;
-import jp.co.ndensan.reams.db.dbz.model.TekiyoJogaishaModel;
-import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.helper.TashichosonJushochiTokureiModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.helper.TekiyoJogaishaModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.realservice.TashichosonJushochiTokureiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -20,14 +17,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.JushochiTokureiDuplicateValidator}のテストです。
@@ -50,7 +48,7 @@ public class JushochiTokureiUnduplicateValidatorTest {
 
     public static class validate extends DbzTestBase {
 
-        private HihokenshaDaichoModel target;
+        private DbT1001HihokenshaDaichoEntity target;
         private TashichosonJushochiTokureiManager tatokuManager;
         private TekiyoJogaishaManager jogaishaManager;
 
@@ -95,10 +93,10 @@ public class JushochiTokureiUnduplicateValidatorTest {
         public void 対象者が他市町村住所地特例の該当データを持たない場合_メッセージを持たない() {
             tatokuManager = mock(TashichosonJushochiTokureiManager.class);
             when(tatokuManager.get他市町村住所地特例List(any(LasdecCode.class), any(ShikibetsuCode.class)))
-                    .thenReturn(ItemList.<TashichosonJushochiTokureiModel>empty());
+                    .thenReturn(ItemList.<DbT1003TashichosonJushochiTokureiEntity>empty());
             jogaishaManager = mock(TekiyoJogaishaManager.class);
             when(jogaishaManager.get適用除外者情報List(any(LasdecCode.class), any(ShikibetsuCode.class)))
-                    .thenReturn(ItemList.<TekiyoJogaishaModel>empty());
+                    .thenReturn(ItemList.<DbT1002TekiyoJogaishaEntity>empty());
             target = createHihoDaicho(new FlexibleDate("20150101"), new FlexibleDate("20151231"));
 
             IValidationMessages result = JushochiTokureiUnduplicateValidator
@@ -148,10 +146,10 @@ public class JushochiTokureiUnduplicateValidatorTest {
         public void 対象者が適用除外の該当データを持たない場合_メッセージを持たない() {
             tatokuManager = mock(TashichosonJushochiTokureiManager.class);
             when(tatokuManager.get他市町村住所地特例List(any(LasdecCode.class), any(ShikibetsuCode.class)))
-                    .thenReturn(ItemList.<TashichosonJushochiTokureiModel>empty());
+                    .thenReturn(ItemList.<DbT1003TashichosonJushochiTokureiEntity>empty());
             jogaishaManager = mock(TekiyoJogaishaManager.class);
             when(jogaishaManager.get適用除外者情報List(any(LasdecCode.class), any(ShikibetsuCode.class)))
-                    .thenReturn(ItemList.<TekiyoJogaishaModel>empty());
+                    .thenReturn(ItemList.<DbT1002TekiyoJogaishaEntity>empty());
             target = createHihoDaicho(new FlexibleDate("20150101"), new FlexibleDate("20151231"));
 
             IValidationMessages result = JushochiTokureiUnduplicateValidator
@@ -160,17 +158,17 @@ public class JushochiTokureiUnduplicateValidatorTest {
             assertThat(result.contains(JushochiTokureiValidationMessage.住所地特例期間と適用除外期間が重複する履歴がある), is(false));
         }
 
-        private HihokenshaDaichoModel createHihoDaicho(FlexibleDate 適用日, FlexibleDate 解除日) {
-            HihokenshaDaichoModel model = HihokenshaDaichoModelTestHelper.createModel();
-            model.set適用年月日(適用日);
-            model.set解除年月日(解除日);
+        private DbT1001HihokenshaDaichoEntity createHihoDaicho(FlexibleDate 適用日, FlexibleDate 解除日) {
+            DbT1001HihokenshaDaichoEntity model = new DbT1001HihokenshaDaichoEntity();
+            model.setJushochitokureiTekiyoYMD(適用日);
+            model.setJushochitokureiKaijoYMD(解除日);
             return model;
         }
 
         private TashichosonJushochiTokureiManager createTatokuManager(FlexibleDate 適用日, FlexibleDate 解除日) {
-            TashichosonJushochiTokureiModel model = TashichosonJushochiTokureiModelTestHelper.createModel();
-            model.set適用年月日(適用日);
-            model.set解除年月日(解除日);
+            DbT1003TashichosonJushochiTokureiEntity model = new DbT1003TashichosonJushochiTokureiEntity();
+            model.setTekiyoYMD(適用日);
+            model.setKaijoYMD(解除日);
 
             TashichosonJushochiTokureiManager manager = mock(TashichosonJushochiTokureiManager.class);
             when(manager.get他市町村住所地特例List(any(LasdecCode.class), any(ShikibetsuCode.class)))
@@ -179,9 +177,9 @@ public class JushochiTokureiUnduplicateValidatorTest {
         }
 
         private TekiyoJogaishaManager createJogaiManager(FlexibleDate 適用日, FlexibleDate 解除日) {
-            TekiyoJogaishaModel model = TekiyoJogaishaModelTestHelper.createModel();
-            model.set適用年月日(適用日);
-            model.set解除年月日(解除日);
+            DbT1002TekiyoJogaishaEntity model = new DbT1002TekiyoJogaishaEntity();
+            model.setTekiyoYMD(適用日);
+            model.setKaijoYMD(解除日);
 
             TekiyoJogaishaManager manager = mock(TekiyoJogaishaManager.class);
             when(manager.get適用除外者情報List(any(LasdecCode.class), any(ShikibetsuCode.class)))

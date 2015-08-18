@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +26,19 @@ public class KoikiShichosonCodeHenkanPatternBuilderTest extends DbzTestBase {
     private static DbT7024KoikiShichosonCodeHenkanPatternEntity KoikiShichosonCodeHenkanPatternEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 広域内市町村番号;
+    private static LasdecCode 市町村コード;
+    private static RString コード区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_主キー名2;
+        広域内市町村番号 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_広域内市町村番号;
+        市町村コード = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_市町村コード;
+        コード区分 = DbT7024KoikiShichosonCodeHenkanPatternEntityGenerator.DEFAULT_コード区分;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KoikiShichosonCodeHenkanPatternBuilder sut;
         private static KoikiShichosonCodeHenkanPattern business;
@@ -43,8 +46,9 @@ public class KoikiShichosonCodeHenkanPatternBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiShichosonCodeHenkanPatternEntity = new DbT7024KoikiShichosonCodeHenkanPatternEntity();
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名1);
-            KoikiShichosonCodeHenkanPatternEntity.setXXX(主キー名2);
+            KoikiShichosonCodeHenkanPatternEntity.setKoikiShichosonNo(広域内市町村番号);
+            KoikiShichosonCodeHenkanPatternEntity.setShichosonCode(市町村コード);
+            KoikiShichosonCodeHenkanPatternEntity.setCodeKubun(コード区分);
 
             business = new KoikiShichosonCodeHenkanPattern(KoikiShichosonCodeHenkanPatternEntity);
 

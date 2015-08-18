@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5305IkenshoImageJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +29,20 @@ public class IkenshoImageJohoTest extends DbzTestBase {
     private static DbT5305IkenshoImageJohoEntity IkenshoImageJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static int 主治医意見書作成依頼履歴番号;
+    private static Code 帳票ID;
+    private static RString マスキングデータ区分;
+    private static int 取込みページ番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_申請書管理番号;
+        主治医意見書作成依頼履歴番号 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号;
+        帳票ID = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_帳票ID;
+        マスキングデータ区分 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_マスキングデータ区分;
+        取込みページ番号 = DbT5305IkenshoImageJohoEntityGenerator.DEFAULT_取込みページ番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +56,38 @@ public class IkenshoImageJohoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new IkenshoImageJoho(null, 主キー名2);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new IkenshoImageJoho(null, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分, 取込みページ番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new IkenshoImageJoho(主キー名1, null);
+        public void 帳票IDがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new IkenshoImageJoho(申請書管理番号, 主治医意見書作成依頼履歴番号, null, マスキングデータ区分, 取込みページ番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void マスキングデータ区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new IkenshoImageJoho(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, null, 取込みページ番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT5305IkenshoImageJohoEntityにセットされている() {
-            sut = new IkenshoImageJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new IkenshoImageJoho(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分, 取込みページ番号);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
+            assertThat(sut.getマスキングデータ区分(), is(マスキングデータ区分));
+            assertThat(sut.get帳票ID(), is(帳票ID));
+            assertThat(sut.get取込みページ番号(), is(取込みページ番号));
         }
 
         @Test
         public void 指定したキーが保持するIkenshoImageJohoIdentifierにセットされている() {
-            sut = new IkenshoImageJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new IkenshoImageJoho(申請書管理番号, 主治医意見書作成依頼履歴番号, 帳票ID, マスキングデータ区分, 取込みページ番号);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get主治医意見書作成依頼履歴番号(), is(主治医意見書作成依頼履歴番号));
+            assertThat(sut.identifier().getマスキングデータ区分(), is(マスキングデータ区分));
+            assertThat(sut.identifier().get帳票ID(), is(帳票ID));
+            assertThat(sut.identifier().get取込みページ番号(), is(取込みページ番号));
         }
     }
 
@@ -89,8 +110,8 @@ public class IkenshoImageJohoTest extends DbzTestBase {
 
             sut = new IkenshoImageJoho(IkenshoImageJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+//            assertThat(sut.identifier().getXXX(), is(申請書管理番号));
+//            assertThat(sut.identifier().getXXX(), is(帳票ID));
         }
     }
 

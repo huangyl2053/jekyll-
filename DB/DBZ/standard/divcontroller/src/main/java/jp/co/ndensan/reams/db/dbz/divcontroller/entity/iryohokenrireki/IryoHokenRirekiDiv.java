@@ -3,17 +3,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IIryoHokenRirekiDiv;
+import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.model.iryohokenkanyujokyo.IryoHokenKanyuJokyoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -228,7 +223,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
     }
 
     @Override
-    public IItemList<IryoHokenKanyuJokyoModel> get医療保険加入状況List() {
+    public IItemList<IryohokenKanyuJokyo> get医療保険加入状況List() {
         //TODO
         //1)、Panel;SessionAccessorに登録されている情報を取得し、戻り値として返却する。
         //2)、もし値が存在しない場合は、空のListを返す。
@@ -237,7 +232,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
     }
 
     @Override
-    public void set医療保険加入状況List(IItemList<IryoHokenKanyuJokyoModel> 医療保険加入状況List) {
+    public void set医療保険加入状況List(IItemList<IryohokenKanyuJokyo> 医療保険加入状況List) {
         //TODO
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。

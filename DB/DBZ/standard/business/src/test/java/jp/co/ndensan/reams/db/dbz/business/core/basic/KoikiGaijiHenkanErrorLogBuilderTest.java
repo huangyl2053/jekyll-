@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7034KoikiGaijiHenkanErrorLogEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +25,19 @@ public class KoikiGaijiHenkanErrorLogBuilderTest extends DbzTestBase {
     private static DbT7034KoikiGaijiHenkanErrorLogEntity KoikiGaijiHenkanErrorLogEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 処理番号;
+    private static RString 連番;
+    private static RString エラー表示連番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_主キー名2;
+        処理番号 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理番号;
+        連番 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_連番;
+        エラー表示連番 = DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_エラー表示連番;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KoikiGaijiHenkanErrorLogBuilder sut;
         private static KoikiGaijiHenkanErrorLog business;
@@ -43,8 +45,9 @@ public class KoikiGaijiHenkanErrorLogBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoikiGaijiHenkanErrorLogEntity = new DbT7034KoikiGaijiHenkanErrorLogEntity();
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名1);
-            KoikiGaijiHenkanErrorLogEntity.setXXX(主キー名2);
+            KoikiGaijiHenkanErrorLogEntity.setShoriNo(処理番号);
+            KoikiGaijiHenkanErrorLogEntity.setRenNo(連番);
+            KoikiGaijiHenkanErrorLogEntity.setErrorHyojiRenban(エラー表示連番);
 
             business = new KoikiGaijiHenkanErrorLog(KoikiGaijiHenkanErrorLogEntity);
 

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5201NinteichosaIraiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -25,14 +27,14 @@ public class NinteichosaIraiJohoTest extends DbzTestBase {
     private static DbT5201NinteichosaIraiJohoEntity NinteichosaIraiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static int 認定調査依頼履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_申請書管理番号;
+        認定調査依頼履歴番号 = DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_認定調査依頼履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +48,22 @@ public class NinteichosaIraiJohoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosaIraiJoho(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosaIraiJoho(主キー名1, null);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosaIraiJoho(null, 認定調査依頼履歴番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT5201NinteichosaIraiJohoEntityにセットされている() {
-            sut = new NinteichosaIraiJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosaIraiJohoIdentifierにセットされている() {
-            sut = new NinteichosaIraiJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 
@@ -89,8 +86,8 @@ public class NinteichosaIraiJohoTest extends DbzTestBase {
 
             sut = new NinteichosaIraiJoho(NinteichosaIraiJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
         }
     }
 
@@ -127,12 +124,12 @@ public class NinteichosaIraiJohoTest extends DbzTestBase {
 
         @Test
         public void get認定調査員コードは_entityが持つ認定調査員コードを返す() {
-            assertThat(sut.get認定調査員コード(), is(NinteichosaIraiJohoEntity.getNinteiChousainCode()));
+            assertThat(sut.get認定調査員コード(), is(NinteichosaIraiJohoEntity.getNinteiChosainCode()));
         }
 
         @Test
         public void get認定調査依頼区分コードは_entityが持つ認定調査依頼区分コードを返す() {
-            assertThat(sut.get認定調査依頼区分コード(), is(NinteichosaIraiJohoEntity.getNinteichousaIraiKubunCode()));
+            assertThat(sut.get認定調査依頼区分コード(), is(NinteichosaIraiJohoEntity.getNinteichosaIraiKubunCode()));
         }
 
         @Test

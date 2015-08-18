@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.daichoShubetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.nyushoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
@@ -92,7 +92,7 @@ public class ShisetsuNyutaishoDac implements
                 select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(eq(shikibetsuCode, 個人識別コード), eq(daichoShubetsu, 台帳種別.getCode()))).
-                order(by(shoriTimestamp, Order.DESC)).
+                order(by(rirekiNo, Order.DESC)).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 

@@ -4,10 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun.措置元;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -24,17 +26,17 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
-    private static DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity GappeiNaiJutokushaShinKyuNoHenkanEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity gappeiNaiJutokushaShinKyuNoHenkanEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static RString 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_識別コード;
+        履歴番号 = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,34 +45,34 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(null, 主キー名2);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(null, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(主キー名1, null);
+        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(識別コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityにセットされている() {
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(識別コード, 履歴番号);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するGappeiNaiJutokushaShinKyuNoHenkanIdentifierにセットされている() {
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(識別コード, 履歴番号);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -80,9 +82,9 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -93,10 +95,10 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
         @Test
         public void 指定したDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityのキー情報を識別子が持つ() {
 
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(GappeiNaiJutokushaShinKyuNoHenkanEntity);
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -106,80 +108,57 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
 
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(GappeiNaiJutokushaShinKyuNoHenkanEntity);
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
         }
 
         @Test
         public void get識別コードは_entityが持つ識別コードを返す() {
-            assertThat(sut.get識別コード(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getShikibetsuCode()));
+            assertThat(sut.get識別コード(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getShikibetsuCode()));
         }
 
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getRirekiNo()));
+            assertThat(sut.get履歴番号(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getRirekiNo()));
         }
 
         @Test
-        public void get識別コード（措置元
-        ）は_entityが持つ識別コード
-        （措置元
-
-        ）を返す() {
-            assertThat(sut.get識別コード（措置元
-            ）(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getShikibetsuCodeSochiMoto())
-
-
-        );
+        public void get識別コード_措置元は_entityが持つ識別コード_措置元を返す() {
+            assertThat(sut.get識別コード_措置元(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getShikibetsuCodeSochiMoto())
+            );
         }
 
         @Test
         public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getShichosonCode()));
+            assertThat(sut.get市町村コード(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getShichosonCode()));
         }
 
         @Test
-        public void get市町村コード（措置元
-        ）は_entityが持つ市町村コード
-        （措置元
-
-        ）を返す() {
-            assertThat(sut.get市町村コード（措置元
-            ）(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getShichosonCodeSochiMoto())
-
-
-        );
+        public void get市町村コード_措置元は_entityが持つ市町村コード_措置元を返す() {
+            assertThat(sut.get市町村コード_措置元(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getShichosonCodeSochiMoto()));
         }
 
         @Test
         public void get被保険者番号は_entityが持つ被保険者番号を返す() {
-            assertThat(sut.get被保険者番号(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getHihokenshaNo()));
+            assertThat(sut.get被保険者番号(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getHihokenshaNo()));
         }
 
         @Test
-        public void get被保険者番号（措置元
-        ）は_entityが持つ被保険者番号
-        （措置元
-
-        ）を返す() {
-            assertThat(sut.get被保険者番号（措置元
-            ）(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getHihokenshaNoSochiMoto())
-
-
-        );
+        public void get被保険者番号_措置元は_entityが持つ被保険者番号_措置元を返す() {
+            assertThat(sut.get被保険者番号_措置元(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getHihokenshaNoSochiMoto()));
         }
 
         @Test
         public void get開始年月日は_entityが持つ開始年月日を返す() {
-            assertThat(sut.get開始年月日(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getKaishiYMD()));
+            assertThat(sut.get開始年月日(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getKaishiYMD()));
         }
 
         @Test
         public void get終了年月日は_entityが持つ終了年月日を返す() {
-            assertThat(sut.get終了年月日(), is(GappeiNaiJutokushaShinKyuNoHenkanEntity.getShuryoYMD()));
+            assertThat(sut.get終了年月日(), is(gappeiNaiJutokushaShinKyuNoHenkanEntity.getShuryoYMD()));
         }
     }
 
@@ -189,16 +168,16 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
 
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(GappeiNaiJutokushaShinKyuNoHenkanEntity);
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(GappeiNaiJutokushaShinKyuNoHenkanEntity));
+            assertThat(sut.toEntity(), not(gappeiNaiJutokushaShinKyuNoHenkanEntity));
         }
     }
 
@@ -208,11 +187,11 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
 
-            sut = new GappeiNaiJutokushaShinKyuNoHenkan(GappeiNaiJutokushaShinKyuNoHenkanEntity);
+            sut = new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
         }
 
         @Test
@@ -228,9 +207,9 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名1);
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setXXX(主キー名2);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity = DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntityGenerator.createDbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity();
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setShikibetsuCode(識別コード);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setRirekiNo(履歴番号);
 
         }
 
@@ -265,8 +244,8 @@ public class GappeiNaiJutokushaShinKyuNoHenkanTest extends DbzTestBase {
     private static class TestSupport {
 
         public static GappeiNaiJutokushaShinKyuNoHenkan setStateGappeiNaiJutokushaShinKyuNoHenkan(EntityDataState parentState) {
-            GappeiNaiJutokushaShinKyuNoHenkanEntity.setState(parentState);
-            return new GappeiNaiJutokushaShinKyuNoHenkan(GappeiNaiJutokushaShinKyuNoHenkanEntity);
+            gappeiNaiJutokushaShinKyuNoHenkanEntity.setState(parentState);
+            return new GappeiNaiJutokushaShinKyuNoHenkan(gappeiNaiJutokushaShinKyuNoHenkanEntity);
         }
     }
 }

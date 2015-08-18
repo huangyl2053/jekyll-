@@ -10,16 +10,14 @@ import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.mapper.NyushoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.uz.uza.message.Messages;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.hojin.IHojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 入所施設を作成するクラスです。<br/>

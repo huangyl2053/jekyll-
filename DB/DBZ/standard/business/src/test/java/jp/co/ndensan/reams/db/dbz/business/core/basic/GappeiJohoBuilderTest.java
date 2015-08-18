@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -22,35 +23,31 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GappeiJohoBuilderTest extends DbzTestBase {
 
-    private static DbT7055GappeiJohoEntity GappeiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static DbT7055GappeiJohoEntity gappeiJohoEntity;
+    private static FlexibleDate 合併年月日;
+    private static RString 地域番号;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7055GappeiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7055GappeiJohoEntityGenerator.DEFAULT_主キー名2;
+        合併年月日 = DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+        地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static GappeiJohoBuilder sut;
         private static GappeiJoho business;
 
         @Before
         public void setUp() {
-            GappeiJohoEntity = new DbT7055GappeiJohoEntity();
-            GappeiJohoEntity.setXXX(主キー名1);
-            GappeiJohoEntity.setXXX(主キー名2);
+            gappeiJohoEntity = new DbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
 
-            business = new GappeiJoho(GappeiJohoEntity);
+            business = new GappeiJoho(gappeiJohoEntity);
 
             sut = business.createBuilderForEdit();
         }
-//TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
         public void 戻り値の合併年月日は_設定した値と同じ合併年月日を返す() {

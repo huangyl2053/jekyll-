@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysKanendo;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 過年度のコンフィグを取得するクラスです。
@@ -29,7 +29,7 @@ public class KanendoConfig {
      * コンストラクタです。
      */
     public KanendoConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -37,11 +37,11 @@ public class KanendoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public KanendoConfig(IUrBusinessConfig businessConfig) {
+    public KanendoConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysKanendo, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysKanendo, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysKanendo, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysKanendo target : ConfigKeysKanendo.values()) {

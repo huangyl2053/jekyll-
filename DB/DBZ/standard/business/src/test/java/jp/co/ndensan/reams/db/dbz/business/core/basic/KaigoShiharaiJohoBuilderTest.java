@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +27,19 @@ public class KaigoShiharaiJohoBuilderTest extends DbzTestBase {
     private static DbT7004KaigoShiharaiJohoEntity KaigoShiharaiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static KamokuCode 科目コード;
+    private static FlexibleDate 決定年月日;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_識別コード;
+        科目コード = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_科目コード;
+        決定年月日 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_決定年月日;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static KaigoShiharaiJohoBuilder sut;
         private static KaigoShiharaiJoho business;
@@ -43,8 +47,9 @@ public class KaigoShiharaiJohoBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = new DbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
 
             business = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
 

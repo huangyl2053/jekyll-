@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1012Minashi2GoshaDaicho
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1012Minashi2GoshaDaicho.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

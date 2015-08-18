@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.mapper;
 
-import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -40,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutoku
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyuCodeValue;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -129,12 +126,12 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
                 assertThat(result.getShichosonCode(), is(shikaku.get市町村コード()));
             }
 
-            @Test
-            public void toHihokenshaDaichoEntityで変換したとき_結果のgetShoriTimestampは_引数のget被保険者台帳登録日時と一致する() {
-                result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(result.getShoriTimestamp(), is(ShoriTimestamp.of(shikaku.get処理日時())));
-            }
-
+//            @Test
+//            public void toHihokenshaDaichoEntityで変換したとき_結果のgetShoriTimestampは_引数のget被保険者台帳登録日時と一致する() {
+//                result = sut.toHihokenshaDaichoEntity(shikaku);
+//                assertThat(result.getShoriTimestamp(), is(ShoriTimestamp.of(shikaku.get処理日時())));
+//            }
+//
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetHihokenshaNoは_引数のget被保険者番号と一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
@@ -390,21 +387,21 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
                         .build();
                 result = sut.toHihokenshaDaichoEntity(shikaku);
             }
-
-            @Test
-            public void toHihokenshaDaichoEntityで変換したとき_結果のgetSaikofuKubunは_引数のget被保険者証再交付$get有無区分$getCodeと一致する() {
-                assertThat(result.getSaikofuKubun(), is(shikaku.get被保険者証再交付().get有無区分().getCode()));
-            }
-
-            @Test
-            public void toHihokenshaDaichoEntityで変換したとき_結果のgetSaikofuJiyuCodeは_引数のget被保険者証再交付$getReason$getCodeと一致する() {
-                assertThat(result.getSaikofuJiyuCode(), is(shikaku.get被保険者証再交付().getReason().getCode()));
-            }
-
-            @Test
-            public void toHihokenshaDaichoEntityで変換したとき_結果のgetChohyoKofuRirekiIDは_引数のget被保険者証再交付$getChohyoKofuRirekiIDと一致する() {
-                assertThat(result.getChohyoKofuRirekiID(), is(shikaku.get被保険者証再交付().getChohyoKofuRirekiID().value()));
-            }
+//
+//            @Test
+//            public void toHihokenshaDaichoEntityで変換したとき_結果のgetSaikofuKubunは_引数のget被保険者証再交付$get有無区分$getCodeと一致する() {
+//                assertThat(result.getSaikofuKubun(), is(shikaku.get被保険者証再交付().get有無区分().getCode()));
+//            }
+//
+//            @Test
+//            public void toHihokenshaDaichoEntityで変換したとき_結果のgetSaikofuJiyuCodeは_引数のget被保険者証再交付$getReason$getCodeと一致する() {
+//                assertThat(result.getSaikofuJiyuCode(), is(shikaku.get被保険者証再交付().getReason().getCode()));
+//            }
+//
+//            @Test
+//            public void toHihokenshaDaichoEntityで変換したとき_結果のgetChohyoKofuRirekiIDは_引数のget被保険者証再交付$getChohyoKofuRirekiIDと一致する() {
+//                assertThat(result.getChohyoKofuRirekiID(), is(shikaku.get被保険者証再交付().getChohyoKofuRirekiID().value()));
+//            }
         }
     }
 
@@ -667,9 +664,9 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setSaikofuKubun(kubun.getCode());
-                entity.setSaikofuJiyuCode(new KofuJiyuCodeValue(reason.getCode()).toRString());
-                entity.setChohyoKofuRirekiID(chohyoID.value());
+//                entity.setSaikofuKubun(kubun.getCode());
+//                entity.setSaikofuJiyuCode(new KofuJiyuCodeValue(reason.getCode()).toRString());
+//                entity.setChohyoKofuRirekiID(chohyoID.value());
                 converted = sut.toHihokenshaShikaku(entity);
             }
 

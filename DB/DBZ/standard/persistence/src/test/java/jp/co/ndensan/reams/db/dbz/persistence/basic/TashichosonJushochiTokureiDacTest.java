@@ -4,32 +4,23 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.TashichosonJushochiTokureiDac;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -41,12 +32,12 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
 
-    private static final LasdecCode OTHER_市町村コード = new LasdecCode("202010");
     private static final ShikibetsuCode OTHER_識別コード = new ShikibetsuCode("000010000101234");
-    private static final YMDHMS OTHER_処理日時 = new YMDHMS("20141212012345");
-    private static final LasdecCode NONE_市町村コード = new LasdecCode("999999");
+    private static final FlexibleDate OTHER_異動日 = new FlexibleDate("20150808");
+    private static final RString OTHER_枝番 = new RString("001");
     private static final ShikibetsuCode NONE_識別コード = new ShikibetsuCode("999999999999999");
-    private static final YMDHMS NONE_処理日時 = new YMDHMS("39991231235959");
+    private static final FlexibleDate NONE_異動日 = new FlexibleDate("99999999");
+    private static final RString NONE_枝番 = new RString("999");
     private static TashichosonJushochiTokureiDac sut;
 
     @BeforeClass
@@ -59,54 +50,54 @@ public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             TestSupport.insert(
-                    OTHER_市町村コード,
                     OTHER_識別コード,
-                    OTHER_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    null,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    OTHER_異動日,
+                    OTHER_枝番);
         }
 
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
                     null,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 異動日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
+                    null,
+                    DEFAULT_枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 枝番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_識別コード,
+                    DEFAULT_異動日,
                     null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT1003TashichosonJushochiTokureiEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT1003TashichosonJushochiTokureiEntity insertedRecord = sut.selectByKey(
-                    NONE_市町村コード,
                     NONE_識別コード,
-                    NONE_処理日時);
+                    NONE_異動日,
+                    NONE_枝番);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -137,14 +128,14 @@ public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
         @Test
         public void 他市町村住所地特例エンティティを渡すと_insertは_他市町村住所地特例を追加する() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番), is(notNullValue()));
         }
     }
 
@@ -153,9 +144,9 @@ public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test
@@ -166,9 +157,9 @@ public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT1003TashichosonJushochiTokureiEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
 
             assertThat(updateRecord.getTekiyoYMD(), is(updatedRecord.getTekiyoYMD()));
         }
@@ -179,34 +170,33 @@ public class TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test
         public void 他市町村住所地特例エンティティを渡すと_deleteは_他市町村住所地特例を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番));
             assertThat(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番), is(nullValue()));
         }
     }
 
     private static class TestSupport {
 
-        public static void insert(
-                LasdecCode 市町村コード,
-                ShikibetsuCode 識別コード,
-                YMDHMS 処理日時) {
+        public static void insert(ShikibetsuCode 識別コード,
+                FlexibleDate 異動日,
+                RString 枝番) {
             DbT1003TashichosonJushochiTokureiEntity entity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
-            entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
-            entity.setShoriTimestamp(処理日時);
+            entity.setIdoYMD(異動日);
+            entity.setEdaNo(枝番);
             sut.insert(entity);
         }
     }

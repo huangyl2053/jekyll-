@@ -6,19 +6,22 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.edaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.idoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -38,76 +41,6 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
     private SqlSession session;
 
     /**
-     * 主キーで被保険者台帳を取得します。
-     *
-     * @param 市町村コード {@link LasdecCode 市町村コード}
-     * @return IItemList<DbT1001HihokenshaDaichoEntity>
-     */
-    @Transaction
-    public ItemList<DbT1001HihokenshaDaichoEntity> selectByKey(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
-                select().
-                table(DbT1001HihokenshaDaicho.class).
-                where(eq(shichosonCode, 市町村コード)).
-                order(by(shoriTimestamp, Order.DESC)).
-                toList(DbT1001HihokenshaDaichoEntity.class);
-        return ItemList.of(entities);
-    }
-
-    /**
-     * 指定の{@link LasdecCode 市町村コード}と{@link HihokenshaNo 被保険者番号}から特定される被保険者の、
-     * 資格情報を検索します。
-     *
-     * @param 市町村コード {@link LasdecCode 市町村コード}
-     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
-     * @return IItemList<DbT1001HihokenshaDaichoEntity>
-     */
-    public IItemList<DbT1001HihokenshaDaichoEntity> selectByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
-                select().
-                table(DbT1001HihokenshaDaicho.class).
-                where(and(eq(shichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))).
-                order(by(shoriTimestamp, Order.DESC)).
-                toList(DbT1001HihokenshaDaichoEntity.class);
-
-        return ItemList.of(entities);
-    }
-
-    /**
-     * 主キーで被保険者台帳を取得します。
-     *
-     * @param 市町村コード LasdecCode
-     * @param 被保険者番号 HihokenshaNo
-     * @param 処理日時 ShoriTimeStamp
-     * @return DbT1001HihokenshaDaichoEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public DbT1001HihokenshaDaichoEntity selectByKey(
-            LasdecCode 市町村コード,
-            HihokenshaNo 被保険者番号,
-            YMDHMS 処理日時) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().
-                table(DbT1001HihokenshaDaicho.class).
-                where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(shoriTimestamp, 処理日時))).
-                toObject(DbT1001HihokenshaDaichoEntity.class);
-    }
-
-    /**
      * 被保険者台帳を全件返します。
      *
      * @return List<DbT1001HihokenshaDaichoEntity>
@@ -122,31 +55,72 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
     }
 
     /**
-     * 市町村コードから、指定した市町村の被保険者台帳情報を検索します。
+     * 被保険者番号で被保険者台帳を取得します。
      *
-     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
-     * @param 処理日時 {@link ShoriTimestamp 処理日時}
+     * @return IItemList<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public ItemList<DbT1001HihokenshaDaichoEntity> selectByKey(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                order(by(hihokenshaNo, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        return ItemList.of(entities);
+    }
+
+    /**
+     * 被保険者番号、異動日で被保険者台帳を取得します。
+     *
+     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
+     * * @param 異動日 {@link FlexibleDate 異動日}
+     * @return IItemList<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public ItemList<DbT1001HihokenshaDaichoEntity> selectByKey(HihokenshaNo 被保険者番号, FlexibleDate 異動日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(idoYMD, 異動日))).
+                order(by(hihokenshaNo, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        return ItemList.of(entities);
+    }
+
+    /**
+     * 被保険者番号、異動日、枝番から、指定した市町村の被保険者台帳情報を検索します。
+     *
+     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
+     * @param 異動日 {@link FlexibleDate 異動日}
+     * @param 枝番 {@link RString 枝番}
      * @return
      * {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
      */
     @Transaction
-    public DbT1001HihokenshaDaichoEntity selectByKey(
-            LasdecCode 市町村コード,
-            HihokenshaNo 被保険者番号,
-            ShoriTimestamp 処理日時) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+    public DbT1001HihokenshaDaichoEntity selectByKey(HihokenshaNo 被保険者番号,
+            FlexibleDate 異動日,
+            RString 枝番) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(shoriTimestamp, 処理日時))).
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -165,7 +139,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
                 select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(shichosonCode, 市町村コード), eq(shikibetsuCode, 識別コード))).
-                order(by(shoriTimestamp, Order.DESC)).
+                order(by(idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         return entities.isEmpty() ? null : entities.get(0);
     }
@@ -184,7 +158,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
                 select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(shichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))).
-                order(by(shoriTimestamp, Order.DESC)).
+                order(by(idoYMD, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         return entities.isEmpty() ? null : entities.get(0);
     }

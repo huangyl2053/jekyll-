@@ -9,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GeninShikkan;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5300GeninShikkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5300GeninShikkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5300GeninShikkanDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -45,25 +45,19 @@ public class GeninShikkanManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー2;
-            sut.get原因疾患(null, 主キー2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー1;
-            sut.get原因疾患(主キー1, null);
+        public void 引数の申請書管理番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            int 連番 = DbT5300GeninShikkanEntityGenerator.DEFAULT_連番;
+            sut.get原因疾患(null, 連番);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー2;
-            GeninShikkan result = sut.get原因疾患(主キー1, 主キー2);
+            ShinseishoKanriNo 申請書管理番号 = DbT5300GeninShikkanEntityGenerator.DEFAULT_申請書管理番号;
+            int 連番 = DbT5300GeninShikkanEntityGenerator.DEFAULT_連番;
+            GeninShikkan result = sut.get原因疾患(申請書管理番号, 連番);
 
             assertThat(result, is(nullValue()));
         }
@@ -71,13 +65,13 @@ public class GeninShikkanManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5300GeninShikkanEntity entity = DbT5300GeninShikkanEntityGenerator.createDbT5300GeninShikkanEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー2;
-            GeninShikkan result = sut.get原因疾患(主キー1, 主キー2);
+            ShinseishoKanriNo 申請書管理番号 = DbT5300GeninShikkanEntityGenerator.DEFAULT_申請書管理番号;
+            int 連番 = DbT5300GeninShikkanEntityGenerator.DEFAULT_連番;
+            GeninShikkan result = sut.get原因疾患(申請書管理番号, 連番);
 
-            assertThat(result.get主キー1().value(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get申請書管理番号().value(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -101,7 +95,7 @@ public class GeninShikkanManagerTest {
             List<GeninShikkan> result = sut.get原因疾患一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get申請書管理番号().value(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_申請書管理番号.value()));
         }
     }
 
@@ -134,7 +128,7 @@ public class GeninShikkanManagerTest {
             DbT5300GeninShikkanEntity entity = DbT5300GeninShikkanEntityGenerator.createDbT5300GeninShikkanEntity();
             entity.initializeMd5();
             GeninShikkan 原因疾患 = new GeninShikkan(entity);
-            原因疾患 = 原因疾患.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            原因疾患 = 原因疾患.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save原因疾患(原因疾患), is(true));
         }
@@ -146,7 +140,7 @@ public class GeninShikkanManagerTest {
             DbT5300GeninShikkanEntity entity = DbT5300GeninShikkanEntityGenerator.createDbT5300GeninShikkanEntity();
             entity.initializeMd5();
             GeninShikkan 原因疾患 = new GeninShikkan(entity);
-            原因疾患 = 原因疾患.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            原因疾患 = 原因疾患.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
 
             assertThat(sut.save原因疾患(原因疾患), is(false));
         }

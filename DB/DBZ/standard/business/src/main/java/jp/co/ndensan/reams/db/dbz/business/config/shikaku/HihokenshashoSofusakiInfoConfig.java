@@ -11,11 +11,11 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.MojigireControlType;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 被保険者の表示方法について定義している業務コンフィグを取得します。
@@ -30,7 +30,7 @@ public class HihokenshashoSofusakiInfoConfig {
      * コンストラクタです。
      */
     public HihokenshashoSofusakiInfoConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -38,11 +38,11 @@ public class HihokenshashoSofusakiInfoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HihokenshashoSofusakiInfoConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoSofusakiInfoConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHihokenshashoSofusakiInfo, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoSofusakiInfo, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysHihokenshashoSofusakiInfo, RString> map = new EnumMap<>(ConfigKeysHihokenshashoSofusakiInfo.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoSofusakiInfo target : ConfigKeysHihokenshashoSofusakiInfo.values()) {

@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -222,7 +222,8 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
     }
 
     /**
-     * 介護世帯のみを変更対象とします。<br/> {@link DbT7014KaigoSetaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護世帯のみを変更対象とします。<br/>
+     * {@link DbT7014KaigoSetaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoSetai}
      */
@@ -237,7 +238,8 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
     }
 
     /**
-     * 保持する介護世帯を削除対象とします。<br/> {@link DbT7014KaigoSetaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護世帯を削除対象とします。<br/>
+     * {@link DbT7014KaigoSetaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoSetai}
      */
@@ -263,9 +265,14 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7014KaigoSetaiEntity entity;
         private final KaigoSetaiIdentifier id;
 

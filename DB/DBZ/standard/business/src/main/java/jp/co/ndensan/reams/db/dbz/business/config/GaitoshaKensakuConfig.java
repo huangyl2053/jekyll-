@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysGaitoshaKensaku;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 該当者検索のコンフィグを取得するクラスです。
@@ -31,7 +31,7 @@ public class GaitoshaKensakuConfig {
      * コンストラクタです。
      */
     public GaitoshaKensakuConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -39,11 +39,11 @@ public class GaitoshaKensakuConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public GaitoshaKensakuConfig(IUrBusinessConfig businessConfig) {
+    public GaitoshaKensakuConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysGaitoshaKensaku, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysGaitoshaKensaku, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysGaitoshaKensaku, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysGaitoshaKensaku target : ConfigKeysGaitoshaKensaku.values()) {

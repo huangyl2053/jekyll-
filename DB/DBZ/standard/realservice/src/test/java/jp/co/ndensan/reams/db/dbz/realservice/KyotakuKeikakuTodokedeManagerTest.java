@@ -7,27 +7,25 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuTodokedeModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,21 +51,18 @@ public class KyotakuKeikakuTodokedeManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画届出が返る() {
 
-            Optional<KyotakuKeikakuTodokedeModel> 居宅給付計画届出モデル = Optional.ofNullable(createModel());
+            Optional<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出モデル = Optional.ofNullable(createModel());
 
-            when(dac.selectByKey(any(HihokenshaNo.class), any(HokenshaNo.class),
-                    any(ShikibetsuCode.class), any(FlexibleYearMonth.class), any(YMDHMS.class)))
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class)))
                     .thenReturn(居宅給付計画届出モデル);
 
-            Optional<KyotakuKeikakuTodokedeModel> 居宅給付計画届出 = sut.get居宅給付計画届出(
+            Optional<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出 = sut.get居宅給付計画届出(
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_被保険者番号,
-                    DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_証記載保険者番号,
-                    DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_識別コード,
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_対象年月,
-                    DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_処理日時);
+                    DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_履歴番号);
 
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(居宅給付計画届出.get().get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出.get().getTodokedeKubun(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
         }
     }
 
@@ -76,19 +71,19 @@ public class KyotakuKeikakuTodokedeManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画届出のリストが返る() {
 
-            List<KyotakuKeikakuTodokedeModel> 居宅給付計画届出モデルリスト = new ArrayList<>();
+            List<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出モデルリスト = new ArrayList<>();
             居宅給付計画届出モデルリスト.add(createModel());
             居宅給付計画届出モデルリスト.add(createModel());
-            IItemList<KyotakuKeikakuTodokedeModel> list = ItemList.of(居宅給付計画届出モデルリスト);
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> list = ItemList.of(居宅給付計画届出モデルリスト);
 
             when(dac.selectAll()).thenReturn(list);
 
-            IItemList<KyotakuKeikakuTodokedeModel> 居宅給付計画届出リスト = sut.get居宅給付計画届出一覧();
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出リスト = sut.get居宅給付計画届出一覧();
 
             assertThat(居宅給付計画届出リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(居宅給付計画届出リスト.toList().get(0).get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
-            assertThat(居宅給付計画届出リスト.toList().get(1).get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出リスト.toList().get(0).getTodokedeKubun(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出リスト.toList().get(1).getTodokedeKubun(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
         }
     }
 
@@ -97,19 +92,19 @@ public class KyotakuKeikakuTodokedeManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画届出のリストが返る() {
 
-            List<KyotakuKeikakuTodokedeModel> 居宅給付計画届出モデルリスト = new ArrayList<>();
+            List<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出モデルリスト = new ArrayList<>();
             居宅給付計画届出モデルリスト.add(createModel());
             居宅給付計画届出モデルリスト.add(createModel());
-            IItemList<KyotakuKeikakuTodokedeModel> list = ItemList.of(居宅給付計画届出モデルリスト);
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> list = ItemList.of(居宅給付計画届出モデルリスト);
 
             when(dac.select居宅給付計画届出一覧By被保険者番号(any(HihokenshaNo.class))).thenReturn(list);
 
-            IItemList<KyotakuKeikakuTodokedeModel> 居宅給付計画届出リスト = sut.get居宅給付計画届出一覧(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_被保険者番号);
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出リスト = sut.get居宅給付計画届出一覧(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_被保険者番号);
 
             assertThat(居宅給付計画届出リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(居宅給付計画届出リスト.toList().get(0).get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
-            assertThat(居宅給付計画届出リスト.toList().get(1).get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出リスト.toList().get(0).getTodokedeKubun(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出リスト.toList().get(1).getTodokedeKubun(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
         }
     }
 
@@ -117,32 +112,32 @@ public class KyotakuKeikakuTodokedeManagerTest {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(KyotakuKeikakuTodokedeModel.class))).thenReturn(1);
+            when(dac.insert(any(DbT3005KyotakuKeikakuTodokedeEntity.class))).thenReturn(1);
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル = createModel();
+            DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
 
             assertThat(sut.save居宅給付計画届出(居宅給付計画届出モデル), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(KyotakuKeikakuTodokedeModel.class))).thenReturn(1);
+            when(dac.update(any(DbT3005KyotakuKeikakuTodokedeEntity.class))).thenReturn(1);
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getEntity().initializeMd5();
+            DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
+            居宅給付計画届出モデル.initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
-            居宅給付計画届出モデル.set届出区分(new RString("3"));
+            居宅給付計画届出モデル.setTodokedeKubun(new RString("3"));
 
             assertThat(sut.save居宅給付計画届出(居宅給付計画届出モデル), is(1));
         }
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(KyotakuKeikakuTodokedeModel.class))).thenReturn(1);
+            when(dac.delete(any(DbT3005KyotakuKeikakuTodokedeEntity.class))).thenReturn(1);
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getEntity().initializeMd5();
-            居宅給付計画届出モデル.setDeletedState(true);
+            DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
+            居宅給付計画届出モデル.initializeMd5();
+            居宅給付計画届出モデル.setIsDeleted(true);
 
             assertThat(sut.save居宅給付計画届出(居宅給付計画届出モデル), is(1));
         }
@@ -150,14 +145,14 @@ public class KyotakuKeikakuTodokedeManagerTest {
         @Test(expected = ApplicationException.class)
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getEntity().initializeMd5();
+            DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
+            居宅給付計画届出モデル.initializeMd5();
 
             sut.save居宅給付計画届出(居宅給付計画届出モデル);
         }
     }
 
-    private static KyotakuKeikakuTodokedeModel createModel() {
-        return new KyotakuKeikakuTodokedeModel(DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity());
+    private static DbT3005KyotakuKeikakuTodokedeEntity createModel() {
+        return new DbT3005KyotakuKeikakuTodokedeEntity();
     }
 }

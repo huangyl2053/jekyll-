@@ -4,8 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -24,14 +29,16 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
     private static DbT5222NinteiChosaScheduleMemoEntity NinteiChosaScheduleMemoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleDate 主キー名1;
+    private static Code 主キー名2;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+        主キー名2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+        主キー名3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,26 +53,26 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteiChosaScheduleMemo(null, 主キー名2);
+            sut = new NinteiChosaScheduleMemo(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteiChosaScheduleMemo(主キー名1, null);
+            sut = new NinteiChosaScheduleMemo(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT5222NinteiChosaScheduleMemoEntityにセットされている() {
-            sut = new NinteiChosaScheduleMemo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteiChosaScheduleMemo(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.getメモ年月日(), is(主キー名1));
+            assertThat(sut.get調査地区コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するNinteiChosaScheduleMemoIdentifierにセットされている() {
-            sut = new NinteiChosaScheduleMemo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteiChosaScheduleMemo(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().getメモ年月日(), is(主キー名1));
+            assertThat(sut.identifier().getメモ区分(), is(主キー名2));
         }
     }
 
@@ -88,8 +95,8 @@ public class NinteiChosaScheduleMemoTest extends DbzTestBase {
 
             sut = new NinteiChosaScheduleMemo(NinteiChosaScheduleMemoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getメモ年月日(), is(主キー名1));
+            assertThat(sut.identifier().getメモ区分(), is(主キー名2));
         }
     }
 

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -143,7 +143,7 @@ public class ShoKofuKaishuBuilder {
      * @param 交付理由 交付理由
      * @return {@link ShoKofuKaishuBuilder}
      */
-    public ShoKofuKaishuBuilder set交付理由(text 交付理由) {
+    public ShoKofuKaishuBuilder set交付理由(RString 交付理由) {
         requireNonNull(交付理由, UrSystemErrorMessages.値がnull.getReplacedMessage("交付理由"));
         entity.setKofuRiyu(交付理由);
         return this;
@@ -179,7 +179,7 @@ public class ShoKofuKaishuBuilder {
      * @param 回収理由 回収理由
      * @return {@link ShoKofuKaishuBuilder}
      */
-    public ShoKofuKaishuBuilder set回収理由(text 回収理由) {
+    public ShoKofuKaishuBuilder set回収理由(RString 回収理由) {
         requireNonNull(回収理由, UrSystemErrorMessages.値がnull.getReplacedMessage("回収理由"));
         entity.setKaishuRiyu(回収理由);
         return this;

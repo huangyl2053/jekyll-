@@ -9,10 +9,9 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -95,15 +94,15 @@ public class KoikiGaijiHenkanErrorLogModel implements Serializable {
         return entity.getShubetsu();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
     /**
      * 送信元市町村コードを返します。
      *
@@ -279,16 +278,16 @@ public class KoikiGaijiHenkanErrorLogModel implements Serializable {
         entity.setShubetsu(種別);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
     /**
      * 送信元市町村コードを設定します。
      *

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 合併内住特者新旧番号変換テーブルの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class GappeiNaiJutokushaShinKyuNoHenkanIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;

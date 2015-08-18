@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.util;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 
 /**
  * {@link jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject ICodeValueObject}を実装しているクラス(=CodeValueObject)を、

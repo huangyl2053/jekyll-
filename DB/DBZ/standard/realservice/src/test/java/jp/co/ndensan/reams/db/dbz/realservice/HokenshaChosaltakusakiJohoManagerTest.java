@@ -5,26 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.realservice.HokenshaChosaltakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4910NinteichosaItakusakiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4910NinteichosaItakusakiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {link HokenshaChosaltakusakiJohoManager}のテストクラスです。
@@ -67,7 +66,7 @@ public class HokenshaChosaltakusakiJohoManagerTest {
 
         @Test
         public void testFind調査委託先情報_該当の情報がないとき_Optionalのemptyを返す() {
-            Optional<DbT4910NinteichosaItakusakiJohoEntity> entity = Optional.empty();
+            DbT4910NinteichosaItakusakiJohoEntity entity = DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity();
             Optional<INinteichosaItakusakiJoho> business = Optional.empty();
 
             when(dac.selectByKey(notFound市町村コード, notFound認定調査委託先コード)).thenReturn(entity);
@@ -82,7 +81,7 @@ public class HokenshaChosaltakusakiJohoManagerTest {
 
             INinteichosaItakusakiJoho business = createBusiness(DEFAULT_市町村コード, DEFAULT_認定調査委託先コード);
 
-            Optional<DbT4910NinteichosaItakusakiJohoEntity> entity = Optional.ofNullable(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
+            DbT4910NinteichosaItakusakiJohoEntity entity = DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity();
 
             when(dac.selectByKey(市町村コード, 認定調査委託先コード)).thenReturn(entity);
             Optional<INinteichosaItakusakiJoho> result = sut.find調査委託先情報(市町村コード, 認定調査委託先コード);
@@ -100,14 +99,14 @@ public class HokenshaChosaltakusakiJohoManagerTest {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             INinteichosaItakusakiJoho hokenshaChosainjoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
             assertThat(sut.save調査委託先(hokenshaChosainjoho), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             HokenshaNinteichosaItakusakiJoho hokenshaNinteichosaItakusakiJoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
             hokenshaNinteichosaItakusakiJoho.getEntity().initializeMd5();
             //編集
@@ -119,7 +118,7 @@ public class HokenshaChosaltakusakiJohoManagerTest {
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
             HokenshaNinteichosaItakusakiJoho hokenshaNinteichosaItakusakiJoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
             hokenshaNinteichosaItakusakiJoho.getEntity().initializeMd5();
             hokenshaNinteichosaItakusakiJoho.setDeletedState(true);

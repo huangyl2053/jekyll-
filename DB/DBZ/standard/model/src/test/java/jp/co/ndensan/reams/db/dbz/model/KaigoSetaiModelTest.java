@@ -39,22 +39,22 @@ public class KaigoSetaiModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の世帯基準年月日は_設定した値と同じ世帯基準年月日を返す() {
-            sut.set世帯基準年月日(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯基準年月日);
-            assertThat(sut.get世帯基準年月日(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯基準年月日));
+            sut.set世帯基準年月日(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日);
+            assertThat(sut.get世帯基準年月日(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日));
         }
 
         @Test
         public void 戻り値の連番は_設定した値と同じ連番を返す() {
-            sut.set連番(DbT7014KaigoSetaiEntityGenerator.DEFAULT_連番);
-            assertThat(sut.get連番(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_連番));
+            sut.set連番(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番);
+            assertThat(sut.get連番(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番));
         }
 
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT7014KaigoSetaiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
+//            sut.set処理日時(DbT7014KaigoSetaiEntityGenerator.DEFAULT_処理日時);
+//            assertThat(sut.get処理日時(), is(DbT7014KaigoSetaiEntityGenerator.DEFAULT_処理日時));
+//        }
+//
         @Test
         public void 戻り値の世帯員識別コードは_設定した値と同じ世帯員識別コードを返す() {
             sut.set世帯員識別コード(DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード);

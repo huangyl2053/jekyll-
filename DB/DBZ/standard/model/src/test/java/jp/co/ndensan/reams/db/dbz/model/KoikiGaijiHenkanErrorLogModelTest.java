@@ -55,12 +55,12 @@ public class KoikiGaijiHenkanErrorLogModelTest extends DbzTestBase {
             assertThat(sut.get種別(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_種別));
         }
 
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理日時));
-        }
-
+//        @Test
+//        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
+//            sut.set処理日時(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理日時);
+//            assertThat(sut.get処理日時(), is(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_処理日時));
+//        }
+//
         @Test
         public void 戻り値の送信元市町村コードは_設定した値と同じ送信元市町村コードを返す() {
             sut.set送信元市町村コード(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.DEFAULT_送信元市町村コード);
@@ -161,7 +161,7 @@ public class KoikiGaijiHenkanErrorLogModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // KoikiGaijiHenkanErrorLogModel sut = new KoikiGaijiHenkanErrorLogModel();
         //sut.setEntity(DbT7034KoikiGaijiHenkanErrorLogEntityGenerator.createDbT7034KoikiGaijiHenkanErrorLogEntity());

@@ -91,7 +91,7 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
 
         @Test
         public void get入所施設のget施設コードが_Entityの入所施設コードと同一になる() {
-            assertThat(sut.get入所施設().get施設コード().value(), is(entity.getNyushoShisetsuCode()));
+            assertThat(sut.get入所施設().get施設コード().value(), is(entity.getNyushoShisetsuCode().value()));
         }
     }
 
@@ -186,7 +186,7 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
 
         @Test
         public void Entityの入所施設コードと_入所施設の施設コードが同一になる() {
-            assertThat(sut.getNyushoShisetsuCode(), is(施設入退所.get入所施設().get施設コード().value()));
+            assertThat(sut.getNyushoShisetsuCode().value(), is(施設入退所.get入所施設().get施設コード().value()));
         }
 
         @Test

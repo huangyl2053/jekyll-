@@ -4,7 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
@@ -13,18 +13,19 @@ import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinde
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * HihokenshaFinder のクラスファイル 
- * 
+ * HihokenshaFinder のクラスファイル
+ *
  * @author 自動生成
  */
 public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -56,7 +57,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     @JsonProperty("KaigoFinder")
     public void setKaigoFinder(KaigoFinderDiv KaigoFinder) {
-        this.KaigoFinder=KaigoFinder;
+        this.KaigoFinder = KaigoFinder;
     }
 
     @JsonProperty("ccdAtenaFinder")
@@ -71,7 +72,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     @JsonProperty("ButtonsForHihokenshaFinder")
     public void setButtonsForHihokenshaFinder(ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder) {
-        this.ButtonsForHihokenshaFinder=ButtonsForHihokenshaFinder;
+        this.ButtonsForHihokenshaFinder = ButtonsForHihokenshaFinder;
     }
 
     @JsonProperty("ccdSaikinShorisha")
@@ -86,7 +87,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     @JsonProperty("btnHihokenshaFinderHyoji")
     public void setBtnHihokenshaFinderHyoji(Button btnHihokenshaFinderHyoji) {
-        this.btnHihokenshaFinderHyoji=btnHihokenshaFinderHyoji;
+        this.btnHihokenshaFinderHyoji = btnHihokenshaFinderHyoji;
     }
 
     // </editor-fold>

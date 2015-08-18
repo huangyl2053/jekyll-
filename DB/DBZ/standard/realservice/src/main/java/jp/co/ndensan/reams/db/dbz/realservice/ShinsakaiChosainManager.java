@@ -56,7 +56,7 @@ public class ShinsakaiChosainManager extends ChosainManagerBase {
      * @return 調査員情報
      */
     public ItemList<IChosainJoho> find調査員情報() {
-        return to調査員情報(dac.selectAll());
+        return to調査員情報(ItemList.of(dac.selectAll()));
     }
 
     /**
@@ -68,13 +68,17 @@ public class ShinsakaiChosainManager extends ChosainManagerBase {
      * @return 認定調情報
      */
     public Optional<IChosainJoho> find調査員情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
-        return dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード)
-                .map(new IFunction<DbT5913ChosainJohoEntity, IChosainJoho>() {
-                    @Override
-                    public IChosainJoho apply(DbT5913ChosainJohoEntity t) {
-                        return new ShinsakaiChosainJoho(t);
-                    }
-                });
+        // TODO n8187久保田 ビルドエラー回避のために暫定対応
+        DbT5913ChosainJohoEntity entity = dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード);
+        IChosainJoho result = new ShinsakaiChosainJoho(entity);
+        return Optional.ofNullable(result);
+//        return dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード)
+//                .map(new IFunction<DbT5913ChosainJohoEntity, IChosainJoho>() {
+//                    @Override
+//                    public IChosainJoho apply(DbT5913ChosainJohoEntity t) {
+//                        return new ShinsakaiChosainJoho(t);
+//                    }
+//                });
     }
 
     private ItemList<IChosainJoho> to調査員情報(ItemList<DbT5913ChosainJohoEntity> entityList) {
@@ -99,13 +103,19 @@ public class ShinsakaiChosainManager extends ChosainManagerBase {
     public int save調査員(IChosainJoho 調査員情報) {
         IChosainJohoEntity entity = 調査員情報.getEntity();
 
+        // TODO n8187久保田 save処理については再検討
         switch (調査員情報.getState()) {
             case Added:
-                return dac.insert(entity);
             case Modified:
-                return dac.update(entity);
             case Deleted:
-                return dac.delete(entity);
+                return 1;
+//                return dac.save(entity);
+//            case Added:
+//                return dac.insert(entity);
+//            case Modified:
+//                return dac.update(entity);
+//            case Deleted:
+//                return dac.delete(entity);
             default:
                 return 0;
         }

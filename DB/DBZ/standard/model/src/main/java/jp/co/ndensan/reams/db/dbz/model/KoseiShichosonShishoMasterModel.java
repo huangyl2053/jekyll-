@@ -8,9 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -57,15 +56,15 @@ public class KoseiShichosonShishoMasterModel implements Serializable {
         this.entity = entity;
     }
 
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
+//    /**
+//     * 証記載保険者番号を返します。
+//     *
+//     * @return 証記載保険者番号
+//     */
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
+//
     /**
      * 支所コードを返します。
      *
@@ -84,16 +83,16 @@ public class KoseiShichosonShishoMasterModel implements Serializable {
         return entity.getShishoMei();
     }
 
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-    }
-
+//    /**
+//     * 証記載保険者番号を設定します。
+//     *
+//     * @param 証記載保険者番号 証記載保険者番号
+//     */
+//    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+//    }
+//
     /**
      * 支所コードを設定します。
      *

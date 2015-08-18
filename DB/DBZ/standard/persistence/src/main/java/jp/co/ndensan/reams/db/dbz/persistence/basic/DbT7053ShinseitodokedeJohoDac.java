@@ -14,7 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7053ShinseitodokedeJoho
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7053ShinseitodokedeJoho.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7053ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
