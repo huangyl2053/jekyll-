@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping.ShisetsuNyutaishoValidationMessageMapping;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
+import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;

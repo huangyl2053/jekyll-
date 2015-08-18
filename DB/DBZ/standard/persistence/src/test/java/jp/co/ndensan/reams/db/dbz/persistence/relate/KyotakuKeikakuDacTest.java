@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiE
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3005KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
@@ -113,11 +112,11 @@ public class KyotakuKeikakuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            IItemList<KyotakuKeikakuRelateModel> modelList = sut.select居宅計画履歴一覧By被保険者番号(計画_被保険者番号1);
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> modelList = sut.select居宅計画履歴一覧By被保険者番号(計画_被保険者番号1);
             assertThat(modelList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get居宅給付計画自己作成モデル().get().getHihokenshaNo(), is(自己_被保険者番号1));
-            assertThat(modelList.toList().get(1).get居宅給付計画事業者作成モデル().get().getHihokenshano(), is(自己_被保険者番号2));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(自己_被保険者番号1));
+            assertThat(modelList.toList().get(1).getHihokenshaNo(), is(自己_被保険者番号2));
         }
 
         // データが見つからない値を指定するように修正してください。

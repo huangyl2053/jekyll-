@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyu
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

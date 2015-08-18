@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -91,7 +90,7 @@ public class GappeiShichosonDacTest extends DbzTestDacBase {
 
     private static void initializeEntityData(int count) {
         for (int i = 1; i <= count; i++) {
-            sut.insert(new GappeiShichosonModel(createEntity(i)));
+            sut.insert(createEntity(i));
         }
     }
 

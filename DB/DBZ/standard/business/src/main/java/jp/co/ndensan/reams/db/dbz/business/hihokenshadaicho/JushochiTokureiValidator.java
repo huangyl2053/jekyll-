@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;

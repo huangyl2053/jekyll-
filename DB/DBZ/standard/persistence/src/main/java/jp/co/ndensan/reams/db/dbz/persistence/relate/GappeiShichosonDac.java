@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -21,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -36,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8156 宮本 康
  */
-public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
+public class GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -51,13 +48,13 @@ public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
      * @return {@code Optional<GappeiShichosonModel>}
      */
     @Transaction
-    public Optional<IGappeiShichoson> select合併市町村ByKey(FlexibleDate 合併年月日, RString 地域番号, LasdecCode 旧市町村コード) {
+    public Optional<DbT7056GappeiShichosonEntity> select合併市町村ByKey(FlexibleDate 合併年月日, RString 地域番号, LasdecCode 旧市町村コード) {
 
         requireNonNull(合併年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
         requireNonNull(地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
         requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
 
-        return Optional.ofNullable(createModel(合併市町村Dac.selectByKey(合併年月日, 地域番号, 旧市町村コード)));
+        return Optional.ofNullable(合併市町村Dac.selectByKey(合併年月日, 地域番号, 旧市町村コード));
     }
 
     /**
@@ -66,9 +63,9 @@ public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
      * @return {@code IItemList<GappeiShichosonModel>}
      */
     @Transaction
-    public IItemList<IGappeiShichoson> selectAll() {
+    public IItemList<DbT7056GappeiShichosonEntity> selectAll() {
         List<DbT7056GappeiShichosonEntity> entityList = 合併市町村Dac.selectAll();
-        return getModelList(entityList);
+        return ItemList.of(entityList);
     }
 
     /**
@@ -78,7 +75,7 @@ public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
      * @return 合併情報リスト
      */
     @Transaction
-    public IItemList<IGappeiShichoson> select(ITrueFalseCriteria 検索条件) {
+    public IItemList<DbT7056GappeiShichosonEntity> select(ITrueFalseCriteria 検索条件) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7056GappeiShichosonEntity> entityList = accessor.
                 select().
@@ -86,46 +83,31 @@ public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
                 where(検索条件).
                 order(by(gappeiYMD, Order.ASC)).
                 toList(DbT7056GappeiShichosonEntity.class);
-        return getModelList(entityList);
-    }
-
-    private IItemList<IGappeiShichoson> getModelList(List<DbT7056GappeiShichosonEntity> entityList) {
-        List<IGappeiShichoson> list = new ArrayList<>();
-        for (DbT7056GappeiShichosonEntity entity : entityList) {
-            list.add(new GappeiShichosonModel(entity));
-        }
-        return ItemList.of(list);
-    }
-
-    private IGappeiShichoson createModel(DbT7056GappeiShichosonEntity 合併市町村エンティティ) {
-        if (合併市町村エンティティ == null) {
-            return null;
-        }
-        return new GappeiShichosonModel(合併市町村エンティティ);
+        return ItemList.of(entityList);
     }
 
     @Override
-    public int insert(GappeiShichosonModel data) {
+    public int insert(DbT7056GappeiShichosonEntity data) {
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.insert(data.getEntity());
+        return 合併市町村Dac.insert(data);
     }
 
     @Override
-    public int update(GappeiShichosonModel data) {
+    public int update(DbT7056GappeiShichosonEntity data) {
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.update(data.getEntity());
+        return 合併市町村Dac.update(data);
     }
 
     @Override
-    public int delete(GappeiShichosonModel data) {
+    public int delete(DbT7056GappeiShichosonEntity data) {
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.delete(data.getEntity());
+        return 合併市町村Dac.delete(data);
     }
 
     /**
@@ -134,10 +116,10 @@ public class GappeiShichosonDac implements IModifiable<GappeiShichosonModel> {
      * @param data GappeiJohoModel
      * @return int 件数
      */
-    public int deletePhysical(GappeiShichosonModel data) {
+    public int deletePhysical(DbT7056GappeiShichosonEntity data) {
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.deletePhysical(data.getEntity());
+        return 合併市町村Dac.deletePhysical(data);
     }
 }

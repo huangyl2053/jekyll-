@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNa
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.IHokensha;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;

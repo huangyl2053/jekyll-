@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.realservice.TashichosonJushochiTokureiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

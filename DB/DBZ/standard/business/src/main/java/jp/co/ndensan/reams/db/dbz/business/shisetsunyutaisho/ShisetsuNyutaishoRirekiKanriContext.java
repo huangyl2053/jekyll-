@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
+package jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.入所年月日より前;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.入所施設が未入力;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.入所日が未入力;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.終了日設定なし;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所施設が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.終了日設定なし;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所年月日より前;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある;
 
 import jp.co.ndensan.reams.ur.urz.model.context.IContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;

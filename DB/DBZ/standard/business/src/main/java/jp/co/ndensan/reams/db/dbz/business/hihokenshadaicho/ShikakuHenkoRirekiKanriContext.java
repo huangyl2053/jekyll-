@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
+package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.取得日より前;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.喪失日より後;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更事由が未入力;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更事由が１号到達以外年齢が40歳未満;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更日が未入力;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更日と住所地特例履歴の期間が重複する履歴がある;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更日と前の履歴データの変更日の期間が重複;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更日と次の履歴データの変更日の期間が重複;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.届出日設定なし;
+import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.最新の取得日として登録不可;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.取得日より前;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.喪失日より後;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更事由が１号到達以外年齢が40歳未満;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と住所地特例履歴の期間が重複する履歴がある;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と前の履歴データの変更日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.変更日と次の履歴データの変更日の期間が重複;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.届出日設定なし;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage.最新の取得日として登録不可;
 import jp.co.ndensan.reams.ur.urz.model.context.IContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 

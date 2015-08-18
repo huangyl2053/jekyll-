@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonEditData;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoA4CommonEditData;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**

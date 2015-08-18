@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.ChohyoKyotsuJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.DateOfBirthEditorB4Base;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.GenderEditorB4Base;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.KyufuSeigenEditorBase;
@@ -18,12 +19,8 @@ import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.ServiceTa
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.ShikakuKihonEditorBase;
 import jp.co.ndensan.reams.db.dbz.business.report.NinteiAndKyotakuShienOutputChecker;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4LowerEditData;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4UpperEditData;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonEditData;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition.上部;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition.指定無し;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 

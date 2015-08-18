@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.report;
 
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**

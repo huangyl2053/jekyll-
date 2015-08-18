@@ -5,14 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaDaichoModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;

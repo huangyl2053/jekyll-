@@ -8,14 +8,12 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -34,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N3327 三浦 凌
  */
-public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMasterModel> {
+public class KoseiShichosonMasterDac implements IModifiable<DbT7051KoseiShichosonMasterEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -47,7 +45,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
      * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
-    public IItemList<KoseiShichosonMasterModel> selectBy(ContainsKyuShichoson containsKyuShichoson) {
+    public IItemList<DbT7051KoseiShichosonMasterEntity> selectBy(ContainsKyuShichoson containsKyuShichoson) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7051KoseiShichosonMasterEntity> result;
         if (containsKyuShichoson.equals(ContainsKyuShichoson.旧市町村を含まない)) {
@@ -59,16 +57,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         } else {
             result = dac.selectAll();
         }
-        return ItemList.of(result).map(toModel());
-    }
-
-    private IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel> toModel() {
-        return new IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel>() {
-            @Override
-            public KoseiShichosonMasterModel apply(DbT7051KoseiShichosonMasterEntity t) {
-                return new KoseiShichosonMasterModel(t);
-            }
-        };
+        return ItemList.of(result);
     }
 
     /**
@@ -80,7 +69,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
      * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
-    public IItemList<KoseiShichosonMasterModel> selectBy(LasdecCode code, ContainsKyuShichoson containsKyuShichoson) {
+    public IItemList<DbT7051KoseiShichosonMasterEntity> selectBy(LasdecCode code, ContainsKyuShichoson containsKyuShichoson) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7051KoseiShichosonMasterEntity> result;
         if (containsKyuShichoson.equals(ContainsKyuShichoson.旧市町村を含まない)) {
@@ -97,7 +86,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
                     .where(eq(shichosonCode, code))
                     .toList(DbT7051KoseiShichosonMasterEntity.class);
         }
-        return ItemList.of(result).map(toModel());
+        return ItemList.of(result);
     }
 
     /**
@@ -107,42 +96,43 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
      * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
-    public IItemList<KoseiShichosonMasterModel> selectForm(ITrueFalseCriteria criteria) {
+    public IItemList<DbT7051KoseiShichosonMasterEntity> selectForm(ITrueFalseCriteria criteria) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7051KoseiShichosonMasterEntity> result = accessor
                 .select()
                 .table(DbT7051KoseiShichosonMaster.class)
                 .where(criteria)
                 .toList(DbT7051KoseiShichosonMasterEntity.class);
-        return ItemList.of(result).map(toModel());
+        return ItemList.of(result);
+
     }
 
     @Override
-    public int update(KoseiShichosonMasterModel model) {
+    public int update(DbT7051KoseiShichosonMasterEntity model) {
         int result = 0;
         if (model == null) {
             return result;
         }
-        return dac.save(model.getEntity());
+        return dac.save(model);
     }
 
     @Override
-    public int insert(KoseiShichosonMasterModel model) {
+    public int insert(DbT7051KoseiShichosonMasterEntity model) {
         int result = 0;
         if (model == null) {
             return result;
         }
-        result = dac.save(model.getEntity());
+        result = dac.save(model);
         return result;
     }
 
     @Override
-    public int delete(KoseiShichosonMasterModel model) {
+    public int delete(DbT7051KoseiShichosonMasterEntity model) {
         int result = 0;
         if (model == null) {
             return result;
         }
-        result = dac.save(model.getEntity());
+        result = dac.save(model);
         return result;
     }
 }

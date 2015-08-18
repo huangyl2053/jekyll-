@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.validations.validator.custom;
 
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
+import jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
-import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;

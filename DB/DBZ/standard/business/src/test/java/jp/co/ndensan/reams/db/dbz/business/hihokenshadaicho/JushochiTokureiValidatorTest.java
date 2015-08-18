@@ -6,21 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JushochiTokureiValidator}のテストです。

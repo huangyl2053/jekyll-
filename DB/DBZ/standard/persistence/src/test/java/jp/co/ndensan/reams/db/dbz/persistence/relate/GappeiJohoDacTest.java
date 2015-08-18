@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiJohoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -89,7 +88,7 @@ public class GappeiJohoDacTest extends DbzTestDacBase {
 
     private static void initializeEntityData(int count) {
         for (int i = 1; i <= count; i++) {
-            sut.insert(new GappeiJohoModel(createEntity(i)));
+            sut.insert(createEntity(i));
         }
     }
 
