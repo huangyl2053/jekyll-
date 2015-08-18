@@ -14,11 +14,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 資格者証発行における委託代行業者の業務コンフィグを取得するクラスです。
@@ -33,7 +33,7 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * コンストラクタです。
      */
     public ShikakushashoItakudaikoHyojiConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -41,11 +41,11 @@ public class ShikakushashoItakudaikoHyojiConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    ShikakushashoItakudaikoHyojiConfig(IUrBusinessConfig businessConfig) {
+    ShikakushashoItakudaikoHyojiConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> map = new EnumMap<>(ConfigKeysShikakushashoItakudaikoHyoji.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShikakushashoItakudaikoHyoji target : ConfigKeysShikakushashoItakudaikoHyoji.values()) {

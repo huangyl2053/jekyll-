@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -32,13 +34,11 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7003BemmeishaJohoDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
+    private static final RString キー_01 = RString.EMPTY;
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT7003BemmeishaJohoDac sut;
@@ -53,7 +53,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -71,7 +71,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -83,7 +83,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_証記載保険者番号,
-                    null,
+                    DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日,
@@ -95,7 +95,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
-                    null,
+                    DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日,
                     DEFAULT_弁明者枝番);
@@ -107,7 +107,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
                     DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
-                    null,
+                    DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日,
                     DEFAULT_弁明者枝番);
         }
@@ -119,7 +119,18 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
-                    null,
+                    DEFAULT_弁明書作成日,
+                    DEFAULT_弁明者枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 弁明者枝番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_証記載保険者番号,
+                    DEFAULT_識別コード,
+                    DEFAULT_原処分被保険者番号,
+                    DEFAULT_審査請求届出日,
+                    DEFAULT_弁明書作成日,
                     DEFAULT_弁明者枝番);
         }
 
@@ -138,7 +149,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7003BemmeishaJohoEntity insertedRecord = sut.selectByKey(
-                    new ShoKisaiHokenshaNo(キー_03),
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -153,7 +164,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
         @Test
         public void 弁明者情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
@@ -212,11 +223,16 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
 
         @Test
         public void 弁明者情報エンティティを渡すと_updateは_弁明者情報を更新する() {
-            DbT7003BemmeishaJohoEntity updateRecord = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
-            //TODO  主キー以外の項目を変更してください
-//      updateRecord.set変更したい項目(75);
+            DbT7003BemmeishaJohoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_証記載保険者番号,
+                    DEFAULT_識別コード,
+                    DEFAULT_原処分被保険者番号,
+                    DEFAULT_審査請求届出日,
+                    DEFAULT_弁明書作成日,
+                    DEFAULT_弁明者枝番);
+            updateRecord.setYakushoskuName(new RString("役職"));
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7003BemmeishaJohoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
@@ -226,7 +242,7 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
                     DEFAULT_弁明書作成日,
                     DEFAULT_弁明者枝番);
 
-//            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getYakushoskuName(), is(updatedRecord.getYakushoskuName()));
         }
     }
 
@@ -245,13 +261,17 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
 
         @Test
         public void 弁明者情報エンティティを渡すと_deleteは_弁明者情報を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7003BemmeishaJohoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_原処分被保険者番号,
                     DEFAULT_審査請求届出日,
                     DEFAULT_弁明書作成日,
-                    DEFAULT_弁明者枝番));
+                    DEFAULT_弁明者枝番);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
@@ -270,15 +290,15 @@ public class DbT7003BemmeishaJohoDacTest extends DbzTestDacBase {
                 HihokenshaNo 原処分被保険者番号,
                 FlexibleDate 審査請求届出日,
                 FlexibleDate 弁明書作成日,
-                int 弁明者枝番) {
+                Decimal 弁明者枝番) {
             DbT7003BemmeishaJohoEntity entity = DbT7003BemmeishaJohoEntityGenerator.createDbT7003BemmeishaJohoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShikibetsuCode(識別コード);
             entity.setGenshobunHihokenshaNo(原処分被保険者番号);
             entity.setShinsaseikyuTodokedeYMD(審査請求届出日);
             entity.setBemmeishoSakuseiYMD(弁明書作成日);
-            entity.setBemmeishaEdaban(弁明者枝番);
-            sut.insert(entity);
+            entity.setBemmeishaEdaban(弁明者枝番.intValue());
+            sut.save(entity);
         }
     }
 }

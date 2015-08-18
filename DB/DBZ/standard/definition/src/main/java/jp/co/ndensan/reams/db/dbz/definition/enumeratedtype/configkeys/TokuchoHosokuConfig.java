@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys;
 import java.util.HashMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 老齢福祉年金受給者の識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class RoreiFukushiNenkinJukyushaIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;

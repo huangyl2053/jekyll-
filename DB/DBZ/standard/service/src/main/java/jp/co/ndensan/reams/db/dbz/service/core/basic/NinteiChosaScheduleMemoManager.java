@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5222NinteiChosaScheduleMemoDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -52,7 +52,7 @@ public class NinteiChosaScheduleMemoManager {
     public NinteiChosaScheduleMemo get認定調査スケジュールメモ情報(
             FlexibleDate メモ年月日,
             Code メモ区分,
-            Decimal 連番) {
+            int 連番) {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));

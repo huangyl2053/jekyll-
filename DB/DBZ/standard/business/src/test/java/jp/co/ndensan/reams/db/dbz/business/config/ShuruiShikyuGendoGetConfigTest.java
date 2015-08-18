@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,8 +49,8 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
         取得方法 = ShuruiShikyuGendoGet.要介護度を検索キーにする;
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysShuruiShikyuGendoGet.種類支給限度額_取得方法),
                 any(RDate.class),

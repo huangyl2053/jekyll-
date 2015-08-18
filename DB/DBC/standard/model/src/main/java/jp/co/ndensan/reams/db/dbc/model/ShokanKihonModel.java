@@ -184,7 +184,7 @@ public class ShokanKihonModel implements Serializable {
      *
      * @return 入所_院実日数
      */
-    public int get入所_院実日数() {
+    public Decimal get入所_院実日数() {
         return entity.getNyushoJitsuNissu();
     }
 
@@ -193,7 +193,7 @@ public class ShokanKihonModel implements Serializable {
      *
      * @return 外泊日数
      */
-    public int get外泊日数() {
+    public Decimal get外泊日数() {
         return entity.getGaihakuNissu();
     }
 
@@ -404,7 +404,7 @@ public class ShokanKihonModel implements Serializable {
      *
      * @param 入所_院実日数 入所_院実日数
      */
-    public void set入所_院実日数(int 入所_院実日数) {
+    public void set入所_院実日数(Decimal 入所_院実日数) {
         requireNonNull(入所_院実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("入所_院実日数"));
         entity.setNyushoJitsuNissu(入所_院実日数);
     }
@@ -414,7 +414,7 @@ public class ShokanKihonModel implements Serializable {
      *
      * @param 外泊日数 外泊日数
      */
-    public void set外泊日数(int 外泊日数) {
+    public void set外泊日数(Decimal 外泊日数) {
         requireNonNull(外泊日数, UrSystemErrorMessages.値がnull.getReplacedMessage("外泊日数"));
         entity.setGaihakuNissu(外泊日数);
     }

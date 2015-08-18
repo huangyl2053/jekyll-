@@ -15,13 +15,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
@@ -92,34 +93,34 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
 
     @Override
     public Optional<FlexibleDate> get旧市町村情報付与終了日() {
-        IItemList<IGappeiJoho> 合併List = gappeiDac.selectAll();
+        IItemList<DbT7055GappeiJohoEntity> 合併List = gappeiDac.selectAll();
         if (!合併List.isEmpty()) {
-            return Optional.of(合併List.toList().get(合併List.size() - 1).get旧市町村情報付与終了日());
+            return Optional.of(合併List.toList().get(合併List.size() - 1).getKyuJohoFuyoToYMD());
         }
         return Optional.empty();
     }
 
     @Override
-    public IItemList<GappeiShichosonJohoModel> get合併市町村情報(boolean 表示対象のみ) {
+    public IItemList<GappeiShichoson> get合併市町村情報(boolean 表示対象のみ) {
         if (!is合併あり()) {
             return ItemList.empty();
         }
-        IItemList<IGappeiJoho> 合併List = gappeiDac.selectAll();
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
+        IItemList<DbT7055GappeiJohoEntity> 合併List = gappeiDac.selectAll();
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
         return ItemList.of(合併市町村情報List);
     }
 
     @Override
-    public IItemList<GappeiShichosonJohoModel> get合併市町村情報(LasdecCode 旧市町村コード) {
+    public IItemList<GappeiShichoson> get合併市町村情報(LasdecCode 旧市町村コード) {
         if (!is合併あり()) {
             return ItemList.empty();
         }
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
         return ItemList.of(合併市町村情報List);
     }
 
     @Override
-    public IItemList<GappeiShichosonJohoModel> get合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
+    public IItemList<GappeiShichoson> get合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
         if (!is合併あり()) {
             return ItemList.empty();
         }
@@ -128,7 +129,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get最新合併市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichoson> get最新合併市町村情報(LasdecCode 市町村コード) {
         if (!is合併あり()) {
             return Optional.empty();
         }
@@ -136,7 +137,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号) {
+    public Optional<GappeiShichoson> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号) {
         if (!is合併あり()) {
             return Optional.empty();
         }
@@ -144,7 +145,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月) {
+    public Optional<GappeiShichoson> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月) {
         if (!is合併あり()) {
             return Optional.empty();
         }
@@ -152,11 +153,11 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get最古合併市町村情報(LasdecCode 旧市町村コード) {
+    public Optional<GappeiShichoson> get最古合併市町村情報(LasdecCode 旧市町村コード) {
         if (!is合併あり()) {
             return Optional.empty();
         }
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
         if (!合併市町村情報List.isEmpty()) {
             return Optional.of(合併市町村情報List.get(0));
         }
@@ -164,12 +165,12 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get直近合併市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichoson> get直近合併市町村情報(LasdecCode 市町村コード) {
 
         if (!is合併あり()) {
             return Optional.empty();
         }
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報(市町村コード).toList();
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報(市町村コード).toList();
         if (!合併市町村情報List.isEmpty()) {
             return Optional.of(合併市町村情報List.get(合併市町村情報List.size() - 1));
         }
@@ -177,11 +178,11 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
+    public Optional<GappeiShichoson> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
         if (!is合併あり()) {
             return Optional.empty();
         }
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
         if (!合併市町村情報List.isEmpty()) {
             return Optional.of(合併市町村情報List.get(合併市町村情報List.size() - 1));
         }
@@ -189,12 +190,12 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月) {
+    public Optional<GappeiShichoson> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月) {
         if (!is合併あり()) {
             return Optional.empty();
         }
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
-        for (GappeiShichosonJohoModel 合併市町村情報 : 合併市町村情報List) {
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
+        for (GappeiShichoson 合併市町村情報 : 合併市町村情報List) {
             if (基準年月.isBefore(合併市町村情報.get合併情報().get().get国保連データ連携開始日().getYearMonth())) {
                 return Optional.of(合併市町村情報);
             }
@@ -203,27 +204,27 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichoson> get市町村情報(LasdecCode 市町村コード) {
         return get合併市町村情報(null, make単一Key(市町村コード), make広域Key(市町村コード), false);
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get市町村情報(ShoKisaiHokenshaNo 保険者番号) {
+    public Optional<GappeiShichoson> get市町村情報(ShoKisaiHokenshaNo 保険者番号) {
         return get合併市町村情報(null, make単一Key(保険者番号), make広域Key(保険者番号), false);
     }
 
     @Override
-    public Optional<GappeiShichosonJohoModel> get最古市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichoson> get最古市町村情報(LasdecCode 市町村コード) {
         return get合併市町村情報(null, make単一Key(市町村コード), make広域Key(市町村コード), true);
     }
 
     @Override
-    public IItemList<GappeiShichosonJohoModel> find合併市町村情報(ISearchCondition 条件, boolean 表示対象のみ) {
+    public IItemList<GappeiShichoson> find合併市町村情報(ISearchCondition 条件, boolean 表示対象のみ) {
         if (!is合併あり()) {
             return ItemList.empty();
         }
-        IItemList<IGappeiJoho> 合併List = gappeiDac.select(条件.makeSearchCondition());
-        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
+        IItemList<DbT7055GappeiJohoEntity> 合併List = gappeiDac.select(条件.makeSearchCondition());
+        List<GappeiShichoson> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
         return ItemList.of(合併市町村情報List);
     }
 
@@ -231,8 +232,8 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return hokenshaConfig.get保険者構成() == HokenshaKosei.単一市町村;
     }
 
-    private Optional<GappeiShichosonJohoModel> get最新合併市町村情報(ITrueFalseCriteria 条件) {
-        IGappeiJoho 合併 = get最新合併情報(条件);
+    private Optional<GappeiShichoson> get最新合併市町村情報(ITrueFalseCriteria 条件) {
+        DbT7055GappeiJohoEntity 合併 = get最新合併情報(条件);
         if (合併 == null) {
             return Optional.empty();
         }
@@ -249,8 +250,8 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return create合併市町村情報(合併, 構成, 単一List, 広域List);
     }
 
-    private IGappeiJoho get最新合併情報(ITrueFalseCriteria 条件) {
-        IItemList<IGappeiJoho> 合併List = gappeiDac.select(条件);
+    private DbT7055GappeiJohoEntity get最新合併情報(ITrueFalseCriteria 条件) {
+        IItemList<DbT7055GappeiJohoEntity> 合併List = gappeiDac.select(条件);
         if (合併List.isEmpty()) {
             return null;
         }
@@ -277,7 +278,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return 広域List;
     }
 
-    private Optional<GappeiShichosonJohoModel> get合併市町村情報(
+    private Optional<GappeiShichoson> get合併市町村情報(
             IGappeiJoho 合併, ITrueFalseCriteria 単一条件, ITrueFalseCriteria 広域条件, boolean is最古) {
         HokenshaKosei 構成;
         List<IGappeiShichoson> 単一List = new ArrayList<>();
@@ -302,8 +303,8 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return create合併市町村情報(合併, 構成, 単一List, 広域List);
     }
 
-    private List<GappeiShichosonJohoModel> get合併市町村情報List(List<IGappeiJoho> 合併List, boolean 表示対象のみ) {
-        List<GappeiShichosonJohoModel> 合併市町村情報List = new ArrayList<>();
+    private List<GappeiShichoson> get合併市町村情報List(List<IGappeiJoho> 合併List, boolean 表示対象のみ) {
+        List<GappeiShichoson> 合併市町村情報List = new ArrayList<>();
         for (IGappeiJoho 合併 : 合併List) {
             Optional<GappeiShichosonJohoModel> 合併市町村情報 = get合併市町村情報(
                     合併,
@@ -315,8 +316,8 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return 合併市町村情報List;
     }
 
-    private List<GappeiShichosonJohoModel> get合併市町村情報List(ITrueFalseCriteria 単一条件, ITrueFalseCriteria 広域条件) {
-        Map<FlexibleDate, GappeiShichosonJohoModel> map = new TreeMap<>();
+    private List<GappeiShichoson> get合併市町村情報List(ITrueFalseCriteria 単一条件, ITrueFalseCriteria 広域条件) {
+        Map<FlexibleDate, GappeiShichoson> map = new TreeMap<>();
         if (is単一市町村()) {
             IItemList<IGappeiShichoson> 単一List = tanitsuDac.select(単一条件);
             for (IGappeiShichoson 単一 : 単一List) {
@@ -333,7 +334,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
                 map.put(合併.get国保連データ連携開始日(), 合併市町村情報.get());
             }
         } else {
-            IItemList<IKoikiKoseiShichoson> 広域List = koikiDac.select(広域条件);
+            IItemList<DbT7051KoseiShichosonMasterEntity> 広域List = koikiDac.select(広域条件);
             for (IKoikiKoseiShichoson 広域 : 広域List) {
                 ITrueFalseCriteria 条件 = make合併Key(広域.get合併情報地域番号());
                 IItemList<IGappeiJoho> 合併List = gappeiDac.select(条件);
@@ -351,7 +352,7 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         return (List) Arrays.asList(map.values().toArray());
     }
 
-    private Optional<GappeiShichosonJohoModel> create合併市町村情報(
+    private Optional<GappeiShichoson> create合併市町村情報(
             IGappeiJoho 合併, HokenshaKosei 構成, List<IGappeiShichoson> 単一List, List<IKoikiKoseiShichoson> 広域List) {
         GappeiShichosonJohoModel 合併市町村情報 = new GappeiShichosonJohoModel(
                 Optional.ofNullable(合併), 構成, ItemList.of(単一List), ItemList.of(広域List));

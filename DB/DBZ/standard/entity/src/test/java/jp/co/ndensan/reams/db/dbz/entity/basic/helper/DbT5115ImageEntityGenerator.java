@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * イメージ情報エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT5115ImageEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
-    public static final Decimal DEFAULT_取込ページ番号 = new Decimal(1);
+    public static final int DEFAULT_取込ページ番号 = 1;
     public static final Code DEFAULT_原本マスク分 = new Code("01");
     public static final RDateTime DEFAULT_イメージ共有ファイルID = RDateTime.of(2014, 9, 1, 10, 20, 30, 123);
 

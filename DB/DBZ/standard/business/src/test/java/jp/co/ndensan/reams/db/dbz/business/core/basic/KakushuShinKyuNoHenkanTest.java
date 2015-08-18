@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7028KakushuShinKyuNoHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
     private static DbT7028KakushuShinKyuNoHenkanEntity KakushuShinKyuNoHenkanEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 番号区分;
+    private static RString 旧番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_被保険者番号;
+        番号区分 = DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_番号区分;
+        旧番号 = DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_旧番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +48,39 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KakushuShinKyuNoHenkan(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuShinKyuNoHenkan(null, 番号区分, 旧番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KakushuShinKyuNoHenkan(主キー名1, null);
+        public void 番号区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuShinKyuNoHenkan(被保険者番号, null, 旧番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 旧番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KakushuShinKyuNoHenkan(被保険者番号, 番号区分, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7028KakushuShinKyuNoHenkanEntityにセットされている() {
-            sut = new KakushuShinKyuNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KakushuShinKyuNoHenkan(被保険者番号, 番号区分, 旧番号);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get番号区分(), is(番号区分));
         }
 
         @Test
         public void 指定したキーが保持するKakushuShinKyuNoHenkanIdentifierにセットされている() {
-            sut = new KakushuShinKyuNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KakushuShinKyuNoHenkan(被保険者番号, 番号区分, 旧番号);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get番号区分(), is(番号区分));
         }
     }
 
@@ -80,8 +91,9 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +106,8 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
 
             sut = new KakushuShinKyuNoHenkan(KakushuShinKyuNoHenkanEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get番号区分(), is(番号区分));
         }
     }
 
@@ -106,8 +118,9 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
 
             sut = new KakushuShinKyuNoHenkan(KakushuShinKyuNoHenkanEntity);
         }
@@ -140,8 +153,9 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
 
             sut = new KakushuShinKyuNoHenkan(KakushuShinKyuNoHenkanEntity);
         }
@@ -159,8 +173,9 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
 
             sut = new KakushuShinKyuNoHenkan(KakushuShinKyuNoHenkanEntity);
         }
@@ -179,8 +194,9 @@ public class KakushuShinKyuNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             KakushuShinKyuNoHenkanEntity = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名1);
-            KakushuShinKyuNoHenkanEntity.setXXX(主キー名2);
+            KakushuShinKyuNoHenkanEntity.setHihokenshaNo(被保険者番号);
+            KakushuShinKyuNoHenkanEntity.setNoKubun(番号区分);
+            KakushuShinKyuNoHenkanEntity.setKyuNo(旧番号);
 
         }
 

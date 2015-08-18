@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,7 +24,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     private HihokenshaNo hihokenshaNo;
     private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
-    private Code hihokennshaKubunCode;
+    private RString hihokennshaKubunCode;
     private RString shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private RString jushochiTokureiFlag;
@@ -142,7 +141,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
      *
      * @return hihokennshaKubunCode
      */
-    public Code getHihokennshaKubunCode() {
+    public RString getHihokennshaKubunCode() {
         return hihokennshaKubunCode;
     }
 
@@ -151,7 +150,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
-    public void setHihokennshaKubunCode(Code hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
     }
 

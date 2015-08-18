@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import lombok.Value;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域市町村管理コード変換パターンの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class KoikiShichosonCodeHenkanPatternIdentifier implements Serializable {
 
     private final RString 広域内市町村番号;
@@ -26,8 +28,8 @@ public class KoikiShichosonCodeHenkanPatternIdentifier implements Serializable {
      * @param コード区分 コード区分
      */
     public KoikiShichosonCodeHenkanPatternIdentifier(RString 広域内市町村番号,
-LasdecCode 市町村コード,
-RString コード区分) {
+            LasdecCode 市町村コード,
+            RString コード区分) {
         this.広域内市町村番号 = 広域内市町村番号;
         this.市町村コード = 市町村コード;
         this.コード区分 = コード区分;

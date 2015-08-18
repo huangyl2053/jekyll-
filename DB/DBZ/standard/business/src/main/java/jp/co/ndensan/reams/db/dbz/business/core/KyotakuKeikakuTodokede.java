@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画届出を管理するクラスです。
  */
-public class KyotakuKeikakuTodokede extends ModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
+public class KyotakuKeikakuTodokede extends ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
 
     private final DbT3005KyotakuKeikakuTodokedeEntity entity;
     private final KyotakuKeikakuTodokedeIdentifier id;
@@ -242,6 +243,23 @@ public class KyotakuKeikakuTodokede extends ModelBase<KyotakuKeikakuTodokedeIden
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public KyotakuKeikakuTodokede modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KyotakuKeikakuJigyoshaSakusei> getKyotakuKeikakuJigyoshaSakuseiList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KyotakuKeikakuJikoSakusei> getKyotakuKeikakuJikoSakuseiList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public KyotakuKeikakuTodokede modified() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

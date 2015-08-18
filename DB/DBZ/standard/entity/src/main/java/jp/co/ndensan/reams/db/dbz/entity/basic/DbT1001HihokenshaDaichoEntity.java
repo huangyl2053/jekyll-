@@ -106,6 +106,24 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     }
 
     /**
+     * lastUpdateTimestampのgetメソッドです。
+     *
+     * @return lastUpdateTimestamp
+     */
+    public RDateTime getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    /**
+     * lastUpdateTimestampのsetメソッドです。
+     *
+     * @param lastUpdateTimestamp lastUpdateTimestamp
+     */
+    public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    /**
      * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId

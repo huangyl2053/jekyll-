@@ -9,7 +9,7 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -81,7 +81,7 @@ public class RoreiFukushiNenkinJukyushaModel implements Serializable {
      * @return 受給廃止日
      */
     public FlexibleDate get受給廃止日() {
-        return entity.getJukyuHaishiYMD();
+        return entity.getJukyuShuryoYMD();
     }
 
     /**
@@ -120,7 +120,7 @@ public class RoreiFukushiNenkinJukyushaModel implements Serializable {
      */
     public void set受給廃止日(FlexibleDate 受給廃止日) {
         requireNonNull(受給廃止日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給廃止日"));
-        entity.setJukyuHaishiYMD(受給廃止日);
+        entity.setJukyuShuryoYMD(受給廃止日);
     }
 
     /**

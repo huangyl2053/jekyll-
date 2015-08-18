@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.searchkey;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 介護賦課基本情報の検索キークラスです。
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 public class KaigoFukaKihonSearchKey {
 
     private final TsuchishoNo 通知書番号;
-    private final FukaNendo 賦課年度;
+    private final FlexibleYear 賦課年度;
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 識別コード;
 
@@ -52,7 +52,7 @@ public class KaigoFukaKihonSearchKey {
      *
      * @return 賦課年度
      */
-    public FukaNendo get賦課年度() {
+    public FlexibleYear get賦課年度() {
         return 賦課年度;
     }
 
@@ -77,7 +77,7 @@ public class KaigoFukaKihonSearchKey {
     public static class Builder {
 
         private final TsuchishoNo 通知書番号;
-        private final FukaNendo 賦課年度;
+        private final FlexibleYear 賦課年度;
         private final LasdecCode 市町村コード;
         private final ShikibetsuCode 識別コード;
 
@@ -91,7 +91,7 @@ public class KaigoFukaKihonSearchKey {
          * @throws NullPointerException 引数がnullの場合
          */
         public Builder(
-                TsuchishoNo 通知書番号, FukaNendo 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) throws NullPointerException {
+                TsuchishoNo 通知書番号, FlexibleYear 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) throws NullPointerException {
             this.通知書番号 = requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
             this.賦課年度 = 賦課年度;
             this.市町村コード = requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));

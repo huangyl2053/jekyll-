@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup.照会系;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup.賦課照会系;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 // TODO N8156 宮本 康 メニューは要精査
 /**

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
@@ -241,6 +242,14 @@ public class TandokuJoseikinKyufuShinsei extends ModelBase<TandokuJoseikinKyufuS
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public TandokuJoseikinKyufuShinsei modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<TandokuJoseikinKyufuKettei> getTandokuJoseikinKyufuKetteiList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -15,23 +15,21 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyo.shikibe
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyo.shinsaseikyuTodokedeYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyo.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 弁明内容のデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7002BemmeiNaiyoDac implements IModifiable<DbT7002BemmeiNaiyoEntity> {
+public class DbT7002BemmeiNaiyoDac implements ISaveable<DbT7002BemmeiNaiyoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -87,37 +85,18 @@ public class DbT7002BemmeiNaiyoDac implements IModifiable<DbT7002BemmeiNaiyoEnti
                 toList(DbT7002BemmeiNaiyoEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT7002BemmeiNaiyoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7002BemmeiNaiyoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7002BemmeiNaiyoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT7002BemmeiNaiyoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT7002BemmeiNaiyoEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT7002BemmeiNaiyoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT7002BemmeiNaiyoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明内容エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

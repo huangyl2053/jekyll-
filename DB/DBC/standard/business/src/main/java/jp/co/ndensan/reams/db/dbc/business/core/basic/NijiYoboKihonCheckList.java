@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3101NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
@@ -415,6 +416,18 @@ public class NijiYoboKihonCheckList extends ModelBase<NijiYoboKihonCheckListIden
 
     @Override
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public NijiYoboKihonCheckList modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<NijiYoboNiniCheckList> getNijiYoboNiniCheckListList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<NijiYoboCheckListHanteiKekka> getNijiYoboCheckListHanteiKekkaList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

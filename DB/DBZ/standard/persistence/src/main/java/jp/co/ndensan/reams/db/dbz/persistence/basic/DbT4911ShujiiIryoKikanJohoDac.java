@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJoho.shujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -80,6 +80,6 @@ public class DbT4911ShujiiIryoKikanJohoDac implements ISaveable<DbT4911ShujiiIry
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

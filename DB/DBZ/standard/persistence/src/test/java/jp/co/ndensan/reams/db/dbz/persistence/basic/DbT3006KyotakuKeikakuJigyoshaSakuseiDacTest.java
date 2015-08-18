@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_被保険者番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,10 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -54,6 +56,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test(expected = NullPointerException.class)
         public void 対象年月がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
         }
@@ -61,6 +64,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test(expected = NullPointerException.class)
         public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
         }
@@ -68,6 +72,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(notNullValue()));
@@ -76,6 +81,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(nullValue()));
@@ -110,6 +116,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
                     DEFAULT_履歴番号);
 
             assertThat(sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号), is(notNullValue()));
         }
@@ -127,6 +134,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test
         public void 居宅給付計画事業者作成エンティティを渡すと_updateは_居宅給付計画事業者作成を更新する() {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity updateRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
             updateRecord.setSakuseiKubunCode(new RString("10"));
@@ -134,6 +142,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
             sut.save(updateRecord);
 
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity updatedRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
 
@@ -153,6 +162,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
         @Test
         public void 居宅給付計画事業者作成エンティティを渡すと_deleteは_居宅給付計画事業者作成を削除する() {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity deletedEntity = sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号);
             deletedEntity.setState(EntityDataState.Deleted);
@@ -160,6 +170,7 @@ public class DbT3006KyotakuKeikakuJigyoshaSakuseiDacTest extends DbzTestDacBase 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
                     DEFAULT_履歴番号), is(nullValue()));
         }

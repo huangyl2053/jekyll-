@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.*;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.choshuHouhou;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.ki;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
@@ -35,7 +40,7 @@ public class DbT2003KibetsuDac implements ISaveable<DbT2003KibetsuEntity> {
      * 主キーで介護期別を取得します。
      *
      * @param 調定年度 ChoteiNendo
-     * @param 賦課年度 FukaNendo
+     * @param 賦課年度 FlexibleYear
      * @param 通知書番号 TsuchishoNo
      * @param 履歴番号 RirekiNo
      * @param 徴収方法 ChoshuHouhou

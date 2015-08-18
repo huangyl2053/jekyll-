@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.Hihoken
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenPrintType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -136,8 +136,8 @@ public class HihokenshashoPrintConfigTest {
         届出日の代わりに適用開始日を表示 = new RString("0");
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無),
                 any(RDate.class),

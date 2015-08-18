@@ -8,11 +8,10 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShujiiIkenshoIraiJoho}の編集を行うビルダークラスです。
@@ -58,7 +57,7 @@ public class ShujiiIkenshoIraiJohoBuilder {
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      * @return {@link ShujiiIkenshoIraiJohoBuilder}
      */
-    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成依頼履歴番号(Decimal 主治医意見書作成依頼履歴番号) {
+    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成依頼履歴番号(int 主治医意見書作成依頼履歴番号) {
         requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
         entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
         return this;
@@ -118,7 +117,7 @@ public class ShujiiIkenshoIraiJohoBuilder {
      * @param 主治医意見書作成回数 主治医意見書作成回数
      * @return {@link ShujiiIkenshoIraiJohoBuilder}
      */
-    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成回数(Decimal 主治医意見書作成回数) {
+    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成回数(int 主治医意見書作成回数) {
         requireNonNull(主治医意見書作成回数, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成回数"));
         entity.setIkenshoIraiKaisu(主治医意見書作成回数);
         return this;
@@ -238,7 +237,7 @@ public class ShujiiIkenshoIraiJohoBuilder {
      * @param 主治医意見書作成督促回数 主治医意見書作成督促回数
      * @return {@link ShujiiIkenshoIraiJohoBuilder}
      */
-    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成督促回数(Decimal 主治医意見書作成督促回数) {
+    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成督促回数(int 主治医意見書作成督促回数) {
         requireNonNull(主治医意見書作成督促回数, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成督促回数"));
         entity.setIkenshoTokusokuKaisu(主治医意見書作成督促回数);
         return this;

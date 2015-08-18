@@ -9,8 +9,8 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -162,7 +162,8 @@ public class ShinKyuIryoKikanShujiiNoHenkan extends ParentModelBase<ShinKyuIryoK
     /**
      * 新旧医療機関主治医番号変換テーブルの識別子{@link ShinKyuIryoKikanShujiiNoHenkanIdentifier}を返します。
      *
-     * @return 新旧医療機関主治医番号変換テーブルの識別子{@link ShinKyuIryoKikanShujiiNoHenkanIdentifier}
+     * @return
+     * 新旧医療機関主治医番号変換テーブルの識別子{@link ShinKyuIryoKikanShujiiNoHenkanIdentifier}
      */
     @Override
     public ShinKyuIryoKikanShujiiNoHenkanIdentifier identifier() {
@@ -213,9 +214,14 @@ public class ShinKyuIryoKikanShujiiNoHenkan extends ParentModelBase<ShinKyuIryoK
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity entity;
         private final ShinKyuIryoKikanShujiiNoHenkanIdentifier id;
 

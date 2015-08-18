@@ -4,8 +4,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.BunshoNoMaintenance.BunshoNoMaintenanceDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.bunshonomaintenance.BunshoNoMaintenanceDiv;
 
 /**
  * KaigoBunshoNoMaintenance のクラスファイル

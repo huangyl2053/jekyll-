@@ -12,16 +12,15 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.ShisetsuNyutaishoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -168,23 +167,18 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(new YMDHMS("20100110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20110110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20120110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(new YMDHMS("20130110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20140110111200"));
             sut.insert(entity);
         }
     }
@@ -232,27 +226,22 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(new YMDHMS("20100110111200"));
             entity.setDaichoShubetsu(DaichoType.他市町村住所地特例者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20110110111200"));
             entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20120110111200"));
             entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(new YMDHMS("20130110111200"));
             entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(new YMDHMS("20140110111200"));
             entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
             sut.insert(entity);
         }

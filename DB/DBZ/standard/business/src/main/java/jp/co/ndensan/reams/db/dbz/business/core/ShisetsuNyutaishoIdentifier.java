@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import lombok.Value;
 
 /**
  * 介護保険施設入退所の識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class ShisetsuNyutaishoIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;

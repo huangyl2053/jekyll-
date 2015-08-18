@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5221NinteichosaScheduleDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +43,31 @@ public class NinteichosaScheduleManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査スケジュール情報 extends FdaTestBase {
+    public static class get認定調査スケジュール情報 extends DbzTestBase {
+
+        FlexibleDate 認定調査予定年月日 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日;
+        RString 認定調査予定開始時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定開始時間;
+        RString 認定調査予定終了時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定終了時間;
+        Code 認定調査時間枠 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査時間枠;
+        RString 認定調査委託先コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
+        RString 認定調査員コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー2;
-            sut.get認定調査スケジュール情報(null, 主キー2);
+        public void 引数の認定調査予定年月日にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get認定調査スケジュール情報(null, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー1;
-            sut.get認定調査スケジュール情報(主キー1, null);
+        public void 引数の認定調査予定開始時間にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get認定調査スケジュール情報(認定調査予定年月日, null, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー2;
-            NinteichosaSchedule result = sut.get認定調査スケジュール情報(主キー1, 主キー2);
+            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(RString.class), any(RString.class))).thenReturn(null);
+            NinteichosaSchedule result = sut.get認定調査スケジュール情報(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +75,15 @@ public class NinteichosaScheduleManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5221NinteichosaScheduleEntity entity = DbT5221NinteichosaScheduleEntityGenerator.createDbT5221NinteichosaScheduleEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class), any(Code.class), any(RString.class), any(RString.class))).thenReturn(entity);
+            NinteichosaSchedule result = sut.get認定調査スケジュール情報(認定調査予定年月日, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 認定調査委託先コード, 認定調査員コード);
 
-            主キー型1 主キー1 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー2;
-            NinteichosaSchedule result = sut.get認定調査スケジュール情報(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get認定調査予定年月日(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get認定調査スケジュール情報一覧 extends FdaTestBase {
+    public static class get認定調査スケジュール情報一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +102,11 @@ public class NinteichosaScheduleManagerTest {
             List<NinteichosaSchedule> result = sut.get認定調査スケジュール情報一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get認定調査予定年月日(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日));
         }
     }
 
-    public static class save認定調査スケジュール情報 extends XxxTestBase {
+    public static class save認定調査スケジュール情報 extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +135,7 @@ public class NinteichosaScheduleManagerTest {
             DbT5221NinteichosaScheduleEntity entity = DbT5221NinteichosaScheduleEntityGenerator.createDbT5221NinteichosaScheduleEntity();
             entity.initializeMd5();
             NinteichosaSchedule 認定調査スケジュール情報 = new NinteichosaSchedule(entity);
-            認定調査スケジュール情報 = 認定調査スケジュール情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査スケジュール情報 = 認定調査スケジュール情報.createBuilderForEdit().set認定調査予定開始時間(new RString("認定調査予定開始時間を変更")).build();
 
             assertThat(sut.save認定調査スケジュール情報(認定調査スケジュール情報), is(true));
         }
@@ -145,7 +147,7 @@ public class NinteichosaScheduleManagerTest {
             DbT5221NinteichosaScheduleEntity entity = DbT5221NinteichosaScheduleEntityGenerator.createDbT5221NinteichosaScheduleEntity();
             entity.initializeMd5();
             NinteichosaSchedule 認定調査スケジュール情報 = new NinteichosaSchedule(entity);
-            認定調査スケジュール情報 = 認定調査スケジュール情報.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            認定調査スケジュール情報 = 認定調査スケジュール情報.createBuilderForEdit().set認定調査予定開始時間(new RString("認定調査予定開始時間を変更")).build();
 
             assertThat(sut.save認定調査スケジュール情報(認定調査スケジュール情報), is(false));
         }

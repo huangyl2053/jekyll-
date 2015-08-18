@@ -16,6 +16,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.8</version>
+            <type>jar</type>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>
@@ -25,13 +32,7 @@
             <artifactId>DbzDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzDefinition</artifactId>
-            <version>1.2-release-staging-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>jp.co.ndensan.reams.aa.aax</groupId>
             <artifactId>AaxDefinition</artifactId>
             <version>0.1.0-SNAPSHOT</version>

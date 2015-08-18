@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -19,23 +21,20 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChohyoBunruiKanriIdentifierTest extends DbzTestBase {
 
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SubGyomuCode サブ業務コード;
+    private static ReportId 帳票ID;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_主キー名2;
+        サブ業務コード = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_サブ業務コード;
+        帳票ID = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7068ChohyoBunruiKanriEntityGenerator.DEFAULT_帳票ID;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            ChohyoBunruiKanriIdentifier sut = new ChohyoBunruiKanriIdentifier(主キー名1, 主キー名2);
+            ChohyoBunruiKanriIdentifier sut = new ChohyoBunruiKanriIdentifier(サブ業務コード, 帳票ID);
             assertThat(sut, is(serializable()));
         }
     }

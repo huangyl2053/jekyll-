@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.jushochitokureirirekilist;
 
-import javax.faces.application.ViewExpiredException;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
@@ -13,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.JushochiTokureiRirekiListValidationHelper;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
@@ -175,15 +174,16 @@ public class JushochiTokureiRirekiList {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(
-                JushochiTokureiRirekiListValidationHelper.validate住所地特例(
-                        handler.createEntryData().get(),
-                        handler.getEditing被保険者台帳情報(),
-                        jutokuRirekiDiv.getTxtTekiyoDate(),
-                        jutokuRirekiDiv.getTxtKaijoDate(),
-                        jutokuRirekiDiv.getDgJutoku(),
-                        JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState()))
-        );
+        //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
+        //        pairs.add(
+        //                JushochiTokureiRirekiListValidationHelper.validate住所地特例(
+        //                        handler.createEntryData().get(),
+        //                        handler.getEditing被保険者台帳情報(),
+        //                        jutokuRirekiDiv.getTxtTekiyoDate(),
+        //                        jutokuRirekiDiv.getTxtKaijoDate(),
+        //                        jutokuRirekiDiv.getDgJutoku(),
+        //                        JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState()))
+        //);
 
         response.addValidationMessages(pairs);
         response.data = jutokuRirekiDiv;

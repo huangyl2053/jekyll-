@@ -9,27 +9,27 @@ import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoSofusakiI
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IAtesakiFinder;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.service.core.atesaki.IAtesakiFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link jp.co.ndensan.reams.db.dba.realservice.report.HihokenshashoPrinter}のテストです。
@@ -64,8 +64,8 @@ public class HihokenshashoPrinterBaseTest {
                     null, null
             );
 
-            HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
-            when(daicho.get識別コード()).thenReturn(shikibetsuCode);
+            DbT1001HihokenshaDaichoEntity daicho = mock(DbT1001HihokenshaDaichoEntity.class);
+            when(daicho.getShikibetsuCode()).thenReturn(shikibetsuCode);
 
             assertThat(sut.getKojin(daicho).get識別コード(), is(shikibetsuCode));
         }
@@ -93,12 +93,12 @@ public class HihokenshashoPrinterBaseTest {
                     createHihoDaichoFinder(dantaiCode, hihoNo)
             );
 
-            assertThat(sut.getDaichoModel(hihoNo).get被保険者番号(), is(hihoNo));
+            assertThat(sut.getDaichoModel(hihoNo).getHihokenshaNo(), is(hihoNo));
         }
 
         private HihokenshaDaichoFinder createHihoDaichoFinder(RString dantaiCode, HihokenshaNo hihoNo) {
-            HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
-            when(daicho.get被保険者番号()).thenReturn(hihoNo);
+            DbT1001HihokenshaDaichoEntity daicho = mock(DbT1001HihokenshaDaichoEntity.class);
+            when(daicho.getHihokenshaNo()).thenReturn(hihoNo);
             HihokenshaDaichoFinder hihoDaichoFinder = mock(HihokenshaDaichoFinder.class);
             when(hihoDaichoFinder.find直近被保険者台帳(hihoNo)).thenReturn(Optional.of(daicho));
             return hihoDaichoFinder;

@@ -15,14 +15,14 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5205NinteichosahyoTokki
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5205NinteichosahyoTokkijiko.shinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5205NinteichosahyoTokkijiko.tokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5205NinteichosahyoTokkijikoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -104,6 +104,6 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票（特記情報）エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

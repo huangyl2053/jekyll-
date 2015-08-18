@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -21,21 +23,19 @@ public class RojinHokenJukyushaJohoIdentifierTest extends DbzTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_識別コード;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            RojinHokenJukyushaJohoIdentifier sut = new RojinHokenJukyushaJohoIdentifier(主キー名1, 主キー名2);
+            RojinHokenJukyushaJohoIdentifier sut = new RojinHokenJukyushaJohoIdentifier(識別コード);
             assertThat(sut, is(serializable()));
         }
     }

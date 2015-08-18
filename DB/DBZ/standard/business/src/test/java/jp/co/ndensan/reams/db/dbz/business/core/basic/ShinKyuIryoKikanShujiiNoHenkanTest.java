@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
     private static DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity ShinKyuIryoKikanShujiiNoHenkanEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 市町村コード;
+    private static RString 旧医療機関番号;
+    private static RString 旧主治医番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.DEFAULT_主キー名2;
+        市町村コード = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.DEFAULT_市町村コード;
+        旧医療機関番号 = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.DEFAULT_旧医療機関番号;
+        旧主治医番号 = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.DEFAULT_旧主治医番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +48,36 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuShujiiNo(旧主治医番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShinKyuIryoKikanShujiiNoHenkan(null, 主キー名2);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShinKyuIryoKikanShujiiNoHenkan(null, 旧医療機関番号, 旧主治医番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShinKyuIryoKikanShujiiNoHenkan(主キー名1, null);
+        public void 旧医療機関番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShinKyuIryoKikanShujiiNoHenkan(市町村コード, null, 旧主治医番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT7030ShinKyuIryoKikanShujiiNoHenkanEntityにセットされている() {
-            sut = new ShinKyuIryoKikanShujiiNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ShinKyuIryoKikanShujiiNoHenkan(市町村コード, 旧医療機関番号, 旧主治医番号);
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.get旧主治医番号(), is(旧主治医番号));
         }
 
         @Test
         public void 指定したキーが保持するShinKyuIryoKikanShujiiNoHenkanIdentifierにセットされている() {
-            sut = new ShinKyuIryoKikanShujiiNoHenkan(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ShinKyuIryoKikanShujiiNoHenkan(市町村コード, 旧医療機関番号, 旧主治医番号);
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.identifier().get旧主治医番号(), is(旧主治医番号));
         }
     }
 
@@ -80,8 +88,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuShujiiNo(旧主治医番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +103,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
 
             sut = new ShinKyuIryoKikanShujiiNoHenkan(ShinKyuIryoKikanShujiiNoHenkanEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get旧医療機関番号(), is(旧医療機関番号));
+            assertThat(sut.identifier().get旧主治医番号(), is(旧主治医番号));
         }
     }
 
@@ -106,8 +116,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuShujiiNo(旧主治医番号);
 
             sut = new ShinKyuIryoKikanShujiiNoHenkan(ShinKyuIryoKikanShujiiNoHenkanEntity);
         }
@@ -160,8 +171,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuShujiiNo(旧主治医番号);
 
             sut = new ShinKyuIryoKikanShujiiNoHenkan(ShinKyuIryoKikanShujiiNoHenkanEntity);
         }
@@ -179,8 +191,9 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuShujiiNo(旧主治医番号);
 
             sut = new ShinKyuIryoKikanShujiiNoHenkan(ShinKyuIryoKikanShujiiNoHenkanEntity);
         }
@@ -199,8 +212,8 @@ public class ShinKyuIryoKikanShujiiNoHenkanTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShinKyuIryoKikanShujiiNoHenkanEntity = DbT7030ShinKyuIryoKikanShujiiNoHenkanEntityGenerator.createDbT7030ShinKyuIryoKikanShujiiNoHenkanEntity();
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名1);
-            ShinKyuIryoKikanShujiiNoHenkanEntity.setXXX(主キー名2);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setShichosonCode(市町村コード);
+            ShinKyuIryoKikanShujiiNoHenkanEntity.setKyuIryoKikanNo(旧医療機関番号);
 
         }
 

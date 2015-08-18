@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +31,22 @@ public class ShoriDateKanriTest extends DbzTestBase {
     private static DbT7022ShoriDateKanriEntity ShoriDateKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SubGyomuCode サブ業務コード;
+    private static LasdecCode 市町村コード;
+    private static RString 処理名;
+    private static RString 処理枝番;
+    private static FlexibleYear 年度;
+    private static RString 年度内連番;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_主キー名2;
+        サブ業務コード = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
+        市町村コード = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_市町村コード;
+        処理名 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理名;
+        処理枝番 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理枝番;
+        年度 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度;
+        年度内連番 = DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度内連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +56,45 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShoriDateKanri(null, 主キー名2);
+        public void サブ業務コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShoriDateKanri(null, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShoriDateKanri(主キー名1, null);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShoriDateKanri(サブ業務コード, null, 処理名, 処理枝番, 年度, 年度内連番);
         }
 
         @Test
         public void 指定したキーが保持するDbT7022ShoriDateKanriEntityにセットされている() {
-            sut = new ShoriDateKanri(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ShoriDateKanri(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+            assertThat(sut.getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get処理名(), is(処理名));
+            assertThat(sut.get処理枝番(), is(処理枝番));
+            assertThat(sut.get年度(), is(年度));
+            assertThat(sut.get年度内連番(), is(年度内連番));
         }
 
         @Test
         public void 指定したキーが保持するShoriDateKanriIdentifierにセットされている() {
-            sut = new ShoriDateKanri(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ShoriDateKanri(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get処理名(), is(処理名));
+            assertThat(sut.identifier().get処理枝番(), is(処理枝番));
+            assertThat(sut.identifier().get年度(), is(年度));
+            assertThat(sut.identifier().get年度内連番(), is(年度内連番));
         }
     }
 
@@ -80,8 +105,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +123,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
 
             sut = new ShoriDateKanri(ShoriDateKanriEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getサブ業務コード(), is(サブ業務コード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get処理名(), is(処理名));
+            assertThat(sut.identifier().get処理枝番(), is(処理枝番));
+            assertThat(sut.identifier().get年度(), is(年度));
+            assertThat(sut.identifier().get年度内連番(), is(年度内連番));
         }
     }
 
@@ -106,8 +139,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
 
             sut = new ShoriDateKanri(ShoriDateKanriEntity);
         }
@@ -180,8 +217,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
 
             sut = new ShoriDateKanri(ShoriDateKanriEntity);
         }
@@ -199,8 +240,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
 
             sut = new ShoriDateKanri(ShoriDateKanriEntity);
         }
@@ -219,8 +264,12 @@ public class ShoriDateKanriTest extends DbzTestBase {
         @Before
         public void setUp() {
             ShoriDateKanriEntity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            ShoriDateKanriEntity.setXXX(主キー名1);
-            ShoriDateKanriEntity.setXXX(主キー名2);
+            ShoriDateKanriEntity.setSubGyomuCode(サブ業務コード);
+            ShoriDateKanriEntity.setShichosonCode(市町村コード);
+            ShoriDateKanriEntity.setShoriName(処理名);
+            ShoriDateKanriEntity.setShoriEdaban(処理枝番);
+            ShoriDateKanriEntity.setNendo(年度);
+            ShoriDateKanriEntity.setNendoNaiRenban(年度内連番);
 
         }
 

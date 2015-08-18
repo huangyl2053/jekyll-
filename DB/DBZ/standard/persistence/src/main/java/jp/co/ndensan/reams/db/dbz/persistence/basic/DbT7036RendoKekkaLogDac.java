@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7036RendoKekkaLog;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7036RendoKekkaLog.shoriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7036RendoKekkaLogEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

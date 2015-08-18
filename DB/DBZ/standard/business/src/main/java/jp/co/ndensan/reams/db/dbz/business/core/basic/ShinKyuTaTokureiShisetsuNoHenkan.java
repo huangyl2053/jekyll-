@@ -9,8 +9,8 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -47,7 +47,8 @@ public class ShinKyuTaTokureiShisetsuNoHenkan extends ParentModelBase<ShinKyuTaT
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity}より{@link ShinKyuTaTokureiShisetsuNoHenkan}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity}
+     * @param entity
+     * DBより取得した{@link DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity}
      */
     public ShinKyuTaTokureiShisetsuNoHenkan(DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("新旧他特例施設番号変換テーブル"));
@@ -129,7 +130,8 @@ public class ShinKyuTaTokureiShisetsuNoHenkan extends ParentModelBase<ShinKyuTaT
     /**
      * 新旧他特例施設番号変換テーブルの識別子{@link ShinKyuTaTokureiShisetsuNoHenkanIdentifier}を返します。
      *
-     * @return 新旧他特例施設番号変換テーブルの識別子{@link ShinKyuTaTokureiShisetsuNoHenkanIdentifier}
+     * @return
+     * 新旧他特例施設番号変換テーブルの識別子{@link ShinKyuTaTokureiShisetsuNoHenkanIdentifier}
      */
     @Override
     public ShinKyuTaTokureiShisetsuNoHenkanIdentifier identifier() {
@@ -180,9 +182,14 @@ public class ShinKyuTaTokureiShisetsuNoHenkan extends ParentModelBase<ShinKyuTaT
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity entity;
         private final ShinKyuTaTokureiShisetsuNoHenkanIdentifier id;
 

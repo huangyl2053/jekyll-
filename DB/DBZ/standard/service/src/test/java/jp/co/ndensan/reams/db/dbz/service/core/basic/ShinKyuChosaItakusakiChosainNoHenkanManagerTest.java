@@ -10,8 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinKyuChosaItakusakiChosainNoHenkan;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7029ShinKyuChosaItakusakiChosainNoHenkanDac;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7029ShinKyuChosaItakusakiChosainNoHenkanDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +42,34 @@ public class ShinKyuChosaItakusakiChosainNoHenkanManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get新旧調査委託先調査員番号変換テーブル extends FdaTestBase {
+    public static class get新旧調査委託先調査員番号変換テーブル extends DbzTestBase {
+
+        LasdecCode 市町村コード = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_市町村コード;
+        RString 旧調査委託先番号 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_旧調査委託先番号;
+        RString 旧調査員番号 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_旧調査員番号;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー2;
-            sut.get新旧調査委託先調査員番号変換テーブル(null, 主キー2);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get新旧調査委託先調査員番号変換テーブル(null, 旧調査委託先番号, 旧調査員番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー1;
-            sut.get新旧調査委託先調査員番号変換テーブル(主キー1, null);
+        public void 引数の旧調査委託先番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get新旧調査委託先調査員番号変換テーブル(市町村コード, null, 旧調査員番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の旧調査員番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get新旧調査委託先調査員番号変換テーブル(市町村コード, 旧調査委託先番号, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー2;
-            ShinKyuChosaItakusakiChosainNoHenkan result = sut.get新旧調査委託先調査員番号変換テーブル(主キー1, 主キー2);
+            ShinKyuChosaItakusakiChosainNoHenkan result = sut.get新旧調査委託先調査員番号変換テーブル(市町村コード, 旧調査委託先番号, 旧調査員番号);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +77,16 @@ public class ShinKyuChosaItakusakiChosainNoHenkanManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity entity = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.createDbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー2;
-            ShinKyuChosaItakusakiChosainNoHenkan result = sut.get新旧調査委託先調査員番号変換テーブル(主キー1, 主キー2);
+            ShinKyuChosaItakusakiChosainNoHenkan result = sut.get新旧調査委託先調査員番号変換テーブル(市町村コード, 旧調査委託先番号, 旧調査員番号);
 
-            assertThat(result.get主キー1().value(), is(DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get市町村コード().value(), is(DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get新旧調査委託先調査員番号変換テーブル一覧 extends FdaTestBase {
+    public static class get新旧調査委託先調査員番号変換テーブル一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +105,11 @@ public class ShinKyuChosaItakusakiChosainNoHenkanManagerTest {
             List<ShinKyuChosaItakusakiChosainNoHenkan> result = sut.get新旧調査委託先調査員番号変換テーブル一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save新旧調査委託先調査員番号変換テーブル extends XxxTestBase {
+    public static class save新旧調査委託先調査員番号変換テーブル extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +138,7 @@ public class ShinKyuChosaItakusakiChosainNoHenkanManagerTest {
             DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity entity = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.createDbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity();
             entity.initializeMd5();
             ShinKyuChosaItakusakiChosainNoHenkan 新旧調査委託先調査員番号変換テーブル = new ShinKyuChosaItakusakiChosainNoHenkan(entity);
-            新旧調査委託先調査員番号変換テーブル = 新旧調査委託先調査員番号変換テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            新旧調査委託先調査員番号変換テーブル = 新旧調査委託先調査員番号変換テーブル.createBuilderForEdit().set旧調査委託先番号(new RString("旧調査委託先番号を変更")).build();
 
             assertThat(sut.save新旧調査委託先調査員番号変換テーブル(新旧調査委託先調査員番号変換テーブル), is(true));
         }
@@ -145,7 +150,7 @@ public class ShinKyuChosaItakusakiChosainNoHenkanManagerTest {
             DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity entity = DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator.createDbT7029ShinKyuChosaItakusakiChosainNoHenkanEntity();
             entity.initializeMd5();
             ShinKyuChosaItakusakiChosainNoHenkan 新旧調査委託先調査員番号変換テーブル = new ShinKyuChosaItakusakiChosainNoHenkan(entity);
-            新旧調査委託先調査員番号変換テーブル = 新旧調査委託先調査員番号変換テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            新旧調査委託先調査員番号変換テーブル = 新旧調査委託先調査員番号変換テーブル.createBuilderForEdit().set旧調査委託先番号(new RString("旧調査委託先番号を変更")).build();
 
             assertThat(sut.save新旧調査委託先調査員番号変換テーブル(新旧調査委託先調査員番号変換テーブル), is(false));
         }

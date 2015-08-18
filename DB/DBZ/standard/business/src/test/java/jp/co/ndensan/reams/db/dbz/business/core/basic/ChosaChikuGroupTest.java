@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5225ChosaChikuGroupEntity;
-import jp.co.ndensan.reams.db.dbz.entity.dbasic.helper.DbT5225ChosaChikuGroupEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5225ChosaChikuGroupEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -22,17 +25,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChosaChikuGroupTest extends DbzTestBase {
 
-    private static DbT5225ChosaChikuGroupEntity ChosaChikuGroupEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static DbT5225ChosaChikuGroupEntity chosaChikuGroupEntity;
+    private static Code 調査地区グループコード;
+    private static LasdecCode 市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_主キー名2;
+        調査地区グループコード = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード;
+        市町村コード = jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -41,32 +41,31 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
         }
 
-//TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChosaChikuGroup(null, 主キー名2);
+            sut = new ChosaChikuGroup(null, 市町村コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChosaChikuGroup(主キー名1, null);
+            sut = new ChosaChikuGroup(調査地区グループコード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5225ChosaChikuGroupEntityにセットされている() {
-            sut = new ChosaChikuGroup(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ChosaChikuGroup(調査地区グループコード, 市町村コード);
+            assertThat(sut.get調査地区グループコード(), is(調査地区グループコード));
+            assertThat(sut.get市町村コード(), is(市町村コード));
         }
 
         @Test
         public void 指定したキーが保持するChosaChikuGroupIdentifierにセットされている() {
-            sut = new ChosaChikuGroup(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ChosaChikuGroup(調査地区グループコード, 市町村コード);
+            assertThat(sut.identifier().get調査地区グループコード(), is(調査地区グループコード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -76,7 +75,7 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
         }
 
         @Test(expected = NullPointerException.class)
@@ -87,10 +86,10 @@ public class ChosaChikuGroupTest extends DbzTestBase {
         @Test
         public void 指定したDbT5225ChosaChikuGroupEntityのキー情報を識別子が持つ() {
 
-            sut = new ChosaChikuGroup(ChosaChikuGroupEntity);
+            sut = new ChosaChikuGroup(chosaChikuGroupEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get調査地区グループコード(), is(調査地区グループコード));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
         }
     }
 
@@ -100,34 +99,34 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
 
-            sut = new ChosaChikuGroup(ChosaChikuGroupEntity);
+            sut = new ChosaChikuGroup(chosaChikuGroupEntity);
         }
 
         @Test
         public void get調査地区グループコードは_entityが持つ調査地区グループコードを返す() {
-            assertThat(sut.get調査地区グループコード(), is(ChosaChikuGroupEntity.getChosaChikuGroupCode()));
+            assertThat(sut.get調査地区グループコード(), is(chosaChikuGroupEntity.getChosaChikuGroupCode()));
         }
 
         @Test
         public void get調査地区コードは_entityが持つ調査地区コードを返す() {
-            assertThat(sut.get調査地区コード(), is(ChosaChikuGroupEntity.getChosaChikuCode()));
+            assertThat(sut.get調査地区コード(), is(chosaChikuGroupEntity.getChosaChikuCode()));
         }
 
         @Test
         public void get市町村コードは_entityが持つ市町村コードを返す() {
-            assertThat(sut.get市町村コード(), is(ChosaChikuGroupEntity.getShichosonCode()));
+            assertThat(sut.get市町村コード(), is(chosaChikuGroupEntity.getShichosonCode()));
         }
 
         @Test
         public void get調査地区グループ名称は_entityが持つ調査地区グループ名称を返す() {
-            assertThat(sut.get調査地区グループ名称(), is(ChosaChikuGroupEntity.getChosaChikuGroupName()));
+            assertThat(sut.get調査地区グループ名称(), is(chosaChikuGroupEntity.getChosaChikuGroupName()));
         }
 
         @Test
         public void get優先番号は_entityが持つ優先番号を返す() {
-            assertThat(sut.get優先番号(), is(ChosaChikuGroupEntity.getYusenNo()));
+            assertThat(sut.get優先番号(), is(chosaChikuGroupEntity.getYusenNo()));
         }
     }
 
@@ -137,14 +136,14 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
 
-            sut = new ChosaChikuGroup(ChosaChikuGroupEntity);
+            sut = new ChosaChikuGroup(chosaChikuGroupEntity);
         }
 
         @Test
         public void toEntityはコンストラクタで設定したentityと異なるインスタンスを返す() {
-            assertThat(sut.toEntity(), not(ChosaChikuGroupEntity));
+            assertThat(sut.toEntity(), not(chosaChikuGroupEntity));
         }
     }
 
@@ -154,9 +153,9 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
 
-            sut = new ChosaChikuGroup(ChosaChikuGroupEntity);
+            sut = new ChosaChikuGroup(chosaChikuGroupEntity);
         }
 
         @Test
@@ -172,7 +171,7 @@ public class ChosaChikuGroupTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUpClass() {
-            ChosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
+            chosaChikuGroupEntity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
 
         }
 
@@ -207,8 +206,8 @@ public class ChosaChikuGroupTest extends DbzTestBase {
     private static class TestSupport {
 
         public static ChosaChikuGroup setStateChosaChikuGroup(EntityDataState parentState) {
-            ChosaChikuGroupEntity.setState(parentState);
-            return new ChosaChikuGroup(ChosaChikuGroupEntity);
+            chosaChikuGroupEntity.setState(parentState);
+            return new ChosaChikuGroup(chosaChikuGroupEntity);
         }
     }
 }

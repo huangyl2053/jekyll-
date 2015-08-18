@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.RendoPattern;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7035RendoPatternEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7035RendoPatternDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +43,31 @@ public class RendoPatternManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get連動パターン extends FdaTestBase {
+    public static class get連動パターン extends DbzTestBase {
+
+        LasdecCode 送信元市町村コード = DbT7035RendoPatternEntityGenerator.DEFAULT_送信元市町村コード;
+        LasdecCode 送信先市町村コード = DbT7035RendoPatternEntityGenerator.DEFAULT_送信先市町村コード;
+        RString 種別 = DbT7035RendoPatternEntityGenerator.DEFAULT_種別;
+        FlexibleDate 有効開始年月日 = DbT7035RendoPatternEntityGenerator.DEFAULT_有効開始年月日;
+        FlexibleDate 有効終了年月日 = DbT7035RendoPatternEntityGenerator.DEFAULT_有効終了年月日;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー2;
-            sut.get連動パターン(null, 主キー2);
+        public void 引数の送信元市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get連動パターン(null, 送信先市町村コード, 種別, 有効開始年月日, 有効終了年月日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー1;
-            sut.get連動パターン(主キー1, null);
+        public void 引数の送信先市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.get連動パターン(送信元市町村コード, null, 種別, 有効開始年月日, 有効終了年月日);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(LasdecCode.class), any(RString.class), any(FlexibleDate.class), any(FlexibleDate.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー2;
-            RendoPattern result = sut.get連動パターン(主キー1, 主キー2);
+            RendoPattern result = sut.get連動パターン(送信元市町村コード, 送信先市町村コード, 種別, 有効開始年月日, 有効終了年月日);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +75,16 @@ public class RendoPatternManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7035RendoPatternEntity entity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(LasdecCode.class), any(RString.class), any(FlexibleDate.class), any(FlexibleDate.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7035RendoPatternEntityGenerator.DEFAULT_主キー2;
-            RendoPattern result = sut.get連動パターン(主キー1, 主キー2);
+            RendoPattern result = sut.get連動パターン(送信元市町村コード, 送信先市町村コード, 種別, 有効開始年月日, 有効終了年月日);
 
-            assertThat(result.get主キー1().value(), is(DbT7035RendoPatternEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get送信元市町村コード().value(), is(DbT7035RendoPatternEntityGenerator.DEFAULT_送信元市町村コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get連動パターン一覧 extends FdaTestBase {
+    public static class get連動パターン一覧 extends DbzTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +103,11 @@ public class RendoPatternManagerTest {
             List<RendoPattern> result = sut.get連動パターン一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7035RendoPatternEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get送信元市町村コード().value(), is(DbT7035RendoPatternEntityGenerator.DEFAULT_送信元市町村コード.value()));
         }
     }
 
-    public static class save連動パターン extends XxxTestBase {
+    public static class save連動パターン extends DbzTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +136,7 @@ public class RendoPatternManagerTest {
             DbT7035RendoPatternEntity entity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
             entity.initializeMd5();
             RendoPattern 連動パターン = new RendoPattern(entity);
-            連動パターン = 連動パターン.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連動パターン = 連動パターン.createBuilderForEdit().set種別(new RString("種別を変更")).build();
 
             assertThat(sut.save連動パターン(連動パターン), is(true));
         }
@@ -145,7 +148,7 @@ public class RendoPatternManagerTest {
             DbT7035RendoPatternEntity entity = DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity();
             entity.initializeMd5();
             RendoPattern 連動パターン = new RendoPattern(entity);
-            連動パターン = 連動パターン.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連動パターン = 連動パターン.createBuilderForEdit().set種別(new RString("種別を変更")).build();
 
             assertThat(sut.save連動パターン(連動パターン), is(false));
         }

@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -125,7 +125,8 @@ public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<Ninteichosah
     /**
      * 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}を返します。
      *
-     * @return 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
+     * @return
+     * 認定調査票_概況調査_サービスの状況フラグの識別子{@link NinteichosahyoServiceJokyoFlagIdentifier}
      */
     @Override
     public NinteichosahyoServiceJokyoFlagIdentifier identifier() {

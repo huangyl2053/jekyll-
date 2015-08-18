@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
  * 主治医意見書作成依頼情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class ShujiiIkenshoIraiJohoIdentifier implements Serializable {
 
     private final ShinseishoKanriNo 申請書管理番号;

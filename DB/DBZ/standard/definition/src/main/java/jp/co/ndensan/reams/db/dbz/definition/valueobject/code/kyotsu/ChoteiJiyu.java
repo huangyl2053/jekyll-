@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -14,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
@@ -38,7 +38,7 @@ public class ChoteiJiyu implements ICodeValueObject, IDbColumnMappable, IValueOb
         SUB_GYOMU_CODE = SubGyomuCode.DBZ介護共通;
         CODE_SHUBETSU = DBZCodeShubetsu.調定事由.getCodeShubetsu();
     }
-    
+
     /**
      * コンストラクタです。
      *

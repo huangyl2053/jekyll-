@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.GeninShikkan;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5300GeninShikkanEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5300GeninShikkanDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -50,7 +49,7 @@ public class GeninShikkanManager {
     @Transaction
     public GeninShikkan get原因疾患(
             ShinseishoKanriNo 申請書管理番号,
-            Decimal 連番) {
+            int 連番) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 

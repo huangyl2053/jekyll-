@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +29,16 @@ public class ShujiiJohoTest extends DbzTestBase {
     private static DbT5912ShujiiJohoEntity ShujiiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 市町村コード;
+    private static ShujiiIryokikanCode 主治医医療機関コード;
+    private static ShujiiCode 主治医コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主キー名2;
+        市町村コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_市町村コード;
+        主治医医療機関コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+        主治医コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +52,34 @@ public class ShujiiJohoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShujiiJoho(null, 主キー名2);
+        public void 市町村コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShujiiJoho(null, 主治医医療機関コード, 主治医コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShujiiJoho(主キー名1, null);
+        public void 主治医医療機関コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShujiiJoho(市町村コード, null, 主治医コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 主治医コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new ShujiiJoho(市町村コード, 主治医医療機関コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5912ShujiiJohoEntityにセットされている() {
-            sut = new ShujiiJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ShujiiJoho(市町村コード, 主治医医療機関コード, 主治医コード);
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.get主治医コード(), is(主治医コード));
         }
 
         @Test
         public void 指定したキーが保持するShujiiJohoIdentifierにセットされている() {
-            sut = new ShujiiJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ShujiiJoho(市町村コード, 主治医医療機関コード, 主治医コード);
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get主治医コード(), is(主治医コード));
         }
     }
 
@@ -89,8 +102,9 @@ public class ShujiiJohoTest extends DbzTestBase {
 
             sut = new ShujiiJoho(ShujiiJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get主治医医療機関コード(), is(主治医医療機関コード));
+            assertThat(sut.identifier().get主治医コード(), is(主治医コード));
         }
     }
 

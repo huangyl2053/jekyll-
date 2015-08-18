@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

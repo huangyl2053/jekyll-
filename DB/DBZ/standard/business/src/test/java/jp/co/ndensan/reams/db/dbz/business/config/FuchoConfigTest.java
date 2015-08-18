@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysFucho;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -155,8 +155,8 @@ public class FuchoConfigTest extends DbzTestBase {
         月の期14 = new RString("14");
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期1), any(RDate.class))).thenReturn(月の期1);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期2), any(RDate.class))).thenReturn(月の期2);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期3), any(RDate.class))).thenReturn(月の期3);

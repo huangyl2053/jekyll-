@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka;
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

@@ -618,4 +618,8 @@ public class FukaBuilder {
     public Fuka build() {
         return new Fuka(entity, id);
     }
+
+    public FukaBuilder setKibetsu(Kibetsu createKibetsu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

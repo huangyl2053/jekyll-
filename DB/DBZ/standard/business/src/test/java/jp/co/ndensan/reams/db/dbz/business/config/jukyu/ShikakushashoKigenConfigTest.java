@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.business.config.jukyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +36,8 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
         有効期限初期表示 = YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較;
     }
 
-    public static IUrBusinessConfig config() {
-        IUrBusinessConfig config = mock(IUrBusinessConfig.class);
+    public static IBusinessConfig config() {
+        IBusinessConfig config = mock(IBusinessConfig.class);
         when(config.get(
                 eq(ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値),
                 any(RDate.class),

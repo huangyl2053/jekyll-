@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 住所地特例で名寄せの参考情報として使用する、住民情報を表すモデルです。

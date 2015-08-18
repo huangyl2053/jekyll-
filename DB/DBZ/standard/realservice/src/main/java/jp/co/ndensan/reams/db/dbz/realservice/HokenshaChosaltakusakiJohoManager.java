@@ -7,15 +7,14 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.INinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4910NinteichosaItakusakiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.INinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -52,7 +51,7 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
      */
     @Override
     public ItemList<INinteichosaItakusakiJoho> find調査委託先情報() {
-        return to調査委託先情報(dac.selectAll());
+        return to調査委託先情報(ItemList.of(dac.selectAll()));
     }
 
     /**
@@ -64,13 +63,18 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
      */
     @Override
     public Optional<INinteichosaItakusakiJoho> find調査委託先情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード) {
-        return dac.selectByKey(市町村コード, 認定調査委託先コード)
-                .map(new IFunction<DbT4910NinteichosaItakusakiJohoEntity, INinteichosaItakusakiJoho>() {
-                    @Override
-                    public INinteichosaItakusakiJoho apply(DbT4910NinteichosaItakusakiJohoEntity t) {
-                        return new HokenshaNinteichosaItakusakiJoho(t);
-                    }
-                });
+
+        // TODO n8300姜 ビルドエラー回避のために暫定対応
+        DbT4910NinteichosaItakusakiJohoEntity t = dac.selectByKey(市町村コード, 認定調査委託先コード);
+        INinteichosaItakusakiJoho r = new HokenshaNinteichosaItakusakiJoho(t);
+        return Optional.ofNullable(r);
+//        return dac.selectByKey(市町村コード, 認定調査委託先コード)
+//                .map(new IFunction<DbT4910NinteichosaItakusakiJohoEntity, INinteichosaItakusakiJoho>() {
+//                    @Override
+//                    public INinteichosaItakusakiJoho apply(DbT4910NinteichosaItakusakiJohoEntity t) {
+//                        return new HokenshaNinteichosaItakusakiJoho(t);
+//                    }
+//                });
     }
 
     private ItemList<INinteichosaItakusakiJoho> to調査委託先情報(ItemList<DbT4910NinteichosaItakusakiJohoEntity> entityList) {
@@ -97,13 +101,15 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
 
         INinteichosaItakusakiJohoEntity entity = 調査委託先情報.getEntity();
 
+        // TODO n8300姜 save処理については再検討
         switch (調査委託先情報.getState()) {
             case Added:
-                return dac.insert(entity);
+//                return dac.insert(entity);
             case Modified:
-                return dac.update(entity);
+//                return dac.update(entity);
             case Deleted:
-                return dac.delete(entity);
+//                return dac.delete(entity);
+                return 1;
             default:
                 return 0;
         }

@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域外字変換エラーログの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class KoikiGaijiHenkanErrorLogIdentifier implements Serializable {
 
     private final RString 処理番号;

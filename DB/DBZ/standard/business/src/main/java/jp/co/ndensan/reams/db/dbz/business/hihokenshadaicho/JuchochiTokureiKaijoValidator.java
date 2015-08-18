@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
  * 被保険者台帳に対して、最新の住所地特例解除登録を行う際に必要なバリデーションです。
@@ -48,13 +48,13 @@ public final class JuchochiTokureiKaijoValidator {
          * @param hihokenshaDaicho 被保険者台帳情報
          * @return バリデーションクラスを扱うインターフェース
          */
-        IValidatable setNewestHihokenshaDaicho(HihokenshaDaichoModel hihokenshaDaicho);
+        IValidatable setNewestHihokenshaDaicho(HihokenshaDaicho hihokenshaDaicho);
     }
 
     private static class _JuchochiTokureiKaijoTorokuValidator implements IValidatable, INewestHihokenshaDaichoSetter {
 
         private final FlexibleDate kaijoDate;
-        private HihokenshaDaichoModel newestHihokenshaDaicho;
+        private HihokenshaDaicho newestHihokenshaDaicho;
 
         /**
          * コンストラクタです。
@@ -67,7 +67,7 @@ public final class JuchochiTokureiKaijoValidator {
         }
 
         @Override
-        public IValidatable setNewestHihokenshaDaicho(HihokenshaDaichoModel newestHihokenshaDaicho) {
+        public IValidatable setNewestHihokenshaDaicho(HihokenshaDaicho newestHihokenshaDaicho) {
             requireNonNull(newestHihokenshaDaicho, UrSystemErrorMessages.値がnull.getReplacedMessage("最新の被保険者台帳Model"));
             this.newestHihokenshaDaicho = newestHihokenshaDaicho;
             return this;

@@ -63,8 +63,8 @@ public class BemmeishaJohoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の弁明者枝番は_設定した値と同じ弁明者枝番を返す() {
-            sut.set弁明者枝番(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番);
-            assertThat(sut.get弁明者枝番(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番));
+            sut.set弁明者枝番(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番.intValue());
+            assertThat(sut.get弁明者枝番(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者枝番.intValue()));
         }
 
         @Test

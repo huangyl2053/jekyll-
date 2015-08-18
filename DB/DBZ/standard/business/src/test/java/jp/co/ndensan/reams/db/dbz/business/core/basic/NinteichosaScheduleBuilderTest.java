@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,25 @@ public class NinteichosaScheduleBuilderTest extends DbzTestBase {
     private static DbT5221NinteichosaScheduleEntity NinteichosaScheduleEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleDate 認定調査予定年月日;
+    private static RString 認定調査予定開始時間;
+    private static RString 認定調査予定終了時間;
+    private static Code 認定調査時間枠;
+    private static RString 認定調査委託先コード;
+    private static RString 認定調査員コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_主キー名2;
+        認定調査予定年月日 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定年月日;
+        認定調査予定開始時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定開始時間;
+        認定調査予定終了時間 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査予定終了時間;
+        認定調査時間枠 = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査時間枠;
+        認定調査委託先コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査委託先コード;
+        認定調査員コード = DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_認定調査員コード;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static NinteichosaScheduleBuilder sut;
         private static NinteichosaSchedule business;

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 被保険者証を印字するために必要な情報を持つModelクラスです。
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
  */
 public class HihokenshashoModel implements Serializable {
 
-    private final HihokenshaDaichoModel hihokenshaDaicho;
+    private final DbT1001HihokenshaDaichoEntity hihokenshaDaicho;
     private final IKojin kojinJoho;
     private final HihokenshaShikakuHakkoModel shikakuHakko;
     private final HihokenshashoPrintPosition position;
@@ -33,7 +33,7 @@ public class HihokenshashoModel implements Serializable {
      * @param position 印字位置
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public HihokenshashoModel(HihokenshaDaichoModel hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko,
+    public HihokenshashoModel(DbT1001HihokenshaDaichoEntity hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko,
             HihokenshashoPrintPosition position) throws NullPointerException {
         requireNonNull(hihokenshaDaicho, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者台帳情報", getClass().getName()));
@@ -57,7 +57,7 @@ public class HihokenshashoModel implements Serializable {
      * @param kojinJoho 被保険者の個人情報
      * @param shikakuHakko 交付証情報
      */
-    public HihokenshashoModel(HihokenshaDaichoModel hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko) {
+    public HihokenshashoModel(DbT1001HihokenshaDaichoEntity hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko) {
         this(hihokenshaDaicho, kojinJoho, shikakuHakko, HihokenshashoPrintPosition.指定無し);
     }
 
@@ -66,7 +66,7 @@ public class HihokenshashoModel implements Serializable {
      *
      * @return 被保険者台帳情報
      */
-    public HihokenshaDaichoModel getHihokenshaDaicho() {
+    public DbT1001HihokenshaDaichoEntity getHihokenshaDaicho() {
         return hihokenshaDaicho;
     }
 

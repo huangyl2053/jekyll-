@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 削除事由の列挙型です。

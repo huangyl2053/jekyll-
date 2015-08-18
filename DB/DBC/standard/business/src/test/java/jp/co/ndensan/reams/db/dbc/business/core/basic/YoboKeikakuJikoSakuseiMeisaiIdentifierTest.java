@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
 import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

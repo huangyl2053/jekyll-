@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5205NinteichosahyoTokkijikoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +29,22 @@ public class NinteichosahyoTokkijikoTest extends DbzTestBase {
     private static DbT5205NinteichosahyoTokkijikoEntity NinteichosahyoTokkijikoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static int 認定調査依頼履歴番号;
+    private static RString 認定調査特記事項番号;
+    private static RString 認定調査特記事項連番;
+    private static RString 特記事項テキスト_イメージ区分;
+    private static Code 原本マスク区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_申請書管理番号;
+        認定調査依頼履歴番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+        認定調査特記事項番号 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査特記事項番号;
+        認定調査特記事項連番 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_認定調査特記事項連番;
+        特記事項テキスト_イメージ区分 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_特記事項テキスト_イメージ区分;
+        原本マスク区分 = DbT5205NinteichosahyoTokkijikoEntityGenerator.DEFAULT_原本マスク区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -46,27 +58,50 @@ public class NinteichosahyoTokkijikoTest extends DbzTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoTokkijiko(null, 主キー名2);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoTokkijiko(null, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoTokkijiko(主キー名1, null);
+        public void 認定調査特記事項番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, null, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 認定調査特記事項連番がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, null, 特記事項テキスト_イメージ区分, 原本マスク区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 特記事項テキスト_イメージ区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, null, 原本マスク区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 原本マスク区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5205NinteichosahyoTokkijikoEntityにセットされている() {
-            sut = new NinteichosahyoTokkijiko(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.get原本マスク区分(), is(原本マスク区分));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosahyoTokkijikoIdentifierにセットされている() {
-            sut = new NinteichosahyoTokkijiko(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteichosahyoTokkijiko(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号, 認定調査特記事項連番, 特記事項テキスト_イメージ区分, 原本マスク区分);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.identifier().get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.identifier().get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 
@@ -89,8 +124,12 @@ public class NinteichosahyoTokkijikoTest extends DbzTestBase {
 
             sut = new NinteichosahyoTokkijiko(NinteichosahyoTokkijikoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get認定調査特記事項番号(), is(認定調査特記事項番号));
+            assertThat(sut.identifier().get認定調査特記事項連番(), is(認定調査特記事項連番));
+            assertThat(sut.identifier().get特記事項テキスト_イメージ区分(), is(特記事項テキスト_イメージ区分));
+            assertThat(sut.identifier().get原本マスク区分(), is(原本マスク区分));
         }
     }
 

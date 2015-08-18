@@ -3,33 +3,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.IAtenaShokaiSimpleDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
+//import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * JushochiTokureiRirekiList のクラスファイル
@@ -582,15 +572,16 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public IItemList<HihokenshaDaichoModel> get被保険者台帳情報() {
+    public IItemList<HihokenshaDaicho> get被保険者台帳情報() {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
-        return handler.getUpdate被保険者台帳情報();
+        return ItemList.empty();
+//        return handler.getUpdate被保険者台帳情報();
     }
 
     @Override
-    public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
+    public void set被保険者台帳情報(IItemList<HihokenshaDaicho> 被保険者台帳List) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
-        handler.set被保険者台帳情報(被保険者台帳List);
+//        handler.set被保険者台帳情報(被保険者台帳List);
         handler.mapping住所地特例履歴();
     }
 

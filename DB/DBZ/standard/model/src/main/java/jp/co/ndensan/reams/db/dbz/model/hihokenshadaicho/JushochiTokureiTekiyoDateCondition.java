@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 住所地特例の適用日を条件として、{@link jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList}から

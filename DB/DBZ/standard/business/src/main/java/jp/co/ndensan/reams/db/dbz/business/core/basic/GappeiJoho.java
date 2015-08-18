@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -157,7 +157,8 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 合併情報のみを変更対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 合併情報のみを変更対象とします。<br/>
+     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GappeiJoho}
      */
@@ -172,7 +173,8 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 保持する合併情報を削除対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する合併情報を削除対象とします。<br/>
+     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link GappeiJoho}
      */
@@ -198,9 +200,14 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT7055GappeiJohoEntity entity;
         private final GappeiJohoIdentifier id;
 

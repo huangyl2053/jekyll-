@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -43,22 +42,21 @@ public class NinteiKekkaJohoManager {
      * 検索条件に合致する要介護認定結果情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 処理日時 処理日時
-     * @return NinteiKekkaJohoModel
+     * @return DbT4102NinteiKekkaJohoEntity
      */
     @Transaction
-    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時) {
+    public Optional<DbT4102NinteiKekkaJohoEntity> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号) {
 
-        return dac.selectByKey(申請書管理番号, 処理日時);
+        return dac.selectByKey(申請書管理番号);
     }
 
     /**
      * 要介護認定結果情報の一覧を返します。
      *
-     * @return IItemList<NinteiKekkaJohoModel>
+     * @return IItemList<DbT4102NinteiKekkaJohoEntity>
      */
     @Transaction
-    public IItemList<NinteiKekkaJohoModel> get要介護認定結果情報一覧() {
+    public IItemList<DbT4102NinteiKekkaJohoEntity> get要介護認定結果情報一覧() {
         return dac.selectAll();
     }
 
@@ -66,21 +64,21 @@ public class NinteiKekkaJohoManager {
      * 申請書管理番号に合致する要介護認定結果情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @return NinteiKekkaJohoModel
+     * @return DbT4102NinteiKekkaJohoEntity
      */
     @Transaction
-    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号) {
+    public Optional<DbT4102NinteiKekkaJohoEntity> get要介護認定結果情報_直近(ShinseishoKanriNo 申請書管理番号) {
         return dac.select直近要介護認定結果情報By申請書管理番号(申請書管理番号);
     }
 
     /**
      * 要介護認定結果情報を登録します。
      *
-     * @param 要介護認定結果情報モデル NinteiKekkaJohoModel
+     * @param 要介護認定結果情報モデル DbT4102NinteiKekkaJohoEntity
      * @return 登録件数
      */
     @Transaction
-    public int save要介護認定結果情報(NinteiKekkaJohoModel 要介護認定結果情報モデル) {
+    public int save要介護認定結果情報(DbT4102NinteiKekkaJohoEntity 要介護認定結果情報モデル) {
 
         if (要介護認定結果情報モデル.getState() == EntityDataState.Added) {
             return dac.insert(要介護認定結果情報モデル);

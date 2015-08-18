@@ -22,11 +22,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_終了分記載区分;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 支払方法変更コンフィグを取得するためのクラスです。
@@ -41,7 +41,7 @@ public class ShiharaiHohoHenkoConfig {
      * コンストラクタです。
      */
     public ShiharaiHohoHenkoConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -49,11 +49,11 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public ShiharaiHohoHenkoConfig(IUrBusinessConfig businessConfig) {
+    public ShiharaiHohoHenkoConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysShiharaiHohoHenko, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysShiharaiHohoHenko, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysShiharaiHohoHenko, RString> map = new EnumMap<>(ConfigKeysShiharaiHohoHenko.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShiharaiHohoHenko target : ConfigKeysShiharaiHohoHenko.values()) {

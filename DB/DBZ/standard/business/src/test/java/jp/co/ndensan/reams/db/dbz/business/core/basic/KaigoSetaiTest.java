@@ -4,9 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7014KaigoSetaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +32,26 @@ public class KaigoSetaiTest extends DbzTestBase {
     private static DbT7014KaigoSetaiEntity KaigoSetaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 管理識別区分;
+    private static FlexibleDate 世帯把握基準年月日;
+    private static int 世帯員管理連番;
+    private static ShikibetsuCode 世帯員識別コード;
+    private static RString 本人区分;
+    private static FlexibleYear 課税年度;
+    private static RString 課税非課税区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_被保険者番号;
+        管理識別区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_管理識別区分;
+        世帯把握基準年月日 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯把握基準年月日;
+        世帯員管理連番 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員管理連番;
+        世帯員識別コード = DbT7014KaigoSetaiEntityGenerator.DEFAULT_世帯員識別コード;
+        本人区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_本人区分;
+        課税年度 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税年度;
+        課税非課税区分 = DbT7014KaigoSetaiEntityGenerator.DEFAULT_課税非課税区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +61,64 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(null, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoSetai(主キー名1, null);
+        public void 管理識別区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, null, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 世帯把握基準年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, null, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 世帯員識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, null, 本人区分, 課税年度, 課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 本人区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, null, 課税年度, 課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 課税年度がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, null, 課税非課税区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 課税非課税区分がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7014KaigoSetaiEntityにセットされている() {
-            sut = new KaigoSetai(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get管理識別区分(), is(管理識別区分));
         }
 
         @Test
         public void 指定したキーが保持するKaigoSetaiIdentifierにセットされている() {
-            sut = new KaigoSetai(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KaigoSetai(被保険者番号, 管理識別区分, 世帯把握基準年月日, 世帯員管理連番, 世帯員識別コード, 本人区分, 課税年度, 課税非課税区分);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get管理識別区分(), is(管理識別区分));
         }
     }
 
@@ -80,8 +129,14 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +149,8 @@ public class KaigoSetaiTest extends DbzTestBase {
 
             sut = new KaigoSetai(KaigoSetaiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get管理識別区分(), is(管理識別区分));
         }
     }
 
@@ -106,8 +161,14 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -170,8 +231,14 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -189,8 +256,14 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
             sut = new KaigoSetai(KaigoSetaiEntity);
         }
@@ -209,8 +282,14 @@ public class KaigoSetaiTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoSetaiEntity = DbT7014KaigoSetaiEntityGenerator.createDbT7014KaigoSetaiEntity();
-            KaigoSetaiEntity.setXXX(主キー名1);
-            KaigoSetaiEntity.setXXX(主キー名2);
+            KaigoSetaiEntity.setHihokenshaNo(被保険者番号);
+            KaigoSetaiEntity.setKanriShikibetsuKubun(管理識別区分);
+            KaigoSetaiEntity.setSetaiHaakuKijunYMD(世帯把握基準年月日);
+            KaigoSetaiEntity.setSetaiInkanriRenban(世帯員管理連番);
+            KaigoSetaiEntity.setSetaiInshikibetsuCode(世帯員識別コード);
+            KaigoSetaiEntity.setHonninKubun(本人区分);
+            KaigoSetaiEntity.setKazeiNendo(課税年度);
+            KaigoSetaiEntity.setKazeiHikazeiKubun(課税非課税区分);
 
         }
 

@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7102ZeiritsuJoho.zeirit
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7102ZeiritsuJoho.zeiritsuShuryoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7102ZeiritsuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

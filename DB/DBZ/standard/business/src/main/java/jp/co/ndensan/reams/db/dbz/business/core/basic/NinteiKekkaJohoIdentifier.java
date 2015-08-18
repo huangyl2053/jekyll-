@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
  * 要介護認定結果情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class NinteiKekkaJohoIdentifier implements Serializable {
 
     private final ShinseishoKanriNo 申請書管理番号;

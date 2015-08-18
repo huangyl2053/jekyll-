@@ -5,15 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import static jp.co.ndensan.reams.uz.uza.util.db.EntityDataState.Added;
+import static jp.co.ndensan.reams.uz.uza.util.db.EntityDataState.Deleted;
+import static jp.co.ndensan.reams.uz.uza.util.db.EntityDataState.Modified;
 
 /**
  * 被保険者モデルと資格変更DataGrid_Rowのマッピングを行います。
@@ -26,85 +28,85 @@ public class ShikakuHenkoMapper {
     }
 
     /**
-     * {@link dgHenko_Row}に含まれる{@link HihokenshaDaichoModel}を特定できるキーを返します。
+     * {@link dgHenko_Row}に含まれる{@link DbT1001HihokenshaDaichoEntity}を特定できるキーを返します。
      *
      * @param rowValue {@link dgHenko_Row}
-     * @return {@link HihokenshaDaichoModel}を特定できるキー
+     * @return {@link DbT1001HihokenshaDaichoEntity}を特定できるキー
      */
-    public static IPredicate<HihokenshaDaichoModel> createKey(final dgHenko_Row rowValue) {
-        return new IPredicate<HihokenshaDaichoModel>() {
+    public static IPredicate<DbT1001HihokenshaDaichoEntity> createKey(final dgHenko_Row rowValue) {
+        return new IPredicate<DbT1001HihokenshaDaichoEntity>() {
             @Override
-            public boolean evaluate(HihokenshaDaichoModel t) {
+            public boolean evaluate(DbT1001HihokenshaDaichoEntity t) {
                 return hasSame資格変更事由(t) && hasSame資格変更年月日(t) && hasSame資格変更届出年月日(t);
             }
 
-            private boolean hasSame資格変更事由(HihokenshaDaichoModel t) {
-                return t.get資格変更事由().getCode().equals(rowValue.getHenkoJiyuKey());
+            private boolean hasSame資格変更事由(DbT1001HihokenshaDaichoEntity t) {
+                return t.getShikakuHenkoJiyuCode().toRString().equals(rowValue.getHenkoJiyuKey());
             }
 
-            private boolean hasSame資格変更年月日(HihokenshaDaichoModel t) {
-                return t.get資格変更年月日().equals(rowValue.getHenkoDate().getValue());
+            private boolean hasSame資格変更年月日(DbT1001HihokenshaDaichoEntity t) {
+                return t.getShikakuHenkoYMD().equals(rowValue.getHenkoDate().getValue());
             }
 
-            private boolean hasSame資格変更届出年月日(HihokenshaDaichoModel t) {
-                return t.get資格変更届出年月日().equals(rowValue.getHenkoTodokedeDate().getValue());
-            }
-        };
-    }
-
-    static IConsumer<HihokenshaDaichoModel> merge(final HihokenshaDaichoModel model) {
-        return new IConsumer<HihokenshaDaichoModel>() {
-            @Override
-            public void accept(HihokenshaDaichoModel t) {
-                t.setDeletedState(false);
-                t.set資格変更年月日(model.get資格変更年月日());
-                t.set資格変更届出年月日(model.get資格変更届出年月日());
-                t.set資格変更事由(model.get資格変更事由());
-                t.set旧市町村コード(model.get旧市町村コード());
+            private boolean hasSame資格変更届出年月日(DbT1001HihokenshaDaichoEntity t) {
+                return t.getShikakuHenkoTodokedeYMD().equals(rowValue.getHenkoTodokedeDate().getValue());
             }
         };
     }
 
-    static IConsumer<HihokenshaDaichoModel> delete() {
-        return new IConsumer<HihokenshaDaichoModel>() {
+    static IConsumer<DbT1001HihokenshaDaichoEntity> merge(final DbT1001HihokenshaDaichoEntity model) {
+        return new IConsumer<DbT1001HihokenshaDaichoEntity>() {
             @Override
-            public void accept(HihokenshaDaichoModel t) {
-                t.setDeletedState(true);
+            public void accept(DbT1001HihokenshaDaichoEntity t) {
+                t.setIsDeleted(false);
+                t.setShikakuHenkoYMD(model.getShikakuHenkoYMD());
+                t.setShikakuHenkoTodokedeYMD(model.getShikakuHenkoTodokedeYMD());
+                t.setShikakuHenkoJiyuCode(model.getShikakuHenkoJiyuCode());
+                t.setKyuShichosonCode(model.getKyuShichosonCode());
             }
         };
     }
 
-    static IFunction<HihokenshaDaichoModel, dgHenko_Row> toGridRow() {
-        return new IFunction<HihokenshaDaichoModel, dgHenko_Row>() {
+    static IConsumer<DbT1001HihokenshaDaichoEntity> delete() {
+        return new IConsumer<DbT1001HihokenshaDaichoEntity>() {
             @Override
-            public dgHenko_Row apply(HihokenshaDaichoModel model) {
+            public void accept(DbT1001HihokenshaDaichoEntity t) {
+                t.setIsDeleted(true);
+            }
+        };
+    }
+
+    static IFunction<DbT1001HihokenshaDaichoEntity, dgHenko_Row> toGridRow() {
+        return new IFunction<DbT1001HihokenshaDaichoEntity, dgHenko_Row>() {
+            @Override
+            public dgHenko_Row apply(DbT1001HihokenshaDaichoEntity model) {
                 dgHenko_Row row = new dgHenko_Row(
                         RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate());
 
                 TextBoxFlexibleDate shoriDate = new TextBoxFlexibleDate();
-                shoriDate.setValue(new FlexibleDate(model.get処理日時().getColumnValue().getDate().toString()));
+                shoriDate.setValue(model.getIdoYMD());
 
                 row.setState(getModelStateValue(model));
                 row.setShoriDate(shoriDate);
 
                 //TODO n8178 城間篤人 資格変更事由にはEMPTYが入る可能性があるが、コードがそれを考慮する形になっていないためif文で仮対応。
                 //該当する項目が存在しない場合の動作が決まった後に修正。
-                if (!model.getEntity().getShikakuHenkoJiyuCode().getColumnValue().isEmpty()) {
-                    row.setHenkoJiyuKey(model.get資格変更事由().getCode());
-                    row.setHenkoJiyu(model.get資格変更事由().getShortName());
+                if (!model.getShikakuHenkoJiyuCode().getColumnValue().isEmpty()) {
+                    row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode().getColumnValue().value());
+                    row.setHenkoJiyu(model.getShikakuHenkoJiyuCode().getMeisho());
                 }
-                row.getHenkoDate().setValue(model.get資格変更年月日());
-                row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
+                row.getHenkoDate().setValue(model.getShikakuHenkoYMD());
+                row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
                 //TODO n8178 城間篤人 旧保険者を取得する方法は用意されたため、この代替実装は不要になる。後日置き換えが必要
                 //row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
-                row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
+                row.setSochimotoHokensha(model.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
                 return row;
             }
         };
     }
 
-    private static RString getModelStateValue(HihokenshaDaichoModel model) {
+    private static RString getModelStateValue(DbT1001HihokenshaDaichoEntity model) {
         switch (model.getState()) {
             case Added:
                 return new RString("追加");
@@ -117,13 +119,13 @@ public class ShikakuHenkoMapper {
         }
     }
 
-    public static HihokenshaDaichoModel toHihokenshaDaichoModel(ShikakuHenkoRirekiDiv div) {
-        HihokenshaDaichoModel model = new HihokenshaDaichoModel();
-        model.set資格変更年月日(div.getTxtHenkoDate().getValue());
-        model.set資格変更届出年月日(div.getTxtHenkoTodokedeDate().getValue());
-        model.set資格変更事由(ShikakuHenkoJiyu.toValue(div.getDdlHenkoJiyu().getSelectedKey()));
-        model.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
-        model.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
+    public static DbT1001HihokenshaDaichoEntity toDbT1001HihokenshaDaichoEntity(ShikakuHenkoRirekiDiv div) {
+        DbT1001HihokenshaDaichoEntity model = new DbT1001HihokenshaDaichoEntity();
+        model.setShikakuHenkoYMD(div.getTxtHenkoDate().getValue());
+        model.setShikakuHenkoTodokedeYMD(div.getTxtHenkoTodokedeDate().getValue());
+        model.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(div.getDdlHenkoJiyu().getSelectedKey()));
+        model.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
+        model.setKyuShichosonCode(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
 
         return model;
     }

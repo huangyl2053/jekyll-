@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKey
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
 
 /**
  * 資格者証発行における有効期限の業務コンフィグを取得するクラスです。
@@ -31,7 +31,7 @@ public class ShikakushashoKigenConfig {
      * コンストラクタです。
      */
     public ShikakushashoKigenConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -39,11 +39,11 @@ public class ShikakushashoKigenConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    ShikakushashoKigenConfig(IUrBusinessConfig businessConfig) {
+    ShikakushashoKigenConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysShikakushashoKigen, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysShikakushashoKigen, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysShikakushashoKigen, RString> map = new EnumMap<>(ConfigKeysShikakushashoKigen.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShikakushashoKigen target : ConfigKeysShikakushashoKigen.values()) {

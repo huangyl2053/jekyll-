@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 証交付回収の識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class ShoKofuKaishuIdentifier implements Serializable {
 
     private final HihokenshaNo 被保険者番号;

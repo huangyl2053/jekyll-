@@ -52,7 +52,7 @@ public final class ShisetsuNyutaishoMapper {
         return new ShisetsuNyutaisho(
                 entity.getShichosonCode(),
                 entity.getShikibetsuCode(),
-                entity.getShoriTimestamp().getRDateTime(),
+                entity.getRirekiNo(),
                 DaichoType.toValue(entity.getDaichoShubetsu()),
                 create入所期間(entity),
                 入所施設,
@@ -102,10 +102,10 @@ public final class ShisetsuNyutaishoMapper {
         DbT1004ShisetsuNyutaishoEntity entity = new DbT1004ShisetsuNyutaishoEntity();
         entity.setShichosonCode(施設入退所.get市町村コード());
         entity.setShikibetsuCode(施設入退所.get個人識別コード());
-        entity.setShoriTimestamp(toYMDHMS(施設入退所.get処理日時()));
+//        entity.setShoriTimestamp(toYMDHMS(施設入退所.get処理日時()));
         entity.setDaichoShubetsu(施設入退所.get台帳種別().getCode());
         entity.setNyushoShisetsuShurui(施設入退所.get入所施設().get施設種類().getCode());
-        entity.setNyushoShisetsuCode(施設入退所.get入所施設().get施設コード().value());
+//        entity.setNyushoShisetsuCode(施設入退所.get入所施設().get施設コード().value());
         entity.setNyushoShoriYMD(施設入退所.get入所処理年月日());
         entity.setNyushoYMD(施設入退所.get入所期間().getFrom());
         entity.setTaishoShoriYMD(施設入退所.get退所処理年月日());

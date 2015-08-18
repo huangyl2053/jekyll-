@@ -9,13 +9,12 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5913ChosainJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ChosainJoho}の編集を行うビルダークラスです。
@@ -145,7 +144,7 @@ public class ChosainJohoBuilder {
      * @param 調査可能人数_月 調査可能人数_月
      * @return {@link ChosainJohoBuilder}
      */
-    public ChosainJohoBuilder set調査可能人数_月(Decimal 調査可能人数_月) {
+    public ChosainJohoBuilder set調査可能人数_月(int 調査可能人数_月) {
         requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数_月"));
         entity.setChosaKanoNinzuPerMonth(調査可能人数_月);
         return this;

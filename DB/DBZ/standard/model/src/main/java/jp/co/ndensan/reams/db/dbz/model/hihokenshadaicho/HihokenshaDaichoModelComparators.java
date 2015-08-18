@@ -22,7 +22,8 @@ public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDai
     orderBy資格取得年月日 {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
-                    return compareToFlexibleDate(model1.get資格取得年月日(), model2.get資格取得年月日());
+                    return 1;
+//                    return compareToFlexibleDate(model1.get資格取得年月日(), model2.get資格取得年月日());
                 }
             },
     /**
@@ -31,7 +32,8 @@ public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDai
     orderBy処理日時 {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
-                    return model1.get処理日時().compareTo(model2.get処理日時());
+                    return 0;
+//                    return model1.get処理日時().compareTo(model2.get処理日時());
                 }
             },
     /**
@@ -40,7 +42,8 @@ public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDai
     orderBy資格変更年月日 {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
-                    return compareToFlexibleDate(model1.get資格変更年月日(), model2.get資格変更年月日());
+                    return 1;
+//                    return compareToFlexibleDate(model1.get資格変更年月日(), model2.get資格変更年月日());
                 }
             };
 

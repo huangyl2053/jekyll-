@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7005RojinHokenJukyushaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7005RojinHokenJukyushaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +25,15 @@ public class RojinHokenJukyushaJohoBuilderTest extends DbzTestBase {
     private static DbT7005RojinHokenJukyushaJohoEntity RojinHokenJukyushaJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_識別コード;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbzTestBase {
 
         private static RojinHokenJukyushaJohoBuilder sut;
         private static RojinHokenJukyushaJoho business;
@@ -43,8 +41,7 @@ public class RojinHokenJukyushaJohoBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             RojinHokenJukyushaJohoEntity = new DbT7005RojinHokenJukyushaJohoEntity();
-            RojinHokenJukyushaJohoEntity.setXXX(主キー名1);
-            RojinHokenJukyushaJohoEntity.setXXX(主キー名2);
+            RojinHokenJukyushaJohoEntity.setShikibetsuCode(識別コード);
 
             business = new RojinHokenJukyushaJoho(RojinHokenJukyushaJohoEntity);
 

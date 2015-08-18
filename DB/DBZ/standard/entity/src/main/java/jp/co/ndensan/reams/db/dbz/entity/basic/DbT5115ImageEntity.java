@@ -6,7 +6,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -33,7 +32,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
-    private Decimal torikomiPageNo;
+    private int torikomiPageNo;
     @PrimaryKey
     private Code genponMaskKubun;
     private RDateTime imageSharedFileId;
@@ -110,7 +109,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
      *
      * @return 取込ページ番号
      */
-    public Decimal getTorikomiPageNo() {
+    public int getTorikomiPageNo() {
         return torikomiPageNo;
     }
 
@@ -119,7 +118,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
      *
      * @param torikomiPageNo 取込ページ番号
      */
-    public void setTorikomiPageNo(Decimal torikomiPageNo) {
+    public void setTorikomiPageNo(int torikomiPageNo) {
         this.torikomiPageNo = torikomiPageNo;
     }
 
@@ -163,8 +162,7 @@ public class DbT5115ImageEntity extends DbTableEntityBase<DbT5115ImageEntity> im
      * このエンティティの主キーが他の{@literal DbT5115ImageEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5115ImageEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5115ImageEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5115ImageEntity other) {

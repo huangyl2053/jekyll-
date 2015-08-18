@@ -46,24 +46,24 @@ public class KoikiNoHatsubanManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
-            sut.get広域番号発番テーブル(null, 主キー2);
+        public void 引数の市町村コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            RString コード区分 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
+            sut.get広域番号発番テーブル(null, コード区分);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
-            sut.get広域番号発番テーブル(主キー1, null);
+        public void 引数のコード区分にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 市町村コード = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
+            sut.get広域番号発番テーブル(市町村コード, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(null);
-            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
-            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
-            KoikiNoHatsuban result = sut.get広域番号発番テーブル(主キー1, 主キー2);
+            LasdecCode 市町村コード = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
+            RString コード区分 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
+            KoikiNoHatsuban result = sut.get広域番号発番テーブル(市町村コード, コード区分);
 
             assertThat(result, is(nullValue()));
         }
@@ -72,11 +72,11 @@ public class KoikiNoHatsubanManagerTest {
         public void 検索結果が存在する場合() {
             DbT7025KoikiNoHatsubanEntity entity = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
             when(dac.selectByKey(any(LasdecCode.class), any(RString.class))).thenReturn(entity);
-            LasdecCode 主キー1 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
-            RString 主キー2 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
-            KoikiNoHatsuban result = sut.get広域番号発番テーブル(主キー1, 主キー2);
+            LasdecCode 市町村コード = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード;
+            RString コード区分 = DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_コード区分;
+            KoikiNoHatsuban result = sut.get広域番号発番テーブル(市町村コード, コード区分);
 
-            assertThat(result.get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
+            assertThat(result.get市町村コード().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
@@ -100,7 +100,7 @@ public class KoikiNoHatsubanManagerTest {
             List<KoikiNoHatsuban> result = sut.get広域番号発番テーブル一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT7025KoikiNoHatsubanEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
@@ -133,7 +133,7 @@ public class KoikiNoHatsubanManagerTest {
             DbT7025KoikiNoHatsubanEntity entity = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
             entity.initializeMd5();
             KoikiNoHatsuban 広域番号発番テーブル = new KoikiNoHatsuban(entity);
-            広域番号発番テーブル = 広域番号発番テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域番号発番テーブル = 広域番号発番テーブル.createBuilderForEdit().setコード区分(new RString("コード区分を変更")).build();
 
             assertThat(sut.save広域番号発番テーブル(広域番号発番テーブル), is(true));
         }
@@ -145,7 +145,7 @@ public class KoikiNoHatsubanManagerTest {
             DbT7025KoikiNoHatsubanEntity entity = DbT7025KoikiNoHatsubanEntityGenerator.createDbT7025KoikiNoHatsubanEntity();
             entity.initializeMd5();
             KoikiNoHatsuban 広域番号発番テーブル = new KoikiNoHatsuban(entity);
-            広域番号発番テーブル = 広域番号発番テーブル.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            広域番号発番テーブル = 広域番号発番テーブル.createBuilderForEdit().setコード区分(new RString("コード区分を変更")).build();
 
             assertThat(sut.save広域番号発番テーブル(広域番号発番テーブル), is(false));
         }

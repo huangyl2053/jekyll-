@@ -9,24 +9,23 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.helper.ShisetsuNyutaishoModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShisetsuNyutaishoTokureiTaishoRelateDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager}のテストです。
@@ -37,7 +36,7 @@ import static org.mockito.Mockito.any;
 public class ShisetsuNyutaishoTokureiTaishoRelateManagerTest {
 
     private static ShisetsuNyutaishoTokureiTaishoRelateManager sut;
-    private static IItemList<ShisetsuNyutaishoRelateModel> result;
+    private static IItemList<DbT1004ShisetsuNyutaishoEntity> result;
 
     public static class get介護保険施設入退所一覧By主キー1 extends DbzTestBase {
 
@@ -60,12 +59,12 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManagerTest {
     }
 
     private static ShisetsuNyutaishoTokureiTaishoRelateDac createMockDac() {
-        ShisetsuNyutaishoRelateModel nyutaishoModel = ShisetsuNyutaishoModelTestHelper.createModel();
-        IItemList<ShisetsuNyutaishoRelateModel> list = ItemList.of(nyutaishoModel, nyutaishoModel, nyutaishoModel);
+        DbT1004ShisetsuNyutaishoEntity nyutaishoModel = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
+        IItemList<DbT1004ShisetsuNyutaishoEntity> list = ItemList.of(nyutaishoModel, nyutaishoModel, nyutaishoModel);
 
         AtenaMeisho shisetsuName = new AtenaMeisho("shisetsuName");
-        KaigoJogaiTokureiTaishoShisetsuModel tokureiShisetsu = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
-        when(tokureiShisetsu.get事業者名称()).thenReturn(shisetsuName);
+        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity tokureiShisetsu = mock(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+        when(tokureiShisetsu.getJigyoshaMeisho()).thenReturn(shisetsuName);
 
         ShisetsuNyutaishoTokureiTaishoRelateDac dac = mock(ShisetsuNyutaishoTokureiTaishoRelateDac.class);
         when(dac.select介護保険施設入退所一覧By識別コード(any(ShikibetsuCode.class))).thenReturn(list);

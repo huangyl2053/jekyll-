@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +30,16 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
     private static DbT7004KaigoShiharaiJohoEntity KaigoShiharaiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static KamokuCode 科目コード;
+    private static FlexibleDate 決定年月日;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_識別コード;
+        科目コード = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_科目コード;
+        決定年月日 = DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_決定年月日;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -43,33 +49,39 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoShiharaiJoho(null, 主キー名2);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoShiharaiJoho(null, 科目コード, 決定年月日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoShiharaiJoho(主キー名1, null);
+        public void 科目コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoShiharaiJoho(識別コード, null, 決定年月日);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 決定年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KaigoShiharaiJoho(識別コード, 科目コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7004KaigoShiharaiJohoEntityにセットされている() {
-            sut = new KaigoShiharaiJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KaigoShiharaiJoho(識別コード, 科目コード, 決定年月日);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get科目コード(), is(科目コード));
         }
 
         @Test
         public void 指定したキーが保持するKaigoShiharaiJohoIdentifierにセットされている() {
-            sut = new KaigoShiharaiJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KaigoShiharaiJoho(識別コード, 科目コード, 決定年月日);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get科目コード(), is(科目コード));
         }
     }
 
@@ -80,8 +92,9 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +107,8 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
 
             sut = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get科目コード(), is(科目コード));
         }
     }
 
@@ -106,8 +119,9 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
 
             sut = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
         }
@@ -205,8 +219,9 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
 
             sut = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
         }
@@ -224,8 +239,9 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
 
             sut = new KaigoShiharaiJoho(KaigoShiharaiJohoEntity);
         }
@@ -244,8 +260,9 @@ public class KaigoShiharaiJohoTest extends DbzTestBase {
         @Before
         public void setUp() {
             KaigoShiharaiJohoEntity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            KaigoShiharaiJohoEntity.setXXX(主キー名1);
-            KaigoShiharaiJohoEntity.setXXX(主キー名2);
+            KaigoShiharaiJohoEntity.setShikibetsuCode(識別コード);
+            KaigoShiharaiJohoEntity.setKamokuCode(科目コード);
+            KaigoShiharaiJohoEntity.setKetteiYMD(決定年月日);
 
         }
 

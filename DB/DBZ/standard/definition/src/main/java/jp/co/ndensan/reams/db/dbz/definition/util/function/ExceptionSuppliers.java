@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 
