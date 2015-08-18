@@ -3,36 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
+package jp.co.ndensan.reams.db.dbz.model.relate;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビルドエラー回避のために暫定で作成したModelクラス
+ * ビルドエラー回避のための暫定クラス
  *
  * @author n8187
  */
-public class ShisetsuNyutaishoModel {
+public class NinteiShinseiKekkaModel {
 
-    public ShisetsuNyutaishoModel(DbT1004ShisetsuNyutaishoEntity createDbT1004ShisetsuNyutaishoEntity) {
+    public DbT4101NinteiShinseiJohoEntity get要介護認定申請情報モデル() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public ShisetsuNyutaishoModel() {
+    public DbT4102NinteiKekkaJohoEntity get要介護認定結果情報モデル() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public EntityDataState getState() {
+    public Object get受給者台帳モデル() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public FlexibleDate get入所年月日() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public FlexibleDate get退所年月日() {
+    public List<RString> getサービス種類List() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
