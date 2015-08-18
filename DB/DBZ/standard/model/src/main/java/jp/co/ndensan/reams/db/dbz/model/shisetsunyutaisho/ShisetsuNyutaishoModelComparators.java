@@ -7,37 +7,34 @@ package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
 
 import java.util.Collections;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.cast._CastDataTypeFactory;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel 介護保険施設入退所Model}をソートするためのComparatorを提供します。
  *
  * @author n8223 朴義一
  */
-public enum ShisetsuNyutaishoModelComparators implements Comparator<ShisetsuNyutaishoRelateModel> {
+public enum ShisetsuNyutaishoModelComparators implements Comparator<DbT1004ShisetsuNyutaishoEntity> {
 
     /**
      * orderBy入所年月日で施設履歴管理Modelをソートする機能を持ちます。
      */
     orderBy入所年月日 {
                 @Override
-                public int compare(ShisetsuNyutaishoRelateModel model1, ShisetsuNyutaishoRelateModel model2) {
+                public int compare(DbT1004ShisetsuNyutaishoEntity model1, DbT1004ShisetsuNyutaishoEntity model2) {
 
                     int value;
 
-                    FlexibleDate 入所年月日1 = model1.get介護保険施設入退所モデル().get入所年月日();
-                    FlexibleDate 入所年月日2 = model2.get介護保険施設入退所モデル().get入所年月日();
+                    FlexibleDate 入所年月日1 = model1.getNyushoYMD();
+                    FlexibleDate 入所年月日2 = model2.getNyushoYMD();
 
                     value = 入所年月日1.compareTo(入所年月日2);
 
                     if (value == 0) {
 
-                        FlexibleDate 退所年月日1 = getValueOrDefault(model1.get介護保険施設入退所モデル().get退所年月日());
-                        FlexibleDate 退所年月日2 = getValueOrDefault(model2.get介護保険施設入退所モデル().get退所年月日());
+                        FlexibleDate 退所年月日1 = getValueOrDefault(model1.getTaishoYMD());
+                        FlexibleDate 退所年月日2 = getValueOrDefault(model2.getTaishoYMD());
 
                         value = 退所年月日1.compareTo(退所年月日2);
                     }
@@ -52,7 +49,7 @@ public enum ShisetsuNyutaishoModelComparators implements Comparator<ShisetsuNyut
      *
      * @return 昇順ソート
      */
-    public Comparator<ShisetsuNyutaishoRelateModel> asc() {
+    public Comparator<DbT1004ShisetsuNyutaishoEntity> asc() {
         return this;
     }
 
@@ -61,7 +58,7 @@ public enum ShisetsuNyutaishoModelComparators implements Comparator<ShisetsuNyut
      *
      * @return 降順ソート
      */
-    public Comparator<ShisetsuNyutaishoRelateModel> desc() {
+    public Comparator<DbT1004ShisetsuNyutaishoEntity> desc() {
         return Collections.reverseOrder(this);
     }
 

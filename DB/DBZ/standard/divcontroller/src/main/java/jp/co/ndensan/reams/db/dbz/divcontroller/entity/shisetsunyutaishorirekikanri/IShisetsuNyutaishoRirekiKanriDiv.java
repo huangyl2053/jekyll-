@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
 
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
@@ -38,14 +38,14 @@ public interface IShisetsuNyutaishoRirekiKanriDiv {
      *
      * @return 施設入退所履歴List
      */
-    IItemList<ShisetsuNyutaishoRelateModel> get施設入退所履歴();
+    IItemList<DbT1004ShisetsuNyutaishoEntity> get施設入退所履歴();
 
     /**
      * 共有子Divに対して、引数から施設入退所履歴の情報を設定します。
      *
      * @param 施設入退所履歴 施設入退所履歴List
      */
-    void set施設入退所履歴(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴);
+    void set施設入退所履歴(IItemList<DbT1004ShisetsuNyutaishoEntity> 施設入退所履歴);
 
     /**
      * 共有子Divの初期化を行います。<br />

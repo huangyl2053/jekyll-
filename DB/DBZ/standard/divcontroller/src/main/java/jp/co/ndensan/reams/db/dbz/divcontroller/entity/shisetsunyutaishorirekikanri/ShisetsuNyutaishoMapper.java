@@ -10,11 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -30,51 +28,51 @@ public class ShisetsuNyutaishoMapper {
     }
 
     /**
-     * {@link dgShisetsuNyutaishoRireki_Row}に含まれる{@link ShisetsuNyutaishoRelateModel}を特定できるキーを返します。
+     * {@link dgShisetsuNyutaishoRireki_Row}に含まれる{@link DbT1004ShisetsuNyutaishoEntity}を特定できるキーを返します。
      *
      * @param rowValue {@link dgShisetsuNyutaishoRireki_Row}
-     * @return {@link ShisetsuNyutaishoRelateModel}を特定できるキー
+     * @return {@link DbT1004ShisetsuNyutaishoEntity}を特定できるキー
      */
-    public static IPredicate<ShisetsuNyutaishoRelateModel> createKey(final dgShisetsuNyutaishoRireki_Row rowValue) {
-        return new IPredicate<ShisetsuNyutaishoRelateModel>() {
+    public static IPredicate<DbT1004ShisetsuNyutaishoEntity> createKey(final dgShisetsuNyutaishoRireki_Row rowValue) {
+        return new IPredicate<DbT1004ShisetsuNyutaishoEntity>() {
             @Override
 
-            public boolean evaluate(ShisetsuNyutaishoRelateModel t) {
+            public boolean evaluate(DbT1004ShisetsuNyutaishoEntity t) {
                 return hasSame施設コード(t) && hasSame入所日(t) && hasSame退所日(t);
             }
 
-            private boolean hasSame施設コード(ShisetsuNyutaishoRelateModel t) {
-                return t.get介護保険施設入退所モデル().get入所施設コード().equals(rowValue.getShisetsuCode());
+            private boolean hasSame施設コード(DbT1004ShisetsuNyutaishoEntity t) {
+                return t.getNyushoShisetsuCode().value().equals(rowValue.getShisetsuCode());
             }
 
-            private boolean hasSame入所日(ShisetsuNyutaishoRelateModel t) {
-                return t.get介護保険施設入退所モデル().get入所年月日().equals(rowValue.getNyushoDate().getValue());
+            private boolean hasSame入所日(DbT1004ShisetsuNyutaishoEntity t) {
+                return t.getNyushoYMD().equals(rowValue.getNyushoDate().getValue());
             }
 
-            private boolean hasSame退所日(ShisetsuNyutaishoRelateModel t) {
-                return t.get介護保険施設入退所モデル().get退所年月日().equals(rowValue.getTaishoDate().getValue());
-            }
-        };
-    }
-
-    static IConsumer<ShisetsuNyutaishoRelateModel> merge(final ShisetsuNyutaishoRelateModel model) {
-        return new IConsumer<ShisetsuNyutaishoRelateModel>() {
-            @Override
-            public void accept(ShisetsuNyutaishoRelateModel t) {
-                t.get介護保険施設入退所モデル().setDeletedState(false);
-                t.get介護保険施設入退所モデル().set入所年月日(model.get介護保険施設入退所モデル().get入所年月日());
-                t.get介護保険施設入退所モデル().set退所年月日(model.get介護保険施設入退所モデル().get退所年月日());
-                t.get介護保険施設入退所モデル().set入所施設コード(model.get介護保険施設入退所モデル().get入所施設コード());
-                t.setJigyoshaMeisho(model.getJigyoshaMeisho());
+            private boolean hasSame退所日(DbT1004ShisetsuNyutaishoEntity t) {
+                return t.getTaishoYMD().equals(rowValue.getTaishoDate().getValue());
             }
         };
     }
 
-    static IConsumer<ShisetsuNyutaishoRelateModel> delete() {
-        return new IConsumer<ShisetsuNyutaishoRelateModel>() {
+    static IConsumer<DbT1004ShisetsuNyutaishoEntity> merge(final DbT1004ShisetsuNyutaishoEntity model) {
+        return new IConsumer<DbT1004ShisetsuNyutaishoEntity>() {
             @Override
-            public void accept(ShisetsuNyutaishoRelateModel t) {
-                t.get介護保険施設入退所モデル().setDeletedState(true);
+            public void accept(DbT1004ShisetsuNyutaishoEntity t) {
+                t.setIsDeleted(false);
+                t.setNyushoYMD(model.getNyushoYMD());
+                t.setTaishoYMD(model.getTaishoYMD());
+                t.setNyushoShisetsuCode(model.getNyushoShisetsuCode());
+//                t.setJigyoshaMeisho(model.getJigyoshaMeisho());
+            }
+        };
+    }
+
+    static IConsumer<DbT1004ShisetsuNyutaishoEntity> delete() {
+        return new IConsumer<DbT1004ShisetsuNyutaishoEntity>() {
+            @Override
+            public void accept(DbT1004ShisetsuNyutaishoEntity t) {
+                t.setIsDeleted(true);
             }
         };
     }
@@ -83,40 +81,40 @@ public class ShisetsuNyutaishoMapper {
      *
      * @return
      */
-    static IFunction<ShisetsuNyutaishoRelateModel, dgShisetsuNyutaishoRireki_Row> toGridRow() {
-        return new IFunction<ShisetsuNyutaishoRelateModel, dgShisetsuNyutaishoRireki_Row>() {
+    static IFunction<DbT1004ShisetsuNyutaishoEntity, dgShisetsuNyutaishoRireki_Row> toGridRow() {
+        return new IFunction<DbT1004ShisetsuNyutaishoEntity, dgShisetsuNyutaishoRireki_Row>() {
             @Override
-            public dgShisetsuNyutaishoRireki_Row apply(ShisetsuNyutaishoRelateModel model) {
+            public dgShisetsuNyutaishoRireki_Row apply(DbT1004ShisetsuNyutaishoEntity model) {
                 dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(
                         RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
                 row.setState(getModelStateValue(model));
-                row.getNyushoDate().setValue(model.get介護保険施設入退所モデル().get入所年月日());
-                row.getTaishoDate().setValue(model.get介護保険施設入退所モデル().get退所年月日());
-                row.setShisetsuCode(model.get介護保険施設入退所モデル().get入所施設コード());
-                row.setShisetsuMeisho(model.getJigyoshaMeisho());
+                row.getNyushoDate().setValue(model.getNyushoYMD());
+                row.getTaishoDate().setValue(model.getTaishoYMD());
+                row.setShisetsuCode(model.getNyushoShisetsuCode().value());
+//                row.setShisetsuMeisho(model.getJigyoshaMeisho());
                 row.setShisetsu(compose施設(model));
-                row.setDaichoShubetsuKey(model.get介護保険施設入退所モデル().get台帳種別());
-                row.setDaichoShubetsu(new RString(DaichoType.toValue(model.get介護保険施設入退所モデル().get台帳種別()).toString()));
-                row.setShisetsuShuruiKey(model.get介護保険施設入退所モデル().get入所施設種類());
-                row.setShisetsuShurui(new RString(ShisetsuType.toValue(model.get介護保険施設入退所モデル().get入所施設種類()).toString()));
+                row.setDaichoShubetsuKey(model.getDaichoShubetsu());
+                row.setDaichoShubetsu(new RString(DaichoType.toValue(model.getDaichoShubetsu()).toString()));
+                row.setShisetsuShuruiKey(model.getNyushoShisetsuShurui());
+                row.setShisetsuShurui(new RString(ShisetsuType.toValue(model.getNyushoShisetsuShurui()).toString()));
                 return row;
             }
         };
     }
 
-    private static RString compose施設(ShisetsuNyutaishoRelateModel model) {
-        RString 施設コード = model.get介護保険施設入退所モデル().get入所施設コード();
-        RString 施設名 = model.getJigyoshaMeisho();
+    private static RString compose施設(DbT1004ShisetsuNyutaishoEntity model) {
+        RString 施設コード = model.getNyushoShisetsuCode().value();
+        RString 施設種類 = model.getNyushoShisetsuShurui();
         return new RStringBuilder()
                 .append((施設コード == null) ? RString.EMPTY : 施設コード)
                 .append((施設コード != null) ? "：" : RString.EMPTY)
-                .append((施設名 == null) ? RString.EMPTY : 施設名)
+                .append((施設種類 == null) ? RString.EMPTY : 施設種類)
                 .toRString();
     }
 
-    private static RString getModelStateValue(ShisetsuNyutaishoRelateModel model) {
+    private static RString getModelStateValue(DbT1004ShisetsuNyutaishoEntity model) {
         switch (model.getState()) {
             case Added:
                 return new RString("追加");
@@ -129,18 +127,15 @@ public class ShisetsuNyutaishoMapper {
         }
     }
 
-    public static ShisetsuNyutaishoRelateModel toShisetsuNyutaishoRelateModel(ShisetsuNyutaishoRirekiKanriDiv div) {
-        ShisetsuNyutaishoRelateModel model = new ShisetsuNyutaishoRelateModel();
-        model.get介護保険施設入退所モデル().set入所年月日(getValueOrDefault(div.getShisetsuNyutaishoInput().getTxtNyushoDate(), FlexibleDate.EMPTY));
-        model.get介護保険施設入退所モデル().set退所年月日(getValueOrDefault(div.getShisetsuNyutaishoInput().getTxtTaishoDate(), FlexibleDate.EMPTY));
-        model.get介護保険施設入退所モデル().set入所施設コード(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().value());
-        model.setJigyoshaMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
-        model.get介護保険施設入退所モデル().set台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getCode());
-        model.get介護保険施設入退所モデル().set入所施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode());
+    public static DbT1004ShisetsuNyutaishoEntity toDbT1004ShisetsuNyutaishoEntity(ShisetsuNyutaishoRirekiKanriDiv div) {
+        DbT1004ShisetsuNyutaishoEntity model = new DbT1004ShisetsuNyutaishoEntity();
+        model.setNyushoYMD(getValueOrDefault(div.getShisetsuNyutaishoInput().getTxtNyushoDate(), FlexibleDate.EMPTY));
+        model.setTaishoYMD(getValueOrDefault(div.getShisetsuNyutaishoInput().getTxtTaishoDate(), FlexibleDate.EMPTY));
+        model.setDaichoShubetsu(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getCode());
+        model.setNyushoShisetsuShurui(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode());
 
-        model.get介護保険施設入退所モデル().set識別コード(new ShikibetsuCode(div.getShikibetsuCode()));
-        model.get介護保険施設入退所モデル().set市町村コード(new LasdecCode(div.getShichosonCode()));
-        model.get介護保険施設入退所モデル().set処理日時(ShoriTimestamp.now().getColumnValue());
+        model.setShikibetsuCode(new ShikibetsuCode(div.getShikibetsuCode()));
+        model.setShichosonCode(new LasdecCode(div.getShichosonCode()));
         return model;
     }
 
