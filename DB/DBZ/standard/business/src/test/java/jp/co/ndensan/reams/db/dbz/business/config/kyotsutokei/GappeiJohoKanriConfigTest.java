@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -47,8 +47,8 @@ public class GappeiJohoKanriConfigTest {
 
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         SubGyomuCode subGyomu = SubGyomuCode.DBU介護統計報告;
         when(mock.get(
                 eq(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分),

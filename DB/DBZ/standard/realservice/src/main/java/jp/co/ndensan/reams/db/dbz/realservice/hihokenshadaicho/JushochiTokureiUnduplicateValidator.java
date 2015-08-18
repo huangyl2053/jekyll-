@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei
 import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.realservice.TashichosonJushochiTokureiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.TekiyoJogaishaManager;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;

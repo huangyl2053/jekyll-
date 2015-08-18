@@ -13,11 +13,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 被保険者証発行における委託代行業者の業務コンフィグを取得するクラスです。
@@ -32,7 +32,7 @@ public class HihokenshashoItakudaikoHyojiConfig {
      * コンストラクタです。
      */
     public HihokenshashoItakudaikoHyojiConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -40,11 +40,11 @@ public class HihokenshashoItakudaikoHyojiConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HihokenshashoItakudaikoHyojiConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoItakudaikoHyojiConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHihokenshashoItakudaikoHyoji, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoItakudaikoHyoji, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysHihokenshashoItakudaikoHyoji, RString> map = new EnumMap<>(ConfigKeysHihokenshashoItakudaikoHyoji.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoItakudaikoHyoji target : ConfigKeysHihokenshashoItakudaikoHyoji.values()) {

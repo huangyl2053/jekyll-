@@ -18,15 +18,15 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.MeishoFuyoType;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SetainushiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IAtesakiFinder;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.atesaki.IAtesakiFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportManager;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportWriter;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.ReportManagerFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.Association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.core.IReportManager;
+import jp.co.ndensan.reams.ur.urz.service.report.core.IReportWriter;
+import jp.co.ndensan.reams.ur.urz.service.report.core.ReportManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -129,7 +129,7 @@ public class HihokenshashoPrinterBase {
      * @return 導入団体情報 Association
      */
     public Association getAssociation() {
-        return AssociationService.createAssociationFinder().getAssociation();
+        return AssociationFinderFactory.createInstance().getAssociation();
     }
 
     /**

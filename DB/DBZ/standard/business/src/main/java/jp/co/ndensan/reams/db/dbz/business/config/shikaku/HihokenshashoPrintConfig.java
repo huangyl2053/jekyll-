@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.Hihoken
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenPrintType;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 被保険者の表示方法について定義している業務コンフィグを取得します。
@@ -33,7 +33,7 @@ public class HihokenshashoPrintConfig {
      * コンストラクタです。
      */
     public HihokenshashoPrintConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -41,11 +41,11 @@ public class HihokenshashoPrintConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HihokenshashoPrintConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoPrintConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHihokenshashoPrint, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoPrint, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysHihokenshashoPrint, RString> map = new EnumMap<>(ConfigKeysHihokenshashoPrint.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoPrint target : ConfigKeysHihokenshashoPrint.values()) {
