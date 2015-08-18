@@ -130,7 +130,7 @@ public class KaigoJogaiTokureiTaishoShisetsuDacTest {
             DbT1005KaigoJogaiTokureiTaishoShisetsuEntity model = new DbT1005KaigoJogaiTokureiTaishoShisetsuEntity();
 
             sut.insert(model);
-            model.getOriginMd5();
+            model.initializeMd5();
             model.setJigyoshaShubetsu(事業者種別);
 
         }

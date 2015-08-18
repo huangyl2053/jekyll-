@@ -266,7 +266,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
             sut.insert(model);
 
-            model.getOriginMd5();
+            model.initializeMd5();
             model.setLogicalDeletedFlag(true);
 
             assertThat(sut.update(model), is(1));

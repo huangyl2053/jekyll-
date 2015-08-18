@@ -163,7 +163,7 @@ public class TekiyoJogaishaDacTest {
 
             sut.insert(model);
 
-            model.getOriginMd5();
+            model.initializeMd5();
             model.setIsDeleted(false);
 
             assertThat(sut.update(model), is(1));

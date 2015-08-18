@@ -121,7 +121,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
             when(dac.update(any(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class))).thenReturn(1);
 
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity 居宅給付計画事業者作成モデル = createModel();
-            居宅給付計画事業者作成モデル.getOriginMd5();
+            居宅給付計画事業者作成モデル.initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
             居宅給付計画事業者作成モデル.setJigyoshaHenkoJiyu(new RString("333"));
 
@@ -133,7 +133,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
             when(dac.delete(any(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class))).thenReturn(1);
 
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity 居宅給付計画事業者作成モデル = createModel();
-            居宅給付計画事業者作成モデル.getOriginMd5();
+            居宅給付計画事業者作成モデル.initializeMd5();
             居宅給付計画事業者作成モデル.setIsDeleted(true);
 
             assertThat(sut.save居宅給付計画事業者作成(居宅給付計画事業者作成モデル), is(1));
@@ -143,7 +143,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity 居宅給付計画事業者作成モデル = createModel();
-            居宅給付計画事業者作成モデル.getOriginMd5();
+            居宅給付計画事業者作成モデル.initializeMd5();
 
             sut.save居宅給付計画事業者作成(居宅給付計画事業者作成モデル);
         }

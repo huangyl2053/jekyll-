@@ -20,6 +20,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.Hoke
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
@@ -612,7 +613,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         when(mock.get地域番号()).thenReturn(new RString(地域番号));
         when(mock.get市町村コード()).thenReturn(new LasdecCode(市町村コード));
         when(mock.get合併種類()).thenReturn(new RString(合併種類));
-        when(mock.get保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString(保険者番号)));
+        when(mock.get保険者番号()).thenReturn(new HokenshaNo(new RString(保険者番号)));
         when(mock.get旧市町村情報付与終了日()).thenReturn(new FlexibleDate(旧市町村情報付与終了日));
         when(mock.get国保連データ連携開始日()).thenReturn(new FlexibleDate(国保連データ連携開始日));
         return mock;
@@ -627,7 +628,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         when(mock.get旧市町村コード()).thenReturn(new LasdecCode(旧市町村コード));
         when(mock.get運用開始日()).thenReturn(new FlexibleDate(運用開始日));
         when(mock.get運用終了日()).thenReturn(new FlexibleDate(運用終了日));
-        when(mock.get旧保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString(旧保険者番号)));
+        when(mock.get旧保険者番号()).thenReturn(new HokenshaNo(new RString(旧保険者番号)));
         when(mock.get旧市町村名称()).thenReturn(new RString(旧市町村名称));
         when(mock.get表示有無()).thenReturn(new RString(表示有無));
         return mock;

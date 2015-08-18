@@ -10,14 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbz.model.helper.TekiyoJogaishaModelTestHelper;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TekiyoJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -50,13 +50,13 @@ public class TekiyoJogaishaManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_適用除外者Modelが返る() {
 
-            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = TekiyoJogaishaModelTestHelper.createModel();
+            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
 
-            when(dac.select適用除外者ModelByKey(any(LasdecCode.class), any(ShikibetsuCode.class), any(YMDHMS.class)))
+            when(dac.select適用除外者ModelByKey(any(ShikibetsuCode.class), any(FlexibleDate.class), any(RString.class)))
                     .thenReturn(適用除外者Modelモデル);
 
-            Optional<DbT1002TekiyoJogaishaEntity> 適用除外者Model = sut.get適用除外者Model(LasdecCode.EMPTY, ShikibetsuCode.EMPTY, new YMDHMS("20140101000000"));
-            assertThat(適用除外者Model.get().get識別コード(), is(適用除外者Modelモデル.get識別コード()));
+            Optional<DbT1002TekiyoJogaishaEntity> 適用除外者Model = sut.get適用除外者Model(ShikibetsuCode.EMPTY, FlexibleDate.EMPTY, new RString(""));
+            assertThat(適用除外者Model.get().getShikibetsuCode(), is(適用除外者Modelモデル.getShikibetsuCode()));
         }
     }
 
@@ -66,8 +66,8 @@ public class TekiyoJogaishaManagerTest {
         public void データが見つかる検索条件を指定した場合_適用除外者Modelのリストが返る() {
 
             List<DbT1002TekiyoJogaishaEntity> 適用除外者Modelモデルリスト = new ArrayList<>();
-            適用除外者Modelモデルリスト.add(TekiyoJogaishaModelTestHelper.createModel());
-            適用除外者Modelモデルリスト.add(TekiyoJogaishaModelTestHelper.createModel());
+            適用除外者Modelモデルリスト.add(DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity());
+            適用除外者Modelモデルリスト.add(DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity());
 
             when(dac.select適用除外者List(any(LasdecCode.class), any(ShikibetsuCode.class)))
                     .thenReturn(適用除外者Modelモデルリスト);
@@ -75,8 +75,8 @@ public class TekiyoJogaishaManagerTest {
             IItemList<DbT1002TekiyoJogaishaEntity> 適用除外者Modelリスト = sut.get適用除外者情報List(LasdecCode.EMPTY, ShikibetsuCode.EMPTY);
 
             assertThat(適用除外者Modelリスト.size(), is(2));
-            assertThat(適用除外者Modelリスト.toList().get(0).get識別コード(), is(適用除外者Modelモデルリスト.get(0).get識別コード()));
-            assertThat(適用除外者Modelリスト.toList().get(1).get識別コード(), is(適用除外者Modelモデルリスト.get(0).get識別コード()));
+            assertThat(適用除外者Modelリスト.toList().get(0).getShikibetsuCode(), is(適用除外者Modelモデルリスト.get(0).getShikibetsuCode()));
+            assertThat(適用除外者Modelリスト.toList().get(1).getShikibetsuCode(), is(適用除外者Modelモデルリスト.get(0).getShikibetsuCode()));
         }
     }
 
@@ -86,7 +86,7 @@ public class TekiyoJogaishaManagerTest {
         public void insertに成功すると1が返る() {
             when(dac.insert(any(DbT1002TekiyoJogaishaEntity.class))).thenReturn(1);
 
-            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = TekiyoJogaishaModelTestHelper.createModel();
+            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
 
             assertThat(sut.save適用除外者Model(適用除外者Modelモデル), is(1));
         }
@@ -95,9 +95,9 @@ public class TekiyoJogaishaManagerTest {
         public void updateに成功すると1が返る() {
             when(dac.update(any(DbT1002TekiyoJogaishaEntity.class))).thenReturn(1);
 
-            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = TekiyoJogaishaModelTestHelper.createModel();
-            適用除外者Modelモデル.getEntity().initializeMd5();
-            適用除外者Modelモデル.set解除年月日(FlexibleDate.MAX);
+            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
+            適用除外者Modelモデル.initializeMd5();
+            適用除外者Modelモデル.setKaijoYMD(FlexibleDate.MAX);
 
             assertThat(sut.save適用除外者Model(適用除外者Modelモデル), is(1));
         }
@@ -106,9 +106,9 @@ public class TekiyoJogaishaManagerTest {
         public void deleteに成功すると1が返る() {
             when(dac.delete(any(DbT1002TekiyoJogaishaEntity.class))).thenReturn(1);
 
-            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = TekiyoJogaishaModelTestHelper.createModel();
-            適用除外者Modelモデル.getEntity().initializeMd5();
-            適用除外者Modelモデル.setDeletedState(true);
+            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
+            適用除外者Modelモデル.initializeMd5();
+            適用除外者Modelモデル.setIsDeleted(true);
 
             assertThat(sut.save適用除外者Model(適用除外者Modelモデル), is(1));
         }
@@ -116,8 +116,8 @@ public class TekiyoJogaishaManagerTest {
         @Test(expected = ApplicationException.class)
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
-            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = TekiyoJogaishaModelTestHelper.createModel();
-            適用除外者Modelモデル.getEntity().initializeMd5();
+            DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
+            適用除外者Modelモデル.initializeMd5();
 
             sut.save適用除外者Model(適用除外者Modelモデル);
         }

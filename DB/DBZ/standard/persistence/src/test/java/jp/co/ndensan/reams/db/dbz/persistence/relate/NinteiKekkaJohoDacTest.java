@@ -135,7 +135,7 @@ public class NinteiKekkaJohoDacTest {
 
             sut.insert(model);
 
-            model.getOriginMd5();
+            model.initializeMd5();
             // 状態をModifiedにするために任意の項目をinsert時と変更してください。
             model.setIsDeleted(false);
 

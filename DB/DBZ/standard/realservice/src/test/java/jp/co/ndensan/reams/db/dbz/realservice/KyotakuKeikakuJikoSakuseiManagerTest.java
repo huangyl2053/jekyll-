@@ -121,7 +121,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
             when(dac.update(any(DbT3007KyotakuKeikakuJikoSakuseiEntity.class))).thenReturn(1);
 
             DbT3007KyotakuKeikakuJikoSakuseiEntity 居宅給付計画自己作成モデル = createModel();
-            居宅給付計画自己作成モデル.getOriginMd5();
+            居宅給付計画自己作成モデル.initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
             居宅給付計画自己作成モデル.setInsertDantaiCd(new RString("9"));
 
@@ -133,7 +133,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
             when(dac.delete(any(DbT3007KyotakuKeikakuJikoSakuseiEntity.class))).thenReturn(1);
 
             DbT3007KyotakuKeikakuJikoSakuseiEntity 居宅給付計画自己作成モデル = createModel();
-            居宅給付計画自己作成モデル.getOriginMd5();
+            居宅給付計画自己作成モデル.initializeMd5();
             居宅給付計画自己作成モデル.setIsDeleted(true);
 
             assertThat(sut.save居宅給付計画自己作成(居宅給付計画自己作成モデル), is(1));
@@ -143,7 +143,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
             DbT3007KyotakuKeikakuJikoSakuseiEntity 居宅給付計画自己作成モデル = createModel();
-            居宅給付計画自己作成モデル.getOriginMd5();
+            居宅給付計画自己作成モデル.initializeMd5();
 
             sut.save居宅給付計画自己作成(居宅給付計画自己作成モデル);
         }

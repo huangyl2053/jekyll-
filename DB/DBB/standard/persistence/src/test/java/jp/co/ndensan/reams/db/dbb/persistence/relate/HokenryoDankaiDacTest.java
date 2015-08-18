@@ -224,7 +224,7 @@ public class HokenryoDankaiDacTest {
 
             sut.insert(model);
 
-            model.getOriginMd5();
+            model.initializeMd5();
             model.setHokenryoRitsu(Decimal.ZERO);
 
             assertThat(sut.update(model), is(1));

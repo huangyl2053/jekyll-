@@ -115,7 +115,7 @@ public class NinteiKekkaJohoManagerTest {
             when(dac.update(any(DbT4102NinteiKekkaJohoEntity.class))).thenReturn(1);
 
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報モデル = createModel();
-            要介護認定結果情報モデル.getOriginMd5();
+            要介護認定結果情報モデル.initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
             要介護認定結果情報モデル.setIchijiHnateiKekkaHenkoRiyu(new RString("9"));
 
@@ -127,7 +127,7 @@ public class NinteiKekkaJohoManagerTest {
             when(dac.delete(any(DbT4102NinteiKekkaJohoEntity.class))).thenReturn(1);
 
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報モデル = createModel();
-            要介護認定結果情報モデル.getOriginMd5();
+            要介護認定結果情報モデル.initializeMd5();
             要介護認定結果情報モデル.setIsDeleted(true);
 
             assertThat(sut.save要介護認定結果情報(要介護認定結果情報モデル), is(1));
@@ -137,7 +137,7 @@ public class NinteiKekkaJohoManagerTest {
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
             DbT4102NinteiKekkaJohoEntity 要介護認定結果情報モデル = createModel();
-            要介護認定結果情報モデル.getOriginMd5();
+            要介護認定結果情報モデル.initializeMd5();
 
             sut.save要介護認定結果情報(要介護認定結果情報モデル);
         }

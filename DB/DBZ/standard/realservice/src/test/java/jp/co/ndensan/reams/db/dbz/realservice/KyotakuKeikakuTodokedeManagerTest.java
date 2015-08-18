@@ -124,7 +124,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
             when(dac.update(any(DbT3005KyotakuKeikakuTodokedeEntity.class))).thenReturn(1);
 
             DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getOriginMd5();
+            居宅給付計画届出モデル.initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
             居宅給付計画届出モデル.setTodokedeKubun(new RString("3"));
 
@@ -136,7 +136,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
             when(dac.delete(any(DbT3005KyotakuKeikakuTodokedeEntity.class))).thenReturn(1);
 
             DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getOriginMd5();
+            居宅給付計画届出モデル.initializeMd5();
             居宅給付計画届出モデル.setIsDeleted(true);
 
             assertThat(sut.save居宅給付計画届出(居宅給付計画届出モデル), is(1));
@@ -146,7 +146,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
             DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出モデル = createModel();
-            居宅給付計画届出モデル.getOriginMd5();
+            居宅給付計画届出モデル.initializeMd5();
 
             sut.save居宅給付計画届出(居宅給付計画届出モデル);
         }
