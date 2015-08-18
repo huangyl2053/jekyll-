@@ -3,48 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * サービスコードを表すクラスです。
+ * サービス種類コードを表すクラスです。
  *
- * @author N3317 塚田 萌
+ * @author n8223 朴 義一
  */
-public final class ServiceCode implements IValueObject<RString>, Comparable<ServiceCode>, IDbColumnMappable, Serializable {
+public final class ServiceShuruiCode implements IValueObject<RString>, Comparable<ServiceShuruiCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ServiceCode です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の ServiceShuruiCode です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final ServiceCode EMPTY;
+    public static final ServiceShuruiCode EMPTY;
 
     static {
-        EMPTY = new ServiceCode(RString.EMPTY);
+        EMPTY = new ServiceShuruiCode(RString.EMPTY);
     }
+
     private final RString code;
 
     /**
-     * 指定した値からサービスコードを生成します。
+     * インスタンスを生成します。
      *
-     * @param code サービスコード サービスコード
+     * @param サービス種類コード サービス種類コード
      */
-    public ServiceCode(String code) {
-        this.code = (code == null) ? null : new RString(code);
+    public ServiceShuruiCode(String サービス種類コード) {
+        this.code = (サービス種類コード == null) ? null : new RString(サービス種類コード);
     }
 
     /**
-     * 指定した値からサービスコードを生成します。
+     * インスタンスを生成します。
      *
-     * @param code サービスコード
+     * @param サービス種類コード サービス種類コード
      */
-    public ServiceCode(RString code) {
-        this.code = code;
+    public ServiceShuruiCode(RString サービス種類コード) {
+        this.code = サービス種類コード;
     }
 
     @Override
@@ -58,7 +60,7 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
     }
 
     @Override
-    public int compareTo(ServiceCode 比較対象) {
+    public int compareTo(ServiceShuruiCode 比較対象) {
         return Objects.compare(this.code, 比較対象.code, Comparators.naturalOrder());
     }
 
@@ -76,17 +78,17 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
         if (比較対象 == null) {
             return false;
         }
-        if (!(比較対象 instanceof ServiceCode)) {
+        if (!(比較対象 instanceof ServiceShuruiCode)) {
             return false;
         }
-        ServiceCode other = (ServiceCode) 比較対象;
+        ServiceShuruiCode other = (ServiceShuruiCode) 比較対象;
         return Objects.equals(this.code, other.code);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.code);
+        hash = 37 * hash + Objects.hashCode(this.code);
         return hash;
     }
 }

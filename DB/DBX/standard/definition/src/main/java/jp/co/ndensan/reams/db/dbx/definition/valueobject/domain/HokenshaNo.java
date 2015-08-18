@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,39 +13,38 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 証記載保険者番号です。
+ * 保険者番号です。
  *
  * @author N3327 三浦 凌
  */
-public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparable<ShoKisaiHokenshaNo>, IDbColumnMappable, Serializable {
+public final class HokenshaNo implements IValueObject<RString>, Comparable<HokenshaNo>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ShoKisaiHokenshaNo です。
-     * {@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の HokenshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final ShoKisaiHokenshaNo EMPTY;
+    public static final HokenshaNo EMPTY;
 
     static {
-        EMPTY = new ShoKisaiHokenshaNo(RString.EMPTY);
+        EMPTY = new HokenshaNo(RString.EMPTY);
     }
 
     private final RString theValue;
 
     /**
-     * 指定の値をもった ShoKisaiHokenshaNo を生成します。
+     * 指定の値をもった HokenshaNo を生成します。
      *
      * @param value 値
      */
-    public ShoKisaiHokenshaNo(String value) {
+    public HokenshaNo(String value) {
         this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
-     * 指定の値をもった ShoKisaiHokenshaNo を生成します。
+     * 指定の値をもった HokenshaNo を生成します。
      *
      * @param value 値
      */
-    public ShoKisaiHokenshaNo(RString value) {
+    public HokenshaNo(RString value) {
         this.theValue = value;
     }
 
@@ -60,7 +59,7 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
     }
 
     @Override
-    public int compareTo(ShoKisaiHokenshaNo o) {
+    public int compareTo(HokenshaNo o) {
         return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
@@ -78,17 +77,17 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof ShoKisaiHokenshaNo)) {
+        if (!(obj instanceof HokenshaNo)) {
             return false;
         }
-        ShoKisaiHokenshaNo other = (ShoKisaiHokenshaNo) obj;
+        HokenshaNo other = (HokenshaNo) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.theValue);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 }

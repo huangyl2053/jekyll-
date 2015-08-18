@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosaScore;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5204NinteichosahyoKihonChosaScoreEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5204NinteichosahyoKihonChosaScoreDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

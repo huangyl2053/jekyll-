@@ -31,6 +31,44 @@
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxEntity</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxModel</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxRealService</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxDivController</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxTestHelper</artifactId>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

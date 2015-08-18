@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,39 +13,38 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 市町村コードを表すクラスです。
+ * サービスコードを表すクラスです。
  *
- * @author n8223　朴義一
+ * @author N3317 塚田 萌
  */
-public class ShichosonCode implements IValueObject<RString>, Comparable<ShichosonCode>, IDbColumnMappable, Serializable {
+public final class ServiceCode implements IValueObject<RString>, Comparable<ServiceCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ShichosonCode です。 {@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の ServiceCode です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final ShichosonCode EMPTY;
+    public static final ServiceCode EMPTY;
 
     static {
-        EMPTY = new ShichosonCode(RString.EMPTY);
+        EMPTY = new ServiceCode(RString.EMPTY);
     }
-
     private final RString code;
 
     /**
-     * インスタンスを生成します。
+     * 指定した値からサービスコードを生成します。
      *
-     * @param 市町村コード 市町村コード
+     * @param code サービスコード サービスコード
      */
-    public ShichosonCode(String 市町村コード) {
-        this.code = (市町村コード == null) ? null : new RString(市町村コード);
+    public ServiceCode(String code) {
+        this.code = (code == null) ? null : new RString(code);
     }
 
     /**
-     * インスタンスを生成します。
+     * 指定した値からサービスコードを生成します。
      *
-     * @param 市町村コード 市町村コード
+     * @param code サービスコード
      */
-    public ShichosonCode(RString 市町村コード) {
-        this.code = 市町村コード;
+    public ServiceCode(RString code) {
+        this.code = code;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class ShichosonCode implements IValueObject<RString>, Comparable<Shichoso
     }
 
     @Override
-    public int compareTo(ShichosonCode 比較対象) {
+    public int compareTo(ServiceCode 比較対象) {
         return Objects.compare(this.code, 比較対象.code, Comparators.naturalOrder());
     }
 
@@ -73,25 +72,21 @@ public class ShichosonCode implements IValueObject<RString>, Comparable<Shichoso
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object 比較対象) {
+        if (比較対象 == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(比較対象 instanceof ServiceCode)) {
             return false;
         }
-        final ShichosonCode other = (ShichosonCode) obj;
-        if (!Objects.equals(this.code, other.code)) {
-            return false;
-        }
-        return true;
+        ServiceCode other = (ServiceCode) 比較対象;
+        return Objects.equals(this.code, other.code);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.code);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.code);
         return hash;
     }
-
 }

@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JutakuKaishuRiyushoTesuryo
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3096JutakuKaishuRiyushoTesuryo
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3096JutakuKaishuRiyushoTesuryoShukei.*;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

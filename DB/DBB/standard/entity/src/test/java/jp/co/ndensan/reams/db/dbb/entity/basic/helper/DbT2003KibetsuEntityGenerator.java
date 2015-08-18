@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

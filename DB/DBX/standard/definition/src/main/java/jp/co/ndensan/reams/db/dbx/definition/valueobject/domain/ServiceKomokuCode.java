@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,20 +13,20 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * サービス種類コードを表すクラスです。
+ * サービス項目コードを表すクラスです。
  *
  * @author n8223 朴 義一
  */
-public final class ServiceShuruiCode implements IValueObject<RString>, Comparable<ServiceShuruiCode>, IDbColumnMappable, Serializable {
+public final class ServiceKomokuCode implements IValueObject<RString>, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ServiceShuruiCode です。
+     * 空の ServiceKomokuCode です。
      * {@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final ServiceShuruiCode EMPTY;
+    public static final ServiceKomokuCode EMPTY;
 
     static {
-        EMPTY = new ServiceShuruiCode(RString.EMPTY);
+        EMPTY = new ServiceKomokuCode(RString.EMPTY);
     }
 
     private final RString code;
@@ -34,19 +34,19 @@ public final class ServiceShuruiCode implements IValueObject<RString>, Comparabl
     /**
      * インスタンスを生成します。
      *
-     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
      */
-    public ServiceShuruiCode(String サービス種類コード) {
-        this.code = (サービス種類コード == null) ? null : new RString(サービス種類コード);
+    public ServiceKomokuCode(String サービス項目コード) {
+        this.code = (サービス項目コード == null) ? null : new RString(サービス項目コード);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
      */
-    public ServiceShuruiCode(RString サービス種類コード) {
-        this.code = サービス種類コード;
+    public ServiceKomokuCode(RString サービス項目コード) {
+        this.code = サービス項目コード;
     }
 
     @Override
@@ -60,7 +60,7 @@ public final class ServiceShuruiCode implements IValueObject<RString>, Comparabl
     }
 
     @Override
-    public int compareTo(ServiceShuruiCode 比較対象) {
+    public int compareTo(ServiceKomokuCode 比較対象) {
         return Objects.compare(this.code, 比較対象.code, Comparators.naturalOrder());
     }
 
@@ -78,10 +78,10 @@ public final class ServiceShuruiCode implements IValueObject<RString>, Comparabl
         if (比較対象 == null) {
             return false;
         }
-        if (!(比較対象 instanceof ServiceShuruiCode)) {
+        if (!(比較対象 instanceof ServiceKomokuCode)) {
             return false;
         }
-        ServiceShuruiCode other = (ServiceShuruiCode) 比較対象;
+        ServiceKomokuCode other = (ServiceKomokuCode) 比較対象;
         return Objects.equals(this.code, other.code);
     }
 

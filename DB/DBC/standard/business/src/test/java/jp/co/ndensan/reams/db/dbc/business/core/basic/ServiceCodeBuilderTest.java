@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7119ServiceCodeEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
 import static org.hamcrest.CoreMatchers.is;

@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaicho.shic
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4025ShiharaiHohoHenkoGengaku.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4025ShiharaiHohoHenkoGengaku.rirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

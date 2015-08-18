@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3065ShichosonTokubetsuKyufuJig
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3065ShichosonTokubetsuKyufuJigyosha.*;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

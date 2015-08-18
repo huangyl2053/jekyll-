@@ -44,7 +44,7 @@
          <jp.co.ndensan.reams.uexVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.uexVersion>
          <jp.co.ndensan.reams.uxxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.uxxVersion>
          <jp.co.ndensan.reams.caxVersion>0.2.0</jp.co.ndensan.reams.caxVersion>
-         <jp.co.ndensan.reams.dbxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.dbxVersion>
+         <jp.co.ndensan.reams.dbxVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbxVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

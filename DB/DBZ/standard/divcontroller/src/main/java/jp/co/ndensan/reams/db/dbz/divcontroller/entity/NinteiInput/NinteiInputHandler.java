@@ -15,8 +15,8 @@ import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.Nintei
 // TODO n8187久保田 dbxのJukyushaDaichoに置換すること。
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeshaTsuzukigaraCode;
 // TODO n8187久保田 dbxのShinseitodokedeJohoFactoryに置換すること。
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;

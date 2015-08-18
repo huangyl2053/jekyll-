@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJoho.shoKisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJoho.sonotaKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

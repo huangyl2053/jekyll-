@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;

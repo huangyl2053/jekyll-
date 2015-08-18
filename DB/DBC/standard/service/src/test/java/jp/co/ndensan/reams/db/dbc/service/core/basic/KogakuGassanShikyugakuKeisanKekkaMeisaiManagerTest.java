@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyugakuKeis
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
