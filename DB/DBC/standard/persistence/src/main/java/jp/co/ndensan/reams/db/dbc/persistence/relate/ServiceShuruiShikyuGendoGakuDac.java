@@ -9,16 +9,15 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -49,21 +48,21 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @param サービス種類コード サービス種類コード
      * @param 要介護状態区分 要介護状態区分
      * @param 適用開始年月 適用開始年月
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @return ServiceShuruiShikyuGendoGakuModel
      */
     @Transaction
     public Optional<ServiceShuruiShikyuGendoGakuModel> selectByKey(ServiceShuruiCode サービス種類コード,
             IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
-            YMDHMS 処理日時) {
+            int 履歴番号) {
 
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return Optional.ofNullable(createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分.getCode(), 適用開始年月, 処理日時)));
+        return Optional.ofNullable(createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分.getCode(), 適用開始年月, 履歴番号)));
     }
 
     /**
@@ -106,7 +105,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
                 where(and(
                                 eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分.getCode()),
                                 leq(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishuYM, 基準日.getYearMonth()))).
-                order(by(DbT7111ServiceShuruiShikyuGendoGaku.shoriTimestamp, Order.DESC)).
+                order(by(DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 
         List<ServiceShuruiShikyuGendoGakuModel> list = new ArrayList<>();
@@ -135,7 +134,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         サービス種類支給限度額List = accessor.select().
                 table(DbT7111ServiceShuruiShikyuGendoGaku.class).
                 where(eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分.getCode())).
-                order(by(DbT7111ServiceShuruiShikyuGendoGaku.shoriTimestamp, Order.DESC)).
+                order(by(DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 
         List<ServiceShuruiShikyuGendoGakuModel> list = new ArrayList<>();
@@ -165,7 +164,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
             return result;
         }
 
-        result = サービス種類支給限度額Dac.insert(data.getEntity());
+        result = サービス種類支給限度額Dac.save(data.getEntity());
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -179,7 +178,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
             return result;
         }
 
-        result = サービス種類支給限度額Dac.update(data.getEntity());
+        result = サービス種類支給限度額Dac.save(data.getEntity());
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -193,7 +192,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
             return result;
         }
 
-        result = サービス種類支給限度額Dac.delete(data.getEntity());
+        result = サービス種類支給限度額Dac.save(data.getEntity());
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -212,7 +211,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
             return result;
         }
 
-        result = サービス種類支給限度額Dac.deletePhysical(data.getEntity());
+        result = サービス種類支給限度額Dac.save(data.getEntity());
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;

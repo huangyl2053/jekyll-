@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbc.realservice;
 
+import jp.co.ndensan.reams.db.dbc.realservice.ServiceShuruiShikyuGendoGakuManager;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -57,13 +58,13 @@ public class ServiceShuruiShikyuGendoGakuManagerTest {
 
             Optional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額モデル = Optional.ofNullable(createModel());
 
-            when(dac.selectByKey(any(ServiceShuruiCode.class), any(IYokaigoJotaiKubun.class), any(FlexibleYearMonth.class), any(YMDHMS.class))).thenReturn(サービス種類支給限度額モデル);
+            when(dac.selectByKey(any(ServiceShuruiCode.class), any(IYokaigoJotaiKubun.class), any(FlexibleYearMonth.class), any(int.class))).thenReturn(サービス種類支給限度額モデル);
 
             Optional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額 = sut.getサービス種類支給限度額(
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード,
                     YokaigoJotaiKubun09A.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月,
-                    DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時);
+                    DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号);
 
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(サービス種類支給限度額.get().get支給限度単位数(), is(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_支給限度単位数));

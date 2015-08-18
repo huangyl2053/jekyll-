@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice;
+package jp.co.ndensan.reams.db.dbc.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
@@ -55,9 +55,9 @@ public class ServiceShuruiShikyuGendoGakuManager {
     public Optional<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額(ServiceShuruiCode サービス種類コード,
             IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
-            YMDHMS 処理日時) {
+            int 履歴番号) {
 
-        return dac.selectByKey(サービス種類コード, 要介護状態区分, 適用開始年月, 処理日時);
+        return dac.selectByKey(サービス種類コード, 要介護状態区分, 適用開始年月, 履歴番号);
     }
 
     /**
