@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.KyotakuKeikakuFinder;
 import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiKekkaFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ServiceShuruiShikyuGendoGakuManager;
-import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
+import jp.co.ndensan.reams.db.dbd.realservice.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;

@@ -9,10 +9,10 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohe
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
+import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
+//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -44,7 +44,8 @@ public class ShiharaiHohoHenkoDacTest {
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("987654");
     private static final KanriKubun 管理区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
     private static final TorokuKubun 登録区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_登録区分;
-    private static final YMDHMS 処理日時1 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
+    private static final int 履歴番号 = 1;
+//    private static final YMDHMS 履歴番号 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
 
     private static final KanriKubun _2号差止管理区分 = KanriKubun.ニ号差止;
     private static final TorokuKubun _2号差止登録区分 = TorokuKubun.二号差止登録;
@@ -63,40 +64,40 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Before
         public void setUp() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の証記載保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(null, 被保険者番号1, 管理区分1, 処理日時1);
+            sut.selectByKey(null, 被保険者番号1, 管理区分1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(証記載保険者番号1, null, 管理区分1, 処理日時1);
+            sut.selectByKey(証記載保険者番号1, null, 管理区分1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の管理区分にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(証記載保険者番号1, 被保険者番号1, null, 処理日時1);
+            sut.selectByKey(証記載保険者番号1, 被保険者番号1, null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, null);
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, null);
+//        }
+//
         // TODO 見つかる場合、支払方法変更モデルを構成している全てのモデルクラスについて特定項目を選択し、一致していることを確認するテストケースを記述して下さい。
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_支払方法変更モデル返す() {
-            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 処理日時1).get().get証記載保険者番号(), is(証記載保険者番号1));
+            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 履歴番号).get().get証記載保険者番号(), is(証記載保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_データ無しを返す() {
-            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 管理区分1, 処理日時1).isPresent(), is(false));
+            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 管理区分1, 履歴番号).isPresent(), is(false));
         }
     }
 
@@ -104,7 +105,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
             IItemList<ShiharaiHohoHenkoModel> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -126,7 +127,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _2号差止管理区分, _2号差止登録区分, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _2号差止管理区分, _2号差止登録区分, 履歴番号);
             IItemList<ShiharaiHohoHenkoModel> modelList = sut.select2号差止履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -135,7 +136,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
             assertThat(sut.select2号差止履歴(被保険者番号1).isEmpty(), is(true));
         }
     }
@@ -149,7 +150,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号償還払化管理区分, _1号償還払化登録区分, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号償還払化管理区分, _1号償還払化登録区分, 履歴番号);
             IItemList<ShiharaiHohoHenkoModel> modelList = sut.select1号償還払化履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -158,7 +159,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
             assertThat(sut.select1号償還払化履歴(被保険者番号1).isEmpty(), is(true));
         }
     }
@@ -172,7 +173,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号減額管理区分, _1号減額登録区分, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号減額管理区分, _1号減額登録区分, 履歴番号);
             IItemList<ShiharaiHohoHenkoModel> modelList = sut.select1号減額履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -181,7 +182,7 @@ public class ShiharaiHohoHenkoDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 処理日時1);
+            TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
             assertThat(sut.select1号減額履歴(被保険者番号1).isEmpty(), is(true));
         }
     }
@@ -266,14 +267,14 @@ public class ShiharaiHohoHenkoDacTest {
                 HihokenshaNo 被保険者番号,
                 KanriKubun 管理区分,
                 TorokuKubun 登録区分,
-                YMDHMS 処理日時) {
+                int 履歴番号) {
             DbT4021ShiharaiHohoHenkoEntity entity = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者番号);
-            entity.setKanriKubun(管理区分.code());
+            entity.setKanriKubun(管理区分);
             entity.setTorokuKubun(登録区分.code());
-            entity.setShoriTimestamp(処理日時);
-            支払方法変更Dac.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            支払方法変更Dac.save(entity);
         }
     }
 

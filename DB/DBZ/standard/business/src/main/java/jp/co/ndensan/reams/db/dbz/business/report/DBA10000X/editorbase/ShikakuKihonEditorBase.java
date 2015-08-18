@@ -87,7 +87,7 @@ public class ShikakuKihonEditorBase {
      * @param source 被保険者証帳票ソース
      */
     public void set被保険者番号(IHihokenshashoCommonEditData source) {
-        HihokenshaDaichoModel hihoDaicho = hihokenshashoModel.getHihokenshaDaicho();
+        HihokenshaDaichoModel hihoDaicho = new HihokenshaDaichoModel(hihokenshashoModel.getHihokenshaDaicho());
         RString hihoNo = RString.EMPTY;
 //        RString hihoNo = hihoDaicho.get被保険者番号().value();
 
