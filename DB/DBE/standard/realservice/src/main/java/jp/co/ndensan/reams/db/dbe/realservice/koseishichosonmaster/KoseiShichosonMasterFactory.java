@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbe.realservice.koseishichosonmaster;
 
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
@@ -11,9 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
  * {@link IChosainManager}を生成するクラスです。
  *
  * @author n8223　朴義一
- * @deprecated dbb.realserviceを使用する。
  */
-// TODO n8300姜 dbb.realserviceパッケージに移動予定。
 public final class KoseiShichosonMasterFactory {
 
     private KoseiShichosonMasterFactory() {

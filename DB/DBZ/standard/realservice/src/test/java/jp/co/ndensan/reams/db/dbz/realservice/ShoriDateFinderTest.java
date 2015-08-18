@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理名;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理枝番;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度内連番;
-import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShoriDateDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -22,12 +21,12 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -53,12 +52,12 @@ public class ShoriDateFinderTest {
         @Test
         public void find処理日付は_該当の情報がない時_Optionalのemptyを返す() {
             SubGyomuCode notFound = new SubGyomuCode("RDD");
-            Optional<ShoriDateModel> empty = Optional.empty();
+            Optional<DbT7022ShoriDateKanriEntity> empty = Optional.empty();
 
             when(dac.select処理日付ByKey(any(SubGyomuCode.class), any(LasdecCode.class),
-                    any(ShoriName.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(empty);
+                    any(RString.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(empty);
 
-            Optional<ShoriDateModel> result = sut.find処理日付(
+            Optional<DbT7022ShoriDateKanriEntity> result = sut.find処理日付(
                     notFound,
                     DEFAULT_市町村コード,
                     ShoriName.valueOf(DEFAULT_処理名.toString()),
@@ -71,18 +70,17 @@ public class ShoriDateFinderTest {
 
         @Test
         public void find処理日付は_該当の情報がある時_該当情報を返す() {
-            Optional<ShoriDateModel> model = Optional.of(
-                    new ShoriDateModel(DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity()));
+            Optional<DbT7022ShoriDateKanriEntity> model = Optional.of(new DbT7022ShoriDateKanriEntity());
 
             when(dac.select処理日付ByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番)).thenReturn(model);
 
-            Optional<ShoriDateModel> result = sut.find処理日付(
+            Optional<DbT7022ShoriDateKanriEntity> result = sut.find処理日付(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
                     ShoriName.valueOf(DEFAULT_処理名.toString()),
@@ -90,7 +88,7 @@ public class ShoriDateFinderTest {
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
 
-            assertThat(result.get().getサブ業務コード(), is(DEFAULT_サブ業務コード));
+            assertThat(result.get().getSubGyomuCode(), is(DEFAULT_サブ業務コード));
         }
     }
 }
