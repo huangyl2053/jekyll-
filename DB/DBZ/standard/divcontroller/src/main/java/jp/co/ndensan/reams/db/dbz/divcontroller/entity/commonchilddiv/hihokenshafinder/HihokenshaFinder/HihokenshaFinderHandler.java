@@ -6,18 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder;
 
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
-import jp.co.ndensan.reams.ur.urz.business.RecentUsed;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ScopeCodeType;
-import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.ScopeCode;
-import jp.co.ndensan.reams.ur.urz.realservice.ISaikinShorishaManager;
-import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.saikinshoririreki.ISaikinShorishaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.saikinshoririreki.RecentUsedManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

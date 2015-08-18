@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki;
 
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ISaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.SaikinShorishaRireki.ISaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /**

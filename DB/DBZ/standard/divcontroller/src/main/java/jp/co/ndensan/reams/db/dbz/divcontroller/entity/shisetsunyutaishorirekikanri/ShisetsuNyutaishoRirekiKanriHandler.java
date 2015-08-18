@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
 import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
-import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**

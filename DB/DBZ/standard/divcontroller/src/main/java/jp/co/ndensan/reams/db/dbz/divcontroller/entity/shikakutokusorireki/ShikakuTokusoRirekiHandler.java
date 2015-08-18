@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
+//import java.util.ArrayList;
+//import java.util.List;
+//import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
+//import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
+//import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
-import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+//import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
+//import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
+//import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
+//import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+//import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+//import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 資格特喪履歴情報Divの操作を行うクラスです。

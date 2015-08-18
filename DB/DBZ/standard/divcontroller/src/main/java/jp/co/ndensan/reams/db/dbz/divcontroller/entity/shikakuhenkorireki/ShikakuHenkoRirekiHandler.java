@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -36,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 
 /**
  * 資格変更履歴共有子Divのエンティティに対する操作を行うクラスです。
