@@ -45,12 +45,12 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkShikkinTaio"));
             }
 
-            public btnBack(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBack"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
-            public btnKoshin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             }
 
         }

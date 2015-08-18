@@ -41,16 +41,16 @@ module DBZ {
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            }
-
-            public btnKoshin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
             public btnMasking(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnMasking"));
+            }
+
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             }
 
         }
