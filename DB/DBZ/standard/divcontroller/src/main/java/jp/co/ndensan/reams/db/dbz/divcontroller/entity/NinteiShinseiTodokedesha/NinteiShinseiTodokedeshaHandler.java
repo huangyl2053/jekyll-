@@ -13,13 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.definition.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeshaTsuzukigaraCode;
-import jp.co.ndensan.reams.db.dbz.realservice.INinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
-import jp.co.ndensan.reams.db.dbz.realservice.IShinseitodokedeJohoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
-import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
 // TODO n8187久保田 dbxのShinseitodokedeJohoFactoryに置換すること。
-import jp.co.ndensan.reams.db.dbz.realservice.ShinseitodokedeJohoFactory;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,9 +31,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 public class NinteiShinseiTodokedeshaHandler {
 
     private final NinteiShinseiTodokedeshaDiv div;
-    private IShinseiRirekiManager shinseiRirekiManager;
-    private INinteiShinseiJohoManager ninteiShinseiJohoManager;
-    private IShinseitodokedeJohoManager shinseitodokedeJohoManager;
+//    private IShinseiRirekiManager shinseiRirekiManager;
+//    private INinteiShinseiJohoManager ninteiShinseiJohoManager;
+//    private IShinseitodokedeJohoManager shinseitodokedeJohoManager;
 
     private SubGyomuCode subGyomuCode;
 
@@ -150,7 +144,8 @@ public class NinteiShinseiTodokedeshaHandler {
     public void onClickBtnZenkaiFukusha() {
         //①受渡しにフォームのhiddenの申請書管理番号と履歴申請情報で、前回申請管理番号があれば、②-1
         createZenkaiJohoManager();
-        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = shinseiRirekiManager.find申請履歴情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
+        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = Optional.empty();
+//        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = shinseiRirekiManager.find申請履歴情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
         if (shinseiRirekiJoho.isPresent()) {
             createZenkaiJoho(shinseiRirekiJoho);
         }
@@ -164,21 +159,21 @@ public class NinteiShinseiTodokedeshaHandler {
     }
 
     private void createZenkaiJohoManager() {
-        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnGyomuCode()));
-        ninteiShinseiJohoManager = NinteiShinseiJohoManagerFactory.createInstance(new SubGyomuCode(div.getHdnGyomuCode()));
-        shinseitodokedeJohoManager = ShinseitodokedeJohoFactory.getInstance(new SubGyomuCode(div.getHdnGyomuCode()));
+//        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnGyomuCode()));
+//        ninteiShinseiJohoManager = NinteiShinseiJohoManagerFactory.createInstance(new SubGyomuCode(div.getHdnGyomuCode()));
+//        shinseitodokedeJohoManager = ShinseitodokedeJohoFactory.getInstance(new SubGyomuCode(div.getHdnGyomuCode()));
     }
 
     private void createZenkaiJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
-        Optional<INinteiShinseiJoho> ninteiShinseiJoho
-                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
-        if (ninteiShinseiJoho.isPresent()) {
-            Optional<IShinseitodokedeJoho> shinseitodokedeJoho
-                    = shinseitodokedeJohoManager.find申請届出者情報(ninteiShinseiJoho.get().get申請書管理番号());
-            if (shinseitodokedeJoho.isPresent()) {
-                setZenkaiJoho(shinseitodokedeJoho);
-            }
-        }
+//        Optional<INinteiShinseiJoho> ninteiShinseiJoho
+//                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
+//        if (ninteiShinseiJoho.isPresent()) {
+//            Optional<IShinseitodokedeJoho> shinseitodokedeJoho
+//                    = shinseitodokedeJohoManager.find申請届出者情報(ninteiShinseiJoho.get().get申請書管理番号());
+//            if (shinseitodokedeJoho.isPresent()) {
+//                setZenkaiJoho(shinseitodokedeJoho);
+//            }
+//        }
     }
 
     private void setZenkaiJoho(Optional<IShinseitodokedeJoho> shinseitodokedeJoho) {

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsunyutaishorirekikanri;
 
+import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -12,17 +13,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage;
-import jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping.ShisetsuNyutaishoValidationMessageMapping;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 //import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -221,7 +218,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
 
         //※ 現在のリストにmodelへいれる。そして、stateによって「追加・変更・削除」をもとにバリデーションチェックを行います。※
-        ShisetsuNyutaishoRelateModel model = ShisetsuNyutaishoMapper.toShisetsuNyutaishoRelateModel(shisetsuNyutaishoRirekiDiv);
+        DbT1004ShisetsuNyutaishoEntity model = ShisetsuNyutaishoMapper.toDbT1004ShisetsuNyutaishoEntity(shisetsuNyutaishoRirekiDiv);
         RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
 
         Optional<ShisetsuNyutaishoModel> 前履歴;
@@ -233,7 +230,10 @@ public class ShisetsuNyutaishoRirekiKanri {
             case Add:
                 前履歴 = Optional.empty();
                 次履歴 = Optional.empty();
-                全履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴().map(toShisetsuNyutaishoModel());
+
+                //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
+                全履歴 = ItemList.empty();
+                //全履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴().map(toShisetsuNyutaishoModel());
                 break;
             case Modify:
                 int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
@@ -241,9 +241,11 @@ public class ShisetsuNyutaishoRirekiKanri {
                 if (rowIndex != 0) {
                     int rdx = rowIndex - 1;
                     dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
-                    次履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
-                            .filter(ShisetsuNyutaishoMapper.createKey(row))
-                            .findJustOne().map(toShisetsuNyutaishoModel());
+                    //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
+                    次履歴 = Optional.empty();
+//                    次履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
+//                            .filter(ShisetsuNyutaishoMapper.createKey(row))
+//                            .findJustOne().map(toShisetsuNyutaishoModel());
                 } else {
                     次履歴 = Optional.empty();
                 }
@@ -251,9 +253,11 @@ public class ShisetsuNyutaishoRirekiKanri {
                 if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
                     int rdx = rowIndex + 1;
                     dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
-                    前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
-                            .filter(ShisetsuNyutaishoMapper.createKey(row))
-                            .findJustOne().map(toShisetsuNyutaishoModel());
+                    //TODO n3331 modelパッケージ廃止に伴うエラーの解消のためコメントアウト
+                    前履歴 = Optional.empty();
+//                    前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
+//                            .filter(ShisetsuNyutaishoMapper.createKey(row))
+//                            .findJustOne().map(toShisetsuNyutaishoModel());
                 } else {
                     前履歴 = Optional.empty();
                 }
@@ -269,7 +273,8 @@ public class ShisetsuNyutaishoRirekiKanri {
         }
         ShisetsuNyutaishoRirekiKanriContext context = new ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus.toValue(rowState), 前履歴, 次履歴, 全履歴);
         //バリデーションチェック
-        validationMessages.add(model.get介護保険施設入退所モデル().validateIn(context));
+        //TODO n3331 modelパッケージ廃止に伴うエラーの解消
+        //validationMessages.add(model.get介護保険施設入退所モデル().validateIn(context));
         //バリデーションチェック
 //        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日が未入力)) {
 //            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
@@ -316,15 +321,14 @@ public class ShisetsuNyutaishoRirekiKanri {
         return response;
     }
 
-    private IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel> toShisetsuNyutaishoModel() {
-        return new IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel>() {
-            @Override
-            public ShisetsuNyutaishoModel apply(ShisetsuNyutaishoRelateModel t) {
-                return t.get介護保険施設入退所モデル();
-            }
-        };
-    }
-
+//    private IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel> toShisetsuNyutaishoModel() {
+//        return new IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel>() {
+//            @Override
+//            public ShisetsuNyutaishoModel apply(ShisetsuNyutaishoRelateModel t) {
+//                return t.get介護保険施設入退所モデル();
+//            }
+//        };
+//    }
     /**
      * 確定ボタンを押下した時に実行されます。<br/>
      * 明細エリアの入力内容を施設入退所履歴一覧に反映します。
@@ -346,11 +350,10 @@ public class ShisetsuNyutaishoRirekiKanri {
         //３）・削除を確定する場合
         //　→選択している行の状態列を"削除"に変更する。
         //新規に追加した行に対して削除する場合は、追加行をグリッドから取り除く。
-        ShisetsuNyutaishoRelateModel model = ShisetsuNyutaishoMapper.toShisetsuNyutaishoRelateModel(shisetsuNyutaishoRirekiDiv);
-
+        //TODO n3331 modelパッケージ廃止に伴うエラー箇所の修正
+        //ShisetsuNyutaishoRelateModel model = ShisetsuNyutaishoMapper.toShisetsuNyutaishoRelateModel(shisetsuNyutaishoRirekiDiv);
         // 明細の入所年月日・退所年月日
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).update施設入退所履歴(model);
-
+        //createHandlerOf(shisetsuNyutaishoRirekiDiv).update施設入退所履歴(model);
         //４）「施設入退所履歴一覧」のReadOnlyを外す。
         shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(false);
         //５）明細表示モードに選択不可を設定する。

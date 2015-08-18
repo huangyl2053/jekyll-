@@ -3,34 +3,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.IHihokenshaShikakuHakkoDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.KubunGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.NinteiInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.ShuruiShikyuGendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.YukoKigenInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tabHihokenshaShikakuShosaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblKyuhuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShienJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShinsakaiIkenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -612,8 +595,9 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @Override
-    public HihokenshaShikakuHakkoModel create証発行情報() {
-        return getHandler().create証発行情報();
+    public HihokenshaShikakuHakko create証発行情報() {
+//        return getHandler().create証発行情報();
+        return null;
     }
 
     // 以下のメソッドはインタフェースに定義していないので業務には公開されません。

@@ -10,20 +10,16 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -60,55 +56,55 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     public void load(LasdecCode 市町村コード, HihokenshaNo HihokenshaNo) {
-        HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
-        IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List = hihokenshaFinder.find被保険者台帳List(市町村コード, HihokenshaNo);
-        set被保険者台帳情報(find被保険者台帳List);
+//        HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
+//        IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List = hihokenshaFinder.find被保険者台帳List(市町村コード, HihokenshaNo);
+//        set被保険者台帳情報(find被保険者台帳List);
         mapping資格変更履歴();
         setJuminJohoDataSource();
         setHenkoJiyuDataSource();
     }
 
     public void initialize(LasdecCode 市町村コード, LasdecCode KyuShichosonCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode) {
-        HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
-        List<HihokenshaDaicho> list = new ArrayList<>();
-        for (DbT1001HihokenshaDaichoEntity entity : hihokenshaFinder.find直近被保険者台帳一覧(市町村コード)) {
-            list.add(new HihokenshaDaicho(entity));
-        }
-        HihokenshaDaichoList 被保険者List = new HihokenshaDaichoList(ItemList.of(list));
+//        HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
+//        List<HihokenshaDaicho> list = new ArrayList<>();
+//        for (DbT1001HihokenshaDaichoEntity entity : hihokenshaFinder.find直近被保険者台帳一覧(市町村コード)) {
+//            list.add(new HihokenshaDaicho(entity));
+//        }
+//        HihokenshaDaichoList 被保険者List = new HihokenshaDaichoList(ItemList.of(list));
 
-        shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(mode);
-        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
-            case TanitsuGappeiNashi:
-                break;
-            case TanitsuGappeiAri:
-                setKyuHokensya(KyuShichosonCode);
-                setTanitsuGappeiAri(被保険者List);
-                break;
-
-            case KoikiGappeiNashi:
-                setJuminJohoDataSource();
-                setKoikiGappeiNashi(被保険者List);
-                break;
-            case KoikiGappeiAri:
-                setKyuHokensya(KyuShichosonCode);
-                setJuminJohoDataSource();
-                setKoikiGappeiAri(被保険者List);
-                break;
-            default:
-                break;
-        }
+ //       shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(mode);
+//        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
+//            case TanitsuGappeiNashi:
+//                break;
+//            case TanitsuGappeiAri:
+//                setKyuHokensya(KyuShichosonCode);
+//                setTanitsuGappeiAri(被保険者List);
+//                break;
+//            case KoikiGappeiNashi:
+//                setJuminJohoDataSource();
+//                setKoikiGappeiNashi(被保険者List);
+//                break;
+//            case KoikiGappeiAri:
+//                setKyuHokensya(KyuShichosonCode);
+//                setJuminJohoDataSource();
+//                setKoikiGappeiAri(被保険者List);
+//                break;
+//            default:
+//                break;
+//    }
         setHenkoJiyuDataSource();
     }
 
     private void setKyuHokensya(LasdecCode lasdecCode) {
 
-        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
-        Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
-        if (gappeiInfo.isPresent()) {
-            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.newItemList(gappeiInfo.get().get単一市町村情報()));
-        } else {
-            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
-        }
+//        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
+//        Optional<GappeiShichoson> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
+//        if (gappeiInfo.isPresent()) {
+        //PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.newItemList(gappeiInfo.get().get単一市町村情報()));
+//            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, null);
+//        } else {
+//            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
+//        }
     }
 
     private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
@@ -119,22 +115,23 @@ public class ShikakuHenkoRirekiHandler {
                 return RString.EMPTY;
         }
 
-        IItemList<IGappeiShichoson> kyuHokenshaList
-                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
+        //TODO n3331 Modelパッケージ廃止に伴うエラー解消のためコメントアウト
+        return RString.EMPTY;
 
-        IPredicate<IGappeiShichoson> predicate = new IPredicate<IGappeiShichoson>() {
-            @Override
-            public boolean evaluate(IGappeiShichoson t) {
-                return t.get旧市町村コード().equals(lasdecCode);
-            }
-        };
-
-        IItemList<IGappeiShichoson> kyuHokensha = kyuHokenshaList.filter(predicate);
-        if (kyuHokensha.isJustOne() && kyuHokensha.findFirst().isPresent()) {
-            return kyuHokensha.findJustOne().get().get旧市町村名称();
-        } else {
-            return RString.EMPTY;
-        }
+//        IItemList<IGappeiShichoson> kyuHokenshaList
+//                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
+//        IPredicate<IGappeiShichoson> predicate = new IPredicate<IGappeiShichoson>() {
+//            @Override
+//            public boolean evaluate(IGappeiShichoson t) {
+//                return t.get旧市町村コード().equals(lasdecCode);
+//            }
+//        };
+//        IItemList<IGappeiShichoson> kyuHokensha = kyuHokenshaList.filter(predicate);
+//        if (kyuHokensha.isJustOne() && kyuHokensha.findFirst().isPresent()) {
+//            return kyuHokensha.findJustOne().get().get旧市町村名称();
+//        } else {
+//            return RString.EMPTY;
+//        }
     }
 
     /**
@@ -345,7 +342,8 @@ public class ShikakuHenkoRirekiHandler {
      */
     public IItemList<HihokenshaDaicho> get被保険者台帳情報() {
         IItemList<HihokenshaDaicho> editing被保険者台帳List
-                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class
+                );
         return editing被保険者台帳List;
     }
 
@@ -411,7 +409,8 @@ public class ShikakuHenkoRirekiHandler {
      */
     public IItemList<DbT1001HihokenshaDaichoEntity> get資格関連異動履歴() {
         IItemList<DbT1001HihokenshaDaichoEntity> baseList
-                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class
+                );
         IItemList<DbT1001HihokenshaDaichoEntity> editingList
                 = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, ItemList.class);
 
@@ -616,9 +615,12 @@ public class ShikakuHenkoRirekiHandler {
         return RString.EMPTY;
     }
 
-    public DbT1001HihokenshaDaichoEntity get更新前選択被保険者台帳() {
-        ItemList<DbT1001HihokenshaDaichoEntity> get = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
-        return get.toList().get(Integer.parseInt(shikakuHenkoRirekiDiv.getSelectRow().toString()));
+    public DbT1001HihokenshaDaichoEntity
+            get更新前選択被保険者台帳() {
+        ItemList<DbT1001HihokenshaDaichoEntity> get = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class
+        );
+        return get.toList()
+                .get(Integer.parseInt(shikakuHenkoRirekiDiv.getSelectRow().toString()));
     }
 
 }

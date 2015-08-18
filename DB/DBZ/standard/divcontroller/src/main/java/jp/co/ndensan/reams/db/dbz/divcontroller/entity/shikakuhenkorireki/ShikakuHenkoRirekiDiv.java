@@ -562,13 +562,13 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @Override
     public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         //TODO
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
 
         //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
         //2)、検索結果として取得する被保険者台帳Listから、資格関連異動の履歴を表現するために必要な情報を抽出する。
         //3)、取得した情報をPanelSessionAccessorに登録する。
         //4)、抽出した資格関連異動履歴Listを、グリッドにマッピングする。
-        handler.load(市町村コード, 被保険者番号);
+//        handler.load(市町村コード, 被保険者番号);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

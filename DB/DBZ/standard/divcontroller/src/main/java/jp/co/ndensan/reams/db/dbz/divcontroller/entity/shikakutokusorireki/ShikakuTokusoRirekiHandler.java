@@ -10,14 +10,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 //import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 //import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 //import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 //import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 //import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 //import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 //import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
 //import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 //import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-
 /**
  * 資格特喪履歴情報Divの操作を行うクラスです。
  *
@@ -26,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 public class ShikakuTokusoRirekiHandler {
 
     private final ShikakuTokusoRirekiDiv div;
-    private final HihokenshaFinder hihokenshaFinder;
+//    private final HihokenshaFinder hihokenshaFinder;
 
     /**
      * コンストラクタです。
@@ -35,7 +33,7 @@ public class ShikakuTokusoRirekiHandler {
      */
     public ShikakuTokusoRirekiHandler(ShikakuTokusoRirekiDiv div) {
         this.div = div;
-        hihokenshaFinder = new HihokenshaFinder();
+//        hihokenshaFinder = new HihokenshaFinder();
     }
 
     /**
@@ -44,11 +42,10 @@ public class ShikakuTokusoRirekiHandler {
      * @param div 資格特喪履歴情報Div
      * @param hihokenshaFinder 被保険者Finder
      */
-    ShikakuTokusoRirekiHandler(ShikakuTokusoRirekiDiv div, HihokenshaFinder hihokenshaFinder) {
-        this.div = div;
-        this.hihokenshaFinder = hihokenshaFinder;
-    }
-
+//    ShikakuTokusoRirekiHandler(ShikakuTokusoRirekiDiv div, HihokenshaFinder hihokenshaFinder) {
+////        this.div = div;
+//        this.hihokenshaFinder = hihokenshaFinder;
+//    }
     /**
      * 検索キーを元にデータを取得し、Divに設定します。
      *

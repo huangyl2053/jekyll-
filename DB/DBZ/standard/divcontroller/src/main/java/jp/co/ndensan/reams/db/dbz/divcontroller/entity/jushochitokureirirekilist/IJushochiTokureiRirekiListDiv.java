@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist;
 
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv.BtnDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv.DisplayType;
@@ -24,14 +25,14 @@ public interface IJushochiTokureiRirekiListDiv {
      *
      * @return 被保険者台帳履歴List
      */
-    IItemList<HihokenshaDaichoModel> get被保険者台帳情報();
+    IItemList<HihokenshaDaicho> get被保険者台帳情報();
 
     /**
      * 住所地特例履歴に対して、引数から被保険者台帳情報を設定します。
      *
      * @param 被保険者台帳List 被保険者台帳List
      */
-    void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List);
+    void set被保険者台帳情報(IItemList<HihokenshaDaicho> 被保険者台帳List);
 
     /**
      * 共有子Divに登録された被保険者台帳情報から、住所地特例情報を抽出してグリッドに対してマッピングします。
