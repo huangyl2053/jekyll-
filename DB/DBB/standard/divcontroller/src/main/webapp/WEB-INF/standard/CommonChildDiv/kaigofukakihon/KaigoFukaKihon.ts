@@ -1,5 +1,5 @@
 /// <reference path='KaigoFukaKihon_Design.ts' />
-module DBZ
+module DBB
 {
     export module KaigoFukaKihon
     {
@@ -26,7 +26,7 @@ module DBZ
     }
 }
 
-module DBZ
+module DBB
 {
     export module KaigoFukaKihon
     {
