@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 上乗せ居宅サービス区分支給限度額を管理するクラスです。
  */
-public class UwanoseKubunShikyuGendoGaku extends ParentModelBase<UwanoseKubunShikyuGendoGakuIdentifier, DbT7113UwanoseKubunShikyuGendoGakuEntity, UwanoseKubunShikyuGendoGaku> implements Serializable {
+public class UwanoseKubunShikyuGendoGaku extends ModelBase<UwanoseKubunShikyuGendoGakuIdentifier, DbT7113UwanoseKubunShikyuGendoGakuEntity, UwanoseKubunShikyuGendoGaku> implements Serializable {
 
     private final DbT7113UwanoseKubunShikyuGendoGakuEntity entity;
     private final UwanoseKubunShikyuGendoGakuIdentifier id;
@@ -144,22 +145,6 @@ public class UwanoseKubunShikyuGendoGaku extends ParentModelBase<UwanoseKubunShi
     }
 
     /**
-     * 上乗せ居宅サービス区分支給限度額のみを変更対象とします。<br/>
-     * {@link DbT7113UwanoseKubunShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link UwanoseKubunShikyuGendoGaku}
-     */
-    @Override
-    public UwanoseKubunShikyuGendoGaku modifiedModel() {
-        DbT7113UwanoseKubunShikyuGendoGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new UwanoseKubunShikyuGendoGaku(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する上乗せ居宅サービス区分支給限度額を削除対象とします。<br/>
      * {@link DbT7113UwanoseKubunShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -187,9 +172,15 @@ public class UwanoseKubunShikyuGendoGaku extends ParentModelBase<UwanoseKubunShi
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7113UwanoseKubunShikyuGendoGakuEntity entity;
         private final UwanoseKubunShikyuGendoGakuIdentifier id;
 

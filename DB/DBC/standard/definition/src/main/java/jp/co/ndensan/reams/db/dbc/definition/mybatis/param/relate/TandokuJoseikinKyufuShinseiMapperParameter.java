@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 市町村単独助成金給付申請を特定するためのMyBatis用パラメータクラスです。

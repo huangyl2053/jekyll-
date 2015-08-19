@@ -47,12 +47,15 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhi
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -107,14 +110,14 @@ public final class KyufuJissekiMapper {
         }
 
         return new KyufuJissekiDetailKeyInfo(
-                entity.getKokanShikibetsuNo(),
+                new KokanShikibetsuNo(entity.getKokanShikibetsuNo().getColumnValue()),
                 //TODO 名称などはどこから取ってくるのか
-                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
-                entity.getHokenshaNo(),
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo().getColumnValue()), new RString(""), new RString("")),
+                new ShoKisaiHokenshaNo(entity.getHokenshaNo().getColumnValue()),
                 entity.getHiHokenshaNo(),
-                entity.getServiceTeikyoYM(),
+                new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
                 entity.getJigyoshoNo(),
-                entity.getToshiNo(),
+                new ToshiNo(entity.getToshiNo()),
                 to対象サービス種類リスト(entities));
     }
 
@@ -142,8 +145,8 @@ public final class KyufuJissekiMapper {
 
             boolean last = (index == (entities.size() - 1));
 
-            ServiceTeikyoYM teikyoYM = entities.get(index).getServiceTeikyoYM();
-            ServiceTeikyoYM nextTeikyoYM = !last ? entities.get(index + 1).getServiceTeikyoYM() : null;
+            ServiceTeikyoYM teikyoYM = new ServiceTeikyoYM(entities.get(index).getServiceTeikyoYM());
+            ServiceTeikyoYM nextTeikyoYM = new ServiceTeikyoYM(!last ? entities.get(index + 1).getServiceTeikyoYM() : null);
             if (last || !teikyoYM.equals(nextTeikyoYM)) {
                 teikyoYMList.add(new JigyoshaNoListOfServiceTeikyoYM(teikyoYM, jigyoshaNoList));
                 jigyoshaNoList = new ArrayList<>();
@@ -178,7 +181,7 @@ public final class KyufuJissekiMapper {
                 KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
                 entity.getSeiriNo(),
                 entity.getHokenshaNo().value(),
-                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), RString.EMPTY, RString.EMPTY),
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo().getColumnValue()), RString.EMPTY, RString.EMPTY),
                 entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
                 entity.getYoKaigoJotaiKubunCode(),
@@ -224,8 +227,8 @@ public final class KyufuJissekiMapper {
         return new KyufuJissekiKihonNyutaisho(
                 entity.getNyushoYMD(),
                 entity.getTaishoYMD(),
-                entity.getNyushoJitsunissu(),
-                entity.getGaihakuNissu(),
+                entity.getNyushoJitsunissu().intValue(),
+                entity.getGaihakuNissu().intValue(),
                 entity.getChushiRiyuNyushomaeJyokyoCode(),
                 entity.getTaishogoJotaiCode());
     }
@@ -336,24 +339,26 @@ public final class KyufuJissekiMapper {
                     entity.getTekiyo(),
                     前,
                     entity.getTanisu(),
-                    entity.getNissuKaisu(),
-                    entity.getKohi1TaishoNissuKaisu(), entity.getKohi2TaishoNissuKaisu(), entity.getKohi3TaishoNissuKaisu(),
+                    entity.getNissuKaisu().intValue(),
+                    entity.getKohi1TaishoNissuKaisu().intValue(), entity.getKohi2TaishoNissuKaisu().intValue(), entity.getKohi3TaishoNissuKaisu().intValue(),
                     entity.getServiceTanisu(),
                     entity.getKohi1TaishoServiceTanisu(), entity.getKohi2TaishoServiceTanisu(), entity.getKohi3TaishoServiceTanisu(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
+                    entity.getSaishinsaKaisu().intValue(),
+                    entity.getKagoKaisu().intValue(),
                     entity.getShinsaYM()));
             list.add(new KyufuJissekiMeisai(
                     entity.getServiceShuruiCode().value(),
                     RString.EMPTY,
                     後,
                     entity.getAtoTanisu(),
-                    entity.getAtoNissuKaisu(),
-                    entity.getAtoKohi1TaishoNissuKaisu(), entity.getAtoKohi2TaishoNissukaisu(), entity.getAtoKohi3TaishoNissuKaisu(),
+                    entity.getAtoNissuKaisu().intValue(),
+                    entity.getAtoKohi1TaishoNissuKaisu().intValue(),
+                    entity.getAtoKohi2TaishoNissukaisu().intValue(),
+                    entity.getAtoKohi3TaishoNissuKaisu().intValue(),
                     entity.getServiceTanisu(),
                     entity.getAtoKohi1TaishoServiceTanisu(), entity.getAtoKohi2TaishoServiceTanisu(), entity.getAtoKohi3TaishoServiceTanisu(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
+                    entity.getSaishinsaKaisu().intValue(),
+                    entity.getKagoKaisu().intValue(),
                     entity.getShinsaYM()));
         }
 
@@ -374,10 +379,12 @@ public final class KyufuJissekiMapper {
         List<KyufuJissekiShukei> list = new ArrayList<>();
         for (DbT3033KyufujissekiShukeiEntity entity : entities) {
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(),
+                    entity.getGendogakuKanritaishogaiTanisu(),
+                    entity.getTankiNyushoPlanNissu().intValue(),
                     保険, 前,
-                    entity.getTankiNyushoJitsunissu(),
+                    entity.getTankiNyushoJitsunissu().intValue(),
                     entity.getHokenTanisuTotal(),
                     entity.getHokenTanisuTani(),
                     entity.getHokenSeikyugaku(),
@@ -385,12 +392,12 @@ public final class KyufuJissekiMapper {
                     entity.getHokenDekidakaTanisuTotal(),
                     entity.getHokenDekidakaSeikyugaku(),
                     entity.getHokenDekidakaIryohiRiyoshaFutangaku(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     RString.EMPTY, 後,
-                    entity.getAtoTankiNyushoJitsunissu(),
+                    entity.getAtoTankiNyushoJitsunissu().intValue(),
                     entity.getAtoHokenTanisuTotal(),
                     null,
                     entity.getAtoHokenSeikyugaku(),
@@ -398,12 +405,12 @@ public final class KyufuJissekiMapper {
                     entity.getAtoHokenDekidakaTanisuTotal(),
                     entity.getAtoHokenDekidakaSeikyugaku(),
                     null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     公費1, 前,
-                    entity.getTankiNyushoJitsunissu(),
+                    entity.getTankiNyushoJitsunissu().intValue(),
                     entity.getKohi1TanisuTotal(),
                     null,
                     entity.getKohi1Seikyugaku(),
@@ -411,12 +418,12 @@ public final class KyufuJissekiMapper {
                     entity.getKohi1DekidakaTanisuTotal(),
                     entity.getKohi1DekidakaSeikyugaku(),
                     entity.getKohi1DekidakaIryohiRiyoshaFutangaku(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     RString.EMPTY, 後,
-                    entity.getAtoTankiNyushoJitsunissu(),
+                    entity.getAtoTankiNyushoJitsunissu().intValue(),
                     entity.getAtoKohi1TanisuTotal(),
                     null,
                     entity.getAtoKohi1Seikyugaku(),
@@ -424,12 +431,12 @@ public final class KyufuJissekiMapper {
                     entity.getAtoKohi1DekidakaTanisuTotal(),
                     entity.getAtoKohi1DekidakaSeikyugaku(),
                     null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     公費2, 前,
-                    entity.getTankiNyushoJitsunissu(),
+                    entity.getTankiNyushoJitsunissu().intValue(),
                     entity.getKohi2TanisuTotal(),
                     null,
                     entity.getKohi2Seikyugaku(),
@@ -437,12 +444,12 @@ public final class KyufuJissekiMapper {
                     entity.getKohi2DekidakaTanisuTotal(),
                     entity.getKohi2DekidakaSeikyugaku(),
                     entity.getKohi2DekidakaIryohiRiyoshaFutangaku(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     RString.EMPTY, 後,
-                    entity.getAtoTankiNyushoJitsunissu(),
+                    entity.getAtoTankiNyushoJitsunissu().intValue(),
                     entity.getAtoKohi2TanisuTotal(),
                     null,
                     entity.getAtoKohi2Seikyugaku(),
@@ -450,12 +457,12 @@ public final class KyufuJissekiMapper {
                     entity.getAtoKohi2DekidakaTanisuTotal(),
                     entity.getAtoKohi2DekidakaSeikyugaku(),
                     null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     公費3, 前,
-                    entity.getTankiNyushoJitsunissu(),
+                    entity.getTankiNyushoJitsunissu().intValue(),
                     entity.getKohi3TanisuTotal(),
                     null,
                     entity.getKohi3Seikyugaku(),
@@ -463,12 +470,12 @@ public final class KyufuJissekiMapper {
                     entity.getKohi3DekidakaTanisuTotal(),
                     entity.getKohi3DekidakaSeikyugaku(),
                     entity.getKohi3DekidakaIryohiRiyoshaFutangaku(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             list.add(new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu(), entity.getPlanTanisu(),
-                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu(),
+                    entity.getServiceSyuruiCode().value(), entity.getServiceJitsunissu().intValue(), entity.getPlanTanisu(),
+                    entity.getGendogakuKanriTaishoTanisu(), entity.getGendogakuKanritaishogaiTanisu(), entity.getTankiNyushoPlanNissu().intValue(),
                     RString.EMPTY, 後,
-                    entity.getAtoTankiNyushoJitsunissu(),
+                    entity.getAtoTankiNyushoJitsunissu().intValue(),
                     entity.getAtoKohi3TanisuTotal(),
                     null,
                     entity.getAtoKohi3Seikyugaku(),
@@ -476,7 +483,7 @@ public final class KyufuJissekiMapper {
                     entity.getAtoKohi3DekidakaTanisuTotal(),
                     entity.getAtoKohi3DekidakaSeikyugaku(),
                     null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
         }
 
         return new KyufuJissekiShukeiCollection(list);
@@ -504,8 +511,8 @@ public final class KyufuJissekiMapper {
                     entity.getKeigengaku(),
                     entity.getKeigengoRiyoshaFutangaku(),
                     entity.getBiko(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
+                    entity.getSaishinsaKaisu().intValue(),
+                    entity.getKagoKaisu().intValue(),
                     entity.getShinsaYM()));
             list.add(new KyufuJissekiShafukuKeigen(
                     new RString(entity.getKeigenritsu().toString()),
@@ -515,8 +522,8 @@ public final class KyufuJissekiMapper {
                     entity.getAtoKeigengaku(),
                     entity.getAtoKeigengoRiyoshaFutangaku(),
                     entity.getBiko(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
+                    entity.getSaishinsaKaisu().intValue(),
+                    entity.getKagoKaisu().intValue(),
                     entity.getShinsaYM()));
         }
 
@@ -544,18 +551,18 @@ public final class KyufuJissekiMapper {
                     entity.getServiceCode().value(),
                     entity.getTanisuTanka(),
                     前, 明細,
-                    entity.getTanisu(), entity.getKaisu(), entity.getServiceTanisu(), null,
+                    entity.getTanisu(), entity.getKaisu().intValue(), entity.getServiceTanisu(), null,
                     entity.getTantouKaigoShienSemmoninNo(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM(), entity.getTekiyo()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM(), entity.getTekiyo()));
             atoList.add(new KyufuJissekiKyotakuService(
                     entity.getShiteiKijunGaitoJigyoshaKubunCode(),
                     entity.getKyotakuServiceSakuseiIraiYMD(),
                     entity.getServiceCode().value(),
                     entity.getTanisuTanka(),
                     後, 明細,
-                    entity.getAtoTanisu(), entity.getAtoKaisu(), entity.getAtoServiceTanisu(), null,
+                    entity.getAtoTanisu(), entity.getAtoKaisu().intValue(), entity.getAtoServiceTanisu(), null,
                     entity.getTantouKaigoShienSemmoninNo(),
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM(), entity.getTekiyo()));
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM(), entity.getTekiyo()));
         }
 
         DbT3025KyufujissekiKyotakuServiceEntity entity = entities.get(entities.size() - 1);
@@ -588,7 +595,7 @@ public final class KyufuJissekiMapper {
         List<KyufuJissekiYoguHanbaihi> list = new ArrayList<>();
         for (DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity : entities) {
             list.add(new KyufuJissekiYoguHanbaihi(
-                    entity.getServiceCode(),
+                    entity.getServiceCode().value(),
                     entity.getFukushiyoguHanbaiYMD(),
                     entity.getFukushiyoguShohinName(),
                     entity.getFukushiyoguSyumokuCode(),
@@ -617,7 +624,7 @@ public final class KyufuJissekiMapper {
         List<KyufuJissekiJutakuKaishuhi> list = new ArrayList<>();
         for (DbT3027KyufujissekiJutakuKaishuhiEntity entity : entities) {
             list.add(new KyufuJissekiJutakuKaishuhi(
-                    entity.getServiceCode(),
+                    entity.getServiceCode().value(),
                     entity.getJutakuKaishuchakkoYMD(),
                     entity.getJutakuKaishuJigyoshaName(),
                     entity.getJuutakukaishuJyutakuAdress(),
@@ -649,21 +656,21 @@ public final class KyufuJissekiMapper {
             maeList.add(new KyufuJissekiTokuteiNyushohi(
                     sb.toRString(), entity.getFutanGendogaku(),
                     前, 明細,
-                    entity.getHiyoTanka(), entity.getNissu(),
+                    entity.getHiyoTanka(), entity.getNissu().intValue(),
                     entity.getHiyogaku(), entity.getHokenbunSeikyugaku(), entity.getRiyoshaFutangaku(),
-                    entity.getKohi1Nissu(), entity.getKohi1Futangaku(), null, null,
-                    entity.getKohi2Nissu(), entity.getKohi2Futangaku(), null, null,
-                    entity.getKohi3Nissu(), entity.getKohi3Futangaku(), null, null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getKohi1Nissu().intValue(), entity.getKohi1Futangaku(), null, null,
+                    entity.getKohi2Nissu().intValue(), entity.getKohi2Futangaku(), null, null,
+                    entity.getKohi3Nissu().intValue(), entity.getKohi3Futangaku(), null, null,
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
             atoList.add(new KyufuJissekiTokuteiNyushohi(
                     sb.toRString(), entity.getFutanGendogaku(),
                     後, 明細,
-                    entity.getAtoHiyoTanka(), entity.getAtoNissu(),
+                    entity.getAtoHiyoTanka(), entity.getAtoNissu().intValue(),
                     entity.getAtoHiyogaku(), entity.getAtoHokenbunSeikyugaku(), entity.getAtoRiyoshaFutangaku(),
-                    entity.getAtoKohi1Nissu(), entity.getAtoKohi1Futangaku(), null, null,
-                    entity.getAtoKohi2Nissu(), entity.getAtoKohi2Futangaku(), null, null,
-                    entity.getAtoKohi3Nissu(), entity.getAtoKohi3Futangaku(), null, null,
-                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+                    entity.getAtoKohi1Nissu().intValue(), entity.getAtoKohi1Futangaku(), null, null,
+                    entity.getAtoKohi2Nissu().intValue(), entity.getAtoKohi2Futangaku(), null, null,
+                    entity.getAtoKohi3Nissu().intValue(), entity.getAtoKohi3Futangaku(), null, null,
+                    entity.getSaishinsaKaisu().intValue(), entity.getKagoKaisu().intValue(), entity.getShinsaYM()));
         }
 
         DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = entities.get(entities.size() - 1);

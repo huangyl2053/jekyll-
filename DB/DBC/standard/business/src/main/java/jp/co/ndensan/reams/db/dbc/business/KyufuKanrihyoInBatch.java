@@ -13,6 +13,10 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufuInCtrlTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.KyufuKanrihyoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.KyufuKanrihyoCSVHeaderEntity;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -103,15 +107,15 @@ public class KyufuKanrihyoInBatch {
         result.setServiceTeikyoYM(new FlexibleYearMonth(input.getTaishoYM()));
 
         // TODO 広域の場合は被保険者番号、給付対象年月時点の証保険者番号を取得し設定する(仕様未決定
-        result.setShokisaiHokenshaNo(input.getHokenshaNo());
+        result.setShokisaiHokenshaNo(new HokenshaNo(input.getHokenshaNo()));
 
-        result.setKyotakushienJigyoshoNo(input.getKyotakuShienJigyoshoNo());
+        result.setKyotakushienJigyoshoNo(new JigyoshaNo(input.getKyotakuShienJigyoshoNo()));
         result.setKyufuKanrihyoSakuseiKubunCode(input.getKyufukanrihyoSakuseiKubunCode());
         result.setKyufuKanrihyoSakuseiYMD(new FlexibleDate(input.getKyufukanrihyoSakuseiYMD()));
         result.setKyufuKanrihyoShubetsuKubunCode(input.getKyufukanrihyoShubetsuKubunCode());
         result.setKyufuKanrihyoMeisaiLineNo(input.getKyufukanrihyoMeisaigyoNo());
-        result.setHokenshaNo(input.getHokenshaNo());
-        result.setHiHokenshaNo(input.getHihokenshaNo());
+        result.setHokenshaNo(new HokenshaNo(input.getHokenshaNo()));
+        result.setHiHokenshaNo(new HihokenshaNo(input.getHihokenshaNo()));
         result.setHiHokenshaUmareYMD(new FlexibleDate(input.getSeinengappiYMD()));
         result.setSeibetsuCode(input.getSeibetsuCode());
         result.setYoKaigoJotaiKubunCode(input.getYokaigojotaiKubunCode());
@@ -120,16 +124,16 @@ public class KyufuKanrihyoInBatch {
         result.setKyotakuKaigoYoboShikyuGendogaku(checkDecimal(input.getKyotakuKaigoyoboShikyugendogaku()));
         result.setKyotakuServicePlanSakuseiKubunCode(input.getKyotakuKeikakuSakuseiKubunCode());
         if (input.getServiceTeikyoJigyoshoNo().isEmpty()) {
-            result.setServiceJigyoshoNo(RSTRING_ALL9_10);
+            result.setServiceJigyoshoNo(new JigyoshaNo(RSTRING_ALL9_10));
         } else {
-            result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+            result.setServiceJigyoshoNo(new JigyoshaNo(input.getServiceTeikyoJigyoshoNo()));
         }
 
         result.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(input.getShiteiKijunGaitoJigyoshoKubunCode());
         if (input.getServiceShuruiCode().isEmpty()) {
-            result.setServiceShuruiCode(RSTRING_ALL9_2);
+            result.setServiceShuruiCode(new ServiceShuruiCode(RSTRING_ALL9_2));
         } else {
-            result.setServiceShuruiCode(input.getServiceShuruiCode());
+            result.setServiceShuruiCode(new ServiceShuruiCode(input.getServiceShuruiCode()));
         }
 
         result.setKyufuKeikakuTanisuNissu(checkDecimal(input.getKyufuKeikakuTanisuNissu()));
@@ -151,44 +155,44 @@ public class KyufuKanrihyoInBatch {
         result.setServiceTeikyoYM(new FlexibleYearMonth(input.getTaishoYM()));
 
         // TODO 広域の場合は被保険者番号、給付対象年月時点の証保険者番号を取得し設定する(仕様未決定
-        result.setShokisaiHokenshaNo(input.getHokenshaNo());
+        result.setShokisaiHokenshaNo(new HokenshaNo(input.getHokenshaNo()));
 
-        result.setKyotakushienJigyoshoNo(input.getKyotakuShienJigyoshoNo());
+        result.setKyotakushienJigyoshoNo(new JigyoshaNo(input.getKyotakuShienJigyoshoNo()));
         result.setKyufuSakuseiKubunCode(input.getKyufukanrihyoSakuseiKubunCode());
         result.setKyufuSakuseiYMD(new FlexibleDate(input.getKyufukanrihyoSakuseiYMD()));
         result.setKyufuShubetsuKubunCode(input.getKyufukanrihyoShubetsuKubunCode());
         result.setKyufuMeisaiLineNo(input.getKyufukanrihyoMeisaigyoNo());
-        result.setHokenshaNo(input.getHokenshaNo());
-        result.setHiHokenshaNo(input.getHihokenshaNo());
+        result.setHokenshaNo(new HokenshaNo(input.getHokenshaNo()));
+        result.setHiHokenshaNo(new HihokenshaNo(input.getHihokenshaNo()));
         result.setHiHokenshaUmareYMD(new FlexibleDate(input.getSeinengappiYMD()));
         result.setSeibetsuCode(input.getSeibetsuCode());
         result.setYoKaigoJotaiKubunCode(input.getYokaigojotaiKubunCode());
         result.setGendogakuTekiyoKaishiYM(new FlexibleYearMonth(input.getGendogakuTekiyoKaishiYMD()));
         result.setGendogakuTekiyoShuryoYM(new FlexibleYearMonth(input.getGendogakuTekiyoShuryoYMD()));
-        result.setKyotakuKaigoYoboShikyuGendogaku(checkDecimal(input.getKyotakuKaigoyoboShikyugendogaku()));
+        result.setKyotakuKaigoYoboShikyuGendogaku(checkDecimal(input.getKyotakuKaigoyoboShikyugendogaku()).intValue());
         result.setKyotakuServicePlanSakuseiKubunCode(input.getKyotakuKeikakuSakuseiKubunCode());
         if (input.getServiceTeikyoJigyoshoNo().isEmpty()) {
-            result.setServiceJigyoshoNo(RSTRING_ALL9_10);
+            result.setServiceJigyoshoNo(new JigyoshaNo(RSTRING_ALL9_10));
         } else {
-            result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+            result.setServiceJigyoshoNo(new JigyoshaNo(input.getServiceTeikyoJigyoshoNo()));
         }
         result.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(input.getShiteiKijunGaitoJigyoshoKubunCode());
         if (input.getServiceShuruiCode().isEmpty()) {
-            result.setServiceShuruiCode(RSTRING_ALL9_2);
+            result.setServiceShuruiCode(new ServiceShuruiCode(RSTRING_ALL9_2));
         } else {
-            result.setServiceShuruiCode(input.getServiceShuruiCode());
+            result.setServiceShuruiCode(new ServiceShuruiCode(input.getServiceShuruiCode()));
         }
         result.setKyufuKeikakuTanisuNissu(checkInteger(input.getKyufuKeikakuTanisuNissu()));
-        result.setKyufuKeikakuNissu(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu()));
+        result.setKyufuKeikakuNissu(new Decimal(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu())));
         result.setShiteiServiceSubTotal(checkInteger(input.getShiteiServiceShokei()));
         result.setKijyunGaitoServiceSubTotal(checkInteger(input.getKijunGaitoServiceShokei()));
         result.setKyufuKeikakuTotalTanisuNissu(checkInteger(input.getKyufuKeikakuGokeiTanisuNissu()));
 
         result.setTantoKaigoShienSemmoninNo(input.getKaigoshienSenmoninNo());
         if (input.getItakusakiKyotakuKaigoshienJigyoshoNo().isEmpty()) {
-            result.setKaigoShienJigyoshaNo(RSTRING_ALL9_10);
+            result.setKaigoShienJigyoshaNo(new JigyoshaNo(RSTRING_ALL9_10));
         } else {
-            result.setKaigoShienJigyoshaNo(input.getItakusakiKyotakuKaigoshienJigyoshoNo());
+            result.setKaigoShienJigyoshaNo(new JigyoshaNo(input.getItakusakiKyotakuKaigoshienJigyoshoNo()));
         }
 
         result.setItakusakiTantoKaigoShienSemmoninNo(input.getItakusakiKaigoshienSenmoninNo());
@@ -214,15 +218,15 @@ public class KyufuKanrihyoInBatch {
         for (DbTKyufuInCtrlTempTableEntity kyufuCtrlTemp : kyufuCtrlTemps) {
             if (kyufuCtrlTemp.getFileBunruiCode().compareTo(new RString("0111")) != 0) {
                 ctrlRecordKensu = ctrlRecordKensu + Integer.valueOf(kyufuCtrlTemp.getRecordKensu().toString());
-                kokuhorenIFkanri.setCtrlShoriYM(new RYearMonth(kyufuCtrlTemp.getShoriTaishoYM()));
+                kokuhorenIFkanri.setCtrlShoriYM(new FlexibleYearMonth(kyufuCtrlTemp.getShoriTaishoYM()));
             } else {
                 kagoCtrlRecordKensu = kagoCtrlRecordKensu + Integer.valueOf(kyufuCtrlTemp.getRecordKensu().toString());
-                kokuhorenIFkanri.setKagoCtrlShoriYM(new RYearMonth(kyufuCtrlTemp.getShoriTaishoYM()));
+                kokuhorenIFkanri.setKagoCtrlShoriYM(new FlexibleYearMonth(kyufuCtrlTemp.getShoriTaishoYM()));
             }
         }
         kokuhorenIFkanri.setCtrlRecordKensu(ctrlRecordKensu);
         kokuhorenIFkanri.setKagoCtrlRecordKensu(kagoCtrlRecordKensu);
-        kokuhorenIFkanri.setJissekiDataShinsaYM(new RYearMonth(kyufuCtrlTemps.get(0).getJissekiDataShinsaYM()));
+        kokuhorenIFkanri.setJissekiDataShinsaYM(new FlexibleYearMonth(kyufuCtrlTemps.get(0).getJissekiDataShinsaYM()));
 
         return kokuhorenIFkanri;
     }

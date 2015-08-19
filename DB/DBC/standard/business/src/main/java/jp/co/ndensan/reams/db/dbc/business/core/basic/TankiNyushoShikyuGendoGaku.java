@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 短期入所系支給限度額を管理するクラスです。
  */
-public class TankiNyushoShikyuGendoGaku extends ParentModelBase<TankiNyushoShikyuGendoGakuIdentifier, DbT7110TankiNyushoShikyuGendoGakuEntity, TankiNyushoShikyuGendoGaku> implements Serializable {
+public class TankiNyushoShikyuGendoGaku extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier, DbT7110TankiNyushoShikyuGendoGakuEntity, TankiNyushoShikyuGendoGaku> implements Serializable {
 
     private final DbT7110TankiNyushoShikyuGendoGakuEntity entity;
     private final TankiNyushoShikyuGendoGakuIdentifier id;
@@ -120,7 +121,7 @@ public class TankiNyushoShikyuGendoGaku extends ParentModelBase<TankiNyushoShiky
      * @return 支給限度単位数
      */
     public Decimal get支給限度単位数() {
-        return entity.getShikyuGendoTaniSu();
+        return entity.getShikyuGendoNissu();
     }
 
     /**
@@ -141,22 +142,6 @@ public class TankiNyushoShikyuGendoGaku extends ParentModelBase<TankiNyushoShiky
     @Override
     public TankiNyushoShikyuGendoGakuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 短期入所系支給限度額のみを変更対象とします。<br/>
-     * {@link DbT7110TankiNyushoShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TankiNyushoShikyuGendoGaku}
-     */
-    @Override
-    public TankiNyushoShikyuGendoGaku modifiedModel() {
-        DbT7110TankiNyushoShikyuGendoGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TankiNyushoShikyuGendoGaku(
-                modifiedEntity, id);
     }
 
     /**
@@ -187,9 +172,15 @@ public class TankiNyushoShikyuGendoGaku extends ParentModelBase<TankiNyushoShiky
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7110TankiNyushoShikyuGendoGakuEntity entity;
         private final TankiNyushoShikyuGendoGakuIdentifier id;
 

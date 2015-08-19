@@ -9,14 +9,13 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -48,12 +47,12 @@ public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakus
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
-        this.entity.setRirekiNo(履歴番号);
+        this.entity.setRirekiNo(履歴番号.intValue());
         this.id = new ShokanJuryoininKeiyakushaIdentifier(
                 被保険者番号,
                 証記載保険者番号,
                 受付年月日,
-                履歴番号
+                履歴番号.intValue()
         );
     }
 
@@ -120,7 +119,7 @@ public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakus
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**

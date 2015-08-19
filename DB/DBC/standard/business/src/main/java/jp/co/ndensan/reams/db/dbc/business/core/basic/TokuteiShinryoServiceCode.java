@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7120TokuteiShinryoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 特定診療サービスコードを管理するクラスです。
  */
-public class TokuteiShinryoServiceCode extends ParentModelBase<TokuteiShinryoServiceCodeIdentifier, DbT7120TokuteiShinryoServiceCodeEntity, TokuteiShinryoServiceCode> implements Serializable {
+public class TokuteiShinryoServiceCode extends ModelBase<TokuteiShinryoServiceCodeIdentifier, DbT7120TokuteiShinryoServiceCodeEntity, TokuteiShinryoServiceCode> implements Serializable {
 
     private final DbT7120TokuteiShinryoServiceCodeEntity entity;
     private final TokuteiShinryoServiceCodeIdentifier id;
@@ -233,22 +233,6 @@ public class TokuteiShinryoServiceCode extends ParentModelBase<TokuteiShinryoSer
     }
 
     /**
-     * 特定診療サービスコードのみを変更対象とします。<br/>
-     * {@link DbT7120TokuteiShinryoServiceCodeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link TokuteiShinryoServiceCode}
-     */
-    @Override
-    public TokuteiShinryoServiceCode modifiedModel() {
-        DbT7120TokuteiShinryoServiceCodeEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new TokuteiShinryoServiceCode(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する特定診療サービスコードを削除対象とします。<br/>
      * {@link DbT7120TokuteiShinryoServiceCodeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -276,9 +260,15 @@ public class TokuteiShinryoServiceCode extends ParentModelBase<TokuteiShinryoSer
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7120TokuteiShinryoServiceCodeEntity entity;
         private final TokuteiShinryoServiceCodeIdentifier id;
 

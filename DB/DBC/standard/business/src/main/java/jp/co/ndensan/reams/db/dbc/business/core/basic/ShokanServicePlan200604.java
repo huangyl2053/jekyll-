@@ -6,20 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.IModel;
-import jp.co.ndensan.reams.db.dbc.business.core.fdz.uzclasskoho.Models;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.dbc.DbT3046ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 
 /**
  * 償還払請求サービス計画200604を管理するクラスです。
  */
-public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan200604Identifier, DbT3046ShokanServicePlan200604Entity, ShokanServicePlan200604> implements Serializable {
+public class ShokanServicePlan200604 extends ModelBase<ShokanServicePlan200604Identifier, DbT3046ShokanServicePlan200604Entity, ShokanServicePlan200604> implements Serializable {
 
     private final DbT3046ShokanServicePlan200604Entity entity;
     private final ShokanServicePlan200604Identifier id;
@@ -28,15 +33,13 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
      * コンストラクタです。<br/>
      * 償還払請求サービス計画200604の新規作成時に使用します。
      *
-
+     *
      */
     public ShokanServicePlan200604() {
 
         this.entity = new DbT3046ShokanServicePlan200604Entity();
 
-        this.id = new ShokanServicePlan200604Identifier(
-
-                );
+        this.id = new ShokanServicePlan200604Identifier();
     }
 
     /**
@@ -47,8 +50,7 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
      */
     public ShokanServicePlan200604(DbT3046ShokanServicePlan200604Entity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求サービス計画200604"));
-        this.id = new ShokanServicePlan200604Identifier(
-);
+        this.id = new ShokanServicePlan200604Identifier();
     }
 
     /**
@@ -121,11 +123,11 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
     }
 
     /**
-     * 指定／基準該当事業者区分コードを返します。
+     * 指定_基準該当事業者区分コードを返します。
      *
-     * @return 指定／基準該当事業者区分コード
+     * @return 指定_基準該当事業者区分コード
      */
-    public RString get指定／基準該当事業者区分コード() {
+    public RString get指定_基準該当事業者区分コード() {
         return entity.getShiteiKijunGaitoJigyoshaKubunCode();
     }
 
@@ -143,7 +145,7 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
      *
      * @return サービスコード
      */
-    public ServiceCode getサービスコード() {
+    public jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode getサービスコード() {
         return entity.getServiceCode();
     }
 
@@ -220,11 +222,11 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
     }
 
     /**
-     * 点数／金額を返します。
+     * 点数_金額を返します。
      *
-     * @return 点数／金額
+     * @return 点数_金額
      */
-    public int get点数／金額() {
+    public int get点数_金額() {
         return entity.getTensuKingaku();
     }
 
@@ -274,11 +276,11 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
     }
 
     /**
-     * 購入・改修履歴等を返します。
+     * 購入_改修履歴等を返します。
      *
-     * @return 購入・改修履歴等
+     * @return 購入_改修履歴等
      */
-    public RString get購入・改修履歴等() {
+    public RString get購入_改修履歴等() {
         return entity.getKounyuKaishuRireki();
     }
 
@@ -303,22 +305,6 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
     }
 
     /**
-     * 償還払請求サービス計画200604のみを変更対象とします。<br/>
-     * {@link DbT3046ShokanServicePlan200604Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanServicePlan200604}
-     */
-    @Override
-    public ShokanServicePlan200604 modifiedModel() {
-        DbT3046ShokanServicePlan200604Entity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanServicePlan200604(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払請求サービス計画200604を削除対象とします。<br/>
      * {@link DbT3046ShokanServicePlan200604Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -335,6 +321,7 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
         }
         return new ShokanServicePlan200604(deletedEntity, id);
     }
+
     /**
      * {@link ShokanServicePlan200604}のシリアライズ形式を提供します。
      *
@@ -345,13 +332,19 @@ public class ShokanServicePlan200604 extends ParentModelBase<ShokanServicePlan20
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT3046ShokanServicePlan200604Entity entity;
         private final ShokanServicePlan200604Identifier id;
 
-        private _SerializationProxy(DbT3046ShokanServicePlan200604Entity entity,ShokanServicePlan200604Identifier id) {
+        private _SerializationProxy(DbT3046ShokanServicePlan200604Entity entity, ShokanServicePlan200604Identifier id) {
             this.entity = entity;
             this.id = id;
         }

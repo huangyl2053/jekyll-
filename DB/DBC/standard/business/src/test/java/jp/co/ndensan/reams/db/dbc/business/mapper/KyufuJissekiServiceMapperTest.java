@@ -5,17 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.mapper;
 
-import jp.co.ndensan.reams.db.dbc.business.mapper.KyufuJissekiServiceMapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.KyufujissekiShuruiDetailEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -33,8 +34,8 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
 
     public static class toKyufuJissekiService extends DbcTestBase {
 
-        private final DbV3016KyufujissekiShuruiDetailEntity entity
-                = KyufujissekiShuruiDetailEntityGenerator.createDbV3016KyufujissekiShuruiDetailEntity();
+        private final DbV3016KyufujissekiShuruiDetailEntity entity = new DbV3016KyufujissekiShuruiDetailEntity();
+//                = KyufujissekiShuruiDetailEntityGenerator.createDbV3016KyufujissekiShuruiDetailEntity();
         private final Range<ServiceTeikyoYM> サービス提供年月期間 = create年月期間();
         private KyufuJissekiService sut;
 
@@ -56,17 +57,17 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
 
         @Test
         public void get利用者負担額合計の結果が_Entityの利用者負担額合計と同一になる() {
-            assertThat(sut.get利用者負担額合計(), is(entity.getHokenRiyoshaFutangaku()));
+            assertThat(sut.get利用者負担額合計(), is(new Decimal(entity.getHokenRiyoshaFutangaku())));
         }
 
         @Test
         public void get単位数合計の結果が_Entityの単位数合計と同一になる() {
-            assertThat(sut.get単位数合計(), is(entity.getAtoHokenTanisuTotal()));
+            assertThat(sut.get単位数合計(), is(new Decimal(entity.getAtoHokenTanisuTotal())));
         }
 
         @Test
         public void get保険請求分請求額合計の結果が_Entityの単位数合計と同一になる() {
-            assertThat(sut.get保険請求分請求額合計(), is(entity.getAtoHokenSeikyugaku()));
+            assertThat(sut.get保険請求分請求額合計(), is(new Decimal(entity.getAtoHokenSeikyugaku().toString())));
         }
 
         @Test
@@ -76,7 +77,7 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
 
         @Test
         public void get入力識別番号の結果が_Entityの入力識別番号と同一になる() {
-            assertThat(sut.get給付実績キー情報().get入力識別番号().getInputShikibetsuNoCode().value(), is(entity.getInputShikibetsuNo()));
+            assertThat(new ShikibetsuCode(sut.get給付実績キー情報().get入力識別番号().getInputShikibetsuNoCode().value()), is(entity.getInputShikibetsuNo()));
         }
 
         @Test
@@ -86,7 +87,7 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
 
         @Test
         public void getサービス提供年月の結果が_Entityのサービス提供年月と同一になる() {
-            assertThat(sut.get給付実績キー情報().getサービス提供年月(), is(entity.getServiceTeikyoYM()));
+            assertThat(sut.get給付実績キー情報().getサービス提供年月().getColumnValue(), is(entity.getServiceTeikyoYM()));
         }
     }
 
@@ -112,7 +113,7 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
         private List<DbV3016KyufujissekiShuruiDetailEntity> create給付実績種類明細EntityList(int listSize) {
             List<DbV3016KyufujissekiShuruiDetailEntity> list = new ArrayList<>();
             for (int i = 0; i < listSize; i++) {
-                list.add(KyufujissekiShuruiDetailEntityGenerator.createDbV3016KyufujissekiShuruiDetailEntity());
+                list.add(new DbV3016KyufujissekiShuruiDetailEntity());//DbV3016.createDbV3016KyufujissekiShuruiDetailEntity());
             }
             return list;
         }

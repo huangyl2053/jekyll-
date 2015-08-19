@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
+import lombok.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
