@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.business;
 
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportItem;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportItem;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

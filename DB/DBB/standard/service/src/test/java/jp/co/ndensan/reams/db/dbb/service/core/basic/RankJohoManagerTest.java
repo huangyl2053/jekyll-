@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.RankJoho;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2011RankJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,7 +48,7 @@ public class RankJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            RString 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+            RankKubun 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
             sut.getランク情報(null, 主キー2);
         }
 
@@ -60,10 +61,10 @@ public class RankJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class))).thenReturn(null);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RankKubun.class))).thenReturn(null);
 
             FlexibleYear 主キー1 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
-            RString 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+            RankKubun 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
             RankJoho result = sut.getランク情報(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -72,10 +73,10 @@ public class RankJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
-            when(dac.selectByKey(any(FlexibleYear.class), any(RString.class))).thenReturn(entity);
+            when(dac.selectByKey(any(FlexibleYear.class), any(RankKubun.class))).thenReturn(entity);
 
             FlexibleYear 主キー1 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
-            RString 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+            RankKubun 主キー2 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
             RankJoho result = sut.getランク情報(主キー1, 主キー2);
 
             assertThat(result.get賦課年度().toDateString(), is(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.toDateString()));

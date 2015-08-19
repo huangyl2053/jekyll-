@@ -10,15 +10,16 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2006ChoshuYuyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2007KibetsuChoshuYuyoDac;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2007KibetsuChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -40,11 +41,12 @@ public class ChoshuYuyoRelateDacTest {
     private static DbT2006ChoshuYuyoDac 徴収猶予Dac;
     private static DbT2007KibetsuChoshuYuyoDac 期別徴収猶予Dac;
 
-    private static final ChoteiNendo 調定年度1 = new ChoteiNendo(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度);
-    private static final ChoteiNendo notFound調定年度 = new ChoteiNendo(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.plusYear(1));
-    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度);
+    private static final FlexibleYear 調定年度1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
+    private static final FlexibleYear notFound調定年度 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度.plusYear(1);
+    private static final FlexibleYear 賦課年度1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
     private static final TsuchishoNo 通知書番号1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
-    private static final RDateTime 処理日時1 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_処理日時;
+//    private static final RDateTime 履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_処理日時;
+    private static final Decimal 履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
     private static final GemmenChoshuYuyoStateKubun 状態区分1
             = GemmenChoshuYuyoStateKubun.toValue(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予状態区分);
 
@@ -59,22 +61,22 @@ public class ChoshuYuyoRelateDacTest {
 
         @Before
         public void setUp() {
-            TestSupport.insertDbT2006(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1);
-            TestSupport.insertDbT2007(調定年度1, 賦課年度1, 通知書番号1, 処理日時1);
+            TestSupport.insertDbT2006(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1);
+            TestSupport.insertDbT2007(調定年度1, 賦課年度1, 通知書番号1, 履歴番号);
         }
 
         public void 引数の賦課年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select徴収猶予RelateByKeyAndState(null, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1);
+            sut.select徴収猶予RelateByKeyAndState(null, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の調定年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select徴収猶予RelateByKeyAndState(調定年度1, null, 通知書番号1, 処理日時1, 状態区分1);
+            sut.select徴収猶予RelateByKeyAndState(調定年度1, null, 通知書番号1, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の通知書番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, null, 処理日時1, 状態区分1);
+            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, null, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
@@ -84,20 +86,20 @@ public class ChoshuYuyoRelateDacTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数の状態区分にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, null);
+            sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, null);
         }
 
         @Test
         public void データが見つかる検索条件を渡すと_徴収猶予モデル返す() {
-            assertThat(sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1)
-                    .get().get徴収猶予モデル().get調定年度(), is(調定年度1));
+            assertThat(sut.select徴収猶予RelateByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1)
+                    .get().getChoteiNendo(), is(調定年度1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
-            Optional<ChoshuYuyoRelateModel> empty = Optional.empty();
+            Optional<DbT2006ChoshuYuyoEntity> empty = Optional.empty();
             assertThat(sut.select徴収猶予RelateByKeyAndState(
-                    notFound調定年度, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1), is(empty));
+                    notFound調定年度, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1), is(empty));
         }
     }
 
@@ -186,28 +188,28 @@ public class ChoshuYuyoRelateDacTest {
     private static class TestSupport {
 
         public static void insertDbT2006(
-                ChoteiNendo 調定年度, FukaNendo 賦課年度,
-                TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分1) {
+                FlexibleYear 調定年度, FlexibleYear 賦課年度,
+                TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分1) {
 
             DbT2006ChoshuYuyoEntity entity = DbT2006ChoshuYuyoEntityGenerator.createDbT2006ChoshuYuyoEntity();
-            entity.setChoteiNendo(調定年度.value());
-            entity.setFukaNendo(賦課年度.value());
+            entity.setChoteiNendo(調定年度);
+            entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
-            entity.setShoriTimestamp(処理日時);
+            entity.setRirekiNo(履歴番号);
             entity.setJotaiKubun(状態区分1.code());
 
-            徴収猶予Dac.insert(entity);
+            徴収猶予Dac.save(entity);
         }
 
         public static void insertDbT2007(
-                ChoteiNendo 調定年度, FukaNendo 賦課年度,
-                TsuchishoNo 通知書番号, RDateTime 処理日時) {
+                FlexibleYear 調定年度, FlexibleYear 賦課年度,
+                TsuchishoNo 通知書番号, Decimal 履歴番号) {
             DbT2007KibetsuChoshuYuyoEntity entity = DbT2007KibetsuChoshuYuyoEntityGenerator.createDbT2007KibetsuChoshuYuyoEntity();
-            entity.setChoteiNendo(調定年度.value());
-            entity.setFukaNendo(賦課年度.value());
+            entity.setChoteiNendo(調定年度);
+            entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
-            entity.setShoriTimestamp(処理日時);
-            期別徴収猶予Dac.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            期別徴収猶予Dac.save(entity);
         }
     }
 }

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoRank;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -136,7 +137,7 @@ public class HokenryoRankManagerTest {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
             entity.initializeMd5();
             HokenryoRank 保険料ランク = new HokenryoRank(entity);
-            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RString("任意項目1を変更")).build();
+            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RankKubun(new RString("任意項目1を変更"))).build();
 
             assertThat(sut.save保険料ランク(保険料ランク), is(true));
         }
@@ -148,7 +149,7 @@ public class HokenryoRankManagerTest {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
             entity.initializeMd5();
             HokenryoRank 保険料ランク = new HokenryoRank(entity);
-            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RString("任意項目1を変更")).build();
+            保険料ランク = 保険料ランク.createBuilderForEdit().setランク区分(new RankKubun(new RString("任意項目1を変更"))).build();
 
             assertThat(sut.save保険料ランク(保険料ランク), is(false));
         }

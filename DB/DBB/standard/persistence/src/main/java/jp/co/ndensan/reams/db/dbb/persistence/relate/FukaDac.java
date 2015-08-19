@@ -14,7 +14,6 @@ import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002Fuka;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -43,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n3317 塚田 萌
  */
-public class FukaDac implements IModifiable<FukaModel> {
+public class FukaDac implements IModifiable<DbT2002FukaEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -56,10 +55,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
-     * @return FukaModel
+     * @return DbT2002FukaEntity
      */
     @Transaction
-    public Optional<FukaModel> select賦課ByKey(FlexibleYear 調定年度,
+    public Optional<DbT2002FukaEntity> select賦課ByKey(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             Decimal 履歴番号) {
@@ -85,7 +84,7 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @throws NullPointerException 引数がnullの時
      */
     @Transaction
-    public Optional<FukaModel> select賦課Recently(
+    public Optional<DbT2002FukaEntity> select賦課Recently(
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
             Decimal 履歴番号) throws NullPointerException {
@@ -121,7 +120,7 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @throws NullPointerException 引数がnullの時
      */
     @Transaction
-    public Optional<FukaModel> select賦課Recently(
+    public Optional<DbT2002FukaEntity> select賦課Recently(
             TsuchishoNo 通知書番号,
             RDateTime 処理日時) throws NullPointerException {
 
@@ -150,10 +149,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @return IItemList<FukaModel>
+     * @return IItemList<DbT2002FukaEntity>
      */
     @Transaction
-    public IItemList<FukaModel> select介護賦課一覧(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+    public IItemList<DbT2002FukaEntity> select介護賦課一覧(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -168,7 +167,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        List<FukaModel> list = new ArrayList<>();
+        List<DbT2002FukaEntity> list = new ArrayList<>();
 
         for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
             list.add(createModel(介護賦課));
@@ -182,10 +181,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      *
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @return Optional<FukaModel>
+     * @return Optional<DbT2002FukaEntity>
      */
     @Transaction
-    public Optional<FukaModel> select最新介護賦課(FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+    public Optional<DbT2002FukaEntity> select最新介護賦課(FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -205,10 +204,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      * 条件に合致する介護賦課のリストを返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return IItemList<FukaModel>
+     * @return IItemList<DbT2002FukaEntity>
      */
     @Transaction
-    public IItemList<FukaModel> select介護賦課一覧(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT2002FukaEntity> select介護賦課一覧(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -218,7 +217,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 where(eq(DbT2002Fuka.hihokenshaNo, 被保険者番号)).
                 toList(DbT2002FukaEntity.class);
 
-        List<FukaModel> list = new ArrayList<>();
+        List<DbT2002FukaEntity> list = new ArrayList<>();
 
         for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
             list.add(createModel(介護賦課));
@@ -232,10 +231,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      *
      * @param 被保険者番号 被保険者番号
      * @param 賦課年度 賦課年度
-     * @return IItemList<FukaModel>
+     * @return IItemList<DbT2002FukaEntity>
      */
     @Transaction
-    public IItemList<FukaModel> select介護賦課一覧(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+    public IItemList<DbT2002FukaEntity> select介護賦課一覧(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -247,7 +246,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                                 eq(DbT2002Fuka.fukaNendo, 賦課年度))).
                 toList(DbT2002FukaEntity.class);
 
-        List<FukaModel> list = new ArrayList<>();
+        List<DbT2002FukaEntity> list = new ArrayList<>();
 
         for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
             list.add(createModel(介護賦課));
@@ -262,10 +261,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @return FukaModel
+     * @return DbT2002FukaEntity
      */
     @Transaction
-    public IItemList<FukaModel> selectRecently賦課(FlexibleYear 調定年度, FlexibleYear 賦課年度,
+    public IItemList<DbT2002FukaEntity> selectRecently賦課(FlexibleYear 調定年度, FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -281,7 +280,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 order(by(DbV2002Fuka.choteiNendo, Order.DESC), by(DbV2002Fuka.fukaNendo, Order.DESC), by(DbV2002Fuka.tsuchishoNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        List<FukaModel> list = new ArrayList<>();
+        List<DbT2002FukaEntity> list = new ArrayList<>();
 
         for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
             list.add(createModel(介護賦課));
@@ -295,10 +294,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      * 賦課情報をキー検索で処理日時が直近の介護賦課のリストを返します。
      *
      * @param 通知書番号 通知書番号
-     * @return FukaModel
+     * @return DbT2002FukaEntity
      */
     @Transaction
-    public IItemList<FukaModel> selectRecently賦課一覧by通知書番号(TsuchishoNo 通知書番号) {
+    public IItemList<DbT2002FukaEntity> selectRecently賦課一覧by通知書番号(TsuchishoNo 通知書番号) {
 
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
 
@@ -309,7 +308,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 order(by(DbV2002Fuka.choteiNendo, Order.DESC), by(DbV2002Fuka.fukaNendo, Order.DESC), by(DbV2002Fuka.tsuchishoNo, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        List<FukaModel> list = new ArrayList<>();
+        List<DbT2002FukaEntity> list = new ArrayList<>();
 
         for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
             list.add(createModel(介護賦課));
@@ -319,34 +318,34 @@ public class FukaDac implements IModifiable<FukaModel> {
 
     }
 
-    private FukaModel createModel(DbT2002FukaEntity 介護賦課エンティティ) {
+    private DbT2002FukaEntity createModel(DbT2002FukaEntity 介護賦課エンティティ) {
         if (介護賦課エンティティ == null) {
             return null;
         }
-        return new FukaModel(介護賦課エンティティ);
+        return 介護賦課エンティティ;
     }
 
     @Override
-    public int insert(FukaModel data) {
+    public int insert(DbT2002FukaEntity data) {
         if (data == null) {
             return 0;
         }
-        return 介護賦課Dac.save(data.getEntity());
+        return 介護賦課Dac.save(data);
     }
 
     @Override
-    public int update(FukaModel data) {
+    public int update(DbT2002FukaEntity data) {
         if (data == null) {
             return 0;
         }
-        return 介護賦課Dac.save(data.getEntity());
+        return 介護賦課Dac.save(data);
     }
 
     @Override
-    public int delete(FukaModel data) {
+    public int delete(DbT2002FukaEntity data) {
         if (data == null) {
             return 0;
         }
-        return 介護賦課Dac.save(data.getEntity());
+        return 介護賦課Dac.save(data);
     }
 }

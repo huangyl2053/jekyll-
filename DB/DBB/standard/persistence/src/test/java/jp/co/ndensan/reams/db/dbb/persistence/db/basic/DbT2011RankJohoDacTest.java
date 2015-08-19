@@ -8,6 +8,7 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -128,7 +129,7 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
             DbT2011RankJohoEntity updateRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
                     DEFAULT_ランク区分);
-            updateRecord.setRankKubun(new RString("11"));
+            updateRecord.setRankKubun(new RankKubun(new RString("11")));
 
             sut.save(updateRecord);
 
@@ -168,7 +169,7 @@ public class DbT2011RankJohoDacTest extends DbbTestDacBase {
 
         public static void insert(
                 FlexibleYear 賦課年度,
-                RString ランク区分) {
+                RankKubun ランク区分) {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
             entity.setFukaNendo(賦課年度);
             entity.setRankKubun(ランク区分);

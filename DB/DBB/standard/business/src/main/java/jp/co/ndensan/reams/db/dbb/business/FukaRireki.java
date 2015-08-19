@@ -10,14 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModelComparators;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaComparators;
+
+//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaComparators;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 
@@ -28,7 +33,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
  */
 public class FukaRireki {
 
-    private final List<FukaModel> 賦課履歴明細;
+    private final List<Fuka> 賦課履歴明細;
 
     /**
      * コンストラクタです。
@@ -36,7 +41,7 @@ public class FukaRireki {
      * @param 賦課履歴明細 賦課履歴明細
      * @throws NullPointerException 引数がnullの場合
      */
-    public FukaRireki(List<FukaModel> 賦課履歴明細) throws NullPointerException {
+    public FukaRireki(List<Fuka> 賦課履歴明細) throws NullPointerException {
         this.賦課履歴明細 = requireNonNull(賦課履歴明細, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課履歴明細"));
     }
 
@@ -46,11 +51,11 @@ public class FukaRireki {
      *
      * @return グループ化した全賦課履歴
      */
-    public IItemList<FukaModel> getグループ化賦課履歴() {
-        Map<RString, FukaModel> map = new HashMap<>();
-        for (FukaModel model : 賦課履歴明細) {
+    public IItemList<Fuka> getグループ化賦課履歴() {
+        Map<RString, Fuka> map = new HashMap<>();
+        for (Fuka model : 賦課履歴明細) {
             RString key = createKey(model);
-            FukaModel value = map.get(key);
+            Fuka value = map.get(key);
 //            if (value == null || value.get処理日時().isBefore(model.get処理日時())) {
 //                map.put(key, model);
 //            }
@@ -58,17 +63,17 @@ public class FukaRireki {
         return sort(new ArrayList<>(map.values()));
     }
 
-    private RString createKey(FukaModel model) {
-        return new RStringBuilder(model.get賦課年度().value().toDateString())
-                .append(model.get調定年度().value().toDateString())
+    private RString createKey(Fuka model) {
+        return new RStringBuilder(model.get賦課年度().toDateString())
+                .append(model.get調定年度().toDateString())
                 .append(model.get通知書番号()).toRString();
     }
 
-    private IItemList<FukaModel> sort(List<FukaModel> list) {
+    private IItemList<Fuka> sort(List<Fuka> list) {
         return ItemList.of(list)
-                .sorted(FukaModelComparators.orderBy通知書番号.desc())
-                .sorted(FukaModelComparators.orderBy調定年度.desc())
-                .sorted(FukaModelComparators.orderBy賦課年度.desc());
+                .sorted(FukaComparators.orderBy通知書番号.desc())
+                .sorted(FukaComparators.orderBy調定年度.desc())
+                .sorted(FukaComparators.orderBy賦課年度.desc());
     }
 
     /**
@@ -76,7 +81,7 @@ public class FukaRireki {
      *
      * @return グループ化する前の全賦課履歴
      */
-    public IItemList<FukaModel> get賦課履歴All() {
+    public IItemList<Fuka> get賦課履歴All() {
         return sort(賦課履歴明細);
     }
 
@@ -88,9 +93,9 @@ public class FukaRireki {
      * @param 通知書番号 通知書番号
      * @return グループ化する前の条件に該当する賦課履歴
      */
-    public IItemList<FukaModel> get賦課履歴(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
-        List<FukaModel> list = new ArrayList<>();
-        for (FukaModel model : 賦課履歴明細) {
+    public IItemList<Fuka> get賦課履歴(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
+        List<Fuka> list = new ArrayList<>();
+        for (Fuka model : 賦課履歴明細) {
             if (model.get賦課年度().equals(賦課年度) && model.get調定年度().equals(調定年度) && model.get通知書番号().equals(通知書番号)) {
                 list.add(model);
             }
