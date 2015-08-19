@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbu.business.core.basic;
 import jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,26 @@ public class JigyoHokokuTokeiDataBuilderTest extends DbuTestBase {
     private static DbT7021JigyoHokokuTokeiDataEntity JigyoHokokuTokeiDataEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYear 主キー名1;
+    private static RString 主キー名2;
+    private static FlexibleYear 主キー名3;
+    private static RString 主キー名4;
+    private static RString 主キー5;
+    private static LasdecCode 主キー6;
+    private static Code 主キー7;
+    private static Code 主キー8;
+    private static Code 主キー9;
+    private static Decimal 主キー10;
+    private static Decimal 主キー11;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_報告年;
+        主キー名2 = DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_報告月;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbuTestBase {
 
         private static JigyoHokokuTokeiDataBuilder sut;
         private static JigyoHokokuTokeiData business;
@@ -42,8 +56,8 @@ public class JigyoHokokuTokeiDataBuilderTest extends DbuTestBase {
         @Before
         public void setUp() {
             JigyoHokokuTokeiDataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
-            JigyoHokokuTokeiDataEntity.setXXX(主キー名1);
-            JigyoHokokuTokeiDataEntity.setXXX(主キー名2);
+            JigyoHokokuTokeiDataEntity.setHokokuYSeireki(主キー名1);
+            JigyoHokokuTokeiDataEntity.setHokokuM(主キー名2);
 
             business = new JigyoHokokuTokeiData(JigyoHokokuTokeiDataEntity);
 
