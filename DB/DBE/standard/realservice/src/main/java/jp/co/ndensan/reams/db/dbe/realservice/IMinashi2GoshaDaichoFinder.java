@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 
 /**
  * みなし2号者台帳を管理するインターフェースです。
