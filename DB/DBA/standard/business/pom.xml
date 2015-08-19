@@ -50,5 +50,11 @@
             <artifactId>DbaDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexDefinition</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

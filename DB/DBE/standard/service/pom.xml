@@ -21,10 +21,6 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
@@ -49,10 +45,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbePersistence</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzRealService</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

@@ -5,16 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dba.business.codeassigneditem;
 
-import jp.co.ndensan.reams.ue.uex.definition.CodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 
 /**
  * 喪失事由（被保険者）のコードマスタ情報を表すクラスです。
  *
  * @author N9606 漢那 憲作
  */
-public class SoshitsuJiyuHihokensha extends CodeAssignedItem {
+public class SoshitsuJiyuHihokensha implements ICodeValueObject {
+
+    private final Code code;
+    private final RString codeMeisho;
+    private final RString codeRyakusho;
+    private final RString option1;
+    private final RString option2;
+    private final RString option3;
 
     /**
      * コンストラクタです。
@@ -27,7 +35,12 @@ public class SoshitsuJiyuHihokensha extends CodeAssignedItem {
      * @param option3 任意情報3
      */
     public SoshitsuJiyuHihokensha(Code code, RString codeMeisho, RString codeRyakusho, RString option1, RString option2, RString option3) {
-        super(code, codeMeisho, codeRyakusho, option1, option2, option3);
+        this.code = code;
+        this.codeMeisho = codeMeisho;
+        this.codeRyakusho = codeRyakusho;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
     }
 
     /**
@@ -39,6 +52,31 @@ public class SoshitsuJiyuHihokensha extends CodeAssignedItem {
      * @param codeRyakusho コード略称
      */
     public SoshitsuJiyuHihokensha(Code code, RString codeMeisho, RString codeRyakusho) {
-        super(code, codeMeisho, codeRyakusho, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        this(code, codeMeisho, codeRyakusho, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+    }
+
+    @Override
+    public RString toRString() {
+        return code.value();
+    }
+
+    @Override
+    public RString getMeisho() {
+        return codeMeisho;
+    }
+
+    @Override
+    public RString getMeisho(FlexibleDate fd) {
+        return codeMeisho;
+    }
+
+    @Override
+    public RString getRyakusho() {
+        return codeRyakusho;
+    }
+
+    @Override
+    public RString getRyakusho(FlexibleDate fd) {
+        return codeRyakusho;
     }
 }
