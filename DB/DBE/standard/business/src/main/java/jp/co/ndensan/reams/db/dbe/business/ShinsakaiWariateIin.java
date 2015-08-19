@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukketsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 審査会に割り当てられた審査会委員を表すクラスです。

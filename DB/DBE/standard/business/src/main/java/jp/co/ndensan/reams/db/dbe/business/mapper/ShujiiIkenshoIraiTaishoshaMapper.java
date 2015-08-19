@@ -7,13 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -40,8 +38,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
      * @param 主治医医療機関 主治医医療機関
      * @param 主治医 主治医
      * @return 主治医意見書作成依頼対象者
-     * @throws NullPointerException
-     * {@code 認定進捗情報}がnullの場合、または{@code 認定申請情報}がnullの場合
+     * @throws NullPointerException {@code 認定進捗情報}がnullの場合、または{@code 認定申請情報}がnullの場合
      */
     public static ShujiiIkenshoIraiTaishosha toShujiiIkenshoIraiTaishosha(
             YokaigoNinteiProgress 認定進捗情報,

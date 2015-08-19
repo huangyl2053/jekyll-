@@ -5,17 +5,17 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
  * 合議体の詳細な情報を表すクラスです。
@@ -50,10 +50,8 @@ public class GogitaiDetail {
      * @param 審査会委員定員 審査会委員定員
      * @param 精神科医師存在区分 精神科医師存在区分
      * @param ダミー区分 ダミー区分
-     * @throws NullPointerException
-     * 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
-     * @throws IllegalArgumentException
-     * 審査会予定定員、審査会自動割当定員、審査会委員定員のいずれかに0より小さい値が渡されたとき
+     * @throws NullPointerException 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
+     * @throws IllegalArgumentException 審査会予定定員、審査会自動割当定員、審査会委員定員のいずれかに0より小さい値が渡されたとき
      */
     public GogitaiDetail(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiDate 有効期間開始年月日,
             FlexibleDate 有効期間終了年月日, Range<TimeString> 予定開催時間, ShinsakaiKaisaiBasho 審査会開催場所,

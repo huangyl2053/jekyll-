@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 認定申請区分（申請時）の列挙型です。

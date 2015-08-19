@@ -4,18 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuUmu;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一次判定警告配列コードを表すクラスです。<br/>
- * 警告配列コードは "01000011001...." という形になっており、1が警告有り、0は警告無しを表します。
- * この例だと、2・7・8・11番目に対応する警告が出ているということを表しています。
+ * 警告配列コードは "01000011001...." という形になっており、1が警告有り、0は警告無しを表します。 この例だと、2・7・8・11番目に対応する警告が出ているということを表しています。
  *
  * @author n8178 城間篤人
  */

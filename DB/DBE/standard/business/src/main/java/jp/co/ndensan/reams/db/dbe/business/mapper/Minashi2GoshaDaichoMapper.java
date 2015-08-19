@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 
 /**
  * {@link Minashi2GoshaDaicho}と{@link DbT1012Minashi2GoshaDaichoEntity}のマッピングクラスです。
@@ -61,7 +61,7 @@ public final class Minashi2GoshaDaichoMapper {
         entity.setShikibetsuCode(minashi2GoshaDaicho.get識別コード());
         entity.setHihokenshaNo(minashi2GoshaDaicho.get被保険者番号());
         entity.setShoriTimestamp(minashi2GoshaDaicho.get処理日時());
-        entity.setHihokenshaKubunCode(minashi2GoshaDaicho.get被保険者区分().getCode());
+        entity.setHihokenshaKubunCode(minashi2GoshaDaicho.get被保険者区分().get被保険者区分コード().asCode());
         entity.setMinashi2GoshaTorokuYMD(minashi2GoshaDaicho.getみなし2号登録年月日());
         entity.setMinashi2GoshaKaijoYMD(minashi2GoshaDaicho.getみなし2号解除年月日());
         entity.setFukushiHihokenshaNo(minashi2GoshaDaicho.get福祉被保険者番号());
