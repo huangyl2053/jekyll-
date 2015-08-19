@@ -15,11 +15,6 @@
     </properties>
         <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxRealService</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
         </dependency>

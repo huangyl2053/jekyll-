@@ -15,10 +15,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzRealService</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdEntity</artifactId>
             <version>${project.version}</version>

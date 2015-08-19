@@ -64,11 +64,6 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxService</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
