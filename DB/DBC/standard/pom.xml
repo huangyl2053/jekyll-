@@ -19,7 +19,6 @@
     <modules>
         <module>entity</module>
         <module>business</module>
-        <module>batchservice</module>
         <module>definition</module>
         <module>persistence</module>
         <module>divcontroller</module>

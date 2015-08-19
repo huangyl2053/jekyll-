@@ -37,7 +37,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
-            <version>${project.version}</version>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
 
         <dependency>
