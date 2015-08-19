@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SakujoJiyuCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;

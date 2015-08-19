@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 認定申請情報のベースクラスです。

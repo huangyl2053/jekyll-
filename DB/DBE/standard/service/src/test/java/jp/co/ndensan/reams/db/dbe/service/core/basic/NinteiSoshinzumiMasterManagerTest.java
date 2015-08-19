@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiSoshinzumiMaster;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5190NinteiSoshinzumiMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5190NinteiSoshinzumiMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5190NinteiSoshinzumiMasterDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

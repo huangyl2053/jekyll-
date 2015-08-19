@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.relate;
 import jp.co.ndensan.reams.db.dba.model.relate.shikakuido.JushochiTokureiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;

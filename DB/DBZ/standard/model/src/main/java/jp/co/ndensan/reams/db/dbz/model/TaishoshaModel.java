@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

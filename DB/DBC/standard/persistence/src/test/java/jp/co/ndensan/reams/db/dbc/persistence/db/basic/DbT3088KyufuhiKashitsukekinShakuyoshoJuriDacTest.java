@@ -8,7 +8,7 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

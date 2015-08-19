@@ -14,7 +14,7 @@ import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.ki;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003Kibetsu.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

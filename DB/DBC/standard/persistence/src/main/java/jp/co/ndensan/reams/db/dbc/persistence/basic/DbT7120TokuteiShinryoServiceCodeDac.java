@@ -12,8 +12,8 @@ import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCode.service
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCode.tekiyoKaishiYM;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7120TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7120TokuteiShinryoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

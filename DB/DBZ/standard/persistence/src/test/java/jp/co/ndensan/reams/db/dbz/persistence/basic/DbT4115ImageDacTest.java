@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4115ImageEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4115ImageEntityGenerator.DEFAULT_原本マスク分;

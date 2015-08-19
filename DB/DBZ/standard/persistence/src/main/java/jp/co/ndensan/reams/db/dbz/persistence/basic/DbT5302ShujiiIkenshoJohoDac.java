@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJoho.ikenshoIraiRirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5302ShujiiIkenshoJoho;

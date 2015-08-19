@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.Shic
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.RegisterDateTimeComparator;
 import jp.co.ndensan.reams.db.dbz.business.util.MultiComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

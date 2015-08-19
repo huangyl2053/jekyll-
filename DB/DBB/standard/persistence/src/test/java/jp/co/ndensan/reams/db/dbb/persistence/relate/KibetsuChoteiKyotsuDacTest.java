@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

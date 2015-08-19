@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.view.FukaAlive;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbV2002FukaAliveDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

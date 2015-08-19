@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5121ShinseiRirekiJohoEn
 import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;

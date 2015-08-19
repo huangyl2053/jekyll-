@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiManagerBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;

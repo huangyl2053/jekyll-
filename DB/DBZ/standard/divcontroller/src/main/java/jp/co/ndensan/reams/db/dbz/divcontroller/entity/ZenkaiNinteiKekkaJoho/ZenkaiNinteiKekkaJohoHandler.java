@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

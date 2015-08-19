@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbV1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbx.entity.basic.DbV1001HihokenshaDaicho.*;
 import jp.co.ndensan.reams.db.dbx.entity.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

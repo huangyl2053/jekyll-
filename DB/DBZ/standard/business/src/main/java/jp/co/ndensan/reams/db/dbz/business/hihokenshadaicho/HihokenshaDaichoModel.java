@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

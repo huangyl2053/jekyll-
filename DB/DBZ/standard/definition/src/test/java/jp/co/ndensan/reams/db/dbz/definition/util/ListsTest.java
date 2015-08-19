@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
+import jp.co.ndensan.reams.db.dbx.definition.util.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

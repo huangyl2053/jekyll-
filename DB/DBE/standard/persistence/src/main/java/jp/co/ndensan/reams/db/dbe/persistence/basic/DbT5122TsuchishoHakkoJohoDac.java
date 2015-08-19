@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5122TsuchishoHakkoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5122TsuchishoHakkoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
