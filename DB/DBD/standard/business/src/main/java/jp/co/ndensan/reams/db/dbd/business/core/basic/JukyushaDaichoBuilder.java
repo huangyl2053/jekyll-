@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -179,40 +179,24 @@ public class JukyushaDaichoBuilder {
     /**
      * （届出者）申請者関係コードを設定します。
      *
-     * @param （届出者）申請者関係コード （届出者）申請者関係コード
+     * @param 届出者_申請者関係コード 届出者_申請者関係コード
      * @return {@link JukyushaDaichoBuilder}
      */
-    public JukyushaDaichoBuilder set
-    （届出者
-
-    ）申請者関係コード(Code
-
-        （届出者）申請者関係コード) {
-        requireNonNull(（届出者）申請者関係コード
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("（届出者）申請者関係コード")
-        );
-        entity.setShinseishaKankeiCode(（届出者）申請者関係コード
-        );
+    public JukyushaDaichoBuilder set届出者_申請者関係コード(Code 届出者_申請者関係コード) {
+        requireNonNull(届出者_申請者関係コード, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者_申請者関係コード"));
+        entity.setShinseishaKankeiCode(届出者_申請者関係コード);
         return this;
     }
 
     /**
      * （届出者）本人との関係を設定します。
      *
-     * @param （届出者）本人との関係 （届出者）本人との関係
+     * @param 届出者_本人との関係 届出者_本人との関係
      * @return {@link JukyushaDaichoBuilder}
      */
-    public JukyushaDaichoBuilder set
-    （届出者
-
-    ）本人との関係(RString
-
-        （届出者）本人との関係) {
-        requireNonNull(（届出者）本人との関係
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("（届出者）本人との関係")
-        );
-        entity.setHomninKankei(（届出者）本人との関係
-        );
+    public JukyushaDaichoBuilder set届出者_本人との関係(RString 届出者_本人との関係) {
+        requireNonNull(届出者_本人との関係, UrSystemErrorMessages.値がnull.getReplacedMessage("届出者_本人との関係"));
+        entity.setHomninKankei(届出者_本人との関係);
         return this;
     }
 
@@ -231,17 +215,12 @@ public class JukyushaDaichoBuilder {
     /**
      * ２号特定疾病コードを設定します。
      *
-     * @param ２号特定疾病コード ２号特定疾病コード
+     * @param nigoTokuteiShippeiCode ２号特定疾病コード
      * @return {@link JukyushaDaichoBuilder}
      */
-    public JukyushaDaichoBuilder set２号特定疾病コード(Code
-
-        ２号特定疾病コード) {
-        requireNonNull(２号特定疾病コード
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("２号特定疾病コード")
-        );
-        entity.setNigoTokuteiShippeiCode(２号特定疾病コード
-        );
+    public JukyushaDaichoBuilder set２号特定疾病コード(Code nigoTokuteiShippeiCode) {
+        requireNonNull(nigoTokuteiShippeiCode, UrSystemErrorMessages.値がnull.getReplacedMessage("２号特定疾病コード"));
+        entity.setNigoTokuteiShippeiCode(nigoTokuteiShippeiCode);
         return this;
     }
 
@@ -755,7 +734,7 @@ public class JukyushaDaichoBuilder {
      * @param 異動理由 異動理由
      * @return {@link JukyushaDaichoBuilder}
      */
-    public JukyushaDaichoBuilder set異動理由(String 異動理由) {
+    public JukyushaDaichoBuilder set異動理由(RString 異動理由) {
         requireNonNull(異動理由, UrSystemErrorMessages.値がnull.getReplacedMessage("異動理由"));
         entity.setIdoRiyu(異動理由);
         return this;
@@ -930,19 +909,14 @@ public class JukyushaDaichoBuilder {
     }
 
     /**
-     * ２号申請受理通知書発行年月日を設定します。
+     * 2号申請受理通知書発行年月日を設定します。
      *
-     * @param ２号申請受理通知書発行年月日 ２号申請受理通知書発行年月日
+     * @param nigoShinseiJuritsuchishoHakkoYMD 2号申請受理通知書発行年月日
      * @return {@link JukyushaDaichoBuilder}
      */
-    public JukyushaDaichoBuilder set２号申請受理通知書発行年月日(FlexibleDate
-
-        ２号申請受理通知書発行年月日) {
-        requireNonNull(２号申請受理通知書発行年月日
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("２号申請受理通知書発行年月日")
-        );
-        entity.setNigoShinseiJuriTsuchishoHakkoYMD(２号申請受理通知書発行年月日
-        );
+    public JukyushaDaichoBuilder set２号申請受理通知書発行年月日(FlexibleDate nigoShinseiJuritsuchishoHakkoYMD) {
+        requireNonNull(nigoShinseiJuritsuchishoHakkoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("2号申請受理通知書発行年月日"));
+        entity.setNigoShinseiJuriTsuchishoHakkoYMD(nigoShinseiJuritsuchishoHakkoYMD);
         return this;
     }
 

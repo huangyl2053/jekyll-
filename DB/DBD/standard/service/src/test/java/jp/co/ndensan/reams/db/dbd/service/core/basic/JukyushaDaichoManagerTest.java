@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbd.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4001JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -47,24 +49,60 @@ public class JukyushaDaichoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー2;
-            sut.get受給者台帳(null, 主キー2);
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            sut.get受給者台帳(null, 主キー2, 主キー3, 主キー4, 主キー5);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー1;
-            sut.get受給者台帳(主キー1, null);
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            sut.get受給者台帳(主キー1, null, 主キー3, 主キー4, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            sut.get受給者台帳(主キー1, 主キー2, null, 主キー4, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            sut.get受給者台帳(主キー1, 主キー2, 主キー3, null, 主キー5);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型5にnullを指定した場合_NullPointerExceptionが発生する() {
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            sut.get受給者台帳(主キー1, 主キー2, 主キー3, 主キー4, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー2;
-            JukyushaDaicho result = sut.get受給者台帳(主キー1, 主キー2);
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            JukyushaDaicho result = sut.get受給者台帳(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
             assertThat(result, is(nullValue()));
         }
@@ -72,13 +110,16 @@ public class JukyushaDaichoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT4001JukyushaDaichoEntity entity = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー2;
-            JukyushaDaicho result = sut.get受給者台帳(主キー1, 主キー2);
+            LasdecCode 主キー1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+            HihokenshaNo 主キー2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+            RString 主キー3 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー4 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+            Code 主キー5 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
+            JukyushaDaicho result = sut.get受給者台帳(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get市町村コード().value(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
@@ -102,11 +143,11 @@ public class JukyushaDaichoManagerTest {
             List<JukyushaDaicho> result = sut.get受給者台帳一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
-    public static class save受給者台帳 extends XxxTestBase {
+    public static class save受給者台帳 extends DbdTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -135,7 +176,7 @@ public class JukyushaDaichoManagerTest {
             DbT4001JukyushaDaichoEntity entity = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
             entity.initializeMd5();
             JukyushaDaicho 受給者台帳 = new JukyushaDaicho(entity);
-            受給者台帳 = 受給者台帳.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受給者台帳 = 受給者台帳.createBuilderForEdit().set受給申請事由(new Code("10")).build();
 
             assertThat(sut.save受給者台帳(受給者台帳), is(true));
         }
@@ -147,7 +188,7 @@ public class JukyushaDaichoManagerTest {
             DbT4001JukyushaDaichoEntity entity = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
             entity.initializeMd5();
             JukyushaDaicho 受給者台帳 = new JukyushaDaicho(entity);
-            受給者台帳 = 受給者台帳.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受給者台帳 = 受給者台帳.createBuilderForEdit().set受給申請事由(new Code("10")).build();
 
             assertThat(sut.save受給者台帳(受給者台帳), is(false));
         }

@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbd.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbd.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
@@ -88,7 +87,7 @@ public class NinteiShinseiKekkaDacTest {
 
         @Test
         public void select要介護認定申請結果ByKeyTest_データが見つかる検索条件を渡すと_モデルリストを返す() {
-            IItemList<NinteiShinseiKekkaModel> modelList = sut.select要介護認定申請結果履歴By被保険者番号(受給者_被保険者番号1);
+            IItemList<DbT4001JukyushaDaichoEntity> modelList = sut.select要介護認定申請結果履歴By被保険者番号(受給者_被保険者番号1);
             assertThat(modelList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
 //            assertThat(modelList.toList().get(0).get要介護認定申請情報モデル().get().get申請書管理番号(), is(申請_申請書管理番号2));
