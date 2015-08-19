@@ -23,6 +23,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
+            <type>jar</type>
+            <version>1.2-release-staging-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -38,6 +40,17 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+            <type>jar</type>
+            <version>1.2-release-staging-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaDefinition</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
