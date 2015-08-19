@@ -43,14 +43,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.fd.fdz</groupId>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
             <version>${jp.co.ndensan.reams.dbzVersion}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.fd.fdz</groupId>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
             <version>${jp.co.ndensan.reams.dbzVersion}</version>
         </dependency>
