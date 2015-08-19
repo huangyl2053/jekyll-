@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dba.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * みなし2号者台帳テーブルのエンティティクラスです。
  */
 public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012Minashi2GoshaDaichoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1012Minashi2GoshaDaicho");
 
@@ -32,18 +34,18 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
     private ShikibetsuCode shikibetsuCode;
     private RString hihokenshaKubunCode;
     private FlexibleDate minashi2GoshaTorokuYMD;
     private FlexibleDate minashi2GoshaKaijoYMD;
-    private DbUDD002HihokenshaNo fukushiHihokenshaNo;
+    private HihokenshaNo fukushiHihokenshaNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -52,7 +54,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +63,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,17 +72,16 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,7 +90,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -98,7 +99,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -107,25 +108,25 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 処理日時のgetメソッドです。
-     * 
+     *
      * @return 処理日時
      */
     public YMDHMS getShoriTimestamp() {
@@ -134,7 +135,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 処理日時のsetメソッドです。
-     * 
+     *
      * @param shoriTimestamp 処理日時
      */
     public void setShoriTimestamp(YMDHMS shoriTimestamp) {
@@ -143,7 +144,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -152,7 +153,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -161,7 +162,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 被保険者区分コードのgetメソッドです。
-     * 
+     *
      * @return 被保険者区分コード
      */
     public RString getHihokenshaKubunCode() {
@@ -170,7 +171,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 被保険者区分コードのsetメソッドです。
-     * 
+     *
      * @param hihokenshaKubunCode 被保険者区分コード
      */
     public void setHihokenshaKubunCode(RString hihokenshaKubunCode) {
@@ -179,7 +180,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 登録年月日のgetメソッドです。
-     * 
+     *
      * @return 登録年月日
      */
     public FlexibleDate getMinashi2GoshaTorokuYMD() {
@@ -188,7 +189,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 登録年月日のsetメソッドです。
-     * 
+     *
      * @param minashi2GoshaTorokuYMD 登録年月日
      */
     public void setMinashi2GoshaTorokuYMD(FlexibleDate minashi2GoshaTorokuYMD) {
@@ -197,7 +198,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 解除年月日のgetメソッドです。
-     * 
+     *
      * @return 解除年月日
      */
     public FlexibleDate getMinashi2GoshaKaijoYMD() {
@@ -206,7 +207,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 解除年月日のsetメソッドです。
-     * 
+     *
      * @param minashi2GoshaKaijoYMD 解除年月日
      */
     public void setMinashi2GoshaKaijoYMD(FlexibleDate minashi2GoshaKaijoYMD) {
@@ -215,27 +216,27 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * 福祉被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 福祉被保険者番号
      */
-    public DbUDD002HihokenshaNo getFukushiHihokenshaNo() {
+    public HihokenshaNo getFukushiHihokenshaNo() {
         return fukushiHihokenshaNo;
     }
 
     /**
      * 福祉被保険者番号のsetメソッドです。
-     * 
+     *
      * @param fukushiHihokenshaNo 福祉被保険者番号
      */
-    public void setFukushiHihokenshaNo(DbUDD002HihokenshaNo fukushiHihokenshaNo) {
+    public void setFukushiHihokenshaNo(HihokenshaNo fukushiHihokenshaNo) {
         this.fukushiHihokenshaNo = fukushiHihokenshaNo;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT1012Minashi2GoshaDaichoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1012Minashi2GoshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -272,6 +273,7 @@ public class DbT1012Minashi2GoshaDaichoEntity extends DbTableEntityBase<DbT1012M
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

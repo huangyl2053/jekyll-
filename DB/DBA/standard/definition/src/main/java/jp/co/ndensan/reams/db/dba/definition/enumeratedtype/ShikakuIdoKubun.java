@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 介護保険の資格異動を表す区分の列挙型です。
