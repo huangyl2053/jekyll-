@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.DateDuration;

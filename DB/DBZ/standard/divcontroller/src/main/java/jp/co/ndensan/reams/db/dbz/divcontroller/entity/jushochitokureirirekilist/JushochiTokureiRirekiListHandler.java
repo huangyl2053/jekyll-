@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshit
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
+import jp.co.ndensan.reams.db.dbx.definition.util.Lists;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;

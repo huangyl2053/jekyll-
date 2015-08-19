@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShik
 import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.被保険者証;
