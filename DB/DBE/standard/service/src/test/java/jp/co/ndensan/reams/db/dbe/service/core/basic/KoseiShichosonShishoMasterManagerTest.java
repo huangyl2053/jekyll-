@@ -15,15 +15,14 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5052KoseiShichosonShishoM
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -79,7 +78,7 @@ public class KoseiShichosonShishoMasterManagerTest {
             ShishoCode 主キー2 = DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
             KoseiShichosonShishoMaster result = sut.get構成市町村支所マスタ(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード.value()));
+            assertThat(result.get市町村コード().value(), is(DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
@@ -103,7 +102,7 @@ public class KoseiShichosonShishoMasterManagerTest {
             List<KoseiShichosonShishoMaster> result = sut.get構成市町村支所マスタ一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード.value()));
+            assertThat(result.get(0).get市町村コード().value(), is(DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード.value()));
         }
     }
 
@@ -136,7 +135,7 @@ public class KoseiShichosonShishoMasterManagerTest {
             DbT5052KoseiShichosonShishoMasterEntity entity = DbT5052KoseiShichosonShishoMasterEntityGenerator.createDbT5052KoseiShichosonShishoMasterEntity();
             entity.initializeMd5();
             KoseiShichosonShishoMaster 構成市町村支所マスタ = new KoseiShichosonShishoMaster(entity);
-            構成市町村支所マスタ = 構成市町村支所マスタ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            構成市町村支所マスタ = 構成市町村支所マスタ.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save構成市町村支所マスタ(構成市町村支所マスタ), is(true));
         }
@@ -148,7 +147,7 @@ public class KoseiShichosonShishoMasterManagerTest {
             DbT5052KoseiShichosonShishoMasterEntity entity = DbT5052KoseiShichosonShishoMasterEntityGenerator.createDbT5052KoseiShichosonShishoMasterEntity();
             entity.initializeMd5();
             KoseiShichosonShishoMaster 構成市町村支所マスタ = new KoseiShichosonShishoMaster(entity);
-            構成市町村支所マスタ = 構成市町村支所マスタ.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            構成市町村支所マスタ = 構成市町村支所マスタ.createBuilderForEdit().set市町村コード(new LasdecCode("市町村コードを変更")).build();
 
             assertThat(sut.save構成市町村支所マスタ(構成市町村支所マスタ), is(false));
         }

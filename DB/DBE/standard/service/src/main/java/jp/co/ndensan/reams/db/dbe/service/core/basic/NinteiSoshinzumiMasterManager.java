@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiSoshinzumiMaster;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5190NinteiSoshinzumiMasterEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5190NinteiSoshinzumiMasterDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 

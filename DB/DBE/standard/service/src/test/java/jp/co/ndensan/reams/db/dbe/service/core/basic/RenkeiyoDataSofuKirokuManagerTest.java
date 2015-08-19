@@ -136,7 +136,7 @@ public class RenkeiyoDataSofuKirokuManagerTest {
             DbT5191RenkeiyoDataSofuKirokuEntity entity = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.createDbT5191RenkeiyoDataSofuKirokuEntity();
             entity.initializeMd5();
             RenkeiyoDataSofuKiroku 連携用データ送付記録 = new RenkeiyoDataSofuKiroku(entity);
-            連携用データ送付記録 = 連携用データ送付記録.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連携用データ送付記録 = 連携用データ送付記録.createBuilderForEdit().set再イメージ送付区分(new RString("再イメージ送付区分を変更")).build();
 
             assertThat(sut.save連携用データ送付記録(連携用データ送付記録), is(true));
         }
@@ -148,7 +148,7 @@ public class RenkeiyoDataSofuKirokuManagerTest {
             DbT5191RenkeiyoDataSofuKirokuEntity entity = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.createDbT5191RenkeiyoDataSofuKirokuEntity();
             entity.initializeMd5();
             RenkeiyoDataSofuKiroku 連携用データ送付記録 = new RenkeiyoDataSofuKiroku(entity);
-            連携用データ送付記録 = 連携用データ送付記録.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            連携用データ送付記録 = 連携用データ送付記録.createBuilderForEdit().set再イメージ送付区分(new RString("再イメージ送付区分を変更")).build();
 
             assertThat(sut.save連携用データ送付記録(連携用データ送付記録), is(false));
         }
