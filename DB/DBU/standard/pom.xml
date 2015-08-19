@@ -21,9 +21,7 @@
         <module>batchservice</module>
         <module>definition</module>
         <module>persistence</module>
-        <module>realservice</module>
         <module>divcontroller</module>
-        <module>model</module>
         <module>service</module>
     </modules>
     <dependencyManagement>
@@ -35,22 +33,17 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzService</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzEntity</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-                <artifactId>DbzModel</artifactId>
-                <version>${jp.co.ndensan.reams.dbzVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzBusiness</artifactId>
-                <version>${jp.co.ndensan.reams.dbzVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-                <artifactId>DbzRealService</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
