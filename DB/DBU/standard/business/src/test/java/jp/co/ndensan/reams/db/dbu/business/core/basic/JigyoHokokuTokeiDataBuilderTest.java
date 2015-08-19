@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.business.core.basic;
 import jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
