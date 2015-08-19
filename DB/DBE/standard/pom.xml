@@ -23,6 +23,7 @@
         <module>divcontroller</module>
         <module>workflowcontroller</module>
         <module>service</module>
+        <module>realservice</module>
     </modules>
     <dependencyManagement>
         <dependencies>
