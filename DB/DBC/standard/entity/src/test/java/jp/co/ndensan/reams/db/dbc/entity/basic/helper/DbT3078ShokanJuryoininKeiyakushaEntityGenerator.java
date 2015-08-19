@@ -19,7 +19,7 @@ public final class DbT3078ShokanJuryoininKeiyakushaEntityGenerator {
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("1");
     public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
-    public static final int DEFAULT_履歴番号 = 1;
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(1);
     public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_事業者契約番号 = new RString("Data");
     public static final RString DEFAULT_契約サービス種類 = new RString("Data");
