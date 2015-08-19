@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.IchijiHanteiResultDetailMapper;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -33,11 +32,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -152,12 +152,12 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定結果コードに01を持つ() {
-            assertThat(result.get一次判定結果().getCode(), is(一次判定結果コード_01));
+            assertThat(result.get一次判定結果().get一次判定結果コード().asCode(), is(一次判定結果コード_01));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_認知症加算一次判定結果コードに12を持つ() {
-            assertThat(result.get認知症加算一次判定結果().getCode(), is(認知症加算一次判定結果コード_12));
+            assertThat(result.get認知症加算一次判定結果().get一次判定結果コード().asCode(), is(認知症加算一次判定結果コード_12));
         }
 
         @Test
@@ -269,7 +269,7 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_介護認定状態の安定性コードに3を持つ() {
-            assertThat(result.get認定状態安定性().getCode(), is(状態安定性コード_3));
+            assertThat(result.get認定状態安定性().get介護認定状態安定性コード().asCode(), is(状態安定性コード_3));
         }
 
         @Test
@@ -279,12 +279,12 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_推定給付区分コードに4を持つ() {
-            assertThat(result.get推定給付区分().getCode(), is(給付区分コード_4));
+            assertThat(result.get推定給付区分().get推定給付区分コード().asCode(), is(給付区分コード_4));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_運動能力未低下認知症高齢者指標コードに5を持つ() {
-            assertThat(result.get運動能力未低下認知症高齢者指標().getCode(), is(運動能力未低下認知症高齢者の指標コード_3));
+            assertThat(result.get運動能力未低下認知症高齢者指標().get能力未低下認知症高齢者指標コード().asCode(), is(運動能力未低下認知症高齢者の指標コード_3));
         }
 
         @Test
@@ -331,7 +331,7 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_認知症高齢者自立度の蓋然性評価コードに6を持つ() {
-            assertThat(result.get認知症高齢者日常生活自立度蓋然性評価().getCode(), is(蓋然性評価コード_6));
+            assertThat(result.get認知症高齢者日常生活自立度蓋然性評価().get認知症高齢者自立度蓋然性評価コード().asCode(), is(蓋然性評価コード_6));
         }
 
         @Test
