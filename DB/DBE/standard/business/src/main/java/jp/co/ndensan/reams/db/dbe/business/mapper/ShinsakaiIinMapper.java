@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -103,7 +103,7 @@ public final class ShinsakaiIinMapper {
         委員Entity.setShinsakaiIinShimei(審査会委員.get氏名());
         委員Entity.setShinsakaiIinKanaShimei(審査会委員.getカナ氏名());
         委員Entity.setSeibetsu(審査会委員.get性別().getCommonName());
-        委員Entity.setShinsakaiIinShikakuCode(審査会委員.get審査会委員資格().getCode());
+        委員Entity.setShinsakaiIinShikakuCode(審査会委員.get審査会委員資格().getShinsakaiIinShikakuCode().asCode());
         委員Entity.setShinsainYusoKubun(審査会委員.get審査委員郵送区分().get郵送区分());
         委員Entity.setYubinNo(審査会委員.get郵便番号());
         委員Entity.setJusho(審査会委員.get住所());

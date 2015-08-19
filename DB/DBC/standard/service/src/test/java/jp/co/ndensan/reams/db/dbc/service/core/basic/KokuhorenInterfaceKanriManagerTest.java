@@ -78,7 +78,7 @@ public class KokuhorenInterfaceKanriManagerTest {
             RString 主キー2 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_交換情報識別番号;
             KokuhorenInterfaceKanri result = sut.get国保連インターフェース管理(主キー1, 主キー2);
 
-            assertThat(result.get主キー1().value(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月.toDateString()));
+            assertThat(result.get処理年月().toDateString(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月.toDateString()));
         }
     }
 
@@ -102,7 +102,7 @@ public class KokuhorenInterfaceKanriManagerTest {
             List<KokuhorenInterfaceKanri> result = sut.get国保連インターフェース管理一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月.toDateString()));
+            assertThat(result.get(0).get処理年月().toDateString(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月.toDateString()));
         }
     }
 
@@ -135,7 +135,7 @@ public class KokuhorenInterfaceKanriManagerTest {
             DbT3104KokuhorenInterfaceKanriEntity entity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
             entity.initializeMd5();
             KokuhorenInterfaceKanri 国保連インターフェース管理 = new KokuhorenInterfaceKanri(entity);
-            国保連インターフェース管理 = 国保連インターフェース管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            国保連インターフェース管理 = 国保連インターフェース管理.createBuilderForEdit().set交換情報識別番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save国保連インターフェース管理(国保連インターフェース管理), is(true));
         }
@@ -147,7 +147,7 @@ public class KokuhorenInterfaceKanriManagerTest {
             DbT3104KokuhorenInterfaceKanriEntity entity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
             entity.initializeMd5();
             KokuhorenInterfaceKanri 国保連インターフェース管理 = new KokuhorenInterfaceKanri(entity);
-            国保連インターフェース管理 = 国保連インターフェース管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            国保連インターフェース管理 = 国保連インターフェース管理.createBuilderForEdit().set交換情報識別番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save国保連インターフェース管理(国保連インターフェース管理), is(false));
         }

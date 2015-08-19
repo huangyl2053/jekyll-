@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoServiceCode;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7122SogoJigyoServiceCodeEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7122SogoJigyoServiceCodeDac;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7122SogoJigyoServiceCodeEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7122SogoJigyoServiceCodeDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -130,6 +131,8 @@ public class SogoJigyoServiceCodeManagerTest {
             ), is(true)
 
 
+
+
         );
         }
 
@@ -144,6 +147,8 @@ public class SogoJigyoServiceCodeManagerTest {
             assertThat(sut.save介護予防
             ・日常生活支援総合事業サービスコード(介護予防・日常生活支援総合事業サービスコード
             ), is(false)
+
+
 
 
         );
@@ -166,6 +171,8 @@ public class SogoJigyoServiceCodeManagerTest {
             ), is(true)
 
 
+
+
         );
         }
 
@@ -184,6 +191,8 @@ public class SogoJigyoServiceCodeManagerTest {
             assertThat(sut.save介護予防
             ・日常生活支援総合事業サービスコード(介護予防・日常生活支援総合事業サービスコード
             ), is(false)
+
+
 
 
         );
@@ -206,6 +215,8 @@ public class SogoJigyoServiceCodeManagerTest {
             ), is(true)
 
 
+
+
         );
         }
 
@@ -226,6 +237,8 @@ public class SogoJigyoServiceCodeManagerTest {
             ), is(false)
 
 
+
+
         );
         }
 
@@ -238,6 +251,9 @@ public class SogoJigyoServiceCodeManagerTest {
             assertThat(sut.save介護予防
             ・日常生活支援総合事業サービスコード(介護予防・日常生活支援総合事業サービスコード
             ), is(false)
+
+
+
 
 
 

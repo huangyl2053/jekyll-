@@ -102,7 +102,7 @@ public class ShokanShinseiManagerTest {
             Decimal 主キー4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
             ShokanShinsei result = sut.get償還払支給申請(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -126,7 +126,7 @@ public class ShokanShinseiManagerTest {
             List<ShokanShinsei> result = sut.get償還払支給申請一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -159,7 +159,7 @@ public class ShokanShinseiManagerTest {
             DbT3034ShokanShinseiEntity entity = DbT3034ShokanShinseiEntityGenerator.createDbT3034ShokanShinseiEntity();
             entity.initializeMd5();
             ShokanShinsei 償還払支給申請 = new ShokanShinsei(entity);
-            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set受領委任契約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給申請(償還払支給申請), is(true));
         }
@@ -171,7 +171,7 @@ public class ShokanShinseiManagerTest {
             DbT3034ShokanShinseiEntity entity = DbT3034ShokanShinseiEntityGenerator.createDbT3034ShokanShinseiEntity();
             entity.initializeMd5();
             ShokanShinsei 償還払支給申請 = new ShokanShinsei(entity);
-            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給申請 = 償還払支給申請.createBuilderForEdit().set受領委任契約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給申請(償還払支給申請), is(false));
         }

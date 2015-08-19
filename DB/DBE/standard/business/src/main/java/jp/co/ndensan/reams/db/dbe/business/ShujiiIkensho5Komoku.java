@@ -4,15 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 主治医意見書の詳細情報のうち、一次判定に使用する5項目の情報を扱うクラスです。
@@ -134,7 +134,7 @@ public class ShujiiIkensho5Komoku {
      */
     public RString get5項目回答() {
         RStringBuilder 回答 = new RStringBuilder();
-        回答.append(認知症高齢者自立度.getCode().value());
+        回答.append(認知症高齢者自立度.get認知症高齢者自立度コード().asCode());
         回答.append(短期記憶.get項目コード());
         回答.append(認知能力.get項目コード());
         回答.append(伝達能力.get項目コード());

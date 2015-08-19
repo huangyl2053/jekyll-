@@ -4,14 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkensho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItemForResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItem;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
 
 /**
  * 主治医意見書の結果を変換するConverterクラスです。

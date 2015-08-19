@@ -156,7 +156,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoManagerTest {
             Decimal 主キー7 = DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_履歴番号;
             ShokanShoteiShikkanShisetsuRyoyo result = sut.get償還払請求所定疾患施設療養費等(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoManagerTest {
             List<ShokanShoteiShikkanShisetsuRyoyo> result = sut.get償還払請求所定疾患施設療養費等一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -213,7 +213,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoManagerTest {
             DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity = DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.createDbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanShoteiShikkanShisetsuRyoyo 償還払請求所定疾患施設療養費等 = new ShokanShoteiShikkanShisetsuRyoyo(entity);
-            償還払請求所定疾患施設療養費等 = 償還払請求所定疾患施設療養費等.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求所定疾患施設療養費等 = 償還払請求所定疾患施設療養費等.createBuilderForEdit().set往診医療機関名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求所定疾患施設療養費等(償還払請求所定疾患施設療養費等), is(true));
         }
@@ -225,7 +225,7 @@ public class ShokanShoteiShikkanShisetsuRyoyoManagerTest {
             DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity = DbT3052ShokanShoteiShikkanShisetsuRyoyoEntityGenerator.createDbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanShoteiShikkanShisetsuRyoyo 償還払請求所定疾患施設療養費等 = new ShokanShoteiShikkanShisetsuRyoyo(entity);
-            償還払請求所定疾患施設療養費等 = 償還払請求所定疾患施設療養費等.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求所定疾患施設療養費等 = 償還払請求所定疾患施設療養費等.createBuilderForEdit().set往診医療機関名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求所定疾患施設療養費等(償還払請求所定疾患施設療養費等), is(false));
         }

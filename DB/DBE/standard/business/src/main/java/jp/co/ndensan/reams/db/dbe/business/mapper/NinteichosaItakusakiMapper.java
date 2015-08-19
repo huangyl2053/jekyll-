@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査委託先のビジネスクラスとエンティティの変換を行うクラスです

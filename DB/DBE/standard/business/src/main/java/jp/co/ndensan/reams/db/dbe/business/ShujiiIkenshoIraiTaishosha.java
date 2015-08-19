@@ -5,12 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,8 +47,7 @@ public class ShujiiIkenshoIraiTaishosha {
      * @param 住所 住所
      * @param 主治医医療機関 主治医医療機関
      * @param 主治医 主治医
-     * @throws NullPointerException
-     * {@code 認定進捗情報}がnullの場合、{@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、
+     * @throws NullPointerException {@code 認定進捗情報}がnullの場合、{@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、
      * {@code 被保険者番号}がnullの場合、{@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、
      * {@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */

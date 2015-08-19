@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

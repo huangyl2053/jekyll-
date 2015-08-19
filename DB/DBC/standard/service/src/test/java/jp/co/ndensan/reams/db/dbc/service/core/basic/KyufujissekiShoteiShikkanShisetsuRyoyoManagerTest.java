@@ -204,7 +204,7 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoManagerTest {
             RString 主キー9 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_緊急時施設療養情報レコード順次番号;
             KyufujissekiShoteiShikkanShisetsuRyoyo result = sut.get給付実績所定疾患施設療養費等(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoManagerTest {
             List<KyufujissekiShoteiShikkanShisetsuRyoyo> result = sut.get給付実績所定疾患施設療養費等一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoManagerTest {
             DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity entity = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.createDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiShoteiShikkanShisetsuRyoyo 給付実績所定疾患施設療養費等 = new KyufujissekiShoteiShikkanShisetsuRyoyo(entity);
-            給付実績所定疾患施設療養費等 = 給付実績所定疾患施設療養費等.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績所定疾患施設療養費等 = 給付実績所定疾患施設療養費等.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績所定疾患施設療養費等(給付実績所定疾患施設療養費等), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoManagerTest {
             DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity entity = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.createDbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiShoteiShikkanShisetsuRyoyo 給付実績所定疾患施設療養費等 = new KyufujissekiShoteiShikkanShisetsuRyoyo(entity);
-            給付実績所定疾患施設療養費等 = 給付実績所定疾患施設療養費等.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績所定疾患施設療養費等 = 給付実績所定疾患施設療養費等.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績所定疾患施設療養費等(給付実績所定疾患施設療養費等), is(false));
         }

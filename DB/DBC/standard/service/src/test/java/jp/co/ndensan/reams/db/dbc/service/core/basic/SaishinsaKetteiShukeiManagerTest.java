@@ -88,7 +88,7 @@ public class SaishinsaKetteiShukeiManagerTest {
             Decimal 主キー3 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_履歴番号;
             SaishinsaKetteiShukei result = sut.get再審査決定集計(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get取扱年月().toDateString(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -112,7 +112,7 @@ public class SaishinsaKetteiShukeiManagerTest {
             List<SaishinsaKetteiShukei> result = sut.get再審査決定集計一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get(0).get取扱年月().toDateString(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -145,7 +145,7 @@ public class SaishinsaKetteiShukeiManagerTest {
             DbT3063SaishinsaKetteiShukeiEntity entity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
             entity.initializeMd5();
             SaishinsaKetteiShukei 再審査決定集計 = new SaishinsaKetteiShukei(entity);
-            再審査決定集計 = 再審査決定集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            再審査決定集計 = 再審査決定集計.createBuilderForEdit().set保険者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save再審査決定集計(再審査決定集計), is(true));
         }
@@ -157,7 +157,7 @@ public class SaishinsaKetteiShukeiManagerTest {
             DbT3063SaishinsaKetteiShukeiEntity entity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
             entity.initializeMd5();
             SaishinsaKetteiShukei 再審査決定集計 = new SaishinsaKetteiShukei(entity);
-            再審査決定集計 = 再審査決定集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            再審査決定集計 = 再審査決定集計.createBuilderForEdit().set保険者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save再審査決定集計(再審査決定集計), is(false));
         }

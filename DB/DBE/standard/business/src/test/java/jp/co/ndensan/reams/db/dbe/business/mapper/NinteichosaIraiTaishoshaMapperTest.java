@@ -4,35 +4,34 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
-import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbx.business.mapper.NinteiChosainMapper;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.Before;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * 認定調査対象者のビジネスクラスとエンティティの変換を行うクラスのテストです。
@@ -92,7 +91,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
             認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
             個人 = KojinTestHelper.create個人();
             認定調査委託先 = NinteichosaItakusakiMapper.toNinteichosaItakusaki(NinteichosaItakusakiTestHelper.create認定調査委託先Entity());
-            介護事業者 = KaigoJigyoshaMapper.toKaigoJigyosha(KaigoJigyoshaEntityMock.getSpiedInstance());
+//            介護事業者 = KaigoJigyoshaMapper.toKaigoJigyosha(KaigoJigyoshaEntityMock.getSpiedInstance());
             認定調査員情報 = NinteiChosainMapper.toNinteiChosain(ChosainJohoEntityMock.getSpiedInstance(), 介護事業者);
 
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(

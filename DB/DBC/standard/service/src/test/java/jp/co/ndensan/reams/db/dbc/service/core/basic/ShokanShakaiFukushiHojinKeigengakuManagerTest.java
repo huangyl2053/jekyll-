@@ -156,7 +156,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
             ShokanShakaiFukushiHojinKeigengaku result = sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             List<ShokanShakaiFukushiHojinKeigengaku> result = sut.get償還払請求社会福祉法人軽減額一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -213,7 +213,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.createDbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
             entity.initializeMd5();
             ShokanShakaiFukushiHojinKeigengaku 償還払請求社会福祉法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(entity);
-            償還払請求社会福祉法人軽減額 = 償還払請求社会福祉法人軽減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求社会福祉法人軽減額 = 償還払請求社会福祉法人軽減額.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求社会福祉法人軽減額(償還払請求社会福祉法人軽減額), is(true));
         }
@@ -225,7 +225,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.createDbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
             entity.initializeMd5();
             ShokanShakaiFukushiHojinKeigengaku 償還払請求社会福祉法人軽減額 = new ShokanShakaiFukushiHojinKeigengaku(entity);
-            償還払請求社会福祉法人軽減額 = 償還払請求社会福祉法人軽減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求社会福祉法人軽減額 = 償還払請求社会福祉法人軽減額.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求社会福祉法人軽減額(償還払請求社会福祉法人軽減額), is(false));
         }

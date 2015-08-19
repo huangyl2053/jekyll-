@@ -257,7 +257,7 @@ public class KyufuJissekiCareManagementHiManagerTest {
             RString 主キー11 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_サービス計画費明細行番号;
             KyufuJissekiCareManagementHi result = sut.get給付実績ケアマネジメント費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9, 主キー10, 主キー11);
 
-            assertThat(result.get主キー1().value(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -281,7 +281,7 @@ public class KyufuJissekiCareManagementHiManagerTest {
             List<KyufuJissekiCareManagementHi> result = sut.get給付実績ケアマネジメント費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -314,7 +314,7 @@ public class KyufuJissekiCareManagementHiManagerTest {
             DbT3031KyufuJissekiCareManagementHiEntity entity = DbT3031KyufuJissekiCareManagementHiEntityGenerator.createDbT3031KyufuJissekiCareManagementHiEntity();
             entity.initializeMd5();
             KyufuJissekiCareManagementHi 給付実績ケアマネジメント費 = new KyufuJissekiCareManagementHi(entity);
-            給付実績ケアマネジメント費 = 給付実績ケアマネジメント費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績ケアマネジメント費 = 給付実績ケアマネジメント費.createBuilderForEdit().setサービス計画費明細行番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績ケアマネジメント費(給付実績ケアマネジメント費), is(true));
         }
@@ -326,7 +326,7 @@ public class KyufuJissekiCareManagementHiManagerTest {
             DbT3031KyufuJissekiCareManagementHiEntity entity = DbT3031KyufuJissekiCareManagementHiEntityGenerator.createDbT3031KyufuJissekiCareManagementHiEntity();
             entity.initializeMd5();
             KyufuJissekiCareManagementHi 給付実績ケアマネジメント費 = new KyufuJissekiCareManagementHi(entity);
-            給付実績ケアマネジメント費 = 給付実績ケアマネジメント費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績ケアマネジメント費 = 給付実績ケアマネジメント費.createBuilderForEdit().setサービス計画費明細行番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績ケアマネジメント費(給付実績ケアマネジメント費), is(false));
         }

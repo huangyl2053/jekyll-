@@ -90,7 +90,7 @@ public class KyufuhiKashitsukeKinKyoseiHenkanManagerTest {
             Decimal 主キー3 = DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukeKinKyoseiHenkan result = sut.get給付費貸付金強制返還(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -114,7 +114,7 @@ public class KyufuhiKashitsukeKinKyoseiHenkanManagerTest {
             List<KyufuhiKashitsukeKinKyoseiHenkan> result = sut.get給付費貸付金強制返還一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -147,7 +147,7 @@ public class KyufuhiKashitsukeKinKyoseiHenkanManagerTest {
             DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity = DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.createDbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity();
             entity.initializeMd5();
             KyufuhiKashitsukeKinKyoseiHenkan 給付費貸付金強制返還 = new KyufuhiKashitsukeKinKyoseiHenkan(entity);
-            給付費貸付金強制返還 = 給付費貸付金強制返還.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金強制返還 = 給付費貸付金強制返還.createBuilderForEdit().set返還理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金強制返還(給付費貸付金強制返還), is(true));
         }
@@ -159,7 +159,7 @@ public class KyufuhiKashitsukeKinKyoseiHenkanManagerTest {
             DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity = DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.createDbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity();
             entity.initializeMd5();
             KyufuhiKashitsukeKinKyoseiHenkan 給付費貸付金強制返還 = new KyufuhiKashitsukeKinKyoseiHenkan(entity);
-            給付費貸付金強制返還 = 給付費貸付金強制返還.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金強制返還 = 給付費貸付金強制返還.createBuilderForEdit().set返還理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金強制返還(給付費貸付金強制返還), is(false));
         }

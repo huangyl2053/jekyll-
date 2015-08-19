@@ -121,8 +121,8 @@ public final class GogitaiWariateIinMapper {
         entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get審査会委員コード().value());
         entity.setGogitaiYukoKikanKaishiYMD(合議体割当委員.get合議体情報().get有効期間開始年月日().value());
         entity.setGogitaiYukoKikanShuryoYMD(合議体割当委員.get合議体情報().get有効期間終了年月日());
-        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().getCode());
-        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getCode());
+        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().getGogitaichoKubunCode().asCode());
+        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getShinsainKubunCode().asCode());
         return entity;
     }
 

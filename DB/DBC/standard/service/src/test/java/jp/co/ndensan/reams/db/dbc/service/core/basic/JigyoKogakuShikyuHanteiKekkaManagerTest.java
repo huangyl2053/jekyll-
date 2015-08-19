@@ -105,7 +105,7 @@ public class JigyoKogakuShikyuHanteiKekkaManagerTest {
             Decimal 主キー4 = DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
             JigyoKogakuShikyuHanteiKekka result = sut.get事業高額介護サービス費支給判定結果(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -129,7 +129,7 @@ public class JigyoKogakuShikyuHanteiKekkaManagerTest {
             List<JigyoKogakuShikyuHanteiKekka> result = sut.get事業高額介護サービス費支給判定結果一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -162,7 +162,7 @@ public class JigyoKogakuShikyuHanteiKekkaManagerTest {
             DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity = DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.createDbT3111JigyoKogakuShikyuHanteiKekkaEntity();
             entity.initializeMd5();
             JigyoKogakuShikyuHanteiKekka 事業高額介護サービス費支給判定結果 = new JigyoKogakuShikyuHanteiKekka(entity);
-            事業高額介護サービス費支給判定結果 = 事業高額介護サービス費支給判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給判定結果 = 事業高額介護サービス費支給判定結果.createBuilderForEdit().set不支給理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給判定結果(事業高額介護サービス費支給判定結果), is(true));
         }
@@ -174,7 +174,7 @@ public class JigyoKogakuShikyuHanteiKekkaManagerTest {
             DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity = DbT3111JigyoKogakuShikyuHanteiKekkaEntityGenerator.createDbT3111JigyoKogakuShikyuHanteiKekkaEntity();
             entity.initializeMd5();
             JigyoKogakuShikyuHanteiKekka 事業高額介護サービス費支給判定結果 = new JigyoKogakuShikyuHanteiKekka(entity);
-            事業高額介護サービス費支給判定結果 = 事業高額介護サービス費支給判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給判定結果 = 事業高額介護サービス費支給判定結果.createBuilderForEdit().set不支給理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給判定結果(事業高額介護サービス費支給判定結果), is(false));
         }

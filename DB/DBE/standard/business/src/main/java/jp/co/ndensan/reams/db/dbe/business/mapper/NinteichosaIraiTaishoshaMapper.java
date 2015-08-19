@@ -4,19 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
-// TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
-import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 認定調査依頼対象者の対応付けを行うクラスです。
@@ -41,8 +37,7 @@ public final class NinteichosaIraiTaishoshaMapper {
      * @param 事業者情報 事業者情報
      * @param 認定調査員情報 認定調査員情報
      * @return 認定調査依頼対象者
-     * @throws NullPointerException
-     * {@code 認定進捗情報}がnullの場合、{@code 要介護認定申請情報}がnullの場合、または{@code 個人}がnullの場合
+     * @throws NullPointerException {@code 認定進捗情報}がnullの場合、{@code 要介護認定申請情報}がnullの場合、または{@code 個人}がnullの場合
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
             YokaigoNinteiProgress 認定進捗情報,

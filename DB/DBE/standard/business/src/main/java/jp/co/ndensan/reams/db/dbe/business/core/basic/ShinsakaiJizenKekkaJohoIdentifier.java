@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護認定審査会事前審査結果情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class ShinsakaiJizenKekkaJohoIdentifier implements Serializable {
 
     private final int 介護認定審査会開催番号;

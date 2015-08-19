@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoServiceCode;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7122SogoJigyoServiceCodeDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7122SogoJigyoServiceCodeDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -103,20 +104,25 @@ public class SogoJigyoServiceCodeManager {
     public boolean save介護予防
 
     ・日常生活支援総合事業サービスコード(SogoJigyoServiceCode 介護予防
+
         ・日常生活支援総合事業サービスコード) {
         requireNonNull(介護予防・日常生活支援総合事業サービスコード
         , UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業サービスコード")
         );
-        if (!介護予防 {
+        if (!介護予防  {
 
         }
-        ・日常生活支援総合事業サービスコード.hasChanged()
+        ・
+        日常生活支援総合事業サービスコード.hasChanged()
+
 
             ) {
             return false;
         }
         return 1 == dac.save(介護予防
         ・日常生活支援総合事業サービスコード.toEntity()
+
+
 
 
 );

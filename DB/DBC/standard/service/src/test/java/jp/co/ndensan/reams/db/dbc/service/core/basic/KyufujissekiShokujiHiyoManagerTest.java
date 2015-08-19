@@ -181,7 +181,7 @@ public class KyufujissekiShokujiHiyoManagerTest {
             RString 主キー8 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_通し番号;
             KyufujissekiShokujiHiyo result = sut.get給付実績食事費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
 
-            assertThat(result.get主キー1().value(), is(DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -205,7 +205,7 @@ public class KyufujissekiShokujiHiyoManagerTest {
             List<KyufujissekiShokujiHiyo> result = sut.get給付実績食事費用一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -238,7 +238,7 @@ public class KyufujissekiShokujiHiyoManagerTest {
             DbT3022KyufujissekiShokujiHiyoEntity entity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
             entity.initializeMd5();
             KyufujissekiShokujiHiyo 給付実績食事費用 = new KyufujissekiShokujiHiyo(entity);
-            給付実績食事費用 = 給付実績食事費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績食事費用 = 給付実績食事費用.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績食事費用(給付実績食事費用), is(true));
         }
@@ -250,7 +250,7 @@ public class KyufujissekiShokujiHiyoManagerTest {
             DbT3022KyufujissekiShokujiHiyoEntity entity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
             entity.initializeMd5();
             KyufujissekiShokujiHiyo 給付実績食事費用 = new KyufujissekiShokujiHiyo(entity);
-            給付実績食事費用 = 給付実績食事費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績食事費用 = 給付実績食事費用.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績食事費用(給付実績食事費用), is(false));
         }

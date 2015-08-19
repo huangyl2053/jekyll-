@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.Minashi2GoshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -19,9 +18,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.hamcrest.core.IsNull;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -83,7 +82,7 @@ public class Minashi2GoshaDaichoMapperTest {
 
         @Test
         public void Entityが持つ被保険者区分コードと_変換後のみなし2号台帳が持つ被保険者区分コードが_一致する() {
-            assertThat(Minashi2GoshaDaichoMapper.toMinashi2GoshaDaicho(createEntity()).get被保険者区分().getCode(), is(被保険者区分.getCode()));
+            assertThat(Minashi2GoshaDaichoMapper.toMinashi2GoshaDaicho(createEntity()).get被保険者区分(), is(被保険者区分));
         }
 
         @Test
@@ -109,7 +108,7 @@ public class Minashi2GoshaDaichoMapperTest {
             entity.setShikibetsuCode(識別コード);
             entity.setHihokenshaNo(被保険者番号);
             entity.setShoriTimestamp(処理日時);
-            entity.setHihokenshaKubunCode(被保険者区分.getCode());
+            entity.setHihokenshaKubunCode(被保険者区分.get被保険者区分コード().asCode());
             entity.setMinashi2GoshaTorokuYMD(みなし2号登録年月日);
             entity.setMinashi2GoshaKaijoYMD(みなし2号解除年月日);
             entity.setFukushiHihokenshaNo(福祉被保険者番号);
@@ -151,7 +150,7 @@ public class Minashi2GoshaDaichoMapperTest {
         @Test
         public void みなし2号台帳が持つ被保険者区分コードと_変換後のEntityが持つ被保険者区分コードが_一致する() {
             assertThat(Minashi2GoshaDaichoMapper.toDbT1012Minashi2GoshaDaichoEntity(
-                    createMinashi2GoshaDaicho()).getHihokenshaKubunCode(), is(被保険者区分.getCode()));
+                    createMinashi2GoshaDaicho()).getHihokenshaKubunCode(), is(被保険者区分.get被保険者区分コード().asCode()));
         }
 
         @Test

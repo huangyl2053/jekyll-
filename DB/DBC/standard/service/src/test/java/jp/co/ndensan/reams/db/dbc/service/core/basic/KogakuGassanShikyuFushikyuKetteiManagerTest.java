@@ -121,7 +121,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuFushikyuKettei result = sut.get高額合算支給不支給決定(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -145,7 +145,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             List<KogakuGassanShikyuFushikyuKettei> result = sut.get高額合算支給不支給決定一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -178,7 +178,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.createDbT3074KogakuGassanShikyuFushikyuKetteiEntity();
             entity.initializeMd5();
             KogakuGassanShikyuFushikyuKettei 高額合算支給不支給決定 = new KogakuGassanShikyuFushikyuKettei(entity);
-            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set保険制度コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給不支給決定(高額合算支給不支給決定), is(true));
         }
@@ -190,7 +190,7 @@ public class KogakuGassanShikyuFushikyuKetteiManagerTest {
             DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity = DbT3074KogakuGassanShikyuFushikyuKetteiEntityGenerator.createDbT3074KogakuGassanShikyuFushikyuKetteiEntity();
             entity.initializeMd5();
             KogakuGassanShikyuFushikyuKettei 高額合算支給不支給決定 = new KogakuGassanShikyuFushikyuKettei(entity);
-            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給不支給決定 = 高額合算支給不支給決定.createBuilderForEdit().set保険制度コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給不支給決定(高額合算支給不支給決定), is(false));
         }

@@ -9,8 +9,9 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -31,7 +32,7 @@ public class RankJoho extends ModelBase<RankJohoIdentifier, DbT2011RankJohoEntit
      * @param ランク区分 ランク区分
      */
     public RankJoho(FlexibleYear 賦課年度,
-            RString ランク区分) {
+            RankKubun ランク区分) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         this.entity = new DbT2011RankJohoEntity();
@@ -85,7 +86,7 @@ public class RankJoho extends ModelBase<RankJohoIdentifier, DbT2011RankJohoEntit
      *
      * @return ランク区分
      */
-    public RString getランク区分() {
+    public RankKubun getランク区分() {
         return entity.getRankKubun();
     }
 

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import org.junit.Test;
 import static org.junit.Assert.*;

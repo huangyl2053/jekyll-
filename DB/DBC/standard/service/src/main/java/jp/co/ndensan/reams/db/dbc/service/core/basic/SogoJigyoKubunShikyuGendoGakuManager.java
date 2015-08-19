@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoKubunShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7117SogoJigyoKubunShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7117SogoJigyoKubunShikyuGendoGakuDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7117SogoJigyoKubunShikyuGendoGakuDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -98,20 +99,25 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
     public boolean save介護予防
 
     ・日常生活支援総合事業区分支給限度額(SogoJigyoKubunShikyuGendoGaku 介護予防
+
         ・日常生活支援総合事業区分支給限度額) {
         requireNonNull(介護予防・日常生活支援総合事業区分支給限度額
         , UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額")
         );
-        if (!介護予防 {
+        if (!介護予防  {
 
         }
-        ・日常生活支援総合事業区分支給限度額.hasChanged()
+        ・
+        日常生活支援総合事業区分支給限度額.hasChanged()
+
 
             ) {
             return false;
         }
         return 1 == dac.save(介護予防
         ・日常生活支援総合事業区分支給限度額.toEntity()
+
+
 
 
 );

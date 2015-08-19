@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * 連携用データ送付記録の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class RenkeiyoDataSofuKirokuIdentifier implements Serializable {
 
     private final ShinseishoKanriNo 申請書管理番号;

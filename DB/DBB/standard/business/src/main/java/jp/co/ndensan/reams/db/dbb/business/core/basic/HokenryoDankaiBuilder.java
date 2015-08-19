@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -57,7 +58,7 @@ public class HokenryoDankaiBuilder {
      * @param 段階インデックス 段階インデックス
      * @return {@link HokenryoDankaiBuilder}
      */
-    public HokenryoDankaiBuilder set段階インデックス(RString 段階インデックス) {
+    public HokenryoDankaiBuilder set段階インデックス(DankaiIndex 段階インデックス) {
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         entity.setDankaiIndex(段階インデックス);
         return this;
@@ -69,7 +70,7 @@ public class HokenryoDankaiBuilder {
      * @param ランク区分 ランク区分
      * @return {@link HokenryoDankaiBuilder}
      */
-    public HokenryoDankaiBuilder setランク区分(RString ランク区分) {
+    public HokenryoDankaiBuilder setランク区分(RankKubun ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         entity.setRankuKubun(ランク区分);
         return this;

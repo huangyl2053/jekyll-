@@ -139,7 +139,7 @@ public class KogakuGassanShinseishoKanyurekiManagerTest {
             Decimal 主キー6 = DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShinseishoKanyureki result = sut.get高額合算申請書加入歴(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -163,7 +163,7 @@ public class KogakuGassanShinseishoKanyurekiManagerTest {
             List<KogakuGassanShinseishoKanyureki> result = sut.get高額合算申請書加入歴一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -196,7 +196,7 @@ public class KogakuGassanShinseishoKanyurekiManagerTest {
             DbT3069KogakuGassanShinseishoKanyurekiEntity entity = DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.createDbT3069KogakuGassanShinseishoKanyurekiEntity();
             entity.initializeMd5();
             KogakuGassanShinseishoKanyureki 高額合算申請書加入歴 = new KogakuGassanShinseishoKanyureki(entity);
-            高額合算申請書加入歴 = 高額合算申請書加入歴.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算申請書加入歴 = 高額合算申請書加入歴.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算申請書加入歴(高額合算申請書加入歴), is(true));
         }
@@ -208,7 +208,7 @@ public class KogakuGassanShinseishoKanyurekiManagerTest {
             DbT3069KogakuGassanShinseishoKanyurekiEntity entity = DbT3069KogakuGassanShinseishoKanyurekiEntityGenerator.createDbT3069KogakuGassanShinseishoKanyurekiEntity();
             entity.initializeMd5();
             KogakuGassanShinseishoKanyureki 高額合算申請書加入歴 = new KogakuGassanShinseishoKanyureki(entity);
-            高額合算申請書加入歴 = 高額合算申請書加入歴.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算申請書加入歴 = 高額合算申請書加入歴.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算申請書加入歴(高額合算申請書加入歴), is(false));
         }

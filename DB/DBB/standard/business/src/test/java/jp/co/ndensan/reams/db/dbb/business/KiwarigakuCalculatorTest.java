@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.experimental.runners.Enclosed;
@@ -79,13 +79,13 @@ public class KiwarigakuCalculatorTest {
     }
 
     private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
-        KibetsuModel kibetsuModel = mock(KibetsuModel.class);
+        Kibetsu kibetsuModel = mock(Kibetsu.class);
 //        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
 
-        ChoteiKyotsuModel choteiKyotsuModel = mock(ChoteiKyotsuModel.class);
+        ChoteiKyotsu choteiKyotsuModel = mock(ChoteiKyotsu.class);
         when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));
 
-        KibetsuChoteiKyotsuModel kibetsuChoteiKyotsuModel = mock(KibetsuChoteiKyotsuModel.class);
+        KibetsuChoteiKyotsu kibetsuChoteiKyotsuModel = mock(KibetsuChoteiKyotsu.class);
 //        when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
         when(kibetsuChoteiKyotsuModel.get調定共通モデル()).thenReturn(choteiKyotsuModel);
 

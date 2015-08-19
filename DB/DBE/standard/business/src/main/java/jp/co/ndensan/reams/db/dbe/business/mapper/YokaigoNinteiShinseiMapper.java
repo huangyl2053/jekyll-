@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
@@ -100,7 +100,7 @@ public final class YokaigoNinteiShinseiMapper {
         //TODO n8178 城間篤人 後日、要支援申請区分を作成予定 2014年2月末
         entity.setShienShinseiKubun(yokaigoNinteiShinsei.get要支援申請区分().getColumnValue());
         entity.setShinseiRiyu(yokaigoNinteiShinsei.get認定申請理由().asRString());
-        entity.setZenYokaigoKubunCode(yokaigoNinteiShinsei.get前回認定結果().get要介護度().getCode());
+        entity.setZenYokaigoKubunCode(yokaigoNinteiShinsei.get前回認定結果().get要介護度().getYokaigoJotaiKubunCode().asCode());
         entity.setZenYukoKikan(yokaigoNinteiShinsei.get前回認定結果().get認定有効期間().get有効期間月数().value());
         entity.setJohoteikyoDouiUmuKubun(yokaigoNinteiShinsei.is情報提供への同意有無());
         entity.setNinteichosaShikibetsuCode(new Code(RString.EMPTY));

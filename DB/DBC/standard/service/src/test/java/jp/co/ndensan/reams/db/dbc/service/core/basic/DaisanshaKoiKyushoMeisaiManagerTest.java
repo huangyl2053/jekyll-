@@ -159,7 +159,7 @@ public class DaisanshaKoiKyushoMeisaiManagerTest {
             Decimal 主キー7 = DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiKyushoMeisai result = sut.get介護第三者行為求償明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -183,7 +183,7 @@ public class DaisanshaKoiKyushoMeisaiManagerTest {
             List<DaisanshaKoiKyushoMeisai> result = sut.get介護第三者行為求償明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -216,7 +216,7 @@ public class DaisanshaKoiKyushoMeisaiManagerTest {
             DbT3083DaisanshaKoiKyushoMeisaiEntity entity = DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.createDbT3083DaisanshaKoiKyushoMeisaiEntity();
             entity.initializeMd5();
             DaisanshaKoiKyushoMeisai 介護第三者行為求償明細 = new DaisanshaKoiKyushoMeisai(entity);
-            介護第三者行為求償明細 = 介護第三者行為求償明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為求償明細 = 介護第三者行為求償明細.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為求償明細(介護第三者行為求償明細), is(true));
         }
@@ -228,7 +228,7 @@ public class DaisanshaKoiKyushoMeisaiManagerTest {
             DbT3083DaisanshaKoiKyushoMeisaiEntity entity = DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.createDbT3083DaisanshaKoiKyushoMeisaiEntity();
             entity.initializeMd5();
             DaisanshaKoiKyushoMeisai 介護第三者行為求償明細 = new DaisanshaKoiKyushoMeisai(entity);
-            介護第三者行為求償明細 = 介護第三者行為求償明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為求償明細 = 介護第三者行為求償明細.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為求償明細(介護第三者行為求償明細), is(false));
         }

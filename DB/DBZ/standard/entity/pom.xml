@@ -35,7 +35,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
-            <version>${project.version}</version>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
         <!--        <dependency>
             <groupId>jp.co.ndensan.reams.aa.aax</groupId>
@@ -91,11 +91,7 @@
                     <version>0.1.0-SNAPSHOT</version>
                 </dependency>
         -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDefinition</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
-        </dependency><!--
+        <!--
         <dependency>
             <groupId>jp.co.ndensan.reams.dc.dcx</groupId>
             <artifactId>DcxDefinition</artifactId>

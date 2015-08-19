@@ -16,15 +16,15 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2007KibetsuChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyo;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelate;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.DbT2006ChoshuYuyoEntity;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyo;
+//import jp.co.ndensan.reams.db.dbz.model.relate.fuka.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n3317 塚田 萌
  */
-public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
+public class ChoshuYuyoRelateDac implements IModifiable<DbT2006ChoshuYuyoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -55,11 +55,11 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
      * @param 通知書番号 通知書番号
      * @param 状態区分 状態区分
      * @param 履歴番号 履歴番号
-     * @return ChoshuYuyoRelate
+     * @return DbT2006ChoshuYuyoEntity
      */
     @Transaction
-    public Optional<ChoshuYuyoRelate> select徴収猶予RelateByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
-            TsuchishoNo 通知書番号, int 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
+    public Optional<DbT2006ChoshuYuyoEntity> select徴収猶予RelateByKeyAndState(FlexibleYear 調定年度, FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -71,16 +71,16 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
     }
 
     @Transaction
-    private Optional<ChoshuYuyo> select徴収猶予ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
-            TsuchishoNo 通知書番号, int 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
+    private Optional<DbT2006ChoshuYuyoEntity> select徴収猶予ByKeyAndState(FlexibleYear 調定年度, FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         DbT2006ChoshuYuyoEntity entity = accessor.select().
                 table(DbT2006ChoshuYuyo.class).
                 where(and(
-                                eq(DbT2006ChoshuYuyo.choteiNendo, 調定年度.value()),
-                                eq(DbT2006ChoshuYuyo.fukaNendo, 賦課年度.value()),
+                                eq(DbT2006ChoshuYuyo.choteiNendo, 調定年度),
+                                eq(DbT2006ChoshuYuyo.fukaNendo, 賦課年度),
                                 eq(DbT2006ChoshuYuyo.tsuchishoNo, 通知書番号),
                                 eq(DbT2006ChoshuYuyo.rirekiNo, 履歴番号),
                                 eq(DbT2006ChoshuYuyo.jotaiKubun, 状態区分.code()))).
@@ -89,26 +89,24 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
         return createChoshuYuyo(entity);
     }
 
-    private Optional<ChoshuYuyo> createChoshuYuyo(DbT2006ChoshuYuyoEntity 徴収猶予エンティティ) {
+    private Optional<DbT2006ChoshuYuyoEntity> createChoshuYuyo(DbT2006ChoshuYuyoEntity 徴収猶予エンティティ) {
         if (徴収猶予エンティティ == null) {
             return Optional.empty();
         }
 
-        return Optional.of(new ChoshuYuyo(徴収猶予エンティティ));
+        return Optional.of(徴収猶予エンティティ);
     }
 
-    private Optional<ChoshuYuyoRelate> createRelateModel(Optional<ChoshuYuyo> modeloid) {
+    private Optional<DbT2006ChoshuYuyoEntity> createRelateModel(Optional<DbT2006ChoshuYuyoEntity> modeloid) {
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }
-        ChoshuYuyo model = modeloid.getClass();
+        DbT2006ChoshuYuyoEntity model = modeloid.get();
 
-        return Optional.of(new ChoshuYuyoRelate(
-                model,
-                select期別徴収猶予(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号())));
+        return Optional.of(new DbT2006ChoshuYuyoEntity());
     }
 
-    private List<KibetsuChoshuYuyo> select期別徴収猶予(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    private List<DbT2007KibetsuChoshuYuyoEntity> select期別徴収猶予(FlexibleYear 調定年度, FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号, int 履歴番号) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -116,8 +114,8 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
         List<DbT2007KibetsuChoshuYuyoEntity> entityList = accessor.select().
                 table(DbT2007KibetsuChoshuYuyo.class).
                 where(and(
-                                eq(DbT2007KibetsuChoshuYuyo.choteiNendo, 調定年度.value()),
-                                eq(DbT2007KibetsuChoshuYuyo.fukaNendo, 賦課年度.value()),
+                                eq(DbT2007KibetsuChoshuYuyo.choteiNendo, 調定年度),
+                                eq(DbT2007KibetsuChoshuYuyo.fukaNendo, 賦課年度),
                                 eq(DbT2007KibetsuChoshuYuyo.tsuchishoNo, 通知書番号),
                                 eq(DbT2007KibetsuChoshuYuyo.rirekiNo, 履歴番号))).
                 order(
@@ -128,15 +126,15 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
             return Collections.emptyList();
         }
 
-        List<KibetsuChoshuYuyo> list = new ArrayList<>();
+        List<DbT2007KibetsuChoshuYuyoEntity> list = new ArrayList<>();
         for (DbT2007KibetsuChoshuYuyoEntity entity : entityList) {
-            list.add(new KibetsuChoshuYuyo(entity));
+            list.add(entity);
         }
         return list;
     }
 
     @Override
-    public int insert(ChoshuYuyoRelate data) {
+    public int insert(DbT2006ChoshuYuyoEntity data) {
 
         int result = 0;
 
@@ -144,64 +142,64 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelate> {
             return result;
         }
 
-        if (data.get期別徴収猶予モデルリスト() != null) {
-            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
-                期別徴収猶予Dac.insert(model.getEntity());
-            }
-        }
+//        if (data.get期別徴収猶予モデルリスト() != null) {
+//            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
+        徴収猶予Dac.save(data);
+//            }
+//        }
         return result;
     }
 
     @Override
-    public int update(ChoshuYuyoRelate data) {
+    public int update(DbT2006ChoshuYuyoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        if (data.get徴収猶予モデル() != null) {
-            result = 徴収猶予Dac.update(data.get徴収猶予モデル().getEntity());
-        }
+//        if (data.get徴収猶予モデル() != null) {
+        result = 徴収猶予Dac.save(data);
+//        }
 
-        if (data.get期別徴収猶予モデルリスト() != null) {
-            EntityDataState state;
-            DbT2007KibetsuChoshuYuyoEntity entity;
-
-            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
-                state = model.getState();
-                entity = model.getEntity();
-
-                if (state == EntityDataState.Added) {
-                    期別徴収猶予Dac.insert(entity);
-                } else if (state == EntityDataState.Modified) {
-                    期別徴収猶予Dac.update(entity);
-                } else if (state == EntityDataState.Deleted) {
-                    期別徴収猶予Dac.deletePhysical(entity);
-                }
-            }
-        }
-
+//        if (data.get期別徴収猶予モデルリスト() != null) {
+//            EntityDataState state;
+//            DbT2007KibetsuChoshuYuyoEntity entity;
+//
+//            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
+//                state = model.getState();
+//                entity = model.getEntity();
+//
+//                if (state == EntityDataState.Added) {
+//                    期別徴収猶予Dac.insert(entity);
+//                } else if (state == EntityDataState.Modified) {
+//                    期別徴収猶予Dac.update(entity);
+//                } else if (state == EntityDataState.Deleted) {
+//                    期別徴収猶予Dac.deletePhysical(entity);
+//                }
+//            }
+//        }
+//
         return result;
     }
 
     @Override
-    public int delete(ChoshuYuyoRelate data) {
+    public int delete(DbT2006ChoshuYuyoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        if (data.get徴収猶予モデル() != null) {
-            result = 徴収猶予Dac.delete(data.get徴収猶予モデル().getEntity());
-        }
-
-        if (data.get期別徴収猶予モデルリスト() != null) {
-            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
-                期別徴収猶予Dac.delete(model.getEntity());
-            }
-        }
+//        if (data.get徴収猶予モデル() != null) {
+        result = 徴収猶予Dac.save(data);
+//        }
+//
+//        if (data.get期別徴収猶予モデルリスト() != null) {
+//            for (KibetsuChoshuYuyo model : data.get期別徴収猶予モデルリスト()) {
+//                期別徴収猶予Dac.delete(model.getEntity());
+//            }
+//        }
         return result;
     }
 }

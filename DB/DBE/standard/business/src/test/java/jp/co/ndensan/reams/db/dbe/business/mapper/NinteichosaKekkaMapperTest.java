@@ -4,25 +4,139 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Choryoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai2;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai3;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai4;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai5;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai6;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.DekiruDekinai7;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Gaishutsu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Kaijo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Kaijo2;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Kaijo3;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.NaiAru;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.NaiAru2;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.Shiryoku;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.サービス区分コード;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.介護保険給付以外の在宅サービス;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.住宅改修;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.利用施設コード;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.利用施設住所;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.利用施設名;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.利用施設郵便番号;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.利用施設電話番号;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.地域密着型介護老人福祉施設入所者生活介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.地域密着型特定施設入居者生活介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.夜間対応型訪問介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.小規模多機能型居宅介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.居宅療養管理指導;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.市町村特別給付;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.概況特記事項;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.特定施設入居者生活介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.特定福祉用具販売;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.短期入所生活介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.短期入所療養介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.福祉用具貸与;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.訪問リハビリ;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.訪問介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.訪問入浴介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.訪問看護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.認知症対応型共同生活介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.認知症対応型通所介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.通所リハビリテーション;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.通所介護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.じょくそうの処置;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.つめ切り;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.ひどい物忘れ;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.カテーテル;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.ストーマの処置;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.ズボン等の着脱;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.モニター測定;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.レスピレーター;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.一人で出たがる;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.上衣の着脱;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.両足での立位;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.中心静脈栄養;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.今の季節を理解;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.介護に抵抗;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.作話;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.収集癖;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.口腔清潔;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.同じ話をする;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.嚥下;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.場所の理解;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.外出して戻れない;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.外出頻度;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.大声を出す;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.寝返り;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.常時の徘徊;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.座位保持;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.意思の伝達;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.感情が不安定;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.排便;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.排尿;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.整髪;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.日常の意思決定;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.昼夜逆転;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.歩行;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.毎日の日課を理解;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.気管切開;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.洗身;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.洗顔;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.点滴の管理;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.片足での立位;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.物や衣類を壊す;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.独り言_独り笑;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.生年月日をいう;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.疼痛の看護;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.短期記憶;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.移乗;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.移動;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.立ち上がり;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.簡単な調理;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.経管栄養;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.聴力;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.自分の名前をいう;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.自分勝手に行動する;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.落ち着きなし;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.薬の内服;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.被害的;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.視力;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.話がまとまらない;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.買い物;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.起き上がり;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.透析;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.酸素療法;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.金銭の管理;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.関節の動く範囲の制限_その他;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.関節の動く範囲の制限_股関節;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.関節の動く範囲の制限_膝関節;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.集団への不適応;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.食事摂取;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_その他;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_右下肢;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_左下肢;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
-import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.*;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 要介護認定調査結果の情報を変換するMapperクラスのテストクラスです。
@@ -83,12 +197,12 @@ public class NinteichosaKekkaMapperTest extends DbeTestBase {
         }
 
         public void 認定調査実施場所コードの設定がある時_toNinteichosaResult_get認定調査実施場所区分_getCodeは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getCode().value(), is(new RString("12345678")));
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getNinteichosaJisshibashoKubunCode().value(), is(new RString("12345678")));
         }
 
         @Test
         public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所区分_getNameは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getMeisho(), is(new RString("認定調査実施場所名称")));
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getNinteichosaJisshibashoKubunCode().value(), is(new RString("認定調査実施場所名称")));
         }
 
         @Test

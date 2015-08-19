@@ -139,7 +139,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
             Decimal 主キー6 = DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_履歴番号;
             KyodoShoriyoJukyushaIdoShokanSofu result = sut.get共同処理用受給者異動償還送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().toString(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get異動年月日().toString(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -163,7 +163,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
             List<KyodoShoriyoJukyushaIdoShokanSofu> result = sut.get共同処理用受給者異動償還送付一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toString(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get(0).get異動年月日().toString(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -196,7 +196,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity = DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.createDbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
             entity.initializeMd5();
             KyodoShoriyoJukyushaIdoShokanSofu 共同処理用受給者異動償還送付 = new KyodoShoriyoJukyushaIdoShokanSofu(entity);
-            共同処理用受給者異動償還送付 = 共同処理用受給者異動償還送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            共同処理用受給者異動償還送付 = 共同処理用受給者異動償還送付.createBuilderForEdit().set保険給付支払一時差止区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save共同処理用受給者異動償還送付(共同処理用受給者異動償還送付), is(true));
         }
@@ -208,7 +208,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuManagerTest {
             DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity entity = DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.createDbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity();
             entity.initializeMd5();
             KyodoShoriyoJukyushaIdoShokanSofu 共同処理用受給者異動償還送付 = new KyodoShoriyoJukyushaIdoShokanSofu(entity);
-            共同処理用受給者異動償還送付 = 共同処理用受給者異動償還送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            共同処理用受給者異動償還送付 = 共同処理用受給者異動償還送付.createBuilderForEdit().set保険給付支払一時差止区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save共同処理用受給者異動償還送付(共同処理用受給者異動償還送付), is(false));
         }

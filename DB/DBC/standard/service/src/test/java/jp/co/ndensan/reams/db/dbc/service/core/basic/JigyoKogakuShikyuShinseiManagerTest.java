@@ -105,7 +105,7 @@ public class JigyoKogakuShikyuShinseiManagerTest {
             Decimal 主キー4 = DbT3110JigyoKogakuShikyuShinseiEntityGenerator.DEFAULT_履歴番号;
             JigyoKogakuShikyuShinsei result = sut.get事業高額介護サービス費支給申請(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3110JigyoKogakuShikyuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3110JigyoKogakuShikyuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -129,7 +129,7 @@ public class JigyoKogakuShikyuShinseiManagerTest {
             List<JigyoKogakuShikyuShinsei> result = sut.get事業高額介護サービス費支給申請一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3110JigyoKogakuShikyuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3110JigyoKogakuShikyuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -162,7 +162,7 @@ public class JigyoKogakuShikyuShinseiManagerTest {
             DbT3110JigyoKogakuShikyuShinseiEntity entity = DbT3110JigyoKogakuShikyuShinseiEntityGenerator.createDbT3110JigyoKogakuShikyuShinseiEntity();
             entity.initializeMd5();
             JigyoKogakuShikyuShinsei 事業高額介護サービス費支給申請 = new JigyoKogakuShikyuShinsei(entity);
-            事業高額介護サービス費支給申請 = 事業高額介護サービス費支給申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給申請 = 事業高額介護サービス費支給申請.createBuilderForEdit().set支払場所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給申請(事業高額介護サービス費支給申請), is(true));
         }
@@ -174,7 +174,7 @@ public class JigyoKogakuShikyuShinseiManagerTest {
             DbT3110JigyoKogakuShikyuShinseiEntity entity = DbT3110JigyoKogakuShikyuShinseiEntityGenerator.createDbT3110JigyoKogakuShikyuShinseiEntity();
             entity.initializeMd5();
             JigyoKogakuShikyuShinsei 事業高額介護サービス費支給申請 = new JigyoKogakuShikyuShinsei(entity);
-            事業高額介護サービス費支給申請 = 事業高額介護サービス費支給申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給申請 = 事業高額介護サービス費支給申請.createBuilderForEdit().set支払場所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給申請(事業高額介護サービス費支給申請), is(false));
         }

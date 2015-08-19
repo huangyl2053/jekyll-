@@ -138,7 +138,7 @@ public class YoboKeikakuJikoSakuseiGokeiManagerTest {
             ServiceShuruiCode 主キー6 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード;
             YoboKeikakuJikoSakuseiGokei result = sut.get予防給付計画自己作成合計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -162,7 +162,7 @@ public class YoboKeikakuJikoSakuseiGokeiManagerTest {
             List<YoboKeikakuJikoSakuseiGokei> result = sut.get予防給付計画自己作成合計一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -195,7 +195,7 @@ public class YoboKeikakuJikoSakuseiGokeiManagerTest {
             DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiGokei 予防給付計画自己作成合計 = new YoboKeikakuJikoSakuseiGokei(entity);
-            予防給付計画自己作成合計 = 予防給付計画自己作成合計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成合計 = 予防給付計画自己作成合計.createBuilderForEdit().set居宅サービス区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save予防給付計画自己作成合計(予防給付計画自己作成合計), is(true));
         }
@@ -207,7 +207,7 @@ public class YoboKeikakuJikoSakuseiGokeiManagerTest {
             DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiGokei 予防給付計画自己作成合計 = new YoboKeikakuJikoSakuseiGokei(entity);
-            予防給付計画自己作成合計 = 予防給付計画自己作成合計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成合計 = 予防給付計画自己作成合計.createBuilderForEdit().set居宅サービス区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save予防給付計画自己作成合計(予防給付計画自己作成合計), is(false));
         }

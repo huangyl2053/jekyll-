@@ -103,7 +103,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryoManagerTest {
             Decimal 主キー4 = DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiSongaiBaishoKinJuryo result = sut.get介護第三者行為損害賠償金受領(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryoManagerTest {
             List<DaisanshaKoiSongaiBaishoKinJuryo> result = sut.get介護第三者行為損害賠償金受領一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryoManagerTest {
             DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity = DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.createDbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity();
             entity.initializeMd5();
             DaisanshaKoiSongaiBaishoKinJuryo 介護第三者行為損害賠償金受領 = new DaisanshaKoiSongaiBaishoKinJuryo(entity);
-            介護第三者行為損害賠償金受領 = 介護第三者行為損害賠償金受領.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為損害賠償金受領 = 介護第三者行為損害賠償金受領.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為損害賠償金受領(介護第三者行為損害賠償金受領), is(true));
         }
@@ -172,7 +172,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryoManagerTest {
             DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity = DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntityGenerator.createDbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity();
             entity.initializeMd5();
             DaisanshaKoiSongaiBaishoKinJuryo 介護第三者行為損害賠償金受領 = new DaisanshaKoiSongaiBaishoKinJuryo(entity);
-            介護第三者行為損害賠償金受領 = 介護第三者行為損害賠償金受領.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為損害賠償金受領 = 介護第三者行為損害賠償金受領.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為損害賠償金受領(介護第三者行為損害賠償金受領), is(false));
         }

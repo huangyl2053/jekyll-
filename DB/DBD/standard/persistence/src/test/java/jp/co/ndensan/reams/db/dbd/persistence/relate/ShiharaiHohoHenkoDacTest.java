@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbd.persistence.relate.ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
@@ -12,15 +11,11 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 //import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
-import jp.co.ndensan.reams.db.dbd.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -91,7 +86,7 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_支払方法変更モデル返す() {
-            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 履歴番号).get().get証記載保険者番号(), is(証記載保険者番号1));
+            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 履歴番号).get().getShoKisaiHokenshaNo(), is(証記載保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -106,10 +101,10 @@ public class ShiharaiHohoHenkoDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
             TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, 管理区分1, 登録区分1, 履歴番号);
-            IItemList<ShiharaiHohoHenkoModel> modelList = sut.selectAll();
+            IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get証記載保険者番号(), is(証記載保険者番号1));
+            assertThat(modelList.toList().get(0).getShoKisaiHokenshaNo(), is(証記載保険者番号1));
         }
 
         @Test
@@ -128,10 +123,10 @@ public class ShiharaiHohoHenkoDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
             TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _2号差止管理区分, _2号差止登録区分, 履歴番号);
-            IItemList<ShiharaiHohoHenkoModel> modelList = sut.select2号差止履歴(被保険者番号1);
+            IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select2号差止履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get被保険者番号(), is(被保険者番号1));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(被保険者番号1));
         }
 
         @Test
@@ -151,10 +146,10 @@ public class ShiharaiHohoHenkoDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
             TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号償還払化管理区分, _1号償還払化登録区分, 履歴番号);
-            IItemList<ShiharaiHohoHenkoModel> modelList = sut.select1号償還払化履歴(被保険者番号1);
+            IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select1号償還払化履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get被保険者番号(), is(被保険者番号1));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(被保険者番号1));
         }
 
         @Test
@@ -174,10 +169,10 @@ public class ShiharaiHohoHenkoDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_台帳モデルリストを返す() {
             TestSupport.insertDbT4021(証記載保険者番号1, 被保険者番号1, _1号減額管理区分, _1号減額登録区分, 履歴番号);
-            IItemList<ShiharaiHohoHenkoModel> modelList = sut.select1号減額履歴(被保険者番号1);
+            IItemList<DbT4021ShiharaiHohoHenkoEntity> modelList = sut.select1号減額履歴(被保険者番号1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get被保険者番号(), is(被保険者番号1));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(被保険者番号1));
         }
 
         @Test
@@ -197,7 +192,7 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO ShiharaiHohoHenkoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。
         @Test
         public void 全ての有効なモデルを持つShiharaiHohoHenkoRelateモデルを渡した時_insertは_1を返す() {
-            ShiharaiHohoHenkoModel model = new ShiharaiHohoHenkoModel(DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity());
+            DbT4021ShiharaiHohoHenkoEntity model = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
 
             assertThat(sut.insert(model), is(1));
         }
@@ -213,13 +208,13 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO ShiharaiHohoHenkoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。異なる状態を指定する。
         @Test
         public void モデルの状態がModifiedの時_updateは_1を返す() {
-            ShiharaiHohoHenkoModel model = new ShiharaiHohoHenkoModel(DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity());
+            DbT4021ShiharaiHohoHenkoEntity model = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
 
             sut.insert(model);
 
-            model.getEntity().initializeMd5();
+            model.initializeMd5();
             // 状態をModifiedにするために任意の項目をinsert時と変更してください。
-            model.set差止対象フラグ(false);
+            model.setSashitome_Flag(false);
 
             assertThat(sut.update(model), is(1));
         }
@@ -236,7 +231,7 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO ShiharaiHohoHenkoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。
         @Test
         public void 全ての有効なモデルを持つShiharaiHohoHenkoRelateモデルを渡した時_deleteは_1を返す() {
-            ShiharaiHohoHenkoModel model = new ShiharaiHohoHenkoModel(DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity());
+            DbT4021ShiharaiHohoHenkoEntity model = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
 
             sut.insert(model);
             assertThat(sut.delete(model), is(1));
@@ -253,7 +248,7 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO ShiharaiHohoHenkoModelの生成パターンによるテストを追加してください。nullや空のリストを指定する。
         @Test
         public void 全ての有効なモデルを持つShiharaiHohoHenkoRelateモデルを渡した時_deletePhysicalは_1を返す() {
-            ShiharaiHohoHenkoModel model = new ShiharaiHohoHenkoModel(DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity());
+            DbT4021ShiharaiHohoHenkoEntity model = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
 
             sut.insert(model);
             assertThat(sut.deletePhysical(model), is(1));

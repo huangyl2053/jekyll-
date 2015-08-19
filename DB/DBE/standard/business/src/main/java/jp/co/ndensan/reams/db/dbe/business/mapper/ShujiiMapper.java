@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 
 /**
  * 主治医情報を変換するMapperクラスです。

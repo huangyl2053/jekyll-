@@ -156,7 +156,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManagerTest {
             Decimal 主キー7 = DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_履歴番号;
             ShokanTokuteiShinryoTokubetsuRyoyo result = sut.get償還払請求特定診療費_特別療養費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManagerTest {
             List<ShokanTokuteiShinryoTokubetsuRyoyo> result = sut.get償還払請求特定診療費_特別療養費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -214,7 +214,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManagerTest {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity = DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.createDbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanTokuteiShinryoTokubetsuRyoyo 償還払請求特定診療費_特別療養費 = new ShokanTokuteiShinryoTokubetsuRyoyo(entity);
-            償還払請求特定診療費_特別療養費 = 償還払請求特定診療費_特別療養費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定診療費_特別療養費 = 償還払請求特定診療費_特別療養費.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定診療費_特別療養費(償還払請求特定診療費_特別療養費), is(true));
         }
@@ -226,7 +226,7 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoManagerTest {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity = DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.createDbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanTokuteiShinryoTokubetsuRyoyo 償還払請求特定診療費_特別療養費 = new ShokanTokuteiShinryoTokubetsuRyoyo(entity);
-            償還払請求特定診療費_特別療養費 = 償還払請求特定診療費_特別療養費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定診療費_特別療養費 = 償還払請求特定診療費_特別療養費.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定診療費_特別療養費(償還払請求特定診療費_特別療養費), is(false));
         }

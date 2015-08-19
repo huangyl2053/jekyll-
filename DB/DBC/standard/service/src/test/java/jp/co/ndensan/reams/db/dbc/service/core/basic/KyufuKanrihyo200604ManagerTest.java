@@ -181,7 +181,7 @@ public class KyufuKanrihyo200604ManagerTest {
             RString 主キー8 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付管理票明細行番号;
             KyufuKanrihyo200604 result = sut.get給付管理票200604(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月.toDateString()));
+            assertThat(result.get審査年月().toDateString(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月.toDateString()));
         }
     }
 
@@ -205,7 +205,7 @@ public class KyufuKanrihyo200604ManagerTest {
             List<KyufuKanrihyo200604> result = sut.get給付管理票200604一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月.toDateString()));
+            assertThat(result.get(0).get審査年月().toDateString(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月.toDateString()));
         }
     }
 
@@ -238,7 +238,7 @@ public class KyufuKanrihyo200604ManagerTest {
             DbT3015KyufuKanrihyo200604Entity entity = DbT3015KyufuKanrihyo200604EntityGenerator.createDbT3015KyufuKanrihyo200604Entity();
             entity.initializeMd5();
             KyufuKanrihyo200604 給付管理票200604 = new KyufuKanrihyo200604(entity);
-            給付管理票200604 = 給付管理票200604.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付管理票200604 = 給付管理票200604.createBuilderForEdit().set性別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付管理票200604(給付管理票200604), is(true));
         }
@@ -250,7 +250,7 @@ public class KyufuKanrihyo200604ManagerTest {
             DbT3015KyufuKanrihyo200604Entity entity = DbT3015KyufuKanrihyo200604EntityGenerator.createDbT3015KyufuKanrihyo200604Entity();
             entity.initializeMd5();
             KyufuKanrihyo200604 給付管理票200604 = new KyufuKanrihyo200604(entity);
-            給付管理票200604 = 給付管理票200604.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付管理票200604 = 給付管理票200604.createBuilderForEdit().set性別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付管理票200604(給付管理票200604), is(false));
         }

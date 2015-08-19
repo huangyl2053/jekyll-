@@ -91,7 +91,7 @@ public class KyufuhiKashitsukekinShinseiManagerTest {
             Decimal 主キー3 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukekinShinsei result = sut.get給付費貸付金申請(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -115,7 +115,7 @@ public class KyufuhiKashitsukekinShinseiManagerTest {
             List<KyufuhiKashitsukekinShinsei> result = sut.get給付費貸付金申請一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -148,7 +148,7 @@ public class KyufuhiKashitsukekinShinseiManagerTest {
             DbT3086KyufuhiKashitsukekinShinseiEntity entity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShinsei 給付費貸付金申請 = new KyufuhiKashitsukekinShinsei(entity);
-            給付費貸付金申請 = 給付費貸付金申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金申請 = 給付費貸付金申請.createBuilderForEdit().set保証人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金申請(給付費貸付金申請), is(true));
         }
@@ -160,7 +160,7 @@ public class KyufuhiKashitsukekinShinseiManagerTest {
             DbT3086KyufuhiKashitsukekinShinseiEntity entity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShinsei 給付費貸付金申請 = new KyufuhiKashitsukekinShinsei(entity);
-            給付費貸付金申請 = 給付費貸付金申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金申請 = 給付費貸付金申請.createBuilderForEdit().set保証人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金申請(給付費貸付金申請), is(false));
         }

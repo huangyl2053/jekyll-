@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 主治医医療機関のマッパーです。

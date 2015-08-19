@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.relate.INijiYoboK
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboCheckListHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.NijiYoboNiniCheckListManager;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 

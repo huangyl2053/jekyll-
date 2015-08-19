@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5123NinteiKeikakuJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -21,21 +23,19 @@ public class NinteiKeikakuJohoIdentifierTest extends DbeTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_申請書管理番号;
     }
 
     public static class シリアライズテスト extends DbeTestBase {
 
         @Test
         public void シリアライズできる() {
-            NinteiKeikakuJohoIdentifier sut = new NinteiKeikakuJohoIdentifier(主キー名1, 主キー名2);
+            NinteiKeikakuJohoIdentifier sut = new NinteiKeikakuJohoIdentifier(申請書管理番号);
             assertThat(sut, is(serializable()));
         }
     }

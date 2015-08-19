@@ -8,6 +8,8 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -148,7 +150,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbbTestDacBase {
                     DEFAULT_賦課年度,
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
-            updateRecord.setRankuKubun(new RString("2"));
+            updateRecord.setRankuKubun(new RankKubun(new RString("2")));
 
             sut.save(updateRecord);
 
@@ -192,8 +194,8 @@ public class DbT2013HokenryoDankaiDacTest extends DbbTestDacBase {
 
         public static void insert(
                 FlexibleYear 賦課年度,
-                RString 段階インデックス,
-                RString ランク区分) {
+                DankaiIndex 段階インデックス,
+                RankKubun ランク区分) {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.setFukaNendo(賦課年度);
             entity.setDankaiIndex(段階インデックス);

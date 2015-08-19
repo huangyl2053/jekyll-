@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
  * DbT5106ShinsakaiWariateIinJohoの項目定義クラスです
@@ -148,7 +147,7 @@ public class DbT5106ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * @return 認定審査員区分コードの名称
      */
     public RString getShinsainKubunCodeMeisho() {
-        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査員区分, shinsainKubunCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査区分, shinsainKubunCode);
     }
 
     /**
@@ -157,7 +156,7 @@ public class DbT5106ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * @return 認定審査員区分コードの略称
      */
     public RString getShinsainKubunCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査員区分, shinsainKubunCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査区分, shinsainKubunCode);
     }
 
     /**

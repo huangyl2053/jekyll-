@@ -103,7 +103,7 @@ public class DaisanshaKoiKyushoManagerTest {
             Decimal 主キー4 = DbT3082DaisanshaKoiKyushoEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiKyusho result = sut.get介護第三者行為求償(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3082DaisanshaKoiKyushoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3082DaisanshaKoiKyushoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class DaisanshaKoiKyushoManagerTest {
             List<DaisanshaKoiKyusho> result = sut.get介護第三者行為求償一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3082DaisanshaKoiKyushoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3082DaisanshaKoiKyushoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class DaisanshaKoiKyushoManagerTest {
             DbT3082DaisanshaKoiKyushoEntity entity = DbT3082DaisanshaKoiKyushoEntityGenerator.createDbT3082DaisanshaKoiKyushoEntity();
             entity.initializeMd5();
             DaisanshaKoiKyusho 介護第三者行為求償 = new DaisanshaKoiKyusho(entity);
-            介護第三者行為求償 = 介護第三者行為求償.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為求償 = 介護第三者行為求償.createBuilderForEdit().set請求先住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為求償(介護第三者行為求償), is(true));
         }
@@ -172,7 +172,7 @@ public class DaisanshaKoiKyushoManagerTest {
             DbT3082DaisanshaKoiKyushoEntity entity = DbT3082DaisanshaKoiKyushoEntityGenerator.createDbT3082DaisanshaKoiKyushoEntity();
             entity.initializeMd5();
             DaisanshaKoiKyusho 介護第三者行為求償 = new DaisanshaKoiKyusho(entity);
-            介護第三者行為求償 = 介護第三者行為求償.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為求償 = 介護第三者行為求償.createBuilderForEdit().set請求先住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為求償(介護第三者行為求償), is(false));
         }

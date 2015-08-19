@@ -5,7 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5914SonotaKikanJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -21,21 +24,21 @@ public class SonotaKikanJohoIdentifierTest extends DbeTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShoKisaiHokenshaNo 証記載保険者番号;
+    private static RString その他機関コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー名2;
+        証記載保険者番号 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号;
+        その他機関コード = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_その他機関コード;
     }
 
     public static class シリアライズテスト extends DbeTestBase {
 
         @Test
         public void シリアライズできる() {
-            SonotaKikanJohoIdentifier sut = new SonotaKikanJohoIdentifier(主キー名1, 主キー名2);
+            SonotaKikanJohoIdentifier sut = new SonotaKikanJohoIdentifier(証記載保険者番号, その他機関コード);
             assertThat(sut, is(serializable()));
         }
     }

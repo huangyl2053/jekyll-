@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -31,7 +31,7 @@ public class ShinsainKubunTest {
         @Test
         public void get区分コードとgetCodeで取得した内容は_同一になる() {
             sut = new ShinsainKubun(区分コード, 名称, 略称);
-            assertThat(sut.getShinsainKubunCode().value(), is(sut.getCode().value()));
+            assertThat(sut.getShinsainKubunCode().value(), is(sut.getShinsainKubunCode().asCode().value()));
         }
     }
 }

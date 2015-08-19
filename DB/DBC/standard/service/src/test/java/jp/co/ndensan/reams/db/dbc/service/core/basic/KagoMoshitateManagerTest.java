@@ -105,7 +105,7 @@ public class KagoMoshitateManagerTest {
             Decimal 主キー4 = DbT3059KagoMoshitateEntityGenerator.DEFAULT_履歴番号;
             KagoMoshitate result = sut.get過誤申立(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
+            assertThat(result.get事業所番号().value(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
         }
     }
 
@@ -129,7 +129,7 @@ public class KagoMoshitateManagerTest {
             List<KagoMoshitate> result = sut.get過誤申立一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
+            assertThat(result.get(0).get事業所番号().value(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
         }
     }
 
@@ -162,7 +162,7 @@ public class KagoMoshitateManagerTest {
             DbT3059KagoMoshitateEntity entity = DbT3059KagoMoshitateEntityGenerator.createDbT3059KagoMoshitateEntity();
             entity.initializeMd5();
             KagoMoshitate 過誤申立 = new KagoMoshitate(entity);
-            過誤申立 = 過誤申立.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤申立 = 過誤申立.createBuilderForEdit().set申立書区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤申立(過誤申立), is(true));
         }
@@ -174,7 +174,7 @@ public class KagoMoshitateManagerTest {
             DbT3059KagoMoshitateEntity entity = DbT3059KagoMoshitateEntityGenerator.createDbT3059KagoMoshitateEntity();
             entity.initializeMd5();
             KagoMoshitate 過誤申立 = new KagoMoshitate(entity);
-            過誤申立 = 過誤申立.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤申立 = 過誤申立.createBuilderForEdit().set申立書区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤申立(過誤申立), is(false));
         }

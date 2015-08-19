@@ -8,7 +8,12 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.TankiNyushoShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7110TankiNyushoShikyuGendoGakuDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,7 +50,7 @@ public class TankiNyushoShikyuGendoGakuManager {
      */
     @Transaction
     public TankiNyushoShikyuGendoGaku get短期入所系支給限度額(
-             RString 要介護状態区分,
+            RString 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));

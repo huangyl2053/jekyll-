@@ -103,7 +103,7 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
             HokenshaNo 主キー4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
             KijunShunyugakuTekiyoKanri result = sut.get基準収入額適用管理(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード.value()));
+            assertThat(result.get世帯コード().value(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
             List<KijunShunyugakuTekiyoKanri> result = sut.get基準収入額適用管理一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード.value()));
+            assertThat(result.get(0).get世帯コード().value(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
             DbT3116KijunShunyugakuTekiyoKanriEntity entity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
             entity.initializeMd5();
             KijunShunyugakuTekiyoKanri 基準収入額適用管理 = new KijunShunyugakuTekiyoKanri(entity);
-            基準収入額適用管理 = 基準収入額適用管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            基準収入額適用管理 = 基準収入額適用管理.createBuilderForEdit().setその他の収入額(new Decimal(100000)).build();
 
             assertThat(sut.save基準収入額適用管理(基準収入額適用管理), is(true));
         }
@@ -172,7 +172,7 @@ public class KijunShunyugakuTekiyoKanriManagerTest {
             DbT3116KijunShunyugakuTekiyoKanriEntity entity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
             entity.initializeMd5();
             KijunShunyugakuTekiyoKanri 基準収入額適用管理 = new KijunShunyugakuTekiyoKanri(entity);
-            基準収入額適用管理 = 基準収入額適用管理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            基準収入額適用管理 = 基準収入額適用管理.createBuilderForEdit().setその他の収入額(new Decimal(100000)).build();
 
             assertThat(sut.save基準収入額適用管理(基準収入額適用管理), is(false));
         }

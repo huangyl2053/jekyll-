@@ -6,7 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5914SonotaKikanJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +28,14 @@ public class SonotaKikanJohoTest extends DbeTestBase {
     private static DbT5914SonotaKikanJohoEntity SonotaKikanJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShoKisaiHokenshaNo 証記載保険者番号;
+    private static RString その他機関コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_主キー名2;
+        証記載保険者番号 = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_証記載保険者番号;
+        その他機関コード = DbT5914SonotaKikanJohoEntityGenerator.DEFAULT_その他機関コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
@@ -46,27 +49,27 @@ public class SonotaKikanJohoTest extends DbeTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SonotaKikanJoho(null, 主キー名2);
+        public void 証記載保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new SonotaKikanJoho(null, その他機関コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SonotaKikanJoho(主キー名1, null);
+        public void その他機関コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new SonotaKikanJoho(証記載保険者番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5914SonotaKikanJohoEntityにセットされている() {
-            sut = new SonotaKikanJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new SonotaKikanJoho(証記載保険者番号, その他機関コード);
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.getその他機関コード(), is(その他機関コード));
         }
 
         @Test
         public void 指定したキーが保持するSonotaKikanJohoIdentifierにセットされている() {
-            sut = new SonotaKikanJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new SonotaKikanJoho(証記載保険者番号, その他機関コード);
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().getその他機関コード(), is(その他機関コード));
         }
     }
 
@@ -89,8 +92,8 @@ public class SonotaKikanJohoTest extends DbeTestBase {
 
             sut = new SonotaKikanJoho(SonotaKikanJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().getその他機関コード(), is(その他機関コード));
         }
     }
 

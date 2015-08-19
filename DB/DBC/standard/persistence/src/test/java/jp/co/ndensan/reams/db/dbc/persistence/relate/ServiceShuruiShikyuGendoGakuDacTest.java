@@ -4,15 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbc.persistence.relate.ServiceShuruiShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.model.ServiceShuruiShikyuGendoGakuModel;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -46,7 +44,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
     private static final YokaigoJotaiKubun09A 要介護状態区分2 = YokaigoJotaiKubun09A.toValue(new RString("12"));
     private static final FlexibleYearMonth 適用開始年月1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用終了年月;
     private static final FlexibleYearMonth 適用開始年月2 = new FlexibleYearMonth(new RString("201501"));
-    private static final YMDHMS 処理日時1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時;
+    private static final int 履歴番号 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
     private static final YMDHMS 処理日時2 = new YMDHMS(new RString("20140415102040"));
     private static final FlexibleDate 基準日 = new FlexibleDate(new RString("20150101"));
 
@@ -60,40 +58,40 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Before
         public void setUp() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数のサービス種類コードにnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(null, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            sut.selectByKey(null, 要介護状態区分1, 適用開始年月1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の要介護状態区分にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(サービス種類コード1, null, 適用開始年月1, 処理日時1);
+            sut.selectByKey(サービス種類コード1, null, 適用開始年月1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の適用開始年月にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(サービス種類コード1, 要介護状態区分1, null, 処理日時1);
+            sut.selectByKey(サービス種類コード1, 要介護状態区分1, null, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の処理日時にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, null);
+            sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
         }
 
         // TODO 見つかる場合、サービス種類支給限度額モデルを構成している全てのモデルクラスについて特定項目を選択し、一致していることを確認するテストケースを記述して下さい。
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_サービス種類支給限度額モデル返す() {
-            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1).get().getサービス種類コード(), is(サービス種類コード1));
+            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号).get().getサービス種類コード(), is(サービス種類コード1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_データ無しを返す() {
-            assertThat(sut.selectByKey(サービス種類コード2, 要介護状態区分1, 適用開始年月1, 処理日時1).isPresent(), is(false));
+            assertThat(sut.selectByKey(サービス種類コード2, 要介護状態区分1, 適用開始年月1, 履歴番号).isPresent(), is(false));
         }
     }
 
@@ -101,7 +99,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
             IItemList<ServiceShuruiShikyuGendoGakuModel> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -128,7 +126,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
             IItemList<ServiceShuruiShikyuGendoGakuModel> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1, 基準日);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -137,7 +135,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと_空のリストを返す() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
             assertThat(sut.selectサービス種類支給限度額リスト(要介護状態区分2, 基準日).isEmpty(), is(true));
         }
     }
@@ -151,7 +149,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
             IItemList<ServiceShuruiShikyuGendoGakuModel> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -160,7 +158,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと_空のリストを返す() {
-            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1);
+            TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
             assertThat(sut.selectサービス種類支給限度額リスト(要介護状態区分2).isEmpty(), is(true));
         }
     }
@@ -246,13 +244,13 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
                 ServiceShuruiCode サービス種類コード,
                 IYokaigoJotaiKubun 要介護状態区分,
                 FlexibleYearMonth 適用開始年月,
-                YMDHMS 処理日時) {
+                int 処理日時) {
             DbT7111ServiceShuruiShikyuGendoGakuEntity entity = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity();
             entity.setServiceShuruiCode(サービス種類コード);
             entity.setYoKaigoJotaiKubun(要介護状態区分.getCode());
             entity.setTekiyoKaishuYM(適用開始年月);
-            entity.setShoriTimestamp(処理日時);
-            サービス種類支給限度額Dac.insert(entity);
+            entity.setRirekiNo(処理日時);
+//            サービス種類支給限度額Dac.insert(entity);
         }
     }
 

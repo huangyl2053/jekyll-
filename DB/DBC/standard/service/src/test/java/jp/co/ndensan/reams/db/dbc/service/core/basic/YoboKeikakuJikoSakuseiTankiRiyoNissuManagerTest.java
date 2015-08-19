@@ -89,7 +89,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
             Decimal 主キー3 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_履歴番号;
             YoboKeikakuJikoSakuseiTankiRiyoNissu result = sut.get予防給付計画自己作成短期利用日数(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -113,7 +113,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
             List<YoboKeikakuJikoSakuseiTankiRiyoNissu> result = sut.get予防給付計画自己作成短期利用日数一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -146,7 +146,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
             DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
-            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set前回迄利用日数(new Decimal(11)).build();
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(true));
         }
@@ -158,7 +158,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
             DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
-            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set前回迄利用日数(new Decimal(11)).build();
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(false));
         }
