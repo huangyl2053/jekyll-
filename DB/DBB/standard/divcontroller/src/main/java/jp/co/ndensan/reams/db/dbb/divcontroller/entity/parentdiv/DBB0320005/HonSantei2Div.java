@@ -4,20 +4,21 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.IKiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HonSantei2 のクラスファイル 
- * 
+ * HonSantei2 のクラスファイル
+ *
  * @author 自動生成
  */
 public class HonSantei2Div extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -61,7 +62,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtChoteiNendoHon2")
     public void setTxtChoteiNendoHon2(TextBoxFlexibleYear txtChoteiNendoHon2) {
-        this.txtChoteiNendoHon2=txtChoteiNendoHon2;
+        this.txtChoteiNendoHon2 = txtChoteiNendoHon2;
     }
 
     @JsonProperty("txtFukaNendoHon2")
@@ -71,7 +72,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtFukaNendoHon2")
     public void setTxtFukaNendoHon2(TextBoxFlexibleYear txtFukaNendoHon2) {
-        this.txtFukaNendoHon2=txtFukaNendoHon2;
+        this.txtFukaNendoHon2 = txtFukaNendoHon2;
     }
 
     @JsonProperty("txtTsuchiNoHon2")
@@ -81,7 +82,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtTsuchiNoHon2")
     public void setTxtTsuchiNoHon2(TextBox txtTsuchiNoHon2) {
-        this.txtTsuchiNoHon2=txtTsuchiNoHon2;
+        this.txtTsuchiNoHon2 = txtTsuchiNoHon2;
     }
 
     @JsonProperty("txtKoseiYMDHon2")
@@ -91,7 +92,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiYMDHon2")
     public void setTxtKoseiYMDHon2(TextBox txtKoseiYMDHon2) {
-        this.txtKoseiYMDHon2=txtKoseiYMDHon2;
+        this.txtKoseiYMDHon2 = txtKoseiYMDHon2;
     }
 
     @JsonProperty("txtKoseiTimeHon2")
@@ -101,7 +102,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiTimeHon2")
     public void setTxtKoseiTimeHon2(TextBoxTime txtKoseiTimeHon2) {
-        this.txtKoseiTimeHon2=txtKoseiTimeHon2;
+        this.txtKoseiTimeHon2 = txtKoseiTimeHon2;
     }
 
     @JsonProperty("txtKoseiYMHon2")
@@ -111,7 +112,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiYMHon2")
     public void setTxtKoseiYMHon2(TextBox txtKoseiYMHon2) {
-        this.txtKoseiYMHon2=txtKoseiYMHon2;
+        this.txtKoseiYMHon2 = txtKoseiYMHon2;
     }
 
     @JsonProperty("txtShimeiHon2")
@@ -121,7 +122,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("txtShimeiHon2")
     public void setTxtShimeiHon2(TextBox txtShimeiHon2) {
-        this.txtShimeiHon2=txtShimeiHon2;
+        this.txtShimeiHon2 = txtShimeiHon2;
     }
 
     @JsonProperty("tblChoteiJiyuHon2")
@@ -131,7 +132,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("tblChoteiJiyuHon2")
     public void setTblChoteiJiyuHon2(tblChoteiJiyuHon2Div tblChoteiJiyuHon2) {
-        this.tblChoteiJiyuHon2=tblChoteiJiyuHon2;
+        this.tblChoteiJiyuHon2 = tblChoteiJiyuHon2;
     }
 
     @JsonProperty("FukakijunHon2")
@@ -141,7 +142,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("FukakijunHon2")
     public void setFukakijunHon2(FukakijunHon2Div FukakijunHon2) {
-        this.FukakijunHon2=FukakijunHon2;
+        this.FukakijunHon2 = FukakijunHon2;
     }
 
     @JsonProperty("HokenryoHon2")
@@ -151,7 +152,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("HokenryoHon2")
     public void setHokenryoHon2(HokenryoHon2Div HokenryoHon2) {
-        this.HokenryoHon2=HokenryoHon2;
+        this.HokenryoHon2 = HokenryoHon2;
     }
 
     @JsonProperty("KibetsugakuHon2")
@@ -161,7 +162,7 @@ public class HonSantei2Div extends Panel {
 
     @JsonProperty("KibetsugakuHon2")
     public void setKibetsugakuHon2(KibetsugakuHon2Div KibetsugakuHon2) {
-        this.KibetsugakuHon2=KibetsugakuHon2;
+        this.KibetsugakuHon2 = KibetsugakuHon2;
     }
 
     /*
@@ -198,7 +199,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakushutokuYMDHon2(Label lblShikakushutokuYMDHon2) {
+    public void setLblShikakushutokuYMDHon2(Label lblShikakushutokuYMDHon2) {
         this.getFukakijunHon2().setLblShikakushutokuYMDHon2(lblShikakushutokuYMDHon2);
     }
 
@@ -208,7 +209,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDHon2(TextBoxDate txtShikakuShutokuYMDHon2) {
+    public void setTxtShikakuShutokuYMDHon2(TextBoxDate txtShikakuShutokuYMDHon2) {
         this.getFukakijunHon2().setTxtShikakuShutokuYMDHon2(txtShikakuShutokuYMDHon2);
     }
 
@@ -218,7 +219,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakusoshitsuYMDHon2(Label lblShikakusoshitsuYMDHon2) {
+    public void setLblShikakusoshitsuYMDHon2(Label lblShikakusoshitsuYMDHon2) {
         this.getFukakijunHon2().setLblShikakusoshitsuYMDHon2(lblShikakusoshitsuYMDHon2);
     }
 
@@ -228,7 +229,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMDHon2(TextBoxDate txtShikakuSoshitsuYMDHon2) {
+    public void setTxtShikakuSoshitsuYMDHon2(TextBoxDate txtShikakuSoshitsuYMDHon2) {
         this.getFukakijunHon2().setTxtShikakuSoshitsuYMDHon2(txtShikakuSoshitsuYMDHon2);
     }
 
@@ -238,7 +239,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGoukeiShotokuHon2(Label lblGoukeiShotokuHon2) {
+    public void setLblGoukeiShotokuHon2(Label lblGoukeiShotokuHon2) {
         this.getFukakijunHon2().setLblGoukeiShotokuHon2(lblGoukeiShotokuHon2);
     }
 
@@ -248,7 +249,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGoukeiShotokuHon2(TextBoxNum txtGoukeiShotokuHon2) {
+    public void setTxtGoukeiShotokuHon2(TextBoxNum txtGoukeiShotokuHon2) {
         this.getFukakijunHon2().setTxtGoukeiShotokuHon2(txtGoukeiShotokuHon2);
     }
 
@@ -258,7 +259,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNenkinShunyuHon2(Label lblNenkinShunyuHon2) {
+    public void setLblNenkinShunyuHon2(Label lblNenkinShunyuHon2) {
         this.getFukakijunHon2().setLblNenkinShunyuHon2(lblNenkinShunyuHon2);
     }
 
@@ -268,7 +269,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenkinShunyuHon2(TextBoxNum txtNenkinShunyuHon2) {
+    public void setTxtNenkinShunyuHon2(TextBoxNum txtNenkinShunyuHon2) {
         this.getFukakijunHon2().setTxtNenkinShunyuHon2(txtNenkinShunyuHon2);
     }
 
@@ -278,7 +279,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHonninKazeiHon2(Label lblHonninKazeiHon2) {
+    public void setLblHonninKazeiHon2(Label lblHonninKazeiHon2) {
         this.getFukakijunHon2().setLblHonninKazeiHon2(lblHonninKazeiHon2);
     }
 
@@ -288,7 +289,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHonninKazeiHon2(TextBox txtHonninKazeiHon2) {
+    public void setTxtHonninKazeiHon2(TextBox txtHonninKazeiHon2) {
         this.getFukakijunHon2().setTxtHonninKazeiHon2(txtHonninKazeiHon2);
     }
 
@@ -298,7 +299,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiKazeiHon2(Label lblSetaiKazeiHon2) {
+    public void setLblSetaiKazeiHon2(Label lblSetaiKazeiHon2) {
         this.getFukakijunHon2().setLblSetaiKazeiHon2(lblSetaiKazeiHon2);
     }
 
@@ -308,7 +309,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazeiHon2(TextBox txtSetaiKazeiHon2) {
+    public void setTxtSetaiKazeiHon2(TextBox txtSetaiKazeiHon2) {
         this.getFukakijunHon2().setTxtSetaiKazeiHon2(txtSetaiKazeiHon2);
     }
 
@@ -318,7 +319,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiinSuHon2(Label lblSetaiinSuHon2) {
+    public void setLblSetaiinSuHon2(Label lblSetaiinSuHon2) {
         this.getFukakijunHon2().setLblSetaiinSuHon2(lblSetaiinSuHon2);
     }
 
@@ -328,7 +329,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinSuHon2(TextBox txtSetaiinSuHon2) {
+    public void setTxtSetaiinSuHon2(TextBox txtSetaiinSuHon2) {
         this.getFukakijunHon2().setTxtSetaiinSuHon2(txtSetaiinSuHon2);
     }
 
@@ -338,7 +339,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHokenryoDankaiHon2(Label lblHokenryoDankaiHon2) {
+    public void setLblHokenryoDankaiHon2(Label lblHokenryoDankaiHon2) {
         this.getHokenryoHon2().setLblHokenryoDankaiHon2(lblHokenryoDankaiHon2);
     }
 
@@ -348,7 +349,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiHon2(TextBox txtHokenryoDankaiHon2) {
+    public void setTxtHokenryoDankaiHon2(TextBox txtHokenryoDankaiHon2) {
         this.getHokenryoHon2().setTxtHokenryoDankaiHon2(txtHokenryoDankaiHon2);
     }
 
@@ -358,7 +359,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKyokaisoHon2(Label lblKyokaisoHon2) {
+    public void setLblKyokaisoHon2(Label lblKyokaisoHon2) {
         this.getHokenryoHon2().setLblKyokaisoHon2(lblKyokaisoHon2);
     }
 
@@ -368,7 +369,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKyokaisoHon2(TextBox txtKyokaisoHon2) {
+    public void setTxtKyokaisoHon2(TextBox txtKyokaisoHon2) {
         this.getHokenryoHon2().setTxtKyokaisoHon2(txtKyokaisoHon2);
     }
 
@@ -378,7 +379,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKeisanHokenryogakuHon2(Label lblKeisanHokenryogakuHon2) {
+    public void setLblKeisanHokenryogakuHon2(Label lblKeisanHokenryogakuHon2) {
         this.getHokenryoHon2().setLblKeisanHokenryogakuHon2(lblKeisanHokenryogakuHon2);
     }
 
@@ -388,7 +389,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKeisanHokenryogakuHon2(TextBoxNum txtKeisanHokenryogakuHon2) {
+    public void setTxtKeisanHokenryogakuHon2(TextBoxNum txtKeisanHokenryogakuHon2) {
         this.getHokenryoHon2().setTxtKeisanHokenryogakuHon2(txtKeisanHokenryogakuHon2);
     }
 
@@ -398,7 +399,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGemmenGakuHon2(Label lblGemmenGakuHon2) {
+    public void setLblGemmenGakuHon2(Label lblGemmenGakuHon2) {
         this.getHokenryoHon2().setLblGemmenGakuHon2(lblGemmenGakuHon2);
     }
 
@@ -408,7 +409,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuHon2(TextBoxNum txtGemmenGakuHon2) {
+    public void setTxtGemmenGakuHon2(TextBoxNum txtGemmenGakuHon2) {
         this.getHokenryoHon2().setTxtGemmenGakuHon2(txtGemmenGakuHon2);
     }
 
@@ -418,7 +419,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiHokenryoHon2(Label lblKakuteiHokenryoHon2) {
+    public void setLblKakuteiHokenryoHon2(Label lblKakuteiHokenryoHon2) {
         this.getHokenryoHon2().setLblKakuteiHokenryoHon2(lblKakuteiHokenryoHon2);
     }
 
@@ -428,7 +429,7 @@ public class HonSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiHokenryoHon2(TextBoxNum txtKakuteiHokenryoHon2) {
+    public void setTxtKakuteiHokenryoHon2(TextBoxNum txtKakuteiHokenryoHon2) {
         this.getHokenryoHon2().setTxtKakuteiHokenryoHon2(txtKakuteiHokenryoHon2);
     }
 

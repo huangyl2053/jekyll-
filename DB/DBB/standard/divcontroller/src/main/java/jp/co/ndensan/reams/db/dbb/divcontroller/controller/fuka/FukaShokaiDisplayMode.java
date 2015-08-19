@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 賦課照会の表示モードの列挙型です。

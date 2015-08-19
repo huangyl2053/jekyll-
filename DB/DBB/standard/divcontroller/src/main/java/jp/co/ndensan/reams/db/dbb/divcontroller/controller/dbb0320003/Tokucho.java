@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuChoIdoAndIraiDiv;
@@ -14,17 +16,17 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuchoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuChoIdoAndIrai_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuchoKekka_Row;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysTokuchoHosoku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.TokuchoHosokuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHoho;
 import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
 import jp.co.ndensan.reams.ue.uex.business.NenkinTokuchoKaifuJoho;
-import jp.co.ndensan.reams.ue.uex.realservice.INenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ue.uex.realservice.NenkinTokuchoKaifuJohoManager;
+//import jp.co.ndensan.reams.ue.uex.realservice.INenkinTokuchoKaifuJohoManager;
+//import jp.co.ndensan.reams.ue.uex.realservice.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -47,15 +49,15 @@ public class Tokucho {
      * @return レスポンスデータ
      */
     public ResponseData<TokuchoDiv> initialize(TokuchoDiv div) {
-
-        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ChoshuHohoModel model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKey();
-
-        if (key.get算定状態() == SanteiState.仮算定) {
-            setDivFor仮算定(div, model);
-        } else {
-            setDivFor本算定(div, model);
-        }
+//
+//        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
+//        ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKey();
+//
+//        if (key.get算定状態() == SanteiState.仮算定) {
+//            setDivFor仮算定(div, model);
+//        } else {
+//            setDivFor本算定(div, model);
+//        }
         return createResponseData(div);
     }
 
@@ -66,60 +68,60 @@ public class Tokucho {
      * @return レスポンスデータ
      */
     public ResponseData<TokuchoDiv> onChenge_radChoshu(TokuchoDiv div) {
-
-        ChoshuHohoModel model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKey();
-
-        if (div.getRadChoshu().getSelectedKey().equals(SanteiState.仮算定.getKey())) {
-            setDivFor仮算定(div, model);
-        } else if (div.getRadChoshu().getSelectedKey().equals(SanteiState.本算定.getKey())) {
-            setDivFor本算定(div, model);
-        } else {
-            setDivFor翌年度(div, model);
-        }
-
+//
+//        ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKey();
+//
+//        if (div.getRadChoshu().getSelectedKey().equals(SanteiState.仮算定.getKey())) {
+//            setDivFor仮算定(div, model);
+//        } else if (div.getRadChoshu().getSelectedKey().equals(SanteiState.本算定.getKey())) {
+//            setDivFor本算定(div, model);
+//        } else {
+//            setDivFor翌年度(div, model);
+//        }
+//
         return createResponseData(div);
     }
 
-    private void setDivFor仮算定(TokuchoDiv div, ChoshuHohoModel model) {
-        div.getTxtKisoNenkinNo2().setValue(model.get仮徴収_基礎年金番号());
-        div.getTxtNenkinCode2().setValue(model.get仮徴収_年金コード());
-
-        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get仮徴収_捕捉月(), model.get賦課年度().value().minusYear(1))));
-
-        NenkinCode nenkinCode = createNenkinCode(model.get仮徴収_年金コード());
-        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
-
-        set年金保険者突合Div(div, model.get賦課年度(), model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(), model.get仮徴収_捕捉月());
-        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
-        set特徴結果Div(div.getTokuChoKekka(), model);
+    private void setDivFor仮算定(TokuchoDiv div, ChoshuHoho model) {
+//        div.getTxtKisoNenkinNo2().setValue(model.get仮徴収_基礎年金番号());
+//        div.getTxtNenkinCode2().setValue(model.get仮徴収_年金コード());
+//
+//        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get仮徴収_捕捉月(), model.get賦課年度().value().minusYear(1))));
+//
+//        NenkinCode nenkinCode = createNenkinCode(model.get仮徴収_年金コード());
+//        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
+//
+//        set年金保険者突合Div(div, model.get賦課年度(), model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(), model.get仮徴収_捕捉月());
+//        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
+//        set特徴結果Div(div.getTokuChoKekka(), model);
     }
 
-    private void setDivFor本算定(TokuchoDiv div, ChoshuHohoModel model) {
-        div.getTxtKisoNenkinNo2().setValue(model.get本徴収_基礎年金番号());
-        div.getTxtNenkinCode2().setValue(model.get本徴収_年金コード());
-
-        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get本徴収_捕捉月(), model.get賦課年度().value())));
-
-        NenkinCode nenkinCode = createNenkinCode(model.get本徴収_年金コード());
-        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
-
-        set年金保険者突合Div(div, model.get賦課年度(), model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(), model.get本徴収_捕捉月());
-        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
-        set特徴結果Div(div.getTokuChoKekka(), model);
+    private void setDivFor本算定(TokuchoDiv div, ChoshuHoho model) {
+//        div.getTxtKisoNenkinNo2().setValue(model.get本徴収_基礎年金番号());
+//        div.getTxtNenkinCode2().setValue(model.get本徴収_年金コード());
+//
+//        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get本徴収_捕捉月(), model.get賦課年度().value())));
+//
+//        NenkinCode nenkinCode = createNenkinCode(model.get本徴収_年金コード());
+//        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
+//
+//        set年金保険者突合Div(div, model.get賦課年度(), model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(), model.get本徴収_捕捉月());
+//        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
+//        set特徴結果Div(div.getTokuChoKekka(), model);
     }
 
-    private void setDivFor翌年度(TokuchoDiv div, ChoshuHohoModel model) {
-        div.getTxtKisoNenkinNo2().setValue(model.get翌年度仮徴収_基礎年金番号());
-        div.getTxtNenkinCode2().setValue(model.get翌年度仮徴収_年金コード());
-
-        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get翌年度仮徴収_捕捉月(), model.get賦課年度().value())));
-
-        NenkinCode nenkinCode = createNenkinCode(model.get翌年度仮徴収_年金コード());
-        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
-
-        set年金保険者突合Div(div, model.get賦課年度(), model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード(), model.get翌年度仮徴収_捕捉月());
-        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
-        set特徴結果Div(div.getTokuChoKekka(), model);
+    private void setDivFor翌年度(TokuchoDiv div, ChoshuHoho model) {
+//        div.getTxtKisoNenkinNo2().setValue(model.get翌年度仮徴収_基礎年金番号());
+//        div.getTxtNenkinCode2().setValue(model.get翌年度仮徴収_年金コード());
+//
+//        div.getTxtKaishiYM().setDomain(new RYearMonth(build開始年月(model.get翌年度仮徴収_捕捉月(), model.get賦課年度().value())));
+//
+//        NenkinCode nenkinCode = createNenkinCode(model.get翌年度仮徴収_年金コード());
+//        div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.getRyakusho());
+//
+//        set年金保険者突合Div(div, model.get賦課年度(), model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード(), model.get翌年度仮徴収_捕捉月());
+//        set特徴異動and依頼Div(div.getTokuChoIdoAndIrai(), model);
+//        set特徴結果Div(div.getTokuChoKekka(), model);
     }
 
     private RString build開始年月(RString 捕捉月, FlexibleYear 年度) {
@@ -160,35 +162,35 @@ public class Tokucho {
             FukaNendo 賦課年度, RString 基礎年金番号, RString 年金コード, RString 捕捉月) {
 
         //TODO n3317塚田　本当はファクトリーから生成
-        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        NenkinTokuchoKaifuJoho kaifuJoho = manager.get年金特徴対象者情報(
-                GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
-
-        div.getTxtHosokuYM().setDomain(new RYearMonth(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
-        div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().getRyakusho());
-        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
-        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(kaifuJoho.getDT漢字氏名());
-        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(kaifuJoho.getDTカナ住所());
-        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(kaifuJoho.getDT漢字住所());
-        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(kaifuJoho.getDT性別().value().get性別名称());
-        div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(kaifuJoho.getDT生年月日());
+//        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+//        NenkinTokuchoKaifuJoho kaifuJoho = manager.get年金特徴対象者情報(
+//                GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
+//
+//        div.getTxtHosokuYM().setDomain(new RYearMonth(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
+//        div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().getRyakusho());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(kaifuJoho.getDT漢字氏名());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(kaifuJoho.getDTカナ住所());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(kaifuJoho.getDT漢字住所());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(kaifuJoho.getDT性別().value().get性別名称());
+//        div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(kaifuJoho.getDT生年月日());
     }
 
-    private void set特徴異動and依頼Div(TokuChoIdoAndIraiDiv div, ChoshuHohoModel model) {
+    private void set特徴異動and依頼Div(TokuChoIdoAndIraiDiv div, ChoshuHoho model) {
         //TODO n3317塚田　本当はファクトリーから生成
-        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        List<NenkinTokuchoKaifuJoho> 年金特徴送付List = manager.get年金特徴送付情報List(
-                GyomuCode.DB介護保険, model.get賦課年度().value(),
-                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
-                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(),
-                model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード());
-        List dataSource = new ArrayList();
-
-        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴送付List) {
-            dataSource.add(toDgTokuChoIdoAndIrai_Row(tokuchoKaifu));
-        }
-
-        div.getDgTokuChoIdoAndIrai().setDataSource(dataSource);
+//        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+//        List<NenkinTokuchoKaifuJoho> 年金特徴送付List = manager.get年金特徴送付情報List(
+//                GyomuCode.DB介護保険, model.get賦課年度().value(),
+//                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
+//                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(),
+//                model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード());
+//        List dataSource = new ArrayList();
+//
+//        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴送付List) {
+//            dataSource.add(toDgTokuChoIdoAndIrai_Row(tokuchoKaifu));
+//        }
+//
+//        div.getDgTokuChoIdoAndIrai().setDataSource(dataSource);
     }
 
     private dgTokuChoIdoAndIrai_Row toDgTokuChoIdoAndIrai_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
@@ -204,20 +206,20 @@ public class Tokucho {
 
     }
 
-    private void set特徴結果Div(TokuChoKekkaDiv div, ChoshuHohoModel model) {
+    private void set特徴結果Div(TokuChoKekkaDiv div, ChoshuHoho model) {
         //TODO n3317塚田　本当はファクトリーから生成
-        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        List<NenkinTokuchoKaifuJoho> 年金特徴受取List = manager.get年金特徴受取情報List(
-                GyomuCode.DB介護保険, model.get賦課年度().value(),
-                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
-                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード());
-        List dataSource = new ArrayList();
-
-        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴受取List) {
-            dataSource.add(toDgTokuchoKekka_Row(tokuchoKaifu));
-        }
-
-        div.getDgTokuchoKekka().setDataSource(dataSource);
+//        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+//        List<NenkinTokuchoKaifuJoho> 年金特徴受取List = manager.get年金特徴受取情報List(
+//                GyomuCode.DB介護保険, model.get賦課年度().value(),
+//                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
+//                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード());
+//        List dataSource = new ArrayList();
+//
+//        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴受取List) {
+//            dataSource.add(toDgTokuchoKekka_Row(tokuchoKaifu));
+//        }
+//
+//        div.getDgTokuchoKekka().setDataSource(dataSource);
     }
 
     private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJoho kaifuJoho) {

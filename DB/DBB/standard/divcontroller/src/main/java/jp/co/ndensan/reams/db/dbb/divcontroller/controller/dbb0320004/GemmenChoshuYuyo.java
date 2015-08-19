@@ -5,20 +5,27 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320004;
 
+import jp.co.ndensan.reams.ca.cax.model.basic.ChoshuYuyoModel;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenDiv;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.GemmenModel;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.Gemmen;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.GemmenFinder;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+//import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
+//import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
+//import jp.co.ndensan.reams.db.dbz.realservice.GemmenFinder;
 
 /**
  * 減免・徴収猶予Divです。
@@ -55,19 +62,21 @@ public class GemmenChoshuYuyo {
     private void setGemmenDiv(GemmenDiv div, FukaShokaiKey key) {
         clearGemmenDiv(div);
 
-        Optional<GemmenModel> modeloid = new GemmenFinder().find減免(
+        Optional<Gemmen> modeloid = Optional.of(new GemmenManager().get介護賦課減免(
                 key.get調定年度(), key.get賦課年度(),
-                key.get通知書番号(), key.get処理日時(), 状態区分);
+                key.get通知書番号(), Decimal.ZERO));
+//                key.get調定年度(), key.get賦課年度(),
+//                key.get通知書番号(), key.get処理日時(), 状態区分);
 
         if (modeloid.isPresent()) {
-            GemmenModel model = modeloid.get();
+            Gemmen model = modeloid.get();
 
-            div.getTxtGemmenShinseiYMD().setValue(FukaMapper.toRDate(model.get減免申請年月日()));
-            div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
-            div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
-            div.getTxtGemmenKetteiYMD().setValue(FukaMapper.toRDate(model.get減免決定年月日()));
-            div.getTxtGemmenShurui().setValue(model.get減免種類().getRyakusho());
-            div.getTxtGemmenShouninRiyu().setValue(model.get減免事由());
+//            div.getTxtGemmenShinseiYMD().setValue(FukaMapper.toRDate(model.get減免申請年月日()));
+//            div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
+//            div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
+//            div.getTxtGemmenKetteiYMD().setValue(FukaMapper.toRDate(model.get減免決定年月日()));
+//            div.getTxtGemmenShurui().setValue(model.get減免種類().getRyakusho());
+//            div.getTxtGemmenShouninRiyu().setValue(model.get減免事由());
         }
     }
 
@@ -90,24 +99,24 @@ public class GemmenChoshuYuyo {
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
         clearChoshuYuyoDiv(div);
 
-        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
-                key.get調定年度(), key.get賦課年度(),
-                key.get通知書番号(), key.get処理日時(), 状態区分);
-
-        if (!modeloid.isPresent()) {
-            div.getChoshuYuyoKikan().setDisplayNone(true);
-        } else {
-            ChoshuYuyoModel model = modeloid.get().get徴収猶予モデル();
-
-            div.getTxtChoshuYuyoShinseiYMD().setValue(FukaMapper.toRDate(model.get徴収猶予申請年月日()));
-            div.getTxtChoshuYuyoShinseiRiyu().setValue(model.get申請事由());
-            div.getTxtChoshuYuyoKeitteiYMD().setValue(FukaMapper.toRDate(model.get徴収猶予決定年月日()));
-            div.getTxtChoshuYuyoShurui().setValue(model.get徴収猶予種類().getRyakusho());
-            div.getTxtChoshuYuyoShouninRiyu().setValue(model.get徴収猶予事由());
-            div.getChoshuYuyoKikan().setDisplayNone(false);
-
-            new KibetsuChoshuYuyo(div.getChoshuYuyoKikan(), modeloid.get().get期別徴収猶予モデルリスト()).load();
-        }
+//        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
+//                key.get調定年度(), key.get賦課年度(),
+//                key.get通知書番号(), key.get処理日時(), 状態区分);
+//
+//        if (!modeloid.isPresent()) {
+//            div.getChoshuYuyoKikan().setDisplayNone(true);
+//        } else {
+//            ChoshuYuyoModel model = modeloid.get().get徴収猶予モデル();
+//
+//            div.getTxtChoshuYuyoShinseiYMD().setValue(FukaMapper.toRDate(model.get徴収猶予申請年月日()));
+//            div.getTxtChoshuYuyoShinseiRiyu().setValue(model.get申請事由());
+//            div.getTxtChoshuYuyoKeitteiYMD().setValue(FukaMapper.toRDate(model.get徴収猶予決定年月日()));
+//            div.getTxtChoshuYuyoShurui().setValue(model.get徴収猶予種類().getRyakusho());
+//            div.getTxtChoshuYuyoShouninRiyu().setValue(model.get徴収猶予事由());
+//            div.getChoshuYuyoKikan().setDisplayNone(false);
+//
+//            new KibetsuChoshuYuyo(div.getChoshuYuyoKikan(), modeloid.get().get期別徴収猶予モデルリスト()).load();
+//        }
     }
 
     private void clearChoshuYuyoDiv(ChoshuYuyoDiv div) {

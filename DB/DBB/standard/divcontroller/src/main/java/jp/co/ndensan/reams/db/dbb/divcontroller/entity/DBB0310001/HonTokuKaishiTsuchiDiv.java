@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HonTokuKaishiTsuchi のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+
+/**
+ * HonTokuKaishiTsuchi のクラスファイル
+ *
  * @author 自動生成
  */
 public class HonTokuKaishiTsuchiDiv extends PanelPublish {
@@ -22,6 +20,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTokuKaishiTsuchiHakkoYMD")
     private TextBoxDate txtTokuKaishiTsuchiHakkoYMD;
     @JsonProperty("lblTokuKaishiTsuchiDaikou")
@@ -44,7 +43,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("txtTokuKaishiTsuchiHakkoYMD")
     public void setTxtTokuKaishiTsuchiHakkoYMD(TextBoxDate txtTokuKaishiTsuchiHakkoYMD) {
-        this.txtTokuKaishiTsuchiHakkoYMD=txtTokuKaishiTsuchiHakkoYMD;
+        this.txtTokuKaishiTsuchiHakkoYMD = txtTokuKaishiTsuchiHakkoYMD;
     }
 
     @JsonProperty("lblTokuKaishiTsuchiDaikou")
@@ -54,7 +53,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("lblTokuKaishiTsuchiDaikou")
     public void setLblTokuKaishiTsuchiDaikou(Label lblTokuKaishiTsuchiDaikou) {
-        this.lblTokuKaishiTsuchiDaikou=lblTokuKaishiTsuchiDaikou;
+        this.lblTokuKaishiTsuchiDaikou = lblTokuKaishiTsuchiDaikou;
     }
 
     @JsonProperty("radTokuKaishiTsuchiTaisho")
@@ -64,7 +63,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("radTokuKaishiTsuchiTaisho")
     public void setRadTokuKaishiTsuchiTaisho(RadioButton radTokuKaishiTsuchiTaisho) {
-        this.radTokuKaishiTsuchiTaisho=radTokuKaishiTsuchiTaisho;
+        this.radTokuKaishiTsuchiTaisho = radTokuKaishiTsuchiTaisho;
     }
 
     @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
@@ -74,7 +73,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
 
     @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
     public void setShutsuryokuJunHonTokuKaishiTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi) {
-        this.ShutsuryokuJunHonTokuKaishiTsuchi=ShutsuryokuJunHonTokuKaishiTsuchi;
+        this.ShutsuryokuJunHonTokuKaishiTsuchi = ShutsuryokuJunHonTokuKaishiTsuchi;
     }
 
 }

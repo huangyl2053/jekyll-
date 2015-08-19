@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
-import jp.co.ndensan.reams.ur.urz.business.lib.lang.IKingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.business.lib.lang.KingakuFormatter;
-import jp.co.ndensan.reams.ur.urz.definition.lib.lang.enumeratedtype.KingakuUnit;
+import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
+import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
+import jp.co.ndensan.reams.ur.urz.definition.core.kingaku.KingakuUnit;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

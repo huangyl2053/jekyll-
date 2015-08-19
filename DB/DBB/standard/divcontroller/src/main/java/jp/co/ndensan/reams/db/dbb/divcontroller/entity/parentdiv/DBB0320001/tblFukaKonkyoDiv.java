@@ -7,18 +7,19 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.IKiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 
 /**
- * tblFukaKonkyo のクラスファイル 
- * 
+ * tblFukaKonkyo のクラスファイル
+ *
  * @author 自動生成
  */
 public class tblFukaKonkyoDiv extends TablePanel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -112,7 +113,7 @@ public class tblFukaKonkyoDiv extends TablePanel {
 
     @JsonProperty("celFukaKonkyo")
     private void setCelFukaKonkyo(celFukaKonkyoAttblFukaKonkyo celFukaKonkyo) {
-        this.celFukaKonkyo=celFukaKonkyo;
+        this.celFukaKonkyo = celFukaKonkyo;
     }
 
     @JsonProperty("celKiwari")
@@ -122,7 +123,7 @@ public class tblFukaKonkyoDiv extends TablePanel {
 
     @JsonProperty("celKiwari")
     private void setCelKiwari(celKiwariAttblFukaKonkyo celKiwari) {
-        this.celKiwari=celKiwari;
+        this.celKiwari = celKiwari;
     }
 
     @JsonProperty("celKikan")
@@ -132,7 +133,7 @@ public class tblFukaKonkyoDiv extends TablePanel {
 
     @JsonProperty("celKikan")
     private void setCelKikan(celKikanAttblFukaKonkyo celKikan) {
-        this.celKikan=celKikan;
+        this.celKikan = celKikan;
     }
 
     @JsonProperty("celChoteiJiyu")
@@ -142,17 +143,19 @@ public class tblFukaKonkyoDiv extends TablePanel {
 
     @JsonProperty("celChoteiJiyu")
     private void setCelChoteiJiyu(celChoteiJiyuAttblFukaKonkyo celChoteiJiyu) {
-        this.celChoteiJiyu=celChoteiJiyu;
+        this.celChoteiJiyu = celChoteiJiyu;
     }
 
     // </editor-fold>
 }
+
 /**
- * celFukaKonkyo のクラスファイル 
- * 
+ * celFukaKonkyo のクラスファイル
+ *
  * @author 自動生成
  */
 class celFukaKonkyoAttblFukaKonkyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("tblFukakonkyoMeisai")
     private tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai;
@@ -172,7 +175,7 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("tblFukakonkyoMeisai")
     public void setTblFukakonkyoMeisai(tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai) {
-        this.tblFukakonkyoMeisai=tblFukakonkyoMeisai;
+        this.tblFukakonkyoMeisai = tblFukakonkyoMeisai;
     }
 
     @JsonProperty("lblDamy")
@@ -182,7 +185,7 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("lblDamy")
     public void setLblDamy(Label lblDamy) {
-        this.lblDamy=lblDamy;
+        this.lblDamy = lblDamy;
     }
 
     @JsonProperty("txtZanteiKeisanjoHokenryoGaku")
@@ -192,7 +195,7 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtZanteiKeisanjoHokenryoGaku")
     public void setTxtZanteiKeisanjoHokenryoGaku(TextBoxNum txtZanteiKeisanjoHokenryoGaku) {
-        this.txtZanteiKeisanjoHokenryoGaku=txtZanteiKeisanjoHokenryoGaku;
+        this.txtZanteiKeisanjoHokenryoGaku = txtZanteiKeisanjoHokenryoGaku;
     }
 
     @JsonProperty("txtZanteiGemmenGaku")
@@ -202,7 +205,7 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtZanteiGemmenGaku")
     public void setTxtZanteiGemmenGaku(TextBoxNum txtZanteiGemmenGaku) {
-        this.txtZanteiGemmenGaku=txtZanteiGemmenGaku;
+        this.txtZanteiGemmenGaku = txtZanteiGemmenGaku;
     }
 
     @JsonProperty("txtZanteiHokenryoGaku")
@@ -212,17 +215,19 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtZanteiHokenryoGaku")
     public void setTxtZanteiHokenryoGaku(TextBoxNum txtZanteiHokenryoGaku) {
-        this.txtZanteiHokenryoGaku=txtZanteiHokenryoGaku;
+        this.txtZanteiHokenryoGaku = txtZanteiHokenryoGaku;
     }
 
     // </editor-fold>
 }
+
 /**
- * celKiwari のクラスファイル 
- * 
+ * celKiwari のクラスファイル
+ *
  * @author 自動生成
  */
 class celKiwariAttblFukaKonkyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("ccdKiwarigaku")
     private KiwarigakuDiv ccdKiwarigaku;
@@ -234,12 +239,14 @@ class celKiwariAttblFukaKonkyo extends TableCell {
 
     // </editor-fold>
 }
+
 /**
- * celKikan のクラスファイル 
- * 
+ * celKikan のクラスファイル
+ *
  * @author 自動生成
  */
 class celKikanAttblFukaKonkyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("Kikan")
     private KikanDiv Kikan;
@@ -253,7 +260,7 @@ class celKikanAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("Kikan")
     public void setKikan(KikanDiv Kikan) {
-        this.Kikan=Kikan;
+        this.Kikan = Kikan;
     }
 
     @JsonProperty("FukakonkyoNengaku")
@@ -263,17 +270,19 @@ class celKikanAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("FukakonkyoNengaku")
     public void setFukakonkyoNengaku(FukakonkyoNengakuDiv FukakonkyoNengaku) {
-        this.FukakonkyoNengaku=FukakonkyoNengaku;
+        this.FukakonkyoNengaku = FukakonkyoNengaku;
     }
 
     // </editor-fold>
 }
+
 /**
- * celChoteiJiyu のクラスファイル 
- * 
+ * celChoteiJiyu のクラスファイル
+ *
  * @author 自動生成
  */
 class celChoteiJiyuAttblFukaKonkyo extends TableCell {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("txtFukashokaiChoteiJiyu1")
     private TextBox txtFukashokaiChoteiJiyu1;
@@ -291,7 +300,7 @@ class celChoteiJiyuAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtFukashokaiChoteiJiyu1")
     public void setTxtFukashokaiChoteiJiyu1(TextBox txtFukashokaiChoteiJiyu1) {
-        this.txtFukashokaiChoteiJiyu1=txtFukashokaiChoteiJiyu1;
+        this.txtFukashokaiChoteiJiyu1 = txtFukashokaiChoteiJiyu1;
     }
 
     @JsonProperty("txtFukashokaiChoteiJiyu2")
@@ -301,7 +310,7 @@ class celChoteiJiyuAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtFukashokaiChoteiJiyu2")
     public void setTxtFukashokaiChoteiJiyu2(TextBox txtFukashokaiChoteiJiyu2) {
-        this.txtFukashokaiChoteiJiyu2=txtFukashokaiChoteiJiyu2;
+        this.txtFukashokaiChoteiJiyu2 = txtFukashokaiChoteiJiyu2;
     }
 
     @JsonProperty("txtFukashokaiChoteiJiyu3")
@@ -311,7 +320,7 @@ class celChoteiJiyuAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtFukashokaiChoteiJiyu3")
     public void setTxtFukashokaiChoteiJiyu3(TextBox txtFukashokaiChoteiJiyu3) {
-        this.txtFukashokaiChoteiJiyu3=txtFukashokaiChoteiJiyu3;
+        this.txtFukashokaiChoteiJiyu3 = txtFukashokaiChoteiJiyu3;
     }
 
     @JsonProperty("txtFukashokaiChoteiJiyu4")
@@ -321,7 +330,7 @@ class celChoteiJiyuAttblFukaKonkyo extends TableCell {
 
     @JsonProperty("txtFukashokaiChoteiJiyu4")
     public void setTxtFukashokaiChoteiJiyu4(TextBox txtFukashokaiChoteiJiyu4) {
-        this.txtFukashokaiChoteiJiyu4=txtFukashokaiChoteiJiyu4;
+        this.txtFukashokaiChoteiJiyu4 = txtFukashokaiChoteiJiyu4;
     }
 
     // </editor-fold>
