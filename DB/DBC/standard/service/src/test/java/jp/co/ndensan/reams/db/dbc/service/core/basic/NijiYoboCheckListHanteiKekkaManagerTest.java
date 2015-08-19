@@ -103,7 +103,7 @@ public class NijiYoboCheckListHanteiKekkaManagerTest {
             Decimal 主キー4 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
             NijiYoboCheckListHanteiKekka result = sut.get二次予防チェックリスト判定結果(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード.value()));
+            assertThat(result.get識別コード().value(), is(DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class NijiYoboCheckListHanteiKekkaManagerTest {
             List<NijiYoboCheckListHanteiKekka> result = sut.get二次予防チェックリスト判定結果一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class NijiYoboCheckListHanteiKekkaManagerTest {
             DbT3103NijiYoboCheckListHanteiKekkaEntity entity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
             entity.initializeMd5();
             NijiYoboCheckListHanteiKekka 二次予防チェックリスト判定結果 = new NijiYoboCheckListHanteiKekka(entity);
-            二次予防チェックリスト判定結果 = 二次予防チェックリスト判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防チェックリスト判定結果 = 二次予防チェックリスト判定結果.createBuilderForEdit().set二次予防_主観的健康感(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save二次予防チェックリスト判定結果(二次予防チェックリスト判定結果), is(true));
         }
@@ -172,7 +172,7 @@ public class NijiYoboCheckListHanteiKekkaManagerTest {
             DbT3103NijiYoboCheckListHanteiKekkaEntity entity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
             entity.initializeMd5();
             NijiYoboCheckListHanteiKekka 二次予防チェックリスト判定結果 = new NijiYoboCheckListHanteiKekka(entity);
-            二次予防チェックリスト判定結果 = 二次予防チェックリスト判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防チェックリスト判定結果 = 二次予防チェックリスト判定結果.createBuilderForEdit().set二次予防_主観的健康感(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save二次予防チェックリスト判定結果(二次予防チェックリスト判定結果), is(false));
         }

@@ -140,7 +140,7 @@ public class KyufuhiTuchiHoseiManagerTest {
             Decimal 主キー6 = DbT3067KyufuhiTuchiHoseiEntityGenerator.DEFAULT_履歴番号;
             KyufuhiTuchiHosei result = sut.get給付費通知補正(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3067KyufuhiTuchiHoseiEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get証記載保険者番号().value(), is(DbT3067KyufuhiTuchiHoseiEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -164,7 +164,7 @@ public class KyufuhiTuchiHoseiManagerTest {
             List<KyufuhiTuchiHosei> result = sut.get給付費通知補正一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3067KyufuhiTuchiHoseiEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT3067KyufuhiTuchiHoseiEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -197,7 +197,7 @@ public class KyufuhiTuchiHoseiManagerTest {
             DbT3067KyufuhiTuchiHoseiEntity entity = DbT3067KyufuhiTuchiHoseiEntityGenerator.createDbT3067KyufuhiTuchiHoseiEntity();
             entity.initializeMd5();
             KyufuhiTuchiHosei 給付費通知補正 = new KyufuhiTuchiHosei(entity);
-            給付費通知補正 = 給付費通知補正.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費通知補正 = 給付費通知補正.createBuilderForEdit().setサービス費用合計額(new Decimal(1200)).build();
 
             assertThat(sut.save給付費通知補正(給付費通知補正), is(true));
         }
@@ -209,7 +209,7 @@ public class KyufuhiTuchiHoseiManagerTest {
             DbT3067KyufuhiTuchiHoseiEntity entity = DbT3067KyufuhiTuchiHoseiEntityGenerator.createDbT3067KyufuhiTuchiHoseiEntity();
             entity.initializeMd5();
             KyufuhiTuchiHosei 給付費通知補正 = new KyufuhiTuchiHosei(entity);
-            給付費通知補正 = 給付費通知補正.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費通知補正 = 給付費通知補正.createBuilderForEdit().setサービス費用合計額(new Decimal(1200)).build();
 
             assertThat(sut.save給付費通知補正(給付費通知補正), is(false));
         }

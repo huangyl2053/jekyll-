@@ -231,7 +231,7 @@ public class KyufujissekiKihonManagerTest {
             RString 主キー10 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_通し番号;
             KyufujissekiKihon result = sut.get給付実績基本(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9, 主キー10);
 
-            assertThat(result.get主キー1().value(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -255,7 +255,7 @@ public class KyufujissekiKihonManagerTest {
             List<KyufujissekiKihon> result = sut.get給付実績基本一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -288,7 +288,7 @@ public class KyufujissekiKihonManagerTest {
             DbT3017KyufujissekiKihonEntity entity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
             entity.initializeMd5();
             KyufujissekiKihon 給付実績基本 = new KyufujissekiKihon(entity);
-            給付実績基本 = 給付実績基本.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績基本 = 給付実績基本.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績基本(給付実績基本), is(true));
         }
@@ -300,7 +300,7 @@ public class KyufujissekiKihonManagerTest {
             DbT3017KyufujissekiKihonEntity entity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
             entity.initializeMd5();
             KyufujissekiKihon 給付実績基本 = new KyufujissekiKihon(entity);
-            給付実績基本 = 給付実績基本.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績基本 = 給付実績基本.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績基本(給付実績基本), is(false));
         }

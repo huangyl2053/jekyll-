@@ -88,7 +88,7 @@ public class KyufuhiKashitsukekinEntaiRisokuKeisanManagerTest {
             Decimal 主キー3 = DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukekinEntaiRisokuKeisan result = sut.get給付費貸付金延滞利息計算(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -112,7 +112,7 @@ public class KyufuhiKashitsukekinEntaiRisokuKeisanManagerTest {
             List<KyufuhiKashitsukekinEntaiRisokuKeisan> result = sut.get給付費貸付金延滞利息計算一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -145,7 +145,7 @@ public class KyufuhiKashitsukekinEntaiRisokuKeisanManagerTest {
             DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity entity = DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.createDbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinEntaiRisokuKeisan 給付費貸付金延滞利息計算 = new KyufuhiKashitsukekinEntaiRisokuKeisan(entity);
-            給付費貸付金延滞利息計算 = 給付費貸付金延滞利息計算.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金延滞利息計算 = 給付費貸付金延滞利息計算.createBuilderForEdit().set貸付管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金延滞利息計算(給付費貸付金延滞利息計算), is(true));
         }
@@ -157,7 +157,7 @@ public class KyufuhiKashitsukekinEntaiRisokuKeisanManagerTest {
             DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity entity = DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntityGenerator.createDbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinEntaiRisokuKeisan 給付費貸付金延滞利息計算 = new KyufuhiKashitsukekinEntaiRisokuKeisan(entity);
-            給付費貸付金延滞利息計算 = 給付費貸付金延滞利息計算.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金延滞利息計算 = 給付費貸付金延滞利息計算.createBuilderForEdit().set貸付管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金延滞利息計算(給付費貸付金延滞利息計算), is(false));
         }

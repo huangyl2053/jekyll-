@@ -137,7 +137,7 @@ public class ShokanKihonManagerTest {
             Decimal 主キー6 = DbT3038ShokanKihonEntityGenerator.DEFAULT_履歴番号;
             ShokanKihon result = sut.get償還払請求基本(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -161,7 +161,7 @@ public class ShokanKihonManagerTest {
             List<ShokanKihon> result = sut.get償還払請求基本一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -194,7 +194,7 @@ public class ShokanKihonManagerTest {
             DbT3038ShokanKihonEntity entity = DbT3038ShokanKihonEntityGenerator.createDbT3038ShokanKihonEntity();
             entity.initializeMd5();
             ShokanKihon 償還払請求基本 = new ShokanKihon(entity);
-            償還払請求基本 = 償還払請求基本.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求基本 = 償還払請求基本.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求基本(償還払請求基本), is(true));
         }
@@ -206,7 +206,7 @@ public class ShokanKihonManagerTest {
             DbT3038ShokanKihonEntity entity = DbT3038ShokanKihonEntityGenerator.createDbT3038ShokanKihonEntity();
             entity.initializeMd5();
             ShokanKihon 償還払請求基本 = new ShokanKihon(entity);
-            償還払請求基本 = 償還払請求基本.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求基本 = 償還払請求基本.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求基本(償還払請求基本), is(false));
         }

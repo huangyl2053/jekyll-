@@ -102,7 +102,7 @@ public class KyufuhiKashitsukekinShokanKigenHenkoManagerTest {
             Decimal 主キー4 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukekinShokanKigenHenko result = sut.get給付費貸付金償還期限変更(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -126,7 +126,7 @@ public class KyufuhiKashitsukekinShokanKigenHenkoManagerTest {
             List<KyufuhiKashitsukekinShokanKigenHenko> result = sut.get給付費貸付金償還期限変更一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -159,7 +159,7 @@ public class KyufuhiKashitsukekinShokanKigenHenkoManagerTest {
             DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShokanKigenHenko 給付費貸付金償還期限変更 = new KyufuhiKashitsukekinShokanKigenHenko(entity);
-            給付費貸付金償還期限変更 = 給付費貸付金償還期限変更.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金償還期限変更 = 給付費貸付金償還期限変更.createBuilderForEdit().set借受人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金償還期限変更(給付費貸付金償還期限変更), is(true));
         }
@@ -171,7 +171,7 @@ public class KyufuhiKashitsukekinShokanKigenHenkoManagerTest {
             DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShokanKigenHenko 給付費貸付金償還期限変更 = new KyufuhiKashitsukekinShokanKigenHenko(entity);
-            給付費貸付金償還期限変更 = 給付費貸付金償還期限変更.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金償還期限変更 = 給付費貸付金償還期限変更.createBuilderForEdit().set借受人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金償還期限変更(給付費貸付金償還期限変更), is(false));
         }

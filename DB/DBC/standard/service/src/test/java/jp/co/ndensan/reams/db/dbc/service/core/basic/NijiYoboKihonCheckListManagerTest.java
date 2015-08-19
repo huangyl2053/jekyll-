@@ -103,7 +103,7 @@ public class NijiYoboKihonCheckListManagerTest {
             Decimal 主キー4 = DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_履歴番号;
             NijiYoboKihonCheckList result = sut.get二次予防基本チェックリスト(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード.value()));
+            assertThat(result.get識別コード().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class NijiYoboKihonCheckListManagerTest {
             List<NijiYoboKihonCheckList> result = sut.get二次予防基本チェックリスト一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード.value()));
+            assertThat(result.get(0).get識別コード().value(), is(DbT3101NijiYoboKihonCheckListEntityGenerator.DEFAULT_識別コード.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class NijiYoboKihonCheckListManagerTest {
             DbT3101NijiYoboKihonCheckListEntity entity = DbT3101NijiYoboKihonCheckListEntityGenerator.createDbT3101NijiYoboKihonCheckListEntity();
             entity.initializeMd5();
             NijiYoboKihonCheckList 二次予防基本チェックリスト = new NijiYoboKihonCheckList(entity);
-            二次予防基本チェックリスト = 二次予防基本チェックリスト.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防基本チェックリスト = 二次予防基本チェックリスト.createBuilderForEdit().set質問事項１(new Decimal(10)).build();
 
             assertThat(sut.save二次予防基本チェックリスト(二次予防基本チェックリスト), is(true));
         }
@@ -172,7 +172,7 @@ public class NijiYoboKihonCheckListManagerTest {
             DbT3101NijiYoboKihonCheckListEntity entity = DbT3101NijiYoboKihonCheckListEntityGenerator.createDbT3101NijiYoboKihonCheckListEntity();
             entity.initializeMd5();
             NijiYoboKihonCheckList 二次予防基本チェックリスト = new NijiYoboKihonCheckList(entity);
-            二次予防基本チェックリスト = 二次予防基本チェックリスト.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防基本チェックリスト = 二次予防基本チェックリスト.createBuilderForEdit().set質問事項１(new Decimal(10)).build();
 
             assertThat(sut.save二次予防基本チェックリスト(二次予防基本チェックリスト), is(false));
         }

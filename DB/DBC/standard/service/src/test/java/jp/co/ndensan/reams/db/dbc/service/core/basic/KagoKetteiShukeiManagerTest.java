@@ -90,7 +90,7 @@ public class KagoKetteiShukeiManagerTest {
             Decimal 主キー3 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_履歴番号;
             KagoKetteiShukei result = sut.get過誤決定集計(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get取扱年月().toDateString(), is(DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -114,7 +114,7 @@ public class KagoKetteiShukeiManagerTest {
             List<KagoKetteiShukei> result = sut.get過誤決定集計一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get(0).get取扱年月().toDateString(), is(DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -147,7 +147,7 @@ public class KagoKetteiShukeiManagerTest {
             DbT3060KagoKetteiShukeiEntity entity = DbT3060KagoKetteiShukeiEntityGenerator.createDbT3060KagoKetteiShukeiEntity();
             entity.initializeMd5();
             KagoKetteiShukei 過誤決定集計 = new KagoKetteiShukei(entity);
-            過誤決定集計 = 過誤決定集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤決定集計 = 過誤決定集計.createBuilderForEdit().set保険者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤決定集計(過誤決定集計), is(true));
         }
@@ -159,7 +159,7 @@ public class KagoKetteiShukeiManagerTest {
             DbT3060KagoKetteiShukeiEntity entity = DbT3060KagoKetteiShukeiEntityGenerator.createDbT3060KagoKetteiShukeiEntity();
             entity.initializeMd5();
             KagoKetteiShukei 過誤決定集計 = new KagoKetteiShukei(entity);
-            過誤決定集計 = 過誤決定集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤決定集計 = 過誤決定集計.createBuilderForEdit().set保険者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤決定集計(過誤決定集計), is(false));
         }

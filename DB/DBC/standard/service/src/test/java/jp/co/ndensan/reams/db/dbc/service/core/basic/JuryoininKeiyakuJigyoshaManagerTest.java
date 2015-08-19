@@ -90,7 +90,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             Decimal 主キー3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             JuryoininKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
+            assertThat(result.get事業者契約番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
         }
     }
 
@@ -114,7 +114,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             List<JuryoininKeiyakuJigyosha> result = sut.get受領委任契約事業者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
+            assertThat(result.get(0).get事業者契約番号(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号));
         }
     }
 
@@ -147,7 +147,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             JuryoininKeiyakuJigyosha 受領委任契約事業者 = new JuryoininKeiyakuJigyosha(entity);
-            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set届出者事業者名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受領委任契約事業者(受領委任契約事業者), is(true));
         }
@@ -159,7 +159,7 @@ public class JuryoininKeiyakuJigyoshaManagerTest {
             DbT3077JuryoininKeiyakuJigyoshaEntity entity = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             JuryoininKeiyakuJigyosha 受領委任契約事業者 = new JuryoininKeiyakuJigyosha(entity);
-            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受領委任契約事業者 = 受領委任契約事業者.createBuilderForEdit().set届出者事業者名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受領委任契約事業者(受領委任契約事業者), is(false));
         }

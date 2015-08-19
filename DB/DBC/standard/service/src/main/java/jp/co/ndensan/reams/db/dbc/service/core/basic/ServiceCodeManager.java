@@ -8,7 +8,13 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7119ServiceCodeDac;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,7 +52,7 @@ public class ServiceCodeManager {
      */
     @Transaction
     public ServiceCode getサービスコード(
-             ServiceShuruiCode サービス種類コード,
+            ServiceShuruiCode サービス種類コード,
             ServiceKomokuCode サービス項目コード,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {

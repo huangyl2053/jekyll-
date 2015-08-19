@@ -139,7 +139,7 @@ public class ShokanShokujiHiyoSagakuShikyuManagerTest {
             Decimal 主キー6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
             ShokanShokujiHiyoSagakuShikyu result = sut.get償還払請求食事費用差額支給(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -163,7 +163,7 @@ public class ShokanShokujiHiyoSagakuShikyuManagerTest {
             List<ShokanShokujiHiyoSagakuShikyu> result = sut.get償還払請求食事費用差額支給一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -196,7 +196,7 @@ public class ShokanShokujiHiyoSagakuShikyuManagerTest {
             DbT3044ShokanShokujiHiyoSagakuShikyuEntity entity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
             entity.initializeMd5();
             ShokanShokujiHiyoSagakuShikyu 償還払請求食事費用差額支給 = new ShokanShokujiHiyoSagakuShikyu(entity);
-            償還払請求食事費用差額支給 = 償還払請求食事費用差額支給.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求食事費用差額支給 = 償還払請求食事費用差額支給.createBuilderForEdit().set支給区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求食事費用差額支給(償還払請求食事費用差額支給), is(true));
         }
@@ -208,7 +208,7 @@ public class ShokanShokujiHiyoSagakuShikyuManagerTest {
             DbT3044ShokanShokujiHiyoSagakuShikyuEntity entity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
             entity.initializeMd5();
             ShokanShokujiHiyoSagakuShikyu 償還払請求食事費用差額支給 = new ShokanShokujiHiyoSagakuShikyu(entity);
-            償還払請求食事費用差額支給 = 償還払請求食事費用差額支給.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求食事費用差額支給 = 償還払請求食事費用差額支給.createBuilderForEdit().set支給区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求食事費用差額支給(償還払請求食事費用差額支給), is(false));
         }

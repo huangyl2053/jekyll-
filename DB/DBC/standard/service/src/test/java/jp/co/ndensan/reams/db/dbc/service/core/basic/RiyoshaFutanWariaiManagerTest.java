@@ -89,7 +89,7 @@ public class RiyoshaFutanWariaiManagerTest {
             Decimal 主キー3 = DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_履歴番号;
             RiyoshaFutanWariai result = sut.get利用者負担割合(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get年度().toDateString(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -113,7 +113,7 @@ public class RiyoshaFutanWariaiManagerTest {
             List<RiyoshaFutanWariai> result = sut.get利用者負担割合一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get(0).get年度().toDateString(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -146,7 +146,7 @@ public class RiyoshaFutanWariaiManagerTest {
             DbT3113RiyoshaFutanWariaiEntity entity = DbT3113RiyoshaFutanWariaiEntityGenerator.createDbT3113RiyoshaFutanWariaiEntity();
             entity.initializeMd5();
             RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(entity);
-            利用者負担割合 = 利用者負担割合.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合 = 利用者負担割合.createBuilderForEdit().set発行区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save利用者負担割合(利用者負担割合), is(true));
         }
@@ -158,7 +158,7 @@ public class RiyoshaFutanWariaiManagerTest {
             DbT3113RiyoshaFutanWariaiEntity entity = DbT3113RiyoshaFutanWariaiEntityGenerator.createDbT3113RiyoshaFutanWariaiEntity();
             entity.initializeMd5();
             RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(entity);
-            利用者負担割合 = 利用者負担割合.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合 = 利用者負担割合.createBuilderForEdit().set発行区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save利用者負担割合(利用者負担割合), is(false));
         }

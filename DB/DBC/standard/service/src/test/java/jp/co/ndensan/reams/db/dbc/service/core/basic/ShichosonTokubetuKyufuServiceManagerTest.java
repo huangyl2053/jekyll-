@@ -88,7 +88,7 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
             Decimal 主キー3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetuKyufuService result = sut.get市町村特別給付サービス内容(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード.value()));
+            assertThat(result.get市町村特別給付用サービスコード(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード));
         }
     }
 
@@ -112,7 +112,7 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
             List<ShichosonTokubetuKyufuService> result = sut.get市町村特別給付サービス内容一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード.value()));
+            assertThat(result.get(0).get市町村特別給付用サービスコード(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード));
         }
     }
 
@@ -145,7 +145,7 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
             DbT3066ShichosonTokubetuKyufuServiceEntity entity = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.createDbT3066ShichosonTokubetuKyufuServiceEntity();
             entity.initializeMd5();
             ShichosonTokubetuKyufuService 市町村特別給付サービス内容 = new ShichosonTokubetuKyufuService(entity);
-            市町村特別給付サービス内容 = 市町村特別給付サービス内容.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村特別給付サービス内容 = 市町村特別給付サービス内容.createBuilderForEdit().set市町村特別給付用サービス区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村特別給付サービス内容(市町村特別給付サービス内容), is(true));
         }
@@ -157,7 +157,7 @@ public class ShichosonTokubetuKyufuServiceManagerTest {
             DbT3066ShichosonTokubetuKyufuServiceEntity entity = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.createDbT3066ShichosonTokubetuKyufuServiceEntity();
             entity.initializeMd5();
             ShichosonTokubetuKyufuService 市町村特別給付サービス内容 = new ShichosonTokubetuKyufuService(entity);
-            市町村特別給付サービス内容 = 市町村特別給付サービス内容.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村特別給付サービス内容 = 市町村特別給付サービス内容.createBuilderForEdit().set市町村特別給付用サービス区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村特別給付サービス内容(市町村特別給付サービス内容), is(false));
         }

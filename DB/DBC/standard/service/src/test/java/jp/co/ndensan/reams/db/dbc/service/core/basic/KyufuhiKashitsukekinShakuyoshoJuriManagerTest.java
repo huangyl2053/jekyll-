@@ -94,7 +94,7 @@ public class KyufuhiKashitsukekinShakuyoshoJuriManagerTest {
             Decimal 主キー3 = DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukekinShakuyoshoJuri result = sut.get給付費貸付金借用書受理(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -118,7 +118,7 @@ public class KyufuhiKashitsukekinShakuyoshoJuriManagerTest {
             List<KyufuhiKashitsukekinShakuyoshoJuri> result = sut.get給付費貸付金借用書受理一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -151,7 +151,7 @@ public class KyufuhiKashitsukekinShakuyoshoJuriManagerTest {
             DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity = DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.createDbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShakuyoshoJuri 給付費貸付金借用書受理 = new KyufuhiKashitsukekinShakuyoshoJuri(entity);
-            給付費貸付金借用書受理 = 給付費貸付金借用書受理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金借用書受理 = 給付費貸付金借用書受理.createBuilderForEdit().set保証人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金借用書受理(給付費貸付金借用書受理), is(true));
         }
@@ -163,7 +163,7 @@ public class KyufuhiKashitsukekinShakuyoshoJuriManagerTest {
             DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity = DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityGenerator.createDbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity();
             entity.initializeMd5();
             KyufuhiKashitsukekinShakuyoshoJuri 給付費貸付金借用書受理 = new KyufuhiKashitsukekinShakuyoshoJuri(entity);
-            給付費貸付金借用書受理 = 給付費貸付金借用書受理.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金借用書受理 = 給付費貸付金借用書受理.createBuilderForEdit().set保証人住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金借用書受理(給付費貸付金借用書受理), is(false));
         }

@@ -90,7 +90,7 @@ public class DaisanshaKoiKyufugakuGengakuManagerTest {
             Decimal 主キー3 = DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiKyufugakuGengaku result = sut.get介護第三者行為給付額減額(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -114,7 +114,7 @@ public class DaisanshaKoiKyufugakuGengakuManagerTest {
             List<DaisanshaKoiKyufugakuGengaku> result = sut.get介護第三者行為給付額減額一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -147,7 +147,7 @@ public class DaisanshaKoiKyufugakuGengakuManagerTest {
             DbT3081DaisanshaKoiKyufugakuGengakuEntity entity = DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.createDbT3081DaisanshaKoiKyufugakuGengakuEntity();
             entity.initializeMd5();
             DaisanshaKoiKyufugakuGengaku 介護第三者行為給付額減額 = new DaisanshaKoiKyufugakuGengaku(entity);
-            介護第三者行為給付額減額 = 介護第三者行為給付額減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為給付額減額 = 介護第三者行為給付額減額.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為給付額減額(介護第三者行為給付額減額), is(true));
         }
@@ -159,7 +159,7 @@ public class DaisanshaKoiKyufugakuGengakuManagerTest {
             DbT3081DaisanshaKoiKyufugakuGengakuEntity entity = DbT3081DaisanshaKoiKyufugakuGengakuEntityGenerator.createDbT3081DaisanshaKoiKyufugakuGengakuEntity();
             entity.initializeMd5();
             DaisanshaKoiKyufugakuGengaku 介護第三者行為給付額減額 = new DaisanshaKoiKyufugakuGengaku(entity);
-            介護第三者行為給付額減額 = 介護第三者行為給付額減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為給付額減額 = 介護第三者行為給付額減額.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為給付額減額(介護第三者行為給付額減額), is(false));
         }

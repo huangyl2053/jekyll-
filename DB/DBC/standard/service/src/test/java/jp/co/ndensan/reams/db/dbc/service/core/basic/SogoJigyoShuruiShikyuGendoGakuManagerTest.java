@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -39,23 +41,19 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護予防
-
-        ・日常生活支援総合事業種類支給限度額 extends FdaTestBase {
+    public static class get介護予防_日常生活支援総合事業種類支給限度額 extends DbcTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             主キー型2 主キー2 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額(null, 主キー2);
+            sut.get介護予防_日常生活支援総合事業種類支給限度額(null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             主キー型1 主キー1 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
-            sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額(主キー1, null);
+            sut.get介護予防_日常生活支援総合事業種類支給限度額(主キー1, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
@@ -65,8 +63,7 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             主キー型1 主キー1 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
             主キー型2 主キー2 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            SogoJigyoShuruiShikyuGendoGaku result = sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額(主キー1, 主キー2);
+            SogoJigyoShuruiShikyuGendoGaku result = sut.get介護予防_日常生活支援総合事業種類支給限度額(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
         }
@@ -78,24 +75,20 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             主キー型1 主キー1 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
             主キー型2 主キー2 = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            SogoJigyoShuruiShikyuGendoGaku result = sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額(主キー1, 主キー2);
+            SogoJigyoShuruiShikyuGendoGaku result = sut.get介護予防_日常生活支援総合事業種類支給限度額(主キー1, 主キー2);
 
             assertThat(result.get主キー1().value(), is(DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー1.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get介護予防
-
-        ・日常生活支援総合事業種類支給限度額一覧 extends FdaTestBase {
+    public static class get介護予防_日常生活支援総合事業種類支給限度額一覧 extends FdaTestBase {
 
         @Test
         public void 検索結果が空の場合() {
             when(dac.selectAll()).thenReturn(Collections.EMPTY_LIST);
 
-            List<SogoJigyoShuruiShikyuGendoGaku> result = sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額一覧();
+            List<SogoJigyoShuruiShikyuGendoGaku> result = sut.get介護予防_日常生活支援総合事業種類支給限度額一覧();
 
             assertThat(result.isEmpty(), is(true));
         }
@@ -105,32 +98,23 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
             List<DbT7118SogoJigyoShuruiShikyuGendoGakuEntity> entityList = Arrays.asList(DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity());
             when(dac.selectAll()).thenReturn(entityList);
 
-            List<SogoJigyoShuruiShikyuGendoGaku> result = sut.get介護予防
-            ・日常生活支援総合事業種類支給限度額一覧();
+            List<SogoJigyoShuruiShikyuGendoGaku> result = sut.get介護予防_日常生活支援総合事業種類支給限度額一覧();
 
             assertThat(result.size(), is(1));
             assertThat(result.get(0).get主キー1().value(), is(DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー1.value()));
         }
     }
 
-    public static class save介護予防
-
-        ・日常生活支援総合事業種類支給限度額 extends XxxTestBase {
+    public static class save介護予防_日常生活支援総合事業種類支給限度額 extends XxxTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
             when(dac.save(any(DbT7118SogoJigyoShuruiShikyuGendoGakuEntity.class))).thenReturn(1);
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(true)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(true));
         }
 
         @Test
@@ -138,15 +122,9 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
             when(dac.save(any(DbT7118SogoJigyoShuruiShikyuGendoGakuEntity.class))).thenReturn(0);
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(false)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(false));
         }
 
         @Test
@@ -155,18 +133,10 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
             entity.initializeMd5();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
-            介護予防
-            ・日常生活支援総合事業種類支給限度額 = 介護予防
-            ・日常生活支援総合事業種類支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            介護予防_日常生活支援総合事業種類支給限度額 = 介護予防_日常生活支援総合事業種類支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(true)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(true));
         }
 
         @Test
@@ -175,18 +145,10 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
             entity.initializeMd5();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
-            介護予防
-            ・日常生活支援総合事業種類支給限度額 = 介護予防
-            ・日常生活支援総合事業種類支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            介護予防_日常生活支援総合事業種類支給限度額 = 介護予防_日常生活支援総合事業種類支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(false)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(false));
         }
 
         @Test
@@ -195,18 +157,10 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
             entity.initializeMd5();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
-            介護予防
-            ・日常生活支援総合事業種類支給限度額 = 介護予防
-            ・日常生活支援総合事業種類支給限度額.deleted();
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            介護予防_日常生活支援総合事業種類支給限度額 = 介護予防_日常生活支援総合事業種類支給限度額.deleted();
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(true)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(true));
         }
 
         @Test
@@ -215,33 +169,18 @@ public class SogoJigyoShuruiShikyuGendoGakuManagerTest {
 
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
             entity.initializeMd5();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
-            介護予防
-            ・日常生活支援総合事業種類支給限度額 = 介護予防
-            ・日常生活支援総合事業種類支給限度額.deleted();
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            介護予防 _日常生活支援総合事業種類支給限度額 = 介護予防_日常生活支援総合事業種類支給限度額.deleted();
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(false)
-
-
-        );
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(false));
         }
 
         public void 何も変更せずにsaveを呼び出すとfalseが返る() {
             DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity = DbT7118SogoJigyoShuruiShikyuGendoGakuEntityGenerator.createDbT7118SogoJigyoShuruiShikyuGendoGakuEntity();
             entity.initializeMd5();
-            SogoJigyoShuruiShikyuGendoGaku 介護予防
-            ・日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
+            SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額 = new SogoJigyoShuruiShikyuGendoGaku(entity);
 
-            assertThat(sut.save介護予防
-            ・日常生活支援総合事業種類支給限度額(介護予防・日常生活支援総合事業種類支給限度額
-            ), is(false)
-
-
-
-);
+            assertThat(sut.save介護予防_日常生活支援総合事業種類支給限度額(介護予防_日常生活支援総合事業種類支給限度額), is(false));
         }
     }
 }

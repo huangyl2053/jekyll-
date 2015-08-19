@@ -139,7 +139,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             KyodoShoriyoJukyushaIdoKihonSofu result = sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get異動年月日().toString(), is(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -163,7 +163,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             List<KyodoShoriyoJukyushaIdoKihonSofu> result = sut.get共同処理用受給者異動基本送付一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get(0).get異動年月日().toString(), is(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -196,7 +196,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
             entity.initializeMd5();
             KyodoShoriyoJukyushaIdoKihonSofu 共同処理用受給者異動基本送付 = new KyodoShoriyoJukyushaIdoKihonSofu(entity);
-            共同処理用受給者異動基本送付 = 共同処理用受給者異動基本送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            共同処理用受給者異動基本送付 = 共同処理用受給者異動基本送付.createBuilderForEdit().set住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save共同処理用受給者異動基本送付(共同処理用受給者異動基本送付), is(true));
         }
@@ -208,7 +208,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
             entity.initializeMd5();
             KyodoShoriyoJukyushaIdoKihonSofu 共同処理用受給者異動基本送付 = new KyodoShoriyoJukyushaIdoKihonSofu(entity);
-            共同処理用受給者異動基本送付 = 共同処理用受給者異動基本送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            共同処理用受給者異動基本送付 = 共同処理用受給者異動基本送付.createBuilderForEdit().set住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save共同処理用受給者異動基本送付(共同処理用受給者異動基本送付), is(false));
         }

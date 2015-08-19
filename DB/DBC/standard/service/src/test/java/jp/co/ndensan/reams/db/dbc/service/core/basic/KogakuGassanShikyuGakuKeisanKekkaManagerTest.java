@@ -118,7 +118,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             Decimal 主キー5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyuGakuKeisanKekka result = sut.get高額合算支給額計算結果(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -142,7 +142,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             List<KogakuGassanShikyuGakuKeisanKekka> result = sut.get高額合算支給額計算結果一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -175,7 +175,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.createDbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
             entity.initializeMd5();
             KogakuGassanShikyuGakuKeisanKekka 高額合算支給額計算結果 = new KogakuGassanShikyuGakuKeisanKekka(entity);
-            高額合算支給額計算結果 = 高額合算支給額計算結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給額計算結果 = 高額合算支給額計算結果.createBuilderForEdit().set70歳以上の者に係る所得区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給額計算結果(高額合算支給額計算結果), is(true));
         }
@@ -187,7 +187,7 @@ public class KogakuGassanShikyuGakuKeisanKekkaManagerTest {
             DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.createDbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
             entity.initializeMd5();
             KogakuGassanShikyuGakuKeisanKekka 高額合算支給額計算結果 = new KogakuGassanShikyuGakuKeisanKekka(entity);
-            高額合算支給額計算結果 = 高額合算支給額計算結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給額計算結果 = 高額合算支給額計算結果.createBuilderForEdit().set70歳以上の者に係る所得区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給額計算結果(高額合算支給額計算結果), is(false));
         }

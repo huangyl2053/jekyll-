@@ -206,7 +206,7 @@ public class KyufujissekiFukushiYoguHanbaihiManagerTest {
             RString 主キー9 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_明細番号;
             KyufujissekiFukushiYoguHanbaihi result = sut.get給付実績福祉用具販売費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -230,7 +230,7 @@ public class KyufujissekiFukushiYoguHanbaihiManagerTest {
             List<KyufujissekiFukushiYoguHanbaihi> result = sut.get給付実績福祉用具販売費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -263,7 +263,7 @@ public class KyufujissekiFukushiYoguHanbaihiManagerTest {
             DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.createDbT3026KyufujissekiFukushiYoguHanbaihiEntity();
             entity.initializeMd5();
             KyufujissekiFukushiYoguHanbaihi 給付実績福祉用具販売費 = new KyufujissekiFukushiYoguHanbaihi(entity);
-            給付実績福祉用具販売費 = 給付実績福祉用具販売費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績福祉用具販売費 = 給付実績福祉用具販売費.createBuilderForEdit().set明細番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績福祉用具販売費(給付実績福祉用具販売費), is(true));
         }
@@ -275,7 +275,7 @@ public class KyufujissekiFukushiYoguHanbaihiManagerTest {
             DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.createDbT3026KyufujissekiFukushiYoguHanbaihiEntity();
             entity.initializeMd5();
             KyufujissekiFukushiYoguHanbaihi 給付実績福祉用具販売費 = new KyufujissekiFukushiYoguHanbaihi(entity);
-            給付実績福祉用具販売費 = 給付実績福祉用具販売費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績福祉用具販売費 = 給付実績福祉用具販売費.createBuilderForEdit().set明細番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績福祉用具販売費(給付実績福祉用具販売費), is(false));
         }

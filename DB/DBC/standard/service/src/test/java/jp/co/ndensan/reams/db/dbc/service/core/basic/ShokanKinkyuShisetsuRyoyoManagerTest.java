@@ -156,7 +156,7 @@ public class ShokanKinkyuShisetsuRyoyoManagerTest {
             Decimal 主キー7 = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_履歴番号;
             ShokanKinkyuShisetsuRyoyo result = sut.get償還払請求緊急時施設療養(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanKinkyuShisetsuRyoyoManagerTest {
             List<ShokanKinkyuShisetsuRyoyo> result = sut.get償還払請求緊急時施設療養一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -213,7 +213,7 @@ public class ShokanKinkyuShisetsuRyoyoManagerTest {
             DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.createDbT3040ShokanKinkyuShisetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanKinkyuShisetsuRyoyo 償還払請求緊急時施設療養 = new ShokanKinkyuShisetsuRyoyo(entity);
-            償還払請求緊急時施設療養 = 償還払請求緊急時施設療養.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求緊急時施設療養 = 償還払請求緊急時施設療養.createBuilderForEdit().set往診医療機関名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求緊急時施設療養(償還払請求緊急時施設療養), is(true));
         }
@@ -225,7 +225,7 @@ public class ShokanKinkyuShisetsuRyoyoManagerTest {
             DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator.createDbT3040ShokanKinkyuShisetsuRyoyoEntity();
             entity.initializeMd5();
             ShokanKinkyuShisetsuRyoyo 償還払請求緊急時施設療養 = new ShokanKinkyuShisetsuRyoyo(entity);
-            償還払請求緊急時施設療養 = 償還払請求緊急時施設療養.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求緊急時施設療養 = 償還払請求緊急時施設療養.createBuilderForEdit().set往診医療機関名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求緊急時施設療養(償還払請求緊急時施設療養), is(false));
         }

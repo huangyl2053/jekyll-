@@ -139,7 +139,7 @@ public class SaishinsaMoshitateManagerTest {
             Decimal 主キー6 = DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_履歴番号;
             SaishinsaMoshitate result = sut.get再審査申立(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
+            assertThat(result.get事業所番号().value(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
         }
     }
 
@@ -163,7 +163,7 @@ public class SaishinsaMoshitateManagerTest {
             List<SaishinsaMoshitate> result = sut.get再審査申立一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
+            assertThat(result.get(0).get事業所番号().value(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_事業所番号.value()));
         }
     }
 
@@ -196,7 +196,7 @@ public class SaishinsaMoshitateManagerTest {
             DbT3062SaishinsaMoshitateEntity entity = DbT3062SaishinsaMoshitateEntityGenerator.createDbT3062SaishinsaMoshitateEntity();
             entity.initializeMd5();
             SaishinsaMoshitate 再審査申立 = new SaishinsaMoshitate(entity);
-            再審査申立 = 再審査申立.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            再審査申立 = 再審査申立.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save再審査申立(再審査申立), is(true));
         }
@@ -208,7 +208,7 @@ public class SaishinsaMoshitateManagerTest {
             DbT3062SaishinsaMoshitateEntity entity = DbT3062SaishinsaMoshitateEntityGenerator.createDbT3062SaishinsaMoshitateEntity();
             entity.initializeMd5();
             SaishinsaMoshitate 再審査申立 = new SaishinsaMoshitate(entity);
-            再審査申立 = 再審査申立.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            再審査申立 = 再審査申立.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save再審査申立(再審査申立), is(false));
         }

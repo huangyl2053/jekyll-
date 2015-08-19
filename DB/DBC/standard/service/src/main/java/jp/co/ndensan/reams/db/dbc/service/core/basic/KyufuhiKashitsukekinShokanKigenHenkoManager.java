@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufuhiKashitsukekinShokan
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

@@ -119,7 +119,7 @@ public class KogakuGassanKyufuJissekiManagerTest {
             Decimal 主キー5 = DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanKyufuJisseki result = sut.get高額合算給付実績(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -143,7 +143,7 @@ public class KogakuGassanKyufuJissekiManagerTest {
             List<KogakuGassanKyufuJisseki> result = sut.get高額合算給付実績一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -176,7 +176,7 @@ public class KogakuGassanKyufuJissekiManagerTest {
             DbT3075KogakuGassanKyufuJissekiEntity entity = DbT3075KogakuGassanKyufuJissekiEntityGenerator.createDbT3075KogakuGassanKyufuJissekiEntity();
             entity.initializeMd5();
             KogakuGassanKyufuJisseki 高額合算給付実績 = new KogakuGassanKyufuJisseki(entity);
-            高額合算給付実績 = 高額合算給付実績.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算給付実績 = 高額合算給付実績.createBuilderForEdit().setデータ区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算給付実績(高額合算給付実績), is(true));
         }
@@ -188,7 +188,7 @@ public class KogakuGassanKyufuJissekiManagerTest {
             DbT3075KogakuGassanKyufuJissekiEntity entity = DbT3075KogakuGassanKyufuJissekiEntityGenerator.createDbT3075KogakuGassanKyufuJissekiEntity();
             entity.initializeMd5();
             KogakuGassanKyufuJisseki 高額合算給付実績 = new KogakuGassanKyufuJisseki(entity);
-            高額合算給付実績 = 高額合算給付実績.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算給付実績 = 高額合算給付実績.createBuilderForEdit().setデータ区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算給付実績(高額合算給付実績), is(false));
         }

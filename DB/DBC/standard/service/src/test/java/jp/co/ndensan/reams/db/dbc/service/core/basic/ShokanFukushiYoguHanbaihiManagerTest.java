@@ -156,7 +156,7 @@ public class ShokanFukushiYoguHanbaihiManagerTest {
             Decimal 主キー7 = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_履歴番号;
             ShokanFukushiYoguHanbaihi result = sut.get償還払請求福祉用具販売費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanFukushiYoguHanbaihiManagerTest {
             List<ShokanFukushiYoguHanbaihi> result = sut.get償還払請求福祉用具販売費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -213,7 +213,7 @@ public class ShokanFukushiYoguHanbaihiManagerTest {
             DbT3048ShokanFukushiYoguHanbaihiEntity entity = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.createDbT3048ShokanFukushiYoguHanbaihiEntity();
             entity.initializeMd5();
             ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費 = new ShokanFukushiYoguHanbaihi(entity);
-            償還払請求福祉用具販売費 = 償還払請求福祉用具販売費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求福祉用具販売費 = 償還払請求福祉用具販売費.createBuilderForEdit().set品目コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求福祉用具販売費(償還払請求福祉用具販売費), is(true));
         }
@@ -225,7 +225,7 @@ public class ShokanFukushiYoguHanbaihiManagerTest {
             DbT3048ShokanFukushiYoguHanbaihiEntity entity = DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.createDbT3048ShokanFukushiYoguHanbaihiEntity();
             entity.initializeMd5();
             ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費 = new ShokanFukushiYoguHanbaihi(entity);
-            償還払請求福祉用具販売費 = 償還払請求福祉用具販売費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求福祉用具販売費 = 償還払請求福祉用具販売費.createBuilderForEdit().set品目コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求福祉用具販売費(償還払請求福祉用具販売費), is(false));
         }

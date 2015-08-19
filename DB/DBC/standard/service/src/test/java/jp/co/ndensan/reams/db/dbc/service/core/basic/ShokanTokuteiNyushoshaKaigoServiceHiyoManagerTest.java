@@ -157,7 +157,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoManagerTest {
             Decimal 主キー7 = DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_履歴番号;
             ShokanTokuteiNyushoshaKaigoServiceHiyo result = sut.get償還払請求特定入所者介護サービス費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -181,7 +181,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoManagerTest {
             List<ShokanTokuteiNyushoshaKaigoServiceHiyo> result = sut.get償還払請求特定入所者介護サービス費用一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -214,7 +214,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoManagerTest {
             DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity = DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.createDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
             entity.initializeMd5();
             ShokanTokuteiNyushoshaKaigoServiceHiyo 償還払請求特定入所者介護サービス費用 = new ShokanTokuteiNyushoshaKaigoServiceHiyo(entity);
-            償還払請求特定入所者介護サービス費用 = 償還払請求特定入所者介護サービス費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定入所者介護サービス費用 = 償還払請求特定入所者介護サービス費用.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定入所者介護サービス費用(償還払請求特定入所者介護サービス費用), is(true));
         }
@@ -226,7 +226,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoManagerTest {
             DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity = DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.createDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
             entity.initializeMd5();
             ShokanTokuteiNyushoshaKaigoServiceHiyo 償還払請求特定入所者介護サービス費用 = new ShokanTokuteiNyushoshaKaigoServiceHiyo(entity);
-            償還払請求特定入所者介護サービス費用 = 償還払請求特定入所者介護サービス費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定入所者介護サービス費用 = 償還払請求特定入所者介護サービス費用.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定入所者介護サービス費用(償還払請求特定入所者介護サービス費用), is(false));
         }

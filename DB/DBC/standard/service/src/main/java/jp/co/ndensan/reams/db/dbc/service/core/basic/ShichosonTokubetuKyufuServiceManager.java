@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShichosonTokubetuKyufuService;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3066ShichosonTokubetuKyufuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3066ShichosonTokubetuKyufuServiceDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

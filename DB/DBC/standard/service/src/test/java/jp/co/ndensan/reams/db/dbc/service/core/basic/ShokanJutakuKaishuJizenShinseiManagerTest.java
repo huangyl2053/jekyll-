@@ -103,7 +103,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             Decimal 主キー4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
             ShokanJutakuKaishuJizenShinsei result = sut.get償還払支給住宅改修事前申請(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             List<ShokanJutakuKaishuJizenShinsei> result = sut.get償還払支給住宅改修事前申請一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
             entity.initializeMd5();
             ShokanJutakuKaishuJizenShinsei 償還払支給住宅改修事前申請 = new ShokanJutakuKaishuJizenShinsei(entity);
-            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set事業者名称カナ(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給住宅改修事前申請(償還払支給住宅改修事前申請), is(true));
         }
@@ -172,7 +172,7 @@ public class ShokanJutakuKaishuJizenShinseiManagerTest {
             DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
             entity.initializeMd5();
             ShokanJutakuKaishuJizenShinsei 償還払支給住宅改修事前申請 = new ShokanJutakuKaishuJizenShinsei(entity);
-            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給住宅改修事前申請 = 償還払支給住宅改修事前申請.createBuilderForEdit().set事業者名称カナ(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給住宅改修事前申請(償還払支給住宅改修事前申請), is(false));
         }

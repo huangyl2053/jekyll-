@@ -204,7 +204,7 @@ public class KyufujissekiKyotakuServiceManagerTest {
             RString 主キー9 = DbT3025KyufujissekiKyotakuServiceEntityGenerator.DEFAULT_サービス計画費明細行番号;
             KyufujissekiKyotakuService result = sut.get給付実績居宅サービス計画費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3025KyufujissekiKyotakuServiceEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3025KyufujissekiKyotakuServiceEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiKyotakuServiceManagerTest {
             List<KyufujissekiKyotakuService> result = sut.get給付実績居宅サービス計画費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3025KyufujissekiKyotakuServiceEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3025KyufujissekiKyotakuServiceEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiKyotakuServiceManagerTest {
             DbT3025KyufujissekiKyotakuServiceEntity entity = DbT3025KyufujissekiKyotakuServiceEntityGenerator.createDbT3025KyufujissekiKyotakuServiceEntity();
             entity.initializeMd5();
             KyufujissekiKyotakuService 給付実績居宅サービス計画費 = new KyufujissekiKyotakuService(entity);
-            給付実績居宅サービス計画費 = 給付実績居宅サービス計画費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績居宅サービス計画費 = 給付実績居宅サービス計画費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績居宅サービス計画費(給付実績居宅サービス計画費), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiKyotakuServiceManagerTest {
             DbT3025KyufujissekiKyotakuServiceEntity entity = DbT3025KyufujissekiKyotakuServiceEntityGenerator.createDbT3025KyufujissekiKyotakuServiceEntity();
             entity.initializeMd5();
             KyufujissekiKyotakuService 給付実績居宅サービス計画費 = new KyufujissekiKyotakuService(entity);
-            給付実績居宅サービス計画費 = 給付実績居宅サービス計画費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績居宅サービス計画費 = 給付実績居宅サービス計画費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績居宅サービス計画費(給付実績居宅サービス計画費), is(false));
         }

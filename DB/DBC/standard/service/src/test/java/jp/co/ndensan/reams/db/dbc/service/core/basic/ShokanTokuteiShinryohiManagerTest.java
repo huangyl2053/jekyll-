@@ -157,7 +157,7 @@ public class ShokanTokuteiShinryohiManagerTest {
             Decimal 主キー7 = DbT3041ShokanTokuteiShinryohiEntityGenerator.DEFAULT_履歴番号;
             ShokanTokuteiShinryohi result = sut.get償還払請求特定診療費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3041ShokanTokuteiShinryohiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3041ShokanTokuteiShinryohiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -181,7 +181,7 @@ public class ShokanTokuteiShinryohiManagerTest {
             List<ShokanTokuteiShinryohi> result = sut.get償還払請求特定診療費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3041ShokanTokuteiShinryohiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3041ShokanTokuteiShinryohiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -214,7 +214,7 @@ public class ShokanTokuteiShinryohiManagerTest {
             DbT3041ShokanTokuteiShinryohiEntity entity = DbT3041ShokanTokuteiShinryohiEntityGenerator.createDbT3041ShokanTokuteiShinryohiEntity();
             entity.initializeMd5();
             ShokanTokuteiShinryohi 償還払請求特定診療費 = new ShokanTokuteiShinryohi(entity);
-            償還払請求特定診療費 = 償還払請求特定診療費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定診療費 = 償還払請求特定診療費.createBuilderForEdit().set傷病名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定診療費(償還払請求特定診療費), is(true));
         }
@@ -226,7 +226,7 @@ public class ShokanTokuteiShinryohiManagerTest {
             DbT3041ShokanTokuteiShinryohiEntity entity = DbT3041ShokanTokuteiShinryohiEntityGenerator.createDbT3041ShokanTokuteiShinryohiEntity();
             entity.initializeMd5();
             ShokanTokuteiShinryohi 償還払請求特定診療費 = new ShokanTokuteiShinryohi(entity);
-            償還払請求特定診療費 = 償還払請求特定診療費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求特定診療費 = 償還払請求特定診療費.createBuilderForEdit().set傷病名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求特定診療費(償還払請求特定診療費), is(false));
         }
