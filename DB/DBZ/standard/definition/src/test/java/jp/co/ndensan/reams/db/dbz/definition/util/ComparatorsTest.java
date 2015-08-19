@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util;
 
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;

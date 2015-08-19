@@ -12,8 +12,8 @@ import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHoho
 import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_証記載保険者番号;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriCon
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GappeiJohoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

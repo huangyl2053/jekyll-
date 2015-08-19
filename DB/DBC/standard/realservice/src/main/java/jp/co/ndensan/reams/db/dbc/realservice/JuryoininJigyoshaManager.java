@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.business.mapper.JuryoininJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urc.business.IKoza;

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgNinteiRireki_Row;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;

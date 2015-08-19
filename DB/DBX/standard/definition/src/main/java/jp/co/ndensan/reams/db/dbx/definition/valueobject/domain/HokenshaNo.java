@@ -3,47 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 被保番号です。
+ * 保険者番号です。
  *
  * @author N3327 三浦 凌
  */
-public final class HihokenshaNo implements IValueObject<RString>, Comparable<HihokenshaNo>, IDbColumnMappable, Serializable {
+public final class HokenshaNo implements IValueObject<RString>, Comparable<HokenshaNo>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の HihokenshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の HokenshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final HihokenshaNo EMPTY;
+    public static final HokenshaNo EMPTY;
 
     static {
-        EMPTY = new HihokenshaNo(RString.EMPTY);
+        EMPTY = new HokenshaNo(RString.EMPTY);
     }
+
     private final RString theValue;
 
     /**
-     * 指定の値をもった HihokenshaNo を生成します。
+     * 指定の値をもった HokenshaNo を生成します。
      *
      * @param value 値
      */
-    public HihokenshaNo(String value) {
+    public HokenshaNo(String value) {
         this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
-     * 指定の値をもった HihokenshaNo を生成します。
+     * 指定の値をもった HokenshaNo を生成します。
      *
      * @param value 値
      */
-    public HihokenshaNo(RString value) {
+    public HokenshaNo(RString value) {
         this.theValue = value;
     }
 
@@ -58,7 +59,7 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
     }
 
     @Override
-    public int compareTo(HihokenshaNo o) {
+    public int compareTo(HokenshaNo o) {
         return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
@@ -76,17 +77,17 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof HihokenshaNo)) {
+        if (!(obj instanceof HokenshaNo)) {
             return false;
         }
-        HihokenshaNo other = (HihokenshaNo) obj;
+        HokenshaNo other = (HokenshaNo) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.theValue);
+        hash = 41 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 }

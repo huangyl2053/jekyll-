@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMaster
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

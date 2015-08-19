@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 申請履歴情報エンティティのテスト用インスタンスを作成する補助クラスです。

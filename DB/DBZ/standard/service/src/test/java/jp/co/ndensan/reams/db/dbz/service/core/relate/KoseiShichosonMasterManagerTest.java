@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KoseiShichosonShishoMasterBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.relate.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;

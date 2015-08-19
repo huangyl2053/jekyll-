@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
+package jp.co.ndensan.reams.db.dbx.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -17,34 +17,34 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3327 三浦 凌
  */
-public final class HokenshaNo implements IValueObject<RString>, Comparable<HokenshaNo>, IDbColumnMappable, Serializable {
+public final class IryoKikanCode implements IValueObject<RString>, Comparable<IryoKikanCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の HokenshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の IryoKikanCode です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final HokenshaNo EMPTY;
+    public static final IryoKikanCode EMPTY;
 
     static {
-        EMPTY = new HokenshaNo(RString.EMPTY);
+        EMPTY = new IryoKikanCode(RString.EMPTY);
     }
 
     private final RString theValue;
 
     /**
-     * 指定の値をもった HokenshaNo を生成します。
+     * 指定の値をもった IryoKikanCode を生成します。
      *
      * @param value 値
      */
-    public HokenshaNo(String value) {
+    public IryoKikanCode(String value) {
         this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
-     * 指定の値をもった HokenshaNo を生成します。
+     * 指定の値をもった IryoKikanCode を生成します。
      *
      * @param value 値
      */
-    public HokenshaNo(RString value) {
+    public IryoKikanCode(RString value) {
         this.theValue = value;
     }
 
@@ -59,7 +59,7 @@ public final class HokenshaNo implements IValueObject<RString>, Comparable<Hoken
     }
 
     @Override
-    public int compareTo(HokenshaNo o) {
+    public int compareTo(IryoKikanCode o) {
         return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
@@ -77,10 +77,10 @@ public final class HokenshaNo implements IValueObject<RString>, Comparable<Hoken
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof HokenshaNo)) {
+        if (!(obj instanceof IryoKikanCode)) {
             return false;
         }
-        HokenshaNo other = (HokenshaNo) obj;
+        IryoKikanCode other = (IryoKikanCode) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 

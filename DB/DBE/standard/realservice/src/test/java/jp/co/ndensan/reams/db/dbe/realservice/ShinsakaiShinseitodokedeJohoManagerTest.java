@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5120ShinsakaiShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;

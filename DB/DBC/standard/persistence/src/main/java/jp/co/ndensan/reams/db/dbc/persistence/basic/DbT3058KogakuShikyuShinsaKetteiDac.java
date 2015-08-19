@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.ketteishaUketoriYM;

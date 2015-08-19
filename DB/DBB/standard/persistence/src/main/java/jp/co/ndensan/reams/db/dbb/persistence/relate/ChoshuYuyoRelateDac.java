@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuy
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelate;

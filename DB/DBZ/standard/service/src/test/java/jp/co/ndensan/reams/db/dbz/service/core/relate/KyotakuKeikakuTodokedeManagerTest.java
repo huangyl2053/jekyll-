@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakusei;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakuseiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.relate.KyotakuKeikakuTodokedeMapperParameter;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;

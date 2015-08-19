@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice.report;
 
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoSofusakiInfoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.relate.KyotakuKeikakuJikoSakuseiMapperParameter;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;

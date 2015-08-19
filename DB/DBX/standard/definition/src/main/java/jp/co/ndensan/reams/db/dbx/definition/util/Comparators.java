@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.util;
+package jp.co.ndensan.reams.db.dbx.definition.util;
 
 import java.io.Serializable;
 import java.util.Collections;

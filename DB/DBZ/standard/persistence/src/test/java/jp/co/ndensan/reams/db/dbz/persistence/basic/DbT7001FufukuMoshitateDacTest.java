@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEntityGenerator.DEFAULT_原処分被保険者番号;
