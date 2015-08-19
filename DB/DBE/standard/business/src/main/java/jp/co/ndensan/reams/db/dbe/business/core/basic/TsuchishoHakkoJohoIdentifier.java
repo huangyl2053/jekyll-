@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriN
  * 通知書発行情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class TsuchishoHakkoJohoIdentifier implements Serializable {
 
     private final ShinseishoKanriNo 申請書管理番号;

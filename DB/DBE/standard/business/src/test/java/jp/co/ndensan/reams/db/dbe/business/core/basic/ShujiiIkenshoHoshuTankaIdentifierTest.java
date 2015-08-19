@@ -5,7 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5032ShujiiIkenshoHoshuTankaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -21,21 +24,23 @@ public class ShujiiIkenshoHoshuTankaIdentifierTest extends DbeTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static Code 在宅施設区分;
+    private static Code 意見書作成回数区分;
+    private static FlexibleYearMonth 開始年月;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_主キー名2;
+        在宅施設区分 = DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_在宅施設区分;
+        意見書作成回数区分 = DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_意見書作成回数区分;
+        開始年月 = DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_開始年月;
     }
 
     public static class シリアライズテスト extends DbeTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShujiiIkenshoHoshuTankaIdentifier sut = new ShujiiIkenshoHoshuTankaIdentifier(主キー名1, 主キー名2);
+            ShujiiIkenshoHoshuTankaIdentifier sut = new ShujiiIkenshoHoshuTankaIdentifier(在宅施設区分, 意見書作成回数区分, 開始年月);
             assertThat(sut, is(serializable()));
         }
     }

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -43,11 +42,11 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
         this.主治医医療機関 = 主治医医療機関;
     }
 
-    @Override
-    public IryoKikanCode get医療機関コード() {
-        return 医療機関.get医療機関コード();
-    }
-
+    // TODO n8300姜　ビルドエラー回避のために暫定対応
+//    @Override
+//    public IryoKikanCode get医療機関コード() {
+//        return 医療機関.get医療機関コード();
+//    }
     /**
      * 医療機関名を返します。
      *
@@ -100,14 +99,13 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
         return 医療機関.is休止フラグ();
     }
 
-    public Code get異動事由() {
-        return 医療機関.get異動事由().value();
-    }
-
-    public Code get会員区分() {
-        return 医療機関.get会員区分().value();
-    }
-
+//    public Code get異動事由() {
+//        return 医療機関.get異動事由().value();
+//    }
+//
+//    public Code get会員区分() {
+//        return 医療機関.get会員区分().value();
+//    }
     public boolean is指定自立支援医療機関() {
         return 医療機関.is指定自立支援医療機関フラグ();
     }
@@ -135,5 +133,10 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
     @Override
     public IryoKikanJokyo get医療機関状況() {
         return 主治医医療機関.get医療機関状況();
+    }
+
+    @Override
+    public IryoKikanCode get医療機関コード() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

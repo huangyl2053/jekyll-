@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * その他機関情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class SonotaKikanJohoIdentifier implements Serializable {
 
     private final ShoKisaiHokenshaNo 証記載保険者番号;
