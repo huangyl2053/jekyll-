@@ -62,17 +62,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbxRealService</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbxPersistence</artifactId>
-                    <groupId>${project.groupId}</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>DbxPersistence</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>

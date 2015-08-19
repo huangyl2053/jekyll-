@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
+import jp.co.ndensan.reams.db.dba.business.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.ShikakuShosaiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
-import jp.co.ndensan.reams.db.dba.model.relate.shikakuido.JushochiTokureiModel;
-import jp.co.ndensan.reams.db.dba.realservice.JushochiTokureiRegister;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.IDonyuHokensha;
+import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -26,21 +26,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
-import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
-import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.hokensha.IDonyuHokenshaLoader;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -52,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeShubetsu;
 
 /**
  * 住所地特例画面における、資格詳細Divのイベントを定義したDivControllerです。
@@ -60,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikakuShosai {
 
+    //TODO n8178 城間　新ビジネス対応と、realservice廃止などにより、依存するクラスが見えなくなったため処理の一部をコメントアウト。依存クラスに変わるものが作成された後に修正予定 2015/08/19記述
     private ICodeShubetsu KaigoshikakuShutokuJiyuHihokensha;
 
     /**
@@ -71,34 +62,34 @@ public class ShikakuShosai {
      * @return 資格詳細Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
-        IDonyuHokensha donyuHokensha = new IDonyuHokenshaLoader().load();
-        GappeiJohoKanriConfig gappeiConfig = new GappeiJohoKanriConfig();
-
-        viewErrorMessage(shikakuShosaiDiv, taishoshaKey, controlData);
-
-        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
-        IItemList<HihokenshaDaichoModel> daichoList = daichoManager.get被保険者台帳一覧DescOrderByShoriTimestamp(
-                lasdecCode, taishoshaKey.get被保険者番号());
-        if (!daichoList.isEmpty()) {
-            daichoList = new HihokenshaDaichoList(daichoList).toOneSeasonList(daichoList.findFirst().get().get資格取得年月日());
-        }
-        ShisetsuNyutaishoTokureiTaishoRelateManager nyutaishoManager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
-        IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList
-                = nyutaishoManager.get台帳別施設入退所List(taishoshaKey.get識別コード(), DaichoType.被保険者);
-
-        initializeHokenshaJoho(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, taishoshaKey.get識別コード(), donyuHokensha, gappeiConfig, controlData);
-        setDataOfShikakuTokuso(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, donyuHokensha, gappeiConfig);
-        setDefaultDataOfCcd(shikakuShosaiDiv, daichoList, nyutaishoRelateList);
-
-        setJushochiTokureiView(shikakuShosaiDiv, controlData);
+//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+//        IUrControlData controlData = UrControlDataFactory.createInstance();
+//        LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
+//        IDonyuHokensha donyuHokensha = new IDonyuHokenshaLeader().load();
+//        GappeiJohoKanriConfig gappeiConfig = new GappeiJohoKanriConfig();
+//
+//        viewErrorMessage(shikakuShosaiDiv, taishoshaKey, controlData);
+//
+//        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
+//        IItemList<HihokenshaDaicho> daichoList = daichoManager.get被保険者台帳一覧DescOrderByShoriTimestamp(
+//                lasdecCode, taishoshaKey.get被保険者番号());
+//        if (!daichoList.isEmpty()) {
+//            daichoList = new HihokenshaDaichoList(daichoList).toOneSeasonList(daichoList.findFirst().get().get資格取得年月日());
+//        }
+//        ShisetsuNyutaishoTokureiTaishoRelateManager nyutaishoManager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
+//        IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList
+//                = nyutaishoManager.get台帳別施設入退所List(taishoshaKey.get識別コード(), DaichoType.被保険者);
+//
+//        initializeHokenshaJoho(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, taishoshaKey.get識別コード(), donyuHokensha, gappeiConfig, controlData);
+//        setDataOfShikakuTokuso(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, donyuHokensha, gappeiConfig);
+//        setDefaultDataOfCcd(shikakuShosaiDiv, daichoList, nyutaishoRelateList);
+//
+//        setJushochiTokureiView(shikakuShosaiDiv, controlData);
 
         return ResponseData.of(shikakuShosaiDiv).respond();
     }
 
-    private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
+    private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, Optional<DbT1001HihokenshaDaichoEntity> hihoDaicho, LasdecCode lasdecCode,
             ShikibetsuCode shikibetsuCode, IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig, IUrControlData controlData) {
 
         if (!donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
@@ -111,7 +102,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
             initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
-            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
+            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().getKyuShichosonCode(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
         } else if (!donyuHokensha.is広域保険者() && gappeiConfig.is合併あり()) {
 
@@ -123,7 +114,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
             initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
-            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
+            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().getKyuShichosonCode(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
         } else if (donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
 
@@ -135,7 +126,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
             initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
-            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
+            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().getKyuShichosonCode(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
         } else {
 
@@ -147,14 +138,14 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
             initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
-            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
+            shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().getKyuShichosonCode(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
 
         shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize(lasdecCode, shikibetsuCode);
     }
 
-    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, Optional<HihokenshaDaichoModel> hihoDaicho,
+    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, Optional<DbT1001HihokenshaDaichoEntity> hihoDaicho,
             IJushochiTokureiRirekiListDiv jutokuDiv, JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaMode) {
         ViewExecutionStatus exeStatus;
         JushochiTokureiExecutionStatus jutokuExeStatus;
@@ -178,14 +169,14 @@ public class ShikakuShosai {
                 jutokuExeStatus = JushochiTokureiExecutionStatus.Tekiyo;
                 break;
         }
-        jutokuDiv.initialize(hihoDaicho.get().get旧市町村コード(), exeStatus, jutokuExeStatus, hokenshaMode);
+        jutokuDiv.initialize(hihoDaicho.get().getKyuShichosonCode(), exeStatus, jutokuExeStatus, hokenshaMode);
     }
 
-    private void setDataOfShikakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
+    private void setDataOfShikakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<DbT1001HihokenshaDaichoEntity> hihoDaicho, LasdecCode lasdecCode,
             IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig) {
-        HihokenshaDaichoModel daichoModel = hihoDaicho.get();
-        shikakuShosaiDiv.getTxtShutokuDate().setValue(daichoModel.get資格取得年月日());
-        shikakuShosaiDiv.getTxtShutokuTodokedeDate().setValue(daichoModel.get資格取得届出年月日());
+//        HihokenshaDaichoModel daichoModel = hihoDaicho.get();
+//        shikakuShosaiDiv.getTxtShutokuDate().setValue(daichoModel.get資格取得年月日());
+//        shikakuShosaiDiv.getTxtShutokuTodokedeDate().setValue(daichoModel.get資格取得届出年月日());
 //TODO n8223 朴 URZCodeShubetsu.介護資格取得事由がみつかれません。エラーが発生したため、コメントアウト
 //        List<KaigoShikakuShutokuJiyu> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由);
 
@@ -195,51 +186,50 @@ public class ShikakuShosai {
 //        if (!daichoModel.getEntity().getShikakuShutokuJiyuCode().getColumnValue().isEmpty()) {
 //            shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
 //        }
-        KeyValueDataSource hihoKubun1 = new KeyValueDataSource(HihokenshaKubun.第1号被保険者.code(), HihokenshaKubun.第1号被保険者.get略称());
-        KeyValueDataSource hihoKubun2 = new KeyValueDataSource(HihokenshaKubun.第2号被保険者.code(), HihokenshaKubun.第2号被保険者.get略称());
-        shikakuShosaiDiv.getDdlHihoKubun().setDataSource(Lists.newArrayList(hihoKubun1, hihoKubun2));
-        shikakuShosaiDiv.getDdlHihoKubun().setSelectedKey(daichoModel.get被保険者区分コード());
-
-        if (donyuHokensha.is広域保険者()) {
-            //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
-            //
-            //1, 所在保険者の設定
-            //広域の場合、Atenaから取得できる地区コード3（もしくはそれに代わるもの）から情報を取得する。（初期設定）
-            //もしくは、住所地特例処理の中で設定した住民情報に合わせて変更を行う。（実行中のイベント）
-            //DDLの内容は住民情報の候補に挙がる保険者の一覧？（設定は不要のため、内容を考慮する必要は無いかもしれない）
-            //
-            //2, 措置元保険者の設定
-            //広域構成市町村の情報を、DDLに設定する。
-            //DDLに設定した情報から、台帳情報に持つ措置元保険者情報に一致するものを選択する。
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDataSource(null);
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDataSource(null);
-        } else {
-
-            KeyValueDataSource shozaihokenshaSource = new KeyValueDataSource(donyuHokensha.get証記載保険者番号().getColumnValue(),
-                    donyuHokensha.get保険者名().value());
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDataSource(Lists.newArrayList(shozaihokenshaSource));
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDataSource(Lists.newArrayList(new KeyValueDataSource()));
-        }
-
-        if (gappeiConfig.is合併あり()) {
-            KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
-            Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
-                    hihoDaicho.get().get旧市町村コード());
-            gappeiInfo.get().get単一市町村情報();
-
-            IFunction function = new IFunction<IGappeiShichoson, KeyValueDataSource>() {
-                @Override
-                public KeyValueDataSource apply(IGappeiShichoson targetModel) {
-                    return new KeyValueDataSource(targetModel.get旧市町村コード().getColumnValue(), targetModel.get旧市町村名称());
-                }
-            };
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDataSource(gappeiInfo.get().get単一市町村情報().map(function).toList());
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setSelectedKey(hihoDaicho.get().get旧市町村コード().getColumnValue());
-        }
-
-        shikakuShosaiDiv.getTxtSoshitsuDate().setValue(daichoModel.get資格喪失年月日());
-        shikakuShosaiDiv.getTxtSoshitsuTodokedeDate().setValue(daichoModel.get資格喪失届出年月日());
-
+//        KeyValueDataSource hihoKubun1 = new KeyValueDataSource(HihokenshaKubun.第1号被保険者.code(), HihokenshaKubun.第1号被保険者.get略称());
+//        KeyValueDataSource hihoKubun2 = new KeyValueDataSource(HihokenshaKubun.第2号被保険者.code(), HihokenshaKubun.第2号被保険者.get略称());
+//        shikakuShosaiDiv.getDdlHihoKubun().setDataSource(Lists.newArrayList(hihoKubun1, hihoKubun2));
+//        shikakuShosaiDiv.getDdlHihoKubun().setSelectedKey(daichoModel.get被保険者区分コード());
+//
+//        if (donyuHokensha.is広域保険者()) {
+        //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
+        //
+        //1, 所在保険者の設定
+        //広域の場合、Atenaから取得できる地区コード3（もしくはそれに代わるもの）から情報を取得する。（初期設定）
+        //もしくは、住所地特例処理の中で設定した住民情報に合わせて変更を行う。（実行中のイベント）
+        //DDLの内容は住民情報の候補に挙がる保険者の一覧？（設定は不要のため、内容を考慮する必要は無いかもしれない）
+        //
+        //2, 措置元保険者の設定
+        //広域構成市町村の情報を、DDLに設定する。
+        //DDLに設定した情報から、台帳情報に持つ措置元保険者情報に一致するものを選択する。
+//            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDataSource(null);
+//            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDataSource(null);
+//        } else {
+//
+//            KeyValueDataSource shozaihokenshaSource = new KeyValueDataSource(donyuHokensha.get証記載保険者番号().getColumnValue(),
+//                    donyuHokensha.get保険者名().value());
+//            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDataSource(Lists.newArrayList(shozaihokenshaSource));
+//            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDataSource(Lists.newArrayList(new KeyValueDataSource()));
+//        }
+//
+//        if (gappeiConfig.is合併あり()) {
+//            KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
+//            Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
+//                    hihoDaicho.get().get旧市町村コード());
+//            gappeiInfo.get().get単一市町村情報();
+//
+//            IFunction function = new IFunction<IGappeiShichoson, KeyValueDataSource>() {
+//                @Override
+//                public KeyValueDataSource apply(IGappeiShichoson targetModel) {
+//                    return new KeyValueDataSource(targetModel.get旧市町村コード().getColumnValue(), targetModel.get旧市町村名称());
+//                }
+//            };
+//            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDataSource(gappeiInfo.get().get単一市町村情報().map(function).toList());
+//            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setSelectedKey(hihoDaicho.get().get旧市町村コード().getColumnValue());
+//        }
+//
+//        shikakuShosaiDiv.getTxtSoshitsuDate().setValue(daichoModel.get資格喪失年月日());
+//        shikakuShosaiDiv.getTxtSoshitsuTodokedeDate().setValue(daichoModel.get資格喪失届出年月日());
 //TODO n8223 朴 URZCodeShubetsu.介護資格取得事由がみつかれません。エラーが発生したため、コメントアウト
 //        List<KaigoShikakuSoshitsuJiyu> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由);
 //        shikakuShosaiDiv.getDdlSoshitsuJiyu().setDataSource(
@@ -265,11 +255,11 @@ public class ShikakuShosai {
 //        IItemList<KeyValueDataSource> dataSource = koseiShichoson.asItemList().map(koikiShichosonDataSource);
 //        return dataSource.toList();
 //    }
-    private void setDefaultDataOfCcd(ShikakuShosaiDiv shikakuShosaiDiv, IItemList<HihokenshaDaichoModel> daichoList,
-            IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList) {
-        shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().set被保険者台帳情報(daichoList);
-        shikakuShosaiDiv.getCcdShikakuHenkoRireki().set資格関連異動履歴(daichoList);
-        shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().set施設入退所履歴(nyutaishoRelateList);
+    private void setDefaultDataOfCcd(ShikakuShosaiDiv shikakuShosaiDiv, IItemList<DbT1001HihokenshaDaichoEntity> daichoList,
+            IItemList<ShisetsuNyutaishoModel> nyutaishoRelateList) {
+//        shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().set被保険者台帳情報(daichoList);
+//        shikakuShosaiDiv.getCcdShikakuHenkoRireki().set資格関連異動履歴(daichoList);
+//        shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().set施設入退所履歴(nyutaishoRelateList);
     }
 
     private void setJushochiTokureiView(ShikakuShosaiDiv shikakuShosaiDiv, IUrControlData controlData) {
@@ -348,24 +338,25 @@ public class ShikakuShosai {
     }
 
     private boolean is住所地特例適用者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
-
-        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
-        Optional<HihokenshaDaichoModel> daicho = daichoManager.
-                get最新被保険者台帳(new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue()), taishoshaKey.get識別コード());
-
-        return !(is住所地特例未適用(daicho.get()) || is住所地特例解除済み(daicho.get()));
+//
+//        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
+//        Optional<HihokenshaDaichoModel> daicho = daichoManager.
+//                get最新被保険者台帳(new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue()), taishoshaKey.get識別コード());
+//
+//        return !(is住所地特例未適用(daicho.get()) || is住所地特例解除済み(daicho.get()));
+        return false;
     }
 
-    private boolean is住所地特例未適用(HihokenshaDaichoModel daicho) {
-        return daicho.get住所地特例適用事由() == null
-                || daicho.get適用届出年月日() == null
-                || daicho.get適用年月日() == null;
+    private boolean is住所地特例未適用(DbT1001HihokenshaDaichoEntity daicho) {
+        return daicho.getJushochitokureiTekiyoJiyuCode() == null
+                || daicho.getJushochitokureiTekiyoTodokedeYMD() == null
+                || daicho.getJushochitokureiTekiyoYMD() == null;
     }
 
-    private boolean is住所地特例解除済み(HihokenshaDaichoModel daicho) {
-        return daicho.get住所地特例解除事由() != null
-                || daicho.get解除届出年月日() != null
-                || daicho.get解除年月日() != null;
+    private boolean is住所地特例解除済み(DbT1001HihokenshaDaichoEntity daicho) {
+        return daicho.getJushochitokureiKaijoJiyuCode() != null
+                || daicho.getJushochitokureiKaijoTodokedeYMD() != null
+                || daicho.getJushochitokureiKaijoYMD() != null;
     }
 
     /**
@@ -471,19 +462,19 @@ public class ShikakuShosai {
      */
     public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate_onYes(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
 
-        IFunction function = new IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel>() {
-            @Override
-            public ShisetsuNyutaishoModel apply(ShisetsuNyutaishoRelateModel t) {
-                return t.get介護保険施設入退所モデル();
-            }
-        };
-
-        JushochiTokureiModel jutokuModel = new JushochiTokureiModel(
-                shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().get被保険者台帳情報().toList(),
-                shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴().map(function).toList()
-        );
-
-        new JushochiTokureiRegister().save(jutokuModel);
+//        IFunction function = new IFunction<ShisetsuNyutaishoModel, ShisetsuNyutaishoModel>() {
+//            @Override
+//            public ShisetsuNyutaishoModel apply(ShisetsuNyutaishoModel t) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        };
+//
+//        JushochiTokureiModel jutokuModel = new JushochiTokureiModel(
+//                shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().get被保険者台帳情報().toList(),
+//                shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().get施設入退所履歴().map(function).toList()
+//        );
+//
+//        new JushochiTokureiRegister().save(jutokuModel);
         return ResponseData.of(shikakuShosaiDiv).respond();
     }
 

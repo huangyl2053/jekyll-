@@ -6,24 +6,22 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-//import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.mybatis.param.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -31,10 +29,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 
 /**

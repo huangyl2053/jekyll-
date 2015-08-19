@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoJushoEdit;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 被保険者証を出力する際の住所編集方法について定義している業務コンフィグを取得します。
@@ -27,7 +27,7 @@ public class HihokenshashoJushoEditConfig {
      * コンストラクタです。
      */
     public HihokenshashoJushoEditConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -35,11 +35,11 @@ public class HihokenshashoJushoEditConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HihokenshashoJushoEditConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoJushoEditConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHihokenshashoJushoEdit, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoJushoEdit, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysHihokenshashoJushoEdit, RString> map = new EnumMap<>(ConfigKeysHihokenshashoJushoEdit.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoJushoEdit target : ConfigKeysHihokenshashoJushoEdit.values()) {

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 
-import jp.co.ndensan.reams.db.dbx.realservice.IJukyuDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -43,12 +42,11 @@ public class KaigoShikakuKihonHandler {
      * @param hihokenshaDaichoManager 被保険者台帳Manager
      * @param jukyuDaichoFinder 受給者台帳Finder
      */
-    KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager, IJukyuDaichoFinder jukyuDaichoFinder) {
-        this.div = div;
+//    KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager, IJukyuDaichoFinder jukyuDaichoFinder) {
+//        this.div = div;
 //        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
 //        this.jukyuDaichoFinder = jukyuDaichoFinder;
-    }
-
+//    }
     /**
      * 検索キーを元にデータを取得し、Divに設定します。
      *

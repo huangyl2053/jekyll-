@@ -1,6 +1,0 @@
-﻿shichosonCode,DbUDD001ShichosonCode,DbUDD001ShichosonCode,,,,,市町村コード,A
-nengetsu,UDD014YM,FlexibleYearMonth,,,,,年月,A
-currentNumber,int4,int,,,,,現在の番号,A
-minNumber,int4,int,,,,,開始番号,A
-maxNumber,int4,int,,,,,終了番号,A
-increment,int4,int,,,,,増分値,A

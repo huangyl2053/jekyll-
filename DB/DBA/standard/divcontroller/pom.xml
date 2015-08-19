@@ -18,11 +18,11 @@
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzRealService</artifactId>
+            <artifactId>UrzService</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbaRealService</artifactId>
+            <artifactId>DbaService</artifactId>
             <version>${project.version}</version>
             <exclusions>
                 <exclusion>
@@ -51,18 +51,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>

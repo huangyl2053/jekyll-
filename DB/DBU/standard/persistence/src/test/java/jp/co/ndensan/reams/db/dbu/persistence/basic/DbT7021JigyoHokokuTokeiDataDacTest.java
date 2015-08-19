@@ -6,6 +6,18 @@ package jp.co.ndensan.reams.db.dbu.persistence.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_報告年;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_報告月;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_市町村コード;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_横番号;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_統計対象区分;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_縦番号;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_表番号;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_集計単位;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_集計対象年;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_集計対象月;
+import static jp.co.ndensan.reams.db.dbu.entity.basic.helper.DbT7021JigyoHokokuTokeiDataEntityGenerator.DEFAULT_集計番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

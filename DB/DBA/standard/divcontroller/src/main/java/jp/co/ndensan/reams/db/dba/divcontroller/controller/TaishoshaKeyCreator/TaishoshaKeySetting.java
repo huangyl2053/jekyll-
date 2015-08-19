@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.TaishoshaKeyCreator;
 
+import jp.co.ndensan.reams.db.dba.business.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.TaishoshaKeyCreator.TaishoshaKeySettingDiv;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

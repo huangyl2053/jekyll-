@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbu.business.config;
 
 import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.config.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -67,8 +67,8 @@ public class ChohyoKyotsuJushoEditConfigTest {
         }
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
 
         when(mock.get(

@@ -23,15 +23,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -39,17 +35,26 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
+            <artifactId>DbaEntity</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbaEntity</artifactId>
+            <artifactId>DbaDefinition</artifactId>
             <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexDefinition</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

@@ -19,8 +19,8 @@ import static jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDat
 import static jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiData.toukeiTaishoKubun;
 import static jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiData.yokoNo;
 import jp.co.ndensan.reams.db.dbu.entity.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessorMethodSelector;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -129,6 +129,6 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業報告統計データエンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessorMethodSelector.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
