@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
+//import jp.co.ndensan.reams.db.dbb.business.core.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.choteiNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004Gemmen.fukaNendo;
@@ -17,13 +17,12 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -36,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N3317 塚田 萌
  */
-public class GemmenDac implements IModifiable<Gemmen> {
+public class GemmenDac implements IModifiable<DbT2004GemmenEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -48,18 +47,18 @@ public class GemmenDac implements IModifiable<Gemmen> {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @param 状態区分 状態区分
-     * @return Gemmen
+     * @return DbT2004GemmenEntity
      */
     @Transaction
-    public Optional<Gemmen> select減免ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
-            TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
+    public Optional<DbT2004GemmenEntity> select減免ByKeyAndState(FlexibleYear 調定年度, FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("状態区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -67,57 +66,57 @@ public class GemmenDac implements IModifiable<Gemmen> {
         DbT2004GemmenEntity entity = accessor.select().
                 table(DbT2004Gemmen.class).
                 where(and(
-                                eq(choteiNendo, 調定年度.value()),
-                                eq(fukaNendo, 賦課年度.value()),
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
                                 eq(tsuchishoNo, 通知書番号),
-                                eq(rirekiNo, 処理日時),
+                                eq(rirekiNo, 履歴番号),
                                 eq(jotaiKubun, 状態区分.code()))).
                 toObject(DbT2004GemmenEntity.class);
 
         return createModel(entity);
     }
 
-    private Optional<Gemmen> createModel(DbT2004GemmenEntity 減免エンティティ) {
+    private Optional<DbT2004GemmenEntity> createModel(DbT2004GemmenEntity 減免エンティティ) {
         if (減免エンティティ == null) {
             return Optional.empty();
         }
 
-        return Optional.of(new Gemmen(減免エンティティ));
+        return Optional.of(減免エンティティ);
     }
 
     @Override
-    public int insert(Gemmen data) {
+    public int insert(DbT2004GemmenEntity data) {
 
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 減免Dac.insert(data.getEntity());
+        result = 減免Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int update(Gemmen data) {
+    public int update(DbT2004GemmenEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 減免Dac.update(data.getEntity());
+        result = 減免Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int delete(Gemmen data) {
+    public int delete(DbT2004GemmenEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 減免Dac.delete(data.getEntity());
+        result = 減免Dac.save(data);
 
         return result;
     }

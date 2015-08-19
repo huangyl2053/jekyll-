@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist;
 
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;

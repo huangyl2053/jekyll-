@@ -13,12 +13,11 @@ import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2005KibetsuGemmen.shori
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -34,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n3317 塚田 萌
  */
-public class ChoshuHohoDac implements IModifiable<ChoshuHoho> {
+public class ChoshuHohoDac implements IModifiable<DbT2001ChoshuHohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -45,10 +44,10 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHoho> {
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
-     * @return ChoshuHoho
+     * @return DbT2001ChoshuHohoEntity
      */
     @Transaction
-    public Optional<ChoshuHoho> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
+    public Optional<DbT2001ChoshuHohoEntity> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -67,47 +66,47 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHoho> {
         return createModel(entities.isEmpty() ? null : entities.get(0));
     }
 
-    private Optional<ChoshuHoho> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
+    private Optional<DbT2001ChoshuHohoEntity> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
         if (徴収方法エンティティ == null) {
             return Optional.empty();
         }
 
-        return Optional.of(new ChoshuHoho(徴収方法エンティティ));
+        return Optional.of(徴収方法エンティティ);
     }
 
     @Override
-    public int insert(ChoshuHoho data) {
+    public int insert(DbT2001ChoshuHohoEntity data) {
 
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 徴収方法Dac.insert(data.getEntity());
+        result = 徴収方法Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int update(ChoshuHoho data) {
+    public int update(DbT2001ChoshuHohoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 徴収方法Dac.update(data.getEntity());
+        result = 徴収方法Dac.save(data);
 
         return result;
     }
 
     @Override
-    public int delete(ChoshuHoho data) {
+    public int delete(DbT2001ChoshuHohoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
-        result = 徴収方法Dac.delete(data.getEntity());
+        result = 徴収方法Dac.save(data);
 
         return result;
     }

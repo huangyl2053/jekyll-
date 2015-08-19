@@ -8,6 +8,7 @@ import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -129,7 +130,7 @@ public class DbT2012HokenryoRankDacTest extends DbbTestDacBase {
             DbT2012HokenryoRankEntity updateRecord = sut.selectByKey(
                     DEFAULT_賦課年度,
                     DEFAULT_市町村コード);
-            updateRecord.setRankKubun(new RString("3"));
+            updateRecord.setRankKubun(new RankKubun(new RString("3")));
 
             sut.save(updateRecord);
 

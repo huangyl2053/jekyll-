@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2012HokenryoRankDac;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -33,8 +33,8 @@ public class HokenryoRankDacTest {
 
     private static HokenryoRankDac sut;
     private static DbT2012HokenryoRankDac 保険料ランクDac;
-    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度);
-    private static final FukaNendo 賦課年度2 = new FukaNendo(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.plusYear(1));
+    private static final FlexibleYear 賦課年度1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
+    private static final FlexibleYear 賦課年度2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.plusYear(1);
     private static final LasdecCode 市町村コード1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
     private static final LasdecCode 市町村コード2 = new LasdecCode("000010");
 
@@ -66,12 +66,12 @@ public class HokenryoRankDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_保険料ランクモデル返す() {
-            assertThat(sut.select保険料ランクByKey(賦課年度1, 市町村コード1).get賦課年度(), is(賦課年度1));
+            assertThat(sut.select保険料ランクByKey(賦課年度1, 市町村コード1).getFukaNendo(), is(賦課年度1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select保険料ランクByKey(FukaNendo.EMPTY, 市町村コード1), is(nullValue()));
+            assertThat(sut.select保険料ランクByKey(FlexibleYear.EMPTY, 市町村コード1), is(nullValue()));
         }
     }
 
@@ -92,15 +92,15 @@ public class HokenryoRankDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_保険料ランクモデルリストを返す() {
-            List<HokenryoRankModel> modelList = sut.select保険料ランク一覧(賦課年度1);
+            List<DbT2012HokenryoRankEntity> modelList = sut.select保険料ランク一覧(賦課年度1);
             assertThat(modelList.size(), is(2));
-            assertThat(modelList.get(0).get市町村コード(), is(市町村コード1));
-            assertThat(modelList.get(1).get市町村コード(), is(市町村コード2));
+            assertThat(modelList.get(0).getShichosonCode(), is(市町村コード1));
+            assertThat(modelList.get(1).getShichosonCode(), is(市町村コード2));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            assertThat(sut.select保険料ランク一覧(FukaNendo.EMPTY).isEmpty(), is(true));
+            assertThat(sut.select保険料ランク一覧(FlexibleYear.EMPTY).isEmpty(), is(true));
         }
     }
 
@@ -113,8 +113,7 @@ public class HokenryoRankDacTest {
 
         @Test
         public void 全ての有効なモデルを持つHokenryoRankモデルを渡した時_insertは_1を返す() {
-            HokenryoRankModel model = new HokenryoRankModel(
-                    DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity());
+            DbT2012HokenryoRankEntity model = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
 
             assertThat(sut.insert(model), is(1));
         }
@@ -129,13 +128,12 @@ public class HokenryoRankDacTest {
 
         @Test
         public void モデルの状態がModifiedの時_updateは_1を返す() {
-            HokenryoRankModel model = new HokenryoRankModel(
-                    DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity());
+            DbT2012HokenryoRankEntity model = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
 
             sut.insert(model);
 
-            model.getEntity().initializeMd5();
-            model.set遡及年度(FlexibleYear.MAX);
+            model.initializeMd5();
+            model.setSokyuNendo(FlexibleYear.MAX);
 
             assertThat(sut.update(model), is(1));
         }
@@ -151,8 +149,7 @@ public class HokenryoRankDacTest {
 
         @Test
         public void 全ての有効なモデルを持つHokenryoRankモデルを渡した時_deleteは_1を返す() {
-            HokenryoRankModel model = new HokenryoRankModel(
-                    DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity());
+            DbT2012HokenryoRankEntity model = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
 
             sut.insert(model);
             assertThat(sut.delete(model), is(1));
@@ -168,8 +165,7 @@ public class HokenryoRankDacTest {
 
         @Test
         public void 全ての有効なモデルを持つHokenryoRankモデルを渡した時_deletePhysicalは_1を返す() {
-            HokenryoRankModel model = new HokenryoRankModel(
-                    DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity());
+            DbT2012HokenryoRankEntity model = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
 
             sut.insert(model);
             assertThat(sut.deletePhysical(model), is(1));
@@ -179,12 +175,12 @@ public class HokenryoRankDacTest {
     private static class TestSupport {
 
         public static void insertDbT2012(
-                FukaNendo 賦課年度,
+                FlexibleYear 賦課年度,
                 LasdecCode 市町村コード) {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
-            entity.setFukaNendo(賦課年度.value());
+            entity.setFukaNendo(賦課年度);
             entity.setShichosonCode(市町村コード);
-            保険料ランクDac.insert(entity);
+            保険料ランクDac.save(entity);
         }
     }
 }

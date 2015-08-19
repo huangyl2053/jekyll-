@@ -90,7 +90,7 @@ public class HokenryoDankaiTest {
 
     private static DbT2013HokenryoDankaiEntity createHokenryoDankaiModel(FukaNendo 賦課年度, RString 段階区分, RString 特例表記) {
         DbT2013HokenryoDankaiEntity model = mock(DbT2013HokenryoDankaiEntity.class);
-        when(model.getFukaNendo()).thenReturn(賦課年度);
+        when(model.getFukaNendo()).thenReturn(賦課年度.value());
         when(model.getDankaiKubun()).thenReturn(段階区分);
         when(model.getTokureiHyoki()).thenReturn(特例表記);
         return model;
