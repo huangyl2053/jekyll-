@@ -16,42 +16,32 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojinMeisho;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin._Hojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin._HojinMeisho;
 //import jp.co.ndensan.reams.ur.urz.business._Koza;
 //import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
-//import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IHojinMeisho;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinMeisho;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Hojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin._Hojin;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._HojinMeisho;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin._HojinMeisho;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.HojinKeitaiFuyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.HojinKeitai;
+import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.NinkaChienDantaiTorokuShikakuKubun;
 //import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitai;
-import jp.co.ndensan.reams.ua.uax.definition.valueobject.code.HojinKeitai;
-import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiFuyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.valueobject.code.NinkaChienDantaiTorokuShikakuKubun;
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.mock;
-import jp.co.ndensan.reams.ua.uax.entity.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.basic._ShikibetsuTaishoEntityHolder;
-import jp.co.ndensan.reams.ur.urc.business.IKoza;
-import jp.co.ndensan.reams.ur.urc.business.KinyuKikan;
-import jp.co.ndensan.reams.ur.urc.business.KinyuKikanShiten;
-import jp.co.ndensan.reams.ur.urc.entity.basic.UrT0131KinyuKikanEntity;
-import jp.co.ndensan.reams.ur.urc.entity.basic.UrT0132KinyuKikanShitenEntity;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic._ShikibetsuTaishoEntityHolder;
 
 /**
  * 受領委任事業者のテストヘルパーです。
@@ -156,18 +146,16 @@ public class JuryoininJigyoshaMock {
 //                create金融機関(),
 //                create金融機関支店());
 //    }
-    private static KinyuKikan create金融機関() {
-        //ビジネスクラスが変更となったため、暫定で対応
-        return new KinyuKikan(new UrT0131KinyuKikanEntity(), null);
-
+//    private static KinyuKikan create金融機関() {
+//        //ビジネスクラスが変更となったため、暫定で対応
+//        return new KinyuKikan(new UrT0131KinyuKikanEntity(), null);
 //        return new _KinyuKikan(new KinyuKikanCode(new RString("0123")), new RString("金融機関名称"), new RString("金融機関カナ名称"),
 //                new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
-    }
-
-    private static KinyuKikanShiten create金融機関支店() {
-        //ビジネスクラスが変更となったため、暫定で対応
-        return new KinyuKikanShiten(new UrT0132KinyuKikanShitenEntity());
+//    }
+//    private static KinyuKikanShiten create金融機関支店() {
+//        //ビジネスクラスが変更となったため、暫定で対応
+//        return new KinyuKikanShiten(new UrT0132KinyuKikanShitenEntity());
 //        return new KinyuKikanShiten(new RString("0123"), new RString("支店コード"), new RString("支店名称"), new RString("金融機関カナ名称"),
 //                new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
-    }
+//    }
 }

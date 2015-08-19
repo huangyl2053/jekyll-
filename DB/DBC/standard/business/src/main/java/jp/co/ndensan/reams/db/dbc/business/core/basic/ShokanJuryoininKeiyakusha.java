@@ -47,13 +47,12 @@ public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakus
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setUketsukeYMD(受付年月日);
-        this.entity.setRirekiNo(履歴番号.intValue());
+        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanJuryoininKeiyakushaIdentifier(
                 被保険者番号,
                 証記載保険者番号,
                 受付年月日,
-                履歴番号.intValue()
-        );
+                履歴番号);
     }
 
     /**
@@ -119,7 +118,7 @@ public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakus
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return new Decimal(entity.getRirekiNo());
+        return entity.getRirekiNo();
     }
 
     /**
