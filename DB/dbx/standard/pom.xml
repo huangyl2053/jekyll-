@@ -18,9 +18,7 @@
         <module>batchservice</module>
         <module>definition</module>
         <module>persistence</module>
-        <module>realservice</module>
         <module>divcontroller</module>
-        <module>model</module>
         <module>testhelper</module>
         <module>service</module>
     </modules>
