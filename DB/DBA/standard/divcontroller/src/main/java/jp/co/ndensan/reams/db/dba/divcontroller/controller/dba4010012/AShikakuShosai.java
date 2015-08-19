@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.ShikakuShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -53,7 +53,7 @@ public class AShikakuShosai {
 
     //TODO #52997
     //ヘッダー情報の初期表示の制御、値の設定などを行います。
-    private void initializedShikakuShosai(ShikakuShosaiDiv div, HihokenshaDaichoModel hihokenshaDaicho) {
+    private void initializedShikakuShosai(ShikakuShosaiDiv div, DbT1001HihokenshaDaichoEntity hihokenshaDaicho) {
         //TODO #52997
         //1, 資格詳細画面のTablePanel上に配置されている、取得日などのヘッダー情報に値を設定する。
         //2, 業務Configの保険者情報を元に、ヘッダー情報の表示非表示を設定する。

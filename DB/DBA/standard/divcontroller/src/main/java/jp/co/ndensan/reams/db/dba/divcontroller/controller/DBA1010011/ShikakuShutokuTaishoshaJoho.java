@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.Shik
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ua.uax.divcontroller.controller.commonchilddiv.atenashokaisimple.AtenaShokaiSimple;
+import jp.co.ndensan.reams.ua.uax.divcontroller.controller.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +42,7 @@ public class ShikakuShutokuTaishoshaJoho {
         DemoKojin demoKojin = new DemoKojin("第2号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
-//        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
+//      AtenaShokaiSimple.setData(taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

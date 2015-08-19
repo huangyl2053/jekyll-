@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
+import jp.co.ndensan.reams.db.dba.business.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.HihokenshaHakkoDiv;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
@@ -12,8 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.Hihoken
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.realservice.report.HihokenshashoPrinter;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 //import jp.co.ndensan.reams.ur.urd.entity.basic.UrT0505ShoKofuKaishuEntity;
 //import jp.co.ndensan.reams.ur.urd.model.IShoKofuKaishuKiroku;
@@ -82,12 +81,13 @@ public class HihokenshaHakko {
 
             //TODO n8187 久保田 画面遷移の確認のために対象者キーにダミーデータを設定
             taishoshaKey = new TaishoshaKey(new HihokenshaNo("1234567890"), ShikibetsuCode.EMPTY, SetaiCode.EMPTY);
-            HihokenshashoPrinter printer = new HihokenshashoPrinter();
-            SourceDataCollection sdc = printer.print(
-                    taishoshaKey.get被保険者番号(),
-                    div.getCcdHihokenshaShikakuHakko().create証発行情報(),
-                    position);
-            return ResponseDatas.newResponseData(sdc);
+            //TODO n8178 城間篤人 帳票に必要なクラスをrealServiceからserviceに移行後にコメントアウト解除
+//            HihokenshashoPrinter printer = new HihokenshashoPrinter();
+//            SourceDataCollection sdc = printer.print(
+//                    taishoshaKey.get被保険者番号(),
+//                    div.getCcdHihokenshaShikakuHakko().create証発行情報(),
+//                    position);
+            return ResponseDatas.newResponseData(null);
         }
     }
 

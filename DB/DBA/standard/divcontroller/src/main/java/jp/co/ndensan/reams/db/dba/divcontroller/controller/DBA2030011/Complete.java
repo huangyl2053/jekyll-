@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.CompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

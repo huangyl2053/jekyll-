@@ -5,15 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiKaijoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JuchochiTokureiTekiyoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.JushochiTokureiValidator;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
-import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.JushochiTokureiUnduplicateValidator;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -32,7 +30,7 @@ public final class ShikakuShosaiValidationHelper {
     private ShikakuShosaiValidationHelper() {
     }
 
-    public static ValidationMessageControlPairs validate画面起動時(HihokenshaDaichoModel target, IItemList<HihokenshaDaichoModel> daichoList,
+    public static ValidationMessageControlPairs validate画面起動時(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
@@ -40,7 +38,7 @@ public final class ShikakuShosaiValidationHelper {
         return dictionary.check(messages);
     }
 
-    public static ValidationMessageControlPairs validate保存前(HihokenshaDaichoModel target, IItemList<HihokenshaDaichoModel> daichoList,
+    public static ValidationMessageControlPairs validate保存前(HihokenshaDaicho target, IItemList<HihokenshaDaicho> daichoList,
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
