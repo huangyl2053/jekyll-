@@ -8,11 +8,15 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3083DaisanshaKoiKyushoM
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -46,10 +50,10 @@ public class DaisanshaKoiKyushoMeisaiIdentifierTest extends DbcTestBase {
 
     public static class シリアライズテスト extends DbcTestBase {
 
-//        @Test
-//        public void シリアライズできる() {
-//            DaisanshaKoiKyushoMeisaiIdentifier sut = new DaisanshaKoiKyushoMeisaiIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            DaisanshaKoiKyushoMeisaiIdentifier sut = new DaisanshaKoiKyushoMeisaiIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
+            assertThat(sut, is(serializable()));
+        }
     }
 }

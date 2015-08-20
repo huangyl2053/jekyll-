@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3070KogakuGassanJikoFutanGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,23 @@ public class KogakuGassanJikoFutanGakuBuilderTest extends DbcTestBase {
     private static DbT3070KogakuGassanJikoFutanGakuEntity KogakuGassanJikoFutanGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYear 主キー名2;
+    private static HokenshaNo 主キー名3;
+    private static RString 主キー名4;
+    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_対象年度;
+        主キー名3 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_保険者番号;
+        主キー名4 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_支給申請書整理番号;
+        主キー名5 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KogakuGassanJikoFutanGakuBuilder sut;
         private static KogakuGassanJikoFutanGaku business;
@@ -42,14 +53,15 @@ public class KogakuGassanJikoFutanGakuBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuEntity = new DbT3070KogakuGassanJikoFutanGakuEntity();
-            KogakuGassanJikoFutanGakuEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuEntity.setTaishoNendo(主キー名2);
 
             business = new KogakuGassanJikoFutanGaku(KogakuGassanJikoFutanGakuEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号).build();
@@ -130,7 +142,7 @@ public class KogakuGassanJikoFutanGakuBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の70歳以上の者に係る所得区分は_設定した値と同じ70歳以上の者に係る所得区分を返す() {
-            business = sut.set70歳以上の者に係る所得区分(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_70歳以上の者に係る所得区分).build();
+            business = sut.set所得区分_70歳以上の者に係る(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_70歳以上の者に係る所得区分).build();
             assertThat(business.get70歳以上の者に係る所得区分(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_70歳以上の者に係る所得区分));
         }
 
@@ -213,51 +225,51 @@ public class KogakuGassanJikoFutanGakuBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の合計・自己負担額は_設定した値と同じ合計・自己負担額を返す() {
-            business = sut.set合計・自己負担額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・自己負担額).build();
-            assertThat(business.get合計・自己負担額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・自己負担額));
+        public void 戻り値の合計_自己負担額は_設定した値と同じ合計_自己負担額を返す() {
+            business = sut.set合計_自己負担額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_自己負担額).build();
+            assertThat(business.get合計_自己負担額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_自己負担額));
         }
 
         @Test
-        public void 戻り値の合計・70-74自己負担額（内訳）は_設定した値と同じ合計・70-74自己負担額（内訳）を返す() {
-            business = sut.set合計・70-74自己負担額（内訳）(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70-74自己負担額（内訳）).build();
-            assertThat(business.get合計・70-74自己負担額（内訳）(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70-74自己負担額（内訳）));
+        public void 戻り値の合計_70_74自己負担額_内訳は_設定した値と同じ合計_70_74自己負担額_内訳を返す() {
+            business = sut.set合計_70_74自己負担額_内訳(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70_74自己負担額_内訳).build();
+            assertThat(business.get合計_70_74自己負担額_内訳(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70_74自己負担額_内訳));
         }
 
         @Test
-        public void 戻り値の合計・70未満高額支給額は_設定した値と同じ合計・70未満高額支給額を返す() {
-            business = sut.set合計・70未満高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70未満高額支給額).build();
-            assertThat(business.get合計・70未満高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70未満高額支給額));
+        public void 戻り値の合計_70未満高額支給額は_設定した値と同じ合計_70未満高額支給額を返す() {
+            business = sut.set合計_70未満高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70未満高額支給額).build();
+            assertThat(business.get合計_70未満高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70未満高額支給額));
         }
 
         @Test
-        public void 戻り値の合計・70-74高額支給額は_設定した値と同じ合計・70-74高額支給額を返す() {
-            business = sut.set合計・70-74高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70-74高額支給額).build();
-            assertThat(business.get合計・70-74高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計・70-74高額支給額));
+        public void 戻り値の合計_70_74高額支給額は_設定した値と同じ合計_70_74高額支給額を返す() {
+            business = sut.set合計_70_74高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70_74高額支給額).build();
+            assertThat(business.get合計_70_74高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_合計_70_74高額支給額));
         }
 
         @Test
-        public void 戻り値の補正済・合計・自己負担額は_設定した値と同じ補正済・合計・自己負担額を返す() {
-            business = sut.set補正済・合計・自己負担額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・自己負担額).build();
-            assertThat(business.get補正済・合計・自己負担額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・自己負担額));
+        public void 戻り値の補正済_合計_自己負担額は_設定した値と同じ補正済_合計_自己負担額を返す() {
+            business = sut.set補正済_合計_自己負担額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_自己負担額).build();
+            assertThat(business.get補正済_合計_自己負担額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_自己負担額));
         }
 
         @Test
-        public void 戻り値の補正済・合計・70-74自己負担額（内訳）は_設定した値と同じ補正済・合計・70-74自己負担額（内訳）を返す() {
-            business = sut.set補正済・合計・70-74自己負担額（内訳）(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70-74自己負担額（内訳）).build();
-            assertThat(business.get補正済・合計・70-74自己負担額（内訳）(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70-74自己負担額（内訳）));
+        public void 戻り値の補正済_合計_70_74自己負担額_内訳は_設定した値と同じ補正済_合計_70_74自己負担額_内訳を返す() {
+            business = sut.set補正済_合計_70_74自己負担額_内訳(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70_74自己負担額_内訳).build();
+            assertThat(business.get補正済_合計_70_74自己負担額_内訳(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70_74自己負担額_内訳));
         }
 
         @Test
-        public void 戻り値の補正済・合計・70未満高額支給額は_設定した値と同じ補正済・合計・70未満高額支給額を返す() {
-            business = sut.set補正済・合計・70未満高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70未満高額支給額).build();
-            assertThat(business.get補正済・合計・70未満高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70未満高額支給額));
+        public void 戻り値の補正済_合計_70未満高額支給額は_設定した値と同じ補正済_合計_70未満高額支給額を返す() {
+            business = sut.set補正済_合計_70未満高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70未満高額支給額).build();
+            assertThat(business.get補正済_合計_70未満高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70未満高額支給額));
         }
 
         @Test
-        public void 戻り値の補正済・合計・70-74高額支給額は_設定した値と同じ補正済・合計・70-74高額支給額を返す() {
-            business = sut.set補正済・合計・70-74高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70-74高額支給額).build();
-            assertThat(business.get補正済・合計・70-74高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済・合計・70-74高額支給額));
+        public void 戻り値の補正済_合計_70_74高額支給額は_設定した値と同じ補正済_合計_70_74高額支給額を返す() {
+            business = sut.set補正済_合計_70_74高額支給額(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70_74高額支給額).build();
+            assertThat(business.get補正済_合計_70_74高額支給額(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_補正済_合計_70_74高額支給額));
         }
 
         @Test
@@ -375,9 +387,9 @@ public class KogakuGassanJikoFutanGakuBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の後期・国保処理区分は_設定した値と同じ後期・国保処理区分を返す() {
-            business = sut.set後期・国保処理区分(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_後期・国保処理区分).build();
-            assertThat(business.get後期・国保処理区分(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_後期・国保処理区分));
+        public void 戻り値の後期_国保処理区分は_設定した値と同じ後期_国保処理区分を返す() {
+            business = sut.set後期_国保処理区分(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_後期_国保処理区分).build();
+            assertThat(business.get後期_国保処理区分(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_後期_国保処理区分));
         }
 
     }

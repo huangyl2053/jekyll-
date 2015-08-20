@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7121ChiikiMitchakuServiceCodeE
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7121ChiikiMitchakuServiceCodeEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -187,10 +188,10 @@ public class ChiikiMitchakuServiceCodeTest extends DbcTestBase {
             sut = new ChiikiMitchakuServiceCode(ChiikiMitchakuServiceCodeEntity);
         }
 
-//        @Test
-//        public void シリアライズできる() {
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            assertThat(sut, is(IsSerializable.serializable()));
+        }
     }
 
     public static class deletedテスト extends DbcTestBase {

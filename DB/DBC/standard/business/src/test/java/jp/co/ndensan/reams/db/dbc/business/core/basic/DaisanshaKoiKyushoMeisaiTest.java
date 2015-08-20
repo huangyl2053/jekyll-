@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3083DaisanshaKoiKyushoM
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -201,10 +202,10 @@ public class DaisanshaKoiKyushoMeisaiTest extends DbcTestBase {
             sut = new DaisanshaKoiKyushoMeisai(DaisanshaKoiKyushoMeisaiEntity);
         }
 
-//        @Test
-//        public void シリアライズできる() {
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            assertThat(sut, is(serializable()));
+        }
     }
 
     public static class deletedテスト extends DbcTestBase {

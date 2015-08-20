@@ -6,10 +6,14 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3082DaisanshaKoiKyushoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -37,10 +41,10 @@ public class DaisanshaKoiKyushoIdentifierTest extends DbcTestBase {
 
     public static class シリアライズテスト extends DbcTestBase {
 
-//        @Test
-//        public void シリアライズできる() {
-//            DaisanshaKoiKyushoIdentifier sut = new DaisanshaKoiKyushoIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            DaisanshaKoiKyushoIdentifier sut = new DaisanshaKoiKyushoIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut, is(serializable()));
+        }
     }
 }

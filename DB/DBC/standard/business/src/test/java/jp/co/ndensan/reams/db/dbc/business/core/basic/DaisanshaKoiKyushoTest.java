@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3082DaisanshaKoiKyushoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3082DaisanshaKoiKyushoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -222,10 +223,10 @@ public class DaisanshaKoiKyushoTest extends DbcTestBase {
             sut = new DaisanshaKoiKyusho(DaisanshaKoiKyushoEntity);
         }
 
-//        @Test
-//        public void シリアライズできる() {
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            assertThat(sut, is(serializable()));
+        }
     }
 
     public static class deletedテスト extends DbcTestBase {

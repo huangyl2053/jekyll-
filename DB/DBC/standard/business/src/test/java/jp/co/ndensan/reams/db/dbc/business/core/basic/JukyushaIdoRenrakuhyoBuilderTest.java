@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3001JukyushaIdoRenrakuhyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,25 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
     private static DbT3001JukyushaIdoRenrakuhyoEntity JukyushaIdoRenrakuhyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleDate 主キー名1;
+    private static RString 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日;
+        主キー名2 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動区分コード;
+        主キー名3 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_受給者異動事由;
+        主キー名4 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static JukyushaIdoRenrakuhyoBuilder sut;
         private static JukyushaIdoRenrakuhyo business;
@@ -42,14 +55,15 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             JukyushaIdoRenrakuhyoEntity = new DbT3001JukyushaIdoRenrakuhyoEntity();
-            JukyushaIdoRenrakuhyoEntity.setXXX(主キー名1);
-            JukyushaIdoRenrakuhyoEntity.setXXX(主キー名2);
+            JukyushaIdoRenrakuhyoEntity.setIdoYMD(主キー名1);
+            JukyushaIdoRenrakuhyoEntity.setIdoKubunCode(主キー名2);
 
             business = new JukyushaIdoRenrakuhyo(JukyushaIdoRenrakuhyoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の異動年月日は_設定した値と同じ異動年月日を返す() {
             business = sut.set異動年月日(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日).build();
@@ -135,9 +149,9 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の広域連合（政令市）保険者番号は_設定した値と同じ広域連合（政令市）保険者番号を返す() {
-            business = sut.set広域連合（政令市）保険者番号(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_広域連合（政令市）保険者番号).build();
-            assertThat(business.get広域連合（政令市）保険者番号(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_広域連合（政令市）保険者番号));
+        public void 戻り値の広域連合_政令市_保険者番号は_設定した値と同じ広域連合_政令市_保険者番号を返す() {
+            business = sut.set広域連合_政令市_保険者番号(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_広域連合_政令市_保険者番号).build();
+            assertThat(business.get広域連合_政令市_保険者番号(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_広域連合_政令市_保険者番号));
         }
 
         @Test
@@ -501,21 +515,21 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の居宅費（新１）負担限度額は_設定した値と同じ居宅費（新１）負担限度額を返す() {
-            business = sut.set居宅費（新１）負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新１）負担限度額).build();
-            assertThat(business.get居宅費（新１）負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新１）負担限度額));
+        public void 戻り値の居宅費_新１_負担限度額は_設定した値と同じ居宅費_新１_負担限度額を返す() {
+            business = sut.set居宅費_新１_負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新１_負担限度額).build();
+            assertThat(business.get居宅費_新１_負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新１_負担限度額));
         }
 
         @Test
-        public void 戻り値の居宅費（新２）負担限度額は_設定した値と同じ居宅費（新２）負担限度額を返す() {
-            business = sut.set居宅費（新２）負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新２）負担限度額).build();
-            assertThat(business.get居宅費（新２）負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新２）負担限度額));
+        public void 戻り値の居宅費_新２_負担限度額は_設定した値と同じ居宅費_新２_負担限度額を返す() {
+            business = sut.set居宅費_新２_負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新２_負担限度額).build();
+            assertThat(business.get居宅費_新２_負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新２_負担限度額));
         }
 
         @Test
-        public void 戻り値の居宅費（新３）負担限度額は_設定した値と同じ居宅費（新３）負担限度額を返す() {
-            business = sut.set居宅費（新３）負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新３）負担限度額).build();
-            assertThat(business.get居宅費（新３）負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費（新３）負担限度額));
+        public void 戻り値の居宅費_新３_負担限度額は_設定した値と同じ居宅費_新３_負担限度額を返す() {
+            business = sut.set居宅費_新３_負担限度額(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新３_負担限度額).build();
+            assertThat(business.get居宅費_新３_負担限度額(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_居宅費_新３_負担限度額));
         }
 
         @Test

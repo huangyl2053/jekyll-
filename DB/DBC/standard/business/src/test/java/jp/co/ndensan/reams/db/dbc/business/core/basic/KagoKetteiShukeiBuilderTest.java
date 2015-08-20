@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3060KagoKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3060KagoKetteiShukeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class KagoKetteiShukeiBuilderTest extends DbcTestBase {
     private static DbT3060KagoKetteiShukeiEntity KagoKetteiShukeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月;
+        主キー名2 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_保険者区分;
+        主キー名3 = DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KagoKetteiShukeiBuilder sut;
         private static KagoKetteiShukei business;
@@ -42,14 +47,15 @@ public class KagoKetteiShukeiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KagoKetteiShukeiEntity = new DbT3060KagoKetteiShukeiEntity();
-            KagoKetteiShukeiEntity.setXXX(主キー名1);
-            KagoKetteiShukeiEntity.setXXX(主キー名2);
+            KagoKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            KagoKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
             business = new KagoKetteiShukei(KagoKetteiShukeiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の取扱年月は_設定した値と同じ取扱年月を返す() {
             business = sut.set取扱年月(DbT3060KagoKetteiShukeiEntityGenerator.DEFAULT_取扱年月).build();

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3080DaisanshaKoiJidanEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,10 +42,10 @@ public class DaisanshaKoiJidanIdentifierTest extends DbcTestBase {
 
     public static class シリアライズテスト extends DbcTestBase {
 
-//        @Test
-//        public void シリアライズできる() {
-//            DaisanshaKoiJidanIdentifier sut = new DaisanshaKoiJidanIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
-//            assertThat(sut, is(serializable()));
-//        }
+        @Test
+        public void シリアライズできる() {
+            DaisanshaKoiJidanIdentifier sut = new DaisanshaKoiJidanIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut, is(serializable()));
+        }
     }
 }

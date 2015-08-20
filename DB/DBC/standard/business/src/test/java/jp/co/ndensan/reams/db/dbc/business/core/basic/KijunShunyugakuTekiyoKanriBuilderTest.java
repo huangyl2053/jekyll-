@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +28,21 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
     private static DbT3116KijunShunyugakuTekiyoKanriEntity KijunShunyugakuTekiyoKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SetaiCode 主キー名1;
+    private static FlexibleYear 主キー名2;
+    private static Decimal 主キー名3;
+    private static HokenshaNo 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
+        主キー名2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
+        主キー名3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+        主キー名4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KijunShunyugakuTekiyoKanriBuilder sut;
         private static KijunShunyugakuTekiyoKanri business;
@@ -42,14 +50,15 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = new DbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
 
             business = new KijunShunyugakuTekiyoKanri(KijunShunyugakuTekiyoKanriEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の世帯コードは_設定した値と同じ世帯コードを返す() {
             business = sut.set世帯コード(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード).build();
@@ -141,15 +150,15 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の年少扶養控除（16歳未満）人数は_設定した値と同じ年少扶養控除（16歳未満）人数を返す() {
-            business = sut.set年少扶養控除（16歳未満）人数(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除（16歳未満）人数).build();
-            assertThat(business.get年少扶養控除（16歳未満）人数(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除（16歳未満）人数));
+        public void 戻り値の年少扶養控除_16歳未満人数は_設定した値と同じ年少扶養控除_16歳未満人数を返す() {
+            business = sut.set年少扶養控除_16歳未満人数(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除_16歳未満_人数).build();
+            assertThat(business.get年少扶養控除_16歳未満人数(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除_16歳未満_人数));
         }
 
         @Test
-        public void 戻り値の年少扶養控除（16～18歳未満）人数は_設定した値と同じ年少扶養控除（16～18歳未満）人数を返す() {
-            business = sut.set年少扶養控除（16～18歳未満）人数(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除（16～18歳未満）人数).build();
-            assertThat(business.get年少扶養控除（16～18歳未満）人数(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除（16～18歳未満）人数));
+        public void 戻り値の年少扶養控除_16_18歳未満人数は_設定した値と同じ年少扶養控除_16_18歳未満人数を返す() {
+            business = sut.set年少扶養控除_16から18歳未満人数(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除_16_18歳未満_人数).build();
+            assertThat(business.get年少扶養控除_16から18歳未満人数(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年少扶養控除_16_18歳未満_人数));
         }
 
         @Test
@@ -171,9 +180,9 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の課税所得額（控除後）は_設定した値と同じ課税所得額（控除後）を返す() {
-            business = sut.set課税所得額（控除後）(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_課税所得額（控除後）).build();
-            assertThat(business.get課税所得額（控除後）(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_課税所得額（控除後）));
+        public void 戻り値の課税所得額_控除後は_設定した値と同じ課税所得額_控除後を返す() {
+            business = sut.set課税所得額_控除後(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_課税所得額_控除後).build();
+            assertThat(business.get課税所得額_控除後(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_課税所得額_控除後));
         }
 
     }

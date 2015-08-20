@@ -4,11 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +31,18 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
     private static DbT3116KijunShunyugakuTekiyoKanriEntity KijunShunyugakuTekiyoKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static SetaiCode 主キー名1;
+    private static FlexibleYear 主キー名2;
+    private static Decimal 主キー名3;
+    private static HokenshaNo 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯コード;
+        主キー名2 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_年度;
+        主キー名3 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_履歴番号;
+        主キー名4 = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_被保険者番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +52,33 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KijunShunyugakuTekiyoKanri(null, 主キー名2);
+            sut = new KijunShunyugakuTekiyoKanri(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KijunShunyugakuTekiyoKanri(主キー名1, null);
+            sut = new KijunShunyugakuTekiyoKanri(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT3116KijunShunyugakuTekiyoKanriEntityにセットされている() {
-            sut = new KijunShunyugakuTekiyoKanri(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KijunShunyugakuTekiyoKanri(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.get世帯コード(), is(主キー名1));
+            assertThat(sut.get年度(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKijunShunyugakuTekiyoKanriIdentifierにセットされている() {
-            sut = new KijunShunyugakuTekiyoKanri(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KijunShunyugakuTekiyoKanri(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.identifier().get世帯コード(), is(主キー名1));
+            assertThat(sut.identifier().get年度(), is(主キー名2));
         }
     }
 
@@ -82,8 +89,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +103,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
             sut = new KijunShunyugakuTekiyoKanri(KijunShunyugakuTekiyoKanriEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get世帯コード(), is(主キー名1));
+            assertThat(sut.identifier().get年度(), is(主キー名2));
         }
     }
 
@@ -108,8 +115,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
 
             sut = new KijunShunyugakuTekiyoKanri(KijunShunyugakuTekiyoKanriEntity);
         }
@@ -190,13 +197,13 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         }
 
         @Test
-        public void get年少扶養控除（16歳未満）人数は_entityが持つ年少扶養控除（16歳未満）人数を返す() {
-            assertThat(sut.get年少扶養控除（16歳未満）人数(), is(KijunShunyugakuTekiyoKanriEntity.getNenshoFuyokojoUnder16Ninzu()));
+        public void get年少扶養控除_16歳未満人数は_entityが持つ年少扶養控除_16歳未満人数を返す() {
+            assertThat(sut.get年少扶養控除_16歳未満人数(), is(KijunShunyugakuTekiyoKanriEntity.getNenshoFuyokojoUnder16Ninzu()));
         }
 
         @Test
-        public void get年少扶養控除（16～18歳未満）人数は_entityが持つ年少扶養控除（16～18歳未満）人数を返す() {
-            assertThat(sut.get年少扶養控除（16～18歳未満）人数(), is(KijunShunyugakuTekiyoKanriEntity.getNenshoFuyokojoOver16Ninzu()));
+        public void get年少扶養控除_16_18歳未満人数は_entityが持つ年少扶養控除_16_18歳未満人数を返す() {
+            assertThat(sut.get年少扶養控除_16から18歳未満人数(), is(KijunShunyugakuTekiyoKanriEntity.getNenshoFuyokojoOver16Ninzu()));
         }
 
         @Test
@@ -215,8 +222,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         }
 
         @Test
-        public void get課税所得額（控除後）は_entityが持つ課税所得額（控除後）を返す() {
-            assertThat(sut.get課税所得額（控除後）(), is(KijunShunyugakuTekiyoKanriEntity.getKazeiShotokugakuKojogo()));
+        public void get課税所得額_控除後は_entityが持つ課税所得額_控除後を返す() {
+            assertThat(sut.get課税所得額_控除後(), is(KijunShunyugakuTekiyoKanriEntity.getKazeiShotokugakuKojogo()));
         }
     }
 
@@ -227,8 +234,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
 
             sut = new KijunShunyugakuTekiyoKanri(KijunShunyugakuTekiyoKanriEntity);
         }
@@ -246,8 +253,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
 
             sut = new KijunShunyugakuTekiyoKanri(KijunShunyugakuTekiyoKanriEntity);
         }
@@ -266,8 +273,8 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KijunShunyugakuTekiyoKanriEntity = DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.createDbT3116KijunShunyugakuTekiyoKanriEntity();
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名1);
-            KijunShunyugakuTekiyoKanriEntity.setXXX(主キー名2);
+            KijunShunyugakuTekiyoKanriEntity.setSetaiCode(主キー名1);
+            KijunShunyugakuTekiyoKanriEntity.setNendo(主キー名2);
 
         }
 
