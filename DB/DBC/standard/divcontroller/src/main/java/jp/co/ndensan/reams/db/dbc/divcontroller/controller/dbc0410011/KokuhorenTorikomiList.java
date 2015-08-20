@@ -10,8 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.KokuhorenJohoTorikomi;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011.dgKokuhorenTorikomiList_Row;
-import jp.co.ndensan.reams.db.dbc.model.relate.KokuhorenJohoTorikomiBatchKidoModel;
-import jp.co.ndensan.reams.db.dbc.model.relate.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -69,42 +67,38 @@ public class KokuhorenTorikomiList {
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(KokuhorenTorikomiListDiv panel) {
 
         dgKokuhorenTorikomiList_Row row = panel.getDgKokuhorenTorikomiList().getSelectedItems().get(0);
-        KokuhorenJohoTorikomiBatchKidoModel viewStateHolder = new KokuhorenJohoTorikomiBatchKidoModel();
-        viewStateHolder.setバッチID(row.getBatchID());
-        viewStateHolder.set交換識別番号(row.getKokanShikibetsuNo());
-        viewStateHolder.set再処理フラグ(row.getSaishoriFlag());
-        viewStateHolder.set処理名(row.getTxtTorikomiJoho());
-        viewStateHolder.set処理年月(panel.getTxtShoriYM().getValue().seireki().separator(Separator.NONE).getYearMonth());
+//        KokuhorenJohoTorikomiBatchKidoModel viewStateHolder = new KokuhorenJohoTorikomiBatchKidoModel();
+        //      viewStateHolder.setバッチID(row.getBatchID());
+        //      viewStateHolder.set交換識別番号(row.getKokanShikibetsuNo());
+        //      viewStateHolder.set再処理フラグ(row.getSaishoriFlag());
+        //      viewStateHolder.set処理名(row.getTxtTorikomiJoho());
+        //     viewStateHolder.set処理年月(panel.getTxtShoriYM().getValue().seireki().separator(Separator.NONE).getYearMonth());
 //        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, viewStateHolder);
 
         return ResponseData.of(panel).respond();
     }
 
-    private dgKokuhorenTorikomiList_Row createKokuhorenTorikomiRow(KokuhorenTorikomiJohoModel model) {
-
-        dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxNum(), new TextBoxDate(), RString.EMPTY);
-        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
-        RStringBuilder rsb = new RStringBuilder();
-
-        row.setTorikomiFlag(business.get取込フラグ(model.get処理名()));
-        rsb.append("[");
-        rsb.append(model.get交換識別番号());
-        rsb.append("]");
-        rsb.append(model.get処理名());
-        row.setTxtTorikomiJoho(rsb.toRString());
-
-        row.setTxtZenZengetsu(business.get処理状態(model.get前々月処理状態()));
-        row.setTxtZengetsu(business.get処理状態(model.get前月処理状態()));
-        row.setTxtTogetsuJotai(model.get当月処理状態());
-        row.setTxtShoriNichiji(model.get当月処理日時().toDateString());
-
-        row.setSaishoriFlag(business.get再処理フラグコード(model.get処理名()));
-        row.getIchiranHyojijun().setValue(new Decimal(model.get一覧表示順().toString()));
-        row.setBatchID(model.getバッチID());
-        row.setKokanShikibetsuNo(model.get交換識別番号());
+//    private dgKokuhorenTorikomiList_Row createKokuhorenTorikomiRow(KokuhorenTorikomiJohoModel model) {
+//        dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxNum(), new TextBoxDate(), RString.EMPTY);
+//        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
+//        RStringBuilder rsb = new RStringBuilder();
+//        row.setTorikomiFlag(business.get取込フラグ(model.get処理名()));
+//        rsb.append("[");
+//        rsb.append(model.get交換識別番号());
+//        rsb.append("]");
+//        rsb.append(model.get処理名());
+//        row.setTxtTorikomiJoho(rsb.toRString());
+//        row.setTxtZenZengetsu(business.get処理状態(model.get前々月処理状態()));
+//        row.setTxtZengetsu(business.get処理状態(model.get前月処理状態()));
+//        row.setTxtTogetsuJotai(model.get当月処理状態());
+//        row.setTxtShoriNichiji(model.get当月処理日時().toDateString());
+//        row.setSaishoriFlag(business.get再処理フラグコード(model.get処理名()));
+//        row.getIchiranHyojijun().setValue(new Decimal(model.get一覧表示順().toString()));
+//        row.setBatchID(model.getバッチID());
+//        row.setKokanShikibetsuNo(model.get交換識別番号());
 //TODO n3317塚田　画面遷移させるために一時的に処理を修正
 //        row.setSelectButtonState(business.get選択ボタン状態(row.getTorikomiFlag(), row.getTxtTogetsuJotai()));
-        row.setSelectButtonState(DataGridButtonState.Enabled);
-        return row;
-    }
+//        row.setSelectButtonState(DataGridButtonState.Enabled);
+//        return row;
+//    }
 }
