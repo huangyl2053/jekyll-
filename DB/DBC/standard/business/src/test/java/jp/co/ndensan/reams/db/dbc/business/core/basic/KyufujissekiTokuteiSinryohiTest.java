@@ -4,11 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3020KyufujissekiTokuteiSinryohiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +34,28 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
     private static DbT3020KyufujissekiTokuteiSinryohiEntity KyufujissekiTokuteiSinryohiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_特定診療情報レコード順次番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +65,33 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiTokuteiSinryohi(null, 主キー名2);
+            sut = new KyufujissekiTokuteiSinryohi(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiTokuteiSinryohi(主キー名1, null);
+            sut = new KyufujissekiTokuteiSinryohi(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
         }
 
         @Test
         public void 指定したキーが保持するDbT3020KyufujissekiTokuteiSinryohiEntityにセットされている() {
-            sut = new KyufujissekiTokuteiSinryohi(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiTokuteiSinryohi(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
+            assertThat(sut.get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.get入力識別番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiTokuteiSinryohiIdentifierにセットされている() {
-            sut = new KyufujissekiTokuteiSinryohi(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiTokuteiSinryohi(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -82,8 +102,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +116,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
 
             sut = new KyufujissekiTokuteiSinryohi(KyufujissekiTokuteiSinryohiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -108,8 +128,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryohi(KyufujissekiTokuteiSinryohiEntity);
         }
@@ -165,103 +185,103 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         }
 
         @Test
-        public void get保険・指導管理料等は_entityが持つ保険・指導管理料等を返す() {
-            assertThat(sut.get保険・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getHokenShidoKanriryo()));
+        public void get保険_指導管理料等は_entityが持つ保険_指導管理料等を返す() {
+            assertThat(sut.get保険_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getHokenShidoKanriryo()));
         }
 
         @Test
-        public void get保険・単純エックス線は_entityが持つ保険・単純エックス線を返す() {
-            assertThat(sut.get保険・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getHokenTanjunXsen()));
+        public void get保険_単純エックス線は_entityが持つ保険_単純エックス線を返す() {
+            assertThat(sut.get保険_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getHokenTanjunXsen()));
         }
 
         @Test
-        public void get保険・リハビリテーションは_entityが持つ保険・リハビリテーションを返す() {
-            assertThat(sut.get保険・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getHokenRehabilitation()));
+        public void get保険_リハビリテーションは_entityが持つ保険_リハビリテーションを返す() {
+            assertThat(sut.get保険_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getHokenRehabilitation()));
         }
 
         @Test
-        public void get保険・精神科専門療法は_entityが持つ保険・精神科専門療法を返す() {
-            assertThat(sut.get保険・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getHokenSeishinkaSemmonRyoho()));
+        public void get保険_精神科専門療法は_entityが持つ保険_精神科専門療法を返す() {
+            assertThat(sut.get保険_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getHokenSeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get保険・合計単位数は_entityが持つ保険・合計単位数を返す() {
-            assertThat(sut.get保険・合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getHokenTotalTanisu()));
+        public void get保険_合計単位数は_entityが持つ保険_合計単位数を返す() {
+            assertThat(sut.get保険_合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getHokenTotalTanisu()));
         }
 
         @Test
-        public void get公費１・指導管理料等は_entityが持つ公費１・指導管理料等を返す() {
-            assertThat(sut.get公費１・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1ShidoKanriryo()));
+        public void get公費１_指導管理料等は_entityが持つ公費１_指導管理料等を返す() {
+            assertThat(sut.get公費１_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1ShidoKanriryo()));
         }
 
         @Test
-        public void get公費１・単純エックス線は_entityが持つ公費１・単純エックス線を返す() {
-            assertThat(sut.get公費１・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1TanjunXsen()));
+        public void get公費１_単純エックス線は_entityが持つ公費１_単純エックス線を返す() {
+            assertThat(sut.get公費１_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1TanjunXsen()));
         }
 
         @Test
-        public void get公費１・リハビリテーションは_entityが持つ公費１・リハビリテーションを返す() {
-            assertThat(sut.get公費１・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1Rehabilitation()));
+        public void get公費１_リハビリテーションは_entityが持つ公費１_リハビリテーションを返す() {
+            assertThat(sut.get公費１_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1Rehabilitation()));
         }
 
         @Test
-        public void get公費１・精神科専門療法は_entityが持つ公費１・精神科専門療法を返す() {
-            assertThat(sut.get公費１・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1SeishinkaSemmonRyoho()));
+        public void get公費１_精神科専門療法は_entityが持つ公費１_精神科専門療法を返す() {
+            assertThat(sut.get公費１_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1SeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get公費１・合計単位数は_entityが持つ公費１・合計単位数を返す() {
-            assertThat(sut.get公費１・合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1TotalTanisu()));
+        public void get公費１_合計単位数は_entityが持つ公費１_合計単位数を返す() {
+            assertThat(sut.get公費１_合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi1TotalTanisu()));
         }
 
         @Test
-        public void get公費２・指導管理料等は_entityが持つ公費２・指導管理料等を返す() {
-            assertThat(sut.get公費２・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2ShidoKanriryo()));
+        public void get公費２_指導管理料等は_entityが持つ公費２_指導管理料等を返す() {
+            assertThat(sut.get公費２_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2ShidoKanriryo()));
         }
 
         @Test
-        public void get公費２・単純エックス線は_entityが持つ公費２・単純エックス線を返す() {
-            assertThat(sut.get公費２・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2TanjunXsen()));
+        public void get公費２_単純エックス線は_entityが持つ公費２_単純エックス線を返す() {
+            assertThat(sut.get公費２_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2TanjunXsen()));
         }
 
         @Test
-        public void get公費２・リハビリテーションは_entityが持つ公費２・リハビリテーションを返す() {
-            assertThat(sut.get公費２・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2Rehabilitation()));
+        public void get公費２_リハビリテーションは_entityが持つ公費２_リハビリテーションを返す() {
+            assertThat(sut.get公費２_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2Rehabilitation()));
         }
 
         @Test
-        public void get公費２・精神科専門療法は_entityが持つ公費２・精神科専門療法を返す() {
-            assertThat(sut.get公費２・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2SeishinkaSemmonRyoho()));
+        public void get公費２_精神科専門療法は_entityが持つ公費２_精神科専門療法を返す() {
+            assertThat(sut.get公費２_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2SeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get公費２・合計単位数は_entityが持つ公費２・合計単位数を返す() {
-            assertThat(sut.get公費２・合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2TotalTanisu()));
+        public void get公費２_合計単位数は_entityが持つ公費２_合計単位数を返す() {
+            assertThat(sut.get公費２_合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi2TotalTanisu()));
         }
 
         @Test
-        public void get公費３・指導管理料等は_entityが持つ公費３・指導管理料等を返す() {
-            assertThat(sut.get公費３・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3ShidoKanriryo()));
+        public void get公費３_指導管理料等は_entityが持つ公費３_指導管理料等を返す() {
+            assertThat(sut.get公費３_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3ShidoKanriryo()));
         }
 
         @Test
-        public void get公費３・単純エックス線は_entityが持つ公費３・単純エックス線を返す() {
-            assertThat(sut.get公費３・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3TanjunXsen()));
+        public void get公費３_単純エックス線は_entityが持つ公費３_単純エックス線を返す() {
+            assertThat(sut.get公費３_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3TanjunXsen()));
         }
 
         @Test
-        public void get公費３・リハビリテーションは_entityが持つ公費３・リハビリテーションを返す() {
-            assertThat(sut.get公費３・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3Rehabilitation()));
+        public void get公費３_リハビリテーションは_entityが持つ公費３_リハビリテーションを返す() {
+            assertThat(sut.get公費３_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3Rehabilitation()));
         }
 
         @Test
-        public void get公費３・精神科専門療法は_entityが持つ公費３・精神科専門療法を返す() {
-            assertThat(sut.get公費３・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3SeishinkaSemmonRyoho()));
+        public void get公費３_精神科専門療法は_entityが持つ公費３_精神科専門療法を返す() {
+            assertThat(sut.get公費３_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3SeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get公費３・合計単位数は_entityが持つ公費３・合計単位数を返す() {
-            assertThat(sut.get公費３・合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3TotalTanisu()));
+        public void get公費３_合計単位数は_entityが持つ公費３_合計単位数を返す() {
+            assertThat(sut.get公費３_合計単位数(), is(KyufujissekiTokuteiSinryohiEntity.getKohi3TotalTanisu()));
         }
 
         @Test
@@ -365,83 +385,83 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         }
 
         @Test
-        public void get後・保険・指導管理料等は_entityが持つ後・保険・指導管理料等を返す() {
-            assertThat(sut.get後・保険・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenShidoKanriryo()));
+        public void get後_保険_指導管理料等は_entityが持つ後_保険_指導管理料等を返す() {
+            assertThat(sut.get後_保険_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenShidoKanriryo()));
         }
 
         @Test
-        public void get後・保険・単純エックス線は_entityが持つ後・保険・単純エックス線を返す() {
-            assertThat(sut.get後・保険・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenTanjunXsen()));
+        public void get後_保険_単純エックス線は_entityが持つ後_保険_単純エックス線を返す() {
+            assertThat(sut.get後_保険_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenTanjunXsen()));
         }
 
         @Test
-        public void get後・保険・リハビリテーションは_entityが持つ後・保険・リハビリテーションを返す() {
-            assertThat(sut.get後・保険・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenRehabilitation()));
+        public void get後_保険_リハビリテーションは_entityが持つ後_保険_リハビリテーションを返す() {
+            assertThat(sut.get後_保険_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenRehabilitation()));
         }
 
         @Test
-        public void get後・保険・精神科専門療法は_entityが持つ後・保険・精神科専門療法を返す() {
-            assertThat(sut.get後・保険・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenSeishinkaSemmonRyoho()));
+        public void get後_保険_精神科専門療法は_entityが持つ後_保険_精神科専門療法を返す() {
+            assertThat(sut.get後_保険_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoHokenSeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get後・公費１・指導管理料等は_entityが持つ後・公費１・指導管理料等を返す() {
-            assertThat(sut.get後・公費１・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1ShidoKanriryo()));
+        public void get後_公費１_指導管理料等は_entityが持つ後_公費１_指導管理料等を返す() {
+            assertThat(sut.get後_公費１_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1ShidoKanriryo()));
         }
 
         @Test
-        public void get後・公費１・単純エックス線は_entityが持つ後・公費１・単純エックス線を返す() {
-            assertThat(sut.get後・公費１・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1TanjunXsen()));
+        public void get後_公費１_単純エックス線は_entityが持つ後_公費１_単純エックス線を返す() {
+            assertThat(sut.get後_公費１_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1TanjunXsen()));
         }
 
         @Test
-        public void get後・公費１・リハビリテーションは_entityが持つ後・公費１・リハビリテーションを返す() {
-            assertThat(sut.get後・公費１・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1Rehabilitation()));
+        public void get後_公費１_リハビリテーションは_entityが持つ後_公費１_リハビリテーションを返す() {
+            assertThat(sut.get後_公費１_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1Rehabilitation()));
         }
 
         @Test
-        public void get後・公費１・精神科専門療法は_entityが持つ後・公費１・精神科専門療法を返す() {
-            assertThat(sut.get後・公費１・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1SeishinkaSemmonRyoho()));
+        public void get後_公費１_精神科専門療法は_entityが持つ後_公費１_精神科専門療法を返す() {
+            assertThat(sut.get後_公費１_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi1SeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get後・公費２・指導管理料等は_entityが持つ後・公費２・指導管理料等を返す() {
-            assertThat(sut.get後・公費２・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2ShidoKanriryo()));
+        public void get後_公費２_指導管理料等は_entityが持つ後_公費２_指導管理料等を返す() {
+            assertThat(sut.get後_公費２_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2ShidoKanriryo()));
         }
 
         @Test
-        public void get後・公費２・単純エックス線は_entityが持つ後・公費２・単純エックス線を返す() {
-            assertThat(sut.get後・公費２・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2TanjunXsen()));
+        public void get後_公費２_単純エックス線は_entityが持つ後_公費２_単純エックス線を返す() {
+            assertThat(sut.get後_公費２_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2TanjunXsen()));
         }
 
         @Test
-        public void get後・公費２・リハビリテーションは_entityが持つ後・公費２・リハビリテーションを返す() {
-            assertThat(sut.get後・公費２・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2Rehabilitation()));
+        public void get後_公費２_リハビリテーションは_entityが持つ後_公費２_リハビリテーションを返す() {
+            assertThat(sut.get後_公費２_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2Rehabilitation()));
         }
 
         @Test
-        public void get後・公費２・精神科専門療法は_entityが持つ後・公費２・精神科専門療法を返す() {
-            assertThat(sut.get後・公費２・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2SeishinkaSemmonRyoho()));
+        public void get後_公費２_精神科専門療法は_entityが持つ後_公費２_精神科専門療法を返す() {
+            assertThat(sut.get後_公費２_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi2SeishinkaSemmonRyoho()));
         }
 
         @Test
-        public void get後・公費３・指導管理料等は_entityが持つ後・公費３・指導管理料等を返す() {
-            assertThat(sut.get後・公費３・指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3ShidoKanriryo()));
+        public void get後_公費３_指導管理料等は_entityが持つ後_公費３_指導管理料等を返す() {
+            assertThat(sut.get後_公費３_指導管理料等(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3ShidoKanriryo()));
         }
 
         @Test
-        public void get後・公費３・単純エックス線は_entityが持つ後・公費３・単純エックス線を返す() {
-            assertThat(sut.get後・公費３・単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3TanjunXsen()));
+        public void get後_公費３_単純エックス線は_entityが持つ後_公費３_単純エックス線を返す() {
+            assertThat(sut.get後_公費３_単純エックス線(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3TanjunXsen()));
         }
 
         @Test
-        public void get後・公費３・リハビリテーションは_entityが持つ後・公費３・リハビリテーションを返す() {
-            assertThat(sut.get後・公費３・リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3Rehabilitation()));
+        public void get後_公費３_リハビリテーションは_entityが持つ後_公費３_リハビリテーションを返す() {
+            assertThat(sut.get後_公費３_リハビリテーション(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3Rehabilitation()));
         }
 
         @Test
-        public void get後・公費３・精神科専門療法は_entityが持つ後・公費３・精神科専門療法を返す() {
-            assertThat(sut.get後・公費３・精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3SeishinkaSemmonRyoho()));
+        public void get後_公費３_精神科専門療法は_entityが持つ後_公費３_精神科専門療法を返す() {
+            assertThat(sut.get後_公費３_精神科専門療法(), is(KyufujissekiTokuteiSinryohiEntity.getAtoKohi3SeishinkaSemmonRyoho()));
         }
 
         @Test
@@ -477,8 +497,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryohi(KyufujissekiTokuteiSinryohiEntity);
         }
@@ -496,8 +516,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryohi(KyufujissekiTokuteiSinryohiEntity);
         }
@@ -516,8 +536,8 @@ public class KyufujissekiTokuteiSinryohiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.createDbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
 
         }
 

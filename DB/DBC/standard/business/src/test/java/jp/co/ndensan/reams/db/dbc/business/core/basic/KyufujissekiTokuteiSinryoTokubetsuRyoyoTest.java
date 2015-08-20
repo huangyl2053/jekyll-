@@ -4,11 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +34,28 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
     private static DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_特定診療情報レコード順次番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +65,33 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(null, 主キー名2);
+            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, null);
+            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
         }
 
         @Test
         public void 指定したキーが保持するDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityにセットされている() {
-            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
+            assertThat(sut.get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.get入力識別番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifierにセットされている() {
-            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8, 主キー名9);
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -82,8 +102,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +116,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
 
             sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -108,8 +128,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity);
         }
@@ -175,63 +195,63 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get保険・回数は_entityが持つ保険・回数を返す() {
-            assertThat(sut.get保険・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenKaisu()));
+        public void get保険_回数は_entityが持つ保険_回数を返す() {
+            assertThat(sut.get保険_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenKaisu()));
         }
 
         @Test
-        public void get保険・ｻｰﾋﾞｽ単位数は_entityが持つ保険・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get保険・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenServiceTanisu()));
+        public void get保険_ｻｰﾋﾞｽ単位数は_entityが持つ保険_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get保険_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenServiceTanisu()));
         }
 
         @Test
-        public void get保険・合計単位数は_entityが持つ保険・合計単位数を返す() {
-            assertThat(sut.get保険・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenTotalTanisu()));
+        public void get保険_合計単位数は_entityが持つ保険_合計単位数を返す() {
+            assertThat(sut.get保険_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getHokenTotalTanisu()));
         }
 
         @Test
-        public void get公費１・回数は_entityが持つ公費１・回数を返す() {
-            assertThat(sut.get公費１・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1Kaisu()));
+        public void get公費１_回数は_entityが持つ公費１_回数を返す() {
+            assertThat(sut.get公費１_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1Kaisu()));
         }
 
         @Test
-        public void get公費１・ｻｰﾋﾞｽ単位数は_entityが持つ公費１・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get公費１・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1ServiceTanisu()));
+        public void get公費１_ｻｰﾋﾞｽ単位数は_entityが持つ公費１_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get公費１_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1ServiceTanisu()));
         }
 
         @Test
-        public void get公費１・合計単位数は_entityが持つ公費１・合計単位数を返す() {
-            assertThat(sut.get公費１・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1TotalTanisu()));
+        public void get公費１_合計単位数は_entityが持つ公費１_合計単位数を返す() {
+            assertThat(sut.get公費１_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi1TotalTanisu()));
         }
 
         @Test
-        public void get公費２・回数は_entityが持つ公費２・回数を返す() {
-            assertThat(sut.get公費２・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2Kaisu()));
+        public void get公費２_回数は_entityが持つ公費２_回数を返す() {
+            assertThat(sut.get公費２_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2Kaisu()));
         }
 
         @Test
-        public void get公費２・ｻｰﾋﾞｽ単位数は_entityが持つ公費２・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get公費２・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2ServiceTanisu()));
+        public void get公費２_ｻｰﾋﾞｽ単位数は_entityが持つ公費２_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get公費２_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2ServiceTanisu()));
         }
 
         @Test
-        public void get公費２・合計単位数は_entityが持つ公費２・合計単位数を返す() {
-            assertThat(sut.get公費２・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2TotalTanisu()));
+        public void get公費２_合計単位数は_entityが持つ公費２_合計単位数を返す() {
+            assertThat(sut.get公費２_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi2TotalTanisu()));
         }
 
         @Test
-        public void get公費３・回数は_entityが持つ公費３・回数を返す() {
-            assertThat(sut.get公費３・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3Kaisu()));
+        public void get公費３_回数は_entityが持つ公費３_回数を返す() {
+            assertThat(sut.get公費３_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3Kaisu()));
         }
 
         @Test
-        public void get公費３・ｻｰﾋﾞｽ単位数は_entityが持つ公費３・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get公費３・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3ServiceTanisu()));
+        public void get公費３_ｻｰﾋﾞｽ単位数は_entityが持つ公費３_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get公費３_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3ServiceTanisu()));
         }
 
         @Test
-        public void get公費３・合計単位数は_entityが持つ公費３・合計単位数を返す() {
-            assertThat(sut.get公費３・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3TotalTanisu()));
+        public void get公費３_合計単位数は_entityが持つ公費３_合計単位数を返す() {
+            assertThat(sut.get公費３_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getKohi3TotalTanisu()));
         }
 
         @Test
@@ -240,68 +260,68 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get後・単位数は_entityが持つ後・単位数を返す() {
-            assertThat(sut.get後・単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoTanisu()));
+        public void get後_単位数は_entityが持つ後_単位数を返す() {
+            assertThat(sut.get後_単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoTanisu()));
         }
 
         @Test
-        public void get後・保険・回数は_entityが持つ後・保険・回数を返す() {
-            assertThat(sut.get後・保険・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenKaisu()));
+        public void get後_保険_回数は_entityが持つ後_保険_回数を返す() {
+            assertThat(sut.get後_保険_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenKaisu()));
         }
 
         @Test
-        public void get後・保険・ｻｰﾋﾞｽ単位数は_entityが持つ後・保険・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get後・保険・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenServiceTanisu()));
+        public void get後_保険_ｻｰﾋﾞｽ単位数は_entityが持つ後_保険_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get後_保険_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenServiceTanisu()));
         }
 
         @Test
-        public void get後・保険・合計単位数は_entityが持つ後・保険・合計単位数を返す() {
-            assertThat(sut.get後・保険・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenTotalTanisu()));
+        public void get後_保険_合計単位数は_entityが持つ後_保険_合計単位数を返す() {
+            assertThat(sut.get後_保険_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoHokenTotalTanisu()));
         }
 
         @Test
-        public void get後・公費１・回数は_entityが持つ後・公費１・回数を返す() {
-            assertThat(sut.get後・公費１・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1Kaisu()));
+        public void get後_公費１_回数は_entityが持つ後_公費１_回数を返す() {
+            assertThat(sut.get後_公費１_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1Kaisu()));
         }
 
         @Test
-        public void get後・公費１・ｻｰﾋﾞｽ単位数は_entityが持つ後・公費１・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get後・公費１・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1ServiceTanisu()));
+        public void get後_公費１_ｻｰﾋﾞｽ単位数は_entityが持つ後_公費１_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get後_公費１_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1ServiceTanisu()));
         }
 
         @Test
-        public void get後・公費１・合計単位数は_entityが持つ後・公費１・合計単位数を返す() {
-            assertThat(sut.get後・公費１・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1TotalTanisu()));
+        public void get後_公費１_合計単位数は_entityが持つ後_公費１_合計単位数を返す() {
+            assertThat(sut.get後_公費１_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi1TotalTanisu()));
         }
 
         @Test
-        public void get後・公費２・回数は_entityが持つ後・公費２・回数を返す() {
-            assertThat(sut.get後・公費２・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2Kaisu()));
+        public void get後_公費２_回数は_entityが持つ後_公費２_回数を返す() {
+            assertThat(sut.get後_公費２_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2Kaisu()));
         }
 
         @Test
-        public void get後・公費２・ｻｰﾋﾞｽ単位数は_entityが持つ後・公費２・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get後・公費２・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2ServiceTanisu()));
+        public void get後_公費２_ｻｰﾋﾞｽ単位数は_entityが持つ後_公費２_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get後_公費２_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2ServiceTanisu()));
         }
 
         @Test
-        public void get後・公費２・合計単位数は_entityが持つ後・公費２・合計単位数を返す() {
-            assertThat(sut.get後・公費２・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2TotalTanisu()));
+        public void get後_公費２_合計単位数は_entityが持つ後_公費２_合計単位数を返す() {
+            assertThat(sut.get後_公費２_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi2TotalTanisu()));
         }
 
         @Test
-        public void get後・公費３・回数は_entityが持つ後・公費３・回数を返す() {
-            assertThat(sut.get後・公費３・回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3Kaisu()));
+        public void get後_公費３_回数は_entityが持つ後_公費３_回数を返す() {
+            assertThat(sut.get後_公費３_回数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3Kaisu()));
         }
 
         @Test
-        public void get後・公費３・ｻｰﾋﾞｽ単位数は_entityが持つ後・公費３・ｻｰﾋﾞｽ単位数を返す() {
-            assertThat(sut.get後・公費３・ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3ServiceTanisu()));
+        public void get後_公費３_ｻｰﾋﾞｽ単位数は_entityが持つ後_公費３_ｻｰﾋﾞｽ単位数を返す() {
+            assertThat(sut.get後_公費３_ｻｰﾋﾞｽ単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3ServiceTanisu()));
         }
 
         @Test
-        public void get後・公費３・合計単位数は_entityが持つ後・公費３・合計単位数を返す() {
-            assertThat(sut.get後・公費３・合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3TotalTanisu()));
+        public void get後_公費３_合計単位数は_entityが持つ後_公費３_合計単位数を返す() {
+            assertThat(sut.get後_公費３_合計単位数(), is(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.getAtoKohi3TotalTanisu()));
         }
 
         @Test
@@ -337,8 +357,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity);
         }
@@ -356,8 +376,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity);
         }
@@ -376,8 +396,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
         }
 

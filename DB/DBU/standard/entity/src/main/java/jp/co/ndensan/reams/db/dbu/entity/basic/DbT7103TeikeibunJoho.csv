@@ -1,4 +1,0 @@
-﻿teikeiKubun,bpchar,RString,,,,,定型区分,A
-shubetsu,bpchar,RString,,,,,種別,A
-teikeibunCd,bpchar,RString,,,,,定型文コード,A
-teikeibunNaiyo,text,RString,,,,,定型文内容,A
