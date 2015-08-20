@@ -4,11 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +32,22 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
     private static DbT3044ShokanShokujiHiyoSagakuShikyuEntity ShokanShokujiHiyoSagakuShikyuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_事業者番号;
+        主キー名5 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_様式番号;
+        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +57,33 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(null, 主キー名2);
+            sut = new ShokanShokujiHiyoSagakuShikyu(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, null);
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test
         public void 指定したキーが保持するDbT3044ShokanShokujiHiyoSagakuShikyuEntityにセットされている() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanShokujiHiyoSagakuShikyuIdentifierにセットされている() {
-            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ShokanShokujiHiyoSagakuShikyu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -82,8 +94,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +108,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
 
             sut = new ShokanShokujiHiyoSagakuShikyu(ShokanShokujiHiyoSagakuShikyuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -108,8 +120,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanShokujiHiyoSagakuShikyu(ShokanShokujiHiyoSagakuShikyuEntity);
         }
@@ -155,8 +167,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         }
 
         @Test
-        public void get点数／金額は_entityが持つ点数／金額を返す() {
-            assertThat(sut.get点数／金額(), is(ShokanShokujiHiyoSagakuShikyuEntity.getTensuKingaku()));
+        public void get点数_金額は_entityが持つ点数_金額を返す() {
+            assertThat(sut.get点数_金額(), is(ShokanShokujiHiyoSagakuShikyuEntity.getTensuKingaku()));
         }
 
         @Test
@@ -165,8 +177,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         }
 
         @Test
-        public void get支給・不支給理由は_entityが持つ支給・不支給理由を返す() {
-            assertThat(sut.get支給・不支給理由(), is(ShokanShokujiHiyoSagakuShikyuEntity.getShikyuFushikyuRiyu()));
+        public void get支給_不支給理由は_entityが持つ支給_不支給理由を返す() {
+            assertThat(sut.get支給_不支給理由(), is(ShokanShokujiHiyoSagakuShikyuEntity.getShikyuFushikyuRiyu()));
         }
     }
 
@@ -177,8 +189,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanShokujiHiyoSagakuShikyu(ShokanShokujiHiyoSagakuShikyuEntity);
         }
@@ -196,8 +208,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanShokujiHiyoSagakuShikyu(ShokanShokujiHiyoSagakuShikyuEntity);
         }
@@ -216,8 +228,8 @@ public class ShokanShokujiHiyoSagakuShikyuTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
 
         }
 
