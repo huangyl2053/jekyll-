@@ -5,8 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,15 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
     private static DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity UwanoseShokanShuruiShikyuGendoGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ServiceShuruiCode 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
+        主キー名2 = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -43,33 +47,33 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new UwanoseShokanShuruiShikyuGendoGaku(null, 主キー名2);
+            sut = new UwanoseShokanShuruiShikyuGendoGaku(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, null);
+            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT7115UwanoseShokanShuruiShikyuGendoGakuEntityにセットされている() {
-            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.getサービス種類コード(), is(主キー名1));
+            assertThat(sut.get適用開始年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するUwanoseShokanShuruiShikyuGendoGakuIdentifierにセットされている() {
-            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new UwanoseShokanShuruiShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -80,8 +84,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +98,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
 
             sut = new UwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGakuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -106,8 +110,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new UwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGakuEntity);
         }
@@ -145,8 +149,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new UwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGakuEntity);
         }
@@ -164,15 +168,15 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new UwanoseShokanShuruiShikyuGendoGaku(UwanoseShokanShuruiShikyuGendoGakuEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -184,8 +188,8 @@ public class UwanoseShokanShuruiShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             UwanoseShokanShuruiShikyuGendoGakuEntity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            UwanoseShokanShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            UwanoseShokanShuruiShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
         }
 

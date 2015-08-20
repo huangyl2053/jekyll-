@@ -67,7 +67,7 @@ public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakus
                 entity.getHihokenshaNo(),
                 entity.getShoKisaiHokenshaNo(),
                 entity.getUketsukeYMD(),
-                entity.getRirekiNo());
+                entity.getRirekiNo().intValue());
     }
 
     /**

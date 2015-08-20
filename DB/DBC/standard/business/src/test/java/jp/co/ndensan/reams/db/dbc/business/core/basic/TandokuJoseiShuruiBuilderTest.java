@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3099TandokuJoseiShuruiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3099TandokuJoseiShuruiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +28,19 @@ public class TandokuJoseiShuruiBuilderTest extends DbcTestBase {
     private static DbT3099TandokuJoseiShuruiEntity TandokuJoseiShuruiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 主キー名1;
+    private static ServiceShuruiCode 主キー名2;
+    private static FlexibleYearMonth 主キー名3;
+    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類;
+        主キー名2 = DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_助成サービス種類コード;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static TandokuJoseiShuruiBuilder sut;
         private static TandokuJoseiShurui business;
@@ -42,14 +48,15 @@ public class TandokuJoseiShuruiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseiShuruiEntity = new DbT3099TandokuJoseiShuruiEntity();
-            TandokuJoseiShuruiEntity.setXXX(主キー名1);
-            TandokuJoseiShuruiEntity.setXXX(主キー名2);
+            TandokuJoseiShuruiEntity.setTandokuJoseiShuruiCode(主キー名1);
+            TandokuJoseiShuruiEntity.setJoseiServiceShuruiCode(主キー名2);
 
             business = new TandokuJoseiShurui(TandokuJoseiShuruiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の市町村単独助成種類は_設定した値と同じ市町村単独助成種類を返す() {
             business = sut.set市町村単独助成種類(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類).build();

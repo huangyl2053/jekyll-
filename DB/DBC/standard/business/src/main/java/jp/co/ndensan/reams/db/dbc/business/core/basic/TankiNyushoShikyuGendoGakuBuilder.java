@@ -87,6 +87,18 @@ public class TankiNyushoShikyuGendoGakuBuilder {
     }
 
     /**
+     * 支給限度単位数を設定します。
+     *
+     * @param 支給限度単位数 支給限度単位数
+     * @return {@link TankiNyushoShikyuGendoGakuBuilder}
+     */
+    public TankiNyushoShikyuGendoGakuBuilder set支給限度単位数(Decimal 支給限度単位数) {
+        requireNonNull(支給限度単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("支給限度単位数"));
+        entity.setShikyuGendoNissu(支給限度単位数);
+        return this;
+    }
+
+    /**
      * {@link TankiNyushoShikyuGendoGaku}のインスタンスを生成します。
      *
      * @return {@link TankiNyushoShikyuGendoGaku}のインスタンス

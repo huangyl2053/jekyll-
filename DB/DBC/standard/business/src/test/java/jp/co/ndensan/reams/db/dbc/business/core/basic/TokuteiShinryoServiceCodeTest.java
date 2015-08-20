@@ -6,7 +6,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7120TokuteiShinryoServiceCodeEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +30,16 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
     private static DbT7120TokuteiShinryoServiceCodeEntity TokuteiShinryoServiceCodeEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ServiceShuruiCode 主キー名1;
+    private static ServiceKomokuCode 主キー名2;
+    private static FlexibleYearMonth 主キー名3;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7120TokuteiShinryoServiceCodeEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7120TokuteiShinryoServiceCodeEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7120TokuteiShinryoServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+        主キー名2 = DbT7120TokuteiShinryoServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -43,33 +49,33 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TokuteiShinryoServiceCode(null, 主キー名2);
+            sut = new TokuteiShinryoServiceCode(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TokuteiShinryoServiceCode(主キー名1, null);
+            sut = new TokuteiShinryoServiceCode(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT7120TokuteiShinryoServiceCodeEntityにセットされている() {
-            sut = new TokuteiShinryoServiceCode(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new TokuteiShinryoServiceCode(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.getサービス種類コード(), is(主キー名1));
+            assertThat(sut.getサービス項目コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するTokuteiShinryoServiceCodeIdentifierにセットされている() {
-            sut = new TokuteiShinryoServiceCode(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new TokuteiShinryoServiceCode(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().getサービス項目コード(), is(主キー名2));
         }
     }
 
@@ -80,8 +86,8 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +100,8 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
 
             sut = new TokuteiShinryoServiceCode(TokuteiShinryoServiceCodeEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().getサービス項目コード(), is(主キー名2));
         }
     }
 
@@ -106,8 +112,8 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new TokuteiShinryoServiceCode(TokuteiShinryoServiceCodeEntity);
         }
@@ -190,8 +196,8 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new TokuteiShinryoServiceCode(TokuteiShinryoServiceCodeEntity);
         }
@@ -209,15 +215,15 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new TokuteiShinryoServiceCode(TokuteiShinryoServiceCodeEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -229,8 +235,8 @@ public class TokuteiShinryoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             TokuteiShinryoServiceCodeEntity = DbT7120TokuteiShinryoServiceCodeEntityGenerator.createDbT7120TokuteiShinryoServiceCodeEntity();
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名1);
-            TokuteiShinryoServiceCodeEntity.setXXX(主キー名2);
+            TokuteiShinryoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            TokuteiShinryoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
         }
 
