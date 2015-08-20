@@ -4,11 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3017KyufujissekiKihonEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +34,30 @@ public class KyufujissekiKihonTest extends DbcTestBase {
     private static DbT3017KyufujissekiKihonEntity KyufujissekiKihonEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 交換情報識別番号;
+    private static NyuryokuShikibetsuNo 入力識別番号;
+    private static RString レコード種別コード;
+    private static RString 給付実績情報作成区分コード;
+    private static HokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth サービス提供年月;
+    private static RString 給付実績区分コード;
+    private static JigyoshaNo 事業所番号;
+    private static RString 通し番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_主キー名2;
+        交換情報識別番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_交換情報識別番号;
+        入力識別番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_入力識別番号;
+        レコード種別コード = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_レコード種別コード;
+        給付実績情報作成区分コード = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_給付実績情報作成区分コード;
+        証記載保険者番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_証記載保険者番号;
+        被保険者番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_被保険者番号;
+        サービス提供年月 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_サービス提供年月;
+        給付実績区分コード = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_給付実績区分コード;
+        事業所番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_事業所番号;
+        通し番号 = DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_通し番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +67,61 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKihon(null, 主キー名2);
+        public void 交換情報識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKihon(null, 入力識別番号, レコード種別コード,
+                    給付実績情報作成区分コード, 証記載保険者番号, 被保険者番号, サービス提供年月, 給付実績区分コード, 事業所番号, 通し番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKihon(主キー名1, null);
+        public void 入力識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKihon(交換情報識別番号, null, レコード種別コード,
+                    給付実績情報作成区分コード, 証記載保険者番号, 被保険者番号, サービス提供年月, 給付実績区分コード, 事業所番号, 通し番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3017KyufujissekiKihonEntityにセットされている() {
-            sut = new KyufujissekiKihon(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiKihon(交換情報識別番号, 入力識別番号, レコード種別コード,
+                    給付実績情報作成区分コード, 証記載保険者番号, 被保険者番号, サービス提供年月, 給付実績区分コード, 事業所番号, 通し番号);
+            assertThat(sut.get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.get入力識別番号(), is(入力識別番号));
+            assertThat(sut.getレコード種別コード(), is(レコード種別コード));
+            assertThat(sut.get給付実績情報作成区分コード(), is(給付実績情報作成区分コード));
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.getサービス提供年月(), is(サービス提供年月));
+            assertThat(sut.get給付実績区分コード(), is(給付実績区分コード));
+            assertThat(sut.get事業者番号(), is(事業所番号));
+            assertThat(sut.get通し番号(), is(通し番号));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiKihonIdentifierにセットされている() {
-            sut = new KyufujissekiKihon(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiKihon(交換情報識別番号, 入力識別番号, レコード種別コード,
+                    給付実績情報作成区分コード, 証記載保険者番号, 被保険者番号, サービス提供年月, 給付実績区分コード, 事業所番号, 通し番号);
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
+            assertThat(sut.identifier().getレコード種別コード(), is(レコード種別コード));
+            assertThat(sut.identifier().get給付実績情報作成区分コード(), is(給付実績情報作成区分コード));
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().getサービス提供年月(), is(サービス提供年月));
+            assertThat(sut.identifier().get給付実績区分コード(), is(給付実績区分コード));
+            assertThat(sut.identifier().get事業所番号(), is(事業所番号));
+            assertThat(sut.identifier().get通し番号(), is(通し番号));
         }
     }
 
@@ -82,8 +132,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +154,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
 
             sut = new KyufujissekiKihon(KyufujissekiKihonEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
+            assertThat(sut.identifier().getレコード種別コード(), is(レコード種別コード));
+            assertThat(sut.identifier().get給付実績情報作成区分コード(), is(給付実績情報作成区分コード));
+            assertThat(sut.identifier().get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().getサービス提供年月(), is(サービス提供年月));
+            assertThat(sut.identifier().get給付実績区分コード(), is(給付実績区分コード));
+            assertThat(sut.identifier().get事業所番号(), is(事業所番号));
+            assertThat(sut.identifier().get通し番号(), is(通し番号));
         }
     }
 
@@ -108,8 +174,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
 
             sut = new KyufujissekiKihon(KyufujissekiKihonEntity);
         }
@@ -165,33 +239,35 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get公費１・負担者番号は_entityが持つ公費１・負担者番号を返す() {
-            assertThat(sut.get公費１・負担者番号(), is(KyufujissekiKihonEntity.getKohi1FutanshaNo()));
+        public void get公費１負担者番号は_entityが持つ公費１負担者番号を返す() {
+            assertThat(sut.get公費１_負担者番号(), is(KyufujissekiKihonEntity.getKohi1FutanshaNo()));
         }
 
         @Test
-        public void get公費１・受給者番号は_entityが持つ公費１・受給者番号を返す() {
-            assertThat(sut.get公費１・受給者番号(), is(KyufujissekiKihonEntity.getKohi1JukyushaNo()));
+        public void get公費１受給者番号は_entityが持つ公費１受給者番号を返す() {
+            assertThat(sut.get公費１_受給者番号(), is(KyufujissekiKihonEntity.getKohi1JukyushaNo()));
         }
 
         @Test
-        public void get公費２・負担者番号は_entityが持つ公費２・負担者番号を返す() {
-            assertThat(sut.get公費２・負担者番号(), is(KyufujissekiKihonEntity.getKohi2FutanshaNo()));
+        public void get公費２負担者番号は_entityが持つ公費２負担者番号を返す() {
+            assertThat(sut.get公費２_負担者番号(), is(KyufujissekiKihonEntity.getKohi2FutanshaNo()));
         }
 
         @Test
-        public void get公費２・受給者番号は_entityが持つ公費２・受給者番号を返す() {
-            assertThat(sut.get公費２・受給者番号(), is(KyufujissekiKihonEntity.getKohi2JukyushaNo()));
+        public void get公費２受給者番号は_entityが持つ公費２受給者番号を返す() {
+            assertThat(sut.get公費２_受給者番号(), is(KyufujissekiKihonEntity.getKohi2JukyushaNo()));
         }
 
         @Test
-        public void get公費３・負担者番号は_entityが持つ公費３・負担者番号を返す() {
-            assertThat(sut.get公費３・負担者番号(), is(KyufujissekiKihonEntity.getKohi3FutanshaNo()));
+        public void get公費３負担者番号は_entityが持つ公費３負担者番号を返す() {
+            assertThat(sut.get公費３_負担者番号(), is(KyufujissekiKihonEntity.getKohi3FutanshaNo())
+            );
         }
 
         @Test
-        public void get公費３・受給者番号は_entityが持つ公費３・受給者番号を返す() {
-            assertThat(sut.get公費３・受給者番号(), is(KyufujissekiKihonEntity.getKohi3JukyushaNo()));
+        public void get公費３受給者番号は_entityが持つ公費３受給者番号を返す() {
+            assertThat(sut.get公費３_受給者番号(), is(KyufujissekiKihonEntity.getKohi3JukyushaNo())
+            );
         }
 
         @Test
@@ -215,13 +291,15 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get認定有効期間・開始年月日は_entityが持つ認定有効期間・開始年月日を返す() {
-            assertThat(sut.get認定有効期間・開始年月日(), is(KyufujissekiKihonEntity.getNinteiYukoKaishiYMD()));
+        public void get認定有効期間開始年月日は_entityが持つ認定有効期間開始年月日を返す() {
+            assertThat(sut.get認定有効期間_開始年月日(), is(KyufujissekiKihonEntity.getNinteiYukoKaishiYMD())
+            );
         }
 
         @Test
-        public void get認定有功期間・終了年月日は_entityが持つ認定有功期間・終了年月日を返す() {
-            assertThat(sut.get認定有功期間・終了年月日(), is(KyufujissekiKihonEntity.getNinteiYukoShuryoYMD()));
+        public void get認定有功期間終了年月日は_entityが持つ認定有功期間終了年月日を返す() {
+            assertThat(sut.get認定有功期間_終了年月日(), is(KyufujissekiKihonEntity.getNinteiYukoShuryoYMD())
+            );
         }
 
         @Test
@@ -235,28 +313,29 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get保険者番号（後期）は_entityが持つ保険者番号（後期）を返す() {
-            assertThat(sut.get保険者番号（後期）(), is(KyufujissekiKihonEntity.getKokiHokenshaNo()));
+        public void get保険者番号_後期_は_entityが持つ保険者番号_後期_を返す() {
+            assertThat(sut.get保険者番号_後期(), is(KyufujissekiKihonEntity.getKokiHokenshaNo()));
         }
 
         @Test
-        public void get被保険者番号（後期）は_entityが持つ被保険者番号（後期）を返す() {
-            assertThat(sut.get被保険者番号（後期）(), is(KyufujissekiKihonEntity.getKokiHiHokenshaNo()));
+        public void get被保険者番号_後期_は_entityが持つ被保険者番号_後期_を返す() {
+            assertThat(sut.get被保険者番号_後期(), is(KyufujissekiKihonEntity.getKokiHiHokenshaNo()));
         }
 
         @Test
-        public void get保険者番号（国保）は_entityが持つ保険者番号（国保）を返す() {
-            assertThat(sut.get保険者番号（国保）(), is(KyufujissekiKihonEntity.getKokuhoHokenshaNo()));
+        public void get保険者番号_国保_は_entityが持つ保険者番号_国保_を返す() {
+            assertThat(sut.get保険者番号_国保(), is(KyufujissekiKihonEntity.getKokuhoHokenshaNo())
+            );
         }
 
         @Test
-        public void get被保険者証番号（国保）は_entityが持つ被保険者証番号（国保）を返す() {
-            assertThat(sut.get被保険者証番号（国保）(), is(KyufujissekiKihonEntity.getKokuhoHiHokenshashoNo()));
+        public void get被保険者証番号_国保_は_entityが持つ被保険者証番号_国保_を返す() {
+            assertThat(sut.get被保険者証番号_国保(), is(KyufujissekiKihonEntity.getKokuhoHiHokenshashoNo()));
         }
 
         @Test
-        public void get個人番号（国保）は_entityが持つ個人番号（国保）を返す() {
-            assertThat(sut.get個人番号（国保）(), is(KyufujissekiKihonEntity.getKokuhoKojinNo()));
+        public void get個人番号_国保_は_entityが持つ個人番号_国保_を返す() {
+            assertThat(sut.get個人番号_国保(), is(KyufujissekiKihonEntity.getKokuhoKojinNo()));
         }
 
         @Test
@@ -264,11 +343,10 @@ public class KyufujissekiKihonTest extends DbcTestBase {
             assertThat(sut.get居宅サービス計画作成区分コード(), is(KyufujissekiKihonEntity.getKyotakuServiceSakuseiKubunCode()));
         }
 
-        @Test
-        public void get事業所番号は_entityが持つ事業所番号を返す() {
-            assertThat(sut.get居宅介護支援事業所番号(), is(KyufujissekiKihonEntity.getKyotakuKaigoShienJigyoshoNo()));
-        }
-
+//        @Test
+//        public void get事業所番号は_entityが持つ事業所番号を返す() {
+//            assertThat(sut.get居宅介護支援事業所番号(), is(KyufujissekiKihonEntity.getKyotakuKaigoShienJigyoshoNo()));
+//        }
         @Test
         public void get開始年月日は_entityが持つ開始年月日を返す() {
             assertThat(sut.get開始年月日(), is(KyufujissekiKihonEntity.getKaishiYMD()));
@@ -280,23 +358,23 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get中止理由・入所（院）前の状況コードは_entityが持つ中止理由・入所（院）前の状況コードを返す() {
-            assertThat(sut.get中止理由・入所（院）前の状況コード(), is(KyufujissekiKihonEntity.getChushiRiyuNyushomaeJyokyoCode()));
+        public void get中止理由入所_院_前の状況コードは_entityが持つ中止理由入所_院_前の状況コードを返す() {
+            assertThat(sut.get中止理由_入所_院_前の状況コード(), is(KyufujissekiKihonEntity.getChushiRiyuNyushomaeJyokyoCode()));
         }
 
         @Test
-        public void get入所（院）年月日は_entityが持つ入所（院）年月日を返す() {
-            assertThat(sut.get入所（院）年月日(), is(KyufujissekiKihonEntity.getNyushoYMD()));
+        public void get入所_院_年月日は_entityが持つ入所_院_年月日を返す() {
+            assertThat(sut.get入所_院_年月日(), is(KyufujissekiKihonEntity.getNyushoYMD()));
         }
 
         @Test
-        public void get退所（院）年月日は_entityが持つ退所（院）年月日を返す() {
-            assertThat(sut.get退所（院）年月日(), is(KyufujissekiKihonEntity.getTaishoYMD()));
+        public void get退所_院_年月日は_entityが持つ退所_院_年月日を返す() {
+            assertThat(sut.get退所_院_年月日(), is(KyufujissekiKihonEntity.getTaishoYMD()));
         }
 
         @Test
-        public void get入所（院）実日数は_entityが持つ入所（院）実日数を返す() {
-            assertThat(sut.get入所（院）実日数(), is(KyufujissekiKihonEntity.getNyushoJitsunissu()));
+        public void get入所_院_実日数は_entityが持つ入所_院_実日数を返す() {
+            assertThat(sut.get入所_院_実日数(), is(KyufujissekiKihonEntity.getNyushoJitsunissu()));
         }
 
         @Test
@@ -305,8 +383,9 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get退所（院）後の状態コードは_entityが持つ退所（院）後の状態コードを返す() {
-            assertThat(sut.get退所（院）後の状態コード(), is(KyufujissekiKihonEntity.getTaishogoJotaiCode()));
+        public void get退所_院_後の状態コードは_entityが持つ退所_院_後の状態コードを返す() {
+            assertThat(sut.get退所_院_後の状態コード(), is(KyufujissekiKihonEntity.getTaishogoJotaiCode())
+            );
         }
 
         @Test
@@ -330,243 +409,290 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         }
 
         @Test
-        public void get前・保険・サービス単位数は_entityが持つ前・保険・サービス単位数を返す() {
-            assertThat(sut.get前・保険・サービス単位数(), is(KyufujissekiKihonEntity.getMaeHokenServiceTanisu()));
+        public void get前保険サービス単位数は_entityが持つ前保険サービス単位数を返す() {
+            assertThat(sut.get前_保険_サービス単位数(), is(KyufujissekiKihonEntity.getMaeHokenServiceTanisu())
+            );
         }
 
         @Test
-        public void get前・保険・請求額は_entityが持つ前・保険・請求額を返す() {
-            assertThat(sut.get前・保険・請求額(), is(KyufujissekiKihonEntity.getMaeHokenSeikyugaku()));
+        public void get前保険請求額は_entityが持つ前保険請求額を返す() {
+            assertThat(sut.get前_保険_請求額(), is(KyufujissekiKihonEntity.getMaeHokenSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・保険・利用者負担額は_entityが持つ前・保険・利用者負担額を返す() {
-            assertThat(sut.get前・保険・利用者負担額(), is(KyufujissekiKihonEntity.getMaeHokenRiyoshaFutangaku()));
+        public void get前保険利用者負担額は_entityが持つ前保険利用者負担額を返す() {
+            assertThat(sut.get前_保険_利用者負担額(), is(KyufujissekiKihonEntity.getMaeHokenRiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get前・保険・緊急時施設療養費請求額は_entityが持つ前・保険・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get前・保険・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeHokenKinkyuShisetsuRyoyoSeikyugaku()));
+        public void get前保険緊急時施設療養費請求額は_entityが持つ前保険緊急時施設療養費請求額を返す() {
+            assertThat(sut.get前_保険_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeHokenKinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・保険・特定診療費請求額は_entityが持つ前・保険・特定診療費請求額を返す() {
-            assertThat(sut.get前・保険・特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeHokenTokuteiShinryohiSeikyugaku()));
+        public void get前保険特定診療費請求額は_entityが持つ前保険特定診療費請求額を返す() {
+            assertThat(sut.get前_保険_特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeHokenTokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・保険・特定入所者介護サービス費等請求額は_entityが持つ前・保険・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get前・保険・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get前保険特定入所者介護サービス費等請求額は_entityが持つ前保険特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get前_保険_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費１・サービス単位数は_entityが持つ前・公費１・サービス単位数を返す() {
-            assertThat(sut.get前・公費１・サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi1ServiceTanisu()));
+        public void get前公費１サービス単位数は_entityが持つ前公費１サービス単位数を返す() {
+            assertThat(sut.get前_公費１_サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi1ServiceTanisu())
+            );
         }
 
         @Test
-        public void get前・公費１・請求額は_entityが持つ前・公費１・請求額を返す() {
-            assertThat(sut.get前・公費１・請求額(), is(KyufujissekiKihonEntity.getMaeKohi1Seikyugaku()));
+        public void get前公費１請求額は_entityが持つ前公費１請求額を返す() {
+            assertThat(sut.get前_公費１_請求額(), is(KyufujissekiKihonEntity.getMaeKohi1Seikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費１・本人負担額は_entityが持つ前・公費１・本人負担額を返す() {
-            assertThat(sut.get前・公費１・本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi1RiyoshaFutangaku()));
+        public void get前公費１本人負担額は_entityが持つ前公費１本人負担額を返す() {
+            assertThat(sut.get前_公費１_本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi1RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get前・公費１・緊急時施設療養費請求額は_entityが持つ前・公費１・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get前・公費１・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get前公費１緊急時施設療養費請求額は_entityが持つ前公費１緊急時施設療養費請求額を返す() {
+            assertThat(sut.get前_公費１_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費１・特定診療費請求額は_entityが持つ前・公費１・特定診療費請求額を返す() {
-            assertThat(sut.get前・公費１・特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi1TokuteiShinryohiSeikyugaku()));
+        public void get前公費１特定診療費請求額は_entityが持つ前公費１特定診療費請求額を返す() {
+            assertThat(sut.get前_公費１_特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi1TokuteiShinryohiSeikyugaku()));
         }
 
         @Test
-        public void get前・公費１・特定入所者介護サービス費等請求額は_entityが持つ前・公費１・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get前・公費１・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get前公費１特定入所者介護サービス費等請求額は_entityが持つ前公費１特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get前_公費１_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費２・サービス単位数は_entityが持つ前・公費２・サービス単位数を返す() {
-            assertThat(sut.get前・公費２・サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi2ServiceTanisu()));
+        public void get前公費２サービス単位数は_entityが持つ前公費２サービス単位数を返す() {
+            assertThat(sut.get前_公費２_サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi2ServiceTanisu())
+            );
         }
 
         @Test
-        public void get前・公費２・請求額は_entityが持つ前・公費２・請求額を返す() {
-            assertThat(sut.get前・公費２・請求額(), is(KyufujissekiKihonEntity.getMaeKohi2Seikyugaku()));
+        public void get前公費２請求額は_entityが持つ前公費２請求額を返す() {
+            assertThat(sut.get前_公費２_請求額(), is(KyufujissekiKihonEntity.getMaeKohi2Seikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費２・本人負担額は_entityが持つ前・公費２・本人負担額を返す() {
-            assertThat(sut.get前・公費２・本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi2RiyoshaFutangaku()));
+        public void get前公費２本人負担額は_entityが持つ前公費２本人負担額を返す() {
+            assertThat(sut.get前_公費２_本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi2RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get前・公費２・緊急時施設療養費請求額は_entityが持つ前・公費２・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get前・公費２・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get前公費２緊急時施設療養費請求額は_entityが持つ前公費２緊急時施設療養費請求額を返す() {
+            assertThat(sut.get前_公費２_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費２・特定診療費請求額は_entityが持つ前・公費２・特定診療費請求額を返す() {
-            assertThat(sut.get前・公費２・特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi2TokuteiShinryohiSeikyugaku()));
+        public void get前公費２特定診療費請求額は_entityが持つ前公費２特定診療費請求額を返す() {
+            assertThat(sut.get前_公費２_特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi2TokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費２・特定入所者介護サービス費等請求額は_entityが持つ前・公費２・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get前・公費２・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get前公費２特定入所者介護サービス費等請求額は_entityが持つ前公費２特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get前_公費２_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費３・サービス単位数は_entityが持つ前・公費３・サービス単位数を返す() {
-            assertThat(sut.get前・公費３・サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi3ServiceTanisu()));
+        public void get前公費３サービス単位数は_entityが持つ前公費３サービス単位数を返す() {
+            assertThat(sut.get前_公費３_サービス単位数(), is(KyufujissekiKihonEntity.getMaeKohi3ServiceTanisu())
+            );
         }
 
         @Test
-        public void get前・公費３・請求額は_entityが持つ前・公費３・請求額を返す() {
-            assertThat(sut.get前・公費３・請求額(), is(KyufujissekiKihonEntity.getMaeKohi3Seikyugaku()));
+        public void get前公費３請求額は_entityが持つ前公費３請求額を返す() {
+            assertThat(sut.get前_公費３_請求額(), is(KyufujissekiKihonEntity.getMaeKohi3Seikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費３・本人負担額は_entityが持つ前・公費３・本人負担額を返す() {
-            assertThat(sut.get前・公費３・本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi3RiyoshaFutangaku()));
+        public void get前公費３本人負担額は_entityが持つ前公費３本人負担額を返す() {
+            assertThat(sut.get前_公費３_本人負担額(), is(KyufujissekiKihonEntity.getMaeKohi3RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get前・公費３・緊急時施設療養費請求額は_entityが持つ前・公費３・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get前・公費３・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get前公費３緊急時施設療養費請求額は_entityが持つ前公費３緊急時施設療養費請求額を返す() {
+            assertThat(sut.get前_公費３_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費３・特定診療費請求額は_entityが持つ前・公費３・特定診療費請求額を返す() {
-            assertThat(sut.get前・公費３・特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi3TokuteiShinryohiSeikyugaku()));
+        public void get前公費３特定診療費請求額は_entityが持つ前公費３特定診療費請求額を返す() {
+            assertThat(sut.get前_公費３_特定診療費請求額(), is(KyufujissekiKihonEntity.getMaeKohi3TokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get前・公費３・特定入所者介護サービス費等請求額は_entityが持つ前・公費３・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get前・公費３・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get前公費３特定入所者介護サービス費等請求額は_entityが持つ前公費３特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get前_公費３_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・保険・サービス単位数は_entityが持つ後・保険・サービス単位数を返す() {
-            assertThat(sut.get後・保険・サービス単位数(), is(KyufujissekiKihonEntity.getAtoHokenServiceTanisu()));
+        public void get後保険サービス単位数は_entityが持つ後保険サービス単位数を返す() {
+            assertThat(sut.get後_保険_サービス単位数(), is(KyufujissekiKihonEntity.getAtoHokenServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・保険・請求額は_entityが持つ後・保険・請求額を返す() {
-            assertThat(sut.get後・保険・請求額(), is(KyufujissekiKihonEntity.getAtoHokenSeikyugaku()));
+        public void get後保険請求額は_entityが持つ後保険請求額を返す() {
+            assertThat(sut.get後_保険_請求額(), is(KyufujissekiKihonEntity.getAtoHokenSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・保険・利用者負担額は_entityが持つ後・保険・利用者負担額を返す() {
-            assertThat(sut.get後・保険・利用者負担額(), is(KyufujissekiKihonEntity.getAtoHokenRiyoshaFutangaku()));
+        public void get後保険用者負担額は_entityが持つ後保険利用者負担額を返す() {
+            assertThat(sut.get後_保険_利用者負担額(), is(KyufujissekiKihonEntity.getAtoHokenRiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get後・緊急時施設療養費請求額は_entityが持つ後・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get後・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoHokenKinkyuShisetsuRyoyoSeikyugaku()));
+        public void get後緊急時施設療養費請求額は_entityが持つ後緊急時施設療養費請求額を返す() {
+            assertThat(sut.get後_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoHokenKinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・保険・特定診療費請求額は_entityが持つ後・保険・特定診療費請求額を返す() {
-            assertThat(sut.get後・保険・特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoHokenTokuteiShinryohiSeikyugaku()));
+        public void get後保険特定診療費請求額は_entityが持つ後保険特定診療費請求額を返す() {
+            assertThat(sut.get後_保険_特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoHokenTokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・保険・特定入所者介護サービス費等請求額は_entityが持つ後・保険・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get後・保険・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get後保険特定入所者介護サービス費等請求額は_entityが持つ後保険特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get後_保険_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費１・サービス単位数は_entityが持つ後・公費１・サービス単位数を返す() {
-            assertThat(sut.get後・公費１・サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi1ServiceTanisu()));
+        public void get後公費１サービス単位数は_entityが持つ後公費１サービス単位数を返す() {
+            assertThat(sut.get後_公費１_サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi1ServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費１・請求額は_entityが持つ後・公費１・請求額を返す() {
-            assertThat(sut.get後・公費１・請求額(), is(KyufujissekiKihonEntity.getAtoKohi1Seikyugaku()));
+        public void get後公費１請求額は_entityが持つ後公費１請求額を返す() {
+            assertThat(sut.get後_公費１_請求額(), is(KyufujissekiKihonEntity.getAtoKohi1Seikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費１・本人負担額は_entityが持つ後・公費１・本人負担額を返す() {
-            assertThat(sut.get後・公費１・本人負担額(), is(KyufujissekiKihonEntity.getAtoKohi1RiyoshaFutangaku()));
+        public void get後公費１本人負担額は_entityが持つ後公費１本人負担額を返す() {
+            assertThat(sut.get後_公費１_本人負担額(), is(KyufujissekiKihonEntity.getAtoKohi1RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get後・公費１・緊急時施設療養費請求額は_entityが持つ後・公費１・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get後・公費１・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get後公費１緊急時施設療養費請求額は_entityが持つ後公費１緊急時施設療養費請求額を返す() {
+            assertThat(sut.get後_公費１_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費１・特定診療費請求額は_entityが持つ後・公費１・特定診療費請求額を返す() {
-            assertThat(sut.get後・公費１・特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi1TokuteiShinryohiSeikyugaku()));
+        public void get後公費１特定診療費請求額は_entityが持つ後公費１特定診療費請求額を返す() {
+            assertThat(sut.get後_公費１_特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi1TokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費１・特定入所者介護サービス費等請求額は_entityが持つ後・公費１・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get後・公費１・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get後公費１特定入所者介護サービス費等請求額は_entityが持つ後公費１特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get後_公費１_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費２・サービス単位数は_entityが持つ後・公費２・サービス単位数を返す() {
-            assertThat(sut.get後・公費２・サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi2ServiceTanisu()));
+        public void get後公費２サービス単位数は_entityが持つ後公費２サービス単位数を返す() {
+            assertThat(sut.get後_公費２_サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi2ServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費２・請求額は_entityが持つ後・公費２・請求額を返す() {
-            assertThat(sut.get後・公費２・請求額(), is(KyufujissekiKihonEntity.getAtoKohi2Seikyugaku()));
+        public void get後公費２請求額は_entityが持つ後公費２請求額を返す() {
+            assertThat(sut.get後_公費２_請求額(), is(KyufujissekiKihonEntity.getAtoKohi2Seikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費２・利用者負担額は_entityが持つ後・公費２・利用者負担額を返す() {
-            assertThat(sut.get後・公費２・利用者負担額(), is(KyufujissekiKihonEntity.getAtoKohi2RiyoshaFutangaku()));
+        public void get後公費２利用者負担額は_entityが持つ後公費２利用者負担額を返す() {
+            assertThat(sut.get後_公費２_利用者負担額(), is(KyufujissekiKihonEntity.getAtoKohi2RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get後・公費２・緊急時施設療養費請求額は_entityが持つ後・公費２・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get後・公費２・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get後公費２緊急時施設療養費請求額は_entityが持つ後公費２緊急時施設療養費請求額を返す() {
+            assertThat(sut.get後_公費２_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費２・特定診療費請求額は_entityが持つ後・公費２・特定診療費請求額を返す() {
-            assertThat(sut.get後・公費２・特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi2TokuteiShinryohiSeikyugaku()));
+        public void get後公費２特定診療費請求額は_entityが持つ後公費２特定診療費請求額を返す() {
+            assertThat(sut.get後_公費２_特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi2TokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費２・特定入所者介護サービス費等請求額は_entityが持つ後・公費２・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get後・公費２・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get後公費２特定入所者介護サービス費等請求額は_entityが持つ後公費２特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get後_公費２_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費３・サービス単位数は_entityが持つ後・公費３・サービス単位数を返す() {
-            assertThat(sut.get後・公費３・サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi3ServiceTanisu()));
+        public void get後公費３サービス単位数は_entityが持つ後公費サービス単位数を返す() {
+            assertThat(sut.get後_公費３_サービス単位数(), is(KyufujissekiKihonEntity.getAtoKohi3ServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費３・請求額は_entityが持つ後・公費３・請求額を返す() {
-            assertThat(sut.get後・公費３・請求額(), is(KyufujissekiKihonEntity.getAtoKohi3Seikyugaku()));
+        public void get後公費３請求額は_entityが持つ後公費３請求額を返す() {
+            assertThat(sut.get後_公費３_請求額(), is(KyufujissekiKihonEntity.getAtoKohi3Seikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費３・利用者負担額は_entityが持つ後・公費３・利用者負担額を返す() {
-            assertThat(sut.get後・公費３・利用者負担額(), is(KyufujissekiKihonEntity.getAtoKohi3RiyoshaFutangaku()));
+        public void get後公費３利用者負担額は_entityが持つ後公費３利用者負担額を返す() {
+            assertThat(sut.get後_公費３_利用者負担額(), is(KyufujissekiKihonEntity.getAtoKohi3RiyoshaFutangaku())
+            );
         }
 
         @Test
-        public void get後・公費３・緊急時施設療養費請求額は_entityが持つ後・公費３・緊急時施設療養費請求額を返す() {
-            assertThat(sut.get後・公費３・緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku()));
+        public void get後公費３緊急時施設療養費請求額は_entityが持つ後公費３緊急時施設療養費請求額を返す() {
+            assertThat(sut.get後_公費３_緊急時施設療養費請求額(), is(KyufujissekiKihonEntity.getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費３・特定診療費請求額は_entityが持つ後・公費３・特定診療費請求額を返す() {
-            assertThat(sut.get後・公費３・特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi3TokuteiShinryohiSeikyugaku()));
+        public void get後公費３特定診療費請求額は_entityが持つ後公費３特定診療費請求額を返す() {
+            assertThat(sut.get後_公費３_特定診療費請求額(), is(KyufujissekiKihonEntity.getAtoKohi3TokuteiShinryohiSeikyugaku())
+            );
         }
 
         @Test
-        public void get後・公費３・特定入所者介護サービス費等請求額は_entityが持つ後・公費３・特定入所者介護サービス費等請求額を返す() {
-            assertThat(sut.get後・公費３・特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku()));
+        public void get後公費３特定入所者介護サービス費等請求額は_entityが持つ後公費３特定入所者介護サービス費等請求額を返す() {
+            assertThat(sut.get後_公費３_特定入所者介護サービス費等請求額(), is(KyufujissekiKihonEntity.getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku())
+            );
         }
 
         @Test
@@ -612,8 +738,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
 
             sut = new KyufujissekiKihon(KyufujissekiKihonEntity);
         }
@@ -631,8 +765,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
 
             sut = new KyufujissekiKihon(KyufujissekiKihonEntity);
         }
@@ -651,8 +793,16 @@ public class KyufujissekiKihonTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKihonEntity = DbT3017KyufujissekiKihonEntityGenerator.createDbT3017KyufujissekiKihonEntity();
-            KyufujissekiKihonEntity.setXXX(主キー名1);
-            KyufujissekiKihonEntity.setXXX(主キー名2);
+            KyufujissekiKihonEntity.setKokanShikibetsuNo(交換情報識別番号);
+            KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);
+            KyufujissekiKihonEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKihonEntity.setToshiNo(通し番号);
 
         }
 
