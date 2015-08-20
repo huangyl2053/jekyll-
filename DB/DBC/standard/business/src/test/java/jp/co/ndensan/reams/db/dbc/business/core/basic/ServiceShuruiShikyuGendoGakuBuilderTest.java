@@ -5,9 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +27,21 @@ public class ServiceShuruiShikyuGendoGakuBuilderTest extends DbcTestBase {
     private static DbT7111ServiceShuruiShikyuGendoGakuEntity ServiceShuruiShikyuGendoGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ServiceShuruiCode 主キー名1;
+    private static RString 主キー名2;
+    private static FlexibleYearMonth 主キー名3;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
+        主キー名2 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+        主キー名3 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+        主キー名4 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ServiceShuruiShikyuGendoGakuBuilder sut;
         private static ServiceShuruiShikyuGendoGaku business;
@@ -43,8 +49,8 @@ public class ServiceShuruiShikyuGendoGakuBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ServiceShuruiShikyuGendoGakuEntity = new DbT7111ServiceShuruiShikyuGendoGakuEntity();
-            ServiceShuruiShikyuGendoGakuEntity.setXXX(主キー名1);
-            ServiceShuruiShikyuGendoGakuEntity.setXXX(主キー名2);
+            ServiceShuruiShikyuGendoGakuEntity.setServiceShuruiCode(主キー名1);
+            ServiceShuruiShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名2);
 
             business = new ServiceShuruiShikyuGendoGaku(ServiceShuruiShikyuGendoGakuEntity);
 

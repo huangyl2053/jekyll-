@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3063SaishinsaKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3063SaishinsaKetteiShukeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class SaishinsaKetteiShukeiBuilderTest extends DbcTestBase {
     private static DbT3063SaishinsaKetteiShukeiEntity SaishinsaKetteiShukeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月;
+        主キー名2 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_保険者区分;
+        主キー名3 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static SaishinsaKetteiShukeiBuilder sut;
         private static SaishinsaKetteiShukei business;
@@ -42,14 +47,15 @@ public class SaishinsaKetteiShukeiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = new DbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
             business = new SaishinsaKetteiShukei(SaishinsaKetteiShukeiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の取扱年月は_設定した値と同じ取扱年月を返す() {
             business = sut.set取扱年月(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月).build();
@@ -69,111 +75,111 @@ public class SaishinsaKetteiShukeiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の介護給付費・請求・件数は_設定した値と同じ介護給付費・請求・件数を返す() {
-            business = sut.set介護給付費・請求・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・件数).build();
-            assertThat(business.get介護給付費・請求・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・件数));
+        public void 戻り値の介護給付費_請求_件数は_設定した値と同じ介護給付費_請求_件数を返す() {
+            business = sut.set介護給付費_請求_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_件数).build();
+            assertThat(business.get介護給付費_請求_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_件数));
         }
 
         @Test
-        public void 戻り値の介護給付費・請求・単位数は_設定した値と同じ介護給付費・請求・単位数を返す() {
-            business = sut.set介護給付費・請求・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・単位数).build();
-            assertThat(business.get介護給付費・請求・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・単位数));
+        public void 戻り値の介護給付費_請求_単位数は_設定した値と同じ介護給付費_請求_単位数を返す() {
+            business = sut.set介護給付費_請求_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_単位数).build();
+            assertThat(business.get介護給付費_請求_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_単位数));
         }
 
         @Test
-        public void 戻り値の介護給付費・請求・保険者負担額は_設定した値と同じ介護給付費・請求・保険者負担額を返す() {
-            business = sut.set介護給付費・請求・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・保険者負担額).build();
-            assertThat(business.get介護給付費・請求・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・請求・保険者負担額));
+        public void 戻り値の介護給付費_請求_保険者負担額は_設定した値と同じ介護給付費_請求_保険者負担額を返す() {
+            business = sut.set介護給付費_請求_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_保険者負担額).build();
+            assertThat(business.get介護給付費_請求_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_請求_保険者負担額));
         }
 
         @Test
-        public void 戻り値の介護給付費・決定・件数は_設定した値と同じ介護給付費・決定・件数を返す() {
-            business = sut.set介護給付費・決定・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・件数).build();
-            assertThat(business.get介護給付費・決定・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・件数));
+        public void 戻り値の介護給付費_決定_件数は_設定した値と同じ介護給付費_決定_件数を返す() {
+            business = sut.set介護給付費_決定_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_件数).build();
+            assertThat(business.get介護給付費_決定_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_件数));
         }
 
         @Test
-        public void 戻り値の介護給付費・決定・単位数は_設定した値と同じ介護給付費・決定・単位数を返す() {
-            business = sut.set介護給付費・決定・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・単位数).build();
-            assertThat(business.get介護給付費・決定・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・単位数));
+        public void 戻り値の介護給付費_決定_単位数は_設定した値と同じ介護給付費_決定_単位数を返す() {
+            business = sut.set介護給付費_決定_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_単位数).build();
+            assertThat(business.get介護給付費_決定_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_単位数));
         }
 
         @Test
-        public void 戻り値の介護給付費・決定・保険者負担額は_設定した値と同じ介護給付費・決定・保険者負担額を返す() {
-            business = sut.set介護給付費・決定・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・保険者負担額).build();
-            assertThat(business.get介護給付費・決定・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・決定・保険者負担額));
+        public void 戻り値の介護給付費_決定_保険者負担額は_設定した値と同じ介護給付費_決定_保険者負担額を返す() {
+            business = sut.set介護給付費_決定_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_保険者負担額).build();
+            assertThat(business.get介護給付費_決定_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_決定_保険者負担額));
         }
 
         @Test
-        public void 戻り値の介護給付費・調整・件数は_設定した値と同じ介護給付費・調整・件数を返す() {
-            business = sut.set介護給付費・調整・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・件数).build();
-            assertThat(business.get介護給付費・調整・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・件数));
+        public void 戻り値の介護給付費_調整_件数は_設定した値と同じ介護給付費_調整_件数を返す() {
+            business = sut.set介護給付費_調整_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_件数).build();
+            assertThat(business.get介護給付費_調整_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_件数));
         }
 
         @Test
-        public void 戻り値の介護給付費・調整・単位数は_設定した値と同じ介護給付費・調整・単位数を返す() {
-            business = sut.set介護給付費・調整・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・単位数).build();
-            assertThat(business.get介護給付費・調整・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・単位数));
+        public void 戻り値の介護給付費_調整_単位数は_設定した値と同じ介護給付費_調整_単位数を返す() {
+            business = sut.set介護給付費_調整_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_単位数).build();
+            assertThat(business.get介護給付費_調整_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_単位数));
         }
 
         @Test
-        public void 戻り値の介護給付費・調整・保険者負担額は_設定した値と同じ介護給付費・調整・保険者負担額を返す() {
-            business = sut.set介護給付費・調整・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・保険者負担額).build();
-            assertThat(business.get介護給付費・調整・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費・調整・保険者負担額));
+        public void 戻り値の介護給付費_調整_保険者負担額は_設定した値と同じ介護給付費_調整_保険者負担額を返す() {
+            business = sut.set介護給付費_調整_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_保険者負担額).build();
+            assertThat(business.get介護給付費_調整_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_介護給付費_調整_保険者負担額));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・請求・件数は_設定した値と同じ高額介護サービス費・請求・件数を返す() {
-            business = sut.set高額介護サービス費・請求・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・件数).build();
-            assertThat(business.get高額介護サービス費・請求・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・件数));
+        public void 戻り値の高額介護サービス費_請求_件数は_設定した値と同じ高額介護サービス費_請求_件数を返す() {
+            business = sut.set高額介護サービス費_請求_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_件数).build();
+            assertThat(business.get高額介護サービス費_請求_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_件数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・請求・単位数は_設定した値と同じ高額介護サービス費・請求・単位数を返す() {
-            business = sut.set高額介護サービス費・請求・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・単位数).build();
-            assertThat(business.get高額介護サービス費・請求・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・単位数));
+        public void 戻り値の高額介護サービス費_請求_単位数は_設定した値と同じ高額介護サービス費_請求_単位数を返す() {
+            business = sut.set高額介護サービス費_請求_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_単位数).build();
+            assertThat(business.get高額介護サービス費_請求_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_単位数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・請求・保険者負担額は_設定した値と同じ高額介護サービス費・請求・保険者負担額を返す() {
-            business = sut.set高額介護サービス費・請求・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・保険者負担額).build();
-            assertThat(business.get高額介護サービス費・請求・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・請求・保険者負担額));
+        public void 戻り値の高額介護サービス費_請求_保険者負担額は_設定した値と同じ高額介護サービス費_請求_保険者負担額を返す() {
+            business = sut.set高額介護サービス費_請求_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_保険者負担額).build();
+            assertThat(business.get高額介護サービス費_請求_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_請求_保険者負担額));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・決定・件数は_設定した値と同じ高額介護サービス費・決定・件数を返す() {
-            business = sut.set高額介護サービス費・決定・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・件数).build();
-            assertThat(business.get高額介護サービス費・決定・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・件数));
+        public void 戻り値の高額介護サービス費_決定_件数は_設定した値と同じ高額介護サービス費_決定_件数を返す() {
+            business = sut.set高額介護サービス費_決定_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_件数).build();
+            assertThat(business.get高額介護サービス費_決定_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_件数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・決定・単位数は_設定した値と同じ高額介護サービス費・決定・単位数を返す() {
-            business = sut.set高額介護サービス費・決定・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・単位数).build();
-            assertThat(business.get高額介護サービス費・決定・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・単位数));
+        public void 戻り値の高額介護サービス費_決定_単位数は_設定した値と同じ高額介護サービス費_決定_単位数を返す() {
+            business = sut.set高額介護サービス費_決定_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_単位数).build();
+            assertThat(business.get高額介護サービス費_決定_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_単位数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・決定・保険者負担額は_設定した値と同じ高額介護サービス費・決定・保険者負担額を返す() {
-            business = sut.set高額介護サービス費・決定・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・保険者負担額).build();
-            assertThat(business.get高額介護サービス費・決定・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・決定・保険者負担額));
+        public void 戻り値の高額介護サービス費_決定_保険者負担額は_設定した値と同じ高額介護サービス費_決定_保険者負担額を返す() {
+            business = sut.set高額介護サービス費_決定_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_保険者負担額).build();
+            assertThat(business.get高額介護サービス費_決定_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_決定_保険者負担額));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・調整・件数は_設定した値と同じ高額介護サービス費・調整・件数を返す() {
-            business = sut.set高額介護サービス費・調整・件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・件数).build();
-            assertThat(business.get高額介護サービス費・調整・件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・件数));
+        public void 戻り値の高額介護サービス費_調整_件数は_設定した値と同じ高額介護サービス費_調整_件数を返す() {
+            business = sut.set高額介護サービス費_調整_件数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_件数).build();
+            assertThat(business.get高額介護サービス費_調整_件数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_件数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・調整・単位数は_設定した値と同じ高額介護サービス費・調整・単位数を返す() {
-            business = sut.set高額介護サービス費・調整・単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・単位数).build();
-            assertThat(business.get高額介護サービス費・調整・単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・単位数));
+        public void 戻り値の高額介護サービス費_調整_単位数は_設定した値と同じ高額介護サービス費_調整_単位数を返す() {
+            business = sut.set高額介護サービス費_調整_単位数(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_単位数).build();
+            assertThat(business.get高額介護サービス費_調整_単位数(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_単位数));
         }
 
         @Test
-        public void 戻り値の高額介護サービス費・調整・保険者負担額は_設定した値と同じ高額介護サービス費・調整・保険者負担額を返す() {
-            business = sut.set高額介護サービス費・調整・保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・保険者負担額).build();
-            assertThat(business.get高額介護サービス費・調整・保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費・調整・保険者負担額));
+        public void 戻り値の高額介護サービス費_調整_保険者負担額は_設定した値と同じ高額介護サービス費_調整_保険者負担額を返す() {
+            business = sut.set高額介護サービス費_調整_保険者負担額(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_保険者負担額).build();
+            assertThat(business.get高額介護サービス費_調整_保険者負担額(), is(DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_高額介護サービス費_調整_保険者負担額));
         }
 
         @Test

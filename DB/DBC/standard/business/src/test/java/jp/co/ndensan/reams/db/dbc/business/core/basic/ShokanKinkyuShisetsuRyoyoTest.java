@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3040ShokanKinkyuShisetsuRyoyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
@@ -79,15 +77,15 @@ public class ShokanKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Test
         public void 指定したキーが保持するDbT3040ShokanKinkyuShisetsuRyoyoEntityにセットされている() {
             sut = new ShokanKinkyuShisetsuRyoyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanKinkyuShisetsuRyoyoIdentifierにセットされている() {
             sut = new ShokanKinkyuShisetsuRyoyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -112,8 +110,8 @@ public class ShokanKinkyuShisetsuRyoyoTest extends DbcTestBase {
 
             sut = new ShokanKinkyuShisetsuRyoyo(ShokanKinkyuShisetsuRyoyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 

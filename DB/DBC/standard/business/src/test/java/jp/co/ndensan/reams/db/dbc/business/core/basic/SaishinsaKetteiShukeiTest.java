@@ -4,11 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3063SaishinsaKetteiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3063SaishinsaKetteiShukeiEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +30,16 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
     private static DbT3063SaishinsaKetteiShukeiEntity SaishinsaKetteiShukeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_取扱年月;
+        主キー名2 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_保険者区分;
+        主キー名3 = DbT3063SaishinsaKetteiShukeiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +49,33 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SaishinsaKetteiShukei(null, 主キー名2);
+            sut = new SaishinsaKetteiShukei(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SaishinsaKetteiShukei(主キー名1, null);
+            sut = new SaishinsaKetteiShukei(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT3063SaishinsaKetteiShukeiEntityにセットされている() {
-            sut = new SaishinsaKetteiShukei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new SaishinsaKetteiShukei(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.get取扱年月(), is(主キー名1));
+            assertThat(sut.get保険者区分(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するSaishinsaKetteiShukeiIdentifierにセットされている() {
-            sut = new SaishinsaKetteiShukei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new SaishinsaKetteiShukei(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().get取扱年月(), is(主キー名1));
+            assertThat(sut.identifier().get保険者区分(), is(主キー名2));
         }
     }
 
@@ -82,8 +86,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +100,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
 
             sut = new SaishinsaKetteiShukei(SaishinsaKetteiShukeiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get取扱年月(), is(主キー名1));
+            assertThat(sut.identifier().get保険者区分(), is(主キー名2));
         }
     }
 
@@ -108,8 +112,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
             sut = new SaishinsaKetteiShukei(SaishinsaKetteiShukeiEntity);
         }
@@ -130,93 +134,93 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         }
 
         @Test
-        public void get介護給付費・請求・件数は_entityが持つ介護給付費・請求・件数を返す() {
-            assertThat(sut.get介護給付費・請求・件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuKensu()));
+        public void get介護給付費_請求_件数は_entityが持つ介護給付費_請求_件数を返す() {
+            assertThat(sut.get介護給付費_請求_件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuKensu()));
         }
 
         @Test
-        public void get介護給付費・請求・単位数は_entityが持つ介護給付費・請求・単位数を返す() {
-            assertThat(sut.get介護給付費・請求・単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuTanisu()));
+        public void get介護給付費_請求_単位数は_entityが持つ介護給付費_請求_単位数を返す() {
+            assertThat(sut.get介護給付費_請求_単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuTanisu()));
         }
 
         @Test
-        public void get介護給付費・請求・保険者負担額は_entityが持つ介護給付費・請求・保険者負担額を返す() {
-            assertThat(sut.get介護給付費・請求・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuFutangaku()));
+        public void get介護給付費_請求_保険者負担額は_entityが持つ介護給付費_請求_保険者負担額を返す() {
+            assertThat(sut.get介護給付費_請求_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiSeikyuFutangaku()));
         }
 
         @Test
-        public void get介護給付費・決定・件数は_entityが持つ介護給付費・決定・件数を返す() {
-            assertThat(sut.get介護給付費・決定・件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiKensu()));
+        public void get介護給付費_決定_件数は_entityが持つ介護給付費_決定_件数を返す() {
+            assertThat(sut.get介護給付費_決定_件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiKensu()));
         }
 
         @Test
-        public void get介護給付費・決定・単位数は_entityが持つ介護給付費・決定・単位数を返す() {
-            assertThat(sut.get介護給付費・決定・単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiTanisu()));
+        public void get介護給付費_決定_単位数は_entityが持つ介護給付費_決定_単位数を返す() {
+            assertThat(sut.get介護給付費_決定_単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiTanisu()));
         }
 
         @Test
-        public void get介護給付費・決定・保険者負担額は_entityが持つ介護給付費・決定・保険者負担額を返す() {
-            assertThat(sut.get介護給付費・決定・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiFutangaku()));
+        public void get介護給付費_決定_保険者負担額は_entityが持つ介護給付費_決定_保険者負担額を返す() {
+            assertThat(sut.get介護給付費_決定_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiKetteiFutangaku()));
         }
 
         @Test
-        public void get介護給付費・調整・件数は_entityが持つ介護給付費・調整・件数を返す() {
-            assertThat(sut.get介護給付費・調整・件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiKensu()));
+        public void get介護給付費_調整_件数は_entityが持つ介護給付費_調整_件数を返す() {
+            assertThat(sut.get介護給付費_調整_件数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiKensu()));
         }
 
         @Test
-        public void get介護給付費・調整・単位数は_entityが持つ介護給付費・調整・単位数を返す() {
-            assertThat(sut.get介護給付費・調整・単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiTanisu()));
+        public void get介護給付費_調整_単位数は_entityが持つ介護給付費_調整_単位数を返す() {
+            assertThat(sut.get介護給付費_調整_単位数(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiTanisu()));
         }
 
         @Test
-        public void get介護給付費・調整・保険者負担額は_entityが持つ介護給付費・調整・保険者負担額を返す() {
-            assertThat(sut.get介護給付費・調整・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiFutangaku()));
+        public void get介護給付費_調整_保険者負担額は_entityが持つ介護給付費_調整_保険者負担額を返す() {
+            assertThat(sut.get介護給付費_調整_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKaigoKyufuhiChoseiFutangaku()));
         }
 
         @Test
-        public void get高額介護サービス費・請求・件数は_entityが持つ高額介護サービス費・請求・件数を返す() {
-            assertThat(sut.get高額介護サービス費・請求・件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuKensu()));
+        public void get高額介護サービス費_請求_件数は_entityが持つ高額介護サービス費_請求_件数を返す() {
+            assertThat(sut.get高額介護サービス費_請求_件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuKensu()));
         }
 
         @Test
-        public void get高額介護サービス費・請求・単位数は_entityが持つ高額介護サービス費・請求・単位数を返す() {
-            assertThat(sut.get高額介護サービス費・請求・単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuTanisu()));
+        public void get高額介護サービス費_請求_単位数は_entityが持つ高額介護サービス費_請求_単位数を返す() {
+            assertThat(sut.get高額介護サービス費_請求_単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuTanisu()));
         }
 
         @Test
-        public void get高額介護サービス費・請求・保険者負担額は_entityが持つ高額介護サービス費・請求・保険者負担額を返す() {
-            assertThat(sut.get高額介護サービス費・請求・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuFutangaku()));
+        public void get高額介護サービス費_請求_保険者負担額は_entityが持つ高額介護サービス費_請求_保険者負担額を返す() {
+            assertThat(sut.get高額介護サービス費_請求_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiSeikyuFutangaku()));
         }
 
         @Test
-        public void get高額介護サービス費・決定・件数は_entityが持つ高額介護サービス費・決定・件数を返す() {
-            assertThat(sut.get高額介護サービス費・決定・件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiKensu()));
+        public void get高額介護サービス費_決定_件数は_entityが持つ高額介護サービス費_決定_件数を返す() {
+            assertThat(sut.get高額介護サービス費_決定_件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiKensu()));
         }
 
         @Test
-        public void get高額介護サービス費・決定・単位数は_entityが持つ高額介護サービス費・決定・単位数を返す() {
-            assertThat(sut.get高額介護サービス費・決定・単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiTanisu()));
+        public void get高額介護サービス費_決定_単位数は_entityが持つ高額介護サービス費_決定_単位数を返す() {
+            assertThat(sut.get高額介護サービス費_決定_単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiTanisu()));
         }
 
         @Test
-        public void get高額介護サービス費・決定・保険者負担額は_entityが持つ高額介護サービス費・決定・保険者負担額を返す() {
-            assertThat(sut.get高額介護サービス費・決定・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiFutangaku()));
+        public void get高額介護サービス費_決定_保険者負担額は_entityが持つ高額介護サービス費_決定_保険者負担額を返す() {
+            assertThat(sut.get高額介護サービス費_決定_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiKetteiFutangaku()));
         }
 
         @Test
-        public void get高額介護サービス費・調整・件数は_entityが持つ高額介護サービス費・調整・件数を返す() {
-            assertThat(sut.get高額介護サービス費・調整・件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiKensu()));
+        public void get高額介護サービス費_調整_件数は_entityが持つ高額介護サービス費_調整_件数を返す() {
+            assertThat(sut.get高額介護サービス費_調整_件数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiKensu()));
         }
 
         @Test
-        public void get高額介護サービス費・調整・単位数は_entityが持つ高額介護サービス費・調整・単位数を返す() {
-            assertThat(sut.get高額介護サービス費・調整・単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiTanisu()));
+        public void get高額介護サービス費_調整_単位数は_entityが持つ高額介護サービス費_調整_単位数を返す() {
+            assertThat(sut.get高額介護サービス費_調整_単位数(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiTanisu()));
         }
 
         @Test
-        public void get高額介護サービス費・調整・保険者負担額は_entityが持つ高額介護サービス費・調整・保険者負担額を返す() {
-            assertThat(sut.get高額介護サービス費・調整・保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiFutangaku()));
+        public void get高額介護サービス費_調整_保険者負担額は_entityが持つ高額介護サービス費_調整_保険者負担額を返す() {
+            assertThat(sut.get高額介護サービス費_調整_保険者負担額(), is(SaishinsaKetteiShukeiEntity.getKogakuKaigoServicehiChoseiFutangaku()));
         }
 
         @Test
@@ -247,8 +251,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
             sut = new SaishinsaKetteiShukei(SaishinsaKetteiShukeiEntity);
         }
@@ -266,8 +270,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
             sut = new SaishinsaKetteiShukei(SaishinsaKetteiShukeiEntity);
         }
@@ -286,8 +290,8 @@ public class SaishinsaKetteiShukeiTest extends DbcTestBase {
         @Before
         public void setUp() {
             SaishinsaKetteiShukeiEntity = DbT3063SaishinsaKetteiShukeiEntityGenerator.createDbT3063SaishinsaKetteiShukeiEntity();
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名1);
-            SaishinsaKetteiShukeiEntity.setXXX(主キー名2);
+            SaishinsaKetteiShukeiEntity.setToriatsukaiYM(主キー名1);
+            SaishinsaKetteiShukeiEntity.setHokenshaKubun(主キー名2);
 
         }
 

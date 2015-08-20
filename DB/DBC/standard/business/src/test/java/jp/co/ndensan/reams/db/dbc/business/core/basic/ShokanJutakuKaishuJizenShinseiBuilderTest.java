@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +28,21 @@ public class ShokanJutakuKaishuJizenShinseiBuilderTest extends DbcTestBase {
     private static DbT3035ShokanJutakuKaishuJizenShinseiEntity ShokanJutakuKaishuJizenShinseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ShokanJutakuKaishuJizenShinseiBuilder sut;
         private static ShokanJutakuKaishuJizenShinsei business;
@@ -42,14 +50,15 @@ public class ShokanJutakuKaishuJizenShinseiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = new DbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
 
             business = new ShokanJutakuKaishuJizenShinsei(ShokanJutakuKaishuJizenShinseiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号).build();
@@ -171,27 +180,27 @@ public class ShokanJutakuKaishuJizenShinseiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の給付額等・費用額合計は_設定した値と同じ給付額等・費用額合計を返す() {
-            business = sut.set給付額等・費用額合計(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・費用額合計).build();
-            assertThat(business.get給付額等・費用額合計(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・費用額合計));
+        public void 戻り値の給付額等_費用額合計は_設定した値と同じ給付額等_費用額合計を返す() {
+            business = sut.set給付額等_費用額合計(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_費用額合計).build();
+            assertThat(business.get給付額等_費用額合計(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_費用額合計));
         }
 
         @Test
-        public void 戻り値の給付額等・保険対象費用額は_設定した値と同じ給付額等・保険対象費用額を返す() {
-            business = sut.set給付額等・保険対象費用額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・保険対象費用額).build();
-            assertThat(business.get給付額等・保険対象費用額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・保険対象費用額));
+        public void 戻り値の給付額等_保険対象費用額は_設定した値と同じ給付額等_保険対象費用額を返す() {
+            business = sut.set給付額等_保険対象費用額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_保険対象費用額).build();
+            assertThat(business.get給付額等_保険対象費用額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_保険対象費用額));
         }
 
         @Test
-        public void 戻り値の給付額等・利用者自己負担額は_設定した値と同じ給付額等・利用者自己負担額を返す() {
-            business = sut.set給付額等・利用者自己負担額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・利用者自己負担額).build();
-            assertThat(business.get給付額等・利用者自己負担額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・利用者自己負担額));
+        public void 戻り値の給付額等_利用者自己負担額は_設定した値と同じ給付額等_利用者自己負担額を返す() {
+            business = sut.set給付額等_利用者自己負担額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_利用者自己負担額).build();
+            assertThat(business.get給付額等_利用者自己負担額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_利用者自己負担額));
         }
 
         @Test
-        public void 戻り値の給付額等・保険給付費額は_設定した値と同じ給付額等・保険給付費額を返す() {
-            business = sut.set給付額等・保険給付費額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・保険給付費額).build();
-            assertThat(business.get給付額等・保険給付費額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等・保険給付費額));
+        public void 戻り値の給付額等_保険給付費額は_設定した値と同じ給付額等_保険給付費額を返す() {
+            business = sut.set給付額等_保険給付費額(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_保険給付費額).build();
+            assertThat(business.get給付額等_保険給付費額(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_給付額等_保険給付費額));
         }
 
         @Test
