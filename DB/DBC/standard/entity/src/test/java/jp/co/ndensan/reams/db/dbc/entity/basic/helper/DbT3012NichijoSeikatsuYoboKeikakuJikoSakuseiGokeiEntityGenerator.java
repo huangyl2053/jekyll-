@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 予防給付計画自己作成合計エンティティのテスト用インスタンスを作成する補助クラスです。
  */
-public final class DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator {
+public final class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_対象年月 = new FlexibleYearMonth("199001");
@@ -28,10 +28,10 @@ public final class DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator {
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator() {
+    private DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator() {
     }
 
-    public static DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity createDbT3012YoboKeikakuJikoSakuseiGokeiEntity() {
+    public static DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity() {
         DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = new DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setTaishoYM(DEFAULT_対象年月);

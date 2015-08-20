@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceCode;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7119ServiceCodeEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7119ServiceCodeDac;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -94,7 +94,7 @@ public class ServiceCodeManagerTest {
             int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
             ServiceCode result = sut.getサービスコード(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
+            assertThat(result.getサービス種類コード().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
         }
     }
 
@@ -118,7 +118,7 @@ public class ServiceCodeManagerTest {
             List<ServiceCode> result = sut.getサービスコード一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
+            assertThat(result.get(0).getサービス種類コード().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
         }
     }
 
@@ -151,7 +151,7 @@ public class ServiceCodeManagerTest {
             DbT7119ServiceCodeEntity entity = DbT7119ServiceCodeEntityGenerator.createDbT7119ServiceCodeEntity();
             entity.initializeMd5();
             ServiceCode サービスコード = new ServiceCode(entity);
-            サービスコード = サービスコード.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            サービスコード = サービスコード.createBuilderForEdit().setサービス名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveサービスコード(サービスコード), is(true));
         }
@@ -163,7 +163,7 @@ public class ServiceCodeManagerTest {
             DbT7119ServiceCodeEntity entity = DbT7119ServiceCodeEntityGenerator.createDbT7119ServiceCodeEntity();
             entity.initializeMd5();
             ServiceCode サービスコード = new ServiceCode(entity);
-            サービスコード = サービスコード.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            サービスコード = サービスコード.createBuilderForEdit().setサービス名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveサービスコード(サービスコード), is(false));
         }

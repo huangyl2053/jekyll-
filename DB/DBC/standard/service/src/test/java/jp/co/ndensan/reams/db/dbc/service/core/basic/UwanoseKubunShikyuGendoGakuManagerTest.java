@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.UwanoseKubunShikyuGendoGak
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7113UwanoseKubunShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +42,32 @@ public class UwanoseKubunShikyuGendoGakuManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get上乗せ居宅サービス区分支給限度額 extends FdaTestBase {
+    public static class get上乗せ居宅サービス区分支給限度額 extends DbcTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            sut.get上乗せ居宅サービス区分支給限度額(null, 主キー2);
+        public void 引数のRStringにnullを指定した場合_NullPointerExceptionが発生する() {
+            FlexibleYearMonth 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー3 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
+            sut.get上乗せ居宅サービス区分支給限度額(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
-            sut.get上乗せ居宅サービス区分支給限度額(主キー1, null);
+        public void 引数のFlexibleYearMonthにnullを指定した場合_NullPointerExceptionが発生する() {
+            RString 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+            int 主キー3 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
+            sut.get上乗せ居宅サービス区分支給限度額(主キー1, null, 主キー3);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
+            when(dac.selectByKey(any(RString.class), any(FlexibleYearMonth.class), any(int.class))).thenReturn(null);
 
-            主キー型1 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            UwanoseKubunShikyuGendoGaku result = sut.get上乗せ居宅サービス区分支給限度額(主キー1, 主キー2);
+            RString 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+            FlexibleYearMonth 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー3 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
+            UwanoseKubunShikyuGendoGaku result = sut.get上乗せ居宅サービス区分支給限度額(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +75,19 @@ public class UwanoseKubunShikyuGendoGakuManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7113UwanoseKubunShikyuGendoGakuEntity entity = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.createDbT7113UwanoseKubunShikyuGendoGakuEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(RString.class), any(FlexibleYearMonth.class), any(int.class))).thenReturn(entity);
 
-            主キー型1 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー2;
-            UwanoseKubunShikyuGendoGaku result = sut.get上乗せ居宅サービス区分支給限度額(主キー1, 主キー2);
+            RString 主キー1 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+            FlexibleYearMonth 主キー2 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー3 = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
+            UwanoseKubunShikyuGendoGaku result = sut.get上乗せ居宅サービス区分支給限度額(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get要介護状態区分(), is(DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class get上乗せ居宅サービス区分支給限度額一覧 extends FdaTestBase {
+    public static class get上乗せ居宅サービス区分支給限度額一覧 extends DbcTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +106,11 @@ public class UwanoseKubunShikyuGendoGakuManagerTest {
             List<UwanoseKubunShikyuGendoGaku> result = sut.get上乗せ居宅サービス区分支給限度額一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).get要介護状態区分(), is(DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分));
         }
     }
 
-    public static class save上乗せ居宅サービス区分支給限度額 extends XxxTestBase {
+    public static class save上乗せ居宅サービス区分支給限度額 extends DbcTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +139,7 @@ public class UwanoseKubunShikyuGendoGakuManagerTest {
             DbT7113UwanoseKubunShikyuGendoGakuEntity entity = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.createDbT7113UwanoseKubunShikyuGendoGakuEntity();
             entity.initializeMd5();
             UwanoseKubunShikyuGendoGaku 上乗せ居宅サービス区分支給限度額 = new UwanoseKubunShikyuGendoGaku(entity);
-            上乗せ居宅サービス区分支給限度額 = 上乗せ居宅サービス区分支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            上乗せ居宅サービス区分支給限度額 = 上乗せ居宅サービス区分支給限度額.createBuilderForEdit().set要介護状態区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save上乗せ居宅サービス区分支給限度額(上乗せ居宅サービス区分支給限度額), is(true));
         }
@@ -145,7 +151,7 @@ public class UwanoseKubunShikyuGendoGakuManagerTest {
             DbT7113UwanoseKubunShikyuGendoGakuEntity entity = DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.createDbT7113UwanoseKubunShikyuGendoGakuEntity();
             entity.initializeMd5();
             UwanoseKubunShikyuGendoGaku 上乗せ居宅サービス区分支給限度額 = new UwanoseKubunShikyuGendoGaku(entity);
-            上乗せ居宅サービス区分支給限度額 = 上乗せ居宅サービス区分支給限度額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            上乗せ居宅サービス区分支給限度額 = 上乗せ居宅サービス区分支給限度額.createBuilderForEdit().set要介護状態区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save上乗せ居宅サービス区分支給限度額(上乗せ居宅サービス区分支給限度額), is(false));
         }

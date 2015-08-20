@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -57,7 +58,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
-        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity = dac.selectByKey(
+        DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = dac.selectByKey(
                 被保険者番号,
                 対象年月,
                 履歴番号);
@@ -77,7 +78,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManager {
     public List<YoboKeikakuJikoSakuseiTankiRiyoNissu> get予防給付計画自己作成短期利用日数一覧() {
         List<YoboKeikakuJikoSakuseiTankiRiyoNissu> businessList = new ArrayList<>();
 
-        for (DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity : dac.selectAll()) {
+        for (DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity));
         }

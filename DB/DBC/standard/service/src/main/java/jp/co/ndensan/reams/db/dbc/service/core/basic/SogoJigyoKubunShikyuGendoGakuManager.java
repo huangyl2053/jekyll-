@@ -49,9 +49,7 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
      * @return SogoJigyoKubunShikyuGendoGaku
      */
     @Transaction
-    public SogoJigyoKubunShikyuGendoGaku get介護予防
-
-    ・日常生活支援総合事業区分支給限度額(
+    public SogoJigyoKubunShikyuGendoGaku get介護予防_日常生活支援総合事業区分支給限度額(
             RString 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {
@@ -76,9 +74,7 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
      * @return List<SogoJigyoKubunShikyuGendoGaku>
      */
     @Transaction
-    public List<SogoJigyoKubunShikyuGendoGaku> get介護予防
-
-    ・日常生活支援総合事業区分支給限度額一覧() {
+    public List<SogoJigyoKubunShikyuGendoGaku> get介護予防_日常生活支援総合事業区分支給限度額一覧() {
         List<SogoJigyoKubunShikyuGendoGaku> businessList = new ArrayList<>();
 
         for (DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity : dac.selectAll()) {
@@ -92,34 +88,15 @@ public class SogoJigyoKubunShikyuGendoGakuManager {
     /**
      * 介護予防・日常生活支援総合事業区分支給限度額{@link SogoJigyoKubunShikyuGendoGaku}を保存します。
      *
-     * @param 介護予防・日常生活支援総合事業区分支給限度額 {@link SogoJigyoKubunShikyuGendoGaku}
-     * @return 更新件数 更新結果の件数を返します。
+     * @param 介護予防_日常生活支援総合事業区分支給限度額 {@link SogoJigyoKubunShikyuGendoGaku}
+     * @return 更新結果
      */
     @Transaction
-    public boolean save介護予防
-
-    ・日常生活支援総合事業区分支給限度額(SogoJigyoKubunShikyuGendoGaku 介護予防
-
-        ・日常生活支援総合事業区分支給限度額) {
-        requireNonNull(介護予防・日常生活支援総合事業区分支給限度額
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額")
-        );
-        if (!介護予防  {
-
-        }
-        ・
-        日常生活支援総合事業区分支給限度額.hasChanged()
-
-
-            ) {
+    public boolean save介護予防_日常生活支援総合事業区分支給限度額(SogoJigyoKubunShikyuGendoGaku 介護予防_日常生活支援総合事業区分支給限度額) {
+        requireNonNull(介護予防_日常生活支援総合事業区分支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業区分支給限度額"));
+        if (!介護予防_日常生活支援総合事業区分支給限度額.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(介護予防
-        ・日常生活支援総合事業区分支給限度額.toEntity()
-
-
-
-
-);
+        return 1 == dac.save(介護予防_日常生活支援総合事業区分支給限度額.toEntity());
     }
 }
