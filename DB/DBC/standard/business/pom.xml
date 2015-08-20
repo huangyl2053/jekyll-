@@ -37,6 +37,11 @@
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcEntity</artifactId>
             <version>${project.version}</version>
@@ -54,6 +59,11 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcEntity</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
