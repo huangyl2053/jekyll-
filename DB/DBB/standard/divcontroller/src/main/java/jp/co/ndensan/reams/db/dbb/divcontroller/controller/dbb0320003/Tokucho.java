@@ -21,10 +21,13 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKey
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.TokuchoHosokuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+//import jp.co.ndensan.reams.ue.uex.business.NenkinTokuchoKaifuJoho;
+//import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
+//import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHoho;
-import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
-import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
-import jp.co.ndensan.reams.ue.uex.business.NenkinTokuchoKaifuJoho;
+//import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
+//import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
+//import jp.co.ndensan.reams.ue.uex.business.NenkinTokuchoKaifuJoho;
 //import jp.co.ndensan.reams.ue.uex.realservice.INenkinTokuchoKaifuJohoManager;
 //import jp.co.ndensan.reams.ue.uex.realservice.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -151,11 +154,11 @@ public class Tokucho {
      * @param 年金コード 年金コード（4桁）
      * @return 年金コード（3桁のコードを保持するコードマスタ）
      */
-    private NenkinCode createNenkinCode(RString 年金コード) {
+    private RString createNenkinCode(RString 年金コード) {
         final int NUMBER_OF_DIGIT = 3;
         RString 年金コード上3桁 = 年金コード.substring(0, NUMBER_OF_DIGIT);
 
-        return new NenkinCode(年金コード上3桁);
+        return 年金コード上3桁;
     }
 
     private void set年金保険者突合Div(TokuchoDiv div,
@@ -193,19 +196,19 @@ public class Tokucho {
 //        div.getDgTokuChoIdoAndIrai().setDataSource(dataSource);
     }
 
-    private dgTokuChoIdoAndIrai_Row toDgTokuChoIdoAndIrai_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
-
-        return new dgTokuChoIdoAndIrai_Row(
-                kaifuJoho.get処理対象年月().wareki().toDateString(),
-                kaifuJoho.get通知内容コード().value().get通知内容名称(),
-                KakushuKubun.search各種区分名称(
-                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())));
-
-    }
-
+//    private dgTokuChoIdoAndIrai_Row toDgTokuChoIdoAndIrai_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
+//
+//        return new dgTokuChoIdoAndIrai_Row(
+//                kaifuJoho.get処理対象年月().wareki().toDateString(),
+//                kaifuJoho.get通知内容コード().value().get通知内容名称(),
+//                KakushuKubun.search各種区分名称(
+//                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())));
+//
+//    }
+//
     private void set特徴結果Div(TokuChoKekkaDiv div, ChoshuHoho model) {
         //TODO n3317塚田　本当はファクトリーから生成
 //        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
@@ -222,19 +225,19 @@ public class Tokucho {
 //        div.getDgTokuchoKekka().setDataSource(dataSource);
     }
 
-    private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
-
-        return new dgTokuchoKekka_Row(
-                kaifuJoho.get処理対象年月().wareki().toDateString(),
-                kaifuJoho.get通知内容コード().value().get通知内容名称(),
-                KakushuKubun.search各種区分名称(
-                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
-                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())),
-                kaifuJoho.getDT処理結果());
-    }
-
+//    private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
+//
+//        return new dgTokuchoKekka_Row(
+//                kaifuJoho.get処理対象年月().wareki().toDateString(),
+//                kaifuJoho.get通知内容コード().value().get通知内容名称(),
+//                KakushuKubun.search各種区分名称(
+//                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
+//                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())),
+//                kaifuJoho.getDT処理結果());
+//    }
+//
     private ResponseData<TokuchoDiv> createResponseData(TokuchoDiv div) {
         ResponseData<TokuchoDiv> response = new ResponseData<>();
         response.data = div;

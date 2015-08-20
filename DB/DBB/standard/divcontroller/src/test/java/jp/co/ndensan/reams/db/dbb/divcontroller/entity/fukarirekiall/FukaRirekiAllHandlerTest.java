@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.fukarirekiall;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.model.basic.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;

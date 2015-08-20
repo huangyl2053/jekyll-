@@ -5,23 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320004;
 
-import jp.co.ndensan.reams.ca.cax.model.basic.ChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 //import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.Gemmen;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 //import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
 //import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
