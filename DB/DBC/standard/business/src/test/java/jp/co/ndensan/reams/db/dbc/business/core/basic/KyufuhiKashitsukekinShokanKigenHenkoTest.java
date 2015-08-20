@@ -4,11 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +31,19 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
     private static DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity KyufuhiKashitsukekinShokanKigenHenkoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 貸付管理番号;
+    private static FlexibleDate 償還期限延長受付年月日;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号;
+        貸付管理番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_貸付管理番号;
+        償還期限延長受付年月日 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限延長受付年月日;
+        履歴番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_履歴番号;
+
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +53,40 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuhiKashitsukekinShokanKigenHenko(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufuhiKashitsukekinShokanKigenHenko(null, 貸付管理番号, 償還期限延長受付年月日, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuhiKashitsukekinShokanKigenHenko(主キー名1, null);
+        public void 貸付管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufuhiKashitsukekinShokanKigenHenko(被保険者番号, null, 償還期限延長受付年月日, 履歴番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityにセットされている() {
-            sut = new KyufuhiKashitsukekinShokanKigenHenko(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufuhiKashitsukekinShokanKigenHenko(被保険者番号, 貸付管理番号, 償還期限延長受付年月日, 履歴番号);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get貸付管理番号(), is(貸付管理番号));
+            assertThat(sut.get償還期限延長受付年月日(), is(償還期限延長受付年月日));
+            assertThat(sut.get履歴番号(), is(履歴番号));
+
         }
 
         @Test
         public void 指定したキーが保持するKyufuhiKashitsukekinShokanKigenHenkoIdentifierにセットされている() {
-            sut = new KyufuhiKashitsukekinShokanKigenHenko(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufuhiKashitsukekinShokanKigenHenko(被保険者番号, 貸付管理番号, 償還期限延長受付年月日, 履歴番号);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get貸付管理番号(), is(貸付管理番号));
+            assertThat(sut.identifier().get償還期限延長受付年月日(), is(償還期限延長受付年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -82,8 +97,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +113,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
 
             sut = new KyufuhiKashitsukekinShokanKigenHenko(KyufuhiKashitsukekinShokanKigenHenkoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get貸付管理番号(), is(貸付管理番号));
+            assertThat(sut.identifier().get償還期限延長受付年月日(), is(償還期限延長受付年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -108,8 +127,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShokanKigenHenko(KyufuhiKashitsukekinShokanKigenHenkoEntity);
         }
@@ -190,8 +211,8 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         }
 
         @Test
-        public void get償還期限変更承認・不承認区分は_entityが持つ償還期限変更承認・不承認区分を返す() {
-            assertThat(sut.get償還期限変更承認・不承認区分(), is(KyufuhiKashitsukekinShokanKigenHenkoEntity.getHenkoShonin_FuShoninKubun()));
+        public void get償還期限変更承認_不承認区分は_entityが持つ償還期限変更承認_不承認区分を返す() {
+            assertThat(sut.get償還期限変更承認_不承認区分(), is(KyufuhiKashitsukekinShokanKigenHenkoEntity.getHenkoShonin_FuShoninKubun()));
         }
 
         @Test
@@ -212,8 +233,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShokanKigenHenko(KyufuhiKashitsukekinShokanKigenHenkoEntity);
         }
@@ -231,8 +254,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShokanKigenHenko(KyufuhiKashitsukekinShokanKigenHenkoEntity);
         }
@@ -251,8 +276,10 @@ public class KyufuhiKashitsukekinShokanKigenHenkoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.createDbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
 
         }
 
