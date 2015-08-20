@@ -8,34 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.CareManagementhiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.FukushiYoguKonyuhiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.JutakuKaishuhiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKohiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyotakuServiceKeikakuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonServiceKikanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisai_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KogakuKaigoServicehiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyufuritsuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiMeisaiShukeiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.ServiceKeikakuhiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgFukushiYoguKonyuhi_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgJutakuKaishuhi_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiShukei_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgServiceKeikakuhiFromH2104_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
@@ -52,11 +24,37 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoshiki;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.CareManagementhiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.FukushiYoguKonyuhiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.JutakuKaishuhiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KogakuKaigoServicehiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKohiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyotakuServiceKeikakuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyufuritsuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonServiceKikanDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiMeisaiShukeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.ServiceKeikakuhiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgFukushiYoguKonyuhi_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgJutakuKaishuhi_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisai_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiShukei_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgServiceKeikakuhiFromH2104_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.tabKyufuJissekiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -471,10 +469,11 @@ public class KyufuJisseki {
     }
 
     private jp.co.ndensan.reams.db.dbc.business.KyufuJisseki get給付実績(KyufuJissekiKeyInfo keyInfo) {
-
-        KyufuJissekiFinder finder = new KyufuJissekiFinder();
-        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
-        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
+        return null;
+// TODO n8300姜　ビルドエラー回避のために暫定対応
+//        KyufuJissekiFinder finder = new KyufuJissekiFinder();
+//        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
+//        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
     private RString setCommFormat(Decimal data) {
