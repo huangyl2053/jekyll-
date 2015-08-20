@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 介護認定審査会音声情報の識別子です。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-//@lombok.Value
+@lombok.Value
 public class ShinsakaiOnseiJohoIdentifier implements Serializable {
 
     private final int 介護認定審査会開催番号;

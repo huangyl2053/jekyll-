@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * サービスコードを管理するクラスです。
  */
-public class ServiceCode extends ParentModelBase<ServiceCodeIdentifier, DbT7119ServiceCodeEntity, ServiceCode> implements Serializable {
+public class ServiceCode extends ModelBase<ServiceCodeIdentifier, DbT7119ServiceCodeEntity, ServiceCode> implements Serializable {
 
     private final DbT7119ServiceCodeEntity entity;
     private final ServiceCodeIdentifier id;
@@ -187,13 +187,11 @@ public class ServiceCode extends ParentModelBase<ServiceCodeIdentifier, DbT7119S
     }
 
     /**
-     * 利用者負担定率／定額区分を返します。
+     * 利用者負担定率_定額区分を返します。
      *
-     * @return 利用者負担定率／定額区分
+     * @return 利用者負担定率_定額区分
      */
-    public RString get利用者負担定率
-
-    ／定額区分() {
+    public RString get利用者負担定率_定額区分() {
         return entity.getTeiRitsu_TeiGakuKubun();
     }
 
@@ -236,22 +234,8 @@ public class ServiceCode extends ParentModelBase<ServiceCodeIdentifier, DbT7119S
     }
 
     /**
-     * サービスコードのみを変更対象とします。<br/> {@link DbT7119ServiceCodeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ServiceCode}
-     */
-    @Override
-    public ServiceCode modifiedModel() {
-        DbT7119ServiceCodeEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ServiceCode(
-                modifiedEntity, id);
-    }
-
-    /**
-     * 保持するサービスコードを削除対象とします。<br/> {@link DbT7119ServiceCodeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持するサービスコードを削除対象とします。<br/>
+     * {@link DbT7119ServiceCodeEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ServiceCode}
      */
@@ -277,9 +261,15 @@ public class ServiceCode extends ParentModelBase<ServiceCodeIdentifier, DbT7119S
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7119ServiceCodeEntity entity;
         private final ServiceCodeIdentifier id;
 

@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbb.persistence.relate;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -48,11 +47,12 @@ public class ChoshuHohoDacTest {
         private static final HihokenshaNo 被保険者番号1 = DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
         private static final RDateTime 処理日時2001_1_1_1_1_1_1 = RDateTime.of(2001, 1, 1, 1, 1, 1, 1);
         private static final RDateTime 処理日時2002_2_2_2_2_2_2 = RDateTime.of(2002, 2, 2, 2, 2, 2, 2);
+        private static final Decimal 履歴番号 = new Decimal(1);
 
         @Before
         public void setUp() {
-            ChoshuHohoDacTest.TestSupport.insertDbT2001(賦課年度1, 被保険者番号1, 処理日時2001_1_1_1_1_1_1);
-            ChoshuHohoDacTest.TestSupport.insertDbT2001(賦課年度1, 被保険者番号1, 処理日時2002_2_2_2_2_2_2);
+            ChoshuHohoDacTest.TestSupport.insertDbT2001(賦課年度1, 被保険者番号1, 履歴番号);
+            ChoshuHohoDacTest.TestSupport.insertDbT2001(賦課年度1, 被保険者番号1, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -67,12 +67,12 @@ public class ChoshuHohoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_直近の徴収方法モデル返す() {
-            assertThat(sut.select徴収方法Recently(賦課年度1, 被保険者番号1).get().get処理日時(), is(処理日時2002_2_2_2_2_2_2));
+            assertThat(sut.select徴収方法Recently(賦課年度1, 被保険者番号1).get().getRirekiNo(), is(履歴番号));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
-            Optional<ChoshuHohoModel> empty = Optional.empty();
+            Optional<DbT2001ChoshuHohoEntity> empty = Optional.empty();
             assertThat(sut.select徴収方法Recently(notFound賦課年度, 被保険者番号1), is(empty));
         }
     }
@@ -81,14 +81,14 @@ public class ChoshuHohoDacTest {
     private static class TestSupport {
 
         public static void insertDbT2001(
-                FukaNendo 賦課年度, HihokenshaNo 被保険者番号, RDateTime 処理日時) {
+                FukaNendo 賦課年度, HihokenshaNo 被保険者番号, Decimal 履歴番号) {
 
             DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
             entity.setFukaNendo(賦課年度.value());
             entity.setHihokenshaNo(被保険者番号);
-            entity.setShoriTimestamp(処理日時);
+            entity.setRirekiNo(履歴番号);
 
-            徴収方法Dac.insert(entity);
+            徴収方法Dac.save(entity);
         }
     }
 }

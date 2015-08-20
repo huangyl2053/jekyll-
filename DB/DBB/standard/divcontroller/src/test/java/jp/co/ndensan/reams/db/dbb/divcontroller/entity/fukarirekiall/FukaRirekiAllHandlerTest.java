@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -23,14 +26,16 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
-import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.ChoteiKyotsuModel;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
+//import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
+//import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+//import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
+//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -72,7 +77,8 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     @BeforeClass
     public static void test() {
         result = createNewDiv();
-        sut = new FukaRirekiAllHandler(result, createFukaManager(), createDankaiManager(), createKiwariFinder());
+//        sut = new FukaRirekiAllHandler(result, createFukaManager(), createDankaiManager(), createKiwariFinder());
+        sut = new FukaRirekiAllHandler(result, createFukaManager(), createDankaiManager());
     }
 
     public static class load_被保険者番号 {
@@ -112,14 +118,14 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         public void 行が選択されていない時_get賦課履歴は_全賦課履歴を返す() {
             sut.load(HihokenshaNo.EMPTY);
             assertThat(sut.get賦課履歴().get賦課履歴All().size(), is(2));
-            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度2));
+//            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度2));
         }
 
         @Test
         public void 行が選択されている時_get賦課履歴は_選択行の賦課履歴を返す() {
             sut.reload(HihokenshaNo.EMPTY, 調定年度1, 賦課年度1, 通知書番号1);
             assertThat(sut.get賦課履歴().get賦課履歴All().size(), is(1));
-            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度1));
+//            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度1));
         }
     }
 
@@ -131,39 +137,39 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static FukaManager createFukaManager() {
         FukaManager mock = mock(FukaManager.class);
-        IItemList<FukaModel> modelList = createFukaModelList();
-        when(mock.load全賦課履歴(any(HihokenshaNo.class))).thenReturn(modelList);
-        when(mock.load全賦課履歴(any(HihokenshaNo.class), any(FukaNendo.class))).thenReturn(modelList);
+//        IItemList<Fuka> modelList = createFukaModelList();
+//        when(mock.load全賦課履歴(any(HihokenshaNo.class))).thenReturn(modelList);
+//        when(mock.load全賦課履歴(any(HihokenshaNo.class), any(FukaNendo.class))).thenReturn(modelList);
         return mock;
     }
 
     private static HokenryoDankaiManager createDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
         Optional<HokenryoDankai> model = createHokenryoDankai();
-        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
+//        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
         return mock;
     }
 
-    private static KiwarigakuFinder createKiwariFinder() {
-        KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        Optional<Kiwarigaku> model = createKiwarigaku();
-        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(model);
-        return mock;
-    }
-
-    private static IItemList<FukaModel> createFukaModelList() {
-        List<FukaModel> modelList = new ArrayList<>();
+//    private static KiwarigakuFinder createKiwariFinder() {
+//        KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
+//        Optional<Kiwarigaku> model = createKiwarigaku();
+//        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(model);
+//        return mock;
+//    }
+//
+    private static IItemList<Fuka> createFukaModelList() {
+        List<Fuka> modelList = new ArrayList<>();
         modelList.add(createFukaModel(賦課年度1, 調定年度1, 通知書番号1));
         modelList.add(createFukaModel(賦課年度2, 調定年度2, 通知書番号2));
         return ItemList.of(modelList);
     }
 
-    private static FukaModel createFukaModel(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
+    private static Fuka createFukaModel(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
         DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
         entity.setFukaNendo(賦課年度.value());
         entity.setChoteiNendo(調定年度.value());
         entity.setTsuchishoNo(通知書番号);
-        return new FukaModel(entity);
+        return new Fuka(entity);
     }
 
     private static Optional<HokenryoDankai> createHokenryoDankai() {
@@ -187,18 +193,20 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     }
 
     private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
-        KibetsuModel kibetsuModel = mock(KibetsuModel.class);
-        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
-
-        ChoteiKyotsuModel choteiKyotsuModel = mock(ChoteiKyotsuModel.class);
-        when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));
-
-        KibetsuChoteiKyotsuModel kibetsuChoteiKyotsuModel = mock(KibetsuChoteiKyotsuModel.class);
-        when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
-        when(kibetsuChoteiKyotsuModel.get調定共通モデル()).thenReturn(choteiKyotsuModel);
+//        KibetsuModel kibetsuModel = mock(KibetsuModel.class);
+//        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
+//
+//        ChoteiKyotsuModel choteiKyotsuModel = mock(ChoteiKyotsuModel.class);
+//        when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));
+//
+//        KibetsuChoteiKyotsuModel kibetsuChoteiKyotsuModel = mock(KibetsuChoteiKyotsuModel.class);
+//        when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
+//        when(kibetsuChoteiKyotsuModel.get調定共通モデル()).thenReturn(choteiKyotsuModel);
+//
+        KibetsuChoteiKyotsu kibetsuChoteiKyotsu = mock(KibetsuChoteiKyotsu.class);
 
         KiwarigakuMeisai kiwarigakuModel = mock(KiwarigakuMeisai.class);
-        when(kiwarigakuModel.get期別調定共通()).thenReturn(kibetsuChoteiKyotsuModel);
+        when(kiwarigakuModel.get期別調定共通()).thenReturn(kibetsuChoteiKyotsu);
         when(kiwarigakuModel.get収入額()).thenReturn(new Decimal(収入額));
 
         return kiwarigakuModel;

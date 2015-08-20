@@ -206,7 +206,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuManagerTest {
             ServiceShuruiCode 主キー9 = DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス種類コード;
             KyufuJissekiShakaiFukushiHojinKeigengaku result = sut.get給付実績社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -230,7 +230,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuManagerTest {
             List<KyufuJissekiShakaiFukushiHojinKeigengaku> result = sut.get給付実績社会福祉法人軽減額一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -263,7 +263,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuManagerTest {
             DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity = DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.createDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity();
             entity.initializeMd5();
             KyufuJissekiShakaiFukushiHojinKeigengaku 給付実績社会福祉法人軽減額 = new KyufuJissekiShakaiFukushiHojinKeigengaku(entity);
-            給付実績社会福祉法人軽減額 = 給付実績社会福祉法人軽減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績社会福祉法人軽減額 = 給付実績社会福祉法人軽減額.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績社会福祉法人軽減額(給付実績社会福祉法人軽減額), is(true));
         }
@@ -275,7 +275,7 @@ public class KyufuJissekiShakaiFukushiHojinKeigengakuManagerTest {
             DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity = DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerator.createDbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity();
             entity.initializeMd5();
             KyufuJissekiShakaiFukushiHojinKeigengaku 給付実績社会福祉法人軽減額 = new KyufuJissekiShakaiFukushiHojinKeigengaku(entity);
-            給付実績社会福祉法人軽減額 = 給付実績社会福祉法人軽減額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績社会福祉法人軽減額 = 給付実績社会福祉法人軽減額.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績社会福祉法人軽減額(給付実績社会福祉法人軽減額), is(false));
         }

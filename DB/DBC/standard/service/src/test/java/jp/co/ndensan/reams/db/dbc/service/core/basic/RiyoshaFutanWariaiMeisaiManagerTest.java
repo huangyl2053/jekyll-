@@ -103,7 +103,7 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
             Decimal 主キー4 = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_枝番号;
             RiyoshaFutanWariaiMeisai result = sut.get利用者負担割合明細(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get年度().toDateString(), is(DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -127,7 +127,7 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
             List<RiyoshaFutanWariaiMeisai> result = sut.get利用者負担割合明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get(0).get年度().toDateString(), is(DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -160,7 +160,7 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
             DbT3114RiyoshaFutanWariaiMeisaiEntity entity = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.createDbT3114RiyoshaFutanWariaiMeisaiEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiMeisai 利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(entity);
-            利用者負担割合明細 = 利用者負担割合明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合明細 = 利用者負担割合明細.createBuilderForEdit().set更正理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save利用者負担割合明細(利用者負担割合明細), is(true));
         }
@@ -172,7 +172,7 @@ public class RiyoshaFutanWariaiMeisaiManagerTest {
             DbT3114RiyoshaFutanWariaiMeisaiEntity entity = DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator.createDbT3114RiyoshaFutanWariaiMeisaiEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiMeisai 利用者負担割合明細 = new RiyoshaFutanWariaiMeisai(entity);
-            利用者負担割合明細 = 利用者負担割合明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合明細 = 利用者負担割合明細.createBuilderForEdit().set更正理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save利用者負担割合明細(利用者負担割合明細), is(false));
         }

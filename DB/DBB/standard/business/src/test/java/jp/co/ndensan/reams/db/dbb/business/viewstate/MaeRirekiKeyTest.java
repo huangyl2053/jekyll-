@@ -38,10 +38,10 @@ public class MaeRirekiKeyTest extends DbzTestBase {
         @BeforeClass
         public static void test() {
             sut = new MaeRirekiKey(
-                    new ChoteiNendo(DEFAULT_調定年度),
-                    new FukaNendo(DEFAULT_賦課年度),
+                    DEFAULT_調定年度,
+                    DEFAULT_賦課年度,
                     DEFAULT_通知書番号,
-                    DEFAULT_調定日時,
+                    DEFAULT_履歴番号,
                     算定状態,
                     氏名
             );
@@ -49,12 +49,12 @@ public class MaeRirekiKeyTest extends DbzTestBase {
 
         @Test
         public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
-            assertThat(sut.get調定年度().value(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度));
+            assertThat(sut.get調定年度(), is(DbT2002FukaEntityGenerator.DEFAULT_調定年度));
         }
 
         @Test
         public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
-            assertThat(sut.get賦課年度().value(), is(DbT2002FukaEntityGenerator.DEFAULT_賦課年度));
+            assertThat(sut.get賦課年度(), is(DbT2002FukaEntityGenerator.DEFAULT_賦課年度));
         }
 
         @Test

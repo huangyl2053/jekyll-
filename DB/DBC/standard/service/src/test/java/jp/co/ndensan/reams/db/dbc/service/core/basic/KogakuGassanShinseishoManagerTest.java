@@ -119,7 +119,7 @@ public class KogakuGassanShinseishoManagerTest {
             Decimal 主キー5 = DbT3068KogakuGassanShinseishoEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShinseisho result = sut.get高額合算申請書(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3068KogakuGassanShinseishoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3068KogakuGassanShinseishoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -143,7 +143,7 @@ public class KogakuGassanShinseishoManagerTest {
             List<KogakuGassanShinseisho> result = sut.get高額合算申請書一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3068KogakuGassanShinseishoEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3068KogakuGassanShinseishoEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -176,7 +176,7 @@ public class KogakuGassanShinseishoManagerTest {
             DbT3068KogakuGassanShinseishoEntity entity = DbT3068KogakuGassanShinseishoEntityGenerator.createDbT3068KogakuGassanShinseishoEntity();
             entity.initializeMd5();
             KogakuGassanShinseisho 高額合算申請書 = new KogakuGassanShinseisho(entity);
-            高額合算申請書 = 高額合算申請書.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算申請書 = 高額合算申請書.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算申請書(高額合算申請書), is(true));
         }
@@ -188,7 +188,7 @@ public class KogakuGassanShinseishoManagerTest {
             DbT3068KogakuGassanShinseishoEntity entity = DbT3068KogakuGassanShinseishoEntityGenerator.createDbT3068KogakuGassanShinseishoEntity();
             entity.initializeMd5();
             KogakuGassanShinseisho 高額合算申請書 = new KogakuGassanShinseisho(entity);
-            高額合算申請書 = 高額合算申請書.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算申請書 = 高額合算申請書.createBuilderForEdit().set備考(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算申請書(高額合算申請書), is(false));
         }

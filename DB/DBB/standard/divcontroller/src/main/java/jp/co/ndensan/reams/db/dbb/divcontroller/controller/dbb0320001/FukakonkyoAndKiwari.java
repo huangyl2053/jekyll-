@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
@@ -14,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.Kika
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukaKonkyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
@@ -23,13 +25,14 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
-import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
+//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.Fuka;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
+//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -76,22 +79,25 @@ public class FukakonkyoAndKiwari {
 //        final FukaManager fukaFinder = new FukaManager();
 //        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         // ここまで
-//        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
+//        Fuka model = FukaShokaiController.getFukaModelByFukaShokaiKey();
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
         // ここから
-        FukaModel model = new FukaModel();
-        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
-                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+//        Fuka model = new Fuka();
+        Fuka model = new Fuka(FlexibleYear.EMPTY,
+                FlexibleYear.EMPTY,
+                TsuchishoNo.EMPTY,
+                Decimal.ZERO);
+        FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
+                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
                 RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
-//        FukaModel model = fukaFinder.find賦課直近(
+//        Fuka model = fukaFinder.find賦課直近(
 //                new ChoteiNendo(fukaTaishoshaKey.get調定年度()),
 //                new FukaNendo(fukaTaishoshaKey.get賦課年度()),
 //                fukaTaishoshaKey.get通知書番号()).findFirst().get();
 //
 //        FukaShokaiKey key = createFukaShokaiKey(model);
         // ここまで
-
         return createResponseData(setDisplay(div, model, key));
     }
 
@@ -105,12 +111,16 @@ public class FukakonkyoAndKiwari {
 
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
         // ここから
-        FukaModel model = new FukaModel();
-        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
-                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+//        Fuka model = new Fuka();
+        Fuka model = new Fuka(FlexibleYear.EMPTY,
+                FlexibleYear.EMPTY,
+                TsuchishoNo.EMPTY,
+                Decimal.ZERO);
+        FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
+                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
                 RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
-//        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
+//        Fuka model = FukaShokaiController.getFukaModelByFukaShokaiKey();
 //
 //        FukaShokaiKey key = createFukaShokaiKey(model);
         // ここまで
@@ -124,7 +134,7 @@ public class FukakonkyoAndKiwari {
      * @param model 賦課情報モデル
      * @return 賦課照会キー
      */
-    private FukaShokaiKey createFukaShokaiKey(FukaModel model) {
+    private FukaShokaiKey createFukaShokaiKey(Fuka model) {
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
         IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
         value.put(key);
@@ -132,7 +142,7 @@ public class FukakonkyoAndKiwari {
         return key;
     }
 
-    private FukakonkyoAndKiwariDiv setDisplay(FukakonkyoAndKiwariDiv div, FukaModel model, FukaShokaiKey key) {
+    private FukakonkyoAndKiwariDiv setDisplay(FukakonkyoAndKiwariDiv div, Fuka model, FukaShokaiKey key) {
 
         // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト
         // ここから
@@ -196,7 +206,7 @@ public class FukakonkyoAndKiwari {
         div.getKikan().setDisplayNone(isHidden);
     }
 
-    private void set賦課根拠(tblFukakonkyoMeisaiDiv div, FukaModel model) {
+    private void set賦課根拠(tblFukakonkyoMeisaiDiv div, Fuka model) {
         div.getLblFukakijunYMD().setText(model.get賦課期日().wareki().toDateString());
         div.getLblShikakuShutokuYMD().setText(model.get資格取得日().wareki().toDateString());
         div.getLblShikakuSoshitsuYMD().setText(model.get資格喪失日().wareki().toDateString());
@@ -206,53 +216,53 @@ public class FukakonkyoAndKiwari {
         div.getLblRonenShuryoYMD().setText(model.get老年廃止日().wareki().toDateString());
     }
 
-    private void set賦課根拠Of本算定(tblFukakonkyoMeisaiDiv div, FukaModel model) {
-        div.getLblHonninKazeiValue().setText(model.get課税区分().toRString());
-        div.getLblSetaiKazeiValue().setText(model.get世帯課税区分().toRString());
-
-        div.getLblShotokuSumValue().setText(FukaMapper.addComma(model.get合計所得金額()));
-
-        div.getLblNenkinShunyuValue().setText(FukaMapper.addComma(model.get公的年金収入額()));
-
-        div.getLblHokenryoDankaiValue().setText(
-                FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階())
-                .edit表示用保険料段階());
+    private void set賦課根拠Of本算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
+//        div.getLblHonninKazeiValue().setText(model.get課税区分().toRString());
+//        div.getLblSetaiKazeiValue().setText(model.get世帯課税区分().toRString());
+//
+//        div.getLblShotokuSumValue().setText(FukaMapper.addComma(model.get合計所得金額()));
+//
+//        div.getLblNenkinShunyuValue().setText(FukaMapper.addComma(model.get公的年金収入額()));
+//
+//        div.getLblHokenryoDankaiValue().setText(
+//                FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階())
+//                .edit表示用保険料段階());
     }
 
-    private void set賦課根拠Of仮算定(tblFukakonkyoMeisaiDiv div, FukaModel model) {
-        Optional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
-        if (保険料段階.isPresent()) {
-            div.getLblZenHokenryoDankaiValue().setText(保険料段階.get().edit表示用保険料段階());
-            div.getLblZenHokenryoritsuValue().setText(FukaMapper.toRString(保険料段階.get().get保険料率()));
-        }
-        div.getLblZenNengakuHokenryoValue().setText(FukaMapper.addComma(model.get確定介護保険料_年額()));
+    private void set賦課根拠Of仮算定(tblFukakonkyoMeisaiDiv div, Fuka model) {
+//        Optional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+//        if (保険料段階.isPresent()) {
+//            div.getLblZenHokenryoDankaiValue().setText(保険料段階.get().edit表示用保険料段階());
+//            div.getLblZenHokenryoritsuValue().setText(FukaMapper.toRString(保険料段階.get().get保険料率()));
+//        }
+//        div.getLblZenNengakuHokenryoValue().setText(FukaMapper.addComma(model.get確定介護保険料_年額()));
     }
 
-    private void set期間(KikanDiv div, FukaModel model) {
+    private void set期間(KikanDiv div, Fuka model) {
 
-        RString 月数1 = getBetweenMonths(model.get月割開始年月1(), model.get月割終了年月1());
-        HokenryoDankai 保険料段階1 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料算定段階1());
-
-        div.getLblKikan1().setText(toRange(model.get月割開始年月1(), model.get月割終了年月1()));
-        div.getLblTsukiSu1().setText(月数1);
-        div.getLblHokenryoDankai1().setText(保険料段階1.edit表示用保険料段階());
-        div.getLblHokenryoritsu1().setText(FukaMapper.addComma(保険料段階1.get保険料率()));
-        div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(保険料段階1.get保険料率(), 月数1));
-        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
-
-        if (model.get月割開始年月2().isValid()) {
-            RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
-            HokenryoDankai 保険料段階2 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料算定段階2());
-
-            div.getLblKikan2().setText(toRange(model.get月割開始年月2(), model.get月割終了年月2()));
-            div.getLblTsukiSu2().setText(月数2);
-            div.getLblHokenryoDankai2().setText(保険料段階2.edit表示用保険料段階());
-            div.getLblHokenryoritsu2().setText(FukaMapper.addComma(保険料段階2.get保険料率()));
-            div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(保険料段階2.get保険料率(), 月数2));
-            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
-        } else {
-            div.getTblKikan2().setDisplayNone(true);
-        }
+//        RString 月数1 = getBetweenMonths(model.get月割開始年月1(), model.get月割終了年月1());
+//        HokenryoDankai 保険料段階1 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料算定段階1());
+//
+//        div.getLblKikan1().setText(toRange(model.get月割開始年月1(), model.get月割終了年月1()));
+//        div.getLblTsukiSu1().setText(月数1);
+//        div.getLblHokenryoDankai1().setText(保険料段階1.edit表示用保険料段階());
+//        div.getLblHokenryoritsu1().setText(FukaMapper.addComma(保険料段階1.get保険料率()));
+//        div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(保険料段階1.get保険料率(), 月数1));
+//        div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+//
+//        if (model.get月割開始年月2().isValid()) {
+//            RString 月数2 = getBetweenMonths(model.get月割開始年月2(), model.get月割終了年月2());
+//            HokenryoDankai 保険料段階2 = FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料算定段階2());
+//
+//            div.getLblKikan2().setText(toRange(model.get月割開始年月2(), model.get月割終了年月2()));
+//            div.getLblTsukiSu2().setText(月数2);
+//            div.getLblHokenryoDankai2().setText(保険料段階2.edit表示用保険料段階());
+//            div.getLblHokenryoritsu2().setText(FukaMapper.addComma(保険料段階2.get保険料率()));
+//            div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(保険料段階2.get保険料率(), 月数2));
+//            div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
+//        } else {
+//            div.getTblKikan2().setDisplayNone(true);
+//        }
     }
 
     private RString calc保険料算出額(Decimal 保険料率, RString 月数) {
@@ -267,30 +277,30 @@ public class FukakonkyoAndKiwari {
         return FukaMapper.addComma(result.roundDownTo(POINT_OF_ROUND_DOWN));
     }
 
-    private void set年額Of仮算定(FukakonkyoAndKiwariDiv div, FukaModel model) {
+    private void set年額Of仮算定(FukakonkyoAndKiwariDiv div, Fuka model) {
         div.getTxtZanteiKeisanjoHokenryoGaku().setValue(model.get減免前介護保険料_年額());
         div.getTxtZanteiGemmenGaku().setValue(model.get減免額());
         div.getTxtZanteiHokenryoGaku().setValue(model.get確定介護保険料_年額());
     }
 
-    private void set年額Of本算定(FukakonkyoNengakuDiv div, FukaModel model) {
+    private void set年額Of本算定(FukakonkyoNengakuDiv div, Fuka model) {
         div.getTxtKeisanjoNenkanHokenryoGaku().setValue(model.get減免前介護保険料_年額());
         div.getTxtGemmenGaku().setValue(model.get減免額());
         div.getTxtNenkanHokenryoGaku().setValue(model.get確定介護保険料_年額());
     }
 
-    private void set調定事由(tblFukaKonkyoDiv div, FukaModel model) {
-        div.getTxtFukashokaiChoteiJiyu1().setValue(model.get調定事由1().getRyakusho());
-        if (model.get調定事由2() != null) {
-            div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
-        }
-        if (model.get調定事由3() != null) {
-            div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
-        }
-        if (model.get調定事由4() != null) {
-            div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
-        }
-
+    private void set調定事由(tblFukaKonkyoDiv div, Fuka model) {
+//        div.getTxtFukashokaiChoteiJiyu1().setValue(model.get調定事由1().getRyakusho());
+//        if (model.get調定事由2() != null) {
+//            div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
+//        }
+//        if (model.get調定事由3() != null) {
+//            div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
+//        }
+//        if (model.get調定事由4() != null) {
+//            div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
+//        }
+//
     }
 
     private RString toRange(FlexibleYearMonth from, FlexibleYearMonth to) {

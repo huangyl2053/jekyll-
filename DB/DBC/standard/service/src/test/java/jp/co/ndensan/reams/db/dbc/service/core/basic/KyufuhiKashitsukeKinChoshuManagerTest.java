@@ -89,7 +89,7 @@ public class KyufuhiKashitsukeKinChoshuManagerTest {
             Decimal 主キー3 = DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.DEFAULT_履歴番号;
             KyufuhiKashitsukeKinChoshu result = sut.get給付費貸付金徴収(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -113,7 +113,7 @@ public class KyufuhiKashitsukeKinChoshuManagerTest {
             List<KyufuhiKashitsukeKinChoshu> result = sut.get給付費貸付金徴収一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -146,7 +146,7 @@ public class KyufuhiKashitsukeKinChoshuManagerTest {
             DbT3092KyufuhiKashitsukeKinChoshuEntity entity = DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.createDbT3092KyufuhiKashitsukeKinChoshuEntity();
             entity.initializeMd5();
             KyufuhiKashitsukeKinChoshu 給付費貸付金徴収 = new KyufuhiKashitsukeKinChoshu(entity);
-            給付費貸付金徴収 = 給付費貸付金徴収.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金徴収 = 給付費貸付金徴収.createBuilderForEdit().set貸付管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金徴収(給付費貸付金徴収), is(true));
         }
@@ -158,7 +158,7 @@ public class KyufuhiKashitsukeKinChoshuManagerTest {
             DbT3092KyufuhiKashitsukeKinChoshuEntity entity = DbT3092KyufuhiKashitsukeKinChoshuEntityGenerator.createDbT3092KyufuhiKashitsukeKinChoshuEntity();
             entity.initializeMd5();
             KyufuhiKashitsukeKinChoshu 給付費貸付金徴収 = new KyufuhiKashitsukeKinChoshu(entity);
-            給付費貸付金徴収 = 給付費貸付金徴収.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付費貸付金徴収 = 給付費貸付金徴収.createBuilderForEdit().set貸付管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付費貸付金徴収(給付費貸付金徴収), is(false));
         }

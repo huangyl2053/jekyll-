@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiContro
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
+//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -28,16 +28,16 @@ public class KihonJoho {
      */
     public ResponseData<KihonJohoDiv> initialize(KihonJohoDiv div) {
 
-        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-
-        div.getCcdKaigoAtenaInfo().set介護宛名賦課モード();
-        div.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
-
-        //TODO 市町村コードはどこから取得？→searchKey見直し予定
-        KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
-                taishoshaKey.get通知書番号(), new FukaNendo(taishoshaKey.get賦課年度()), LasdecCode.EMPTY, taishoshaKey.get識別コード()).build();
-        div.getCcdKaigoFukaKihon().load(searchKey);
-
+//        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+//
+//        div.getCcdKaigoAtenaInfo().set介護宛名賦課モード();
+//        div.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
+//
+//        //TODO 市町村コードはどこから取得？→searchKey見直し予定
+//        KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
+//                taishoshaKey.get通知書番号(), new FukaNendo(taishoshaKey.get賦課年度()), LasdecCode.EMPTY, taishoshaKey.get識別コード()).build();
+//        div.getCcdKaigoFukaKihon().load(searchKey);
+//
         return createResponseData(div);
     }
 

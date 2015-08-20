@@ -8,18 +8,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.fukarirekiall;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
-import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
-import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
+//import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+//import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
+//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
+//import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
  * 全賦課履歴Divの操作を行うクラスです。
@@ -31,7 +35,7 @@ public class FukaRirekiAllHandler {
     private final FukaRirekiAllDiv div;
     private final FukaManager fukaFinder;
     private final HokenryoDankaiManager dankaiManager;
-    private final KiwarigakuFinder kiwariFinder;
+//    private final KiwarigakuFinder kiwariFinder;
 
     private static final RString SESSION_NAME = new RString("FukaRirekiAll");
 
@@ -44,7 +48,7 @@ public class FukaRirekiAllHandler {
         this.div = div;
         this.fukaFinder = new FukaManager();
         this.dankaiManager = new HokenryoDankaiManager();
-        this.kiwariFinder = new KiwarigakuFinder();
+//        this.kiwariFinder = new KiwarigakuFinder();
     }
 
     /**
@@ -53,14 +57,15 @@ public class FukaRirekiAllHandler {
      * @param div 全賦課履歴Div
      * @param fukaFinder 賦課照会Finder
      * @param dankaiManager 保険料段階Manager
-     * @param kiwariFinder 期割額Finder
      */
+//    FukaRirekiAllHandler(
+//            FukaRirekiAllDiv div, FukaManager fukaShokaiFinder, HokenryoDankaiManager dankaiManager, KiwarigakuFinder kiwariFinder) {
     FukaRirekiAllHandler(
-            FukaRirekiAllDiv div, FukaManager fukaShokaiFinder, HokenryoDankaiManager dankaiManager, KiwarigakuFinder kiwariFinder) {
+            FukaRirekiAllDiv div, FukaManager fukaShokaiFinder, HokenryoDankaiManager dankaiManager) {
         this.div = div;
         this.fukaFinder = fukaShokaiFinder;
         this.dankaiManager = dankaiManager;
-        this.kiwariFinder = kiwariFinder;
+//        this.kiwariFinder = kiwariFinder;
     }
 
     /**
@@ -72,9 +77,9 @@ public class FukaRirekiAllHandler {
     public int load(HihokenshaNo 被保険者番号) {
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから
-        List<FukaModel> list = new ArrayList<>();
-        IItemList<FukaModel> modelList = ItemList.of(list);
-//        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号);
+        List<Fuka> list = new ArrayList<>();
+        IItemList<Fuka> modelList = ItemList.of(list);
+//        IItemList<Fuka> modelList = fukaFinder.load全賦課履歴(被保険者番号);
 //        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         // ここまで
         return set全賦課履歴(modelList);
@@ -90,9 +95,9 @@ public class FukaRirekiAllHandler {
     public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから
-        List<FukaModel> list = new ArrayList<>();
-        IItemList<FukaModel> modelList = ItemList.of(list);
-//        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
+        List<Fuka> list = new ArrayList<>();
+        IItemList<Fuka> modelList = ItemList.of(list);
+//        IItemList<Fuka> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
 //        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         // ここまで
         return set全賦課履歴(modelList);
@@ -109,9 +114,9 @@ public class FukaRirekiAllHandler {
     public int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから
-        List<FukaModel> list = new ArrayList<>();
-        IItemList<FukaModel> modelList = ItemList.of(list);
-//        IItemList<FukaModel> modelList = fukaFinder.find賦課直近(調定年度, 賦課年度, 通知書番号);
+        List<Fuka> list = new ArrayList<>();
+        IItemList<Fuka> modelList = ItemList.of(list);
+//        IItemList<Fuka> modelList = fukaFinder.find賦課直近(調定年度, 賦課年度, 通知書番号);
 //        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         // ここまで
         return set全賦課履歴(modelList);
@@ -126,9 +131,9 @@ public class FukaRirekiAllHandler {
     public int reload(TsuchishoNo 通知書番号) {
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから
-        List<FukaModel> list = new ArrayList<>();
-        IItemList<FukaModel> modelList = ItemList.of(list);
-//        IItemList<FukaModel> modelList = fukaFinder.get直近介護賦課一覧(通知書番号);
+        List<Fuka> list = new ArrayList<>();
+        IItemList<Fuka> modelList = ItemList.of(list);
+//        IItemList<Fuka> modelList = fukaFinder.get直近介護賦課一覧(通知書番号);
 //        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         // ここまで
         return set全賦課履歴(modelList);
@@ -167,13 +172,13 @@ public class FukaRirekiAllHandler {
         }
     }
 
-    private int set全賦課履歴(IItemList<FukaModel> modelList) {
+    private int set全賦課履歴(IItemList<Fuka> modelList) {
 
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
         // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
         // ここから
         rowList.add(new dgFukaRirekiAll_Row());
-//        for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
+//        for (Fuka model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
 //
 //            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階());
 //            Optional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());

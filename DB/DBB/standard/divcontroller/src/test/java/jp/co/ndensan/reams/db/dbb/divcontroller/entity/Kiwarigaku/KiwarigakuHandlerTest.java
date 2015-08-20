@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.KiwarigakuCalculator;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.model.helper.KibetsuChoteiKyotsuModelTestHelper;
-import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
+//import jp.co.ndensan.reams.db.dbb.model.helper.KibetsuChoteiKyotsuModelTestHelper;
+//import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
+//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
@@ -66,7 +68,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void setup() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(調定年度, 賦課年度, 通知書番号, 処理日時);
         }
 
@@ -129,7 +131,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度の時_loadは_月列を表示する() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(new ChoteiNendo(納期統一年度), new FukaNendo(納期統一年度), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
@@ -147,7 +149,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度より後の時_loadは_月列を表示する() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(new ChoteiNendo(納期統一年度.plusYear(1)), new FukaNendo(納期統一年度.plusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
@@ -165,7 +167,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 納期統一年度より前の時_loadは_月列を表示しない() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(new ChoteiNendo(納期統一年度.minusYear(1)), new FukaNendo(納期統一年度.minusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(false));
@@ -186,7 +188,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 調定年度と賦課年度が同じ時_loadは_普徴期情報を参照する() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(調定年度, 賦課年度, 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki2().isVisible(), is(true));
@@ -203,7 +205,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         public void 調定年度と賦課年度が異なる時_loadは_過年度期情報を参照する() {
             result = createNewDiv();
             new KiwarigakuHandler(result,
-                    createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
+                    create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
                     .load(調定年度, new FukaNendo(賦課年度.value().plusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki2().isVisible(), is(false));
@@ -346,13 +348,13 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         return mock;
     }
 
-    private static KiwarigakuFinder createFinder() {
-        KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        Optional<Kiwarigaku> 期割額 = Optional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
-        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額);
-        return mock;
-    }
-
+//    private static KiwarigakuFinder createFinder() {
+//        KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
+//        Optional<Kiwarigaku> 期割額 = Optional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
+//        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額);
+//        return mock;
+//    }
+//
     private static IItemList<KiwarigakuMeisai> create期割額List() {
         List<KiwarigakuMeisai> list = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
@@ -370,12 +372,13 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         return new KiwarigakuMeisai(create期別調定共通Model(徴収方法, 期, 期別額), new Decimal(納付額));
     }
 
-    private static KibetsuChoteiKyotsuModel create期別調定共通Model(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額) {
-        KibetsuChoteiKyotsuModel model = KibetsuChoteiKyotsuModelTestHelper.createModel();
+    private static KibetsuChoteiKyotsu create期別調定共通Model(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額) {
+//        KibetsuChoteiKyotsu model = KibetsuChoteiKyotsuModelTestHelper.createModel();
+        KibetsuChoteiKyotsu model = new KibetsuChoteiKyotsu();
         //TODO n8300姜　ビルドエラー回避のために暫定対応
 //        model.get介護期別モデル().set徴収方法(徴収方法);
-        model.get介護期別モデル().set期(期);
-        model.get調定共通モデル().set調定額(new Decimal(期別額));
+//        model.get介護期別モデル().set期(期);
+//        model.get調定共通モデル().set調定額(new Decimal(期別額));
         return model;
     }
 

@@ -6,22 +6,19 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonGokeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiKihonGokei_Row;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
-import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -84,9 +81,11 @@ public class KyufuJissekiKihonGokei {
                 new ServiceShuruiCode(サービス種類),
                 new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
 
-        KyufuJissekiFinder finder = new KyufuJissekiFinder();
-        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
-        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
+        // TODO n8300姜　ビルドエラー回避のために暫定対応
+//        KyufuJissekiFinder finder = new KyufuJissekiFinder();
+//        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
+//        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
+        return null;
     }
 
     private RString setCommFormat(Decimal data) {

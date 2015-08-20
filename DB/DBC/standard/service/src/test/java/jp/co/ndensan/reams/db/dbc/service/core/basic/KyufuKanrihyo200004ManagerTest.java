@@ -181,7 +181,7 @@ public class KyufuKanrihyo200004ManagerTest {
             RString 主キー8 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_給付管理票明細行番号;
             KyufuKanrihyo200004 result = sut.get給付管理票200004(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_審査年月.toDateString()));
+            assertThat(result.get審査年月().toDateString(), is(DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_審査年月.toDateString()));
         }
     }
 
@@ -205,7 +205,7 @@ public class KyufuKanrihyo200004ManagerTest {
             List<KyufuKanrihyo200004> result = sut.get給付管理票200004一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_審査年月.toDateString()));
+            assertThat(result.get(0).get審査年月().toDateString(), is(DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_審査年月.toDateString()));
         }
     }
 
@@ -238,7 +238,7 @@ public class KyufuKanrihyo200004ManagerTest {
             DbT3014KyufuKanrihyo200004Entity entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
             entity.initializeMd5();
             KyufuKanrihyo200004 給付管理票200004 = new KyufuKanrihyo200004(entity);
-            給付管理票200004 = 給付管理票200004.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付管理票200004 = 給付管理票200004.createBuilderForEdit().set居宅サービス計画作成区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付管理票200004(給付管理票200004), is(true));
         }
@@ -250,7 +250,7 @@ public class KyufuKanrihyo200004ManagerTest {
             DbT3014KyufuKanrihyo200004Entity entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
             entity.initializeMd5();
             KyufuKanrihyo200004 給付管理票200004 = new KyufuKanrihyo200004(entity);
-            給付管理票200004 = 給付管理票200004.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付管理票200004 = 給付管理票200004.createBuilderForEdit().set居宅サービス計画作成区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付管理票200004(給付管理票200004), is(false));
         }

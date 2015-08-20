@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 構成市町村支所マスタの識別子です。
@@ -24,7 +26,7 @@ public class KoseiShichosonShishoMasterIdentifier implements Serializable {
      * @param 支所コード 支所コード
      */
     public KoseiShichosonShishoMasterIdentifier(LasdecCode 市町村コード,
-ShishoCode 支所コード) {
+            ShishoCode 支所コード) {
         this.市町村コード = 市町村コード;
         this.支所コード = 支所コード;
     }

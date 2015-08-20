@@ -89,7 +89,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             Decimal 主キー3 = DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_履歴番号;
             TandokuJoseikinKyufuShinsei result = sut.get市町村単独助成金給付申請(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -113,7 +113,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             List<TandokuJoseikinKyufuShinsei> result = sut.get市町村単独助成金給付申請一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -146,7 +146,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             DbT3098TandokuJoseikinKyufuShinseiEntity entity = DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.createDbT3098TandokuJoseikinKyufuShinseiEntity();
             entity.initializeMd5();
             TandokuJoseikinKyufuShinsei 市町村単独助成金給付申請 = new TandokuJoseikinKyufuShinsei(entity);
-            市町村単独助成金給付申請 = 市町村単独助成金給付申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村単独助成金給付申請 = 市町村単独助成金給付申請.createBuilderForEdit().set事業者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村単独助成金給付申請(市町村単独助成金給付申請), is(true));
         }
@@ -158,7 +158,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             DbT3098TandokuJoseikinKyufuShinseiEntity entity = DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.createDbT3098TandokuJoseikinKyufuShinseiEntity();
             entity.initializeMd5();
             TandokuJoseikinKyufuShinsei 市町村単独助成金給付申請 = new TandokuJoseikinKyufuShinsei(entity);
-            市町村単独助成金給付申請 = 市町村単独助成金給付申請.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村単独助成金給付申請 = 市町村単独助成金給付申請.createBuilderForEdit().set事業者区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村単独助成金給付申請(市町村単独助成金給付申請), is(false));
         }

@@ -16,15 +16,13 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategorySubTi
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategoryTitle;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSearchDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
-import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiServiceFinder;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -120,9 +118,11 @@ public class KyufuJissekiList {
     }
 
     private KyufuJissekiServiceCollections getKyufuJissekiServiceCollections(KyufuJissekiSearchDiv panel2) {
-        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
-        HihokenshaNo hihoNo = new HihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
-        return finder.get給付実績一覧(hihoNo, getServiceTeikyoKikan(panel2));
+        return null;
+        // TODO n8300姜　ビルドエラー回避のために暫定対応
+//        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
+//        HihokenshaNo hihoNo = new HihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
+//        return finder.get給付実績一覧(hihoNo, getServiceTeikyoKikan(panel2));
     }
 
     private KyufuJissekiKeyInfo getKyufuJissekiKeyInfo(KyufuJissekiSearchDiv panel2, RString serviceShurui) {

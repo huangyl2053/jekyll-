@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.relate;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
@@ -13,14 +12,12 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbd.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -36,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel> {
+public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenkoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -52,7 +49,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
-    public Optional<ShiharaiHohoHenkoModel> selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
+    public Optional<DbT4021ShiharaiHohoHenkoEntity> selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             KanriKubun 管理区分,
             int 履歴番号) {
@@ -61,7 +58,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(管理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分"));
 
-        return Optional.ofNullable(createModel(支払方法変更Dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 履歴番号)));
+        return Optional.ofNullable(支払方法変更Dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 履歴番号));
     }
 
     /**
@@ -70,17 +67,10 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return List<ShiharaiHohoHenkoModel>
      */
     @Transaction
-    public IItemList<ShiharaiHohoHenkoModel> selectAll() {
+    public IItemList<DbT4021ShiharaiHohoHenkoEntity> selectAll() {
 
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = 支払方法変更Dac.selectAll();
-        List<ShiharaiHohoHenkoModel> list = new ArrayList<>();
-
-        for (DbT4021ShiharaiHohoHenkoEntity 支払方法変更 : 支払方法変更List) {
-            list.add(createModel(支払方法変更));
-        }
-        IItemList<ShiharaiHohoHenkoModel> 支払方法リスト = ItemList.of(list);
-
-        return 支払方法リスト;
+        return ItemList.of(支払方法変更List);
     }
 
     /**
@@ -90,7 +80,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return IItemList<ShiharaiHohoHenkoModel>
      */
     @Transaction
-    public IItemList<ShiharaiHohoHenkoModel> select2号差止履歴(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT4021ShiharaiHohoHenkoEntity> select2号差止履歴(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -105,14 +95,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).
                 order(by(DbT4021ShiharaiHohoHenko.rirekiNo, Order.DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
-
-        List<ShiharaiHohoHenkoModel> list = new ArrayList<>();
-        for (DbT4021ShiharaiHohoHenkoEntity 支払方法変更 : 支払方法変更List) {
-            list.add(createModel(支払方法変更));
-        }
-        IItemList<ShiharaiHohoHenkoModel> 台帳リスト = ItemList.of(list);
-
-        return 台帳リスト;
+        return ItemList.of(支払方法変更List);
     }
 
     /**
@@ -122,7 +105,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
-    public IItemList<ShiharaiHohoHenkoModel> select1号償還払化履歴(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT4021ShiharaiHohoHenkoEntity> select1号償還払化履歴(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -136,13 +119,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).
                 order(by(DbT4021ShiharaiHohoHenko.rirekiNo, Order.DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
-        List<ShiharaiHohoHenkoModel> list = new ArrayList<>();
-        for (DbT4021ShiharaiHohoHenkoEntity 支払方法変更 : 支払方法変更List) {
-            list.add(createModel(支払方法変更));
-        }
-        IItemList<ShiharaiHohoHenkoModel> 台帳リスト = ItemList.of(list);
-
-        return 台帳リスト;
+        return ItemList.of(支払方法変更List);
     }
 
     /**
@@ -152,7 +129,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
-    public IItemList<ShiharaiHohoHenkoModel> select1号減額履歴(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT4021ShiharaiHohoHenkoEntity> select1号減額履歴(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -165,25 +142,12 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
                                 eq(DbT4021ShiharaiHohoHenko.isDeleted, false),
                                 eq(DbT4021ShiharaiHohoHenko.hihokenshaNo, 被保険者番号))).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
-        List<ShiharaiHohoHenkoModel> list = new ArrayList<>();
-        for (DbT4021ShiharaiHohoHenkoEntity 支払方法変更 : 支払方法変更List) {
-            list.add(createModel(支払方法変更));
-        }
-        IItemList<ShiharaiHohoHenkoModel> 台帳リスト = ItemList.of(list);
 
-        return 台帳リスト;
-    }
-
-    private ShiharaiHohoHenkoModel createModel(DbT4021ShiharaiHohoHenkoEntity 支払方法変更エンティティ) {
-        if (支払方法変更エンティティ == null) {
-            return null;
-        }
-
-        return new ShiharaiHohoHenkoModel(支払方法変更エンティティ);
+        return ItemList.of(支払方法変更List);
     }
 
     @Override
-    public int insert(ShiharaiHohoHenkoModel data) {
+    public int insert(DbT4021ShiharaiHohoHenkoEntity data) {
 
         int result = 0;
 
@@ -191,35 +155,35 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
             return result;
         }
 
-        result = 支払方法変更Dac.save(data.getEntity());
+        result = 支払方法変更Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int update(ShiharaiHohoHenkoModel data) {
+    public int update(DbT4021ShiharaiHohoHenkoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 支払方法変更Dac.save(data.getEntity());
+        result = 支払方法変更Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int delete(ShiharaiHohoHenkoModel data) {
+    public int delete(DbT4021ShiharaiHohoHenkoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 支払方法変更Dac.save(data.getEntity());
+        result = 支払方法変更Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -231,14 +195,14 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @param data ShiharaiHohoHenkoModel
      * @return int 件数
      */
-    public int deletePhysical(ShiharaiHohoHenkoModel data) {
+    public int deletePhysical(DbT4021ShiharaiHohoHenkoEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 支払方法変更Dac.save(data.getEntity());
+        result = 支払方法変更Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;

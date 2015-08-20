@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -23,7 +23,7 @@ public class HihokenshaOutline {
      */
     public ResponseData<HihokenshaOutlineDiv> onStart(HihokenshaOutlineDiv div) {
         dgSearchResult_Row hihokensha = clickedItem();
-        div.getShikakuKihon().getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
+//        div.getShikakuKihon().getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
 //        div.getAtenaInfo().getAtenaInfo().getTxtShikibetsuCode().setValue(hihokensha.getShikibetsuCode());
 //        div.getAtenaInfo().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(hihokensha.getKanaShimsei());
 //        div.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().setValue(hihokensha.getShimei());

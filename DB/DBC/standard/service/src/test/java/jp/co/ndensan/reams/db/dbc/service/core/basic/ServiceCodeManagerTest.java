@@ -8,10 +8,14 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceCode;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7119ServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7119ServiceCodeEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7119ServiceCodeDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7119ServiceCodeDac;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -40,29 +44,42 @@ public class ServiceCodeManagerTest {
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class getサービスコード extends FdaTestBase {
+    public static class getサービスコード extends DbcTestBase {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型2 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー2;
-            sut.getサービスコード(null, 主キー2);
+            ServiceKomokuCode 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
+            FlexibleYearMonth 主キー3 = DbT7119ServiceCodeEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
+            sut.getサービスコード(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            主キー型1 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー1;
-            sut.getサービスコード(主キー1, null);
+            ServiceShuruiCode 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+            FlexibleYearMonth 主キー3 = DbT7119ServiceCodeEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
+            sut.getサービスコード(主キー1, null, 主キー3, 主キー4);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
+            ServiceShuruiCode 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+            ServiceKomokuCode 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
+            int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
+            sut.getサービスコード(主キー1, 主キー2, null, 主キー4);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(null);
-
-            主キー型1 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー2;
-            ServiceCode result = sut.getサービスコード(主キー1, 主キー2);
+            when(dac.selectByKey(any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(FlexibleYearMonth.class), any(int.class))).thenReturn(null);
+            ServiceShuruiCode 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+            ServiceKomokuCode 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
+            FlexibleYearMonth 主キー3 = DbT7119ServiceCodeEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
+            ServiceCode result = sut.getサービスコード(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
         }
@@ -70,18 +87,19 @@ public class ServiceCodeManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7119ServiceCodeEntity entity = DbT7119ServiceCodeEntityGenerator.createDbT7119ServiceCodeEntity();
-            when(dac.selectByKey(any(主キー型1.class), any(主キー型2.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ServiceShuruiCode.class), any(ServiceKomokuCode.class), any(FlexibleYearMonth.class), any(int.class))).thenReturn(entity);
+            ServiceShuruiCode 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+            ServiceKomokuCode 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
+            FlexibleYearMonth 主キー3 = DbT7119ServiceCodeEntityGenerator.DEFAULT_適用開始年月;
+            int 主キー4 = DbT7119ServiceCodeEntityGenerator.DEFAULT_履歴番号;
+            ServiceCode result = sut.getサービスコード(主キー1, 主キー2, 主キー3, 主キー4);
 
-            主キー型1 主キー1 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー1;
-            主キー型2 主キー2 = DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー2;
-            ServiceCode result = sut.getサービスコード(主キー1, 主キー2);
-
-            assertThat(result.get主キー1().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.getサービス種類コード().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
         }
     }
 
     // TODO 主キー型、主キー値については使用するエンティティに合わせて適切に置換してください。
-    public static class getサービスコード一覧 extends FdaTestBase {
+    public static class getサービスコード一覧 extends DbcTestBase {
 
         @Test
         public void 検索結果が空の場合() {
@@ -100,11 +118,11 @@ public class ServiceCodeManagerTest {
             List<ServiceCode> result = sut.getサービスコード一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_主キー1.value()));
+            assertThat(result.get(0).getサービス種類コード().value(), is(DbT7119ServiceCodeEntityGenerator.DEFAULT_サービス種類コード.value()));
         }
     }
 
-    public static class saveサービスコード extends XxxTestBase {
+    public static class saveサービスコード extends DbcTestBase {
 
         @Test
         public void insertに成功するとtrueが返る() {
@@ -133,7 +151,7 @@ public class ServiceCodeManagerTest {
             DbT7119ServiceCodeEntity entity = DbT7119ServiceCodeEntityGenerator.createDbT7119ServiceCodeEntity();
             entity.initializeMd5();
             ServiceCode サービスコード = new ServiceCode(entity);
-            サービスコード = サービスコード.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            サービスコード = サービスコード.createBuilderForEdit().setサービス名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveサービスコード(サービスコード), is(true));
         }
@@ -145,7 +163,7 @@ public class ServiceCodeManagerTest {
             DbT7119ServiceCodeEntity entity = DbT7119ServiceCodeEntityGenerator.createDbT7119ServiceCodeEntity();
             entity.initializeMd5();
             ServiceCode サービスコード = new ServiceCode(entity);
-            サービスコード = サービスコード.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            サービスコード = サービスコード.createBuilderForEdit().setサービス名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.saveサービスコード(サービスコード), is(false));
         }

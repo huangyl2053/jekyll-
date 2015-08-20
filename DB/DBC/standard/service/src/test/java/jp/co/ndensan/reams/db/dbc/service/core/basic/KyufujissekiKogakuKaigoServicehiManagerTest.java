@@ -203,7 +203,7 @@ public class KyufujissekiKogakuKaigoServicehiManagerTest {
             RString 主キー9 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_給付実績区分コード;
             KyufujissekiKogakuKaigoServicehi result = sut.get給付実績高額介護サービス費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -227,7 +227,7 @@ public class KyufujissekiKogakuKaigoServicehiManagerTest {
             List<KyufujissekiKogakuKaigoServicehi> result = sut.get給付実績高額介護サービス費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -260,7 +260,7 @@ public class KyufujissekiKogakuKaigoServicehiManagerTest {
             DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
             entity.initializeMd5();
             KyufujissekiKogakuKaigoServicehi 給付実績高額介護サービス費 = new KyufujissekiKogakuKaigoServicehi(entity);
-            給付実績高額介護サービス費 = 給付実績高額介護サービス費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績高額介護サービス費 = 給付実績高額介護サービス費.createBuilderForEdit().set作成区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績高額介護サービス費(給付実績高額介護サービス費), is(true));
         }
@@ -272,7 +272,7 @@ public class KyufujissekiKogakuKaigoServicehiManagerTest {
             DbT3028KyufujissekiKogakuKaigoServicehiEntity entity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
             entity.initializeMd5();
             KyufujissekiKogakuKaigoServicehi 給付実績高額介護サービス費 = new KyufujissekiKogakuKaigoServicehi(entity);
-            給付実績高額介護サービス費 = 給付実績高額介護サービス費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績高額介護サービス費 = 給付実績高額介護サービス費.createBuilderForEdit().set作成区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績高額介護サービス費(給付実績高額介護サービス費), is(false));
         }

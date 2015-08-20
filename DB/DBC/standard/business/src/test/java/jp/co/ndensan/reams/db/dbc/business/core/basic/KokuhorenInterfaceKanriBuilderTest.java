@@ -4,9 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +26,17 @@ public class KokuhorenInterfaceKanriBuilderTest extends DbcTestBase {
     private static DbT3104KokuhorenInterfaceKanriEntity KokuhorenInterfaceKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月;
+        主キー名2 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_交換情報識別番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KokuhorenInterfaceKanriBuilder sut;
         private static KokuhorenInterfaceKanri business;
@@ -42,14 +44,15 @@ public class KokuhorenInterfaceKanriBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = new DbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
 
             business = new KokuhorenInterfaceKanri(KokuhorenInterfaceKanriEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の処理年月は_設定した値と同じ処理年月を返す() {
             business = sut.set処理年月(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月).build();

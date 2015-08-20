@@ -5,30 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaList;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTaishoshaList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
-import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaFinder;
-import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiTaishosha;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.SearchCriteriaOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
-import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 
 /**
  * 要介護認定申請時に、対象となる被保険者を検索するDivを制御します。
@@ -69,7 +49,7 @@ public class HihokenshaSearchForShinsei {
      * @return ResponseData
      */
     public ResponseData<HihokenshaSearchForShinseiDiv> onClick_btnToDecide(HihokenshaSearchForShinseiDiv panel) {
-        YokaigoNinteiShinseisha.getInstance().save(panel.getSearchResultForShinsei().getDgSearchResult().getClickedItem());
+//        YokaigoNinteiShinseisha.getInstance().save(panel.getSearchResultForShinsei().getDgSearchResult().getClickedItem());
         return _createResponseData(panel);
     }
 

@@ -5,8 +5,12 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7122SogoJigyoServiceCodeEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7122SogoJigyoServiceCodeEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +30,16 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
     private static DbT7122SogoJigyoServiceCodeEntity SogoJigyoServiceCodeEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ServiceShuruiCode 主キー名1;
+    private static ServiceKomokuCode 主キー名2;
+    private static FlexibleYearMonth 主キー名3;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7122SogoJigyoServiceCodeEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7122SogoJigyoServiceCodeEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7122SogoJigyoServiceCodeEntityGenerator.DEFAULT_サービス種類コード;
+        主キー名2 = DbT7122SogoJigyoServiceCodeEntityGenerator.DEFAULT_サービス項目コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -43,33 +49,33 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoServiceCode(null, 主キー名2);
+            sut = new SogoJigyoServiceCode(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoServiceCode(主キー名1, null);
+            sut = new SogoJigyoServiceCode(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT7122SogoJigyoServiceCodeEntityにセットされている() {
-            sut = new SogoJigyoServiceCode(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new SogoJigyoServiceCode(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.getサービス種類コード(), is(主キー名1));
+            assertThat(sut.getサービス項目コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するSogoJigyoServiceCodeIdentifierにセットされている() {
-            sut = new SogoJigyoServiceCode(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new SogoJigyoServiceCode(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().getサービス項目コード(), is(主キー名2));
         }
     }
 
@@ -80,8 +86,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +100,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
 
             sut = new SogoJigyoServiceCode(SogoJigyoServiceCodeEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().getサービス種類コード(), is(主キー名1));
+            assertThat(sut.identifier().getサービス項目コード(), is(主キー名2));
         }
     }
 
@@ -106,8 +112,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new SogoJigyoServiceCode(SogoJigyoServiceCodeEntity);
         }
@@ -168,15 +174,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         }
 
         @Test
-        public void get利用者負担定率／定額区分は_entityが持つ利用者負担定率
-
-        ／定額区分を返す() {
-            assertThat(sut.get利用者負担定率
-            ／定額区分()
-            , is(SogoJigyoServiceCodeEntity.getTeiRitsu_TeiGakuKubun())
-
-
-        );
+        public void get利用者負担定率_定額区分は_entityが持つ利用者負担定率_定額区分を返す() {
+            assertThat(sut.get利用者負担定率_定額区分(), is(SogoJigyoServiceCodeEntity.getTeiRitsu_TeiGakuKubun()));
         }
 
         @Test
@@ -212,8 +211,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new SogoJigyoServiceCode(SogoJigyoServiceCodeEntity);
         }
@@ -231,15 +230,15 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
             sut = new SogoJigyoServiceCode(SogoJigyoServiceCodeEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -251,8 +250,8 @@ public class SogoJigyoServiceCodeTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoServiceCodeEntity = DbT7122SogoJigyoServiceCodeEntityGenerator.createDbT7122SogoJigyoServiceCodeEntity();
-            SogoJigyoServiceCodeEntity.setXXX(主キー名1);
-            SogoJigyoServiceCodeEntity.setXXX(主キー名2);
+            SogoJigyoServiceCodeEntity.setServiceShuruiCode(主キー名1);
+            SogoJigyoServiceCodeEntity.setServiceKomokuCode(主キー名2);
 
         }
 

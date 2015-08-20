@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3086KyufuhiKashitsukekinShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3086KyufuhiKashitsukekinShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class KyufuhiKashitsukekinShinseiBuilderTest extends DbcTestBase {
     private static DbT3086KyufuhiKashitsukekinShinseiEntity KyufuhiKashitsukekinShinseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleDate 借入申請年月日;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号;
+        借入申請年月日 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_借入申請年月日;
+        履歴番号 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufuhiKashitsukekinShinseiBuilder sut;
         private static KyufuhiKashitsukekinShinsei business;
@@ -42,14 +47,16 @@ public class KyufuhiKashitsukekinShinseiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = new DbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
 
             business = new KyufuhiKashitsukekinShinsei(KyufuhiKashitsukekinShinseiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号).build();
@@ -117,27 +124,27 @@ public class KyufuhiKashitsukekinShinseiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の貸付対象・高額介護サービス費等有無は_設定した値と同じ貸付対象・高額介護サービス費等有無を返す() {
-            business = sut.set貸付対象・高額介護サービス費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・高額介護サービス費等有無).build();
-            assertThat(business.get貸付対象・高額介護サービス費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・高額介護サービス費等有無));
+        public void 戻り値の貸付対象_高額介護サービス費等有無は_設定した値と同じ貸付対象_高額介護サービス費等有無を返す() {
+            business = sut.set貸付対象_高額介護サービス費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_高額介護サービス費等有無).build();
+            assertThat(business.get貸付対象_高額介護サービス費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_高額介護サービス費等有無));
         }
 
         @Test
-        public void 戻り値の貸付対象・住宅改修費等有無は_設定した値と同じ貸付対象・住宅改修費等有無を返す() {
-            business = sut.set貸付対象・住宅改修費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・住宅改修費等有無).build();
-            assertThat(business.get貸付対象・住宅改修費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・住宅改修費等有無));
+        public void 戻り値の貸付対象_住宅改修費等有無は_設定した値と同じ貸付対象_住宅改修費等有無を返す() {
+            business = sut.set貸付対象_住宅改修費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_住宅改修費等有無).build();
+            assertThat(business.get貸付対象_住宅改修費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_住宅改修費等有無));
         }
 
         @Test
-        public void 戻り値の貸付対象・福祉用具購入費等有無は_設定した値と同じ貸付対象・福祉用具購入費等有無を返す() {
-            business = sut.set貸付対象・福祉用具購入費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・福祉用具購入費等有無).build();
-            assertThat(business.get貸付対象・福祉用具購入費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・福祉用具購入費等有無));
+        public void 戻り値の貸付対象_福祉用具購入費等有無は_設定した値と同じ貸付対象_福祉用具購入費等有無を返す() {
+            business = sut.set貸付対象_福祉用具購入費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_福祉用具購入費等有無).build();
+            assertThat(business.get貸付対象_福祉用具購入費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_福祉用具購入費等有無));
         }
 
         @Test
-        public void 戻り値の貸付対象・特例介護サービス費等有無は_設定した値と同じ貸付対象・特例介護サービス費等有無を返す() {
-            business = sut.set貸付対象・特例介護サービス費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・特例介護サービス費等有無).build();
-            assertThat(business.get貸付対象・特例介護サービス費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象・特例介護サービス費等有無));
+        public void 戻り値の貸付対象_特例介護サービス費等有無は_設定した値と同じ貸付対象_特例介護サービス費等有無を返す() {
+            business = sut.set貸付対象_特例介護サービス費等有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_特例介護サービス費等有無).build();
+            assertThat(business.get貸付対象_特例介護サービス費等有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_貸付対象_特例介護サービス費等有無));
         }
 
         @Test
@@ -213,9 +220,9 @@ public class KyufuhiKashitsukekinShinseiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の請求書・領収書の有無は_設定した値と同じ請求書・領収書の有無を返す() {
-            business = sut.set請求書・領収書の有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_請求書・領収書の有無).build();
-            assertThat(business.get請求書・領収書の有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_請求書・領収書の有無));
+        public void 戻り値の請求書_領収書の有無は_設定した値と同じ請求書_領収書の有無を返す() {
+            business = sut.set請求書_領収書の有無(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_請求書_領収書の有無).build();
+            assertThat(business.get請求書_領収書の有無(), is(DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_請求書_領収書の有無));
         }
 
         @Test

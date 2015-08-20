@@ -9,13 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
-import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,13 +86,11 @@ public final class FukaErrorGridMapper {
      * @return 賦課エラー一覧1行分のデータ
      */
     public static FukaErrorInternalReportItem toFukaErrorReportItem(dgFukaErrorList_Row row) {
-        FukaErrorModel model = new FukaErrorModel();
-        model.set賦課年度(new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()));
-        model.set通知書番号(new TsuchishoNo(row.getTsuchishoNo()));
-        model.setエラーコード(new Code(row.getErrorCode()));
-        model.set被保険者番号(new HihokenshaNo(row.getHihokenshaNo()));
-        model.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
-        model.set処理区分(InternalReportShoriKubun.toValue(new Code(row.getShoriJokyoCode())));
+        FukaErrorList model = new FukaErrorList(
+                SubGyomuCode.DBB介護賦課,
+                new RString("内部帳票ID"),
+                new FlexibleYear(row.getFukaNendo().getValue().toDateString()),
+                new TsuchishoNo(row.getTsuchishoNo()));
         return new FukaErrorInternalReportItem(model);
     }
 }

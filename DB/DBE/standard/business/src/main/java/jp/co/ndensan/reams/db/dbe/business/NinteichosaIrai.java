@@ -10,10 +10,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -58,8 +57,7 @@ public class NinteichosaIrai {
      * @param 認定調査督促方法 認定調査督促方法
      * @param 認定調査督促回数 認定調査督促回数
      * @param 認定調査督促メモ 認定調査督促メモ
-     * @throws NullPointerException
-     * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
+     * @throws NullPointerException 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
     public NinteichosaIrai(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             KaigoJigyoshaNo 認定調査委託先コード, NinteichosainBangoCode 調査員番号コード,

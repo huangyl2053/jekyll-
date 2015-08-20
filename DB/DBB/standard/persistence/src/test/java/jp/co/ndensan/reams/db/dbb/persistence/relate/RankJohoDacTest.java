@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.persistence.relate.RankJohoDac;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.RankJohoModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2011RankJohoDac;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2011RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Before;
@@ -34,8 +33,8 @@ public class RankJohoDacTest {
 
     private static RankJohoDac sut;
     private static DbT2011RankJohoDac ランク情報Dac;
-    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度);
-    private static final FukaNendo 賦課年度2 = new FukaNendo(DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.plusYear(1));
+    private static final FlexibleYear 賦課年度1 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
+    private static final FlexibleYear 賦課年度2 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.plusYear(1);
     private static final RankKubun ランク区分1 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
     private static final RankKubun ランク区分2 = new RankKubun(new RString("02"));
 
@@ -67,12 +66,12 @@ public class RankJohoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_ランク情報モデル返す() {
-            assertThat(sut.selectランク情報ByKey(賦課年度1, ランク区分1).get賦課年度(), is(賦課年度1));
+            assertThat(sut.selectランク情報ByKey(賦課年度1, ランク区分1).getFukaNendo(), is(賦課年度1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectランク情報ByKey(FukaNendo.EMPTY, ランク区分1), is(nullValue()));
+            assertThat(sut.selectランク情報ByKey(FlexibleYear.EMPTY, ランク区分1), is(nullValue()));
         }
     }
 
@@ -93,15 +92,15 @@ public class RankJohoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_ランク情報モデルリストを返す() {
-            List<RankJohoModel> modelList = sut.selectランク情報一覧(賦課年度1);
+            List<DbT2011RankJohoEntity> modelList = sut.selectランク情報一覧(賦課年度1);
             assertThat(modelList.size(), is(2));
-            assertThat(modelList.get(0).getランク区分(), is(ランク区分1));
-            assertThat(modelList.get(1).getランク区分(), is(ランク区分2));
+            assertThat(modelList.get(0).getRankKubun(), is(ランク区分1));
+            assertThat(modelList.get(1).getRankKubun(), is(ランク区分2));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_空のリストを返す() {
-            assertThat(sut.selectランク情報一覧(FukaNendo.EMPTY).isEmpty(), is(true));
+            assertThat(sut.selectランク情報一覧(FlexibleYear.EMPTY).isEmpty(), is(true));
         }
     }
 
@@ -114,8 +113,7 @@ public class RankJohoDacTest {
 
         @Test
         public void 全ての有効なモデルを持つRankJohoモデルを渡した時_insertは_1を返す() {
-            RankJohoModel model = new RankJohoModel(
-                    DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity());
+            DbT2011RankJohoEntity model = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
 
             assertThat(sut.insert(model), is(1));
         }
@@ -130,13 +128,12 @@ public class RankJohoDacTest {
 
         @Test
         public void モデルの状態がModifiedの時_updateは_1を返す() {
-            RankJohoModel model = new RankJohoModel(
-                    DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity());
+            DbT2011RankJohoEntity model = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
 
             sut.insert(model);
 
-            model.getEntity().initializeMd5();
-            model.setランク名称(new RString("ランク名称変更"));
+            model.initializeMd5();
+            model.setRankName(new RString("ランク名称変更"));
 
             assertThat(sut.update(model), is(1));
         }
@@ -152,8 +149,7 @@ public class RankJohoDacTest {
 
         @Test
         public void 全ての有効なモデルを持つRankJohoモデルを渡した時_deleteは_1を返す() {
-            RankJohoModel model = new RankJohoModel(
-                    DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity());
+            DbT2011RankJohoEntity model = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
 
             sut.insert(model);
             assertThat(sut.delete(model), is(1));
@@ -169,8 +165,7 @@ public class RankJohoDacTest {
 
         @Test
         public void 全ての有効なモデルを持つRankJohoモデルを渡した時_deletePhysicalは_1を返す() {
-            RankJohoModel model = new RankJohoModel(
-                    DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity());
+            DbT2011RankJohoEntity model = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
 
             sut.insert(model);
             assertThat(sut.deletePhysical(model), is(1));
@@ -180,12 +175,12 @@ public class RankJohoDacTest {
     private static class TestSupport {
 
         public static void insertDbT2011(
-                FukaNendo 賦課年度,
+                FlexibleYear 賦課年度,
                 RankKubun ランク区分) {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
-            entity.setFukaNendo(賦課年度.value());
+            entity.setFukaNendo(賦課年度);
             entity.setRankKubun(ランク区分);
-            ランク情報Dac.insert(entity);
+            ランク情報Dac.save(entity);
         }
     }
 }

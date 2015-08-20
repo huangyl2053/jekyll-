@@ -118,7 +118,7 @@ public class KogakuShikyuShinsaKetteiManagerTest {
             RString 主キー5 = DbT3112KogakuShikyuShinsaKetteiEntityGenerator.DEFAULT_通知書番号;
             KogakuShikyuShinsaKettei result = sut.get事業高額介護サービス費支給審査決定(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3112KogakuShikyuShinsaKetteiEntityGenerator.DEFAULT_決定者受取年月.toDateString()));
+            assertThat(result.get決定者受取年月().toDateString(), is(DbT3112KogakuShikyuShinsaKetteiEntityGenerator.DEFAULT_決定者受取年月.toDateString()));
         }
     }
 
@@ -142,7 +142,7 @@ public class KogakuShikyuShinsaKetteiManagerTest {
             List<KogakuShikyuShinsaKettei> result = sut.get事業高額介護サービス費支給審査決定一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3112KogakuShikyuShinsaKetteiEntityGenerator.DEFAULT_決定者受取年月.toDateString()));
+            assertThat(result.get(0).get決定者受取年月().toDateString(), is(DbT3112KogakuShikyuShinsaKetteiEntityGenerator.DEFAULT_決定者受取年月.toDateString()));
         }
     }
 
@@ -175,7 +175,7 @@ public class KogakuShikyuShinsaKetteiManagerTest {
             DbT3112KogakuShikyuShinsaKetteiEntity entity = DbT3112KogakuShikyuShinsaKetteiEntityGenerator.createDbT3112KogakuShikyuShinsaKetteiEntity();
             entity.initializeMd5();
             KogakuShikyuShinsaKettei 事業高額介護サービス費支給審査決定 = new KogakuShikyuShinsaKettei(entity);
-            事業高額介護サービス費支給審査決定 = 事業高額介護サービス費支給審査決定.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給審査決定 = 事業高額介護サービス費支給審査決定.createBuilderForEdit().set支給区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給審査決定(事業高額介護サービス費支給審査決定), is(true));
         }
@@ -187,7 +187,7 @@ public class KogakuShikyuShinsaKetteiManagerTest {
             DbT3112KogakuShikyuShinsaKetteiEntity entity = DbT3112KogakuShikyuShinsaKetteiEntityGenerator.createDbT3112KogakuShikyuShinsaKetteiEntity();
             entity.initializeMd5();
             KogakuShikyuShinsaKettei 事業高額介護サービス費支給審査決定 = new KogakuShikyuShinsaKettei(entity);
-            事業高額介護サービス費支給審査決定 = 事業高額介護サービス費支給審査決定.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            事業高額介護サービス費支給審査決定 = 事業高額介護サービス費支給審査決定.createBuilderForEdit().set支給区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save事業高額介護サービス費支給審査決定(事業高額介護サービス費支給審査決定), is(false));
         }

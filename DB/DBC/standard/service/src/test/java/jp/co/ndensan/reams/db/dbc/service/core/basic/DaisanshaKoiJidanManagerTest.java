@@ -104,7 +104,7 @@ public class DaisanshaKoiJidanManagerTest {
             Decimal 主キー4 = DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiJidan result = sut.get介護第三者行為示談(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -128,7 +128,7 @@ public class DaisanshaKoiJidanManagerTest {
             List<DaisanshaKoiJidan> result = sut.get介護第三者行為示談一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -161,7 +161,7 @@ public class DaisanshaKoiJidanManagerTest {
             DbT3080DaisanshaKoiJidanEntity entity = DbT3080DaisanshaKoiJidanEntityGenerator.createDbT3080DaisanshaKoiJidanEntity();
             entity.initializeMd5();
             DaisanshaKoiJidan 介護第三者行為示談 = new DaisanshaKoiJidan(entity);
-            介護第三者行為示談 = 介護第三者行為示談.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為示談 = 介護第三者行為示談.createBuilderForEdit().set過失割合_被害者(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為示談(介護第三者行為示談), is(true));
         }
@@ -173,7 +173,7 @@ public class DaisanshaKoiJidanManagerTest {
             DbT3080DaisanshaKoiJidanEntity entity = DbT3080DaisanshaKoiJidanEntityGenerator.createDbT3080DaisanshaKoiJidanEntity();
             entity.initializeMd5();
             DaisanshaKoiJidan 介護第三者行為示談 = new DaisanshaKoiJidan(entity);
-            介護第三者行為示談 = 介護第三者行為示談.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為示談 = 介護第三者行為示談.createBuilderForEdit().set過失割合_被害者(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為示談(介護第三者行為示談), is(false));
         }

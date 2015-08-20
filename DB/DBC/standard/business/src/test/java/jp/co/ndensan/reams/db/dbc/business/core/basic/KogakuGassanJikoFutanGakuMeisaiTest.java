@@ -4,11 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +32,22 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
     private static DbT3071KogakuGassanJikoFutanGakuMeisaiEntity KogakuGassanJikoFutanGakuMeisaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYear 主キー名2;
+    private static HokenshaNo 主キー名3;
+    private static RString 主キー名4;
+    private static RString 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象年度;
+        主キー名3 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_保険者番号;
+        主キー名4 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_支給申請書整理番号;
+        主キー名5 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_対象月;
+        主キー名6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +57,33 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KogakuGassanJikoFutanGakuMeisai(null, 主キー名2);
+            sut = new KogakuGassanJikoFutanGakuMeisai(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, null);
+            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test
         public void 指定したキーが保持するDbT3071KogakuGassanJikoFutanGakuMeisaiEntityにセットされている() {
-            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.get対象年度(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKogakuGassanJikoFutanGakuMeisaiIdentifierにセットされている() {
-            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KogakuGassanJikoFutanGakuMeisai(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get対象年度(), is(主キー名2));
         }
     }
 
@@ -82,8 +94,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +108,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
 
             sut = new KogakuGassanJikoFutanGakuMeisai(KogakuGassanJikoFutanGakuMeisaiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get対象年度(), is(主キー名2));
         }
     }
 
@@ -108,8 +120,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
 
             sut = new KogakuGassanJikoFutanGakuMeisai(KogakuGassanJikoFutanGakuMeisaiEntity);
         }
@@ -150,8 +162,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         }
 
         @Test
-        public void get70-74自己負担額（内数）は_entityが持つ70-74自己負担額（内数）を返す() {
-            assertThat(sut.get70-74自己負担額（内数）(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getUchisu_70_74JikoFutanGaku()));
+        public void get70_74自己負担額_内数は_entityが持つ70_74自己負担額_内数を返す() {
+            assertThat(sut.get70_74自己負担額_内数(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getUchisu_70_74JikoFutanGaku()));
         }
 
         @Test
@@ -160,8 +172,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         }
 
         @Test
-        public void get70-74高額支給額は_entityが持つ70-74高額支給額を返す() {
-            assertThat(sut.get70-74高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getOver_70_74KogakuShikyuGaku()));
+        public void get70_74高額支給額は_entityが持つ70_74高額支給額を返す() {
+            assertThat(sut.get70_74高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getOver_70_74KogakuShikyuGaku()));
         }
 
         @Test
@@ -170,28 +182,28 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         }
 
         @Test
-        public void get補正済・自己負担額は_entityが持つ補正済・自己負担額を返す() {
-            assertThat(sut.get補正済・自己負担額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_JikoFutanGaku()));
+        public void get補正済_自己負担額は_entityが持つ補正済_自己負担額を返す() {
+            assertThat(sut.get補正済_自己負担額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_JikoFutanGaku()));
         }
 
         @Test
-        public void get補正済・70-74自己負担額（内数）は_entityが持つ補正済・70-74自己負担額（内数）を返す() {
-            assertThat(sut.get補正済・70-74自己負担額（内数）(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_70_74JikoFutanGaku()));
+        public void get補正済_70_74自己負担額_内数は_entityが持つ補正済_70_74自己負担額_内数を返す() {
+            assertThat(sut.get補正済_70_74自己負担額_内数(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_70_74JikoFutanGaku()));
         }
 
         @Test
-        public void get補正済・70未満高額支給額は_entityが持つ補正済・70未満高額支給額を返す() {
-            assertThat(sut.get補正済・70未満高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_under_70KogakuShikyuGaku()));
+        public void get補正済_70未満高額支給額は_entityが持つ補正済_70未満高額支給額を返す() {
+            assertThat(sut.get補正済_70未満高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_under_70KogakuShikyuGaku()));
         }
 
         @Test
-        public void get補正済・70-74高額支給額は_entityが持つ補正済・70-74高額支給額を返す() {
-            assertThat(sut.get補正済・70-74高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_70_74KogakuShikyuGaku()));
+        public void get補正済_70_74高額支給額は_entityが持つ補正済_70_74高額支給額を返す() {
+            assertThat(sut.get補正済_70_74高額支給額(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_70_74KogakuShikyuGaku()));
         }
 
         @Test
-        public void get補正済・摘要は_entityが持つ補正済・摘要を返す() {
-            assertThat(sut.get補正済・摘要(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_Tekiyo()));
+        public void get補正済_摘要は_entityが持つ補正済_摘要を返す() {
+            assertThat(sut.get補正済_摘要(), is(KogakuGassanJikoFutanGakuMeisaiEntity.getSumi_Tekiyo()));
         }
     }
 
@@ -202,8 +214,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
 
             sut = new KogakuGassanJikoFutanGakuMeisai(KogakuGassanJikoFutanGakuMeisaiEntity);
         }
@@ -221,8 +233,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
 
             sut = new KogakuGassanJikoFutanGakuMeisai(KogakuGassanJikoFutanGakuMeisaiEntity);
         }
@@ -241,8 +253,8 @@ public class KogakuGassanJikoFutanGakuMeisaiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanJikoFutanGakuMeisaiEntity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名1);
-            KogakuGassanJikoFutanGakuMeisaiEntity.setXXX(主キー名2);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanJikoFutanGakuMeisaiEntity.setTaishoNendo(主キー名2);
 
         }
 

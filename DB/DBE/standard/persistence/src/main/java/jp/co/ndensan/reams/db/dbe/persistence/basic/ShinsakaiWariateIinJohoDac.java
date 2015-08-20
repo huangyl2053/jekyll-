@@ -6,18 +6,22 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJoho.shinsakaiKaisaiYMD;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho.*;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho.shinsakaiIinCode;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Order.ASC;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
-import static jp.co.ndensan.reams.uz.uza.util.db.Order.*;
 
 /**
  * 審査会に割り当てられている委員の情報を取得するDacです。
@@ -95,7 +99,6 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
     }
 
     @Transaction
-    @Override
     public int delete(DbT5106ShinsakaiWariateIinJohoEntity data) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(data).execute();

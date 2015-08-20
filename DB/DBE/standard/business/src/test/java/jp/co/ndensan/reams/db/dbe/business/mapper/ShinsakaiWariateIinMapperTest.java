@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiWariateIinMapper;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
@@ -22,10 +21,11 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -99,12 +99,12 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test
         public void 返却された審査会割当委員が持つ_認定審査員区分の区分コードは_shinsain01になる() {
-            assertThat(result.get認定審査員区分().getCode(), is(審査員区分_shinsain01));
+            assertThat(result.get認定審査員区分().getShinsainKubunCode().asCode(), is(審査員区分_shinsain01));
         }
 
         @Test
         public void 返却された審査会割当委員が持つ_合議体長区分の区分コードは_gogitaicho01になる() {
-            assertThat(result.get合議体長区分().getCode(), is(合議体長区分_gogitaicho01));
+            assertThat(result.get合議体長区分().getGogitaichoKubunCode().asCode(), is(合議体長区分_gogitaicho01));
         }
 
         @Test
@@ -245,11 +245,6 @@ public class ShinsakaiWariateIinMapperTest {
         @Test
         public void 返却された割当委員Entityが持つ_審査会開催番号は_1になる() {
             assertThat(result.getShinsakaiKaisaiNo(), is(審査会開催番号_1));
-        }
-
-        @Test
-        public void 返却された割当委員Entityが持つ_開催年月日は_19990101になる() {
-            assertThat(result.getShinsakaiKaisaiYMD(), is(審査会開催年月日_19990101));
         }
 
         @Test

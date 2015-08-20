@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoKikanDiv;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
+// TODO n8187久保田 KibetsuChoshuYuyoModelをdbb.business.core.basic.KibetsuChoshuYuyoに変更する。
+// divと名前が被っているのでdiv名を変更する。
+//import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -29,7 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 public class KibetsuChoshuYuyo {
 
     private final ChoshuYuyoKikanDiv div;
-    private final IItemList<KibetsuChoshuYuyoModel> list;
+//    private final IItemList<KibetsuChoshuYuyoModel> list;
+    private final IItemList<Object> list;
 
     private enum TableItem {
 
@@ -52,7 +55,8 @@ public class KibetsuChoshuYuyo {
      * @param div 期割額Div
      * @param list 期別徴収猶予モデルリスト
      */
-    public KibetsuChoshuYuyo(ChoshuYuyoKikanDiv div, IItemList<KibetsuChoshuYuyoModel> list) {
+    public KibetsuChoshuYuyo(ChoshuYuyoKikanDiv div, IItemList<Object> list) {
+//    public KibetsuChoshuYuyo(ChoshuYuyoKikanDiv div, IItemList<KibetsuChoshuYuyoModel> list) {
         this.div = div;
         this.list = list;
         this.日付Config = new HizukeConfig();
@@ -75,9 +79,12 @@ public class KibetsuChoshuYuyo {
         setKibetsu(createIndexMap(期列));
     }
 
-    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyoModel> model) {
-        return model.get().get調定年度().value().equals(model.get().get賦課年度().value());
+    private boolean are調定年度and賦課年度SameAge(Optional<Object> model) {
+        return true;
     }
+//    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyoModel> model) {
+//        return model.get().get調定年度().value().equals(model.get().get賦課年度().value());
+//    }
 
     private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
         for (int index = 0; index < dataList.size(); index++) {
@@ -102,16 +109,16 @@ public class KibetsuChoshuYuyo {
         FlexibleDate[] 開始日 = new FlexibleDate[TABLE_SIZE];
         FlexibleDate[] 終了日 = new FlexibleDate[TABLE_SIZE];
 
-        for (KibetsuChoshuYuyoModel model : list) {
-
-            RString 期 = new RString(String.format("%1$02d", model.get期()));
-            Integer 期Index = 期IndexMap.get(期);
-
-            if (期Index != null && 0 <= 期Index && 期Index < TABLE_SIZE) {
-                開始日[期Index] = model.get徴収猶予開始年月日();
-                終了日[期Index] = model.get徴収猶予終了年月日();
-            }
-        }
+//        for (KibetsuChoshuYuyoModel model : list) {
+//
+//            RString 期 = new RString(String.format("%1$02d", model.get期()));
+//            Integer 期Index = 期IndexMap.get(期);
+//
+//            if (期Index != null && 0 <= 期Index && 期Index < TABLE_SIZE) {
+//                開始日[期Index] = model.get徴収猶予開始年月日();
+//                終了日[期Index] = model.get徴収猶予終了年月日();
+//            }
+//        }
         setTableData(TableItem.開始日, 開始日);
         setTableData(TableItem.終了日, 終了日);
     }

@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB3110003;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * Kiwarigaku のクラスファイル 
- * 
+ * Kiwarigaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class KiwarigakuDiv extends Panel {
@@ -23,6 +22,7 @@ public class KiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("TablePanel2")
     private TablePanel2Div TablePanel2;
 
@@ -39,7 +39,7 @@ public class KiwarigakuDiv extends Panel {
 
     @JsonProperty("TablePanel2")
     public void setTablePanel2(TablePanel2Div TablePanel2) {
-        this.TablePanel2=TablePanel2;
+        this.TablePanel2 = TablePanel2;
     }
 
     /*

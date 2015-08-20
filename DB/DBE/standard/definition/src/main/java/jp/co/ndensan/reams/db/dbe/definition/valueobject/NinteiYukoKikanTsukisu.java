@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
  * 認定有効期間月数を保持するクラスです。

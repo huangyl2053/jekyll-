@@ -147,7 +147,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetHihokennshaKubunCodeは_引数のget被保険者区分$getコードと一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(result.getHihokennshaKubunCode(), is(shikaku.get被保険者区分().getCode().value()));
+                assertThat(result.getHihokennshaKubunCode(), is(shikaku.get被保険者区分().get被保険者区分コード().value()));
             }
 
             @Test

@@ -204,7 +204,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManagerTest {
             RString 主キー9 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_特定診療情報レコード順次番号;
             KyufujissekiTokuteiSinryoTokubetsuRyoyo result = sut.get給付実績特定診療費_特別療養費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManagerTest {
             List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> result = sut.get給付実績特定診療費_特別療養費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManagerTest {
             DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiTokuteiSinryoTokubetsuRyoyo 給付実績特定診療費_特別療養費 = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(entity);
-            給付実績特定診療費_特別療養費 = 給付実績特定診療費_特別療養費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績特定診療費_特別療養費 = 給付実績特定診療費_特別療養費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績特定診療費_特別療養費(給付実績特定診療費_特別療養費), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoManagerTest {
             DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.createDbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiTokuteiSinryoTokubetsuRyoyo 給付実績特定診療費_特別療養費 = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(entity);
-            給付実績特定診療費_特別療養費 = 給付実績特定診療費_特別療養費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績特定診療費_特別療養費 = 給付実績特定診療費_特別療養費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績特定診療費_特別療養費(給付実績特定診療費_特別療養費), is(false));
         }

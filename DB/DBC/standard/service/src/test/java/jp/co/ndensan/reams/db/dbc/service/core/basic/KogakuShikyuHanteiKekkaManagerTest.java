@@ -103,7 +103,7 @@ public class KogakuShikyuHanteiKekkaManagerTest {
             Decimal 主キー4 = DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
             KogakuShikyuHanteiKekka result = sut.get高額介護サービス費支給判定結果(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class KogakuShikyuHanteiKekkaManagerTest {
             List<KogakuShikyuHanteiKekka> result = sut.get高額介護サービス費支給判定結果一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class KogakuShikyuHanteiKekkaManagerTest {
             DbT3057KogakuShikyuHanteiKekkaEntity entity = DbT3057KogakuShikyuHanteiKekkaEntityGenerator.createDbT3057KogakuShikyuHanteiKekkaEntity();
             entity.initializeMd5();
             KogakuShikyuHanteiKekka 高額介護サービス費支給判定結果 = new KogakuShikyuHanteiKekka(entity);
-            高額介護サービス費支給判定結果 = 高額介護サービス費支給判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費支給判定結果 = 高額介護サービス費支給判定結果.createBuilderForEdit().set不支給理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費支給判定結果(高額介護サービス費支給判定結果), is(true));
         }
@@ -172,7 +172,7 @@ public class KogakuShikyuHanteiKekkaManagerTest {
             DbT3057KogakuShikyuHanteiKekkaEntity entity = DbT3057KogakuShikyuHanteiKekkaEntityGenerator.createDbT3057KogakuShikyuHanteiKekkaEntity();
             entity.initializeMd5();
             KogakuShikyuHanteiKekka 高額介護サービス費支給判定結果 = new KogakuShikyuHanteiKekka(entity);
-            高額介護サービス費支給判定結果 = 高額介護サービス費支給判定結果.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費支給判定結果 = 高額介護サービス費支給判定結果.createBuilderForEdit().set不支給理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費支給判定結果(高額介護サービス費支給判定結果), is(false));
         }

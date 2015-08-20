@@ -16,7 +16,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaK
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKettei.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

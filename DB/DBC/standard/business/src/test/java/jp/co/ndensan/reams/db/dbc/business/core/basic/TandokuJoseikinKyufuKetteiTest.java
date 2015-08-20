@@ -4,11 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3097TandokuJoseikinKyufuKetteiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3097TandokuJoseikinKyufuKetteiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +30,15 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
     private static DbT3097TandokuJoseikinKyufuKetteiEntity TandokuJoseikinKyufuKetteiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleDate 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.DEFAULT_受付年月日;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +48,33 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TandokuJoseikinKyufuKettei(null, 主キー名2);
+            sut = new TandokuJoseikinKyufuKettei(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TandokuJoseikinKyufuKettei(主キー名1, null);
+            sut = new TandokuJoseikinKyufuKettei(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT3097TandokuJoseikinKyufuKetteiEntityにセットされている() {
-            sut = new TandokuJoseikinKyufuKettei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new TandokuJoseikinKyufuKettei(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.get受付年月日(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するTandokuJoseikinKyufuKetteiIdentifierにセットされている() {
-            sut = new TandokuJoseikinKyufuKettei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new TandokuJoseikinKyufuKettei(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get受付年月日(), is(主キー名2));
         }
     }
 
@@ -82,8 +85,8 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +99,8 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
 
             sut = new TandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKetteiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get受付年月日(), is(主キー名2));
         }
     }
 
@@ -108,8 +111,8 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
 
             sut = new TandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKetteiEntity);
         }
@@ -145,13 +148,13 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         }
 
         @Test
-        public void get利用者負担・決定区分は_entityが持つ利用者負担・決定区分を返す() {
-            assertThat(sut.get利用者負担・決定区分(), is(TandokuJoseikinKyufuKetteiEntity.getRiyoshaFutan_KetteiKubun()));
+        public void get利用者負担_決定区分は_entityが持つ利用者負担_決定区分を返す() {
+            assertThat(sut.get利用者負担_決定区分(), is(TandokuJoseikinKyufuKetteiEntity.getRiyoshaFutan_KetteiKubun()));
         }
 
         @Test
-        public void get利用者負担・不承認理由は_entityが持つ利用者負担・不承認理由を返す() {
-            assertThat(sut.get利用者負担・不承認理由(), is(TandokuJoseikinKyufuKetteiEntity.getRiyoshaFutan_FuShoninRiyu()));
+        public void get利用者負担_不承認理由は_entityが持つ利用者負担_不承認理由を返す() {
+            assertThat(sut.get利用者負担_不承認理由(), is(TandokuJoseikinKyufuKetteiEntity.getRiyoshaFutan_FuShoninRiyu()));
         }
 
         @Test
@@ -195,18 +198,18 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         }
 
         @Test
-        public void get保留区分・滞納は_entityが持つ保留区分・滞納を返す() {
-            assertThat(sut.get保留区分・滞納(), is(TandokuJoseikinKyufuKetteiEntity.getTaino_HoryuKubun()));
+        public void get保留区分_滞納は_entityが持つ保留区分_滞納を返す() {
+            assertThat(sut.get保留区分_滞納(), is(TandokuJoseikinKyufuKetteiEntity.getTaino_HoryuKubun()));
         }
 
         @Test
-        public void get保留区分・認定申請中は_entityが持つ保留区分・認定申請中を返す() {
-            assertThat(sut.get保留区分・認定申請中(), is(TandokuJoseikinKyufuKetteiEntity.getNinteiShinseichu_HoryuKubun()));
+        public void get保留区分_認定申請中は_entityが持つ保留区分_認定申請中を返す() {
+            assertThat(sut.get保留区分_認定申請中(), is(TandokuJoseikinKyufuKetteiEntity.getNinteiShinseichu_HoryuKubun()));
         }
 
         @Test
-        public void get保留区分・認定有効期限切れは_entityが持つ保留区分・認定有効期限切れを返す() {
-            assertThat(sut.get保留区分・認定有効期限切れ(), is(TandokuJoseikinKyufuKetteiEntity.getNinteiKigenGire_HoryuKubun()));
+        public void get保留区分_認定有効期限切れは_entityが持つ保留区分_認定有効期限切れを返す() {
+            assertThat(sut.get保留区分_認定有効期限切れ(), is(TandokuJoseikinKyufuKetteiEntity.getNinteiKigenGire_HoryuKubun()));
         }
     }
 
@@ -217,8 +220,8 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
 
             sut = new TandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKetteiEntity);
         }
@@ -236,15 +239,15 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
 
             sut = new TandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKetteiEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -256,8 +259,8 @@ public class TandokuJoseikinKyufuKetteiTest extends DbcTestBase {
         @Before
         public void setUp() {
             TandokuJoseikinKyufuKetteiEntity = DbT3097TandokuJoseikinKyufuKetteiEntityGenerator.createDbT3097TandokuJoseikinKyufuKetteiEntity();
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名1);
-            TandokuJoseikinKyufuKetteiEntity.setXXX(主キー名2);
+            TandokuJoseikinKyufuKetteiEntity.setHihokenshaNo(主キー名1);
+            TandokuJoseikinKyufuKetteiEntity.setUketsukeYMD(主キー名2);
 
         }
 

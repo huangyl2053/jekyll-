@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikakuCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 /**
@@ -29,7 +28,7 @@ public class ShinsakaiIinShikakuTest {
         @Test
         public void get区分コードと_getCodeで取得できる内容が_同一である() {
             sut = new ShinsakaiIinShikaku(区分コード, 名称, 略称);
-            assertThat(sut.getShinsakaiIinShikakuCode().value(), is(sut.getCode().value()));
+            assertThat(sut.getShinsakaiIinShikakuCode().value(), is(sut.getShinsakaiIinShikakuCode().asCode().value()));
         }
     }
 }

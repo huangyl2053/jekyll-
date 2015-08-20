@@ -84,7 +84,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             Decimal 主キー3 = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_履歴番号;
             JutakuKaishuRiyushoTesuryoMeisai result = sut.get住宅改修理由書作成手数料請求明細(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get証記載保険者番号().value(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -108,7 +108,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             List<JutakuKaishuRiyushoTesuryoMeisai> result = sut.get住宅改修理由書作成手数料請求明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -141,7 +141,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.createDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
             entity.initializeMd5();
             JutakuKaishuRiyushoTesuryoMeisai 住宅改修理由書作成手数料請求明細 = new JutakuKaishuRiyushoTesuryoMeisai(entity);
-            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save住宅改修理由書作成手数料請求明細(住宅改修理由書作成手数料請求明細), is(true));
         }
@@ -153,7 +153,7 @@ public class JutakuKaishuRiyushoTesuryoMeisaiManagerTest {
             DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity = DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntityGenerator.createDbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity();
             entity.initializeMd5();
             JutakuKaishuRiyushoTesuryoMeisai 住宅改修理由書作成手数料請求明細 = new JutakuKaishuRiyushoTesuryoMeisai(entity);
-            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            住宅改修理由書作成手数料請求明細 = 住宅改修理由書作成手数料請求明細.createBuilderForEdit().set介護住宅改修理由書作成者資格(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save住宅改修理由書作成手数料請求明細(住宅改修理由書作成手数料請求明細), is(false));
         }

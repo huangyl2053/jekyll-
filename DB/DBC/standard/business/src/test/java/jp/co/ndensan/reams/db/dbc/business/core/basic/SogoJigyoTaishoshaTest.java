@@ -4,11 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3105SogoJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3105SogoJigyoTaishoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +30,15 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
     private static DbT3105SogoJigyoTaishoshaEntity SogoJigyoTaishoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HokenshaNo 主キー名1;
+    private static HihokenshaNo 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名2 = DbT3105SogoJigyoTaishoshaEntityGenerator.DEFAULT_被保険者番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +48,33 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoTaishosha(null, 主キー名2);
+            sut = new SogoJigyoTaishosha(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoTaishosha(主キー名1, null);
+            sut = new SogoJigyoTaishosha(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT3105SogoJigyoTaishoshaEntityにセットされている() {
-            sut = new SogoJigyoTaishosha(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new SogoJigyoTaishosha(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.get証記載保険者番号(), is(主キー名1));
+            assertThat(sut.get被保険者番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するSogoJigyoTaishoshaIdentifierにセットされている() {
-            sut = new SogoJigyoTaishosha(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new SogoJigyoTaishosha(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名2));
         }
     }
 
@@ -82,8 +85,8 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -95,9 +98,8 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         public void 指定したDbT3105SogoJigyoTaishoshaEntityのキー情報を識別子が持つ() {
 
             sut = new SogoJigyoTaishosha(SogoJigyoTaishoshaEntity);
-
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get証記載保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名2));
         }
     }
 
@@ -108,8 +110,8 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
 
             sut = new SogoJigyoTaishosha(SogoJigyoTaishoshaEntity);
         }
@@ -162,8 +164,8 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
 
             sut = new SogoJigyoTaishosha(SogoJigyoTaishoshaEntity);
         }
@@ -181,15 +183,15 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
 
             sut = new SogoJigyoTaishosha(SogoJigyoTaishoshaEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -201,8 +203,8 @@ public class SogoJigyoTaishoshaTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoTaishoshaEntity = DbT3105SogoJigyoTaishoshaEntityGenerator.createDbT3105SogoJigyoTaishoshaEntity();
-            SogoJigyoTaishoshaEntity.setXXX(主キー名1);
-            SogoJigyoTaishoshaEntity.setXXX(主キー名2);
+            SogoJigyoTaishoshaEntity.setShoKisaiHokenshaNo(主キー名1);
+            SogoJigyoTaishoshaEntity.setHihokenshaNo(主キー名2);
 
         }
 

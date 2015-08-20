@@ -31,7 +31,7 @@ public final class DbT2013HokenryoDankaiEntityGenerator {
 
     public static DbT2013HokenryoDankaiEntity createDbT2013HokenryoDankaiEntity() {
         DbT2013HokenryoDankaiEntity entity = new DbT2013HokenryoDankaiEntity();
-        entity.setFlexibleYear(DEFAULT_賦課年度);
+        entity.setFukaNendo(DEFAULT_賦課年度);
         entity.setDankaiIndex(DEFAULT_段階インデックス);
         entity.setRankuKubun(DEFAULT_ランク区分);
         entity.setDankaiKubun(DEFAULT_段階区分);

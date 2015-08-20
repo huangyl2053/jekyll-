@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -30,6 +30,14 @@ public class HokenryoDankai {
     private static final RString 基本表記 = new RString("第%1$d段階");
     private static final RString 改正前表記 = new RString("(改正前%1$d)");
     private static final RString 対象外表記 = new RString("-");
+
+    /**
+     * コンストラクタです。
+     */
+    public HokenryoDankai() {
+        this.保険料段階 = new DbT2013HokenryoDankaiEntity();
+        this.激変緩和期間 = null;
+    }
 
     /**
      * コンストラクタです。
@@ -145,5 +153,29 @@ public class HokenryoDankai {
 
     private RString add特例表記(RString 表記) {
         return new RStringBuilder(表記).append(保険料段階.getTokureiHyoki()).toRString();
+    }
+
+    void setHokenryoDankai(String hokenryoDankai) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setSystemDankai(String hokenryoDankai) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    String getSystemDankai() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setTokureiTaisho(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    String getHokenryoDankai() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    boolean isTokureiTaisho() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

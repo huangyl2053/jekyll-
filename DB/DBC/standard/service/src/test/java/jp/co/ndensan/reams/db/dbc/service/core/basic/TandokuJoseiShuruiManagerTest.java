@@ -102,7 +102,7 @@ public class TandokuJoseiShuruiManagerTest {
             Decimal 主キー4 = DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_履歴番号;
             TandokuJoseiShurui result = sut.get市町村単独助成種類(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類));
+            assertThat(result.get市町村単独助成種類(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類));
         }
     }
 
@@ -126,7 +126,7 @@ public class TandokuJoseiShuruiManagerTest {
             List<TandokuJoseiShurui> result = sut.get市町村単独助成種類一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類));
+            assertThat(result.get(0).get市町村単独助成種類(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_市町村単独助成種類));
         }
     }
 
@@ -159,7 +159,7 @@ public class TandokuJoseiShuruiManagerTest {
             DbT3099TandokuJoseiShuruiEntity entity = DbT3099TandokuJoseiShuruiEntityGenerator.createDbT3099TandokuJoseiShuruiEntity();
             entity.initializeMd5();
             TandokuJoseiShurui 市町村単独助成種類 = new TandokuJoseiShurui(entity);
-            市町村単独助成種類 = 市町村単独助成種類.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村単独助成種類 = 市町村単独助成種類.createBuilderForEdit().set助成サービス種類名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村単独助成種類(市町村単独助成種類), is(true));
         }
@@ -171,7 +171,7 @@ public class TandokuJoseiShuruiManagerTest {
             DbT3099TandokuJoseiShuruiEntity entity = DbT3099TandokuJoseiShuruiEntityGenerator.createDbT3099TandokuJoseiShuruiEntity();
             entity.initializeMd5();
             TandokuJoseiShurui 市町村単独助成種類 = new TandokuJoseiShurui(entity);
-            市町村単独助成種類 = 市町村単独助成種類.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村単独助成種類 = 市町村単独助成種類.createBuilderForEdit().set助成サービス種類名称(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村単独助成種類(市町村単独助成種類), is(false));
         }

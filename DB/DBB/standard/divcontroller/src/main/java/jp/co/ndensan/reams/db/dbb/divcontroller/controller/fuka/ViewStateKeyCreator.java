@@ -5,24 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
-import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.ShoriDateFinder;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -46,7 +37,7 @@ public final class ViewStateKeyCreator {
      * @param name 対象者氏名
      * @return 賦課照会キー
      */
-    public static FukaShokaiKey createFukaShokaiKey(FukaModel model, AtenaMeisho name) {
+    public static FukaShokaiKey createFukaShokaiKey(Fuka model, AtenaMeisho name) {
         //TODO 賦課期日は今回対象外の世帯員所得取得時に必要
         FlexibleDate 賦課期日 = FlexibleDate.MAX;
 
@@ -54,7 +45,7 @@ public final class ViewStateKeyCreator {
                 model.get調定年度(),
                 model.get賦課年度(),
                 model.get通知書番号(),
-                model.get処理日時(),
+                model.get履歴番号(),
                 model.get被保険者番号(),
                 賦課期日,
                 model.get更正月(),
@@ -74,13 +65,13 @@ public final class ViewStateKeyCreator {
      * @param name 対象者氏名
      * @return 前履歴キー
      */
-    public static MaeRirekiKey createMaeRirekiKey(FukaModel model, AtenaMeisho name) {
+    public static MaeRirekiKey createMaeRirekiKey(Fuka model, AtenaMeisho name) {
 
         MaeRirekiKey key = new MaeRirekiKey(
                 model.get調定年度(),
                 model.get賦課年度(),
                 model.get通知書番号(),
-                model.get処理日時(),
+                model.get履歴番号(),
                 checkSanteiState(model),
                 name);
         return key;
@@ -94,35 +85,36 @@ public final class ViewStateKeyCreator {
      * @param fukaModel 賦課モデル
      * @return 算定状態
      */
-    private static SanteiState checkSanteiState(FukaModel fukaModel) {
+    private static SanteiState checkSanteiState(Fuka fukaModel) {
         final RString SERIAL_NUMBER = new RString("0001");
 
-        Optional<ShoriDateModel> modeloid = new ShoriDateFinder().find処理日付(
-                SubGyomuCode.DBB介護賦課, fukaModel.get賦課市町村コード(), ShoriName.本算定賦課,
-                SERIAL_NUMBER, fukaModel.get賦課年度().value(), SERIAL_NUMBER);
-
-        if (!modeloid.isPresent()) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
-        }
-        RDateTime 対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
-        RDateTime 処理日時 = fukaModel.get処理日時();
-
-        if (処理日時.isAfter(対象終了日時)) {
-            return SanteiState.本算定;
-        }
-
+//        Optional<ShoriDateModel> modeloid = new ShoriDateFinder().find処理日付(
+//                SubGyomuCode.DBB介護賦課, fukaModel.get賦課市町村コード(), ShoriName.本算定賦課,
+//                SERIAL_NUMBER, fukaModel.get賦課年度().value(), SERIAL_NUMBER);
+//
+//        if (!modeloid.isPresent()) {
+//            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+//        }
+//        RDateTime 対象終了日時 = modeloid.get().get対象終了日時().getRDateTime();
+//        RDateTime 処理日時 = fukaModel.get処理日時();
+//
+//        if (処理日時.isAfter(対象終了日時)) {
+//            return SanteiState.本算定;
+//        }
+//
         return SanteiState.仮算定;
     }
 
-    private static boolean is減免あり(FukaModel model) {
+    private static boolean is減免あり(Fuka model) {
         return model.get減免額().compareTo(Decimal.ZERO) > 0;
     }
 
-    private static boolean is徴収猶予あり(FukaModel fukaModel) {
-        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
-                fukaModel.get調定年度(), fukaModel.get賦課年度(),
-                fukaModel.get通知書番号(), fukaModel.get処理日時(), GemmenChoshuYuyoStateKubun.決定_承認);
-
-        return modeloid.isPresent();
+    private static boolean is徴収猶予あり(Fuka fukaModel) {
+//        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
+//                fukaModel.get調定年度(), fukaModel.get賦課年度(),
+//                fukaModel.get通知書番号(), fukaModel.get処理日時(), GemmenChoshuYuyoStateKubun.決定_承認);
+//
+//        return modeloid.isPresent();
+        return true;
     }
 }

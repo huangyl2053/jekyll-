@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +27,12 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
     private static DbT5051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 市町村識別ID;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_主キー名2;
+        市町村識別ID = DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
     }
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
@@ -46,27 +46,21 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoseiShichosonMaster(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoseiShichosonMaster(主キー名1, null);
+        public void 市町村識別IDがnullである場合に_NullPointerExceptionが発生する() {
+            市町村識別ID = null;
+            sut = new KoseiShichosonMaster(市町村識別ID);
         }
 
         @Test
         public void 指定したキーが保持するDbT5051KoseiShichosonMasterEntityにセットされている() {
-            sut = new KoseiShichosonMaster(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KoseiShichosonMaster(市町村識別ID);
+            assertThat(sut.get市町村識別ID(), is(市町村識別ID));
         }
 
         @Test
         public void 指定したキーが保持するKoseiShichosonMasterIdentifierにセットされている() {
-            sut = new KoseiShichosonMaster(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KoseiShichosonMaster(市町村識別ID);
+            assertThat(sut.identifier().get市町村識別ID(), is(市町村識別ID));
         }
     }
 
@@ -81,7 +75,8 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
-            sut = new KoseiShichosonMaster(null);
+            市町村識別ID = null;
+            sut = new KoseiShichosonMaster(市町村識別ID);
         }
 
         @Test
@@ -89,8 +84,7 @@ public class KoseiShichosonMasterTest extends DbeTestBase {
 
             sut = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get市町村識別ID(), is(市町村識別ID));
         }
     }
 

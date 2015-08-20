@@ -5,8 +5,10 @@
 package jp.co.ndensan.reams.db.dbd.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,14 +26,14 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
     private static DbT4001JukyushaDaichoEntity JukyushaDaichoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static LasdecCode 主キー名1;
+    private static HihokenshaNo 主キー名2;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+        主キー名2 = DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
     }
 
     public static class getterSetterTest extends DbdTestBase {
@@ -42,8 +44,8 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
         @Before
         public void setUp() {
             JukyushaDaichoEntity = new DbT4001JukyushaDaichoEntity();
-            JukyushaDaichoEntity.setXXX(主キー名1);
-            JukyushaDaichoEntity.setXXX(主キー名2);
+            JukyushaDaichoEntity.setShichosonCode(主キー名1);
+            JukyushaDaichoEntity.setHihokenshaNo(主キー名2);
 
             business = new JukyushaDaicho(JukyushaDaichoEntity);
 
@@ -119,37 +121,15 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
 
         @Test
         public void 戻り値の届出者_申請者関係コードは_設定した値と同じ届出者_申請者関係コードを返す() {
-            business = sut.set（届出者
-            ）申請者関係コード(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_（届出者）申請者関係コード
-            ).build();
-            assertThat(business.get（届出者
-            ）申請者関係コード()
-            , is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_（届出者）申請者関係コード
-
-
-
-        ));
+            business = sut.set届出者_申請者関係コード(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_届出者_申請者関係コード).build();
+            assertThat(business.get届出者_申請者関係コード(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_届出者_申請者関係コード
+            ));
         }
 
         @Test
-        public void 戻り値の（届出者
-        ）本人との関係は_設定した値と同じ
-        （届出者
-
-        ）本人との関係を返す() {
-            business = sut.set（届出者
-            ）本人との関係(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_（届出者）本人との関係
-            ).build();
-            assertThat(business.get（届出者
-            ）本人との関係()
-            , is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_（届出者）本人との関係
-
-
-
-
-
-
-        ));
+        public void 戻り値の_届出者_本人との関係は_設定した値と同じ_届出者_本人との関係を返す() {
+            business = sut.set届出者_本人との関係(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_届出者_本人との関係).build();
+            assertThat(business.get届出者_本人との関係(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_届出者_本人との関係));
         }
 
         @Test

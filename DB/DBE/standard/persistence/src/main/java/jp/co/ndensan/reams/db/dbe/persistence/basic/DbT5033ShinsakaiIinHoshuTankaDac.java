@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5033ShinsakaiIinHoshuTa
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5033ShinsakaiIinHoshuTanka.shuryoYM;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5033ShinsakaiIinHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

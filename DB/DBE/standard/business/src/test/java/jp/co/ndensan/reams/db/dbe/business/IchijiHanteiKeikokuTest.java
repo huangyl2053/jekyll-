@@ -8,9 +8,9 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -33,7 +33,7 @@ public class IchijiHanteiKeikokuTest {
 
         @Test
         public void get一次判定警告コードと_getCodeの内容が同一になる() {
-            assertThat(sut.get一次判定警告コード().value(), is(sut.getCode().value()));
+            assertThat(sut.get一次判定警告コード().value(), is(sut.get一次判定警告コード().asCode().value()));
         }
     }
 }

@@ -4,11 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3086KyufuhiKashitsukekinShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3086KyufuhiKashitsukekinShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +30,16 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
     private static DbT3086KyufuhiKashitsukekinShinseiEntity KyufuhiKashitsukekinShinseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleDate 借入申請年月日;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_被保険者番号;
+        借入申請年月日 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_借入申請年月日;
+        履歴番号 = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +49,36 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuhiKashitsukekinShinsei(null, 主キー名2);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufuhiKashitsukekinShinsei(null, 借入申請年月日, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuhiKashitsukekinShinsei(主キー名1, null);
+        public void 借入申請年月日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufuhiKashitsukekinShinsei(被保険者番号, null, 履歴番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3086KyufuhiKashitsukekinShinseiEntityにセットされている() {
-            sut = new KyufuhiKashitsukekinShinsei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufuhiKashitsukekinShinsei(被保険者番号, 借入申請年月日, 履歴番号);
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
+            assertThat(sut.get借入申請年月日(), is(借入申請年月日));
+            assertThat(sut.get履歴番号(), is(履歴番号));
         }
 
         @Test
         public void 指定したキーが保持するKyufuhiKashitsukekinShinseiIdentifierにセットされている() {
-            sut = new KyufuhiKashitsukekinShinsei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufuhiKashitsukekinShinsei(被保険者番号, 借入申請年月日, 履歴番号);
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get借入申請年月日(), is(借入申請年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -82,8 +89,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +104,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
 
             sut = new KyufuhiKashitsukekinShinsei(KyufuhiKashitsukekinShinseiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get借入申請年月日(), is(借入申請年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -108,8 +117,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShinsei(KyufuhiKashitsukekinShinseiEntity);
         }
@@ -170,23 +180,23 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         }
 
         @Test
-        public void get貸付対象・高額介護サービス費等有無は_entityが持つ貸付対象・高額介護サービス費等有無を返す() {
-            assertThat(sut.get貸付対象・高額介護サービス費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_KogakuUmu()));
+        public void get貸付対象_高額介護サービス費等有無は_entityが持つ貸付対象_高額介護サービス費等有無を返す() {
+            assertThat(sut.get貸付対象_高額介護サービス費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_KogakuUmu()));
         }
 
         @Test
-        public void get貸付対象・住宅改修費等有無は_entityが持つ貸付対象・住宅改修費等有無を返す() {
-            assertThat(sut.get貸付対象・住宅改修費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_JutakuKaishuUmu()));
+        public void get貸付対象_住宅改修費等有無は_entityが持つ貸付対象_住宅改修費等有無を返す() {
+            assertThat(sut.get貸付対象_住宅改修費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_JutakuKaishuUmu()));
         }
 
         @Test
-        public void get貸付対象・福祉用具購入費等有無は_entityが持つ貸付対象・福祉用具購入費等有無を返す() {
-            assertThat(sut.get貸付対象・福祉用具購入費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKahitsuke_YoguKonyuUmu()));
+        public void get貸付対象_福祉用具購入費等有無は_entityが持つ貸付対象_福祉用具購入費等有無を返す() {
+            assertThat(sut.get貸付対象_福祉用具購入費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKahitsuke_YoguKonyuUmu()));
         }
 
         @Test
-        public void get貸付対象・特例介護サービス費等有無は_entityが持つ貸付対象・特例介護サービス費等有無を返す() {
-            assertThat(sut.get貸付対象・特例介護サービス費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_TokureiServiceUmu()));
+        public void get貸付対象_特例介護サービス費等有無は_entityが持つ貸付対象_特例介護サービス費等有無を返す() {
+            assertThat(sut.get貸付対象_特例介護サービス費等有無(), is(KyufuhiKashitsukekinShinseiEntity.getKashitsuke_TokureiServiceUmu()));
         }
 
         @Test
@@ -250,8 +260,8 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         }
 
         @Test
-        public void get請求書・領収書の有無は_entityが持つ請求書・領収書の有無を返す() {
-            assertThat(sut.get請求書・領収書の有無(), is(KyufuhiKashitsukekinShinseiEntity.getSeikyusho_RyoshushoUmu()));
+        public void get請求書_領収書の有無は_entityが持つ請求書_領収書の有無を返す() {
+            assertThat(sut.get請求書_領収書の有無(), is(KyufuhiKashitsukekinShinseiEntity.getSeikyusho_RyoshushoUmu()));
         }
 
         @Test
@@ -267,8 +277,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShinsei(KyufuhiKashitsukekinShinseiEntity);
         }
@@ -286,8 +297,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
 
             sut = new KyufuhiKashitsukekinShinsei(KyufuhiKashitsukekinShinseiEntity);
         }
@@ -306,8 +318,9 @@ public class KyufuhiKashitsukekinShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShinseiEntity = DbT3086KyufuhiKashitsukekinShinseiEntityGenerator.createDbT3086KyufuhiKashitsukekinShinseiEntity();
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShinseiEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShinseiEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShinseiEntity.setKariireShinseiYMD(借入申請年月日);
+            KyufuhiKashitsukekinShinseiEntity.setRirekiNo(履歴番号);
 
         }
 

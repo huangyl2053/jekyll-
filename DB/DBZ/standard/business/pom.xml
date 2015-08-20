@@ -46,11 +46,6 @@
             <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
-            <artifactId>UxxBusiness</artifactId>
-            <version>${jp.co.ndensan.reams.uxxVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzDefinition</artifactId>
             <version>${project.version}</version>

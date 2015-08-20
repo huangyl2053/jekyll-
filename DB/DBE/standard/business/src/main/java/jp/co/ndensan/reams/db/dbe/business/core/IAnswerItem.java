@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
-import jp.co.ndensan.reams.ur.urz.business.lib.util.IWrapper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.IWrapper;
 
 /**
  * 回答項目を扱うインターフェースです。

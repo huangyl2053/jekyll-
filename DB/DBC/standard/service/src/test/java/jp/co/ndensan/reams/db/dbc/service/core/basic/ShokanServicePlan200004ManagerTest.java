@@ -58,7 +58,7 @@ public class ShokanServicePlan200004ManagerTest {
             when(dac.selectByKey()).thenReturn(entity);
             ShokanServicePlan200004 result = sut.get償還払請求サービス計画200004();
 
-            assertThat(result.get主キー1().value(), is(DbT3045ShokanServicePlan200004EntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3045ShokanServicePlan200004EntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -82,7 +82,7 @@ public class ShokanServicePlan200004ManagerTest {
             List<ShokanServicePlan200004> result = sut.get償還払請求サービス計画200004一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3045ShokanServicePlan200004EntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3045ShokanServicePlan200004EntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -115,7 +115,7 @@ public class ShokanServicePlan200004ManagerTest {
             DbT3045ShokanServicePlan200004Entity entity = DbT3045ShokanServicePlan200004EntityGenerator.createDbT3045ShokanServicePlan200004Entity();
             entity.initializeMd5();
             ShokanServicePlan200004 償還払請求サービス計画200004 = new ShokanServicePlan200004(entity);
-            償還払請求サービス計画200004 = 償還払請求サービス計画200004.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求サービス計画200004 = 償還払請求サービス計画200004.createBuilderForEdit().set不支給理由等(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求サービス計画200004(償還払請求サービス計画200004), is(true));
         }
@@ -127,7 +127,7 @@ public class ShokanServicePlan200004ManagerTest {
             DbT3045ShokanServicePlan200004Entity entity = DbT3045ShokanServicePlan200004EntityGenerator.createDbT3045ShokanServicePlan200004Entity();
             entity.initializeMd5();
             ShokanServicePlan200004 償還払請求サービス計画200004 = new ShokanServicePlan200004(entity);
-            償還払請求サービス計画200004 = 償還払請求サービス計画200004.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求サービス計画200004 = 償還払請求サービス計画200004.createBuilderForEdit().set不支給理由等(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求サービス計画200004(償還払請求サービス計画200004), is(false));
         }

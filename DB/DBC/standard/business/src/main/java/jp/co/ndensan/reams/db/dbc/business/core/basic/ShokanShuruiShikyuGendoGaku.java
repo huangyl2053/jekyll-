@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払い給付種類支給限度額を管理するクラスです。
  */
-public class ShokanShuruiShikyuGendoGaku extends ParentModelBase<ShokanShuruiShikyuGendoGakuIdentifier, DbT7112ShokanShuruiShikyuGendoGakuEntity, ShokanShuruiShikyuGendoGaku> implements Serializable {
+public class ShokanShuruiShikyuGendoGaku extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier, DbT7112ShokanShuruiShikyuGendoGakuEntity, ShokanShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7112ShokanShuruiShikyuGendoGakuEntity entity;
     private final ShokanShuruiShikyuGendoGakuIdentifier id;
@@ -144,22 +144,6 @@ public class ShokanShuruiShikyuGendoGaku extends ParentModelBase<ShokanShuruiShi
     }
 
     /**
-     * 償還払い給付種類支給限度額のみを変更対象とします。<br/>
-     * {@link DbT7112ShokanShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link ShokanShuruiShikyuGendoGaku}
-     */
-    @Override
-    public ShokanShuruiShikyuGendoGaku modifiedModel() {
-        DbT7112ShokanShuruiShikyuGendoGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new ShokanShuruiShikyuGendoGaku(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する償還払い給付種類支給限度額を削除対象とします。<br/>
      * {@link DbT7112ShokanShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -187,9 +171,15 @@ public class ShokanShuruiShikyuGendoGaku extends ParentModelBase<ShokanShuruiShi
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7112ShokanShuruiShikyuGendoGakuEntity entity;
         private final ShokanShuruiShikyuGendoGakuIdentifier id;
 

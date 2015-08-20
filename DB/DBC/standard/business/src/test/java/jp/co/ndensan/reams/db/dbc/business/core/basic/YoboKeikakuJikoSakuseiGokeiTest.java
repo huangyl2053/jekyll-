@@ -4,14 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -25,17 +30,21 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
-    private static DbT3012YoboKeikakuJikoSakuseiGokeiEntity YoboKeikakuJikoSakuseiGokeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
+    private static DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity YoboKeikakuJikoSakuseiGokeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static Decimal 主キー名3;
+    private static RString 主キー名4;
+    private static JigyoshaNo 主キー名5;
+    private static ServiceShuruiCode 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -44,34 +53,34 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new YoboKeikakuJikoSakuseiGokei(null, 主キー名2);
+            sut = new YoboKeikakuJikoSakuseiGokei(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, null);
+            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test
         public void 指定したキーが保持するDbT3012YoboKeikakuJikoSakuseiGokeiEntityにセットされている() {
-            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.get対象年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するYoboKeikakuJikoSakuseiGokeiIdentifierにセットされている() {
-            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new YoboKeikakuJikoSakuseiGokei(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get対象年月(), is(主キー名2));
         }
     }
 
@@ -81,9 +90,9 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +105,8 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
             sut = new YoboKeikakuJikoSakuseiGokei(YoboKeikakuJikoSakuseiGokeiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().get対象年月(), is(主キー名2));
         }
     }
 
@@ -107,9 +116,9 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
 
             sut = new YoboKeikakuJikoSakuseiGokei(YoboKeikakuJikoSakuseiGokeiEntity);
         }
@@ -156,9 +165,9 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
 
             sut = new YoboKeikakuJikoSakuseiGokei(YoboKeikakuJikoSakuseiGokeiEntity);
         }
@@ -175,16 +184,16 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
 
             sut = new YoboKeikakuJikoSakuseiGokei(YoboKeikakuJikoSakuseiGokeiEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(IsSerializable.serializable()));
         }
     }
 
@@ -195,9 +204,9 @@ public class YoboKeikakuJikoSakuseiGokeiTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名1);
-            YoboKeikakuJikoSakuseiGokeiEntity.setXXX(主キー名2);
+            YoboKeikakuJikoSakuseiGokeiEntity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
+            YoboKeikakuJikoSakuseiGokeiEntity.setHihokenshaNo(主キー名1);
+            YoboKeikakuJikoSakuseiGokeiEntity.setTaishoYM(主キー名2);
 
         }
 

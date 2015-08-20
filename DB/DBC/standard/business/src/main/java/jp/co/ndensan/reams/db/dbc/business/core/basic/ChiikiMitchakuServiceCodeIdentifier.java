@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import lombok.Value;
 
 /**
  * 地域密着型介護サービスコードの識別子です。

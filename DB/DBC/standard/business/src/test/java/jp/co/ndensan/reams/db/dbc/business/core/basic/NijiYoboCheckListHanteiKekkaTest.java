@@ -4,11 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +31,18 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
     private static DbT3103NijiYoboCheckListHanteiKekkaEntity NijiYoboCheckListHanteiKekkaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShikibetsuCode 識別コード;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleDate 受付年月日;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_主キー名2;
+        識別コード = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_識別コード;
+        被保険者番号 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_被保険者番号;
+        受付年月日 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_受付年月日;
+        履歴番号 = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +52,37 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NijiYoboCheckListHanteiKekka(null, 主キー名2);
+        public void 識別コードがnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NijiYoboCheckListHanteiKekka(null, 被保険者番号, 受付年月日, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NijiYoboCheckListHanteiKekka(主キー名1, null);
+        public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new NijiYoboCheckListHanteiKekka(識別コード, null, 受付年月日, 履歴番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3103NijiYoboCheckListHanteiKekkaEntityにセットされている() {
-            sut = new NijiYoboCheckListHanteiKekka(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NijiYoboCheckListHanteiKekka(識別コード, 被保険者番号, 受付年月日, 履歴番号);
+            assertThat(sut.get識別コード(), is(識別コード));
+            assertThat(sut.get被保険者番号(), is(被保険者番号));
         }
 
         @Test
         public void 指定したキーが保持するNijiYoboCheckListHanteiKekkaIdentifierにセットされている() {
-            sut = new NijiYoboCheckListHanteiKekka(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NijiYoboCheckListHanteiKekka(識別コード, 被保険者番号, 受付年月日, 履歴番号);
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get受付年月日(), is(受付年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -82,8 +93,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +109,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get識別コード(), is(識別コード));
+            assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
+            assertThat(sut.identifier().get受付年月日(), is(受付年月日));
+            assertThat(sut.identifier().get履歴番号(), is(履歴番号));
         }
     }
 
@@ -108,8 +123,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
         }
@@ -135,78 +152,78 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         }
 
         @Test
-        public void get点数・生活機能全般は_entityが持つ点数・生活機能全般を返す() {
-            assertThat(sut.get点数・生活機能全般(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_SeikatsuKinoZenpan()));
+        public void get点数_生活機能全般は_entityが持つ点数_生活機能全般を返す() {
+            assertThat(sut.get点数_生活機能全般(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_SeikatsuKinoZenpan()));
         }
 
         @Test
-        public void get点数・運動器機能は_entityが持つ点数・運動器機能を返す() {
-            assertThat(sut.get点数・運動器機能(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_UndokiKino()));
+        public void get点数_運動器機能は_entityが持つ点数_運動器機能を返す() {
+            assertThat(sut.get点数_運動器機能(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_UndokiKino()));
         }
 
         @Test
-        public void get点数・栄養は_entityが持つ点数・栄養を返す() {
-            assertThat(sut.get点数・栄養(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Eiyo()));
+        public void get点数_栄養は_entityが持つ点数_栄養を返す() {
+            assertThat(sut.get点数_栄養(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Eiyo()));
         }
 
         @Test
-        public void get点数・口腔は_entityが持つ点数・口腔を返す() {
-            assertThat(sut.get点数・口腔(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Koku()));
+        public void get点数_口腔は_entityが持つ点数_口腔を返す() {
+            assertThat(sut.get点数_口腔(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Koku()));
         }
 
         @Test
-        public void get点数・閉じこもりは_entityが持つ点数・閉じこもりを返す() {
-            assertThat(sut.get点数・閉じこもり(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Tojikomori()));
+        public void get点数_閉じこもりは_entityが持つ点数_閉じこもりを返す() {
+            assertThat(sut.get点数_閉じこもり(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Tojikomori()));
         }
 
         @Test
-        public void get点数・認知能力は_entityが持つ点数・認知能力を返す() {
-            assertThat(sut.get点数・認知能力(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_NinchiNoryoku()));
+        public void get点数_認知能力は_entityが持つ点数_認知能力を返す() {
+            assertThat(sut.get点数_認知能力(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_NinchiNoryoku()));
         }
 
         @Test
-        public void get点数・うつは_entityが持つ点数・うつを返す() {
-            assertThat(sut.get点数・うつ(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Utsu()));
+        public void get点数_うつは_entityが持つ点数_うつを返す() {
+            assertThat(sut.get点数_うつ(), is(NijiYoboCheckListHanteiKekkaEntity.getTensu_Utsu()));
         }
 
         @Test
-        public void get支援必要性・生活機能全般は_entityが持つ支援必要性・生活機能全般を返す() {
-            assertThat(sut.get支援必要性・生活機能全般(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_SeikatsuKinoZenpan()));
+        public void get支援必要性_生活機能全般は_entityが持つ支援必要性_生活機能全般を返す() {
+            assertThat(sut.get支援必要性_生活機能全般(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_SeikatsuKinoZenpan()));
         }
 
         @Test
-        public void get支援必要性・運動器機能は_entityが持つ支援必要性・運動器機能を返す() {
-            assertThat(sut.get支援必要性・運動器機能(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_UndokiKino()));
+        public void get支援必要性_運動器機能は_entityが持つ支援必要性_運動器機能を返す() {
+            assertThat(sut.get支援必要性_運動器機能(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_UndokiKino()));
         }
 
         @Test
-        public void get支援必要性・栄養は_entityが持つ支援必要性・栄養を返す() {
-            assertThat(sut.get支援必要性・栄養(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Eiyo()));
+        public void get支援必要性_栄養は_entityが持つ支援必要性_栄養を返す() {
+            assertThat(sut.get支援必要性_栄養(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Eiyo()));
         }
 
         @Test
-        public void get支援必要性・口腔は_entityが持つ支援必要性・口腔を返す() {
-            assertThat(sut.get支援必要性・口腔(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Koku()));
+        public void get支援必要性_口腔は_entityが持つ支援必要性_口腔を返す() {
+            assertThat(sut.get支援必要性_口腔(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Koku()));
         }
 
         @Test
-        public void get支援必要性・閉じこもりは_entityが持つ支援必要性・閉じこもりを返す() {
-            assertThat(sut.get支援必要性・閉じこもり(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Tojikomori()));
+        public void get支援必要性_閉じこもりは_entityが持つ支援必要性_閉じこもりを返す() {
+            assertThat(sut.get支援必要性_閉じこもり(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Tojikomori()));
         }
 
         @Test
-        public void get支援必要性・認知能力は_entityが持つ支援必要性・認知能力を返す() {
-            assertThat(sut.get支援必要性・認知能力(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_NinchiNoryoku()));
+        public void get支援必要性_認知能力は_entityが持つ支援必要性_認知能力を返す() {
+            assertThat(sut.get支援必要性_認知能力(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_NinchiNoryoku()));
         }
 
         @Test
-        public void get支援必要性・うつは_entityが持つ支援必要性・うつを返す() {
-            assertThat(sut.get支援必要性・うつ(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Utsu()));
+        public void get支援必要性_うつは_entityが持つ支援必要性_うつを返す() {
+            assertThat(sut.get支援必要性_うつ(), is(NijiYoboCheckListHanteiKekkaEntity.getShien_Utsu()));
         }
 
         @Test
-        public void get二次予防・主観的健康感は_entityが持つ二次予防・主観的健康感を返す() {
-            assertThat(sut.get二次予防・主観的健康感(), is(NijiYoboCheckListHanteiKekkaEntity.getNijiYobo_ShukantekiKenkouKan()));
+        public void get二次予防_主観的健康感は_entityが持つ二次予防_主観的健康感を返す() {
+            assertThat(sut.get二次予防_主観的健康感(), is(NijiYoboCheckListHanteiKekkaEntity.getNijiYobo_ShukantekiKenkouKan()));
         }
     }
 
@@ -217,8 +234,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
         }
@@ -236,8 +255,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
 
             sut = new NijiYoboCheckListHanteiKekka(NijiYoboCheckListHanteiKekkaEntity);
         }
@@ -256,8 +277,10 @@ public class NijiYoboCheckListHanteiKekkaTest extends DbcTestBase {
         @Before
         public void setUp() {
             NijiYoboCheckListHanteiKekkaEntity = DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator.createDbT3103NijiYoboCheckListHanteiKekkaEntity();
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名1);
-            NijiYoboCheckListHanteiKekkaEntity.setXXX(主キー名2);
+            NijiYoboCheckListHanteiKekkaEntity.setShikibetsuCode(識別コード);
+            NijiYoboCheckListHanteiKekkaEntity.setHihokenshaNo(被保険者番号);
+            NijiYoboCheckListHanteiKekkaEntity.setUketsukeYMD(受付年月日);
+            NijiYoboCheckListHanteiKekkaEntity.setRirekiNo(履歴番号);
 
         }
 

@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5123NinteiKeikakuJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -25,14 +27,12 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
     private static DbT5123NinteiKeikakuJohoEntity NinteiKeikakuJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5123NinteiKeikakuJohoEntityGenerator.DEFAULT_申請書管理番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
@@ -46,27 +46,21 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteiKeikakuJoho(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteiKeikakuJoho(主キー名1, null);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            申請書管理番号 = null;
+            sut = new NinteiKeikakuJoho(申請書管理番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT5123NinteiKeikakuJohoEntityにセットされている() {
-            sut = new NinteiKeikakuJoho(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new NinteiKeikakuJoho(申請書管理番号);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
         }
 
         @Test
         public void 指定したキーが保持するNinteiKeikakuJohoIdentifierにセットされている() {
-            sut = new NinteiKeikakuJoho(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new NinteiKeikakuJoho(申請書管理番号);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 
@@ -81,7 +75,8 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
-            sut = new NinteiKeikakuJoho(null);
+            申請書管理番号 = null;
+            sut = new NinteiKeikakuJoho(申請書管理番号);
         }
 
         @Test
@@ -89,8 +84,7 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
 
             sut = new NinteiKeikakuJoho(NinteiKeikakuJohoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
         }
     }
 
@@ -136,17 +130,8 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
         }
 
         @Test
-        public void get要介護認定1.5次判定予定年月日は_entityが持つ要介護認定1
-
-        .5次判定予定年月日を返す() {
-            assertThat(sut.get要介護認定1
-            .5次判定予定年月日()
-            , is(NinteiKeikakuJohoEntity.getIchiGoHanteiYoteiYMD())
-
-
-
-
-        );
+        public void get要介護認定1_5次判定予定年月日は_entityが持つ要介護認定1_5次判定予定年月日を返す() {
+            assertThat(sut.get要介護認定1_5次判定予定年月日(), is(NinteiKeikakuJohoEntity.getIchiGoHanteiYoteiYMD()));
         }
 
         @Test

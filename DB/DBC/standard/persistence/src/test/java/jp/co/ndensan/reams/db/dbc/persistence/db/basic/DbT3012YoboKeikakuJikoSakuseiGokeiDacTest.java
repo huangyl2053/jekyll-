@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
@@ -285,7 +285,7 @@ public class DbT3012YoboKeikakuJikoSakuseiGokeiDacTest extends DbcTestDacBase {
                 RString 居宅サービス区分,
                 JigyoshaNo サービス提供事業者番号,
                 ServiceShuruiCode サービス種類コード) {
-            DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012YoboKeikakuJikoSakuseiGokeiEntity();
+            DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);

@@ -29,5 +29,10 @@
             <artifactId>DbdDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

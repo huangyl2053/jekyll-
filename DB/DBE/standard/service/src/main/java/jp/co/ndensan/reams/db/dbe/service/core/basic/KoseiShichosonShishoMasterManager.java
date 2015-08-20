@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.KoseiShichosonShishoMaster
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5052KoseiShichosonShishoMasterDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

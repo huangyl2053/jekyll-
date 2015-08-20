@@ -6,17 +6,22 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbb.business.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
+//import jp.co.ndensan.reams.db.dbb.realservice.FukaManager;
+//import jp.co.ndensan.reams.db.dbb.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
+//import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+//import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -113,15 +118,15 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
     private static FukaManager createFukaManager() {
         FukaManager mock = mock(FukaManager.class);
-        Optional<FukaModel> fuka = Optional.ofNullable(createFuka());
-        when(mock.get最新介護賦課(any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(fuka);
+        Optional<Fuka> fuka = Optional.ofNullable(createFuka());
+//        when(mock.get最新介護賦課(any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(fuka);
         return mock;
     }
 
     private static HokenryoDankaiManager createHokenryoDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
         Optional<HokenryoDankai> hokenryoDankai = Optional.ofNullable(createHokenryoDankai());
-        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
+//        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
         return mock;
     }
 
@@ -140,15 +145,15 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
     private static HihokenshaDaichoModel createHihokenshaDaicho() {
         HihokenshaDaichoModel mock = mock(HihokenshaDaichoModel.class);
         when(mock.get被保険者番号()).thenReturn(new HihokenshaNo(被保険者番号));
-        when(mock.get資格取得年月日()).thenReturn(new FlexibleDate(資格取得日.toString()));
-        when(mock.get資格取得事由()).thenReturn(資格取得事由);
-        when(mock.get資格喪失年月日()).thenReturn(new FlexibleDate(資格喪失日.toString()));
-        when(mock.get資格喪失事由()).thenReturn(資格喪失事由);
+//        when(mock.get資格取得年月日()).thenReturn(new FlexibleDate(資格取得日.toString()));
+//        when(mock.get資格取得事由()).thenReturn(資格取得事由);
+//        when(mock.get資格喪失年月日()).thenReturn(new FlexibleDate(資格喪失日.toString()));
+//        when(mock.get資格喪失事由()).thenReturn(資格喪失事由);
         return mock;
     }
 
-    private static FukaModel createFuka() {
-        FukaModel mock = mock(FukaModel.class);
+    private static Fuka createFuka() {
+        Fuka mock = mock(Fuka.class);
         when(mock.get保険料段階()).thenReturn(保険料段階);
         return mock;
     }

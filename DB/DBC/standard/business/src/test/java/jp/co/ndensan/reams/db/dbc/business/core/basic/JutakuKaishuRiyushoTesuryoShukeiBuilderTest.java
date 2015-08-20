@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilderTest extends DbcTestBase {
     private static DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity JutakuKaishuRiyushoTesuryoShukeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名2 = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_集計開始年月;
+        主キー名3 = DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static JutakuKaishuRiyushoTesuryoShukeiBuilder sut;
         private static JutakuKaishuRiyushoTesuryoShukei business;
@@ -42,14 +47,15 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             JutakuKaishuRiyushoTesuryoShukeiEntity = new DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity();
-            JutakuKaishuRiyushoTesuryoShukeiEntity.setXXX(主キー名1);
-            JutakuKaishuRiyushoTesuryoShukeiEntity.setXXX(主キー名2);
+            JutakuKaishuRiyushoTesuryoShukeiEntity.setShoKisaiHokenshaNo(主キー名1);
+            JutakuKaishuRiyushoTesuryoShukeiEntity.setShukeiKaishiYM(主キー名2);
 
             business = new JutakuKaishuRiyushoTesuryoShukei(JutakuKaishuRiyushoTesuryoShukeiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
             business = sut.set証記載保険者番号(DbT3096JutakuKaishuRiyushoTesuryoShukeiEntityGenerator.DEFAULT_証記載保険者番号).build();

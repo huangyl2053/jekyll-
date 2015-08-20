@@ -483,7 +483,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                             資格取得届出Date, 資格取得Date, null,
                             資格喪失届出Date, 資格喪失Date, null,
                             hihokenshaNo.value(), shoKisaiHokenshaNo.getColumnValue(),
-                            ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue()),
+                            ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.get被保険者区分コード().value()),
                             JushochiTokureishaKubun.通常資格者);
                 }
 

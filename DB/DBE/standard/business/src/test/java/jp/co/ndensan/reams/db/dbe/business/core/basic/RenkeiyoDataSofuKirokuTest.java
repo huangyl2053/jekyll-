@@ -6,7 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5191RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5191RenkeiyoDataSofuKirokuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -25,14 +28,14 @@ public class RenkeiyoDataSofuKirokuTest extends DbeTestBase {
     private static DbT5191RenkeiyoDataSofuKirokuEntity RenkeiyoDataSofuKirokuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static ShinseishoKanriNo 申請書管理番号;
+    private static FlexibleDate 資料作成日;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_主キー名2;
+        申請書管理番号 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_申請書管理番号;
+        資料作成日 = DbT5191RenkeiyoDataSofuKirokuEntityGenerator.DEFAULT_資料作成日;
     }
 
     public static class 主キーコンストラクタテスト extends DbeTestBase {
@@ -46,27 +49,27 @@ public class RenkeiyoDataSofuKirokuTest extends DbeTestBase {
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new RenkeiyoDataSofuKiroku(null, 主キー名2);
+        public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new RenkeiyoDataSofuKiroku(null, 資料作成日);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new RenkeiyoDataSofuKiroku(主キー名1, null);
+        public void 資料作成日がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new RenkeiyoDataSofuKiroku(申請書管理番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT5191RenkeiyoDataSofuKirokuEntityにセットされている() {
-            sut = new RenkeiyoDataSofuKiroku(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new RenkeiyoDataSofuKiroku(申請書管理番号, 資料作成日);
+            assertThat(sut.get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.get資料作成日(), is(資料作成日));
         }
 
         @Test
         public void 指定したキーが保持するRenkeiyoDataSofuKirokuIdentifierにセットされている() {
-            sut = new RenkeiyoDataSofuKiroku(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new RenkeiyoDataSofuKiroku(申請書管理番号, 資料作成日);
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get資料作成日(), is(資料作成日));
         }
     }
 
@@ -89,8 +92,8 @@ public class RenkeiyoDataSofuKirokuTest extends DbeTestBase {
 
             sut = new RenkeiyoDataSofuKiroku(RenkeiyoDataSofuKirokuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
+            assertThat(sut.identifier().get資料作成日(), is(資料作成日));
         }
     }
 

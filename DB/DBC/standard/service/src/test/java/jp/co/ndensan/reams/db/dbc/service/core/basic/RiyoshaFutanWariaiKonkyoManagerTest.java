@@ -117,7 +117,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             HihokenshaNo 主キー5 = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_世帯員被保険者番号;
             RiyoshaFutanWariaiKonkyo result = sut.get利用者負担割合世帯員(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get年度().toDateString(), is(DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -141,7 +141,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             List<RiyoshaFutanWariaiKonkyo> result = sut.get利用者負担割合世帯員一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度.toDateString()));
+            assertThat(result.get(0).get年度().toDateString(), is(DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.DEFAULT_年度.toDateString()));
         }
     }
 
@@ -174,7 +174,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             DbT3115RiyoshaFutanWariaiKonkyoEntity entity = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.createDbT3115RiyoshaFutanWariaiKonkyoEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiKonkyo 利用者負担割合世帯員 = new RiyoshaFutanWariaiKonkyo(entity);
-            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(new Decimal(100)).build();
 
             assertThat(sut.save利用者負担割合世帯員(利用者負担割合世帯員), is(true));
         }
@@ -186,7 +186,7 @@ public class RiyoshaFutanWariaiKonkyoManagerTest {
             DbT3115RiyoshaFutanWariaiKonkyoEntity entity = DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator.createDbT3115RiyoshaFutanWariaiKonkyoEntity();
             entity.initializeMd5();
             RiyoshaFutanWariaiKonkyo 利用者負担割合世帯員 = new RiyoshaFutanWariaiKonkyo(entity);
-            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            利用者負担割合世帯員 = 利用者負担割合世帯員.createBuilderForEdit().set枝番号(new Decimal(100)).build();
 
             assertThat(sut.save利用者負担割合世帯員(利用者負担割合世帯員), is(false));
         }

@@ -103,7 +103,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
             ShokanJuryoininKeiyakusha result = sut.get償還受領委任契約者(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             List<ShokanJuryoininKeiyakusha> result = sut.get償還受領委任契約者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             DbT3078ShokanJuryoininKeiyakushaEntity entity = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.createDbT3078ShokanJuryoininKeiyakushaEntity();
             entity.initializeMd5();
             ShokanJuryoininKeiyakusha 償還受領委任契約者 = new ShokanJuryoininKeiyakusha(entity);
-            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set事業者契約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還受領委任契約者(償還受領委任契約者), is(true));
         }
@@ -172,7 +172,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             DbT3078ShokanJuryoininKeiyakushaEntity entity = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.createDbT3078ShokanJuryoininKeiyakushaEntity();
             entity.initializeMd5();
             ShokanJuryoininKeiyakusha 償還受領委任契約者 = new ShokanJuryoininKeiyakusha(entity);
-            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set事業者契約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還受領委任契約者(償還受領委任契約者), is(false));
         }

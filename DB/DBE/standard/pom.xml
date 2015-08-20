@@ -38,12 +38,17 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzService</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzBusiness</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-                <artifactId>DbzService</artifactId>
+                <artifactId>DbzPersistence</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
             </dependency>
             <dependency>
