@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -32,8 +32,8 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifierTest extends DbcTestB
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_対象年月;
+        主キー名1 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_対象年月;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
