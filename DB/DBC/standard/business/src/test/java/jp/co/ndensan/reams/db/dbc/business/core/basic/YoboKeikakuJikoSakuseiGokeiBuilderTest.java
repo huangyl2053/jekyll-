@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
@@ -40,8 +40,8 @@ public class YoboKeikakuJikoSakuseiGokeiBuilderTest extends DbcTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
-        主キー名2 = DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
+        主キー名1 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -63,44 +63,44 @@ public class YoboKeikakuJikoSakuseiGokeiBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
-            business = sut.set被保険者番号(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号).build();
-            assertThat(business.get被保険者番号(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号));
+            business = sut.set被保険者番号(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号).build();
+            assertThat(business.get被保険者番号(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号));
         }
 
         @Test
         public void 戻り値の対象年月は_設定した値と同じ対象年月を返す() {
-            business = sut.set対象年月(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月).build();
-            assertThat(business.get対象年月(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月));
+            business = sut.set対象年月(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月).build();
+            assertThat(business.get対象年月(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月));
         }
 
         @Test
         public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号));
+            business = sut.set履歴番号(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号).build();
+            assertThat(business.get履歴番号(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test
         public void 戻り値の居宅サービス区分は_設定した値と同じ居宅サービス区分を返す() {
-            business = sut.set居宅サービス区分(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分).build();
-            assertThat(business.get居宅サービス区分(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分));
+            business = sut.set居宅サービス区分(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分).build();
+            assertThat(business.get居宅サービス区分(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_居宅サービス区分));
         }
 
         @Test
         public void 戻り値のサービス提供事業者番号は_設定した値と同じサービス提供事業者番号を返す() {
-            business = sut.setサービス提供事業者番号(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号).build();
-            assertThat(business.getサービス提供事業者番号(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号));
+            business = sut.setサービス提供事業者番号(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号).build();
+            assertThat(business.getサービス提供事業者番号(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス提供事業者番号));
         }
 
         @Test
         public void 戻り値のサービス種類コードは_設定した値と同じサービス種類コードを返す() {
-            business = sut.setサービス種類コード(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード).build();
-            assertThat(business.getサービス種類コード(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード));
+            business = sut.setサービス種類コード(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード).build();
+            assertThat(business.getサービス種類コード(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_サービス種類コード));
         }
 
         @Test
         public void 戻り値の給付計画単位数は_設定した値と同じ給付計画単位数を返す() {
-            business = sut.set給付計画単位数(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_給付計画単位数).build();
-            assertThat(business.get給付計画単位数(), is(DbT3012YoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_給付計画単位数));
+            business = sut.set給付計画単位数(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_給付計画単位数).build();
+            assertThat(business.get給付計画単位数(), is(DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_給付計画単位数));
         }
 
     }
