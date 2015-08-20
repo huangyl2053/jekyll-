@@ -4,11 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3028KyufujissekiKogakuKaigoServicehiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +33,28 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
     private static DbT3028KyufujissekiKogakuKaigoServicehiEntity KyufujissekiKogakuKaigoServicehiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 交換情報識別番号;
+    private static NyuryokuShikibetsuNo 入力識別番号;
+    private static RString レコード種別コード;
+    private static HokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth サービス提供年月;
+    private static RString 通し番号;
+    private static RString 給付実績情報作成区分コード;
+    private static RString 給付実績区分コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_主キー名2;
+        交換情報識別番号 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_交換情報識別番号;
+        入力識別番号 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_入力識別番号;
+        レコード種別コード = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_レコード種別コード;
+        証記載保険者番号 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_証記載保険者番号;
+        被保険者番号 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_被保険者番号;
+        サービス提供年月 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_サービス提供年月;
+        通し番号 = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_通し番号;
+        給付実績情報作成区分コード = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_給付実績情報作成区分コード;
+        給付実績区分コード = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_給付実績区分コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +64,44 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKogakuKaigoServicehi(null, 主キー名2);
+        public void 交換情報識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKogakuKaigoServicehi(null, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 通し番号, 給付実績情報作成区分コード, 給付実績区分コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKogakuKaigoServicehi(主キー名1, null);
+        public void 入力識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKogakuKaigoServicehi(交換情報識別番号, null, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 通し番号, 給付実績情報作成区分コード, 給付実績区分コード);
         }
 
         @Test
         public void 指定したキーが保持するDbT3028KyufujissekiKogakuKaigoServicehiEntityにセットされている() {
-            sut = new KyufujissekiKogakuKaigoServicehi(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiKogakuKaigoServicehi(交換情報識別番号, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 通し番号, 給付実績情報作成区分コード, 給付実績区分コード);
+            assertThat(sut.get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.get入力識別番号(), is(入力識別番号));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiKogakuKaigoServicehiIdentifierにセットされている() {
-            sut = new KyufujissekiKogakuKaigoServicehi(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiKogakuKaigoServicehi(交換情報識別番号, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 通し番号, 給付実績情報作成区分コード, 給付実績区分コード);
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -82,8 +112,15 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +133,8 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
 
             sut = new KyufujissekiKogakuKaigoServicehi(KyufujissekiKogakuKaigoServicehiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -108,8 +145,15 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
 
             sut = new KyufujissekiKogakuKaigoServicehi(KyufujissekiKogakuKaigoServicehiEntity);
         }
@@ -267,8 +311,15 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
 
             sut = new KyufujissekiKogakuKaigoServicehi(KyufujissekiKogakuKaigoServicehiEntity);
         }
@@ -286,8 +337,15 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
 
             sut = new KyufujissekiKogakuKaigoServicehi(KyufujissekiKogakuKaigoServicehiEntity);
         }
@@ -306,8 +364,15 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKogakuKaigoServicehiEntity = DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.createDbT3028KyufujissekiKogakuKaigoServicehiEntity();
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名1);
-            KyufujissekiKogakuKaigoServicehiEntity.setXXX(主キー名2);
+            KyufujissekiKogakuKaigoServicehiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKogakuKaigoServicehiEntity.setToshiNo(通し番号);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
+            KyufujissekiKogakuKaigoServicehiEntity.setKyufuJissekiKubunCode(給付実績区分コード);
 
         }
 
