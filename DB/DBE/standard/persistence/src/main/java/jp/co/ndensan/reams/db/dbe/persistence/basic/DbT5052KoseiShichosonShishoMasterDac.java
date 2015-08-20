@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho.shishoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMaster;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMaster.shichosonCode;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMaster.shishoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
