@@ -4,11 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +32,22 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
     private static DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity KyodoShoriyoJukyushaIdoKihonSofuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleDate 主キー名1;
+    private static RString 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
+        主キー名2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
+        主キー名3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
+        主キー名4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +57,33 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyodoShoriyoJukyushaIdoKihonSofu(null, 主キー名2);
+            sut = new KyodoShoriyoJukyushaIdoKihonSofu(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, null);
+            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
         }
 
         @Test
         public void 指定したキーが保持するDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityにセットされている() {
-            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.get異動年月日(), is(主キー名1));
+            assertThat(sut.get異動区分コード(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKyodoShoriyoJukyushaIdoKihonSofuIdentifierにセットされている() {
-            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyodoShoriyoJukyushaIdoKihonSofu(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            assertThat(sut.identifier().get異動年月日(), is(主キー名1));
+            assertThat(sut.identifier().get異動区分コード(), is(主キー名2));
         }
     }
 
@@ -82,8 +94,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +108,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
 
             sut = new KyodoShoriyoJukyushaIdoKihonSofu(KyodoShoriyoJukyushaIdoKihonSofuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get異動年月日(), is(主キー名1));
+            assertThat(sut.identifier().get異動区分コード(), is(主キー名2));
         }
     }
 
@@ -108,8 +120,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
 
             sut = new KyodoShoriyoJukyushaIdoKihonSofu(KyodoShoriyoJukyushaIdoKihonSofuEntity);
         }
@@ -192,8 +204,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
 
             sut = new KyodoShoriyoJukyushaIdoKihonSofu(KyodoShoriyoJukyushaIdoKihonSofuEntity);
         }
@@ -211,8 +223,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
 
             sut = new KyodoShoriyoJukyushaIdoKihonSofu(KyodoShoriyoJukyushaIdoKihonSofuEntity);
         }
@@ -231,8 +243,8 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyodoShoriyoJukyushaIdoKihonSofuEntity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名1);
-            KyodoShoriyoJukyushaIdoKihonSofuEntity.setXXX(主キー名2);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoYMD(主キー名1);
+            KyodoShoriyoJukyushaIdoKihonSofuEntity.setIdoKubunCode(主キー名2);
 
         }
 

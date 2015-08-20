@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3015KyufuKanrihyo200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3015KyufuKanrihyo200604EntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,29 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
     private static DbT3015KyufuKanrihyo200604Entity KyufuKanrihyo200604Entity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static HokenshaNo 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static FlexibleDate 主キー名6;
+    private static RString 主キー名7;
+    private static RString 主キー名8;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月;
+        主キー名2 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名4 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_居宅支援事業所番号;
+        主キー名5 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付管理票情報作成区分コード;
+        主キー名6 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付管理票作成年月日;
+        主キー名7 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付管理票種別区分コード;
+        主キー名8 = DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付管理票明細行番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufuKanrihyo200604Builder sut;
         private static KyufuKanrihyo200604 business;
@@ -42,14 +59,15 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200604Entity = new DbT3015KyufuKanrihyo200604Entity();
-            KyufuKanrihyo200604Entity.setXXX(主キー名1);
-            KyufuKanrihyo200604Entity.setXXX(主キー名2);
+            KyufuKanrihyo200604Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200604Entity.setServiceTeikyoYM(主キー名2);
 
             business = new KyufuKanrihyo200604(KyufuKanrihyo200604Entity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の審査年月は_設定した値と同じ審査年月を返す() {
             business = sut.set審査年月(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_審査年月).build();
@@ -141,9 +159,9 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の居宅・介護予防支給限度額は_設定した値と同じ居宅・介護予防支給限度額を返す() {
-            business = sut.set居宅・介護予防支給限度額(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_居宅・介護予防支給限度額).build();
-            assertThat(business.get居宅・介護予防支給限度額(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_居宅・介護予防支給限度額));
+        public void 戻り値の居宅_介護予防支給限度額は_設定した値と同じ居宅_介護予防支給限度額を返す() {
+            business = sut.set居宅_介護予防支給限度額(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_居宅_介護予防支給限度額).build();
+            assertThat(business.get居宅_介護予防支給限度額(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_居宅_介護予防支給限度額));
         }
 
         @Test
@@ -159,9 +177,9 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の指定/基準該当/地域密着型サービス識別コードは_設定した値と同じ指定/基準該当/地域密着型サービス識別コードを返す() {
-            business = sut.set指定/基準該当/地域密着型サービス識別コード(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_指定/基準該当/地域密着型サービス識別コード).build();
-            assertThat(business.get指定/基準該当/地域密着型サービス識別コード(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_指定/基準該当/地域密着型サービス識別コード));
+        public void 戻り値の指定_基準該当_地域密着型サービス識別コードは_設定した値と同じ指定_基準該当_地域密着型サービス識別コードを返す() {
+            business = sut.set指定_基準該当_地域密着型サービス識別コード(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_指定_基準該当_地域密着型サービス識別コード).build();
+            assertThat(business.get指定_基準該当_地域密着型サービス識別コード(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_指定_基準該当_地域密着型サービス識別コード));
         }
 
         @Test
@@ -171,9 +189,9 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の給付計画単位数／日数は_設定した値と同じ給付計画単位数／日数を返す() {
-            business = sut.set給付計画単位数／日数(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画単位数／日数).build();
-            assertThat(business.get給付計画単位数／日数(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画単位数／日数));
+        public void 戻り値の給付計画単位数_日数は_設定した値と同じ給付計画単位数_日数を返す() {
+            business = sut.set給付計画単位数_日数(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画単位数_日数).build();
+            assertThat(business.get給付計画単位数_日数(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画単位数_日数));
         }
 
         @Test
@@ -195,9 +213,9 @@ public class KyufuKanrihyo200604BuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の給付計画合計単位数/日数は_設定した値と同じ給付計画合計単位数/日数を返す() {
-            business = sut.set給付計画合計単位数/日数(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画合計単位数/日数).build();
-            assertThat(business.get給付計画合計単位数/日数(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画合計単位数/日数));
+        public void 戻り値の給付計画合計単位数_日数は_設定した値と同じ給付計画合計単位数_日数を返す() {
+            business = sut.set給付計画合計単位数_日数(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画合計単位数_日数).build();
+            assertThat(business.get給付計画合計単位数_日数(), is(DbT3015KyufuKanrihyo200604EntityGenerator.DEFAULT_給付計画合計単位数_日数));
         }
 
         @Test

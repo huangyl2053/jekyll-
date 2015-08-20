@@ -4,11 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3014KyufuKanrihyo200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3014KyufuKanrihyo200004EntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +32,27 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
     private static DbT3014KyufuKanrihyo200004Entity KyufuKanrihyo200004Entity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static HokenshaNo 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static FlexibleDate 主キー名6;
+    private static RString 主キー名7;
+    private static RString 主キー名8;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_審査年月;
+        主キー名2 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名4 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_居宅支援事業所番号;
+        主キー名5 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_給付管理票情報作成区分コード;
+        主キー名6 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_給付管理票作成年月日;
+        主キー名7 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_給付管理票種別区分コード;
+        主キー名8 = DbT3014KyufuKanrihyo200004EntityGenerator.DEFAULT_給付管理票明細行番号;
+
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +62,33 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuKanrihyo200004(null, 主キー名2);
+            sut = new KyufuKanrihyo200004(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufuKanrihyo200004(主キー名1, null);
+            sut = new KyufuKanrihyo200004(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
         }
 
         @Test
         public void 指定したキーが保持するDbT3014KyufuKanrihyo200004Entityにセットされている() {
-            sut = new KyufuKanrihyo200004(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufuKanrihyo200004(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
+            assertThat(sut.get審査年月(), is(主キー名1));
+            assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKyufuKanrihyo200004Identifierにセットされている() {
-            sut = new KyufuKanrihyo200004(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufuKanrihyo200004(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
+            assertThat(sut.identifier().get審査年月(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -82,8 +99,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +113,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
 
             sut = new KyufuKanrihyo200004(KyufuKanrihyo200004Entity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get審査年月(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -108,8 +125,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
 
             sut = new KyufuKanrihyo200004(KyufuKanrihyo200004Entity);
         }
@@ -180,18 +197,18 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         }
 
         @Test
-        public void get限度額適用期間は_entityが持つ限度額適用期間を返す() {
-            assertThat(sut.get限度額適用期間(), is(KyufuKanrihyo200004Entity.getGendogakuTekiyoKaishiYM()));
+        public void get限度額適用期間_開始は_entityが持つ限度額適用期間_開始を返す() {
+            assertThat(sut.get限度額適用期間_開始(), is(KyufuKanrihyo200004Entity.getGendogakuTekiyoKaishiYM()));
         }
 
         @Test
         public void get限度額適用期間は_entityが持つ限度額適用期間を返す() {
-            assertThat(sut.get限度額適用期間(), is(KyufuKanrihyo200004Entity.getGendogakuTekiyoShuryoYM()));
+            assertThat(sut.get限度額適用期間_終了(), is(KyufuKanrihyo200004Entity.getGendogakuTekiyoShuryoYM()));
         }
 
         @Test
-        public void get居宅・介護予防支給限度額は_entityが持つ居宅・介護予防支給限度額を返す() {
-            assertThat(sut.get居宅・介護予防支給限度額(), is(KyufuKanrihyo200004Entity.getKyotakuKaigoYoboShikyuGendogaku()));
+        public void get居宅_介護予防支給限度額は_entityが持つ居宅_介護予防支給限度額を返す() {
+            assertThat(sut.get居宅_介護予防支給限度額(), is(KyufuKanrihyo200004Entity.getKyotakuKaigoYoboShikyuGendogaku()));
         }
 
         @Test
@@ -205,8 +222,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         }
 
         @Test
-        public void get指定/基準該当/地域密着型サービス識別コードは_entityが持つ指定/基準該当/地域密着型サービス識別コードを返す() {
-            assertThat(sut.get指定/基準該当/地域密着型サービス識別コード(), is(KyufuKanrihyo200004Entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()));
+        public void get指定_基準該当_地域密着型サービス識別コードは_entityが持つ指定_基準該当_地域密着型サービス識別コードを返す() {
+            assertThat(sut.get指定_基準該当_地域密着型サービス識別コード(), is(KyufuKanrihyo200004Entity.getShiteiKijungaitoChiikimitchakuServiceShikibetsuCode()));
         }
 
         @Test
@@ -215,8 +232,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         }
 
         @Test
-        public void get給付計画単位数／日数は_entityが持つ給付計画単位数／日数を返す() {
-            assertThat(sut.get給付計画単位数／日数(), is(KyufuKanrihyo200004Entity.getKyufuKeikakuTanisuNissu()));
+        public void get給付計画単位数_日数は_entityが持つ給付計画単位数_日数を返す() {
+            assertThat(sut.get給付計画単位数_日数(), is(KyufuKanrihyo200004Entity.getKyufuKeikakuTanisuNissu()));
         }
 
         @Test
@@ -235,8 +252,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         }
 
         @Test
-        public void get給付計画合計単位数/日数は_entityが持つ給付計画合計単位数/日数を返す() {
-            assertThat(sut.get給付計画合計単位数/日数(), is(KyufuKanrihyo200004Entity.getKyufuKeikakuTotalTanisuNissu()));
+        public void get給付計画合計単位数_日数は_entityが持つ給付計画合計単位数_日数を返す() {
+            assertThat(sut.get給付計画合計単位数_日数(), is(KyufuKanrihyo200004Entity.getKyufuKeikakuTotalTanisuNissu()));
         }
 
         @Test
@@ -257,8 +274,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
 
             sut = new KyufuKanrihyo200004(KyufuKanrihyo200004Entity);
         }
@@ -276,8 +293,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
 
             sut = new KyufuKanrihyo200004(KyufuKanrihyo200004Entity);
         }
@@ -296,8 +313,8 @@ public class KyufuKanrihyo200004Test extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuKanrihyo200004Entity = DbT3014KyufuKanrihyo200004EntityGenerator.createDbT3014KyufuKanrihyo200004Entity();
-            KyufuKanrihyo200004Entity.setXXX(主キー名1);
-            KyufuKanrihyo200004Entity.setXXX(主キー名2);
+            KyufuKanrihyo200004Entity.setShinsaYM(主キー名1);
+            KyufuKanrihyo200004Entity.setServiceTeikyoYM(主キー名2);
 
         }
 
