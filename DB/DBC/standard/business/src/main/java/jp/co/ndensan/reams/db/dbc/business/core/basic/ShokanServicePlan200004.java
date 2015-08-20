@@ -10,7 +10,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 
 /**
@@ -33,13 +31,40 @@ public class ShokanServicePlan200004 extends ModelBase<ShokanServicePlan200004Id
      * コンストラクタです。<br/>
      * 償還払請求サービス計画200004の新規作成時に使用します。
      *
-     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 履歴番号 履歴番号
      */
-    public ShokanServicePlan200004() {
-
+    public ShokanServicePlan200004(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            Decimal 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3045ShokanServicePlan200004Entity();
-
-        this.id = new ShokanServicePlan200004Identifier();
+        this.entity.setHiHokenshaNo(被保険者番号);
+        this.entity.setServiceTeikyoYM(サービス提供年月);
+        this.entity.setSeiriNp(整理番号);
+        this.entity.setJigyoshaNo(事業者番号);
+        this.entity.setYoshikiNo(様式番号);
+        this.entity.setRirekiNo(履歴番号);
+        this.id = new ShokanServicePlan200004Identifier(
+                被保険者番号,
+                サービス提供年月,
+                整理番号,
+                事業者番号,
+                様式番号,
+                履歴番号
+        );
     }
 
     /**
@@ -50,7 +75,13 @@ public class ShokanServicePlan200004 extends ModelBase<ShokanServicePlan200004Id
      */
     public ShokanServicePlan200004(DbT3045ShokanServicePlan200004Entity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求サービス計画200004"));
-        this.id = new ShokanServicePlan200004Identifier();
+        this.id = new ShokanServicePlan200004Identifier(
+                entity.getHiHokenshaNo(),
+                entity.getServiceTeikyoYM(),
+                entity.getSeiriNp(),
+                entity.getJigyoshaNo(),
+                entity.getYoshikiNo(),
+                entity.getRirekiNo());
     }
 
     /**
