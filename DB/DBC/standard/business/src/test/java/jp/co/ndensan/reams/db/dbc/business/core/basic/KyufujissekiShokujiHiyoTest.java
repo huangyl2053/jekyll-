@@ -4,11 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3022KyufujissekiShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3022KyufujissekiShokujiHiyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +34,26 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
     private static DbT3022KyufujissekiShokujiHiyoEntity KyufujissekiShokujiHiyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3022KyufujissekiShokujiHiyoEntityGenerator.DEFAULT_通し番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +63,33 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiShokujiHiyo(null, 主キー名2);
+            sut = new KyufujissekiShokujiHiyo(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiShokujiHiyo(主キー名1, null);
+            sut = new KyufujissekiShokujiHiyo(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
         }
 
         @Test
         public void 指定したキーが保持するDbT3022KyufujissekiShokujiHiyoEntityにセットされている() {
-            sut = new KyufujissekiShokujiHiyo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiShokujiHiyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
+            assertThat(sut.get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.get入力識別番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiShokujiHiyoIdentifierにセットされている() {
-            sut = new KyufujissekiShokujiHiyo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiShokujiHiyo(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7, 主キー名8);
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -82,8 +100,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +114,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
 
             sut = new KyufujissekiShokujiHiyo(KyufujissekiShokujiHiyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名1));
+            assertThat(sut.identifier().get入力識別番号(), is(主キー名2));
         }
     }
 
@@ -108,8 +126,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiShokujiHiyo(KyufujissekiShokujiHiyoEntity);
         }
@@ -155,33 +173,33 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get基本・提供日数は_entityが持つ基本・提供日数を返す() {
-            assertThat(sut.get基本・提供日数(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoNissu()));
+        public void get基本_提供日数は_entityが持つ基本_提供日数を返す() {
+            assertThat(sut.get基本_提供日数(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoNissu()));
         }
 
         @Test
-        public void get基本・提供単価は_entityが持つ基本・提供単価を返す() {
-            assertThat(sut.get基本・提供単価(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoTanka()));
+        public void get基本_提供単価は_entityが持つ基本_提供単価を返す() {
+            assertThat(sut.get基本_提供単価(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoTanka()));
         }
 
         @Test
-        public void get基本・提供金額は_entityが持つ基本・提供金額を返す() {
-            assertThat(sut.get基本・提供金額(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoKingaku()));
+        public void get基本_提供金額は_entityが持つ基本_提供金額を返す() {
+            assertThat(sut.get基本_提供金額(), is(KyufujissekiShokujiHiyoEntity.getKihonTeikyoKingaku()));
         }
 
         @Test
-        public void get特別・提供日数は_entityが持つ特別・提供日数を返す() {
-            assertThat(sut.get特別・提供日数(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoNissu()));
+        public void get特別_提供日数は_entityが持つ特別_提供日数を返す() {
+            assertThat(sut.get特別_提供日数(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoNissu()));
         }
 
         @Test
-        public void get特別・提供単価は_entityが持つ特別・提供単価を返す() {
-            assertThat(sut.get特別・提供単価(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoTanka()));
+        public void get特別_提供単価は_entityが持つ特別_提供単価を返す() {
+            assertThat(sut.get特別_提供単価(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoTanka()));
         }
 
         @Test
-        public void get特別・提供金額は_entityが持つ特別・提供金額を返す() {
-            assertThat(sut.get特別・提供金額(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoKingaku()));
+        public void get特別_提供金額は_entityが持つ特別_提供金額を返す() {
+            assertThat(sut.get特別_提供金額(), is(KyufujissekiShokujiHiyoEntity.getTokubestuTeikyoKingaku()));
         }
 
         @Test
@@ -210,8 +228,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get標準負担額（月額）は_entityが持つ標準負担額（月額）を返す() {
-            assertThat(sut.get標準負担額（月額）(), is(KyufujissekiShokujiHiyoEntity.getGetsugakuHyojunFutanGaku()));
+        public void get標準負担額_月額は_entityが持つ標準負担額_月額を返す() {
+            assertThat(sut.get標準負担額_月額(), is(KyufujissekiShokujiHiyoEntity.getGetsugakuHyojunFutanGaku()));
         }
 
         @Test
@@ -235,23 +253,23 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get標準負担額（日額）は_entityが持つ標準負担額（日額）を返す() {
-            assertThat(sut.get標準負担額（日額）(), is(KyufujissekiShokujiHiyoEntity.getNichigakuHyojunFutanGaku()));
+        public void get標準負担額_日額は_entityが持つ標準負担額_日額を返す() {
+            assertThat(sut.get標準負担額_日額(), is(KyufujissekiShokujiHiyoEntity.getNichigakuHyojunFutanGaku()));
         }
 
         @Test
-        public void get後・基本食提供費用提供単価は_entityが持つ後・基本食提供費用提供単価を返す() {
-            assertThat(sut.get後・基本食提供費用提供単価(), is(KyufujissekiShokujiHiyoEntity.getAtoKihonTeikyoTanka()));
+        public void get後_基本食提供費用提供単価は_entityが持つ後_基本食提供費用提供単価を返す() {
+            assertThat(sut.get後_基本食提供費用提供単価(), is(KyufujissekiShokujiHiyoEntity.getAtoKihonTeikyoTanka()));
         }
 
         @Test
-        public void get後・特別食提供費用提供単価は_entityが持つ後・特別食提供費用提供単価を返す() {
-            assertThat(sut.get後・特別食提供費用提供単価(), is(KyufujissekiShokujiHiyoEntity.getAtoTokubestuTeikyoTanka()));
+        public void get後_特別食提供費用提供単価は_entityが持つ後_特別食提供費用提供単価を返す() {
+            assertThat(sut.get後_特別食提供費用提供単価(), is(KyufujissekiShokujiHiyoEntity.getAtoTokubestuTeikyoTanka()));
         }
 
         @Test
-        public void get後・食事提供費請求額は_entityが持つ後・食事提供費請求額を返す() {
-            assertThat(sut.get後・食事提供費請求額(), is(KyufujissekiShokujiHiyoEntity.getAtoSyokujiTeikyohiSeikyugaku()));
+        public void get後_食事提供費請求額は_entityが持つ後_食事提供費請求額を返す() {
+            assertThat(sut.get後_食事提供費請求額(), is(KyufujissekiShokujiHiyoEntity.getAtoSyokujiTeikyohiSeikyugaku()));
         }
 
         @Test
@@ -287,8 +305,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiShokujiHiyo(KyufujissekiShokujiHiyoEntity);
         }
@@ -306,8 +324,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
 
             sut = new KyufujissekiShokujiHiyo(KyufujissekiShokujiHiyoEntity);
         }
@@ -326,8 +344,8 @@ public class KyufujissekiShokujiHiyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiShokujiHiyoEntity = DbT3022KyufujissekiShokujiHiyoEntityGenerator.createDbT3022KyufujissekiShokujiHiyoEntity();
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名1);
-            KyufujissekiShokujiHiyoEntity.setXXX(主キー名2);
+            KyufujissekiShokujiHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShokujiHiyoEntity.setInputShikibetsuNo(主キー名2);
 
         }
 
