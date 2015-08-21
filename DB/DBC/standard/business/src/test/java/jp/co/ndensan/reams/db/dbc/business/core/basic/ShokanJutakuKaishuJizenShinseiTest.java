@@ -4,11 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +31,18 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
     private static DbT3035ShokanJutakuKaishuJizenShinseiEntity ShokanJutakuKaishuJizenShinseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static Decimal 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +52,33 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanJutakuKaishuJizenShinsei(null, 主キー名2);
+            sut = new ShokanJutakuKaishuJizenShinsei(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, null);
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT3035ShokanJutakuKaishuJizenShinseiEntityにセットされている() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.get被保険者番号(), is(主キー名1));
+            assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanJutakuKaishuJizenShinseiIdentifierにセットされている() {
-            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new ShokanJutakuKaishuJizenShinsei(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -82,8 +89,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +103,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
 
             sut = new ShokanJutakuKaishuJizenShinsei(ShokanJutakuKaishuJizenShinseiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
+            assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
     }
 
@@ -108,8 +115,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanJutakuKaishuJizenShinsei(ShokanJutakuKaishuJizenShinseiEntity);
         }
@@ -215,23 +222,23 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         }
 
         @Test
-        public void get給付額等・費用額合計は_entityが持つ給付額等・費用額合計を返す() {
-            assertThat(sut.get給付額等・費用額合計(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHiyogakuTotal()));
+        public void get給付額等_費用額合計は_entityが持つ給付額等_費用額合計を返す() {
+            assertThat(sut.get給付額等_費用額合計(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHiyogakuTotal()));
         }
 
         @Test
-        public void get給付額等・保険対象費用額は_entityが持つ給付額等・保険対象費用額を返す() {
-            assertThat(sut.get給付額等・保険対象費用額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHokenTaishoHiyogaku()));
+        public void get給付額等_保険対象費用額は_entityが持つ給付額等_保険対象費用額を返す() {
+            assertThat(sut.get給付額等_保険対象費用額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHokenTaishoHiyogaku()));
         }
 
         @Test
-        public void get給付額等・利用者自己負担額は_entityが持つ給付額等・利用者自己負担額を返す() {
-            assertThat(sut.get給付額等・利用者自己負担額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuRiyoshaJikofutangaku()));
+        public void get給付額等_利用者自己負担額は_entityが持つ給付額等_利用者自己負担額を返す() {
+            assertThat(sut.get給付額等_利用者自己負担額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuRiyoshaJikofutangaku()));
         }
 
         @Test
-        public void get給付額等・保険給付費額は_entityが持つ給付額等・保険給付費額を返す() {
-            assertThat(sut.get給付額等・保険給付費額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHokenkyufuhigaku()));
+        public void get給付額等_保険給付費額は_entityが持つ給付額等_保険給付費額を返す() {
+            assertThat(sut.get給付額等_保険給付費額(), is(ShokanJutakuKaishuJizenShinseiEntity.getKyufugakuHokenkyufuhigaku()));
         }
 
         @Test
@@ -257,8 +264,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanJutakuKaishuJizenShinsei(ShokanJutakuKaishuJizenShinseiEntity);
         }
@@ -276,8 +283,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
 
             sut = new ShokanJutakuKaishuJizenShinsei(ShokanJutakuKaishuJizenShinseiEntity);
         }
@@ -296,8 +303,8 @@ public class ShokanJutakuKaishuJizenShinseiTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanJutakuKaishuJizenShinseiEntity = DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity();
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名1);
-            ShokanJutakuKaishuJizenShinseiEntity.setXXX(主キー名2);
+            ShokanJutakuKaishuJizenShinseiEntity.setHiHokenshaNo(主キー名1);
+            ShokanJutakuKaishuJizenShinseiEntity.setServiceTeikyoYM(主キー名2);
 
         }
 

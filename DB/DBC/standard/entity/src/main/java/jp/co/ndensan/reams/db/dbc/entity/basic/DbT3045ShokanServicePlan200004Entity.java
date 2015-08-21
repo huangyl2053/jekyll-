@@ -32,11 +32,17 @@ public class DbT3045ShokanServicePlan200004Entity extends DbTableEntityBase<DbT3
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
+    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
+    @PrimaryKey
     private RString seiriNp;
+    @PrimaryKey
     private JigyoshaNo jigyoshaNo;
+    @PrimaryKey
     private RString yoshikiNo;
+    @PrimaryKey
     private Decimal rirekiNo;
     private RString shiteiKijunGaitoJigyoshaKubunCode;
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;

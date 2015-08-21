@@ -72,12 +72,6 @@
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbxBatchService</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>

@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3020KyufujissekiTokuteiSinryohiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,31 @@ public class KyufujissekiTokuteiSinryohiBuilderTest extends DbcTestBase {
     private static DbT3020KyufujissekiTokuteiSinryohiEntity KyufujissekiTokuteiSinryohiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_特定診療情報レコード順次番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufujissekiTokuteiSinryohiBuilder sut;
         private static KyufujissekiTokuteiSinryohi business;
@@ -42,14 +63,15 @@ public class KyufujissekiTokuteiSinryohiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryohiEntity = new DbT3020KyufujissekiTokuteiSinryohiEntity();
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryohiEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryohiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryohiEntity.setInputShikibetsuNo(主キー名2);
 
             business = new KyufujissekiTokuteiSinryohi(KyufujissekiTokuteiSinryohiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -111,123 +133,123 @@ public class KyufujissekiTokuteiSinryohiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の保険・指導管理料等は_設定した値と同じ保険・指導管理料等を返す() {
-            business = sut.set保険・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・指導管理料等).build();
-            assertThat(business.get保険・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・指導管理料等));
+        public void 戻り値の保険_指導管理料等は_設定した値と同じ保険_指導管理料等を返す() {
+            business = sut.set保険_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_指導管理料等).build();
+            assertThat(business.get保険_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_指導管理料等));
         }
 
         @Test
-        public void 戻り値の保険・単純エックス線は_設定した値と同じ保険・単純エックス線を返す() {
-            business = sut.set保険・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・単純エックス線).build();
-            assertThat(business.get保険・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・単純エックス線));
+        public void 戻り値の保険_単純エックス線は_設定した値と同じ保険_単純エックス線を返す() {
+            business = sut.set保険_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_単純エックス線).build();
+            assertThat(business.get保険_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_単純エックス線));
         }
 
         @Test
-        public void 戻り値の保険・リハビリテーションは_設定した値と同じ保険・リハビリテーションを返す() {
-            business = sut.set保険・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・リハビリテーション).build();
-            assertThat(business.get保険・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・リハビリテーション));
+        public void 戻り値の保険_リハビリテーションは_設定した値と同じ保険_リハビリテーションを返す() {
+            business = sut.set保険_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_リハビリテーション).build();
+            assertThat(business.get保険_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の保険・精神科専門療法は_設定した値と同じ保険・精神科専門療法を返す() {
-            business = sut.set保険・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・精神科専門療法).build();
-            assertThat(business.get保険・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・精神科専門療法));
+        public void 戻り値の保険_精神科専門療法は_設定した値と同じ保険_精神科専門療法を返す() {
+            business = sut.set保険_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_精神科専門療法).build();
+            assertThat(business.get保険_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の保険・合計単位数は_設定した値と同じ保険・合計単位数を返す() {
-            business = sut.set保険・合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・合計単位数).build();
-            assertThat(business.get保険・合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険・合計単位数));
+        public void 戻り値の保険_合計単位数は_設定した値と同じ保険_合計単位数を返す() {
+            business = sut.set保険_合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_合計単位数).build();
+            assertThat(business.get保険_合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_保険_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費１・指導管理料等は_設定した値と同じ公費１・指導管理料等を返す() {
-            business = sut.set公費１・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・指導管理料等).build();
-            assertThat(business.get公費１・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・指導管理料等));
+        public void 戻り値の公費１_指導管理料等は_設定した値と同じ公費１_指導管理料等を返す() {
+            business = sut.set公費１_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_指導管理料等).build();
+            assertThat(business.get公費１_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_指導管理料等));
         }
 
         @Test
-        public void 戻り値の公費１・単純エックス線は_設定した値と同じ公費１・単純エックス線を返す() {
-            business = sut.set公費１・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・単純エックス線).build();
-            assertThat(business.get公費１・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・単純エックス線));
+        public void 戻り値の公費１_単純エックス線は_設定した値と同じ公費１_単純エックス線を返す() {
+            business = sut.set公費１_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_単純エックス線).build();
+            assertThat(business.get公費１_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_単純エックス線));
         }
 
         @Test
-        public void 戻り値の公費１・リハビリテーションは_設定した値と同じ公費１・リハビリテーションを返す() {
-            business = sut.set公費１・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・リハビリテーション).build();
-            assertThat(business.get公費１・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・リハビリテーション));
+        public void 戻り値の公費１_リハビリテーションは_設定した値と同じ公費１_リハビリテーションを返す() {
+            business = sut.set公費１_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_リハビリテーション).build();
+            assertThat(business.get公費１_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の公費１・精神科専門療法は_設定した値と同じ公費１・精神科専門療法を返す() {
-            business = sut.set公費１・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・精神科専門療法).build();
-            assertThat(business.get公費１・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・精神科専門療法));
+        public void 戻り値の公費１_精神科専門療法は_設定した値と同じ公費１_精神科専門療法を返す() {
+            business = sut.set公費１_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_精神科専門療法).build();
+            assertThat(business.get公費１_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の公費１・合計単位数は_設定した値と同じ公費１・合計単位数を返す() {
-            business = sut.set公費１・合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・合計単位数).build();
-            assertThat(business.get公費１・合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１・合計単位数));
+        public void 戻り値の公費１_合計単位数は_設定した値と同じ公費１_合計単位数を返す() {
+            business = sut.set公費１_合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_合計単位数).build();
+            assertThat(business.get公費１_合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費１_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費２・指導管理料等は_設定した値と同じ公費２・指導管理料等を返す() {
-            business = sut.set公費２・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・指導管理料等).build();
-            assertThat(business.get公費２・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・指導管理料等));
+        public void 戻り値の公費２_指導管理料等は_設定した値と同じ公費２_指導管理料等を返す() {
+            business = sut.set公費２_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_指導管理料等).build();
+            assertThat(business.get公費２_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_指導管理料等));
         }
 
         @Test
-        public void 戻り値の公費２・単純エックス線は_設定した値と同じ公費２・単純エックス線を返す() {
-            business = sut.set公費２・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・単純エックス線).build();
-            assertThat(business.get公費２・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・単純エックス線));
+        public void 戻り値の公費２_単純エックス線は_設定した値と同じ公費２_単純エックス線を返す() {
+            business = sut.set公費２_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_単純エックス線).build();
+            assertThat(business.get公費２_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_単純エックス線));
         }
 
         @Test
-        public void 戻り値の公費２・リハビリテーションは_設定した値と同じ公費２・リハビリテーションを返す() {
-            business = sut.set公費２・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・リハビリテーション).build();
-            assertThat(business.get公費２・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・リハビリテーション));
+        public void 戻り値の公費２_リハビリテーションは_設定した値と同じ公費２_リハビリテーションを返す() {
+            business = sut.set公費２_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_リハビリテーション).build();
+            assertThat(business.get公費２_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の公費２・精神科専門療法は_設定した値と同じ公費２・精神科専門療法を返す() {
-            business = sut.set公費２・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・精神科専門療法).build();
-            assertThat(business.get公費２・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・精神科専門療法));
+        public void 戻り値の公費２_精神科専門療法は_設定した値と同じ公費２_精神科専門療法を返す() {
+            business = sut.set公費２_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_精神科専門療法).build();
+            assertThat(business.get公費２_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の公費２・合計単位数は_設定した値と同じ公費２・合計単位数を返す() {
-            business = sut.set公費２・合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・合計単位数).build();
-            assertThat(business.get公費２・合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２・合計単位数));
+        public void 戻り値の公費２_合計単位数は_設定した値と同じ公費２_合計単位数を返す() {
+            business = sut.set公費２_合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_合計単位数).build();
+            assertThat(business.get公費２_合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費２_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費３・指導管理料等は_設定した値と同じ公費３・指導管理料等を返す() {
-            business = sut.set公費３・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・指導管理料等).build();
-            assertThat(business.get公費３・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・指導管理料等));
+        public void 戻り値の公費３_指導管理料等は_設定した値と同じ公費３_指導管理料等を返す() {
+            business = sut.set公費３_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_指導管理料等).build();
+            assertThat(business.get公費３_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_指導管理料等));
         }
 
         @Test
-        public void 戻り値の公費３・単純エックス線は_設定した値と同じ公費３・単純エックス線を返す() {
-            business = sut.set公費３・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・単純エックス線).build();
-            assertThat(business.get公費３・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・単純エックス線));
+        public void 戻り値の公費３_単純エックス線は_設定した値と同じ公費３_単純エックス線を返す() {
+            business = sut.set公費３_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_単純エックス線).build();
+            assertThat(business.get公費３_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_単純エックス線));
         }
 
         @Test
-        public void 戻り値の公費３・リハビリテーションは_設定した値と同じ公費３・リハビリテーションを返す() {
-            business = sut.set公費３・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・リハビリテーション).build();
-            assertThat(business.get公費３・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・リハビリテーション));
+        public void 戻り値の公費３_リハビリテーションは_設定した値と同じ公費３_リハビリテーションを返す() {
+            business = sut.set公費３_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_リハビリテーション).build();
+            assertThat(business.get公費３_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の公費３・精神科専門療法は_設定した値と同じ公費３・精神科専門療法を返す() {
-            business = sut.set公費３・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・精神科専門療法).build();
-            assertThat(business.get公費３・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・精神科専門療法));
+        public void 戻り値の公費３_精神科専門療法は_設定した値と同じ公費３_精神科専門療法を返す() {
+            business = sut.set公費３_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_精神科専門療法).build();
+            assertThat(business.get公費３_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の公費３・合計単位数は_設定した値と同じ公費３・合計単位数を返す() {
-            business = sut.set公費３・合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・合計単位数).build();
-            assertThat(business.get公費３・合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３・合計単位数));
+        public void 戻り値の公費３_合計単位数は_設定した値と同じ公費３_合計単位数を返す() {
+            business = sut.set公費３_合計単位数(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_合計単位数).build();
+            assertThat(business.get公費３_合計単位数(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_公費３_合計単位数));
         }
 
         @Test
@@ -351,99 +373,99 @@ public class KyufujissekiTokuteiSinryohiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の後・保険・指導管理料等は_設定した値と同じ後・保険・指導管理料等を返す() {
-            business = sut.set後・保険・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・指導管理料等).build();
-            assertThat(business.get後・保険・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・指導管理料等));
+        public void 戻り値の後_保険_指導管理料等は_設定した値と同じ後_保険_指導管理料等を返す() {
+            business = sut.set後_保険_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_指導管理料等).build();
+            assertThat(business.get後_保険_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_指導管理料等));
         }
 
         @Test
-        public void 戻り値の後・保険・単純エックス線は_設定した値と同じ後・保険・単純エックス線を返す() {
-            business = sut.set後・保険・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・単純エックス線).build();
-            assertThat(business.get後・保険・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・単純エックス線));
+        public void 戻り値の後_保険_単純エックス線は_設定した値と同じ後_保険_単純エックス線を返す() {
+            business = sut.set後_保険_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_単純エックス線).build();
+            assertThat(business.get後_保険_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_単純エックス線));
         }
 
         @Test
-        public void 戻り値の後・保険・リハビリテーションは_設定した値と同じ後・保険・リハビリテーションを返す() {
-            business = sut.set後・保険・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・リハビリテーション).build();
-            assertThat(business.get後・保険・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・リハビリテーション));
+        public void 戻り値の後_保険_リハビリテーションは_設定した値と同じ後_保険_リハビリテーションを返す() {
+            business = sut.set後_保険_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_リハビリテーション).build();
+            assertThat(business.get後_保険_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の後・保険・精神科専門療法は_設定した値と同じ後・保険・精神科専門療法を返す() {
-            business = sut.set後・保険・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・精神科専門療法).build();
-            assertThat(business.get後・保険・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・保険・精神科専門療法));
+        public void 戻り値の後_保険_精神科専門療法は_設定した値と同じ後_保険_精神科専門療法を返す() {
+            business = sut.set後_保険_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_精神科専門療法).build();
+            assertThat(business.get後_保険_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_保険_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の後・公費１・指導管理料等は_設定した値と同じ後・公費１・指導管理料等を返す() {
-            business = sut.set後・公費１・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・指導管理料等).build();
-            assertThat(business.get後・公費１・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・指導管理料等));
+        public void 戻り値の後_公費１_指導管理料等は_設定した値と同じ後_公費１_指導管理料等を返す() {
+            business = sut.set後_公費１_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_指導管理料等).build();
+            assertThat(business.get後_公費１_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_指導管理料等));
         }
 
         @Test
-        public void 戻り値の後・公費１・単純エックス線は_設定した値と同じ後・公費１・単純エックス線を返す() {
-            business = sut.set後・公費１・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・単純エックス線).build();
-            assertThat(business.get後・公費１・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・単純エックス線));
+        public void 戻り値の後_公費１_単純エックス線は_設定した値と同じ後_公費１_単純エックス線を返す() {
+            business = sut.set後_公費１_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_単純エックス線).build();
+            assertThat(business.get後_公費１_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_単純エックス線));
         }
 
         @Test
-        public void 戻り値の後・公費１・リハビリテーションは_設定した値と同じ後・公費１・リハビリテーションを返す() {
-            business = sut.set後・公費１・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・リハビリテーション).build();
-            assertThat(business.get後・公費１・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・リハビリテーション));
+        public void 戻り値の後_公費１_リハビリテーションは_設定した値と同じ後_公費１_リハビリテーションを返す() {
+            business = sut.set後_公費１_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_リハビリテーション).build();
+            assertThat(business.get後_公費１_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の後・公費１・精神科専門療法は_設定した値と同じ後・公費１・精神科専門療法を返す() {
-            business = sut.set後・公費１・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・精神科専門療法).build();
-            assertThat(business.get後・公費１・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費１・精神科専門療法));
+        public void 戻り値の後_公費１_精神科専門療法は_設定した値と同じ後_公費１_精神科専門療法を返す() {
+            business = sut.set後_公費１_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_精神科専門療法).build();
+            assertThat(business.get後_公費１_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費１_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の後・公費２・指導管理料等は_設定した値と同じ後・公費２・指導管理料等を返す() {
-            business = sut.set後・公費２・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・指導管理料等).build();
-            assertThat(business.get後・公費２・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・指導管理料等));
+        public void 戻り値の後_公費２_指導管理料等は_設定した値と同じ後_公費２_指導管理料等を返す() {
+            business = sut.set後_公費２_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_指導管理料等).build();
+            assertThat(business.get後_公費２_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_指導管理料等));
         }
 
         @Test
-        public void 戻り値の後・公費２・単純エックス線は_設定した値と同じ後・公費２・単純エックス線を返す() {
-            business = sut.set後・公費２・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・単純エックス線).build();
-            assertThat(business.get後・公費２・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・単純エックス線));
+        public void 戻り値の後_公費２_単純エックス線は_設定した値と同じ後_公費２_単純エックス線を返す() {
+            business = sut.set後_公費２_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_単純エックス線).build();
+            assertThat(business.get後_公費２_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_単純エックス線));
         }
 
         @Test
-        public void 戻り値の後・公費２・リハビリテーションは_設定した値と同じ後・公費２・リハビリテーションを返す() {
-            business = sut.set後・公費２・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・リハビリテーション).build();
-            assertThat(business.get後・公費２・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・リハビリテーション));
+        public void 戻り値の後_公費２_リハビリテーションは_設定した値と同じ後_公費２_リハビリテーションを返す() {
+            business = sut.set後_公費２_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_リハビリテーション).build();
+            assertThat(business.get後_公費２_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の後・公費２・精神科専門療法は_設定した値と同じ後・公費２・精神科専門療法を返す() {
-            business = sut.set後・公費２・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・精神科専門療法).build();
-            assertThat(business.get後・公費２・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費２・精神科専門療法));
+        public void 戻り値の後_公費２_精神科専門療法は_設定した値と同じ後_公費２_精神科専門療法を返す() {
+            business = sut.set後_公費２_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_精神科専門療法).build();
+            assertThat(business.get後_公費２_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費２_精神科専門療法));
         }
 
         @Test
-        public void 戻り値の後・公費３・指導管理料等は_設定した値と同じ後・公費３・指導管理料等を返す() {
-            business = sut.set後・公費３・指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・指導管理料等).build();
-            assertThat(business.get後・公費３・指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・指導管理料等));
+        public void 戻り値の後_公費３_指導管理料等は_設定した値と同じ後_公費３_指導管理料等を返す() {
+            business = sut.set後_公費３_指導管理料等(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_指導管理料等).build();
+            assertThat(business.get後_公費３_指導管理料等(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_指導管理料等));
         }
 
         @Test
-        public void 戻り値の後・公費３・単純エックス線は_設定した値と同じ後・公費３・単純エックス線を返す() {
-            business = sut.set後・公費３・単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・単純エックス線).build();
-            assertThat(business.get後・公費３・単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・単純エックス線));
+        public void 戻り値の後_公費３_単純エックス線は_設定した値と同じ後_公費３_単純エックス線を返す() {
+            business = sut.set後_公費３_単純エックス線(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_単純エックス線).build();
+            assertThat(business.get後_公費３_単純エックス線(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_単純エックス線));
         }
 
         @Test
-        public void 戻り値の後・公費３・リハビリテーションは_設定した値と同じ後・公費３・リハビリテーションを返す() {
-            business = sut.set後・公費３・リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・リハビリテーション).build();
-            assertThat(business.get後・公費３・リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・リハビリテーション));
+        public void 戻り値の後_公費３_リハビリテーションは_設定した値と同じ後_公費３_リハビリテーションを返す() {
+            business = sut.set後_公費３_リハビリテーション(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_リハビリテーション).build();
+            assertThat(business.get後_公費３_リハビリテーション(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_リハビリテーション));
         }
 
         @Test
-        public void 戻り値の後・公費３・精神科専門療法は_設定した値と同じ後・公費３・精神科専門療法を返す() {
-            business = sut.set後・公費３・精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・精神科専門療法).build();
-            assertThat(business.get後・公費３・精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後・公費３・精神科専門療法));
+        public void 戻り値の後_公費３_精神科専門療法は_設定した値と同じ後_公費３_精神科専門療法を返す() {
+            business = sut.set後_公費３_精神科専門療法(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_精神科専門療法).build();
+            assertThat(business.get後_公費３_精神科専門療法(), is(DbT3020KyufujissekiTokuteiSinryohiEntityGenerator.DEFAULT_後_公費３_精神科専門療法));
         }
 
         @Test

@@ -1,7 +1,0 @@
-﻿kihonJokyoFlag,bool,boolean,,,,,基本情報状況フラグ,A
-mobileDataFlag,bool,boolean,,,,,モバイルデータ出力フラグ,A
-ninteiJohoTeikyoKiboAriFlag,bool,boolean,,,,,認定情報提供希望有フラグ,A
-shinsakaiShinsajunKakuteiFlag,bool,boolean,,,,,介護認定審査会審査順確定フラグ,A
-gogitaiDummyFlag,bool,boolean,,,,,合議体ダミーフラグ,A
-gogitaiSeishinkaiFlag,bool,boolean,,,,,合議体精神科医存在フラグ,A
-shinsakaiKyukaiFlag,bool,boolean,,,,,介護認定審査会休会フラグ,A

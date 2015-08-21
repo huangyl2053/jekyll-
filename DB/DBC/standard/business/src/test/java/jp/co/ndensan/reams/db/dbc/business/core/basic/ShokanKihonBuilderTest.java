@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3038ShokanKihonEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,25 @@ public class ShokanKihonBuilderTest extends DbcTestBase {
     private static DbT3038ShokanKihonEntity ShokanKihonEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3038ShokanKihonEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3038ShokanKihonEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3038ShokanKihonEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3038ShokanKihonEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3038ShokanKihonEntityGenerator.DEFAULT_事業者番号;
+        主キー名5 = DbT3038ShokanKihonEntityGenerator.DEFAULT_様式番号;
+        主キー名6 = DbT3038ShokanKihonEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ShokanKihonBuilder sut;
         private static ShokanKihon business;
@@ -42,14 +55,15 @@ public class ShokanKihonBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanKihonEntity = new DbT3038ShokanKihonEntity();
-            ShokanKihonEntity.setXXX(主キー名1);
-            ShokanKihonEntity.setXXX(主キー名2);
+            ShokanKihonEntity.setHiHokenshaNo(主キー名1);
+            ShokanKihonEntity.setServiceTeikyoYM(主キー名2);
 
             business = new ShokanKihon(ShokanKihonEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3038ShokanKihonEntityGenerator.DEFAULT_被保険者番号).build();
@@ -117,27 +131,27 @@ public class ShokanKihonBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の中止理由・入所（院）前の状況コードは_設定した値と同じ中止理由・入所（院）前の状況コードを返す() {
-            business = sut.set中止理由・入所（院）前の状況コード(DbT3038ShokanKihonEntityGenerator.DEFAULT_中止理由・入所（院）前の状況コード).build();
-            assertThat(business.get中止理由・入所（院）前の状況コード(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_中止理由・入所（院）前の状況コード));
+        public void 戻り値の中止理由_入所_院_前の状況コードは_設定した値と同じ中止理由_入所_院前の状況コードを返す() {
+            business = sut.set中止理由_入所_院前の状況コード(DbT3038ShokanKihonEntityGenerator.DEFAULT_中止理由_入所_院_前の状況コード).build();
+            assertThat(business.get中止理由_入所_院前の状況コード(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_中止理由_入所_院_前の状況コード));
         }
 
         @Test
-        public void 戻り値の入所（院）年月日は_設定した値と同じ入所（院）年月日を返す() {
-            business = sut.set入所（院）年月日(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所（院）年月日).build();
-            assertThat(business.get入所（院）年月日(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所（院）年月日));
+        public void 戻り値の入所_院年月日は_設定した値と同じ入所_院年月日を返す() {
+            business = sut.set入所_院年月日(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所_院_年月日).build();
+            assertThat(business.get入所_院年月日(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所_院_年月日));
         }
 
         @Test
-        public void 戻り値の退所（院）年月日は_設定した値と同じ退所（院）年月日を返す() {
-            business = sut.set退所（院）年月日(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所（院）年月日).build();
-            assertThat(business.get退所（院）年月日(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所（院）年月日));
+        public void 戻り値の退所_院年月日は_設定した値と同じ退所_院年月日を返す() {
+            business = sut.set退所_院年月日(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所_院_年月日).build();
+            assertThat(business.get退所_院年月日(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所_院_年月日));
         }
 
         @Test
-        public void 戻り値の入所（院）実日数は_設定した値と同じ入所（院）実日数を返す() {
-            business = sut.set入所（院）実日数(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所（院）実日数).build();
-            assertThat(business.get入所（院）実日数(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所（院）実日数));
+        public void 戻り値の入所_院実日数は_設定した値と同じ入所_院実日数を返す() {
+            business = sut.set入所_院実日数(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所_院_実日数).build();
+            assertThat(business.get入所_院実日数(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_入所_院_実日数));
         }
 
         @Test
@@ -147,9 +161,9 @@ public class ShokanKihonBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の退所（院）後の状態コードは_設定した値と同じ退所（院）後の状態コードを返す() {
-            business = sut.set退所（院）後の状態コード(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所（院）後の状態コード).build();
-            assertThat(business.get退所（院）後の状態コード(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所（院）後の状態コード));
+        public void 戻り値の退所_院後の状態コードは_設定した値と同じ退所_院後の状態コードを返す() {
+            business = sut.set退所_院後の状態コード(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所_院_後の状態コード).build();
+            assertThat(business.get退所_院後の状態コード(), is(DbT3038ShokanKihonEntityGenerator.DEFAULT_退所_院_後の状態コード));
         }
 
         @Test
