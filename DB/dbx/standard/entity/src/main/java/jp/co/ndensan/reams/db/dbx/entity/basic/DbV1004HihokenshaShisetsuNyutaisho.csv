@@ -1,8 +1,0 @@
-﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,shikibetsuCode,A
-rirekiNo,int2,int,,,,,rirekiNo,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,shichosonCode,A
-daichoShubetsu,varchar,RString,,,,,daichoShubetsu,A
-nyushoShisetsuShurui,varchar,RString,,,,,nyushoShisetsuShurui,A
-nyushoShisetsuCode,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,nyushoShisetsuCode,A
-nyushoYMD,UDD015YMD,FlexibleDate,,,,,nyushoYMD,A
-taishoYMD,UDD015YMD,FlexibleDate,,,,,taishoYMD,A

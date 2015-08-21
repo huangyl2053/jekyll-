@@ -1,7 +1,0 @@
-/// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URACommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URCCommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URDCommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URFCommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URICommonChildDiv.d.ts" />
-/// <reference path="../d.ts/URUCommonChildDiv.d.ts" />

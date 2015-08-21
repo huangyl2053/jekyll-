@@ -1,3 +1,0 @@
-﻿gyomuBunrui,varchar,RString,,,,,業務分類,A
-donyuKeitaiCode,UDD035Code,Code,,,,,導入形態コード,A
-shishoKanriUmuFlag,bool,boolean,,,,,支所管理有無フラグ,A
