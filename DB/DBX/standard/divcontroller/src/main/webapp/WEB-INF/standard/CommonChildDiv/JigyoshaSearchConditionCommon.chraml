@@ -1,0 +1,589 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBX&quot;,&quot;controlName&quot;:&quot;JigyoshaSearchConditionCommon&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBX.JigyoshaSearchConditionCommon"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="JigyoshaSearchConditionCommon" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JigyoshaSearchConditionCommon&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;JigyoshaSearchConditionCommon&quot;,&quot;title&quot;:&quot;検索条件&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="JigyoshaSearchConditionCommon_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">検索条件</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="JigyoshaSearchConditionCommon_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSearchJigyoshaNo" style="width: 204px; height: 22px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtSearchJigyoshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSearchJigyoshaNo_core&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者番号&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtSearchJigyoshaNo_labelL"><span>事業者番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtSearchJigyoshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDateRange TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSearchJigyoshaKaishiDateRange" style="width: 325px; height: 22px;" data-control-type="TextBoxDateRange" data-obj="{&quot;fieldName&quot;:&quot;txtSearchJigyoshaKaishiDateRange&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDateRange&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSearchJigyoshaKaishiDateRange_core&quot;,&quot;labelLText&quot;:&quot;有効開始日&quot;,&quot;fromSelectControlID&quot;:&quot;txtSearchJigyoshaKaishiDateRangeFrom&quot;,&quot;toSelectControlID&quot;:&quot;txtSearchJigyoshaKaishiDateRangeTo&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSearchJigyoshaKaishiDateRange_labelL" style="width: 5.5em;"><span>有効開始日</span></span><span class="CoreElement UzTextBox TextBoxDateRangeCore" id="txtSearchJigyoshaKaishiDateRange_core" data-control-type="TextBoxDateRange"><input class="UzTextBox UzTextBoxDateRange" id="txtSearchJigyoshaKaishiDateRangeFrom" style="margin: 0em; width: 80px; font-size: inherit;" type="text" placeholder="" data-control-type="TextBoxDateRange" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-maxdate="" data-mindate=""><span class="UzTextBoxDateRange Label-L text-align-center Width-XS" id="txtSearchJigyoshaKaishiDateRangeArrow" style="text-align: center; margin-right: 0.8em; margin-left: 0.8em;">～</span><input class="UzTextBox UzTextBoxDateRange" id="txtSearchJigyoshaKaishiDateRangeTo" style="margin: 0em; width: 80px; font-size: inherit;" type="text" placeholder="" data-control-type="TextBoxDateRange" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-maxdate="" data-mindate=""></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSearchJigyoshaMeiOrKanaMeisho" style="width: 630px; height: 22px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSearchJigyoshaMeiOrKanaMeisho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;L&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSearchJigyoshaMeiOrKanaMeisho_core&quot;,&quot;placeHolder&quot;:&quot;事業者名称かカナ名称を入力してください&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;事業者名&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtSearchJigyoshaMeiOrKanaMeisho_labelL"><span>事業者名</span></span><input class="UzTextBox CoreElement Width-L text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtSearchJigyoshaMeiOrKanaMeisho_core" type="text" placeholder="事業者名称かカナ名称を入力してください" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="ddlSearchMeishoMatchCondition" style="width: 101px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSearchMeishoMatchCondition&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;selectControlID&quot;:&quot;ddlSearchMeishoMatchCondition_core&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;leftHandMatch&quot;,&quot;value&quot;:&quot;前方一致&quot;},{&quot;key&quot;:&quot;partialMatch&quot;,&quot;value&quot;:&quot;部分一致&quot;},{&quot;key&quot;:&quot;rightHandMatch&quot;,&quot;value&quot;:&quot;後方一致&quot;}],&quot;selectedItem&quot;:&quot;leftHandMatch&quot;}"><select class="CoreElement" id="ddlSearchMeishoMatchCondition_core" style="width: 100px;"><option value="leftHandMatch">前方一致</option><option value="partialMatch">部分一致</option><option value="rightHandMatch">後方一致</option></select></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxYubinNo FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSearchYubinNo" style="width: 194px; height: 22px;" data-control-type="TextBoxYubinNo" data-obj="{&quot;fieldName&quot;:&quot;txtSearchYubinNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxYubinNo&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSearchYubinNo_core&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;郵便番号&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtSearchYubinNo_labelL"><span>郵便番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtSearchYubinNo_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSearchJusho" style="width: 804px; height: 22px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSearchJusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;700px&quot;,&quot;selectControlID&quot;:&quot;txtSearchJusho_core&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;住所&quot;,&quot;labelLWidth&quot;:&quot;97px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSearchJusho_labelL" style="width: 97px;"><span>住所</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtSearchJusho_core" style="width: 700px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var URD;
+(function (URD) {
+    var JigyoshaSearchConditionCommon_Design = (function (_super) {
+        __extends(JigyoshaSearchConditionCommon_Design, _super);
+        function JigyoshaSearchConditionCommon_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, JigyoshaSearchConditionCommon_Design.myLayout, fieldName);
+        }
+        JigyoshaSearchConditionCommon_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        JigyoshaSearchConditionCommon_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        JigyoshaSearchConditionCommon_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "JigyoshaSearchConditionCommon",
+                    "items": [
+                        {
+                            "fieldName": "txtSearchJigyoshaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSearchJigyoshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "事業者番号",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": 1
+                        },
+                        {
+                            "fieldName": "txtSearchJigyoshaKaishiDateRange",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSearchJigyoshaKaishiDateRange_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "labelLText": "有効開始日",
+                            "labelRText": "",
+                            "labelLWidth": "5.5em",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": "",
+                            "fromSelectControlID": "txtSearchJigyoshaKaishiDateRangeFrom",
+                            "toSelectControlID": "txtSearchJigyoshaKaishiDateRangeTo",
+                            "autoRangeTo": true
+                        },
+                        {
+                            "fieldName": "txtSearchJigyoshaMeiOrKanaMeisho",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "L",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSearchJigyoshaMeiOrKanaMeisho_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "事業者名称かカナ名称を入力してください",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "事業者名",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "ddlSearchMeishoMatchCondition",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "100px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlSearchMeishoMatchCondition_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "leftHandMatch",
+                            "dataSource": [
+                                {
+                                    "key": "leftHandMatch",
+                                    "value": "前方一致"
+                                },
+                                {
+                                    "key": "partialMatch",
+                                    "value": "部分一致"
+                                },
+                                {
+                                    "key": "rightHandMatch",
+                                    "value": "後方一致"
+                                }
+                            ],
+                            "isBlankLine": false
+                        },
+                        {
+                            "fieldName": "txtSearchYubinNo",
+                            "items": [],
+                            "controlType": "TextBoxYubinNo",
+                            "width": "70px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSearchYubinNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "郵便番号",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtSearchJusho",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "700px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSearchJusho_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "住所",
+                            "labelRText": "",
+                            "labelLWidth": "97px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "JigyoshaSearchConditionCommon",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "検索条件",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "focusPositionID": "createFile",
+                    "canPost": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "commonchilddiv.jigyoshasearchconditioncommon",
+            "businessId": "URD",
+            "controlName": "JigyoshaSearchConditionCommon",
+            "marginTop": "0px",
+            "marginBottom": "0px",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return JigyoshaSearchConditionCommon_Design;
+    })(Uz.CommonChildDiv);
+    URD.JigyoshaSearchConditionCommon_Design = JigyoshaSearchConditionCommon_Design;
+
+    (function (JigyoshaSearchConditionCommon) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        JigyoshaSearchConditionCommon.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "JigyoshaSearchConditionCommon";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + URD.JigyoshaSearchConditionCommon.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.JigyoshaSearchConditionCommon = function () {
+                return new UZA.Panel(this.convFiledName("JigyoshaSearchConditionCommon"));
+            };
+
+            Controls.prototype.txtSearchJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSearchJigyoshaNo"));
+            };
+
+            Controls.prototype.txtSearchJigyoshaKaishiDateRange = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSearchJigyoshaKaishiDateRange"));
+            };
+
+            Controls.prototype.txtSearchJigyoshaMeiOrKanaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtSearchJigyoshaMeiOrKanaMeisho"));
+            };
+
+            Controls.prototype.ddlSearchMeishoMatchCondition = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSearchMeishoMatchCondition"));
+            };
+
+            Controls.prototype.txtSearchYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtSearchYubinNo"));
+            };
+
+            Controls.prototype.txtSearchJusho = function () {
+                return new UZA.TextBox(this.convFiledName("txtSearchJusho"));
+            };
+            return Controls;
+        })();
+        JigyoshaSearchConditionCommon.Controls = Controls;
+    })(URD.JigyoshaSearchConditionCommon || (URD.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = URD.JigyoshaSearchConditionCommon;
+})(URD || (URD = {}));
+
+var URD;
+(function (URD) {
+    (function (JigyoshaSearchConditionCommon) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new JigyoshaSearchConditionCommon.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        JigyoshaSearchConditionCommon.ModeController = ModeController;
+    })(URD.JigyoshaSearchConditionCommon || (URD.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = URD.JigyoshaSearchConditionCommon;
+})(URD || (URD = {}));
+
+var URD;
+(function (URD) {
+    (function (JigyoshaSearchConditionCommon) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new JigyoshaSearchConditionCommon.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        JigyoshaSearchConditionCommon.PublicProperties = PublicProperties;
+    })(URD.JigyoshaSearchConditionCommon || (URD.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = URD.JigyoshaSearchConditionCommon;
+})(URD || (URD = {}));
+</script>
+    
+   <script class="RamlConvert" type="text/javascript">
+var DBX= DBX? DBX: {};
+DBX['JIGYOSHASEARCHCONDITIONCOMMON'] = {};
+</script><script>var DBX;
+(function (DBX) {
+    (function (JigyoshaSearchConditionCommon) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        JigyoshaSearchConditionCommon.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "JigyoshaSearchConditionCommon";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBX.JigyoshaSearchConditionCommon.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBX.JigyoshaSearchConditionCommon.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.JigyoshaSearchConditionCommon = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtSearchJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSearchJigyoshaNo"));
+            };
+
+            Controls.prototype.txtSearchJigyoshaKaishiDateRange = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtSearchJigyoshaKaishiDateRange"));
+            };
+
+            Controls.prototype.txtSearchJigyoshaMeiOrKanaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtSearchJigyoshaMeiOrKanaMeisho"));
+            };
+
+            Controls.prototype.ddlSearchMeishoMatchCondition = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSearchMeishoMatchCondition"));
+            };
+
+            Controls.prototype.txtSearchYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtSearchYubinNo"));
+            };
+
+            Controls.prototype.txtSearchJusho = function () {
+                return new UZA.TextBox(this.convFiledName("txtSearchJusho"));
+            };
+            return Controls;
+        })();
+        JigyoshaSearchConditionCommon.Controls = Controls;
+    })(DBX.JigyoshaSearchConditionCommon || (DBX.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = DBX.JigyoshaSearchConditionCommon;
+})(DBX || (DBX = {}));
+var DBX;
+(function (DBX) {
+    (function (JigyoshaSearchConditionCommon) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new JigyoshaSearchConditionCommon.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new JigyoshaSearchConditionCommon.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        JigyoshaSearchConditionCommon.ModeController = ModeController;
+    })(DBX.JigyoshaSearchConditionCommon || (DBX.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = DBX.JigyoshaSearchConditionCommon;
+})(DBX || (DBX = {}));
+
+var DBX;
+(function (DBX) {
+    (function (JigyoshaSearchConditionCommon) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new JigyoshaSearchConditionCommon.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        JigyoshaSearchConditionCommon.PublicProperties = PublicProperties;
+    })(DBX.JigyoshaSearchConditionCommon || (DBX.JigyoshaSearchConditionCommon = {}));
+    var JigyoshaSearchConditionCommon = DBX.JigyoshaSearchConditionCommon;
+})(DBX || (DBX = {}));
+</script></div>
