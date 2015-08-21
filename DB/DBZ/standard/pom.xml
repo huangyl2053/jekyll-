@@ -22,6 +22,7 @@
         <module>divcontroller</module>
         <module>testhelper</module>
         <module>service</module>
+        <module>batchcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>
