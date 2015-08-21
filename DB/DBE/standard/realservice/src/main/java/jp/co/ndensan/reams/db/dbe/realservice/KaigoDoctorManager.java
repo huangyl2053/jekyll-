@@ -6,22 +6,15 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctorCollection;
-import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
-//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-//import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
-//import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
-//import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

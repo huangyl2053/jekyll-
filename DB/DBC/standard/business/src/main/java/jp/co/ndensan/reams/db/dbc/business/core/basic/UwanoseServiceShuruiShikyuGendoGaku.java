@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,8 +10,9 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 上乗せサービス種類支給限度額を管理するクラスです。
  */
-public class UwanoseServiceShuruiShikyuGendoGaku extends ParentModelBase<UwanoseServiceShuruiShikyuGendoGakuIdentifier, DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity, UwanoseServiceShuruiShikyuGendoGaku> implements Serializable {
+public class UwanoseServiceShuruiShikyuGendoGaku extends ModelBase<UwanoseServiceShuruiShikyuGendoGakuIdentifier, DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity, UwanoseServiceShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity entity;
     private final UwanoseServiceShuruiShikyuGendoGakuIdentifier id;
@@ -59,7 +60,8 @@ public class UwanoseServiceShuruiShikyuGendoGaku extends ParentModelBase<Uwanose
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity}より{@link UwanoseServiceShuruiShikyuGendoGaku}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity}
+     * @param entity
+     * DBより取得した{@link DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity}
      */
     public UwanoseServiceShuruiShikyuGendoGaku(DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("上乗せサービス種類支給限度額"));
@@ -152,27 +154,12 @@ public class UwanoseServiceShuruiShikyuGendoGaku extends ParentModelBase<Uwanose
     /**
      * 上乗せサービス種類支給限度額の識別子{@link UwanoseServiceShuruiShikyuGendoGakuIdentifier}を返します。
      *
-     * @return 上乗せサービス種類支給限度額の識別子{@link UwanoseServiceShuruiShikyuGendoGakuIdentifier}
+     * @return
+     * 上乗せサービス種類支給限度額の識別子{@link UwanoseServiceShuruiShikyuGendoGakuIdentifier}
      */
     @Override
     public UwanoseServiceShuruiShikyuGendoGakuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 上乗せサービス種類支給限度額のみを変更対象とします。<br/>
-     * {@link DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link UwanoseServiceShuruiShikyuGendoGaku}
-     */
-    @Override
-    public UwanoseServiceShuruiShikyuGendoGaku modifiedModel() {
-        DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new UwanoseServiceShuruiShikyuGendoGaku(
-                modifiedEntity, id);
     }
 
     /**
@@ -203,9 +190,15 @@ public class UwanoseServiceShuruiShikyuGendoGaku extends ParentModelBase<Uwanose
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7114UwanoseServiceShuruiShikyuGendoGakuEntity entity;
         private final UwanoseServiceShuruiShikyuGendoGakuIdentifier id;
 

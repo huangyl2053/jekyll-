@@ -98,7 +98,7 @@ public class ShinsakaiKoseiShichosonMasterManagerTest {
         public void updateに成功すると1が返るDbT5051KoseiShichosonMasterEntity() {
             when(dac.save(any(DbT5051KoseiShichosonMasterEntity.class))).thenReturn(1);
             ShinsakaiKoseiShichosonMaster shinsakaiKoseiShichosonMaster = new ShinsakaiKoseiShichosonMaster(DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity());
-            shinsakaiKoseiShichosonMaster.getEntity().initializeMd5();
+            shinsakaiKoseiShichosonMaster.getEntity();
             //編集
             ShinsakaiKoseiShichosonMaster.Builder createBuilderForEdit = shinsakaiKoseiShichosonMaster.createBuilderForEdit();
             createBuilderForEdit.setJusho(new AtenaJusho("住所"));
@@ -110,7 +110,7 @@ public class ShinsakaiKoseiShichosonMasterManagerTest {
         public void deleteに成功すると1が返る() {
             when(dac.save(any(DbT5051KoseiShichosonMasterEntity.class))).thenReturn(1);
             ShinsakaiKoseiShichosonMaster shinsakaiKoseiShichosonMaster = new ShinsakaiKoseiShichosonMaster(DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity());
-            shinsakaiKoseiShichosonMaster.getEntity().initializeMd5();
+            shinsakaiKoseiShichosonMaster.getEntity();
             shinsakaiKoseiShichosonMaster.setDeletedState(true);
             assertThat(sut.save構成市町村(shinsakaiKoseiShichosonMaster), is(1));
         }
@@ -118,7 +118,7 @@ public class ShinsakaiKoseiShichosonMasterManagerTest {
         @Test
         public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
             ShinsakaiKoseiShichosonMaster kaigoKoseiShichosonMaster = new ShinsakaiKoseiShichosonMaster(DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity());
-            kaigoKoseiShichosonMaster.getEntity().initializeMd5();
+            kaigoKoseiShichosonMaster.getEntity();
             sut.save構成市町村(kaigoKoseiShichosonMaster);
         }
     }

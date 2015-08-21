@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiTankiRiyoNissu;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -49,22 +49,22 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleYearMonth 主キー2 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_履歴番号;
+            FlexibleYearMonth 主キー2 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_対象年月;
+            Decimal 主キー3 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_履歴番号;
             sut.get予防給付計画自己作成短期利用日数(null, 主キー2, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー3 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号;
+            Decimal 主キー3 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_履歴番号;
             sut.get予防給付計画自己作成短期利用日数(主キー1, null, 主キー3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
-            HihokenshaNo 主キー1 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_対象年月;
+            HihokenshaNo 主キー1 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleYearMonth 主キー2 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_対象年月;
             sut.get予防給付計画自己作成短期利用日数(主キー1, 主キー2, null);
         }
 
@@ -72,9 +72,9 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class))).thenReturn(null);
-            HihokenshaNo 主キー1 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleYearMonth 主キー2 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_対象年月;
+            Decimal 主キー3 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_履歴番号;
             YoboKeikakuJikoSakuseiTankiRiyoNissu result = sut.get予防給付計画自己作成短期利用日数(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
@@ -82,14 +82,14 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
 
         @Test
         public void 検索結果が存在する場合() {
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(Decimal.class))).thenReturn(entity);
-            HihokenshaNo 主キー1 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleYearMonth 主キー2 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_対象年月;
-            Decimal 主キー3 = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_履歴番号;
+            HihokenshaNo 主キー1 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号;
+            FlexibleYearMonth 主キー2 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_対象年月;
+            Decimal 主キー3 = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_履歴番号;
             YoboKeikakuJikoSakuseiTankiRiyoNissu result = sut.get予防給付計画自己作成短期利用日数(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -107,13 +107,13 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
 
         @Test
         public void 検索結果が存在する場合() {
-            List<DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity> entityList = Arrays.asList(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity());
+            List<DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity> entityList = Arrays.asList(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity());
             when(dac.selectAll()).thenReturn(entityList);
 
             List<YoboKeikakuJikoSakuseiTankiRiyoNissu> result = sut.get予防給付計画自己作成短期利用日数一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -123,7 +123,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void insertに成功するとtrueが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(1);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(true));
@@ -133,7 +133,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void insertに失敗するとfalseが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(0);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(false));
@@ -143,10 +143,10 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void updateに成功するとtrueが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(1);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
-            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set前回迄利用日数(new Decimal(11)).build();
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(true));
         }
@@ -155,10 +155,10 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void updateに失敗するとfalseが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(0);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
-            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.createBuilderForEdit().set前回迄利用日数(new Decimal(11)).build();
 
             assertThat(sut.save予防給付計画自己作成短期利用日数(予防給付計画自己作成短期利用日数), is(false));
         }
@@ -167,7 +167,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void deleteに成功するとtrueが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(1);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
             予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.deleted();
@@ -179,7 +179,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         public void deleteに失敗するとfalseが返る() {
             when(dac.save(any(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class))).thenReturn(0);
 
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
             予防給付計画自己作成短期利用日数 = 予防給付計画自己作成短期利用日数.deleted();
@@ -188,7 +188,7 @@ public class YoboKeikakuJikoSakuseiTankiRiyoNissuManagerTest {
         }
 
         public void 何も変更せずにsaveを呼び出すとfalseが返る() {
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.initializeMd5();
             YoboKeikakuJikoSakuseiTankiRiyoNissu 予防給付計画自己作成短期利用日数 = new YoboKeikakuJikoSakuseiTankiRiyoNissu(entity);
 

@@ -91,7 +91,7 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
             Decimal 主キー3 = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             ShichosonTokubetsuKyufuJigyosha result = sut.get市町村特別給付サービス事業者(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号.value()));
+            assertThat(result.get市町村特別給付用事業者番号().value(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号.value()));
         }
     }
 
@@ -115,7 +115,7 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
             List<ShichosonTokubetsuKyufuJigyosha> result = sut.get市町村特別給付サービス事業者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号.value()));
+            assertThat(result.get(0).get市町村特別給付用事業者番号().value(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_市町村特別給付用事業者番号.value()));
         }
     }
 
@@ -148,7 +148,7 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
             DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.createDbT3065ShichosonTokubetsuKyufuJigyoshaEntity();
             entity.initializeMd5();
             ShichosonTokubetsuKyufuJigyosha 市町村特別給付サービス事業者 = new ShichosonTokubetsuKyufuJigyosha(entity);
-            市町村特別給付サービス事業者 = 市町村特別給付サービス事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村特別給付サービス事業者 = 市町村特別給付サービス事業者.createBuilderForEdit().setサービス事業所住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村特別給付サービス事業者(市町村特別給付サービス事業者), is(true));
         }
@@ -160,7 +160,7 @@ public class ShichosonTokubetsuKyufuJigyoshaManagerTest {
             DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity = DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.createDbT3065ShichosonTokubetsuKyufuJigyoshaEntity();
             entity.initializeMd5();
             ShichosonTokubetsuKyufuJigyosha 市町村特別給付サービス事業者 = new ShichosonTokubetsuKyufuJigyosha(entity);
-            市町村特別給付サービス事業者 = 市町村特別給付サービス事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            市町村特別給付サービス事業者 = 市町村特別給付サービス事業者.createBuilderForEdit().setサービス事業所住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save市町村特別給付サービス事業者(市町村特別給付サービス事業者), is(false));
         }

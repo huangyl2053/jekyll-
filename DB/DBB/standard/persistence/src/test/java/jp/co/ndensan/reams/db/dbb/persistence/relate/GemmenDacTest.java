@@ -5,17 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2004GemmenEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.fuka.GemmenModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2004GemmenDac;
+//import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
+//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.DbT2004GemmenEntity;
+//import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import static jp.co.ndensan.reams.uz.uza.lang.cast._CastDataTypeFactory.DataType.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -44,32 +49,32 @@ public class GemmenDacTest {
 
     public static class select減免ByKeyAndStateTest extends DbzTestDacBase {
 
-        private static final ChoteiNendo 調定年度1 = new ChoteiNendo(DbT2004GemmenEntityGenerator.DEFAULT_調定年度);
-        private static final ChoteiNendo notFound調定年度 = new ChoteiNendo(DbT2004GemmenEntityGenerator.DEFAULT_調定年度.plusYear(1));
-        private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2004GemmenEntityGenerator.DEFAULT_賦課年度);
+        private static final FlexibleYear 調定年度1 = DbT2004GemmenEntityGenerator.DEFAULT_調定年度;
+        private static final FlexibleYear notFound調定年度 = DbT2004GemmenEntityGenerator.DEFAULT_調定年度.plusYear(1);
+        private static final FlexibleYear 賦課年度1 = DbT2004GemmenEntityGenerator.DEFAULT_賦課年度;
         private static final TsuchishoNo 通知書番号1 = DbT2004GemmenEntityGenerator.DEFAULT_通知書番号;
-        private static final RDateTime 処理日時1 = DbT2004GemmenEntityGenerator.DEFAULT_処理日時;
+        private static final Decimal 履歴番号 = DbT2004GemmenEntityGenerator.DEFAULT_履歴番号;
         private static final GemmenChoshuYuyoStateKubun 状態区分1
                 = GemmenChoshuYuyoStateKubun.toValue(DbT2004GemmenEntityGenerator.DEFAULT_減免状態区分);
 
         @Before
         public void setUp() {
-            TestSupport.insertDbT2004(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1);
+            TestSupport.insertDbT2004(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の賦課年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select減免ByKeyAndState(null, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1);
+            sut.select減免ByKeyAndState(null, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の調定年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select減免ByKeyAndState(調定年度1, null, 通知書番号1, 処理日時1, 状態区分1);
+            sut.select減免ByKeyAndState(調定年度1, null, 通知書番号1, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の通知書番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select減免ByKeyAndState(調定年度1, 賦課年度1, null, 処理日時1, 状態区分1);
+            sut.select減免ByKeyAndState(調定年度1, 賦課年度1, null, 履歴番号, 状態区分1);
         }
 
         @Test(expected = NullPointerException.class)
@@ -79,20 +84,20 @@ public class GemmenDacTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数の状態区分にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select減免ByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, null);
+            sut.select減免ByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, null);
         }
 
         @Test
         public void データが見つかる検索条件を渡すと_減免モデル返す() {
-            assertThat(sut.select減免ByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1)
-                    .get().get調定年度(), is(調定年度1));
+            assertThat(sut.select減免ByKeyAndState(調定年度1, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1)
+                    .get().getChoteiNendo(), is(調定年度1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
-            Optional<GemmenModel> empty = Optional.empty();
+            Optional<DbT2004GemmenEntity> empty = Optional.empty();
             assertThat(sut.select減免ByKeyAndState(
-                    notFound調定年度, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1), is(empty));
+                    notFound調定年度, 賦課年度1, 通知書番号1, 履歴番号, 状態区分1), is(empty));
         }
     }
 
@@ -100,17 +105,17 @@ public class GemmenDacTest {
     private static class TestSupport {
 
         public static void insertDbT2004(
-                ChoteiNendo 調定年度, FukaNendo 賦課年度,
-                TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分1) {
+                FlexibleYear 調定年度, FlexibleYear 賦課年度,
+                TsuchishoNo 通知書番号, Decimal 履歴番号, GemmenChoshuYuyoStateKubun 状態区分1) {
 
             DbT2004GemmenEntity entity = DbT2004GemmenEntityGenerator.createDbT2004GemmenEntity();
-            entity.setChoteiNendo(調定年度.value());
-            entity.setFukaNendo(賦課年度.value());
+            entity.setChoteiNendo(調定年度);
+            entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
-            entity.setShoriTimestamp(処理日時);
+            entity.setRirekiNo(履歴番号);
             entity.setJotaiKubun(状態区分1.code());
 
-            減免Dac.insert(entity);
+            減免Dac.save(entity);
         }
     }
 }

@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbb.business.viewstate;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * viewStateに渡す賦課照会キーです。<br/>
@@ -24,10 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class FukaShokaiKey implements Serializable {
 
-    private final ChoteiNendo 調定年度;
-    private final FukaNendo 賦課年度;
+    private final FlexibleYear 調定年度;
+    private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final RDateTime 処理日時;
+    private final Decimal 履歴番号;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 賦課期日;
     private final RString 更正月;
@@ -43,7 +43,7 @@ public class FukaShokaiKey implements Serializable {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @param 被保険者番号 被保険者番号
      * @param 賦課期日 賦課期日
      * @param 更正月 更正月
@@ -53,14 +53,14 @@ public class FukaShokaiKey implements Serializable {
      * @param 徴収猶予あり 徴収猶予あり
      * @param 氏名 氏名
      */
-    public FukaShokaiKey(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号,
-            RDateTime 処理日時, HihokenshaNo 被保険者番号, FlexibleDate 賦課期日,
+    public FukaShokaiKey(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号,
+            Decimal 履歴番号, HihokenshaNo 被保険者番号, FlexibleDate 賦課期日,
             RString 更正月, RDateTime 更正日時, SanteiState 算定状態,
             boolean 減免あり, boolean 徴収猶予あり, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
-        this.処理日時 = 処理日時;
+        this.履歴番号 = 履歴番号;
         this.被保険者番号 = 被保険者番号;
         this.賦課期日 = 賦課期日;
         this.更正月 = 更正月;
@@ -76,7 +76,7 @@ public class FukaShokaiKey implements Serializable {
      *
      * @return 調定年度
      */
-    public ChoteiNendo get調定年度() {
+    public FlexibleYear get調定年度() {
         return 調定年度;
     }
 
@@ -85,7 +85,7 @@ public class FukaShokaiKey implements Serializable {
      *
      * @return 賦課年度
      */
-    public FukaNendo get賦課年度() {
+    public FlexibleYear get賦課年度() {
         return 賦課年度;
     }
 
@@ -99,12 +99,12 @@ public class FukaShokaiKey implements Serializable {
     }
 
     /**
-     * 処理日時を返します。
+     * 履歴番号を返します。
      *
-     * @return 処理日時
+     * @return 履歴番号
      */
-    public RDateTime get処理日時() {
-        return 処理日時;
+    public Decimal get履歴番号() {
+        return 履歴番号;
     }
 
     /**

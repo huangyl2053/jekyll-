@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.IKiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KariSantei2 のクラスファイル 
- * 
+ * KariSantei2 のクラスファイル
+ *
  * @author 自動生成
  */
 public class KariSantei2Div extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -64,7 +64,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtChoteiNendoKari2")
     public void setTxtChoteiNendoKari2(TextBoxFlexibleYear txtChoteiNendoKari2) {
-        this.txtChoteiNendoKari2=txtChoteiNendoKari2;
+        this.txtChoteiNendoKari2 = txtChoteiNendoKari2;
     }
 
     @JsonProperty("txtFukaNendoKari2")
@@ -74,7 +74,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtFukaNendoKari2")
     public void setTxtFukaNendoKari2(TextBoxFlexibleYear txtFukaNendoKari2) {
-        this.txtFukaNendoKari2=txtFukaNendoKari2;
+        this.txtFukaNendoKari2 = txtFukaNendoKari2;
     }
 
     @JsonProperty("txtTsuchiNoKari2")
@@ -84,7 +84,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtTsuchiNoKari2")
     public void setTxtTsuchiNoKari2(TextBox txtTsuchiNoKari2) {
-        this.txtTsuchiNoKari2=txtTsuchiNoKari2;
+        this.txtTsuchiNoKari2 = txtTsuchiNoKari2;
     }
 
     @JsonProperty("txtKoseiYMDKari2")
@@ -94,7 +94,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiYMDKari2")
     public void setTxtKoseiYMDKari2(TextBox txtKoseiYMDKari2) {
-        this.txtKoseiYMDKari2=txtKoseiYMDKari2;
+        this.txtKoseiYMDKari2 = txtKoseiYMDKari2;
     }
 
     @JsonProperty("txtKoseiTimeKari2")
@@ -104,7 +104,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiTimeKari2")
     public void setTxtKoseiTimeKari2(TextBoxTime txtKoseiTimeKari2) {
-        this.txtKoseiTimeKari2=txtKoseiTimeKari2;
+        this.txtKoseiTimeKari2 = txtKoseiTimeKari2;
     }
 
     @JsonProperty("txtKoseiYMKari2")
@@ -114,7 +114,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtKoseiYMKari2")
     public void setTxtKoseiYMKari2(TextBox txtKoseiYMKari2) {
-        this.txtKoseiYMKari2=txtKoseiYMKari2;
+        this.txtKoseiYMKari2 = txtKoseiYMKari2;
     }
 
     @JsonProperty("txtShimeiKari2")
@@ -124,7 +124,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("txtShimeiKari2")
     public void setTxtShimeiKari2(TextBox txtShimeiKari2) {
-        this.txtShimeiKari2=txtShimeiKari2;
+        this.txtShimeiKari2 = txtShimeiKari2;
     }
 
     @JsonProperty("tblChoteiJiyuKari2")
@@ -134,7 +134,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("tblChoteiJiyuKari2")
     public void setTblChoteiJiyuKari2(tblChoteiJiyuKari2Div tblChoteiJiyuKari2) {
-        this.tblChoteiJiyuKari2=tblChoteiJiyuKari2;
+        this.tblChoteiJiyuKari2 = tblChoteiJiyuKari2;
     }
 
     @JsonProperty("FukakijunKari2")
@@ -144,7 +144,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("FukakijunKari2")
     public void setFukakijunKari2(FukakijunKari2Div FukakijunKari2) {
-        this.FukakijunKari2=FukakijunKari2;
+        this.FukakijunKari2 = FukakijunKari2;
     }
 
     @JsonProperty("ZennendoKari2")
@@ -154,7 +154,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("ZennendoKari2")
     public void setZennendoKari2(ZennendoKari2Div ZennendoKari2) {
-        this.ZennendoKari2=ZennendoKari2;
+        this.ZennendoKari2 = ZennendoKari2;
     }
 
     @JsonProperty("HokenryoKari2")
@@ -164,7 +164,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("HokenryoKari2")
     public void setHokenryoKari2(HokenryoKari2Div HokenryoKari2) {
-        this.HokenryoKari2=HokenryoKari2;
+        this.HokenryoKari2 = HokenryoKari2;
     }
 
     @JsonProperty("KibetsugakuKari2")
@@ -174,7 +174,7 @@ public class KariSantei2Div extends Panel {
 
     @JsonProperty("KibetsugakuKari2")
     public void setKibetsugakuKari2(KibetsugakuKari2Div KibetsugakuKari2) {
-        this.KibetsugakuKari2=KibetsugakuKari2;
+        this.KibetsugakuKari2 = KibetsugakuKari2;
     }
 
     /*
@@ -211,7 +211,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDKari2(TextBoxDate txtShikakuShutokuYMDKari2) {
+    public void setTxtShikakuShutokuYMDKari2(TextBoxDate txtShikakuShutokuYMDKari2) {
         this.getFukakijunKari2().setTxtShikakuShutokuYMDKari2(txtShikakuShutokuYMDKari2);
     }
 
@@ -221,7 +221,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMDKari2(TextBoxDate txtShikakuSoshitsuYMDKari2) {
+    public void setTxtShikakuSoshitsuYMDKari2(TextBoxDate txtShikakuSoshitsuYMDKari2) {
         this.getFukakijunKari2().setTxtShikakuSoshitsuYMDKari2(txtShikakuSoshitsuYMDKari2);
     }
 
@@ -231,7 +231,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiKari2(TextBox txtHokenryoDankaiKari2) {
+    public void setTxtHokenryoDankaiKari2(TextBox txtHokenryoDankaiKari2) {
         this.getZennendoKari2().setTxtHokenryoDankaiKari2(txtHokenryoDankaiKari2);
     }
 
@@ -241,7 +241,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoRitsuKari2(TextBox txtHokenryoRitsuKari2) {
+    public void setTxtHokenryoRitsuKari2(TextBox txtHokenryoRitsuKari2) {
         this.getZennendoKari2().setTxtHokenryoRitsuKari2(txtHokenryoRitsuKari2);
     }
 
@@ -251,7 +251,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNengakuHokenryoKari2(TextBoxNum txtNengakuHokenryoKari2) {
+    public void setTxtNengakuHokenryoKari2(TextBoxNum txtNengakuHokenryoKari2) {
         this.getZennendoKari2().setTxtNengakuHokenryoKari2(txtNengakuHokenryoKari2);
     }
 
@@ -261,7 +261,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiKeisanjoHokenryoKari2(TextBoxNum txtZanteiKeisanjoHokenryoKari2) {
+    public void setTxtZanteiKeisanjoHokenryoKari2(TextBoxNum txtZanteiKeisanjoHokenryoKari2) {
         this.getHokenryoKari2().setTxtZanteiKeisanjoHokenryoKari2(txtZanteiKeisanjoHokenryoKari2);
     }
 
@@ -271,7 +271,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuKari2(TextBoxNum txtGemmenGakuKari2) {
+    public void setTxtGemmenGakuKari2(TextBoxNum txtGemmenGakuKari2) {
         this.getHokenryoKari2().setTxtGemmenGakuKari2(txtGemmenGakuKari2);
     }
 
@@ -281,7 +281,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiGoukeiGakuKari2(TextBoxNum txtZanteiGoukeiGakuKari2) {
+    public void setTxtZanteiGoukeiGakuKari2(TextBoxNum txtZanteiGoukeiGakuKari2) {
         this.getHokenryoKari2().setTxtZanteiGoukeiGakuKari2(txtZanteiGoukeiGakuKari2);
     }
 
@@ -291,7 +291,7 @@ public class KariSantei2Div extends Panel {
     }
 
     @JsonIgnore
-    public void  setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2Div zanteihokenryoHeightKari2) {
+    public void setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2Div zanteihokenryoHeightKari2) {
         this.getHokenryoKari2().setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2);
     }
 

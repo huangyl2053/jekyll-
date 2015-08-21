@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryoKikanEntity;
+import jp.co.ndensan.reams.ur.urz.entity.db.basic.iryokikan.UrT0516IryoKikanEntity;
 
 /**
  * 業務共通の医療機関、講座、介護業務独自の主治医医療機関の情報をまとめたrelateエンティティです。

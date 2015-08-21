@@ -123,7 +123,7 @@ public class KogakuKyufuTaishoshaMeisaiManagerTest {
             Decimal 主キー5 = DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
             KogakuKyufuTaishoshaMeisai result = sut.get高額介護サービス費給付対象者明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -147,7 +147,7 @@ public class KogakuKyufuTaishoshaMeisaiManagerTest {
             List<KogakuKyufuTaishoshaMeisai> result = sut.get高額介護サービス費給付対象者明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class KogakuKyufuTaishoshaMeisaiManagerTest {
             DbT3054KogakuKyufuTaishoshaMeisaiEntity entity = DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.createDbT3054KogakuKyufuTaishoshaMeisaiEntity();
             entity.initializeMd5();
             KogakuKyufuTaishoshaMeisai 高額介護サービス費給付対象者明細 = new KogakuKyufuTaishoshaMeisai(entity);
-            高額介護サービス費給付対象者明細 = 高額介護サービス費給付対象者明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費給付対象者明細 = 高額介護サービス費給付対象者明細.createBuilderForEdit().set高額給付根拠(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費給付対象者明細(高額介護サービス費給付対象者明細), is(true));
         }
@@ -192,7 +192,7 @@ public class KogakuKyufuTaishoshaMeisaiManagerTest {
             DbT3054KogakuKyufuTaishoshaMeisaiEntity entity = DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.createDbT3054KogakuKyufuTaishoshaMeisaiEntity();
             entity.initializeMd5();
             KogakuKyufuTaishoshaMeisai 高額介護サービス費給付対象者明細 = new KogakuKyufuTaishoshaMeisai(entity);
-            高額介護サービス費給付対象者明細 = 高額介護サービス費給付対象者明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費給付対象者明細 = 高額介護サービス費給付対象者明細.createBuilderForEdit().set高額給付根拠(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費給付対象者明細(高額介護サービス費給付対象者明細), is(false));
         }

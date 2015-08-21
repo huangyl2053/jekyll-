@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 一次判定結果の、詳細な情報を表すクラスです。<br/>
@@ -255,8 +255,7 @@ public final class IchijiHanteiResultDetail {
         private IchijiHanteiResultSofu 一次判定結果送付状況;
 
         /**
-         * 一次判定結果詳細のBuilderインスタンスを生成します。
-         * 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
+         * 一次判定結果詳細のBuilderインスタンスを生成します。 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
          */
         private Builder() {
             this.運動能力未低下認知症高齢者指標

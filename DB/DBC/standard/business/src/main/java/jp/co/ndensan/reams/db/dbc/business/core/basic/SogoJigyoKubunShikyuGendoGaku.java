@@ -8,9 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7117SogoJigyoKubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額を管理するクラスです。
  */
-public class SogoJigyoKubunShikyuGendoGaku extends ParentModelBase<SogoJigyoKubunShikyuGendoGakuIdentifier, DbT7117SogoJigyoKubunShikyuGendoGakuEntity, SogoJigyoKubunShikyuGendoGaku> implements Serializable {
+public class SogoJigyoKubunShikyuGendoGaku extends ModelBase<SogoJigyoKubunShikyuGendoGakuIdentifier, DbT7117SogoJigyoKubunShikyuGendoGakuEntity, SogoJigyoKubunShikyuGendoGaku> implements Serializable {
 
     private final DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity;
     private final SogoJigyoKubunShikyuGendoGakuIdentifier id;
@@ -136,27 +137,12 @@ public class SogoJigyoKubunShikyuGendoGaku extends ParentModelBase<SogoJigyoKubu
     /**
      * 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}を返します。
      *
-     * @return 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}
+     * @return
+     * 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}
      */
     @Override
     public SogoJigyoKubunShikyuGendoGakuIdentifier identifier() {
         return this.id;
-    }
-
-    /**
-     * 介護予防・日常生活支援総合事業区分支給限度額のみを変更対象とします。<br/>
-     * {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
-     */
-    @Override
-    public SogoJigyoKubunShikyuGendoGaku modifiedModel() {
-        DbT7117SogoJigyoKubunShikyuGendoGakuEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new SogoJigyoKubunShikyuGendoGaku(
-                modifiedEntity, id);
     }
 
     /**
@@ -187,9 +173,15 @@ public class SogoJigyoKubunShikyuGendoGaku extends ParentModelBase<SogoJigyoKubu
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity;
         private final SogoJigyoKubunShikyuGendoGakuIdentifier id;
 

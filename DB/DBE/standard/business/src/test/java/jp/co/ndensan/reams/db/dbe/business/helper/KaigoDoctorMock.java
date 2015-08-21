@@ -12,12 +12,8 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-//import jp.co.ndensan.reams.ur.urz.business._Doctor;
-//import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
 import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -76,7 +72,8 @@ public class KaigoDoctorMock {
     }
 
     private static IryoKikan createIryoKikan() {
-        return new IryoKikan(KaigoIryoKikanTestHelper.create医療機関Entity(), null);
+        return null;
+//        return new IryoKikan(KaigoIryoKikanTestHelper.create医療機関Entity(), null);
     }
 
     private static IShujiiIryoKikan createShujiiIryoKikan() {

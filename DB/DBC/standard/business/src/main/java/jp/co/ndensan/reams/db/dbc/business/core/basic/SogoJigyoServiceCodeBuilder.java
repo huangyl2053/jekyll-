@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7122SogoJigyoServiceCodeEntity
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -174,20 +174,14 @@ public class SogoJigyoServiceCodeBuilder {
     }
 
     /**
-     * 利用者負担定率／定額区分を設定します。
+     * 利用者負担定率_定額区分を設定します。
      *
-     * @param 利用者負担定率／定額区分 利用者負担定率／定額区分
+     * @param 利用者負担定率_定額区分 利用者負担定率_定額区分
      * @return {@link SogoJigyoServiceCodeBuilder}
      */
-    public SogoJigyoServiceCodeBuilder set利用者負担定率
-
-    ／定額区分(RString 利用者負担定率
-        ／定額区分) {
-        requireNonNull(利用者負担定率／定額区分
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担定率／定額区分")
-        );
-        entity.setTeiRitsu_TeiGakuKubun(利用者負担定率／定額区分
-        );
+    public SogoJigyoServiceCodeBuilder set利用者負担定率_定額区分(RString 利用者負担定率_定額区分) {
+        requireNonNull(利用者負担定率_定額区分, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担定率_定額区分"));
+        entity.setTeiRitsu_TeiGakuKubun(利用者負担定率_定額区分);
         return this;
     }
 

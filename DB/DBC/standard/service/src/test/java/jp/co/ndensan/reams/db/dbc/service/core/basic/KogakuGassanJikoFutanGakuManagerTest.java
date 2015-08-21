@@ -120,7 +120,7 @@ public class KogakuGassanJikoFutanGakuManagerTest {
             Decimal 主キー5 = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanJikoFutanGaku result = sut.get高額合算自己負担額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -144,7 +144,7 @@ public class KogakuGassanJikoFutanGakuManagerTest {
             List<KogakuGassanJikoFutanGaku> result = sut.get高額合算自己負担額一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3070KogakuGassanJikoFutanGakuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -177,7 +177,7 @@ public class KogakuGassanJikoFutanGakuManagerTest {
             DbT3070KogakuGassanJikoFutanGakuEntity entity = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.createDbT3070KogakuGassanJikoFutanGakuEntity();
             entity.initializeMd5();
             KogakuGassanJikoFutanGaku 高額合算自己負担額 = new KogakuGassanJikoFutanGaku(entity);
-            高額合算自己負担額 = 高額合算自己負担額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算自己負担額 = 高額合算自己負担額.createBuilderForEdit().set保険者名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算自己負担額(高額合算自己負担額), is(true));
         }
@@ -189,7 +189,7 @@ public class KogakuGassanJikoFutanGakuManagerTest {
             DbT3070KogakuGassanJikoFutanGakuEntity entity = DbT3070KogakuGassanJikoFutanGakuEntityGenerator.createDbT3070KogakuGassanJikoFutanGakuEntity();
             entity.initializeMd5();
             KogakuGassanJikoFutanGaku 高額合算自己負担額 = new KogakuGassanJikoFutanGaku(entity);
-            高額合算自己負担額 = 高額合算自己負担額.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算自己負担額 = 高額合算自己負担額.createBuilderForEdit().set保険者名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算自己負担額(高額合算自己負担額), is(false));
         }

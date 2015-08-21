@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3066ShichosonTokubetuKyufuServiceEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3066ShichosonTokubetuKyufuServiceEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class ShichosonTokubetuKyufuServiceBuilderTest extends DbcTestBase {
     private static DbT3066ShichosonTokubetuKyufuServiceEntity ShichosonTokubetuKyufuServiceEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 主キー名1;
+    private static FlexibleDate 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード;
+        主キー名2 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス有効期間開始年月日;
+        主キー名3 = DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ShichosonTokubetuKyufuServiceBuilder sut;
         private static ShichosonTokubetuKyufuService business;
@@ -42,14 +47,15 @@ public class ShichosonTokubetuKyufuServiceBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShichosonTokubetuKyufuServiceEntity = new DbT3066ShichosonTokubetuKyufuServiceEntity();
-            ShichosonTokubetuKyufuServiceEntity.setXXX(主キー名1);
-            ShichosonTokubetuKyufuServiceEntity.setXXX(主キー名2);
+            ShichosonTokubetuKyufuServiceEntity.setServiceCode(主キー名1);
+            ShichosonTokubetuKyufuServiceEntity.setServiceYukoKikanKaishiYMD(主キー名2);
 
             business = new ShichosonTokubetuKyufuService(ShichosonTokubetuKyufuServiceEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の市町村特別給付用サービスコードは_設定した値と同じ市町村特別給付用サービスコードを返す() {
             business = sut.set市町村特別給付用サービスコード(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービスコード).build();
@@ -69,15 +75,15 @@ public class ShichosonTokubetuKyufuServiceBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の市町村特別給付用サービス名（正式名称）は_設定した値と同じ市町村特別給付用サービス名（正式名称）を返す() {
-            business = sut.set市町村特別給付用サービス名（正式名称）(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名（正式名称）).build();
-            assertThat(business.get市町村特別給付用サービス名（正式名称）(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名（正式名称）));
+        public void 戻り値の市町村特別給付用サービス名_正式名称は_設定した値と同じ市町村特別給付用サービス名_正式名称を返す() {
+            business = sut.set市町村特別給付用サービス名_正式名称(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名_正式名称).build();
+            assertThat(business.get市町村特別給付用サービス名_正式名称(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名_正式名称));
         }
 
         @Test
-        public void 戻り値の市町村特別給付用サービス名（略称）は_設定した値と同じ市町村特別給付用サービス名（略称）を返す() {
-            business = sut.set市町村特別給付用サービス名（略称）(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名（略称）).build();
-            assertThat(business.get市町村特別給付用サービス名（略称）(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名（略称）));
+        public void 戻り値の市町村特別給付用サービス名_略称は_設定した値と同じ市町村特別給付用サービス名_略称を返す() {
+            business = sut.set市町村特別給付用サービス名_略称(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名_略称).build();
+            assertThat(business.get市町村特別給付用サービス名_略称(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用サービス名_略称));
         }
 
         @Test
@@ -93,9 +99,9 @@ public class ShichosonTokubetuKyufuServiceBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の市町村特別給付用単位・日数は_設定した値と同じ市町村特別給付用単位・日数を返す() {
-            business = sut.set市町村特別給付用単位・日数(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用単位・日数).build();
-            assertThat(business.get市町村特別給付用単位・日数(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用単位・日数));
+        public void 戻り値の市町村特別給付用単位_日数は_設定した値と同じ市町村特別給付用単位_日数を返す() {
+            business = sut.set市町村特別給付用単位_日数(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用単位_日数).build();
+            assertThat(business.get市町村特別給付用単位_日数(), is(DbT3066ShichosonTokubetuKyufuServiceEntityGenerator.DEFAULT_市町村特別給付用単位_日数));
         }
 
         @Test

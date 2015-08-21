@@ -10,8 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
+//import jp.co.ndensan.reams.db.dbb.model.fuka.KiwarigakuMeisai;
+//import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
@@ -36,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 public class KiwarigakuHandler {
 
     private final KiwarigakuDiv div;
-    private final KiwarigakuFinder finder;
+//    private final KiwarigakuFinder finder;
 
     private enum TableItem {
 
@@ -65,7 +66,7 @@ public class KiwarigakuHandler {
      */
     public KiwarigakuHandler(KiwarigakuDiv div) {
         this.div = div;
-        this.finder = new KiwarigakuFinder();
+//        this.finder = new KiwarigakuFinder();
         this.賦課計算Config = new FukaKeisanConfig();
         this.日付Config = new HizukeConfig();
         this.普徴Config = new FuchoConfig();
@@ -85,10 +86,12 @@ public class KiwarigakuHandler {
      * @param 特徴Config 特徴Config
      * @param 過年度Config 過年度Config
      */
-    KiwarigakuHandler(KiwarigakuDiv div, KiwarigakuFinder finder,
+//    KiwarigakuHandler(KiwarigakuDiv div, KiwarigakuFinder finder,
+//            FukaKeisanConfig 賦課計算Config, HizukeConfig 日付Config, FuchoConfig 普徴Config, TokuchoConfig 特徴Config, KanendoConfig 過年度Config) {
+    KiwarigakuHandler(KiwarigakuDiv div,
             FukaKeisanConfig 賦課計算Config, HizukeConfig 日付Config, FuchoConfig 普徴Config, TokuchoConfig 特徴Config, KanendoConfig 過年度Config) {
         this.div = div;
-        this.finder = finder;
+//        this.finder = finder;
         this.賦課計算Config = 賦課計算Config;
         this.日付Config = 日付Config;
         this.普徴Config = 普徴Config;

@@ -39,6 +39,36 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbeDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbeBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
             <artifactId>DbaBusiness</artifactId>
             <version>${project.version}</version>

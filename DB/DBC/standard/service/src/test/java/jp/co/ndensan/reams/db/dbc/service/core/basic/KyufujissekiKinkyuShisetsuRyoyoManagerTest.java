@@ -204,7 +204,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoManagerTest {
             RString 主キー9 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_緊急時施設療養情報レコード順次番号;
             KyufujissekiKinkyuShisetsuRyoyo result = sut.get給付実績緊急時施設療養(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoManagerTest {
             List<KyufujissekiKinkyuShisetsuRyoyo> result = sut.get給付実績緊急時施設療養一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoManagerTest {
             DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiKinkyuShisetsuRyoyo 給付実績緊急時施設療養 = new KyufujissekiKinkyuShisetsuRyoyo(entity);
-            給付実績緊急時施設療養 = 給付実績緊急時施設療養.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績緊急時施設療養 = 給付実績緊急時施設療養.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績緊急時施設療養(給付実績緊急時施設療養), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoManagerTest {
             DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity entity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
             entity.initializeMd5();
             KyufujissekiKinkyuShisetsuRyoyo 給付実績緊急時施設療養 = new KyufujissekiKinkyuShisetsuRyoyo(entity);
-            給付実績緊急時施設療養 = 給付実績緊急時施設療養.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績緊急時施設療養 = 給付実績緊急時施設療養.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績緊急時施設療養(給付実績緊急時施設療養), is(false));
         }

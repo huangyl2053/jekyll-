@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctorCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 
 /**
  * 介護医師情報を管理するインターフェースです。

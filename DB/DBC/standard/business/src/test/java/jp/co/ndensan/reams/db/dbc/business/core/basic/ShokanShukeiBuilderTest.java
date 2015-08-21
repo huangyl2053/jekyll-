@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3053ShokanShukeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,27 @@ public class ShokanShukeiBuilderTest extends DbcTestBase {
     private static DbT3053ShokanShukeiEntity ShokanShukeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static RString 主キー名6;
+    private static Decimal 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_事業者番号;
+        主キー名5 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_様式番号;
+        主キー名6 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_順次番号;
+        主キー名7 = DbT3053ShokanShukeiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ShokanShukeiBuilder sut;
         private static ShokanShukei business;
@@ -42,14 +57,15 @@ public class ShokanShukeiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShukeiEntity = new DbT3053ShokanShukeiEntity();
-            ShokanShukeiEntity.setXXX(主キー名1);
-            ShokanShukeiEntity.setXXX(主キー名2);
+            ShokanShukeiEntity.setHiHokenshaNo(主キー名1);
+            ShokanShukeiEntity.setServiceTeikyoYM(主キー名2);
 
             business = new ShokanShukei(ShokanShukeiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3053ShokanShukeiEntityGenerator.DEFAULT_被保険者番号).build();
@@ -195,9 +211,9 @@ public class ShokanShukeiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の点数／金額は_設定した値と同じ点数／金額を返す() {
-            business = sut.set点数／金額(DbT3053ShokanShukeiEntityGenerator.DEFAULT_点数／金額).build();
-            assertThat(business.get点数／金額(), is(DbT3053ShokanShukeiEntityGenerator.DEFAULT_点数／金額));
+        public void 戻り値の点数_金額は_設定した値と同じ点数_金額を返す() {
+            business = sut.set点数_金額(DbT3053ShokanShukeiEntityGenerator.DEFAULT_点数_金額).build();
+            assertThat(business.get点数_金額(), is(DbT3053ShokanShukeiEntityGenerator.DEFAULT_点数_金額));
         }
 
         @Test
@@ -237,9 +253,9 @@ public class ShokanShukeiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の購入・改修履歴等は_設定した値と同じ購入・改修履歴等を返す() {
-            business = sut.set購入・改修履歴等(DbT3053ShokanShukeiEntityGenerator.DEFAULT_購入・改修履歴等).build();
-            assertThat(business.get購入・改修履歴等(), is(DbT3053ShokanShukeiEntityGenerator.DEFAULT_購入・改修履歴等));
+        public void 戻り値の購入_改修履歴等は_設定した値と同じ購入_改修履歴等を返す() {
+            business = sut.set購入_改修履歴等(DbT3053ShokanShukeiEntityGenerator.DEFAULT_購入_改修履歴等).build();
+            assertThat(business.get購入_改修履歴等(), is(DbT3053ShokanShukeiEntityGenerator.DEFAULT_購入_改修履歴等));
         }
 
     }

@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,23 @@ public class JigyoKogakuKyufuTaishoshaMeisaiBuilderTest extends DbcTestBase {
     private static DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity JigyoKogakuKyufuTaishoshaMeisaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static JigyoshaNo 主キー名3;
+    private static ServiceShuruiCode 主キー名4;
+    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_事業者番号;
+        主キー名4 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス種類コード;
+        主キー名5 = DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static JigyoKogakuKyufuTaishoshaMeisaiBuilder sut;
         private static JigyoKogakuKyufuTaishoshaMeisai business;
@@ -42,14 +53,15 @@ public class JigyoKogakuKyufuTaishoshaMeisaiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             JigyoKogakuKyufuTaishoshaMeisaiEntity = new DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity();
-            JigyoKogakuKyufuTaishoshaMeisaiEntity.setXXX(主キー名1);
-            JigyoKogakuKyufuTaishoshaMeisaiEntity.setXXX(主キー名2);
+            JigyoKogakuKyufuTaishoshaMeisaiEntity.setHihokenshaNo(主キー名1);
+            JigyoKogakuKyufuTaishoshaMeisaiEntity.setServiceTeikyoYM(主キー名2);
 
             business = new JigyoKogakuKyufuTaishoshaMeisai(JigyoKogakuKyufuTaishoshaMeisaiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_被保険者番号).build();

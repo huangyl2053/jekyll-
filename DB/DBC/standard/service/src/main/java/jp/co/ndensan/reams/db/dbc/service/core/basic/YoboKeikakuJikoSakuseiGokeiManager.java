@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiGokei;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -69,7 +70,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
         requireNonNull(サービス提供事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
 
-        DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
+        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
                 被保険者番号,
                 対象年月,
                 履歴番号,
@@ -92,7 +93,7 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
     public List<YoboKeikakuJikoSakuseiGokei> get予防給付計画自己作成合計一覧() {
         List<YoboKeikakuJikoSakuseiGokei> businessList = new ArrayList<>();
 
-        for (DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
+        for (DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
             entity.initializeMd5();
             businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
         }

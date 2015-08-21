@@ -4,9 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +28,21 @@ public class KyufuhiKashitsukekinShokanKigenHenkoBuilderTest extends DbcTestBase
     private static DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity KyufuhiKashitsukekinShokanKigenHenkoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 被保険者番号;
+    private static RString 貸付管理番号;
+    private static FlexibleDate 償還期限延長受付年月日;
+    private static Decimal 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_主キー名2;
+        被保険者番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号;
+        貸付管理番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_貸付管理番号;
+        償還期限延長受付年月日 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限延長受付年月日;
+        履歴番号 = DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufuhiKashitsukekinShokanKigenHenkoBuilder sut;
         private static KyufuhiKashitsukekinShokanKigenHenko business;
@@ -42,14 +50,17 @@ public class KyufuhiKashitsukekinShokanKigenHenkoBuilderTest extends DbcTestBase
         @Before
         public void setUp() {
             KyufuhiKashitsukekinShokanKigenHenkoEntity = new DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity();
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名1);
-            KyufuhiKashitsukekinShokanKigenHenkoEntity.setXXX(主キー名2);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setHihokenshaNo(被保険者番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setKashitsukeKanriNo(貸付管理番号);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setShokanKigenEnchoUketsukeYMD(償還期限延長受付年月日);
+            KyufuhiKashitsukekinShokanKigenHenkoEntity.setRirekiNo(履歴番号);
 
             business = new KyufuhiKashitsukekinShokanKigenHenko(KyufuhiKashitsukekinShokanKigenHenkoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_被保険者番号).build();
@@ -141,9 +152,9 @@ public class KyufuhiKashitsukekinShokanKigenHenkoBuilderTest extends DbcTestBase
         }
 
         @Test
-        public void 戻り値の償還期限変更承認・不承認区分は_設定した値と同じ償還期限変更承認・不承認区分を返す() {
-            business = sut.set償還期限変更承認・不承認区分(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限変更承認・不承認区分).build();
-            assertThat(business.get償還期限変更承認・不承認区分(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限変更承認・不承認区分));
+        public void 戻り値の償還期限変更承認_不承認区分は_設定した値と同じ償還期限変更承認_不承認区分を返す() {
+            business = sut.set償還期限変更承認_不承認区分(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限変更承認_不承認区分).build();
+            assertThat(business.get償還期限変更承認_不承認区分(), is(DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntityGenerator.DEFAULT_償還期限変更承認_不承認区分));
         }
 
         @Test

@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3061KagoKetteiMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +27,19 @@ public class KagoKetteiMeisaiBuilderTest extends DbcTestBase {
     private static DbT3061KagoKetteiMeisaiEntity KagoKetteiMeisaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
+    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月;
+        主キー名2 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_保険者区分;
+        主キー名3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KagoKetteiMeisaiBuilder sut;
         private static KagoKetteiMeisai business;
@@ -42,14 +47,15 @@ public class KagoKetteiMeisaiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KagoKetteiMeisaiEntity = new DbT3061KagoKetteiMeisaiEntity();
-            KagoKetteiMeisaiEntity.setXXX(主キー名1);
-            KagoKetteiMeisaiEntity.setXXX(主キー名2);
+            KagoKetteiMeisaiEntity.setToriatsukaiYM(主キー名1);
+            KagoKetteiMeisaiEntity.setHokenshaKubun(主キー名2);
 
             business = new KagoKetteiMeisai(KagoKetteiMeisaiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の取扱年月は_設定した値と同じ取扱年月を返す() {
             business = sut.set取扱年月(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月).build();
@@ -129,9 +135,9 @@ public class KagoKetteiMeisaiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の単位数（特定入所者介護費等）は_設定した値と同じ単位数（特定入所者介護費等）を返す() {
-            business = sut.set単位数（特定入所者介護費等）(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_単位数（特定入所者介護費等）).build();
-            assertThat(business.get単位数（特定入所者介護費等）(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_単位数（特定入所者介護費等）));
+        public void 戻り値の単位数_特定入所者介護費等は_設定した値と同じ単位数_特定入所者介護費等を返す() {
+            business = sut.set単位数_特定入所者介護費等(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_単位数_特定入所者介護費等).build();
+            assertThat(business.get単位数_特定入所者介護費等(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_単位数_特定入所者介護費等));
         }
 
         @Test

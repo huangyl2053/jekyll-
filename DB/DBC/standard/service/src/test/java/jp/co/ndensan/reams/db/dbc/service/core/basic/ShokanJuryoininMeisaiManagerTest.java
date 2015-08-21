@@ -103,7 +103,7 @@ public class ShokanJuryoininMeisaiManagerTest {
             Decimal 主キー4 = DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_履歴番号;
             ShokanJuryoininMeisai result = sut.get償還払支給受領委任払明細(主キー1, 主キー2, 主キー3, 主キー4);
 
-            assertThat(result.get主キー1().value(), is(DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -127,7 +127,7 @@ public class ShokanJuryoininMeisaiManagerTest {
             List<ShokanJuryoininMeisai> result = sut.get償還払支給受領委任払明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -160,7 +160,7 @@ public class ShokanJuryoininMeisaiManagerTest {
             DbT3037ShokanJuryoininMeisaiEntity entity = DbT3037ShokanJuryoininMeisaiEntityGenerator.createDbT3037ShokanJuryoininMeisaiEntity();
             entity.initializeMd5();
             ShokanJuryoininMeisai 償還払支給受領委任払明細 = new ShokanJuryoininMeisai(entity);
-            償還払支給受領委任払明細 = 償還払支給受領委任払明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給受領委任払明細 = 償還払支給受領委任払明細.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給受領委任払明細(償還払支給受領委任払明細), is(true));
         }
@@ -172,7 +172,7 @@ public class ShokanJuryoininMeisaiManagerTest {
             DbT3037ShokanJuryoininMeisaiEntity entity = DbT3037ShokanJuryoininMeisaiEntityGenerator.createDbT3037ShokanJuryoininMeisaiEntity();
             entity.initializeMd5();
             ShokanJuryoininMeisai 償還払支給受領委任払明細 = new ShokanJuryoininMeisai(entity);
-            償還払支給受領委任払明細 = 償還払支給受領委任払明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払支給受領委任払明細 = 償還払支給受領委任払明細.createBuilderForEdit().set整理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払支給受領委任払明細(償還払支給受領委任払明細), is(false));
         }

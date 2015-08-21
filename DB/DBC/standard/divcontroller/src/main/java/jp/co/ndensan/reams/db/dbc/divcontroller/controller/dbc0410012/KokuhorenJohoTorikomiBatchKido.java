@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.helper.KokuhorenJohoTorikomiValidationHelper;
-import jp.co.ndensan.reams.db.dbc.model.relate.KokuhorenJohoTorikomiBatchKidoModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -39,12 +38,10 @@ public class KokuhorenJohoTorikomiBatchKido {
 
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
-        KokuhorenJohoTorikomiBatchKidoModel selectedrow
-                = ViewStateHolder.get(ViewStateHolderName.国保連取込情報, KokuhorenJohoTorikomiBatchKidoModel.class);
-
-        setDisplay(panel, selectedrow);
-        panel.getLblTitle().setText(selectedrow.get処理名());
-
+//        KokuhorenJohoTorikomiBatchKidoModel selectedrow
+//                = ViewStateHolder.get(ViewStateHolderName.国保連取込情報, KokuhorenJohoTorikomiBatchKidoModel.class);
+//        setDisplay(panel, selectedrow);
+//        panel.getLblTitle().setText(selectedrow.get処理名());
         return ResponseData.of(panel).respond();
     }
 
@@ -80,11 +77,10 @@ public class KokuhorenJohoTorikomiBatchKido {
         return responseData;
     }
 
-    private void setDisplay(KokuhorenJohoTorikomiBatchKidoDiv panel, KokuhorenJohoTorikomiBatchKidoModel selectedrow) {
-        setVisible(selectedrow.get交換識別番号(), panel);
-        setDisplayData(selectedrow, panel);
-    }
-
+//    private void setDisplay(KokuhorenJohoTorikomiBatchKidoDiv panel, KokuhorenJohoTorikomiBatchKidoModel selectedrow) {
+//        setVisible(selectedrow.get交換識別番号(), panel);
+//        setDisplayData(selectedrow, panel);
+//    }
     private void setVisible(RString 交換識別番号, KokuhorenJohoTorikomiBatchKidoDiv panel) {
         switch (交換識別番号.toString()) {
             case "151":
@@ -121,58 +117,54 @@ public class KokuhorenJohoTorikomiBatchKido {
         }
     }
 
-    private void setDisplayData(KokuhorenJohoTorikomiBatchKidoModel selectedrow, KokuhorenJohoTorikomiBatchKidoDiv panel) {
-        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
-
-        switch (selectedrow.get交換識別番号().toString()) {
-            case "111":
-                if (SharedFile.searchSharedFile(同月過誤分ファイル名).isEmpty()) {
-                    panel.getPnlShoritaishoJoho().getDogetsuKagobun().setSelectedItems(Collections.EMPTY_LIST);
-                } else {
-                    panel.getPnlShoritaishoJoho().getDogetsuKagobun().setSelectedItems(panel.getPnlShoritaishoJoho().getTsujobun().getDataSource());
-                }
-
-                if (SharedFile.searchSharedFile(通常分ファイル名).isEmpty()) {
-                    panel.getPnlShoritaishoJoho().getTsujobun().setSelectedItems(Collections.EMPTY_LIST);
-                } else {
-                    panel.getPnlShoritaishoJoho().getTsujobun().setSelectedItems(panel.getPnlShoritaishoJoho().getTsujobun().getDataSource());
-                }
-            case "5C3":
-            case "112":
-            case "161":
-            case "171":
-            case "172":
-            case "651":
-            case "652":
-            case "641":
-            case "533":
-            case "114":
-            case "221":
-            case "222":
-            case "331":
-            case "351":
-            case "37J":
-            case "37H":
-            case "386":
-            case "38B":
-            case "38P":
-            case "175":
-            case "162":
+//    private void setDisplayData(KokuhorenJohoTorikomiBatchKidoModel selectedrow, KokuhorenJohoTorikomiBatchKidoDiv panel) {
+//      KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
+//        switch (selectedrow.get交換識別番号().toString()) {
+//            case "111":
+//                if (SharedFile.searchSharedFile(同月過誤分ファイル名).isEmpty()) {
+//                    panel.getPnlShoritaishoJoho().getDogetsuKagobun().setSelectedItems(Collections.EMPTY_LIST);
+//                } else {
+//                    panel.getPnlShoritaishoJoho().getDogetsuKagobun().setSelectedItems(panel.getPnlShoritaishoJoho().getTsujobun().getDataSource());
+//                }
+//                if (SharedFile.searchSharedFile(通常分ファイル名).isEmpty()) {
+//                    panel.getPnlShoritaishoJoho().getTsujobun().setSelectedItems(Collections.EMPTY_LIST);
+//                } else {
+//                    panel.getPnlShoritaishoJoho().getTsujobun().setSelectedItems(panel.getPnlShoritaishoJoho().getTsujobun().getDataSource());
+//                }
+//            case "5C3":
+//            case "112":
+//            case "161":
+//            case "171":
+//            case "172":
+//            case "651":
+//            case "652":
+//            case "641":
+//            case "533":
+//            case "114":
+//            case "221":
+//            case "222":
+//            case "331":
+//            case "351":
+//          case "37J":
+//            case "37H":
+//            case "386":
+//            case "38B":
+//            case "38P":
+//            case "175":
+//            case "162":
 //                panel.getPnlShutsuryokuJun().getCommonShutsuryokuJun().load(SubGyomuCode.DBC介護給付, business.get帳票ID(selectedrow.get交換識別番号()));
-            case "151":
-            case "152":
-            case "632":
-            case "741":
-            case "121":
-            case "122":
-                panel.getPnlChushutsuJoken().getTxtShoriJoken().setValue(new RDate(selectedrow.get処理年月().toString()));
-                panel.getPnlChushutsuJoken().getTxtSaishoriKubun().setValue(business.get再処理フラグ名称(selectedrow.get再処理フラグ()));
-                panel.getPnlChushutsuJoken().getTxtKokanShikibetsuNo().setValue(selectedrow.get交換識別番号());
-
-            default:
-        }
-    }
-
+//            case "151":
+////            case "152":
+//            case "632":
+//            case "741":
+//            case "121":
+//            case "122":
+//                panel.getPnlChushutsuJoken().getTxtShoriJoken().setValue(new RDate(selectedrow.get処理年月().toString()));
+//                panel.getPnlChushutsuJoken().getTxtSaishoriKubun().setValue(business.get再処理フラグ名称(selectedrow.get再処理フラグ()));
+//                panel.getPnlChushutsuJoken().getTxtKokanShikibetsuNo().setValue(selectedrow.get交換識別番号());
+//            default:
+//        }
+//    }
     private RString convertYMDHMS(RDateTime datetime) {
         RStringBuilder rsb = new RStringBuilder();
 

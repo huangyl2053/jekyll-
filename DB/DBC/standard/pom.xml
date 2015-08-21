@@ -14,7 +14,6 @@
     </parent>
     <properties>
         <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
-        <jp.co.ndensan.reams.dbcVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbcVersion>
     </properties>
     <modules>
         <module>entity</module>
@@ -23,6 +22,7 @@
         <module>persistence</module>
         <module>divcontroller</module>
         <module>service</module>
+        <module>batchcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>

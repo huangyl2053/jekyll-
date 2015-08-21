@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 

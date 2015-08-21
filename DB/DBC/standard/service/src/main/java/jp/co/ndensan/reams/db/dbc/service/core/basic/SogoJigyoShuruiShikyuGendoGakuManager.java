@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7118SogoJigyoShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -50,9 +51,7 @@ public class SogoJigyoShuruiShikyuGendoGakuManager {
      * @return SogoJigyoShuruiShikyuGendoGaku
      */
     @Transaction
-    public SogoJigyoShuruiShikyuGendoGaku get介護予防
-
-    ・日常生活支援総合事業種類支給限度額(
+    public SogoJigyoShuruiShikyuGendoGaku get介護予防_日常生活支援総合事業種類支給限度額(
             ServiceShuruiCode サービス種類コード,
             RString 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
@@ -80,9 +79,7 @@ public class SogoJigyoShuruiShikyuGendoGakuManager {
      * @return List<SogoJigyoShuruiShikyuGendoGaku>
      */
     @Transaction
-    public List<SogoJigyoShuruiShikyuGendoGaku> get介護予防
-
-    ・日常生活支援総合事業種類支給限度額一覧() {
+    public List<SogoJigyoShuruiShikyuGendoGaku> get介護予防_日常生活支援総合事業種類支給限度額一覧() {
         List<SogoJigyoShuruiShikyuGendoGaku> businessList = new ArrayList<>();
 
         for (DbT7118SogoJigyoShuruiShikyuGendoGakuEntity entity : dac.selectAll()) {
@@ -96,29 +93,15 @@ public class SogoJigyoShuruiShikyuGendoGakuManager {
     /**
      * 介護予防・日常生活支援総合事業種類支給限度額{@link SogoJigyoShuruiShikyuGendoGaku}を保存します。
      *
-     * @param 介護予防・日常生活支援総合事業種類支給限度額 {@link SogoJigyoShuruiShikyuGendoGaku}
-     * @return 更新件数 更新結果の件数を返します。
+     * @param 介護予防_日常生活支援総合事業種類支給限度額 {@link SogoJigyoShuruiShikyuGendoGaku}
+     * @return 更新結果
      */
     @Transaction
-    public boolean save介護予防
-
-    ・日常生活支援総合事業種類支給限度額(SogoJigyoShuruiShikyuGendoGaku 介護予防
-        ・日常生活支援総合事業種類支給限度額) {
-        requireNonNull(介護予防・日常生活支援総合事業種類支給限度額
-        , UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業種類支給限度額")
-        );
-        if (!介護予防 {
-
-        }
-        ・日常生活支援総合事業種類支給限度額.hasChanged()
-
-            ) {
+    public boolean save介護予防_日常生活支援総合事業種類支給限度額(SogoJigyoShuruiShikyuGendoGaku 介護予防_日常生活支援総合事業種類支給限度額) {
+        requireNonNull(介護予防_日常生活支援総合事業種類支給限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("介護予防・日常生活支援総合事業種類支給限度額"));
+        if (!介護予防_日常生活支援総合事業種類支給限度額.hasChanged()) {
             return false;
         }
-        return 1 == dac.save(介護予防
-        ・日常生活支援総合事業種類支給限度額.toEntity()
-
-
-);
+        return 1 == dac.save(介護予防_日常生活支援総合事業種類支給限度額.toEntity());
     }
 }

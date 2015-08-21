@@ -139,7 +139,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             Decimal 主キー6 = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanJikoFutanGakuMeisai result = sut.get高額合算自己負担額明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -163,7 +163,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             List<KogakuGassanJikoFutanGakuMeisai> result = sut.get高額合算自己負担額明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -196,7 +196,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
             entity.initializeMd5();
             KogakuGassanJikoFutanGakuMeisai 高額合算自己負担額明細 = new KogakuGassanJikoFutanGakuMeisai(entity);
-            高額合算自己負担額明細 = 高額合算自己負担額明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算自己負担額明細 = 高額合算自己負担額明細.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算自己負担額明細(高額合算自己負担額明細), is(true));
         }
@@ -208,7 +208,7 @@ public class KogakuGassanJikoFutanGakuMeisaiManagerTest {
             DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity = DbT3071KogakuGassanJikoFutanGakuMeisaiEntityGenerator.createDbT3071KogakuGassanJikoFutanGakuMeisaiEntity();
             entity.initializeMd5();
             KogakuGassanJikoFutanGakuMeisai 高額合算自己負担額明細 = new KogakuGassanJikoFutanGakuMeisai(entity);
-            高額合算自己負担額明細 = 高額合算自己負担額明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算自己負担額明細 = 高額合算自己負担額明細.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算自己負担額明細(高額合算自己負担額明細), is(false));
         }

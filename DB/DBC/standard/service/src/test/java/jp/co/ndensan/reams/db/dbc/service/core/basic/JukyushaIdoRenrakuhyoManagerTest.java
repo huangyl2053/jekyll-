@@ -139,7 +139,7 @@ public class JukyushaIdoRenrakuhyoManagerTest {
             Decimal 主キー6 = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_履歴番号;
             JukyushaIdoRenrakuhyo result = sut.get受給者異動送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().toString(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get異動年月日().toString(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -163,7 +163,7 @@ public class JukyushaIdoRenrakuhyoManagerTest {
             List<JukyushaIdoRenrakuhyo> result = sut.get受給者異動送付一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toString(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日.toString()));
+            assertThat(result.get(0).get異動年月日().toString(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_異動年月日.toString()));
         }
     }
 
@@ -196,7 +196,7 @@ public class JukyushaIdoRenrakuhyoManagerTest {
             DbT3001JukyushaIdoRenrakuhyoEntity entity = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.createDbT3001JukyushaIdoRenrakuhyoEntity();
             entity.initializeMd5();
             JukyushaIdoRenrakuhyo 受給者異動送付 = new JukyushaIdoRenrakuhyo(entity);
-            受給者異動送付 = 受給者異動送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受給者異動送付 = 受給者異動送付.createBuilderForEdit().setみなし要介護状態区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受給者異動送付(受給者異動送付), is(true));
         }
@@ -208,7 +208,7 @@ public class JukyushaIdoRenrakuhyoManagerTest {
             DbT3001JukyushaIdoRenrakuhyoEntity entity = DbT3001JukyushaIdoRenrakuhyoEntityGenerator.createDbT3001JukyushaIdoRenrakuhyoEntity();
             entity.initializeMd5();
             JukyushaIdoRenrakuhyo 受給者異動送付 = new JukyushaIdoRenrakuhyo(entity);
-            受給者異動送付 = 受給者異動送付.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            受給者異動送付 = 受給者異動送付.createBuilderForEdit().setみなし要介護状態区分コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save受給者異動送付(受給者異動送付), is(false));
         }

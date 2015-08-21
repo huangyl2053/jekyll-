@@ -4,9 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3031KyufuJissekiCareManagementHiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3031KyufuJissekiCareManagementHiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +32,35 @@ public class KyufuJissekiCareManagementHiBuilderTest extends DbcTestBase {
     private static DbT3031KyufuJissekiCareManagementHiEntity KyufuJissekiCareManagementHiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static FlexibleDate 主キー名9;
+    private static RString 主キー名10;
+    private static RString 主キー名11;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_指定_基準該当事業所区分コード;
+        主キー名9 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_居宅サービス計画作成依頼届出年月日;
+        主キー名10 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_通し番号;
+        主キー名11 = DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_サービス計画費明細行番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufuJissekiCareManagementHiBuilder sut;
         private static KyufuJissekiCareManagementHi business;
@@ -42,14 +68,15 @@ public class KyufuJissekiCareManagementHiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufuJissekiCareManagementHiEntity = new DbT3031KyufuJissekiCareManagementHiEntity();
-            KyufuJissekiCareManagementHiEntity.setXXX(主キー名1);
-            KyufuJissekiCareManagementHiEntity.setXXX(主キー名2);
+            KyufuJissekiCareManagementHiEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufuJissekiCareManagementHiEntity.setInputShikibetsuNo(主キー名2);
 
             business = new KyufuJissekiCareManagementHi(KyufuJissekiCareManagementHiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -93,9 +120,9 @@ public class KyufuJissekiCareManagementHiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の指定／基準該当事業所区分コードは_設定した値と同じ指定／基準該当事業所区分コードを返す() {
-            business = sut.set指定／基準該当事業所区分コード(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_指定／基準該当事業所区分コード).build();
-            assertThat(business.get指定／基準該当事業所区分コード(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_指定／基準該当事業所区分コード));
+        public void 戻り値の指定_基準該当事業所区分コードは_設定した値と同じ指定_基準該当事業所区分コードを返す() {
+            business = sut.set指定_基準該当事業所区分コード(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_指定_基準該当事業所区分コード).build();
+            assertThat(business.get指定_基準該当事業所区分コード(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_指定_基準該当事業所区分コード));
         }
 
         @Test
@@ -177,39 +204,39 @@ public class KyufuJissekiCareManagementHiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の後・単位数は_設定した値と同じ後・単位数を返す() {
-            business = sut.set後・単位数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・単位数).build();
-            assertThat(business.get後・単位数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・単位数));
+        public void 戻り値の後_単位数は_設定した値と同じ後_単位数を返す() {
+            business = sut.set後_単位数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_単位数).build();
+            assertThat(business.get後_単位数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_単位数));
         }
 
         @Test
-        public void 戻り値の後・回数は_設定した値と同じ後・回数を返す() {
-            business = sut.set後・回数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・回数).build();
-            assertThat(business.get後・回数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・回数));
+        public void 戻り値の後_回数は_設定した値と同じ後_回数を返す() {
+            business = sut.set後_回数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_回数).build();
+            assertThat(business.get後_回数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_回数));
         }
 
         @Test
-        public void 戻り値の後・サービス単位数は_設定した値と同じ後・サービス単位数を返す() {
-            business = sut.set後・サービス単位数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・サービス単位数).build();
-            assertThat(business.get後・サービス単位数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・サービス単位数));
+        public void 戻り値の後_サービス単位数は_設定した値と同じ後_サービス単位数を返す() {
+            business = sut.set後_サービス単位数(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_サービス単位数).build();
+            assertThat(business.get後_サービス単位数(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_サービス単位数));
         }
 
         @Test
-        public void 戻り値の後・サービス単位数合計は_設定した値と同じ後・サービス単位数合計を返す() {
-            business = sut.set後・サービス単位数合計(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・サービス単位数合計).build();
-            assertThat(business.get後・サービス単位数合計(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・サービス単位数合計));
+        public void 戻り値の後_サービス単位数合計は_設定した値と同じ後_サービス単位数合計を返す() {
+            business = sut.set後_サービス単位数合計(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_サービス単位数合計).build();
+            assertThat(business.get後_サービス単位数合計(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_サービス単位数合計));
         }
 
         @Test
-        public void 戻り値の後・請求金額は_設定した値と同じ後・請求金額を返す() {
-            business = sut.set後・請求金額(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・請求金額).build();
-            assertThat(business.get後・請求金額(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・請求金額));
+        public void 戻り値の後_請求金額は_設定した値と同じ後_請求金額を返す() {
+            business = sut.set後_請求金額(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_請求金額).build();
+            assertThat(business.get後_請求金額(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_請求金額));
         }
 
         @Test
-        public void 戻り値の後・利用者負担額は_設定した値と同じ後・利用者負担額を返す() {
-            business = sut.set後・利用者負担額(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・利用者負担額).build();
-            assertThat(business.get後・利用者負担額(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後・利用者負担額));
+        public void 戻り値の後_利用者負担額は_設定した値と同じ後_利用者負担額を返す() {
+            business = sut.set後_利用者負担額(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_利用者負担額).build();
+            assertThat(business.get後_利用者負担額(), is(DbT3031KyufuJissekiCareManagementHiEntityGenerator.DEFAULT_後_利用者負担額));
         }
 
         @Test

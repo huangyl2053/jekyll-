@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -84,7 +84,7 @@ public class ShujiiIkensho5KomokuTest {
 
         @Test
         public void get認知症高齢者自立度で_記載無しが返る() {
-            assertThat(sut.get認知症高齢者自立度().getMeisho(), is(new RString("記載無し")));
+            assertThat(sut.get認知症高齢者自立度().get認知症高齢者自立度コード().value(), is(new RString("記載無し")));
         }
 
         @Test

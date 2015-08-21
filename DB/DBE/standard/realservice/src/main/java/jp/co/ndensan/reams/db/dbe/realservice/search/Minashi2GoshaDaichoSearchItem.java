@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.search;
 
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchItem;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho.hihokenshaKubunCode;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho.shichosonCode;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho.*;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 
 /**
  * みなし2号被保険者区分者台帳を検索する際に使用するSearchItemです。

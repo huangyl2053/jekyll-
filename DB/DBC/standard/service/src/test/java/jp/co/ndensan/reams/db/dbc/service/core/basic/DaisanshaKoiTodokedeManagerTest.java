@@ -90,7 +90,7 @@ public class DaisanshaKoiTodokedeManagerTest {
             Decimal 主キー3 = DbT3084DaisanshaKoiTodokedeEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiTodokede result = sut.get介護第三者行為届出(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3084DaisanshaKoiTodokedeEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3084DaisanshaKoiTodokedeEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -114,7 +114,7 @@ public class DaisanshaKoiTodokedeManagerTest {
             List<DaisanshaKoiTodokede> result = sut.get介護第三者行為届出一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3084DaisanshaKoiTodokedeEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3084DaisanshaKoiTodokedeEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -147,7 +147,7 @@ public class DaisanshaKoiTodokedeManagerTest {
             DbT3084DaisanshaKoiTodokedeEntity entity = DbT3084DaisanshaKoiTodokedeEntityGenerator.createDbT3084DaisanshaKoiTodokedeEntity();
             entity.initializeMd5();
             DaisanshaKoiTodokede 介護第三者行為届出 = new DaisanshaKoiTodokede(entity);
-            介護第三者行為届出 = 介護第三者行為届出.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為届出 = 介護第三者行為届出.createBuilderForEdit().set使用者住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為届出(介護第三者行為届出), is(true));
         }
@@ -159,7 +159,7 @@ public class DaisanshaKoiTodokedeManagerTest {
             DbT3084DaisanshaKoiTodokedeEntity entity = DbT3084DaisanshaKoiTodokedeEntityGenerator.createDbT3084DaisanshaKoiTodokedeEntity();
             entity.initializeMd5();
             DaisanshaKoiTodokede 介護第三者行為届出 = new DaisanshaKoiTodokede(entity);
-            介護第三者行為届出 = 介護第三者行為届出.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為届出 = 介護第三者行為届出.createBuilderForEdit().set使用者住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為届出(介護第三者行為届出), is(false));
         }

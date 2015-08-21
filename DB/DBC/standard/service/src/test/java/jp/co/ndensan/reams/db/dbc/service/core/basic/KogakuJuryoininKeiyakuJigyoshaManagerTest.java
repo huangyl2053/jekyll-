@@ -91,7 +91,7 @@ public class KogakuJuryoininKeiyakuJigyoshaManagerTest {
             Decimal 主キー3 = DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
             KogakuJuryoininKeiyakuJigyosha result = sut.get高額受領委任契約事業者(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -115,7 +115,7 @@ public class KogakuJuryoininKeiyakuJigyoshaManagerTest {
             List<KogakuJuryoininKeiyakuJigyosha> result = sut.get高額受領委任契約事業者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -148,7 +148,7 @@ public class KogakuJuryoininKeiyakuJigyoshaManagerTest {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity = DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.createDbT3076KogakuJuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             KogakuJuryoininKeiyakuJigyosha 高額受領委任契約事業者 = new KogakuJuryoininKeiyakuJigyosha(entity);
-            高額受領委任契約事業者 = 高額受領委任契約事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額受領委任契約事業者 = 高額受領委任契約事業者.createBuilderForEdit().set不承認理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額受領委任契約事業者(高額受領委任契約事業者), is(true));
         }
@@ -160,7 +160,7 @@ public class KogakuJuryoininKeiyakuJigyoshaManagerTest {
             DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity = DbT3076KogakuJuryoininKeiyakuJigyoshaEntityGenerator.createDbT3076KogakuJuryoininKeiyakuJigyoshaEntity();
             entity.initializeMd5();
             KogakuJuryoininKeiyakuJigyosha 高額受領委任契約事業者 = new KogakuJuryoininKeiyakuJigyosha(entity);
-            高額受領委任契約事業者 = 高額受領委任契約事業者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額受領委任契約事業者 = 高額受領委任契約事業者.createBuilderForEdit().set不承認理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額受領委任契約事業者(高額受領委任契約事業者), is(false));
         }

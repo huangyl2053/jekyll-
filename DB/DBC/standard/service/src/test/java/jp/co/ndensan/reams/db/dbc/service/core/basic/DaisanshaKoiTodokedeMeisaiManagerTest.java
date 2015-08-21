@@ -118,7 +118,7 @@ public class DaisanshaKoiTodokedeMeisaiManagerTest {
             Decimal 主キー5 = DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.DEFAULT_履歴番号;
             DaisanshaKoiTodokedeMeisai result = sut.get介護第三者行為届出詳細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5);
 
-            assertThat(result.get主キー1().value(), is(DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -142,7 +142,7 @@ public class DaisanshaKoiTodokedeMeisaiManagerTest {
             List<DaisanshaKoiTodokedeMeisai> result = sut.get介護第三者行為届出詳細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -175,7 +175,7 @@ public class DaisanshaKoiTodokedeMeisaiManagerTest {
             DbT3085DaisanshaKoiTodokedeMeisaiEntity entity = DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.createDbT3085DaisanshaKoiTodokedeMeisaiEntity();
             entity.initializeMd5();
             DaisanshaKoiTodokedeMeisai 介護第三者行為届出詳細 = new DaisanshaKoiTodokedeMeisai(entity);
-            介護第三者行為届出詳細 = 介護第三者行為届出詳細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為届出詳細 = 介護第三者行為届出詳細.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為届出詳細(介護第三者行為届出詳細), is(true));
         }
@@ -187,7 +187,7 @@ public class DaisanshaKoiTodokedeMeisaiManagerTest {
             DbT3085DaisanshaKoiTodokedeMeisaiEntity entity = DbT3085DaisanshaKoiTodokedeMeisaiEntityGenerator.createDbT3085DaisanshaKoiTodokedeMeisaiEntity();
             entity.initializeMd5();
             DaisanshaKoiTodokedeMeisai 介護第三者行為届出詳細 = new DaisanshaKoiTodokedeMeisai(entity);
-            介護第三者行為届出詳細 = 介護第三者行為届出詳細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            介護第三者行為届出詳細 = 介護第三者行為届出詳細.createBuilderForEdit().set第三者行為届出管理番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save介護第三者行為届出詳細(介護第三者行為届出詳細), is(false));
         }

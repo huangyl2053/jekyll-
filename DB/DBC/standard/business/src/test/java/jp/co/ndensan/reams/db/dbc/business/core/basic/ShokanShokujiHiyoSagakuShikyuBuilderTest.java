@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3044ShokanShokujiHiyoSagakuShikyuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,25 @@ public class ShokanShokujiHiyoSagakuShikyuBuilderTest extends DbcTestBase {
     private static DbT3044ShokanShokujiHiyoSagakuShikyuEntity ShokanShokujiHiyoSagakuShikyuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static RString 主キー名3;
+    private static JigyoshaNo 主キー名4;
+    private static RString 主キー名5;
+    private static Decimal 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名3 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_整理番号;
+        主キー名4 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_事業者番号;
+        主キー名5 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_様式番号;
+        主キー名6 = DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static ShokanShokujiHiyoSagakuShikyuBuilder sut;
         private static ShokanShokujiHiyoSagakuShikyu business;
@@ -42,14 +55,15 @@ public class ShokanShokujiHiyoSagakuShikyuBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             ShokanShokujiHiyoSagakuShikyuEntity = new DbT3044ShokanShokujiHiyoSagakuShikyuEntity();
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名1);
-            ShokanShokujiHiyoSagakuShikyuEntity.setXXX(主キー名2);
+            ShokanShokujiHiyoSagakuShikyuEntity.setHiHokenshaNo(主キー名1);
+            ShokanShokujiHiyoSagakuShikyuEntity.setServiceTeikyoYM(主キー名2);
 
             business = new ShokanShokujiHiyoSagakuShikyu(ShokanShokujiHiyoSagakuShikyuEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_被保険者番号).build();
@@ -99,9 +113,9 @@ public class ShokanShokujiHiyoSagakuShikyuBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の点数／金額は_設定した値と同じ点数／金額を返す() {
-            business = sut.set点数／金額(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_点数／金額).build();
-            assertThat(business.get点数／金額(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_点数／金額));
+        public void 戻り値の点数_金額は_設定した値と同じ点数_金額を返す() {
+            business = sut.set点数_金額(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_点数_金額).build();
+            assertThat(business.get点数_金額(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_点数_金額));
         }
 
         @Test
@@ -111,9 +125,9 @@ public class ShokanShokujiHiyoSagakuShikyuBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の支給・不支給理由は_設定した値と同じ支給・不支給理由を返す() {
-            business = sut.set支給・不支給理由(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_支給・不支給理由).build();
-            assertThat(business.get支給・不支給理由(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_支給・不支給理由));
+        public void 戻り値の支給_不支給理由は_設定した値と同じ支給_不支給理由を返す() {
+            business = sut.set支給_不支給理由(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_支給_不支給理由).build();
+            assertThat(business.get支給_不支給理由(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_支給_不支給理由));
         }
 
     }

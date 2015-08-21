@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 給付実績の明細情報リストを保持するコレクションクラスです。

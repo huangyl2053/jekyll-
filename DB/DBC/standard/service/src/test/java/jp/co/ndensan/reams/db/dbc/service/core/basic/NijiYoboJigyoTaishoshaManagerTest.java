@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3100NijiYoboJigyoTaish
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
@@ -89,7 +90,7 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             Decimal 主キー3 = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_履歴番号;
             NijiYoboJigyoTaishosha result = sut.get二次予防事業対象者(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get証記載保険者番号().value(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -113,7 +114,7 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             List<NijiYoboJigyoTaishosha> result = sut.get二次予防事業対象者一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号.value()));
+            assertThat(result.get(0).get証記載保険者番号().value(), is(DbT3100NijiYoboJigyoTaishoshaEntityGenerator.DEFAULT_証記載保険者番号.value()));
         }
     }
 
@@ -146,7 +147,7 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             DbT3100NijiYoboJigyoTaishoshaEntity entity = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.createDbT3100NijiYoboJigyoTaishoshaEntity();
             entity.initializeMd5();
             NijiYoboJigyoTaishosha 二次予防事業対象者 = new NijiYoboJigyoTaishosha(entity);
-            二次予防事業対象者 = 二次予防事業対象者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防事業対象者 = 二次予防事業対象者.createBuilderForEdit().set識別コード(new ShikibetsuCode("100000000")).build();
 
             assertThat(sut.save二次予防事業対象者(二次予防事業対象者), is(true));
         }
@@ -158,7 +159,7 @@ public class NijiYoboJigyoTaishoshaManagerTest {
             DbT3100NijiYoboJigyoTaishoshaEntity entity = DbT3100NijiYoboJigyoTaishoshaEntityGenerator.createDbT3100NijiYoboJigyoTaishoshaEntity();
             entity.initializeMd5();
             NijiYoboJigyoTaishosha 二次予防事業対象者 = new NijiYoboJigyoTaishosha(entity);
-            二次予防事業対象者 = 二次予防事業対象者.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            二次予防事業対象者 = 二次予防事業対象者.createBuilderForEdit().set識別コード(new ShikibetsuCode("100000000")).build();
 
             assertThat(sut.save二次予防事業対象者(二次予防事業対象者), is(false));
         }

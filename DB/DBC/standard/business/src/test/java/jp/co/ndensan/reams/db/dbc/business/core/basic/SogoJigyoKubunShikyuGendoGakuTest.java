@@ -5,8 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7117SogoJigyoKubunShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
     private static DbT7117SogoJigyoKubunShikyuGendoGakuEntity SogoJigyoKubunShikyuGendoGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+        主キー名2 = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+        主キー名3 = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -43,33 +48,34 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoKubunShikyuGendoGaku(null, 主キー名2);
+            sut = new SogoJigyoKubunShikyuGendoGaku(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, null);
+            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT7117SogoJigyoKubunShikyuGendoGakuEntityにセットされている() {
-            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.get要介護状態区分(), is(主キー名1));
+            assertThat(sut.get適用開始年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するSogoJigyoKubunShikyuGendoGakuIdentifierにセットされている() {
-            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new SogoJigyoKubunShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().get要介護状態区分(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -80,8 +86,9 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +101,8 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
 
             sut = new SogoJigyoKubunShikyuGendoGaku(SogoJigyoKubunShikyuGendoGakuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get要介護状態区分(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -106,8 +113,9 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
 
             sut = new SogoJigyoKubunShikyuGendoGaku(SogoJigyoKubunShikyuGendoGakuEntity);
         }
@@ -145,8 +153,9 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
 
             sut = new SogoJigyoKubunShikyuGendoGaku(SogoJigyoKubunShikyuGendoGakuEntity);
         }
@@ -164,8 +173,9 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
 
             sut = new SogoJigyoKubunShikyuGendoGaku(SogoJigyoKubunShikyuGendoGakuEntity);
         }
@@ -184,8 +194,9 @@ public class SogoJigyoKubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             SogoJigyoKubunShikyuGendoGakuEntity = DbT7117SogoJigyoKubunShikyuGendoGakuEntityGenerator.createDbT7117SogoJigyoKubunShikyuGendoGakuEntity();
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            SogoJigyoKubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            SogoJigyoKubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
+            SogoJigyoKubunShikyuGendoGakuEntity.setRirekiNo(主キー名3);
 
         }
 

@@ -4,11 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +29,15 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
     private static DbT3104KokuhorenInterfaceKanriEntity KokuhorenInterfaceKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static FlexibleYearMonth 主キー名1;
+    private static RString 主キー名2;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月;
+        主キー名2 = DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_交換情報識別番号;
+
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,8 +47,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
         }
 
 //TODO 主キー名を置換してください
@@ -63,15 +65,15 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Test
         public void 指定したキーが保持するDbT3104KokuhorenInterfaceKanriEntityにセットされている() {
             sut = new KokuhorenInterfaceKanri(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            assertThat(sut.get処理年月(), is(主キー名1));
+            assertThat(sut.get交換情報識別番号(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKokuhorenInterfaceKanriIdentifierにセットされている() {
             sut = new KokuhorenInterfaceKanri(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get処理年月(), is(主キー名1));
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名2));
         }
     }
 
@@ -82,8 +84,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +98,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
 
             sut = new KokuhorenInterfaceKanri(KokuhorenInterfaceKanriEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get処理年月(), is(主キー名1));
+            assertThat(sut.identifier().get交換情報識別番号(), is(主キー名2));
         }
     }
 
@@ -108,8 +110,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
 
             sut = new KokuhorenInterfaceKanri(KokuhorenInterfaceKanriEntity);
         }
@@ -247,8 +249,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
 
             sut = new KokuhorenInterfaceKanri(KokuhorenInterfaceKanriEntity);
         }
@@ -266,8 +268,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
 
             sut = new KokuhorenInterfaceKanri(KokuhorenInterfaceKanriEntity);
         }
@@ -286,8 +288,8 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         @Before
         public void setUp() {
             KokuhorenInterfaceKanriEntity = DbT3104KokuhorenInterfaceKanriEntityGenerator.createDbT3104KokuhorenInterfaceKanriEntity();
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名1);
-            KokuhorenInterfaceKanriEntity.setXXX(主キー名2);
+            KokuhorenInterfaceKanriEntity.setShoriYM(主キー名1);
+            KokuhorenInterfaceKanriEntity.setKokanShikibetsuNo(主キー名2);
 
         }
 

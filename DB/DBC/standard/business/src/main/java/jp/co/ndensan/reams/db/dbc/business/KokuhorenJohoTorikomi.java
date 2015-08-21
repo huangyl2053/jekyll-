@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbc.model.relate.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -46,34 +45,6 @@ public class KokuhorenJohoTorikomi {
         }
     }
 
-    public RString get当月処理状態(KokuhorenTorikomiJohoModel 国保連取込情報) {
-
-        if (国保連取込情報.get当月処理状態().isEmpty()) {
-            return new RString("未処理");
-        }
-
-        switch (国保連取込情報.get当月処理状態().toString()) {
-            case 処理前:
-                return new RString("未処理");
-            case 起動中:
-                return new RString("起動中");
-            case 処理済:
-                return new RString("処理済");
-            case 処理無:
-                return new RString("処理無");
-            default:
-                return new RString("処理無");
-        }
-    }
-
-    public RString get再処理フラグ(KokuhorenTorikomiJohoModel model) {
-        if (model.get国保連取込管理エンティティ() == null) {
-            return new RString("0");
-        }
-
-        return model.get国保連取込管理エンティティ().getSaiShoriKahiKubun() ? new RString("1") : new RString("0");
-    }
-
     public RString get再処理フラグ名称(RString 再処理フラグコード) {
         if (再処理フラグコード.compareTo("1") == 0) {
             return new RString("再処理");
@@ -110,19 +81,6 @@ public class KokuhorenJohoTorikomi {
         } else {
             return DataGridButtonState.Disabled;
         }
-    }
-
-    public RString get当月処理日時(KokuhorenTorikomiJohoModel model) {
-        if (model.get国保連取込管理エンティティ() == null
-                || model.get当月処理日時() == null
-                || model.get当月処理日時().isEmpty()) {
-            return new RString("-");
-        }
-        RDate rdate = model.get当月処理日時().getDate();
-        String time = model.get当月処理日時().getRDateTime().getTime().toString();
-        RString datetime = new RString(rdate.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString()
-                + " " + time.substring(0, time.length() - 4));
-        return datetime;
     }
 
     public ReportId get帳票ID(RString 交換識別番号) {

@@ -7,11 +7,10 @@ package jp.co.ndensan.reams.db.dbb.business.viewstate;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * viewStateに渡す賦課照会の前履歴取得キーです。<br/>
@@ -21,10 +20,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  */
 public class MaeRirekiKey implements Serializable {
 
-    private final ChoteiNendo 調定年度;
-    private final FukaNendo 賦課年度;
+    private final FlexibleYear 調定年度;
+    private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final RDateTime 処理日時;
+    private final Decimal 履歴番号;
     private final SanteiState 算定状態;
     private final AtenaMeisho 氏名;
 
@@ -34,16 +33,16 @@ public class MaeRirekiKey implements Serializable {
      * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @param 処理日時 処理日時
+     * @param 履歴番号 履歴番号
      * @param 算定状態 算定状態
      * @param 氏名 氏名
      */
-    public MaeRirekiKey(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号,
-            RDateTime 処理日時, SanteiState 算定状態, AtenaMeisho 氏名) {
+    public MaeRirekiKey(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号,
+            Decimal 履歴番号, SanteiState 算定状態, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
-        this.処理日時 = 処理日時;
+        this.履歴番号 = 履歴番号;
         this.算定状態 = 算定状態;
         this.氏名 = 氏名;
     }
@@ -53,7 +52,7 @@ public class MaeRirekiKey implements Serializable {
      *
      * @return 調定年度
      */
-    public ChoteiNendo get調定年度() {
+    public FlexibleYear get調定年度() {
         return 調定年度;
     }
 
@@ -62,7 +61,7 @@ public class MaeRirekiKey implements Serializable {
      *
      * @return 賦課年度
      */
-    public FukaNendo get賦課年度() {
+    public FlexibleYear get賦課年度() {
         return 賦課年度;
     }
 
@@ -76,12 +75,12 @@ public class MaeRirekiKey implements Serializable {
     }
 
     /**
-     * 処理日時を返します。
+     * 履歴番号を返します。
      *
-     * @return 処理日時
+     * @return 履歴番号
      */
-    public RDateTime get処理日時() {
-        return 処理日時;
+    public Decimal get履歴番号() {
+        return 履歴番号;
     }
 
     /**

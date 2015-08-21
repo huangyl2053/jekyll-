@@ -156,7 +156,7 @@ public class ShokanJutakuKaishuManagerTest {
             Decimal 主キー7 = DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_履歴番号;
             ShokanJutakuKaishu result = sut.get償還払請求住宅改修(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
-            assertThat(result.get主キー1().value(), is(DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -180,7 +180,7 @@ public class ShokanJutakuKaishuManagerTest {
             List<ShokanJutakuKaishu> result = sut.get償還払請求住宅改修一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3049ShokanJutakuKaishuEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -213,7 +213,7 @@ public class ShokanJutakuKaishuManagerTest {
             DbT3049ShokanJutakuKaishuEntity entity = DbT3049ShokanJutakuKaishuEntityGenerator.createDbT3049ShokanJutakuKaishuEntity();
             entity.initializeMd5();
             ShokanJutakuKaishu 償還払請求住宅改修 = new ShokanJutakuKaishu(entity);
-            償還払請求住宅改修 = 償還払請求住宅改修.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求住宅改修 = 償還払請求住宅改修.createBuilderForEdit().set住宅改修住宅住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求住宅改修(償還払請求住宅改修), is(true));
         }
@@ -225,7 +225,7 @@ public class ShokanJutakuKaishuManagerTest {
             DbT3049ShokanJutakuKaishuEntity entity = DbT3049ShokanJutakuKaishuEntityGenerator.createDbT3049ShokanJutakuKaishuEntity();
             entity.initializeMd5();
             ShokanJutakuKaishu 償還払請求住宅改修 = new ShokanJutakuKaishu(entity);
-            償還払請求住宅改修 = 償還払請求住宅改修.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            償還払請求住宅改修 = 償還払請求住宅改修.createBuilderForEdit().set住宅改修住宅住所(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還払請求住宅改修(償還払請求住宅改修), is(false));
         }

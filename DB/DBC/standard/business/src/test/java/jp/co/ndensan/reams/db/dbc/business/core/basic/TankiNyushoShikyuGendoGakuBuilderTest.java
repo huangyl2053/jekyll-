@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +26,18 @@ public class TankiNyushoShikyuGendoGakuBuilderTest extends DbcTestBase {
     private static DbT7110TankiNyushoShikyuGendoGakuEntity TankiNyushoShikyuGendoGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+        主キー名2 = DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static TankiNyushoShikyuGendoGakuBuilder sut;
         private static TankiNyushoShikyuGendoGaku business;
@@ -43,8 +45,8 @@ public class TankiNyushoShikyuGendoGakuBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             TankiNyushoShikyuGendoGakuEntity = new DbT7110TankiNyushoShikyuGendoGakuEntity();
-            TankiNyushoShikyuGendoGakuEntity.setXXX(主キー名1);
-            TankiNyushoShikyuGendoGakuEntity.setXXX(主キー名2);
+            TankiNyushoShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            TankiNyushoShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             business = new TankiNyushoShikyuGendoGaku(TankiNyushoShikyuGendoGakuEntity);
 
@@ -78,8 +80,8 @@ public class TankiNyushoShikyuGendoGakuBuilderTest extends DbcTestBase {
 
         @Test
         public void 戻り値の支給限度単位数は_設定した値と同じ支給限度単位数を返す() {
-            business = sut.set支給限度単位数(DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_支給限度単位数).build();
-            assertThat(business.get支給限度単位数(), is(DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_支給限度単位数));
+            business = sut.set支給限度単位数(DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_支給限度日数).build();
+            assertThat(business.get支給限度単位数(), is(DbT7110TankiNyushoShikyuGendoGakuEntityGenerator.DEFAULT_支給限度日数));
         }
 
     }

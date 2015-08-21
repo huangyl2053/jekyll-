@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,31 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilderTest extends DbcTestB
     private static DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_特定診療情報レコード順次番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder sut;
         private static KyufujissekiTokuteiSinryoTokubetsuRyoyo business;
@@ -42,14 +63,15 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilderTest extends DbcTestB
         @Before
         public void setUp() {
             KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity = new DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity();
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
             business = new KyufujissekiTokuteiSinryoTokubetsuRyoyo(KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -123,75 +145,75 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilderTest extends DbcTestB
         }
 
         @Test
-        public void 戻り値の保険・回数は_設定した値と同じ保険・回数を返す() {
-            business = sut.set保険・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・回数).build();
-            assertThat(business.get保険・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・回数));
+        public void 戻り値の保険_回数は_設定した値と同じ保険_回数を返す() {
+            business = sut.set保険_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_回数).build();
+            assertThat(business.get保険_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_回数));
         }
 
         @Test
-        public void 戻り値の保険・ｻｰﾋﾞｽ単位数は_設定した値と同じ保険・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set保険・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get保険・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の保険_ｻｰﾋﾞｽ単位数は_設定した値と同じ保険_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set保険_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get保険_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の保険・合計単位数は_設定した値と同じ保険・合計単位数を返す() {
-            business = sut.set保険・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・合計単位数).build();
-            assertThat(business.get保険・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険・合計単位数));
+        public void 戻り値の保険_合計単位数は_設定した値と同じ保険_合計単位数を返す() {
+            business = sut.set保険_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_合計単位数).build();
+            assertThat(business.get保険_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_保険_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費１・回数は_設定した値と同じ公費１・回数を返す() {
-            business = sut.set公費１・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・回数).build();
-            assertThat(business.get公費１・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・回数));
+        public void 戻り値の公費１_回数は_設定した値と同じ公費１_回数を返す() {
+            business = sut.set公費１_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_回数).build();
+            assertThat(business.get公費１_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_回数));
         }
 
         @Test
-        public void 戻り値の公費１・ｻｰﾋﾞｽ単位数は_設定した値と同じ公費１・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set公費１・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get公費１・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の公費１_ｻｰﾋﾞｽ単位数は_設定した値と同じ公費１_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set公費１_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get公費１_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の公費１・合計単位数は_設定した値と同じ公費１・合計単位数を返す() {
-            business = sut.set公費１・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・合計単位数).build();
-            assertThat(business.get公費１・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１・合計単位数));
+        public void 戻り値の公費１_合計単位数は_設定した値と同じ公費１_合計単位数を返す() {
+            business = sut.set公費１_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_合計単位数).build();
+            assertThat(business.get公費１_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費１_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費２・回数は_設定した値と同じ公費２・回数を返す() {
-            business = sut.set公費２・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・回数).build();
-            assertThat(business.get公費２・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・回数));
+        public void 戻り値の公費２_回数は_設定した値と同じ公費２_回数を返す() {
+            business = sut.set公費２_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_回数).build();
+            assertThat(business.get公費２_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_回数));
         }
 
         @Test
-        public void 戻り値の公費２・ｻｰﾋﾞｽ単位数は_設定した値と同じ公費２・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set公費２・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get公費２・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の公費２_ｻｰﾋﾞｽ単位数は_設定した値と同じ公費２_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set公費２_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get公費２_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の公費２・合計単位数は_設定した値と同じ公費２・合計単位数を返す() {
-            business = sut.set公費２・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・合計単位数).build();
-            assertThat(business.get公費２・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２・合計単位数));
+        public void 戻り値の公費２_合計単位数は_設定した値と同じ公費２_合計単位数を返す() {
+            business = sut.set公費２_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_合計単位数).build();
+            assertThat(business.get公費２_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費２_合計単位数));
         }
 
         @Test
-        public void 戻り値の公費３・回数は_設定した値と同じ公費３・回数を返す() {
-            business = sut.set公費３・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・回数).build();
-            assertThat(business.get公費３・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・回数));
+        public void 戻り値の公費３_回数は_設定した値と同じ公費３_回数を返す() {
+            business = sut.set公費３_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_回数).build();
+            assertThat(business.get公費３_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_回数));
         }
 
         @Test
-        public void 戻り値の公費３・ｻｰﾋﾞｽ単位数は_設定した値と同じ公費３・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set公費３・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get公費３・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の公費３_ｻｰﾋﾞｽ単位数は_設定した値と同じ公費３_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set公費３_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get公費３_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の公費３・合計単位数は_設定した値と同じ公費３・合計単位数を返す() {
-            business = sut.set公費３・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・合計単位数).build();
-            assertThat(business.get公費３・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３・合計単位数));
+        public void 戻り値の公費３_合計単位数は_設定した値と同じ公費３_合計単位数を返す() {
+            business = sut.set公費３_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_合計単位数).build();
+            assertThat(business.get公費３_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_公費３_合計単位数));
         }
 
         @Test
@@ -201,81 +223,81 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilderTest extends DbcTestB
         }
 
         @Test
-        public void 戻り値の後・単位数は_設定した値と同じ後・単位数を返す() {
-            business = sut.set後・単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・単位数).build();
-            assertThat(business.get後・単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・単位数));
+        public void 戻り値の後_単位数は_設定した値と同じ後_単位数を返す() {
+            business = sut.set後_単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_単位数).build();
+            assertThat(business.get後_単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_単位数));
         }
 
         @Test
-        public void 戻り値の後・保険・回数は_設定した値と同じ後・保険・回数を返す() {
-            business = sut.set後・保険・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・回数).build();
-            assertThat(business.get後・保険・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・回数));
+        public void 戻り値の後_保険_回数は_設定した値と同じ後_保険_回数を返す() {
+            business = sut.set後_保険_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_回数).build();
+            assertThat(business.get後_保険_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_回数));
         }
 
         @Test
-        public void 戻り値の後・保険・ｻｰﾋﾞｽ単位数は_設定した値と同じ後・保険・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set後・保険・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get後・保険・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の後_保険_ｻｰﾋﾞｽ単位数は_設定した値と同じ後_保険_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set後_保険_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get後_保険_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の後・保険・合計単位数は_設定した値と同じ後・保険・合計単位数を返す() {
-            business = sut.set後・保険・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・合計単位数).build();
-            assertThat(business.get後・保険・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・保険・合計単位数));
+        public void 戻り値の後_保険_合計単位数は_設定した値と同じ後_保険_合計単位数を返す() {
+            business = sut.set後_保険_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_合計単位数).build();
+            assertThat(business.get後_保険_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_保険_合計単位数));
         }
 
         @Test
-        public void 戻り値の後・公費１・回数は_設定した値と同じ後・公費１・回数を返す() {
-            business = sut.set後・公費１・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・回数).build();
-            assertThat(business.get後・公費１・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・回数));
+        public void 戻り値の後_公費１_回数は_設定した値と同じ後_公費１_回数を返す() {
+            business = sut.set後_公費１_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_回数).build();
+            assertThat(business.get後_公費１_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_回数));
         }
 
         @Test
-        public void 戻り値の後・公費１・ｻｰﾋﾞｽ単位数は_設定した値と同じ後・公費１・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set後・公費１・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get後・公費１・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の後_公費１_ｻｰﾋﾞｽ単位数は_設定した値と同じ後_公費１_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set後_公費１_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get後_公費１_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の後・公費１・合計単位数は_設定した値と同じ後・公費１・合計単位数を返す() {
-            business = sut.set後・公費１・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・合計単位数).build();
-            assertThat(business.get後・公費１・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費１・合計単位数));
+        public void 戻り値の後_公費１_合計単位数は_設定した値と同じ後_公費１_合計単位数を返す() {
+            business = sut.set後_公費１_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_合計単位数).build();
+            assertThat(business.get後_公費１_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費１_合計単位数));
         }
 
         @Test
-        public void 戻り値の後・公費２・回数は_設定した値と同じ後・公費２・回数を返す() {
-            business = sut.set後・公費２・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・回数).build();
-            assertThat(business.get後・公費２・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・回数));
+        public void 戻り値の後_公費２_回数は_設定した値と同じ後_公費２_回数を返す() {
+            business = sut.set後_公費２_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_回数).build();
+            assertThat(business.get後_公費２_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_回数));
         }
 
         @Test
-        public void 戻り値の後・公費２・ｻｰﾋﾞｽ単位数は_設定した値と同じ後・公費２・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set後・公費２・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get後・公費２・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の後_公費２_ｻｰﾋﾞｽ単位数は_設定した値と同じ後_公費２_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set後_公費２_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get後_公費２_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の後・公費２・合計単位数は_設定した値と同じ後・公費２・合計単位数を返す() {
-            business = sut.set後・公費２・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・合計単位数).build();
-            assertThat(business.get後・公費２・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費２・合計単位数));
+        public void 戻り値の後_公費２_合計単位数は_設定した値と同じ後_公費２_合計単位数を返す() {
+            business = sut.set後_公費２_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_合計単位数).build();
+            assertThat(business.get後_公費２_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費２_合計単位数));
         }
 
         @Test
-        public void 戻り値の後・公費３・回数は_設定した値と同じ後・公費３・回数を返す() {
-            business = sut.set後・公費３・回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・回数).build();
-            assertThat(business.get後・公費３・回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・回数));
+        public void 戻り値の後_公費３_回数は_設定した値と同じ後_公費３_回数を返す() {
+            business = sut.set後_公費３_回数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_回数).build();
+            assertThat(business.get後_公費３_回数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_回数));
         }
 
         @Test
-        public void 戻り値の後・公費３・ｻｰﾋﾞｽ単位数は_設定した値と同じ後・公費３・ｻｰﾋﾞｽ単位数を返す() {
-            business = sut.set後・公費３・ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・ｻｰﾋﾞｽ単位数).build();
-            assertThat(business.get後・公費３・ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・ｻｰﾋﾞｽ単位数));
+        public void 戻り値の後_公費３_ｻｰﾋﾞｽ単位数は_設定した値と同じ後_公費３_ｻｰﾋﾞｽ単位数を返す() {
+            business = sut.set後_公費３_ｻｰﾋﾞｽ単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_ｻｰﾋﾞｽ単位数).build();
+            assertThat(business.get後_公費３_ｻｰﾋﾞｽ単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_ｻｰﾋﾞｽ単位数));
         }
 
         @Test
-        public void 戻り値の後・公費３・合計単位数は_設定した値と同じ後・公費３・合計単位数を返す() {
-            business = sut.set後・公費３・合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・合計単位数).build();
-            assertThat(business.get後・公費３・合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後・公費３・合計単位数));
+        public void 戻り値の後_公費３_合計単位数は_設定した値と同じ後_公費３_合計単位数を返す() {
+            business = sut.set後_公費３_合計単位数(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_合計単位数).build();
+            assertThat(business.get後_公費３_合計単位数(), is(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntityGenerator.DEFAULT_後_公費３_合計単位数));
         }
 
         @Test

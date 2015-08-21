@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320003;
 
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.FukaShokaiControlDiv;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -28,7 +28,7 @@ public class TokuchoFukaShokaiControl {
 
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
 
-        div.getTxtChoteiNendo().setDomain(key.get調定年度().value());
+        div.getTxtChoteiNendo().setDomain(key.get調定年度());
         div.getTxtKoseiM().setValue(key.get更正月());
         div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
         div.getTxtKoseiTime().setValue(key.get更正日時().getTime());

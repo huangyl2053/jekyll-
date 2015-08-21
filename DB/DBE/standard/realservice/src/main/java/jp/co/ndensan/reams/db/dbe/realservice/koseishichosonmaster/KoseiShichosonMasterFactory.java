@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.koseishichosonmaster;
 
+import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.realservice.IChosainManager;
+import jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster.IKoseiShichosonMasterManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
 /**

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -94,7 +94,7 @@ public class TankiNyushoShikyuGendoGakuBuilder {
      */
     public TankiNyushoShikyuGendoGakuBuilder set支給限度単位数(Decimal 支給限度単位数) {
         requireNonNull(支給限度単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("支給限度単位数"));
-        entity.setShikyuGendoTaniSu(支給限度単位数);
+        entity.setShikyuGendoNissu(支給限度単位数);
         return this;
     }
 

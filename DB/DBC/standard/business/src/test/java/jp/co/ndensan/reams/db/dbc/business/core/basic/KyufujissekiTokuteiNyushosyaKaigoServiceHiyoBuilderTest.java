@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,31 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilderTest extends Dbc
     private static DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_特定入所者介護サービス費用情報レコード順次番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder sut;
         private static KyufujissekiTokuteiNyushosyaKaigoServiceHiyo business;
@@ -42,14 +63,15 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilderTest extends Dbc
         @Before
         public void setUp() {
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity = new DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity();
-            KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity.setXXX(主キー名1);
-            KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity.setXXX(主キー名2);
+            KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity.setInputShikibetsuNo(主キー名2);
 
             business = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -165,21 +187,21 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilderTest extends Dbc
         }
 
         @Test
-        public void 戻り値の公費１負担額（明細）は_設定した値と同じ公費１負担額（明細）を返す() {
-            business = sut.set公費１負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１負担額（明細）).build();
-            assertThat(business.get公費１負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１負担額（明細）));
+        public void 戻り値の公費１負担額_明細は_設定した値と同じ公費１負担額_明細を返す() {
+            business = sut.set公費１負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１負担額_明細).build();
+            assertThat(business.get公費１負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１負担額_明細));
         }
 
         @Test
-        public void 戻り値の公費２負担額（明細）は_設定した値と同じ公費２負担額（明細）を返す() {
-            business = sut.set公費２負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２負担額（明細）).build();
-            assertThat(business.get公費２負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２負担額（明細）));
+        public void 戻り値の公費２負担額_明細は_設定した値と同じ公費２負担額_明細を返す() {
+            business = sut.set公費２負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２負担額_明細).build();
+            assertThat(business.get公費２負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２負担額_明細));
         }
 
         @Test
-        public void 戻り値の公費３負担額（明細）は_設定した値と同じ公費３負担額（明細）を返す() {
-            business = sut.set公費３負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３負担額（明細）).build();
-            assertThat(business.get公費３負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３負担額（明細）));
+        public void 戻り値の公費３負担額_明細は_設定した値と同じ公費３負担額_明細を返す() {
+            business = sut.set公費３負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３負担額_明細).build();
+            assertThat(business.get公費３負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３負担額_明細));
         }
 
         @Test
@@ -207,195 +229,195 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilderTest extends Dbc
         }
 
         @Test
-        public void 戻り値の公費１・負担額合計は_設定した値と同じ公費１・負担額合計を返す() {
-            business = sut.set公費１・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・負担額合計).build();
-            assertThat(business.get公費１・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・負担額合計));
+        public void 戻り値の公費１_負担額合計は_設定した値と同じ公費１_負担額合計を返す() {
+            business = sut.set公費１_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_負担額合計).build();
+            assertThat(business.get公費１_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_負担額合計));
         }
 
         @Test
-        public void 戻り値の公費１・請求額は_設定した値と同じ公費１・請求額を返す() {
-            business = sut.set公費１・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・請求額).build();
-            assertThat(business.get公費１・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・請求額));
+        public void 戻り値の公費１_請求額は_設定した値と同じ公費１_請求額を返す() {
+            business = sut.set公費１_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_請求額).build();
+            assertThat(business.get公費１_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_請求額));
         }
 
         @Test
-        public void 戻り値の公費１・本人負担月額は_設定した値と同じ公費１・本人負担月額を返す() {
-            business = sut.set公費１・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・本人負担月額).build();
-            assertThat(business.get公費１・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１・本人負担月額));
+        public void 戻り値の公費１_本人負担月額は_設定した値と同じ公費１_本人負担月額を返す() {
+            business = sut.set公費１_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_本人負担月額).build();
+            assertThat(business.get公費１_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費１_本人負担月額));
         }
 
         @Test
-        public void 戻り値の公費２・負担額合計は_設定した値と同じ公費２・負担額合計を返す() {
-            business = sut.set公費２・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・負担額合計).build();
-            assertThat(business.get公費２・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・負担額合計));
+        public void 戻り値の公費２_負担額合計は_設定した値と同じ公費２_負担額合計を返す() {
+            business = sut.set公費２_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_負担額合計).build();
+            assertThat(business.get公費２_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_負担額合計));
         }
 
         @Test
-        public void 戻り値の公費２・請求額は_設定した値と同じ公費２・請求額を返す() {
-            business = sut.set公費２・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・請求額).build();
-            assertThat(business.get公費２・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・請求額));
+        public void 戻り値の公費２_請求額は_設定した値と同じ公費２_請求額を返す() {
+            business = sut.set公費２_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_請求額).build();
+            assertThat(business.get公費２_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_請求額));
         }
 
         @Test
-        public void 戻り値の公費２・本人負担月額は_設定した値と同じ公費２・本人負担月額を返す() {
-            business = sut.set公費２・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・本人負担月額).build();
-            assertThat(business.get公費２・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２・本人負担月額));
+        public void 戻り値の公費２_本人負担月額は_設定した値と同じ公費２_本人負担月額を返す() {
+            business = sut.set公費２_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_本人負担月額).build();
+            assertThat(business.get公費２_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費２_本人負担月額));
         }
 
         @Test
-        public void 戻り値の公費３・負担額合計は_設定した値と同じ公費３・負担額合計を返す() {
-            business = sut.set公費３・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・負担額合計).build();
-            assertThat(business.get公費３・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・負担額合計));
+        public void 戻り値の公費３_負担額合計は_設定した値と同じ公費３_負担額合計を返す() {
+            business = sut.set公費３_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_負担額合計).build();
+            assertThat(business.get公費３_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_負担額合計));
         }
 
         @Test
-        public void 戻り値の公費３・請求額は_設定した値と同じ公費３・請求額を返す() {
-            business = sut.set公費３・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・請求額).build();
-            assertThat(business.get公費３・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・請求額));
+        public void 戻り値の公費３_請求額は_設定した値と同じ公費３_請求額を返す() {
+            business = sut.set公費３_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_請求額).build();
+            assertThat(business.get公費３_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_請求額));
         }
 
         @Test
-        public void 戻り値の公費３・本人負担月額は_設定した値と同じ公費３・本人負担月額を返す() {
-            business = sut.set公費３・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・本人負担月額).build();
-            assertThat(business.get公費３・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３・本人負担月額));
+        public void 戻り値の公費３_本人負担月額は_設定した値と同じ公費３_本人負担月額を返す() {
+            business = sut.set公費３_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_本人負担月額).build();
+            assertThat(business.get公費３_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_公費３_本人負担月額));
         }
 
         @Test
-        public void 戻り値の後・費用単価は_設定した値と同じ後・費用単価を返す() {
-            business = sut.set後・費用単価(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用単価).build();
-            assertThat(business.get後・費用単価(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用単価));
+        public void 戻り値の後_費用単価は_設定した値と同じ後_費用単価を返す() {
+            business = sut.set後_費用単価(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用単価).build();
+            assertThat(business.get後_費用単価(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用単価));
         }
 
         @Test
-        public void 戻り値の後・日数は_設定した値と同じ後・日数を返す() {
-            business = sut.set後・日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・日数).build();
-            assertThat(business.get後・日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・日数));
+        public void 戻り値の後_日数は_設定した値と同じ後_日数を返す() {
+            business = sut.set後_日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_日数).build();
+            assertThat(business.get後_日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_日数));
         }
 
         @Test
-        public void 戻り値の後・公費１日数は_設定した値と同じ後・公費１日数を返す() {
-            business = sut.set後・公費１日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１日数).build();
-            assertThat(business.get後・公費１日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１日数));
+        public void 戻り値の後_公費１日数は_設定した値と同じ後_公費１日数を返す() {
+            business = sut.set後_公費１日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１日数).build();
+            assertThat(business.get後_公費１日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１日数));
         }
 
         @Test
-        public void 戻り値の後・公費２日数は_設定した値と同じ後・公費２日数を返す() {
-            business = sut.set後・公費２日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２日数).build();
-            assertThat(business.get後・公費２日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２日数));
+        public void 戻り値の後_公費２日数は_設定した値と同じ後_公費２日数を返す() {
+            business = sut.set後_公費２日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２日数).build();
+            assertThat(business.get後_公費２日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２日数));
         }
 
         @Test
-        public void 戻り値の後・公費３日数は_設定した値と同じ後・公費３日数を返す() {
-            business = sut.set後・公費３日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３日数).build();
-            assertThat(business.get後・公費３日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３日数));
+        public void 戻り値の後_公費３日数は_設定した値と同じ後_公費３日数を返す() {
+            business = sut.set後_公費３日数(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３日数).build();
+            assertThat(business.get後_公費３日数(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３日数));
         }
 
         @Test
-        public void 戻り値の後・費用額は_設定した値と同じ後・費用額を返す() {
-            business = sut.set後・費用額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用額).build();
-            assertThat(business.get後・費用額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用額));
+        public void 戻り値の後_費用額は_設定した値と同じ後_費用額を返す() {
+            business = sut.set後_費用額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用額).build();
+            assertThat(business.get後_費用額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用額));
         }
 
         @Test
-        public void 戻り値の後・保険分請求額は_設定した値と同じ後・保険分請求額を返す() {
-            business = sut.set後・保険分請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・保険分請求額).build();
-            assertThat(business.get後・保険分請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・保険分請求額));
+        public void 戻り値の後_保険分請求額は_設定した値と同じ後_保険分請求額を返す() {
+            business = sut.set後_保険分請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_保険分請求額).build();
+            assertThat(business.get後_保険分請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_保険分請求額));
         }
 
         @Test
-        public void 戻り値の後・公費１負担額（明細）は_設定した値と同じ後・公費１負担額（明細）を返す() {
-            business = sut.set後・公費１負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１負担額（明細）).build();
-            assertThat(business.get後・公費１負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１負担額（明細）));
+        public void 戻り値の後_公費１負担額_明細は_設定した値と同じ後_公費１負担額_明細を返す() {
+            business = sut.set後_公費１負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１負担額_明細).build();
+            assertThat(business.get後_公費１負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１負担額_明細));
         }
 
         @Test
-        public void 戻り値の後・公費２負担額（明細）は_設定した値と同じ後・公費２負担額（明細）を返す() {
-            business = sut.set後・公費２負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２負担額（明細）).build();
-            assertThat(business.get後・公費２負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２負担額（明細）));
+        public void 戻り値の後_公費２負担額_明細は_設定した値と同じ後_公費２負担額_明細を返す() {
+            business = sut.set後_公費２負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２負担額_明細).build();
+            assertThat(business.get後_公費２負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２負担額_明細));
         }
 
         @Test
-        public void 戻り値の後・公費３負担額（明細）は_設定した値と同じ後・公費３負担額（明細）を返す() {
-            business = sut.set後・公費３負担額（明細）(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３負担額（明細）).build();
-            assertThat(business.get後・公費３負担額（明細）(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３負担額（明細）));
+        public void 戻り値の後_公費３負担額_明細は_設定した値と同じ後_公費３負担額_明細を返す() {
+            business = sut.set後_公費３負担額_明細(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３負担額_明細).build();
+            assertThat(business.get後_公費３負担額_明細(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３負担額_明細));
         }
 
         @Test
-        public void 戻り値の後・利用者負担額は_設定した値と同じ後・利用者負担額を返す() {
-            business = sut.set後・利用者負担額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・利用者負担額).build();
-            assertThat(business.get後・利用者負担額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・利用者負担額));
+        public void 戻り値の後_利用者負担額は_設定した値と同じ後_利用者負担額を返す() {
+            business = sut.set後_利用者負担額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_利用者負担額).build();
+            assertThat(business.get後_利用者負担額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_利用者負担額));
         }
 
         @Test
-        public void 戻り値の後・費用額合計は_設定した値と同じ後・費用額合計を返す() {
-            business = sut.set後・費用額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用額合計).build();
-            assertThat(business.get後・費用額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・費用額合計));
+        public void 戻り値の後_費用額合計は_設定した値と同じ後_費用額合計を返す() {
+            business = sut.set後_費用額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用額合計).build();
+            assertThat(business.get後_費用額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_費用額合計));
         }
 
         @Test
-        public void 戻り値の後・保険分請求額合計は_設定した値と同じ後・保険分請求額合計を返す() {
-            business = sut.set後・保険分請求額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・保険分請求額合計).build();
-            assertThat(business.get後・保険分請求額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・保険分請求額合計));
+        public void 戻り値の後_保険分請求額合計は_設定した値と同じ後_保険分請求額合計を返す() {
+            business = sut.set後_保険分請求額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_保険分請求額合計).build();
+            assertThat(business.get後_保険分請求額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_保険分請求額合計));
         }
 
         @Test
-        public void 戻り値の後・利用者負担額合計は_設定した値と同じ後・利用者負担額合計を返す() {
-            business = sut.set後・利用者負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・利用者負担額合計).build();
-            assertThat(business.get後・利用者負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・利用者負担額合計));
+        public void 戻り値の後_利用者負担額合計は_設定した値と同じ後_利用者負担額合計を返す() {
+            business = sut.set後_利用者負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_利用者負担額合計).build();
+            assertThat(business.get後_利用者負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_利用者負担額合計));
         }
 
         @Test
-        public void 戻り値の後・公費１・負担額合計は_設定した値と同じ後・公費１・負担額合計を返す() {
-            business = sut.set後・公費１・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・負担額合計).build();
-            assertThat(business.get後・公費１・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・負担額合計));
+        public void 戻り値の後_公費１_負担額合計は_設定した値と同じ後_公費１_負担額合計を返す() {
+            business = sut.set後_公費１_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_負担額合計).build();
+            assertThat(business.get後_公費１_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_負担額合計));
         }
 
         @Test
-        public void 戻り値の後・公費１・請求額は_設定した値と同じ後・公費１・請求額を返す() {
-            business = sut.set後・公費１・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・請求額).build();
-            assertThat(business.get後・公費１・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・請求額));
+        public void 戻り値の後_公費１_請求額は_設定した値と同じ後_公費１_請求額を返す() {
+            business = sut.set後_公費１_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_請求額).build();
+            assertThat(business.get後_公費１_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_請求額));
         }
 
         @Test
-        public void 戻り値の後・公費１・本人負担月額は_設定した値と同じ後・公費１・本人負担月額を返す() {
-            business = sut.set後・公費１・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・本人負担月額).build();
-            assertThat(business.get後・公費１・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費１・本人負担月額));
+        public void 戻り値の後_公費１_本人負担月額は_設定した値と同じ後_公費１_本人負担月額を返す() {
+            business = sut.set後_公費１_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_本人負担月額).build();
+            assertThat(business.get後_公費１_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費１_本人負担月額));
         }
 
         @Test
-        public void 戻り値の後・公費２・負担額合計は_設定した値と同じ後・公費２・負担額合計を返す() {
-            business = sut.set後・公費２・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・負担額合計).build();
-            assertThat(business.get後・公費２・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・負担額合計));
+        public void 戻り値の後_公費２_負担額合計は_設定した値と同じ後_公費２_負担額合計を返す() {
+            business = sut.set後_公費２_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_負担額合計).build();
+            assertThat(business.get後_公費２_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_負担額合計));
         }
 
         @Test
-        public void 戻り値の後・公費２・請求額は_設定した値と同じ後・公費２・請求額を返す() {
-            business = sut.set後・公費２・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・請求額).build();
-            assertThat(business.get後・公費２・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・請求額));
+        public void 戻り値の後_公費２_請求額は_設定した値と同じ後_公費２_請求額を返す() {
+            business = sut.set後_公費２_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_請求額).build();
+            assertThat(business.get後_公費２_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_請求額));
         }
 
         @Test
-        public void 戻り値の後・公費２・本人負担月額は_設定した値と同じ後・公費２・本人負担月額を返す() {
-            business = sut.set後・公費２・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・本人負担月額).build();
-            assertThat(business.get後・公費２・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費２・本人負担月額));
+        public void 戻り値の後_公費２_本人負担月額は_設定した値と同じ後_公費２_本人負担月額を返す() {
+            business = sut.set後_公費２_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_本人負担月額).build();
+            assertThat(business.get後_公費２_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費２_本人負担月額));
         }
 
         @Test
-        public void 戻り値の後・公費３・負担額合計は_設定した値と同じ後・公費３・負担額合計を返す() {
-            business = sut.set後・公費３・負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・負担額合計).build();
-            assertThat(business.get後・公費３・負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・負担額合計));
+        public void 戻り値の後_公費３_負担額合計は_設定した値と同じ後_公費３_負担額合計を返す() {
+            business = sut.set後_公費３_負担額合計(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_負担額合計).build();
+            assertThat(business.get後_公費３_負担額合計(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_負担額合計));
         }
 
         @Test
-        public void 戻り値の後・公費３・請求額は_設定した値と同じ後・公費３・請求額を返す() {
-            business = sut.set後・公費３・請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・請求額).build();
-            assertThat(business.get後・公費３・請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・請求額));
+        public void 戻り値の後_公費３_請求額は_設定した値と同じ後_公費３_請求額を返す() {
+            business = sut.set後_公費３_請求額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_請求額).build();
+            assertThat(business.get後_公費３_請求額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_請求額));
         }
 
         @Test
-        public void 戻り値の後・公費３・本人負担月額は_設定した値と同じ後・公費３・本人負担月額を返す() {
-            business = sut.set後・公費３・本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・本人負担月額).build();
-            assertThat(business.get後・公費３・本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後・公費３・本人負担月額));
+        public void 戻り値の後_公費３_本人負担月額は_設定した値と同じ後_公費３_本人負担月額を返す() {
+            business = sut.set後_公費３_本人負担月額(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_本人負担月額).build();
+            assertThat(business.get後_公費３_本人負担月額(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_後_公費３_本人負担月額));
         }
 
         @Test

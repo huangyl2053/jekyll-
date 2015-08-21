@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

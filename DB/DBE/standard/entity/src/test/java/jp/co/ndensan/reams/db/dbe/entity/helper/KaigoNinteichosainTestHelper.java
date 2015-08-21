@@ -5,16 +5,15 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
-//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;

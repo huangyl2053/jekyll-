@@ -5,8 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7109KubunShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7109KubunShikyuGendoGakuEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -26,14 +29,16 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
     private static DbT7109KubunShikyuGendoGakuEntity KubunShikyuGendoGakuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static RString 主キー名1;
+    private static FlexibleYearMonth 主キー名2;
+    private static int 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
+        主キー名2 = DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
+        主キー名3 = DbT7109KubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -43,33 +48,33 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KubunShikyuGendoGaku(null, 主キー名2);
+            sut = new KubunShikyuGendoGaku(null, 主キー名2, 主キー名3);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KubunShikyuGendoGaku(主キー名1, null);
+            sut = new KubunShikyuGendoGaku(主キー名1, null, 主キー名3);
         }
 
         @Test
         public void 指定したキーが保持するDbT7109KubunShikyuGendoGakuEntityにセットされている() {
-            sut = new KubunShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KubunShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.get要介護状態区分(), is(主キー名1));
+            assertThat(sut.get適用開始年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するKubunShikyuGendoGakuIdentifierにセットされている() {
-            sut = new KubunShikyuGendoGaku(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KubunShikyuGendoGaku(主キー名1, 主キー名2, 主キー名3);
+            assertThat(sut.identifier().get要介護状態区分(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -80,8 +85,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
         }
 
         @Test(expected = NullPointerException.class)
@@ -94,8 +99,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
 
             sut = new KubunShikyuGendoGaku(KubunShikyuGendoGakuEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get要介護状態区分(), is(主キー名1));
+            assertThat(sut.identifier().get適用開始年月(), is(主キー名2));
         }
     }
 
@@ -106,8 +111,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new KubunShikyuGendoGaku(KubunShikyuGendoGakuEntity);
         }
@@ -145,8 +150,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new KubunShikyuGendoGaku(KubunShikyuGendoGakuEntity);
         }
@@ -164,8 +169,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
             sut = new KubunShikyuGendoGaku(KubunShikyuGendoGakuEntity);
         }
@@ -184,8 +189,8 @@ public class KubunShikyuGendoGakuTest extends DbcTestBase {
         @Before
         public void setUp() {
             KubunShikyuGendoGakuEntity = DbT7109KubunShikyuGendoGakuEntityGenerator.createDbT7109KubunShikyuGendoGakuEntity();
-            KubunShikyuGendoGakuEntity.setXXX(主キー名1);
-            KubunShikyuGendoGakuEntity.setXXX(主キー名2);
+            KubunShikyuGendoGakuEntity.setYoKaigoJotaiKubun(主キー名1);
+            KubunShikyuGendoGakuEntity.setTekiyoKaishiYM(主キー名2);
 
         }
 

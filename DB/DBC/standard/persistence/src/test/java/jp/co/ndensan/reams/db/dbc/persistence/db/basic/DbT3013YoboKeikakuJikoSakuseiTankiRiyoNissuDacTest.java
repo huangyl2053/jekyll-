@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -196,7 +196,7 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDacTest extends DbcTestD
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
                 Decimal 履歴番号) {
-            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityGenerator.createDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity();
+            DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity = DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntityGenerator.createDbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
             entity.setRirekiNo(履歴番号);

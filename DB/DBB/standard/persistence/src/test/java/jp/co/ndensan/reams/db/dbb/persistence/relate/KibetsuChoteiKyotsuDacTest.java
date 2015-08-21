@@ -2,23 +2,24 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.relate;
+package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbb.persistence.relate.KibetsuChoteiKyotsuDac;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+//import jp.co.ndensan.reams.db.dbz.model.relate.fuka.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2003KibetsuDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -44,10 +45,10 @@ public class KibetsuChoteiKyotsuDacTest {
     private static DbT2003KibetsuDac 介護期別Dac;
     private static UrT0705ChoteiKyotsuDac 調定共通Dac;
 
-    private static final ChoteiNendo 調定年度 = new ChoteiNendo(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度);
-    private static final FukaNendo 賦課年度 = new FukaNendo(DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度);
+    private static final FlexibleYear 調定年度 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
+    private static final FlexibleYear 賦課年度 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
     private static final TsuchishoNo 通知書番号 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
-    private static final RDateTime 処理日時 = DbT2003KibetsuEntityGenerator.DEFAULT_処理日時;
+    private static final Decimal 履歴番号 = DbT2003KibetsuEntityGenerator.DEFAULT_履歴番号;
     private static final RString 徴収方法 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
     private static final int 期 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
     private static final Long 調定ID = UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_調定ID;
@@ -64,24 +65,24 @@ public class KibetsuChoteiKyotsuDacTest {
         @Before
         public void setUp() {
             for (int i = 0; i < 4; i++) {
-                TestSupport.insertDbT2003(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期 + i);
+                TestSupport.insertDbT2003(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期 + i);
                 TestSupport.insertUrT0705(調定ID + i);
             }
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の調定年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通ByKey(null, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期);
+            sut.select介護期別調定共通ByKey(null, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の賦課年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通ByKey(調定年度, null, 通知書番号, 処理日時, 徴収方法, 期);
+            sut.select介護期別調定共通ByKey(調定年度, null, 通知書番号, 履歴番号, 徴収方法, 期);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の通知書番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, null, 処理日時, 徴収方法, 期);
+            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, null, 履歴番号, 徴収方法, 期);
         }
 
         @Test(expected = NullPointerException.class)
@@ -91,17 +92,17 @@ public class KibetsuChoteiKyotsuDacTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数の徴収方法にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, null, 期);
+            sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, null, 期);
         }
 
         @Test
         public void データが見つかる検索条件を渡すと_介護期別調定共通モデル返す() {
-            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期).get介護期別モデル().get期(), is(期));
+            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期).getShoriNo(), is(期));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 99), is(nullValue()));
+            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 99), is(nullValue()));
         }
     }
 
@@ -110,24 +111,24 @@ public class KibetsuChoteiKyotsuDacTest {
         @Before
         public void setUp() {
             for (int i = 0; i < 4; i++) {
-                TestSupport.insertDbT2003(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期 + i);
+                TestSupport.insertDbT2003(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期 + i);
                 TestSupport.insertUrT0705(調定ID + i);
             }
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の調定年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通一覧(null, 賦課年度, 通知書番号, 処理日時);
+            sut.select介護期別調定共通一覧(null, 賦課年度, 通知書番号, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の賦課年度にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通一覧(調定年度, null, 通知書番号, 処理日時);
+            sut.select介護期別調定共通一覧(調定年度, null, 通知書番号, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の通知書番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select介護期別調定共通一覧(調定年度, 賦課年度, null, 処理日時);
+            sut.select介護期別調定共通一覧(調定年度, 賦課年度, null, 履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -137,15 +138,15 @@ public class KibetsuChoteiKyotsuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_介護期別調定共通リストを返す() {
-            List<KibetsuChoteiKyotsuModel> modelList = sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 処理日時);
+            List<UrT0705ChoteiKyotsuEntity> modelList = sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 履歴番号);
             assertThat(modelList.size(), is(4));
-            assertThat(modelList.get(0).get介護期別モデル().get期(), is(期));
-            assertThat(modelList.get(1).get介護期別モデル().get期(), is(期 + 1));
+            assertThat(modelList.get(0).getShoriNo(), is(期));
+            assertThat(modelList.get(1).getShoriNo(), is(期 + 1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            assertThat(sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 処理日時.minusYears(10)).isEmpty(), is(true));
+            assertThat(sut.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 履歴番号).isEmpty(), is(true));
         }
     }
 
@@ -158,11 +159,9 @@ public class KibetsuChoteiKyotsuDacTest {
 
         @Test
         public void 介護期別調定共通モデルを渡すと_insertは_介護期別調定共通を追加する() {
-            KibetsuChoteiKyotsuModel model = new KibetsuChoteiKyotsuModel(
-                    new KibetsuModel(DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity()),
-                    new ChoteiKyotsuModel(UrT0705ChoteiKyotsuEntityGenerator.createUrT0705ChoteiKyotsuEntity()));
+            UrT0705ChoteiKyotsuEntity model = new UrT0705ChoteiKyotsuEntity();
             sut.insert(model);
-            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期).get介護期別モデル().get期(), is(期));
+            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期).getShoriNo(), is(期));
         }
     }
 
@@ -175,16 +174,12 @@ public class KibetsuChoteiKyotsuDacTest {
 
         @Test
         public void 介護期別調定共通モデルを渡すと_updateは_介護期別調定共通を更新する() {
-            KibetsuChoteiKyotsuModel model = new KibetsuChoteiKyotsuModel(
-                    new KibetsuModel(DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity()),
-                    new ChoteiKyotsuModel(UrT0705ChoteiKyotsuEntityGenerator.createUrT0705ChoteiKyotsuEntity()));
+            UrT0705ChoteiKyotsuEntity model = new UrT0705ChoteiKyotsuEntity();
             sut.insert(model);
-            model.get介護期別モデル().getEntity().initializeMd5();
-            model.get調定共通モデル().getEntity().initializeMd5();
-            model.get介護期別モデル().set調定ID(調定ID + 1);
-            model.get調定共通モデル().set調定額(new Decimal(9999));
+            model.initializeMd5();
+            model.setChoteiId(調定ID + 1);
             sut.update(model);
-            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期).get介護期別モデル().get調定ID(), is(調定ID + 1));
+            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期).getChoteiId(), is(調定ID + 1));
         }
     }
 
@@ -198,32 +193,30 @@ public class KibetsuChoteiKyotsuDacTest {
         @Test
         public void 介護期別調定共通モデルを渡すと_deleteは_介護期別調定共通を削除する() {
 
-            KibetsuChoteiKyotsuModel model = new KibetsuChoteiKyotsuModel(
-                    new KibetsuModel(DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity()),
-                    new ChoteiKyotsuModel(UrT0705ChoteiKyotsuEntityGenerator.createUrT0705ChoteiKyotsuEntity()));
+            UrT0705ChoteiKyotsuEntity model = new UrT0705ChoteiKyotsuEntity();
             sut.insert(model);
             sut.delete(model);
-            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 処理日時, 徴収方法, 期), is(nullValue()));
+            assertThat(sut.select介護期別調定共通ByKey(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期), is(nullValue()));
         }
     }
 
     private static class TestSupport {
 
         public static void insertDbT2003(
-                ChoteiNendo 調定年度,
-                FukaNendo 賦課年度,
+                FlexibleYear 調定年度,
+                FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                RDateTime 処理日時,
+                Decimal 履歴番号,
                 RString 徴収方法,
                 int 期) {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
-            entity.setChoteiNendo(調定年度.value());
-            entity.setFukaNendo(賦課年度.value());
+            entity.setChoteiNendo(調定年度);
+            entity.setFukaNendo(賦課年度);
             entity.setTsuchishoNo(通知書番号);
-            entity.setShoriTimestamp(処理日時);
-            entity.setChoshuHoho(徴収方法);
+            entity.setRirekiNo(履歴番号);
+            entity.setChoshuHouhou(徴収方法);
             entity.setKi(期);
-            介護期別Dac.insert(entity);
+            介護期別Dac.save(entity);
         }
 
         public static void insertUrT0705(Long 調定ID) {

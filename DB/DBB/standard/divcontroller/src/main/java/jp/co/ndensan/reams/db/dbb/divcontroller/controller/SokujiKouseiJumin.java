@@ -9,11 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.SokujiKouseiJuminDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.ua.uax.divcontroller.controller.commonchilddiv.atenashokaisimple.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

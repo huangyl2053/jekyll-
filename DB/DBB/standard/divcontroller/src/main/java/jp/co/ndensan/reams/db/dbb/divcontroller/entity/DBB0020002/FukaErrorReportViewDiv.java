@@ -1,22 +1,18 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.FukaErrorShoriButtonDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.InternalReportKihonDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.InternalReportKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FukaErrorIchiran のクラスファイル 
- * 
+ * FukaErrorIchiran のクラスファイル
+ *
  * @author 自動生成
  */
 public class FukaErrorReportViewDiv extends Panel {
@@ -26,6 +22,7 @@ public class FukaErrorReportViewDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ccdFukaErrorCommon")
     private InternalReportKihonDiv ccdFukaErrorCommon;
     @JsonProperty("dgFukaErrorList")
@@ -57,7 +54,7 @@ public class FukaErrorReportViewDiv extends Panel {
 
     @JsonProperty("dgFukaErrorList")
     public void setDgFukaErrorList(DataGrid<dgFukaErrorList_Row> dgFukaErrorList) {
-        this.dgFukaErrorList=dgFukaErrorList;
+        this.dgFukaErrorList = dgFukaErrorList;
     }
 
     @JsonProperty("btnCsvDownload")
@@ -67,7 +64,7 @@ public class FukaErrorReportViewDiv extends Panel {
 
     @JsonProperty("btnCsvDownload")
     public void setBtnCsvDownload(ButtonDownLoad btnCsvDownload) {
-        this.btnCsvDownload=btnCsvDownload;
+        this.btnCsvDownload = btnCsvDownload;
     }
 
     @JsonProperty("btnFukaErrorPublish")
@@ -77,7 +74,7 @@ public class FukaErrorReportViewDiv extends Panel {
 
     @JsonProperty("btnFukaErrorPublish")
     public void setBtnFukaErrorPublish(ButtonReportPublish btnFukaErrorPublish) {
-        this.btnFukaErrorPublish=btnFukaErrorPublish;
+        this.btnFukaErrorPublish = btnFukaErrorPublish;
     }
 
     @JsonProperty("btnPreview")
@@ -87,7 +84,7 @@ public class FukaErrorReportViewDiv extends Panel {
 
     @JsonProperty("btnPreview")
     public void setBtnPreview(ButtonPreview btnPreview) {
-        this.btnPreview=btnPreview;
+        this.btnPreview = btnPreview;
     }
 
     @JsonProperty("FukaErrorShoriButton")
@@ -97,7 +94,7 @@ public class FukaErrorReportViewDiv extends Panel {
 
     @JsonProperty("FukaErrorShoriButton")
     public void setFukaErrorShoriButton(FukaErrorShoriButtonDiv FukaErrorShoriButton) {
-        this.FukaErrorShoriButton=FukaErrorShoriButton;
+        this.FukaErrorShoriButton = FukaErrorShoriButton;
     }
 
     /*
@@ -109,7 +106,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMishori(Button btnMishori) {
+    public void setBtnMishori(Button btnMishori) {
         this.getFukaErrorShoriButton().setBtnMishori(btnMishori);
     }
 
@@ -119,7 +116,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnFukaKosei(Button btnFukaKosei) {
+    public void setBtnFukaKosei(Button btnFukaKosei) {
         this.getFukaErrorShoriButton().setBtnFukaKosei(btnFukaKosei);
     }
 
@@ -129,7 +126,7 @@ public class FukaErrorReportViewDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShikakuFuseigo(Button btnShikakuFuseigo) {
+    public void setBtnShikakuFuseigo(Button btnShikakuFuseigo) {
         this.getFukaErrorShoriButton().setBtnShikakuFuseigo(btnShikakuFuseigo);
     }
 

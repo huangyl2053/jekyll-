@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -29,16 +31,16 @@ public class KoseiShichosonShishoMaster extends ParentModelBase<KoseiShichosonSh
      * @param 支所コード 支所コード
      */
     public KoseiShichosonShishoMaster(LasdecCode 市町村コード,
-ShishoCode 支所コード) {
+            ShishoCode 支所コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
         this.entity = new DbT5052KoseiShichosonShishoMasterEntity();
         this.entity.setShichosonCode(市町村コード);
         this.entity.setShishoCode(支所コード);
         this.id = new KoseiShichosonShishoMasterIdentifier(
-        市町村コード,
-        支所コード
-                );
+                市町村コード,
+                支所コード
+        );
     }
 
     /**
@@ -140,6 +142,7 @@ ShishoCode 支所コード) {
         }
         return new KoseiShichosonShishoMaster(deletedEntity, id);
     }
+
     /**
      * {@link KoseiShichosonShishoMaster}のシリアライズ形式を提供します。
      *
@@ -150,13 +153,18 @@ ShishoCode 支所コード) {
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5052KoseiShichosonShishoMasterEntity entity;
         private final KoseiShichosonShishoMasterIdentifier id;
 
-        private _SerializationProxy(DbT5052KoseiShichosonShishoMasterEntity entity,KoseiShichosonShishoMasterIdentifier id) {
+        private _SerializationProxy(DbT5052KoseiShichosonShishoMasterEntity entity, KoseiShichosonShishoMasterIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.Fuka
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.dgFukaRirekiFukaRireki_Row;
-import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
+import jp.co.ndensan.reams.db.dbb.business.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -31,10 +31,10 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
+//import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -128,16 +128,16 @@ public class FukaRirekiPanel {
 
         // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト。
         // ここから
-//        IItemList<FukaModel> selectItemList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
-//        FukaModel selectRow = selectItemList.findFirst().get();
+//        IItemList<Fuka> selectItemList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
+//        Fuka selectRow = selectItemList.findFirst().get();
 //
 //        final FukaManager fukaFinder = new FukaManager();
-//        IItemList<FukaModel> descList = fukaFinder.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号());
+//        IItemList<Fuka> descList = fukaFinder.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号());
 //
 //        if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
 //            setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
 //        } else {
-//            FukaModel model = descList.findFirst().get();
+//            Fuka model = descList.findFirst().get();
 //            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
 //            ViewStates.access().valueAssignedToA(FukaShokaiKey.class).put(key);
 //        }
@@ -159,18 +159,19 @@ public class FukaRirekiPanel {
         // ここまで
     }
 
-    private IFunction<FukaModel, dgFukaRirekiFukaRireki_Row> to_dgFukaRireki_Row() {
+    private IFunction<Fuka, dgFukaRirekiFukaRireki_Row> to_dgFukaRireki_Row() {
 
-        return new IFunction<FukaModel, dgFukaRirekiFukaRireki_Row>() {
+        return new IFunction<Fuka, dgFukaRirekiFukaRireki_Row>() {
             @Override
-            public dgFukaRirekiFukaRireki_Row apply(FukaModel model) {
+            public dgFukaRirekiFukaRireki_Row apply(Fuka model) {
 
                 RString hokernyoDankai;
                 if (model.get保険料段階().isEmpty()) {
                     hokernyoDankai = new RString("-");
                 } else {
-                    hokernyoDankai = FukaShokaiController.findHokenryoDankai(
-                            model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階()).edit表示用保険料段階();
+                    hokernyoDankai = RString.EMPTY;
+//                    hokernyoDankai = FukaShokaiController.findHokenryoDankai(
+//                            model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階()).edit表示用保険料段階();
                 }
 
                 Kiwarigaku kiwarigaku = findKiwarigaku(model);
@@ -178,20 +179,21 @@ public class FukaRirekiPanel {
                 return new dgFukaRirekiFukaRireki_Row(
                         new Button(),
                         model.get通知書番号().value(),
-                        model.get調定年度().value().wareki().toDateString(),
+                        model.get調定年度().wareki().toDateString(),
                         FukaMapper.toDisplayForm(model.get調定日時()),
                         model.get更正月(),
                         hokernyoDankai,
                         FukaMapper.addComma(model.get確定介護保険料_年額()),
                         FukaMapper.addComma(kiwarigaku.get特徴期別額合計()),
                         FukaMapper.addComma(kiwarigaku.get普徴期別額合計()),
-                        new RString(model.get処理日時().toString()));
+                        new RString(model.get履歴番号().toString()));
             }
         };
     }
 
-    private Kiwarigaku findKiwarigaku(FukaModel model) {
-        Optional<Kiwarigaku> amountoid = new KiwarigakuFinder().load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
+    private Kiwarigaku findKiwarigaku(Fuka model) {
+//        Optional<Kiwarigaku> amountoid = new KiwarigakuFinder().load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
+        Optional<Kiwarigaku> amountoid = Optional.ofNullable(null);
 
         return amountoid.orElseThrow(
                 ExceptionSuppliers.systemException(UrErrorMessages.対象データなし.getMessage().evaluate()));
@@ -208,7 +210,7 @@ public class FukaRirekiPanel {
     public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(
             FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-//        FukaModel model = findTargetModel(
+//        Fuka model = findTargetModel(
 //                rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
 //                rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem());
         // TODO FukaManagerを１つにしたい
@@ -219,7 +221,7 @@ public class FukaRirekiPanel {
 //        dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
 //        RDate choteiNendo = new RDate(selectRow.getTxtChoteiNendo().toString());
 //
-//        FukaModel model = fukaFinder.find賦課(
+//        Fuka model = fukaFinder.find賦課(
 //                new ChoteiNendo(choteiNendo.getYear().seireki().toDateString().toString()),
 //                new FukaNendo(rirekiDiv.getTxtFukaNendoFukaRireki().getDomain()),
 //                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
@@ -251,7 +253,7 @@ public class FukaRirekiPanel {
 //        RDate choteiNendo = new RDate(selectRow.getTxtChoteiNendo().toString());
 //
 //        IItemList list = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All();
-//        FukaModel atoModel = fukaFinder.find賦課(
+//        Fuka atoModel = fukaFinder.find賦課(
 //                new ChoteiNendo(choteiNendo.getYear().seireki().toDateString().toString()),
 //                new FukaNendo(rirekiDiv.getTxtFukaNendoFukaRireki().getDomain()),
 //                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
@@ -262,18 +264,18 @@ public class FukaRirekiPanel {
 //        atoRireki.remove();
 //        atoRireki.put(ViewStateKeyCreator.createFukaShokaiKey(atoModel, kihonDiv.getCcdKaigoAtenaInfo().getName()));
         // ここまで
-//        Optional<FukaModel> value = fukaFinder.find賦課直近(
+//        Optional<Fuka> value = fukaFinder.find賦課直近(
 //                new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
 //                RDateTime.parse(selectRow.getShoriTimestamp().toString()));
 //
 //        IViewStateValue<MaeRirekiKey> maeRireki = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
 //        if (value.isPresent()) {
-//            FukaModel maeModel = value.get();
+//            Fuka maeModel = value.get();
 //            maeRireki.put(ViewStateKeyCreator.createMaeRirekiKey(maeModel, kihonDiv.getCcdKaigoAtenaInfo().getName()));
 //        } else {
 //            maeRireki.remove();
 //        }
-//        for (ListIterator<FukaModel> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
+//        for (ListIterator<Fuka> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
 //            targetModel = listIterator.next();
 //            if (targetModel.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
 //                FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel, kihonDiv.getCcdKaigoAtenaInfo().getName());
@@ -290,10 +292,10 @@ public class FukaRirekiPanel {
         return createResponseData(rirekiDiv);
     }
 
-    private FukaModel findTargetModel(IItemList list, dgFukaRirekiFukaRireki_Row row) {
-        for (Iterator<FukaModel> iterator = list.iterator(); iterator.hasNext();) {
-            FukaModel target = iterator.next();
-            if (target.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
+    private Fuka findTargetModel(IItemList list, dgFukaRirekiFukaRireki_Row row) {
+        for (Iterator<Fuka> iterator = list.iterator(); iterator.hasNext();) {
+            Fuka target = iterator.next();
+            if (target.get履歴番号().toString().equals(row.getShoriTimestamp().toString())) {
                 return target;
             }
         }

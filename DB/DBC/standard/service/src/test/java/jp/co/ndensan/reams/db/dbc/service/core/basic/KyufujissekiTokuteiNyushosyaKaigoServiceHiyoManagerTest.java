@@ -204,7 +204,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoManagerTest {
             RString 主キー9 = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_特定入所者介護サービス費用情報レコード順次番号;
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyo result = sut.get給付実績特定入所者介護サービス費用(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoManagerTest {
             List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> result = sut.get給付実績特定入所者介護サービス費用一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoManagerTest {
             DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.createDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity();
             entity.initializeMd5();
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyo 給付実績特定入所者介護サービス費用 = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(entity);
-            給付実績特定入所者介護サービス費用 = 給付実績特定入所者介護サービス費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績特定入所者介護サービス費用 = 給付実績特定入所者介護サービス費用.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績特定入所者介護サービス費用(給付実績特定入所者介護サービス費用), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoManagerTest {
             DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityGenerator.createDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity();
             entity.initializeMd5();
             KyufujissekiTokuteiNyushosyaKaigoServiceHiyo 給付実績特定入所者介護サービス費用 = new KyufujissekiTokuteiNyushosyaKaigoServiceHiyo(entity);
-            給付実績特定入所者介護サービス費用 = 給付実績特定入所者介護サービス費用.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績特定入所者介護サービス費用 = 給付実績特定入所者介護サービス費用.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績特定入所者介護サービス費用(給付実績特定入所者介護サービス費用), is(false));
         }

@@ -204,7 +204,7 @@ public class KyufujissekiJutakuKaishuhiManagerTest {
             RString 主キー9 = DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.DEFAULT_明細番号;
             KyufujissekiJutakuKaishuhi result = sut.get給付実績住宅改修費(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -228,7 +228,7 @@ public class KyufujissekiJutakuKaishuhiManagerTest {
             List<KyufujissekiJutakuKaishuhi> result = sut.get給付実績住宅改修費一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -261,7 +261,7 @@ public class KyufujissekiJutakuKaishuhiManagerTest {
             DbT3027KyufujissekiJutakuKaishuhiEntity entity = DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.createDbT3027KyufujissekiJutakuKaishuhiEntity();
             entity.initializeMd5();
             KyufujissekiJutakuKaishuhi 給付実績住宅改修費 = new KyufujissekiJutakuKaishuhi(entity);
-            給付実績住宅改修費 = 給付実績住宅改修費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績住宅改修費 = 給付実績住宅改修費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績住宅改修費(給付実績住宅改修費), is(true));
         }
@@ -273,7 +273,7 @@ public class KyufujissekiJutakuKaishuhiManagerTest {
             DbT3027KyufujissekiJutakuKaishuhiEntity entity = DbT3027KyufujissekiJutakuKaishuhiEntityGenerator.createDbT3027KyufujissekiJutakuKaishuhiEntity();
             entity.initializeMd5();
             KyufujissekiJutakuKaishuhi 給付実績住宅改修費 = new KyufujissekiJutakuKaishuhi(entity);
-            給付実績住宅改修費 = 給付実績住宅改修費.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績住宅改修費 = 給付実績住宅改修費.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績住宅改修費(給付実績住宅改修費), is(false));
         }

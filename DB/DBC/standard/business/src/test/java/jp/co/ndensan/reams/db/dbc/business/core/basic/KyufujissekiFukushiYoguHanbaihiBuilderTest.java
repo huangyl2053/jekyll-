@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,31 @@ public class KyufujissekiFukushiYoguHanbaihiBuilderTest extends DbcTestBase {
     private static DbT3026KyufujissekiFukushiYoguHanbaihiEntity KyufujissekiFukushiYoguHanbaihiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 交換情報識別番号;
+    private static NyuryokuShikibetsuNo 入力識別番号;
+    private static RString レコード種別コード;
+    private static HokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth サービス提供年月;
+    private static JigyoshaNo 事業所番号;
+    private static RString 通し番号;
+    private static RString 明細番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_主キー名2;
+        交換情報識別番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号;
+        入力識別番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_入力識別番号;
+        レコード種別コード = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_レコード種別コード;
+        証記載保険者番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_証記載保険者番号;
+        被保険者番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_被保険者番号;
+        サービス提供年月 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービス提供年月;
+        事業所番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_事業所番号;
+        通し番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_通し番号;
+        明細番号 = DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_明細番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufujissekiFukushiYoguHanbaihiBuilder sut;
         private static KyufujissekiFukushiYoguHanbaihi business;
@@ -42,14 +63,22 @@ public class KyufujissekiFukushiYoguHanbaihiBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiFukushiYoguHanbaihiEntity = new DbT3026KyufujissekiFukushiYoguHanbaihiEntity();
-            KyufujissekiFukushiYoguHanbaihiEntity.setXXX(主キー名1);
-            KyufujissekiFukushiYoguHanbaihiEntity.setXXX(主キー名2);
+            KyufujissekiFukushiYoguHanbaihiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiFukushiYoguHanbaihiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiFukushiYoguHanbaihiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setToshiNo(通し番号);
+            KyufujissekiFukushiYoguHanbaihiEntity.setMeisaiNo(明細番号);
 
             business = new KyufujissekiFukushiYoguHanbaihi(KyufujissekiFukushiYoguHanbaihiEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -147,9 +176,9 @@ public class KyufujissekiFukushiYoguHanbaihiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の摘要（品目コード）は_設定した値と同じ摘要（品目コード）を返す() {
-            business = sut.set摘要（品目コード）(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_摘要（品目コード）).build();
-            assertThat(business.get摘要（品目コード）(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_摘要（品目コード）));
+        public void 戻り値の摘要_品目コード_は_設定した値と同じ摘要_品目コード_を返す() {
+            business = sut.set摘要_品目コード(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_摘要_品目コード).build();
+            assertThat(business.get摘要_品目コード(), is(DbT3026KyufujissekiFukushiYoguHanbaihiEntityGenerator.DEFAULT_摘要_品目コード));
         }
 
         @Test

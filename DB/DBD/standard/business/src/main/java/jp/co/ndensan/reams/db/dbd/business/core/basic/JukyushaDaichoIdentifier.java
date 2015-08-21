@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder.Value;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Value;
 
 /**
  * 受給者台帳の識別子です。

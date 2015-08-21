@@ -138,7 +138,7 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiManagerTest {
             Decimal 主キー6 = DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.DEFAULT_履歴番号;
             KogakuGassanShikyugakuKeisanKekkaMeisai result = sut.get高額合算支給額計算結果明細(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
-            assertThat(result.get主キー1().value(), is(DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -162,7 +162,7 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiManagerTest {
             List<KogakuGassanShikyugakuKeisanKekkaMeisai> result = sut.get高額合算支給額計算結果明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -195,7 +195,7 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiManagerTest {
             DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity = DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.createDbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
             entity.initializeMd5();
             KogakuGassanShikyugakuKeisanKekkaMeisai 高額合算支給額計算結果明細 = new KogakuGassanShikyugakuKeisanKekkaMeisai(entity);
-            高額合算支給額計算結果明細 = 高額合算支給額計算結果明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給額計算結果明細 = 高額合算支給額計算結果明細.createBuilderForEdit().setデータ区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給額計算結果明細(高額合算支給額計算結果明細), is(true));
         }
@@ -207,7 +207,7 @@ public class KogakuGassanShikyugakuKeisanKekkaMeisaiManagerTest {
             DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity entity = DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntityGenerator.createDbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity();
             entity.initializeMd5();
             KogakuGassanShikyugakuKeisanKekkaMeisai 高額合算支給額計算結果明細 = new KogakuGassanShikyugakuKeisanKekkaMeisai(entity);
-            高額合算支給額計算結果明細 = 高額合算支給額計算結果明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額合算支給額計算結果明細 = 高額合算支給額計算結果明細.createBuilderForEdit().setデータ区分(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額合算支給額計算結果明細(高額合算支給額計算結果明細), is(false));
         }

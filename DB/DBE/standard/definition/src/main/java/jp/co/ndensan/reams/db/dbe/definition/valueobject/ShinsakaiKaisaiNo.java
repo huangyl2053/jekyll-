@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
  * 審査会開催番号を保持するクラスです。

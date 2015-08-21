@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * 利用者負担割合明細を特定するためのMyBatis用パラメータクラスです。

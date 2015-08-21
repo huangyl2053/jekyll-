@@ -90,7 +90,7 @@ public class KagoKetteiMeisaiManagerTest {
             Decimal 主キー3 = DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_履歴番号;
             KagoKetteiMeisai result = sut.get過誤決定明細(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().toDateString(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get取扱年月().toDateString(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -114,7 +114,7 @@ public class KagoKetteiMeisaiManagerTest {
             List<KagoKetteiMeisai> result = sut.get過誤決定明細一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().toDateString(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));
+            assertThat(result.get(0).get取扱年月().toDateString(), is(DbT3061KagoKetteiMeisaiEntityGenerator.DEFAULT_取扱年月.toDateString()));
         }
     }
 
@@ -147,7 +147,7 @@ public class KagoKetteiMeisaiManagerTest {
             DbT3061KagoKetteiMeisaiEntity entity = DbT3061KagoKetteiMeisaiEntityGenerator.createDbT3061KagoKetteiMeisaiEntity();
             entity.initializeMd5();
             KagoKetteiMeisai 過誤決定明細 = new KagoKetteiMeisai(entity);
-            過誤決定明細 = 過誤決定明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤決定明細 = 過誤決定明細.createBuilderForEdit().setサービス種類名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤決定明細(過誤決定明細), is(true));
         }
@@ -159,7 +159,7 @@ public class KagoKetteiMeisaiManagerTest {
             DbT3061KagoKetteiMeisaiEntity entity = DbT3061KagoKetteiMeisaiEntityGenerator.createDbT3061KagoKetteiMeisaiEntity();
             entity.initializeMd5();
             KagoKetteiMeisai 過誤決定明細 = new KagoKetteiMeisai(entity);
-            過誤決定明細 = 過誤決定明細.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            過誤決定明細 = 過誤決定明細.createBuilderForEdit().setサービス種類名(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save過誤決定明細(過誤決定明細), is(false));
         }

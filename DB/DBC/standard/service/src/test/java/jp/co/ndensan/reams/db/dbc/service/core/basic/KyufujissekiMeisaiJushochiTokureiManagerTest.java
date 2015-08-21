@@ -231,7 +231,7 @@ public class KyufujissekiMeisaiJushochiTokureiManagerTest {
             ServiceKomokuCode 主キー10 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス項目コード;
             KyufujissekiMeisaiJushochiTokurei result = sut.get給付実績明細_住所地特例(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9, 主キー10);
 
-            assertThat(result.get主キー1().value(), is(DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -255,7 +255,7 @@ public class KyufujissekiMeisaiJushochiTokureiManagerTest {
             List<KyufujissekiMeisaiJushochiTokurei> result = sut.get給付実績明細_住所地特例一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -288,7 +288,7 @@ public class KyufujissekiMeisaiJushochiTokureiManagerTest {
             DbT3106KyufujissekiMeisaiJushochiTokureiEntity entity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
             entity.initializeMd5();
             KyufujissekiMeisaiJushochiTokurei 給付実績明細_住所地特例 = new KyufujissekiMeisaiJushochiTokurei(entity);
-            給付実績明細_住所地特例 = 給付実績明細_住所地特例.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績明細_住所地特例 = 給付実績明細_住所地特例.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績明細_住所地特例(給付実績明細_住所地特例), is(true));
         }
@@ -300,48 +300,9 @@ public class KyufujissekiMeisaiJushochiTokureiManagerTest {
             DbT3106KyufujissekiMeisaiJushochiTokureiEntity entity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
             entity.initializeMd5();
             KyufujissekiMeisaiJushochiTokurei 給付実績明細_住所地特例 = new KyufujissekiMeisaiJushochiTokurei(entity);
-            給付実績明細_住所地特例 = 給付実績明細_住所地特例.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績明細_住所地特例 = 給付実績明細_住所地特例.createBuilderForEdit().set摘要(new RString("任意項目1を変更")).build();
 
-            assertThat(sut.save給付実績明細
-            ・住所地特例(給付実績明細・住所地特例
-            ), is(false)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        );
+            assertThat(sut.save給付実績明細_住所地特例(給付実績明細_住所地特例), is(false));
         }
 
         @Test

@@ -4,9 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +31,31 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoBuilderTest extends DbcTestBa
     private static DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity KyufujissekiShoteiShikkanShisetsuRyoyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 主キー名1;
+    private static NyuryokuShikibetsuNo 主キー名2;
+    private static RString 主キー名3;
+    private static HokenshaNo 主キー名4;
+    private static HihokenshaNo 主キー名5;
+    private static FlexibleYearMonth 主キー名6;
+    private static JigyoshaNo 主キー名7;
+    private static RString 主キー名8;
+    private static RString 主キー名9;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号;
+        主キー名2 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_入力識別番号;
+        主キー名3 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_レコード種別コード;
+        主キー名4 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名5 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号;
+        主キー名6 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_サービス提供年月;
+        主キー名7 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_事業所番号;
+        主キー名8 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_通し番号;
+        主キー名9 = DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_緊急時施設療養情報レコード順次番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KyufujissekiShoteiShikkanShisetsuRyoyoBuilder sut;
         private static KyufujissekiShoteiShikkanShisetsuRyoyo business;
@@ -42,14 +63,15 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoBuilderTest extends DbcTestBa
         @Before
         public void setUp() {
             KyufujissekiShoteiShikkanShisetsuRyoyoEntity = new DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity();
-            KyufujissekiShoteiShikkanShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiShoteiShikkanShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiShoteiShikkanShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(主キー名1);
+            KyufujissekiShoteiShikkanShisetsuRyoyoEntity.setInputShikibetsuNo(主キー名2);
 
             business = new KyufujissekiShoteiShikkanShisetsuRyoyo(KyufujissekiShoteiShikkanShisetsuRyoyoEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の交換情報識別番号は_設定した値と同じ交換情報識別番号を返す() {
             business = sut.set交換情報識別番号(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号).build();
@@ -393,69 +415,69 @@ public class KyufujissekiShoteiShikkanShisetsuRyoyoBuilderTest extends DbcTestBa
         }
 
         @Test
-        public void 戻り値の後・往診日数は_設定した値と同じ後・往診日数を返す() {
-            business = sut.set後・往診日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・往診日数).build();
-            assertThat(business.get後・往診日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・往診日数));
+        public void 戻り値の後_往診日数は_設定した値と同じ後_往診日数を返す() {
+            business = sut.set後_往診日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_往診日数).build();
+            assertThat(business.get後_往診日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_往診日数));
         }
 
         @Test
-        public void 戻り値の後・通院日数は_設定した値と同じ後・通院日数を返す() {
-            business = sut.set後・通院日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・通院日数).build();
-            assertThat(business.get後・通院日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・通院日数));
+        public void 戻り値の後_通院日数は_設定した値と同じ後_通院日数を返す() {
+            business = sut.set後_通院日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_通院日数).build();
+            assertThat(business.get後_通院日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_通院日数));
         }
 
         @Test
-        public void 戻り値の後・緊急時治療管理単位数は_設定した値と同じ後・緊急時治療管理単位数を返す() {
-            business = sut.set後・緊急時治療管理単位数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・緊急時治療管理単位数).build();
-            assertThat(business.get後・緊急時治療管理単位数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・緊急時治療管理単位数));
+        public void 戻り値の後_緊急時治療管理単位数は_設定した値と同じ後_緊急時治療管理単位数を返す() {
+            business = sut.set後_緊急時治療管理単位数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_緊急時治療管理単位数).build();
+            assertThat(business.get後_緊急時治療管理単位数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_緊急時治療管理単位数));
         }
 
         @Test
-        public void 戻り値の後・緊急時治療管理日数は_設定した値と同じ後・緊急時治療管理日数を返す() {
-            business = sut.set後・緊急時治療管理日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・緊急時治療管理日数).build();
-            assertThat(business.get後・緊急時治療管理日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・緊急時治療管理日数));
+        public void 戻り値の後_緊急時治療管理日数は_設定した値と同じ後_緊急時治療管理日数を返す() {
+            business = sut.set後_緊急時治療管理日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_緊急時治療管理日数).build();
+            assertThat(business.get後_緊急時治療管理日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_緊急時治療管理日数));
         }
 
         @Test
-        public void 戻り値の後・リハビリテーション点数は_設定した値と同じ後・リハビリテーション点数を返す() {
-            business = sut.set後・リハビリテーション点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・リハビリテーション点数).build();
-            assertThat(business.get後・リハビリテーション点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・リハビリテーション点数));
+        public void 戻り値の後_リハビリテーション点数は_設定した値と同じ後_リハビリテーション点数を返す() {
+            business = sut.set後_リハビリテーション点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_リハビリテーション点数).build();
+            assertThat(business.get後_リハビリテーション点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_リハビリテーション点数));
         }
 
         @Test
-        public void 戻り値の後・処置点数は_設定した値と同じ後・処置点数を返す() {
-            business = sut.set後・処置点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・処置点数).build();
-            assertThat(business.get後・処置点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・処置点数));
+        public void 戻り値の後_処置点数は_設定した値と同じ後_処置点数を返す() {
+            business = sut.set後_処置点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_処置点数).build();
+            assertThat(business.get後_処置点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_処置点数));
         }
 
         @Test
-        public void 戻り値の後・手術点数は_設定した値と同じ後・手術点数を返す() {
-            business = sut.set後・手術点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・手術点数).build();
-            assertThat(business.get後・手術点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・手術点数));
+        public void 戻り値の後_手術点数は_設定した値と同じ後_手術点数を返す() {
+            business = sut.set後_手術点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_手術点数).build();
+            assertThat(business.get後_手術点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_手術点数));
         }
 
         @Test
-        public void 戻り値の後・麻酔点数は_設定した値と同じ後・麻酔点数を返す() {
-            business = sut.set後・麻酔点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・麻酔点数).build();
-            assertThat(business.get後・麻酔点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・麻酔点数));
+        public void 戻り値の後_麻酔点数は_設定した値と同じ後_麻酔点数を返す() {
+            business = sut.set後_麻酔点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_麻酔点数).build();
+            assertThat(business.get後_麻酔点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_麻酔点数));
         }
 
         @Test
-        public void 戻り値の後・放射線治療点数は_設定した値と同じ後・放射線治療点数を返す() {
-            business = sut.set後・放射線治療点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・放射線治療点数).build();
-            assertThat(business.get後・放射線治療点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・放射線治療点数));
+        public void 戻り値の後_放射線治療点数は_設定した値と同じ後_放射線治療点数を返す() {
+            business = sut.set後_放射線治療点数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_放射線治療点数).build();
+            assertThat(business.get後_放射線治療点数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_放射線治療点数));
         }
 
         @Test
-        public void 戻り値の後・所定疾患施設療養費単位数は_設定した値と同じ後・所定疾患施設療養費単位数を返す() {
-            business = sut.set後・所定疾患施設療養費単位数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・所定疾患施設療養費単位数).build();
-            assertThat(business.get後・所定疾患施設療養費単位数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・所定疾患施設療養費単位数));
+        public void 戻り値の後_所定疾患施設療養費単位数は_設定した値と同じ後_所定疾患施設療養費単位数を返す() {
+            business = sut.set後_所定疾患施設療養費単位数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_所定疾患施設療養費単位数).build();
+            assertThat(business.get後_所定疾患施設療養費単位数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_所定疾患施設療養費単位数));
         }
 
         @Test
-        public void 戻り値の後・所定疾患施設療養費日数は_設定した値と同じ後・所定疾患施設療養費日数を返す() {
-            business = sut.set後・所定疾患施設療養費日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・所定疾患施設療養費日数).build();
-            assertThat(business.get後・所定疾患施設療養費日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後・所定疾患施設療養費日数));
+        public void 戻り値の後_所定疾患施設療養費日数は_設定した値と同じ後_所定疾患施設療養費日数を返す() {
+            business = sut.set後_所定疾患施設療養費日数(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_所定疾患施設療養費日数).build();
+            assertThat(business.get後_所定疾患施設療養費日数(), is(DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntityGenerator.DEFAULT_後_所定疾患施設療養費日数));
         }
 
         @Test

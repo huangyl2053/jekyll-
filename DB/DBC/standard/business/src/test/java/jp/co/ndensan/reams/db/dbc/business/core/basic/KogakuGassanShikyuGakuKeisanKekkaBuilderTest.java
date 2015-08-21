@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.fd.fdz.testhelper.FdaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -24,17 +29,23 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilderTest extends DbcTestBase {
     private static DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity KogakuGassanShikyuGakuKeisanKekkaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static HihokenshaNo 主キー名1;
+    private static FlexibleYear 主キー名2;
+    private static HokenshaNo 主キー名3;
+    private static RString 主キー名4;
+    private static Decimal 主キー名5;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_主キー名2;
+        主キー名1 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号;
+        主キー名2 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_対象年度;
+        主キー名3 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_証記載保険者番号;
+        主キー名4 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_支給申請書整理番号;
+        主キー名5 = DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_履歴番号;
     }
 
-    public static class getterSetterTest extends FdaTestBase {
+    public static class getterSetterTest extends DbcTestBase {
 
         private static KogakuGassanShikyuGakuKeisanKekkaBuilder sut;
         private static KogakuGassanShikyuGakuKeisanKekka business;
@@ -42,14 +53,15 @@ public class KogakuGassanShikyuGakuKeisanKekkaBuilderTest extends DbcTestBase {
         @Before
         public void setUp() {
             KogakuGassanShikyuGakuKeisanKekkaEntity = new DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity();
-            KogakuGassanShikyuGakuKeisanKekkaEntity.setXXX(主キー名1);
-            KogakuGassanShikyuGakuKeisanKekkaEntity.setXXX(主キー名2);
+            KogakuGassanShikyuGakuKeisanKekkaEntity.setHihokenshaNo(主キー名1);
+            KogakuGassanShikyuGakuKeisanKekkaEntity.setTaishoNendo(主キー名2);
 
             business = new KogakuGassanShikyuGakuKeisanKekka(KogakuGassanShikyuGakuKeisanKekkaEntity);
 
             sut = business.createBuilderForEdit();
         }
 //TODO Key項目のテストメソッドは削除して下さい。
+
         @Test
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             business = sut.set被保険者番号(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntityGenerator.DEFAULT_被保険者番号).build();

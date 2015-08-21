@@ -207,7 +207,7 @@ public class KyufujissekiShukeiManagerTest {
             ServiceShuruiCode 主キー9 = DbT3033KyufujissekiShukeiEntityGenerator.DEFAULT_サービス種類コード;
             KyufujissekiShukei result = sut.get給付実績集計(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7, 主キー8, 主キー9);
 
-            assertThat(result.get主キー1().value(), is(DbT3033KyufujissekiShukeiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get交換情報識別番号().value(), is(DbT3033KyufujissekiShukeiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -231,7 +231,7 @@ public class KyufujissekiShukeiManagerTest {
             List<KyufujissekiShukei> result = sut.get給付実績集計一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3033KyufujissekiShukeiEntityGenerator.DEFAULT_交換情報識別番号.value()));
+            assertThat(result.get(0).get交換情報識別番号().value(), is(DbT3033KyufujissekiShukeiEntityGenerator.DEFAULT_交換情報識別番号.value()));
         }
     }
 
@@ -264,7 +264,7 @@ public class KyufujissekiShukeiManagerTest {
             DbT3033KyufujissekiShukeiEntity entity = DbT3033KyufujissekiShukeiEntityGenerator.createDbT3033KyufujissekiShukeiEntity();
             entity.initializeMd5();
             KyufujissekiShukei 給付実績集計 = new KyufujissekiShukei(entity);
-            給付実績集計 = 給付実績集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績集計 = 給付実績集計.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績集計(給付実績集計), is(true));
         }
@@ -276,7 +276,7 @@ public class KyufujissekiShukeiManagerTest {
             DbT3033KyufujissekiShukeiEntity entity = DbT3033KyufujissekiShukeiEntityGenerator.createDbT3033KyufujissekiShukeiEntity();
             entity.initializeMd5();
             KyufujissekiShukei 給付実績集計 = new KyufujissekiShukei(entity);
-            給付実績集計 = 給付実績集計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            給付実績集計 = 給付実績集計.createBuilderForEdit().setレコード種別コード(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save給付実績集計(給付実績集計), is(false));
         }

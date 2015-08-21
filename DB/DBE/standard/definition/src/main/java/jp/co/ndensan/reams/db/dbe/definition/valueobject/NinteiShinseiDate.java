@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;

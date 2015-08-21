@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.IKiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FukaJohoHikaku のクラスファイル 
- * 
+ * FukaJohoHikaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class FukaJohoHikakuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -49,7 +49,7 @@ public class FukaJohoHikakuDiv extends Panel {
 
     @JsonProperty("EventPanel")
     public void setEventPanel(EventPanelDiv EventPanel) {
-        this.EventPanel=EventPanel;
+        this.EventPanel = EventPanel;
     }
 
     @JsonProperty("HonSantei1")
@@ -59,7 +59,7 @@ public class FukaJohoHikakuDiv extends Panel {
 
     @JsonProperty("HonSantei1")
     public void setHonSantei1(HonSantei1Div HonSantei1) {
-        this.HonSantei1=HonSantei1;
+        this.HonSantei1 = HonSantei1;
     }
 
     @JsonProperty("KariSantei1")
@@ -69,7 +69,7 @@ public class FukaJohoHikakuDiv extends Panel {
 
     @JsonProperty("KariSantei1")
     public void setKariSantei1(KariSantei1Div KariSantei1) {
-        this.KariSantei1=KariSantei1;
+        this.KariSantei1 = KariSantei1;
     }
 
     @JsonProperty("KariSantei2")
@@ -79,7 +79,7 @@ public class FukaJohoHikakuDiv extends Panel {
 
     @JsonProperty("KariSantei2")
     public void setKariSantei2(KariSantei2Div KariSantei2) {
-        this.KariSantei2=KariSantei2;
+        this.KariSantei2 = KariSantei2;
     }
 
     @JsonProperty("HonSantei2")
@@ -89,7 +89,7 @@ public class FukaJohoHikakuDiv extends Panel {
 
     @JsonProperty("HonSantei2")
     public void setHonSantei2(HonSantei2Div HonSantei2) {
-        this.HonSantei2=HonSantei2;
+        this.HonSantei2 = HonSantei2;
     }
 
     /*
@@ -101,7 +101,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnForHikaku(Button btnForHikaku) {
+    public void setBtnForHikaku(Button btnForHikaku) {
         this.getEventPanel().setBtnForHikaku(btnForHikaku);
     }
 
@@ -111,7 +111,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnHaveNoRireki(Button btnHaveNoRireki) {
+    public void setBtnHaveNoRireki(Button btnHaveNoRireki) {
         this.getEventPanel().setBtnHaveNoRireki(btnHaveNoRireki);
     }
 
@@ -121,7 +121,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakushutokuYMDHon1(Label lblShikakushutokuYMDHon1) {
+    public void setLblShikakushutokuYMDHon1(Label lblShikakushutokuYMDHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblShikakushutokuYMDHon1(lblShikakushutokuYMDHon1);
     }
 
@@ -131,7 +131,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDHon1(TextBoxDate txtShikakuShutokuYMDHon1) {
+    public void setTxtShikakuShutokuYMDHon1(TextBoxDate txtShikakuShutokuYMDHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtShikakuShutokuYMDHon1(txtShikakuShutokuYMDHon1);
     }
 
@@ -141,7 +141,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakusoshitsuYMDHon1(Label lblShikakusoshitsuYMDHon1) {
+    public void setLblShikakusoshitsuYMDHon1(Label lblShikakusoshitsuYMDHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblShikakusoshitsuYMDHon1(lblShikakusoshitsuYMDHon1);
     }
 
@@ -151,7 +151,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakusoshitsuYMDHon1(TextBoxDate txtShikakusoshitsuYMDHon1) {
+    public void setTxtShikakusoshitsuYMDHon1(TextBoxDate txtShikakusoshitsuYMDHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtShikakusoshitsuYMDHon1(txtShikakusoshitsuYMDHon1);
     }
 
@@ -161,7 +161,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGoukeiShotokuHon1(Label lblGoukeiShotokuHon1) {
+    public void setLblGoukeiShotokuHon1(Label lblGoukeiShotokuHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblGoukeiShotokuHon1(lblGoukeiShotokuHon1);
     }
 
@@ -171,7 +171,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGoukeiShotokuHon1(TextBoxNum txtGoukeiShotokuHon1) {
+    public void setTxtGoukeiShotokuHon1(TextBoxNum txtGoukeiShotokuHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtGoukeiShotokuHon1(txtGoukeiShotokuHon1);
     }
 
@@ -181,7 +181,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNenkinShunyuHon1(Label lblNenkinShunyuHon1) {
+    public void setLblNenkinShunyuHon1(Label lblNenkinShunyuHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblNenkinShunyuHon1(lblNenkinShunyuHon1);
     }
 
@@ -191,7 +191,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenkinShunyuHon1(TextBoxNum txtNenkinShunyuHon1) {
+    public void setTxtNenkinShunyuHon1(TextBoxNum txtNenkinShunyuHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtNenkinShunyuHon1(txtNenkinShunyuHon1);
     }
 
@@ -201,7 +201,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHonninKazeiHon1(Label lblHonninKazeiHon1) {
+    public void setLblHonninKazeiHon1(Label lblHonninKazeiHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblHonninKazeiHon1(lblHonninKazeiHon1);
     }
 
@@ -211,7 +211,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHonninKazeiHon1(TextBox txtHonninKazeiHon1) {
+    public void setTxtHonninKazeiHon1(TextBox txtHonninKazeiHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtHonninKazeiHon1(txtHonninKazeiHon1);
     }
 
@@ -221,7 +221,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiKazeiHon1(Label lblSetaiKazeiHon1) {
+    public void setLblSetaiKazeiHon1(Label lblSetaiKazeiHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblSetaiKazeiHon1(lblSetaiKazeiHon1);
     }
 
@@ -231,7 +231,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazeiHon1(TextBox txtSetaiKazeiHon1) {
+    public void setTxtSetaiKazeiHon1(TextBox txtSetaiKazeiHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtSetaiKazeiHon1(txtSetaiKazeiHon1);
     }
 
@@ -241,7 +241,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiinSuHon1(Label lblSetaiinSuHon1) {
+    public void setLblSetaiinSuHon1(Label lblSetaiinSuHon1) {
         this.getHonSantei1().getFukakijunHon1().setLblSetaiinSuHon1(lblSetaiinSuHon1);
     }
 
@@ -251,7 +251,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinSuHon1(TextBox txtSetaiinSuHon1) {
+    public void setTxtSetaiinSuHon1(TextBox txtSetaiinSuHon1) {
         this.getHonSantei1().getFukakijunHon1().setTxtSetaiinSuHon1(txtSetaiinSuHon1);
     }
 
@@ -261,7 +261,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHokenryoDankaiHon1(Label lblHokenryoDankaiHon1) {
+    public void setLblHokenryoDankaiHon1(Label lblHokenryoDankaiHon1) {
         this.getHonSantei1().getHokenryoHon1().setLblHokenryoDankaiHon1(lblHokenryoDankaiHon1);
     }
 
@@ -271,7 +271,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiHon1(TextBox txtHokenryoDankaiHon1) {
+    public void setTxtHokenryoDankaiHon1(TextBox txtHokenryoDankaiHon1) {
         this.getHonSantei1().getHokenryoHon1().setTxtHokenryoDankaiHon1(txtHokenryoDankaiHon1);
     }
 
@@ -281,7 +281,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKyokaisoHon1(Label lblKyokaisoHon1) {
+    public void setLblKyokaisoHon1(Label lblKyokaisoHon1) {
         this.getHonSantei1().getHokenryoHon1().setLblKyokaisoHon1(lblKyokaisoHon1);
     }
 
@@ -291,7 +291,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKyokaisoHon1(TextBox txtKyokaisoHon1) {
+    public void setTxtKyokaisoHon1(TextBox txtKyokaisoHon1) {
         this.getHonSantei1().getHokenryoHon1().setTxtKyokaisoHon1(txtKyokaisoHon1);
     }
 
@@ -301,7 +301,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKeisanHokenryogakuHon1(Label lblKeisanHokenryogakuHon1) {
+    public void setLblKeisanHokenryogakuHon1(Label lblKeisanHokenryogakuHon1) {
         this.getHonSantei1().getHokenryoHon1().setLblKeisanHokenryogakuHon1(lblKeisanHokenryogakuHon1);
     }
 
@@ -311,7 +311,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKeisanHokenryogakuHon1(TextBoxNum txtKeisanHokenryogakuHon1) {
+    public void setTxtKeisanHokenryogakuHon1(TextBoxNum txtKeisanHokenryogakuHon1) {
         this.getHonSantei1().getHokenryoHon1().setTxtKeisanHokenryogakuHon1(txtKeisanHokenryogakuHon1);
     }
 
@@ -321,7 +321,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGemmenGakuHon1(Label lblGemmenGakuHon1) {
+    public void setLblGemmenGakuHon1(Label lblGemmenGakuHon1) {
         this.getHonSantei1().getHokenryoHon1().setLblGemmenGakuHon1(lblGemmenGakuHon1);
     }
 
@@ -331,7 +331,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuHon1(TextBoxNum txtGemmenGakuHon1) {
+    public void setTxtGemmenGakuHon1(TextBoxNum txtGemmenGakuHon1) {
         this.getHonSantei1().getHokenryoHon1().setTxtGemmenGakuHon1(txtGemmenGakuHon1);
     }
 
@@ -341,7 +341,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiHokenryoHon1(Label lblKakuteiHokenryoHon1) {
+    public void setLblKakuteiHokenryoHon1(Label lblKakuteiHokenryoHon1) {
         this.getHonSantei1().getHokenryoHon1().setLblKakuteiHokenryoHon1(lblKakuteiHokenryoHon1);
     }
 
@@ -351,7 +351,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiHokenryoHon1(TextBoxNum txtKakuteiHokenryoHon1) {
+    public void setTxtKakuteiHokenryoHon1(TextBoxNum txtKakuteiHokenryoHon1) {
         this.getHonSantei1().getHokenryoHon1().setTxtKakuteiHokenryoHon1(txtKakuteiHokenryoHon1);
     }
 
@@ -366,7 +366,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDKari1(TextBoxDate txtShikakuShutokuYMDKari1) {
+    public void setTxtShikakuShutokuYMDKari1(TextBoxDate txtShikakuShutokuYMDKari1) {
         this.getKariSantei1().getFukakijunKari1().setTxtShikakuShutokuYMDKari1(txtShikakuShutokuYMDKari1);
     }
 
@@ -376,7 +376,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMDKari1(TextBoxDate txtShikakuSoshitsuYMDKari1) {
+    public void setTxtShikakuSoshitsuYMDKari1(TextBoxDate txtShikakuSoshitsuYMDKari1) {
         this.getKariSantei1().getFukakijunKari1().setTxtShikakuSoshitsuYMDKari1(txtShikakuSoshitsuYMDKari1);
     }
 
@@ -386,7 +386,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiKari1(TextBox txtHokenryoDankaiKari1) {
+    public void setTxtHokenryoDankaiKari1(TextBox txtHokenryoDankaiKari1) {
         this.getKariSantei1().getZennendoKari1().setTxtHokenryoDankaiKari1(txtHokenryoDankaiKari1);
     }
 
@@ -396,7 +396,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoRitsuKari1(TextBox txtHokenryoRitsuKari1) {
+    public void setTxtHokenryoRitsuKari1(TextBox txtHokenryoRitsuKari1) {
         this.getKariSantei1().getZennendoKari1().setTxtHokenryoRitsuKari1(txtHokenryoRitsuKari1);
     }
 
@@ -406,7 +406,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNengakuHokenryoKari1(TextBoxNum txtNengakuHokenryoKari1) {
+    public void setTxtNengakuHokenryoKari1(TextBoxNum txtNengakuHokenryoKari1) {
         this.getKariSantei1().getZennendoKari1().setTxtNengakuHokenryoKari1(txtNengakuHokenryoKari1);
     }
 
@@ -416,7 +416,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiKeisanjoHokenryoKari1(TextBoxNum txtZanteiKeisanjoHokenryoKari1) {
+    public void setTxtZanteiKeisanjoHokenryoKari1(TextBoxNum txtZanteiKeisanjoHokenryoKari1) {
         this.getKariSantei1().getHokenryoKari1().setTxtZanteiKeisanjoHokenryoKari1(txtZanteiKeisanjoHokenryoKari1);
     }
 
@@ -426,7 +426,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuKari1(TextBoxNum txtGemmenGakuKari1) {
+    public void setTxtGemmenGakuKari1(TextBoxNum txtGemmenGakuKari1) {
         this.getKariSantei1().getHokenryoKari1().setTxtGemmenGakuKari1(txtGemmenGakuKari1);
     }
 
@@ -436,7 +436,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiGoukeiGakuKari1(TextBoxNum txtZanteiGoukeiGakuKari1) {
+    public void setTxtZanteiGoukeiGakuKari1(TextBoxNum txtZanteiGoukeiGakuKari1) {
         this.getKariSantei1().getHokenryoKari1().setTxtZanteiGoukeiGakuKari1(txtZanteiGoukeiGakuKari1);
     }
 
@@ -446,7 +446,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZanteihokenryoHeightKari1(zanteihokenryoHeightKari1Div zanteihokenryoHeightKari1) {
+    public void setZanteihokenryoHeightKari1(zanteihokenryoHeightKari1Div zanteihokenryoHeightKari1) {
         this.getKariSantei1().getHokenryoKari1().setZanteihokenryoHeightKari1(zanteihokenryoHeightKari1);
     }
 
@@ -461,7 +461,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDKari2(TextBoxDate txtShikakuShutokuYMDKari2) {
+    public void setTxtShikakuShutokuYMDKari2(TextBoxDate txtShikakuShutokuYMDKari2) {
         this.getKariSantei2().getFukakijunKari2().setTxtShikakuShutokuYMDKari2(txtShikakuShutokuYMDKari2);
     }
 
@@ -471,7 +471,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMDKari2(TextBoxDate txtShikakuSoshitsuYMDKari2) {
+    public void setTxtShikakuSoshitsuYMDKari2(TextBoxDate txtShikakuSoshitsuYMDKari2) {
         this.getKariSantei2().getFukakijunKari2().setTxtShikakuSoshitsuYMDKari2(txtShikakuSoshitsuYMDKari2);
     }
 
@@ -481,7 +481,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiKari2(TextBox txtHokenryoDankaiKari2) {
+    public void setTxtHokenryoDankaiKari2(TextBox txtHokenryoDankaiKari2) {
         this.getKariSantei2().getZennendoKari2().setTxtHokenryoDankaiKari2(txtHokenryoDankaiKari2);
     }
 
@@ -491,7 +491,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoRitsuKari2(TextBox txtHokenryoRitsuKari2) {
+    public void setTxtHokenryoRitsuKari2(TextBox txtHokenryoRitsuKari2) {
         this.getKariSantei2().getZennendoKari2().setTxtHokenryoRitsuKari2(txtHokenryoRitsuKari2);
     }
 
@@ -501,7 +501,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNengakuHokenryoKari2(TextBoxNum txtNengakuHokenryoKari2) {
+    public void setTxtNengakuHokenryoKari2(TextBoxNum txtNengakuHokenryoKari2) {
         this.getKariSantei2().getZennendoKari2().setTxtNengakuHokenryoKari2(txtNengakuHokenryoKari2);
     }
 
@@ -511,7 +511,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiKeisanjoHokenryoKari2(TextBoxNum txtZanteiKeisanjoHokenryoKari2) {
+    public void setTxtZanteiKeisanjoHokenryoKari2(TextBoxNum txtZanteiKeisanjoHokenryoKari2) {
         this.getKariSantei2().getHokenryoKari2().setTxtZanteiKeisanjoHokenryoKari2(txtZanteiKeisanjoHokenryoKari2);
     }
 
@@ -521,7 +521,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuKari2(TextBoxNum txtGemmenGakuKari2) {
+    public void setTxtGemmenGakuKari2(TextBoxNum txtGemmenGakuKari2) {
         this.getKariSantei2().getHokenryoKari2().setTxtGemmenGakuKari2(txtGemmenGakuKari2);
     }
 
@@ -531,7 +531,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZanteiGoukeiGakuKari2(TextBoxNum txtZanteiGoukeiGakuKari2) {
+    public void setTxtZanteiGoukeiGakuKari2(TextBoxNum txtZanteiGoukeiGakuKari2) {
         this.getKariSantei2().getHokenryoKari2().setTxtZanteiGoukeiGakuKari2(txtZanteiGoukeiGakuKari2);
     }
 
@@ -541,7 +541,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2Div zanteihokenryoHeightKari2) {
+    public void setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2Div zanteihokenryoHeightKari2) {
         this.getKariSantei2().getHokenryoKari2().setZanteihokenryoHeightKari2(zanteihokenryoHeightKari2);
     }
 
@@ -556,7 +556,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakushutokuYMDHon2(Label lblShikakushutokuYMDHon2) {
+    public void setLblShikakushutokuYMDHon2(Label lblShikakushutokuYMDHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblShikakushutokuYMDHon2(lblShikakushutokuYMDHon2);
     }
 
@@ -566,7 +566,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMDHon2(TextBoxDate txtShikakuShutokuYMDHon2) {
+    public void setTxtShikakuShutokuYMDHon2(TextBoxDate txtShikakuShutokuYMDHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtShikakuShutokuYMDHon2(txtShikakuShutokuYMDHon2);
     }
 
@@ -576,7 +576,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblShikakusoshitsuYMDHon2(Label lblShikakusoshitsuYMDHon2) {
+    public void setLblShikakusoshitsuYMDHon2(Label lblShikakusoshitsuYMDHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblShikakusoshitsuYMDHon2(lblShikakusoshitsuYMDHon2);
     }
 
@@ -586,7 +586,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMDHon2(TextBoxDate txtShikakuSoshitsuYMDHon2) {
+    public void setTxtShikakuSoshitsuYMDHon2(TextBoxDate txtShikakuSoshitsuYMDHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtShikakuSoshitsuYMDHon2(txtShikakuSoshitsuYMDHon2);
     }
 
@@ -596,7 +596,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGoukeiShotokuHon2(Label lblGoukeiShotokuHon2) {
+    public void setLblGoukeiShotokuHon2(Label lblGoukeiShotokuHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblGoukeiShotokuHon2(lblGoukeiShotokuHon2);
     }
 
@@ -606,7 +606,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGoukeiShotokuHon2(TextBoxNum txtGoukeiShotokuHon2) {
+    public void setTxtGoukeiShotokuHon2(TextBoxNum txtGoukeiShotokuHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtGoukeiShotokuHon2(txtGoukeiShotokuHon2);
     }
 
@@ -616,7 +616,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblNenkinShunyuHon2(Label lblNenkinShunyuHon2) {
+    public void setLblNenkinShunyuHon2(Label lblNenkinShunyuHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblNenkinShunyuHon2(lblNenkinShunyuHon2);
     }
 
@@ -626,7 +626,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenkinShunyuHon2(TextBoxNum txtNenkinShunyuHon2) {
+    public void setTxtNenkinShunyuHon2(TextBoxNum txtNenkinShunyuHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtNenkinShunyuHon2(txtNenkinShunyuHon2);
     }
 
@@ -636,7 +636,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHonninKazeiHon2(Label lblHonninKazeiHon2) {
+    public void setLblHonninKazeiHon2(Label lblHonninKazeiHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblHonninKazeiHon2(lblHonninKazeiHon2);
     }
 
@@ -646,7 +646,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHonninKazeiHon2(TextBox txtHonninKazeiHon2) {
+    public void setTxtHonninKazeiHon2(TextBox txtHonninKazeiHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtHonninKazeiHon2(txtHonninKazeiHon2);
     }
 
@@ -656,7 +656,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiKazeiHon2(Label lblSetaiKazeiHon2) {
+    public void setLblSetaiKazeiHon2(Label lblSetaiKazeiHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblSetaiKazeiHon2(lblSetaiKazeiHon2);
     }
 
@@ -666,7 +666,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazeiHon2(TextBox txtSetaiKazeiHon2) {
+    public void setTxtSetaiKazeiHon2(TextBox txtSetaiKazeiHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtSetaiKazeiHon2(txtSetaiKazeiHon2);
     }
 
@@ -676,7 +676,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblSetaiinSuHon2(Label lblSetaiinSuHon2) {
+    public void setLblSetaiinSuHon2(Label lblSetaiinSuHon2) {
         this.getHonSantei2().getFukakijunHon2().setLblSetaiinSuHon2(lblSetaiinSuHon2);
     }
 
@@ -686,7 +686,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinSuHon2(TextBox txtSetaiinSuHon2) {
+    public void setTxtSetaiinSuHon2(TextBox txtSetaiinSuHon2) {
         this.getHonSantei2().getFukakijunHon2().setTxtSetaiinSuHon2(txtSetaiinSuHon2);
     }
 
@@ -696,7 +696,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblHokenryoDankaiHon2(Label lblHokenryoDankaiHon2) {
+    public void setLblHokenryoDankaiHon2(Label lblHokenryoDankaiHon2) {
         this.getHonSantei2().getHokenryoHon2().setLblHokenryoDankaiHon2(lblHokenryoDankaiHon2);
     }
 
@@ -706,7 +706,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenryoDankaiHon2(TextBox txtHokenryoDankaiHon2) {
+    public void setTxtHokenryoDankaiHon2(TextBox txtHokenryoDankaiHon2) {
         this.getHonSantei2().getHokenryoHon2().setTxtHokenryoDankaiHon2(txtHokenryoDankaiHon2);
     }
 
@@ -716,7 +716,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKyokaisoHon2(Label lblKyokaisoHon2) {
+    public void setLblKyokaisoHon2(Label lblKyokaisoHon2) {
         this.getHonSantei2().getHokenryoHon2().setLblKyokaisoHon2(lblKyokaisoHon2);
     }
 
@@ -726,7 +726,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKyokaisoHon2(TextBox txtKyokaisoHon2) {
+    public void setTxtKyokaisoHon2(TextBox txtKyokaisoHon2) {
         this.getHonSantei2().getHokenryoHon2().setTxtKyokaisoHon2(txtKyokaisoHon2);
     }
 
@@ -736,7 +736,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKeisanHokenryogakuHon2(Label lblKeisanHokenryogakuHon2) {
+    public void setLblKeisanHokenryogakuHon2(Label lblKeisanHokenryogakuHon2) {
         this.getHonSantei2().getHokenryoHon2().setLblKeisanHokenryogakuHon2(lblKeisanHokenryogakuHon2);
     }
 
@@ -746,7 +746,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKeisanHokenryogakuHon2(TextBoxNum txtKeisanHokenryogakuHon2) {
+    public void setTxtKeisanHokenryogakuHon2(TextBoxNum txtKeisanHokenryogakuHon2) {
         this.getHonSantei2().getHokenryoHon2().setTxtKeisanHokenryogakuHon2(txtKeisanHokenryogakuHon2);
     }
 
@@ -756,7 +756,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGemmenGakuHon2(Label lblGemmenGakuHon2) {
+    public void setLblGemmenGakuHon2(Label lblGemmenGakuHon2) {
         this.getHonSantei2().getHokenryoHon2().setLblGemmenGakuHon2(lblGemmenGakuHon2);
     }
 
@@ -766,7 +766,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenGakuHon2(TextBoxNum txtGemmenGakuHon2) {
+    public void setTxtGemmenGakuHon2(TextBoxNum txtGemmenGakuHon2) {
         this.getHonSantei2().getHokenryoHon2().setTxtGemmenGakuHon2(txtGemmenGakuHon2);
     }
 
@@ -776,7 +776,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKakuteiHokenryoHon2(Label lblKakuteiHokenryoHon2) {
+    public void setLblKakuteiHokenryoHon2(Label lblKakuteiHokenryoHon2) {
         this.getHonSantei2().getHokenryoHon2().setLblKakuteiHokenryoHon2(lblKakuteiHokenryoHon2);
     }
 
@@ -786,7 +786,7 @@ public class FukaJohoHikakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKakuteiHokenryoHon2(TextBoxNum txtKakuteiHokenryoHon2) {
+    public void setTxtKakuteiHokenryoHon2(TextBoxNum txtKakuteiHokenryoHon2) {
         this.getHonSantei2().getHokenryoHon2().setTxtKakuteiHokenryoHon2(txtKakuteiHokenryoHon2);
     }
 

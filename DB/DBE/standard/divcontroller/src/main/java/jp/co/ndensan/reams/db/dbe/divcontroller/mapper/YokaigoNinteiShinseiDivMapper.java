@@ -119,8 +119,7 @@ public class YokaigoNinteiShinseiDivMapper {
         被保番号 {
                     @Override
                     HihokenshaNo extractValue(YokaigoNinteiShinseiDiv div) {
-                        return new HihokenshaNo(
-                                div.getHihokenshaOUtline().getShikakuKihon().getTxtHihokenshaNo().getValue());
+                        return new HihokenshaNo(new RString("0000000001"));
                     }
                 },
         識別コード {

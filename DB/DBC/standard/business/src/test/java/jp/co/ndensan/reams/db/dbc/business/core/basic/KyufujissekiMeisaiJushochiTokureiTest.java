@@ -4,11 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3106KyufujissekiMeisaiJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +36,30 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
     private static DbT3106KyufujissekiMeisaiJushochiTokureiEntity KyufujissekiMeisaiJushochiTokureiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 交換情報識別番号;
+    private static NyuryokuShikibetsuNo 入力識別番号;
+    private static RString レコード種別コード;
+    private static HokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth サービス提供年月;
+    private static JigyoshaNo 事業所番号;
+    private static RString 通し番号;
+    private static ServiceShuruiCode サービス種類コード;
+    private static ServiceKomokuCode サービス項目コード;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_主キー名2;
+        交換情報識別番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_交換情報識別番号;
+        入力識別番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_入力識別番号;
+        レコード種別コード = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_レコード種別コード;
+        証記載保険者番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_証記載保険者番号;
+        被保険者番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_被保険者番号;
+        サービス提供年月 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス提供年月;
+        事業所番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業所番号;
+        通し番号 = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_通し番号;
+        サービス種類コード = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス種類コード;
+        サービス項目コード = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.DEFAULT_サービス項目コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +69,49 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiMeisaiJushochiTokurei(null, 主キー名2);
+        public void 交換情報識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiMeisaiJushochiTokurei(null, 入力識別番号,
+                    レコード種別コード, 証記載保険者番号, 被保険者番号, サービス提供年月,
+                    事業所番号, 通し番号, サービス種類コード, サービス項目コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiMeisaiJushochiTokurei(主キー名1, null);
+        public void 入力識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiMeisaiJushochiTokurei(交換情報識別番号, null,
+                    レコード種別コード, 証記載保険者番号, 被保険者番号, サービス提供年月,
+                    事業所番号, 通し番号, サービス種類コード, サービス項目コード);
         }
 
         @Test
         public void 指定したキーが保持するDbT3106KyufujissekiMeisaiJushochiTokureiEntityにセットされている() {
-            sut = new KyufujissekiMeisaiJushochiTokurei(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiMeisaiJushochiTokurei(交換情報識別番号, 入力識別番号,
+                    レコード種別コード, 証記載保険者番号, 被保険者番号, サービス提供年月,
+                    事業所番号, 通し番号, サービス種類コード, サービス項目コード);
+            assertThat(sut.get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.get入力識別番号(), is(入力識別番号));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiMeisaiJushochiTokureiIdentifierにセットされている() {
-            sut = new KyufujissekiMeisaiJushochiTokurei(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiMeisaiJushochiTokurei(交換情報識別番号, 入力識別番号,
+                    レコード種別コード, 証記載保険者番号, 被保険者番号, サービス提供年月,
+                    事業所番号, 通し番号, サービス種類コード, サービス項目コード);
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -82,8 +122,16 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +144,8 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
 
             sut = new KyufujissekiMeisaiJushochiTokurei(KyufujissekiMeisaiJushochiTokureiEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -108,8 +156,16 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
 
             sut = new KyufujissekiMeisaiJushochiTokurei(KyufujissekiMeisaiJushochiTokureiEntity);
         }
@@ -170,23 +226,27 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         }
 
         @Test
-        public void get日数・回数は_entityが持つ日数・回数を返す() {
-            assertThat(sut.get日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getNissuKaisu()));
+        public void get日数_回数は_entityが持つ日数_回数を返す() {
+            assertThat(sut.get日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getNissuKaisu())
+            );
         }
 
         @Test
-        public void get公費１対象日数・回数は_entityが持つ公費１対象日数・回数を返す() {
-            assertThat(sut.get公費１対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi1TaishoNissuKaisu()));
+        public void get公費１対象日数_回数は_entityが持つ公費１対象日数_回数を返す() {
+            assertThat(sut.get公費１対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi1TaishoNissuKaisu())
+            );
         }
 
         @Test
-        public void get公費２対象日数・回数は_entityが持つ公費２対象日数・回数を返す() {
-            assertThat(sut.get公費２対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi2TaishoNissuKaisu()));
+        public void get公費２対象日数_回数は_entityが持つ公費２対象日数_回数を返す() {
+            assertThat(sut.get公費２対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi2TaishoNissuKaisu())
+            );
         }
 
         @Test
-        public void get公費３対象日数・回数は_entityが持つ公費３対象日数・回数を返す() {
-            assertThat(sut.get公費３対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi3TaishoNissuKaisu()));
+        public void get公費３対象日数_回数は_entityが持つ公費３対象日数_回数を返す() {
+            assertThat(sut.get公費３対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getKohi3TaishoNissuKaisu())
+            );
         }
 
         @Test
@@ -220,48 +280,57 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         }
 
         @Test
-        public void get後・単位数は_entityが持つ後・単位数を返す() {
-            assertThat(sut.get後・単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoTanisu()));
+        public void get後_単位数は_entityが持つ後_単位数を返す() {
+            assertThat(sut.get後_単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoTanisu())
+            );
         }
 
         @Test
-        public void get後・日数・回数は_entityが持つ後・日数・回数を返す() {
-            assertThat(sut.get後・日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoNissuKaisu()));
+        public void get後_日数_回数は_entityが持つ後_日数_回数を返す() {
+            assertThat(sut.get後_日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoNissuKaisu())
+            );
         }
 
         @Test
-        public void get後・公費１対象日数・回数は_entityが持つ後・公費１対象日数・回数を返す() {
-            assertThat(sut.get後・公費１対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi1TaishoNissuKaisu()));
+        public void get後_公費１対象日数_回数は_entityが持つ後_公費１対象日数_回数を返す() {
+            assertThat(sut.get後_公費１対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi1TaishoNissuKaisu())
+            );
         }
 
         @Test
-        public void get後・公費２対象日数・回数は_entityが持つ後・公費２対象日数・回数を返す() {
-            assertThat(sut.get後・公費２対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi2TaishoNissukaisu()));
+        public void get後_公費２対象日数_回数は_entityが持つ後_公費２対象日数_回数を返す() {
+            assertThat(sut.get後_公費２対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi2TaishoNissukaisu())
+            );
         }
 
         @Test
-        public void get後・公費３対象日数・回数は_entityが持つ後・公費３対象日数・回数を返す() {
-            assertThat(sut.get後・公費３対象日数・回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi3TaishoNissuKaisu()));
+        public void get後_公費３対象日数_回数は_entityが持つ後_公費３対象日数_回数を返す() {
+            assertThat(sut.get後_公費３対象日数_回数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi3TaishoNissuKaisu())
+            );
         }
 
         @Test
-        public void get後・サービス単位数は_entityが持つ後・サービス単位数を返す() {
-            assertThat(sut.get後・サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoServiceTanisu()));
+        public void get後_サービス単位数は_entityが持つ後_サービス単位数を返す() {
+            assertThat(sut.get後_サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費１対象サービス単位数は_entityが持つ後・公費１対象サービス単位数を返す() {
-            assertThat(sut.get後・公費１対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi1TaishoServiceTanisu()));
+        public void get後_公費１対象サービス単位数は_entityが持つ後_公費１対象サービス単位数を返す() {
+            assertThat(sut.get後_公費１対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi1TaishoServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費２対象サービス単位数は_entityが持つ後・公費２対象サービス単位数を返す() {
-            assertThat(sut.get後・公費２対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi2TaishoServiceTanisu()));
+        public void get後_公費２対象サービス単位数は_entityが持つ後_公費２対象サービス単位数を返す() {
+            assertThat(sut.get後_公費２対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi2TaishoServiceTanisu())
+            );
         }
 
         @Test
-        public void get後・公費３対象サービス単位数は_entityが持つ後・公費３対象サービス単位数を返す() {
-            assertThat(sut.get後・公費３対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi3TaishoServiceTanisu()));
+        public void get後_公費３対象サービス単位数は_entityが持つ後_公費３対象サービス単位数を返す() {
+            assertThat(sut.get後_公費３対象サービス単位数(), is(KyufujissekiMeisaiJushochiTokureiEntity.getAtoKohi3TaishoServiceTanisu())
+            );
         }
 
         @Test
@@ -297,8 +366,16 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
 
             sut = new KyufujissekiMeisaiJushochiTokurei(KyufujissekiMeisaiJushochiTokureiEntity);
         }
@@ -316,8 +393,16 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
 
             sut = new KyufujissekiMeisaiJushochiTokurei(KyufujissekiMeisaiJushochiTokureiEntity);
         }
@@ -336,8 +421,16 @@ public class KyufujissekiMeisaiJushochiTokureiTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiMeisaiJushochiTokureiEntity = DbT3106KyufujissekiMeisaiJushochiTokureiEntityGenerator.createDbT3106KyufujissekiMeisaiJushochiTokureiEntity();
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名1);
-            KyufujissekiMeisaiJushochiTokureiEntity.setXXX(主キー名2);
+            KyufujissekiMeisaiJushochiTokureiEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiMeisaiJushochiTokureiEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setToshiNo(通し番号);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceShuruiCode(サービス種類コード);
+            KyufujissekiMeisaiJushochiTokureiEntity.setServiceKomokuCode(サービス項目コード);
 
         }
 

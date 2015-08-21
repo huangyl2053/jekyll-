@@ -1,8 +1,0 @@
-﻿hihokenshaNo,varchar,RString,,,,,A
-serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
-shoKisaiHokenshaNo,varchar,RString,,,,,A
-shoriTimestamp,timestamp,RDateTime,,,,,A
-honninShiharaiGaku,numeric,Decimal,,,,,A
-shiharaiKubunCode,varchar,RString,,,,,A
-shiharaiKingaku,numeric,Decimal,,,,,A
-shinsaKekkaHaneiKubun,varchar,RString,,,,,A

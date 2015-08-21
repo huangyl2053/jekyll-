@@ -91,7 +91,7 @@ public class KogakuKyufuTaishoshaGokeiManagerTest {
             Decimal 主キー3 = DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_履歴番号;
             KogakuKyufuTaishoshaGokei result = sut.get高額介護サービス費給付対象者合計(主キー1, 主キー2, 主キー3);
 
-            assertThat(result.get主キー1().value(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get被保険者番号().value(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -115,7 +115,7 @@ public class KogakuKyufuTaishoshaGokeiManagerTest {
             List<KogakuKyufuTaishoshaGokei> result = sut.get高額介護サービス費給付対象者合計一覧();
 
             assertThat(result.size(), is(1));
-            assertThat(result.get(0).get主キー1().value(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
+            assertThat(result.get(0).get被保険者番号().value(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_被保険者番号.value()));
         }
     }
 
@@ -148,7 +148,7 @@ public class KogakuKyufuTaishoshaGokeiManagerTest {
             DbT3055KogakuKyufuTaishoshaGokeiEntity entity = DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.createDbT3055KogakuKyufuTaishoshaGokeiEntity();
             entity.initializeMd5();
             KogakuKyufuTaishoshaGokei 高額介護サービス費給付対象者合計 = new KogakuKyufuTaishoshaGokei(entity);
-            高額介護サービス費給付対象者合計 = 高額介護サービス費給付対象者合計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費給付対象者合計 = 高額介護サービス費給付対象者合計.createBuilderForEdit().set世帯集約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費給付対象者合計(高額介護サービス費給付対象者合計), is(true));
         }
@@ -160,7 +160,7 @@ public class KogakuKyufuTaishoshaGokeiManagerTest {
             DbT3055KogakuKyufuTaishoshaGokeiEntity entity = DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.createDbT3055KogakuKyufuTaishoshaGokeiEntity();
             entity.initializeMd5();
             KogakuKyufuTaishoshaGokei 高額介護サービス費給付対象者合計 = new KogakuKyufuTaishoshaGokei(entity);
-            高額介護サービス費給付対象者合計 = 高額介護サービス費給付対象者合計.createBuilderForEdit().set任意項目1(new RString("任意項目1を変更")).build();
+            高額介護サービス費給付対象者合計 = 高額介護サービス費給付対象者合計.createBuilderForEdit().set世帯集約番号(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save高額介護サービス費給付対象者合計(高額介護サービス費給付対象者合計), is(false));
         }

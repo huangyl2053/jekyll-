@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -89,7 +89,9 @@ public class ShinsakaiWariateIinManager {
 
     private ShinsakaiDetail get審査会情報(DbT5106ShinsakaiWariateIinJohoEntity 割当委員Entity) {
         ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(割当委員Entity.getShinsakaiKaisaiNo());
-        FlexibleDate 開催年月日 = 割当委員Entity.getShinsakaiKaisaiYMD();
+        // TODO n8300姜　ビルドエラー回避のために暫定対応
+        FlexibleDate 開催年月日 = new FlexibleDate("20150808");
+//        FlexibleDate 開催年月日 = 割当委員Entity.getShinsakaiKaisaiYMD();
         return 審査会情報Finder.get審査会情報(開催番号, 開催年月日);
     }
 

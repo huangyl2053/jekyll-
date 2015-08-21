@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7116JukyushaGendoGakuKanriEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者限度額管理を管理するクラスです。
  */
-public class JukyushaGendoGakuKanri extends ParentModelBase<JukyushaGendoGakuKanriIdentifier, DbT7116JukyushaGendoGakuKanriEntity, JukyushaGendoGakuKanri> implements Serializable {
+public class JukyushaGendoGakuKanri extends ModelBase<JukyushaGendoGakuKanriIdentifier, DbT7116JukyushaGendoGakuKanriEntity, JukyushaGendoGakuKanri> implements Serializable {
 
     private final DbT7116JukyushaGendoGakuKanriEntity entity;
     private final JukyushaGendoGakuKanriIdentifier id;
@@ -224,22 +224,6 @@ public class JukyushaGendoGakuKanri extends ParentModelBase<JukyushaGendoGakuKan
     }
 
     /**
-     * 受給者限度額管理のみを変更対象とします。<br/>
-     * {@link DbT7116JukyushaGendoGakuKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
-     *
-     * @return 変更対象処理実施後の{@link JukyushaGendoGakuKanri}
-     */
-    @Override
-    public JukyushaGendoGakuKanri modifiedModel() {
-        DbT7116JukyushaGendoGakuKanriEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
-            modifiedEntity.setState(EntityDataState.Modified);
-        }
-        return new JukyushaGendoGakuKanri(
-                modifiedEntity, id);
-    }
-
-    /**
      * 保持する受給者限度額管理を削除対象とします。<br/>
      * {@link DbT7116JukyushaGendoGakuKanriEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -267,9 +251,15 @@ public class JukyushaGendoGakuKanri extends ParentModelBase<JukyushaGendoGakuKan
 
     }
 
+    @Override
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
+
         private final DbT7116JukyushaGendoGakuKanriEntity entity;
         private final JukyushaGendoGakuKanriIdentifier id;
 

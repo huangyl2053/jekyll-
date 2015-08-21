@@ -4,11 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.testhelper.DbcTestBase;
-import static jp.co.ndensan.reams.db.dbc.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -28,14 +34,28 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
     private static DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity KyufujissekiKinkyuShisetsuRyoyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static 主キー型1 主キー名1;
-    private static 主キー型2 主キー名2;
+    private static KokanShikibetsuNo 交換情報識別番号;
+    private static NyuryokuShikibetsuNo 入力識別番号;
+    private static RString レコード種別コード;
+    private static HokenshaNo 証記載保険者番号;
+    private static HihokenshaNo 被保険者番号;
+    private static FlexibleYearMonth サービス提供年月;
+    private static JigyoshaNo 事業所番号;
+    private static RString 通し番号;
+    private static RString 緊急時施設療養情報レコード順次番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_主キー名1;
-        主キー名2 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_主キー名2;
+        交換情報識別番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_交換情報識別番号;
+        入力識別番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_入力識別番号;
+        レコード種別コード = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_レコード種別コード;
+        証記載保険者番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_証記載保険者番号;
+        被保険者番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_被保険者番号;
+        サービス提供年月 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_サービス提供年月;
+        事業所番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_事業所番号;
+        通し番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_通し番号;
+        緊急時施設療養情報レコード順次番号 = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.DEFAULT_緊急時施設療養情報レコード順次番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -45,33 +65,44 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKinkyuShisetsuRyoyo(null, 主キー名2);
+        public void 交換情報識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKinkyuShisetsuRyoyo(null, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 事業所番号, 通し番号, 緊急時施設療養情報レコード順次番号);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyufujissekiKinkyuShisetsuRyoyo(主キー名1, null);
+        public void 入力識別番号がnullである場合に_NullPointerExceptionが発生する() {
+            sut = new KyufujissekiKinkyuShisetsuRyoyo(交換情報識別番号, null, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 事業所番号, 通し番号, 緊急時施設療養情報レコード順次番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT3019KyufujissekiKinkyuShisetsuRyoyoEntityにセットされている() {
-            sut = new KyufujissekiKinkyuShisetsuRyoyo(主キー名1, 主キー名2);
-            assertThat(sut.get主キー名1(), is(主キー名1));
-            assertThat(sut.get主キー名2(), is(主キー名2));
+            sut = new KyufujissekiKinkyuShisetsuRyoyo(交換情報識別番号, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 事業所番号, 通し番号, 緊急時施設療養情報レコード順次番号);
+            assertThat(sut.get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.get入力識別番号(), is(入力識別番号));
         }
 
         @Test
         public void 指定したキーが保持するKyufujissekiKinkyuShisetsuRyoyoIdentifierにセットされている() {
-            sut = new KyufujissekiKinkyuShisetsuRyoyo(主キー名1, 主キー名2);
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            sut = new KyufujissekiKinkyuShisetsuRyoyo(交換情報識別番号, 入力識別番号, レコード種別コード, 証記載保険者番号, 被保険者番号,
+                    サービス提供年月, 事業所番号, 通し番号, 緊急時施設療養情報レコード順次番号);
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -82,8 +113,15 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +134,8 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
 
             sut = new KyufujissekiKinkyuShisetsuRyoyo(KyufujissekiKinkyuShisetsuRyoyoEntity);
 
-            assertThat(sut.identifier().getXXX(), is(主キー名1));
-            assertThat(sut.identifier().getXXX(), is(主キー名2));
+            assertThat(sut.identifier().get交換情報識別番号(), is(交換情報識別番号));
+            assertThat(sut.identifier().get入力識別番号(), is(入力識別番号));
         }
     }
 
@@ -108,8 +146,15 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
 
             sut = new KyufujissekiKinkyuShisetsuRyoyo(KyufujissekiKinkyuShisetsuRyoyoEntity);
         }
@@ -355,48 +400,48 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         }
 
         @Test
-        public void get後・往診日数は_entityが持つ後・往診日数を返す() {
-            assertThat(sut.get後・往診日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoOshinNissu()));
+        public void get後_往診日数は_entityが持つ後_往診日数を返す() {
+            assertThat(sut.get後_往診日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoOshinNissu()));
         }
 
         @Test
-        public void get後・通院日数は_entityが持つ後・通院日数を返す() {
-            assertThat(sut.get後・通院日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoTsuinNissu()));
+        public void get後_通院日数は_entityが持つ後_通院日数を返す() {
+            assertThat(sut.get後_通院日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoTsuinNissu()));
         }
 
         @Test
-        public void get後・緊急時治療管理単位数は_entityが持つ後・緊急時治療管理単位数を返す() {
-            assertThat(sut.get後・緊急時治療管理単位数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoKinkyuChiryoKanriTanisu()));
+        public void get後_緊急時治療管理単位数は_entityが持つ後_緊急時治療管理単位数を返す() {
+            assertThat(sut.get後_緊急時治療管理単位数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoKinkyuChiryoKanriTanisu()));
         }
 
         @Test
-        public void get後・緊急時治療管理日数は_entityが持つ後・緊急時治療管理日数を返す() {
-            assertThat(sut.get後・緊急時治療管理日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoKinkyuChiryoKanriNissu()));
+        public void get後_緊急時治療管理日数は_entityが持つ後_緊急時治療管理日数を返す() {
+            assertThat(sut.get後_緊急時治療管理日数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoKinkyuChiryoKanriNissu()));
         }
 
         @Test
-        public void get後・リハビリテーション点数は_entityが持つ後・リハビリテーション点数を返す() {
-            assertThat(sut.get後・リハビリテーション点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoRehabilitationTensu()));
+        public void get後_リハビリテーション点数は_entityが持つ後_リハビリテーション点数を返す() {
+            assertThat(sut.get後_リハビリテーション点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoRehabilitationTensu()));
         }
 
         @Test
-        public void get後・処置点数は_entityが持つ後・処置点数を返す() {
-            assertThat(sut.get後・処置点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoShochiTensu()));
+        public void get後_処置点数は_entityが持つ後_処置点数を返す() {
+            assertThat(sut.get後_処置点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoShochiTensu()));
         }
 
         @Test
-        public void get後・手術点数は_entityが持つ後・手術点数を返す() {
-            assertThat(sut.get後・手術点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoShujutsuTensu()));
+        public void get後_手術点数は_entityが持つ後_手術点数を返す() {
+            assertThat(sut.get後_手術点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoShujutsuTensu()));
         }
 
         @Test
-        public void get後・麻酔点数は_entityが持つ後・麻酔点数を返す() {
-            assertThat(sut.get後・麻酔点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoMasuiTensu()));
+        public void get後_麻酔点数は_entityが持つ後_麻酔点数を返す() {
+            assertThat(sut.get後_麻酔点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoMasuiTensu()));
         }
 
         @Test
-        public void get後・放射線治療点数は_entityが持つ後・放射線治療点数を返す() {
-            assertThat(sut.get後・放射線治療点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoHoshasenChiryoTensu()));
+        public void get後_放射線治療点数は_entityが持つ後_放射線治療点数を返す() {
+            assertThat(sut.get後_放射線治療点数(), is(KyufujissekiKinkyuShisetsuRyoyoEntity.getAtoHoshasenChiryoTensu()));
         }
 
         @Test
@@ -432,8 +477,15 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
 
             sut = new KyufujissekiKinkyuShisetsuRyoyo(KyufujissekiKinkyuShisetsuRyoyoEntity);
         }
@@ -451,8 +503,15 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
 
             sut = new KyufujissekiKinkyuShisetsuRyoyo(KyufujissekiKinkyuShisetsuRyoyoEntity);
         }
@@ -471,8 +530,15 @@ public class KyufujissekiKinkyuShisetsuRyoyoTest extends DbcTestBase {
         @Before
         public void setUp() {
             KyufujissekiKinkyuShisetsuRyoyoEntity = DbT3019KyufujissekiKinkyuShisetsuRyoyoEntityGenerator.createDbT3019KyufujissekiKinkyuShisetsuRyoyoEntity();
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名1);
-            KyufujissekiKinkyuShisetsuRyoyoEntity.setXXX(主キー名2);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setKokanJohoShikibetsuNo(交換情報識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setInputShikibetsuNo(入力識別番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeShubetsuCode(レコード種別コード);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setShokisaiHokenshaNo(証記載保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setHiHokenshaNo(被保険者番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setServiceTeikyoYM(サービス提供年月);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setJigyoshoNo(事業所番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setToshiNo(通し番号);
+            KyufujissekiKinkyuShisetsuRyoyoEntity.setRecodeJunjiNo(緊急時施設療養情報レコード順次番号);
 
         }
 

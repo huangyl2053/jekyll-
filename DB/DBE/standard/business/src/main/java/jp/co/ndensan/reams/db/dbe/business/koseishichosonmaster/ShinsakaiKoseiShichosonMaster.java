@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.koseishichosonmaster;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -45,11 +46,11 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return DbT5051KoseiShichosonMasterEntity
      */
-    @Override
-    public DbT5051KoseiShichosonMasterEntity getEntity() {
-        return entity;
-    }
-
+    // TODO n8300姜　ビルドエラー回避のために暫定対応
+//    @Override
+//    public DbT5051KoseiShichosonMasterEntity getEntity() {
+//        return entity;
+//    }
     /**
      * 市町村識別IDを返します。
      *
@@ -414,6 +415,11 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public IKoseiShichosonMasterEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
