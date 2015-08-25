@@ -14,9 +14,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBX -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbxTestHelper</artifactId>
+            <artifactId>DbxDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -24,10 +25,14 @@
             <artifactId>DbxEntity</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- 公開系 -->
+
+        <!-- テスト -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbxDefinition</artifactId>
+            <artifactId>DbxTestHelper</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
