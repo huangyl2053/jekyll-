@@ -32,6 +32,44 @@
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxDefinition</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxEntity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxEntity</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxPersistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxBusiness</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+                <artifactId>DbxService</artifactId>
+                <version>${project.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>DbxPersistence</artifactId>
+                        <groupId>jp.co.ndensan.reams.ur.ura</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

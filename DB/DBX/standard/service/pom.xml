@@ -18,22 +18,18 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxBusiness</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxPersistence</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <!-- URD -->
         <dependency>
@@ -74,7 +70,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
