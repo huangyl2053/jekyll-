@@ -52,6 +52,10 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtInsatsuSu"));
             };
 
+            Controls.prototype.dgNinteiChosa = function () {
+                return new UZA.DataGrid(this.convFiledName("dgNinteiChosa"));
+            };
+
             Controls.prototype.ShujiiIkensho = function () {
                 return new UZA.Panel(this.convFiledName("ShujiiIkensho"));
             };

@@ -66,6 +66,10 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtInsatsuSu"));
             }
 
+            public dgNinteiChosa(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgNinteiChosa"));
+            }
+
             public ShujiiIkensho(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShujiiIkensho"));
             }
