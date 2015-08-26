@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.typehandlers;
+package jp.co.ndensan.reams.db.dbx.entity.typehandlers;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

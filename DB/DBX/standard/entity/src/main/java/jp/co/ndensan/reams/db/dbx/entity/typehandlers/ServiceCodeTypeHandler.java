@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.typehandlers;
+package jp.co.ndensan.reams.db.dbx.entity.typehandlers;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ServiceCodeTypeHandler extends BaseTypeHandler<ServiceCode> {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, ServiceCode parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
