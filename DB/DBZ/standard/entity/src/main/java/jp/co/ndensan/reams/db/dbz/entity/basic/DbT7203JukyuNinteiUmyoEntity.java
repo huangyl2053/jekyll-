@@ -7,17 +7,18 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShichosonCode;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 受給認定運用管理テーブルのエンティティクラスです。
  */
 public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203JukyuNinteiUmyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7203JukyuNinteiUmyo");
 
@@ -30,13 +31,13 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShichosonCode shichosonCode;
+    private LasdecCode shichosonCode;
     private FlexibleDate koshinTaishoChushutsuYMD;
     private FlexibleYearMonth koshinTaishoChushutsuYukoShuryoYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +46,7 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +55,7 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,16 +64,17 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,34 +83,35 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
-    public ShichosonCode getShichosonCode() {
+    public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 更新対象抽出処理日のgetメソッドです。
-     *
+     * 
      * @return 更新対象抽出処理日
      */
+    @CheckForNull
     public FlexibleDate getKoshinTaishoChushutsuYMD() {
         return koshinTaishoChushutsuYMD;
     }
 
     /**
      * 更新対象抽出処理日のsetメソッドです。
-     *
+     * 
      * @param koshinTaishoChushutsuYMD 更新対象抽出処理日
      */
     public void setKoshinTaishoChushutsuYMD(FlexibleDate koshinTaishoChushutsuYMD) {
@@ -117,16 +120,17 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * 更新対象抽出有効終了年月のgetメソッドです。
-     *
+     * 
      * @return 更新対象抽出有効終了年月
      */
+    @CheckForNull
     public FlexibleYearMonth getKoshinTaishoChushutsuYukoShuryoYM() {
         return koshinTaishoChushutsuYukoShuryoYM;
     }
 
     /**
      * 更新対象抽出有効終了年月のsetメソッドです。
-     *
+     * 
      * @param koshinTaishoChushutsuYukoShuryoYM 更新対象抽出有効終了年月
      */
     public void setKoshinTaishoChushutsuYukoShuryoYM(FlexibleYearMonth koshinTaishoChushutsuYukoShuryoYM) {
@@ -135,9 +139,9 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * このエンティティの主キーが他の{@literal DbT7203JukyuNinteiUmyoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7203JukyuNinteiUmyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -163,7 +167,6 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
