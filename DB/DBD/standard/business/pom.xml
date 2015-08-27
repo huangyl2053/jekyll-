@@ -14,19 +14,27 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzBusiness</artifactId>
-        </dependency>
+		<!-- DBD -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdEntity</artifactId>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
         </dependency>
+		<!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
+        </dependency>
+		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -34,14 +42,8 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbdEntity</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

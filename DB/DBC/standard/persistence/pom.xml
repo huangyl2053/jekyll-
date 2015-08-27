@@ -14,56 +14,52 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbcEntity</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbcBusiness</artifactId>
-                    <groupId>${project.groupId}</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbcBusiness</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!-- DBC -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcEntity</artifactId>
+        </dependency>
+        <!-- DBD -->
+        <!-- DBX -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        <!-- 公開系 -->
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbcBusiness</artifactId>
-            <version>${project.version}</version>
+            <artifactId>DbcEntity</artifactId>
             <type>test-jar</type>
-            <scope>test</scope>
+        </dependency>
+        <!-- ツール -->
+        <!-- 規約違反により削除予定 -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbcEntity</artifactId>
-            <version>${project.version}</version>
+            <artifactId>DbcBusiness</artifactId>
             <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBatchController</artifactId>
             <scope>test</scope>
-            <type>jar</type>
         </dependency>
-
     </dependencies>
 </project>

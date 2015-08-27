@@ -14,28 +14,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeEntity</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbeBusiness</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- DBE -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeEntity</artifactId>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.dbzVersion}</version>
-            <type>jar</type>
         </dependency>
+		<!-- 公開系 -->
+		<!-- テスト -->
+		<!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -43,9 +39,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

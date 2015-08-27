@@ -65,8 +65,8 @@
                 <version>${project.version}</version>
                 <exclusions>
                     <exclusion>
+                        <groupId>jp.co.ndensan.reams.db.dbx</groupId>					
                         <artifactId>DbxPersistence</artifactId>
-                        <groupId>jp.co.ndensan.reams.ur.ura</groupId>
                     </exclusion>
                 </exclusions>
             </dependency>

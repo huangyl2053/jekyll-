@@ -9,44 +9,41 @@
     <artifactId>DbuPersistence</artifactId>
     <packaging>jar</packaging>
     <name>DbuPersistence</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbuEntity</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbuBusiness</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
+		<!-- DBA -->
+		<!-- DBB -->
+		<!-- DBC -->
+		<!-- DBD -->
+		<!-- DBE -->
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
         </dependency>
+		<!-- 公開系 -->
+		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuEntity</artifactId>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 </project>

@@ -40,10 +40,11 @@
     <properties>
         <!-- UZ -->
         <jp.co.ndensan.reams.uz.version>1.3.0</jp.co.ndensan.reams.uz.version>
-        <!-- UR -->
+        <!-- 公開系 -->
         <jp.co.ndensan.reams.ur.version>1.3.0</jp.co.ndensan.reams.ur.version>
-        <!-- UAX -->
         <jp.co.ndensan.reams.uax.version>1.0.0</jp.co.ndensan.reams.uax.version>
+        <jp.co.ndensan.reams.uex.version>1.0-SNAPSHOT</jp.co.ndensan.reams.uex.version>
+        <jp.co.ndensan.reams.uxx.version>1.3.0</jp.co.ndensan.reams.uxx.version>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -409,6 +410,11 @@
             <!-- UA -->
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.uax.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxEntity</artifactId>
                 <version>${jp.co.ndensan.reams.uax.version}</version>
             </dependency>
@@ -421,12 +427,67 @@
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxService</artifactId>
                 <version>${jp.co.ndensan.reams.uax.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                        <artifactId>UaxPersistence</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
-               <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-               <artifactId>UaxDivController</artifactId>
-               <version>${jp.co.ndensan.reams.uax.version}</version>
-               <classifier>classes</classifier>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxDivController</artifactId>
+                <version>${jp.co.ndensan.reams.uax.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <!-- UEX -->
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexEntity</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexService</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                        <artifactId>UexPersistence</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+                <artifactId>UexDivController</artifactId>
+                <version>${jp.co.ndensan.reams.uex.version}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <!-- UXX -->
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+                <artifactId>UxxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.uxx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+                <artifactId>UxxEntity</artifactId>
+                <version>${jp.co.ndensan.reams.uxx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+                <artifactId>UxxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.uxx.version}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
@@ -436,29 +497,6 @@
                 <type>jar</type>
                 <scope>provided</scope>
             </dependency>
-            <!--
-
-                        <dependency>
-                            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-                            <artifactId>UaxRealService</artifactId>
-                            <version>${jp.co.ndensan.reams.uax.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-                            <artifactId>UaxDefinition</artifactId>
-                            <version>${jp.co.ndensan.reams.uax.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
-                            <artifactId>UexRealService</artifactId>
-                            <version>${jp.co.ndensan.reams.uexVersion}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>jp.co.ndensan.reams.ad.adx</groupId>
-                            <artifactId>AdxDefinition</artifactId>
-                            <version>${jp.co.ndensan.reams.adxVersion}</version>
-                        </dependency>
-            -->
         </dependencies>
     </dependencyManagement>
 </project>

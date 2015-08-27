@@ -14,27 +14,43 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+		<!-- DBD -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdPersistence</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbdPersistence</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
-        </dependency>
+		<!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.13</version>
-        </dependency>
+		<!-- テスト -->
+		<!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
             <artifactId>requestSettings-maven-plugin</artifactId>
@@ -44,6 +60,12 @@
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
             <artifactId>shareSetting-maven-plugin</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+		<!-- 削除予定 -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.13</version>
         </dependency>
     </dependencies>
     <build>
