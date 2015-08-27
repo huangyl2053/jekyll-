@@ -9,13 +9,22 @@
     <artifactId>DbaEntity</artifactId>
     <packaging>jar</packaging>
     <name>DbaEntity</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+        <!-- DBA -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaDefinition</artifactId>
+        </dependency>
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>
@@ -24,17 +33,12 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
+        <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDefinition</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

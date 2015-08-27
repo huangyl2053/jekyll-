@@ -14,6 +14,29 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBZ -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
@@ -21,23 +44,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxBusiness</artifactId>
-            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzEntity</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzBusiness</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!-- テスト -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -45,21 +53,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzBusiness</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDefinition</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
     </dependencies>
 </project>

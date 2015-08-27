@@ -9,30 +9,31 @@
     <artifactId>DbdEntity</artifactId>
     <packaging>jar</packaging>
     <name>DbdEntity</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+		<!-- DBD -->
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzEntity</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdDefinition</artifactId>
         </dependency>
+		<!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
+		<!-- 公開系 -->
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdDefinition</artifactId>
-            <version>${project.version}</version>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzEntity</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+		<!-- テスト -->
     </dependencies>
 </project>

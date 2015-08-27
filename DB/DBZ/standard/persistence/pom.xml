@@ -14,44 +14,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBZ -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzEntity</artifactId>
+        </dependency>
+        <!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <!-- テスト -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbzDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbzBusiness</artifactId>
-                    <groupId>${project.groupId}</groupId>
-                </exclusion>
-            </exclusions>
+            <type>test-jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzBusiness</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzEntity</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxDefinition</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
     </dependencies>
 </project>

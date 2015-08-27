@@ -9,28 +9,23 @@
     <artifactId>DbbDefinition</artifactId>
     <packaging>jar</packaging>
     <name>DbbDefinition</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.14.8</version>
-            <type>jar</type>
-        </dependency>
-
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzDefinition</artifactId>
-        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
         </dependency>
+		<!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+        </dependency>
+		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>

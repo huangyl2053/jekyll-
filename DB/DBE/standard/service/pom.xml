@@ -13,38 +13,49 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-        <dependencies>
+    <dependencies>
+		<!-- DBE -->
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzBusiness</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeDefinition</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbePersistence</artifactId>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
+		<!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeBusiness</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbePersistence</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzPersistence</artifactId>
-        </dependency>
+		<!-- テスト -->
+		<!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -52,26 +63,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeBusiness</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzBusiness</artifactId>
-            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

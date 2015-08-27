@@ -14,31 +14,56 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+		<!-- DBE -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbePersistence</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzDivController</artifactId>
-            <classifier>classes</classifier>
+            <artifactId>DbzDefinition</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbePersistence</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
+	    <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeBusiness</artifactId>
-            <version>${project.version}</version>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDivController</artifactId>
+            <classifier>classes</classifier>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+		<!-- 公開系 -->
+		<dependency>
+			<groupId>jp.co.ndensan.reams.ur.urz</groupId>
+			<artifactId>UrzDivController</artifactId>
+			<classifier>classes</classifier>
+		</dependency>
+	    <dependency>
+			<groupId>jp.co.ndensan.reams.ua.uax</groupId>
+			<artifactId>UaxDivController</artifactId>
+			<classifier>classes</classifier>
+		</dependency>
+		<!-- テスト -->
+		<!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
             <artifactId>requestSettings-maven-plugin</artifactId>

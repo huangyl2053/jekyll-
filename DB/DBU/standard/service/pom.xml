@@ -14,26 +14,56 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbuBusiness</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+		<!-- DBU -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuPersistence</artifactId>
+        </dependency>
+		<!-- DBA -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dba</groupId>
+            <artifactId>DbaService</artifactId>
             <version>${project.version}</version>
         </dependency>
+		<!-- DBB -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbService</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		<!-- DBC -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
+            <artifactId>DbcService</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		<!-- DBD -->
+		<!-- DBE -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbeService</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+        </dependency>
+		<!-- 公開系 -->
+		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -41,33 +71,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuEntity</artifactId>
-            <version>${project.version}</version>
             <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dba</groupId>
-            <artifactId>DbaService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
-            <artifactId>DbbService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbc</groupId>
-            <artifactId>DbcService</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
-            <artifactId>DbeService</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -9,34 +9,26 @@
     <artifactId>DbaPersistence</artifactId>
     <packaging>jar</packaging>
     <name>DbaPersistence</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaEntity</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbaBusiness</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- DBA -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaDefinition</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaEntity</artifactId>
+        </dependency>
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
         </dependency>
+		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -45,8 +37,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>

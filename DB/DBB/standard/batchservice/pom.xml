@@ -9,22 +9,27 @@
     <artifactId>DbbBatchService</artifactId>
     <packaging>jar</packaging>
     <name>DbbBatchService</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+		<!-- DBB -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
-            <version>${project.version}</version>
         </dependency>
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzBatchService</artifactId>
-            <version>${project.version}</version>
+            <artifactId>DbzBatchController</artifactId>
+        </dependency>
+		<!-- 公開系 -->
+		<!-- テスト -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
     </dependencies>
 </project>

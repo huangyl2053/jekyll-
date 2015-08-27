@@ -14,37 +14,33 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBX -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbxEntity</artifactId>
-            <version>${project.version}</version>
+            <artifactId>DbxDefinition</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
+        <!-- 公開系 -->
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbxModel</artifactId>
-            <version>${project.version}</version>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzPersistence</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.uaVersion}</version>
-        </dependency>
+        <!-- テスト -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbxTestHelper</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
     </dependencies>

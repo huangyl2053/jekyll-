@@ -14,62 +14,55 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- DBX -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbxPersistence</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- URD -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdService</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdDivController</artifactId>
+            <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfService</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
+            <artifactId>UrfEntity</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- URF -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdEntity</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfPersistence</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdEntity</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfEntity</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdDivController</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfDivController</artifactId>
-            <version>${jp.co.ndensan.reams.urVersion}</version>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbxPersistence</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbxEntity</artifactId>
-            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
@@ -136,6 +129,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
             </plugin>
         </plugins>
     </build>
