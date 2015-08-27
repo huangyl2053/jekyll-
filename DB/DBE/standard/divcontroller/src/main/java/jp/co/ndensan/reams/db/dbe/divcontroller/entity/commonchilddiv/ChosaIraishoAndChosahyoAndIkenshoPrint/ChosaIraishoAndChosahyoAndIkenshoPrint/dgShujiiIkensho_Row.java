@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 26 19:48:14 CST 2015 
+ * Thu Aug 27 16:02:07 CST 2015 
  */
 
 
@@ -22,44 +22,56 @@ public class dgShujiiIkensho_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
     private RString no;
+    private RString hohokenshaBango;
     private RString hihokenshaShimei;
     private RString seibetsu;
+    private RString ninteiShinseibi;
     private RString shujiiIryokikanCode;
     private RString shujiiIryoKikanMeisho;
     private RString shujiiCode;
-    private RString shujiiMeisho;
+    private RString shujiiShimei;
 
     public dgShujiiIkensho_Row() {
         super();
         this.no = RString.EMPTY;
+        this.hohokenshaBango = RString.EMPTY;
         this.hihokenshaShimei = RString.EMPTY;
         this.seibetsu = RString.EMPTY;
+        this.ninteiShinseibi = RString.EMPTY;
         this.shujiiIryokikanCode = RString.EMPTY;
         this.shujiiIryoKikanMeisho = RString.EMPTY;
         this.shujiiCode = RString.EMPTY;
-        this.shujiiMeisho = RString.EMPTY;
+        this.shujiiShimei = RString.EMPTY;
     }
 
-    public dgShujiiIkensho_Row(RString no, RString hihokenshaShimei, RString seibetsu, RString shujiiIryokikanCode, RString shujiiIryoKikanMeisho, RString shujiiCode, RString shujiiMeisho) {
+    public dgShujiiIkensho_Row(RString no, RString hohokenshaBango, RString hihokenshaShimei, RString seibetsu, RString ninteiShinseibi, RString shujiiIryokikanCode, RString shujiiIryoKikanMeisho, RString shujiiCode, RString shujiiShimei) {
         super();
         this.setOriginalData("no", no);
+        this.setOriginalData("hohokenshaBango", hohokenshaBango);
         this.setOriginalData("hihokenshaShimei", hihokenshaShimei);
         this.setOriginalData("seibetsu", seibetsu);
+        this.setOriginalData("ninteiShinseibi", ninteiShinseibi);
         this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
         this.setOriginalData("shujiiIryoKikanMeisho", shujiiIryoKikanMeisho);
         this.setOriginalData("shujiiCode", shujiiCode);
-        this.setOriginalData("shujiiMeisho", shujiiMeisho);
+        this.setOriginalData("shujiiShimei", shujiiShimei);
         this.no = no;
+        this.hohokenshaBango = hohokenshaBango;
         this.hihokenshaShimei = hihokenshaShimei;
         this.seibetsu = seibetsu;
+        this.ninteiShinseibi = ninteiShinseibi;
         this.shujiiIryokikanCode = shujiiIryokikanCode;
         this.shujiiIryoKikanMeisho = shujiiIryoKikanMeisho;
         this.shujiiCode = shujiiCode;
-        this.shujiiMeisho = shujiiMeisho;
+        this.shujiiShimei = shujiiShimei;
     }
 
     public RString getNo() {
         return no;
+    }
+
+    public RString getHohokenshaBango() {
+        return hohokenshaBango;
     }
 
     public RString getHihokenshaShimei() {
@@ -68,6 +80,10 @@ public class dgShujiiIkensho_Row extends DataRow {
 
     public RString getSeibetsu() {
         return seibetsu;
+    }
+
+    public RString getNinteiShinseibi() {
+        return ninteiShinseibi;
     }
 
     public RString getShujiiIryokikanCode() {
@@ -82,13 +98,18 @@ public class dgShujiiIkensho_Row extends DataRow {
         return shujiiCode;
     }
 
-    public RString getShujiiMeisho() {
-        return shujiiMeisho;
+    public RString getShujiiShimei() {
+        return shujiiShimei;
     }
 
     public void setNo(RString no) {
         this.setOriginalData("no", no);
         this.no = no;
+    }
+
+    public void setHohokenshaBango(RString hohokenshaBango) {
+        this.setOriginalData("hohokenshaBango", hohokenshaBango);
+        this.hohokenshaBango = hohokenshaBango;
     }
 
     public void setHihokenshaShimei(RString hihokenshaShimei) {
@@ -99,6 +120,11 @@ public class dgShujiiIkensho_Row extends DataRow {
     public void setSeibetsu(RString seibetsu) {
         this.setOriginalData("seibetsu", seibetsu);
         this.seibetsu = seibetsu;
+    }
+
+    public void setNinteiShinseibi(RString ninteiShinseibi) {
+        this.setOriginalData("ninteiShinseibi", ninteiShinseibi);
+        this.ninteiShinseibi = ninteiShinseibi;
     }
 
     public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
@@ -116,9 +142,9 @@ public class dgShujiiIkensho_Row extends DataRow {
         this.shujiiCode = shujiiCode;
     }
 
-    public void setShujiiMeisho(RString shujiiMeisho) {
-        this.setOriginalData("shujiiMeisho", shujiiMeisho);
-        this.shujiiMeisho = shujiiMeisho;
+    public void setShujiiShimei(RString shujiiShimei) {
+        this.setOriginalData("shujiiShimei", shujiiShimei);
+        this.shujiiShimei = shujiiShimei;
     }
 
     // </editor-fold>

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
@@ -25,16 +26,10 @@ public class NinteiChosaDiv extends Panel {
      */
     @JsonProperty("ccdChosaItakusakiAndChosainGuide")
     private ChosaItakusakiAndChosainInputDiv ccdChosaItakusakiAndChosainGuide;
-    @JsonProperty("chk")
-    private CheckBoxList chk;
-    @JsonProperty("chkOcrChosahyo")
-    private CheckBoxList chkOcrChosahyo;
-    @JsonProperty("spSpace1")
-    private Space spSpace1;
-    @JsonProperty("txtInsatsuSu")
-    private TextBox txtInsatsuSu;
     @JsonProperty("dgNinteiChosa")
     private DataGrid<dgNinteiChosa_Row> dgNinteiChosa;
+    @JsonProperty("NinteiChosaPrint")
+    private NinteiChosaPrintDiv NinteiChosaPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -47,46 +42,6 @@ public class NinteiChosaDiv extends Panel {
         return ccdChosaItakusakiAndChosainGuide;
     }
 
-    @JsonProperty("chk")
-    public CheckBoxList getChk() {
-        return chk;
-    }
-
-    @JsonProperty("chk")
-    public void setChk(CheckBoxList chk) {
-        this.chk=chk;
-    }
-
-    @JsonProperty("chkOcrChosahyo")
-    public CheckBoxList getChkOcrChosahyo() {
-        return chkOcrChosahyo;
-    }
-
-    @JsonProperty("chkOcrChosahyo")
-    public void setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
-        this.chkOcrChosahyo=chkOcrChosahyo;
-    }
-
-    @JsonProperty("spSpace1")
-    public Space getSpSpace1() {
-        return spSpace1;
-    }
-
-    @JsonProperty("spSpace1")
-    public void setSpSpace1(Space spSpace1) {
-        this.spSpace1=spSpace1;
-    }
-
-    @JsonProperty("txtInsatsuSu")
-    public TextBox getTxtInsatsuSu() {
-        return txtInsatsuSu;
-    }
-
-    @JsonProperty("txtInsatsuSu")
-    public void setTxtInsatsuSu(TextBox txtInsatsuSu) {
-        this.txtInsatsuSu=txtInsatsuSu;
-    }
-
     @JsonProperty("dgNinteiChosa")
     public DataGrid<dgNinteiChosa_Row> getDgNinteiChosa() {
         return dgNinteiChosa;
@@ -95,6 +50,69 @@ public class NinteiChosaDiv extends Panel {
     @JsonProperty("dgNinteiChosa")
     public void setDgNinteiChosa(DataGrid<dgNinteiChosa_Row> dgNinteiChosa) {
         this.dgNinteiChosa=dgNinteiChosa;
+    }
+
+    @JsonProperty("NinteiChosaPrint")
+    public NinteiChosaPrintDiv getNinteiChosaPrint() {
+        return NinteiChosaPrint;
+    }
+
+    @JsonProperty("NinteiChosaPrint")
+    public void setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
+        this.NinteiChosaPrint=NinteiChosaPrint;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public CheckBoxList getChk() {
+        return this.getNinteiChosaPrint().getChk();
+    }
+
+    @JsonIgnore
+    public void  setChk(CheckBoxList chk) {
+        this.getNinteiChosaPrint().setChk(chk);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyo() {
+        return this.getNinteiChosaPrint().getChkChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyo(CheckBoxList chkChosahyo) {
+        this.getNinteiChosaPrint().setChkChosahyo(chkChosahyo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkOcrChosahyo() {
+        return this.getNinteiChosaPrint().getChkOcrChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
+        this.getNinteiChosaPrint().setChkOcrChosahyo(chkOcrChosahyo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtInsatsuSu() {
+        return this.getNinteiChosaPrint().getTxtInsatsuSu();
+    }
+
+    @JsonIgnore
+    public void  setTxtInsatsuSu(TextBox txtInsatsuSu) {
+        this.getNinteiChosaPrint().setTxtInsatsuSu(txtInsatsuSu);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyo2() {
+        return this.getNinteiChosaPrint().getChkChosahyo2();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyo2(CheckBoxList chkChosahyo2) {
+        this.getNinteiChosaPrint().setChkChosahyo2(chkChosahyo2);
     }
 
     // </editor-fold>

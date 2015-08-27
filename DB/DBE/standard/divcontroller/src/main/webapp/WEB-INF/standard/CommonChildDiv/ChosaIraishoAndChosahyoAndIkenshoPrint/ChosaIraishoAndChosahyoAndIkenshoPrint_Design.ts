@@ -50,24 +50,32 @@ module DBE {
             //    return new DBZ.ChosaItakusakiAndChosainInput.ModeController(this.convFiledName("ccdChosaItakusakiAndChosainGuide"));
             //}
 
+            public dgNinteiChosa(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgNinteiChosa"));
+            }
+
+            public NinteiChosaPrint(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NinteiChosaPrint"));
+            }
+
             public chk(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chk"));
+            }
+
+            public chkChosahyo(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosahyo"));
             }
 
             public chkOcrChosahyo(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkOcrChosahyo"));
             }
 
-            public spSpace1(): UZA.Space {
-                return new UZA.Space(this.convFiledName("spSpace1"));
-            }
-
             public txtInsatsuSu(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtInsatsuSu"));
             }
 
-            public dgNinteiChosa(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgNinteiChosa"));
+            public chkChosahyo2(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosahyo2"));
             }
 
             public ShujiiIkensho(): UZA.Panel {
@@ -78,16 +86,52 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgShujiiIkensho"));
             }
 
+            public ShujiiIkenshoPrint(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShujiiIkenshoPrint"));
+            }
+
             public chkInsatsuIkensho(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkInsatsuIkensho"));
+            }
+
+            public chkIkenshoSakuseiIchiran(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoSakuseiIchiran"));
             }
 
             public chkIkenshoSakuseiryoSeikyusho(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkIkenshoSakuseiryoSeikyusho"));
             }
 
-            public chkIkenshoSakuseiIchiran(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoSakuseiIchiran"));
+            public ShindanMeirei(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShindanMeirei"));
+            }
+
+            public radJyushinKikan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radJyushinKikan"));
+            }
+
+            public txtJyushinymd(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtJyushinymd"));
+            }
+
+            public txtJushinTime(): UZA.TextBoxTime {
+                return new UZA.TextBoxTime(this.convFiledName("txtJushinTime"));
+            }
+
+            public spSpace1(): UZA.Space {
+                return new UZA.Space(this.convFiledName("spSpace1"));
+            }
+
+            public txtJushinKikan(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtJushinKikan"));
+            }
+
+            public spSpace3(): UZA.Space {
+                return new UZA.Space(this.convFiledName("spSpace3"));
+            }
+
+            public txtJushinBasho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJushinBasho"));
             }
 
             public TeishutsuKigen(): UZA.Panel {

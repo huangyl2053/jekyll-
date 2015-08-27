@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.dgNinteiChosa_Row;
@@ -30,6 +31,8 @@ public class InsatsuTaishoShiteiDiv extends Panel {
     private NinteiChosaDiv NinteiChosa;
     @JsonProperty("ShujiiIkensho")
     private ShujiiIkenshoDiv ShujiiIkensho;
+    @JsonProperty("ShindanMeirei")
+    private ShindanMeireiDiv ShindanMeirei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -57,52 +60,22 @@ public class InsatsuTaishoShiteiDiv extends Panel {
         this.ShujiiIkensho=ShujiiIkensho;
     }
 
+    @JsonProperty("ShindanMeirei")
+    public ShindanMeireiDiv getShindanMeirei() {
+        return ShindanMeirei;
+    }
+
+    @JsonProperty("ShindanMeirei")
+    public void setShindanMeirei(ShindanMeireiDiv ShindanMeirei) {
+        this.ShindanMeirei=ShindanMeirei;
+    }
+
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
     public IChosaItakusakiAndChosainInputDiv getCcdChosaItakusakiAndChosainGuide() {
         return this.getNinteiChosa().getCcdChosaItakusakiAndChosainGuide();
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChk() {
-        return this.getNinteiChosa().getChk();
-    }
-
-    @JsonIgnore
-    public void  setChk(CheckBoxList chk) {
-        this.getNinteiChosa().setChk(chk);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkOcrChosahyo() {
-        return this.getNinteiChosa().getChkOcrChosahyo();
-    }
-
-    @JsonIgnore
-    public void  setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
-        this.getNinteiChosa().setChkOcrChosahyo(chkOcrChosahyo);
-    }
-
-    @JsonIgnore
-    public Space getSpSpace1() {
-        return this.getNinteiChosa().getSpSpace1();
-    }
-
-    @JsonIgnore
-    public void  setSpSpace1(Space spSpace1) {
-        this.getNinteiChosa().setSpSpace1(spSpace1);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtInsatsuSu() {
-        return this.getNinteiChosa().getTxtInsatsuSu();
-    }
-
-    @JsonIgnore
-    public void  setTxtInsatsuSu(TextBox txtInsatsuSu) {
-        this.getNinteiChosa().setTxtInsatsuSu(txtInsatsuSu);
     }
 
     @JsonIgnore
@@ -116,6 +89,66 @@ public class InsatsuTaishoShiteiDiv extends Panel {
     }
 
     @JsonIgnore
+    public NinteiChosaPrintDiv getNinteiChosaPrint() {
+        return this.getNinteiChosa().getNinteiChosaPrint();
+    }
+
+    @JsonIgnore
+    public void  setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
+        this.getNinteiChosa().setNinteiChosaPrint(NinteiChosaPrint);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChk() {
+        return this.getNinteiChosa().getNinteiChosaPrint().getChk();
+    }
+
+    @JsonIgnore
+    public void  setChk(CheckBoxList chk) {
+        this.getNinteiChosa().getNinteiChosaPrint().setChk(chk);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyo() {
+        return this.getNinteiChosa().getNinteiChosaPrint().getChkChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyo(CheckBoxList chkChosahyo) {
+        this.getNinteiChosa().getNinteiChosaPrint().setChkChosahyo(chkChosahyo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkOcrChosahyo() {
+        return this.getNinteiChosa().getNinteiChosaPrint().getChkOcrChosahyo();
+    }
+
+    @JsonIgnore
+    public void  setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
+        this.getNinteiChosa().getNinteiChosaPrint().setChkOcrChosahyo(chkOcrChosahyo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtInsatsuSu() {
+        return this.getNinteiChosa().getNinteiChosaPrint().getTxtInsatsuSu();
+    }
+
+    @JsonIgnore
+    public void  setTxtInsatsuSu(TextBox txtInsatsuSu) {
+        this.getNinteiChosa().getNinteiChosaPrint().setTxtInsatsuSu(txtInsatsuSu);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyo2() {
+        return this.getNinteiChosa().getNinteiChosaPrint().getChkChosahyo2();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyo2(CheckBoxList chkChosahyo2) {
+        this.getNinteiChosa().getNinteiChosaPrint().setChkChosahyo2(chkChosahyo2);
+    }
+
+    @JsonIgnore
     public DataGrid<dgShujiiIkensho_Row> getDgShujiiIkensho() {
         return this.getShujiiIkensho().getDgShujiiIkensho();
     }
@@ -126,33 +159,113 @@ public class InsatsuTaishoShiteiDiv extends Panel {
     }
 
     @JsonIgnore
+    public ShujiiIkenshoPrintDiv getShujiiIkenshoPrint() {
+        return this.getShujiiIkensho().getShujiiIkenshoPrint();
+    }
+
+    @JsonIgnore
+    public void  setShujiiIkenshoPrint(ShujiiIkenshoPrintDiv ShujiiIkenshoPrint) {
+        this.getShujiiIkensho().setShujiiIkenshoPrint(ShujiiIkenshoPrint);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkInsatsuIkensho() {
-        return this.getShujiiIkensho().getChkInsatsuIkensho();
+        return this.getShujiiIkensho().getShujiiIkenshoPrint().getChkInsatsuIkensho();
     }
 
     @JsonIgnore
     public void  setChkInsatsuIkensho(CheckBoxList chkInsatsuIkensho) {
-        this.getShujiiIkensho().setChkInsatsuIkensho(chkInsatsuIkensho);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkIkenshoSakuseiryoSeikyusho() {
-        return this.getShujiiIkensho().getChkIkenshoSakuseiryoSeikyusho();
-    }
-
-    @JsonIgnore
-    public void  setChkIkenshoSakuseiryoSeikyusho(CheckBoxList chkIkenshoSakuseiryoSeikyusho) {
-        this.getShujiiIkensho().setChkIkenshoSakuseiryoSeikyusho(chkIkenshoSakuseiryoSeikyusho);
+        this.getShujiiIkensho().getShujiiIkenshoPrint().setChkInsatsuIkensho(chkInsatsuIkensho);
     }
 
     @JsonIgnore
     public CheckBoxList getChkIkenshoSakuseiIchiran() {
-        return this.getShujiiIkensho().getChkIkenshoSakuseiIchiran();
+        return this.getShujiiIkensho().getShujiiIkenshoPrint().getChkIkenshoSakuseiIchiran();
     }
 
     @JsonIgnore
     public void  setChkIkenshoSakuseiIchiran(CheckBoxList chkIkenshoSakuseiIchiran) {
-        this.getShujiiIkensho().setChkIkenshoSakuseiIchiran(chkIkenshoSakuseiIchiran);
+        this.getShujiiIkensho().getShujiiIkenshoPrint().setChkIkenshoSakuseiIchiran(chkIkenshoSakuseiIchiran);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkIkenshoSakuseiryoSeikyusho() {
+        return this.getShujiiIkensho().getShujiiIkenshoPrint().getChkIkenshoSakuseiryoSeikyusho();
+    }
+
+    @JsonIgnore
+    public void  setChkIkenshoSakuseiryoSeikyusho(CheckBoxList chkIkenshoSakuseiryoSeikyusho) {
+        this.getShujiiIkensho().getShujiiIkenshoPrint().setChkIkenshoSakuseiryoSeikyusho(chkIkenshoSakuseiryoSeikyusho);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadJyushinKikan() {
+        return this.getShindanMeirei().getRadJyushinKikan();
+    }
+
+    @JsonIgnore
+    public void  setRadJyushinKikan(RadioButton radJyushinKikan) {
+        this.getShindanMeirei().setRadJyushinKikan(radJyushinKikan);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtJyushinymd() {
+        return this.getShindanMeirei().getTxtJyushinymd();
+    }
+
+    @JsonIgnore
+    public void  setTxtJyushinymd(TextBoxDate txtJyushinymd) {
+        this.getShindanMeirei().setTxtJyushinymd(txtJyushinymd);
+    }
+
+    @JsonIgnore
+    public TextBoxTime getTxtJushinTime() {
+        return this.getShindanMeirei().getTxtJushinTime();
+    }
+
+    @JsonIgnore
+    public void  setTxtJushinTime(TextBoxTime txtJushinTime) {
+        this.getShindanMeirei().setTxtJushinTime(txtJushinTime);
+    }
+
+    @JsonIgnore
+    public Space getSpSpace1() {
+        return this.getShindanMeirei().getSpSpace1();
+    }
+
+    @JsonIgnore
+    public void  setSpSpace1(Space spSpace1) {
+        this.getShindanMeirei().setSpSpace1(spSpace1);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtJushinKikan() {
+        return this.getShindanMeirei().getTxtJushinKikan();
+    }
+
+    @JsonIgnore
+    public void  setTxtJushinKikan(TextBoxDateRange txtJushinKikan) {
+        this.getShindanMeirei().setTxtJushinKikan(txtJushinKikan);
+    }
+
+    @JsonIgnore
+    public Space getSpSpace3() {
+        return this.getShindanMeirei().getSpSpace3();
+    }
+
+    @JsonIgnore
+    public void  setSpSpace3(Space spSpace3) {
+        this.getShindanMeirei().setSpSpace3(spSpace3);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJushinBasho() {
+        return this.getShindanMeirei().getTxtJushinBasho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJushinBasho(TextBox txtJushinBasho) {
+        this.getShindanMeirei().setTxtJushinBasho(txtJushinBasho);
     }
 
     // </editor-fold>
