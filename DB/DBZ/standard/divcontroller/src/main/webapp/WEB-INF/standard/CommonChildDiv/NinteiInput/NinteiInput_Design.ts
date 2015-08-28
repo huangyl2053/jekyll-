@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBD {
+module DBZ {
 
      export module NinteiInput {
 
@@ -10,10 +10,6 @@ module DBD {
 
             public static onChange_radNinteiKubun(): string {
                 return "onChange_radNinteiKubun";
-            }
-
-            public static onBeforeClick_btnValidate(): string {
-                return "onBeforeClick_btnValidate";
             }
 
             public static onClick_btnSixMonthLater(): string {
@@ -46,11 +42,11 @@ module DBD {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBD.NinteiInput.Controls.myType();
+                return this._myName + "_" + DBZ.NinteiInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBD.NinteiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.NinteiInput.Controls.myType() + "_" + fieldName;
             }
 
             public NinteiInput(): UZA.Panel {

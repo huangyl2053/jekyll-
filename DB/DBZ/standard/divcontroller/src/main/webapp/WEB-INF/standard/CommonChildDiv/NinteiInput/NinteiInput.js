@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiInput) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -227,12 +227,12 @@ var DBD;
             Modes.ShoriType = ShoriType;
         })(NinteiInput.Modes || (NinteiInput.Modes = {}));
         var Modes = NinteiInput.Modes;
-    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
-    var NinteiInput = DBD.NinteiInput;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
+    var NinteiInput = DBZ.NinteiInput;
+})(DBZ || (DBZ = {}));
 
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiInput) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -247,6 +247,6 @@ var DBD;
             return PublicProperties;
         })();
         NinteiInput.PublicProperties = PublicProperties;
-    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
-    var NinteiInput = DBD.NinteiInput;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
+    var NinteiInput = DBZ.NinteiInput;
+})(DBZ || (DBZ = {}));

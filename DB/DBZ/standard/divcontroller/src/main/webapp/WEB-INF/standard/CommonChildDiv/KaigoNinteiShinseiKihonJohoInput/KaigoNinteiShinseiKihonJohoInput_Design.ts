@@ -37,6 +37,10 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radShinseishoKubun"));
             }
 
+            public txtShinseiJokyo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
+            }
+
             public txtShinseiYMD(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtShinseiYMD"));
             }
@@ -53,6 +57,10 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlShinseiKubunHorei"));
             }
 
+            public ddlShisho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlShisho"));
+            }
+
             public chkKyuSochisha(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkKyuSochisha"));
             }
@@ -67,10 +75,6 @@ module DBZ {
 
             public ddlTokuteiShippei(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlTokuteiShippei"));
-            }
-
-            public txtShinseiJokyo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
             }
 
             public ServiceSakujo(): UZA.Panel {

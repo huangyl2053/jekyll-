@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBD {
+module DBZ {
 
      export module ShinseiSonotaJohoInput {
 
@@ -22,11 +22,11 @@ module DBD {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType();
+                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
             }
 
             public ShinseiSonotaJohoInput(): UZA.Panel {

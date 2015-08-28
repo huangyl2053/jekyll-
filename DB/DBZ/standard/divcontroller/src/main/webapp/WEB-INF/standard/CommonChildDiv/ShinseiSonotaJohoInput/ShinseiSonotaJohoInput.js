@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ShinseiSonotaJohoInput) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -170,12 +170,12 @@ var DBD;
             Modes.ShoriType = ShoriType;
         })(ShinseiSonotaJohoInput.Modes || (ShinseiSonotaJohoInput.Modes = {}));
         var Modes = ShinseiSonotaJohoInput.Modes;
-    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
-    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ShinseiSonotaJohoInput || (DBZ.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBZ.ShinseiSonotaJohoInput;
+})(DBZ || (DBZ = {}));
 
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ShinseiSonotaJohoInput) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -190,6 +190,6 @@ var DBD;
             return PublicProperties;
         })();
         ShinseiSonotaJohoInput.PublicProperties = PublicProperties;
-    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
-    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ShinseiSonotaJohoInput || (DBZ.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBZ.ShinseiSonotaJohoInput;
+})(DBZ || (DBZ = {}));

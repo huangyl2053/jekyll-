@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ShinseiSonotaJohoInput) {
         var Events = (function () {
             function Events() {
@@ -17,11 +17,11 @@ var DBD;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType();
+                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ShinseiSonotaJohoInput = function () {
@@ -70,6 +70,6 @@ var DBD;
             return Controls;
         })();
         ShinseiSonotaJohoInput.Controls = Controls;
-    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
-    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ShinseiSonotaJohoInput || (DBZ.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBZ.ShinseiSonotaJohoInput;
+})(DBZ || (DBZ = {}));

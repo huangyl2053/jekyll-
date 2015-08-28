@@ -45,18 +45,20 @@ module DBZ {
                     this.controls.txtKanaShimei().readOnly = false;
                     this.controls.txtHonninKankeisei().readOnly = false;
                     this.controls.txtYubinNo().readOnly = false;
-                    this.controls.txtJusho().readOnly = false;
+                    this.controls.ccdZenkokuJushoInput().State().入力;
+                    this.controls.ccdChoikiInput().State().入力;
                     this.controls.txtTelNo().readOnly = false;
                 }
 
-                public ShgokaiMode() {
+                public ShokaiMode() {
                     this.controls.ddlTodokledeDaikoKubun().readOnly = true;
                     this.controls.btnZenkaiFukusha().disabled = true;
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;
                     this.controls.txtYubinNo().readOnly = true;
-                    this.controls.txtJusho().readOnly = true;
+                    this.controls.ccdZenkokuJushoInput().State().照会;
+                    this.controls.ccdChoikiInput().State().照会;
                     this.controls.txtTelNo().readOnly = true;
                 }
             }
