@@ -12,8 +12,8 @@ var DBZ;
                 return "onClick_Hikaku";
             };
 
-            Events.onClick_SetaiKakunin = function () {
-                return "onClick_SetaiKakunin";
+            Events.onClick_SetaiinSentaku = function () {
+                return "onClick_SetaiinSentaku";
             };
             return Events;
         })();
@@ -44,7 +44,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSetaiIchiranKazeiNendo = function () {
-                return new UZA.TextBox(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+                return new UZA.TextBoxYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
             };
 
             Controls.prototype.ddlSetaiIchiranKazeiNendo = function () {
@@ -56,7 +56,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSetaiIchiranSetaiCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
+                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
             };
 
             Controls.prototype.chkSetaiIchiranAll = function () {
@@ -73,6 +73,14 @@ var DBZ;
 
             Controls.prototype.dgSetaiShotoku = function () {
                 return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
+            };
+
+            Controls.prototype.dgShotokuRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShotokuRireki"));
+            };
+
+            Controls.prototype.btnRirekiClose = function () {
+                return new UZA.Button(this.convFiledName("btnRirekiClose"));
             };
             return Controls;
         })();
