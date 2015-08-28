@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -16,8 +16,8 @@ module DBZ {
                 return "onClick_Hikaku";
             }
 
-            public static onClick_SetaiKakunin(): string {
-                return "onClick_SetaiKakunin";
+            public static onClick_SetaiinSentaku(): string {
+                return "onClick_SetaiinSentaku";
             }
 
         }
@@ -49,8 +49,8 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtSetaiIchiranKijunYMD"));
             }
 
-            public txtSetaiIchiranKazeiNendo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+            public txtSetaiIchiranKazeiNendo(): UZA.TextBoxYear {
+                return new UZA.TextBoxYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
             }
 
             public ddlSetaiIchiranKazeiNendo(): UZA.DropDownList {
@@ -61,8 +61,8 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnSaiHyoji"));
             }
 
-            public txtSetaiIchiranSetaiCode(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
+            public txtSetaiIchiranSetaiCode(): UZA.TextBoxSetaiCode {
+                return new UZA.TextBoxSetaiCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
             }
 
             public chkSetaiIchiranAll(): UZA.CheckBoxList {
@@ -79,6 +79,14 @@ module DBZ {
 
             public dgSetaiShotoku(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
+            }
+
+            public dgShotokuRireki(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgShotokuRireki"));
+            }
+
+            public btnRirekiClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnRirekiClose"));
             }
 
         }
