@@ -22,6 +22,9 @@ module DBZ {
             public ShoriType() {
                 return new Modes.ShoriType(this.controls);
             }
+            public DisplayType() {
+                return new Modes.DisplayType(this.controls);
+            }
             public AtenaType() {
                 return new Modes.AtenaType(this.controls);
             }
@@ -44,9 +47,9 @@ module DBZ {
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtKanaShimei().readOnly = false;
                     this.controls.txtHonninKankeisei().readOnly = false;
-                    this.controls.txtYubinNo().readOnly = false;
-                    this.controls.ccdZenkokuJushoInput().State().入力;
-                    this.controls.ccdChoikiInput().State().入力;
+                    this.controls.ccdZenkokuJushoInput().State().入力();
+                    this.controls.ccdChoikiInput().State().入力();
+                    this.controls.txtYubinNo().readOnly = true;
                     this.controls.txtTelNo().readOnly = false;
                 }
 
@@ -56,12 +59,35 @@ module DBZ {
                     this.controls.txtShimei().readOnly = true;
                     this.controls.txtKanaShimei().readOnly = true;
                     this.controls.txtHonninKankeisei().readOnly = true;
+                    this.controls.ccdZenkokuJushoInput().State().照会();
+                    this.controls.ccdChoikiInput().State().照会();
                     this.controls.txtYubinNo().readOnly = true;
-                    this.controls.ccdZenkokuJushoInput().State().照会;
-                    this.controls.ccdChoikiInput().State().照会;
                     this.controls.txtTelNo().readOnly = true;
                 }
             }
+            
+                 export class DisplayType {
+
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 管内() {
+                    this.controls.ccdZenkokuJushoInput().DisplayNoneSetMode().使用しない();
+                    this.controls.ccdChoikiInput().DisplayNoneSetMode().使用する();
+                    this.controls.txtYubinNo().displayNone=false
+                }
+
+                public 管外() {
+
+                    this.controls.ccdZenkokuJushoInput().DisplayNoneSetMode().使用する();
+                    this.controls.ccdChoikiInput().DisplayNoneSetMode().使用しない();
+                    this.controls.txtYubinNo().displayNone=true
+                }
+            }
+            
             export class AtenaType {
 
                 private controls: Controls;

@@ -16,6 +16,9 @@ var DBZ;
             ModeController.prototype.DisplayType = function () {
                 return new Modes.DisplayType(this.controls);
             };
+            ModeController.prototype.GyomuType = function () {
+                return new Modes.GyomuType(this.controls);
+            };
             return ModeController;
         })();
         NinteiShinseishaFinder.ModeController = ModeController;
@@ -85,6 +88,40 @@ var DBZ;
                 return DisplayType;
             })();
             Modes.DisplayType = DisplayType;
+
+            var GyomuType = (function () {
+                function GyomuType(controls) {
+                    this.controls = controls;
+                }
+                GyomuType.prototype.Nintei = function () {
+                    this.controls.chkShinseiUketsuke().readOnly = false;
+                    this.controls.chkChosaIrai().readOnly = false;
+                    this.controls.chkIkenshoIrai().readOnly = false;
+                    this.controls.chkChosaNyushu().readOnly = false;
+                    this.controls.chkIkenshoNyushu().readOnly = false;
+                    this.controls.chkIchijiHantei().readOnly = false;
+                    this.controls.chkMasking().readOnly = false;
+                    this.controls.chkShinsakaiToroku().readOnly = false;
+                    this.controls.chkNijiHantei().readOnly = false;
+                    this.controls.chkTsuchiShori().readOnly = true;
+                    this.controls.chkGetsureiShori().readOnly = false;
+                };
+                GyomuType.prototype.Jukyu = function () {
+                    this.controls.chkShinseiUketsuke().readOnly = true;
+                    this.controls.chkChosaIrai().readOnly = true;
+                    this.controls.chkIkenshoIrai().readOnly = true;
+                    this.controls.chkChosaNyushu().readOnly = true;
+                    this.controls.chkIkenshoNyushu().readOnly = true;
+                    this.controls.chkIchijiHantei().readOnly = true;
+                    this.controls.chkMasking().readOnly = true;
+                    this.controls.chkShinsakaiToroku().readOnly = true;
+                    this.controls.chkNijiHantei().readOnly = true;
+                    this.controls.chkTsuchiShori().readOnly = false;
+                    this.controls.chkGetsureiShori().readOnly = true;
+                };
+                return GyomuType;
+            })();
+            Modes.GyomuType = GyomuType;
         })(NinteiShinseishaFinder.Modes || (NinteiShinseishaFinder.Modes = {}));
         var Modes = NinteiShinseishaFinder.Modes;
     })(DBZ.NinteiShinseishaFinder || (DBZ.NinteiShinseishaFinder = {}));
