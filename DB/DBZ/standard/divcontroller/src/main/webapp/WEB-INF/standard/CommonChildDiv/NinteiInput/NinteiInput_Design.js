@@ -1,15 +1,11 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiInput) {
         var Events = (function () {
             function Events() {
             }
             Events.onChange_radNinteiKubun = function () {
                 return "onChange_radNinteiKubun";
-            };
-
-            Events.onBeforeClick_btnValidate = function () {
-                return "onBeforeClick_btnValidate";
             };
 
             Events.onClick_btnSixMonthLater = function () {
@@ -40,11 +36,11 @@ var DBD;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBD.NinteiInput.Controls.myType();
+                return this._myName + "_" + DBZ.NinteiInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBD.NinteiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.NinteiInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.NinteiInput = function () {
@@ -121,6 +117,6 @@ var DBD;
             return Controls;
         })();
         NinteiInput.Controls = Controls;
-    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
-    var NinteiInput = DBD.NinteiInput;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
+    var NinteiInput = DBZ.NinteiInput;
+})(DBZ || (DBZ = {}));

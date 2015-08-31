@@ -1,6 +1,8 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/URACommonChildDiv.d.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -89,16 +91,24 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             }
 
-            public txtYubinNo(): UZA.TextBoxYubinNo {
-                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            public radKannaiKangai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKannaiKangai"));
             }
 
             public txtTelNo(): UZA.TextBoxTelNo {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtTelNo"));
             }
 
-            public txtJusho(): UZA.TextBoxJusho {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJusho"));
+            public txtYubinNo(): UZA.TextBoxYubinNo {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            }
+
+            public ccdChoikiInput(): URA.ChoikiInput.ModeController {
+                return new URA.ChoikiInput.ModeController(this.convFiledName("ccdChoikiInput"));
+            }
+
+            public ccdZenkokuJushoInput(): URZ.ZenkokuJushoInput.ModeController {
+                return new URZ.ZenkokuJushoInput.ModeController(this.convFiledName("ccdZenkokuJushoInput"));
             }
 
         }

@@ -64,6 +64,10 @@ var DBZ;
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteiShuryoYmd"));
             };
 
+            Controls.prototype.txtHookenshaCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHookenshaCode"));
+            };
+
             Controls.prototype.txtHokensha = function () {
                 return new UZA.TextBox(this.convFiledName("txtHokensha"));
             };

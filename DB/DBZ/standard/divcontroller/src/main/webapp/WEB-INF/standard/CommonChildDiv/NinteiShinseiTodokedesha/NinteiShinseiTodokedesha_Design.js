@@ -83,16 +83,24 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             };
 
-            Controls.prototype.txtYubinNo = function () {
-                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            Controls.prototype.radKannaiKangai = function () {
+                return new UZA.RadioButton(this.convFiledName("radKannaiKangai"));
             };
 
             Controls.prototype.txtTelNo = function () {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtTelNo"));
             };
 
-            Controls.prototype.txtJusho = function () {
-                return new UZA.TextBoxJusho(this.convFiledName("txtJusho"));
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            };
+
+            Controls.prototype.ccdChoikiInput = function () {
+                return new URA.ChoikiInput.ModeController(this.convFiledName("ccdChoikiInput"));
+            };
+
+            Controls.prototype.ccdZenkokuJushoInput = function () {
+                return new URZ.ZenkokuJushoInput.ModeController(this.convFiledName("ccdZenkokuJushoInput"));
             };
             return Controls;
         })();
