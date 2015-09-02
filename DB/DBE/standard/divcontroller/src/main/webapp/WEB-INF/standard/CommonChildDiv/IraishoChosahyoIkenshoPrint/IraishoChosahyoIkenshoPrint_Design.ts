@@ -5,7 +5,7 @@
 
 module DBE {
 
-     export module ChosaIraishoAndChosahyoAndIkenshoPrint {
+     export module IraishoChosahyoIkenshoPrint {
 
         export class Events {
 
@@ -15,7 +15,7 @@ module DBE {
             private _myName: string;
 
             public static myType(): string {
-                return "ChosaIraishoAndChosahyoAndIkenshoPrint";
+                return "IraishoChosahyoIkenshoPrint";
             }
 
             constructor(fieldName: string) {
@@ -23,14 +23,14 @@ module DBE {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBE.ChosaIraishoAndChosahyoAndIkenshoPrint.Controls.myType();
+                return this._myName + "_" + DBE.IraishoChosahyoIkenshoPrint.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBE.ChosaIraishoAndChosahyoAndIkenshoPrint.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBE.IraishoChosahyoIkenshoPrint.Controls.myType() + "_" + fieldName;
             }
 
-            public ChosaIraishoAndChosahyoAndIkenshoPrint(): UZA.Panel {
+            public IraishoChosahyoIkenshoPrint(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 

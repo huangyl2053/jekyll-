@@ -1,7 +1,7 @@
-/// <reference path='ChosaIraishoAndChosahyoAndIkenshoPrint_Design.ts' />
+/// <reference path='IraishoChosahyoIkenshoPrint_Design.ts' />
 module DBE
 {
-    export module ChosaIraishoAndChosahyoAndIkenshoPrint
+    export module IraishoChosahyoIkenshoPrint
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBE
 
 module DBE
 {
-    export module ChosaIraishoAndChosahyoAndIkenshoPrint
+    export module IraishoChosahyoIkenshoPrint
     {
         export class PublicProperties {
             private controls: Controls;
