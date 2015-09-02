@@ -23,6 +23,9 @@ module DBZ {
             public GyomuType() {
                 return new Modes.GyomuType(this.controls);
             }
+            public MinashiType() {
+                return new Modes.MinashiType(this.controls);
+            }
         }
 
         export module Modes {
@@ -128,6 +131,22 @@ module DBZ {
                     this.controls.chkTsuchiShori().readOnly = false;
                     this.controls.chkGetsureiShori().readOnly = true;
 
+                }
+            }
+
+            export class MinashiType {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+                public Minashi(): void {
+                    this.controls.chkMinashiFlag().readOnly = true;
+                    }
+                public NotMinashi(): void {
+                    var minashiFlag = this.controls.chkMinashiFlag().selectedItem[0].replace="True";
+
+                    this.controls.chkMinashiFlag().readOnly = false;
                 }
             }
 

@@ -61,6 +61,10 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlHihokenshaNameMatchType"));
             }
 
+            public chkMinashiFlag(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkMinashiFlag"));
+            }
+
             public txtNinteiShinseiDateFrom(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiShinseiDateFrom"));
             }

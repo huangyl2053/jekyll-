@@ -56,6 +56,10 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlHihokenshaNameMatchType"));
             };
 
+            Controls.prototype.chkMinashiFlag = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMinashiFlag"));
+            };
+
             Controls.prototype.txtNinteiShinseiDateFrom = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiShinseiDateFrom"));
             };
