@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import java.util.Objects;
 
 /**
  * DbT7055GappeiJohoの項目定義クラスです
@@ -36,7 +36,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
     private RString chiikiNo;
     private LasdecCode shichosonCode;
     private RString gappeiShurui;
-    private ShoKisaiHokenshaNo hokenshaNo;
+    private HokenshaNo hokenshaNo;
     private FlexibleDate kyuJohoFuyoToYMD;
     private FlexibleDate kokuhorenDataFromYMD;
 
@@ -162,7 +162,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      *
      * @return hokenshaNo
      */
-    public ShoKisaiHokenshaNo getHokenshaNo() {
+    public HokenshaNo getHokenshaNo() {
         return hokenshaNo;
     }
 
@@ -171,7 +171,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      *
      * @param hokenshaNo hokenshaNo
      */
-    public void setHokenshaNo(ShoKisaiHokenshaNo hokenshaNo) {
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
     }
 
@@ -215,8 +215,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * このエンティティの主キーが他の{@literal DbT7055GappeiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7055GappeiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7055GappeiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7055GappeiJohoEntity other) {

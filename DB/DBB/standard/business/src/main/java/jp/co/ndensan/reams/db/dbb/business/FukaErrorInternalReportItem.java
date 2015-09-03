@@ -5,16 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportItem;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportItem;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課エラー一覧内部帳票の業務固有の項目を持つクラスです。 CSV出力のためのアノテーションの設定や、Validationメソッドを宣言しています。
@@ -34,7 +35,7 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
     @CsvField(order = 50, name = "識別コード")
     private final ShikibetsuCode 識別コード;
 
-    private final FukaErrorModel model;
+    private final FukaErrorList model;
     private final InternalReportShoriKubun 処理区分;
 
     /**
@@ -43,14 +44,14 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
      * @param model 賦課エラー情報を持つテーブルに対応したModelクラス
      * @throws NullPointerException 賦課年度、通知書番号、処理区分にnullが渡されたとき
      */
-    public FukaErrorInternalReportItem(FukaErrorModel model) throws NullPointerException {
+    public FukaErrorInternalReportItem(FukaErrorList model) throws NullPointerException {
         requireNonNull(model, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("賦課エラーのModelObject", getClass().getName()));
         requireNonNull(model.get賦課年度(), UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("賦課年度", getClass().getName()));
         requireNonNull(model.get通知書番号(), UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("通知書番号", getClass().getName()));
-        requireNonNull(model.get処理区分(), UrSystemErrorMessages.引数がnullのため生成不可
+        requireNonNull(model.get処理区分コード(), UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("通知書番号", getClass().getName()));
         requireNonNull(model.getエラーコード(), UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("エラーコード", getClass().getName()));
@@ -62,13 +63,13 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
         this.識別コード = model.get識別コード();
 
         this.model = model;
-        this.処理区分 = model.get処理区分();
+        this.処理区分 = InternalReportShoriKubun.toValue(model.get処理区分コード());
     }
 
-    private FukaError getエラー詳細(FukaErrorModel model) {
+    private FukaError getエラー詳細(FukaErrorList model) {
         return new FukaError(model.getエラーコード(),
-                model.getエラー名称(),
-                model.getエラー略称());
+                RString.EMPTY,
+                RString.EMPTY);
     }
 
     /**
@@ -76,8 +77,8 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
      *
      * @return 賦課エラーModel
      */
-    public FukaErrorModel toModel() {
-        return new FukaErrorModel(model.getEntity());
+    public FukaErrorList toModel() {
+        return new FukaErrorList(model.toEntity());
     }
 
     /**

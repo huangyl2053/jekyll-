@@ -12,13 +12,14 @@ import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * KyufujissekiShuruiDetailEntityをKyufujissekiServiceCollectionに変換するクラスです。
@@ -53,10 +54,10 @@ public final class KyufuJissekiServiceMapper {
         //TODO 様式固定でnewしている。本来は様式を見て入れる値を変える。
         return new KyufuJissekiService(
                 entity.getJigyoshoNo(),
-                entity.getHokenRiyoshaFutangaku(),
-                entity.getAtoHokenTanisuTotal(),
-                entity.getAtoHokenSeikyugaku(),
-                entity.getAtoServiceTanisuTotal(),
+                new Decimal(entity.getHokenRiyoshaFutangaku()),
+                new Decimal(entity.getAtoHokenTanisuTotal()),
+                new Decimal(entity.getAtoHokenSeikyugaku().toString()),
+                new Decimal(entity.getAtoServiceTanisuTotal()),
                 create給付実績Key(entity, teikyoYMRange));
     }
 
@@ -92,9 +93,9 @@ public final class KyufuJissekiServiceMapper {
         return new KyufuJissekiKeyInfo(
                 entity.getHiHokenshaNo(),
                 teikyoYMRange,
-                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo().getColumnValue()), new RString(""), new RString("")),
                 getサービス種類コード(entity),
-                entity.getServiceTeikyoYM());
+                new ServiceTeikyoYM(entity.getServiceTeikyoYM()));
     }
 
     private static ServiceShuruiCode getサービス種類コード(DbV3016KyufujissekiShuruiDetailEntity entity) {

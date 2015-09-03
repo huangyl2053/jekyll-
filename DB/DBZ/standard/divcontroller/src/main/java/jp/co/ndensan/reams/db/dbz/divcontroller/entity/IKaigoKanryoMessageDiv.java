@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

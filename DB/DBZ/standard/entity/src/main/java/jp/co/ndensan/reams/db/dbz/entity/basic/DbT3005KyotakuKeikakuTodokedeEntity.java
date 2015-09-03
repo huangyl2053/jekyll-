@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT3005KyotakuKeikakuTodokedeの項目定義クラスです
@@ -22,6 +23,7 @@ import java.util.Objects;
  */
 public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT3005KyotakuKeikakuTodokedeEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3005KyotakuKeikakuTodokede");
 
@@ -38,7 +40,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString todokedeKubun;
     private FlexibleDate todokedeYMD;
     private AtenaMeisho todokedeshaShimei;
@@ -51,7 +53,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,7 +62,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -69,7 +71,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -78,17 +80,16 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -97,7 +98,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -106,7 +107,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -115,7 +116,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 対象年月のgetメソッドです。
-     * 
+     *
      * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
@@ -124,7 +125,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 対象年月のsetメソッドです。
-     * 
+     *
      * @param taishoYM 対象年月
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
@@ -133,19 +134,19 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -153,7 +154,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
      * 届出区分のgetメソッドです。
      * <br/>
      * <br/>1:新規,2:変更,3:暫定
-     * 
+     *
      * @return 届出区分
      */
     public RString getTodokedeKubun() {
@@ -164,7 +165,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
      * 届出区分のsetメソッドです。
      * <br/>
      * <br/>1:新規,2:変更,3:暫定
-     * 
+     *
      * @param todokedeKubun 届出区分
      */
     public void setTodokedeKubun(RString todokedeKubun) {
@@ -173,7 +174,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出年月日のgetメソッドです。
-     * 
+     *
      * @return 届出年月日
      */
     public FlexibleDate getTodokedeYMD() {
@@ -182,7 +183,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出年月日のsetメソッドです。
-     * 
+     *
      * @param todokedeYMD 届出年月日
      */
     public void setTodokedeYMD(FlexibleDate todokedeYMD) {
@@ -191,7 +192,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者氏名のgetメソッドです。
-     * 
+     *
      * @return 届出者氏名
      */
     public AtenaMeisho getTodokedeshaShimei() {
@@ -200,7 +201,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者氏名のsetメソッドです。
-     * 
+     *
      * @param todokedeshaShimei 届出者氏名
      */
     public void setTodokedeshaShimei(AtenaMeisho todokedeshaShimei) {
@@ -209,7 +210,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者氏名カナのgetメソッドです。
-     * 
+     *
      * @return 届出者氏名カナ
      */
     public AtenaKanaMeisho getTodokedeshaShimeiKana() {
@@ -218,7 +219,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者氏名カナのsetメソッドです。
-     * 
+     *
      * @param todokedeshaShimeiKana 届出者氏名カナ
      */
     public void setTodokedeshaShimeiKana(AtenaKanaMeisho todokedeshaShimeiKana) {
@@ -227,7 +228,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 届出者郵便番号
      */
     public YubinNo getTodokedeshaYubinNo() {
@@ -236,7 +237,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者郵便番号のsetメソッドです。
-     * 
+     *
      * @param todokedeshaYubinNo 届出者郵便番号
      */
     public void setTodokedeshaYubinNo(YubinNo todokedeshaYubinNo) {
@@ -245,7 +246,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者住所のgetメソッドです。
-     * 
+     *
      * @return 届出者住所
      */
     public RString getTodokedeshaJusho() {
@@ -254,7 +255,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者住所のsetメソッドです。
-     * 
+     *
      * @param todokedeshaJusho 届出者住所
      */
     public void setTodokedeshaJusho(RString todokedeshaJusho) {
@@ -263,7 +264,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者電話番号のgetメソッドです。
-     * 
+     *
      * @return 届出者電話番号
      */
     public TelNo getTodokedeshaTelNo() {
@@ -272,7 +273,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 届出者電話番号のsetメソッドです。
-     * 
+     *
      * @param todokedeshaTelNo 届出者電話番号
      */
     public void setTodokedeshaTelNo(TelNo todokedeshaTelNo) {
@@ -283,7 +284,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
      * 届出者関係区分のgetメソッドです。
      * <br/>
      * <br/>1:本人,2:家族,3:代理人,4:サービス事業者,5:ケアマネージャ
-     * 
+     *
      * @return 届出者関係区分
      */
     public RString getTodokedeshaKankeiKubun() {
@@ -294,7 +295,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
      * 届出者関係区分のsetメソッドです。
      * <br/>
      * <br/>1:本人,2:家族,3:代理人,4:サービス事業者,5:ケアマネージャ
-     * 
+     *
      * @param todokedeshaKankeiKubun 届出者関係区分
      */
     public void setTodokedeshaKankeiKubun(RString todokedeshaKankeiKubun) {
@@ -303,7 +304,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 暫定区分のgetメソッドです。
-     * 
+     *
      * @return 暫定区分
      */
     public RString getZanteiKubun() {
@@ -312,7 +313,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * 暫定区分のsetメソッドです。
-     * 
+     *
      * @param zanteiKubun 暫定区分
      */
     public void setZanteiKubun(RString zanteiKubun) {
@@ -321,9 +322,9 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * このエンティティの主キーが他の{@literal DbT3005KyotakuKeikakuTodokedeEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3005KyotakuKeikakuTodokedeEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -364,6 +365,7 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -372,5 +374,4 @@ public class DbT3005KyotakuKeikakuTodokedeEntity extends DbTableEntityBase<DbT30
     }
 
 // </editor-fold>
-
 }

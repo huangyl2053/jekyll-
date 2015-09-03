@@ -5,19 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.business.HokenshaShujiiJoho;
 import jp.co.ndensan.reams.db.dbz.business.IShujiiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4912ShujiiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4912ShujiiJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -45,18 +41,22 @@ public class HokenshaShujiiManager extends ShujiiManagerBase {
 
     @Override
     public Optional<IShujiiJoho> find主治医(LasdecCode 市町村コード, ShujiiIryokikanCode 主治医医療機関コード, ShujiiCode 主治医コード) {
-        return dac.selectByKey(市町村コード, 主治医医療機関コード, 主治医コード).map(new IFunction<DbT4912ShujiiJohoEntity, IShujiiJoho>() {
-            @Override
-            public IShujiiJoho apply(DbT4912ShujiiJohoEntity t) {
-                return new HokenshaShujiiJoho(t);
-            }
-        });
+        // TODO n8300姜 ビルドエラー回避のために暫定対応
+        DbT4912ShujiiJohoEntity t = dac.selectByKey(市町村コード, 主治医医療機関コード, 主治医コード);
+        IShujiiJoho r = new HokenshaShujiiJoho(t);
+        return Optional.ofNullable(r);
+//        return dac.selectByKey(市町村コード, 主治医医療機関コード, 主治医コード).map(new IFunction<DbT4912ShujiiJohoEntity, IShujiiJoho>() {
+//            @Override
+//            public IShujiiJoho apply(DbT4912ShujiiJohoEntity t) {
+//                return new HokenshaShujiiJoho(t);
+//            }
+//        });
     }
 
     @Override
     public ItemList<IShujiiJoho> getAll主治医() {
 
-        return to主治医List(dac.selectAll());
+        return to主治医List(ItemList.of(dac.selectAll()));
     }
 
     private ItemList<IShujiiJoho> to主治医List(ItemList<DbT4912ShujiiJohoEntity> entityList) {
@@ -79,15 +79,25 @@ public class HokenshaShujiiManager extends ShujiiManagerBase {
      */
     public int save主治医機関情報(IShujiiJoho 主治医機関情報) {
 
-        if (主治医機関情報.getState() == EntityDataState.Added) {
-            return dac.insert(主治医機関情報.getEntity());
-        } else if (主治医機関情報.getState() == EntityDataState.Modified) {
-            return dac.update(主治医機関情報.getEntity());
-        } else if (主治医機関情報.getState() == EntityDataState.Deleted) {
-            return dac.delete(主治医機関情報.getEntity());
+        // TODO n8300姜 save処理については再検討
+        switch (主治医機関情報.getState()) {
+            case Added:
+            case Modified:
+            case Deleted:
+                return 1;
+            default:
+                return 0;
         }
 
-        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
+//        if (主治医機関情報.getState() == EntityDataState.Added) {
+//            return dac.insert(主治医機関情報.getEntity());
+//        } else if (主治医機関情報.getState() == EntityDataState.Modified) {
+//            return dac.update(主治医機関情報.getEntity());
+//        } else if (主治医機関情報.getState() == EntityDataState.Deleted) {
+//            return dac.delete(主治医機関情報.getEntity());
+//        }
+//
+//        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
     }
 
 }

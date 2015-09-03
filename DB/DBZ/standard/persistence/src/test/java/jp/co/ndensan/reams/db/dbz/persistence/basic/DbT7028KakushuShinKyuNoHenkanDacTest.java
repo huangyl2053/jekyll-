@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7028KakushuShinKyuNoHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7028KakushuShinKyuNoHenkanEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_旧番号;
@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7028KakushuShinK
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7028KakushuShinKyuNoHenkanEntityGenerator.DEFAULT_被保険者番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7028KakushuShinKyuNoHenkanDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
@@ -47,7 +46,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new HihokenshaNo("456125"),
+                    DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
                     DEFAULT_旧番号);
             TestSupport.insert(
@@ -59,7 +58,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
                     DEFAULT_旧番号);
         }
@@ -68,7 +67,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
         public void 番号区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    null,
+                    DEFAULT_番号区分,
                     DEFAULT_旧番号);
         }
 
@@ -77,7 +76,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
-                    null);
+                    DEFAULT_旧番号);
         }
 
         @Test
@@ -92,7 +91,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7028KakushuShinKyuNoHenkanEntity insertedRecord = sut.selectByKey(
-                    new HihokenshaNo("78454"),
+                    DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
                     DEFAULT_旧番号);
             assertThat(insertedRecord, is(nullValue()));
@@ -104,7 +103,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
         @Test
         public void 各種新旧番号変換テーブルが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new HihokenshaNo(キー_01),
+                    DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
                     DEFAULT_旧番号);
             TestSupport.insert(
@@ -148,19 +147,22 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
 
         @Test
         public void 各種新旧番号変換テーブルエンティティを渡すと_updateは_各種新旧番号変換テーブルを更新する() {
-            DbT7028KakushuShinKyuNoHenkanEntity updateRecord = DbT7028KakushuShinKyuNoHenkanEntityGenerator.createDbT7028KakushuShinKyuNoHenkanEntity();
-            //TODO  主キー以外の項目を変更してください
-//updateRecord.set変更したい項目(75);
+            DbT7028KakushuShinKyuNoHenkanEntity updateRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_番号区分,
+                    DEFAULT_旧番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7028KakushuShinKyuNoHenkanEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
                     DEFAULT_旧番号);
 
-            //TODO  主キー以外の項目を変更してください
-//     assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -176,10 +178,14 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
 
         @Test
         public void 各種新旧番号変換テーブルエンティティを渡すと_deleteは_各種新旧番号変換テーブルを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7028KakushuShinKyuNoHenkanEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
-                    DEFAULT_旧番号));
+                    DEFAULT_旧番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_番号区分,
@@ -197,7 +203,7 @@ public class DbT7028KakushuShinKyuNoHenkanDacTest extends DbzTestDacBase {
             entity.setHihokenshaNo(被保険者番号);
             entity.setNoKubun(番号区分);
             entity.setKyuNo(旧番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

@@ -14,33 +14,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護除外住所地特例対象施設エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 鄭雪双
  */
 public final class DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator {
 
-    public static final RString DEFAULT_事業者種別 = new RString("1");
-    public static final RString DEFAULT_事業者番号 = new RString("1");
-    public static final FlexibleDate DEFAULT_有効開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_有効終了年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_管内_管外区分 = new RString("1");
-    public static final AtenaMeisho DEFAULT_事業者名称 = new AtenaMeisho("電算太郎");
-    public static final AtenaKanaMeisho DEFAULT_事業者名称カナ = new AtenaKanaMeisho("デンサンタロウ");
-    public static final YubinNo DEFAULT_郵便番号 = new YubinNo(new RString("123-1234"));
-    public static final RString DEFAULT_事業者住所 = new RString("1");
-    public static final RString DEFAULT_事業者住所カナ = new RString("1");
-    public static final TelNo DEFAULT_電話番号 = new TelNo("012-345-6789");
-    public static final TelNo DEFAULT_FAX番号 = new TelNo("012-345-6789");
-    public static final RString DEFAULT_異動事由 = new RString("1");
-    public static final FlexibleDate DEFAULT_異動年月日 = new FlexibleDate("20140402");
-    public static final AtenaMeisho DEFAULT_代表者名称 = new AtenaMeisho("電算太郎");
-    public static final AtenaKanaMeisho DEFAULT_代表者名称カナ = new AtenaKanaMeisho("デンサンタロウ");
-    public static final RString DEFAULT_役職 = new RString("1");
-    public static final RString DEFAULT_備考 = new RString("1");
-    public static final FlexibleDate DEFAULT_事業開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_事業休止年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_事業廃止年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_事業再開年月日 = new FlexibleDate("20140402");
+    public static final RString DEFAULT_事業者種別 = new RString("Data");
+    public static final RString DEFAULT_事業者番号 = new RString("Data");
+    public static final FlexibleDate DEFAULT_有効開始年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_有効終了年月日 = new FlexibleDate("19900101");
+    public static final RString DEFAULT_管内管外区分 = new RString("Data");
+    public static final AtenaMeisho DEFAULT_事業者名称 = new AtenaMeisho("");
+    public static final AtenaKanaMeisho DEFAULT_事業者名称カナ = new AtenaKanaMeisho("");
+    public static final YubinNo DEFAULT_郵便番号 = new YubinNo("0010001");
+    public static final RString DEFAULT_事業者住所 = new RString("Data");
+    public static final RString DEFAULT_事業者住所カナ = new RString("Data");
+    public static final TelNo DEFAULT_電話番号 = new TelNo("08011112222");
+    public static final TelNo DEFAULT_FAX番号 = new TelNo("08011112222");
+    public static final RString DEFAULT_異動事由 = new RString("Data");
+    public static final FlexibleDate DEFAULT_異動年月日 = new FlexibleDate("19900101");
+    public static final AtenaMeisho DEFAULT_代表者名称 = new AtenaMeisho("");
+    public static final AtenaKanaMeisho DEFAULT_代表者名称カナ = new AtenaKanaMeisho("");
+    public static final RString DEFAULT_役職 = new RString("Data");
+    public static final RString DEFAULT_備考 = new RString("Data");
+    public static final FlexibleDate DEFAULT_事業開始年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_事業休止年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_事業廃止年月日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_事業再開年月日 = new FlexibleDate("19900101");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -54,7 +52,7 @@ public final class DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator {
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYukoKaishiYMD(DEFAULT_有効開始年月日);
         entity.setYukoShuryoYMD(DEFAULT_有効終了年月日);
-        entity.setKannaiKangaiKubun(DEFAULT_管内_管外区分);
+        entity.setKannaiKangaiKubun(DEFAULT_管内管外区分);
         entity.setJigyoshaMeisho(DEFAULT_事業者名称);
         entity.setJigyoshaKanaMeisho(DEFAULT_事業者名称カナ);
         entity.setYubinNo(DEFAULT_郵便番号);

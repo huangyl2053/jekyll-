@@ -17,23 +17,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医情報エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author n8235 船山洋介
  */
 public final class DbT5912ShujiiJohoEntityGenerator {
 
-    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("100001");
-    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("1000000001");
-    public static final ShujiiCode DEFAULT_主治医コード = new ShujiiCode("10000001");
-    public static final AtenaMeisho DEFAULT_主治医氏名 = new AtenaMeisho("主治医氏名");
-    public static final AtenaKanaMeisho DEFAULT_主治医カナ = new AtenaKanaMeisho("シュジイカナ");
+    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
+    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("000001");
+    public static final ShujiiCode DEFAULT_主治医コード = new ShujiiCode("000001");
+    public static final AtenaMeisho DEFAULT_主治医氏名 = new AtenaMeisho("宛名名称");
+    public static final AtenaKanaMeisho DEFAULT_主治医カナ = new AtenaKanaMeisho("ﾃｽﾄｻﾝ");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
-    public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("住所");
-    public static final TelNo DEFAULT_電話番号 = new TelNo("99999999999");
-    public static final TelNo DEFAULT_FAX番号 = new TelNo("99999999990");
-    public static final RString DEFAULT_診療科名称 = new RString("診療科名称");
-    public static final boolean DEFAULT_指定医フラグ = true;
-    public static final boolean DEFAULT_状況フラグ = true;
+    public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("電算市リームス町");
+    public static final TelNo DEFAULT_電話番号 = new TelNo("0123456789");
+    public static final TelNo DEFAULT_FAX番号 = new TelNo("0123456789");
+    public static final RString DEFAULT_診療科名称 = new RString("名称");
+    public static final boolean DEFAULT_指定医フラグ = false;
+    public static final boolean DEFAULT_状況フラグ = false;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiy
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
@@ -483,7 +483,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                             資格取得届出Date, 資格取得Date, null,
                             資格喪失届出Date, 資格喪失Date, null,
                             hihokenshaNo.value(), shoKisaiHokenshaNo.getColumnValue(),
-                            ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue()),
+                            ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.get被保険者区分コード().value()),
                             JushochiTokureishaKubun.通常資格者);
                 }
 

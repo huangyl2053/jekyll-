@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.NinshoshaCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
@@ -68,8 +68,8 @@ public class KaigoShiharaiJohoModel implements Serializable {
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+    public LasdecCode get証記載保険者番号() {
+        return entity.getShichosonCode();
     }
 
     /**
@@ -168,7 +168,7 @@ public class KaigoShiharaiJohoModel implements Serializable {
      * @return 種別コード
      */
     public Code get種別コード() {
-        return entity.getShubetsuCode();
+        return entity.getSyubetsuCode();
     }
 
     /**
@@ -221,9 +221,9 @@ public class KaigoShiharaiJohoModel implements Serializable {
      *
      * @param 証記載保険者番号 証記載保険者番号
      */
-    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public void set証記載保険者番号(LasdecCode 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setShichosonCode(証記載保険者番号);
     }
 
     /**
@@ -333,7 +333,7 @@ public class KaigoShiharaiJohoModel implements Serializable {
      */
     public void set種別コード(Code 種別コード) {
         requireNonNull(種別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("種別コード"));
-        entity.setShubetsuCode(種別コード);
+        entity.setSyubetsuCode(種別コード);
     }
 
     /**

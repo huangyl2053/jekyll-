@@ -11,11 +11,10 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -42,8 +41,7 @@ import org.junit.BeforeClass;
 /**
  * HihokenshaDaichoManagerのテストです。
  *
- * @deprecated
- * jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManagerTestを使用してください。
+ * @deprecated jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManagerTestを使用してください。
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
@@ -299,7 +297,6 @@ public class _HihokenshaDaichoManagerTest extends DbzTestBase {
                     = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
             entity.setShichosonCode(lasdecCode);
             entity.setShikibetsuCode(shikibetsuCode);
-            entity.setShoriTimestamp(ShoriTimestamp.of(shoriTimestamp));
             return entity;
         }
 
@@ -309,7 +306,6 @@ public class _HihokenshaDaichoManagerTest extends DbzTestBase {
                     = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
             entity.setShichosonCode(lasdecCode);
             entity.setHihokenshaNo(hihokenshaNo);
-            entity.setShoriTimestamp(ShoriTimestamp.of(shoriTimestamp));
             return entity;
         }
     }

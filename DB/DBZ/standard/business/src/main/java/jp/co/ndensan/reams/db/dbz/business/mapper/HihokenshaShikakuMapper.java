@@ -7,9 +7,19 @@ package jp.co.ndensan.reams.db.dbz.business.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
@@ -20,25 +30,9 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijo
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
-//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
-//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -76,8 +70,8 @@ public final class HihokenshaShikakuMapper {
         entity.setShichosonCode(shikaku.get市町村コード());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
-        entity.setShoriTimestamp(ShoriTimestamp.of(shikaku.get処理日時()));
-        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
+//        entity.setShoriTimestamp(ShoriTimestamp.of(shikaku.get処理日時()));
+        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().get被保険者区分コード().value());
         entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
         entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(shikaku.get資格取得().getReason().getCode()));
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
@@ -98,9 +92,9 @@ public final class HihokenshaShikakuMapper {
         entity.setKoikinaiJushochiTokureiFlag(shikaku.get広域内住所地特例者区分().getCode());
         entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         entity.setKyuShichosonCode(shikaku.get旧市町村コード());
-        entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
-        entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
-        entity.setChohyoKofuRirekiID(toValue(shikaku.get被保険者証再交付().getChohyoKofuRirekiID()));
+//        entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
+//        entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
+//        entity.setChohyoKofuRirekiID(toValue(shikaku.get被保険者証再交付().getChohyoKofuRirekiID()));
         return entity;
     }
 
@@ -154,14 +148,15 @@ public final class HihokenshaShikakuMapper {
                 entity.getJushochitokureiKaijoJiyuCode().toRString(),
                 entity.getJushochitokureiKaijoTodokedeYMD(),
                 entity.getJushochitokureiKaijoYMD());
-        HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(
-                entity.getSaikofuKubun(),
-                entity.getSaikofuJiyuCode(),
-                entity.getChohyoKofuRirekiID());
+        HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//        HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(
+//                entity.getSaikofuKubun(),
+//                entity.getSaikofuJiyuCode(),
+//                entity.getChohyoKofuRirekiID());
 
         LasdecCode lasdecCode = entity.getShichosonCode();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
-        YMDHMS shoriTimestamp = entity.getShoriTimestamp().value();
+        YMDHMS shoriTimestamp = new YMDHMS("19990101123456");//entity.getShoriTimestamp().value();
         HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(Code.EMPTY, RString.EMPTY);
         HihokenshaShikaku shikaku
                 = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,

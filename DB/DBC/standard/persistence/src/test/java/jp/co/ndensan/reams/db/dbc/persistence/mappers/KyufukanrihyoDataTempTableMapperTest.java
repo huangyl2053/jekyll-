@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.ur.urz.batchservice.step.writer.BatchWriters;
+import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process._BatchProcessChunkQueryExecutor;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

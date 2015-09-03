@@ -18,16 +18,16 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_郵便番号;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 保険者情報の業務コンフィグを取得するクラスです。
@@ -43,7 +43,7 @@ public class HokenshaJohoConfig {
      * コンストラクタです。
      */
     public HokenshaJohoConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -51,11 +51,11 @@ public class HokenshaJohoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public HokenshaJohoConfig(IUrBusinessConfig businessConfig) {
+    public HokenshaJohoConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHokenshaJoho, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysHokenshaJoho, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysHokenshaJoho, RString> map = new EnumMap<>(ConfigKeysHokenshaJoho.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHokenshaJoho target : ConfigKeysHokenshaJoho.values()) {

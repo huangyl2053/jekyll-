@@ -5,11 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Objects;
-//TODO n3327 三浦凌　ICodeAssignedItemが参照でいないのでコメントアウト。方針が決まったら、修正する。
-//import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 病院、診療所、助産所といった、医療機関の区分を表すクラスです。

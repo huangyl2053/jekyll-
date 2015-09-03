@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiIinMapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
@@ -13,13 +12,12 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -31,9 +29,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -269,7 +268,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 審査会委員資格コードにcodeを持つ審査会委員が渡されたとき_審査会委員資格コードにcodeを持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getShinsakaiIinShikakuCode(), is(審査会委員資格_code_name.getCode()));
+            assertThat(sut.getShinsakaiIinShikakuCode(), is(審査会委員資格_code_name.getShinsakaiIinShikakuCode().asCode()));
         }
 
         @Test
@@ -352,7 +351,7 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setShinsakaiIinShimei(氏名_太郎);
         委員Entity.setShinsakaiIinKanaShimei(カナ氏名_タロウ);
         委員Entity.setSeibetsu(性別_MALE.getCode());
-        委員Entity.setShinsakaiIinShikakuCode(審査会委員資格_code_name.getCode());
+        委員Entity.setShinsakaiIinShikakuCode(審査会委員資格_code_name.getShinsakaiIinShikakuCode().asCode());
         委員Entity.setShinsainYusoKubun(審査委員郵送区分_自宅.get郵送区分());
         委員Entity.setYubinNo(郵便番号_1231234);
         委員Entity.setJusho(住所_山田市);

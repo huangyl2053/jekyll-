@@ -7,27 +7,24 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku.rirekiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku.shotokuNendo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008Shotoku.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護所得のデータアクセスクラスです。
- *
- * @author LDNS 鄭雪双
  */
-public class DbT2008ShotokuDac implements IModifiable<DbT2008ShotokuEntity> {
+public class DbT2008ShotokuDac implements ISaveable<DbT2008ShotokuEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -45,7 +42,7 @@ public class DbT2008ShotokuDac implements IModifiable<DbT2008ShotokuEntity> {
     public DbT2008ShotokuEntity selectByKey(
             FlexibleYear 所得年度,
             ShikibetsuCode 識別コード,
-            int 履歴番号) throws NullPointerException {
+            Decimal 履歴番号) throws NullPointerException {
         requireNonNull(所得年度, UrSystemErrorMessages.値がnull.getReplacedMessage("所得年度"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -75,37 +72,18 @@ public class DbT2008ShotokuDac implements IModifiable<DbT2008ShotokuEntity> {
                 toList(DbT2008ShotokuEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT2008ShotokuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT2008ShotokuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT2008ShotokuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT2008ShotokuEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT2008ShotokuEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT2008ShotokuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT2008ShotokuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護所得エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

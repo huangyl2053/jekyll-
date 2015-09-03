@@ -7,13 +7,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 市町村特別給付サービス事業者テーブルのエンティティクラスです。
@@ -37,7 +38,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     @PrimaryKey
     private ServiceCode serviceCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString idoKubun;
     private FlexibleDate idoYMD;
     private RString teiseiKubun;
@@ -166,7 +167,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -175,7 +176,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

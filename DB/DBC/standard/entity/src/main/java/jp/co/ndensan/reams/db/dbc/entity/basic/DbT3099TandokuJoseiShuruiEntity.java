@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -36,7 +36,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleYearMonth tekiyoShuryoYM;
     private RString joseiServiceShuriMeisho;
     private Decimal joseiTani;
@@ -146,7 +146,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -155,7 +155,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

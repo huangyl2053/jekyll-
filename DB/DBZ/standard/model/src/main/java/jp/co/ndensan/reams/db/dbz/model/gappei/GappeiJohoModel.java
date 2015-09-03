@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,7 +52,7 @@ public class GappeiJohoModel implements Serializable, IGappeiJoho {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get保険者番号() {
+    public HokenshaNo get保険者番号() {
         return entity.getHokenshaNo();
     }
 

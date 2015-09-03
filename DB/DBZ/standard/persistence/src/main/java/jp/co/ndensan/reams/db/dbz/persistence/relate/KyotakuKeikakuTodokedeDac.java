@@ -7,21 +7,18 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokede;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuTodokedeModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3005KyotakuKeikakuTodokedeDac;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokede;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3005KyotakuKeikakuTodokedeDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -35,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodokedeModel> {
+public class KyotakuKeikakuTodokedeDac implements IModifiable<DbT3005KyotakuKeikakuTodokedeEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -44,45 +41,39 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
     /**
      * 居宅給付計画届出情報をキー検索で１件返します。
      *
-     * @param 被保険者番号 被保険者番号
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 識別コード 識別コード
-     * @param 対象年月 対象年月
-     * @param 処理日時 処理日時
-     * @return KyotakuKeikakuTodokedeModel
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年月 TaishoYM
+     * @param 履歴番号 RirekiNo
+     * @return DbT3005KyotakuKeikakuTodokedeEntity
      */
     @Transaction
-    public Optional<KyotakuKeikakuTodokedeModel> selectByKey(
+    public Optional<DbT3005KyotakuKeikakuTodokedeEntity> selectByKey(
             HihokenshaNo 被保険者番号,
-            HokenshaNo 証記載保険者番号,
-            ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月,
-            YMDHMS 処理日時) {
+            Decimal 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
-        return Optional.ofNullable(createModel(居宅給付計画届出Dac.selectByKey(被保険者番号, 証記載保険者番号, 識別コード, 対象年月, 処理日時)));
+        return Optional.ofNullable(createModel(居宅給付計画届出Dac.selectByKey(被保険者番号, 対象年月, 履歴番号)));
     }
 
     /**
      * 居宅給付計画届出情報を全件返します。
      *
-     * @return IItemList<KyotakuKeikakuTodokedeModel>
+     * @return IItemList<DbT3005KyotakuKeikakuTodokedeEntity>
      */
     @Transaction
-    public IItemList<KyotakuKeikakuTodokedeModel> selectAll() {
+    public IItemList<DbT3005KyotakuKeikakuTodokedeEntity> selectAll() {
 
         List<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出List = 居宅給付計画届出Dac.selectAll();
-        List<KyotakuKeikakuTodokedeModel> list = new ArrayList<>();
+        List<DbT3005KyotakuKeikakuTodokedeEntity> list = new ArrayList<>();
 
         for (DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出 : 居宅給付計画届出List) {
             list.add(createModel(居宅給付計画届出));
         }
-        IItemList<KyotakuKeikakuTodokedeModel> 台帳リスト = ItemList.of(list);
+        IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 台帳リスト = ItemList.of(list);
 
         return 台帳リスト;
     }
@@ -91,10 +82,10 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
      * 被保険者番号に合致する居宅給付計画届出の一覧を返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return IItemList<KyotakuKeikakuTodokedeModel>
+     * @return IItemList<DbT3005KyotakuKeikakuTodokedeEntity>
      */
     @Transaction
-    public IItemList<KyotakuKeikakuTodokedeModel> select居宅給付計画届出一覧By被保険者番号(HihokenshaNo 被保険者番号) {
+    public IItemList<DbT3005KyotakuKeikakuTodokedeEntity> select居宅給付計画届出一覧By被保険者番号(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -102,29 +93,29 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
         List<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出List = accessor.select().
                 table(DbT3005KyotakuKeikakuTodokede.class).
                 where(eq(DbT3005KyotakuKeikakuTodokede.hihokenshaNo, 被保険者番号)).
-                order(by(DbT3005KyotakuKeikakuTodokede.shoriTimestamp, Order.DESC)).
+                order(by(DbT3005KyotakuKeikakuTodokede.rirekiNo, Order.DESC)).
                 toList(DbT3005KyotakuKeikakuTodokedeEntity.class);
 
-        List<KyotakuKeikakuTodokedeModel> list = new ArrayList<>();
+        List<DbT3005KyotakuKeikakuTodokedeEntity> list = new ArrayList<>();
 
         for (DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出 : 居宅給付計画届出List) {
             list.add(createModel(居宅給付計画届出));
         }
-        IItemList<KyotakuKeikakuTodokedeModel> 台帳リスト = ItemList.of(list);
+        IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 台帳リスト = ItemList.of(list);
 
         return 台帳リスト;
     }
 
-    private KyotakuKeikakuTodokedeModel createModel(DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出エンティティ) {
+    private DbT3005KyotakuKeikakuTodokedeEntity createModel(DbT3005KyotakuKeikakuTodokedeEntity 居宅給付計画届出エンティティ) {
         if (居宅給付計画届出エンティティ == null) {
             return null;
         }
 
-        return new KyotakuKeikakuTodokedeModel(居宅給付計画届出エンティティ);
+        return new DbT3005KyotakuKeikakuTodokedeEntity();
     }
 
     @Override
-    public int insert(KyotakuKeikakuTodokedeModel data) {
+    public int insert(DbT3005KyotakuKeikakuTodokedeEntity data) {
 
         int result = 0;
 
@@ -132,35 +123,35 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
             return result;
         }
 
-        result = 居宅給付計画届出Dac.insert(data.getEntity());
+        result = 居宅給付計画届出Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int update(KyotakuKeikakuTodokedeModel data) {
+    public int update(DbT3005KyotakuKeikakuTodokedeEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 居宅給付計画届出Dac.update(data.getEntity());
+        result = 居宅給付計画届出Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int delete(KyotakuKeikakuTodokedeModel data) {
+    public int delete(DbT3005KyotakuKeikakuTodokedeEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 居宅給付計画届出Dac.delete(data.getEntity());
+        result = 居宅給付計画届出Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -169,17 +160,17 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
     /**
      * 物理削除を行います。
      *
-     * @param data KyotakuKeikakuTodokedeModel
+     * @param data DbT3005KyotakuKeikakuTodokedeEntity
      * @return int 件数
      */
-    public int deletePhysical(KyotakuKeikakuTodokedeModel data) {
+    public int deletePhysical(DbT3005KyotakuKeikakuTodokedeEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = 居宅給付計画届出Dac.deletePhysical(data.getEntity());
+        result = 居宅給付計画届出Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;

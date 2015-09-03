@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * DbT1008IryohokenKanyuJokyoの項目定義クラスです
@@ -34,7 +35,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private LasdecCode shichosonCode;
     private HihokenshaNo hihokenshaNo;
     private RString iryoHokenShubetsuCode;
@@ -112,7 +113,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -121,7 +122,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

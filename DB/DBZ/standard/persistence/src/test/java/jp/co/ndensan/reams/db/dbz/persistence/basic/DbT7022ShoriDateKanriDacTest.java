@@ -5,20 +5,20 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理枝番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理名;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理枝番;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度内連番;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -32,12 +32,13 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7022ShoriDateKanriDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
 
+    private static final RString キー_01 = new RString("01");
+    private static final RString キー_02 = new RString("02");
+    private static final RString キー_03 = new RString("03");
     private static DbT7022ShoriDateKanriDac sut;
 
     @BeforeClass
@@ -50,16 +51,16 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new SubGyomuCode("DBB"),
+                    DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
             TestSupport.insert(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -68,9 +69,9 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void サブ業務コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -80,8 +81,8 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_サブ業務コード,
-                    null,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_市町村コード,
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -92,7 +93,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    null,
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -103,8 +104,8 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
-                    null,
+                    DEFAULT_処理名,
+                    DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
         }
@@ -114,9 +115,9 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
-                    null,
+                    DEFAULT_年度,
                     DEFAULT_年度内連番);
         }
 
@@ -125,10 +126,10 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
-                    null);
+                    DEFAULT_年度内連番);
         }
 
         @Test
@@ -136,7 +137,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             DbT7022ShoriDateKanriEntity insertedRecord = sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -146,9 +147,9 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7022ShoriDateKanriEntity insertedRecord = sut.selectByKey(
-                    new SubGyomuCode("RDD"),
+                    DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -161,16 +162,16 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         @Test
         public void 処理日付管理マスタが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new SubGyomuCode("DBC"),
+                    DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
             TestSupport.insert(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -190,7 +191,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -198,7 +199,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番), is(notNullValue()));
@@ -212,7 +213,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -220,22 +221,28 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
 
         @Test
         public void 処理日付管理マスタエンティティを渡すと_updateは_処理日付管理マスタを更新する() {
-            DbT7022ShoriDateKanriEntity updateRecord = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
-            //TODO  主キー以外の項目を変更してください
-//   updateRecord.set変更したい項目(75);
+            DbT7022ShoriDateKanriEntity updateRecord = sut.selectByKey(
+                    DEFAULT_サブ業務コード,
+                    DEFAULT_市町村コード,
+                    DEFAULT_処理名,
+                    DEFAULT_処理枝番,
+                    DEFAULT_年度,
+                    DEFAULT_年度内連番);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7022ShoriDateKanriEntity updatedRecord = sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
 
-            //TODO  主キー以外の項目を変更してください
-//   assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -246,7 +253,7 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番);
@@ -254,17 +261,21 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
 
         @Test
         public void 処理日付管理マスタエンティティを渡すと_deleteは_処理日付管理マスタを削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7022ShoriDateKanriEntity deletedEntity = sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
-                    DEFAULT_年度内連番));
+                    DEFAULT_年度内連番);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
-                    ShoriName.valueOf(DEFAULT_処理名.toString()),
+                    DEFAULT_処理名,
                     DEFAULT_処理枝番,
                     DEFAULT_年度,
                     DEFAULT_年度内連番), is(nullValue()));
@@ -276,18 +287,18 @@ public class DbT7022ShoriDateKanriDacTest extends DbzTestDacBase {
         public static void insert(
                 SubGyomuCode サブ業務コード,
                 LasdecCode 市町村コード,
-                ShoriName 処理名,
+                RString 処理名,
                 RString 処理枝番,
                 FlexibleYear 年度,
                 RString 年度内連番) {
             DbT7022ShoriDateKanriEntity entity = DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity();
             entity.setSubGyomuCode(サブ業務コード);
             entity.setShichosonCode(市町村コード);
-            entity.setShoriName(処理名.toRString());
+            entity.setShoriName(処理名);
             entity.setShoriEdaban(処理枝番);
             entity.setNendo(年度);
             entity.setNendoNaiRenban(年度内連番);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

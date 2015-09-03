@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
 
 /**

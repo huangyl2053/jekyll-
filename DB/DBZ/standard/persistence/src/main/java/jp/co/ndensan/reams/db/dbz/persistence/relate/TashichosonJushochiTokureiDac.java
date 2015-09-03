@@ -9,17 +9,19 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbz.model.TashichosonJushochiTokureiModel;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1003TashichosonJushochiTokureiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1003TashichosonJushochiTokureiDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8178 城間篤人
  */
-public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJushochiTokureiModel> {
+public class TashichosonJushochiTokureiDac implements IModifiable<DbT1003TashichosonJushochiTokureiEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -38,19 +40,21 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
     /**
      * 他市町村住所地特例Model情報をキー検索で１件返します。
      *
-     * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 YMDHMS
-     * @return TashichosonJushochiTokureiModel
+     * @param 異動日 FlexibleDate
+     * @param 枝番 RString
+     * @return DbT1003TashichosonJushochiTokureiEntity
      */
     @Transaction
-    public TashichosonJushochiTokureiModel select他市町村住所地特例ModelByKey(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+    public DbT1003TashichosonJushochiTokureiEntity select他市町村住所地特例ModelByKey(ShikibetsuCode 識別コード,
+            FlexibleDate 異動日,
+            RString 枝番) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
-        return createModel(dac.selectByKey(市町村コード, 識別コード, 処理日時));
+        return createModel(dac.selectByKey(識別コード, 異動日, 枝番));
     }
 
     // TODO 一覧取得に使用する検索項目はテーブル構造に合わせて修正が必要になります。
@@ -60,10 +64,10 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
      *
      * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @return List<TashichosonJushochiTokureiModel>
+     * @return List<DbT1003TashichosonJushochiTokureiEntity>
      */
     @Transaction
-    public List<TashichosonJushochiTokureiModel> select他市町村住所地特例List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public List<DbT1003TashichosonJushochiTokureiEntity> select他市町村住所地特例List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
@@ -82,7 +86,7 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
                 ).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
 
-        List<TashichosonJushochiTokureiModel> 台帳リスト = new ArrayList<>();
+        List<DbT1003TashichosonJushochiTokureiEntity> 台帳リスト = new ArrayList<>();
 
         for (DbT1003TashichosonJushochiTokureiEntity entity : List) {
             台帳リスト.add(createModel(entity));
@@ -91,16 +95,16 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
         return 台帳リスト;
     }
 
-    private TashichosonJushochiTokureiModel createModel(DbT1003TashichosonJushochiTokureiEntity エンティティ) {
+    private DbT1003TashichosonJushochiTokureiEntity createModel(DbT1003TashichosonJushochiTokureiEntity エンティティ) {
         if (エンティティ == null) {
             return null;
         }
 
-        return new TashichosonJushochiTokureiModel(エンティティ);
+        return new DbT1003TashichosonJushochiTokureiEntity();
     }
 
     @Override
-    public int insert(TashichosonJushochiTokureiModel data) {
+    public int insert(DbT1003TashichosonJushochiTokureiEntity data) {
 
         int result = 0;
 
@@ -108,31 +112,31 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
             return result;
         }
 
-        result = dac.insert(data.getEntity());
+        result = dac.save(data);
         return result;
     }
 
     @Override
-    public int update(TashichosonJushochiTokureiModel data) {
+    public int update(DbT1003TashichosonJushochiTokureiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = dac.update(data.getEntity());
+        result = dac.save(data);
         return result;
     }
 
     @Override
-    public int delete(TashichosonJushochiTokureiModel data) {
+    public int delete(DbT1003TashichosonJushochiTokureiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = dac.delete(data.getEntity());
+        result = dac.save(data);
         return result;
     }
 
@@ -143,14 +147,14 @@ public class TashichosonJushochiTokureiDac implements IModifiable<TashichosonJus
      * @return 削除件数
      */
     @Transaction
-    public int deletePhysical(TashichosonJushochiTokureiModel data) {
+    public int deletePhysical(DbT1003TashichosonJushochiTokureiEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = dac.deletePhysical(data.getEntity());
+        result = dac.save(data);
         return result;
     }
 }

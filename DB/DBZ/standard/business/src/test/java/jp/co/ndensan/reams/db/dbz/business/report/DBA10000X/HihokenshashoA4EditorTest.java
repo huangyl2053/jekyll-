@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.ChohyoKyotsuJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.DateOfBirthEditorA4Base;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.GenderEditorA4Base;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.KyufuSeigenEditorBase;
@@ -17,34 +19,31 @@ import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.ShikakuKi
 import jp.co.ndensan.reams.db.dbz.business.report.NinteiAndKyotakuShienOutputChecker;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshaNoPrintType;
-import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonEditData;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbx.definition.util.Lists;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doCallRealMethod;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doCallRealMethod;
 
 /**
  * {@link jp.co.ndensan.reams.db.dba.business.report.DBA10000X.HihokenshashoA4Editor}のテストです。
@@ -162,12 +161,13 @@ public class HihokenshashoA4EditorTest {
             when(shikakuHakko.get支援事業者名称()).thenReturn(Lists.newArrayList(shienJigyosha));
             when(shikakuHakko.get支援事業者届出日()).thenReturn(Lists.newArrayList(todokedeDate));
 
-            HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
-            when(daicho.get被保険者番号()).thenReturn(new HihokenshaNo(hihokenshaNo));
+            DbT1001HihokenshaDaichoEntity daicho = mock(DbT1001HihokenshaDaichoEntity.class);
+            when(daicho.getHihokenshaNo()).thenReturn(new HihokenshaNo(hihokenshaNo));
 
             HihokenshashoModel hihokenshashoModel = mock(HihokenshashoModel.class);
             when(hihokenshashoModel.getShikakuHakko()).thenReturn(shikakuHakko);
-            when(hihokenshashoModel.getHihokenshaDaicho()).thenReturn(daicho);
+            //TODO
+//            when(hihokenshashoModel.getHihokenshaDaicho()).thenReturn(daicho);
             when(hihokenshashoModel.getPosition()).thenReturn(印字位置);
             return hihokenshashoModel;
         }

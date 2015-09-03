@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShoriDateDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,7 +51,7 @@ public class ShoriDateFinder {
      * @return ShoriDateKanriModel
      */
     @Transaction
-    public Optional<ShoriDateModel> find処理日付(
+    public Optional<DbT7022ShoriDateKanriEntity> find処理日付(
             SubGyomuCode サブ業務コード,
             LasdecCode 市町村コード,
             ShoriName 処理名,
@@ -59,6 +59,6 @@ public class ShoriDateFinder {
             FlexibleYear 年度,
             RString 年度内連番) {
 
-        return dac.select処理日付ByKey(サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+        return dac.select処理日付ByKey(サブ業務コード, 市町村コード, 処理名.toRString(), 処理枝番, 年度, 年度内連番);
     }
 }

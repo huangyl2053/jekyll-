@@ -1,6 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
@@ -8,25 +7,24 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.chiikiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.gappeiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.*;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併情報のデータアクセスクラスです。
- *
- * @author N8187 久保田 英男
  */
-public class DbT7055GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity> {
+public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -34,8 +32,8 @@ public class DbT7055GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity
     /**
      * 主キーで合併情報を取得します。
      *
-     * @param 合併年月日 FlexibleDate
-     * @param 地域番号 RString
+     * @param 合併年月日 GappeiYMD
+     * @param 地域番号 ChiikiNo
      * @return DbT7055GappeiJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -71,55 +69,33 @@ public class DbT7055GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity
     }
 
     /**
-     * 合併情報を追加します。
+     * DbT7055GappeiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity 合併情報
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
     @Override
+    public int save(DbT7055GappeiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
     public int insert(DbT7055GappeiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * 合併情報をDBに更新します。
-     *
-     * @param entity 合併情報
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
     public int update(DbT7055GappeiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * 合併情報をDBから削除します。（論理削除）
-     *
-     * @param entity 合併情報
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
     public int delete(DbT7055GappeiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 合併情報を物理削除。
-     *
-     * @param entity 合併情報
-     * @return 影響行数
-     */
-    @Transaction
     public int deletePhysical(DbT7055GappeiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

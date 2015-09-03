@@ -36,16 +36,16 @@ var DBZ;
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            };
-
-            Controls.prototype.btnKoshin = function () {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
             Controls.prototype.btnMasking = function () {
                 return new UZA.Button(this.convFiledName("btnMasking"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             };
             return Controls;
         })();

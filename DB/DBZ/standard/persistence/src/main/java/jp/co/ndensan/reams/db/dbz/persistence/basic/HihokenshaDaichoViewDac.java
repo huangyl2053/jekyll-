@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoViewModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -38,14 +36,14 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy被保険者番号(HihokenshaNo 被保険者番号) {
+    public IItemList<DbV1001HihokenshaDaichoEntity> selectBy被保険者番号(HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
                 toList(DbV1001HihokenshaDaichoEntity.class);
-        return getModelList(entityList);
+        return ItemList.of(entityList);
     }
 
     /**
@@ -56,7 +54,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectByAny市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbV1001HihokenshaDaichoEntity> selectByAny市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -65,7 +63,7 @@ public class HihokenshaDaichoViewDac {
                         ? and(or(eq(shichosonCode, 市町村コード), eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード)), eq(hihokenshaNo, 被保険者番号))
                         : or(eq(shichosonCode, 市町村コード), eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード))).
                 toList(DbV1001HihokenshaDaichoEntity.class);
-        return getModelList(entityList);
+        return ItemList.of(entityList);
     }
 
     /**
@@ -76,7 +74,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbV1001HihokenshaDaichoEntity> selectBy市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -85,7 +83,7 @@ public class HihokenshaDaichoViewDac {
                         ? and(eq(shichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))
                         : eq(shichosonCode, 市町村コード)).
                 toList(DbV1001HihokenshaDaichoEntity.class);
-        return getModelList(entityList);
+        return ItemList.of(entityList);
     }
 
     /**
@@ -96,7 +94,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy広住特措置元市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<DbV1001HihokenshaDaichoEntity> selectBy広住特措置元市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -105,14 +103,7 @@ public class HihokenshaDaichoViewDac {
                         ? and(eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))
                         : eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード)).
                 toList(DbV1001HihokenshaDaichoEntity.class);
-        return getModelList(entityList);
+        return ItemList.of(entityList);
     }
 
-    private IItemList<HihokenshaDaichoViewModel> getModelList(List<DbV1001HihokenshaDaichoEntity> entityList) {
-        List<HihokenshaDaichoViewModel> list = new ArrayList<>();
-        for (DbV1001HihokenshaDaichoEntity entity : entityList) {
-            list.add(new HihokenshaDaichoViewModel(entity));
-        }
-        return ItemList.of(list);
-    }
 }

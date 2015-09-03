@@ -5,44 +5,36 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_処理日時;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_対象年月;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_証記載保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.DEFAULT_識別コード;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
+import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT3009KyotakuKeikakuJikoSakuseiGokeiDac}のテストです。
- *
- * @author LDNS 鄭雪双
  */
 @RunWith(Enclosed.class)
 public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final HihokenshaNo 被保険者番号1 = new HihokenshaNo(new RString("1"));
-    private static final HihokenshaNo 被保険者番号3 = new HihokenshaNo(new RString("3"));
     private static DbT3009KyotakuKeikakuJikoSakuseiGokeiDac sut;
 
     @BeforeClass
@@ -56,87 +48,107 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
             TestSupport.insert(
-                    被保険者番号1,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
-                    DEFAULT_対象年月,
-                    DEFAULT_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    null,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    null,
-                    DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 対象年月がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
-                    null,
-                    DEFAULT_処理日時);
+                    DEFAULT_対象年月,
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+        public void 履歴番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    null);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 居宅サービス区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_対象年月,
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void サービス提供事業者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_対象年月,
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void サービス種類コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_対象年月,
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity insertedRecord = sut.selectByKey(
-                    被保険者番号3,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -147,16 +159,18 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public void 居宅給付計画自己作成合計が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
             TestSupport.insert(
-                    被保険者番号1,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
+                    DEFAULT_被保険者番号,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -172,17 +186,19 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public void 居宅給付計画自己作成合計エンティティを渡すと_insertは_居宅給付計画自己作成合計を追加する() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード), is(notNullValue()));
         }
     }
 
@@ -192,28 +208,35 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test
         public void 居宅給付計画自己作成合計エンティティを渡すと_updateは_居宅給付計画自己作成合計を更新する() {
-            DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity updateRecord = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
-            // TODO 主キー以外の項目を変更してください
-//            updateRecord.set変更したい項目(75);
+            DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity updateRecord = sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_対象年月,
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
+            updateRecord.setTaishoYM(new FlexibleYearMonth("199901"));
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
 
-//            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getTaishoYM(), is(updatedRecord.getTaishoYM()));
         }
     }
 
@@ -223,26 +246,33 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時);
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
         }
 
         @Test
         public void 居宅給付計画自己作成合計エンティティを渡すと_deleteは_居宅給付計画自己作成合計を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時));
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
                     DEFAULT_対象年月,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_履歴番号,
+                    DEFAULT_居宅サービス区分,
+                    DEFAULT_サービス提供事業者番号,
+                    DEFAULT_サービス種類コード), is(nullValue()));
         }
     }
 
@@ -250,17 +280,19 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
 
         public static void insert(
                 HihokenshaNo 被保険者番号,
-                HokenshaNo 証記載保険者番号,
-                ShikibetsuCode 識別コード,
                 FlexibleYearMonth 対象年月,
-                YMDHMS 処理日時) {
+                Decimal 履歴番号,
+                RString 居宅サービス区分,
+                JigyoshaNo サービス提供事業者番号,
+                ServiceShuruiCode サービス種類コード) {
             DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity entity = DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator.createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
             entity.setHihokenshaNo(被保険者番号);
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
-            entity.setShikibetsuNo(識別コード);
             entity.setTaishoYM(対象年月);
-            entity.setShoriTimestamp(処理日時);
-            sut.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            entity.setKyotakuServiceKubun(居宅サービス区分);
+            entity.setServiceTeikyoJigyoshaNo(サービス提供事業者番号);
+            entity.setServiceShuruiCode(サービス種類コード);
+            sut.save(entity);
         }
     }
 }

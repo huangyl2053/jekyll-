@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearchEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7902FukaSearch");
@@ -27,7 +27,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     private HihokenshaNo hihodaichoHihokenshaNo;
 
     /**
-     * getChoteiNendo
+     * choteiNendoのgetメソッドです。
      *
      * @return choteiNendo
      */
@@ -36,7 +36,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setChoteiNendo
+     * choteiNendoのsetメソッドです。
      *
      * @param choteiNendo choteiNendo
      */
@@ -45,7 +45,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * getFukaNendo
+     * fukaNendoのgetメソッドです。
      *
      * @return fukaNendo
      */
@@ -54,7 +54,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setFukaNendo
+     * fukaNendoのsetメソッドです。
      *
      * @param fukaNendo fukaNendo
      */
@@ -63,7 +63,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * getTsuchishoNo
+     * tsuchishoNoのgetメソッドです。
      *
      * @return tsuchishoNo
      */
@@ -72,7 +72,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setTsuchishoNo
+     * tsuchishoNoのsetメソッドです。
      *
      * @param tsuchishoNo tsuchishoNo
      */
@@ -81,7 +81,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * getHihokenshaNo
+     * hihokenshaNoのgetメソッドです。
      *
      * @return hihokenshaNo
      */
@@ -90,7 +90,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setHihokenshaNo
+     * hihokenshaNoのsetメソッドです。
      *
      * @param hihokenshaNo hihokenshaNo
      */
@@ -99,7 +99,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * getShikibetsuCode
+     * shikibetsuCodeのgetメソッドです。
      *
      * @return shikibetsuCode
      */
@@ -108,7 +108,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setShikibetsuCode
+     * shikibetsuCodeのsetメソッドです。
      *
      * @param shikibetsuCode shikibetsuCode
      */
@@ -117,7 +117,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * getHihodaichoHihokenshaNo
+     * hihodaichoHihokenshaNoのgetメソッドです。
      *
      * @return hihodaichoHihokenshaNo
      */
@@ -126,7 +126,7 @@ public class DbV7902FukaSearchEntity extends DbTableEntityBase<DbV7902FukaSearch
     }
 
     /**
-     * setHihodaichoHihokenshaNo
+     * hihodaichoHihokenshaNoのsetメソッドです。
      *
      * @param hihodaichoHihokenshaNo hihodaichoHihokenshaNo
      */

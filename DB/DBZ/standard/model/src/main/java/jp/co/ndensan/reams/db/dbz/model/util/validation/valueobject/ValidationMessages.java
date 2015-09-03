@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
-import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.必須;
-import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.項目に対する制約;
+import static jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages.必須;
+import static jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages.項目に対する制約;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;

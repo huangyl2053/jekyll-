@@ -5,18 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.business.HokenshaShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.business.IShujiiIryokikanJoho;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4911ShujiiIryoKikanJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -45,19 +41,23 @@ public class HokenshaShujiiIryokikanManager extends ShujiiIryokikanManagerBase {
 
     @Override
     public Optional<IShujiiIryokikanJoho> find主治医医療機関(LasdecCode 市町村コード, ShujiiIryokikanCode 主治医医療機関コード) {
-        return dac.selectByKey(市町村コード, 主治医医療機関コード)
-                .map(new IFunction<DbT4911ShujiiIryoKikanJohoEntity, IShujiiIryokikanJoho>() {
-                    @Override
-                    public IShujiiIryokikanJoho apply(DbT4911ShujiiIryoKikanJohoEntity t) {
-                        return new HokenshaShujiiIryoKikanJoho(t);
-                    }
-                });
+        // TODO n8300姜 ビルドエラー回避のために暫定対応
+        DbT4911ShujiiIryoKikanJohoEntity t = dac.selectByKey(市町村コード, 主治医医療機関コード);
+        IShujiiIryokikanJoho r = new HokenshaShujiiIryoKikanJoho(t);
+        return Optional.ofNullable(r);
+//        return dac.selectByKey(市町村コード, 主治医医療機関コード)
+//                .map(new IFunction<DbT4911ShujiiIryoKikanJohoEntity, IShujiiIryokikanJoho>() {
+//                    @Override
+//                    public IShujiiIryokikanJoho apply(DbT4911ShujiiIryoKikanJohoEntity t) {
+//                        return new HokenshaShujiiIryoKikanJoho(t);
+//                    }
+//                });
     }
 
     @Override
     public ItemList<IShujiiIryokikanJoho> getAll主治医医療機関() {
 
-        return to主治医医療機関List(dac.selectAll());
+        return to主治医医療機関List(ItemList.of(dac.selectAll()));
     }
 
     private ItemList<IShujiiIryokikanJoho> to主治医医療機関List(ItemList<DbT4911ShujiiIryoKikanJohoEntity> entityList) {
@@ -81,14 +81,23 @@ public class HokenshaShujiiIryokikanManager extends ShujiiIryokikanManagerBase {
     @Transaction
     public int save主治医医療機関情報(IShujiiIryokikanJoho 主治医医療機関情報) {
 
-        if (主治医医療機関情報.getState() == EntityDataState.Added) {
-            return dac.insert(主治医医療機関情報.getEntity());
-        } else if (主治医医療機関情報.getState() == EntityDataState.Modified) {
-            return dac.update(主治医医療機関情報.getEntity());
-        } else if (主治医医療機関情報.getState() == EntityDataState.Deleted) {
-            return dac.delete(主治医医療機関情報.getEntity());
+        // TODO n8300姜 save処理については再検討
+        switch (主治医医療機関情報.getState()) {
+            case Added:
+            case Modified:
+            case Deleted:
+                return 1;
+            default:
+                return 0;
         }
-
-        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
+//        if (主治医医療機関情報.getState() == EntityDataState.Added) {
+//            return dac.save(主治医医療機関情報.getEntity());
+//        } else if (主治医医療機関情報.getState() == EntityDataState.Modified) {
+//            return dac.update(主治医医療機関情報.getEntity());
+//        } else if (主治医医療機関情報.getState() == EntityDataState.Deleted) {
+//            return dac.delete(主治医医療機関情報.getEntity());
+//        }
+//
+//        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
     }
 }

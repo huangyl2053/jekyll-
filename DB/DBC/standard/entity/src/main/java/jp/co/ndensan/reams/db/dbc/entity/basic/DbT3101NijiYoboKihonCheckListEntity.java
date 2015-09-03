@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -37,34 +37,34 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate kinyuYMD;
-    private int shitsumonJiko01;
-    private int shitsumonJiko02;
-    private int shitsumonJiko03;
-    private int shitsumonJiko04;
-    private int shitsumonJiko05;
-    private int shitsumonJiko06;
-    private int shitsumonJiko07;
-    private int shitsumonJiko08;
-    private int shitsumonJiko09;
-    private int shitsumonJiko10;
-    private int shitsumonJiko11;
+    private Decimal shitsumonJiko01;
+    private Decimal shitsumonJiko02;
+    private Decimal shitsumonJiko03;
+    private Decimal shitsumonJiko04;
+    private Decimal shitsumonJiko05;
+    private Decimal shitsumonJiko06;
+    private Decimal shitsumonJiko07;
+    private Decimal shitsumonJiko08;
+    private Decimal shitsumonJiko09;
+    private Decimal shitsumonJiko10;
+    private Decimal shitsumonJiko11;
     private Decimal shitsumonJiko12Shincho;
     private Decimal shitsumonJiko12Taiju;
-    private int shitsumonJiko13;
-    private int shitsumonJiko14;
-    private int shitsumonJiko15;
-    private int shitsumonJiko16;
-    private int shitsumonJiko17;
-    private int shitsumonJiko18;
-    private int shitsumonJiko19;
-    private int shitsumonJiko20;
-    private int shitsumonJiko21;
-    private int shitsumonJiko22;
-    private int shitsumonJiko23;
-    private int shitsumonJiko24;
-    private int shitsumonJiko25;
+    private Decimal shitsumonJiko13;
+    private Decimal shitsumonJiko14;
+    private Decimal shitsumonJiko15;
+    private Decimal shitsumonJiko16;
+    private Decimal shitsumonJiko17;
+    private Decimal shitsumonJiko18;
+    private Decimal shitsumonJiko19;
+    private Decimal shitsumonJiko20;
+    private Decimal shitsumonJiko21;
+    private Decimal shitsumonJiko22;
+    private Decimal shitsumonJiko23;
+    private Decimal shitsumonJiko24;
+    private Decimal shitsumonJiko25;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -170,7 +170,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -179,7 +179,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -206,7 +206,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１
      */
-    public int getShitsumonJiko01() {
+    public Decimal getShitsumonJiko01() {
         return shitsumonJiko01;
     }
 
@@ -215,7 +215,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko01 質問事項１
      */
-    public void setShitsumonJiko01(int shitsumonJiko01) {
+    public void setShitsumonJiko01(Decimal shitsumonJiko01) {
         this.shitsumonJiko01 = shitsumonJiko01;
     }
 
@@ -224,7 +224,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２
      */
-    public int getShitsumonJiko02() {
+    public Decimal getShitsumonJiko02() {
         return shitsumonJiko02;
     }
 
@@ -233,7 +233,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko02 質問事項２
      */
-    public void setShitsumonJiko02(int shitsumonJiko02) {
+    public void setShitsumonJiko02(Decimal shitsumonJiko02) {
         this.shitsumonJiko02 = shitsumonJiko02;
     }
 
@@ -242,7 +242,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項３
      */
-    public int getShitsumonJiko03() {
+    public Decimal getShitsumonJiko03() {
         return shitsumonJiko03;
     }
 
@@ -251,7 +251,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko03 質問事項３
      */
-    public void setShitsumonJiko03(int shitsumonJiko03) {
+    public void setShitsumonJiko03(Decimal shitsumonJiko03) {
         this.shitsumonJiko03 = shitsumonJiko03;
     }
 
@@ -260,7 +260,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項４
      */
-    public int getShitsumonJiko04() {
+    public Decimal getShitsumonJiko04() {
         return shitsumonJiko04;
     }
 
@@ -269,7 +269,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko04 質問事項４
      */
-    public void setShitsumonJiko04(int shitsumonJiko04) {
+    public void setShitsumonJiko04(Decimal shitsumonJiko04) {
         this.shitsumonJiko04 = shitsumonJiko04;
     }
 
@@ -278,7 +278,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項５
      */
-    public int getShitsumonJiko05() {
+    public Decimal getShitsumonJiko05() {
         return shitsumonJiko05;
     }
 
@@ -287,7 +287,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko05 質問事項５
      */
-    public void setShitsumonJiko05(int shitsumonJiko05) {
+    public void setShitsumonJiko05(Decimal shitsumonJiko05) {
         this.shitsumonJiko05 = shitsumonJiko05;
     }
 
@@ -296,7 +296,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項６
      */
-    public int getShitsumonJiko06() {
+    public Decimal getShitsumonJiko06() {
         return shitsumonJiko06;
     }
 
@@ -305,7 +305,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko06 質問事項６
      */
-    public void setShitsumonJiko06(int shitsumonJiko06) {
+    public void setShitsumonJiko06(Decimal shitsumonJiko06) {
         this.shitsumonJiko06 = shitsumonJiko06;
     }
 
@@ -314,7 +314,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項７
      */
-    public int getShitsumonJiko07() {
+    public Decimal getShitsumonJiko07() {
         return shitsumonJiko07;
     }
 
@@ -323,7 +323,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko07 質問事項７
      */
-    public void setShitsumonJiko07(int shitsumonJiko07) {
+    public void setShitsumonJiko07(Decimal shitsumonJiko07) {
         this.shitsumonJiko07 = shitsumonJiko07;
     }
 
@@ -332,7 +332,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項８
      */
-    public int getShitsumonJiko08() {
+    public Decimal getShitsumonJiko08() {
         return shitsumonJiko08;
     }
 
@@ -341,7 +341,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko08 質問事項８
      */
-    public void setShitsumonJiko08(int shitsumonJiko08) {
+    public void setShitsumonJiko08(Decimal shitsumonJiko08) {
         this.shitsumonJiko08 = shitsumonJiko08;
     }
 
@@ -350,7 +350,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項９
      */
-    public int getShitsumonJiko09() {
+    public Decimal getShitsumonJiko09() {
         return shitsumonJiko09;
     }
 
@@ -359,7 +359,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko09 質問事項９
      */
-    public void setShitsumonJiko09(int shitsumonJiko09) {
+    public void setShitsumonJiko09(Decimal shitsumonJiko09) {
         this.shitsumonJiko09 = shitsumonJiko09;
     }
 
@@ -368,7 +368,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１０
      */
-    public int getShitsumonJiko10() {
+    public Decimal getShitsumonJiko10() {
         return shitsumonJiko10;
     }
 
@@ -377,7 +377,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko10 質問事項１０
      */
-    public void setShitsumonJiko10(int shitsumonJiko10) {
+    public void setShitsumonJiko10(Decimal shitsumonJiko10) {
         this.shitsumonJiko10 = shitsumonJiko10;
     }
 
@@ -386,7 +386,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１１
      */
-    public int getShitsumonJiko11() {
+    public Decimal getShitsumonJiko11() {
         return shitsumonJiko11;
     }
 
@@ -395,7 +395,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko11 質問事項１１
      */
-    public void setShitsumonJiko11(int shitsumonJiko11) {
+    public void setShitsumonJiko11(Decimal shitsumonJiko11) {
         this.shitsumonJiko11 = shitsumonJiko11;
     }
 
@@ -440,7 +440,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１３
      */
-    public int getShitsumonJiko13() {
+    public Decimal getShitsumonJiko13() {
         return shitsumonJiko13;
     }
 
@@ -449,7 +449,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko13 質問事項１３
      */
-    public void setShitsumonJiko13(int shitsumonJiko13) {
+    public void setShitsumonJiko13(Decimal shitsumonJiko13) {
         this.shitsumonJiko13 = shitsumonJiko13;
     }
 
@@ -458,7 +458,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１４
      */
-    public int getShitsumonJiko14() {
+    public Decimal getShitsumonJiko14() {
         return shitsumonJiko14;
     }
 
@@ -467,7 +467,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko14 質問事項１４
      */
-    public void setShitsumonJiko14(int shitsumonJiko14) {
+    public void setShitsumonJiko14(Decimal shitsumonJiko14) {
         this.shitsumonJiko14 = shitsumonJiko14;
     }
 
@@ -476,7 +476,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１５
      */
-    public int getShitsumonJiko15() {
+    public Decimal getShitsumonJiko15() {
         return shitsumonJiko15;
     }
 
@@ -485,7 +485,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko15 質問事項１５
      */
-    public void setShitsumonJiko15(int shitsumonJiko15) {
+    public void setShitsumonJiko15(Decimal shitsumonJiko15) {
         this.shitsumonJiko15 = shitsumonJiko15;
     }
 
@@ -494,7 +494,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１６
      */
-    public int getShitsumonJiko16() {
+    public Decimal getShitsumonJiko16() {
         return shitsumonJiko16;
     }
 
@@ -503,7 +503,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko16 質問事項１６
      */
-    public void setShitsumonJiko16(int shitsumonJiko16) {
+    public void setShitsumonJiko16(Decimal shitsumonJiko16) {
         this.shitsumonJiko16 = shitsumonJiko16;
     }
 
@@ -512,7 +512,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１７
      */
-    public int getShitsumonJiko17() {
+    public Decimal getShitsumonJiko17() {
         return shitsumonJiko17;
     }
 
@@ -521,7 +521,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko17 質問事項１７
      */
-    public void setShitsumonJiko17(int shitsumonJiko17) {
+    public void setShitsumonJiko17(Decimal shitsumonJiko17) {
         this.shitsumonJiko17 = shitsumonJiko17;
     }
 
@@ -530,7 +530,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１８
      */
-    public int getShitsumonJiko18() {
+    public Decimal getShitsumonJiko18() {
         return shitsumonJiko18;
     }
 
@@ -539,7 +539,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko18 質問事項１８
      */
-    public void setShitsumonJiko18(int shitsumonJiko18) {
+    public void setShitsumonJiko18(Decimal shitsumonJiko18) {
         this.shitsumonJiko18 = shitsumonJiko18;
     }
 
@@ -548,7 +548,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項１９
      */
-    public int getShitsumonJiko19() {
+    public Decimal getShitsumonJiko19() {
         return shitsumonJiko19;
     }
 
@@ -557,7 +557,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko19 質問事項１９
      */
-    public void setShitsumonJiko19(int shitsumonJiko19) {
+    public void setShitsumonJiko19(Decimal shitsumonJiko19) {
         this.shitsumonJiko19 = shitsumonJiko19;
     }
 
@@ -566,7 +566,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２０
      */
-    public int getShitsumonJiko20() {
+    public Decimal getShitsumonJiko20() {
         return shitsumonJiko20;
     }
 
@@ -575,7 +575,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko20 質問事項２０
      */
-    public void setShitsumonJiko20(int shitsumonJiko20) {
+    public void setShitsumonJiko20(Decimal shitsumonJiko20) {
         this.shitsumonJiko20 = shitsumonJiko20;
     }
 
@@ -584,7 +584,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２１
      */
-    public int getShitsumonJiko21() {
+    public Decimal getShitsumonJiko21() {
         return shitsumonJiko21;
     }
 
@@ -593,7 +593,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko21 質問事項２１
      */
-    public void setShitsumonJiko21(int shitsumonJiko21) {
+    public void setShitsumonJiko21(Decimal shitsumonJiko21) {
         this.shitsumonJiko21 = shitsumonJiko21;
     }
 
@@ -602,7 +602,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２２
      */
-    public int getShitsumonJiko22() {
+    public Decimal getShitsumonJiko22() {
         return shitsumonJiko22;
     }
 
@@ -611,7 +611,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko22 質問事項２２
      */
-    public void setShitsumonJiko22(int shitsumonJiko22) {
+    public void setShitsumonJiko22(Decimal shitsumonJiko22) {
         this.shitsumonJiko22 = shitsumonJiko22;
     }
 
@@ -620,7 +620,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２３
      */
-    public int getShitsumonJiko23() {
+    public Decimal getShitsumonJiko23() {
         return shitsumonJiko23;
     }
 
@@ -629,7 +629,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko23 質問事項２３
      */
-    public void setShitsumonJiko23(int shitsumonJiko23) {
+    public void setShitsumonJiko23(Decimal shitsumonJiko23) {
         this.shitsumonJiko23 = shitsumonJiko23;
     }
 
@@ -638,7 +638,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２４
      */
-    public int getShitsumonJiko24() {
+    public Decimal getShitsumonJiko24() {
         return shitsumonJiko24;
     }
 
@@ -647,7 +647,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko24 質問事項２４
      */
-    public void setShitsumonJiko24(int shitsumonJiko24) {
+    public void setShitsumonJiko24(Decimal shitsumonJiko24) {
         this.shitsumonJiko24 = shitsumonJiko24;
     }
 
@@ -656,7 +656,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @return 質問事項２５
      */
-    public int getShitsumonJiko25() {
+    public Decimal getShitsumonJiko25() {
         return shitsumonJiko25;
     }
 
@@ -665,7 +665,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
      *
      * @param shitsumonJiko25 質問事項２５
      */
-    public void setShitsumonJiko25(int shitsumonJiko25) {
+    public void setShitsumonJiko25(Decimal shitsumonJiko25) {
         this.shitsumonJiko25 = shitsumonJiko25;
     }
 

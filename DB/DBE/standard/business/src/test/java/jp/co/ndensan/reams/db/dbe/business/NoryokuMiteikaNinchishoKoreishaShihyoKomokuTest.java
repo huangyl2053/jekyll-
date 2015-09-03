@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -33,7 +33,7 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoKomokuTest {
 
         @Test
         public void get能力未低下認知症高齢者指標コードと_getCodeで取得した内容が_同一になる() {
-            assertThat(sut.get能力未低下認知症高齢者指標コード().value(), is(sut.getCode().value()));
+            assertThat(sut.get能力未低下認知症高齢者指標コード().value(), is(sut.get能力未低下認知症高齢者指標コード().asCode().value()));
         }
     }
 }

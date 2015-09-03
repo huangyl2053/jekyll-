@@ -8,13 +8,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsu.*;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**

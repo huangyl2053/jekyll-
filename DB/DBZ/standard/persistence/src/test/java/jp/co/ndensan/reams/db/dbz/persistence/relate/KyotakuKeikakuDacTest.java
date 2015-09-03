@@ -4,16 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3005KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
@@ -23,12 +22,13 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -56,8 +56,10 @@ public class KyotakuKeikakuDacTest {
     private static final FlexibleYearMonth 計画_対象年月2 = new FlexibleYearMonth(new RString("201407"));
     private static final YMDHMS 計画_処理日時1 = new YMDHMS(new RString("20140101102030"));
     private static final YMDHMS 計画_処理日時2 = new YMDHMS(new RString("20140101102040"));
+    private static final Decimal 計画_履歴番号1 = new Decimal(1);
+    private static final Decimal 計画_履歴番号2 = new Decimal(2);
 
-    private static final RString 事業者_被保険者番号1 = new RString("123451");
+    private static final HihokenshaNo 事業者_被保険者番号1 = new HihokenshaNo("123451");
     private static final RString 事業者_被保険者番号2 = new RString("023450");
     private static final RString 事業者_証記載保険者番号1 = new RString("123456");
     private static final RString 事業者_証記載保険者番号2 = new RString("023450");
@@ -68,6 +70,7 @@ public class KyotakuKeikakuDacTest {
     private static final YMDHMS 事業者_処理日時1 = new YMDHMS(new RString("20140101102030"));
     private static final YMDHMS 事業者_処理日時2 = new YMDHMS(new RString("20141201102030"));
     private static final FlexibleDate 事業者_適用開始年月 = new FlexibleDate(new RString("20140601"));
+    private static final Decimal 事業者_履歴番号1 = new Decimal(1);
 
     private static final HihokenshaNo 自己_被保険者番号1 = new HihokenshaNo("123451");
     private static final HihokenshaNo 自己_被保険者番号2 = new HihokenshaNo("023450");
@@ -80,6 +83,7 @@ public class KyotakuKeikakuDacTest {
     private static final YMDHMS 自己_処理日時1 = new YMDHMS(new RString("20140101102040"));
     private static final YMDHMS 自己_処理日時2 = new YMDHMS(new RString("20141201102030"));
     private static final FlexibleDate 自己_適用開始年月 = new FlexibleDate(new RString("20140701"));
+    private static final Decimal 自己_履歴番号1 = new Decimal(1);
 
     @BeforeClass
     public static void setUpClass() {
@@ -93,12 +97,12 @@ public class KyotakuKeikakuDacTest {
 
         @Before
         public void setUp() {
-            TestSupport.insertDbT3005(計画_被保険者番号1, 計画_証記載保険者番号1, 計画_識別コード1, 計画_対象年月1, 計画_処理日時1);
-            TestSupport.insertDbT3005(計画_被保険者番号2, 計画_証記載保険者番号2, 計画_識別コード2, 計画_対象年月2, 計画_処理日時2);
+            TestSupport.insertDbT3005(計画_被保険者番号1, 計画_対象年月1, 計画_履歴番号1);
+            TestSupport.insertDbT3005(計画_被保険者番号2, 計画_対象年月2, 計画_履歴番号2);
 
-            TestSupport.insertDbT3006(事業者_証記載保険者番号1, 事業者_被保険者番号1, 事業者_識別コード1, 事業者_対象年月1, 事業者_処理日時1, 事業者_適用開始年月);
+            TestSupport.insertDbT3006(事業者_被保険者番号1, 事業者_対象年月1, 事業者_履歴番号1);
 
-            TestSupport.insertDbT3007(自己_証記載保険者番号1, 自己_被保険者番号1, 自己_識別コード1, 自己_対象年月1, 自己_処理日時1, 自己_適用開始年月);
+            TestSupport.insertDbT3007(自己_被保険者番号1, 自己_対象年月1, 自己_履歴番号1);
         }
 
         @Test(expected = NullPointerException.class)
@@ -108,11 +112,11 @@ public class KyotakuKeikakuDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
-            IItemList<KyotakuKeikakuRelateModel> modelList = sut.select居宅計画履歴一覧By被保険者番号(計画_被保険者番号1);
+            IItemList<DbT3005KyotakuKeikakuTodokedeEntity> modelList = sut.select居宅計画履歴一覧By被保険者番号(計画_被保険者番号1);
             assertThat(modelList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get居宅給付計画自己作成モデル().get().get証記載保険者番号(), is(自己_証記載保険者番号1));
-            assertThat(modelList.toList().get(1).get居宅給付計画事業者作成モデル().get().get証記載保険者番号(), is(事業者_証記載保険者番号1));
+            assertThat(modelList.toList().get(0).getHihokenshaNo(), is(自己_被保険者番号1));
+            assertThat(modelList.toList().get(1).getHihokenshaNo(), is(自己_被保険者番号2));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -126,51 +130,35 @@ public class KyotakuKeikakuDacTest {
 
         public static void insertDbT3005(
                 HihokenshaNo 被保険者番号,
-                HokenshaNo 証記載保険者番号,
-                ShikibetsuCode 識別コード,
                 FlexibleYearMonth 対象年月,
-                YMDHMS 処理日時) {
+                Decimal 履歴番号) {
             DbT3005KyotakuKeikakuTodokedeEntity entity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
             entity.setHihokenshaNo(被保険者番号);
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
-            entity.setShikibetsuCode(識別コード);
             entity.setTaishoYM(対象年月);
-            entity.setShoriTimestamp(処理日時);
-            居宅給付計画届出Dac.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            居宅給付計画届出Dac.save(entity);
         }
 
         public static void insertDbT3006(
-                RString 証記載保険者番号,
-                RString 被保険者番号,
-                ShikibetsuCode 識別コード,
+                HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                YMDHMS 処理日時,
-                FlexibleDate 適用開始年月) {
+                Decimal 履歴番号) {
             DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshano(被保険者番号);
-            entity.setShikibetsuCode(識別コード);
             entity.setTaishoYM(対象年月);
-            entity.setShoriTimestamp(処理日時);
-            entity.setTekiyoKaishiYMD(適用開始年月);
-            居宅給付計画事業者作成Dac.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            居宅給付計画事業者作成Dac.save(entity);
         }
 
         public static void insertDbT3007(
-                HokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
-                ShikibetsuCode 識別コード,
                 FlexibleYearMonth 対象年月,
-                YMDHMS 処理日時,
-                FlexibleDate 適用開始年月) {
+                Decimal 履歴番号) {
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.createDbT3007KyotakuKeikakuJikoSakuseiEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者番号);
-            entity.setShikibetsuCode(識別コード);
             entity.setTaishoYM(対象年月);
-            entity.setShoriTimestamp(処理日時);
-            entity.setTekiyoKaishiYMD(適用開始年月);
-            居宅給付計画自己作成Dac.insert(entity);
+            entity.setRirekiNo(履歴番号);
+            居宅給付計画自己作成Dac.save(entity);
         }
     }
 

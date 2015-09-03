@@ -4,52 +4,48 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防基本チェックリストエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT3101NijiYoboKihonCheckListEntityGenerator {
 
-    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final FlexibleDate DEFAULT_記入年月日 = new FlexibleDate("20140402");
-    public static final int DEFAULT_質問事項１ = 1;
-    public static final int DEFAULT_質問事項２ = 1;
-    public static final int DEFAULT_質問事項３ = 1;
-    public static final int DEFAULT_質問事項４ = 1;
-    public static final int DEFAULT_質問事項５ = 1;
-    public static final int DEFAULT_質問事項６ = 1;
-    public static final int DEFAULT_質問事項７ = 1;
-    public static final int DEFAULT_質問事項８ = 1;
-    public static final int DEFAULT_質問事項９ = 1;
-    public static final int DEFAULT_質問事項１０ = 1;
-    public static final int DEFAULT_質問事項１１ = 1;
-    public static final Decimal DEFAULT_質問事項１２身長 = new Decimal(90);
-    public static final Decimal DEFAULT_質問事項１２体重 = new Decimal(65);
-    public static final int DEFAULT_質問事項１３ = 1;
-    public static final int DEFAULT_質問事項１４ = 1;
-    public static final int DEFAULT_質問事項１５ = 1;
-    public static final int DEFAULT_質問事項１６ = 1;
-    public static final int DEFAULT_質問事項１７ = 1;
-    public static final int DEFAULT_質問事項１８ = 1;
-    public static final int DEFAULT_質問事項１９ = 1;
-    public static final int DEFAULT_質問事項２０ = 1;
-    public static final int DEFAULT_質問事項２１ = 1;
-    public static final int DEFAULT_質問事項２２ = 1;
-    public static final int DEFAULT_質問事項２３ = 1;
-    public static final int DEFAULT_質問事項２４ = 1;
-    public static final int DEFAULT_質問事項２５ = 1;
+    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final FlexibleDate DEFAULT_記入年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_質問事項１ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項３ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項４ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項５ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項６ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項７ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項８ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項９ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１０ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１１ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１２身長 = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１２体重 = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１３ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１４ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１５ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１６ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１７ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１８ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項１９ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２０ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２１ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２２ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２３ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２４ = new Decimal(0);
+    public static final Decimal DEFAULT_質問事項２５ = new Decimal(0);
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -62,6 +58,7 @@ public final class DbT3101NijiYoboKihonCheckListEntityGenerator {
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setUketsukeYMD(DEFAULT_受付年月日);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setKinyuYMD(DEFAULT_記入年月日);
         entity.setShitsumonJiko01(DEFAULT_質問事項１);
         entity.setShitsumonJiko02(DEFAULT_質問事項２);

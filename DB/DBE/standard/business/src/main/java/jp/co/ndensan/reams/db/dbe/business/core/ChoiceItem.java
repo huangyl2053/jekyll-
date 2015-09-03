@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.core;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 回答項目（選択項目）を扱うクラスです。

@@ -5,16 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dba.business.code;
 
-import jp.co.ndensan.reams.ur.urz.definition.ICodeAssignedHelper;
 import jp.co.ndensan.reams.db.dba.business.codeassigneditem.*;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterHelper;
 
 /**
  * コード種別を表す列挙型です。
  *
  * @author N9606 漢那 憲作
  */
-public enum DBACodeShubetsu implements ICodeAssignedHelper {
+public enum DBACodeShubetsu {
 
     /**
      * 取得事由_被保険者
@@ -61,12 +61,10 @@ public enum DBACodeShubetsu implements ICodeAssignedHelper {
         this.returnType = returnType;
     }
 
-    @Override
     public CodeShubetsu getCodeShubetsu() {
         return codeShubetsu;
     }
 
-    @Override
     public Class getReturnType() {
         return returnType;
     }

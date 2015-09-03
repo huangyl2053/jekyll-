@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testhihokenshashikakuhakko;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestHihokenshaShikakuHakko.TestHihokenshaShikakuHakkoPanelDiv;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -63,9 +62,8 @@ public class TestHihokenshaShikakuHakkoPanel {
     public ResponseData<TestHihokenshaShikakuHakkoPanelDiv> onClick_btnGetModel(TestHihokenshaShikakuHakkoPanelDiv div) {
 
         ResponseData<TestHihokenshaShikakuHakkoPanelDiv> response = new ResponseData<>();
-
-        HihokenshaShikakuHakkoModel model = div.getCcdHihokenshaShikakuHakko().create証発行情報();
-
+        //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
+//        HihokenshaShikakuHakkoModel model = div.getCcdHihokenshaShikakuHakko().create証発行情報();
         response.addValidationMessages(div.getCcdHihokenshaShikakuHakko().validate());
         return response;
     }

@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -45,12 +45,12 @@ public interface IShikakuHenkoRirekiDiv {
      *
      * @return 被保険者台帳List
      */
-    IItemList<HihokenshaDaichoModel> get資格関連異動履歴();
+    IItemList<DbT1001HihokenshaDaichoEntity> get資格関連異動履歴();
 
     /**
      * 共有子Divに、資格関連異動の履歴を設定する。
      *
      * @param 被保険者台帳List 被保険者台帳List
      */
-    void set資格関連異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List);
+    void set資格関連異動履歴(IItemList<DbT1001HihokenshaDaichoEntity> 被保険者台帳List);
 }

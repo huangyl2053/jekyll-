@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -47,22 +47,22 @@ public class DbT3033KyufujissekiShukeiEntityMock {
     public static DbT3033KyufujissekiShukeiEntity createEntity() {
         DbT3033KyufujissekiShukeiEntity entity = new DbT3033KyufujissekiShukeiEntity();
         entity.setKokanJohoShikibetsuNo(new KokanShikibetsuNo(new RString("1234")));
-        entity.setInputShikibetsuNo(new RString("0001"));
+        entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo("0001"));
         entity.setRecodeShubetsuCode(new RString("02"));
-        entity.setShokisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000003")));
+        entity.setShokisaiHokenshaNo(new HokenshaNo(new RString("00000003")));
         entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
-        entity.setToshiNo(new ToshiNo(new RString("0000000006")));
+        entity.setToshiNo(new RString("0000000006"));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("01")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("11")));
-        entity.setServiceJitsunissu(new Integer(1));
+        entity.setServiceJitsunissu(new Decimal(1));
         entity.setPlanTanisu(new Decimal(200));
         entity.setGendogakuKanriTaishoTanisu(new Decimal(300));
         entity.setGendogakuKanritaishogaiTanisu(new Decimal(400));
-        entity.setTankiNyushoPlanNissu(new Integer(5));
-        entity.setTankiNyushoJitsunissu(new Integer(6));
+        entity.setTankiNyushoPlanNissu(new Decimal(5));
+        entity.setTankiNyushoJitsunissu(new Decimal(6));
         entity.setHokenTanisuTotal(new Decimal(100));
         entity.setHokenTanisuTani(new Decimal(101));
         entity.setHokenSeikyugaku(new Decimal(102));
@@ -88,7 +88,7 @@ public class DbT3033KyufujissekiShukeiEntityMock {
         entity.setKohi3DekidakaTanisuTotal(new Decimal(404));
         entity.setKohi3DekidakaSeikyugaku(new Decimal(405));
         entity.setKohi3DekidakaIryohiRiyoshaFutangaku(new Decimal(406));
-        entity.setAtoTankiNyushoJitsunissu(new Integer(7));
+        entity.setAtoTankiNyushoJitsunissu(new Decimal(7));
         entity.setAtoHokenTanisuTotal(new Decimal(110));
         entity.setAtoHokenSeikyugaku(new Decimal(112));
         entity.setAtoHokenDekidakaTanisuTotal(new Decimal(114));
@@ -105,8 +105,8 @@ public class DbT3033KyufujissekiShukeiEntityMock {
         entity.setAtoKohi3Seikyugaku(new Decimal(412));
         entity.setAtoKohi3DekidakaTanisuTotal(new Decimal(414));
         entity.setAtoKohi3DekidakaSeikyugaku(new Decimal(415));
-        entity.setSaishinsaKaisu(new Integer(12));
-        entity.setKagoKaisu(new Integer(13));
+        entity.setSaishinsaKaisu(new Decimal(12));
+        entity.setKagoKaisu(new Decimal(13));
         return entity;
     }
 }

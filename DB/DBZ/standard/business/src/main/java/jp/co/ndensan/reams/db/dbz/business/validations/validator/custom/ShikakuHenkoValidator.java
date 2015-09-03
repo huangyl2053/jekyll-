@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.validations.validator.custom;
 
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
+import jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
-import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -142,33 +142,33 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         return !変更日.isBefore(喪失日);
     }
 
-    private boolean is変更日が前の履歴データの変更日と重複(Optional<HihokenshaDaichoModel> optional) {
-        HihokenshaDaichoModel 前履歴 = optional.orElse(null);
+    private boolean is変更日が前の履歴データの変更日と重複(Optional<DbT1001HihokenshaDaichoEntity> optional) {
+        DbT1001HihokenshaDaichoEntity 前履歴 = optional.orElse(null);
 
         if (前履歴 == null || 変更日.isEmpty()) {
             return false;
         }
-        return !前履歴.get資格変更年月日().isBefore(変更日);
+        return !前履歴.getShikakuHenkoYMD().isBefore(変更日);
     }
 
-    private boolean is変更日が次の履歴データの変更日と重複(Optional<HihokenshaDaichoModel> optional) {
-        HihokenshaDaichoModel 次履歴 = optional.orElse(null);
+    private boolean is変更日が次の履歴データの変更日と重複(Optional<DbT1001HihokenshaDaichoEntity> optional) {
+        DbT1001HihokenshaDaichoEntity 次履歴 = optional.orElse(null);
 
         if (次履歴 == null || 変更日.isEmpty()) {
             return false;
         }
-        return 次履歴.get資格変更年月日().isBefore(変更日);
+        return 次履歴.getShikakuHenkoYMD().isBefore(変更日);
     }
 
-    private boolean has住所地特例履歴と期間が重複する履歴In(IItemList<HihokenshaDaichoModel> list) {
+    private boolean has住所地特例履歴と期間が重複する履歴In(IItemList<DbT1001HihokenshaDaichoEntity> list) {
         if (変更日.isEmpty()) {
             return false;
         }
-        for (HihokenshaDaichoModel model : list) {
-            if (model.get適用年月日().isEmpty() || model.get解除年月日().isEmpty()) {
+        for (DbT1001HihokenshaDaichoEntity model : list) {
+            if (model.getShikakuShutokuYMD().isEmpty() || model.getShikakuSoshitsuYMD().isEmpty()) {
                 return false;
             }
-            if (OrderValidator.from(model.get適用年月日()).afterOrEquals(変更日).after(model.get解除年月日()).isValid()) {
+            if (OrderValidator.from(model.getShikakuShutokuYMD()).afterOrEquals(変更日).after(model.getShikakuSoshitsuYMD()).isValid()) {
                 return true;
             }
         }

@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReport;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

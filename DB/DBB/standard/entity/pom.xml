@@ -9,31 +9,30 @@
     <artifactId>DbbEntity</artifactId>
     <packaging>jar</packaging>
     <name>DbbEntity</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+		<!-- DBB -->
+	    <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbbDefinition</artifactId>
+        </dependency>
+		<!-- DBX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+        </dependency>
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbbDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
-        </dependency>
+		<!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
-            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

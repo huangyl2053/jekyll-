@@ -34,7 +34,7 @@ public class DbT3063SaishinsaKetteiShukeiEntity extends DbTableEntityBase<DbT306
     @PrimaryKey
     private RString hokenshaKubun;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private int kaigoKyufuhiSeikyuKensu;
     private Decimal kaigoKyufuhiSeikyuTanisu;
     private Decimal kaigoKyufuhiSeikyuFutangaku;
@@ -160,7 +160,7 @@ public class DbT3063SaishinsaKetteiShukeiEntity extends DbTableEntityBase<DbT306
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -169,7 +169,7 @@ public class DbT3063SaishinsaKetteiShukeiEntity extends DbTableEntityBase<DbT306
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

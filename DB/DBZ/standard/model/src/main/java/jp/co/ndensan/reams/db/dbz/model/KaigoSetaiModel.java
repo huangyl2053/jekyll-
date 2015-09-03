@@ -7,12 +7,11 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -73,7 +72,7 @@ public class KaigoSetaiModel implements Serializable {
      * @return 世帯基準年月日
      */
     public FlexibleDate get世帯基準年月日() {
-        return entity.getSetaiKijunYMD();
+        return entity.getSetaiHaakuKijunYMD();
     }
 
     /**
@@ -82,18 +81,18 @@ public class KaigoSetaiModel implements Serializable {
      * @return 連番
      */
     public int get連番() {
-        return entity.getRenban();
+        return entity.getSetaiInkanriRenban();
     }
 
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public RDateTime get処理日時() {
-        return entity.getShoriTimestamp();
-    }
-
+//    /**
+//     * 処理日時を返します。
+//     *
+//     * @return 処理日時
+//     */
+//    public RDateTime get処理日時() {
+//        return entity.getShoriTimestamp();
+//    }
+//
     /**
      * 世帯員識別コードを返します。
      *
@@ -120,7 +119,7 @@ public class KaigoSetaiModel implements Serializable {
      */
     public void set世帯基準年月日(FlexibleDate 世帯基準年月日) {
         requireNonNull(世帯基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯基準年月日"));
-        entity.setSetaiKijunYMD(世帯基準年月日);
+        entity.setSetaiHaakuKijunYMD(世帯基準年月日);
     }
 
     /**
@@ -130,19 +129,19 @@ public class KaigoSetaiModel implements Serializable {
      */
     public void set連番(int 連番) {
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        entity.setRenban(連番);
+        entity.setSetaiInkanriRenban(連番);
     }
 
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(RDateTime 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
-    }
-
+//    /**
+//     * 処理日時を設定します。
+//     *
+//     * @param 処理日時 処理日時
+//     */
+//    public void set処理日時(RDateTime 処理日時) {
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimestamp(処理日時);
+//    }
+//
     /**
      * 世帯員識別コードを設定します。
      *

@@ -7,25 +7,24 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_枝番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_異動日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -37,12 +36,12 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
-    private static final LasdecCode OTHER_市町村コード = new LasdecCode("201010");
     private static final HihokenshaNo OTHER_被保険者番号 = new HihokenshaNo("1234500001");
-    private static final ShoriTimestamp OTHER_処理日時 = ShoriTimestamp.of(new YMDHMS("20091104134911"));
-    private static final LasdecCode NONE_市町村コード = new LasdecCode("999999");
+    private static final FlexibleDate OTHER_異動日 = new FlexibleDate("20150808");
+    private static final RString OTHER_枝番 = new RString("001");
     private static final HihokenshaNo NONE_被保険者番号 = new HihokenshaNo("9999999999");
-    private static final ShoriTimestamp NONE_処理日時 = ShoriTimestamp.of(new YMDHMS("39990101235959"));
+    private static final FlexibleDate NONE_異動日 = new FlexibleDate("99999999");
+    private static final RString NONE_枝番 = new RString("001");
     private static HihokenshaDaichoDac sut;
 
     @BeforeClass
@@ -55,57 +54,54 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             TestSupport.insert(
-                    OTHER_市町村コード,
                     OTHER_被保険者番号,
-                    OTHER_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            LasdecCode nullLasdecCode = null;
-            sut.selectByKey(
-                    nullLasdecCode,
-                    DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    OTHER_異動日,
+                    OTHER_枝番);
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            HihokenshaNo nullHihokenshaNo = null;
             sut.selectByKey(
-                    DEFAULT_市町村コード,
-                    nullHihokenshaNo,
-                    DEFAULT_処理日時);
+                    null,
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            ShoriTimestamp nullTimestamp = null;
+        public void 異動日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    nullTimestamp);
+                    null,
+                    DEFAULT_枝番);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 枝番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
+                    DEFAULT_異動日,
+                    null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT1001HihokenshaDaichoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT1001HihokenshaDaichoEntity insertedRecord = sut.selectByKey(
-                    NONE_市町村コード,
                     NONE_被保険者番号,
-                    NONE_処理日時);
+                    NONE_異動日,
+                    NONE_枝番);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -115,42 +111,42 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             TestSupport.insert(
-                    OTHER_市町村コード,
                     OTHER_被保険者番号,
-                    OTHER_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    null,
-                    DEFAULT_被保険者番号);
+                    OTHER_異動日,
+                    OTHER_枝番);
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
+                    null,
+                    DEFAULT_異動日);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 異動日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_被保険者番号,
                     null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             IItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(
-                    DEFAULT_市町村コード,
-                    DEFAULT_被保険者番号);
+                    DEFAULT_被保険者番号,
+                    DEFAULT_異動日);
             assertThat(selectByKey, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             IItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(
-                    NONE_市町村コード,
-                    NONE_被保険者番号);
+                    null,
+                    NONE_異動日);
             assertThat(selectByKey.isEmpty(), is(true));
         }
     }
@@ -160,13 +156,13 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             TestSupport.insert(
-                    OTHER_市町村コード,
                     OTHER_被保険者番号,
-                    OTHER_処理日時);
+                    OTHER_異動日,
+                    OTHER_枝番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -176,13 +172,13 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(DEFAULT_市町村コード);
+            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(DEFAULT_被保険者番号);
             assertThat(selectByKey, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(NONE_市町村コード);
+            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(NONE_被保険者番号);
             assertThat(selectByKey.isEmpty(), is(true));
         }
     }
@@ -193,9 +189,9 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Test
         public void 被保険者台帳が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
             assertThat(sut.selectAll().size(), is(14));
         }
 
@@ -210,14 +206,14 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Test
         public void 被保険者台帳エンティティを渡すと_insertは_被保険者台帳を追加する() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番), is(notNullValue()));
         }
     }
 
@@ -226,9 +222,9 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test
@@ -239,9 +235,9 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT1001HihokenshaDaichoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
 
             assertThat(updateRecord.getShikakuShutokuYMD(), is(updatedRecord.getShikakuShutokuYMD()));
         }
@@ -252,34 +248,33 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時);
+                    DEFAULT_異動日,
+                    DEFAULT_枝番);
         }
 
         @Test
         public void 被保険者台帳エンティティを渡すと_deleteは_被保険者台帳を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番));
             assertThat(sut.selectByKey(
-                    DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_異動日,
+                    DEFAULT_枝番), is(nullValue()));
         }
     }
 
     private static class TestSupport {
 
-        public static void insert(
-                LasdecCode 市町村コード,
-                HihokenshaNo 被保険者番号,
-                ShoriTimestamp 処理日時) {
+        public static void insert(HihokenshaNo 被保険者番号,
+                FlexibleDate 異動日,
+                RString 枝番) {
             DbT1001HihokenshaDaichoEntity entity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
-            entity.setShichosonCode(市町村コード);
             entity.setHihokenshaNo(被保険者番号);
-            entity.setShoriTimestamp(処理日時);
+            entity.setIdoYMD(異動日);
+            entity.setEdaNo(枝番);
             sut.insert(entity);
         }
     }

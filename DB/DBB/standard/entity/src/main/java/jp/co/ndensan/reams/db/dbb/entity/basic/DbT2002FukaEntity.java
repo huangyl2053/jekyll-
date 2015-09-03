@@ -2,8 +2,8 @@ package jp.co.ndensan.reams.db.dbb.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -42,11 +42,11 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private SetaiCode setaiCode;
-    private int setaiInsu;
+    private Decimal setaiInsu;
     private FlexibleDate shikakuShutokuYMD;
     private RString shikakuShutokuJiyu;
     private FlexibleDate shikakuSoshitsuYMD;
@@ -80,7 +80,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private Decimal gemmenGaku;
     private Decimal kakuteiHokenryo;
     private RString hokenryoDankaiKarisanntei;
-    private int choshuHohoRirekiNo;
+    private Decimal choshuHohoRirekiNo;
     private RDateTime idoKijunTimestamp;
     private RString kozaKubun;
     private RString kyokaisoKubun;
@@ -191,7 +191,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -200,7 +200,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -263,7 +263,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return 世帯員数
      */
-    public int getSetaiInsu() {
+    public Decimal getSetaiInsu() {
         return setaiInsu;
     }
 
@@ -272,7 +272,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param setaiInsu 世帯員数
      */
-    public void setSetaiInsu(int setaiInsu) {
+    public void setSetaiInsu(Decimal setaiInsu) {
         this.setaiInsu = setaiInsu;
     }
 
@@ -895,7 +895,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return 徴収方法履歴番号
      */
-    public int getChoshuHohoRirekiNo() {
+    public Decimal getChoshuHohoRirekiNo() {
         return choshuHohoRirekiNo;
     }
 
@@ -904,7 +904,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choshuHohoRirekiNo 徴収方法履歴番号
      */
-    public void setChoshuHohoRirekiNo(int choshuHohoRirekiNo) {
+    public void setChoshuHohoRirekiNo(Decimal choshuHohoRirekiNo) {
         this.choshuHohoRirekiNo = choshuHohoRirekiNo;
     }
 
@@ -1014,7 +1014,8 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * このエンティティの主キーが他の{@literal DbT2002FukaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2002FukaEntity other) {

@@ -7,17 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.JuminJohoModel;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 
 /**
  * 住所地特例などで、異動対象者の名寄せに使用する住民情報です。
@@ -28,37 +21,7 @@ public class JuminJoho {
 
     private static final RString BREAK_STRING = new RString(",");
     private static final int SHICHOSON_CODE_INDEX = 2;
-    private final JuminJohoModel model;
-    private final RString modelStr;
-
-    /**
-     * コンストラクタです。
-     *
-     * @param model 住民情報Model
-     */
-    public JuminJoho(JuminJohoModel model) throws NullPointerException {
-        requireNonNull(model, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住民情報Model", getClass().getName()));
-        this.model = model;
-        this.modelStr = createJuminJohoStr();
-    }
-
-    private RString createJuminJohoStr() {
-        RStringBuilder modelStrBuilder = new RStringBuilder();
-        modelStrBuilder.append(model.get識別コード().getColumnValue());
-        modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.get住民種別().toRString());
-        modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.getカナ名称().value());
-        modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.get性別().getName());
-        modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
-        modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.get地区コード3().getColumnValue().substring(SHICHOSON_CODE_INDEX));
-        modelStrBuilder.append(BREAK_STRING);
-        return modelStrBuilder.toRString();
-    }
+//    private final RString modelStr;
 
     /**
      * 住所地特例で使用する、必要な住民情報を連結した文字列を返します。
@@ -66,7 +29,8 @@ public class JuminJoho {
      * @return 住民情報を連結した文字列
      */
     public RString getJuminJohoString() {
-        return modelStr;
+        return null;
+//        return modelStr;
     }
 
     /**
@@ -80,8 +44,8 @@ public class JuminJoho {
     public static IItemList<JuminJoho> createListBy(IItemList<IShikibetsuTaisho> shikibetsuTaishoList) throws NullPointerException {
         List<JuminJoho> juminJohoList = new ArrayList<>();
         for (IShikibetsuTaisho shikibetsuTaisho : shikibetsuTaishoList) {
-            JuminJohoModel model = new JuminJohoModel(shikibetsuTaisho);
-            juminJohoList.add(new JuminJoho(model));
+//            JuminJohoModel model = new JuminJohoModel(shikibetsuTaisho);
+//            juminJohoList.add(new JuminJoho(model));
         }
         return ItemList.of(juminJohoList);
     }

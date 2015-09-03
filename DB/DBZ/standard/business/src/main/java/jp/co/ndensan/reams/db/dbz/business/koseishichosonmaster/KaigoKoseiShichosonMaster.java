@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster;
 
 import java.io.Serializable;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -412,6 +413,18 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    public KaigoKoseiShichosonMaster modifiedModel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<KaigoKoseiShichosonMaster> getKoseiShichosonShishoMasterList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

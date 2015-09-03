@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * DbT1009ShikakuShutokuJogaishaの項目定義クラスです
@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT1009ShikakuShutokuJogaishaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1009ShikakuShutokuJogaisha");
 
@@ -40,7 +41,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +50,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +59,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,17 +68,16 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,7 +86,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -95,7 +95,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -104,7 +104,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -113,7 +113,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -122,7 +122,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -131,7 +131,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -140,7 +140,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外理由のgetメソッドです。
-     * 
+     *
      * @return 資格取得除外理由
      */
     public RString getShikakuShutokuJogaiRiyu() {
@@ -149,7 +149,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外理由のsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJogaiRiyu 資格取得除外理由
      */
     public void setShikakuShutokuJogaiRiyu(RString shikakuShutokuJogaiRiyu) {
@@ -158,7 +158,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外年月日のgetメソッドです。
-     * 
+     *
      * @return 資格取得除外年月日
      */
     public FlexibleDate getShikakuShutokuJogaiYMD() {
@@ -167,7 +167,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外年月日のsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJogaiYMD 資格取得除外年月日
      */
     public void setShikakuShutokuJogaiYMD(FlexibleDate shikakuShutokuJogaiYMD) {
@@ -176,7 +176,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外解除年月日のgetメソッドです。
-     * 
+     *
      * @return 資格取得除外解除年月日
      */
     public FlexibleDate getShikakuShutokuJogaiKaijoYMD() {
@@ -185,7 +185,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * 資格取得除外解除年月日のsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJogaiKaijoYMD 資格取得除外解除年月日
      */
     public void setShikakuShutokuJogaiKaijoYMD(FlexibleDate shikakuShutokuJogaiKaijoYMD) {
@@ -194,9 +194,9 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * このエンティティの主キーが他の{@literal DbT1009ShikakuShutokuJogaishaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1009ShikakuShutokuJogaishaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -228,6 +228,7 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -236,8 +237,4 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     }
 
 // </editor-fold>
-
-
-
-
 }

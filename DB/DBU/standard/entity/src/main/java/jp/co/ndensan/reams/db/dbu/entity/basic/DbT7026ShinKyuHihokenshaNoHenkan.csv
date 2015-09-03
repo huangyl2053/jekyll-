@@ -1,5 +1,0 @@
-﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-shinNo,varchar,RString,,,,,新番号,A
-kyuNo,varchar,RString,,,,,旧番号,A
-kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,旧市町村コード２,A
-kyuNo2,varchar,RString,,,,,旧番号２,A

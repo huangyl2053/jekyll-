@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 各種コード変換テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7027KakushuCodeHenkanEntityGenerator {
 

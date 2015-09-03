@@ -8,12 +8,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受給者異動送付テーブルのエンティティクラスです。
@@ -43,7 +44,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString hiHokenshaNameKana;
     private FlexibleDate umareYMD;
     private RString seibetsuCode;
@@ -67,7 +68,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private int homonTsushoServiceShikyuGendoKijungaku;
     private FlexibleDate homonTsushoServiceJogenKanriTekiyoKaishiYMD;
     private FlexibleDate homonTsushoServiceJogenKanriTekiyoShuryoYMD;
-    private int tankiNyushoServiceShikyuGendoKijungaku;
+    private Decimal tankiNyushoServiceShikyuGendoKijungaku;
     private FlexibleDate tankinyushoServiceJogenKanriTekiyoKaishiYMD;
     private FlexibleDate tankinyushoServiceJogenKanriTekiyoShuryoYMD;
     private boolean kohiFutanJogenGengakuAriFlag;
@@ -87,15 +88,15 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private RString tokuteiNyushoshaNinteiShinseichuKubunCode;
     private RString tokuteiNyushoshaKaigoServiceKubunCode;
     private boolean kaizeisoTokureiGengakuSochiTaishoFlag;
-    private int shokuhiFutanGendogaku;
-    private int kyojuhiUnitGataKoshitsuFutanGendogaku;
-    private int kyojuhiUnitGataJunKoshitsuFutanGendogaku;
-    private int kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
-    private int kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
-    private int kyujuhiTashoshitsuFutanGendogaku;
+    private Decimal shokuhiFutanGendogaku;
+    private Decimal kyojuhiUnitGataKoshitsuFutanGendogaku;
+    private Decimal kyojuhiUnitGataJunKoshitsuFutanGendogaku;
+    private Decimal kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
+    private Decimal kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
+    private Decimal kyujuhiTashoshitsuFutanGendogaku;
     private FlexibleDate futanGendogakuTekiyoKaishiYMD;
     private FlexibleDate futanGendogakuTekiyoShuryoYMD;
-    private int keigenritsu;
+    private Decimal keigenritsu;
     private FlexibleDate keigenritsuTekiyoKaishiYMD;
     private FlexibleDate keigenritsuTekiyoShuryoYMD;
     private boolean shoTakinoKyotakuKaigoRiyozukiRiyoAriFlag;
@@ -113,9 +114,9 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     private RString shisetsuShozaiHokenjaNo;
     private FlexibleDate jushochiTokureiTekiyoKaishiYMD;
     private FlexibleDate jushochiTokureiTekiyoShuryoYMD;
-    private int kyotakuhiShin1FutanGendogaku;
-    private int kyotakuhiShin2FutanGendogaku;
-    private int kyotakuhiShin3FutanGendogaku;
+    private Decimal kyotakuhiShin1FutanGendogaku;
+    private Decimal kyotakuhiShin2FutanGendogaku;
+    private Decimal kyotakuhiShin3FutanGendogaku;
     private FlexibleDate riyosyaFutanWariaiYukoKaishiYMD;
     private FlexibleDate riyosyaFutanWariaiYukoShuryoYMD;
 
@@ -271,7 +272,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -280,7 +281,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -747,7 +748,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 短期入所サービス支給限度基準額
      */
-    public int getTankiNyushoServiceShikyuGendoKijungaku() {
+    public Decimal getTankiNyushoServiceShikyuGendoKijungaku() {
         return tankiNyushoServiceShikyuGendoKijungaku;
     }
 
@@ -756,7 +757,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param tankiNyushoServiceShikyuGendoKijungaku 短期入所サービス支給限度基準額
      */
-    public void setTankiNyushoServiceShikyuGendoKijungaku(int tankiNyushoServiceShikyuGendoKijungaku) {
+    public void setTankiNyushoServiceShikyuGendoKijungaku(Decimal tankiNyushoServiceShikyuGendoKijungaku) {
         this.tankiNyushoServiceShikyuGendoKijungaku = tankiNyushoServiceShikyuGendoKijungaku;
     }
 
@@ -889,8 +890,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     /**
      * 減免申請中区分コードのgetメソッドです。
      * <br/>
-     * <br/>1:申請無し      *
-     * <br/>2:申請中      *
+     * <br/>1:申請無し
+     *
+     * <br/>2:申請中
+     *
      * <br/>3:決定済み
      *
      * @return 減免申請中区分コード
@@ -902,8 +905,10 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
     /**
      * 減免申請中区分コードのsetメソッドです。
      * <br/>
-     * <br/>1:申請無し      *
-     * <br/>2:申請中      *
+     * <br/>1:申請無し
+     *
+     * <br/>2:申請中
+     *
      * <br/>3:決定済み
      *
      * @param gemmenShinseichuKubunCode 減免申請中区分コード
@@ -1135,7 +1140,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 食費負担限度額
      */
-    public int getShokuhiFutanGendogaku() {
+    public Decimal getShokuhiFutanGendogaku() {
         return shokuhiFutanGendogaku;
     }
 
@@ -1144,7 +1149,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param shokuhiFutanGendogaku 食費負担限度額
      */
-    public void setShokuhiFutanGendogaku(int shokuhiFutanGendogaku) {
+    public void setShokuhiFutanGendogaku(Decimal shokuhiFutanGendogaku) {
         this.shokuhiFutanGendogaku = shokuhiFutanGendogaku;
     }
 
@@ -1153,7 +1158,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居住費ユニット型個室負担限度額
      */
-    public int getKyojuhiUnitGataKoshitsuFutanGendogaku() {
+    public Decimal getKyojuhiUnitGataKoshitsuFutanGendogaku() {
         return kyojuhiUnitGataKoshitsuFutanGendogaku;
     }
 
@@ -1162,7 +1167,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyojuhiUnitGataKoshitsuFutanGendogaku 居住費ユニット型個室負担限度額
      */
-    public void setKyojuhiUnitGataKoshitsuFutanGendogaku(int kyojuhiUnitGataKoshitsuFutanGendogaku) {
+    public void setKyojuhiUnitGataKoshitsuFutanGendogaku(Decimal kyojuhiUnitGataKoshitsuFutanGendogaku) {
         this.kyojuhiUnitGataKoshitsuFutanGendogaku = kyojuhiUnitGataKoshitsuFutanGendogaku;
     }
 
@@ -1171,7 +1176,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居住費ユニット型準個室負担限度額
      */
-    public int getKyojuhiUnitGataJunKoshitsuFutanGendogaku() {
+    public Decimal getKyojuhiUnitGataJunKoshitsuFutanGendogaku() {
         return kyojuhiUnitGataJunKoshitsuFutanGendogaku;
     }
 
@@ -1180,7 +1185,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyojuhiUnitGataJunKoshitsuFutanGendogaku 居住費ユニット型準個室負担限度額
      */
-    public void setKyojuhiUnitGataJunKoshitsuFutanGendogaku(int kyojuhiUnitGataJunKoshitsuFutanGendogaku) {
+    public void setKyojuhiUnitGataJunKoshitsuFutanGendogaku(Decimal kyojuhiUnitGataJunKoshitsuFutanGendogaku) {
         this.kyojuhiUnitGataJunKoshitsuFutanGendogaku = kyojuhiUnitGataJunKoshitsuFutanGendogaku;
     }
 
@@ -1189,7 +1194,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居住費従来型個室特養等負担限度額
      */
-    public int getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku() {
+    public Decimal getKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku() {
         return kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
     }
 
@@ -1198,7 +1203,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku 居住費従来型個室特養等負担限度額
      */
-    public void setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(int kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku) {
+    public void setKyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku(Decimal kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku) {
         this.kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku = kyojuhiJuraiGataKoshitsuTokuyoFutanGendogaku;
     }
 
@@ -1207,7 +1212,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居住費従来型個室老健療養等負担限度額
      */
-    public int getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku() {
+    public Decimal getKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku() {
         return kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
     }
 
@@ -1217,7 +1222,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      * @param kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku
      * 居住費従来型個室老健療養等負担限度額
      */
-    public void setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(int kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku) {
+    public void setKyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku(Decimal kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku) {
         this.kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku = kyojuhiJuraiGataKoshitsuRokenRyoyoFutanGendogaku;
     }
 
@@ -1226,7 +1231,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居住費多床室負担限度額
      */
-    public int getKyujuhiTashoshitsuFutanGendogaku() {
+    public Decimal getKyujuhiTashoshitsuFutanGendogaku() {
         return kyujuhiTashoshitsuFutanGendogaku;
     }
 
@@ -1235,7 +1240,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyujuhiTashoshitsuFutanGendogaku 居住費多床室負担限度額
      */
-    public void setKyujuhiTashoshitsuFutanGendogaku(int kyujuhiTashoshitsuFutanGendogaku) {
+    public void setKyujuhiTashoshitsuFutanGendogaku(Decimal kyujuhiTashoshitsuFutanGendogaku) {
         this.kyujuhiTashoshitsuFutanGendogaku = kyujuhiTashoshitsuFutanGendogaku;
     }
 
@@ -1280,7 +1285,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 軽減率
      */
-    public int getKeigenritsu() {
+    public Decimal getKeigenritsu() {
         return keigenritsu;
     }
 
@@ -1289,7 +1294,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param keigenritsu 軽減率
      */
-    public void setKeigenritsu(int keigenritsu) {
+    public void setKeigenritsu(Decimal keigenritsu) {
         this.keigenritsu = keigenritsu;
     }
 
@@ -1616,7 +1621,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居宅費（新１）負担限度額
      */
-    public int getKyotakuhiShin1FutanGendogaku() {
+    public Decimal getKyotakuhiShin1FutanGendogaku() {
         return kyotakuhiShin1FutanGendogaku;
     }
 
@@ -1625,7 +1630,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyotakuhiShin1FutanGendogaku 居宅費（新１）負担限度額
      */
-    public void setKyotakuhiShin1FutanGendogaku(int kyotakuhiShin1FutanGendogaku) {
+    public void setKyotakuhiShin1FutanGendogaku(Decimal kyotakuhiShin1FutanGendogaku) {
         this.kyotakuhiShin1FutanGendogaku = kyotakuhiShin1FutanGendogaku;
     }
 
@@ -1634,7 +1639,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居宅費（新２）負担限度額
      */
-    public int getKyotakuhiShin2FutanGendogaku() {
+    public Decimal getKyotakuhiShin2FutanGendogaku() {
         return kyotakuhiShin2FutanGendogaku;
     }
 
@@ -1643,7 +1648,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyotakuhiShin2FutanGendogaku 居宅費（新２）負担限度額
      */
-    public void setKyotakuhiShin2FutanGendogaku(int kyotakuhiShin2FutanGendogaku) {
+    public void setKyotakuhiShin2FutanGendogaku(Decimal kyotakuhiShin2FutanGendogaku) {
         this.kyotakuhiShin2FutanGendogaku = kyotakuhiShin2FutanGendogaku;
     }
 
@@ -1652,7 +1657,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @return 居宅費（新３）負担限度額
      */
-    public int getKyotakuhiShin3FutanGendogaku() {
+    public Decimal getKyotakuhiShin3FutanGendogaku() {
         return kyotakuhiShin3FutanGendogaku;
     }
 
@@ -1661,7 +1666,7 @@ public class DbT3001JukyushaIdoRenrakuhyoEntity extends DbTableEntityBase<DbT300
      *
      * @param kyotakuhiShin3FutanGendogaku 居宅費（新３）負担限度額
      */
-    public void setKyotakuhiShin3FutanGendogaku(int kyotakuhiShin3FutanGendogaku) {
+    public void setKyotakuhiShin3FutanGendogaku(Decimal kyotakuhiShin3FutanGendogaku) {
         this.kyotakuhiShin3FutanGendogaku = kyotakuhiShin3FutanGendogaku;
     }
 

@@ -75,7 +75,7 @@ public class ShinsakaiChosainManagerTest {
             Optional<DbT5913ChosainJohoEntity> entity = Optional.empty();
             Optional<IChosainJoho> business = Optional.empty();
 
-            when(dac.selectByKey(notFound市町村コード, notFound認定調査委託先コード, notFound認定調査員コード)).thenReturn(entity);
+            when(dac.selectByKey(notFound市町村コード, notFound認定調査委託先コード, notFound認定調査員コード)).thenReturn(entity.get());
             Optional<IChosainJoho> result = sut.find調査員情報(notFound市町村コード, notFound認定調査委託先コード, notFound認定調査員コード);
             assertThat(result, is(business));
 
@@ -91,7 +91,7 @@ public class ShinsakaiChosainManagerTest {
 
             Optional<DbT5913ChosainJohoEntity> entity = Optional.ofNullable(DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity());
 
-            when(dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード)).thenReturn(entity);
+            when(dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード)).thenReturn(entity.get());
             Optional<IChosainJoho> result = sut.find調査員情報(市町村コード, 認定調査委託先コード, 認定調査員コード);
             assertThat(result.get().get市町村コード().value(), is(business.get市町村コード().value()));
         }
@@ -108,14 +108,14 @@ public class ShinsakaiChosainManagerTest {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
             IChosainJoho hokenshaChosainjoho = new ShinsakaiChosainJoho(DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity());
             assertThat(sut.save調査員(hokenshaChosainjoho), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
             ShinsakaiChosainJoho shinsakaiChosainJoho = new ShinsakaiChosainJoho(DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity());
             shinsakaiChosainJoho.getEntity().initializeMd5();
             //編集
@@ -127,7 +127,7 @@ public class ShinsakaiChosainManagerTest {
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
+            when(dac.save(any(DbT5913ChosainJohoEntity.class))).thenReturn(1);
             ShinsakaiChosainJoho shinsakaiChosainJoho = new ShinsakaiChosainJoho(DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity());
             shinsakaiChosainJoho.getEntity().initializeMd5();
             shinsakaiChosainJoho.setDeletedState(true);

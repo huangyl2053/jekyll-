@@ -6,30 +6,34 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.renban;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiKijunYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.shoriTimestamp;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.honninKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.kanriShikibetsuKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.kazeiHikazeiKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.kazeiNendo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiHaakuKijunYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiInkanriRenban;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetai.setaiInshikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7014KaigoSetaiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護世帯のデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7014KaigoSetaiDac implements IModifiable<DbT7014KaigoSetaiEntity> {
+public class DbT7014KaigoSetaiDac implements ISaveable<DbT7014KaigoSetaiEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -38,22 +42,34 @@ public class DbT7014KaigoSetaiDac implements IModifiable<DbT7014KaigoSetaiEntity
      * 主キーで介護世帯を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
-     * @param 世帯基準年月日 SetaiKijunYMD
-     * @param 連番 Renban
-     * @param 処理日時 ShoriTimestamp
+     * @param 管理識別区分 KanriShikibetsuKubun
+     * @param 世帯把握基準年月日 SetaiHaakuKijunYMD
+     * @param 世帯員管理連番 SetaiInkanriRenban
+     * @param 世帯員識別コード SetaiInshikibetsuCode
+     * @param 本人区分 HonninKubun
+     * @param 課税年度 KazeiNendo
+     * @param 課税非課税区分 KazeiHikazeiKubun
      * @return DbT7014KaigoSetaiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT7014KaigoSetaiEntity selectByKey(
             HihokenshaNo 被保険者番号,
-            FlexibleDate 世帯基準年月日,
-            int 連番,
-            RDateTime 処理日時) throws NullPointerException {
+            RString 管理識別区分,
+            FlexibleDate 世帯把握基準年月日,
+            int 世帯員管理連番,
+            ShikibetsuCode 世帯員識別コード,
+            RString 本人区分,
+            FlexibleYear 課税年度,
+            RString 課税非課税区分) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(世帯基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯基準年月日"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(管理識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理識別区分"));
+        requireNonNull(世帯把握基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯把握基準年月日"));
+        requireNonNull(世帯員管理連番, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員管理連番"));
+        requireNonNull(世帯員識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員識別コード"));
+        requireNonNull(本人区分, UrSystemErrorMessages.値がnull.getReplacedMessage("本人区分"));
+        requireNonNull(課税年度, UrSystemErrorMessages.値がnull.getReplacedMessage("課税年度"));
+        requireNonNull(課税非課税区分, UrSystemErrorMessages.値がnull.getReplacedMessage("課税非課税区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -61,9 +77,13 @@ public class DbT7014KaigoSetaiDac implements IModifiable<DbT7014KaigoSetaiEntity
                 table(DbT7014KaigoSetai.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(setaiKijunYMD, 世帯基準年月日),
-                                eq(renban, 連番),
-                                eq(shoriTimestamp, 処理日時))).
+                                eq(kanriShikibetsuKubun, 管理識別区分),
+                                eq(setaiHaakuKijunYMD, 世帯把握基準年月日),
+                                eq(setaiInkanriRenban, 世帯員管理連番),
+                                eq(setaiInshikibetsuCode, 世帯員識別コード),
+                                eq(honninKubun, 本人区分),
+                                eq(kazeiNendo, 課税年度),
+                                eq(kazeiHikazeiKubun, 課税非課税区分))).
                 toObject(DbT7014KaigoSetaiEntity.class);
     }
 
@@ -81,37 +101,18 @@ public class DbT7014KaigoSetaiDac implements IModifiable<DbT7014KaigoSetaiEntity
                 toList(DbT7014KaigoSetaiEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT7014KaigoSetaiEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7014KaigoSetaiEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7014KaigoSetaiEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT7014KaigoSetaiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT7014KaigoSetaiEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT7014KaigoSetaiEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT7014KaigoSetaiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護世帯エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

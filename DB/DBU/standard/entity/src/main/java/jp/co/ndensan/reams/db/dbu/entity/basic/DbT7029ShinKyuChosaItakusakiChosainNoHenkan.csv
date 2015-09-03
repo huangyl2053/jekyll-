@@ -1,8 +1,0 @@
-﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-shinChosaItakusakiNo,varchar,RString,,,,,新調査委託先番号,A
-shinChosainNo,varchar,RString,,,,,新調査員番号,A
-kyuChosaItakusakiNo,varchar,RString,,,,,旧調査委託先番号,A
-kyuChosainNo,varchar,RString,,,,,旧調査員番号,A
-shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,市町村コード２,A
-kyuChosaItakusakiNo2,varchar,RString,,,,,旧調査委託先番号２,A
-kyuChosainNo2,varchar,RString,,,,,旧調査員番号２,A

@@ -69,6 +69,10 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtNinteiShuryoYmd"));
             }
 
+            public txtHookenshaCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtHookenshaCode"));
+            }
+
             public txtHokensha(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHokensha"));
             }

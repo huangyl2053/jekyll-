@@ -6,30 +6,22 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村マスタのデータアクセスクラスです。
- *
- * @author LDNS 宋文娟
- * @author n8223 朴義一
  */
-public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichosonMasterEntity> {
+public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShichosonMasterEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -42,59 +34,17 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
+    public DbT7051KoseiShichosonMasterEntity selectByKey(
             RString 市町村識別ID) throws NullPointerException {
         requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return Optional.ofNullable(accessor.select().
+        return accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(
                         eq(shichosonShokibetsuID, 市町村識別ID)).
-                toObject(DbT7051KoseiShichosonMasterEntity.class));
-    }
-
-    /**
-     * 主キーで構成市町村マスタを取得します。
-     *
-     * @param 証記載保険者番号 ShokisaiHokenshaNo
-     * @return DbT7051KoseiShichosonMasterEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return Optional.ofNullable(accessor.select().
-                table(DbT7051KoseiShichosonMaster.class).
-                where(
-                        eq(shichosonShokibetsuID, 証記載保険者番号)).
-                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
-    }
-
-    /**
-     * 市町村コードで構成市町村マスタを取得します。
-     *
-     * @param 市町村コード ShichosonCode
-     * @return DbT7051KoseiShichosonMasterEntity
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
-            LasdecCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return Optional.ofNullable(accessor.select().
-                table(DbT7051KoseiShichosonMaster.class).
-                where(
-                        eq(shichosonShokibetsuID, 市町村コード)).
-                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
@@ -103,63 +53,26 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
      * @return List<DbT7051KoseiShichosonMasterEntity>
      */
     @Transaction
-    public ItemList<DbT7051KoseiShichosonMasterEntity> selectAll() {
+    public List<DbT7051KoseiShichosonMasterEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return ItemList.of(accessor.select().
+        return accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
-                toList(DbT7051KoseiShichosonMasterEntity.class));
+                toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
     /**
-     * 構成市町村マスタを追加します。
+     * DbT7051KoseiShichosonMasterEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity 構成市町村マスタ
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
     @Override
-    public int insert(IKoseiShichosonMasterEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+    public int save(DbT7051KoseiShichosonMasterEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    /**
-     * 構成市町村マスタをDBに更新します。
-     *
-     * @param entity 構成市町村マスタ
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int update(IKoseiShichosonMasterEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    /**
-     * 構成市町村マスタをDBから削除します。（論理削除）
-     *
-     * @param entity 構成市町村マスタ
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int delete(IKoseiShichosonMasterEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 構成市町村マスタを物理削除。
-     *
-     * @param entity 構成市町村マスタ
-     * @return 影響行数
-     */
-//    @Transaction
-//    public int deletePhysical(DbT7051KoseiShichosonMasterEntity entity) {
-//        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-//        return accessor.deletePhysical(entity).execute();
-//    }
 }

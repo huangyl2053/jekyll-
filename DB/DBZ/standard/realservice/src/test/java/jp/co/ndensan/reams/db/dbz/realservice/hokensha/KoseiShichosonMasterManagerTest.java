@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

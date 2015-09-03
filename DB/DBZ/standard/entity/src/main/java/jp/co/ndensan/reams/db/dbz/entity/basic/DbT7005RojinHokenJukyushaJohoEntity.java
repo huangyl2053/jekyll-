@@ -2,8 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT7005RojinHokenJukyushaJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7005RojinHokenJukyushaJoho");
@@ -32,15 +31,14 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
+    private LasdecCode shichosonCode;
     private HihokenshaNo hihokenshaNo;
     private LasdecCode rojinHokenShichosonCode;
     private RString rojinHokenJukyushaNo;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -49,7 +47,7 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -58,7 +56,7 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -67,7 +65,7 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -76,7 +74,7 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -85,90 +83,90 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 識別コードのgetメソッドです。
      *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * 識別コードのsetメソッドです。
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getHihokenshaNo
+     * 市町村コードのgetメソッドです。
      *
-     * @return hihokenshaNo
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     *
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getRojinHokenShichosonCode
+     * 老人保健市町村コードのgetメソッドです。
      *
-     * @return rojinHokenShichosonCode
+     * @return 老人保健市町村コード
      */
     public LasdecCode getRojinHokenShichosonCode() {
         return rojinHokenShichosonCode;
     }
 
     /**
-     * setRojinHokenShichosonCode
+     * 老人保健市町村コードのsetメソッドです。
      *
-     * @param rojinHokenShichosonCode rojinHokenShichosonCode
+     * @param rojinHokenShichosonCode 老人保健市町村コード
      */
     public void setRojinHokenShichosonCode(LasdecCode rojinHokenShichosonCode) {
         this.rojinHokenShichosonCode = rojinHokenShichosonCode;
     }
 
     /**
-     * getRojinHokenJukyushaNo
+     * 老人保健受給者番号のgetメソッドです。
      *
-     * @return rojinHokenJukyushaNo
+     * @return 老人保健受給者番号
      */
     public RString getRojinHokenJukyushaNo() {
         return rojinHokenJukyushaNo;
     }
 
     /**
-     * setRojinHokenJukyushaNo
+     * 老人保健受給者番号のsetメソッドです。
      *
-     * @param rojinHokenJukyushaNo rojinHokenJukyushaNo
+     * @param rojinHokenJukyushaNo 老人保健受給者番号
      */
     public void setRojinHokenJukyushaNo(RString rojinHokenJukyushaNo) {
         this.rojinHokenJukyushaNo = rojinHokenJukyushaNo;
@@ -178,14 +176,12 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
      * このエンティティの主キーが他の{@literal DbT7005RojinHokenJukyushaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7005RojinHokenJukyushaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7005RojinHokenJukyushaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7005RojinHokenJukyushaJohoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
@@ -199,8 +195,8 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
      */
     @Override
     public void shallowCopy(DbT7005RojinHokenJukyushaJohoEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.shikibetsuCode = entity.shikibetsuCode;
+        this.shichosonCode = entity.shichosonCode;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rojinHokenShichosonCode = entity.rojinHokenShichosonCode;
         this.rojinHokenJukyushaNo = entity.rojinHokenJukyushaNo;
@@ -213,7 +209,7 @@ public class DbT7005RojinHokenJukyushaJohoEntity extends DbTableEntityBase<DbT70
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, shikibetsuCode, hihokenshaNo, rojinHokenShichosonCode, rojinHokenJukyushaNo);
+        return super.toMd5(shikibetsuCode, shichosonCode, hihokenshaNo, rojinHokenShichosonCode, rojinHokenJukyushaNo);
     }
 
 // </editor-fold>

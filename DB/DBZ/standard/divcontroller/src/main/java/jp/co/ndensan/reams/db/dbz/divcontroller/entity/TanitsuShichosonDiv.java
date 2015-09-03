@@ -1,33 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.Chikiku1SelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.Chikiku2SelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.Chikiku3SelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ChoikiSelectDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.GyoseikuSelectDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.Chiku1InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.Chiku2InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.Chiku3InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.ChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.GyoseikuInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChiku1InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChiku2InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChiku3InputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IGyoseikuInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku1Input.IChiku1InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku2Input.IChiku2InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.Chiku3Input.IChiku3InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.ChoikiInput.IChoikiInputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.commonchilddiv.GyoseikuInput.IGyoseikuInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TanitsuShichoson のクラスファイル 
- * 
+ * TanitsuShichoson のクラスファイル
+ *
  * @author 自動生成
  */
 public class TanitsuShichosonDiv extends Panel {
@@ -37,6 +25,7 @@ public class TanitsuShichosonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
     @JsonProperty("ddlKyushichosonTanitsu")
@@ -65,7 +54,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("ddlChiku")
     public void setDdlChiku(DropDownList ddlChiku) {
-        this.ddlChiku=ddlChiku;
+        this.ddlChiku = ddlChiku;
     }
 
     @JsonProperty("ddlKyushichosonTanitsu")
@@ -75,7 +64,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("ddlKyushichosonTanitsu")
     public void setDdlKyushichosonTanitsu(DropDownList ddlKyushichosonTanitsu) {
-        this.ddlKyushichosonTanitsu=ddlKyushichosonTanitsu;
+        this.ddlKyushichosonTanitsu = ddlKyushichosonTanitsu;
     }
 
     @JsonProperty("ChoikiSelect")
@@ -85,7 +74,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("ChoikiSelect")
     public void setChoikiSelect(ChoikiSelectDiv ChoikiSelect) {
-        this.ChoikiSelect=ChoikiSelect;
+        this.ChoikiSelect = ChoikiSelect;
     }
 
     @JsonProperty("GyoseikuSelect")
@@ -95,7 +84,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("GyoseikuSelect")
     public void setGyoseikuSelect(GyoseikuSelectDiv GyoseikuSelect) {
-        this.GyoseikuSelect=GyoseikuSelect;
+        this.GyoseikuSelect = GyoseikuSelect;
     }
 
     @JsonProperty("Chikiku1Select")
@@ -105,7 +94,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("Chikiku1Select")
     public void setChikiku1Select(Chikiku1SelectDiv Chikiku1Select) {
-        this.Chikiku1Select=Chikiku1Select;
+        this.Chikiku1Select = Chikiku1Select;
     }
 
     @JsonProperty("Chikiku2Select")
@@ -115,7 +104,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("Chikiku2Select")
     public void setChikiku2Select(Chikiku2SelectDiv Chikiku2Select) {
-        this.Chikiku2Select=Chikiku2Select;
+        this.Chikiku2Select = Chikiku2Select;
     }
 
     @JsonProperty("Chikiku3Select")
@@ -125,7 +114,7 @@ public class TanitsuShichosonDiv extends Panel {
 
     @JsonProperty("Chikiku3Select")
     public void setChikiku3Select(Chikiku3SelectDiv Chikiku3Select) {
-        this.Chikiku3Select=Chikiku3Select;
+        this.Chikiku3Select = Chikiku3Select;
     }
 
     /*
@@ -142,7 +131,7 @@ public class TanitsuShichosonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaraChoiki(Label lblKaraChoiki) {
+    public void setLblKaraChoiki(Label lblKaraChoiki) {
         this.getChoikiSelect().setLblKaraChoiki(lblKaraChoiki);
     }
 
@@ -162,7 +151,7 @@ public class TanitsuShichosonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaraGyoseiku(Label lblKaraGyoseiku) {
+    public void setLblKaraGyoseiku(Label lblKaraGyoseiku) {
         this.getGyoseikuSelect().setLblKaraGyoseiku(lblKaraGyoseiku);
     }
 
@@ -182,7 +171,7 @@ public class TanitsuShichosonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaraChiku1(Label lblKaraChiku1) {
+    public void setLblKaraChiku1(Label lblKaraChiku1) {
         this.getChikiku1Select().setLblKaraChiku1(lblKaraChiku1);
     }
 
@@ -202,7 +191,7 @@ public class TanitsuShichosonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaraChiku2(Label lblKaraChiku2) {
+    public void setLblKaraChiku2(Label lblKaraChiku2) {
         this.getChikiku2Select().setLblKaraChiku2(lblKaraChiku2);
     }
 
@@ -222,7 +211,7 @@ public class TanitsuShichosonDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKaraChiku3(Label lblKaraChiku3) {
+    public void setLblKaraChiku3(Label lblKaraChiku3) {
         this.getChikiku3Select().setLblKaraChiku3(lblKaraChiku3);
     }
 

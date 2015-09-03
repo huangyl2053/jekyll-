@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -25,10 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -72,14 +70,13 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
         }
 
         /**
-         * Test of select介護保険施設入退所一覧By主キー method, of class
-         * ShisetsuNyutaishoTokureiTaishoRelateDac.
+         * Test of select介護保険施設入退所一覧By主キー method, of class ShisetsuNyutaishoTokureiTaishoRelateDac.
          */
         @Test
         public void testSelect介護保険施設入退所一覧By主キー1() {
 
-            IItemList<ShisetsuNyutaishoRelateModel> modelList = sut1.select介護保険施設入退所一覧By識別コード(識別コード);
-            assertThat(modelList.toList().get(0).get介護保険施設入退所モデル().get識別コード(), is(識別コード));
+            IItemList<DbT1004ShisetsuNyutaishoEntity> modelList = sut1.select介護保険施設入退所一覧By識別コード(識別コード);
+            assertThat(modelList.toList().get(0).getShikibetsuCode(), is(識別コード));
 
         }
     }
@@ -92,14 +89,13 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
         }
 
         /**
-         * Test of select介護保険施設入退所一覧By識別コード method, of class
-         * ShisetsuNyutaishoTokureiTaishoRelateDac.
+         * Test of select介護保険施設入退所一覧By識別コード method, of class ShisetsuNyutaishoTokureiTaishoRelateDac.
          */
         @Test
         public void testSelect介護除外住所地特例対象施設ByKey() {
 
-            Optional<KaigoJogaiTokureiTaishoShisetsuModel> model = sut2.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
-            assertThat(model.get().get事業者種別(), is(事業者種別));
+            Optional<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> model = sut2.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
+            assertThat(model.get().getJigyoshaShubetsu(), is(事業者種別));
 
         }
 
@@ -123,7 +119,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
         @Test
         public void 台帳種別にtype1を指定したとき_2件のListが返る() {
 
-            IItemList<ShisetsuNyutaishoRelateModel> result = sut1.select台帳別施設入退所一覧(識別コード, type1);
+            IItemList<DbT1004ShisetsuNyutaishoEntity> result = sut1.select台帳別施設入退所一覧(識別コード, type1);
             assertThat(result.size(), is(2));
 
         }
@@ -131,7 +127,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
         @Test
         public void 台帳種別にtype2を指定したとき_3件のListが返る() {
 
-            IItemList<ShisetsuNyutaishoRelateModel> result = sut1.select台帳別施設入退所一覧(識別コード, type2);
+            IItemList<DbT1004ShisetsuNyutaishoEntity> result = sut1.select台帳別施設入退所一覧(識別コード, type2);
             assertThat(result.size(), is(3));
 
         }
@@ -145,7 +141,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
-            介護保険施設入退所Dac.insert(entity);
+            介護保険施設入退所Dac.save(entity);
         }
 
         public static void insertDbT1004(LasdecCode 市町村コード, ShikibetsuCode 識別コード, DaichoType 台帳種別, YMDHMS shoriTimestamp) {
@@ -153,8 +149,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
             entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
             entity.setDaichoShubetsu(台帳種別.getCode());
-            entity.setShoriTimestamp(shoriTimestamp);
-            介護保険施設入退所Dac.insert(entity);
+            介護保険施設入退所Dac.save(entity);
         }
 
         public static void insertDbT1005(
@@ -165,7 +160,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
             entity.setJigyoshaShubetsu(事業者種別);
             entity.setJigyoshaNo(事業者番号);
             entity.setYukoKaishiYMD(有効開始年月日);
-            介護除外住所地特例対象施設Dac.insert(entity);
+            介護除外住所地特例対象施設Dac.save(entity);
         }
 
     }

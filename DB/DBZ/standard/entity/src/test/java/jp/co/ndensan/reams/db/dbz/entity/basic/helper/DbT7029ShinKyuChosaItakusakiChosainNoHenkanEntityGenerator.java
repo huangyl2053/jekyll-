@@ -10,19 +10,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 新旧調査委託先調査員番号変換テーブルエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT7029ShinKyuChosaItakusakiChosainNoHenkanEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_新調査委託先番号 = new RString("1231");
-    public static final RString DEFAULT_新調査員番号 = new RString("1232");
+    public static final RString DEFAULT_新調査員番号 = new RString("1231");
     public static final RString DEFAULT_旧調査委託先番号 = new RString("1231");
-    public static final RString DEFAULT_旧調査員番号 = new RString("1230");
+    public static final RString DEFAULT_旧調査員番号 = new RString("1231");
     public static final LasdecCode DEFAULT_市町村コード２ = new LasdecCode("202011");
-    public static final RString DEFAULT_旧調査委託先番号２ = new RString("1523");
-    public static final RString DEFAULT_旧調査員番号２ = new RString("1263");
+    public static final RString DEFAULT_旧調査委託先番号２ = new RString("1231");
+    public static final RString DEFAULT_旧調査員番号２ = new RString("1231");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

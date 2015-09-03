@@ -9,20 +9,29 @@
     <artifactId>DbuEntity</artifactId>
     <packaging>jar</packaging>
     <name>DbuEntity</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdEntity</artifactId>
-        </dependency>
+		<!-- DBU -->
+		<!-- DBA -->
+		<!-- DBB -->
+		<!-- DBC -->
+		<!-- DBD -->
+		<!-- DBE -->
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
+		<!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdEntity</artifactId>
+        </dependency>
+		<!-- テスト -->
+		<!-- ツール -->
     </dependencies>
 </project>

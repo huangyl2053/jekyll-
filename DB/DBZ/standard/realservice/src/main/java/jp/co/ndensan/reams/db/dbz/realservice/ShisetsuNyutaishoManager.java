@@ -6,13 +6,12 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShisetsuNyutaishoDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -43,15 +42,14 @@ public class ShisetsuNyutaishoManager {
     /**
      * 主キーに合致する介護保険施設入退所を返します。
      *
-     * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 YMDHMS
+     * @param 履歴番号 Decimal
      * @return ShisetsuNyutaishoModel
      */
     @Transaction
-    public Optional<ShisetsuNyutaishoRelateModel> get介護保険施設入退所(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+    public Optional<DbT1004ShisetsuNyutaishoEntity> get介護保険施設入退所(ShikibetsuCode 識別コード, Decimal 履歴番号) {
 
-        return dac.select介護保険施設入退所ByKey(市町村コード, 識別コード, 処理日時);
+        return dac.select介護保険施設入退所ByKey(識別コード, 履歴番号);
     }
 
     /**
@@ -61,7 +59,7 @@ public class ShisetsuNyutaishoManager {
      * @return List<ShisetsuNyutaishoModel>
      */
     @Transaction
-    public IItemList<ShisetsuNyutaishoRelateModel> get介護保険施設入退所一覧By主キー1(ShikibetsuCode 識別コード) {
+    public IItemList<DbT1004ShisetsuNyutaishoEntity> get介護保険施設入退所一覧By主キー1(ShikibetsuCode 識別コード) {
         return dac.select介護保険施設入退所一覧By識別コード(識別コード);
     }
 
@@ -72,7 +70,7 @@ public class ShisetsuNyutaishoManager {
      * @return 登録件数
      */
     @Transaction
-    public int save介護保険施設入退所(ShisetsuNyutaishoRelateModel 介護保険施設入退所モデル) {
+    public int save介護保険施設入退所(DbT1004ShisetsuNyutaishoEntity 介護保険施設入退所モデル) {
 
         if (介護保険施設入退所モデル.getState() == EntityDataState.Added) {
             return dac.insert(介護保険施設入退所モデル);

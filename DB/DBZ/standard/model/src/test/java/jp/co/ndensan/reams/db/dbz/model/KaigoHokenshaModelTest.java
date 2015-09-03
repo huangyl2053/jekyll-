@@ -33,14 +33,14 @@ public class KaigoHokenshaModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
-            sut.set市町村コード(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_市町村コード);
-            assertThat(sut.get市町村コード(), is(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_市町村コード));
+            sut.set市町村コード(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_広域保険者市町村コード);
+            assertThat(sut.get市町村コード(), is(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_広域保険者市町村コード));
         }
 
         @Test
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            sut.set証記載保険者番号(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_証記載保険者番号);
-            assertThat(sut.get証記載保険者番号(), is(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_証記載保険者番号));
+            sut.set証記載保険者番号(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_広域保険者番号);
+            assertThat(sut.get証記載保険者番号(), is(DbT7050KaigoHokenshaEntityGenerator.DEFAULT_広域保険者番号));
         }
     }
 
@@ -53,7 +53,7 @@ public class KaigoHokenshaModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // KaigoHokenshaModel sut = new KaigoHokenshaModel();
         //sut.setEntity(DbT7050KaigoHokenshaEntityGenerator.createDbT7050KaigoHokenshaEntity());

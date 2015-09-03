@@ -1,0 +1,289 @@
+package jp.co.ndensan.reams.db.dbz.entity.basic;
+
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+
+/**
+ * 認定調査スケジュールメモ情報テーブルのエンティティクラスです。
+ */
+public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5222NinteiChosaScheduleMemoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+    @TableName
+    public static final RString TABLE_NAME = new RString("DbT5222NinteiChosaScheduleMemo");
+
+    private RString insertDantaiCd;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId;
+    private UUID insertContextId;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
+    @PrimaryKey
+    private FlexibleDate memoYMD;
+    @PrimaryKey
+    private Code chosaChikuCode;
+    @PrimaryKey
+    private Code memoKubun;
+    @PrimaryKey
+    private int remban;
+    private Code memoShiteiChosaChikuCode;
+    private RString sakuseisha;
+    private Code memoPriority;
+    private RString memoNaiyo;
+
+    /**
+     * insertDantaiCdのgetメソッドです。
+     * 
+     * @return insertDantaiCd
+     */
+    public RString getInsertDantaiCd() {
+        return insertDantaiCd;
+    }
+
+    /**
+     * insertDantaiCdのsetメソッドです。
+     * 
+     * @param insertDantaiCd insertDantaiCd
+     */
+    public void setInsertDantaiCd(RString insertDantaiCd) {
+        this.insertDantaiCd = insertDantaiCd;
+    }
+
+    /**
+     * isDeletedのgetメソッドです。
+     * 
+     * @return isDeleted
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * isDeletedのsetメソッドです。
+     * 
+     * @param isDeleted isDeleted
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+
+    /**
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
+     */
+    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
+        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
+    }
+
+    /**
+     * メモ年月日のgetメソッドです。
+     * 
+     * @return メモ年月日
+     */
+    public FlexibleDate getMemoYMD() {
+        return memoYMD;
+    }
+
+    /**
+     * メモ年月日のsetメソッドです。
+     * 
+     * @param memoYMD メモ年月日
+     */
+    public void setMemoYMD(FlexibleDate memoYMD) {
+        this.memoYMD = memoYMD;
+    }
+
+    /**
+     * 調査地区コードのgetメソッドです。
+     * 
+     * @return 調査地区コード
+     */
+    public Code getChosaChikuCode() {
+        return chosaChikuCode;
+    }
+
+    /**
+     * 調査地区コードのsetメソッドです。
+     * 
+     * @param chosaChikuCode 調査地区コード
+     */
+    public void setChosaChikuCode(Code chosaChikuCode) {
+        this.chosaChikuCode = chosaChikuCode;
+    }
+
+    /**
+     * メモ区分のgetメソッドです。
+     * 
+     * @return メモ区分
+     */
+    public Code getMemoKubun() {
+        return memoKubun;
+    }
+
+    /**
+     * メモ区分のsetメソッドです。
+     * 
+     * @param memoKubun メモ区分
+     */
+    public void setMemoKubun(Code memoKubun) {
+        this.memoKubun = memoKubun;
+    }
+
+    /**
+     * 連番のgetメソッドです。
+     * 
+     * @return 連番
+     */
+    public int getRemban() {
+        return remban;
+    }
+
+    /**
+     * 連番のsetメソッドです。
+     * 
+     * @param remban 連番
+     */
+    public void setRemban(int remban) {
+        this.remban = remban;
+    }
+
+    /**
+     * メモ指定調査地区コードのgetメソッドです。
+     * <br/>
+     * <br/>Code（DBE：5002）
+     * 
+     * @return メモ指定調査地区コード
+     */
+    public Code getMemoShiteiChosaChikuCode() {
+        return memoShiteiChosaChikuCode;
+    }
+
+    /**
+     * メモ指定調査地区コードのsetメソッドです。
+     * <br/>
+     * <br/>Code（DBE：5002）
+     * 
+     * @param memoShiteiChosaChikuCode メモ指定調査地区コード
+     */
+    public void setMemoShiteiChosaChikuCode(Code memoShiteiChosaChikuCode) {
+        this.memoShiteiChosaChikuCode = memoShiteiChosaChikuCode;
+    }
+
+    /**
+     * 作成者のgetメソッドです。
+     * 
+     * @return 作成者
+     */
+    public RString getSakuseisha() {
+        return sakuseisha;
+    }
+
+    /**
+     * 作成者のsetメソッドです。
+     * 
+     * @param sakuseisha 作成者
+     */
+    public void setSakuseisha(RString sakuseisha) {
+        this.sakuseisha = sakuseisha;
+    }
+
+    /**
+     * メモ重要度のgetメソッドです。
+     * 
+     * @return メモ重要度
+     */
+    public Code getMemoPriority() {
+        return memoPriority;
+    }
+
+    /**
+     * メモ重要度のsetメソッドです。
+     * 
+     * @param memoPriority メモ重要度
+     */
+    public void setMemoPriority(Code memoPriority) {
+        this.memoPriority = memoPriority;
+    }
+
+    /**
+     * メモ内容のgetメソッドです。
+     * 
+     * @return メモ内容
+     */
+    public RString getMemoNaiyo() {
+        return memoNaiyo;
+    }
+
+    /**
+     * メモ内容のsetメソッドです。
+     * 
+     * @param memoNaiyo メモ内容
+     */
+    public void setMemoNaiyo(RString memoNaiyo) {
+        this.memoNaiyo = memoNaiyo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5222NinteiChosaScheduleMemoEntity}と等しいか判定します。
+     * 
+     * @param other 比較するエンティティ
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5222NinteiChosaScheduleMemoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    @Override
+    public boolean equalsPrimaryKeys(DbT5222NinteiChosaScheduleMemoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.memoYMD, other.memoYMD)) {
+            return false;
+        }
+        if (!Objects.equals(this.chosaChikuCode, other.chosaChikuCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.memoKubun, other.memoKubun)) {
+            return false;
+        }
+        if (this.remban != other.remban) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT5222NinteiChosaScheduleMemoEntity entity) {
+        this.memoYMD = entity.memoYMD;
+        this.chosaChikuCode = entity.chosaChikuCode;
+        this.memoKubun = entity.memoKubun;
+        this.remban = entity.remban;
+        this.memoShiteiChosaChikuCode = entity.memoShiteiChosaChikuCode;
+        this.sakuseisha = entity.sakuseisha;
+        this.memoPriority = entity.memoPriority;
+        this.memoNaiyo = entity.memoNaiyo;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(memoYMD, chosaChikuCode, memoKubun, remban, memoShiteiChosaChikuCode, sakuseisha, memoPriority, memoNaiyo);
+    }
+
+// </editor-fold>
+}

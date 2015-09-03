@@ -5,14 +5,15 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7054KanrenHihokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7054KanrenHihokenshaNoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_最新被保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7054KanrenHihokenshaNoEntityGenerator.DEFAULT_証記載保険者番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -26,8 +27,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7054KanrenHihokenshaNoDac}のテストです。
- *
- * @author LDNS 宋文娟
  */
 @RunWith(Enclosed.class)
 public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
@@ -35,8 +34,6 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("1"));
-    private static final ShoKisaiHokenshaNo 証記載保険者番号3 = new ShoKisaiHokenshaNo(new RString("3"));
     private static DbT7054KanrenHihokenshaNoDac sut;
 
     @BeforeClass
@@ -49,7 +46,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    証記載保険者番号,
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号);
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
@@ -59,7 +56,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号);
         }
 
@@ -67,7 +64,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
         public void 最新被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_証記載保険者番号,
-                    null);
+                    DEFAULT_最新被保険者番号);
         }
 
         @Test
@@ -81,7 +78,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7054KanrenHihokenshaNoEntity insertedRecord = sut.selectByKey(
-                    証記載保険者番号3,
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -92,7 +89,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
         @Test
         public void 関連被保険者番号が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    証記載保険者番号,
+                    DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号);
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
@@ -131,17 +128,20 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
 
         @Test
         public void 関連被保険者番号エンティティを渡すと_updateは_関連被保険者番号を更新する() {
-            DbT7054KanrenHihokenshaNoEntity updateRecord = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
-            // TODO 主キー以外の項目を変更してください
-            //updateRecord.set変更したい項目(75);
+            DbT7054KanrenHihokenshaNoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_証記載保険者番号,
+                    DEFAULT_最新被保険者番号);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7054KanrenHihokenshaNoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -156,9 +156,13 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
 
         @Test
         public void 関連被保険者番号エンティティを渡すと_deleteは_関連被保険者番号を削除する() {
-            sut.delete(sut.selectByKey(
+            DbT7054KanrenHihokenshaNoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
-                    DEFAULT_最新被保険者番号));
+                    DEFAULT_最新被保険者番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_最新被保険者番号), is(nullValue()));
@@ -173,7 +177,7 @@ public class DbT7054KanrenHihokenshaNoDacTest extends DbzTestDacBase {
             DbT7054KanrenHihokenshaNoEntity entity = DbT7054KanrenHihokenshaNoEntityGenerator.createDbT7054KanrenHihokenshaNoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setSaishinHihokenshaNo(最新被保険者番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

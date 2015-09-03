@@ -20,11 +20,9 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urc.business.IKoza;
-//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -61,7 +59,7 @@ public final class JuryoininJigyoshaMapper {
         JuryoininJigyosha 受領委任事業者 = new JuryoininJigyosha(
                 create契約番号(entity.getJigyoshaKeiyakuNo()),
                 create契約期間(entity),
-                entity.getShoriTimestamp(),
+                null,//entity.getRirekiNo(),
                 entity.getTodokedeYMD(),
                 create届出者(entity),
                 entity.getKeiyakuTorokuYMD(),
@@ -114,13 +112,13 @@ public final class JuryoininJigyoshaMapper {
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
         entity.setJigyoshaKeiyakuNo(受領委任事業者.get契約番号().value());
         entity.setKaishiYMD(受領委任事業者.get契約期間().getFrom());
-        entity.setShoriTimestamp(受領委任事業者.get処理日時());
+//        entity.setShoriTimestamp(受領委任事業者.get処理日時());
         entity.setShuryoYMD(受領委任事業者.get契約期間().getTo());
         entity.setTodokedeYMD(受領委任事業者.get届出年月日());
         entity.setTodokedeAddress(受領委任事業者.get届出者().get住所());
         entity.setTodokedeJigyoshaName(受領委任事業者.get届出者().get事業者名称());
         entity.setTodokedeDaihyoshaName(受領委任事業者.get届出者().get代表者氏名());
-        entity.setShikibetsuCode(受領委任事業者.get識別コード());
+//        entity.setShikibetsuCode(受領委任事業者.get識別コード());
         entity.setJigyoshaFaxNo(受領委任事業者.get契約事業者().get事業者FAX番号());
         entity.setKeiyakuTorokuYMD(受領委任事業者.get契約登録年月日());
         entity.setSofusakiBusho(受領委任事業者.get契約事業者().get送付先部署());

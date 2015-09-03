@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri;
 
-import jp.co.ndensan.reams.db.dbz.model.shokofukaishu.ShoKofuKaishuModel;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -32,12 +32,12 @@ public interface IShoKaishuKirokuKanriDiv {
      *
      * @return 証交付回収履歴List
      */
-    IItemList<ShoKofuKaishuModel> get証交付回収履歴();
+    IItemList<ShoKofuKaishu> get証交付回収履歴();
 
     /**
      * 証回収記録管理Divに設定されている、証交付回収履歴の情報を取得します。
      *
      * @param 証交付回収履歴List 証交付回収履歴List
      */
-    void set証交付回収履歴(IItemList<ShoKofuKaishuModel> 証交付回収履歴List);
+    void set証交付回収履歴(IItemList<ShoKofuKaishu> 証交付回収履歴List);
 }

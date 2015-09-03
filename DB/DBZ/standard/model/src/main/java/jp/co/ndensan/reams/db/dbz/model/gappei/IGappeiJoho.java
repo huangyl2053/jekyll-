@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,7 +50,7 @@ public interface IGappeiJoho {
      *
      * @return 保険者番号
      */
-    ShoKisaiHokenshaNo get保険者番号();
+    HokenshaNo get保険者番号();
 
     /**
      * 旧市町村情報付与終了日を返します。

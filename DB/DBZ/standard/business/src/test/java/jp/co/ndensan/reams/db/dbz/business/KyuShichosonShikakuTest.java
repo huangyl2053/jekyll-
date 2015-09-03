@@ -7,21 +7,23 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.指定無;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.月初;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.月末;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 
 /**
  * 旧市町村の被保険者情報を扱うクラスのテストクラスです。
@@ -50,7 +52,7 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            List<HihokenshaDaichoModel> 被保険者台帳List = new ArrayList<>();
+            List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             被保険者台帳List.add(create被保険者台帳("20140301"));
             被保険者台帳List.add(create被保険者台帳("20140401"));
             被保険者台帳List.add(create被保険者台帳("20140410"));
@@ -88,7 +90,7 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            List<HihokenshaDaichoModel> 被保険者台帳List = new ArrayList<>();
+            List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             for (int year = 2012; year <= 2014; year++) {
                 for (int month = 1; month <= 12; month++) {
                     被保険者台帳List.add(create被保険者台帳(String.format("%1$04d%2$02d%3$02d", year, month, 5)));
@@ -132,7 +134,7 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            List<HihokenshaDaichoModel> 被保険者台帳List = new ArrayList<>();
+            List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             被保険者台帳List.add(create被保険者台帳("20140301"));
             被保険者台帳List.add(create被保険者台帳("20140401"));
             被保険者台帳List.add(create被保険者台帳("20140410"));
@@ -162,7 +164,7 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            List<HihokenshaDaichoModel> 被保険者台帳List = new ArrayList<>();
+            List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             被保険者台帳List.add(create被保険者台帳("20140301", "20140320"));
             被保険者台帳List.add(create被保険者台帳("20140405", "20140505"));
             被保険者台帳List.add(create被保険者台帳("20140415", "20140515"));
@@ -227,7 +229,7 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            List<HihokenshaDaichoModel> 被保険者台帳List = new ArrayList<>();
+            List<HihokenshaDaicho> 被保険者台帳List = new ArrayList<>();
             被保険者台帳List.add(create被保険者台帳("000001", "20140101", "", ""));
             被保険者台帳List.add(create被保険者台帳("000001", "", "000002", ""));
             sut = new KyuShichosonShikaku(被保険者台帳List);
@@ -254,23 +256,23 @@ public class KyuShichosonShikakuTest extends DbzTestBase {
         }
     }
 
-    private static HihokenshaDaichoModel create被保険者台帳(String 資格取得年月日) {
+    private static HihokenshaDaicho create被保険者台帳(String 資格取得年月日) {
         return create被保険者台帳(資格取得年月日, 資格取得年月日);
     }
 
-    private static HihokenshaDaichoModel create被保険者台帳(String 資格取得年月日, String 資格喪失年月日) {
+    private static HihokenshaDaicho create被保険者台帳(String 資格取得年月日, String 資格喪失年月日) {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShikakuShutokuYMD(new FlexibleDate(資格取得年月日));
         entity.setShikakuSoshitsuYMD(new FlexibleDate(資格喪失年月日));
-        return new HihokenshaDaichoModel(entity);
+        return new HihokenshaDaicho(entity);
     }
 
-    private static HihokenshaDaichoModel create被保険者台帳(String 市町村コード, String 資格喪失年月日, String 広住特措置元市町村コード, String 旧市町村コード) {
+    private static HihokenshaDaicho create被保険者台帳(String 市町村コード, String 資格喪失年月日, String 広住特措置元市町村コード, String 旧市町村コード) {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode(new RString(市町村コード)));
         entity.setShikakuSoshitsuYMD(new FlexibleDate(資格喪失年月日));
         entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(広住特措置元市町村コード));
         entity.setKyuShichosonCode(new LasdecCode(旧市町村コード));
-        return new HihokenshaDaichoModel(entity);
+        return new HihokenshaDaicho(entity);
     }
 }

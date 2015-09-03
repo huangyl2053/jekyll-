@@ -19,6 +19,11 @@
             <artifactId>UrzDefinition</artifactId>
             <!--<version>1.0.0</version>-->
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!--        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
@@ -71,6 +76,11 @@
             <artifactId>UaxBusiness</artifactId>
             <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
-
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzModel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

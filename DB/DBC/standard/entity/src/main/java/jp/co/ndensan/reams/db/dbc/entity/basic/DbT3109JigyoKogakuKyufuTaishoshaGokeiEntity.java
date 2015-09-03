@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +34,7 @@ public class DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBa
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal serviceHiyoGokeiGakuGokei;
     private Decimal riyoshaFutanGakuGokei;
     private Decimal santeiKijunGaku;
@@ -134,7 +134,7 @@ public class DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBa
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -143,7 +143,7 @@ public class DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBa
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonModel;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.KoseiShichosonMasterModel;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.KoseiShichosonModel;
 
 /**
  * パッケージ内で用いる{@link IFunction}をまとめたクラスです。

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.mapper;
 
-import jp.co.ndensan.reams.db.dbc.business.mapper.JuryoininJigyoshaMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,10 +15,8 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEn
 import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.ur.urc.business.IKoza;
-//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -77,11 +74,6 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void get処理日時の結果が_Entityの処理日時と同一になる() {
-            assertThat(sut.get処理日時(), is(JuryoininJigyoshaEntity.getShoriTimestamp()));
-        }
-
-        @Test
         public void get届出年月日の結果が_Entityの届出年月日と同一になる() {
             assertThat(sut.get届出年月日(), is(JuryoininJigyoshaEntity.getTodokedeYMD()));
         }
@@ -99,11 +91,6 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         @Test
         public void get届出者のget代表者氏名の結果が_Entityの届出者代表者氏名と同一になる() {
             assertThat(sut.get届出者().get代表者氏名(), is(JuryoininJigyoshaEntity.getTodokedeDaihyoshaName()));
-        }
-
-        @Test
-        public void get識別コードの結果が_Entityの識別コードと同一になる() {
-            assertThat(sut.get識別コード(), is(JuryoininJigyoshaEntity.getShikibetsuCode()));
         }
 
         @Test
@@ -233,11 +220,6 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void Entityの処理日時と_受領委任事業者の処理日時が同一になる() {
-            assertThat(sut.getShoriTimestamp(), is(受領委任事業者.get処理日時()));
-        }
-
-        @Test
         public void Entityの終了年月日と_受領委任事業者の契約期間の終了年月日が同一になる() {
             assertThat(sut.getShuryoYMD(), is(受領委任事業者.get契約期間().getTo()));
         }
@@ -260,11 +242,6 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         @Test
         public void Entityの届出者代表者氏名と_届出者の代表者氏名が同一になる() {
             assertThat(sut.getTodokedeDaihyoshaName(), is(受領委任事業者.get届出者().get代表者氏名()));
-        }
-
-        @Test
-        public void Entityの識別コードと_受領委任事業者のget識別コードが同一になる() {
-            assertThat(sut.getShikibetsuCode(), is(受領委任事業者.get識別コード()));
         }
 
         @Test

@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dba.business.shikakuido;
 
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
  * 資格の取得・喪失日に不整合がおきていないかをチェックする機能を提供するクラスです。<br/>
- * 以下の様に、比較したい値を設定します。<br/> {@code ShikakuToskusoDateValidetor.previous(previousHihoDaicho).next(nextHihoDaicho).validate();}
+ * 以下の様に、比較したい値を設定します。<br/>
+ * {@code ShikakuToskusoDateValidetor.previous(previousHihoDaicho).next(nextHihoDaicho).validate();}
  *
  * @author n8178 城間篤人
  */

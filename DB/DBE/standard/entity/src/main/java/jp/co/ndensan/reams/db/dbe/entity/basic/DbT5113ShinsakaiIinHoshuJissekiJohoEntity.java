@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 
 /**
  * 介護認定審査会委員報酬実績情報テーブルのエンティティクラスです。
  */
 public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase<DbT5113ShinsakaiIinHoshuJissekiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5113ShinsakaiIinHoshuJissekiJoho");
 
@@ -30,7 +32,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     private int gogitaiNo;
     @PrimaryKey
     private RString shinsakaiIinCode;
-    private DbUDD004JigyoshaNo shinsakaiIinShozokuKikanCode;
+    private JigyoshaNo shinsakaiIinShozokuKikanCode;
     private int shinsakaiKaisaiNo;
     @PrimaryKey
     private FlexibleDate shinsakaiKaisaiYMD;
@@ -52,7 +54,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +63,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +72,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,17 +81,16 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -98,7 +99,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 合議体番号のgetメソッドです。
-     * 
+     *
      * @return 合議体番号
      */
     public int getGogitaiNo() {
@@ -107,7 +108,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 合議体番号のsetメソッドです。
-     * 
+     *
      * @param gogitaiNo 合議体番号
      */
     public void setGogitaiNo(int gogitaiNo) {
@@ -116,7 +117,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -125,7 +126,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
     public void setShinsakaiIinCode(RString shinsakaiIinCode) {
@@ -134,25 +135,25 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会委員所属機関コードのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員所属機関コード
      */
-    public DbUDD004JigyoshaNo getShinsakaiIinShozokuKikanCode() {
+    public JigyoshaNo getShinsakaiIinShozokuKikanCode() {
         return shinsakaiIinShozokuKikanCode;
     }
 
     /**
      * 介護認定審査会委員所属機関コードのsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinShozokuKikanCode 介護認定審査会委員所属機関コード
      */
-    public void setShinsakaiIinShozokuKikanCode(DbUDD004JigyoshaNo shinsakaiIinShozokuKikanCode) {
+    public void setShinsakaiIinShozokuKikanCode(JigyoshaNo shinsakaiIinShozokuKikanCode) {
         this.shinsakaiIinShozokuKikanCode = shinsakaiIinShozokuKikanCode;
     }
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開催番号
      */
     public int getShinsakaiKaisaiNo() {
@@ -161,7 +162,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
     public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
@@ -170,7 +171,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会開催年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開催年月日
      */
     public FlexibleDate getShinsakaiKaisaiYMD() {
@@ -179,7 +180,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会開催年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaisaiYMD 介護認定審査会開催年月日
      */
     public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
@@ -188,7 +189,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会開始時間のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開始時間
      */
     public RString getShinsakaiKaishiTime() {
@@ -197,7 +198,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会開始時間のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaishiTime 介護認定審査会開始時間
      */
     public void setShinsakaiKaishiTime(RString shinsakaiKaishiTime) {
@@ -206,7 +207,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会終了時間のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会終了時間
      */
     public RString getShinsakaiShuryoTime() {
@@ -215,7 +216,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会終了時間のsetメソッドです。
-     * 
+     *
      * @param shinsakaiShuryoTime 介護認定審査会終了時間
      */
     public void setShinsakaiShuryoTime(RString shinsakaiShuryoTime) {
@@ -224,7 +225,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員出席のgetメソッドです。
-     * 
+     *
      * @return 委員出席
      */
     public boolean getIsShusseki() {
@@ -233,7 +234,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員出席のsetメソッドです。
-     * 
+     *
      * @param isShusseki 委員出席
      */
     public void setIsShusseki(boolean isShusseki) {
@@ -242,7 +243,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員出席時間のgetメソッドです。
-     * 
+     *
      * @return 委員出席時間
      */
     public RString getShussekiTime() {
@@ -251,7 +252,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員出席時間のsetメソッドです。
-     * 
+     *
      * @param shussekiTime 委員出席時間
      */
     public void setShussekiTime(RString shussekiTime) {
@@ -260,7 +261,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員退席時間のgetメソッドです。
-     * 
+     *
      * @return 委員退席時間
      */
     public RString getTaisekiTime() {
@@ -269,7 +270,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 委員退席時間のsetメソッドです。
-     * 
+     *
      * @param taisekiTime 委員退席時間
      */
     public void setTaisekiTime(RString taisekiTime) {
@@ -278,7 +279,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 合議体長区分コードのgetメソッドです。
-     * 
+     *
      * @return 合議体長区分コード
      */
     public Code getGogitaichoKubunCode() {
@@ -287,7 +288,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 合議体長区分コードのsetメソッドです。
-     * 
+     *
      * @param gogitaichoKubunCode 合議体長区分コード
      */
     public void setGogitaichoKubunCode(Code gogitaichoKubunCode) {
@@ -296,7 +297,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会報酬税率のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会報酬税率
      */
     public int getShinsakaiHoshuZeiritsu() {
@@ -305,7 +306,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会報酬税率のsetメソッドです。
-     * 
+     *
      * @param shinsakaiHoshuZeiritsu 介護認定審査会報酬税率
      */
     public void setShinsakaiHoshuZeiritsu(int shinsakaiHoshuZeiritsu) {
@@ -314,7 +315,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査報酬
      */
     public int getShinsakaiHoshu() {
@@ -323,7 +324,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬のsetメソッドです。
-     * 
+     *
      * @param shinsakaiHoshu 介護認定審査報酬
      */
     public void setShinsakaiHoshu(int shinsakaiHoshu) {
@@ -332,7 +333,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査その他報酬のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査その他報酬
      */
     public int getShinsakaiSonotaHoshu() {
@@ -341,7 +342,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査その他報酬のsetメソッドです。
-     * 
+     *
      * @param shinsakaiSonotaHoshu 介護認定審査その他報酬
      */
     public void setShinsakaiSonotaHoshu(int shinsakaiSonotaHoshu) {
@@ -350,7 +351,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査交通費等のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査交通費等
      */
     public int getShinsakaiKotsuhi() {
@@ -359,7 +360,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査交通費等のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKotsuhi 介護認定審査交通費等
      */
     public void setShinsakaiKotsuhi(int shinsakaiKotsuhi) {
@@ -368,7 +369,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査控除税額のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査控除税額
      */
     public int getShinsakaiKojoZeigaku() {
@@ -377,7 +378,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査控除税額のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKojoZeigaku 介護認定審査控除税額
      */
     public void setShinsakaiKojoZeigaku(int shinsakaiKojoZeigaku) {
@@ -386,7 +387,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬合計のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査報酬合計
      */
     public int getShinsakaiHoshuGokei() {
@@ -395,7 +396,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬合計のsetメソッドです。
-     * 
+     *
      * @param shinsakaiHoshuGokei 介護認定審査報酬合計
      */
     public void setShinsakaiHoshuGokei(int shinsakaiHoshuGokei) {
@@ -404,7 +405,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬支払年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査報酬支払年月日
      */
     public FlexibleDate getHoshuShiharaiYMD() {
@@ -413,7 +414,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬支払年月日のsetメソッドです。
-     * 
+     *
      * @param hoshuShiharaiYMD 介護認定審査報酬支払年月日
      */
     public void setHoshuShiharaiYMD(FlexibleDate hoshuShiharaiYMD) {
@@ -422,7 +423,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬支払メモのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査報酬支払メモ
      */
     public RString getHoshushiharaiMemo() {
@@ -431,7 +432,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査報酬支払メモのsetメソッドです。
-     * 
+     *
      * @param hoshushiharaiMemo 介護認定審査報酬支払メモ
      */
     public void setHoshushiharaiMemo(RString hoshushiharaiMemo) {
@@ -440,7 +441,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 銀行振込出力済フラグのgetメソッドです。
-     * 
+     *
      * @return 銀行振込出力済フラグ
      */
     public boolean getIsGinkoFurikomiShutsuryokuZumi() {
@@ -449,7 +450,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 銀行振込出力済フラグのsetメソッドです。
-     * 
+     *
      * @param isGinkoFurikomiShutsuryokuZumi 銀行振込出力済フラグ
      */
     public void setIsGinkoFurikomiShutsuryokuZumi(boolean isGinkoFurikomiShutsuryokuZumi) {
@@ -458,9 +459,9 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * このエンティティの主キーが他の{@literal DbT5113ShinsakaiIinHoshuJissekiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5113ShinsakaiIinHoshuJissekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -506,6 +507,7 @@ public class DbT5113ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

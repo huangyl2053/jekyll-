@@ -4,14 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -34,7 +33,7 @@ public class IchijiHanteiResultKomokuTest {
 
         @Test
         public void get一次判定結果コードと_getCodeの内容が同一になる() {
-            assertThat(sut.get一次判定結果コード().value(), is(sut.getCode().value()));
+            assertThat(sut.get一次判定結果コード().value(), is(sut.get一次判定結果コード().asCode().value()));
         }
     }
 }

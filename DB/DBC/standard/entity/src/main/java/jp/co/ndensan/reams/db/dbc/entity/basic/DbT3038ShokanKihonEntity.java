@@ -7,11 +7,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKihonEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3038ShokanKihon");
 
@@ -42,7 +43,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString kyuSochiNyushoshaTokureiCode;
     private RString kyotakuServiceSakuseiKubunCode;
     private JigyoshaNo kyotakuserviceJigyoshaNo;
@@ -51,8 +52,8 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     private RString chushiRiyuNyushomaeJyokyoCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
-    private int nyushoJitsuNissu;
-    private int gaihakuNissu;
+    private Decimal nyushoJitsuNissu;
+    private Decimal gaihakuNissu;
     private RString taishogoJotaiCode;
     private HokenKyufuRitsu hokenKyufuritsu;
     private int serviceTanisu;
@@ -64,7 +65,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -73,7 +74,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -82,7 +83,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -91,17 +92,16 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -110,7 +110,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -119,7 +119,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -128,7 +128,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -137,7 +137,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -146,7 +146,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNp() {
@@ -155,7 +155,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNp 整理番号
      */
     public void setSeiriNp(RString seiriNp) {
@@ -164,7 +164,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -173,7 +173,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -182,7 +182,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -191,7 +191,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -200,25 +200,25 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 旧措置入所者特例コードのgetメソッドです。
-     * 
+     *
      * @return 旧措置入所者特例コード
      */
     public RString getKyuSochiNyushoshaTokureiCode() {
@@ -227,7 +227,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 旧措置入所者特例コードのsetメソッドです。
-     * 
+     *
      * @param kyuSochiNyushoshaTokureiCode 旧措置入所者特例コード
      */
     public void setKyuSochiNyushoshaTokureiCode(RString kyuSochiNyushoshaTokureiCode) {
@@ -236,7 +236,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 居宅サービス計画作成区分コードのgetメソッドです。
-     * 
+     *
      * @return 居宅サービス計画作成区分コード
      */
     public RString getKyotakuServiceSakuseiKubunCode() {
@@ -245,7 +245,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 居宅サービス計画作成区分コードのsetメソッドです。
-     * 
+     *
      * @param kyotakuServiceSakuseiKubunCode 居宅サービス計画作成区分コード
      */
     public void setKyotakuServiceSakuseiKubunCode(RString kyotakuServiceSakuseiKubunCode) {
@@ -254,7 +254,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 居宅サービス計画事業者番号のgetメソッドです。
-     * 
+     *
      * @return 居宅サービス計画事業者番号
      */
     public JigyoshaNo getKyotakuserviceJigyoshaNo() {
@@ -263,7 +263,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 居宅サービス計画事業者番号のsetメソッドです。
-     * 
+     *
      * @param kyotakuserviceJigyoshaNo 居宅サービス計画事業者番号
      */
     public void setKyotakuserviceJigyoshaNo(JigyoshaNo kyotakuserviceJigyoshaNo) {
@@ -272,7 +272,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 開始年月日のgetメソッドです。
-     * 
+     *
      * @return 開始年月日
      */
     public FlexibleDate getKaishiYMD() {
@@ -281,7 +281,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 開始年月日のsetメソッドです。
-     * 
+     *
      * @param kaishiYMD 開始年月日
      */
     public void setKaishiYMD(FlexibleDate kaishiYMD) {
@@ -290,7 +290,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 中止年月日のgetメソッドです。
-     * 
+     *
      * @return 中止年月日
      */
     public FlexibleDate getChushiYMD() {
@@ -299,7 +299,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 中止年月日のsetメソッドです。
-     * 
+     *
      * @param chushiYMD 中止年月日
      */
     public void setChushiYMD(FlexibleDate chushiYMD) {
@@ -308,7 +308,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 中止理由・入所（院）前の状況コードのgetメソッドです。
-     * 
+     *
      * @return 中止理由・入所（院）前の状況コード
      */
     public RString getChushiRiyuNyushomaeJyokyoCode() {
@@ -317,7 +317,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 中止理由・入所（院）前の状況コードのsetメソッドです。
-     * 
+     *
      * @param chushiRiyuNyushomaeJyokyoCode 中止理由・入所（院）前の状況コード
      */
     public void setChushiRiyuNyushomaeJyokyoCode(RString chushiRiyuNyushomaeJyokyoCode) {
@@ -326,7 +326,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 入所（院）年月日のgetメソッドです。
-     * 
+     *
      * @return 入所（院）年月日
      */
     public FlexibleDate getNyushoYMD() {
@@ -335,7 +335,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 入所（院）年月日のsetメソッドです。
-     * 
+     *
      * @param nyushoYMD 入所（院）年月日
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -344,7 +344,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 退所（院）年月日のgetメソッドです。
-     * 
+     *
      * @return 退所（院）年月日
      */
     public FlexibleDate getTaishoYMD() {
@@ -353,7 +353,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 退所（院）年月日のsetメソッドです。
-     * 
+     *
      * @param taishoYMD 退所（院）年月日
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -362,43 +362,43 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 入所（院）実日数のgetメソッドです。
-     * 
+     *
      * @return 入所（院）実日数
      */
-    public int getNyushoJitsuNissu() {
+    public Decimal getNyushoJitsuNissu() {
         return nyushoJitsuNissu;
     }
 
     /**
      * 入所（院）実日数のsetメソッドです。
-     * 
+     *
      * @param nyushoJitsuNissu 入所（院）実日数
      */
-    public void setNyushoJitsuNissu(int nyushoJitsuNissu) {
+    public void setNyushoJitsuNissu(Decimal nyushoJitsuNissu) {
         this.nyushoJitsuNissu = nyushoJitsuNissu;
     }
 
     /**
      * 外泊日数のgetメソッドです。
-     * 
+     *
      * @return 外泊日数
      */
-    public int getGaihakuNissu() {
+    public Decimal getGaihakuNissu() {
         return gaihakuNissu;
     }
 
     /**
      * 外泊日数のsetメソッドです。
-     * 
+     *
      * @param gaihakuNissu 外泊日数
      */
-    public void setGaihakuNissu(int gaihakuNissu) {
+    public void setGaihakuNissu(Decimal gaihakuNissu) {
         this.gaihakuNissu = gaihakuNissu;
     }
 
     /**
      * 退所（院）後の状態コードのgetメソッドです。
-     * 
+     *
      * @return 退所（院）後の状態コード
      */
     public RString getTaishogoJotaiCode() {
@@ -407,7 +407,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 退所（院）後の状態コードのsetメソッドです。
-     * 
+     *
      * @param taishogoJotaiCode 退所（院）後の状態コード
      */
     public void setTaishogoJotaiCode(RString taishogoJotaiCode) {
@@ -416,7 +416,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 保険給付率のgetメソッドです。
-     * 
+     *
      * @return 保険給付率
      */
     public HokenKyufuRitsu getHokenKyufuritsu() {
@@ -425,7 +425,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 保険給付率のsetメソッドです。
-     * 
+     *
      * @param hokenKyufuritsu 保険給付率
      */
     public void setHokenKyufuritsu(HokenKyufuRitsu hokenKyufuritsu) {
@@ -434,7 +434,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * サービス単位数のgetメソッドです。
-     * 
+     *
      * @return サービス単位数
      */
     public int getServiceTanisu() {
@@ -443,7 +443,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * サービス単位数のsetメソッドです。
-     * 
+     *
      * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(int serviceTanisu) {
@@ -452,7 +452,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 保険請求額のgetメソッドです。
-     * 
+     *
      * @return 保険請求額
      */
     public Decimal getHokenSeikyugaku() {
@@ -461,7 +461,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 保険請求額のsetメソッドです。
-     * 
+     *
      * @param hokenSeikyugaku 保険請求額
      */
     public void setHokenSeikyugaku(Decimal hokenSeikyugaku) {
@@ -470,7 +470,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額
      */
     public int getRiyoshaFutangaku() {
@@ -479,7 +479,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 利用者負担額のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutangaku 利用者負担額
      */
     public void setRiyoshaFutangaku(int riyoshaFutangaku) {
@@ -488,7 +488,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 緊急時施設療養費請求額のgetメソッドです。
-     * 
+     *
      * @return 緊急時施設療養費請求額
      */
     public Decimal getKinkyuShisetsuRyoyoSeikyugaku() {
@@ -497,7 +497,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 緊急時施設療養費請求額のsetメソッドです。
-     * 
+     *
      * @param kinkyuShisetsuRyoyoSeikyugaku 緊急時施設療養費請求額
      */
     public void setKinkyuShisetsuRyoyoSeikyugaku(Decimal kinkyuShisetsuRyoyoSeikyugaku) {
@@ -506,7 +506,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 特定診療費請求額のgetメソッドです。
-     * 
+     *
      * @return 特定診療費請求額
      */
     public Decimal getTokuteiShinryoSeikyugaku() {
@@ -515,7 +515,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 特定診療費請求額のsetメソッドです。
-     * 
+     *
      * @param tokuteiShinryoSeikyugaku 特定診療費請求額
      */
     public void setTokuteiShinryoSeikyugaku(Decimal tokuteiShinryoSeikyugaku) {
@@ -524,7 +524,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 特定入所者介護サービス費等請求額のgetメソッドです。
-     * 
+     *
      * @return 特定入所者介護サービス費等請求額
      */
     public int getTokuteiNyushoshaKaigoServiceSeikyugaku() {
@@ -533,7 +533,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * 特定入所者介護サービス費等請求額のsetメソッドです。
-     * 
+     *
      * @param tokuteiNyushoshaKaigoServiceSeikyugaku 特定入所者介護サービス費等請求額
      */
     public void setTokuteiNyushoshaKaigoServiceSeikyugaku(int tokuteiNyushoshaKaigoServiceSeikyugaku) {
@@ -542,9 +542,9 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * このエンティティの主キーが他の{@literal DbT3038ShokanKihonEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3038ShokanKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -606,6 +606,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -614,5 +615,4 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     }
 
 // </editor-fold>
-
 }

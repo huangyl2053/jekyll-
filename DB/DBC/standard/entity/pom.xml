@@ -15,16 +15,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-
+		<!-- DBC -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcDefinition</artifactId>
+        </dependency>
+		<!-- DBD -->
+		<!-- DBX -->
+		<!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbcDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-    </dependencies>
+		<!-- 公開系 -->
+		<!-- テスト -->
+		<!-- ツール -->
+	</dependencies>
 </project>

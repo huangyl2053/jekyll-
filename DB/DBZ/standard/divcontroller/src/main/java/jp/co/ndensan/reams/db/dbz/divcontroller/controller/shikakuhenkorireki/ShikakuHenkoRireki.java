@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shikakuhenkorireki;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Add;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Delete;
@@ -12,16 +15,11 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecution
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuHenkoRirekiValidationHelper;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoMapper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.dgHenko_Row;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -46,7 +44,7 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> load(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         //TODO n8178 城間篤人 修正の必要有り。 2015年2月末まで
         LasdecCode lasdecCode = new LasdecCode("123456");
         LasdecCode kyuLasdecCode = new LasdecCode("123456");
@@ -72,13 +70,12 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnAdd(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
 
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
-
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         henkoRirekiDiv.getDgHenko().setReadOnly(true);
         henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Add.getValue());
-        handler.setExecutionStatus(ViewExecutionStatus.Add);
+//        handler.setExecutionStatus(ViewExecutionStatus.Add);
         return createSettingData(henkoRirekiDiv);
     }
 
@@ -91,10 +88,10 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelect_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
 
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         henkoRirekiDiv.getDgHenko().setReadOnly(true);
-        handler.showSelectedData();
+//        handler.showSelectedData();
 
         if (henkoRirekiDiv.getDgHenko().getSelectedItems().get(0).getState().equals(new RString("追加"))) {
             henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
@@ -120,12 +117,12 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelectByModifyButton_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         henkoRirekiDiv.getDgHenko().setReadOnly(true);
-        handler.showSelectedData();
+//        handler.showSelectedData();
         henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
-        handler.setExecutionStatus(ViewExecutionStatus.Modify);
+//        handler.setExecutionStatus(ViewExecutionStatus.Modify);
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
         return createSettingData(henkoRirekiDiv);
     }
@@ -139,12 +136,12 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onSelectByDeleteButton_dgHenko(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         //TODO
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+        //       ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
 
-        createHandlerOf(henkoRirekiDiv).showSelectedData();
+//        createHandlerOf(henkoRirekiDiv).showSelectedData();
         henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.sakujo);
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
-        handler.setExecutionStatus(ViewExecutionStatus.Delete);
+//        handler.setExecutionStatus(ViewExecutionStatus.Delete);
         henkoRirekiDiv.getHenkoHokenshaJoho().setReadOnly(true);
         return createSettingData(henkoRirekiDiv);
     }
@@ -159,10 +156,10 @@ public class ShikakuHenkoRireki {
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoTorikeshi(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ResponseData<ShikakuHenkoRirekiDiv> response = new ResponseData<>();
 
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
-        if (!handler.hasChangedInMeisai()) {
-            return this.onClick_btnHenkoTorikeshi_onYes(henkoRirekiDiv);
-        }
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        if (!handler.hasChangedInMeisai()) {
+//            return this.onClick_btnHenkoTorikeshi_onYes(henkoRirekiDiv);
+//        }
         ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnHenkoTorikeshi_onYes");
         QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                 UrQuestionMessages.入力内容の破棄.getMessage().toString(), "はい", "いいえ");
@@ -242,12 +239,12 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoTorikeshi_onYes(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
 
-        handler.clearInputData();
+//        handler.clearInputData();
         henkoRirekiDiv.getBtnAdd().setDisabled(false);
         henkoRirekiDiv.getDgHenko().setReadOnly(false);
-        handler.setExecutionStatus(ViewExecutionStatus.None);
+//        handler.setExecutionStatus(ViewExecutionStatus.None);
 
         return createSettingData(henkoRirekiDiv);
     }
@@ -264,10 +261,12 @@ public class ShikakuHenkoRireki {
 
         RString rowState = henkoRirekiDiv.getInputMode();
 
-        Optional<HihokenshaDaichoModel> 前履歴;
-        Optional<HihokenshaDaichoModel> 次履歴;
-        IItemList<HihokenshaDaichoModel> 全履歴;
-        HihokenshaDaichoModel select最終更新被保険者 = new HihokenshaDaichoModel();
+        Optional<HihokenshaDaicho> 前履歴;
+        Optional<HihokenshaDaicho> 次履歴;
+        IItemList<HihokenshaDaicho> 全履歴;
+        HihokenshaDaicho select最終更新被保険者 = null;
+        //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
+//        HihokenshaDaicho select最終更新被保険者 = new HihokenshaDaicho();
         FlexibleDate selected資格取得日 = FlexibleDate.EMPTY;
         FlexibleDate selected資格喪失日 = FlexibleDate.EMPTY;
         switch (ViewExecutionStatus.toValue(rowState)) {
@@ -275,7 +274,8 @@ public class ShikakuHenkoRireki {
             case Add:
                 前履歴 = Optional.empty();
                 次履歴 = Optional.empty();
-                全履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報();
+                全履歴 = ItemList.empty();
+//                全履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報();
                 break;
             case Modify:
                 int rowIndex = Integer.valueOf(henkoRirekiDiv.getSelectRow().toString()).intValue();
@@ -283,9 +283,10 @@ public class ShikakuHenkoRireki {
                 if (rowIndex != 0) {
                     int rdx = rowIndex - 1;
                     dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
-                    次履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
-                            .filter(ShikakuHenkoMapper.createKey(row))
-                            .findJustOne();
+                    次履歴 = Optional.empty();
+//                    次履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
+//                            .filter(ShikakuHenkoMapper.createKey(row))
+//                            .findJustOne();
                 } else {
                     次履歴 = Optional.empty();
                 }
@@ -293,15 +294,16 @@ public class ShikakuHenkoRireki {
                 if (rowIndex + 1 <= henkoRirekiDiv.getDgHenko().getDataSource().size() - 1) {
                     int rdx = rowIndex + 1;
                     dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
-                    前履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
-                            .filter(ShikakuHenkoMapper.createKey(row))
-                            .findJustOne();
+                    前履歴 = Optional.empty();
+//                    前履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
+//                            .filter(ShikakuHenkoMapper.createKey(row))
+//                            .findJustOne();
                 } else {
                     前履歴 = Optional.empty();
                 }
 
                 全履歴 = ItemList.empty();
-                select最終更新被保険者 = createHandlerOf(henkoRirekiDiv).get更新前選択被保険者台帳();
+//                select最終更新被保険者 = createHandlerOf(henkoRirekiDiv).get更新前選択被保険者台帳();
                 selected資格取得日 = select最終更新被保険者.get資格取得年月日();
                 selected資格喪失日 = select最終更新被保険者.get資格喪失年月日();
 
@@ -314,8 +316,16 @@ public class ShikakuHenkoRireki {
                 break;
         }
 
-        ShikakuHenkoRirekiKanriContext context = new ShikakuHenkoRirekiKanriContext(ViewExecutionStatus.toValue(rowState), 前履歴, 次履歴, 全履歴);
+        List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
+//        for (HihokenshaDaichoModel model : 全履歴) {
+//            全履歴modelList.add(model.getEntity());
+//        }
 
+//        ShikakuHenkoRirekiKanriContext context = new ShikakuHenkoRirekiKanriContext(
+//                ViewExecutionStatus.toValue(rowState),
+//                Optional.ofNullable(前履歴.get().getEntity()),
+//                Optional.ofNullable(次履歴.get().getEntity()),
+//                ItemList.of(全履歴modelList));
         //TODO テストのため、代入
         henkoRirekiDiv.setLatestSoshitsubi(new RString(""));
         henkoRirekiDiv.setLatestShutokubi(new RString("20140103"));
@@ -326,11 +336,10 @@ public class ShikakuHenkoRireki {
         RString 最新更新日 = henkoRirekiDiv.getLatestKoshinbi();
         RString 一号資格取得日 = henkoRirekiDiv.getIchigoShikakuShutokubi();
 
-        pairs.add(ShikakuHenkoRirekiValidationHelper.validate資格変更(
-                henkoRirekiDiv.getTxtHenkoDate(), henkoRirekiDiv.getTxtHenkoTodokedeDate(), selected資格取得日, selected資格喪失日,
-                new FlexibleDate(最新取得日), new FlexibleDate(最新喪失日), new FlexibleDate(最新更新日), new FlexibleDate(一号資格取得日),
-                henkoRirekiDiv.getDdlHenkoJiyu(), context));
-
+//        pairs.add(ShikakuHenkoRirekiValidationHelper.validate資格変更(
+//                henkoRirekiDiv.getTxtHenkoDate(), henkoRirekiDiv.getTxtHenkoTodokedeDate(), selected資格取得日, selected資格喪失日,
+//                new FlexibleDate(最新取得日), new FlexibleDate(最新喪失日), new FlexibleDate(最新更新日), new FlexibleDate(一号資格取得日),
+//                henkoRirekiDiv.getDdlHenkoJiyu(), context));
         ResponseData<ShikakuHenkoRirekiDiv> response = new ResponseData<>();
 
         response.addValidationMessages(pairs);
@@ -356,11 +365,11 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoKakutei(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
-        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
-        handler.updateEntryData();
-        handler.clearInputData();
-        handler.setupToAfterInput();
-        handler.setExecutionStatus(ViewExecutionStatus.None);
+//        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+//        handler.updateEntryData();
+//        handler.clearInputData();
+//        handler.setupToAfterInput();
+//        handler.setExecutionStatus(ViewExecutionStatus.None);
         return createSettingData(henkoRirekiDiv);
     }
 
@@ -370,8 +379,7 @@ public class ShikakuHenkoRireki {
         return response;
     }
 
-    private ShikakuHenkoRirekiHandler createHandlerOf(ShikakuHenkoRirekiDiv requestDiv) {
-        return new ShikakuHenkoRirekiHandler(requestDiv);
-    }
-
+//    private ShikakuHenkoRirekiHandler createHandlerOf(ShikakuHenkoRirekiDiv requestDiv) {
+//        return new ShikakuHenkoRirekiHandler(requestDiv);
+//    }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.relate;
 
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.model.helper.KyotakuKeikakuRelateModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,11 +30,11 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がModifiedの時_Modifiedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
-            model.get居宅給付計画事業者作成モデル().get().getEntity().initializeMd5();
-            model.get居宅給付計画自己作成モデル().get().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
+            model.get居宅給付計画事業者作成モデル().get().initializeMd5();
+            model.get居宅給付計画自己作成モデル().get().initializeMd5();
             // 親テーブルの状態をModifiedにするために、親テーブルの任意の項目を変更してください。
-            model.get居宅給付計画届出モデル().set暫定区分(new RString("9"));
+            model.get居宅給付計画届出モデル().setZanteiKubun(new RString("9"));
             assertThat(model.getState(), is(EntityDataState.Modified));
 
         }
@@ -42,7 +43,7 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がUnchanged_子テーブルの状態のいずれかがAddedの時_Modifiedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
 
             assertThat(model.getState(), is(EntityDataState.Modified));
         }
@@ -51,11 +52,11 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がUnchanged_子テーブルの状態のいずれかがModifiedの時_Modifiedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
-            model.get居宅給付計画事業者作成モデル().get().getEntity().initializeMd5();
-            model.get居宅給付計画自己作成モデル().get().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
+            model.get居宅給付計画事業者作成モデル().get().initializeMd5();
+            model.get居宅給付計画自己作成モデル().get().initializeMd5();
             // 子テーブルの状態をModifiedにするために、子テーブルの任意の項目を変更してください。
-            model.get居宅給付計画事業者作成モデル().get().set委託先事業者番号(new RString("9"));
+            model.get居宅給付計画事業者作成モデル().get().setItakusakiJigyoshaNo(JigyoshaNo.EMPTY);
 
             assertThat(model.getState(), is(EntityDataState.Modified));
         }
@@ -64,12 +65,12 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がUnchanged_子テーブルの状態のいずれかがDeletedの時_Modifiedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
-            model.get居宅給付計画事業者作成モデル().get().getEntity().initializeMd5();
-            model.get居宅給付計画自己作成モデル().get().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
+            model.get居宅給付計画事業者作成モデル().get().initializeMd5();
+            model.get居宅給付計画自己作成モデル().get().initializeMd5();
 
             // 子テーブルの状態をDeletedにするために、任意の子テーブルの削除フラグにtrueを設定してください。
-            model.get居宅給付計画自己作成モデル().get().setDeletedState(true);
+            model.get居宅給付計画自己作成モデル().get().setIsDeleted(true);
 
             assertThat(model.getState(), is(EntityDataState.Modified));
         }
@@ -78,9 +79,9 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がUnchanged_子テーブルの状態のいずれもUnchangedの時_Unchangedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
-            model.get居宅給付計画事業者作成モデル().get().getEntity().initializeMd5();
-            model.get居宅給付計画自己作成モデル().get().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
+            model.get居宅給付計画事業者作成モデル().get().initializeMd5();
+            model.get居宅給付計画自己作成モデル().get().initializeMd5();
 
             assertThat(model.getState(), is(EntityDataState.Unchanged));
         }
@@ -96,9 +97,9 @@ public class KyotakuKeikakuRelateModelTest {
         public void 親テーブルの状態がDeletedの時_Deletedが返る() {
             KyotakuKeikakuRelateModel model = KyotakuKeikakuRelateModelTestHelper.createModel();
 
-            model.get居宅給付計画届出モデル().getEntity().initializeMd5();
+            model.get居宅給付計画届出モデル().initializeMd5();
             // 親テーブルの状態をDeletedにするために、親テーブルの削除フラグにtrueを設定してください。
-            model.get居宅給付計画届出モデル().setDeletedState(true);
+            model.get居宅給付計画届出モデル().setIsDeleted(true);
 
             assertThat(model.getState(), is(EntityDataState.Deleted));
         }

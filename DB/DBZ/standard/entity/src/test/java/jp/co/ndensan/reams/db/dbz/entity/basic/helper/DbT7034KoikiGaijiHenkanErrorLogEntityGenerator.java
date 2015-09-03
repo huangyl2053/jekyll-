@@ -4,17 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域外字変換エラーログエンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋文娟
  */
 public final class DbT7034KoikiGaijiHenkanErrorLogEntityGenerator {
 
@@ -22,7 +19,7 @@ public final class DbT7034KoikiGaijiHenkanErrorLogEntityGenerator {
     public static final RString DEFAULT_連番 = new RString("1");
     public static final LasdecCode DEFAULT_市町村番号 = new LasdecCode("202011");
     public static final RString DEFAULT_種別 = new RString("1");
-    public static final RDateTime DEFAULT_処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final LasdecCode DEFAULT_送信元市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_送信元市町村名称 = new RString("1");
     public static final LasdecCode DEFAULT_送信先市町村コード = new LasdecCode("202011");
@@ -51,7 +48,7 @@ public final class DbT7034KoikiGaijiHenkanErrorLogEntityGenerator {
         entity.setRenNo(DEFAULT_連番);
         entity.setShichosonCode(DEFAULT_市町村番号);
         entity.setShubetsu(DEFAULT_種別);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setMotoShichosonCode(DEFAULT_送信元市町村コード);
         entity.setMotoShichosonMeisho(DEFAULT_送信元市町村名称);
         entity.setSakiShichosonCode(DEFAULT_送信先市町村コード);

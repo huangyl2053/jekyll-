@@ -7,11 +7,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3046ShokanServicePlan200604Entity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3046ShokanServicePlan200604");
 
@@ -31,12 +32,18 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
+    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
+    @PrimaryKey
     private RString seiriNp;
+    @PrimaryKey
     private JigyoshaNo jigyoshaNo;
+    @PrimaryKey
     private RString yoshikiNo;
-    private int rirekiNo;
+    @PrimaryKey
+    private Decimal rirekiNo;
     private RString shiteiKijunGaitoJigyoshaKubunCode;
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;
     private ServiceCode serviceCode;
@@ -58,7 +65,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -67,7 +74,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -76,7 +83,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -85,17 +92,16 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -104,7 +110,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -113,7 +119,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -122,7 +128,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -131,7 +137,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -140,7 +146,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNp() {
@@ -149,7 +155,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNp 整理番号
      */
     public void setSeiriNp(RString seiriNp) {
@@ -158,7 +164,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
     public JigyoshaNo getJigyoshaNo() {
@@ -167,7 +173,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -176,7 +182,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 様式番号のgetメソッドです。
-     * 
+     *
      * @return 様式番号
      */
     public RString getYoshikiNo() {
@@ -185,7 +191,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 様式番号のsetメソッドです。
-     * 
+     *
      * @param yoshikiNo 様式番号
      */
     public void setYoshikiNo(RString yoshikiNo) {
@@ -194,25 +200,25 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 指定／基準該当事業者区分コードのgetメソッドです。
-     * 
+     *
      * @return 指定／基準該当事業者区分コード
      */
     public RString getShiteiKijunGaitoJigyoshaKubunCode() {
@@ -221,7 +227,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 指定／基準該当事業者区分コードのsetメソッドです。
-     * 
+     *
      * @param shiteiKijunGaitoJigyoshaKubunCode 指定／基準該当事業者区分コード
      */
     public void setShiteiKijunGaitoJigyoshaKubunCode(RString shiteiKijunGaitoJigyoshaKubunCode) {
@@ -230,7 +236,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 居宅サービス計画作成依頼届出年月日のgetメソッドです。
-     * 
+     *
      * @return 居宅サービス計画作成依頼届出年月日
      */
     public FlexibleDate getKyotakuServiceSakuseiIraiYMD() {
@@ -239,7 +245,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 居宅サービス計画作成依頼届出年月日のsetメソッドです。
-     * 
+     *
      * @param kyotakuServiceSakuseiIraiYMD 居宅サービス計画作成依頼届出年月日
      */
     public void setKyotakuServiceSakuseiIraiYMD(FlexibleDate kyotakuServiceSakuseiIraiYMD) {
@@ -248,7 +254,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * サービスコードのgetメソッドです。
-     * 
+     *
      * @return サービスコード
      */
     public ServiceCode getServiceCode() {
@@ -257,7 +263,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * サービスコードのsetメソッドです。
-     * 
+     *
      * @param serviceCode サービスコード
      */
     public void setServiceCode(ServiceCode serviceCode) {
@@ -266,7 +272,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public int getTanisu() {
@@ -275,7 +281,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param tanisu 単位数
      */
     public void setTanisu(int tanisu) {
@@ -284,7 +290,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 単位数単価のgetメソッドです。
-     * 
+     *
      * @return 単位数単価
      */
     public Decimal getTanisuTanka() {
@@ -293,7 +299,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 単位数単価のsetメソッドです。
-     * 
+     *
      * @param tanisuTanka 単位数単価
      */
     public void setTanisuTanka(Decimal tanisuTanka) {
@@ -302,7 +308,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 請求金額のgetメソッドです。
-     * 
+     *
      * @return 請求金額
      */
     public int getSeikyuKingaku() {
@@ -311,7 +317,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 請求金額のsetメソッドです。
-     * 
+     *
      * @param seikyuKingaku 請求金額
      */
     public void setSeikyuKingaku(int seikyuKingaku) {
@@ -320,7 +326,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 担当介護支援専門員番号のgetメソッドです。
-     * 
+     *
      * @return 担当介護支援専門員番号
      */
     public RString getTantokangoshienSemmoninNo() {
@@ -329,7 +335,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 担当介護支援専門員番号のsetメソッドです。
-     * 
+     *
      * @param tantokangoshienSemmoninNo 担当介護支援専門員番号
      */
     public void setTantokangoshienSemmoninNo(RString tantokangoshienSemmoninNo) {
@@ -338,7 +344,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 摘要のgetメソッドです。
-     * 
+     *
      * @return 摘要
      */
     public RString getTekiyo() {
@@ -347,7 +353,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 摘要のsetメソッドです。
-     * 
+     *
      * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
@@ -356,7 +362,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 審査方法区分コードのgetメソッドです。
-     * 
+     *
      * @return 審査方法区分コード
      */
     public RString getShinsaHohoKubunCode() {
@@ -365,7 +371,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 審査方法区分コードのsetメソッドです。
-     * 
+     *
      * @param shinsaHohoKubunCode 審査方法区分コード
      */
     public void setShinsaHohoKubunCode(RString shinsaHohoKubunCode) {
@@ -374,7 +380,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 審査年月のgetメソッドです。
-     * 
+     *
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -383,7 +389,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 審査年月のsetメソッドです。
-     * 
+     *
      * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -392,7 +398,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 支給区分コードのgetメソッドです。
-     * 
+     *
      * @return 支給区分コード
      */
     public RString getShikyuKubunCode() {
@@ -401,7 +407,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 支給区分コードのsetメソッドです。
-     * 
+     *
      * @param shikyuKubunCode 支給区分コード
      */
     public void setShikyuKubunCode(RString shikyuKubunCode) {
@@ -410,7 +416,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 点数／金額のgetメソッドです。
-     * 
+     *
      * @return 点数／金額
      */
     public int getTensuKingaku() {
@@ -419,7 +425,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 点数／金額のsetメソッドです。
-     * 
+     *
      * @param tensuKingaku 点数／金額
      */
     public void setTensuKingaku(int tensuKingaku) {
@@ -428,7 +434,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 支給金額のgetメソッドです。
-     * 
+     *
      * @return 支給金額
      */
     public int getShikyuKingaku() {
@@ -437,7 +443,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 支給金額のsetメソッドです。
-     * 
+     *
      * @param shikyuKingaku 支給金額
      */
     public void setShikyuKingaku(int shikyuKingaku) {
@@ -446,7 +452,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 増減点のgetメソッドです。
-     * 
+     *
      * @return 増減点
      */
     public int getZougenTen() {
@@ -455,7 +461,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 増減点のsetメソッドです。
-     * 
+     *
      * @param zougenTen 増減点
      */
     public void setZougenTen(int zougenTen) {
@@ -464,7 +470,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 差額金額のgetメソッドです。
-     * 
+     *
      * @return 差額金額
      */
     public int getSagakuKingaku() {
@@ -473,7 +479,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 差額金額のsetメソッドです。
-     * 
+     *
      * @param sagakuKingaku 差額金額
      */
     public void setSagakuKingaku(int sagakuKingaku) {
@@ -482,7 +488,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 増減理由等のgetメソッドです。
-     * 
+     *
      * @return 増減理由等
      */
     public RString getZougenRiyu() {
@@ -491,7 +497,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 増減理由等のsetメソッドです。
-     * 
+     *
      * @param zougenRiyu 増減理由等
      */
     public void setZougenRiyu(RString zougenRiyu) {
@@ -500,7 +506,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 不支給理由等のgetメソッドです。
-     * 
+     *
      * @return 不支給理由等
      */
     public RString getFushikyuRiyu() {
@@ -509,7 +515,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 不支給理由等のsetメソッドです。
-     * 
+     *
      * @param fushikyuRiyu 不支給理由等
      */
     public void setFushikyuRiyu(RString fushikyuRiyu) {
@@ -518,7 +524,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 購入・改修履歴等のgetメソッドです。
-     * 
+     *
      * @return 購入・改修履歴等
      */
     public RString getKounyuKaishuRireki() {
@@ -527,7 +533,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * 購入・改修履歴等のsetメソッドです。
-     * 
+     *
      * @param kounyuKaishuRireki 購入・改修履歴等
      */
     public void setKounyuKaishuRireki(RString kounyuKaishuRireki) {
@@ -536,9 +542,9 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * このエンティティの主キーが他の{@literal DbT3046ShokanServicePlan200604Entity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3046ShokanServicePlan200604Entity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -582,6 +588,7 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -590,5 +597,4 @@ public class DbT3046ShokanServicePlan200604Entity extends DbTableEntityBase<DbT3
     }
 
 // </editor-fold>
-
 }

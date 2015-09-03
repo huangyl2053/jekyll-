@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonEditData;
+import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoB4CommonEditData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

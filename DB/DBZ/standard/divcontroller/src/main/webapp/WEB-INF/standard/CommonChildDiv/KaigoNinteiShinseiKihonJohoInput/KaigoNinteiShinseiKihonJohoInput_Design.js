@@ -32,6 +32,10 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radShinseishoKubun"));
             };
 
+            Controls.prototype.txtShinseiJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
+            };
+
             Controls.prototype.txtShinseiYMD = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtShinseiYMD"));
             };
@@ -48,6 +52,10 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlShinseiKubunHorei"));
             };
 
+            Controls.prototype.ddlShisho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShisho"));
+            };
+
             Controls.prototype.chkKyuSochisha = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkKyuSochisha"));
             };
@@ -62,10 +70,6 @@ var DBZ;
 
             Controls.prototype.ddlTokuteiShippei = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlTokuteiShippei"));
-            };
-
-            Controls.prototype.txtShinseiJokyo = function () {
-                return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
             };
 
             Controls.prototype.ServiceSakujo = function () {

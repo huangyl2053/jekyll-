@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 業務Configを取得します。
@@ -16,19 +16,19 @@ import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
  */
 public final class BusinessConfigLoader implements IBusinessConfigLoader {
 
-    private final IUrBusinessConfig urBusinessConfig;
+    private final IBusinessConfig urBusinessConfig;
 
     /**
      * インスタンスを生成します。
      */
     public BusinessConfigLoader() {
-        this.urBusinessConfig = UrBusinessConfigFactory.createInstance();
+        this.urBusinessConfig = BusinessConfigFactory.createInstance();
     }
 
     /**
      * テスト用のコンストラクタです。
      */
-    BusinessConfigLoader(IUrBusinessConfig urBusinessConfig) {
+    BusinessConfigLoader(IBusinessConfig urBusinessConfig) {
         this.urBusinessConfig = urBusinessConfig;
     }
 

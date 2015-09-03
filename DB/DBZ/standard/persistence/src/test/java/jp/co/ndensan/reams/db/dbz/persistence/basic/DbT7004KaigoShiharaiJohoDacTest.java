@@ -5,18 +5,17 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7004KaigoShiharaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_決定年月日;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_科目コード;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_証記載保険者番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7004KaigoShiharaiJohoEntityGenerator.DEFAULT_識別コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -30,8 +29,6 @@ import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7004KaigoShiharaiJohoDac}のテストです。
- *
- * @author LDNS 宋昕沢
  */
 @RunWith(Enclosed.class)
 public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
@@ -51,21 +48,10 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
-                    DEFAULT_識別コード,
-                    DEFAULT_科目コード,
-                    DEFAULT_決定年月日);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    null,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -74,8 +60,7 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
-                    null,
+                    DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
         }
@@ -83,25 +68,22 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 科目コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
-                    null,
+                    DEFAULT_科目コード,
                     DEFAULT_決定年月日);
         }
 
         @Test(expected = NullPointerException.class)
         public void 決定年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
-                    null);
+                    DEFAULT_決定年月日);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7004KaigoShiharaiJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -111,7 +93,6 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7004KaigoShiharaiJohoEntity insertedRecord = sut.selectByKey(
-                    new ShoKisaiHokenshaNo(キー_03),
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -124,12 +105,10 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護支払情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new ShoKisaiHokenshaNo(キー_01),
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -147,13 +126,11 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護支払情報エンティティを渡すと_insertは_介護支払情報を追加する() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日), is(notNullValue()));
@@ -165,7 +142,6 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -173,20 +149,22 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
 
         @Test
         public void 介護支払情報エンティティを渡すと_updateは_介護支払情報を更新する() {
-            DbT7004KaigoShiharaiJohoEntity updateRecord = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            //TODO  主キー以外の項目を変更してください
-//  updateRecord.set変更したい項目(75);
+            DbT7004KaigoShiharaiJohoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_識別コード,
+                    DEFAULT_科目コード,
+                    DEFAULT_決定年月日);
+            // TODO  主キー以外の項目を変更してください
+            // updateRecord.set変更したい項目(75);
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
             DbT7004KaigoShiharaiJohoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
 
-            //TODO  主キー以外の項目を変更してください
-// assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            // TODO  主キー以外の項目を変更してください
+            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -195,7 +173,6 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日);
@@ -203,13 +180,15 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
 
         @Test
         public void 介護支払情報エンティティを渡すと_deleteは_介護支払情報を削除する() {
-            sut.delete(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
+            DbT7004KaigoShiharaiJohoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
-                    DEFAULT_決定年月日));
+                    DEFAULT_決定年月日);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
-                    DEFAULT_証記載保険者番号,
                     DEFAULT_識別コード,
                     DEFAULT_科目コード,
                     DEFAULT_決定年月日), is(nullValue()));
@@ -219,16 +198,14 @@ public class DbT7004KaigoShiharaiJohoDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShoKisaiHokenshaNo 証記載保険者番号,
                 ShikibetsuCode 識別コード,
                 KamokuCode 科目コード,
                 FlexibleDate 決定年月日) {
             DbT7004KaigoShiharaiJohoEntity entity = DbT7004KaigoShiharaiJohoEntityGenerator.createDbT7004KaigoShiharaiJohoEntity();
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setShikibetsuCode(識別コード);
             entity.setKamokuCode(科目コード);
             entity.setKetteiYMD(決定年月日);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }

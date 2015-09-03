@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -42,8 +42,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
      * @param みなし2号登録年月日 FlexibleDate
      * @param みなし2号解除年月日 FlexibleDate
      * @param 福祉被保険者番号 FukushiHihokenshaNo
-     * @throws NullPointerException
-     * 市町村コード,識別コード,被保険者番号,処理日時,被保険者区分コード,みなし2号登録年月日がNullの場合
+     * @throws NullPointerException 市町村コード,識別コード,被保険者番号,処理日時,被保険者区分コード,みなし2号登録年月日がNullの場合
      */
     public Minashi2GoshaDaicho(
             LasdecCode 市町村コード,

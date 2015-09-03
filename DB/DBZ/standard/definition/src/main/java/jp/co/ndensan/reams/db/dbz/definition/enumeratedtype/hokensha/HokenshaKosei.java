@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,17 +29,17 @@ public enum HokenshaKosei {
      * コード:"2"
      */
     広域市町村("2"),
-     /**
-      *広域保険者あることを表します。<br/>
+    /**
+     * 広域保険者あることを表します。<br/>
      * コード:"3"
      */
     広域保険者("3"),
-     /**
-      * 広域審査会であることを表します。<br/>
+    /**
+     * 広域審査会であることを表します。<br/>
      * コード:"4"
      */
     広域審査会("4");
-    
+
     private final RString theCode;
 
     private HokenshaKosei(String code) {

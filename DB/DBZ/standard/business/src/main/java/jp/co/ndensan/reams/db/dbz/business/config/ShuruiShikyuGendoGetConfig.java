@@ -10,11 +10,11 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet.種類支給限度額_取得方法;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 種類支給限度額コンフィグを取得するためのクラスです。
@@ -29,7 +29,7 @@ public class ShuruiShikyuGendoGetConfig {
      * コンストラクタです。
      */
     public ShuruiShikyuGendoGetConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -37,11 +37,11 @@ public class ShuruiShikyuGendoGetConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public ShuruiShikyuGendoGetConfig(IUrBusinessConfig businessConfig) {
+    public ShuruiShikyuGendoGetConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysShuruiShikyuGendoGet, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysShuruiShikyuGendoGet, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysShuruiShikyuGendoGet, RString> map = new EnumMap<>(ConfigKeysShuruiShikyuGendoGet.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShuruiShikyuGendoGet target : ConfigKeysShuruiShikyuGendoGet.values()) {

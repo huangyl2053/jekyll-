@@ -6,28 +6,26 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPattern;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPattern.codeKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPattern.koikiShichosonNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPattern.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7024KoikiShichosonCodeHenkanPatternEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7027KakushuCodeHenkan.codeKubun;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 広域市町村管理コード変換パターンのデータアクセスクラスです。
- *
- * @author LDNS 宋昕沢
  */
-public class DbT7024KoikiShichosonCodeHenkanPatternDac implements IModifiable<DbT7024KoikiShichosonCodeHenkanPatternEntity> {
+public class DbT7024KoikiShichosonCodeHenkanPatternDac implements ISaveable<DbT7024KoikiShichosonCodeHenkanPatternEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -75,37 +73,18 @@ public class DbT7024KoikiShichosonCodeHenkanPatternDac implements IModifiable<Db
                 toList(DbT7024KoikiShichosonCodeHenkanPatternEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * 物理削除を行う。
+     * DbT7024KoikiShichosonCodeHenkanPatternEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity DbT7024KoikiShichosonCodeHenkanPatternEntity
-     * @return int 件数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT7024KoikiShichosonCodeHenkanPatternEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("広域市町村管理コード変換パターンエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

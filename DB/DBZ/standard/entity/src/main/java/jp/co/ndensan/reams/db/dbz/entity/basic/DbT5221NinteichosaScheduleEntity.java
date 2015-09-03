@@ -2,8 +2,9 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -39,13 +40,13 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     @PrimaryKey
     private Code ninteiChosaJikanWaku;
     @PrimaryKey
-    private Code chosachikucode;
+    private Code chosaChikuCode;
     @PrimaryKey
     private RString ninteichosaItakusakiCode;
     @PrimaryKey
     private RString ninteiChosainNo;
     @PrimaryKey
-    private Code shichosoncode;
+    private LasdecCode shichosonCode;
     private ShinseishoKanriNo shinseishoKanriNo;
     private Code yoyakuJokyo;
     private boolean yoyakuKaoFlag;
@@ -180,8 +181,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 調査地区コード
      */
-    public Code getChosachikucode() {
-        return chosachikucode;
+    public Code getChosaChikuCode() {
+        return chosaChikuCode;
     }
 
     /**
@@ -189,8 +190,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @param chosachikucode 調査地区コード
      */
-    public void setChosachikucode(Code chosachikucode) {
-        this.chosachikucode = chosachikucode;
+    public void setChosaChikuCode(Code chosaChikuCode) {
+        this.chosaChikuCode = chosaChikuCode;
     }
 
     /**
@@ -244,8 +245,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 市町村コード
      */
-    public Code getShichosoncode() {
-        return shichosoncode;
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
     }
 
     /**
@@ -253,10 +254,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * <br/>
      * <br/>市町村コード
      *
-     * @param shichosoncode 市町村コード
+     * @param shichosonCode 市町村コード
      */
-    public void setShichosoncode(Code shichosoncode) {
-        this.shichosoncode = shichosoncode;
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
     }
 
     /**
@@ -493,7 +494,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
         if (!Objects.equals(this.ninteiChosaJikanWaku, other.ninteiChosaJikanWaku)) {
             return false;
         }
-        if (!Objects.equals(this.chosachikucode, other.chosachikucode)) {
+        if (!Objects.equals(this.chosaChikuCode, other.chosaChikuCode)) {
             return false;
         }
         if (!Objects.equals(this.ninteichosaItakusakiCode, other.ninteichosaItakusakiCode)) {
@@ -502,7 +503,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
         if (!Objects.equals(this.ninteiChosainNo, other.ninteiChosainNo)) {
             return false;
         }
-        if (!Objects.equals(this.shichosoncode, other.shichosoncode)) {
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         return true;
@@ -517,10 +518,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
         this.ninteiChosaYoteiKaishiTime = entity.ninteiChosaYoteiKaishiTime;
         this.ninteiChosaYoteiShuryoTime = entity.ninteiChosaYoteiShuryoTime;
         this.ninteiChosaJikanWaku = entity.ninteiChosaJikanWaku;
-        this.chosachikucode = entity.chosachikucode;
+        this.chosaChikuCode = entity.chosaChikuCode;
         this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
         this.ninteiChosainNo = entity.ninteiChosainNo;
-        this.shichosoncode = entity.shichosoncode;
+        this.shichosonCode = entity.shichosonCode;
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.yoyakuJokyo = entity.yoyakuJokyo;
         this.yoyakuKaoFlag = entity.yoyakuKaoFlag;
@@ -541,7 +542,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosachikucode, ninteichosaItakusakiCode, ninteiChosainNo, shichosoncode, shinseishoKanriNo, yoyakuJokyo, yoyakuKaoFlag, biko, basho, chushajo, tachiainin1, renrakusaki1, tachiainin2, renrakusaki2, taishoshaMemo);
+        return super.toMd5(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode, shinseishoKanriNo, yoyakuJokyo, yoyakuKaoFlag, biko, basho, chushajo, tachiainin1, renrakusaki1, tachiainin2, renrakusaki2, taishoshaMemo);
     }
 
 // </editor-fold>

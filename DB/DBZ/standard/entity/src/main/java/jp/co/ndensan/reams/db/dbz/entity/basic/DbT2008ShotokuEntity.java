@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2008Shotoku");
 
@@ -34,7 +35,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private RString hiKazeiKubun;
     private RString hiKazeiKubunGemmenGo;
     private Decimal gokeiShotokuGaku;
@@ -43,6 +44,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,6 +53,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -59,6 +62,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,15 +71,16 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,6 +89,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getShotokuNendo
+     *
      * @return shotokuNendo
      */
     public FlexibleYear getShotokuNendo() {
@@ -92,6 +98,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setShotokuNendo
+     *
      * @param shotokuNendo shotokuNendo
      */
     public void setShotokuNendo(FlexibleYear shotokuNendo) {
@@ -100,6 +107,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getShikibetsuCode
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -108,6 +116,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setShikibetsuCode
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -116,22 +125,25 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getRirekiNo
+     *
      * @return rirekiNo
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * setRirekiNo
+     *
      * @param rirekiNo rirekiNo
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * getHiKazeiKubun
+     *
      * @return hiKazeiKubun
      */
     public RString getHiKazeiKubun() {
@@ -140,6 +152,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setHiKazeiKubun
+     *
      * @param hiKazeiKubun hiKazeiKubun
      */
     public void setHiKazeiKubun(RString hiKazeiKubun) {
@@ -148,6 +161,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getHiKazeiKubunGemmenGo
+     *
      * @return hiKazeiKubunGemmenGo
      */
     public RString getHiKazeiKubunGemmenGo() {
@@ -156,6 +170,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setHiKazeiKubunGemmenGo
+     *
      * @param hiKazeiKubunGemmenGo hiKazeiKubunGemmenGo
      */
     public void setHiKazeiKubunGemmenGo(RString hiKazeiKubunGemmenGo) {
@@ -164,6 +179,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getGokeiShotokuGaku
+     *
      * @return gokeiShotokuGaku
      */
     public Decimal getGokeiShotokuGaku() {
@@ -172,6 +188,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setGokeiShotokuGaku
+     *
      * @param gokeiShotokuGaku gokeiShotokuGaku
      */
     public void setGokeiShotokuGaku(Decimal gokeiShotokuGaku) {
@@ -180,6 +197,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getNenkiniShunyuGaku
+     *
      * @return nenkiniShunyuGaku
      */
     public Decimal getNenkiniShunyuGaku() {
@@ -188,6 +206,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setNenkiniShunyuGaku
+     *
      * @param nenkiniShunyuGaku nenkiniShunyuGaku
      */
     public void setNenkiniShunyuGaku(Decimal nenkiniShunyuGaku) {
@@ -196,6 +215,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * getGekihenKanwaKubun
+     *
      * @return gekihenKanwaKubun
      */
     public RString getGekihenKanwaKubun() {
@@ -204,6 +224,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * setGekihenKanwaKubun
+     *
      * @param gekihenKanwaKubun gekihenKanwaKubun
      */
     public void setGekihenKanwaKubun(RString gekihenKanwaKubun) {
@@ -212,9 +233,9 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT2008ShotokuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT2008ShotokuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -251,6 +272,7 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -259,5 +281,4 @@ public class DbT2008ShotokuEntity extends DbTableEntityBase<DbT2008ShotokuEntity
     }
 
 // </editor-fold>
-
 }

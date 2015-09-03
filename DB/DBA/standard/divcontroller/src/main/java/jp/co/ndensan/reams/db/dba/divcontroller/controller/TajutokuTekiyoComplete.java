@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTaishosaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTekiyoCompleteDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
-import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,8 +28,8 @@ public class TajutokuTekiyoComplete {
     public ResponseData onClick_btnSave(TajutokuTekiyoCompleteDiv completeDiv, TajutokuTaishosaJohoDiv taishoshaJohoDiv) {
         ResponseData<TajutokuTekiyoCompleteDiv> response = new ResponseData<>();
 
-        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
-
+        //TODO getAtenaJohoが存在しない
+//        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
         KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("他市町村住所地特例適用を更新しました。"));//,
 //                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 

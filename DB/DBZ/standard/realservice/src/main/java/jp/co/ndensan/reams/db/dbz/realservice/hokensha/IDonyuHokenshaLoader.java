@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.IHokensha;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;

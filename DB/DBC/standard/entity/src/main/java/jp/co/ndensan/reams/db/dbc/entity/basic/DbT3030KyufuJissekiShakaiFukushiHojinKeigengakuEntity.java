@@ -10,13 +10,20 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
 
 /**
  * DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuの項目定義クラスです
  *
  */
 public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTableEntityBase<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku");
 
@@ -31,19 +38,19 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
     @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @PrimaryKey
-    private RString inputShikibetsuNo;
+    private NyuryokuShikibetsuNo inputShikibetsuNo;
     @PrimaryKey
     private RString recodeShubetsuCode;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private KaigoHihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private ToshiNo toshiNo;
+    private RString toshiNo;
     private Decimal keigenritsu;
     @PrimaryKey
     private ServiceShuruiCode serviceSyuruiCode;
@@ -54,15 +61,15 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
     private Decimal atoRiyoshaFutanTotal;
     private Decimal atoKeigengaku;
     private Decimal atoKeigengoRiyoshaFutangaku;
-    private Integer saishinsaKaisu;
-    private Integer kagoKaisu;
+    private Decimal saishinsaKaisu;
+    private Decimal kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -71,7 +78,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -80,7 +87,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -89,17 +96,16 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -108,7 +114,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     * 
+     *
      * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -117,7 +123,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     * 
+     *
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -126,25 +132,25 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 入力識別番号のgetメソッドです。
-     * 
+     *
      * @return 入力識別番号
      */
-    public RString getInputShikibetsuNo() {
+    public NyuryokuShikibetsuNo getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
      * 入力識別番号のsetメソッドです。
-     * 
+     *
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(RString inputShikibetsuNo) {
+    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     * 
+     *
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -153,7 +159,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * レコード種別コードのsetメソッドです。
-     * 
+     *
      * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -162,43 +168,43 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -207,7 +213,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -216,7 +222,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 事業所番号のgetメソッドです。
-     * 
+     *
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -225,7 +231,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 事業所番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshoNo 事業所番号
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -234,25 +240,25 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 通し番号のgetメソッドです。
-     * 
+     *
      * @return 通し番号
      */
-    public ToshiNo getToshiNo() {
+    public RString getToshiNo() {
         return toshiNo;
     }
 
     /**
      * 通し番号のsetメソッドです。
-     * 
+     *
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(ToshiNo toshiNo) {
+    public void setToshiNo(RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * 軽減率のgetメソッドです。
-     * 
+     *
      * @return 軽減率
      */
     public Decimal getKeigenritsu() {
@@ -261,7 +267,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 軽減率のsetメソッドです。
-     * 
+     *
      * @param keigenritsu 軽減率
      */
     public void setKeigenritsu(Decimal keigenritsu) {
@@ -270,7 +276,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
@@ -279,7 +285,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceSyuruiCode サービス種類コード
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
@@ -288,7 +294,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 受領すべき利用者負担の総額のgetメソッドです。
-     * 
+     *
      * @return 受領すべき利用者負担の総額
      */
     public Decimal getRiyoshaFutanTotal() {
@@ -297,7 +303,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 受領すべき利用者負担の総額のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutanTotal 受領すべき利用者負担の総額
      */
     public void setRiyoshaFutanTotal(Decimal riyoshaFutanTotal) {
@@ -306,7 +312,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 軽減額のgetメソッドです。
-     * 
+     *
      * @return 軽減額
      */
     public Decimal getKeigengaku() {
@@ -315,7 +321,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 軽減額のsetメソッドです。
-     * 
+     *
      * @param keigengaku 軽減額
      */
     public void setKeigengaku(Decimal keigengaku) {
@@ -324,7 +330,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 軽減後利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 軽減後利用者負担額
      */
     public Decimal getKeigengoRiyoshaFutangaku() {
@@ -333,7 +339,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 軽減後利用者負担額のsetメソッドです。
-     * 
+     *
      * @param keigengoRiyoshaFutangaku 軽減後利用者負担額
      */
     public void setKeigengoRiyoshaFutangaku(Decimal keigengoRiyoshaFutangaku) {
@@ -342,7 +348,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
     public RString getBiko() {
@@ -351,7 +357,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -360,7 +366,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・受領すべき利用者負担の総額のgetメソッドです。
-     * 
+     *
      * @return 後・受領すべき利用者負担の総額
      */
     public Decimal getAtoRiyoshaFutanTotal() {
@@ -369,7 +375,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・受領すべき利用者負担の総額のsetメソッドです。
-     * 
+     *
      * @param atoRiyoshaFutanTotal 後・受領すべき利用者負担の総額
      */
     public void setAtoRiyoshaFutanTotal(Decimal atoRiyoshaFutanTotal) {
@@ -378,7 +384,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・軽減額のgetメソッドです。
-     * 
+     *
      * @return 後・軽減額
      */
     public Decimal getAtoKeigengaku() {
@@ -387,7 +393,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・軽減額のsetメソッドです。
-     * 
+     *
      * @param atoKeigengaku 後・軽減額
      */
     public void setAtoKeigengaku(Decimal atoKeigengaku) {
@@ -396,7 +402,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・軽減後利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 後・軽減後利用者負担額
      */
     public Decimal getAtoKeigengoRiyoshaFutangaku() {
@@ -405,7 +411,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 後・軽減後利用者負担額のsetメソッドです。
-     * 
+     *
      * @param atoKeigengoRiyoshaFutangaku 後・軽減後利用者負担額
      */
     public void setAtoKeigengoRiyoshaFutangaku(Decimal atoKeigengoRiyoshaFutangaku) {
@@ -414,43 +420,43 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 再審査回数のgetメソッドです。
-     * 
+     *
      * @return 再審査回数
      */
-    public Integer getSaishinsaKaisu() {
+    public Decimal getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * 再審査回数のsetメソッドです。
-     * 
+     *
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
+    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * 過誤回数のgetメソッドです。
-     * 
+     *
      * @return 過誤回数
      */
-    public Integer getKagoKaisu() {
+    public Decimal getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * 過誤回数のsetメソッドです。
-     * 
+     *
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Integer kagoKaisu) {
+    public void setKagoKaisu(Decimal kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * 審査年月のgetメソッドです。
-     * 
+     *
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -459,7 +465,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 審査年月のsetメソッドです。
-     * 
+     *
      * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -468,7 +474,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -477,7 +483,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -486,7 +492,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 取込年月のgetメソッドです。
-     * 
+     *
      * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -495,7 +501,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * 取込年月のsetメソッドです。
-     * 
+     *
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -504,9 +510,9 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * このエンティティの主キーが他の{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -575,6 +581,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -583,6 +590,4 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTab
     }
 
 // </editor-fold>
-
-
 }

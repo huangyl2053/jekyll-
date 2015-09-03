@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -30,7 +29,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 処理日時 処理日時
      * @return 被保険者台帳
      */
-    Optional<IHihokenshaDaicho> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時);
+    Optional<DbT1001HihokenshaDaichoEntity> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時);
 
     /**
      * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
@@ -39,7 +38,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
+    IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
 
     /**
      * 識別コードと市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。<br/>
@@ -49,7 +48,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 識別コード 被保険者番号
      * @return 被保険者台帳List
      */
-    IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
+    IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 市町村コード・被保険者番号・資格取得日を指定して、ある資格取得期間中の被保険者台帳情報をListで取得します。
@@ -59,7 +58,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 資格取得日 資格取得日
      * @return ある資格取得期間中の被保険者台帳List
      */
-    IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日);
+    IItemList<DbT1001HihokenshaDaichoEntity> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日);
 
     /**
      * 被保険者番号を指定して、該当する直近の被保険者台帳を取得します。
@@ -67,7 +66,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳
      */
-    Optional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号);
+    Optional<DbT1001HihokenshaDaichoEntity> find直近被保険者台帳(HihokenshaNo 被保険者番号);
 
     /**
      * 市町村コードを指定して、ある資格取得期間中の被保険者台帳情報をListで取得します。
@@ -75,5 +74,5 @@ public interface IHihokenshaDaichoFinder {
      * @param 市町村コード 市町村コード
      * @return ある資格取得期間中の被保険者台帳List
      */
-    IItemList<HihokenshaDaichoModel> find直近被保険者台帳一覧(LasdecCode 市町村コード);
+    IItemList<DbT1001HihokenshaDaichoEntity> find直近被保険者台帳一覧(LasdecCode 市町村コード);
 }

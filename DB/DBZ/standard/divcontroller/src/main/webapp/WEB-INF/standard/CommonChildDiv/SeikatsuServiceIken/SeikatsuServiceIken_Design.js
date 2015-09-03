@@ -168,12 +168,12 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtKansenshoShosai"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
 
-            Controls.prototype.btnKoshin = function () {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             };
             return Controls;
         })();

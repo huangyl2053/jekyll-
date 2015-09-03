@@ -173,12 +173,12 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtKansenshoShosai"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
-            public btnKoshin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKoshin"));
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             }
 
         }

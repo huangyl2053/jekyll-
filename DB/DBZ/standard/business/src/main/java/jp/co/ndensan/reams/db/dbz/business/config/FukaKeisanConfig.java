@@ -9,12 +9,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysFukaKeisan;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 
 /**
  * 賦課計算のコンフィグを取得するクラスです。
@@ -31,7 +31,7 @@ public class FukaKeisanConfig {
      * コンストラクタです。
      */
     public FukaKeisanConfig() {
-        this.configs = createMap(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(BusinessConfigFactory.createInstance());
     }
 
     /**
@@ -39,11 +39,11 @@ public class FukaKeisanConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public FukaKeisanConfig(IUrBusinessConfig businessConfig) {
+    public FukaKeisanConfig(IBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysFukaKeisan, RString> createMap(IUrBusinessConfig businessConfig) {
+    private Map<ConfigKeysFukaKeisan, RString> createMap(IBusinessConfig businessConfig) {
         Map<ConfigKeysFukaKeisan, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {

@@ -1,5 +1,5 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kanriKubun,varchar,RString,,,,,管理区分,A
 rirekiNo,int2,int,,,,,履歴番号,A
 torokuKubun,varchar,RString,,,,,登録区分,A
@@ -25,7 +25,7 @@ sashitome_KaijoYMD,UDD015YMD,FlexibleDate,,,,,差止対象解除年月日,A
 gemmen_KetteiYMD,UDD015YMD,FlexibleDate,,,,,減額決定年月日,A
 gemmen_TsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,減額通知書発行年月日,A
 gemmen_TsuchiSaiHakkoFlag,bool,boolean,,,,,減額通知書再発行フラグ,A
-kyufuRitsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,給付率,A
+kyufuRitsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,給付率,A
 shuryoShinsei_UketsukeYMD,UDD015YMD,FlexibleDate,,,,,終了申請書受付年月日,A
 shuryoShinsei_YMD,UDD015YMD,FlexibleDate,,,,,終了申請年月日,A
 shuryoShinsei_RiyuCode,varchar,RString,,,,,終了申請理由コード,A

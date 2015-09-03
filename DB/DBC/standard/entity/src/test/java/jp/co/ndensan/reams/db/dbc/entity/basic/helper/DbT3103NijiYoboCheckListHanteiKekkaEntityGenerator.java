@@ -4,40 +4,37 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防チェックリスト判定結果エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 宋昕沢
  */
 public final class DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator {
 
-    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("02"));
-    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final Decimal DEFAULT_点数_生活機能全般 = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_運動器機能 = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_栄養 = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_口腔 = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_閉じこもり = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_認知能力 = new Decimal(10000);
-    public static final Decimal DEFAULT_点数_うつ = new Decimal(10000);
-    public static final int DEFAULT_支援必要性_生活機能全般 = 1;
-    public static final int DEFAULT_支援必要性_運動器機能 = 1;
-    public static final int DEFAULT_支援必要性_栄養 = 1;
-    public static final int DEFAULT_支援必要性_口腔 = 1;
-    public static final int DEFAULT_支援必要性_閉じこもり = 1;
-    public static final int DEFAULT_支援必要性_認知能力 = 1;
-    public static final int DEFAULT_支援必要性_うつ = 1;
-    public static final RString DEFAULT_二次予防_主観的健康感 = new RString("123");
+    public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_生活機能全般 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_運動器機能 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_栄養 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_口腔 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_閉じこもり = new Decimal(0);
+    public static final Decimal DEFAULT_点数_認知能力 = new Decimal(0);
+    public static final Decimal DEFAULT_点数_うつ = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_生活機能全般 = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_運動器機能 = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_栄養 = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_口腔 = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_閉じこもり = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_認知能力 = new Decimal(0);
+    public static final Decimal DEFAULT_支援必要性_うつ = new Decimal(0);
+    public static final RString DEFAULT_二次予防_主観的健康感 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -50,6 +47,7 @@ public final class DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator {
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setUketsukeYMD(DEFAULT_受付年月日);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setTensu_SeikatsuKinoZenpan(DEFAULT_点数_生活機能全般);
         entity.setTensu_UndokiKino(DEFAULT_点数_運動器機能);
         entity.setTensu_Eiyo(DEFAULT_点数_栄養);

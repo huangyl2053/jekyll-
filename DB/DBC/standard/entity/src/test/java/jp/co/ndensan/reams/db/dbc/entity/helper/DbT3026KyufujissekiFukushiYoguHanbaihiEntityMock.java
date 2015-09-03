@@ -6,11 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,15 +48,15 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock {
     public static DbT3026KyufujissekiFukushiYoguHanbaihiEntity createEntity() {
         DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity = new DbT3026KyufujissekiFukushiYoguHanbaihiEntity();
         entity.setKokanJohoShikibetsuNo(new KokanShikibetsuNo(new RString("1234")));
-        entity.setInputShikibetsuNo(new RString("0001"));
+        entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo("0001"));
         entity.setRecodeShubetsuCode(new RString("02"));
-        entity.setShokisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000003")));
+        entity.setShokisaiHokenshaNo(new HokenshaNo(new RString("00000003")));
         entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
-        entity.setToshiNo(new ToshiNo(new RString("0000000006")));
+        entity.setToshiNo(new RString("0000000006"));
         entity.setMeisaiNo(new RString("1"));
-        entity.setServiceCode(new RString("000007"));
+        entity.setServiceCode(new ServiceCode("000007"));
         entity.setFukushiyoguHanbaiYMD(new FlexibleDate("20140201"));
         entity.setFukushiyoguShohinName(new RString("福祉用具商品名"));
         entity.setFukushiyoguSyumokuCode(new RString("08"));

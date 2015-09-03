@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
  * {@link IChosainManager}を生成するクラスです。
  *
  * @author n8223　朴義一
+ * @deprecated dbb.realserviceを使用する。
  */
+// TODO n8300姜 dbb.realserviceパッケージに移動予定。
 public final class KoseiShichosonMasterFactory {
 
     private KoseiShichosonMasterFactory() {

@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbx.definition.CodeAssignedItem;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.CodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

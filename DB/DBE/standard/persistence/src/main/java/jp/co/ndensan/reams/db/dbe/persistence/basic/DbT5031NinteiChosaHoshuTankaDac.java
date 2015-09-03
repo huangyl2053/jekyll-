@@ -13,23 +13,22 @@ import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5031NinteiChosaHoshuTan
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5031NinteiChosaHoshuTanka.kaishiYM;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5031NinteiChosaHoshuTanka.shuryoYM;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5031NinteiChosaHoshuTankaEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査報酬単価のデータアクセスクラスです。
- *
- * @author LDNS 焦蘇晋
  */
-public class DbT5031NinteiChosaHoshuTankaDac implements IModifiable<DbT5031NinteiChosaHoshuTankaEntity> {
+public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiChosaHoshuTankaEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -37,11 +36,11 @@ public class DbT5031NinteiChosaHoshuTankaDac implements IModifiable<DbT5031Ninte
     /**
      * 主キーで認定調査報酬単価を取得します。
      *
-     * @param 調査区分 ChosaKubun
-     * @param 訪問種別 HomonShubetsu
-     * @param 意見書入手パターン IkenshoNyushuPatern
-     * @param 開始年月 KaishiYM
-     * @param 終了年月 ShuryoYM
+     * @param 調査区分 調査区分
+     * @param 訪問種別 訪問種別
+     * @param 意見書入手パターン 意見書入手パターン
+     * @param 開始年月 開始年月
+     * @param 終了年月 終了年月
      * @return DbT5031NinteiChosaHoshuTankaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -74,7 +73,7 @@ public class DbT5031NinteiChosaHoshuTankaDac implements IModifiable<DbT5031Ninte
     /**
      * 認定調査報酬単価を全件返します。
      *
-     * @return List<DbT5031NinteiChosaHoshuTankaEntity>
+     * @return DbT5031NinteiChosaHoshuTankaEntityの{@code list}
      */
     @Transaction
     public List<DbT5031NinteiChosaHoshuTankaEntity> selectAll() {
@@ -85,37 +84,18 @@ public class DbT5031NinteiChosaHoshuTankaDac implements IModifiable<DbT5031Ninte
                 toList(DbT5031NinteiChosaHoshuTankaEntity.class);
     }
 
-    @Transaction
-    @Override
-    public int insert(DbT5031NinteiChosaHoshuTankaEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int update(DbT5031NinteiChosaHoshuTankaEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT5031NinteiChosaHoshuTankaEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
-     * OCR収入を物理削除。
+     * DbT5031NinteiChosaHoshuTankaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity OCR収入
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
-    public int deletePhysical(DbT5031NinteiChosaHoshuTankaEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    @Override
+    public int save(DbT5031NinteiChosaHoshuTankaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査報酬単価エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

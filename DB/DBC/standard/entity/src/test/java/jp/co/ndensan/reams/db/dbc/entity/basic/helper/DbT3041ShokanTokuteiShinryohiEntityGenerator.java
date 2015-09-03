@@ -4,53 +4,51 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3041ShokanTokuteiShinryohiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求特定診療費エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 周杏月
  */
 public final class DbT3041ShokanTokuteiShinryohiEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo(new RString("2"));
-    public static final RString DEFAULT_様式番号 = new RString("1");
-    public static final RString DEFAULT_順次番号 = new RString("1");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final RString DEFAULT_傷病名 = new RString("1");
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final RString DEFAULT_整理番号 = new RString("Data");
+    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_様式番号 = new RString("Data");
+    public static final RString DEFAULT_順次番号 = new RString("Data");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_傷病名 = new RString("Data");
     public static final int DEFAULT_指導管理料等単位数 = 1;
     public static final int DEFAULT_単純エックス線単位数 = 1;
     public static final int DEFAULT_リハビリテーション単位数 = 1;
     public static final int DEFAULT_精神科専門療法単位数 = 1;
     public static final int DEFAULT_合計単位数 = 1;
-    public static final RString DEFAULT_摘要１ = new RString("1");
-    public static final RString DEFAULT_摘要２ = new RString("1");
-    public static final RString DEFAULT_摘要３ = new RString("1");
-    public static final RString DEFAULT_摘要４ = new RString("1");
-    public static final RString DEFAULT_摘要５ = new RString("1");
-    public static final RString DEFAULT_摘要６ = new RString("1");
-    public static final RString DEFAULT_摘要７ = new RString("1");
-    public static final RString DEFAULT_摘要８ = new RString("1");
-    public static final RString DEFAULT_摘要９ = new RString("1");
-    public static final RString DEFAULT_摘要１０ = new RString("1");
-    public static final RString DEFAULT_摘要１１ = new RString("1");
-    public static final RString DEFAULT_摘要１２ = new RString("1");
-    public static final RString DEFAULT_摘要１３ = new RString("1");
-    public static final RString DEFAULT_摘要１４ = new RString("1");
-    public static final RString DEFAULT_摘要１５ = new RString("1");
-    public static final RString DEFAULT_摘要１６ = new RString("1");
-    public static final RString DEFAULT_摘要１７ = new RString("1");
-    public static final RString DEFAULT_摘要１８ = new RString("1");
-    public static final RString DEFAULT_摘要１９ = new RString("1");
-    public static final RString DEFAULT_摘要２０ = new RString("1");
+    public static final RString DEFAULT_摘要１ = new RString("Data");
+    public static final RString DEFAULT_摘要２ = new RString("Data");
+    public static final RString DEFAULT_摘要３ = new RString("Data");
+    public static final RString DEFAULT_摘要４ = new RString("Data");
+    public static final RString DEFAULT_摘要５ = new RString("Data");
+    public static final RString DEFAULT_摘要６ = new RString("Data");
+    public static final RString DEFAULT_摘要７ = new RString("Data");
+    public static final RString DEFAULT_摘要８ = new RString("Data");
+    public static final RString DEFAULT_摘要９ = new RString("Data");
+    public static final RString DEFAULT_摘要１０ = new RString("Data");
+    public static final RString DEFAULT_摘要１１ = new RString("Data");
+    public static final RString DEFAULT_摘要１２ = new RString("Data");
+    public static final RString DEFAULT_摘要１３ = new RString("Data");
+    public static final RString DEFAULT_摘要１４ = new RString("Data");
+    public static final RString DEFAULT_摘要１５ = new RString("Data");
+    public static final RString DEFAULT_摘要１６ = new RString("Data");
+    public static final RString DEFAULT_摘要１７ = new RString("Data");
+    public static final RString DEFAULT_摘要１８ = new RString("Data");
+    public static final RString DEFAULT_摘要１９ = new RString("Data");
+    public static final RString DEFAULT_摘要２０ = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -66,6 +64,7 @@ public final class DbT3041ShokanTokuteiShinryohiEntityGenerator {
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setJunjiNo(DEFAULT_順次番号);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShobyoName(DEFAULT_傷病名);
         entity.setShidoKanriryoTanisu(DEFAULT_指導管理料等単位数);
         entity.setTanjunXsenTanisu(DEFAULT_単純エックス線単位数);

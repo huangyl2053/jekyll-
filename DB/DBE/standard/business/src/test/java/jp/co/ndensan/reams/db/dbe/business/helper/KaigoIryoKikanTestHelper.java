@@ -6,21 +6,22 @@ package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urc.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyuCodeValue;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubunCodeValue;
-import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryoKikanEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
+import jp.co.ndensan.reams.ur.urz.definition.core.code.IryoKikanIdoJiyuCodeValue;
+import jp.co.ndensan.reams.ur.urz.definition.core.code.KaiinKubunCodeValue;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.entity.db.basic.iryokikan.UrT0516IryoKikanEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * 主治医医療機関関連のテストの補助クラスです。

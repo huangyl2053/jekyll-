@@ -2,10 +2,10 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.NinshoshaCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004KaigoShiharaiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7004KaigoShiharaiJoho");
@@ -36,21 +36,20 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private KamokuCode kamokuCode;
     @PrimaryKey
     private FlexibleDate ketteiYMD;
     private HihokenshaNo hihokenshaNo;
+    private LasdecCode shichosonCode;
     private RString shiharaiHohoKubun;
     private Code madoguchiShiharaiBashoCode;
     private YMDHM madoguchiShiharaiKaishiYMDHM;
     private YMDHM madoguchiShiharaiShuryoYMDHM;
     private FlexibleDate furikomiYoteiYMD;
     private int shiharaiKingaku;
-    private Code shubetsuCode;
+    private Code syubetsuCode;
     private Code yotoKubunCode;
     private FlexibleDate ninshoYMD1;
     private NinshoshaCode ninshoshaCode1;
@@ -58,7 +57,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     private NinshoshaCode ninshoshaCode2;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -67,7 +66,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -76,7 +75,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -85,7 +84,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -94,7 +93,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -103,306 +102,322 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 識別コードのgetメソッドです。
+     * <br/>
+     * <br/>口座ＤＢ上の識別コード
      *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * 識別コードのsetメソッドです。
+     * <br/>
+     * <br/>口座ＤＢ上の識別コード
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getKamokuCode
+     * 科目コードのgetメソッドです。
+     * <br/>
+     * <br/>支払単位の科目：高額サ・福祉用具・住宅改修など
      *
-     * @return kamokuCode
+     * @return 科目コード
      */
     public KamokuCode getKamokuCode() {
         return kamokuCode;
     }
 
     /**
-     * setKamokuCode
+     * 科目コードのsetメソッドです。
+     * <br/>
+     * <br/>支払単位の科目：高額サ・福祉用具・住宅改修など
      *
-     * @param kamokuCode kamokuCode
+     * @param kamokuCode 科目コード
      */
     public void setKamokuCode(KamokuCode kamokuCode) {
         this.kamokuCode = kamokuCode;
     }
 
     /**
-     * getKetteiYMD
+     * 決定年月日のgetメソッドです。
      *
-     * @return ketteiYMD
+     * @return 決定年月日
      */
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
 
     /**
-     * setKetteiYMD
+     * 決定年月日のsetメソッドです。
      *
-     * @param ketteiYMD ketteiYMD
+     * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
         this.ketteiYMD = ketteiYMD;
     }
 
     /**
-     * getHihokenshaNo
+     * 被保険者番号のgetメソッドです。
      *
-     * @return hihokenshaNo
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getShiharaiHohoKubun
+     * 市町村コードのgetメソッドです。
      *
-     * @return shiharaiHohoKubun
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 支払方法区分のgetメソッドです。
+     * <br/>
+     * <br/>窓口・口座
+     *
+     * @return 支払方法区分
      */
     public RString getShiharaiHohoKubun() {
         return shiharaiHohoKubun;
     }
 
     /**
-     * setShiharaiHohoKubun
+     * 支払方法区分のsetメソッドです。
+     * <br/>
+     * <br/>窓口・口座
      *
-     * @param shiharaiHohoKubun shiharaiHohoKubun
+     * @param shiharaiHohoKubun 支払方法区分
      */
     public void setShiharaiHohoKubun(RString shiharaiHohoKubun) {
         this.shiharaiHohoKubun = shiharaiHohoKubun;
     }
 
     /**
-     * getMadoguchiShiharaiBashoCode
+     * 窓口支払場所コードのgetメソッドです。
+     * <br/>
+     * <br/>各市町村の窓口
      *
-     * @return madoguchiShiharaiBashoCode
+     * @return 窓口支払場所コード
      */
     public Code getMadoguchiShiharaiBashoCode() {
         return madoguchiShiharaiBashoCode;
     }
 
     /**
-     * setMadoguchiShiharaiBashoCode
+     * 窓口支払場所コードのsetメソッドです。
+     * <br/>
+     * <br/>各市町村の窓口
      *
-     * @param madoguchiShiharaiBashoCode madoguchiShiharaiBashoCode
+     * @param madoguchiShiharaiBashoCode 窓口支払場所コード
      */
     public void setMadoguchiShiharaiBashoCode(Code madoguchiShiharaiBashoCode) {
         this.madoguchiShiharaiBashoCode = madoguchiShiharaiBashoCode;
     }
 
     /**
-     * getMadoguchiShiharaiKaishiYMDHM
+     * 窓口支払開始年月日時分のgetメソッドです。
      *
-     * @return madoguchiShiharaiKaishiYMDHM
+     * @return 窓口支払開始年月日時分
      */
     public YMDHM getMadoguchiShiharaiKaishiYMDHM() {
         return madoguchiShiharaiKaishiYMDHM;
     }
 
     /**
-     * setMadoguchiShiharaiKaishiYMDHM
+     * 窓口支払開始年月日時分のsetメソッドです。
      *
-     * @param madoguchiShiharaiKaishiYMDHM madoguchiShiharaiKaishiYMDHM
+     * @param madoguchiShiharaiKaishiYMDHM 窓口支払開始年月日時分
      */
     public void setMadoguchiShiharaiKaishiYMDHM(YMDHM madoguchiShiharaiKaishiYMDHM) {
         this.madoguchiShiharaiKaishiYMDHM = madoguchiShiharaiKaishiYMDHM;
     }
 
     /**
-     * getMadoguchiShiharaiShuryoYMDHM
+     * 窓口支払終了年月日時分のgetメソッドです。
      *
-     * @return madoguchiShiharaiShuryoYMDHM
+     * @return 窓口支払終了年月日時分
      */
     public YMDHM getMadoguchiShiharaiShuryoYMDHM() {
         return madoguchiShiharaiShuryoYMDHM;
     }
 
     /**
-     * setMadoguchiShiharaiShuryoYMDHM
+     * 窓口支払終了年月日時分のsetメソッドです。
      *
-     * @param madoguchiShiharaiShuryoYMDHM madoguchiShiharaiShuryoYMDHM
+     * @param madoguchiShiharaiShuryoYMDHM 窓口支払終了年月日時分
      */
     public void setMadoguchiShiharaiShuryoYMDHM(YMDHM madoguchiShiharaiShuryoYMDHM) {
         this.madoguchiShiharaiShuryoYMDHM = madoguchiShiharaiShuryoYMDHM;
     }
 
     /**
-     * getFurikomiYoteiYMD
+     * 振込予定年月日のgetメソッドです。
      *
-     * @return furikomiYoteiYMD
+     * @return 振込予定年月日
      */
     public FlexibleDate getFurikomiYoteiYMD() {
         return furikomiYoteiYMD;
     }
 
     /**
-     * setFurikomiYoteiYMD
+     * 振込予定年月日のsetメソッドです。
      *
-     * @param furikomiYoteiYMD furikomiYoteiYMD
+     * @param furikomiYoteiYMD 振込予定年月日
      */
     public void setFurikomiYoteiYMD(FlexibleDate furikomiYoteiYMD) {
         this.furikomiYoteiYMD = furikomiYoteiYMD;
     }
 
     /**
-     * getShiharaiKingaku
+     * 支払金額のgetメソッドです。
      *
-     * @return shiharaiKingaku
+     * @return 支払金額
      */
     public int getShiharaiKingaku() {
         return shiharaiKingaku;
     }
 
     /**
-     * setShiharaiKingaku
+     * 支払金額のsetメソッドです。
      *
-     * @param shiharaiKingaku shiharaiKingaku
+     * @param shiharaiKingaku 支払金額
      */
     public void setShiharaiKingaku(int shiharaiKingaku) {
         this.shiharaiKingaku = shiharaiKingaku;
     }
 
     /**
-     * getShubetsuCode
+     * 種別コードのgetメソッドです。
      *
-     * @return shubetsuCode
+     * @return 種別コード
      */
-    public Code getShubetsuCode() {
-        return shubetsuCode;
+    public Code getSyubetsuCode() {
+        return syubetsuCode;
     }
 
     /**
-     * setShubetsuCode
+     * 種別コードのsetメソッドです。
      *
-     * @param shubetsuCode shubetsuCode
+     * @param syubetsuCode 種別コード
      */
-    public void setShubetsuCode(Code shubetsuCode) {
-        this.shubetsuCode = shubetsuCode;
+    public void setSyubetsuCode(Code syubetsuCode) {
+        this.syubetsuCode = syubetsuCode;
     }
 
     /**
-     * getYotoKubunCode
+     * 用途区分コードのgetメソッドです。
      *
-     * @return yotoKubunCode
+     * @return 用途区分コード
      */
     public Code getYotoKubunCode() {
         return yotoKubunCode;
     }
 
     /**
-     * setYotoKubunCode
+     * 用途区分コードのsetメソッドです。
      *
-     * @param yotoKubunCode yotoKubunCode
+     * @param yotoKubunCode 用途区分コード
      */
     public void setYotoKubunCode(Code yotoKubunCode) {
         this.yotoKubunCode = yotoKubunCode;
     }
 
     /**
-     * getNinshoYMD1
+     * 認証日１のgetメソッドです。
      *
-     * @return ninshoYMD1
+     * @return 認証日１
      */
     public FlexibleDate getNinshoYMD1() {
         return ninshoYMD1;
     }
 
     /**
-     * setNinshoYMD1
+     * 認証日１のsetメソッドです。
      *
-     * @param ninshoYMD1 ninshoYMD1
+     * @param ninshoYMD1 認証日１
      */
     public void setNinshoYMD1(FlexibleDate ninshoYMD1) {
         this.ninshoYMD1 = ninshoYMD1;
     }
 
     /**
-     * getNinshoshaCode1
+     * 認証者コード１のgetメソッドです。
      *
-     * @return ninshoshaCode1
+     * @return 認証者コード１
      */
     public NinshoshaCode getNinshoshaCode1() {
         return ninshoshaCode1;
     }
 
     /**
-     * setNinshoshaCode1
+     * 認証者コード１のsetメソッドです。
      *
-     * @param ninshoshaCode1 ninshoshaCode1
+     * @param ninshoshaCode1 認証者コード１
      */
     public void setNinshoshaCode1(NinshoshaCode ninshoshaCode1) {
         this.ninshoshaCode1 = ninshoshaCode1;
     }
 
     /**
-     * getNinshoYMD2
+     * 認証日２のgetメソッドです。
      *
-     * @return ninshoYMD2
+     * @return 認証日２
      */
     public FlexibleDate getNinshoYMD2() {
         return ninshoYMD2;
     }
 
     /**
-     * setNinshoYMD2
+     * 認証日２のsetメソッドです。
      *
-     * @param ninshoYMD2 ninshoYMD2
+     * @param ninshoYMD2 認証日２
      */
     public void setNinshoYMD2(FlexibleDate ninshoYMD2) {
         this.ninshoYMD2 = ninshoYMD2;
     }
 
     /**
-     * getNinshoshaCode2
+     * 認証者コード２のgetメソッドです。
      *
-     * @return ninshoshaCode2
+     * @return 認証者コード２
      */
     public NinshoshaCode getNinshoshaCode2() {
         return ninshoshaCode2;
     }
 
     /**
-     * setNinshoshaCode2
+     * 認証者コード２のsetメソッドです。
      *
-     * @param ninshoshaCode2 ninshoshaCode2
+     * @param ninshoshaCode2 認証者コード２
      */
     public void setNinshoshaCode2(NinshoshaCode ninshoshaCode2) {
         this.ninshoshaCode2 = ninshoshaCode2;
@@ -417,9 +432,6 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     @Override
     public boolean equalsPrimaryKeys(DbT7004KaigoShiharaiJohoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
@@ -439,18 +451,18 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      */
     @Override
     public void shallowCopy(DbT7004KaigoShiharaiJohoEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.shikibetsuCode = entity.shikibetsuCode;
         this.kamokuCode = entity.kamokuCode;
         this.ketteiYMD = entity.ketteiYMD;
         this.hihokenshaNo = entity.hihokenshaNo;
+        this.shichosonCode = entity.shichosonCode;
         this.shiharaiHohoKubun = entity.shiharaiHohoKubun;
         this.madoguchiShiharaiBashoCode = entity.madoguchiShiharaiBashoCode;
         this.madoguchiShiharaiKaishiYMDHM = entity.madoguchiShiharaiKaishiYMDHM;
         this.madoguchiShiharaiShuryoYMDHM = entity.madoguchiShiharaiShuryoYMDHM;
         this.furikomiYoteiYMD = entity.furikomiYoteiYMD;
         this.shiharaiKingaku = entity.shiharaiKingaku;
-        this.shubetsuCode = entity.shubetsuCode;
+        this.syubetsuCode = entity.syubetsuCode;
         this.yotoKubunCode = entity.yotoKubunCode;
         this.ninshoYMD1 = entity.ninshoYMD1;
         this.ninshoshaCode1 = entity.ninshoshaCode1;
@@ -465,7 +477,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, shikibetsuCode, kamokuCode, ketteiYMD, hihokenshaNo, shiharaiHohoKubun, madoguchiShiharaiBashoCode, madoguchiShiharaiKaishiYMDHM, madoguchiShiharaiShuryoYMDHM, furikomiYoteiYMD, shiharaiKingaku, shubetsuCode, yotoKubunCode, ninshoYMD1, ninshoshaCode1, ninshoYMD2, ninshoshaCode2);
+        return super.toMd5(shikibetsuCode, kamokuCode, ketteiYMD, hihokenshaNo, shichosonCode, shiharaiHohoKubun, madoguchiShiharaiBashoCode, madoguchiShiharaiKaishiYMDHM, madoguchiShiharaiShuryoYMDHM, furikomiYoteiYMD, shiharaiKingaku, syubetsuCode, yotoKubunCode, ninshoYMD1, ninshoshaCode1, ninshoYMD2, ninshoshaCode2);
     }
 
 // </editor-fold>

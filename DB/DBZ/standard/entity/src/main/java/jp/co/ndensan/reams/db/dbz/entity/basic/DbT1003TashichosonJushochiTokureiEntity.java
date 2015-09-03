@@ -4,8 +4,8 @@ import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoTatokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,7 +41,6 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
-    @PrimaryKey
     private LasdecCode shichosonCode;
     private KaigoTatokuTekiyoJiyu tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;

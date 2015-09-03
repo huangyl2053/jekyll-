@@ -10,8 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.YukoShinsakaiIinInputGuideDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.dgYukoShinsakaiIin_Row;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
-import jp.co.ndensan.reams.db.dbe.realservice.ShinsakaiIinManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -41,13 +39,13 @@ public class YukoShinsakaiIinInputGuide {
 
     private void setGridData(DataGrid<dgYukoShinsakaiIin_Row> grid) {
         List<dgYukoShinsakaiIin_Row> dataSource = new ArrayList<>();
-        ShinsakaiIinManager manager = new ShinsakaiIinManager();
+        // TODO n8300姜　ビルドエラー回避のために暫定対応
+//        ShinsakaiIinManager manager = new ShinsakaiIinManager();
 
-        ShinsakaiIinList shinsakaiIinList = manager.get有効審査会委員List();
-        for (ShinsakaiIin shinsakaiIin : shinsakaiIinList) {
-            dataSource.add(toShinsakaiIinRow(shinsakaiIin));
-        }
-
+//        ShinsakaiIinList shinsakaiIinList = manager.get有効審査会委員List();
+//        for (ShinsakaiIin shinsakaiIin : shinsakaiIinList) {
+//            dataSource.add(toShinsakaiIinRow(shinsakaiIin));
+//        }
         grid.setDataSource(dataSource);
     }
 

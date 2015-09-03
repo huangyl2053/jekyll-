@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
@@ -44,7 +42,7 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
      * @return 合併情報リスト
      */
     @Transaction
-    public IItemList<IKoikiKoseiShichoson> select(ITrueFalseCriteria 検索条件) {
+    public IItemList<DbT7051KoseiShichosonMasterEntity> select(ITrueFalseCriteria 検索条件) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7051KoseiShichosonMasterEntity> entityList = accessor.
                 select().
@@ -52,15 +50,7 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
                 where(検索条件).
                 order(by(kanyuYMD, Order.ASC)).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
-        return getModelList(entityList);
-    }
-
-    private IItemList<IKoikiKoseiShichoson> getModelList(List<DbT7051KoseiShichosonMasterEntity> entityList) {
-        List<IKoikiKoseiShichoson> list = new ArrayList<>();
-        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
-            list.add(new KoikiKoseiShichosonModel(entity));
-        }
-        return ItemList.of(list);
+        return ItemList.of(entityList);
     }
 
     @Override

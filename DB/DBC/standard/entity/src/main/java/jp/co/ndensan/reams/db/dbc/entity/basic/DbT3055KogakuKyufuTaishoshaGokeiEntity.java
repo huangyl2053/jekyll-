@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<DbT3055KogakuKyufuTaishoshaGokeiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3055KogakuKyufuTaishoshaGokei");
 
@@ -33,7 +34,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private Decimal serviceHiyoGokeiGakuGokei;
     private Decimal riyoshaFutanGakuGokei;
     private Decimal santeiKijunGaku;
@@ -49,7 +50,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +59,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +68,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,17 +77,16 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +95,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -104,7 +104,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -113,7 +113,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -122,7 +122,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -131,25 +131,25 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * サービス費用合計額合計のgetメソッドです。
-     * 
+     *
      * @return サービス費用合計額合計
      */
     public Decimal getServiceHiyoGokeiGakuGokei() {
@@ -158,7 +158,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * サービス費用合計額合計のsetメソッドです。
-     * 
+     *
      * @param serviceHiyoGokeiGakuGokei サービス費用合計額合計
      */
     public void setServiceHiyoGokeiGakuGokei(Decimal serviceHiyoGokeiGakuGokei) {
@@ -167,7 +167,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 利用者負担額合計のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額合計
      */
     public Decimal getRiyoshaFutanGakuGokei() {
@@ -176,7 +176,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 利用者負担額合計のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutanGakuGokei 利用者負担額合計
      */
     public void setRiyoshaFutanGakuGokei(Decimal riyoshaFutanGakuGokei) {
@@ -185,7 +185,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 算定基準額のgetメソッドです。
-     * 
+     *
      * @return 算定基準額
      */
     public Decimal getSanteiKijunGaku() {
@@ -194,7 +194,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 算定基準額のsetメソッドです。
-     * 
+     *
      * @param santeiKijunGaku 算定基準額
      */
     public void setSanteiKijunGaku(Decimal santeiKijunGaku) {
@@ -203,7 +203,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 支払済金額合計のgetメソッドです。
-     * 
+     *
      * @return 支払済金額合計
      */
     public Decimal getShiharaiSumiKingakuGokei() {
@@ -212,7 +212,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 支払済金額合計のsetメソッドです。
-     * 
+     *
      * @param shiharaiSumiKingakuGokei 支払済金額合計
      */
     public void setShiharaiSumiKingakuGokei(Decimal shiharaiSumiKingakuGokei) {
@@ -221,7 +221,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 高額支給額のgetメソッドです。
-     * 
+     *
      * @return 高額支給額
      */
     public Decimal getKogakuShikyuGaku() {
@@ -230,7 +230,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 高額支給額のsetメソッドです。
-     * 
+     *
      * @param KogakuShikyuGaku 高額支給額
      */
     public void setKogakuShikyuGaku(Decimal KogakuShikyuGaku) {
@@ -239,7 +239,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 対象者受取年月のgetメソッドです。
-     * 
+     *
      * @return 対象者受取年月
      */
     public FlexibleYearMonth getTashoshaUketoriYM() {
@@ -248,7 +248,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 対象者受取年月のsetメソッドです。
-     * 
+     *
      * @param tashoshaUketoriYM 対象者受取年月
      */
     public void setTashoshaUketoriYM(FlexibleYearMonth tashoshaUketoriYM) {
@@ -257,7 +257,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 対象者判定審査年月のgetメソッドです。
-     * 
+     *
      * @return 対象者判定審査年月
      */
     public FlexibleYearMonth getTaishoshaHanteiShinsaYM() {
@@ -266,7 +266,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 対象者判定審査年月のsetメソッドです。
-     * 
+     *
      * @param taishoshaHanteiShinsaYM 対象者判定審査年月
      */
     public void setTaishoshaHanteiShinsaYM(FlexibleYearMonth taishoshaHanteiShinsaYM) {
@@ -275,7 +275,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 世帯集約番号のgetメソッドです。
-     * 
+     *
      * @return 世帯集約番号
      */
     public RString getSetaiShuyakuNo() {
@@ -284,7 +284,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * 世帯集約番号のsetメソッドです。
-     * 
+     *
      * @param setaiShuyakuNo 世帯集約番号
      */
     public void setSetaiShuyakuNo(RString setaiShuyakuNo) {
@@ -295,7 +295,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 境界層対象者フラグのgetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @return 境界層対象者フラグ
      */
     public boolean getKyokaisoTaishoshaFlag() {
@@ -306,7 +306,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 境界層対象者フラグのsetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @param kyokaisoTaishoshaFlag 境界層対象者フラグ
      */
     public void setKyokaisoTaishoshaFlag(boolean kyokaisoTaishoshaFlag) {
@@ -317,7 +317,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 社会福祉法人軽減対象フラグのgetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @return 社会福祉法人軽減対象フラグ
      */
     public boolean getHojinKeigenTaishoFlag() {
@@ -328,7 +328,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 社会福祉法人軽減対象フラグのsetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @param hojinKeigenTaishoFlag 社会福祉法人軽減対象フラグ
      */
     public void setHojinKeigenTaishoFlag(boolean hojinKeigenTaishoFlag) {
@@ -339,7 +339,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 高額対象外フラグのgetメソッドです。
      * <br/>
      * <br/>True:対象外,False:対象
-     * 
+     *
      * @return 高額対象外フラグ
      */
     public boolean getKogakuTaishoGaiFlag() {
@@ -350,7 +350,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 高額対象外フラグのsetメソッドです。
      * <br/>
      * <br/>True:対象外,False:対象
-     * 
+     *
      * @param kogakuTaishoGaiFlag 高額対象外フラグ
      */
     public void setKogakuTaishoGaiFlag(boolean kogakuTaishoGaiFlag) {
@@ -361,7 +361,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 自動償還対象フラグのgetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @return 自動償還対象フラグ
      */
     public boolean getJidoShokanTaishoFlag() {
@@ -372,7 +372,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
      * 自動償還対象フラグのsetメソッドです。
      * <br/>
      * <br/>True:対象,False:対象外
-     * 
+     *
      * @param jidoShokanTaishoFlag 自動償還対象フラグ
      */
     public void setJidoShokanTaishoFlag(boolean jidoShokanTaishoFlag) {
@@ -381,9 +381,9 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT3055KogakuKyufuTaishoshaGokeiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3055KogakuKyufuTaishoshaGokeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -427,6 +427,7 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -435,5 +436,4 @@ public class DbT3055KogakuKyufuTaishoshaGokeiEntity extends DbTableEntityBase<Db
     }
 
 // </editor-fold>
-
 }

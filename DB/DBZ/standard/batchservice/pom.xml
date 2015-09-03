@@ -24,6 +24,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>framework</artifactId>
             <version>1.0.0</version>

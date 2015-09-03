@@ -1,8 +1,8 @@
-﻿kokanJohoShikibetsuNo,DbUDD009KokanShikibetsuNo,DbUDD009KokanShikibetsuNo,,,,,交換情報識別番号,A
-inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,,,,,入力識別番号,A
+﻿kokanJohoShikibetsuNo,DbUDD009KokanShikibetsuNo,KokanShikibetsuNo,,,,,交換情報識別番号,A
+inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,NyuryokuShikibetsuNo,,,,,入力識別番号,A
 recodeShubetsuCode,varchar,RString,,,,,レコード種別コード,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 toshiNo,varchar,RString,,,,,通し番号,A
 kyufuSakuseiKubunCode,varchar,RString,,,,,給付実績情報作成区分コード,A

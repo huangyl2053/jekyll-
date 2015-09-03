@@ -5,21 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
 
+import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.台帳種別の列を;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.施設種類の列を;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示Heightサイズ;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示widthサイズ;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
-import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -94,11 +94,9 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public void load(ShikibetsuCode 識別コード) {
 
-        ShisetsuNyutaishoTokureiTaishoRelateManager manager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
-
-        IItemList<ShisetsuNyutaishoRelateModel> list = manager.get介護保険施設入退所一覧By主キー1(識別コード);
-
-        set施設入退所履歴(list);
+//        ShisetsuNyutaishoTokureiTaishoRelateManager manager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
+//        IItemList<DbT1004ShisetsuNyutaishoEntity> list = manager.get介護保険施設入退所一覧By主キー1(識別コード);
+//        set施設入退所履歴(list);
     }
 
     /**
@@ -124,9 +122,9 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
     }
 
-    public void update施設入退所履歴(ShisetsuNyutaishoRelateModel model) {
+    public void update施設入退所履歴(DbT1004ShisetsuNyutaishoEntity model) {
         RString rowState = div.getInputMode();
-        IItemList<ShisetsuNyutaishoRelateModel> models = get施設入退所履歴();
+        IItemList<DbT1004ShisetsuNyutaishoEntity> models = get施設入退所履歴();
         switch (ViewExecutionStatus.toValue(rowState)) {
             case Add:
                 models = models.added(model);
@@ -142,11 +140,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         set施設入退所履歴(models);
     }
 
-    private IItemList<ShisetsuNyutaishoRelateModel> update履歴(final ShisetsuNyutaishoRirekiKanriDiv d, IConsumer<ShisetsuNyutaishoRelateModel> consumer) {
+    private IItemList<DbT1004ShisetsuNyutaishoEntity> update履歴(final ShisetsuNyutaishoRirekiKanriDiv d, IConsumer<DbT1004ShisetsuNyutaishoEntity> consumer) {
         int rowIndex = Integer.valueOf(d.getSelectRow().toString()).intValue();
         dgShisetsuNyutaishoRireki_Row 更新行 = div.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
 
-        IItemList<ShisetsuNyutaishoRelateModel> models = get施設入退所履歴();
+        IItemList<DbT1004ShisetsuNyutaishoEntity> models = get施設入退所履歴();
         models.filter(ShisetsuNyutaishoMapper.createKey(更新行))
                 .findJustOne()
                 .ifPresent(consumer);
@@ -162,21 +160,21 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         dgShisetsuNyutaishoRireki_Row selRow = clickedItem;
         div.setSelectRow(new RString(String.valueOf(selRow.getId())));
 
-        ShisetsuNyutaishoRelateModel model = new ShisetsuNyutaishoRelateModel();
+        DbT1004ShisetsuNyutaishoEntity model = new DbT1004ShisetsuNyutaishoEntity();
 
-        model.get介護保険施設入退所モデル().set入所年月日(selRow.getNyushoDate().getValue());
-        model.get介護保険施設入退所モデル().set退所年月日(selRow.getTaishoDate().getValue());
-        model.get介護保険施設入退所モデル().set台帳種別(new RString(selRow.getDaichoShubetsuKey().toString()));
-        model.get介護保険施設入退所モデル().set入所施設種類(new RString(selRow.getShisetsuShuruiKey().toString()));
-        model.get介護保険施設入退所モデル().set入所施設コード(new RString(selRow.getShisetsuCode().toString()));
-        model.setJigyoshaMeisho(new RString(selRow.getShisetsuMeisho().toString()));
+        model.setNyushoYMD(selRow.getNyushoDate().getValue());
+        model.setTaishoYMD(selRow.getTaishoDate().getValue());
+        model.setDaichoShubetsu(new RString(selRow.getDaichoShubetsuKey().toString()));
+        model.setNyushoShisetsuShurui(new RString(selRow.getShisetsuShuruiKey().toString()));
+        model.setNyushoShisetsuCode(new JigyoshaNo(selRow.getShisetsuCode().toString()));
+//        model.setJigyoshaMeisho(new RString(selRow.getShisetsuMeisho().toString()));
 
-        div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(model.get介護保険施設入退所モデル().get入所年月日());
-        div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(model.get介護保険施設入退所モデル().get退所年月日());
-        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(model.get介護保険施設入退所モデル().get台帳種別());
-        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(model.get介護保険施設入退所モデル().get入所施設種類());
-        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set入所施設コード(model.get介護保険施設入退所モデル().get入所施設コード());
-        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設名称(model.getJigyoshaMeisho());
+        div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(model.getNyushoYMD());
+        div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(model.getTaishoYMD());
+        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(model.getDaichoShubetsu());
+        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(model.getNyushoShisetsuShurui());
+        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set入所施設コード(model.getNyushoShisetsuCode().value());
+//        div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設名称(model.getJigyoshaMeisho());
     }
 
     /**
@@ -184,8 +182,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<ShisetsuNyutaishoRelateModel> get施設入退所履歴() {
-        IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴List
+    public IItemList<DbT1004ShisetsuNyutaishoEntity> get施設入退所履歴() {
+        IItemList<DbT1004ShisetsuNyutaishoEntity> 施設入退所履歴List
                 = PanelSessionAccessor.get(div, PANEL_SESSION_ACCESSOR_KEY, ItemList.class);
         return 施設入退所履歴List;
     }
@@ -195,7 +193,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      *
      * @param 施設入退所履歴List 施設入退所履歴List
      */
-    public void set施設入退所履歴(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴List) {
+    public void set施設入退所履歴(IItemList<DbT1004ShisetsuNyutaishoEntity> 施設入退所履歴List) {
         PanelSessionAccessor.put(div, PANEL_SESSION_ACCESSOR_KEY, ItemList.newItemList(施設入退所履歴List));
 
         施設入退所履歴List = 施設入退所履歴List.sorted(ShisetsuNyutaishoModelComparators.orderBy入所年月日.desc());
@@ -208,8 +206,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @return 施設入退所情報に変更が存在するならtrue
      */
     public boolean hasChanged() {
-        IItemList<ShisetsuNyutaishoRelateModel> nyutaishoList = get施設入退所履歴();
-        for (ShisetsuNyutaishoRelateModel nyutaisho : nyutaishoList) {
+        IItemList<DbT1004ShisetsuNyutaishoEntity> nyutaishoList = get施設入退所履歴();
+        for (DbT1004ShisetsuNyutaishoEntity nyutaisho : nyutaishoList) {
             if (nyutaisho.getState() == EntityDataState.Unchanged) {
                 continue;
             }

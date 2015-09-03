@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * tplKubunShikyuGendogaku のクラスファイル 
- * 
+ * tplKubunShikyuGendogaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplKubunShikyuGendogakuDiv extends TablePanel {
@@ -23,6 +22,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("cel11")
     private cel11AttplKubunShikyuGendogaku cel11;
     @JsonProperty("cel12")
@@ -230,7 +230,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel11")
     private void setCel11(cel11AttplKubunShikyuGendogaku cel11) {
-        this.cel11=cel11;
+        this.cel11 = cel11;
     }
 
     @JsonProperty("cel12")
@@ -240,7 +240,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel12")
     private void setCel12(cel12AttplKubunShikyuGendogaku cel12) {
-        this.cel12=cel12;
+        this.cel12 = cel12;
     }
 
     @JsonProperty("cel22")
@@ -250,7 +250,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel22")
     private void setCel22(cel22AttplKubunShikyuGendogaku cel22) {
-        this.cel22=cel22;
+        this.cel22 = cel22;
     }
 
     @JsonProperty("cel23")
@@ -260,7 +260,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel23")
     private void setCel23(cel23AttplKubunShikyuGendogaku cel23) {
-        this.cel23=cel23;
+        this.cel23 = cel23;
     }
 
     @JsonProperty("cel31")
@@ -270,7 +270,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel31")
     private void setCel31(cel31AttplKubunShikyuGendogaku cel31) {
-        this.cel31=cel31;
+        this.cel31 = cel31;
     }
 
     @JsonProperty("cel32")
@@ -280,7 +280,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel32")
     private void setCel32(cel32AttplKubunShikyuGendogaku cel32) {
-        this.cel32=cel32;
+        this.cel32 = cel32;
     }
 
     @JsonProperty("cel33")
@@ -290,7 +290,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel33")
     private void setCel33(cel33AttplKubunShikyuGendogaku cel33) {
-        this.cel33=cel33;
+        this.cel33 = cel33;
     }
 
     @JsonProperty("cel17")
@@ -300,7 +300,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel17")
     private void setCel17(cel17AttplKubunShikyuGendogaku cel17) {
-        this.cel17=cel17;
+        this.cel17 = cel17;
     }
 
     @JsonProperty("cel18")
@@ -310,7 +310,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel18")
     private void setCel18(cel18AttplKubunShikyuGendogaku cel18) {
-        this.cel18=cel18;
+        this.cel18 = cel18;
     }
 
     @JsonProperty("cel24")
@@ -320,7 +320,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel24")
     private void setCel24(cel24AttplKubunShikyuGendogaku cel24) {
-        this.cel24=cel24;
+        this.cel24 = cel24;
     }
 
     @JsonProperty("cel25")
@@ -330,7 +330,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel25")
     private void setCel25(cel25AttplKubunShikyuGendogaku cel25) {
-        this.cel25=cel25;
+        this.cel25 = cel25;
     }
 
     @JsonProperty("cel26")
@@ -340,7 +340,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel26")
     private void setCel26(cel26AttplKubunShikyuGendogaku cel26) {
-        this.cel26=cel26;
+        this.cel26 = cel26;
     }
 
     @JsonProperty("cel28")
@@ -350,7 +350,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel28")
     private void setCel28(cel28AttplKubunShikyuGendogaku cel28) {
-        this.cel28=cel28;
+        this.cel28 = cel28;
     }
 
     @JsonProperty("cel29")
@@ -360,7 +360,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel29")
     private void setCel29(cel29AttplKubunShikyuGendogaku cel29) {
-        this.cel29=cel29;
+        this.cel29 = cel29;
     }
 
     @JsonProperty("cel34")
@@ -370,7 +370,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel34")
     private void setCel34(cel34AttplKubunShikyuGendogaku cel34) {
-        this.cel34=cel34;
+        this.cel34 = cel34;
     }
 
     @JsonProperty("cel35")
@@ -380,7 +380,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel35")
     private void setCel35(cel35AttplKubunShikyuGendogaku cel35) {
-        this.cel35=cel35;
+        this.cel35 = cel35;
     }
 
     @JsonProperty("cel36")
@@ -390,7 +390,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel36")
     private void setCel36(cel36AttplKubunShikyuGendogaku cel36) {
-        this.cel36=cel36;
+        this.cel36 = cel36;
     }
 
     @JsonProperty("cel37")
@@ -400,7 +400,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel37")
     private void setCel37(cel37AttplKubunShikyuGendogaku cel37) {
-        this.cel37=cel37;
+        this.cel37 = cel37;
     }
 
     @JsonProperty("cel38")
@@ -410,7 +410,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel38")
     private void setCel38(cel38AttplKubunShikyuGendogaku cel38) {
-        this.cel38=cel38;
+        this.cel38 = cel38;
     }
 
     @JsonProperty("cel39")
@@ -420,7 +420,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel39")
     private void setCel39(cel39AttplKubunShikyuGendogaku cel39) {
-        this.cel39=cel39;
+        this.cel39 = cel39;
     }
 
     @JsonProperty("cel41")
@@ -430,7 +430,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel41")
     private void setCel41(cel41AttplKubunShikyuGendogaku cel41) {
-        this.cel41=cel41;
+        this.cel41 = cel41;
     }
 
     @JsonProperty("cel42")
@@ -440,7 +440,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel42")
     private void setCel42(cel42AttplKubunShikyuGendogaku cel42) {
-        this.cel42=cel42;
+        this.cel42 = cel42;
     }
 
     @JsonProperty("cel43")
@@ -450,7 +450,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel43")
     private void setCel43(cel43AttplKubunShikyuGendogaku cel43) {
-        this.cel43=cel43;
+        this.cel43 = cel43;
     }
 
     @JsonProperty("cel44")
@@ -460,7 +460,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel44")
     private void setCel44(cel44AttplKubunShikyuGendogaku cel44) {
-        this.cel44=cel44;
+        this.cel44 = cel44;
     }
 
     @JsonProperty("cel45")
@@ -470,7 +470,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel45")
     private void setCel45(cel45AttplKubunShikyuGendogaku cel45) {
-        this.cel45=cel45;
+        this.cel45 = cel45;
     }
 
     @JsonProperty("cel46")
@@ -480,7 +480,7 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel46")
     private void setCel46(cel46AttplKubunShikyuGendogaku cel46) {
-        this.cel46=cel46;
+        this.cel46 = cel46;
     }
 
     @JsonProperty("cel47")
@@ -490,16 +490,18 @@ public class tplKubunShikyuGendogakuDiv extends TablePanel {
 
     @JsonProperty("cel47")
     private void setCel47(cel47AttplKubunShikyuGendogaku cel47) {
-        this.cel47=cel47;
+        this.cel47 = cel47;
     }
 
 }
+
 /**
- * cel11 のクラスファイル 
- * 
+ * cel11 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel11AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblKubun")
     private Label lblKubun;
 
@@ -510,16 +512,18 @@ class cel11AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblKubun")
     public void setLblKubun(Label lblKubun) {
-        this.lblKubun=lblKubun;
+        this.lblKubun = lblKubun;
     }
 
 }
+
 /**
- * cel12 のクラスファイル 
- * 
+ * cel12 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel12AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblKyotakuKaigo")
     private Label lblKyotakuKaigo;
 
@@ -530,16 +534,18 @@ class cel12AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblKyotakuKaigo")
     public void setLblKyotakuKaigo(Label lblKyotakuKaigo) {
-        this.lblKyotakuKaigo=lblKyotakuKaigo;
+        this.lblKyotakuKaigo = lblKyotakuKaigo;
     }
 
 }
+
 /**
- * cel22 のクラスファイル 
- * 
+ * cel22 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel22AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYokaigo1")
     private Label lblYokaigo1;
 
@@ -550,16 +556,18 @@ class cel22AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYokaigo1")
     public void setLblYokaigo1(Label lblYokaigo1) {
-        this.lblYokaigo1=lblYokaigo1;
+        this.lblYokaigo1 = lblYokaigo1;
     }
 
 }
+
 /**
- * cel23 のクラスファイル 
- * 
+ * cel23 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel23AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYokaigo2")
     private Label lblYokaigo2;
 
@@ -570,16 +578,18 @@ class cel23AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYokaigo2")
     public void setLblYokaigo2(Label lblYokaigo2) {
-        this.lblYokaigo2=lblYokaigo2;
+        this.lblYokaigo2 = lblYokaigo2;
     }
 
 }
+
 /**
- * cel31 のクラスファイル 
- * 
+ * cel31 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel31AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblShikyuGendoKijungaku")
     private Label lblShikyuGendoKijungaku;
 
@@ -590,16 +600,18 @@ class cel31AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblShikyuGendoKijungaku")
     public void setLblShikyuGendoKijungaku(Label lblShikyuGendoKijungaku) {
-        this.lblShikyuGendoKijungaku=lblShikyuGendoKijungaku;
+        this.lblShikyuGendoKijungaku = lblShikyuGendoKijungaku;
     }
 
 }
+
 /**
- * cel32 のクラスファイル 
- * 
+ * cel32 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel32AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYokaigo1")
     private TextBoxNum txtShikyuGendoKijungakuYokaigo1;
 
@@ -610,16 +622,18 @@ class cel32AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYokaigo1")
     public void setTxtShikyuGendoKijungakuYokaigo1(TextBoxNum txtShikyuGendoKijungakuYokaigo1) {
-        this.txtShikyuGendoKijungakuYokaigo1=txtShikyuGendoKijungakuYokaigo1;
+        this.txtShikyuGendoKijungakuYokaigo1 = txtShikyuGendoKijungakuYokaigo1;
     }
 
 }
+
 /**
- * cel33 のクラスファイル 
- * 
+ * cel33 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel33AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYokaigo2")
     private TextBoxNum txtShikyuGendoKijungakuYokaigo2;
 
@@ -630,16 +644,18 @@ class cel33AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYokaigo2")
     public void setTxtShikyuGendoKijungakuYokaigo2(TextBoxNum txtShikyuGendoKijungakuYokaigo2) {
-        this.txtShikyuGendoKijungakuYokaigo2=txtShikyuGendoKijungakuYokaigo2;
+        this.txtShikyuGendoKijungakuYokaigo2 = txtShikyuGendoKijungakuYokaigo2;
     }
 
 }
+
 /**
- * cel17 のクラスファイル 
- * 
+ * cel17 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel17AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblKyotakuShien")
     private Label lblKyotakuShien;
 
@@ -650,16 +666,18 @@ class cel17AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblKyotakuShien")
     public void setLblKyotakuShien(Label lblKyotakuShien) {
-        this.lblKyotakuShien=lblKyotakuShien;
+        this.lblKyotakuShien = lblKyotakuShien;
     }
 
 }
+
 /**
- * cel18 のクラスファイル 
- * 
+ * cel18 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel18AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblKaigoYobo")
     private Label lblKaigoYobo;
 
@@ -670,16 +688,18 @@ class cel18AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblKaigoYobo")
     public void setLblKaigoYobo(Label lblKaigoYobo) {
-        this.lblKaigoYobo=lblKaigoYobo;
+        this.lblKaigoYobo = lblKaigoYobo;
     }
 
 }
+
 /**
- * cel24 のクラスファイル 
- * 
+ * cel24 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel24AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYokaigo3")
     private Label lblYokaigo3;
 
@@ -690,16 +710,18 @@ class cel24AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYokaigo3")
     public void setLblYokaigo3(Label lblYokaigo3) {
-        this.lblYokaigo3=lblYokaigo3;
+        this.lblYokaigo3 = lblYokaigo3;
     }
 
 }
+
 /**
- * cel25 のクラスファイル 
- * 
+ * cel25 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel25AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYokaigo4")
     private Label lblYokaigo4;
 
@@ -710,16 +732,18 @@ class cel25AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYokaigo4")
     public void setLblYokaigo4(Label lblYokaigo4) {
-        this.lblYokaigo4=lblYokaigo4;
+        this.lblYokaigo4 = lblYokaigo4;
     }
 
 }
+
 /**
- * cel26 のクラスファイル 
- * 
+ * cel26 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel26AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYokaigo5")
     private Label lblYokaigo5;
 
@@ -730,16 +754,18 @@ class cel26AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYokaigo5")
     public void setLblYokaigo5(Label lblYokaigo5) {
-        this.lblYokaigo5=lblYokaigo5;
+        this.lblYokaigo5 = lblYokaigo5;
     }
 
 }
+
 /**
- * cel28 のクラスファイル 
- * 
+ * cel28 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel28AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYoshien1")
     private Label lblYoshien1;
 
@@ -750,16 +776,18 @@ class cel28AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYoshien1")
     public void setLblYoshien1(Label lblYoshien1) {
-        this.lblYoshien1=lblYoshien1;
+        this.lblYoshien1 = lblYoshien1;
     }
 
 }
+
 /**
- * cel29 のクラスファイル 
- * 
+ * cel29 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel29AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblYoshien2")
     private Label lblYoshien2;
 
@@ -770,16 +798,18 @@ class cel29AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblYoshien2")
     public void setLblYoshien2(Label lblYoshien2) {
-        this.lblYoshien2=lblYoshien2;
+        this.lblYoshien2 = lblYoshien2;
     }
 
 }
+
 /**
- * cel34 のクラスファイル 
- * 
+ * cel34 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel34AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYokaigo3")
     private TextBoxNum txtShikyuGendoKijungakuYokaigo3;
 
@@ -790,16 +820,18 @@ class cel34AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYokaigo3")
     public void setTxtShikyuGendoKijungakuYokaigo3(TextBoxNum txtShikyuGendoKijungakuYokaigo3) {
-        this.txtShikyuGendoKijungakuYokaigo3=txtShikyuGendoKijungakuYokaigo3;
+        this.txtShikyuGendoKijungakuYokaigo3 = txtShikyuGendoKijungakuYokaigo3;
     }
 
 }
+
 /**
- * cel35 のクラスファイル 
- * 
+ * cel35 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel35AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYokaigo4")
     private TextBoxNum txtShikyuGendoKijungakuYokaigo4;
 
@@ -810,16 +842,18 @@ class cel35AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYokaigo4")
     public void setTxtShikyuGendoKijungakuYokaigo4(TextBoxNum txtShikyuGendoKijungakuYokaigo4) {
-        this.txtShikyuGendoKijungakuYokaigo4=txtShikyuGendoKijungakuYokaigo4;
+        this.txtShikyuGendoKijungakuYokaigo4 = txtShikyuGendoKijungakuYokaigo4;
     }
 
 }
+
 /**
- * cel36 のクラスファイル 
- * 
+ * cel36 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel36AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYokaigo5")
     private TextBoxNum txtShikyuGendoKijungakuYokaigo5;
 
@@ -830,16 +864,18 @@ class cel36AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYokaigo5")
     public void setTxtShikyuGendoKijungakuYokaigo5(TextBoxNum txtShikyuGendoKijungakuYokaigo5) {
-        this.txtShikyuGendoKijungakuYokaigo5=txtShikyuGendoKijungakuYokaigo5;
+        this.txtShikyuGendoKijungakuYokaigo5 = txtShikyuGendoKijungakuYokaigo5;
     }
 
 }
+
 /**
- * cel37 のクラスファイル 
- * 
+ * cel37 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel37AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuKyotakuShien")
     private TextBoxNum txtShikyuGendoKijungakuKyotakuShien;
 
@@ -850,16 +886,18 @@ class cel37AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuKyotakuShien")
     public void setTxtShikyuGendoKijungakuKyotakuShien(TextBoxNum txtShikyuGendoKijungakuKyotakuShien) {
-        this.txtShikyuGendoKijungakuKyotakuShien=txtShikyuGendoKijungakuKyotakuShien;
+        this.txtShikyuGendoKijungakuKyotakuShien = txtShikyuGendoKijungakuKyotakuShien;
     }
 
 }
+
 /**
- * cel38 のクラスファイル 
- * 
+ * cel38 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel38AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYoshien1")
     private TextBoxNum txtShikyuGendoKijungakuYoshien1;
 
@@ -870,16 +908,18 @@ class cel38AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYoshien1")
     public void setTxtShikyuGendoKijungakuYoshien1(TextBoxNum txtShikyuGendoKijungakuYoshien1) {
-        this.txtShikyuGendoKijungakuYoshien1=txtShikyuGendoKijungakuYoshien1;
+        this.txtShikyuGendoKijungakuYoshien1 = txtShikyuGendoKijungakuYoshien1;
     }
 
 }
+
 /**
- * cel39 のクラスファイル 
- * 
+ * cel39 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel39AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtShikyuGendoKijungakuYoshien2")
     private TextBoxNum txtShikyuGendoKijungakuYoshien2;
 
@@ -890,16 +930,18 @@ class cel39AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtShikyuGendoKijungakuYoshien2")
     public void setTxtShikyuGendoKijungakuYoshien2(TextBoxNum txtShikyuGendoKijungakuYoshien2) {
-        this.txtShikyuGendoKijungakuYoshien2=txtShikyuGendoKijungakuYoshien2;
+        this.txtShikyuGendoKijungakuYoshien2 = txtShikyuGendoKijungakuYoshien2;
     }
 
 }
+
 /**
- * cel41 のクラスファイル 
- * 
+ * cel41 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel41AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("lblKyuTankiNyusho")
     private Label lblKyuTankiNyusho;
 
@@ -910,16 +952,18 @@ class cel41AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("lblKyuTankiNyusho")
     public void setLblKyuTankiNyusho(Label lblKyuTankiNyusho) {
-        this.lblKyuTankiNyusho=lblKyuTankiNyusho;
+        this.lblKyuTankiNyusho = lblKyuTankiNyusho;
     }
 
 }
+
 /**
- * cel42 のクラスファイル 
- * 
+ * cel42 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel42AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoYokaigo1")
     private TextBoxNum txtKyuTankiNyushoYokaigo1;
 
@@ -930,16 +974,18 @@ class cel42AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoYokaigo1")
     public void setTxtKyuTankiNyushoYokaigo1(TextBoxNum txtKyuTankiNyushoYokaigo1) {
-        this.txtKyuTankiNyushoYokaigo1=txtKyuTankiNyushoYokaigo1;
+        this.txtKyuTankiNyushoYokaigo1 = txtKyuTankiNyushoYokaigo1;
     }
 
 }
+
 /**
- * cel43 のクラスファイル 
- * 
+ * cel43 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel43AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoYokaigo2")
     private TextBoxNum txtKyuTankiNyushoYokaigo2;
 
@@ -950,16 +996,18 @@ class cel43AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoYokaigo2")
     public void setTxtKyuTankiNyushoYokaigo2(TextBoxNum txtKyuTankiNyushoYokaigo2) {
-        this.txtKyuTankiNyushoYokaigo2=txtKyuTankiNyushoYokaigo2;
+        this.txtKyuTankiNyushoYokaigo2 = txtKyuTankiNyushoYokaigo2;
     }
 
 }
+
 /**
- * cel44 のクラスファイル 
- * 
+ * cel44 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel44AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoYokaigo3")
     private TextBoxNum txtKyuTankiNyushoYokaigo3;
 
@@ -970,16 +1018,18 @@ class cel44AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoYokaigo3")
     public void setTxtKyuTankiNyushoYokaigo3(TextBoxNum txtKyuTankiNyushoYokaigo3) {
-        this.txtKyuTankiNyushoYokaigo3=txtKyuTankiNyushoYokaigo3;
+        this.txtKyuTankiNyushoYokaigo3 = txtKyuTankiNyushoYokaigo3;
     }
 
 }
+
 /**
- * cel45 のクラスファイル 
- * 
+ * cel45 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel45AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoYokaigo4")
     private TextBoxNum txtKyuTankiNyushoYokaigo4;
 
@@ -990,16 +1040,18 @@ class cel45AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoYokaigo4")
     public void setTxtKyuTankiNyushoYokaigo4(TextBoxNum txtKyuTankiNyushoYokaigo4) {
-        this.txtKyuTankiNyushoYokaigo4=txtKyuTankiNyushoYokaigo4;
+        this.txtKyuTankiNyushoYokaigo4 = txtKyuTankiNyushoYokaigo4;
     }
 
 }
+
 /**
- * cel46 のクラスファイル 
- * 
+ * cel46 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel46AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoYokaigo5")
     private TextBoxNum txtKyuTankiNyushoYokaigo5;
 
@@ -1010,16 +1062,18 @@ class cel46AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoYokaigo5")
     public void setTxtKyuTankiNyushoYokaigo5(TextBoxNum txtKyuTankiNyushoYokaigo5) {
-        this.txtKyuTankiNyushoYokaigo5=txtKyuTankiNyushoYokaigo5;
+        this.txtKyuTankiNyushoYokaigo5 = txtKyuTankiNyushoYokaigo5;
     }
 
 }
+
 /**
- * cel47 のクラスファイル 
- * 
+ * cel47 のクラスファイル
+ *
  * @author 自動生成
  */
 class cel47AttplKubunShikyuGendogaku extends TableCell {
+
     @JsonProperty("txtKyuTankiNyushoKyotakuShien")
     private TextBoxNum txtKyuTankiNyushoKyotakuShien;
 
@@ -1030,7 +1084,7 @@ class cel47AttplKubunShikyuGendogaku extends TableCell {
 
     @JsonProperty("txtKyuTankiNyushoKyotakuShien")
     public void setTxtKyuTankiNyushoKyotakuShien(TextBoxNum txtKyuTankiNyushoKyotakuShien) {
-        this.txtKyuTankiNyushoKyotakuShien=txtKyuTankiNyushoKyotakuShien;
+        this.txtKyuTankiNyushoKyotakuShien = txtKyuTankiNyushoKyotakuShien;
     }
 
 }

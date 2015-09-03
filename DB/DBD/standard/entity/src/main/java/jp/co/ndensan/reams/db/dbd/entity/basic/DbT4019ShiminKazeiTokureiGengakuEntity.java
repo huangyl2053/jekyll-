@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 市民課税特例減額テーブルのエンティティクラスです。
  */
 public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<DbT4019ShiminKazeiTokureiGengakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4019ShiminKazeiTokureiGengaku");
 
@@ -27,9 +30,9 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private RString kyusochishaKubun;
@@ -46,7 +49,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,7 +58,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,7 +67,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,17 +76,16 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,43 +94,43 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -137,7 +139,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -147,10 +149,12 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 旧措置者区分のgetメソッドです。
      * <br/>
-     * <br/>・空白
-     * <br/>・旧措置
+     * <br/>・空白
+     *
+     * <br/>・旧措置
+     *
      * <br/>・負担軽減
-     * 
+     *
      * @return 旧措置者区分
      */
     public RString getKyusochishaKubun() {
@@ -160,10 +164,12 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 旧措置者区分のsetメソッドです。
      * <br/>
-     * <br/>・空白
-     * <br/>・旧措置
+     * <br/>・空白
+     *
+     * <br/>・旧措置
+     *
      * <br/>・負担軽減
-     * 
+     *
      * @param kyusochishaKubun 旧措置者区分
      */
     public void setKyusochishaKubun(RString kyusochishaKubun) {
@@ -173,14 +179,19 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 申請理由区分のgetメソッドです。
      * <br/>
-     * <br/>世帯非課税８０万以下
-     * <br/>世帯非課税８０万超　
-     * <br/>生保、
-     * <br/>世帯非課税
-     * <br/>老齢
-     * <br/>特例減額措置
+     * <br/>世帯非課税８０万以下
+     *
+     * <br/>世帯非課税８０万超　     *
+     * <br/>生保、
+     *
+     * <br/>世帯非課税
+     *
+     * <br/>老齢
+     *
+     * <br/>特例減額措置
+     *
      * <br/>その他
-     * 
+     *
      * @return 申請理由区分
      */
     public RString getShinseiRiyuKubun() {
@@ -190,14 +201,19 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 申請理由区分のsetメソッドです。
      * <br/>
-     * <br/>世帯非課税８０万以下
-     * <br/>世帯非課税８０万超　
-     * <br/>生保、
-     * <br/>世帯非課税
-     * <br/>老齢
-     * <br/>特例減額措置
+     * <br/>世帯非課税８０万以下
+     *
+     * <br/>世帯非課税８０万超　     *
+     * <br/>生保、
+     *
+     * <br/>世帯非課税
+     *
+     * <br/>老齢
+     *
+     * <br/>特例減額措置
+     *
      * <br/>その他
-     * 
+     *
      * @param shinseiRiyuKubun 申請理由区分
      */
     public void setShinseiRiyuKubun(RString shinseiRiyuKubun) {
@@ -207,11 +223,14 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 利用者負担段階のgetメソッドです。
      * <br/>
-     * <br/>・第一段階
-     * <br/>・第二段階
-     * <br/>・第三段階
+     * <br/>・第一段階
+     *
+     * <br/>・第二段階
+     *
+     * <br/>・第三段階
+     *
      * <br/>・課税層第三段階
-     * 
+     *
      * @return 利用者負担段階
      */
     public RString getRiyoshaFutanDankai() {
@@ -221,11 +240,14 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 利用者負担段階のsetメソッドです。
      * <br/>
-     * <br/>・第一段階
-     * <br/>・第二段階
-     * <br/>・第三段階
+     * <br/>・第一段階
+     *
+     * <br/>・第二段階
+     *
+     * <br/>・第三段階
+     *
      * <br/>・課税層第三段階
-     * 
+     *
      * @param riyoshaFutanDankai 利用者負担段階
      */
     public void setRiyoshaFutanDankai(RString riyoshaFutanDankai) {
@@ -235,9 +257,10 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 境界層該当者区分のgetメソッドです。
      * <br/>
-     * <br/>1：該当者
+     * <br/>1：該当者
+     *
      * <br/>0：非該当者
-     * 
+     *
      * @return 境界層該当者区分
      */
     public boolean getKyokaisoGaitoshaKubun() {
@@ -247,9 +270,10 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 境界層該当者区分のsetメソッドです。
      * <br/>
-     * <br/>1：該当者
+     * <br/>1：該当者
+     *
      * <br/>0：非該当者
-     * 
+     *
      * @param kyokaisoGaitoshaKubun 境界層該当者区分
      */
     public void setKyokaisoGaitoshaKubun(boolean kyokaisoGaitoshaKubun) {
@@ -259,12 +283,16 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 居室種別のgetメソッドです。
      * <br/>
-     * <br/>1：ユニット型個室
-     * <br/>2：ユニット型準個室
-     * <br/>3：従来型個室
-     * <br/>4：多床室
+     * <br/>1：ユニット型個室
+     *
+     * <br/>2：ユニット型準個室
+     *
+     * <br/>3：従来型個室
+     *
+     * <br/>4：多床室
+     *
      * <br/>5：従来型個室（老健）
-     * 
+     *
      * @return 居室種別
      */
     public RString getKyoshitsuShubetsu() {
@@ -274,12 +302,16 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
     /**
      * 居室種別のsetメソッドです。
      * <br/>
-     * <br/>1：ユニット型個室
-     * <br/>2：ユニット型準個室
-     * <br/>3：従来型個室
-     * <br/>4：多床室
+     * <br/>1：ユニット型個室
+     *
+     * <br/>2：ユニット型準個室
+     *
+     * <br/>3：従来型個室
+     *
+     * <br/>4：多床室
+     *
      * <br/>5：従来型個室（老健）
-     * 
+     *
      * @param kyoshitsuShubetsu 居室種別
      */
     public void setKyoshitsuShubetsu(RString kyoshitsuShubetsu) {
@@ -288,7 +320,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 食費負担限度額のgetメソッドです。
-     * 
+     *
      * @return 食費負担限度額
      */
     public Decimal getShokuhiFutanGendogaku() {
@@ -297,7 +329,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 食費負担限度額のsetメソッドです。
-     * 
+     *
      * @param shokuhiFutanGendogaku 食費負担限度額
      */
     public void setShokuhiFutanGendogaku(Decimal shokuhiFutanGendogaku) {
@@ -306,7 +338,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * ユニット型個室のgetメソッドです。
-     * 
+     *
      * @return ユニット型個室
      */
     public Decimal getUnitTypeKoshitsu() {
@@ -315,7 +347,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * ユニット型個室のsetメソッドです。
-     * 
+     *
      * @param unitTypeKoshitsu ユニット型個室
      */
     public void setUnitTypeKoshitsu(Decimal unitTypeKoshitsu) {
@@ -324,7 +356,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * ユニット型準個室のgetメソッドです。
-     * 
+     *
      * @return ユニット型準個室
      */
     public Decimal getUnitTypejunKoshitsu() {
@@ -333,7 +365,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * ユニット型準個室のsetメソッドです。
-     * 
+     *
      * @param unitTypejunKoshitsu ユニット型準個室
      */
     public void setUnitTypejunKoshitsu(Decimal unitTypejunKoshitsu) {
@@ -342,7 +374,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 従来型個室（特養等）のgetメソッドです。
-     * 
+     *
      * @return 従来型個室（特養等）
      */
     public Decimal getJuraiTypeKoshitsu_Tokuyo() {
@@ -351,7 +383,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 従来型個室（特養等）のsetメソッドです。
-     * 
+     *
      * @param juraiTypeKoshitsu_Tokuyo 従来型個室（特養等）
      */
     public void setJuraiTypeKoshitsu_Tokuyo(Decimal juraiTypeKoshitsu_Tokuyo) {
@@ -360,7 +392,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 従来型個室（老健・療養等）のgetメソッドです。
-     * 
+     *
      * @return 従来型個室（老健・療養等）
      */
     public Decimal getJuraiTypeKoshitsu_Roken_Ryoyo() {
@@ -369,7 +401,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 従来型個室（老健・療養等）のsetメソッドです。
-     * 
+     *
      * @param juraiTypeKoshitsu_Roken_Ryoyo 従来型個室（老健・療養等）
      */
     public void setJuraiTypeKoshitsu_Roken_Ryoyo(Decimal juraiTypeKoshitsu_Roken_Ryoyo) {
@@ -378,7 +410,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 多床室のgetメソッドです。
-     * 
+     *
      * @return 多床室
      */
     public Decimal getTashoshitsu() {
@@ -387,7 +419,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * 多床室のsetメソッドです。
-     * 
+     *
      * @param tashoshitsu 多床室
      */
     public void setTashoshitsu(Decimal tashoshitsu) {
@@ -396,9 +428,9 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT4019ShiminKazeiTokureiGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4019ShiminKazeiTokureiGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -441,6 +473,7 @@ public class DbT4019ShiminKazeiTokureiGengakuEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

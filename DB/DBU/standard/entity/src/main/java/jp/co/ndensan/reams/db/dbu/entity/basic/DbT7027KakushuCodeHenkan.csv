@@ -1,7 +1,0 @@
-﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-codeKubun,varchar,RString,,,,,コード区分,A
-naibuCode,varchar,RString,,,,,内部コード,A
-naibuNo,varchar,RString,,,,,内部番号,A
-gaibuCode,varchar,RString,,,,,外部コード,A
-shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,市町村コード２,A
-gaibuCode2,varchar,RString,,,,,外部コード２,A

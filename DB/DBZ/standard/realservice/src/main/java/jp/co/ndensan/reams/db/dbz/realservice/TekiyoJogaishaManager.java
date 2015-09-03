@@ -4,18 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.model.TekiyoJogaishaModel;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TekiyoJogaishaDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -46,15 +45,17 @@ public class TekiyoJogaishaManager {
     /**
      * 主キーに合致する適用除外者Modelを返します。
      *
-     * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 YMDHMS
+     * @param 異動日 FlexibleDate
+     * @param 枝番 RString
      * @return TekiyoJogaishaModelModel
      */
     @Transaction
-    public Optional<TekiyoJogaishaModel> get適用除外者Model(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+    public Optional<DbT1002TekiyoJogaishaEntity> get適用除外者Model(ShikibetsuCode 識別コード,
+            FlexibleDate 異動日,
+            RString 枝番) {
 
-        return Optional.of(dac.select適用除外者ModelByKey(市町村コード, 識別コード, 処理日時));
+        return Optional.of(dac.select適用除外者ModelByKey(識別コード, 異動日, 枝番));
     }
 
     /**
@@ -65,7 +66,7 @@ public class TekiyoJogaishaManager {
      * @return List<TekiyoJogaishaModelModel>
      */
     @Transaction
-    public IItemList<TekiyoJogaishaModel> get適用除外者情報List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public IItemList<DbT1002TekiyoJogaishaEntity> get適用除外者情報List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         return ItemList.of(dac.select適用除外者List(市町村コード, 識別コード));
     }
 
@@ -76,7 +77,7 @@ public class TekiyoJogaishaManager {
      * @return 登録件数
      */
     @Transaction
-    public int save適用除外者Model(TekiyoJogaishaModel 適用除外者Modelモデル) {
+    public int save適用除外者Model(DbT1002TekiyoJogaishaEntity 適用除外者Modelモデル) {
 
         if (適用除外者Modelモデル.getState() == EntityDataState.Added) {
             return dac.insert(適用除外者Modelモデル);

@@ -12,13 +12,14 @@ import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.Nintei
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
+// TODO n8187久保田 dbxのJukyushaDaichoに置換すること。
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -129,7 +130,8 @@ public class NinteiInputHandler {
     }
 
     private void setJukyushaJoho() {
-        Optional<JukyushaDaicho> 直近受給者台帳 = new JukyushaDaichoManager().get直近受給者台帳(new HihokenshaNo(div.getHdnHihokenshaNo()));
+        Optional<JukyushaDaicho> 直近受給者台帳 = Optional.empty();
+//        Optional<JukyushaDaicho> 直近受給者台帳 = new JukyushaDaichoManager().get直近受給者台帳(new HihokenshaNo(div.getHdnHihokenshaNo()));
         if (直近受給者台帳.isPresent()) {
             div.getTxtNinteiYMD().setValue(直近受給者台帳.get().get認定年月日());
             div.getTxtYokaigodoCode().setValue(直近受給者台帳.get().get要介護認定状態区分コード().value());

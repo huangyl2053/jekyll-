@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbb.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -38,7 +38,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private int rirekiNo;
+    private Decimal rirekiNo;
     private FlexibleDate shinseiYMD;
     private FlexibleDate ketteiYMD;
     private FlexibleDate torikeshiYMD;
@@ -157,7 +157,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -166,7 +166,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -416,7 +416,8 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * このエンティティの主キーが他の{@literal DbT2004GemmenEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2004GemmenEntity other) {

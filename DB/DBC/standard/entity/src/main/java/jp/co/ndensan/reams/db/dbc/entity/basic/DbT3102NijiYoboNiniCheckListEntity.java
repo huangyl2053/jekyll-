@@ -8,9 +8,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 二次予防任意チェックリストテーブルのエンティティクラスです。
@@ -36,10 +37,10 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
-    private int niniShitsumonNo;
+    private Decimal niniShitsumonNo;
     @PrimaryKey
-    private int rirekiNo;
-    private int niniShitsumonJiko;
+    private Decimal rirekiNo;
+    private Decimal niniShitsumonJiko;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -145,7 +146,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @return 任意質問番号
      */
-    public int getNiniShitsumonNo() {
+    public Decimal getNiniShitsumonNo() {
         return niniShitsumonNo;
     }
 
@@ -154,7 +155,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @param niniShitsumonNo 任意質問番号
      */
-    public void setNiniShitsumonNo(int niniShitsumonNo) {
+    public void setNiniShitsumonNo(Decimal niniShitsumonNo) {
         this.niniShitsumonNo = niniShitsumonNo;
     }
 
@@ -163,7 +164,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @return 履歴番号
      */
-    public int getRirekiNo() {
+    public Decimal getRirekiNo() {
         return rirekiNo;
     }
 
@@ -172,7 +173,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(int rirekiNo) {
+    public void setRirekiNo(Decimal rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -181,7 +182,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @return 任意質問事項
      */
-    public int getNiniShitsumonJiko() {
+    public Decimal getNiniShitsumonJiko() {
         return niniShitsumonJiko;
     }
 
@@ -190,7 +191,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
      *
      * @param niniShitsumonJiko 任意質問事項
      */
-    public void setNiniShitsumonJiko(int niniShitsumonJiko) {
+    public void setNiniShitsumonJiko(Decimal niniShitsumonJiko) {
         this.niniShitsumonJiko = niniShitsumonJiko;
     }
 

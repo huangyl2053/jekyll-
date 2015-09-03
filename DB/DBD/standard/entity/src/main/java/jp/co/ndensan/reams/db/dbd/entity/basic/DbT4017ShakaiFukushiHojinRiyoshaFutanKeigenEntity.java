@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 社会福祉法人等利用者負担軽減テーブルのエンティティクラスです。
  */
 public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEntityBase<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen");
 
@@ -27,9 +30,9 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private RString shinseiJiyu;
@@ -46,7 +49,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,7 +58,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,7 +67,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,17 +76,16 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,43 +94,43 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -137,7 +139,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -146,7 +148,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -155,7 +157,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -165,9 +167,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 生活保護受給有無のgetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @return 生活保護受給有無
      */
     public boolean getSeihoJukyuUmu() {
@@ -177,9 +180,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 生活保護受給有無のsetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @param seihoJukyuUmu 生活保護受給有無
      */
     public void setSeihoJukyuUmu(boolean seihoJukyuUmu) {
@@ -189,9 +193,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 老齢福祉年金受給有無のgetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @return 老齢福祉年金受給有無
      */
     public boolean getRoreiFukushiNenkinJukyuUmu() {
@@ -201,9 +206,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 老齢福祉年金受給有無のsetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @param roreiFukushiNenkinJukyuUmu 老齢福祉年金受給有無
      */
     public void setRoreiFukushiNenkinJukyuUmu(boolean roreiFukushiNenkinJukyuUmu) {
@@ -213,9 +219,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 生保扶助見直し特例有無のgetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @return 生保扶助見直し特例有無
      */
     public boolean getSeihoFujoMinaoshiTokureiUmu() {
@@ -225,9 +232,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 生保扶助見直し特例有無のsetメソッドです。
      * <br/>
-     * <br/>1：適用対象者
+     * <br/>1：適用対象者
+     *
      * <br/>0：適用外
-     * 
+     *
      * @param seihoFujoMinaoshiTokureiUmu 生保扶助見直し特例有無
      */
     public void setSeihoFujoMinaoshiTokureiUmu(boolean seihoFujoMinaoshiTokureiUmu) {
@@ -236,7 +244,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 軽減率（分子）のgetメソッドです。
-     * 
+     *
      * @return 軽減率（分子）
      */
     public Decimal getKeigenritsu_Bunshi() {
@@ -245,7 +253,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 軽減率（分子）のsetメソッドです。
-     * 
+     *
      * @param keigenritsu_Bunshi 軽減率（分子）
      */
     public void setKeigenritsu_Bunshi(Decimal keigenritsu_Bunshi) {
@@ -254,7 +262,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 軽減率（分母）のgetメソッドです。
-     * 
+     *
      * @return 軽減率（分母）
      */
     public Decimal getKeigenritsu_Bumbo() {
@@ -263,7 +271,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 軽減率（分母）のsetメソッドです。
-     * 
+     *
      * @param keigenritsu_Bumbo 軽減率（分母）
      */
     public void setKeigenritsu_Bumbo(Decimal keigenritsu_Bumbo) {
@@ -273,9 +281,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 居宅サービス限定のgetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @return 居宅サービス限定
      */
     public boolean getKyotakuServiceGentei() {
@@ -285,9 +294,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 居宅サービス限定のsetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @param kyotakuServiceGentei 居宅サービス限定
      */
     public void setKyotakuServiceGentei(boolean kyotakuServiceGentei) {
@@ -297,9 +307,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 居住費・食費のみのgetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @return 居住費・食費のみ
      */
     public boolean getKyojuhiShokuhiNomi() {
@@ -309,9 +320,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 居住費・食費のみのsetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @param kyojuhiShokuhiNomi 居住費・食費のみ
      */
     public void setKyojuhiShokuhiNomi(boolean kyojuhiShokuhiNomi) {
@@ -321,9 +333,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 旧措置者ユニット型個室のみのgetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @return 旧措置者ユニット型個室のみ
      */
     public boolean getKyusochishaUnitTypeKoshitsuNomi() {
@@ -333,9 +346,10 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 旧措置者ユニット型個室のみのsetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @param kyusochishaUnitTypeKoshitsuNomi 旧措置者ユニット型個室のみ
      */
     public void setKyusochishaUnitTypeKoshitsuNomi(boolean kyusochishaUnitTypeKoshitsuNomi) {
@@ -344,7 +358,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 確認番号のgetメソッドです。
-     * 
+     *
      * @return 確認番号
      */
     public RString getKakuninNo() {
@@ -353,7 +367,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * 確認番号のsetメソッドです。
-     * 
+     *
      * @param kakuninNo 確認番号
      */
     public void setKakuninNo(RString kakuninNo) {
@@ -363,12 +377,16 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 減免区分のgetメソッドです。
      * <br/>
-     * <br/>非課税・老年受給
-     * <br/>生保に準ずる
-     * <br/>その他
-     * <br/>生計困難
+     * <br/>非課税・老年受給
+     *
+     * <br/>生保に準ずる
+     *
+     * <br/>その他
+     *
+     * <br/>生計困難
+     *
      * <br/>激変緩和
-     * 
+     *
      * @return 減免区分
      */
     public RString getGemmenKubun() {
@@ -378,12 +396,16 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
     /**
      * 減免区分のsetメソッドです。
      * <br/>
-     * <br/>非課税・老年受給
-     * <br/>生保に準ずる
-     * <br/>その他
-     * <br/>生計困難
+     * <br/>非課税・老年受給
+     *
+     * <br/>生保に準ずる
+     *
+     * <br/>その他
+     *
+     * <br/>生計困難
+     *
      * <br/>激変緩和
-     * 
+     *
      * @param gemmenKubun 減免区分
      */
     public void setGemmenKubun(RString gemmenKubun) {
@@ -392,9 +414,9 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * このエンティティの主キーが他の{@literal DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -437,6 +459,7 @@ public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity extends DbTableEn
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -233,8 +233,8 @@ public class HizukeConfigTest {
         }
     }
 
-    private static IUrBusinessConfig createBusinessConfigMock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+    private static IBusinessConfig createBusinessConfigMock() {
+        IBusinessConfig mock = mock(IBusinessConfig.class);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル1), any(RDate.class))).thenReturn(月別テーブル1);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル2), any(RDate.class))).thenReturn(月別テーブル2);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル3), any(RDate.class))).thenReturn(月別テーブル3);

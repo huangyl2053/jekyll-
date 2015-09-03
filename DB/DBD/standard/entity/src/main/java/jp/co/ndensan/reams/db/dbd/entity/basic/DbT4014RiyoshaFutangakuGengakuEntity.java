@@ -8,12 +8,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 利用者負担額減額テーブルのエンティティクラスです。
  */
 public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4014RiyoshaFutangakuGengakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4014RiyoshaFutangakuGengaku");
 
@@ -26,18 +30,18 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private boolean kyuSochishaUmu;
     private RString shinseiJiyu;
-    private DbUDD011HokenKyufuRitsu kyuhuritsu;
+    private HokenKyufuRitsu kyuhuritsu;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -46,7 +50,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -55,7 +59,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -64,17 +68,16 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,43 +86,43 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -128,7 +131,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -138,9 +141,10 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
     /**
      * 旧措置者有無のgetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @return 旧措置者有無
      */
     public boolean getKyuSochishaUmu() {
@@ -150,9 +154,10 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
     /**
      * 旧措置者有無のsetメソッドです。
      * <br/>
-     * <br/>1：該当
+     * <br/>1：該当
+     *
      * <br/>0：非該当
-     * 
+     *
      * @param kyuSochishaUmu 旧措置者有無
      */
     public void setKyuSochishaUmu(boolean kyuSochishaUmu) {
@@ -161,7 +166,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -170,7 +175,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -179,27 +184,27 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * 給付率のgetメソッドです。
-     * 
+     *
      * @return 給付率
      */
-    public DbUDD011HokenKyufuRitsu getKyuhuritsu() {
+    public HokenKyufuRitsu getKyuhuritsu() {
         return kyuhuritsu;
     }
 
     /**
      * 給付率のsetメソッドです。
-     * 
+     *
      * @param kyuhuritsu 給付率
      */
-    public void setKyuhuritsu(DbUDD011HokenKyufuRitsu kyuhuritsu) {
+    public void setKyuhuritsu(HokenKyufuRitsu kyuhuritsu) {
         this.kyuhuritsu = kyuhuritsu;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT4014RiyoshaFutangakuGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4014RiyoshaFutangakuGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -234,6 +239,7 @@ public class DbT4014RiyoshaFutangakuGengakuEntity extends DbTableEntityBase<DbT4
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

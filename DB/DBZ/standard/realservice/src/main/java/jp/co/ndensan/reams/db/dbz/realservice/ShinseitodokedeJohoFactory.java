@@ -8,27 +8,14 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
 /**
- * {@link IShinseitodokedeJohoManager}を生成するクラスです。
+ * ビルドエラー回避のための暫定クラス
  *
- * @author n8223 朴義一
+ * @author n8187
  */
-public final class ShinseitodokedeJohoFactory {
+public class ShinseitodokedeJohoFactory {
 
-    private ShinseitodokedeJohoFactory() {
-    }
-
-    /**
-     * {@link IShinseitodokedeJohoManager}を生成します。
-     *
-     * @param subGyomuCode サブ業務コード
-     * @return IShinseitodokedeJohoManager
-     */
     public static IShinseitodokedeJohoManager getInstance(SubGyomuCode subGyomuCode) {
-
-        if (subGyomuCode.equals(SubGyomuCode.DBD介護受給)) {
-            return new HokenshaShinseitodokedeJohoManager();
-        }
-        return new ShinsakaiShinseitodokedeJohoManager();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7050KaigoHokenshaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -62,7 +62,7 @@ public class KaigoHokenshaModel implements Serializable {
      * @return 市町村コード
      */
     public LasdecCode get市町村コード() {
-        return entity.getShichosonCode();
+        return entity.getKoikiHokenshaShichosonCode();
     }
 
     /**
@@ -71,7 +71,7 @@ public class KaigoHokenshaModel implements Serializable {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+        return entity.getKoikiHokenshaNo();
     }
 
     /**
@@ -81,7 +81,7 @@ public class KaigoHokenshaModel implements Serializable {
      */
     public void set市町村コード(LasdecCode 市町村コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
+        entity.setKoikiHokenshaShichosonCode(市町村コード);
     }
 
     /**
@@ -91,7 +91,7 @@ public class KaigoHokenshaModel implements Serializable {
      */
     public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setKoikiHokenshaNo(証記載保険者番号);
     }
 
     /**

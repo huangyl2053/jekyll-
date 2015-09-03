@@ -12,14 +12,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo.KaigoRenrakusakiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo.dgRenrakusaki_Row;
-import jp.co.ndensan.reams.db.dbz.realservice.RenrakusakiInfoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -216,8 +215,8 @@ public class RenrakusakiInfo {
                 new ShoKisaiHokenshaNo(div.getHokenshaNo()),
                 new HihokenshaNo(div.getHihokenshaNo()),
                 shishoCode);
-
-        boolean isSaveSuccess = new RenrakusakiInfoManager().remove(renrakusakiJoho);
+        boolean isSaveSuccess = false;
+//        boolean isSaveSuccess = new RenrakusakiInfoManager().remove(renrakusakiJoho);
 
         if (isSaveSuccess == Boolean.TRUE) {
             div.getDgRenrakusaki().getDataSource().remove(div.getDgRenrakusaki().
@@ -288,8 +287,8 @@ public class RenrakusakiInfo {
                 new ShoKisaiHokenshaNo(div.getHokenshaNo()),
                 new HihokenshaNo(div.getHihokenshaNo()),
                 shishoCode);
-
-        boolean isSaveSucces = new RenrakusakiInfoManager().save(renrakusakiJoho);
+        boolean isSaveSucces = false;
+//        boolean isSaveSucces = new RenrakusakiInfoManager().save(renrakusakiJoho);
 
         if (!isSaveSucces) {
             //TODO n3327 たまたま見つけたので修正。現在は作業している時間が無いのでTODOコメントにより省略。適切なエラー処理を考えて、適用する必要がある。

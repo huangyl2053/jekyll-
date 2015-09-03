@@ -125,7 +125,7 @@ public class RendoPatternModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // RendoPatternModel sut = new RendoPatternModel();
         //sut.setEntity(DbT7035RendoPatternEntityGenerator.createDbT7035RendoPatternEntity());

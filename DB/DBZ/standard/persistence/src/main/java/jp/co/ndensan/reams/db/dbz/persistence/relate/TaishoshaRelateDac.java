@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearch;
 import jp.co.ndensan.reams.db.dbz.entity.relate.FukaTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
-import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
@@ -58,7 +56,7 @@ public class TaishoshaRelateDac {
      * @return 対象者
      */
     @Transaction
-    public IItemList<TaishoshaModel> select資格対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
+    public IItemList<TaishoshaRelateEntity> select資格対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
         ITableClause table = create資格対象者TableClause(psm, is内部結合);
         return to資格ModelList(((条件 != null) ? table.where(条件).limit(最大件数) : table.limit(最大件数)).toList(TaishoshaRelateEntity.class));
     }
@@ -95,7 +93,7 @@ public class TaishoshaRelateDac {
      * @return 対象者
      */
     @Transaction
-    public IItemList<FukaTaishoshaModel> select賦課対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
+    public IItemList<FukaTaishoshaRelateEntity> select賦課対象者(ITrueFalseCriteria 条件, IPsmCriteria psm, boolean is内部結合, int 最大件数) {
         ITableClause table = create賦課対象者TableClause(psm, is内部結合);
         return to賦課ModelList(((条件 != null) ? table.where(条件).limit(最大件数) : table.limit(最大件数)).toList(FukaTaishoshaRelateEntity.class));
     }
@@ -108,18 +106,18 @@ public class TaishoshaRelateDac {
         return table;
     }
 
-    private IItemList<TaishoshaModel> to資格ModelList(List<TaishoshaRelateEntity> entityList) {
-        List<TaishoshaModel> modelList = new ArrayList<>();
+    private IItemList<TaishoshaRelateEntity> to資格ModelList(List<TaishoshaRelateEntity> entityList) {
+        List<TaishoshaRelateEntity> modelList = new ArrayList<>();
         for (TaishoshaRelateEntity entity : entityList) {
-            modelList.add(new TaishoshaModel(entity));
+            modelList.add(entity);
         }
         return ItemList.of(modelList);
     }
 
-    private IItemList<FukaTaishoshaModel> to賦課ModelList(List<FukaTaishoshaRelateEntity> entityList) {
-        List<FukaTaishoshaModel> modelList = new ArrayList<>();
+    private IItemList<FukaTaishoshaRelateEntity> to賦課ModelList(List<FukaTaishoshaRelateEntity> entityList) {
+        List<FukaTaishoshaRelateEntity> modelList = new ArrayList<>();
         for (FukaTaishoshaRelateEntity entity : entityList) {
-            modelList.add(new FukaTaishoshaModel(entity));
+            modelList.add(entity);
         }
         return ItemList.of(modelList);
     }

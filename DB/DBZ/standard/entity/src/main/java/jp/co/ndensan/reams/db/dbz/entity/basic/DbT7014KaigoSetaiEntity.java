@@ -2,11 +2,13 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -23,7 +25,6 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     public static final RString TABLE_NAME = new RString("DbT7014KaigoSetai");
 
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -34,12 +35,17 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private FlexibleDate setaiKijunYMD;
+    private RString kanriShikibetsuKubun;
     @PrimaryKey
-    private int renban;
+    private FlexibleDate setaiHaakuKijunYMD;
     @PrimaryKey
-    private RDateTime shoriTimestamp;
+    private int setaiInkanriRenban;
     private ShikibetsuCode setaiInshikibetsuCode;
+    private RString honninKubun;
+    private FlexibleYear kazeiNendo;
+    private RString kazeiHikazeiKubun;
+    private Decimal gokeiShotokuKingaku;
+    private Decimal kazeiNenkinShunyugaku;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -105,57 +111,61 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * 世帯基準年月日のgetメソッドです。
+     * 管理識別区分のgetメソッドです。
+     * <br/>
+     * <br/>1：賦課、2：高額介護、3：負担限度額、4：社福軽減
      *
-     * @return 世帯基準年月日
+     * @return 管理識別区分
      */
-    public FlexibleDate getSetaiKijunYMD() {
-        return setaiKijunYMD;
+    public RString getKanriShikibetsuKubun() {
+        return kanriShikibetsuKubun;
     }
 
     /**
-     * 世帯基準年月日のsetメソッドです。
+     * 管理識別区分のsetメソッドです。
+     * <br/>
+     * <br/>1：賦課、2：高額介護、3：負担限度額、4：社福軽減
      *
-     * @param setaiKijunYMD 世帯基準年月日
+     * @param kanriShikibetsuKubun 管理識別区分
      */
-    public void setSetaiKijunYMD(FlexibleDate setaiKijunYMD) {
-        this.setaiKijunYMD = setaiKijunYMD;
+    public void setKanriShikibetsuKubun(RString kanriShikibetsuKubun) {
+        this.kanriShikibetsuKubun = kanriShikibetsuKubun;
     }
 
     /**
-     * 連番のgetメソッドです。
+     * 世帯把握基準年月日のgetメソッドです。
      *
-     * @return 連番
+     * @return 世帯把握基準年月日
      */
-    public int getRenban() {
-        return renban;
+    public FlexibleDate getSetaiHaakuKijunYMD() {
+        return setaiHaakuKijunYMD;
     }
 
     /**
-     * 連番のsetメソッドです。
+     * 世帯把握基準年月日のsetメソッドです。
      *
-     * @param renban 連番
+     * @param setaiHaakuKijunYMD 世帯把握基準年月日
      */
-    public void setRenban(int renban) {
-        this.renban = renban;
+    public void setSetaiHaakuKijunYMD(FlexibleDate setaiHaakuKijunYMD) {
+        this.setaiHaakuKijunYMD = setaiHaakuKijunYMD;
     }
 
     /**
-     * 処理日時のgetメソッドです。
+     * 世帯員管理連番のgetメソッドです。
      *
-     * @return 処理日時
+     * @return 世帯員管理連番
      */
-    public RDateTime getShoriTimestamp() {
-        return shoriTimestamp;
+    public int getSetaiInkanriRenban() {
+        return setaiInkanriRenban;
     }
 
     /**
-     * 処理日時のsetメソッドです。
+     * 世帯員管理連番のsetメソッドです。
      *
-     * @param shoriTimestamp 処理日時
+     * @param setaiInkanriRenban 世帯員管理連番
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setSetaiInkanriRenban(int setaiInkanriRenban) {
+        this.setaiInkanriRenban = setaiInkanriRenban;
     }
 
     /**
@@ -177,6 +187,104 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
+     * 本人区分のgetメソッドです。
+     * <br/>
+     * <br/>1：本人、2：世帯構成員
+     *
+     * @return 本人区分
+     */
+    public RString getHonninKubun() {
+        return honninKubun;
+    }
+
+    /**
+     * 本人区分のsetメソッドです。
+     * <br/>
+     * <br/>1：本人、2：世帯構成員
+     *
+     * @param honninKubun 本人区分
+     */
+    public void setHonninKubun(RString honninKubun) {
+        this.honninKubun = honninKubun;
+    }
+
+    /**
+     * 課税年度のgetメソッドです。
+     *
+     * @return 課税年度
+     */
+    public FlexibleYear getKazeiNendo() {
+        return kazeiNendo;
+    }
+
+    /**
+     * 課税年度のsetメソッドです。
+     *
+     * @param kazeiNendo 課税年度
+     */
+    public void setKazeiNendo(FlexibleYear kazeiNendo) {
+        this.kazeiNendo = kazeiNendo;
+    }
+
+    /**
+     * 課税非課税区分のgetメソッドです。
+     * <br/>
+     * <br/>1:課税　2:非課税　3:未申告　4:所得調査中
+     *
+     * @return 課税非課税区分
+     */
+    public RString getKazeiHikazeiKubun() {
+        return kazeiHikazeiKubun;
+    }
+
+    /**
+     * 課税非課税区分のsetメソッドです。
+     * <br/>
+     * <br/>1:課税　2:非課税　3:未申告　4:所得調査中
+     *
+     * @param kazeiHikazeiKubun 課税非課税区分
+     */
+    public void setKazeiHikazeiKubun(RString kazeiHikazeiKubun) {
+        this.kazeiHikazeiKubun = kazeiHikazeiKubun;
+    }
+
+    /**
+     * 合計所得金額のgetメソッドです。
+     *
+     * @return 合計所得金額
+     */
+    public Decimal getGokeiShotokuKingaku() {
+        return gokeiShotokuKingaku;
+    }
+
+    /**
+     * 合計所得金額のsetメソッドです。
+     *
+     * @param gokeiShotokuKingaku 合計所得金額
+     */
+    public void setGokeiShotokuKingaku(Decimal gokeiShotokuKingaku) {
+        this.gokeiShotokuKingaku = gokeiShotokuKingaku;
+    }
+
+    /**
+     * 課税年金収入額のgetメソッドです。
+     *
+     * @return 課税年金収入額
+     */
+    public Decimal getKazeiNenkinShunyugaku() {
+        return kazeiNenkinShunyugaku;
+    }
+
+    /**
+     * 課税年金収入額のsetメソッドです。
+     *
+     * @param kazeiNenkinShunyugaku 課税年金収入額
+     */
+    public void setKazeiNenkinShunyugaku(Decimal kazeiNenkinShunyugaku) {
+        this.kazeiNenkinShunyugaku = kazeiNenkinShunyugaku;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT7014KaigoSetaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -187,19 +295,16 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
-            return false;
-        }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.setaiKijunYMD, other.setaiKijunYMD)) {
+        if (!Objects.equals(this.kanriShikibetsuKubun, other.kanriShikibetsuKubun)) {
             return false;
         }
-        if (this.renban != other.renban) {
+        if (!Objects.equals(this.setaiHaakuKijunYMD, other.setaiHaakuKijunYMD)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+        if (this.setaiInkanriRenban != other.setaiInkanriRenban) {
             return false;
         }
         return true;
@@ -211,10 +316,15 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     @Override
     public void shallowCopy(DbT7014KaigoSetaiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.setaiKijunYMD = entity.setaiKijunYMD;
-        this.renban = entity.renban;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.kanriShikibetsuKubun = entity.kanriShikibetsuKubun;
+        this.setaiHaakuKijunYMD = entity.setaiHaakuKijunYMD;
+        this.setaiInkanriRenban = entity.setaiInkanriRenban;
         this.setaiInshikibetsuCode = entity.setaiInshikibetsuCode;
+        this.honninKubun = entity.honninKubun;
+        this.kazeiNendo = entity.kazeiNendo;
+        this.kazeiHikazeiKubun = entity.kazeiHikazeiKubun;
+        this.gokeiShotokuKingaku = entity.gokeiShotokuKingaku;
+        this.kazeiNenkinShunyugaku = entity.kazeiNenkinShunyugaku;
     }
 
     /**
@@ -224,7 +334,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, setaiKijunYMD, renban, shoriTimestamp, setaiInshikibetsuCode);
+        return super.toMd5(hihokenshaNo, kanriShikibetsuKubun, setaiHaakuKijunYMD, setaiInkanriRenban, setaiInshikibetsuCode, honninKubun, kazeiNendo, kazeiHikazeiKubun, gokeiShotokuKingaku, kazeiNenkinShunyugaku);
     }
 
 // </editor-fold>

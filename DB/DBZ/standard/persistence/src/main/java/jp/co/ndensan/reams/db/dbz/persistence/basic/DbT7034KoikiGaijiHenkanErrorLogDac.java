@@ -11,22 +11,20 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErr
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLog.renNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLog.shoriNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7034KoikiGaijiHenkanErrorLogEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 広域外字変換エラーログのデータアクセスクラスです。
- *
- * @author LDNS 宋文娟
  */
-public class DbT7034KoikiGaijiHenkanErrorLogDac implements IModifiable<DbT7034KoikiGaijiHenkanErrorLogEntity> {
+public class DbT7034KoikiGaijiHenkanErrorLogDac implements ISaveable<DbT7034KoikiGaijiHenkanErrorLogEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -75,54 +73,17 @@ public class DbT7034KoikiGaijiHenkanErrorLogDac implements IModifiable<DbT7034Ko
     }
 
     /**
-     * 広域外字変換エラーログを追加します。
+     * DbT7034KoikiGaijiHenkanErrorLogEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity 広域外字変換エラーログ
-     * @return 影響行数
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
     @Override
-    public int insert(DbT7034KoikiGaijiHenkanErrorLogEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
-    }
-
-    /**
-     * 広域外字変換エラーログをDBに更新します。
-     *
-     * @param entity 広域外字変換エラーログ
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int update(DbT7034KoikiGaijiHenkanErrorLogEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    /**
-     * 広域外字変換エラーログをDBから削除します。（論理削除）
-     *
-     * @param entity 広域外字変換エラーログ
-     * @return 影響行数
-     */
-    @Transaction
-    @Override
-    public int delete(DbT7034KoikiGaijiHenkanErrorLogEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 広域外字変換エラーログを物理削除。
-     *
-     * @param entity 広域外字変換エラーログ
-     * @return 影響行数
-     */
-    @Transaction
-    public int deletePhysical(DbT7034KoikiGaijiHenkanErrorLogEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+    public int save(DbT7034KoikiGaijiHenkanErrorLogEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("広域外字変換エラーログエンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

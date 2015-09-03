@@ -6,28 +6,24 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 介護保険施設入退所のデータアクセスクラスの実装クラスです。
- *
- * @author n8223 朴義一
+ * 介護保険施設入退所のデータアクセスクラスです。
  */
-public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuNyutaishoEntity> {
+public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyutaishoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -35,29 +31,25 @@ public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuN
     /**
      * 主キーで介護保険施設入退所を取得します。
      *
-     * @param 市町村コード 市町村コード
-     * @param 識別コード 識別コード
-     * @param 処理日時 処理日時
+     * @param 識別コード ShikibetsuCode
+     * @param 履歴番号 RirekiNo
      * @return DbT1004ShisetsuNyutaishoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1004ShisetsuNyutaishoEntity selectByKey(
-            LasdecCode 市町村コード,
             ShikibetsuCode 識別コード,
-            YMDHMS 処理日時) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+            Decimal 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
-                                eq(shichosonCode, 市町村コード),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(shoriTimestamp, 処理日時))).
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT1004ShisetsuNyutaishoEntity.class);
     }
 
@@ -75,35 +67,18 @@ public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuN
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 
+    /**
+     * DbT1004ShisetsuNyutaishoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
     @Transaction
     @Override
-    public int insert(DbT1004ShisetsuNyutaishoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.insert(entity).execute();
+    public int save(DbT1004ShisetsuNyutaishoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険施設入退所エンティティ"));
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    @Transaction
-    @Override
-    public int update(DbT1004ShisetsuNyutaishoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
-    }
-
-    @Transaction
-    @Override
-    public int delete(DbT1004ShisetsuNyutaishoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.delete(entity).execute();
-    }
-
-    @Transaction
-    public int deletePhysical(DbT1004ShisetsuNyutaishoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
-    }
-
-    void insertDenialRow(DbT1004ShisetsuNyutaishoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3086KyufuhiKashitsukekinShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -311,7 +312,7 @@ public class KyufuhiKashitsukekinShinseiModel implements Serializable {
      *
      * @return 提出物管理番号
      */
-    public int get提出物管理番号() {
+    public Decimal get提出物管理番号() {
         return entity.getTeishutsubutsuKanriNo();
     }
 
@@ -590,7 +591,7 @@ public class KyufuhiKashitsukekinShinseiModel implements Serializable {
      *
      * @param 提出物管理番号 提出物管理番号
      */
-    public void set提出物管理番号(int 提出物管理番号) {
+    public void set提出物管理番号(Decimal 提出物管理番号) {
         requireNonNull(提出物管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("提出物管理番号"));
         entity.setTeishutsubutsuKanriNo(提出物管理番号);
     }

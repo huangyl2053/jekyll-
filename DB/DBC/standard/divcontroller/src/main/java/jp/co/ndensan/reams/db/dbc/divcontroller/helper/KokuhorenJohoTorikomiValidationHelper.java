@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.helper;
 
 import jp.co.ndensan.reams.db.dbc.business.KokuhorenJohoTorikomiValidator;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;

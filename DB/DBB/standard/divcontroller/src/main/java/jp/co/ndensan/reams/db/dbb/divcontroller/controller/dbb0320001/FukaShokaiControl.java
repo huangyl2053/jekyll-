@@ -5,23 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
+import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaShokaiControlDiv;
-import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
+//import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 根拠・期割画面の賦課照会コントロールdivです。
@@ -65,8 +64,8 @@ public class FukaShokaiControl {
         // ここまで
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
         // ここから
-        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
-                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+        FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
+                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
                 RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //       // TODO 賦課根拠かこっちかでDBアクセスを一回にしたい
@@ -91,8 +90,8 @@ public class FukaShokaiControl {
     public ResponseData<FukaShokaiControlDiv> reLoad(FukaShokaiControlDiv div) {
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課照会キーを作成。
         // ここから
-        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
-                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+        FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
+                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
                 RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();

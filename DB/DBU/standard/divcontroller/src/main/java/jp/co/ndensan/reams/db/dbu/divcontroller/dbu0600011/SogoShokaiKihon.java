@@ -9,8 +9,6 @@ import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011.SogoShokaiKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ua.uax.divcontroller.controller.commonchilddiv.atenashokaisimple.AtenaShokaiSimple;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 //import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -40,7 +38,7 @@ public class SogoShokaiKihon {
         //宛名照会 識別コード設定
 //        AtenaShokaiSimple.setData(panel.getSogoShokaiKihonInfo().getAtenaInfo(),
 //                new ShikibetsuCode(ymlData.getAsRString("識別コード")));
-//        
+//
         //RString rsShikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
         //宛名照会 識別コード設定
         //AtenaShokaiSimple.setData(panel.getSogoShokaiKihonInfo(), new ShikibetsuCode(rsShikibetsuCode));

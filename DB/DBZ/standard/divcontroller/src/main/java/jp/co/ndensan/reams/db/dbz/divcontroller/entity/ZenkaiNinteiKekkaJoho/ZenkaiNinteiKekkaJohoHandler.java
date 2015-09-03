@@ -9,15 +9,9 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbz.realservice.INinteiKekkaJohoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.INinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
-import jp.co.ndensan.reams.db.dbz.realservice.NinteiKekkaJohoFactory;
-import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
-import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -29,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ZenkaiNinteiKekkaJohoHandler {
 
     private final ZenkaiNinteiKekkaJohoDiv div;
-    private IShinseiRirekiManager shinseiRirekiManager;
-    private INinteiShinseiJohoManager ninteiShinseiJohoManager;
-    private INinteiKekkaJohoManager ninteiKekkaJohoManager;
+//    private IShinseiRirekiManager shinseiRirekiManager;
+//    private INinteiShinseiJohoManager ninteiShinseiJohoManager;
+//    private INinteiKekkaJohoManager ninteiKekkaJohoManager;
     private SubGyomuCode subGyomuCode;
 
     /**
@@ -50,33 +44,31 @@ public class ZenkaiNinteiKekkaJohoHandler {
      */
     public void onClickBtnZenkaiJohoShosaiGuide() {
 
-        createZenkaiNinteiKekkaJohoManager();
-        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = shinseiRirekiManager.find申請履歴情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
-
-        if (shinseiRirekiJoho.isPresent()) {
-            createZenkaiNinteiKekkaJoho(shinseiRirekiJoho);
-        }
+//       createZenkaiNinteiKekkaJohoManager();
+//        Optional<IShinseiRirekiJoho> shinseiRirekiJoho = shinseiRirekiManager.find申請履歴情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
+//        if (shinseiRirekiJoho.isPresent()) {
+//            createZenkaiNinteiKekkaJoho(shinseiRirekiJoho);
+//        }
     }
 
     private void createZenkaiNinteiKekkaJoho(Optional<IShinseiRirekiJoho> shinseiRirekiJoho) {
 
-        Optional<INinteiShinseiJoho> ninteiShinseiJoho
-                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
-        if (!ninteiShinseiJoho.isPresent()) {
-            return;
-        }
-        Optional<INinteiKekkaJoho> ninteiKekkaJoho
-                = ninteiKekkaJohoManager.find要介護認定結果情報(ninteiShinseiJoho.get().get申請書管理番号());
-        if (ninteiKekkaJoho.isPresent()) {
-
-            if (!KoroshoInterfaceShikibetsuCode.toValue(ninteiShinseiJoho.get().get厚労省IF識別コード().value()).getCode().isEmpty()) {
-                div.getTxtYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode
-                        .toValue(ninteiShinseiJoho.get().get厚労省IF識別コード().value()), ninteiKekkaJoho.get().get二次判定要介護状態区分コード().value()).getName());
-                div.getTxtNinteiDay().setValue(ninteiKekkaJoho.get().get二次判定年月日());
-                div.getTxtYukoKikanFrom().setValue(ninteiKekkaJoho.get().get二次判定認定有効開始年月日());
-                div.getTxtYukoKikanTo().setValue(ninteiKekkaJoho.get().get二次判定認定有効終了年月日());
-            }
-        }
+//        Optional<INinteiShinseiJoho> ninteiShinseiJoho
+//                = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
+//        if (!ninteiShinseiJoho.isPresent()) {
+//            return;
+//        }
+//        Optional<INinteiKekkaJoho> ninteiKekkaJoho
+//                = ninteiKekkaJohoManager.find要介護認定結果情報(ninteiShinseiJoho.get().get申請書管理番号());
+//        if (ninteiKekkaJoho.isPresent()) {
+//            if (!KoroshoInterfaceShikibetsuCode.toValue(ninteiShinseiJoho.get().get厚労省IF識別コード().value()).getCode().isEmpty()) {
+//                div.getTxtYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode
+//                        .toValue(ninteiShinseiJoho.get().get厚労省IF識別コード().value()), ninteiKekkaJoho.get().get二次判定要介護状態区分コード().value()).getName());
+//                div.getTxtNinteiDay().setValue(ninteiKekkaJoho.get().get二次判定年月日());
+//                div.getTxtYukoKikanFrom().setValue(ninteiKekkaJoho.get().get二次判定認定有効開始年月日());
+//                div.getTxtYukoKikanTo().setValue(ninteiKekkaJoho.get().get二次判定認定有効終了年月日());
+//            }
+//        }
     }
 
     private static RString nullToStr(RString str) {
@@ -90,9 +82,9 @@ public class ZenkaiNinteiKekkaJohoHandler {
     }
 
     private void createZenkaiNinteiKekkaJohoManager() {
-        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
-        ninteiShinseiJohoManager = NinteiShinseiJohoManagerFactory.createInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
-        ninteiKekkaJohoManager = NinteiKekkaJohoFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+//        shinseiRirekiManager = ShinseiRirekiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+//        ninteiShinseiJohoManager = NinteiShinseiJohoManagerFactory.createInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+//        ninteiKekkaJohoManager = NinteiKekkaJohoFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
     }
 
     /**

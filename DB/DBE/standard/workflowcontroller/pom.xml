@@ -9,35 +9,20 @@
     <artifactId>DbeWorkflowcontroller</artifactId>
     <packaging>jar</packaging>
     <name>DbeWorkflowcontroller</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+		<!-- DBE -->
+		<!-- DBX -->
+		<!-- DBZ -->
+		<!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeRealService</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbePersistence</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dbe</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>DbzPersistence</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- テスト -->
+		<!-- ツール -->
     </dependencies>
 </project>

@@ -4,34 +4,32 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払請求特定診療費・特別療養費エンティティのテスト用インスタンスを作成する補助クラスです。
- *
- * @author LDNS 周杏月
  */
 public final class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator {
 
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
-    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth(new RString("201406"));
-    public static final RString DEFAULT_整理番号 = new RString("1");
-    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo(new RString("2"));
-    public static final RString DEFAULT_様式番号 = new RString("1");
-    public static final RString DEFAULT_順次番号 = new RString("1");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
-    public static final RString DEFAULT_傷病名 = new RString("1");
-    public static final RString DEFAULT_識別番号 = new RString("1");
-    public static final int DEFAULT_単位数 = 1;
-    public static final int DEFAULT_回数 = 1;
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
+    public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
+    public static final RString DEFAULT_整理番号 = new RString("Data");
+    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
+    public static final RString DEFAULT_様式番号 = new RString("Data");
+    public static final RString DEFAULT_順次番号 = new RString("Data");
+    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_傷病名 = new RString("Data");
+    public static final RString DEFAULT_識別番号 = new RString("Data");
+    public static final Decimal DEFAULT_単位数 = new Decimal(0);
+    public static final Decimal DEFAULT_回数 = new Decimal(0);
     public static final int DEFAULT_サービス単位数 = 1;
     public static final int DEFAULT_合計単位数 = 1;
-    public static final RString DEFAULT_摘要 = new RString("1");
+    public static final RString DEFAULT_摘要 = new RString("Data");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -47,6 +45,7 @@ public final class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator {
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setJunjiNo(DEFAULT_順次番号);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShobyoName(DEFAULT_傷病名);
         entity.setShikibetsuNo(DEFAULT_識別番号);
         entity.setTanisu(DEFAULT_単位数);

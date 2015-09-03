@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
 
 /**
  * Reams導入保険者であることを表します。

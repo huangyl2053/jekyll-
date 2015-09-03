@@ -6,34 +6,32 @@
 package jp.co.ndensan.reams.db.dbz.realservice.report;
 
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoSofusakiInfoConfig;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ur.urz.business.Association;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.MeishoFuyoType;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SetainushiRiyoKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.service.core.atesaki.IAtesakiFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
+import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.MeishoFuyoType;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.SetainushiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.JushoKangaiEditPattern;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.JushoKannaiEditPattern;
-import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IAtesakiFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportManager;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportWriter;
-import jp.co.ndensan.reams.ur.urz.realservice.report.core.ReportManagerFactory;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.service.core.Association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.core.IReportManager;
+import jp.co.ndensan.reams.ur.urz.service.report.core.IReportWriter;
+import jp.co.ndensan.reams.ur.urz.service.report.core.ReportManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 被保険者証を発行するために使用するPrinterのBaseクラスです。<br/>
@@ -83,8 +81,8 @@ public class HihokenshashoPrinterBase {
      * @param daichoModel 被保険者台帳Model
      * @return 対応する個人の情報
      */
-    public IKojin getKojin(HihokenshaDaichoModel daichoModel) {
-        return kojinFinder.get個人(GyomuCode.DB介護保険, daichoModel.get識別コード());
+    public IKojin getKojin(DbT1001HihokenshaDaichoEntity daichoModel) {
+        return kojinFinder.get個人(GyomuCode.DB介護保険, daichoModel.getShikibetsuCode());
     }
 
     /**
@@ -93,7 +91,7 @@ public class HihokenshashoPrinterBase {
      * @param hihokenshaNo 被保険者番号
      * @return 被保険者台帳Model
      */
-    public HihokenshaDaichoModel getDaichoModel(HihokenshaNo hihokenshaNo) {
+    public DbT1001HihokenshaDaichoEntity getDaichoModel(HihokenshaNo hihokenshaNo) {
         return hihoDaichoFinder.find直近被保険者台帳(hihokenshaNo).get();
     }
 
@@ -131,7 +129,7 @@ public class HihokenshashoPrinterBase {
      * @return 導入団体情報 Association
      */
     public Association getAssociation() {
-        return AssociationService.createAssociationFinder().getAssociation();
+        return AssociationFinderFactory.createInstance().getAssociation();
     }
 
     /**
