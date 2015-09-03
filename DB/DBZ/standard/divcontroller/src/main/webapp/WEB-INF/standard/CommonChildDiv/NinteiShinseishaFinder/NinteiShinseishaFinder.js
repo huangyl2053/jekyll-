@@ -131,17 +131,9 @@ var DBZ;
                     this.controls = controls;
                 }
                 MinashiType.prototype.Minashi = function () {
-                    var minashiFlag = this.controls.chkMinashiFlag();
-                    minashiFlag.selectedItem = this.controls.chkMinashiFlag().dataSource[0].key;
-                    this.controls.chkMinashiFlag.prototype = minashiFlag;
-                    this.controls.chkMinashiFlag()._control.afterPropertiesSet();
                     this.controls.chkMinashiFlag().readOnly = true;
                 };
                 MinashiType.prototype.NotMinashi = function () {
-                    var minashiFlag = this.controls.chkMinashiFlag().selectedItem[0].replace = "True";
-
-                    this.controls.chkMinashiFlag().selectedItem = "True";
-                    this.controls.chkMinashiFlag()._control.afterPropertiesSet();
                     this.controls.chkMinashiFlag().readOnly = false;
                 };
                 return MinashiType;

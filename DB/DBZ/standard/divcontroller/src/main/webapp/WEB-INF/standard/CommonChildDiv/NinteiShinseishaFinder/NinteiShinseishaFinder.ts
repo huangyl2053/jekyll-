@@ -144,8 +144,6 @@ module DBZ {
                     this.controls.chkMinashiFlag().readOnly = true;
                     }
                 public NotMinashi(): void {
-                    var minashiFlag = this.controls.chkMinashiFlag().selectedItem[0].replace="True";
-
                     this.controls.chkMinashiFlag().readOnly = false;
                 }
             }

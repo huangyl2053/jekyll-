@@ -340,16 +340,16 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoShuryoDate"));
             };
 
-            Controls.prototype.txtNijiHanteiKekkaFrom = function () {
-                return new UZA.TextBox(this.convFiledName("txtNijiHanteiKekkaFrom"));
+            Controls.prototype.txtNijiHanteiDateFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNijiHanteiDateFrom"));
             };
 
-            Controls.prototype.lblNijiHanteiKekka = function () {
-                return new UZA.Label(this.convFiledName("lblNijiHanteiKekka"));
+            Controls.prototype.lblNijiHanteiDate = function () {
+                return new UZA.Label(this.convFiledName("lblNijiHanteiDate"));
             };
 
-            Controls.prototype.txtNijiHanteiKakkaTo = function () {
-                return new UZA.TextBox(this.convFiledName("txtNijiHanteiKakkaTo"));
+            Controls.prototype.txtNijiHnateiDateTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNijiHnateiDateTo"));
             };
 
             Controls.prototype.txtKaisaiDateFrom = function () {
