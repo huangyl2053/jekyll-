@@ -140,10 +140,6 @@ var DBZ;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTaishoshaShosaiMemo"));
             };
 
-            Controls.prototype.spSpace1 = function () {
-                return new UZA.Space(this.convFiledName("spSpace1"));
-            };
-
             Controls.prototype.btnClear = function () {
                 return new UZA.Button(this.convFiledName("btnClear"));
             };

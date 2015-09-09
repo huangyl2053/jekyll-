@@ -44,8 +44,8 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuDay"));
             };
 
-            Controls.prototype.txtTorikeshiDay = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorikeshiDay"));
+            Controls.prototype.txtTorisageDay = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorisageDay"));
             };
 
             Controls.prototype.txtToshoNinteiKikanFrom = function () {

@@ -4,11 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaWariateInput.NinteiChosaWariateInput.INinteiChosaWariateInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaWariateInput.NinteiChosaWariateInput.INinteiChosaWariateInputDiv;
 
 /**
  * NinteiChosaWariateInput のクラスファイル 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWariateInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,44 +38,76 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getWariateJokyo
+     * @return WariateJokyo
+     */
     @JsonProperty("WariateJokyo")
     public WariateJokyoDiv getWariateJokyo() {
         return WariateJokyo;
     }
 
+    /*
+     * setWariateJokyo
+     * @param WariateJokyo WariateJokyo
+     */
     @JsonProperty("WariateJokyo")
     public void setWariateJokyo(WariateJokyoDiv WariateJokyo) {
-        this.WariateJokyo=WariateJokyo;
+        this.WariateJokyo = WariateJokyo;
     }
 
+    /*
+     * getbtnSearchTaishosha
+     * @return btnSearchTaishosha
+     */
     @JsonProperty("btnSearchTaishosha")
     public ButtonDialog getBtnSearchTaishosha() {
         return btnSearchTaishosha;
     }
 
+    /*
+     * setbtnSearchTaishosha
+     * @param btnSearchTaishosha btnSearchTaishosha
+     */
     @JsonProperty("btnSearchTaishosha")
     public void setBtnSearchTaishosha(ButtonDialog btnSearchTaishosha) {
-        this.btnSearchTaishosha=btnSearchTaishosha;
+        this.btnSearchTaishosha = btnSearchTaishosha;
     }
 
+    /*
+     * getbtnDisplayLatestInformation
+     * @return btnDisplayLatestInformation
+     */
     @JsonProperty("btnDisplayLatestInformation")
     public Button getBtnDisplayLatestInformation() {
         return btnDisplayLatestInformation;
     }
 
+    /*
+     * setbtnDisplayLatestInformation
+     * @param btnDisplayLatestInformation btnDisplayLatestInformation
+     */
     @JsonProperty("btnDisplayLatestInformation")
     public void setBtnDisplayLatestInformation(Button btnDisplayLatestInformation) {
-        this.btnDisplayLatestInformation=btnDisplayLatestInformation;
+        this.btnDisplayLatestInformation = btnDisplayLatestInformation;
     }
 
+    /*
+     * getTaishoshaShosai
+     * @return TaishoshaShosai
+     */
     @JsonProperty("TaishoshaShosai")
     public TaishoshaShosaiDiv getTaishoshaShosai() {
         return TaishoshaShosai;
     }
 
+    /*
+     * setTaishoshaShosai
+     * @param TaishoshaShosai TaishoshaShosai
+     */
     @JsonProperty("TaishoshaShosai")
     public void setTaishoshaShosai(TaishoshaShosaiDiv TaishoshaShosai) {
-        this.TaishoshaShosai=TaishoshaShosai;
+        this.TaishoshaShosai = TaishoshaShosai;
     }
 
     /*
@@ -319,16 +351,6 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     @JsonIgnore
     public void  setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
         this.getTaishoshaShosai().setTxtTaishoshaShosaiMemo(txtTaishoshaShosaiMemo);
-    }
-
-    @JsonIgnore
-    public Space getSpSpace1() {
-        return this.getTaishoshaShosai().getSpSpace1();
-    }
-
-    @JsonIgnore
-    public void  setSpSpace1(Space spSpace1) {
-        this.getTaishoshaShosai().setSpSpace1(spSpace1);
     }
 
     @JsonIgnore

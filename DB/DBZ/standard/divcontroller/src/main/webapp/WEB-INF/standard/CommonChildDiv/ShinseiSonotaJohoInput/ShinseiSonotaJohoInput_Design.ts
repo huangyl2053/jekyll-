@@ -49,8 +49,8 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuDay"));
             }
 
-            public txtTorikeshiDay(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorikeshiDay"));
+            public txtTorisageDay(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorisageDay"));
             }
 
             public txtToshoNinteiKikanFrom(): UZA.TextBoxFlexibleDate {
