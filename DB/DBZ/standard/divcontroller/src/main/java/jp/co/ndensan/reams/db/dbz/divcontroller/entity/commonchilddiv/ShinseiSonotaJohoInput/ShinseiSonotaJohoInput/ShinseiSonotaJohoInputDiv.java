@@ -35,8 +35,8 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     private TextBox txtRiyu;
     @JsonProperty("txtSoshitsuDay")
     private TextBoxFlexibleDate txtSoshitsuDay;
-    @JsonProperty("txtTorikeshiDay")
-    private TextBoxFlexibleDate txtTorikeshiDay;
+    @JsonProperty("txtTorisageDay")
+    private TextBoxFlexibleDate txtTorisageDay;
     @JsonProperty("txtToshoNinteiKikanFrom")
     private TextBoxFlexibleDate txtToshoNinteiKikanFrom;
     @JsonProperty("txtToshoNinteiKikanTo")
@@ -131,21 +131,21 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
     }
 
     /*
-     * gettxtTorikeshiDay
-     * @return txtTorikeshiDay
+     * gettxtTorisageDay
+     * @return txtTorisageDay
      */
-    @JsonProperty("txtTorikeshiDay")
-    public TextBoxFlexibleDate getTxtTorikeshiDay() {
-        return txtTorikeshiDay;
+    @JsonProperty("txtTorisageDay")
+    public TextBoxFlexibleDate getTxtTorisageDay() {
+        return txtTorisageDay;
     }
 
     /*
-     * settxtTorikeshiDay
-     * @param txtTorikeshiDay txtTorikeshiDay
+     * settxtTorisageDay
+     * @param txtTorisageDay txtTorisageDay
      */
-    @JsonProperty("txtTorikeshiDay")
-    public void setTxtTorikeshiDay(TextBoxFlexibleDate txtTorikeshiDay) {
-        this.txtTorikeshiDay = txtTorikeshiDay;
+    @JsonProperty("txtTorisageDay")
+    public void setTxtTorisageDay(TextBoxFlexibleDate txtTorisageDay) {
+        this.txtTorisageDay = txtTorisageDay;
     }
 
     /*
@@ -289,15 +289,15 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
         NinteiMode("NinteiMode"),
         KyakkaMode("KyakkaMode"),
         ShokkenKisaiMode("ShokkenKisaiMode"),
-        TorikeshiMode("TorikeshiMode"),
-        ShokkenTorikeshiMode("ShokkenTorikeshiMode"),
+        TorisageMode("TorisageMode"),
+        ShokkenTorisageMode("ShokkenTorisageMode"),
         SoshitsuMode("SoshitsuMode"),
         JukyuShikakushashoMode("JukyuShikakushashoMode"),
         ShokaiMode("ShokaiMode"),
         RirekiTsuika("RirekiTsuika"),
         RirekiSakujoShusei("RirekiSakujoShusei"),
-        RirekiShinseiTorikeshi("RirekiShinseiTorikeshi"),
-        RirekiNinteiTorikeshi("RirekiNinteiTorikeshi"),
+        RirekiShinseiTorisage("RirekiShinseiTorisage"),
+        RirekiNinteiTorisage("RirekiNinteiTorisage"),
         RirekTsuikaKyakka("RirekTsuikaKyakka");
 
         private final String name;

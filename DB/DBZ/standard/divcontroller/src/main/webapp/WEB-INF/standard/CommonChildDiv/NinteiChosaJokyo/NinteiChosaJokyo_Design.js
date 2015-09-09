@@ -56,6 +56,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             };
 
+            Controls.prototype.btnChosainJohoClear = function () {
+                return new UZA.Button(this.convFiledName("btnChosainJohoClear"));
+            };
+
             Controls.prototype.txtNinteiChosaYubinNo = function () {
                 return new UZA.TextBoxYubinNo(this.convFiledName("txtNinteiChosaYubinNo"));
             };
@@ -90,6 +94,10 @@ var DBZ;
 
             Controls.prototype.txtChosasakiName = function () {
                 return new UZA.TextBox(this.convFiledName("txtChosasakiName"));
+            };
+
+            Controls.prototype.btnHomonChosaClear = function () {
+                return new UZA.Button(this.convFiledName("btnHomonChosaClear"));
             };
 
             Controls.prototype.txtChosasakiYubinNo = function () {
@@ -130,6 +138,10 @@ var DBZ;
 
             Controls.prototype.txtShujiiIryoKikanName = function () {
                 return new UZA.TextBox(this.convFiledName("txtShujiiIryoKikanName"));
+            };
+
+            Controls.prototype.btnShujiiJohoClear = function () {
+                return new UZA.Button(this.convFiledName("btnShujiiJohoClear"));
             };
 
             Controls.prototype.txtShujiiIryoKikanYubinNo = function () {
@@ -226,6 +238,10 @@ var DBZ;
 
             Controls.prototype.btnTorikeshi = function () {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            };
+
+            Controls.prototype.btnAllClear = function () {
+                return new UZA.Button(this.convFiledName("btnAllClear"));
             };
             return Controls;
         })();

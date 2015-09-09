@@ -61,6 +61,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             }
 
+            public btnChosainJohoClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnChosainJohoClear"));
+            }
+
             public txtNinteiChosaYubinNo(): UZA.TextBoxYubinNo {
                 return new UZA.TextBoxYubinNo(this.convFiledName("txtNinteiChosaYubinNo"));
             }
@@ -95,6 +99,10 @@ module DBZ {
 
             public txtChosasakiName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtChosasakiName"));
+            }
+
+            public btnHomonChosaClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHomonChosaClear"));
             }
 
             public txtChosasakiYubinNo(): UZA.TextBoxYubinNo {
@@ -135,6 +143,10 @@ module DBZ {
 
             public txtShujiiIryoKikanName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShujiiIryoKikanName"));
+            }
+
+            public btnShujiiJohoClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShujiiJohoClear"));
             }
 
             public txtShujiiIryoKikanYubinNo(): UZA.TextBoxYubinNo {
@@ -231,6 +243,10 @@ module DBZ {
 
             public btnTorikeshi(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnTorikeshi"));
+            }
+
+            public btnAllClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAllClear"));
             }
 
         }

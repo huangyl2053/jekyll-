@@ -22,8 +22,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujiii
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.rirekishusei.RirekiShusei.IRirekiShuseiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseisonotaJohoInput.ShinseiSonotaJohoInputDiv;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * RirekiShusei のクラスファイル 
@@ -198,6 +200,53 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum DisplayType implements ICommonChildDivMode {
+
+        tsuika("tsuika"),
+        sakujo("sakujo"),
+        sakujoShusei("sakujoShusei"),
+        torikeshiTsuika("torikeshiTsuika"),
+        torikeshiShusei("torikeshiShusei"),
+        ninteiShusei("ninteiShusei");
+
+        private final String name;
+
+        private DisplayType(final String name) {
+            this.name = name;
+        }
+
+        public static DisplayType getEnum(String str) {
+            DisplayType[] enumArray = DisplayType.values();
+
+            for (DisplayType enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public DisplayType getMode_DisplayType() {
+        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+    }
+
+    public void setMode_DisplayType( DisplayType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
     }
 
     /*
