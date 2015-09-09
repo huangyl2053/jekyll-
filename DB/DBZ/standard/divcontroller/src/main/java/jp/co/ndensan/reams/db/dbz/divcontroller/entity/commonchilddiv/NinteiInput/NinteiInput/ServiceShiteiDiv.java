@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ServiceShiteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class ServiceShiteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblServiceIken
+     * @return lblServiceIken
+     */
     @JsonProperty("lblServiceIken")
     public Label getLblServiceIken() {
         return lblServiceIken;
     }
 
+    /*
+     * setlblServiceIken
+     * @param lblServiceIken lblServiceIken
+     */
     @JsonProperty("lblServiceIken")
     public void setLblServiceIken(Label lblServiceIken) {
-        this.lblServiceIken=lblServiceIken;
+        this.lblServiceIken = lblServiceIken;
     }
 
+    /*
+     * getdgServiceIchiran
+     * @return dgServiceIchiran
+     */
     @JsonProperty("dgServiceIchiran")
     public DataGrid<dgServiceIchiran_Row> getDgServiceIchiran() {
         return dgServiceIchiran;
     }
 
+    /*
+     * setdgServiceIchiran
+     * @param dgServiceIchiran dgServiceIchiran
+     */
     @JsonProperty("dgServiceIchiran")
     public void setDgServiceIchiran(DataGrid<dgServiceIchiran_Row> dgServiceIchiran) {
-        this.dgServiceIchiran=dgServiceIchiran;
+        this.dgServiceIchiran = dgServiceIchiran;
     }
 
     // </editor-fold>

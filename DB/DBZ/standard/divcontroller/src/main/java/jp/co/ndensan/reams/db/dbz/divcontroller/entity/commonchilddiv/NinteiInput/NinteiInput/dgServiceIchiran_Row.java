@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInp
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 05 17:09:10 JST 2015 
+ * Tue Sep 08 18:40:19 JST 2015 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgServiceIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
 
     private RString code;
     private RString serviceName;
@@ -28,6 +28,8 @@ public class dgServiceIchiran_Row extends DataRow {
         super();
         this.code = RString.EMPTY;
         this.serviceName = RString.EMPTY;
+        this.setOriginalData("code", code);
+        this.setOriginalData("serviceName", serviceName);
     }
 
     public dgServiceIchiran_Row(RString code, RString serviceName) {

@@ -28,10 +28,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.lblNinteiChosa = function () {
-                return new UZA.Label(this.convFiledName("lblNinteiChosa"));
-            };
-
             Controls.prototype.NinteiChosa = function () {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             };
@@ -72,24 +68,20 @@ var DBZ;
                 return new UZA.TextBoxTelNo(this.convFiledName("txtNinteiChosaTelNo"));
             };
 
-            Controls.prototype.txtNinteiChosaIraiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaIraiDay"));
+            Controls.prototype.txtNinteiChosaIraiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaIraiDate"));
             };
 
-            Controls.prototype.txtNinteiChosaJisshiYoteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiYoteiDay"));
+            Controls.prototype.txtNinteiChosaJisshiYoteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiYoteiDate"));
             };
 
-            Controls.prototype.NinteiChosaJissiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("NinteiChosaJissiDay"));
+            Controls.prototype.txtNinteiChosaJisshiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiDate"));
             };
 
             Controls.prototype.ddlNinteiChosaItakusakiKubun = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlNinteiChosaItakusakiKubun"));
-            };
-
-            Controls.prototype.lblHomonSaki = function () {
-                return new UZA.Label(this.convFiledName("lblHomonSaki"));
             };
 
             Controls.prototype.HomonChosasaki = function () {
@@ -112,10 +104,6 @@ var DBZ;
                 return new UZA.TextBoxTelNo(this.convFiledName("txtChosasakiTelNo"));
             };
 
-            Controls.prototype.lblShujii = function () {
-                return new UZA.Label(this.convFiledName("lblShujii"));
-            };
-
             Controls.prototype.ShujiiAndShujiIryoKikan = function () {
                 return new UZA.Panel(this.convFiledName("ShujiiAndShujiIryoKikan"));
             };
@@ -124,8 +112,8 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtShujiiCode"));
             };
 
-            Controls.prototype.btnShujii = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnShujii"));
+            Controls.prototype.btnShujiiGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnShujiiGuide"));
             };
 
             Controls.prototype.txtShujiiName = function () {
@@ -136,8 +124,8 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtShujiiIryoKikanCode"));
             };
 
-            Controls.prototype.btnIryoKikan = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikan"));
+            Controls.prototype.btnIryoKikanGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikanGuide"));
             };
 
             Controls.prototype.txtShujiiIryoKikanName = function () {
@@ -156,24 +144,20 @@ var DBZ;
                 return new UZA.TextBoxTelNo(this.convFiledName("txtShujiiIryoKikanTelNo"));
             };
 
-            Controls.prototype.txtShujiiIryoKikanIraiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanIraiDay"));
+            Controls.prototype.txtShujiiIryoKikanIraiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanIraiDate"));
             };
 
-            Controls.prototype.txtShujiiIryoKikanNyushuYoteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDay"));
+            Controls.prototype.txtShujiiIryoKikanNyushuYoteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDate"));
             };
 
-            Controls.prototype.txtShujiiIryoKikanNyushuDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuDay"));
+            Controls.prototype.txtShujiiIryoKikanNyushuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuDate"));
             };
 
             Controls.prototype.chkShujiiKubun = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkShujiiKubun"));
-            };
-
-            Controls.prototype.lblIchijiHantei = function () {
-                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
             };
 
             Controls.prototype.IchijiHantei = function () {
@@ -184,32 +168,28 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlYokaigodo"));
             };
 
-            Controls.prototype.txtIchijiHanteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtIchijiHanteiDay"));
+            Controls.prototype.txtIchijiHanteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIchijiHanteiDate"));
             };
 
             Controls.prototype.ddlNinchishoKasangoYokaigodo = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlNinchishoKasangoYokaigodo"));
             };
 
-            Controls.prototype.lblKaigoNinteiShinsakai = function () {
-                return new UZA.Label(this.convFiledName("lblKaigoNinteiShinsakai"));
-            };
-
             Controls.prototype.KaigoNinteiShinsakai = function () {
                 return new UZA.Panel(this.convFiledName("KaigoNinteiShinsakai"));
             };
 
-            Controls.prototype.txtShinsakaiShiryoSakuseiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiShiryoSakuseiDay"));
+            Controls.prototype.txtShinsakaiShiryoSakuseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiShiryoSakuseiDate"));
             };
 
-            Controls.prototype.txtShinsakaiKaisaiYoteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiKaisaiYoteiDay"));
+            Controls.prototype.txtShinsakaiKaisaiYoteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiKaisaiYoteiDate"));
             };
 
-            Controls.prototype.txtNijiHanteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNijiHanteiDay"));
+            Controls.prototype.txtNijiHanteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNijiHanteiDate"));
             };
 
             Controls.prototype.ddlNijiHanteiKekka = function () {
@@ -221,15 +201,11 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiYukoKikanFrom = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoKikanFrom"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanFrom"));
             };
 
             Controls.prototype.txtNinteiYukoKikanTo = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoKikanTo"));
-            };
-
-            Controls.prototype.lblEnkiTsuchi = function () {
-                return new UZA.Label(this.convFiledName("lblEnkiTsuchi"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanTo"));
             };
 
             Controls.prototype.EnkiTsuchi = function () {
@@ -237,15 +213,19 @@ var DBZ;
             };
 
             Controls.prototype.txtEnkiTsuchiHakkoDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
             };
 
             Controls.prototype.txtEnkiTsuchiHakkoCount = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtEnkiTsuchiHakkoCount"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
             };
             return Controls;
         })();

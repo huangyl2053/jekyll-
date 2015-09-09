@@ -13,9 +13,35 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new RirekiShusei.PublicProperties(this.fieldName);
             };
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
             return ModeController;
         })();
         RirekiShusei.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.tsuika = function () {
+                };
+                DisplayType.prototype.sakujo = function () {
+                };
+                DisplayType.prototype.sakujoShusei = function () {
+                };
+                DisplayType.prototype.torikeshiTsuika = function () {
+                };
+                DisplayType.prototype.torikeshiShusei = function () {
+                };
+                DisplayType.prototype.ninteiShusei = function () {
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(RirekiShusei.Modes || (RirekiShusei.Modes = {}));
+        var Modes = RirekiShusei.Modes;
     })(DBZ.RirekiShusei || (DBZ.RirekiShusei = {}));
     var RirekiShusei = DBZ.RirekiShusei;
 })(DBZ || (DBZ = {}));

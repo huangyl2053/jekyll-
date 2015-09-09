@@ -115,6 +115,28 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
+                ShoriType.prototype.TokushuShinseiTorikeshiMode = function () {
+                    this.controls.txtNinteiYMD().readOnly = false;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = false;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = false;
+                    this.controls.txtYukoShuryoYMD().readOnly = false;
+
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
+
+                    this.controls.dgServiceIchiran().readOnly = false;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = false;
+
+                    this.controls.btnYokaigodoGuide().disabled = false;
+                    this.controls.btnAfter6Month().disabled = false;
+                    this.controls.btnAfter12Month().disabled = false;
+                    this.controls.btnAfter18Month().disabled = false;
+                    this.controls.btnAfter24Month().disabled = false;
+                };
                 ShoriType.prototype.ShokaiMode = function () {
                     this.controls.txtNinteiYMD().readOnly = true;
                     this.controls.txtShinsakaiIken().readOnly = true;
@@ -215,6 +237,72 @@ var DBZ;
                     this.controls.dgServiceIchiran().readOnly = true;
 
                     this.controls.chkMinashiKoshinNintei().readOnly = true;
+
+                    this.controls.btnYokaigodoGuide().disabled = true;
+                    this.controls.btnAfter6Month().disabled = true;
+                    this.controls.btnAfter12Month().disabled = true;
+                    this.controls.btnAfter18Month().disabled = true;
+                    this.controls.btnAfter24Month().disabled = true;
+                };
+                ShoriType.prototype.KyakkaRirekiTsuikaMode = function () {
+                    this.controls.txtNinteiYMD().readOnly = false;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = true;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = true;
+                    this.controls.txtYukoShuryoYMD().readOnly = true;
+
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
+
+                    this.controls.dgServiceIchiran().readOnly = true;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = false;
+
+                    this.controls.btnYokaigodoGuide().disabled = true;
+                    this.controls.btnAfter6Month().disabled = true;
+                    this.controls.btnAfter12Month().disabled = true;
+                    this.controls.btnAfter18Month().disabled = true;
+                    this.controls.btnAfter24Month().disabled = true;
+                };
+                ShoriType.prototype.ShinseiTorikeshiRirekiMode = function () {
+                    this.controls.txtNinteiYMD().readOnly = true;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = true;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = true;
+                    this.controls.txtYukoShuryoYMD().readOnly = true;
+
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
+
+                    this.controls.dgServiceIchiran().readOnly = true;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = false;
+
+                    this.controls.btnYokaigodoGuide().disabled = true;
+                    this.controls.btnAfter6Month().disabled = true;
+                    this.controls.btnAfter12Month().disabled = true;
+                    this.controls.btnAfter18Month().disabled = true;
+                    this.controls.btnAfter24Month().disabled = true;
+                };
+                ShoriType.prototype.KyakkaTorikeshiRirekiShusei = function () {
+                    this.controls.txtNinteiYMD().readOnly = false;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = true;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = true;
+                    this.controls.txtYukoShuryoYMD().readOnly = true;
+
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
+
+                    this.controls.dgServiceIchiran().readOnly = false;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = false;
 
                     this.controls.btnYokaigodoGuide().disabled = true;
                     this.controls.btnAfter6Month().disabled = true;

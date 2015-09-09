@@ -186,6 +186,61 @@ module DBZ
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 }
+                 public RirekiTsuika(): void {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = true;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                }
+                public RirekiSakujoShusei(): void {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = false;
+                    this.controls.txtRiyu().readOnly = true;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                }
+                public RirekiShinseiTorikeshi(): void {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = false;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                }
+                public RirekiNinteiTorikeshi(): void {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = false;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                }
+                public RirekTsuikaKyakka(): void {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                }
             }
         }
     }

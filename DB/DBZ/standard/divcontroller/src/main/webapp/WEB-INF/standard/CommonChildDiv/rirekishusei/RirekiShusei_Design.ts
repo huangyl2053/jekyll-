@@ -1,12 +1,13 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../KaigoNinteiShinseiKihonJohoInput/KaigoNinteiShinseiKihonJohoInput.ts" />
-// <reference path="./../NinteiShinseiTodokedesha/NinteiShinseiTodokedesha.ts" />
-// <reference path="./../shujiiIryokikanandshujiiinput/ShujiiIryokikanAndShujiiInput.ts" />
-// <reference path="./../NinteiInput/NinteiInput.ts" />
-// <reference path="./../ZenkaiNinteiKekkaJoho/ZenkaiNinteiKekkaJoho.ts" />
-// <reference path="./../ShinseiSonotaJohoInput/ShinseiSonotaJohoInput.ts" />
+/// <reference path="./../KaigoNinteiShinseiKihonJohoInput/KaigoNinteiShinseiKihonJohoInput.ts" />
+/// <reference path="./../NinteiShinseiTodokedesha/NinteiShinseiTodokedesha.ts" />
+/// <reference path="./../shujiiIryokikanandshujiiinput/ShujiiIryokikanAndShujiiInput.ts" />
+/// <reference path="./../chosaitakusakiandchosaininput/ChosaItakusakiAndChosainInput.ts" />
+/// <reference path="./../NinteiInput/NinteiInput.ts" />
+/// <reference path="./../ZenkaiNinteiKekkaJoho/ZenkaiNinteiKekkaJoho.ts" />
+/// <reference path="./../ShinseiSonotaJohoInput/ShinseiSonotaJohoInput.ts" />
 
 module DBZ {
 
@@ -39,29 +40,41 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            //public ccdKaigoNinteiShinseiKihonJohoInput(): DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController {
-            //    return new DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController(this.convFiledName("ccdKaigoNinteiShinseiKihonJohoInput"));
-            //}
+            public ccdKaigoNinteiShinseiKihonJohoInput(): DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController {
+                return new DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController(this.convFiledName("ccdKaigoNinteiShinseiKihonJohoInput"));
+            }
 
-            //public ccdNinteiShinseiTodokedesha(): DBZ.NinteiShinseiTodokedesha.ModeController {
-            //    return new DBZ.NinteiShinseiTodokedesha.ModeController(this.convFiledName("ccdNinteiShinseiTodokedesha"));
-            //}
+            public ccdNinteiShinseiTodokedesha(): DBZ.NinteiShinseiTodokedesha.ModeController {
+                return new DBZ.NinteiShinseiTodokedesha.ModeController(this.convFiledName("ccdNinteiShinseiTodokedesha"));
+            }
 
-            //public ccdShujiiIryokikanAndShujiiInput(): DBZ.ShujiiIryokikanAndShujiiInput.ModeController {
-            //    return new DBZ.ShujiiIryokikanAndShujiiInput.ModeController(this.convFiledName("ccdShujiiIryokikanAndShujiiInput"));
-            //}
+            public ShijiiIryokikanAndShijiiInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShijiiIryokikanAndShijiiInput"));
+            }
 
-            //public ccdNinteiJohoInput(): DBZ.NinteiInput.ModeController {
-            //    return new DBZ.NinteiInput.ModeController(this.convFiledName("ccdNinteiJohoInput"));
-            //}
+            public ccdShujiiIryokikanAndShujiiInput(): DBZ.ShujiiIryokikanAndShujiiInput.ModeController {
+                return new DBZ.ShujiiIryokikanAndShujiiInput.ModeController(this.convFiledName("ccdShujiiIryokikanAndShujiiInput"));
+            }
 
-            //public ccdZenkaiNinteiKekka(): DBZ.ZenkaiNinteiKekkaJoho.ModeController {
-            //    return new DBZ.ZenkaiNinteiKekkaJoho.ModeController(this.convFiledName("ccdZenkaiNinteiKekka"));
-            //}
+            public ChsaItakusakiAndChosainInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ChsaItakusakiAndChosainInput"));
+            }
 
-            //public ccdShinseiSonotaJohoInput(): DBZ.ShinseiSonotaJohoInput.ModeController {
-            //    return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
-            //}
+            public ccdChosaItakusakiAndChosainInput(): DBZ.ChosaItakusakiAndChosainInput.ModeController {
+                return new DBZ.ChosaItakusakiAndChosainInput.ModeController(this.convFiledName("ccdChosaItakusakiAndChosainInput"));
+            }
+
+            public ccdNinteiJohoInput(): DBZ.NinteiInput.ModeController {
+                return new DBZ.NinteiInput.ModeController(this.convFiledName("ccdNinteiJohoInput"));
+            }
+
+            public ccdZenkaiNinteiKekka(): DBZ.ZenkaiNinteiKekkaJoho.ModeController {
+                return new DBZ.ZenkaiNinteiKekkaJoho.ModeController(this.convFiledName("ccdZenkaiNinteiKekka"));
+            }
+
+            public ccdShinseiSonotaJohoInput(): DBZ.ShinseiSonotaJohoInput.ModeController {
+                return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
+            }
 
             public btnChosaJokyo(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaJokyo"));

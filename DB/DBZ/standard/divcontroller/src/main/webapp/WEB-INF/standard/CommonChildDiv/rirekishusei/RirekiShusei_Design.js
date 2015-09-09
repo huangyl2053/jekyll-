@@ -28,6 +28,42 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.ccdKaigoNinteiShinseiKihonJohoInput = function () {
+                return new DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController(this.convFiledName("ccdKaigoNinteiShinseiKihonJohoInput"));
+            };
+
+            Controls.prototype.ccdNinteiShinseiTodokedesha = function () {
+                return new DBZ.NinteiShinseiTodokedesha.ModeController(this.convFiledName("ccdNinteiShinseiTodokedesha"));
+            };
+
+            Controls.prototype.ShijiiIryokikanAndShijiiInput = function () {
+                return new UZA.Panel(this.convFiledName("ShijiiIryokikanAndShijiiInput"));
+            };
+
+            Controls.prototype.ccdShujiiIryokikanAndShujiiInput = function () {
+                return new DBZ.ShujiiIryokikanAndShujiiInput.ModeController(this.convFiledName("ccdShujiiIryokikanAndShujiiInput"));
+            };
+
+            Controls.prototype.ChsaItakusakiAndChosainInput = function () {
+                return new UZA.Panel(this.convFiledName("ChsaItakusakiAndChosainInput"));
+            };
+
+            Controls.prototype.ccdChosaItakusakiAndChosainInput = function () {
+                return new DBZ.ChosaItakusakiAndChosainInput.ModeController(this.convFiledName("ccdChosaItakusakiAndChosainInput"));
+            };
+
+            Controls.prototype.ccdNinteiJohoInput = function () {
+                return new DBZ.NinteiInput.ModeController(this.convFiledName("ccdNinteiJohoInput"));
+            };
+
+            Controls.prototype.ccdZenkaiNinteiKekka = function () {
+                return new DBZ.ZenkaiNinteiKekkaJoho.ModeController(this.convFiledName("ccdZenkaiNinteiKekka"));
+            };
+
+            Controls.prototype.ccdShinseiSonotaJohoInput = function () {
+                return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
+            };
+
             Controls.prototype.btnChosaJokyo = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnChosaJokyo"));
             };

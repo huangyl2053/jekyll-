@@ -33,10 +33,6 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public lblNinteiChosa(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblNinteiChosa"));
-            }
-
             public NinteiChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             }
@@ -77,24 +73,20 @@ module DBZ {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtNinteiChosaTelNo"));
             }
 
-            public txtNinteiChosaIraiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaIraiDay"));
+            public txtNinteiChosaIraiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaIraiDate"));
             }
 
-            public txtNinteiChosaJisshiYoteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiYoteiDay"));
+            public txtNinteiChosaJisshiYoteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiYoteiDate"));
             }
 
-            public NinteiChosaJissiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("NinteiChosaJissiDay"));
+            public txtNinteiChosaJisshiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaJisshiDate"));
             }
 
             public ddlNinteiChosaItakusakiKubun(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlNinteiChosaItakusakiKubun"));
-            }
-
-            public lblHomonSaki(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblHomonSaki"));
             }
 
             public HomonChosasaki(): UZA.Panel {
@@ -117,10 +109,6 @@ module DBZ {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtChosasakiTelNo"));
             }
 
-            public lblShujii(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShujii"));
-            }
-
             public ShujiiAndShujiIryoKikan(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ShujiiAndShujiIryoKikan"));
             }
@@ -129,8 +117,8 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtShujiiCode"));
             }
 
-            public btnShujii(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnShujii"));
+            public btnShujiiGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShujiiGuide"));
             }
 
             public txtShujiiName(): UZA.TextBox {
@@ -141,8 +129,8 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtShujiiIryoKikanCode"));
             }
 
-            public btnIryoKikan(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikan"));
+            public btnIryoKikanGuide(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikanGuide"));
             }
 
             public txtShujiiIryoKikanName(): UZA.TextBox {
@@ -161,24 +149,20 @@ module DBZ {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtShujiiIryoKikanTelNo"));
             }
 
-            public txtShujiiIryoKikanIraiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanIraiDay"));
+            public txtShujiiIryoKikanIraiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanIraiDate"));
             }
 
-            public txtShujiiIryoKikanNyushuYoteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDay"));
+            public txtShujiiIryoKikanNyushuYoteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuYoteiDate"));
             }
 
-            public txtShujiiIryoKikanNyushuDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIryoKikanNyushuDay"));
+            public txtShujiiIryoKikanNyushuDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShujiiIryoKikanNyushuDate"));
             }
 
             public chkShujiiKubun(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkShujiiKubun"));
-            }
-
-            public lblIchijiHantei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
             }
 
             public IchijiHantei(): UZA.Panel {
@@ -189,32 +173,28 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlYokaigodo"));
             }
 
-            public txtIchijiHanteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtIchijiHanteiDay"));
+            public txtIchijiHanteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIchijiHanteiDate"));
             }
 
             public ddlNinchishoKasangoYokaigodo(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlNinchishoKasangoYokaigodo"));
             }
 
-            public lblKaigoNinteiShinsakai(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblKaigoNinteiShinsakai"));
-            }
-
             public KaigoNinteiShinsakai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("KaigoNinteiShinsakai"));
             }
 
-            public txtShinsakaiShiryoSakuseiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiShiryoSakuseiDay"));
+            public txtShinsakaiShiryoSakuseiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiShiryoSakuseiDate"));
             }
 
-            public txtShinsakaiKaisaiYoteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsakaiKaisaiYoteiDay"));
+            public txtShinsakaiKaisaiYoteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsakaiKaisaiYoteiDate"));
             }
 
-            public txtNijiHanteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNijiHanteiDay"));
+            public txtNijiHanteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNijiHanteiDate"));
             }
 
             public ddlNijiHanteiKekka(): UZA.DropDownList {
@@ -225,32 +205,32 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNijiHanteiYukoKikan"));
             }
 
-            public txtNinteiYukoKikanFrom(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoKikanFrom"));
+            public txtNinteiYukoKikanFrom(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanFrom"));
             }
 
-            public txtNinteiYukoKikanTo(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoKikanTo"));
-            }
-
-            public lblEnkiTsuchi(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblEnkiTsuchi"));
+            public txtNinteiYukoKikanTo(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanTo"));
             }
 
             public EnkiTsuchi(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("EnkiTsuchi"));
             }
 
-            public txtEnkiTsuchiHakkoDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
+            public txtEnkiTsuchiHakkoDay(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtEnkiTsuchiHakkoDay"));
             }
 
             public txtEnkiTsuchiHakkoCount(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtEnkiTsuchiHakkoCount"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
+
+            public btnTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTorikeshi"));
             }
 
         }

@@ -4,13 +4,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInp
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.INinteiInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.INinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 
 /**
  * NinteiInput のクラスファイル 
@@ -18,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiInputDiv extends Panel implements INinteiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -46,74 +50,184 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getNinteiJoho
+     * @return NinteiJoho
+     */
     @JsonProperty("NinteiJoho")
     public NinteiJohoDiv getNinteiJoho() {
         return NinteiJoho;
     }
 
+    /*
+     * setNinteiJoho
+     * @param NinteiJoho NinteiJoho
+     */
     @JsonProperty("NinteiJoho")
     public void setNinteiJoho(NinteiJohoDiv NinteiJoho) {
-        this.NinteiJoho=NinteiJoho;
+        this.NinteiJoho = NinteiJoho;
     }
 
+    /*
+     * getServiceShitei
+     * @return ServiceShitei
+     */
     @JsonProperty("ServiceShitei")
     public ServiceShiteiDiv getServiceShitei() {
         return ServiceShitei;
     }
 
+    /*
+     * setServiceShitei
+     * @param ServiceShitei ServiceShitei
+     */
     @JsonProperty("ServiceShitei")
     public void setServiceShitei(ServiceShiteiDiv ServiceShitei) {
-        this.ServiceShitei=ServiceShitei;
+        this.ServiceShitei = ServiceShitei;
     }
 
+    /*
+     * gettxtShinsakaiIken
+     * @return txtShinsakaiIken
+     */
     @JsonProperty("txtShinsakaiIken")
     public TextBoxMultiLine getTxtShinsakaiIken() {
         return txtShinsakaiIken;
     }
 
+    /*
+     * settxtShinsakaiIken
+     * @param txtShinsakaiIken txtShinsakaiIken
+     */
     @JsonProperty("txtShinsakaiIken")
     public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
-        this.txtShinsakaiIken=txtShinsakaiIken;
+        this.txtShinsakaiIken = txtShinsakaiIken;
     }
 
+    /*
+     * gethdnDatabaseSubGyomuCode
+     * @return hdnDatabaseSubGyomuCode
+     */
     @JsonProperty("hdnDatabaseSubGyomuCode")
     public RString getHdnDatabaseSubGyomuCode() {
         return hdnDatabaseSubGyomuCode;
     }
 
+    /*
+     * sethdnDatabaseSubGyomuCode
+     * @param hdnDatabaseSubGyomuCode hdnDatabaseSubGyomuCode
+     */
     @JsonProperty("hdnDatabaseSubGyomuCode")
     public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode=hdnDatabaseSubGyomuCode;
+        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
     }
 
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
     @JsonProperty("hdnShinseishoKanriNo")
     public RString getHdnShinseishoKanriNo() {
         return hdnShinseishoKanriNo;
     }
 
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
     @JsonProperty("hdnShinseishoKanriNo")
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
+    /*
+     * gethdnKoroshoIfShikibetsuCode
+     * @return hdnKoroshoIfShikibetsuCode
+     */
     @JsonProperty("hdnKoroshoIfShikibetsuCode")
     public RString getHdnKoroshoIfShikibetsuCode() {
         return hdnKoroshoIfShikibetsuCode;
     }
 
+    /*
+     * sethdnKoroshoIfShikibetsuCode
+     * @param hdnKoroshoIfShikibetsuCode hdnKoroshoIfShikibetsuCode
+     */
     @JsonProperty("hdnKoroshoIfShikibetsuCode")
     public void setHdnKoroshoIfShikibetsuCode(RString hdnKoroshoIfShikibetsuCode) {
-        this.hdnKoroshoIfShikibetsuCode=hdnKoroshoIfShikibetsuCode;
+        this.hdnKoroshoIfShikibetsuCode = hdnKoroshoIfShikibetsuCode;
     }
 
+    /*
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
+     */
     @JsonProperty("hdnHihokenshaNo")
     public RString getHdnHihokenshaNo() {
         return hdnHihokenshaNo;
     }
 
+    /*
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
+     */
     @JsonProperty("hdnHihokenshaNo")
     public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
-        this.hdnHihokenshaNo=hdnHihokenshaNo;
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum ShoriType implements ICommonChildDivMode {
+
+        TemnyuMode("TemnyuMode"),
+        InputMode("InputMode"),
+        TokushuTsuikaMode("TokushuTsuikaMode"),
+        TokushuShuseiMode("TokushuShuseiMode"),
+        TokushuShinseiTorikeshiMode("TokushuShinseiTorikeshiMode"),
+        ShokaiMode("ShokaiMode"),
+        NinteiMode("NinteiMode"),
+        ShokkenTsuikaMode("ShokkenTsuikaMode"),
+        ShokkenShuseiMode("ShokkenShuseiMode"),
+        IchibuSoshitsuMode("IchibuSoshitsuMode"),
+        KyakkaRirekiTsuikaMode("KyakkaRirekiTsuikaMode"),
+        ShinseiTorikeshiRirekiMode("ShinseiTorikeshiRirekiMode"),
+        KyakkaTorikeshiRirekiShusei("KyakkaTorikeshiRirekiShusei");
+
+        private final String name;
+
+        private ShoriType(final String name) {
+            this.name = name;
+        }
+
+        public static ShoriType getEnum(String str) {
+            ShoriType[] enumArray = ShoriType.values();
+
+            for (ShoriType enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public ShoriType getMode_ShoriType() {
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+    }
+
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     /*
