@@ -145,10 +145,6 @@ module DBZ {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTaishoshaShosaiMemo"));
             }
 
-            public spSpace1(): UZA.Space {
-                return new UZA.Space(this.convFiledName("spSpace1"));
-            }
-
             public btnClear(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnClear"));
             }
