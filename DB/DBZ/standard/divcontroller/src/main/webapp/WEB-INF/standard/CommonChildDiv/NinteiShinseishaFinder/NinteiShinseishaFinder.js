@@ -19,6 +19,9 @@ var DBZ;
             ModeController.prototype.GyomuType = function () {
                 return new Modes.GyomuType(this.controls);
             };
+            ModeController.prototype.MinashiType = function () {
+                return new Modes.MinashiType(this.controls);
+            };
             return ModeController;
         })();
         NinteiShinseishaFinder.ModeController = ModeController;
@@ -122,6 +125,20 @@ var DBZ;
                 return GyomuType;
             })();
             Modes.GyomuType = GyomuType;
+
+            var MinashiType = (function () {
+                function MinashiType(controls) {
+                    this.controls = controls;
+                }
+                MinashiType.prototype.Minashi = function () {
+                    this.controls.chkMinashiFlag().readOnly = true;
+                };
+                MinashiType.prototype.NotMinashi = function () {
+                    this.controls.chkMinashiFlag().readOnly = false;
+                };
+                return MinashiType;
+            })();
+            Modes.MinashiType = MinashiType;
         })(NinteiShinseishaFinder.Modes || (NinteiShinseishaFinder.Modes = {}));
         var Modes = NinteiShinseishaFinder.Modes;
     })(DBZ.NinteiShinseishaFinder || (DBZ.NinteiShinseishaFinder = {}));
