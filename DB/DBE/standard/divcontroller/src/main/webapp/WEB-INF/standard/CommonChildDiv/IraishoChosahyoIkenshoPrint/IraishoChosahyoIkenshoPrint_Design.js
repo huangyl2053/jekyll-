@@ -1,30 +1,30 @@
 var DBE;
 (function (DBE) {
-    (function (ChosaIraishoAndChosahyoAndIkenshoPrint) {
+    (function (IraishoChosahyoIkenshoPrint) {
         var Events = (function () {
             function Events() {
             }
             return Events;
         })();
-        ChosaIraishoAndChosahyoAndIkenshoPrint.Events = Events;
+        IraishoChosahyoIkenshoPrint.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "ChosaIraishoAndChosahyoAndIkenshoPrint";
+                return "IraishoChosahyoIkenshoPrint";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBE.ChosaIraishoAndChosahyoAndIkenshoPrint.Controls.myType();
+                return this._myName + "_" + DBE.IraishoChosahyoIkenshoPrint.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.ChosaIraishoAndChosahyoAndIkenshoPrint.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBE.IraishoChosahyoIkenshoPrint.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.ChosaIraishoAndChosahyoAndIkenshoPrint = function () {
+            Controls.prototype.IraishoChosahyoIkenshoPrint = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
@@ -145,7 +145,7 @@ var DBE;
             };
             return Controls;
         })();
-        ChosaIraishoAndChosahyoAndIkenshoPrint.Controls = Controls;
-    })(DBE.ChosaIraishoAndChosahyoAndIkenshoPrint || (DBE.ChosaIraishoAndChosahyoAndIkenshoPrint = {}));
-    var ChosaIraishoAndChosahyoAndIkenshoPrint = DBE.ChosaIraishoAndChosahyoAndIkenshoPrint;
+        IraishoChosahyoIkenshoPrint.Controls = Controls;
+    })(DBE.IraishoChosahyoIkenshoPrint || (DBE.IraishoChosahyoIkenshoPrint = {}));
+    var IraishoChosahyoIkenshoPrint = DBE.IraishoChosahyoIkenshoPrint;
 })(DBE || (DBE = {}));

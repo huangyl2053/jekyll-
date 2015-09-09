@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IraishoChosahyoIkenshoPrint.IraishoChosahyoIkenshoPrint;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.dgNinteiChosa_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.dgShujiiIkensho_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IraishoChosahyoIkenshoPrint.IraishoChosahyoIkenshoPrint.dgNinteiChosa_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IraishoChosahyoIkenshoPrint.IraishoChosahyoIkenshoPrint.dgShujiiIkensho_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
