@@ -8,6 +8,30 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnChosainJohoClear(): string {
+                return "onClick_btnChosainJohoClear";
+            }
+
+            public static onClick_btnHomonChosaClear(): string {
+                return "onClick_btnHomonChosaClear";
+            }
+
+            public static onClick_btnShujiiJohoClear(): string {
+                return "onClick_btnShujiiJohoClear";
+            }
+
+            public static onOkClose(): string {
+                return "onOkClose";
+            }
+
+            public static onCancelClose(): string {
+                return "onCancelClose";
+            }
+
+            public static onClick_btnAllClear(): string {
+                return "onClick_btnAllClear";
+            }
+
         }
 
         export class Controls {
@@ -99,6 +123,18 @@ module DBZ {
 
             public txtChosasakiName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtChosasakiName"));
+            }
+
+            public btnZenKaiFukusha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZenKaiFukusha"));
+            }
+
+            public btnHonninJushoFukusha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHonninJushoFukusha"));
+            }
+
+            public btnNyushoShisetsuFukusha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNyushoShisetsuFukusha"));
             }
 
             public btnHomonChosaClear(): UZA.Button {

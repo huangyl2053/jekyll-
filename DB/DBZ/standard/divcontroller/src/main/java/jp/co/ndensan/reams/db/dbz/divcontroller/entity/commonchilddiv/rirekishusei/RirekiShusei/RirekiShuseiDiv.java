@@ -12,14 +12,15 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.INinteiInputD
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseisonotaJohoInput.IShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.IShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -60,6 +61,12 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     private Button btnKakutei;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnSerializeBusiness")
+    private RString hdnSerializeBusiness;
+    @JsonProperty("hdnDisplayModeKey")
+    private RString hdnDisplayModeKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -200,6 +207,60 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
+    }
+
+    /*
+     * gethdnSerializeBusiness
+     * @return hdnSerializeBusiness
+     */
+    @JsonProperty("hdnSerializeBusiness")
+    public RString getHdnSerializeBusiness() {
+        return hdnSerializeBusiness;
+    }
+
+    /*
+     * sethdnSerializeBusiness
+     * @param hdnSerializeBusiness hdnSerializeBusiness
+     */
+    @JsonProperty("hdnSerializeBusiness")
+    public void setHdnSerializeBusiness(RString hdnSerializeBusiness) {
+        this.hdnSerializeBusiness = hdnSerializeBusiness;
+    }
+
+    /*
+     * gethdnDisplayModeKey
+     * @return hdnDisplayModeKey
+     */
+    @JsonProperty("hdnDisplayModeKey")
+    public RString getHdnDisplayModeKey() {
+        return hdnDisplayModeKey;
+    }
+
+    /*
+     * sethdnDisplayModeKey
+     * @param hdnDisplayModeKey hdnDisplayModeKey
+     */
+    @JsonProperty("hdnDisplayModeKey")
+    public void setHdnDisplayModeKey(RString hdnDisplayModeKey) {
+        this.hdnDisplayModeKey = hdnDisplayModeKey;
     }
 
     /*

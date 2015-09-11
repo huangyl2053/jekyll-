@@ -15,6 +15,14 @@ module DBZ {
 
         export class Events {
 
+            public static onOkClose(): string {
+                return "onOkClose";
+            }
+
+            public static onCancelClose(): string {
+                return "onCancelClose";
+            }
+
         }
 
         export class Controls {

@@ -4,6 +4,29 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnChosainJohoClear = function () {
+                return "onClick_btnChosainJohoClear";
+            };
+
+            Events.onClick_btnHomonChosaClear = function () {
+                return "onClick_btnHomonChosaClear";
+            };
+
+            Events.onClick_btnShujiiJohoClear = function () {
+                return "onClick_btnShujiiJohoClear";
+            };
+
+            Events.onOkClose = function () {
+                return "onOkClose";
+            };
+
+            Events.onCancelClose = function () {
+                return "onCancelClose";
+            };
+
+            Events.onClick_btnAllClear = function () {
+                return "onClick_btnAllClear";
+            };
             return Events;
         })();
         NinteiChosaJokyo.Events = Events;
@@ -94,6 +117,18 @@ var DBZ;
 
             Controls.prototype.txtChosasakiName = function () {
                 return new UZA.TextBox(this.convFiledName("txtChosasakiName"));
+            };
+
+            Controls.prototype.btnZenKaiFukusha = function () {
+                return new UZA.Button(this.convFiledName("btnZenKaiFukusha"));
+            };
+
+            Controls.prototype.btnHonninJushoFukusha = function () {
+                return new UZA.Button(this.convFiledName("btnHonninJushoFukusha"));
+            };
+
+            Controls.prototype.btnNyushoShisetsuFukusha = function () {
+                return new UZA.Button(this.convFiledName("btnNyushoShisetsuFukusha"));
             };
 
             Controls.prototype.btnHomonChosaClear = function () {

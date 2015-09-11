@@ -4,6 +4,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose = function () {
+                return "onOkClose";
+            };
+
+            Events.onCancelClose = function () {
+                return "onCancelClose";
+            };
             return Events;
         })();
         RirekiShusei.Events = Events;

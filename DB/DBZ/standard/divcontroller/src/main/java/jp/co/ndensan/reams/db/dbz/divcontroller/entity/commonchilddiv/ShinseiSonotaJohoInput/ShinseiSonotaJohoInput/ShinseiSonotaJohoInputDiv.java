@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.IShinseiSonotaJohoInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * ShinseiSonotaJohoInput のクラスファイル 
- * 
+ * ShinseiSonotaJohoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJohoInputDiv {
@@ -334,5 +334,63 @@ public class ShinseiSonotaJohoInputDiv extends Panel implements IShinseiSonotaJo
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public RString get移動事由() {
+        return ddlIdoJiyu.getSelectedKey();
+    }
+
+    @Override
+    public RString get削除事由() {
+        return ddlSakujoJiyu.getSelectedKey();
+    }
+
+    @Override
+    public RString get理由() {
+        return txtRiyu.getValue();
+    }
+
+    @Override
+    public FlexibleDate get喪失日() {
+        return txtSoshitsuDay.getValue();
+    }
+
+    @Override
+    public FlexibleDate get取下日() {
+        return txtTorisageDay.getValue();
+    }
+
+    @Override
+    public FlexibleDate get当初認定期間開始() {
+        return txtToshoNinteiKikanFrom.getValue();
+    }
+
+    @Override
+    public FlexibleDate get当初認定期間終了() {
+        return txtToshoNinteiKikanTo.getValue();
+    }
+
+    @Override
+    public FlexibleDate get受給資格者証発行日１() {
+        return txtJukyuShikakuHakkoDay1.getValue();
+    }
+
+    @Override
+    public FlexibleDate get受給資格者証発効日２() {
+        return txtJukyuShikakuHakkoDay2.getValue();
+    }
+
+    @Override
+    public void clear() {
+        createHandler().clear();
+    }
+
+    @Override
+    public void initialize() {
+        createHandler().initialize();
+    }
+
+    private ShinseiSonotaJohoInputHandler createHandler() {
+        return new ShinseiSonotaJohoInputHandler(this);
+    }
 
 }

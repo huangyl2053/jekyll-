@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseisonotaJohoInput.ShinseiSonotaJohoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestShinseiSonotaJohoInput.TestShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 

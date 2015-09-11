@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -45,6 +46,10 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     private Button btnTorikeshi;
     @JsonProperty("btnAllClear")
     private Button btnAllClear;
+    @JsonProperty("hdnSerializedBusiness")
+    private RString hdnSerializedBusiness;
+    @JsonProperty("hdnDisplayModeKey")
+    private RString hdnDisplayModeKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -212,6 +217,42 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonProperty("btnAllClear")
     public void setBtnAllClear(Button btnAllClear) {
         this.btnAllClear = btnAllClear;
+    }
+
+    /*
+     * gethdnSerializedBusiness
+     * @return hdnSerializedBusiness
+     */
+    @JsonProperty("hdnSerializedBusiness")
+    public RString getHdnSerializedBusiness() {
+        return hdnSerializedBusiness;
+    }
+
+    /*
+     * sethdnSerializedBusiness
+     * @param hdnSerializedBusiness hdnSerializedBusiness
+     */
+    @JsonProperty("hdnSerializedBusiness")
+    public void setHdnSerializedBusiness(RString hdnSerializedBusiness) {
+        this.hdnSerializedBusiness = hdnSerializedBusiness;
+    }
+
+    /*
+     * gethdnDisplayModeKey
+     * @return hdnDisplayModeKey
+     */
+    @JsonProperty("hdnDisplayModeKey")
+    public RString getHdnDisplayModeKey() {
+        return hdnDisplayModeKey;
+    }
+
+    /*
+     * sethdnDisplayModeKey
+     * @param hdnDisplayModeKey hdnDisplayModeKey
+     */
+    @JsonProperty("hdnDisplayModeKey")
+    public void setHdnDisplayModeKey(RString hdnDisplayModeKey) {
+        this.hdnDisplayModeKey = hdnDisplayModeKey;
     }
 
     /*
@@ -408,6 +449,36 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonIgnore
     public void  setTxtChosasakiName(TextBox txtChosasakiName) {
         this.getHomonChosasaki().setTxtChosasakiName(txtChosasakiName);
+    }
+
+    @JsonIgnore
+    public Button getBtnZenKaiFukusha() {
+        return this.getHomonChosasaki().getBtnZenKaiFukusha();
+    }
+
+    @JsonIgnore
+    public void  setBtnZenKaiFukusha(Button btnZenKaiFukusha) {
+        this.getHomonChosasaki().setBtnZenKaiFukusha(btnZenKaiFukusha);
+    }
+
+    @JsonIgnore
+    public Button getBtnHonninJushoFukusha() {
+        return this.getHomonChosasaki().getBtnHonninJushoFukusha();
+    }
+
+    @JsonIgnore
+    public void  setBtnHonninJushoFukusha(Button btnHonninJushoFukusha) {
+        this.getHomonChosasaki().setBtnHonninJushoFukusha(btnHonninJushoFukusha);
+    }
+
+    @JsonIgnore
+    public Button getBtnNyushoShisetsuFukusha() {
+        return this.getHomonChosasaki().getBtnNyushoShisetsuFukusha();
+    }
+
+    @JsonIgnore
+    public void  setBtnNyushoShisetsuFukusha(Button btnNyushoShisetsuFukusha) {
+        this.getHomonChosasaki().setBtnNyushoShisetsuFukusha(btnNyushoShisetsuFukusha);
     }
 
     @JsonIgnore

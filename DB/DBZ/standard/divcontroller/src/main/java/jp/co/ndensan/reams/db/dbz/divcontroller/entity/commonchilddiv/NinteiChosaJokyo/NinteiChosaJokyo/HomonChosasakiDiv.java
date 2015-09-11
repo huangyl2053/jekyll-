@@ -24,6 +24,12 @@ public class HomonChosasakiDiv extends Panel {
      */
     @JsonProperty("txtChosasakiName")
     private TextBox txtChosasakiName;
+    @JsonProperty("btnZenKaiFukusha")
+    private Button btnZenKaiFukusha;
+    @JsonProperty("btnHonninJushoFukusha")
+    private Button btnHonninJushoFukusha;
+    @JsonProperty("btnNyushoShisetsuFukusha")
+    private Button btnNyushoShisetsuFukusha;
     @JsonProperty("btnHomonChosaClear")
     private Button btnHomonChosaClear;
     @JsonProperty("txtChosasakiYubinNo")
@@ -55,6 +61,60 @@ public class HomonChosasakiDiv extends Panel {
     @JsonProperty("txtChosasakiName")
     public void setTxtChosasakiName(TextBox txtChosasakiName) {
         this.txtChosasakiName = txtChosasakiName;
+    }
+
+    /*
+     * getbtnZenKaiFukusha
+     * @return btnZenKaiFukusha
+     */
+    @JsonProperty("btnZenKaiFukusha")
+    public Button getBtnZenKaiFukusha() {
+        return btnZenKaiFukusha;
+    }
+
+    /*
+     * setbtnZenKaiFukusha
+     * @param btnZenKaiFukusha btnZenKaiFukusha
+     */
+    @JsonProperty("btnZenKaiFukusha")
+    public void setBtnZenKaiFukusha(Button btnZenKaiFukusha) {
+        this.btnZenKaiFukusha = btnZenKaiFukusha;
+    }
+
+    /*
+     * getbtnHonninJushoFukusha
+     * @return btnHonninJushoFukusha
+     */
+    @JsonProperty("btnHonninJushoFukusha")
+    public Button getBtnHonninJushoFukusha() {
+        return btnHonninJushoFukusha;
+    }
+
+    /*
+     * setbtnHonninJushoFukusha
+     * @param btnHonninJushoFukusha btnHonninJushoFukusha
+     */
+    @JsonProperty("btnHonninJushoFukusha")
+    public void setBtnHonninJushoFukusha(Button btnHonninJushoFukusha) {
+        this.btnHonninJushoFukusha = btnHonninJushoFukusha;
+    }
+
+    /*
+     * getbtnNyushoShisetsuFukusha
+     * @return btnNyushoShisetsuFukusha
+     */
+    @JsonProperty("btnNyushoShisetsuFukusha")
+    public Button getBtnNyushoShisetsuFukusha() {
+        return btnNyushoShisetsuFukusha;
+    }
+
+    /*
+     * setbtnNyushoShisetsuFukusha
+     * @param btnNyushoShisetsuFukusha btnNyushoShisetsuFukusha
+     */
+    @JsonProperty("btnNyushoShisetsuFukusha")
+    public void setBtnNyushoShisetsuFukusha(Button btnNyushoShisetsuFukusha) {
+        this.btnNyushoShisetsuFukusha = btnNyushoShisetsuFukusha;
     }
 
     /*
