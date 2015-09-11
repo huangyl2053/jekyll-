@@ -63,10 +63,16 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     private Button btnCancel;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
-    @JsonProperty("hdnSerializeBusiness")
-    private RString hdnSerializeBusiness;
     @JsonProperty("hdnDisplayModeKey")
     private RString hdnDisplayModeKey;
+    @JsonProperty("hdnKonkaiJohoSerialized")
+    private RString hdnKonkaiJohoSerialized;
+    @JsonProperty("hdnZenkaiJohoSerialized")
+    private RString hdnZenkaiJohoSerialized;
+    @JsonProperty("hdnJikaiJohoSerialized")
+    private RString hdnJikaiJohoSerialized;
+    @JsonProperty("hdnDeleteKey")
+    private RString hdnDeleteKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -228,24 +234,6 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     }
 
     /*
-     * gethdnSerializeBusiness
-     * @return hdnSerializeBusiness
-     */
-    @JsonProperty("hdnSerializeBusiness")
-    public RString getHdnSerializeBusiness() {
-        return hdnSerializeBusiness;
-    }
-
-    /*
-     * sethdnSerializeBusiness
-     * @param hdnSerializeBusiness hdnSerializeBusiness
-     */
-    @JsonProperty("hdnSerializeBusiness")
-    public void setHdnSerializeBusiness(RString hdnSerializeBusiness) {
-        this.hdnSerializeBusiness = hdnSerializeBusiness;
-    }
-
-    /*
      * gethdnDisplayModeKey
      * @return hdnDisplayModeKey
      */
@@ -261,6 +249,78 @@ public class RirekiShuseiDiv extends Panel implements IRirekiShuseiDiv {
     @JsonProperty("hdnDisplayModeKey")
     public void setHdnDisplayModeKey(RString hdnDisplayModeKey) {
         this.hdnDisplayModeKey = hdnDisplayModeKey;
+    }
+
+    /*
+     * gethdnKonkaiJohoSerialized
+     * @return hdnKonkaiJohoSerialized
+     */
+    @JsonProperty("hdnKonkaiJohoSerialized")
+    public RString getHdnKonkaiJohoSerialized() {
+        return hdnKonkaiJohoSerialized;
+    }
+
+    /*
+     * sethdnKonkaiJohoSerialized
+     * @param hdnKonkaiJohoSerialized hdnKonkaiJohoSerialized
+     */
+    @JsonProperty("hdnKonkaiJohoSerialized")
+    public void setHdnKonkaiJohoSerialized(RString hdnKonkaiJohoSerialized) {
+        this.hdnKonkaiJohoSerialized = hdnKonkaiJohoSerialized;
+    }
+
+    /*
+     * gethdnZenkaiJohoSerialized
+     * @return hdnZenkaiJohoSerialized
+     */
+    @JsonProperty("hdnZenkaiJohoSerialized")
+    public RString getHdnZenkaiJohoSerialized() {
+        return hdnZenkaiJohoSerialized;
+    }
+
+    /*
+     * sethdnZenkaiJohoSerialized
+     * @param hdnZenkaiJohoSerialized hdnZenkaiJohoSerialized
+     */
+    @JsonProperty("hdnZenkaiJohoSerialized")
+    public void setHdnZenkaiJohoSerialized(RString hdnZenkaiJohoSerialized) {
+        this.hdnZenkaiJohoSerialized = hdnZenkaiJohoSerialized;
+    }
+
+    /*
+     * gethdnJikaiJohoSerialized
+     * @return hdnJikaiJohoSerialized
+     */
+    @JsonProperty("hdnJikaiJohoSerialized")
+    public RString getHdnJikaiJohoSerialized() {
+        return hdnJikaiJohoSerialized;
+    }
+
+    /*
+     * sethdnJikaiJohoSerialized
+     * @param hdnJikaiJohoSerialized hdnJikaiJohoSerialized
+     */
+    @JsonProperty("hdnJikaiJohoSerialized")
+    public void setHdnJikaiJohoSerialized(RString hdnJikaiJohoSerialized) {
+        this.hdnJikaiJohoSerialized = hdnJikaiJohoSerialized;
+    }
+
+    /*
+     * gethdnDeleteKey
+     * @return hdnDeleteKey
+     */
+    @JsonProperty("hdnDeleteKey")
+    public RString getHdnDeleteKey() {
+        return hdnDeleteKey;
+    }
+
+    /*
+     * sethdnDeleteKey
+     * @param hdnDeleteKey hdnDeleteKey
+     */
+    @JsonProperty("hdnDeleteKey")
+    public void setHdnDeleteKey(RString hdnDeleteKey) {
+        this.hdnDeleteKey = hdnDeleteKey;
     }
 
     /*

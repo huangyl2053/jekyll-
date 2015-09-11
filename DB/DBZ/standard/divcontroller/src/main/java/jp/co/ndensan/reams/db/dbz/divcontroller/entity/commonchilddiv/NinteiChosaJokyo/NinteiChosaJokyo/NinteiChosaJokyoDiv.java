@@ -46,10 +46,12 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     private Button btnTorikeshi;
     @JsonProperty("btnAllClear")
     private Button btnAllClear;
-    @JsonProperty("hdnSerializedBusiness")
-    private RString hdnSerializedBusiness;
     @JsonProperty("hdnDisplayModeKey")
     private RString hdnDisplayModeKey;
+    @JsonProperty("hdnSerializedBusiness_Konkai")
+    private RString hdnSerializedBusiness_Konkai;
+    @JsonProperty("hdnSerializedBusiness_Zenkai")
+    private RString hdnSerializedBusiness_Zenkai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -220,24 +222,6 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     /*
-     * gethdnSerializedBusiness
-     * @return hdnSerializedBusiness
-     */
-    @JsonProperty("hdnSerializedBusiness")
-    public RString getHdnSerializedBusiness() {
-        return hdnSerializedBusiness;
-    }
-
-    /*
-     * sethdnSerializedBusiness
-     * @param hdnSerializedBusiness hdnSerializedBusiness
-     */
-    @JsonProperty("hdnSerializedBusiness")
-    public void setHdnSerializedBusiness(RString hdnSerializedBusiness) {
-        this.hdnSerializedBusiness = hdnSerializedBusiness;
-    }
-
-    /*
      * gethdnDisplayModeKey
      * @return hdnDisplayModeKey
      */
@@ -253,6 +237,42 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonProperty("hdnDisplayModeKey")
     public void setHdnDisplayModeKey(RString hdnDisplayModeKey) {
         this.hdnDisplayModeKey = hdnDisplayModeKey;
+    }
+
+    /*
+     * gethdnSerializedBusiness_Konkai
+     * @return hdnSerializedBusiness_Konkai
+     */
+    @JsonProperty("hdnSerializedBusiness_Konkai")
+    public RString getHdnSerializedBusiness_Konkai() {
+        return hdnSerializedBusiness_Konkai;
+    }
+
+    /*
+     * sethdnSerializedBusiness_Konkai
+     * @param hdnSerializedBusiness_Konkai hdnSerializedBusiness_Konkai
+     */
+    @JsonProperty("hdnSerializedBusiness_Konkai")
+    public void setHdnSerializedBusiness_Konkai(RString hdnSerializedBusiness_Konkai) {
+        this.hdnSerializedBusiness_Konkai = hdnSerializedBusiness_Konkai;
+    }
+
+    /*
+     * gethdnSerializedBusiness_Zenkai
+     * @return hdnSerializedBusiness_Zenkai
+     */
+    @JsonProperty("hdnSerializedBusiness_Zenkai")
+    public RString getHdnSerializedBusiness_Zenkai() {
+        return hdnSerializedBusiness_Zenkai;
+    }
+
+    /*
+     * sethdnSerializedBusiness_Zenkai
+     * @param hdnSerializedBusiness_Zenkai hdnSerializedBusiness_Zenkai
+     */
+    @JsonProperty("hdnSerializedBusiness_Zenkai")
+    public void setHdnSerializedBusiness_Zenkai(RString hdnSerializedBusiness_Zenkai) {
+        this.hdnSerializedBusiness_Zenkai = hdnSerializedBusiness_Zenkai;
     }
 
     /*
