@@ -112,20 +112,6 @@ module DBZ
                     this.controls.NinteiShinseiRiyu().readOnly = true;
                 }
 
-                public TokuteiShippeiNashiMode(): void {
-                    this.controls.radShinseishoKubun().readOnly = false;
-                    this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = false;
-                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
-                    this.controls.ddlShinseiKubunHorei().readOnly = false;
-                    this.controls.chkKyuSochisha().readOnly = false;
-                    this.controls.ddlHihokenshaKubun().readOnly = false;
-                    this.controls.chkShikakuShutokuMae().readOnly = false;
-                    this.controls.ddlTokuteiShippei().readOnly = true;
-
-                    this.controls.ServiceSakujo().displayNone = true;
-                    this.controls.NinteiShinseiRiyu().readOnly = false;
-                }
                 public JizenShinseiNashiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
@@ -182,7 +168,37 @@ module DBZ
                     this.controls.ServiceSakujo().displayNone = true;
                     this.controls.NinteiShinseiRiyu().readOnly = true;
                 }
-                            
+
+                public RirekiTsuikaMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
+                    this.controls.ddlShisho().readOnly = false;
+
+                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+                }
+                public RirekiShuseiMode(): void {
+                    //TokuteiShippeiNashiMode Ç©ÇÁÉÇÅ[ÉhñºïœçX
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = true;
+
+                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+                }            
             }
         }
     }

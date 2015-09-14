@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseisonotaJohoInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +42,7 @@ public interface IShinseiSonotaJohoInputDiv extends ICommonChildDivBasePropertie
      *
      * @return 取消日
      */
-    FlexibleDate get取消日();
+    FlexibleDate get取下日();
 
     /**
      * 当初認定期間開始日を取得します。

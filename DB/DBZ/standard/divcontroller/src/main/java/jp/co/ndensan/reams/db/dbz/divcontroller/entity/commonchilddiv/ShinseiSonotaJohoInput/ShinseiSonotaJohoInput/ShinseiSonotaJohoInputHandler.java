@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseisonotaJohoInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DataKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SakujoJiyuCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -71,7 +70,7 @@ public class ShinseiSonotaJohoInputHandler {
 
         div.getTxtRiyu().setValue(直近受給者台帳.get().get異動理由());
         div.getTxtSoshitsuDay().setValue(直近受給者台帳.get().get喪失年月日());
-        div.getTxtTorikeshiDay().setValue(直近受給者台帳.get().get認定取消通知書発行年月日());
+        div.getTxtTorisageDay().setValue(直近受給者台帳.get().get認定取消通知書発行年月日());
         div.getTxtToshoNinteiKikanFrom().setValue(直近受給者台帳.get().get当初認定有効開始年月日());
         div.getTxtToshoNinteiKikanTo().setValue(直近受給者台帳.get().get当初認定有効終了年月日());
         div.getTxtJukyuShikakuHakkoDay1().setValue(直近受給者台帳.get().get受給資格証明書発行年月日１());
@@ -88,7 +87,7 @@ public class ShinseiSonotaJohoInputHandler {
         }
         div.getTxtRiyu().clearValue();
         div.getTxtSoshitsuDay().clearValue();
-        div.getTxtTorikeshiDay().clearValue();
+        div.getTxtTorisageDay().clearValue();
         div.getTxtToshoNinteiKikanFrom().clearValue();
         div.getTxtToshoNinteiKikanTo().clearValue();
         div.getTxtJukyuShikakuHakkoDay1().clearValue();
@@ -111,11 +110,11 @@ public class ShinseiSonotaJohoInputHandler {
                 div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(KYAKKA_IDOJIYU_KEY));
                 break;
 
-            case TorikeshiMode:
+            case TorisageMode:
                 div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(SHINSEITORIKESHI_IDOJIYU_KEY));
                 break;
 
-            case ShokkenTorikeshiMode:
+            case RirekTsuikaKyakka:
             case SoshitsuMode:
                 div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(TORIKESHI_IDOJIYU_KEY));
                 break;

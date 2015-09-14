@@ -1,7 +1,8 @@
-/// <reference path='NinteiChosaJokyo_Design.ts' />
+/// <reference path='RirekiShusei_Design.ts' />
 module DBZ
 {
-    export module NinteiChosaJokyo {
+    export module RirekiShusei
+    {
         export class ModeController {
             private controls: Controls;
             private fieldName: string;
@@ -24,26 +25,29 @@ module DBZ
         }
 
         export module Modes {
-
             export class DisplayType {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
-                public shokai(): void {
-                    this.controls.NinteiChosaJokyo().readOnly = true;
-                    this.controls.btnChosainGuide().disabled = true;
-                    this.controls.btnIryoKikanGuide().disabled = true;
-                    this.controls.btnItakusakiGuide().disabled = true;
-                    this.controls.btnShujiiGuide().disabled = true;
+                public tsuika(): void {
+                    //異動事由のみ入力可能
                 }
-                public input(): void {
-                    this.controls.NinteiChosaJokyo().readOnly = false;
-                    this.controls.btnChosainGuide().disabled = false;
-                    this.controls.btnIryoKikanGuide().disabled = false;
-                    this.controls.btnItakusakiGuide().disabled = false;
-                    this.controls.btnShujiiGuide().disabled = false;
+                public sakujo(): void {
+                    //削除事由のみ入力可能
+                }
+                public sakujoShusei(): void {
+                    //削除事由・当初認定開始-終了・受給資格証明書1-2・申請区分(申請時)-(法令)　が入力可
+                }
+                public torikeshiTsuika(): void {
+                    //ccd認定入力・削除事由・喪失日　が未入力
+                }
+                public torikeshiShusei(): void {
+                    //ccd認定入力・削除事由・喪失日・特定疾病　が未入力
+                }
+                public ninteiShusei(): void {
+                    //tuikaShusei・異動事由
                 }
             }
         }
@@ -52,7 +56,7 @@ module DBZ
 
 module DBZ
 {
-    export module NinteiChosaJokyo
+    export module RirekiShusei
     {
         export class PublicProperties {
             private controls: Controls;

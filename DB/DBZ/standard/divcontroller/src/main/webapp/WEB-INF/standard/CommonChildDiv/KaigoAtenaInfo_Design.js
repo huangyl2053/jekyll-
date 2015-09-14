@@ -29,7 +29,7 @@ var DBZ;
             };
 
             Controls.prototype.atenaInfo = function () {
-                return new URA.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
+                return new UAX.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
             };
             return Controls;
         })();
