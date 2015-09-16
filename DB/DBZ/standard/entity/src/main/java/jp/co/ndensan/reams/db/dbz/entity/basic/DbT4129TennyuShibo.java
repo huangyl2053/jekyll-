@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 転入・死亡情報テーブルの項目定義クラスです。
  */
 public enum DbT4129TennyuShibo implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -65,6 +65,10 @@ public enum DbT4129TennyuShibo implements IColumnDefinition {
      * 二時判定認定有効終了年月日
      */
     nijiHanteiNinteiYukoShuryoYMD(2147483647, 0),
+    /**
+     * 介護認定審査会資料作成年月日
+     */
+    shinsakaiShiryoSakuseiYMD(2147483647, 0),
     /**
      * 介護認定審査会開催番号
      * <br/>介護認定審査会開催予定情報

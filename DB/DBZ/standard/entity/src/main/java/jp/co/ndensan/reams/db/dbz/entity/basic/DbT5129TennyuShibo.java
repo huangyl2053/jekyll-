@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 要介護認定結果情報テーブルの項目定義クラスです。
+ * 転入・死亡情報テーブルの項目定義クラスです。
  */
-public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
+public enum DbT5129TennyuShibo implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -41,6 +41,7 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
@@ -49,7 +50,7 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
     nijiHanteiYMD(2147483647, 0),
     /**
      * 二次判定要介護状態区分コード
-     * <br/>Enum（DBZ：要介護状態区分コードxx）
+     * <br/>Enum（DBZ：要介護状態区分コード09）
      */
     nijiHanteiYokaigoJotaiKubunCode(2147483647, 0),
     /**
@@ -57,11 +58,11 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
      */
     nijiHanteiNinteiYukoKikan(5, 0),
     /**
-     * 二次判定認定有効開始年月日
+     * 二時判定認定有効開始年月日
      */
     nijiHanteiNinteiYukoKaishiYMD(2147483647, 0),
     /**
-     * 二次判定認定有効終了年月日
+     * 二時判定認定有効終了年月日
      */
     nijiHanteiNinteiYukoShuryoYMD(2147483647, 0),
     /**
@@ -108,7 +109,7 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private DbT5102NinteiKekkaJoho(int maxLength, int scale) {
+    private DbT5129TennyuShibo(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
