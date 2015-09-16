@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriN
 /**
  * 転入・死亡情報テーブルのエンティティクラスです。
  */
-public class DbT4129TennyuShiboEntity extends DbTableEntityBase<DbT4129TennyuShiboEntity> implements IDbAccessable {
+public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShiboEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT4129TennyuShibo");
+    public static final RString TABLE_NAME = new RString("DbT5129TennyuShibo");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -399,14 +399,14 @@ public class DbT4129TennyuShiboEntity extends DbTableEntityBase<DbT4129TennyuShi
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT4129TennyuShiboEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT5129TennyuShiboEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
      * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT4129TennyuShiboEntity other) {
+    public boolean equalsPrimaryKeys(DbT5129TennyuShiboEntity other) {
         if (other == null) {
             return false;
         }
@@ -420,7 +420,7 @@ public class DbT4129TennyuShiboEntity extends DbTableEntityBase<DbT4129TennyuShi
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT4129TennyuShiboEntity entity) {
+    public void shallowCopy(DbT5129TennyuShiboEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.nijiHanteiYMD = entity.nijiHanteiYMD;
         this.nijiHanteiYokaigoJotaiKubunCode = entity.nijiHanteiYokaigoJotaiKubunCode;
