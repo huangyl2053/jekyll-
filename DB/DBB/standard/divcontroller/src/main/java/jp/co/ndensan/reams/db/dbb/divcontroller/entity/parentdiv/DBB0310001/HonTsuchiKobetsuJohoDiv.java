@@ -1,5 +1,5 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
-/**
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HonTsuchiKobetsuJoho のクラスファイル 
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HonTsuchiKobetsuJohoDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,10 +23,14 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
      */
     @JsonProperty("lblTokuKaishiTsuchi")
     private Label lblTokuKaishiTsuchi;
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    private TextBoxDate txtTokuKaishiTsuchiHakkoYMD2;
     @JsonProperty("radTokuKaishiTsuchiTaisho2")
     private RadioButton radTokuKaishiTsuchiTaisho2;
     @JsonProperty("lblKetteTsuchi")
     private Label lblKetteTsuchi;
+    @JsonProperty("txtKetteTsuchiHakkoYMD2")
+    private TextBoxDate txtKetteTsuchiHakkoYMD2;
     @JsonProperty("txtKetteTsuchiBunshoNo2")
     private TextBox txtKetteTsuchiBunshoNo2;
     @JsonProperty("btnKetteiTsuchiYousikiSettei2")
@@ -35,6 +39,8 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     private TextBox txtKetteiTsuchiYousikiSettei;
     @JsonProperty("lblNotsu")
     private Label lblNotsu;
+    @JsonProperty("txtNotsuHakkoYMD2")
+    private TextBoxDate txtNotsuHakkoYMD2;
     @JsonProperty("ddlNotsuShuturyokuki2")
     private DropDownList ddlNotsuShuturyokuki2;
     @JsonProperty("chkNotsuTaishosha2")
@@ -62,6 +68,16 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
         this.lblTokuKaishiTsuchi=lblTokuKaishiTsuchi;
     }
 
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    public TextBoxDate getTxtTokuKaishiTsuchiHakkoYMD2() {
+        return txtTokuKaishiTsuchiHakkoYMD2;
+    }
+
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    public void setTxtTokuKaishiTsuchiHakkoYMD2(TextBoxDate txtTokuKaishiTsuchiHakkoYMD2) {
+        this.txtTokuKaishiTsuchiHakkoYMD2=txtTokuKaishiTsuchiHakkoYMD2;
+    }
+
     @JsonProperty("radTokuKaishiTsuchiTaisho2")
     public RadioButton getRadTokuKaishiTsuchiTaisho2() {
         return radTokuKaishiTsuchiTaisho2;
@@ -80,6 +96,16 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     @JsonProperty("lblKetteTsuchi")
     public void setLblKetteTsuchi(Label lblKetteTsuchi) {
         this.lblKetteTsuchi=lblKetteTsuchi;
+    }
+
+    @JsonProperty("txtKetteTsuchiHakkoYMD2")
+    public TextBoxDate getTxtKetteTsuchiHakkoYMD2() {
+        return txtKetteTsuchiHakkoYMD2;
+    }
+
+    @JsonProperty("txtKetteTsuchiHakkoYMD2")
+    public void setTxtKetteTsuchiHakkoYMD2(TextBoxDate txtKetteTsuchiHakkoYMD2) {
+        this.txtKetteTsuchiHakkoYMD2=txtKetteTsuchiHakkoYMD2;
     }
 
     @JsonProperty("txtKetteTsuchiBunshoNo2")
@@ -120,6 +146,16 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     @JsonProperty("lblNotsu")
     public void setLblNotsu(Label lblNotsu) {
         this.lblNotsu=lblNotsu;
+    }
+
+    @JsonProperty("txtNotsuHakkoYMD2")
+    public TextBoxDate getTxtNotsuHakkoYMD2() {
+        return txtNotsuHakkoYMD2;
+    }
+
+    @JsonProperty("txtNotsuHakkoYMD2")
+    public void setTxtNotsuHakkoYMD2(TextBoxDate txtNotsuHakkoYMD2) {
+        this.txtNotsuHakkoYMD2=txtNotsuHakkoYMD2;
     }
 
     @JsonProperty("ddlNotsuShuturyokuki2")
@@ -172,4 +208,5 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
         this.demoTest=demoTest;
     }
 
+    // </editor-fold>
 }

@@ -6,13 +6,10 @@
 
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiChohyoHakkoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiChohyoHakkoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
