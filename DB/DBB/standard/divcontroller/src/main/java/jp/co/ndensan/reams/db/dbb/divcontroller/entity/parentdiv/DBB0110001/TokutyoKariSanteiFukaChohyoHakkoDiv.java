@@ -5,7 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,8 +22,8 @@ public class TokutyoKariSanteiFukaChohyoHakkoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgTokuchoKarisanteiTsuchisho")
-    private DataGrid<dgTokuchoKarisanteiTsuchisho_Row> dgTokuchoKarisanteiTsuchisho;
+    @JsonProperty("ccdChohyoIchiran")
+    private OutputChohyoIchiranDiv ccdChohyoIchiran;
     @JsonProperty("TokutyoKariTsuchiKobetsuJoho")
     private TokutyoKariTsuchiKobetsuJohoDiv TokutyoKariTsuchiKobetsuJoho;
 
@@ -32,14 +33,9 @@ public class TokutyoKariSanteiFukaChohyoHakkoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgTokuchoKarisanteiTsuchisho")
-    public DataGrid<dgTokuchoKarisanteiTsuchisho_Row> getDgTokuchoKarisanteiTsuchisho() {
-        return dgTokuchoKarisanteiTsuchisho;
-    }
-
-    @JsonProperty("dgTokuchoKarisanteiTsuchisho")
-    public void setDgTokuchoKarisanteiTsuchisho(DataGrid<dgTokuchoKarisanteiTsuchisho_Row> dgTokuchoKarisanteiTsuchisho) {
-        this.dgTokuchoKarisanteiTsuchisho=dgTokuchoKarisanteiTsuchisho;
+    @JsonProperty("ccdChohyoIchiran")
+    public IOutputChohyoIchiranDiv getCcdChohyoIchiran() {
+        return ccdChohyoIchiran;
     }
 
     @JsonProperty("TokutyoKariTsuchiKobetsuJoho")

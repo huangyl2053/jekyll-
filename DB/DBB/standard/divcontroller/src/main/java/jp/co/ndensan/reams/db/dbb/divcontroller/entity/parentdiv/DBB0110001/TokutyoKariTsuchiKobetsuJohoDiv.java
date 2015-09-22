@@ -23,6 +23,8 @@ public class TokutyoKariTsuchiKobetsuJohoDiv extends Panel {
      */
     @JsonProperty("lblTokuKaishiTsuchi")
     private Label lblTokuKaishiTsuchi;
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    private TextBoxDate txtTokuKaishiTsuchiHakkoYMD2;
     @JsonProperty("radTokuKaishiTsuchiTaisho2")
     private RadioButton radTokuKaishiTsuchiTaisho2;
 
@@ -40,6 +42,16 @@ public class TokutyoKariTsuchiKobetsuJohoDiv extends Panel {
     @JsonProperty("lblTokuKaishiTsuchi")
     public void setLblTokuKaishiTsuchi(Label lblTokuKaishiTsuchi) {
         this.lblTokuKaishiTsuchi=lblTokuKaishiTsuchi;
+    }
+
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    public TextBoxDate getTxtTokuKaishiTsuchiHakkoYMD2() {
+        return txtTokuKaishiTsuchiHakkoYMD2;
+    }
+
+    @JsonProperty("txtTokuKaishiTsuchiHakkoYMD2")
+    public void setTxtTokuKaishiTsuchiHakkoYMD2(TextBoxDate txtTokuKaishiTsuchiHakkoYMD2) {
+        this.txtTokuKaishiTsuchiHakkoYMD2=txtTokuKaishiTsuchiHakkoYMD2;
     }
 
     @JsonProperty("radTokuKaishiTsuchiTaisho2")
