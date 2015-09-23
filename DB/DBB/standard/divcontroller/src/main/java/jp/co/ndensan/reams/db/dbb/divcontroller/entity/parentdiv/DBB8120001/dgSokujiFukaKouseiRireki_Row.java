@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
-/**
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 18 11:50:45 JST 2014 
+ * Wed Sep 23 16:02:27 CST 2015 
  */
 
 
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgSokujiFukaKouseiRireki_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
     private RString txtChoteiNendo;
     private RString txtFukaNendo;
@@ -107,4 +108,5 @@ public class dgSokujiFukaKouseiRireki_Row extends DataRow {
         this.txtFuchiGaku = txtFuchiGaku;
     }
 
+    // </editor-fold>
 }

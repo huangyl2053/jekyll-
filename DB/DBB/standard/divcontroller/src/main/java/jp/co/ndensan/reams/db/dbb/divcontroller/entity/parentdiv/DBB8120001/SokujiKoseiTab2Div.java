@@ -1,5 +1,5 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
-/**
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class SokujiKoseiTab2Div extends TabPanel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -50,4 +51,5 @@ public class SokujiKoseiTab2Div extends TabPanel {
         this.SokujikouseiJiyu=SokujikouseiJiyu;
     }
 
+    // </editor-fold>
 }

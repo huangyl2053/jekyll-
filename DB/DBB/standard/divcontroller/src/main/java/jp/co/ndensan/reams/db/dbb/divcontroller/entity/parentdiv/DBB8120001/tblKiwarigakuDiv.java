@@ -1,5 +1,5 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
-/**
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tblKiwarigaku のクラスファイル 
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tblKiwarigakuDiv extends TablePanel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,12 +35,6 @@ public class tblKiwarigakuDiv extends TablePanel {
     private celKiwarigaku33AttblKiwarigaku celKiwarigaku33;
     @JsonProperty("celKiwarigaku34")
     private celKiwarigaku34AttblKiwarigaku celKiwarigaku34;
-    @JsonProperty("celKiwarigaku35")
-    private celKiwarigaku35AttblKiwarigaku celKiwarigaku35;
-    @JsonProperty("celKiwarigaku36")
-    private celKiwarigaku36AttblKiwarigaku celKiwarigaku36;
-    @JsonProperty("celKiwarigaku37")
-    private celKiwarigaku37AttblKiwarigaku celKiwarigaku37;
     @JsonProperty("celKiwarigaku38")
     private celKiwarigaku38AttblKiwarigaku celKiwarigaku38;
     @JsonProperty("celKiwarigaku39")
@@ -59,6 +53,12 @@ public class tblKiwarigakuDiv extends TablePanel {
     private celKiwarigaku45AttblKiwarigaku celKiwarigaku45;
     @JsonProperty("celKiwarigaku46")
     private celKiwarigaku46AttblKiwarigaku celKiwarigaku46;
+    @JsonProperty("celKiwarigaku35")
+    private celKiwarigaku35AttblKiwarigaku celKiwarigaku35;
+    @JsonProperty("celKiwarigaku36")
+    private celKiwarigaku36AttblKiwarigaku celKiwarigaku36;
+    @JsonProperty("celKiwarigaku37")
+    private celKiwarigaku37AttblKiwarigaku celKiwarigaku37;
     @JsonProperty("celKiwarigaku47")
     private celKiwarigaku47AttblKiwarigaku celKiwarigaku47;
     @JsonProperty("celKiwarigaku48")
@@ -444,21 +444,6 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTsuki4() {
-        return this.celKiwarigaku35.getLblTsuki4();
-    }
-
-    @JsonIgnore
-    public Label getLblTokuchoKi1() {
-        return this.celKiwarigaku36.getLblTokuchoKi1();
-    }
-
-    @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue1() {
-        return this.celKiwarigaku37.getLblTokuchoKoseiMaeValue1();
-    }
-
-    @JsonIgnore
     public Label getLblTokuchoKoseiGo() {
         return this.celKiwarigaku38.getLblTokuchoKoseiGo();
     }
@@ -504,63 +489,78 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue1() {
-        return this.celKiwarigaku47.getLblTokuchoKoseiGoValue1();
+    public Label getLblTsuki4() {
+        return this.celKiwarigaku35.getLblTsuki4();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo1() {
-        return this.celKiwarigaku47.getTxtTokuchoKoseiGo1();
+    public Label getLblTokuchoKi04() {
+        return this.celKiwarigaku36.getLblTokuchoKi04();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue1() {
-        return this.celKiwarigaku48.getLblTokuchoZogenValue1();
+    public Label getLblTokuchoKoseiMaeValue04() {
+        return this.celKiwarigaku37.getLblTokuchoKoseiMaeValue04();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue1() {
-        return this.celKiwarigaku49.getLblTokuchoNofugakuValue1();
+    public Label getLblTokuchoKoseiGoValue04() {
+        return this.celKiwarigaku47.getLblTokuchoKoseiGoValue04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi1() {
-        return this.celKiwarigaku50.getLblFuchoKi1();
+    public TextBoxNum getTxtTokuchoKoseiGo04() {
+        return this.celKiwarigaku47.getTxtTokuchoKoseiGo04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue1() {
-        return this.celKiwarigaku51.getLblFuchoKoseiMaeValue1();
+    public Label getLblTokuchoZogenValue04() {
+        return this.celKiwarigaku48.getLblTokuchoZogenValue04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue1() {
-        return this.celKiwarigaku52.getLblFuchoKoseiGoValue1();
+    public Label getLblTokuchoNofugakuValue04() {
+        return this.celKiwarigaku49.getLblTokuchoNofugakuValue04();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo1() {
-        return this.celKiwarigaku52.getTxtFuchoKoseiGo1();
+    public Label getLblFuchoKi04() {
+        return this.celKiwarigaku50.getLblFuchoKi04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue1() {
-        return this.celKiwarigaku53.getLblFuchoZogenValue1();
+    public Label getLblFuchoKoseiMaeValue04() {
+        return this.celKiwarigaku51.getLblFuchoKoseiMaeValue04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue1() {
-        return this.celKiwarigaku54.getLblFuchoNofugakuValue1();
+    public Label getLblFuchoKoseiGoValue04() {
+        return this.celKiwarigaku52.getLblFuchoKoseiGoValue04();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue1() {
-        return this.celKiwarigaku55.getLblFuchoNokigenValue1();
+    public TextBoxNum getTxtFuchoKoseiGo04() {
+        return this.celKiwarigaku52.getTxtFuchoKoseiGo04();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen1() {
-        return this.celKiwarigaku55.getTxtFuchoNokigen1();
+    public Label getLblFuchoZogenValue04() {
+        return this.celKiwarigaku53.getLblFuchoZogenValue04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofugakuValue04() {
+        return this.celKiwarigaku54.getLblFuchoNofugakuValue04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigenValue04() {
+        return this.celKiwarigaku55.getLblFuchoNokigenValue04();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtFuchoNokigen04() {
+        return this.celKiwarigaku55.getTxtFuchoNokigen04();
     }
 
     @JsonIgnore
@@ -569,43 +569,43 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi2() {
-        return this.celKiwarigaku62.getLblFuchoKi2();
+    public Label getLblFuchoKi05() {
+        return this.celKiwarigaku62.getLblFuchoKi05();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue2() {
-        return this.celKiwarigaku63.getLblFuchoKoseiMaeValue2();
+    public Label getLblFuchoKoseiMaeValue05() {
+        return this.celKiwarigaku63.getLblFuchoKoseiMaeValue05();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue2() {
-        return this.celKiwarigaku64.getLblFuchoKoseiGoValue2();
+    public Label getLblFuchoKoseiGoValue05() {
+        return this.celKiwarigaku64.getLblFuchoKoseiGoValue05();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo2() {
-        return this.celKiwarigaku64.getTxtFuchoKoseiGo2();
+    public TextBoxNum getTxtFuchoKoseiGo05() {
+        return this.celKiwarigaku64.getTxtFuchoKoseiGo05();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue2() {
-        return this.celKiwarigaku65.getLblFuchoZogenValue2();
+    public Label getLblFuchoZogenValue05() {
+        return this.celKiwarigaku65.getLblFuchoZogenValue05();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue2() {
-        return this.celKiwarigaku66.getLblFuchoNofugakuValue2();
+    public Label getLblFuchoNofugakuValue05() {
+        return this.celKiwarigaku66.getLblFuchoNofugakuValue05();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue2() {
-        return this.celKiwarigaku67.getLblFuchoNokigenValue2();
+    public Label getLblFuchoNokigenValue05() {
+        return this.celKiwarigaku67.getLblFuchoNokigenValue05();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen2() {
-        return this.celKiwarigaku67.getTxtFuchoNokigen2();
+    public TextBoxDate getTxtFuchoNokigen05() {
+        return this.celKiwarigaku67.getTxtFuchoNokigen05();
     }
 
     @JsonIgnore
@@ -614,73 +614,73 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKi2() {
-        return this.celKiwarigaku69.getLblTokuchoKi2();
+    public Label getLblTokuchoKi06() {
+        return this.celKiwarigaku69.getLblTokuchoKi06();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue2() {
-        return this.celKiwarigaku70.getLblTokuchoKoseiMaeValue2();
+    public Label getLblTokuchoKoseiMaeValue06() {
+        return this.celKiwarigaku70.getLblTokuchoKoseiMaeValue06();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue2() {
-        return this.celKiwarigaku71.getLblTokuchoKoseiGoValue2();
+    public Label getLblTokuchoKoseiGoValue06() {
+        return this.celKiwarigaku71.getLblTokuchoKoseiGoValue06();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo2() {
-        return this.celKiwarigaku71.getTxtTokuchoKoseiGo2();
+    public TextBoxNum getTxtTokuchoKoseiGo06() {
+        return this.celKiwarigaku71.getTxtTokuchoKoseiGo06();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue2() {
-        return this.celKiwarigaku72.getLblTokuchoZogenValue2();
+    public Label getLblTokuchoZogenValue06() {
+        return this.celKiwarigaku72.getLblTokuchoZogenValue06();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue2() {
-        return this.celKiwarigaku73.getLblTokuchoNofugakuValue2();
+    public Label getLblTokuchoNofugakuValue06() {
+        return this.celKiwarigaku73.getLblTokuchoNofugakuValue06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi3() {
-        return this.celKiwarigaku74.getLblFuchoKi3();
+    public Label getLblFuchoKi06() {
+        return this.celKiwarigaku74.getLblFuchoKi06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue3() {
-        return this.celKiwarigaku75.getLblFuchoKoseiMaeValue3();
+    public Label getLblFuchoKoseiMaeValue06() {
+        return this.celKiwarigaku75.getLblFuchoKoseiMaeValue06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue3() {
-        return this.celKiwarigaku76.getLblFuchoKoseiGoValue3();
+    public Label getLblFuchoKoseiGoValue06() {
+        return this.celKiwarigaku76.getLblFuchoKoseiGoValue06();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo3() {
-        return this.celKiwarigaku76.getTxtFuchoKoseiGo3();
+    public TextBoxNum getTxtFuchoKoseiGo06() {
+        return this.celKiwarigaku76.getTxtFuchoKoseiGo06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue3() {
-        return this.celKiwarigaku77.getLblFuchoZogenValue3();
+    public Label getLblFuchoZogenValue06() {
+        return this.celKiwarigaku77.getLblFuchoZogenValue06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue3() {
-        return this.celKiwarigaku78.getLblFuchoNofugakuValue3();
+    public Label getLblFuchoNofugakuValue06() {
+        return this.celKiwarigaku78.getLblFuchoNofugakuValue06();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue3() {
-        return this.celKiwarigaku79.getLblFuchoNokigenValue3();
+    public Label getLblFuchoNokigenValue06() {
+        return this.celKiwarigaku79.getLblFuchoNokigenValue06();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen3() {
-        return this.celKiwarigaku79.getTxtFuchoNokigen3();
+    public TextBoxDate getTxtFuchoNokigen06() {
+        return this.celKiwarigaku79.getTxtFuchoNokigen06();
     }
 
     @JsonIgnore
@@ -689,43 +689,43 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi4() {
-        return this.celKiwarigaku86.getLblFuchoKi4();
+    public Label getLblFuchoKi07() {
+        return this.celKiwarigaku86.getLblFuchoKi07();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue4() {
-        return this.celKiwarigaku87.getLblFuchoKoseiMaeValue4();
+    public Label getLblFuchoKoseiMaeValue07() {
+        return this.celKiwarigaku87.getLblFuchoKoseiMaeValue07();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue4() {
-        return this.celKiwarigaku88.getLblFuchoKoseiGoValue4();
+    public Label getLblFuchoKoseiGoValue07() {
+        return this.celKiwarigaku88.getLblFuchoKoseiGoValue07();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo4() {
-        return this.celKiwarigaku88.getTxtFuchoKoseiGo4();
+    public TextBoxNum getTxtFuchoKoseiGo07() {
+        return this.celKiwarigaku88.getTxtFuchoKoseiGo07();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue4() {
-        return this.celKiwarigaku89.getLblFuchoZogenValue4();
+    public Label getLblFuchoZogenValue07() {
+        return this.celKiwarigaku89.getLblFuchoZogenValue07();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue4() {
-        return this.celKiwarigaku90.getLblFuchoNofugakuValue4();
+    public Label getLblFuchoNofugakuValue07() {
+        return this.celKiwarigaku90.getLblFuchoNofugakuValue07();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue4() {
-        return this.celKiwarigaku91.getLblFuchoNokigenValue4();
+    public Label getLblFuchoNokigenValue07() {
+        return this.celKiwarigaku91.getLblFuchoNokigenValue07();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen4() {
-        return this.celKiwarigaku91.getTxtFuchoNokigen4();
+    public TextBoxDate getTxtFuchoNokigen07() {
+        return this.celKiwarigaku91.getTxtFuchoNokigen07();
     }
 
     @JsonIgnore
@@ -734,73 +734,73 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKi3() {
-        return this.celKiwarigaku93.getLblTokuchoKi3();
+    public Label getLblTokuchoKi08() {
+        return this.celKiwarigaku93.getLblTokuchoKi08();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue3() {
-        return this.celKiwarigaku94.getLblTokuchoKoseiMaeValue3();
+    public Label getLblTokuchoKoseiMaeValue08() {
+        return this.celKiwarigaku94.getLblTokuchoKoseiMaeValue08();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue3() {
-        return this.celKiwarigaku95.getLblTokuchoKoseiGoValue3();
+    public Label getLblTokuchoKoseiGoValue08() {
+        return this.celKiwarigaku95.getLblTokuchoKoseiGoValue08();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo3() {
-        return this.celKiwarigaku95.getTxtTokuchoKoseiGo3();
+    public TextBoxNum getTxtTokuchoKoseiGo08() {
+        return this.celKiwarigaku95.getTxtTokuchoKoseiGo08();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue3() {
-        return this.celKiwarigaku96.getLblTokuchoZogenValue3();
+    public Label getLblTokuchoZogenValue08() {
+        return this.celKiwarigaku96.getLblTokuchoZogenValue08();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue3() {
-        return this.celKiwarigaku97.getLblTokuchoNofugakuValue3();
+    public Label getLblTokuchoNofugakuValue08() {
+        return this.celKiwarigaku97.getLblTokuchoNofugakuValue08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi5() {
-        return this.celKiwarigaku98.getLblFuchoKi5();
+    public Label getLblFuchoKi08() {
+        return this.celKiwarigaku98.getLblFuchoKi08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue5() {
-        return this.celKiwarigaku99.getLblFuchoKoseiMaeValue5();
+    public Label getLblFuchoKoseiMaeValue08() {
+        return this.celKiwarigaku99.getLblFuchoKoseiMaeValue08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue5() {
-        return this.celKiwarigaku100.getLblFuchoKoseiGoValue5();
+    public Label getLblFuchoKoseiGoValue08() {
+        return this.celKiwarigaku100.getLblFuchoKoseiGoValue08();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo5() {
-        return this.celKiwarigaku100.getTxtFuchoKoseiGo5();
+    public TextBoxNum getTxtFuchoKoseiGo08() {
+        return this.celKiwarigaku100.getTxtFuchoKoseiGo08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue5() {
-        return this.celKiwarigaku101.getLblFuchoZogenValue5();
+    public Label getLblFuchoZogenValue08() {
+        return this.celKiwarigaku101.getLblFuchoZogenValue08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue5() {
-        return this.celKiwarigaku102.getLblFuchoNofugakuValue5();
+    public Label getLblFuchoNofugakuValue08() {
+        return this.celKiwarigaku102.getLblFuchoNofugakuValue08();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue5() {
-        return this.celKiwarigaku103.getLblFuchoNokigenValue5();
+    public Label getLblFuchoNokigenValue08() {
+        return this.celKiwarigaku103.getLblFuchoNokigenValue08();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen5() {
-        return this.celKiwarigaku103.getTxtFuchoNokigen5();
+    public TextBoxDate getTxtFuchoNokigen08() {
+        return this.celKiwarigaku103.getTxtFuchoNokigen08();
     }
 
     @JsonIgnore
@@ -809,43 +809,43 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi6() {
-        return this.celKiwarigaku110.getLblFuchoKi6();
+    public Label getLblFuchoKi09() {
+        return this.celKiwarigaku110.getLblFuchoKi09();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue6() {
-        return this.celKiwarigaku111.getLblFuchoKoseiMaeValue6();
+    public Label getLblFuchoKoseiMaeValue09() {
+        return this.celKiwarigaku111.getLblFuchoKoseiMaeValue09();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue6() {
-        return this.celKiwarigaku112.getLblFuchoKoseiGoValue6();
+    public Label getLblFuchoKoseiGoValue09() {
+        return this.celKiwarigaku112.getLblFuchoKoseiGoValue09();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo6() {
-        return this.celKiwarigaku112.getTxtFuchoKoseiGo6();
+    public TextBoxNum getTxtFuchoKoseiGo09() {
+        return this.celKiwarigaku112.getTxtFuchoKoseiGo09();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue6() {
-        return this.celKiwarigaku113.getLblFuchoZogenValue6();
+    public Label getLblFuchoZogenValue09() {
+        return this.celKiwarigaku113.getLblFuchoZogenValue09();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue6() {
-        return this.celKiwarigaku114.getLblFuchoNofugakuValue6();
+    public Label getLblFuchoNofugakuValue09() {
+        return this.celKiwarigaku114.getLblFuchoNofugakuValue09();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue6() {
-        return this.celKiwarigaku115.getLblFuchoNokigenValue6();
+    public Label getLblFuchoNokigenValue09() {
+        return this.celKiwarigaku115.getLblFuchoNokigenValue09();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen6() {
-        return this.celKiwarigaku115.getTxtFuchoNokigen6();
+    public TextBoxDate getTxtFuchoNokigen09() {
+        return this.celKiwarigaku115.getTxtFuchoNokigen09();
     }
 
     @JsonIgnore
@@ -854,33 +854,33 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKi4() {
-        return this.celKiwarigaku117.getLblTokuchoKi4();
+    public Label getLblTokuchoKi10() {
+        return this.celKiwarigaku117.getLblTokuchoKi10();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue4() {
-        return this.celKiwarigaku118.getLblTokuchoKoseiMaeValue4();
+    public Label getLblTokuchoKoseiMaeValue10() {
+        return this.celKiwarigaku118.getLblTokuchoKoseiMaeValue10();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue4() {
-        return this.celKiwarigaku119.getLblTokuchoKoseiGoValue4();
+    public Label getLblTokuchoKoseiGoValue10() {
+        return this.celKiwarigaku119.getLblTokuchoKoseiGoValue10();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo4() {
-        return this.celKiwarigaku119.getTxtTokuchoKoseiGo4();
+    public TextBoxNum getTxtTokuchoKoseiGo10() {
+        return this.celKiwarigaku119.getTxtTokuchoKoseiGo10();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue4() {
-        return this.celKiwarigaku120.getLblTokuchoZogenValue4();
+    public Label getLblTokuchoZogenValue10() {
+        return this.celKiwarigaku120.getLblTokuchoZogenValue10();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue4() {
-        return this.celKiwarigaku121.getLblTokuchoNofugakuValue4();
+    public Label getLblTokuchoNofugakuValue10() {
+        return this.celKiwarigaku121.getLblTokuchoNofugakuValue10();
     }
 
     @JsonIgnore
@@ -889,38 +889,38 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue7() {
-        return this.celKiwarigaku123.getLblFuchoKoseiMaeValue7();
+    public Label getLblFuchoKoseiMaeValue10() {
+        return this.celKiwarigaku123.getLblFuchoKoseiMaeValue10();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue7() {
-        return this.celKiwarigaku124.getLblFuchoKoseiGoValue7();
+    public Label getLblFuchoKoseiGoValue10() {
+        return this.celKiwarigaku124.getLblFuchoKoseiGoValue10();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo7() {
-        return this.celKiwarigaku124.getTxtFuchoKoseiGo7();
+    public TextBoxNum getTxtFuchoKoseiGo10() {
+        return this.celKiwarigaku124.getTxtFuchoKoseiGo10();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue7() {
-        return this.celKiwarigaku125.getLblFuchoZogenValue7();
+    public Label getLblFuchoZogenValue10() {
+        return this.celKiwarigaku125.getLblFuchoZogenValue10();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue7() {
-        return this.celKiwarigaku126.getLblFuchoNofugakuValue7();
+    public Label getLblFuchoNofugakuValue10() {
+        return this.celKiwarigaku126.getLblFuchoNofugakuValue10();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue7() {
-        return this.celKiwarigaku127.getLblFuchoNokigenValue7();
+    public Label getLblFuchoNokigenValue10() {
+        return this.celKiwarigaku127.getLblFuchoNokigenValue10();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen7() {
-        return this.celKiwarigaku127.getTxtFuchoNokigen7();
+    public TextBoxDate getTxtFuchoNokigen10() {
+        return this.celKiwarigaku127.getTxtFuchoNokigen10();
     }
 
     @JsonIgnore
@@ -934,38 +934,38 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue8() {
-        return this.celKiwarigaku135.getLblFuchoKoseiMaeValue8();
+    public Label getLblFuchoKoseiMaeValue11() {
+        return this.celKiwarigaku135.getLblFuchoKoseiMaeValue11();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue8() {
-        return this.celKiwarigaku136.getLblFuchoKoseiGoValue8();
+    public Label getLblFuchoKoseiGoValue11() {
+        return this.celKiwarigaku136.getLblFuchoKoseiGoValue11();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo8() {
-        return this.celKiwarigaku136.getTxtFuchoKoseiGo8();
+    public TextBoxNum getTxtFuchoKoseiGo11() {
+        return this.celKiwarigaku136.getTxtFuchoKoseiGo11();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue8() {
-        return this.celKiwarigaku137.getLblFuchoZogenValue8();
+    public Label getLblFuchoZogenValue11() {
+        return this.celKiwarigaku137.getLblFuchoZogenValue11();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue8() {
-        return this.celKiwarigaku138.getLblFuchoNofugakuValue8();
+    public Label getLblFuchoNofugakuValue11() {
+        return this.celKiwarigaku138.getLblFuchoNofugakuValue11();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue8() {
-        return this.celKiwarigaku139.getLblFuchoNokigenValue8();
+    public Label getLblFuchoNokigenValue11() {
+        return this.celKiwarigaku139.getLblFuchoNokigenValue11();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen8() {
-        return this.celKiwarigaku139.getTxtFuchoNokigen8();
+    public TextBoxDate getTxtFuchoNokigen11() {
+        return this.celKiwarigaku139.getTxtFuchoNokigen11();
     }
 
     @JsonIgnore
@@ -974,33 +974,33 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKi5() {
-        return this.celKiwarigaku141.getLblTokuchoKi5();
+    public Label getLblTokuchoKi12() {
+        return this.celKiwarigaku141.getLblTokuchoKi12();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue5() {
-        return this.celKiwarigaku142.getLblTokuchoKoseiMaeValue5();
+    public Label getLblTokuchoKoseiMaeValue12() {
+        return this.celKiwarigaku142.getLblTokuchoKoseiMaeValue12();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue5() {
-        return this.celKiwarigaku143.getLblTokuchoKoseiGoValue5();
+    public Label getLblTokuchoKoseiGoValue12() {
+        return this.celKiwarigaku143.getLblTokuchoKoseiGoValue12();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo5() {
-        return this.celKiwarigaku143.getTxtTokuchoKoseiGo5();
+    public TextBoxNum getTxtTokuchoKoseiGo12() {
+        return this.celKiwarigaku143.getTxtTokuchoKoseiGo12();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue5() {
-        return this.celKiwarigaku144.getLblTokuchoZogenValue5();
+    public Label getLblTokuchoZogenValue12() {
+        return this.celKiwarigaku144.getLblTokuchoZogenValue12();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue5() {
-        return this.celKiwarigaku145.getLblTokuchoNofugakuValue5();
+    public Label getLblTokuchoNofugakuValue12() {
+        return this.celKiwarigaku145.getLblTokuchoNofugakuValue12();
     }
 
     @JsonIgnore
@@ -1009,38 +1009,38 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue9() {
-        return this.celKiwarigaku147.getLblFuchoKoseiMaeValue9();
+    public Label getLblFuchoKoseiMaeValue12() {
+        return this.celKiwarigaku147.getLblFuchoKoseiMaeValue12();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue9() {
-        return this.celKiwarigaku148.getLblFuchoKoseiGoValue9();
+    public Label getLblFuchoKoseiGoValue12() {
+        return this.celKiwarigaku148.getLblFuchoKoseiGoValue12();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo9() {
-        return this.celKiwarigaku148.getTxtFuchoKoseiGo9();
+    public TextBoxNum getTxtFuchoKoseiGo12() {
+        return this.celKiwarigaku148.getTxtFuchoKoseiGo12();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue9() {
-        return this.celKiwarigaku149.getLblFuchoZogenValue9();
+    public Label getLblFuchoZogenValue12() {
+        return this.celKiwarigaku149.getLblFuchoZogenValue12();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue9() {
-        return this.celKiwarigaku150.getLblFuchoNofugakuValue9();
+    public Label getLblFuchoNofugakuValue12() {
+        return this.celKiwarigaku150.getLblFuchoNofugakuValue12();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue9() {
-        return this.celKiwarigaku151.getLblFuchoNokigenValue9();
+    public Label getLblFuchoNokigenValue12() {
+        return this.celKiwarigaku151.getLblFuchoNokigenValue12();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen9() {
-        return this.celKiwarigaku151.getTxtFuchoNokigen9();
+    public TextBoxDate getTxtFuchoNokigen12() {
+        return this.celKiwarigaku151.getTxtFuchoNokigen12();
     }
 
     @JsonIgnore
@@ -1049,43 +1049,43 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi10() {
-        return this.celKiwarigaku158.getLblFuchoKi10();
+    public Label getLblFuchoKi01() {
+        return this.celKiwarigaku158.getLblFuchoKi01();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue10() {
-        return this.celKiwarigaku250.getLblFuchoKoseiMaeValue10();
+    public Label getLblFuchoKoseiMaeValue01() {
+        return this.celKiwarigaku250.getLblFuchoKoseiMaeValue01();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue10() {
-        return this.celKiwarigaku160.getLblFuchoKoseiGoValue10();
+    public Label getLblFuchoKoseiGoValue01() {
+        return this.celKiwarigaku160.getLblFuchoKoseiGoValue01();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo10() {
-        return this.celKiwarigaku160.getTxtFuchoKoseiGo10();
+    public TextBoxNum getTxtFuchoKoseiGo01() {
+        return this.celKiwarigaku160.getTxtFuchoKoseiGo01();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue10() {
-        return this.celKiwarigaku161.getLblFuchoZogenValue10();
+    public Label getLblFuchoZogenValue01() {
+        return this.celKiwarigaku161.getLblFuchoZogenValue01();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue10() {
-        return this.celKiwarigaku162.getLblFuchoNofugakuValue10();
+    public Label getLblFuchoNofugakuValue01() {
+        return this.celKiwarigaku162.getLblFuchoNofugakuValue01();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue10() {
-        return this.celKiwarigaku163.getLblFuchoNokigenValue10();
+    public Label getLblFuchoNokigenValue01() {
+        return this.celKiwarigaku163.getLblFuchoNokigenValue01();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen10() {
-        return this.celKiwarigaku163.getTxtFuchoNokigen10();
+    public TextBoxDate getTxtFuchoNokigen01() {
+        return this.celKiwarigaku163.getTxtFuchoNokigen01();
     }
 
     @JsonIgnore
@@ -1094,73 +1094,73 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKi6() {
-        return this.celKiwarigaku165.getLblTokuchoKi6();
+    public Label getLblTokuchoKi02() {
+        return this.celKiwarigaku165.getLblTokuchoKi02();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiMaeValue6() {
-        return this.celKiwarigaku166.getLblTokuchoKoseiMaeValue6();
+    public Label getLblTokuchoKoseiMaeValue02() {
+        return this.celKiwarigaku166.getLblTokuchoKoseiMaeValue02();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoKoseiGoValue6() {
-        return this.celKiwarigaku167.getLblTokuchoKoseiGoValue6();
+    public Label getLblTokuchoKoseiGoValue02() {
+        return this.celKiwarigaku167.getLblTokuchoKoseiGoValue02();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtTokuchoKoseiGo6() {
-        return this.celKiwarigaku167.getTxtTokuchoKoseiGo6();
+    public TextBoxNum getTxtTokuchoKoseiGo02() {
+        return this.celKiwarigaku167.getTxtTokuchoKoseiGo02();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoZogenValue6() {
-        return this.celKiwarigaku168.getLblTokuchoZogenValue6();
+    public Label getLblTokuchoZogenValue02() {
+        return this.celKiwarigaku168.getLblTokuchoZogenValue02();
     }
 
     @JsonIgnore
-    public Label getLblTokuchoNofugakuValue6() {
-        return this.celKiwarigaku169.getLblTokuchoNofugakuValue6();
+    public Label getLblTokuchoNofugakuValue02() {
+        return this.celKiwarigaku169.getLblTokuchoNofugakuValue02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi11() {
-        return this.celKiwarigaku170.getLblFuchoKi11();
+    public Label getLblFuchoKi02() {
+        return this.celKiwarigaku170.getLblFuchoKi02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue11() {
-        return this.celKiwarigaku171.getLblFuchoKoseiMaeValue11();
+    public Label getLblFuchoKoseiMaeValue02() {
+        return this.celKiwarigaku171.getLblFuchoKoseiMaeValue02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue11() {
-        return this.celKiwarigaku172.getLblFuchoKoseiGoValue11();
+    public Label getLblFuchoKoseiGoValue02() {
+        return this.celKiwarigaku172.getLblFuchoKoseiGoValue02();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo11() {
-        return this.celKiwarigaku172.getTxtFuchoKoseiGo11();
+    public TextBoxNum getTxtFuchoKoseiGo02() {
+        return this.celKiwarigaku172.getTxtFuchoKoseiGo02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue11() {
-        return this.celKiwarigaku173.getLblFuchoZogenValue11();
+    public Label getLblFuchoZogenValue02() {
+        return this.celKiwarigaku173.getLblFuchoZogenValue02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue11() {
-        return this.celKiwarigaku174.getLblFuchoNofugakuValue11();
+    public Label getLblFuchoNofugakuValue02() {
+        return this.celKiwarigaku174.getLblFuchoNofugakuValue02();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue11() {
-        return this.celKiwarigaku175.getLblFuchoNokigenValue11();
+    public Label getLblFuchoNokigenValue02() {
+        return this.celKiwarigaku175.getLblFuchoNokigenValue02();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen11() {
-        return this.celKiwarigaku175.getTxtFuchoNokigen11();
+    public TextBoxDate getTxtFuchoNokigen02() {
+        return this.celKiwarigaku175.getTxtFuchoNokigen02();
     }
 
     @JsonIgnore
@@ -1169,43 +1169,43 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi12() {
-        return this.celKiwarigaku182.getLblFuchoKi12();
+    public Label getLblFuchoKi03() {
+        return this.celKiwarigaku182.getLblFuchoKi03();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiMaeValue12() {
-        return this.celKiwarigaku183.getLblFuchoKoseiMaeValue12();
+    public Label getLblFuchoKoseiMaeValue03() {
+        return this.celKiwarigaku183.getLblFuchoKoseiMaeValue03();
     }
 
     @JsonIgnore
-    public Label getLblFuchoKoseiGoValue12() {
-        return this.celKiwarigaku184.getLblFuchoKoseiGoValue12();
+    public Label getLblFuchoKoseiGoValue03() {
+        return this.celKiwarigaku184.getLblFuchoKoseiGoValue03();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtFuchoKoseiGo12() {
-        return this.celKiwarigaku184.getTxtFuchoKoseiGo12();
+    public TextBoxNum getTxtFuchoKoseiGo03() {
+        return this.celKiwarigaku184.getTxtFuchoKoseiGo03();
     }
 
     @JsonIgnore
-    public Label getLblFuchoZogenValue12() {
-        return this.celKiwarigaku185.getLblFuchoZogenValue12();
+    public Label getLblFuchoZogenValue03() {
+        return this.celKiwarigaku185.getLblFuchoZogenValue03();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNofugakuValue12() {
-        return this.celKiwarigaku186.getLblFuchoNofugakuValue12();
+    public Label getLblFuchoNofugakuValue03() {
+        return this.celKiwarigaku186.getLblFuchoNofugakuValue03();
     }
 
     @JsonIgnore
-    public Label getLblFuchoNokigenValue12() {
-        return this.celKiwarigaku187.getLblFuchoNokigenValue12();
+    public Label getLblFuchoNokigenValue03() {
+        return this.celKiwarigaku187.getLblFuchoNokigenValue03();
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtFuchoNokigen12() {
-        return this.celKiwarigaku187.getTxtFuchoNokigen12();
+    public TextBoxDate getTxtFuchoNokigen03() {
+        return this.celKiwarigaku187.getTxtFuchoNokigen03();
     }
 
     @JsonIgnore
@@ -1214,8 +1214,88 @@ public class tblKiwarigakuDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKiYoku04() {
+        return this.celKiwarigaku194.getLblFuchoKiYoku04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKoseiMaeValueYoku04() {
+        return this.celKiwarigaku195.getLblFuchoKoseiMaeValueYoku04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKoseiGoValue14() {
+        return this.celKiwarigaku196.getLblFuchoKoseiGoValue14();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtFuchoKoseiGoYoku04() {
+        return this.celKiwarigaku196.getTxtFuchoKoseiGoYoku04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoZogenValueYoku04() {
+        return this.celKiwarigaku197.getLblFuchoZogenValueYoku04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofugakuValueYoku04() {
+        return this.celKiwarigaku198.getLblFuchoNofugakuValueYoku04();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigenValueYoku04() {
+        return this.celKiwarigaku199.getLblFuchoNokigenValueYoku04();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtFuchoNokigenYoku04() {
+        return this.celKiwarigaku199.getTxtFuchoNokigenYoku04();
+    }
+
+    @JsonIgnore
     public Label getLblTsukiYoku5() {
         return this.celKiwarigaku200.getLblTsukiYoku5();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKiYoku05() {
+        return this.celKiwarigaku206.getLblFuchoKiYoku05();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKoseiMaeValueYoku05() {
+        return this.celKiwarigaku207.getLblFuchoKoseiMaeValueYoku05();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKoseiGoValueYoku05() {
+        return this.celKiwarigaku208.getLblFuchoKoseiGoValueYoku05();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtFuchoKoseiGoYoku05() {
+        return this.celKiwarigaku208.getTxtFuchoKoseiGoYoku05();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoZogenValueYoku05() {
+        return this.celKiwarigaku209.getLblFuchoZogenValueYoku05();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNofugakuValueYoku05() {
+        return this.celKiwarigaku210.getLblFuchoNofugakuValueYoku05();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigenValueYoku05() {
+        return this.celKiwarigaku211.getLblFuchoNokigenValueYoku05();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtFuchoNokigenYoku05() {
+        return this.celKiwarigaku211.getTxtFuchoNokigenYoku05();
     }
 
     @JsonIgnore
@@ -1329,36 +1409,6 @@ public class tblKiwarigakuDiv extends TablePanel {
         this.celKiwarigaku34=celKiwarigaku34;
     }
 
-    @JsonProperty("celKiwarigaku35")
-    private celKiwarigaku35AttblKiwarigaku getCelKiwarigaku35() {
-        return celKiwarigaku35;
-    }
-
-    @JsonProperty("celKiwarigaku35")
-    private void setCelKiwarigaku35(celKiwarigaku35AttblKiwarigaku celKiwarigaku35) {
-        this.celKiwarigaku35=celKiwarigaku35;
-    }
-
-    @JsonProperty("celKiwarigaku36")
-    private celKiwarigaku36AttblKiwarigaku getCelKiwarigaku36() {
-        return celKiwarigaku36;
-    }
-
-    @JsonProperty("celKiwarigaku36")
-    private void setCelKiwarigaku36(celKiwarigaku36AttblKiwarigaku celKiwarigaku36) {
-        this.celKiwarigaku36=celKiwarigaku36;
-    }
-
-    @JsonProperty("celKiwarigaku37")
-    private celKiwarigaku37AttblKiwarigaku getCelKiwarigaku37() {
-        return celKiwarigaku37;
-    }
-
-    @JsonProperty("celKiwarigaku37")
-    private void setCelKiwarigaku37(celKiwarigaku37AttblKiwarigaku celKiwarigaku37) {
-        this.celKiwarigaku37=celKiwarigaku37;
-    }
-
     @JsonProperty("celKiwarigaku38")
     private celKiwarigaku38AttblKiwarigaku getCelKiwarigaku38() {
         return celKiwarigaku38;
@@ -1447,6 +1497,36 @@ public class tblKiwarigakuDiv extends TablePanel {
     @JsonProperty("celKiwarigaku46")
     private void setCelKiwarigaku46(celKiwarigaku46AttblKiwarigaku celKiwarigaku46) {
         this.celKiwarigaku46=celKiwarigaku46;
+    }
+
+    @JsonProperty("celKiwarigaku35")
+    private celKiwarigaku35AttblKiwarigaku getCelKiwarigaku35() {
+        return celKiwarigaku35;
+    }
+
+    @JsonProperty("celKiwarigaku35")
+    private void setCelKiwarigaku35(celKiwarigaku35AttblKiwarigaku celKiwarigaku35) {
+        this.celKiwarigaku35=celKiwarigaku35;
+    }
+
+    @JsonProperty("celKiwarigaku36")
+    private celKiwarigaku36AttblKiwarigaku getCelKiwarigaku36() {
+        return celKiwarigaku36;
+    }
+
+    @JsonProperty("celKiwarigaku36")
+    private void setCelKiwarigaku36(celKiwarigaku36AttblKiwarigaku celKiwarigaku36) {
+        this.celKiwarigaku36=celKiwarigaku36;
+    }
+
+    @JsonProperty("celKiwarigaku37")
+    private celKiwarigaku37AttblKiwarigaku getCelKiwarigaku37() {
+        return celKiwarigaku37;
+    }
+
+    @JsonProperty("celKiwarigaku37")
+    private void setCelKiwarigaku37(celKiwarigaku37AttblKiwarigaku celKiwarigaku37) {
+        this.celKiwarigaku37=celKiwarigaku37;
     }
 
     @JsonProperty("celKiwarigaku47")
@@ -3219,6 +3299,7 @@ public class tblKiwarigakuDiv extends TablePanel {
         this.celKiwarigaku223=celKiwarigaku223;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku1 のクラスファイル 
@@ -3226,7 +3307,9 @@ public class tblKiwarigakuDiv extends TablePanel {
  * @author 自動生成
  */
 class celKiwarigaku1AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku2 のクラスファイル 
@@ -3234,6 +3317,7 @@ class celKiwarigaku1AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku2AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokucho")
     private Label lblTokucho;
 
@@ -3247,6 +3331,7 @@ class celKiwarigaku2AttblKiwarigaku extends TableCell {
         this.lblTokucho=lblTokucho;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku31 のクラスファイル 
@@ -3254,6 +3339,7 @@ class celKiwarigaku2AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku31AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFucho")
     private Label lblFucho;
 
@@ -3267,6 +3353,7 @@ class celKiwarigaku31AttblKiwarigaku extends TableCell {
         this.lblFucho=lblFucho;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku32 のクラスファイル 
@@ -3274,6 +3361,7 @@ class celKiwarigaku31AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku32AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki")
     private Label lblTsuki;
 
@@ -3287,6 +3375,7 @@ class celKiwarigaku32AttblKiwarigaku extends TableCell {
         this.lblTsuki=lblTsuki;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku33 のクラスファイル 
@@ -3294,6 +3383,7 @@ class celKiwarigaku32AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku33AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoKi")
     private Label lblTokuchoKi;
 
@@ -3307,6 +3397,7 @@ class celKiwarigaku33AttblKiwarigaku extends TableCell {
         this.lblTokuchoKi=lblTokuchoKi;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku34 のクラスファイル 
@@ -3314,6 +3405,7 @@ class celKiwarigaku33AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku34AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoKoseiMae")
     private Label lblTokuchoKoseiMae;
 
@@ -3327,66 +3419,7 @@ class celKiwarigaku34AttblKiwarigaku extends TableCell {
         this.lblTokuchoKoseiMae=lblTokuchoKoseiMae;
     }
 
-}
-/**
- * celKiwarigaku35 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku35AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki4")
-    private Label lblTsuki4;
-
-    @JsonProperty("lblTsuki4")
-    public Label getLblTsuki4() {
-        return lblTsuki4;
-    }
-
-    @JsonProperty("lblTsuki4")
-    public void setLblTsuki4(Label lblTsuki4) {
-        this.lblTsuki4=lblTsuki4;
-    }
-
-}
-/**
- * celKiwarigaku36 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku36AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi1")
-    private Label lblTokuchoKi1;
-
-    @JsonProperty("lblTokuchoKi1")
-    public Label getLblTokuchoKi1() {
-        return lblTokuchoKi1;
-    }
-
-    @JsonProperty("lblTokuchoKi1")
-    public void setLblTokuchoKi1(Label lblTokuchoKi1) {
-        this.lblTokuchoKi1=lblTokuchoKi1;
-    }
-
-}
-/**
- * celKiwarigaku37 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku37AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue1")
-    private Label lblTokuchoKoseiMaeValue1;
-
-    @JsonProperty("lblTokuchoKoseiMaeValue1")
-    public Label getLblTokuchoKoseiMaeValue1() {
-        return lblTokuchoKoseiMaeValue1;
-    }
-
-    @JsonProperty("lblTokuchoKoseiMaeValue1")
-    public void setLblTokuchoKoseiMaeValue1(Label lblTokuchoKoseiMaeValue1) {
-        this.lblTokuchoKoseiMaeValue1=lblTokuchoKoseiMaeValue1;
-    }
-
+    // </editor-fold>
 }
 /**
  * celKiwarigaku38 のクラスファイル 
@@ -3394,6 +3427,7 @@ class celKiwarigaku37AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku38AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoKoseiGo")
     private Label lblTokuchoKoseiGo;
 
@@ -3407,6 +3441,7 @@ class celKiwarigaku38AttblKiwarigaku extends TableCell {
         this.lblTokuchoKoseiGo=lblTokuchoKoseiGo;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku39 のクラスファイル 
@@ -3414,6 +3449,7 @@ class celKiwarigaku38AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku39AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoZogen")
     private Label lblTokuchoZogen;
 
@@ -3427,6 +3463,7 @@ class celKiwarigaku39AttblKiwarigaku extends TableCell {
         this.lblTokuchoZogen=lblTokuchoZogen;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku40 のクラスファイル 
@@ -3434,6 +3471,7 @@ class celKiwarigaku39AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku40AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoNofugaku")
     private Label lblTokuchoNofugaku;
 
@@ -3447,6 +3485,7 @@ class celKiwarigaku40AttblKiwarigaku extends TableCell {
         this.lblTokuchoNofugaku=lblTokuchoNofugaku;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku41 のクラスファイル 
@@ -3454,6 +3493,7 @@ class celKiwarigaku40AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku41AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKi")
     private Label lblFuchoKi;
 
@@ -3467,6 +3507,7 @@ class celKiwarigaku41AttblKiwarigaku extends TableCell {
         this.lblFuchoKi=lblFuchoKi;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku42 のクラスファイル 
@@ -3474,6 +3515,7 @@ class celKiwarigaku41AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku42AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiMae")
     private Label lblFuchoKoseiMae;
 
@@ -3487,6 +3529,7 @@ class celKiwarigaku42AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiMae=lblFuchoKoseiMae;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku43 のクラスファイル 
@@ -3494,6 +3537,7 @@ class celKiwarigaku42AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku43AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiGo")
     private Label lblFuchoKoseiGo;
 
@@ -3507,6 +3551,7 @@ class celKiwarigaku43AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiGo=lblFuchoKoseiGo;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku44 のクラスファイル 
@@ -3514,6 +3559,7 @@ class celKiwarigaku43AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku44AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoZogen")
     private Label lblFuchoZogen;
 
@@ -3527,6 +3573,7 @@ class celKiwarigaku44AttblKiwarigaku extends TableCell {
         this.lblFuchoZogen=lblFuchoZogen;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku45 のクラスファイル 
@@ -3534,6 +3581,7 @@ class celKiwarigaku44AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku45AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNofugaku")
     private Label lblFuchoNofugaku;
 
@@ -3547,6 +3595,7 @@ class celKiwarigaku45AttblKiwarigaku extends TableCell {
         this.lblFuchoNofugaku=lblFuchoNofugaku;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku46 のクラスファイル 
@@ -3554,6 +3603,7 @@ class celKiwarigaku45AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku46AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNokigen")
     private Label lblFuchoNokigen;
 
@@ -3567,6 +3617,73 @@ class celKiwarigaku46AttblKiwarigaku extends TableCell {
         this.lblFuchoNokigen=lblFuchoNokigen;
     }
 
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku35 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku35AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki4")
+    private Label lblTsuki4;
+
+    @JsonProperty("lblTsuki4")
+    public Label getLblTsuki4() {
+        return lblTsuki4;
+    }
+
+    @JsonProperty("lblTsuki4")
+    public void setLblTsuki4(Label lblTsuki4) {
+        this.lblTsuki4=lblTsuki4;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku36 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku36AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi04")
+    private Label lblTokuchoKi04;
+
+    @JsonProperty("lblTokuchoKi04")
+    public Label getLblTokuchoKi04() {
+        return lblTokuchoKi04;
+    }
+
+    @JsonProperty("lblTokuchoKi04")
+    public void setLblTokuchoKi04(Label lblTokuchoKi04) {
+        this.lblTokuchoKi04=lblTokuchoKi04;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku37 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku37AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue04")
+    private Label lblTokuchoKoseiMaeValue04;
+
+    @JsonProperty("lblTokuchoKoseiMaeValue04")
+    public Label getLblTokuchoKoseiMaeValue04() {
+        return lblTokuchoKoseiMaeValue04;
+    }
+
+    @JsonProperty("lblTokuchoKoseiMaeValue04")
+    public void setLblTokuchoKoseiMaeValue04(Label lblTokuchoKoseiMaeValue04) {
+        this.lblTokuchoKoseiMaeValue04=lblTokuchoKoseiMaeValue04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku47 のクラスファイル 
@@ -3574,31 +3691,33 @@ class celKiwarigaku46AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku47AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue1")
-    private Label lblTokuchoKoseiGoValue1;
-    @JsonProperty("txtTokuchoKoseiGo1")
-    private TextBoxNum txtTokuchoKoseiGo1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue04")
+    private Label lblTokuchoKoseiGoValue04;
+    @JsonProperty("txtTokuchoKoseiGo04")
+    private TextBoxNum txtTokuchoKoseiGo04;
 
-    @JsonProperty("lblTokuchoKoseiGoValue1")
-    public Label getLblTokuchoKoseiGoValue1() {
-        return lblTokuchoKoseiGoValue1;
+    @JsonProperty("lblTokuchoKoseiGoValue04")
+    public Label getLblTokuchoKoseiGoValue04() {
+        return lblTokuchoKoseiGoValue04;
     }
 
-    @JsonProperty("lblTokuchoKoseiGoValue1")
-    public void setLblTokuchoKoseiGoValue1(Label lblTokuchoKoseiGoValue1) {
-        this.lblTokuchoKoseiGoValue1=lblTokuchoKoseiGoValue1;
+    @JsonProperty("lblTokuchoKoseiGoValue04")
+    public void setLblTokuchoKoseiGoValue04(Label lblTokuchoKoseiGoValue04) {
+        this.lblTokuchoKoseiGoValue04=lblTokuchoKoseiGoValue04;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo1")
-    public TextBoxNum getTxtTokuchoKoseiGo1() {
-        return txtTokuchoKoseiGo1;
+    @JsonProperty("txtTokuchoKoseiGo04")
+    public TextBoxNum getTxtTokuchoKoseiGo04() {
+        return txtTokuchoKoseiGo04;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo1")
-    public void setTxtTokuchoKoseiGo1(TextBoxNum txtTokuchoKoseiGo1) {
-        this.txtTokuchoKoseiGo1=txtTokuchoKoseiGo1;
+    @JsonProperty("txtTokuchoKoseiGo04")
+    public void setTxtTokuchoKoseiGo04(TextBoxNum txtTokuchoKoseiGo04) {
+        this.txtTokuchoKoseiGo04=txtTokuchoKoseiGo04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku48 のクラスファイル 
@@ -3606,19 +3725,21 @@ class celKiwarigaku47AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku48AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue1")
-    private Label lblTokuchoZogenValue1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue04")
+    private Label lblTokuchoZogenValue04;
 
-    @JsonProperty("lblTokuchoZogenValue1")
-    public Label getLblTokuchoZogenValue1() {
-        return lblTokuchoZogenValue1;
+    @JsonProperty("lblTokuchoZogenValue04")
+    public Label getLblTokuchoZogenValue04() {
+        return lblTokuchoZogenValue04;
     }
 
-    @JsonProperty("lblTokuchoZogenValue1")
-    public void setLblTokuchoZogenValue1(Label lblTokuchoZogenValue1) {
-        this.lblTokuchoZogenValue1=lblTokuchoZogenValue1;
+    @JsonProperty("lblTokuchoZogenValue04")
+    public void setLblTokuchoZogenValue04(Label lblTokuchoZogenValue04) {
+        this.lblTokuchoZogenValue04=lblTokuchoZogenValue04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku49 のクラスファイル 
@@ -3626,19 +3747,21 @@ class celKiwarigaku48AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku49AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue1")
-    private Label lblTokuchoNofugakuValue1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue04")
+    private Label lblTokuchoNofugakuValue04;
 
-    @JsonProperty("lblTokuchoNofugakuValue1")
-    public Label getLblTokuchoNofugakuValue1() {
-        return lblTokuchoNofugakuValue1;
+    @JsonProperty("lblTokuchoNofugakuValue04")
+    public Label getLblTokuchoNofugakuValue04() {
+        return lblTokuchoNofugakuValue04;
     }
 
-    @JsonProperty("lblTokuchoNofugakuValue1")
-    public void setLblTokuchoNofugakuValue1(Label lblTokuchoNofugakuValue1) {
-        this.lblTokuchoNofugakuValue1=lblTokuchoNofugakuValue1;
+    @JsonProperty("lblTokuchoNofugakuValue04")
+    public void setLblTokuchoNofugakuValue04(Label lblTokuchoNofugakuValue04) {
+        this.lblTokuchoNofugakuValue04=lblTokuchoNofugakuValue04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku50 のクラスファイル 
@@ -3646,19 +3769,21 @@ class celKiwarigaku49AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku50AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi1")
-    private Label lblFuchoKi1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi04")
+    private Label lblFuchoKi04;
 
-    @JsonProperty("lblFuchoKi1")
-    public Label getLblFuchoKi1() {
-        return lblFuchoKi1;
+    @JsonProperty("lblFuchoKi04")
+    public Label getLblFuchoKi04() {
+        return lblFuchoKi04;
     }
 
-    @JsonProperty("lblFuchoKi1")
-    public void setLblFuchoKi1(Label lblFuchoKi1) {
-        this.lblFuchoKi1=lblFuchoKi1;
+    @JsonProperty("lblFuchoKi04")
+    public void setLblFuchoKi04(Label lblFuchoKi04) {
+        this.lblFuchoKi04=lblFuchoKi04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku51 のクラスファイル 
@@ -3666,19 +3791,21 @@ class celKiwarigaku50AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku51AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue1")
-    private Label lblFuchoKoseiMaeValue1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue04")
+    private Label lblFuchoKoseiMaeValue04;
 
-    @JsonProperty("lblFuchoKoseiMaeValue1")
-    public Label getLblFuchoKoseiMaeValue1() {
-        return lblFuchoKoseiMaeValue1;
+    @JsonProperty("lblFuchoKoseiMaeValue04")
+    public Label getLblFuchoKoseiMaeValue04() {
+        return lblFuchoKoseiMaeValue04;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue1")
-    public void setLblFuchoKoseiMaeValue1(Label lblFuchoKoseiMaeValue1) {
-        this.lblFuchoKoseiMaeValue1=lblFuchoKoseiMaeValue1;
+    @JsonProperty("lblFuchoKoseiMaeValue04")
+    public void setLblFuchoKoseiMaeValue04(Label lblFuchoKoseiMaeValue04) {
+        this.lblFuchoKoseiMaeValue04=lblFuchoKoseiMaeValue04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku52 のクラスファイル 
@@ -3686,31 +3813,33 @@ class celKiwarigaku51AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku52AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue1")
-    private Label lblFuchoKoseiGoValue1;
-    @JsonProperty("txtFuchoKoseiGo1")
-    private TextBoxNum txtFuchoKoseiGo1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue04")
+    private Label lblFuchoKoseiGoValue04;
+    @JsonProperty("txtFuchoKoseiGo04")
+    private TextBoxNum txtFuchoKoseiGo04;
 
-    @JsonProperty("lblFuchoKoseiGoValue1")
-    public Label getLblFuchoKoseiGoValue1() {
-        return lblFuchoKoseiGoValue1;
+    @JsonProperty("lblFuchoKoseiGoValue04")
+    public Label getLblFuchoKoseiGoValue04() {
+        return lblFuchoKoseiGoValue04;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue1")
-    public void setLblFuchoKoseiGoValue1(Label lblFuchoKoseiGoValue1) {
-        this.lblFuchoKoseiGoValue1=lblFuchoKoseiGoValue1;
+    @JsonProperty("lblFuchoKoseiGoValue04")
+    public void setLblFuchoKoseiGoValue04(Label lblFuchoKoseiGoValue04) {
+        this.lblFuchoKoseiGoValue04=lblFuchoKoseiGoValue04;
     }
 
-    @JsonProperty("txtFuchoKoseiGo1")
-    public TextBoxNum getTxtFuchoKoseiGo1() {
-        return txtFuchoKoseiGo1;
+    @JsonProperty("txtFuchoKoseiGo04")
+    public TextBoxNum getTxtFuchoKoseiGo04() {
+        return txtFuchoKoseiGo04;
     }
 
-    @JsonProperty("txtFuchoKoseiGo1")
-    public void setTxtFuchoKoseiGo1(TextBoxNum txtFuchoKoseiGo1) {
-        this.txtFuchoKoseiGo1=txtFuchoKoseiGo1;
+    @JsonProperty("txtFuchoKoseiGo04")
+    public void setTxtFuchoKoseiGo04(TextBoxNum txtFuchoKoseiGo04) {
+        this.txtFuchoKoseiGo04=txtFuchoKoseiGo04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku53 のクラスファイル 
@@ -3718,19 +3847,21 @@ class celKiwarigaku52AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku53AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue1")
-    private Label lblFuchoZogenValue1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue04")
+    private Label lblFuchoZogenValue04;
 
-    @JsonProperty("lblFuchoZogenValue1")
-    public Label getLblFuchoZogenValue1() {
-        return lblFuchoZogenValue1;
+    @JsonProperty("lblFuchoZogenValue04")
+    public Label getLblFuchoZogenValue04() {
+        return lblFuchoZogenValue04;
     }
 
-    @JsonProperty("lblFuchoZogenValue1")
-    public void setLblFuchoZogenValue1(Label lblFuchoZogenValue1) {
-        this.lblFuchoZogenValue1=lblFuchoZogenValue1;
+    @JsonProperty("lblFuchoZogenValue04")
+    public void setLblFuchoZogenValue04(Label lblFuchoZogenValue04) {
+        this.lblFuchoZogenValue04=lblFuchoZogenValue04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku54 のクラスファイル 
@@ -3738,19 +3869,21 @@ class celKiwarigaku53AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku54AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue1")
-    private Label lblFuchoNofugakuValue1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue04")
+    private Label lblFuchoNofugakuValue04;
 
-    @JsonProperty("lblFuchoNofugakuValue1")
-    public Label getLblFuchoNofugakuValue1() {
-        return lblFuchoNofugakuValue1;
+    @JsonProperty("lblFuchoNofugakuValue04")
+    public Label getLblFuchoNofugakuValue04() {
+        return lblFuchoNofugakuValue04;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue1")
-    public void setLblFuchoNofugakuValue1(Label lblFuchoNofugakuValue1) {
-        this.lblFuchoNofugakuValue1=lblFuchoNofugakuValue1;
+    @JsonProperty("lblFuchoNofugakuValue04")
+    public void setLblFuchoNofugakuValue04(Label lblFuchoNofugakuValue04) {
+        this.lblFuchoNofugakuValue04=lblFuchoNofugakuValue04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku55 のクラスファイル 
@@ -3758,31 +3891,33 @@ class celKiwarigaku54AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku55AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue1")
-    private Label lblFuchoNokigenValue1;
-    @JsonProperty("txtFuchoNokigen1")
-    private TextBoxDate txtFuchoNokigen1;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue04")
+    private Label lblFuchoNokigenValue04;
+    @JsonProperty("txtFuchoNokigen04")
+    private TextBoxDate txtFuchoNokigen04;
 
-    @JsonProperty("lblFuchoNokigenValue1")
-    public Label getLblFuchoNokigenValue1() {
-        return lblFuchoNokigenValue1;
+    @JsonProperty("lblFuchoNokigenValue04")
+    public Label getLblFuchoNokigenValue04() {
+        return lblFuchoNokigenValue04;
     }
 
-    @JsonProperty("lblFuchoNokigenValue1")
-    public void setLblFuchoNokigenValue1(Label lblFuchoNokigenValue1) {
-        this.lblFuchoNokigenValue1=lblFuchoNokigenValue1;
+    @JsonProperty("lblFuchoNokigenValue04")
+    public void setLblFuchoNokigenValue04(Label lblFuchoNokigenValue04) {
+        this.lblFuchoNokigenValue04=lblFuchoNokigenValue04;
     }
 
-    @JsonProperty("txtFuchoNokigen1")
-    public TextBoxDate getTxtFuchoNokigen1() {
-        return txtFuchoNokigen1;
+    @JsonProperty("txtFuchoNokigen04")
+    public TextBoxDate getTxtFuchoNokigen04() {
+        return txtFuchoNokigen04;
     }
 
-    @JsonProperty("txtFuchoNokigen1")
-    public void setTxtFuchoNokigen1(TextBoxDate txtFuchoNokigen1) {
-        this.txtFuchoNokigen1=txtFuchoNokigen1;
+    @JsonProperty("txtFuchoNokigen04")
+    public void setTxtFuchoNokigen04(TextBoxDate txtFuchoNokigen04) {
+        this.txtFuchoNokigen04=txtFuchoNokigen04;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku56 のクラスファイル 
@@ -3790,6 +3925,7 @@ class celKiwarigaku55AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku56AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki5")
     private Label lblTsuki5;
 
@@ -3803,6 +3939,7 @@ class celKiwarigaku56AttblKiwarigaku extends TableCell {
         this.lblTsuki5=lblTsuki5;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku57 のクラスファイル 
@@ -3810,7 +3947,9 @@ class celKiwarigaku56AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku57AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku58 のクラスファイル 
@@ -3818,7 +3957,9 @@ class celKiwarigaku57AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku58AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku59 のクラスファイル 
@@ -3826,7 +3967,9 @@ class celKiwarigaku58AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku59AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku60 のクラスファイル 
@@ -3834,7 +3977,9 @@ class celKiwarigaku59AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku60AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku61 のクラスファイル 
@@ -3842,7 +3987,9 @@ class celKiwarigaku60AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku61AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku62 のクラスファイル 
@@ -3850,19 +3997,21 @@ class celKiwarigaku61AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku62AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi2")
-    private Label lblFuchoKi2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi05")
+    private Label lblFuchoKi05;
 
-    @JsonProperty("lblFuchoKi2")
-    public Label getLblFuchoKi2() {
-        return lblFuchoKi2;
+    @JsonProperty("lblFuchoKi05")
+    public Label getLblFuchoKi05() {
+        return lblFuchoKi05;
     }
 
-    @JsonProperty("lblFuchoKi2")
-    public void setLblFuchoKi2(Label lblFuchoKi2) {
-        this.lblFuchoKi2=lblFuchoKi2;
+    @JsonProperty("lblFuchoKi05")
+    public void setLblFuchoKi05(Label lblFuchoKi05) {
+        this.lblFuchoKi05=lblFuchoKi05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku63 のクラスファイル 
@@ -3870,19 +4019,21 @@ class celKiwarigaku62AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku63AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue2")
-    private Label lblFuchoKoseiMaeValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue05")
+    private Label lblFuchoKoseiMaeValue05;
 
-    @JsonProperty("lblFuchoKoseiMaeValue2")
-    public Label getLblFuchoKoseiMaeValue2() {
-        return lblFuchoKoseiMaeValue2;
+    @JsonProperty("lblFuchoKoseiMaeValue05")
+    public Label getLblFuchoKoseiMaeValue05() {
+        return lblFuchoKoseiMaeValue05;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue2")
-    public void setLblFuchoKoseiMaeValue2(Label lblFuchoKoseiMaeValue2) {
-        this.lblFuchoKoseiMaeValue2=lblFuchoKoseiMaeValue2;
+    @JsonProperty("lblFuchoKoseiMaeValue05")
+    public void setLblFuchoKoseiMaeValue05(Label lblFuchoKoseiMaeValue05) {
+        this.lblFuchoKoseiMaeValue05=lblFuchoKoseiMaeValue05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku64 のクラスファイル 
@@ -3890,31 +4041,33 @@ class celKiwarigaku63AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku64AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue2")
-    private Label lblFuchoKoseiGoValue2;
-    @JsonProperty("txtFuchoKoseiGo2")
-    private TextBoxNum txtFuchoKoseiGo2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue05")
+    private Label lblFuchoKoseiGoValue05;
+    @JsonProperty("txtFuchoKoseiGo05")
+    private TextBoxNum txtFuchoKoseiGo05;
 
-    @JsonProperty("lblFuchoKoseiGoValue2")
-    public Label getLblFuchoKoseiGoValue2() {
-        return lblFuchoKoseiGoValue2;
+    @JsonProperty("lblFuchoKoseiGoValue05")
+    public Label getLblFuchoKoseiGoValue05() {
+        return lblFuchoKoseiGoValue05;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue2")
-    public void setLblFuchoKoseiGoValue2(Label lblFuchoKoseiGoValue2) {
-        this.lblFuchoKoseiGoValue2=lblFuchoKoseiGoValue2;
+    @JsonProperty("lblFuchoKoseiGoValue05")
+    public void setLblFuchoKoseiGoValue05(Label lblFuchoKoseiGoValue05) {
+        this.lblFuchoKoseiGoValue05=lblFuchoKoseiGoValue05;
     }
 
-    @JsonProperty("txtFuchoKoseiGo2")
-    public TextBoxNum getTxtFuchoKoseiGo2() {
-        return txtFuchoKoseiGo2;
+    @JsonProperty("txtFuchoKoseiGo05")
+    public TextBoxNum getTxtFuchoKoseiGo05() {
+        return txtFuchoKoseiGo05;
     }
 
-    @JsonProperty("txtFuchoKoseiGo2")
-    public void setTxtFuchoKoseiGo2(TextBoxNum txtFuchoKoseiGo2) {
-        this.txtFuchoKoseiGo2=txtFuchoKoseiGo2;
+    @JsonProperty("txtFuchoKoseiGo05")
+    public void setTxtFuchoKoseiGo05(TextBoxNum txtFuchoKoseiGo05) {
+        this.txtFuchoKoseiGo05=txtFuchoKoseiGo05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku65 のクラスファイル 
@@ -3922,19 +4075,21 @@ class celKiwarigaku64AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku65AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue2")
-    private Label lblFuchoZogenValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue05")
+    private Label lblFuchoZogenValue05;
 
-    @JsonProperty("lblFuchoZogenValue2")
-    public Label getLblFuchoZogenValue2() {
-        return lblFuchoZogenValue2;
+    @JsonProperty("lblFuchoZogenValue05")
+    public Label getLblFuchoZogenValue05() {
+        return lblFuchoZogenValue05;
     }
 
-    @JsonProperty("lblFuchoZogenValue2")
-    public void setLblFuchoZogenValue2(Label lblFuchoZogenValue2) {
-        this.lblFuchoZogenValue2=lblFuchoZogenValue2;
+    @JsonProperty("lblFuchoZogenValue05")
+    public void setLblFuchoZogenValue05(Label lblFuchoZogenValue05) {
+        this.lblFuchoZogenValue05=lblFuchoZogenValue05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku66 のクラスファイル 
@@ -3942,19 +4097,21 @@ class celKiwarigaku65AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku66AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue2")
-    private Label lblFuchoNofugakuValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue05")
+    private Label lblFuchoNofugakuValue05;
 
-    @JsonProperty("lblFuchoNofugakuValue2")
-    public Label getLblFuchoNofugakuValue2() {
-        return lblFuchoNofugakuValue2;
+    @JsonProperty("lblFuchoNofugakuValue05")
+    public Label getLblFuchoNofugakuValue05() {
+        return lblFuchoNofugakuValue05;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue2")
-    public void setLblFuchoNofugakuValue2(Label lblFuchoNofugakuValue2) {
-        this.lblFuchoNofugakuValue2=lblFuchoNofugakuValue2;
+    @JsonProperty("lblFuchoNofugakuValue05")
+    public void setLblFuchoNofugakuValue05(Label lblFuchoNofugakuValue05) {
+        this.lblFuchoNofugakuValue05=lblFuchoNofugakuValue05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku67 のクラスファイル 
@@ -3962,31 +4119,33 @@ class celKiwarigaku66AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku67AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue2")
-    private Label lblFuchoNokigenValue2;
-    @JsonProperty("txtFuchoNokigen2")
-    private TextBoxDate txtFuchoNokigen2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue05")
+    private Label lblFuchoNokigenValue05;
+    @JsonProperty("txtFuchoNokigen05")
+    private TextBoxDate txtFuchoNokigen05;
 
-    @JsonProperty("lblFuchoNokigenValue2")
-    public Label getLblFuchoNokigenValue2() {
-        return lblFuchoNokigenValue2;
+    @JsonProperty("lblFuchoNokigenValue05")
+    public Label getLblFuchoNokigenValue05() {
+        return lblFuchoNokigenValue05;
     }
 
-    @JsonProperty("lblFuchoNokigenValue2")
-    public void setLblFuchoNokigenValue2(Label lblFuchoNokigenValue2) {
-        this.lblFuchoNokigenValue2=lblFuchoNokigenValue2;
+    @JsonProperty("lblFuchoNokigenValue05")
+    public void setLblFuchoNokigenValue05(Label lblFuchoNokigenValue05) {
+        this.lblFuchoNokigenValue05=lblFuchoNokigenValue05;
     }
 
-    @JsonProperty("txtFuchoNokigen2")
-    public TextBoxDate getTxtFuchoNokigen2() {
-        return txtFuchoNokigen2;
+    @JsonProperty("txtFuchoNokigen05")
+    public TextBoxDate getTxtFuchoNokigen05() {
+        return txtFuchoNokigen05;
     }
 
-    @JsonProperty("txtFuchoNokigen2")
-    public void setTxtFuchoNokigen2(TextBoxDate txtFuchoNokigen2) {
-        this.txtFuchoNokigen2=txtFuchoNokigen2;
+    @JsonProperty("txtFuchoNokigen05")
+    public void setTxtFuchoNokigen05(TextBoxDate txtFuchoNokigen05) {
+        this.txtFuchoNokigen05=txtFuchoNokigen05;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku68 のクラスファイル 
@@ -3994,6 +4153,7 @@ class celKiwarigaku67AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku68AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki6")
     private Label lblTsuki6;
 
@@ -4007,6 +4167,7 @@ class celKiwarigaku68AttblKiwarigaku extends TableCell {
         this.lblTsuki6=lblTsuki6;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku69 のクラスファイル 
@@ -4014,19 +4175,21 @@ class celKiwarigaku68AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku69AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi2")
-    private Label lblTokuchoKi2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi06")
+    private Label lblTokuchoKi06;
 
-    @JsonProperty("lblTokuchoKi2")
-    public Label getLblTokuchoKi2() {
-        return lblTokuchoKi2;
+    @JsonProperty("lblTokuchoKi06")
+    public Label getLblTokuchoKi06() {
+        return lblTokuchoKi06;
     }
 
-    @JsonProperty("lblTokuchoKi2")
-    public void setLblTokuchoKi2(Label lblTokuchoKi2) {
-        this.lblTokuchoKi2=lblTokuchoKi2;
+    @JsonProperty("lblTokuchoKi06")
+    public void setLblTokuchoKi06(Label lblTokuchoKi06) {
+        this.lblTokuchoKi06=lblTokuchoKi06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku70 のクラスファイル 
@@ -4034,19 +4197,21 @@ class celKiwarigaku69AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku70AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue2")
-    private Label lblTokuchoKoseiMaeValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue06")
+    private Label lblTokuchoKoseiMaeValue06;
 
-    @JsonProperty("lblTokuchoKoseiMaeValue2")
-    public Label getLblTokuchoKoseiMaeValue2() {
-        return lblTokuchoKoseiMaeValue2;
+    @JsonProperty("lblTokuchoKoseiMaeValue06")
+    public Label getLblTokuchoKoseiMaeValue06() {
+        return lblTokuchoKoseiMaeValue06;
     }
 
-    @JsonProperty("lblTokuchoKoseiMaeValue2")
-    public void setLblTokuchoKoseiMaeValue2(Label lblTokuchoKoseiMaeValue2) {
-        this.lblTokuchoKoseiMaeValue2=lblTokuchoKoseiMaeValue2;
+    @JsonProperty("lblTokuchoKoseiMaeValue06")
+    public void setLblTokuchoKoseiMaeValue06(Label lblTokuchoKoseiMaeValue06) {
+        this.lblTokuchoKoseiMaeValue06=lblTokuchoKoseiMaeValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku71 のクラスファイル 
@@ -4054,31 +4219,33 @@ class celKiwarigaku70AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku71AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue2")
-    private Label lblTokuchoKoseiGoValue2;
-    @JsonProperty("txtTokuchoKoseiGo2")
-    private TextBoxNum txtTokuchoKoseiGo2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue06")
+    private Label lblTokuchoKoseiGoValue06;
+    @JsonProperty("txtTokuchoKoseiGo06")
+    private TextBoxNum txtTokuchoKoseiGo06;
 
-    @JsonProperty("lblTokuchoKoseiGoValue2")
-    public Label getLblTokuchoKoseiGoValue2() {
-        return lblTokuchoKoseiGoValue2;
+    @JsonProperty("lblTokuchoKoseiGoValue06")
+    public Label getLblTokuchoKoseiGoValue06() {
+        return lblTokuchoKoseiGoValue06;
     }
 
-    @JsonProperty("lblTokuchoKoseiGoValue2")
-    public void setLblTokuchoKoseiGoValue2(Label lblTokuchoKoseiGoValue2) {
-        this.lblTokuchoKoseiGoValue2=lblTokuchoKoseiGoValue2;
+    @JsonProperty("lblTokuchoKoseiGoValue06")
+    public void setLblTokuchoKoseiGoValue06(Label lblTokuchoKoseiGoValue06) {
+        this.lblTokuchoKoseiGoValue06=lblTokuchoKoseiGoValue06;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo2")
-    public TextBoxNum getTxtTokuchoKoseiGo2() {
-        return txtTokuchoKoseiGo2;
+    @JsonProperty("txtTokuchoKoseiGo06")
+    public TextBoxNum getTxtTokuchoKoseiGo06() {
+        return txtTokuchoKoseiGo06;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo2")
-    public void setTxtTokuchoKoseiGo2(TextBoxNum txtTokuchoKoseiGo2) {
-        this.txtTokuchoKoseiGo2=txtTokuchoKoseiGo2;
+    @JsonProperty("txtTokuchoKoseiGo06")
+    public void setTxtTokuchoKoseiGo06(TextBoxNum txtTokuchoKoseiGo06) {
+        this.txtTokuchoKoseiGo06=txtTokuchoKoseiGo06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku72 のクラスファイル 
@@ -4086,19 +4253,21 @@ class celKiwarigaku71AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku72AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue2")
-    private Label lblTokuchoZogenValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue06")
+    private Label lblTokuchoZogenValue06;
 
-    @JsonProperty("lblTokuchoZogenValue2")
-    public Label getLblTokuchoZogenValue2() {
-        return lblTokuchoZogenValue2;
+    @JsonProperty("lblTokuchoZogenValue06")
+    public Label getLblTokuchoZogenValue06() {
+        return lblTokuchoZogenValue06;
     }
 
-    @JsonProperty("lblTokuchoZogenValue2")
-    public void setLblTokuchoZogenValue2(Label lblTokuchoZogenValue2) {
-        this.lblTokuchoZogenValue2=lblTokuchoZogenValue2;
+    @JsonProperty("lblTokuchoZogenValue06")
+    public void setLblTokuchoZogenValue06(Label lblTokuchoZogenValue06) {
+        this.lblTokuchoZogenValue06=lblTokuchoZogenValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku73 のクラスファイル 
@@ -4106,19 +4275,21 @@ class celKiwarigaku72AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku73AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue2")
-    private Label lblTokuchoNofugakuValue2;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue06")
+    private Label lblTokuchoNofugakuValue06;
 
-    @JsonProperty("lblTokuchoNofugakuValue2")
-    public Label getLblTokuchoNofugakuValue2() {
-        return lblTokuchoNofugakuValue2;
+    @JsonProperty("lblTokuchoNofugakuValue06")
+    public Label getLblTokuchoNofugakuValue06() {
+        return lblTokuchoNofugakuValue06;
     }
 
-    @JsonProperty("lblTokuchoNofugakuValue2")
-    public void setLblTokuchoNofugakuValue2(Label lblTokuchoNofugakuValue2) {
-        this.lblTokuchoNofugakuValue2=lblTokuchoNofugakuValue2;
+    @JsonProperty("lblTokuchoNofugakuValue06")
+    public void setLblTokuchoNofugakuValue06(Label lblTokuchoNofugakuValue06) {
+        this.lblTokuchoNofugakuValue06=lblTokuchoNofugakuValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku74 のクラスファイル 
@@ -4126,19 +4297,21 @@ class celKiwarigaku73AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku74AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi3")
-    private Label lblFuchoKi3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi06")
+    private Label lblFuchoKi06;
 
-    @JsonProperty("lblFuchoKi3")
-    public Label getLblFuchoKi3() {
-        return lblFuchoKi3;
+    @JsonProperty("lblFuchoKi06")
+    public Label getLblFuchoKi06() {
+        return lblFuchoKi06;
     }
 
-    @JsonProperty("lblFuchoKi3")
-    public void setLblFuchoKi3(Label lblFuchoKi3) {
-        this.lblFuchoKi3=lblFuchoKi3;
+    @JsonProperty("lblFuchoKi06")
+    public void setLblFuchoKi06(Label lblFuchoKi06) {
+        this.lblFuchoKi06=lblFuchoKi06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku75 のクラスファイル 
@@ -4146,19 +4319,21 @@ class celKiwarigaku74AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku75AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue3")
-    private Label lblFuchoKoseiMaeValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue06")
+    private Label lblFuchoKoseiMaeValue06;
 
-    @JsonProperty("lblFuchoKoseiMaeValue3")
-    public Label getLblFuchoKoseiMaeValue3() {
-        return lblFuchoKoseiMaeValue3;
+    @JsonProperty("lblFuchoKoseiMaeValue06")
+    public Label getLblFuchoKoseiMaeValue06() {
+        return lblFuchoKoseiMaeValue06;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue3")
-    public void setLblFuchoKoseiMaeValue3(Label lblFuchoKoseiMaeValue3) {
-        this.lblFuchoKoseiMaeValue3=lblFuchoKoseiMaeValue3;
+    @JsonProperty("lblFuchoKoseiMaeValue06")
+    public void setLblFuchoKoseiMaeValue06(Label lblFuchoKoseiMaeValue06) {
+        this.lblFuchoKoseiMaeValue06=lblFuchoKoseiMaeValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku76 のクラスファイル 
@@ -4166,31 +4341,33 @@ class celKiwarigaku75AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku76AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue3")
-    private Label lblFuchoKoseiGoValue3;
-    @JsonProperty("txtFuchoKoseiGo3")
-    private TextBoxNum txtFuchoKoseiGo3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue06")
+    private Label lblFuchoKoseiGoValue06;
+    @JsonProperty("txtFuchoKoseiGo06")
+    private TextBoxNum txtFuchoKoseiGo06;
 
-    @JsonProperty("lblFuchoKoseiGoValue3")
-    public Label getLblFuchoKoseiGoValue3() {
-        return lblFuchoKoseiGoValue3;
+    @JsonProperty("lblFuchoKoseiGoValue06")
+    public Label getLblFuchoKoseiGoValue06() {
+        return lblFuchoKoseiGoValue06;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue3")
-    public void setLblFuchoKoseiGoValue3(Label lblFuchoKoseiGoValue3) {
-        this.lblFuchoKoseiGoValue3=lblFuchoKoseiGoValue3;
+    @JsonProperty("lblFuchoKoseiGoValue06")
+    public void setLblFuchoKoseiGoValue06(Label lblFuchoKoseiGoValue06) {
+        this.lblFuchoKoseiGoValue06=lblFuchoKoseiGoValue06;
     }
 
-    @JsonProperty("txtFuchoKoseiGo3")
-    public TextBoxNum getTxtFuchoKoseiGo3() {
-        return txtFuchoKoseiGo3;
+    @JsonProperty("txtFuchoKoseiGo06")
+    public TextBoxNum getTxtFuchoKoseiGo06() {
+        return txtFuchoKoseiGo06;
     }
 
-    @JsonProperty("txtFuchoKoseiGo3")
-    public void setTxtFuchoKoseiGo3(TextBoxNum txtFuchoKoseiGo3) {
-        this.txtFuchoKoseiGo3=txtFuchoKoseiGo3;
+    @JsonProperty("txtFuchoKoseiGo06")
+    public void setTxtFuchoKoseiGo06(TextBoxNum txtFuchoKoseiGo06) {
+        this.txtFuchoKoseiGo06=txtFuchoKoseiGo06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku77 のクラスファイル 
@@ -4198,19 +4375,21 @@ class celKiwarigaku76AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku77AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue3")
-    private Label lblFuchoZogenValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue06")
+    private Label lblFuchoZogenValue06;
 
-    @JsonProperty("lblFuchoZogenValue3")
-    public Label getLblFuchoZogenValue3() {
-        return lblFuchoZogenValue3;
+    @JsonProperty("lblFuchoZogenValue06")
+    public Label getLblFuchoZogenValue06() {
+        return lblFuchoZogenValue06;
     }
 
-    @JsonProperty("lblFuchoZogenValue3")
-    public void setLblFuchoZogenValue3(Label lblFuchoZogenValue3) {
-        this.lblFuchoZogenValue3=lblFuchoZogenValue3;
+    @JsonProperty("lblFuchoZogenValue06")
+    public void setLblFuchoZogenValue06(Label lblFuchoZogenValue06) {
+        this.lblFuchoZogenValue06=lblFuchoZogenValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku78 のクラスファイル 
@@ -4218,19 +4397,21 @@ class celKiwarigaku77AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku78AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue3")
-    private Label lblFuchoNofugakuValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue06")
+    private Label lblFuchoNofugakuValue06;
 
-    @JsonProperty("lblFuchoNofugakuValue3")
-    public Label getLblFuchoNofugakuValue3() {
-        return lblFuchoNofugakuValue3;
+    @JsonProperty("lblFuchoNofugakuValue06")
+    public Label getLblFuchoNofugakuValue06() {
+        return lblFuchoNofugakuValue06;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue3")
-    public void setLblFuchoNofugakuValue3(Label lblFuchoNofugakuValue3) {
-        this.lblFuchoNofugakuValue3=lblFuchoNofugakuValue3;
+    @JsonProperty("lblFuchoNofugakuValue06")
+    public void setLblFuchoNofugakuValue06(Label lblFuchoNofugakuValue06) {
+        this.lblFuchoNofugakuValue06=lblFuchoNofugakuValue06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku79 のクラスファイル 
@@ -4238,31 +4419,33 @@ class celKiwarigaku78AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku79AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue3")
-    private Label lblFuchoNokigenValue3;
-    @JsonProperty("txtFuchoNokigen3")
-    private TextBoxDate txtFuchoNokigen3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue06")
+    private Label lblFuchoNokigenValue06;
+    @JsonProperty("txtFuchoNokigen06")
+    private TextBoxDate txtFuchoNokigen06;
 
-    @JsonProperty("lblFuchoNokigenValue3")
-    public Label getLblFuchoNokigenValue3() {
-        return lblFuchoNokigenValue3;
+    @JsonProperty("lblFuchoNokigenValue06")
+    public Label getLblFuchoNokigenValue06() {
+        return lblFuchoNokigenValue06;
     }
 
-    @JsonProperty("lblFuchoNokigenValue3")
-    public void setLblFuchoNokigenValue3(Label lblFuchoNokigenValue3) {
-        this.lblFuchoNokigenValue3=lblFuchoNokigenValue3;
+    @JsonProperty("lblFuchoNokigenValue06")
+    public void setLblFuchoNokigenValue06(Label lblFuchoNokigenValue06) {
+        this.lblFuchoNokigenValue06=lblFuchoNokigenValue06;
     }
 
-    @JsonProperty("txtFuchoNokigen3")
-    public TextBoxDate getTxtFuchoNokigen3() {
-        return txtFuchoNokigen3;
+    @JsonProperty("txtFuchoNokigen06")
+    public TextBoxDate getTxtFuchoNokigen06() {
+        return txtFuchoNokigen06;
     }
 
-    @JsonProperty("txtFuchoNokigen3")
-    public void setTxtFuchoNokigen3(TextBoxDate txtFuchoNokigen3) {
-        this.txtFuchoNokigen3=txtFuchoNokigen3;
+    @JsonProperty("txtFuchoNokigen06")
+    public void setTxtFuchoNokigen06(TextBoxDate txtFuchoNokigen06) {
+        this.txtFuchoNokigen06=txtFuchoNokigen06;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku80 のクラスファイル 
@@ -4270,6 +4453,7 @@ class celKiwarigaku79AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku80AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki7")
     private Label lblTsuki7;
 
@@ -4283,6 +4467,7 @@ class celKiwarigaku80AttblKiwarigaku extends TableCell {
         this.lblTsuki7=lblTsuki7;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku81 のクラスファイル 
@@ -4290,7 +4475,9 @@ class celKiwarigaku80AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku81AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku82 のクラスファイル 
@@ -4298,7 +4485,9 @@ class celKiwarigaku81AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku82AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku83 のクラスファイル 
@@ -4306,7 +4495,9 @@ class celKiwarigaku82AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku83AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku84 のクラスファイル 
@@ -4314,7 +4505,9 @@ class celKiwarigaku83AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku84AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku85 のクラスファイル 
@@ -4322,7 +4515,9 @@ class celKiwarigaku84AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku85AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku86 のクラスファイル 
@@ -4330,19 +4525,21 @@ class celKiwarigaku85AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku86AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi4")
-    private Label lblFuchoKi4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi07")
+    private Label lblFuchoKi07;
 
-    @JsonProperty("lblFuchoKi4")
-    public Label getLblFuchoKi4() {
-        return lblFuchoKi4;
+    @JsonProperty("lblFuchoKi07")
+    public Label getLblFuchoKi07() {
+        return lblFuchoKi07;
     }
 
-    @JsonProperty("lblFuchoKi4")
-    public void setLblFuchoKi4(Label lblFuchoKi4) {
-        this.lblFuchoKi4=lblFuchoKi4;
+    @JsonProperty("lblFuchoKi07")
+    public void setLblFuchoKi07(Label lblFuchoKi07) {
+        this.lblFuchoKi07=lblFuchoKi07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku87 のクラスファイル 
@@ -4350,19 +4547,21 @@ class celKiwarigaku86AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku87AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue4")
-    private Label lblFuchoKoseiMaeValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue07")
+    private Label lblFuchoKoseiMaeValue07;
 
-    @JsonProperty("lblFuchoKoseiMaeValue4")
-    public Label getLblFuchoKoseiMaeValue4() {
-        return lblFuchoKoseiMaeValue4;
+    @JsonProperty("lblFuchoKoseiMaeValue07")
+    public Label getLblFuchoKoseiMaeValue07() {
+        return lblFuchoKoseiMaeValue07;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue4")
-    public void setLblFuchoKoseiMaeValue4(Label lblFuchoKoseiMaeValue4) {
-        this.lblFuchoKoseiMaeValue4=lblFuchoKoseiMaeValue4;
+    @JsonProperty("lblFuchoKoseiMaeValue07")
+    public void setLblFuchoKoseiMaeValue07(Label lblFuchoKoseiMaeValue07) {
+        this.lblFuchoKoseiMaeValue07=lblFuchoKoseiMaeValue07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku88 のクラスファイル 
@@ -4370,31 +4569,33 @@ class celKiwarigaku87AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku88AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue4")
-    private Label lblFuchoKoseiGoValue4;
-    @JsonProperty("txtFuchoKoseiGo4")
-    private TextBoxNum txtFuchoKoseiGo4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue07")
+    private Label lblFuchoKoseiGoValue07;
+    @JsonProperty("txtFuchoKoseiGo07")
+    private TextBoxNum txtFuchoKoseiGo07;
 
-    @JsonProperty("lblFuchoKoseiGoValue4")
-    public Label getLblFuchoKoseiGoValue4() {
-        return lblFuchoKoseiGoValue4;
+    @JsonProperty("lblFuchoKoseiGoValue07")
+    public Label getLblFuchoKoseiGoValue07() {
+        return lblFuchoKoseiGoValue07;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue4")
-    public void setLblFuchoKoseiGoValue4(Label lblFuchoKoseiGoValue4) {
-        this.lblFuchoKoseiGoValue4=lblFuchoKoseiGoValue4;
+    @JsonProperty("lblFuchoKoseiGoValue07")
+    public void setLblFuchoKoseiGoValue07(Label lblFuchoKoseiGoValue07) {
+        this.lblFuchoKoseiGoValue07=lblFuchoKoseiGoValue07;
     }
 
-    @JsonProperty("txtFuchoKoseiGo4")
-    public TextBoxNum getTxtFuchoKoseiGo4() {
-        return txtFuchoKoseiGo4;
+    @JsonProperty("txtFuchoKoseiGo07")
+    public TextBoxNum getTxtFuchoKoseiGo07() {
+        return txtFuchoKoseiGo07;
     }
 
-    @JsonProperty("txtFuchoKoseiGo4")
-    public void setTxtFuchoKoseiGo4(TextBoxNum txtFuchoKoseiGo4) {
-        this.txtFuchoKoseiGo4=txtFuchoKoseiGo4;
+    @JsonProperty("txtFuchoKoseiGo07")
+    public void setTxtFuchoKoseiGo07(TextBoxNum txtFuchoKoseiGo07) {
+        this.txtFuchoKoseiGo07=txtFuchoKoseiGo07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku89 のクラスファイル 
@@ -4402,19 +4603,21 @@ class celKiwarigaku88AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku89AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue4")
-    private Label lblFuchoZogenValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue07")
+    private Label lblFuchoZogenValue07;
 
-    @JsonProperty("lblFuchoZogenValue4")
-    public Label getLblFuchoZogenValue4() {
-        return lblFuchoZogenValue4;
+    @JsonProperty("lblFuchoZogenValue07")
+    public Label getLblFuchoZogenValue07() {
+        return lblFuchoZogenValue07;
     }
 
-    @JsonProperty("lblFuchoZogenValue4")
-    public void setLblFuchoZogenValue4(Label lblFuchoZogenValue4) {
-        this.lblFuchoZogenValue4=lblFuchoZogenValue4;
+    @JsonProperty("lblFuchoZogenValue07")
+    public void setLblFuchoZogenValue07(Label lblFuchoZogenValue07) {
+        this.lblFuchoZogenValue07=lblFuchoZogenValue07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku90 のクラスファイル 
@@ -4422,19 +4625,21 @@ class celKiwarigaku89AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku90AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue4")
-    private Label lblFuchoNofugakuValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue07")
+    private Label lblFuchoNofugakuValue07;
 
-    @JsonProperty("lblFuchoNofugakuValue4")
-    public Label getLblFuchoNofugakuValue4() {
-        return lblFuchoNofugakuValue4;
+    @JsonProperty("lblFuchoNofugakuValue07")
+    public Label getLblFuchoNofugakuValue07() {
+        return lblFuchoNofugakuValue07;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue4")
-    public void setLblFuchoNofugakuValue4(Label lblFuchoNofugakuValue4) {
-        this.lblFuchoNofugakuValue4=lblFuchoNofugakuValue4;
+    @JsonProperty("lblFuchoNofugakuValue07")
+    public void setLblFuchoNofugakuValue07(Label lblFuchoNofugakuValue07) {
+        this.lblFuchoNofugakuValue07=lblFuchoNofugakuValue07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku91 のクラスファイル 
@@ -4442,31 +4647,33 @@ class celKiwarigaku90AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku91AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue4")
-    private Label lblFuchoNokigenValue4;
-    @JsonProperty("txtFuchoNokigen4")
-    private TextBoxDate txtFuchoNokigen4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue07")
+    private Label lblFuchoNokigenValue07;
+    @JsonProperty("txtFuchoNokigen07")
+    private TextBoxDate txtFuchoNokigen07;
 
-    @JsonProperty("lblFuchoNokigenValue4")
-    public Label getLblFuchoNokigenValue4() {
-        return lblFuchoNokigenValue4;
+    @JsonProperty("lblFuchoNokigenValue07")
+    public Label getLblFuchoNokigenValue07() {
+        return lblFuchoNokigenValue07;
     }
 
-    @JsonProperty("lblFuchoNokigenValue4")
-    public void setLblFuchoNokigenValue4(Label lblFuchoNokigenValue4) {
-        this.lblFuchoNokigenValue4=lblFuchoNokigenValue4;
+    @JsonProperty("lblFuchoNokigenValue07")
+    public void setLblFuchoNokigenValue07(Label lblFuchoNokigenValue07) {
+        this.lblFuchoNokigenValue07=lblFuchoNokigenValue07;
     }
 
-    @JsonProperty("txtFuchoNokigen4")
-    public TextBoxDate getTxtFuchoNokigen4() {
-        return txtFuchoNokigen4;
+    @JsonProperty("txtFuchoNokigen07")
+    public TextBoxDate getTxtFuchoNokigen07() {
+        return txtFuchoNokigen07;
     }
 
-    @JsonProperty("txtFuchoNokigen4")
-    public void setTxtFuchoNokigen4(TextBoxDate txtFuchoNokigen4) {
-        this.txtFuchoNokigen4=txtFuchoNokigen4;
+    @JsonProperty("txtFuchoNokigen07")
+    public void setTxtFuchoNokigen07(TextBoxDate txtFuchoNokigen07) {
+        this.txtFuchoNokigen07=txtFuchoNokigen07;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku92 のクラスファイル 
@@ -4474,6 +4681,7 @@ class celKiwarigaku91AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku92AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki8")
     private Label lblTsuki8;
 
@@ -4487,6 +4695,7 @@ class celKiwarigaku92AttblKiwarigaku extends TableCell {
         this.lblTsuki8=lblTsuki8;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku93 のクラスファイル 
@@ -4494,19 +4703,21 @@ class celKiwarigaku92AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku93AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi3")
-    private Label lblTokuchoKi3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi08")
+    private Label lblTokuchoKi08;
 
-    @JsonProperty("lblTokuchoKi3")
-    public Label getLblTokuchoKi3() {
-        return lblTokuchoKi3;
+    @JsonProperty("lblTokuchoKi08")
+    public Label getLblTokuchoKi08() {
+        return lblTokuchoKi08;
     }
 
-    @JsonProperty("lblTokuchoKi3")
-    public void setLblTokuchoKi3(Label lblTokuchoKi3) {
-        this.lblTokuchoKi3=lblTokuchoKi3;
+    @JsonProperty("lblTokuchoKi08")
+    public void setLblTokuchoKi08(Label lblTokuchoKi08) {
+        this.lblTokuchoKi08=lblTokuchoKi08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku94 のクラスファイル 
@@ -4514,19 +4725,21 @@ class celKiwarigaku93AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku94AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue3")
-    private Label lblTokuchoKoseiMaeValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue08")
+    private Label lblTokuchoKoseiMaeValue08;
 
-    @JsonProperty("lblTokuchoKoseiMaeValue3")
-    public Label getLblTokuchoKoseiMaeValue3() {
-        return lblTokuchoKoseiMaeValue3;
+    @JsonProperty("lblTokuchoKoseiMaeValue08")
+    public Label getLblTokuchoKoseiMaeValue08() {
+        return lblTokuchoKoseiMaeValue08;
     }
 
-    @JsonProperty("lblTokuchoKoseiMaeValue3")
-    public void setLblTokuchoKoseiMaeValue3(Label lblTokuchoKoseiMaeValue3) {
-        this.lblTokuchoKoseiMaeValue3=lblTokuchoKoseiMaeValue3;
+    @JsonProperty("lblTokuchoKoseiMaeValue08")
+    public void setLblTokuchoKoseiMaeValue08(Label lblTokuchoKoseiMaeValue08) {
+        this.lblTokuchoKoseiMaeValue08=lblTokuchoKoseiMaeValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku95 のクラスファイル 
@@ -4534,31 +4747,33 @@ class celKiwarigaku94AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku95AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue3")
-    private Label lblTokuchoKoseiGoValue3;
-    @JsonProperty("txtTokuchoKoseiGo3")
-    private TextBoxNum txtTokuchoKoseiGo3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue08")
+    private Label lblTokuchoKoseiGoValue08;
+    @JsonProperty("txtTokuchoKoseiGo08")
+    private TextBoxNum txtTokuchoKoseiGo08;
 
-    @JsonProperty("lblTokuchoKoseiGoValue3")
-    public Label getLblTokuchoKoseiGoValue3() {
-        return lblTokuchoKoseiGoValue3;
+    @JsonProperty("lblTokuchoKoseiGoValue08")
+    public Label getLblTokuchoKoseiGoValue08() {
+        return lblTokuchoKoseiGoValue08;
     }
 
-    @JsonProperty("lblTokuchoKoseiGoValue3")
-    public void setLblTokuchoKoseiGoValue3(Label lblTokuchoKoseiGoValue3) {
-        this.lblTokuchoKoseiGoValue3=lblTokuchoKoseiGoValue3;
+    @JsonProperty("lblTokuchoKoseiGoValue08")
+    public void setLblTokuchoKoseiGoValue08(Label lblTokuchoKoseiGoValue08) {
+        this.lblTokuchoKoseiGoValue08=lblTokuchoKoseiGoValue08;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo3")
-    public TextBoxNum getTxtTokuchoKoseiGo3() {
-        return txtTokuchoKoseiGo3;
+    @JsonProperty("txtTokuchoKoseiGo08")
+    public TextBoxNum getTxtTokuchoKoseiGo08() {
+        return txtTokuchoKoseiGo08;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo3")
-    public void setTxtTokuchoKoseiGo3(TextBoxNum txtTokuchoKoseiGo3) {
-        this.txtTokuchoKoseiGo3=txtTokuchoKoseiGo3;
+    @JsonProperty("txtTokuchoKoseiGo08")
+    public void setTxtTokuchoKoseiGo08(TextBoxNum txtTokuchoKoseiGo08) {
+        this.txtTokuchoKoseiGo08=txtTokuchoKoseiGo08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku96 のクラスファイル 
@@ -4566,19 +4781,21 @@ class celKiwarigaku95AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku96AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue3")
-    private Label lblTokuchoZogenValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue08")
+    private Label lblTokuchoZogenValue08;
 
-    @JsonProperty("lblTokuchoZogenValue3")
-    public Label getLblTokuchoZogenValue3() {
-        return lblTokuchoZogenValue3;
+    @JsonProperty("lblTokuchoZogenValue08")
+    public Label getLblTokuchoZogenValue08() {
+        return lblTokuchoZogenValue08;
     }
 
-    @JsonProperty("lblTokuchoZogenValue3")
-    public void setLblTokuchoZogenValue3(Label lblTokuchoZogenValue3) {
-        this.lblTokuchoZogenValue3=lblTokuchoZogenValue3;
+    @JsonProperty("lblTokuchoZogenValue08")
+    public void setLblTokuchoZogenValue08(Label lblTokuchoZogenValue08) {
+        this.lblTokuchoZogenValue08=lblTokuchoZogenValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku97 のクラスファイル 
@@ -4586,19 +4803,21 @@ class celKiwarigaku96AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku97AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue3")
-    private Label lblTokuchoNofugakuValue3;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue08")
+    private Label lblTokuchoNofugakuValue08;
 
-    @JsonProperty("lblTokuchoNofugakuValue3")
-    public Label getLblTokuchoNofugakuValue3() {
-        return lblTokuchoNofugakuValue3;
+    @JsonProperty("lblTokuchoNofugakuValue08")
+    public Label getLblTokuchoNofugakuValue08() {
+        return lblTokuchoNofugakuValue08;
     }
 
-    @JsonProperty("lblTokuchoNofugakuValue3")
-    public void setLblTokuchoNofugakuValue3(Label lblTokuchoNofugakuValue3) {
-        this.lblTokuchoNofugakuValue3=lblTokuchoNofugakuValue3;
+    @JsonProperty("lblTokuchoNofugakuValue08")
+    public void setLblTokuchoNofugakuValue08(Label lblTokuchoNofugakuValue08) {
+        this.lblTokuchoNofugakuValue08=lblTokuchoNofugakuValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku98 のクラスファイル 
@@ -4606,19 +4825,21 @@ class celKiwarigaku97AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku98AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi5")
-    private Label lblFuchoKi5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi08")
+    private Label lblFuchoKi08;
 
-    @JsonProperty("lblFuchoKi5")
-    public Label getLblFuchoKi5() {
-        return lblFuchoKi5;
+    @JsonProperty("lblFuchoKi08")
+    public Label getLblFuchoKi08() {
+        return lblFuchoKi08;
     }
 
-    @JsonProperty("lblFuchoKi5")
-    public void setLblFuchoKi5(Label lblFuchoKi5) {
-        this.lblFuchoKi5=lblFuchoKi5;
+    @JsonProperty("lblFuchoKi08")
+    public void setLblFuchoKi08(Label lblFuchoKi08) {
+        this.lblFuchoKi08=lblFuchoKi08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku99 のクラスファイル 
@@ -4626,19 +4847,21 @@ class celKiwarigaku98AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku99AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue5")
-    private Label lblFuchoKoseiMaeValue5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue08")
+    private Label lblFuchoKoseiMaeValue08;
 
-    @JsonProperty("lblFuchoKoseiMaeValue5")
-    public Label getLblFuchoKoseiMaeValue5() {
-        return lblFuchoKoseiMaeValue5;
+    @JsonProperty("lblFuchoKoseiMaeValue08")
+    public Label getLblFuchoKoseiMaeValue08() {
+        return lblFuchoKoseiMaeValue08;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue5")
-    public void setLblFuchoKoseiMaeValue5(Label lblFuchoKoseiMaeValue5) {
-        this.lblFuchoKoseiMaeValue5=lblFuchoKoseiMaeValue5;
+    @JsonProperty("lblFuchoKoseiMaeValue08")
+    public void setLblFuchoKoseiMaeValue08(Label lblFuchoKoseiMaeValue08) {
+        this.lblFuchoKoseiMaeValue08=lblFuchoKoseiMaeValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku100 のクラスファイル 
@@ -4646,31 +4869,33 @@ class celKiwarigaku99AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku100AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue5")
-    private Label lblFuchoKoseiGoValue5;
-    @JsonProperty("txtFuchoKoseiGo5")
-    private TextBoxNum txtFuchoKoseiGo5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue08")
+    private Label lblFuchoKoseiGoValue08;
+    @JsonProperty("txtFuchoKoseiGo08")
+    private TextBoxNum txtFuchoKoseiGo08;
 
-    @JsonProperty("lblFuchoKoseiGoValue5")
-    public Label getLblFuchoKoseiGoValue5() {
-        return lblFuchoKoseiGoValue5;
+    @JsonProperty("lblFuchoKoseiGoValue08")
+    public Label getLblFuchoKoseiGoValue08() {
+        return lblFuchoKoseiGoValue08;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue5")
-    public void setLblFuchoKoseiGoValue5(Label lblFuchoKoseiGoValue5) {
-        this.lblFuchoKoseiGoValue5=lblFuchoKoseiGoValue5;
+    @JsonProperty("lblFuchoKoseiGoValue08")
+    public void setLblFuchoKoseiGoValue08(Label lblFuchoKoseiGoValue08) {
+        this.lblFuchoKoseiGoValue08=lblFuchoKoseiGoValue08;
     }
 
-    @JsonProperty("txtFuchoKoseiGo5")
-    public TextBoxNum getTxtFuchoKoseiGo5() {
-        return txtFuchoKoseiGo5;
+    @JsonProperty("txtFuchoKoseiGo08")
+    public TextBoxNum getTxtFuchoKoseiGo08() {
+        return txtFuchoKoseiGo08;
     }
 
-    @JsonProperty("txtFuchoKoseiGo5")
-    public void setTxtFuchoKoseiGo5(TextBoxNum txtFuchoKoseiGo5) {
-        this.txtFuchoKoseiGo5=txtFuchoKoseiGo5;
+    @JsonProperty("txtFuchoKoseiGo08")
+    public void setTxtFuchoKoseiGo08(TextBoxNum txtFuchoKoseiGo08) {
+        this.txtFuchoKoseiGo08=txtFuchoKoseiGo08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku101 のクラスファイル 
@@ -4678,19 +4903,21 @@ class celKiwarigaku100AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku101AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue5")
-    private Label lblFuchoZogenValue5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue08")
+    private Label lblFuchoZogenValue08;
 
-    @JsonProperty("lblFuchoZogenValue5")
-    public Label getLblFuchoZogenValue5() {
-        return lblFuchoZogenValue5;
+    @JsonProperty("lblFuchoZogenValue08")
+    public Label getLblFuchoZogenValue08() {
+        return lblFuchoZogenValue08;
     }
 
-    @JsonProperty("lblFuchoZogenValue5")
-    public void setLblFuchoZogenValue5(Label lblFuchoZogenValue5) {
-        this.lblFuchoZogenValue5=lblFuchoZogenValue5;
+    @JsonProperty("lblFuchoZogenValue08")
+    public void setLblFuchoZogenValue08(Label lblFuchoZogenValue08) {
+        this.lblFuchoZogenValue08=lblFuchoZogenValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku102 のクラスファイル 
@@ -4698,19 +4925,21 @@ class celKiwarigaku101AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku102AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue5")
-    private Label lblFuchoNofugakuValue5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue08")
+    private Label lblFuchoNofugakuValue08;
 
-    @JsonProperty("lblFuchoNofugakuValue5")
-    public Label getLblFuchoNofugakuValue5() {
-        return lblFuchoNofugakuValue5;
+    @JsonProperty("lblFuchoNofugakuValue08")
+    public Label getLblFuchoNofugakuValue08() {
+        return lblFuchoNofugakuValue08;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue5")
-    public void setLblFuchoNofugakuValue5(Label lblFuchoNofugakuValue5) {
-        this.lblFuchoNofugakuValue5=lblFuchoNofugakuValue5;
+    @JsonProperty("lblFuchoNofugakuValue08")
+    public void setLblFuchoNofugakuValue08(Label lblFuchoNofugakuValue08) {
+        this.lblFuchoNofugakuValue08=lblFuchoNofugakuValue08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku103 のクラスファイル 
@@ -4718,31 +4947,33 @@ class celKiwarigaku102AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku103AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue5")
-    private Label lblFuchoNokigenValue5;
-    @JsonProperty("txtFuchoNokigen5")
-    private TextBoxDate txtFuchoNokigen5;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue08")
+    private Label lblFuchoNokigenValue08;
+    @JsonProperty("txtFuchoNokigen08")
+    private TextBoxDate txtFuchoNokigen08;
 
-    @JsonProperty("lblFuchoNokigenValue5")
-    public Label getLblFuchoNokigenValue5() {
-        return lblFuchoNokigenValue5;
+    @JsonProperty("lblFuchoNokigenValue08")
+    public Label getLblFuchoNokigenValue08() {
+        return lblFuchoNokigenValue08;
     }
 
-    @JsonProperty("lblFuchoNokigenValue5")
-    public void setLblFuchoNokigenValue5(Label lblFuchoNokigenValue5) {
-        this.lblFuchoNokigenValue5=lblFuchoNokigenValue5;
+    @JsonProperty("lblFuchoNokigenValue08")
+    public void setLblFuchoNokigenValue08(Label lblFuchoNokigenValue08) {
+        this.lblFuchoNokigenValue08=lblFuchoNokigenValue08;
     }
 
-    @JsonProperty("txtFuchoNokigen5")
-    public TextBoxDate getTxtFuchoNokigen5() {
-        return txtFuchoNokigen5;
+    @JsonProperty("txtFuchoNokigen08")
+    public TextBoxDate getTxtFuchoNokigen08() {
+        return txtFuchoNokigen08;
     }
 
-    @JsonProperty("txtFuchoNokigen5")
-    public void setTxtFuchoNokigen5(TextBoxDate txtFuchoNokigen5) {
-        this.txtFuchoNokigen5=txtFuchoNokigen5;
+    @JsonProperty("txtFuchoNokigen08")
+    public void setTxtFuchoNokigen08(TextBoxDate txtFuchoNokigen08) {
+        this.txtFuchoNokigen08=txtFuchoNokigen08;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku104 のクラスファイル 
@@ -4750,6 +4981,7 @@ class celKiwarigaku103AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku104AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki9")
     private Label lblTsuki9;
 
@@ -4763,6 +4995,7 @@ class celKiwarigaku104AttblKiwarigaku extends TableCell {
         this.lblTsuki9=lblTsuki9;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku105 のクラスファイル 
@@ -4770,7 +5003,9 @@ class celKiwarigaku104AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku105AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku106 のクラスファイル 
@@ -4778,7 +5013,9 @@ class celKiwarigaku105AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku106AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku107 のクラスファイル 
@@ -4786,7 +5023,9 @@ class celKiwarigaku106AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku107AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku108 のクラスファイル 
@@ -4794,7 +5033,9 @@ class celKiwarigaku107AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku108AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku109 のクラスファイル 
@@ -4802,7 +5043,9 @@ class celKiwarigaku108AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku109AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku110 のクラスファイル 
@@ -4810,19 +5053,21 @@ class celKiwarigaku109AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku110AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi6")
-    private Label lblFuchoKi6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi09")
+    private Label lblFuchoKi09;
 
-    @JsonProperty("lblFuchoKi6")
-    public Label getLblFuchoKi6() {
-        return lblFuchoKi6;
+    @JsonProperty("lblFuchoKi09")
+    public Label getLblFuchoKi09() {
+        return lblFuchoKi09;
     }
 
-    @JsonProperty("lblFuchoKi6")
-    public void setLblFuchoKi6(Label lblFuchoKi6) {
-        this.lblFuchoKi6=lblFuchoKi6;
+    @JsonProperty("lblFuchoKi09")
+    public void setLblFuchoKi09(Label lblFuchoKi09) {
+        this.lblFuchoKi09=lblFuchoKi09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku111 のクラスファイル 
@@ -4830,19 +5075,21 @@ class celKiwarigaku110AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku111AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue6")
-    private Label lblFuchoKoseiMaeValue6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue09")
+    private Label lblFuchoKoseiMaeValue09;
 
-    @JsonProperty("lblFuchoKoseiMaeValue6")
-    public Label getLblFuchoKoseiMaeValue6() {
-        return lblFuchoKoseiMaeValue6;
+    @JsonProperty("lblFuchoKoseiMaeValue09")
+    public Label getLblFuchoKoseiMaeValue09() {
+        return lblFuchoKoseiMaeValue09;
     }
 
-    @JsonProperty("lblFuchoKoseiMaeValue6")
-    public void setLblFuchoKoseiMaeValue6(Label lblFuchoKoseiMaeValue6) {
-        this.lblFuchoKoseiMaeValue6=lblFuchoKoseiMaeValue6;
+    @JsonProperty("lblFuchoKoseiMaeValue09")
+    public void setLblFuchoKoseiMaeValue09(Label lblFuchoKoseiMaeValue09) {
+        this.lblFuchoKoseiMaeValue09=lblFuchoKoseiMaeValue09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku112 のクラスファイル 
@@ -4850,31 +5097,33 @@ class celKiwarigaku111AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku112AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue6")
-    private Label lblFuchoKoseiGoValue6;
-    @JsonProperty("txtFuchoKoseiGo6")
-    private TextBoxNum txtFuchoKoseiGo6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue09")
+    private Label lblFuchoKoseiGoValue09;
+    @JsonProperty("txtFuchoKoseiGo09")
+    private TextBoxNum txtFuchoKoseiGo09;
 
-    @JsonProperty("lblFuchoKoseiGoValue6")
-    public Label getLblFuchoKoseiGoValue6() {
-        return lblFuchoKoseiGoValue6;
+    @JsonProperty("lblFuchoKoseiGoValue09")
+    public Label getLblFuchoKoseiGoValue09() {
+        return lblFuchoKoseiGoValue09;
     }
 
-    @JsonProperty("lblFuchoKoseiGoValue6")
-    public void setLblFuchoKoseiGoValue6(Label lblFuchoKoseiGoValue6) {
-        this.lblFuchoKoseiGoValue6=lblFuchoKoseiGoValue6;
+    @JsonProperty("lblFuchoKoseiGoValue09")
+    public void setLblFuchoKoseiGoValue09(Label lblFuchoKoseiGoValue09) {
+        this.lblFuchoKoseiGoValue09=lblFuchoKoseiGoValue09;
     }
 
-    @JsonProperty("txtFuchoKoseiGo6")
-    public TextBoxNum getTxtFuchoKoseiGo6() {
-        return txtFuchoKoseiGo6;
+    @JsonProperty("txtFuchoKoseiGo09")
+    public TextBoxNum getTxtFuchoKoseiGo09() {
+        return txtFuchoKoseiGo09;
     }
 
-    @JsonProperty("txtFuchoKoseiGo6")
-    public void setTxtFuchoKoseiGo6(TextBoxNum txtFuchoKoseiGo6) {
-        this.txtFuchoKoseiGo6=txtFuchoKoseiGo6;
+    @JsonProperty("txtFuchoKoseiGo09")
+    public void setTxtFuchoKoseiGo09(TextBoxNum txtFuchoKoseiGo09) {
+        this.txtFuchoKoseiGo09=txtFuchoKoseiGo09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku113 のクラスファイル 
@@ -4882,19 +5131,21 @@ class celKiwarigaku112AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku113AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue6")
-    private Label lblFuchoZogenValue6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue09")
+    private Label lblFuchoZogenValue09;
 
-    @JsonProperty("lblFuchoZogenValue6")
-    public Label getLblFuchoZogenValue6() {
-        return lblFuchoZogenValue6;
+    @JsonProperty("lblFuchoZogenValue09")
+    public Label getLblFuchoZogenValue09() {
+        return lblFuchoZogenValue09;
     }
 
-    @JsonProperty("lblFuchoZogenValue6")
-    public void setLblFuchoZogenValue6(Label lblFuchoZogenValue6) {
-        this.lblFuchoZogenValue6=lblFuchoZogenValue6;
+    @JsonProperty("lblFuchoZogenValue09")
+    public void setLblFuchoZogenValue09(Label lblFuchoZogenValue09) {
+        this.lblFuchoZogenValue09=lblFuchoZogenValue09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku114 のクラスファイル 
@@ -4902,19 +5153,21 @@ class celKiwarigaku113AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku114AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue6")
-    private Label lblFuchoNofugakuValue6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue09")
+    private Label lblFuchoNofugakuValue09;
 
-    @JsonProperty("lblFuchoNofugakuValue6")
-    public Label getLblFuchoNofugakuValue6() {
-        return lblFuchoNofugakuValue6;
+    @JsonProperty("lblFuchoNofugakuValue09")
+    public Label getLblFuchoNofugakuValue09() {
+        return lblFuchoNofugakuValue09;
     }
 
-    @JsonProperty("lblFuchoNofugakuValue6")
-    public void setLblFuchoNofugakuValue6(Label lblFuchoNofugakuValue6) {
-        this.lblFuchoNofugakuValue6=lblFuchoNofugakuValue6;
+    @JsonProperty("lblFuchoNofugakuValue09")
+    public void setLblFuchoNofugakuValue09(Label lblFuchoNofugakuValue09) {
+        this.lblFuchoNofugakuValue09=lblFuchoNofugakuValue09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku115 のクラスファイル 
@@ -4922,31 +5175,33 @@ class celKiwarigaku114AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku115AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue6")
-    private Label lblFuchoNokigenValue6;
-    @JsonProperty("txtFuchoNokigen6")
-    private TextBoxDate txtFuchoNokigen6;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue09")
+    private Label lblFuchoNokigenValue09;
+    @JsonProperty("txtFuchoNokigen09")
+    private TextBoxDate txtFuchoNokigen09;
 
-    @JsonProperty("lblFuchoNokigenValue6")
-    public Label getLblFuchoNokigenValue6() {
-        return lblFuchoNokigenValue6;
+    @JsonProperty("lblFuchoNokigenValue09")
+    public Label getLblFuchoNokigenValue09() {
+        return lblFuchoNokigenValue09;
     }
 
-    @JsonProperty("lblFuchoNokigenValue6")
-    public void setLblFuchoNokigenValue6(Label lblFuchoNokigenValue6) {
-        this.lblFuchoNokigenValue6=lblFuchoNokigenValue6;
+    @JsonProperty("lblFuchoNokigenValue09")
+    public void setLblFuchoNokigenValue09(Label lblFuchoNokigenValue09) {
+        this.lblFuchoNokigenValue09=lblFuchoNokigenValue09;
     }
 
-    @JsonProperty("txtFuchoNokigen6")
-    public TextBoxDate getTxtFuchoNokigen6() {
-        return txtFuchoNokigen6;
+    @JsonProperty("txtFuchoNokigen09")
+    public TextBoxDate getTxtFuchoNokigen09() {
+        return txtFuchoNokigen09;
     }
 
-    @JsonProperty("txtFuchoNokigen6")
-    public void setTxtFuchoNokigen6(TextBoxDate txtFuchoNokigen6) {
-        this.txtFuchoNokigen6=txtFuchoNokigen6;
+    @JsonProperty("txtFuchoNokigen09")
+    public void setTxtFuchoNokigen09(TextBoxDate txtFuchoNokigen09) {
+        this.txtFuchoNokigen09=txtFuchoNokigen09;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku116 のクラスファイル 
@@ -4954,6 +5209,7 @@ class celKiwarigaku115AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku116AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsuki10")
     private Label lblTsuki10;
 
@@ -4967,6 +5223,7 @@ class celKiwarigaku116AttblKiwarigaku extends TableCell {
         this.lblTsuki10=lblTsuki10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku117 のクラスファイル 
@@ -4974,19 +5231,21 @@ class celKiwarigaku116AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku117AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi4")
-    private Label lblTokuchoKi4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi10")
+    private Label lblTokuchoKi10;
 
-    @JsonProperty("lblTokuchoKi4")
-    public Label getLblTokuchoKi4() {
-        return lblTokuchoKi4;
+    @JsonProperty("lblTokuchoKi10")
+    public Label getLblTokuchoKi10() {
+        return lblTokuchoKi10;
     }
 
-    @JsonProperty("lblTokuchoKi4")
-    public void setLblTokuchoKi4(Label lblTokuchoKi4) {
-        this.lblTokuchoKi4=lblTokuchoKi4;
+    @JsonProperty("lblTokuchoKi10")
+    public void setLblTokuchoKi10(Label lblTokuchoKi10) {
+        this.lblTokuchoKi10=lblTokuchoKi10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku118 のクラスファイル 
@@ -4994,19 +5253,21 @@ class celKiwarigaku117AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku118AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue4")
-    private Label lblTokuchoKoseiMaeValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue10")
+    private Label lblTokuchoKoseiMaeValue10;
 
-    @JsonProperty("lblTokuchoKoseiMaeValue4")
-    public Label getLblTokuchoKoseiMaeValue4() {
-        return lblTokuchoKoseiMaeValue4;
+    @JsonProperty("lblTokuchoKoseiMaeValue10")
+    public Label getLblTokuchoKoseiMaeValue10() {
+        return lblTokuchoKoseiMaeValue10;
     }
 
-    @JsonProperty("lblTokuchoKoseiMaeValue4")
-    public void setLblTokuchoKoseiMaeValue4(Label lblTokuchoKoseiMaeValue4) {
-        this.lblTokuchoKoseiMaeValue4=lblTokuchoKoseiMaeValue4;
+    @JsonProperty("lblTokuchoKoseiMaeValue10")
+    public void setLblTokuchoKoseiMaeValue10(Label lblTokuchoKoseiMaeValue10) {
+        this.lblTokuchoKoseiMaeValue10=lblTokuchoKoseiMaeValue10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku119 のクラスファイル 
@@ -5014,31 +5275,33 @@ class celKiwarigaku118AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku119AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue4")
-    private Label lblTokuchoKoseiGoValue4;
-    @JsonProperty("txtTokuchoKoseiGo4")
-    private TextBoxNum txtTokuchoKoseiGo4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue10")
+    private Label lblTokuchoKoseiGoValue10;
+    @JsonProperty("txtTokuchoKoseiGo10")
+    private TextBoxNum txtTokuchoKoseiGo10;
 
-    @JsonProperty("lblTokuchoKoseiGoValue4")
-    public Label getLblTokuchoKoseiGoValue4() {
-        return lblTokuchoKoseiGoValue4;
+    @JsonProperty("lblTokuchoKoseiGoValue10")
+    public Label getLblTokuchoKoseiGoValue10() {
+        return lblTokuchoKoseiGoValue10;
     }
 
-    @JsonProperty("lblTokuchoKoseiGoValue4")
-    public void setLblTokuchoKoseiGoValue4(Label lblTokuchoKoseiGoValue4) {
-        this.lblTokuchoKoseiGoValue4=lblTokuchoKoseiGoValue4;
+    @JsonProperty("lblTokuchoKoseiGoValue10")
+    public void setLblTokuchoKoseiGoValue10(Label lblTokuchoKoseiGoValue10) {
+        this.lblTokuchoKoseiGoValue10=lblTokuchoKoseiGoValue10;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo4")
-    public TextBoxNum getTxtTokuchoKoseiGo4() {
-        return txtTokuchoKoseiGo4;
+    @JsonProperty("txtTokuchoKoseiGo10")
+    public TextBoxNum getTxtTokuchoKoseiGo10() {
+        return txtTokuchoKoseiGo10;
     }
 
-    @JsonProperty("txtTokuchoKoseiGo4")
-    public void setTxtTokuchoKoseiGo4(TextBoxNum txtTokuchoKoseiGo4) {
-        this.txtTokuchoKoseiGo4=txtTokuchoKoseiGo4;
+    @JsonProperty("txtTokuchoKoseiGo10")
+    public void setTxtTokuchoKoseiGo10(TextBoxNum txtTokuchoKoseiGo10) {
+        this.txtTokuchoKoseiGo10=txtTokuchoKoseiGo10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku120 のクラスファイル 
@@ -5046,19 +5309,21 @@ class celKiwarigaku119AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku120AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue4")
-    private Label lblTokuchoZogenValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue10")
+    private Label lblTokuchoZogenValue10;
 
-    @JsonProperty("lblTokuchoZogenValue4")
-    public Label getLblTokuchoZogenValue4() {
-        return lblTokuchoZogenValue4;
+    @JsonProperty("lblTokuchoZogenValue10")
+    public Label getLblTokuchoZogenValue10() {
+        return lblTokuchoZogenValue10;
     }
 
-    @JsonProperty("lblTokuchoZogenValue4")
-    public void setLblTokuchoZogenValue4(Label lblTokuchoZogenValue4) {
-        this.lblTokuchoZogenValue4=lblTokuchoZogenValue4;
+    @JsonProperty("lblTokuchoZogenValue10")
+    public void setLblTokuchoZogenValue10(Label lblTokuchoZogenValue10) {
+        this.lblTokuchoZogenValue10=lblTokuchoZogenValue10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku121 のクラスファイル 
@@ -5066,19 +5331,21 @@ class celKiwarigaku120AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku121AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue4")
-    private Label lblTokuchoNofugakuValue4;
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue10")
+    private Label lblTokuchoNofugakuValue10;
 
-    @JsonProperty("lblTokuchoNofugakuValue4")
-    public Label getLblTokuchoNofugakuValue4() {
-        return lblTokuchoNofugakuValue4;
+    @JsonProperty("lblTokuchoNofugakuValue10")
+    public Label getLblTokuchoNofugakuValue10() {
+        return lblTokuchoNofugakuValue10;
     }
 
-    @JsonProperty("lblTokuchoNofugakuValue4")
-    public void setLblTokuchoNofugakuValue4(Label lblTokuchoNofugakuValue4) {
-        this.lblTokuchoNofugakuValue4=lblTokuchoNofugakuValue4;
+    @JsonProperty("lblTokuchoNofugakuValue10")
+    public void setLblTokuchoNofugakuValue10(Label lblTokuchoNofugakuValue10) {
+        this.lblTokuchoNofugakuValue10=lblTokuchoNofugakuValue10;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku122 のクラスファイル 
@@ -5086,6 +5353,7 @@ class celKiwarigaku121AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku122AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKi7")
     private Label lblFuchoKi7;
 
@@ -5099,6 +5367,7 @@ class celKiwarigaku122AttblKiwarigaku extends TableCell {
         this.lblFuchoKi7=lblFuchoKi7;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku123 のクラスファイル 
@@ -5106,690 +5375,7 @@ class celKiwarigaku122AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku123AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue7")
-    private Label lblFuchoKoseiMaeValue7;
-
-    @JsonProperty("lblFuchoKoseiMaeValue7")
-    public Label getLblFuchoKoseiMaeValue7() {
-        return lblFuchoKoseiMaeValue7;
-    }
-
-    @JsonProperty("lblFuchoKoseiMaeValue7")
-    public void setLblFuchoKoseiMaeValue7(Label lblFuchoKoseiMaeValue7) {
-        this.lblFuchoKoseiMaeValue7=lblFuchoKoseiMaeValue7;
-    }
-
-}
-/**
- * celKiwarigaku124 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku124AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue7")
-    private Label lblFuchoKoseiGoValue7;
-    @JsonProperty("txtFuchoKoseiGo7")
-    private TextBoxNum txtFuchoKoseiGo7;
-
-    @JsonProperty("lblFuchoKoseiGoValue7")
-    public Label getLblFuchoKoseiGoValue7() {
-        return lblFuchoKoseiGoValue7;
-    }
-
-    @JsonProperty("lblFuchoKoseiGoValue7")
-    public void setLblFuchoKoseiGoValue7(Label lblFuchoKoseiGoValue7) {
-        this.lblFuchoKoseiGoValue7=lblFuchoKoseiGoValue7;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo7")
-    public TextBoxNum getTxtFuchoKoseiGo7() {
-        return txtFuchoKoseiGo7;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo7")
-    public void setTxtFuchoKoseiGo7(TextBoxNum txtFuchoKoseiGo7) {
-        this.txtFuchoKoseiGo7=txtFuchoKoseiGo7;
-    }
-
-}
-/**
- * celKiwarigaku125 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku125AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue7")
-    private Label lblFuchoZogenValue7;
-
-    @JsonProperty("lblFuchoZogenValue7")
-    public Label getLblFuchoZogenValue7() {
-        return lblFuchoZogenValue7;
-    }
-
-    @JsonProperty("lblFuchoZogenValue7")
-    public void setLblFuchoZogenValue7(Label lblFuchoZogenValue7) {
-        this.lblFuchoZogenValue7=lblFuchoZogenValue7;
-    }
-
-}
-/**
- * celKiwarigaku126 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku126AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue7")
-    private Label lblFuchoNofugakuValue7;
-
-    @JsonProperty("lblFuchoNofugakuValue7")
-    public Label getLblFuchoNofugakuValue7() {
-        return lblFuchoNofugakuValue7;
-    }
-
-    @JsonProperty("lblFuchoNofugakuValue7")
-    public void setLblFuchoNofugakuValue7(Label lblFuchoNofugakuValue7) {
-        this.lblFuchoNofugakuValue7=lblFuchoNofugakuValue7;
-    }
-
-}
-/**
- * celKiwarigaku127 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku127AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue7")
-    private Label lblFuchoNokigenValue7;
-    @JsonProperty("txtFuchoNokigen7")
-    private TextBoxDate txtFuchoNokigen7;
-
-    @JsonProperty("lblFuchoNokigenValue7")
-    public Label getLblFuchoNokigenValue7() {
-        return lblFuchoNokigenValue7;
-    }
-
-    @JsonProperty("lblFuchoNokigenValue7")
-    public void setLblFuchoNokigenValue7(Label lblFuchoNokigenValue7) {
-        this.lblFuchoNokigenValue7=lblFuchoNokigenValue7;
-    }
-
-    @JsonProperty("txtFuchoNokigen7")
-    public TextBoxDate getTxtFuchoNokigen7() {
-        return txtFuchoNokigen7;
-    }
-
-    @JsonProperty("txtFuchoNokigen7")
-    public void setTxtFuchoNokigen7(TextBoxDate txtFuchoNokigen7) {
-        this.txtFuchoNokigen7=txtFuchoNokigen7;
-    }
-
-}
-/**
- * celKiwarigaku128 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku128AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki11")
-    private Label lblTsuki11;
-
-    @JsonProperty("lblTsuki11")
-    public Label getLblTsuki11() {
-        return lblTsuki11;
-    }
-
-    @JsonProperty("lblTsuki11")
-    public void setLblTsuki11(Label lblTsuki11) {
-        this.lblTsuki11=lblTsuki11;
-    }
-
-}
-/**
- * celKiwarigaku129 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku129AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku130 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku130AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku131 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku131AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku132 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku132AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku133 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku133AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku134 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku134AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi8")
-    private Label lblFuchoKi8;
-
-    @JsonProperty("lblFuchoKi8")
-    public Label getLblFuchoKi8() {
-        return lblFuchoKi8;
-    }
-
-    @JsonProperty("lblFuchoKi8")
-    public void setLblFuchoKi8(Label lblFuchoKi8) {
-        this.lblFuchoKi8=lblFuchoKi8;
-    }
-
-}
-/**
- * celKiwarigaku135 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku135AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue8")
-    private Label lblFuchoKoseiMaeValue8;
-
-    @JsonProperty("lblFuchoKoseiMaeValue8")
-    public Label getLblFuchoKoseiMaeValue8() {
-        return lblFuchoKoseiMaeValue8;
-    }
-
-    @JsonProperty("lblFuchoKoseiMaeValue8")
-    public void setLblFuchoKoseiMaeValue8(Label lblFuchoKoseiMaeValue8) {
-        this.lblFuchoKoseiMaeValue8=lblFuchoKoseiMaeValue8;
-    }
-
-}
-/**
- * celKiwarigaku136 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku136AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue8")
-    private Label lblFuchoKoseiGoValue8;
-    @JsonProperty("txtFuchoKoseiGo8")
-    private TextBoxNum txtFuchoKoseiGo8;
-
-    @JsonProperty("lblFuchoKoseiGoValue8")
-    public Label getLblFuchoKoseiGoValue8() {
-        return lblFuchoKoseiGoValue8;
-    }
-
-    @JsonProperty("lblFuchoKoseiGoValue8")
-    public void setLblFuchoKoseiGoValue8(Label lblFuchoKoseiGoValue8) {
-        this.lblFuchoKoseiGoValue8=lblFuchoKoseiGoValue8;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo8")
-    public TextBoxNum getTxtFuchoKoseiGo8() {
-        return txtFuchoKoseiGo8;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo8")
-    public void setTxtFuchoKoseiGo8(TextBoxNum txtFuchoKoseiGo8) {
-        this.txtFuchoKoseiGo8=txtFuchoKoseiGo8;
-    }
-
-}
-/**
- * celKiwarigaku137 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku137AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue8")
-    private Label lblFuchoZogenValue8;
-
-    @JsonProperty("lblFuchoZogenValue8")
-    public Label getLblFuchoZogenValue8() {
-        return lblFuchoZogenValue8;
-    }
-
-    @JsonProperty("lblFuchoZogenValue8")
-    public void setLblFuchoZogenValue8(Label lblFuchoZogenValue8) {
-        this.lblFuchoZogenValue8=lblFuchoZogenValue8;
-    }
-
-}
-/**
- * celKiwarigaku138 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku138AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue8")
-    private Label lblFuchoNofugakuValue8;
-
-    @JsonProperty("lblFuchoNofugakuValue8")
-    public Label getLblFuchoNofugakuValue8() {
-        return lblFuchoNofugakuValue8;
-    }
-
-    @JsonProperty("lblFuchoNofugakuValue8")
-    public void setLblFuchoNofugakuValue8(Label lblFuchoNofugakuValue8) {
-        this.lblFuchoNofugakuValue8=lblFuchoNofugakuValue8;
-    }
-
-}
-/**
- * celKiwarigaku139 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku139AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue8")
-    private Label lblFuchoNokigenValue8;
-    @JsonProperty("txtFuchoNokigen8")
-    private TextBoxDate txtFuchoNokigen8;
-
-    @JsonProperty("lblFuchoNokigenValue8")
-    public Label getLblFuchoNokigenValue8() {
-        return lblFuchoNokigenValue8;
-    }
-
-    @JsonProperty("lblFuchoNokigenValue8")
-    public void setLblFuchoNokigenValue8(Label lblFuchoNokigenValue8) {
-        this.lblFuchoNokigenValue8=lblFuchoNokigenValue8;
-    }
-
-    @JsonProperty("txtFuchoNokigen8")
-    public TextBoxDate getTxtFuchoNokigen8() {
-        return txtFuchoNokigen8;
-    }
-
-    @JsonProperty("txtFuchoNokigen8")
-    public void setTxtFuchoNokigen8(TextBoxDate txtFuchoNokigen8) {
-        this.txtFuchoNokigen8=txtFuchoNokigen8;
-    }
-
-}
-/**
- * celKiwarigaku140 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku140AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki12")
-    private Label lblTsuki12;
-
-    @JsonProperty("lblTsuki12")
-    public Label getLblTsuki12() {
-        return lblTsuki12;
-    }
-
-    @JsonProperty("lblTsuki12")
-    public void setLblTsuki12(Label lblTsuki12) {
-        this.lblTsuki12=lblTsuki12;
-    }
-
-}
-/**
- * celKiwarigaku141 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku141AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi5")
-    private Label lblTokuchoKi5;
-
-    @JsonProperty("lblTokuchoKi5")
-    public Label getLblTokuchoKi5() {
-        return lblTokuchoKi5;
-    }
-
-    @JsonProperty("lblTokuchoKi5")
-    public void setLblTokuchoKi5(Label lblTokuchoKi5) {
-        this.lblTokuchoKi5=lblTokuchoKi5;
-    }
-
-}
-/**
- * celKiwarigaku142 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku142AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue5")
-    private Label lblTokuchoKoseiMaeValue5;
-
-    @JsonProperty("lblTokuchoKoseiMaeValue5")
-    public Label getLblTokuchoKoseiMaeValue5() {
-        return lblTokuchoKoseiMaeValue5;
-    }
-
-    @JsonProperty("lblTokuchoKoseiMaeValue5")
-    public void setLblTokuchoKoseiMaeValue5(Label lblTokuchoKoseiMaeValue5) {
-        this.lblTokuchoKoseiMaeValue5=lblTokuchoKoseiMaeValue5;
-    }
-
-}
-/**
- * celKiwarigaku143 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku143AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue5")
-    private Label lblTokuchoKoseiGoValue5;
-    @JsonProperty("txtTokuchoKoseiGo5")
-    private TextBoxNum txtTokuchoKoseiGo5;
-
-    @JsonProperty("lblTokuchoKoseiGoValue5")
-    public Label getLblTokuchoKoseiGoValue5() {
-        return lblTokuchoKoseiGoValue5;
-    }
-
-    @JsonProperty("lblTokuchoKoseiGoValue5")
-    public void setLblTokuchoKoseiGoValue5(Label lblTokuchoKoseiGoValue5) {
-        this.lblTokuchoKoseiGoValue5=lblTokuchoKoseiGoValue5;
-    }
-
-    @JsonProperty("txtTokuchoKoseiGo5")
-    public TextBoxNum getTxtTokuchoKoseiGo5() {
-        return txtTokuchoKoseiGo5;
-    }
-
-    @JsonProperty("txtTokuchoKoseiGo5")
-    public void setTxtTokuchoKoseiGo5(TextBoxNum txtTokuchoKoseiGo5) {
-        this.txtTokuchoKoseiGo5=txtTokuchoKoseiGo5;
-    }
-
-}
-/**
- * celKiwarigaku144 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku144AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue5")
-    private Label lblTokuchoZogenValue5;
-
-    @JsonProperty("lblTokuchoZogenValue5")
-    public Label getLblTokuchoZogenValue5() {
-        return lblTokuchoZogenValue5;
-    }
-
-    @JsonProperty("lblTokuchoZogenValue5")
-    public void setLblTokuchoZogenValue5(Label lblTokuchoZogenValue5) {
-        this.lblTokuchoZogenValue5=lblTokuchoZogenValue5;
-    }
-
-}
-/**
- * celKiwarigaku145 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku145AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue5")
-    private Label lblTokuchoNofugakuValue5;
-
-    @JsonProperty("lblTokuchoNofugakuValue5")
-    public Label getLblTokuchoNofugakuValue5() {
-        return lblTokuchoNofugakuValue5;
-    }
-
-    @JsonProperty("lblTokuchoNofugakuValue5")
-    public void setLblTokuchoNofugakuValue5(Label lblTokuchoNofugakuValue5) {
-        this.lblTokuchoNofugakuValue5=lblTokuchoNofugakuValue5;
-    }
-
-}
-/**
- * celKiwarigaku146 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku146AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi9")
-    private Label lblFuchoKi9;
-
-    @JsonProperty("lblFuchoKi9")
-    public Label getLblFuchoKi9() {
-        return lblFuchoKi9;
-    }
-
-    @JsonProperty("lblFuchoKi9")
-    public void setLblFuchoKi9(Label lblFuchoKi9) {
-        this.lblFuchoKi9=lblFuchoKi9;
-    }
-
-}
-/**
- * celKiwarigaku147 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku147AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiMaeValue9")
-    private Label lblFuchoKoseiMaeValue9;
-
-    @JsonProperty("lblFuchoKoseiMaeValue9")
-    public Label getLblFuchoKoseiMaeValue9() {
-        return lblFuchoKoseiMaeValue9;
-    }
-
-    @JsonProperty("lblFuchoKoseiMaeValue9")
-    public void setLblFuchoKoseiMaeValue9(Label lblFuchoKoseiMaeValue9) {
-        this.lblFuchoKoseiMaeValue9=lblFuchoKoseiMaeValue9;
-    }
-
-}
-/**
- * celKiwarigaku148 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku148AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKoseiGoValue9")
-    private Label lblFuchoKoseiGoValue9;
-    @JsonProperty("txtFuchoKoseiGo9")
-    private TextBoxNum txtFuchoKoseiGo9;
-
-    @JsonProperty("lblFuchoKoseiGoValue9")
-    public Label getLblFuchoKoseiGoValue9() {
-        return lblFuchoKoseiGoValue9;
-    }
-
-    @JsonProperty("lblFuchoKoseiGoValue9")
-    public void setLblFuchoKoseiGoValue9(Label lblFuchoKoseiGoValue9) {
-        this.lblFuchoKoseiGoValue9=lblFuchoKoseiGoValue9;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo9")
-    public TextBoxNum getTxtFuchoKoseiGo9() {
-        return txtFuchoKoseiGo9;
-    }
-
-    @JsonProperty("txtFuchoKoseiGo9")
-    public void setTxtFuchoKoseiGo9(TextBoxNum txtFuchoKoseiGo9) {
-        this.txtFuchoKoseiGo9=txtFuchoKoseiGo9;
-    }
-
-}
-/**
- * celKiwarigaku149 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku149AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoZogenValue9")
-    private Label lblFuchoZogenValue9;
-
-    @JsonProperty("lblFuchoZogenValue9")
-    public Label getLblFuchoZogenValue9() {
-        return lblFuchoZogenValue9;
-    }
-
-    @JsonProperty("lblFuchoZogenValue9")
-    public void setLblFuchoZogenValue9(Label lblFuchoZogenValue9) {
-        this.lblFuchoZogenValue9=lblFuchoZogenValue9;
-    }
-
-}
-/**
- * celKiwarigaku150 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku150AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNofugakuValue9")
-    private Label lblFuchoNofugakuValue9;
-
-    @JsonProperty("lblFuchoNofugakuValue9")
-    public Label getLblFuchoNofugakuValue9() {
-        return lblFuchoNofugakuValue9;
-    }
-
-    @JsonProperty("lblFuchoNofugakuValue9")
-    public void setLblFuchoNofugakuValue9(Label lblFuchoNofugakuValue9) {
-        this.lblFuchoNofugakuValue9=lblFuchoNofugakuValue9;
-    }
-
-}
-/**
- * celKiwarigaku151 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku151AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoNokigenValue9")
-    private Label lblFuchoNokigenValue9;
-    @JsonProperty("txtFuchoNokigen9")
-    private TextBoxDate txtFuchoNokigen9;
-
-    @JsonProperty("lblFuchoNokigenValue9")
-    public Label getLblFuchoNokigenValue9() {
-        return lblFuchoNokigenValue9;
-    }
-
-    @JsonProperty("lblFuchoNokigenValue9")
-    public void setLblFuchoNokigenValue9(Label lblFuchoNokigenValue9) {
-        this.lblFuchoNokigenValue9=lblFuchoNokigenValue9;
-    }
-
-    @JsonProperty("txtFuchoNokigen9")
-    public TextBoxDate getTxtFuchoNokigen9() {
-        return txtFuchoNokigen9;
-    }
-
-    @JsonProperty("txtFuchoNokigen9")
-    public void setTxtFuchoNokigen9(TextBoxDate txtFuchoNokigen9) {
-        this.txtFuchoNokigen9=txtFuchoNokigen9;
-    }
-
-}
-/**
- * celKiwarigaku152 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku152AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki1")
-    private Label lblTsuki1;
-
-    @JsonProperty("lblTsuki1")
-    public Label getLblTsuki1() {
-        return lblTsuki1;
-    }
-
-    @JsonProperty("lblTsuki1")
-    public void setLblTsuki1(Label lblTsuki1) {
-        this.lblTsuki1=lblTsuki1;
-    }
-
-}
-/**
- * celKiwarigaku153 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku153AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku154 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku154AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku155 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku155AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku156 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku156AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku157 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku157AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku158 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku158AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi10")
-    private Label lblFuchoKi10;
-
-    @JsonProperty("lblFuchoKi10")
-    public Label getLblFuchoKi10() {
-        return lblFuchoKi10;
-    }
-
-    @JsonProperty("lblFuchoKi10")
-    public void setLblFuchoKi10(Label lblFuchoKi10) {
-        this.lblFuchoKi10=lblFuchoKi10;
-    }
-
-}
-/**
- * celKiwarigaku250 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku250AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiMaeValue10")
     private Label lblFuchoKoseiMaeValue10;
 
@@ -5803,13 +5389,15 @@ class celKiwarigaku250AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiMaeValue10=lblFuchoKoseiMaeValue10;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku160 のクラスファイル 
+ * celKiwarigaku124 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku160AttblKiwarigaku extends TableCell {
+class celKiwarigaku124AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiGoValue10")
     private Label lblFuchoKoseiGoValue10;
     @JsonProperty("txtFuchoKoseiGo10")
@@ -5835,13 +5423,15 @@ class celKiwarigaku160AttblKiwarigaku extends TableCell {
         this.txtFuchoKoseiGo10=txtFuchoKoseiGo10;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku161 のクラスファイル 
+ * celKiwarigaku125 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku161AttblKiwarigaku extends TableCell {
+class celKiwarigaku125AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoZogenValue10")
     private Label lblFuchoZogenValue10;
 
@@ -5855,13 +5445,15 @@ class celKiwarigaku161AttblKiwarigaku extends TableCell {
         this.lblFuchoZogenValue10=lblFuchoZogenValue10;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku162 のクラスファイル 
+ * celKiwarigaku126 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku162AttblKiwarigaku extends TableCell {
+class celKiwarigaku126AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNofugakuValue10")
     private Label lblFuchoNofugakuValue10;
 
@@ -5875,13 +5467,15 @@ class celKiwarigaku162AttblKiwarigaku extends TableCell {
         this.lblFuchoNofugakuValue10=lblFuchoNofugakuValue10;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku163 のクラスファイル 
+ * celKiwarigaku127 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku163AttblKiwarigaku extends TableCell {
+class celKiwarigaku127AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNokigenValue10")
     private Label lblFuchoNokigenValue10;
     @JsonProperty("txtFuchoNokigen10")
@@ -5907,165 +5501,109 @@ class celKiwarigaku163AttblKiwarigaku extends TableCell {
         this.txtFuchoNokigen10=txtFuchoNokigen10;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku164 のクラスファイル 
+ * celKiwarigaku128 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku164AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki2")
-    private Label lblTsuki2;
+class celKiwarigaku128AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki11")
+    private Label lblTsuki11;
 
-    @JsonProperty("lblTsuki2")
-    public Label getLblTsuki2() {
-        return lblTsuki2;
+    @JsonProperty("lblTsuki11")
+    public Label getLblTsuki11() {
+        return lblTsuki11;
     }
 
-    @JsonProperty("lblTsuki2")
-    public void setLblTsuki2(Label lblTsuki2) {
-        this.lblTsuki2=lblTsuki2;
+    @JsonProperty("lblTsuki11")
+    public void setLblTsuki11(Label lblTsuki11) {
+        this.lblTsuki11=lblTsuki11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku165 のクラスファイル 
+ * celKiwarigaku129 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku165AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKi6")
-    private Label lblTokuchoKi6;
+class celKiwarigaku129AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    @JsonProperty("lblTokuchoKi6")
-    public Label getLblTokuchoKi6() {
-        return lblTokuchoKi6;
-    }
-
-    @JsonProperty("lblTokuchoKi6")
-    public void setLblTokuchoKi6(Label lblTokuchoKi6) {
-        this.lblTokuchoKi6=lblTokuchoKi6;
-    }
-
+    // </editor-fold>
 }
 /**
- * celKiwarigaku166 のクラスファイル 
+ * celKiwarigaku130 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku166AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiMaeValue6")
-    private Label lblTokuchoKoseiMaeValue6;
+class celKiwarigaku130AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    @JsonProperty("lblTokuchoKoseiMaeValue6")
-    public Label getLblTokuchoKoseiMaeValue6() {
-        return lblTokuchoKoseiMaeValue6;
-    }
-
-    @JsonProperty("lblTokuchoKoseiMaeValue6")
-    public void setLblTokuchoKoseiMaeValue6(Label lblTokuchoKoseiMaeValue6) {
-        this.lblTokuchoKoseiMaeValue6=lblTokuchoKoseiMaeValue6;
-    }
-
+    // </editor-fold>
 }
 /**
- * celKiwarigaku167 のクラスファイル 
+ * celKiwarigaku131 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku167AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoKoseiGoValue6")
-    private Label lblTokuchoKoseiGoValue6;
-    @JsonProperty("txtTokuchoKoseiGo6")
-    private TextBoxNum txtTokuchoKoseiGo6;
+class celKiwarigaku131AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    @JsonProperty("lblTokuchoKoseiGoValue6")
-    public Label getLblTokuchoKoseiGoValue6() {
-        return lblTokuchoKoseiGoValue6;
-    }
-
-    @JsonProperty("lblTokuchoKoseiGoValue6")
-    public void setLblTokuchoKoseiGoValue6(Label lblTokuchoKoseiGoValue6) {
-        this.lblTokuchoKoseiGoValue6=lblTokuchoKoseiGoValue6;
-    }
-
-    @JsonProperty("txtTokuchoKoseiGo6")
-    public TextBoxNum getTxtTokuchoKoseiGo6() {
-        return txtTokuchoKoseiGo6;
-    }
-
-    @JsonProperty("txtTokuchoKoseiGo6")
-    public void setTxtTokuchoKoseiGo6(TextBoxNum txtTokuchoKoseiGo6) {
-        this.txtTokuchoKoseiGo6=txtTokuchoKoseiGo6;
-    }
-
+    // </editor-fold>
 }
 /**
- * celKiwarigaku168 のクラスファイル 
+ * celKiwarigaku132 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku168AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoZogenValue6")
-    private Label lblTokuchoZogenValue6;
+class celKiwarigaku132AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    @JsonProperty("lblTokuchoZogenValue6")
-    public Label getLblTokuchoZogenValue6() {
-        return lblTokuchoZogenValue6;
-    }
-
-    @JsonProperty("lblTokuchoZogenValue6")
-    public void setLblTokuchoZogenValue6(Label lblTokuchoZogenValue6) {
-        this.lblTokuchoZogenValue6=lblTokuchoZogenValue6;
-    }
-
+    // </editor-fold>
 }
 /**
- * celKiwarigaku169 のクラスファイル 
+ * celKiwarigaku133 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku169AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTokuchoNofugakuValue6")
-    private Label lblTokuchoNofugakuValue6;
+class celKiwarigaku133AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    @JsonProperty("lblTokuchoNofugakuValue6")
-    public Label getLblTokuchoNofugakuValue6() {
-        return lblTokuchoNofugakuValue6;
-    }
-
-    @JsonProperty("lblTokuchoNofugakuValue6")
-    public void setLblTokuchoNofugakuValue6(Label lblTokuchoNofugakuValue6) {
-        this.lblTokuchoNofugakuValue6=lblTokuchoNofugakuValue6;
-    }
-
+    // </editor-fold>
 }
 /**
- * celKiwarigaku170 のクラスファイル 
+ * celKiwarigaku134 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku170AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi11")
-    private Label lblFuchoKi11;
+class celKiwarigaku134AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi8")
+    private Label lblFuchoKi8;
 
-    @JsonProperty("lblFuchoKi11")
-    public Label getLblFuchoKi11() {
-        return lblFuchoKi11;
+    @JsonProperty("lblFuchoKi8")
+    public Label getLblFuchoKi8() {
+        return lblFuchoKi8;
     }
 
-    @JsonProperty("lblFuchoKi11")
-    public void setLblFuchoKi11(Label lblFuchoKi11) {
-        this.lblFuchoKi11=lblFuchoKi11;
+    @JsonProperty("lblFuchoKi8")
+    public void setLblFuchoKi8(Label lblFuchoKi8) {
+        this.lblFuchoKi8=lblFuchoKi8;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku171 のクラスファイル 
+ * celKiwarigaku135 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku171AttblKiwarigaku extends TableCell {
+class celKiwarigaku135AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiMaeValue11")
     private Label lblFuchoKoseiMaeValue11;
 
@@ -6079,13 +5617,15 @@ class celKiwarigaku171AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiMaeValue11=lblFuchoKoseiMaeValue11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku172 のクラスファイル 
+ * celKiwarigaku136 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku172AttblKiwarigaku extends TableCell {
+class celKiwarigaku136AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiGoValue11")
     private Label lblFuchoKoseiGoValue11;
     @JsonProperty("txtFuchoKoseiGo11")
@@ -6111,13 +5651,15 @@ class celKiwarigaku172AttblKiwarigaku extends TableCell {
         this.txtFuchoKoseiGo11=txtFuchoKoseiGo11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku173 のクラスファイル 
+ * celKiwarigaku137 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku173AttblKiwarigaku extends TableCell {
+class celKiwarigaku137AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoZogenValue11")
     private Label lblFuchoZogenValue11;
 
@@ -6131,13 +5673,15 @@ class celKiwarigaku173AttblKiwarigaku extends TableCell {
         this.lblFuchoZogenValue11=lblFuchoZogenValue11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku174 のクラスファイル 
+ * celKiwarigaku138 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku174AttblKiwarigaku extends TableCell {
+class celKiwarigaku138AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNofugakuValue11")
     private Label lblFuchoNofugakuValue11;
 
@@ -6151,13 +5695,15 @@ class celKiwarigaku174AttblKiwarigaku extends TableCell {
         this.lblFuchoNofugakuValue11=lblFuchoNofugakuValue11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku175 のクラスファイル 
+ * celKiwarigaku139 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku175AttblKiwarigaku extends TableCell {
+class celKiwarigaku139AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNokigenValue11")
     private Label lblFuchoNokigenValue11;
     @JsonProperty("txtFuchoNokigen11")
@@ -6183,93 +5729,181 @@ class celKiwarigaku175AttblKiwarigaku extends TableCell {
         this.txtFuchoNokigen11=txtFuchoNokigen11;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku176 のクラスファイル 
+ * celKiwarigaku140 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku176AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblTsuki3")
-    private Label lblTsuki3;
+class celKiwarigaku140AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki12")
+    private Label lblTsuki12;
 
-    @JsonProperty("lblTsuki3")
-    public Label getLblTsuki3() {
-        return lblTsuki3;
+    @JsonProperty("lblTsuki12")
+    public Label getLblTsuki12() {
+        return lblTsuki12;
     }
 
-    @JsonProperty("lblTsuki3")
-    public void setLblTsuki3(Label lblTsuki3) {
-        this.lblTsuki3=lblTsuki3;
+    @JsonProperty("lblTsuki12")
+    public void setLblTsuki12(Label lblTsuki12) {
+        this.lblTsuki12=lblTsuki12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku177 のクラスファイル 
+ * celKiwarigaku141 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku177AttblKiwarigaku extends TableCell {
+class celKiwarigaku141AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi12")
+    private Label lblTokuchoKi12;
 
-}
-/**
- * celKiwarigaku178 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku178AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku179 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku179AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku180 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku180AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku181 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku181AttblKiwarigaku extends TableCell {
-
-}
-/**
- * celKiwarigaku182 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celKiwarigaku182AttblKiwarigaku extends TableCell {
-    @JsonProperty("lblFuchoKi12")
-    private Label lblFuchoKi12;
-
-    @JsonProperty("lblFuchoKi12")
-    public Label getLblFuchoKi12() {
-        return lblFuchoKi12;
+    @JsonProperty("lblTokuchoKi12")
+    public Label getLblTokuchoKi12() {
+        return lblTokuchoKi12;
     }
 
-    @JsonProperty("lblFuchoKi12")
-    public void setLblFuchoKi12(Label lblFuchoKi12) {
-        this.lblFuchoKi12=lblFuchoKi12;
+    @JsonProperty("lblTokuchoKi12")
+    public void setLblTokuchoKi12(Label lblTokuchoKi12) {
+        this.lblTokuchoKi12=lblTokuchoKi12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku183 のクラスファイル 
+ * celKiwarigaku142 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku183AttblKiwarigaku extends TableCell {
+class celKiwarigaku142AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue12")
+    private Label lblTokuchoKoseiMaeValue12;
+
+    @JsonProperty("lblTokuchoKoseiMaeValue12")
+    public Label getLblTokuchoKoseiMaeValue12() {
+        return lblTokuchoKoseiMaeValue12;
+    }
+
+    @JsonProperty("lblTokuchoKoseiMaeValue12")
+    public void setLblTokuchoKoseiMaeValue12(Label lblTokuchoKoseiMaeValue12) {
+        this.lblTokuchoKoseiMaeValue12=lblTokuchoKoseiMaeValue12;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku143 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku143AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue12")
+    private Label lblTokuchoKoseiGoValue12;
+    @JsonProperty("txtTokuchoKoseiGo12")
+    private TextBoxNum txtTokuchoKoseiGo12;
+
+    @JsonProperty("lblTokuchoKoseiGoValue12")
+    public Label getLblTokuchoKoseiGoValue12() {
+        return lblTokuchoKoseiGoValue12;
+    }
+
+    @JsonProperty("lblTokuchoKoseiGoValue12")
+    public void setLblTokuchoKoseiGoValue12(Label lblTokuchoKoseiGoValue12) {
+        this.lblTokuchoKoseiGoValue12=lblTokuchoKoseiGoValue12;
+    }
+
+    @JsonProperty("txtTokuchoKoseiGo12")
+    public TextBoxNum getTxtTokuchoKoseiGo12() {
+        return txtTokuchoKoseiGo12;
+    }
+
+    @JsonProperty("txtTokuchoKoseiGo12")
+    public void setTxtTokuchoKoseiGo12(TextBoxNum txtTokuchoKoseiGo12) {
+        this.txtTokuchoKoseiGo12=txtTokuchoKoseiGo12;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku144 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku144AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue12")
+    private Label lblTokuchoZogenValue12;
+
+    @JsonProperty("lblTokuchoZogenValue12")
+    public Label getLblTokuchoZogenValue12() {
+        return lblTokuchoZogenValue12;
+    }
+
+    @JsonProperty("lblTokuchoZogenValue12")
+    public void setLblTokuchoZogenValue12(Label lblTokuchoZogenValue12) {
+        this.lblTokuchoZogenValue12=lblTokuchoZogenValue12;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku145 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku145AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue12")
+    private Label lblTokuchoNofugakuValue12;
+
+    @JsonProperty("lblTokuchoNofugakuValue12")
+    public Label getLblTokuchoNofugakuValue12() {
+        return lblTokuchoNofugakuValue12;
+    }
+
+    @JsonProperty("lblTokuchoNofugakuValue12")
+    public void setLblTokuchoNofugakuValue12(Label lblTokuchoNofugakuValue12) {
+        this.lblTokuchoNofugakuValue12=lblTokuchoNofugakuValue12;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku146 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku146AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi9")
+    private Label lblFuchoKi9;
+
+    @JsonProperty("lblFuchoKi9")
+    public Label getLblFuchoKi9() {
+        return lblFuchoKi9;
+    }
+
+    @JsonProperty("lblFuchoKi9")
+    public void setLblFuchoKi9(Label lblFuchoKi9) {
+        this.lblFuchoKi9=lblFuchoKi9;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku147 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku147AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiMaeValue12")
     private Label lblFuchoKoseiMaeValue12;
 
@@ -6283,13 +5917,15 @@ class celKiwarigaku183AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiMaeValue12=lblFuchoKoseiMaeValue12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku184 のクラスファイル 
+ * celKiwarigaku148 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku184AttblKiwarigaku extends TableCell {
+class celKiwarigaku148AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiGoValue12")
     private Label lblFuchoKoseiGoValue12;
     @JsonProperty("txtFuchoKoseiGo12")
@@ -6315,13 +5951,15 @@ class celKiwarigaku184AttblKiwarigaku extends TableCell {
         this.txtFuchoKoseiGo12=txtFuchoKoseiGo12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku185 のクラスファイル 
+ * celKiwarigaku149 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku185AttblKiwarigaku extends TableCell {
+class celKiwarigaku149AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoZogenValue12")
     private Label lblFuchoZogenValue12;
 
@@ -6335,13 +5973,15 @@ class celKiwarigaku185AttblKiwarigaku extends TableCell {
         this.lblFuchoZogenValue12=lblFuchoZogenValue12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku186 のクラスファイル 
+ * celKiwarigaku150 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku186AttblKiwarigaku extends TableCell {
+class celKiwarigaku150AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNofugakuValue12")
     private Label lblFuchoNofugakuValue12;
 
@@ -6355,13 +5995,15 @@ class celKiwarigaku186AttblKiwarigaku extends TableCell {
         this.lblFuchoNofugakuValue12=lblFuchoNofugakuValue12;
     }
 
+    // </editor-fold>
 }
 /**
- * celKiwarigaku187 のクラスファイル 
+ * celKiwarigaku151 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celKiwarigaku187AttblKiwarigaku extends TableCell {
+class celKiwarigaku151AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNokigenValue12")
     private Label lblFuchoNokigenValue12;
     @JsonProperty("txtFuchoNokigen12")
@@ -6387,6 +6029,763 @@ class celKiwarigaku187AttblKiwarigaku extends TableCell {
         this.txtFuchoNokigen12=txtFuchoNokigen12;
     }
 
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku152 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku152AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki1")
+    private Label lblTsuki1;
+
+    @JsonProperty("lblTsuki1")
+    public Label getLblTsuki1() {
+        return lblTsuki1;
+    }
+
+    @JsonProperty("lblTsuki1")
+    public void setLblTsuki1(Label lblTsuki1) {
+        this.lblTsuki1=lblTsuki1;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku153 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku153AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku154 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku154AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku155 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku155AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku156 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku156AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku157 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku157AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku158 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku158AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi01")
+    private Label lblFuchoKi01;
+
+    @JsonProperty("lblFuchoKi01")
+    public Label getLblFuchoKi01() {
+        return lblFuchoKi01;
+    }
+
+    @JsonProperty("lblFuchoKi01")
+    public void setLblFuchoKi01(Label lblFuchoKi01) {
+        this.lblFuchoKi01=lblFuchoKi01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku250 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku250AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue01")
+    private Label lblFuchoKoseiMaeValue01;
+
+    @JsonProperty("lblFuchoKoseiMaeValue01")
+    public Label getLblFuchoKoseiMaeValue01() {
+        return lblFuchoKoseiMaeValue01;
+    }
+
+    @JsonProperty("lblFuchoKoseiMaeValue01")
+    public void setLblFuchoKoseiMaeValue01(Label lblFuchoKoseiMaeValue01) {
+        this.lblFuchoKoseiMaeValue01=lblFuchoKoseiMaeValue01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku160 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku160AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue01")
+    private Label lblFuchoKoseiGoValue01;
+    @JsonProperty("txtFuchoKoseiGo01")
+    private TextBoxNum txtFuchoKoseiGo01;
+
+    @JsonProperty("lblFuchoKoseiGoValue01")
+    public Label getLblFuchoKoseiGoValue01() {
+        return lblFuchoKoseiGoValue01;
+    }
+
+    @JsonProperty("lblFuchoKoseiGoValue01")
+    public void setLblFuchoKoseiGoValue01(Label lblFuchoKoseiGoValue01) {
+        this.lblFuchoKoseiGoValue01=lblFuchoKoseiGoValue01;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo01")
+    public TextBoxNum getTxtFuchoKoseiGo01() {
+        return txtFuchoKoseiGo01;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo01")
+    public void setTxtFuchoKoseiGo01(TextBoxNum txtFuchoKoseiGo01) {
+        this.txtFuchoKoseiGo01=txtFuchoKoseiGo01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku161 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku161AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue01")
+    private Label lblFuchoZogenValue01;
+
+    @JsonProperty("lblFuchoZogenValue01")
+    public Label getLblFuchoZogenValue01() {
+        return lblFuchoZogenValue01;
+    }
+
+    @JsonProperty("lblFuchoZogenValue01")
+    public void setLblFuchoZogenValue01(Label lblFuchoZogenValue01) {
+        this.lblFuchoZogenValue01=lblFuchoZogenValue01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku162 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku162AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue01")
+    private Label lblFuchoNofugakuValue01;
+
+    @JsonProperty("lblFuchoNofugakuValue01")
+    public Label getLblFuchoNofugakuValue01() {
+        return lblFuchoNofugakuValue01;
+    }
+
+    @JsonProperty("lblFuchoNofugakuValue01")
+    public void setLblFuchoNofugakuValue01(Label lblFuchoNofugakuValue01) {
+        this.lblFuchoNofugakuValue01=lblFuchoNofugakuValue01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku163 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku163AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue01")
+    private Label lblFuchoNokigenValue01;
+    @JsonProperty("txtFuchoNokigen01")
+    private TextBoxDate txtFuchoNokigen01;
+
+    @JsonProperty("lblFuchoNokigenValue01")
+    public Label getLblFuchoNokigenValue01() {
+        return lblFuchoNokigenValue01;
+    }
+
+    @JsonProperty("lblFuchoNokigenValue01")
+    public void setLblFuchoNokigenValue01(Label lblFuchoNokigenValue01) {
+        this.lblFuchoNokigenValue01=lblFuchoNokigenValue01;
+    }
+
+    @JsonProperty("txtFuchoNokigen01")
+    public TextBoxDate getTxtFuchoNokigen01() {
+        return txtFuchoNokigen01;
+    }
+
+    @JsonProperty("txtFuchoNokigen01")
+    public void setTxtFuchoNokigen01(TextBoxDate txtFuchoNokigen01) {
+        this.txtFuchoNokigen01=txtFuchoNokigen01;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku164 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku164AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki2")
+    private Label lblTsuki2;
+
+    @JsonProperty("lblTsuki2")
+    public Label getLblTsuki2() {
+        return lblTsuki2;
+    }
+
+    @JsonProperty("lblTsuki2")
+    public void setLblTsuki2(Label lblTsuki2) {
+        this.lblTsuki2=lblTsuki2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku165 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku165AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKi02")
+    private Label lblTokuchoKi02;
+
+    @JsonProperty("lblTokuchoKi02")
+    public Label getLblTokuchoKi02() {
+        return lblTokuchoKi02;
+    }
+
+    @JsonProperty("lblTokuchoKi02")
+    public void setLblTokuchoKi02(Label lblTokuchoKi02) {
+        this.lblTokuchoKi02=lblTokuchoKi02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku166 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku166AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiMaeValue02")
+    private Label lblTokuchoKoseiMaeValue02;
+
+    @JsonProperty("lblTokuchoKoseiMaeValue02")
+    public Label getLblTokuchoKoseiMaeValue02() {
+        return lblTokuchoKoseiMaeValue02;
+    }
+
+    @JsonProperty("lblTokuchoKoseiMaeValue02")
+    public void setLblTokuchoKoseiMaeValue02(Label lblTokuchoKoseiMaeValue02) {
+        this.lblTokuchoKoseiMaeValue02=lblTokuchoKoseiMaeValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku167 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku167AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoKoseiGoValue02")
+    private Label lblTokuchoKoseiGoValue02;
+    @JsonProperty("txtTokuchoKoseiGo02")
+    private TextBoxNum txtTokuchoKoseiGo02;
+
+    @JsonProperty("lblTokuchoKoseiGoValue02")
+    public Label getLblTokuchoKoseiGoValue02() {
+        return lblTokuchoKoseiGoValue02;
+    }
+
+    @JsonProperty("lblTokuchoKoseiGoValue02")
+    public void setLblTokuchoKoseiGoValue02(Label lblTokuchoKoseiGoValue02) {
+        this.lblTokuchoKoseiGoValue02=lblTokuchoKoseiGoValue02;
+    }
+
+    @JsonProperty("txtTokuchoKoseiGo02")
+    public TextBoxNum getTxtTokuchoKoseiGo02() {
+        return txtTokuchoKoseiGo02;
+    }
+
+    @JsonProperty("txtTokuchoKoseiGo02")
+    public void setTxtTokuchoKoseiGo02(TextBoxNum txtTokuchoKoseiGo02) {
+        this.txtTokuchoKoseiGo02=txtTokuchoKoseiGo02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku168 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku168AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoZogenValue02")
+    private Label lblTokuchoZogenValue02;
+
+    @JsonProperty("lblTokuchoZogenValue02")
+    public Label getLblTokuchoZogenValue02() {
+        return lblTokuchoZogenValue02;
+    }
+
+    @JsonProperty("lblTokuchoZogenValue02")
+    public void setLblTokuchoZogenValue02(Label lblTokuchoZogenValue02) {
+        this.lblTokuchoZogenValue02=lblTokuchoZogenValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku169 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku169AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTokuchoNofugakuValue02")
+    private Label lblTokuchoNofugakuValue02;
+
+    @JsonProperty("lblTokuchoNofugakuValue02")
+    public Label getLblTokuchoNofugakuValue02() {
+        return lblTokuchoNofugakuValue02;
+    }
+
+    @JsonProperty("lblTokuchoNofugakuValue02")
+    public void setLblTokuchoNofugakuValue02(Label lblTokuchoNofugakuValue02) {
+        this.lblTokuchoNofugakuValue02=lblTokuchoNofugakuValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku170 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku170AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi02")
+    private Label lblFuchoKi02;
+
+    @JsonProperty("lblFuchoKi02")
+    public Label getLblFuchoKi02() {
+        return lblFuchoKi02;
+    }
+
+    @JsonProperty("lblFuchoKi02")
+    public void setLblFuchoKi02(Label lblFuchoKi02) {
+        this.lblFuchoKi02=lblFuchoKi02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku171 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku171AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue02")
+    private Label lblFuchoKoseiMaeValue02;
+
+    @JsonProperty("lblFuchoKoseiMaeValue02")
+    public Label getLblFuchoKoseiMaeValue02() {
+        return lblFuchoKoseiMaeValue02;
+    }
+
+    @JsonProperty("lblFuchoKoseiMaeValue02")
+    public void setLblFuchoKoseiMaeValue02(Label lblFuchoKoseiMaeValue02) {
+        this.lblFuchoKoseiMaeValue02=lblFuchoKoseiMaeValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku172 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku172AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue02")
+    private Label lblFuchoKoseiGoValue02;
+    @JsonProperty("txtFuchoKoseiGo02")
+    private TextBoxNum txtFuchoKoseiGo02;
+
+    @JsonProperty("lblFuchoKoseiGoValue02")
+    public Label getLblFuchoKoseiGoValue02() {
+        return lblFuchoKoseiGoValue02;
+    }
+
+    @JsonProperty("lblFuchoKoseiGoValue02")
+    public void setLblFuchoKoseiGoValue02(Label lblFuchoKoseiGoValue02) {
+        this.lblFuchoKoseiGoValue02=lblFuchoKoseiGoValue02;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo02")
+    public TextBoxNum getTxtFuchoKoseiGo02() {
+        return txtFuchoKoseiGo02;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo02")
+    public void setTxtFuchoKoseiGo02(TextBoxNum txtFuchoKoseiGo02) {
+        this.txtFuchoKoseiGo02=txtFuchoKoseiGo02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku173 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku173AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue02")
+    private Label lblFuchoZogenValue02;
+
+    @JsonProperty("lblFuchoZogenValue02")
+    public Label getLblFuchoZogenValue02() {
+        return lblFuchoZogenValue02;
+    }
+
+    @JsonProperty("lblFuchoZogenValue02")
+    public void setLblFuchoZogenValue02(Label lblFuchoZogenValue02) {
+        this.lblFuchoZogenValue02=lblFuchoZogenValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku174 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku174AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue02")
+    private Label lblFuchoNofugakuValue02;
+
+    @JsonProperty("lblFuchoNofugakuValue02")
+    public Label getLblFuchoNofugakuValue02() {
+        return lblFuchoNofugakuValue02;
+    }
+
+    @JsonProperty("lblFuchoNofugakuValue02")
+    public void setLblFuchoNofugakuValue02(Label lblFuchoNofugakuValue02) {
+        this.lblFuchoNofugakuValue02=lblFuchoNofugakuValue02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku175 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku175AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue02")
+    private Label lblFuchoNokigenValue02;
+    @JsonProperty("txtFuchoNokigen02")
+    private TextBoxDate txtFuchoNokigen02;
+
+    @JsonProperty("lblFuchoNokigenValue02")
+    public Label getLblFuchoNokigenValue02() {
+        return lblFuchoNokigenValue02;
+    }
+
+    @JsonProperty("lblFuchoNokigenValue02")
+    public void setLblFuchoNokigenValue02(Label lblFuchoNokigenValue02) {
+        this.lblFuchoNokigenValue02=lblFuchoNokigenValue02;
+    }
+
+    @JsonProperty("txtFuchoNokigen02")
+    public TextBoxDate getTxtFuchoNokigen02() {
+        return txtFuchoNokigen02;
+    }
+
+    @JsonProperty("txtFuchoNokigen02")
+    public void setTxtFuchoNokigen02(TextBoxDate txtFuchoNokigen02) {
+        this.txtFuchoNokigen02=txtFuchoNokigen02;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku176 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku176AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsuki3")
+    private Label lblTsuki3;
+
+    @JsonProperty("lblTsuki3")
+    public Label getLblTsuki3() {
+        return lblTsuki3;
+    }
+
+    @JsonProperty("lblTsuki3")
+    public void setLblTsuki3(Label lblTsuki3) {
+        this.lblTsuki3=lblTsuki3;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku177 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku177AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku178 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku178AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku179 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku179AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku180 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku180AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku181 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku181AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku182 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku182AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKi03")
+    private Label lblFuchoKi03;
+
+    @JsonProperty("lblFuchoKi03")
+    public Label getLblFuchoKi03() {
+        return lblFuchoKi03;
+    }
+
+    @JsonProperty("lblFuchoKi03")
+    public void setLblFuchoKi03(Label lblFuchoKi03) {
+        this.lblFuchoKi03=lblFuchoKi03;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku183 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku183AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValue03")
+    private Label lblFuchoKoseiMaeValue03;
+
+    @JsonProperty("lblFuchoKoseiMaeValue03")
+    public Label getLblFuchoKoseiMaeValue03() {
+        return lblFuchoKoseiMaeValue03;
+    }
+
+    @JsonProperty("lblFuchoKoseiMaeValue03")
+    public void setLblFuchoKoseiMaeValue03(Label lblFuchoKoseiMaeValue03) {
+        this.lblFuchoKoseiMaeValue03=lblFuchoKoseiMaeValue03;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku184 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku184AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue03")
+    private Label lblFuchoKoseiGoValue03;
+    @JsonProperty("txtFuchoKoseiGo03")
+    private TextBoxNum txtFuchoKoseiGo03;
+
+    @JsonProperty("lblFuchoKoseiGoValue03")
+    public Label getLblFuchoKoseiGoValue03() {
+        return lblFuchoKoseiGoValue03;
+    }
+
+    @JsonProperty("lblFuchoKoseiGoValue03")
+    public void setLblFuchoKoseiGoValue03(Label lblFuchoKoseiGoValue03) {
+        this.lblFuchoKoseiGoValue03=lblFuchoKoseiGoValue03;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo03")
+    public TextBoxNum getTxtFuchoKoseiGo03() {
+        return txtFuchoKoseiGo03;
+    }
+
+    @JsonProperty("txtFuchoKoseiGo03")
+    public void setTxtFuchoKoseiGo03(TextBoxNum txtFuchoKoseiGo03) {
+        this.txtFuchoKoseiGo03=txtFuchoKoseiGo03;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku185 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku185AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValue03")
+    private Label lblFuchoZogenValue03;
+
+    @JsonProperty("lblFuchoZogenValue03")
+    public Label getLblFuchoZogenValue03() {
+        return lblFuchoZogenValue03;
+    }
+
+    @JsonProperty("lblFuchoZogenValue03")
+    public void setLblFuchoZogenValue03(Label lblFuchoZogenValue03) {
+        this.lblFuchoZogenValue03=lblFuchoZogenValue03;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku186 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku186AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValue03")
+    private Label lblFuchoNofugakuValue03;
+
+    @JsonProperty("lblFuchoNofugakuValue03")
+    public Label getLblFuchoNofugakuValue03() {
+        return lblFuchoNofugakuValue03;
+    }
+
+    @JsonProperty("lblFuchoNofugakuValue03")
+    public void setLblFuchoNofugakuValue03(Label lblFuchoNofugakuValue03) {
+        this.lblFuchoNofugakuValue03=lblFuchoNofugakuValue03;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celKiwarigaku187 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celKiwarigaku187AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValue03")
+    private Label lblFuchoNokigenValue03;
+    @JsonProperty("txtFuchoNokigen03")
+    private TextBoxDate txtFuchoNokigen03;
+
+    @JsonProperty("lblFuchoNokigenValue03")
+    public Label getLblFuchoNokigenValue03() {
+        return lblFuchoNokigenValue03;
+    }
+
+    @JsonProperty("lblFuchoNokigenValue03")
+    public void setLblFuchoNokigenValue03(Label lblFuchoNokigenValue03) {
+        this.lblFuchoNokigenValue03=lblFuchoNokigenValue03;
+    }
+
+    @JsonProperty("txtFuchoNokigen03")
+    public TextBoxDate getTxtFuchoNokigen03() {
+        return txtFuchoNokigen03;
+    }
+
+    @JsonProperty("txtFuchoNokigen03")
+    public void setTxtFuchoNokigen03(TextBoxDate txtFuchoNokigen03) {
+        this.txtFuchoNokigen03=txtFuchoNokigen03;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku188 のクラスファイル 
@@ -6394,6 +6793,7 @@ class celKiwarigaku187AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku188AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsukiYoku4")
     private Label lblTsukiYoku4;
 
@@ -6407,6 +6807,7 @@ class celKiwarigaku188AttblKiwarigaku extends TableCell {
         this.lblTsukiYoku4=lblTsukiYoku4;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku189 のクラスファイル 
@@ -6414,7 +6815,9 @@ class celKiwarigaku188AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku189AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku190 のクラスファイル 
@@ -6422,7 +6825,9 @@ class celKiwarigaku189AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku190AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku191 のクラスファイル 
@@ -6430,7 +6835,9 @@ class celKiwarigaku190AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku191AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku192 のクラスファイル 
@@ -6438,7 +6845,9 @@ class celKiwarigaku191AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku192AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku193 のクラスファイル 
@@ -6446,7 +6855,9 @@ class celKiwarigaku192AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku193AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku194 のクラスファイル 
@@ -6454,7 +6865,21 @@ class celKiwarigaku193AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku194AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKiYoku04")
+    private Label lblFuchoKiYoku04;
 
+    @JsonProperty("lblFuchoKiYoku04")
+    public Label getLblFuchoKiYoku04() {
+        return lblFuchoKiYoku04;
+    }
+
+    @JsonProperty("lblFuchoKiYoku04")
+    public void setLblFuchoKiYoku04(Label lblFuchoKiYoku04) {
+        this.lblFuchoKiYoku04=lblFuchoKiYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku195 のクラスファイル 
@@ -6462,7 +6887,21 @@ class celKiwarigaku194AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku195AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValueYoku04")
+    private Label lblFuchoKoseiMaeValueYoku04;
 
+    @JsonProperty("lblFuchoKoseiMaeValueYoku04")
+    public Label getLblFuchoKoseiMaeValueYoku04() {
+        return lblFuchoKoseiMaeValueYoku04;
+    }
+
+    @JsonProperty("lblFuchoKoseiMaeValueYoku04")
+    public void setLblFuchoKoseiMaeValueYoku04(Label lblFuchoKoseiMaeValueYoku04) {
+        this.lblFuchoKoseiMaeValueYoku04=lblFuchoKoseiMaeValueYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku196 のクラスファイル 
@@ -6470,7 +6909,33 @@ class celKiwarigaku195AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku196AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValue14")
+    private Label lblFuchoKoseiGoValue14;
+    @JsonProperty("txtFuchoKoseiGoYoku04")
+    private TextBoxNum txtFuchoKoseiGoYoku04;
 
+    @JsonProperty("lblFuchoKoseiGoValue14")
+    public Label getLblFuchoKoseiGoValue14() {
+        return lblFuchoKoseiGoValue14;
+    }
+
+    @JsonProperty("lblFuchoKoseiGoValue14")
+    public void setLblFuchoKoseiGoValue14(Label lblFuchoKoseiGoValue14) {
+        this.lblFuchoKoseiGoValue14=lblFuchoKoseiGoValue14;
+    }
+
+    @JsonProperty("txtFuchoKoseiGoYoku04")
+    public TextBoxNum getTxtFuchoKoseiGoYoku04() {
+        return txtFuchoKoseiGoYoku04;
+    }
+
+    @JsonProperty("txtFuchoKoseiGoYoku04")
+    public void setTxtFuchoKoseiGoYoku04(TextBoxNum txtFuchoKoseiGoYoku04) {
+        this.txtFuchoKoseiGoYoku04=txtFuchoKoseiGoYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku197 のクラスファイル 
@@ -6478,7 +6943,21 @@ class celKiwarigaku196AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku197AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValueYoku04")
+    private Label lblFuchoZogenValueYoku04;
 
+    @JsonProperty("lblFuchoZogenValueYoku04")
+    public Label getLblFuchoZogenValueYoku04() {
+        return lblFuchoZogenValueYoku04;
+    }
+
+    @JsonProperty("lblFuchoZogenValueYoku04")
+    public void setLblFuchoZogenValueYoku04(Label lblFuchoZogenValueYoku04) {
+        this.lblFuchoZogenValueYoku04=lblFuchoZogenValueYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku198 のクラスファイル 
@@ -6486,7 +6965,21 @@ class celKiwarigaku197AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku198AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValueYoku04")
+    private Label lblFuchoNofugakuValueYoku04;
 
+    @JsonProperty("lblFuchoNofugakuValueYoku04")
+    public Label getLblFuchoNofugakuValueYoku04() {
+        return lblFuchoNofugakuValueYoku04;
+    }
+
+    @JsonProperty("lblFuchoNofugakuValueYoku04")
+    public void setLblFuchoNofugakuValueYoku04(Label lblFuchoNofugakuValueYoku04) {
+        this.lblFuchoNofugakuValueYoku04=lblFuchoNofugakuValueYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku199 のクラスファイル 
@@ -6494,7 +6987,33 @@ class celKiwarigaku198AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku199AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValueYoku04")
+    private Label lblFuchoNokigenValueYoku04;
+    @JsonProperty("txtFuchoNokigenYoku04")
+    private TextBoxDate txtFuchoNokigenYoku04;
 
+    @JsonProperty("lblFuchoNokigenValueYoku04")
+    public Label getLblFuchoNokigenValueYoku04() {
+        return lblFuchoNokigenValueYoku04;
+    }
+
+    @JsonProperty("lblFuchoNokigenValueYoku04")
+    public void setLblFuchoNokigenValueYoku04(Label lblFuchoNokigenValueYoku04) {
+        this.lblFuchoNokigenValueYoku04=lblFuchoNokigenValueYoku04;
+    }
+
+    @JsonProperty("txtFuchoNokigenYoku04")
+    public TextBoxDate getTxtFuchoNokigenYoku04() {
+        return txtFuchoNokigenYoku04;
+    }
+
+    @JsonProperty("txtFuchoNokigenYoku04")
+    public void setTxtFuchoNokigenYoku04(TextBoxDate txtFuchoNokigenYoku04) {
+        this.txtFuchoNokigenYoku04=txtFuchoNokigenYoku04;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku200 のクラスファイル 
@@ -6502,6 +7021,7 @@ class celKiwarigaku199AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku200AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTsukiYoku5")
     private Label lblTsukiYoku5;
 
@@ -6515,6 +7035,7 @@ class celKiwarigaku200AttblKiwarigaku extends TableCell {
         this.lblTsukiYoku5=lblTsukiYoku5;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku201 のクラスファイル 
@@ -6522,7 +7043,9 @@ class celKiwarigaku200AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku201AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku202 のクラスファイル 
@@ -6530,7 +7053,9 @@ class celKiwarigaku201AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku202AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku203 のクラスファイル 
@@ -6538,7 +7063,9 @@ class celKiwarigaku202AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku203AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku204 のクラスファイル 
@@ -6546,7 +7073,9 @@ class celKiwarigaku203AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku204AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku205 のクラスファイル 
@@ -6554,7 +7083,9 @@ class celKiwarigaku204AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku205AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku206 のクラスファイル 
@@ -6562,7 +7093,21 @@ class celKiwarigaku205AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku206AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKiYoku05")
+    private Label lblFuchoKiYoku05;
 
+    @JsonProperty("lblFuchoKiYoku05")
+    public Label getLblFuchoKiYoku05() {
+        return lblFuchoKiYoku05;
+    }
+
+    @JsonProperty("lblFuchoKiYoku05")
+    public void setLblFuchoKiYoku05(Label lblFuchoKiYoku05) {
+        this.lblFuchoKiYoku05=lblFuchoKiYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku207 のクラスファイル 
@@ -6570,7 +7115,21 @@ class celKiwarigaku206AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku207AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiMaeValueYoku05")
+    private Label lblFuchoKoseiMaeValueYoku05;
 
+    @JsonProperty("lblFuchoKoseiMaeValueYoku05")
+    public Label getLblFuchoKoseiMaeValueYoku05() {
+        return lblFuchoKoseiMaeValueYoku05;
+    }
+
+    @JsonProperty("lblFuchoKoseiMaeValueYoku05")
+    public void setLblFuchoKoseiMaeValueYoku05(Label lblFuchoKoseiMaeValueYoku05) {
+        this.lblFuchoKoseiMaeValueYoku05=lblFuchoKoseiMaeValueYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku208 のクラスファイル 
@@ -6578,7 +7137,33 @@ class celKiwarigaku207AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku208AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoKoseiGoValueYoku05")
+    private Label lblFuchoKoseiGoValueYoku05;
+    @JsonProperty("txtFuchoKoseiGoYoku05")
+    private TextBoxNum txtFuchoKoseiGoYoku05;
 
+    @JsonProperty("lblFuchoKoseiGoValueYoku05")
+    public Label getLblFuchoKoseiGoValueYoku05() {
+        return lblFuchoKoseiGoValueYoku05;
+    }
+
+    @JsonProperty("lblFuchoKoseiGoValueYoku05")
+    public void setLblFuchoKoseiGoValueYoku05(Label lblFuchoKoseiGoValueYoku05) {
+        this.lblFuchoKoseiGoValueYoku05=lblFuchoKoseiGoValueYoku05;
+    }
+
+    @JsonProperty("txtFuchoKoseiGoYoku05")
+    public TextBoxNum getTxtFuchoKoseiGoYoku05() {
+        return txtFuchoKoseiGoYoku05;
+    }
+
+    @JsonProperty("txtFuchoKoseiGoYoku05")
+    public void setTxtFuchoKoseiGoYoku05(TextBoxNum txtFuchoKoseiGoYoku05) {
+        this.txtFuchoKoseiGoYoku05=txtFuchoKoseiGoYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku209 のクラスファイル 
@@ -6586,7 +7171,21 @@ class celKiwarigaku208AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku209AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoZogenValueYoku05")
+    private Label lblFuchoZogenValueYoku05;
 
+    @JsonProperty("lblFuchoZogenValueYoku05")
+    public Label getLblFuchoZogenValueYoku05() {
+        return lblFuchoZogenValueYoku05;
+    }
+
+    @JsonProperty("lblFuchoZogenValueYoku05")
+    public void setLblFuchoZogenValueYoku05(Label lblFuchoZogenValueYoku05) {
+        this.lblFuchoZogenValueYoku05=lblFuchoZogenValueYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku210 のクラスファイル 
@@ -6594,7 +7193,21 @@ class celKiwarigaku209AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku210AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNofugakuValueYoku05")
+    private Label lblFuchoNofugakuValueYoku05;
 
+    @JsonProperty("lblFuchoNofugakuValueYoku05")
+    public Label getLblFuchoNofugakuValueYoku05() {
+        return lblFuchoNofugakuValueYoku05;
+    }
+
+    @JsonProperty("lblFuchoNofugakuValueYoku05")
+    public void setLblFuchoNofugakuValueYoku05(Label lblFuchoNofugakuValueYoku05) {
+        this.lblFuchoNofugakuValueYoku05=lblFuchoNofugakuValueYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku211 のクラスファイル 
@@ -6602,7 +7215,33 @@ class celKiwarigaku210AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku211AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblFuchoNokigenValueYoku05")
+    private Label lblFuchoNokigenValueYoku05;
+    @JsonProperty("txtFuchoNokigenYoku05")
+    private TextBoxDate txtFuchoNokigenYoku05;
 
+    @JsonProperty("lblFuchoNokigenValueYoku05")
+    public Label getLblFuchoNokigenValueYoku05() {
+        return lblFuchoNokigenValueYoku05;
+    }
+
+    @JsonProperty("lblFuchoNokigenValueYoku05")
+    public void setLblFuchoNokigenValueYoku05(Label lblFuchoNokigenValueYoku05) {
+        this.lblFuchoNokigenValueYoku05=lblFuchoNokigenValueYoku05;
+    }
+
+    @JsonProperty("txtFuchoNokigenYoku05")
+    public TextBoxDate getTxtFuchoNokigenYoku05() {
+        return txtFuchoNokigenYoku05;
+    }
+
+    @JsonProperty("txtFuchoNokigenYoku05")
+    public void setTxtFuchoNokigenYoku05(TextBoxDate txtFuchoNokigenYoku05) {
+        this.txtFuchoNokigenYoku05=txtFuchoNokigenYoku05;
+    }
+
+    // </editor-fold>
 }
 /**
  * celKiwarigaku212 のクラスファイル 
@@ -6610,6 +7249,7 @@ class celKiwarigaku211AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku212AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblGokei")
     private Label lblGokei;
 
@@ -6623,6 +7263,7 @@ class celKiwarigaku212AttblKiwarigaku extends TableCell {
         this.lblGokei=lblGokei;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku213 のクラスファイル 
@@ -6630,7 +7271,9 @@ class celKiwarigaku212AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku213AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku214 のクラスファイル 
@@ -6638,6 +7281,7 @@ class celKiwarigaku213AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku214AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoKoseiMaeSum")
     private Label lblTokuchoKoseiMaeSum;
 
@@ -6651,6 +7295,7 @@ class celKiwarigaku214AttblKiwarigaku extends TableCell {
         this.lblTokuchoKoseiMaeSum=lblTokuchoKoseiMaeSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku215 のクラスファイル 
@@ -6658,6 +7303,7 @@ class celKiwarigaku214AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku215AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoKoseiGoSum")
     private Label lblTokuchoKoseiGoSum;
 
@@ -6671,6 +7317,7 @@ class celKiwarigaku215AttblKiwarigaku extends TableCell {
         this.lblTokuchoKoseiGoSum=lblTokuchoKoseiGoSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku216 のクラスファイル 
@@ -6678,6 +7325,7 @@ class celKiwarigaku215AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku216AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoZogenSum")
     private Label lblTokuchoZogenSum;
 
@@ -6691,6 +7339,7 @@ class celKiwarigaku216AttblKiwarigaku extends TableCell {
         this.lblTokuchoZogenSum=lblTokuchoZogenSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku217 のクラスファイル 
@@ -6698,6 +7347,7 @@ class celKiwarigaku216AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku217AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblTokuchoNofugakuSum")
     private Label lblTokuchoNofugakuSum;
 
@@ -6711,6 +7361,7 @@ class celKiwarigaku217AttblKiwarigaku extends TableCell {
         this.lblTokuchoNofugakuSum=lblTokuchoNofugakuSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku218 のクラスファイル 
@@ -6718,7 +7369,9 @@ class celKiwarigaku217AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku218AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku219 のクラスファイル 
@@ -6726,6 +7379,7 @@ class celKiwarigaku218AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku219AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiMaeSum")
     private Label lblFuchoKoseiMaeSum;
 
@@ -6739,6 +7393,7 @@ class celKiwarigaku219AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiMaeSum=lblFuchoKoseiMaeSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku220 のクラスファイル 
@@ -6746,6 +7401,7 @@ class celKiwarigaku219AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku220AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoKoseiGoSum")
     private Label lblFuchoKoseiGoSum;
 
@@ -6759,6 +7415,7 @@ class celKiwarigaku220AttblKiwarigaku extends TableCell {
         this.lblFuchoKoseiGoSum=lblFuchoKoseiGoSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku221 のクラスファイル 
@@ -6766,6 +7423,7 @@ class celKiwarigaku220AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku221AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoZogenSum")
     private Label lblFuchoZogenSum;
 
@@ -6779,6 +7437,7 @@ class celKiwarigaku221AttblKiwarigaku extends TableCell {
         this.lblFuchoZogenSum=lblFuchoZogenSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku222 のクラスファイル 
@@ -6786,6 +7445,7 @@ class celKiwarigaku221AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku222AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     @JsonProperty("lblFuchoNofugakuSum")
     private Label lblFuchoNofugakuSum;
 
@@ -6799,6 +7459,7 @@ class celKiwarigaku222AttblKiwarigaku extends TableCell {
         this.lblFuchoNofugakuSum=lblFuchoNofugakuSum;
     }
 
+    // </editor-fold>
 }
 /**
  * celKiwarigaku223 のクラスファイル 
@@ -6806,5 +7467,7 @@ class celKiwarigaku222AttblKiwarigaku extends TableCell {
  * @author 自動生成
  */
 class celKiwarigaku223AttblKiwarigaku extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
+    // </editor-fold>
 }
