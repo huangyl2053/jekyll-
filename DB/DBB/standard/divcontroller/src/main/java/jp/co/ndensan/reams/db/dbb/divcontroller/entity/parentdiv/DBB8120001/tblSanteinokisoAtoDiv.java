@@ -49,6 +49,18 @@ public class tblSanteinokisoAtoDiv extends TablePanel {
     private celAto35AttblSanteinokisoAto celAto35;
     @JsonProperty("celAto36")
     private celAto36AttblSanteinokisoAto celAto36;
+    @JsonProperty("celAto41")
+    private celAto41AttblSanteinokisoAto celAto41;
+    @JsonProperty("celAto42")
+    private celAto42AttblSanteinokisoAto celAto42;
+    @JsonProperty("celAto43")
+    private celAto43AttblSanteinokisoAto celAto43;
+    @JsonProperty("celAto44")
+    private celAto44AttblSanteinokisoAto celAto44;
+    @JsonProperty("celAto45")
+    private celAto45AttblSanteinokisoAto celAto45;
+    @JsonProperty("celAto46")
+    private celAto46AttblSanteinokisoAto celAto46;
 
     /*
      * [ Helperの作成 ]
@@ -117,6 +129,36 @@ public class tblSanteinokisoAtoDiv extends TablePanel {
     @JsonIgnore
     public Label getLblHokenryoGakuAto1() {
         return this.celAto36.getLblHokenryoGakuAto1();
+    }
+
+    @JsonIgnore
+    public Label getLblKikanAto2() {
+        return this.celAto41.getLblKikanAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblTsukisuAto2() {
+        return this.celAto42.getLblTsukisuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiAto2() {
+        return this.celAto43.getLblHokenryoDankaiAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuAto2() {
+        return this.celAto44.getLblHokenryoritsuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsuGakuAto2() {
+        return this.celAto45.getLblHokenryoSanshutsuGakuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoGakuAto2() {
+        return this.celAto46.getLblHokenryoGakuAto2();
     }
 
     /*
@@ -253,6 +295,66 @@ public class tblSanteinokisoAtoDiv extends TablePanel {
     @JsonProperty("celAto36")
     private void setCelAto36(celAto36AttblSanteinokisoAto celAto36) {
         this.celAto36=celAto36;
+    }
+
+    @JsonProperty("celAto41")
+    private celAto41AttblSanteinokisoAto getCelAto41() {
+        return celAto41;
+    }
+
+    @JsonProperty("celAto41")
+    private void setCelAto41(celAto41AttblSanteinokisoAto celAto41) {
+        this.celAto41=celAto41;
+    }
+
+    @JsonProperty("celAto42")
+    private celAto42AttblSanteinokisoAto getCelAto42() {
+        return celAto42;
+    }
+
+    @JsonProperty("celAto42")
+    private void setCelAto42(celAto42AttblSanteinokisoAto celAto42) {
+        this.celAto42=celAto42;
+    }
+
+    @JsonProperty("celAto43")
+    private celAto43AttblSanteinokisoAto getCelAto43() {
+        return celAto43;
+    }
+
+    @JsonProperty("celAto43")
+    private void setCelAto43(celAto43AttblSanteinokisoAto celAto43) {
+        this.celAto43=celAto43;
+    }
+
+    @JsonProperty("celAto44")
+    private celAto44AttblSanteinokisoAto getCelAto44() {
+        return celAto44;
+    }
+
+    @JsonProperty("celAto44")
+    private void setCelAto44(celAto44AttblSanteinokisoAto celAto44) {
+        this.celAto44=celAto44;
+    }
+
+    @JsonProperty("celAto45")
+    private celAto45AttblSanteinokisoAto getCelAto45() {
+        return celAto45;
+    }
+
+    @JsonProperty("celAto45")
+    private void setCelAto45(celAto45AttblSanteinokisoAto celAto45) {
+        this.celAto45=celAto45;
+    }
+
+    @JsonProperty("celAto46")
+    private celAto46AttblSanteinokisoAto getCelAto46() {
+        return celAto46;
+    }
+
+    @JsonProperty("celAto46")
+    private void setCelAto46(celAto46AttblSanteinokisoAto celAto46) {
+        this.celAto46=celAto46;
     }
 
     // </editor-fold>
@@ -539,6 +641,138 @@ class celAto36AttblSanteinokisoAto extends TableCell {
     @JsonProperty("lblHokenryoGakuAto1")
     public void setLblHokenryoGakuAto1(Label lblHokenryoGakuAto1) {
         this.lblHokenryoGakuAto1=lblHokenryoGakuAto1;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto41 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto41AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblKikanAto2")
+    private Label lblKikanAto2;
+
+    @JsonProperty("lblKikanAto2")
+    public Label getLblKikanAto2() {
+        return lblKikanAto2;
+    }
+
+    @JsonProperty("lblKikanAto2")
+    public void setLblKikanAto2(Label lblKikanAto2) {
+        this.lblKikanAto2=lblKikanAto2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto42 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto42AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsukisuAto2")
+    private Label lblTsukisuAto2;
+
+    @JsonProperty("lblTsukisuAto2")
+    public Label getLblTsukisuAto2() {
+        return lblTsukisuAto2;
+    }
+
+    @JsonProperty("lblTsukisuAto2")
+    public void setLblTsukisuAto2(Label lblTsukisuAto2) {
+        this.lblTsukisuAto2=lblTsukisuAto2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto43 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto43AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoDankaiAto2")
+    private Label lblHokenryoDankaiAto2;
+
+    @JsonProperty("lblHokenryoDankaiAto2")
+    public Label getLblHokenryoDankaiAto2() {
+        return lblHokenryoDankaiAto2;
+    }
+
+    @JsonProperty("lblHokenryoDankaiAto2")
+    public void setLblHokenryoDankaiAto2(Label lblHokenryoDankaiAto2) {
+        this.lblHokenryoDankaiAto2=lblHokenryoDankaiAto2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto44 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto44AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoritsuAto2")
+    private Label lblHokenryoritsuAto2;
+
+    @JsonProperty("lblHokenryoritsuAto2")
+    public Label getLblHokenryoritsuAto2() {
+        return lblHokenryoritsuAto2;
+    }
+
+    @JsonProperty("lblHokenryoritsuAto2")
+    public void setLblHokenryoritsuAto2(Label lblHokenryoritsuAto2) {
+        this.lblHokenryoritsuAto2=lblHokenryoritsuAto2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto45 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto45AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoSanshutsuGakuAto2")
+    private Label lblHokenryoSanshutsuGakuAto2;
+
+    @JsonProperty("lblHokenryoSanshutsuGakuAto2")
+    public Label getLblHokenryoSanshutsuGakuAto2() {
+        return lblHokenryoSanshutsuGakuAto2;
+    }
+
+    @JsonProperty("lblHokenryoSanshutsuGakuAto2")
+    public void setLblHokenryoSanshutsuGakuAto2(Label lblHokenryoSanshutsuGakuAto2) {
+        this.lblHokenryoSanshutsuGakuAto2=lblHokenryoSanshutsuGakuAto2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celAto46 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celAto46AttblSanteinokisoAto extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoGakuAto2")
+    private Label lblHokenryoGakuAto2;
+
+    @JsonProperty("lblHokenryoGakuAto2")
+    public Label getLblHokenryoGakuAto2() {
+        return lblHokenryoGakuAto2;
+    }
+
+    @JsonProperty("lblHokenryoGakuAto2")
+    public void setLblHokenryoGakuAto2(Label lblHokenryoGakuAto2) {
+        this.lblHokenryoGakuAto2=lblHokenryoGakuAto2;
     }
 
     // </editor-fold>

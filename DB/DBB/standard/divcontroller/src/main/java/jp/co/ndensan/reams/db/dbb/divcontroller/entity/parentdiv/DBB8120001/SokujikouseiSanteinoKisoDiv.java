@@ -122,6 +122,36 @@ public class SokujikouseiSanteinoKisoDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblKikanMae2() {
+        return this.getTblSanteinokisoMae().getLblKikanMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblTsukisuMae2() {
+        return this.getTblSanteinokisoMae().getLblTsukisuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiMae2() {
+        return this.getTblSanteinokisoMae().getLblHokenryoDankaiMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuMae2() {
+        return this.getTblSanteinokisoMae().getLblHokenryoritsuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsuGakuMae2() {
+        return this.getTblSanteinokisoMae().getLblHokenryoSanshutsuGakuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoGakuMae2() {
+        return this.getTblSanteinokisoMae().getLblHokenryoGakuMae2();
+    }
+
+    @JsonIgnore
     public Label getLblSanteinoKisoAto() {
         return this.getTblSanteinokisoAto().getLblSanteinoKisoAto();
     }
@@ -184,6 +214,36 @@ public class SokujikouseiSanteinoKisoDiv extends Panel {
     @JsonIgnore
     public Label getLblHokenryoGakuAto1() {
         return this.getTblSanteinokisoAto().getLblHokenryoGakuAto1();
+    }
+
+    @JsonIgnore
+    public Label getLblKikanAto2() {
+        return this.getTblSanteinokisoAto().getLblKikanAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblTsukisuAto2() {
+        return this.getTblSanteinokisoAto().getLblTsukisuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiAto2() {
+        return this.getTblSanteinokisoAto().getLblHokenryoDankaiAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuAto2() {
+        return this.getTblSanteinokisoAto().getLblHokenryoritsuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsuGakuAto2() {
+        return this.getTblSanteinokisoAto().getLblHokenryoSanshutsuGakuAto2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoGakuAto2() {
+        return this.getTblSanteinokisoAto().getLblHokenryoGakuAto2();
     }
 
     // </editor-fold>

@@ -49,6 +49,18 @@ public class tblSanteinokisoMaeDiv extends TablePanel {
     private celMae35AttblSanteinokisoMae celMae35;
     @JsonProperty("celMae36")
     private celMae36AttblSanteinokisoMae celMae36;
+    @JsonProperty("celMae41")
+    private celMae41AttblSanteinokisoMae celMae41;
+    @JsonProperty("celMae42")
+    private celMae42AttblSanteinokisoMae celMae42;
+    @JsonProperty("celMae43")
+    private celMae43AttblSanteinokisoMae celMae43;
+    @JsonProperty("celMae44")
+    private celMae44AttblSanteinokisoMae celMae44;
+    @JsonProperty("celMae45")
+    private celMae45AttblSanteinokisoMae celMae45;
+    @JsonProperty("celMae46")
+    private celMae46AttblSanteinokisoMae celMae46;
 
     /*
      * [ Helperの作成 ]
@@ -117,6 +129,36 @@ public class tblSanteinokisoMaeDiv extends TablePanel {
     @JsonIgnore
     public Label getLblHokenryoGakuMae1() {
         return this.celMae36.getLblHokenryoGakuMae1();
+    }
+
+    @JsonIgnore
+    public Label getLblKikanMae2() {
+        return this.celMae41.getLblKikanMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblTsukisuMae2() {
+        return this.celMae42.getLblTsukisuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiMae2() {
+        return this.celMae43.getLblHokenryoDankaiMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoritsuMae2() {
+        return this.celMae44.getLblHokenryoritsuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoSanshutsuGakuMae2() {
+        return this.celMae45.getLblHokenryoSanshutsuGakuMae2();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoGakuMae2() {
+        return this.celMae46.getLblHokenryoGakuMae2();
     }
 
     /*
@@ -253,6 +295,66 @@ public class tblSanteinokisoMaeDiv extends TablePanel {
     @JsonProperty("celMae36")
     private void setCelMae36(celMae36AttblSanteinokisoMae celMae36) {
         this.celMae36=celMae36;
+    }
+
+    @JsonProperty("celMae41")
+    private celMae41AttblSanteinokisoMae getCelMae41() {
+        return celMae41;
+    }
+
+    @JsonProperty("celMae41")
+    private void setCelMae41(celMae41AttblSanteinokisoMae celMae41) {
+        this.celMae41=celMae41;
+    }
+
+    @JsonProperty("celMae42")
+    private celMae42AttblSanteinokisoMae getCelMae42() {
+        return celMae42;
+    }
+
+    @JsonProperty("celMae42")
+    private void setCelMae42(celMae42AttblSanteinokisoMae celMae42) {
+        this.celMae42=celMae42;
+    }
+
+    @JsonProperty("celMae43")
+    private celMae43AttblSanteinokisoMae getCelMae43() {
+        return celMae43;
+    }
+
+    @JsonProperty("celMae43")
+    private void setCelMae43(celMae43AttblSanteinokisoMae celMae43) {
+        this.celMae43=celMae43;
+    }
+
+    @JsonProperty("celMae44")
+    private celMae44AttblSanteinokisoMae getCelMae44() {
+        return celMae44;
+    }
+
+    @JsonProperty("celMae44")
+    private void setCelMae44(celMae44AttblSanteinokisoMae celMae44) {
+        this.celMae44=celMae44;
+    }
+
+    @JsonProperty("celMae45")
+    private celMae45AttblSanteinokisoMae getCelMae45() {
+        return celMae45;
+    }
+
+    @JsonProperty("celMae45")
+    private void setCelMae45(celMae45AttblSanteinokisoMae celMae45) {
+        this.celMae45=celMae45;
+    }
+
+    @JsonProperty("celMae46")
+    private celMae46AttblSanteinokisoMae getCelMae46() {
+        return celMae46;
+    }
+
+    @JsonProperty("celMae46")
+    private void setCelMae46(celMae46AttblSanteinokisoMae celMae46) {
+        this.celMae46=celMae46;
     }
 
     // </editor-fold>
@@ -539,6 +641,138 @@ class celMae36AttblSanteinokisoMae extends TableCell {
     @JsonProperty("lblHokenryoGakuMae1")
     public void setLblHokenryoGakuMae1(Label lblHokenryoGakuMae1) {
         this.lblHokenryoGakuMae1=lblHokenryoGakuMae1;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae41 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae41AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblKikanMae2")
+    private Label lblKikanMae2;
+
+    @JsonProperty("lblKikanMae2")
+    public Label getLblKikanMae2() {
+        return lblKikanMae2;
+    }
+
+    @JsonProperty("lblKikanMae2")
+    public void setLblKikanMae2(Label lblKikanMae2) {
+        this.lblKikanMae2=lblKikanMae2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae42 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae42AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblTsukisuMae2")
+    private Label lblTsukisuMae2;
+
+    @JsonProperty("lblTsukisuMae2")
+    public Label getLblTsukisuMae2() {
+        return lblTsukisuMae2;
+    }
+
+    @JsonProperty("lblTsukisuMae2")
+    public void setLblTsukisuMae2(Label lblTsukisuMae2) {
+        this.lblTsukisuMae2=lblTsukisuMae2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae43 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae43AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoDankaiMae2")
+    private Label lblHokenryoDankaiMae2;
+
+    @JsonProperty("lblHokenryoDankaiMae2")
+    public Label getLblHokenryoDankaiMae2() {
+        return lblHokenryoDankaiMae2;
+    }
+
+    @JsonProperty("lblHokenryoDankaiMae2")
+    public void setLblHokenryoDankaiMae2(Label lblHokenryoDankaiMae2) {
+        this.lblHokenryoDankaiMae2=lblHokenryoDankaiMae2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae44 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae44AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoritsuMae2")
+    private Label lblHokenryoritsuMae2;
+
+    @JsonProperty("lblHokenryoritsuMae2")
+    public Label getLblHokenryoritsuMae2() {
+        return lblHokenryoritsuMae2;
+    }
+
+    @JsonProperty("lblHokenryoritsuMae2")
+    public void setLblHokenryoritsuMae2(Label lblHokenryoritsuMae2) {
+        this.lblHokenryoritsuMae2=lblHokenryoritsuMae2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae45 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae45AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoSanshutsuGakuMae2")
+    private Label lblHokenryoSanshutsuGakuMae2;
+
+    @JsonProperty("lblHokenryoSanshutsuGakuMae2")
+    public Label getLblHokenryoSanshutsuGakuMae2() {
+        return lblHokenryoSanshutsuGakuMae2;
+    }
+
+    @JsonProperty("lblHokenryoSanshutsuGakuMae2")
+    public void setLblHokenryoSanshutsuGakuMae2(Label lblHokenryoSanshutsuGakuMae2) {
+        this.lblHokenryoSanshutsuGakuMae2=lblHokenryoSanshutsuGakuMae2;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celMae46 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celMae46AttblSanteinokisoMae extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    @JsonProperty("lblHokenryoGakuMae2")
+    private Label lblHokenryoGakuMae2;
+
+    @JsonProperty("lblHokenryoGakuMae2")
+    public Label getLblHokenryoGakuMae2() {
+        return lblHokenryoGakuMae2;
+    }
+
+    @JsonProperty("lblHokenryoGakuMae2")
+    public void setLblHokenryoGakuMae2(Label lblHokenryoGakuMae2) {
+        this.lblHokenryoGakuMae2=lblHokenryoGakuMae2;
     }
 
     // </editor-fold>
