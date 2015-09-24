@@ -20,30 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class SokujiFukaKouseiMain {
 
-    private static final int _1期 = 1;
-    private static final int _2期 = 2;
-    private static final int _3期 = 3;
-    private static final int _4期 = 4;
-    private static final int _5期 = 5;
-    private static final int _6期 = 6;
-
-    private static final int _1月 = 1;
-    private static final int _2月 = 2;
-    private static final int _3月 = 3;
-    private static final int _4月 = 4;
-    private static final int _5月 = 5;
-    private static final int _6月 = 6;
-    private static final int _7月 = 7;
-    private static final int _8月 = 8;
-    private static final int _9月 = 9;
-    private static final int _10月 = 10;
-    private static final int _11月 = 11;
-    private static final int _12月 = 12;
-
-    private static final RString 更正前 = new RString("更正前");
-    private static final RString 更正後 = new RString("更正後");
-
     public ResponseData<SokujiFukaKouseiMainDiv> onLoad_SokujiFukaKouseiMainDiv(SokujiFukaKouseiMainDiv sokujiFukaKouseiMainDiv) {
+        //TODO 以下の処理はラフスケッチ撮影用の仮実装。本実装時には削除する。
         setParam(sokujiFukaKouseiMainDiv);
         return ResponseData.of(sokujiFukaKouseiMainDiv).respond();
     }
