@@ -11,13 +11,15 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * DbT5033ShinsakaiIinHoshuTankaの項目定義クラスです
  *
  */
 public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT5033ShinsakaiIinHoshuTankaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5033ShinsakaiIinHoshuTanka");
 
@@ -97,7 +99,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
      * 
      * @param kaigoNinteiShinsaIinShubetsu 介護認定審査委員種別
      */
-    public void setKaigoNinteiShinsaIinShubetsu(CodeShubetsu kaigoNinteiShinsaIinShubetsu) {
+    public void setKaigoNinteiShinsaIinShubetsu(@Nonnull CodeShubetsu kaigoNinteiShinsaIinShubetsu) {
         this.kaigoNinteiShinsaIinShubetsu = kaigoNinteiShinsaIinShubetsu;
     }
 
@@ -115,7 +117,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
      * 
      * @param kaishiYM 開始年月
      */
-    public void setKaishiYM(FlexibleYearMonth kaishiYM) {
+    public void setKaishiYM(@Nonnull FlexibleYearMonth kaishiYM) {
         this.kaishiYM = kaishiYM;
     }
 
@@ -133,7 +135,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
      * 
      * @param shuryoYM 終了年月
      */
-    public void setShuryoYM(FlexibleYearMonth shuryoYM) {
+    public void setShuryoYM(@Nonnull FlexibleYearMonth shuryoYM) {
         this.shuryoYM = shuryoYM;
     }
 
@@ -142,6 +144,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
      * 
      * @return 単価
      */
+    @CheckForNull
     public Decimal getTanka() {
         return tanka;
     }
@@ -159,7 +162,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
      * このエンティティの主キーが他の{@literal DbT5033ShinsakaiIinHoshuTankaEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5033ShinsakaiIinHoshuTankaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -200,6 +203,7 @@ public class DbT5033ShinsakaiIinHoshuTankaEntity extends DbTableEntityBase<DbT50
     }
 
 // </editor-fold>
+
 
 
 
