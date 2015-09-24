@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護認定審査会委員報酬実績情報テーブルのエンティティクラスです。
  */
 public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase<DbT5603ShinsakaiIinHoshuJissekiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5603ShinsakaiIinHoshuJissekiJoho");
 
@@ -94,6 +96,8 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会委員情報
      * 
      * @return 介護認定審査会委員コード
      */
@@ -103,17 +107,19 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会委員情報
      * 
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
-    public void setShinsakaiIinCode(RString shinsakaiIinCode) {
+    public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
     }
 
     /**
      * 審査会委員報酬区分のgetメソッドです。
      * <br/>
-     * <br/>1:審査報酬、2:その他報酬
+     * <br/>Enum（DBE：審査会委員報酬区分）1:審査報酬、2:その他報酬
      * 
      * @return 審査会委員報酬区分
      */
@@ -124,11 +130,11 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     /**
      * 審査会委員報酬区分のsetメソッドです。
      * <br/>
-     * <br/>1:審査報酬、2:その他報酬
+     * <br/>Enum（DBE：審査会委員報酬区分）1:審査報酬、2:その他報酬
      * 
      * @param shinsakaiIinHoshuKubun 審査会委員報酬区分
      */
-    public void setShinsakaiIinHoshuKubun(Code shinsakaiIinHoshuKubun) {
+    public void setShinsakaiIinHoshuKubun(@Nonnull Code shinsakaiIinHoshuKubun) {
         this.shinsakaiIinHoshuKubun = shinsakaiIinHoshuKubun;
     }
 
@@ -146,7 +152,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @param shinsakaiKaisaiYMD 実施年月日
      */
-    public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
+    public void setShinsakaiKaisaiYMD(@Nonnull FlexibleDate shinsakaiKaisaiYMD) {
         this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
     }
 
@@ -164,21 +170,26 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @param remban 連番
      */
-    public void setRemban(int remban) {
+    public void setRemban(@Nonnull int remban) {
         this.remban = remban;
     }
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催結果情報
      * 
      * @return 介護認定審査会開催番号
      */
+    @CheckForNull
     public int getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催結果情報
      * 
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
@@ -191,6 +202,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査会報酬税率
      */
+    @CheckForNull
     public int getShinsakaiHoshuZeiritsu() {
         return shinsakaiHoshuZeiritsu;
     }
@@ -209,6 +221,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査報酬
      */
+    @CheckForNull
     public int getShinsakaiHoshu() {
         return shinsakaiHoshu;
     }
@@ -227,6 +240,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査その他報酬
      */
+    @CheckForNull
     public int getShinsakaiSonotaHoshu() {
         return shinsakaiSonotaHoshu;
     }
@@ -245,6 +259,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査交通費等
      */
+    @CheckForNull
     public int getShinsakaiKotsuhi() {
         return shinsakaiKotsuhi;
     }
@@ -263,6 +278,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査控除税額
      */
+    @CheckForNull
     public int getShinsakaiKojoZeigaku() {
         return shinsakaiKojoZeigaku;
     }
@@ -281,6 +297,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査報酬合計
      */
+    @CheckForNull
     public int getShinsakaiHoshuGokei() {
         return shinsakaiHoshuGokei;
     }
@@ -299,6 +316,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査報酬支払年月日
      */
+    @CheckForNull
     public FlexibleDate getHoshuShiharaiYMD() {
         return hoshuShiharaiYMD;
     }
@@ -317,6 +335,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * 
      * @return 介護認定審査報酬支払メモ
      */
+    @CheckForNull
     public RString getHoshuShiharaiMemo() {
         return hoshuShiharaiMemo;
     }
@@ -332,15 +351,20 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
 
     /**
      * 銀行振込出力フラグのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      * 
      * @return 銀行振込出力フラグ
      */
+    @CheckForNull
     public boolean getGinkoFurikomiShutsuryokuFlag() {
         return ginkoFurikomiShutsuryokuFlag;
     }
 
     /**
      * 銀行振込出力フラグのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      * 
      * @param ginkoFurikomiShutsuryokuFlag 銀行振込出力フラグ
      */
@@ -352,7 +376,7 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
      * このエンティティの主キーが他の{@literal DbT5603ShinsakaiIinHoshuJissekiJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5603ShinsakaiIinHoshuJissekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -406,5 +430,6 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     }
 
 // </editor-fold>
+
 
 }

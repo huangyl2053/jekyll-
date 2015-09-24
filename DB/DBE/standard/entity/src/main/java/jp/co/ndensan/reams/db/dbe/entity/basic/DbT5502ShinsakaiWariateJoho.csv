@@ -1,5 +1,5 @@
-﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinsakaiKaisaiNo,bpchar,RString,,,,,介護認定審査会開催番号,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催年月日,A
 shinsakaiWariateYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会割当年月日,A
 shinsakaiOrder,int2,int,,,,,介護認定審査会審査順,A

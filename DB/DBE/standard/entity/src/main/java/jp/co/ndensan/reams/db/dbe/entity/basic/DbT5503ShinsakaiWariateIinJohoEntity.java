@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護認定審査会割当委員情報テーブルのエンティティクラスです。
  */
 public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5503ShinsakaiWariateIinJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5503ShinsakaiWariateIinJoho");
 
@@ -28,7 +30,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     @PrimaryKey
     private RString shinsakaiIinCode;
     private FlexibleDate shinsakaiKaisaiYMD;
@@ -87,24 +89,30 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
      * 
      * @return 介護認定審査会開催番号
      */
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
      * 
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(@Nonnull RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会委員情報
      * 
      * @return 介護認定審査会委員コード
      */
@@ -114,10 +122,12 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会委員情報
      * 
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
-    public void setShinsakaiIinCode(RString shinsakaiIinCode) {
+    public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
     }
 
@@ -135,14 +145,14 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 
      * @param shinsakaiKaisaiYMD 介護認定審査会開催年月日
      */
-    public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
+    public void setShinsakaiKaisaiYMD(@Nonnull FlexibleDate shinsakaiKaisaiYMD) {
         this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
     }
 
     /**
      * 介護認定審査会議長区分コードのgetメソッドです。
      * <br/>
-     * <br/>0：委員、1：議長
+     * <br/>Enum（DBE：介護認定審査会議長区分コード）0：委員、1：議長
      * 
      * @return 介護認定審査会議長区分コード
      */
@@ -153,16 +163,18 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     /**
      * 介護認定審査会議長区分コードのsetメソッドです。
      * <br/>
-     * <br/>0：委員、1：議長
+     * <br/>Enum（DBE：介護認定審査会議長区分コード）0：委員、1：議長
      * 
      * @param kaigoninteiShinsakaiGichoKubunCode 介護認定審査会議長区分コード
      */
-    public void setKaigoninteiShinsakaiGichoKubunCode(Code kaigoninteiShinsakaiGichoKubunCode) {
+    public void setKaigoninteiShinsakaiGichoKubunCode(@Nonnull Code kaigoninteiShinsakaiGichoKubunCode) {
         this.kaigoninteiShinsakaiGichoKubunCode = kaigoninteiShinsakaiGichoKubunCode;
     }
 
     /**
      * 委員出席のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員出席）
      * 
      * @return 委員出席
      */
@@ -172,15 +184,19 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員出席のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員出席）
      * 
      * @param shussekiFlag 委員出席
      */
-    public void setShussekiFlag(boolean shussekiFlag) {
+    public void setShussekiFlag(@Nonnull boolean shussekiFlag) {
         this.shussekiFlag = shussekiFlag;
     }
 
     /**
      * 委員遅刻有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員遅刻有無）
      * 
      * @return 委員遅刻有無
      */
@@ -190,10 +206,12 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員遅刻有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員遅刻有無）
      * 
      * @param existChikokuFlag 委員遅刻有無
      */
-    public void setExistChikokuFlag(boolean existChikokuFlag) {
+    public void setExistChikokuFlag(@Nonnull boolean existChikokuFlag) {
         this.existChikokuFlag = existChikokuFlag;
     }
 
@@ -211,12 +229,14 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 
      * @param shussekiTime 委員出席時間
      */
-    public void setShussekiTime(RString shussekiTime) {
+    public void setShussekiTime(@Nonnull RString shussekiTime) {
         this.shussekiTime = shussekiTime;
     }
 
     /**
      * 委員早退有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員早退有無）
      * 
      * @return 委員早退有無
      */
@@ -226,10 +246,12 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 委員早退有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：委員早退有無）
      * 
      * @param existSotaiFlag 委員早退有無
      */
-    public void setExistSotaiFlag(boolean existSotaiFlag) {
+    public void setExistSotaiFlag(@Nonnull boolean existSotaiFlag) {
         this.existSotaiFlag = existSotaiFlag;
     }
 
@@ -247,7 +269,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * 
      * @param taisekiTime 委員退席時間
      */
-    public void setTaisekiTime(RString taisekiTime) {
+    public void setTaisekiTime(@Nonnull RString taisekiTime) {
         this.taisekiTime = taisekiTime;
     }
 
@@ -255,7 +277,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
      * このエンティティの主キーが他の{@literal DbT5503ShinsakaiWariateIinJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5503ShinsakaiWariateIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -263,7 +285,7 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
         if (other == null) {
             return false;
         }
-        if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
+        if (!Objects.equals(this.shinsakaiKaisaiNo, other.shinsakaiKaisaiNo)) {
             return false;
         }
         if (!Objects.equals(this.shinsakaiIinCode, other.shinsakaiIinCode)) {
@@ -298,5 +320,6 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
+
 
 }

@@ -27,7 +27,7 @@ public class ShinsakaiJizenKekkaJohoTest extends DbeTestBase {
     private static DbT5508ShinsakaiJizenKekkaJohoEntity ShinsakaiJizenKekkaJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static int 介護認定審査会開催番号;
+    private static RString 介護認定審査会開催番号;
     private static RString 介護認定審査会委員コード;
     private static int 介護認定審査会審査順;
 

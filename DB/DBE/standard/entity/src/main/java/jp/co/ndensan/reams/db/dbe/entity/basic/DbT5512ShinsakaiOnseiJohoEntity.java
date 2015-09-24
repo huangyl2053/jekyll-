@@ -8,12 +8,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護認定審査会音声情報テーブルのエンティティクラスです。
  */
 public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512ShinsakaiOnseiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5512ShinsakaiOnseiJoho");
 
@@ -26,7 +28,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     @PrimaryKey
     private int renban;
     private byte[] shinsakaiOnseiFile;
@@ -79,19 +81,23 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
      * 
      * @return 介護認定審査会開催番号
      */
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
      * 
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(@Nonnull RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
@@ -109,7 +115,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
      * 
      * @param renban 連番
      */
-    public void setRenban(int renban) {
+    public void setRenban(@Nonnull int renban) {
         this.renban = renban;
     }
 
@@ -118,6 +124,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
      * 
      * @return 審査会音声ファイル
      */
+    @CheckForNull
     public byte[] getShinsakaiOnseiFile() {
         return shinsakaiOnseiFile;
     }
@@ -135,7 +142,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
      * このエンティティの主キーが他の{@literal DbT5512ShinsakaiOnseiJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5512ShinsakaiOnseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -143,7 +150,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
         if (other == null) {
             return false;
         }
-        if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
+        if (!Objects.equals(this.shinsakaiKaisaiNo, other.shinsakaiKaisaiNo)) {
             return false;
         }
         if (this.renban != other.renban) {
@@ -172,5 +179,6 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
     }
 
 // </editor-fold>
+
 
 }

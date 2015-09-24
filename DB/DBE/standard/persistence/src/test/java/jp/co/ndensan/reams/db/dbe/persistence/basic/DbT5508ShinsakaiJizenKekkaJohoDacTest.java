@@ -195,7 +195,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoDacTest extends DbeTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                int 介護認定審査会開催番号,
+                RString 介護認定審査会開催番号,
                 RString 介護認定審査会委員コード,
                 int 介護認定審査会審査順) {
             DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();

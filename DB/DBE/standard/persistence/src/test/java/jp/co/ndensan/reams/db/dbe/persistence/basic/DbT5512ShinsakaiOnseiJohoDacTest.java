@@ -170,7 +170,7 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                int 介護認定審査会開催番号,
+                RString 介護認定審査会開催番号,
                 int 連番) {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
             entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);

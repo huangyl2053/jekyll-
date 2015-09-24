@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiOnseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5512ShinsakaiOnseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -47,7 +48,7 @@ public class ShinsakaiOnseiJohoManager {
      */
     @Transaction
     public ShinsakaiOnseiJoho get介護認定審査会音声情報(
-            int 介護認定審査会開催番号,
+            RString 介護認定審査会開催番号,
             int 連番) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));

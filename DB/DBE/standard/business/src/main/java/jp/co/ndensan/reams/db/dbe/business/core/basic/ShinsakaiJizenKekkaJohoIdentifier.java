@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class ShinsakaiJizenKekkaJohoIdentifier implements Serializable {
 
-    private final int 介護認定審査会開催番号;
+    private final RString 介護認定審査会開催番号;
     private final RString 介護認定審査会委員コード;
     private final int 介護認定審査会審査順;
 
@@ -26,7 +26,7 @@ public class ShinsakaiJizenKekkaJohoIdentifier implements Serializable {
      * @param 介護認定審査会委員コード 介護認定審査会委員コード
      * @param 介護認定審査会審査順 介護認定審査会審査順
      */
-    public ShinsakaiJizenKekkaJohoIdentifier(int 介護認定審査会開催番号,
+    public ShinsakaiJizenKekkaJohoIdentifier(RString 介護認定審査会開催番号,
             RString 介護認定審査会委員コード,
             int 介護認定審査会審査順) {
         this.介護認定審査会開催番号 = 介護認定審査会開催番号;

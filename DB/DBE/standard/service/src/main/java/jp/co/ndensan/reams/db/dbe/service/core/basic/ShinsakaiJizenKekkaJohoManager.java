@@ -49,7 +49,7 @@ public class ShinsakaiJizenKekkaJohoManager {
      */
     @Transaction
     public ShinsakaiJizenKekkaJoho get介護認定審査会事前審査結果情報(
-            int 介護認定審査会開催番号,
+            RString 介護認定審査会開催番号,
             RString 介護認定審査会委員コード,
             int 介護認定審査会審査順) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
