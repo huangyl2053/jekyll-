@@ -3,9 +3,10 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 主治医情報（子）テーブルの項目定義クラスです。
+ * 申請届出情報テーブルの項目定義クラスです。
+ * <br/> 申請届出情報を一元管理する
  */
-public enum DbT4912ShujiiJoho implements IColumnDefinition {
+public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -40,67 +41,54 @@ public enum DbT4912ShujiiJoho implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 市町村コード
+     * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
-    shichosonCode(2147483647, 0),
+    shinseishoKanriNo(2147483647, 0),
     /**
-     * 主治医医療機関コード
-     * <br/>主治医医療機関情報
+     * 申請届出代行区分コード
+     * <br/>Enum（DBD：申請届出代行区分コード）本人・家族・委任者・代行事業者等
      */
-    shujiiIryokikanCode(10, 0),
+    shinseiTodokedeDaikoKubunCode(2147483647, 0),
     /**
-     * 主治医コード
-     * <br/>主治医コード
+     * 申請届出者氏名
      */
-    shujiiCode(8, 0),
+    shinseiTodokedeshaShimei(512, 0),
     /**
-     * 主治医氏名
+     * 申請届出者氏名カナ
      */
-    shujiiName(512, 0),
+    shinseiTodokedeshaKanaShimei(512, 0),
     /**
-     * 主治医カナ
+     * 申請届出者続柄コード
+     * <br/>Enum（DBD：続柄コード）
      */
-    shujiiKana(2147483647, 0),
+    shinseiTodokedeshaTsuzukigaraCode(2, 0),
     /**
-     * 性別
-     * <br/>Enum（DBZ：性別コード）
+     * 申請届出代行事業者番号
      */
-    seibetsu(2147483647, 0),
+    shinseiTodokedeDaikoJigyoshaNo(2147483647, 0),
     /**
-     * 郵便番号
+     * 事業者区分
+     * <br/>Enum（DBD：事業者区分）
      */
-    yubinNo(2147483647, 0),
+    jigyoshaKubun(2, 0),
     /**
-     * 住所
+     * 申請届出者郵便番号
      */
-    jusho(512, 0),
+    shinseiTodokedeshaYubinNo(2147483647, 0),
     /**
-     * 電話番号
+     * 申請届出者住所
      */
-    telNo(2147483647, 0),
+    shinseiTodokedeshaJusho(512, 0),
     /**
-     * FAX番号
+     * 申請届出者電話番号
      */
-    faxNo(2147483647, 0),
-    /**
-     * 診療科名称
-     */
-    shinryokaName(64, 0),
-    /**
-     * 指定医フラグ
-     * <br/>Enum（DBE：指定医フラグ）True：指定医になれる、False：なれない
-     */
-    shiteiiFlag(1, 0),
-    /**
-     * 状況フラグ
-     * <br/>True：有効　False：無効
-     */
-    jokyoFlag(1, 0);
+    shinseiTodokedeshaTelNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT4912ShujiiJoho(int maxLength, int scale) {
+    private DbT5120ShinseitodokedeJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 
@@ -19,7 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCo
  * 調査員情報（子）テーブルのエンティティクラスです。
  */
 public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable, IChosainJohoEntity {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4913ChosainJoho");
@@ -48,6 +50,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     private AtenaJusho jusho;
     private TelNo telNo;
     private TelNo faxNo;
+    private RString shozokuKikanName;
     private boolean jokyoFlag;
 
     /**
@@ -109,12 +112,14 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 認定調査委託先コードのgetメソッドです。
+     * <br/>
+     * <br/>認定調査委託先情報
      *
      * @return 認定調査委託先コード
      */
@@ -124,10 +129,12 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
 
     /**
      * 認定調査委託先コードのsetメソッドです。
+     * <br/>
+     * <br/>認定調査委託先情報
      *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+    public void setNinteichosaItakusakiCode(@Nonnull ChosaItakusakiCode ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
@@ -145,7 +152,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param ninteiChosainNo 認定調査員コード
      */
-    public void setNinteiChosainNo(ChosainCode ninteiChosainNo) {
+    public void setNinteiChosainNo(@Nonnull ChosainCode ninteiChosainNo) {
         this.ninteiChosainNo = ninteiChosainNo;
     }
 
@@ -163,7 +170,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param chosainShimei 調査員氏名
      */
-    public void setChosainShimei(RString chosainShimei) {
+    public void setChosainShimei(@Nonnull RString chosainShimei) {
         this.chosainShimei = chosainShimei;
     }
 
@@ -172,6 +179,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 調査員氏名カナ
      */
+    @CheckForNull
     public RString getChosainKanaShimei() {
         return chosainKanaShimei;
     }
@@ -187,6 +195,8 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
 
     /**
      * 性別のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
      *
      * @return 性別
      */
@@ -196,24 +206,31 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
 
     /**
      * 性別のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
      *
      * @param seibetsu 性別
      */
-    public void setSeibetsu(RString seibetsu) {
+    public void setSeibetsu(@Nonnull RString seibetsu) {
         this.seibetsu = seibetsu;
     }
 
     /**
      * 調査員資格のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：資格コード）
      *
      * @return 調査員資格
      */
+    @CheckForNull
     public RString getChosainShikaku() {
         return chosainShikaku;
     }
 
     /**
      * 調査員資格のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：資格コード）
      *
      * @param chosainShikaku 調査員資格
      */
@@ -223,15 +240,20 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
 
     /**
      * 地区コードのgetメソッドです。
+     * <br/>
+     * <br/>Code（DBE：5002）
      *
      * @return 地区コード
      */
+    @CheckForNull
     public RString getChikuCode() {
         return chikuCode;
     }
 
     /**
      * 地区コードのsetメソッドです。
+     * <br/>
+     * <br/>Code（DBE：5002）
      *
      * @param chikuCode 地区コード
      */
@@ -244,6 +266,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 調査可能人数／月
      */
+    @CheckForNull
     public int getChosaKanoNinzuPerMonth() {
         return chosaKanoNinzuPerMonth;
     }
@@ -262,6 +285,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
@@ -280,6 +304,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 住所
      */
+    @CheckForNull
     public AtenaJusho getJusho() {
         return jusho;
     }
@@ -298,6 +323,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
@@ -316,6 +342,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return FAX番号
      */
+    @CheckForNull
     public TelNo getFaxNo() {
         return faxNo;
     }
@@ -330,7 +357,28 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     }
 
     /**
+     * 所属機関名称のgetメソッドです。
+     *
+     * @return 所属機関名称
+     */
+    @CheckForNull
+    public RString getShozokuKikanName() {
+        return shozokuKikanName;
+    }
+
+    /**
+     * 所属機関名称のsetメソッドです。
+     *
+     * @param shozokuKikanName 所属機関名称
+     */
+    public void setShozokuKikanName(RString shozokuKikanName) {
+        this.shozokuKikanName = shozokuKikanName;
+    }
+
+    /**
      * 状況フラグのgetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @return 状況フラグ
      */
@@ -340,10 +388,12 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
 
     /**
      * 状況フラグのsetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @param jokyoFlag 状況フラグ
      */
-    public void setJokyoFlag(boolean jokyoFlag) {
+    public void setJokyoFlag(@Nonnull boolean jokyoFlag) {
         this.jokyoFlag = jokyoFlag;
     }
 
@@ -351,7 +401,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * このエンティティの主キーが他の{@literal DbT4913ChosainJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -389,6 +439,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
         this.jusho = entity.jusho;
         this.telNo = entity.telNo;
         this.faxNo = entity.faxNo;
+        this.shozokuKikanName = entity.shozokuKikanName;
         this.jokyoFlag = entity.jokyoFlag;
     }
 
@@ -399,7 +450,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, ninteiChosainNo, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, jokyoFlag);
+        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, ninteiChosainNo, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, shozokuKikanName, jokyoFlag);
     }
 
 // </editor-fold>

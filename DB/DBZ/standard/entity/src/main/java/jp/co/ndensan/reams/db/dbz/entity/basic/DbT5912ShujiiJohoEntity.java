@@ -1,7 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -12,16 +10,21 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 
 /**
  * 主治医情報テーブルのエンティティクラスです。
  */
 public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJohoEntity> implements IDbAccessable, IShujiiJohoEntity {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5912ShujiiJoho");
@@ -42,6 +45,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     private ShujiiCode shujiiCode;
     private AtenaMeisho shujiiName;
     private AtenaKanaMeisho shujiiKana;
+    private Code seibetsu;
     private YubinNo yubinNo;
     private AtenaJusho jusho;
     private TelNo telNo;
@@ -109,12 +113,14 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 主治医医療機関コードのgetメソッドです。
+     * <br/>
+     * <br/>主治医医療機関情報
      *
      * @return 主治医医療機関コード
      */
@@ -124,10 +130,12 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
 
     /**
      * 主治医医療機関コードのsetメソッドです。
+     * <br/>
+     * <br/>主治医医療機関情報
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -149,7 +157,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(ShujiiCode shujiiCode) {
+    public void setShujiiCode(@Nonnull ShujiiCode shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
@@ -167,7 +175,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param shujiiName 主治医氏名
      */
-    public void setShujiiName(AtenaMeisho shujiiName) {
+    public void setShujiiName(@Nonnull AtenaMeisho shujiiName) {
         this.shujiiName = shujiiName;
     }
 
@@ -176,6 +184,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 主治医カナ
      */
+    @CheckForNull
     public AtenaKanaMeisho getShujiiKana() {
         return shujiiKana;
     }
@@ -190,10 +199,34 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     }
 
     /**
+     * 性別のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
+     *
+     * @return 性別
+     */
+    @CheckForNull
+    public Code getSeibetsu() {
+        return seibetsu;
+    }
+
+    /**
+     * 性別のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
+     *
+     * @param seibetsu 性別
+     */
+    public void setSeibetsu(Code seibetsu) {
+        this.seibetsu = seibetsu;
+    }
+
+    /**
      * 郵便番号のgetメソッドです。
      *
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
@@ -212,6 +245,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 住所
      */
+    @CheckForNull
     public AtenaJusho getJusho() {
         return jusho;
     }
@@ -230,6 +264,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
@@ -248,6 +283,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return FAX番号
      */
+    @CheckForNull
     public TelNo getFaxNo() {
         return faxNo;
     }
@@ -266,6 +302,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @return 診療科名称
      */
+    @CheckForNull
     public RString getShinryokaName() {
         return shinryokaName;
     }
@@ -282,10 +319,11 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     /**
      * 指定医フラグのgetメソッドです。
      * <br/>
-     * <br/>True：指定医になれる、False：なれない
+     * <br/>Enum（DBE：指定医フラグ）True：指定医になれる、False：なれない
      *
      * @return 指定医フラグ
      */
+    @CheckForNull
     public boolean getShiteiiFlag() {
         return shiteiiFlag;
     }
@@ -293,7 +331,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     /**
      * 指定医フラグのsetメソッドです。
      * <br/>
-     * <br/>True：指定医になれる、False：なれない
+     * <br/>Enum（DBE：指定医フラグ）True：指定医になれる、False：なれない
      *
      * @param shiteiiFlag 指定医フラグ
      */
@@ -303,6 +341,8 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
 
     /**
      * 状況フラグのgetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @return 状況フラグ
      */
@@ -312,10 +352,12 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
 
     /**
      * 状況フラグのsetメソッドです。
+     * <br/>
+     * <br/>True：有効　False：無効
      *
      * @param jokyoFlag 状況フラグ
      */
-    public void setJokyoFlag(boolean jokyoFlag) {
+    public void setJokyoFlag(@Nonnull boolean jokyoFlag) {
         this.jokyoFlag = jokyoFlag;
     }
 
@@ -323,7 +365,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      * このエンティティの主キーが他の{@literal DbT5912ShujiiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5912ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -353,6 +395,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
         this.shujiiCode = entity.shujiiCode;
         this.shujiiName = entity.shujiiName;
         this.shujiiKana = entity.shujiiKana;
+        this.seibetsu = entity.seibetsu;
         this.yubinNo = entity.yubinNo;
         this.jusho = entity.jusho;
         this.telNo = entity.telNo;
@@ -369,7 +412,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shujiiIryokikanCode, shujiiCode, shujiiName, shujiiKana, yubinNo, jusho, telNo, faxNo, shinryokaName, shiteiiFlag, jokyoFlag);
+        return super.toMd5(shichosonCode, shujiiIryokikanCode, shujiiCode, shujiiName, shujiiKana, seibetsu, yubinNo, jusho, telNo, faxNo, shinryokaName, shiteiiFlag, jokyoFlag);
     }
 
 // </editor-fold>

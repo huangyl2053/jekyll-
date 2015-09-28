@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 調査員情報テーブルの項目定義クラスです。
  */
 public enum DbT5913ChosainJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,6 +45,7 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
     shichosonCode(2147483647, 0),
     /**
      * 認定調査委託先コード
+     * <br/>認定調査委託先情報
      */
     ninteichosaItakusakiCode(10, 0),
     /**
@@ -61,14 +62,17 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
     chosainKanaShimei(80, 0),
     /**
      * 性別
+     * <br/>Enum（DBZ：性別コード）
      */
     seibetsu(1, 0),
     /**
      * 調査員資格
+     * <br/>Enum（DBD：資格コード）
      */
     chosainShikaku(2, 0),
     /**
      * 地区コード
+     * <br/>Code（DBE：5002）
      */
     chikuCode(8, 0),
     /**
@@ -92,7 +96,12 @@ public enum DbT5913ChosainJoho implements IColumnDefinition {
      */
     faxNo(2147483647, 0),
     /**
+     * 所属機関名称
+     */
+    shozokuKikanName(512, 0),
+    /**
      * 状況フラグ
+     * <br/>True：有効　False：無効
      */
     jokyoFlag(1, 0);
 
