@@ -102,20 +102,6 @@ var DBZ;
                     this.controls.NinteiShinseiRiyu().readOnly = true;
                 };
 
-                InputType.prototype.TokuteiShippeiNashiMode = function () {
-                    this.controls.radShinseishoKubun().readOnly = false;
-                    this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = false;
-                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
-                    this.controls.ddlShinseiKubunHorei().readOnly = false;
-                    this.controls.chkKyuSochisha().readOnly = false;
-                    this.controls.ddlHihokenshaKubun().readOnly = false;
-                    this.controls.chkShikakuShutokuMae().readOnly = false;
-                    this.controls.ddlTokuteiShippei().readOnly = true;
-
-                    this.controls.ServiceSakujo().displayNone = true;
-                    this.controls.NinteiShinseiRiyu().readOnly = false;
-                };
                 InputType.prototype.JizenShinseiNashiMode = function () {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
@@ -171,6 +157,36 @@ var DBZ;
 
                     this.controls.ServiceSakujo().displayNone = true;
                     this.controls.NinteiShinseiRiyu().readOnly = true;
+                };
+
+                InputType.prototype.RirekiTsuikaMode = function () {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
+                    this.controls.ddlShisho().readOnly = false;
+
+                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+                };
+                InputType.prototype.RirekiShuseiMode = function () {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = true;
+
+                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
                 };
                 return InputType;
             })();

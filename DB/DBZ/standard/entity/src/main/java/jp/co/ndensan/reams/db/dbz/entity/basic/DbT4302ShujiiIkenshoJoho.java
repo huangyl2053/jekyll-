@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定主治医意見書情報テーブルの項目定義クラスです。
  */
 public enum DbT4302ShujiiIkenshoJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -170,6 +170,55 @@ public enum DbT4302ShujiiIkenshoJoho implements IColumnDefinition {
      * その他受診科名
      */
     sonotaJushinKaShimei(40, 0),
+    /**
+     * 意見書・診断名1
+     */
+    shindamMei1(40, 0),
+    /**
+     * 意見書・発症年月日1
+     */
+    hasshoYMD1(2147483647, 0),
+    /**
+     * 意見書・診断名2
+     */
+    shindamMei2(40, 0),
+    /**
+     * 意見書・発症年月日2
+     */
+    hasshoYMD2(2147483647, 0),
+    /**
+     * 意見書・診断名3
+     */
+    shindamMei3(40, 0),
+    /**
+     * 意見書・発症年月日3
+     */
+    hasshoYMD3(2147483647, 0),
+    /**
+     * 意見書・症状としての安定性
+     * <br/>Enum（DBE：意見書・症状としての安定性）
+     */
+    anteisei(1, 0),
+    /**
+     * 意見書・症状としての安定性　不安定状況
+     */
+    fuanteiJokyo(2147483647, 0),
+    /**
+     * 治療内容
+     */
+    chiryoNaiyo(2147483647, 0),
+    /**
+     * 特記事項
+     */
+    tokkiJiko(2147483647, 0),
+    /**
+     * 特記事項イメージ共有ファイルID
+     */
+    tokkiJikoImageSharedFileId(29, 0),
+    /**
+     * 認定審査会後の二次判定結果の連絡確認フラグ
+     */
+    nijiHanteiKekkaRenrakuFlag(1, 0),
     /**
      * 意見書メモ
      * <br/>広域対応

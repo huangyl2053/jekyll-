@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定結果情報テーブルの項目定義クラスです。
  */
 public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -49,7 +49,7 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
     nijiHanteiYMD(2147483647, 0),
     /**
      * 二次判定要介護状態区分コード
-     * <br/>Enum（DBZ：要介護状態区分コード09）
+     * <br/>Enum（DBZ：要介護状態区分コードxx）
      */
     nijiHanteiYokaigoJotaiKubunCode(2147483647, 0),
     /**
@@ -64,6 +64,10 @@ public enum DbT5102NinteiKekkaJoho implements IColumnDefinition {
      * 二次判定認定有効終了年月日
      */
     nijiHanteiNinteiYukoShuryoYMD(2147483647, 0),
+    /**
+     * 介護認定審査会資料作成年月日
+     */
+    shinsakaiShiryoSakuseiYMD(2147483647, 0),
     /**
      * 介護認定審査会開催番号
      * <br/>介護認定審査会開催予定情報

@@ -13,9 +13,37 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new NinteiChosaJokyo.PublicProperties(this.fieldName);
             };
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
             return ModeController;
         })();
         NinteiChosaJokyo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.shokai = function () {
+                    this.controls.NinteiChosaJokyo().readOnly = true;
+                    this.controls.btnChosainGuide().disabled = true;
+                    this.controls.btnIryoKikanGuide().disabled = true;
+                    this.controls.btnItakusakiGuide().disabled = true;
+                    this.controls.btnShujiiGuide().disabled = true;
+                };
+                DisplayType.prototype.input = function () {
+                    this.controls.NinteiChosaJokyo().readOnly = false;
+                    this.controls.btnChosainGuide().disabled = false;
+                    this.controls.btnIryoKikanGuide().disabled = false;
+                    this.controls.btnItakusakiGuide().disabled = false;
+                    this.controls.btnShujiiGuide().disabled = false;
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(NinteiChosaJokyo.Modes || (NinteiChosaJokyo.Modes = {}));
+        var Modes = NinteiChosaJokyo.Modes;
     })(DBZ.NinteiChosaJokyo || (DBZ.NinteiChosaJokyo = {}));
     var NinteiChosaJokyo = DBZ.NinteiChosaJokyo;
 })(DBZ || (DBZ = {}));

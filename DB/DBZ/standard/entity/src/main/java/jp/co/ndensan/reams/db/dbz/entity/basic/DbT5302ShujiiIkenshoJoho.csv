@@ -1,4 +1,4 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 ikenshoIraiRirekiNo,int2,int,,,,,主治医意見書作成依頼履歴番号,A
 koroshoIfShikibetsuCode,bpchar,RString,,,,,厚労省IF識別コード,A
 ikenshoIraiKubun,bpchar,RString,,,,,主治医意見書依頼区分,A
@@ -25,4 +25,16 @@ existShikaJushinFlag,bool,boolean,,,,,歯科受診の有無,A
 existGankaJushinFlag,bool,boolean,,,,,眼科の有無,A
 existSonotaJushinkaFlag,bool,boolean,,,,,その他受診科の有無,A
 sonotaJushinKaShimei,varchar,RString,,,,,その他受診科名,A
+shindamMei1,varchar,RString,,,,,意見書・診断名1,A
+hasshoYMD1,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日1,A
+shindamMei2,varchar,RString,,,,,意見書・診断名2,A
+hasshoYMD2,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日2,A
+shindamMei3,varchar,RString,,,,,意見書・診断名3,A
+hasshoYMD3,UDD015YMD,FlexibleDate,,,,,意見書・発症年月日3,A
+anteisei,bpchar,RString,,,,,意見書・症状としての安定性,A
+fuanteiJokyo,text,RString,,,,,意見書・症状としての安定性　不安定状況,A
+chiryoNaiyo,text,RString,,,,,治療内容,A
+tokkiJiko,text,RString,,,,,特記事項,A
+tokkiJikoImageSharedFileId,timestamp,RDateTime,,,,,特記事項イメージ共有ファイルID,A
+nijiHanteiKekkaRenrakuFlag,bool,boolean,,,,,認定審査会後の二次判定結果の連絡確認フラグ,A
 ikenshoMemo,text,RString,,,,,意見書メモ,A

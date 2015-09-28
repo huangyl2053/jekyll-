@@ -1,0 +1,178 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;rirekishusei&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;RirekiShusei&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;SerilizedBusiness_Zenkai&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnZenkaiJohoSerialized&quot;},{&quot;key&quot;:&quot;SerilizedBusiness_Jikai&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnJikaiJohoSerialized&quot;},{&quot;key&quot;:&quot;SerilizedBusiness_Konkai&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnKonkaiJohoSerialized&quot;},{&quot;key&quot;:&quot;DeleteKey&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnDeleteKey&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onOkClose&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onCancelClose&quot;,&quot;heightForDialog&quot;:&quot;XL&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.RirekiShusei"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="RirekiShusei" style="width: 1205px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;RirekiShusei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1205px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;RirekiShusei&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;RirekiShusei&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onOkClose&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onCancelClose&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnShinseishoKanriNo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnDisplayModeKey&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnKonkaiJohoSerialized&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnZenkaiJohoSerialized&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnJikaiJohoSerialized&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnDeleteKey&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="RirekiShusei_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete" id="RirekiShusei_panel_body_area"><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdKaigoNinteiShinseiKihonJohoInput" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdKaigoNinteiShinseiKihonJohoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdKaigoNinteiShinseiKihonJohoInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KaigoNinteiShinseiKihonJohoInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoNinteiShinseiKihonJohoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[{&quot;modeKey&quot;:&quot;InputType&quot;,&quot;modeValue&quot;:&quot;ServiceNomalInputMode&quot;}],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoNinteiShinseiKihonJohoInput"></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdNinteiShinseiTodokedesha" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdNinteiShinseiTodokedesha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdNinteiShinseiTodokedesha&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;NinteiShinseiTodokedesha&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiShinseiTodokedesha&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onChanged_ddlTodokedeDaikoKubun&quot;}],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.NinteiShinseiTodokedesha"></div><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow UzCompositeChild" id="ShijiiIryokikanAndShijiiInput" style="margin: 0px; width: 1200px; position: relative;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShijiiIryokikanAndShijiiInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1200px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ShijiiIryokikanAndShijiiInput&quot;,&quot;title&quot;:&quot;主治医医療機関&主治医&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;ui-accordion-WestAccordion-header-0&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ShijiiIryokikanAndShijiiInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">主治医医療機関&主治医</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShijiiIryokikanAndShijiiInput_panel_body_area"><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdShujiiIryokikanAndShujiiInput" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShujiiIryokikanAndShujiiInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdShujiiIryokikanAndShujiiInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;shujiiIryokikanandshujiiinput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShujiiIryokikanAndShujiiInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[{&quot;modeKey&quot;:&quot;ShoriType&quot;,&quot;modeValue&quot;:&quot;InputMode&quot;}],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShujiiIryokikanAndShujiiInput"></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow UzCompositeChild" id="ChsaItakusakiAndChosainInput" style="margin: 0px; width: 1200px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChsaItakusakiAndChosainInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1200px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ChsaItakusakiAndChosainInput&quot;,&quot;title&quot;:&quot;認定調査委託先&調査員&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;ui-accordion-WestAccordion-header-0&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ChsaItakusakiAndChosainInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">認定調査委託先&調査員</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ChsaItakusakiAndChosainInput_panel_body_area"><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdChosaItakusakiAndChosainInput" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdChosaItakusakiAndChosainInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdChosaItakusakiAndChosainInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;chosaitakusakiandchosaininput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiAndChosainInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ChosaItakusakiAndChosainInput"></div></div></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdNinteiJohoInput" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdNinteiJohoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdNinteiJohoInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;NinteiInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;onBeforeClick_btnValidate&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.NinteiInput"></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdZenkaiNinteiKekka" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdZenkaiNinteiKekka&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdZenkaiNinteiKekka&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ZenkaiNinteiKekkaJoho"></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdShinseiSonotaJohoInput" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShinseiSonotaJohoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdShinseiSonotaJohoInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[{&quot;modeKey&quot;:&quot;ShoriType&quot;,&quot;modeValue&quot;:&quot;NinteiMode&quot;}],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShinseiSonotaJohoInput"></div><button class="UzButtonDialog JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat Width-S UzCompositeChild" id="btnChosaJokyo" style="opacity: 0.8;" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnChosaJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;btnChosaJokyo&quot;,&quot;text&quot;:&quot;調査状況&quot;,&quot;displayChildDivName&quot;:&quot;DBZ.NinteiChosaJokyo&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;DisplayModeKey&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnDisplayModeKey&quot;},{&quot;key&quot;:&quot;SerilizedBusiness_Konkai&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnKonkaiJohoSerialized&quot;},{&quot;key&quot;:&quot;SerilizedBusiness_Zenkai&quot;,&quot;controlName&quot;:&quot;RirekiShusei.hdnZenkaiJohoSerialized&quot;}]}"><span>調査状況</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKakutei" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKakutei&quot;,&quot;onClick&quot;:&quot;onOkClose&quot;,&quot;text&quot;:&quot;確定&quot;}"><span>確定</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnCancel" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnCancel&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnCancel&quot;,&quot;onClick&quot;:&quot;onCancelClose&quot;,&quot;text&quot;:&quot;取消&quot;}"><span>取消</span></button></div></div>        
+     
+   
+   
+       
+         
+   
+   
+     
+   
+     
+     
+         
+       <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['RIREKISHUSEI'] = {};
+DBZ['RIREKISHUSEI'].RirekiShuseiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_RirekiShusei').getProperty();parameter0.ccdKaigoNinteiShinseiKihonJohoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdKaigoNinteiShinseiKihonJohoInput').getPostParameter();parameter0.ccdNinteiShinseiTodokedesha = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdNinteiShinseiTodokedesha').getPostParameter();parameter0.ShijiiIryokikanAndShijiiInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShijiiIryokikanAndShijiiInput').getProperty();parameter0.ShijiiIryokikanAndShijiiInput.ccdShujiiIryokikanAndShujiiInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdShujiiIryokikanAndShujiiInput').getPostParameter();parameter0.ChsaItakusakiAndChosainInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChsaItakusakiAndChosainInput').getProperty();parameter0.ChsaItakusakiAndChosainInput.ccdChosaItakusakiAndChosainInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdChosaItakusakiAndChosainInput').getPostParameter();parameter0.ccdNinteiJohoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdNinteiJohoInput').getPostParameter();parameter0.ccdZenkaiNinteiKekka = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdZenkaiNinteiKekka').getPostParameter();parameter0.ccdShinseiSonotaJohoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdShinseiSonotaJohoInput').getPostParameter();parameter0.btnChosaJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnChosaJokyo').getProperty();parameter0.btnKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakutei').getProperty();parameter0.btnCancel = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnCancel').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (RirekiShusei) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onOkClose = function () {
+                return "onOkClose";
+            };
+
+            Events.onCancelClose = function () {
+                return "onCancelClose";
+            };
+            return Events;
+        })();
+        RirekiShusei.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RirekiShusei";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.RirekiShusei.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.RirekiShusei.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.RirekiShusei = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdKaigoNinteiShinseiKihonJohoInput = function () {
+                return new DBZ.KaigoNinteiShinseiKihonJohoInput.ModeController(this.convFiledName("ccdKaigoNinteiShinseiKihonJohoInput"));
+            };
+
+            Controls.prototype.ccdNinteiShinseiTodokedesha = function () {
+                return new DBZ.NinteiShinseiTodokedesha.ModeController(this.convFiledName("ccdNinteiShinseiTodokedesha"));
+            };
+
+            Controls.prototype.ShijiiIryokikanAndShijiiInput = function () {
+                return new UZA.Panel(this.convFiledName("ShijiiIryokikanAndShijiiInput"));
+            };
+
+            Controls.prototype.ccdShujiiIryokikanAndShujiiInput = function () {
+                return new DBZ.ShujiiIryokikanAndShujiiInput.ModeController(this.convFiledName("ccdShujiiIryokikanAndShujiiInput"));
+            };
+
+            Controls.prototype.ChsaItakusakiAndChosainInput = function () {
+                return new UZA.Panel(this.convFiledName("ChsaItakusakiAndChosainInput"));
+            };
+
+            Controls.prototype.ccdChosaItakusakiAndChosainInput = function () {
+                return new DBZ.ChosaItakusakiAndChosainInput.ModeController(this.convFiledName("ccdChosaItakusakiAndChosainInput"));
+            };
+
+            Controls.prototype.ccdNinteiJohoInput = function () {
+                return new DBZ.NinteiInput.ModeController(this.convFiledName("ccdNinteiJohoInput"));
+            };
+
+            Controls.prototype.ccdZenkaiNinteiKekka = function () {
+                return new DBZ.ZenkaiNinteiKekkaJoho.ModeController(this.convFiledName("ccdZenkaiNinteiKekka"));
+            };
+
+            Controls.prototype.ccdShinseiSonotaJohoInput = function () {
+                return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
+            };
+
+            Controls.prototype.btnChosaJokyo = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosaJokyo"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+            return Controls;
+        })();
+        RirekiShusei.Controls = Controls;
+    })(DBZ.RirekiShusei || (DBZ.RirekiShusei = {}));
+    var RirekiShusei = DBZ.RirekiShusei;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (RirekiShusei) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RirekiShusei.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new RirekiShusei.PublicProperties(this.fieldName);
+            };
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
+            return ModeController;
+        })();
+        RirekiShusei.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.tsuika = function () {
+                };
+                DisplayType.prototype.sakujo = function () {
+                };
+                DisplayType.prototype.sakujoShusei = function () {
+                };
+                DisplayType.prototype.torikeshiTsuika = function () {
+                };
+                DisplayType.prototype.torikeshiShusei = function () {
+                };
+                DisplayType.prototype.ninteiShusei = function () {
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(RirekiShusei.Modes || (RirekiShusei.Modes = {}));
+        var Modes = RirekiShusei.Modes;
+    })(DBZ.RirekiShusei || (DBZ.RirekiShusei = {}));
+    var RirekiShusei = DBZ.RirekiShusei;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (RirekiShusei) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RirekiShusei.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RirekiShusei.PublicProperties = PublicProperties;
+    })(DBZ.RirekiShusei || (DBZ.RirekiShusei = {}));
+    var RirekiShusei = DBZ.RirekiShusei;
+})(DBZ || (DBZ = {}));
+</script></div>
