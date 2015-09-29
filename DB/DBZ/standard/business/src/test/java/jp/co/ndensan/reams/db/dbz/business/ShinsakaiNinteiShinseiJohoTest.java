@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -11,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -287,11 +287,6 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
         }
 
         @Test
-        public void 戻り値のみなし要介護区分コードは_設定した値と同じみなし要介護区分コードを返す() {
-            assertThat(sut.getみなし要介護区分コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_みなし要介護区分コード));
-        }
-
-        @Test
         public void 戻り値の認定延期通知発行しないことに対する同意有無は_設定した値と同じ認定延期通知発行しないことに対する同意有無を返す() {
             assertThat(sut.is認定延期通知発行しないことに対する同意有無(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_認定延期通知発行しないことに対する同意有無));
         }
@@ -558,7 +553,7 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setSeibetsuで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setSeibetsu(new SeibetsuCode(new RString("1"))).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setSeibetsu(new Code("1")).build();
             assertThat(result.get性別().value(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_性別.value()));
         }
 
@@ -761,12 +756,6 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
         }
 
         @Test
-        public void setMinashiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setMinashiCode(new Code("1")).build();
-            assertThat(result.getみなし要介護区分コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_みなし要介護区分コード));
-        }
-
-        @Test
         public void setEnkitsuchiNashiDoiFlagで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
             ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setEnkitsuchiNashiDoiFlag(false).build();
             assertThat(result.is認定延期通知発行しないことに対する同意有無(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_認定延期通知発行しないことに対する同意有無));
@@ -780,7 +769,7 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setNyushoShisetsuCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNyushoShisetsuCode(new RString("0000000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNyushoShisetsuCode(new JigyoshaNo("0000000001")).build();
             assertThat(result.get入所施設コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_入所施設コード));
         }
 
@@ -864,13 +853,13 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setEnkitsuchiHakkoYMDで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setEnkitsuchiHakkoYMD(new FlexibleDate("20150110")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setEnkiTsuchiHakkoYMD(new FlexibleDate("20150110")).build();
             assertThat(result.get延期通知発行年月日(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_延期通知発行年月日));
         }
 
         @Test
         public void setEnkitsuchiHakkoKaisuで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setEnkitsuchiHakkoKaisu(1).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setEnkiTsuchiHakkoKaisu(1).build();
             assertThat(result.get延期通知発行回数(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_延期通知発行回数));
         }
 

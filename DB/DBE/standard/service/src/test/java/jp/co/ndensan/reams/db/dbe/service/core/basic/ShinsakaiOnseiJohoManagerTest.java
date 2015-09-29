@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.DbT5512ShinsakaiOnseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -45,8 +46,8 @@ public class ShinsakaiOnseiJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(int.class), any(int.class))).thenReturn(null);
-            int 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            when(dac.selectByKey(any(RString.class), any(int.class))).thenReturn(null);
+            RString 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
             int 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
             ShinsakaiOnseiJoho result = sut.get介護認定審査会音声情報(主キー1, 主キー2);
 
@@ -56,8 +57,8 @@ public class ShinsakaiOnseiJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
-            when(dac.selectByKey(any(int.class), any(int.class))).thenReturn(entity);
-            int 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            when(dac.selectByKey(any(RString.class), any(int.class))).thenReturn(entity);
+            RString 主キー1 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
             int 主キー2 = DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
             ShinsakaiOnseiJoho result = sut.get介護認定審査会音声情報(主キー1, 主キー2);
 
@@ -118,7 +119,7 @@ public class ShinsakaiOnseiJohoManagerTest {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
             entity.initializeMd5();
             ShinsakaiOnseiJoho 介護認定審査会音声情報 = new ShinsakaiOnseiJoho(entity);
-            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(1).build();
+            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(new RString("1")).build();
 
             assertThat(sut.save介護認定審査会音声情報(介護認定審査会音声情報), is(true));
         }
@@ -130,7 +131,7 @@ public class ShinsakaiOnseiJohoManagerTest {
             DbT5512ShinsakaiOnseiJohoEntity entity = DbT5512ShinsakaiOnseiJohoEntityGenerator.createDbT5512ShinsakaiOnseiJohoEntity();
             entity.initializeMd5();
             ShinsakaiOnseiJoho 介護認定審査会音声情報 = new ShinsakaiOnseiJoho(entity);
-            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(1).build();
+            介護認定審査会音声情報 = 介護認定審査会音声情報.createBuilderForEdit().set介護認定審査会開催番号(new RString("1")).build();
 
             assertThat(sut.save介護認定審査会音声情報(介護認定審査会音声情報), is(false));
         }

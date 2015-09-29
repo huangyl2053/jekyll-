@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会事前審査結果情報テーブルの項目定義クラスです。
  */
 public enum DbT5508ShinsakaiJizenKekkaJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,14 +41,17 @@ public enum DbT5508ShinsakaiJizenKekkaJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 介護認定審査会開催番号
+     * <br/>介護認定審査会開催予定情報
      */
-    shinsakaiKaisaiNo(5, 0),
+    shinsakaiKaisaiNo(8, 0),
     /**
      * 介護認定審査会委員コード
+     * <br/>介護認定審査会委員情報
      */
     shinsakaiIinCode(8, 0),
     /**
      * 介護認定審査会審査順
+     * <br/>介護認定審査会割当情報
      */
     shinsakaiOrder(5, 0),
     /**
@@ -57,6 +60,7 @@ public enum DbT5508ShinsakaiJizenKekkaJoho implements IColumnDefinition {
     ichijiHanteiHenkoRiyu(2147483647, 0),
     /**
      * 二次判定結果コード
+     * <br/>Enum（DBE：要介護状態区分コード（認定ｿﾌﾄ2009））
      */
     nijiHanteiKekkaCode(2147483647, 0);
 

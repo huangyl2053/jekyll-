@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -129,7 +129,7 @@ public interface INinteiShinseiJoho {
      *
      * @return 性別
      */
-    SeibetsuCode get性別();
+    Code get性別();
 
     /**
      * 被保険者氏名カナを返します。
@@ -363,13 +363,6 @@ public interface INinteiShinseiJoho {
     RString get主治医への連絡事項();
 
     /**
-     * みなし要介護区分コードを返します。
-     *
-     * @return みなし要介護区分コード
-     */
-    Code getみなし要介護区分コード();
-
-    /**
      * 認定延期通知発行しないことに対する同意有無を返します。
      *
      * @return 認定延期通知発行しないことに対する同意有無
@@ -388,7 +381,7 @@ public interface INinteiShinseiJoho {
      *
      * @return 入所施設コード
      */
-    RString get入所施設コード();
+    JigyoshaNo get入所施設コード();
 
     /**
      * 家庭訪問の有無を返します。
@@ -739,7 +732,7 @@ public interface INinteiShinseiJoho {
          * @param seibetsu 性別
          * @return builder
          */
-        public Builder setSeibetsu(SeibetsuCode seibetsu) {
+        public Builder setSeibetsu(Code seibetsu) {
             return this;
         }
 
@@ -1074,16 +1067,6 @@ public interface INinteiShinseiJoho {
         }
 
         /**
-         * minashiCodeを設定します。
-         *
-         * @param minashiCode みなし要介護区分コード
-         * @return builder
-         */
-        public Builder setMinashiCode(Code minashiCode) {
-            return this;
-        }
-
-        /**
          * enkitsuchiNashiDoiFlagを設定します。
          *
          * @param enkitsuchiNashiDoiFlag 認定延期通知発行しないことに対する同意有無
@@ -1109,7 +1092,7 @@ public interface INinteiShinseiJoho {
          * @param nyushoShisetsuCode 入所施設コード
          * @return builder
          */
-        public Builder setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        public Builder setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
             return this;
         }
 
@@ -1249,7 +1232,7 @@ public interface INinteiShinseiJoho {
          * @param enkitsuchiHakkoYMD 延期通知発行年月日
          * @return builder
          */
-        public Builder setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
+        public Builder setEnkiTsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
             return this;
         }
 
@@ -1259,7 +1242,7 @@ public interface INinteiShinseiJoho {
          * @param enkitsuchiHakkoKaisu 延期通知発行回数
          * @return builder
          */
-        public Builder setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
+        public Builder setEnkiTsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
             return this;
         }
 

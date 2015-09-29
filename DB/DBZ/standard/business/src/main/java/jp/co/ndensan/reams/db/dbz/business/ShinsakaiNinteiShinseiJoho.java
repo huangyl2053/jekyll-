@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
@@ -208,7 +209,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 性別
      */
     @Override
-    public SeibetsuCode get性別() {
+    public Code get性別() {
         return entity.getSeibetsu();
     }
 
@@ -543,16 +544,6 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
     }
 
     /**
-     * みなし要介護区分コードを返します。
-     *
-     * @return みなし要介護区分コード
-     */
-    @Override
-    public Code getみなし要介護区分コード() {
-        return entity.getMinashiCode();
-    }
-
-    /**
      * 認定延期通知発行しないことに対する同意有無を返します。
      *
      * @return 認定延期通知発行しないことに対する同意有無
@@ -578,7 +569,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 入所施設コード
      */
     @Override
-    public RString get入所施設コード() {
+    public JigyoshaNo get入所施設コード() {
         return entity.getNyushoShisetsuCode();
     }
 
@@ -639,7 +630,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public RString get市町村連絡事項() {
-        return entity.getSichosonRenrakuJiko();
+        return entity.getShichosonRenrakuJiko();
     }
 
     /**
@@ -719,7 +710,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public FlexibleDate get延期通知発行年月日() {
-        return entity.getEnkitsuchiHakkoYMD();
+        return entity.getEnkiTsuchiHakkoYMD();
     }
 
     /**
@@ -729,7 +720,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public int get延期通知発行回数() {
-        return entity.getEnkitsuchiHakkoKaisu();
+        return entity.getEnkiTsuchiHakkoKaisu();
     }
 
     /**
@@ -779,7 +770,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public FlexibleDate get更新通知発行年月日() {
-        return entity.getKosinTsuchiHakkoYMD();
+        return entity.getKoshinTsuchiHakkoYMD();
     }
 
     /**
@@ -789,7 +780,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public FlexibleDate get更新通知発行完了年月日() {
-        return entity.getKosinTsuchiHakkoKanryoYMD();
+        return entity.getKoshinTsuchiHakkoKanryoYMD();
     }
 
     /**
@@ -1113,7 +1104,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setSeibetsu(SeibetsuCode seibetsu) {
+        public Builder setSeibetsu(Code seibetsu) {
             Objects.requireNonNull(seibetsu);
             this.entity.setSeibetsu(seibetsu);
             return this;
@@ -1546,19 +1537,6 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         }
 
         /**
-         * minashiCodeを設定します。
-         *
-         * @param minashiCode みなし要介護区分コード
-         * @return builder
-         */
-        @Override
-        public Builder setMinashiCode(Code minashiCode) {
-            Objects.requireNonNull(minashiCode);
-            this.entity.setMinashiCode(minashiCode);
-            return this;
-        }
-
-        /**
          * enkitsuchiNashiDoiFlagを設定します。
          *
          * @param enkitsuchiNashiDoiFlag 認定延期通知発行しないことに対する同意有無
@@ -1589,7 +1567,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+        public Builder setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
             Objects.requireNonNull(nyushoShisetsuCode);
             this.entity.setNyushoShisetsuCode(nyushoShisetsuCode);
             return this;
@@ -1668,7 +1646,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         @Override
         public Builder setSichosonRenrakuJiko(RString sichosonRenrakuJiko) {
             Objects.requireNonNull(sichosonRenrakuJiko);
-            this.entity.setSichosonRenrakuJiko(sichosonRenrakuJiko);
+            this.entity.setShichosonRenrakuJiko(sichosonRenrakuJiko);
             return this;
         }
 
@@ -1770,9 +1748,9 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
+        public Builder setEnkiTsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
             Objects.requireNonNull(enkitsuchiHakkoYMD);
-            this.entity.setEnkitsuchiHakkoYMD(enkitsuchiHakkoYMD);
+            this.entity.setEnkiTsuchiHakkoYMD(enkitsuchiHakkoYMD);
             return this;
         }
 
@@ -1783,8 +1761,8 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
-            this.entity.setEnkitsuchiHakkoKaisu(enkitsuchiHakkoKaisu);
+        public Builder setEnkiTsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
+            this.entity.setEnkiTsuchiHakkoKaisu(enkitsuchiHakkoKaisu);
             return this;
         }
 
@@ -1848,7 +1826,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         @Override
         public Builder setKosinTsuchiHakkoYMD(FlexibleDate kosinTsuchiHakkoYMD) {
             Objects.requireNonNull(kosinTsuchiHakkoYMD);
-            this.entity.setKosinTsuchiHakkoYMD(kosinTsuchiHakkoYMD);
+            this.entity.setKoshinTsuchiHakkoYMD(kosinTsuchiHakkoYMD);
             return this;
         }
 
@@ -1861,7 +1839,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
         @Override
         public Builder setKosinTsuchiHakkoKanryoYMD(FlexibleDate kosinTsuchiHakkoKanryoYMD) {
             Objects.requireNonNull(kosinTsuchiHakkoKanryoYMD);
-            this.entity.setKosinTsuchiHakkoKanryoYMD(kosinTsuchiHakkoKanryoYMD);
+            this.entity.setKoshinTsuchiHakkoKanryoYMD(kosinTsuchiHakkoKanryoYMD);
             return this;
         }
 

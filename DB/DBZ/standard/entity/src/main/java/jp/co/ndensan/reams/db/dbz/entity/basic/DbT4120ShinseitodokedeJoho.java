@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 申請届出情報（子）テーブルの項目定義クラスです。
  */
 public enum DbT4120ShinseitodokedeJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,27 +45,29 @@ public enum DbT4120ShinseitodokedeJoho implements IColumnDefinition {
     shinseishoKanriNo(2147483647, 0),
     /**
      * 申請届出代行区分コード
-     * <br/>本人・家族・委任者・代行事業者等
+     * <br/>Enum（DBD：申請届出代行区分コード）本人・家族・委任者・代行事業者等
      */
     shinseiTodokedeDaikoKubunCode(2147483647, 0),
     /**
      * 申請届出者氏名
      */
-    shinseiTodokedeshaShimei(2147483647, 0),
+    shinseiTodokedeshaShimei(512, 0),
     /**
      * 申請届出者氏名カナ
      */
-    shinseiTodokedeshaKanaShimei(2147483647, 0),
+    shinseiTodokedeshaKanaShimei(512, 0),
     /**
      * 申請届出者続柄コード
+     * <br/>Enum（DBD：続柄コード）
      */
-    shinseiTodokedeshaTsuzukigaraCode(32, 0),
+    shinseiTodokedeshaTsuzukigaraCode(2, 0),
     /**
      * 申請届出代行事業者番号
      */
     shinseiTodokedeDaikoJigyoshaNo(2147483647, 0),
     /**
      * 事業者区分
+     * <br/>Enum（DBD：事業者区分）
      */
     jigyoshaKubun(2, 0),
     /**
@@ -75,7 +77,7 @@ public enum DbT4120ShinseitodokedeJoho implements IColumnDefinition {
     /**
      * 申請届出者住所
      */
-    shinseiTodokedeshaJusho(2147483647, 0),
+    shinseiTodokedeshaJusho(512, 0),
     /**
      * 申請届出者電話番号
      */

@@ -1,21 +1,22 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 介護認定審査会事前審査結果情報テーブルのエンティティクラスです。
  */
 public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5508ShinsakaiJizenKekkaJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5508ShinsakaiJizenKekkaJoho");
 
@@ -28,7 +29,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private int shinsakaiKaisaiNo;
+    private RString shinsakaiKaisaiNo;
     @PrimaryKey
     private RString shinsakaiIinCode;
     @PrimaryKey
@@ -38,7 +39,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,7 +48,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,7 +57,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,16 +66,17 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,25 +85,31 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
+     * 
      * @return 介護認定審査会開催番号
      */
-    public int getShinsakaiKaisaiNo() {
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会開催予定情報
+     * 
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(@Nonnull RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会委員情報
+     * 
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -110,16 +118,20 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会委員情報
+     * 
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
-    public void setShinsakaiIinCode(RString shinsakaiIinCode) {
+    public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
     }
 
     /**
      * 介護認定審査会審査順のgetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会割当情報
+     * 
      * @return 介護認定審査会審査順
      */
     public int getShinsakaiOrder() {
@@ -128,16 +140,18 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 介護認定審査会審査順のsetメソッドです。
-     *
+     * <br/>
+     * <br/>介護認定審査会割当情報
+     * 
      * @param shinsakaiOrder 介護認定審査会審査順
      */
-    public void setShinsakaiOrder(int shinsakaiOrder) {
+    public void setShinsakaiOrder(@Nonnull int shinsakaiOrder) {
         this.shinsakaiOrder = shinsakaiOrder;
     }
 
     /**
      * 一次判定結果変更理由のgetメソッドです。
-     *
+     * 
      * @return 一次判定結果変更理由
      */
     public RString getIchijiHanteiHenkoRiyu() {
@@ -146,16 +160,18 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 一次判定結果変更理由のsetメソッドです。
-     *
+     * 
      * @param ichijiHanteiHenkoRiyu 一次判定結果変更理由
      */
-    public void setIchijiHanteiHenkoRiyu(RString ichijiHanteiHenkoRiyu) {
+    public void setIchijiHanteiHenkoRiyu(@Nonnull RString ichijiHanteiHenkoRiyu) {
         this.ichijiHanteiHenkoRiyu = ichijiHanteiHenkoRiyu;
     }
 
     /**
      * 二次判定結果コードのgetメソッドです。
-     *
+     * <br/>
+     * <br/>Enum（DBE：要介護状態区分コード（認定ｿﾌﾄ2009））
+     * 
      * @return 二次判定結果コード
      */
     public Code getNijiHanteiKekkaCode() {
@@ -164,18 +180,20 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * 二次判定結果コードのsetメソッドです。
-     *
+     * <br/>
+     * <br/>Enum（DBE：要介護状態区分コード（認定ｿﾌﾄ2009））
+     * 
      * @param nijiHanteiKekkaCode 二次判定結果コード
      */
-    public void setNijiHanteiKekkaCode(Code nijiHanteiKekkaCode) {
+    public void setNijiHanteiKekkaCode(@Nonnull Code nijiHanteiKekkaCode) {
         this.nijiHanteiKekkaCode = nijiHanteiKekkaCode;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5508ShinsakaiJizenKekkaJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5508ShinsakaiJizenKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -183,7 +201,7 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
         if (other == null) {
             return false;
         }
-        if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
+        if (!Objects.equals(this.shinsakaiKaisaiNo, other.shinsakaiKaisaiNo)) {
             return false;
         }
         if (!Objects.equals(this.shinsakaiIinCode, other.shinsakaiIinCode)) {
@@ -209,7 +227,6 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -218,4 +235,6 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
+
+
 }

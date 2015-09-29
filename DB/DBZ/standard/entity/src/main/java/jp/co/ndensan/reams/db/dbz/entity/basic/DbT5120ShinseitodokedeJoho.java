@@ -3,9 +3,10 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 認定調査票（概況調査）サービスの状況フラグテーブルの項目定義クラスです。
+ * 申請届出情報テーブルの項目定義クラスです。
+ * <br/> 申請届出情報を一元管理する
  */
-public enum DbT4208NinteichosahyoServiceJokyoFlag implements IColumnDefinition {
+public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
@@ -45,27 +46,49 @@ public enum DbT4208NinteichosahyoServiceJokyoFlag implements IColumnDefinition {
      */
     shinseishoKanriNo(2147483647, 0),
     /**
-     * 認定調査依頼履歴番号
-     * <br/>認定調査依頼情報
+     * 申請届出代行区分コード
+     * <br/>Enum（DBD：申請届出代行区分コード）本人・家族・委任者・代行事業者等
      */
-    ninteichosaRirekiNo(5, 0),
+    shinseiTodokedeDaikoKubunCode(2147483647, 0),
     /**
-     * 連番
+     * 申請届出者氏名
      */
-    remban(5, 0),
+    shinseiTodokedeshaShimei(512, 0),
     /**
-     * 厚労省IF識別コード
+     * 申請届出者氏名カナ
      */
-    koroshoIfShikibetsuCode(2147483647, 0),
+    shinseiTodokedeshaKanaShimei(512, 0),
     /**
-     * サービスの状況フラグ
+     * 申請届出者続柄コード
+     * <br/>Enum（DBD：続柄コード）
      */
-    serviceJokyoFlag(1, 0);
+    shinseiTodokedeshaTsuzukigaraCode(2, 0),
+    /**
+     * 申請届出代行事業者番号
+     */
+    shinseiTodokedeDaikoJigyoshaNo(2147483647, 0),
+    /**
+     * 事業者区分
+     * <br/>Enum（DBD：事業者区分）
+     */
+    jigyoshaKubun(2, 0),
+    /**
+     * 申請届出者郵便番号
+     */
+    shinseiTodokedeshaYubinNo(2147483647, 0),
+    /**
+     * 申請届出者住所
+     */
+    shinseiTodokedeshaJusho(512, 0),
+    /**
+     * 申請届出者電話番号
+     */
+    shinseiTodokedeshaTelNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT4208NinteichosahyoServiceJokyoFlag(int maxLength, int scale) {
+    private DbT5120ShinseitodokedeJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定申請情報テーブルの項目定義クラスです。
  */
 public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -166,7 +166,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     shinseiServiceDeleteRiyu(2147483647, 0),
     /**
      * 前回要介護状態区分コード
-     * <br/>Enum（DBZ：要介護状態区分コード09）
+     * <br/>Enum（DBZ：要介護状態区分コード09など）
      */
     zenYokaigoKubunCode(2147483647, 0),
     /**
@@ -241,7 +241,6 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     shujiiCode(8, 0),
     /**
      * 指定医フラグ
-     * <br/>Enum（DBE：指定医フラグ）
      */
     shiteiiFlag(1, 0),
     /**
@@ -253,11 +252,6 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
      * 主治医への連絡事項
      */
     renrakuJikoToShujii(2147483647, 0),
-    /**
-     * みなし要介護区分コード
-     * <br/>Enum（DBE：みなし要介護区分コード）
-     */
-    minashiCode(2147483647, 0),
     /**
      * 認定延期通知発行しないことに対する同意有無
      * <br/>Enum（DBE：認定延期通知発行しないことに対する同意有無）
@@ -272,7 +266,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
      * 入所施設コード
      * <br/>介護事業者の事業者番号または、医療機関コード
      */
-    nyushoShisetsuCode(10, 0),
+    nyushoShisetsuCode(2147483647, 0),
     /**
      * 家庭訪問の有無
      * <br/>Enum（DBE：家庭訪問の有無）
@@ -298,7 +292,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
      * 市町村連絡事項
      * <br/>広域運用時、市町村から広域連合に伝えたい事務連絡事項を登録する
      */
-    sichosonRenrakuJiko(2147483647, 0),
+    shichosonRenrakuJiko(2147483647, 0),
     /**
      * 処理状態区分
      * <br/>旧「処理区分」
@@ -331,11 +325,11 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     /**
      * 延期通知発行年月日
      */
-    enkitsuchiHakkoYMD(2147483647, 0),
+    enkiTsuchiHakkoYMD(2147483647, 0),
     /**
      * 延期通知発行回数
      */
-    enkitsuchiHakkoKaisu(5, 0),
+    enkiTsuchiHakkoKaisu(5, 0),
     /**
      * 延期見込期間開始年月日
      */
@@ -357,11 +351,11 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     /**
      * 更新通知発行年月日
      */
-    kosinTsuchiHakkoYMD(2147483647, 0),
+    koshinTsuchiHakkoYMD(2147483647, 0),
     /**
      * 更新通知発行完了年月日
      */
-    kosinTsuchiHakkoKanryoYMD(2147483647, 0),
+    koshinTsuchiHakkoKanryoYMD(2147483647, 0),
     /**
      * 認定申請情報登録年月日
      */

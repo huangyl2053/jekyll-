@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会割当委員情報テーブルの項目定義クラスです。
  */
 public enum DbT5503ShinsakaiWariateIinJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,10 +41,12 @@ public enum DbT5503ShinsakaiWariateIinJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 介護認定審査会開催番号
+     * <br/>介護認定審査会開催予定情報
      */
-    shinsakaiKaisaiNo(5, 0),
+    shinsakaiKaisaiNo(8, 0),
     /**
      * 介護認定審査会委員コード
+     * <br/>介護認定審査会委員情報
      */
     shinsakaiIinCode(8, 0),
     /**
@@ -53,15 +55,17 @@ public enum DbT5503ShinsakaiWariateIinJoho implements IColumnDefinition {
     shinsakaiKaisaiYMD(2147483647, 0),
     /**
      * 介護認定審査会議長区分コード
-     * <br/>0：委員、1：議長
+     * <br/>Enum（DBE：介護認定審査会議長区分コード）0：委員、1：議長
      */
     kaigoninteiShinsakaiGichoKubunCode(2147483647, 0),
     /**
      * 委員出席
+     * <br/>Enum（DBE：委員出席）
      */
     shussekiFlag(1, 0),
     /**
      * 委員遅刻有無
+     * <br/>Enum（DBE：委員遅刻有無）
      */
     existChikokuFlag(1, 0),
     /**
@@ -70,6 +74,7 @@ public enum DbT5503ShinsakaiWariateIinJoho implements IColumnDefinition {
     shussekiTime(4, 0),
     /**
      * 委員早退有無
+     * <br/>Enum（DBE：委員早退有無）
      */
     existSotaiFlag(1, 0),
     /**

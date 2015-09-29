@@ -46,7 +46,7 @@ public class ShinsakaiJizenKekkaJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            int 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            RString 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
             RString 主キー2 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会委員コード;
             int 主キー3 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会審査順;
             sut.get介護認定審査会事前審査結果情報(主キー1, null, 主キー3);
@@ -55,8 +55,8 @@ public class ShinsakaiJizenKekkaJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(int.class), any(RString.class), any(int.class))).thenReturn(null);
-            int 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(int.class))).thenReturn(null);
+            RString 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
             RString 主キー2 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会委員コード;
             int 主キー3 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会審査順;
             ShinsakaiJizenKekkaJoho result = sut.get介護認定審査会事前審査結果情報(主キー1, 主キー2, 主キー3);
@@ -67,8 +67,8 @@ public class ShinsakaiJizenKekkaJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5508ShinsakaiJizenKekkaJohoEntity entity = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.createDbT5508ShinsakaiJizenKekkaJohoEntity();
-            when(dac.selectByKey(any(int.class), any(RString.class), any(int.class))).thenReturn(entity);
-            int 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+            when(dac.selectByKey(any(RString.class), any(RString.class), any(int.class))).thenReturn(entity);
+            RString 主キー1 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
             RString 主キー2 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会委員コード;
             int 主キー3 = DbT5508ShinsakaiJizenKekkaJohoEntityGenerator.DEFAULT_介護認定審査会審査順;
             ShinsakaiJizenKekkaJoho result = sut.get介護認定審査会事前審査結果情報(主キー1, 主キー2, 主キー3);

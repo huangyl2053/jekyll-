@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会委員報酬実績情報テーブルの項目定義クラスです。
  */
 public enum DbT5603ShinsakaiIinHoshuJissekiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,11 +41,12 @@ public enum DbT5603ShinsakaiIinHoshuJissekiJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 介護認定審査会委員コード
+     * <br/>介護認定審査会委員情報
      */
     shinsakaiIinCode(8, 0),
     /**
      * 審査会委員報酬区分
-     * <br/>1:審査報酬、2:その他報酬
+     * <br/>Enum（DBE：審査会委員報酬区分）1:審査報酬、2:その他報酬
      */
     shinsakaiIinHoshuKubun(2147483647, 0),
     /**
@@ -58,6 +59,7 @@ public enum DbT5603ShinsakaiIinHoshuJissekiJoho implements IColumnDefinition {
     remban(5, 0),
     /**
      * 介護認定審査会開催番号
+     * <br/>介護認定審査会開催結果情報
      */
     shinsakaiKaisaiNo(5, 0),
     /**
@@ -94,6 +96,7 @@ public enum DbT5603ShinsakaiIinHoshuJissekiJoho implements IColumnDefinition {
     hoshuShiharaiMemo(2147483647, 0),
     /**
      * 銀行振込出力フラグ
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      */
     ginkoFurikomiShutsuryokuFlag(1, 0);
 

@@ -19,18 +19,20 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 
 /**
  * 要介護認定申請情報テーブルのエンティティクラスです。
  */
 public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101NinteiShinseiJohoEntity> implements IDbAccessable, INinteiShinseiJohoEntity {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5101NinteiShinseiJoho");
@@ -57,7 +59,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private RString hihokenshaKubunCode;
     private FlexibleDate seinengappiYMD;
     private int age;
-    private SeibetsuCode seibetsu;
+    private Code seibetsu;
     private AtenaKanaMeisho hihokenshaKana;
     private AtenaMeisho hihokenshaName;
     private YubinNo yubinNo;
@@ -91,16 +93,15 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
-    private Code minashiCode;
     private boolean enkitsuchiNashiDoiFlag;
     private boolean shisetsuNyushoFlag;
-    private RString nyushoShisetsuCode;
+    private JigyoshaNo nyushoShisetsuCode;
     private boolean kateiHomonFlag;
     private YubinNo homonChosasakiYubinNo;
     private AtenaJusho homonChosasakiJusho;
     private AtenaMeisho homonChosasakiName;
     private TelNo homonChosasakiTelNo;
-    private RString sichosonRenrakuJiko;
+    private RString shichosonRenrakuJiko;
     private Code shoriJotaiKubun;
     private FlexibleDate torisageYMD;
     private RString torisageRiyu;
@@ -108,14 +109,14 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private RString kyakkaRiyu;
     private FlexibleDate enkiKetteiYMD;
     private RString enkiRiyu;
-    private FlexibleDate enkitsuchiHakkoYMD;
-    private int enkitsuchiHakkoKaisu;
+    private FlexibleDate enkiTsuchiHakkoYMD;
+    private int enkiTsuchiHakkoKaisu;
     private FlexibleDate enkiMikomiKaishiYMD;
     private FlexibleDate enkiMikomiShuryoYMD;
     private boolean shinsaKeizokuFlag;
     private Code shinsakaiYusenWaritsukeKubunCode;
-    private FlexibleDate kosinTsuchiHakkoYMD;
-    private FlexibleDate kosinTsuchiHakkoKanryoYMD;
+    private FlexibleDate koshinTsuchiHakkoYMD;
+    private FlexibleDate koshinTsuchiHakkoKanryoYMD;
     private FlexibleDate ninteiShinseiJohoTorokuYMD;
     private int saiChosaIraiKaisu;
     private int saiSakuseiIraiKaisu;
@@ -181,7 +182,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -203,7 +204,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
-    public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
+    public void setKoroshoIfShikibetsuCode(@Nonnull Code koroshoIfShikibetsuCode) {
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
     }
 
@@ -221,7 +222,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull RString shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -239,7 +240,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shinseiNendo 申請年度
      */
-    public void setShinseiNendo(FlexibleYear shinseiNendo) {
+    public void setShinseiNendo(@Nonnull FlexibleYear shinseiNendo) {
         this.shinseiNendo = shinseiNendo;
     }
 
@@ -257,7 +258,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(RString hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull RString hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -268,6 +269,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定申請年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinseiYMD() {
         return ninteiShinseiYMD;
     }
@@ -297,7 +299,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param ninteiShinseiEdabanCode 認定申請枝番コード
      */
-    public void setNinteiShinseiEdabanCode(EdabanCode ninteiShinseiEdabanCode) {
+    public void setNinteiShinseiEdabanCode(@Nonnull EdabanCode ninteiShinseiEdabanCode) {
         this.ninteiShinseiEdabanCode = ninteiShinseiEdabanCode;
     }
 
@@ -319,7 +321,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param ninteiShinseiHoreiKubunCode 認定申請区分（法令）コード
      */
-    public void setNinteiShinseiHoreiKubunCode(Code ninteiShinseiHoreiKubunCode) {
+    public void setNinteiShinseiHoreiKubunCode(@Nonnull Code ninteiShinseiHoreiKubunCode) {
         this.ninteiShinseiHoreiKubunCode = ninteiShinseiHoreiKubunCode;
     }
 
@@ -341,7 +343,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param ninteiShinseiShinseijiKubunCode 認定申請区分（申請時）コード
      */
-    public void setNinteiShinseiShinseijiKubunCode(Code ninteiShinseiShinseijiKubunCode) {
+    public void setNinteiShinseiShinseijiKubunCode(@Nonnull Code ninteiShinseiShinseijiKubunCode) {
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
     }
 
@@ -352,6 +354,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 取下区分コード
      */
+    @CheckForNull
     public Code getTorisageKubunCode() {
         return torisageKubunCode;
     }
@@ -385,7 +388,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param hihokenshaKubunCode 被保険者区分コード
      */
-    public void setHihokenshaKubunCode(RString hihokenshaKubunCode) {
+    public void setHihokenshaKubunCode(@Nonnull RString hihokenshaKubunCode) {
         this.hihokenshaKubunCode = hihokenshaKubunCode;
     }
 
@@ -403,7 +406,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param seinengappiYMD 生年月日
      */
-    public void setSeinengappiYMD(FlexibleDate seinengappiYMD) {
+    public void setSeinengappiYMD(@Nonnull FlexibleDate seinengappiYMD) {
         this.seinengappiYMD = seinengappiYMD;
     }
 
@@ -414,6 +417,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 年齢
      */
+    @CheckForNull
     public int getAge() {
         return age;
     }
@@ -436,7 +440,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 性別
      */
-    public SeibetsuCode getSeibetsu() {
+    public Code getSeibetsu() {
         return seibetsu;
     }
 
@@ -447,7 +451,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param seibetsu 性別
      */
-    public void setSeibetsu(SeibetsuCode seibetsu) {
+    public void setSeibetsu(@Nonnull Code seibetsu) {
         this.seibetsu = seibetsu;
     }
 
@@ -465,7 +469,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param hihokenshaKana 被保険者氏名カナ
      */
-    public void setHihokenshaKana(AtenaKanaMeisho hihokenshaKana) {
+    public void setHihokenshaKana(@Nonnull AtenaKanaMeisho hihokenshaKana) {
         this.hihokenshaKana = hihokenshaKana;
     }
 
@@ -483,7 +487,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param hihokenshaName 被保険者氏名
      */
-    public void setHihokenshaName(AtenaMeisho hihokenshaName) {
+    public void setHihokenshaName(@Nonnull AtenaMeisho hihokenshaName) {
         this.hihokenshaName = hihokenshaName;
     }
 
@@ -501,7 +505,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param yubinNo 郵便番号
      */
-    public void setYubinNo(YubinNo yubinNo) {
+    public void setYubinNo(@Nonnull YubinNo yubinNo) {
         this.yubinNo = yubinNo;
     }
 
@@ -519,7 +523,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param jusho 住所
      */
-    public void setJusho(AtenaJusho jusho) {
+    public void setJusho(@Nonnull AtenaJusho jusho) {
         this.jusho = jusho;
     }
 
@@ -537,7 +541,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param telNo 電話番号
      */
-    public void setTelNo(TelNo telNo) {
+    public void setTelNo(@Nonnull TelNo telNo) {
         this.telNo = telNo;
     }
 
@@ -555,7 +559,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shishoCode 支所コード
      */
-    public void setShishoCode(RString shishoCode) {
+    public void setShishoCode(@Nonnull RString shishoCode) {
         this.shishoCode = shishoCode;
     }
 
@@ -566,6 +570,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 識別コード
      */
+    @CheckForNull
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
@@ -586,6 +591,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 地区コード
      */
+    @CheckForNull
     public ChikuCode getChikuCode() {
         return chikuCode;
     }
@@ -617,7 +623,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param minashiNigoEtcTaishoFlag みなし２号等対象フラグ
      */
-    public void setMinashiNigoEtcTaishoFlag(boolean minashiNigoEtcTaishoFlag) {
+    public void setMinashiNigoEtcTaishoFlag(@Nonnull boolean minashiNigoEtcTaishoFlag) {
         this.minashiNigoEtcTaishoFlag = minashiNigoEtcTaishoFlag;
     }
 
@@ -639,7 +645,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param koikinaiTenkyoKubun 広域内転居区分
      */
-    public void setKoikinaiTenkyoKubun(Code koikinaiTenkyoKubun) {
+    public void setKoikinaiTenkyoKubun(@Nonnull Code koikinaiTenkyoKubun) {
         this.koikinaiTenkyoKubun = koikinaiTenkyoKubun;
     }
 
@@ -661,7 +667,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param ninteiShinseiYukoKubunCode 認定申請有効区分
      */
-    public void setNinteiShinseiYukoKubunCode(Code ninteiShinseiYukoKubunCode) {
+    public void setNinteiShinseiYukoKubunCode(@Nonnull Code ninteiShinseiYukoKubunCode) {
         this.ninteiShinseiYukoKubunCode = ninteiShinseiYukoKubunCode;
     }
 
@@ -683,7 +689,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shienShinseiKubun 要介護申請・要支援申請の区分
      */
-    public void setShienShinseiKubun(RString shienShinseiKubun) {
+    public void setShienShinseiKubun(@Nonnull RString shienShinseiKubun) {
         this.shienShinseiKubun = shienShinseiKubun;
     }
 
@@ -692,6 +698,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定申請理由
      */
+    @CheckForNull
     public RString getNinteiShinseiRiyu() {
         return ninteiShinseiRiyu;
     }
@@ -710,6 +717,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 申請サービス削除の理由
      */
+    @CheckForNull
     public RString getShinseiServiceDeleteRiyu() {
         return shinseiServiceDeleteRiyu;
     }
@@ -726,10 +734,11 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 前回要介護状態区分コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBZ：要介護状態区分コード09）
+     * <br/>Enum（DBZ：要介護状態区分コード09など）
      *
      * @return 前回要介護状態区分コード
      */
+    @CheckForNull
     public Code getZenYokaigoKubunCode() {
         return zenYokaigoKubunCode;
     }
@@ -737,7 +746,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 前回要介護状態区分コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBZ：要介護状態区分コード09）
+     * <br/>Enum（DBZ：要介護状態区分コード09など）
      *
      * @param zenYokaigoKubunCode 前回要介護状態区分コード
      */
@@ -750,6 +759,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 前回認定年月日
      */
+    @CheckForNull
     public FlexibleDate getZenkaiNinteiYMD() {
         return zenkaiNinteiYMD;
     }
@@ -768,6 +778,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 前回認定有効期間（開始）
      */
+    @CheckForNull
     public FlexibleDate getZenkaiYukoKikanStart() {
         return zenkaiYukoKikanStart;
     }
@@ -786,6 +797,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 前回認定有効期間（終了）
      */
+    @CheckForNull
     public FlexibleDate getZenkaiYukoKikanEnd() {
         return zenkaiYukoKikanEnd;
     }
@@ -806,6 +818,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return ２号医療保険者名
      */
+    @CheckForNull
     public RString getNigoIryoHokenshaName() {
         return nigoIryoHokenshaName;
     }
@@ -828,6 +841,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return ２号医療保険記号番号
      */
+    @CheckForNull
     public RString getNigoIryoHokenKigoBango() {
         return nigoIryoHokenKigoBango;
     }
@@ -850,6 +864,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return ２号特定疾病コード
      */
+    @CheckForNull
     public Code getNigoTokuteiShippeiCode() {
         return nigoTokuteiShippeiCode;
     }
@@ -883,7 +898,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param jidoWariateJogaishaKubun 自動割当除外者区分
      */
-    public void setJidoWariateJogaishaKubun(RString jidoWariateJogaishaKubun) {
+    public void setJidoWariateJogaishaKubun(@Nonnull RString jidoWariateJogaishaKubun) {
         this.jidoWariateJogaishaKubun = jidoWariateJogaishaKubun;
     }
 
@@ -905,7 +920,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param johoteikyoDoiFlag 情報提供への同意有無
      */
-    public void setJohoteikyoDoiFlag(boolean johoteikyoDoiFlag) {
+    public void setJohoteikyoDoiFlag(@Nonnull boolean johoteikyoDoiFlag) {
         this.johoteikyoDoiFlag = johoteikyoDoiFlag;
     }
 
@@ -914,6 +929,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 情報提供資料出力年月日
      */
+    @CheckForNull
     public FlexibleDate getJohoteikyoSiryoOutputYMD() {
         return johoteikyoSiryoOutputYMD;
     }
@@ -934,6 +950,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 調査区分
      */
+    @CheckForNull
     public Code getChosaKubun() {
         return chosaKubun;
     }
@@ -956,6 +973,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定調査委託先コード
      */
+    @CheckForNull
     public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
         return ninteiChosaItakusakiCode;
     }
@@ -978,6 +996,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定調査員コード
      */
+    @CheckForNull
     public ChosainCode getNinteiChosainCode() {
         return ninteiChosainCode;
     }
@@ -998,6 +1017,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 調査員への連絡事項
      */
+    @CheckForNull
     public RString getRenrakuJikoToChosain() {
         return renrakuJikoToChosain;
     }
@@ -1018,6 +1038,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医医療機関コード
      */
+    @CheckForNull
     public ShujiiIryokikanCode getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
@@ -1040,6 +1061,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医コード
      */
+    @CheckForNull
     public ShujiiCode getShujiiCode() {
         return shujiiCode;
     }
@@ -1057,19 +1079,16 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 指定医フラグのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：指定医フラグ）
      *
      * @return 指定医フラグ
      */
+    @CheckForNull
     public boolean getShiteiiFlag() {
         return shiteiiFlag;
     }
 
     /**
      * 指定医フラグのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：指定医フラグ）
      *
      * @param shiteiiFlag 指定医フラグ
      */
@@ -1084,6 +1103,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 意見書データ種別
      */
+    @CheckForNull
     public Code getIkenshoDataShubetsu() {
         return ikenshoDataShubetsu;
     }
@@ -1104,6 +1124,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医への連絡事項
      */
+    @CheckForNull
     public RString getRenrakuJikoToShujii() {
         return renrakuJikoToShujii;
     }
@@ -1118,34 +1139,13 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     }
 
     /**
-     * みなし要介護区分コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：みなし要介護区分コード）
-     *
-     * @return みなし要介護区分コード
-     */
-    public Code getMinashiCode() {
-        return minashiCode;
-    }
-
-    /**
-     * みなし要介護区分コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBE：みなし要介護区分コード）
-     *
-     * @param minashiCode みなし要介護区分コード
-     */
-    public void setMinashiCode(Code minashiCode) {
-        this.minashiCode = minashiCode;
-    }
-
-    /**
      * 認定延期通知発行しないことに対する同意有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：認定延期通知発行しないことに対する同意有無）
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
+    @CheckForNull
     public boolean getEnkitsuchiNashiDoiFlag() {
         return enkitsuchiNashiDoiFlag;
     }
@@ -1168,6 +1168,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 施設入所の有無
      */
+    @CheckForNull
     public boolean getShisetsuNyushoFlag() {
         return shisetsuNyushoFlag;
     }
@@ -1190,7 +1191,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 入所施設コード
      */
-    public RString getNyushoShisetsuCode() {
+    @CheckForNull
+    public JigyoshaNo getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
@@ -1201,7 +1203,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param nyushoShisetsuCode 入所施設コード
      */
-    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
@@ -1212,6 +1214,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 家庭訪問の有無
      */
+    @CheckForNull
     public boolean getKateiHomonFlag() {
         return kateiHomonFlag;
     }
@@ -1232,6 +1235,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 訪問調査先郵便番号
      */
+    @CheckForNull
     public YubinNo getHomonChosasakiYubinNo() {
         return homonChosasakiYubinNo;
     }
@@ -1250,6 +1254,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 訪問調査先住所
      */
+    @CheckForNull
     public AtenaJusho getHomonChosasakiJusho() {
         return homonChosasakiJusho;
     }
@@ -1268,6 +1273,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 訪問調査先名称
      */
+    @CheckForNull
     public AtenaMeisho getHomonChosasakiName() {
         return homonChosasakiName;
     }
@@ -1286,6 +1292,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 訪問調査先電話番号
      */
+    @CheckForNull
     public TelNo getHomonChosasakiTelNo() {
         return homonChosasakiTelNo;
     }
@@ -1306,8 +1313,9 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 市町村連絡事項
      */
-    public RString getSichosonRenrakuJiko() {
-        return sichosonRenrakuJiko;
+    @CheckForNull
+    public RString getShichosonRenrakuJiko() {
+        return shichosonRenrakuJiko;
     }
 
     /**
@@ -1315,10 +1323,10 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * <br/>
      * <br/>広域運用時、市町村から広域連合に伝えたい事務連絡事項を登録する
      *
-     * @param sichosonRenrakuJiko 市町村連絡事項
+     * @param shichosonRenrakuJiko 市町村連絡事項
      */
-    public void setSichosonRenrakuJiko(RString sichosonRenrakuJiko) {
-        this.sichosonRenrakuJiko = sichosonRenrakuJiko;
+    public void setShichosonRenrakuJiko(RString shichosonRenrakuJiko) {
+        this.shichosonRenrakuJiko = shichosonRenrakuJiko;
     }
 
     /**
@@ -1328,6 +1336,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 処理状態区分
      */
+    @CheckForNull
     public Code getShoriJotaiKubun() {
         return shoriJotaiKubun;
     }
@@ -1348,6 +1357,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 取下年月日
      */
+    @CheckForNull
     public FlexibleDate getTorisageYMD() {
         return torisageYMD;
     }
@@ -1366,6 +1376,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 取下理由
      */
+    @CheckForNull
     public RString getTorisageRiyu() {
         return torisageRiyu;
     }
@@ -1384,6 +1395,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 却下年月日
      */
+    @CheckForNull
     public FlexibleDate getKyakkaYMD() {
         return kyakkaYMD;
     }
@@ -1402,6 +1414,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 却下理由
      */
+    @CheckForNull
     public RString getKyakkaRiyu() {
         return kyakkaRiyu;
     }
@@ -1420,6 +1433,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期決定年月日
      */
+    @CheckForNull
     public FlexibleDate getEnkiKetteiYMD() {
         return enkiKetteiYMD;
     }
@@ -1438,6 +1452,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期理由
      */
+    @CheckForNull
     public RString getEnkiRiyu() {
         return enkiRiyu;
     }
@@ -1456,17 +1471,18 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期通知発行年月日
      */
-    public FlexibleDate getEnkitsuchiHakkoYMD() {
-        return enkitsuchiHakkoYMD;
+    @CheckForNull
+    public FlexibleDate getEnkiTsuchiHakkoYMD() {
+        return enkiTsuchiHakkoYMD;
     }
 
     /**
      * 延期通知発行年月日のsetメソッドです。
      *
-     * @param enkitsuchiHakkoYMD 延期通知発行年月日
+     * @param enkiTsuchiHakkoYMD 延期通知発行年月日
      */
-    public void setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
-        this.enkitsuchiHakkoYMD = enkitsuchiHakkoYMD;
+    public void setEnkiTsuchiHakkoYMD(FlexibleDate enkiTsuchiHakkoYMD) {
+        this.enkiTsuchiHakkoYMD = enkiTsuchiHakkoYMD;
     }
 
     /**
@@ -1474,17 +1490,18 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期通知発行回数
      */
-    public int getEnkitsuchiHakkoKaisu() {
-        return enkitsuchiHakkoKaisu;
+    @CheckForNull
+    public int getEnkiTsuchiHakkoKaisu() {
+        return enkiTsuchiHakkoKaisu;
     }
 
     /**
      * 延期通知発行回数のsetメソッドです。
      *
-     * @param enkitsuchiHakkoKaisu 延期通知発行回数
+     * @param enkiTsuchiHakkoKaisu 延期通知発行回数
      */
-    public void setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
-        this.enkitsuchiHakkoKaisu = enkitsuchiHakkoKaisu;
+    public void setEnkiTsuchiHakkoKaisu(int enkiTsuchiHakkoKaisu) {
+        this.enkiTsuchiHakkoKaisu = enkiTsuchiHakkoKaisu;
     }
 
     /**
@@ -1492,6 +1509,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期見込期間開始年月日
      */
+    @CheckForNull
     public FlexibleDate getEnkiMikomiKaishiYMD() {
         return enkiMikomiKaishiYMD;
     }
@@ -1510,6 +1528,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 延期見込期間終了年月日
      */
+    @CheckForNull
     public FlexibleDate getEnkiMikomiShuryoYMD() {
         return enkiMikomiShuryoYMD;
     }
@@ -1530,6 +1549,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 審査継続区分
      */
+    @CheckForNull
     public boolean getShinsaKeizokuFlag() {
         return shinsaKeizokuFlag;
     }
@@ -1552,6 +1572,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 介護認定審査会優先振分区分コード
      */
+    @CheckForNull
     public Code getShinsakaiYusenWaritsukeKubunCode() {
         return shinsakaiYusenWaritsukeKubunCode;
     }
@@ -1572,17 +1593,18 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 更新通知発行年月日
      */
-    public FlexibleDate getKosinTsuchiHakkoYMD() {
-        return kosinTsuchiHakkoYMD;
+    @CheckForNull
+    public FlexibleDate getKoshinTsuchiHakkoYMD() {
+        return koshinTsuchiHakkoYMD;
     }
 
     /**
      * 更新通知発行年月日のsetメソッドです。
      *
-     * @param kosinTsuchiHakkoYMD 更新通知発行年月日
+     * @param koshinTsuchiHakkoYMD 更新通知発行年月日
      */
-    public void setKosinTsuchiHakkoYMD(FlexibleDate kosinTsuchiHakkoYMD) {
-        this.kosinTsuchiHakkoYMD = kosinTsuchiHakkoYMD;
+    public void setKoshinTsuchiHakkoYMD(FlexibleDate koshinTsuchiHakkoYMD) {
+        this.koshinTsuchiHakkoYMD = koshinTsuchiHakkoYMD;
     }
 
     /**
@@ -1590,17 +1612,18 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 更新通知発行完了年月日
      */
-    public FlexibleDate getKosinTsuchiHakkoKanryoYMD() {
-        return kosinTsuchiHakkoKanryoYMD;
+    @CheckForNull
+    public FlexibleDate getKoshinTsuchiHakkoKanryoYMD() {
+        return koshinTsuchiHakkoKanryoYMD;
     }
 
     /**
      * 更新通知発行完了年月日のsetメソッドです。
      *
-     * @param kosinTsuchiHakkoKanryoYMD 更新通知発行完了年月日
+     * @param koshinTsuchiHakkoKanryoYMD 更新通知発行完了年月日
      */
-    public void setKosinTsuchiHakkoKanryoYMD(FlexibleDate kosinTsuchiHakkoKanryoYMD) {
-        this.kosinTsuchiHakkoKanryoYMD = kosinTsuchiHakkoKanryoYMD;
+    public void setKoshinTsuchiHakkoKanryoYMD(FlexibleDate koshinTsuchiHakkoKanryoYMD) {
+        this.koshinTsuchiHakkoKanryoYMD = koshinTsuchiHakkoKanryoYMD;
     }
 
     /**
@@ -1608,6 +1631,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定申請情報登録年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinseiJohoTorokuYMD() {
         return ninteiShinseiJohoTorokuYMD;
     }
@@ -1626,6 +1650,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 再調査依頼回数
      */
+    @CheckForNull
     public int getSaiChosaIraiKaisu() {
         return saiChosaIraiKaisu;
     }
@@ -1644,6 +1669,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 再作成依頼回数
      */
+    @CheckForNull
     public int getSaiSakuseiIraiKaisu() {
         return saiSakuseiIraiKaisu;
     }
@@ -1662,6 +1688,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return ＩＦ送付年月日
      */
+    @CheckForNull
     public FlexibleDate getIfSofuYMD() {
         return ifSofuYMD;
     }
@@ -1682,6 +1709,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 論理削除フラグ
      */
+    @CheckForNull
     public boolean getLogicalDeletedFlag() {
         return logicalDeletedFlag;
     }
@@ -1701,7 +1729,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * このエンティティの主キーが他の{@literal DbT5101NinteiShinseiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5101NinteiShinseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1709,7 +1737,10 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         if (other == null) {
             return false;
         }
-        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -1764,7 +1795,6 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.shiteiiFlag = entity.shiteiiFlag;
         this.ikenshoDataShubetsu = entity.ikenshoDataShubetsu;
         this.renrakuJikoToShujii = entity.renrakuJikoToShujii;
-        this.minashiCode = entity.minashiCode;
         this.enkitsuchiNashiDoiFlag = entity.enkitsuchiNashiDoiFlag;
         this.shisetsuNyushoFlag = entity.shisetsuNyushoFlag;
         this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
@@ -1773,7 +1803,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.homonChosasakiJusho = entity.homonChosasakiJusho;
         this.homonChosasakiName = entity.homonChosasakiName;
         this.homonChosasakiTelNo = entity.homonChosasakiTelNo;
-        this.sichosonRenrakuJiko = entity.sichosonRenrakuJiko;
+        this.shichosonRenrakuJiko = entity.shichosonRenrakuJiko;
         this.shoriJotaiKubun = entity.shoriJotaiKubun;
         this.torisageYMD = entity.torisageYMD;
         this.torisageRiyu = entity.torisageRiyu;
@@ -1781,14 +1811,14 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.kyakkaRiyu = entity.kyakkaRiyu;
         this.enkiKetteiYMD = entity.enkiKetteiYMD;
         this.enkiRiyu = entity.enkiRiyu;
-        this.enkitsuchiHakkoYMD = entity.enkitsuchiHakkoYMD;
-        this.enkitsuchiHakkoKaisu = entity.enkitsuchiHakkoKaisu;
+        this.enkiTsuchiHakkoYMD = entity.enkiTsuchiHakkoYMD;
+        this.enkiTsuchiHakkoKaisu = entity.enkiTsuchiHakkoKaisu;
         this.enkiMikomiKaishiYMD = entity.enkiMikomiKaishiYMD;
         this.enkiMikomiShuryoYMD = entity.enkiMikomiShuryoYMD;
         this.shinsaKeizokuFlag = entity.shinsaKeizokuFlag;
         this.shinsakaiYusenWaritsukeKubunCode = entity.shinsakaiYusenWaritsukeKubunCode;
-        this.kosinTsuchiHakkoYMD = entity.kosinTsuchiHakkoYMD;
-        this.kosinTsuchiHakkoKanryoYMD = entity.kosinTsuchiHakkoKanryoYMD;
+        this.koshinTsuchiHakkoYMD = entity.koshinTsuchiHakkoYMD;
+        this.koshinTsuchiHakkoKanryoYMD = entity.koshinTsuchiHakkoKanryoYMD;
         this.ninteiShinseiJohoTorokuYMD = entity.ninteiShinseiJohoTorokuYMD;
         this.saiChosaIraiKaisu = entity.saiChosaIraiKaisu;
         this.saiSakuseiIraiKaisu = entity.saiSakuseiIraiKaisu;
@@ -1803,7 +1833,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteiChosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, minashiCode, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, sichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkitsuchiHakkoYMD, enkitsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, kosinTsuchiHakkoYMD, kosinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
+        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteiChosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, shichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkiTsuchiHakkoYMD, enkiTsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, koshinTsuchiHakkoYMD, koshinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>

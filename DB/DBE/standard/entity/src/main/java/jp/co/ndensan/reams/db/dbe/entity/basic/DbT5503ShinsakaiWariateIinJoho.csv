@@ -1,4 +1,4 @@
-﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+﻿shinsakaiKaisaiNo,bpchar,RString,,,,,介護認定審査会開催番号,A
 shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
 shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催年月日,A
 kaigoninteiShinsakaiGichoKubunCode,UDD035Code,Code,,,,,介護認定審査会議長区分コード,A

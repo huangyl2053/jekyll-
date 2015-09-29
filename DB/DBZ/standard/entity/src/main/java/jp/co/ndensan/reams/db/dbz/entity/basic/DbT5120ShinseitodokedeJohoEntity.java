@@ -20,13 +20,14 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
- * 申請届出情報（子）テーブルのエンティティクラスです。
+ * 申請届出情報テーブルのエンティティクラスです。
+ * <br/> 申請届出情報を一元管理する
  */
-public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120ShinseitodokedeJohoEntity> implements IDbAccessable, IShinseitodokedeJohoEntity {
+public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120ShinseitodokedeJohoEntity> implements IDbAccessable, IShinseitodokedeJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT4120ShinseitodokedeJoho");
+    public static final RString TABLE_NAME = new RString("DbT5120ShinseitodokedeJoho");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -95,6 +96,8 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @return 申請書管理番号
      */
@@ -104,6 +107,8 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
@@ -294,14 +299,14 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT4120ShinseitodokedeJohoEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT5120ShinseitodokedeJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
      * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4120ShinseitodokedeJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5120ShinseitodokedeJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT4120ShinseitodokedeJohoEntity other) {
+    public boolean equalsPrimaryKeys(DbT5120ShinseitodokedeJohoEntity other) {
         if (other == null) {
             return false;
         }
@@ -315,7 +320,7 @@ public class DbT4120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT4120S
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT4120ShinseitodokedeJohoEntity entity) {
+    public void shallowCopy(DbT5120ShinseitodokedeJohoEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.shinseiTodokedeDaikoKubunCode = entity.shinseiTodokedeDaikoKubunCode;
         this.shinseiTodokedeshaShimei = entity.shinseiTodokedeshaShimei;

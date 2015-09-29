@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会割当情報テーブルの項目定義クラスです。
  */
 public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -41,8 +41,9 @@ public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 介護認定審査会開催番号
+     * <br/>介護認定審査会開催予定情報
      */
-    shinsakaiKaisaiNo(5, 0),
+    shinsakaiKaisaiNo(8, 0),
     /**
      * 申請書管理番号
      */
@@ -61,10 +62,12 @@ public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
     shinsakaiOrder(5, 0),
     /**
      * 介護認定審査会審査順確定フラグ
+     * <br/>Enum（DBE：介護認定審査会審査順確定フラグ）
      */
     shinsakaiOrderKakuteiFlag(1, 0),
     /**
      * 審査会自動割付フラグ
+     * <br/>Enum（DBE：審査会自動割付フラグ）
      */
     shinsakaiJidoWaritsukeFlag(1, 0),
     /**
@@ -77,7 +80,7 @@ public enum DbT5502ShinsakaiWariateJoho implements IColumnDefinition {
     shinsakaiShiryoSofuYMD(2147483647, 0),
     /**
      * 判定結果コード
-     * <br/>01：認定、11：未審査、21：再審査、31：再調査（調査票・意見書）、32：再調査（調査のみ）、33：再調査（意見書のみ）
+     * <br/>Enum（DBE：判定結果コード）01：認定、11：未審査、21：再審査、31：再調査（調査票・意見書）、32：再調査（調査のみ）、33：再調査（意見書のみ）
      */
     hanteiKekkaCode(2147483647, 0);
 

@@ -1,4 +1,4 @@
-﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+﻿shinsakaiKaisaiNo,bpchar,RString,,,,,介護認定審査会開催番号,A
 shinsakaiKaisaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催予定年月日,A
 shinsakaiKaishiYoteiTime,varchar,RString,,,,,介護認定審査会開始予定時刻,A
 shinsakaiShuryoYoteiTime,varchar,RString,,,,,介護認定審査会終了予定時刻,A

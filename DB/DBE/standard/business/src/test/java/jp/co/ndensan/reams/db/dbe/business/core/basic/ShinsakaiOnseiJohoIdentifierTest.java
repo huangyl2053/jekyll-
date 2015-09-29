@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -22,7 +23,7 @@ public class ShinsakaiOnseiJohoIdentifierTest extends DbeTestBase {
 
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static int 介護認定審査会開催番号;
+    private static RString 介護認定審査会開催番号;
     private static int 連番;
 
     @BeforeClass

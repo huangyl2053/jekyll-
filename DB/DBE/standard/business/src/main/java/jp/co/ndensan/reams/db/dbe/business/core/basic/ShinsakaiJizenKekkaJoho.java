@@ -31,7 +31,7 @@ public class ShinsakaiJizenKekkaJoho extends ParentModelBase<ShinsakaiJizenKekka
      * @param 介護認定審査会委員コード 介護認定審査会委員コード
      * @param 介護認定審査会審査順 介護認定審査会審査順
      */
-    public ShinsakaiJizenKekkaJoho(int 介護認定審査会開催番号,
+    public ShinsakaiJizenKekkaJoho(RString 介護認定審査会開催番号,
             RString 介護認定審査会委員コード,
             int 介護認定審査会審査順) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
@@ -82,7 +82,7 @@ public class ShinsakaiJizenKekkaJoho extends ParentModelBase<ShinsakaiJizenKekka
      *
      * @return 介護認定審査会開催番号
      */
-    public int get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 

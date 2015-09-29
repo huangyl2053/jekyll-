@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 主治医情報テーブルの項目定義クラスです。
  */
 public enum DbT5912ShujiiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -45,6 +45,7 @@ public enum DbT5912ShujiiJoho implements IColumnDefinition {
     shichosonCode(2147483647, 0),
     /**
      * 主治医医療機関コード
+     * <br/>主治医医療機関情報
      */
     shujiiIryokikanCode(10, 0),
     /**
@@ -55,11 +56,16 @@ public enum DbT5912ShujiiJoho implements IColumnDefinition {
     /**
      * 主治医氏名
      */
-    shujiiName(2147483647, 0),
+    shujiiName(512, 0),
     /**
      * 主治医カナ
      */
     shujiiKana(2147483647, 0),
+    /**
+     * 性別
+     * <br/>Enum（DBZ：性別コード）
+     */
+    seibetsu(2147483647, 0),
     /**
      * 郵便番号
      */
@@ -67,7 +73,7 @@ public enum DbT5912ShujiiJoho implements IColumnDefinition {
     /**
      * 住所
      */
-    jusho(2147483647, 0),
+    jusho(512, 0),
     /**
      * 電話番号
      */
@@ -82,11 +88,12 @@ public enum DbT5912ShujiiJoho implements IColumnDefinition {
     shinryokaName(64, 0),
     /**
      * 指定医フラグ
-     * <br/>True：指定医になれる、False：なれない
+     * <br/>Enum（DBE：指定医フラグ）True：指定医になれる、False：なれない
      */
     shiteiiFlag(1, 0),
     /**
      * 状況フラグ
+     * <br/>True：有効　False：無効
      */
     jokyoFlag(1, 0);
 

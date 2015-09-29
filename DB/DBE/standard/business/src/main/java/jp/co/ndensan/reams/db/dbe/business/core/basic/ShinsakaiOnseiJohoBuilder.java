@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ShinsakaiOnseiJoho}の編集を行うビルダークラスです。
@@ -41,7 +42,7 @@ public class ShinsakaiOnseiJohoBuilder {
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @return {@link ShinsakaiOnseiJohoBuilder}
      */
-    public ShinsakaiOnseiJohoBuilder set介護認定審査会開催番号(int 介護認定審査会開催番号) {
+    public ShinsakaiOnseiJohoBuilder set介護認定審査会開催番号(RString 介護認定審査会開催番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
         entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);
         return this;

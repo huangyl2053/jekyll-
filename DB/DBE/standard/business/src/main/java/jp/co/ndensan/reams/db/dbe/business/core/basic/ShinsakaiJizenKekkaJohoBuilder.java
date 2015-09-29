@@ -43,7 +43,7 @@ public class ShinsakaiJizenKekkaJohoBuilder {
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @return {@link ShinsakaiJizenKekkaJohoBuilder}
      */
-    public ShinsakaiJizenKekkaJohoBuilder set介護認定審査会開催番号(int 介護認定審査会開催番号) {
+    public ShinsakaiJizenKekkaJohoBuilder set介護認定審査会開催番号(RString 介護認定審査会開催番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
         entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);
         return this;

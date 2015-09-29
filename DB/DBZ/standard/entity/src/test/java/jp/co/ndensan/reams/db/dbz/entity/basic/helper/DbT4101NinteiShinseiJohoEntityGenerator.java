@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -44,7 +44,7 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
     public static final RString DEFAULT_被保険者区分コード = new RString("1");
     public static final FlexibleDate DEFAULT_生年月日 = new FlexibleDate("19700101");
     public static final int DEFAULT_年齢 = 45;
-    public static final SeibetsuCode DEFAULT_性別 = new SeibetsuCode(new RString("1"));
+    public static final Code DEFAULT_性別 = new Code(new RString("1"));
     public static final AtenaKanaMeisho DEFAULT_被保険者氏名カナ = new AtenaKanaMeisho("ヒホケンシャ");
     public static final AtenaMeisho DEFAULT_被保険者氏名 = new AtenaMeisho("被保険者");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
@@ -81,7 +81,7 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
     public static final Code DEFAULT_みなし要介護区分コード = new Code("1");
     public static final boolean DEFAULT_認定延期通知発行しないことに対する同意有無 = false;
     public static final boolean DEFAULT_施設入所の有無 = false;
-    public static final RString DEFAULT_入所施設コード = new RString("0000000001");
+    public static final JigyoshaNo DEFAULT_入所施設コード = new JigyoshaNo("0000000001");
     public static final boolean DEFAULT_家庭訪問の有無 = false;
     public static final YubinNo DEFAULT_訪問調査先郵便番号 = new YubinNo("7654321");
     public static final AtenaJusho DEFAULT_訪問調査先住所 = new AtenaJusho("訪問先受住所");
@@ -164,7 +164,6 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
         entity.setShiteiiFlag(DEFAULT_指定医フラグ);
         entity.setIkenshoDataShubetsu(DEFAULT_意見書データ種別);
         entity.setRenrakuJikoToShujii(DEFAULT_主治医への連絡事項);
-        entity.setMinashiCode(DEFAULT_みなし要介護区分コード);
         entity.setEnkitsuchiNashiDoiFlag(DEFAULT_認定延期通知発行しないことに対する同意有無);
         entity.setShisetsuNyushoFlag(DEFAULT_施設入所の有無);
         entity.setNyushoShisetsuCode(DEFAULT_入所施設コード);
@@ -173,7 +172,7 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
         entity.setHomonChosasakiJusho(DEFAULT_訪問調査先住所);
         entity.setHomonChosasakiName(DEFAULT_訪問調査先名称);
         entity.setHomonChosasakiTelNo(DEFAULT_訪問調査先電話番号);
-        entity.setSichosonRenrakuJiko(DEFAULT_市町村連絡事項);
+        entity.setShichosonRenrakuJiko(DEFAULT_市町村連絡事項);
         entity.setShoriJotaiKubun(DEFAULT_処理状態区分);
         entity.setTorisageYMD(DEFAULT_取下年月日);
         entity.setTorisageRiyu(DEFAULT_取下理由);
@@ -181,14 +180,14 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
         entity.setKyakkaRiyu(DEFAULT_却下理由);
         entity.setEnkiKetteiYMD(DEFAULT_延期決定年月日);
         entity.setEnkiRiyu(DEFAULT_延期理由);
-        entity.setEnkitsuchiHakkoYMD(DEFAULT_延期通知発行年月日);
-        entity.setEnkitsuchiHakkoKaisu(DEFAULT_延期通知発行回数);
+        entity.setEnkiTsuchiHakkoYMD(DEFAULT_延期通知発行年月日);
+        entity.setEnkiTsuchiHakkoKaisu(DEFAULT_延期通知発行回数);
         entity.setEnkiMikomiKaishiYMD(DEFAULT_延期見込期間開始年月日);
         entity.setEnkiMikomiShuryoYMD(DEFAULT_延期見込期間終了年月日);
         entity.setShinsaKeizokuFlag(DEFAULT_審査継続区分);
         entity.setShinsakaiYusenWaritsukeKubunCode(DEFAULT_要介護認定審査会優先振分区分コード);
-        entity.setKosinTsuchiHakkoYMD(DEFAULT_更新通知発行年月日);
-        entity.setKosinTsuchiHakkoKanryoYMD(DEFAULT_更新通知発行完了年月日);
+        entity.setKoshinTsuchiHakkoYMD(DEFAULT_更新通知発行年月日);
+        entity.setKoshinTsuchiHakkoKanryoYMD(DEFAULT_更新通知発行完了年月日);
         entity.setNinteiShinseiJohoTorokuYMD(DEFAULT_認定申請情報登録年月日);
         entity.setSaiChosaIraiKaisu(DEFAULT_再調査依頼回数);
         entity.setSaiSakuseiIraiKaisu(DEFAULT_再作成依頼回数);

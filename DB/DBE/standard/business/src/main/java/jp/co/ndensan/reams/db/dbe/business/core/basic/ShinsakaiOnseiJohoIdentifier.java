@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会音声情報の識別子です。
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @lombok.Value
 public class ShinsakaiOnseiJohoIdentifier implements Serializable {
 
-    private final int 介護認定審査会開催番号;
+    private final RString 介護認定審査会開催番号;
     private final int 連番;
 
     /**
@@ -23,7 +24,7 @@ public class ShinsakaiOnseiJohoIdentifier implements Serializable {
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @param 連番 連番
      */
-    public ShinsakaiOnseiJohoIdentifier(int 介護認定審査会開催番号,
+    public ShinsakaiOnseiJohoIdentifier(RString 介護認定審査会開催番号,
             int 連番) {
         this.介護認定審査会開催番号 = 介護認定審査会開催番号;
         this.連番 = 連番;

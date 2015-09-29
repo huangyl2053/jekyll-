@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT5508ShinsakaiJizenKekkaJohoEntityGenerator {
 
-    public static final int DEFAULT_介護認定審査会開催番号 = 1;
+    public static final RString DEFAULT_介護認定審査会開催番号 = new RString("1");
     public static final RString DEFAULT_介護認定審査会委員コード = new RString("名称");
     public static final int DEFAULT_介護認定審査会審査順 = 1;
     public static final RString DEFAULT_一次判定結果変更理由 = new RString("名称");

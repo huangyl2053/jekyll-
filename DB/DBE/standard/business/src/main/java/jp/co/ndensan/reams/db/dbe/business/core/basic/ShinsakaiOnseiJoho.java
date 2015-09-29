@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -28,7 +29,7 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @param 連番 連番
      */
-    public ShinsakaiOnseiJoho(int 介護認定審査会開催番号,
+    public ShinsakaiOnseiJoho(RString 介護認定審査会開催番号,
             int 連番) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
@@ -74,7 +75,7 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
      *
      * @return 介護認定審査会開催番号
      */
-    public int get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 
