@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 

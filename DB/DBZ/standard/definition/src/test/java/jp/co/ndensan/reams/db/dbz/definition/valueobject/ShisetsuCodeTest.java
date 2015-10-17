@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

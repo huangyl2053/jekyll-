@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.CareManeger;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7064CareManegerEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7064CareManegerEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7064CareManegerDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;

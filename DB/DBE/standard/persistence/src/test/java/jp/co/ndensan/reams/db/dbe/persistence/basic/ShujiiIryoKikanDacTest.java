@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;

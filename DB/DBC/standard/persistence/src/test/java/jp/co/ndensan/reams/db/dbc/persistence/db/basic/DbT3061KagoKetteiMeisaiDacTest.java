@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3061KagoKetteiMeisaiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3061KagoKetteiMeisaiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;

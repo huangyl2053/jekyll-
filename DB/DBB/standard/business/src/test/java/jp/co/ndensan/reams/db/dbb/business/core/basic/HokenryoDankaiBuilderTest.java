@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

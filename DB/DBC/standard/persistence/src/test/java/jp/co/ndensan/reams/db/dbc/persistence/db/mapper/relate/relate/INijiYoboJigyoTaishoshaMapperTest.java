@@ -4,17 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboJigyoTaishoshaMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate.NijiYoboJigyoTaishoshaMapperParameter;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboJigyoTaishoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3100NijiYoboJigyoTaishoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.relate.NijiYoboJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3100NijiYoboJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

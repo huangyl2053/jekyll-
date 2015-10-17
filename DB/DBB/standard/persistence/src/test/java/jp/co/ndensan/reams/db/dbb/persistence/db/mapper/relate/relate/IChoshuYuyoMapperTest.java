@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.IChoshuYuyoMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatis.param.relate.ChoshuYuyoMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2007KibetsuChoshuYuyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.ChoshuYuyoEntity;

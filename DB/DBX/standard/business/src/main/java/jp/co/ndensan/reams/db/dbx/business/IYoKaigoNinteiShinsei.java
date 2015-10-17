@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbx.business;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunHorei;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiYukoKubun;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.TorisageKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunHorei;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiYukoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

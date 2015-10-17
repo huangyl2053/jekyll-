@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceIdoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceIdoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;

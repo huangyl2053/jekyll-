@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
 
 /**
  * 構成市町村マスタのモデルクラスです。（資格・賦課）
@@ -509,7 +509,6 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param shoKisaiHokenshaNo 証記載保険者番号
          * @return builder
          */
-        @Override
         public Builder setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
             Objects.requireNonNull(shoKisaiHokenshaNo);
             this.entity.setShoKisaiHokenshaNo(shoKisaiHokenshaNo);
@@ -821,7 +820,6 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param unyoHokenshaNo 運用保険者番号
          * @return builder
          */
-        @Override
         public Builder setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
             Objects.requireNonNull(unyoHokenshaNo);
             this.entity.setUnyoHokenshaNo(unyoHokenshaNo);
@@ -875,8 +873,7 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

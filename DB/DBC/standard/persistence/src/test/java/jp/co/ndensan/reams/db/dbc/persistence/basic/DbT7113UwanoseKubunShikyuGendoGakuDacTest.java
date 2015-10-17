@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7113UwanoseKubunShikyuGendoGakuDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;

@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

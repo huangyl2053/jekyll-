@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

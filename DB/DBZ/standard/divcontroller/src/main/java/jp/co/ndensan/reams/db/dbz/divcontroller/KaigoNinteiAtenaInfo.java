@@ -6,8 +6,8 @@
 
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

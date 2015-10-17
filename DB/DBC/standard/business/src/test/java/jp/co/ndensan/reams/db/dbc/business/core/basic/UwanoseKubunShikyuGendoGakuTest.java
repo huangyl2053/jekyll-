@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7113UwanoseKubunShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

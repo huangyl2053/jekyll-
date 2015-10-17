@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.mapper;
 
+import jp.co.ndensan.reams.db.dbc.business.core.mapper.JuryoininJigyoshaMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyoshaList;
-import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyoshaList;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
-import jp.co.ndensan.reams.db.dbx.entity.basic.ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;

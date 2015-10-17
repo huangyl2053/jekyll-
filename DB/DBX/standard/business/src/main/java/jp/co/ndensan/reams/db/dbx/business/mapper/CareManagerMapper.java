@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business._CareManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho._Name;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7064CareManegerEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**

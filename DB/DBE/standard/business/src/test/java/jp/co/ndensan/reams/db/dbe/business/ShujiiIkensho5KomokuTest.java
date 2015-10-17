@@ -4,10 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ShogaiKoreishaJiritsudoKomoku;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkensho5Komoku;
+import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.DentatsuNoryokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinchiNoryokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShokujiKoiHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TankiKiokuKomoku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

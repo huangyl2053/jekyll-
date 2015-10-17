@@ -4,9 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiWariateIin;
+import jp.co.ndensan.reams.db.dbe.business.core.ShinsainKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukketsuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinShukketsuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

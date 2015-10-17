@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3068KogakuGassanShinseishoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3068KogakuGassanShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3068KogakuGassanShinseishoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3068KogakuGassanShinseishoEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

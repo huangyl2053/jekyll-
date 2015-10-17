@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.IryoKikanIdoJiyuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.KaiinKubunCodeValue;

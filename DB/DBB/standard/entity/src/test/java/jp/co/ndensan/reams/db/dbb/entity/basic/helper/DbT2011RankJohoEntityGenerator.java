@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

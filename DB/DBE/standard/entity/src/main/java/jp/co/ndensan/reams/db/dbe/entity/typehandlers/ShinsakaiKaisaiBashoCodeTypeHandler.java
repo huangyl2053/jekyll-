@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ShinsakaiKaisaiBashoCodeTypeHandler extends BaseTypeHandler<ShinsakaiKaisaiBashoCode> {

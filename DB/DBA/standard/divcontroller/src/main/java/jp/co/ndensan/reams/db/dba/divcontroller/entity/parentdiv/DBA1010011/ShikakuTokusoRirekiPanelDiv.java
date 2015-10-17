@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.IShikakuTokusoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusorireki.IShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusorireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

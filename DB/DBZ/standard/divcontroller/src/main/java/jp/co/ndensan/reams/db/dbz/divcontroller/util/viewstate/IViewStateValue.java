@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
 
 /**

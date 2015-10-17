@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoJigyoshaDaihyosha;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoJigyoshaShiteiService;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.relate.KaigoJigyoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoJigyoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.relate.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.relate.IKaigoJigyoshaMapper;

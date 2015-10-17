@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**

@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

@@ -8,11 +8,11 @@ import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.business.core.InputItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

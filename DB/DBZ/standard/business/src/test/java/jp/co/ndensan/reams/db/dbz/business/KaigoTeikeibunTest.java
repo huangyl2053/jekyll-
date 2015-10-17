@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbz.business.core.KaigoTeikeibun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;

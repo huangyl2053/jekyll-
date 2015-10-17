@@ -9,7 +9,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.relate.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.relate.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.relate.IKaigoServiceShuruiMapper;

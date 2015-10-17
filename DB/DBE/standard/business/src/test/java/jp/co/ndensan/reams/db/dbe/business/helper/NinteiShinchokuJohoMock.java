@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock.センター送信年月日;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock.主治医意見書作成依頼完了年月日;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock.主治医意見書登録完了年月日;

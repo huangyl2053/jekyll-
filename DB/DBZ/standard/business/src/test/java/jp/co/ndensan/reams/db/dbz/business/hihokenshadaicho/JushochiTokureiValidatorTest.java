@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.Test;

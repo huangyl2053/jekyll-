@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;

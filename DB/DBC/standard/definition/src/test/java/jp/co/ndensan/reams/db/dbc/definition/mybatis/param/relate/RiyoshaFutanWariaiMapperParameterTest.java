@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate;
 
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.RiyoshaFutanWariaiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

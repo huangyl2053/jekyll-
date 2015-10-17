@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

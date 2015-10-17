@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.GemmenDac;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2004GemmenEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 //import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
 //import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2004GemmenEntityGenerator;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.DbT2004GemmenEntity;

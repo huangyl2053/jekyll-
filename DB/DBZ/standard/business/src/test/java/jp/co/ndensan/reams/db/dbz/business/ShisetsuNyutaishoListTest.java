@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

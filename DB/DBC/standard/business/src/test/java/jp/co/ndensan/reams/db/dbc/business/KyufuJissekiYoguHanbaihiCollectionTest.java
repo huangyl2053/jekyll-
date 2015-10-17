@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

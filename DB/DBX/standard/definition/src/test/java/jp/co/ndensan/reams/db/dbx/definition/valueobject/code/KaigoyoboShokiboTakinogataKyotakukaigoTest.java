@@ -1,5 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.valueobject.code;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoyoboShokiboTakinogataKyotakukaigo;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

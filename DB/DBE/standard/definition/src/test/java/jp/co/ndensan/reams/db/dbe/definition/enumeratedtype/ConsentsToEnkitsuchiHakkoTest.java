@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;

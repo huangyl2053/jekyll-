@@ -4,15 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.HokenryoDankaiDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

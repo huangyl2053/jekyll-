@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiKaisaiBashoDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

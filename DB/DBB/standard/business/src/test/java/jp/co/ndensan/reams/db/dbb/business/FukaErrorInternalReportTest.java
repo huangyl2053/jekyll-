@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
+import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItemList;
+import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReport;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;

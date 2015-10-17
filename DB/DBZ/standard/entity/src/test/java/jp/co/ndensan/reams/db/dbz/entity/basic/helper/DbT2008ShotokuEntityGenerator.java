@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

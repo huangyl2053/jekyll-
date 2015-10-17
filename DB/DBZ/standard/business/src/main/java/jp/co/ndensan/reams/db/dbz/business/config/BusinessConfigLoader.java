@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
 

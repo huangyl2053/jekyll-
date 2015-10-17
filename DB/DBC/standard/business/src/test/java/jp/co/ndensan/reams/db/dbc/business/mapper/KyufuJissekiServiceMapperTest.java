@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.mapper;
 
+import jp.co.ndensan.reams.db.dbc.business.core.mapper.KyufuJissekiServiceMapper;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiService;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiServiceCollection;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceType;
 import jp.co.ndensan.reams.db.dbx.business._KaigoServiceType;
 import jp.co.ndensan.reams.db.dbx.business._KaigoServiceTypeCode;
-import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoServiceTypeEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.KaigoServiceTypeEntity;
 
 /**
  * 介護サービス種類Entityを操作クラスに変換するクラスです。

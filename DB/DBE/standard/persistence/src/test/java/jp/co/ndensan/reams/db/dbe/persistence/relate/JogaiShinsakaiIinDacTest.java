@@ -5,17 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.relate.JogaiShinsakaiIinDac;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
-import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.JogaiShinsakaiIinEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.ShinsakaiIinDacMock;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;

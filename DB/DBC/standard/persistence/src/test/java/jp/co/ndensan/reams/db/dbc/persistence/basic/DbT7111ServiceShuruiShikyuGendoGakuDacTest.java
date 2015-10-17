@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_履歴番号;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

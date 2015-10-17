@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business;
 
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinchishoKoreishaNichijoSeikatsuJiritsudo;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShogaiKoreiNichijoSeikatsuJiritsudo;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinchishoKoreishaNichijoSeikatsuJiritsudo;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShogaiKoreiNichijoSeikatsuJiritsudo;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import static org.hamcrest.CoreMatchers.is;

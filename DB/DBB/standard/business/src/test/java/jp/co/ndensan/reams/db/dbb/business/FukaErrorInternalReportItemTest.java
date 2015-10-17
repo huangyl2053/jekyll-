@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
+import jp.co.ndensan.reams.db.dbb.business.core.FukaError;
+import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

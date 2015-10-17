@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbz.business.core.KyuShichosonShikaku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.指定無;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.月初;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun.月末;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GesshoGetsumatsuKubun.指定無;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GesshoGetsumatsuKubun.月初;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GesshoGetsumatsuKubun.月末;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

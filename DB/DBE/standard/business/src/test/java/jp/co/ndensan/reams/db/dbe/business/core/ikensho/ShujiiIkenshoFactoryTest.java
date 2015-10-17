@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkensho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;

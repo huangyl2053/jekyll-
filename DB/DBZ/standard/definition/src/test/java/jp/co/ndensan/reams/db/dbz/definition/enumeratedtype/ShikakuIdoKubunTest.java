@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;

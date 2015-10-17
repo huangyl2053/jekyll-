@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.IShujii;
-import jp.co.ndensan.reams.db.dbe.business.IShujiiIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
-import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.IryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.business.core.Shujii.IShujii;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
+import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
+import jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan.KaigoIryoKikan;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.ShujiiIryoKikan;
+import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ux.uxx.business.core.iryokikan.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

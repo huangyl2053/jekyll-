@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.view;
 
 import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV7902FukaSearchEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

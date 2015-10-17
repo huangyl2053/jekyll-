@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysFucho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysFucho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;

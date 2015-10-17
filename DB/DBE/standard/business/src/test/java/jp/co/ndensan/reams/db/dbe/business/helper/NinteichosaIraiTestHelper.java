@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIrai;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.MobileDataShutsuryoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaTokusokuHoho;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper.chosahyoTouShutsuryokuYMD;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper.chousainCode;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper.iraishoShutsuryokuYMD;

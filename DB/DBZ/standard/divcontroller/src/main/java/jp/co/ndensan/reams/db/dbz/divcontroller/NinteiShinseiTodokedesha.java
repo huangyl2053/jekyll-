@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

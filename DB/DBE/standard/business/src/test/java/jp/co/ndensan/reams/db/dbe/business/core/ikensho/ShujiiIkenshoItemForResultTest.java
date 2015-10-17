@@ -5,14 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

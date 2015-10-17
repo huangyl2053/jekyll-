@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.valueobject;
 
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.Shisetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

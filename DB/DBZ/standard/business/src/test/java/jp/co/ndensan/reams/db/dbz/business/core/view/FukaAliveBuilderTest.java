@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.view;
 
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

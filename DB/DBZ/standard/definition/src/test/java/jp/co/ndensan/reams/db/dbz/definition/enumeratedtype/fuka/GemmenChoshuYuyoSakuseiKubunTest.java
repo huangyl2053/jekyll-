@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.GemmenChoshuYuyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

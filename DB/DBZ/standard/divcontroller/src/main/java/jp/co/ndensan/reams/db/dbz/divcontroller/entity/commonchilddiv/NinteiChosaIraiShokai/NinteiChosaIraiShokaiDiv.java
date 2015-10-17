@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIraiShokai.INinteiChosaIraiShokaiDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiShinseishaInfo.IKaigoNinteiShinseishaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseishaInfo.IKaigoNinteiShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 

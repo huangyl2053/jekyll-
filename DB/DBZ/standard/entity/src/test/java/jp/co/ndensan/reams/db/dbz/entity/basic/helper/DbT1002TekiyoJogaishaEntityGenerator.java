@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

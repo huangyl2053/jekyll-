@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.YukoKigenPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.MojigireControlType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

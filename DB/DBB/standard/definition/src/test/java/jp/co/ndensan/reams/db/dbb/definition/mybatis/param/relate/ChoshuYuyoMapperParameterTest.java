@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatis.param.relate;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static org.hamcrest.CoreMatchers.is;

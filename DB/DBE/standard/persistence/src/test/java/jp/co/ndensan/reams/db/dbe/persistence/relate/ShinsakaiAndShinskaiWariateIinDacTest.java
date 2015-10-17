@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.relate.ShinsakaiAndShinskaiWariateIinDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import org.junit.Test;

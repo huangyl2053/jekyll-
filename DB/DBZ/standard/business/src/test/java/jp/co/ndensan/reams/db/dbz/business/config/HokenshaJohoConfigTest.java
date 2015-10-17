@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

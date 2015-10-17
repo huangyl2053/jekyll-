@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoM
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoA4;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoA4EditData;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IryoKikanAndJigyoshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
-import jp.co.ndensan.reams.db.dbx.definition.util.Lists;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.IryoKikanAndJigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.Lists;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;

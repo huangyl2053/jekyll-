@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import lombok.Value;
 

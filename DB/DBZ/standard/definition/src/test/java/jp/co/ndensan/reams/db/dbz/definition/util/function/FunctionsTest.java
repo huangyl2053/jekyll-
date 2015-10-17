@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.function.Functions;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.Functions;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.isA;
 import org.junit.Test;

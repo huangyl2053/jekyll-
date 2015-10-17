@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShujiiIkenshoJohoDac;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.ShujiiIkenshoEntityMock;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;

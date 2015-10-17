@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 //import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;

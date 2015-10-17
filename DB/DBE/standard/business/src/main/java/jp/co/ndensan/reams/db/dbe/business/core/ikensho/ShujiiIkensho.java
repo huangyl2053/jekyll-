@@ -11,8 +11,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**

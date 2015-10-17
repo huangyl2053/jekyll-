@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestZenkaiNinteiKekkaJoho.TestZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestZenkaiNinteiKekkaJoho.TestZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

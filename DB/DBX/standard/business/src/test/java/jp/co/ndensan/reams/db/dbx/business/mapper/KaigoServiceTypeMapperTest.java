@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import jp.co.ndensan.reams.db.dbx.entity.basic.KaigoServiceTypeEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.KaigoServiceTypeEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

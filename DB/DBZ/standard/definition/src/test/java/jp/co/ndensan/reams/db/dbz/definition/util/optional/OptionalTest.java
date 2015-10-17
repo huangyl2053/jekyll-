@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import java.util.NoSuchElementException;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ISupplier;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

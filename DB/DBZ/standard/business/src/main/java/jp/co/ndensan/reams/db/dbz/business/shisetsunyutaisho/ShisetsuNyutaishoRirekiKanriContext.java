@@ -18,9 +18,9 @@ import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoVa
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある;
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 
 import jp.co.ndensan.reams.ur.urz.model.context.IContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;

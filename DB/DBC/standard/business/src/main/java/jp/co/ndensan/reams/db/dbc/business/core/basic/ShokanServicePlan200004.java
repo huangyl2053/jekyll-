@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3045ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -176,7 +176,7 @@ public class ShokanServicePlan200004 extends ModelBase<ShokanServicePlan200004Id
      *
      * @return サービスコード
      */
-    public jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceCode getサービスコード() {
+    public jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode getサービスコード() {
         return entity.getServiceCode();
     }
 

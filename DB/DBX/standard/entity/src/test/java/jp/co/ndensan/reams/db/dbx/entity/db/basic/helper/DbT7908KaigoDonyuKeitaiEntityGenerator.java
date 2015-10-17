@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7908KaigoDonyuKeitaiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

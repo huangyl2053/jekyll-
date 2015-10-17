@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosainBangoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoJigyoshaNo;
 import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiTestHelper.*;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;

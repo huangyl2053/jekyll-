@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

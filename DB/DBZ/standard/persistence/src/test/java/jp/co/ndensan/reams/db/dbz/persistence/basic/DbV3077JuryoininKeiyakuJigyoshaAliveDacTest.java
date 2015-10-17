@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbV3077JuryoininKeiyakuJigyoshaAliveDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbV3077JuryoininKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV3077JuryoininKeiyakuJigyoshaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;

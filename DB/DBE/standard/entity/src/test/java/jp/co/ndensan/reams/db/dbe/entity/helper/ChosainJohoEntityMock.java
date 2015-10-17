@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 //import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.basic.ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7110TankiNyushoShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

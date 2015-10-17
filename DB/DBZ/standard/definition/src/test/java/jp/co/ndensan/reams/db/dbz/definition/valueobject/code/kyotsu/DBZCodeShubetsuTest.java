@@ -4,6 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.TokubetsuChoshuTeishiJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoGemmenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.DBZCodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

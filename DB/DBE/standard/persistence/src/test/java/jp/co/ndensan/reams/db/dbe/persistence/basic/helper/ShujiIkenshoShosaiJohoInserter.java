@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5009NinteichosahyoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

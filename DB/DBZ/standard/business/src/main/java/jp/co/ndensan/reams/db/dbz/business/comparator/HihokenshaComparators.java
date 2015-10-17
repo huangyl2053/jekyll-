@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
+import jp.co.ndensan.reams.db.dbz.business.core.Hihokensha;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SortOrder;
 
 /**
  * {@link Hihokensha Hihokensha}専用のcomparatorを集めたクラスです。

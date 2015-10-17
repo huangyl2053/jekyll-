@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.business.config;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoJushoEdit;
+import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoJushoEdit;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;

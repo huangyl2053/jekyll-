@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoKetteiMeisai;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3061KagoKetteiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3061KagoKetteiMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3061KagoKetteiMeisaiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

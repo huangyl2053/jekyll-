@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5052KoseiShichosonShishoMasterDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

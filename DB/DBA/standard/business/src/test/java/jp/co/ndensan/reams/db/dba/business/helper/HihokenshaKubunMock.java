@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;

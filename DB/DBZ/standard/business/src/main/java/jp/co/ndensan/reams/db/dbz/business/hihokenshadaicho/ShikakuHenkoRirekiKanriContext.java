@@ -21,10 +21,10 @@ import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidat
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.届出日設定なし;
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.最新の取得日として登録不可;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.model.context.IContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 

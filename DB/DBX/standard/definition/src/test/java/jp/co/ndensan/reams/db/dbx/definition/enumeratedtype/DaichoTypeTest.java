@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.IFukaMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatis.param.relate.FukaMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.FukaEntity;

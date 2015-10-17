@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

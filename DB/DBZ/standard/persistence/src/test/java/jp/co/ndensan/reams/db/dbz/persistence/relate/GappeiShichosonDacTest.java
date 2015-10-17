@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.relate.GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

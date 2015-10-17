@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;

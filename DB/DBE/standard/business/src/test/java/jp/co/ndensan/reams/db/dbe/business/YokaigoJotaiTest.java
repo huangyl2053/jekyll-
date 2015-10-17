@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;

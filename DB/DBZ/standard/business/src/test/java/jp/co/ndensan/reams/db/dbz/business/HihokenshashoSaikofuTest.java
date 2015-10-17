@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshashoSaikofu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

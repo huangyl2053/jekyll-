@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSo
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DataKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SakujoJiyuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DataKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SakujoJiyuCode;
 // TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;

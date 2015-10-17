@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;

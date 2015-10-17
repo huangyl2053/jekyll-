@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.shikakuido;
 
 import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;

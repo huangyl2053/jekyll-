@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.Pred;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.*;

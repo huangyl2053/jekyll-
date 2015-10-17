@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

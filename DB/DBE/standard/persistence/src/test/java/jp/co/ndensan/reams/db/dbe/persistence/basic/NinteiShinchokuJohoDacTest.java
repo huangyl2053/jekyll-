@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.NinteiShinchokuJohoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;

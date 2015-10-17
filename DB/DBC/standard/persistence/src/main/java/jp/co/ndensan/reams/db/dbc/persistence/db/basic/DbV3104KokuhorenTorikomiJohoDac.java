@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3104KokuhorenTorikomiJoho;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.DbV3104KokuhorenTorikomiJoho.kokanShikibetsuNo;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.DbV3104KokuhorenTorikomiJoho.shoriYM;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3104KokuhorenTorikomiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJoho;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJoho.kokanShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJoho.shoriYM;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

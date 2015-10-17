@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;

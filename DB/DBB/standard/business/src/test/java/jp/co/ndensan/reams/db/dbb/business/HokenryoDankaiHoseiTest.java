@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
+import jp.co.ndensan.reams.db.dbb.business.core.SeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
+import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHosei;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Before;
 import org.junit.BeforeClass;

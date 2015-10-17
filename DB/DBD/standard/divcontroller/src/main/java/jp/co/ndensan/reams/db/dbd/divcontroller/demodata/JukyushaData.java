@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.demodata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgNinteiRireki_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002.dgNinteiRireki_Row;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;

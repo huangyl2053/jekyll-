@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.relate.TekiyoJogaishaDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1002TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

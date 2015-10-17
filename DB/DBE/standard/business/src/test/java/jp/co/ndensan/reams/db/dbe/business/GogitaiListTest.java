@@ -4,13 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
+import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiList;
+import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiDetail;
+import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.Gogitai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

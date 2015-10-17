@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.relate.ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubun09A;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

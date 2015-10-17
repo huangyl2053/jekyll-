@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.comparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.IShikibetsuCodeGettable;
+import jp.co.ndensan.reams.db.dbz.business.core.IShikibetsuCodeGettable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import org.junit.experimental.runners.Enclosed;

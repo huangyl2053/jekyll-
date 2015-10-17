@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.relate.GogitaiAndGogitaiWariateIinDac;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiJohoDac;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.GogitaiWariateSelector;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2GoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.Minashi2Gosha.Minashi2Gosha;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiTaishoshaList;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
+import jp.co.ndensan.reams.db.dbz.business.core.Hihokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

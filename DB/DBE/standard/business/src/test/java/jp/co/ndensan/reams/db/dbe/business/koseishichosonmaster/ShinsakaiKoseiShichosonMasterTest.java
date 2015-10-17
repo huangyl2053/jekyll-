@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.koseishichosonmaster;
 
+import jp.co.ndensan.reams.db.dbe.business.core.koseishichosonmaster.ShinsakaiKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

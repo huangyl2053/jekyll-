@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaIrai;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.MobileDataShutsuryoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaTokusokuHoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosainBangoCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

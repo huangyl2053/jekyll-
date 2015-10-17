@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4911ShujiiIryoKikanJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4911ShujiiIryoKikanJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;

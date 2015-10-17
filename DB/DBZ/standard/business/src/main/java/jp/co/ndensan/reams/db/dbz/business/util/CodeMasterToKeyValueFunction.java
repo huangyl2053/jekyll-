@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.util;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.ICodeValueObject;
 

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho;
 
 import java.util.Collections;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

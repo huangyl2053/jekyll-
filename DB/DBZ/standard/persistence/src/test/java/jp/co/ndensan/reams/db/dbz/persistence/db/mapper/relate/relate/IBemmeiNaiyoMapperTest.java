@@ -4,17 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IBemmeiNaiyoMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.relate.BemmeiNaiyoMapperParameter;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7002BemmeiNaiyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7003BemmeishaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.BemmeiNaiyoMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.relate.BemmeiNaiyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7002BemmeiNaiyoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7003BemmeishaJohoDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7002BemmeiNaiyoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7003BemmeishaJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

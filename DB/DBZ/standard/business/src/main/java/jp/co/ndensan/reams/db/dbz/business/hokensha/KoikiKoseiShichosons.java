@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
 import java.util.Iterator;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 

@@ -6,12 +6,13 @@ package jp.co.ndensan.reams.db.dbb.business;
  * and open the template in the editor.
  */
 
+import jp.co.ndensan.reams.db.dbb.business.core.端数調整判定;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import jp.co.ndensan.reams.db.dbb.business.NengakuFukaKonkyo;
-import jp.co.ndensan.reams.db.dbb.business.保険料段階判定input;
-import jp.co.ndensan.reams.db.dbb.business.資格喪失日が年度内に存在するか判定;
+import jp.co.ndensan.reams.db.dbb.business.core.NengakuFukaKonkyo;
+import jp.co.ndensan.reams.db.dbb.business.core.保険料段階判定input;
+import jp.co.ndensan.reams.db.dbb.business.core.資格喪失日が年度内に存在するか判定;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;

@@ -5,17 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.helper;
 
-import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.KeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.Todokedesha;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.JutakuKaishuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KogakuKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.Todokedesha;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.EigyoKeitai;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.JutakuKaishuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;

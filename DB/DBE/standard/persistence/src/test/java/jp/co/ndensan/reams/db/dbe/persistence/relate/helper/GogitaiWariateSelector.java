@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate.helper;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJoho.*;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJoho.*;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

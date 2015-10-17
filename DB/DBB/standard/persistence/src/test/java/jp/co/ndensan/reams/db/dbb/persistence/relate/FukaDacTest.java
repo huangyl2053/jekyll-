@@ -4,18 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.FukaDac;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 //import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 //import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 //import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
 //import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2002FukaDac;

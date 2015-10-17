@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.IConfigKeysKokuhorenTorikomi;
+import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiConfigKeysFactory;
+import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.IConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.junit.Assert.assertThat;

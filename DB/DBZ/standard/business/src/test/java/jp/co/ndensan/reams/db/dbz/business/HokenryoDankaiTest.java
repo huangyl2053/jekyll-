@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 //import jp.co.ndensan.reams.db.dbb.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

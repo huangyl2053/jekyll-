@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbV1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1002TekiyoJogaishaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1002TekiyoJogaishaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;

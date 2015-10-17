@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5052KoseiShichosonShishoMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

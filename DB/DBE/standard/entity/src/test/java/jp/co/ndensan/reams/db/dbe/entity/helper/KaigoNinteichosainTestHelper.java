@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7013ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3104KokuhorenTorikomiJohoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbV3104KokuhorenTorikomiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.DbV3104KokuhorenTorikomiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

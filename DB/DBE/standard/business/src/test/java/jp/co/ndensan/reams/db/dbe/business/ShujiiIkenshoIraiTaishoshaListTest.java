@@ -4,12 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoIraiTaishoshaList;
+import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
+import jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan.KaigoIryoKikan;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

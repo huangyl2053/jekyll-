@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002Fuka.*;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.ISaveable;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.*;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

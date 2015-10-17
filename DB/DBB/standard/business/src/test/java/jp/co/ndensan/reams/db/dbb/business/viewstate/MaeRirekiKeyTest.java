@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.viewstate;
 
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

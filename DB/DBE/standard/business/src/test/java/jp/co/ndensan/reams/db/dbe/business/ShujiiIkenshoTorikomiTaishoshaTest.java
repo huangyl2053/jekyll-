@@ -4,6 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaResult.NinteichosaKekkaTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiShinsei;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import static org.hamcrest.CoreMatchers.instanceOf;

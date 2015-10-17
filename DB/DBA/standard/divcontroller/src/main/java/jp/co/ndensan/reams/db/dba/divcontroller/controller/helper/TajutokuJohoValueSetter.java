@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.helper;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.SochimotoJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TekiyoJiyuInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.JutokuJohoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.ShisetsuJohoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.SochimotoJohoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.TekiyoJiyuInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;

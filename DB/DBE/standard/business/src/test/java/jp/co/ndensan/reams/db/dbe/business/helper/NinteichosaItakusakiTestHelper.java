@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper.事業者番号;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper.介護事業者状況;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper.介護事業者番号;

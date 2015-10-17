@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceNaiyo;
 import jp.co.ndensan.reams.db.dbx.business._KaigoServiceCode;
 import jp.co.ndensan.reams.db.dbx.business._KaigoServiceNaiyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceTani;
 import jp.co.ndensan.reams.db.dbx.business._KaigoServiceTani;

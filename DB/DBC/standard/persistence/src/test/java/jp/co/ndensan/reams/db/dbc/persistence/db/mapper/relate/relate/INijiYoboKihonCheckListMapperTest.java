@@ -4,19 +4,20 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.INijiYoboKihonCheckListMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate.NijiYoboKihonCheckListMapperParameter;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3101NijiYoboKihonCheckListEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3102NijiYoboNiniCheckListEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.NijiYoboKihonCheckListMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3103NijiYoboCheckListHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3101NijiYoboKihonCheckListEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3102NijiYoboNiniCheckListEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3103NijiYoboCheckListHanteiKekkaEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.relate.NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.NijiYoboKihonCheckListEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3101NijiYoboKihonCheckListDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3102NijiYoboNiniCheckListDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3103NijiYoboCheckListHanteiKekkaDac;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

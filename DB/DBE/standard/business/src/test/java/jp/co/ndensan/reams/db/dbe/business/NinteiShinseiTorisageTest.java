@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.TorisageRiyu;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinseiTorisage.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;

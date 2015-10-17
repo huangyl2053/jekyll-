@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.FukaErrorCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

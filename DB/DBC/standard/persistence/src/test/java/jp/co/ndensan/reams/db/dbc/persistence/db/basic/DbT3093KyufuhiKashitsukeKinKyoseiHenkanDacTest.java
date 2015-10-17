@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntityGenerator.*;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_枝番;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_異動日;

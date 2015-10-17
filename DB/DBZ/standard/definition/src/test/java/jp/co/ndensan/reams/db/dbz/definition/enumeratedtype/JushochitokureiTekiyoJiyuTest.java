@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

@@ -1,16 +1,15 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShisetsuNyutaishoIdo のクラスファイル 
- * 
+ * ShisetsuNyutaishoIdo のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuNyutaishoIdoDiv extends Panel {
@@ -20,6 +19,7 @@ public class ShisetsuNyutaishoIdoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShisetsuNyutaishoKanri")
     private ShisetsuNyutaishoRirekiKanriDiv ShisetsuNyutaishoKanri;
 
@@ -36,7 +36,7 @@ public class ShisetsuNyutaishoIdoDiv extends Panel {
 
     @JsonProperty("ShisetsuNyutaishoKanri")
     public void setShisetsuNyutaishoKanri(ShisetsuNyutaishoRirekiKanriDiv ShisetsuNyutaishoKanri) {
-        this.ShisetsuNyutaishoKanri=ShisetsuNyutaishoKanri;
+        this.ShisetsuNyutaishoKanri = ShisetsuNyutaishoKanri;
     }
 
 }

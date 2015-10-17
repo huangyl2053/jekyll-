@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.RankJohoDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2011RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;

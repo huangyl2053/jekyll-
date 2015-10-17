@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
+import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;

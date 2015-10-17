@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;

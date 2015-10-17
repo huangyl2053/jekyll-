@@ -6,7 +6,16 @@
  */
 package jp.co.ndensan.reams.db.dba.business.code;
 
-import jp.co.ndensan.reams.db.dba.business.codeassigneditem.*;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.ShutokuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.SoshitsuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.ShutokuJiyuTatokuJogai;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.SoshitsuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.ShutokuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.SoshitsuJiyuTatokuJogai;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.IryoHokenShurui;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.SoshitsuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.db.dba.business.core.codeassigneditem.ShutokuJiyuHihokensha;
+import jp.co.ndensan.reams.db.dba.business.core.code.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import static org.hamcrest.CoreMatchers.is;

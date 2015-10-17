@@ -4,18 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IChohyoSeigyoKyotsuMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.relate.ChohyoSeigyoKyotsuMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7065ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7066ChohyoSeigyoKyotsuControlEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7067ChohyoSeigyoHanyoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControlEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7066ChohyoSeigyoKyotsuControlEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.relate.ChohyoSeigyoKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7066ChohyoSeigyoKyotsuControlDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7067ChohyoSeigyoHanyoDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7066ChohyoSeigyoKyotsuControlDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

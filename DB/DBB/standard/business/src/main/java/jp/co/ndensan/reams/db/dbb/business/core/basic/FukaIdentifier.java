@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;

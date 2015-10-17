@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
+import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;

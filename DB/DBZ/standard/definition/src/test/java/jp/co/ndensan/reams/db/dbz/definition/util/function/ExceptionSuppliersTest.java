@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;

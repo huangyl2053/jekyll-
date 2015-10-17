@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbx.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.codeassigneditem.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.codeassigneditem.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeassigneditem.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeassigneditem.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

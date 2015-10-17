@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 

@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbz.business.core.ShichosonSecurity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import org.junit.experimental.runners.Enclosed;

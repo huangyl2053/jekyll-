@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ToshiNoTypeHandler extends BaseTypeHandler<ToshiNo> {

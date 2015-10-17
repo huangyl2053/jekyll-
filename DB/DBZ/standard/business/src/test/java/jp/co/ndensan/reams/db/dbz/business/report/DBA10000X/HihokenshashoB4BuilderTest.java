@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;

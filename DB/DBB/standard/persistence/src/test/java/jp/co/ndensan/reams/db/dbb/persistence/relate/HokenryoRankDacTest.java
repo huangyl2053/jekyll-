@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.HokenryoRankDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2012HokenryoRankEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2012HokenryoRankDac;

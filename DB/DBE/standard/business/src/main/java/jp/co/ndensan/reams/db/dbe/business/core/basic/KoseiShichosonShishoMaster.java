@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

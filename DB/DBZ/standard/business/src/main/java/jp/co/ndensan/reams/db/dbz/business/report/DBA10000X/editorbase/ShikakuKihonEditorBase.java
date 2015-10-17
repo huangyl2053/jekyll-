@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConf
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;

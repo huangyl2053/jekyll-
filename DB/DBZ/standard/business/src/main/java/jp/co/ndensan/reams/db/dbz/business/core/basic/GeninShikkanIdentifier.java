@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 原因疾患の識別子です。

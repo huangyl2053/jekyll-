@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition;
 
+import jp.co.ndensan.reams.db.dbe.core.definition.SaiChousaSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.core.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;

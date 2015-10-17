@@ -5,6 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
+import jp.co.ndensan.reams.db.dbb.business.core.SeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.FukaKonkyo;
+import jp.co.ndensan.reams.db.dbb.business.core.KazeiHantei;
+import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;

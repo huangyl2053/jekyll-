@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.business.IShikibetsuCodeGettable;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
+import jp.co.ndensan.reams.db.dbz.business.core.IShikibetsuCodeGettable;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SortOrder;
 
 /**
  * {@link IShikibetsuCodeGettable 識別コードが取得可能なオブジェクト}専用のComparatorです。

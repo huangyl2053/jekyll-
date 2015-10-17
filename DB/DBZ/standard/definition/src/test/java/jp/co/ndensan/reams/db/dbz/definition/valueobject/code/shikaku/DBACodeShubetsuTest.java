@@ -4,6 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.HihokenshashoKaishuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakushashoKaishuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.HihokenshashoKofuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.IryoHokenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakushashoKofuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

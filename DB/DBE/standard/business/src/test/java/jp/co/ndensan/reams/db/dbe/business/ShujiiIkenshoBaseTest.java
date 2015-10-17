@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiJohoTeikyoKibo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoDoi;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteiJohoTeikyoKibo;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

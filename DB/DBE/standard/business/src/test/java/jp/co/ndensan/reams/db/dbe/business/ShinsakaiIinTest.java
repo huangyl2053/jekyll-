@@ -4,10 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinKoza;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

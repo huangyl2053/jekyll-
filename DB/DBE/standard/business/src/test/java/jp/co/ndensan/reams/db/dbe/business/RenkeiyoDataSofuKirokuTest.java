@@ -4,13 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.HikiwatashiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.business.core.RenkeiyoDataSofuKiroku;
+import jp.co.ndensan.reams.db.dbe.core.definition.HikiwatashiKubun;
+import jp.co.ndensan.reams.db.dbe.core.definition.NinteiShinseijiKubun;
+import jp.co.ndensan.reams.db.dbe.core.definition.SaiChousaSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.core.definition.SaiIkenshoSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.core.definition.SaiSoufuKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

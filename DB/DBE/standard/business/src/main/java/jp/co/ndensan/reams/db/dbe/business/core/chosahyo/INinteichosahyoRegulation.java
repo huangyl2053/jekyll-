@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 
 /**
  * 要介護認定調査の調査票定義を扱うインターフェースです。

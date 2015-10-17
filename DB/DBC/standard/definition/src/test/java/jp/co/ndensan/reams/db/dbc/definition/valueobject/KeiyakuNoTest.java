@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

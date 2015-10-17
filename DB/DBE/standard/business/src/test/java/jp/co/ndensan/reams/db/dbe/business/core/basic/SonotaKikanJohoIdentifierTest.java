@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5914SonotaKikanJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

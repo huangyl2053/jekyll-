@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.business.HokenshaShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HokenshaShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;

@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokensh
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.AtenaFinderDiv;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.IAtenaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;

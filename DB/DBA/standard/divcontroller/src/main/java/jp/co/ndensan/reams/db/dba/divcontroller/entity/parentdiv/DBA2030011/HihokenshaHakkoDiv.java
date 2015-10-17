@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.IHihokenshaShikakuHakkoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.IHihokenshaShikakuHakkoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
  * HihokenshaHakko のクラスファイル

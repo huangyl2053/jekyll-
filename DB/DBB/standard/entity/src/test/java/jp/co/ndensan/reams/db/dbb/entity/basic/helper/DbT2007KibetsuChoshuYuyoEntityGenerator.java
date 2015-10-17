@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2007KibetsuChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

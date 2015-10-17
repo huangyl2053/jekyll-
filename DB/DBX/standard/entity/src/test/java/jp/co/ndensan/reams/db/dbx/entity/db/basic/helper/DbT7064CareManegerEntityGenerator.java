@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7064CareManegerEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

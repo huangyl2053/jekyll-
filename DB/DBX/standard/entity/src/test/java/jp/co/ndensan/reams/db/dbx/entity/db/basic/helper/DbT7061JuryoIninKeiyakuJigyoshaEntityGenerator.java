@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

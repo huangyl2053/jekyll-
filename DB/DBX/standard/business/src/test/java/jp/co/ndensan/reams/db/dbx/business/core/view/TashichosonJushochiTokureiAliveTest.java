@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.view;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.entity.basic.DbV1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
+import jp.co.ndensan.reams.db.dbe.business.core.NinteiResult.NinteiYukoKikan;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.experimental.runners.Enclosed;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoTeikeibun;
+import jp.co.ndensan.reams.db.dbz.business.core.KaigoTeikeibun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

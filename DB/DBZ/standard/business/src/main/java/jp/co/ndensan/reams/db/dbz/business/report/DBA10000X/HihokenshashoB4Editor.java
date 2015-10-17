@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.SeiDoitsu
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.ServiceTaniEditorB4Base;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.ShikakuKihonEditorBase;
 import jp.co.ndensan.reams.db.dbz.business.report.NinteiAndKyotakuShienOutputChecker;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition.上部;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition.指定無し;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition.上部;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition.指定無し;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 

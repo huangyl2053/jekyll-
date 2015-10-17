@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;

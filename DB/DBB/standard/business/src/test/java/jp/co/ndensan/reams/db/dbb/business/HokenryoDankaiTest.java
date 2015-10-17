@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
+import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 //import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 //import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

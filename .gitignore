@@ -6,6 +6,7 @@ libs/
 .idea/
 build/
 d.ts/
+DB-jp/
 
 *.map
 *.dll

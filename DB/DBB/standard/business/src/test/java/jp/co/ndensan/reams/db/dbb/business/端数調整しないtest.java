@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbb.business;
  * and open the template in the editor.
  */
 
-import jp.co.ndensan.reams.db.dbb.business.I端数調整;
-import jp.co.ndensan.reams.db.dbb.business.端数調整しない;
+import jp.co.ndensan.reams.db.dbb.business.core.I端数調整;
+import jp.co.ndensan.reams.db.dbb.business.core.端数調整しない;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;

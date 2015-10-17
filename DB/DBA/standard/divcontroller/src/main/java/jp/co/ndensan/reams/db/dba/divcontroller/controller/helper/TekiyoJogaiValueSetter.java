@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.helper;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.JogaishaTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTorokuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.JogaishaTekiyoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

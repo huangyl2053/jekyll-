@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.mapper;
 
-import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 
 /**

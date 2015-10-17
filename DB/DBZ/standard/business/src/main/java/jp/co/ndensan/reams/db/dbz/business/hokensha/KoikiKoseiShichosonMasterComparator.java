@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.hokensha;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
 
 /**
  * {@link IKoikiKoseiShichoson}とその実装クラスに適用できる{@link Comparator}です。

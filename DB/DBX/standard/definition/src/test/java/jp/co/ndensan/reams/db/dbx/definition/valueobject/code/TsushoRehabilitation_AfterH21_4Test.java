@@ -1,5 +1,6 @@
 package  jp.co.ndensan.reams.db.dbx.definition.valueobject.code;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsushoRehabilitation_AfterH21_4;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertFalse;

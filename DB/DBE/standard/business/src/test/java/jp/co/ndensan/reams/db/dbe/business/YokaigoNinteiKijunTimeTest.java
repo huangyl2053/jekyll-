@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.YokaigoNintei.YokaigoNinteiKijunTime;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import org.junit.Before;

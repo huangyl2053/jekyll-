@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

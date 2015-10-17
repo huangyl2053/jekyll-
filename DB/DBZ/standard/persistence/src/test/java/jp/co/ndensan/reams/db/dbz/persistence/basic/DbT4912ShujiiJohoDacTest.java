@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4912ShujiiJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4912ShujiiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード;

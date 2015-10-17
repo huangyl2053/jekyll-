@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbx.business;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuShikibetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 
 /**
  * 介護サービス単位のインターフェースです。

@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;

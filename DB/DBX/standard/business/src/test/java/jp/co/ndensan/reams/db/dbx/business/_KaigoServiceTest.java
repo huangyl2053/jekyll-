@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbx.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.TanisuShikibetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;

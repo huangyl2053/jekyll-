@@ -8,31 +8,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
-import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
-import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuHenko;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshashoSaikofu;
+import jp.co.ndensan.reams.db.dbz.business.core.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.business.core.JushochitokureiKaijo;
+import jp.co.ndensan.reams.db.dbz.business.core.JushochitokureiTekiyo;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuHenko;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -58,8 +55,7 @@ public final class HihokenshaShikakuMapper {
      * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}へ変換します。
      *
      * @param shikaku {@link IHihokenshaShikaku IHihokenshaShikaku}
-     * @return
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
+     * @return {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
      */
     public static DbT1001HihokenshaDaichoEntity toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         return isNull(shikaku) ? null : _toHihokenshaDaichoEntity(shikaku);
@@ -99,14 +95,12 @@ public final class HihokenshaShikakuMapper {
     }
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
-     * {@link List list}へ変換します。<br />
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link List list}を、
+     * {@link IHihokenshaShikaku IHihokenshaShikaku}の {@link List list}へ変換します。<br />
      *
      * 引数のlistが空だったときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
      *
-     * @param entities
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
+     * @param entities {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
      * @return
      * {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
      */
@@ -126,8 +120,7 @@ public final class HihokenshaShikakuMapper {
      * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}を
      * {@link IHihokenshaShikaku IHihokenshaShikaku}へ変換します。
      *
-     * @param entity
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
+     * @param entity {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。ただし、引数がnullのときnull。
      */
     public static IHihokenshaShikaku toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
@@ -176,26 +169,28 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
-        IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
-                entity.getShikibetsuCode(),
-                HokenShubetsu.介護保険,
-                toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
-                toRDateOrMin(entity.getShikakuShutokuYMD()),
-                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
-                //                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
-                null,
-                toRDateOrMax(entity.getShikakuSoshitsuTodokedeYMD()),
-                toRDateOrMax(entity.getShikakuSoshitsuYMD()),
-                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
-                //                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
-                null,
-                toValue(entity.getHihokenshaNo()),
-                entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
-                toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
-                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
-                JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
-
-        return kaigoShikaku;
+       // IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
+        //                entity.getShikibetsuCode(),
+        //                HokenShubetsu.介護保険,
+        //                toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
+        //                toRDateOrMin(entity.getShikakuShutokuYMD()),
+        //                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+        //                //                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
+        //                null,
+        //                toRDateOrMax(entity.getShikakuSoshitsuTodokedeYMD()),
+        //                toRDateOrMax(entity.getShikakuSoshitsuYMD()),
+        //                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+        //                //                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
+        //                null,
+        //                toValue(entity.getHihokenshaNo()),
+        //                entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
+        //                toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
+        //                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
+        //                JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
+        //
+        //
+        //    KaigoShikakuFactory.createInstance(ShikibetsuCode.EMPTY, HokenShubetsu.介護保険, RDate.MAX, RDate.MAX, null, RDate.MAX, RDate.MAX, null, RString.EMPTY, RString.EMPTY, RDate.MAX, ShikakuHihokenshaKubun.第１号被保険者, JushochiTokureishaKubun.住所地特例者);
+        return null;
     }
 
     private static RDate toRDateOrMin(FlexibleDate date) {

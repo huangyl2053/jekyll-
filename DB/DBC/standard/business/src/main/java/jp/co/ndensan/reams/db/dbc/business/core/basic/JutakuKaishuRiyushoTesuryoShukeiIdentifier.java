@@ -9,7 +9,7 @@ import java.io.Serializable;
 import lombok.Value;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 
 /**
  * 住宅改修理由書作成手数料請求集計の識別子です。

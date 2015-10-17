@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho.*;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJoho.*;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;

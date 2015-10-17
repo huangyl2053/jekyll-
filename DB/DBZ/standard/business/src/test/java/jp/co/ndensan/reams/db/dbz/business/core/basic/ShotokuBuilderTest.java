@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.ShotokuBuilder;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2008ShotokuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

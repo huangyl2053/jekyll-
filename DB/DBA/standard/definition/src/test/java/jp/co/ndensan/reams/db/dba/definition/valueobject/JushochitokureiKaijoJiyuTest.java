@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.valueobject;
 
-import jp.co.ndensan.reams.db.dba.definition.valueobject.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.valueobject.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;

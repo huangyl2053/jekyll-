@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic.FukaErrorListDac;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.basic.testhelper.FukaErrorListInserter;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

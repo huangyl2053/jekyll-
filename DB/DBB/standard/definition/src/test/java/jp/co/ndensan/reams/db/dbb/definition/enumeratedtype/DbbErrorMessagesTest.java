@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbb.definition.core.enumeratedtype.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import static org.hamcrest.CoreMatchers.*;

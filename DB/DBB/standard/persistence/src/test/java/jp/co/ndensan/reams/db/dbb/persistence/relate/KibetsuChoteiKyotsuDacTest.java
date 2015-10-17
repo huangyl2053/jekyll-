@@ -4,20 +4,20 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbb.persistence.relate.KibetsuChoteiKyotsuDac;
+import jp.co.ndensan.reams.db.dbb.persistence.db.relate.KibetsuChoteiKyotsuDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
 //import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
 //import jp.co.ndensan.reams.db.dbz.model.relate.fuka.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

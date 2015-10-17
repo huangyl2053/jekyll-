@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.valueobject;
 
-import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JunkyoKubunType;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.JunkyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JunkyoKubunType;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

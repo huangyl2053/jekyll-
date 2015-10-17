@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.IPrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.IPrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.printcontentssetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * KashitsukeHenkanTsuchisho のクラスファイル

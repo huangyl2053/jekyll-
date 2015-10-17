@@ -4,19 +4,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IraishoCh
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * NinteiChosa のクラスファイル 
- * 
+ * NinteiChosa のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
@@ -49,7 +53,7 @@ public class NinteiChosaDiv extends Panel {
 
     @JsonProperty("dgNinteiChosa")
     public void setDgNinteiChosa(DataGrid<dgNinteiChosa_Row> dgNinteiChosa) {
-        this.dgNinteiChosa=dgNinteiChosa;
+        this.dgNinteiChosa = dgNinteiChosa;
     }
 
     @JsonProperty("NinteiChosaPrint")
@@ -59,7 +63,7 @@ public class NinteiChosaDiv extends Panel {
 
     @JsonProperty("NinteiChosaPrint")
     public void setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
-        this.NinteiChosaPrint=NinteiChosaPrint;
+        this.NinteiChosaPrint = NinteiChosaPrint;
     }
 
     /*
@@ -71,7 +75,7 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChk(CheckBoxList chk) {
+    public void setChk(CheckBoxList chk) {
         this.getNinteiChosaPrint().setChk(chk);
     }
 
@@ -81,7 +85,7 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkChosahyo(CheckBoxList chkChosahyo) {
+    public void setChkChosahyo(CheckBoxList chkChosahyo) {
         this.getNinteiChosaPrint().setChkChosahyo(chkChosahyo);
     }
 
@@ -91,7 +95,7 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
+    public void setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
         this.getNinteiChosaPrint().setChkOcrChosahyo(chkOcrChosahyo);
     }
 
@@ -101,7 +105,7 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtInsatsuSu(TextBox txtInsatsuSu) {
+    public void setTxtInsatsuSu(TextBox txtInsatsuSu) {
         this.getNinteiChosaPrint().setTxtInsatsuSu(txtInsatsuSu);
     }
 
@@ -111,7 +115,7 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkChosahyo2(CheckBoxList chkChosahyo2) {
+    public void setChkChosahyo2(CheckBoxList chkChosahyo2) {
         this.getNinteiChosaPrint().setChkChosahyo2(chkChosahyo2);
     }
 

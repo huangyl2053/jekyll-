@@ -4,18 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5012ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ShujiiIkenshoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
+import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.*;
 import static org.mockito.Mockito.spy;
 
 /**

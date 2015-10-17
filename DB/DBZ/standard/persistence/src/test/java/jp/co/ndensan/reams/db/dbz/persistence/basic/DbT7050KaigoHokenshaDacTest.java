@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7050KaigoHokenshaDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7050KaigoHokenshaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7050KaigoHokenshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7050KaigoHokenshaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7050KaigoHokenshaEntityGenerator.DEFAULT_広域保険者市町村コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;

@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.comparator;
 
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaNoGettable;
+import jp.co.ndensan.reams.db.dbz.business.core.IHihokenshaNoGettable;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.SortOrder;
 
 /**
  * {@link IHihokenshaNoGettable 被保険者番号を取得可能なオブジェクト}専用のComparatorです。

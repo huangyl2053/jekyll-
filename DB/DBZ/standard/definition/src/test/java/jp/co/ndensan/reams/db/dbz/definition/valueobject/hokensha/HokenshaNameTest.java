@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

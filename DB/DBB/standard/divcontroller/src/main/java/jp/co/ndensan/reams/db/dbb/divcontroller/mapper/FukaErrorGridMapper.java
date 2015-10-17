@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
+import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItem;
+import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFukaErrorList_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

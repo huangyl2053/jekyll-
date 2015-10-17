@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.jukyu;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

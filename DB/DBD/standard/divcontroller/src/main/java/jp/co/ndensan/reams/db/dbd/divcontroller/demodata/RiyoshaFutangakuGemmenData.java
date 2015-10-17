@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.demodata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.riyoshaFutangakuGemmen.dgRiyoshaFutangakuGemmenList_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.riyoshaFutangakuGemmen.dgRiyoshaFutangakuGemmenList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;

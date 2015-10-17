@@ -4,16 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.relate;
 
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.IRiyoshaFutanWariaiMeisaiMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatis.param.relate.RiyoshaFutanWariaiMeisaiMapperParameter;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.RiyoshaFutanWariaiMeisaiMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3115RiyoshaFutanWariaiKonkyoEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.relate.RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3114RiyoshaFutanWariaiMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3115RiyoshaFutanWariaiKonkyoDac;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

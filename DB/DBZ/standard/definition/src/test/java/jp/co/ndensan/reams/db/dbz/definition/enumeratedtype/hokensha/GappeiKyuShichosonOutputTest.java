@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

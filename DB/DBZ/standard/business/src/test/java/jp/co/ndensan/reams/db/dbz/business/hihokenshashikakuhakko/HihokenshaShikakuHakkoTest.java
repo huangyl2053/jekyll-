@@ -7,33 +7,27 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.jukyu.ShikakushashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.jukyu.ShikakushashoKigenConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.YukoKigenShokiHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.business._KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 /**
@@ -442,9 +436,10 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         }
 
         private static IKaigoServiceShurui createKaigoServiceShurui() {
-            return spy(new _KaigoServiceShurui(
-                    new KaigoServiceShuruiCode("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
-                    new RString("略称。"), new KaigoServiceBunruiCode(new RString("サービス分類"))));
+//            return spy(new _KaigoServiceShurui(
+//                    new KaigoServiceShuruiCode("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
+//                    new RString("略称。"), new KaigoServiceBunruiCode(new RString("サービス分類"))));
+            return null;
         }
 
     }

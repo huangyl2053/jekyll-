@@ -4,13 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.persistence.db.relate.GogitaiWariateShinsakaiIinDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
-import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiYukoKikanKaishiDate;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.GogitaiWariateShinsakaiIinEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiWariateDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.ShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
