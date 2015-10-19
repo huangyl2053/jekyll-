@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1004ShisetsuNyutaishoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1004ShisetsuNyutaishoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

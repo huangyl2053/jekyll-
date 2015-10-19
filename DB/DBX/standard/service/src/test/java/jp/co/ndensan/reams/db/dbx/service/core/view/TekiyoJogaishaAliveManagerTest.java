@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.view.TekiyoJogaishaAlive;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1002TekiyoJogaishaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1002TekiyoJogaishaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1002TekiyoJogaishaAliveDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

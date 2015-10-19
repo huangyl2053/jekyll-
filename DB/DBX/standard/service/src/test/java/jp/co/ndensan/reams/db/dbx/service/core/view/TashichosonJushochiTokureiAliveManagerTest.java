@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.view.TashichosonJushochiTokureiAlive;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1003TashichosonJushochiTokureiEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1003TashichosonJushochiTokureiAliveDac;
 
 /**

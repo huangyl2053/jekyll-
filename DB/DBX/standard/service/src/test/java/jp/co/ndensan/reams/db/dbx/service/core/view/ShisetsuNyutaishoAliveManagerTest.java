@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.view.ShisetsuNyutaishoAlive;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1004ShisetsuNyutaishoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1004ShisetsuNyutaishoAliveDac;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 

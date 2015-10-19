@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.view.KaigoJogaiTokureiTaishoShisetsuAlive;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1005KaigoJogaiTokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1005KaigoJogaiTokureiTaishoShisetsuAliveDac;
 
 /**
