@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shikakuhen
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Add;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Delete;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Modify;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Add;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Delete;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Modify;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;

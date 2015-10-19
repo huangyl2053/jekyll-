@@ -20,7 +20,7 @@ import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidat
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.変更日と次の履歴データの変更日の期間が重複;
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.届出日設定なし;
 import static jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMessage.最新の取得日として登録不可;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
