@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.mapper.NinteichosaItakusakiMappe
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.core.definition.ChosaItakuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

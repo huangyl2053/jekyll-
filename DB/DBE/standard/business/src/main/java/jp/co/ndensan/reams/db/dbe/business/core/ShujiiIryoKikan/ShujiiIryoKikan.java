@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;

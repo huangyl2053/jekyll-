@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.core.definition.HikiwatashiKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.NinteiShinseijiKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiChousaSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiIkenshoSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.HikiwatashiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteiShinseijiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiChousaSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiIkenshoSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5022RenkeiyoDataSofuKiroku;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

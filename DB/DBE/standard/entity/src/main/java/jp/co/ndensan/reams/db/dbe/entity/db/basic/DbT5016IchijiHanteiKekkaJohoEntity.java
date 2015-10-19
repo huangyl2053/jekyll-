@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.core.definition.DbeShubetsuKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.DbeShubetsuKey;
 
 /**
  * DbT5016IchijiHanteiKekkaJohoの項目定義クラスです

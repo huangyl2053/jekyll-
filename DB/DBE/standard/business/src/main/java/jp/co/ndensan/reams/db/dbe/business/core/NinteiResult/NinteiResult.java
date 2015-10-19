@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiResult;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.core.YokaigoJotai.YokaigoJotaizoRei;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TsuchiKubun;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;

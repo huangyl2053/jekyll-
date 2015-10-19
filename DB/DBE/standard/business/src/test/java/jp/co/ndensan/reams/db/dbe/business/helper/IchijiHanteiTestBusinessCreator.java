@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHantei
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.IchijiHanteiResultSofu;
-import jp.co.ndensan.reams.db.dbe.business.core.IchiijiHanteiResult.JotaiAnteiseiKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiResult.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.core.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;

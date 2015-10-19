@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShujiiIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.business.helper.KaigoIryoKikanTestHelper;
