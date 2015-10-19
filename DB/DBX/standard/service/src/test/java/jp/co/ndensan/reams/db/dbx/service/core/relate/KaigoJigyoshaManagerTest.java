@@ -18,10 +18,10 @@ import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoJigyoshaMapp
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.relate.KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.relate.IKaigoJigyoshaMapper;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.IKaigoJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoJigyoshaDaihyoshaManager;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoJigyoshaShiteiServiceManager;
