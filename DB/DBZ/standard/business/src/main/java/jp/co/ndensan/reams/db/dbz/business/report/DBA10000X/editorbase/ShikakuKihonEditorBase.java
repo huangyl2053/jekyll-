@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.Kataga
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

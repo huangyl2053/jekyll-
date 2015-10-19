@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.NinteiAndKyotakuShienOutputChe
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition.上部;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition.指定無し;
-import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**

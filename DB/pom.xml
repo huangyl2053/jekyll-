@@ -39,9 +39,9 @@
     </repositories>
     <properties>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uz.version>1.3.0</jp.co.ndensan.reams.uz.version>
+        <jp.co.ndensan.reams.uz.version>1.4.2</jp.co.ndensan.reams.uz.version>
         <!-- 公開系 -->
-        <jp.co.ndensan.reams.ur.version>1.3.0</jp.co.ndensan.reams.ur.version>
+        <jp.co.ndensan.reams.ur.version>1.4.2</jp.co.ndensan.reams.ur.version>
         <jp.co.ndensan.reams.uax.version>1.0.0</jp.co.ndensan.reams.uax.version>
         <jp.co.ndensan.reams.uex.version>1.0-SNAPSHOT</jp.co.ndensan.reams.uex.version>
         <jp.co.ndensan.reams.uxx.version>1.3.0</jp.co.ndensan.reams.uxx.version>
