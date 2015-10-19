@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
  * 介護サービスのクラスです。

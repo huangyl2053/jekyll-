@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.lang.reflect.Constructor;
-import jp.co.ndensan.reams.db.dbx.business.KaigoJigyoshaDaihyosha.Builder;
+import jp.co.ndensan.reams.db.dbx.business.core.KaigoJigyoshaDaihyosha.Builder;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;

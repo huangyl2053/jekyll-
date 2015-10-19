@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.IShinseitodokedeJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.JigyoshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.ShinseiTodokedeDaikoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.ShinseiTodokedeshaTsuzukigaraCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeshaTsuzukigaraCode;
 // TODO n8187久保田 dbxのShinseitodokedeJohoFactoryに置換すること。
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

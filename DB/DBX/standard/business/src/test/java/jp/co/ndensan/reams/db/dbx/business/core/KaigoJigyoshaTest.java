@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HojinsShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;

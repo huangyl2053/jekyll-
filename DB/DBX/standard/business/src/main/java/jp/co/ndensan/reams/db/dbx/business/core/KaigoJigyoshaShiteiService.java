@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -2231,8 +2231,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * rehaTeikyoTaisei_SogoRehaShisetsu_umuを設定します。
          *
-         * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu
-         * リハビリテーション提供体制_総合リハビリテーション施設_の有無
+         * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu リハビリテーション提供体制_総合リハビリテーション施設_の有無
          * @return builder
          */
         public Builder setRehaTeikyoTaisei_SogoRehaShisetsu_umu(
@@ -2281,8 +2280,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * rehaTeikyoTaisei_SeisinkaSagyouRyoho_umuを設定します。
          *
-         * @param rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
-         * リハビリテーション提供体制_精神科作業療法_の有無
+         * @param rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu リハビリテーション提供体制_精神科作業療法_の有無
          * @return builder
          */
         public Builder setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(
@@ -2391,8 +2389,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umuを設定します。
          *
-         * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
-         * 介護支援専門員の欠員による減算の状況の有無
+         * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu 介護支援専門員の欠員による減算の状況の有無
          * @return builder
          */
         public Builder setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(
@@ -2537,8 +2534,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
-         * 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
+         * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(
@@ -2551,8 +2547,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1を設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
-         * 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1
+         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(
@@ -2565,8 +2560,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
-         * 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
+         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(
@@ -2579,8 +2573,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_SagyoRyohoII_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
-         * 個別リハビリテーション提供体制_作業療法Ⅱ_の有無
+         * @param kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu 個別リハビリテーション提供体制_作業療法Ⅱ_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(
@@ -2593,8 +2586,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
-         * 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
+         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(
@@ -2607,8 +2599,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
-         * 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無
+         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(
@@ -3078,8 +3069,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_RigakuRyohoI_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
-         * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無
+         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(
@@ -3092,8 +3082,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2を設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
-         * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2
+         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(
@@ -3106,8 +3095,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_SagyoRyoho_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SagyoRyoho_umu
-         * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無
+         * @param kobetsuRehaTeikyoTaisei_SagyoRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(
@@ -3120,8 +3108,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
-         * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無
+         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(
@@ -3170,8 +3157,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * kobetsuRehaTeikyoTaisei_RehaShidoKanri_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
-         * 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無
+         * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無
          * @return builder
          */
         public Builder setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(
@@ -3196,8 +3182,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * chuSankanChiikiShokiboJigyoshoKasan_chiikiを設定します。
          *
-         * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki
-         * 中山間地域等における小規模事業所加算_地域に関する状況
+         * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki 中山間地域等における小規模事業所加算_地域に関する状況
          * @return builder
          */
         public Builder setChuSankanChiikiShokiboJigyoshoKasan_chiiki(
@@ -3210,8 +3195,7 @@ public class KaigoJigyoshaShiteiService {
         /**
          * chuSankanChiikiShokiboJigyoushoKasan_kiboを設定します。
          *
-         * @param chuSankanChiikiShokiboJigyoushoKasan_kibo
-         * 中山間地域等における小規模事業所加算_規模に関する状況
+         * @param chuSankanChiikiShokiboJigyoushoKasan_kibo 中山間地域等における小規模事業所加算_規模に関する状況
          * @return builder
          */
         public Builder setChuSankanChiikiShokiboJigyoushoKasan_kibo(
@@ -3474,8 +3458,7 @@ public class KaigoJigyoshaShiteiService {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

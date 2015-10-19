@@ -2,10 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
-import jp.co.ndensan.reams.db.dbx.business.IKobetsuJikoKaigoJukyu;
-import jp.co.ndensan.reams.db.dbx.business.IYoKaigoNinteiKekka;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JukyushaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.YoKaigoJotaiKubun;

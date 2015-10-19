@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 介護サービス単位クラスのテストクラスです

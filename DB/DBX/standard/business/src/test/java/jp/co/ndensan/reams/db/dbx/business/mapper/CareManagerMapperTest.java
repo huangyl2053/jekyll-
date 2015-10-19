@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.ICareManager;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.ICareManager;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import org.junit.Test;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.junit.Test;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -52,7 +52,7 @@ public class CareManagerMapperTest extends DbxTestBase {
         List<ICareManager> result = CareManagerMapper.toCareManager(input, 事業者);
         assertThat(result.get(0).get有効年月日(), is(new Range(new FlexibleDate("20120101"), new FlexibleDate("20120103"))));
     }
-    
+
     @Test
     public void LDNS_メソッドCareManagerMapperが呼び出される場合_CareManagerMapperは_インスタンス化成功() throws Exception {
         Constructor<CareManagerMapper> constructor = CareManagerMapper.class.getDeclaredConstructor();

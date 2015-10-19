@@ -2,18 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HojinsShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.HojinsShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKijunGaitoJigyoshoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -916,8 +916,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

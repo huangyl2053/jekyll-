@@ -2,11 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
-import jp.co.ndensan.reams.db.dbx.business.IKobetsuJikoKaigoShikaku;
-import jp.co.ndensan.reams.db.dbx.business.IKobetsuJikoKaigo;
-import jp.co.ndensan.reams.db.dbx.business.IKobetsuJikoKaigoJukyu;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

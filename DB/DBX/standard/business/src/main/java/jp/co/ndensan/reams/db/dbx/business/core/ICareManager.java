@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

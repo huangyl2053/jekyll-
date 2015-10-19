@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.ChosainJohoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import org.junit.Test;
-import static org.junit.Assert.assertThat;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.junit.Test;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -46,11 +46,11 @@ public class NinteiChosainMapperTest extends DbxTestBase {
         List<INinteiChosain> result = NinteiChosainMapper.toNinteiChosain(chosains, 所属事業者);
         assertThat(result.size(), is(2));
     }
-    
+
     @Test
     public void LDNS_メソッドNinteiChosainMapperが呼び出される場合_NinteiChosainMapperは_インスタンス化成功() throws Exception {
         Constructor<NinteiChosainMapper> constructor = NinteiChosainMapper.class.getDeclaredConstructor();
         constructor.setAccessible(true);
-        constructor.newInstance();      
+        constructor.newInstance();
     }
 }

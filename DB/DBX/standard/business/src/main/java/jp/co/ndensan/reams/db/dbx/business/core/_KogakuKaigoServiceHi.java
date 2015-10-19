@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business;
+package jp.co.ndensan.reams.db.dbx.business.core;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -37,8 +37,7 @@ public class _KogakuKaigoServiceHi implements IKogakuKaigoServiceHi {
      * @param 支給高額介護サービス費 支給高額介護サービス費
      * @param 利用者負担額 利用者負担額
      * @throws NullPointerException 引数がNullの場合はスローされる。
-     * @throws IllegalArgumentException
-     * 支給高額介護サービス費と利用者負担額が0より小さい、または利用者負担額が支給高額介護サービス費より小さい場合はスローされる。
+     * @throws IllegalArgumentException 支給高額介護サービス費と利用者負担額が0より小さい、または利用者負担額が支給高額介護サービス費より小さい場合はスローされる。
      */
     public _KogakuKaigoServiceHi(RString 被保険者番号,
             FlexibleYearMonth サービス提供年月,

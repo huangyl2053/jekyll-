@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
-import jp.co.ndensan.reams.db.dbx.business._NinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.core._NinteiChosain;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.ChosainJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho._Name;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 
