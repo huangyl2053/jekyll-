@@ -61,8 +61,7 @@ public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
      *
      * @param code コード
      * @return 指定のコードに対応するShinseiTodokedeDaikoKubunCode
-     * @throws IllegalArgumentException
-     * 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
+     * @throws IllegalArgumentException 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
      */
     public static ShinseiTodokedeDaikoKubunCode toValue(RString code) throws IllegalArgumentException {
         for (ShinseiTodokedeDaikoKubunCode target : values()) {
