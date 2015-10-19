@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai;
 
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.core.definition.ChosaItakuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.business.helper.KaigoIryoKikanTestHelper;

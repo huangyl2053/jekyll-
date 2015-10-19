@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.RenkeiyoDataSofuKiroku;
-import jp.co.ndensan.reams.db.dbe.core.definition.HikiwatashiKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.NinteiShinseijiKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiChousaSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiIkenshoSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.core.definition.SaiSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.HikiwatashiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteiShinseijiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiChousaSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiIkenshoSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;

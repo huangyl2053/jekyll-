@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.view;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

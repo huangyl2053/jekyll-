@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaJisshib
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

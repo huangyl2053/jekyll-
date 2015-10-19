@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.IShujiiIryoKikan
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoIryoKikan.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.ShujiiIryoKikan;
-import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;

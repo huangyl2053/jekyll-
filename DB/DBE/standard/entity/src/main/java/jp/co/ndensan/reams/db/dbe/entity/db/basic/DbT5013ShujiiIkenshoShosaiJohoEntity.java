@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbe.core.definition.DbeShubetsuKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.DbeShubetsuKey;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

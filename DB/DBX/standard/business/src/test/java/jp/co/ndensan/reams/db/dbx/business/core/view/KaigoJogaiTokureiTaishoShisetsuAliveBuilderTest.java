@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.view;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1005KaigoJogaiTokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbV1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.core.definition.DbeShubetsuKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.DbeShubetsuKey;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**

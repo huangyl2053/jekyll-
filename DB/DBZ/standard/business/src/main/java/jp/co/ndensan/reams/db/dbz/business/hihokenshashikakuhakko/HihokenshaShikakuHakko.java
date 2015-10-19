@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.Hi
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

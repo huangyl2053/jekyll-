@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.mapper;
 
-import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceType;
-import jp.co.ndensan.reams.db.dbx.business._KaigoServiceType;
-import jp.co.ndensan.reams.db.dbx.business._KaigoServiceTypeCode;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceType;
+import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceType;
+import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceTypeCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.KaigoServiceTypeEntity;
 
 /**

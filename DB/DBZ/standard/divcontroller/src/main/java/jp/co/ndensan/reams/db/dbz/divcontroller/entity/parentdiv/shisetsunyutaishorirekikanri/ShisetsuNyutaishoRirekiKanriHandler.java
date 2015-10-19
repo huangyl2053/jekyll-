@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutai
 
 import jp.co.ndensan.reams.db.dbz.business.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;

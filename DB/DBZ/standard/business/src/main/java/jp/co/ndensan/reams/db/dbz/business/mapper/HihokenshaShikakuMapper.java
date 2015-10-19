@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoShikaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
@@ -169,7 +169,7 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
-       // IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
+        // IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
         //                entity.getShikibetsuCode(),
         //                HokenShubetsu.介護保険,
         //                toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),

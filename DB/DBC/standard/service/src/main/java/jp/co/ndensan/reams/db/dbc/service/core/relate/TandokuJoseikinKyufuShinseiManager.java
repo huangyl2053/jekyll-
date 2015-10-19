@@ -57,8 +57,7 @@ public class TandokuJoseikinKyufuShinseiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TandokuJoseikinKyufuShinseiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TandokuJoseikinKyufuShinseiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TandokuJoseikinKyufuShinseiManager}のインスタンス
      */
     public static TandokuJoseikinKyufuShinseiManager createInstance() {
         return InstanceProvider.create(TandokuJoseikinKyufuShinseiManager.class);

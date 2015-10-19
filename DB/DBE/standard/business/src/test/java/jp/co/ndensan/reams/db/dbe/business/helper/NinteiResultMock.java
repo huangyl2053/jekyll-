@@ -19,20 +19,19 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShisetsuNyushoK
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.business._KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.spy;
 
 /**

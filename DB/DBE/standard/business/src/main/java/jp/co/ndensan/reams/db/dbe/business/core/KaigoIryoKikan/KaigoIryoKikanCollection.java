@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.core.definition.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

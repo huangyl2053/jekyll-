@@ -9,7 +9,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
