@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsainKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsainkubuncode.ShinsainKubunCode;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 

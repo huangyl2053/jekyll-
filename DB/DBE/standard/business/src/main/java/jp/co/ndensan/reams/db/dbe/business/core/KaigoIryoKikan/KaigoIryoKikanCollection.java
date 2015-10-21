@@ -11,7 +11,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

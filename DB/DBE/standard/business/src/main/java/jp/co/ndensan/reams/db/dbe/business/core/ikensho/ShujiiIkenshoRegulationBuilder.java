@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IS
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShujiiIkenshoItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikenshoitemno.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

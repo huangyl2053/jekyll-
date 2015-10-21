@@ -11,14 +11,17 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ShiharaiHohoHenkoConfig}のテストです。
@@ -30,11 +33,12 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private ShiharaiHohoHenkoConfig sut;
+        static ShiharaiHohoHenkoConfig sut;
 
         @Before
         public void setUp() {
-            sut = new ShiharaiHohoHenkoConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new ShiharaiHohoHenkoConfig();
         }
 
         @Test
@@ -139,8 +143,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         資格者証表示減額_記載文言 = new RString("給付額減額・高額費不支給");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_終了分記載区分),
                 any(RDate.class),

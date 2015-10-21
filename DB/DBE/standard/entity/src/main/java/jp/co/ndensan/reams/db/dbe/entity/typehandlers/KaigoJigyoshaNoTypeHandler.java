@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class KaigoJigyoshaNoTypeHandler extends BaseTypeHandler<KaigoJigyoshaNo> {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, KaigoJigyoshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());

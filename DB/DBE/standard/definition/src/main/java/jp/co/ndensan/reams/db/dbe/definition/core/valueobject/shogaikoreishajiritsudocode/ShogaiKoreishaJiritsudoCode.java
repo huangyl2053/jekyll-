@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shogaikoreishajir
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 障害高齢者自立度コードを表すクラスです。
  *
  */
-public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJiritsudoCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+// TODO dingn
+// public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJiritsudoCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJiritsudoCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
 
     private final Code code;
 
@@ -43,8 +46,7 @@ public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJir
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link ShogaiKoreishaJiritsudoCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link ShogaiKoreishaJiritsudoCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,8 +62,7 @@ public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJir
      *
      * @param code {@link ShogaiKoreishaJiritsudoCode}となるコード{@link Code}
      * @return {@link ShogaiKoreishaJiritsudoCode}
-     * @throws IllegalArgumentException
-     * {@link ShogaiKoreishaJiritsudoCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link ShogaiKoreishaJiritsudoCodeSpec}の仕様を満たさない場合
      */
     public static ShogaiKoreishaJiritsudoCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult
@@ -72,11 +73,10 @@ public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJir
         return new ShogaiKoreishaJiritsudoCode(code);
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public int compareTo(ShogaiKoreishaJiritsudoCode 比較対象) {
         return this.value().compareTo(比較対象.value());
@@ -105,5 +105,15 @@ public class ShogaiKoreishaJiritsudoCode implements Comparable<ShogaiKoreishaJir
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public Code asCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

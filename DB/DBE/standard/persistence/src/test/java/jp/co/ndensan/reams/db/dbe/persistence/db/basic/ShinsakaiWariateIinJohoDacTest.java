@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiWariateIinJohoDac;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;

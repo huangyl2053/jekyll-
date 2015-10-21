@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.KatagakiPrint;
@@ -18,8 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.Todofu
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 被保険者証を出力する際の住所編集方法について定義している業務コンフィグを取得します。
@@ -34,23 +33,14 @@ public class HihokenshashoJushoEditConfig {
      * コンストラクタです。
      */
     public HihokenshashoJushoEditConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    HihokenshashoJushoEditConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysHihokenshashoJushoEdit, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoJushoEdit, RString> createMap() {
         Map<ConfigKeysHihokenshashoJushoEdit, RString> map = new EnumMap<>(ConfigKeysHihokenshashoJushoEdit.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoJushoEdit target : ConfigKeysHihokenshashoJushoEdit.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate, SubGyomuCode.DBA介護資格).toString());
+            RString value = new RString(BusinessConfig.get(target, nowDate, SubGyomuCode.DBA介護資格).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

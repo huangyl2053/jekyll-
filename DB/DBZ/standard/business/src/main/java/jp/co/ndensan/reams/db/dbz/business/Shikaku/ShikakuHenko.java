@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.Shikaku;
 
-import jp.co.ndensan.reams.db.dbz.business.ShikakuIdoBaseItem;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuIdoBaseItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 /**
  * 被保険者の資格変更を扱います。
  *
- * @author N3327 三浦 凌
+ *
  */
 public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
 

@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
-import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.shisetsucode.ShisetsuCode;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * 施設入退所の共通Mockです。

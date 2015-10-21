@@ -9,14 +9,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenre
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link NenreiTotatsuKijunConfigTest}のテストです。
@@ -28,11 +31,12 @@ public class NenreiTotatsuKijunConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private NenreiTotatsuKijunConfig sut;
+        static NenreiTotatsuKijunConfig sut;
 
         @Before
         public void setUp() {
-            sut = new NenreiTotatsuKijunConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new NenreiTotatsuKijunConfig();
         }
 
         @Test
@@ -56,8 +60,8 @@ public class NenreiTotatsuKijunConfigTest extends DbzTestBase {
         第２号被保険者到達基準年齢 = new RString("40");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢),
                 any(RDate.class)

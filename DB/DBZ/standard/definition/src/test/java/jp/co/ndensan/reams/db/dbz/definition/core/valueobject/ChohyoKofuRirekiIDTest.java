@@ -4,14 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
  * ChohyoKofuRirekiIDのテストです。

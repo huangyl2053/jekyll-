@@ -7,17 +7,20 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link HizukeConfigTest}のテストです。
@@ -65,11 +68,12 @@ public class HizukeConfigTest {
 
     public static class get extends DbzTestBase {
 
-        private HizukeConfig sut;
+        static HizukeConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HizukeConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new HizukeConfig();
         }
 
         @Test
@@ -170,7 +174,8 @@ public class HizukeConfigTest {
                 所得年度 = new RString("20120202");
                 当初年度 = new RString("20130303");
                 遡及年度 = new RString("20140404");
-                sut = new HizukeConfig(createBusinessConfigMock());
+                createBusinessConfigMock();
+                sut = new HizukeConfig();
             }
 
             @Test
@@ -208,7 +213,8 @@ public class HizukeConfigTest {
                 所得年度 = null;
                 当初年度 = null;
                 遡及年度 = null;
-                sut = new HizukeConfig(createBusinessConfigMock());
+                createBusinessConfigMock();
+                sut = new HizukeConfig();
             }
 
             @Test(expected = SystemException.class)
@@ -233,8 +239,8 @@ public class HizukeConfigTest {
         }
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル1), any(RDate.class))).thenReturn(月別テーブル1);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル2), any(RDate.class))).thenReturn(月別テーブル2);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル3), any(RDate.class))).thenReturn(月別テーブル3);

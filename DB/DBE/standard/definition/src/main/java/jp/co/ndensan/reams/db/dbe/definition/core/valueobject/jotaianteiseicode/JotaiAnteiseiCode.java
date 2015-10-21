@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.jotaianteiseicode
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 要介護認定状態の安定性コードを表すクラスです。
  *
  */
-public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+//public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
 
     private final Code code;
     public static final JotaiAnteiseiCode EMPTY;
@@ -42,8 +44,7 @@ public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, IValueO
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link JotaiAnteiseiCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link JotaiAnteiseiCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -70,11 +71,10 @@ public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, IValueO
         return new JotaiAnteiseiCode(code);
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public int compareTo(JotaiAnteiseiCode 比較対象) {
         return this.value().compareTo(比較対象.value());
@@ -103,5 +103,15 @@ public class JotaiAnteiseiCode implements Comparable<JotaiAnteiseiCode>, IValueO
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public Code asCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

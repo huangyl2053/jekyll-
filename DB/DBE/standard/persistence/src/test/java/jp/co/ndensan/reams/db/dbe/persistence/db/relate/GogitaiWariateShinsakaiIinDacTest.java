@@ -4,10 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.relate.GogitaiWariateShinsakaiIinDac;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiYukoKikanKaishiDate;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikankaishidate.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.GogitaiWariateDac;

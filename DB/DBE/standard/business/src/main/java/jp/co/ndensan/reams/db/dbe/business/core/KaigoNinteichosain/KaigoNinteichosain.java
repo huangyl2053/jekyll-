@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

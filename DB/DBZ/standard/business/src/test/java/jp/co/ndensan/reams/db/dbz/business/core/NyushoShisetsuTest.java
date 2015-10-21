@@ -5,19 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.core.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.shisetsucode.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 施設入退所情報を表すクラスのテストクラスです。

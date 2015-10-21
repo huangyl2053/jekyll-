@@ -14,14 +14,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.Todofu
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ChohyoKyotsuJushoEditConfig}のテストです。
@@ -33,11 +36,12 @@ public class ChohyoKyotsuJushoEditConfigTest {
 
     public static class get extends DbuTestBase {
 
-        private ChohyoKyotsuJushoEditConfig sut;
+        static ChohyoKyotsuJushoEditConfig sut;
 
         @Before
         public void setUp() {
-            sut = new ChohyoKyotsuJushoEditConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new ChohyoKyotsuJushoEditConfig();
         }
 
         @Test
@@ -71,8 +75,8 @@ public class ChohyoKyotsuJushoEditConfigTest {
         }
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         SubGyomuCode subGyomu = SubGyomuCode.DBU介護統計報告;
         when(mock.get(
                 eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無),

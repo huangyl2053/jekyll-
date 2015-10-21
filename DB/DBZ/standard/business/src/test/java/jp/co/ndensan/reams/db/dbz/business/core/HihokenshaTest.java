@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushoch
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;

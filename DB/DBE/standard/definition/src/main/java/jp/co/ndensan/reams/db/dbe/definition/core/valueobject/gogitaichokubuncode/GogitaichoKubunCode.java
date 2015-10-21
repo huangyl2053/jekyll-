@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaichokubunco
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 合議体（介護認定審査会）の長や長代理、委員などの区分コードを表すクラスです。
  *
  */
-public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+//public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
 
@@ -43,8 +45,7 @@ public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDb
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link GogitaichoKubunCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link GogitaichoKubunCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,8 +61,7 @@ public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDb
      *
      * @param code {@link GogitaichoKubunCode}となるコード{@link Code}
      * @return {@link GogitaichoKubunCode}
-     * @throws IllegalArgumentException
-     * {@link GogitaichoKubunCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link GogitaichoKubunCodeSpec}の仕様を満たさない場合
      */
     public static GogitaichoKubunCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult
@@ -92,11 +92,10 @@ public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDb
         return ((GogitaichoKubunCode) 比較対象).value().equals(this.value());
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public Code getColumnValue() {
         return this.code;
@@ -105,5 +104,15 @@ public class GogitaichoKubunCode implements Comparable<GogitaichoKubunCode>, IDb
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public Code asCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

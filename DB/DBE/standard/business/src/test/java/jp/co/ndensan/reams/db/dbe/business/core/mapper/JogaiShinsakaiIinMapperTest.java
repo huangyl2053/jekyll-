@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.JogaiShinsakaiIinMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,20 +12,21 @@ import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakai
 import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.JogaiShinsakaiIinEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

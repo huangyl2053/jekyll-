@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIkenTy
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteiYukoKikanTsukisu;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.business.core._KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;

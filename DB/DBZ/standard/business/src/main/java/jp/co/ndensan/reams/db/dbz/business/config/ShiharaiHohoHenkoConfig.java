@@ -25,8 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.Sh
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 支払方法変更コンフィグを取得するためのクラスです。
@@ -41,23 +40,14 @@ public class ShiharaiHohoHenkoConfig {
      * コンストラクタです。
      */
     public ShiharaiHohoHenkoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public ShiharaiHohoHenkoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysShiharaiHohoHenko, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysShiharaiHohoHenko, RString> createMap() {
         Map<ConfigKeysShiharaiHohoHenko, RString> map = new EnumMap<>(ConfigKeysShiharaiHohoHenko.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShiharaiHohoHenko target : ConfigKeysShiharaiHohoHenko.values()) {
-            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBD介護受給));
+            map.put(target, BusinessConfig.get(target, nowDate, SubGyomuCode.DBD介護受給));
         }
         return Collections.unmodifiableMap(map);
     }

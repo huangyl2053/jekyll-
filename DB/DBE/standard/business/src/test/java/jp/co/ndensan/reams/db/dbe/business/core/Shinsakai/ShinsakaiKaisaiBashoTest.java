@@ -4,10 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiChiku;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

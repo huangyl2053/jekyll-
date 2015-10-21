@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiChiku;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

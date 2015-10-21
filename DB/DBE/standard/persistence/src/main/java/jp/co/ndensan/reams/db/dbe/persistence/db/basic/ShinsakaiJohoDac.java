@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJohoEntity;
@@ -41,7 +41,7 @@ public class ShinsakaiJohoDac implements IReplaceable<DbT5101ShinsakaiJohoEntity
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5101ShinsakaiJoho.class)
                 .where(and(eq(shinsakaiKaisaiNo, 審査会開催番号.value()),
-                eq(shinsakaiKaisaiYMD, 審査会開催年月日)))
+                                eq(shinsakaiKaisaiYMD, 審査会開催年月日)))
                 .toObject(DbT5101ShinsakaiJohoEntity.class);
     }
 

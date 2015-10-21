@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIryoKikan.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ux.uxx.business.core.iryokikan.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -11,14 +11,17 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ShikakushashoKigenConfig}のテストです。
@@ -36,8 +39,8 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
         有効期限初期表示 = YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較;
     }
 
-    public static IBusinessConfig config() {
-        IBusinessConfig config = mock(IBusinessConfig.class);
+    public static BusinessConfig config() {
+        BusinessConfig config = mock(BusinessConfig.class);
         when(config.get(
                 eq(ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値),
                 any(RDate.class),
@@ -53,11 +56,12 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private ShikakushashoKigenConfig sut;
+        static ShikakushashoKigenConfig sut;
 
         @Before
         public void setUp() {
-            sut = new ShikakushashoKigenConfig(config());
+            config();
+            sut = new ShikakushashoKigenConfig();
         }
 
         @Test

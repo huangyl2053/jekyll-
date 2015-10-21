@@ -15,17 +15,17 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
 
 /**
  * {@link HihokenshashoIndicationMethodConfig}のテストです。
@@ -37,11 +37,12 @@ public class HihokenshashoPrintConfigTest {
 
     public static class get extends DbaTestBase {
 
-        private HihokenshashoPrintConfig sut;
+        static HihokenshashoPrintConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HihokenshashoPrintConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new HihokenshashoPrintConfig();
         }
 
         @Test
@@ -136,8 +137,8 @@ public class HihokenshashoPrintConfigTest {
         届出日の代わりに適用開始日を表示 = new RString("0");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無),
                 any(RDate.class),

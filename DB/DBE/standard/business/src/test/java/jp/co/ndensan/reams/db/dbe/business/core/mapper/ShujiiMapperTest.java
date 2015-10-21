@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.business.core.Shujii.IShujii;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiMock;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaKubu
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaJisshibashoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosajisshibashokubuncode.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.NinteichosaKekkaEntity;

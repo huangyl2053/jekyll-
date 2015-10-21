@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.NinteiResult;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIkenType;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

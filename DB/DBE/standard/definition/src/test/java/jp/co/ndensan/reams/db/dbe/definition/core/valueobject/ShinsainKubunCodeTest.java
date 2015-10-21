@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsainKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsainkubuncode.ShinsainKubunCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

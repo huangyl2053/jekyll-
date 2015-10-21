@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinShukketsuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.TimeString;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.timestring.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;

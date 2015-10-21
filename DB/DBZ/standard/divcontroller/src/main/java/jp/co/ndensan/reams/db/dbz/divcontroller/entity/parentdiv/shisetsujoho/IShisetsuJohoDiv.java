@@ -2,8 +2,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.shisetsucode.ShisetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

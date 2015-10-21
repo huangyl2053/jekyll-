@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJoho.*;

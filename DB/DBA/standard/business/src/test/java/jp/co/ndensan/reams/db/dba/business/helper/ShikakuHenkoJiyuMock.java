@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dba.business.helper;
 
-import jp.co.ndensan.reams.db.dba.definition.core.valueobject.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.valueobject.shikakuhenkojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
 
 /**
  * 資格変更事由のMockクラスです。

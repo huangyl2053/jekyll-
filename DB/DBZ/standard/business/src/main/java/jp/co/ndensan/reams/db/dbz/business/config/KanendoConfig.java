@@ -13,8 +13,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysKanendo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 過年度のコンフィグを取得するクラスです。
@@ -29,23 +28,14 @@ public class KanendoConfig {
      * コンストラクタです。
      */
     public KanendoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public KanendoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysKanendo, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysKanendo, RString> createMap() {
         Map<ConfigKeysKanendo, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysKanendo target : ConfigKeysKanendo.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate));
         }
         return Collections.unmodifiableMap(map);
     }

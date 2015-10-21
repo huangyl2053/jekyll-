@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;

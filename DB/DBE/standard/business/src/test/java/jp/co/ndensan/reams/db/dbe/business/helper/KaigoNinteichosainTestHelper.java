@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.core.mapper.NinteichosaItakusakiMapper;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.介護事業者番号;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.介護調査員番号;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.住所;

@@ -5,25 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.business.core.Todokedesha;
-import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.JutakuKaishuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;

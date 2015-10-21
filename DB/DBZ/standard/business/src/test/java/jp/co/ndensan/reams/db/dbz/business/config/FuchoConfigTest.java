@@ -9,17 +9,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysFucho
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
 
 /**
  * {@link FuchoConfigTest}のテストです。
@@ -31,11 +31,12 @@ public class FuchoConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private FuchoConfig sut;
+        static FuchoConfig sut;
 
         @Before
         public void setUp() {
-            sut = new FuchoConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new FuchoConfig();
         }
 
         @Test
@@ -155,8 +156,8 @@ public class FuchoConfigTest extends DbzTestBase {
         月の期14 = new RString("14");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期1), any(RDate.class))).thenReturn(月の期1);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期2), any(RDate.class))).thenReturn(月の期2);
         when(mock.get(eq(ConfigKeysFucho.普徴期情報_月の期3), any(RDate.class))).thenReturn(月の期3);

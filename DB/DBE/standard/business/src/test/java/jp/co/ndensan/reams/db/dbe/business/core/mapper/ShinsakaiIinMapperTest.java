@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShinsakaiIinMapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
@@ -13,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;

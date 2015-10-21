@@ -4,27 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho.ShujiiIkenshoSakuseiIrai;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoSakuseiTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.SakuseiryoSeikyuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
-//import jp.co.ndensan.reams.db.dbe.business.helper.KaigoDoctorMock;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoSakuseiIraiMock;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * 主治医意見書作成依頼情報を変換するMapperクラスのテストクラスです。

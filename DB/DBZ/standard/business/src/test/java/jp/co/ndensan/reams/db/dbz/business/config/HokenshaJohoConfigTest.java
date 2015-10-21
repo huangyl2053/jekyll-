@@ -5,20 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -34,11 +34,12 @@ public class HokenshaJohoConfigTest extends DbzTestBase {
 
     public static class get {
 
-        private HokenshaJohoConfig sut;
+        static HokenshaJohoConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HokenshaJohoConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new HokenshaJohoConfig();
         }
 
         @Test
@@ -91,8 +92,8 @@ public class HokenshaJohoConfigTest extends DbzTestBase {
 
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
 
         when(mock.get(

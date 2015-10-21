@@ -4,21 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-//import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-
 /**
  * 介護医師の情報を扱うクラスです。
  *

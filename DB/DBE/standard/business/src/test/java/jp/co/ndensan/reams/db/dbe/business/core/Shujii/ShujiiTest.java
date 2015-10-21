@@ -4,19 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.Shujii;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
 
 /**
  * 主治医の情報を表すクラスのテストクラスです。

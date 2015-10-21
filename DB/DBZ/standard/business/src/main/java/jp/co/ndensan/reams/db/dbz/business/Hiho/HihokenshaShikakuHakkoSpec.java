@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.Hiho;
 
-import jp.co.ndensan.reams.db.dbz.definition.uzikotaisho.IPredicate;
+import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

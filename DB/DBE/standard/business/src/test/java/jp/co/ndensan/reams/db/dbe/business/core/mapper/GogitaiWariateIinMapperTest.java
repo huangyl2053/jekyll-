@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.GogitaiWariateIinMapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiDetail;
@@ -17,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiYukoKikanKaishiDate;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikankaishidate.GogitaiYukoKikanKaishiDate;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;

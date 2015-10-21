@@ -16,14 +16,17 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link HihokenshashoJushoEditConfig}のテストです。
@@ -35,11 +38,12 @@ public class HihokenshashoJushoEditConfigTest {
 
     public static class get extends DbaTestBase {
 
-        private HihokenshashoJushoEditConfig sut;
+        static HihokenshashoJushoEditConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HihokenshashoJushoEditConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new HihokenshashoJushoEditConfig();
         }
 
         @Test
@@ -84,8 +88,8 @@ public class HihokenshashoJushoEditConfigTest {
         帳票独自区分 = new RString("1");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分),
                 any(RDate.class),

@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiTekiyo;
 
-import jp.co.ndensan.reams.db.dbz.business.spec.*;
-import jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiTekiyo.JushochitokureiTekiyo;
-import jp.co.ndensan.reams.db.dbz.definition.uzikotaisho.IPredicate;
+import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

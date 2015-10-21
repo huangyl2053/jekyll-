@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.Sh
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 資格者証発行における委託代行業者の業務コンフィグを取得するクラスです。
@@ -33,23 +32,14 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * コンストラクタです。
      */
     public ShikakushashoItakudaikoHyojiConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    ShikakushashoItakudaikoHyojiConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> createMap() {
         Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> map = new EnumMap<>(ConfigKeysShikakushashoItakudaikoHyoji.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShikakushashoItakudaikoHyoji target : ConfigKeysShikakushashoItakudaikoHyoji.values()) {
-            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBD介護受給));
+            map.put(target, BusinessConfig.get(target, nowDate, SubGyomuCode.DBD介護受給));
         }
         return Collections.unmodifiableMap(map);
     }

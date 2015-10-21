@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.EigyoKeitai;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;

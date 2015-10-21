@@ -4,16 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosaitemno.NinteichosaItemNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 要介護認定調査の調査項目番号を表すクラスのテストクラスです。

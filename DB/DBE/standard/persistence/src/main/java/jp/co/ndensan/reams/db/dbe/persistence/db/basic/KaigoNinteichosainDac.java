@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7013ChosainJoho;

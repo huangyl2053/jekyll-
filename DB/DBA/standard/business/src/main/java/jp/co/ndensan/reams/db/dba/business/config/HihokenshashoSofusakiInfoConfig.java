@@ -11,8 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.config.ConfigKeysHihokenshashoSofusakiInfo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 被保険者の表示方法について定義している業務コンフィグを取得します。
@@ -27,23 +26,14 @@ public class HihokenshashoSofusakiInfoConfig {
      * コンストラクタです。
      */
     public HihokenshashoSofusakiInfoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    HihokenshashoSofusakiInfoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysHihokenshashoSofusakiInfo, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysHihokenshashoSofusakiInfo, RString> createMap() {
         Map<ConfigKeysHihokenshashoSofusakiInfo, RString> map = new EnumMap<>(ConfigKeysHihokenshashoSofusakiInfo.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoSofusakiInfo target : ConfigKeysHihokenshashoSofusakiInfo.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate).toString());
+            RString value = new RString(BusinessConfig.get(target, nowDate).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

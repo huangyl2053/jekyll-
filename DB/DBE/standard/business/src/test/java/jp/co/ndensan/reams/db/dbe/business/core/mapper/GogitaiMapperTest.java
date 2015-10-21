@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.GogitaiMapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiYukoKikanKaishiDate;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.gogitaiyukokikankaishidate.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.GogitaiWariateShinsakaiIinEntity;

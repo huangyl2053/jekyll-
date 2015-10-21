@@ -4,17 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaJisshibashoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosajisshibashokubuncode.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 要介護認定調査の実施場所区分コードを扱うクラスのテストクラスです。

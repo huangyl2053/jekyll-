@@ -10,8 +10,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 資格取得における、年齢到達の基準年齢を扱う業務コンフィグ取得クラスです。
@@ -26,23 +25,14 @@ public class NenreiTotatsuKijunConfig {
      * コンストラクタです。
      */
     public NenreiTotatsuKijunConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    NenreiTotatsuKijunConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> createMap() {
         Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijunJoho.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysNenreiTotatsuKijunJoho target : ConfigKeysNenreiTotatsuKijunJoho.values()) {
-            Integer value = Integer.valueOf(businessConfig.get(target, nowDate).toString());
+            Integer value = Integer.valueOf(BusinessConfig.get(target, nowDate).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

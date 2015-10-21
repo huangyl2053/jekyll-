@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsainYusoKub
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiShinseiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.YokaigoNinteiShinseishaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.EditShinsakaiIinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaShujiiDiv;

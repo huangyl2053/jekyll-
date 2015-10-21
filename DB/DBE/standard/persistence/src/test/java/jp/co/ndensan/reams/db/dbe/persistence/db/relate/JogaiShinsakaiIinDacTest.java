@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.relate.JogaiShinsakaiIinDac;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
-import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiIinJogaiJohoDac;

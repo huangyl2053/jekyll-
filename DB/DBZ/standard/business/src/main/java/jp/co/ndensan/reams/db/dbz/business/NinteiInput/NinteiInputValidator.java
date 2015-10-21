@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.NinteiInput;
 
-import jp.co.ndensan.reams.db.dbz.definition.uzikotaisho.ValidateChain;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.Shikaku;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;

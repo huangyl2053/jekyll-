@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

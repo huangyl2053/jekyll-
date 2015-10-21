@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.I
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosaitemno.NinteichosaItemNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

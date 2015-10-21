@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiy
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

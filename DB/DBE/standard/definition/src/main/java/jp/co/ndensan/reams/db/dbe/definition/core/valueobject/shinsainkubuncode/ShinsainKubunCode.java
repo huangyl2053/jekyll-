@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsainkubuncode
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 介護認定審査会での、委員としての役割コードを表すクラスです。
  *
  */
-public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+//public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
 
     private final Code code;
 
@@ -43,8 +45,7 @@ public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColu
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link ShinsainKubunCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link ShinsainKubunCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -71,11 +72,10 @@ public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColu
         return new ShinsainKubunCode(code);
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public int compareTo(ShinsainKubunCode 比較対象) {
         return this.value().compareTo(比較対象.value());
@@ -104,5 +104,15 @@ public class ShinsainKubunCode implements Comparable<ShinsainKubunCode>, IDbColu
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public Code asCode() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

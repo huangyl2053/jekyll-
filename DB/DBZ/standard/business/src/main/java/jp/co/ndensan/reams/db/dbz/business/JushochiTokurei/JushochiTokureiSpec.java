@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.JushochiTokurei;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.uzikotaisho.IPredicate;
+import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
 /**
  *

@@ -139,7 +139,7 @@ import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.cho
 import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢;
 import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_左下肢;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaJisshibashoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosajisshibashokubuncode.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbx.business.core.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.business.core._NinteiChosain;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;

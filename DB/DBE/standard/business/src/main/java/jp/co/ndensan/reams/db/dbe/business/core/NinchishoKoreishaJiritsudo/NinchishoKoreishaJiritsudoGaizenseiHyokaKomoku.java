@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.NinchishoKoreishaJiritsudo;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinchishoKoreishaJiritsudoGaizenseiHyokaCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninchishokoreishajiritsudogaizenseihyokacode.NinchishoKoreishaJiritsudoGaizenseiHyokaCode;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.tokuteishippeicod
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 特定疾病コードを保持するクラスです。
  *
  */
-public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+//public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
 
     private final Code code;
 
@@ -42,8 +44,7 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValu
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link TokuteiShippeiCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link TokuteiShippeiCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -59,8 +60,7 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValu
      *
      * @param code {@link TokuteiShippeiCode}となるコード{@link Code}
      * @return {@link TokuteiShippeiCode}
-     * @throws IllegalArgumentException
-     * {@link TokuteiShippeiCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link TokuteiShippeiCodeSpec}の仕様を満たさない場合
      */
     public static TokuteiShippeiCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult
@@ -74,11 +74,11 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValu
     public Code asCode() {
         return this.code;
     }
-
-    @Override
-    public Code value() {
-        return this.code;
-    }
+//
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
 
     @Override
     public int compareTo(TokuteiShippeiCode target) {
@@ -120,5 +120,10 @@ public class TokuteiShippeiCode implements Comparable<TokuteiShippeiCode>, IValu
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShujiiIkenshoItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikenshoitemno.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

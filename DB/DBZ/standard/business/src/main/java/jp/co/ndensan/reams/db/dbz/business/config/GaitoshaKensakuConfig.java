@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 該当者検索のコンフィグを取得するクラスです。
@@ -31,23 +30,14 @@ public class GaitoshaKensakuConfig {
      * コンストラクタです。
      */
     public GaitoshaKensakuConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public GaitoshaKensakuConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysGaitoshaKensaku, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysGaitoshaKensaku, RString> createMap() {
         Map<ConfigKeysGaitoshaKensaku, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysGaitoshaKensaku target : ConfigKeysGaitoshaKensaku.values()) {
-            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
+            map.put(target, BusinessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
         }
         return Collections.unmodifiableMap(map);
     }

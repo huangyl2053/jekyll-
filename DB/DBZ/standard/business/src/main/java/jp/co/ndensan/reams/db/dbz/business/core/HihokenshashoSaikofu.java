@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
@@ -23,8 +23,7 @@ public class HihokenshashoSaikofu {
      *
      * {@link #get有無区分() get有無区分()}は{@link HihokenshashoSaikofuKubun#なし なし}、
      * {@link #getReason() getReason()}は{@link HihokenshashoSaikofuJiyu#なし なし}、
-     * {@link #getChohyoKofuRirekiID() getChohyoKofuRirekiID}はnull、
-     * {@link #exists() exists()}はfalseを返します。
+     * {@link #getChohyoKofuRirekiID() getChohyoKofuRirekiID}はnull、 {@link #exists() exists()}はfalseを返します。
      */
     public static final HihokenshashoSaikofu NOTHING;
 
@@ -46,8 +45,7 @@ public class HihokenshashoSaikofu {
 
     /**
      * 新しいHihokenshashoSaikofuを生成します。<br />
-     * 「被保険者証再交付がない」という状態を扱う場合は、
-     * {@link HihokenshashoSaikofu#NOTHING HihokenshashoSaikofu.NOTHING}を使用してください。
+     * 「被保険者証再交付がない」という状態を扱う場合は、 {@link HihokenshashoSaikofu#NOTHING HihokenshashoSaikofu.NOTHING}を使用してください。
      *
      * @param reason {@link HihokenshashoSaikofuJiyu 被保険者証再交付事由}
      * @param chohyoKofuRirekiID {@link ChohyoKofuRirekiID 帳票交付履歴ID}

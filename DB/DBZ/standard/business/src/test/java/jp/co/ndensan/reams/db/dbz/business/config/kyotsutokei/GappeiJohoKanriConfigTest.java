@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -37,7 +37,8 @@ public class GappeiJohoKanriConfigTest {
 
         @Before
         public void setUp() {
-            sut = new GappeiJohoKanriConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new GappeiJohoKanriConfig();
         }
 
         @Test
@@ -47,8 +48,8 @@ public class GappeiJohoKanriConfigTest {
 
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         SubGyomuCode subGyomu = SubGyomuCode.DBU介護統計報告;
         when(mock.get(
                 eq(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分),

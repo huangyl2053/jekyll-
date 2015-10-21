@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbb.definition.core.valueobject.fukaerrorcode;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -20,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 賦課のエラーコードを表すクラスです。
  *
  */
-public class FukaErrorCode implements Comparable<FukaErrorCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+// TODO dingn
+//public class FukaErrorCode implements Comparable<FukaErrorCode>, IValueObject<Code>, IDbColumnMappable, IValidatable
+public class FukaErrorCode implements Comparable<FukaErrorCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
 
     private final Code errorCode;
 
@@ -45,8 +48,7 @@ public class FukaErrorCode implements Comparable<FukaErrorCode>, IValueObject<Co
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link FukaErrorCode}が持つerrorCodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link FukaErrorCode}が持つerrorCodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -109,11 +111,10 @@ public class FukaErrorCode implements Comparable<FukaErrorCode>, IValueObject<Co
         return target.value().equals(this.errorCode.value());
     }
 
-    @Override
-    public Code value() {
-        return this.errorCode;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.errorCode;
+//    }
     @Override
     public Code getColumnValue() {
         return this.errorCode;
@@ -122,6 +123,11 @@ public class FukaErrorCode implements Comparable<FukaErrorCode>, IValueObject<Co
     @Override
     public String toString() {
         return this.errorCode == null ? "" : this.errorCode.toString();
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

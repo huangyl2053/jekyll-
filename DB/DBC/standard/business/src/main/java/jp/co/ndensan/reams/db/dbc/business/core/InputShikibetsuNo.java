@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.InputShikibetsuNoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.inputshikibetsunocode.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

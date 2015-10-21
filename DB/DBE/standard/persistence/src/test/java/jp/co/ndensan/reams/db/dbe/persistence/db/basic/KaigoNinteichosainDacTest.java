@@ -4,10 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.KaigoNinteichosainDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper;
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;

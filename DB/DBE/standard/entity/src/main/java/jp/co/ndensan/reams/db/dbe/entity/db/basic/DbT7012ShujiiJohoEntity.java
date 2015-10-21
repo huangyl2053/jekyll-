@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -273,8 +273,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT7012ShujiiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7012ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7012ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT7012ShujiiJohoEntity other) {
         if (other == null) {

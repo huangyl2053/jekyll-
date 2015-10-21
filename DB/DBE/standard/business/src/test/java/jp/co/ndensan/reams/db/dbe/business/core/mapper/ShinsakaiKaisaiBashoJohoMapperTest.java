@@ -4,11 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShinsakaiKaisaiBashoMapper;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiChiku;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaichiku.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -133,8 +132,8 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
 
     private static DbT5104ShinsakaiKaisaiBashoJohoEntity createEntity() {
 
-        DbT5104ShinsakaiKaisaiBashoJohoEntity 審査会開催場所Entity =
-                GogitaiMockEntityCreator.create開催場所EntitySpy(開催場所コード_A001.value().toString());
+        DbT5104ShinsakaiKaisaiBashoJohoEntity 審査会開催場所Entity
+                = GogitaiMockEntityCreator.create開催場所EntitySpy(開催場所コード_A001.value().toString());
         審査会開催場所Entity.setShinsakaiKaisaiBashoCode(開催場所コード_A001.value());
         審査会開催場所Entity.setShinsakaiKaisaiBashoMei(開催場所名_山田家);
         審査会開催場所Entity.setShinsakaiKaisaiChikuCode(開催地区_chiku01_name01);

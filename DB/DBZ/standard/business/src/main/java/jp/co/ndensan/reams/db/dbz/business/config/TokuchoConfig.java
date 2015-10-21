@@ -13,8 +13,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysTokucho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 特別徴収のコンフィグを取得するクラスです。
@@ -29,23 +28,14 @@ public class TokuchoConfig {
      * コンストラクタです。
      */
     public TokuchoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public TokuchoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysTokucho, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysTokucho, RString> createMap() {
         Map<ConfigKeysTokucho, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysTokucho target : ConfigKeysTokucho.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate));
         }
         return Collections.unmodifiableMap(map);
     }

@@ -9,14 +9,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysTokuc
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link TokuchoConfigTest}のテストです。
@@ -28,11 +31,12 @@ public class TokuchoConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private TokuchoConfig sut;
+        static TokuchoConfig sut;
 
         @Before
         public void setUp() {
-            sut = new TokuchoConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new TokuchoConfig();
         }
 
         @Test
@@ -136,8 +140,8 @@ public class TokuchoConfigTest extends DbzTestBase {
         月の期12 = new RString("12");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(eq(ConfigKeysTokucho.特徴期情報_月の期1), any(RDate.class))).thenReturn(月の期1);
         when(mock.get(eq(ConfigKeysTokucho.特徴期情報_月の期2), any(RDate.class))).thenReturn(月の期2);
         when(mock.get(eq(ConfigKeysTokucho.特徴期情報_月の期3), any(RDate.class))).thenReturn(月の期3);

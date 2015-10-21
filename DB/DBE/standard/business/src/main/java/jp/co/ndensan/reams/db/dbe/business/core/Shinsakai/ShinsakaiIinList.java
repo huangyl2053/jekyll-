@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 
 /**

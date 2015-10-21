@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiDummyKub
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.TimeString;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaiiincode.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.timestring.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;

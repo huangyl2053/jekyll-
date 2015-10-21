@@ -5,14 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.valueobject;
 
-import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.FukaErrorCode;
+import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.fukaerrorcode.FukaErrorCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

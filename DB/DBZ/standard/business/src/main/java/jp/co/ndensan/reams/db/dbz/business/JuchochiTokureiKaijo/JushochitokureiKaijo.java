@@ -4,17 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiKaijo;
 
-import jp.co.ndensan.reams.db.dbz.business.ShikakuIdoBaseItem;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuIdoBaseItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 被保険者の住所地自特例解除を扱います。
  *
- * @author N3327 三浦 凌
+ *
  */
-@Deprecated
 public class JushochitokureiKaijo extends ShikakuIdoBaseItem<JushochitokureiKaijoJiyu> {
 
     /**

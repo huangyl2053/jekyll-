@@ -14,10 +14,8 @@ import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiy
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
-import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -25,13 +23,11 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojinMeisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin._Hojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin._HojinMeisho;
-//import jp.co.ndensan.reams.ur.urz.business._Koza;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.HojinKeitaiFuyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.HojinKeitai;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.NinkaChienDantaiTorokuShikakuKubun;
-//import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitai;
-//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubun;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic._ShikibetsuTaishoEntityHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -40,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.mock;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic._ShikibetsuTaishoEntityHolder;
 
 /**
  * 受領委任事業者のテストヘルパーです。

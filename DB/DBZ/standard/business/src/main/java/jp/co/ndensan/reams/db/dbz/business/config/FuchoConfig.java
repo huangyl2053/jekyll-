@@ -13,8 +13,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysFucho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 普通徴収のコンフィグを取得するクラスです。
@@ -29,23 +28,14 @@ public class FuchoConfig {
      * コンストラクタです。
      */
     public FuchoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public FuchoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysFucho, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysFucho, RString> createMap() {
         Map<ConfigKeysFucho, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysFucho target : ConfigKeysFucho.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate));
         }
         return Collections.unmodifiableMap(map);
     }

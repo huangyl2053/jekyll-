@@ -5,20 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.JuryoininJigyoshaList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 

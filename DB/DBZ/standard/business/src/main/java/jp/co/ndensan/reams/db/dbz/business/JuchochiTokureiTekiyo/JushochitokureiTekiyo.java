@@ -4,17 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiTekiyo;
 
-import jp.co.ndensan.reams.db.dbz.business.ShikakuIdoBaseItem;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbz.business.core.ShikakuIdoBaseItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 被保険者の住所地特例適用を扱います。
  *
- * @author N3327 三浦 凌
+ *
  */
-@Deprecated
 public class JushochitokureiTekiyo extends ShikakuIdoBaseItem<JushochitokureiTekiyoJiyu> {
 
     /**

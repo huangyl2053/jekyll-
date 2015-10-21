@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.KaigoDoctorEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

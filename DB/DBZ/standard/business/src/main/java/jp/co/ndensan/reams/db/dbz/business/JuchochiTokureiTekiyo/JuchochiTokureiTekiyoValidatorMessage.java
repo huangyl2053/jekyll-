@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.JuchochiTokureiTekiyo;
 
-import jp.co.ndensan.reams.db.dbz.business.validation.my.*;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;

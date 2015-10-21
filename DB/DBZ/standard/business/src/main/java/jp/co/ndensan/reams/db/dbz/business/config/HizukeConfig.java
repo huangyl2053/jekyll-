@@ -13,11 +13,10 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 日付のコンフィグを取得するクラスです。
@@ -32,23 +31,14 @@ public class HizukeConfig {
      * コンストラクタです。
      */
     public HizukeConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public HizukeConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysHizuke, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysHizuke, RString> createMap() {
         Map<ConfigKeysHizuke, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate));
         }
         return Collections.unmodifiableMap(map);
     }

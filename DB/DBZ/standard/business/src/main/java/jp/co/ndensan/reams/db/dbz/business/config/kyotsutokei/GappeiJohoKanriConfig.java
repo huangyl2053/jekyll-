@@ -13,8 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyot
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 合併情報管理について定義している業務コンフィグを取得します。
@@ -29,23 +28,14 @@ public class GappeiJohoKanriConfig {
      * コンストラクタです。
      */
     public GappeiJohoKanriConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    GappeiJohoKanriConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysGappeiJohoKanri, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysGappeiJohoKanri, RString> createMap() {
         Map<ConfigKeysGappeiJohoKanri, RString> map = new EnumMap<>(ConfigKeysGappeiJohoKanri.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysGappeiJohoKanri target : ConfigKeysGappeiJohoKanri.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告).toString());
+            RString value = new RString(BusinessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

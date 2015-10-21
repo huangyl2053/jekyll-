@@ -8,8 +8,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5011ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5011ShujiiIkenshoIraiJoho.*;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
@@ -35,8 +35,8 @@ public class ShujiiIkenshoIraiJohoDac implements IShujiiIkenshoIraiJohoDac {
         return accessor.select()
                 .table(DbT5011ShujiiIkenshoIraiJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ikenshoIraiRirekiNo, 意見書作成依頼履歴番号.value())))
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ikenshoIraiRirekiNo, 意見書作成依頼履歴番号.value())))
                 .toObject(DbT5011ShujiiIkenshoIraiJohoEntity.class);
     }
 
@@ -66,8 +66,8 @@ public class ShujiiIkenshoIraiJohoDac implements IShujiiIkenshoIraiJohoDac {
         return accessor.select()
                 .table(DbT5011ShujiiIkenshoIraiJoho.class)
                 .where(and(
-                eq(kaigoIryokikanCode, 介護医療機関コード.getValue()),
-                eq(kaigoIshiCode, 介護医師コード.value())))
+                                eq(kaigoIryokikanCode, 介護医療機関コード.getValue()),
+                                eq(kaigoIshiCode, 介護医師コード.value())))
                 .order(by(shinseishoKanriNo, Order.ASC), by(ikenshoIraiRirekiNo, Order.DESC))
                 .toList(DbT5011ShujiiIkenshoIraiJohoEntity.class);
     }
@@ -110,8 +110,8 @@ public class ShujiiIkenshoIraiJohoDac implements IShujiiIkenshoIraiJohoDac {
         return accessor.select()
                 .table(DbT5011ShujiiIkenshoIraiJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
-                eq(ikenshoIraiRirekiNo, entity.getIkenshoIraiRirekiNo())))
+                                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
+                                eq(ikenshoIraiRirekiNo, entity.getIkenshoIraiRirekiNo())))
                 .getCount();
     }
 }

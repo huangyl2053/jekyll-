@@ -11,14 +11,17 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ShikakushashoItakudaikoHyojiConfig}のテストです。
@@ -38,8 +41,8 @@ public class ShikakushashoItakudaikoHyojiConfigTest extends DbzTestBase {
         委託代行業者表示終了文言 = new RString("）");
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無),
                 any(RDate.class),
@@ -60,11 +63,12 @@ public class ShikakushashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
     public static class get {
 
-        private ShikakushashoItakudaikoHyojiConfig sut;
+        static ShikakushashoItakudaikoHyojiConfig sut;
 
         @Before
         public void setUp() {
-            sut = new ShikakushashoItakudaikoHyojiConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new ShikakushashoItakudaikoHyojiConfig();
         }
 
         @Test

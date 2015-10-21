@@ -8,17 +8,17 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_住所;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者名称;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者構成;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者番号;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_最優先地区コード;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_電話番号;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_住所;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_郵便番号;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_電話番号;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 保険者情報の業務コンフィグを取得するクラスです。
@@ -43,23 +42,14 @@ public class HokenshaJohoConfig {
      * コンストラクタです。
      */
     public HokenshaJohoConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public HokenshaJohoConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysHokenshaJoho, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysHokenshaJoho, RString> createMap() {
         Map<ConfigKeysHokenshaJoho, RString> map = new EnumMap<>(ConfigKeysHokenshaJoho.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHokenshaJoho target : ConfigKeysHokenshaJoho.values()) {
-            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
+            map.put(target, BusinessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
         }
         return Collections.unmodifiableMap(map);
     }

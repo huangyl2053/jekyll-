@@ -10,14 +10,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.Sh
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {@link ShuruiShikyuGendoGetConfig}のテストです。
@@ -29,11 +32,12 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
 
     public static class get extends DbzTestBase {
 
-        private ShuruiShikyuGendoGetConfig sut;
+        static ShuruiShikyuGendoGetConfig sut;
 
         @Before
         public void setUp() {
-            sut = new ShuruiShikyuGendoGetConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new ShuruiShikyuGendoGetConfig();
         }
 
         @Test
@@ -49,8 +53,8 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
         取得方法 = ShuruiShikyuGendoGet.要介護度を検索キーにする;
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         when(mock.get(
                 eq(ConfigKeysShuruiShikyuGendoGet.種類支給限度額_取得方法),
                 any(RDate.class),

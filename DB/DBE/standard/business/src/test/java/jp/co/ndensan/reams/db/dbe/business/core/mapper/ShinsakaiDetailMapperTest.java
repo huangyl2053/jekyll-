@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.core.mapper.ShinsakaiDetailMapper;
 import jp.co.ndensan.reams.db.dbe.business.core.Gogitai.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiKaisaiBasho;
@@ -14,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.GogitaiSeishink
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.TimeString;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.timestring.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

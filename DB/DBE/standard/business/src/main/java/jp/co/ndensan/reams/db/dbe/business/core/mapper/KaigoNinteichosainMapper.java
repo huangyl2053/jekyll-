@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;

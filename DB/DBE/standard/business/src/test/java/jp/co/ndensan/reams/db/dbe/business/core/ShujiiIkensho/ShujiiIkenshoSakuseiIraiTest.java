@@ -4,45 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ShujiiIkensho;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IkenshoSakuseiTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.SakuseiryoSeikyuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-//import jp.co.ndensan.reams.ur.urz.business.IDoctors;
-//import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urc.business.IKoza;
-//import jp.co.ndensan.reams.ur.urz.business._Doctor;
-//import jp.co.ndensan.reams.ur.urz.business._Doctors;
-//import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
  * 主治医意見書作成依頼情報を保持するクラスのテストクラスです。

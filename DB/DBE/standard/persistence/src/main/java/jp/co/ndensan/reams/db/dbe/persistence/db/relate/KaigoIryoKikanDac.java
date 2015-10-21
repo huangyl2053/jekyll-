@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJ
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7011ShujiiIryoKikanJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.KaigoIryoKikanEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.iryokikan.UrT0516IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

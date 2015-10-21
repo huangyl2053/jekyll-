@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosajisshi
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -20,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 要介護認定調査の実施場所区分コードを扱うクラスです。
  *
  */
-public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+//public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
 
@@ -43,8 +45,7 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link NinteichosaJisshibashoKubunCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinteichosaJisshibashoKubunCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -60,8 +61,7 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
      *
      * @param code {@link NinteichosaJisshibashoKubunCode}となるコード{@link Code}
      * @return {@link NinteichosaJisshibashoKubunCode}
-     * @throws IllegalArgumentException
-     * {@link NinteichosaJisshibashoKubunCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link NinteichosaJisshibashoKubunCodeSpec}の仕様を満たさない場合
      */
     public static NinteichosaJisshibashoKubunCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult
@@ -76,11 +76,10 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
         return this.code;
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public int compareTo(NinteichosaJisshibashoKubunCode target) {
         return this.code.compareTo(target.asCode());
@@ -121,5 +120,10 @@ public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJi
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

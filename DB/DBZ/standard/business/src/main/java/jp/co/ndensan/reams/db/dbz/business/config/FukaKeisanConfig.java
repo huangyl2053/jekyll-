@@ -13,8 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 賦課計算のコンフィグを取得するクラスです。
@@ -31,23 +30,14 @@ public class FukaKeisanConfig {
      * コンストラクタです。
      */
     public FukaKeisanConfig() {
-        this.configs = createMap(BusinessConfigFactory.createInstance());
+        this.configs = createMap();
     }
 
-    /**
-     * モックを使用するテスト用コンストラクタです。
-     *
-     * @param businessConfig 業務コンフィグを取得するインスタンス
-     */
-    public FukaKeisanConfig(IBusinessConfig businessConfig) {
-        this.configs = createMap(businessConfig);
-    }
-
-    private Map<ConfigKeysFukaKeisan, RString> createMap(IBusinessConfig businessConfig) {
+    private Map<ConfigKeysFukaKeisan, RString> createMap() {
         Map<ConfigKeysFukaKeisan, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, BusinessConfig.get(target, nowDate));
         }
         return Collections.unmodifiableMap(map);
     }

@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shik
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -29,11 +29,12 @@ public class HihokenshashoJushoEditConfigTest {
 
     public static class get extends DbaTestBase {
 
-        private HihokenshashoJushoEditConfig sut;
+        static HihokenshashoJushoEditConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HihokenshashoJushoEditConfig(createBusinessConfigMock());
+            createBusinessConfigMock();
+            sut = new HihokenshashoJushoEditConfig();
         }
 
         @Test
@@ -73,8 +74,8 @@ public class HihokenshashoJushoEditConfigTest {
         }
     }
 
-    private static IBusinessConfig createBusinessConfigMock() {
-        IBusinessConfig mock = mock(IBusinessConfig.class);
+    private static BusinessConfig createBusinessConfigMock() {
+        BusinessConfig mock = mock(BusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
 
         when(mock.get(

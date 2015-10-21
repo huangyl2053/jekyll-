@@ -5,10 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain;
 
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaIrai.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

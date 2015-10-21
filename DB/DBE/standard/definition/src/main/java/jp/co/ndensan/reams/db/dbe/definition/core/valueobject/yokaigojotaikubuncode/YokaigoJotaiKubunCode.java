@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.yokaigojotaikubun
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -19,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 要介護状態区分コードを保持するクラスです。
  *
  */
-public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
+public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>, ICodeWrapValueObject, IDbColumnMappable, IValidatable {
+//public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>, IValueObject<Code>, IDbColumnMappable, IValidatable {
 
     private final Code code;
 
@@ -42,8 +44,7 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
-     * {@link YokaigoJotaiKubunCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link YokaigoJotaiKubunCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -59,8 +60,7 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
      *
      * @param code {@link YokaigoJotaiKubunCode}となるコード{@link Code}
      * @return {@link YokaigoJotaiKubunCode}
-     * @throws IllegalArgumentException
-     * {@link YokaigoJotaiKubunCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException {@link YokaigoJotaiKubunCodeSpec}の仕様を満たさない場合
      */
     public static YokaigoJotaiKubunCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult
@@ -75,11 +75,10 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
         return this.code;
     }
 
-    @Override
-    public Code value() {
-        return this.code;
-    }
-
+//    @Override
+//    public Code value() {
+//        return this.code;
+//    }
     @Override
     public int compareTo(YokaigoJotaiKubunCode target) {
         return this.code.compareTo(target.asCode());
@@ -120,5 +119,10 @@ public class YokaigoJotaiKubunCode implements Comparable<YokaigoJotaiKubunCode>,
     @Override
     public String toString() {
         return this.code == null ? "" : this.code.toString();
+    }
+
+    @Override
+    public RString value() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
