@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護認定審査会委員情報テーブルの項目定義クラスです。
  */
 public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -61,18 +62,22 @@ public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
     ShinsakaiIinKanaShimei(2147483647, 0),
     /**
      * 性別
+     * <br/>Enum（DBZ：性別コード）
      */
     seibetsu(1, 0),
     /**
      * 介護認定審査員資格コード
+     * <br/>Enum（DBE:資格コード）
      */
     shinsakaiIinShikakuCode(2147483647, 0),
     /**
      * 審査員郵送区分
+     * <br/>Enum（DBE:審査員郵送区分）
      */
     shinsainYusoKubun(1, 0),
     /**
      * 担当地区コード
+     * <br/>Code（DBE:5001）
      */
     tantoChikuCode(2147483647, 0),
     /**
@@ -92,30 +97,6 @@ public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
      */
     faxNo(2147483647, 0),
     /**
-     * 金融機関コード
-     */
-    kinyuKikanCode(2147483647, 0),
-    /**
-     * 支店コード
-     */
-    kinyuKikanShitenCode(2147483647, 0),
-    /**
-     * 口座種別
-     */
-    kozaShubetsu(1, 0),
-    /**
-     * 口座名義人
-     */
-    kozaMeiginin(80, 0),
-    /**
-     * 口座名義人カナ
-     */
-    kozaMeigininKana(80, 0),
-    /**
-     * 口座番号
-     */
-    kozaNo(7, 0),
-    /**
      * 生年月日
      */
     seinengappiYMD(2147483647, 0),
@@ -125,6 +106,7 @@ public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
     biko(2147483647, 0),
     /**
      * 廃止フラグ
+     * <br/>Enum（DBE：廃止フラグ）True：有効　False：無効
      */
     haishiFlag(1, 0),
     /**
@@ -142,7 +124,7 @@ public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -151,7 +133,7 @@ public enum DbT5594ShinsakaiIinJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

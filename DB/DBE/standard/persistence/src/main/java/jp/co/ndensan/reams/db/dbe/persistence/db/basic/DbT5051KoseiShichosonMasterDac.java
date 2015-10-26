@@ -30,7 +30,7 @@ public class DbT5051KoseiShichosonMasterDac implements ISaveable<DbT5051KoseiShi
     /**
      * 主キーで構成市町村マスタを取得します。
      *
-     * @param 市町村識別ID 市町村識別ID
+     * @param 市町村識別ID ShichosonShokibetsuID
      * @return DbT5051KoseiShichosonMasterEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -43,7 +43,8 @@ public class DbT5051KoseiShichosonMasterDac implements ISaveable<DbT5051KoseiShi
 
         return accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
-                where(eq(shichosonShokibetsuID, 市町村識別ID)).
+                where(
+                        eq(shichosonShokibetsuID, 市町村識別ID)).
                 toObject(DbT5051KoseiShichosonMasterEntity.class);
     }
 
@@ -71,8 +72,7 @@ public class DbT5051KoseiShichosonMasterDac implements ISaveable<DbT5051KoseiShi
     @Override
     public int save(DbT5051KoseiShichosonMasterEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタエンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

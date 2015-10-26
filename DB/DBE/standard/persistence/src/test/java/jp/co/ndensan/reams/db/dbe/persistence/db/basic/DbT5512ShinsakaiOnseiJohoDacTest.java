@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5512ShinsakaiOnseiJohoDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -45,24 +44,17 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_介護認定審査会開催番号,
+                    キー_01,
                     DEFAULT_連番);
             TestSupport.insert(
-                    DEFAULT_介護認定審査会開催番号,
+                    キー_02,
                     DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護認定審査会開催番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_介護認定審査会開催番号,
-                    DEFAULT_連番);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 連番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    DEFAULT_介護認定審査会開催番号,
+                    null,
                     DEFAULT_連番);
         }
 
@@ -77,7 +69,7 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT5512ShinsakaiOnseiJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_介護認定審査会開催番号,
+                    キー_03,
                     DEFAULT_連番);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -88,10 +80,10 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
         @Test
         public void 介護認定審査会音声情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_介護認定審査会開催番号,
+                    キー_01,
                     DEFAULT_連番);
             TestSupport.insert(
-                    DEFAULT_介護認定審査会開催番号,
+                    キー_02,
                     DEFAULT_連番);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -130,8 +122,7 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
             DbT5512ShinsakaiOnseiJohoEntity updateRecord = sut.selectByKey(
                     DEFAULT_介護認定審査会開催番号,
                     DEFAULT_連番);
-            // TODO  主キー以外の項目を変更してください
-            // updateRecord.set変更したい項目(75);
+            updateRecord.setShinsakaiOnseiFile(new byte[]{1, 2, 3});
 
             sut.save(updateRecord);
 
@@ -139,8 +130,7 @@ public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
                     DEFAULT_介護認定審査会開催番号,
                     DEFAULT_連番);
 
-            // TODO  主キー以外の項目を変更してください
-            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getShinsakaiOnseiFile(), is(updatedRecord.getShinsakaiOnseiFile()));
         }
     }
 

@@ -1,4 +1,4 @@
- /*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5106ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5111ShinsakaiOnseiJoho.renban;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho.renban;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -78,8 +78,7 @@ public class DbT5512ShinsakaiOnseiJohoDac implements ISaveable<DbT5512ShinsakaiO
     @Override
     public int save(DbT5512ShinsakaiOnseiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会音声情報エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

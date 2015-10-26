@@ -1,32 +1,33 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import java.util.Objects;
 
 /**
  * 介護認定審査会委員情報テーブルのエンティティクラスです。
  */
 public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594ShinsakaiIinJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5594ShinsakaiIinJoho");
+    private static final long serialVersionUID = -6728305955113033827L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -50,20 +51,14 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
     private AtenaJusho Jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private KinyuKikanCode kinyuKikanCode;
-    private KinyuKikanShitenCode kinyuKikanShitenCode;
-    private RString kozaShubetsu;
-    private RString kozaMeiginin;
-    private RString kozaMeigininKana;
-    private RString kozaNo;
-    private GyomuCode seinengappiYMD;
+    private FlexibleDate seinengappiYMD;
     private RString biko;
     private boolean haishiFlag;
     private FlexibleDate haishiYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -72,7 +67,7 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -81,7 +76,7 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -90,17 +85,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -109,7 +103,7 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員コードのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員コード
      */
     public RString getShinsakaiIinCode() {
@@ -118,16 +112,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員コードのsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
-    public void setShinsakaiIinCode(RString shinsakaiIinCode) {
+    public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
     }
 
     /**
      * 介護認定審査会委員開始年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員開始年月日
      */
     public FlexibleDate getShinsakaiIinKaishiYMD() {
@@ -136,16 +130,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員開始年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinKaishiYMD 介護認定審査会委員開始年月日
      */
-    public void setShinsakaiIinKaishiYMD(FlexibleDate shinsakaiIinKaishiYMD) {
+    public void setShinsakaiIinKaishiYMD(@Nonnull FlexibleDate shinsakaiIinKaishiYMD) {
         this.shinsakaiIinKaishiYMD = shinsakaiIinKaishiYMD;
     }
 
     /**
      * 介護認定審査会委員終了年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員終了年月日
      */
     public FlexibleDate getShinsakaiIinShuryoYMD() {
@@ -154,16 +148,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員終了年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinShuryoYMD 介護認定審査会委員終了年月日
      */
-    public void setShinsakaiIinShuryoYMD(FlexibleDate shinsakaiIinShuryoYMD) {
+    public void setShinsakaiIinShuryoYMD(@Nonnull FlexibleDate shinsakaiIinShuryoYMD) {
         this.shinsakaiIinShuryoYMD = shinsakaiIinShuryoYMD;
     }
 
     /**
      * 介護認定審査会委員氏名のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員氏名
      */
     public AtenaMeisho getShinsakaiIinShimei() {
@@ -172,16 +166,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員氏名のsetメソッドです。
-     * 
+     *
      * @param shinsakaiIinShimei 介護認定審査会委員氏名
      */
-    public void setShinsakaiIinShimei(AtenaMeisho shinsakaiIinShimei) {
+    public void setShinsakaiIinShimei(@Nonnull AtenaMeisho shinsakaiIinShimei) {
         this.shinsakaiIinShimei = shinsakaiIinShimei;
     }
 
     /**
      * 介護認定審査会委員氏名カナのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会委員氏名カナ
      */
     public AtenaKanaMeisho getShinsakaiIinKanaShimei() {
@@ -190,16 +184,18 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査会委員氏名カナのsetメソッドです。
-     * 
+     *
      * @param ShinsakaiIinKanaShimei 介護認定審査会委員氏名カナ
      */
-    public void setShinsakaiIinKanaShimei(AtenaKanaMeisho ShinsakaiIinKanaShimei) {
+    public void setShinsakaiIinKanaShimei(@Nonnull AtenaKanaMeisho ShinsakaiIinKanaShimei) {
         this.ShinsakaiIinKanaShimei = ShinsakaiIinKanaShimei;
     }
 
     /**
      * 性別のgetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
+     *
      * @return 性別
      */
     public RString getSeibetsu() {
@@ -208,16 +204,20 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 性別のsetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
+     *
      * @param seibetsu 性別
      */
-    public void setSeibetsu(RString seibetsu) {
+    public void setSeibetsu(@Nonnull RString seibetsu) {
         this.seibetsu = seibetsu;
     }
 
     /**
      * 介護認定審査員資格コードのgetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE:資格コード）
+     *
      * @return 介護認定審査員資格コード
      */
     public Code getShinsakaiIinShikakuCode() {
@@ -226,16 +226,20 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 介護認定審査員資格コードのsetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE:資格コード）
+     *
      * @param shinsakaiIinShikakuCode 介護認定審査員資格コード
      */
-    public void setShinsakaiIinShikakuCode(Code shinsakaiIinShikakuCode) {
+    public void setShinsakaiIinShikakuCode(@Nonnull Code shinsakaiIinShikakuCode) {
         this.shinsakaiIinShikakuCode = shinsakaiIinShikakuCode;
     }
 
     /**
      * 審査員郵送区分のgetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE:審査員郵送区分）
+     *
      * @return 審査員郵送区分
      */
     public RString getShinsainYusoKubun() {
@@ -244,25 +248,32 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 審査員郵送区分のsetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE:審査員郵送区分）
+     *
      * @param shinsainYusoKubun 審査員郵送区分
      */
-    public void setShinsainYusoKubun(RString shinsainYusoKubun) {
+    public void setShinsainYusoKubun(@Nonnull RString shinsainYusoKubun) {
         this.shinsainYusoKubun = shinsainYusoKubun;
     }
 
     /**
      * 担当地区コードのgetメソッドです。
-     * 
+     * <br/>
+     * <br/>Code（DBE:5001）
+     *
      * @return 担当地区コード
      */
+    @CheckForNull
     public ChikuCode getTantoChikuCode() {
         return tantoChikuCode;
     }
 
     /**
      * 担当地区コードのsetメソッドです。
-     * 
+     * <br/>
+     * <br/>Code（DBE:5001）
+     *
      * @param tantoChikuCode 担当地区コード
      */
     public void setTantoChikuCode(ChikuCode tantoChikuCode) {
@@ -271,7 +282,7 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     public YubinNo getYubinNo() {
@@ -280,16 +291,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param yubinNo 郵便番号
      */
-    public void setYubinNo(YubinNo yubinNo) {
+    public void setYubinNo(@Nonnull YubinNo yubinNo) {
         this.yubinNo = yubinNo;
     }
 
     /**
      * 住所のgetメソッドです。
-     * 
+     *
      * @return 住所
      */
     public AtenaJusho getJusho() {
@@ -298,16 +309,16 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 住所のsetメソッドです。
-     * 
+     *
      * @param Jusho 住所
      */
-    public void setJusho(AtenaJusho Jusho) {
+    public void setJusho(@Nonnull AtenaJusho Jusho) {
         this.Jusho = Jusho;
     }
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     public TelNo getTelNo() {
@@ -316,25 +327,26 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
-    public void setTelNo(TelNo telNo) {
+    public void setTelNo(@Nonnull TelNo telNo) {
         this.telNo = telNo;
     }
 
     /**
      * FAX番号のgetメソッドです。
-     * 
+     *
      * @return FAX番号
      */
+    @CheckForNull
     public TelNo getFaxNo() {
         return faxNo;
     }
 
     /**
      * FAX番号のsetメソッドです。
-     * 
+     *
      * @param faxNo FAX番号
      */
     public void setFaxNo(TelNo faxNo) {
@@ -342,143 +354,37 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
     }
 
     /**
-     * 金融機関コードのgetメソッドです。
-     * 
-     * @return 金融機関コード
-     */
-    public KinyuKikanCode getKinyuKikanCode() {
-        return kinyuKikanCode;
-    }
-
-    /**
-     * 金融機関コードのsetメソッドです。
-     * 
-     * @param kinyuKikanCode 金融機関コード
-     */
-    public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
-        this.kinyuKikanCode = kinyuKikanCode;
-    }
-
-    /**
-     * 支店コードのgetメソッドです。
-     * 
-     * @return 支店コード
-     */
-    public KinyuKikanShitenCode getKinyuKikanShitenCode() {
-        return kinyuKikanShitenCode;
-    }
-
-    /**
-     * 支店コードのsetメソッドです。
-     * 
-     * @param kinyuKikanShitenCode 支店コード
-     */
-    public void setKinyuKikanShitenCode(KinyuKikanShitenCode kinyuKikanShitenCode) {
-        this.kinyuKikanShitenCode = kinyuKikanShitenCode;
-    }
-
-    /**
-     * 口座種別のgetメソッドです。
-     * 
-     * @return 口座種別
-     */
-    public RString getKozaShubetsu() {
-        return kozaShubetsu;
-    }
-
-    /**
-     * 口座種別のsetメソッドです。
-     * 
-     * @param kozaShubetsu 口座種別
-     */
-    public void setKozaShubetsu(RString kozaShubetsu) {
-        this.kozaShubetsu = kozaShubetsu;
-    }
-
-    /**
-     * 口座名義人のgetメソッドです。
-     * 
-     * @return 口座名義人
-     */
-    public RString getKozaMeiginin() {
-        return kozaMeiginin;
-    }
-
-    /**
-     * 口座名義人のsetメソッドです。
-     * 
-     * @param kozaMeiginin 口座名義人
-     */
-    public void setKozaMeiginin(RString kozaMeiginin) {
-        this.kozaMeiginin = kozaMeiginin;
-    }
-
-    /**
-     * 口座名義人カナのgetメソッドです。
-     * 
-     * @return 口座名義人カナ
-     */
-    public RString getKozaMeigininKana() {
-        return kozaMeigininKana;
-    }
-
-    /**
-     * 口座名義人カナのsetメソッドです。
-     * 
-     * @param kozaMeigininKana 口座名義人カナ
-     */
-    public void setKozaMeigininKana(RString kozaMeigininKana) {
-        this.kozaMeigininKana = kozaMeigininKana;
-    }
-
-    /**
-     * 口座番号のgetメソッドです。
-     * 
-     * @return 口座番号
-     */
-    public RString getKozaNo() {
-        return kozaNo;
-    }
-
-    /**
-     * 口座番号のsetメソッドです。
-     * 
-     * @param kozaNo 口座番号
-     */
-    public void setKozaNo(RString kozaNo) {
-        this.kozaNo = kozaNo;
-    }
-
-    /**
      * 生年月日のgetメソッドです。
-     * 
+     *
      * @return 生年月日
      */
-    public GyomuCode getSeinengappiYMD() {
+    @CheckForNull
+    public FlexibleDate getSeinengappiYMD() {
         return seinengappiYMD;
     }
 
     /**
      * 生年月日のsetメソッドです。
-     * 
+     *
      * @param seinengappiYMD 生年月日
      */
-    public void setSeinengappiYMD(GyomuCode seinengappiYMD) {
+    public void setSeinengappiYMD(FlexibleDate seinengappiYMD) {
         this.seinengappiYMD = seinengappiYMD;
     }
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
+    @CheckForNull
     public RString getBiko() {
         return biko;
     }
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -487,7 +393,9 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 廃止フラグのgetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE：廃止フラグ）True：有効　False：無効
+     *
      * @return 廃止フラグ
      */
     public boolean getHaishiFlag() {
@@ -496,25 +404,28 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * 廃止フラグのsetメソッドです。
-     * 
+     * <br/>
+     * <br/>Enum（DBE：廃止フラグ）True：有効　False：無効
+     *
      * @param haishiFlag 廃止フラグ
      */
-    public void setHaishiFlag(boolean haishiFlag) {
+    public void setHaishiFlag(@Nonnull boolean haishiFlag) {
         this.haishiFlag = haishiFlag;
     }
 
     /**
      * 廃止年月日のgetメソッドです。
-     * 
+     *
      * @return 廃止年月日
      */
+    @CheckForNull
     public FlexibleDate getHaishiYMD() {
         return haishiYMD;
     }
 
     /**
      * 廃止年月日のsetメソッドです。
-     * 
+     *
      * @param haishiYMD 廃止年月日
      */
     public void setHaishiYMD(FlexibleDate haishiYMD) {
@@ -523,10 +434,9 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * このエンティティの主キーが他の{@literal DbT5594ShinsakaiIinJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5594ShinsakaiIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5594ShinsakaiIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5594ShinsakaiIinJohoEntity other) {
@@ -541,6 +451,8 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5594ShinsakaiIinJohoEntity entity) {
@@ -557,12 +469,6 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
         this.Jusho = entity.Jusho;
         this.telNo = entity.telNo;
         this.faxNo = entity.faxNo;
-        this.kinyuKikanCode = entity.kinyuKikanCode;
-        this.kinyuKikanShitenCode = entity.kinyuKikanShitenCode;
-        this.kozaShubetsu = entity.kozaShubetsu;
-        this.kozaMeiginin = entity.kozaMeiginin;
-        this.kozaMeigininKana = entity.kozaMeigininKana;
-        this.kozaNo = entity.kozaNo;
         this.seinengappiYMD = entity.seinengappiYMD;
         this.biko = entity.biko;
         this.haishiFlag = entity.haishiFlag;
@@ -571,13 +477,13 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinsakaiIinCode, shinsakaiIinKaishiYMD, shinsakaiIinShuryoYMD, shinsakaiIinShimei, ShinsakaiIinKanaShimei, seibetsu, shinsakaiIinShikakuCode, shinsainYusoKubun, tantoChikuCode, yubinNo, Jusho, telNo, faxNo, kinyuKikanCode, kinyuKikanShitenCode, kozaShubetsu, kozaMeiginin, kozaMeigininKana, kozaNo, seinengappiYMD, biko, haishiFlag, haishiYMD);
+        return super.toMd5(shinsakaiIinCode, shinsakaiIinKaishiYMD, shinsakaiIinShuryoYMD, shinsakaiIinShimei, ShinsakaiIinKanaShimei, seibetsu, shinsakaiIinShikakuCode, shinsainYusoKubun, tantoChikuCode, yubinNo, Jusho, telNo, faxNo, seinengappiYMD, biko, haishiFlag, haishiYMD);
     }
 
 // </editor-fold>
-
 }

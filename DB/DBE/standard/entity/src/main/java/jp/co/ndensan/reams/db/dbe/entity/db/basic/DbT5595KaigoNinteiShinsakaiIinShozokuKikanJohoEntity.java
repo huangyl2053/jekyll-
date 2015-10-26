@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -15,10 +17,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 介護認定審査会委員所属機関情報テーブルのエンティティクラスです。
  */
 public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTableEntityBase<DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho");
+    private static final long serialVersionUID = -2635763512021683010L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -101,7 +104,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      */
-    public void setShinsakaiIinCode(RString shinsakaiIinCode) {
+    public void setShinsakaiIinCode(@Nonnull RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
     }
 
@@ -119,7 +122,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @param remban 連番
      */
-    public void setRemban(int remban) {
+    public void setRemban(@Nonnull int remban) {
         this.remban = remban;
     }
 
@@ -128,6 +131,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 事業者区分
      */
+    @CheckForNull
     public RString getJigyoshaKubun() {
         return jigyoshaKubun;
     }
@@ -146,6 +150,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 所属開始年月日
      */
+    @CheckForNull
     public FlexibleDate getShozokuKaishiYMD() {
         return shozokuKaishiYMD;
     }
@@ -164,6 +169,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 所属終了年月日
      */
+    @CheckForNull
     public FlexibleDate getShozokuShuryoYMD() {
         return shozokuShuryoYMD;
     }
@@ -182,6 +188,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 証記載保険者番号
      */
+    @CheckForNull
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
@@ -202,6 +209,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 主治医医療機関コード
      */
+    @CheckForNull
     public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
@@ -224,6 +232,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 主治医コード
      */
+    @CheckForNull
     public RString getShujiiCode() {
         return shujiiCode;
     }
@@ -246,6 +255,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 認定調査委託先コード
      */
+    @CheckForNull
     public RString getNinteichosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
@@ -268,6 +278,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return 認定調査員コード
      */
+    @CheckForNull
     public RString getNinteiChosainNo() {
         return ninteiChosainNo;
     }
@@ -290,6 +301,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      *
      * @return その他機関コード
      */
+    @CheckForNull
     public RString getSonotaKikanCode() {
         return sonotaKikanCode;
     }
@@ -309,7 +321,7 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
      * このエンティティの主キーが他の{@literal DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -328,6 +340,8 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity) {
