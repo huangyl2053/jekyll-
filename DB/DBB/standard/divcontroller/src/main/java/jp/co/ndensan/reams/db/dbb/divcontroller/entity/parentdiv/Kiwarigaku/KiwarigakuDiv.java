@@ -5,12 +5,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.Kiwarigaku;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * Kiwarigaku のクラスファイル
@@ -708,7 +708,7 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
+    public void initialize(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
         getHandler().load(調定年度, 賦課年度, 通知書番号, 処理日時);
     }
 

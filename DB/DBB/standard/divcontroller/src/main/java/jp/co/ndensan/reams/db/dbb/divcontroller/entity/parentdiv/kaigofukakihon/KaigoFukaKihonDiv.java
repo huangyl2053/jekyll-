@@ -7,14 +7,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.kaigofukakihon.
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * KaigoFukaKihon のクラスファイル
@@ -134,7 +128,7 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(KaigoFukaKihonSearchKey searchKey) {
+    public void initialize(KaigoFukaKihonSearchKey searchKey) {
         getHandler().load(searchKey);
     }
 

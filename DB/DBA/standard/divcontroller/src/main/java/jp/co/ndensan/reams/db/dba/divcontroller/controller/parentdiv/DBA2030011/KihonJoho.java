@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dba.business.core.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.definition.core.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -23,13 +21,11 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFind
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 
 /**
  * 住所地特例画面における、資格基本情報Divのイベントを定義したDivControllerです。
@@ -56,7 +52,7 @@ public class KihonJoho {
 //        lasdecCode = new LasdecCode("209007");
 
         kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
-        kihonDiv.getCcdKaigoShikakuKihon().load(lasdecCode, taishoshaKey.get識別コード());
+        kihonDiv.getCcdKaigoShikakuKihon().initialize(lasdecCode, taishoshaKey.get識別コード());
 
         if (isNot適用対象者(taishoshaKey, controlData)) {
             //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月

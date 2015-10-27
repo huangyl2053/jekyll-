@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon;
 
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
@@ -53,7 +52,7 @@ public class KaigoShikakuKihonHandler {
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
      */
-    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
 //        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());

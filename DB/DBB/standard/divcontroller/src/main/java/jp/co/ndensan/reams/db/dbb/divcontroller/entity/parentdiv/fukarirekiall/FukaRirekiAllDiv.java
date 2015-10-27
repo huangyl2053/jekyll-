@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.fukarirekiall.dgFukaRirekiAll_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
@@ -50,17 +49,17 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public int load(HihokenshaNo 被保険者番号) {
+    public int initialize(HihokenshaNo 被保険者番号) {
         return getHandler().load(被保険者番号);
     }
 
     @Override
-    public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
+    public int initialize(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         return getHandler().load(被保険者番号, 賦課年度);
     }
 
     @Override
-    public int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+    public int initialize(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         return getHandler().load(調定年度, 賦課年度, 通知書番号);
     }
 

@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.fukarirekiall;
 
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 
 /**
  * 全賦課履歴Divのインターフェースです。
@@ -19,7 +19,7 @@ public interface IFukaRirekiAllDiv {
      * @param 被保険者番号 被保険者番号
      * @return 表示件数
      */
-    int load(HihokenshaNo 被保険者番号);
+    int initialize(HihokenshaNo 被保険者番号);
 
     /**
      * 引数に該当するデータをDivに設定します。
@@ -28,7 +28,7 @@ public interface IFukaRirekiAllDiv {
      * @param 賦課年度 賦課年度
      * @return 表示件数
      */
-    int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度);
+    int initialize(HihokenshaNo 被保険者番号, FukaNendo 賦課年度);
 
     /**
      * 調定年度、賦課年度、通知書番号に該当する処理日時の直近データをDivに設定します。
@@ -38,7 +38,7 @@ public interface IFukaRirekiAllDiv {
      * @param 通知書番号 通知書番号
      * @return 表示件数
      */
-    int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号);
+    int initialize(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号);
 
     /**
      * 通知書番号に該当する処理日時の直近データをDivに設定します。

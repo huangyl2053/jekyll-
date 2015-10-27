@@ -4,17 +4,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusor
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -274,7 +275,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public void initialize(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         //1)、引数から受け取った市町村コード・被保険者番号を元に、被保険者台帳情報を検索する。
         //2)、取得した情報をPanelSessionAccessorに登録する。
         //3)、取得した被保険者台帳Listから、資格得喪を表す情報を抽出する。
@@ -282,7 +283,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     @Override
-    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         //1)、引数から受け取った市町村コード・識別コードを元に、被保険者台帳情報を検索する。
         //2)、取得した情報をPanelSessionAccessorに登録する。
         //3)、取得した被保険者台帳Listから、資格得喪を表す情報を抽出する。

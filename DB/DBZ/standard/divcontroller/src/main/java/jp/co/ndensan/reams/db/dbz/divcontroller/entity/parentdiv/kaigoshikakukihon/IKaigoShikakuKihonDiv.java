@@ -18,7 +18,7 @@ public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
      */
-    void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
+    void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 自身に設定されている被保険者番号を返します。
