@@ -18,7 +18,7 @@ public interface IIryoHokenRirekiDiv {
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
      */
-    void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
+    void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 明細エリアに入力されている情報を初期化します。

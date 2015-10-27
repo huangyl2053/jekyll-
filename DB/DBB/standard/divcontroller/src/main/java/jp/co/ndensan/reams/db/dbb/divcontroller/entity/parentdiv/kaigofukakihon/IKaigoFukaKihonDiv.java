@@ -15,5 +15,5 @@ public interface IKaigoFukaKihonDiv extends ICommonChildDivBaseProperties {
      *
      * @param searchKey {@link KaigoFukaKihonSearchKey key}
      */
-    void load(KaigoFukaKihonSearchKey searchKey);
+    void initialize(KaigoFukaKihonSearchKey searchKey);
 }

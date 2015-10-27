@@ -18,7 +18,7 @@ public interface IShikakuHenkoRirekiDiv {
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      */
-    void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
+    void initialize(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
 
     /**
      * 住所地特例履歴ListDivについて、グリッド表示項目などの項目について初期化処理を行います。<br/>

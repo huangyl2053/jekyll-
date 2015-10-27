@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakutokusorireki;
 
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -19,7 +19,7 @@ public interface IShikakuTokusoRirekiDiv {
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
      */
-    void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
+    void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 引数から渡されたキーを元に被保険者台帳テーブルから情報を取得し、その情報をグリッドに表示します。
@@ -27,7 +27,7 @@ public interface IShikakuTokusoRirekiDiv {
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      */
-    void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
+    void initialize(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
 
     /**
      * 共有子Divが保持している、被保険者台帳の情報を取得します。

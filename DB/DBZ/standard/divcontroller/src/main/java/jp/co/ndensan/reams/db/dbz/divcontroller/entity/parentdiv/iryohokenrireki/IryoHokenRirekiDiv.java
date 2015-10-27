@@ -3,15 +3,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.iryohokenrirek
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.business.core.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -205,7 +207,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public void initialize(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         //TODO
         //1)、引数から渡されたキーを元に、医療保険加入情報を検索する。
         //2)、取得した情報をPanelSessionAccessorに登録する。
