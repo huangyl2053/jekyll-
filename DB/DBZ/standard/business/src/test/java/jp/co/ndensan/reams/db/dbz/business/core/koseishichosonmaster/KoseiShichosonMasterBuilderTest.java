@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
 
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,15 +25,37 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KoseiShichosonMasterBuilderTest extends DbzTestBase {
 
-    private static DbT7051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static RString 主キー名1;
+    private static DbT7051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;
+    private static RString 市町村識別ID;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
+
+        市町村識別ID = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
+
+    }
+
+    public static class KoseiShichosonShishoMasterテスト extends DbzTestBase {
+
+        private static KoseiShichosonMasterBuilder sut;
+        private static KoseiShichosonMaster business;
+        private static KoseiShichosonShishoMaster seishinTechoNini;
+
+        @Before
+        public void setUp() {
+
+            business = new KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID);
+            seishinTechoNini = new KoseiShichosonShishoMaster(
+                    DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村コード,
+                    DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード);
+            sut = business.createBuilderForEdit();
+        }
+
+        @Test
+        public void 構成市町村マスタに紐づくことが可能な子テーブル情報をsetSeishinTechoNiniで設定した場合_設定済みの子テーブル情報が返る() {
+            business = sut.setKoseiShichosonShishoMaster(seishinTechoNini).build();
+            assertThat(business.getKoseiShichosonShishoMasterList().size(), is(1));
+        }
     }
 
     public static class getterSetterTest extends DbzTestBase {
@@ -43,18 +66,13 @@ public class KoseiShichosonMasterBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonMasterEntity = new DbT7051KoseiShichosonMasterEntity();
-            KoseiShichosonMasterEntity.setShichosonShokibetsuID(主キー名1);
+            KoseiShichosonMasterEntity.setShichosonShokibetsuID(市町村識別ID);
 
-            business = new KoseiShichosonMaster(KoseiShichosonMasterEntity);
+            KoseiShichosonMasterRelateEntity entity = new KoseiShichosonMasterRelateEntity();
+            entity.set構成市町村マスタEntity(KoseiShichosonMasterEntity);
+            business = new KoseiShichosonMaster(entity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の市町村識別IDは_設定した値と同じ市町村識別IDを返す() {
-            business = sut.set市町村識別ID(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID).build();
-            assertThat(business.get市町村識別ID(), is(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID));
         }
 
         @Test

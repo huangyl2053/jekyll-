@@ -4,11 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -44,15 +43,15 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_市町村識別ID);
+                    キー_01);
             TestSupport.insert(
-                    DEFAULT_市町村識別ID);
+                    キー_02);
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村識別IDがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村識別ID);
+                    null);
         }
 
         @Test
@@ -65,7 +64,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7051KoseiShichosonMasterEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_市町村識別ID);
+                    キー_01);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -75,9 +74,9 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         @Test
         public void 構成市町村マスタが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_市町村識別ID);
+                    キー_02);
             TestSupport.insert(
-                    DEFAULT_市町村識別ID);
+                    キー_03);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -111,14 +110,14 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         public void 構成市町村マスタエンティティを渡すと_updateは_構成市町村マスタを更新する() {
             DbT7051KoseiShichosonMasterEntity updateRecord = sut.selectByKey(
                     DEFAULT_市町村識別ID);
-            updateRecord.setGunMeisho(new RString("郡名称"));
+            updateRecord.setTyohyoKatagakiHyojiUmu(new RString("000001"));
 
             sut.save(updateRecord);
 
             DbT7051KoseiShichosonMasterEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村識別ID);
 
-            assertThat(updateRecord.getGunMeisho(), is(updatedRecord.getGunMeisho()));
+            assertThat(updateRecord.getTyohyoKatagakiHyojiUmu(), is(updatedRecord.getTyohyoKatagakiHyojiUmu()));
         }
     }
 

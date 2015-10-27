@@ -3,14 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -26,8 +33,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterIdentifier, DbT7051KoseiShichosonMasterEntity, KoseiShichosonMaster> implements Serializable {
 
+    private static final long serialVersionUID = -7585494205375015808L;
+
     private final DbT7051KoseiShichosonMasterEntity entity;
     private final KoseiShichosonMasterIdentifier id;
+    private final Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster;
 
     /**
      * コンストラクタです。<br/>
@@ -42,6 +52,7 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         this.id = new KoseiShichosonMasterIdentifier(
                 市町村識別ID
         );
+        this.koseiShichosonShishoMaster = Models.create(new ArrayList<KoseiShichosonShishoMaster>());
     }
 
     /**
@@ -50,10 +61,16 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
      *
      * @param entity DBより取得した{@link DbT7051KoseiShichosonMasterEntity}
      */
-    public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ"));
+    public KoseiShichosonMaster(KoseiShichosonMasterRelateEntity entity) {
+        this.entity = requireNonNull(entity.get構成市町村マスタEntity(), UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ"));
         this.id = new KoseiShichosonMasterIdentifier(
-                entity.getShichosonShokibetsuID());
+                entity.get構成市町村マスタEntity().getShichosonShokibetsuID());
+
+        List<KoseiShichosonShishoMaster> koseiShichosonShishoMasterList = new ArrayList<>();
+        for (DbT7052KoseiShichosonShishoMasterEntity niniEntity : entity.get構成市町村支所マスタEntity()) {
+            koseiShichosonShishoMasterList.add(new KoseiShichosonShishoMaster(niniEntity));
+        }
+        this.koseiShichosonShishoMaster = Models.create(koseiShichosonShishoMasterList);
     }
 
     /**
@@ -64,10 +81,12 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
      */
     KoseiShichosonMaster(
             DbT7051KoseiShichosonMasterEntity entity,
-            KoseiShichosonMasterIdentifier id
+            KoseiShichosonMasterIdentifier id,
+            Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster
     ) {
         this.entity = entity;
         this.id = id;
+        this.koseiShichosonShishoMaster = koseiShichosonShishoMaster;
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
@@ -374,7 +393,7 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new KoseiShichosonMaster(
-                modifiedEntity, id);
+                modifiedEntity, id, koseiShichosonShishoMaster);
     }
 
     /**
@@ -392,7 +411,7 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
             //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new KoseiShichosonMaster(deletedEntity, id);
+        return new KoseiShichosonMaster(deletedEntity, id, koseiShichosonShishoMaster.deleted());
     }
 
     /**
@@ -401,17 +420,25 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
      * @return {@link KoseiShichosonMaster}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id);
+        return new _SerializationProxy(entity, id, koseiShichosonShishoMaster);
 
     }
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity() || koseiShichosonShishoMaster.hasAnyChanged();
+    }
+
+    public KoseiShichosonShishoMaster getKoseiShichosonShishoMaster(KoseiShichosonShishoMasterIdentifier id) {
+        if (koseiShichosonShishoMaster.contains(id)) {
+            return koseiShichosonShishoMaster.clone().get(id);
+        }
+        //TODO メッセージの検討
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
     public List<KoseiShichosonShishoMaster> getKoseiShichosonShishoMasterList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>(koseiShichosonShishoMaster.values());
     }
 
     public KoseiShichosonMaster modified() {
@@ -420,18 +447,24 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -3289973936745141212L;
 
         private final DbT7051KoseiShichosonMasterEntity entity;
         private final KoseiShichosonMasterIdentifier id;
+        private final Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster;
 
-        private _SerializationProxy(DbT7051KoseiShichosonMasterEntity entity, KoseiShichosonMasterIdentifier id) {
+        private _SerializationProxy(
+                DbT7051KoseiShichosonMasterEntity entity,
+                KoseiShichosonMasterIdentifier id,
+                Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster
+        ) {
             this.entity = entity;
             this.id = id;
+            this.koseiShichosonShishoMaster = koseiShichosonShishoMaster;
         }
 
         private Object readResolve() {
-            return new KoseiShichosonMaster(this.entity, this.id);
+            return new KoseiShichosonMaster(this.entity, this.id, this.koseiShichosonShishoMaster);
         }
     }
 
@@ -442,8 +475,29 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
      * @return Builder
      */
     public KoseiShichosonMasterBuilder createBuilderForEdit() {
-        return new KoseiShichosonMasterBuilder(entity, id);
+        return new KoseiShichosonMasterBuilder(entity, id, koseiShichosonShishoMaster);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KoseiShichosonMaster other = (KoseiShichosonMaster) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

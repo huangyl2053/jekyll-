@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7052KoseiShichosonShishoMasterEntityGenerator {
 
-    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("209007");
-    public static final ShishoCode DEFAULT_支所コード = new ShishoCode("0001");
-    public static final RString DEFAULT_支所名 = new RString("Data");
+    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
+    public static final ShishoCode DEFAULT_支所コード = new ShishoCode("123456789");
+    public static final RString DEFAULT_支所名 = new RString("あいうえおさし");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

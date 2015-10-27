@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeishichoson;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class GappeiShichosonIdentifier implements Serializable {
+
+    private static final long serialVersionUID = -8096763861099854452L;
 
     private final FlexibleDate 合併年月日;
     private final RString 地域番号;

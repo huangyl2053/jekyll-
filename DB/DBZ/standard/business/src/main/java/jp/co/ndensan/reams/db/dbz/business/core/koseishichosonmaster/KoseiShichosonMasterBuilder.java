@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -23,6 +27,7 @@ public class KoseiShichosonMasterBuilder {
 
     private final DbT7051KoseiShichosonMasterEntity entity;
     private final KoseiShichosonMasterIdentifier id;
+    private final Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster;
 
     /**
      * {@link DbT7051KoseiShichosonMasterEntity}より{@link KoseiShichosonMaster}の編集用Builderクラスを生成します。
@@ -33,15 +38,14 @@ public class KoseiShichosonMasterBuilder {
      */
     KoseiShichosonMasterBuilder(
             DbT7051KoseiShichosonMasterEntity entity,
-            KoseiShichosonMasterIdentifier id
+            KoseiShichosonMasterIdentifier id,
+            Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster
     ) {
         this.entity = entity.clone();
         this.id = id;
-
+        this.koseiShichosonShishoMaster = koseiShichosonShishoMaster.clone();
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
      * 市町村識別IDを設定します。
      *
@@ -408,10 +412,19 @@ public class KoseiShichosonMasterBuilder {
      * @return {@link KoseiShichosonMaster}のインスタンス
      */
     public KoseiShichosonMaster build() {
-        return new KoseiShichosonMaster(entity, id);
+        return new KoseiShichosonMaster(entity, id, koseiShichosonShishoMaster);
     }
 
-    public KoseiShichosonMasterBuilder setKoseiShichosonShishoMaster(KoseiShichosonShishoMaster KoseiShichosonShishoMaster) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public KoseiShichosonMasterBuilder setKoseiShichosonShishoMaster(KoseiShichosonShishoMaster 構成市町村支所マスタ) {
+
+        if (hasSameIdentifier(構成市町村支所マスタ.identifier())) {
+            koseiShichosonShishoMaster.add(構成市町村支所マスタ);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(KoseiShichosonShishoMasterIdentifier 構成市町村支所マスタ識別子) {
+        return (entity.getShichosonCode().equals(構成市町村支所マスタ識別子.get市町村コード()));
     }
 }

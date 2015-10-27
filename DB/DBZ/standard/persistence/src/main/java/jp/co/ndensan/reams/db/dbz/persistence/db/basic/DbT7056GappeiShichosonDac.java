@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.kyuShichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.chiikiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.gappeiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.chiikiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.kyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -63,7 +63,7 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
     /**
      * 合併市町村を全件返します。
      *
-     * @return List<DbT7056GappeiShichosonEntity>
+     * @return DbT7056GappeiShichosonEntityの{@code list}
      */
     @Transaction
     public List<DbT7056GappeiShichosonEntity> selectAll() {
@@ -84,24 +84,7 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
     @Override
     public int save(DbT7056GappeiShichosonEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併市町村エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    public int insert(DbT7056GappeiShichosonEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int update(DbT7056GappeiShichosonEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int delete(DbT7056GappeiShichosonEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int deletePhysical(DbT7056GappeiShichosonEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

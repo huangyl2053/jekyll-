@@ -8,11 +8,12 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMaster;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMaster.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMaster.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMaster.shishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -31,8 +32,8 @@ public class DbT7052KoseiShichosonShishoMasterDac implements ISaveable<DbT7052Ko
     /**
      * 主キーで構成市町村支所マスタを取得します。
      *
-     * @param 市町村コード ShichosonCode
-     * @param 支所コード ShishoCode
+     * @param 市町村コード 市町村コード
+     * @param 支所コード 支所コード
      * @return DbT7052KoseiShichosonShishoMasterEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -56,7 +57,7 @@ public class DbT7052KoseiShichosonShishoMasterDac implements ISaveable<DbT7052Ko
     /**
      * 構成市町村支所マスタを全件返します。
      *
-     * @return List<DbT7052KoseiShichosonShishoMasterEntity>
+     * @return DbT7052KoseiShichosonShishoMasterEntityの{@code list}
      */
     @Transaction
     public List<DbT7052KoseiShichosonShishoMasterEntity> selectAll() {

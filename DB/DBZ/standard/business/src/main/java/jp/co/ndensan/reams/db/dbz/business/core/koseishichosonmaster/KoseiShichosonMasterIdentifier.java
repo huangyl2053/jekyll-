@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Value;
 
 /**
  * 構成市町村マスタの識別子です。
  */
-@Value
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Value
 public class KoseiShichosonMasterIdentifier implements Serializable {
+
+    private static final long serialVersionUID = -2100269448367237366L;
 
     private final RString 市町村識別ID;
 

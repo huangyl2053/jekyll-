@@ -2,17 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -29,17 +26,16 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KoseiShichosonShishoMasterTest extends DbzTestBase {
 
-    private static DbT7052KoseiShichosonShishoMasterEntity KoseiShichosonShishoMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static LasdecCode 主キー名1;
-    private static ShishoCode 主キー名2;
+    private static DbT7052KoseiShichosonShishoMasterEntity KoseiShichosonShishoMasterEntity;
+
+    private static LasdecCode 市町村コード;
+    private static ShishoCode 支所コード;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
-        主キー名2 = DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
+
+        市町村コード = DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
+        支所コード = DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_支所コード;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -49,34 +45,35 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoseiShichosonShishoMaster(null, 主キー名2);
+            sut = new KoseiShichosonShishoMaster(null, 支所コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KoseiShichosonShishoMaster(主キー名1, null);
+            sut = new KoseiShichosonShishoMaster(市町村コード, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7052KoseiShichosonShishoMasterEntityにセットされている() {
-            sut = new KoseiShichosonShishoMaster(主キー名1, 主キー名2);
-            assertThat(sut.get市町村コード(), is(主キー名1));
-            assertThat(sut.get支所コード(), is(主キー名2));
+            sut = new KoseiShichosonShishoMaster(市町村コード, 支所コード);
+            assertThat(sut.get市町村コード(), is(市町村コード));
+            assertThat(sut.get支所コード(), is(支所コード));
         }
 
         @Test
         public void 指定したキーが保持するKoseiShichosonShishoMasterIdentifierにセットされている() {
-            sut = new KoseiShichosonShishoMaster(主キー名1, 主キー名2);
-            assertThat(sut.identifier().get市町村コード(), is(主キー名1));
-            assertThat(sut.identifier().get支所コード(), is(主キー名2));
+            sut = new KoseiShichosonShishoMaster(市町村コード, 支所コード);
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get支所コード(), is(支所コード));
         }
+
     }
 
     public static class Entityコンストラクタテスト extends DbzTestBase {
@@ -86,23 +83,24 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
         }
 
         @Test(expected = NullPointerException.class)
-        public void 指定したEntityがnullである場合_NullPointerExceptionとなる() {
+        public void 指定したKoseiShichosonShishoMasterRelateEntityがnullである場合_NullPointerExceptionとなる() {
             sut = new KoseiShichosonShishoMaster(null);
         }
 
         @Test
-        public void 指定したDbT7052KoseiShichosonShishoMasterEntityのキー情報を識別子が持つ() {
+        public void 指定したKoseiShichosonShishoMasterRelateEntityの保持するDbT7052KoseiShichosonShishoMasterEntityのキー情報を識別子が持つ() {
 
             sut = new KoseiShichosonShishoMaster(KoseiShichosonShishoMasterEntity);
 
-            assertThat(sut.identifier().get市町村コード(), is(主キー名1));
-            assertThat(sut.identifier().get支所コード(), is(主キー名2));
+            assertThat(sut.identifier().get市町村コード(), is(市町村コード));
+            assertThat(sut.identifier().get支所コード(), is(支所コード));
         }
+
     }
 
     public static class getterテスト extends DbzTestBase {
@@ -112,8 +110,8 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
 
             sut = new KoseiShichosonShishoMaster(KoseiShichosonShishoMasterEntity);
         }
@@ -141,8 +139,8 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
 
             sut = new KoseiShichosonShishoMaster(KoseiShichosonShishoMasterEntity);
         }
@@ -160,15 +158,15 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
 
             sut = new KoseiShichosonShishoMaster(KoseiShichosonShishoMasterEntity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(IsSerializable.serializable()));
+            assertThat(sut, is(canBeCopiedBySerialization()));
         }
     }
 
@@ -180,8 +178,8 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
         @Before
         public void setUp() {
             KoseiShichosonShishoMasterEntity = DbT7052KoseiShichosonShishoMasterEntityGenerator.createDbT7052KoseiShichosonShishoMasterEntity();
-            KoseiShichosonShishoMasterEntity.setShichosonCode(主キー名1);
-            KoseiShichosonShishoMasterEntity.setShishoCode(主キー名2);
+            KoseiShichosonShishoMasterEntity.setShichosonCode(市町村コード);
+            KoseiShichosonShishoMasterEntity.setShishoCode(支所コード);
 
         }
 
@@ -219,5 +217,6 @@ public class KoseiShichosonShishoMasterTest extends DbzTestBase {
             KoseiShichosonShishoMasterEntity.setState(parentState);
             return new KoseiShichosonShishoMaster(KoseiShichosonShishoMasterEntity);
         }
+
     }
 }

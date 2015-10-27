@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -27,6 +27,7 @@ public class GappeiJohoIdentifierTest extends DbzTestBase {
 
     @BeforeClass
     public static void setUpClass() {
+
         合併年月日 = DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
         地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
@@ -36,7 +37,7 @@ public class GappeiJohoIdentifierTest extends DbzTestBase {
         @Test
         public void シリアライズできる() {
             GappeiJohoIdentifier sut = new GappeiJohoIdentifier(合併年月日, 地域番号);
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(canBeCopiedBySerialization()));
         }
     }
 }

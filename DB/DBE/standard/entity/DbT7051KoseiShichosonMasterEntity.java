@@ -1,21 +1,20 @@
-package jp.co.ndensan.reams.db.dbz.entity.db.basic;
+package C:.Users.kongwc.Documents.LDNS_DB.DB.DBE.standard.entity;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 構成市町村マスタテーブルのエンティティクラスです。
@@ -23,10 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
-    private static final long serialVersionUID = -3103305345770896014L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -39,7 +36,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     @PrimaryKey
     private RString shichosonShokibetsuID;
     private LasdecCode shichosonCode;
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;
     private RString shichosonMeisho;
     private RString todofukenMeisho;
@@ -63,14 +60,14 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     private RString gappeiKyuShichosonKubun;
     private RString gappeiKyuShichosonHyojiUmu;
     private RString gappeiChiikiNo;
-    private ShoKisaiHokenshaNo unyoHokenshaNo;
+    private DbUDD015ShoKisaiHokenshaNo unyoHokenshaNo;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
     private RString unyoKeitaiKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -79,7 +76,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -88,7 +85,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -97,16 +94,17 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -115,7 +113,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村識別IDのgetメソッドです。
-     *
+     * 
      * @return 市町村識別ID
      */
     public RString getShichosonShokibetsuID() {
@@ -124,7 +122,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村識別IDのsetメソッドです。
-     *
+     * 
      * @param shichosonShokibetsuID 市町村識別ID
      */
     public void setShichosonShokibetsuID(@Nonnull RString shichosonShokibetsuID) {
@@ -133,7 +131,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -142,7 +140,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
@@ -151,25 +149,25 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 国保連広域内市町村番号のgetメソッドです。
-     *
+     * 
      * @return 国保連広域内市町村番号
      */
     @CheckForNull
@@ -179,7 +177,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 国保連広域内市町村番号のsetメソッドです。
-     *
+     * 
      * @param kokuhorenKoikiShichosonNo 国保連広域内市町村番号
      */
     public void setKokuhorenKoikiShichosonNo(RString kokuhorenKoikiShichosonNo) {
@@ -188,7 +186,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村名称のgetメソッドです。
-     *
+     * 
      * @return 市町村名称
      */
     public RString getShichosonMeisho() {
@@ -197,7 +195,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 市町村名称のsetメソッドです。
-     *
+     * 
      * @param shichosonMeisho 市町村名称
      */
     public void setShichosonMeisho(@Nonnull RString shichosonMeisho) {
@@ -206,7 +204,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 都道府県名称のgetメソッドです。
-     *
+     * 
      * @return 都道府県名称
      */
     @CheckForNull
@@ -216,7 +214,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 都道府県名称のsetメソッドです。
-     *
+     * 
      * @param todofukenMeisho 都道府県名称
      */
     public void setTodofukenMeisho(RString todofukenMeisho) {
@@ -225,7 +223,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 郡名称のgetメソッドです。
-     *
+     * 
      * @return 郡名称
      */
     @CheckForNull
@@ -235,7 +233,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 郡名称のsetメソッドです。
-     *
+     * 
      * @param gunMeisho 郡名称
      */
     public void setGunMeisho(RString gunMeisho) {
@@ -244,7 +242,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 郵便番号のgetメソッドです。
-     *
+     * 
      * @return 郵便番号
      */
     @CheckForNull
@@ -254,7 +252,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 郵便番号のsetメソッドです。
-     *
+     * 
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -263,7 +261,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 住所のgetメソッドです。
-     *
+     * 
      * @return 住所
      */
     @CheckForNull
@@ -273,7 +271,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 住所のsetメソッドです。
-     *
+     * 
      * @param jusho 住所
      */
     public void setJusho(AtenaJusho jusho) {
@@ -282,7 +280,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 電話番号のgetメソッドです。
-     *
+     * 
      * @return 電話番号
      */
     @CheckForNull
@@ -292,7 +290,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 電話番号のsetメソッドです。
-     *
+     * 
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -301,7 +299,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 最優先地区コードのgetメソッドです。
-     *
+     * 
      * @return 最優先地区コード
      */
     @CheckForNull
@@ -311,7 +309,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 最優先地区コードのsetメソッドです。
-     *
+     * 
      * @param yusenChikuCode 最優先地区コード
      */
     public void setYusenChikuCode(RString yusenChikuCode) {
@@ -320,7 +318,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用都道府県名称表示有無のgetメソッドです。
-     *
+     * 
      * @return 帳票用都道府県名称表示有無
      */
     public RString getTyohyoTodoufukenHyojiUmu() {
@@ -329,7 +327,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用都道府県名称表示有無のsetメソッドです。
-     *
+     * 
      * @param tyohyoTodoufukenHyojiUmu 帳票用都道府県名称表示有無
      */
     public void setTyohyoTodoufukenHyojiUmu(@Nonnull RString tyohyoTodoufukenHyojiUmu) {
@@ -338,7 +336,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用郡名称表示有無のgetメソッドです。
-     *
+     * 
      * @return 帳票用郡名称表示有無
      */
     public RString getTyohyoGunHyojiUmu() {
@@ -347,7 +345,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用郡名称表示有無のsetメソッドです。
-     *
+     * 
      * @param tyohyoGunHyojiUmu 帳票用郡名称表示有無
      */
     public void setTyohyoGunHyojiUmu(@Nonnull RString tyohyoGunHyojiUmu) {
@@ -356,7 +354,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用市町村名称表示有無のgetメソッドです。
-     *
+     * 
      * @return 帳票用市町村名称表示有無
      */
     public RString getTyohyoShichosonHyojiUmu() {
@@ -365,7 +363,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用市町村名称表示有無のsetメソッドです。
-     *
+     * 
      * @param tyohyoShichosonHyojiUmu 帳票用市町村名称表示有無
      */
     public void setTyohyoShichosonHyojiUmu(@Nonnull RString tyohyoShichosonHyojiUmu) {
@@ -374,7 +372,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用住所編集方法のgetメソッドです。
-     *
+     * 
      * @return 帳票用住所編集方法
      */
     public RString getTyohyoJushoHenshuHouhou() {
@@ -383,7 +381,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用住所編集方法のsetメソッドです。
-     *
+     * 
      * @param tyohyoJushoHenshuHouhou 帳票用住所編集方法
      */
     public void setTyohyoJushoHenshuHouhou(@Nonnull RString tyohyoJushoHenshuHouhou) {
@@ -392,7 +390,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用方書表示有無のgetメソッドです。
-     *
+     * 
      * @return 帳票用方書表示有無
      */
     public RString getTyohyoKatagakiHyojiUmu() {
@@ -401,7 +399,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 帳票用方書表示有無のsetメソッドです。
-     *
+     * 
      * @param tyohyoKatagakiHyojiUmu 帳票用方書表示有無
      */
     public void setTyohyoKatagakiHyojiUmu(@Nonnull RString tyohyoKatagakiHyojiUmu) {
@@ -410,7 +408,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 外国人氏名表示方法のgetメソッドです。
-     *
+     * 
      * @return 外国人氏名表示方法
      */
     public RString getGaikokujinHyojiHouhou() {
@@ -419,7 +417,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 外国人氏名表示方法のsetメソッドです。
-     *
+     * 
      * @param gaikokujinHyojiHouhou 外国人氏名表示方法
      */
     public void setGaikokujinHyojiHouhou(@Nonnull RString gaikokujinHyojiHouhou) {
@@ -428,7 +426,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 老人保健市町村番号のgetメソッドです。
-     *
+     * 
      * @return 老人保健市町村番号
      */
     @CheckForNull
@@ -438,7 +436,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 老人保健市町村番号のsetメソッドです。
-     *
+     * 
      * @param rojinhokenShichosonNo 老人保健市町村番号
      */
     public void setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
@@ -447,7 +445,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 老人保健受給者番号体系のgetメソッドです。
-     *
+     * 
      * @return 老人保健受給者番号体系
      */
     @CheckForNull
@@ -457,7 +455,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 老人保健受給者番号体系のsetメソッドです。
-     *
+     * 
      * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
      */
     public void setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
@@ -468,7 +466,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * 特徴分配集約のgetメソッドです。
      * <br/>
      * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
-     *
+     * 
      * @return 特徴分配集約
      */
     @CheckForNull
@@ -480,7 +478,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * 特徴分配集約のsetメソッドです。
      * <br/>
      * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
-     *
+     * 
      * @param tokuchoBunpaishuyaku 特徴分配集約
      */
     public void setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
@@ -489,7 +487,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 移行日のgetメソッドです。
-     *
+     * 
      * @return 移行日
      */
     @CheckForNull
@@ -499,7 +497,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 移行日のsetメソッドです。
-     *
+     * 
      * @param ikoYMD 移行日
      */
     public void setIkoYMD(FlexibleDate ikoYMD) {
@@ -508,7 +506,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 加入日のgetメソッドです。
-     *
+     * 
      * @return 加入日
      */
     public FlexibleDate getKanyuYMD() {
@@ -517,7 +515,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 加入日のsetメソッドです。
-     *
+     * 
      * @param kanyuYMD 加入日
      */
     public void setKanyuYMD(@Nonnull FlexibleDate kanyuYMD) {
@@ -526,7 +524,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 離脱日のgetメソッドです。
-     *
+     * 
      * @return 離脱日
      */
     @CheckForNull
@@ -536,7 +534,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 離脱日のsetメソッドです。
-     *
+     * 
      * @param ridatsuYMD 離脱日
      */
     public void setRidatsuYMD(FlexibleDate ridatsuYMD) {
@@ -544,9 +542,9 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのgetメソッドです。
-     *
-     * @return 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
+     * 合併旧市町村区分  １：合併前の旧市町村である ０：最新の広域構成市町村であるのgetメソッドです。
+     * 
+     * @return 合併旧市町村区分  １：合併前の旧市町村である ０：最新の広域構成市町村である
      */
     @CheckForNull
     public RString getGappeiKyuShichosonKubun() {
@@ -554,18 +552,20 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのsetメソッドです。
-     *
-     * @param gappeiKyuShichosonKubun 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
+     * 合併旧市町村区分  １：合併前の旧市町村である ０：最新の広域構成市町村であるのsetメソッドです。
+     * 
+     * @param gappeiKyuShichosonKubun 合併旧市町村区分  １：合併前の旧市町村である ０：最新の広域構成市町村である
      */
     public void setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
         this.gappeiKyuShichosonKubun = gappeiKyuShichosonKubun;
     }
 
     /**
-     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのgetメソッドです。
-     *
-     * @return 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+１：表示する ０：表示しないのgetメソッドです。
+     * 
+     * @return 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+１：表示する ０：表示しない
      */
     @CheckForNull
     public RString getGappeiKyuShichosonHyojiUmu() {
@@ -573,9 +573,11 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのsetメソッドです。
-     *
-     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+１：表示する ０：表示しないのsetメソッドです。
+     * 
+     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+１：表示する ０：表示しない
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
         this.gappeiKyuShichosonHyojiUmu = gappeiKyuShichosonHyojiUmu;
@@ -583,7 +585,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 合併情報地域番号のgetメソッドです。
-     *
+     * 
      * @return 合併情報地域番号
      */
     @CheckForNull
@@ -593,7 +595,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 合併情報地域番号のsetメソッドです。
-     *
+     * 
      * @param gappeiChiikiNo 合併情報地域番号
      */
     public void setGappeiChiikiNo(RString gappeiChiikiNo) {
@@ -602,25 +604,25 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 運用保険者番号のgetメソッドです。
-     *
+     * 
      * @return 運用保険者番号
      */
-    public ShoKisaiHokenshaNo getUnyoHokenshaNo() {
+    public DbUDD015ShoKisaiHokenshaNo getUnyoHokenshaNo() {
         return unyoHokenshaNo;
     }
 
     /**
      * 運用保険者番号のsetメソッドです。
-     *
+     * 
      * @param unyoHokenshaNo 運用保険者番号
      */
-    public void setUnyoHokenshaNo(@Nonnull ShoKisaiHokenshaNo unyoHokenshaNo) {
+    public void setUnyoHokenshaNo(@Nonnull DbUDD015ShoKisaiHokenshaNo unyoHokenshaNo) {
         this.unyoHokenshaNo = unyoHokenshaNo;
     }
 
     /**
      * 運用開始日のgetメソッドです。
-     *
+     * 
      * @return 運用開始日
      */
     public FlexibleDate getUnyoKaishiYMD() {
@@ -629,7 +631,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 運用開始日のsetメソッドです。
-     *
+     * 
      * @param unyoKaishiYMD 運用開始日
      */
     public void setUnyoKaishiYMD(@Nonnull FlexibleDate unyoKaishiYMD) {
@@ -638,7 +640,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 運用終了日のgetメソッドです。
-     *
+     * 
      * @return 運用終了日
      */
     public FlexibleDate getUnyoShuryoYMD() {
@@ -647,7 +649,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * 運用終了日のsetメソッドです。
-     *
+     * 
      * @param unyoShuryoYMD 運用終了日
      */
     public void setUnyoShuryoYMD(@Nonnull FlexibleDate unyoShuryoYMD) {
@@ -660,7 +662,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * <br/>単独
      * <br/>広域連合
      * <br/>一部事務組合
-     *
+     * 
      * @return 運用形態区分
      */
     public RString getUnyoKeitaiKubun() {
@@ -673,7 +675,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * <br/>単独
      * <br/>広域連合
      * <br/>一部事務組合
-     *
+     * 
      * @param unyoKeitaiKubun 運用形態区分
      */
     public void setUnyoKeitaiKubun(@Nonnull RString unyoKeitaiKubun) {
@@ -682,9 +684,9 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -737,7 +739,6 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

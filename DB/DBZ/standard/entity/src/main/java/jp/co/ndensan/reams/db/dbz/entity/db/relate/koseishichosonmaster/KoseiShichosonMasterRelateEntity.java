@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.db.relate;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMas
  */
 @lombok.Getter
 @lombok.Setter
-public class KoseiShichosonMasterEntity implements Cloneable, Serializable {
+public class KoseiShichosonMasterRelateEntity implements Cloneable, Serializable {
+
+    private static final long serialVersionUID = -7293038234715949928L;
 
     /**
      * -- GETTER -- 構成市町村マスタEntityを返します。
@@ -26,7 +28,7 @@ public class KoseiShichosonMasterEntity implements Cloneable, Serializable {
      * @param 構成市町村マスタEntity 構成市町村マスタEntity
      */
     private DbT7051KoseiShichosonMasterEntity 構成市町村マスタEntity;
-    //TODO List型が適切かどうか見直してください
+
     /**
      * -- GETTER -- 構成市町村支所マスタEntityListを返します。
      *
@@ -39,7 +41,7 @@ public class KoseiShichosonMasterEntity implements Cloneable, Serializable {
     /**
      * コンストラクタです。
      */
-    public KoseiShichosonMasterEntity() {
+    public KoseiShichosonMasterRelateEntity() {
         構成市町村マスタEntity = new DbT7051KoseiShichosonMasterEntity();
         構成市町村支所マスタEntity = new ArrayList<>();
     }
@@ -47,8 +49,7 @@ public class KoseiShichosonMasterEntity implements Cloneable, Serializable {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * KoseiShichosonMasterEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/>
-     * {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * KoseiShichosonMasterEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.構成市町村マスタEntity.initializeMd5();

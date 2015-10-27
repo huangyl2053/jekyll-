@@ -4,13 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7056GappeiShichosonDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,9 +32,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final FlexibleDate キー_01 = new FlexibleDate("20150101");
+    private static final FlexibleDate キー_02 = new FlexibleDate("20150202");
+    private static final FlexibleDate キー_03 = new FlexibleDate("20150303");
     private static DbT7056GappeiShichosonDac sut;
 
     @BeforeClass
@@ -48,11 +47,11 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_02,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
         }
@@ -60,7 +59,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 合併年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    null,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
         }
@@ -69,7 +68,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         public void 地域番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_合併年月日,
-                    DEFAULT_地域番号,
+                    null,
                     DEFAULT_旧市町村コード);
         }
 
@@ -78,7 +77,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
-                    DEFAULT_旧市町村コード);
+                    null);
         }
 
         @Test
@@ -93,7 +92,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(insertedRecord, is(nullValue()));
@@ -105,11 +104,11 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Test
         public void 合併市町村が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_02,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_03,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(sut.selectAll().size(), is(2));
@@ -153,8 +152,8 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
-            // TODO  主キー以外の項目を変更してください
-            // updateRecord.set変更したい項目(75);
+
+            updateRecord.setHyojiUmu(new RString("0001"));
 
             sut.save(updateRecord);
 
@@ -163,8 +162,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
 
-            // TODO  主キー以外の項目を変更してください
-            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getHyojiUmu(), is(updatedRecord.getHyojiUmu()));
         }
     }
 

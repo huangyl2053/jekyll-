@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -17,18 +17,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7056GappeiShichosonEntityGenerator {
 
-    public static final FlexibleDate DEFAULT_合併年月日 = new FlexibleDate("20140101");
+    public static final FlexibleDate DEFAULT_合併年月日 = new FlexibleDate("20141216");
     public static final RString DEFAULT_地域番号 = new RString("01");
-    public static final LasdecCode DEFAULT_旧市町村コード = new LasdecCode("000001");
-    public static final FlexibleDate DEFAULT_運用開始年月日 = new FlexibleDate("20140101");
-    public static final FlexibleDate DEFAULT_運用終了年月日 = new FlexibleDate("20140101");
-    public static final HokenshaNo DEFAULT_旧保険者番号 = new HokenshaNo("123456");
-    public static final RString DEFAULT_旧市町村名称 = new RString("旧市町村名称");
-    public static final RString DEFAULT_都道府県名称 = new RString("都道府県");
-    public static final RString DEFAULT_郡名称 = new RString("郡名称");
-    public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
-    public static final TelNo DEFAULT_電話番号 = new TelNo("12345678900");
-    public static final RString DEFAULT_老人保健市町村番号 = new RString("02");
+    public static final LasdecCode DEFAULT_旧市町村コード = new LasdecCode("123456");
+    public static final FlexibleDate DEFAULT_運用開始年月日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_運用終了年月日 = new FlexibleDate("20141216");
+    public static final HokenshaNo DEFAULT_旧保険者番号 = new HokenshaNo("209007");
+    public static final RString DEFAULT_旧市町村名称 = new RString("あいうえおか");
+    public static final RString DEFAULT_都道府県名称 = new RString("1234");
+    public static final RString DEFAULT_郡名称 = new RString("あいうえ");
+    public static final YubinNo DEFAULT_郵便番号 = new YubinNo("111-1111");
+    public static final TelNo DEFAULT_電話番号 = new TelNo("111-222-3344");
+    public static final RString DEFAULT_老人保健市町村番号 = new RString("あいうえ");
     public static final RString DEFAULT_老人保健受給者番号体系 = new RString("1");
     public static final RString DEFAULT_表示有無 = new RString("1");
 

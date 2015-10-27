@@ -1,17 +1,16 @@
-package jp.co.ndensan.reams.db.dbz.entity.db.basic;
+package C:.Users.kongwc.Documents.LDNS_DB.DB.DBE.standard.entity;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 構成市町村支所マスタテーブルのエンティティクラスです。
@@ -19,10 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<DbT7052KoseiShichosonShishoMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7052KoseiShichosonShishoMaster");
-    private static final long serialVersionUID = -5543964898756859270L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -35,12 +32,12 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShishoCode shishoCode;
+    private DbUDD014ShishoCode shishoCode;
     private RString shishoMei;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +46,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +55,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,16 +64,17 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,7 +83,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -94,7 +92,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
@@ -103,25 +101,25 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * 支所コードのgetメソッドです。
-     *
+     * 
      * @return 支所コード
      */
-    public ShishoCode getShishoCode() {
+    public DbUDD014ShishoCode getShishoCode() {
         return shishoCode;
     }
 
     /**
      * 支所コードのsetメソッドです。
-     *
+     * 
      * @param shishoCode 支所コード
      */
-    public void setShishoCode(@Nonnull ShishoCode shishoCode) {
+    public void setShishoCode(@Nonnull DbUDD014ShishoCode shishoCode) {
         this.shishoCode = shishoCode;
     }
 
     /**
      * 支所名のgetメソッドです。
-     *
+     * 
      * @return 支所名
      */
     @CheckForNull
@@ -131,7 +129,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * 支所名のsetメソッドです。
-     *
+     * 
      * @param shishoMei 支所名
      */
     public void setShishoMei(RString shishoMei) {
@@ -140,9 +138,9 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT7052KoseiShichosonShishoMasterEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7052KoseiShichosonShishoMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -161,8 +159,6 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT7052KoseiShichosonShishoMasterEntity entity) {
@@ -173,7 +169,6 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
