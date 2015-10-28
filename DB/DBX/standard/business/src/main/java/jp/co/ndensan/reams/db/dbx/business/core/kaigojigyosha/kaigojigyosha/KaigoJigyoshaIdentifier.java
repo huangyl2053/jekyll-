@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -11,10 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Value;
 
 /**
- * 介護事業者代表者の識別子です。
+ * 介護事業者の識別子です。
  */
 @Value
-public class KaigoJigyoshaDaihyoshaIdentifier implements Serializable {
+public class KaigoJigyoshaIdentifier implements Serializable {
+
+    private static final long serialVersionUID = -4872959460293809687L;
 
     private final KaigoJigyoshaNo 事業者番号;
     private final FlexibleDate 有効開始日;
@@ -25,7 +27,7 @@ public class KaigoJigyoshaDaihyoshaIdentifier implements Serializable {
      * @param 事業者番号 事業者番号
      * @param 有効開始日 有効開始日
      */
-    public KaigoJigyoshaDaihyoshaIdentifier(KaigoJigyoshaNo 事業者番号,
+    public KaigoJigyoshaIdentifier(KaigoJigyoshaNo 事業者番号,
             FlexibleDate 有効開始日) {
         this.事業者番号 = 事業者番号;
         this.有効開始日 = 有効開始日;

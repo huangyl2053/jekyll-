@@ -3,14 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaIdentifier;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
+import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -22,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -32,6 +40,8 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
 
     private final DbT7060KaigoJigyoshaEntity entity;
     private final KaigoJigyoshaIdentifier id;
+    private final Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha;
+    private final Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService;
 
     /**
      * コンストラクタです。<br/>
@@ -51,6 +61,8 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
                 事業者番号,
                 有効開始日
         );
+        this.kaigoJigyoshaDaihyosha = Models.create(new ArrayList<KaigoJigyoshaDaihyosha>());
+        this.kaigoJigyoshaShiteiService = Models.create(new ArrayList<KaigoJigyoshaShiteiService>());
     }
 
     /**
@@ -59,11 +71,23 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      *
      * @param entity DBより取得した{@link DbT7060KaigoJigyoshaEntity}
      */
-    public KaigoJigyosha(DbT7060KaigoJigyoshaEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者"));
+    public KaigoJigyosha(KaigoJigyoshaEntity entity) {
+        this.entity = requireNonNull(entity.get介護事業者Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者指定サービス"));
         this.id = new KaigoJigyoshaIdentifier(
-                entity.getJigyoshaNo(),
-                entity.getYukoKaishiYMD());
+                entity.get介護事業者Entity().getJigyoshaNo(),
+                entity.get介護事業者Entity().getYukoKaishiYMD());
+
+        List<KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyoshaList = new ArrayList<>();
+        for (DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity : entity.get介護事業者代表者Entity()) {
+            kaigoJigyoshaDaihyoshaList.add(new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity));
+        }
+        this.kaigoJigyoshaDaihyosha = Models.create(kaigoJigyoshaDaihyoshaList);
+
+        List<KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiServiceList = new ArrayList<>();
+        for (DbT7063KaigoJigyoshaShiteiServiceEntity KaigoJigyoshaShiteiServiceEntity : entity.get介護事業者指定サービスEntity()) {
+            kaigoJigyoshaShiteiServiceList.add(new KaigoJigyoshaShiteiService(KaigoJigyoshaShiteiServiceEntity));
+        }
+        this.kaigoJigyoshaShiteiService = Models.create(kaigoJigyoshaShiteiServiceList);
     }
 
     /**
@@ -74,10 +98,14 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      */
     KaigoJigyosha(
             DbT7060KaigoJigyoshaEntity entity,
-            KaigoJigyoshaIdentifier id
+            KaigoJigyoshaIdentifier id,
+            Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha,
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService
     ) {
         this.entity = entity;
         this.id = id;
+        this.kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyosha;
+        this.kaigoJigyoshaShiteiService = kaigoJigyoshaShiteiService;
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
@@ -293,7 +321,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      *
      * @return ベッド数
      */
-    public Decimal getベッド数() {
+    public int getベッド数() {
         return entity.getBedSu();
     }
 
@@ -302,7 +330,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      *
      * @return 所属人数
      */
-    public Decimal get所属人数() {
+    public int get所属人数() {
         return entity.getShozokuNinzu();
     }
 
@@ -311,7 +339,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      *
      * @return 利用者数
      */
-    public Decimal get利用者数() {
+    public int get利用者数() {
         return entity.getRiyoshaSu();
     }
 
@@ -345,8 +373,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
     }
 
     /**
-     * 保持する介護事業者を削除対象とします。<br/>
-     * {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護事業者を削除対象とします。<br/> {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoJigyosha}
      */
@@ -356,10 +383,9 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new KaigoJigyosha(deletedEntity, id);
+        return new KaigoJigyosha(deletedEntity, id, kaigoJigyoshaDaihyosha.deleted(), kaigoJigyoshaShiteiService.deleted());
     }
 
     /**
@@ -368,43 +394,69 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      * @return {@link KaigoJigyosha}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id);
+        return new _SerializationProxy(entity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
 
     }
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity() || kaigoJigyoshaDaihyosha.hasAnyChanged() || kaigoJigyoshaShiteiService.hasAnyChanged();
     }
 
     @Override
     public KaigoJigyosha modifiedModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DbT7060KaigoJigyoshaEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KaigoJigyosha(modifiedEntity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
+    }
+
+    public KaigoJigyoshaDaihyosha getKaigoJigyoshaDaihyoshaList(KaigoJigyoshaDaihyoshaIdentifier id) {
+        if (kaigoJigyoshaDaihyosha.contains(id)) {
+            return kaigoJigyoshaDaihyosha.clone().get(id);
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
     public List<KaigoJigyoshaDaihyosha> getKaigoJigyoshaDaihyoshaList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>(kaigoJigyoshaDaihyosha.values());
+    }
+
+    public KaigoJigyoshaShiteiService getKaigoJigyoshaShiteiServiceList(KaigoJigyoshaShiteiServiceIdentifier id) {
+        if (kaigoJigyoshaShiteiService.contains(id)) {
+            return kaigoJigyoshaShiteiService.clone().get(id);
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
     public List<KaigoJigyoshaShiteiService> getKaigoJigyoshaShiteiServiceList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>(kaigoJigyoshaShiteiService.values());
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
-
+        private static final long serialVersionUID = -7979436055984750761L;
         private final DbT7060KaigoJigyoshaEntity entity;
         private final KaigoJigyoshaIdentifier id;
+        private final Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha;
+        private final Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService;
 
-        private _SerializationProxy(DbT7060KaigoJigyoshaEntity entity, KaigoJigyoshaIdentifier id) {
+        private _SerializationProxy(
+                DbT7060KaigoJigyoshaEntity entity,
+                KaigoJigyoshaIdentifier id,
+                Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha,
+                Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService) {
             this.entity = entity;
             this.id = id;
+            this.kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyosha;
+            this.kaigoJigyoshaShiteiService = kaigoJigyoshaShiteiService;
         }
 
         private Object readResolve() {
-            return new KaigoJigyosha(this.entity, this.id);
+            return new KaigoJigyosha(this.entity, this.id, this.kaigoJigyoshaDaihyosha, this.kaigoJigyoshaShiteiService);
         }
+
     }
 
     /**
@@ -414,8 +466,29 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
      * @return Builder
      */
     public KaigoJigyoshaBuilder createBuilderForEdit() {
-        return new KaigoJigyoshaBuilder(entity, id);
+        return new KaigoJigyoshaBuilder(entity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KaigoJigyosha other = (KaigoJigyosha) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

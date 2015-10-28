@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -16,6 +16,8 @@ import lombok.Value;
  */
 @Value
 public class KaigoJigyoshaShiteiServiceIdentifier implements Serializable {
+
+    private static final long serialVersionUID = 8977963032754423415L;
 
     private final KaigoJigyoshaNo 事業者番号;
     private final KaigoServiceShuruiCode サービス種類コード;

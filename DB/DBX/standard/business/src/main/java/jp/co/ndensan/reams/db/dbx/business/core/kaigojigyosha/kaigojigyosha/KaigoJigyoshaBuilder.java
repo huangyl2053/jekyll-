@@ -3,10 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyoshaIdentifier;
+import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -17,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KaigoJigyosha}の編集を行うビルダークラスです。
@@ -26,6 +31,8 @@ public class KaigoJigyoshaBuilder {
 
     private final DbT7060KaigoJigyoshaEntity entity;
     private final KaigoJigyoshaIdentifier id;
+    private final Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha;
+    private final Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService;
 
     /**
      * {@link DbT7060KaigoJigyoshaEntity}より{@link KaigoJigyosha}の編集用Builderクラスを生成します。
@@ -36,37 +43,33 @@ public class KaigoJigyoshaBuilder {
      */
     KaigoJigyoshaBuilder(
             DbT7060KaigoJigyoshaEntity entity,
-            KaigoJigyoshaIdentifier id
+            KaigoJigyoshaIdentifier id,
+            Models<KaigoJigyoshaDaihyoshaIdentifier, KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyosha,
+            Models<KaigoJigyoshaShiteiServiceIdentifier, KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiService
     ) {
         this.entity = entity.clone();
         this.id = id;
+        this.kaigoJigyoshaDaihyosha = kaigoJigyoshaDaihyosha.clone();
+        this.kaigoJigyoshaShiteiService = kaigoJigyoshaShiteiService.clone();
 
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
-     * 事業者番号を設定します。
+     * 事業者番号を返します。
      *
-     * @param 事業者番号 事業者番号
-     * @return {@link KaigoJigyoshaBuilder}
+     * @return 事業者番号
      */
-    public KaigoJigyoshaBuilder set事業者番号(KaigoJigyoshaNo 事業者番号) {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        entity.setJigyoshaNo(事業者番号);
-        return this;
+    public KaigoJigyoshaNo get事業者番号() {
+        return entity.getJigyoshaNo();
     }
 
     /**
-     * 有効開始日を設定します。
+     * 有効開始日を返します。
      *
-     * @param 有効開始日 有効開始日
-     * @return {@link KaigoJigyoshaBuilder}
+     * @return 有効開始日
      */
-    public KaigoJigyoshaBuilder set有効開始日(FlexibleDate 有効開始日) {
-        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
-        entity.setYukoKaishiYMD(有効開始日);
-        return this;
+    public FlexibleDate get有効開始日() {
+        return entity.getYukoKaishiYMD();
     }
 
     /**
@@ -327,7 +330,7 @@ public class KaigoJigyoshaBuilder {
      * @param ベッド数 ベッド数
      * @return {@link KaigoJigyoshaBuilder}
      */
-    public KaigoJigyoshaBuilder setベッド数(Decimal ベッド数) {
+    public KaigoJigyoshaBuilder setベッド数(int ベッド数) {
         requireNonNull(ベッド数, UrSystemErrorMessages.値がnull.getReplacedMessage("ベッド数"));
         entity.setBedSu(ベッド数);
         return this;
@@ -339,7 +342,7 @@ public class KaigoJigyoshaBuilder {
      * @param 所属人数 所属人数
      * @return {@link KaigoJigyoshaBuilder}
      */
-    public KaigoJigyoshaBuilder set所属人数(Decimal 所属人数) {
+    public KaigoJigyoshaBuilder set所属人数(int 所属人数) {
         requireNonNull(所属人数, UrSystemErrorMessages.値がnull.getReplacedMessage("所属人数"));
         entity.setShozokuNinzu(所属人数);
         return this;
@@ -351,7 +354,7 @@ public class KaigoJigyoshaBuilder {
      * @param 利用者数 利用者数
      * @return {@link KaigoJigyoshaBuilder}
      */
-    public KaigoJigyoshaBuilder set利用者数(Decimal 利用者数) {
+    public KaigoJigyoshaBuilder set利用者数(int 利用者数) {
         requireNonNull(利用者数, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者数"));
         entity.setRiyoshaSu(利用者数);
         return this;
@@ -369,20 +372,39 @@ public class KaigoJigyoshaBuilder {
         return this;
     }
 
+    public KaigoJigyoshaBuilder setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha 介護事業者代表者) {
+        if (hasSameIdentifier(介護事業者代表者.identifier())) {
+            kaigoJigyoshaDaihyosha.add(介護事業者代表者);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(KaigoJigyoshaDaihyoshaIdentifier 介護事業者代表者の識別子) {
+        return (id.get事業者番号().equals(介護事業者代表者の識別子.get事業者番号())
+                && id.get有効開始日() == 介護事業者代表者の識別子.get有効開始日());
+    }
+
+    public KaigoJigyoshaBuilder setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService 介護事業者指定サービス) {
+        if (hasSameIdentifier(介護事業者指定サービス.identifier())) {
+            kaigoJigyoshaShiteiService.add(介護事業者指定サービス);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(KaigoJigyoshaShiteiServiceIdentifier 介護事業者指定サービスの識別子) {
+        return (id.get事業者番号().equals(介護事業者指定サービスの識別子.get事業者番号())
+                && id.get有効開始日() == 介護事業者指定サービスの識別子.get有効開始日());
+    }
+
     /**
      * {@link KaigoJigyosha}のインスタンスを生成します。
      *
      * @return {@link KaigoJigyosha}のインスタンス
      */
     public KaigoJigyosha build() {
-        return new KaigoJigyosha(entity, id);
+        return new KaigoJigyosha(entity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
     }
 
-    public KaigoJigyoshaBuilder setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha createKaigoJigyoshaDaihyosha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public KaigoJigyoshaBuilder setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService createKaigoJigyoshaShiteiService) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

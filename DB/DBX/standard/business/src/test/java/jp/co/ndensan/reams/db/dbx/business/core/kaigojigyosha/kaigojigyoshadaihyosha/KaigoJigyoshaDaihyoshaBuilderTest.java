@@ -2,15 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +23,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaDaihyoshaBuilderTest extends DbxTestBase {
 
-    private static DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static KaigoJigyoshaNo 主キー名1;
-    private static FlexibleDate 主キー名2;
+    private static DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity;
+    private static KaigoJigyoshaNo 事業者番号;
+    private static FlexibleDate 有効開始日;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号;
-        主キー名2 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
+
+        事業者番号 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号;
+        有効開始日 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
     }
 
     public static class getterSetterTest extends DbxTestBase {
@@ -46,25 +42,12 @@ public class KaigoJigyoshaDaihyoshaBuilderTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = new DbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
 
             business = new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の事業者番号は_設定した値と同じ事業者番号を返す() {
-            business = sut.set事業者番号(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号).build();
-            assertThat(business.get事業者番号(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号));
-        }
-
-        @Test
-        public void 戻り値の有効開始日は_設定した値と同じ有効開始日を返す() {
-            business = sut.set有効開始日(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日).build();
-            assertThat(business.get有効開始日(), is(DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日));
         }
 
         @Test

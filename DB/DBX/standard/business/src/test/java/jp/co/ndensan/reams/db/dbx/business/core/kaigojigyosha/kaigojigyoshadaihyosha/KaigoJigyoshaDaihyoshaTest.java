@@ -2,13 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
@@ -29,17 +26,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
 
-    private static DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static KaigoJigyoshaNo 主キー名1;
-    private static FlexibleDate 主キー名2;
+    private static DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity;
+    private static KaigoJigyoshaNo 事業者番号;
+    private static FlexibleDate 有効開始日;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号;
-        主キー名2 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
+
+        事業者番号 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号;
+        有効開始日 = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
     }
 
     public static class 主キーコンストラクタテスト extends DbxTestBase {
@@ -49,33 +44,32 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
         }
 
-//TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoJigyoshaDaihyosha(null, 主キー名2);
+            sut = new KaigoJigyoshaDaihyosha(null, 有効開始日);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoJigyoshaDaihyosha(主キー名1, null);
+            sut = new KaigoJigyoshaDaihyosha(事業者番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT7062KaigoJigyoshaDaihyoshaEntityにセットされている() {
-            sut = new KaigoJigyoshaDaihyosha(主キー名1, 主キー名2);
-            assertThat(sut.get事業者番号(), is(主キー名1));
-            assertThat(sut.get有効開始日(), is(主キー名2));
+            sut = new KaigoJigyoshaDaihyosha(事業者番号, 有効開始日);
+            assertThat(sut.get事業者番号(), is(事業者番号));
+            assertThat(sut.get有効開始日(), is(有効開始日));
         }
 
         @Test
         public void 指定したキーが保持するKaigoJigyoshaDaihyoshaIdentifierにセットされている() {
-            sut = new KaigoJigyoshaDaihyosha(主キー名1, 主キー名2);
-            assertThat(sut.identifier().get事業者番号(), is(主キー名1));
-            assertThat(sut.identifier().get有効開始日(), is(主キー名2));
+            sut = new KaigoJigyoshaDaihyosha(事業者番号, 有効開始日);
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始日(), is(有効開始日));
         }
     }
 
@@ -86,8 +80,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
         }
 
         @Test(expected = NullPointerException.class)
@@ -100,8 +94,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
 
             sut = new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity);
 
-            assertThat(sut.identifier().get事業者番号(), is(主キー名1));
-            assertThat(sut.identifier().get有効開始日(), is(主キー名2));
+            assertThat(sut.identifier().get事業者番号(), is(事業者番号));
+            assertThat(sut.identifier().get有効開始日(), is(有効開始日));
         }
     }
 
@@ -112,8 +106,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
 
             sut = new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity);
         }
@@ -201,8 +195,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
 
             sut = new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity);
         }
@@ -220,8 +214,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
 
             sut = new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity);
         }
@@ -240,8 +234,8 @@ public class KaigoJigyoshaDaihyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             KaigoJigyoshaDaihyoshaEntity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
-            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(主キー名2);
+            KaigoJigyoshaDaihyoshaEntity.setJigyoshaNo(事業者番号);
+            KaigoJigyoshaDaihyoshaEntity.setYukoKaishiYMD(有効開始日);
         }
 
         @Test

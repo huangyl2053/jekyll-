@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.entity.db.basic;
+package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -10,51 +10,43 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護事業者エンティティのテスト用インスタンスを作成する補助クラスです。
  */
 public final class DbT7060KaigoJigyoshaEntityGenerator {
 
-    public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0001");
-    public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("19900101");
-    public static final FlexibleDate DEFAULT_有効終了日 = new FlexibleDate("19900101");
-    public static final FlexibleDate DEFAULT_異動日 = new FlexibleDate("19900101");
-    public static final RString DEFAULT_異動事由 = new RString("Data");
-    public static final FlexibleDate DEFAULT_事業開始日 = new FlexibleDate("19900101");
-    public static final FlexibleDate DEFAULT_事業休止日 = new FlexibleDate("19900101");
-    public static final FlexibleDate DEFAULT_事業再開日 = new FlexibleDate("19900101");
-    public static final FlexibleDate DEFAULT_事業廃止日 = new FlexibleDate("19900101");
-    public static final AtenaMeisho DEFAULT_事業者名称 = new AtenaMeisho("");
-    public static final AtenaKanaMeisho DEFAULT_事業者名称カナ = new AtenaKanaMeisho("");
-    public static final YubinNo DEFAULT_郵便番号 = new YubinNo("0010001");
-    public static final AtenaJusho DEFAULT_事業者住所 = new AtenaJusho("");
-    public static final RString DEFAULT_事業者住所カナ = new RString("Data");
-    public static final TelNo DEFAULT_電話番号 = new TelNo("08011112222");
-    public static final TelNo DEFAULT_FAX番号 = new TelNo("08011112222");
-    public static final RString DEFAULT_宛先部署 = new RString("Data");
-    public static final AtenaMeisho DEFAULT_宛先人名 = new AtenaMeisho("");
-    public static final AtenaKanaMeisho DEFAULT_宛先人名カナ = new AtenaKanaMeisho("");
-    public static final Code DEFAULT_指定_基準該当等事業所区分 = new Code();
-    public static final RString DEFAULT_所在市町村 = new RString("Data");
-    public static final RString DEFAULT_サービス実施地域 = new RString("Data");
-    public static final Code DEFAULT_法人等種別 = new Code();
-    public static final Decimal DEFAULT_ベッド数 = new Decimal(0);
-    public static final Decimal DEFAULT_所属人数 = new Decimal(1);
-    public static final Decimal DEFAULT_利用者数 = new Decimal(1);
-    public static final RString DEFAULT_備考 = new RString("Data");
+    public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("00001");
+    public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_有効終了日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_異動日 = new FlexibleDate("20141216");
+    public static final RString DEFAULT_異動事由 = new RString("01");
+    public static final FlexibleDate DEFAULT_事業開始日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_事業休止日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_事業再開日 = new FlexibleDate("20141216");
+    public static final FlexibleDate DEFAULT_事業廃止日 = new FlexibleDate("20141216");
+    public static final AtenaMeisho DEFAULT_事業者名称 = new AtenaMeisho("テスト 太郎");
+    public static final AtenaKanaMeisho DEFAULT_事業者名称カナ = new AtenaKanaMeisho("テスト　タロウ");
+    public static final YubinNo DEFAULT_郵便番号 = new YubinNo("111-1111");
+    public static final AtenaJusho DEFAULT_事業者住所 = new AtenaJusho("テスト住所");
+    public static final RString DEFAULT_事業者住所カナ = new RString("あいうえおかきくけこ");
+    public static final TelNo DEFAULT_電話番号 = new TelNo("111-222-3344");
+    public static final TelNo DEFAULT_FAX番号 = new TelNo("111-222-3344");
+    public static final RString DEFAULT_宛先部署 = new RString("あいうえおかき");
+    public static final AtenaMeisho DEFAULT_宛先人名 = new AtenaMeisho("テスト 太郎");
+    public static final AtenaKanaMeisho DEFAULT_宛先人名カナ = new AtenaKanaMeisho("テスト　タロウ");
+    public static final Code DEFAULT_指定_基準該当等事業所区分 = new Code("001");
+    public static final RString DEFAULT_所在市町村 = new RString("010");
+    public static final RString DEFAULT_サービス実施地域 = new RString("あうお");
+    public static final Code DEFAULT_法人等種別 = new Code("001");
+    public static final int DEFAULT_ベッド数 = 1;
+    public static final int DEFAULT_所属人数 = 1;
+    public static final int DEFAULT_利用者数 = 1;
+    public static final RString DEFAULT_備考 = new RString("あうお");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

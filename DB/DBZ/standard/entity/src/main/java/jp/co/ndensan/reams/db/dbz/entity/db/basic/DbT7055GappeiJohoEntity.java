@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

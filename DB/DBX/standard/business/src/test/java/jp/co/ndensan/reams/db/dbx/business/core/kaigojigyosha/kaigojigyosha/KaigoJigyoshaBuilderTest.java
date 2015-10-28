@@ -2,15 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha;
 
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha.KaigoJigyoshaDaihyosha;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -25,17 +27,68 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaBuilderTest extends DbxTestBase {
 
-    private static DbT7060KaigoJigyoshaEntity KaigoJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
-    private static KaigoJigyoshaNo 主キー名1;
-    private static FlexibleDate 主キー名2;
+    private static DbT7060KaigoJigyoshaEntity kaigoJigyoshaEntity;
+    private static KaigoJigyoshaNo 事業者番号;
+    private static FlexibleDate 有効開始日;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号;
-        主キー名2 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日;
+
+        事業者番号 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号;
+        有効開始日 = DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日;
+
+    }
+
+    public static class KaigoJigyoshaDaihyoshaテスト extends DbxTestBase {
+
+        private static KaigoJigyoshaBuilder sut;
+        private static KaigoJigyosha business;
+        private static KaigoJigyoshaDaihyosha kaigoJigyoshaDaihyosha;
+
+        @Before
+        public void setUp() {
+            kaigoJigyoshaEntity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
+            kaigoJigyoshaEntity.setJigyoshaNo(事業者番号);
+            kaigoJigyoshaEntity.setYukoKaishiYMD(有効開始日);
+
+            KaigoJigyoshaEntity entity = new KaigoJigyoshaEntity();
+            entity.set介護事業者Entity(kaigoJigyoshaEntity);
+            business = new KaigoJigyosha(entity);
+            kaigoJigyoshaDaihyosha = new KaigoJigyoshaDaihyosha(事業者番号, 有効開始日);
+            sut = business.createBuilderForEdit();
+        }
+
+        @Test
+        public void 介護事業者に紐づくことが可能な子テーブル情報をsetkaigoJigyoshaDaihyoshaで設定した場合_設定済みの子テーブル情報が返る() {
+            business = sut.setKaigoJigyoshaDaihyosha(kaigoJigyoshaDaihyosha).build();
+            assertThat(business.getKaigoJigyoshaDaihyoshaList().size(), is(1));
+        }
+    }
+
+    public static class KaigoJigyoshaShiteiServiceテスト extends DbxTestBase {
+
+        private static KaigoJigyoshaBuilder sut;
+        private static KaigoJigyosha business;
+        private static KaigoJigyoshaShiteiService kaigoJigyoshaShiteiService;
+
+        @Before
+        public void setUp() {
+            kaigoJigyoshaEntity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
+            kaigoJigyoshaEntity.setJigyoshaNo(事業者番号);
+            kaigoJigyoshaEntity.setYukoKaishiYMD(有効開始日);
+
+            KaigoJigyoshaEntity entity = new KaigoJigyoshaEntity();
+            entity.set介護事業者Entity(kaigoJigyoshaEntity);
+            business = new KaigoJigyosha(entity);
+            kaigoJigyoshaShiteiService = new KaigoJigyoshaShiteiService(事業者番号, DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_サービス種類コード, 有効開始日);
+            sut = business.createBuilderForEdit();
+        }
+
+        @Test
+        public void 家屋台帳に紐づくことが可能な子テーブル情報をsetkaigoJigyoshaShiteiServiceで設定した場合_設定済みの子テーブル情報が返る() {
+            business = sut.setKaigoJigyoshaShiteiService(kaigoJigyoshaShiteiService).build();
+            assertThat(business.getKaigoJigyoshaShiteiServiceList().size(), is(1));
+        }
     }
 
     public static class getterSetterTest extends DbxTestBase {
@@ -45,26 +98,15 @@ public class KaigoJigyoshaBuilderTest extends DbxTestBase {
 
         @Before
         public void setUp() {
-            KaigoJigyoshaEntity = new DbT7060KaigoJigyoshaEntity();
-            KaigoJigyoshaEntity.setJigyoshaNo(主キー名1);
-            KaigoJigyoshaEntity.setYukoKaishiYMD(主キー名2);
+            kaigoJigyoshaEntity = new DbT7060KaigoJigyoshaEntity();
+            kaigoJigyoshaEntity.setJigyoshaNo(事業者番号);
+            kaigoJigyoshaEntity.setYukoKaishiYMD(有効開始日);
 
-            business = new KaigoJigyosha(KaigoJigyoshaEntity);
+            KaigoJigyoshaEntity entity = new KaigoJigyoshaEntity();
+            entity.set介護事業者Entity(kaigoJigyoshaEntity);
+            business = new KaigoJigyosha(entity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の事業者番号は_設定した値と同じ事業者番号を返す() {
-            business = sut.set事業者番号(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号).build();
-            assertThat(business.get事業者番号(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号));
-        }
-
-        @Test
-        public void 戻り値の有効開始日は_設定した値と同じ有効開始日を返す() {
-            business = sut.set有効開始日(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日).build();
-            assertThat(business.get有効開始日(), is(DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日));
         }
 
         @Test

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 介護事業者代表者を管理するクラスです。
  */
 public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha> implements Serializable {
+
+    private static final long serialVersionUID = 3928754943480377769L;
 
     private final DbT7062KaigoJigyoshaDaihyoshaEntity entity;
     private final KaigoJigyoshaDaihyoshaIdentifier id;
@@ -76,7 +79,6 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 事業者番号を返します。
      *
@@ -267,7 +269,7 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -863592029193124204L;
 
         private final DbT7062KaigoJigyoshaDaihyoshaEntity entity;
         private final KaigoJigyoshaDaihyoshaIdentifier id;
@@ -292,5 +294,26 @@ public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIden
         return new KaigoJigyoshaDaihyoshaBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KaigoJigyoshaDaihyosha other = (KaigoJigyoshaDaihyosha) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

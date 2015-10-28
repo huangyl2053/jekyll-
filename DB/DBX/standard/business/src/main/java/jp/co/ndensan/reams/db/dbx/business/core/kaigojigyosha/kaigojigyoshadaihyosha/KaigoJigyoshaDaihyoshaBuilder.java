@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihyosha;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
@@ -11,10 +11,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,32 +37,6 @@ public class KaigoJigyoshaDaihyoshaBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 事業者番号を設定します。
-     *
-     * @param 事業者番号 事業者番号
-     * @return {@link KaigoJigyoshaDaihyoshaBuilder}
-     */
-    public KaigoJigyoshaDaihyoshaBuilder set事業者番号(KaigoJigyoshaNo 事業者番号) {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        entity.setJigyoshaNo(事業者番号);
-        return this;
-    }
-
-    /**
-     * 有効開始日を設定します。
-     *
-     * @param 有効開始日 有効開始日
-     * @return {@link KaigoJigyoshaDaihyoshaBuilder}
-     */
-    public KaigoJigyoshaDaihyoshaBuilder set有効開始日(FlexibleDate 有効開始日) {
-        requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
-        entity.setYukoKaishiYMD(有効開始日);
-        return this;
     }
 
     /**
