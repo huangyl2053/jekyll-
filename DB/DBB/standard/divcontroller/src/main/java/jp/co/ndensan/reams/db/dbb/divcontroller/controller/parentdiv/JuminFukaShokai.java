@@ -25,14 +25,14 @@ public class JuminFukaShokai {
 
 //        AtenaShokaiSimple.setData(panel.getKaigoatena().getAtenaInfo(), new ShikibetsuCode("000000000000094"));
 //
-        List<HashMap> SokujiKouseiKihonData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/SokujiKouseiKihon.yml"));
-        panel.getKaigoKihon().getTxtTsuchishoNo().setValue(new RString(SokujiKouseiKihonData.get(0).get("通知書番号").toString()));
-        panel.getKaigoKihon().getTxtHihokenshaNo().setValue(new RString(SokujiKouseiKihonData.get(0).get("被保番号").toString()));
-        panel.getKaigoKihon().getTxtHokenryoDankai().setValue(new RString(SokujiKouseiKihonData.get(0).get("保険料段階").toString()));
-        panel.getKaigoKihon().getTxtShutokuYmd().setValue(new FlexibleDate(SokujiKouseiKihonData.get(0).get("資格取得日").toString()));
-        panel.getKaigoKihon().getTxtShutokuJiyu().setValue(new RString(SokujiKouseiKihonData.get(0).get("資格取得事由").toString()));
-        panel.getKaigoKihon().getTxtSoshitsuYmd().setValue(new FlexibleDate(SokujiKouseiKihonData.get(0).get("資格喪失日").toString()));
-        panel.getKaigoKihon().getTxtSoshitsuJiyu().setValue(new RString(SokujiKouseiKihonData.get(0).get("資格喪失事由").toString()));
+        List<HashMap> sokujiKouseiKihonData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/SokujiKouseiKihon.yml"));
+        panel.getKaigoKihon().getTxtTsuchishoNo().setValue(new RString(sokujiKouseiKihonData.get(0).get("通知書番号").toString()));
+        panel.getKaigoKihon().getTxtHihokenshaNo().setValue(new RString(sokujiKouseiKihonData.get(0).get("被保番号").toString()));
+        panel.getKaigoKihon().getTxtHokenryoDankai().setValue(new RString(sokujiKouseiKihonData.get(0).get("保険料段階").toString()));
+        panel.getKaigoKihon().getTxtShutokuYmd().setValue(new FlexibleDate(sokujiKouseiKihonData.get(0).get("資格取得日").toString()));
+        panel.getKaigoKihon().getTxtShutokuJiyu().setValue(new RString(sokujiKouseiKihonData.get(0).get("資格取得事由").toString()));
+        panel.getKaigoKihon().getTxtSoshitsuYmd().setValue(new FlexibleDate(sokujiKouseiKihonData.get(0).get("資格喪失日").toString()));
+        panel.getKaigoKihon().getTxtSoshitsuJiyu().setValue(new RString(sokujiKouseiKihonData.get(0).get("資格喪失事由").toString()));
 
         response.data = panel;
         return response;

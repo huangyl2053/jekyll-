@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -355,7 +355,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 依頼情報送付済みフラグ
      */
-    public boolean get依頼情報送付済みフラグ() {
+    public boolean is依頼情報送付済みフラグ() {
         return entity.getIraiSohuzumiFlag();
     }
 
@@ -364,7 +364,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      *
      * @return 追加依頼情報送付済みフラグ
      */
-    public boolean get追加依頼情報送付済みフラグ() {
+    public boolean is追加依頼情報送付済みフラグ() {
         return entity.getTsuikaIraiSohuzumiFlag();
     }
 

@@ -28,9 +28,25 @@ public class FukaShokaiGrandsonTsuchisho {
     private static final RString KOBETSU_HAKKO_FUKAKONKYO = new RString("DBB8110001/tblKobetsuHakkoFukakonkyo.yml");
     private static final RString KOBETSU_HAKKO_KIWARIGAKU = new RString("DBB8110001/tblKobetsuHakkoKiwariGaku.yml");
     private static final RString CHOTEI_JIYU = new RString("DBB8110001/ChoteiJiyu.yml");
-    private static final List< List<RString>> konkyo = new ArrayList<>();
-    private static final List< List<RString>> kiwarigaku = new ArrayList<>();
-    private static final List< List<RString>> jiyu = new ArrayList<>();
+
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
+    private static final int INDEX_15 = 15;
+
+    private final List<List<RString>> konkyo = new ArrayList<>();
+    private final List<List<RString>> kiwarigaku = new ArrayList<>();
+    private final List<List<RString>> jiyu = new ArrayList<>();
 
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onLoad_FukaShokaiGrandsonTsuchisho(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
@@ -45,8 +61,8 @@ public class FukaShokaiGrandsonTsuchisho {
 
         panel.getTxtChoteiNendo().setValue(new RString("平26"));
         panel.getTxtFukaNendo().setValue(new RString("平26"));
-        panel.getTxtKoseiYMD().setValue(konkyo.get(0).get(11));
-        panel.getTxtKoseiM().setValue(konkyo.get(0).get(12));
+        panel.getTxtKoseiYMD().setValue(konkyo.get(0).get(INDEX_11));
+        panel.getTxtKoseiM().setValue(konkyo.get(0).get(INDEX_12));
 
         set_radKobetsuHakkoChoteiJiyu(panel.getKobetsuHakkoChoteiJiyu());
         setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
@@ -97,8 +113,8 @@ public class FukaShokaiGrandsonTsuchisho {
             setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
             setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
         } else {
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), INDEX_2);
+            setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), INDEX_2);
         }
 
         response.data = panel;
@@ -113,8 +129,8 @@ public class FukaShokaiGrandsonTsuchisho {
             setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
             setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
         } else if (key.contains("1")) {
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), INDEX_2);
+            setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), INDEX_2);
         } else {
             setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
             setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
@@ -194,27 +210,27 @@ public class FukaShokaiGrandsonTsuchisho {
     private void setAto_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl, int n) {
         tbl.getLblFukankonkyoAto1().setText(konkyo.get(n).get(0));
         tbl.getLblFukankonkyoAto2().setText(konkyo.get(n).get(1));
-        tbl.getLblFukankonkyoAto3().setText(konkyo.get(n).get(2));
-        tbl.getLblFukankonkyoAto8().setText(konkyo.get(n).get(3));
-        tbl.getLblFukankonkyoAto9().setText(konkyo.get(n).get(4));
-        tbl.getLblFukankonkyoAto10().setText(konkyo.get(n).get(5));
-        tbl.getLblFukankonkyoAto11().setText(konkyo.get(n).get(6));
-        tbl.getLblFukankonkyoAto12().setText(konkyo.get(n).get(7));
-        tbl.getLblFukankonkyoAto13().setText(konkyo.get(n).get(8));
-        tbl.getLblFukankonkyoAto14().setText(konkyo.get(n).get(9));
+        tbl.getLblFukankonkyoAto3().setText(konkyo.get(n).get(INDEX_2));
+        tbl.getLblFukankonkyoAto8().setText(konkyo.get(n).get(INDEX_3));
+        tbl.getLblFukankonkyoAto9().setText(konkyo.get(n).get(INDEX_4));
+        tbl.getLblFukankonkyoAto10().setText(konkyo.get(n).get(INDEX_5));
+        tbl.getLblFukankonkyoAto11().setText(konkyo.get(n).get(INDEX_6));
+        tbl.getLblFukankonkyoAto12().setText(konkyo.get(n).get(INDEX_7));
+        tbl.getLblFukankonkyoAto13().setText(konkyo.get(n).get(INDEX_8));
+        tbl.getLblFukankonkyoAto14().setText(konkyo.get(n).get(INDEX_9));
     }
 
     private void setMae_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl, int n) {
         tbl.getLblFukankonkyoMae1().setText(konkyo.get(n).get(0));
         tbl.getLblFukankonkyoMae2().setText(konkyo.get(n).get(1));
-        tbl.getLblFukankonkyoMae3().setText(konkyo.get(n).get(2));
-        tbl.getLblFukankonkyoMae8().setText(konkyo.get(n).get(3));
-        tbl.getLblFukankonkyoMae9().setText(konkyo.get(n).get(4));
-        tbl.getLblFukankonkyoMae10().setText(konkyo.get(n).get(5));
-        tbl.getLblFukankonkyoMae11().setText(konkyo.get(n).get(6));
-        tbl.getLblFukankonkyoMae12().setText(konkyo.get(n).get(7));
-        tbl.getLblFukankonkyoMae13().setText(konkyo.get(n).get(8));
-        tbl.getLblFukankonkyoMae14().setText(konkyo.get(n).get(9));
+        tbl.getLblFukankonkyoMae3().setText(konkyo.get(n).get(INDEX_2));
+        tbl.getLblFukankonkyoMae8().setText(konkyo.get(n).get(INDEX_3));
+        tbl.getLblFukankonkyoMae9().setText(konkyo.get(n).get(INDEX_4));
+        tbl.getLblFukankonkyoMae10().setText(konkyo.get(n).get(INDEX_5));
+        tbl.getLblFukankonkyoMae11().setText(konkyo.get(n).get(INDEX_6));
+        tbl.getLblFukankonkyoMae12().setText(konkyo.get(n).get(INDEX_7));
+        tbl.getLblFukankonkyoMae13().setText(konkyo.get(n).get(INDEX_8));
+        tbl.getLblFukankonkyoMae14().setText(konkyo.get(n).get(INDEX_9));
     }
 
     private void setMae_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl) {
@@ -233,42 +249,42 @@ public class FukaShokaiGrandsonTsuchisho {
     private void setAto_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
         tbl.getLblZengoTokuchoAto1().setText(kiwarigaku.get(n).get(0));
         tbl.getLblZengoTokuchoAto2().setText(kiwarigaku.get(n).get(1));
-        tbl.getLblZengoTokuchoAto3().setText(kiwarigaku.get(n).get(2));
-        tbl.getLblZengoTokuchoAto4().setText(kiwarigaku.get(n).get(3));
-        tbl.getLblZengoTokuchoAto5().setText(kiwarigaku.get(n).get(4));
-        tbl.getLblZengoTokuchoAto6().setText(kiwarigaku.get(n).get(5));
+        tbl.getLblZengoTokuchoAto3().setText(kiwarigaku.get(n).get(INDEX_2));
+        tbl.getLblZengoTokuchoAto4().setText(kiwarigaku.get(n).get(INDEX_3));
+        tbl.getLblZengoTokuchoAto5().setText(kiwarigaku.get(n).get(INDEX_4));
+        tbl.getLblZengoTokuchoAto6().setText(kiwarigaku.get(n).get(INDEX_5));
 
-        tbl.getLblZengoFuchoAto3().setText(kiwarigaku.get(n).get(6));
-        tbl.getLblZengoFuchoAto4().setText(kiwarigaku.get(n).get(7));
-        tbl.getLblZengoFuchoAto5().setText(kiwarigaku.get(n).get(8));
-        tbl.getLblZengoFuchoAto6().setText(kiwarigaku.get(n).get(9));
-        tbl.getLblZengoFuchoAto7().setText(kiwarigaku.get(n).get(10));
-        tbl.getLblZengoFuchoAto8().setText(kiwarigaku.get(n).get(11));
-        tbl.getLblZengoFuchoAto9().setText(kiwarigaku.get(n).get(12));
-        tbl.getLblZengoFuchoAto10().setText(kiwarigaku.get(n).get(13));
-        tbl.getLblZengoFuchoAto11().setText(kiwarigaku.get(n).get(14));
-        tbl.getLblZengoFuchoAto12().setText(kiwarigaku.get(n).get(15));
+        tbl.getLblZengoFuchoAto3().setText(kiwarigaku.get(n).get(INDEX_6));
+        tbl.getLblZengoFuchoAto4().setText(kiwarigaku.get(n).get(INDEX_7));
+        tbl.getLblZengoFuchoAto5().setText(kiwarigaku.get(n).get(INDEX_8));
+        tbl.getLblZengoFuchoAto6().setText(kiwarigaku.get(n).get(INDEX_9));
+        tbl.getLblZengoFuchoAto7().setText(kiwarigaku.get(n).get(INDEX_10));
+        tbl.getLblZengoFuchoAto8().setText(kiwarigaku.get(n).get(INDEX_11));
+        tbl.getLblZengoFuchoAto9().setText(kiwarigaku.get(n).get(INDEX_12));
+        tbl.getLblZengoFuchoAto10().setText(kiwarigaku.get(n).get(INDEX_13));
+        tbl.getLblZengoFuchoAto11().setText(kiwarigaku.get(n).get(INDEX_14));
+        tbl.getLblZengoFuchoAto12().setText(kiwarigaku.get(n).get(INDEX_15));
 
     }
 
     private void setMae_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
         tbl.getLblZengoTokuchoMae1().setText(kiwarigaku.get(n).get(0));
         tbl.getLblZengoTokuchoMae2().setText(kiwarigaku.get(n).get(1));
-        tbl.getLblZengoTokuchoMae3().setText(kiwarigaku.get(n).get(2));
-        tbl.getLblZengoTokuchoMae4().setText(kiwarigaku.get(n).get(3));
-        tbl.getLblZengoTokuchoMae5().setText(kiwarigaku.get(n).get(4));
-        tbl.getLblZengoTokuchoMae6().setText(kiwarigaku.get(n).get(5));
+        tbl.getLblZengoTokuchoMae3().setText(kiwarigaku.get(n).get(INDEX_2));
+        tbl.getLblZengoTokuchoMae4().setText(kiwarigaku.get(n).get(INDEX_3));
+        tbl.getLblZengoTokuchoMae5().setText(kiwarigaku.get(n).get(INDEX_4));
+        tbl.getLblZengoTokuchoMae6().setText(kiwarigaku.get(n).get(INDEX_5));
 
-        tbl.getLblZengoFuchoMae3().setText(kiwarigaku.get(n).get(6));
-        tbl.getLblZengoFuchoMae4().setText(kiwarigaku.get(n).get(7));
-        tbl.getLblZengoFuchoMae5().setText(kiwarigaku.get(n).get(8));
-        tbl.getLblZengoFuchoMae6().setText(kiwarigaku.get(n).get(9));
-        tbl.getLblZengoFuchoMae7().setText(kiwarigaku.get(n).get(10));
-        tbl.getLblZengoFuchoMae8().setText(kiwarigaku.get(n).get(11));
-        tbl.getLblZengoFuchoMae9().setText(kiwarigaku.get(n).get(12));
-        tbl.getLblZengoFuchoMae10().setText(kiwarigaku.get(n).get(13));
-        tbl.getLblZengoFuchoMae11().setText(kiwarigaku.get(n).get(14));
-        tbl.getLblZengoFuchoMae12().setText(kiwarigaku.get(n).get(15));
+        tbl.getLblZengoFuchoMae3().setText(kiwarigaku.get(n).get(INDEX_6));
+        tbl.getLblZengoFuchoMae4().setText(kiwarigaku.get(n).get(INDEX_7));
+        tbl.getLblZengoFuchoMae5().setText(kiwarigaku.get(n).get(INDEX_8));
+        tbl.getLblZengoFuchoMae6().setText(kiwarigaku.get(n).get(INDEX_9));
+        tbl.getLblZengoFuchoMae7().setText(kiwarigaku.get(n).get(INDEX_10));
+        tbl.getLblZengoFuchoMae8().setText(kiwarigaku.get(n).get(INDEX_11));
+        tbl.getLblZengoFuchoMae9().setText(kiwarigaku.get(n).get(INDEX_12));
+        tbl.getLblZengoFuchoMae10().setText(kiwarigaku.get(n).get(INDEX_13));
+        tbl.getLblZengoFuchoMae11().setText(kiwarigaku.get(n).get(INDEX_14));
+        tbl.getLblZengoFuchoMae12().setText(kiwarigaku.get(n).get(INDEX_15));
     }
 
     private void setMae_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl) {

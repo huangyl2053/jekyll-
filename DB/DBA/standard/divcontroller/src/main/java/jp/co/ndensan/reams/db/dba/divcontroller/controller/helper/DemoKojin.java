@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DemoKojin {
 
-    private static final RString demoKojin = new RString("demoKojin.yml");
+    private static final RString DEMO_KOJIN = new RString("demoKojin.yml");
     private ControlGenerator generator;
 
     public DemoKojin(String hihokenshaKubun) {
-        List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(demoKojin);
+        List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(DEMO_KOJIN);
         generator = null;
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator nestGenerator = new ControlGenerator(yamlData);
@@ -31,7 +31,7 @@ public class DemoKojin {
         }
 
         if (generator == null) {
-            generator = new ControlGenerator(YamlLoader.DBA.loadAsList(demoKojin).get(0));
+            generator = new ControlGenerator(YamlLoader.DBA.loadAsList(DEMO_KOJIN).get(0));
         }
     }
 

@@ -28,14 +28,13 @@ public class TaskTajutokuTaishosaJoho {
      * 対象者検索で選択された個人の情報を元に、被保険者の基本情報を表示します。
      *
      * @param taishoshaJohoDiv 資格関連処理対象者情報
-     * @param searchDiv
      * @return レスポンス
      */
     public ResponseData onLoad(TaskTajutokuTaishosaJohoDiv taishoshaJohoDiv) {
         ResponseData<TaskTajutokuTaishosaJohoDiv> response = new ResponseData<>();
 
         DemoKojin demoKojin = new DemoKojin("第1号");
-        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+//        RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
 //        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
@@ -45,7 +44,7 @@ public class TaskTajutokuTaishosaJoho {
     }
 
     private void setTaishoshaData(TaskTajutokuTaishosaJohoDiv taishoshaJohoDiv, RString hihokenshaNo) {
-        List< HashMap> taishoshaDataList = YamlLoader.DBA.loadAsList(SHIKAKU_KANRI_TAISHOSHA);
+        List<HashMap> taishoshaDataList = YamlLoader.DBA.loadAsList(SHIKAKU_KANRI_TAISHOSHA);
         for (HashMap taishoshaData : taishoshaDataList) {
             if (taishoshaData.get("被保番号").equals(hihokenshaNo.toString())) {
                 setDbJoho(taishoshaJohoDiv.getKaigoShikakuJoho(), new ControlGenerator(taishoshaData));

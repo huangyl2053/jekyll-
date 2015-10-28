@@ -18,7 +18,7 @@ public class InputShikibetsuNoCodeValidator {
     private final InputShikibetsuNoCode inputShikibetsuNoCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param inputShikibetsuNoCode 入力識別番号コード
      */

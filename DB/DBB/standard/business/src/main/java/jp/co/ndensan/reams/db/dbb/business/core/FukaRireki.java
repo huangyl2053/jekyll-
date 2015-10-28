@@ -9,22 +9,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaModel;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaComparators;
-
-//import jp.co.ndensan.reams.db.dbb.model.fuka.Fuka;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.FukaComparators;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 賦課履歴を扱うクラスです。
@@ -53,21 +47,21 @@ public class FukaRireki {
      */
     public IItemList<Fuka> getグループ化賦課履歴() {
         Map<RString, Fuka> map = new HashMap<>();
-        for (Fuka model : 賦課履歴明細) {
-            RString key = createKey(model);
-            Fuka value = map.get(key);
+//        for (Fuka model : 賦課履歴明細) {
+//            RString key = createKey(model);
+//            Fuka value = map.get(key);
 //            if (value == null || value.get処理日時().isBefore(model.get処理日時())) {
 //                map.put(key, model);
 //            }
-        }
+//        }
         return sort(new ArrayList<>(map.values()));
     }
 
-    private RString createKey(Fuka model) {
-        return new RStringBuilder(model.get賦課年度().toDateString())
-                .append(model.get調定年度().toDateString())
-                .append(model.get通知書番号()).toRString();
-    }
+//    private RString createKey(Fuka model) {
+//        return new RStringBuilder(model.get賦課年度().toDateString())
+//                .append(model.get調定年度().toDateString())
+//                .append(model.get通知書番号()).toRString();
+//    }
 
     private IItemList<Fuka> sort(List<Fuka> list) {
         return ItemList.of(list)

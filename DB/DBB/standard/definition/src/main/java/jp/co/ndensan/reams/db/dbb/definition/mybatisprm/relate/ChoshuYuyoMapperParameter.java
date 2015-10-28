@@ -5,17 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護賦課徴収猶予を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class ChoshuYuyoMapperParameter {
+public final class ChoshuYuyoMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -75,5 +70,21 @@ public class ChoshuYuyoMapperParameter {
     public static ChoshuYuyoMapperParameter createSelectListParam(
             FlexibleYear 主キー1) {
         return new ChoshuYuyoMapperParameter(主キー1, FlexibleYear.EMPTY, true, false);
+    }
+
+    public FlexibleYear get主キー1() {
+        return 主キー1;
+    }
+
+    public FlexibleYear get主キー2() {
+        return 主キー2;
+    }
+
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    public boolean isUses主キー2() {
+        return uses主キー2;
     }
 }

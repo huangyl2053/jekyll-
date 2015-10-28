@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者証再交付の有無についての列挙型です。
+ * 被保険者証再交付の有無についての列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -46,7 +46,7 @@ public enum HihokenshashoSaikofuKubun {
 
     /**
      * 指定のコードに対応するHihokenshashoSaikofuKubunを返します。
-     * 空文字列、もしくはnullを受け取った場合は<@code>HihokenshashoSaikofuKubun.EMPTY</code>を返します。
+     * 空文字列、もしくはnullを受け取った場合はHihokenshashoSaikofuKubun.EMPTY返します。
      *
      * @param code コード
      * @return 指定のコードに対応するHihokenshashoSaikofuKubun

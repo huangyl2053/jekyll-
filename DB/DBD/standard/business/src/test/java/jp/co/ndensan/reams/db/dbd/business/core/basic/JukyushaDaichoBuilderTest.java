@@ -98,7 +98,7 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
         @Test
         public void 戻り値の直近フラグは_設定した値と同じ直近フラグを返す() {
             business = sut.set直近フラグ(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_直近フラグ).build();
-            assertThat(business.get直近フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_直近フラグ));
+            assertThat(business.is直近フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_直近フラグ));
         }
 
         @Test
@@ -417,7 +417,7 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
         @Test
         public void 戻り値の要支援者認定申請区分は_設定した値と同じ要支援者認定申請区分を返す() {
             business = sut.set要支援者認定申請区分(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_要支援者認定申請区分).build();
-            assertThat(business.get要支援者認定申請区分(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_要支援者認定申請区分));
+            assertThat(business.is要支援者認定申請区分(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_要支援者認定申請区分));
         }
 
         @Test
@@ -525,19 +525,19 @@ public class JukyushaDaichoBuilderTest extends DbdTestBase {
         @Test
         public void 戻り値の資格取得前申請フラグは_設定した値と同じ資格取得前申請フラグを返す() {
             business = sut.set資格取得前申請フラグ(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_資格取得前申請フラグ).build();
-            assertThat(business.get資格取得前申請フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_資格取得前申請フラグ));
+            assertThat(business.is資格取得前申請フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_資格取得前申請フラグ));
         }
 
         @Test
         public void 戻り値の旧措置者フラグは_設定した値と同じ旧措置者フラグを返す() {
             business = sut.set旧措置者フラグ(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_旧措置者フラグ).build();
-            assertThat(business.get旧措置者フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_旧措置者フラグ));
+            assertThat(business.is旧措置者フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_旧措置者フラグ));
         }
 
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

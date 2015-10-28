@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum GogitaichoKubunCodeSpec implements IPredicate<GogitaichoKubunCode> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
 

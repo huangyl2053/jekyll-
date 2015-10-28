@@ -5,12 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0320002;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

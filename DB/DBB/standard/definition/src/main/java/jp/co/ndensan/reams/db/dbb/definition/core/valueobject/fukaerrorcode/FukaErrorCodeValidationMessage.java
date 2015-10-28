@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.fukaerrorcode;
+package jp.co.ndensan.reams.db.dbb.definition.core.valueobject.fukaerrorcode;
 
 import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum FukaErrorCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(FukaErrorCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum FukaErrorCodeValidationMessage implements IValidationMessage {
     public enum FukaErrorCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "エラーコードを指定してください。");
         private final int no;

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum FukaErrorCodeSpec implements IPredicate<FukaErrorCode> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
                 /**

@@ -13,5 +13,5 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author n3336
  */
 public interface I端数調整 {
-    public Decimal Calc端数(Decimal 年額保険料);
+     Decimal calc端数(Decimal 年額保険料);
 }

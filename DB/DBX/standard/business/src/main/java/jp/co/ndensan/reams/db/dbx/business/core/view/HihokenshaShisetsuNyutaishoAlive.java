@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyuta
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -23,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 被保険者施設入退所Aliveを管理するクラスです。
  */
-public class HihokenshaShisetsuNyutaishoAlive extends ModelBase<HihokenshaShisetsuNyutaishoAliveIdentifier, DbV1004HihokenshaShisetsuNyutaishoEntity, HihokenshaShisetsuNyutaishoAlive> implements Serializable {
+public class HihokenshaShisetsuNyutaishoAlive
+        extends ModelBase<HihokenshaShisetsuNyutaishoAliveIdentifier, DbV1004HihokenshaShisetsuNyutaishoEntity, HihokenshaShisetsuNyutaishoAlive>
+        implements Serializable {
 
     private final DbV1004HihokenshaShisetsuNyutaishoEntity entity;
     private final HihokenshaShisetsuNyutaishoAliveIdentifier id;

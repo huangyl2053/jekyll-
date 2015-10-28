@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 他市町村住所地特例者台帳管理Aliveを管理するクラスです。
  */
-public class TashichosonJushochiTokureiAlive extends ModelBase<TashichosonJushochiTokureiAliveIdentifier, DbV1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokureiAlive> implements Serializable {
+public class TashichosonJushochiTokureiAlive
+        extends ModelBase<TashichosonJushochiTokureiAliveIdentifier, DbV1003TashichosonJushochiTokureiEntity, TashichosonJushochiTokureiAlive>
+        implements Serializable {
 
     private final DbV1003TashichosonJushochiTokureiEntity entity;
     private final TashichosonJushochiTokureiAliveIdentifier id;
@@ -248,7 +250,7 @@ public class TashichosonJushochiTokureiAlive extends ModelBase<TashichosonJushoc
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

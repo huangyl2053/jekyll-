@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core;
 
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
@@ -68,31 +69,31 @@ public class 端数調整Factorytest {
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格取得日(new RDate("20140401"));
         fukakonkyo.set資格喪失日(new RDate("20150401"));
-        fukakonkyo.setランク_4月("4");
-        fukakonkyo.setランク_5月("4");
-        fukakonkyo.setランク_6月("4");
-        fukakonkyo.setランク_7月("4");
-        fukakonkyo.setランク_8月("4");
-        fukakonkyo.setランク_9月("4");
-        fukakonkyo.setランク_10月("4");
-        fukakonkyo.setランク_11月("4");
-        fukakonkyo.setランク_12月("4");
-        fukakonkyo.setランク_1月("4");
-        fukakonkyo.setランク_2月("4");
-        fukakonkyo.setランク_3月("4");
+        fukakonkyo.setランク_4月(new RString("4"));
+        fukakonkyo.setランク_5月(new RString("4"));
+        fukakonkyo.setランク_6月(new RString("4"));
+        fukakonkyo.setランク_7月(new RString("4"));
+        fukakonkyo.setランク_8月(new RString("4"));
+        fukakonkyo.setランク_9月(new RString("4"));
+        fukakonkyo.setランク_10月(new RString("4"));
+        fukakonkyo.setランク_11月(new RString("4"));
+        fukakonkyo.setランク_12月(new RString("4"));
+        fukakonkyo.setランク_1月(new RString("4"));
+        fukakonkyo.setランク_2月(new RString("4"));
+        fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai("4");
-        dankai5.setSystemDankai("4");
-        dankai6.setSystemDankai("4");
-        dankai7.setSystemDankai("4");
-        dankai8.setSystemDankai("4");
-        dankai9.setSystemDankai("4");
-        dankai10.setSystemDankai("4");
-        dankai11.setSystemDankai("4");
-        dankai12.setSystemDankai("4");
-        dankai1.setSystemDankai("4");
-        dankai2.setSystemDankai("4");
-        dankai3.setSystemDankai("4");
+        dankai4.setSystemDankai(new RString("4"));
+        dankai5.setSystemDankai(new RString("4"));
+        dankai6.setSystemDankai(new RString("4"));
+        dankai7.setSystemDankai(new RString("4"));
+        dankai8.setSystemDankai(new RString("4"));
+        dankai9.setSystemDankai(new RString("4"));
+        dankai10.setSystemDankai(new RString("4"));
+        dankai11.setSystemDankai(new RString("4"));
+        dankai12.setSystemDankai(new RString("4"));
+        dankai1.setSystemDankai(new RString("4"));
+        dankai2.setSystemDankai(new RString("4"));
+        dankai3.setSystemDankai(new RString("4"));
 
         fukakonkyo.set保険料段階_4月(dankai4);
         fukakonkyo.set保険料段階_5月(dankai5);
@@ -109,15 +110,15 @@ public class 端数調整Factorytest {
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
-        seigyo.set端数調整方法("切り上げ");
+        seigyo.set端数調整方法(new RString("切り上げ"));
         seigyo.set端数単位_ランク用(new Decimal("100"));
-        seigyo.set端数調整方法_ランク用("切捨て");
+        seigyo.set端数調整方法_ランク用(new RString("切捨て"));
 
         input.set年額賦課根拠(fukakonkyo);
         input.set年額制御情報(seigyo);
-        input.set賦課年度("2014");
+        input.set賦課年度(new RString("2014"));
 
-        assertThat(factory.getIncetance(input).Calc端数(new Decimal("9999")), is(new Decimal("9999")));
+        assertThat(factory.getIncetance(input).calc端数(new Decimal("9999")), is(new Decimal("9999")));
 
     }
 
@@ -131,31 +132,31 @@ public class 端数調整Factorytest {
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格取得日(new RDate("20140401"));
         fukakonkyo.set資格喪失日(new RDate("20150401"));
-        fukakonkyo.setランク_4月("4");
-        fukakonkyo.setランク_5月("4");
-        fukakonkyo.setランク_6月("4");
-        fukakonkyo.setランク_7月("4");
-        fukakonkyo.setランク_8月("4");
-        fukakonkyo.setランク_9月("4");
-        fukakonkyo.setランク_10月("4");
-        fukakonkyo.setランク_11月("4");
-        fukakonkyo.setランク_12月("4");
-        fukakonkyo.setランク_1月("4");
-        fukakonkyo.setランク_2月("4");
-        fukakonkyo.setランク_3月("4");
+        fukakonkyo.setランク_4月(new RString("4"));
+        fukakonkyo.setランク_5月(new RString("4"));
+        fukakonkyo.setランク_6月(new RString("4"));
+        fukakonkyo.setランク_7月(new RString("4"));
+        fukakonkyo.setランク_8月(new RString("4"));
+        fukakonkyo.setランク_9月(new RString("4"));
+        fukakonkyo.setランク_10月(new RString("4"));
+        fukakonkyo.setランク_11月(new RString("4"));
+        fukakonkyo.setランク_12月(new RString("4"));
+        fukakonkyo.setランク_1月(new RString("4"));
+        fukakonkyo.setランク_2月(new RString("4"));
+        fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai("5");
-        dankai5.setSystemDankai("4");
-        dankai6.setSystemDankai("4");
-        dankai7.setSystemDankai("4");
-        dankai8.setSystemDankai("4");
-        dankai9.setSystemDankai("4");
-        dankai10.setSystemDankai("4");
-        dankai11.setSystemDankai("4");
-        dankai12.setSystemDankai("4");
-        dankai1.setSystemDankai("4");
-        dankai2.setSystemDankai("4");
-        dankai3.setSystemDankai("4");
+        dankai4.setSystemDankai(new RString("5"));
+        dankai5.setSystemDankai(new RString("4"));
+        dankai6.setSystemDankai(new RString("4"));
+        dankai7.setSystemDankai(new RString("4"));
+        dankai8.setSystemDankai(new RString("4"));
+        dankai9.setSystemDankai(new RString("4"));
+        dankai10.setSystemDankai(new RString("4"));
+        dankai11.setSystemDankai(new RString("4"));
+        dankai12.setSystemDankai(new RString("4"));
+        dankai1.setSystemDankai(new RString("4"));
+        dankai2.setSystemDankai(new RString("4"));
+        dankai3.setSystemDankai(new RString("4"));
 
         fukakonkyo.set保険料段階_4月(dankai4);
         fukakonkyo.set保険料段階_5月(dankai5);
@@ -172,15 +173,15 @@ public class 端数調整Factorytest {
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
-        seigyo.set端数調整方法("切り上げ");
+        seigyo.set端数調整方法(new RString("切り上げ"));
         seigyo.set端数単位_ランク用(new Decimal("100"));
-        seigyo.set端数調整方法_ランク用("切捨て");
+        seigyo.set端数調整方法_ランク用(new RString("切捨て"));
 
         input.set年額賦課根拠(fukakonkyo);
         input.set年額制御情報(seigyo);
-        input.set賦課年度("2014");
+        input.set賦課年度(new RString("2014"));
 
-        assertThat(factory.getIncetance(input).Calc端数(new Decimal("9999")), is(new Decimal("10000")));
+        assertThat(factory.getIncetance(input).calc端数(new Decimal("9999")), is(new Decimal("10000")));
 
     }
 
@@ -194,31 +195,31 @@ public class 端数調整Factorytest {
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格取得日(new RDate("20140401"));
         fukakonkyo.set資格喪失日(new RDate("20150401"));
-        fukakonkyo.setランク_4月("5");
-        fukakonkyo.setランク_5月("4");
-        fukakonkyo.setランク_6月("4");
-        fukakonkyo.setランク_7月("4");
-        fukakonkyo.setランク_8月("4");
-        fukakonkyo.setランク_9月("4");
-        fukakonkyo.setランク_10月("4");
-        fukakonkyo.setランク_11月("4");
-        fukakonkyo.setランク_12月("4");
-        fukakonkyo.setランク_1月("4");
-        fukakonkyo.setランク_2月("4");
-        fukakonkyo.setランク_3月("4");
+        fukakonkyo.setランク_4月(new RString("5"));
+        fukakonkyo.setランク_5月(new RString("4"));
+        fukakonkyo.setランク_6月(new RString("4"));
+        fukakonkyo.setランク_7月(new RString("4"));
+        fukakonkyo.setランク_8月(new RString("4"));
+        fukakonkyo.setランク_9月(new RString("4"));
+        fukakonkyo.setランク_10月(new RString("4"));
+        fukakonkyo.setランク_11月(new RString("4"));
+        fukakonkyo.setランク_12月(new RString("4"));
+        fukakonkyo.setランク_1月(new RString("4"));
+        fukakonkyo.setランク_2月(new RString("4"));
+        fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai("4");
-        dankai5.setSystemDankai("4");
-        dankai6.setSystemDankai("4");
-        dankai7.setSystemDankai("4");
-        dankai8.setSystemDankai("4");
-        dankai9.setSystemDankai("4");
-        dankai10.setSystemDankai("4");
-        dankai11.setSystemDankai("4");
-        dankai12.setSystemDankai("4");
-        dankai1.setSystemDankai("4");
-        dankai2.setSystemDankai("4");
-        dankai3.setSystemDankai("4");
+        dankai4.setSystemDankai(new RString("4"));
+        dankai5.setSystemDankai(new RString("4"));
+        dankai6.setSystemDankai(new RString("4"));
+        dankai7.setSystemDankai(new RString("4"));
+        dankai8.setSystemDankai(new RString("4"));
+        dankai9.setSystemDankai(new RString("4"));
+        dankai10.setSystemDankai(new RString("4"));
+        dankai11.setSystemDankai(new RString("4"));
+        dankai12.setSystemDankai(new RString("4"));
+        dankai1.setSystemDankai(new RString("4"));
+        dankai2.setSystemDankai(new RString("4"));
+        dankai3.setSystemDankai(new RString("4"));
 
         fukakonkyo.set保険料段階_4月(dankai4);
         fukakonkyo.set保険料段階_5月(dankai5);
@@ -235,15 +236,15 @@ public class 端数調整Factorytest {
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
-        seigyo.set端数調整方法("切り上げ");
+        seigyo.set端数調整方法(new RString("切り上げ"));
         seigyo.set端数単位_ランク用(new Decimal("100"));
-        seigyo.set端数調整方法_ランク用("切捨て");
+        seigyo.set端数調整方法_ランク用(new RString("切捨て"));
 
         input.set年額賦課根拠(fukakonkyo);
         input.set年額制御情報(seigyo);
-        input.set賦課年度("2014");
+        input.set賦課年度(new RString("2014"));
 
-        assertThat(factory.getIncetance(input).Calc端数(new Decimal("9999")), is(new Decimal("9900")));
+        assertThat(factory.getIncetance(input).calc端数(new Decimal("9999")), is(new Decimal("9900")));
 
     }
 
@@ -257,31 +258,31 @@ public class 端数調整Factorytest {
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格取得日(new RDate("20140402"));
         fukakonkyo.set資格喪失日(null);
-        fukakonkyo.setランク_4月("4");
-        fukakonkyo.setランク_5月("4");
-        fukakonkyo.setランク_6月("4");
-        fukakonkyo.setランク_7月("4");
-        fukakonkyo.setランク_8月("4");
-        fukakonkyo.setランク_9月("4");
-        fukakonkyo.setランク_10月("4");
-        fukakonkyo.setランク_11月("4");
-        fukakonkyo.setランク_12月("4");
-        fukakonkyo.setランク_1月("4");
-        fukakonkyo.setランク_2月("4");
-        fukakonkyo.setランク_3月("4");
+        fukakonkyo.setランク_4月(new RString("4"));
+        fukakonkyo.setランク_5月(new RString("4"));
+        fukakonkyo.setランク_6月(new RString("4"));
+        fukakonkyo.setランク_7月(new RString("4"));
+        fukakonkyo.setランク_8月(new RString("4"));
+        fukakonkyo.setランク_9月(new RString("4"));
+        fukakonkyo.setランク_10月(new RString("4"));
+        fukakonkyo.setランク_11月(new RString("4"));
+        fukakonkyo.setランク_12月(new RString("4"));
+        fukakonkyo.setランク_1月(new RString("4"));
+        fukakonkyo.setランク_2月(new RString("4"));
+        fukakonkyo.setランク_3月(new RString("4"));
 
-        dankai4.setSystemDankai("4");
-        dankai5.setSystemDankai("4");
-        dankai6.setSystemDankai("4");
-        dankai7.setSystemDankai("4");
-        dankai8.setSystemDankai("4");
-        dankai9.setSystemDankai("4");
-        dankai10.setSystemDankai("4");
-        dankai11.setSystemDankai("4");
-        dankai12.setSystemDankai("4");
-        dankai1.setSystemDankai("4");
-        dankai2.setSystemDankai("4");
-        dankai3.setSystemDankai("4");
+        dankai4.setSystemDankai(new RString("4"));
+        dankai5.setSystemDankai(new RString("4"));
+        dankai6.setSystemDankai(new RString("4"));
+        dankai7.setSystemDankai(new RString("4"));
+        dankai8.setSystemDankai(new RString("4"));
+        dankai9.setSystemDankai(new RString("4"));
+        dankai10.setSystemDankai(new RString("4"));
+        dankai11.setSystemDankai(new RString("4"));
+        dankai12.setSystemDankai(new RString("4"));
+        dankai1.setSystemDankai(new RString("4"));
+        dankai2.setSystemDankai(new RString("4"));
+        dankai3.setSystemDankai(new RString("4"));
 
         fukakonkyo.set保険料段階_4月(dankai4);
         fukakonkyo.set保険料段階_5月(dankai5);
@@ -298,15 +299,15 @@ public class 端数調整Factorytest {
 
         NengakuSeigyoJoho seigyo = new NengakuSeigyoJoho();
         seigyo.set端数単位(new Decimal("10"));
-        seigyo.set端数調整方法("切り上げ");
+        seigyo.set端数調整方法(new RString("切り上げ"));
         seigyo.set端数単位_ランク用(new Decimal("100"));
-        seigyo.set端数調整方法_ランク用("切捨て");
+        seigyo.set端数調整方法_ランク用(new RString("切捨て"));
 
         input.set年額賦課根拠(fukakonkyo);
         input.set年額制御情報(seigyo);
-        input.set賦課年度("2014");
+        input.set賦課年度(new RString("2014"));
 
-        assertThat(factory.getIncetance(input).Calc端数(new Decimal("9999")), is(new Decimal("10000")));
+        assertThat(factory.getIncetance(input).calc端数(new Decimal("9999")), is(new Decimal("10000")));
 
     }
 

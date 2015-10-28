@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.IHanteiHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHanteiHohoHozon;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -68,14 +66,14 @@ public class 第4期 extends HokenryoDankaiHanteiHohoHozon {
         段階9.add(new 段階判定_本人課税());
         段階9.add(new 段階判定_金額(基準所得段階2.add(1), new Decimal(-1)));
 
-        hanteiHoho.put("2", 段階2);
-        hanteiHoho.put("3", 段階3);
-        hanteiHoho.put("4", 段階4);
-        hanteiHoho.put("5", 段階5);
-        hanteiHoho.put("6", 段階6);
-        hanteiHoho.put("7", 段階7);
-        hanteiHoho.put("8", 段階8);
-        hanteiHoho.put("9", 段階9);
+        getHanteiHoho().put(new RString("2"), 段階2);
+        getHanteiHoho().put(new RString("3"), 段階3);
+        getHanteiHoho().put(new RString("4"), 段階4);
+        getHanteiHoho().put(new RString("5"), 段階5);
+        getHanteiHoho().put(new RString("6"), 段階6);
+        getHanteiHoho().put(new RString("7"), 段階7);
+        getHanteiHoho().put(new RString("8"), 段階8);
+        getHanteiHoho().put(new RString("9"), 段階9);
 
     }
 

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoD
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -38,6 +39,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
     @InjectSession
     private SqlSession session;
     private final DbT4021ShiharaiHohoHenkoDac 支払方法変更Dac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
+    private static final RString 番号 = new RString("被保険者番号");
 
     /**
      * 支払方法変更情報をキー検索で１件返します。
@@ -55,7 +57,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
             int 履歴番号) {
 
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(番号.toString()));
         requireNonNull(管理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分"));
 
         return Optional.ofNullable(支払方法変更Dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 履歴番号));
@@ -82,7 +84,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
     @Transaction
     public IItemList<DbT4021ShiharaiHohoHenkoEntity> select2号差止履歴(HihokenshaNo 被保険者番号) {
 
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -107,7 +109,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
     @Transaction
     public IItemList<DbT4021ShiharaiHohoHenkoEntity> select1号償還払化履歴(HihokenshaNo 被保険者番号) {
 
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = accessor.select().
@@ -131,7 +133,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiHohoHenk
     @Transaction
     public IItemList<DbT4021ShiharaiHohoHenkoEntity> select1号減額履歴(HihokenshaNo 被保険者番号) {
 
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更List = accessor.select().

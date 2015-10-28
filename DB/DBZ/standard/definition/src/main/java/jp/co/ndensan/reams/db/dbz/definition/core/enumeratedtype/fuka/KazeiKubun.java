@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 課税区分の列挙型です。
+ * 課税区分の列挙型クラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -18,27 +18,27 @@ public enum KazeiKubun implements IRStringConvertable {
 
     /**
      * 課税 <br />
-     * コード : 1
+     * コード : 1。
      */
     課税("1"),
     /**
      * 非課税 <br />
-     * コード : 2
+     * コード : 2。
      */
     非課税("2"),
     /**
      * 未申告 <br />
-     * コード : 3
+     * コード : 3。
      */
     未申告("3"),
     /**
      * 所得調査中 <br />
-     * コード : 4
+     * コード : 4。
      */
     所得調査中("4"),
     /**
      * 課税取消 <br />
-     * コード : 5
+     * コード : 5。
      */
     課税取消("5");
     private final RString code;

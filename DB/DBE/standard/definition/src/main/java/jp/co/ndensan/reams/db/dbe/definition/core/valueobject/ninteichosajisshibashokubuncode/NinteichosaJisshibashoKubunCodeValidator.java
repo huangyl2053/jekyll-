@@ -18,7 +18,7 @@ public class NinteichosaJisshibashoKubunCodeValidator {
     private final NinteichosaJisshibashoKubunCode ninteichosaJisshibashoKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninteichosaJisshibashoKubunCode 要介護認定調査の実施場所区分コード
      */

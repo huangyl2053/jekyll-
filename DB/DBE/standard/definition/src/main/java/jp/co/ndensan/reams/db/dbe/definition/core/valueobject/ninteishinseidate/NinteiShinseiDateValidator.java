@@ -18,7 +18,7 @@ public class NinteiShinseiDateValidator {
     private final NinteiShinseiDate ninteiShinseiDate;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninteiShinseiDate 認定申請年月日
      */

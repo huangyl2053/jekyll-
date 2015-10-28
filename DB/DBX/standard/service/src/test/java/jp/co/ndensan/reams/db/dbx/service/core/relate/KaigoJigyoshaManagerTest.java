@@ -29,10 +29,7 @@ import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -291,7 +288,7 @@ public class KaigoJigyoshaManagerTest {
                     // 介護事業者代表者
                     .setKaigoJigyoshaDaihyosha(createKaigoJigyoshaDaihyosha(主キー1, 主キー2))
                     // 介護事業者指定サービス
-                    .setKaigoJigyoshaShiteiService(createKaigoJigyoshaShiteiService(主キー1, 主キー2))
+                    .setKaigoJigyoshaService(createKaigoJigyoshaShiteiService(主キー1, 主キー2))
                     .build();
         }
 
@@ -347,7 +344,7 @@ public class KaigoJigyoshaManagerTest {
                     // 介護事業者代表者
                     .setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha)
                     // 介護事業者指定サービス
-                    .setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService)
+                    .setKaigoJigyoshaService(KaigoJigyoshaShiteiService)
                     .build();
             return 介護事業者.modifiedModel();
         }

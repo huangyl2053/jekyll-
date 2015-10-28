@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum Minashi2GoHihokenshaKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(Minashi2GoHihokenshaKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum Minashi2GoHihokenshaKubunCodeValidationMessage implements IValidatio
     public enum Minashi2GoHihokenshaKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "みなし2号被保険者区分コードを指定してください。");
         private final int no;

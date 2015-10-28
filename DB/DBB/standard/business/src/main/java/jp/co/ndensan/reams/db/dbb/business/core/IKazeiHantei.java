@@ -5,15 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  *
  * @author N2810
  */
 public interface IKazeiHantei {
 
-    public boolean isMatch(HokenryoDankaiInput hokenryoDankaiInput);
+    boolean isMatch(HokenryoDankaiInput hokenryoDankaiInput);
 
-    public String HokenryoDankaiShiyo(HokenryoDankaiInput hokenryoDankaiInput);
+    RString hokenryoDankaiShiyo(HokenryoDankaiInput hokenryoDankaiInput);
 
-    public void HokenryoDankaiShiyoShinai(HokenryoDankaiInput hokenryoDankaiInput);
+    void hokenryoDankaiShiyoShinai(HokenryoDankaiInput hokenryoDankaiInput);
 }

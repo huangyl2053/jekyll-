@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -65,10 +64,10 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
     }
 
     private void set基本情報(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv panel) {
-        List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));
-        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
-        int rowId = 0;
+//        List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getTaishoshaAtena(), panel.getTaishoshaKaigoShikaku(), 識別コード, rowId);
     }
 
@@ -93,7 +92,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
 
     private void set申請者情報(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv panel) {
 //        AtenaShokaiSimpleDiv atenaDiv = panel.getTaishoshaAtena().getAtenaInfo();
-        ShogaishaKojoShinseishaDiv shinseishaDiv = panel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha();
+//        ShogaishaKojoShinseishaDiv shinseishaDiv = panel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha();
 //        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
 //        shinseishaDiv.getTxtShinseishaJusho().setValue(atenaDiv.getTxtJusho().getValue());
     }

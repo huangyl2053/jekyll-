@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum IchijiHanteiKeikokuCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(IchijiHanteiKeikokuCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum IchijiHanteiKeikokuCodeValidationMessage implements IValidationMessa
     public enum IchijiHanteiKeikokuCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "一次判定警告コードを指定してください。");
         private final int no;

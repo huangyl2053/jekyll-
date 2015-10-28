@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 該当非該当区分の列挙型です。
+ * 該当非該当区分の列挙型クラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -19,12 +19,12 @@ public enum GaitoHigaitoKubun implements IRStringConvertable {
 
     /**
      * 非該当 <br />
-     * コード : 0
+     * コード : 0。
      */
     非該当("0"),
     /**
      * 該当 <br />
-     * コード : 1
+     * コード : 1。
      */
     該当("1");
     private final RString code;

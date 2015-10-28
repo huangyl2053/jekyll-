@@ -18,11 +18,11 @@ package jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype;
 public enum NinteiShinseiYukoKubun {
 
     /**
-     * 申請中
+     * 申請中します。
      */
     申請中,
     /**
-     * 認定
+     * 認定します。
      */
     認定;
 }

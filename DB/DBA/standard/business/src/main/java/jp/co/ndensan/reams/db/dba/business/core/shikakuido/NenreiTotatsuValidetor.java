@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core.shikakuido;
 
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
@@ -71,4 +71,15 @@ public class NenreiTotatsuValidetor implements IValidatable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public HihokenshaDaichoModel getModel() {
+        return model;
+    }
+
+    public IDateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public NenreiTotatsuKijunConfig getConfig() {
+        return config;
+    }
 }

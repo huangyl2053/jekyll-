@@ -18,7 +18,7 @@ public class ShisetsuCodeValidator {
     private final ShisetsuCode shisetsuCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shisetsuCode 施設コード
      */

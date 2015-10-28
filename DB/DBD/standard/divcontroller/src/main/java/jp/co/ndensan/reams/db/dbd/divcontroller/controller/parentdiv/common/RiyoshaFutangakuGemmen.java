@@ -38,7 +38,7 @@ public class RiyoshaFutangakuGemmen {
     }
 
     /**
-     * onSelect dgRiyoshaFutangakuGemmenList
+     * onSelect dgRiyoshaFutangakuGemmenList。
      *
      * @param div RiyoshaFutangakuGemmenDiv
      * @return ResponseData
@@ -46,14 +46,14 @@ public class RiyoshaFutangakuGemmen {
     public ResponseData<RiyoshaFutangakuGemmenDiv> onSelect_dgRiyoshaFutangakuGemmenList(RiyoshaFutangakuGemmenDiv div) {
         for (dgRiyoshaFutangakuGemmenList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(RiyoshaFutangakuGemmenDiv div, dgRiyoshaFutangakuGemmenList_Row rowValue) {
+    private void _setUp(RiyoshaFutangakuGemmenDiv div, dgRiyoshaFutangakuGemmenList_Row rowValue) {
         div.getRiyoshaFutangakuGemmenDetail().getTxtShinseiDate().setValue(rowValue.getShinseiDate().getValue());
         _riyoshaFutan(div).getTxtFushoninRiyu().setValue(rowValue.getFushoninRiyu());
         _riyoshaFutan(div).getTxtKyufuRitsu().setValue(rowValue.getKyufuRitsu().getValue());

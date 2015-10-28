@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum JushochitokureiKaijoJiyuSpec implements IPredicate<JushochitokureiKaijoJiyu> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
                 /**
@@ -29,7 +29,7 @@ public enum JushochitokureiKaijoJiyuSpec implements IPredicate<JushochitokureiKa
                 }
             },
     /**
-     * 名称がNullでないこと
+     * 名称がNullでないこと。
      */
     名称がNullでないこと {
                 /**

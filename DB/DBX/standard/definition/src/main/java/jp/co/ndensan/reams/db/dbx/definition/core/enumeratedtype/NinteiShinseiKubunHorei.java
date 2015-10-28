@@ -22,19 +22,19 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 public enum NinteiShinseiKubunHorei {
 
     /**
-     * コード「1」新規申請
+     * コード「1」新規申請します。
      */
     新規申請(1),
     /**
-     * コード「2」更新申請
+     * コード「2」更新申請します。
      */
     更新申請(2),
     /**
-     * コード「3」区分変更申請
+     * コード「3」区分変更申請します。
      */
     区分変更申請(3),
     /**
-     * コード「4」職権
+     * コード「4」職権します。
      */
     職権(4);
     private final int コード;

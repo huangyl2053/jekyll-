@@ -8,19 +8,21 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護第三者行為損害賠償金受領を管理するクラスです。
  */
-public class DaisanshaKoiSongaiBaishoKinJuryo extends ModelBase<DaisanshaKoiSongaiBaishoKinJuryoIdentifier, DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity, DaisanshaKoiSongaiBaishoKinJuryo> implements Serializable {
+public class DaisanshaKoiSongaiBaishoKinJuryo
+       extends ModelBase<DaisanshaKoiSongaiBaishoKinJuryoIdentifier, DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity, DaisanshaKoiSongaiBaishoKinJuryo>
+       implements Serializable {
 
     private final DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity;
     private final DaisanshaKoiSongaiBaishoKinJuryoIdentifier id;
@@ -59,8 +61,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryo extends ModelBase<DaisanshaKoiSong
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}より{@link DaisanshaKoiSongaiBaishoKinJuryo}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}
+     * @param entity DBより取得した{@link DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}
      */
     public DaisanshaKoiSongaiBaishoKinJuryo(DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護第三者行為損害賠償金受領"));
@@ -180,8 +181,7 @@ public class DaisanshaKoiSongaiBaishoKinJuryo extends ModelBase<DaisanshaKoiSong
     /**
      * 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}を返します。
      *
-     * @return
-     * 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}
+     * @return 介護第三者行為損害賠償金受領の識別子{@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}
      */
     @Override
     public DaisanshaKoiSongaiBaishoKinJuryoIdentifier identifier() {

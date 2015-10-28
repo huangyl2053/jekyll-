@@ -12,30 +12,30 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住所の編集方法です。
+ * 住所の編集方法クラスです。
  *
  * @author N3327 三浦 凌
  */
 public enum HowToEditJusho {
 
     /**
-     * 住所＋番地
+     * 住所＋番地。
      */
     住所と番地("1"),
     /**
-     * 行政区＋番地
+     * 行政区＋番地。
      */
     行政区と番地("2"),
     /**
-     * 住所＋番地、（行政区）
+     * 住所＋番地、（行政区）。
      */
     住所と番地_行政区("3"),
     /**
-     * 番地のみ
+     * 番地のみ。
      */
     番地のみ("4"),
     /**
-     * 表示無し(住所は印字しない)
+     * 表示無し(住所は印字しない)。
      */
     印字しない("5");
 

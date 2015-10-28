@@ -72,4 +72,13 @@ public class NyushoJyokyo {
     public ShikibetsuCode get識別コード() {
         return this.nyutaishoEntity.getShikibetsuCode();
     }
+
+    /**
+     * DbT7060KaigoJigyoshaEntity。
+     *
+     * @return jigyoshaEntity
+     */
+    public DbT7060KaigoJigyoshaEntity getJigyoshaEntity() {
+        return jigyoshaEntity;
+    }
 }

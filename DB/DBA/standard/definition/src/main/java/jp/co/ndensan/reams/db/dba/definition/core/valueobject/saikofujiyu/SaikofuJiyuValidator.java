@@ -18,7 +18,7 @@ public class SaikofuJiyuValidator {
     private final SaikofuJiyu saikofuJiyu;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param saikofuJiyu 被保険者証の再交付事由
      */

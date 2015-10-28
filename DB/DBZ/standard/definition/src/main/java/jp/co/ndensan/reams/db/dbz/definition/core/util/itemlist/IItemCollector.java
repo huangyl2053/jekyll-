@@ -5,12 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist;
 
-import java.util.Collection;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ISupplier;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * ある入力要素の集合を、集積用のオブジェクト(コンテナ)に集積して、その後、最終的な結果へと変換して返す、という一連の処理の定義であることを表します。

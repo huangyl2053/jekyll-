@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 public class ShujiiIkenshoEntity implements IDbAccessable {
 
     private DbT5012ShujiiIkenshoJohoEntity dbT5012ShujiiIkenshoJohoEntity = null;
-    private DbT5013ShujiiIkenshoShosaiJohoEntity dbT5013ShujiiIkenshoShosaiJohoEntity = null;
+    private DbT5013ShujiiIkenshoShosaiJohoEntity dbT5013Entity = null;
 
     /**
      * インスタンスを生成します。
@@ -48,7 +48,7 @@ public class ShujiiIkenshoEntity implements IDbAccessable {
      * @return 主治医意見書詳細情報エンティティ
      */
     public DbT5013ShujiiIkenshoShosaiJohoEntity getDbT5013ShujiiIkenshoShosaiJohoEntity() {
-        return dbT5013ShujiiIkenshoShosaiJohoEntity;
+        return dbT5013Entity;
     }
 
     /**
@@ -57,6 +57,6 @@ public class ShujiiIkenshoEntity implements IDbAccessable {
      * @param entity 主治医意見書詳細情報エンティティ
      */
     public void setDbT5013ShujiiIkenshoShosaiJohoEntity(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
-        this.dbT5013ShujiiIkenshoShosaiJohoEntity = entity;
+        this.dbT5013Entity = entity;
     }
 }

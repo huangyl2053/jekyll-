@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -211,8 +208,8 @@ public class TashichosonJushochiTokureiAliveTest extends DbxTestBase {
         }
 
         @Test
-        public void get論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.get論理削除フラグ(), is(TashichosonJushochiTokureiAliveEntity.getLogicalDeletedFlag()));
+        public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
+            assertThat(sut.is論理削除フラグ(), is(TashichosonJushochiTokureiAliveEntity.getLogicalDeletedFlag()));
         }
     }
 

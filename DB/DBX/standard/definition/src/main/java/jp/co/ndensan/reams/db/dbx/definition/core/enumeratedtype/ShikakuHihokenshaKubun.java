@@ -26,13 +26,13 @@ public enum ShikakuHihokenshaKubun implements IRStringConvertable {
     /**
      * 第１号被保険者<br />
      * コード：1<br />
-     * 名称：１号<br />
+     * 名称：１号。<br />
      */
     第１号被保険者("1", "１号"),
     /**
      * 第２号被保険者<br />
      * コード：2<br />
-     * 名称：２号<br />
+     * 名称：２号。<br />
      */
     第２号被保険者("2", "２号");
     private final RString コード;

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住所地特例の解除事由を表す列挙型です。
+ * 住所地特例の解除事由を表す列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -22,17 +22,17 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
     EMPTY("", ""),
     /**
      * 自特例転入 <br />
-     * コード : 01
+     * コード : 01。
      */
     自特例転入("01", "自特例転入"),
     /**
      * 自特例解除 <br />
-     * コード : 02
+     * コード : 02。
      */
     自特例解除("02", "自特例解除"),
     /**
      * その他 <br />
-     * コード : 99
+     * コード : 99。
      */
     その他("99", "その他");
     private final RString code;
@@ -60,7 +60,7 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
 
     /**
      * 指定のコードに対応するJushochitokureiKaijoJiyuを返します。
-     * 空文字列、もしくはnullを受け取った場合は<@code>JushochitokureiTekiyoJiyu.EMPTY</code>を返します。
+     * 空文字列、もしくはnullを受け取った場合はJushochitokureiTekiyoJiyu.EMPTY返します。
      *
      * @param code コード
      * @return 指定のコードに対応するJushochitokureiKaijoJiyu

@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 地域密着型介護サービスコードを管理するクラスです。
  */
-public class ChiikiMitchakuServiceCode extends ModelBase<ChiikiMitchakuServiceCodeIdentifier, DbT7121ChiikiMitchakuServiceCodeEntity, ChiikiMitchakuServiceCode> implements Serializable {
+public class ChiikiMitchakuServiceCode
+        extends ModelBase<ChiikiMitchakuServiceCodeIdentifier, DbT7121ChiikiMitchakuServiceCodeEntity, ChiikiMitchakuServiceCode>
+        implements Serializable {
 
     private final DbT7121ChiikiMitchakuServiceCodeEntity entity;
     private final ChiikiMitchakuServiceCodeIdentifier id;

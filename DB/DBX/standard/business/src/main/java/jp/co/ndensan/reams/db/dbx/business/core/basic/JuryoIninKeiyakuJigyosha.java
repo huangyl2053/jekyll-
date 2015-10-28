@@ -23,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受領委任契約事業者を管理するクラスです。
  */
-public class JuryoIninKeiyakuJigyosha extends ModelBase<JuryoIninKeiyakuJigyoshaIdentifier, DbT7061JuryoIninKeiyakuJigyoshaEntity, JuryoIninKeiyakuJigyosha> implements Serializable {
+public class JuryoIninKeiyakuJigyosha extends
+        ModelBase<JuryoIninKeiyakuJigyoshaIdentifier, DbT7061JuryoIninKeiyakuJigyoshaEntity, JuryoIninKeiyakuJigyosha>
+        implements Serializable {
 
     private final DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
     private final JuryoIninKeiyakuJigyoshaIdentifier id;

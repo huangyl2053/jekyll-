@@ -12,12 +12,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 認定調査委託先コードです。
+ * 認定調査委託先コードクラスです。
  *
  * @author n8223　朴義一
  */
 public class ChosaItakusakiCode implements IValueObject<RString>, Comparable<ChosaItakusakiCode>, IDbColumnMappable, Serializable {
 
+    private static final int ten = 10;
     /**
      * 空の{@link ChosaItakusakiCode}です。
      */

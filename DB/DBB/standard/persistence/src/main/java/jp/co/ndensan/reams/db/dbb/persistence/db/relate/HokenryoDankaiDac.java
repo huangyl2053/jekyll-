@@ -39,6 +39,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
     private SqlSession session;
     private final DbT2013HokenryoDankaiDac 保険料段階Dac = InstanceProvider.create(DbT2013HokenryoDankaiDac.class);
     private final DbT2012HokenryoRankDac 保険料ランクDac = InstanceProvider.create(DbT2012HokenryoRankDac.class);
+    private static final RString FUKANENDO = new RString("賦課年度");
 
     /**
      * 保険料段階情報をキー検索で１件返します。
@@ -51,7 +52,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
     @Transaction
     public DbT2013HokenryoDankaiEntity select保険料段階ByKey(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(FUKANENDO.toString()));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
 
@@ -67,7 +68,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
     @Transaction
     public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度) {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(FUKANENDO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2013HokenryoDankaiEntity> 保険料段階List = accessor.select().
@@ -94,7 +95,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
     @Transaction
     public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度, RString 段階区分) {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(FUKANENDO.toString()));
         requireNonNull(段階区分, UrSystemErrorMessages.値がnull.getReplacedMessage("段階区分"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -125,7 +126,7 @@ public class HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDankaiEntit
     @Transaction
     public List<DbT2013HokenryoDankaiEntity> select保険料段階一覧(FlexibleYear 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
 
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(FUKANENDO.toString()));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(段階区分, UrSystemErrorMessages.値がnull.getReplacedMessage("段階区分"));
 

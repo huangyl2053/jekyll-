@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureika
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
@@ -19,7 +18,7 @@ public class JushochitokureiKaijoJiyuValidator {
     private final JushochitokureiKaijoJiyu jushochitokureiKaijoJiyu;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param jushochitokureiKaijoJiyu 住所地特例解除事由
      */

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum GogitaiYukoKikanKaishiDateSpec implements IPredicate<GogitaiYukoKikanKaishiDate> {
 
     /**
-     * 開始年月日がNullでないこと
+     * 開始年月日がNullでないこと。
      */
     開始年月日がNullでないこと {
 

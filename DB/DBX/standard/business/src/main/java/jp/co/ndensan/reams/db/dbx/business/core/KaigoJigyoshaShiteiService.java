@@ -2013,14 +2013,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * shakaiFukushihoujinKeigenjigyouJisshi_umuを設定します。
+         * shafukuhojinKeigenUmuを設定します。
          *
-         * @param shakaiFukushihoujinKeigenjigyouJisshi_umu 社会福祉法人軽減事業実施の有無
+         * @param shafukuhojinKeigenUmu 社会福祉法人軽減事業実施の有無
          * @return builder
          */
-        public Builder setShakaiFukushihoujinKeigenjigyouJisshi_umu(ShafukuhojinKeigenJigyoJisshiUmu shakaiFukushihoujinKeigenjigyouJisshi_umu) {
-            Objects.requireNonNull(shakaiFukushihoujinKeigenjigyouJisshi_umu);
-            this.entity.setShakaiFukushihoujinKeigenjigyouJisshi_umu(shakaiFukushihoujinKeigenjigyouJisshi_umu);
+        public Builder setShafukuhojinKeigenUmu(ShafukuhojinKeigenJigyoJisshiUmu shafukuhojinKeigenUmu) {
+            Objects.requireNonNull(shafukuhojinKeigenUmu);
+            this.entity.setShakaiFukushihoujinKeigenjigyouJisshi_umu(shafukuhojinKeigenUmu);
             return this;
         }
 
@@ -2097,26 +2097,26 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kinoKunrenShidoTaisei_umuを設定します。
+         * kinokunrenShidoTaiseiUmuを設定します。
          *
-         * @param kinoKunrenShidoTaisei_umu 機能訓練指導体制の有無
+         * @param kinokunrenShidoTaiseiUmu 機能訓練指導体制の有無
          * @return builder
          */
-        public Builder setKinoKunrenShidoTaisei_umu(KinokunrenShidoTaiseiUmu kinoKunrenShidoTaisei_umu) {
-            Objects.requireNonNull(kinoKunrenShidoTaisei_umu);
-            this.entity.setKinoKunrenShidoTaisei_umu(kinoKunrenShidoTaisei_umu);
+        public Builder setKinokunrenShidoTaiseiUmu(KinokunrenShidoTaiseiUmu kinokunrenShidoTaiseiUmu) {
+            Objects.requireNonNull(kinokunrenShidoTaiseiUmu);
+            this.entity.setKinoKunrenShidoTaisei_umu(kinokunrenShidoTaiseiUmu);
             return this;
         }
 
         /**
-         * shokujiTeikyoTaisei_umuを設定します。
+         * shokujiTeikyoTaiseiUmuを設定します。
          *
-         * @param shokujiTeikyoTaisei_umu 食事提供体制の有無
+         * @param shokujiTeikyoTaiseiUmu 食事提供体制の有無
          * @return builder
          */
-        public Builder setShokujiTeikyoTaisei_umu(ShokujiTeikyoTaiseiUmu shokujiTeikyoTaisei_umu) {
-            Objects.requireNonNull(shokujiTeikyoTaisei_umu);
-            this.entity.setShokujiTeikyoTaisei_umu(shokujiTeikyoTaisei_umu);
+        public Builder setShokujiTeikyoTaiseiUmu(ShokujiTeikyoTaiseiUmu shokujiTeikyoTaiseiUmu) {
+            Objects.requireNonNull(shokujiTeikyoTaiseiUmu);
+            this.entity.setShokujiTeikyoTaisei_umu(shokujiTeikyoTaiseiUmu);
             return this;
         }
 
@@ -2133,14 +2133,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * tokubetsuNyuyokuKaijoTaisei_umuを設定します。
+         * tokubetsuNyuyokuUmuを設定します。
          *
-         * @param tokubetsuNyuyokuKaijoTaisei_umu 特別入浴介助体制の有無
+         * @param tokubetsuNyuyokuUmu 特別入浴介助体制の有無
          * @return builder
          */
-        public Builder setTokubetsuNyuyokuKaijoTaisei_umu(TokubetsuNyuyokuKaijoTaiseiUmu tokubetsuNyuyokuKaijoTaisei_umu) {
-            Objects.requireNonNull(tokubetsuNyuyokuKaijoTaisei_umu);
-            this.entity.setTokubetsuNyuyokuKaijoTaisei_umu(tokubetsuNyuyokuKaijoTaisei_umu);
+        public Builder setTokubetsuNyuyokuUmu(TokubetsuNyuyokuKaijoTaiseiUmu tokubetsuNyuyokuUmu) {
+            Objects.requireNonNull(tokubetsuNyuyokuUmu);
+            this.entity.setTokubetsuNyuyokuKaijoTaisei_umu(tokubetsuNyuyokuUmu);
             return this;
         }
 
@@ -2169,14 +2169,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * seisinkaIshiTeikitekiRyouyousidou_umuを設定します。
+         * seisinkaIshiTeikitekiUmuを設定します。
          *
-         * @param seisinkaIshiTeikitekiRyouyousidou_umu 精神科医師定期的療養指導の有無
+         * @param seisinkaIshiTeikitekiUmu 精神科医師定期的療養指導の有無
          * @return builder
          */
-        public Builder setSeisinkaIshiTeikitekiRyouyousidou_umu(SeishinkaIshiTeikitekiRyoyoshidoUmu seisinkaIshiTeikitekiRyouyousidou_umu) {
-            Objects.requireNonNull(seisinkaIshiTeikitekiRyouyousidou_umu);
-            this.entity.setSeisinkaIshiTeikitekiRyouyousidou_umu(seisinkaIshiTeikitekiRyouyousidou_umu);
+        public Builder setSeisinkaIshiTeikitekiUmu(SeishinkaIshiTeikitekiRyoyoshidoUmu seisinkaIshiTeikitekiUmu) {
+            Objects.requireNonNull(seisinkaIshiTeikitekiUmu);
+            this.entity.setSeisinkaIshiTeikitekiRyouyousidou_umu(seisinkaIshiTeikitekiUmu);
             return this;
         }
 
@@ -2229,64 +2229,64 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * rehaTeikyoTaisei_SogoRehaShisetsu_umuを設定します。
+         * rehabilitationTeikyoTaiseiUmuを設定します。
          *
-         * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu リハビリテーション提供体制_総合リハビリテーション施設_の有無
+         * @param rehabilitationTeikyoTaiseiUmu リハビリテーション提供体制_総合リハビリテーション施設_の有無
          * @return builder
          */
-        public Builder setRehaTeikyoTaisei_SogoRehaShisetsu_umu(
-                RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu rehaTeikyoTaisei_SogoRehaShisetsu_umu) {
-            Objects.requireNonNull(rehaTeikyoTaisei_SogoRehaShisetsu_umu);
-            this.entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(rehaTeikyoTaisei_SogoRehaShisetsu_umu);
+        public Builder setRehabilitationTeikyoTaiseiUmu(
+                RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu rehabilitationTeikyoTaiseiUmu) {
+            Objects.requireNonNull(rehabilitationTeikyoTaiseiUmu);
+            this.entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(rehabilitationTeikyoTaiseiUmu);
             return this;
         }
 
         /**
-         * rehaTeikyoTaisei_RigakuRyohoII_umuを設定します。
+         * rigakuRyohoIIUmuを設定します。
          *
-         * @param rehaTeikyoTaisei_RigakuRyohoII_umu リハビリテーション提供体制_理学療法Ⅱ_の有無
+         * @param rigakuRyohoIIUmu リハビリテーション提供体制_理学療法Ⅱ_の有無
          * @return builder
          */
-        public Builder setRehaTeikyoTaisei_RigakuRyohoII_umu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho2 rehaTeikyoTaisei_RigakuRyohoII_umu) {
-            Objects.requireNonNull(rehaTeikyoTaisei_RigakuRyohoII_umu);
-            this.entity.setRehaTeikyoTaisei_RigakuRyohoII_umu(rehaTeikyoTaisei_RigakuRyohoII_umu);
+        public Builder setRigakuRyohoIIUmu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho2 rigakuRyohoIIUmu) {
+            Objects.requireNonNull(rigakuRyohoIIUmu);
+            this.entity.setRehaTeikyoTaisei_RigakuRyohoII_umu(rigakuRyohoIIUmu);
             return this;
         }
 
         /**
-         * rehaTeikyoTaisei_RigakuRyohoIII_umuを設定します。
+         * rigakuRyohoIIIUmuを設定します。
          *
-         * @param rehaTeikyoTaisei_RigakuRyohoIII_umu リハビリテーション提供体制_理学療法Ⅲ_の有無
+         * @param rigakuRyohoIIIUmu リハビリテーション提供体制_理学療法Ⅲ_の有無
          * @return builder
          */
-        public Builder setRehaTeikyoTaisei_RigakuRyohoIII_umu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho3 rehaTeikyoTaisei_RigakuRyohoIII_umu) {
-            Objects.requireNonNull(rehaTeikyoTaisei_RigakuRyohoIII_umu);
-            this.entity.setRehaTeikyoTaisei_RigakuRyohoIII_umu(rehaTeikyoTaisei_RigakuRyohoIII_umu);
+        public Builder setRigakuRyohoIIIUmu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho3 rigakuRyohoIIIUmu) {
+            Objects.requireNonNull(rigakuRyohoIIIUmu);
+            this.entity.setRehaTeikyoTaisei_RigakuRyohoIII_umu(rigakuRyohoIIIUmu);
             return this;
         }
 
         /**
-         * rehaTeikyoTaisei_SagyoRyohoII_umuを設定します。
+         * sagyoRyohoIIUmuを設定します。
          *
-         * @param rehaTeikyoTaisei_SagyoRyohoII_umu リハビリテーション提供体制_作業療法Ⅱ_の有無
+         * @param sagyoRyohoIIUmu リハビリテーション提供体制_作業療法Ⅱ_の有無
          * @return builder
          */
-        public Builder setRehaTeikyoTaisei_SagyoRyohoII_umu(RehabilitationTeikyoTaiseiUmu_SagyoRyoho2 rehaTeikyoTaisei_SagyoRyohoII_umu) {
-            Objects.requireNonNull(rehaTeikyoTaisei_SagyoRyohoII_umu);
-            this.entity.setRehaTeikyoTaisei_SagyoRyohoII_umu(rehaTeikyoTaisei_SagyoRyohoII_umu);
+        public Builder setSagyoRyohoIIUmu(RehabilitationTeikyoTaiseiUmu_SagyoRyoho2 sagyoRyohoIIUmu) {
+            Objects.requireNonNull(sagyoRyohoIIUmu);
+            this.entity.setRehaTeikyoTaisei_SagyoRyohoII_umu(sagyoRyohoIIUmu);
             return this;
         }
 
         /**
-         * rehaTeikyoTaisei_SeisinkaSagyouRyoho_umuを設定します。
+         * seisinkaSagyouRyohoUmuを設定します。
          *
-         * @param rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu リハビリテーション提供体制_精神科作業療法_の有無
+         * @param seisinkaSagyouRyohoUmu リハビリテーション提供体制_精神科作業療法_の有無
          * @return builder
          */
-        public Builder setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(
-                RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu) {
-            Objects.requireNonNull(rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu);
-            this.entity.setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu);
+        public Builder setSeisinkaSagyouRyohoUmu(
+                RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho seisinkaSagyouRyohoUmu) {
+            Objects.requireNonNull(seisinkaSagyouRyohoUmu);
+            this.entity.setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(seisinkaSagyouRyohoUmu);
             return this;
         }
 
@@ -2339,75 +2339,75 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kangoShokuinKetsuinGenzanJokyo_umuを設定します。
+         * kangoStaffKetsuinUmuを設定します。
          *
-         * @param kangoShokuinKetsuinGenzanJokyo_umu 看護職員の欠員による減算の状況の有無を返します
+         * @param kangoStaffKetsuinUmu 看護職員の欠員による減算の状況の有無を返します
          * @return builder
          */
-        public Builder setKangoShokuinKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKangoStaffKetsuin kangoShokuinKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(kangoShokuinKetsuinGenzanJokyo_umu);
-            this.entity.setKangoShokuinKetsuinGenzanJokyo_umu(kangoShokuinKetsuinGenzanJokyo_umu);
+        public Builder setKangoStaffKetsuinUmu(GenzanJokyoUmuByKangoStaffKetsuin kangoStaffKetsuinUmu) {
+            Objects.requireNonNull(kangoStaffKetsuinUmu);
+            this.entity.setKangoShokuinKetsuinGenzanJokyo_umu(kangoStaffKetsuinUmu);
             return this;
         }
 
         /**
-         * rigakuRyouhousiKetsuinGenzanJokyo_umuを設定します。
+         * rigakuRyouhousiKetsuinUmuを設定します。
          *
-         * @param rigakuRyouhousiKetsuinGenzanJokyo_umu 理学療法士の欠員による減算の状況の有無
+         * @param rigakuRyouhousiKetsuinUmu 理学療法士の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setRigakuRyouhousiKetsuinGenzanJokyo_umu(GenzanJokyoUmuByRigakuryohoshiKetsuin rigakuRyouhousiKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(rigakuRyouhousiKetsuinGenzanJokyo_umu);
-            this.entity.setRigakuRyouhousiKetsuinGenzanJokyo_umu(rigakuRyouhousiKetsuinGenzanJokyo_umu);
+        public Builder setRigakuRyouhousiKetsuinUmu(GenzanJokyoUmuByRigakuryohoshiKetsuin rigakuRyouhousiKetsuinUmu) {
+            Objects.requireNonNull(rigakuRyouhousiKetsuinUmu);
+            this.entity.setRigakuRyouhousiKetsuinGenzanJokyo_umu(rigakuRyouhousiKetsuinUmu);
             return this;
         }
 
         /**
-         * sagyouRyouhousiKetsuinGenzanJokyo_umuを設定します。
+         * sagyouRyouhousiKetsuinUmuを設定します。
          *
-         * @param sagyouRyouhousiKetsuinGenzanJokyo_umu 作業療法士の欠員による減算の状況の有無
+         * @param sagyouRyouhousiKetsuinUmu 作業療法士の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setSagyouRyouhousiKetsuinGenzanJokyo_umu(GenzanJokyoUmuBySagyoryohoshiKetsuin sagyouRyouhousiKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(sagyouRyouhousiKetsuinGenzanJokyo_umu);
-            this.entity.setSagyouRyouhousiKetsuinGenzanJokyo_umu(sagyouRyouhousiKetsuinGenzanJokyo_umu);
+        public Builder setSagyouRyouhousiKetsuinUmu(GenzanJokyoUmuBySagyoryohoshiKetsuin sagyouRyouhousiKetsuinUmu) {
+            Objects.requireNonNull(sagyouRyouhousiKetsuinUmu);
+            this.entity.setSagyouRyouhousiKetsuinGenzanJokyo_umu(sagyouRyouhousiKetsuinUmu);
             return this;
         }
 
         /**
-         * kaigoShokuinKetsuinGenzanJokyo_umuを設定します。
+         * kaigoShokuinKetsuinUmuを設定します。
          *
-         * @param kaigoShokuinKetsuinGenzanJokyo_umu 介護職員の欠員による減算の状況の有無
+         * @param kaigoShokuinKetsuinUmu 介護職員の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setKaigoShokuinKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKaigoStaffKetsuin kaigoShokuinKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(kaigoShokuinKetsuinGenzanJokyo_umu);
-            this.entity.setKaigoShokuinKetsuinGenzanJokyo_umu(kaigoShokuinKetsuinGenzanJokyo_umu);
+        public Builder setKaigoShokuinKetsuinUmu(GenzanJokyoUmuByKaigoStaffKetsuin kaigoShokuinKetsuinUmu) {
+            Objects.requireNonNull(kaigoShokuinKetsuinUmu);
+            this.entity.setKaigoShokuinKetsuinGenzanJokyo_umu(kaigoShokuinKetsuinUmu);
             return this;
         }
 
         /**
-         * kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umuを設定します。
+         * kaigoSienSenmoninUmuを設定します。
          *
-         * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu 介護支援専門員の欠員による減算の状況の有無
+         * @param kaigoSienSenmoninUmu 介護支援専門員の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(
-                GenzanJokyoUmuByKaigoSupportSemmoninKetsuin kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu);
-            this.entity.setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu);
+        public Builder setKaigoSienSenmoninUmu(
+                GenzanJokyoUmuByKaigoSupportSemmoninKetsuin kaigoSienSenmoninUmu) {
+            Objects.requireNonNull(kaigoSienSenmoninUmu);
+            this.entity.setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(kaigoSienSenmoninUmu);
             return this;
         }
 
         /**
-         * kaigoJujishaKetsuinGenzanJokyo_umuを設定します。
+         * kaigoJujishaKetsuinUmuを設定します。
          *
-         * @param kaigoJujishaKetsuinGenzanJokyo_umu 介護従業者の欠員による減算の状況の有無
+         * @param kaigoJujishaKetsuinUmu 介護従業者の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setKaigoJujishaKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKaigojugyoshaKetsuin kaigoJujishaKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(kaigoJujishaKetsuinGenzanJokyo_umu);
-            this.entity.setKaigoJujishaKetsuinGenzanJokyo_umu(kaigoJujishaKetsuinGenzanJokyo_umu);
+        public Builder setKaigoJujishaKetsuinUmu(GenzanJokyoUmuByKaigojugyoshaKetsuin kaigoJujishaKetsuinUmu) {
+            Objects.requireNonNull(kaigoJujishaKetsuinUmu);
+            this.entity.setKaigoJujishaKetsuinGenzanJokyo_umu(kaigoJujishaKetsuinUmu);
             return this;
         }
 
@@ -2448,14 +2448,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * shogaishaSeikatsuShienTaisei_umuを設定します。
+         * shogaishaSeikatsuUmuを設定します。
          *
-         * @param shogaishaSeikatsuShienTaisei_umu 障害者生活支援体制の有無
+         * @param shogaishaSeikatsuUmu 障害者生活支援体制の有無
          * @return builder
          */
-        public Builder setShogaishaSeikatsuShienTaisei_umu(ShogaishaSeikatsuSupportTaiseiUmu shogaishaSeikatsuShienTaisei_umu) {
-            Objects.requireNonNull(shogaishaSeikatsuShienTaisei_umu);
-            this.entity.setShogaishaSeikatsuShienTaisei_umu(shogaishaSeikatsuShienTaisei_umu);
+        public Builder setShogaishaSeikatsuUmu(ShogaishaSeikatsuSupportTaiseiUmu shogaishaSeikatsuUmu) {
+            Objects.requireNonNull(shogaishaSeikatsuUmu);
+            this.entity.setShogaishaSeikatsuShienTaisei_umu(shogaishaSeikatsuUmu);
             return this;
         }
 
@@ -2484,14 +2484,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kobetsuRehabilitationTeikyoTaiseiを設定します。
+         * kobetsuRehabilitationを設定します。
          *
-         * @param kobetsuRehabilitationTeikyoTaisei 個別リハビリテーション提供体制
+         * @param kobetsuRehabilitation 個別リハビリテーション提供体制
          * @return builder
          */
-        public Builder setKobetsuRehabilitationTeikyoTaisei(KobetsuRehabilitationTeikyoTaisei kobetsuRehabilitationTeikyoTaisei) {
-            Objects.requireNonNull(kobetsuRehabilitationTeikyoTaisei);
-            this.entity.setKobetsuRehabilitationTeikyoTaisei(kobetsuRehabilitationTeikyoTaisei);
+        public Builder setKobetsuRehabilitation(KobetsuRehabilitationTeikyoTaisei kobetsuRehabilitation) {
+            Objects.requireNonNull(kobetsuRehabilitation);
+            this.entity.setKobetsuRehabilitationTeikyoTaisei(kobetsuRehabilitation);
             return this;
         }
 
@@ -2532,92 +2532,92 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umuを設定します。
+         * kobetsuRehaTeikyoTaiseiUmuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
+         * @param kobetsuRehaTeikyoTaiseiUmu 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu);
+        public Builder setKobetsuRehaTeikyoTaiseiUmu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu kobetsuRehaTeikyoTaiseiUmu) {
+            Objects.requireNonNull(kobetsuRehaTeikyoTaiseiUmu);
+            this.entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(kobetsuRehaTeikyoTaiseiUmu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1を設定します。
+         * rigakuRyohoIIUmu1を設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1
+         * @param rigakuRyohoIIUmu1 個別リハビリテーション提供体制_理学療法Ⅱ_の有無1
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(
-                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1);
-            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1);
+        public Builder setRigakuRyohoIIUmu1(
+                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2 rigakuRyohoIIUmu1) {
+            Objects.requireNonNull(rigakuRyohoIIUmu1);
+            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(rigakuRyohoIIUmu1);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umuを設定します。
+         * rigakuRyohoIIIUmuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
+         * @param rigakuRyohoIIIUmu 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3 kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu);
+        public Builder setRigakuRyohoIIIUmu1(
+                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3 rigakuRyohoIIIUmu) {
+            Objects.requireNonNull(rigakuRyohoIIIUmu);
+            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(rigakuRyohoIIIUmu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_SagyoRyohoII_umuを設定します。
+         * sagyoRyohoIIUmu1を設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu 個別リハビリテーション提供体制_作業療法Ⅱ_の有無
+         * @param sagyoRyohoIIUmu1 個別リハビリテーション提供体制_作業療法Ⅱ_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1 kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu);
+        public Builder setSagyoRyohoIIUmu1(
+                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1 sagyoRyohoIIUmu1) {
+            Objects.requireNonNull(sagyoRyohoIIUmu1);
+            this.entity.setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(sagyoRyohoIIUmu1);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umuを設定します。
+         * gengoChokakuRyohoIUmuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
+         * @param gengoChokakuRyohoIUmu 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu);
+        public Builder setGengoChokakuRyohoIUmu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2 gengoChokakuRyohoIUmu) {
+            Objects.requireNonNull(gengoChokakuRyohoIUmu);
+            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(gengoChokakuRyohoIUmu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umuを設定します。
+         * gengoChokakuRyohoIIUmuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無
+         * @param gengoChokakuRyohoIIUmu 個別リハビリテーション提供体制_言語聴覚療法Ⅱ_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu);
+        public Builder setGengoChokakuRyohoIIUmu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2 gengoChokakuRyohoIIUmu) {
+            Objects.requireNonNull(gengoChokakuRyohoIIUmu);
+            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(gengoChokakuRyohoIIUmu);
             return this;
         }
 
         /**
-         * gengoChokakushiKetsuinGenzanJokyo_umuを設定します。
+         * genzanJokyoUmuを設定します。
          *
-         * @param gengoChokakushiKetsuinGenzanJokyo_umu 言語聴覚士の欠員による減算の状況の有無
+         * @param genzanJokyoUmu 言語聴覚士の欠員による減算の状況の有無
          * @return builder
          */
-        public Builder setGengoChokakushiKetsuinGenzanJokyo_umu(GenzanJokyoUmuByGengoChokakushiKetsuin gengoChokakushiKetsuinGenzanJokyo_umu) {
-            Objects.requireNonNull(gengoChokakushiKetsuinGenzanJokyo_umu);
-            this.entity.setGengoChokakushiKetsuinGenzanJokyo_umu(gengoChokakushiKetsuinGenzanJokyo_umu);
+        public Builder setGenzanJokyoUmu(GenzanJokyoUmuByGengoChokakushiKetsuin genzanJokyoUmu) {
+            Objects.requireNonNull(genzanJokyoUmu);
+            this.entity.setGengoChokakushiKetsuinGenzanJokyo_umu(genzanJokyoUmu);
             return this;
         }
 
@@ -2634,26 +2634,26 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * tokuteijigyoushoKasan_HomonKaigo_umuを設定します。
+         * homonKaigoUmuを設定します。
          *
-         * @param tokuteijigyoushoKasan_HomonKaigo_umu 特定事業所加算_訪問介護_の有無
+         * @param homonKaigoUmu 特定事業所加算_訪問介護_の有無
          * @return builder
          */
-        public Builder setTokuteijigyoushoKasan_HomonKaigo_umu(TokuteiJigyoshoKasanUmu tokuteijigyoushoKasan_HomonKaigo_umu) {
-            Objects.requireNonNull(tokuteijigyoushoKasan_HomonKaigo_umu);
-            this.entity.setTokuteijigyoushoKasan_HomonKaigo_umu(tokuteijigyoushoKasan_HomonKaigo_umu);
+        public Builder setHomonKaigoUmu(TokuteiJigyoshoKasanUmu homonKaigoUmu) {
+            Objects.requireNonNull(homonKaigoUmu);
+            this.entity.setTokuteijigyoushoKasan_HomonKaigo_umu(homonKaigoUmu);
             return this;
         }
 
         /**
-         * jakunenseiNinchishoCareTaisei_umuを設定します。
+         * jakunenseiUmuを設定します。
          *
-         * @param jakunenseiNinchishoCareTaisei_umu 若年性認知症ケア体制の有無
+         * @param jakunenseiUmu 若年性認知症ケア体制の有無
          * @return builder
          */
-        public Builder setJakunenseiNinchishoCareTaisei_umu(JakunenseiNinchishoCareTaiseiUmu jakunenseiNinchishoCareTaisei_umu) {
-            Objects.requireNonNull(jakunenseiNinchishoCareTaisei_umu);
-            this.entity.setJakunenseiNinchishoCareTaisei_umu(jakunenseiNinchishoCareTaisei_umu);
+        public Builder setJakunenseiUmu(JakunenseiNinchishoCareTaiseiUmu jakunenseiUmu) {
+            Objects.requireNonNull(jakunenseiUmu);
+            this.entity.setJakunenseiNinchishoCareTaisei_umu(jakunenseiUmu);
             return this;
         }
 
@@ -2670,14 +2670,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * eiyoManagement_KaizenTaisei_umuを設定します。
+         * kaizenTaiseiUmuを設定します。
          *
-         * @param eiyoManagement_KaizenTaisei_umu 栄養マネジメント_改善_体制の有無
+         * @param kaizenTaiseiUmu 栄養マネジメント_改善_体制の有無
          * @return builder
          */
-        public Builder setEiyoManagement_KaizenTaisei_umu(EiyoManagementTaiseiUmu eiyoManagement_KaizenTaisei_umu) {
-            Objects.requireNonNull(eiyoManagement_KaizenTaisei_umu);
-            this.entity.setEiyoManagement_KaizenTaisei_umu(eiyoManagement_KaizenTaisei_umu);
+        public Builder setKaizenTaiseiUmu(EiyoManagementTaiseiUmu kaizenTaiseiUmu) {
+            Objects.requireNonNull(kaizenTaiseiUmu);
+            this.entity.setEiyoManagement_KaizenTaisei_umu(kaizenTaiseiUmu);
             return this;
         }
 
@@ -2742,69 +2742,69 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * tokuteijigyoshoKasan_Kyotakukaigoshien_umuを設定します。
+         * kyotakukaigoshienUmuを設定します。
          *
-         * @param tokuteijigyoshoKasan_Kyotakukaigoshien_umu 特定事業所加算_居宅介護支援_の有無
+         * @param kyotakukaigoshienUmu 特定事業所加算_居宅介護支援_の有無
          * @return builder
          */
-        public Builder setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(Code tokuteijigyoshoKasan_Kyotakukaigoshien_umu) {
-            Objects.requireNonNull(tokuteijigyoshoKasan_Kyotakukaigoshien_umu);
-            this.entity.setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(tokuteijigyoshoKasan_Kyotakukaigoshien_umu);
+        public Builder setKyotakukaigoshienUmu(Code kyotakukaigoshienUmu) {
+            Objects.requireNonNull(kyotakukaigoshienUmu);
+            this.entity.setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(kyotakukaigoshienUmu);
             return this;
         }
 
         /**
-         * kaigoShienSemmoninSenjuJokinshaNinsuを設定します。
+         * kaigoShienSemmoninを設定します。
          *
-         * @param kaigoShienSemmoninSenjuJokinshaNinsu 介護支援専門員数_専従の常勤者
+         * @param kaigoShienSemmonin 介護支援専門員数_専従の常勤者
          * @return builder
          */
-        public Builder setKaigoShienSemmoninSenjuJokinshaNinsu(Decimal kaigoShienSemmoninSenjuJokinshaNinsu) {
-            this.entity.setKaigoShienSemmoninSenjuJokinshaNinsu(kaigoShienSemmoninSenjuJokinshaNinsu);
+        public Builder setKaigoShienSemmonin(Decimal kaigoShienSemmonin) {
+            this.entity.setKaigoShienSemmoninSenjuJokinshaNinsu(kaigoShienSemmonin);
             return this;
         }
 
         /**
-         * kaigoSienSemmoninSenjuHijokinshaNinsuを設定します。
+         * senjuHijokinshaNinsuを設定します。
          *
-         * @param kaigoSienSemmoninSenjuHijokinshaNinsu 介護支援専門員数_専従の非常勤者
+         * @param senjuHijokinshaNinsu 介護支援専門員数_専従の非常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninSenjuHijokinshaNinsu(Decimal kaigoSienSemmoninSenjuHijokinshaNinsu) {
-            this.entity.setKaigoSienSemmoninSenjuHijokinshaNinsu(kaigoSienSemmoninSenjuHijokinshaNinsu);
+        public Builder setSenjuHijokinshaNinsu(Decimal senjuHijokinshaNinsu) {
+            this.entity.setKaigoSienSemmoninSenjuHijokinshaNinsu(senjuHijokinshaNinsu);
             return this;
         }
 
         /**
-         * kaigoSienSemmoninKemmuJokinshaNinsuを設定します。
+         * kaigoSienSenmoninを設定します。
          *
-         * @param kaigoSienSemmoninKemmuJokinshaNinsu 介護支援専門員数_兼務の常勤者
+         * @param kaigoSienSenmonin 介護支援専門員数_兼務の常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninKemmuJokinshaNinsu(Decimal kaigoSienSemmoninKemmuJokinshaNinsu) {
-            this.entity.setKaigoSienSemmoninKemmuJokinshaNinsu(kaigoSienSemmoninKemmuJokinshaNinsu);
+        public Builder setKaigoSienSenmonin(Decimal kaigoSienSenmonin) {
+            this.entity.setKaigoSienSemmoninKemmuJokinshaNinsu(kaigoSienSenmonin);
             return this;
         }
 
         /**
-         * kaigoSienSemmoninKemmuHijokinshaNinsuを設定します。
+         * kenmuHijokinshaNinsuを設定します。
          *
-         * @param kaigoSienSemmoninKemmuHijokinshaNinsu 介護支援専門員数_兼務の非常勤者
+         * @param kenmuHijokinshaNinsu 介護支援専門員数_兼務の非常勤者
          * @return builder
          */
-        public Builder setKaigoSienSemmoninKemmuHijokinshaNinsu(Decimal kaigoSienSemmoninKemmuHijokinshaNinsu) {
-            this.entity.setKaigoSienSemmoninKemmuHijokinshaNinsu(kaigoSienSemmoninKemmuHijokinshaNinsu);
+        public Builder setKenmuHijokinshaNinsu(Decimal kenmuHijokinshaNinsu) {
+            this.entity.setKaigoSienSemmoninKemmuHijokinshaNinsu(kenmuHijokinshaNinsu);
             return this;
         }
 
         /**
-         * homonkaigoServiceTeikyoSekininshaNinsuを設定します。
+         * homonkaigoServiceを設定します。
          *
-         * @param homonkaigoServiceTeikyoSekininshaNinsu 訪問介護サービス提供責任者数
+         * @param homonkaigoService 訪問介護サービス提供責任者数
          * @return builder
          */
-        public Builder setHomonkaigoServiceTeikyoSekininshaNinsu(Decimal homonkaigoServiceTeikyoSekininshaNinsu) {
-            this.entity.setHomonkaigoServiceTeikyoSekininshaNinsu(homonkaigoServiceTeikyoSekininshaNinsu);
+        public Builder setHomonkaigoService(Decimal homonkaigoService) {
+            this.entity.setHomonkaigoServiceTeikyoSekininshaNinsu(homonkaigoService);
             return this;
         }
 
@@ -2995,14 +2995,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * zaitaku_nyushoSogoRiyoTaisei_umuを設定します。
+         * zaitaku_nyushoUmuを設定します。
          *
-         * @param zaitaku_nyushoSogoRiyoTaisei_umu 在宅・入所相互利用体制の有無
+         * @param zaitaku_nyushoUmu 在宅・入所相互利用体制の有無
          * @return builder
          */
-        public Builder setZaitaku_nyushoSogoRiyoTaisei_umu(JutakuNyushoSogoriyoTaiseiUmu zaitaku_nyushoSogoRiyoTaisei_umu) {
-            Objects.requireNonNull(zaitaku_nyushoSogoRiyoTaisei_umu);
-            this.entity.setZaitaku_nyushoSogoRiyoTaisei_umu(zaitaku_nyushoSogoRiyoTaisei_umu);
+        public Builder setZaitaku_nyushoUmu(JutakuNyushoSogoriyoTaiseiUmu zaitaku_nyushoUmu) {
+            Objects.requireNonNull(zaitaku_nyushoUmu);
+            this.entity.setZaitaku_nyushoSogoRiyoTaisei_umu(zaitaku_nyushoUmu);
             return this;
         }
 
@@ -3019,14 +3019,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * shintaiKosokuHaishiTorikumi_umuを設定します。
+         * shintaiKosokuHaishiUmuを設定します。
          *
-         * @param shintaiKosokuHaishiTorikumi_umu 身体拘束廃止取組の有無
+         * @param shintaiKosokuHaishiUmu 身体拘束廃止取組の有無
          * @return builder
          */
-        public Builder setShintaiKosokuHaishiTorikumi_umu(ShintaikosokuHaishiTorikumiUmu shintaiKosokuHaishiTorikumi_umu) {
-            Objects.requireNonNull(shintaiKosokuHaishiTorikumi_umu);
-            this.entity.setShintaiKosokuHaishiTorikumi_umu(shintaiKosokuHaishiTorikumi_umu);
+        public Builder setShintaiKosokuHaishiUmu(ShintaikosokuHaishiTorikumiUmu shintaiKosokuHaishiUmu) {
+            Objects.requireNonNull(shintaiKosokuHaishiUmu);
+            this.entity.setShintaiKosokuHaishiTorikumi_umu(shintaiKosokuHaishiUmu);
             return this;
         }
 
@@ -3067,66 +3067,66 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_RigakuRyohoI_umuを設定します。
+         * rigakuRyohoI_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無
+         * @param rigakuRyohoI_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅰ_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1 kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu);
+        public Builder setRigakuRyohoI_umu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1 rigakuRyohoI_umu) {
+            Objects.requireNonNull(rigakuRyohoI_umu);
+            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(rigakuRyohoI_umu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2を設定します。
+         * rigakuRyohoII_umu2を設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2
+         * @param rigakuRyohoII_umu2 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_理学療法Ⅱ_の有無2
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(
-                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2);
-            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2);
+        public Builder setRigakuRyohoII_umu2(
+                KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3 rigakuRyohoII_umu2) {
+            Objects.requireNonNull(rigakuRyohoII_umu2);
+            this.entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(rigakuRyohoII_umu2);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_SagyoRyoho_umuを設定します。
+         * sagyoRyoho_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_SagyoRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無
+         * @param sagyoRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_作業療法_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho kobetsuRehaTeikyoTaisei_SagyoRyoho_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_SagyoRyoho_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(kobetsuRehaTeikyoTaisei_SagyoRyoho_umu);
+        public Builder setSagyoRyoho_umu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho sagyoRyoho_umu) {
+            Objects.requireNonNull(sagyoRyoho_umu);
+            this.entity.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(sagyoRyoho_umu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umuを設定します。
+         * gengoChokakuRyoho_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無
+         * @param gengoChokakuRyoho_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_言語聴覚療法_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu);
+        public Builder setGengoChokakuRyoho_umu(
+                KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho gengoChokakuRyoho_umu) {
+            Objects.requireNonNull(gengoChokakuRyoho_umu);
+            this.entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(gengoChokakuRyoho_umu);
             return this;
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_Sonota_umuを設定します。
+         * sonota_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_Sonota_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無
+         * @param sonota_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_その他_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_Sonota_umu(KobetsuRehabilitationTeikyoTaiseiUmu_Sonota kobetsuRehaTeikyoTaisei_Sonota_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_Sonota_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_Sonota_umu(kobetsuRehaTeikyoTaisei_Sonota_umu);
+        public Builder setSonota_umu(KobetsuRehabilitationTeikyoTaiseiUmu_Sonota sonota_umu) {
+            Objects.requireNonNull(sonota_umu);
+            this.entity.setKobetsuRehaTeikyoTaisei_Sonota_umu(sonota_umu);
             return this;
         }
 
@@ -3155,15 +3155,15 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * kobetsuRehaTeikyoTaisei_RehaShidoKanri_umuを設定します。
+         * rehaShidoKanri_umuを設定します。
          *
-         * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無
+         * @param rehaShidoKanri_umu 個別ﾘﾊﾋﾞﾘﾃｰｼｮﾝ提供体制_ﾘﾊﾋﾞﾘﾃｰｼｮﾝ指導管理_の有無
          * @return builder
          */
-        public Builder setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(
-                KobetsuRehabilitationTeikyoTaiseiUmu kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu) {
-            Objects.requireNonNull(kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu);
-            this.entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu);
+        public Builder setRehaShidoKanri_umu(
+                KobetsuRehabilitationTeikyoTaiseiUmu rehaShidoKanri_umu) {
+            Objects.requireNonNull(rehaShidoKanri_umu);
+            this.entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(rehaShidoKanri_umu);
             return this;
         }
 
@@ -3180,28 +3180,28 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * chuSankanChiikiShokiboJigyoshoKasan_chiikiを設定します。
+         * chuSankanChiikiShokiboChiikiを設定します。
          *
-         * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki 中山間地域等における小規模事業所加算_地域に関する状況
+         * @param chuSankanChiikiShokiboChiiki 中山間地域等における小規模事業所加算_地域に関する状況
          * @return builder
          */
-        public Builder setChuSankanChiikiShokiboJigyoshoKasan_chiiki(
-                ShokiboJigyoshoKasanInMountainArea_SituationAboutArea chuSankanChiikiShokiboJigyoshoKasan_chiiki) {
-            Objects.requireNonNull(chuSankanChiikiShokiboJigyoshoKasan_chiiki);
-            this.entity.setChuSankanChiikiShokiboJigyoshoKasan_chiiki(chuSankanChiikiShokiboJigyoshoKasan_chiiki);
+        public Builder setChuSankanChiikiShokiboChiiki(
+                ShokiboJigyoshoKasanInMountainArea_SituationAboutArea chuSankanChiikiShokiboChiiki) {
+            Objects.requireNonNull(chuSankanChiikiShokiboChiiki);
+            this.entity.setChuSankanChiikiShokiboJigyoshoKasan_chiiki(chuSankanChiikiShokiboChiiki);
             return this;
         }
 
         /**
-         * chuSankanChiikiShokiboJigyoushoKasan_kiboを設定します。
+         * chuSankanChiikiShokiboKiboを設定します。
          *
-         * @param chuSankanChiikiShokiboJigyoushoKasan_kibo 中山間地域等における小規模事業所加算_規模に関する状況
+         * @param chuSankanChiikiShokiboKibo 中山間地域等における小規模事業所加算_規模に関する状況
          * @return builder
          */
-        public Builder setChuSankanChiikiShokiboJigyoushoKasan_kibo(
-                ShokiboJigyoshoKasanInMountainArea_SituationAboutScale chuSankanChiikiShokiboJigyoushoKasan_kibo) {
-            Objects.requireNonNull(chuSankanChiikiShokiboJigyoushoKasan_kibo);
-            this.entity.setChuSankanChiikiShokiboJigyoushoKasan_kibo(chuSankanChiikiShokiboJigyoushoKasan_kibo);
+        public Builder setChuSankanChiikiShokiboKibo(
+                ShokiboJigyoshoKasanInMountainArea_SituationAboutScale chuSankanChiikiShokiboKibo) {
+            Objects.requireNonNull(chuSankanChiikiShokiboKibo);
+            this.entity.setChuSankanChiikiShokiboJigyoushoKasan_kibo(chuSankanChiikiShokiboKibo);
             return this;
         }
 
@@ -3223,21 +3223,21 @@ public class KaigoJigyoshaShiteiService {
          * @param ninchishoTankiShuchuRehabilitationKasan 認知症短期集中リハビリテーション加算
          * @return builder
          */
-        public Builder setNinchishoTankiShuchuRehabilitationKasan(NinchishoTankiShuchuRehabilitationKasan ninchishoTankiShuchuRehabilitationKasan) {
-            Objects.requireNonNull(ninchishoTankiShuchuRehabilitationKasan);
-            this.entity.setNinchishoTankiShuchuRehabilitationKasan(ninchishoTankiShuchuRehabilitationKasan);
+        public Builder setNinchishoTankiShuchuKasan(NinchishoTankiShuchuRehabilitationKasan ninchishoTankiShuchuKasan) {
+            Objects.requireNonNull(ninchishoTankiShuchuKasan);
+            this.entity.setNinchishoTankiShuchuRehabilitationKasan(ninchishoTankiShuchuKasan);
             return this;
         }
 
         /**
-         * jakunenseiNinchishoRiyoushaUkeeireKasanを設定します。
+         * jakunenseiNinchishoKasanを設定します。
          *
-         * @param jakunenseiNinchishoRiyoushaUkeeireKasan 若年性認知症利用者_入所者・患者_受入加算
+         * @param jakunenseiNinchishoKasan 若年性認知症利用者_入所者・患者_受入加算
          * @return builder
          */
-        public Builder setJakunenseiNinchishoRiyoushaUkeeireKasan(JakunenseiNinchishoRiyoshaUkeireKasan jakunenseiNinchishoRiyoushaUkeeireKasan) {
-            Objects.requireNonNull(jakunenseiNinchishoRiyoushaUkeeireKasan);
-            this.entity.setJakunenseiNinchishoRiyoushaUkeeireKasan(jakunenseiNinchishoRiyoushaUkeeireKasan);
+        public Builder setJakunenseiNinchishoKasan(JakunenseiNinchishoRiyoshaUkeireKasan jakunenseiNinchishoKasan) {
+            Objects.requireNonNull(jakunenseiNinchishoKasan);
+            this.entity.setJakunenseiNinchishoRiyoushaUkeeireKasan(jakunenseiNinchishoKasan);
             return this;
         }
 
@@ -3278,14 +3278,14 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * nichijoSeikatsuKeizokuShienKasanを設定します。
+         * nichijoSeikatsuKeizokuShienを設定します。
          *
-         * @param nichijoSeikatsuKeizokuShienKasan 日常生活継続支援加算
+         * @param nichijoSeikatsuKeizokuShien 日常生活継続支援加算
          * @return builder
          */
-        public Builder setNichijoSeikatsuKeizokuShienKasan(NichijoSeikatsuKeizokuSupprtKasan nichijoSeikatsuKeizokuShienKasan) {
-            Objects.requireNonNull(nichijoSeikatsuKeizokuShienKasan);
-            this.entity.setNichijoSeikatsuKeizokuShienKasan(nichijoSeikatsuKeizokuShienKasan);
+        public Builder setNichijoSeikatsuKeizokuShien(NichijoSeikatsuKeizokuSupprtKasan nichijoSeikatsuKeizokuShien) {
+            Objects.requireNonNull(nichijoSeikatsuKeizokuShien);
+            this.entity.setNichijoSeikatsuKeizokuShienKasan(nichijoSeikatsuKeizokuShien);
             return this;
         }
 
@@ -3350,100 +3350,100 @@ public class KaigoJigyoshaShiteiService {
         }
 
         /**
-         * serviceTeikyoTaiseiKyokaKasan_Karadokogataを設定します。
+         * karadokogataを設定します。
          *
-         * @param serviceTeikyoTaiseiKyokaKasan_Karadokogata サービス提供体制強化加算_空床型
+         * @param karadokogata サービス提供体制強化加算_空床型
          * @return builder
          */
-        public Builder setServiceTeikyoTaiseiKyokaKasan_Karadokogata(
-                ServiceTeikyoTaiseiKyokaKasanForKushoType serviceTeikyoTaiseiKyokaKasan_Karadokogata) {
-            Objects.requireNonNull(serviceTeikyoTaiseiKyokaKasan_Karadokogata);
-            this.entity.setServiceTeikyoTaiseiKyokaKasan_Karadokogata(serviceTeikyoTaiseiKyokaKasan_Karadokogata);
+        public Builder setKaradokogata(
+                ServiceTeikyoTaiseiKyokaKasanForKushoType karadokogata) {
+            Objects.requireNonNull(karadokogata);
+            this.entity.setServiceTeikyoTaiseiKyokaKasan_Karadokogata(karadokogata);
             return this;
         }
 
         /**
-         * nitchuShintaikaigoTaise_20funmiman_umuを設定します。
+         * nitchu_20funmiman_umuを設定します。
          *
-         * @param nitchuShintaikaigoTaise_20funmiman_umu 日中の身体介護２０分未満体制の有無
+         * @param nitchu_20funmiman_umu 日中の身体介護２０分未満体制の有無
          * @return builder
          */
-        public Builder setNitchuShintaikaigoTaise_20funmiman_umu(
-                ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu nitchuShintaikaigoTaise_20funmiman_umu) {
-            Objects.requireNonNull(nitchuShintaikaigoTaise_20funmiman_umu);
-            this.entity.setNitchuShintaikaigoTaise_20funmiman_umu(nitchuShintaikaigoTaise_20funmiman_umu);
+        public Builder setNitchu_20funmiman_umu(
+                ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu nitchu_20funmiman_umu) {
+            Objects.requireNonNull(nitchu_20funmiman_umu);
+            this.entity.setNitchuShintaikaigoTaise_20funmiman_umu(nitchu_20funmiman_umu);
             return this;
         }
 
         /**
-         * serviceTeikyoSekininshaTaisei_umuを設定します。
+         * serviceTeikyoSekininshaUmuを設定します。
          *
-         * @param serviceTeikyoSekininshaTaisei_umu サービス提供責任者体制の有無
+         * @param serviceTeikyoSekininshaUmu サービス提供責任者体制の有無
          * @return builder
          */
-        public Builder setServiceTeikyoSekininshaTaisei_umu(ServiceTeikyoSekininshaTaiseiUmu serviceTeikyoSekininshaTaisei_umu) {
-            Objects.requireNonNull(serviceTeikyoSekininshaTaisei_umu);
-            this.entity.setServiceTeikyoSekininshaTaisei_umu(serviceTeikyoSekininshaTaisei_umu);
+        public Builder setServiceTeikyoSekininshaUmu(ServiceTeikyoSekininshaTaiseiUmu serviceTeikyoSekininshaUmu) {
+            Objects.requireNonNull(serviceTeikyoSekininshaUmu);
+            this.entity.setServiceTeikyoSekininshaTaisei_umu(serviceTeikyoSekininshaUmu);
             return this;
         }
 
         /**
-         * doitsuTatemonoKyojuRiyoshaGenzan_umuを設定します。
+         * doitsuTatemonoKyojuUmuを設定します。
          *
-         * @param doitsuTatemonoKyojuRiyoshaGenzan_umu 同一建物に居住する利用者の減算の有無
+         * @param doitsuTatemonoKyojuUmu 同一建物に居住する利用者の減算の有無
          * @return builder
          */
-        public Builder setDoitsuTatemonoKyojuRiyoshaGenzan_umu(DoitsuTatemonoKyojuUserGenzanUmu doitsuTatemonoKyojuRiyoshaGenzan_umu) {
-            Objects.requireNonNull(doitsuTatemonoKyojuRiyoshaGenzan_umu);
-            this.entity.setDoitsuTatemonoKyojuRiyoshaGenzan_umu(doitsuTatemonoKyojuRiyoshaGenzan_umu);
+        public Builder setDoitsuTatemonoKyojuUmu(DoitsuTatemonoKyojuUserGenzanUmu doitsuTatemonoKyojuUmu) {
+            Objects.requireNonNull(doitsuTatemonoKyojuUmu);
+            this.entity.setDoitsuTatemonoKyojuRiyoshaGenzan_umu(doitsuTatemonoKyojuUmu);
             return this;
         }
 
         /**
-         * kinkyuTankiNyushoTaiseiKakuhoKasanを設定します。
+         * kinkyuTankiNyushoTaiseiを設定します。
          *
-         * @param kinkyuTankiNyushoTaiseiKakuhoKasan 緊急短期入所体制確保加算
+         * @param kinkyuTankiNyushoTaisei 緊急短期入所体制確保加算
          * @return builder
          */
-        public Builder setKinkyuTankiNyushoTaiseiKakuhoKasan(KinkyuTankinyushoTaiseiKakuhoKasan kinkyuTankiNyushoTaiseiKakuhoKasan) {
-            Objects.requireNonNull(kinkyuTankiNyushoTaiseiKakuhoKasan);
-            this.entity.setKinkyuTankiNyushoTaiseiKakuhoKasan(kinkyuTankiNyushoTaiseiKakuhoKasan);
+        public Builder setKinkyuTankiNyushoTaisei(KinkyuTankinyushoTaiseiKakuhoKasan kinkyuTankiNyushoTaisei) {
+            Objects.requireNonNull(kinkyuTankiNyushoTaisei);
+            this.entity.setKinkyuTankiNyushoTaiseiKakuhoKasan(kinkyuTankiNyushoTaisei);
             return this;
         }
 
         /**
-         * zaitakuFukki_ZaitakuRyoyoShienKinoKasanを設定します。
+         * zaitakuFukki_Zaitakuを設定します。
          *
-         * @param zaitakuFukki_ZaitakuRyoyoShienKinoKasan 在宅復帰_在宅療養支援機能加算
+         * @param zaitakuFukki_Zaitaku 在宅復帰_在宅療養支援機能加算
          * @return builder
          */
-        public Builder setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(ZaitakuFukkiZaitakuRyoyoSupportKinoKasan zaitakuFukki_ZaitakuRyoyoShienKinoKasan) {
-            Objects.requireNonNull(zaitakuFukki_ZaitakuRyoyoShienKinoKasan);
-            this.entity.setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(zaitakuFukki_ZaitakuRyoyoShienKinoKasan);
+        public Builder setZaitakuFukki_Zaitaku(ZaitakuFukkiZaitakuRyoyoSupportKinoKasan zaitakuFukki_Zaitaku) {
+            Objects.requireNonNull(zaitakuFukki_Zaitaku);
+            this.entity.setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(zaitakuFukki_Zaitaku);
             return this;
         }
 
         /**
-         * seikatuKinoKojoGroupKatsudoKasanを設定します。
+         * seikatuKinoKojoGroupKatsudoを設定します。
          *
-         * @param seikatuKinoKojoGroupKatsudoKasan 生活機能向上グループ活動加算
+         * @param seikatuKinoKojoGroupKatsudo 生活機能向上グループ活動加算
          * @return builder
          */
-        public Builder setSeikatuKinoKojoGroupKatsudoKasan(SeikatsuKinoKojoGroupKatsudoKasan seikatuKinoKojoGroupKatsudoKasan) {
-            Objects.requireNonNull(seikatuKinoKojoGroupKatsudoKasan);
-            this.entity.setSeikatuKinoKojoGroupKatsudoKasan(seikatuKinoKojoGroupKatsudoKasan);
+        public Builder setSeikatuKinoKojoGroupKatsudo(SeikatsuKinoKojoGroupKatsudoKasan seikatuKinoKojoGroupKatsudo) {
+            Objects.requireNonNull(seikatuKinoKojoGroupKatsudo);
+            this.entity.setSeikatuKinoKojoGroupKatsudoKasan(seikatuKinoKojoGroupKatsudo);
             return this;
         }
 
         /**
-         * kaigoShokuinShoguKaizenKasanを設定します。
+         * kaigoShokuinShoguKaizenを設定します。
          *
-         * @param kaigoShokuinShoguKaizenKasan 介護職員処遇改善加算
+         * @param kaigoShokuinShoguKaizen 介護職員処遇改善加算
          * @return builder
          */
-        public Builder setKaigoShokuinShoguKaizenKasan(KaigoStaffShoguKaizenKasan kaigoShokuinShoguKaizenKasan) {
-            Objects.requireNonNull(kaigoShokuinShoguKaizenKasan);
-            this.entity.setKaigoShokuinShoguKaizenKasan(kaigoShokuinShoguKaizenKasan);
+        public Builder setKaigoShokuinShoguKaizen(KaigoStaffShoguKaizenKasan kaigoShokuinShoguKaizen) {
+            Objects.requireNonNull(kaigoShokuinShoguKaizen);
+            this.entity.setKaigoShokuinShoguKaizenKasan(kaigoShokuinShoguKaizen);
             return this;
         }
 
@@ -3458,7 +3458,8 @@ public class KaigoJigyoshaShiteiService {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

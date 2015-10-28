@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
@@ -47,8 +48,8 @@ public class HokenryoDankaiHanteiHohoHozonTest {
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHanteiHohoHozon instance = new 第4期(hokenryodankaiinput);
-        String expResult = "4";
-        String result = instance.世帯非課税最大段階数取得();
+        RString expResult = new RString("4");
+        RString result = instance.世帯非課税最大段階数取得();
         assertEquals(expResult, result);
     }
 
@@ -71,8 +72,8 @@ public class HokenryoDankaiHanteiHohoHozonTest {
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHanteiHohoHozon instance = new 第4期(hokenryodankaiinput);
-        String expResult = "6";
-        String result = instance.本人非課税最大段階数取得();
+        RString expResult = new RString("6");
+        RString result = instance.本人非課税最大段階数取得();
         assertEquals(expResult, result);
     }
 

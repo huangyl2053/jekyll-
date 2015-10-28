@@ -13,7 +13,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.config;
 public final class ChohyoKyotsuJushoHenshuHoho {
 
     /**
-     * 管内住所編集
+     * 管内住所編集。
      */
     public enum KannaiJushoHenshu implements IConfigKey {
 
@@ -36,7 +36,7 @@ public final class ChohyoKyotsuJushoHenshuHoho {
     }
 
     /**
-     * 住所編集
+     * 住所編集。
      */
     public enum JushoHenshu implements IConfigKey {
 

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -37,14 +38,14 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei1() {
 
-        System.out.println("段階使用あり");
+        System.out.println(new RString("段階使用あり"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(100000));
 
@@ -55,49 +56,49 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setMishinkokuDankaiShiyo("使用する");
-        seigyojoho.setMishinkokuDankai("3");
+        seigyojoho.setMishinkokuDankaiShiyo(new RString("使用する"));
+        seigyojoho.setMishinkokuDankai(new RString("3"));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("6");
-        expResult.get保険料段階04月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階05月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階06月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階07月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階08月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階09月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階10月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階11月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階12月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階01月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階02月().setHokenryoDankai("第4段階２");
-        expResult.get保険料段階03月().setHokenryoDankai("第4段階２");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("6"));
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第4段階２"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第4段階２"));
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
         if (!HokenryoDankaiEquals(expResult, result)) {
             fail("段階使用あり 保険料段階failed");
@@ -116,14 +117,14 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei2() {
 
-        System.out.println("段階使用なし");
+        System.out.println(new RString("段階使用なし"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("非課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(800000));
 
@@ -134,49 +135,49 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setMishinkokuDankaiShiyo("使用しない");
-        seigyojoho.setMishinkokuKazeiKubun("課税");
+        seigyojoho.setMishinkokuDankaiShiyo(new RString("使用しない"));
+        seigyojoho.setMishinkokuKazeiKubun(new RString("課税"));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("8");
-        expResult.get保険料段階04月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階05月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階06月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階07月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階08月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階09月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階10月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階11月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階12月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階01月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階02月().setHokenryoDankai("第6段階");
-        expResult.get保険料段階03月().setHokenryoDankai("第6段階");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("8"));
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第6段階"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第6段階"));
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
         if (!HokenryoDankaiEquals(expResult, result)) {
             fail("段階使用なし 保険料段階failed");
@@ -193,14 +194,14 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei3() {
 
-        System.out.println("段階使用有無全無 5段階");
+        System.out.println(new RString("段階使用有無全無 5段階"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(200000));
 
@@ -211,47 +212,47 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("5");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("5"));
 
-        expResult.get保険料段階04月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階05月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階06月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階07月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階08月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階09月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階10月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階11月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階12月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階01月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階02月().setHokenryoDankai("第4段階１");
-        expResult.get保険料段階03月().setHokenryoDankai("第4段階１");
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第4段階１"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第4段階１"));
 
         expResult.get保険料段階04月().setTokureiTaisho(true);
         expResult.get保険料段階05月().setTokureiTaisho(true);
@@ -282,17 +283,17 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei4() {
 
-        System.out.println("段階使用有無全無 途中から生保開始");
+        System.out.println(new RString("段階使用有無全無 途中から生保開始"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("非課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(1300000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(0));
-        fukakonkyo.setSeihoStartYMD(toDate("2014/07/25"));
+        fukakonkyo.setSeihoStartYMD(toDate(new RString("2014/07/25")));
 
         seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
         seigyojoho.setKijunNenkinShunyu02(new Decimal(500000));
@@ -301,57 +302,57 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("4");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("4"));
 
-        expResult.get保険料段階04月().setHokenryoDankai("第3段階②");
-        expResult.get保険料段階05月().setHokenryoDankai("第3段階②");
-        expResult.get保険料段階06月().setHokenryoDankai("第3段階②");
-        expResult.get保険料段階07月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階08月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階09月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階10月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階11月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階12月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階01月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階02月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階03月().setHokenryoDankai("第1段階");
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第3段階②"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第3段階②"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第3段階②"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第1段階"));
 
-        expResult.get保険料段階07月().setSystemDankai("1");
-        expResult.get保険料段階08月().setSystemDankai("1");
-        expResult.get保険料段階09月().setSystemDankai("1");
-        expResult.get保険料段階10月().setSystemDankai("1");
-        expResult.get保険料段階11月().setSystemDankai("1");
-        expResult.get保険料段階12月().setSystemDankai("1");
-        expResult.get保険料段階01月().setSystemDankai("1");
-        expResult.get保険料段階02月().setSystemDankai("1");
-        expResult.get保険料段階03月().setSystemDankai("1");
+        expResult.get保険料段階07月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階08月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階09月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階10月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階11月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階12月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階01月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階02月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階03月().setSystemDankai(new RString("1"));
 
         expResult.get保険料段階07月().setTokureiTaisho(false);
         expResult.get保険料段階08月().setTokureiTaisho(false);
@@ -378,18 +379,18 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei5() {
 
-        System.out.println("段階使用有無全無 途中で生保終了");
+        System.out.println(new RString("段階使用有無全無 途中で生保終了"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("非課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(0));
-        fukakonkyo.setSeihoStartYMD(toDate("2014/01/25"));
-        fukakonkyo.setSeihoEndYMD(toDate("2014/07/25"));
+        fukakonkyo.setSeihoStartYMD(toDate(new RString("2014/01/25")));
+        fukakonkyo.setSeihoEndYMD(toDate(new RString("2014/07/25")));
 
         seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
         seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
@@ -398,60 +399,60 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("4");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("4"));
 
-        expResult.get保険料段階01月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階02月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階03月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階04月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階05月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階06月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階07月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階08月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階09月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階10月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階11月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階12月().setHokenryoDankai("第1段階");
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第1段階"));
 
-        expResult.get保険料段階01月().setSystemDankai("1");
-        expResult.get保険料段階02月().setSystemDankai("1");
-        expResult.get保険料段階03月().setSystemDankai("1");
-        expResult.get保険料段階04月().setSystemDankai("1");
-        expResult.get保険料段階05月().setSystemDankai("1");
-        expResult.get保険料段階06月().setSystemDankai("1");
-        expResult.get保険料段階07月().setSystemDankai("1");
-        expResult.get保険料段階08月().setSystemDankai("1");
-        expResult.get保険料段階09月().setSystemDankai("1");
-        expResult.get保険料段階10月().setSystemDankai("1");
-        expResult.get保険料段階11月().setSystemDankai("1");
-        expResult.get保険料段階12月().setSystemDankai("1");
+        expResult.get保険料段階01月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階02月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階03月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階04月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階05月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階06月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階07月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階08月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階09月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階10月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階11月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階12月().setSystemDankai(new RString("1"));
 
         expResult.get保険料段階01月().setTokureiTaisho(false);
         expResult.get保険料段階02月().setTokureiTaisho(false);
@@ -481,18 +482,18 @@ public class HokenryoDankaiHanteiTest {
     @Test
     public void testHokenryoDankaiHantei6() {
 
-        System.out.println("段階使用有無全無 途中で生保開始終了");
+        System.out.println(new RString("段階使用有無全無 途中で生保開始終了"));
 
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         SeigyoJoho seigyojoho = new SeigyoJoho();
         HokenryoDankaiInput hokenryodankaiinput;
 
-        fukakonkyo.setHonninKazeiKubun("非課税");
-        fukakonkyo.setSetaiKazeiKubun("非課税");
+        fukakonkyo.setHonninKazeiKubun(new RString("非課税"));
+        fukakonkyo.setSetaiKazeiKubun(new RString("非課税"));
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(300001));
-        fukakonkyo.setSeihoStartYMD(toDate("2015/01/25"));
-        fukakonkyo.setSeihoEndYMD(toDate("2015/02/25"));
+        fukakonkyo.setSeihoStartYMD(toDate(new RString("2015/01/25")));
+        fukakonkyo.setSeihoEndYMD(toDate(new RString("2015/02/25")));
 
         seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
         seigyojoho.setKijunNenkinShunyu02(new Decimal(1200000));
@@ -501,51 +502,51 @@ public class HokenryoDankaiHanteiTest {
         seigyojoho.setKijunShotokuKingaku01(new Decimal(1200000));
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
 
-        seigyojoho.setHokenryoDankaiHyoki01("第1段階");
-        seigyojoho.setHokenryoDankaiHyoki02("第2段階");
-        seigyojoho.setHokenryoDankaiHyoki03("第3段階①");
-        seigyojoho.setHokenryoDankaiHyoki04("第3段階②");
-        seigyojoho.setHokenryoDankaiHyoki05("第4段階１");
-        seigyojoho.setHokenryoDankaiHyoki06("第4段階２");
-        seigyojoho.setHokenryoDankaiHyoki07("第5段階");
-        seigyojoho.setHokenryoDankaiHyoki08("第6段階");
-        seigyojoho.setHokenryoDankaiHyoki09("第7段階");
-        seigyojoho.setHokenryoDankaiHyoki10("第8段階");
-        seigyojoho.setHokenryoDankaiHyoki11("第9段階");
-        seigyojoho.setHokenryoDankaiHyoki12("第10段階");
-        seigyojoho.setHokenryoDankaiHyoki13("第11段階");
-        seigyojoho.setHokenryoDankaiHyoki14("第12段階");
-        seigyojoho.setHokenryoDankaiHyoki15("第13段階");
-        seigyojoho.setHokenryoDankaiHyoki16("第14段階");
-        seigyojoho.setHokenryoDankaiHyoki17("第15段階");
-        seigyojoho.setHokenryoDankaiHyoki18("第16段階");
-        seigyojoho.setHokenryoDankaiHyoki19("第17段階");
-        seigyojoho.setHokenryoDankaiHyoki20("第18段階");
+        seigyojoho.setHokenryoDankaiHyoki01(new RString("第1段階"));
+        seigyojoho.setHokenryoDankaiHyoki02(new RString("第2段階"));
+        seigyojoho.setHokenryoDankaiHyoki03(new RString("第3段階①"));
+        seigyojoho.setHokenryoDankaiHyoki04(new RString("第3段階②"));
+        seigyojoho.setHokenryoDankaiHyoki05(new RString("第4段階１"));
+        seigyojoho.setHokenryoDankaiHyoki06(new RString("第4段階２"));
+        seigyojoho.setHokenryoDankaiHyoki07(new RString("第5段階"));
+        seigyojoho.setHokenryoDankaiHyoki08(new RString("第6段階"));
+        seigyojoho.setHokenryoDankaiHyoki09(new RString("第7段階"));
+        seigyojoho.setHokenryoDankaiHyoki10(new RString("第8段階"));
+        seigyojoho.setHokenryoDankaiHyoki11(new RString("第9段階"));
+        seigyojoho.setHokenryoDankaiHyoki12(new RString("第10段階"));
+        seigyojoho.setHokenryoDankaiHyoki13(new RString("第11段階"));
+        seigyojoho.setHokenryoDankaiHyoki14(new RString("第12段階"));
+        seigyojoho.setHokenryoDankaiHyoki15(new RString("第13段階"));
+        seigyojoho.setHokenryoDankaiHyoki16(new RString("第14段階"));
+        seigyojoho.setHokenryoDankaiHyoki17(new RString("第15段階"));
+        seigyojoho.setHokenryoDankaiHyoki18(new RString("第16段階"));
+        seigyojoho.setHokenryoDankaiHyoki19(new RString("第17段階"));
+        seigyojoho.setHokenryoDankaiHyoki20(new RString("第18段階"));
 
         hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
         hokenryodankaiinput.setFukaKonkyo(fukakonkyo);
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("3");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput(new RString("3"));
 
-        expResult.get保険料段階04月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階05月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階06月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階07月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階08月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階09月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階10月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階11月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階12月().setHokenryoDankai("第3段階①");
-        expResult.get保険料段階01月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階02月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階03月().setHokenryoDankai("第1段階");
+        expResult.get保険料段階04月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階05月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階06月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階07月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階08月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階09月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階10月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階11月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階12月().setHokenryoDankai(new RString("第3段階①"));
+        expResult.get保険料段階01月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階02月().setHokenryoDankai(new RString("第1段階"));
+        expResult.get保険料段階03月().setHokenryoDankai(new RString("第1段階"));
 
-        expResult.get保険料段階01月().setSystemDankai("1");
-        expResult.get保険料段階02月().setSystemDankai("1");
-        expResult.get保険料段階03月().setSystemDankai("1");
+        expResult.get保険料段階01月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階02月().setSystemDankai(new RString("1"));
+        expResult.get保険料段階03月().setSystemDankai(new RString("1"));
 
         expResult.get保険料段階04月().setTokureiTaisho(true);
         expResult.get保険料段階05月().setTokureiTaisho(true);
@@ -572,10 +573,10 @@ public class HokenryoDankaiHanteiTest {
         }
     }
 
-    protected static Date toDate(String str) {
+    protected static Date toDate(RString str) {
         Date date = null;
         try {
-            date = DateFormat.getDateInstance().parse(str);
+            date = DateFormat.getDateInstance().parse(str.toString());
         } catch (ParseException pe) {
 
         }

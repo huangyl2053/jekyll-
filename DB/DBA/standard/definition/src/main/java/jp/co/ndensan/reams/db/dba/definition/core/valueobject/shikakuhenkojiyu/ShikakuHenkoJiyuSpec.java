@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum ShikakuHenkoJiyuSpec implements IPredicate<ShikakuHenkoJiyu> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
 
@@ -23,7 +23,7 @@ public enum ShikakuHenkoJiyuSpec implements IPredicate<ShikakuHenkoJiyu> {
                 }
             },
     /**
-     * 名称がNullでないこと
+     * 名称がNullでないこと。
      */
     名称がNullでないこと {
 

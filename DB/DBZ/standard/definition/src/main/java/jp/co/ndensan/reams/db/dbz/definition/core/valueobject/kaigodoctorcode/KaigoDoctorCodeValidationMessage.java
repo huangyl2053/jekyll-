@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link KaigoDoctorCode}のバリデーションメッセージです。
+ * {@link KaigoDoctorCode}のバリデーションメッセージクラスです。
  */
 public enum KaigoDoctorCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(KaigoDoctorCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum KaigoDoctorCodeValidationMessage implements IValidationMessage {
     public enum KaigoDoctorCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "介護医師コードを指定してください。");
         private final int no;

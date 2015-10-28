@@ -10,12 +10,13 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険者の名称です。
+ * 保険者の名称クラスです。
  *
  * @author N3327 三浦 凌
  */
 public final class HokenshaName implements IValueObject<RString>, Comparable<HokenshaName> {
 
+    private static final int twenty = 20;
     /**
      * 最大長です。
      */

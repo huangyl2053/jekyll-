@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 老人保険受給者番号の体系です。
+ * 老人保険受給者番号の体系クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -20,22 +20,22 @@ public enum RokenJukyushaNoTaikei {
 
     /**
      * 住民コード<br/>
-     * コード:"1"
+     * コード:"1"。
      */
     住民コード("1"),
     /**
      * 医療給付サブシステム<br/>
-     * コード:"2"
+     * コード:"2"。
      */
     医療給付サブシステム("2"),
     /**
      * 市町村独自<br/>
-     * コード:"3"
+     * コード:"3"。
      */
     市町村独自("3"),
     /**
      * 設定なし<br/>
-     * コード:"" (空文字)
+     * コード:"" (空文字)。
      */
     設定なし("");
     private final RString theCode;

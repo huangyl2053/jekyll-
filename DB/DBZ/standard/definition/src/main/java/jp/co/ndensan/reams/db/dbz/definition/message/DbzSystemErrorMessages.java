@@ -10,7 +10,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * DBZのシステムエラーメッセージ定義列挙型です。
+ * DBZのシステムエラーメッセージ定義列挙型クラスです。
  *
  * @author N9606 漢那 憲作
  */
@@ -69,13 +69,13 @@ public enum DbzSystemErrorMessages {
             throw new IllegalArgumentException("置換予定部分の数と、指定する置換文字列の数を一致させてください。");
         }
 
-        String replaced = message.toString();
+        RString replaced = new RString(message.toString());
         int i = 0;
 
         while (true) {
-            replaced = replaced.replaceFirst(Pattern.quote(REPLACEE.toString()), replacers[i++]);
+            replaced = new RString(replaced.toString().replaceFirst(Pattern.quote(REPLACEE.toString()), replacers[i++]));
             if (replaced.indexOf(REPLACEE.toString()) < 0) {
-                return replaced;
+                return replaced.toString();
             }
         }
     }

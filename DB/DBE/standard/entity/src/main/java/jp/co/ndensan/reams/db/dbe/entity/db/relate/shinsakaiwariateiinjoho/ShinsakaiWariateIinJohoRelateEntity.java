@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho
 /**
  * 介護認定審査会割当情報RelateEntityクラスです。
  */
-@lombok.Getter
-@lombok.Setter
 public class ShinsakaiWariateIinJohoRelateEntity {
 
     /**
@@ -55,6 +53,38 @@ public class ShinsakaiWariateIinJohoRelateEntity {
             entity.initializeMd5();
         }
 
+    }
+
+    /**
+     * 介護認定審査会割当委員情報Entityを取得します。
+     * @return 介護認定審査会割当委員情報Entity
+     */
+    public DbT5503ShinsakaiWariateIinJohoEntity get介護認定審査会割当委員情報Entity() {
+        return 介護認定審査会割当委員情報Entity;
+    }
+
+    /**
+     * 介護認定審査会割当委員情報Entityを設定します。
+     * @param 介護認定審査会割当委員情報Entity 
+     */
+    public void set介護認定審査会割当委員情報Entity(DbT5503ShinsakaiWariateIinJohoEntity 介護認定審査会割当委員情報Entity) {
+        this.介護認定審査会割当委員情報Entity = 介護認定審査会割当委員情報Entity;
+    }
+
+     /**
+     * 要介護認定申請情報Entityを取得します。
+     * @return 要介護認定申請情報Entity
+     */
+    public List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報Entity() {
+        return 要介護認定申請情報Entity;
+    }
+
+     /**
+     * 要介護認定申請情報Entityを設定します。
+     * @param 要介護認定申請情報Entity
+     */
+    public void set要介護認定申請情報Entity(List<DbT5101NinteiShinseiJohoEntity> 要介護認定申請情報Entity) {
+        this.要介護認定申請情報Entity = 要介護認定申請情報Entity;
     }
 
 }

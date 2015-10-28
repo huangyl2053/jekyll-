@@ -9,15 +9,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003Kibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
-//import jp.co.ndensan.reams.db.dbb.model.fuka.KibetsuModel;
-//import jp.co.ndensan.reams.db.dbb.model.relate.fuka.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
-//import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IPersistable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.UrT0705ChoteiKyotsuDac;
-//import jp.co.ndensan.reams.ur.urc.entity.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -104,12 +100,11 @@ public class KibetsuChoteiKyotsuDac implements IPersistable<UrT0705ChoteiKyotsuE
         return 期別調定共通リスト;
     }
 
-    private UrT0705ChoteiKyotsuEntity select調定共通ByKey(Long 調定ID) {
-        UrT0705ChoteiKyotsuEntity entity = 調定共通Dac.selectByKey(調定ID);
-
-        return (entity == null) ? null : entity;
-    }
-
+//    private UrT0705ChoteiKyotsuEntity select調定共通ByKey(Long 調定ID) {
+//        UrT0705ChoteiKyotsuEntity entity = 調定共通Dac.selectByKey(調定ID);
+//
+//        return (entity == null) ? null : entity;
+//    }
     private UrT0705ChoteiKyotsuEntity createModel(DbT2003KibetsuEntity 介護期別エンティティ) {
         if (介護期別エンティティ == null) {
             return null;

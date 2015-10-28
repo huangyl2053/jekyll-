@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.business.core;
 
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;

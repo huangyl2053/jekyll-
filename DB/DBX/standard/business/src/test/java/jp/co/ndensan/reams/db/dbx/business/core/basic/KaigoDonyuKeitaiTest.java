@@ -4,20 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -137,8 +126,8 @@ public class KaigoDonyuKeitaiTest extends DbxTestBase {
         }
 
         @Test
-        public void get支所管理有無フラグは_entityが持つ支所管理有無フラグを返す() {
-            assertThat(sut.get支所管理有無フラグ(), is(KaigoDonyuKeitaiEntity.getShishoKanriUmuFlag()));
+        public void is支所管理有無フラグは_entityが持つ支所管理有無フラグを返す() {
+            assertThat(sut.is支所管理有無フラグ(), is(KaigoDonyuKeitaiEntity.getShishoKanriUmuFlag()));
         }
     }
 

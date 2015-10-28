@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IshiJokyo {
 
     /**
-     * 有効 コード : "1"
+     * 有効 コード : "1"。
      */
     有効(new RString("1")),
     /**
-     * 無効 コード : "0"
+     * 無効 コード : "0"。
      */
     無効(new RString("0"));
     private final RString jokyo;

@@ -20,8 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 認知症高齢者日常生活自立度が、どの程度確からしいかを表すコードです。
  *
  */
-public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<NinchishoKoreishaJiritsudoGaizenseiHyokaCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
-//public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<NinchishoKoreishaJiritsudoGaizenseiHyokaCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<NinchishoKoreishaJiritsudoGaizenseiHyokaCode>,
+        IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+//public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<NinchishoKoreishaJiritsudoGaizenseiHyokaCode>,
+//    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
 
@@ -45,7 +47,8 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements Comparable<
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/> 
+     * {@link NinchishoKoreishaJiritsudoGaizenseiHyokaCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */

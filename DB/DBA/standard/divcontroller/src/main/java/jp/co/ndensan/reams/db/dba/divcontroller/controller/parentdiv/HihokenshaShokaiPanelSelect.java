@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplS
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplShinseiTodokedeDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011.tplShoKofuKaishuDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.dgShoKaishuJokyo_Row;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -38,6 +36,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author n8178 城間篤人
  */
 public class HihokenshaShokaiPanelSelect {
+
+    private final DemoKojin demoKojin = new DemoKojin("第1号");
+    private ControlGenerator generator;
+    private final static RString SHIKIBETSUCODE = new RString("識別コード");
 
     /**
      * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
@@ -69,8 +71,7 @@ public class HihokenshaShokaiPanelSelect {
         return response;
     }
 
-    private static final RString SHIKAKU_TOKUSO = new RString("DBA4010011/shikakuTokuso.yml");
-
+//    private static final RString SHIKAKU_TOKUSO = new RString("DBA4010011/shikakuTokuso.yml");
     /**
      * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
      * 選択した個人の被保険者番号を元に、資格得喪の情報を取得して表示します。
@@ -81,66 +82,64 @@ public class HihokenshaShokaiPanelSelect {
      */
     private void setShikakuDiv(tplHihokenshaRirekiDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
-        RString hihokenshaNo = demoKojin.getHihokenshaNo();
+//        
+//        RString hihokenshaNo = demoKojin.getHihokenshaNo();
 //        setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
     }
 
-    private void setShikakuTokusoJoho(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki, RString hihokenshaNo) {
-
-        List<HashMap> yamlShikakuTokusoList = YamlLoader.DBA.loadAsList(SHIKAKU_TOKUSO);
-        List<HashMap> hihokenshaShikakuTokusoList = new ArrayList<>();
-        for (HashMap yamlShikakuTokuso : yamlShikakuTokusoList) {
-            ControlGenerator generator = new ControlGenerator(yamlShikakuTokuso);
-            if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
-                hihokenshaShikakuTokusoList = (List<HashMap>) generator.get("被保台帳");
-            }
-        }
-
-        List<dgShikakuShutokuRireki_Row> shikakuTokusoDataSource = new ArrayList<>();
-        for (HashMap shikakuTokuso : hihokenshaShikakuTokusoList) {
-            shikakuTokusoDataSource.add(createShikakuTokusoRirekiRow(new ControlGenerator(shikakuTokuso)));
-        }
-        dgShikakuShutokuRireki.setDataSource(shikakuTokusoDataSource);
-    }
-
-    private dgShikakuShutokuRireki_Row createShikakuTokusoRirekiRow(ControlGenerator generator) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(RString.EMPTY, new Button(), new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
-        row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
-        row.setShutokuJiyu(generator.getAsRString("取得事由"));
-        row.setShutokuJiyuKey(generator.getAsRString("取得事由Key"));
-        row.getSoshitsuTodokedeDate().setValue(generator.getAsFlexibleDate("喪失届出日"));
-        row.getSoshitsuDate().setValue(generator.getAsFlexibleDate("喪失日"));
-        row.setSoshitsuJiyu(generator.getAsRString("喪失事由"));
-        row.setSoshitsuJiyuKey(generator.getAsRString("喪失事由Key"));
-        row.setHihokenshaKubunKey(generator.getAsRString("被保区分Key"));
-        row.setHihokenshaKubun(generator.getAsRString("被保区分"));
-//        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
-//        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
-//        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
-//        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
-//        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
-//        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
-//        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
-//        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
-//        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
-//        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
-//        row.setHenkoJiyu(generator.getAsRString("変更事由"));
-//        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
-//        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
-        row.setKyuHokensha(generator.getAsRString("旧保険者"));
-        row.setShikibetsuCode(generator.getAsRString("識別コード"));
-        return row;
-    }
-
+//    private void setShikakuTokusoJoho(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki, RString hihokenshaNo) {
+//
+//        List<HashMap> yamlShikakuTokusoList = YamlLoader.DBA.loadAsList(SHIKAKU_TOKUSO);
+//        List<HashMap> hihokenshaShikakuTokusoList = new ArrayList<>();
+//        for (HashMap yamlShikakuTokuso : yamlShikakuTokusoList) {
+//            generator = new ControlGenerator(yamlShikakuTokuso);
+//            if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
+//                hihokenshaShikakuTokusoList = (List<HashMap>) generator.get("被保台帳");
+//            }
+//        }
+//
+//        List<dgShikakuShutokuRireki_Row> shikakuTokusoDataSource = new ArrayList<>();
+//        for (HashMap shikakuTokuso : hihokenshaShikakuTokusoList) {
+//            shikakuTokusoDataSource.add(createShikakuTokusoRirekiRow(new ControlGenerator(shikakuTokuso)));
+//        }
+//        dgShikakuShutokuRireki.setDataSource(shikakuTokusoDataSource);
+//    }
+//    private dgShikakuShutokuRireki_Row createShikakuTokusoRirekiRow(ControlGenerator generator) {
+//        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(RString.EMPTY, new Button(), new TextBoxFlexibleDate(),
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
+//        row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
+//        row.setShutokuJiyu(generator.getAsRString("取得事由"));
+//        row.setShutokuJiyuKey(generator.getAsRString("取得事由Key"));
+//        row.getSoshitsuTodokedeDate().setValue(generator.getAsFlexibleDate("喪失届出日"));
+//        row.getSoshitsuDate().setValue(generator.getAsFlexibleDate("喪失日"));
+//        row.setSoshitsuJiyu(generator.getAsRString("喪失事由"));
+//        row.setSoshitsuJiyuKey(generator.getAsRString("喪失事由Key"));
+//        row.setHihokenshaKubunKey(generator.getAsRString("被保区分Key"));
+//        row.setHihokenshaKubun(generator.getAsRString("被保区分"));
+////        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
+////        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
+////        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
+////        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
+////        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
+////        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
+////        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
+////        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
+////        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
+////        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
+////        row.setHenkoJiyu(generator.getAsRString("変更事由"));
+////        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
+////        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
+//        row.setKyuHokensha(generator.getAsRString("旧保険者"));
+//        row.setShikibetsuCode(generator.getAsRString("識別コード"));
+//        return row;
+//    }
     private static final RString SETAI_JOHO = new RString("DBA4010011/setaiJoho.yml");
 
     /**
@@ -153,7 +152,6 @@ public class HihokenshaShokaiPanelSelect {
      */
     private void setSetaiDiv(tplSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setSetaiJoho(setaiDiv.getDgSetaiJoho(), shikibetsuCode);
     }
@@ -163,8 +161,8 @@ public class HihokenshaShokaiPanelSelect {
         List<HashMap> yamlSetaiJohoList = YamlLoader.DBA.loadAsList(SETAI_JOHO);
         List<HashMap> setaiJohoList = new ArrayList<>();
         for (HashMap yamlShikakuTokuso : yamlSetaiJohoList) {
-            ControlGenerator generator = new ControlGenerator(yamlShikakuTokuso);
-            if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
+            generator = new ControlGenerator(yamlShikakuTokuso);
+            if (generator.getAsRString(SHIKIBETSUCODE).equals(shikibetsuCode)) {
                 setaiJohoList = (List<HashMap>) generator.get("世帯情報");
             }
         }
@@ -188,7 +186,7 @@ public class HihokenshaShokaiPanelSelect {
         row.setTsuzukigara(generator.getAsRString("続柄"));
         row.setJuminJotai(generator.getAsRString("住民状態"));
         row.setHihokenshaKubun(generator.getAsRString("被保区分"));
-        row.setShikibetsuCode(generator.getAsRString("識別コード"));
+        row.setShikibetsuCode(generator.getAsRString(SHIKIBETSUCODE));
         row.setKojinNo(generator.getAsRString("個人番号"));
         return row;
     }
@@ -214,7 +212,7 @@ public class HihokenshaShokaiPanelSelect {
 //        List<HashMap> yamlSeikatuHogoData = YamlLoader.DBA.loadAsList(SEIKATSU_HOGO);
 //        List<HashMap> seikatuHogoDataList = new ArrayList<>();
 //        for (HashMap yamlSeikatuHogo : yamlSeikatuHogoData) {
-//            ControlGenerator generator = new ControlGenerator(yamlSeikatuHogo);
+//            generator = new ControlGenerator(yamlSeikatuHogo);
 //            if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
 //                seikatuHogoDataList = (List<HashMap>) generator.get("生保情報");
 //            }
@@ -257,7 +255,7 @@ public class HihokenshaShokaiPanelSelect {
 //        List<HashMap> yamlRofukuDataList = YamlLoader.DBA.loadAsList(ROFUKU_NENKIN);
 //        List<HashMap> rofukuDataList = new ArrayList<>();
 //        for (HashMap yamlRofukuData : yamlRofukuDataList) {
-//            ControlGenerator generator = new ControlGenerator(yamlRofukuData);
+//            generator = new ControlGenerator(yamlRofukuData);
 //            if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
 //                rofukuDataList = (List<HashMap>) generator.get("老福情報");
 //            }
@@ -281,12 +279,13 @@ public class HihokenshaShokaiPanelSelect {
 
     /**
      * // * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
-     * // * 選択した個人の識別コードを元に、医療保険の情報を表示します。 // * // * @param iryoHokenDiv 医療保険Div // * @param searchDiv 検索Div // *
+     * // * 選択した個人の識別コードを元に、医療保険の情報を表示します。 // * // * @param iryoHokenDiv 医療保険Div // * @param searchDiv 検索Div //
+     *
+     *
      * @return 医療保険Div //
      */
     private void setIryoHokenDiv(tplIryoHokenDiv iryoHokenDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setIryoHokenJoho(iryoHokenDiv.getIryoHokenRireki().getDgIryoHokenRireki(), shikibetsuCode);
     }
@@ -296,7 +295,7 @@ public class HihokenshaShokaiPanelSelect {
         List<HashMap> yamlIryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN);
         List<HashMap> iryoHokenDataList = new ArrayList<>();
         for (HashMap yamlIryoHokenData : yamlIryoHokenDataList) {
-            ControlGenerator generator = new ControlGenerator(yamlIryoHokenData);
+            generator = new ControlGenerator(yamlIryoHokenData);
             if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
                 iryoHokenDataList = (List<HashMap>) generator.get("医療保険");
             }
@@ -336,7 +335,6 @@ public class HihokenshaShokaiPanelSelect {
     private void setNyutaishoDiv(tplShisetsuNyutaishoDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
     }
@@ -346,7 +344,7 @@ public class HihokenshaShokaiPanelSelect {
         List<HashMap> yamlNyutaishoDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO);
         List<HashMap> nyutaishoDataList = new ArrayList<>();
         for (HashMap yamlNyutaishoData : yamlNyutaishoDataList) {
-            ControlGenerator generator = new ControlGenerator(yamlNyutaishoData);
+            generator = new ControlGenerator(yamlNyutaishoData);
             if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
                 nyutaishoDataList = (List<HashMap>) generator.get("異動履歴");
             }
@@ -388,7 +386,6 @@ public class HihokenshaShokaiPanelSelect {
     private void setShoKofuKaishuDiv(tplShoKofuKaishuDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getCcdShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
     }
@@ -398,7 +395,7 @@ public class HihokenshaShokaiPanelSelect {
         List<HashMap> yamlShoKofuDataList = YamlLoader.DBA.loadAsList(SHO_KOFU_KAISHU);
         List<HashMap> shoKofuDataList = new ArrayList<>();
         for (HashMap yamlShoKofuData : yamlShoKofuDataList) {
-            ControlGenerator generator = new ControlGenerator(yamlShoKofuData);
+            generator = new ControlGenerator(yamlShoKofuData);
             if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
                 shoKofuDataList = (List<HashMap>) generator.get("証交付記録");
             }
@@ -438,7 +435,6 @@ public class HihokenshaShokaiPanelSelect {
     private void setShinseiTodokedeDiv(tplShinseiTodokedeDiv todokedeDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);
     }
@@ -448,7 +444,7 @@ public class HihokenshaShokaiPanelSelect {
         List<HashMap> yamlTodokedeDataList = YamlLoader.DBA.loadAsList(SHINSEI_TODOKEDE);
         List<HashMap> todokedeDataList = new ArrayList<>();
         for (HashMap yamlTodokedeData : yamlTodokedeDataList) {
-            ControlGenerator generator = new ControlGenerator(yamlTodokedeData);
+            generator = new ControlGenerator(yamlTodokedeData);
             if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
                 todokedeDataList = (List<HashMap>) generator.get("申請届出");
             }

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者証を再交付した事由の列挙型です。
+ * 被保険者証を再交付した事由の列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -21,12 +21,12 @@ public enum HihokenshashoSaikofuJiyu {
     EMPTY(""),
     /**
      * その他 <br />
-     * コード : 00
+     * コード : 00。
      */
     なし("00"),
     /**
      * その他 <br />
-     * コード : 99
+     * コード : 99。
      */
     その他("99");
     private final RString code;
@@ -46,7 +46,7 @@ public enum HihokenshashoSaikofuJiyu {
 
     /**
      * 指定のコードに対応するHihokenshashoSaikofuJiyuを返します。
-     * 空文字列、もしくはnullを受け取った場合は<@code>HihokenshashoSaikofuJiyu.EMPTY</code>を返します。
+     * 空文字列、もしくはnullを受け取った場合はHihokenshashoSaikofuJiyu.EMPTY返します。
      *
      * @param code コード
      * @return 指定のコードに対応するHihokenshashoSaikofuJiyu

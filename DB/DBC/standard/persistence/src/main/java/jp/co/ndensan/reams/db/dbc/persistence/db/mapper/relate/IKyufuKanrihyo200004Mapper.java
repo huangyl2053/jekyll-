@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3014KyufuKanrihyo200004Entity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.apache.ibatis.annotations.Param;
 

@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBBのエラーメッセージ定義列挙型です。
@@ -17,10 +18,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbbErrorMessages implements IMessageGettable {
 
-    比較対象データなし(1, "比較対象のデータがありません。");
+    比較対象データなし(1, new RString("比較対象のデータがありません。"));
 
     private final int no;
-    private final String message;
+    private final RString message;
 
     /**
      * コンストラクタです。
@@ -28,13 +29,13 @@ public enum DbbErrorMessages implements IMessageGettable {
      * @param no 番号
      * @param message メッセージ
      */
-    private DbbErrorMessages(int no, String message) {
+    private DbbErrorMessages(int no, RString message) {
         this.no = no;
         this.message = message;
     }
 
     @Override
     public Message getMessage() {
-        return new ErrorMessage(toCode("E", no), message);
+        return new ErrorMessage(toCode("E", no), message.toString());
     }
 }

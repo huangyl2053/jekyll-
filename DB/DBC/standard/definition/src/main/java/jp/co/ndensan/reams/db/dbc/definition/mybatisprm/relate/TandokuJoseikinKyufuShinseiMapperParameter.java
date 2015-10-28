@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 市町村単独助成金給付申請を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class TandokuJoseikinKyufuShinseiMapperParameter {
+public final class TandokuJoseikinKyufuShinseiMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -71,4 +70,25 @@ public class TandokuJoseikinKyufuShinseiMapperParameter {
             HihokenshaNo 主キー1) {
         return new TandokuJoseikinKyufuShinseiMapperParameter(主キー1, FlexibleDate.MIN, true, false);
     }
+
+    public HihokenshaNo get主キー1() {
+        return 主キー1;
+    }
+
+    public FlexibleDate get主キー2() {
+        return 主キー2;
+    }
+
+    public Decimal get主キー3() {
+        return 主キー3;
+    }
+
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    public boolean isUses主キー2() {
+        return uses主キー2;
+    }
+
 }

@@ -5,15 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.IHanteiHoho;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHanteiHohoHozon;
-import jp.co.ndensan.reams.db.dbb.business.core.I1段階判定;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -21,15 +16,16 @@ import java.util.Map;
  */
 public class 保険料段階 {
 
-    public HokenryoDankaiOutput HokenryoDankaiHantei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho) {
+    public HokenryoDankaiOutput hokenryoDankaiHantei(
+            HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho) {
 
         HokenryoDankaiOutput hokenryoDankaiOutput = null;
 
         //mapからkey(段階数)を取得
-        for (String hanteiDankai : hokenryoDankaiHanteiHoho.hanteiHoho.keySet()) {
+        for (RString hanteiDankai : hokenryoDankaiHanteiHoho.getHanteiHoho().keySet()) {
 
             //取得した段階の判定方法を取得
-            List<IHanteiHoho> hanteihohoList = hokenryoDankaiHanteiHoho.hanteiHoho.get(hanteiDankai);
+            List<IHanteiHoho> hanteihohoList = hokenryoDankaiHanteiHoho.getHanteiHoho().get(hanteiDankai);
             //hanteiResult = KakuDankaiHantei(hokenryoDankaiInput,hanteihohoList);
 
             if (各段階判定(hokenryoDankaiInput, hanteihohoList)) {
@@ -49,7 +45,7 @@ public class 保険料段階 {
 
         for (I1段階判定 dai1dankaiHantei : dai1dankaiHanteiList) {
             if (dai1dankaiHantei.isMatch(hokenryoDankaiInput)) {
-                dai1dankaiHantei.Dai1dankaiSettei(hokenryoDankaiInput, hokenryoDankaiOutput);
+                dai1dankaiHantei.dai1dankaiSettei(hokenryoDankaiInput, hokenryoDankaiOutput);
                 break;
             }
         }
@@ -86,17 +82,16 @@ public class 保険料段階 {
     }
 
     private void 特例対象設定(HokenryoDankaiOutput hokenryoDankaiOutput) {
-        Map<String, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.CreateHokenryoDankaiMap();
-        for (String hokenryoDankai : hokenryoDankaiMap.keySet()) {
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.createHokenryoDankaiMap();
+        for (RString hokenryoDankai : hokenryoDankaiMap.keySet()) {
             //取得した段階の判定方法を取得
             HokenryoDankai hanteihohoList = hokenryoDankaiMap.get(hokenryoDankai);
             hanteihohoList.setTokureiTaisho(true);
         }
     }
 
-    protected static HokenryoDankaiOutput 出力データ作成(HokenryoDankaiInput hokenryoDankaiInput, String dankaiResult) {
+    protected static HokenryoDankaiOutput 出力データ作成(HokenryoDankaiInput hokenryoDankaiInput, RString dankaiResult) {
 
-        HokenryoDankaiOutput hokenryoDankaiOutput = new HokenryoDankaiOutput(dankaiResult);
-        return hokenryoDankaiOutput;
+        return new HokenryoDankaiOutput(dankaiResult);
     }
 }

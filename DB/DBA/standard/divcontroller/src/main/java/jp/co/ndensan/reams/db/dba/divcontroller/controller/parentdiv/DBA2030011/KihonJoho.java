@@ -52,7 +52,7 @@ public class KihonJoho {
 //        lasdecCode = new LasdecCode("209007");
 
         kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
-        kihonDiv.getCcdKaigoShikakuKihon().initialize(lasdecCode, taishoshaKey.get識別コード());
+        kihonDiv.getCcdKaigoShikakuKihon().load(lasdecCode, taishoshaKey.get識別コード());
 
         if (isNot適用対象者(taishoshaKey, controlData)) {
             //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
@@ -82,10 +82,10 @@ public class KihonJoho {
         IKojinFinder kojinFinder = ShikibetsuTaishoService.getKojinFinder();
         // IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
         IShikibetsuTaishoGyomuHanteiKey createInstance = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.EMPTY, KensakuYusenKubun.住登内優先);
-        ShikibetsuTaishoSearchKeyBuilder shikibetsuTaishoSearchKeyBuilder = new ShikibetsuTaishoSearchKeyBuilder(createInstance);
-        shikibetsuTaishoSearchKeyBuilder.set個人番号(KojinNo.EMPTY);
+        ShikibetsuTaishoSearchKeyBuilder keyBuilder = new ShikibetsuTaishoSearchKeyBuilder(createInstance);
+        keyBuilder.set個人番号(KojinNo.EMPTY);
         // IKojin kojin = kojinFinder.get個人s(shikibetsuTaishoSearchKeyBuilder);
-        List<IKojin> kojinList = kojinFinder.get個人s(shikibetsuTaishoSearchKeyBuilder.build());
+        List<IKojin> kojinList = kojinFinder.get個人s(keyBuilder.build());
         switch (kojinList.get(0).get住民状態()) {
             case 転出者:
             case 消除者:

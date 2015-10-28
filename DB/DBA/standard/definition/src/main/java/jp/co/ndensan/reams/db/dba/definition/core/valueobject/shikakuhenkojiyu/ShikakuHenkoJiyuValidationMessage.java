@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShikakuHenkoJiyuValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ShikakuHenkoJiyuErrorMessage.コードがNullであること),
     /**
-     * 名称がNullであること
+     * 名称がNullであること。
      */
     名称がNullであること(ShikakuHenkoJiyuErrorMessage.名称がNullであること);
     private final Message message;
@@ -43,11 +43,11 @@ public enum ShikakuHenkoJiyuValidationMessage implements IValidationMessage {
     public enum ShikakuHenkoJiyuErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "コードを指定してください。。"),
         /**
-         * 名称がNullであること
+         * 名称がNullであること。
          */
         名称がNullであること(2, "名称を指定してください。");
         private final int no;

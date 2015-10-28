@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link ShisetsuCode}のバリデーションメッセージです。
+ * {@link ShisetsuCode}のバリデーションメッセージクラスです。
  */
 public enum ShisetsuCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ShisetsuCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShisetsuCodeValidationMessage implements IValidationMessage {
     public enum ShisetsuCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "エラーコードを指定してください。");
         private final int no;

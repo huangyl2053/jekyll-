@@ -18,7 +18,7 @@ public class ShikakuHenkoJiyuValidator {
     private final ShikakuHenkoJiyu shikakuHenkoJiyu;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shikakuHenkoJiyu 資格変更事由
      */

@@ -9,14 +9,14 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.util.code.ICodeShubetsu;
 
 /**
- * コード種別を表す列挙型です。
+ * コード種別を表す列挙型クラスです。
  *
  * @author N8156 宮本 康
  */
 public enum DBZCodeShubetsu implements ICodeShubetsu {
 
     /**
-     * 調定事由コード
+     * 調定事由コード。
      */
     調定事由コード("0001", ChoteiJiyuCode.class);
 
@@ -29,16 +29,31 @@ public enum DBZCodeShubetsu implements ICodeShubetsu {
         this.returnType = returnType;
     }
 
+    /**
+     * getCodeShubetsuを取得します。
+     *
+     * @return　codeShubetsu
+     */
     @Override
     public CodeShubetsu getCodeShubetsu() {
         return codeShubetsu;
     }
 
+    /**
+     * getSubGyomuCodeを取得します。
+     *
+     * @return　subGyomuCode
+     */
     @Override
     public SubGyomuCode getSubGyomuCode() {
         return subGyomuCode;
     }
 
+    /**
+     * getReturnTypeを取得します。
+     *
+     * @return returnType
+     */
     @Override
     public Class getReturnType() {
         return returnType;

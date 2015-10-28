@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  */
 public class HonsanteiMessageController implements IMessageController {
 
-    private final static RString WFPRMKEY1 = new RString("Key1");
-    private final static RString WFPRMKEY2 = new RString("Key2");
+    private static final RString WFPRMKEY1 = new RString("Key1");
+    private static final RString WFPRMKEY2 = new RString("Key2");
 
     @Override
     public List<WakeUpMessage> sendFlowMessage(DeliveredMessages deliveredMessage) { //この引数に、起動元となったメッセージの情報が格納される

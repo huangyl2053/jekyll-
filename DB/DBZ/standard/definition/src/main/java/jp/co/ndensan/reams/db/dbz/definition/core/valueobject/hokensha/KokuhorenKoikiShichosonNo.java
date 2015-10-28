@@ -11,12 +11,13 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 国保連広域内市町村番号です。
+ * 国保連広域内市町村番号クラスです。
  *
  * @author N3327 三浦 凌
  */
 public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, Comparable<KokuhorenKoikiShichosonNo>, Serializable {
 
+    private static final int three = 3;
     /**
      * 空の{@link KokuhorenKoikiShichosonNo}です。
      */

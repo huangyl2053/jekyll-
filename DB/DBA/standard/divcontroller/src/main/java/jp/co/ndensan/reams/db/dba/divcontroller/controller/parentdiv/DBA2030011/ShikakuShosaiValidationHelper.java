@@ -30,7 +30,7 @@ public final class ShikakuShosaiValidationHelper {
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance(); //createValidationMessagesInstance();
         return dictionary.check(messages);
     }
 
@@ -38,7 +38,7 @@ public final class ShikakuShosaiValidationHelper {
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance(); //createValidationMessagesInstance();
         return dictionary.check(messages);
     }
 

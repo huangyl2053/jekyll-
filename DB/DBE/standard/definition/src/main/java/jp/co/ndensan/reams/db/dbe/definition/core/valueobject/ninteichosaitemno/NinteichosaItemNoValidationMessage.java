@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinteichosaItemNoValidationMessage implements IValidationMessage {
 
     /**
-     * 番号がNullであること
+     * 番号がNullであること。
      */
     番号がNullであること(NinteichosaItemNoErrorMessage.番号がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinteichosaItemNoValidationMessage implements IValidationMessage {
     public enum NinteichosaItemNoErrorMessage implements IMessageGettable {
 
         /**
-         * 番号がNullであること
+         * 番号がNullであること。
          */
         番号がNullであること(1, "調査項目番号を指定してください。");
         private final int no;

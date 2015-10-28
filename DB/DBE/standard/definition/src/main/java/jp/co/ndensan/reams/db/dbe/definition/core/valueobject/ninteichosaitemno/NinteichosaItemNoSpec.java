@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum NinteichosaItemNoSpec implements IPredicate<NinteichosaItemNo> {
 
     /**
-     * 番号がNullでないこと
+     * 番号がNullでないこと。
      */
     番号がNullでないこと {
                 /**

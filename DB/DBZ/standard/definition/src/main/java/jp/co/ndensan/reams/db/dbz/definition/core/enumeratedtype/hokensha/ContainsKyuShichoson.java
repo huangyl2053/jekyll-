@@ -6,18 +6,18 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha;
 
 /**
- * 旧市町村を含むか、含まないかを選択するための列挙型です。
+ * 旧市町村を含むか、含まないかを選択するための列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
 public enum ContainsKyuShichoson {
 
     /**
-     * 旧市町村を含む
+     * 旧市町村を含む。
      */
     旧市町村を含む,
     /**
-     * 旧市町村を含まない
+     * 旧市町村を含まない。
      */
     旧市町村を含まない;
 }

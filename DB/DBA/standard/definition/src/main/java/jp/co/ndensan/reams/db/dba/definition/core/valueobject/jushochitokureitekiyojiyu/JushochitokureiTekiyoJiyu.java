@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureikaijojiyu;
+package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureitekiyojiyu;
 
 import java.util.List;
 import java.util.Objects;

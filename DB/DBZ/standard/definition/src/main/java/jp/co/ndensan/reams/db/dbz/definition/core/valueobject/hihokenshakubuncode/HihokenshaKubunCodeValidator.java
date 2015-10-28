@@ -18,7 +18,7 @@ public class HihokenshaKubunCodeValidator {
     private final HihokenshaKubunCode hihokenshaKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param hihokenshaKubunCode 保険者区分コード
      */

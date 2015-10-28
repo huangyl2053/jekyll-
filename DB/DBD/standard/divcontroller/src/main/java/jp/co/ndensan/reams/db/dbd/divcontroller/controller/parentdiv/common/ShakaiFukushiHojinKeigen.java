@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class ShakaiFukushiHojinKeigen {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div ShakaiFukushiHojinKeigenDiv
      * @return ResponseData
@@ -43,7 +43,7 @@ public class ShakaiFukushiHojinKeigen {
     }
 
     /**
-     * onSelect dgShakaiFukushiHojinKeigenList
+     * onSelect dgShakaiFukushiHojinKeigenList。
      *
      * @param div ShakaiFukushiHojinKeigenDiv
      * @return ResponseData
@@ -51,14 +51,14 @@ public class ShakaiFukushiHojinKeigen {
     public ResponseData<ShakaiFukushiHojinKeigenDiv> onSelect_dgShakaiFukushiHojinKeigenList(ShakaiFukushiHojinKeigenDiv div) {
         for (dgShakaiFukushiHojinKeigenList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(ShakaiFukushiHojinKeigenDiv div, dgShakaiFukushiHojinKeigenList_Row rowValue) {
+    private void _setUp(ShakaiFukushiHojinKeigenDiv div, dgShakaiFukushiHojinKeigenList_Row rowValue) {
         _setUp_detail(div, rowValue);
     }
 

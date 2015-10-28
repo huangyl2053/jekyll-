@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link InputShikibetsuNoCode}のバリデーションメッセージです。
+ * {@link InputShikibetsuNoCode}のバリデーションメッセージクラスです。
  */
 public enum InputShikibetsuNoCodeValidationMessage implements IValidationMessage {
 
@@ -36,7 +36,7 @@ public enum InputShikibetsuNoCodeValidationMessage implements IValidationMessage
     public enum InputShikibetsuNoCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "入力識別番号コードを指定してください。");
         private final int no;

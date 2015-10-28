@@ -22,7 +22,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 他市町村住所地特例者台帳管理Aliveを管理するクラスです。
  */
-public class KaigoJogaiTokureiTaishoShisetsuAlive extends ModelBase<KaigoJogaiTokureiTaishoShisetsuAliveIdentifier, DbV1005KaigoJogaiTokureiTaishoShisetsuEntity, KaigoJogaiTokureiTaishoShisetsuAlive> implements Serializable {
+public class KaigoJogaiTokureiTaishoShisetsuAlive extends
+        ModelBase<KaigoJogaiTokureiTaishoShisetsuAliveIdentifier, 
+        DbV1005KaigoJogaiTokureiTaishoShisetsuEntity, 
+        KaigoJogaiTokureiTaishoShisetsuAlive>
+        implements Serializable {
 
     private final DbV1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
     private final KaigoJogaiTokureiTaishoShisetsuAliveIdentifier id;

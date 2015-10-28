@@ -97,8 +97,8 @@ public class KoseiShichosonMasterRelateEntity implements Cloneable, Serializable
      */
     public void initializeMd5ToEntities() {
         this.構成市町村マスタEntity.initializeMd5();
-        for (ShujiiIryoKikanJohoRelateEntity RelateEntity : this.主治医医療機関情報RelateEntity) {
-            RelateEntity.initializeMd5ToEntities();
+        for (ShujiiIryoKikanJohoRelateEntity relateEntity : this.主治医医療機関情報RelateEntity) {
+            relateEntity.initializeMd5ToEntities();
         }
         for (DbT5911ShujiiIryoKikanJohoEntity entity : this.主治医医療機関情報Entity) {
             entity.initializeMd5();

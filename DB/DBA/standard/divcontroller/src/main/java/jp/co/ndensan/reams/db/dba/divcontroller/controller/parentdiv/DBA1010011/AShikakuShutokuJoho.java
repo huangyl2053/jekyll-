@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1010011
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -152,15 +151,15 @@ public class AShikakuShutokuJoho {
         return response;
     }
 
-    private IValidationMessages validate(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
-        //TODO #52997
-        //1, 被保険者履歴一覧グリッドのデータを、Listで取得する。
-        //2, 介護基本情報から、生年月日を取得する。
-        //3, HihokenshaDaichoValidatorに、グリッドから取得したListと生年月日を渡してインスタンスを生成する。
-        //4, HihokenshaDaichoValidatorのvalidate()メソッドを実行し、IValidationMessagesを取得する。
-        //5, IValidationMessagesを返す。
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+//    private IValidationMessages validate(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
+//        //TODO #52997
+//        //1, 被保険者履歴一覧グリッドのデータを、Listで取得する。
+//        //2, 介護基本情報から、生年月日を取得する。
+//        //3, HihokenshaDaichoValidatorに、グリッドから取得したListと生年月日を渡してインスタンスを生成する。
+//        //4, HihokenshaDaichoValidatorのvalidate()メソッドを実行し、IValidationMessagesを取得する。
+//        //5, IValidationMessagesを返す。
+//        throw new UnsupportedOperationException("Not supported yet.");
+//    }
 
     /**
      * 資格取得情報の入力を確定する際に実行するイベントです。

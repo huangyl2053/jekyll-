@@ -18,7 +18,7 @@ public class IchijiHanteiKeikokuCodeValidator {
     private final IchijiHanteiKeikokuCode ichijiHanteiKeikokuCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ichijiHanteiKeikokuCode 一次判定警告コード
      */

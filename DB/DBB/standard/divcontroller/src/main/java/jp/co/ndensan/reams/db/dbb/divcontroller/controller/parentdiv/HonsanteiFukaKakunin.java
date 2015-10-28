@@ -26,10 +26,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class HonsanteiFukaKakunin {
 
-    private static final RString ShoriNaiyo = new RString("DBB0310001/ShoriNaiyo.yml");
+    private static final RString SHORINAIYO = new RString("DBB0310001/ShoriNaiyo.yml");
 
     /**
-     * 初期ロード時に実行
+     * 初期ロード時に実行。
      *
      * @param honsanteiFukaKakuninDiv
      *
@@ -43,7 +43,7 @@ public class HonsanteiFukaKakunin {
     }
 
     private void setParam(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
-        List<HashMap> demoData = YamlLoader.DBB.loadAsList(ShoriNaiyo);
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(SHORINAIYO);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
         honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));

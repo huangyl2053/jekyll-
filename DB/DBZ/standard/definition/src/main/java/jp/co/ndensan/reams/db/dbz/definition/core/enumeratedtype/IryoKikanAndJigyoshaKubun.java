@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 事業者番号の3桁目によって判断される、医療機関と介護保険事業者を表す区分です。
+ * 事業者番号の3桁目によって判断される、医療機関と介護保険事業者を表す区分クラスです。
  *
  * @author n8178 城間篤人
  */
@@ -104,6 +104,10 @@ public enum IryoKikanAndJigyoshaKubun {
      * @throws IllegalArgumentException 引数の事業者番号が、医療機関_事業者区分に変換できないとき
      */
     public static IryoKikanAndJigyoshaKubun toValue(RString jigyoshaNo) throws IllegalArgumentException {
+        int five = 5;
+        int nine = 9;
+        int fivethousand = 5000;
+        int fivethousandone = 5001;
         for (IryoKikanAndJigyoshaKubun kubun : values()) {
             if (!kubun.kubunCode.equals(jigyoshaNo.stringAt(2))) {
                 continue;
@@ -113,12 +117,12 @@ public enum IryoKikanAndJigyoshaKubun {
                 return kubun;
             }
 
-            int jigyosha5_9Number = Integer.parseInt(jigyoshaNo.toString().substring(5, 9));
-            if (kubun == 地域包括支援センター && jigyosha5_9Number <= 5000) {
+            int jigyosha5_9Number = Integer.parseInt(jigyoshaNo.toString().substring(five, nine));
+            if (kubun == 地域包括支援センター && jigyosha5_9Number <= fivethousand) {
                 return kubun;
             }
 
-            if (kubun == 介護予防_日常生活支援総合事業事業所 && 5001 <= jigyosha5_9Number) {
+            if (kubun == 介護予防_日常生活支援総合事業事業所 && fivethousandone <= jigyosha5_9Number) {
                 return kubun;
             }
         }

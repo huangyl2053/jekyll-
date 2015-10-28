@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0410011.HihokenshashoHakkoJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 被保険者証発行情報Divを制御します。
@@ -23,6 +23,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N9606 漢那 憲作
  */
 public class HihokenshashoHakkoJoho {
+
+    private static final int LIST_RECORD1 = 1;
+    private static final int LIST_RECORD2 = 1;
+    private static final int LIST_RECORD3 = 1;
+    private static final int LIST_RECORD4 = 1;
+    private static final int LIST_RECORD5 = 1;
+    private static final RString BTN_PRINT = new RString("btnPrint");
 
     /**
      * 被保険者証発行該当者一覧画面-「選択」ボタン押下時の処理を表します。
@@ -58,7 +65,7 @@ public class HihokenshashoHakkoJoho {
                 ymlData.getAsTextBoxFlexibleDate("shinseibi").getValue());
 
         //限度額タブ内情報
-        hashMap = hihokenshashoHakkoJohoList.get(1);
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD1);
         ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().getTplGendoGaku().
@@ -79,7 +86,7 @@ public class HihokenshashoHakkoJoho {
                 setDataSource(arraydata);
 
         //審査会意見情報
-        hashMap = hihokenshashoHakkoJohoList.get(2);
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD2);
         ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
@@ -87,7 +94,7 @@ public class HihokenshashoHakkoJoho {
                 setValue(ymlData.getAsRString("shinsakaiiken"));
 
         //給付制限情報
-        hashMap = hihokenshashoHakkoJohoList.get(3);
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD3);
         ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
@@ -127,7 +134,7 @@ public class HihokenshashoHakkoJoho {
                 setToValue(ymlData.getAsTextBoxDate("seigenkikanto3").getValue());
 
         //支援事業者情報
-        hashMap = hihokenshashoHakkoJohoList.get(4);
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD4);
         ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
@@ -155,7 +162,7 @@ public class HihokenshashoHakkoJoho {
                 setValue(ymlData.getAsTextBoxFlexibleDate("todokedebi3").getValue());
 
         //施設入退所情報
-        hashMap = hihokenshashoHakkoJohoList.get(5);
+        hashMap = hihokenshashoHakkoJohoList.get(LIST_RECORD5);
         ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
@@ -245,11 +252,11 @@ public class HihokenshashoHakkoJoho {
         if (!panel.getHihokenshashoHakkoShosaiJoho().getTxtKofuDate().getText().isEmpty()
                 && !panel.getHihokenshashoHakkoShosaiJoho().getDdlKofuJiyu().getSelectedValue().isEmpty()) {
 
-            //boolean isDisabled = CommonButtonHolder.isDisabled(new RString("btnPrint"));
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), false);
+            //boolean isDisabled = CommonButtonHolder.isDisabled(BTN_PRINT);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_PRINT, false);
 
         } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_PRINT, true);
         }
 
         response.data = panel;

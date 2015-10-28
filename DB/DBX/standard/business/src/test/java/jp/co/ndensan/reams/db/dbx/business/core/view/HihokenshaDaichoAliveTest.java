@@ -252,8 +252,8 @@ public class HihokenshaDaichoAliveTest extends DbxTestBase {
         }
 
         @Test
-        public void get論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.get論理削除フラグ(), is(HihokenshaDaichoAliveEntity.getLogicalDeletedFlag()));
+        public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
+            assertThat(sut.is論理削除フラグ(), is(HihokenshaDaichoAliveEntity.getLogicalDeletedFlag()));
         }
     }
 

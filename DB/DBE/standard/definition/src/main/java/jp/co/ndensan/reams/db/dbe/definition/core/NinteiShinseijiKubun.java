@@ -19,27 +19,27 @@ public enum NinteiShinseijiKubun implements IRStringConvertable {
 //TODO N8107千秋雄 コードマスタにて管理されることも考慮する　2014/2/28 まで
 
     /**
-     * 新規申請 ("01")
+     * 新規申請 ("01")。
      */
     新規申請(new RString("01")),
     /**
-     * 更新申請 ("02")
+     * 更新申請 ("02")。
      */
     更新申請(new RString("02")),
     /**
-     * 区分変更申請 ("03")
+     * 区分変更申請 ("03")。
      */
     区分変更申請(new RString("03")),
     /**
-     * 職権 ("04")
+     * 職権 ("04")。
      */
     職権(new RString("04")),
     /**
-     * 転入申請 ("05")
+     * 転入申請 ("05")。
      */
     転入申請(new RString("05")),
     /**
-     * 資格喪失（死亡）("06")
+     * 資格喪失（死亡）("06")。
      */
     資格喪失_死亡(new RString("06"));
     private final RString コード;

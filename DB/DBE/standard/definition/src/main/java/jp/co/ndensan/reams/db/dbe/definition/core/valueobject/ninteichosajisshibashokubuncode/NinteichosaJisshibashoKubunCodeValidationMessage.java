@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinteichosaJisshibashoKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(NinteichosaJisshibashoKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinteichosaJisshibashoKubunCodeValidationMessage implements IValidat
     public enum NinteichosaJisshibashoKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "実施場所区分コードを指定してください。");
         private final int no;

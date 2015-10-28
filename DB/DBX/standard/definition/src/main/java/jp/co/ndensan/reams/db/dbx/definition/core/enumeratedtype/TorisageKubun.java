@@ -18,19 +18,19 @@ package jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype;
 public enum TorisageKubun {
 
     /**
-     * 認定申請有効
+     * 認定申請有効します。
      */
     認定申請有効,
     /**
-     * 区分変更却下
+     * 区分変更却下します。
      */
     区分変更却下,
     /**
-     * 認定申請取下げ
+     * 認定申請取下げします。
      */
     認定申請取下げ,
     /**
-     * 認定申請削除
+     * 認定申請削除します。
      */
     認定申請削除;
 }

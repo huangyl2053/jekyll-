@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -86,7 +85,7 @@ public final class ViewStateKeyCreator {
      * @return 算定状態
      */
     private static SanteiState checkSanteiState(Fuka fukaModel) {
-        final RString SERIAL_NUMBER = new RString("0001");
+//        final RString SERIAL_NUMBER = new RString("0001");
 
 //        Optional<ShoriDateModel> modeloid = new ShoriDateFinder().find処理日付(
 //                SubGyomuCode.DBB介護賦課, fukaModel.get賦課市町村コード(), ShoriName.本算定賦課,

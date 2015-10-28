@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(NinchishoKoreishaJiritsudoGaizenseiHyokaCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidationMessage implem
     public enum NinchishoKoreishaJiritsudoGaizenseiHyokaCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "認知症高齢者自立度の蓋然性評価コードを指定してください。");
         private final int no;

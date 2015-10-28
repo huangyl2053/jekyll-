@@ -10,6 +10,9 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -19,15 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算自己負担額を管理するクラスです。
  */
-public class KogakuGassanJikoFutanGaku extends ModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku> implements Serializable {
+public class KogakuGassanJikoFutanGaku
+        extends ModelBase<KogakuGassanJikoFutanGakuIdentifier, DbT3070KogakuGassanJikoFutanGakuEntity, KogakuGassanJikoFutanGaku>
+        implements Serializable {
 
     private final DbT3070KogakuGassanJikoFutanGakuEntity entity;
     private final KogakuGassanJikoFutanGakuIdentifier id;

@@ -94,7 +94,7 @@ public class KaigoDonyuKeitai extends ModelBase<KaigoDonyuKeitaiIdentifier, DbT7
      *
      * @return 支所管理有無フラグ
      */
-    public boolean get支所管理有無フラグ() {
+    public boolean is支所管理有無フラグ() {
         return entity.getShishoKanriUmuFlag();
     }
 

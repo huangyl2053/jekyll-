@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者異動送付を管理するクラスです。
  */
-public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo> implements Serializable {
+public class JukyushaIdoRenrakuhyo
+        extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo>
+        implements Serializable {
 
     private final DbT3001JukyushaIdoRenrakuhyoEntity entity;
     private final JukyushaIdoRenrakuhyoIdentifier id;

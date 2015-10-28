@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum KeiyakuNoSpec implements IPredicate<KeiyakuNo> {
 
     /**
-     * 番号がNullでないこと
+     * 番号がNullでないこと。
      */
     番号がNullでないこと {
                 /**

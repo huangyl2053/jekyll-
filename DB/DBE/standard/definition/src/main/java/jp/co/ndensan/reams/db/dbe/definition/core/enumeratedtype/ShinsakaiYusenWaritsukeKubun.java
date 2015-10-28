@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShinsakaiYusenWaritsukeKubun {
 
     /**
-     * コード : 1
+     * コード : 1。
      */
     優先する("1"),
     /**
-     * コード : 2
+     * コード : 2。
      */
     優先しない("2");
     private final RString theCode;

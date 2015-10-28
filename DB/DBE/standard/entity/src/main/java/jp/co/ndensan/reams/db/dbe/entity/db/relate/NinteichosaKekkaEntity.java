@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
  */
 public class NinteichosaKekkaEntity implements IDbAccessable {
 
-    private DbT5008NinteichosaKekkaJohoEntity dbT5008NinteichosaKekkaJohoEntity = null;
-    private DbT5009NinteichosahyoJohoEntity dbT5009NinteichosahyoJohoEntity = null;
+    private DbT5008NinteichosaKekkaJohoEntity dbT5008Entity = null;
+    private DbT5009NinteichosahyoJohoEntity dbT5009Entity = null;
 
     /**
      * インスタンスを生成します。
@@ -30,7 +30,7 @@ public class NinteichosaKekkaEntity implements IDbAccessable {
      * @return 要介護認定調査結果情報エンティティ
      */
     public DbT5008NinteichosaKekkaJohoEntity getDbT5008NinteichosaKekkaJohoEntity() {
-        return dbT5008NinteichosaKekkaJohoEntity;
+        return dbT5008Entity;
     }
 
     /**
@@ -39,7 +39,7 @@ public class NinteichosaKekkaEntity implements IDbAccessable {
      * @param entity 要介護認定調査結果情報エンティティ
      */
     public void setDbT5008NinteichosaKekkaJohoEntity(DbT5008NinteichosaKekkaJohoEntity entity) {
-        this.dbT5008NinteichosaKekkaJohoEntity = entity;
+        this.dbT5008Entity = entity;
     }
 
     /**
@@ -48,7 +48,7 @@ public class NinteichosaKekkaEntity implements IDbAccessable {
      * @return 要介護認定調査票情報エンティティ
      */
     public DbT5009NinteichosahyoJohoEntity getDbT5009NinteichosahyoJohoEntity() {
-        return dbT5009NinteichosahyoJohoEntity;
+        return dbT5009Entity;
     }
 
     /**
@@ -57,6 +57,6 @@ public class NinteichosaKekkaEntity implements IDbAccessable {
      * @param entity 要介護認定調査票情報エンティティ
      */
     public void setDbT5009NinteichosahyoJohoEntity(DbT5009NinteichosahyoJohoEntity entity) {
-        this.dbT5009NinteichosahyoJohoEntity = entity;
+        this.dbT5009Entity = entity;
     }
 }

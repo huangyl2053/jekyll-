@@ -18,13 +18,15 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator {
     private final NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninchishoKoreishaJiritsudoGaizenseiHyokaCode
      * 認知症高齢者日常生活自立度が、どの程度確からしいか
      */
-    public NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator(NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode) {
-        requireNonNull(ninchishoKoreishaJiritsudoGaizenseiHyokaCode, UrSystemErrorMessages.値がnull.getReplacedMessage("認知症高齢者日常生活自立度が、どの程度確からしいか"));
+    public NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator
+        (NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode) {
+        requireNonNull(ninchishoKoreishaJiritsudoGaizenseiHyokaCode,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("認知症高齢者日常生活自立度が、どの程度確からしいか"));
         this.ninchishoKoreishaJiritsudoGaizenseiHyokaCode = ninchishoKoreishaJiritsudoGaizenseiHyokaCode;
     }
 

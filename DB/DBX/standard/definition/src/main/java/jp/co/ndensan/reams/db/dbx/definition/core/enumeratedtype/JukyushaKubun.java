@@ -25,12 +25,12 @@ public enum JukyushaKubun implements IRStringConvertable {
 
     /**
      * 受給者<br />
-     * コード：1<br />
+     * コード：1。<br />
      */
     受給者("1"),
     /**
      * 非受給者<br />
-     * コード：無<br />
+     * コード：無。<br />
      */
     非受給者("");
     private final RString コード;

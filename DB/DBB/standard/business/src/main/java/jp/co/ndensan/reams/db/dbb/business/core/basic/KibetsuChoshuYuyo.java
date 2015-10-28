@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護期別徴収猶予を管理するクラスです。
  */
-public class KibetsuChoshuYuyo extends ParentModelBase<KibetsuChoshuYuyoIdentifier, DbT2007KibetsuChoshuYuyoEntity, KibetsuChoshuYuyo> implements Serializable {
+public class KibetsuChoshuYuyo
+        extends ParentModelBase<KibetsuChoshuYuyoIdentifier, DbT2007KibetsuChoshuYuyoEntity, KibetsuChoshuYuyo>
+        implements Serializable {
 
     private final DbT2007KibetsuChoshuYuyoEntity entity;
     private final KibetsuChoshuYuyoIdentifier id;

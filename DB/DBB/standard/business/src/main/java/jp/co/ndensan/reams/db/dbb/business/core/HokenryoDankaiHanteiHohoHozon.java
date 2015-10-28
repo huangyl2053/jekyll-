@@ -8,19 +8,20 @@ package jp.co.ndensan.reams.db.dbb.business.core;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
  * @author N2810
  */
-abstract public class HokenryoDankaiHanteiHohoHozon {
+public abstract class HokenryoDankaiHanteiHohoHozon {
 
-    Map<String, List<IHanteiHoho>> hanteiHoho = new HashMap<>();
+    private final Map<RString, List<IHanteiHoho>> hanteiHoho = new HashMap<>();
 
-    protected String 世帯非課税最大段階数取得() {
+    protected RString 世帯非課税最大段階数取得() {
 
-        String result = null;
+        RString result = null;
         boolean setaihikazei;
         boolean honninhikazei;
         Decimal maekagen = new Decimal(0);
@@ -28,7 +29,7 @@ abstract public class HokenryoDankaiHanteiHohoHozon {
         Decimal atokagen = new Decimal(0);
 
         //mapからkey(段階数)を取得
-        for (String hanteiDankai : hanteiHoho.keySet()) {
+        for (RString hanteiDankai : hanteiHoho.keySet()) {
 
             //取得した段階の判定方法を取得
             List<IHanteiHoho> hanteihohoList = hanteiHoho.get(hanteiDankai);
@@ -66,9 +67,9 @@ abstract public class HokenryoDankaiHanteiHohoHozon {
         return result;
     }
 
-    protected String 本人非課税最大段階数取得() {
+    protected RString 本人非課税最大段階数取得() {
 
-        String result = null;
+        RString result = null;
         boolean setaihikazei;
         boolean honninhikazei;
         Decimal maekagen = new Decimal(0);
@@ -76,7 +77,7 @@ abstract public class HokenryoDankaiHanteiHohoHozon {
         Decimal atokagen = new Decimal(0);
 
         //mapからkey(段階数)を取得
-        for (String hanteiDankai : hanteiHoho.keySet()) {
+        for (RString hanteiDankai : hanteiHoho.keySet()) {
 
             //取得した段階の判定方法を取得
             List<IHanteiHoho> hanteihohoList = hanteiHoho.get(hanteiDankai);
@@ -110,5 +111,9 @@ abstract public class HokenryoDankaiHanteiHohoHozon {
         }
 
         return result;
+    }
+
+    public Map<RString, List<IHanteiHoho>> getHanteiHoho() {
+        return hanteiHoho;
     }
 }

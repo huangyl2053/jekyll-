@@ -5,23 +5,31 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  *
  * @author N2810
  */
-public class HokenryoDankaiHanteiHohoHozonFactory {
+public final class HokenryoDankaiHanteiHohoHozonFactory {
 
-    public static HokenryoDankaiHanteiHohoHozon CreateHokenryoDankaiHanteiHoho(HokenryoDankaiInput hokenryoDankaiInput) {
+    private static final int SEIREKI_2012 = 2012;
+    private static final int SEIREKI_2014 = 2014;
 
-        String fukanendo = hokenryoDankaiInput.getFukaNendo();
+    private HokenryoDankaiHanteiHohoHozonFactory() {
+    }
+
+    public static HokenryoDankaiHanteiHohoHozon createHokenryoDankaiHanteiHoho(HokenryoDankaiInput hokenryoDankaiInput) {
+
+        RString fukanendo = hokenryoDankaiInput.getFukaNendo();
         if (fukanendo == null || fukanendo.isEmpty()) {
             return null;
         }
 
-        int seireki = Integer.parseInt(fukanendo);
+        int seireki = Integer.parseInt(String.valueOf(fukanendo));
         HokenryoDankaiHanteiHohoHozon ret;
 
-        if (2012 <= seireki && seireki <= 2014) {
+        if (SEIREKI_2012 <= seireki && seireki <= SEIREKI_2014) {
             ret = new 第4期(hokenryoDankaiInput);
 
         } else {

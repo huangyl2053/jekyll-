@@ -71,5 +71,13 @@ public final class ShikakuTokusoDateValidetor {
             //      　メッセージID：URZE00025（期間が重複しています。）
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+
+        public HihokenshaDaichoModel getPreviousModel() {
+            return previousModel;
+        }
+
+        public HihokenshaDaichoModel getNextModel() {
+            return nextModel;
+        }
     }
 }

@@ -5,44 +5,40 @@ package jp.co.ndensan.reams.db.dbb.business.core;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import jp.co.ndensan.reams.db.dbb.business.core.端数調整判定;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
-import jp.co.ndensan.reams.db.dbb.business.core.NengakuFukaKonkyo;
-import jp.co.ndensan.reams.db.dbb.business.core.保険料段階判定input;
-import jp.co.ndensan.reams.db.dbb.business.core.資格喪失日が年度内に存在するか判定;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author n3336
  */
 public class 資格喪失日が年度内に存在するか判定test {
-    
+
     public 資格喪失日が年度内に存在するか判定test() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -52,59 +48,55 @@ public class 資格喪失日が年度内に存在するか判定test {
     //
     // @Test
     // public void hello() {}
-    
-    
     @Test
-    public void 資格喪失日が年度開始日以前の場合falseを返す(){
+    public void 資格喪失日が年度開始日以前の場合falseを返す() {
         端数調整判定 soushitu = new 資格喪失日が年度内に存在するか判定();
-        
+
         保険料段階判定input input = new 保険料段階判定input();
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格喪失日(new RDate("2014/03/31"));
         input.set年額賦課根拠(fukakonkyo);
-        input.set賦課年度("2014");
-        assertThat(soushitu.JudgeHasuu(input), is(false));        
-    }    
- 
+        input.set賦課年度(new RString("2014"));
+        assertThat(soushitu.judgeHasuu(input), is(false));
+    }
+
     @Test
-    public void 資格喪失日が年度内の場合はtrueを返す(){
+    public void 資格喪失日が年度内の場合はtrueを返す() {
         端数調整判定 soushitu = new 資格喪失日が年度内に存在するか判定();
-        
+
         保険料段階判定input input = new 保険料段階判定input();
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格喪失日(new RDate("2014/04/03"));
         input.set年額賦課根拠(fukakonkyo);
-        input.set賦課年度("2014");
-        assertThat(soushitu.JudgeHasuu(input), is(true));        
-    }         
-    
+        input.set賦課年度(new RString("2014"));
+        assertThat(soushitu.judgeHasuu(input), is(true));
+    }
+
     @Test
-    public void 資格喪失日が年度終了日以降の場合falseを返す(){
+    public void 資格喪失日が年度終了日以降の場合falseを返す() {
         資格喪失日が年度内に存在するか判定 soushitu = new 資格喪失日が年度内に存在するか判定();
-        
+
         保険料段階判定input input = new 保険料段階判定input();
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格喪失日(new RDate("2015/04/01"));
         input.set年額賦課根拠(fukakonkyo);
-        input.set賦課年度("2014");
-        assertThat(soushitu.JudgeHasuu(input), is(false));        
+        input.set賦課年度(new RString("2014"));
+        assertThat(soushitu.judgeHasuu(input), is(false));
     }
-    
+
     @Test
-    public void 資格喪失日が空白の場合falseを返す(){
+    public void 資格喪失日が空白の場合falseを返す() {
         資格喪失日が年度内に存在するか判定 soushitu = new 資格喪失日が年度内に存在するか判定();
-        
+
         保険料段階判定input input = new 保険料段階判定input();
         NengakuFukaKonkyo fukakonkyo = new NengakuFukaKonkyo();
         fukakonkyo.set資格喪失日(null);
         input.set年額賦課根拠(fukakonkyo);
-        input.set賦課年度("2014");
-        assertThat(soushitu.JudgeHasuu(input), is(false));        
-    }    
-    
-  
-    
-           protected static Date toDate(String str) {
+        input.set賦課年度(new RString("2014"));
+        assertThat(soushitu.judgeHasuu(input), is(false));
+    }
+
+    protected static Date toDate(String str) {
         Date date = null;
         try {
             date = DateFormat.getDateInstance().parse(str);
@@ -113,5 +105,5 @@ public class 資格喪失日が年度内に存在するか判定test {
         }
         return date;
     }
-    
+
 }

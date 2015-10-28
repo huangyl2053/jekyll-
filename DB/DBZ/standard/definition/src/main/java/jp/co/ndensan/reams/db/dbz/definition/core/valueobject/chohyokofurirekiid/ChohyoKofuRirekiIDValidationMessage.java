@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link ChohyoKofuRirekiID}のバリデーションメッセージです。
+ * {@link ChohyoKofuRirekiID}のバリデーションメッセージクラスです。
  */
 public enum ChohyoKofuRirekiIDValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ChohyoKofuRirekiIDErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ChohyoKofuRirekiIDValidationMessage implements IValidationMessage {
     public enum ChohyoKofuRirekiIDErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "帳票交付履歴IDを指定してください。");
         private final int no;

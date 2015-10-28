@@ -19,15 +19,15 @@ public enum SaiSoufuKubun implements IRStringConvertable {
 //TODO N8107千秋雄 コードマスタにて管理されることも考慮する　2014/2/28 まで
 
     /**
-     * 初期値・再送信がない場合 ("00")
+     * 初期値・再送信がない場合 ("00")。
      */
     再送信無し(new RString("00")),
     /**
-     * 再度送信した場合 ("01")
+     * 再度送信した場合 ("01")。
      */
     再送信(new RString("01")),
     /**
-     * 再度送信後、送付済の場合 ("02")
+     * 再度送信後、送付済の場合 ("02")。
      */
     再送信送付済(new RString("02"));
     private final RString コード;

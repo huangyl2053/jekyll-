@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class HomonkaigoRiyoshaFutangakuGengaku {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div HomonkaigoRiyoshaFutangakuGengakuDiv
      * @return ResponseData
@@ -48,7 +48,7 @@ public class HomonkaigoRiyoshaFutangakuGengaku {
     }
 
     /**
-     * onSelect dgHomonkaigoRiyoshaFutangakuGengakuList
+     * onSelect dgHomonkaigoRiyoshaFutangakuGengakuList。
      *
      * @param div HomonkaigoRiyoshaFutangakuGengakuDiv
      * @return ResponseData
@@ -57,14 +57,14 @@ public class HomonkaigoRiyoshaFutangakuGengaku {
             onSelect_dgHomonkaigoRiyoshaFutangakuGengakuList(HomonkaigoRiyoshaFutangakuGengakuDiv div) {
         for (dgHomonkaigoRiyoshaFutangakuGengakuList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(HomonkaigoRiyoshaFutangakuGengakuDiv div,
+    private void _setUp(HomonkaigoRiyoshaFutangakuGengakuDiv div,
             dgHomonkaigoRiyoshaFutangakuGengakuList_Row rowValue) {
         _setUp_Shinsei(div, rowValue);
         _setUp_RiyoshaFutan(div, rowValue);
@@ -111,7 +111,7 @@ public class HomonkaigoRiyoshaFutangakuGengaku {
     }
 
     /**
-     * creates ResponseData for HomonkaigoRiyoshaFutangakuGengakuDiv
+     * creates ResponseData for HomonkaigoRiyoshaFutangakuGengakuDiv。
      *
      * @param div HomonkaigoRiyoshaFutangakuGengakuDiv
      * @return ResponseData

@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -14,12 +12,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 主治医コードです。
+ * 主治医コードクラスです。
  *
  * @author N8235 船山 洋介
  */
 public class ShujiiCode implements IValueObject<RString>, Comparable<ShujiiCode>, IDbColumnMappable, Serializable {
 
+    private static final int eight = 8;
     /**
      * 空の{@link ShujiiCode}です。
      */

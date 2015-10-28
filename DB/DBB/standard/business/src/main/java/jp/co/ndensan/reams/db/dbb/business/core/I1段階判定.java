@@ -11,8 +11,8 @@ package jp.co.ndensan.reams.db.dbb.business.core;
  */
 public interface I1段階判定 {
 
-    public boolean isMatch(HokenryoDankaiInput hokenryoDankaiInput);
+    boolean isMatch(HokenryoDankaiInput hokenryoDankaiInput);
 
-    public HokenryoDankaiOutput Dai1dankaiSettei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput);
+    HokenryoDankaiOutput dai1dankaiSettei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput);
 
 }

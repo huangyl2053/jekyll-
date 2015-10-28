@@ -5,22 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0320001;
 
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiDisplayMode;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
-//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * 全賦課履歴Divのコントローラです。

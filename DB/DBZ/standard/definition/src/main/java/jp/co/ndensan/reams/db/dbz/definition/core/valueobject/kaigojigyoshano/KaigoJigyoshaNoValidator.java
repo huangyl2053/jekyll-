@@ -18,7 +18,7 @@ public class KaigoJigyoshaNoValidator {
     private final KaigoJigyoshaNo kaigoJigyoshaNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param kaigoJigyoshaNo 認定調査委託先コード
      */

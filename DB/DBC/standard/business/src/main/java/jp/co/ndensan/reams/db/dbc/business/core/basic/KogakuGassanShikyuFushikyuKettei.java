@@ -8,22 +8,24 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給不支給決定を管理するクラスです。
  */
-public class KogakuGassanShikyuFushikyuKettei extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei> implements Serializable {
+public class KogakuGassanShikyuFushikyuKettei
+       extends ModelBase<KogakuGassanShikyuFushikyuKetteiIdentifier, DbT3074KogakuGassanShikyuFushikyuKetteiEntity, KogakuGassanShikyuFushikyuKettei>
+       implements Serializable {
 
     private final DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity;
     private final KogakuGassanShikyuFushikyuKetteiIdentifier id;
@@ -67,8 +69,7 @@ public class KogakuGassanShikyuFushikyuKettei extends ModelBase<KogakuGassanShik
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}より{@link KogakuGassanShikyuFushikyuKettei}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}
+     * @param entity DBより取得した{@link DbT3074KogakuGassanShikyuFushikyuKetteiEntity}
      */
     public KogakuGassanShikyuFushikyuKettei(DbT3074KogakuGassanShikyuFushikyuKetteiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給不支給決定"));

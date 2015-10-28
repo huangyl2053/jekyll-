@@ -19,11 +19,11 @@ public enum HikiwatashiKubun implements IRStringConvertable {
 //TODO N8107千秋雄 コードマスタにて管理されることも考慮する　2014/2/28 まで
 
     /**
-     * 連携データの引き渡しが済んでいる("1")
+     * 連携データの引き渡しが済んでいる("1")。
      */
     引渡し済み(new RString("1")),
     /**
-     * 連携データが引き渡されていない("0")
+     * 連携データが引き渡されていない("0")。
      */
     引き渡し未済(new RString("0"));
     private final RString コード;

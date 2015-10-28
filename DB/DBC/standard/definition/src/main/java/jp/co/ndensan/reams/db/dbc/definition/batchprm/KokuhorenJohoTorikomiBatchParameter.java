@@ -15,13 +15,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
 
-    public final static String SHORIYM = "shoriym";
-    public final static String SHUTURYOKUJUNID = "shutsuryokujunid";
-    public final static String SAISHORIKUBUN = "saishorikubun";
-    public final static String KOKANJOHOSHIKIBETSUNO = "kokanjohoshikibetsuno";
-    public final static String SHORINICHIJI = "shorinichiji";
-    public final static String HOKENSHAKOSEIKUBUN = "hokenshakoseikubun";
-    public final static String GAPPEIJOHOKBN = "gappeijohokubun";
+    public static final String SHORIYM = "shoriym";
+    public static final String SHUTURYOKUJUNID = "shutsuryokujunid";
+    public static final String SAISHORIKUBUN = "saishorikubun";
+    public static final String KOKANJOHOSHIKIBETSUNO = "kokanjohoshikibetsuno";
+    public static final String SHORINICHIJI = "shorinichiji";
+    public static final String HOKENSHAKOSEIKUBUN = "hokenshakoseikubun";
+    public static final String GAPPEIJOHOKBN = "gappeijohokubun";
 
     @BatchParameter(key = SHORIYM, name = "処理対象年月")
     private RString shoriYM;

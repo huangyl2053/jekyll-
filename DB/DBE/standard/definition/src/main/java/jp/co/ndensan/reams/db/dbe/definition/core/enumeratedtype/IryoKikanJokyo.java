@@ -12,11 +12,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype;
 public enum IryoKikanJokyo {
 
     /**
-     * 有効
+     * 有効。
      */
     有効(true),
     /**
-     * 無効
+     * 無効。
      */
     無効(false);
     private final boolean is有効;

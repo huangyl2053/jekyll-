@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 介護サービス内容のコンバーターです
+ * 介護サービス内容のコンバーターです。
  *
  * @author n8104　小玉　洋一
  * @jpName 介護サービス内容マッパー

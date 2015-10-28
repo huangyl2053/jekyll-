@@ -7,12 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core;
 
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 
 /**
@@ -21,11 +16,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
  */
 public class KokuhorenJohoTorikomi {
 
-    private final String 処理前 = "1";
-    private final String 起動中 = "2";
-    private final String 処理済 = "3";
-    private final String 処理無 = "9";
-
+//    private final String 処理前 = "1";
+//    private final String 起動中 = "2";
+//    private final String 処理済 = "3";
+//    private final String 処理無 = "9";
     public RString get処理状態(RString 処理状態区分) {
 
         if (処理状態区分.isEmpty()) {
@@ -33,11 +27,11 @@ public class KokuhorenJohoTorikomi {
         }
 
         switch (処理状態区分.toString()) {
-            case 処理前:
+            case "1":
                 return new RString("×");
-            case 処理済:
+            case "3":
                 return new RString("○");
-            case 処理無:
+            case "9":
                 return new RString("-");
             default:
                 return new RString("-");

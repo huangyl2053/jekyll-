@@ -6,6 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -14,20 +15,20 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class 年額計算Output {
     
-    private String fukaNendo;
+    private RString fukaNendo;
     private Decimal hokenryoNengaku;
 
     /**
      * @return the fukaNendo
      */
-    public String getFukaNendo() {
+    public RString getFukaNendo() {
         return fukaNendo;
     }
 
     /**
      * @param fukaNendo the fukaNendo to set
      */
-    public void setFukaNendo(String fukaNendo) {
+    public void setFukaNendo(RString fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 

@@ -155,27 +155,27 @@ public class HokenryoDankai {
         return new RStringBuilder(表記).append(保険料段階.getTokureiHyoki()).toRString();
     }
 
-    void setHokenryoDankai(String hokenryoDankai) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void setHokenryoDankai(RString hokenryoDankai) {
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
-    void setSystemDankai(String hokenryoDankai) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void setSystemDankai(RString hokenryoDankai) {
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
-    String getSystemDankai() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    RString getSystemDankai() {
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
     void setTokureiTaisho(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
-    String getHokenryoDankai() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    RString getHokenryoDankai() {
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 
     boolean isTokureiTaisho() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(""); //To change body of generated methods, choose Tools | Templates.
     }
 }

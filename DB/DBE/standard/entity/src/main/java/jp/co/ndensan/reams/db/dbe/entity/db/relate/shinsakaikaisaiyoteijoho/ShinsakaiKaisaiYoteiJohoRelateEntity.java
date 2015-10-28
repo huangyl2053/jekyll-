@@ -86,11 +86,11 @@ public class ShinsakaiKaisaiYoteiJohoRelateEntity implements Cloneable, Serializ
      */
     public void initializeMd5ToEntities() {
         this.介護認定審査会開催予定情報Entity.initializeMd5();
-        for (ShinsakaiWariateJohoRelateEntity RelateEntity : this.介護認定審査会割当情報RelateEntity) {
-            RelateEntity.initializeMd5ToEntities();
+        for (ShinsakaiWariateJohoRelateEntity relateEntity : this.介護認定審査会割当情報RelateEntity) {
+            relateEntity.initializeMd5ToEntities();
         }
-        for (ShinsakaiWariateIinJohoRelateEntity RelateEntity : this.介護認定審査会割当委員情報RelateEntity) {
-            RelateEntity.initializeMd5ToEntities();
+        for (ShinsakaiWariateIinJohoRelateEntity relateEntity : this.介護認定審査会割当委員情報RelateEntity) {
+            relateEntity.initializeMd5ToEntities();
         }
         for (DbT5511ShinsakaiKaisaiKekkaJohoEntity entity : this.介護認定審査会開催結果情報Entity) {
             entity.initializeMd5();

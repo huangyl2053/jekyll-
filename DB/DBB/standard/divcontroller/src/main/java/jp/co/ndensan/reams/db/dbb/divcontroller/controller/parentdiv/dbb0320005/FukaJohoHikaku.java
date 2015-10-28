@@ -5,37 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0320005;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaMapper;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei2Div;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
-import jp.co.ndensan.reams.db.dbz.business.core.HokenryoDankai;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
-//import jp.co.ndensan.reams.db.dbz.model.fuka.Fuka;
-//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ControlEventType;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 
 /**
  * 賦課照会の比較Divのコントローラです。
@@ -52,15 +26,15 @@ public class FukaJohoHikaku {
      */
     public ResponseData<FukaJohoHikakuDiv> initialize(FukaJohoHikakuDiv div) {
 
-        FukaShokaiKey fukaShokaiKey = FukaShokaiController.getFukaShokaiKeyInViewState();
+//        FukaShokaiKey fukaShokaiKey = FukaShokaiController.getFukaShokaiKeyInViewState();
 //        MaeRirekiKey maeRirekiKey = FukaShokaiController.getMaeRirekiKeyInViewState();
-        final FukaManager fukaFinder = new FukaManager();
+//        final FukaManager fukaFinder = new FukaManager();
 //        Optional<Fuka> value = fukaFinder.find賦課直近(
 //                fukaShokaiKey.get通知書番号(),
 //                fukaShokaiKey.get処理日時());
 //
 //        MaeRirekiKey maeRireki = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
-        MaeRirekiKey maeRirekiKey;
+//        MaeRirekiKey maeRirekiKey;
         IViewStateValue<MaeRirekiKey> maeRireki = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
 //        if (value.isPresent()) {
 //            Fuka maeModel = value.get();
@@ -103,21 +77,21 @@ public class FukaJohoHikaku {
         return createResponseData(div);
     }
 
-    private FukaHikakuTarget checkFukaHikakuTarget(FukaShokaiKey fukaShokaiKey, MaeRirekiKey maeRirekiKey) {
-
-        if (maeRirekiKey == null) {
-            return FukaHikakuTarget.前データなし;
-        }
-        if (fukaShokaiKey.get算定状態() == SanteiState.仮算定 && maeRirekiKey.get算定状態() == SanteiState.仮算定) {
-            return FukaHikakuTarget.仮算定_仮算定;
-        } else if (fukaShokaiKey.get算定状態() == SanteiState.仮算定 && maeRirekiKey.get算定状態() == SanteiState.本算定) {
-            return FukaHikakuTarget.仮算定_本算定;
-        } else if (fukaShokaiKey.get算定状態() == SanteiState.本算定 && maeRirekiKey.get算定状態() == SanteiState.仮算定) {
-            return FukaHikakuTarget.本算定_仮算定;
-        } else {
-            return FukaHikakuTarget.本算定_本算定;
-        }
-    }
+//    private FukaHikakuTarget checkFukaHikakuTarget(FukaShokaiKey fukaShokaiKey, MaeRirekiKey maeRirekiKey) {
+//
+//        if (maeRirekiKey == null) {
+//            return FukaHikakuTarget.前データなし;
+//        }
+//        if (fukaShokaiKey.get算定状態() == SanteiState.仮算定 && maeRirekiKey.get算定状態() == SanteiState.仮算定) {
+//            return FukaHikakuTarget.仮算定_仮算定;
+//        } else if (fukaShokaiKey.get算定状態() == SanteiState.仮算定 && maeRirekiKey.get算定状態() == SanteiState.本算定) {
+//            return FukaHikakuTarget.仮算定_本算定;
+//        } else if (fukaShokaiKey.get算定状態() == SanteiState.本算定 && maeRirekiKey.get算定状態() == SanteiState.仮算定) {
+//            return FukaHikakuTarget.本算定_仮算定;
+//        } else {
+//            return FukaHikakuTarget.本算定_本算定;
+//        }
+//    }
 
     private enum FukaHikakuTarget {
 
@@ -128,156 +102,156 @@ public class FukaJohoHikaku {
         本算定_本算定;
     }
 
-    private void setDivFor本1_仮1(FukaJohoHikakuDiv div) {
-        div.getHonSantei1().setDisplayNone(false);
-        div.getHonSantei2().setDisplayNone(true);
-        div.getKariSantei1().setDisplayNone(false);
-        div.getKariSantei2().setDisplayNone(true);
+//    private void setDivFor本1_仮1(FukaJohoHikakuDiv div) {
+//        div.getHonSantei1().setDisplayNone(false);
+//        div.getHonSantei2().setDisplayNone(true);
+//        div.getKariSantei1().setDisplayNone(false);
+//        div.getKariSantei2().setDisplayNone(true);
+//
+//        setHonSantei1(div.getHonSantei1(),
+//                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+//        setKariSantei1(div.getKariSantei1(),
+//                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
+//    }
 
-        setHonSantei1(div.getHonSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
-        setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
-    }
+//    private void setDivFor仮1_仮2(FukaJohoHikakuDiv div) {
+//        div.getHonSantei1().setDisplayNone(true);
+//        div.getHonSantei2().setDisplayNone(true);
+//        div.getKariSantei1().setDisplayNone(false);
+//        div.getKariSantei2().setDisplayNone(false);
+//
+//        setKariSantei1(div.getKariSantei1(),
+//                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+//        setKariSantei2(div.getKariSantei2(),
+//                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
+//    }
+//
+//    private void setDivFor仮1_本2(FukaJohoHikakuDiv div) {
+//        div.getHonSantei1().setDisplayNone(true);
+//        div.getHonSantei2().setDisplayNone(false);
+//        div.getKariSantei1().setDisplayNone(false);
+//        div.getKariSantei2().setDisplayNone(true);
+//
+//        setKariSantei1(div.getKariSantei1(),
+//                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+//        setHonSantei2(div.getHonSantei2(),
+//                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
+//    }
+//
+//    private void setDivFor本1_本2(FukaJohoHikakuDiv div) {
+//        div.getHonSantei1().setDisplayNone(false);
+//        div.getHonSantei2().setDisplayNone(false);
+//        div.getKariSantei1().setDisplayNone(true);
+//        div.getKariSantei2().setDisplayNone(true);
+//
+//        setHonSantei1(div.getHonSantei1(),
+//                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+//        setHonSantei2(div.getHonSantei2(),
+//                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
+//    }
+//
+//    private void setDivFor前データなし(FukaJohoHikakuDiv div) {
+//        div.getHonSantei1().setDisplayNone(true);
+//        div.getHonSantei2().setDisplayNone(true);
+//        div.getKariSantei1().setDisplayNone(true);
+//        div.getKariSantei2().setDisplayNone(true);
+//
+//    }
 
-    private void setDivFor仮1_仮2(FukaJohoHikakuDiv div) {
-        div.getHonSantei1().setDisplayNone(true);
-        div.getHonSantei2().setDisplayNone(true);
-        div.getKariSantei1().setDisplayNone(false);
-        div.getKariSantei2().setDisplayNone(false);
+//    private void clearKariSantei1(final KariSantei1Div div) {
+//        div.getTxtChoteiJiyuKari11().clearValue();
+//        div.getTxtChoteiJiyuKari14().clearValue();
+//        div.getTxtFukaNendoKari1().clearValue();
+//        div.getTxtGemmenGakuKari1().clearValue();
+//        div.getTxtHokenryoRitsuKari1().clearValue();
+//        div.getTxtChoteiJiyuKari13().clearValue();
+//        div.getTxtKoseiYMDKari1().clearValue();
+//        div.getTxtHokenryoDankaiKari1().clearValue();
+//        div.getTxtShimeiKari1().clearValue();
+//        div.getTxtKoseiYMKari1().clearValue();
+//        div.getTxtZanteiGoukeiGakuKari1().clearValue();
+//        div.getTxtTsuchiNoKari1().clearValue();
+//        div.getTxtShikakuSoshitsuYMDKari1().clearValue();
+//        div.getTxtChoteiJiyuKari12().clearValue();
+//        div.getTxtZanteiKeisanjoHokenryoKari1().clearValue();
+//        div.getTxtChoteiNendoKari1().clearValue();
+//        div.getTxtNengakuHokenryoKari1().clearValue();
+//        div.getTxtShikakuShutokuYMDKari1().clearValue();
+//    }
+//
+//    private void clearKariSantei2(final KariSantei2Div div) {
+//        div.getTxtChoteiJiyuKari23().clearValue();
+//        div.getTxtShikakuSoshitsuYMDKari2().clearValue();
+//        div.getTxtGemmenGakuKari2().clearValue();
+//        div.getTxtFukaNendoKari2().clearValue();
+//        div.getTxtKoseiYMDKari2().clearValue();
+//        div.getTxtZanteiKeisanjoHokenryoKari2().clearValue();
+//        div.getTxtTsuchiNoKari2().clearValue();
+//        div.getTxtHokenryoRitsuKari2().clearValue();
+//        div.getTxtChoteiJiyuKari22().clearValue();
+//        div.getTxtShimeiKari2().clearValue();
+//        div.getTxtNengakuHokenryoKari2().clearValue();
+//        div.getTxtChoteiNendoKari2().clearValue();
+//        div.getTxtChoteiJiyuKari21().clearValue();
+//        div.getTxtZanteiGoukeiGakuKari2().clearValue();
+//        div.getTxtShikakuShutokuYMDKari2().clearValue();
+//        div.getTxtChoteiJiyuKari24().clearValue();
+//        div.getTxtKoseiYMKari2().clearValue();
+//        div.getTxtHokenryoDankaiKari2().clearValue();
+//    }
+//
+//    private void clearHonSantei1(final HonSantei1Div div) {
+//        div.getTxtKyokaisoHon1().clearValue();
+//        div.getTxtHokenryoDankaiHon1().clearValue();
+//        div.getTxtChoteiNendoHon1().clearValue();
+//        div.getTxtKakuteiHokenryoHon1().clearValue();
+//        div.getTxtChoteiJiyuHon13().clearValue();
+//        div.getTxtShimeiHon1().clearValue();
+//        div.getTxtNenkinShunyuHon1().clearValue();
+//        div.getTxtGemmenGakuHon1().clearValue();
+//        div.getTxtShikakusoshitsuYMDHon1().clearValue();
+//        div.getTxtFukaNendoHon1().clearValue();
+//        div.getTxtShikakuShutokuYMDHon1().clearValue();
+//        div.getTxtSetaiinSuHon1().clearValue();
+//        div.getTxtChoteiJiyuHon14().clearValue();
+//        div.getTxtKoseiYMDHon1().clearValue();
+//        div.getTxtGoukeiShotokuHon1().clearValue();
+//        div.getTxtChoteiJiyuHon12().clearValue();
+//        div.getTxtHonninKazeiHon1().clearValue();
+//        div.getTxtKeisanHokenryogakuHon1().clearValue();
+//        div.getTxtSetaiKazeiHon1().clearValue();
+//        div.getTxtKoseiYMHon1().clearValue();
+//        div.getTxtTsuchiNoHon1().clearValue();
+//        div.getTxtChoteiJiyuHon11().clearValue();
+//    }
+//
+//    private void clearHonSantei2(final HonSantei2Div div) {
+//        div.getTxtKeisanHokenryogakuHon2().clearValue();
+//        div.getTxtHonninKazeiHon2().clearValue();
+//        div.getTxtSetaiKazeiHon2().clearValue();
+//        div.getTxtChoteiJiyuHon23().clearValue();
+//        div.getTxtKoseiYMDHon2().clearValue();
+//        div.getTxtTsuchiNoHon2().clearValue();
+//        div.getTxtKoseiYMHon2().clearValue();
+//        div.getTxtGoukeiShotokuHon2().clearValue();
+//        div.getTxtShikakuSoshitsuYMDHon2().clearValue();
+//        div.getTxtChoteiJiyuHon22().clearValue();
+//        div.getTxtNenkinShunyuHon2().clearValue();
+//        div.getTxtShimeiHon2().clearValue();
+//        div.getTxtShikakuShutokuYMDHon2().clearValue();
+//        div.getTxtKyokaisoHon2().clearValue();
+//        div.getTxtKakuteiHokenryoHon2().clearValue();
+//        div.getTxtChoteiJiyuHon24().clearValue();
+//        div.getTxtSetaiinSuHon2().clearValue();
+//        div.getTxtHokenryoDankaiHon2().clearValue();
+//        div.getTxtGemmenGakuHon2().clearValue();
+//        div.getTxtChoteiJiyuHon21().clearValue();
+//        div.getTxtFukaNendoHon2().clearValue();
+//        div.getTxtChoteiNendoHon2().clearValue();
+//    }
 
-        setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
-        setKariSantei2(div.getKariSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
-    }
-
-    private void setDivFor仮1_本2(FukaJohoHikakuDiv div) {
-        div.getHonSantei1().setDisplayNone(true);
-        div.getHonSantei2().setDisplayNone(false);
-        div.getKariSantei1().setDisplayNone(false);
-        div.getKariSantei2().setDisplayNone(true);
-
-        setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
-        setHonSantei2(div.getHonSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
-    }
-
-    private void setDivFor本1_本2(FukaJohoHikakuDiv div) {
-        div.getHonSantei1().setDisplayNone(false);
-        div.getHonSantei2().setDisplayNone(false);
-        div.getKariSantei1().setDisplayNone(true);
-        div.getKariSantei2().setDisplayNone(true);
-
-        setHonSantei1(div.getHonSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
-        setHonSantei2(div.getHonSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
-    }
-
-    private void setDivFor前データなし(FukaJohoHikakuDiv div) {
-        div.getHonSantei1().setDisplayNone(true);
-        div.getHonSantei2().setDisplayNone(true);
-        div.getKariSantei1().setDisplayNone(true);
-        div.getKariSantei2().setDisplayNone(true);
-
-    }
-
-    private void clearKariSantei1(final KariSantei1Div div) {
-        div.getTxtChoteiJiyuKari11().clearValue();
-        div.getTxtChoteiJiyuKari14().clearValue();
-        div.getTxtFukaNendoKari1().clearValue();
-        div.getTxtGemmenGakuKari1().clearValue();
-        div.getTxtHokenryoRitsuKari1().clearValue();
-        div.getTxtChoteiJiyuKari13().clearValue();
-        div.getTxtKoseiYMDKari1().clearValue();
-        div.getTxtHokenryoDankaiKari1().clearValue();
-        div.getTxtShimeiKari1().clearValue();
-        div.getTxtKoseiYMKari1().clearValue();
-        div.getTxtZanteiGoukeiGakuKari1().clearValue();
-        div.getTxtTsuchiNoKari1().clearValue();
-        div.getTxtShikakuSoshitsuYMDKari1().clearValue();
-        div.getTxtChoteiJiyuKari12().clearValue();
-        div.getTxtZanteiKeisanjoHokenryoKari1().clearValue();
-        div.getTxtChoteiNendoKari1().clearValue();
-        div.getTxtNengakuHokenryoKari1().clearValue();
-        div.getTxtShikakuShutokuYMDKari1().clearValue();
-    }
-
-    private void clearKariSantei2(final KariSantei2Div div) {
-        div.getTxtChoteiJiyuKari23().clearValue();
-        div.getTxtShikakuSoshitsuYMDKari2().clearValue();
-        div.getTxtGemmenGakuKari2().clearValue();
-        div.getTxtFukaNendoKari2().clearValue();
-        div.getTxtKoseiYMDKari2().clearValue();
-        div.getTxtZanteiKeisanjoHokenryoKari2().clearValue();
-        div.getTxtTsuchiNoKari2().clearValue();
-        div.getTxtHokenryoRitsuKari2().clearValue();
-        div.getTxtChoteiJiyuKari22().clearValue();
-        div.getTxtShimeiKari2().clearValue();
-        div.getTxtNengakuHokenryoKari2().clearValue();
-        div.getTxtChoteiNendoKari2().clearValue();
-        div.getTxtChoteiJiyuKari21().clearValue();
-        div.getTxtZanteiGoukeiGakuKari2().clearValue();
-        div.getTxtShikakuShutokuYMDKari2().clearValue();
-        div.getTxtChoteiJiyuKari24().clearValue();
-        div.getTxtKoseiYMKari2().clearValue();
-        div.getTxtHokenryoDankaiKari2().clearValue();
-    }
-
-    private void clearHonSantei1(final HonSantei1Div div) {
-        div.getTxtKyokaisoHon1().clearValue();
-        div.getTxtHokenryoDankaiHon1().clearValue();
-        div.getTxtChoteiNendoHon1().clearValue();
-        div.getTxtKakuteiHokenryoHon1().clearValue();
-        div.getTxtChoteiJiyuHon13().clearValue();
-        div.getTxtShimeiHon1().clearValue();
-        div.getTxtNenkinShunyuHon1().clearValue();
-        div.getTxtGemmenGakuHon1().clearValue();
-        div.getTxtShikakusoshitsuYMDHon1().clearValue();
-        div.getTxtFukaNendoHon1().clearValue();
-        div.getTxtShikakuShutokuYMDHon1().clearValue();
-        div.getTxtSetaiinSuHon1().clearValue();
-        div.getTxtChoteiJiyuHon14().clearValue();
-        div.getTxtKoseiYMDHon1().clearValue();
-        div.getTxtGoukeiShotokuHon1().clearValue();
-        div.getTxtChoteiJiyuHon12().clearValue();
-        div.getTxtHonninKazeiHon1().clearValue();
-        div.getTxtKeisanHokenryogakuHon1().clearValue();
-        div.getTxtSetaiKazeiHon1().clearValue();
-        div.getTxtKoseiYMHon1().clearValue();
-        div.getTxtTsuchiNoHon1().clearValue();
-        div.getTxtChoteiJiyuHon11().clearValue();
-    }
-
-    private void clearHonSantei2(final HonSantei2Div div) {
-        div.getTxtKeisanHokenryogakuHon2().clearValue();
-        div.getTxtHonninKazeiHon2().clearValue();
-        div.getTxtSetaiKazeiHon2().clearValue();
-        div.getTxtChoteiJiyuHon23().clearValue();
-        div.getTxtKoseiYMDHon2().clearValue();
-        div.getTxtTsuchiNoHon2().clearValue();
-        div.getTxtKoseiYMHon2().clearValue();
-        div.getTxtGoukeiShotokuHon2().clearValue();
-        div.getTxtShikakuSoshitsuYMDHon2().clearValue();
-        div.getTxtChoteiJiyuHon22().clearValue();
-        div.getTxtNenkinShunyuHon2().clearValue();
-        div.getTxtShimeiHon2().clearValue();
-        div.getTxtShikakuShutokuYMDHon2().clearValue();
-        div.getTxtKyokaisoHon2().clearValue();
-        div.getTxtKakuteiHokenryoHon2().clearValue();
-        div.getTxtChoteiJiyuHon24().clearValue();
-        div.getTxtSetaiinSuHon2().clearValue();
-        div.getTxtHokenryoDankaiHon2().clearValue();
-        div.getTxtGemmenGakuHon2().clearValue();
-        div.getTxtChoteiJiyuHon21().clearValue();
-        div.getTxtFukaNendoHon2().clearValue();
-        div.getTxtChoteiNendoHon2().clearValue();
-    }
-
-    private void setKariSantei1(final KariSantei1Div div, Fuka model, AtenaMeisho name) {
-        clearKariSantei1(div);
+//    private void setKariSantei1(final KariSantei1Div div, Fuka model, AtenaMeisho name) {
+//        clearKariSantei1(div);
 
 //        div.getTxtChoteiJiyuKari11().setValue(model.get調定事由1().getRyakusho());
 //        div.getTxtChoteiJiyuKari14().setValue(getRyakusho(model.get調定事由4()));
@@ -306,10 +280,10 @@ public class FukaJohoHikaku {
 //        div.getTxtChoteiNendoKari1().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
 //        div.getTxtNengakuHokenryoKari1().setValue(model.get確定介護保険料_年額());
 //        div.getTxtShikakuShutokuYMDKari1().setValue(FukaMapper.toRDate(model.get資格取得日()));
-    }
+//    }
 
-    private void setKariSantei2(final KariSantei2Div div, Fuka model, AtenaMeisho name) {
-        clearKariSantei2(div);
+//    private void setKariSantei2(final KariSantei2Div div, Fuka model, AtenaMeisho name) {
+//        clearKariSantei2(div);
 
 //        div.getTxtChoteiJiyuKari23().setValue(getRyakusho(model.get調定事由3()));
 //        div.getTxtShikakuSoshitsuYMDKari2().setValue(FukaMapper.toRDate(model.get資格喪失日()));
@@ -336,10 +310,10 @@ public class FukaJohoHikaku {
 //            div.getTxtHokenryoDankaiKari2().setValue(前年度保険料段階.get().edit表示用保険料段階());
 //            div.getTxtHokenryoRitsuKari2().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
 //        }
-    }
+//    }
 
-    private void setHonSantei1(final HonSantei1Div div, Fuka model, AtenaMeisho name) {
-        clearHonSantei1(div);
+//    private void setHonSantei1(final HonSantei1Div div, Fuka model, AtenaMeisho name) {
+//        clearHonSantei1(div);
 
 //        div.getTxtKyokaisoHon1().setValue(model.get境界層区分().toRString());
 //        div.getTxtHokenryoDankaiHon1().setValue(
@@ -368,10 +342,10 @@ public class FukaJohoHikaku {
 //        div.getTxtKoseiYMHon1().setValue(model.get更正月());
 //        div.getTxtTsuchiNoHon1().setValue(model.get通知書番号().value());
 //        div.getTxtChoteiJiyuHon11().setValue(model.get調定事由1().getRyakusho());
-    }
-
-    private void setHonSantei2(final HonSantei2Div div, Fuka model, AtenaMeisho name) {
-        clearHonSantei2(div);
+//    }
+//
+//    private void setHonSantei2(final HonSantei2Div div, Fuka model, AtenaMeisho name) {
+//        clearHonSantei2(div);
 
 //        div.getTxtKeisanHokenryogakuHon2().setValue(model.get減免前介護保険料_年額());
 //        div.getTxtHonninKazeiHon2().setValue(model.get課税区分().toRString());
@@ -400,7 +374,7 @@ public class FukaJohoHikaku {
 //        div.getTxtChoteiJiyuHon21().setValue(model.get調定事由1().getRyakusho());
 //        div.getTxtFukaNendoHon2().setValue(new FlexibleDate(model.get賦課年度().value().getYearValue(), 12, 31));
 //        div.getTxtChoteiNendoHon2().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
-    }
+//    }
 
     private ResponseData<FukaJohoHikakuDiv> createResponseData(FukaJohoHikakuDiv div) {
         ResponseData<FukaJohoHikakuDiv> response = new ResponseData<>();
@@ -408,11 +382,11 @@ public class FukaJohoHikaku {
         return response;
     }
 
-    private RString getRyakusho(ChoteiJiyu choteijiyu) {
-        if (choteijiyu == null) {
-            return null;
-        } else {
-            return choteijiyu.getRyakusho();
-        }
-    }
+//    private RString getRyakusho(ChoteiJiyu choteijiyu) {
+//        if (choteijiyu == null) {
+//            return null;
+//        } else {
+//            return choteijiyu.getRyakusho();
+//        }
+//    }
 }

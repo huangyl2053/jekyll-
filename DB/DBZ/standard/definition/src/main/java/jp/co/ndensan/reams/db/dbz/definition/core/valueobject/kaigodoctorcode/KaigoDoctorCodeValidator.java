@@ -18,7 +18,7 @@ public class KaigoDoctorCodeValidator {
     private final KaigoDoctorCode kaigoDoctorCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param kaigoDoctorCode 介護医師コード
      */

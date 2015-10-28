@@ -6,16 +6,14 @@ package jp.co.ndensan.reams.db.dbb.business.core;
  * and open the template in the editor.
  */
 
-import jp.co.ndensan.reams.db.dbb.business.core.I端数調整;
-import jp.co.ndensan.reams.db.dbb.business.core.端数調整しない;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -51,6 +49,6 @@ public class 端数調整しないtest {
     @Test
     public void 端数調整しない(){
         I端数調整 test = new 端数調整しない();
-        assertThat(test.Calc端数(new Decimal("9990")), is(new Decimal("9990")));
+        assertThat(test.calc端数(new Decimal("9990")), is(new Decimal("9990")));
     }    
 }

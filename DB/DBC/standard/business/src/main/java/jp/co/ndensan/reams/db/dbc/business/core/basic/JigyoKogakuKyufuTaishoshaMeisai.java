@@ -8,21 +8,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業高額介護サービス費給付対象者明細を管理するクラスです。
  */
-public class JigyoKogakuKyufuTaishoshaMeisai extends ModelBase<JigyoKogakuKyufuTaishoshaMeisaiIdentifier, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity, JigyoKogakuKyufuTaishoshaMeisai> implements Serializable {
+public class JigyoKogakuKyufuTaishoshaMeisai
+        extends ModelBase<JigyoKogakuKyufuTaishoshaMeisaiIdentifier, DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity, JigyoKogakuKyufuTaishoshaMeisai>
+        implements Serializable {
 
     private final DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity;
     private final JigyoKogakuKyufuTaishoshaMeisaiIdentifier id;
@@ -66,8 +68,7 @@ public class JigyoKogakuKyufuTaishoshaMeisai extends ModelBase<JigyoKogakuKyufuT
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity}より{@link JigyoKogakuKyufuTaishoshaMeisai}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity}
+     * @param entity DBより取得した{@link DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity}
      */
     public JigyoKogakuKyufuTaishoshaMeisai(DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業高額介護サービス費給付対象者明細"));
@@ -179,8 +180,7 @@ public class JigyoKogakuKyufuTaishoshaMeisai extends ModelBase<JigyoKogakuKyufuT
     /**
      * 事業高額介護サービス費給付対象者明細の識別子{@link JigyoKogakuKyufuTaishoshaMeisaiIdentifier}を返します。
      *
-     * @return
-     * 事業高額介護サービス費給付対象者明細の識別子{@link JigyoKogakuKyufuTaishoshaMeisaiIdentifier}
+     * @return 事業高額介護サービス費給付対象者明細の識別子{@link JigyoKogakuKyufuTaishoshaMeisaiIdentifier}
      */
     @Override
     public JigyoKogakuKyufuTaishoshaMeisaiIdentifier identifier() {

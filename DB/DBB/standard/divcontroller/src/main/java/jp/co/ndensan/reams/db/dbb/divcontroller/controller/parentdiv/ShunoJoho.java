@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.SupplementInfoPrm;
 
@@ -26,9 +25,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.SupplementInfoPrm;
  */
 public class ShunoJoho {
 
-    private static final RString ShunoInfo = new RString("ShunoJoho/ShunoInfo.yml");
-    private static final RString Tokucho = new RString("ShunoJoho/Tokucho.yml");
-    private static final RString Fucho = new RString("ShunoJoho/Fucho.yml");
+    private static final RString SHUNOINFO = new RString("ShunoJoho/ShunoInfo.yml");
+    private static final RString TOKUCHO = new RString("ShunoJoho/Tokucho.yml");
+    private static final RString FUCHO = new RString("ShunoJoho/Fucho.yml");
+    private static final int TSUCHINO_LENGTH = 16;
 
     /**
      * 補足情報パラメータオブジェクトを作成する。 共有子Divが必要とする親Divからのキー情報を返すメソッド
@@ -63,7 +63,8 @@ public class ShunoJoho {
     }
 
     /**
-     * この共有子DivがActive（タブが選択されている状態）で、業務画面側でキー情報の変更が発生した際に発火するイベント。 親画面で、sendDataが更新されたとき自動的にcallされる。メソッド名はonUpdateにすること。
+     * この共有子DivがActive（タブが選択されている状態）で、業務画面側でキー情報の変更が発生した際に発火するイベント。
+     * 親画面で、sendDataが更新されたとき自動的にcallされる。メソッド名はonUpdateにすること。
      * 第一引数は対象の共有子Divのentityのインスタンス。第二引数は親Divから渡されるSupplementInfoPrmのインスタンス。
      *
      * @param div
@@ -123,9 +124,9 @@ public class ShunoJoho {
     }
 
     private void setShunoInfo(ShunoJohoDiv div) {
-        div.getTxtTsuchiNo().setFormatLength(16);
-        
-        List<HashMap> demoData = YamlLoader.DBB.loadAsList(ShunoInfo);
+        div.getTxtTsuchiNo().setFormatLength(TSUCHINO_LENGTH);
+
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(SHUNOINFO);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
         div.getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));
@@ -139,7 +140,7 @@ public class ShunoJoho {
     }
 
     private void setDgTokucho(ShunoJohoDiv div) {
-        List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(Tokucho);
+        List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(TOKUCHO);
         List<dgTokucho_Row> arrayData = new ArrayList<>();
 
         if (demoDataList != null) {
@@ -166,7 +167,7 @@ public class ShunoJoho {
     }
 
     private void setDgFucho(ShunoJohoDiv div) {
-        List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(Fucho);
+        List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(FUCHO);
         List<dgFucho_Row> arrayData = new ArrayList<>();
 
         if (demoDataList != null) {

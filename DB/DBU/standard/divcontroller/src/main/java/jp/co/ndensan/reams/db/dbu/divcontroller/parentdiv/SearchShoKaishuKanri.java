@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SearchShoKaishuKanri {
 
-    private final static RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
+    private static final RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
 
     /**
      * 未発行検索条件画面の初期処理を表します。

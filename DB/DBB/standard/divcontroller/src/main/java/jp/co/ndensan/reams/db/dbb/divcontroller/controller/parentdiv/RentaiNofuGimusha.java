@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.SupplementInfoPrm;
  */
 public class RentaiNofuGimusha {
 
-    private static final RString RentaiNofuGimusha = new RString("RentaiNofuGimusha/RentaiNofuGimusha.yml");
+    private static final RString RENTAI_NOFU_GIMU_SHA = new RString("RentaiNofuGimusha/RentaiNofuGimusha.yml");
 
     /**
      * 補足情報パラメータオブジェクトを作成する。 共有子Divが必要とする親Divからのキー情報を返すメソッド
@@ -114,7 +114,7 @@ public class RentaiNofuGimusha {
     }
 
     private void setRentaiNofuGimusha(RentaiNofuGimushaDiv div) {
-        List<HashMap> demoData = YamlLoader.DBB.loadAsList(RentaiNofuGimusha);
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(RENTAI_NOFU_GIMU_SHA);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
         div.getTxtShikibetsuCode().setValue(cg.getAsRString("識別コード"));

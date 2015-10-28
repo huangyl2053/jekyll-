@@ -21,11 +21,11 @@ final class SearchResultForJukyushaShokai {
 
     private static class SearchResultHolder {
 
-        private static final SearchResultForJukyushaShokai instance = new SearchResultForJukyushaShokai();
+        private static final SearchResultForJukyushaShokai INSTANCE = new SearchResultForJukyushaShokai();
     }
 
     static SearchResultForJukyushaShokai getInstance() {
-        return SearchResultHolder.instance;
+        return SearchResultHolder.INSTANCE;
     }
 
     void save(SearchResultOfHihokenshaDiv searchResultDiv) {

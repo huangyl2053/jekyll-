@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link HihokenshaKubunCode}のバリデーションメッセージです。
+ * {@link HihokenshaKubunCode}のバリデーションメッセージクラスです。
  */
 public enum HihokenshaKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(HihokenshaKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum HihokenshaKubunCodeValidationMessage implements IValidationMessage {
     public enum HihokenshaKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "被保険者区分コードを指定してください。");
         private final int no;

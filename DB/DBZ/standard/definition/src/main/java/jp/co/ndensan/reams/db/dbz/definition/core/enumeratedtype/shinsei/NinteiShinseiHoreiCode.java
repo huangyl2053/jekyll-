@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定で使用する申請区分(法令)のコードです。
+ * 要介護認定で使用する申請区分(法令)のコードクラスです。
  *
  * @author N8235 船山 洋介
  */
@@ -20,22 +20,22 @@ public enum NinteiShinseiHoreiCode {
 
     /**
      * 新規申請 <br />
-     * コード : 1
+     * コード : 1。
      */
     新規申請("1"),
     /**
      * 更新申請 <br />
-     * コード : 2
+     * コード : 2。
      */
     更新申請("2"),
     /**
      * 区分変更申請 <br />
-     * コード : 3
+     * コード : 3。
      */
     区分変更申請("3"),
     /**
      * 職権 <br />
-     * コード : 4
+     * コード : 4。
      */
     職権("4");
 

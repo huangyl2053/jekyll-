@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum DbdSystemErrorMessages {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    ダミーメッセージ(0, new RString(""));
 
-    private final String code;
-    private final String message;
+    private final RString code;
+    private final RString message;
 
-    private DbdSystemErrorMessages(int no, String message) {
-        this.code = toCode("S", no);
+    private DbdSystemErrorMessages(int no, RString message) {
+        this.code = new RString(toCode("S", no));
         this.message = message;
     }
 
@@ -32,7 +32,7 @@ public enum DbdSystemErrorMessages {
      *
      * @return メッセージ
      */
-    public String getMessage() {
+    public RString getMessage() {
         return message;
     }
 
@@ -42,21 +42,21 @@ public enum DbdSystemErrorMessages {
      * @param replacers ?を置換する文字列
      * @return 引数で受け取った値で置換したメッセージ
      */
-    public String getReplacedMessage(String... replacers) {
+    public RString getReplacedMessage(String... replacers) {
 
-        final RString REPLACEE = new RString("?");
+        final RString replacee = new RString("?");
 
         if (getReplacerCount() != replacers.length) {
             throw new IllegalArgumentException("置換予定部分の数と、指定する置換文字列の数を一致させてください。");
         }
 
-        String replaced = message;
+        RString replaced = message;
         int i = 0;
 
         while (true) {
-            replaced = replaced.replaceFirst(Pattern.quote(REPLACEE.toString()), replacers[i++]);
+            replaced = new RString(replaced.toString().replaceFirst(Pattern.quote(replacee.toString()), replacers[i++]));
 
-            if (replaced.indexOf(REPLACEE.toString()) < 0) {
+            if (replaced.indexOf(replacee.toString()) < 0) {
                 return replaced;
             }
         }

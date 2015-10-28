@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  * 介護事業者を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class KaigoJigyoshaMapperParameter {
+public final class KaigoJigyoshaMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -21,8 +20,8 @@ public class KaigoJigyoshaMapperParameter {
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
-
 // TODO 用途に応じてアクセス修飾子を修正してください。
+
     /**
      * コンストラクタです。
      *
@@ -68,5 +67,41 @@ public class KaigoJigyoshaMapperParameter {
     public static KaigoJigyoshaMapperParameter createSelectListParam(
             KaigoJigyoshaNo 主キー1) {
         return new KaigoJigyoshaMapperParameter(主キー1, FlexibleDate.MIN, true, false);
+    }
+
+    /**
+     * get主キー1します。
+     *
+     * @return 主キー1
+     */
+    public KaigoJigyoshaNo get主キー1() {
+        return 主キー1;
+    }
+
+    /**
+     * get主キー2します。
+     *
+     * @return 主キー2
+     */
+    public FlexibleDate get主キー2() {
+        return 主キー2;
+    }
+
+    /**
+     * isUses主キー1します。
+     *
+     * @return uses主キー1
+     */
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    /**
+     * isUses主キー2します。
+     *
+     * @return uses主キー2
+     */
+    public boolean isUses主キー2() {
+        return uses主キー2;
     }
 }

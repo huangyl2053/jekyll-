@@ -5,18 +5,18 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
 
 /**
- * ソート順の列挙型です。
+ * ソート順の列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
 public enum SortOrder {
 
     /**
-     * 昇順
+     * 昇順。
      */
     ASC(1),
     /**
-     * 降順
+     * 降順。
      */
     DESC(-1);
     private final int theRate;

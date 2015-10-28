@@ -8,21 +8,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費給付対象者明細を管理するクラスです。
  */
-public class KogakuKyufuTaishoshaMeisai extends ModelBase<KogakuKyufuTaishoshaMeisaiIdentifier, DbT3054KogakuKyufuTaishoshaMeisaiEntity, KogakuKyufuTaishoshaMeisai> implements Serializable {
+public class KogakuKyufuTaishoshaMeisai
+        extends ModelBase<KogakuKyufuTaishoshaMeisaiIdentifier, DbT3054KogakuKyufuTaishoshaMeisaiEntity, KogakuKyufuTaishoshaMeisai>
+        implements Serializable {
 
     private final DbT3054KogakuKyufuTaishoshaMeisaiEntity entity;
     private final KogakuKyufuTaishoshaMeisaiIdentifier id;

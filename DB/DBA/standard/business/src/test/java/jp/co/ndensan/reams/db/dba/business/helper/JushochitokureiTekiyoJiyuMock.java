@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.helper;
 
-import jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureikaijojiyu.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureitekiyojiyu.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 

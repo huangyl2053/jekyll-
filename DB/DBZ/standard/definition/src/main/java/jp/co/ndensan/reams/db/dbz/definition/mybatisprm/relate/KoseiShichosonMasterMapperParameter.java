@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 構成市町村マスタを特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class KoseiShichosonMasterMapperParameter {
+public final class KoseiShichosonMasterMapperParameter {
 
     public static KoseiShichosonMasterMapperParameter createXXXParam(RString rString) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -47,7 +46,6 @@ public class KoseiShichosonMasterMapperParameter {
      * キー検索用のパラメータを生成します。
      *
      * @param 主キー1 主キー1
-     * @param 主キー2 主キー2
      * @return 身体手帳検索パラメータ
      */
     public static KoseiShichosonMasterMapperParameter createSelectByKeyParam(
@@ -64,5 +62,23 @@ public class KoseiShichosonMasterMapperParameter {
     public static KoseiShichosonMasterMapperParameter createSelectListParam(
             RString 主キー1) {
         return new KoseiShichosonMasterMapperParameter(主キー1, true);
+    }
+
+    /**
+     * get主キー1を取得します。
+     *
+     * @return 主キー1
+     */
+    public RString get主キー1() {
+        return 主キー1;
+    }
+
+    /**
+     * isUses主キー1を取得します。
+     *
+     * @return uses主キー1
+     */
+    public boolean isUses主キー1() {
+        return uses主キー1;
     }
 }

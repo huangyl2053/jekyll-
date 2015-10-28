@@ -11,5 +11,5 @@ package jp.co.ndensan.reams.db.dbb.business.core;
  */
 public interface IHanteiHoho {
 
-    public boolean isMatch(HokenryoDankaiInput hokenryodankai);
+    boolean isMatch(HokenryoDankaiInput hokenryodankai);
 }
