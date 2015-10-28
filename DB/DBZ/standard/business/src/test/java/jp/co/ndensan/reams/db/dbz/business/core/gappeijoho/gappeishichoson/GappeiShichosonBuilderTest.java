@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,16 +24,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GappeiShichosonBuilderTest extends DbzTestBase {
 
-    private static DbT7056GappeiShichosonEntity GappeiShichosonEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
-//TODO 主キー型と変数名を置換してください
-//TODO 主キーの数が足りない場合、追加してください。
+    private static DbT7056GappeiShichosonEntity GappeiShichosonEntity;
     private static FlexibleDate 合併年月日;
     private static RString 地域番号;
     private static LasdecCode 旧市町村コード;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
+
         合併年月日 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
         地域番号 = DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
         旧市町村コード = DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
@@ -54,25 +52,6 @@ public class GappeiShichosonBuilderTest extends DbzTestBase {
             business = new GappeiShichoson(GappeiShichosonEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の合併年月日は_設定した値と同じ合併年月日を返す() {
-            business = sut.set合併年月日(DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日).build();
-            assertThat(business.get合併年月日(), is(DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日));
-        }
-
-        @Test
-        public void 戻り値の地域番号は_設定した値と同じ地域番号を返す() {
-            business = sut.set地域番号(DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号).build();
-            assertThat(business.get地域番号(), is(DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号));
-        }
-
-        @Test
-        public void 戻り値の旧市町村コードは_設定した値と同じ旧市町村コードを返す() {
-            business = sut.set旧市町村コード(DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード).build();
-            assertThat(business.get旧市町村コード(), is(DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード));
         }
 
         @Test

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.gappeishichoson;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

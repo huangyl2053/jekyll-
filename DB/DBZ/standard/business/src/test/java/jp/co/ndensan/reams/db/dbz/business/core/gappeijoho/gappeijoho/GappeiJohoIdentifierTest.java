@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,25 +17,26 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link KoseiShichosonMasterIdentifier}のテストクラスです。
+ * {@link GappeiJohoIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class KoseiShichosonMasterIdentifierTest extends DbzTestBase {
+public class GappeiJohoIdentifierTest extends DbzTestBase {
 
-    private static RString 市町村識別ID;
+    private static FlexibleDate 合併年月日;
+    private static RString 地域番号;
 
     @BeforeClass
     public static void setUpClass() {
 
-        市町村識別ID = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
-
+        合併年月日 = DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+        地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            KoseiShichosonMasterIdentifier sut = new KoseiShichosonMasterIdentifier(市町村識別ID);
+            GappeiJohoIdentifier sut = new GappeiJohoIdentifier(合併年月日, 地域番号);
             assertThat(sut, is(canBeCopiedBySerialization()));
         }
     }

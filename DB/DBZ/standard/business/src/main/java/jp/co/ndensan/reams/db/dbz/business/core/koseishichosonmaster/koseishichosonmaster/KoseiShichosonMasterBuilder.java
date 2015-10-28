@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -44,18 +44,6 @@ public class KoseiShichosonMasterBuilder {
         this.entity = entity.clone();
         this.id = id;
         this.koseiShichosonShishoMaster = koseiShichosonShishoMaster.clone();
-    }
-
-    /**
-     * 市町村識別IDを設定します。
-     *
-     * @param 市町村識別ID 市町村識別ID
-     * @return {@link KoseiShichosonMasterBuilder}
-     */
-    public KoseiShichosonMasterBuilder set市町村識別ID(RString 市町村識別ID) {
-        requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
-        entity.setShichosonShokibetsuID(市町村識別ID);
-        return this;
     }
 
     /**

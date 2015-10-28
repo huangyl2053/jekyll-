@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonSh
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations;
+import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -304,7 +304,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(ByteArraySerializations.canBeCopiedBySerialization()));
+            assertThat(sut, is(canBeCopiedBySerialization()));
         }
     }
 

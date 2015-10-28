@@ -3,13 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -22,8 +30,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055GappeiJohoEntity, GappeiJoho> implements Serializable {
 
+    private static final long serialVersionUID = -4878571272595491588L;
+
     private final DbT7055GappeiJohoEntity entity;
     private final GappeiJohoIdentifier id;
+    private final Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson;
 
     /**
      * コンストラクタです。<br/>
@@ -43,6 +54,7 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
                 合併年月日,
                 地域番号
         );
+        this.gappeiShichoson = Models.create(new ArrayList<GappeiShichoson>());
     }
 
     /**
@@ -51,11 +63,17 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
      *
      * @param entity DBより取得した{@link DbT7055GappeiJohoEntity}
      */
-    public GappeiJoho(DbT7055GappeiJohoEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報"));
+    public GappeiJoho(GappeiJohoRelateEntity entity) {
+        this.entity = requireNonNull(entity.get合併情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報"));
         this.id = new GappeiJohoIdentifier(
-                entity.getGappeiYMD(),
-                entity.getChiikiNo());
+                entity.get合併情報Entity().getGappeiYMD(),
+                entity.get合併情報Entity().getChiikiNo());
+
+        List<GappeiShichoson> gappeiShichosonList = new ArrayList<>();
+        for (DbT7056GappeiShichosonEntity niniEntity : entity.get合併市町村Entity()) {
+            gappeiShichosonList.add(new GappeiShichoson(niniEntity));
+        }
+        this.gappeiShichoson = Models.create(gappeiShichosonList);
     }
 
     /**
@@ -66,13 +84,14 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
      */
     GappeiJoho(
             DbT7055GappeiJohoEntity entity,
-            GappeiJohoIdentifier id
+            GappeiJohoIdentifier id,
+            Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson
     ) {
         this.entity = entity;
         this.id = id;
+        this.gappeiShichoson = gappeiShichoson;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 合併年月日を返します。
      *
@@ -157,8 +176,7 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 合併情報のみを変更対象とします。<br/>
-     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 合併情報のみを変更対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GappeiJoho}
      */
@@ -169,12 +187,11 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new GappeiJoho(
-                modifiedEntity, id);
+                modifiedEntity, id, gappeiShichoson);
     }
 
     /**
-     * 保持する合併情報を削除対象とします。<br/>
-     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する合併情報を削除対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link GappeiJoho}
      */
@@ -187,7 +204,7 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
             //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
-        return new GappeiJoho(deletedEntity, id);
+        return new GappeiJoho(deletedEntity, id, gappeiShichoson.deleted());
     }
 
     /**
@@ -196,28 +213,48 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
      * @return {@link GappeiJoho}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id);
+        return new _SerializationProxy(entity, id, gappeiShichoson);
 
     }
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity() || gappeiShichoson.hasAnyChanged();
+    }
+
+    public GappeiShichoson getGappeiShichoson(GappeiShichosonIdentifier id) {
+        if (gappeiShichoson.contains(id)) {
+            return gappeiShichoson.clone().get(id);
+        }
+
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    public List<GappeiShichoson> getGappeiShichosonList() {
+        return new ArrayList<>(gappeiShichoson.values());
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = -6759729045529889408L;
+
         private final DbT7055GappeiJohoEntity entity;
         private final GappeiJohoIdentifier id;
 
-        private _SerializationProxy(DbT7055GappeiJohoEntity entity, GappeiJohoIdentifier id) {
+        private final Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson;
+
+        private _SerializationProxy(
+                DbT7055GappeiJohoEntity entity,
+                GappeiJohoIdentifier id,
+                Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson
+        ) {
             this.entity = entity;
             this.id = id;
+            this.gappeiShichoson = gappeiShichoson;
         }
 
         private Object readResolve() {
-            return new GappeiJoho(this.entity, this.id);
+            return new GappeiJoho(this.entity, this.id, this.gappeiShichoson);
         }
     }
 
@@ -228,8 +265,29 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
      * @return Builder
      */
     public GappeiJohoBuilder createBuilderForEdit() {
-        return new GappeiJohoBuilder(entity, id);
+        return new GappeiJohoBuilder(entity, id, gappeiShichoson);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GappeiJoho other = (GappeiJoho) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

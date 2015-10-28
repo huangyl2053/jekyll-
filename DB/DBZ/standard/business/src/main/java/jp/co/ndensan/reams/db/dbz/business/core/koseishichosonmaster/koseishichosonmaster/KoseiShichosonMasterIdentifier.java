@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

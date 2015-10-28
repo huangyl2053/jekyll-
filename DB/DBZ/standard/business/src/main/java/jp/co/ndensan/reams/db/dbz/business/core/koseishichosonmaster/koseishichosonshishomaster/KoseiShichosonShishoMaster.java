@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster;
 
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

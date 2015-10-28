@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**

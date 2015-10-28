@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -34,30 +32,6 @@ public class KoseiShichosonShishoMasterBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link KoseiShichosonShishoMasterBuilder}
-     */
-    public KoseiShichosonShishoMasterBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
-    }
-
-    /**
-     * 支所コードを設定します。
-     *
-     * @param 支所コード 支所コード
-     * @return {@link KoseiShichosonShishoMasterBuilder}
-     */
-    public KoseiShichosonShishoMasterBuilder set支所コード(ShishoCode 支所コード) {
-        requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
-        entity.setShishoCode(支所コード);
-        return this;
     }
 
     /**

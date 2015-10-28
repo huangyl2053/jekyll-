@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -37,44 +36,6 @@ public class GappeiShichosonBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 合併年月日を設定します。
-     *
-     * @param 合併年月日 合併年月日
-     * @return {@link GappeiShichosonBuilder}
-     */
-    public GappeiShichosonBuilder set合併年月日(FlexibleDate 合併年月日) {
-        requireNonNull(合併年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
-        entity.setGappeiYMD(合併年月日);
-        return this;
-    }
-
-    /**
-     * 地域番号を設定します。
-     *
-     * @param 地域番号 地域番号
-     * @return {@link GappeiShichosonBuilder}
-     */
-    public GappeiShichosonBuilder set地域番号(RString 地域番号) {
-        requireNonNull(地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
-        entity.setChiikiNo(地域番号);
-        return this;
-    }
-
-    /**
-     * 旧市町村コードを設定します。
-     *
-     * @param 旧市町村コード 旧市町村コード
-     * @return {@link GappeiShichosonBuilder}
-     */
-    public GappeiShichosonBuilder set旧市町村コード(LasdecCode 旧市町村コード) {
-        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
-        entity.setKyuShichosonCode(旧市町村コード);
-        return this;
     }
 
     /**

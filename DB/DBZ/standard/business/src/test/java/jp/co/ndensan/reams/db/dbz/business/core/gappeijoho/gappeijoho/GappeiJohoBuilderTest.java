@@ -2,10 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +36,31 @@ public class GappeiJohoBuilderTest extends DbzTestBase {
         地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
+    public static class GappeiShichosonテスト extends DbzTestBase {
+
+        private static GappeiJohoBuilder sut;
+        private static GappeiJoho business;
+        private static GappeiShichoson seishinTechoNini;
+
+        @Before
+        public void setUp() {
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            business = new GappeiJoho(entity);
+            seishinTechoNini = new GappeiShichoson(合併年月日, 地域番号, DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード);
+            sut = business.createBuilderForEdit();
+        }
+
+        @Test
+        public void 償却資産概調品目に紐づくことが可能な子テーブル情報をsetGappeiShichosonで設定した場合_設定済みの子テーブル情報が返る() {
+            business = sut.setGappeiShichoson(seishinTechoNini).build();
+            assertThat(business.getGappeiShichosonList().size(), is(1));
+        }
+    }
+
     public static class getterSetterTest extends DbzTestBase {
 
         private static GappeiJohoBuilder sut;
@@ -44,7 +72,9 @@ public class GappeiJohoBuilderTest extends DbzTestBase {
             gappeiJohoEntity.setGappeiYMD(合併年月日);
             gappeiJohoEntity.setChiikiNo(地域番号);
 
-            business = new GappeiJoho(gappeiJohoEntity);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            business = new GappeiJoho(entity);
 
             sut = business.createBuilderForEdit();
         }

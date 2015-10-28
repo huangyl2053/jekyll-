@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -23,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 合併市町村を管理するクラスです。
  */
 public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, DbT7056GappeiShichosonEntity, GappeiShichoson> implements Serializable {
+
+    private static final long serialVersionUID = 5427610772528976479L;
 
     private final DbT7056GappeiShichosonEntity entity;
     private final GappeiShichosonIdentifier id;
@@ -80,7 +83,6 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 合併年月日を返します。
      *
@@ -228,8 +230,7 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
     }
 
     /**
-     * 合併市町村のみを変更対象とします。<br/>
-     * {@link DbT7056GappeiShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 合併市町村のみを変更対象とします。<br/> {@link DbT7056GappeiShichosonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GappeiShichoson}
      */
@@ -278,7 +279,7 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = -4221720727880961678L;
         private final DbT7056GappeiShichosonEntity entity;
         private final GappeiShichosonIdentifier id;
 
@@ -302,5 +303,26 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
         return new GappeiShichosonBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GappeiShichoson other = (GappeiShichoson) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

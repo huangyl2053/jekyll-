@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
@@ -89,7 +89,6 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         this.koseiShichosonShishoMaster = koseiShichosonShishoMaster;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村識別IDを返します。
      *

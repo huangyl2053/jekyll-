@@ -2,14 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -91,7 +99,9 @@ public class GappeiJohoTest extends DbzTestBase {
         @Test
         public void 指定したDbT7055GappeiJohoEntityのキー情報を識別子が持つ() {
 
-            sut = new GappeiJoho(gappeiJohoEntity);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            sut = new GappeiJoho(entity);
 
             assertThat(sut.identifier().get合併年月日(), is(合併年月日));
             assertThat(sut.identifier().get地域番号(), is(地域番号));
@@ -108,7 +118,9 @@ public class GappeiJohoTest extends DbzTestBase {
             gappeiJohoEntity.setGappeiYMD(合併年月日);
             gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(gappeiJohoEntity);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            sut = new GappeiJoho(entity);
         }
 
         @Test
@@ -157,7 +169,9 @@ public class GappeiJohoTest extends DbzTestBase {
             gappeiJohoEntity.setGappeiYMD(合併年月日);
             gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(gappeiJohoEntity);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            sut = new GappeiJoho(entity);
         }
 
         @Test
@@ -176,12 +190,14 @@ public class GappeiJohoTest extends DbzTestBase {
             gappeiJohoEntity.setGappeiYMD(合併年月日);
             gappeiJohoEntity.setChiikiNo(地域番号);
 
-            sut = new GappeiJoho(gappeiJohoEntity);
+            GappeiJohoRelateEntity entity = new GappeiJohoRelateEntity();
+            entity.set合併情報Entity(gappeiJohoEntity);
+            sut = new GappeiJoho(entity);
         }
 
         @Test
         public void シリアライズできる() {
-            assertThat(sut, is(serializable()));
+            assertThat(sut, is(canBeCopiedBySerialization()));
         }
     }
 
@@ -200,37 +216,107 @@ public class GappeiJohoTest extends DbzTestBase {
 
         @Test
         public void GappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがUnchangedである場合_deletedメソッド_によりGappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがDeletedに指定されたGappeiJohoが返る() {
-            sut = TestSupport.setStateGappeiJoho(EntityDataState.Unchanged);
+            sut = TestSupport.setStateGappeiJoho(EntityDataState.Unchanged, EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
         public void GappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがModifiedである場合_deletedメソッド_によりGappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがDeletedに指定されたGappeiJohoが返る() {
-            sut = TestSupport.setStateGappeiJoho(EntityDataState.Modified);
+            sut = TestSupport.setStateGappeiJoho(EntityDataState.Modified, EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test
         public void GappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがDeletedである場合_deletedメソッド_によりGappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがDeletedに指定されたGappeiJohoが返る() {
-            sut = TestSupport.setStateGappeiJoho(EntityDataState.Deleted);
+            sut = TestSupport.setStateGappeiJoho(EntityDataState.Deleted, EntityDataState.Unchanged);
             result = sut.deleted();
             assertThat(result.toEntity().getState(), is(EntityDataState.Deleted));
         }
 
         @Test(expected = IllegalStateException.class)
         public void GappeiJohoが保持するDbT7055GappeiJohoEntityのEntityDataStateがAddedである場合_deletedメソッド_により_IllegalStateExceptionが発火する() {
-            sut = TestSupport.setStateGappeiJoho(EntityDataState.Added);
+            sut = TestSupport.setStateGappeiJoho(EntityDataState.Added, EntityDataState.Unchanged);
             result = sut.deleted();
+        }
+
+        @Test
+        public void GappeiJohoが保持するGappeiShichosonで保持するEntityのEntityDataStateがUnchangedであった場合_deletedメソッド_によりEntityDataStateがDeletedとなる() {
+            sut = TestSupport.setStateGappeiJoho(EntityDataState.Unchanged, EntityDataState.Unchanged);
+            result = sut.deleted();
+            for (GappeiShichoson seishinTechoNini : result.getGappeiShichosonList()) {
+                assertThat(seishinTechoNini.toEntity().getState(), is(EntityDataState.Deleted));
+            }
+        }
+    }
+
+    public static class getGappeiShichosonテスト extends DbzTestBase {
+
+        private static GappeiJoho sut;
+        private static GappeiShichoson resultGappeiShichoson;
+        private static GappeiShichosonIdentifier techoNiniId;
+
+        @Before
+        public void setUp() {
+            gappeiJohoEntity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            gappeiJohoEntity.setGappeiYMD(合併年月日);
+            gappeiJohoEntity.setChiikiNo(地域番号);
+
+        }
+
+        @Test
+        public void 指定の識別子に該当するGappeiShichosonが存在する場合_getGappeiShichoson_は該当のGappeiShichosonを返す() {
+            sut = TestSupport.createGappeiJoho();
+            techoNiniId = new GappeiShichosonIdentifier(合併年月日, 地域番号, DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード);
+            resultGappeiShichoson = sut.getGappeiShichoson(techoNiniId);
+            assertThat(resultGappeiShichoson.identifier(), is(techoNiniId));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 指定の識別子に該当するGappeiShichosonが存在しない場合_getGappeiShichoson_はIllegalArgumentExceptionを返す() {
+            sut = TestSupport.createGappeiJoho();
+            techoNiniId = new GappeiShichosonIdentifier(合併年月日, new RString("000001"), DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード);
+            resultGappeiShichoson = sut.getGappeiShichoson(techoNiniId);
         }
     }
 
     private static class TestSupport {
 
-        public static GappeiJoho setStateGappeiJoho(EntityDataState parentState) {
+        private static DbT7056GappeiShichosonEntity techoNiniEntity_1;
+        private static DbT7056GappeiShichosonEntity techoNiniEntity_2;
+
+        public static GappeiJoho setStateGappeiJoho(EntityDataState parentState, EntityDataState childState) {
+            GappeiJohoRelateEntity relateEntity = new GappeiJohoRelateEntity();
             gappeiJohoEntity.setState(parentState);
-            return new GappeiJoho(gappeiJohoEntity);
+            relateEntity.set合併情報Entity(gappeiJohoEntity);
+            List<DbT7056GappeiShichosonEntity> niniEntityList = new ArrayList<>();
+            techoNiniEntity_1 = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+            techoNiniEntity_1.setGappeiYMD(gappeiJohoEntity.getGappeiYMD());
+            techoNiniEntity_1.setChiikiNo(gappeiJohoEntity.getChiikiNo());
+            techoNiniEntity_1.setKyuShichosonCode(new LasdecCode("値１"));
+            techoNiniEntity_1.setState(childState);
+            techoNiniEntity_2 = techoNiniEntity_1.clone();
+            techoNiniEntity_2.setKyuShichosonCode(new LasdecCode("値２"));
+            niniEntityList.add(techoNiniEntity_1);
+            niniEntityList.add(techoNiniEntity_2);
+            relateEntity.set合併市町村Entity(niniEntityList);
+
+            return new GappeiJoho(relateEntity);
+        }
+
+        public static GappeiJoho createGappeiJoho() {
+            GappeiJohoRelateEntity relateEntity = new GappeiJohoRelateEntity();
+            relateEntity.set合併情報Entity(gappeiJohoEntity);
+
+            List<DbT7056GappeiShichosonEntity> niniEntityList = new ArrayList<>();
+            techoNiniEntity_1 = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+            techoNiniEntity_1.setGappeiYMD(gappeiJohoEntity.getGappeiYMD());
+            techoNiniEntity_1.setChiikiNo(gappeiJohoEntity.getChiikiNo());
+            niniEntityList.add(techoNiniEntity_1);
+            relateEntity.set合併市町村Entity(niniEntityList);
+
+            return new GappeiJoho(relateEntity);
         }
     }
 }

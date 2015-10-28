@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.basic;
+package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -20,6 +24,7 @@ public class GappeiJohoBuilder {
 
     private final DbT7055GappeiJohoEntity entity;
     private final GappeiJohoIdentifier id;
+    private final Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson;
 
     /**
      * {@link DbT7055GappeiJohoEntity}より{@link GappeiJoho}の編集用Builderクラスを生成します。
@@ -30,15 +35,14 @@ public class GappeiJohoBuilder {
      */
     GappeiJohoBuilder(
             DbT7055GappeiJohoEntity entity,
-            GappeiJohoIdentifier id
+            GappeiJohoIdentifier id,
+            Models<GappeiShichosonIdentifier, GappeiShichoson> gappeiShichoson
     ) {
         this.entity = entity.clone();
         this.id = id;
-
+        this.gappeiShichoson = gappeiShichoson.clone();
     }
 
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
      * 合併年月日を設定します。
      *
@@ -129,6 +133,20 @@ public class GappeiJohoBuilder {
      * @return {@link GappeiJoho}のインスタンス
      */
     public GappeiJoho build() {
-        return new GappeiJoho(entity, id);
+        return new GappeiJoho(entity, id, gappeiShichoson);
+    }
+
+    public GappeiJohoBuilder setGappeiShichoson(GappeiShichoson 合併市町村) {
+
+        if (hasSameIdentifier(合併市町村.identifier())) {
+            gappeiShichoson.add(合併市町村);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(GappeiShichosonIdentifier 合併市町村識別子) {
+        return (id.get合併年月日().equals(合併市町村識別子.get合併年月日())
+                && id.get地域番号().equals(合併市町村識別子.get地域番号()));
     }
 }
