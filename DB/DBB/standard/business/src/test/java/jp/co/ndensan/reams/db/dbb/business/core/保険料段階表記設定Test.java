@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  *
  * @author N2810
  */
+@Ignore
 public class 保険料段階表記設定Test {
 
     public 保険料段階表記設定Test() {
