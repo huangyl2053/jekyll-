@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.basic;
+package jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaionseijoho;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会音声情報を管理するクラスです。
  */
-public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdentifier, DbT5512ShinsakaiOnseiJohoEntity, ShinsakaiOnseiJoho> implements Serializable {
+public class ShinsakaiOnseiJoho extends ModelBase<ShinsakaiOnseiJohoIdentifier, DbT5512ShinsakaiOnseiJohoEntity, ShinsakaiOnseiJoho> implements Serializable {
 
     private final DbT5512ShinsakaiOnseiJohoEntity entity;
     private final ShinsakaiOnseiJohoIdentifier id;
@@ -69,7 +69,6 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 介護認定審査会開催番号を返します。
      *
@@ -123,7 +122,6 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
      *
      * @return 変更対象処理実施後の{@link ShinsakaiOnseiJoho}
      */
-    @Override
     public ShinsakaiOnseiJoho modifiedModel() {
         DbT5512ShinsakaiOnseiJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -163,12 +161,11 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
         private final DbT5512ShinsakaiOnseiJohoEntity entity;
         private final ShinsakaiOnseiJohoIdentifier id;
 
@@ -192,5 +189,4 @@ public class ShinsakaiOnseiJoho extends ParentModelBase<ShinsakaiOnseiJohoIdenti
         return new ShinsakaiOnseiJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

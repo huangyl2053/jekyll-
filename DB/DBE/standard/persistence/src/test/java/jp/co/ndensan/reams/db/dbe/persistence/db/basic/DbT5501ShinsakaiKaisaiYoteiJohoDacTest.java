@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5501ShinsakaiKaisaiYoteiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5501ShinsakaiKaisaiYoteiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
@@ -28,7 +28,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT5501ShinsakaiKaisaiYoteiJohoDacTest extends DbeTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_介護認定審査会開催番号;
+    private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT5501ShinsakaiKaisaiYoteiJohoDac sut;

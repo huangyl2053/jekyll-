@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiIinCode;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5503ShinsakaiWariateIinJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiIinCode;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
