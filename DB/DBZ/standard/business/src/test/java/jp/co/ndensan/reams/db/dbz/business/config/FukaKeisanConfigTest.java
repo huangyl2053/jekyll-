@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.when;
  *
  * @author N8156 宮本 康
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class FukaKeisanConfigTest {
 

@@ -14,6 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ShujiiIkenshoIraiJoho}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ShujiiIkenshoIraiJohoTest extends DbzTestBase {
 
@@ -193,8 +195,8 @@ public class ShujiiIkenshoIraiJohoTest extends DbzTestBase {
         }
 
         @Test
-        public void get認定情報提供希望フラグは_entityが持つ認定情報提供希望フラグを返す() {
-            assertThat(sut.get認定情報提供希望フラグ(), is(ShujiiIkenshoIraiJohoEntity.getNinteiJohoTeikyoKiboFlag()));
+        public void is認定情報提供希望フラグは_entityが持つ認定情報提供希望フラグを返す() {
+            assertThat(sut.is認定情報提供希望フラグ(), is(ShujiiIkenshoIraiJohoEntity.getNinteiJohoTeikyoKiboFlag()));
         }
 
         @Test
@@ -203,8 +205,8 @@ public class ShujiiIkenshoIraiJohoTest extends DbzTestBase {
         }
 
         @Test
-        public void get論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.get論理削除フラグ(), is(ShujiiIkenshoIraiJohoEntity.getLogicalDeletedFlag()));
+        public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
+            assertThat(sut.is論理削除フラグ(), is(ShujiiIkenshoIraiJohoEntity.getLogicalDeletedFlag()));
         }
     }
 

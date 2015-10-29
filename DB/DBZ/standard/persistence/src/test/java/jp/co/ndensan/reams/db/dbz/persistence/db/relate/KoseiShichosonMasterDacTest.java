@@ -5,18 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -25,6 +27,7 @@ import org.junit.runner.RunWith;
  *
  * @author n3331 山邉 大貴
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KoseiShichosonMasterDacTest {
 

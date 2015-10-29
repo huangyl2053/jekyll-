@@ -21,10 +21,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT7051KoseiShichosonMasterDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
 

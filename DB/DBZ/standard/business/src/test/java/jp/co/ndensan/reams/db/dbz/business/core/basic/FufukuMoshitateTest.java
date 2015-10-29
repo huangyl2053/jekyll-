@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -16,12 +13,12 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -29,6 +26,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link FufukuMoshitate}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class FufukuMoshitateTest extends DbzTestBase {
 
@@ -244,8 +242,8 @@ public class FufukuMoshitateTest extends DbzTestBase {
         }
 
         @Test
-        public void get添付書類等は_entityが持つ添付書類等を返す() {
-            assertThat(sut.get添付書類等(), is(FufukuMoshitateEntity.getTempuShoruiTo()));
+        public void is添付書類等は_entityが持つ添付書類等を返す() {
+            assertThat(sut.is添付書類等(), is(FufukuMoshitateEntity.getTempuShoruiTo()));
         }
 
         @Test
@@ -254,8 +252,8 @@ public class FufukuMoshitateTest extends DbzTestBase {
         }
 
         @Test
-        public void get弁明書登録フラグは_entityが持つ弁明書登録フラグを返す() {
-            assertThat(sut.get弁明書登録フラグ(), is(FufukuMoshitateEntity.getBemmeishoTorokuFlag()));
+        public void is弁明書登録フラグは_entityが持つ弁明書登録フラグを返す() {
+            assertThat(sut.is弁明書登録フラグ(), is(FufukuMoshitateEntity.getBemmeishoTorokuFlag()));
         }
 
         @Test

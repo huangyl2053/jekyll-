@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ChikuShichoson}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ChikuShichosonTest extends DbzTestBase {
 
@@ -120,8 +122,8 @@ public class ChikuShichosonTest extends DbzTestBase {
         }
 
         @Test
-        public void get自地区フラグは_entityが持つ自地区フラグを返す() {
-            assertThat(sut.get自地区フラグ(), is(ChikuShichosonEntity.getJiChikuFlag()));
+        public void is自地区フラグは_entityが持つ自地区フラグを返す() {
+            assertThat(sut.is自地区フラグ(), is(ChikuShichosonEntity.getJiChikuFlag()));
         }
     }
 

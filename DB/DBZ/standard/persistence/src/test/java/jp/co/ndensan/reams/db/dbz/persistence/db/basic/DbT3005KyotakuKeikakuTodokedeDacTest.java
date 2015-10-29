@@ -24,12 +24,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT3005KyotakuKeikakuTodokedeDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT3005KyotakuKeikakuTodokedeDacTest extends DbzTestDacBase {
 

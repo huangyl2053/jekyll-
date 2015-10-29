@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,6 +26,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link TashichosonJushochiTokurei}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class TashichosonJushochiTokureiTest extends DbzTestBase {
 
@@ -220,8 +222,8 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
         }
 
         @Test
-        public void get論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.get論理削除フラグ(), is(TashichosonJushochiTokureiEntity.getLogicalDeletedFlag()));
+        public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
+            assertThat(sut.is論理削除フラグ(), is(TashichosonJushochiTokureiEntity.getLogicalDeletedFlag()));
         }
     }
 

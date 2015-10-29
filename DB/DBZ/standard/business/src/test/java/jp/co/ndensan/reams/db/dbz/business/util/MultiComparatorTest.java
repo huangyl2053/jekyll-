@@ -25,12 +25,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
+import org.junit.Ignore;
 
 /**
  * MultiComparatorのテストです。
  *
  * @author N3327 三浦 凌
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class MultiComparatorTest extends DbzTestBase {
 

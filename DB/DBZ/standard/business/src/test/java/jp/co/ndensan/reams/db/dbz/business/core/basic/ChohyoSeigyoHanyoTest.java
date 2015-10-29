@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
@@ -15,12 +12,12 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,6 +25,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ChohyoSeigyoHanyo}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ChohyoSeigyoHanyoTest extends DbzTestBase {
 
@@ -148,7 +146,7 @@ public class ChohyoSeigyoHanyoTest extends DbzTestBase {
 
         @Test
         public void get変更可否は_entityが持つ変更可否を返す() {
-            assertThat(sut.get変更可否(), is(ChohyoSeigyoHanyoEntity.getHenkoKahi()));
+            assertThat(sut.is変更可否(), is(ChohyoSeigyoHanyoEntity.getHenkoKahi()));
         }
 
         @Test

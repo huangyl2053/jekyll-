@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.any;
@@ -30,6 +31,7 @@ import static org.mockito.Mockito.when;
 /**
  * {link TennyushutsuHoryuTaishoshaManager}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class TennyushutsuHoryuTaishoshaManagerTest {
 

@@ -19,6 +19,7 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.mock;
  *
  * @author N3317 塚田 萌
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ShisetsuNyutaishoTest extends DbzTestBase {
 

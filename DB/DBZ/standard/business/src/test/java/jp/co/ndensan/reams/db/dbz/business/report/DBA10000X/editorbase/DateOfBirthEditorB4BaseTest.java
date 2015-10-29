@@ -18,6 +18,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.when;
  *
  * @author n8178 城間篤人
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DateOfBirthEditorB4BaseTest {
 

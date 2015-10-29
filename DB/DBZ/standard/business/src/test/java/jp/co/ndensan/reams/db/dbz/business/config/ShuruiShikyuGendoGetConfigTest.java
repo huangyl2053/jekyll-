@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import javax.persistence.Id;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.when;
  *
  * @author N8187 久保田 英男
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
 
