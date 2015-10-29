@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -20,6 +17,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,6 +25,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ShisetsuNyutaishoAlive}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ShisetsuNyutaishoAliveTest extends DbxTestBase {
 

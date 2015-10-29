@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShurui
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.any;
@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 /**
  * {link KaigoServiceShuruiManager}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoServiceShuruiManagerTest {
 

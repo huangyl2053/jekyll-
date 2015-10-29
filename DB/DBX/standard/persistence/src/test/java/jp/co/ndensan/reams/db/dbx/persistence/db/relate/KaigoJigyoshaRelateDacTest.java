@@ -4,14 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbx.persistence.db.relate.KaigoJigyoshaRelateDac;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoJigyoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoJigyoshaRelateEntityGenerator;
@@ -29,6 +28,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -38,6 +38,7 @@ import org.junit.runner.RunWith;
  *
  * @author N8187 久保田 英男
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaRelateDacTest extends DbxTestDacBase {
 

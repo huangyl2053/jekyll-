@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_サービス種類コード;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_事業者番号;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_有効開始日;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
@@ -23,6 +20,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -30,6 +28,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link DbT7063KaigoJigyoshaShiteiServiceDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT7063KaigoJigyoshaShiteiServiceDacTest extends DbxTestDacBase {
 

@@ -23,10 +23,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,6 +32,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -45,6 +43,7 @@ import static org.mockito.Mockito.when;
 /**
  * {link KaigoServiceShuruiManager}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoServiceShuruiManagerTest {
 

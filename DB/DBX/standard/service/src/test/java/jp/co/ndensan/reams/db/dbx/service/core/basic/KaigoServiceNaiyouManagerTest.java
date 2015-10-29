@@ -20,18 +20,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
  * {link KaigoServiceNaiyouManager}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoServiceNaiyouManagerTest {
 

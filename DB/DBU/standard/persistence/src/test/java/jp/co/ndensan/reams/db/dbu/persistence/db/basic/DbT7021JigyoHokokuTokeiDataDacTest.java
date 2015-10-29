@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntityGenerator;
@@ -33,6 +32,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -40,6 +40,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link DbT7021JigyoHokokuTokeiDataDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT7021JigyoHokokuTokeiDataDacTest extends DbuTestDacBase {
 

@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntityGenerator;
@@ -18,6 +15,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,6 +23,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link CareManeger}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class CareManegerTest extends DbxTestBase {
 

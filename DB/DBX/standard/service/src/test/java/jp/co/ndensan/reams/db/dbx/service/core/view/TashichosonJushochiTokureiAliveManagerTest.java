@@ -5,20 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.service.core.view;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -26,10 +12,26 @@ import jp.co.ndensan.reams.db.dbx.business.core.view.TashichosonJushochiTokureiA
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1003TashichosonJushochiTokureiAliveDac;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * {link TashichosonJushochiTokureiAliveManager}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class TashichosonJushochiTokureiAliveManagerTest {
 

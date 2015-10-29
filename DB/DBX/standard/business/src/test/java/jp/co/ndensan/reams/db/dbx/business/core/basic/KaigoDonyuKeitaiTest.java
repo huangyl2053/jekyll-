@@ -4,18 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import static org.hamcrest.CoreMatchers.not;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link KaigoDonyuKeitai}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoDonyuKeitaiTest extends DbxTestBase {
 

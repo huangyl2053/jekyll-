@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -16,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -29,6 +26,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link KaigoServiceNaiyou}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class KaigoServiceNaiyouTest extends DbxTestBase {
 

@@ -9,17 +9,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -29,12 +19,14 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7064CareManegerDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT7064CareManegerDacTest extends DbxTestDacBase {
 
