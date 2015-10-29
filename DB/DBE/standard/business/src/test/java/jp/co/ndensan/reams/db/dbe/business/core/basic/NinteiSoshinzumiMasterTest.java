@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
  * {@link NinteiSoshinzumiMaster}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class NinteiSoshinzumiMasterTest extends DbeTestBase {
 
     private static DbT5190NinteiSoshinzumiMasterEntity NinteiSoshinzumiMasterEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -111,7 +113,7 @@ public class NinteiSoshinzumiMasterTest extends DbeTestBase {
 
         @Test
         public void get引き渡しフラグは_entityが持つ引き渡しフラグを返す() {
-            assertThat(sut.get引き渡しフラグ(), is(NinteiSoshinzumiMasterEntity.getIsHikiwatashi()));
+            assertThat(sut.is引き渡しフラグ(), is(NinteiSoshinzumiMasterEntity.getIsHikiwatashi()));
         }
 
         @Test

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.BeforeClass;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class NinteiShinchokuJohoDacTest extends DbeTestDacBase {
 
     private static NinteiShinchokuJohoDac sut;

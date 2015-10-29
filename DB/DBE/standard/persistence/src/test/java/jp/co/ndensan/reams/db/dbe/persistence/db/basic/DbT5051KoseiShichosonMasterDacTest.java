@@ -19,6 +19,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
  * {@link DbT5051KoseiShichosonMasterDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5051KoseiShichosonMasterDacTest extends DbeTestDacBase {
 
     private static final RString キー_01 = DEFAULT_市町村識別ID;

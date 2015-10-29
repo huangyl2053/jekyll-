@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
  * {@link RenkeiyoDataSofuKiroku}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class RenkeiyoDataSofuKirokuTest extends DbeTestBase {
 
     private static DbT5191RenkeiyoDataSofuKirokuEntity RenkeiyoDataSofuKirokuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

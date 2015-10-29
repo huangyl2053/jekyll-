@@ -136,6 +136,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -145,6 +146,7 @@ import org.junit.runner.RunWith;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class NinteichosaKekkaMapperTest extends DbeTestBase {
 
     public static class toNinteichosaResult extends DbeTestBase {

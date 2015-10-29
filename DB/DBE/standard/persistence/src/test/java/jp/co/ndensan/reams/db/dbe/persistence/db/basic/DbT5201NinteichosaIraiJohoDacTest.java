@@ -20,6 +20,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -27,6 +28,7 @@ import org.junit.runner.RunWith;
  * {@link DbT5201NinteichosaIraiJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5201NinteichosaIraiJohoDacTest extends DbeTestDacBase {
 
     private static final ShinseishoKanriNo キー_01 = DEFAULT_申請書管理番号;

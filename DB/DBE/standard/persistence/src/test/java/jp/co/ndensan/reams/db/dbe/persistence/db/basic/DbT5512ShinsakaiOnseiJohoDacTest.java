@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5512ShinsakaiOnseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_介護認定審査会開催番号;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator.DEFAULT_連番;
@@ -20,6 +20,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -27,6 +28,7 @@ import org.junit.runner.RunWith;
  * {@link DbT5512ShinsakaiOnseiJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5512ShinsakaiOnseiJohoDacTest extends DbeTestDacBase {
 
     private static final RString キー_01 = new RString("01");

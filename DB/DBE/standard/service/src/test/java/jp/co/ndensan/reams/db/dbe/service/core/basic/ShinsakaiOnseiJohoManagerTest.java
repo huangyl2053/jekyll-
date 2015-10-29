@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.when;
  * {link ShinsakaiOnseiJohoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShinsakaiOnseiJohoManagerTest {
 
     private static DbT5512ShinsakaiOnseiJohoDac dac;

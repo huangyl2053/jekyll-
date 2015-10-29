@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,6 +33,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
 
     private static IShujiiIkenshoIraiJohoDac sut;

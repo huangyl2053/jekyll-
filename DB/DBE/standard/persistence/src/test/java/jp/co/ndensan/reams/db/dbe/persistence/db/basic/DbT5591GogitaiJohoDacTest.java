@@ -22,11 +22,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT5591GogitaiJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5591GogitaiJohoDacTest extends DbeTestDacBase {
 
     private static final int キー_01 = 1;

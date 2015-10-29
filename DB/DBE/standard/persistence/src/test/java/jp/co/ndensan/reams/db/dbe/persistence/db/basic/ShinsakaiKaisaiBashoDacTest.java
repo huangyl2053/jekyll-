@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -30,6 +31,7 @@ import org.junit.runner.RunWith;
  * @author N1013 松本直樹
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShinsakaiKaisaiBashoDacTest {
 
     private static ShinsakaiKaisaiBashoDacMock inserter;

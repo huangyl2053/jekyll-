@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
  * {@link SonotaKikanJoho}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class SonotaKikanJohoTest extends DbeTestBase {
 
     private static DbT5914SonotaKikanJohoEntity SonotaKikanJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -170,7 +172,7 @@ public class SonotaKikanJohoTest extends DbeTestBase {
 
         @Test
         public void get廃止フラグは_entityが持つ廃止フラグを返す() {
-            assertThat(sut.get廃止フラグ(), is(SonotaKikanJohoEntity.getHaishiFlag()));
+            assertThat(sut.is廃止フラグ(), is(SonotaKikanJohoEntity.getHaishiFlag()));
         }
     }
 
