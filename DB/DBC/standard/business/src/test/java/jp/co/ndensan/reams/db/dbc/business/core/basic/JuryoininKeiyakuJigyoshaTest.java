@@ -20,11 +20,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link JuryoininKeiyakuJigyosha}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
     private static DbT3077JuryoininKeiyakuJigyoshaEntity JuryoininKeiyakuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

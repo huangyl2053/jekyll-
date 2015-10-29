@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link JukyushaGendoGakuKanriIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JukyushaGendoGakuKanriIdentifierTest extends DbcTestBase {
 
 //TODO 主キー型と変数名を置換してください

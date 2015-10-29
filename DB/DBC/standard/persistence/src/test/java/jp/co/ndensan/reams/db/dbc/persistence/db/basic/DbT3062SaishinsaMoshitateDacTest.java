@@ -26,6 +26,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -33,6 +34,7 @@ import org.junit.runner.RunWith;
  * {@link DbT3062SaishinsaMoshitateDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT3062SaishinsaMoshitateDacTest extends DbcTestDacBase {
 
     private static final RString キー_02 = new RString("02");

@@ -20,11 +20,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KyufujissekiShoteiShikkanShisetsuRyoyoIdentifierTest extends DbcTestBase {
 
 //TODO 主キー型と変数名を置換してください

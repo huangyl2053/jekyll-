@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -67,6 +68,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KyufuJissekiMapperTest extends DbcTestBase {
 
     public static class to給付実績詳細キー extends DbcTestBase {

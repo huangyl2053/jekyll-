@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -33,6 +34,7 @@ import static org.mockito.Mockito.when;
  * {link KogakuGassanShinseishoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KogakuGassanShinseishoManagerTest {
 
     private static DbT3068KogakuGassanShinseishoDac dac;

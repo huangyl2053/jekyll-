@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
+import org.junit.Ignore;
 
 /**
  * 受領委任事業者のbusinessクラスとentityクラスのマッピングを行うテストクラスです。
@@ -34,6 +35,7 @@ import static org.mockito.Mockito.mock;
  * @author N3317 塚田 萌
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JuryoininJigyoshaMapperTest extends DbcTestBase {
 
     private static final KeiyakuNo 契約番号 = new KeiyakuNo(new RString("1234567890"));

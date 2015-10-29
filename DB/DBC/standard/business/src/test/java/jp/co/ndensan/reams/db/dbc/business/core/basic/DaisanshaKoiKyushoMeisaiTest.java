@@ -21,6 +21,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -28,6 +29,7 @@ import org.junit.runner.RunWith;
  * {@link DaisanshaKoiKyushoMeisai}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DaisanshaKoiKyushoMeisaiTest extends DbcTestBase {
 
     private static DbT3083DaisanshaKoiKyushoMeisaiEntity DaisanshaKoiKyushoMeisaiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
