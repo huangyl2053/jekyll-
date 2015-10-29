@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator {
 
-    private final NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode;
+    private final NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoGaizenseiHyokaCode;
 
     /**
      * コンストラクタです。
@@ -23,11 +23,10 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator {
      * @param ninchishoKoreishaJiritsudoGaizenseiHyokaCode
      * 認知症高齢者日常生活自立度が、どの程度確からしいか
      */
-    public NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator
-        (NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode) {
-        requireNonNull(ninchishoKoreishaJiritsudoGaizenseiHyokaCode,
+    public NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator(NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoGaizenseiHyokaCode) {
+        requireNonNull(ninchishoGaizenseiHyokaCode,
                 UrSystemErrorMessages.値がnull.getReplacedMessage("認知症高齢者日常生活自立度が、どの程度確からしいか"));
-        this.ninchishoKoreishaJiritsudoGaizenseiHyokaCode = ninchishoKoreishaJiritsudoGaizenseiHyokaCode;
+        this.ninchishoGaizenseiHyokaCode = ninchishoGaizenseiHyokaCode;
     }
 
     /**
@@ -37,7 +36,7 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeValidator {
      * @return {@link IValidationMessages}
      */
     public IValidationMessages validate() {
-        return ValidateChain.validateStart(ninchishoKoreishaJiritsudoGaizenseiHyokaCode)
+        return ValidateChain.validateStart(ninchishoGaizenseiHyokaCode)
                 .messages();
     }
 }

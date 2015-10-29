@@ -26,14 +26,14 @@ public class KoikiKoseiShichosonData {
     public interface IShichoson {
 
         /**
-         * 市町村コード
+         * 市町村コード。
          *
          * @return 市町村コード
          */
         RString getCode();
 
         /**
-         * 市町村名
+         * 市町村名。
          *
          * @return 市町村名
          */

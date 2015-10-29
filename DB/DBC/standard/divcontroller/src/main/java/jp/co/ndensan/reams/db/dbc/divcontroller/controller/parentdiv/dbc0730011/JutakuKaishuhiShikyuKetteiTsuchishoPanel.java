@@ -5,19 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0730011;
 
-import static java.lang.Integer.parseInt;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
- * 住宅改修費支給申請決定 審査済支給申請検索条件
+ * 住宅改修費支給申請決定 審査済支給申請検索条件。
  *
  * @author n8223
  */
@@ -40,8 +37,8 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
     private void setPaymentDateOutputOrderForTsuchisho(JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv panel) {
 
         int yamlNo = 1;
-        String ymlDataName = "ReportPublish.yml";
-        List<HashMap> ymlData = ymlData(ymlDataName);
+        RString ymlDataName = new RString("ReportPublish.yml");
+        List<HashMap> ymlData = ymlData(ymlDataName.toString());
 
         //　発行日の初期値を設定する。
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoHakkoDate().getTxtIssueDate().setValue(RDate.getNowDate());
@@ -57,32 +54,32 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
                 .setValue(new RString(ymlData.get(yamlNo).get("出力順").toString()));
     }
 
-    private void setPaymentInfo(JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv panel) {
-        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("TsuchishoPaymentInfo.yml"));
-        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToKoza().getTxtKozaPaymentDate()
-                .setValue(cg.getAsRDate("口座払い日"));
-
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiBasho()
-                .setValue(cg.getAsRString("窓口払場所"));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiDateRange()
-                .setFromValue(cg.getAsRDate("窓口払開始日"));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiDateRange()
-                .setToValue(cg.getAsRDate("窓口払終了日"));
-
-        List<RString> time = cg.getAsRString("窓口払開始時間").split(":");
-        int hour = parseInt(time.get(0).toString());
-        int minute = parseInt(time.get(1).toString());
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiKaishiTime()
-                .setValue(RTime.of(hour, minute));
-
-        time = cg.getAsRString("窓口払終了時間").split(":");
-        hour = parseInt(time.get(0).toString());
-        minute = parseInt(time.get(1).toString());
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiShuryoTime()
-                .setValue(RTime.of(hour, minute));
-    }
+//    private void setPaymentInfo(JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv panel) {
+//        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("TsuchishoPaymentInfo.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+//
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToKoza().getTxtKozaPaymentDate()
+//                .setValue(cg.getAsRDate("口座払い日"));
+//
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiBasho()
+//                .setValue(cg.getAsRString("窓口払場所"));
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiDateRange()
+//                .setFromValue(cg.getAsRDate("窓口払開始日"));
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiDateRange()
+//                .setToValue(cg.getAsRDate("窓口払終了日"));
+//
+//        List<RString> time = cg.getAsRString("窓口払開始時間").split(":");
+//        int hour = parseInt(time.get(0).toString());
+//        int minute = parseInt(time.get(1).toString());
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiKaishiTime()
+//                .setValue(RTime.of(hour, minute));
+//
+//        time = cg.getAsRString("窓口払終了時間").split(":");
+//        hour = parseInt(time.get(0).toString());
+//        minute = parseInt(time.get(1).toString());
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getPayToMadoguchi().getTxtShiharaiShuryoTime()
+//                .setValue(RTime.of(hour, minute));
+//    }
 
     private List<HashMap> ymlData(String ymlDataName) {
         return YamlLoader.DBZ.loadAsList(new RString(ymlDataName));

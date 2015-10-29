@@ -8,10 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.jushochito
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.dgJutoku_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.JushochiTokureiRirekiListValidationHelper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -21,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerです。
+ * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerクラスです。
  *
  * @author n8178 城間篤人
  */
@@ -150,10 +148,9 @@ public class JushochiTokureiRirekiList {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.clearInputData();
 
-        if (jutokuRirekiDiv.getMode_BtnDisplayMode() == JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone) {
-            if (ViewExecutionStatus.toValue(jutokuRirekiDiv.getExecutionStatus()) == ViewExecutionStatus.Add) {
-                return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
-            }
+        if (jutokuRirekiDiv.getMode_BtnDisplayMode() == JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone
+                && ViewExecutionStatus.toValue(jutokuRirekiDiv.getExecutionStatus()) == ViewExecutionStatus.Add) {
+            return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
         }
 
         handler.setupToAfterInput();
@@ -171,7 +168,7 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onBeforeClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
-        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        // JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト

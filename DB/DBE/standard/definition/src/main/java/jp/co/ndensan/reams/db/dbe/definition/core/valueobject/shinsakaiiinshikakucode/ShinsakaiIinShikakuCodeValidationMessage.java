@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShinsakaiIinShikakuCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ShinsakaiIinShikakuCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShinsakaiIinShikakuCodeValidationMessage implements IValidationMessa
     public enum ShinsakaiIinShikakuCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "審査会委員資格コードを指定してください。");
         private final int no;

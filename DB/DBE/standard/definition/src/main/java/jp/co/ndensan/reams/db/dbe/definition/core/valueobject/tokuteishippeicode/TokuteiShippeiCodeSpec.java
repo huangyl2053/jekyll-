@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum TokuteiShippeiCodeSpec implements IPredicate<TokuteiShippeiCode> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
 

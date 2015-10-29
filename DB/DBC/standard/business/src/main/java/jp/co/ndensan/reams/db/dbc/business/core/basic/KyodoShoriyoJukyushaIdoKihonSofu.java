@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 共同処理用受給者異動基本送付を管理するクラスです。
  */
-public class KyodoShoriyoJukyushaIdoKihonSofu extends ModelBase<KyodoShoriyoJukyushaIdoKihonSofuIdentifier, DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity, KyodoShoriyoJukyushaIdoKihonSofu> implements Serializable {
+public class KyodoShoriyoJukyushaIdoKihonSofu extends 
+        ModelBase<KyodoShoriyoJukyushaIdoKihonSofuIdentifier, 
+        DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity, 
+        KyodoShoriyoJukyushaIdoKihonSofu> implements Serializable {
 
     private final DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity;
     private final KyodoShoriyoJukyushaIdoKihonSofuIdentifier id;
@@ -215,7 +218,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofu extends ModelBase<KyodoShoriyoJuky
      *
      * @return 訂正連絡票フラグ
      */
-    public boolean get訂正連絡票フラグ() {
+    public boolean is訂正連絡票フラグ() {
         return entity.getTeiseiRenrakuhyoFlag();
     }
 

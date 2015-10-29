@@ -96,8 +96,8 @@ public final class JogaiShinsakaiIinMapper {
      */
     public static List<DbT5014ShinsakaiIinJogaiJohoEntity> toShinsakaiIinJogaiJohoEntityList(JogaiShinsakaiIinList 除外対象委員List) {
         if (除外対象委員List == null) {
-            List<DbT5014ShinsakaiIinJogaiJohoEntity> list = Collections.emptyList();
-            return list;
+//            List<DbT5014ShinsakaiIinJogaiJohoEntity> list = Collections.emptyList();
+            return Collections.emptyList();
         }
 
         List<DbT5014ShinsakaiIinJogaiJohoEntity> list = new ArrayList<>();

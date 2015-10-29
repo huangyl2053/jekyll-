@@ -21,13 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KyufujissekiKihonBuilder}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KyufujissekiKihonBuilderTest extends DbcTestBase {
 
     private static DbT3017KyufujissekiKihonEntity KyufujissekiKihonEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -665,7 +663,7 @@ public class KyufujissekiKihonBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の保険者保有給付実績情報削除済フラグは_設定した値と同じ保険者保有給付実績情報削除済フラグを返す() {
             business = sut.set保険者保有給付実績情報削除済フラグ(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ).build();
-            assertThat(business.get保険者保有給付実績情報削除済フラグ(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ));
+            assertThat(business.is保険者保有給付実績情報削除済フラグ(), is(DbT3017KyufujissekiKihonEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ));
         }
 
     }

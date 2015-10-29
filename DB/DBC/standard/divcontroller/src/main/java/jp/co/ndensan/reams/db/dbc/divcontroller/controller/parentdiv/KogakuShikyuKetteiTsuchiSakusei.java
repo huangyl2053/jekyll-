@@ -5,16 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.KogakuShikyuKetteiTsuchiSakuseiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 高額サービス費支給決定通知書作成パネルです。

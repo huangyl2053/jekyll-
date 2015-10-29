@@ -19,13 +19,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KokuhorenInterfaceKanri}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KokuhorenInterfaceKanriTest extends DbcTestBase {
 
     private static DbT3104KokuhorenInterfaceKanriEntity KokuhorenInterfaceKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -155,7 +153,7 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
 
         @Test
         public void get再処理可能区分は_entityが持つ再処理可能区分を返す() {
-            assertThat(sut.get再処理可能区分(), is(KokuhorenInterfaceKanriEntity.getSaiShoriKahiKubun()));
+            assertThat(sut.is再処理可能区分(), is(KokuhorenInterfaceKanriEntity.getSaiShoriKahiKubun()));
         }
 
         @Test
@@ -215,7 +213,7 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
 
         @Test
         public void get再処理設定不可区分は_entityが持つ再処理設定不可区分を返す() {
-            assertThat(sut.get再処理設定不可区分(), is(KokuhorenInterfaceKanriEntity.getSaiShoriFukaKubun()));
+            assertThat(sut.is再処理設定不可区分(), is(KokuhorenInterfaceKanriEntity.getSaiShoriFukaKubun()));
         }
 
         @Test

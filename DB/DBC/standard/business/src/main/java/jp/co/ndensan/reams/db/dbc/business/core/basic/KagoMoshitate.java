@@ -174,7 +174,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      *
      * @return 国保連再送付有フラグ
      */
-    public boolean get国保連再送付有フラグ() {
+    public boolean is国保連再送付有フラグ() {
         return entity.getKokuhirenSaiSofuAriFlag();
     }
 
@@ -183,7 +183,7 @@ public class KagoMoshitate extends ModelBase<KagoMoshitateIdentifier, DbT3059Kag
      *
      * @return 同月審査有フラグ
      */
-    public boolean get同月審査有フラグ() {
+    public boolean is同月審査有フラグ() {
         return entity.getDogetsuShinsaAriFlag();
     }
 

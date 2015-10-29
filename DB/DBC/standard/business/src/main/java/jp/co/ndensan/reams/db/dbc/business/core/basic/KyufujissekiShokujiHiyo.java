@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績食事費用を管理するクラスです。
  */
-public class KyufujissekiShokujiHiyo extends ModelBase<KyufujissekiShokujiHiyoIdentifier, DbT3022KyufujissekiShokujiHiyoEntity, KyufujissekiShokujiHiyo> implements Serializable {
+public class KyufujissekiShokujiHiyo extends 
+        ModelBase<KyufujissekiShokujiHiyoIdentifier, 
+        DbT3022KyufujissekiShokujiHiyoEntity, 
+        KyufujissekiShokujiHiyo> implements Serializable {
 
     private final DbT3022KyufujissekiShokujiHiyoEntity entity;
     private final KyufujissekiShokujiHiyoIdentifier id;

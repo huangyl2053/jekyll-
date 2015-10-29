@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 給付実績高額介護サービス費を管理するクラスです。
  */
-public class KyufujissekiKogakuKaigoServicehi extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, DbT3028KyufujissekiKogakuKaigoServicehiEntity, KyufujissekiKogakuKaigoServicehi> implements Serializable {
+public class KyufujissekiKogakuKaigoServicehi
+extends ModelBase<KyufujissekiKogakuKaigoServicehiIdentifier, 
+        DbT3028KyufujissekiKogakuKaigoServicehiEntity, 
+        KyufujissekiKogakuKaigoServicehi> implements Serializable {
 
     private final DbT3028KyufujissekiKogakuKaigoServicehiEntity entity;
     private final KyufujissekiKogakuKaigoServicehiIdentifier id;
@@ -376,7 +379,7 @@ public class KyufujissekiKogakuKaigoServicehi extends ModelBase<KyufujissekiKoga
      *
      * @return 保険者保有給付実績情報削除済フラグ
      */
-    public boolean get保険者保有給付実績情報削除済フラグ() {
+    public boolean is保険者保有給付実績情報削除済フラグ() {
         return entity.getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag();
     }
 

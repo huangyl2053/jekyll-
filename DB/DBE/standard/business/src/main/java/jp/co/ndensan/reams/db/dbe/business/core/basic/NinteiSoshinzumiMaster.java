@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定送信済みマスタを管理するクラスです。
  */
-public class NinteiSoshinzumiMaster extends ParentModelBase<NinteiSoshinzumiMasterIdentifier, DbT5190NinteiSoshinzumiMasterEntity, NinteiSoshinzumiMaster> implements Serializable {
+public class NinteiSoshinzumiMaster
+        extends ParentModelBase<NinteiSoshinzumiMasterIdentifier, DbT5190NinteiSoshinzumiMasterEntity, NinteiSoshinzumiMaster>
+        implements Serializable {
 
     private final DbT5190NinteiSoshinzumiMasterEntity entity;
     private final NinteiSoshinzumiMasterIdentifier id;
@@ -87,7 +89,7 @@ public class NinteiSoshinzumiMaster extends ParentModelBase<NinteiSoshinzumiMast
      *
      * @return 引き渡しフラグ
      */
-    public boolean get引き渡しフラグ() {
+    public boolean is引き渡しフラグ() {
         return entity.getIsHikiwatashi();
     }
 
@@ -225,7 +227,7 @@ public class NinteiSoshinzumiMaster extends ParentModelBase<NinteiSoshinzumiMast
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5190NinteiSoshinzumiMasterEntity entity;
         private final NinteiSoshinzumiMasterIdentifier id;
 

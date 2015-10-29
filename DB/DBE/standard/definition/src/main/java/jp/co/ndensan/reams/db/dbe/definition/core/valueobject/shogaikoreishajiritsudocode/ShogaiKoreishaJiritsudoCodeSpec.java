@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum ShogaiKoreishaJiritsudoCodeSpec implements IPredicate<ShogaiKoreishaJiritsudoCode> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
 

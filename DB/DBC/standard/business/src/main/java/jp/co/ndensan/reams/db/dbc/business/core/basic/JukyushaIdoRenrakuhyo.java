@@ -396,7 +396,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 公費負担上限額減額有フラグ
      */
-    public boolean get公費負担上限額減額有フラグ() {
+    public boolean is公費負担上限額減額有フラグ() {
         return entity.getKohiFutanJogenGengakuAriFlag();
     }
 
@@ -540,7 +540,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 課税層の特例減額措置対象フラグ
      */
-    public boolean get課税層の特例減額措置対象フラグ() {
+    public boolean is課税層の特例減額措置対象フラグ() {
         return entity.getKaizeisoTokureiGengakuSochiTaishoFlag();
     }
 
@@ -648,7 +648,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 小多機能居宅介護利用開始月利用有フラグ
      */
-    public boolean get小多機能居宅介護利用開始月利用有フラグ() {
+    public boolean is小多機能居宅介護利用開始月利用有フラグ() {
         return entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag();
     }
 
@@ -729,7 +729,7 @@ public class JukyushaIdoRenrakuhyo
      *
      * @return 訂正連絡票フラグ
      */
-    public boolean get訂正連絡票フラグ() {
+    public boolean is訂正連絡票フラグ() {
         return entity.getTeiseiRenrakuhyoFlag();
     }
 

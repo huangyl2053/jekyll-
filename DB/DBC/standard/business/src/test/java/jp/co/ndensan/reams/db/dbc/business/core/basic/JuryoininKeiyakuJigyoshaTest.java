@@ -20,13 +20,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link JuryoininKeiyakuJigyosha}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
     private static DbT3077JuryoininKeiyakuJigyoshaEntity JuryoininKeiyakuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -222,22 +220,22 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
         @Test
         public void get住宅改修契約有無は_entityが持つ住宅改修契約有無を返す() {
-            assertThat(sut.get住宅改修契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getJutakuKaishuKeiyakuUmu()));
+            assertThat(sut.is住宅改修契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getJutakuKaishuKeiyakuUmu()));
         }
 
         @Test
         public void get特定福祉用具販売契約有無は_entityが持つ特定福祉用具販売契約有無を返す() {
-            assertThat(sut.get特定福祉用具販売契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()));
+            assertThat(sut.is特定福祉用具販売契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()));
         }
 
         @Test
         public void get償還払給付契約有無は_entityが持つ償還払給付契約有無を返す() {
-            assertThat(sut.get償還払給付契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getShokanbaraiKyufuKeiyakuUmu()));
+            assertThat(sut.is償還払給付契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getShokanbaraiKyufuKeiyakuUmu()));
         }
 
         @Test
         public void get高額給付契約有無は_entityが持つ高額給付契約有無を返す() {
-            assertThat(sut.get高額給付契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getKogakuKyufuKeiyakuUmu()));
+            assertThat(sut.is高額給付契約有無(), is(JuryoininKeiyakuJigyoshaEntity.getKogakuKyufuKeiyakuUmu()));
         }
 
         @Test
@@ -247,7 +245,7 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
 
         @Test
         public void get取扱確約書有無は_entityが持つ取扱確約書有無を返す() {
-            assertThat(sut.get取扱確約書有無(), is(JuryoininKeiyakuJigyoshaEntity.getToriatsukaiKakuyakushoUmu()));
+            assertThat(sut.is取扱確約書有無(), is(JuryoininKeiyakuJigyoshaEntity.getToriatsukaiKakuyakushoUmu()));
         }
     }
 

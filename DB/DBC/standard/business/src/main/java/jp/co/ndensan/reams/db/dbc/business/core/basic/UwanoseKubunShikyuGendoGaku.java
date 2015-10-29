@@ -9,7 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 上乗せ居宅サービス区分支給限度額を管理するクラスです。
  */
-public class UwanoseKubunShikyuGendoGaku extends ModelBase<UwanoseKubunShikyuGendoGakuIdentifier, DbT7113UwanoseKubunShikyuGendoGakuEntity, UwanoseKubunShikyuGendoGaku> implements Serializable {
+public class UwanoseKubunShikyuGendoGaku 
+extends ModelBase<UwanoseKubunShikyuGendoGakuIdentifier, 
+        DbT7113UwanoseKubunShikyuGendoGakuEntity, 
+        UwanoseKubunShikyuGendoGaku> implements Serializable {
 
     private final DbT7113UwanoseKubunShikyuGendoGakuEntity entity;
     private final UwanoseKubunShikyuGendoGakuIdentifier id;

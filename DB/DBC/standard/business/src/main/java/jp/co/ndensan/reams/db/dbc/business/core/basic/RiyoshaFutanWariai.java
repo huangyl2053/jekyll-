@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 利用者負担割合を管理するクラスです。
  */
-public class RiyoshaFutanWariai extends ModelBase<RiyoshaFutanWariaiIdentifier, DbT3113RiyoshaFutanWariaiEntity, RiyoshaFutanWariai> implements Serializable {
+public class RiyoshaFutanWariai 
+extends ModelBase<RiyoshaFutanWariaiIdentifier, 
+        DbT3113RiyoshaFutanWariaiEntity, 
+        RiyoshaFutanWariai> implements Serializable {
 
     private final DbT3113RiyoshaFutanWariaiEntity entity;
     private final RiyoshaFutanWariaiIdentifier id;
@@ -114,7 +117,7 @@ public class RiyoshaFutanWariai extends ModelBase<RiyoshaFutanWariaiIdentifier, 
      *
      * @return 発行不要フラグ
      */
-    public boolean get発行不要フラグ() {
+    public boolean is発行不要フラグ() {
         return entity.getHakoFuyoFlag();
     }
 
@@ -123,7 +126,7 @@ public class RiyoshaFutanWariai extends ModelBase<RiyoshaFutanWariaiIdentifier, 
      *
      * @return 職権変更フラグ
      */
-    public boolean get職権変更フラグ() {
+    public boolean is職権変更フラグ() {
         return entity.getShokenFlag();
     }
 

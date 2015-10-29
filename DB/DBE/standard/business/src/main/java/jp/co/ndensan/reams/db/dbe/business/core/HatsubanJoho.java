@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 発番情報を表すクラスです
+ * 発番情報を表すクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -19,7 +19,7 @@ public class HatsubanJoho implements IDbColumnMappable {
     private int 発番番号;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param 発番 発番
      */
@@ -28,7 +28,7 @@ public class HatsubanJoho implements IDbColumnMappable {
     }
 
     /**
-     * 発番情報に＋１した値を返します
+     * 発番情報に＋１した値を返します。
      *
      * @return 発番した番号
      */

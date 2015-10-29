@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.TestKaigoNinte
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- * 共有子Div「介護認定申請基本情報入力」のテスト用
+ * 共有子Div「介護認定申請基本情報入力」のテスト用クラスです。
  *
  * @author N8235 船山 洋介
  */

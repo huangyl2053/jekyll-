@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 国保連インターフェース管理を管理するクラスです。
  */
-public class KokuhorenInterfaceKanri extends ModelBase<KokuhorenInterfaceKanriIdentifier, DbT3104KokuhorenInterfaceKanriEntity, KokuhorenInterfaceKanri> implements Serializable {
+public class KokuhorenInterfaceKanri extends
+        ModelBase<KokuhorenInterfaceKanriIdentifier, DbT3104KokuhorenInterfaceKanriEntity, KokuhorenInterfaceKanri>
+        implements Serializable {
 
     private final DbT3104KokuhorenInterfaceKanriEntity entity;
     private final KokuhorenInterfaceKanriIdentifier id;
@@ -141,7 +143,7 @@ public class KokuhorenInterfaceKanri extends ModelBase<KokuhorenInterfaceKanriId
      *
      * @return 再処理可能区分
      */
-    public boolean get再処理可能区分() {
+    public boolean is再処理可能区分() {
         return entity.getSaiShoriKahiKubun();
     }
 
@@ -249,7 +251,7 @@ public class KokuhorenInterfaceKanri extends ModelBase<KokuhorenInterfaceKanriId
      *
      * @return 再処理設定不可区分
      */
-    public boolean get再処理設定不可区分() {
+    public boolean is再処理設定不可区分() {
         return entity.getSaiShoriFukaKubun();
     }
 

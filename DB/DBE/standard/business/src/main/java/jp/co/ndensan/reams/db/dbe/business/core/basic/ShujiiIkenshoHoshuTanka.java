@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 意見書作成報酬単価を管理するクラスです。
  */
-public class ShujiiIkenshoHoshuTanka extends ParentModelBase<ShujiiIkenshoHoshuTankaIdentifier, DbT5032ShujiiIkenshoHoshuTankaEntity, ShujiiIkenshoHoshuTanka> implements Serializable {
+public class ShujiiIkenshoHoshuTanka
+        extends ParentModelBase<ShujiiIkenshoHoshuTankaIdentifier, DbT5032ShujiiIkenshoHoshuTankaEntity, ShujiiIkenshoHoshuTanka>
+        implements Serializable {
 
     private final DbT5032ShujiiIkenshoHoshuTankaEntity entity;
     private final ShujiiIkenshoHoshuTankaIdentifier id;
@@ -194,7 +196,7 @@ public class ShujiiIkenshoHoshuTanka extends ParentModelBase<ShujiiIkenshoHoshuT
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5032ShujiiIkenshoHoshuTankaEntity entity;
         private final ShujiiIkenshoHoshuTankaIdentifier id;
 

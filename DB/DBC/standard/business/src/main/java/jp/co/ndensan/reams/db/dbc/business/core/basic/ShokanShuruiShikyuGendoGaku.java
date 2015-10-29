@@ -19,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払い給付種類支給限度額を管理するクラスです。
  */
-public class ShokanShuruiShikyuGendoGaku extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier, DbT7112ShokanShuruiShikyuGendoGakuEntity, ShokanShuruiShikyuGendoGaku> implements Serializable {
+public class ShokanShuruiShikyuGendoGaku 
+extends ModelBase<ShokanShuruiShikyuGendoGakuIdentifier, 
+        DbT7112ShokanShuruiShikyuGendoGakuEntity, 
+        ShokanShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7112ShokanShuruiShikyuGendoGakuEntity entity;
     private final ShokanShuruiShikyuGendoGakuIdentifier id;

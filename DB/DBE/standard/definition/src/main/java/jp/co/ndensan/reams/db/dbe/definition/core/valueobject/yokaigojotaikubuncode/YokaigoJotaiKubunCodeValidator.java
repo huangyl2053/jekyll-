@@ -18,7 +18,7 @@ public class YokaigoJotaiKubunCodeValidator {
     private final YokaigoJotaiKubunCode yokaigoJotaiKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param yokaigoJotaiKubunCode 要介護状態区分コード
      */

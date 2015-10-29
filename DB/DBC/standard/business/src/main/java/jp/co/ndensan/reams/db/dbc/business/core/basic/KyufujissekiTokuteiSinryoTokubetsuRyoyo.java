@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績特定診療費_特別療養費を管理するクラスです。
  */
-public class KyufujissekiTokuteiSinryoTokubetsuRyoyo extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier, DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity, KyufujissekiTokuteiSinryoTokubetsuRyoyo> implements Serializable {
+public class KyufujissekiTokuteiSinryoTokubetsuRyoyo 
+extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier, 
+        DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity, 
+        KyufujissekiTokuteiSinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity;
     private final KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier id;
@@ -569,7 +572,8 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyo extends ModelBase<Kyufujiss
         private final DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity;
         private final KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier id;
 
-        private _SerializationProxy(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity, KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier id) {
+        private _SerializationProxy(DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity entity, 
+                KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -57,7 +57,7 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
     /**
      * 合併情報を全件返します。
      *
-     * @return DbT7055GappeiJohoEntityの{@code list}
+     * @return List<DbT7055GappeiJohoEntity>
      */
     @Transaction
     public List<DbT7055GappeiJohoEntity> selectAll() {
@@ -78,7 +78,24 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
     @Override
     public int save(DbT7055GappeiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報エンティティ"));
-
+        // TODO 物理削除であるかは業務ごとに検討してください。
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    public int insert(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int update(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int delete(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int deletePhysical(DbT7055GappeiJohoEntity entity) {
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 }

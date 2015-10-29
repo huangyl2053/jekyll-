@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績基本Aliveを管理するクラスです。
  */
-public class KyufujissekiKihonAlive extends ParentModelBase<KyufujissekiKihonAliveIdentifier, DbV3017KyufujissekiKihonEntity, KyufujissekiKihonAlive> implements Serializable {
+public class KyufujissekiKihonAlive extends 
+        ParentModelBase<KyufujissekiKihonAliveIdentifier, 
+        DbV3017KyufujissekiKihonEntity, KyufujissekiKihonAlive> implements Serializable {
 
     private final DbV3017KyufujissekiKihonEntity entity;
     private final KyufujissekiKihonAliveIdentifier id;
@@ -284,7 +286,7 @@ public class KyufujissekiKihonAlive extends ParentModelBase<KyufujissekiKihonAli
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV3017KyufujissekiKihonEntity entity;
         private final KyufujissekiKihonAliveIdentifier id;
 

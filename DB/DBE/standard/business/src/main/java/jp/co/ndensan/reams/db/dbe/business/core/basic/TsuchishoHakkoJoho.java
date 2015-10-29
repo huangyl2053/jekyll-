@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 通知書発行情報を管理するクラスです。
  */
-public class TsuchishoHakkoJoho extends ParentModelBase<TsuchishoHakkoJohoIdentifier, DbT5122TsuchishoHakkoJohoEntity, TsuchishoHakkoJoho> implements Serializable {
+public class TsuchishoHakkoJoho
+        extends ParentModelBase<TsuchishoHakkoJohoIdentifier, DbT5122TsuchishoHakkoJohoEntity, TsuchishoHakkoJoho>
+        implements Serializable {
 
     private final DbT5122TsuchishoHakkoJohoEntity entity;
     private final TsuchishoHakkoJohoIdentifier id;
@@ -210,7 +212,7 @@ public class TsuchishoHakkoJoho extends ParentModelBase<TsuchishoHakkoJohoIdenti
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5122TsuchishoHakkoJohoEntity entity;
         private final TsuchishoHakkoJohoIdentifier id;
 

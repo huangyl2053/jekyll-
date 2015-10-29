@@ -19,11 +19,11 @@ public enum NinteichosaJisshibashoKubunCodeSpec implements IPredicate<Ninteichos
 
                 /**
                  *
-                 * @param ninteichosaJisshibashoKubunCode 要介護認定調査の実施場所区分コード
+                 * @param ninteichosaKubunCode 要介護認定調査の実施場所区分コード
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override
-                public boolean apply(NinteichosaJisshibashoKubunCode ninteichosaJisshibashoKubunCode) {
+                public boolean apply(NinteichosaJisshibashoKubunCode ninteichosaKubunCode) {
                     return true;
                 }
             }

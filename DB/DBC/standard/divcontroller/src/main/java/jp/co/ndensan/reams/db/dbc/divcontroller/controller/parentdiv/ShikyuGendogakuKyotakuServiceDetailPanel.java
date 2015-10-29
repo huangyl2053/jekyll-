@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgServicehiHiritsu_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgServicehiShurui_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.ShikyuGendogakuKyotakuServiceDetailPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.ShikyuGendogakuKyotakuServiceListPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgServicehiHiritsu_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgServicehiShurui_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 支給限度額登録（居宅サービス費）
+ *
  * @author n8223
  */
 public class ShikyuGendogakuKyotakuServiceDetailPanel {
@@ -31,16 +32,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 //    final static String RadIdoKubun1 = "1:新規";
 //    final static String RadIdoKubun2 = "2:変更";
 //    final static String RadIdoKubun3 = "3:終了";
+    private static final RString SHIKYUKUN = new RString("区分支給");
+    private static final RString SHURUIKUN = new RString("種類支給");
 
-    final static String ShikyuKun = "区分支給";
-    final static String ShuruiKun = "種類支給";
-
-    final static String AddedFlg = "追加";
-    final static String ModifiedFlg = "修正";
-    final static String DeletefFlag = "削除";
+    private static final RString ADDEDFLG = new RString("追加");
+    private static final RString MODIFIEDFLG = new RString("修正");
+//    private static final RString DELETEFFLAG = new RString("削除");
 
     /**
-     * 支給限度額登録（居宅サービス費）　区分支給限度額を追加するボタン押下後、（居宅サービス費）サービス費区分支給限度内容の情報を表示する
+     * 支給限度額登録（居宅サービス費）　区分支給限度額を追加するボタン押下後、（居宅サービス費）サービス費区分支給限度内容の情報を表示する。
      *
      * @author n8223
      */
@@ -49,7 +49,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
         panel.getKubunShikyuGendogaku().setDisplayNone(false);
         panel.getKubunShikyuGendogaku().setVisible(true);
-            
+
         //支給限度額
         setShikyuKubunGendogakuKyotaku(panel);
 
@@ -60,34 +60,32 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
     private void setShikyuKubunGendogakuKyotaku(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData("dbc4200011/ShikyuGendogakuKyotakuServiceDetailKubunShikyuGendogaku.yml");
+        List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetailKubunShikyuGendogaku.yml"));
 
         //VIEWPUT
-        String kun = ShikyuKun;
-        String flg = AddedFlg;
+        RString kun = SHIKYUKUN;
+        RString flg = ADDEDFLG;
         setViewPutState(panel,
                 kun,
                 flg,
-                ymlData.get(0).get("idoDate").toString(),
-                panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString(),
-                ymlData.get(0).get("yukoDateRangefrom").toString(),
-               (String) ymlData.get(0).get("yukoDateRangeto"));
-        
+                (RString) ymlData.get(0).get("idoDate"),
+                panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue(),
+                (RString) ymlData.get(0).get("yukoDateRangefrom"),
+                (RString) ymlData.get(0).get("yukoDateRangeto"));
+
         //TOP
         //異動日
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get("idoDate").toString()));
-        //異動区分 new 
+        //異動区分 new
         panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().setSelectedItem(new RString("radIdoKubun"));
         //異動事由
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().setValue(new RString(ymlData.get(0).get("idoJiyu").toString()));
-        //有効期間 from ~ to 
+        //有効期間 from ~ to
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setFromValue(new RDate(ymlData.get(0).get("yukoDateRangefrom").toString()));
-        
-        //panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
 
-        
+        //panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
         //サービス費区分支給限度基準額
-        //支給限度基準額（旧訪問通所） 
+        //支給限度基準額（旧訪問通所）
         //要介護1
         panel.getKubunShikyuGendogaku().getTplKubunShikyuGendogaku().getTxtShikyuGendoKijungakuYokaigo1().setValue(new Decimal(
                 ymlData.get(0).get("shikyuGendoKijungakuYokaigo1").toString()));
@@ -116,16 +114,16 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
     }
 
     /**
-     * 支給限度額登録（居宅サービス費）　種類支給限度額を追加するボタン押下後、（居宅サービス費）サービス費種類支給限度内容の情報を表示する
+     * 支給限度額登録（居宅サービス費）　種類支給限度額を追加するボタン押下後、（居宅サービス費）サービス費種類支給限度内容の情報を表示する。
      *
      * @author n8223
      */
     public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnAddShuruiShikyuGendogaku(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
-         panel.getShuruiShikyuGendogaku().setDisplayNone(false);
-         panel.getShuruiShikyuGendogaku().setVisible(true);
-        
+        panel.getShuruiShikyuGendogaku().setDisplayNone(false);
+        panel.getShuruiShikyuGendogaku().setVisible(true);
+
         //種類支給額
         setShikyuGendogakuKyotaku(panel);
 
@@ -135,30 +133,29 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
     private void setShikyuGendogakuKyotaku(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData("dbc4200011/ShikyuGendogakuKyotakuServiceDetailKubunShikyuGendogaku.yml");
-        
-        
-         //VIEWPUT
-        String kun = ShuruiKun;
-        String flg = AddedFlg;
+        List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetailKubunShikyuGendogaku.yml"));
+
+        //VIEWPUT
+        RString kun = SHURUIKUN;
+        RString flg = ADDEDFLG;
         setViewPutState(panel,
                 kun,
                 flg,
-                ymlData.get(0).get("idoDate").toString(),
-                panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString(),
-                ymlData.get(0).get("yukoDateRangefrom").toString(),
-               (String) ymlData.get(0).get("yukoDateRangeto"));
+                (RString) ymlData.get(0).get("idoDate"),
+                (RString) panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue(),
+                (RString) ymlData.get(0).get("yukoDateRangefrom"),
+                (RString) ymlData.get(0).get("yukoDateRangeto"));
 
         //TOP
         //異動日
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().setValue(new RDate(ymlData.get(0).get("idoDate").toString()));
-        //異動区分 new 
+        //異動区分 new
         panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().setSelectedItem(new RString("radIdoKubun"));
         //異動事由
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().setValue(new RString(ymlData.get(0).get("idoJiyu").toString()));
-        //有効期間 from ~ to 
+        //有効期間 from ~ to
         panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setFromValue(new RDate(ymlData.get(0).get("yukoDateRangefrom").toString()));
-       // panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
+        // panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().setToValue(new RDate((String) ymlData.get(0).get("yukoDateRangeto")));
 
     }
 
@@ -182,7 +179,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
     private List<dgServicehiShurui_Row> setAddServicehiShuruiList(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiShurui.yml");
+        List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiShurui.yml"));
 
         List<dgServicehiShurui_Row> arrayData = new ArrayList<>();
         dgServicehiShurui_Row item;
@@ -192,11 +189,11 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
                 ymlData.get(0).get("yokaigo1").toString(),
                 //要介護2
                 ymlData.get(0).get("yokaigo2").toString(),
-                //要介護3 
+                //要介護3
                 ymlData.get(0).get("yokaigo3").toString(),
                 //要介護4
                 ymlData.get(0).get("yokaigo4").toString(),
-                //要介護5 
+                //要介護5
                 ymlData.get(0).get("yokaigo5").toString(),
                 //要支援1
                 ymlData.get(0).get("yoshien1").toString(),
@@ -263,7 +260,7 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 
     private List<dgServicehiHiritsu_Row> setAddServicehiHiritsuList(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiHiritsu.yml");
+        List<HashMap> ymlData = ymlData(new RString("dbc4200011/ShikyuGendogakuKyotakuServiceDetaildgServicehiHiritsu.yml"));
 
         List<dgServicehiHiritsu_Row> arrayData = new ArrayList<>();
         dgServicehiHiritsu_Row item;
@@ -300,27 +297,27 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
     public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onClick_btnModifyRow(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
-        if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(ShikyuKun)) {
+        if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHIKYUKUN)) {
             setViewPutState(panel,
-                    ShikyuKun,
-                    ModifiedFlg,
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().getValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString()
+                    SHIKYUKUN,
+                    MODIFIEDFLG,
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().getValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString())
             );
 
             panel.getShuruiShikyuGendogaku().setDisplayNone(true);
             panel.getShuruiShikyuGendogaku().setVisible(true);
 
-        } else if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(ShuruiKun)) {
+        } else if (panel1.getDgShikyuGendogakuKyotakuService().getClickedItem().getTxtKubunOrShurui().toString().equals(SHURUIKUN)) {
             setViewPutState(panel,
-                    ShuruiKun,
-                    ModifiedFlg,
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().getValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toString(),
-                    panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString()
+                    SHURUIKUN,
+                    MODIFIEDFLG,
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoDate().getValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toString()),
+                    new RString(panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString())
             );
 
             panel.getKubunShikyuGendogaku().setDisplayNone(true);
@@ -335,8 +332,8 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setRadIdoKubunViewStateHolder(panel);
-        String radIdoKubun = panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString();
-         ViewStateHolder.put("RADIOKUBUN", radIdoKubun);
+        RString radIdoKubun = panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue();
+        ViewStateHolder.put("RADIOKUBUN", radIdoKubun);
 
 //        if (radIdoKubun.equals(RadIdoKubun1)) {
 //            ViewStateHolder.put("RADIOKUBUN", RadIdoKubun1);
@@ -345,17 +342,15 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 //        } else if (radIdoKubun.equals(RadIdoKubun3)) {
 //            ViewStateHolder.put("RADIOKUBUN", RadIdoKubun3);
 //        }
-
         response.data = panel;
         return response;
     }
 
-    
     public ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> onBlur_txtIdoJiyu(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, ShikyuGendogakuKyotakuServiceListPanelDiv panel1) {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setIdoJiyuViewStateHolder(panel);
-        String txtIdoJiyu = panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().getValue().toString();
+        RString txtIdoJiyu = panel.getShikyuGendogakuKyotakuServiceTop().getTxtIdoJiyu().getValue();
         ViewStateHolder.put("IDOJIYU", txtIdoJiyu);
 
         response.data = panel;
@@ -366,8 +361,8 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         ResponseData<ShikyuGendogakuKyotakuServiceDetailPanelDiv> response = new ResponseData<>();
 
         //setYukoDateRangeFromValueViewStateHolder(panel);
-        String txtYukoDateRangeFromValue = panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toString();
-       // String txtYukoDateRangeToValue = panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString();
+        RString txtYukoDateRangeFromValue = panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getFromValue().toDateString();
+        // String txtYukoDateRangeToValue = panel.getShikyuGendogakuKyotakuServiceTop().getTxtYukoDateRange().getToValue().toString();
 
         ViewStateHolder.put("YUKODATERANGEFROMVALUE", txtYukoDateRangeFromValue);
         //ViewStateHolder.put("YUKODATERANGETOVALUE", txtYukoDateRangeToValue);
@@ -376,17 +371,17 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
         return response;
     }
 
-    private void setViewPutState(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel, String kun, String flg, String  radiokubun, String  idojiyu, String yukoDateRangeFromValue , String yukoDateRangeToValue) {
-     
-        
+    private void setViewPutState(ShikyuGendogakuKyotakuServiceDetailPanelDiv panel,
+            RString kun, RString flg, RString radiokubun, RString idojiyu,
+            RString yukoDateRangeFromValue, RString yukoDateRangeToValue) {
+
         ViewStateHolder.put("GUBUN", kun);
         ViewStateHolder.put("FLG", flg);
-     
-        
-        radiokubun = panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue().toString();
-        
+
+        radiokubun = panel.getShikyuGendogakuKyotakuServiceTop().getRadIdoKubun().getSelectedValue();
+
         ViewStateHolder.put("RADIOKUBUN", radiokubun);
-        
+
 //        if (radiokubun.equals(RadIdoKubun1)) {
 //            ViewStateHolder.put("RADIOKUBUN", RadIdoKubun1);
 //        } else if (radiokubun.equals(RadIdoKubun2)) {
@@ -394,18 +389,19 @@ public class ShikyuGendogakuKyotakuServiceDetailPanel {
 //        } else if (radiokubun.equals(RadIdoKubun3)) {
 //            ViewStateHolder.put("RADIOKUBUN", RadIdoKubun3);
 //        }
-//         
+//
         ViewStateHolder.put("IDOJIYU", idojiyu);
-   
+
         ViewStateHolder.put("YUKODATERANGEFROMVALUE", yukoDateRangeFromValue);
-        
-        if (yukoDateRangeToValue.length() > 0) ViewStateHolder.put("YUKODATERANGETOVALUE", yukoDateRangeToValue);
-        
-        
+
+        if (0 < yukoDateRangeToValue.length()) {
+            ViewStateHolder.put("YUKODATERANGETOVALUE", yukoDateRangeToValue);
+        }
+
     }
 
-    private List<HashMap> ymlData(String ymlName) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlName));
+    private List<HashMap> ymlData(RString ymlName) {
+        return YamlLoader.FOR_DBC.loadAsList(ymlName);
     }
 
 }

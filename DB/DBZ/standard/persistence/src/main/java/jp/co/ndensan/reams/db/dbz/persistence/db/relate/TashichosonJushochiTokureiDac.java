@@ -73,7 +73,7 @@ public class TashichosonJushochiTokureiDac implements IModifiable<DbT1003Tashich
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT1003TashichosonJushochiTokureiEntity> List = accessor.select().
+        List<DbT1003TashichosonJushochiTokureiEntity> entityList = accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(
                         and(
@@ -88,7 +88,7 @@ public class TashichosonJushochiTokureiDac implements IModifiable<DbT1003Tashich
 
         List<DbT1003TashichosonJushochiTokureiEntity> 台帳リスト = new ArrayList<>();
 
-        for (DbT1003TashichosonJushochiTokureiEntity entity : List) {
+        for (DbT1003TashichosonJushochiTokureiEntity entity : entityList) {
             台帳リスト.add(createModel(entity));
         }
 

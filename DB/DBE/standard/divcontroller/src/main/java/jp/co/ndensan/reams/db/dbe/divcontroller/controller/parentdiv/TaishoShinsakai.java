@@ -34,11 +34,11 @@ public class TaishoShinsakai {
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 
         div.getTxtGogitai().setValue(cg.getAsRString("合議体"));
-        int startTimeHour = new Integer(cg.getAsRString("開始時間時").toString());
-        int startTimeMin = new Integer(cg.getAsRString("開始時間分").toString());
+        int startTimeHour = Integer.valueOf(cg.getAsRString("開始時間時").toString());
+        int startTimeMin = Integer.valueOf(cg.getAsRString("開始時間分").toString());
         div.getTxtShinsaStartTime().setValue(RTime.of(startTimeHour, startTimeMin));
-        int endTimeHour = new Integer(cg.getAsRString("終了時間時").toString());
-        int endTimeMin = new Integer(cg.getAsRString("終了時間分").toString());
+        int endTimeHour = Integer.valueOf(cg.getAsRString("終了時間時").toString());
+        int endTimeMin = Integer.valueOf(cg.getAsRString("終了時間分").toString());
         div.getTxtShinsaEndTime().setValue(RTime.of(endTimeHour, endTimeMin));
         div.getTxtShinsaTaishoshaSu().setValue(cg.getAsDecimal("対象人数"));
         div.getTxtShinsaTaishoMax().setValue(cg.getAsDecimal("可能人数"));

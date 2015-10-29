@@ -5,22 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiKozaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiKozaInfoKozaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiKozaInfoMadoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShinseiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShinseishoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.dgShokanShikyuKetteiInfoList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoList.dgServiceTeikyoShomeishoList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 /**
  * 償還支給申請決定の支給申請書情報のコントロールです。
@@ -47,7 +38,7 @@ public class ShokanShikyuKetteiShinseisho {
 
         setKetteiInfoList(panel);
 
-        ShokanShikyuKetteiInfoDiv infoDiv = panel.getTabShokanShikyuKetteiShinseisho().getShokanShikyuKetteiInfo();
+//        ShokanShikyuKetteiInfoDiv infoDiv = panel.getTabShokanShikyuKetteiShinseisho().getShokanShikyuKetteiInfo();
 //        ControlGenerator cg = new ControlGenerator(getYaml().get(9));
 //        infoDiv.getRadKetteiShikyuKubun().setSelectedItem(cg.getAsRString("支給区分key"));
 //

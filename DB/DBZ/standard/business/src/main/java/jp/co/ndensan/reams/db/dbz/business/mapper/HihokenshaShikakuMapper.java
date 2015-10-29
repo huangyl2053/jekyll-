@@ -31,12 +31,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiy
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -149,7 +147,7 @@ public final class HihokenshaShikakuMapper {
 
         LasdecCode lasdecCode = entity.getShichosonCode();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
-        YMDHMS shoriTimestamp = new YMDHMS("19990101123456");//entity.getShoriTimestamp().value();
+        YMDHMS shoriTimestamp = new YMDHMS("19990101123456");
         HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(Code.EMPTY, RString.EMPTY);
         HihokenshaShikaku shikaku
                 = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,
@@ -189,25 +187,27 @@ public final class HihokenshaShikakuMapper {
         //                JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
         //
         //
-        //    KaigoShikakuFactory.createInstance(ShikibetsuCode.EMPTY, HokenShubetsu.介護保険, RDate.MAX, RDate.MAX, null, RDate.MAX, RDate.MAX, null, RString.EMPTY, RString.EMPTY, RDate.MAX, ShikakuHihokenshaKubun.第１号被保険者, JushochiTokureishaKubun.住所地特例者);
+        //    KaigoShikakuFactory.createInstance
+        // (ShikibetsuCode.EMPTY, HokenShubetsu.介護保険, RDate.MAX, RDate.MAX, null, 
+        // RDate.MAX, RDate.MAX, null, RString.EMPTY, RString.EMPTY, RDate.MAX, ShikakuHihokenshaKubun.第１号被保険者, JushochiTokureishaKubun.住所地特例者);
         return null;
     }
 
-    private static RDate toRDateOrMin(FlexibleDate date) {
-        return date.isValid() ? toRDate(date) : RDate.MIN;
-    }
-
-    private static RDate toRDateOrMax(FlexibleDate date) {
-        return date.isValid() ? toRDate(date) : RDate.MAX;
-    }
-
-    private static RDate toRDate(FlexibleDate date) {
-        return new RDate(date.toString());
-    }
-
-    private static <T> T toValue(IValueObject<T> source) {
-        return isNull(source) ? null : source.value();
-    }
+//    private static RDate toRDateOrMin(FlexibleDate date) {
+//        return date.isValid() ? toRDate(date) : RDate.MIN;
+//    }
+//
+//    private static RDate toRDateOrMax(FlexibleDate date) {
+//        return date.isValid() ? toRDate(date) : RDate.MAX;
+//    }
+//
+//    private static RDate toRDate(FlexibleDate date) {
+//        return new RDate(date.toString());
+//    }
+//
+//    private static <T> T toValue(IValueObject<T> source) {
+//        return isNull(source) ? null : source.value();
+//    }
 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
 //    private static IShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
 //        final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);

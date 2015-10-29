@@ -21,13 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KagoMoshitate}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KagoMoshitateTest extends DbcTestBase {
 
     private static DbT3059KagoMoshitateEntity KagoMoshitateEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -170,12 +168,12 @@ public class KagoMoshitateTest extends DbcTestBase {
 
         @Test
         public void get国保連再送付有フラグは_entityが持つ国保連再送付有フラグを返す() {
-            assertThat(sut.get国保連再送付有フラグ(), is(KagoMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
+            assertThat(sut.is国保連再送付有フラグ(), is(KagoMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
         }
 
         @Test
         public void get同月審査有フラグは_entityが持つ同月審査有フラグを返す() {
-            assertThat(sut.get同月審査有フラグ(), is(KagoMoshitateEntity.getDogetsuShinsaAriFlag()));
+            assertThat(sut.is同月審査有フラグ(), is(KagoMoshitateEntity.getDogetsuShinsaAriFlag()));
         }
 
         @Test

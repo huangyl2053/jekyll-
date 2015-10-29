@@ -23,13 +23,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link SaishinsaMoshitate}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class SaishinsaMoshitateTest extends DbcTestBase {
 
     private static DbT3062SaishinsaMoshitateEntity SaishinsaMoshitateEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -191,7 +189,7 @@ public class SaishinsaMoshitateTest extends DbcTestBase {
 
         @Test
         public void get国保連再送付有フラグは_entityが持つ国保連再送付有フラグを返す() {
-            assertThat(sut.get国保連再送付有フラグ(), is(SaishinsaMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
+            assertThat(sut.is国保連再送付有フラグ(), is(SaishinsaMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
         }
 
         @Test

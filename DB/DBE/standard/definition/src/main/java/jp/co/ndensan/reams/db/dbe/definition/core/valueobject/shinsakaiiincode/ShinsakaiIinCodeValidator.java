@@ -18,7 +18,7 @@ public class ShinsakaiIinCodeValidator {
     private final ShinsakaiIinCode shinsakaiIinCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shinsakaiIinCode 審査会委員コード
      */

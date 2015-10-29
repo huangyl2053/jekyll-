@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum ShinsakaiIinCodeSpec implements IPredicate<ShinsakaiIinCode> {
 
     /**
-     * 桁数が8桁であること
+     * 桁数が8桁であること。
      */
     桁数が8桁であること {
                 /**

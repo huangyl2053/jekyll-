@@ -9,7 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7117SogoJigyoKubunShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護予防・日常生活支援総合事業区分支給限度額を管理するクラスです。
  */
-public class SogoJigyoKubunShikyuGendoGaku extends ModelBase<SogoJigyoKubunShikyuGendoGakuIdentifier, DbT7117SogoJigyoKubunShikyuGendoGakuEntity, SogoJigyoKubunShikyuGendoGaku> implements Serializable {
+public class SogoJigyoKubunShikyuGendoGaku
+        extends ModelBase<SogoJigyoKubunShikyuGendoGakuIdentifier, DbT7117SogoJigyoKubunShikyuGendoGakuEntity, SogoJigyoKubunShikyuGendoGaku>
+        implements Serializable {
 
     private final DbT7117SogoJigyoKubunShikyuGendoGakuEntity entity;
     private final SogoJigyoKubunShikyuGendoGakuIdentifier id;
@@ -137,8 +138,7 @@ public class SogoJigyoKubunShikyuGendoGaku extends ModelBase<SogoJigyoKubunShiky
     /**
      * 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}を返します。
      *
-     * @return
-     * 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}
+     * @return 介護予防・日常生活支援総合事業区分支給限度額の識別子{@link SogoJigyoKubunShikyuGendoGakuIdentifier}
      */
     @Override
     public SogoJigyoKubunShikyuGendoGakuIdentifier identifier() {
@@ -146,8 +146,8 @@ public class SogoJigyoKubunShikyuGendoGaku extends ModelBase<SogoJigyoKubunShiky
     }
 
     /**
-     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/>
-     * {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護予防・日常生活支援総合事業区分支給限度額を削除対象とします。<br/> null     {@link DbT7117SogoJigyoKubunShikyuGendoGakuEntity}の{@link 
+     * EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link SogoJigyoKubunShikyuGendoGaku}
      */

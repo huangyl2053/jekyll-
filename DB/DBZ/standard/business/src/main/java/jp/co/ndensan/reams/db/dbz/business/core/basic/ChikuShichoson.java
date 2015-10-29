@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 地区市町村を管理するクラスです。
  */
-public class ChikuShichoson extends ParentModelBase<ChikuShichosonIdentifier, DbT5224ChikuShichosonEntity, ChikuShichoson> implements Serializable {
+public class ChikuShichoson extends
+        ParentModelBase<ChikuShichosonIdentifier, DbT5224ChikuShichosonEntity, ChikuShichoson>
+        implements Serializable {
 
     private final DbT5224ChikuShichosonEntity entity;
     private final ChikuShichosonIdentifier id;
@@ -103,7 +105,7 @@ public class ChikuShichoson extends ParentModelBase<ChikuShichosonIdentifier, Db
      *
      * @return 自地区フラグ
      */
-    public boolean get自地区フラグ() {
+    public boolean is自地区フラグ() {
         return entity.getJiChikuFlag();
     }
 
@@ -178,7 +180,7 @@ public class ChikuShichoson extends ParentModelBase<ChikuShichosonIdentifier, Db
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5224ChikuShichosonEntity entity;
         private final ChikuShichosonIdentifier id;
 

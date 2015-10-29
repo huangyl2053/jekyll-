@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence;
 
 /**
- * テーブルデータの追加、更新と削除を統合したインタフェースです
+ * テーブルデータの追加、更新と削除を統合したインタフェースです。
  *
  * @author LDNS 焦蘇晋
  * @param <T>

@@ -19,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画自己作成短期入所利用日数を管理するクラスです。
  */
-public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends ModelBase<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> implements Serializable {
+public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends 
+        ModelBase<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, 
+        DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity, 
+        KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> implements Serializable {
 
     private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity;
     private final KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id;
@@ -187,7 +190,8 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu extends ModelBase<Kyo
         private final DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity;
         private final KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id;
 
-        private _SerializationProxy(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id) {
+        private _SerializationProxy (DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity, 
+                KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

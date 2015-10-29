@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 市町村特別給付サービス事業者を管理するクラスです。
  */
-public class ShichosonTokubetsuKyufuJigyosha extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, DbT3065ShichosonTokubetsuKyufuJigyoshaEntity, ShichosonTokubetsuKyufuJigyosha> implements Serializable {
+public class ShichosonTokubetsuKyufuJigyosha 
+extends ModelBase<ShichosonTokubetsuKyufuJigyoshaIdentifier, 
+        DbT3065ShichosonTokubetsuKyufuJigyoshaEntity,
+        ShichosonTokubetsuKyufuJigyosha> implements Serializable {
 
     private final DbT3065ShichosonTokubetsuKyufuJigyoshaEntity entity;
     private final ShichosonTokubetsuKyufuJigyoshaIdentifier id;
@@ -458,7 +461,7 @@ public class ShichosonTokubetsuKyufuJigyosha extends ModelBase<ShichosonTokubets
      *
      * @return 生活保護法による指定の有
      */
-    public boolean get生活保護法による指定の有() {
+    public boolean is生活保護法による指定の有() {
         return entity.getSeikatsuhogoShiteiFlag();
     }
 

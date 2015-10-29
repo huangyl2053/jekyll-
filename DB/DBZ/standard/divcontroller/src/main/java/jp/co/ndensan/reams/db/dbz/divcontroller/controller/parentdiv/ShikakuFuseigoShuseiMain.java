@@ -32,6 +32,8 @@ public class ShikakuFuseigoShuseiMain {
 
     private static final List<dgShikakuFuseigoIchiran_Row> ROWS = new ArrayList<>();
     private static final List<dgShikakuFuseigoIchiranForDemo_Row> KAKUSHI_ROWS = new ArrayList<>();
+    private static final RString BR = new RString("<br>");
+    private static final RString SPACE = new RString("  ");
 
     /**
      * 画面が読み込まれた際の初期値をセットします。
@@ -179,41 +181,41 @@ public class ShikakuFuseigoShuseiMain {
      データグリッド内に挿入する際に二行として表示させるための成型メソッドです。
      */
     private void createRowKetsugo(dgShikakuFuseigoIchiran_Row row) {
-        row.setTxtKetsugo01(row.getTxtHihoNo().concat(new RString("<br>"))
-                .concat(row.getTxtShikibetsuCode()).concat(new RString("  ")));
-        row.setTxtKetsugo02(row.getTxtKanaShimei().concat(new RString("<br>"))
-                .concat(row.getTxtShimei()).concat(new RString("  ")));
-        row.setTxtKetsugo03(row.getTxtJuminShu().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtSeiYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
-        row.setTxtKetsugo04(row.getTxtSeibetsu().concat(new RString("<br>"))
-                .concat(row.getTxtNenrei()).concat(new RString("  ")));
-        row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(new RString("<br>"))
-                .concat(row.getTxtShikakuShutokuJiyu()).concat(new RString("  ")));
-        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
-        row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(new RString("<br>"))
-                .concat(row.getTxtShikakuSoshitsuJiyu()).concat(new RString("  ")));
-        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        row.setTxtKetsugo01(row.getTxtHihoNo().concat(BR)
+                .concat(row.getTxtShikibetsuCode()).concat(SPACE));
+        row.setTxtKetsugo02(row.getTxtKanaShimei().concat(BR)
+                .concat(row.getTxtShimei()).concat(SPACE));
+        row.setTxtKetsugo03(row.getTxtJuminShu().concat(BR)
+                .concat(new FlexibleDate(row.getTxtSeiYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
+        row.setTxtKetsugo04(row.getTxtSeibetsu().concat(BR)
+                .concat(row.getTxtNenrei()).concat(SPACE));
+        row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(BR)
+                .concat(row.getTxtShikakuShutokuJiyu()).concat(SPACE));
+        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(BR)
+                .concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
+        row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(BR)
+                .concat(row.getTxtShikakuSoshitsuJiyu()).concat(SPACE));
+        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(BR)
+                .concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
     }
 
     private void createRowKetsugoForDemo(dgShikakuFuseigoIchiranForDemo_Row row) {
-        row.setTxtKetsugo01(row.getTxtHihoNo().concat(new RString("<br>"))
-                .concat(row.getTxtShikibetsuCode()).concat(new RString("  ")));
-        row.setTxtKetsugo02(row.getTxtKanaShimei().concat(new RString("<br>"))
-                .concat(row.getTxtShimei()).concat(new RString("  ")));
-        row.setTxtKetsugo03(row.getTxtJuminShu().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtSeiYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
-        row.setTxtKetsugo04(row.getTxtSeibetsu().concat(new RString("<br>"))
-                .concat(row.getTxtNenrei()).concat(new RString("  ")));
-        row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(new RString("<br>"))
-                .concat(row.getTxtShikakuShutokuJiyu()).concat(new RString("  ")));
-        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
-        row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(new RString("<br>"))
-                .concat(row.getTxtShikakuSoshitsuJiyu()).concat(new RString("  ")));
-        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>"))
-                .concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        row.setTxtKetsugo01(row.getTxtHihoNo().concat(BR)
+                .concat(row.getTxtShikibetsuCode()).concat(SPACE));
+        row.setTxtKetsugo02(row.getTxtKanaShimei().concat(BR)
+                .concat(row.getTxtShimei()).concat(SPACE));
+        row.setTxtKetsugo03(row.getTxtJuminShu().concat(BR)
+                .concat(new FlexibleDate(row.getTxtSeiYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
+        row.setTxtKetsugo04(row.getTxtSeibetsu().concat(BR)
+                .concat(row.getTxtNenrei()).concat(SPACE));
+        row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(BR)
+                .concat(row.getTxtShikakuShutokuJiyu()).concat(SPACE));
+        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(BR)
+                .concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
+        row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(BR)
+                .concat(row.getTxtShikakuSoshitsuJiyu()).concat(SPACE));
+        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(BR)
+                .concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(SPACE));
     }
 
     /**
@@ -268,7 +270,7 @@ public class ShikakuFuseigoShuseiMain {
      * @param panel
      */
     private void showDataIncludedMushi(ShikakuFuseigoShuseiMainDiv panel) {
-        dgShikakuFuseigoIchiran_Row row;
+        //dgShikakuFuseigoIchiran_Row row;
         ROWS.clear();
         for (dgShikakuFuseigoIchiranForDemo_Row temp : KAKUSHI_ROWS) {
             ROWS.add(createRowShikakuFuseigoData(
@@ -307,7 +309,7 @@ public class ShikakuFuseigoShuseiMain {
      * @param panel
      */
     private void showDataNotIncludedMushi(ShikakuFuseigoShuseiMainDiv panel) {
-        dgShikakuFuseigoIchiran_Row row;
+        //dgShikakuFuseigoIchiran_Row row;
         ROWS.clear();
         for (dgShikakuFuseigoIchiranForDemo_Row temp : KAKUSHI_ROWS) {
             if (!temp.getTxtIgnore().equals(new RString("無視"))) {
@@ -343,14 +345,14 @@ public class ShikakuFuseigoShuseiMain {
     }
 
     /**
-     * 無視チェックボックスの値が替わったとき
+     * 無視チェックボックスの値が替わったとき。
      *
      * @param panel ShikakuFuseigoShuseiMainDiv
      * @return ResponseData
      */
     public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkMushi(ShikakuFuseigoShuseiMainDiv panel) {
         ResponseData<ShikakuFuseigoShuseiMainDiv> response = new ResponseData<>();
-        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
+        //DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
         if (panel.getShikakuFuseigoIchiran().getChkMushiBunHihyoji().getSelectedItems().isEmpty()) { // 無視するデータも含む場合
             showDataIncludedMushi(panel);
         } else {

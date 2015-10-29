@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画届出を管理するクラスです。
  */
-public class KyotakuKeikakuTodokede extends ParentModelBase<KyotakuKeikakuTodokedeIdentifier, DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
+public class KyotakuKeikakuTodokede extends 
+        ParentModelBase<KyotakuKeikakuTodokedeIdentifier, 
+        DbT3005KyotakuKeikakuTodokedeEntity, KyotakuKeikakuTodokede> implements Serializable {
 
     private final DbT3005KyotakuKeikakuTodokedeEntity entity;
     private final KyotakuKeikakuTodokedeIdentifier id;
@@ -243,24 +245,24 @@ public class KyotakuKeikakuTodokede extends ParentModelBase<KyotakuKeikakuTodoke
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public KyotakuKeikakuTodokede modifiedModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<KyotakuKeikakuJigyoshaSakusei> getKyotakuKeikakuJigyoshaSakuseiList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<KyotakuKeikakuJikoSakusei> getKyotakuKeikakuJikoSakuseiList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public KyotakuKeikakuTodokede modified() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {

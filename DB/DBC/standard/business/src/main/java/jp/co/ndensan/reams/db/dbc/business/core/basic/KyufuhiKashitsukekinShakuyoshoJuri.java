@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費貸付金借用書受理を管理するクラスです。
  */
-public class KyufuhiKashitsukekinShakuyoshoJuri extends ModelBase<KyufuhiKashitsukekinShakuyoshoJuriIdentifier, DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity, KyufuhiKashitsukekinShakuyoshoJuri> implements Serializable {
+public class KyufuhiKashitsukekinShakuyoshoJuri
+extends ModelBase<KyufuhiKashitsukekinShakuyoshoJuriIdentifier, 
+        DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity, 
+        KyufuhiKashitsukekinShakuyoshoJuri> implements Serializable {
 
     private final DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity entity;
     private final KyufuhiKashitsukekinShakuyoshoJuriIdentifier id;

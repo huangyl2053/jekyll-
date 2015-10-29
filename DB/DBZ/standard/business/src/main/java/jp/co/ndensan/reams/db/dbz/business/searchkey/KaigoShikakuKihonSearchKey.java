@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  *
  * @author N8156 宮本 康
  */
-public class KaigoShikakuKihonSearchKey {
+public final class KaigoShikakuKihonSearchKey {
 
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 識別コード;

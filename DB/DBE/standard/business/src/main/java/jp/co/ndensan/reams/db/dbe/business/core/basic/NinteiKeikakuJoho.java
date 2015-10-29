@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定計画情報を管理するクラスです。
  */
-public class NinteiKeikakuJoho extends ParentModelBase<NinteiKeikakuJohoIdentifier, DbT5123NinteiKeikakuJohoEntity, NinteiKeikakuJoho> implements Serializable {
+public class NinteiKeikakuJoho
+        extends ParentModelBase<NinteiKeikakuJohoIdentifier, DbT5123NinteiKeikakuJohoEntity, NinteiKeikakuJoho>
+        implements Serializable {
 
     private final DbT5123NinteiKeikakuJohoEntity entity;
     private final NinteiKeikakuJohoIdentifier id;
@@ -225,7 +227,7 @@ public class NinteiKeikakuJoho extends ParentModelBase<NinteiKeikakuJohoIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5123NinteiKeikakuJohoEntity entity;
         private final NinteiKeikakuJohoIdentifier id;
 

@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 
 /**
  * 要介護認定申請情報のビジネスクラスです。

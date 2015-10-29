@@ -41,14 +41,14 @@ public class KaigoDoctorCollection implements Iterable {
      * @return 介護医師情報
      */
     public KaigoDoctor get介護医師(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        for (KaigoDoctor 介護医師 : 介護医師リスト) {
-            //KaigoDoctorがコメントアウトされている
+//        for (KaigoDoctor 介護医師 : 介護医師リスト) {
+        //KaigoDoctorがコメントアウトされている
 //            if (介護医師.get市町村コード().equals(市町村コード)
 //                    && 介護医師.get介護医療機関コード().equals(介護医療機関コード)
 //                    && 介護医師.get介護医師コード().equals(介護医師コード)) {
 //                return 介護医師;
 //            }
-        }
+//        }
 //        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").evaluate());
         throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").getMessage());
     }
@@ -61,12 +61,12 @@ public class KaigoDoctorCollection implements Iterable {
      */
     public KaigoDoctorCollection sub介護医師List(KaigoIryoKikanCode 介護医療機関コード) {
         List<KaigoDoctor> sub介護医師List = new ArrayList<>();
-        for (KaigoDoctor 介護医師 : 介護医師リスト) {
-            //KaigoDoctorがコメントアウトされている
+//        for (KaigoDoctor 介護医師 : 介護医師リスト) {
+        //KaigoDoctorがコメントアウトされている
 //            if (介護医師.get介護医療機関コード().equals(介護医療機関コード)) {
 //                sub介護医師List.add(介護医師);
 //            }
-        }
+//        }
         return new KaigoDoctorCollection(sub介護医師List);
     }
 

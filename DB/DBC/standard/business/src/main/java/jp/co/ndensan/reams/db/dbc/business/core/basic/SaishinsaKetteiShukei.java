@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 再審査決定集計を管理するクラスです。
  */
-public class SaishinsaKetteiShukei extends ModelBase<SaishinsaKetteiShukeiIdentifier, DbT3063SaishinsaKetteiShukeiEntity, SaishinsaKetteiShukei> implements Serializable {
+public class SaishinsaKetteiShukei 
+extends ModelBase<SaishinsaKetteiShukeiIdentifier,
+        DbT3063SaishinsaKetteiShukeiEntity, 
+        SaishinsaKetteiShukei> implements Serializable {
 
     private final DbT3063SaishinsaKetteiShukeiEntity entity;
     private final SaishinsaKetteiShukeiIdentifier id;

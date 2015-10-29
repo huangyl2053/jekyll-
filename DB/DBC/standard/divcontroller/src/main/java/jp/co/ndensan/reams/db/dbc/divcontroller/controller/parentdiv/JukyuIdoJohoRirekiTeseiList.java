@@ -5,19 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200001.JukyuIdoJohoRirekiTeseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200001.dgJukyuIdoJohoRirekiTeseiList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayTaskManager;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayToTask;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValues;
 
 /**
  * 受給異動情報履歴訂正一覧のコントローラークラスです。
@@ -59,15 +51,14 @@ public class JukyuIdoJohoRirekiTeseiList {
         }
     }
 
-    private void completeTrayTask() {
-        for (TrayToTask data : TrayTaskManager.getIdentificationValues()) {
-            IdentificationKeyValues keyValues = data.getIdKeyVal();
-            TrayTaskManager.grabTask(keyValues);
-            TrayTaskManager.completeTask(keyValues);
-            break;
-        }
-    }
-
+//    private void completeTrayTask() {
+//        for (TrayToTask data : TrayTaskManager.getIdentificationValues()) {
+//            IdentificationKeyValues keyValues = data.getIdKeyVal();
+//            TrayTaskManager.grabTask(keyValues);
+//            TrayTaskManager.completeTask(keyValues);
+//            break;
+//        }
+//    }
     private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow() {
         //TODO n3317塚田　遷移するために空のリストを作成
         return new dgJukyuIdoJohoRirekiTeseiList_Row();

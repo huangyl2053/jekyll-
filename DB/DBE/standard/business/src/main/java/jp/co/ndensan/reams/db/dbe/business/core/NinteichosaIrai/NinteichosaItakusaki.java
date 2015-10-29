@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認定調査委託先のクラスです
+ * 認定調査委託先のクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -30,7 +30,7 @@ public class NinteichosaItakusaki {
     private final RString 機関の区分;
 
     /**
-     * コンストラクタクラスです
+     * コンストラクタクラスです。
      *
      * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
@@ -62,7 +62,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 事業者コードを取得します
+     * 事業者コードを取得します。
      *
      * @return 事業者コード
      */
@@ -71,7 +71,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 市町村コードを取得します
+     * 市町村コードを取得します。
      *
      * @return 市町村コード
      */
@@ -80,7 +80,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 介護事業者番号を取得します
+     * 介護事業者番号を取得します。
      *
      * @return 介護事業者番号
      */
@@ -89,7 +89,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 介護事業者状況を判定します
+     * 介護事業者状況を判定します。
      *
      * @return 介護事業者状況
      */
@@ -98,7 +98,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 調査委託区分を取得します
+     * 調査委託区分を取得します。
      *
      * @return 調査委託区分
      */
@@ -107,7 +107,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 割付定員を取得します
+     * 割付定員を取得します。
      *
      * @return 割付定員
      */
@@ -116,7 +116,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 割付地区を取得します
+     * 割付地区を取得します。
      *
      * @return 割付地区
      */
@@ -125,7 +125,7 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 機関の区分を取得します
+     * 機関の区分を取得します。
      *
      * @return 機関の区分
      */

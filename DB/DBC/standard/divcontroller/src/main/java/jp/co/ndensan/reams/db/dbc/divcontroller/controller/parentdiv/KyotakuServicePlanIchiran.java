@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.tblKyotakuServi
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.tblKyotakuServiceJikoSakuseiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

@@ -100,15 +100,14 @@ public class KyotakuKeikakuTodokedeDetail {
         }
     }
 
-    private void add履歴(KyotakuKeikakuTodokedeDetailDiv panel, dgKyotakuKeikakuTodokedeRirekiList_Row addRow) {
-        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList();
-        List<dgKyotakuKeikakuTodokedeRirekiList_Row> dgList = rirekiList.getDgKyotakuKeikakuTodokedeRirekiList().getDataSource();
-        dgList.add(addRow);
-        Collections.sort(dgList, new DateComparator());
-        rirekiList.getDgKyotakuKeikakuTodokedeRirekiList().setDataSource(dgList);
-    }
-
+//    private void add履歴(KyotakuKeikakuTodokedeDetailDiv panel, dgKyotakuKeikakuTodokedeRirekiList_Row addRow) {
+//        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList();
+//        List<dgKyotakuKeikakuTodokedeRirekiList_Row> dgList = rirekiList.getDgKyotakuKeikakuTodokedeRirekiList().getDataSource();
+//        dgList.add(addRow);
+//        Collections.sort(dgList, new DateComparator());
+//        rirekiList.getDgKyotakuKeikakuTodokedeRirekiList().setDataSource(dgList);
+//    }
     private void modify履歴(KyotakuKeikakuTodokedeDetailDiv panel, int index, 修正削除 kubun) {
         KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList();
@@ -175,7 +174,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 計画届出明細(初期表示)のデータ設定
+     * 計画届出明細(初期表示)のデータ設定。
      *
      * @param panel panel
      */
@@ -186,7 +185,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 新規届出を追加するボタン押下時の処理
+     * 新規届出を追加するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -200,7 +199,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 変更届出を追加するボタン押下時の処理
+     * 変更届出を追加するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -214,7 +213,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 履歴一覧で選択ボタン押下時の処理
+     * 履歴一覧で選択ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -236,7 +235,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 届出明細を削除するボタン押下時の処理
+     * 届出明細を削除するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -251,7 +250,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 届出明細をクリアするボタン押下時の処理
+     * 届出明細をクリアするボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -263,7 +262,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 届出明細を確定するボタン押下時の処理
+     * 届出明細を確定するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -317,7 +316,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 届出明細を訂正するボタン押下時の処理
+     * 届出明細を訂正するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -398,7 +397,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * ボタン表示の有効化処理
+     * ボタン表示の有効化処理。
      *
      */
     private void btnVisible(Button btn) {
@@ -407,7 +406,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * ボタン表示の無効化処理
+     * ボタン表示の無効化処理。
      *
      */
     private void btnInvisible(Button btn) {
@@ -416,7 +415,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 計画届出明細の表示設定
+     * 計画届出明細の表示設定。
      *
      * @param panel panel
      * @param pattern pattern
@@ -469,7 +468,7 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 計画届出明細のデータ設定
+     * 計画届出明細のデータ設定。
      *
      * @param panel panel
      * @param pattern pattern

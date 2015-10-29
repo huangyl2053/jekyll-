@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査委託先情報を管理するクラスです。
  */
-public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
+public class NinteichosaItakusakiJoho extends
+        ParentModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho>
+        implements Serializable {
 
     private final DbT5910NinteichosaItakusakiJohoEntity entity;
     private final NinteichosaItakusakiJohoIdentifier id;
@@ -199,7 +201,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 自動割付フラグ
      */
-    public boolean get自動割付フラグ() {
+    public boolean is自動割付フラグ() {
         return entity.getAutoWaritsukeFlag();
     }
 
@@ -217,7 +219,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 
@@ -292,7 +294,7 @@ public class NinteichosaItakusakiJoho extends ParentModelBase<NinteichosaItakusa
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5910NinteichosaItakusakiJohoEntity entity;
         private final NinteichosaItakusakiJohoIdentifier id;
 

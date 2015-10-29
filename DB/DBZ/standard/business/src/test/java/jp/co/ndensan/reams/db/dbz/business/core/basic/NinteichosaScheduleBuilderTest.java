@@ -123,7 +123,7 @@ public class NinteichosaScheduleBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の予約可能フラグは_設定した値と同じ予約可能フラグを返す() {
             business = sut.set予約可能フラグ(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_予約可能フラグ).build();
-            assertThat(business.get予約可能フラグ(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_予約可能フラグ));
+            assertThat(business.is予約可能フラグ(), is(DbT5221NinteichosaScheduleEntityGenerator.DEFAULT_予約可能フラグ));
         }
 
         @Test

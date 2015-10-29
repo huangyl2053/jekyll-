@@ -22,7 +22,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 認定調査委託先を管理するクラスです
+ * 認定調査委託先を管理するクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -32,7 +32,7 @@ public class NinteichosaItakusakiDac {
     private SqlSession session;
 
     /**
-     * 指定した市町村コードで有効又は無効の認定調査委託先を取得します
+     * 指定した市町村コードで有効又は無効の認定調査委託先を取得します。
      *
      * @param 市町村コード 市町村コード
      * @param 介護事業状況 介護事業状況
@@ -53,7 +53,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 指定した市町村コードで登録されている全ての認定調査委託先を取得します
+     * 指定した市町村コードで登録されている全ての認定調査委託先を取得します。
      *
      * @param 市町村コード 市町村コード
      * @return 認定調査委託先情報エンティティ
@@ -73,7 +73,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 市町村・介護事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     * 市町村・介護事業者番号・介護事業状況を指定して認定調査委託先を取得します。
      *
      * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
@@ -99,7 +99,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 市町村コード・事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     * 市町村コード・事業者番号・介護事業状況を指定して認定調査委託先を取得します。
      *
      * @param 市町村コード 市町村コード
      * @param 事業者番号 事業者番号
@@ -126,7 +126,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 認定調査委託先情報に対し追加・更新を行います
+     * 認定調査委託先情報に対し追加・更新を行います。
      *
      * @param entity 認定調査委託先情報エンティティ
      * @return 更新・追加結果
@@ -141,7 +141,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 認定調査委託先を新規追加します
+     * 認定調査委託先を新規追加します。
      *
      * @param data 認定調査委託先情報エンティティ
      * @return 追加結果
@@ -153,7 +153,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 認定調査委託先を更新します
+     * 認定調査委託先を更新します。
      *
      * @param data 認定調査委託先情報エンティティ
      * @return 更新結果
@@ -165,7 +165,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 認定調査委託先を削除します
+     * 認定調査委託先を削除します。
      *
      * @param data 認定調査委託先情報エンティティ
      * @return 削除結果
@@ -177,7 +177,7 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 認定調査委託先の件数を取得します
+     * 認定調査委託先の件数を取得します。
      *
      * @param entity 認定調査委託先情報エンティティ
      * @return 取得件数

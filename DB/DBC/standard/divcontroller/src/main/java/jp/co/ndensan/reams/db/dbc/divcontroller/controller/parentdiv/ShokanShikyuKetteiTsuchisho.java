@@ -5,12 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiTsuchishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還支給申請登録の償還払支給（不支給）通知書のコントロールです。

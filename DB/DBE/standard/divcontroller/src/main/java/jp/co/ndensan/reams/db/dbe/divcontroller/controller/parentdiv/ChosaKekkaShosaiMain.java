@@ -55,25 +55,25 @@ public class ChosaKekkaShosaiMain {
 
     private enum Sentakushi {
 
-        Type1("つかまらないでできる", "何かにつかまればできる", "できない"),
-        Type2("できる", "自分の手で支えればできる", "支えてもらえればできる", "できない"),
-        Type3("支えなしでできる", "何か支えがあればできる", "できない"),
-        Type4("介助されていない", "一部介助", "全部介助", "行っていない"),
-        Type5("介助されていない", "一部介助", "全部介助"),
-        Type6("普通", "約１ｍ離れた視力表", "目の前の視力表", "ほとんど見えない", "判断不能"),
-        Type7("普通", "普通がやっと", "かなり大きい声でやっと", "ほとんど聞こえない", "判断不能");
+        Type1(new RString("つかまらないでできる"), new RString("何かにつかまればできる"), new RString("できない")),
+        Type2(new RString("できる"), new RString("自分の手で支えればできる"), new RString("支えてもらえればできる"), new RString("できない")),
+        Type3(new RString("支えなしでできる"), new RString("何か支えがあればできる"), new RString("できない")),
+        Type4(new RString("介助されていない"), new RString("一部介助"), new RString("全部介助"), new RString("行っていない")),
+        Type5(new RString("介助されていない"), new RString("一部介助"), new RString("全部介助")),
+        Type6(new RString("普通"), new RString("約１ｍ離れた視力表"), new RString("目の前の視力表"), new RString("ほとんど見えない"), new RString("判断不能")),
+        Type7(new RString("普通"), new RString("普通がやっと"), new RString("かなり大きい声でやっと"), new RString("ほとんど聞こえない"), new RString("判断不能"));
         private final List<KeyValueDataSource> dataSource;
 
-        private Sentakushi(String... values) {
+        private Sentakushi(RString... values) {
             this.dataSource = _toDataSource(values);
         }
 
-        private static List<KeyValueDataSource> _toDataSource(String... values) {
+        private static List<KeyValueDataSource> _toDataSource(RString... values) {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             int index = 0;
-            for (String value : values) {
+            for (RString value : values) {
                 dataSource.add(new KeyValueDataSource(
-                        new RString(String.valueOf(++index)), new RString(value))
+                        new RString(String.valueOf(++index)), value)
                 );
             }
             return dataSource;
@@ -346,7 +346,7 @@ public class ChosaKekkaShosaiMain {
         arrayData.add(item);
         item = createRowChosakekka3Data(false, "4", "意認知症度", "Ⅰ", DataGridCellBgColor.bgColorNormal);
         arrayData.add(item);
-        item = createRowChosakekka3Data(true, "　", "主治医意見書", "　",DataGridCellBgColor.bgColorRed);
+        item = createRowChosakekka3Data(true, "　", "主治医意見書", "　", DataGridCellBgColor.bgColorRed);
         arrayData.add(item);
         item = createRowChosakekka3Data(false, "1", "短期記録", "問題なし", DataGridCellBgColor.bgColorNormal);
         arrayData.add(item);

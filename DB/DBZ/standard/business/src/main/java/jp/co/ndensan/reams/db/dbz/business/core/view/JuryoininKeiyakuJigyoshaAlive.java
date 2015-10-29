@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受領委任事業者Aliveを管理するクラスです。
  */
-public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiyakuJigyoshaAliveIdentifier, DbV3077JuryoininKeiyakuJigyoshaEntity, JuryoininKeiyakuJigyoshaAlive> implements Serializable {
+public class JuryoininKeiyakuJigyoshaAlive extends
+        ParentModelBase<JuryoininKeiyakuJigyoshaAliveIdentifier, 
+        DbV3077JuryoininKeiyakuJigyoshaEntity, 
+        JuryoininKeiyakuJigyoshaAlive> implements Serializable {
 
     private final DbV3077JuryoininKeiyakuJigyoshaEntity entity;
     private final JuryoininKeiyakuJigyoshaAliveIdentifier id;
@@ -248,7 +251,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
      *
      * @return 住宅改修契約有無
      */
-    public boolean get住宅改修契約有無() {
+    public boolean is住宅改修契約有無() {
         return entity.getJutakuKaishuKeiyakuUmu();
     }
 
@@ -257,7 +260,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
      *
      * @return 特定福祉用具販売契約有無
      */
-    public boolean get特定福祉用具販売契約有無() {
+    public boolean is特定福祉用具販売契約有無() {
         return entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu();
     }
 
@@ -266,7 +269,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
      *
      * @return 償還払給付契約有無
      */
-    public boolean get償還払給付契約有無() {
+    public boolean is償還払給付契約有無() {
         return entity.getShokanbaraiKyufuKeiyakuUmu();
     }
 
@@ -275,7 +278,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
      *
      * @return 高額給付契約有無
      */
-    public boolean get高額給付契約有無() {
+    public boolean is高額給付契約有無() {
         return entity.getKogakuKyufuKeiyakuUmu();
     }
 
@@ -293,7 +296,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
      *
      * @return 取扱確約書有無
      */
-    public boolean get取扱確約書有無() {
+    public boolean is取扱確約書有無() {
         return entity.getToriatsukaiKakuyakushoUmu();
     }
 
@@ -368,7 +371,7 @@ public class JuryoininKeiyakuJigyoshaAlive extends ParentModelBase<JuryoininKeiy
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV3077JuryoininKeiyakuJigyoshaEntity entity;
         private final JuryoininKeiyakuJigyoshaAliveIdentifier id;
 

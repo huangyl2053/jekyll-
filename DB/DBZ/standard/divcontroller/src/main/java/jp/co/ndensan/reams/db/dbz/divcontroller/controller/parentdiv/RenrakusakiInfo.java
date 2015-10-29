@@ -5,21 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoRenrakusakiInfo.KaigoRenrakusakiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoRenrakusakiInfo.dgRenrakusaki_Row;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -49,13 +41,11 @@ public class RenrakusakiInfo {
 
         List<KaigoRenrakusaki> list = new ArrayList<>();
 
-        if (div.getHihokenshaNo() != null && !div.getHihokenshaNo().isEmpty()) {
+        if (div.getHihokenshaNo() != null && !div.getHihokenshaNo().isEmpty() && div.getHokenshaNo().isEmpty()) {
 
-            if (div.getHokenshaNo().isEmpty()) {
-                //TODO n9606 漢那憲作 証記載保険者番号を取得してセットするよう今後対応を行う。
-                hokenshaNo = new RString("999999");
-                div.setHokenshaNo(hokenshaNo);
-            }
+            //TODO n9606 漢那憲作 証記載保険者番号を取得してセットするよう今後対応を行う。
+            hokenshaNo = new RString("999999");
+            div.setHokenshaNo(hokenshaNo);
 
 //            list = new RenrakusakiInfoFinder().getRenrakusakiList(
 //                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
@@ -196,25 +186,24 @@ public class RenrakusakiInfo {
             return ResponseDatas.newResponseData(div);
         }
 
-        RString shishoCode = null;
-        dgRenrakusaki_Row rowRenrakusaki = div.getDgRenrakusaki().getSelectedItems().get(0);
-        DecimalFormat df = new DecimalFormat("00000000");
-
+//        RString shishoCode = null;
+//        dgRenrakusaki_Row rowRenrakusaki = div.getDgRenrakusaki().getSelectedItems().get(0);
+//        DecimalFormat df = new DecimalFormat("00000000");
         //TODO n3327 三浦凌 たまたま見つけたのでコメントを付加。連絡先のsaveを複数のメソッドでやっているのでまとめるべき。
-        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
-                new AtenaMeisho(rowRenrakusaki.getShimei()),
-                new AtenaKanaMeisho(rowRenrakusaki.getShimeiKana()),
-                new TelNo(rowRenrakusaki.getTel()),
-                new TelNo(rowRenrakusaki.getKeitaiNo()),
-                new YubinNo(rowRenrakusaki.getYubinNo()),
-                new AtenaJusho(rowRenrakusaki.getJusho()),
-                rowRenrakusaki.getTsuzukigara(),
-                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
-                                                div.getDgRenrakusaki().getSelectedItems().get(0).
-                                                getRenrakusakiKbnNo().toString())))),
-                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                new HihokenshaNo(div.getHihokenshaNo()),
-                shishoCode);
+//        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
+//                new AtenaMeisho(rowRenrakusaki.getShimei()),
+//                new AtenaKanaMeisho(rowRenrakusaki.getShimeiKana()),
+//                new TelNo(rowRenrakusaki.getTel()),
+//                new TelNo(rowRenrakusaki.getKeitaiNo()),
+//                new YubinNo(rowRenrakusaki.getYubinNo()),
+//                new AtenaJusho(rowRenrakusaki.getJusho()),
+//                rowRenrakusaki.getTsuzukigara(),
+//                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+//                                                div.getDgRenrakusaki().getSelectedItems().get(0).
+//                                                getRenrakusakiKbnNo().toString())))),
+//                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+//                new HihokenshaNo(div.getHihokenshaNo()),
+//                shishoCode);
         boolean isSaveSuccess = false;
 //        boolean isSaveSuccess = new RenrakusakiInfoManager().remove(renrakusakiJoho);
 
@@ -270,23 +259,22 @@ public class RenrakusakiInfo {
             return ResponseDatas.newResponseData(div);
         }
 
-        RString shishoCode = null;
-
-        DecimalFormat df = new DecimalFormat("00000000");
-        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
-                new AtenaMeisho(div.getSelectedContents().getTxtShimei().getValue()),
-                new AtenaKanaMeisho(div.getSelectedContents().getTxtShimeiKana().getValue()),
-                new TelNo(div.getSelectedContents().getTxtTel().getValue()),
-                new TelNo(div.getSelectedContents().getTxtKeitaiNo().getValue()),
-                new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
-                new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
-                div.getSelectedContents().getTxtTsuzukigara().getValue(),
-                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
-                                                div.getSelectedContents().
-                                                getTxtRenrakusakiKbnNo().getValue().toString())))),
-                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                new HihokenshaNo(div.getHihokenshaNo()),
-                shishoCode);
+        //RString shishoCode = null;
+        //DecimalFormat df = new DecimalFormat("00000000");
+//        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
+//                new AtenaMeisho(div.getSelectedContents().getTxtShimei().getValue()),
+//                new AtenaKanaMeisho(div.getSelectedContents().getTxtShimeiKana().getValue()),
+//                new TelNo(div.getSelectedContents().getTxtTel().getValue()),
+//                new TelNo(div.getSelectedContents().getTxtKeitaiNo().getValue()),
+//                new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
+//                new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
+//                div.getSelectedContents().getTxtTsuzukigara().getValue(),
+//                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+//                                                div.getSelectedContents().
+//                                                getTxtRenrakusakiKbnNo().getValue().toString())))),
+//                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+//                new HihokenshaNo(div.getHihokenshaNo()),
+//                shishoCode);
         boolean isSaveSucces = false;
 //        boolean isSaveSucces = new RenrakusakiInfoManager().save(renrakusakiJoho);
 

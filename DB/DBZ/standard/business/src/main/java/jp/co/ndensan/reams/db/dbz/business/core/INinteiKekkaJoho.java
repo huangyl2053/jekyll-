@@ -178,12 +178,12 @@ public interface INinteiKekkaJoho {
         }
 
         /**
-         * nijiHanteiYokaigoJotaiKubunCodeを設定します。
+         * nijiHanteiYokaigoJotaiを設定します。
          *
-         * @param nijiHanteiYokaigoJotaiKubunCode 二次判定要介護状態区分コード
+         * @param nijiHanteiYokaigoJotai 二次判定要介護状態区分コード
          * @return builder
          */
-        public Builder setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
+        public Builder setNijiHanteiYokaigoJotai(Code nijiHanteiYokaigoJotai) {
             return this;
         }
 

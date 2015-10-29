@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  *
  * @author n8178 城間篤人
  */
-public class JuchochiTokureiTekiyoValidator {
+public final class JuchochiTokureiTekiyoValidator {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。

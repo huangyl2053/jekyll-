@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 主治医医療機関情報を管理するクラスです。
  */
-public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
+public class ShujiiIryoKikanJoho extends
+        ParentModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
 
     private final DbT5911ShujiiIryoKikanJohoEntity entity;
     private final ShujiiIryoKikanJohoIdentifier id;
@@ -171,7 +172,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 
@@ -246,7 +247,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5911ShujiiIryoKikanJohoEntity entity;
         private final ShujiiIryoKikanJohoIdentifier id;
 

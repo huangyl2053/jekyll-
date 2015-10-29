@@ -19,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 連動パターンを管理するクラスです。
  */
-public class RendoPattern extends ParentModelBase<RendoPatternIdentifier, DbT7035RendoPatternEntity, RendoPattern> implements Serializable {
+public class RendoPattern extends 
+        ParentModelBase<RendoPatternIdentifier, DbT7035RendoPatternEntity, RendoPattern> implements Serializable {
 
     private final DbT7035RendoPatternEntity entity;
     private final RendoPatternIdentifier id;
@@ -287,7 +288,7 @@ public class RendoPattern extends ParentModelBase<RendoPatternIdentifier, DbT703
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1;
         private final DbT7035RendoPatternEntity entity;
         private final RendoPatternIdentifier id;
 

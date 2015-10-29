@@ -21,13 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KijunShunyugakuTekiyoKanri}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
     private static DbT3116KijunShunyugakuTekiyoKanriEntity KijunShunyugakuTekiyoKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -195,7 +193,7 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
         @Test
         public void get宛先印字対象者フラグは_entityが持つ宛先印字対象者フラグを返す() {
-            assertThat(sut.get宛先印字対象者フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getAtesakiInjiTaishoshaFlag()));
+            assertThat(sut.is宛先印字対象者フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getAtesakiInjiTaishoshaFlag()));
         }
 
         @Test
@@ -215,7 +213,7 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
         @Test
         public void get世帯主フラグは_entityが持つ世帯主フラグを返す() {
-            assertThat(sut.get世帯主フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getSetainushiFlag()));
+            assertThat(sut.is世帯主フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getSetainushiFlag()));
         }
 
         @Test

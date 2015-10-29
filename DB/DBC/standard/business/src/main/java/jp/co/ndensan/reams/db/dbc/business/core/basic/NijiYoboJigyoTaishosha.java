@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 二次予防事業対象者を管理するクラスです。
  */
-public class NijiYoboJigyoTaishosha extends ModelBase<NijiYoboJigyoTaishoshaIdentifier, DbT3100NijiYoboJigyoTaishoshaEntity, NijiYoboJigyoTaishosha> implements Serializable {
+public class NijiYoboJigyoTaishosha 
+extends ModelBase<NijiYoboJigyoTaishoshaIdentifier, 
+        DbT3100NijiYoboJigyoTaishoshaEntity, 
+        NijiYoboJigyoTaishosha> implements Serializable {
 
     private final DbT3100NijiYoboJigyoTaishoshaEntity entity;
     private final NijiYoboJigyoTaishoshaIdentifier id;

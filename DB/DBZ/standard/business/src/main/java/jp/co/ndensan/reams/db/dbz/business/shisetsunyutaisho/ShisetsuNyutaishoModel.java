@@ -10,30 +10,30 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
- * ビルドエラー回避のために暫定で作成したModelクラス
+ * ビルドエラー回避のために暫定で作成したModelクラスです。
  *
  * @author n8187
  */
 public class ShisetsuNyutaishoModel {
 
-    public ShisetsuNyutaishoModel(DbT1004ShisetsuNyutaishoEntity createDbT1004ShisetsuNyutaishoEntity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ShisetsuNyutaishoModel(DbT1004ShisetsuNyutaishoEntity createDbT1004Entity) {
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ShisetsuNyutaishoModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public EntityDataState getState() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     FlexibleDate get入所年月日() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     FlexibleDate get退所年月日() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

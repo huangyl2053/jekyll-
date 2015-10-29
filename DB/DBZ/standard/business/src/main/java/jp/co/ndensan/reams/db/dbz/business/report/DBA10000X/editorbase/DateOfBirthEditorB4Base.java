@@ -54,7 +54,7 @@ public class DateOfBirthEditorB4Base {
     public void set生年月日(IHihokenshashoB4CommonEditData source) {
 
         IKojin kojin = hihokenshashoModel.getKojinJoho();
-        FlexibleDate date = kojin.get生年月日().toFlexibleDate();
+        //FlexibleDate date = kojin.get生年月日().toFlexibleDate();
         Formatted formattedDate;
 
         if (kojin.is日本人()) {

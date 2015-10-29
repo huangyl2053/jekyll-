@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 市町村単独助成種類を管理するクラスです。
  */
-public class TandokuJoseiShurui extends ModelBase<TandokuJoseiShuruiIdentifier, DbT3099TandokuJoseiShuruiEntity, TandokuJoseiShurui> implements Serializable {
+public class TandokuJoseiShurui
+extends ModelBase<TandokuJoseiShuruiIdentifier, 
+        DbT3099TandokuJoseiShuruiEntity, 
+        TandokuJoseiShurui> implements Serializable {
 
     private final DbT3099TandokuJoseiShuruiEntity entity;
     private final TandokuJoseiShuruiIdentifier id;

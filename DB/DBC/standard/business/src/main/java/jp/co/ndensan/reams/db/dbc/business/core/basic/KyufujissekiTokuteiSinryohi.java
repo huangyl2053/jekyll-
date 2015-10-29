@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績特定診療費を管理するクラスです。
  */
-public class KyufujissekiTokuteiSinryohi extends ModelBase<KyufujissekiTokuteiSinryohiIdentifier, DbT3020KyufujissekiTokuteiSinryohiEntity, KyufujissekiTokuteiSinryohi> implements Serializable {
+public class KyufujissekiTokuteiSinryohi 
+extends ModelBase<KyufujissekiTokuteiSinryohiIdentifier, 
+        DbT3020KyufujissekiTokuteiSinryohiEntity, 
+        KyufujissekiTokuteiSinryohi> implements Serializable {
 
     private final DbT3020KyufujissekiTokuteiSinryohiEntity entity;
     private final KyufujissekiTokuteiSinryohiIdentifier id;

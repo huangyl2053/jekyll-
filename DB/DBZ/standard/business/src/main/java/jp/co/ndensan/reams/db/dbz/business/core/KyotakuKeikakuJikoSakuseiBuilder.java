@@ -170,11 +170,13 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
         return new KyotakuKeikakuJikoSakusei(entity, id);
     }
 
-    public KyotakuKeikakuJikoSakuseiBuilder setKyotakuKeikakuJikosakuseiMeisai(KyotakuKeikakuJikosakuseiMeisai createKyotakuKeikakuJikosakuseiMeisai) {
+    public KyotakuKeikakuJikoSakuseiBuilder
+            setKyotakuKeikaku(KyotakuKeikakuJikosakuseiMeisai createKyotakuKeikaku) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public KyotakuKeikakuJikoSakuseiBuilder setYoboKeikakuJikoSakuseiMeisai(YoboKeikakuJikoSakuseiMeisai createKyotakuKeikakuJikosakuseiMeisai) {
+    public KyotakuKeikakuJikoSakuseiBuilder
+            setYoboKeikaku(YoboKeikakuJikoSakuseiMeisai createKyotakuKeikaku) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

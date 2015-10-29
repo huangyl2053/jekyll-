@@ -18,7 +18,7 @@ public class TimeStringValidator {
     private final TimeString timeString;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param timeString 介護独自で、文字列で表した時間
      */

@@ -75,5 +75,5 @@ public interface IShujiiIkenshoIraiJohoDac
 
     int insert(DbT5011ShujiiIkenshoIraiJohoEntity entity);
 
-    public int update(DbT5011ShujiiIkenshoIraiJohoEntity entity);
+    int update(DbT5011ShujiiIkenshoIraiJohoEntity entity);
 }

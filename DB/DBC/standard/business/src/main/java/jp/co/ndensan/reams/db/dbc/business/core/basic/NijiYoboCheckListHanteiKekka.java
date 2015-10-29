@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 二次予防チェックリスト判定結果を管理するクラスです。
  */
-public class NijiYoboCheckListHanteiKekka extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier, DbT3103NijiYoboCheckListHanteiKekkaEntity, NijiYoboCheckListHanteiKekka> implements Serializable {
+public class NijiYoboCheckListHanteiKekka 
+extends ModelBase<NijiYoboCheckListHanteiKekkaIdentifier, 
+        DbT3103NijiYoboCheckListHanteiKekkaEntity, 
+        NijiYoboCheckListHanteiKekka> implements Serializable {
 
     private final DbT3103NijiYoboCheckListHanteiKekkaEntity entity;
     private final NijiYoboCheckListHanteiKekkaIdentifier id;

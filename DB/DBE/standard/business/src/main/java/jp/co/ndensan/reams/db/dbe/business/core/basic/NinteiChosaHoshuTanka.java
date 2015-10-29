@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査報酬単価を管理するクラスです。
  */
-public class NinteiChosaHoshuTanka extends ParentModelBase<NinteiChosaHoshuTankaIdentifier, DbT5031NinteiChosaHoshuTankaEntity, NinteiChosaHoshuTanka> implements Serializable {
+public class NinteiChosaHoshuTanka
+        extends ParentModelBase<NinteiChosaHoshuTankaIdentifier, DbT5031NinteiChosaHoshuTankaEntity, NinteiChosaHoshuTanka>
+        implements Serializable {
 
     private final DbT5031NinteiChosaHoshuTankaEntity entity;
     private final NinteiChosaHoshuTankaIdentifier id;
@@ -215,7 +217,7 @@ public class NinteiChosaHoshuTanka extends ParentModelBase<NinteiChosaHoshuTanka
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5031NinteiChosaHoshuTankaEntity entity;
         private final NinteiChosaHoshuTankaIdentifier id;
 

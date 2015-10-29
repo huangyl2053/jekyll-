@@ -17,7 +17,8 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 
 /**
- * 発番管理情報を管理するクラスです
+ * 発番管理情報を管理するクラスです。
+ *
  *
  * @author N1013 松本直樹
  */
@@ -28,7 +29,7 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
     private final DbAccessor accessor = new DbAccessor(session);
 
     /**
-     * 指定した項目区分と年度で発番情報を取得します
+     * 指定した項目区分と年度で発番情報を取得します。
      *
      * @param 項目区分 項目年度
      * @param 年度 年度
@@ -40,7 +41,7 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
         List<DbT5020HatsubanKanriJohoEntity> list = accessor.select()
                 .table(DbT5020HatsubanKanriJoho.class)
                 .where(and(eq(DbT5020HatsubanKanriJoho.KOMOKU_KUBUN, 項目区分),
-                eq(DbT5020HatsubanKanriJoho.NENDO, 年度)))
+                                eq(DbT5020HatsubanKanriJoho.NENDO, 年度)))
                 .order(by(DbT5020HatsubanKanriJoho.HATSUBAN, Order.DESC))
                 .toList(DbT5020HatsubanKanriJohoEntity.class);
 
@@ -52,7 +53,7 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
     }
 
     /**
-     * 発番管理情報を更新します
+     * 発番管理情報を更新します。
      *
      * @param data 発番管理情報エンティティ
      * @return 更新結果

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.INinteiShinseiTaishosha;
  */
 public class NinteiShinseiTaishoshaList implements Iterable<INinteiShinseiTaishosha> {
 
-    private final List<INinteiShinseiTaishosha> ninteiShinseiTaishoshaList;
+    private final List<INinteiShinseiTaishosha> ninteiTaishoshaList;
 
     /**
      * 引数から被保険者Listとみなし2号Listを受け取り、両方のListを結合したインスタンスを生成します。
@@ -28,7 +28,7 @@ public class NinteiShinseiTaishoshaList implements Iterable<INinteiShinseiTaisho
      * @param minashi2GoshaList みなし2号者List
      */
     public NinteiShinseiTaishoshaList(HihokenshaList hihokenshaList, Minashi2GoshaList minashi2GoshaList) {
-        ninteiShinseiTaishoshaList = new ArrayList<>();
+        ninteiTaishoshaList = new ArrayList<>();
         toNinteiShinseiTaishoshaList(hihokenshaList);
         toNinteiShinseiTaishoshaList(minashi2GoshaList);
     }
@@ -39,7 +39,7 @@ public class NinteiShinseiTaishoshaList implements Iterable<INinteiShinseiTaisho
         }
 
         for (INinteiShinseiTaishosha taishosha : taishoshaList) {
-            ninteiShinseiTaishoshaList.add(taishosha);
+            ninteiTaishoshaList.add(taishosha);
         }
     }
 
@@ -49,7 +49,7 @@ public class NinteiShinseiTaishoshaList implements Iterable<INinteiShinseiTaisho
      * @return Listサイズ
      */
     public int size() {
-        return ninteiShinseiTaishoshaList.size();
+        return ninteiTaishoshaList.size();
     }
 
     /**
@@ -58,12 +58,12 @@ public class NinteiShinseiTaishoshaList implements Iterable<INinteiShinseiTaisho
      * @return 空ならtrue
      */
     public boolean isEmpty() {
-        return ninteiShinseiTaishoshaList.isEmpty();
+        return ninteiTaishoshaList.isEmpty();
     }
 
     @Override
     public Iterator<INinteiShinseiTaishosha> iterator() {
-        return ninteiShinseiTaishoshaList.iterator();
+        return ninteiTaishoshaList.iterator();
     }
 
 }

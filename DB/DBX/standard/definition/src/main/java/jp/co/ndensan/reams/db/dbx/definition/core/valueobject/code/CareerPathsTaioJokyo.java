@@ -41,7 +41,7 @@ public class CareerPathsTaioJokyo implements ICodeValueObject, IDbColumnMappable
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;;
+        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;
         CODE_SHUBETSU = DBXCodeShubetsu.キャリアパス対応の状況.getCodeShubetsu();
     }
 

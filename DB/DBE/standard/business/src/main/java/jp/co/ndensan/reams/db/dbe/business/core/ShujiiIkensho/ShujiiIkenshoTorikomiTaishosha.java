@@ -41,7 +41,8 @@ public class ShujiiIkenshoTorikomiTaishosha {
             KaigoDoctor 介護主治医) {
         this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", getClass().getName()));
         this.認定申請情報 = requireNonNull(認定申請情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請情報", getClass().getName()));
-        this.主治医意見書作成依頼情報 = requireNonNull(主治医意見書作成依頼情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医意見書作成依頼情報", getClass().getName()));
+        this.主治医意見書作成依頼情報 = requireNonNull(主治医意見書作成依頼情報, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("主治医意見書作成依頼情報", getClass().getName()));
         this.個人 = requireNonNull(個人, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人", getClass().getName()));
         this.介護主治医 = requireNonNull(介護主治医, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("介護主治医", getClass().getName()));
     }

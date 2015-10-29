@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShisetsuNyutaishoTokureiTaishoRelateDac {
 
     @InjectSession
-    private SqlSession session;
+    //private SqlSession session;
     private final ShisetsuNyutaishoDac 介護保険施設入退所Dac = InstanceProvider.create(ShisetsuNyutaishoDac.class);
     private final KaigoJogaiTokureiTaishoShisetsuDac 介護除外住所地特例対象施設Dac = InstanceProvider.create(KaigoJogaiTokureiTaishoShisetsuDac.class);
 

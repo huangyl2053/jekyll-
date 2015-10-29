@@ -249,7 +249,7 @@ public class KyufujissekiKogakuKaigoServicehiBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の保険者保有給付実績情報削除済フラグは_設定した値と同じ保険者保有給付実績情報削除済フラグを返す() {
             business = sut.set保険者保有給付実績情報削除済フラグ(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ).build();
-            assertThat(business.get保険者保有給付実績情報削除済フラグ(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ));
+            assertThat(business.is保険者保有給付実績情報削除済フラグ(), is(DbT3028KyufujissekiKogakuKaigoServicehiEntityGenerator.DEFAULT_保険者保有給付実績情報削除済フラグ));
         }
 
     }

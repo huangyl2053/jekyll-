@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsujoho.ShisetsuJohoHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,7 +134,7 @@ public class ShisetsuJoho implements Serializable {
     }
 
     /**
-     * 最終的に返すレイアウトデータを生成
+     * 最終的に返すレイアウトデータを生成。
      *
      * @param requestDiv
      * @return

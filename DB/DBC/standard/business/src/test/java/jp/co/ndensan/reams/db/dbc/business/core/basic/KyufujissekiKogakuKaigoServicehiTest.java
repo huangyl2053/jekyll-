@@ -23,13 +23,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KyufujissekiKogakuKaigoServicehi}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
 
     private static DbT3028KyufujissekiKogakuKaigoServicehiEntity KyufujissekiKogakuKaigoServicehiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -302,7 +300,7 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
 
         @Test
         public void get保険者保有給付実績情報削除済フラグは_entityが持つ保険者保有給付実績情報削除済フラグを返す() {
-            assertThat(sut.get保険者保有給付実績情報削除済フラグ(), is(KyufujissekiKogakuKaigoServicehiEntity.getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag()));
+            assertThat(sut.is保険者保有給付実績情報削除済フラグ(), is(KyufujissekiKogakuKaigoServicehiEntity.getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag()));
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,15 +53,13 @@ public final class ConfigValueBoolean {
          * </pre>
          * </p>
          */
-        INSTANCE("1");
+        INSTANCE(new RString("1"));
 
         private final Set<RString> valuesOfTrue;
 
-        private Dictionary(String... values) {
+        private Dictionary(RString... values) {
             Set<RString> set = new HashSet<>();
-            for (String str : values) {
-                set.add(new RString(str));
-            }
+            set.addAll(Arrays.asList(values));
             this.valuesOfTrue = Collections.unmodifiableSet(set);
         }
     }

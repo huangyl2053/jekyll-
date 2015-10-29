@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費貸付金延滞利息金徴収を管理するクラスです。
  */
-public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu extends ModelBase<KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier, DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity, KyufuhiKashitsukeKinEntaiRisokuKinChoshu> implements Serializable {
+public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu 
+extends ModelBase<KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier, 
+        DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity, 
+        KyufuhiKashitsukeKinEntaiRisokuKinChoshu> implements Serializable {
 
     private final DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity;
     private final KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id;
@@ -188,7 +191,8 @@ public class KyufuhiKashitsukeKinEntaiRisokuKinChoshu extends ModelBase<KyufuhiK
         private final DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity;
         private final KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id;
 
-        private _SerializationProxy(DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity, KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id) {
+        private _SerializationProxy(DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity entity,
+                KyufuhiKashitsukeKinEntaiRisokuKinChoshuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

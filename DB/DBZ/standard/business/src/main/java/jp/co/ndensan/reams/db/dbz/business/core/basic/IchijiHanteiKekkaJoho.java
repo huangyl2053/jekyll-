@@ -19,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定一次判定結果情報を管理するクラスです。
  */
-public class IchijiHanteiKekkaJoho extends ParentModelBase<IchijiHanteiKekkaJohoIdentifier, DbT4116IchijiHanteiKekkaJohoEntity, IchijiHanteiKekkaJoho> implements Serializable {
+public class IchijiHanteiKekkaJoho extends
+        ParentModelBase<IchijiHanteiKekkaJohoIdentifier, DbT4116IchijiHanteiKekkaJohoEntity, IchijiHanteiKekkaJoho> implements Serializable {
 
     private final DbT4116IchijiHanteiKekkaJohoEntity entity;
     private final IchijiHanteiKekkaJohoIdentifier id;
@@ -80,7 +81,7 @@ public class IchijiHanteiKekkaJoho extends ParentModelBase<IchijiHanteiKekkaJoho
      *
      * @return 仮一次判定区分
      */
-    public boolean get仮一次判定区分() {
+    public boolean is仮一次判定区分() {
         return entity.getKariIchijiHanteiKubun();
     }
 
@@ -182,7 +183,7 @@ public class IchijiHanteiKekkaJoho extends ParentModelBase<IchijiHanteiKekkaJoho
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT4116IchijiHanteiKekkaJohoEntity entity;
         private final IchijiHanteiKekkaJohoIdentifier id;
 

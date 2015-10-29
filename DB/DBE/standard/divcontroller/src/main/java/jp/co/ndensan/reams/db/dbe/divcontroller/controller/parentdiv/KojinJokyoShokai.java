@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8020001.Koji
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8020001.KonkaiHomonChosaIraiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8020001.dgServiceJokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8020001.dgShinsakaiIinJoho_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe8020001.tplHomonChosaIraiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.ichijiHanteiKekkaInfo.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;

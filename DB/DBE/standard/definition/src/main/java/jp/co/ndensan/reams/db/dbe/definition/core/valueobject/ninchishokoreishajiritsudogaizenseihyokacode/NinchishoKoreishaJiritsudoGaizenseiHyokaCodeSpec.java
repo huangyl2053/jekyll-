@@ -18,12 +18,11 @@ public enum NinchishoKoreishaJiritsudoGaizenseiHyokaCodeSpec implements IPredica
     コードがNullでないこと {
                 /**
                  *
-                 * @param ninchishoKoreishaJiritsudoGaizenseiHyokaCode
-                 * 認知症高齢者自立度の蓋然性評価コード
+                 * @param jiritsudoGaizenseiHyokaCode 認知症高齢者自立度の蓋然性評価コード
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override
-                public boolean apply(NinchishoKoreishaJiritsudoGaizenseiHyokaCode ninchishoKoreishaJiritsudoGaizenseiHyokaCode) {
+                public boolean apply(NinchishoKoreishaJiritsudoGaizenseiHyokaCode jiritsudoGaizenseiHyokaCode) {
                     return true;
                 }
             }

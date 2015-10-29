@@ -20,13 +20,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link ShichosonTokubetsuKyufuJigyosha}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
 
     private static DbT3065ShichosonTokubetsuKyufuJigyoshaEntity ShichosonTokubetsuKyufuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -327,7 +325,7 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
 
         @Test
         public void get生活保護法による指定の有は_entityが持つ生活保護法による指定の有を返す() {
-            assertThat(sut.get生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
+            assertThat(sut.is生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
         }
 
         @Test

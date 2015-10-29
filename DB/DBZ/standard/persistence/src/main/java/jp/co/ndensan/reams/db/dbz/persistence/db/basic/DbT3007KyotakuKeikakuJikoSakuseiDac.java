@@ -90,7 +90,9 @@ public class DbT3007KyotakuKeikakuJikoSakuseiDac implements ISaveable<DbT3007Kyo
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
-    public DbT3007KyotakuKeikakuJikoSakuseiEntity selectByKey(HihokenshaNo 被保険者番号, HokenshaNo 証記載保険者番号, ShikibetsuCode 識別コード, FlexibleYearMonth 対象年月, YMDHMS 処理日時) {
+    public DbT3007KyotakuKeikakuJikoSakuseiEntity
+            selectByKey(HihokenshaNo 被保険者番号, HokenshaNo 証記載保険者番号,
+                    ShikibetsuCode 識別コード, FlexibleYearMonth 対象年月, YMDHMS 処理日時) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -28,7 +28,8 @@ public class HihokenshashoB4Builder implements IHihokenshashoBuilder {
      * @param tsuchishoSofusaki 宛先SourceBuilder
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public HihokenshashoB4Builder(HihokenshashoB4SourceBuilder hihokenshashoB4, ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki) throws NullPointerException {
+    public HihokenshashoB4Builder(HihokenshashoB4SourceBuilder hihokenshashoB4, 
+            ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki) throws NullPointerException {
         requireNonNull(hihokenshashoB4, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証A4版ソースビルダー", getClass().getName()));
         requireNonNull(tsuchishoSofusaki, UrSystemErrorMessages.引数がnullのため生成不可

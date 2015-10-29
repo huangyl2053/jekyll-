@@ -15,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class NinteichosaJisshibashoKubunCodeValidator {
 
-    private final NinteichosaJisshibashoKubunCode ninteichosaJisshibashoKubunCode;
+    private final NinteichosaJisshibashoKubunCode ninteichosaKubunCode;
 
     /**
      * コンストラクタです。
      *
      * @param ninteichosaJisshibashoKubunCode 要介護認定調査の実施場所区分コード
      */
-    public NinteichosaJisshibashoKubunCodeValidator(NinteichosaJisshibashoKubunCode ninteichosaJisshibashoKubunCode) {
-        requireNonNull(ninteichosaJisshibashoKubunCode, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査の実施場所区分コード"));
-        this.ninteichosaJisshibashoKubunCode = ninteichosaJisshibashoKubunCode;
+    public NinteichosaJisshibashoKubunCodeValidator(NinteichosaJisshibashoKubunCode ninteichosaKubunCode) {
+        requireNonNull(ninteichosaKubunCode, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定調査の実施場所区分コード"));
+        this.ninteichosaKubunCode = ninteichosaKubunCode;
     }
 
     /**
@@ -34,7 +34,7 @@ public class NinteichosaJisshibashoKubunCodeValidator {
      * @return {@link IValidationMessages}
      */
     public IValidationMessages validate() {
-        return ValidateChain.validateStart(ninteichosaJisshibashoKubunCode)
+        return ValidateChain.validateStart(ninteichosaKubunCode)
                 .messages();
     }
 }

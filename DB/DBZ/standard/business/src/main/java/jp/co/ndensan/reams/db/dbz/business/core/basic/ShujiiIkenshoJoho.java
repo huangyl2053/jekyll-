@@ -20,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定主治医意見書情報を管理するクラスです。
  */
-public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifier, DbT5302ShujiiIkenshoJohoEntity, ShujiiIkenshoJoho> implements Serializable {
+public class ShujiiIkenshoJoho extends
+        ParentModelBase<ShujiiIkenshoJohoIdentifier, DbT5302ShujiiIkenshoJohoEntity, ShujiiIkenshoJoho> implements Serializable {
 
     private final DbT5302ShujiiIkenshoJohoEntity entity;
     private final ShujiiIkenshoJohoIdentifier id;
@@ -168,7 +169,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 意見書同意フラグ
      */
-    public boolean get意見書同意フラグ() {
+    public boolean is意見書同意フラグ() {
         return entity.getIkenshoDoiFlag();
     }
 
@@ -186,7 +187,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 他科受診の有無
      */
-    public boolean get他科受診の有無() {
+    public boolean is他科受診の有無() {
         return entity.getExistTakaJushinFlag();
     }
 
@@ -195,7 +196,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 内科受診の有無
      */
-    public boolean get内科受診の有無() {
+    public boolean is内科受診の有無() {
         return entity.getExistNaikaJushinFlag();
     }
 
@@ -204,7 +205,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 精神科受診の有無
      */
-    public boolean get精神科受診の有無() {
+    public boolean is精神科受診の有無() {
         return entity.getExistSeishinkaJushinFlag();
     }
 
@@ -213,7 +214,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 外科受診の有無
      */
-    public boolean get外科受診の有無() {
+    public boolean is外科受診の有無() {
         return entity.getExistGekaJushinFlag();
     }
 
@@ -222,7 +223,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 整形外科受診の有無
      */
-    public boolean get整形外科受診の有無() {
+    public boolean is整形外科受診の有無() {
         return entity.getExistSeikeigekaJushinFlag();
     }
 
@@ -231,7 +232,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 脳神経外科の有無
      */
-    public boolean get脳神経外科の有無() {
+    public boolean is脳神経外科の有無() {
         return entity.getExistNoshinkeigekaJushinFlag();
     }
 
@@ -240,7 +241,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 皮膚科受診の有無
      */
-    public boolean get皮膚科受診の有無() {
+    public boolean is皮膚科受診の有無() {
         return entity.getExistHifukaJushinFlag();
     }
 
@@ -249,7 +250,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 泌尿器科受診の有無
      */
-    public boolean get泌尿器科受診の有無() {
+    public boolean is泌尿器科受診の有無() {
         return entity.getExistHinyokikaJushinFlag();
     }
 
@@ -258,7 +259,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 婦人科受診の有無
      */
-    public boolean get婦人科受診の有無() {
+    public boolean is婦人科受診の有無() {
         return entity.getExistFujinkaJushinFlag();
     }
 
@@ -267,7 +268,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 耳鼻咽喉科受診の有無
      */
-    public boolean get耳鼻咽喉科受診の有無() {
+    public boolean is耳鼻咽喉科受診の有無() {
         return entity.getExistJibiinkokaJushinFlag();
     }
 
@@ -276,7 +277,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return リハビリテーション科受診の有無
      */
-    public boolean getリハビリテーション科受診の有無() {
+    public boolean isリハビリテーション科受診の有無() {
         return entity.getExistRehabilitationkaJushinFlag();
     }
 
@@ -285,7 +286,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 歯科受診の有無
      */
-    public boolean get歯科受診の有無() {
+    public boolean is歯科受診の有無() {
         return entity.getExistShikaJushinFlag();
     }
 
@@ -294,7 +295,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return 眼科の有無
      */
-    public boolean get眼科の有無() {
+    public boolean is眼科の有無() {
         return entity.getExistGankaJushinFlag();
     }
 
@@ -303,7 +304,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
      *
      * @return その他受診科の有無
      */
-    public boolean getその他受診科の有無() {
+    public boolean isその他受診科の有無() {
         return entity.getExistSonotaJushinkaFlag();
     }
 
@@ -396,7 +397,7 @@ public class ShujiiIkenshoJoho extends ParentModelBase<ShujiiIkenshoJohoIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5302ShujiiIkenshoJohoEntity entity;
         private final ShujiiIkenshoJohoIdentifier id;
 

@@ -59,7 +59,9 @@ public class HihokenshashoA4Editor implements IHihokenshashoA4Editor {
         hihoJushoEditConfig = new HihokenshashoJushoEditConfig();
         kyotsuJushoEditConfig = new ChohyoKyotsuJushoEditConfig();
 
-        this.shikakuKihonEditor = new ShikakuKihonEditorBase(hihokenshashoModel, association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
+        this.shikakuKihonEditor = new ShikakuKihonEditorBase(
+                hihokenshashoModel, association, 
+                printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
         this.ninteiEditor = new NinteiEditorBase(hihokenshashoModel);
         this.kyufuSeigenEditor = new KyufuSeigenEditorBase(hihokenshashoModel, printConfig);
         this.seiDoitsuEditor = new SeiDoitsuShogaiEditorBase(hihokenshashoModel);
@@ -84,7 +86,8 @@ public class HihokenshashoA4Editor implements IHihokenshashoA4Editor {
      * @param dateOfBirthEditor 生年月日EditorBaseMock
      * @param checker 認定・居宅支援情報表示Checker
      */
-    HihokenshashoA4Editor(HihokenshashoPrintConfig printConfig, HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig,
+    HihokenshashoA4Editor(HihokenshashoPrintConfig printConfig, 
+            HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig,
             ShikakuKihonEditorBase shikakuKihonEditor, NinteiEditorBase ninteiEditor, KyufuSeigenEditorBase kyufuSeigenEditor,
             SeiDoitsuShogaiEditorBase seiDoitsuEditor, GenderEditorA4Base genderEditor, DateOfBirthEditorA4Base dateOfBirthEditor,
             NinteiAndKyotakuShienOutputChecker checker) {

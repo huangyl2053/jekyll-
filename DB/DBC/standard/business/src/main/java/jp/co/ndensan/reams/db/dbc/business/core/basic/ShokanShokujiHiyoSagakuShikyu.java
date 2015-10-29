@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求食事費用差額支給を管理するクラスです。
  */
-public class ShokanShokujiHiyoSagakuShikyu extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier, DbT3044ShokanShokujiHiyoSagakuShikyuEntity, ShokanShokujiHiyoSagakuShikyu> implements Serializable {
+public class ShokanShokujiHiyoSagakuShikyu 
+extends ModelBase<ShokanShokujiHiyoSagakuShikyuIdentifier, 
+        DbT3044ShokanShokujiHiyoSagakuShikyuEntity, 
+        ShokanShokujiHiyoSagakuShikyu> implements Serializable {
 
     private final DbT3044ShokanShokujiHiyoSagakuShikyuEntity entity;
     private final ShokanShokujiHiyoSagakuShikyuIdentifier id;

@@ -6,13 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.ShikyuGendogakuKyotakuServiceDetailPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.ShikyuGendogakuKyotakuServiceListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4200011.dgShikyuGendogakuKyotakuService_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,13 +24,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikyuGendogakuKyotakuServiceListPanel {
 
-    final static String AddedFlg = "追加";
-    final static String ModifiedFlg = "修正";
-    final static String DeletedFlg = "削除";
-    final static String UnchangedFlg = "変更無し";
+    private static final RString ADDED_FLG = new RString("追加");
+    private static final RString MODIFIED_FLG = new RString("修正");
+//    private static final RString DELETED_FLG = new RString("削除");
+//    private static final RString UNCHANGED_FLG = new RString("変更無し");
 
     /**
-     * 支給限度額登録（居宅サービス費）　支給限度額の入力を確定するボタン押下後、支給限度額一覧の情報を表示する
+     * 支給限度額登録（居宅サービス費）　支給限度額の入力を確定するボタン押下後、支給限度額一覧の情報を表示する。
      *
      * @author n8223
      */
@@ -46,34 +42,32 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
         DataGrid<dgShikyuGendogakuKyotakuService_Row> grid = panel.getDgShikyuGendogakuKyotakuService();
 
         int index = grid.getClickedRowId();
-        
+
         System.out.println("++++ index +++  " + index);
-        
-        if(index != -1 ) {
-             grid.getDataSource().get(index).setRowState(RowState.Added);
-            
-           //  grid.getDataSource().add(index, arraydata.get(index));
-        }  else {
-            
-             if(grid.getDataSource().isEmpty()) {
-                 
-                  grid.getDataSource().add(0, arraydata.get(0));
-             } else {
-                 
-                 System.out.println("+++ grid.getDataSource().size() +++" + grid.getDataSource().size());
-                 index = grid.getDataSource().size() ;
-                 grid.getDataSource().add(index, arraydata.get(0));
-             }
-            
+
+        if (index != -1) {
+            grid.getDataSource().get(index).setRowState(RowState.Added);
+
+            //  grid.getDataSource().add(index, arraydata.get(index));
+        } else {
+
+            if (grid.getDataSource().isEmpty()) {
+
+                grid.getDataSource().add(0, arraydata.get(0));
+            } else {
+
+                System.out.println("+++ grid.getDataSource().size() +++" + grid.getDataSource().size());
+                index = grid.getDataSource().size();
+                grid.getDataSource().add(index, arraydata.get(0));
+            }
+
         }
-        
+
 //       
 //        grid.setDataSource(arraydata);
 //        
 //        grid.getDataSource().addAll(arraydata);
-        
         //grid.setDataSource(arraydata);
-
         response.data = panel;
         return response;
     }
@@ -89,31 +83,31 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
 
         //VIEWGET
         RString radIdoKubun = (RString) ViewStateHolder.get("RADIOKUBUN", RString.class);
-      //  RString idoJiyu = (RString) ViewStateHolder.get("IDOJIYU", RString.class);
+        //  RString idoJiyu = (RString) ViewStateHolder.get("IDOJIYU", RString.class);
 
         RString yukoDateRangeFromValue = (RString) ViewStateHolder.get("YUKODATERANGEFROMVALUE", RString.class);
         //RString yukoDateRangeToValue = (RString) ViewStateHolder.get("YUKODATERANGETOVALUE", RString.class);
 
         //追加 区分支給限
-        if (flg.toString().equals(AddedFlg)) {
+        if (flg.equals(ADDED_FLG)) {
 
             item = createRowShikyuGendogakuKyotakuListData(
                     flg.toString(),
                     gubun.toString(),
                     yukoDateRangeFromValue.toString(),
-                   // yukoDateRangeToValue.toString(),
+                    // yukoDateRangeToValue.toString(),
                     radIdoKubun.toString()
             );
             arrayData.add(item);
         }
         //修正 区分支給限
-        if (flg.toString().equals(ModifiedFlg)) {
+        if (flg.equals(MODIFIED_FLG)) {
 
             item = createRowShikyuGendogakuKyotakuListData(
                     flg.toString(),
                     gubun.toString(),
                     yukoDateRangeFromValue.toString(),
-                  // yukoDateRangeToValue.toString(),
+                    // yukoDateRangeToValue.toString(),
                     radIdoKubun.toString()
             );
             arrayData.add(item);
@@ -127,7 +121,7 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
             String 状況,
             String 限度額の分類,
             String 開始年月,
-           // String 終了年月,
+            // String 終了年月,
             String 異動区分
     ) {
         dgShikyuGendogakuKyotakuService_Row rowShikyuGendogakuKyotakuListData;
@@ -148,24 +142,22 @@ public class ShikyuGendogakuKyotakuServiceListPanel {
         rowShikyuGendogakuKyotakuListData.setTxtIdoKubun(new RString(異動区分));
 
         switch (状況) {
-            case AddedFlg:
+            case "追加":
                 rowShikyuGendogakuKyotakuListData.setRowState(RowState.Added);
                 break;
-            case ModifiedFlg:
-                 rowShikyuGendogakuKyotakuListData.setRowState(RowState.Added);
+            case "修正":
+                rowShikyuGendogakuKyotakuListData.setRowState(RowState.Added);
                 //wShikyuGendogakuKyotakuListData.setRowState(RowState.Modified);
                 break;
-            case DeletedFlg:
+            case "削除":
                 rowShikyuGendogakuKyotakuListData.setRowState(RowState.Deleted);
                 break;
-            case UnchangedFlg:
+            case "変更無し":
                 rowShikyuGendogakuKyotakuListData.setRowState(RowState.Unchanged);
                 break;
         }
 
         return rowShikyuGendogakuKyotakuListData;
     }
-
-
 
 }

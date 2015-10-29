@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 予防給付計画自己作成合計を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiGokei extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier, DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity, YoboKeikakuJikoSakuseiGokei> implements Serializable {
+public class YoboKeikakuJikoSakuseiGokei 
+extends ModelBase<YoboKeikakuJikoSakuseiGokeiIdentifier, 
+        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity, 
+        YoboKeikakuJikoSakuseiGokei> implements Serializable {
 
     private final DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity;
     private final YoboKeikakuJikoSakuseiGokeiIdentifier id;

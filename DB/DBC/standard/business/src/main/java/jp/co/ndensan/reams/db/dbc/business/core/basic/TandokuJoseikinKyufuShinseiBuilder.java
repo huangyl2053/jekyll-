@@ -195,7 +195,7 @@ public class TandokuJoseikinKyufuShinseiBuilder {
         return new TandokuJoseikinKyufuShinsei(entity, id);
     }
 
-    public TandokuJoseikinKyufuShinseiBuilder setTandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKettei createTandokuJoseikinKyufuKettei) {
+    public TandokuJoseikinKyufuShinseiBuilder setTandokuJoseikin(TandokuJoseikinKyufuKettei createTandokuJoseikin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

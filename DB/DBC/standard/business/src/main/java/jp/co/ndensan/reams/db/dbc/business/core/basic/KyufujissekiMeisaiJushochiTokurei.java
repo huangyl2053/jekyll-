@@ -27,7 +27,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績明細_住所地特例を管理するクラスです。
  */
-public class KyufujissekiMeisaiJushochiTokurei extends ModelBase<KyufujissekiMeisaiJushochiTokureiIdentifier, DbT3106KyufujissekiMeisaiJushochiTokureiEntity, KyufujissekiMeisaiJushochiTokurei> implements Serializable {
+public class KyufujissekiMeisaiJushochiTokurei 
+extends ModelBase<KyufujissekiMeisaiJushochiTokureiIdentifier, 
+        DbT3106KyufujissekiMeisaiJushochiTokureiEntity, 
+        KyufujissekiMeisaiJushochiTokurei> implements Serializable {
 
     private final DbT3106KyufujissekiMeisaiJushochiTokureiEntity entity;
     private final KyufujissekiMeisaiJushochiTokureiIdentifier id;

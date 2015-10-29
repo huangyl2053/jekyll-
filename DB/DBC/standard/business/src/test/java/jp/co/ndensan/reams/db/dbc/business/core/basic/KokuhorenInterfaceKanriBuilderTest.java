@@ -98,7 +98,7 @@ public class KokuhorenInterfaceKanriBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の再処理可能区分は_設定した値と同じ再処理可能区分を返す() {
             business = sut.set再処理可能区分(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理可能区分).build();
-            assertThat(business.get再処理可能区分(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理可能区分));
+            assertThat(business.is再処理可能区分(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理可能区分));
         }
 
         @Test
@@ -170,7 +170,7 @@ public class KokuhorenInterfaceKanriBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の再処理設定不可区分は_設定した値と同じ再処理設定不可区分を返す() {
             business = sut.set再処理設定不可区分(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理設定不可区分).build();
-            assertThat(business.get再処理設定不可区分(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理設定不可区分));
+            assertThat(business.is再処理設定不可区分(), is(DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_再処理設定不可区分));
         }
 
         @Test

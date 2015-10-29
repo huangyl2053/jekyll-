@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画自己作成明細を管理するクラスです。
  */
-public class KyotakuKeikakuJikosakuseiMeisai extends ModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, KyotakuKeikakuJikosakuseiMeisai> implements Serializable {
+public class KyotakuKeikakuJikosakuseiMeisai extends 
+        ModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, 
+        DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, 
+        KyotakuKeikakuJikosakuseiMeisai> implements Serializable {
 
     private final DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity;
     private final KyotakuKeikakuJikosakuseiMeisaiIdentifier id;

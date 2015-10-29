@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅サービス区分支給限度額を管理するクラスです。
  */
-public class KubunShikyuGendoGaku extends ModelBase<KubunShikyuGendoGakuIdentifier, DbT7109KubunShikyuGendoGakuEntity, KubunShikyuGendoGaku> implements Serializable {
+public class KubunShikyuGendoGaku extends
+        ModelBase<KubunShikyuGendoGakuIdentifier, DbT7109KubunShikyuGendoGakuEntity, KubunShikyuGendoGaku>
+        implements Serializable {
 
     private final DbT7109KubunShikyuGendoGakuEntity entity;
     private final KubunShikyuGendoGakuIdentifier id;

@@ -116,13 +116,13 @@ public class KagoMoshitateBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の国保連再送付有フラグは_設定した値と同じ国保連再送付有フラグを返す() {
             business = sut.set国保連再送付有フラグ(DbT3059KagoMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ).build();
-            assertThat(business.get国保連再送付有フラグ(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ));
+            assertThat(business.is国保連再送付有フラグ(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ));
         }
 
         @Test
         public void 戻り値の同月審査有フラグは_設定した値と同じ同月審査有フラグを返す() {
             business = sut.set同月審査有フラグ(DbT3059KagoMoshitateEntityGenerator.DEFAULT_同月審査有フラグ).build();
-            assertThat(business.get同月審査有フラグ(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_同月審査有フラグ));
+            assertThat(business.is同月審査有フラグ(), is(DbT3059KagoMoshitateEntityGenerator.DEFAULT_同月審査有フラグ));
         }
 
         @Test

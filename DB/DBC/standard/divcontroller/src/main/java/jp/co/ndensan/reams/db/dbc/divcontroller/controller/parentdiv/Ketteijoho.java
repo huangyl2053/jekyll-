@@ -5,17 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011.KetteijohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011.dgKetteiHokenshaDetail_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0071011.dgKetteiKohiDetail_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
  * 過誤決定取込情報照会画面です。
@@ -25,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 //TODO n3317塚田　Yamlを使わないように変更
 public class Ketteijoho {
 
-    final static RDate OldDate = new RDate("201402");
-    final static RDate NewDate = new RDate("201404");
+    static final RDate OLD_DATE = new RDate("201402");
+    static final RDate NEW_DATE = new RDate("201404");
 
     /**
      * 読み込み時は最新の決定情報を表示します。
@@ -303,7 +295,7 @@ public class Ketteijoho {
 //        //取扱年月を指定した
 //        RDate txtToriatsukaiYM = panel.getTxtToriatsukaiYM().getValue();
 //
-//        if (txtToriatsukaiYM.equals(OldDate)) {
+//        if (txtToriatsukaiYM.equals(OLD_DATE)) {
 //
 //            //setDefault取扱年月
 //            setDefault(panel, OldYmlName);
@@ -316,7 +308,7 @@ public class Ketteijoho {
 //            setKohiCellData(panel, OldYmlName);
 //            setKohiListData(panel, OldYmlName);
 //
-//        } else if (txtToriatsukaiYM.equals(NewDate)) {
+//        } else if (txtToriatsukaiYM.equals(NEW_DATE)) {
 //
 //            //setDefault取扱年月
 //            setDefault(panel, NewYmlName);
@@ -336,50 +328,50 @@ public class Ketteijoho {
         return ResponseData.of(panel).respond();
     }
 
-    private void setHokenshaKetteiClear(KetteijohoDiv panel) {
-
-        panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().clearValue();
-        panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().clearValue();
-
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell11().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell12().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell13().clearValue();
-
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell21().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell22().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell23().clearValue();
-
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell31().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell32().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell33().clearValue();
-
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell41().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell42().clearValue();
-        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell43().clearValue();
-
-        List<dgKetteiHokenshaDetail_Row> arrayHokenshaDetaildata = new ArrayList<>();
-        DataGrid<dgKetteiHokenshaDetail_Row> gridHokenshaDetail = panel.getKetteiHokensha().getDgKetteiHokenshaDetail();
-        gridHokenshaDetail.setDataSource(arrayHokenshaDetaildata);
-
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell11().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell12().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell13().clearValue();
-
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell21().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell22().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell23().clearValue();
-
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell31().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell32().clearValue();
-        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell33().clearValue();
-
-        List<dgKetteiKohiDetail_Row> arrayKohiDetaildata = new ArrayList<>();
-        DataGrid<dgKetteiKohiDetail_Row> gridKetteiKohiDetail = panel.getKetteiKohi().getDgKetteiKohiDetail();
-        gridKetteiKohiDetail.setDataSource(arrayKohiDetaildata);
-
-    }
-
-    private List<HashMap> ymlData(String ymlName) {
-        return YamlLoader.DBC.loadAsList(new RString(ymlName));
-    }
+//    private void setHokenshaKetteiClear(KetteijohoDiv panel) {
+//
+//        panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().clearValue();
+//        panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().clearValue();
+//
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell11().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell12().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell13().clearValue();
+//
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell21().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell22().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell23().clearValue();
+//
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell31().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell32().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell33().clearValue();
+//
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell41().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell42().clearValue();
+//        panel.getKetteiHokensha().getKetteiHokenshaShukei().getTxtHokenshaCell43().clearValue();
+//
+//        List<dgKetteiHokenshaDetail_Row> arrayHokenshaDetaildata = new ArrayList<>();
+//        DataGrid<dgKetteiHokenshaDetail_Row> gridHokenshaDetail = panel.getKetteiHokensha().getDgKetteiHokenshaDetail();
+//        gridHokenshaDetail.setDataSource(arrayHokenshaDetaildata);
+//
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell11().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell12().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell13().clearValue();
+//
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell21().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell22().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell23().clearValue();
+//
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell31().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell32().clearValue();
+//        panel.getKetteiKohi().getKetteiKohiShukei().getTxtKohiCell33().clearValue();
+//
+//        List<dgKetteiKohiDetail_Row> arrayKohiDetaildata = new ArrayList<>();
+//        DataGrid<dgKetteiKohiDetail_Row> gridKetteiKohiDetail = panel.getKetteiKohi().getDgKetteiKohiDetail();
+//        gridKetteiKohiDetail.setDataSource(arrayKohiDetaildata);
+//
+//    }
+//
+//    private List<HashMap> ymlData(String ymlName) {
+//        return YamlLoader.DBC.loadAsList(new RString(ymlName));
+//    }
 }

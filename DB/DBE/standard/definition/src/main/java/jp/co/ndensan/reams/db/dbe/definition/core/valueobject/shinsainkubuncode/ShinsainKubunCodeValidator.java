@@ -18,7 +18,7 @@ public class ShinsainKubunCodeValidator {
     private final ShinsainKubunCode shinsainKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shinsainKubunCode 介護認定審査会での、委員としての役割コード
      */

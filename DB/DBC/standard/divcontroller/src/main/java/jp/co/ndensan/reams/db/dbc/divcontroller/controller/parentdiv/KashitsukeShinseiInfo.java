@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiTorokuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -164,7 +164,7 @@ public class KashitsukeShinseiInfo {
         return new FlexibleDate(date.replace(".", "")).toString();
     }
 
-    private boolean isNew(KashitsukeShinseiInfoDiv info) {
-        return Integer.parseInt(info.getTxtKashitsukeShinseiListSelectedIndex().getValue().toString()) == -1;
-    }
+//    private boolean isNew(KashitsukeShinseiInfoDiv info) {
+//        return Integer.parseInt(info.getTxtKashitsukeShinseiListSelectedIndex().getValue().toString()) == -1;
+//    }
 }

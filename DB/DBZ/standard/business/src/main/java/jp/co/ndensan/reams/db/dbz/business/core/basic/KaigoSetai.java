@@ -272,7 +272,7 @@ public class KaigoSetai extends ParentModelBase<KaigoSetaiIdentifier, DbT7014Kai
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7014KaigoSetaiEntity entity;
         private final KaigoSetaiIdentifier id;
 

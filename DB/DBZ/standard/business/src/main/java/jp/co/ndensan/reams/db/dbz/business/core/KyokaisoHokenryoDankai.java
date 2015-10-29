@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 境界層保険料段階を管理するクラスです。
  */
-public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai> implements Serializable {
+public class KyokaisoHokenryoDankai extends
+        ModelBase<KyokaisoHokenryoDankaiIdentifier, DbT1007KyokaisoHokenryoDankaiEntity, KyokaisoHokenryoDankai>
+        implements Serializable {
 
     private final DbT1007KyokaisoHokenryoDankaiEntity entity;
     private final KyokaisoHokenryoDankaiIdentifier id;

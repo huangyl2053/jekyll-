@@ -271,7 +271,7 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 住宅改修契約有無
      */
-    public boolean get住宅改修契約有無() {
+    public boolean is住宅改修契約有無() {
         return entity.getJutakuKaishuKeiyakuUmu();
     }
 
@@ -280,7 +280,7 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 特定福祉用具販売契約有無
      */
-    public boolean get特定福祉用具販売契約有無() {
+    public boolean is特定福祉用具販売契約有無() {
         return entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu();
     }
 
@@ -289,7 +289,7 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 償還払給付契約有無
      */
-    public boolean get償還払給付契約有無() {
+    public boolean is償還払給付契約有無() {
         return entity.getShokanbaraiKyufuKeiyakuUmu();
     }
 
@@ -298,7 +298,7 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 高額給付契約有無
      */
-    public boolean get高額給付契約有無() {
+    public boolean is高額給付契約有無() {
         return entity.getKogakuKyufuKeiyakuUmu();
     }
 
@@ -316,7 +316,7 @@ public class JuryoininKeiyakuJigyosha
      *
      * @return 取扱確約書有無
      */
-    public boolean get取扱確約書有無() {
+    public boolean is取扱確約書有無() {
         return entity.getToriatsukaiKakuyakushoUmu();
     }
 

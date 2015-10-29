@@ -9,7 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7110TankiNyushoShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -20,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 短期入所系支給限度額を管理するクラスです。
  */
-public class TankiNyushoShikyuGendoGaku extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier, DbT7110TankiNyushoShikyuGendoGakuEntity, TankiNyushoShikyuGendoGaku> implements Serializable {
+public class TankiNyushoShikyuGendoGaku 
+extends ModelBase<TankiNyushoShikyuGendoGakuIdentifier, 
+        DbT7110TankiNyushoShikyuGendoGakuEntity, 
+        TankiNyushoShikyuGendoGaku> implements Serializable {
 
     private final DbT7110TankiNyushoShikyuGendoGakuEntity entity;
     private final TankiNyushoShikyuGendoGakuIdentifier id;

@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.MishinsaShikyuShinseiListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgMishinsaShikyuShinsei_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class MishinsaShikyuShinseiListPanel {
 
+    private static final int 不承認 = 3;
     /**
      * 住宅改修費支給申請審査 未審査支給申請一覧の内容をセットします。
      *
@@ -72,7 +71,6 @@ public class MishinsaShikyuShinseiListPanel {
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnShinsa(MishinsaShikyuShinseiListPanelDiv panel) {
 
-        int 不承認 = 3;
 //        if (is３段階チェックあり(panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認))) {
 //            panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxtShinsaResult(new RString("承認"));
 //        } else {
@@ -106,7 +104,6 @@ public class MishinsaShikyuShinseiListPanel {
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnModifyShinseiContents(
             MishinsaShikyuShinseiListPanelDiv panel) {
 
-        int 不承認 = 3;
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setRowState(RowState.Modified);
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxt3DankaiReset(Boolean.TRUE);
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxtShinsaResult(new RString("承認"));
@@ -141,9 +138,9 @@ public class MishinsaShikyuShinseiListPanel {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
     }
 
-    private boolean is３段階チェックあり(dgMishinsaShikyuShinsei_Row row) {
-        return row.getTxt3DankaiReset();
-    }
+//    private boolean is３段階チェックあり(dgMishinsaShikyuShinsei_Row row) {
+//        return row.getTxt3DankaiReset();
+//    }
 
     /*
      * 住宅改修費支給申請審査 未審査支給申請一覧のデータを設定する。
@@ -169,55 +166,55 @@ public class MishinsaShikyuShinseiListPanel {
     /*
      * 共通内容を設定する
      */
-    private void hashMap(HashMap hashMap, List<dgMishinsaShikyuShinsei_Row> arrayData) {
-
-        //TO DO DataGrid
-        String shikyuShinseiDate = hashMap.get("shikyuShinseiDate").toString();
-        String teikyoYM = hashMap.get("teikyoYM").toString();
-        String hihoNo = hashMap.get("hihoNo").toString();
-        String hihokenshaName = hashMap.get("hihokenshaName").toString();
-        String hokenKyufuAmount = hashMap.get("hokenKyufuAmount").toString();
-        String riyoshaFutanAmount = hashMap.get("riyoshaFutanAmount").toString();
-        String hiyoTotalAmount = hashMap.get("hiyoTotalAmount").toString();
-        String tenkyoReset = hashMap.get("tenkyoReset").toString();
-        String DankaiReset3 = hashMap.get("DankaiReset3").toString();
-        String seiriNo = hashMap.get("seiriNo").toString();
-
-        dgMishinsaShikyuShinsei_Row item;
-
-        item = createRowishinsaShikyuShinseiListData(
-                shikyuShinseiDate,
-                teikyoYM,
-                hihoNo,
-                hihokenshaName,
-                hokenKyufuAmount,
-                riyoshaFutanAmount,
-                hiyoTotalAmount,
-                tenkyoReset,
-                DankaiReset3,
-                // shinsaResult,
-                seiriNo
-        );
-        arrayData.add(item);
-    }
+//    private void hashMap(HashMap hashMap, List<dgMishinsaShikyuShinsei_Row> arrayData) {
+//
+//        //TO DO DataGrid
+//        RString shikyuShinseiDate = new RString(hashMap.get("shikyuShinseiDate").toString());
+//        RString teikyoYM = new RString(hashMap.get("teikyoYM").toString());
+//        RString hihoNo = new RString(hashMap.get("hihoNo").toString());
+//        RString hihokenshaName = new RString(hashMap.get("hihokenshaName").toString());
+//        RString hokenKyufuAmount = new RString(hashMap.get("hokenKyufuAmount").toString());
+//        RString riyoshaFutanAmount = new RString(hashMap.get("riyoshaFutanAmount").toString());
+//        RString hiyoTotalAmount = new RString(hashMap.get("hiyoTotalAmount").toString());
+//        RString tenkyoReset = new RString(hashMap.get("tenkyoReset").toString());
+//        RString dankaiReset3 = new RString(hashMap.get("dankaiReset3").toString());
+//        RString seiriNo = new RString(hashMap.get("seiriNo").toString());
+//
+//        dgMishinsaShikyuShinsei_Row item;
+//
+//        item = createRowishinsaShikyuShinseiListData(
+//                shikyuShinseiDate,
+//                teikyoYM,
+//                hihoNo,
+//                hihokenshaName,
+//                hokenKyufuAmount,
+//                riyoshaFutanAmount,
+//                hiyoTotalAmount,
+//                tenkyoReset,
+//                dankaiReset3,
+//                // shinsaResult,
+//                seiriNo
+//        );
+//        arrayData.add(item);
+//    }
 
     /*
      *引数を元にデータグリッド内に挿入する個人データを作成します。
      */
     private dgMishinsaShikyuShinsei_Row createRowishinsaShikyuShinseiListData(
-            String 支給申請日,
-            String 提供年月,
-            String 被保番号,
-            String 氏名,
-            String 保険給付額,
-            String 利用者負担額,
-            String 費用額合計,
-            String 転居,
-            String 段階3,
-            String 整理番号) {
+            RString 支給申請日,
+            RString 提供年月,
+            RString 被保番号,
+            RString 氏名,
+            RString 保険給付額,
+            RString 利用者負担額,
+            RString 費用額合計,
+            RString 転居,
+            RString 段階3,
+            RString 整理番号) {
 
-        dgMishinsaShikyuShinsei_Row rowMishinsaShikyuShinseiListData;
-        rowMishinsaShikyuShinseiListData = new dgMishinsaShikyuShinsei_Row(
+        dgMishinsaShikyuShinsei_Row rowMishinsaShinseiListData;
+        rowMishinsaShinseiListData = new dgMishinsaShikyuShinsei_Row(
                 new TextBoxDate(),
                 new TextBoxDate(),
                 RString.EMPTY,
@@ -229,18 +226,18 @@ public class MishinsaShikyuShinseiListPanel {
                 new TextBoxCode()
         );
 
-        rowMishinsaShikyuShinseiListData.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日));
-        rowMishinsaShikyuShinseiListData.getTxtTeikyoYM().setValue(new RDate(提供年月));
-        rowMishinsaShikyuShinseiListData.setTxtHihoNo(new RString(被保番号));
-        rowMishinsaShikyuShinseiListData.setTxtHihokenshaName(new RString(氏名));
-        rowMishinsaShikyuShinseiListData.getTxtHokenKyufuAmount().setValue(new Decimal(保険給付額));
-        rowMishinsaShikyuShinseiListData.getTxtRiyoshaFutanAmount().setValue(new Decimal(利用者負担額));
-        rowMishinsaShikyuShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計));
-        rowMishinsaShikyuShinseiListData.setTxtTenkyoReset(Boolean.valueOf(転居));
-        rowMishinsaShikyuShinseiListData.setTxt3DankaiReset(Boolean.valueOf(段階3));
-        rowMishinsaShikyuShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号));
+        rowMishinsaShinseiListData.getTxtShikyuShinseiDate().setValue(new RDate(支給申請日.toString()));
+        rowMishinsaShinseiListData.getTxtTeikyoYM().setValue(new RDate(提供年月.toString()));
+        rowMishinsaShinseiListData.setTxtHihoNo(new RString(被保番号.toString()));
+        rowMishinsaShinseiListData.setTxtHihokenshaName(new RString(氏名.toString()));
+        rowMishinsaShinseiListData.getTxtHokenKyufuAmount().setValue(new Decimal(保険給付額.toString()));
+        rowMishinsaShinseiListData.getTxtRiyoshaFutanAmount().setValue(new Decimal(利用者負担額.toString()));
+        rowMishinsaShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計.toString()));
+        rowMishinsaShinseiListData.setTxtTenkyoReset(Boolean.valueOf(転居.toString()));
+        rowMishinsaShinseiListData.setTxt3DankaiReset(Boolean.valueOf(段階3.toString()));
+        rowMishinsaShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号.toString()));
 
-        return rowMishinsaShikyuShinseiListData;
+        return rowMishinsaShinseiListData;
 
     }
 

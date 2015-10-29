@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票_概況調査_サービスの状況フラグを管理するクラスです。
  */
-public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag> implements Serializable {
+public class NinteichosahyoServiceJokyoFlag extends 
+        ParentModelBase<NinteichosahyoServiceJokyoFlagIdentifier, 
+        DbT5208NinteichosahyoServiceJokyoFlagEntity, NinteichosahyoServiceJokyoFlag> implements Serializable {
 
     private final DbT5208NinteichosahyoServiceJokyoFlagEntity entity;
     private final NinteichosahyoServiceJokyoFlagIdentifier id;
@@ -184,7 +186,7 @@ public class NinteichosahyoServiceJokyoFlag extends ParentModelBase<Ninteichosah
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5208NinteichosahyoServiceJokyoFlagEntity entity;
         private final NinteichosahyoServiceJokyoFlagIdentifier id;
 

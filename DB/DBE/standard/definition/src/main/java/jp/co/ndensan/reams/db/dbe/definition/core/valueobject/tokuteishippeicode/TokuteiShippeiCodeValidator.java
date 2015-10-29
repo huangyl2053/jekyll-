@@ -18,7 +18,7 @@ public class TokuteiShippeiCodeValidator {
     private final TokuteiShippeiCode tokuteiShippeiCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param tokuteiShippeiCode 特定疾病コード
      */

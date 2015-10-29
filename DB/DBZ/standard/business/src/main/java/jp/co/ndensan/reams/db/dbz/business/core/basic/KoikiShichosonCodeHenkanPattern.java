@@ -18,7 +18,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 広域市町村管理コード変換パターンを管理するクラスです。
  */
-public class KoikiShichosonCodeHenkanPattern extends ParentModelBase<KoikiShichosonCodeHenkanPatternIdentifier, DbT7024KoikiShichosonCodeHenkanPatternEntity, KoikiShichosonCodeHenkanPattern> implements Serializable {
+public class KoikiShichosonCodeHenkanPattern extends 
+        ParentModelBase<KoikiShichosonCodeHenkanPatternIdentifier, 
+        DbT7024KoikiShichosonCodeHenkanPatternEntity, 
+        KoikiShichosonCodeHenkanPattern> implements Serializable {
 
     private final DbT7024KoikiShichosonCodeHenkanPatternEntity entity;
     private final KoikiShichosonCodeHenkanPatternIdentifier id;
@@ -276,7 +279,7 @@ public class KoikiShichosonCodeHenkanPattern extends ParentModelBase<KoikiShicho
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7024KoikiShichosonCodeHenkanPatternEntity entity;
         private final KoikiShichosonCodeHenkanPatternIdentifier id;
 

@@ -185,7 +185,7 @@ public class JigyoKogakuKyufuTaishoshaGokei
      *
      * @return 境界層対象者フラグ
      */
-    public boolean get境界層対象者フラグ() {
+    public boolean is境界層対象者フラグ() {
         return entity.getKyokaisoTaishoshaFlag();
     }
 
@@ -194,7 +194,7 @@ public class JigyoKogakuKyufuTaishoshaGokei
      *
      * @return 社会福祉法人軽減対象フラグ
      */
-    public boolean get社会福祉法人軽減対象フラグ() {
+    public boolean is社会福祉法人軽減対象フラグ() {
         return entity.getHojinKeigenTaishoFlag();
     }
 
@@ -203,7 +203,7 @@ public class JigyoKogakuKyufuTaishoshaGokei
      *
      * @return 高額対象外フラグ
      */
-    public boolean get高額対象外フラグ() {
+    public boolean is高額対象外フラグ() {
         return entity.getKogakuTaishoGaiFlag();
     }
 
@@ -212,7 +212,7 @@ public class JigyoKogakuKyufuTaishoshaGokei
      *
      * @return 自動償還対象フラグ
      */
-    public boolean get自動償還対象フラグ() {
+    public boolean is自動償還対象フラグ() {
         return entity.getJidoShokanTaishoFlag();
     }
 

@@ -31,16 +31,18 @@ public class KyufuSeigenEditorBase {
     private final HihokenshashoModel hihokenshashoModel;
     private final HihokenshashoPrintConfig printConfig;
 
-    private static final int KYUFU_SEIGEN_NAME_LENGTH;
-    private static final int KYUFU_SEIGEN_LONG_NAME_LENGTH;
+    //private static final int KYUFU_SEIGEN_NAME_LENGTH;
+    //private static final int KYUFU_SEIGEN_LONG_NAME_LENGTH;
 
     private static final int KYOTAKU_JIGYOSHA_NAME_STANDARD;
     private static final RString DAUB_WORD;
 
+    private static final int SIJUU = 40;
+    private static final int SAN = 3;
     static {
-        KYUFU_SEIGEN_NAME_LENGTH = 8;
-        KYUFU_SEIGEN_LONG_NAME_LENGTH = 12;
-        KYOTAKU_JIGYOSHA_NAME_STANDARD = 40;
+        //KYUFU_SEIGEN_NAME_LENGTH = 8;
+        //KYUFU_SEIGEN_LONG_NAME_LENGTH = 12;
+        KYOTAKU_JIGYOSHA_NAME_STANDARD = SIJUU;
         DAUB_WORD = new RString("*");
     }
 
@@ -72,7 +74,7 @@ public class KyufuSeigenEditorBase {
         List<FlexibleDate> kyufuSeigenStartDates = hihokenshashoModel.getShikakuHakko().get給付制限開始日();
         List<FlexibleDate> kyufuSeigenEndDates = hihokenshashoModel.getShikakuHakko().get給付制限終了日();
 
-        for (int i = 0; i < 3 && i < kyufuSeigenNames.size(); i++) {
+        for (int i = 0; i < SAN && i < kyufuSeigenNames.size(); i++) {
             switch (i) {
                 case 0:
                     setKyufuSeigen(createKyufuSeigenSetter1(source),
@@ -241,51 +243,51 @@ public class KyufuSeigenEditorBase {
     public void set居宅介護支援事業者(IHihokenshashoCommonEditData source) {
 
         List<RString> kyotakuShienJigyoshaNames = hihokenshashoModel.getShikakuHakko().get支援事業者名称();
-        List<FlexibleDate> DateOfoutputTargets = setKyotakuDatesOfOutputTarget(hihokenshashoModel);
+        List<FlexibleDate> dateOfoutputTargets = setKyotakuDatesOfOutputTarget(hihokenshashoModel);
 
-        for (int i = 0; i < 3 && i < kyotakuShienJigyoshaNames.size(); i++) {
+        for (int i = 0; i < SAN && i < kyotakuShienJigyoshaNames.size(); i++) {
             RString kyotakuJigyoshaName = kyotakuShienJigyoshaNames.get(i);
-            RString DateOfoutputTargetString = toWarekiString(DateOfoutputTargets.get(i));
+            RString dateOfoutputTargetString = toWarekiString(dateOfoutputTargets.get(i));
 
             switch (i) {
                 case 0:
-                    setKyotakuJigyosha1(kyotakuJigyoshaName, source, DateOfoutputTargetString);
+                    setKyotakuJigyosha1(kyotakuJigyoshaName, source, dateOfoutputTargetString);
                     break;
                 case 1:
-                    setKyotakuJigyosha2(kyotakuJigyoshaName, source, DateOfoutputTargetString);
+                    setKyotakuJigyosha2(kyotakuJigyoshaName, source, dateOfoutputTargetString);
                     break;
                 default:
-                    setKyotakuJigyosha3(kyotakuJigyoshaName, source, DateOfoutputTargetString);
+                    setKyotakuJigyosha3(kyotakuJigyoshaName, source, dateOfoutputTargetString);
                     break;
             }
         }
     }
 
-    private void setKyotakuJigyosha1(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString DateOfoutputTargetString) {
+    private void setKyotakuJigyosha1(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString dateOfoutputTargetString) {
         if (is居宅支援事業者名の文字数がKYOTAKU_JIGYOSHA_NAME_STANDARD以下(kyotakuJigyoshaName)) {
             source.setGyosha1(kyotakuJigyoshaName);
         } else {
             source.setItakuGyosha1(kyotakuJigyoshaName);
         }
-        source.setTodokeYmd1(DateOfoutputTargetString);
+        source.setTodokeYmd1(dateOfoutputTargetString);
     }
 
-    private void setKyotakuJigyosha2(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString DateOfoutputTargetString) {
+    private void setKyotakuJigyosha2(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString dateOfoutputTargetString) {
         if (is居宅支援事業者名の文字数がKYOTAKU_JIGYOSHA_NAME_STANDARD以下(kyotakuJigyoshaName)) {
             setKyotakuPrintJoho(craeteKyotakuGyoshaSetter2(source), kyotakuJigyoshaName);
         } else {
             setKyotakuPrintJoho(craeteKyotakuItakuGyoshaSetter2(source), kyotakuJigyoshaName);
         }
-        setKyotakuPrintJoho(craeteKyotakuTodokeYmdSetter2(source), DateOfoutputTargetString);
+        setKyotakuPrintJoho(craeteKyotakuTodokeYmdSetter2(source), dateOfoutputTargetString);
     }
 
-    private void setKyotakuJigyosha3(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString DateOfoutputTargetString) {
+    private void setKyotakuJigyosha3(RString kyotakuJigyoshaName, IHihokenshashoCommonEditData source, RString dateOfoutputTargetString) {
         if (is居宅支援事業者名の文字数がKYOTAKU_JIGYOSHA_NAME_STANDARD以下(kyotakuJigyoshaName)) {
             setKyotakuPrintJoho(craeteKyotakuGyoshaSetter3(source), kyotakuJigyoshaName);
         } else {
             setKyotakuPrintJoho(craeteKyotakuItakuGyoshaSetter3(source), kyotakuJigyoshaName);
         }
-        setKyotakuPrintJoho(craeteKyotakuTodokeYmdSetter3(source), DateOfoutputTargetString);
+        setKyotakuPrintJoho(craeteKyotakuTodokeYmdSetter3(source), dateOfoutputTargetString);
     }
 
     private boolean is居宅支援事業者名の文字数がKYOTAKU_JIGYOSHA_NAME_STANDARD以下(RString kyotakuJigyoshaName) {
@@ -306,7 +308,7 @@ public class KyufuSeigenEditorBase {
                 break;
             case アスタリスク:
                 setter.setTarget(printData);
-                RString asa = new RString("");
+                //RString asa = new RString("");
                 setter.setTargetAsa(createAstelisk(printData.length() * 2));
                 break;
             case 抹消線:

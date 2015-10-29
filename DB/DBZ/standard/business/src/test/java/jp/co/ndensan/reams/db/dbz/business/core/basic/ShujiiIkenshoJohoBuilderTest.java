@@ -113,7 +113,7 @@ public class ShujiiIkenshoJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の意見書同意フラグは_設定した値と同じ意見書同意フラグを返す() {
             business = sut.set意見書同意フラグ(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_意見書同意フラグ).build();
-            assertThat(business.get意見書同意フラグ(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_意見書同意フラグ));
+            assertThat(business.is意見書同意フラグ(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_意見書同意フラグ));
         }
 
         @Test
@@ -125,85 +125,85 @@ public class ShujiiIkenshoJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の他科受診の有無は_設定した値と同じ他科受診の有無を返す() {
             business = sut.set他科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_他科受診の有無).build();
-            assertThat(business.get他科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_他科受診の有無));
+            assertThat(business.is他科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_他科受診の有無));
         }
 
         @Test
         public void 戻り値の内科受診の有無は_設定した値と同じ内科受診の有無を返す() {
             business = sut.set内科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_内科受診の有無).build();
-            assertThat(business.get内科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_内科受診の有無));
+            assertThat(business.is内科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_内科受診の有無));
         }
 
         @Test
         public void 戻り値の精神科受診の有無は_設定した値と同じ精神科受診の有無を返す() {
             business = sut.set精神科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_精神科受診の有無).build();
-            assertThat(business.get精神科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_精神科受診の有無));
+            assertThat(business.is精神科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_精神科受診の有無));
         }
 
         @Test
         public void 戻り値の外科受診の有無は_設定した値と同じ外科受診の有無を返す() {
             business = sut.set外科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_外科受診の有無).build();
-            assertThat(business.get外科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_外科受診の有無));
+            assertThat(business.is外科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_外科受診の有無));
         }
 
         @Test
         public void 戻り値の整形外科受診の有無は_設定した値と同じ整形外科受診の有無を返す() {
             business = sut.set整形外科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_整形外科受診の有無).build();
-            assertThat(business.get整形外科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_整形外科受診の有無));
+            assertThat(business.is整形外科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_整形外科受診の有無));
         }
 
         @Test
         public void 戻り値の脳神経外科の有無は_設定した値と同じ脳神経外科の有無を返す() {
             business = sut.set脳神経外科の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_脳神経外科の有無).build();
-            assertThat(business.get脳神経外科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_脳神経外科の有無));
+            assertThat(business.is脳神経外科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_脳神経外科の有無));
         }
 
         @Test
         public void 戻り値の皮膚科受診の有無は_設定した値と同じ皮膚科受診の有無を返す() {
             business = sut.set皮膚科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_皮膚科受診の有無).build();
-            assertThat(business.get皮膚科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_皮膚科受診の有無));
+            assertThat(business.is皮膚科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_皮膚科受診の有無));
         }
 
         @Test
         public void 戻り値の泌尿器科受診の有無は_設定した値と同じ泌尿器科受診の有無を返す() {
             business = sut.set泌尿器科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_泌尿器科受診の有無).build();
-            assertThat(business.get泌尿器科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_泌尿器科受診の有無));
+            assertThat(business.is泌尿器科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_泌尿器科受診の有無));
         }
 
         @Test
         public void 戻り値の婦人科受診の有無は_設定した値と同じ婦人科受診の有無を返す() {
             business = sut.set婦人科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_婦人科受診の有無).build();
-            assertThat(business.get婦人科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_婦人科受診の有無));
+            assertThat(business.is婦人科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_婦人科受診の有無));
         }
 
         @Test
         public void 戻り値の耳鼻咽喉科受診の有無は_設定した値と同じ耳鼻咽喉科受診の有無を返す() {
             business = sut.set耳鼻咽喉科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_耳鼻咽喉科受診の有無).build();
-            assertThat(business.get耳鼻咽喉科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_耳鼻咽喉科受診の有無));
+            assertThat(business.is耳鼻咽喉科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_耳鼻咽喉科受診の有無));
         }
 
         @Test
         public void 戻り値のリハビリテーション科受診の有無は_設定した値と同じリハビリテーション科受診の有無を返す() {
             business = sut.setリハビリテーション科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_リハビリテーション科受診の有無).build();
-            assertThat(business.getリハビリテーション科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_リハビリテーション科受診の有無));
+            assertThat(business.isリハビリテーション科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_リハビリテーション科受診の有無));
         }
 
         @Test
         public void 戻り値の歯科受診の有無は_設定した値と同じ歯科受診の有無を返す() {
             business = sut.set歯科受診の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_歯科受診の有無).build();
-            assertThat(business.get歯科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_歯科受診の有無));
+            assertThat(business.is歯科受診の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_歯科受診の有無));
         }
 
         @Test
         public void 戻り値の眼科の有無は_設定した値と同じ眼科の有無を返す() {
             business = sut.set眼科の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_眼科の有無).build();
-            assertThat(business.get眼科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_眼科の有無));
+            assertThat(business.is眼科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_眼科の有無));
         }
 
         @Test
         public void 戻り値のその他受診科の有無は_設定した値と同じその他受診科の有無を返す() {
             business = sut.setその他受診科の有無(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_その他受診科の有無).build();
-            assertThat(business.getその他受診科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_その他受診科の有無));
+            assertThat(business.isその他受診科の有無(), is(DbT5302ShujiiIkenshoJohoEntityGenerator.DEFAULT_その他受診科の有無));
         }
 
         @Test

@@ -220,7 +220,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 宛先印字対象者フラグ
      */
-    public boolean get宛先印字対象者フラグ() {
+    public boolean is宛先印字対象者フラグ() {
         return entity.getAtesakiInjiTaishoshaFlag();
     }
 
@@ -256,7 +256,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 世帯主フラグ
      */
-    public boolean get世帯主フラグ() {
+    public boolean is世帯主フラグ() {
         return entity.getSetainushiFlag();
     }
 

@@ -5,17 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.KagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.KyufuJissekiGaitoshaListPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -49,8 +41,8 @@ public class KagoMoshitatePanel {
      */
     private void setKagoMoshitateHihokensha(KagoMoshitatePanelDiv panel) {
 
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
-        int rowId = 0;
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
 //                panel.getCommonKaigoshikakuKihonChildDiv2(), 識別コード, rowId);
     }

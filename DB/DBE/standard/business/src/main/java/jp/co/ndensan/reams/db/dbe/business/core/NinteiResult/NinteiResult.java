@@ -70,7 +70,7 @@ public class NinteiResult {
     private final NinteiTorikeshi 認定取消;
     private final TsuchiKubun 通知区分;
     private final RString 認定理由;
-    private final FlexibleDate IF送付年月日;
+    private final FlexibleDate 送付年月日;
 
     /**
      * インスタンスを生成します。
@@ -89,7 +89,7 @@ public class NinteiResult {
      * @param 認定結果異動 認定結果異動
      * @param 認定取消 認定取消
      * @param 認定理由 認定理由
-     * @param IF送付年月日 IF送付年月日
+     * @param 送付年月日 送付年月日
      */
     public NinteiResult(
             ShinseishoKanriNo 申請書管理番号,
@@ -136,7 +136,7 @@ public class NinteiResult {
             NinteiTorikeshi 認定取消,
             TsuchiKubun 通知区分,
             RString 認定理由,
-            FlexibleDate IF送付年月日) {
+            FlexibleDate 送付年月日) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
         this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
@@ -181,7 +181,7 @@ public class NinteiResult {
         this.認定取消 = 認定取消;
         this.通知区分 = 通知区分;
         this.認定理由 = 認定理由;
-        this.IF送付年月日 = IF送付年月日;
+        this.送付年月日 = 送付年月日;
     }
 
     /**
@@ -581,11 +581,11 @@ public class NinteiResult {
     }
 
     /**
-     * IF送付年月日を返します。
+     * 送付年月日を返します。
      *
-     * @return IF送付年月日
+     * @return 送付年月日
      */
-    public FlexibleDate getIF送付年月日() {
-        return IF送付年月日;
+    public FlexibleDate get送付年月日() {
+        return 送付年月日;
     }
 }

@@ -24,7 +24,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付管理票200004を管理するクラスです。
  */
-public class KyufuKanrihyo200004 extends ModelBase<KyufuKanrihyo200004Identifier, DbT3014KyufuKanrihyo200004Entity, KyufuKanrihyo200004> implements Serializable {
+public class KyufuKanrihyo200004 
+extends 
+        ModelBase<KyufuKanrihyo200004Identifier, 
+        DbT3014KyufuKanrihyo200004Entity, KyufuKanrihyo200004> 
+implements Serializable {
 
     private final DbT3014KyufuKanrihyo200004Entity entity;
     private final KyufuKanrihyo200004Identifier id;

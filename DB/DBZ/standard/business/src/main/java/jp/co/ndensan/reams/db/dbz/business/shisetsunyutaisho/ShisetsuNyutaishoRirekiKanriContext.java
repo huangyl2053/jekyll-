@@ -37,7 +37,10 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
     private final Optional<ShisetsuNyutaishoModel> 次履歴;
     private final IItemList<ShisetsuNyutaishoModel> 全履歴;
 
-    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴, IItemList<ShisetsuNyutaishoModel> 全履歴) {
+    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, 
+            Optional<ShisetsuNyutaishoModel> 前履歴, 
+            Optional<ShisetsuNyutaishoModel> 次履歴, 
+            IItemList<ShisetsuNyutaishoModel> 全履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -45,7 +48,8 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
         this.全履歴 = 全履歴;
     }
 
-    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴) {
+    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, 
+            Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;

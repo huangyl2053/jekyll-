@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求住宅改修を管理するクラスです。
  */
-public class ShokanJutakuKaishu extends ModelBase<ShokanJutakuKaishuIdentifier, DbT3049ShokanJutakuKaishuEntity, ShokanJutakuKaishu> implements Serializable {
+public class ShokanJutakuKaishu
+extends ModelBase<ShokanJutakuKaishuIdentifier,
+        DbT3049ShokanJutakuKaishuEntity, 
+        ShokanJutakuKaishu> implements Serializable {
 
     private final DbT3049ShokanJutakuKaishuEntity entity;
     private final ShokanJutakuKaishuIdentifier id;

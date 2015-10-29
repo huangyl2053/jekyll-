@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費貸付金強制返還を管理するクラスです。
  */
-public class KyufuhiKashitsukeKinKyoseiHenkan extends ModelBase<KyufuhiKashitsukeKinKyoseiHenkanIdentifier, DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity, KyufuhiKashitsukeKinKyoseiHenkan> implements Serializable {
+public class KyufuhiKashitsukeKinKyoseiHenkan 
+extends ModelBase<KyufuhiKashitsukeKinKyoseiHenkanIdentifier,
+        DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity, 
+        KyufuhiKashitsukeKinKyoseiHenkan> implements Serializable {
 
     private final DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity entity;
     private final KyufuhiKashitsukeKinKyoseiHenkanIdentifier id;

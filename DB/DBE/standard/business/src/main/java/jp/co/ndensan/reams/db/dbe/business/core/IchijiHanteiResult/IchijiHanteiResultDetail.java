@@ -92,7 +92,7 @@ public final class IchijiHanteiResultDetail {
     }
 
     /**
-     * 仮一次判定区分を返します
+     * 仮一次判定区分を返します。
      *
      * @return 仮一次判定区分
      */
@@ -261,7 +261,8 @@ public final class IchijiHanteiResultDetail {
         private IchijiHanteiResultSofu 一次判定結果送付状況;
 
         /**
-         * 一次判定結果詳細のBuilderインスタンスを生成します。 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
+         * 一次判定結果詳細のBuilderインスタンスを生成します。
+         * 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
          */
         private Builder() {
             this.運動能力未低下認知症高齢者指標

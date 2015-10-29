@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績特定入所者介護サービス費用を管理するクラスです。
  */
-public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
+public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo 
+extends ModelBase<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier, 
+        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity, 
+        KyufujissekiTokuteiNyushosyaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
     private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;
@@ -752,7 +755,8 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyo extends ModelBase<Kyuf
         private final DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity;
         private final KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id;
 
-        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity, KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id) {
+        private _SerializationProxy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity, 
+                KyufujissekiTokuteiNyushosyaKaigoServiceHiyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

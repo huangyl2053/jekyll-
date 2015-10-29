@@ -41,7 +41,7 @@ public class SearchHihokenshaPanel {
         List<HashMap> ymlData = ymlData();
 
         //TO DO  JutakuData1.xml Read　②
-        String hihokenshaNo = ymlData.get(0).get("hihokenshaNo").toString();
+//        RString hihokenshaNo = new RString(ymlData.get(0).get("hihokenshaNo").toString());
        /////////////////////////////////////////////////////////////////////////////////////////
 
         //TO DO  JutakuData.xml Write　③
@@ -67,7 +67,7 @@ public class SearchHihokenshaPanel {
         List<HashMap> ymlData = ymlData();
 
         //TO DO  JutakuData1.xml Read　②
-        String hihokenshaNo = ymlData.get(0).get("hihokenshaNo").toString();
+//        RString hihokenshaNo = new RString(ymlData.get(0).get("hihokenshaNo").toString());
        /////////////////////////////////////////////////////////////////////////////////////////
 
         //TO DO  JutakuData.xml Write　③
@@ -109,16 +109,16 @@ public class SearchHihokenshaPanel {
         //  for (int i = 1; i < ymlData.size(); i++) {
         HashMap hashMap = ymlData.get(1);
 
-        String hihokenshaNo = hashMap.get("hihokenshaNo").toString(); //被保番号
-        String shikibetsuCode = hashMap.get("shikibetsuCode").toString(); //識別コード
-        String hihokenshaKubun = hashMap.get("hihokenshaKubun").toString(); //被保険者区分
-        String shimeiAndKanaShimsei = hashMap.get("shimeiAndKanaShimsei").toString(); //氏名
-        String gender = hashMap.get("gender").toString(); //性別
-        String birthDay = hashMap.get("birthDay").toString();//生年月日
-        String yubinNo = hashMap.get("yubinNo").toString(); //郵便番号
-        String jusho = hashMap.get("jusho").toString(); // 住所
-        String juminShubetsu = hashMap.get("yubinNo").toString(); //住民種別
-        String setaiCode = hashMap.get("setaiCode").toString(); //世帯コード
+        RString hihokenshaNo = new RString(hashMap.get("hihokenshaNo").toString()); //被保番号
+        RString shikibetsuCode = new RString(hashMap.get("shikibetsuCode").toString()); //識別コード
+        RString hihokenshaKubun = new RString(hashMap.get("hihokenshaKubun").toString()); //被保険者区分
+        RString shimeiAndKanaShimsei = new RString(hashMap.get("shimeiAndKanaShimsei").toString()); //氏名
+        RString gender = new RString(hashMap.get("gender").toString()); //性別
+        RString birthDay = new RString(hashMap.get("birthDay").toString()); //生年月日
+        RString yubinNo = new RString(hashMap.get("yubinNo").toString()); //郵便番号
+        RString jusho = new RString(hashMap.get("jusho").toString()); // 住所
+        RString juminShubetsu = new RString(hashMap.get("yubinNo").toString()); //住民種別
+        RString setaiCode = new RString(hashMap.get("setaiCode").toString()); //世帯コード
 /////////////////////////////////////////////////////////////////////////////////////////
 
         dgSearchResult_Row item;
@@ -144,16 +144,16 @@ public class SearchHihokenshaPanel {
     /*
      * 引数を元にデータグリッド内に挿入する個人データを作成します。
      */
-    private dgSearchResult_Row createRowSearchHihokenshaiListData(String 被保番号,
-            String 識別コード,
-            String 被保険者区分,
-            String 氏名,
-            String 性別,
-            String 生年月日,
-            String 郵便番号,
-            String 住所,
-            String 住民種別,
-            String 世帯コード) {
+    private dgSearchResult_Row createRowSearchHihokenshaiListData(RString 被保番号,
+            RString 識別コード,
+            RString 被保険者区分,
+            RString 氏名,
+            RString 性別,
+            RString 生年月日,
+            RString 郵便番号,
+            RString 住所,
+            RString 住民種別,
+            RString 世帯コード) {
 
         dgSearchResult_Row rowHihokenshaiListData;
         rowHihokenshaiListData = new dgSearchResult_Row(
@@ -173,16 +173,16 @@ public class SearchHihokenshaPanel {
                 RString.EMPTY
         );
 
-        rowHihokenshaiListData.setHihokenshaNo(new RString(被保番号));
-        rowHihokenshaiListData.setShikibetsuCode(new RString(識別コード));
-        rowHihokenshaiListData.setHihokenshaKubun(new RString(被保険者区分));
-        rowHihokenshaiListData.setShimeiAndKanaShimsei(new RString(氏名));
-        rowHihokenshaiListData.setGender(new RString(性別));
-        rowHihokenshaiListData.getBirthDay().setValue(new RDate(生年月日));
-        rowHihokenshaiListData.setYubinNo(new RString(郵便番号));
-        rowHihokenshaiListData.setJusho(new RString(住所));
-        rowHihokenshaiListData.setKojinNo(new RString(住民種別));
-        rowHihokenshaiListData.setSetaiCode(new RString(世帯コード));
+        rowHihokenshaiListData.setHihokenshaNo(被保番号);
+        rowHihokenshaiListData.setShikibetsuCode(識別コード);
+        rowHihokenshaiListData.setHihokenshaKubun(被保険者区分);
+        rowHihokenshaiListData.setShimeiAndKanaShimsei(氏名);
+        rowHihokenshaiListData.setGender(性別);
+        rowHihokenshaiListData.getBirthDay().setValue(new RDate(生年月日.toString()));
+        rowHihokenshaiListData.setYubinNo(郵便番号);
+        rowHihokenshaiListData.setJusho(住所);
+        rowHihokenshaiListData.setKojinNo(住民種別);
+        rowHihokenshaiListData.setSetaiCode(世帯コード);
 
         return rowHihokenshaiListData;
 

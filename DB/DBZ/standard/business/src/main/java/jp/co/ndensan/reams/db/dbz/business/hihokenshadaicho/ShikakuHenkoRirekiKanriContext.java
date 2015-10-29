@@ -65,7 +65,10 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
      * @param 前履歴 前履歴
      * @param 次履歴 次履歴
      */
-    public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state, Optional<DbT1001HihokenshaDaichoEntity> 前履歴, Optional<DbT1001HihokenshaDaichoEntity> 次履歴) {
+    public ShikakuHenkoRirekiKanriContext(
+            ViewExecutionStatus state, 
+            Optional<DbT1001HihokenshaDaichoEntity> 前履歴, 
+            Optional<DbT1001HihokenshaDaichoEntity> 次履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;

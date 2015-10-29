@@ -22,7 +22,7 @@ public class ShujiiIryoKikanData {
 
     private static final RString FILE_NAME = new RString("IryoKikanDialog/IryoKikanList.yml");
 
-    public static class IryoKikan {
+    public static final class IryoKikan {
 
         public static final IryoKikan EMPTY;
 

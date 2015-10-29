@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.relate;
 
-import static java.nio.channels.spi.AsynchronousChannelProvider.provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,10 +27,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuTodokedeDa
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KyotakuKeikakuJigyoshaSakuseiManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
@@ -291,9 +287,9 @@ public class KyotakuKeikakuTodokedeManagerTest {
             KyotakuKeikakuTodokede 居宅給付計画届出 = new KyotakuKeikakuTodokede(主キー1, 主キー2, new Decimal(0));
             return 居宅給付計画届出.createBuilderForEdit()
                     // 居宅給付計画事業者作成
-                    .setKyotakuKeikakuJigyoshaSakusei(createKyotakuKeikakuJigyoshaSakusei(主キー1, 主キー2))
+                    .setKyotakuKeikakuJigyosha(createKyotakuKeikakuJigyoshaSakusei(主キー1, 主キー2))
                     // 居宅給付計画自己作成
-                    .setKyotakuKeikakuJikoSakusei(createKyotakuKeikakuJikoSakusei(主キー1, 主キー2))
+                    .setKyotakuKeikakuJiko(createKyotakuKeikakuJikoSakusei(主キー1, 主キー2))
                     .build();
         }
 
@@ -348,9 +344,9 @@ public class KyotakuKeikakuTodokedeManagerTest {
             居宅給付計画届出 = 居宅給付計画届出.createBuilderForEdit()
                     .set暫定区分(new RString("1")) // TODO 任意項目の値を変更してください。
                     // 居宅給付計画事業者作成
-                    .setKyotakuKeikakuJigyoshaSakusei(KyotakuKeikakuJigyoshaSakusei)
+                    .setKyotakuKeikakuJigyosha(KyotakuKeikakuJigyoshaSakusei)
                     // 居宅給付計画自己作成
-                    .setKyotakuKeikakuJikoSakusei(KyotakuKeikakuJikoSakusei)
+                    .setKyotakuKeikakuJiko(KyotakuKeikakuJikoSakusei)
                     .build();
             return 居宅給付計画届出.modified();
         }

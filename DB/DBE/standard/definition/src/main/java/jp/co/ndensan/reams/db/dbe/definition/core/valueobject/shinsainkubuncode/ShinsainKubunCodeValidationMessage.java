@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShinsainKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ShinsainKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShinsainKubunCodeValidationMessage implements IValidationMessage {
     public enum ShinsainKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "審査員区分コードを指定してください。");
         private final int no;

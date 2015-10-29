@@ -8,22 +8,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001StateName.該当者一覧;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleYearOperator;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
-import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  * 対象者検索のコントローラークラスです。（賦課系）
@@ -32,9 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
  */
 public class FukaTaishoshaSearch {
 
-    private static final ISearchCondition 条件無 = null;
-    private static final int 最近処理者検索数 = 1;
-
+//    private static final ISearchCondition 条件無 = null;
+//    private static final int 最近処理者検索数 = 1;
     /**
      * 「検索する」ボタンクリック時に呼び出される処理です。
      *
@@ -92,7 +81,7 @@ public class FukaTaishoshaSearch {
      */
     public ResponseData<FukaTaishoshaSearchDiv> onClick_btnSaikinShorishaHyoji(FukaTaishoshaSearchDiv div) {
 
-        ShikibetsuCode 識別コード = new ShikibetsuCode(div.getSearchCondition().getCcdSearchCondition().get最近処理者());
+        // ShikibetsuCode 識別コード = new ShikibetsuCode(div.getSearchCondition().getCcdSearchCondition().get最近処理者());
         //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
 //        IShikibetsuTaishoGyomuHanteiKey 業務判定キー
 //                = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
@@ -107,13 +96,12 @@ public class FukaTaishoshaSearch {
         return ResponseDatas.createSettingDataTo(div);
     }
 
-    private void set賦課年度(FukaTaishoshaSearchDiv div) {
-        boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
-        div.getGaitoshaList().getTxtFukanendo().setVisible(!is全年度);
-        div.getGaitoshaList().getTxtFukanendo().setDisplayNone(is全年度);
-        div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(div.getSearchCondition().getCcdSearchCondition().get賦課年度().toString()));
-    }
-
+//    private void set賦課年度(FukaTaishoshaSearchDiv div) {
+//        boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
+//        div.getGaitoshaList().getTxtFukanendo().setVisible(!is全年度);
+//        div.getGaitoshaList().getTxtFukanendo().setDisplayNone(is全年度);
+//        div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(div.getSearchCondition().getCcdSearchCondition().get賦課年度().toString()));
+//    }
 //    private SearchResult<FukaTaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
 //        TaishoshaFinder finder = new TaishoshaFinder();
 //TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
@@ -121,51 +109,49 @@ public class FukaTaishoshaSearch {
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
 //        return finder.get賦課対象者(get介護条件(div, menu), get介護除外条件(div, menu), div.get宛名条件(), div.get最大表示件数());
 //    }
-    private ISearchCondition get介護条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
-
-        List<INewSearchCondition> 条件List = new ArrayList<>();
-
-//        if (div.get被保険者番号() != null) {
-//            INewSearchCondition 被保険者番号条件 = SearchConditionFactory.condition(
-//                    FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, div.get被保険者番号());
-//            if (menu.is(FukaSearchMenuGroup.更正計算系)) {
-//                被保険者番号条件 = SearchConditionFactory.where(被保険者番号条件.or(SearchConditionFactory.condition(
-//                        FukaSearchItem.被保険者台帳_被保険者番号, StringOperator.完全一致, div.get被保険者番号())));
-//            }
-//            条件List.add(被保険者番号条件);
+//    private ISearchCondition get介護条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
+//
+//        List<INewSearchCondition> 条件List = new ArrayList<>();
+//
+////        if (div.get被保険者番号() != null) {
+////            INewSearchCondition 被保険者番号条件 = SearchConditionFactory.condition(
+////                    FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, div.get被保険者番号());
+////            if (menu.is(FukaSearchMenuGroup.更正計算系)) {
+////                被保険者番号条件 = SearchConditionFactory.where(被保険者番号条件.or(SearchConditionFactory.condition(
+////                        FukaSearchItem.被保険者台帳_被保険者番号, StringOperator.完全一致, div.get被保険者番号())));
+////            }
+////            条件List.add(被保険者番号条件);
+////        }
+////        if (div.get通知書番号() != null) {
+////            条件List.add(SearchConditionFactory.condition(
+////                    FukaSearchItem.通知書番号, StringOperator.完全一致, div.get通知書番号()));
+////        }
+////        if (!div.get賦課年度().isMaxOrMin()) {
+////            条件List.add(SearchConditionFactory.condition(
+////                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, div.get賦課年度()));
+////        }
+//        ISearchCondition 介護条件 = null;
+//        for (INewSearchCondition 条件 : 条件List) {
+//            介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
 //        }
-//        if (div.get通知書番号() != null) {
-//            条件List.add(SearchConditionFactory.condition(
-//                    FukaSearchItem.通知書番号, StringOperator.完全一致, div.get通知書番号()));
+//
+//        return 介護条件;
+//    }
+//    private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
+//        List<INewSearchCondition> 条件List = new ArrayList<>();
+//
+//        //TODO 検索ボタン押下時にエラーするためコメントアウト
+////        if (menu.is(FukaSearchMenuGroup.照会系)) {
+////            条件List.add(SearchConditionFactory.condition(
+////                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
+////        }
+//        ISearchCondition 介護条件 = null;
+//        for (INewSearchCondition 条件 : 条件List) {
+//            介護条件 = (介護条件 == null) ? 条件 : 条件.or(介護条件);
 //        }
-//        if (!div.get賦課年度().isMaxOrMin()) {
-//            条件List.add(SearchConditionFactory.condition(
-//                    FukaSearchItem.賦課年度, FlexibleYearOperator.等しい, div.get賦課年度()));
-//        }
-        ISearchCondition 介護条件 = null;
-        for (INewSearchCondition 条件 : 条件List) {
-            介護条件 = (介護条件 == null) ? 条件 : 条件.and(介護条件);
-        }
-
-        return 介護条件;
-    }
-
-    private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
-        List<INewSearchCondition> 条件List = new ArrayList<>();
-
-        //TODO 検索ボタン押下時にエラーするためコメントアウト
-//        if (menu.is(FukaSearchMenuGroup.照会系)) {
-//            条件List.add(SearchConditionFactory.condition(
-//                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
-//        }
-        ISearchCondition 介護条件 = null;
-        for (INewSearchCondition 条件 : 条件List) {
-            介護条件 = (介護条件 == null) ? 条件 : 条件.or(介護条件);
-        }
-
-        return 介護条件;
-    }
-
+//
+//        return 介護条件;
+//    }
 //    private FukaTaishoshaKey create対象者Key(FukaTaishoshaSearchDiv div) {
 //        dgFukaGaitoshaList_Row row = div.getGaitoshaList().getDgFukaGaitoshaList().getClickedItem();
 //        return new FukaTaishoshaKey(

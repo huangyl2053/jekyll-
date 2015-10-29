@@ -193,7 +193,7 @@ public class JigyoKogakuShikyuHanteiKekka
      *
      * @return 再送付フラグ
      */
-    public boolean get再送付フラグ() {
+    public boolean is再送付フラグ() {
         return entity.getSaiSofuFlag();
     }
 
@@ -202,7 +202,7 @@ public class JigyoKogakuShikyuHanteiKekka
      *
      * @return 判定結果送付不要フラグ
      */
-    public boolean get判定結果送付不要フラグ() {
+    public boolean is判定結果送付不要フラグ() {
         return entity.getHanteiKekkaSofuFuyoFlag();
     }
 

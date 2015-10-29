@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class KanryoDialog {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div KanryoDialogDiv
      * @return ResponseData
@@ -25,7 +25,7 @@ public class KanryoDialog {
     }
 
     /**
-     * onClick btnClose
+     * onClick btnClose。
      *
      * @param div KanryoDialogDiv
      * @return ResponseData

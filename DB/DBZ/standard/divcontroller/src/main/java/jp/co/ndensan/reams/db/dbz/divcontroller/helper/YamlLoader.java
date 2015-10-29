@@ -152,9 +152,9 @@ public final class YamlLoader {
 
     private Object load(RString fileName) {
         InputStream input = null;
-        String urlHeader = ((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader();
+        RString urlHeader = new RString(((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader());
         try {
-            URL url = new URL(urlHeader.concat(rootPath.toString()).concat(fileName.toString()));
+            URL url = new URL(urlHeader.concat(rootPath).concat(fileName).toString());
             input = url.openStream();
         } catch (FileNotFoundException ex) {
             throw new SystemException("yamlが見つかりません。:" + fileName.toString(), ex);

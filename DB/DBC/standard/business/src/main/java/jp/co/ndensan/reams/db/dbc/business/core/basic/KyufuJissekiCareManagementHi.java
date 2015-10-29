@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績ケアマネジメント費を管理するクラスです。
  */
-public class KyufuJissekiCareManagementHi extends ModelBase<KyufuJissekiCareManagementHiIdentifier, DbT3031KyufuJissekiCareManagementHiEntity, KyufuJissekiCareManagementHi> implements Serializable {
+public class KyufuJissekiCareManagementHi 
+extends ModelBase<KyufuJissekiCareManagementHiIdentifier, 
+        DbT3031KyufuJissekiCareManagementHiEntity, 
+        KyufuJissekiCareManagementHi> implements Serializable {
 
     private final DbT3031KyufuJissekiCareManagementHiEntity entity;
     private final KyufuJissekiCareManagementHiIdentifier id;

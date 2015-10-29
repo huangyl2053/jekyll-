@@ -12,11 +12,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060000.KyufuKanrihyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0060000.dgKyufuKanrihyoList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 給付管理票情報照会の検索Panelのコントロールクラスです。
@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * @author N8187 久保田 英男
  */
 public class KyufuKanrihyoList {
+
+    private static final int LENGTH_3 = 3;
 
     private List<HashMap> getYaml() {
         return YamlLoader.DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoList.yml"));
@@ -67,7 +69,7 @@ public class KyufuKanrihyoList {
     private List<dgKyufuKanrihyoList_Row> bindYamlData(List<dgKyufuKanrihyoList_Row> dgList) {
         dgList.clear();
         Button btn = new Button();
-        for (int index = 0; index < 3; index++) {
+        for (int index = 0; index < LENGTH_3; index++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(index));
             dgList.add(create給付管理票(btn,
                     cg.getAsRString("対象年月"),

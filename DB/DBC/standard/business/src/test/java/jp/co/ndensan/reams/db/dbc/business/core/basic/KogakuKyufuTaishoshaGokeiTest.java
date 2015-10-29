@@ -20,13 +20,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KogakuKyufuTaishoshaGokei}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KogakuKyufuTaishoshaGokeiTest extends DbcTestBase {
 
     private static DbT3055KogakuKyufuTaishoshaGokeiEntity KogakuKyufuTaishoshaGokeiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -177,22 +175,22 @@ public class KogakuKyufuTaishoshaGokeiTest extends DbcTestBase {
 
         @Test
         public void get境界層対象者フラグは_entityが持つ境界層対象者フラグを返す() {
-            assertThat(sut.get境界層対象者フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getKyokaisoTaishoshaFlag()));
+            assertThat(sut.is境界層対象者フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getKyokaisoTaishoshaFlag()));
         }
 
         @Test
         public void get社会福祉法人軽減対象フラグは_entityが持つ社会福祉法人軽減対象フラグを返す() {
-            assertThat(sut.get社会福祉法人軽減対象フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getHojinKeigenTaishoFlag()));
+            assertThat(sut.is社会福祉法人軽減対象フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getHojinKeigenTaishoFlag()));
         }
 
         @Test
         public void get高額対象外フラグは_entityが持つ高額対象外フラグを返す() {
-            assertThat(sut.get高額対象外フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getKogakuTaishoGaiFlag()));
+            assertThat(sut.is高額対象外フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getKogakuTaishoGaiFlag()));
         }
 
         @Test
         public void get自動償還対象フラグは_entityが持つ自動償還対象フラグを返す() {
-            assertThat(sut.get自動償還対象フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getJidoShokanTaishoFlag()));
+            assertThat(sut.is自動償還対象フラグ(), is(KogakuKyufuTaishoshaGokeiEntity.getJidoShokanTaishoFlag()));
         }
     }
 

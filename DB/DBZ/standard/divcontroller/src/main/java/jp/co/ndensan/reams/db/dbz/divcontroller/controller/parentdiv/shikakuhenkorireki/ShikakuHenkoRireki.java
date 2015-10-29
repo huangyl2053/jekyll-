@@ -5,24 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.shikakuhenkorireki;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Add;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Delete;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus.Modify;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.dgHenko_Row;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
@@ -46,12 +39,12 @@ public class ShikakuHenkoRireki {
     public ResponseData<ShikakuHenkoRirekiDiv> load(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
 //        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         //TODO n8178 城間篤人 修正の必要有り。 2015年2月末まで
-        LasdecCode lasdecCode = new LasdecCode("123456");
-        LasdecCode kyuLasdecCode = new LasdecCode("123456");
+//        LasdecCode lasdecCode = new LasdecCode("123456");
+//        LasdecCode kyuLasdecCode = new LasdecCode("123456");
 
-        HokenshaJohoDisplayMode mode = ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi;
+        //HokenshaJohoDisplayMode mode = ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi;
         if (henkoRirekiDiv.getMode_HokenshaJohoDisplayMode() != null) {
-            mode = henkoRirekiDiv.getMode_HokenshaJohoDisplayMode();
+            henkoRirekiDiv.getMode_HokenshaJohoDisplayMode();
         }
 
         //TODO n8187 久保田 画面遷移のためデータ取得処理を一時的にコメントアウト
@@ -261,20 +254,20 @@ public class ShikakuHenkoRireki {
 
         RString rowState = henkoRirekiDiv.getInputMode();
 
-        Optional<HihokenshaDaicho> 前履歴;
-        Optional<HihokenshaDaicho> 次履歴;
-        IItemList<HihokenshaDaicho> 全履歴;
+//        Optional<HihokenshaDaicho> 前履歴;
+//        Optional<HihokenshaDaicho> 次履歴;
+//        IItemList<HihokenshaDaicho> 全履歴;
         HihokenshaDaicho select最終更新被保険者 = null;
         //TODO n3331 modelパッケージ廃止に伴うエラー解消のためコメントアウト
 //        HihokenshaDaicho select最終更新被保険者 = new HihokenshaDaicho();
-        FlexibleDate selected資格取得日 = FlexibleDate.EMPTY;
-        FlexibleDate selected資格喪失日 = FlexibleDate.EMPTY;
+//        FlexibleDate selected資格取得日 = FlexibleDate.EMPTY;
+//        FlexibleDate selected資格喪失日 = FlexibleDate.EMPTY;
         switch (ViewExecutionStatus.toValue(rowState)) {
 
             case Add:
-                前履歴 = Optional.empty();
-                次履歴 = Optional.empty();
-                全履歴 = ItemList.empty();
+                Optional.empty();
+                Optional.empty();
+                ItemList.empty();
 //                全履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報();
                 break;
             case Modify:
@@ -282,45 +275,44 @@ public class ShikakuHenkoRireki {
 
                 if (rowIndex != 0) {
                     int rdx = rowIndex - 1;
-                    dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
-                    次履歴 = Optional.empty();
+                    //dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
+                    Optional.empty();
 //                    次履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
 //                            .filter(ShikakuHenkoMapper.createKey(row))
 //                            .findJustOne();
                 } else {
-                    次履歴 = Optional.empty();
+                    Optional.empty();
                 }
 
                 if (rowIndex + 1 <= henkoRirekiDiv.getDgHenko().getDataSource().size() - 1) {
                     int rdx = rowIndex + 1;
-                    dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
-                    前履歴 = Optional.empty();
+                    //dgHenko_Row row = henkoRirekiDiv.getDgHenko().getDataSource().get(rdx);
+                    Optional.empty();
 //                    前履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報()
 //                            .filter(ShikakuHenkoMapper.createKey(row))
 //                            .findJustOne();
                 } else {
-                    前履歴 = Optional.empty();
+                    Optional.empty();
                 }
 
-                全履歴 = ItemList.empty();
+                ItemList.empty();
 //                select最終更新被保険者 = createHandlerOf(henkoRirekiDiv).get更新前選択被保険者台帳();
-                selected資格取得日 = select最終更新被保険者.get資格取得年月日();
-                selected資格喪失日 = select最終更新被保険者.get資格喪失年月日();
+                select最終更新被保険者.get資格取得年月日();
+                select最終更新被保険者.get資格喪失年月日();
 
                 break;
             case Delete:
             default:
-                前履歴 = Optional.empty();
-                次履歴 = Optional.empty();
-                全履歴 = ItemList.empty();
+                Optional.empty();
+                Optional.empty();
+                ItemList.empty();
                 break;
         }
 
-        List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
+       // List<DbT1001HihokenshaDaichoEntity> 全履歴modelList = new ArrayList<>();
 //        for (HihokenshaDaichoModel model : 全履歴) {
 //            全履歴modelList.add(model.getEntity());
 //        }
-
 //        ShikakuHenkoRirekiKanriContext context = new ShikakuHenkoRirekiKanriContext(
 //                ViewExecutionStatus.toValue(rowState),
 //                Optional.ofNullable(前履歴.get().getEntity()),
@@ -331,10 +323,10 @@ public class ShikakuHenkoRireki {
         henkoRirekiDiv.setLatestShutokubi(new RString("20140103"));
         henkoRirekiDiv.setLatestKoshinbi(new RString("20190101"));
         henkoRirekiDiv.setIchigoShikakuShutokubi(new RString("20190101"));
-        RString 最新喪失日 = henkoRirekiDiv.getLatestSoshitsubi();
-        RString 最新取得日 = henkoRirekiDiv.getLatestShutokubi();
-        RString 最新更新日 = henkoRirekiDiv.getLatestKoshinbi();
-        RString 一号資格取得日 = henkoRirekiDiv.getIchigoShikakuShutokubi();
+//        RString 最新喪失日 = henkoRirekiDiv.getLatestSoshitsubi();
+//        RString 最新取得日 = henkoRirekiDiv.getLatestShutokubi();
+//        RString 最新更新日 = henkoRirekiDiv.getLatestKoshinbi();
+//        RString 一号資格取得日 = henkoRirekiDiv.getIchigoShikakuShutokubi();
 
 //        pairs.add(ShikakuHenkoRirekiValidationHelper.validate資格変更(
 //                henkoRirekiDiv.getTxtHenkoDate(), henkoRirekiDiv.getTxtHenkoTodokedeDate(), selected資格取得日, selected資格喪失日,

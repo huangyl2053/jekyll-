@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShinsakaiKaisaiNoValidationMessage implements IValidationMessage {
 
     /**
-     * 番号がNullであること
+     * 番号がNullであること。
      */
     番号がNullであること(ShinsakaiKaisaiNoErrorMessage.番号がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShinsakaiKaisaiNoValidationMessage implements IValidationMessage {
     public enum ShinsakaiKaisaiNoErrorMessage implements IMessageGettable {
 
         /**
-         * 番号がNullであること
+         * 番号がNullであること。
          */
         番号がNullであること(1, "審査会開催番号を指定してください。");
         private final int no;

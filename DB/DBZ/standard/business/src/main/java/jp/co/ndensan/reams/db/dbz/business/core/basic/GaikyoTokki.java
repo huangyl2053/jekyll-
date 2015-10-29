@@ -269,7 +269,7 @@ public class GaikyoTokki extends ParentModelBase<GaikyoTokkiIdentifier, DbT5206G
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5206GaikyoTokkiEntity entity;
         private final GaikyoTokkiIdentifier id;
 

@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定意見書イメージ情報を管理するクラスです。
  */
-public class IkenshoImageJoho extends ParentModelBase<IkenshoImageJohoIdentifier, DbT5305IkenshoImageJohoEntity, IkenshoImageJoho> implements Serializable {
+public class IkenshoImageJoho extends 
+        ParentModelBase<IkenshoImageJohoIdentifier, 
+        DbT5305IkenshoImageJohoEntity, IkenshoImageJoho> implements Serializable {
 
     private final DbT5305IkenshoImageJohoEntity entity;
     private final IkenshoImageJohoIdentifier id;
@@ -225,7 +227,7 @@ public class IkenshoImageJoho extends ParentModelBase<IkenshoImageJohoIdentifier
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5305IkenshoImageJohoEntity entity;
         private final IkenshoImageJohoIdentifier id;
 

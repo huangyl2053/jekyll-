@@ -586,7 +586,7 @@ public class FukaAlive extends ParentModelBase<FukaAliveIdentifier, DbV2002FukaE
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV2002FukaEntity entity;
         private final FukaAliveIdentifier id;
 

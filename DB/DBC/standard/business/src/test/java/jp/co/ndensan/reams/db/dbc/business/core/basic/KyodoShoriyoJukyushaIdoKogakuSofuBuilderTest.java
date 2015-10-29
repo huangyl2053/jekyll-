@@ -121,25 +121,25 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の老齢福祉年金受給有フラグは_設定した値と同じ老齢福祉年金受給有フラグを返す() {
             business = sut.set老齢福祉年金受給有フラグ(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_老齢福祉年金受給有フラグ).build();
-            assertThat(business.get老齢福祉年金受給有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_老齢福祉年金受給有フラグ));
+            assertThat(business.is老齢福祉年金受給有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_老齢福祉年金受給有フラグ));
         }
 
         @Test
         public void 戻り値の利用者負担第２段階有フラグは_設定した値と同じ利用者負担第２段階有フラグを返す() {
             business = sut.set利用者負担第２段階有フラグ(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_利用者負担第２段階有フラグ).build();
-            assertThat(business.get利用者負担第２段階有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_利用者負担第２段階有フラグ));
+            assertThat(business.is利用者負担第２段階有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_利用者負担第２段階有フラグ));
         }
 
         @Test
         public void 戻り値の支給申請書出力有フラグは_設定した値と同じ支給申請書出力有フラグを返す() {
             business = sut.set支給申請書出力有フラグ(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_支給申請書出力有フラグ).build();
-            assertThat(business.get支給申請書出力有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_支給申請書出力有フラグ));
+            assertThat(business.is支給申請書出力有フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_支給申請書出力有フラグ));
         }
 
         @Test
         public void 戻り値の訂正連絡票フラグは_設定した値と同じ訂正連絡票フラグを返す() {
             business = sut.set訂正連絡票フラグ(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_訂正連絡票フラグ).build();
-            assertThat(business.get訂正連絡票フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_訂正連絡票フラグ));
+            assertThat(business.is訂正連絡票フラグ(), is(DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntityGenerator.DEFAULT_訂正連絡票フラグ));
         }
 
         @Test

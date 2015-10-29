@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績福祉用具販売費を管理するクラスです。
  */
-public class KyufujissekiFukushiYoguHanbaihi extends ModelBase<KyufujissekiFukushiYoguHanbaihiIdentifier, DbT3026KyufujissekiFukushiYoguHanbaihiEntity, KyufujissekiFukushiYoguHanbaihi> implements Serializable {
+public class KyufujissekiFukushiYoguHanbaihi 
+extends ModelBase<KyufujissekiFukushiYoguHanbaihiIdentifier, 
+        DbT3026KyufujissekiFukushiYoguHanbaihiEntity,
+        KyufujissekiFukushiYoguHanbaihi> implements Serializable {
 
     private final DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity;
     private final KyufujissekiFukushiYoguHanbaihiIdentifier id;

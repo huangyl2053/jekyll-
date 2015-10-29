@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績住宅改修費を管理するクラスです。
  */
-public class KyufujissekiJutakuKaishuhi extends ModelBase<KyufujissekiJutakuKaishuhiIdentifier, DbT3027KyufujissekiJutakuKaishuhiEntity, KyufujissekiJutakuKaishuhi> implements Serializable {
+public class KyufujissekiJutakuKaishuhi 
+extends ModelBase<KyufujissekiJutakuKaishuhiIdentifier, 
+        DbT3027KyufujissekiJutakuKaishuhiEntity, 
+        KyufujissekiJutakuKaishuhi> implements Serializable {
 
     private final DbT3027KyufujissekiJutakuKaishuhiEntity entity;
     private final KyufujissekiJutakuKaishuhiIdentifier id;

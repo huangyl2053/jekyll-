@@ -19,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費貸付金延滞利息計算を管理するクラスです。
  */
-public class KyufuhiKashitsukekinEntaiRisokuKeisan extends ModelBase<KyufuhiKashitsukekinEntaiRisokuKeisanIdentifier, DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity, KyufuhiKashitsukekinEntaiRisokuKeisan> implements Serializable {
+public class KyufuhiKashitsukekinEntaiRisokuKeisan 
+extends ModelBase<KyufuhiKashitsukekinEntaiRisokuKeisanIdentifier, 
+        DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity, 
+        KyufuhiKashitsukekinEntaiRisokuKeisan> implements Serializable {
 
     private final DbT3090KyufuhiKashitsukekinEntaiRisokuKeisanEntity entity;
     private final KyufuhiKashitsukekinEntaiRisokuKeisanIdentifier id;

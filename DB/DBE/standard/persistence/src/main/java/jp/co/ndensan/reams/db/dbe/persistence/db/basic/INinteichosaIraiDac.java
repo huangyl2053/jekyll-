@@ -42,6 +42,6 @@ public interface INinteichosaIraiDac extends IInsertable<DbT5006NinteichosaIraiJ
     List<DbT5006NinteichosaIraiJohoEntity> select(ShinseishoKanriNo 申請書管理番号);
 
     @Override
-    public int insertOrUpdate(DbT5006NinteichosaIraiJohoEntity data);
+    int insertOrUpdate(DbT5006NinteichosaIraiJohoEntity data);
 
 }

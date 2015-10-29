@@ -6,18 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
@@ -89,12 +83,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         return ResponseData.of(panel).respond();
     }
 
-    private void setSearchCondition(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
+//    private void setSearchCondition(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
 
 //        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 //        panel.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setFromValue(cg.getAsRDate("検索開始日"));
 //        panel.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setToValue(cg.getAsRDate("検索終了日"));
-    }
+//    }
 
     private void set審査日(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
 //        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(RDate.getNowDate());
@@ -119,7 +113,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     private static dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row() {
 
         //TODO n3317塚田　遷移させるために空のリストを作成
-        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
-        return row;
+//        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
+        return new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
     }
 }

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.JogaiShinsakaiIin.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteiShinsei.NinteiShinseiJohoValidate;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIinKoza;
@@ -33,9 +32,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.SinseiRiyuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.dgShisetsuRereki_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.searchResultOfHihokensha.dgSearchResult_Row;
@@ -57,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -86,7 +82,7 @@ public class ShinseiJohoInput {
     }
 
     /**
-     * onStart
+     * onStart。
      *
      * @param div ShinseiJohoInputDiv
      * @param hihokenshaDiv HihokenshaOutlineDiv
@@ -153,7 +149,7 @@ public class ShinseiJohoInput {
     }
 
     /**
-     * バリデーションをします
+     * バリデーションをします。
      *
      * @param div ShinseiJohoInputDiv
      * @param hihokenshaDiv
@@ -506,13 +502,13 @@ public class ShinseiJohoInput {
     private static final class LatestNinteiResult implements IPanelAdapter {
 
         private final LatestNinteiResultDiv div;
-        private final DropDownList shiseijiKubun;
+//        private final DropDownList shiseijiKubun;
         private final HihokenshaShujiiDiv shujii;
         private final NinteichosainAdvanceEntryDiv chosain;
 
         public LatestNinteiResult(ShinseiJohoInputDiv div) {
             this.div = div.getLatestNinteiResult();
-            this.shiseijiKubun = div.getDdlShinseiKubunShinseiji();
+//            this.shiseijiKubun = div.getDdlShinseiKubunShinseiji();
             this.shujii = div.getHihokenshaShujii();
             this.chosain = div.getNinteichosainAdvanceEntry();
         }
@@ -766,7 +762,7 @@ public class ShinseiJohoInput {
 
     private static final class ShichosonRenrakuJiko implements IPanelAdapter {
 
-        ShichosonRenrakuJikoDiv div;
+        private final ShichosonRenrakuJikoDiv div;
 
         ShichosonRenrakuJiko(ShinseiJohoInputDiv shiseiJohoDiv) {
             this.div = shiseiJohoDiv.getShichosonRenrakuJiko();
@@ -796,9 +792,8 @@ public class ShinseiJohoInput {
         private final KankeiIinDiv div;
 
         //TODO n8178 城間篤人 固定値で必要な項目を用意。本来は基本情報から取得すべきで、修正が必要 2014年9月
-        private final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("012345"));
-        private final HihokenshaNo kaigoHihokenshaNo = new HihokenshaNo(new RString("0123456789"));
-
+//        private final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("012345"));
+//        private final HihokenshaNo kaigoHihokenshaNo = new HihokenshaNo(new RString("0123456789"));
         private enum KankeiIinDecideFlag {
 
             ADD("add"), MODIFY("update"), DELETE("delete"), NOT_SELECTED("notSelected");
@@ -1005,9 +1000,8 @@ public class ShinseiJohoInput {
             for (dgKankeiIin_Row row : div.getDgKankeiIin().getDataSource()) {
 
                 //TODO n8178 城間篤人 後日、Div用Mapperに処理を移譲予定 2014年9月
-                JogaiShinsakaiIin jogaiIin = new JogaiShinsakaiIin(shoKisaiHokenshaNo, kaigoHihokenshaNo,
-                        row.getKanriNo().getValue().intValue(), create審査会委員(row.getCode().toString()));
-
+//                JogaiShinsakaiIin jogaiIin = new JogaiShinsakaiIin(shoKisaiHokenshaNo, kaigoHihokenshaNo,
+//                        row.getKanriNo().getValue().intValue(), create審査会委員(row.getCode().toString()));
                 if (row.getRowState().equals(RowState.Added) || row.getRowState().equals(RowState.Modified)) {
 //                    manager.save(jogaiIin);
                 } else if (row.getRowState().equals(RowState.Deleted)) {

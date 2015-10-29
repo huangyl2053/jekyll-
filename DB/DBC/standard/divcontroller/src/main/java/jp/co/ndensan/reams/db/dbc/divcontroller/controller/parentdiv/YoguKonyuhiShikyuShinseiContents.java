@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 福祉用具購入費支給申請
+ * 福祉用具購入費支給申請。
  *
  * @author n8223
  */
 public class YoguKonyuhiShikyuShinseiContents {
 
+    private static final Decimal INDEX_50000 = new Decimal(50000);
     /**
      * 福祉用具購入費支給申請 支給申請内容の初期値をセットします。
      *
@@ -32,7 +33,7 @@ public class YoguKonyuhiShikyuShinseiContents {
         panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtShohinName().setValue(new RString("介護ケア用品　腰掛便座"));
         panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtSeizoJigyosha().setValue(new RString("電算○ｘ介護ケア"));
         panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtHanbaiJigyosha().setValue(new RString("電算福祉センター"));
-        panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtBuyAmount().setValue(new Decimal(50000));
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtBuyAmount().setValue(INDEX_50000);
         panel.getYoguKonyuhiShikyuShinseiSeikyuDetail().getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtHinmokuCode().setValue(new RString("1000000001"));
 
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄 申請者情報

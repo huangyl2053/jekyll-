@@ -21,13 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KogakuShikyuHanteiKekka}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KogakuShikyuHanteiKekkaTest extends DbcTestBase {
 
     private static DbT3057KogakuShikyuHanteiKekkaEntity KogakuShikyuHanteiKekkaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -180,12 +178,12 @@ public class KogakuShikyuHanteiKekkaTest extends DbcTestBase {
 
         @Test
         public void get再送付フラグは_entityが持つ再送付フラグを返す() {
-            assertThat(sut.get再送付フラグ(), is(KogakuShikyuHanteiKekkaEntity.getSaiSofuFlag()));
+            assertThat(sut.is再送付フラグ(), is(KogakuShikyuHanteiKekkaEntity.getSaiSofuFlag()));
         }
 
         @Test
         public void get判定結果送付不要フラグは_entityが持つ判定結果送付不要フラグを返す() {
-            assertThat(sut.get判定結果送付不要フラグ(), is(KogakuShikyuHanteiKekkaEntity.getHanteiKekkaSofuFuyoFlag()));
+            assertThat(sut.is判定結果送付不要フラグ(), is(KogakuShikyuHanteiKekkaEntity.getHanteiKekkaSofuFuyoFlag()));
         }
 
         @Test

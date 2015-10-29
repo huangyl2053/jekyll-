@@ -107,6 +107,6 @@ public class NinteiResultTest extends DbeTestBase {
                 ninteiResult.get認定取消(),
                 ninteiResult.get通知区分(),
                 ninteiResult.get認定理由(),
-                ninteiResult.getIF送付年月日());
+                ninteiResult.get送付年月日());
     }
 }

@@ -21,13 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link JukyushaIdoRenrakuhyo}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class JukyushaIdoRenrakuhyoTest extends DbcTestBase {
 
     private static DbT3001JukyushaIdoRenrakuhyoEntity JukyushaIdoRenrakuhyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -289,7 +287,7 @@ public class JukyushaIdoRenrakuhyoTest extends DbcTestBase {
 
         @Test
         public void get公費負担上限額減額有フラグは_entityが持つ公費負担上限額減額有フラグを返す() {
-            assertThat(sut.get公費負担上限額減額有フラグ(), is(JukyushaIdoRenrakuhyoEntity.getKohiFutanJogenGengakuAriFlag()));
+            assertThat(sut.is公費負担上限額減額有フラグ(), is(JukyushaIdoRenrakuhyoEntity.getKohiFutanJogenGengakuAriFlag()));
         }
 
         @Test
@@ -369,7 +367,7 @@ public class JukyushaIdoRenrakuhyoTest extends DbcTestBase {
 
         @Test
         public void get課税層の特例減額措置対象フラグは_entityが持つ課税層の特例減額措置対象フラグを返す() {
-            assertThat(sut.get課税層の特例減額措置対象フラグ(), is(JukyushaIdoRenrakuhyoEntity.getKaizeisoTokureiGengakuSochiTaishoFlag()));
+            assertThat(sut.is課税層の特例減額措置対象フラグ(), is(JukyushaIdoRenrakuhyoEntity.getKaizeisoTokureiGengakuSochiTaishoFlag()));
         }
 
         @Test
@@ -429,7 +427,7 @@ public class JukyushaIdoRenrakuhyoTest extends DbcTestBase {
 
         @Test
         public void get小多機能居宅介護利用開始月利用有フラグは_entityが持つ小多機能居宅介護利用開始月利用有フラグを返す() {
-            assertThat(sut.get小多機能居宅介護利用開始月利用有フラグ(), is(JukyushaIdoRenrakuhyoEntity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()));
+            assertThat(sut.is小多機能居宅介護利用開始月利用有フラグ(), is(JukyushaIdoRenrakuhyoEntity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag()));
         }
 
         @Test
@@ -474,7 +472,7 @@ public class JukyushaIdoRenrakuhyoTest extends DbcTestBase {
 
         @Test
         public void get訂正連絡票フラグは_entityが持つ訂正連絡票フラグを返す() {
-            assertThat(sut.get訂正連絡票フラグ(), is(JukyushaIdoRenrakuhyoEntity.getTeiseiRenrakuhyoFlag()));
+            assertThat(sut.is訂正連絡票フラグ(), is(JukyushaIdoRenrakuhyoEntity.getTeiseiRenrakuhyoFlag()));
         }
 
         @Test

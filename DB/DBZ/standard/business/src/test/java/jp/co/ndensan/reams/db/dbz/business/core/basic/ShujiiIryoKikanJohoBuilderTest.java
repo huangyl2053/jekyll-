@@ -101,7 +101,7 @@ public class ShujiiIryoKikanJohoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値のFAX番号は_設定した値と同じFAX番号を返す() {
-            business = sut.setFAX番号(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_FAX番号).build();
+            business = sut.setFax番号(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_FAX番号).build();
             assertThat(business.getFAX番号(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_FAX番号));
         }
 
@@ -114,7 +114,7 @@ public class ShujiiIryoKikanJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の状況フラグは_設定した値と同じ状況フラグを返す() {
             business = sut.set状況フラグ(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_状況フラグ).build();
-            assertThat(business.get状況フラグ(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_状況フラグ));
+            assertThat(business.is状況フラグ(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_状況フラグ));
         }
 
     }

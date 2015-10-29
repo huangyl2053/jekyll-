@@ -27,10 +27,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuControlManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -288,7 +285,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
             ChohyoSeigyoKyotsu 帳票制御共通 = new ChohyoSeigyoKyotsu(主キー1, 主キー2);
             return 帳票制御共通.createBuilderForEdit()
                     // 帳票制御共通コントロール
-                    .setChohyoSeigyoKyotsuControl(createChohyoSeigyoKyotsuControl(主キー1, 主キー2))
+                    .setChohyoSeigyoKyotsu(createChohyoSeigyoKyotsuControl(主キー1, 主キー2))
                     // 帳票制御汎用
                     .setChohyoSeigyoHanyo(createChohyoSeigyoHanyo(主キー1, 主キー2))
                     .build();
@@ -344,7 +341,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
             帳票制御共通 = 帳票制御共通.createBuilderForEdit()
                     .setカスタマバーコード使用有無(false) // TODO 任意項目の値を変更してください。
                     // 帳票制御共通コントロール
-                    .setChohyoSeigyoKyotsuControl(ChohyoSeigyoKyotsuControl)
+                    .setChohyoSeigyoKyotsu(ChohyoSeigyoKyotsuControl)
                     // 帳票制御汎用
                     .setChohyoSeigyoHanyo(ChohyoSeigyoHanyo)
                     .build();

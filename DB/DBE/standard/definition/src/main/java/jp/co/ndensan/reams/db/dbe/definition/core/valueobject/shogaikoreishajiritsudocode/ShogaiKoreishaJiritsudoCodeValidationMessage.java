@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShogaiKoreishaJiritsudoCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(ShogaiKoreishaJiritsudoCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShogaiKoreishaJiritsudoCodeValidationMessage implements IValidationM
     public enum ShogaiKoreishaJiritsudoCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "介護事業者番号を指定してください。");
         private final int no;

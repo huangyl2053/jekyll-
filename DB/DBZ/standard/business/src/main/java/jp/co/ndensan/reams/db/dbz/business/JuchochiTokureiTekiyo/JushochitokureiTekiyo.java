@@ -44,11 +44,22 @@ public class JushochitokureiTekiyo extends ShikakuIdoBaseItem<JushochitokureiTek
         return this == NOTHING;
     }
 
-    public FlexibleDate tekiyoDate() {
+    /**
+     * getTekiyoDateを取得します。
+     *
+     * @return tekiyoDate
+     */
+    public FlexibleDate getTekiyoDate() {
         return tekiyoDate;
     }
 
-    public HihokenshaDaicho newestHihokenshaDaicho() {
+    /**
+     * getNewestHihokenshaDaichoを取得します。
+     *
+     * @return newestHihokenshaDaicho
+     */
+    public HihokenshaDaicho getNewestHihokenshaDaicho() {
         return newestHihokenshaDaicho;
     }
+
 }

@@ -25,7 +25,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払支給住宅改修事前申請を管理するクラスです。
  */
-public class ShokanJutakuKaishuJizenShinsei extends ModelBase<ShokanJutakuKaishuJizenShinseiIdentifier, DbT3035ShokanJutakuKaishuJizenShinseiEntity, ShokanJutakuKaishuJizenShinsei> implements Serializable {
+public class ShokanJutakuKaishuJizenShinsei 
+extends ModelBase<ShokanJutakuKaishuJizenShinseiIdentifier, 
+        DbT3035ShokanJutakuKaishuJizenShinseiEntity, 
+        ShokanJutakuKaishuJizenShinsei> implements Serializable {
 
     private final DbT3035ShokanJutakuKaishuJizenShinseiEntity entity;
     private final ShokanJutakuKaishuJizenShinseiIdentifier id;

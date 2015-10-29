@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoEntity> {
 
+    private final RString SHICHOUSON_CODE = new RString("市町村コード");
+    private final RString HIHOKENSHA_NO = new RString("被保険者番号");
     @InjectSession
     private SqlSession session;
     private final DbT1001HihokenshaDaichoDac 被保険者台帳Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
@@ -54,7 +56,7 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
             FlexibleDate 異動日,
             RString 枝番) {
 
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(HIHOKENSHA_NO.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -89,7 +91,7 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
     @Transaction
     public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧(LasdecCode 市町村コード) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(SHICHOUSON_CODE.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
@@ -116,8 +118,8 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
     @Transaction
     public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(SHICHOUSON_CODE.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(HIHOKENSHA_NO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
@@ -144,8 +146,8 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
     @Transaction
     public IItemList<DbT1001HihokenshaDaichoEntity> select被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(SHICHOUSON_CODE.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(HIHOKENSHA_NO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
@@ -173,7 +175,7 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
     @Transaction
     public Optional<DbT1001HihokenshaDaichoEntity> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage(SHICHOUSON_CODE.toString()));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -195,7 +197,7 @@ public class HihokenshaDaichoDac implements IModifiable<DbT1001HihokenshaDaichoE
     @Transaction
     public Optional<DbT1001HihokenshaDaichoEntity> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
 
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(HIHOKENSHA_NO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().

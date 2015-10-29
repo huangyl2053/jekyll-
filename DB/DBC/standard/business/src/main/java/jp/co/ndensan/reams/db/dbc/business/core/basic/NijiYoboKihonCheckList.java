@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 二次予防基本チェックリストを管理するクラスです。
  */
-public class NijiYoboKihonCheckList extends ModelBase<NijiYoboKihonCheckListIdentifier, DbT3101NijiYoboKihonCheckListEntity, NijiYoboKihonCheckList> implements Serializable {
+public class NijiYoboKihonCheckList 
+extends ModelBase<NijiYoboKihonCheckListIdentifier, 
+        DbT3101NijiYoboKihonCheckListEntity, 
+        NijiYoboKihonCheckList> implements Serializable {
 
     private final DbT3101NijiYoboKihonCheckListEntity entity;
     private final NijiYoboKihonCheckListIdentifier id;
@@ -415,19 +418,19 @@ public class NijiYoboKihonCheckList extends ModelBase<NijiYoboKihonCheckListIden
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public NijiYoboKihonCheckList modifiedModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<NijiYoboNiniCheckList> getNijiYoboNiniCheckListList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<NijiYoboCheckListHanteiKekka> getNijiYoboCheckListHanteiKekkaList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {

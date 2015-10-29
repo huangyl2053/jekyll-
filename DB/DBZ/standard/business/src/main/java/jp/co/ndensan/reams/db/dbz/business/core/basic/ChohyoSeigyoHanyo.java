@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 帳票制御汎用を管理するクラスです。
  */
-public class ChohyoSeigyoHanyo extends ModelBase<ChohyoSeigyoHanyoIdentifier, DbT7067ChohyoSeigyoHanyoEntity, ChohyoSeigyoHanyo> implements Serializable {
+public class ChohyoSeigyoHanyo extends
+        ModelBase<ChohyoSeigyoHanyoIdentifier, DbT7067ChohyoSeigyoHanyoEntity, ChohyoSeigyoHanyo>
+        implements Serializable {
 
     private final DbT7067ChohyoSeigyoHanyoEntity entity;
     private final ChohyoSeigyoHanyoIdentifier id;
@@ -129,7 +131,7 @@ public class ChohyoSeigyoHanyo extends ModelBase<ChohyoSeigyoHanyoIdentifier, Db
      *
      * @return 変更可否
      */
-    public boolean get変更可否() {
+    public boolean is変更可否() {
         return entity.getHenkoKahi();
     }
 

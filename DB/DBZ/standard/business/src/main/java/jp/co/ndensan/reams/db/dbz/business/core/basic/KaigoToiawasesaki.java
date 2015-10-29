@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護問合せ先を管理するクラスです。
  */
-public class KaigoToiawasesaki extends ParentModelBase<KaigoToiawasesakiIdentifier, DbT7069KaigoToiawasesakiEntity, KaigoToiawasesaki> implements Serializable {
+public class KaigoToiawasesaki extends 
+        ParentModelBase<KaigoToiawasesakiIdentifier, 
+        DbT7069KaigoToiawasesakiEntity, KaigoToiawasesaki> implements Serializable {
 
     private final DbT7069KaigoToiawasesakiEntity entity;
     private final KaigoToiawasesakiIdentifier id;
@@ -226,7 +228,7 @@ public class KaigoToiawasesaki extends ParentModelBase<KaigoToiawasesakiIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7069KaigoToiawasesakiEntity entity;
         private final KaigoToiawasesakiIdentifier id;
 

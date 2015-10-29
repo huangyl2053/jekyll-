@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  */
 public class Minashi2GoshaList implements Iterable<Minashi2Gosha> {
 
-    List<Minashi2Gosha> minashi2GoshaList;
+    private final List<Minashi2Gosha> goshaList;
 
     /**
      * 引数からみなし2号者のリストを受け取り、インスタンスを生成します。
@@ -27,7 +27,7 @@ public class Minashi2GoshaList implements Iterable<Minashi2Gosha> {
     public Minashi2GoshaList(List<Minashi2Gosha> minashi2GoshaList) {
         requireNonNull(minashi2GoshaList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("みなし2号者List", getClass().getName()));
-        this.minashi2GoshaList = minashi2GoshaList;
+        this.goshaList = minashi2GoshaList;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Minashi2GoshaList implements Iterable<Minashi2Gosha> {
      * @return
      */
     public int size() {
-        return minashi2GoshaList.size();
+        return goshaList.size();
     }
 
     /**
@@ -45,12 +45,12 @@ public class Minashi2GoshaList implements Iterable<Minashi2Gosha> {
      * @return 空ならtrue
      */
     public boolean isEmpty() {
-        return minashi2GoshaList.isEmpty();
+        return goshaList.isEmpty();
     }
 
     @Override
     public Iterator<Minashi2Gosha> iterator() {
-        return minashi2GoshaList.iterator();
+        return goshaList.iterator();
     }
 
 }

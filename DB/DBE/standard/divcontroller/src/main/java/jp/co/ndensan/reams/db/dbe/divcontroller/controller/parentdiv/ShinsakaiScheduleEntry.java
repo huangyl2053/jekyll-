@@ -77,11 +77,11 @@ public class ShinsakaiScheduleEntry {
         }
 
         div.getSchedule().getDdlKaisaiBasho().setSelectedItem(_toRString(map.get("開催場所")));
-        int startTimeHour = new Integer(map.get("予定開始時").toString());
-        int startTimeMin = new Integer(map.get("予定開始分").toString());
+        int startTimeHour = Integer.valueOf(map.get("予定開始時").toString());
+        int startTimeMin = Integer.valueOf(map.get("予定開始分").toString());
         div.getSchedule().getTxtYoteiTimeFrom().setValue(RTime.of(startTimeHour, startTimeMin));
-        int endTimeHour = new Integer(map.get("予定終了時").toString());
-        int endTimeMin = new Integer(map.get("予定終了分").toString());
+        int endTimeHour = Integer.valueOf(map.get("予定終了時").toString());
+        int endTimeMin = Integer.valueOf(map.get("予定終了分").toString());
         div.getSchedule().getTxtYoteiTimeTo().setValue(RTime.of(endTimeHour, endTimeMin));
         div.getSchedule().getTxtYoteiTeiin().setValue(new Decimal(map.get("予定定員").toString()));
         div.getSchedule().getTxtMaxTeiin().setValue(new Decimal(map.get("最大定員").toString()));
@@ -267,8 +267,8 @@ public class ShinsakaiScheduleEntry {
         RString sex = _toRString(map.get("性別"));
         RString kikan = _toRString(map.get("所属機関"));
         RString shikaku = _toRString(map.get("資格"));
-        dgShinsakaiIinList_Row row = new dgShinsakaiIinList_Row(iinNo, shimei, shimei, shimei, sex, kikan, shikaku);
-        return row;
+//        dgShinsakaiIinList_Row row = new dgShinsakaiIinList_Row(iinNo, shimei, shimei, shimei, sex, kikan, shikaku);
+        return new dgShinsakaiIinList_Row(iinNo, shimei, shimei, shimei, sex, kikan, shikaku);
     }
 
     private List<dgShinakaiScheduleList_Row> createRowShinsakaiListTestData() {

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum YokaigoJotaiKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(YokaigoJotaiKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum YokaigoJotaiKubunCodeValidationMessage implements IValidationMessage
     public enum YokaigoJotaiKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "要介護状態区分コードを指定してください。");
         private final int no;

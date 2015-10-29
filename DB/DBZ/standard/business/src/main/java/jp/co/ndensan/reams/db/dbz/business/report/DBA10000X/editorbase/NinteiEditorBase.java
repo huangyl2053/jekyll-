@@ -29,6 +29,9 @@ public class NinteiEditorBase {
     private final HihokenshashoModel hihokenshashoModel;
 
     private static final RString TANI;
+    private static final int ROKU = 6;
+    private static final int SAN = 3;
+    private static final int YONN = 4;
 
     static {
         TANI = new RString("単位");
@@ -97,7 +100,7 @@ public class NinteiEditorBase {
         List<RString> serviceShu = hihokenshashoModel.getShikakuHakko().get限度基準額サービス種類();
         List<RString> serviceGaku = hihokenshashoModel.getShikakuHakko().get限度基準額サービス額();
 
-        for (int i = 0; i < 6 && i < serviceShu.size(); i++) {
+        for (int i = 0; i < ROKU && i < serviceShu.size(); i++) {
             switch (i) {
                 case 0:
                     source.setShurui1(serviceShu.get(i));
@@ -114,12 +117,12 @@ public class NinteiEditorBase {
                     source.setShuruigendo3(serviceGaku.get(i));
                     source.setTen3(TANI);
                     break;
-                case 3:
+                case SAN:
                     source.setShurui4(serviceShu.get(i));
                     source.setShuruigendo4(serviceGaku.get(i));
                     source.setTen4(TANI);
                     break;
-                case 4:
+                case YONN:
                     source.setShurui5(serviceShu.get(i));
                     source.setShuruigendo5(serviceGaku.get(i));
                     source.setTen5(TANI);

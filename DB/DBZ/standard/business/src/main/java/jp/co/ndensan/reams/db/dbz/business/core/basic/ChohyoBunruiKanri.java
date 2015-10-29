@@ -18,7 +18,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 帳票分類管理を管理するクラスです。
  */
-public class ChohyoBunruiKanri extends ParentModelBase<ChohyoBunruiKanriIdentifier, DbT7068ChohyoBunruiKanriEntity, ChohyoBunruiKanri> implements Serializable {
+public class ChohyoBunruiKanri extends 
+        ParentModelBase<ChohyoBunruiKanriIdentifier, 
+        DbT7068ChohyoBunruiKanriEntity, ChohyoBunruiKanri> 
+        implements Serializable {
 
     private final DbT7068ChohyoBunruiKanriEntity entity;
     private final ChohyoBunruiKanriIdentifier id;
@@ -169,7 +172,7 @@ public class ChohyoBunruiKanri extends ParentModelBase<ChohyoBunruiKanriIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7068ChohyoBunruiKanriEntity entity;
         private final ChohyoBunruiKanriIdentifier id;
 

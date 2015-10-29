@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class _ConfigValue implements IConfigValue {
 
-    final Optional<RString> rawValue;
+    private final Optional<RString> rawValue;
 
     _ConfigValue(Optional<RString> rawValue) {
         this.rawValue = rawValue;

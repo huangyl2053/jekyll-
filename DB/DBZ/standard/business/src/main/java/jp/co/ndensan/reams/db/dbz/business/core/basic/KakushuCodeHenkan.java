@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 各種コード変換テーブルを管理するクラスです。
  */
-public class KakushuCodeHenkan extends ParentModelBase<KakushuCodeHenkanIdentifier, DbT7027KakushuCodeHenkanEntity, KakushuCodeHenkan> implements Serializable {
+public class KakushuCodeHenkan extends 
+        ParentModelBase<KakushuCodeHenkanIdentifier, 
+        DbT7027KakushuCodeHenkanEntity, KakushuCodeHenkan> implements Serializable {
 
     private final DbT7027KakushuCodeHenkanEntity entity;
     private final KakushuCodeHenkanIdentifier id;
@@ -211,7 +213,7 @@ public class KakushuCodeHenkan extends ParentModelBase<KakushuCodeHenkanIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7027KakushuCodeHenkanEntity entity;
         private final KakushuCodeHenkanIdentifier id;
 

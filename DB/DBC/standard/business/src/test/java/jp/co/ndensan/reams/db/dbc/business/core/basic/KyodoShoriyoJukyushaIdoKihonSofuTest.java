@@ -22,13 +22,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KyodoShoriyoJukyushaIdoKihonSofu}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
 
     private static DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity KyodoShoriyoJukyushaIdoKihonSofuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -190,7 +188,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuTest extends DbcTestBase {
 
         @Test
         public void get訂正連絡票フラグは_entityが持つ訂正連絡票フラグを返す() {
-            assertThat(sut.get訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoKihonSofuEntity.getTeiseiRenrakuhyoFlag()));
+            assertThat(sut.is訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoKihonSofuEntity.getTeiseiRenrakuhyoFlag()));
         }
 
         @Test

@@ -5,16 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.KyotakuJikoRiyohyoRirekiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.DBC0120000StateName.利用票登録;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.KyotakuJikoRiyohyoRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.DBC0120000StateName.利用票登録;
 
 /**
  * 居宅サービス自己作成サービス利用票登録の履歴一覧をコントロールするクラスです。
@@ -41,7 +39,7 @@ public class KyotakuJikoRiyohyoRireki {
     }
 
     /**
-     * 履歴一覧のデータ設定
+     * 履歴一覧のデータ設定。
      */
     private void setRirekiList(KyotakuJikoRiyohyoRirekiDiv panel) {
         ServiceRiyohyoRirekiListDiv rirekiList = panel.getKyotakuJikoRiyohyoRirekiList();
@@ -68,20 +66,20 @@ public class KyotakuJikoRiyohyoRireki {
         }
     }
 
-    private dgServiceRiyohyoRirekiList_Row create履歴(int index) {
-//        ControlGenerator cg = new ControlGenerator(getYaml().get(index));
-        dgServiceRiyohyoRirekiList_Row row = new dgServiceRiyohyoRirekiList_Row(
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY);
-//        row.setTxtJotai(cg.getAsRString("状態"));
-//        row.setTxtTodokedeYMD(cg.getAsRString("届出日"));
-//        row.setTxtTodokedeKubun(cg.getAsRString("届出区分"));
-//        row.setTxtTekiyoKaishiYMD(cg.getAsRString("計画適用期間開始日"));
-//        row.setTxtTekiyoShuryoYMD(cg.getAsRString("計画適用期間終了日"));
-        return row;
-    }
+//    private dgServiceRiyohyoRirekiList_Row create履歴(int index) {
+////        ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+//        dgServiceRiyohyoRirekiList_Row row = new dgServiceRiyohyoRirekiList_Row(
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY);
+////        row.setTxtJotai(cg.getAsRString("状態"));
+////        row.setTxtTodokedeYMD(cg.getAsRString("届出日"));
+////        row.setTxtTodokedeKubun(cg.getAsRString("届出区分"));
+////        row.setTxtTekiyoKaishiYMD(cg.getAsRString("計画適用期間開始日"));
+////        row.setTxtTekiyoShuryoYMD(cg.getAsRString("計画適用期間終了日"));
+//        return row;
+//    }
 }

@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払支給判定結果を管理するクラスです。
  */
-public class ShokanHanteiKekka extends ModelBase<ShokanHanteiKekkaIdentifier, DbT3036ShokanHanteiKekkaEntity, ShokanHanteiKekka> implements Serializable {
+public class ShokanHanteiKekka 
+extends ModelBase<ShokanHanteiKekkaIdentifier,
+        DbT3036ShokanHanteiKekkaEntity, 
+        ShokanHanteiKekka> implements Serializable {
 
     private final DbT3036ShokanHanteiKekkaEntity entity;
     private final ShokanHanteiKekkaIdentifier id;

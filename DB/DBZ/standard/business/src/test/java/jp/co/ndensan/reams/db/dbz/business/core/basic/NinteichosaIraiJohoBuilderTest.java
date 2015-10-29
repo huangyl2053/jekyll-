@@ -119,13 +119,13 @@ public class NinteichosaIraiJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値のモバイルデータ出力済フラグは_設定した値と同じモバイルデータ出力済フラグを返す() {
             business = sut.setモバイルデータ出力済フラグ(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_モバイルデータ出力済フラグ).build();
-            assertThat(business.getモバイルデータ出力済フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_モバイルデータ出力済フラグ));
+            assertThat(business.isモバイルデータ出力済フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_モバイルデータ出力済フラグ));
         }
 
         @Test
         public void 戻り値の事前調査フラグは_設定した値と同じ事前調査フラグを返す() {
             business = sut.set事前調査フラグ(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_事前調査フラグ).build();
-            assertThat(business.get事前調査フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_事前調査フラグ));
+            assertThat(business.is事前調査フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_事前調査フラグ));
         }
 
         @Test
@@ -155,7 +155,7 @@ public class NinteichosaIraiJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

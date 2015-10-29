@@ -25,7 +25,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績集計を管理するクラスです。
  */
-public class KyufujissekiShukei extends ModelBase<KyufujissekiShukeiIdentifier, DbT3033KyufujissekiShukeiEntity, KyufujissekiShukei> implements Serializable {
+public class KyufujissekiShukei extends
+        ModelBase<KyufujissekiShukeiIdentifier, 
+        DbT3033KyufujissekiShukeiEntity, 
+        KyufujissekiShukei> implements Serializable {
 
     private final DbT3033KyufujissekiShukeiEntity entity;
     private final KyufujissekiShukeiIdentifier id;

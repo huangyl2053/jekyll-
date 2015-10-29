@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum SuiteiKyuhuKubunCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(SuiteiKyuhuKubunCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum SuiteiKyuhuKubunCodeValidationMessage implements IValidationMessage 
     public enum SuiteiKyuhuKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "推定給付区分コードを指定してください。");
         private final int no;

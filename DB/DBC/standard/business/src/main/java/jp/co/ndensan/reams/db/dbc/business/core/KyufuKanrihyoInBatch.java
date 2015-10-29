@@ -260,7 +260,7 @@ public class KyufuKanrihyoInBatch {
 
     private Integer checkInteger(RString 金額) {
         if (金額 == null || 金額.isEmpty()) {
-            return new Integer(0);
+            return Integer.valueOf(0);
         }
 
         return new Integer(金額.toString());

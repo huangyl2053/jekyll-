@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShujiiData {
 
-    public static class Doctor {
+    public static final class Doctor {
 
         public static final Doctor EMPTY;
 

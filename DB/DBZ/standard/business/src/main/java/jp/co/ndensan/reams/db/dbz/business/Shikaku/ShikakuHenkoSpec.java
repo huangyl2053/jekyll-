@@ -20,9 +20,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
 
     変更日が入力であること {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
+                public boolean apply(ShikakuHenko nothing) {
                     boolean res = false;
-                    if (!PresenceValidator.isValid(NOTHING.変更日())) {
+                    if (!PresenceValidator.isValid(nothing.get変更日())) {
                         res = true;
                     }
                     return res;
@@ -30,9 +30,9 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
             },
     変更事由が入力であること {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
+                public boolean apply(ShikakuHenko nothing) {
                     boolean res = false;
-                    if (!PresenceValidator.isValid(NOTHING.変更事由())) {
+                    if (!PresenceValidator.isValid(nothing.get変更事由())) {
                         res = true;
                     }
                     return res;
@@ -40,61 +40,63 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
             },
     取得日が変更日より前 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
-                    if (NOTHING.変更日().isEmpty() || NOTHING.取得日().isEmpty()) {
+                public boolean apply(ShikakuHenko nothing) {
+                    if (nothing.get変更日().isEmpty() || nothing.get取得日().isEmpty()) {
                         return false;
                     }
-                    return NOTHING.変更日().isBefore(NOTHING.取得日());
+                    return nothing.get変更日().isBefore(nothing.get取得日());
                 }
             },
     喪失日が変更日より後 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
-                    if (NOTHING.喪失日().isEmpty() || NOTHING.取得日().isEmpty()) {
+                public boolean apply(ShikakuHenko nothing) {
+                    if (nothing.get喪失日().isEmpty() || nothing.get取得日().isEmpty()) {
                         return false;
                     }
-                    return !NOTHING.変更日().isBefore(NOTHING.喪失日());
+                    return !nothing.get変更日().isBefore(nothing.get喪失日());
                 }
             },
     変更日が次の履歴データの変更日以降 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
+                public boolean apply(ShikakuHenko nothing) {
 
-                    Optional< DbT1001HihokenshaDaichoEntity> optional = NOTHING.get次履歴();
+                    Optional<DbT1001HihokenshaDaichoEntity> optional = nothing.get次履歴();
                     DbT1001HihokenshaDaichoEntity 次履歴 = optional.orElse(null);
 
-                    if (次履歴 == null || NOTHING.変更日().isEmpty()) {
+                    if (次履歴 == null || nothing.get変更日().isEmpty()) {
                         return false;
                     }
-                    return 次履歴.getShikakuHenkoYMD().isBefore(NOTHING.変更日());
+                    return 次履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
                 }
             },
     変更日が前の履歴データの変更日以降 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
+                public boolean apply(ShikakuHenko nothing) {
 
-                    Optional<DbT1001HihokenshaDaichoEntity> optional = NOTHING.get前履歴();
+                    Optional<DbT1001HihokenshaDaichoEntity> optional = nothing.get前履歴();
                     DbT1001HihokenshaDaichoEntity 前履歴 = optional.orElse(null);
 
-                    if (前履歴 == null || NOTHING.変更日().isEmpty()) {
+                    if (前履歴 == null || nothing.get変更日().isEmpty()) {
                         return false;
                     }
-                    return !前履歴.getShikakuHenkoYMD().isBefore(NOTHING.変更日());
+                    return !前履歴.getShikakuHenkoYMD().isBefore(nothing.get変更日());
                 }
             },
     has住所地特例履歴と期間が重複する履歴 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
+                public boolean apply(ShikakuHenko nothing) {
 
-                    IItemList<DbT1001HihokenshaDaichoEntity> list = NOTHING.get全履歴();
-                    if (NOTHING.変更日().isEmpty()) {
+                    IItemList<DbT1001HihokenshaDaichoEntity> list = nothing.get全履歴();
+                    if (nothing.get変更日().isEmpty()) {
                         return false;
                     }
                     for (DbT1001HihokenshaDaichoEntity model : list) {
                         if (model.getShikakuShutokuYMD().isEmpty() || model.getShikakuSoshitsuYMD().isEmpty()) {
                             return false;
                         }
-                        if (OrderValidator.from(model.getShikakuShutokuYMD()).afterOrEquals(NOTHING.変更日()).after(model.getShikakuSoshitsuYMD()).isValid()) {
+                        if (OrderValidator.from(model.getShikakuShutokuYMD())
+                        .afterOrEquals(nothing.get変更日())
+                        .after(model.getShikakuSoshitsuYMD()).isValid()) {
                             return true;
                         }
                     }
@@ -103,31 +105,25 @@ public enum ShikakuHenkoSpec implements IPredicate<ShikakuHenko> {
             },
     is最新の取得日として登録不可 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
-                    if (NOTHING.最新資格喪失日().isEmpty()) {
+                public boolean apply(ShikakuHenko nothing) {
+                    if (nothing.get最新資格喪失日().isEmpty()) {
 
-                        if (NOTHING.変更日().isBefore(NOTHING.最新資格変更日())) {
+                        if (nothing.get変更日().isBefore(nothing.get最新資格変更日())) {
                             return true;
                         }
 
                     } else {
-                        if (!NOTHING.最新資格変更日().isBeforeOrEquals(NOTHING.最新資格喪失日())) {
+                        if (!nothing.get最新資格変更日().isBeforeOrEquals(nothing.get最新資格喪失日())) {
                             return true;
                         }
                     }
-                    if (NOTHING.最新資格変更日().isBefore(NOTHING.最新資格取得日())) {
-                        return true;
-                    }
-                    return false;
+                    return nothing.get最新資格変更日().isBefore(nothing.get最新資格取得日());
                 }
             },
     変更事由が１号到達で年齢が65歳未満 {
                 @Override
-                public boolean apply(ShikakuHenko NOTHING) {
-                    if (NOTHING.変更日().equals(NOTHING.一号資格取得日())) {
-                        return true;
-                    }
-                    return false;
+                public boolean apply(ShikakuHenko nothing) {
+                    return nothing.get変更日().equals(nothing.get一号資格取得日());
                 }
             },
 }

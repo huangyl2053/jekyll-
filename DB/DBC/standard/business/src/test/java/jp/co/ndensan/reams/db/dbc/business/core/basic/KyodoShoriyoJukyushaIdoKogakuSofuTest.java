@@ -22,13 +22,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link KyodoShoriyoJukyushaIdoKogakuSofu}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class KyodoShoriyoJukyushaIdoKogakuSofuTest extends DbcTestBase {
 
     private static DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity KyodoShoriyoJukyushaIdoKogakuSofuEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
@@ -175,22 +173,22 @@ public class KyodoShoriyoJukyushaIdoKogakuSofuTest extends DbcTestBase {
 
         @Test
         public void get老齢福祉年金受給有フラグは_entityが持つ老齢福祉年金受給有フラグを返す() {
-            assertThat(sut.get老齢福祉年金受給有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getRoureiFukushiNenkinJukyuAriFlag()));
+            assertThat(sut.is老齢福祉年金受給有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getRoureiFukushiNenkinJukyuAriFlag()));
         }
 
         @Test
         public void get利用者負担第２段階有フラグは_entityが持つ利用者負担第２段階有フラグを返す() {
-            assertThat(sut.get利用者負担第２段階有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getRiyoshaFutan2DankaiAriFlag()));
+            assertThat(sut.is利用者負担第２段階有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getRiyoshaFutan2DankaiAriFlag()));
         }
 
         @Test
         public void get支給申請書出力有フラグは_entityが持つ支給申請書出力有フラグを返す() {
-            assertThat(sut.get支給申請書出力有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getShikyuShinseishoOutputAriFlag()));
+            assertThat(sut.is支給申請書出力有フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getShikyuShinseishoOutputAriFlag()));
         }
 
         @Test
         public void get訂正連絡票フラグは_entityが持つ訂正連絡票フラグを返す() {
-            assertThat(sut.get訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getTeiseiRenrakuhyoFlag()));
+            assertThat(sut.is訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoKogakuSofuEntity.getTeiseiRenrakuhyoFlag()));
         }
 
         @Test

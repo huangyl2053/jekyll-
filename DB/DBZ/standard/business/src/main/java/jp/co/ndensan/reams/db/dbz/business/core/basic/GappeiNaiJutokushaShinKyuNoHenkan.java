@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 合併内住特者新旧番号変換テーブルを管理するクラスです。
  */
-public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNaiJutokushaShinKyuNoHenkanIdentifier, DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity, GappeiNaiJutokushaShinKyuNoHenkan> implements Serializable {
+public class GappeiNaiJutokushaShinKyuNoHenkan extends 
+        ParentModelBase<GappeiNaiJutokushaShinKyuNoHenkanIdentifier, 
+        DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity, 
+        GappeiNaiJutokushaShinKyuNoHenkan> implements Serializable {
 
     private final DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity;
     private final GappeiNaiJutokushaShinKyuNoHenkanIdentifier id;
@@ -228,7 +231,7 @@ public class GappeiNaiJutokushaShinKyuNoHenkan extends ParentModelBase<GappeiNai
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity entity;
         private final GappeiNaiJutokushaShinKyuNoHenkanIdentifier id;
 

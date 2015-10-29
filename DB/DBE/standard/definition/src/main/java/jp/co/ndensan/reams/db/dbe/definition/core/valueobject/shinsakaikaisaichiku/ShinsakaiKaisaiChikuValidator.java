@@ -18,7 +18,7 @@ public class ShinsakaiKaisaiChikuValidator {
     private final ShinsakaiKaisaiChiku shinsakaiKaisaiChiku;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shinsakaiKaisaiChiku 介護認定審査会の開催地区
      */

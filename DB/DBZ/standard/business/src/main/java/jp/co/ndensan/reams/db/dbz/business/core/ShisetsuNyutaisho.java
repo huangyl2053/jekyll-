@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護保険施設入退所を管理するクラスです。
  */
-public class ShisetsuNyutaisho extends ModelBase<ShisetsuNyutaishoIdentifier, DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> implements Serializable {
+public class ShisetsuNyutaisho extends 
+        ModelBase<ShisetsuNyutaishoIdentifier, 
+        DbT1004ShisetsuNyutaishoEntity, ShisetsuNyutaisho> 
+        implements Serializable {
 
     private final DbT1004ShisetsuNyutaishoEntity entity;
     private final ShisetsuNyutaishoIdentifier id;

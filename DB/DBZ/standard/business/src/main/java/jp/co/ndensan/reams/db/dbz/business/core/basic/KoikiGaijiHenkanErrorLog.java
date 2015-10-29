@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 広域外字変換エラーログを管理するクラスです。
  */
-public class KoikiGaijiHenkanErrorLog extends ParentModelBase<KoikiGaijiHenkanErrorLogIdentifier, DbT7034KoikiGaijiHenkanErrorLogEntity, KoikiGaijiHenkanErrorLog> implements Serializable {
+public class KoikiGaijiHenkanErrorLog extends 
+        ParentModelBase<KoikiGaijiHenkanErrorLogIdentifier, 
+        DbT7034KoikiGaijiHenkanErrorLogEntity, KoikiGaijiHenkanErrorLog> implements Serializable {
 
     private final DbT7034KoikiGaijiHenkanErrorLogEntity entity;
     private final KoikiGaijiHenkanErrorLogIdentifier id;
@@ -330,7 +332,7 @@ public class KoikiGaijiHenkanErrorLog extends ParentModelBase<KoikiGaijiHenkanEr
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7034KoikiGaijiHenkanErrorLogEntity entity;
         private final KoikiGaijiHenkanErrorLogIdentifier id;
 

@@ -57,7 +57,7 @@ public class IchijiHanteiKekkaJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の仮一次判定区分は_設定した値と同じ仮一次判定区分を返す() {
             business = sut.set仮一次判定区分(DbT4116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_仮一次判定区分).build();
-            assertThat(business.get仮一次判定区分(), is(DbT4116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_仮一次判定区分));
+            assertThat(business.is仮一次判定区分(), is(DbT4116IchijiHanteiKekkaJohoEntityGenerator.DEFAULT_仮一次判定区分));
         }
 
         @Test

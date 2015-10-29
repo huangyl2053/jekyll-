@@ -5,13 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.business.core.mapper;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.core.IchijiHanteiKeikoku.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UDT022CodeTable;
 
 /**
  * 一次判定警告についてマッピングを行うクラスです。
@@ -51,8 +49,8 @@ public final class IchijiHanteiKeikokuMapper {
                 Collections.EMPTY_LIST);
     }
 
-    private static IchijiHanteiKeikoku to一次判定警告(UDT022CodeTable コードマスタ内一次判定警告) {
-        return new IchijiHanteiKeikoku(コードマスタ内一次判定警告.getコード(),
-                コードマスタ内一次判定警告.getコード名称(), コードマスタ内一次判定警告.getコード略称());
-    }
+//    private static IchijiHanteiKeikoku to一次判定警告(UDT022CodeTable コードマスタ内一次判定警告) {
+//        return new IchijiHanteiKeikoku(コードマスタ内一次判定警告.getコード(),
+//                コードマスタ内一次判定警告.getコード名称(), コードマスタ内一次判定警告.getコード略称());
+//    }
 }

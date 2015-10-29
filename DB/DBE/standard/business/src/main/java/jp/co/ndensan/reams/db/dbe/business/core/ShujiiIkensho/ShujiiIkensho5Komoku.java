@@ -37,7 +37,10 @@ public class ShujiiIkensho5Komoku {
 
     static {
         ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度記載無し = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
-        NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度記載無し = new NinchishoKoreishaJiritsudoKomoku(new Code("9"), new RString("記載無し"), new RString("記載無し"));
+        NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度記載無し = new NinchishoKoreishaJiritsudoKomoku(
+                new Code("9"), 
+                new RString("記載無し"), 
+                new RString("記載無し"));
         TankiKiokuKomoku 短期記憶記載無し = TankiKiokuKomoku.記載無し;
         NinchiNoryokuKomoku 認知能力記載無し = NinchiNoryokuKomoku.記載無し;
         DentatsuNoryokuKomoku 伝達能力記載無し = DentatsuNoryokuKomoku.記載無し;

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -21,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * サービス種類支給限度額を管理するクラスです。
  */
-public class ServiceShuruiShikyuGendoGaku extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier, DbT7111ServiceShuruiShikyuGendoGakuEntity, ServiceShuruiShikyuGendoGaku> implements Serializable {
+public class ServiceShuruiShikyuGendoGaku 
+extends ModelBase<ServiceShuruiShikyuGendoGakuIdentifier, 
+        DbT7111ServiceShuruiShikyuGendoGakuEntity, 
+        ServiceShuruiShikyuGendoGaku> implements Serializable {
 
     private final DbT7111ServiceShuruiShikyuGendoGakuEntity entity;
     private final ServiceShuruiShikyuGendoGakuIdentifier id;

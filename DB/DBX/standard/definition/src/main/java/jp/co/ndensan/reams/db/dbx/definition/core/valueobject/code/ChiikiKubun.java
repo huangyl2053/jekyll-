@@ -41,7 +41,7 @@ public class ChiikiKubun implements ICodeValueObject, IDbColumnMappable, IValueO
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;;
+        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;
         CODE_SHUBETSU = DBXCodeShubetsu.地域区分コード.getCodeShubetsu();
     }
 

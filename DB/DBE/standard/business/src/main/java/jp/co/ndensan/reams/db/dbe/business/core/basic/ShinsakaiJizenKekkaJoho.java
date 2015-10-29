@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護認定審査会事前審査結果情報を管理するクラスです。
  */
-public class ShinsakaiJizenKekkaJoho extends ParentModelBase<ShinsakaiJizenKekkaJohoIdentifier, DbT5508ShinsakaiJizenKekkaJohoEntity, ShinsakaiJizenKekkaJoho> implements Serializable {
+public class ShinsakaiJizenKekkaJoho
+        extends ParentModelBase<ShinsakaiJizenKekkaJohoIdentifier, DbT5508ShinsakaiJizenKekkaJohoEntity, ShinsakaiJizenKekkaJoho>
+        implements Serializable {
 
     private final DbT5508ShinsakaiJizenKekkaJohoEntity entity;
     private final ShinsakaiJizenKekkaJohoIdentifier id;
@@ -193,7 +195,7 @@ public class ShinsakaiJizenKekkaJoho extends ParentModelBase<ShinsakaiJizenKekka
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5508ShinsakaiJizenKekkaJohoEntity entity;
         private final ShinsakaiJizenKekkaJohoIdentifier id;
 

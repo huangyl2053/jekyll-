@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 還受領委任契約者Aliveを管理するクラスです。
  */
-public class ShokanJuryoininKeiyakushaAlive extends ParentModelBase<ShokanJuryoininKeiyakushaAliveIdentifier, DbV3078ShokanJuryoininKeiyakushaEntity, ShokanJuryoininKeiyakushaAlive> implements Serializable {
+public class ShokanJuryoininKeiyakushaAlive extends 
+        ParentModelBase<ShokanJuryoininKeiyakushaAliveIdentifier, 
+        DbV3078ShokanJuryoininKeiyakushaEntity, ShokanJuryoininKeiyakushaAlive> implements Serializable {
 
     private final DbV3078ShokanJuryoininKeiyakushaEntity entity;
     private final ShokanJuryoininKeiyakushaAliveIdentifier id;
@@ -328,7 +330,7 @@ public class ShokanJuryoininKeiyakushaAlive extends ParentModelBase<ShokanJuryoi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV3078ShokanJuryoininKeiyakushaEntity entity;
         private final ShokanJuryoininKeiyakushaAliveIdentifier id;
 

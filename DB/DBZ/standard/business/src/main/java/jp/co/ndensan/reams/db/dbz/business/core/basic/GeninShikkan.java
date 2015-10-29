@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 原因疾患を管理するクラスです。
  */
-public class GeninShikkan extends ParentModelBase<GeninShikkanIdentifier, DbT5300GeninShikkanEntity, GeninShikkan> implements Serializable {
+public class GeninShikkan extends
+        ParentModelBase<GeninShikkanIdentifier, DbT5300GeninShikkanEntity, GeninShikkan> implements Serializable {
 
     private final DbT5300GeninShikkanEntity entity;
     private final GeninShikkanIdentifier id;
@@ -94,7 +95,7 @@ public class GeninShikkan extends ParentModelBase<GeninShikkanIdentifier, DbT530
      *
      * @return 主たる原因疾患フラグ
      */
-    public boolean get主たる原因疾患フラグ() {
+    public boolean is主たる原因疾患フラグ() {
         return entity.getIsShutaruGeninShikkan();
     }
 
@@ -178,7 +179,7 @@ public class GeninShikkan extends ParentModelBase<GeninShikkanIdentifier, DbT530
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5300GeninShikkanEntity entity;
         private final GeninShikkanIdentifier id;
 

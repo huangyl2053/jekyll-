@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinteiYukoKikanTsukisuValidationMessage implements IValidationMessage {
 
     /**
-     * 認定有効期間月数がNullであること
+     * 認定有効期間月数がNullであること。
      */
     認定有効期間月数がNullであること(NinteiYukoKikanTsukisuErrorMessage.認定有効期間月数がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinteiYukoKikanTsukisuValidationMessage implements IValidationMessag
     public enum NinteiYukoKikanTsukisuErrorMessage implements IMessageGettable {
 
         /**
-         * 認定有効期間月数がNullであること
+         * 認定有効期間月数がNullであること。
          */
         認定有効期間月数がNullであること(1, "認定有効期間月数を指定してください。");
         private final int no;

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinseiJohoTorokuKanryo {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div ShinseiJohoTorokuKanryoDiv
      * @param outline ShinseiJohoInputDiv
