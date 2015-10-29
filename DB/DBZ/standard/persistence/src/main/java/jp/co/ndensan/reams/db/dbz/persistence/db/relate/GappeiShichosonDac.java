@@ -7,26 +7,27 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.*;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.gappeiYMD;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併市町村のデータアクセスクラスです。
@@ -91,7 +92,7 @@ public class GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEnt
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.insert(data);
+        return 合併市町村Dac.save(data);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEnt
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.update(data);
+        return 合併市町村Dac.save(data);
     }
 
     @Override
@@ -107,7 +108,8 @@ public class GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEnt
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.delete(data);
+        data.setState(EntityDataState.Deleted);
+        return 合併市町村Dac.save(data);
     }
 
     /**
@@ -120,6 +122,7 @@ public class GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEnt
         if (data == null) {
             return 0;
         }
-        return 合併市町村Dac.deletePhysical(data);
+        data.setState(EntityDataState.Deleted);
+        return 合併市町村Dac.save(data);
     }
 }

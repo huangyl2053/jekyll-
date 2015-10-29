@@ -7,25 +7,26 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.*;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.kokuhorenDataFromYMD;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7055GappeiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合併情報のデータアクセスクラスです。
@@ -88,7 +89,7 @@ public class GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity> {
         if (data == null) {
             return 0;
         }
-        return 合併情報Dac.insert(data);
+        return 合併情報Dac.save(data);
     }
 
     @Override
@@ -96,7 +97,7 @@ public class GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity> {
         if (data == null) {
             return 0;
         }
-        return 合併情報Dac.update(data);
+        return 合併情報Dac.save(data);
     }
 
     @Override
@@ -104,7 +105,8 @@ public class GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity> {
         if (data == null) {
             return 0;
         }
-        return 合併情報Dac.delete(data);
+        data.setState(EntityDataState.Deleted);
+        return 合併情報Dac.save(data);
     }
 
     /**
@@ -117,7 +119,7 @@ public class GappeiJohoDac implements IModifiable<DbT7055GappeiJohoEntity> {
         if (data == null) {
             return 0;
         }
-        return 合併情報Dac.deletePhysical(data);
+        return 合併情報Dac.save(data);
     }
 
 }

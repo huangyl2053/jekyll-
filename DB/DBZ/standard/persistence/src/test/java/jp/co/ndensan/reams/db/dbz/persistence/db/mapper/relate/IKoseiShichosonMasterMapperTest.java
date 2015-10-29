@@ -4,15 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.IKoseiShichosonMasterMapper;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7052KoseiShichosonShishoMasterDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -106,7 +105,7 @@ public class IKoseiShichosonMasterMapperTest {
         @Test
         public void データが見つかる検索条件を渡すと_台帳Entityリストを返す() {
             KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件 = KoseiShichosonMasterMapperParameter.createSelectListParam(主キー11);
-            List<KoseiShichosonMasterEntity> entityList = sut.select構成市町村マスタリストBy主キー1(構成市町村マスタ検索条件);
+            List<KoseiShichosonMasterRelateEntity> entityList = sut.select構成市町村マスタリストBy主キー1(構成市町村マスタ検索条件);
             assertThat(entityList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(entityList.get(0).get構成市町村マスタEntity().getShichosonShokibetsuID(), is(主キー11));
