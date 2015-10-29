@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2010FukaErrorListマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2010FukaErrorListMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2010FukaErrorList">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2010FukaErrorListMapper.allColumns_DbT2010FukaErrorList" />
+     FROM
+         rgdb."DbT2010FukaErrorList"
+     WHERE
+         rgdb."DbT2010FukaErrorList"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2010FukaErrorList">
+         "DbT2010FukaErrorList"."subGyomuCode" as "dbT2010FukaErrorList_subGyomuCode",
+         "DbT2010FukaErrorList"."internalReportId" as "dbT2010FukaErrorList_internalReportId",
+         "DbT2010FukaErrorList"."fukaNendo" as "dbT2010FukaErrorList_fukaNendo",
+         "DbT2010FukaErrorList"."tsuchishoNo" as "dbT2010FukaErrorList_tsuchishoNo",
+         "DbT2010FukaErrorList"."insertDantaiCd" as "dbT2010FukaErrorList_insertDantaiCd",
+         "DbT2010FukaErrorList"."insertTimestamp" as "dbT2010FukaErrorList_insertTimestamp",
+         "DbT2010FukaErrorList"."insertReamsLoginId" as "dbT2010FukaErrorList_insertReamsLoginId",
+         "DbT2010FukaErrorList"."insertContextId" as "dbT2010FukaErrorList_insertContextId",
+         "DbT2010FukaErrorList"."isDeleted" as "dbT2010FukaErrorList_isDeleted",
+         "DbT2010FukaErrorList"."updateCount" as "dbT2010FukaErrorList_updateCount",
+         "DbT2010FukaErrorList"."lastUpdateTimestamp" as "dbT2010FukaErrorList_lastUpdateTimestamp",
+         "DbT2010FukaErrorList"."lastUpdateReamsLoginId" as "dbT2010FukaErrorList_lastUpdateReamsLoginId",
+         "DbT2010FukaErrorList"."internalReportCreationDateTime" as "dbT2010FukaErrorList_internalReportCreationDateTime",
+         "DbT2010FukaErrorList"."batchId" as "dbT2010FukaErrorList_batchId",
+         "DbT2010FukaErrorList"."batchStartingDateTime" as "dbT2010FukaErrorList_batchStartingDateTime",
+         "DbT2010FukaErrorList"."shoriKubunCode" as "dbT2010FukaErrorList_shoriKubunCode",
+         "DbT2010FukaErrorList"."errorCode" as "dbT2010FukaErrorList_errorCode",
+         "DbT2010FukaErrorList"."hihokenshaNo" as "dbT2010FukaErrorList_hihokenshaNo",
+         "DbT2010FukaErrorList"."shikibetsuCode" as "dbT2010FukaErrorList_shikibetsuCode"
+    </sql>
+
+
+    <!--テーブルDbT2010FukaErrorListの項目をDbT2010FukaErrorListEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2010FukaErrorListEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT2010FukaErrorList_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="internalReportId" column="dbT2010FukaErrorList_internalReportId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="fukaNendo" column="dbT2010FukaErrorList_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2010FukaErrorList_tsuchishoNo" />
+        <result property="insertDantaiCd" column="dbT2010FukaErrorList_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2010FukaErrorList_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2010FukaErrorList_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2010FukaErrorList_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2010FukaErrorList_isDeleted" />
+        <result property="updateCount" column="dbT2010FukaErrorList_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2010FukaErrorList_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2010FukaErrorList_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="internalReportCreationDateTime" column="dbT2010FukaErrorList_internalReportCreationDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="batchId" column="dbT2010FukaErrorList_batchId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="batchStartingDateTime" column="dbT2010FukaErrorList_batchStartingDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="shoriKubunCode" column="dbT2010FukaErrorList_shoriKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="errorCode" column="dbT2010FukaErrorList_errorCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT2010FukaErrorList_hihokenshaNo" />
+        <result property="shikibetsuCode" column="dbT2010FukaErrorList_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT2010FukaErrorListEntity">
+        SELECT
+        <include refid="allColumns_DbT2010FukaErrorList" />
+        FROM
+        rgdb."DbT2010FukaErrorList"
+    </select>
+
+</mapper>

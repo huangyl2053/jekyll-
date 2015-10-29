@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護賦課のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper">
+
+    <!-- RelateEntityを取得できるSQL。 -->
+    <select id="getFukaEntity" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+        SELECT
+        dbT2002Fuka.*,
+        dbT2003Kibetsu.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        FROM
+        rgba."DbT2002Fuka"
+        WHERE
+        "choteiNendo" = #{choteiNendo}
+        AND
+        "fukaNendo" = #{fukaNendo}
+        AND
+        "tsuchishoNo" = #{tsuchishoNo}
+        AND
+        "rirekiNo" = #{rirekiNo}
+        )
+        AS dbT2002Fuka
+        
+        INNER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        FROM
+        rgba."DbT2003Kibetsu"
+        )
+        AS dbT2003Kibetsu
+        ON
+        dbT2002Fuka."dbT2002Fuka_choteiNendo" = dbT2003Kibetsu."dbT2003Kibetsu_choteiNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_fukaNendo" = dbT2003Kibetsu."dbT2003Kibetsu_fukaNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_tsuchishoNo" = dbT2003Kibetsu."dbT2003Kibetsu_tsuchishoNo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_rirekiNo" = dbT2003Kibetsu."dbT2003Kibetsu_rirekiNo"
+        
+    </select>
+
+    
+    <resultMap id="resultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.FukaEntity" autoMapping="true">
+        <id column="dbT2002Fuka_choteiNendo"/>
+        <id column="dbT2002Fuka_fukaNendo"/>
+        <id column="dbT2002Fuka_tsuchishoNo"/>
+        <id column="dbT2002Fuka_rirekiNo"/>
+        <association property="DbT2002FukaEntity" 
+                     resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka.ResultMap_DbT2002FukaEntity"/>
+        <collection property="DbT2003KibetsuEntity" 
+                    ofType="jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu.ResultMap_DbT2003KibetsuEntity"/>
+    </resultMap>
+
+</mapper>
