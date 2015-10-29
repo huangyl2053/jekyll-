@@ -36,6 +36,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -46,6 +47,7 @@ import static org.mockito.Mockito.when;
  * {link TandokuJoseikinKyufuShinseiManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class TandokuJoseikinKyufuShinseiManagerTest {
 
 //    private static TandokuJoseikinKyufuShinseiDac relateDac;

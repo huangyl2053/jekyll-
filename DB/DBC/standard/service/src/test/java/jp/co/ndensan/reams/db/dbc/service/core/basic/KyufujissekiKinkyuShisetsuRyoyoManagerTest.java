@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -35,6 +36,7 @@ import static org.mockito.Mockito.when;
  * {link KyufujissekiKinkyuShisetsuRyoyoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KyufujissekiKinkyuShisetsuRyoyoManagerTest {
 
     private static DbT3019KyufujissekiKinkyuShisetsuRyoyoDac dac;

@@ -35,6 +35,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -59,6 +60,7 @@ import org.junit.runner.RunWith;
  * {link NijiYoboKihonCheckListManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class NijiYoboKihonCheckListManagerTest {
 
 //    private static NijiYoboKihonCheckListDac relateDac;
