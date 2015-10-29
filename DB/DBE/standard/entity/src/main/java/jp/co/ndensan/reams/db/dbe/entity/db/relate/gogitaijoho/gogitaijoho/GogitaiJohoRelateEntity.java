@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho;
+package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaiwariateiinjoho.GogitaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 
 /**
  * 合議体情報RelateEntityクラスです。
@@ -45,7 +45,7 @@ public class GogitaiJohoRelateEntity implements Cloneable, Serializable {
      *
      * @param 合議体割当委員情報EntityList 合議体割当委員情報EntityList
      */
-    private List<GogitaiWariateIinJohoRelateEntity> 合議体割当委員情報RelateEntity;
+    private List<DbT5593GogitaiWariateIinJohoEntity> 合議体割当委員情報Entity;
 
     /**
      * コンストラクタです。
@@ -53,22 +53,23 @@ public class GogitaiJohoRelateEntity implements Cloneable, Serializable {
     public GogitaiJohoRelateEntity() {
         合議体情報Entity = new DbT5591GogitaiJohoEntity();
         介護認定審査会開催場所情報Entity = new ArrayList<>();
-        合議体割当委員情報RelateEntity = new ArrayList<>();
+        合議体割当委員情報Entity = new ArrayList<>();
 
     }
 
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * GogitaiJohoEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * GogitaiJohoEntityが持つ{@link DbT5592ShinsakaiKaisaiBashoJohoEntity}と{@link DbT5593GogitaiWariateIinJohoEntity}と<br/>
+     * {@link DbT5591GogitaiJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.合議体情報Entity.initializeMd5();
         for (DbT5592ShinsakaiKaisaiBashoJohoEntity entity : this.介護認定審査会開催場所情報Entity) {
             entity.initializeMd5();
         }
-        for (GogitaiWariateIinJohoRelateEntity wariateRelateEntity : this.合議体割当委員情報RelateEntity) {
-            wariateRelateEntity.initializeMd5ToEntities();
+        for (DbT5593GogitaiWariateIinJohoEntity entity : this.合議体割当委員情報Entity) {
+            entity.initializeMd5();
         }
     }
 }
