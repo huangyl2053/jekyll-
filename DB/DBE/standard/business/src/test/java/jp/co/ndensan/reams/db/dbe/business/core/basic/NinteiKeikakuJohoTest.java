@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5123NinteiKeikakuJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5123NinteiKeikakuJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -14,8 +14,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -131,11 +131,10 @@ public class NinteiKeikakuJohoTest extends DbeTestBase {
             assertThat(sut.get要介護認定一次判定予定年月日(), is(NinteiKeikakuJohoEntity.getIchijiHanteiYoteiYMD()));
         }
 
-        @Test
-        public void get要介護認定1_5次判定予定年月日は_entityが持つ要介護認定1_5次判定予定年月日を返す() {
-            assertThat(sut.get要介護認定1_5次判定予定年月日(), is(NinteiKeikakuJohoEntity.getIchiGoHanteiYoteiYMD()));
-        }
-
+//        @Test
+//        public void get要介護認定1_5次判定予定年月日は_entityが持つ要介護認定1_5次判定予定年月日を返す() {
+//            assertThat(sut.get要介護認定1_5次判定予定年月日(), is(NinteiKeikakuJohoEntity.getIchiGoHanteiYoteiYMD()));
+//        }
         @Test
         public void get認定審査会割当予定年月日は_entityが持つ認定審査会割当予定年月日を返す() {
             assertThat(sut.get認定審査会割当予定年月日(), is(NinteiKeikakuJohoEntity.getNinteiShinsakaiWariateYoteiYMD()));

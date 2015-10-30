@@ -125,10 +125,9 @@ public class NinteiKeikakuJoho
      *
      * @return 要介護認定1.5次判定予定年月日
      */
-    public FlexibleDate get要介護認定1_5次判定予定年月日() {
-        return entity.getIchiGoHanteiYoteiYMD();
-    }
-
+//    public FlexibleDate get要介護認定1_5次判定予定年月日() {
+//        return entity.getIchiGoHanteiYoteiYMD();
+//    }
     /**
      * 認定審査会割当予定年月日を返します。
      *

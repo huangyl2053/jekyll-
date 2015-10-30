@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5116IchijiHanteiKekkaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5116IchijiHanteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;

@@ -117,7 +117,7 @@ public class NinteiKeikakuJohoBuilder {
      */
     public NinteiKeikakuJohoBuilder set要介護認定1_5次判定予定年月日(FlexibleDate 要介護認定1_5次判定予定年月日) {
         requireNonNull(要介護認定1_5次判定予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定1_5次判定予定年月日"));
-        entity.setIchiGoHanteiYoteiYMD(要介護認定1_5次判定予定年月日);
+//        entity.setIchiGoHanteiYoteiYMD(要介護認定1_5次判定予定年月日);
         return this;
     }
 
