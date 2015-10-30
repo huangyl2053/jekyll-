@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -15,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 要介護認定完了情報テーブルのエンティティクラスです。
  */
 public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105NinteiKanryoJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5105NinteiKanryoJoho");
@@ -104,7 +106,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -113,6 +115,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 認定申請情報登録完了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinseiJohoTorokuKanryoYMD() {
         return ninteiShinseiJohoTorokuKanryoYMD;
     }
@@ -131,6 +134,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 認定調査依頼完了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteichosaIraiKanryoYMD() {
         return ninteichosaIraiKanryoYMD;
     }
@@ -149,6 +153,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 認定調査完了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteichosaKanryoYMD() {
         return ninteichosaKanryoYMD;
     }
@@ -167,6 +172,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 主治医意見書作成依頼完了年月日
      */
+    @CheckForNull
     public FlexibleDate getIkenshoSakuseiIraiKanryoYMD() {
         return ikenshoSakuseiIraiKanryoYMD;
     }
@@ -185,6 +191,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 主治医意見書登録完了年月日
      */
+    @CheckForNull
     public FlexibleDate getIkenshoTorokuKanryoYMD() {
         return ikenshoTorokuKanryoYMD;
     }
@@ -203,6 +210,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 要介護認定一次判定完了年月日
      */
+    @CheckForNull
     public FlexibleDate getIchijiHanteiKanryoYMD() {
         return ichijiHanteiKanryoYMD;
     }
@@ -221,6 +229,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return マスキング完了年月日
      */
+    @CheckForNull
     public FlexibleDate getMaskingKanryoYMD() {
         return maskingKanryoYMD;
     }
@@ -239,6 +248,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 認定審査会割当完了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinsakaiWariateKanryoYMD() {
         return ninteiShinsakaiWariateKanryoYMD;
     }
@@ -257,6 +267,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return 認定審査会完了年月日
      */
+    @CheckForNull
     public FlexibleDate getNinteiShinsakaiKanryoYMD() {
         return ninteiShinsakaiKanryoYMD;
     }
@@ -275,6 +286,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      *
      * @return センター送信年月日
      */
+    @CheckForNull
     public FlexibleDate getCenterSoshinYMD() {
         return centerSoshinYMD;
     }
@@ -292,7 +304,7 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
      * このエンティティの主キーが他の{@literal DbT5105NinteiKanryoJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5105NinteiKanryoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5105NinteiKanryoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5105NinteiKanryoJohoEntity other) {
@@ -307,6 +319,8 @@ public class DbT5105NinteiKanryoJohoEntity extends DbTableEntityBase<DbT5105Nint
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5105NinteiKanryoJohoEntity entity) {

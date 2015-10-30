@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbe.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 /**
  * 申請履歴情報エンティティのテスト用インスタンスを作成する補助クラスです。
  *
- * @author n8223 朴義一
  */
 public final class DbT5121ShinseiRirekiJohoEntityGenerator {
 

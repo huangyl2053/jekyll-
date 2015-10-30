@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJoho.shinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -30,7 +30,7 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
     /**
      * 主キーで要介護認定申請情報を取得します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param 申請書管理番号 ShinseishoKanriNo
      * @return DbT5101NinteiShinseiJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -72,7 +72,6 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
     @Override
     public int save(DbT5101NinteiShinseiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報エンティティ"));
-
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

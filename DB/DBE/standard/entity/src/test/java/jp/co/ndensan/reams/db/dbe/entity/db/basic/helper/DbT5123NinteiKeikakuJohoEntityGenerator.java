@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.helper;
+package jp.co.ndensan.reams.db.dbe.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -19,7 +19,6 @@ public final class DbT5123NinteiKeikakuJohoEntityGenerator {
     public static final FlexibleDate DEFAULT_主治医意見書作成依頼予定年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_主治医意見書登録予定年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_要介護認定一次判定予定年月日 = new FlexibleDate("20141030");
-    public static final FlexibleDate DEFAULT_要介護認定1_5次判定予定年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_認定審査会割当予定年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_認定審査会予定年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_センター送信予定年月日 = new FlexibleDate("20141030");
@@ -38,7 +37,6 @@ public final class DbT5123NinteiKeikakuJohoEntityGenerator {
         entity.setIkenshoSakuseiIraiYoteiYMD(DEFAULT_主治医意見書作成依頼予定年月日);
         entity.setIkenshoTorokuYoteiYMD(DEFAULT_主治医意見書登録予定年月日);
         entity.setIchijiHanteiYoteiYMD(DEFAULT_要介護認定一次判定予定年月日);
-        entity.setIchiGoHanteiYoteiYMD(DEFAULT_要介護認定1_5次判定予定年月日);
         entity.setNinteiShinsakaiWariateYoteiYMD(DEFAULT_認定審査会割当予定年月日);
         entity.setNinteiShinsakaiYoteiYMD(DEFAULT_認定審査会予定年月日);
         entity.setCenterSoshinYoteiYMD(DEFAULT_センター送信予定年月日);

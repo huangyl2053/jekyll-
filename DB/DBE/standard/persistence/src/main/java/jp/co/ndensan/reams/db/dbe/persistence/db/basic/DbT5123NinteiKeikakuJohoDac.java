@@ -43,7 +43,8 @@ public class DbT5123NinteiKeikakuJohoDac implements ISaveable<DbT5123NinteiKeika
 
         return accessor.select().
                 table(DbT5123NinteiKeikakuJoho.class).
-                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
                 toObject(DbT5123NinteiKeikakuJohoEntity.class);
     }
 
@@ -71,8 +72,6 @@ public class DbT5123NinteiKeikakuJohoDac implements ISaveable<DbT5123NinteiKeika
     @Override
     public int save(DbT5123NinteiKeikakuJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定計画情報エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
