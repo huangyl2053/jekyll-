@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7030ShinKyuIryoKikanShujiiNoHenkanEntity;
 
 /**
  *
