@@ -184,7 +184,7 @@ public class NinteichosaIraiEntry {
     }
 
     /**
-     * radTokusoku
+     * radTokusoku。
      *
      * @param div NinteichosaIraiEntryDiv
      * @param div2 NinteichosaIraiListDiv
@@ -196,7 +196,7 @@ public class NinteichosaIraiEntry {
     }
 
     /**
-     * ddlTokukuHoho
+     * ddlTokukuHoho。
      *
      * @param div NinteichosaIraiEntryDiv
      * @param div2 NinteichosaIraiListDiv
@@ -208,7 +208,7 @@ public class NinteichosaIraiEntry {
     }
 
     /**
-     * onClick_btnToPublishTokusokujo
+     * onClick_btnToPublishTokusokujo。
      *
      * @param div NinteichosaIraiEntryDiv
      * @param div2 NinteichosaIraiListDiv

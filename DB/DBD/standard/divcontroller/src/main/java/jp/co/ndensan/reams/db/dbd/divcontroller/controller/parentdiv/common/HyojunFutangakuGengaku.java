@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class HyojunFutangakuGengaku {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div HyojunFutangakuGengakuDiv
      * @return ResponseData
@@ -40,7 +40,7 @@ public class HyojunFutangakuGengaku {
     }
 
     /**
-     * onSelect dgHyojunFutangakuGengakuList
+     * onSelect dgHyojunFutangakuGengakuList。
      *
      * @param div HyojunFutangakuGengakuDiv
      * @return ResponseData
@@ -48,14 +48,14 @@ public class HyojunFutangakuGengaku {
     public ResponseData<HyojunFutangakuGengakuDiv> onSelect_dgHyojunFutangakuGengakuList(HyojunFutangakuGengakuDiv div) {
         for (dgHyojunFutangakuGengakuList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(HyojunFutangakuGengakuDiv div, dgHyojunFutangakuGengakuList_Row rowValue) {
+    private void _setUp(HyojunFutangakuGengakuDiv div, dgHyojunFutangakuGengakuList_Row rowValue) {
         div.getHyojunFutangakuGemmenDetail().getTxtShinseiDate().setValue(rowValue.getShinseiDate().getValue());
         _riyoshaFutan(div).getTxtFushoninRiyu().setValue(rowValue.getFushoninRiyu());
         _riyoshaFutan(div).getTxtFutangaku().setValue(rowValue.getFutangaku().getValue());

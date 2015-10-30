@@ -6,14 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 
 //import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0410011.SearchHihokenshashoHakkoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 //import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者証発行対象者検索Divを制御します。
@@ -62,12 +57,10 @@ public class SearchHihokenshashoHakkoTaishosha {
      */
     private void setInitData(SearchHihokenshashoHakkoDiv panel) {
 
-        List<HashMap> hihokenshashoHakkoTaishoshaList = YamlLoader.DBU.loadAsList(
-                new RString("dbu0410011/HihokenshashoHakkoTaishoshaList.yml"));
-
-        HashMap hashMap = hihokenshashoHakkoTaishoshaList.get(0);
-        ControlGenerator ymlData = new ControlGenerator(hashMap);
-
+//        List<HashMap> hihokenshashoHakkoList = YamlLoader.DBU.loadAsList(
+//                new RString("dbu0410011/HihokenshashoHakkoTaishoshaList.yml"));
+//        HashMap hashMap = hihokenshashoHakkoList.get(0);
+//        ControlGenerator ymlData = new ControlGenerator(hashMap);
         //検索キー氏名の初期値設定
 //        panel.getCcdSearchHihokenshashoHakkoTaishosha().getKaigoAtenaFinder().getTxtAtenaMeisho().
 //                setValue(ymlData.getAsRString("searchShimei"));

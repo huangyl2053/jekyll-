@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 徴収方法の列挙型です。
+ * 徴収方法の列挙型クラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -18,17 +18,17 @@ public enum ChoshuHoho implements IRStringConvertable {
 
     /**
      * 特別徴収_厚生労働省 <br />
-     * コード : 1
+     * コード : 1。
      */
     特別徴収_厚生労働省("1"),
     /**
      * 特別徴収_地共済 <br />
-     * コード : 2
+     * コード : 2。
      */
     特別徴収_地共済("2"),
     /**
      * 普通徴収 <br />
-     * コード : 3
+     * コード : 3。
      */
     普通徴収("3");
     private final RString code;

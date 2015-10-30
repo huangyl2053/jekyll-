@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import org.junit.Before;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
@@ -13,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link JuryoIninKeiyakuJigyoshaBuilder}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class JuryoIninKeiyakuJigyoshaBuilderTest extends DbxTestBase {
 

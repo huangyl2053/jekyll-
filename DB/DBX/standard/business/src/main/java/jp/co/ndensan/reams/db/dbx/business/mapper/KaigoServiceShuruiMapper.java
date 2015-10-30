@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
- * 介護サービス種類のコンバーターです
+ * 介護サービス種類のコンバーターです。
  *
  * @author n8104 小玉　洋一
  * @jpName 介護サービス種類マッパー

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class RokenShichosonNo implements IValueObject<RString>, Comparable<RokenShichosonNo>, Serializable {
 
+    private static final int eight = 8;
     /**
      * 空の{@link RokenShichosonNo } です。
      */

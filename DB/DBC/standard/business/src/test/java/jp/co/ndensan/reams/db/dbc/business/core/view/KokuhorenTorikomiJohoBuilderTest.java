@@ -90,7 +90,7 @@ public class KokuhorenTorikomiJohoBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の再処理可能区分は_設定した値と同じ再処理可能区分を返す() {
             business = sut.set再処理可能区分(DbV3104KokuhorenTorikomiJohoEntityGenerator.DEFAULT_再処理可能区分).build();
-            assertThat(business.get再処理可能区分(), is(DbV3104KokuhorenTorikomiJohoEntityGenerator.DEFAULT_再処理可能区分));
+            assertThat(business.is再処理可能区分(), is(DbV3104KokuhorenTorikomiJohoEntityGenerator.DEFAULT_再処理可能区分));
         }
 
     }

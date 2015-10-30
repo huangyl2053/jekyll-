@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
  *
  * @author N8156 宮本 康
  */
-public class KaigoFukaKihonSearchKey {
+public final class KaigoFukaKihonSearchKey {
 
     private final TsuchishoNo 通知書番号;
     private final FlexibleYear 賦課年度;

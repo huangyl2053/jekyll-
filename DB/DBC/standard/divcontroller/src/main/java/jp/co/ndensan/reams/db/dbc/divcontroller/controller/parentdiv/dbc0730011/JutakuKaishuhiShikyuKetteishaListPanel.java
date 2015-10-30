@@ -38,8 +38,8 @@ public class JutakuKaishuhiShikyuKetteishaListPanel {
 
     private void setHakkoDateOutputOrderForKetteishaList(JutakuKaishuhiShikyuKetteishaListPanelDiv panel) {
 
-        String ymlDataName = "ReportPublish.yml";
-        List<HashMap> ymlData = ymlData(ymlDataName);
+        RString ymlDataName = new RString("ReportPublish.yml");
+        List<HashMap> ymlData = ymlData(ymlDataName.toString());
 
         //　発行日の初期値を設定する。
         panel.getJutakuKaishuhiShikyuKetteishaListHakkoDate().getTxtIssueDate().setValue(RDate.getNowDate());

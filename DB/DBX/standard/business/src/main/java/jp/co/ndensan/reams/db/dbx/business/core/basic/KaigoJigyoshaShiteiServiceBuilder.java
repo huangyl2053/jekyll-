@@ -783,15 +783,18 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     }
 
     /**
-     * リハビリテーション提供体制_総合リハビリテーション施設_の有無を設定します。
+     * リハビリテーション提供体制_の有無を設定します。
      *
-     * @param リハビリテーション提供体制_総合リハビリテーション施設_の有無 リハビリテーション提供体制_総合リハビリテーション施設_の有無
+     * @param リハビリテーション提供体制_の有無 リハビリテーション提供体制_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder setリハビリテーション提供体制_総合リハビリテーション施設_の有無(Code リハビリテーション提供体制_総合リハビリテーション施設_の有無) {
-        requireNonNull(リハビリテーション提供体制_総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション提供体制_総合リハビリテーション施設_の有無")
+    public KaigoJigyoshaShiteiServiceBuilder
+            setリハビリテーション提供体制_の有無(Code リハビリテーション提供体制_の有無) {
+        requireNonNull(リハビリテーション提供体制_の有無,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション提供体制_総合リハビリテーション施設_の有無")
         );
-        entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(new RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu(リハビリテーション提供体制_総合リハビリテーション施設_の有無));
+        entity.setRehaTeikyoTaisei_SogoRehaShisetsu_umu(new RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu(
+                リハビリテーション提供体制_の有無));
         return this;
     }
 
@@ -1086,15 +1089,18 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     }
 
     /**
-     * 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無を設定します。
+     * 個別リハビリテーション提供体制_の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
+     * @param 個別リハビリテーション提供体制_の有無
      * 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_総合リハビリテーション施設_の有無(Code 個別リハビリテーション提供体制_総合リハビリテーション施設_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_総合リハビリテーション施設_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
-        entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu(個別リハビリテーション提供体制_総合リハビリテーション施設_の有無));
+    public KaigoJigyoshaShiteiServiceBuilder
+            set個別リハビリテーション提供体制_の有無(Code 個別リハビリテーション提供体制_の有無) {
+        requireNonNull(個別リハビリテーション提供体制_の有無,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_総合リハビリテーション施設_の有無"));
+        entity.setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu(
+                個別リハビリテーション提供体制_の有無));
         return this;
     }
 
@@ -1118,10 +1124,13 @@ public class KaigoJigyoshaShiteiServiceBuilder {
      * @param 個別リハビリテーション提供体制_理学療法Ⅲ_の有無 個別リハビリテーション提供体制_理学療法Ⅲ_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅲ_の有無(Code 個別リハビリテーション提供体制_理学療法Ⅲ_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_理学療法Ⅲ_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_理学療法Ⅲ_の有無")
+    public KaigoJigyoshaShiteiServiceBuilder
+            set個別リハビリテーション提供体制_理学療法Ⅲ_の有無(Code 個別リハビリテーション提供体制_理学療法Ⅲ_の有無) {
+        requireNonNull(個別リハビリテーション提供体制_理学療法Ⅲ_の有無,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_理学療法Ⅲ_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3(個別リハビリテーション提供体制_理学療法Ⅲ_の有無)
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3(
+                個別リハビリテーション提供体制_理学療法Ⅲ_の有無)
         );
         return this;
     }
@@ -1146,10 +1155,13 @@ public class KaigoJigyoshaShiteiServiceBuilder {
      * @param 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無")
+    public KaigoJigyoshaShiteiServiceBuilder
+            set個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無) {
+        requireNonNull(個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無,
+                UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2(個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無)
+        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2(
+                個別リハビリテーション提供体制_言語聴覚療法Ⅰ_の有無)
         );
         return this;
     }
@@ -1679,7 +1691,8 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_理学療法Ⅱ_の有無2(Code 個別リハビリテーション提供体制_理学療法Ⅱ_の有無2) {
         requireNonNull(個別リハビリテーション提供体制_理学療法Ⅱ_の有無2, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_理学療法Ⅱ_の有無2")
         );
-        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(new KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3(個別リハビリテーション提供体制_理学療法Ⅱ_の有無2));
+        entity.setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(new KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3(
+                個別リハビリテーション提供体制_理学療法Ⅱ_の有無2));
         return this;
     }
 
@@ -1692,7 +1705,8 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_作業療法_の有無(Code 個別リハビリテーション提供体制_作業療法_の有無) {
         requireNonNull(個別リハビリテーション提供体制_作業療法_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_作業療法_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho(個別リハビリテーション提供体制_作業療法_の有無));
+        entity.setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho(
+                個別リハビリテーション提供体制_作業療法_の有無));
         return this;
     }
 
@@ -1705,7 +1719,8 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_言語聴覚療法_の有無(Code 個別リハビリテーション提供体制_言語聴覚療法_の有無) {
         requireNonNull(個別リハビリテーション提供体制_言語聴覚療法_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_言語聴覚療法_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho(個別リハビリテーション提供体制_言語聴覚療法_の有無));
+        entity.setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho(
+                個別リハビリテーション提供体制_言語聴覚療法_の有無));
         return this;
     }
 
@@ -1718,7 +1733,8 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_その他_の有無(Code 個別リハビリテーション提供体制_その他_の有無) {
         requireNonNull(個別リハビリテーション提供体制_その他_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_その他_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_Sonota_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_Sonota(個別リハビリテーション提供体制_その他_の有無));
+        entity.setKobetsuRehaTeikyoTaisei_Sonota_umu(new KobetsuRehabilitationTeikyoTaiseiUmu_Sonota(
+                個別リハビリテーション提供体制_その他_の有無));
         return this;
     }
 
@@ -1747,16 +1763,16 @@ public class KaigoJigyoshaShiteiServiceBuilder {
     }
 
     /**
-     * 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無を設定します。
+     * 個別提供体制_指導管理_の有無を設定します。
      *
-     * @param 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無
-     * 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無
+     * @param 個別提供体制_指導管理_の有無
+     * 個別提供体制_指導管理_の有無
      * @return {@link KaigoJigyoshaShiteiServiceBuilder}
      */
-    public KaigoJigyoshaShiteiServiceBuilder set個別リハビリテーション提供体制_リハビリテーション指導管理_の有無(Code 個別リハビリテーション提供体制_リハビリテーション指導管理_の有無) {
-        requireNonNull(個別リハビリテーション提供体制_リハビリテーション指導管理_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_リハビリテーション指導管理_の有無")
+    public KaigoJigyoshaShiteiServiceBuilder set個別提供体制_指導管理_の有無(Code 個別提供体制_指導管理_の有無) {
+        requireNonNull(個別提供体制_指導管理_の有無, UrSystemErrorMessages.値がnull.getReplacedMessage("個別リハビリテーション提供体制_リハビリテーション指導管理_の有無")
         );
-        entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(new KobetsuRehabilitationTeikyoTaiseiUmu(個別リハビリテーション提供体制_リハビリテーション指導管理_の有無));
+        entity.setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(new KobetsuRehabilitationTeikyoTaiseiUmu(個別提供体制_指導管理_の有無));
         return this;
     }
 

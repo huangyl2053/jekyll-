@@ -60,10 +60,10 @@ public class HihokenshashoHakkoTaishoGaitosha {
      */
     private void setHihokenshashoHakkoTaishoshaData(SearchHihokenshashoHakkoDiv panel) {
 
-        List<HashMap> hihokenshashoHakkoTaishoshaList = YamlLoader.DBU.loadAsList(
+        List<HashMap> hihokenshashoHakkoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0410011/HihokenshashoHakkoTaishoshaList.yml"));
 
-        List arraydata = createRowHihokenshashoHakkoTaishoshaList(hihokenshashoHakkoTaishoshaList);
+        List arraydata = createRowHihokenshashoHakkoTaishoshaList(hihokenshashoHakkoList);
         DataGrid grid = panel.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult();
         grid.setDataSource(arraydata);
 
@@ -73,12 +73,12 @@ public class HihokenshashoHakkoTaishoGaitosha {
      *被保険者証発行対象者情報の初期値をセットします。
      */
     private List createRowHihokenshashoHakkoTaishoshaList(
-            List<HashMap> hihokenshashoHakkoTaishoshaList) {
+            List<HashMap> hihokenshashoHakkoList) {
 
         List arrayDataList = new ArrayList();
 
-        for (int i = 1; i < hihokenshashoHakkoTaishoshaList.size(); i++) {
-            HashMap hashMap = hihokenshashoHakkoTaishoshaList.get(i);
+        for (int i = 1; i < hihokenshashoHakkoList.size(); i++) {
+            HashMap hashMap = hihokenshashoHakkoList.get(i);
             ControlGenerator ymlData = new ControlGenerator(hashMap);
 
             RString rsHihoNo = ymlData.getAsRString("hihoNo");
@@ -133,7 +133,7 @@ public class HihokenshashoHakkoTaishoGaitosha {
             RString juminShubetsu,
             RString setaiCode
     ) {
-        dgSearchResult_Row rowHihokenshashoHakkoTaishoshaList
+        dgSearchResult_Row rowHihokenshashoHakkoList
                 = new dgSearchResult_Row(
                         new Button(),
                         hihoNo,
@@ -150,6 +150,6 @@ public class HihokenshashoHakkoTaishoGaitosha {
                         juminShubetsu,
                         setaiCode
                 );
-        return rowHihokenshashoHakkoTaishoshaList;
+        return rowHihokenshashoHakkoList;
     }
 }

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShikakuHihokens
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -164,21 +162,21 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     /**
      * 資格異動区分を判定します。<br />
-     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。 資格変更よりも資格喪失を優先して判定します。
+     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。
+     * 資格変更よりも資格喪失を優先して判定します。
      *
      * @return 資格異動区分
      */
-    private ShikakuIdoKubun judgeShikakuIdoKubun() {
-        FlexibleDate 資格変更日 = this.get資格変更().getActionDate();
-        FlexibleDate 資格喪失日 = this.get資格喪失().getActionDate();
-        if (資格喪失日 != FlexibleDate.MAX) {
-            return ShikakuIdoKubun.資格喪失;
-        } else if (資格変更日 != FlexibleDate.MAX) {
-            return ShikakuIdoKubun.資格変更;
-        }
-        return ShikakuIdoKubun.資格取得;
-    }
-
+//    private ShikakuIdoKubun judgeShikakuIdoKubun() {
+//        FlexibleDate 資格変更日 = this.get資格変更().getActionDate();
+//        FlexibleDate 資格喪失日 = this.get資格喪失().getActionDate();
+//        if (資格喪失日 != FlexibleDate.MAX) {
+//            return ShikakuIdoKubun.資格喪失;
+//        } else if (資格変更日 != FlexibleDate.MAX) {
+//            return ShikakuIdoKubun.資格変更;
+//        }
+//        return ShikakuIdoKubun.資格取得;
+//    }
     /**
      * HihokenshaShikakuを生成するためのクラスです。
      */

@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者限度額管理を管理するクラスです。
  */
-public class JukyushaGendoGakuKanri extends ModelBase<JukyushaGendoGakuKanriIdentifier, DbT7116JukyushaGendoGakuKanriEntity, JukyushaGendoGakuKanri> implements Serializable {
+public class JukyushaGendoGakuKanri
+        extends ModelBase<JukyushaGendoGakuKanriIdentifier, DbT7116JukyushaGendoGakuKanriEntity, JukyushaGendoGakuKanri>
+        implements Serializable {
 
     private final DbT7116JukyushaGendoGakuKanriEntity entity;
     private final JukyushaGendoGakuKanriIdentifier id;

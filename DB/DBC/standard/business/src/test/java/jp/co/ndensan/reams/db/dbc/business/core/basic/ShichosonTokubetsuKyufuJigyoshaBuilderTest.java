@@ -305,7 +305,7 @@ public class ShichosonTokubetsuKyufuJigyoshaBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の生活保護法による指定の有は_設定した値と同じ生活保護法による指定の有を返す() {
             business = sut.set生活保護法による指定の有(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_生活保護法による指定の有).build();
-            assertThat(business.get生活保護法による指定の有(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_生活保護法による指定の有));
+            assertThat(business.is生活保護法による指定の有(), is(DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator.DEFAULT_生活保護法による指定の有));
         }
 
         @Test

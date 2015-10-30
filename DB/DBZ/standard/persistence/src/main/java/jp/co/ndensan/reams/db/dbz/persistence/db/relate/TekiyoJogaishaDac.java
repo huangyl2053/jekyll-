@@ -71,7 +71,7 @@ public class TekiyoJogaishaDac implements IModifiable<DbT1002TekiyoJogaishaEntit
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT1002TekiyoJogaishaEntity> List = accessor.select().
+        List<DbT1002TekiyoJogaishaEntity> entityList = accessor.select().
                 table(DbT1002TekiyoJogaisha.class).
                 where(
                         and(
@@ -86,7 +86,7 @@ public class TekiyoJogaishaDac implements IModifiable<DbT1002TekiyoJogaishaEntit
 
         List<DbT1002TekiyoJogaishaEntity> 台帳リスト = new ArrayList<>();
 
-        for (DbT1002TekiyoJogaishaEntity entity : List) {
+        for (DbT1002TekiyoJogaishaEntity entity : entityList) {
             台帳リスト.add(createModel(entity));
         }
 

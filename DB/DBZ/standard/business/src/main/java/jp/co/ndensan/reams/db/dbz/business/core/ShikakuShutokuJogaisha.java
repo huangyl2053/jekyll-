@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 資格取得除外者を管理するクラスです。
  */
-public class ShikakuShutokuJogaisha extends ModelBase<ShikakuShutokuJogaishaIdentifier, DbT1009ShikakuShutokuJogaishaEntity, ShikakuShutokuJogaisha> implements Serializable {
+public class ShikakuShutokuJogaisha extends 
+        ModelBase<ShikakuShutokuJogaishaIdentifier, 
+        DbT1009ShikakuShutokuJogaishaEntity, 
+        ShikakuShutokuJogaisha> implements Serializable {
 
     private final DbT1009ShikakuShutokuJogaishaEntity entity;
     private final ShikakuShutokuJogaishaIdentifier id;

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinteiShinseiDateValidationMessage implements IValidationMessage {
 
     /**
-     * 認定申請年月日がNullであること
+     * 認定申請年月日がNullであること。
      */
     認定申請年月日がNullであること(NinteiShinseiDateErrorMessage.認定申請年月日がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinteiShinseiDateValidationMessage implements IValidationMessage {
     public enum NinteiShinseiDateErrorMessage implements IMessageGettable {
 
         /**
-         * 認定申請年月日がNullであること
+         * 認定申請年月日がNullであること。
          */
         認定申請年月日がNullであること(1, "認定申請年月日を指定してください。");
         private final int no;

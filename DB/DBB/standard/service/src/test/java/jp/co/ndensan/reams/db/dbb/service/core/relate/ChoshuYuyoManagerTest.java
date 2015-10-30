@@ -35,6 +35,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -46,6 +47,7 @@ import static org.mockito.Mockito.when;
  * {link ChoshuYuyoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ChoshuYuyoManagerTest {
 
     // 介護賦課徴収猶予

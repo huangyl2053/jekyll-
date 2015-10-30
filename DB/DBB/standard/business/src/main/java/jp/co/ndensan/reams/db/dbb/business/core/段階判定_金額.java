@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.IHanteiHoho;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**

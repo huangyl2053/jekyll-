@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class IkkatsuHakkoTaishoList {
 
+    private static final RString BTN_HAKKO = new RString("btnHakko");
+
     /**
      * 未発行検索条件画面-「一括作成対象を表示する」ボタン押下時の処理を表します。
      *
@@ -55,7 +57,7 @@ public class IkkatsuHakkoTaishoList {
                 getKaigoChohyoShutsuryokujun().setEraseBorder(true);
 
         //「被保険者証を発行する」ボタンを活性化
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, false);
 
         response.data = panel;
         return response;
@@ -72,12 +74,12 @@ public class IkkatsuHakkoTaishoList {
         ResponseData<IkkatsuHakkoTaishoListDiv> response = new ResponseData<>();
 
         if (panel.getDgIkkatsuHakkoTaisho().getSelectedItems().isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, true);
         } else {
             if (!panel.getShutsuryokuJoho().getTxtKofuDate().getText().isEmpty()) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, false);
             } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, true);
             }
         }
 
@@ -95,9 +97,9 @@ public class IkkatsuHakkoTaishoList {
         ResponseData<IkkatsuHakkoTaishoListDiv> response = new ResponseData<>();
 
         if (!panel.getShutsuryokuJoho().getTxtKofuDate().getText().isEmpty()) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, false);
         } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_HAKKO, true);
         }
 
         response.data = panel;
@@ -109,10 +111,10 @@ public class IkkatsuHakkoTaishoList {
      */
     private void setIkkatsuHakkoTaishoData(IkkatsuHakkoTaishoListDiv panel) {
 
-        List<HashMap> IkkatsuHakkoTaishoList = YamlLoader.DBU.loadAsList(
+        List<HashMap> ikkatsuHakkoTaishoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0400011/IkkatsuHakkoTaishoList.yml"));
 
-        List<dgIkkatsuHakkoTaisho_Row> arraydata = createRowIkkatsuHakkoTaishoList(IkkatsuHakkoTaishoList);
+        List<dgIkkatsuHakkoTaisho_Row> arraydata = createRowIkkatsuHakkoTaishoList(ikkatsuHakkoTaishoList);
         for (Iterator<dgIkkatsuHakkoTaisho_Row> it = arraydata.iterator(); it.hasNext();) {
 
             dgIkkatsuHakkoTaisho_Row ikkatsuHakkoTaisho_Row = it.next();
@@ -128,12 +130,12 @@ public class IkkatsuHakkoTaishoList {
     /*
      *一括発行対象者情報の初期値をセットします。
      */
-    private List createRowIkkatsuHakkoTaishoList(List<HashMap> IkkatsuHakkoTaishoList) {
+    private List createRowIkkatsuHakkoTaishoList(List<HashMap> ikkatsuHakkoTaishoList) {
 
         List arrayDataList = new ArrayList();
 
-        for (int i = 0; i < IkkatsuHakkoTaishoList.size(); i++) {
-            HashMap hashMap = IkkatsuHakkoTaishoList.get(i);
+        for (int i = 0; i < ikkatsuHakkoTaishoList.size(); i++) {
+            HashMap hashMap = ikkatsuHakkoTaishoList.get(i);
             ControlGenerator ymlData = new ControlGenerator(hashMap);
 
             RString rsHihoNo = ymlData.getAsRString("hihoNo");

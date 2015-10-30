@@ -20,8 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 認知症高齢者自立度コードを表すクラスです。
  *
  */
-public class NinchishoKoreishaJiritsudoCode implements Comparable<NinchishoKoreishaJiritsudoCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
-//public class NinchishoKoreishaJiritsudoCode implements Comparable<NinchishoKoreishaJiritsudoCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class NinchishoKoreishaJiritsudoCode implements Comparable<NinchishoKoreishaJiritsudoCode>,
+        IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+//public class NinchishoKoreishaJiritsudoCode implements Comparable<NinchishoKoreishaJiritsudoCode>,
+//    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
 

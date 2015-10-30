@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3317 塚田 萌
  */
-public class PaymentMethod {
+public final class PaymentMethod {
 
     private PaymentMethod() {
     }

@@ -57,6 +57,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
  * @author N8187 久保田 英男
  */
 public class ShokanShikyuTorokuShomeisho {
+    
+        private static final int INDEX_3 = 3;
+        private static final int INDEX_4 = 4;
+        private static final int INDEX_7 = 7;
+        private static final int INDEX_37 = 37;
+        private static final int INDEX_38 = 38;
+        private static final int INDEX_40 = 40;
+        private static final int INDEX_45 = 45;
+        private static final int INDEX_46 = 46;
+        private static final int INDEX_48 = 48;
 
     private enum 一覧明細表示 {
 
@@ -234,7 +244,7 @@ public class ShokanShikyuTorokuShomeisho {
             kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
             kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
         } else {
-            source = getShokanShikyuTorokuShomeishoYamlId(3);
+            source = getShokanShikyuTorokuShomeishoYamlId(INDEX_3);
             nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
             nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
             nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
@@ -325,7 +335,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
-        for (int i = 4; i < 7; i++) {
+        for (int i = INDEX_4; i < INDEX_7; i++) {
             dgRowList.add(create給付費明細一覧アイテム(
                     sourceList.get(i).get("サービス").toString(),
                     sourceList.get(i).get("単位数").toString(),
@@ -364,7 +374,7 @@ public class ShokanShikyuTorokuShomeisho {
                     getDgServiceTeikyoShomeishoMeisaiList().getActiveRowId();
             meisaiMeisai.getTxtKyufuhiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = getShokanShikyuTorokuShomeishoYamlId(7);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(INDEX_7);
         meisaiMeisai.getTxtKyufuhiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
         meisaiMeisai.getTxtKyufuhiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
         meisaiMeisai.getTxtKyufuhiServiceName().setValue(new RString(source.get("サービス名称").toString()));
@@ -1847,7 +1857,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
-        for (int i = 37; i < 38; i++) {
+        for (int i = INDEX_37; i < INDEX_38; i++) {
             dgRowList.add(create請求額一覧アイテム(
                     sourceList.get(i).get("サービス種類").toString(),
                     sourceList.get(i).get("単位数合計").toString(),
@@ -1888,7 +1898,7 @@ public class ShokanShikyuTorokuShomeisho {
                     .getDgServiceTeikyoShomeishoShukeiList().getActiveRowId();
             meisai.getTxtShukeiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = getShokanShikyuTorokuShomeishoYamlId(40);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(INDEX_40);
         meisai.getRadShukeiShinsaHoho().setSelectedItem(new RString("key0"));
         meisai.getTxtShukeiShuruiCode().setValue(new RString(source.get("サービス種類").toString()));
         meisai.getTxtShukeiShuruiName().setValue(new RString(source.get("サービス種類名").toString()));
@@ -2311,7 +2321,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
-        for (int i = 45; i < 46; i++) {
+        for (int i = INDEX_45; i < INDEX_46; i++) {
             dgRowList.add(create社福軽減額一覧アイテム(
                     sourceList.get(i).get("サービス種類").toString(),
                     sourceList.get(i).get("軽減率").toString(),
@@ -2352,7 +2362,7 @@ public class ShokanShikyuTorokuShomeisho {
                     .getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList().getActiveRowId();
             meisai.getTxtShafukuSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = getShokanShikyuTorokuShomeishoYamlId(48);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(INDEX_48);
         meisai.getTxtShafukugakuFutanSogaku().setValue(new Decimal(source.get("受領すべき利用者負担の総額").toString()));
         meisai.getTxtShafukugakuKeigengaku().setValue(new Decimal(source.get("軽減額").toString()));
         meisai.getTxtShafukugakuKeigengoFutangaku().setValue(new Decimal(source.get("軽減後利用者負担額").toString()));

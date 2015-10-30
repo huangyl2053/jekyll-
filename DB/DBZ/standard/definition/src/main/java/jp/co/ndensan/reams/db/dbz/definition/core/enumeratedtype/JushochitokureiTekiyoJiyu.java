@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 住所地特例の適用事由の列挙型です。
+ * 住所地特例の適用事由の列挙型クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -22,12 +22,12 @@ public enum JushochitokureiTekiyoJiyu implements IShikakuIdoJiyu {
     EMPTY("", ""),
     /**
      * 自特例適用 <br />
-     * コード : 01
+     * コード : 01。
      */
     自特例適用("01", "自特例適用"),
     /**
      * その他 <br />
-     * コード : 99
+     * コード : 99。
      */
     その他("99", "その他");
     private final RString code;

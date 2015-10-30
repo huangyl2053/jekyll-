@@ -21,14 +21,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT5592ShinsakaiKaisaiBashoJohoDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT5592ShinsakaiKaisaiBashoJohoDacTest extends DbeTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_介護認定審査会開催場所コード;
+    private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT5592ShinsakaiKaisaiBashoJohoDac sut;
@@ -43,7 +45,7 @@ public class DbT5592ShinsakaiKaisaiBashoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_介護認定審査会開催場所コード);
+                    キー_01);
             TestSupport.insert(
                     キー_02);
         }

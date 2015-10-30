@@ -58,7 +58,7 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
     }
 
     /**
-     * 福祉用具購入費支給申請決定 審査済決定日をクリア処理が行う
+     * 福祉用具購入費支給申請決定 審査済決定日をクリア処理が行う。
      *
      * @param panel YoguKonyuhiShikyuShinseiMishinsaResultListDiv
      * @return PanelDivのResponseData
@@ -84,13 +84,16 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
     /*
      *審査済支給申請一覧情報の初期値をセットします。
      */
+    private static final RString DATE = new RString("20140701");
+    private static final RString YEAR = new RString("201406");
+    
     private List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> createRowShinseiShinsazumiData() {
 
         List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> arrayDataList = new ArrayList<>();
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111111",
                 "電算　太郎",
                 "18000",
@@ -102,8 +105,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111112",
                 "電算　一輝",
                 "27000",
@@ -115,8 +118,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111113",
                 "電算　涼太",
                 "36000",
@@ -128,8 +131,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111114",
                 "電算　陸斗",
                 "45000",
@@ -141,8 +144,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111115",
                 "電算　悠馬",
                 "54000",
@@ -154,8 +157,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111116",
                 "電算　嗚呼",
                 "63000",
@@ -167,8 +170,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111117",
                 "電算　長野",
                 "9000",
@@ -180,8 +183,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111118",
                 "電算　知",
                 "27000",
@@ -193,8 +196,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111119",
                 "電算　網",
                 "72000",
@@ -206,8 +209,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
         ));
 
         arrayDataList.add(createRowShinseiShinsazumiData(
-                "20140701",
-                "201406",
+                DATE.toString(),
+                YEAR.toString(),
                 "1111111110",
                 "電算　箕",
                 "81000",

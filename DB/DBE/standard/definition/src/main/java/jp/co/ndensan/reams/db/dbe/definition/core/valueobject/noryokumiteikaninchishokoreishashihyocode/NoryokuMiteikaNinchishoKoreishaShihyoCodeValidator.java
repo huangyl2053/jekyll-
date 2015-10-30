@@ -15,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator {
 
-    private final NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuMiteikaNinchishoKoreishaShihyoCode;
+    private final NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuKoreishaShihyoCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param noryokuMiteikaNinchishoKoreishaShihyoCode 運動能力が低下していない認知症高齢者の指標
      */
-    public NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator(NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuMiteikaNinchishoKoreishaShihyoCode) {
-        requireNonNull(noryokuMiteikaNinchishoKoreishaShihyoCode, UrSystemErrorMessages.値がnull.getReplacedMessage("運動能力が低下していない認知症高齢者の指標"));
-        this.noryokuMiteikaNinchishoKoreishaShihyoCode = noryokuMiteikaNinchishoKoreishaShihyoCode;
+    public NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator(NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuKoreishaShihyoCode) {
+        requireNonNull(noryokuKoreishaShihyoCode, UrSystemErrorMessages.値がnull.getReplacedMessage("運動能力が低下していない認知症高齢者の指標"));
+        this.noryokuKoreishaShihyoCode = noryokuKoreishaShihyoCode;
     }
 
     /**
@@ -34,7 +34,7 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCodeValidator {
      * @return {@link IValidationMessages}
      */
     public IValidationMessages validate() {
-        return ValidateChain.validateStart(noryokuMiteikaNinchishoKoreishaShihyoCode)
+        return ValidateChain.validateStart(noryokuKoreishaShihyoCode)
                 .messages();
     }
 }

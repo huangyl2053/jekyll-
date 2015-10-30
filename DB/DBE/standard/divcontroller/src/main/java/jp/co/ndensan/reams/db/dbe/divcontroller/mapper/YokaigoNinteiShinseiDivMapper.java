@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class YokaigoNinteiShinseiDivMapper {
+public final class YokaigoNinteiShinseiDivMapper {
 
     private YokaigoNinteiShinseiDivMapper() {
     }

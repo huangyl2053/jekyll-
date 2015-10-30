@@ -161,7 +161,7 @@ public class ShujiiIkenshoIraiJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の認定情報提供希望フラグは_設定した値と同じ認定情報提供希望フラグを返す() {
             business = sut.set認定情報提供希望フラグ(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_認定情報提供希望フラグ).build();
-            assertThat(business.get認定情報提供希望フラグ(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_認定情報提供希望フラグ));
+            assertThat(business.is認定情報提供希望フラグ(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_認定情報提供希望フラグ));
         }
 
         @Test
@@ -173,7 +173,7 @@ public class ShujiiIkenshoIraiJohoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbT5301ShujiiIkenshoIraiJohoEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanShikyuKetteishaListSetting {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+
     private List<HashMap> getShokanShikyuTorokuShomeishoYaml() {
         return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1000000/ShokanShikyuKetteiTsuchishoJoken.yml"));
     }
@@ -42,17 +46,17 @@ public class ShokanShikyuKetteishaListSetting {
     }
 
     private void setPrintSetting(ShokanShikyuKetteishaListSettingDiv panel) {
-        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(3);
+        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(INDEX_3);
 
         panel.getShokanShikyuKetteishaListPrintSetting().getTxtIssueDate().setValue(new RDate(source.get("発効日").toString()));
     }
 
     private void setPaymentDate(ShokanShikyuKetteishaListSettingDiv panel) {
-        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(4);
+//        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(INDEX_4);
     }
 
     private void setOutputOrder(ShokanShikyuKetteishaListSettingDiv panel) {
-        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(5);
+        HashMap source = getShokanShikyuTorokuShomeishoYaml().get(INDEX_5);
 
         panel.getShokanShikyuKetteishaListSettingOutputOrder().getTxtSortName().setValue(new RString(source.get("出力順名称").toString()));
         panel.getShokanShikyuKetteishaListSettingOutputOrder().getTxtKaiPage().setValue(new RString(source.get("改頁").toString()));

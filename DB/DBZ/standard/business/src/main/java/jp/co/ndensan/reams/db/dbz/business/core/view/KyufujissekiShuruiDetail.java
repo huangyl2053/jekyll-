@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付実績種類詳細を管理するクラスです。
  */
-public class KyufujissekiShuruiDetail extends ParentModelBase<KyufujissekiShuruiDetailIdentifier, DbV3016KyufujissekiShuruiDetailEntity, KyufujissekiShuruiDetail> implements Serializable {
+public class KyufujissekiShuruiDetail extends 
+        ParentModelBase<KyufujissekiShuruiDetailIdentifier, 
+        DbV3016KyufujissekiShuruiDetailEntity, KyufujissekiShuruiDetail> implements Serializable {
 
     private final DbV3016KyufujissekiShuruiDetailEntity entity;
     private final KyufujissekiShuruiDetailIdentifier id;
@@ -328,7 +330,7 @@ public class KyufujissekiShuruiDetail extends ParentModelBase<KyufujissekiShurui
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV3016KyufujissekiShuruiDetailEntity entity;
         private final KyufujissekiShuruiDetailIdentifier id;
 

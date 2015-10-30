@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.any;
@@ -32,6 +33,7 @@ import static org.mockito.Mockito.when;
  * {link KibetsuChoshuYuyoManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KibetsuChoshuYuyoManagerTest {
 
     private static DbT2007KibetsuChoshuYuyoDac dac;

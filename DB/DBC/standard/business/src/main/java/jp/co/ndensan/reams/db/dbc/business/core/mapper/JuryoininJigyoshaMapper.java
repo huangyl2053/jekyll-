@@ -59,7 +59,7 @@ public final class JuryoininJigyoshaMapper {
         JuryoininJigyosha 受領委任事業者 = new JuryoininJigyosha(
                 create契約番号(entity.getJigyoshaKeiyakuNo()),
                 create契約期間(entity),
-                null,//entity.getRirekiNo(),
+                null,
                 entity.getTodokedeYMD(),
                 create届出者(entity),
                 entity.getKeiyakuTorokuYMD(),

@@ -185,7 +185,7 @@ public class Image extends ParentModelBase<ImageIdentifier, DbT5115ImageEntity, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5115ImageEntity entity;
         private final ImageIdentifier id;
 

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ビルドエラー回避のための暫定クラス
+ * ビルドエラー回避のための暫定クラスです。
  *
  * @author n8187
  */

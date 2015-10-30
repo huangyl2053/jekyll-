@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 最優先地区コードの区分です。
+ * 最優先地区コードの区分クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -20,27 +20,27 @@ public enum TopPriorityArea {
 
     /**
      * 地区コード１<br/>
-     * コード:"1"
+     * コード:"1"。
      */
     地区コード１("1"),
     /**
      * 地区コード２<br/>
-     * コード:"2"
+     * コード:"2"。
      */
     地区コード２("2"),
     /**
      * 地区コード３<br/>
-     * コード:"3"
+     * コード:"3"。
      */
     地区コード３("3"),
     /**
      * 未使用<br/>
-     * コード:"4"
+     * コード:"4"。
      */
     未使用("4"),
     /**
      * 未設定<br/>
-     * コード:""
+     * コード:""。
      */
     未設定("");
     private final RString theCode;

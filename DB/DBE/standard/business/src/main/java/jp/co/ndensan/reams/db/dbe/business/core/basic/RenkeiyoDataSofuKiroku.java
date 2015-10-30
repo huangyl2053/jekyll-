@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 連携用データ送付記録を管理するクラスです。
  */
-public class RenkeiyoDataSofuKiroku extends ParentModelBase<RenkeiyoDataSofuKirokuIdentifier, DbT5191RenkeiyoDataSofuKirokuEntity, RenkeiyoDataSofuKiroku> implements Serializable {
+public class RenkeiyoDataSofuKiroku
+        extends ParentModelBase<RenkeiyoDataSofuKirokuIdentifier, DbT5191RenkeiyoDataSofuKirokuEntity, RenkeiyoDataSofuKiroku>
+        implements Serializable {
 
     private final DbT5191RenkeiyoDataSofuKirokuEntity entity;
     private final RenkeiyoDataSofuKirokuIdentifier id;
@@ -225,7 +227,7 @@ public class RenkeiyoDataSofuKiroku extends ParentModelBase<RenkeiyoDataSofuKiro
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5191RenkeiyoDataSofuKirokuEntity entity;
         private final RenkeiyoDataSofuKirokuIdentifier id;
 

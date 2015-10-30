@@ -12,11 +12,11 @@ package jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype;
 public enum ShinsaKeizokuKubun {
 
     /**
-     * 継続する
+     * 継続する。
      */
     継続する(true),
     /**
-     * 継続しない
+     * 継続しない。
      */
     継続しない(false);
     private final boolean is継続;

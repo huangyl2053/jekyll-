@@ -128,6 +128,5 @@ public interface IKyufukanrihyoDataTempTableMapper {
      */
     List<DbTKyufukanrihyoDataTempTableEntity> getTempData(Map<String, Object> param);
 
-	//select
     List<DbTKyufukanrihyoDataTempTableEntity> selectAll();
 }

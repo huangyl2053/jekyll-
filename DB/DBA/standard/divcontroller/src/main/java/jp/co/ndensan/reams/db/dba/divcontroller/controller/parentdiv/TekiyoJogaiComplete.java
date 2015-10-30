@@ -28,7 +28,7 @@ public class TekiyoJogaiComplete {
         ResponseData<TekiyoJogaiCompleteDiv> response = new ResponseData<>();
 
 //        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("適用除外登録を更新しました。"));//,
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("適用除外登録を更新しました。")); //,
 //                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;

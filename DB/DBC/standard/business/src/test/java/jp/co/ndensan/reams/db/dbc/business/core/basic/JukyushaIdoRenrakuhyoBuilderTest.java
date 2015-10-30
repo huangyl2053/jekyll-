@@ -259,7 +259,7 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の公費負担上限額減額有フラグは_設定した値と同じ公費負担上限額減額有フラグを返す() {
             business = sut.set公費負担上限額減額有フラグ(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_公費負担上限額減額有フラグ).build();
-            assertThat(business.get公費負担上限額減額有フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_公費負担上限額減額有フラグ));
+            assertThat(business.is公費負担上限額減額有フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_公費負担上限額減額有フラグ));
         }
 
         @Test
@@ -355,7 +355,7 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の課税層の特例減額措置対象フラグは_設定した値と同じ課税層の特例減額措置対象フラグを返す() {
             business = sut.set課税層の特例減額措置対象フラグ(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_課税層の特例減額措置対象フラグ).build();
-            assertThat(business.get課税層の特例減額措置対象フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_課税層の特例減額措置対象フラグ));
+            assertThat(business.is課税層の特例減額措置対象フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_課税層の特例減額措置対象フラグ));
         }
 
         @Test
@@ -427,7 +427,7 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の小多機能居宅介護利用開始月利用有フラグは_設定した値と同じ小多機能居宅介護利用開始月利用有フラグを返す() {
             business = sut.set小多機能居宅介護利用開始月利用有フラグ(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_小多機能居宅介護利用開始月利用有フラグ).build();
-            assertThat(business.get小多機能居宅介護利用開始月利用有フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_小多機能居宅介護利用開始月利用有フラグ));
+            assertThat(business.is小多機能居宅介護利用開始月利用有フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_小多機能居宅介護利用開始月利用有フラグ));
         }
 
         @Test
@@ -481,7 +481,7 @@ public class JukyushaIdoRenrakuhyoBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の訂正連絡票フラグは_設定した値と同じ訂正連絡票フラグを返す() {
             business = sut.set訂正連絡票フラグ(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_訂正連絡票フラグ).build();
-            assertThat(business.get訂正連絡票フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_訂正連絡票フラグ));
+            assertThat(business.is訂正連絡票フラグ(), is(DbT3001JukyushaIdoRenrakuhyoEntityGenerator.DEFAULT_訂正連絡票フラグ));
         }
 
         @Test

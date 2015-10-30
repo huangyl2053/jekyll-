@@ -43,13 +43,13 @@ public class KyufuJissekiKihonGokei {
             RString rsServiceTani = toRString(iKihonGokei.getサービス単位());
             RString rsRiyoshaFutangaku = setCommFormat(iKihonGokei.get利用者負担額());
             RString rsHokenryoSeikyugaku = setCommFormat(iKihonGokei.get保険料請求額());
-            RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = setCommFormat(iKihonGokei.get緊急時施設療養費保険請求分合計());
-            RString rsTokuteiShinryohiKohiSeikyubunGokei = setCommFormat(iKihonGokei.get特定診療費公費請求分合計());
-            RString rsTokuteiNyushoshaKaigotoSeikyugaku = setCommFormat(iKihonGokei.get特定入所者介護等請求額());
+            RString rsKinkyujiSeikyubunGokei = setCommFormat(iKihonGokei.get緊急時施設療養費保険請求分合計());
+            RString rsTokuteiSeikyubunGokei = setCommFormat(iKihonGokei.get特定診療費公費請求分合計());
+            RString rsKaigotoSeikyugaku = setCommFormat(iKihonGokei.get特定入所者介護等請求額());
 
             kyufuJissekiKihonGokeiList.add(createKyufuJissekiKihonGokeiRow(
                     rsHokenKohi, rsZengo, rsServiceTani, rsHokenryoSeikyugaku, rsRiyoshaFutangaku,
-                    rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei, rsTokuteiShinryohiKohiSeikyubunGokei, rsTokuteiNyushoshaKaigotoSeikyugaku));
+                    rsKinkyujiSeikyubunGokei, rsTokuteiSeikyubunGokei, rsKaigotoSeikyugaku));
         }
         panel.getDgKyufuJissekiKihonGokei().setDataSource(kyufuJissekiKihonGokeiList);
 
@@ -74,12 +74,12 @@ public class KyufuJissekiKihonGokei {
         RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
         RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
 
-        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
-                new HihokenshaNo(被保番号),
-                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
-                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
-                new ServiceShuruiCode(サービス種類),
-                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
+//        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
+//                new HihokenshaNo(被保番号),
+//                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
+//                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
+//                new ServiceShuruiCode(サービス種類),
+//                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
 
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        KyufuJissekiFinder finder = new KyufuJissekiFinder();

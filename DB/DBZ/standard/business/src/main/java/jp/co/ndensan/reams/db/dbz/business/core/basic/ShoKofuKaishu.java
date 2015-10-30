@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 証交付回収を管理するクラスです。
  */
-public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7037ShoKofuKaishuEntity, ShoKofuKaishu> implements Serializable {
+public class ShoKofuKaishu extends
+        ParentModelBase<ShoKofuKaishuIdentifier, DbT7037ShoKofuKaishuEntity, ShoKofuKaishu>
+        implements Serializable {
 
     private final DbT7037ShoKofuKaishuEntity entity;
     private final ShoKofuKaishuIdentifier id;
@@ -194,7 +196,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 単票発行有無フラグ
      */
-    public boolean get単票発行有無フラグ() {
+    public boolean is単票発行有無フラグ() {
         return entity.getTanpyoHakkoUmuFlag();
     }
 
@@ -230,7 +232,7 @@ public class ShoKofuKaishu extends ParentModelBase<ShoKofuKaishuIdentifier, DbT7
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

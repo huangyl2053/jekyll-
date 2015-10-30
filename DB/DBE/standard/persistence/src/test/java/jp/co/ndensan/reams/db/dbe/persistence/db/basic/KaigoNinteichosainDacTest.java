@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
@@ -32,6 +33,7 @@ import static org.junit.Assert.assertThat;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
     private static KaigoNinteichosainDac sut;

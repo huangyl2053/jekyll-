@@ -77,8 +77,8 @@ public class IchijiHanteiKekkaInfo {
         RString keikokuNo = cg.getAsRString("keikokuno");
         RString keikokuCode = cg.getAsRString("keikokucode");
         RString keikokuNaiyo = cg.getAsRString("keikokunaiyo");
-        dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row(keikokuNo, keikokuCode, keikokuNaiyo);
-        return row;
+//        dgIchijiHanteiKeikokuCode_Row row = new dgIchijiHanteiKeikokuCode_Row(keikokuNo, keikokuCode, keikokuNaiyo);
+        return new dgIchijiHanteiKeikokuCode_Row(keikokuNo, keikokuCode, keikokuNaiyo);
     }
 
 }

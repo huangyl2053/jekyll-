@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  *
- * {@link KaigoIryoKikanCode}のバリデーションメッセージです。
+ * {@link KaigoIryoKikanCode}のバリデーションメッセージクラスです。
  */
 public enum KaigoIryoKikanCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(KaigoIryoKikanCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum KaigoIryoKikanCodeValidationMessage implements IValidationMessage {
     public enum KaigoIryoKikanCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "介護医療機関コードを指定してください。");
         private final int no;

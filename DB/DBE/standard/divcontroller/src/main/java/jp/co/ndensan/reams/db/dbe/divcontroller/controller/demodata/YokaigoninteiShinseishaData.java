@@ -16,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  */
 public class YokaigoninteiShinseishaData {
 
-    private static final RString FILE_NAME = new RString("dbe1010001/YokaigoninteiShinseisha.yml");
-
+//    private static final RString FILE_NAME = new RString("dbe1010001/YokaigoninteiShinseisha.yml");
     /**
      * 要介護認定申請者のデモデータを返します。
      *

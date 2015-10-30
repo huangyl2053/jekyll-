@@ -28,11 +28,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class KogakuServicehiListPanel {
 
+    private static final int INDEX_6 = 6;
+    private RString hihonNo = null;
+    private RString hihoName = null;
+    private RString teikyoYM = null;
+    private RString shinseiYM = null;
+    private RString ketteiYM = null;
+
     /**
      * 高額介護サービス費照会 高額介護サービス費照会画面の一覧で該当者を検索するボタンを押したら、一覧の内容が表示する。
      *
-     * @author n8223 ①高額介護サービス費照会画面の一覧から選択された 「被保険番号 ,被保険名 , 提供年月, 申請年月, 決定年月」
-     * その YMLデータを設定する。」014．07.01
+     * @author n8223 ①高額介護サービス費照会画面の一覧から選択された 「被保険番号 ,被保険名 , 提供年月, 申請年月, 決定年月」 その YMLデータを設定する。」014．07.01
      *
      * @param panel
      * @param searchpanel
@@ -78,74 +84,15 @@ public class KogakuServicehiListPanel {
     }
 
     private void hashMap(ControlGenerator ymlDt, List<dgKogakuServicehiRireki_Row> arrayData, SearchKogakuServicehiPanelDiv searchpanel) {
-        RString hihonNo = null;
-        RString hihoName = null;
-        RString teikyoYM = null;
-        RString shinseiYM = null;
-        RString ketteiYM = null;
 
         dgKogakuServicehiRireki_Row item;
         switch (searchpanel.getRadSearchKubun().getSelectedItem().toString()) {
             case "hihokenshaShitei":
-                //2014.07.01 画面入力
-                //被保番号
-              //  hihonNo = searchpanel.getSearchKogakuHihokensha().getTxtHihoNo().getValue();
-                hihonNo = ymlDt.getAsRString("hihoNo");
-
-                if (IsBlankString(searchpanel.getSearchKogakuHihokensha().getTxtHihoName().getValue())) {
-                    hihoName = ymlDt.getAsRString("hihoName");
-                } else {
-                    hihoName = searchpanel.getSearchKogakuHihokensha().getTxtHihoName().getValue();
-                }
-
-                //提供年月
-                if (IsNullDate(searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue())) {
-                    teikyoYM = ymlDt.getAsRString("teikyoYM");
-                } else {
-                    teikyoYM = searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue().toDateString();
-                }
-                
-                //申請年月
-                if (IsNullDate(searchpanel.getSearchKogakuHihokensha().getTxtShinseiYMRange().getFromValue())) {
-                    shinseiYM =  ymlDt.getAsRString("shinseiDate"); 
-                } else { 
-                    shinseiYM = searchpanel.getSearchKogakuHihokensha().getTxtShinseiYMRange().getFromValue().toDateString();
-                }
-                
-                //決定年月
-                if (IsNullDate(searchpanel.getSearchKogakuHihokensha().getTxtKetteiYMRange().getFromValue())) {
-                    ketteiYM =  ymlDt.getAsRString("ketteiDate"); 
-                }  else {
-                    ketteiYM = searchpanel.getSearchKogakuHihokensha().getTxtKetteiYMRange().getFromValue().toDateString(); }
+                hihokenshaShitei(ymlDt, arrayData, searchpanel);
                 break;
 
             case "YMShitei":
-                //被保番号
-                hihonNo = ymlDt.getAsRString("hihoNo");
-                //提供年月
-                hihoName = ymlDt.getAsRString("hihoName");
-                //2014.07.01 画面入力
-                //提供年月                
-                if(IsNullDate(searchpanel.getSearchYM().getTxtTeikyoYM().getValue())) {
-                    teikyoYM = ymlDt.getAsRString("teikyoYM"); 
-                } else {   
-                    teikyoYM = searchpanel.getSearchYM().getTxtTeikyoYM().getValue().toDateString();
-                }
-              
-                //申請年月
-                if(IsNullDate(searchpanel.getSearchYM().getTxtShinseiYM().getValue())) {
-                    shinseiYM = ymlDt.getAsRString("shinseiDate"); 
-                } else {
-                     shinseiYM = searchpanel.getSearchYM().getTxtShinseiYM().getValue().toDateString();
-                }
-               
-                //決定年月
-                if(IsNullDate(searchpanel.getSearchYM().getTxtKetteiYM().getValue())) {
-                    ketteiYM =  ymlDt.getAsRString("ketteiDate"); 
-                } else {
-                    ketteiYM = searchpanel.getSearchYM().getTxtKetteiYM().getValue().toDateString();
-                }
-                
+                yMShitei(ymlDt, arrayData, searchpanel);
                 break;
         }
 
@@ -169,6 +116,69 @@ public class KogakuServicehiListPanel {
                 ymlDt.getAsRString("hokensha")
         );
         arrayData.add(item);
+    }
+
+    private void hihokenshaShitei(ControlGenerator ymlDt, List<dgKogakuServicehiRireki_Row> arrayData, SearchKogakuServicehiPanelDiv searchpanel) {
+
+        //2014.07.01 画面入力
+        //被保番号
+        //  hihonNo = searchpanel.getSearchKogakuHihokensha().getTxtHihoNo().getValue();
+        hihonNo = ymlDt.getAsRString("hihoNo");
+
+        if (isBlankString(searchpanel.getSearchKogakuHihokensha().getTxtHihoName().getValue())) {
+            hihoName = ymlDt.getAsRString("hihoName");
+        } else {
+            hihoName = searchpanel.getSearchKogakuHihokensha().getTxtHihoName().getValue();
+        }
+
+        //提供年月
+        if (isNullDate(searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue())) {
+            teikyoYM = ymlDt.getAsRString("teikyoYM");
+        } else {
+            teikyoYM = searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue().toDateString();
+        }
+
+        //申請年月
+        if (isNullDate(searchpanel.getSearchKogakuHihokensha().getTxtShinseiYMRange().getFromValue())) {
+            shinseiYM = ymlDt.getAsRString("shinseiDate");
+        } else {
+            shinseiYM = searchpanel.getSearchKogakuHihokensha().getTxtShinseiYMRange().getFromValue().toDateString();
+        }
+
+        //決定年月
+        if (isNullDate(searchpanel.getSearchKogakuHihokensha().getTxtKetteiYMRange().getFromValue())) {
+            ketteiYM = ymlDt.getAsRString("ketteiDate");
+        } else {
+            ketteiYM = searchpanel.getSearchKogakuHihokensha().getTxtKetteiYMRange().getFromValue().toDateString();
+        }
+    }
+
+    private void yMShitei(ControlGenerator ymlDt, List<dgKogakuServicehiRireki_Row> arrayData, SearchKogakuServicehiPanelDiv searchpanel) {
+        //被保番号
+        hihonNo = ymlDt.getAsRString("hihoNo");
+        //提供年月
+        hihoName = ymlDt.getAsRString("hihoName");
+        //2014.07.01 画面入力
+        //提供年月
+        if (isNullDate(searchpanel.getSearchYM().getTxtTeikyoYM().getValue())) {
+            teikyoYM = ymlDt.getAsRString("teikyoYM");
+        } else {
+            teikyoYM = searchpanel.getSearchYM().getTxtTeikyoYM().getValue().toDateString();
+        }
+
+        //申請年月
+        if (isNullDate(searchpanel.getSearchYM().getTxtShinseiYM().getValue())) {
+            shinseiYM = ymlDt.getAsRString("shinseiDate");
+        } else {
+            shinseiYM = searchpanel.getSearchYM().getTxtShinseiYM().getValue().toDateString();
+        }
+
+        //決定年月
+        if (isNullDate(searchpanel.getSearchYM().getTxtKetteiYM().getValue())) {
+            ketteiYM = ymlDt.getAsRString("ketteiDate");
+        } else {
+            ketteiYM = searchpanel.getSearchYM().getTxtKetteiYM().getValue().toDateString();
+        }
     }
 
     private dgKogakuServicehiRireki_Row createRowKogakuServicehiListData(
@@ -198,12 +208,12 @@ public class KogakuServicehiListPanel {
                 RString.EMPTY
         );
 
-        //被保番号 
+        //被保番号
         rowKogakuServicehiData.setTxtHihoNo(hihoNo);
         //氏名
         rowKogakuServicehiData.setTxtHihoName(hihoName);
-        //提供年月        
-        rowKogakuServicehiData.setTxtTeikyoYM(setWareki(teikyoYM).substring(0, 6));
+        //提供年月
+        rowKogakuServicehiData.setTxtTeikyoYM(setWareki(teikyoYM).substring(0, INDEX_6));
         //高額支給額
         rowKogakuServicehiData.getTxtKogakuShikyuAmount().setValue(kogakuShikyuAmount);
         //申請日
@@ -223,11 +233,11 @@ public class KogakuServicehiListPanel {
 
     }
 
-    private Boolean IsBlankString(RString str) {
+    private Boolean isBlankString(RString str) {
         return (str == null || str.isEmpty());
     }
 
-    private Boolean IsNullDate(RDate ymd) {
+    private Boolean isNullDate(RDate ymd) {
         return (ymd == null);
     }
 

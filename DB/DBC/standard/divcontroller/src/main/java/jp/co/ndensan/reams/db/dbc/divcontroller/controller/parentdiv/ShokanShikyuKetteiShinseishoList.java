@@ -80,28 +80,28 @@ public class ShokanShikyuKetteiShinseishoList {
         }
     }
 
-    private dgShokanShikyuShinseishoList_Row create申請書情報(
-            String txtServiceYM,
-            String txtShinseiYMD,
-            String txtSeiriNo,
-            String txtShiharaiGokei,
-            String txtHokenGokei,
-            String txtJikoGokei
-    ) {
-        Button btnSelect = new Button();
-        Button btnEdit = new Button();
-        Button btnDelete = new Button();
-        dgShokanShikyuShinseishoList_Row item = new dgShokanShikyuShinseishoList_Row(
-                btnSelect,
-                btnEdit,
-                btnDelete,
-                new RString(txtServiceYM),
-                new RString(txtShinseiYMD),
-                new RString(txtSeiriNo),
-                new RString(txtShiharaiGokei),
-                new RString(txtHokenGokei),
-                new RString(txtJikoGokei)
-        );
-        return item;
-    }
+//    private dgShokanShikyuShinseishoList_Row create申請書情報(
+//            String txtServiceYM,
+//            String txtShinseiYMD,
+//            String txtSeiriNo,
+//            String txtShiharaiGokei,
+//            String txtHokenGokei,
+//            String txtJikoGokei
+//    ) {
+//        Button btnSelect = new Button();
+//        Button btnEdit = new Button();
+//        Button btnDelete = new Button();
+//        dgShokanShikyuShinseishoList_Row item = new dgShokanShikyuShinseishoList_Row(
+//                btnSelect,
+//                btnEdit,
+//                btnDelete,
+//                new RString(txtServiceYM),
+//                new RString(txtShinseiYMD),
+//                new RString(txtSeiriNo),
+//                new RString(txtShiharaiGokei),
+//                new RString(txtHokenGokei),
+//                new RString(txtJikoGokei)
+//        );
+//        return item;
+//    }
 }

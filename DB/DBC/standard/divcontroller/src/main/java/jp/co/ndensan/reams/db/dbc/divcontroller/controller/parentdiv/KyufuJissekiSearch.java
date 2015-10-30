@@ -9,7 +9,7 @@ import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dbc0010000.KyufuJissekiSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuJissekiSearch {
 
-    private final RString DATE_TYPE_YM = new RString("serviceTeikyoYM");
+    private static final RString DATE_TYPE_YM = new RString("serviceTeikyoYM");
 
     public ResponseData<KyufuJissekiSearchDiv> onLoad(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();

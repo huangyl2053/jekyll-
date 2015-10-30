@@ -8,21 +8,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業高額介護サービス費支給判定結果を管理するクラスです。
  */
-public class JigyoKogakuShikyuHanteiKekka extends ModelBase<JigyoKogakuShikyuHanteiKekkaIdentifier, DbT3111JigyoKogakuShikyuHanteiKekkaEntity, JigyoKogakuShikyuHanteiKekka> implements Serializable {
+public class JigyoKogakuShikyuHanteiKekka
+        extends ModelBase<JigyoKogakuShikyuHanteiKekkaIdentifier, DbT3111JigyoKogakuShikyuHanteiKekkaEntity, JigyoKogakuShikyuHanteiKekka>
+        implements Serializable {
 
     private final DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity;
     private final JigyoKogakuShikyuHanteiKekkaIdentifier id;
@@ -191,7 +193,7 @@ public class JigyoKogakuShikyuHanteiKekka extends ModelBase<JigyoKogakuShikyuHan
      *
      * @return 再送付フラグ
      */
-    public boolean get再送付フラグ() {
+    public boolean is再送付フラグ() {
         return entity.getSaiSofuFlag();
     }
 
@@ -200,7 +202,7 @@ public class JigyoKogakuShikyuHanteiKekka extends ModelBase<JigyoKogakuShikyuHan
      *
      * @return 判定結果送付不要フラグ
      */
-    public boolean get判定結果送付不要フラグ() {
+    public boolean is判定結果送付不要フラグ() {
         return entity.getHanteiKekkaSofuFuyoFlag();
     }
 
@@ -244,8 +246,7 @@ public class JigyoKogakuShikyuHanteiKekka extends ModelBase<JigyoKogakuShikyuHan
     /**
      * 事業高額介護サービス費支給判定結果の識別子{@link JigyoKogakuShikyuHanteiKekkaIdentifier}を返します。
      *
-     * @return
-     * 事業高額介護サービス費支給判定結果の識別子{@link JigyoKogakuShikyuHanteiKekkaIdentifier}
+     * @return 事業高額介護サービス費支給判定結果の識別子{@link JigyoKogakuShikyuHanteiKekkaIdentifier}
      */
     @Override
     public JigyoKogakuShikyuHanteiKekkaIdentifier identifier() {

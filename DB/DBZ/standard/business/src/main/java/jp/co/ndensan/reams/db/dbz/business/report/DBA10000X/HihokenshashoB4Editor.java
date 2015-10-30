@@ -54,7 +54,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
      * @throws IllegalArgumentException 引数が持つ印字位置が指定無しである場合
      * @throws NullPointerException 引数がnullの場合
      */
-    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, Association association) throws NullPointerException, IllegalArgumentException {
+    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, Association association) 
+            throws NullPointerException, IllegalArgumentException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
         check印字位置(hihokenshashoModel);
@@ -64,7 +65,8 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         kyotsuJushoEditConfig = new ChohyoKyotsuJushoEditConfig();
 
         this.hihokenshashoModel = hihokenshashoModel;
-        this.shikakuKihonEditor = new ShikakuKihonEditorBase(hihokenshashoModel, association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
+        this.shikakuKihonEditor = new ShikakuKihonEditorBase(hihokenshashoModel, 
+                association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
         this.ninteiEditor = new NinteiEditorBase(hihokenshashoModel);
         this.kyufuSeigenEditor = new KyufuSeigenEditorBase(hihokenshashoModel, printConfig);
         this.seiDoitsuEditor = new SeiDoitsuShogaiEditorBase(hihokenshashoModel);

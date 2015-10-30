@@ -41,6 +41,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJissekiList {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+
     public ResponseData<KyufuJissekiListDiv> onClick_btnKyufuJissekiSearch(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
 
@@ -264,10 +275,10 @@ public class KyufuJissekiList {
 
     private class rowData {
 
-        RString txtServiceGroup1;
-        RString txtServiceGroup2;
-        RString txtServiceShurui;
-        List<RString> txtYM = new ArrayList();
+        private RString txtServiceGroup1;
+        private RString txtServiceGroup2;
+        private RString txtServiceShurui;
+//        private List<RString> txtYM = new ArrayList();
     }
 
     private List createRowKyufuJissekiMeisaiList(KyufuJissekiServiceCollections collections, Range<ServiceTeikyoYM> range) {
@@ -280,8 +291,8 @@ public class KyufuJissekiList {
             List<RString> rsYM = createYMList(row);
             arrayDataList.add(createRowKyufuJissekiMeisaiList(
                     row.txtServiceGroup1, row.txtServiceGroup2, row.txtServiceShurui,
-                    rsYM.get(0), rsYM.get(1), rsYM.get(2), rsYM.get(3), rsYM.get(4), rsYM.get(5), rsYM.get(6),
-                    rsYM.get(7), rsYM.get(8), rsYM.get(9), rsYM.get(10), rsYM.get(11)));
+                    rsYM.get(0), rsYM.get(1), rsYM.get(2), rsYM.get(INDEX_3), rsYM.get(INDEX_4), rsYM.get(INDEX_5), rsYM.get(INDEX_6),
+                    rsYM.get(INDEX_7), rsYM.get(INDEX_8), rsYM.get(INDEX_9), rsYM.get(INDEX_10), rsYM.get(INDEX_11)));
         }
 
         return arrayDataList;
@@ -297,8 +308,8 @@ public class KyufuJissekiList {
             List<RString> rsYM = createYMList(row);
             arrayDataList.add(createRowKyufuJissekiGokeiList(
                     row.txtServiceGroup1, row.txtServiceGroup2, row.txtServiceShurui,
-                    rsYM.get(0), rsYM.get(1), rsYM.get(2), rsYM.get(3), rsYM.get(4), rsYM.get(5), rsYM.get(6),
-                    rsYM.get(7), rsYM.get(8), rsYM.get(9), rsYM.get(10), rsYM.get(11)));
+                    rsYM.get(0), rsYM.get(1), rsYM.get(2), rsYM.get(INDEX_3), rsYM.get(INDEX_4), rsYM.get(INDEX_5), rsYM.get(INDEX_6),
+                    rsYM.get(INDEX_7), rsYM.get(INDEX_8), rsYM.get(INDEX_9), rsYM.get(INDEX_10), rsYM.get(INDEX_11)));
         }
 
         return arrayDataList;
@@ -329,7 +340,7 @@ public class KyufuJissekiList {
                 KyufuJissekiServiceCollection col = collections.get給付実績月別集計(new ServiceTeikyoYM(start));
                 if (col != null) {
                     Decimal data = isMeisai ? col.get単位数合計Byサービス種類(code) : col.get保険請求分請求額合計Byサービス種類(code);
-                    row.txtYM.add(setCommFormat(data));
+//                    row.txtYM.add(setCommFormat(data));
                 }
                 start = start.plusMonth(1);
             }
@@ -341,8 +352,8 @@ public class KyufuJissekiList {
 
     private List<RString> createYMList(rowData row) {
         List<RString> list = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            list.add(i < row.txtYM.size() ? row.txtYM.get(i) : RString.EMPTY);
+        for (int i = 0; i < INDEX_12; i++) {
+//            list.add(i < row.txtYM.size() ? row.txtYM.get(i) : RString.EMPTY);
         }
         return list;
     }

@@ -8,20 +8,22 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算自己負担額明細を管理するクラスです。
  */
-public class KogakuGassanJikoFutanGakuMeisai extends ModelBase<KogakuGassanJikoFutanGakuMeisaiIdentifier, DbT3071KogakuGassanJikoFutanGakuMeisaiEntity, KogakuGassanJikoFutanGakuMeisai> implements Serializable {
+public class KogakuGassanJikoFutanGakuMeisai
+        extends ModelBase<KogakuGassanJikoFutanGakuMeisaiIdentifier, DbT3071KogakuGassanJikoFutanGakuMeisaiEntity, KogakuGassanJikoFutanGakuMeisai>
+        implements Serializable {
 
     private final DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity;
     private final KogakuGassanJikoFutanGakuMeisaiIdentifier id;
@@ -70,8 +72,7 @@ public class KogakuGassanJikoFutanGakuMeisai extends ModelBase<KogakuGassanJikoF
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}より{@link KogakuGassanJikoFutanGakuMeisai}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}
+     * @param entity DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}
      */
     public KogakuGassanJikoFutanGakuMeisai(DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算自己負担額明細"));

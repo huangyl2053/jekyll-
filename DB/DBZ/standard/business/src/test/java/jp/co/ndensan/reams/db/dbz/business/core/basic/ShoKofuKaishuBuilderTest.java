@@ -131,7 +131,7 @@ public class ShoKofuKaishuBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の単票発行有無フラグは_設定した値と同じ単票発行有無フラグを返す() {
             business = sut.set単票発行有無フラグ(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_単票発行有無フラグ).build();
-            assertThat(business.get単票発行有無フラグ(), is(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_単票発行有無フラグ));
+            assertThat(business.is単票発行有無フラグ(), is(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_単票発行有無フラグ));
         }
 
         @Test
@@ -155,7 +155,7 @@ public class ShoKofuKaishuBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbT7037ShoKofuKaishuEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

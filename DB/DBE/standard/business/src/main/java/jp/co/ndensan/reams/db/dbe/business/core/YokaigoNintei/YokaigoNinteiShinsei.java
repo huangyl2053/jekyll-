@@ -52,7 +52,7 @@ public class YokaigoNinteiShinsei {
     private final RString 市町村連絡事項;
     private final NinteiShinseiTorisage 認定申請取下げ;
     private final ShinsakaiYusenWaritsukeKubun 審査会優先割付区分;
-    private final FlexibleDate IF送付年月日;
+    private final FlexibleDate 送付年月日;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -79,14 +79,14 @@ public class YokaigoNinteiShinsei {
      * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
-     * @param IF送付年月日 IF送付年月日
+     * @param 送付年月日 送付年月日
      */
     public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
             HihokenshaNo 被保番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
             Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, NinteiShinseiRiyu 認定申請理由,
             NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean 延期通知発行同意有無, boolean is施設入所,
-            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分, FlexibleDate IF送付年月日) {
+            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分, FlexibleDate 送付年月日) {
         this.申請書管理番号 = 申請書管理番号;
         this.処理日時 = 処理日時;
         this.証記載保険者番号 = 証記載保険者番号;
@@ -110,7 +110,7 @@ public class YokaigoNinteiShinsei {
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;
         this.審査会優先割付区分 = 審査会優先割付区分;
-        this.IF送付年月日 = IF送付年月日;
+        this.送付年月日 = 送付年月日;
     }
 
     /**
@@ -321,11 +321,11 @@ public class YokaigoNinteiShinsei {
     }
 
     /**
-     * IF送付年月日を返します。
+     * 送付年月日を返します。
      *
-     * @return IF送付年月日
+     * @return 送付年月日
      */
-    public FlexibleDate getIF送付年月日() {
-        return IF送付年月日;
+    public FlexibleDate get送付年月日() {
+        return 送付年月日;
     }
 }

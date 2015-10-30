@@ -9,34 +9,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 特別徴収捕捉を表す列挙体です。
+ * 特別徴収捕捉を表す列挙体クラスです。
  *
  * @author n3317 塚田 萌
  */
 public enum ConfigKeysTokuchoHosoku implements IRStringConvertable {
 
     /**
-     * 4月捕捉
+     * 4月捕捉。
      */
     特別徴収_特徴開始月_4月捕捉("04"),
     /**
-     * 6月捕捉
+     * 6月捕捉。
      */
     特別徴収_特徴開始月_6月捕捉("06"),
     /**
-     * 8月捕捉
+     * 8月捕捉。
      */
     特別徴収_特徴開始月_8月捕捉("08"),
     /**
-     * 10月捕捉
+     * 10月捕捉。
      */
     特別徴収_特徴開始月_10月捕捉("10"),
     /**
-     * 12月捕捉
+     * 12月捕捉。
      */
     特別徴収_特徴開始月_12月捕捉("12"),
     /**
-     * 2月捕捉
+     * 2月捕捉。
      */
     特別徴収_特徴開始月_2月捕捉("02");
 

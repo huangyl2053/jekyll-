@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 運動能力が低下していない認知症高齢者の指標を表すコードです。
  *
  */
-//public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<NoryokuMiteikaNinchishoKoreishaShihyoCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
-public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<NoryokuMiteikaNinchishoKoreishaShihyoCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<NoryokuMiteikaNinchishoKoreishaShihyoCode>,
+        IDbColumnMappable, IValidatable, ICodeWrapValueObject {
 
     private final Code code;
 
@@ -45,7 +45,8 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<Nor
     }
 
     /**
-     * DB等からコンストラクタを利用して直接マッピングされた、<br/> {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}が持つcodeについてバリデーションを実施します。
+     * DB等からコンストラクタを利用して直接マッピングされた、<br/>
+     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}が持つcodeについてバリデーションを実施します。
      *
      * @return {@link IValidationMessages}
      */
@@ -59,9 +60,11 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements Comparable<Nor
      * 指定のcodeについて、バリデーションを実施し、バリデーション実施結果としての、<br/>
      * {@link IValidationMessages}にメッセージが含まれていた場合に{@link IllegalArgumentException}をthrowします。<br/>
      *
-     * @param code {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}となるコード{@link Code}
+     * @param code
+     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}となるコード{@link Code}
      * @return {@link NoryokuMiteikaNinchishoKoreishaShihyoCode}
-     * @throws IllegalArgumentException {@link NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec}の仕様を満たさない場合
+     * @throws IllegalArgumentException
+     * {@link NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec}の仕様を満たさない場合
      */
     public static NoryokuMiteikaNinchishoKoreishaShihyoCode createCheckInstance(Code code) throws IllegalArgumentException {
         List<IValidationMessage> validResult

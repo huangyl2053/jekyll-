@@ -24,14 +24,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT5593GogitaiWariateIinJohoDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT5593GogitaiWariateIinJohoDacTest extends DbeTestDacBase {
 
-    private static final int キー_01 = DEFAULT_合議体番号;
+    private static final int キー_01 = 1;
     private static final int キー_02 = 2;
     private static final int キー_03 = 3;
     private static DbT5593GogitaiWariateIinJohoDac sut;
@@ -46,7 +48,7 @@ public class DbT5593GogitaiWariateIinJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_合議体番号,
+                    キー_01,
                     DEFAULT_合議体有効期間開始年月日,
                     DEFAULT_介護認定審査会委員コード);
             TestSupport.insert(

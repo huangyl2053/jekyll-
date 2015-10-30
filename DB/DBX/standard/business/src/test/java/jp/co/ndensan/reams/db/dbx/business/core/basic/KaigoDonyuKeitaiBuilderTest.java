@@ -68,7 +68,7 @@ public class KaigoDonyuKeitaiBuilderTest extends DbxTestBase {
         @Test
         public void 戻り値の支所管理有無フラグは_設定した値と同じ支所管理有無フラグを返す() {
             business = sut.set支所管理有無フラグ(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ).build();
-            assertThat(business.get支所管理有無フラグ(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ));
+            assertThat(business.is支所管理有無フラグ(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ));
         }
 
     }

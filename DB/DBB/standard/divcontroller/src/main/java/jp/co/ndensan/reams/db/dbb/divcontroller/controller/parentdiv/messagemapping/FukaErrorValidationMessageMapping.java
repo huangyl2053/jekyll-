@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.messagemapping;
 
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportValidationMessage;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
@@ -19,12 +20,12 @@ public enum FukaErrorValidationMessageMapping {
 
 //    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
     //更正対象が未処理状態ではないため実行不可→修正対象が未処理状態ではないため実行不可 へ変更
-    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.修正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
+    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.修正対象が未処理状態ではないため実行不可.getMessage(), new RString("dgFukaErrorList"));
 
     private final IValidationMessage message;
-    private final String fieldName;
+    private final RString fieldName;
 
-    private FukaErrorValidationMessageMapping(IValidationMessage message, String fieldName) {
+    private FukaErrorValidationMessageMapping(IValidationMessage message, RString fieldName) {
         this.message = message;
         this.fieldName = fieldName;
     }
@@ -37,7 +38,7 @@ public enum FukaErrorValidationMessageMapping {
         return message.getMessage();
     }
 
-    public String getFieldName() {
+    public RString getFieldName() {
         return fieldName;
     }
 }

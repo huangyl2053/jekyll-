@@ -13,7 +13,7 @@ public class NinchishoKoreishaJiritsudoCodeValidator {
     private final NinchishoKoreishaJiritsudoCode ninchishoKoreishaJiritsudoCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninchishoKoreishaJiritsudoCode 認知症高齢者自立度コード
      */

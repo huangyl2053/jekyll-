@@ -5,30 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoKihonKeikakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoKihonKikanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoKihonNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoMeisaiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoShafukuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.ShokanShikyuKetteiShomeishoShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.tabShokanShikyuKetteiShomeishoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoMeisaiList.ServiceTeikyoShomeishoMeisaiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoMeisaiList.dgServiceTeikyoShomeishoMeisaiList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoShafukuList.ServiceTeikyoShomeishoShafukuListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoShafukuList.dgServiceTeikyoShomeishoShafukuList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoShukeiList.ServiceTeikyoShomeishoShukeiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceTeikyoShomeishoShukeiList.dgServiceTeikyoShomeishoShukeiList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
  * 償還支給申請決定のサービス提供証明書情報のコントロールです。
@@ -197,27 +186,27 @@ public class ShokanShikyuKetteiShomeisho {
 //        dgRow.setDataSource(dgRowList);
     }
 
-    private dgServiceTeikyoShomeishoMeisaiList_Row create給付費明細一覧アイテム(
-            String txtService,
-            String txtTanisu,
-            String txtNissuKaisu,
-            String txtServiceTanisu,
-            String txtTekiyo
-    ) {
-        Button btnSelect = new Button();
-        Button btnEdit = new Button();
-        Button btnDelete = new Button();
-
-        return new dgServiceTeikyoShomeishoMeisaiList_Row(
-                btnSelect,
-                btnEdit,
-                btnDelete,
-                new RString(txtService),
-                new RString(txtTanisu),
-                new RString(txtNissuKaisu),
-                new RString(txtServiceTanisu),
-                new RString(txtTekiyo));
-    }
+//    private dgServiceTeikyoShomeishoMeisaiList_Row create給付費明細一覧アイテム(
+//            String txtService,
+//            String txtTanisu,
+//            String txtNissuKaisu,
+//            String txtServiceTanisu,
+//            String txtTekiyo
+//    ) {
+//        Button btnSelect = new Button();
+//        Button btnEdit = new Button();
+//        Button btnDelete = new Button();
+//
+//        return new dgServiceTeikyoShomeishoMeisaiList_Row(
+//                btnSelect,
+//                btnEdit,
+//                btnDelete,
+//                new RString(txtService),
+//                new RString(txtTanisu),
+//                new RString(txtNissuKaisu),
+//                new RString(txtServiceTanisu),
+//                new RString(txtTekiyo));
+//    }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで給付費明細タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // 南魚沼市のデモ向けに、基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
@@ -259,29 +248,29 @@ public class ShokanShikyuKetteiShomeisho {
 //        dgRow.setDataSource(dgRowList);
     }
 
-    private dgServiceTeikyoShomeishoShukeiList_Row create請求額一覧アイテム(
-            String txtServiceShurui,
-            String txtTanisuGokei,
-            String txtTanisuTanka,
-            String txtSeikyugaku,
-            String txtRiyoshaFutangaku,
-            String txtShinsaHoho
-    ) {
-        Button btnSelect = new Button();
-        Button btnEdit = new Button();
-        Button btnDelete = new Button();
-
-        return new dgServiceTeikyoShomeishoShukeiList_Row(
-                btnSelect,
-                btnEdit,
-                btnDelete,
-                new RString(txtServiceShurui),
-                new RString(txtTanisuGokei),
-                new RString(txtTanisuTanka),
-                new RString(txtSeikyugaku),
-                new RString(txtRiyoshaFutangaku),
-                new RString(txtShinsaHoho));
-    }
+//    private dgServiceTeikyoShomeishoShukeiList_Row create請求額一覧アイテム(
+//            String txtServiceShurui,
+//            String txtTanisuGokei,
+//            String txtTanisuTanka,
+//            String txtSeikyugaku,
+//            String txtRiyoshaFutangaku,
+//            String txtShinsaHoho
+//    ) {
+//        Button btnSelect = new Button();
+//        Button btnEdit = new Button();
+//        Button btnDelete = new Button();
+//
+//        return new dgServiceTeikyoShomeishoShukeiList_Row(
+//                btnSelect,
+//                btnEdit,
+//                btnDelete,
+//                new RString(txtServiceShurui),
+//                new RString(txtTanisuGokei),
+//                new RString(txtTanisuTanka),
+//                new RString(txtSeikyugaku),
+//                new RString(txtRiyoshaFutangaku),
+//                new RString(txtShinsaHoho));
+//    }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで請求額集計タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // 南魚沼市のデモ向けに、基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
@@ -310,28 +299,28 @@ public class ShokanShikyuKetteiShomeisho {
 //        dgRow.setDataSource(dgRowList);
     }
 
-    private dgServiceTeikyoShomeishoShafukuList_Row create社福軽減額一覧アイテム(
-            String txtShurui,
-            String txtKeigenritsu,
-            String txtFutanSogaku,
-            String txtKeigengaku,
-            String txtKeigengoRiyoshaFutangaku,
-            String txtBiko
-    ) {
-        Button btnSelect = new Button();
-        Button btnEdit = new Button();
-        Button btnDelete = new Button();
-
-        return new dgServiceTeikyoShomeishoShafukuList_Row(
-                btnSelect,
-                btnEdit,
-                btnDelete,
-                new RString(txtShurui),
-                new RString(txtKeigenritsu),
-                new RString(txtFutanSogaku),
-                new RString(txtKeigengaku),
-                new RString(txtKeigengoRiyoshaFutangaku),
-                new RString(txtBiko));
-    }
+//    private dgServiceTeikyoShomeishoShafukuList_Row create社福軽減額一覧アイテム(
+//            String txtShurui,
+//            String txtKeigenritsu,
+//            String txtFutanSogaku,
+//            String txtKeigengaku,
+//            String txtKeigengoRiyoshaFutangaku,
+//            String txtBiko
+//    ) {
+//        Button btnSelect = new Button();
+//        Button btnEdit = new Button();
+//        Button btnDelete = new Button();
+//
+//        return new dgServiceTeikyoShomeishoShafukuList_Row(
+//                btnSelect,
+//                btnEdit,
+//                btnDelete,
+//                new RString(txtShurui),
+//                new RString(txtKeigenritsu),
+//                new RString(txtFutanSogaku),
+//                new RString(txtKeigengaku),
+//                new RString(txtKeigengoRiyoshaFutangaku),
+//                new RString(txtBiko));
+//    }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで社福軽減額タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

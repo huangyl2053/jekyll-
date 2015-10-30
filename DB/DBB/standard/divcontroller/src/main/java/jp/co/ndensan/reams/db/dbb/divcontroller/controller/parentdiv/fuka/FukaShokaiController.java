@@ -11,23 +11,14 @@ import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.FukaManager;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HokenryoDankai;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
-//import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
-//import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-//import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
-//import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHoho;
-//import jp.co.ndensan.reams.db.dbz.realservice.ChoshuHohoFinder;
-//import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
-//import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -160,8 +151,7 @@ public final class FukaShokaiController {
      */
     public static ChoshuHoho getChoshuHohoModelByFukaShokaiKey() {
 
-        FukaShokaiKey key = getFukaShokaiKeyInViewState();
-
+//        FukaShokaiKey key = getFukaShokaiKeyInViewState();
 //        Optional<ChoshuHoho> modeloid = new ChoshuHohoFinder().find徴収方法(key.get賦課年度(), key.get被保険者番号());
         Optional<ChoshuHoho> modeloid = Optional.ofNullable(null);
 
@@ -203,7 +193,7 @@ public final class FukaShokaiController {
             return Optional.empty();
         }
 
-        Fuka 前年度賦課モデル = modeloid.get();
+//        Fuka 前年度賦課モデル = modeloid.get();
         Optional<HokenryoDankai> rankoid = Optional.ofNullable(null);
 //        Optional<HokenryoDankai> rankoid = new HokenryoDankaiManager().get保険料段階(
 //                前年度賦課モデル.get賦課年度(), 前年度賦課モデル.get賦課市町村コード(), 前年度賦課モデル.get保険料段階());

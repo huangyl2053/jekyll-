@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 広域番号発番テーブルを管理するクラスです。
  */
-public class KoikiNoHatsuban extends ParentModelBase<KoikiNoHatsubanIdentifier, DbT7025KoikiNoHatsubanEntity, KoikiNoHatsuban> implements Serializable {
+public class KoikiNoHatsuban extends 
+        ParentModelBase<KoikiNoHatsubanIdentifier, 
+        DbT7025KoikiNoHatsubanEntity, KoikiNoHatsuban> implements Serializable {
 
     private final DbT7025KoikiNoHatsubanEntity entity;
     private final KoikiNoHatsubanIdentifier id;
@@ -169,7 +171,7 @@ public class KoikiNoHatsuban extends ParentModelBase<KoikiNoHatsubanIdentifier, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7025KoikiNoHatsubanEntity entity;
         private final KoikiNoHatsubanIdentifier id;
 

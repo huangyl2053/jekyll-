@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求特定診療費を管理するクラスです。
  */
-public class ShokanTokuteiShinryohi extends ModelBase<ShokanTokuteiShinryohiIdentifier, DbT3041ShokanTokuteiShinryohiEntity, ShokanTokuteiShinryohi> implements Serializable {
+public class ShokanTokuteiShinryohi 
+extends ModelBase<ShokanTokuteiShinryohiIdentifier, 
+        DbT3041ShokanTokuteiShinryohiEntity, 
+        ShokanTokuteiShinryohi> implements Serializable {
 
     private final DbT3041ShokanTokuteiShinryohiEntity entity;
     private final ShokanTokuteiShinryohiIdentifier id;

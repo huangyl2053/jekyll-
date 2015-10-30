@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 資格喪失事由の列挙型です。<br />
+ * 資格喪失事由の列挙型クラスです。<br />
  * 被保険者資格を喪失した際の異動事由を扱います。
  *
  * @author N3327 三浦 凌
@@ -23,37 +23,37 @@ public enum ShikakuSoshitsuJiyu implements IShikakuIdoJiyu {
     EMPTY("", ""),
     /**
      * 転出 <br />
-     * コード : 01
+     * コード : 01。
      */
     転出("01", "転出"),
     /**
      * 死亡 <br />
-     * コード : 02
+     * コード : 02。
      */
     死亡("02", "死亡"),
     /**
      * 除外者 <br />
-     * コード : 03
+     * コード : 03。
      */
     除外者("03", "除外者"),
     /**
      * 国籍喪失 <br />
-     * コード : 04
+     * コード : 04。
      */
     国籍喪失("04", "国籍喪失"),
     /**
      * 他特例者 <br />
-     * コード : 05
+     * コード : 05。
      */
     他特例者("05", "他特例者"),
     /**
      * 職権喪失 <br />
-     * コード : 06
+     * コード : 06。
      */
     職権喪失("06", "職権喪失"),
     /**
      * その他 <br />
-     * コード : 99
+     * コード : 99。
      */
     その他("99", "その他");
     private final RString code;

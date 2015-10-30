@@ -8,24 +8,26 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 住宅改修理由書作成手数料請求明細を管理するクラスです。
  */
-public class JutakuKaishuRiyushoTesuryoMeisai extends ModelBase<JutakuKaishuRiyushoTesuryoMeisaiIdentifier, DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity, JutakuKaishuRiyushoTesuryoMeisai> implements Serializable {
+public class JutakuKaishuRiyushoTesuryoMeisai
+       extends ModelBase<JutakuKaishuRiyushoTesuryoMeisaiIdentifier, DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity, JutakuKaishuRiyushoTesuryoMeisai>
+       implements Serializable {
 
     private final DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity;
     private final JutakuKaishuRiyushoTesuryoMeisaiIdentifier id;
@@ -59,8 +61,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai extends ModelBase<JutakuKaishuRiyu
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}より{@link JutakuKaishuRiyushoTesuryoMeisai}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}
+     * @param entity DBより取得した{@link DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity}
      */
     public JutakuKaishuRiyushoTesuryoMeisai(DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修理由書作成手数料請求明細"));
@@ -242,8 +243,7 @@ public class JutakuKaishuRiyushoTesuryoMeisai extends ModelBase<JutakuKaishuRiyu
     /**
      * 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}を返します。
      *
-     * @return
-     * 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}
+     * @return 住宅改修理由書作成手数料請求明細の識別子{@link JutakuKaishuRiyushoTesuryoMeisaiIdentifier}
      */
     @Override
     public JutakuKaishuRiyushoTesuryoMeisaiIdentifier identifier() {

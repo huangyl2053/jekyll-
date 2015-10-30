@@ -6,11 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0700011;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiShinsaResultPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -89,14 +87,14 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
             JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
 
 //        System.out.println("++++" + panel.getRadJudgeKubun().getSelectedItem().toString());
-        String selRadJudgeKubun = panel.getRadJudgeKubun().getSelectedItem().toString();
+        RString selRadJudgeKubun = new RString(panel.getRadJudgeKubun().getSelectedItem().toString());
 
         //判定区分を選択するとき shonin 承認
-        if (selRadJudgeKubun.equals("shonin")) {
+        if (("shonin").equals(selRadJudgeKubun)) {
             panel.getTxtShoninCondition().setDisabled(false);
             panel.getTxtFushoninReason().setDisabled(true);
             //判定区分を選択するとき fushonin 不承認
-        } else if (selRadJudgeKubun.equals("fushonin")) {
+        } else if (("fushonin").equals(selRadJudgeKubun)) {
             panel.getTxtFushoninReason().setDisabled(false);
             panel.getTxtShoninCondition().setDisabled(true);
         }

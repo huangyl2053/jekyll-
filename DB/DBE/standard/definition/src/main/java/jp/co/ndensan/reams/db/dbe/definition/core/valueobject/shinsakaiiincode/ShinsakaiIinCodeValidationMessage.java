@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShinsakaiIinCodeValidationMessage implements IValidationMessage {
 
     /**
-     * 桁数が8桁であること
+     * 桁数が8桁であること。
      */
     桁数が8桁ではないこと(ShinsakaiIinCodeErrorMessage.桁数が8桁ではないこと);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShinsakaiIinCodeValidationMessage implements IValidationMessage {
     public enum ShinsakaiIinCodeErrorMessage implements IMessageGettable {
 
         /**
-         * 桁数が8桁でないこと
+         * 桁数が8桁でないこと。
          */
         桁数が8桁ではないこと(1, "審査会委員コードは8桁で指定してください。");
         private final int no;

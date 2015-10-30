@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -90,29 +89,29 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
         List<HashMap> ichijiHanteiTaishoshaData = YamlLoader.DBE.loadAsList(new RString("dbe3010001/IchijiHanteiShoriTaishoshaIchiran.yml"));
 
-        List<dgIchijiHanteiTaishoshaIchiran_Row> ichijiHanteiTaishoshaSelectData = panel.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
+        List<dgIchijiHanteiTaishoshaIchiran_Row> ichijiHanteiSelectData = panel.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
         if (intShoriFlg == 0) {
             List arraydata = createRowIchijiHanteiTaishosha(ichijiHanteiTaishoshaData);
             DataGrid grid = panel.getDgIchijiHanteiTaishoshaIchiran();
             grid.setDataSource(arraydata);
         } else if (intShoriFlg == 1) {
-            for (int i = 0; i < ichijiHanteiTaishoshaSelectData.size(); i++) {
+            for (int i = 0; i < ichijiHanteiSelectData.size(); i++) {
                 ControlGenerator cg = new ControlGenerator(ichijiHanteiTaishoshaData.
-                        get(Integer.parseInt(ichijiHanteiTaishoshaSelectData.get(i).getIndex().toString())));
+                        get(Integer.parseInt(ichijiHanteiSelectData.get(i).getIndex().toString())));
                 TextBoxFlexibleDate ichijiDate = new TextBoxFlexibleDate();
                 ichijiDate.setValue(FlexibleDate.getNowDate());
-                ichijiHanteiTaishoshaSelectData.get(i).setIchijiHanteibi(ichijiDate);
-                ichijiHanteiTaishoshaSelectData.get(i).setIchijiHanteiKekka(cg.getAsRString("ichijiHanteiKekka"));
-                ichijiHanteiTaishoshaSelectData.get(i).setKeikokuCode(cg.getAsRString("keikokuCode"));
+                ichijiHanteiSelectData.get(i).setIchijiHanteibi(ichijiDate);
+                ichijiHanteiSelectData.get(i).setIchijiHanteiKekka(cg.getAsRString("ichijiHanteiKekka"));
+                ichijiHanteiSelectData.get(i).setKeikokuCode(cg.getAsRString("keikokuCode"));
             }
 
         } else if (intShoriFlg == 2) {
 
-            for (int i = 0; i < ichijiHanteiTaishoshaSelectData.size(); i++) {
-                if (ichijiHanteiTaishoshaSelectData.get(i).getIchijiHanteibi().getValue().isEmpty() == Boolean.FALSE) {
+            for (int i = 0; i < ichijiHanteiSelectData.size(); i++) {
+                if (ichijiHanteiSelectData.get(i).getIchijiHanteibi().getValue().isEmpty() == Boolean.FALSE) {
                     TextBoxFlexibleDate kanryoDate = new TextBoxFlexibleDate();
                     kanryoDate.setValue(FlexibleDate.getNowDate());
-                    ichijiHanteiTaishoshaSelectData.get(i).setIchijiHanteiKanryobi(kanryoDate);
+                    ichijiHanteiSelectData.get(i).setIchijiHanteiKanryobi(kanryoDate);
                 }
             }
         }

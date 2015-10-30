@@ -6,23 +6,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0000001.testShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoJogaiTokureiTaishoShisetsuManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
- * 施設履歴管理共有子Divのテスト画面のコントローラクラスです。※テスト用※
+ * 施設履歴管理共有子Divのテスト画面のコントローラクラスです。
  *
  * @author N8223　朴義一
  */
 public class TestShisetsuNyutaishoRirekiKanri {
 
     private static final ShikibetsuCode SHIKIBETSU_CODE = new ShikibetsuCode("1234567890");
-
-    private final ShisetsuNyutaishoManager 介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
-    private final KaigoJogaiTokureiTaishoShisetsuManager 介護除外住所地特例対象施設Manager = new KaigoJogaiTokureiTaishoShisetsuManager();
 
     /**
      * 画面ロード時のイベントメソッドです。 検索キーを元にデータを取得し、Divに設定します。

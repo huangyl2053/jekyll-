@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 高額介護サービス費支給申請を管理するクラスです。
  */
-public class KogakuShikyuShinsei extends ModelBase<KogakuShikyuShinseiIdentifier, DbT3056KogakuShikyuShinseiEntity, KogakuShikyuShinsei> implements Serializable {
+public class KogakuShikyuShinsei extends
+        ModelBase<KogakuShikyuShinseiIdentifier, DbT3056KogakuShikyuShinseiEntity, KogakuShikyuShinsei>
+        implements Serializable {
 
     private final DbT3056KogakuShikyuShinseiEntity entity;
     private final KogakuShikyuShinseiIdentifier id;

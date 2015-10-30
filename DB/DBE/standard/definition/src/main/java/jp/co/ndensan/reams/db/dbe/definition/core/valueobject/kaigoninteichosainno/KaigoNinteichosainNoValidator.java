@@ -18,7 +18,7 @@ public class KaigoNinteichosainNoValidator {
     private final KaigoNinteichosainNo kaigoNinteichosainNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param kaigoNinteichosainNo 介護独自の認定調査員番号
      */

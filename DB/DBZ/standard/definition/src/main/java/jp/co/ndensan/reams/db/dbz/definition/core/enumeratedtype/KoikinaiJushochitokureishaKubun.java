@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 広域内住所地特例者区分の列挙型です。<br />
+ * 広域内住所地特例者区分の列挙型クラスです。<br />
  * 広域内の住所地特例者かどうかを表します。
  *
  * @author N3327 三浦 凌
@@ -17,17 +17,17 @@ public enum KoikinaiJushochitokureishaKubun {
 
     /**
      * EMPTY <br />
-     * コード : EMPTY
+     * コード : EMPTY。
      */
     EMPTY(""),
     /**
      * 広域内住所地特例者 <br />
-     * コード : 1
+     * コード : 1。
      */
     広域内住所地特例者("1"),
     /**
      * 通常資格者 <br />
-     * コード : 2
+     * コード : 2。
      */
     通常資格者("2");
     private final RString code;

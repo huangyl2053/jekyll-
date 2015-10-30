@@ -5,33 +5,27 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0030011.KogakuServicehiInfoPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dgJudgementResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * 高額介護サービス費照会 #37963
+ * 高額介護サービス費照会 #37963。
  *
  * @author n8223　2014.06.28 朴　共有DIV適用
  * @author n8223 2014.07.02 朴　親DIV分ける
  */
 public class KogakuServicehiInfoPanel {
 
-    final static String PayToJuryoinin = "受領委任払い";
-    final static String PayToKoza = "口座払い";
-    final static String PayToMadoguchi = "窓口払い";
-
+//    private static final RString PAY_TO_JURYOININ = new RString("受領委任払い");
+//    private static final RString PAY_TO_KOZA = new RString("口座払い");
+//    private static final RString PAY_TO_MADOGUCHI = new RString("窓口払い");
     /**
      * 高額介護サービス費照会 高額介護サービス費情報 勧奨通知発行を設定する。
      *
@@ -129,10 +123,9 @@ public class KogakuServicehiInfoPanel {
         panel.getKogakuServiceDetail().getTxtTeikyoYM().setValue(ymlDt.getAsRDate("teikyoYM"));
 
         //2014.07.01 朴　宛名・介護基本 対応
-        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
-
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
         //2014.07.04 朴　KogakuJumin　panel 削除
-        int rowId = 0;
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getCommonKogakuNushiJuminJohoChildDiv1(),
 //                panel.getCommonKogakuKaigoJuminJohoChildDiv2(), 識別コード, rowId);
 //
@@ -142,7 +135,6 @@ public class KogakuServicehiInfoPanel {
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
 //        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getTaishoshaAtena(), panel.getTaishoshaKaigoShikaku(), 識別コード, rowId);
-
     }
 
     //申請者情報 TAB
@@ -267,12 +259,12 @@ public class KogakuServicehiInfoPanel {
                                 ymlDt.getAsRString("shiharaiKaishiDay").toString()));
 
         //開始時間
-        int KaishistartTimeHour = new Integer(ymlDt.getAsRString("shiharaiKaishiTimeS").toString());
-        int KaishistartTimeMin = new Integer(ymlDt.getAsRString("shiharaiKaishiTimeE").toString());
+        int kaishistartTimeHour = Integer.valueOf(ymlDt.getAsRString("shiharaiKaishiTimeS").toString());
+        int kaishistartTimeMin = Integer.valueOf(ymlDt.getAsRString("shiharaiKaishiTimeE").toString());
 
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiKaishiTime().setValue(
-                        RTime.of(KaishistartTimeHour, KaishistartTimeMin));
+                        RTime.of(kaishistartTimeHour, kaishistartTimeMin));
 
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiShuryoDate().setValue(
@@ -282,17 +274,17 @@ public class KogakuServicehiInfoPanel {
                         ymlDt.getAsRString("shiharaiShuryoDay"));
 
         //終了時間
-        int ShuryostartTimeHour = new Integer(ymlDt.getAsRString("shiharaiShuryoTimeS").toString());
-        int ShuryostartTimeMin = new Integer(ymlDt.getAsRString("shiharaiShuryoTimeE").toString());
+        int shuryostartTimeHour = Integer.valueOf(ymlDt.getAsRString("shiharaiShuryoTimeS").toString());
+        int shuryostartTimeMin = Integer.valueOf(ymlDt.getAsRString("shiharaiShuryoTimeE").toString());
 
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiShuryoTime().setValue(
-                        RTime.of(ShuryostartTimeHour, ShuryostartTimeMin));
+                        RTime.of(shuryostartTimeHour, shuryostartTimeMin));
 
     }
 
     //高額決定情報 TAB
-    private void KogakuServiceDetaildgJudgementinfo(KogakuServicehiInfoPanelDiv panel) {
+    private void kogakuServiceDetaildgJudgementinfo(KogakuServicehiInfoPanelDiv panel) {
 //        List<HashMap> ymlData = ymlData("dbc0030011/KogakuServiceDetaildgJudgementinfo.yml");
 //
 //        HashMap hashMap = ymlData.get(0);
@@ -342,7 +334,7 @@ public class KogakuServicehiInfoPanel {
     }
 
     //高額決定情報 TAB     高額介護サービス費一覧 dgJudgementResult
-    private void KogakuServiceDetaildgJudgementResult(KogakuServicehiInfoPanelDiv panel) {
+    private void kogakuServiceDetaildgJudgementResult(KogakuServicehiInfoPanelDiv panel) {
 //        List<HashMap> ymlData = ymlData("dbc0030011/KogakuServiceDetaildgJudgementResult.yml");
 //
 //        List<dgJudgementResult_Row> arraydata = createRowKogakuServiceDetaildgJudgementResultTestData(ymlData);
@@ -354,79 +346,76 @@ public class KogakuServicehiInfoPanel {
 
     }
 
-    private List<dgJudgementResult_Row> createRowKogakuServiceDetaildgJudgementResultTestData(List<HashMap> ymlData) {
-        List<dgJudgementResult_Row> arrayData = new ArrayList<>();
-
-        //TO DO データを増える場合。
-        for (int i = 0; i < ymlData.size(); i++) {
-            HashMap hashMap = ymlData.get(i);
-            ControlGenerator ymlDt = new ControlGenerator(hashMap);
-            hashMap(ymlDt, arrayData);
-        }
-
-        return arrayData;
-
-    }
-
-    private void hashMap(ControlGenerator hashMap, List<dgJudgementResult_Row> arrayData) {
-
-        dgJudgementResult_Row item;
-
-        item = createRowKogakuServiceDetaildgJudgementResultData(
-                hashMap.getAsRString("jigyosha"),
-                hashMap.getAsRString("serviceShurui"),
-                hashMap.getAsDecimal("serviceHiyoTotal"),
-                hashMap.getAsDecimal("riyoshaFutanTotalAmount"),
-                hashMap.getAsDecimal("santeiKijunAmount"),
-                //* 20140702 YML追加
-                hashMap.getAsDecimal("shiharaizumiAmount"),
-                hashMap.getAsDecimal("kogakuShikyuAmount")
-        /*           servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtShikyuKingaku().getValue(),
-         hashMap.getAsDecimal("kogakuShikyuAmount")
-         servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtKogakuShikyuAmount().getValue()   */
-        );
-        arrayData.add(item);
-    }
-
-    private dgJudgementResult_Row createRowKogakuServiceDetaildgJudgementResultData(
-            RString jigyosha,
-            RString serviceShurui,
-            Decimal serviceHiyoTotal,
-            Decimal riyoshaFutanTotalAmount,
-            Decimal santeiKijunAmount,
-            Decimal shiharaizumiAmount,
-            Decimal kogakuShikyuAmount
-    ) {
-        dgJudgementResult_Row rowKogakuServiceDetaildgJudgementResultData;
-        rowKogakuServiceDetaildgJudgementResultData = new dgJudgementResult_Row(
-                RString.EMPTY,
-                RString.EMPTY,
-                new TextBoxNum(),
-                new TextBoxNum(),
-                new TextBoxNum(),
-                new TextBoxNum(),
-                new TextBoxNum()
-        );
-
-        //事業者
-        rowKogakuServiceDetaildgJudgementResultData.setTxtJigyosha(jigyosha);
-        //サービス種類
-        rowKogakuServiceDetaildgJudgementResultData.setTxtServiceShurui(serviceShurui);
-        //サービス費用合計
-        rowKogakuServiceDetaildgJudgementResultData.getTxtServiceHiyoTotal().setValue(serviceHiyoTotal);
-
-        rowKogakuServiceDetaildgJudgementResultData.getTxtRiyoshaFutanTotalAmount().setValue(riyoshaFutanTotalAmount);
-        //利用者<負担額合計
-        rowKogakuServiceDetaildgJudgementResultData.getTxtSanteiKijunAmount().setValue(santeiKijunAmount);
-        //算定基準額
-        rowKogakuServiceDetaildgJudgementResultData.getTxtShiharaizumiAmount().setValue(shiharaizumiAmount);
-        //支払済金額
-        rowKogakuServiceDetaildgJudgementResultData.getTxtKogakuShikyuAmount().setValue(kogakuShikyuAmount);
-
-        return rowKogakuServiceDetaildgJudgementResultData;
-
-    }
-
+//    private List<dgJudgementResult_Row> createRowKogakuServiceDetaildgJudgementResultTestData(List<HashMap> ymlData) {
+//        List<dgJudgementResult_Row> arrayData = new ArrayList<>();
+//
+//        //TO DO データを増える場合。
+//        for (int i = 0; i < ymlData.size(); i++) {
+//            HashMap hashMap = ymlData.get(i);
+//            ControlGenerator ymlDt = new ControlGenerator(hashMap);
+//            hashMap(ymlDt, arrayData);
+//        }
+//
+//        return arrayData;
+//
+//    }
+//    private void hashMap(ControlGenerator hashMap, List<dgJudgementResult_Row> arrayData) {
+//
+//        dgJudgementResult_Row item;
+//
+//        item = createRowKogakuServiceDetaildgJudgementResultData(
+//                hashMap.getAsRString("jigyosha"),
+//                hashMap.getAsRString("serviceShurui"),
+//                hashMap.getAsDecimal("serviceHiyoTotal"),
+//                hashMap.getAsDecimal("riyoshaFutanTotalAmount"),
+//                hashMap.getAsDecimal("santeiKijunAmount"),
+//                //* 20140702 YML追加
+//                hashMap.getAsDecimal("shiharaizumiAmount"),
+//                hashMap.getAsDecimal("kogakuShikyuAmount")
+//        /*           servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtShikyuKingaku().getValue(),
+//         hashMap.getAsDecimal("kogakuShikyuAmount")
+//         servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtKogakuShikyuAmount().getValue()   */
+//        );
+//        arrayData.add(item);
+//    }
+//    private dgJudgementResult_Row createRowKogakuServiceDetaildgJudgementResultData(
+//            RString jigyosha,
+//            RString serviceShurui,
+//            Decimal serviceHiyoTotal,
+//            Decimal riyoshaFutanTotalAmount,
+//            Decimal santeiKijunAmount,
+//            Decimal shiharaizumiAmount,
+//            Decimal kogakuShikyuAmount
+//    ) {
+//        dgJudgementResult_Row rowKogakuServiceDetaildgJudgementResultData;
+//        rowKogakuServiceDetaildgJudgementResultData = new dgJudgementResult_Row(
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                new TextBoxNum(),
+//                new TextBoxNum(),
+//                new TextBoxNum(),
+//                new TextBoxNum(),
+//                new TextBoxNum()
+//        );
+//
+//        //事業者
+//        rowKogakuServiceDetaildgJudgementResultData.setTxtJigyosha(jigyosha);
+//        //サービス種類
+//        rowKogakuServiceDetaildgJudgementResultData.setTxtServiceShurui(serviceShurui);
+//        //サービス費用合計
+//        rowKogakuServiceDetaildgJudgementResultData.getTxtServiceHiyoTotal().setValue(serviceHiyoTotal);
+//
+//        rowKogakuServiceDetaildgJudgementResultData.getTxtRiyoshaFutanTotalAmount().setValue(riyoshaFutanTotalAmount);
+//        //利用者<負担額合計
+//        rowKogakuServiceDetaildgJudgementResultData.getTxtSanteiKijunAmount().setValue(santeiKijunAmount);
+//        //算定基準額
+//        rowKogakuServiceDetaildgJudgementResultData.getTxtShiharaizumiAmount().setValue(shiharaizumiAmount);
+//        //支払済金額
+//        rowKogakuServiceDetaildgJudgementResultData.getTxtKogakuShikyuAmount().setValue(kogakuShikyuAmount);
+//
+//        return rowKogakuServiceDetaildgJudgementResultData;
+//
+//    }
     /**
      * 高額介護サービス費照会 高額介護サービス費一覧で、選択された情報をもとに高額介護サービス費照会の情報を表示する。
      *
@@ -447,9 +436,9 @@ public class KogakuServicehiInfoPanel {
         //口座情報 TAB
         setKogakuServicehiInfoPanelPaymentMethod(panel);
         //高額決定情報 TAB
-        KogakuServiceDetaildgJudgementinfo(panel);
+        kogakuServiceDetaildgJudgementinfo(panel);
         //高額決定情報 TAB     dgJudgementResult
-        KogakuServiceDetaildgJudgementResult(panel);
+        kogakuServiceDetaildgJudgementResult(panel);
 
         response.data = panel;
         return response;
@@ -477,7 +466,7 @@ public class KogakuServicehiInfoPanel {
         switch (panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                 getTplKoza().getPaymentMethod().
                 getRadPayMethod().getSelectedValue().toString()) {
-            case PayToJuryoinin:
+            case "受領委任払い":
                 //受領委任払い 表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
@@ -496,7 +485,7 @@ public class KogakuServicehiInfoPanel {
 
                 //口座払い　→　　受領委任払い・窓口払い　非表示に設定する
                 break;
-            case PayToKoza:
+            case "口座払い":
                 //受領委任払い 非表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
@@ -515,7 +504,7 @@ public class KogakuServicehiInfoPanel {
 
                 //窓口払い　→　口座払い・受領委任払い　非表示に設定する
                 break;
-            case PayToMadoguchi:
+            case "窓口払い":
                 //受領委任払い 非表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
@@ -541,7 +530,7 @@ public class KogakuServicehiInfoPanel {
                 getRadPayMethod().setSelectedItem(new RString("payToKoza"));
 
         if (panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getRadPayMethod().getSelectedValue().toString().equals(PayToKoza)) {
+                getTplKoza().getPaymentMethod().getRadPayMethod().getSelectedValue().toString().equals("口座払い")) {
 
             //受領委任払い 非表示に設定する
             panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().

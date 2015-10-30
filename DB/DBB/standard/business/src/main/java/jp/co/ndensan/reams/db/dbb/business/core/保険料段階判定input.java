@@ -6,18 +6,18 @@
 
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.NengakuSeigyoJoho;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * @author n3336
  */
 public class 保険料段階判定input {
-    private String 賦課年度;
+    private RString 賦課年度;
     private NengakuFukaKonkyo 年額賦課根拠;
     private NengakuSeigyoJoho 年額制御情報;
 
-    public String get賦課年度() {
+    public RString get賦課年度() {
         return 賦課年度;
     }
 
@@ -29,7 +29,7 @@ public class 保険料段階判定input {
         return 年額制御情報;
     }
 
-    public void set賦課年度(String 賦課年度) {
+    public void set賦課年度(RString 賦課年度) {
         this.賦課年度 = 賦課年度;
     }
 

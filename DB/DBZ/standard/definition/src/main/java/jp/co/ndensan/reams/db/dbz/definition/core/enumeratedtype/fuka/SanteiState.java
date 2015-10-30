@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum SanteiState {
 
     /**
-     * 仮算定
+     * 仮算定。
      */
     仮算定("1"),
     /**
-     * 本算定
+     * 本算定。
      */
     本算定("2");
     private final RString key;

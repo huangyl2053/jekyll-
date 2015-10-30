@@ -19,7 +19,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 地区認定調査員を管理するクラスです。
  */
-public class ChikuNinteiChosain extends ParentModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain> implements Serializable {
+public class ChikuNinteiChosain extends 
+        ParentModelBase<ChikuNinteiChosainIdentifier, 
+        DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>
+        implements Serializable {
 
     private final DbT5223ChikuNinteiChosainEntity entity;
     private final ChikuNinteiChosainIdentifier id;

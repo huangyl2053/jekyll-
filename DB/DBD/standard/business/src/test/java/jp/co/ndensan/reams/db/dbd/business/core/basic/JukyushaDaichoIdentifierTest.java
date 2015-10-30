@@ -14,6 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
  * {@link JukyushaDaichoIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JukyushaDaichoIdentifierTest extends DbdTestBase {
 
 //TODO 主キー型と変数名を置換してください

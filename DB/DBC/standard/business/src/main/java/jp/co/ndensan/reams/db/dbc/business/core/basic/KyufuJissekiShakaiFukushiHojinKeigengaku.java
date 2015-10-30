@@ -25,7 +25,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績社会福祉法人軽減額を管理するクラスです。
  */
-public class KyufuJissekiShakaiFukushiHojinKeigengaku extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
+public class KyufuJissekiShakaiFukushiHojinKeigengaku 
+extends ModelBase<KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier,
+        DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity, 
+        KyufuJissekiShakaiFukushiHojinKeigengaku> implements Serializable {
 
     private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
     private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
@@ -382,7 +385,8 @@ public class KyufuJissekiShakaiFukushiHojinKeigengaku extends ModelBase<KyufuJis
         private final DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity;
         private final KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id;
 
-        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity, KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id) {
+        private _SerializationProxy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity, 
+                KyufuJissekiShakaiFukushiHojinKeigengakuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

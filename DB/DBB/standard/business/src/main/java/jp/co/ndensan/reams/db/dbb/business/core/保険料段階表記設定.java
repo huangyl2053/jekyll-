@@ -5,21 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiOutput;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * @author N2810
  */
-public class 保険料段階表記設定 {
+public final class 保険料段階表記設定 {
 
-    public static void 保険料段階表記設定(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput) {
+    private 保険料段階表記設定() {
 
-        Map<String, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.CreateHokenryoDankaiMap();
-        for (String tsuki : hokenryoDankaiMap.keySet()) {
+    }
+
+    public static void set保険料段階表記(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput) {
+
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.createHokenryoDankaiMap();
+        for (RString tsuki : hokenryoDankaiMap.keySet()) {
 
             HokenryoDankai hokenryoDankai = hokenryoDankaiMap.get(tsuki);
 
@@ -28,11 +30,11 @@ public class 保険料段階表記設定 {
         }
     }
 
-    private static String システム段階置換(HokenryoDankaiInput hokenryoDankaiInput, String dankai) {
+    private static RString システム段階置換(HokenryoDankaiInput hokenryoDankaiInput, RString dankai) {
 
-        String result;
+        RString result;
 
-        switch (dankai) {
+        switch (dankai.toString()) {
             case "1":
                 result = hokenryoDankaiInput.getSeigyoJoho().getHokenryoDankaiHyoki01();
                 break;
@@ -94,7 +96,7 @@ public class 保険料段階表記設定 {
                 result = hokenryoDankaiInput.getSeigyoJoho().getHokenryoDankaiHyoki20();
                 break;
             default:
-                result = "";
+                result = new RString("");
         }
 
         return result;

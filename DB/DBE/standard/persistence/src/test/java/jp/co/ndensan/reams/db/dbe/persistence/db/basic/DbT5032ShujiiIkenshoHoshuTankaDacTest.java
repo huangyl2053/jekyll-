@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -31,6 +32,7 @@ import org.junit.runner.RunWith;
  * {@link DbT5032ShujiiIkenshoHoshuTankaDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5032ShujiiIkenshoHoshuTankaDacTest extends DbeTestDacBase {
 
     private static final RString キー_01 = new RString("01");

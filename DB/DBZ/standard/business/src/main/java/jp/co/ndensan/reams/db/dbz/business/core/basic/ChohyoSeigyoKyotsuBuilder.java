@@ -311,7 +311,7 @@ public class ChohyoSeigyoKyotsuBuilder {
         return new ChohyoSeigyoKyotsu(entity, id);
     }
 
-    public ChohyoSeigyoKyotsuBuilder setChohyoSeigyoKyotsuControl(ChohyoSeigyoKyotsuControl createChohyoSeigyoKyotsuControl) {
+    public ChohyoSeigyoKyotsuBuilder setChohyoSeigyoKyotsu(ChohyoSeigyoKyotsuControl createChohyoSeigyoKyotsu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

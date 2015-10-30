@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.PaymentMethod;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinsaResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiPanelDiv;
@@ -16,13 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgMishinsaShiky
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KozaPayment;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.ShinseishaInfo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  *
@@ -124,27 +119,27 @@ public class JutakuKaishuShinseiPanel {
     /*
      * 住宅改修費支給申請審査   申請内容の情報を表示する。
      */
-    private void setInfoData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow, String ymlDataName) {
-
-        //住宅所有者・被保険者との関係
-        setJutakuOwnerData(panel, ymlDataName);
-
-        //住宅改修明細
-        setRowShikyuShinseiData(panel, selectedRow);
-
-        //setZizenShinseiDetailInput(panel, ymlDataName);
-        //前回・今回初期化設定
-        setSummary(panel, ymlDataName);
-
-        //申請者情報初期化設定
-        setShinseishaInfo(panel, ymlDataName);
-
-        //住宅改修理由書
-        setShinseiReason(panel, ymlDataName);
-
-        //口座振替申請情報（UR)
-        setShinseiKozaInfo(panel, ymlDataName);
-    }
+//    private void setInfoData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow, String ymlDataName) {
+//
+//        //住宅所有者・被保険者との関係
+//        setJutakuOwnerData(panel, ymlDataName);
+//
+//        //住宅改修明細
+//        setRowShikyuShinseiData(panel, selectedRow);
+//
+//        //setZizenShinseiDetailInput(panel, ymlDataName);
+//        //前回・今回初期化設定
+//        setSummary(panel, ymlDataName);
+//
+//        //申請者情報初期化設定
+//        setShinseishaInfo(panel, ymlDataName);
+//
+//        //住宅改修理由書
+//        setShinseiReason(panel, ymlDataName);
+//
+//        //口座振替申請情報（UR)
+//        setShinseiKozaInfo(panel, ymlDataName);
+//    }
 
     private void setRowShikyuShinseiData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
 
@@ -280,26 +275,26 @@ public class JutakuKaishuShinseiPanel {
     /*
      * 引数を元にデータグリッド内に挿入する支給申請データを作成します。
      */
-    private dgJutakuKaishuDetail_Row createRowShikyuShinseiListAddData(
-            String 着工予定日,
-            String 完成予定日,
-            String 見積金額,
-            String 事業者,
-            String 改修対象住所,
-            String 改修内容) {
-
-        dgJutakuKaishuDetail_Row rowShikyuShinseiListData = new dgJutakuKaishuDetail_Row(
-                new TextBoxDate(), new TextBoxDate(), new TextBoxNum(), RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        rowShikyuShinseiListData.getTxtChakkoDueDate().setValue(new RDate(着工予定日));
-        rowShikyuShinseiListData.getTxtKanseiDueDate().setValue(new RDate(完成予定日));
-        rowShikyuShinseiListData.getTxtMitsumoriAmount().setValue(new Decimal(見積金額));
-        rowShikyuShinseiListData.setTxtKaishuJigyosha(new RString(事業者));
-        rowShikyuShinseiListData.setTxtKaishuTaishoAddress(new RString(改修対象住所));
-        rowShikyuShinseiListData.setTxtKaishuContents(new RString(改修内容));
-
-        return rowShikyuShinseiListData;
-    }
+//    private dgJutakuKaishuDetail_Row createRowShikyuShinseiListAddData(
+//            String 着工予定日,
+//            String 完成予定日,
+//            String 見積金額,
+//            String 事業者,
+//            String 改修対象住所,
+//            String 改修内容) {
+//
+//        dgJutakuKaishuDetail_Row rowShikyuShinseiListData = new dgJutakuKaishuDetail_Row(
+//                new TextBoxDate(), new TextBoxDate(), new TextBoxNum(), RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        rowShikyuShinseiListData.getTxtChakkoDueDate().setValue(new RDate(着工予定日));
+//        rowShikyuShinseiListData.getTxtKanseiDueDate().setValue(new RDate(完成予定日));
+//        rowShikyuShinseiListData.getTxtMitsumoriAmount().setValue(new Decimal(見積金額));
+//        rowShikyuShinseiListData.setTxtKaishuJigyosha(new RString(事業者));
+//        rowShikyuShinseiListData.setTxtKaishuTaishoAddress(new RString(改修対象住所));
+//        rowShikyuShinseiListData.setTxtKaishuContents(new RString(改修内容));
+//
+//        return rowShikyuShinseiListData;
+//    }
 
     private void setJutakuKaishuJizenShinseiAddDetailInput(JutakuKaishuShinseiPanelDiv panel) {
 
@@ -325,7 +320,7 @@ public class JutakuKaishuShinseiPanel {
 
     }
 
-    private void set承認区分(JutakuKaishuShinsaResultDiv div) {
-        div.getRadShonin().setSelectedItem(new RString("kyakka"));
-    }
+//    private void set承認区分(JutakuKaishuShinsaResultDiv div) {
+//        div.getRadShonin().setSelectedItem(new RString("kyakka"));
+//    }
 }

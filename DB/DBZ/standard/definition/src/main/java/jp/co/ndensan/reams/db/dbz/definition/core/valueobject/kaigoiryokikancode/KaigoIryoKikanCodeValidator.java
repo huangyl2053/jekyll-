@@ -18,7 +18,7 @@ public class KaigoIryoKikanCodeValidator {
     private final KaigoIryoKikanCode kaigoIryoKikanCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param kaigoIryoKikanCode 介護医療機関コード
      */

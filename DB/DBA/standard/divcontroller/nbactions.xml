@@ -21,4 +21,18 @@
             <skipTests>true</skipTests>
         </properties>
     </action>
+    <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <jpda.listen>maven</jpda.listen>
+                <skipTests>true</skipTests>
+            </properties>
+        </action>
 </actions>

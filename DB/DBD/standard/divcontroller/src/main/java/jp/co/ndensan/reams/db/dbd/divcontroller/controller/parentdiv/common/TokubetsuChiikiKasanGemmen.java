@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class TokubetsuChiikiKasanGemmen {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div TokubetsuChiikiKasanGemmenDiv
      * @return ResponseData
@@ -43,7 +43,7 @@ public class TokubetsuChiikiKasanGemmen {
     }
 
     /**
-     * onSelect dgTokubetsuChiikiKasanGemmenList
+     * onSelect dgTokubetsuChiikiKasanGemmenList。
      *
      * @param div TokubetsuChiikiKasanGemmenDiv
      * @return ResponseData
@@ -52,14 +52,14 @@ public class TokubetsuChiikiKasanGemmen {
             onSelect_dgTokubetsuChiikiKasanGemmenList(TokubetsuChiikiKasanGemmenDiv div) {
         for (dgTokubetsuChiikiKasanGemmenList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(TokubetsuChiikiKasanGemmenDiv div, dgTokubetsuChiikiKasanGemmenList_Row rowValue) {
+    private void _setUp(TokubetsuChiikiKasanGemmenDiv div, dgTokubetsuChiikiKasanGemmenList_Row rowValue) {
         _setUp_Detail(div, rowValue);
     }
 

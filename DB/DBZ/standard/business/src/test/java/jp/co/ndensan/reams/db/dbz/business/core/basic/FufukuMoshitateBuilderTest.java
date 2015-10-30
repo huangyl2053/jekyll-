@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7001FufukuMoshitateEnti
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -205,7 +204,7 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の添付書類等は_設定した値と同じ添付書類等を返す() {
             business = sut.set添付書類等(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_添付書類等).build();
-            assertThat(business.get添付書類等(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_添付書類等));
+            assertThat(business.is添付書類等(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_添付書類等));
         }
 
         @Test
@@ -217,7 +216,7 @@ public class FufukuMoshitateBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の弁明書登録フラグは_設定した値と同じ弁明書登録フラグを返す() {
             business = sut.set弁明書登録フラグ(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_弁明書登録フラグ).build();
-            assertThat(business.get弁明書登録フラグ(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_弁明書登録フラグ));
+            assertThat(business.is弁明書登録フラグ(), is(DbT7001FufukuMoshitateEntityGenerator.DEFAULT_弁明書登録フラグ));
         }
 
         @Test

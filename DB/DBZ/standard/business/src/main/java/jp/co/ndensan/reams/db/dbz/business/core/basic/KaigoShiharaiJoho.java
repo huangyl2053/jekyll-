@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護支払情報を管理するクラスです。
  */
-public class KaigoShiharaiJoho extends ParentModelBase<KaigoShiharaiJohoIdentifier, DbT7004KaigoShiharaiJohoEntity, KaigoShiharaiJoho> implements Serializable {
+public class KaigoShiharaiJoho extends 
+        ParentModelBase<KaigoShiharaiJohoIdentifier, 
+        DbT7004KaigoShiharaiJohoEntity, KaigoShiharaiJoho> implements Serializable {
 
     private final DbT7004KaigoShiharaiJohoEntity entity;
     private final KaigoShiharaiJohoIdentifier id;
@@ -308,7 +310,7 @@ public class KaigoShiharaiJoho extends ParentModelBase<KaigoShiharaiJohoIdentifi
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7004KaigoShiharaiJohoEntity entity;
         private final KaigoShiharaiJohoIdentifier id;
 

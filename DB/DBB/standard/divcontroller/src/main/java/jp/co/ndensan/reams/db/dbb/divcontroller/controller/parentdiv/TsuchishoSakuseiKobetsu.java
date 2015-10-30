@@ -8,13 +8,11 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8110001.TsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TsuchishoSakuseiKobetsu {
 
     private static final RString HAKKO_YMD = new RString("DBB8110001/hakkoYMD.yml");
+    private static final RString 発行日 = new RString("発行日");
 
     public ResponseData<TsuchishoSakuseiKobetsuDiv> onLoad_TsuchishoSakuseiKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
         ResponseData<TsuchishoSakuseiKobetsuDiv> response = new ResponseData<>();
@@ -41,12 +40,12 @@ public class TsuchishoSakuseiKobetsu {
         List<HashMap> demoData = YamlLoader.DBB.loadAsList(HAKKO_YMD);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
-        panel.getTokuKaishiTsuchiKobetsu().getTxtTokuKaishiTsuchiHakkoYMD().setValue(cg.getAsRDate("発行日"));
-        panel.getKetteiTsuchiKobetsu().getTxtKetteiTsuchiHakkoYMD().setValue(cg.getAsRDate("発行日"));
-        panel.getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().setValue(cg.getAsRDate("発行日"));
-        panel.getNotsuKobetsu().getTxtNotsuHakkoYMD().setValue(cg.getAsRDate("発行日"));
-        panel.getGemmenTsuchiKobetsu().getTxtGemmenHakkoYMD().setValue(cg.getAsRDate("発行日"));
-        panel.getChoshuYuyoTsuchiKobetsu().getTxtChoshuYuyoHakkoYMD().setValue(cg.getAsRDate("発行日"));
+        panel.getTokuKaishiTsuchiKobetsu().getTxtTokuKaishiTsuchiHakkoYMD().setValue(cg.getAsRDate(発行日));
+        panel.getKetteiTsuchiKobetsu().getTxtKetteiTsuchiHakkoYMD().setValue(cg.getAsRDate(発行日));
+        panel.getHenkoTsuchiKobetsu().getTxtHenkoTsuchiHakkoYMD().setValue(cg.getAsRDate(発行日));
+        panel.getNotsuKobetsu().getTxtNotsuHakkoYMD().setValue(cg.getAsRDate(発行日));
+        panel.getGemmenTsuchiKobetsu().getTxtGemmenHakkoYMD().setValue(cg.getAsRDate(発行日));
+        panel.getChoshuYuyoTsuchiKobetsu().getTxtChoshuYuyoHakkoYMD().setValue(cg.getAsRDate(発行日));
 
         panel.getDgChohyoSentaku().setDataSource(arrayData);
 
@@ -100,12 +99,12 @@ public class TsuchishoSakuseiKobetsu {
     private void change_KetteiTsuchiKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
 
         if (panel.getDgChohyoSentaku().getClickedItem().getTxtChohyoSentaku().equals(new RString("決定通知書"))) {
-            if (panel.getKetteiTsuchiKobetsu().isIsOpen() == false) {
+            if (!panel.getKetteiTsuchiKobetsu().isIsOpen()) {
                 panel.getKetteiTsuchiKobetsu().setIsOpen(true);
             } else {
                 panel.getKetteiTsuchiKobetsu().setIsOpen(false);
             }
-            if (panel.getKetteiTsuchiKobetsu().isIsPublish() == false) {
+            if (!panel.getKetteiTsuchiKobetsu().isIsPublish()) {
                 panel.getKetteiTsuchiKobetsu().setIsPublish(true);
             } else {
                 panel.getKetteiTsuchiKobetsu().setIsPublish(false);
@@ -116,12 +115,12 @@ public class TsuchishoSakuseiKobetsu {
     private void change_HenkoTsuchiKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
 
         if (panel.getDgChohyoSentaku().getClickedItem().getTxtChohyoSentaku().equals(new RString("変更兼特徴中止通知書"))) {
-            if (panel.getHenkoTsuchiKobetsu().isIsOpen() == false) {
+            if (!panel.getHenkoTsuchiKobetsu().isIsOpen()) {
                 panel.getHenkoTsuchiKobetsu().setIsOpen(true);
             } else {
                 panel.getHenkoTsuchiKobetsu().setIsOpen(false);
             }
-            if (panel.getHenkoTsuchiKobetsu().isIsPublish() == false) {
+            if (!panel.getHenkoTsuchiKobetsu().isIsPublish()) {
                 panel.getHenkoTsuchiKobetsu().setIsPublish(true);
             } else {
                 panel.getHenkoTsuchiKobetsu().setIsPublish(false);
@@ -132,12 +131,12 @@ public class TsuchishoSakuseiKobetsu {
     private void change_NotsuKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
 
         if (panel.getDgChohyoSentaku().getClickedItem().getTxtChohyoSentaku().equals(new RString("納入通知書"))) {
-            if (panel.getNotsuKobetsu().isIsOpen() == false) {
+            if (!panel.getNotsuKobetsu().isIsOpen()) {
                 panel.getNotsuKobetsu().setIsOpen(true);
             } else {
                 panel.getNotsuKobetsu().setIsOpen(false);
             }
-            if (panel.getNotsuKobetsu().isIsPublish() == false) {
+            if (!panel.getNotsuKobetsu().isIsPublish()) {
                 panel.getNotsuKobetsu().setIsPublish(true);
             } else {
                 panel.getNotsuKobetsu().setIsPublish(false);
@@ -148,12 +147,12 @@ public class TsuchishoSakuseiKobetsu {
     private void change_YufuriKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
 
         if (panel.getDgChohyoSentaku().getClickedItem().getTxtChohyoSentaku().equals(new RString("郵便振替納付書"))) {
-            if (panel.getYufuriKobetsu().isIsOpen() == false) {
+            if (!panel.getYufuriKobetsu().isIsOpen()) {
                 panel.getYufuriKobetsu().setIsOpen(true);
             } else {
                 panel.getYufuriKobetsu().setIsOpen(false);
             }
-            if (panel.getYufuriKobetsu().isIsPublish() == false) {
+            if (!panel.getYufuriKobetsu().isIsPublish()) {
                 panel.getYufuriKobetsu().setIsPublish(true);
             } else {
                 panel.getYufuriKobetsu().setIsPublish(false);
@@ -164,12 +163,12 @@ public class TsuchishoSakuseiKobetsu {
     private void change_FukadaichoKobetsu(TsuchishoSakuseiKobetsuDiv panel) {
 
         if (panel.getDgChohyoSentaku().getClickedItem().getTxtChohyoSentaku().equals(new RString("賦課台帳"))) {
-            if (panel.getFukadaichoKobetsu().isIsOpen() == false) {
+            if (!panel.getFukadaichoKobetsu().isIsOpen()) {
                 panel.getFukadaichoKobetsu().setIsOpen(true);
             } else {
                 panel.getFukadaichoKobetsu().setIsOpen(false);
             }
-            if (panel.getFukadaichoKobetsu().isIsPublish() == false) {
+            if (!panel.getFukadaichoKobetsu().isIsPublish()) {
                 panel.getFukadaichoKobetsu().setIsPublish(true);
             } else {
                 panel.getFukadaichoKobetsu().setIsPublish(false);

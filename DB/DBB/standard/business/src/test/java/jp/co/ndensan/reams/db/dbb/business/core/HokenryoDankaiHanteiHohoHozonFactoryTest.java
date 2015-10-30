@@ -5,15 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.SeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.第4期;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHanteiHohoHozonFactory;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHanteiHohoHozon;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -29,14 +26,13 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
     }
 
     /**
-     * Test of CreateHokenryoDankaiHanteiHoho method, of class
-     * HokenryoDankaiHanteiHohoHozonFactory.
+     * Test of CreateHokenryoDankaiHanteiHoho method, of class HokenryoDankaiHanteiHohoHozonFactory.
      */
     @Test
     public void testCreateHokenryoDankaiHanteiHoho1() {
         System.out.println("CreateHokenryoDankaiHanteiHoho1");
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2012");
+        hokenryodankaiinput.setFukaNendo(new RString("2012"));
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
         seigyojoho.setKijunNenkinShunyu01(new Decimal(800000));
@@ -47,7 +43,7 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryodankaiinput);
+        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryodankaiinput);
         if (result instanceof 第4期) {
         } else {
             fail("CreateHokenryoDankaiHanteiHoho1 failed");
@@ -59,7 +55,7 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         System.out.println("CreateHokenryoDankaiHanteiHoho2");
 
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -71,7 +67,7 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryodankaiinput);
+        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryodankaiinput);
         if (result instanceof 第4期) {
         } else {
             fail("CreateHokenryoDankaiHanteiHoho1 failed");
@@ -83,9 +79,9 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         System.out.println("CreateHokenryoDankaiHanteiHoho3");
 
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2015");
+        hokenryodankaiinput.setFukaNendo(new RString("2015"));
         HokenryoDankaiHanteiHohoHozon expResult = null;
-        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryodankaiinput);
+        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryodankaiinput);
         assertEquals(expResult, result);
 
     }
@@ -95,9 +91,9 @@ public class HokenryoDankaiHanteiHohoHozonFactoryTest {
         System.out.println("CreateHokenryoDankaiHanteiHoho4");
 
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("");
+        hokenryodankaiinput.setFukaNendo(new RString(""));
         HokenryoDankaiHanteiHohoHozon expResult = null;
-        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryodankaiinput);
+        HokenryoDankaiHanteiHohoHozon result = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryodankaiinput);
         assertEquals(expResult, result);
 
     }

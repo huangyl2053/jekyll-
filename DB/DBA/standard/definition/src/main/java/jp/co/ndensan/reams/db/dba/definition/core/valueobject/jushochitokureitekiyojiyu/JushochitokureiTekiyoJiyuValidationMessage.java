@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureikaijojiyu;
+package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureitekiyojiyu;
 
 import static jp.co.ndensan.reams.uz.uza.batch.parameter.message._BatchMessageUtil.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum JushochitokureiTekiyoJiyuValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(JushochitokureiTekiyoJiyuErrorMessage.コードがNullであること),
     /**
-     * 名称がNullであること
+     * 名称がNullであること。
      */
     名称がNullであること(JushochitokureiTekiyoJiyuErrorMessage.名称がNullであること);
     private final Message message;
@@ -43,11 +43,11 @@ public enum JushochitokureiTekiyoJiyuValidationMessage implements IValidationMes
     public enum JushochitokureiTekiyoJiyuErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "コードを指定してください。。"),
         /**
-         * 名称がNullであること
+         * 名称がNullであること。
          */
         名称がNullであること(2, "名称を指定してください。。");
         private final int no;

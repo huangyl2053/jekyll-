@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -15,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * DbT7056GappeiShichosonの項目定義クラスです
- *
+ * 合併市町村テーブルのエンティティクラスです。
  */
 public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056GappeiShichosonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
+    private static final long serialVersionUID = 5066494311793636088L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -51,7 +53,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     private RString hyojiUmu;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -60,7 +62,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -69,7 +71,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -78,7 +80,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -87,7 +89,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -96,252 +98,271 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     }
 
     /**
-     * getGappeiYMD
+     * 合併年月日のgetメソッドです。
      *
-     * @return gappeiYMD
+     * @return 合併年月日
      */
     public FlexibleDate getGappeiYMD() {
         return gappeiYMD;
     }
 
     /**
-     * setGappeiYMD
+     * 合併年月日のsetメソッドです。
      *
-     * @param gappeiYMD gappeiYMD
+     * @param gappeiYMD 合併年月日
      */
-    public void setGappeiYMD(FlexibleDate gappeiYMD) {
+    public void setGappeiYMD(@Nonnull FlexibleDate gappeiYMD) {
         this.gappeiYMD = gappeiYMD;
     }
 
     /**
-     * getChiikiNo
+     * 地域番号のgetメソッドです。
      *
-     * @return chiikiNo
+     * @return 地域番号
      */
     public RString getChiikiNo() {
         return chiikiNo;
     }
 
     /**
-     * setChiikiNo
+     * 地域番号のsetメソッドです。
      *
-     * @param chiikiNo chiikiNo
+     * @param chiikiNo 地域番号
      */
-    public void setChiikiNo(RString chiikiNo) {
+    public void setChiikiNo(@Nonnull RString chiikiNo) {
         this.chiikiNo = chiikiNo;
     }
 
     /**
-     * getKyuShichosonCode
+     * 旧市町村コードのgetメソッドです。
      *
-     * @return kyuShichosonCode
+     * @return 旧市町村コード
      */
     public LasdecCode getKyuShichosonCode() {
         return kyuShichosonCode;
     }
 
     /**
-     * setKyuShichosonCode
+     * 旧市町村コードのsetメソッドです。
      *
-     * @param kyuShichosonCode kyuShichosonCode
+     * @param kyuShichosonCode 旧市町村コード
      */
-    public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
+    public void setKyuShichosonCode(@Nonnull LasdecCode kyuShichosonCode) {
         this.kyuShichosonCode = kyuShichosonCode;
     }
 
     /**
-     * getUnyoKaishiYMD
+     * 運用開始年月日のgetメソッドです。
      *
-     * @return unyoKaishiYMD
+     * @return 運用開始年月日
      */
+    @CheckForNull
     public FlexibleDate getUnyoKaishiYMD() {
         return unyoKaishiYMD;
     }
 
     /**
-     * setUnyoKaishiYMD
+     * 運用開始年月日のsetメソッドです。
      *
-     * @param unyoKaishiYMD unyoKaishiYMD
+     * @param unyoKaishiYMD 運用開始年月日
      */
     public void setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
         this.unyoKaishiYMD = unyoKaishiYMD;
     }
 
     /**
-     * getUnyoShuryoYMD
+     * 運用終了年月日のgetメソッドです。
      *
-     * @return unyoShuryoYMD
+     * @return 運用終了年月日
      */
+    @CheckForNull
     public FlexibleDate getUnyoShuryoYMD() {
         return unyoShuryoYMD;
     }
 
     /**
-     * setUnyoShuryoYMD
+     * 運用終了年月日のsetメソッドです。
      *
-     * @param unyoShuryoYMD unyoShuryoYMD
+     * @param unyoShuryoYMD 運用終了年月日
      */
     public void setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
         this.unyoShuryoYMD = unyoShuryoYMD;
     }
 
     /**
-     * getKyuHokenshaNo
+     * 旧保険者番号のgetメソッドです。
      *
-     * @return kyuHokenshaNo
+     * @return 旧保険者番号
      */
+    @CheckForNull
     public HokenshaNo getKyuHokenshaNo() {
         return kyuHokenshaNo;
     }
 
     /**
-     * setKyuHokenshaNo
+     * 旧保険者番号のsetメソッドです。
      *
-     * @param kyuHokenshaNo kyuHokenshaNo
+     * @param kyuHokenshaNo 旧保険者番号
      */
     public void setKyuHokenshaNo(HokenshaNo kyuHokenshaNo) {
         this.kyuHokenshaNo = kyuHokenshaNo;
     }
 
     /**
-     * getKyuShichosonMeisho
+     * 旧市町村名称のgetメソッドです。
      *
-     * @return kyuShichosonMeisho
+     * @return 旧市町村名称
      */
+    @CheckForNull
     public RString getKyuShichosonMeisho() {
         return kyuShichosonMeisho;
     }
 
     /**
-     * setKyuShichosonMeisho
+     * 旧市町村名称のsetメソッドです。
      *
-     * @param kyuShichosonMeisho kyuShichosonMeisho
+     * @param kyuShichosonMeisho 旧市町村名称
      */
     public void setKyuShichosonMeisho(RString kyuShichosonMeisho) {
         this.kyuShichosonMeisho = kyuShichosonMeisho;
     }
 
     /**
-     * getTodofukenMeisho
+     * 都道府県名称のgetメソッドです。
      *
-     * @return todofukenMeisho
+     * @return 都道府県名称
      */
+    @CheckForNull
     public RString getTodofukenMeisho() {
         return todofukenMeisho;
     }
 
     /**
-     * setTodofukenMeisho
+     * 都道府県名称のsetメソッドです。
      *
-     * @param todofukenMeisho todofukenMeisho
+     * @param todofukenMeisho 都道府県名称
      */
     public void setTodofukenMeisho(RString todofukenMeisho) {
         this.todofukenMeisho = todofukenMeisho;
     }
 
     /**
-     * getGunMeisho
+     * 郡名称のgetメソッドです。
      *
-     * @return gunMeisho
+     * @return 郡名称
      */
+    @CheckForNull
     public RString getGunMeisho() {
         return gunMeisho;
     }
 
     /**
-     * setGunMeisho
+     * 郡名称のsetメソッドです。
      *
-     * @param gunMeisho gunMeisho
+     * @param gunMeisho 郡名称
      */
     public void setGunMeisho(RString gunMeisho) {
         this.gunMeisho = gunMeisho;
     }
 
     /**
-     * getYubinNo
+     * 郵便番号のgetメソッドです。
      *
-     * @return yubinNo
+     * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
 
     /**
-     * setYubinNo
+     * 郵便番号のsetメソッドです。
      *
-     * @param yubinNo yubinNo
+     * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
         this.yubinNo = yubinNo;
     }
 
     /**
-     * getTelNo
+     * 電話番号のgetメソッドです。
      *
-     * @return telNo
+     * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
 
     /**
-     * setTelNo
+     * 電話番号のsetメソッドです。
      *
-     * @param telNo telNo
+     * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
         this.telNo = telNo;
     }
 
     /**
-     * getRojinhokenShichosonNo
+     * 老人保健市町村番号のgetメソッドです。
      *
-     * @return rojinhokenShichosonNo
+     * @return 老人保健市町村番号
      */
+    @CheckForNull
     public RString getRojinhokenShichosonNo() {
         return rojinhokenShichosonNo;
     }
 
     /**
-     * setRojinhokenShichosonNo
+     * 老人保健市町村番号のsetメソッドです。
      *
-     * @param rojinhokenShichosonNo rojinhokenShichosonNo
+     * @param rojinhokenShichosonNo 老人保健市町村番号
      */
     public void setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
         this.rojinhokenShichosonNo = rojinhokenShichosonNo;
     }
 
     /**
-     * getRokenJukyushaNoTaikei
+     * 老人保健受給者番号体系のgetメソッドです。
+     * <br/>
+     * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
      *
-     * @return rokenJukyushaNoTaikei
+     * @return 老人保健受給者番号体系
      */
+    @CheckForNull
     public RString getRokenJukyushaNoTaikei() {
         return rokenJukyushaNoTaikei;
     }
 
     /**
-     * setRokenJukyushaNoTaikei
+     * 老人保健受給者番号体系のsetメソッドです。
+     * <br/>
+     * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
      *
-     * @param rokenJukyushaNoTaikei rokenJukyushaNoTaikei
+     * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
      */
     public void setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
         this.rokenJukyushaNoTaikei = rokenJukyushaNoTaikei;
     }
 
     /**
-     * getHyojiUmu
+     * 表示有無のgetメソッドです。
+     * <br/>
+     * <br/>1:表示対象とする 0:表示対象としない
      *
-     * @return hyojiUmu
+     * @return 表示有無
      */
+    @CheckForNull
     public RString getHyojiUmu() {
         return hyojiUmu;
     }
 
     /**
-     * setHyojiUmu
+     * 表示有無のsetメソッドです。
+     * <br/>
+     * <br/>1:表示対象とする 0:表示対象としない
      *
-     * @param hyojiUmu hyojiUmu
+     * @param hyojiUmu 表示有無
      */
     public void setHyojiUmu(RString hyojiUmu) {
         this.hyojiUmu = hyojiUmu;
@@ -351,7 +372,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * このエンティティの主キーが他の{@literal DbT7056GappeiShichosonEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7056GappeiShichosonEntity other) {

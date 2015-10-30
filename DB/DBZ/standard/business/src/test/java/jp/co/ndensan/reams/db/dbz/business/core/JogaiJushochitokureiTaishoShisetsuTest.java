@@ -17,6 +17,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.mock;
  *
  * @author N3317 塚田 萌
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class JogaiJushochitokureiTaishoShisetsuTest extends DbzTestBase {
 

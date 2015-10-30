@@ -7,15 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguKonyuhiShikyuShinseiSeikyuDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgSeikyuDetail_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KozaPayment;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
@@ -124,16 +120,16 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
         return list;
     }
 
-    private static dgSeikyuDetail_Row toDgSeikyuDetail_Row(Map map) {
-        ControlGenerator cg = new ControlGenerator(map);
-        dgSeikyuDetail_Row row = new dgSeikyuDetail_Row(
-                cg.getAsTextBoxDate("購入日"),
-                cg.getAsTextBox("種目"),
-                cg.getAsTextBox("商品名"),
-                cg.getAsTextBoxNum("購入金額"),
-                cg.getAsTextBox("審査方法"));
-        return row;
-    }
+//    private static dgSeikyuDetail_Row toDgSeikyuDetail_Row(Map map) {
+//        ControlGenerator cg = new ControlGenerator(map);
+//        dgSeikyuDetail_Row row = new dgSeikyuDetail_Row(
+//                cg.getAsTextBoxDate("購入日"),
+//                cg.getAsTextBox("種目"),
+//                cg.getAsTextBox("商品名"),
+//                cg.getAsTextBoxNum("購入金額"),
+//                cg.getAsTextBox("審査方法"));
+//        return row;
+//    }
 
     /*
      * 支給申請内容の値を設定します。
@@ -151,11 +147,11 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
 //        ShinseishaInfo.setData(panel.getYoguKonyuhiShikyuShinseiShinsaShinseisha(), 0);
     }
 
-    private void setKozaInfo(YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
-        panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
-
-        panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getKozaPayment()
-                .getRadKozaShubetsu().setSelectedItem(new RString("futsu"));
-        KozaPayment.setData(panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getKozaPayment(), 0);
-    }
+//    private void setKozaInfo(YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
+//        panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+//
+//        panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getKozaPayment()
+//                .getRadKozaShubetsu().setSelectedItem(new RString("futsu"));
+//        KozaPayment.setData(panel.getYoguKonyuhiShikyuShinseiShinsaPaymentMethod().getKozaPayment(), 0);
+//    }
 }

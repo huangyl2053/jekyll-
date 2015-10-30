@@ -146,7 +146,7 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の宛先印字対象者フラグは_設定した値と同じ宛先印字対象者フラグを返す() {
             business = sut.set宛先印字対象者フラグ(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_宛先印字対象者フラグ).build();
-            assertThat(business.get宛先印字対象者フラグ(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_宛先印字対象者フラグ));
+            assertThat(business.is宛先印字対象者フラグ(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_宛先印字対象者フラグ));
         }
 
         @Test
@@ -170,7 +170,7 @@ public class KijunShunyugakuTekiyoKanriBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の世帯主フラグは_設定した値と同じ世帯主フラグを返す() {
             business = sut.set世帯主フラグ(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯主フラグ).build();
-            assertThat(business.get世帯主フラグ(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯主フラグ));
+            assertThat(business.is世帯主フラグ(), is(DbT3116KijunShunyugakuTekiyoKanriEntityGenerator.DEFAULT_世帯主フラグ));
         }
 
         @Test

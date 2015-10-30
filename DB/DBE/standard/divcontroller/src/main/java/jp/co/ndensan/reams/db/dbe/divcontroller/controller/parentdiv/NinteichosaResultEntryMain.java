@@ -141,7 +141,7 @@ public class NinteichosaResultEntryMain {
         return repeateData;
     }
 
-    private class TokkijikoComFactroy {
+    private final class TokkijikoComFactroy {
 
         private final TokkijikoCom copyOrigin;
 
@@ -306,7 +306,7 @@ public class NinteichosaResultEntryMain {
         }
 
         /**
-         * radChosaJisshiBasho
+         * radChosaJisshiBasho。
          *
          * @return radChosaJisshiBasho
          */
@@ -447,7 +447,7 @@ public class NinteichosaResultEntryMain {
         }
 
         /**
-         * radShinsakaiWaritsukeKibo
+         * radShinsakaiWaritsukeKibo。
          *
          * @return radShinsakaiWaritsukeKibo
          */
@@ -482,7 +482,7 @@ public class NinteichosaResultEntryMain {
         }
 
         /**
-         * radServiceKubun
+         * radServiceKubun。
          *
          * @return radServiceKubun
          */
@@ -636,7 +636,7 @@ public class NinteichosaResultEntryMain {
             }
 
             /**
-             * radJutakuKaishu
+             * radJutakuKaishu。
              *
              * @return radJutakuKaishu
              */
@@ -647,7 +647,7 @@ public class NinteichosaResultEntryMain {
             //<editor-fold defaultstate="collapsed" desc="JutakuKaishu">
             private static enum JutakuKaishu {
 
-                あり("1"), なし("0"),;
+                あり("1"), なし("0");
                 private final RString theKey;
                 private final RString theValue;
 

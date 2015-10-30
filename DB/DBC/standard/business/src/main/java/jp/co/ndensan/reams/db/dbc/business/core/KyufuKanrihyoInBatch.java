@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -31,10 +30,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KyufuKanrihyoInBatch {
 
-    private final RString RSTRING_ALL9_2 = new RString("99");
-    private final RString RSTRING_ALL9_10 = new RString("9999999999");
+    private static final RString RSTRING_ALL9_2 = new RString("99");
+    private static final RString RSTRING_ALL9_10 = new RString("9999999999");
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_6 = 6;
 
-    public DbTKyufuInCtrlTempTableEntity CreateControlRecord(List<RString> input, RString filtpath) {
+    public DbTKyufuInCtrlTempTableEntity createControlRecord(List<RString> input, RString filtpath) {
 
         DbTKyufuInCtrlTempTableEntity result = new DbTKyufuInCtrlTempTableEntity();
         KyufuKanrihyoCSVHeaderEntity entity = ListToObjectMappingHelper.toObject(KyufuKanrihyoCSVHeaderEntity.class, input);
@@ -54,12 +55,12 @@ public class KyufuKanrihyoInBatch {
 
         List<RString> filepathlist = filtpath.split("/");
         RString filename = filepathlist.get(filepathlist.size() - 1);
-        result.setFileBunruiCode(filename.substringReturnAsPossible(0, 4));
+        result.setFileBunruiCode(filename.substringReturnAsPossible(0, INDEX_4));
         result.setJissekiDataShinsaYM(RString.EMPTY);
         return result;
     }
 
-    public DbTKyufukanrihyoDataTempTableEntity CreateDataRecord(List<RString> input) {
+    public DbTKyufukanrihyoDataTempTableEntity createDataRecord(List<RString> input) {
 
         DbTKyufukanrihyoDataTempTableEntity result = new DbTKyufukanrihyoDataTempTableEntity();
         KyufuKanrihyoCSVDataEntity entity = ListToObjectMappingHelper.toObject(KyufuKanrihyoCSVDataEntity.class, input);
@@ -99,7 +100,8 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
-    public DbT3014KyufuKanrihyo200004Entity CreateKyufuKanrihyo200004Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
+    public DbT3014KyufuKanrihyo200004Entity createKyufuKanrihyo200004Record(
+            DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
         DbT3014KyufuKanrihyo200004Entity result = new DbT3014KyufuKanrihyo200004Entity();
 
@@ -142,12 +144,13 @@ public class KyufuKanrihyoInBatch {
         result.setKijyunGaitoServiceSubTotal(checkDecimal(input.getKijunGaitoServiceShokei()));
         result.setKyufuKeikakuTotalTanisuNissu(checkDecimal(input.getKyufuKeikakuGokeiTanisuNissu()));
 
-        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, 6)));
+        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, INDEX_6)));
 
         return result;
     }
 
-    public DbT3015KyufuKanrihyo200604Entity CreateKyufuKanrihyo200604Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
+    public DbT3015KyufuKanrihyo200604Entity createKyufuKanrihyo200604Record(
+            DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
         DbT3015KyufuKanrihyo200604Entity result = new DbT3015KyufuKanrihyo200604Entity();
 
@@ -197,12 +200,15 @@ public class KyufuKanrihyoInBatch {
 
         result.setItakusakiTantoKaigoShienSemmoninNo(input.getItakusakiKaigoshienSenmoninNo());
 
-        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, 6)));
+        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, INDEX_6)));
 
         return result;
     }
 
-    public DbT3104KokuhorenInterfaceKanriEntity CreateKokuhorenIFKanriRecord(DbT3104KokuhorenInterfaceKanriEntity kokuhorenIFkanri, List<DbTKyufuInCtrlTempTableEntity> kyufuCtrlTemps, RString fileName, RString shoriNichiji) {
+    public DbT3104KokuhorenInterfaceKanriEntity createKokuhorenIFKanriRecord(
+            DbT3104KokuhorenInterfaceKanriEntity kokuhorenIFkanri,
+            List<DbTKyufuInCtrlTempTableEntity> kyufuCtrlTemps,
+            RString fileName, RString shoriNichiji) {
 
         kokuhorenIFkanri.setSofuTorikomiKubun(new RString("2"));
         kokuhorenIFkanri.setShoriJotaiKubun(new RString("3"));
@@ -254,7 +260,7 @@ public class KyufuKanrihyoInBatch {
 
     private Integer checkInteger(RString 金額) {
         if (金額 == null || 金額.isEmpty()) {
-            return new Integer(0);
+            return Integer.valueOf(0);
         }
 
         return new Integer(金額.toString());

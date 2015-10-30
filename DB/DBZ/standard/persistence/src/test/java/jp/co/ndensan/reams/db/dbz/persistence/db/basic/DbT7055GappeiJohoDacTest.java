@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7055GappeiJohoDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,16 +23,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT7055GappeiJohoDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final FlexibleDate キー_01 = new FlexibleDate("20150101");
+    private static final FlexibleDate キー_02 = new FlexibleDate("20150202");
+    private static final FlexibleDate キー_03 = new FlexibleDate("20150303");
     private static DbT7055GappeiJohoDac sut;
 
     @BeforeClass
@@ -46,17 +47,17 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号);
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_02,
                     DEFAULT_地域番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 合併年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    null,
                     DEFAULT_地域番号);
         }
 
@@ -64,7 +65,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         public void 地域番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_合併年月日,
-                    DEFAULT_地域番号);
+                    null);
         }
 
         @Test
@@ -78,7 +79,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7055GappeiJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    キー_02,
                     DEFAULT_地域番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,10 +90,10 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
         @Test
         public void 合併情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号);
             TestSupport.insert(
-                    DEFAULT_合併年月日,
+                    キー_03,
                     DEFAULT_地域番号);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -132,7 +133,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号);
             // TODO  主キー以外の項目を変更してください
-            // updateRecord.set変更したい項目(75);
+            updateRecord.setGappeiShurui(new RString("00001"));
 
             sut.save(updateRecord);
 
@@ -141,7 +142,7 @@ public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
                     DEFAULT_地域番号);
 
             // TODO  主キー以外の項目を変更してください
-            // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getGappeiShurui(), is(updatedRecord.getGappeiShurui()));
         }
     }
 

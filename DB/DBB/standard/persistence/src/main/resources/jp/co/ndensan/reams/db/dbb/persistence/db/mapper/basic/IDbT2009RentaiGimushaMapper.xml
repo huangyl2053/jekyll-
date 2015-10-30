@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2009RentaiGimushaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2009RentaiGimushaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2009RentaiGimusha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2009RentaiGimushaMapper.allColumns_DbT2009RentaiGimusha" />
+     FROM
+         rgdb."DbT2009RentaiGimusha"
+     WHERE
+         rgdb."DbT2009RentaiGimusha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2009RentaiGimusha">
+         "DbT2009RentaiGimusha"."hihokenshaNo" as "dbT2009RentaiGimusha_hihokenshaNo",
+         "DbT2009RentaiGimusha"."rirekiNo" as "dbT2009RentaiGimusha_rirekiNo",
+         "DbT2009RentaiGimusha"."insertDantaiCd" as "dbT2009RentaiGimusha_insertDantaiCd",
+         "DbT2009RentaiGimusha"."insertTimestamp" as "dbT2009RentaiGimusha_insertTimestamp",
+         "DbT2009RentaiGimusha"."insertReamsLoginId" as "dbT2009RentaiGimusha_insertReamsLoginId",
+         "DbT2009RentaiGimusha"."insertContextId" as "dbT2009RentaiGimusha_insertContextId",
+         "DbT2009RentaiGimusha"."isDeleted" as "dbT2009RentaiGimusha_isDeleted",
+         "DbT2009RentaiGimusha"."updateCount" as "dbT2009RentaiGimusha_updateCount",
+         "DbT2009RentaiGimusha"."lastUpdateTimestamp" as "dbT2009RentaiGimusha_lastUpdateTimestamp",
+         "DbT2009RentaiGimusha"."lastUpdateReamsLoginId" as "dbT2009RentaiGimusha_lastUpdateReamsLoginId",
+         "DbT2009RentaiGimusha"."shikibetuCode" as "dbT2009RentaiGimusha_shikibetuCode",
+         "DbT2009RentaiGimusha"."startYMD" as "dbT2009RentaiGimusha_startYMD",
+         "DbT2009RentaiGimusha"."endYMD" as "dbT2009RentaiGimusha_endYMD"
+    </sql>
+
+
+    <!--テーブルDbT2009RentaiGimushaの項目をDbT2009RentaiGimushaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2009RentaiGimushaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2009RentaiGimushaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT2009RentaiGimusha_hihokenshaNo" />
+        <id property="rirekiNo" column="dbT2009RentaiGimusha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT2009RentaiGimusha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2009RentaiGimusha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2009RentaiGimusha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2009RentaiGimusha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2009RentaiGimusha_isDeleted" />
+        <result property="updateCount" column="dbT2009RentaiGimusha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2009RentaiGimusha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2009RentaiGimusha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetuCode" column="dbT2009RentaiGimusha_shikibetuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="startYMD" column="dbT2009RentaiGimusha_startYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="endYMD" column="dbT2009RentaiGimusha_endYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT2009RentaiGimushaEntity">
+        SELECT
+        <include refid="allColumns_DbT2009RentaiGimusha" />
+        FROM
+        rgdb."DbT2009RentaiGimusha"
+    </select>
+
+</mapper>

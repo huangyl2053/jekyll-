@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5040002.dgSe
  *
  * @author N3327 三浦 凌
  */
-class YokaigoNinteiShinseisha {
+final class YokaigoNinteiShinseisha {
 
     private dgSearchResult_Row shinseishaInfo;
 
@@ -20,11 +20,11 @@ class YokaigoNinteiShinseisha {
 
     private static class YokaigoNinteiShinseishaHolder {
 
-        private static final YokaigoNinteiShinseisha instance = new YokaigoNinteiShinseisha();
+        private static final YokaigoNinteiShinseisha INSTANCE = new YokaigoNinteiShinseisha();
     }
 
     static YokaigoNinteiShinseisha getInstance() {
-        return YokaigoNinteiShinseishaHolder.instance;
+        return YokaigoNinteiShinseishaHolder.INSTANCE;
     }
 
     void save(dgSearchResult_Row shinseishaInfo) {

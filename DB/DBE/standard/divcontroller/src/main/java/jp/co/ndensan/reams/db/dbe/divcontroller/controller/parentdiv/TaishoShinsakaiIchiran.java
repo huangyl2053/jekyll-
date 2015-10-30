@@ -43,7 +43,7 @@ public class TaishoShinsakaiIchiran {
     }
 
     /**
-     * データグリッドの登録ボタン押下時の処理を押下した時の処理を表します
+     * データグリッドの登録ボタン押下時の処理を押下した時の処理を表します。
      *
      * @param div 対象審査会一覧Div
      * @return ResponseData

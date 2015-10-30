@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.SeigyoJoho;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiHosei;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -38,7 +36,7 @@ public class HokenryoDankaiHoseiTest {
     public void testHokenryoDankaiHosei1() {
         System.out.println("HokenryoDankaiHosei1");
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -50,9 +48,9 @@ public class HokenryoDankaiHoseiTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        String hokenryodankai = "2";
-        String expResult = "6";
-        String result = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
+        RString hokenryodankai = new RString("2");
+        RString expResult = new RString("6");
+        RString result = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
         assertEquals(expResult, result);
     }
 
@@ -63,7 +61,7 @@ public class HokenryoDankaiHoseiTest {
     public void testHokenryoDankaiHosei2() {
         System.out.println("HokenryoDankaiHosei2");
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -75,9 +73,9 @@ public class HokenryoDankaiHoseiTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        String hokenryodankai = "4";
-        String expResult = "6";
-        String result = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
+        RString hokenryodankai = new RString("4");
+        RString expResult = new RString("6");
+        RString result = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
         assertEquals(expResult, result);
 
     }
@@ -89,7 +87,7 @@ public class HokenryoDankaiHoseiTest {
     public void testHokenryoDankaiHosei3() {
         System.out.println("HokenryoDankaiHosei3");
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -101,9 +99,9 @@ public class HokenryoDankaiHoseiTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        String hokenryodankai = "5";
-        String expResult = "5";
-        String result = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
+        RString hokenryodankai = new RString("5");
+        RString expResult = new RString("5");
+        RString result = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
         assertEquals(expResult, result);
 
     }
@@ -115,7 +113,7 @@ public class HokenryoDankaiHoseiTest {
     public void testHokenryoDankaiHosei4() {
         System.out.println("HokenryoDankaiHosei4");
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -127,9 +125,9 @@ public class HokenryoDankaiHoseiTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        String hokenryodankai = "6";
-        String expResult = "6";
-        String result = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
+        RString hokenryodankai = new RString("6");
+        RString expResult = new RString("6");
+        RString result = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
         assertEquals(expResult, result);
 
     }
@@ -142,7 +140,7 @@ public class HokenryoDankaiHoseiTest {
         System.out.println("HokenryoDankaiHosei5");
 
         HokenryoDankaiInput hokenryodankaiinput = new HokenryoDankaiInput();
-        hokenryodankaiinput.setFukaNendo("2014");
+        hokenryodankaiinput.setFukaNendo(new RString("2014"));
 
         SeigyoJoho seigyojoho = new SeigyoJoho();
 
@@ -154,9 +152,9 @@ public class HokenryoDankaiHoseiTest {
         seigyojoho.setKijunShotokuKingaku02(new Decimal(1900000));
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
-        String hokenryodankai = "7";
-        String expResult = "7";
-        String result = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
+        RString hokenryodankai = new RString("7");
+        RString expResult = new RString("7");
+        RString result = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryodankaiinput, hokenryodankai);
         assertEquals(expResult, result);
 
     }

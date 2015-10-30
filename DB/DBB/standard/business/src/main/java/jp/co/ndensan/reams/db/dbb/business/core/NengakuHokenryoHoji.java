@@ -6,40 +6,42 @@
 
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  *
  * @author N2810
  */
 public class NengakuHokenryoHoji {
-    private String rank;
-    private String dankai;
+    private RString rank;
+    private RString dankai;
     private int kosuu;
 
     /**
      * @return the rank
      */
-    public String getRank() {
+    public RString getRank() {
         return rank;
     }
 
     /**
      * @param rank the rank to set
      */
-    public void setRank(String rank) {
+    public void setRank(RString rank) {
         this.rank = rank;
     }
 
     /**
      * @return the dankai
      */
-    public String getDankai() {
+    public RString getDankai() {
         return dankai;
     }
 
     /**
      * @param dankai the dankai to set
      */
-    public void setDankai(String dankai) {
+    public void setDankai(RString dankai) {
         this.dankai = dankai;
     }
 

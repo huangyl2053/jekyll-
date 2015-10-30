@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  *
  * @author N2810
@@ -15,7 +17,7 @@ public class HokenryoDankaiHantei {
 
         //課税判定
         KazeiHantei kazeiHantei = new KazeiHantei();
-        String kazeiHanteiResult = kazeiHantei.kazeiHantei(hokenryoDankaiInput);
+        RString kazeiHanteiResult = kazeiHantei.kazeiHantei(hokenryoDankaiInput);
 
         //所得段階判定
         HokenryoDankaiOutput hokenryoDankaiOutput;
@@ -24,9 +26,10 @@ public class HokenryoDankaiHantei {
             保険料段階 hokenryoDankai = new 保険料段階();
 
             // 賦課年度の所得段階判定方法を取得する
-            HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho = HokenryoDankaiHanteiHohoHozonFactory.CreateHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
+            HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho
+                    = HokenryoDankaiHanteiHohoHozonFactory.createHokenryoDankaiHanteiHoho(hokenryoDankaiInput);
 
-            hokenryoDankaiOutput = hokenryoDankai.HokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
+            hokenryoDankaiOutput = hokenryoDankai.hokenryoDankaiHantei(hokenryoDankaiInput, hokenryoDankaiHanteiHoho);
 
         } else {
             // 所得調査中などで所得段階が暫定的に決まっているので、それを返す
@@ -34,7 +37,7 @@ public class HokenryoDankaiHantei {
         }
 
         //所得段階表記設定
-        保険料段階表記設定.保険料段階表記設定(hokenryoDankaiInput, hokenryoDankaiOutput);
+        保険料段階表記設定.set保険料段階表記(hokenryoDankaiInput, hokenryoDankaiOutput);
 
         return hokenryoDankaiOutput;
     }

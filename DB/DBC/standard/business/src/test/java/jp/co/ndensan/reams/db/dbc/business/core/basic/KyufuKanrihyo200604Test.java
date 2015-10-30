@@ -22,6 +22,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link KyufuKanrihyo200604
@@ -29,6 +30,7 @@ import org.junit.runner.RunWith;
  * }のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KyufuKanrihyo200604Test extends DbcTestBase {
 
     private static DbT3015KyufuKanrihyo200604Entity KyufuKanrihyo200604Entity;//TODO 変数名称の頭文字を小文字に変更して下さい。

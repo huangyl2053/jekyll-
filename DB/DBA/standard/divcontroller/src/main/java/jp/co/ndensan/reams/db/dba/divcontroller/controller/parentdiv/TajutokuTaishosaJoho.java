@@ -36,7 +36,7 @@ public class TajutokuTaishosaJoho {
         ResponseData<TajutokuTaishosaJohoDiv> response = new ResponseData<>();
 
         DemoKojin demoKojin = new DemoKojin("第1号");
-        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+//        RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
 //        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
@@ -46,7 +46,7 @@ public class TajutokuTaishosaJoho {
     }
 
     private void setTaishoshaData(TajutokuTaishosaJohoDiv taishoshaJohoDiv, RString hihokenshaNo) {
-        List< HashMap> taishoshaDataList = YamlLoader.DBA.loadAsList(SHIKAKU_KANRI_TAISHOSHA);
+        List<HashMap> taishoshaDataList = YamlLoader.DBA.loadAsList(SHIKAKU_KANRI_TAISHOSHA);
         for (HashMap taishoshaData : taishoshaDataList) {
             if (taishoshaData.get("被保番号").equals(hihokenshaNo.toString())) {
                 setDbJoho(taishoshaJohoDiv.getKaigoShikakuJoho(), new ControlGenerator(taishoshaData));

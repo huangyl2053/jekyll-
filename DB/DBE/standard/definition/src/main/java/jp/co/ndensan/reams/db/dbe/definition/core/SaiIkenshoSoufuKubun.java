@@ -19,19 +19,19 @@ public enum SaiIkenshoSoufuKubun implements IRStringConvertable {
 //TODO N8107千秋雄 コードマスタにて管理されることも考慮する　2014/2/28 まで
 
     /**
-     * 再送信の場合 ("1")
+     * 再送信の場合 ("1")。
      */
     再送信(new RString("1")),
     /**
-     * 再度意見書を依頼する場合 ("2")
+     * 再度意見書を依頼する場合 ("2")。
      */
     再意見書(new RString("2")),
     /**
-     * 再意見書後 送付済の場合 ("3")
+     * 再意見書後 送付済の場合 ("3")。
      */
     再意見書送付済(new RString("3")),
     /**
-     * 再意見書送付区分自体未使用の場合 ("0")
+     * 再意見書送付区分自体未使用の場合 ("0")。
      */
     未使用(new RString("0"));
     private final RString コード;

@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ShoKofuKaishu}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ShoKofuKaishuTest extends DbzTestBase {
 
@@ -185,8 +187,8 @@ public class ShoKofuKaishuTest extends DbzTestBase {
         }
 
         @Test
-        public void get単票発行有無フラグは_entityが持つ単票発行有無フラグを返す() {
-            assertThat(sut.get単票発行有無フラグ(), is(ShoKofuKaishuEntity.getTanpyoHakkoUmuFlag()));
+        public void is単票発行有無フラグは_entityが持つ単票発行有無フラグを返す() {
+            assertThat(sut.is単票発行有無フラグ(), is(ShoKofuKaishuEntity.getTanpyoHakkoUmuFlag()));
         }
 
         @Test
@@ -205,8 +207,8 @@ public class ShoKofuKaishuTest extends DbzTestBase {
         }
 
         @Test
-        public void get論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.get論理削除フラグ(), is(ShoKofuKaishuEntity.getLogicalDeletedFlag()));
+        public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
+            assertThat(sut.is論理削除フラグ(), is(ShoKofuKaishuEntity.getLogicalDeletedFlag()));
         }
     }
 

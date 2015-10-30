@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.uz.uza.workflow.flow.task.ITaskDetailManageable;
  */
 public class TaskFlowDetailSetter implements ITaskDetailManageable {
 
-    private static final RString demoKojin = new RString("demoKojin.yml");
+    private static final RString DEMOKOJIN = new RString("demoKojin.yml");
 
     @Override
     public RString getDetailString() {
 
-        List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(demoKojin);
+        List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(DEMOKOJIN);
         ControlGenerator generator = new ControlGenerator(yamlDataList.get(0));
 
         return generator.getAsRString("識別コード").concat("<br/>").concat(generator.getAsRString("氏名"));

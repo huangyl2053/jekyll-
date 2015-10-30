@@ -5,15 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200000.HokenshaSofuListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200000.dgHokenshaSofuList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -59,20 +54,20 @@ public class HokenshaSofuList {
 //        dgRow.setDataSource(dgRowList);
     }
 
-    private dgHokenshaSofuList_Row create保険者情報送付一覧アイテム(
-            RString txtSofuJoho,
-            RString txtZenZengetsu,
-            RString txtZengetsu,
-            RString txtTogetsuJotai,
-            RString txtShoriNichiji
-    ) {
-        Button btnSelect = new Button();
-        return new dgHokenshaSofuList_Row(
-                btnSelect,
-                txtSofuJoho,
-                txtZenZengetsu,
-                txtZengetsu,
-                txtTogetsuJotai,
-                txtShoriNichiji);
-    }
+//    private dgHokenshaSofuList_Row create保険者情報送付一覧アイテム(
+//            RString txtSofuJoho,
+//            RString txtZenZengetsu,
+//            RString txtZengetsu,
+//            RString txtTogetsuJotai,
+//            RString txtShoriNichiji
+//    ) {
+//        Button btnSelect = new Button();
+//        return new dgHokenshaSofuList_Row(
+//                btnSelect,
+//                txtSofuJoho,
+//                txtZenZengetsu,
+//                txtZengetsu,
+//                txtTogetsuJotai,
+//                txtShoriNichiji);
+//    }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2007KibetsuChoshuYuyoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2007KibetsuChoshuYuyoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2007KibetsuChoshuYuyo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2007KibetsuChoshuYuyoMapper.allColumns_DbT2007KibetsuChoshuYuyo" />
+     FROM
+         rgdb."DbT2007KibetsuChoshuYuyo"
+     WHERE
+         rgdb."DbT2007KibetsuChoshuYuyo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2007KibetsuChoshuYuyo">
+         "DbT2007KibetsuChoshuYuyo"."choteiNendo" as "dbT2007KibetsuChoshuYuyo_choteiNendo",
+         "DbT2007KibetsuChoshuYuyo"."fukaNendo" as "dbT2007KibetsuChoshuYuyo_fukaNendo",
+         "DbT2007KibetsuChoshuYuyo"."tsuchishoNo" as "dbT2007KibetsuChoshuYuyo_tsuchishoNo",
+         "DbT2007KibetsuChoshuYuyo"."rirekiNo" as "dbT2007KibetsuChoshuYuyo_rirekiNo",
+         "DbT2007KibetsuChoshuYuyo"."choshuHoho" as "dbT2007KibetsuChoshuYuyo_choshuHoho",
+         "DbT2007KibetsuChoshuYuyo"."ki" as "dbT2007KibetsuChoshuYuyo_ki",
+         "DbT2007KibetsuChoshuYuyo"."insertDantaiCd" as "dbT2007KibetsuChoshuYuyo_insertDantaiCd",
+         "DbT2007KibetsuChoshuYuyo"."insertTimestamp" as "dbT2007KibetsuChoshuYuyo_insertTimestamp",
+         "DbT2007KibetsuChoshuYuyo"."insertReamsLoginId" as "dbT2007KibetsuChoshuYuyo_insertReamsLoginId",
+         "DbT2007KibetsuChoshuYuyo"."insertContextId" as "dbT2007KibetsuChoshuYuyo_insertContextId",
+         "DbT2007KibetsuChoshuYuyo"."isDeleted" as "dbT2007KibetsuChoshuYuyo_isDeleted",
+         "DbT2007KibetsuChoshuYuyo"."updateCount" as "dbT2007KibetsuChoshuYuyo_updateCount",
+         "DbT2007KibetsuChoshuYuyo"."lastUpdateTimestamp" as "dbT2007KibetsuChoshuYuyo_lastUpdateTimestamp",
+         "DbT2007KibetsuChoshuYuyo"."lastUpdateReamsLoginId" as "dbT2007KibetsuChoshuYuyo_lastUpdateReamsLoginId",
+         "DbT2007KibetsuChoshuYuyo"."yuyoStartYMD" as "dbT2007KibetsuChoshuYuyo_yuyoStartYMD",
+         "DbT2007KibetsuChoshuYuyo"."yuyoEndYMD" as "dbT2007KibetsuChoshuYuyo_yuyoEndYMD"
+    </sql>
+
+
+    <!--テーブルDbT2007KibetsuChoshuYuyoの項目をDbT2007KibetsuChoshuYuyoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2007KibetsuChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity" autoMapping="true">
+        <id property="choteiNendo" column="dbT2007KibetsuChoshuYuyo_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="dbT2007KibetsuChoshuYuyo_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2007KibetsuChoshuYuyo_tsuchishoNo" />
+        <id property="rirekiNo" column="dbT2007KibetsuChoshuYuyo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="choshuHoho" column="dbT2007KibetsuChoshuYuyo_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ki" column="dbT2007KibetsuChoshuYuyo_ki" />
+        <result property="insertDantaiCd" column="dbT2007KibetsuChoshuYuyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2007KibetsuChoshuYuyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2007KibetsuChoshuYuyo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2007KibetsuChoshuYuyo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2007KibetsuChoshuYuyo_isDeleted" />
+        <result property="updateCount" column="dbT2007KibetsuChoshuYuyo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2007KibetsuChoshuYuyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2007KibetsuChoshuYuyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yuyoStartYMD" column="dbT2007KibetsuChoshuYuyo_yuyoStartYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="yuyoEndYMD" column="dbT2007KibetsuChoshuYuyo_yuyoEndYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT2007KibetsuChoshuYuyoEntity">
+        SELECT
+        <include refid="allColumns_DbT2007KibetsuChoshuYuyo" />
+        FROM
+        rgdb."DbT2007KibetsuChoshuYuyo"
+    </select>
+
+</mapper>

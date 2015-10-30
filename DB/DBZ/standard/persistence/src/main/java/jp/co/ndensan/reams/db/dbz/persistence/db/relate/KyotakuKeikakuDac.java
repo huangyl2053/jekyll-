@@ -43,7 +43,7 @@ public class KyotakuKeikakuDac {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
         IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 居宅給付計画届出List = 居宅給付計画届出Dac.select居宅給付計画届出一覧By被保険者番号(被保険者番号);
-        List<DbT3005KyotakuKeikakuTodokedeEntity> list = new ArrayList<>();
+        //List<DbT3005KyotakuKeikakuTodokedeEntity> list = new ArrayList<>();
 
         List<DbT3005KyotakuKeikakuTodokedeEntity> sortList = sort適用開始年月日(居宅給付計画届出List);
         IItemList<DbT3005KyotakuKeikakuTodokedeEntity> 台帳リスト = ItemList.of(sortList);
@@ -58,7 +58,8 @@ public class KyotakuKeikakuDac {
         List<Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity>> entries = new ArrayList<>(map.entrySet());
         Collections.sort(entries, new Comparator<Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity>>() {
             @Override
-            public int compare(Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity> o1, Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity> o2) {
+            public int compare(Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity> o1,
+                    Map.Entry<FlexibleDate, DbT3005KyotakuKeikakuTodokedeEntity> o2) {
                 return (o2.getKey()).compareTo(o1.getKey());
             }
         });

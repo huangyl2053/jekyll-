@@ -19,86 +19,86 @@ public interface IHihokenshashoA4CommonEditData extends IHihokenshashoCommonEdit
      *
      * @return 帳票ソース
      */
-    public HihokenshashoA4 getEditData();
+    HihokenshashoA4 getEditData();
 
     /**
      * @return the umareG
      */
-    public RString getUmareG();
+    RString getUmareG();
 
     /**
      * @param umareG the umareG to set
      */
-    public void setUmareG(RString umareG);
+    void setUmareG(RString umareG);
 
     /**
      * @return the umareYyyy
      */
-    public RString getUmareYyyy();
+    RString getUmareYyyy();
 
     /**
      * @param umareYyyy the umareYyyy to set
      */
-    public void setUmareYyyy(RString umareYyyy);
+    void setUmareYyyy(RString umareYyyy);
 
     /**
      * @return the umareYy
      */
-    public RString getUmareYy();
+    RString getUmareYy();
 
     /**
      * @param umareYy the umareYy to set
      */
-    public void setUmareYy(RString umareYy);
+    void setUmareYy(RString umareYy);
 
     /**
      * @return the umareMm
      */
-    public RString getUmareMm();
+    RString getUmareMm();
 
     /**
      * @param umareMm the umareMm to set
      */
-    public void setUmareMm(RString umareMm);
+    void setUmareMm(RString umareMm);
 
     /**
      * @return the umareDd
      */
-    public RString getUmareDd();
+    RString getUmareDd();
 
     /**
      * @param umareDd the umareDd to set
      */
-    public void setUmareDd(RString umareDd);
+    void setUmareDd(RString umareDd);
 
     /**
      * @return the seibetsu
      */
-    public RString getSeibetsu();
+    RString getSeibetsu();
 
     /**
      * @param seibetsu the seibetsu to set
      */
-    public void setSeibetsu(RString seibetsu);
+    void setSeibetsu(RString seibetsu);
 
     /**
      * @return the yukokikannamisen
      */
-    public RString getYukokikannamisen();
+    RString getYukokikannamisen();
 
     /**
      * @param yukokikannamisen the yukokikannamisen to set
      */
-    public void setYukokikannamisen(RString yukokikannamisen);
+    void setYukokikannamisen(RString yukokikannamisen);
 
     /**
      * @return the homonkikannamisen
      */
-    public RString getHomonkikannamisen();
+    RString getHomonkikannamisen();
 
     /**
      * @param homonkikannamisen the homonkikannamisen to set
      */
-    public void setHomonkikannamisen(RString homonkikannamisen);
+    void setHomonkikannamisen(RString homonkikannamisen);
 
 }

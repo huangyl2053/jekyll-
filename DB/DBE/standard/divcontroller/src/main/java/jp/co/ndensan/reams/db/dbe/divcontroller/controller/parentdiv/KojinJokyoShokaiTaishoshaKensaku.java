@@ -33,9 +33,8 @@ public class KojinJokyoShokaiTaishoshaKensaku {
     public ResponseData onLoad(KojinJokyoShokaiTaishoshaKensakuDiv div) {
         ResponseData<KojinJokyoShokaiTaishoshaKensakuDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
-        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-
+//        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 //        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
         response.data = div;
         return response;

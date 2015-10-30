@@ -65,7 +65,7 @@ public class GeninShikkanBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の主たる原因疾患フラグは_設定した値と同じ主たる原因疾患フラグを返す() {
             business = sut.set主たる原因疾患フラグ(DbT5300GeninShikkanEntityGenerator.DEFAULT_主たる原因疾患フラグ).build();
-            assertThat(business.get主たる原因疾患フラグ(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_主たる原因疾患フラグ));
+            assertThat(business.is主たる原因疾患フラグ(), is(DbT5300GeninShikkanEntityGenerator.DEFAULT_主たる原因疾患フラグ));
         }
 
         @Test

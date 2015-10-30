@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 /**
- * 給付実績の情報を保持するクラス
+ * 給付実績の情報を保持するクラス。
  *
  * @author n8223 朴義一
  */

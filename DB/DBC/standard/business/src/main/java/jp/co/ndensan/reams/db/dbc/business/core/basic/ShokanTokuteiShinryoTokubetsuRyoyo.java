@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求特定診療費・特別療養費を管理するクラスです。
  */
-public class ShokanTokuteiShinryoTokubetsuRyoyo extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
+public class ShokanTokuteiShinryoTokubetsuRyoyo 
+extends ModelBase<ShokanTokuteiShinryoTokubetsuRyoyoIdentifier, 
+        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity, 
+        ShokanTokuteiShinryoTokubetsuRyoyo> implements Serializable {
 
     private final DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity;
     private final ShokanTokuteiShinryoTokubetsuRyoyoIdentifier id;

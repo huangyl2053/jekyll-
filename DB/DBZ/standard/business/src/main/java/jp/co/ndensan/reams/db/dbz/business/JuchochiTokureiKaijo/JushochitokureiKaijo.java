@@ -42,12 +42,19 @@ public class JushochitokureiKaijo extends ShikakuIdoBaseItem<JushochitokureiKaij
     public boolean isNothing() {
         return this == NOTHING;
     }
-
-    public FlexibleDate kaijoDate() {
+/**
+ * getKaijoDateを取得します。
+ * @return kaijoDate
+ */
+    public FlexibleDate getKaijoDate() {
         return kaijoDate;
     }
-
-    public HihokenshaDaicho newestHihokenshaDaicho() {
+/**
+ * getNewestHihokenshaDaichoを取得します。
+ * @return newestHihokenshaDaicho
+ */
+    public HihokenshaDaicho getNewestHihokenshaDaicho() {
         return newestHihokenshaDaicho;
     }
+
 }

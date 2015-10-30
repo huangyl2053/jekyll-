@@ -335,15 +335,15 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
         }
 
         /**
-         * nijiHanteiYokaigoJotaiKubunCodeを設定します。
+         * nijiHanteiYokaigoJotaiを設定します。
          *
-         * @param nijiHanteiYokaigoJotaiKubunCode 二次判定要介護状態区分コード
+         * @param nijiHanteiYokaigoJotai 二次判定要介護状態区分コード
          * @return builder
          */
         @Override
-        public Builder setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
-            Objects.requireNonNull(nijiHanteiYokaigoJotaiKubunCode);
-            this.entity.setNijiHanteiYokaigoJotaiKubunCode(nijiHanteiYokaigoJotaiKubunCode);
+        public Builder setNijiHanteiYokaigoJotai(Code nijiHanteiYokaigoJotai) {
+            Objects.requireNonNull(nijiHanteiYokaigoJotai);
+            this.entity.setNijiHanteiYokaigoJotaiKubunCode(nijiHanteiYokaigoJotai);
             return this;
         }
 

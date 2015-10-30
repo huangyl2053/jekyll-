@@ -12,18 +12,18 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 支払方法変更で用いる終了申請の審査結果の区分です。
+ * 支払方法変更で用いる終了申請の審査結果の区分クラスです。
  *
  * @author N3327 三浦 凌
  */
 public enum ShuryoShinseiShinsaKekkaKubun {
 
     /**
-     * 申請受理です。コード："1"
+     * 申請受理です。コード："1"。
      */
     申請受理("1"),
     /**
-     * 申請却下です。コード："2"
+     * 申請却下です。コード："2"。
      */
     申請却下("2");
 

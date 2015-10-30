@@ -18,7 +18,7 @@ public class SuiteiKyuhuKubunCodeValidator {
     private final SuiteiKyuhuKubunCode suiteiKyuhuKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param suiteiKyuhuKubunCode 推定給付区分コード
      */

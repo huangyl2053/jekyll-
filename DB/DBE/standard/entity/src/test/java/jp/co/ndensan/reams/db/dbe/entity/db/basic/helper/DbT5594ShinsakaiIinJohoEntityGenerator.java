@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5594ShinsakaiIinJohoEntityGenerator {
 
     public static final RString DEFAULT_介護認定審査会委員コード = new RString("1");
-    public static final FlexibleDate DEFAULT_介護認定審査会委員開始年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_介護認定審査会委員終了年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_介護認定審査会委員開始年月日 = new FlexibleDate("20150402");
+    public static final FlexibleDate DEFAULT_介護認定審査会委員終了年月日 = new FlexibleDate("20150402");
     public static final AtenaMeisho DEFAULT_介護認定審査会委員氏名 = new AtenaMeisho("宛名太郎");
     public static final AtenaKanaMeisho DEFAULT_介護認定審査会委員氏名カナ = new AtenaKanaMeisho("アテナカナ");
     public static final RString DEFAULT_性別 = new RString("1");
@@ -33,10 +33,10 @@ public final class DbT5594ShinsakaiIinJohoEntityGenerator {
     public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("長野市県町");
     public static final TelNo DEFAULT_電話番号 = new TelNo("1234567890");
     public static final TelNo DEFAULT_FAX番号 = new TelNo("1234567890");
-    public static final FlexibleDate DEFAULT_生年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_生年月日 = new FlexibleDate("20150402");
     public static final RString DEFAULT_備考 = new RString("1");
     public static final boolean DEFAULT_廃止フラグ = false;
-    public static final FlexibleDate DEFAULT_廃止年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_廃止年月日 = new FlexibleDate("20150402");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

@@ -36,7 +36,7 @@ public class TokuteiNyushoshaKaigoServicehi {
         KyufuJisseki kyufuJisseki = get給付実績();
 
         //特定入所者介護サービスデータ取得、設定
-        List<dgTokuteiNyushoshaKaigoServicehi_Row> tokuteiNyushoshaKaigoServicehiList = new ArrayList<>();
+        List<dgTokuteiNyushoshaKaigoServicehi_Row> tokuteiKaigoServicehiList = new ArrayList<>();
 
         for (KyufuJissekiTokuteiNyushohi iTokute : kyufuJisseki.get特定入所者リスト()) {
 
@@ -65,7 +65,7 @@ public class TokuteiNyushoshaKaigoServicehi {
             RString rsKagoKaisu = toRString(iTokute.get過誤回数());
             RString rsShinsaYM = toWareki(iTokute.get審査年月());
 
-            tokuteiNyushoshaKaigoServicehiList.add(createTokuteiNyushoshaKaigoServicehiRow(
+            tokuteiKaigoServicehiList.add(createTokuteiNyushoshaKaigoServicehiRow(
                     rsService, rsFutanGendogaku, rsKettei, rsMeisaiGokei, rsHiyoTanka, rsNissu,
                     rsHiyogaku, rsSeikyugaku, rsRiyoshaFutangaku, rsKohi1Nissu, rsKohi1Futangaku,
                     rsKohi1Seikyugaku, rsKohi1HonninFutangaku, rsKohi2Nissu, rsKohi2Futangaku,
@@ -73,7 +73,7 @@ public class TokuteiNyushoshaKaigoServicehi {
                     rsKohi3Seikyugaku, rsKohi3HonninFutangaku,
                     rsSaishinsaKaisu, rsKagoKaisu, rsShinsaYM));
         }
-        panel.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(tokuteiNyushoshaKaigoServicehiList);
+        panel.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(tokuteiKaigoServicehiList);
 
         response.data = panel;
         return response;
@@ -104,12 +104,12 @@ public class TokuteiNyushoshaKaigoServicehi {
         RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
         RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
 
-        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
-                new HihokenshaNo(被保番号),
-                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
-                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
-                new ServiceShuruiCode(サービス種類),
-                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
+//        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
+//                new HihokenshaNo(被保番号),
+//                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
+//                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
+//                new ServiceShuruiCode(サービス種類),
+//                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
 
         // TODO n8300姜　ビルドエラー回避のために暫定対応
 //        KyufuJissekiFinder finder = new KyufuJissekiFinder();
@@ -132,11 +132,12 @@ public class TokuteiNyushoshaKaigoServicehi {
         return new RString(data.toString("##,###,###"));
     }
 
+    private static final int INDEX_6 = 6;
     private RString toWareki(FlexibleYearMonth data) {
         if (data == null || !data.isValid()) {
             return RString.EMPTY;
         }
-        return data.wareki().toDateString().substring(0, 6);
+        return data.wareki().toDateString().substring(0, INDEX_6);
     }
 
     private RString toRString(Integer data) {

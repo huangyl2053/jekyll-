@@ -84,7 +84,6 @@ public class DbT5593GogitaiWariateIinJohoDac implements ISaveable<DbT5593Gogitai
     @Override
     public int save(DbT5593GogitaiWariateIinJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体割当委員情報エンティティ"));
-
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

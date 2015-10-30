@@ -193,7 +193,7 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
         @Test
         public void get宛先印字対象者フラグは_entityが持つ宛先印字対象者フラグを返す() {
-            assertThat(sut.get宛先印字対象者フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getAtesakiInjiTaishoshaFlag()));
+            assertThat(sut.is宛先印字対象者フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getAtesakiInjiTaishoshaFlag()));
         }
 
         @Test
@@ -213,7 +213,7 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
 
         @Test
         public void get世帯主フラグは_entityが持つ世帯主フラグを返す() {
-            assertThat(sut.get世帯主フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getSetainushiFlag()));
+            assertThat(sut.is世帯主フラグ(), is(KijunShunyugakuTekiyoKanriEntity.getSetainushiFlag()));
         }
 
         @Test

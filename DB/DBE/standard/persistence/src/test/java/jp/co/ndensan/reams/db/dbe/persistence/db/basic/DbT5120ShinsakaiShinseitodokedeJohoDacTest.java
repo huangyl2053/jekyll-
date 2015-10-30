@@ -22,6 +22,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -31,6 +32,7 @@ import org.junit.runner.RunWith;
  * @author n8223 朴義一
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5120ShinsakaiShinseitodokedeJohoDacTest extends DbdTestDacBase {
 
     private static final ShinseishoKanriNo OTHER_DEFAULT_申請書管理番号 = new ShinseishoKanriNo("9000000001");

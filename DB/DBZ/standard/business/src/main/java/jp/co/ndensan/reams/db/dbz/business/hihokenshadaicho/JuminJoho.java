@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
  */
 public class JuminJoho {
 
-    private static final RString BREAK_STRING = new RString(",");
-    private static final int SHICHOSON_CODE_INDEX = 2;
+//    private static final RString BREAK_STRING = new RString(",");
+//    private static final int SHICHOSON_CODE_INDEX = 2;
 //    private final RString modelStr;
 
     /**
@@ -43,10 +43,10 @@ public class JuminJoho {
     //TODO n8178 城間篤人 識別対象のヒストリを使用できることが確認できたら、ShikibetsuTaishoHistoriesを受け取るように修正したほうがよい 2014/12/24
     public static IItemList<JuminJoho> createListBy(IItemList<IShikibetsuTaisho> shikibetsuTaishoList) throws NullPointerException {
         List<JuminJoho> juminJohoList = new ArrayList<>();
-        for (IShikibetsuTaisho shikibetsuTaisho : shikibetsuTaishoList) {
-//            JuminJohoModel model = new JuminJohoModel(shikibetsuTaisho);
-//            juminJohoList.add(new JuminJoho(model));
-        }
+//        for (IShikibetsuTaisho shikibetsuTaisho : shikibetsuTaishoList) {
+////            JuminJohoModel model = new JuminJohoModel(shikibetsuTaisho);
+////            juminJohoList.add(new JuminJoho(model));
+//        }
         return ItemList.of(juminJohoList);
     }
 }

@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link JigyoKogakuShikyuShinseiIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JigyoKogakuShikyuShinseiIdentifierTest extends DbcTestBase {
 
 //TODO 主キー型と変数名を置換してください

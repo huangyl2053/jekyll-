@@ -189,7 +189,7 @@ public class SaishinsaMoshitateTest extends DbcTestBase {
 
         @Test
         public void get国保連再送付有フラグは_entityが持つ国保連再送付有フラグを返す() {
-            assertThat(sut.get国保連再送付有フラグ(), is(SaishinsaMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
+            assertThat(sut.is国保連再送付有フラグ(), is(SaishinsaMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
         }
 
         @Test

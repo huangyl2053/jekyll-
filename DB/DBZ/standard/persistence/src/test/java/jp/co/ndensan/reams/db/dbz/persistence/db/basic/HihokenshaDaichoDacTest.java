@@ -34,6 +34,7 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 

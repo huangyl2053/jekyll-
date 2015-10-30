@@ -6,13 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0710011;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgJutakuKaishuShinseiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
@@ -56,13 +54,13 @@ public class JutakuKaishuShinseiList {
     /*
      * 住宅改修費事申請登録 申請を追加するボタンを押下後、
      */
-    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel) {
-
-        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData();
-        DataGrid<dgJutakuKaishuShinseiList_Row> grid = panel.getDgJutakuKaishuShinseiList();
-        grid.setDataSource(arraydata);
-
-    }
+//    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel) {
+//
+//        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData();
+//        DataGrid<dgJutakuKaishuShinseiList_Row> grid = panel.getDgJutakuKaishuShinseiList();
+//        grid.setDataSource(arraydata);
+//
+//    }
 
     /*
      * 住宅改修費事申請登録 申請内容の情報を設定する。
@@ -78,49 +76,49 @@ public class JutakuKaishuShinseiList {
     /*
      * 共通内容を設定する
      */
-    private void hashMap(HashMap hashMap, List<dgJutakuKaishuShinseiList_Row> arrayData) {
-        String state = hashMap.get("state").toString(); //状態
-        String shinseiKubun = hashMap.get("shinseiKubun").toString(); //申請区分
-        String teikyoYM = hashMap.get("teikyoYM").toString(); //提供年月
-        String shinseiDate = hashMap.get("shinseiDate").toString(); //申請日
-        String shinsaResult = hashMap.get("shinsaResult").toString(); //審査結果
-        String shinsaDate = hashMap.get("shinsaDate").toString(); //審査日
-        String shikyuKubun = hashMap.get("shikyuKubun").toString(); //審査結果
-        String ketteiDate = hashMap.get("ketteiDate").toString(); //審査日
-        String seiriNo = hashMap.get("seiriNo").toString(); //整理番号
-        String jizenShinsei = hashMap.get("jizenShinsei").toString(); //事前申請
-
-        dgJutakuKaishuShinseiList_Row item;
-
-        item = createRowSearchHihokenshaiListData(
-                state,
-                shinseiKubun,
-                teikyoYM,
-                shinseiDate,
-                shinsaResult,
-                shinsaDate,
-                shikyuKubun,
-                ketteiDate,
-                seiriNo,
-                jizenShinsei
-        );
-        arrayData.add(item);
-    }
+//    private void hashMap(HashMap hashMap, List<dgJutakuKaishuShinseiList_Row> arrayData) {
+//        RString state = new RString(hashMap.get("state").toString()); //状態
+//        RString shinseiKubun = new RString(hashMap.get("shinseiKubun").toString()); //申請区分
+//        RString teikyoYM = new RString(hashMap.get("teikyoYM").toString()); //提供年月
+//        RString shinseiDate = new RString(hashMap.get("shinseiDate").toString()); //申請日
+//        RString shinsaResult = new RString(hashMap.get("shinsaResult").toString()); //審査結果
+//        RString shinsaDate = new RString(hashMap.get("shinsaDate").toString()); //審査日
+//        RString shikyuKubun = new RString(hashMap.get("shikyuKubun").toString()); //審査結果
+//        RString ketteiDate = new RString(hashMap.get("ketteiDate").toString()); //審査日
+//        RString seiriNo = new RString(hashMap.get("seiriNo").toString()); //整理番号
+//        RString jizenShinsei = new RString(hashMap.get("jizenShinsei").toString()); //事前申請
+//
+//        dgJutakuKaishuShinseiList_Row item;
+//
+//        item = createRowSearchHihokenshaiListData(
+//                state,
+//                shinseiKubun,
+//                teikyoYM,
+//                shinseiDate,
+//                shinsaResult,
+//                shinsaDate,
+//                shikyuKubun,
+//                ketteiDate,
+//                seiriNo,
+//                jizenShinsei
+//        );
+//        arrayData.add(item);
+//    }
 
     /*
      *引数を元にデータグリッド内に挿入する個人データを作成します。
      */
     private dgJutakuKaishuShinseiList_Row createRowSearchHihokenshaiListData(
-            String 状態,
-            String 申請区分,
-            String 提供年月,
-            String 申請日,
-            String 審査結果,
-            String 審査日,
-            String 支給区分,
-            String 決定日,
-            String 整理番号,
-            String 事前申請) {
+            RString 状態,
+            RString 申請区分,
+            RString 提供年月,
+            RString 申請日,
+            RString 審査結果,
+            RString 審査日,
+            RString 支給区分,
+            RString 決定日,
+            RString 整理番号,
+            RString 事前申請) {
 
         dgJutakuKaishuShinseiList_Row rowJutakuKaishuShinseiListData;
         rowJutakuKaishuShinseiListData = new dgJutakuKaishuShinseiList_Row(
@@ -135,24 +133,24 @@ public class JutakuKaishuShinseiList {
                 RString.EMPTY
         );
 
-        if (isAddRow(状態)) {
+        if (isAddRow(状態.toString())) {
             rowJutakuKaishuShinseiListData.setRowState(RowState.Added);
         }
-        rowJutakuKaishuShinseiListData.setTxtShinseiKubun(new RString(申請区分));
-        rowJutakuKaishuShinseiListData.setTxtTeikyoYM(new RString(提供年月));
-        rowJutakuKaishuShinseiListData.setTxtShinseiDate(new RString(申請日));
-        rowJutakuKaishuShinseiListData.setTxtShinsaResult(new RString(審査結果));
-        rowJutakuKaishuShinseiListData.setTxtShinsaDate(new RString(審査日));
-        rowJutakuKaishuShinseiListData.setTxtShikyuKubun(new RString(支給区分));
-        rowJutakuKaishuShinseiListData.setTxtKetteiDate(new RString(決定日));
-        rowJutakuKaishuShinseiListData.setTxtSeiriNo(new RString(整理番号));
-        rowJutakuKaishuShinseiListData.setTxtJizenShinsei(new RString(事前申請));
+        rowJutakuKaishuShinseiListData.setTxtShinseiKubun(new RString(申請区分.toString()));
+        rowJutakuKaishuShinseiListData.setTxtTeikyoYM(new RString(提供年月.toString()));
+        rowJutakuKaishuShinseiListData.setTxtShinseiDate(new RString(申請日.toString()));
+        rowJutakuKaishuShinseiListData.setTxtShinsaResult(new RString(審査結果.toString()));
+        rowJutakuKaishuShinseiListData.setTxtShinsaDate(new RString(審査日.toString()));
+        rowJutakuKaishuShinseiListData.setTxtShikyuKubun(new RString(支給区分.toString()));
+        rowJutakuKaishuShinseiListData.setTxtKetteiDate(new RString(決定日.toString()));
+        rowJutakuKaishuShinseiListData.setTxtSeiriNo(new RString(整理番号.toString()));
+        rowJutakuKaishuShinseiListData.setTxtJizenShinsei(new RString(事前申請.toString()));
 
         return rowJutakuKaishuShinseiListData;
 
     }
 
     private boolean isAddRow(String 状態) {
-        return 状態.equals("追加");
+        return ("追加").equals(状態);
     }
 }

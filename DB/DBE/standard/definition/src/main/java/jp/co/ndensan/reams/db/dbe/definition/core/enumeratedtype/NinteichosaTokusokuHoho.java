@@ -16,19 +16,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum NinteichosaTokusokuHoho {
 
     /**
-     * 督促状郵送
+     * 督促状郵送。
      */
     督促状郵送(new RString("0")),
     /**
-     * 督促状ＦＡＸ
+     * 督促状ＦＡＸ。
      */
     督促状ＦＡＸ(new RString("1")),
     /**
-     * 電話
+     * 電話。
      */
     電話(new RString("2")),
     /**
-     * その他
+     * その他。
      */
     その他(new RString("3"));
     private final RString 督促方法コード;

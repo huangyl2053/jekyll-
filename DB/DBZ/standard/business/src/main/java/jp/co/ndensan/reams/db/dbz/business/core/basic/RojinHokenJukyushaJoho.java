@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 老人保健受給者情報を管理するクラスです。
  */
-public class RojinHokenJukyushaJoho extends ParentModelBase<RojinHokenJukyushaJohoIdentifier, DbT7005RojinHokenJukyushaJohoEntity, RojinHokenJukyushaJoho> implements Serializable {
+public class RojinHokenJukyushaJoho extends 
+        ParentModelBase<RojinHokenJukyushaJohoIdentifier, 
+        DbT7005RojinHokenJukyushaJohoEntity, RojinHokenJukyushaJoho> implements Serializable {
 
     private final DbT7005RojinHokenJukyushaJohoEntity entity;
     private final RojinHokenJukyushaJohoIdentifier id;
@@ -183,7 +185,7 @@ public class RojinHokenJukyushaJoho extends ParentModelBase<RojinHokenJukyushaJo
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7005RojinHokenJukyushaJohoEntity entity;
         private final RojinHokenJukyushaJohoIdentifier id;
 

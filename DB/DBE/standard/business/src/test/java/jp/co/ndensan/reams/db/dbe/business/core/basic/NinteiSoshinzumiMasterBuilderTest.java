@@ -63,7 +63,7 @@ public class NinteiSoshinzumiMasterBuilderTest extends DbeTestBase {
         @Test
         public void 戻り値の引き渡しフラグは_設定した値と同じ引き渡しフラグを返す() {
             business = sut.set引き渡しフラグ(DbT5190NinteiSoshinzumiMasterEntityGenerator.DEFAULT_引き渡しフラグ).build();
-            assertThat(business.get引き渡しフラグ(), is(DbT5190NinteiSoshinzumiMasterEntityGenerator.DEFAULT_引き渡しフラグ));
+            assertThat(business.is引き渡しフラグ(), is(DbT5190NinteiSoshinzumiMasterEntityGenerator.DEFAULT_引き渡しフラグ));
         }
 
         @Test

@@ -78,8 +78,7 @@ public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity
     @Override
     public int save(DbT5591GogitaiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

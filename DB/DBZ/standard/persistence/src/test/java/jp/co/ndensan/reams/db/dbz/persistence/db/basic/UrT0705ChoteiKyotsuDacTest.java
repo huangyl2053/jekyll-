@@ -21,12 +21,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 
 /**
  * {@link UrT0705ChoteiKyotsuDac}のテストです。
  *
  * @author N8156 宮本 康
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class UrT0705ChoteiKyotsuDacTest extends DbbTestDacBase {
 

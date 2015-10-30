@@ -79,4 +79,17 @@ public class ShutokuJiyuTatokuJogai implements ICodeValueObject {
     public RString getRyakusho(FlexibleDate fd) {
         return codeRyakusho;
     }
+
+    public RString getOption1() {
+        return option1;
+    }
+
+    public RString getOption2() {
+        return option2;
+    }
+
+    public RString getOption3() {
+        return option3;
+    }
+
 }

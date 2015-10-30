@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2005KibetsuGemmenマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2005KibetsuGemmenMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2005KibetsuGemmen">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2005KibetsuGemmenMapper.allColumns_DbT2005KibetsuGemmen" />
+     FROM
+         rgdb."DbT2005KibetsuGemmen"
+     WHERE
+         rgdb."DbT2005KibetsuGemmen"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2005KibetsuGemmen">
+         "DbT2005KibetsuGemmen"."insertTimestamp" as "dbT2005KibetsuGemmen_insertTimestamp",
+         "DbT2005KibetsuGemmen"."choteiNendo" as "dbT2005KibetsuGemmen_choteiNendo",
+         "DbT2005KibetsuGemmen"."fukaNendo" as "dbT2005KibetsuGemmen_fukaNendo",
+         "DbT2005KibetsuGemmen"."tsuchishoNo" as "dbT2005KibetsuGemmen_tsuchishoNo",
+         "DbT2005KibetsuGemmen"."shoriTimestamp" as "dbT2005KibetsuGemmen_shoriTimestamp",
+         "DbT2005KibetsuGemmen"."choshuHoho" as "dbT2005KibetsuGemmen_choshuHoho",
+         "DbT2005KibetsuGemmen"."ki" as "dbT2005KibetsuGemmen_ki",
+         "DbT2005KibetsuGemmen"."insertDantaiCd" as "dbT2005KibetsuGemmen_insertDantaiCd",
+         "DbT2005KibetsuGemmen"."insertReamsLoginId" as "dbT2005KibetsuGemmen_insertReamsLoginId",
+         "DbT2005KibetsuGemmen"."insertContextId" as "dbT2005KibetsuGemmen_insertContextId",
+         "DbT2005KibetsuGemmen"."isDeleted" as "dbT2005KibetsuGemmen_isDeleted",
+         "DbT2005KibetsuGemmen"."updateCount" as "dbT2005KibetsuGemmen_updateCount",
+         "DbT2005KibetsuGemmen"."lastUpdateTimestamp" as "dbT2005KibetsuGemmen_lastUpdateTimestamp",
+         "DbT2005KibetsuGemmen"."lastUpdateReamsLoginId" as "dbT2005KibetsuGemmen_lastUpdateReamsLoginId",
+         "DbT2005KibetsuGemmen"."gemmenMaeKibetsuGaku" as "dbT2005KibetsuGemmen_gemmenMaeKibetsuGaku",
+         "DbT2005KibetsuGemmen"."KibetsugemmenGaku" as "dbT2005KibetsuGemmen_KibetsugemmenGaku"
+    </sql>
+
+
+    <!--テーブルDbT2005KibetsuGemmenの項目をDbT2005KibetsuGemmenEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2005KibetsuGemmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005KibetsuGemmenEntity" autoMapping="true">
+        <id property="insertTimestamp" column="dbT2005KibetsuGemmen_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="choteiNendo" column="dbT2005KibetsuGemmen_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="dbT2005KibetsuGemmen_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2005KibetsuGemmen_tsuchishoNo" />
+        <id property="shoriTimestamp" column="dbT2005KibetsuGemmen_shoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="choshuHoho" column="dbT2005KibetsuGemmen_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ki" column="dbT2005KibetsuGemmen_ki" />
+        <result property="insertDantaiCd" column="dbT2005KibetsuGemmen_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2005KibetsuGemmen_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2005KibetsuGemmen_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2005KibetsuGemmen_isDeleted" />
+        <result property="updateCount" column="dbT2005KibetsuGemmen_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2005KibetsuGemmen_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2005KibetsuGemmen_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gemmenMaeKibetsuGaku" column="dbT2005KibetsuGemmen_gemmenMaeKibetsuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="KibetsugemmenGaku" column="dbT2005KibetsuGemmen_KibetsugemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT2005KibetsuGemmenEntity">
+        SELECT
+        <include refid="allColumns_DbT2005KibetsuGemmen" />
+        FROM
+        rgdb."DbT2005KibetsuGemmen"
+    </select>
+
+</mapper>

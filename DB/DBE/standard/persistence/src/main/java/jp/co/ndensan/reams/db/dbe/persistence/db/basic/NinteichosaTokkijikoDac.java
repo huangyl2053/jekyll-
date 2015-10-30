@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
- * 認定調査特記事項テーブルの情報を取得するDACです
+ * 認定調査特記事項テーブルの情報を取得するDACです。
  *
  * @author n8178 城間篤人
  */

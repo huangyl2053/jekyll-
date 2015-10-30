@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 市町村単独助成金給付決定を管理するクラスです。
  */
-public class TandokuJoseikinKyufuKettei extends ModelBase<TandokuJoseikinKyufuKetteiIdentifier, DbT3097TandokuJoseikinKyufuKetteiEntity, TandokuJoseikinKyufuKettei> implements Serializable {
+public class TandokuJoseikinKyufuKettei 
+extends ModelBase<TandokuJoseikinKyufuKetteiIdentifier, 
+        DbT3097TandokuJoseikinKyufuKetteiEntity, 
+        TandokuJoseikinKyufuKettei> implements Serializable {
 
     private final DbT3097TandokuJoseikinKyufuKetteiEntity entity;
     private final TandokuJoseikinKyufuKetteiIdentifier id;

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
+//import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2050001.IkenshoIraiIkkatuHakkoTabDiv;
@@ -51,6 +51,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
  */
 public class IraishoIkkatsuHakko {
 
+    private static final int I = 7;
+    private static final int E = 10;
+
     /**
      * ロード時の処理です。
      *
@@ -82,7 +85,7 @@ public class IraishoIkkatsuHakko {
         div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
                 getNinteichosaIraishoRelatedDates().getTxtHakkoDateOfChosa().setValue(RDate.getNowDate());
         div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
-                getNinteichosaIraishoRelatedDates().getTxtKigenDateOfChosa().setValue(RDate.getNowDate().plusDay(7));
+                getNinteichosaIraishoRelatedDates().getTxtKigenDateOfChosa().setValue(RDate.getNowDate().plusDay(I));
 
         response.data = div;
         return response;
@@ -103,7 +106,7 @@ public class IraishoIkkatsuHakko {
         div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
                 getShujiiIkenshoIraishoRelatedDates().getTxtHakkoDateOfIkensho().setValue(RDate.getNowDate());
         div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
-                getShujiiIkenshoIraishoRelatedDates().getTxtKigenDateOfIkensho().setValue(RDate.getNowDate().plusDay(10));
+                getShujiiIkenshoIraishoRelatedDates().getTxtKigenDateOfIkensho().setValue(RDate.getNowDate().plusDay(E));
 
         response.data = div;
         return response;
@@ -153,7 +156,7 @@ public class IraishoIkkatsuHakko {
         div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
                 getShujiiIkenshoIraishoRelatedDates().getTxtKigenDateOfIkensho().
                 setValue(div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
-                        getShujiiIkenshoIraishoRelatedDates().getTxtShoriDateOfIkensho().getValue().plusDay(10));
+                        getShujiiIkenshoIraishoRelatedDates().getTxtShoriDateOfIkensho().getValue().plusDay(E));
 
         response.data = div;
         return response;
@@ -171,7 +174,7 @@ public class IraishoIkkatsuHakko {
         div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
                 getNinteichosaIraishoRelatedDates().getTxtKigenDateOfChosa().
                 setValue(div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
-                        getNinteichosaIraishoRelatedDates().getTxtShoriDateOfChosa().getValue().plusDay(7));
+                        getNinteichosaIraishoRelatedDates().getTxtShoriDateOfChosa().getValue().plusDay(I));
 
         response.data = div;
         return response;
@@ -194,7 +197,7 @@ public class IraishoIkkatsuHakko {
     }
 
     /**
-     * 依頼書発行済み区分
+     * 依頼書発行済み区分。
      */
     private static enum IraishoHakkoType {
 
@@ -458,7 +461,7 @@ public class IraishoIkkatsuHakko {
         }
 
         /**
-         * ShujiiIkenshoRelatedReportType
+         * ShujiiIkenshoRelatedReportType。
          */
         private static final class ShujiiIkenshoRelatedReportType {
 
@@ -607,7 +610,7 @@ public class IraishoIkkatsuHakko {
          *
          * @param div ShujiiIkenshoIraishoRelatedDatesDiv
          */
-        static final void clear(ShujiiIkenshoIraishoRelatedDatesDiv div) {
+        static void clear(ShujiiIkenshoIraishoRelatedDatesDiv div) {
             div.getTxtHakkoDateOfIkensho().clearValue();
             div.getTxtKigenDateOfIkensho().clearValue();
             div.getTxtShoriDateOfIkensho().clearValue();
@@ -693,11 +696,11 @@ public class IraishoIkkatsuHakko {
         }
 
         /**
-         * 調査依頼対象者
+         * 調査依頼対象者。
          */
         private final List<dgNinteichosaIraishoTargetPersons_Row> choraIraiTargets;
         /**
-         * 作成依頼対象者
+         * 作成依頼対象者。
          */
         private final List<dgShujiiIkenshoIraishoTargetPersons_Row> sakuseiIraiTargets;
 

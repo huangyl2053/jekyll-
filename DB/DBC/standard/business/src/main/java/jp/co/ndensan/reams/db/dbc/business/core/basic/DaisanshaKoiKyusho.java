@@ -8,22 +8,24 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3082DaisanshaKoiKyushoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護第三者行為求償を管理するクラスです。
  */
-public class DaisanshaKoiKyusho extends ModelBase<DaisanshaKoiKyushoIdentifier, DbT3082DaisanshaKoiKyushoEntity, DaisanshaKoiKyusho> implements Serializable {
+public class DaisanshaKoiKyusho
+        extends ModelBase<DaisanshaKoiKyushoIdentifier, DbT3082DaisanshaKoiKyushoEntity, DaisanshaKoiKyusho>
+        implements Serializable {
 
     private final DbT3082DaisanshaKoiKyushoEntity entity;
     private final DaisanshaKoiKyushoIdentifier id;

@@ -15,7 +15,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
  *
  * @author N3327 三浦 凌
  */
-public class KaigoNinteiKekka {
+public final class KaigoNinteiKekka {
+
+    private KaigoNinteiKekka() {
+
+    }
 
     //<editor-fold defaultstate="collapsed" desc="enum Mode">
     enum Mode {
@@ -253,7 +257,7 @@ public class KaigoNinteiKekka {
      * @param tsukisu
      * @return
      */
-    static final FlexibleDate calcYukoKikanTo(FlexibleDate yukoKikanFrom, YukoKikanTsukisu tsukisu) {
+    static FlexibleDate calcYukoKikanTo(FlexibleDate yukoKikanFrom, YukoKikanTsukisu tsukisu) {
         if (!yukoKikanFrom.isValid()) {
             return FlexibleDate.EMPTY;
         }

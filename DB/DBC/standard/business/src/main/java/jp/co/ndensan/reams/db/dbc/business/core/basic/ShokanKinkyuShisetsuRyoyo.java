@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求緊急時施設療養を管理するクラスです。
  */
-public class ShokanKinkyuShisetsuRyoyo extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, DbT3040ShokanKinkyuShisetsuRyoyoEntity, ShokanKinkyuShisetsuRyoyo> implements Serializable {
+public class ShokanKinkyuShisetsuRyoyo 
+extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, 
+        DbT3040ShokanKinkyuShisetsuRyoyoEntity, 
+        ShokanKinkyuShisetsuRyoyo> implements Serializable {
 
     private final DbT3040ShokanKinkyuShisetsuRyoyoEntity entity;
     private final ShokanKinkyuShisetsuRyoyoIdentifier id;

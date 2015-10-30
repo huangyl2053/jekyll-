@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -34,6 +33,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 //TODO n3317塚田　Yamlを使わないように変更する
 public class KyotakuJikoRiyohyo {
+
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
 
     private enum 別票画面表示 {
 
@@ -63,7 +67,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの「前月の情報をコピー」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoの「前月の情報をコピー」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -79,18 +83,18 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoのサービス利用票Tabの「明細行を追加する」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoのサービス利用票Tabの「明細行を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
      */
     public ResponseData onClickRiyohyoMeisaiAdd(KyotakuJikoRiyohyoDiv panel) {
-        DataGrid<dgServiceRiyohyoList_Row> dgRiyohyo = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
-        List<dgServiceRiyohyoList_Row> dgRiyohyoList = dgRiyohyo.getDataSource();
-        Button btnDelete = new Button();
-        Button btnService = new Button();
-        Button btnJigyosha = new Button();
+//        DataGrid<dgServiceRiyohyoList_Row> dgRiyohyo = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
+//        List<dgServiceRiyohyoList_Row> dgRiyohyoList = dgRiyohyo.getDataSource();
+//        Button btnDelete = new Button();
+//        Button btnService = new Button();
+//        Button btnJigyosha = new Button();
 
 //        for (int index = 0; index < 2; index++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
@@ -145,7 +149,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoのサービス利用票Tabの明細表の削除ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoのサービス利用票Tabの明細表の削除ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -158,7 +162,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を追加する」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -172,7 +176,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を追加する」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -186,7 +190,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の選択ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の選択ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -209,7 +213,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の削除ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の削除ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -222,7 +226,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を確定する」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を確定する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -237,7 +241,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を確定する」ボタン押下時の処理
+     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を確定する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -272,10 +276,10 @@ public class KyotakuJikoRiyohyo {
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
-        meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
-        meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
-        meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, 6));
-        meisai.getTxtServiceName().setValue(row.getTxtService().substring(7));
+        meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, INDEX_10));
+        meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(INDEX_11));
+        meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, INDEX_6));
+        meisai.getTxtServiceName().setValue(row.getTxtService().substring(INDEX_7));
         meisai.getTxtTani().setValue(new Decimal(row.getTxtTani().toString()));
         meisai.getTxtWaribikigoRitsu().setValue(new Decimal(row.getTxtWaribikigoRitsu().toString()));
         meisai.getTxtWaribikigoTani().setValue(new Decimal(row.getTxtWaribikigoTani().toString()));
@@ -305,7 +309,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * 利用票のデータ設定
+     * 利用票のデータ設定。
      */
     private void setRiyohyoData(KyotakuJikoRiyohyoDiv panel) {
         setSummaryData(panel);
@@ -464,27 +468,26 @@ public class KyotakuJikoRiyohyo {
 //        beppyoList.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
     }
 
-    private boolean validateGokei(KyotakuJikoRiyohyoDiv panel, int index) {
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
-        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
-                getDgServiceRiyohyoBeppyoList().getDataSource();
-        dgServiceRiyohyoBeppyoList_Row currentRow = listRow.get(index);
-
-        if (gokei.getTxtShuruiGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendoChokaTani().toString()))
-                && gokei.getTxtShuruiGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendonaiTani().toString()))
-                && gokei.getTxtTanisuTanka().getValue().equals(new Decimal(currentRow.getTxtTanisuTanka().toString()))
-                && gokei.getTxtKubunGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendoChokaTani().toString()))
-                && gokei.getTxtKubunGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendonaiTani().toString()))
-                && gokei.getTxtKyufuritsu().getValue().equals(new Decimal(currentRow.getTxtKyufuritsu().toString()))) {
-            return false;
-        }
-        return true;
-    }
-
+//    private boolean validateGokei(KyotakuJikoRiyohyoDiv panel, int index) {
+//        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+//        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
+//                getDgServiceRiyohyoBeppyoList().getDataSource();
+//        dgServiceRiyohyoBeppyoList_Row currentRow = listRow.get(index);
+//
+//        if (gokei.getTxtShuruiGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendoChokaTani().toString()))
+//                && gokei.getTxtShuruiGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendonaiTani().toString()))
+//                && gokei.getTxtTanisuTanka().getValue().equals(new Decimal(currentRow.getTxtTanisuTanka().toString()))
+//                && gokei.getTxtKubunGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendoChokaTani().toString()))
+//                && gokei.getTxtKubunGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendonaiTani().toString()))
+//                && gokei.getTxtKyufuritsu().getValue().equals(new Decimal(currentRow.getTxtKyufuritsu().toString()))) {
+//            return false;
+//        }
+//        return true;
+//    }
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの明細のデータ初期化
+     * KyotakuJikoRiyohyoInfoの別票Tabの明細のデータ初期化。
      *
      * @param panel panel
      */
@@ -503,7 +506,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの合計のデータ初期化
+     * KyotakuJikoRiyohyoInfoの別票Tabの合計のデータ初期化。
      *
      * @param panel panel
      */
@@ -523,7 +526,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの明細のデモ向けデータ設定
+     * KyotakuJikoRiyohyoInfoの別票Tabの明細のデモ向けデータ設定。
      *
      * @param panel panel
      */
@@ -543,7 +546,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの合計のデモ向けデータ設定
+     * KyotakuJikoRiyohyoInfoの別票Tabの合計のデモ向けデータ設定。
      *
      * @param panel panel
      */
@@ -564,7 +567,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoの別票のPanel表示設定
+     * KyotakuJikoRiyohyoInfoの別票のPanel表示設定。
      *
      * @param panel panel
      * @param 表示 表示
@@ -597,7 +600,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * 届出日など、タブ以外のデータの設定(前月分)
+     * 届出日など、タブ以外のデータの設定(前月分)。
      *
      * @param panel panel
      */
@@ -617,13 +620,13 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * 届出日など、タブ以外のデータの設定
+     * 届出日など、タブ以外のデータの設定。
      *
      * @param panel panel
      */
     private void setSummaryData(KyotakuJikoRiyohyoDiv panel) {
 //        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
-//        ControlGenerator cg = new ControlGenerator(getYaml().get(6));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_6));
 //        info.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
 //        info.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
 //        info.getTxtTekiyoKikan().clearToValue();
@@ -637,7 +640,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * サービス利用票タブの曜日の設定
+     * サービス利用票タブの曜日の設定。
      *
      * @param panel panel
      */
@@ -655,7 +658,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * サービス利用票タブのデータ設定
+     * サービス利用票タブのデータ設定。
      *
      * @param panel panel
      */
@@ -667,7 +670,7 @@ public class KyotakuJikoRiyohyo {
 //        Button btnService = new Button();
 //        Button btnJigyosha = new Button();
 //
-//        for (int index = 7; index < 9; index++) {
+//        for (int index = INDEX_7; index < 9; index++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
 //            dgServiceRiyohyoList_Row rowItem = createサービス利用票(
 //                    btnDelete,
@@ -743,7 +746,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void setBeppyoNissuZengetsuData(ServiceRiyohyoBeppyoRiyoNissuDiv nissu) {
-//        ControlGenerator cg = new ControlGenerator(getYaml().get(10));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_10));
 //        nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
 //        nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
 //        nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
@@ -756,7 +759,7 @@ public class KyotakuJikoRiyohyo {
 //        Button btnDelete = new Button();
 //
 //        dgServiceRiyohyoBeppyoList_Row rowItem;
-//        for (int index = 11; index < 14; index++) {
+//        for (int index = INDEX_11; index < 14; index++) {
 //            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
 //            別票行区分 kubun;
 //            if (cg.getAsRString("別票行区分").equals(new RString("明細"))) {
@@ -865,88 +868,86 @@ public class KyotakuJikoRiyohyo {
         return row;
     }
 
-    private dgServiceRiyohyoList_Row createサービス利用票(
-            Button btnDelete,
-            RString txtKaishi,
-            RString txtShuryo,
-            Button btnService,
-            RString txtService,
-            Button btnJigyosha,
-            RString txtJigyosha,
-            RString txtYoJitsu,
-            RString txtDay1, RString txtDay2, RString txtDay3, RString txtDay4, RString txtDay5,
-            RString txtDay6, RString txtDay7, RString txtDay8, RString txtDay9, RString txtDay10,
-            RString txtDay11, RString txtDay12, RString txtDay13, RString txtDay14, RString txtDay15,
-            RString txtDay16, RString txtDay17, RString txtDay18, RString txtDay19, RString txtDay20,
-            RString txtDay21, RString txtDay22, RString txtDay23, RString txtDay24, RString txtDay25,
-            RString txtDay26, RString txtDay27, RString txtDay28, RString txtDay29, RString txtDay30,
-            RString txtDay31, RString txtGokei) {
-
-        TextBox txtBoxKaishi = new TextBox();
-        TextBox txtBoxShuryo = new TextBox();
-        txtBoxKaishi.setValue(txtKaishi);
-        txtBoxShuryo.setValue(txtShuryo);
-        TextBoxNum txtBoxDay1 = makeTextBoxNum(txtDay1);
-        TextBoxNum txtBoxDay2 = makeTextBoxNum(txtDay2);
-        TextBoxNum txtBoxDay3 = makeTextBoxNum(txtDay3);
-        TextBoxNum txtBoxDay4 = makeTextBoxNum(txtDay4);
-        TextBoxNum txtBoxDay5 = makeTextBoxNum(txtDay5);
-        TextBoxNum txtBoxDay6 = makeTextBoxNum(txtDay6);
-        TextBoxNum txtBoxDay7 = makeTextBoxNum(txtDay7);
-        TextBoxNum txtBoxDay8 = makeTextBoxNum(txtDay8);
-        TextBoxNum txtBoxDay9 = makeTextBoxNum(txtDay9);
-        TextBoxNum txtBoxDay10 = makeTextBoxNum(txtDay10);
-        TextBoxNum txtBoxDay11 = makeTextBoxNum(txtDay11);
-        TextBoxNum txtBoxDay12 = makeTextBoxNum(txtDay12);
-        TextBoxNum txtBoxDay13 = makeTextBoxNum(txtDay13);
-        TextBoxNum txtBoxDay14 = makeTextBoxNum(txtDay14);
-        TextBoxNum txtBoxDay15 = makeTextBoxNum(txtDay15);
-        TextBoxNum txtBoxDay16 = makeTextBoxNum(txtDay16);
-        TextBoxNum txtBoxDay17 = makeTextBoxNum(txtDay17);
-        TextBoxNum txtBoxDay18 = makeTextBoxNum(txtDay18);
-        TextBoxNum txtBoxDay19 = makeTextBoxNum(txtDay19);
-        TextBoxNum txtBoxDay20 = makeTextBoxNum(txtDay20);
-        TextBoxNum txtBoxDay21 = makeTextBoxNum(txtDay21);
-        TextBoxNum txtBoxDay22 = makeTextBoxNum(txtDay22);
-        TextBoxNum txtBoxDay23 = makeTextBoxNum(txtDay23);
-        TextBoxNum txtBoxDay24 = makeTextBoxNum(txtDay24);
-        TextBoxNum txtBoxDay25 = makeTextBoxNum(txtDay25);
-        TextBoxNum txtBoxDay26 = makeTextBoxNum(txtDay26);
-        TextBoxNum txtBoxDay27 = makeTextBoxNum(txtDay27);
-        TextBoxNum txtBoxDay28 = makeTextBoxNum(txtDay28);
-        TextBoxNum txtBoxDay29 = makeTextBoxNum(txtDay29);
-        TextBoxNum txtBoxDay30 = makeTextBoxNum(txtDay30);
-        TextBoxNum txtBoxDay31 = makeTextBoxNum(txtDay31);
-
-        return new dgServiceRiyohyoList_Row(
-                btnDelete,
-                txtBoxKaishi,
-                txtBoxShuryo,
-                btnService,
-                txtService,
-                btnJigyosha,
-                txtJigyosha,
-                txtYoJitsu,
-                txtBoxDay1, txtBoxDay2, txtBoxDay3, txtBoxDay4, txtBoxDay5,
-                txtBoxDay6, txtBoxDay7, txtBoxDay8, txtBoxDay9, txtBoxDay10,
-                txtBoxDay11, txtBoxDay12, txtBoxDay13, txtBoxDay14, txtBoxDay15,
-                txtBoxDay16, txtBoxDay17, txtBoxDay18, txtBoxDay19, txtBoxDay20,
-                txtBoxDay21, txtBoxDay22, txtBoxDay23, txtBoxDay24, txtBoxDay25,
-                txtBoxDay26, txtBoxDay27, txtBoxDay28, txtBoxDay29, txtBoxDay30, txtBoxDay31,
-                txtGokei);
-    }
-
-    private TextBoxNum makeTextBoxNum(RString str) {
-        TextBoxNum ret = new TextBoxNum();
-        try {
-            Decimal data = new Decimal(str.toString());
-            ret.setValue(data);
-        } catch (Throwable e) {
-            ret.clearValue();
-        }
-        return ret;
-    }
-
+//    private dgServiceRiyohyoList_Row createサービス利用票(
+//            Button btnDelete,
+//            RString txtKaishi,
+//            RString txtShuryo,
+//            Button btnService,
+//            RString txtService,
+//            Button btnJigyosha,
+//            RString txtJigyosha,
+//            RString txtYoJitsu,
+//            RString txtDay1, RString txtDay2, RString txtDay3, RString txtDay4, RString txtDay5,
+//            RString txtDay6, RString txtDay7, RString txtDay8, RString txtDay9, RString txtDay10,
+//            RString txtDay11, RString txtDay12, RString txtDay13, RString txtDay14, RString txtDay15,
+//            RString txtDay16, RString txtDay17, RString txtDay18, RString txtDay19, RString txtDay20,
+//            RString txtDay21, RString txtDay22, RString txtDay23, RString txtDay24, RString txtDay25,
+//            RString txtDay26, RString txtDay27, RString txtDay28, RString txtDay29, RString txtDay30,
+//            RString txtDay31, RString txtGokei) {
+//
+//        TextBox txtBoxKaishi = new TextBox();
+//        TextBox txtBoxShuryo = new TextBox();
+//        txtBoxKaishi.setValue(txtKaishi);
+//        txtBoxShuryo.setValue(txtShuryo);
+//        TextBoxNum txtBoxDay1 = makeTextBoxNum(txtDay1);
+//        TextBoxNum txtBoxDay2 = makeTextBoxNum(txtDay2);
+//        TextBoxNum txtBoxDay3 = makeTextBoxNum(txtDay3);
+//        TextBoxNum txtBoxDay4 = makeTextBoxNum(txtDay4);
+//        TextBoxNum txtBoxDay5 = makeTextBoxNum(txtDay5);
+//        TextBoxNum txtBoxDay6 = makeTextBoxNum(txtDay6);
+//        TextBoxNum txtBoxDay7 = makeTextBoxNum(txtDay7);
+//        TextBoxNum txtBoxDay8 = makeTextBoxNum(txtDay8);
+//        TextBoxNum txtBoxDay9 = makeTextBoxNum(txtDay9);
+//        TextBoxNum txtBoxDay10 = makeTextBoxNum(txtDay10);
+//        TextBoxNum txtBoxDay11 = makeTextBoxNum(txtDay11);
+//        TextBoxNum txtBoxDay12 = makeTextBoxNum(txtDay12);
+//        TextBoxNum txtBoxDay13 = makeTextBoxNum(txtDay13);
+//        TextBoxNum txtBoxDay14 = makeTextBoxNum(txtDay14);
+//        TextBoxNum txtBoxDay15 = makeTextBoxNum(txtDay15);
+//        TextBoxNum txtBoxDay16 = makeTextBoxNum(txtDay16);
+//        TextBoxNum txtBoxDay17 = makeTextBoxNum(txtDay17);
+//        TextBoxNum txtBoxDay18 = makeTextBoxNum(txtDay18);
+//        TextBoxNum txtBoxDay19 = makeTextBoxNum(txtDay19);
+//        TextBoxNum txtBoxDay20 = makeTextBoxNum(txtDay20);
+//        TextBoxNum txtBoxDay21 = makeTextBoxNum(txtDay21);
+//        TextBoxNum txtBoxDay22 = makeTextBoxNum(txtDay22);
+//        TextBoxNum txtBoxDay23 = makeTextBoxNum(txtDay23);
+//        TextBoxNum txtBoxDay24 = makeTextBoxNum(txtDay24);
+//        TextBoxNum txtBoxDay25 = makeTextBoxNum(txtDay25);
+//        TextBoxNum txtBoxDay26 = makeTextBoxNum(txtDay26);
+//        TextBoxNum txtBoxDay27 = makeTextBoxNum(txtDay27);
+//        TextBoxNum txtBoxDay28 = makeTextBoxNum(txtDay28);
+//        TextBoxNum txtBoxDay29 = makeTextBoxNum(txtDay29);
+//        TextBoxNum txtBoxDay30 = makeTextBoxNum(txtDay30);
+//        TextBoxNum txtBoxDay31 = makeTextBoxNum(txtDay31);
+//
+//        return new dgServiceRiyohyoList_Row(
+//                btnDelete,
+//                txtBoxKaishi,
+//                txtBoxShuryo,
+//                btnService,
+//                txtService,
+//                btnJigyosha,
+//                txtJigyosha,
+//                txtYoJitsu,
+//                txtBoxDay1, txtBoxDay2, txtBoxDay3, txtBoxDay4, txtBoxDay5,
+//                txtBoxDay6, txtBoxDay7, txtBoxDay8, txtBoxDay9, txtBoxDay10,
+//                txtBoxDay11, txtBoxDay12, txtBoxDay13, txtBoxDay14, txtBoxDay15,
+//                txtBoxDay16, txtBoxDay17, txtBoxDay18, txtBoxDay19, txtBoxDay20,
+//                txtBoxDay21, txtBoxDay22, txtBoxDay23, txtBoxDay24, txtBoxDay25,
+//                txtBoxDay26, txtBoxDay27, txtBoxDay28, txtBoxDay29, txtBoxDay30, txtBoxDay31,
+//                txtGokei);
+//    }
+//    private TextBoxNum makeTextBoxNum(RString str) {
+//        TextBoxNum ret = new TextBoxNum();
+//        try {
+//            Decimal data = new Decimal(str.toString());
+//            ret.setValue(data);
+//        } catch (Throwable e) {
+//            ret.clearValue();
+//        }
+//        return ret;
+//    }
     private List<HashMap> getRiyohyoYaml() {
         return YamlLoader.DBC.loadAsList(new RString("ServiceRiyohyoInfo/ServiceRiyohyoInfo.yml"));
     }
@@ -968,8 +969,8 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
 
-        RString ServiceCode = meisai.getTxtServiceCode().getValue();
-        if (ServiceCode.length() == 6) {
+        RString serviceCode = meisai.getTxtServiceCode().getValue();
+        if (serviceCode.length() == INDEX_6) {
             ControlGenerator cg = new ControlGenerator(getRiyohyoYaml().get(0));
             meisai.getTxtServiceName().setValue(cg.getAsRString("サービス名称"));
         }

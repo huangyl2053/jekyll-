@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -16,13 +15,13 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class HihokenshaOutline {
 
     /**
-     * onStart
+     * onStart。
      *
      * @param div HihokenshaOutlineDiv
      * @return ResponseData
      */
     public ResponseData<HihokenshaOutlineDiv> onStart(HihokenshaOutlineDiv div) {
-        dgSearchResult_Row hihokensha = clickedItem();
+//        dgSearchResult_Row hihokensha = clickedItem();
 //        div.getShikakuKihon().getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
 //        div.getAtenaInfo().getAtenaInfo().getTxtShikibetsuCode().setValue(hihokensha.getShikibetsuCode());
 //        div.getAtenaInfo().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(hihokensha.getKanaShimsei());
@@ -30,10 +29,9 @@ public class HihokenshaOutline {
         return _createResponseData(div);
     }
 
-    private dgSearchResult_Row clickedItem() {
-        return YokaigoNinteiShinseisha.getInstance().get();
-    }
-
+//    private dgSearchResult_Row clickedItem() {
+//        return YokaigoNinteiShinseisha.getInstance().get();
+//    }
     private ResponseData<HihokenshaOutlineDiv> _createResponseData(HihokenshaOutlineDiv div) {
         ResponseData<HihokenshaOutlineDiv> response = new ResponseData<>();
         response.data = div;

@@ -15,20 +15,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum TorisageKubun {
 
     /**
-     * 認定申請有効
+     * 認定申請有効。
      */
     認定申請有効(new Code(new RString("1"))),
     /**
-     * 却下
+     * 却下。
      */
     却下(new Code(new RString("2"))),
     /**
-     * 取下げ
+     * 取下げ。
      */
     取下げ(
     new Code(new RString("3"))),
     /**
-     * 区分変更却下
+     * 区分変更却下。
      */
     区分変更却下(new Code(new RString("4")));
     private final Code 取下げ区分コード;

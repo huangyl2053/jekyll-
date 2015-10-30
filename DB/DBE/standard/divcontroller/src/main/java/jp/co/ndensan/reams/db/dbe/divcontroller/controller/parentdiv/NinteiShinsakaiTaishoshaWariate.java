@@ -146,9 +146,9 @@ public class NinteiShinsakaiTaishoshaWariate {
     private void setNinteiShinsakaiTaishoshaWariateData(
             NinteiShinsakaiTaishoshaWariateDiv panel, NinteiShinsakaiIchiranDiv panel2) {
 
-        List<HashMap> ninteiShinsakaiTaishoshaWariate = YamlLoader.DBE.loadAsList(
+        List<HashMap> ninteiTaishoshaWariate = YamlLoader.DBE.loadAsList(
                 new RString("dbe4060001/NinteiShinsakaiTaishoshaWariate.yml"));
-        HashMap hashMap = ninteiShinsakaiTaishoshaWariate.get(0);
+        HashMap hashMap = ninteiTaishoshaWariate.get(0);
         ControlGenerator cg = new ControlGenerator(hashMap);
         RString strKaisaiBasho = cg.getAsRString("kaisaiBasho");
         RString strSaidaiTeiin = cg.getAsRString("saidaiTeiin");
@@ -415,10 +415,10 @@ public class NinteiShinsakaiTaishoshaWariate {
             RString chosaKikanMei,
             RString chosainMei
     ) {
-        dgWariatezumiTaishoshaIchiran_Row rowWariatezumiTaishoshaIchiranData = new dgWariatezumiTaishoshaIchiran_Row(
+        dgWariatezumiTaishoshaIchiran_Row rowTaishoshaIchiranData = new dgWariatezumiTaishoshaIchiran_Row(
                 shinsaNo, hokensha, hihoNo, shimei, kana, shinseibi, shinseiKbn, seibetsu, ichijiHantei, kijunJikan, furiwakeKbn,
                 iryoKikanMei, shujiiMei, chosaKikanMei, chosainMei);
-        return rowWariatezumiTaishoshaIchiranData;
+        return rowTaishoshaIchiranData;
     }
 
     /*
@@ -440,10 +440,10 @@ public class NinteiShinsakaiTaishoshaWariate {
             RString chosaKikanMei,
             RString chosainMei
     ) {
-        dgMiwariateTaishoshaIchiran_Row rowMiwariateTaishoshaIchiranData = new dgMiwariateTaishoshaIchiran_Row(
+        dgMiwariateTaishoshaIchiran_Row rowMiwariateIchiranData = new dgMiwariateTaishoshaIchiran_Row(
                 hokensha, hihoNo, shimei, kana, furiwakeKbn, shinseibi, shinseiKbn, seibetsu, ichijiHantei, kijunJikan,
                 iryoKikanMei, shujiiMei, chosaKikanMei, chosainMei);
-        return rowMiwariateTaishoshaIchiranData;
+        return rowMiwariateIchiranData;
     }
 
     /*
@@ -653,12 +653,12 @@ public class NinteiShinsakaiTaishoshaWariate {
      *割当済み対象者一覧へ割付します。
      */
     private List setRowWariatezumiTaishoshaIchiran(
-            List<dgWariatezumiTaishoshaIchiran_Row> wariatezumiTaishoshaIchiranData,
+            List<dgWariatezumiTaishoshaIchiran_Row> wariatezumiIchiranData,
             List<dgMiwariateTaishoshaIchiran_Row> selectedMiwariateData) {
 
         for (int i = 0; i < selectedMiwariateData.size(); i++) {
 
-            wariatezumiTaishoshaIchiranData.add(createRowWariatezumiTaishoshaIchiran(
+            wariatezumiIchiranData.add(createRowWariatezumiTaishoshaIchiran(
                     RString.EMPTY,
                     selectedMiwariateData.get(i).getHokensha(),
                     selectedMiwariateData.get(i).getHihokenNo(),
@@ -677,7 +677,7 @@ public class NinteiShinsakaiTaishoshaWariate {
             ));
         }
 
-        return wariatezumiTaishoshaIchiranData;
+        return wariatezumiIchiranData;
     }
 
     /*

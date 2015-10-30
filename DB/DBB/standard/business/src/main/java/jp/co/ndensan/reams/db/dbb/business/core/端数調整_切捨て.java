@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.I端数調整;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
  * @author n3336
  */
-public class 端数調整_切捨て implements I端数調整{
-     private final String tanni;
+public class 端数調整_切捨て implements I端数調整 {
 
-    public 端数調整_切捨て(String tanni) {
+    private final RString tanni;
+
+    public 端数調整_切捨て(RString tanni) {
         this.tanni = tanni;
     }
-     
-     @Override
-      public Decimal Calc端数(Decimal 年額保険料) {
-        return 年額保険料.subtract(年額保険料.remainder(new Decimal(this.tanni)));    
-    }   
-    
+
+    @Override
+    public Decimal calc端数(Decimal 年額保険料) {
+        return 年額保険料.subtract(年額保険料.remainder(new Decimal(String.valueOf(this.tanni))));
+    }
+
 }

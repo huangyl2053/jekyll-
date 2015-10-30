@@ -178,7 +178,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuTest extends DbcTestBase {
 
         @Test
         public void get訂正連絡票フラグは_entityが持つ訂正連絡票フラグを返す() {
-            assertThat(sut.get訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoShokanSofuEntity.getTeiseiRenrakuhyoFlag()));
+            assertThat(sut.is訂正連絡票フラグ(), is(KyodoShoriyoJukyushaIdoShokanSofuEntity.getTeiseiRenrakuhyoFlag()));
         }
 
         @Test

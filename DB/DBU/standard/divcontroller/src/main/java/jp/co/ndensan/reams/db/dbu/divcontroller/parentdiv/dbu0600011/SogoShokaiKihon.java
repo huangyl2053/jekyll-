@@ -5,12 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv.dbu0600011;
 
-import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600011.SogoShokaiKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 //import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -30,11 +26,9 @@ public class SogoShokaiKihon {
             SogoShokaiKihonDiv panel) {
         ResponseData<SogoShokaiKihonDiv> response = new ResponseData<>();
 
-        HashMap hashMap
-                = YamlLoader.DBU.loadAsList(new RString("dbu0600011/AtenaKihonData.yml")).get(0);
-
-        ControlGenerator ymlData = new ControlGenerator(hashMap);
-
+//        HashMap hashMap
+//                = YamlLoader.DBU.loadAsList(new RString("dbu0600011/AtenaKihonData.yml")).get(0);
+//        ControlGenerator ymlData = new ControlGenerator(hashMap);
         //宛名照会 識別コード設定
 //        AtenaShokaiSimple.setData(panel.getSogoShokaiKihonInfo().getAtenaInfo(),
 //                new ShikibetsuCode(ymlData.getAsRString("識別コード")));

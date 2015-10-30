@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -40,14 +41,14 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
         this.entity = entity;
     }
 
-    /**
-     * DbT7051KoseiShichosonMasterEntityを返します。
-     *
-     * @return DbT7051KoseiShichosonMasterEntity
-     */
-    public DbT7051KoseiShichosonMasterEntity getEntity() {
-        return entity;
-    }
+//    /**
+//     * DbT7051KoseiShichosonMasterEntityを返します。
+//     *
+//     * @return DbT7051KoseiShichosonMasterEntity
+//     */
+//    public DbT7051KoseiShichosonMasterEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * 市町村識別IDを返します。
@@ -424,6 +425,11 @@ public class KaigoKoseiShichosonMaster implements IKoseiShichosonMaster {
     }
 
     public boolean hasChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IKoseiShichosonMasterEntity getEntity() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

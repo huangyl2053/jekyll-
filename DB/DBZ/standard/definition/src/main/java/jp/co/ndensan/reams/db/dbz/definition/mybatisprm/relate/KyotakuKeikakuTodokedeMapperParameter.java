@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 居宅給付計画届出を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class KyotakuKeikakuTodokedeMapperParameter {
+public final class KyotakuKeikakuTodokedeMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -70,5 +69,50 @@ public class KyotakuKeikakuTodokedeMapperParameter {
     public static KyotakuKeikakuTodokedeMapperParameter createSelectListParam(
             HihokenshaNo 主キー1) {
         return new KyotakuKeikakuTodokedeMapperParameter(主キー1, FlexibleYearMonth.MIN, true, false);
+    }
+
+    /**
+     * get主キー1を取得します。
+     *
+     * @return 主キー1
+     */
+    public HihokenshaNo get主キー1() {
+        return 主キー1;
+    }
+
+    /**
+     * get主キー2を取得します。
+     *
+     * @return 主キー2
+     */
+    public FlexibleYearMonth get主キー2() {
+        return 主キー2;
+    }
+
+    /**
+     * get主キー3を取得します。
+     *
+     * @return 主キー3
+     */
+    public Decimal get主キー3() {
+        return 主キー3;
+    }
+
+    /**
+     * isUses主キー1を取得します。
+     *
+     * @return uses主キー1
+     */
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    /**
+     * isUses主キー2を取得します。
+     *
+     * @return uses主キー2
+     */
+    public boolean isUses主キー2() {
+        return uses主キー2;
     }
 }

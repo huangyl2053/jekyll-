@@ -140,7 +140,7 @@ public class SaishinsaMoshitateBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の国保連再送付有フラグは_設定した値と同じ国保連再送付有フラグを返す() {
             business = sut.set国保連再送付有フラグ(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ).build();
-            assertThat(business.get国保連再送付有フラグ(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ));
+            assertThat(business.is国保連再送付有フラグ(), is(DbT3062SaishinsaMoshitateEntityGenerator.DEFAULT_国保連再送付有フラグ));
         }
 
         @Test

@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -12,14 +14,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * DbT7052KoseiShichosonShishoMasterの項目定義クラスです
- *
+ * 構成市町村支所マスタテーブルのエンティティクラスです。
+ * <br/> 構成・単独市町村単位の支所を管理する
  */
 public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<DbT7052KoseiShichosonShishoMasterEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7052KoseiShichosonShishoMaster");
+    private static final long serialVersionUID = -5543964898756859270L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -94,7 +97,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -112,7 +115,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
      *
      * @param shishoCode 支所コード
      */
-    public void setShishoCode(ShishoCode shishoCode) {
+    public void setShishoCode(@Nonnull ShishoCode shishoCode) {
         this.shishoCode = shishoCode;
     }
 
@@ -121,6 +124,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
      *
      * @return 支所名
      */
+    @CheckForNull
     public RString getShishoMei() {
         return shishoMei;
     }
@@ -138,7 +142,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT7052KoseiShichosonShishoMasterEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7052KoseiShichosonShishoMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -157,6 +161,8 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT7052KoseiShichosonShishoMasterEntity entity) {

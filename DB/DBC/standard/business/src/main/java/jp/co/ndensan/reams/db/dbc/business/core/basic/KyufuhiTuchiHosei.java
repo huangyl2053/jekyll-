@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費通知補正を管理するクラスです。
  */
-public class KyufuhiTuchiHosei extends ModelBase<KyufuhiTuchiHoseiIdentifier, DbT3067KyufuhiTuchiHoseiEntity, KyufuhiTuchiHosei> implements Serializable {
+public class KyufuhiTuchiHosei 
+extends ModelBase<KyufuhiTuchiHoseiIdentifier, 
+        DbT3067KyufuhiTuchiHoseiEntity, 
+        KyufuhiTuchiHosei> implements Serializable {
 
     private final DbT3067KyufuhiTuchiHoseiEntity entity;
     private final KyufuhiTuchiHoseiIdentifier id;

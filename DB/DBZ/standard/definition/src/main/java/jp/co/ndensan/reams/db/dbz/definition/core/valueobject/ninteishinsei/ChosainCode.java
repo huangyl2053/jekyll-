@@ -12,12 +12,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 認定調査員コードです。
+ * 認定調査員コードクラスです。
  *
  * @author n8223　朴義一
  */
 public class ChosainCode implements IValueObject<RString>, Comparable<ChosainCode>, IDbColumnMappable, Serializable {
 
+    private static final int eight = 8;
     /**
      * 空の{@link ChosainCode}です。
      */

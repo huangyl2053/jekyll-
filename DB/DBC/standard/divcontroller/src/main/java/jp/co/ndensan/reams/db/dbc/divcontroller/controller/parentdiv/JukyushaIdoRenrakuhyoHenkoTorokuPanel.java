@@ -5,27 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoShinkiTorokuPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoGemmenGengakuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoHyojunFutanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoKihonJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoKokiKoreiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoKokuhoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoKyotakuServicePlanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoNijiyoboJigyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoRiyoshaFutanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoRojinHokenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JukyushaIdoRenrakuhyoYokaigoninteiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 受給者異動連絡票変更登録 受給者異動連絡票のコントローラークラスです。

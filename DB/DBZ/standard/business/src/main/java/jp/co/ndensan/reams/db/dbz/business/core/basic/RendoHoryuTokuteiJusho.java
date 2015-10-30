@@ -22,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 連動保留特定住所マスタを管理するクラスです。
  */
-public class RendoHoryuTokuteiJusho extends ParentModelBase<RendoHoryuTokuteiJushoIdentifier, DbT7023RendoHoryuTokuteiJushoEntity, RendoHoryuTokuteiJusho> implements Serializable {
+public class RendoHoryuTokuteiJusho extends 
+        ParentModelBase<RendoHoryuTokuteiJushoIdentifier, 
+        DbT7023RendoHoryuTokuteiJushoEntity, RendoHoryuTokuteiJusho> implements Serializable {
 
     private final DbT7023RendoHoryuTokuteiJushoEntity entity;
     private final RendoHoryuTokuteiJushoIdentifier id;
@@ -236,7 +238,7 @@ public class RendoHoryuTokuteiJusho extends ParentModelBase<RendoHoryuTokuteiJus
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7023RendoHoryuTokuteiJushoEntity entity;
         private final RendoHoryuTokuteiJushoIdentifier id;
 

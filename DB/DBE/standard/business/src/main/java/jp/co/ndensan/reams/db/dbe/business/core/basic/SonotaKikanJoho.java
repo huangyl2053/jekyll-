@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * その他機関情報を管理するクラスです。
  */
-public class SonotaKikanJoho extends ParentModelBase<SonotaKikanJohoIdentifier, DbT5914SonotaKikanJohoEntity, SonotaKikanJoho> implements Serializable {
+public class SonotaKikanJoho
+        extends ParentModelBase<SonotaKikanJohoIdentifier, DbT5914SonotaKikanJohoEntity, SonotaKikanJoho>
+        implements Serializable {
 
     private final DbT5914SonotaKikanJohoEntity entity;
     private final SonotaKikanJohoIdentifier id;
@@ -187,7 +189,7 @@ public class SonotaKikanJoho extends ParentModelBase<SonotaKikanJohoIdentifier, 
      *
      * @return 廃止フラグ
      */
-    public boolean get廃止フラグ() {
+    public boolean is廃止フラグ() {
         return entity.getHaishiFlag();
     }
 
@@ -262,7 +264,7 @@ public class SonotaKikanJoho extends ParentModelBase<SonotaKikanJohoIdentifier, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L; // TODO serialVersionUIDを生成してください
         private final DbT5914SonotaKikanJohoEntity entity;
         private final SonotaKikanJohoIdentifier id;
 

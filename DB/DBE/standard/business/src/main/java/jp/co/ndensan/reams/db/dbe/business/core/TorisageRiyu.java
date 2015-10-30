@@ -23,7 +23,7 @@ public class TorisageRiyu {
     static {
         EMPTY = new TorisageRiyu(RString.EMPTY);
     }
-    private final RString torisageRiyu;
+    private final RString torisageRiy;
 
     /**
      * 指定のRStringをもったTorisageRiyuを生成します。
@@ -31,7 +31,7 @@ public class TorisageRiyu {
      * @param 取下げ理由 取下げ理由
      */
     public TorisageRiyu(RString 取下げ理由) {
-        this.torisageRiyu = isNull(取下げ理由) ? RString.EMPTY : 取下げ理由;
+        this.torisageRiy = isNull(取下げ理由) ? RString.EMPTY : 取下げ理由;
     }
 
     private static boolean isNull(Object target) {
@@ -44,7 +44,7 @@ public class TorisageRiyu {
      * @return 取下げ理由
      */
     public RString asRString() {
-        return this.torisageRiyu;
+        return this.torisageRiy;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TorisageRiyu {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.torisageRiyu);
+        hash = 97 * hash + Objects.hashCode(this.torisageRiy);
         return hash;
     }
 
@@ -67,6 +67,6 @@ public class TorisageRiyu {
     }
 
     private boolean hasSameValue(TorisageRiyu target) {
-        return target.asRString().equals(this.torisageRiyu);
+        return target.asRString().equals(this.torisageRiy);
     }
 }

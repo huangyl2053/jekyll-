@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定申請で使用する被保険者区分の列挙型です。
+ * 要介護認定申請で使用する被保険者区分の列挙型クラスです。
  *
  * @author N8235 船山 洋介
  */
@@ -20,17 +20,17 @@ public enum HihokenshaKubunCode {
 
     /**
      * 第１号被保険者 <br />
-     * コード : 1
+     * コード : 1。
      */
     第１号被保険者("1"),
     /**
      * 第２号被保険者 <br />
-     * コード : 2
+     * コード : 2。
      */
     第２号被保険者("2"),
     /**
      * その他 <br />
-     * コード : 3
+     * コード : 3。
      */
     その他("3");
 

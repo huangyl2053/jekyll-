@@ -18,7 +18,7 @@ public class ChohyoKofuRirekiIDValidator {
     private final ChohyoKofuRirekiID chohyoKofuRirekiID;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param chohyoKofuRirekiID 帳票交付履歴ID
      */

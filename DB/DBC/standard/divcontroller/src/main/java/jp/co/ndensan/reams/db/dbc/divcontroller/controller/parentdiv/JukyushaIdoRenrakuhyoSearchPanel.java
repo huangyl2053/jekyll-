@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0040011.Juky
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0040011.JukyushaIdoRenrakuhyoSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0040011.dgJukyushaIdoRenrakuhyoSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -22,12 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class JukyushaIdoRenrakuhyoSearchPanel {
 
-    final static String IsDeletedDataSearch = "isDeletedDataSearch";
-    final static String DeleteFlg = "削除";
-
+//    private static final  RString IS_DELETE_DATA_SEARCH = new RString("isDeletedDataSearch");
+//    private static final  RString DELETE_FLG = new RString("削除");
     /**
-     * 検索パネルが読み込まれた時は、検索項目をEMPTYで初期化し、検索結果一覧を閉じた状態にします。</br>
-     * 異動日の初期値をあらかじめセットしておきます
+     * 検索パネルが読み込まれた時は、検索項目をEMPTYで初期化し、検索結果一覧を閉じた状態にします。 異動日の初期値をあらかじめセットしておきます。
      *
      * @param searchPanel
      * @return ResponseData
@@ -103,8 +99,8 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
 
     private dgJukyushaIdoRenrakuhyoSearchResult_Row createRow() {
 
-        dgJukyushaIdoRenrakuhyoSearchResult_Row rowJukyushaIdoRenrakuhyoSearchResultList;
-        rowJukyushaIdoRenrakuhyoSearchResultList = new dgJukyushaIdoRenrakuhyoSearchResult_Row();
+        dgJukyushaIdoRenrakuhyoSearchResult_Row resultList;
+        resultList = new dgJukyushaIdoRenrakuhyoSearchResult_Row();
 
 //        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultIdoDate(setWareki(resultIdoDate));
 //        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtRenrakuhyoIdoKubun(renrakuhyoIdoKubun);
@@ -113,11 +109,11 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
 //        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultHihoName(resultHihoName);
 //        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultSendYM(setWareki(resultSendYM).substring(0, 6));
 //        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtDeleteFlg(deleteFlg);
-        return rowJukyushaIdoRenrakuhyoSearchResultList;
+        return resultList;
     }
 
-    private RString setWareki(RString wareki) {
-        FlexibleDate warekiYmd = new FlexibleDate(wareki);
-        return warekiYmd.wareki().toDateString();
-    }
+//    private RString setWareki(RString wareki) {
+//        FlexibleDate warekiYmd = new FlexibleDate(wareki);
+//        return warekiYmd.wareki().toDateString();
+//    }
 }

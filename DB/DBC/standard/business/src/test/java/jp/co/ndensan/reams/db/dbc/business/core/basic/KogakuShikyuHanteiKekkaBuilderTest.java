@@ -128,13 +128,13 @@ public class KogakuShikyuHanteiKekkaBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の再送付フラグは_設定した値と同じ再送付フラグを返す() {
             business = sut.set再送付フラグ(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_再送付フラグ).build();
-            assertThat(business.get再送付フラグ(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_再送付フラグ));
+            assertThat(business.is再送付フラグ(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_再送付フラグ));
         }
 
         @Test
         public void 戻り値の判定結果送付不要フラグは_設定した値と同じ判定結果送付不要フラグを返す() {
             business = sut.set判定結果送付不要フラグ(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_判定結果送付不要フラグ).build();
-            assertThat(business.get判定結果送付不要フラグ(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_判定結果送付不要フラグ));
+            assertThat(business.is判定結果送付不要フラグ(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_判定結果送付不要フラグ));
         }
 
         @Test

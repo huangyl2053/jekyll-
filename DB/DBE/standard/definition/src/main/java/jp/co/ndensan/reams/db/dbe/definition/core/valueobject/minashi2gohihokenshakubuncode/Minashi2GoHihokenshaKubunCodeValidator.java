@@ -18,7 +18,7 @@ public class Minashi2GoHihokenshaKubunCodeValidator {
     private final Minashi2GoHihokenshaKubunCode minashi2GoHihokenshaKubunCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param minashi2GoHihokenshaKubunCode みなし2号者の被保険者区分
      */

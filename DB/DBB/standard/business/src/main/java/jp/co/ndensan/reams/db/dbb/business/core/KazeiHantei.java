@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -24,21 +25,21 @@ public class KazeiHantei {
 
     }
 
-    public String kazeiHantei(HokenryoDankaiInput hokenryoDankaiInput) {
+    public RString kazeiHantei(HokenryoDankaiInput hokenryoDankaiInput) {
 
-        String HokenryoDankai = null;
+        RString hokenryoDankai = null;
 
         for (IKazeiHantei kazeihantei : kazeiHanteiList) {
             if (kazeihantei.isMatch(hokenryoDankaiInput)) {
-                HokenryoDankai = kazeihantei.HokenryoDankaiShiyo(hokenryoDankaiInput);
+                hokenryoDankai = kazeihantei.hokenryoDankaiShiyo(hokenryoDankaiInput);
                 if (hokenryoDankaiInput.getFukaKonkyo().getSetaiKazeiKubun().equals("課税")) {
-                    HokenryoDankai = HokenryoDankaiHosei.HokenryoDankaiHosei(hokenryoDankaiInput, HokenryoDankai);
+                    hokenryoDankai = HokenryoDankaiHosei.hokenryoDankaiHosei(hokenryoDankaiInput, hokenryoDankai);
                 }
                 break;
             } else {
-                kazeihantei.HokenryoDankaiShiyoShinai(hokenryoDankaiInput);
+                kazeihantei.hokenryoDankaiShiyoShinai(hokenryoDankaiInput);
             }
         }
-        return HokenryoDankai;
+        return hokenryoDankai;
     }
 }

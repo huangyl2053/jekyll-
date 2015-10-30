@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 関連被保険者番号を管理するクラスです。
  */
-public class KanrenHihokenshaNo extends ParentModelBase<KanrenHihokenshaNoIdentifier, DbT7054KanrenHihokenshaNoEntity, KanrenHihokenshaNo> implements Serializable {
+public class KanrenHihokenshaNo extends 
+        ParentModelBase<KanrenHihokenshaNoIdentifier, 
+        DbT7054KanrenHihokenshaNoEntity, KanrenHihokenshaNo> implements Serializable {
 
     private final DbT7054KanrenHihokenshaNoEntity entity;
     private final KanrenHihokenshaNoIdentifier id;
@@ -179,7 +181,7 @@ public class KanrenHihokenshaNo extends ParentModelBase<KanrenHihokenshaNoIdenti
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7054KanrenHihokenshaNoEntity entity;
         private final KanrenHihokenshaNoIdentifier id;
 

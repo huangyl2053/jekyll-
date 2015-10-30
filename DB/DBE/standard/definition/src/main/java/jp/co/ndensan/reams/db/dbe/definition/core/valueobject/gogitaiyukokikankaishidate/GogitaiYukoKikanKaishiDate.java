@@ -19,7 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 合議体有効期間開始年月日を表すクラスです。
  *
  */
-public class GogitaiYukoKikanKaishiDate implements IValueObject<FlexibleDate>, Comparable<GogitaiYukoKikanKaishiDate>, IDbColumnMappable, IValidatable {
+public class GogitaiYukoKikanKaishiDate implements IValueObject<FlexibleDate>, Comparable<GogitaiYukoKikanKaishiDate>, 
+        IDbColumnMappable, IValidatable {
 
     private final FlexibleDate 開始年月日;
 

@@ -28,7 +28,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 転出保留対象者を管理するクラスです。
  */
-public class TenshutsuHoryuTaishosha extends ModelBase<TenshutsuHoryuTaishoshaIdentifier, DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha> implements Serializable {
+public class TenshutsuHoryuTaishosha extends 
+        ModelBase<TenshutsuHoryuTaishoshaIdentifier, 
+        DbT1011TenshutsuHoryuTaishoshaEntity, TenshutsuHoryuTaishosha> 
+        implements Serializable {
 
     private final DbT1011TenshutsuHoryuTaishoshaEntity entity;
     private final TenshutsuHoryuTaishoshaIdentifier id;

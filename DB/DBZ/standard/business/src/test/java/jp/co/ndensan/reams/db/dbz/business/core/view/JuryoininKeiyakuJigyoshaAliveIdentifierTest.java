@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link JuryoininKeiyakuJigyoshaAliveIdentifier}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class JuryoininKeiyakuJigyoshaAliveIdentifierTest extends DbzTestBase {
 

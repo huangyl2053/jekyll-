@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 広域保険者の運用形態の区分です。
+ * 広域保険者の運用形態の区分クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -20,17 +20,17 @@ public enum UnyoKeitaiKubun {
 
     /**
      * 単独<br/>
-     * コード:"1"
+     * コード:"1"。
      */
     単独("1"),
     /**
      * 広域連合<br/>
-     * コード:"2"
+     * コード:"2"。
      */
     広域連合("2"),
     /**
      * 一部事務組合<br/>
-     * コード:"3"
+     * コード:"3"。
      */
     一部事務組合("3");
     private final RString theCode;

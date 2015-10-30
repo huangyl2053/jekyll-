@@ -23,12 +23,14 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 
 /**
  * 合併情報のデータアクセスクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class GappeiJohoDacTest extends DbzTestDacBase {
 

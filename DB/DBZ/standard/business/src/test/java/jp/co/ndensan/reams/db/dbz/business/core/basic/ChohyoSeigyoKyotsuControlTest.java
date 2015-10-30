@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControlEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7066ChohyoSeigyoKyotsuControlEntityGenerator;
@@ -19,6 +16,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -26,6 +24,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ChohyoSeigyoKyotsuControl}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ChohyoSeigyoKyotsuControlTest extends DbzTestBase {
 
@@ -129,8 +128,8 @@ public class ChohyoSeigyoKyotsuControlTest extends DbzTestBase {
         }
 
         @Test
-        public void get共通画面使用有無は_entityが持つ共通画面使用有無を返す() {
-            assertThat(sut.get共通画面使用有無(), is(ChohyoSeigyoKyotsuControlEntity.getKyotsuGamenShiyoUmu()));
+        public void is共通画面使用有無は_entityが持つ共通画面使用有無を返す() {
+            assertThat(sut.is共通画面使用有無(), is(ChohyoSeigyoKyotsuControlEntity.getKyotsuGamenShiyoUmu()));
         }
 
         @Test

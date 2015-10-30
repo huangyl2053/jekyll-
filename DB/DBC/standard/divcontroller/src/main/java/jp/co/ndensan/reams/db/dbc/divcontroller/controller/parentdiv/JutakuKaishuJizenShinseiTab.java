@@ -5,12 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuJizenShinseiTabDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgJutakuKaishuJizenShinseiDetail_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,7 +37,7 @@ public class JutakuKaishuJizenShinseiTab {
     }
 
     private void set住宅改修申請内容(JutakuKaishuJizenShinseiTabDiv panel) {
-        int rowId = 0;
+//        int rowId = 0;
 //        ShinseishaInfo.setData(panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseisha(), rowId);
 //        panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
 //        KozaPayment.setData(panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getKozaPayment(), rowId);
@@ -90,30 +87,28 @@ public class JutakuKaishuJizenShinseiTab {
         panel.getTabJizenShinsei().getTplJizenShinseiResult().getTxtShoninCondition().setValue(cg.getAsRString("shoninCondition"));
     }
 
-    private void set住宅改修明細List(JutakuKaishuJizenShinseiTabDiv panel) {
-        panel.getTabJizenShinsei().getTplJizenShinseiContents()
-                .getDgJutakuKaishuJizenShinseiDetail().setDataSource(get住宅改修明細List());
-    }
-
-    private List<dgJutakuKaishuJizenShinseiDetail_Row> get住宅改修明細List() {
-        List<dgJutakuKaishuJizenShinseiDetail_Row> list = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("JutakuKaishuDetailList.yml"));
-        for (Map info : targetSource) {
-            list.add(toDgJutakuKaishuJizenShinseiDetail_Row(info));
-        }
-        return list;
-    }
-
-    private static dgJutakuKaishuJizenShinseiDetail_Row toDgJutakuKaishuJizenShinseiDetail_Row(Map map) {
-        ControlGenerator cg = new ControlGenerator(map);
-
-        dgJutakuKaishuJizenShinseiDetail_Row row = new dgJutakuKaishuJizenShinseiDetail_Row(
-                cg.getAsTextBoxDate("chakkoDueDate"),
-                cg.getAsTextBoxDate("kanseiDueDate"),
-                cg.getAsTextBoxNum("estimatedAmount"),
-                cg.getAsRString("kaishuJigyoshaName"),
-                cg.getAsRString("kaishuTaishoAddress"),
-                cg.getAsRString("kaishuContents"));
-        return row;
-    }
+//    private void set住宅改修明細List(JutakuKaishuJizenShinseiTabDiv panel) {
+//        panel.getTabJizenShinsei().getTplJizenShinseiContents()
+//                .getDgJutakuKaishuJizenShinseiDetail().setDataSource(get住宅改修明細List());
+//    }
+//    private List<dgJutakuKaishuJizenShinseiDetail_Row> get住宅改修明細List() {
+//        List<dgJutakuKaishuJizenShinseiDetail_Row> list = new ArrayList<>();
+//        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("JutakuKaishuDetailList.yml"));
+//        for (Map info : targetSource) {
+//            list.add(toDgJutakuKaishuJizenShinseiDetail_Row(info));
+//        }
+//        return list;
+//    }
+//    private static dgJutakuKaishuJizenShinseiDetail_Row toDgJutakuKaishuJizenShinseiDetail_Row(Map map) {
+//        ControlGenerator cg = new ControlGenerator(map);
+//
+//        dgJutakuKaishuJizenShinseiDetail_Row row = new dgJutakuKaishuJizenShinseiDetail_Row(
+//                cg.getAsTextBoxDate("chakkoDueDate"),
+//                cg.getAsTextBoxDate("kanseiDueDate"),
+//                cg.getAsTextBoxNum("estimatedAmount"),
+//                cg.getAsRString("kaishuJigyoshaName"),
+//                cg.getAsRString("kaishuTaishoAddress"),
+//                cg.getAsRString("kaishuContents"));
+//        return row;
+//    }
 }

@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 要介護認定主治医意見書意見項目を管理するクラスです。
  */
-public class ShujiiIkenshoIkenItem extends ParentModelBase<ShujiiIkenshoIkenItemIdentifier, DbT5304ShujiiIkenshoIkenItemEntity, ShujiiIkenshoIkenItem> implements Serializable {
+public class ShujiiIkenshoIkenItem extends 
+        ParentModelBase<ShujiiIkenshoIkenItemIdentifier, 
+        DbT5304ShujiiIkenshoIkenItemEntity, ShujiiIkenshoIkenItem> implements Serializable {
 
     private final DbT5304ShujiiIkenshoIkenItemEntity entity;
     private final ShujiiIkenshoIkenItemIdentifier id;
@@ -185,7 +187,7 @@ public class ShujiiIkenshoIkenItem extends ParentModelBase<ShujiiIkenshoIkenItem
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5304ShujiiIkenshoIkenItemEntity entity;
         private final ShujiiIkenshoIkenItemIdentifier id;
 

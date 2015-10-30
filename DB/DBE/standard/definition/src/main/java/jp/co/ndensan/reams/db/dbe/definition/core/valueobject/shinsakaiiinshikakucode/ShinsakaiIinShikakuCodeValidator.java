@@ -18,7 +18,7 @@ public class ShinsakaiIinShikakuCodeValidator {
     private final ShinsakaiIinShikakuCode shinsakaiIinShikakuCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shinsakaiIinShikakuCode 介護認定審査会委員資格コード
      */

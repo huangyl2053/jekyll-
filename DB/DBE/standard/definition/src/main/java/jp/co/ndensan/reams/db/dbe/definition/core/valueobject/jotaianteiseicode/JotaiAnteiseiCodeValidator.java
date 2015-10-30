@@ -18,7 +18,7 @@ public class JotaiAnteiseiCodeValidator {
     private final JotaiAnteiseiCode jotaiAnteiseiCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param jotaiAnteiseiCode 要介護認定状態の安定性コード
      */

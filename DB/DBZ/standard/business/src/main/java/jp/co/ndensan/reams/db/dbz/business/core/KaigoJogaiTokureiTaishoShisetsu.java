@@ -20,7 +20,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護除外住所地特例対象施設を管理するクラスです。
  */
-public class KaigoJogaiTokureiTaishoShisetsu extends ModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, KaigoJogaiTokureiTaishoShisetsu> implements Serializable {
+public class KaigoJogaiTokureiTaishoShisetsu extends
+        ModelBase<KaigoJogaiTokureiTaishoShisetsuIdentifier, 
+        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity, 
+        KaigoJogaiTokureiTaishoShisetsu>
+        implements Serializable {
 
     private final DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity;
     private final KaigoJogaiTokureiTaishoShisetsuIdentifier id;

@@ -19,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -29,6 +30,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShujiiIkenshoJohoDacTest {
 
     private static ShujiiIkenshoJohoDac sut;

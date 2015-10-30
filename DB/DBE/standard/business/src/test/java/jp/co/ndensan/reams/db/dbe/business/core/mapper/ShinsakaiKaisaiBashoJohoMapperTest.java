@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
@@ -27,6 +28,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShinsakaiKaisaiBashoJohoMapperTest {
 
     private static ShinsakaiKaisaiBashoCode 開催場所コード_A001 = new ShinsakaiKaisaiBashoCode(new RString("A001"));

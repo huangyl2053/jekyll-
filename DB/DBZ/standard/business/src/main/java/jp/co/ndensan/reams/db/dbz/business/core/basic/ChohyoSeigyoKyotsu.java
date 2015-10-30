@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 帳票制御共通を管理するクラスです。
  */
-public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, DbT7065ChohyoSeigyoKyotsuEntity, ChohyoSeigyoKyotsu> implements Serializable {
+public class ChohyoSeigyoKyotsu extends
+        ModelBase<ChohyoSeigyoKyotsuIdentifier, DbT7065ChohyoSeigyoKyotsuEntity, ChohyoSeigyoKyotsu>
+        implements Serializable {
 
     private final DbT7065ChohyoSeigyoKyotsuEntity entity;
     private final ChohyoSeigyoKyotsuIdentifier id;
@@ -114,7 +116,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 住所編集都道府県名表示有無
      */
-    public boolean get住所編集都道府県名表示有無() {
+    public boolean is住所編集都道府県名表示有無() {
         return entity.getJushoHenshuTodoufukenMeiHyojiUmu();
     }
 
@@ -123,7 +125,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 住所編集郡名表示有無
      */
-    public boolean get住所編集郡名表示有無() {
+    public boolean is住所編集郡名表示有無() {
         return entity.getJushoHenshuGunMeiHyojiUmu();
     }
 
@@ -132,7 +134,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 住所編集市町村名表示有無
      */
-    public boolean get住所編集市町村名表示有無() {
+    public boolean is住所編集市町村名表示有無() {
         return entity.getJushoHenshuShichosonMeiHyojiUmu();
     }
 
@@ -141,7 +143,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 住所編集町域編集方法
      */
-    public RString get住所編集町域編集方法() {
+    public RString is住所編集町域編集方法() {
         return entity.getJushoHenshuChoikiHenshuHoho();
     }
 
@@ -150,7 +152,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 住所編集方書表示有無
      */
-    public boolean get住所編集方書表示有無() {
+    public boolean is住所編集方書表示有無() {
         return entity.getJushoHenshuKatagakiHyojiUmu();
     }
 
@@ -159,7 +161,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 世帯主表示有無
      */
-    public boolean get世帯主表示有無() {
+    public boolean is世帯主表示有無() {
         return entity.getSetainushiHyojiUmu();
     }
 
@@ -168,7 +170,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return カスタマバーコード使用有無
      */
-    public boolean getカスタマバーコード使用有無() {
+    public boolean isカスタマバーコード使用有無() {
         return entity.getCustomerBarCodeShiyoUmu();
     }
 
@@ -222,7 +224,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 口座マスク有無
      */
-    public boolean get口座マスク有無() {
+    public boolean is口座マスク有無() {
         return entity.getKozaMaskUmu();
     }
 
@@ -240,7 +242,7 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
      *
      * @return 代行プリント有無
      */
-    public boolean get代行プリント有無() {
+    public boolean is代行プリント有無() {
         return entity.getDaikoPrintUmu();
     }
 
@@ -321,23 +323,23 @@ public class ChohyoSeigyoKyotsu extends ModelBase<ChohyoSeigyoKyotsuIdentifier, 
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ChohyoSeigyoKyotsu modifiedModel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<ChohyoSeigyoKyotsuControl> getChohyoSeigyoKyotsuControlList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public List<ChohyoSeigyoHanyo> getChohyoSeigyoHanyoList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ChohyoSeigyoKyotsu modified() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {

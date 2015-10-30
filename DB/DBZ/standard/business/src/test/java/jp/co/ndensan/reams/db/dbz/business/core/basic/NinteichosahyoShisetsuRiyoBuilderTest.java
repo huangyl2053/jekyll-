@@ -79,7 +79,7 @@ public class NinteichosahyoShisetsuRiyoBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の施設利用フラグは_設定した値と同じ施設利用フラグを返す() {
             business = sut.set施設利用フラグ(DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_施設利用フラグ).build();
-            assertThat(business.get施設利用フラグ(), is(DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_施設利用フラグ));
+            assertThat(business.is施設利用フラグ(), is(DbT5210NinteichosahyoShisetsuRiyoEntityGenerator.DEFAULT_施設利用フラグ));
         }
 
     }

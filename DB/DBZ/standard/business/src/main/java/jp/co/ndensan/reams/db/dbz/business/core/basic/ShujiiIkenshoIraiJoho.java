@@ -20,7 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 主治医意見書作成依頼情報を管理するクラスです。
  */
-public class ShujiiIkenshoIraiJoho extends ParentModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho> implements Serializable {
+public class ShujiiIkenshoIraiJoho extends
+        ParentModelBase<ShujiiIkenshoIraiJohoIdentifier, DbT5301ShujiiIkenshoIraiJohoEntity, ShujiiIkenshoIraiJoho> implements Serializable {
 
     private final DbT5301ShujiiIkenshoIraiJohoEntity entity;
     private final ShujiiIkenshoIraiJohoIdentifier id;
@@ -240,7 +241,7 @@ public class ShujiiIkenshoIraiJoho extends ParentModelBase<ShujiiIkenshoIraiJoho
      *
      * @return 認定情報提供希望フラグ
      */
-    public boolean get認定情報提供希望フラグ() {
+    public boolean is認定情報提供希望フラグ() {
         return entity.getNinteiJohoTeikyoKiboFlag();
     }
 
@@ -258,7 +259,7 @@ public class ShujiiIkenshoIraiJoho extends ParentModelBase<ShujiiIkenshoIraiJoho
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -333,7 +334,7 @@ public class ShujiiIkenshoIraiJoho extends ParentModelBase<ShujiiIkenshoIraiJoho
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5301ShujiiIkenshoIraiJohoEntity entity;
         private final ShujiiIkenshoIraiJohoIdentifier id;
 

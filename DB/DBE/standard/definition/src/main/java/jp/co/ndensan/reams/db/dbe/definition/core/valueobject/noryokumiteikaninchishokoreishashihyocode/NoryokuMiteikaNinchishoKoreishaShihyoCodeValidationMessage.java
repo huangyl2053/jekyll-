@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(NoryokuMiteikaNinchishoKoreishaShihyoCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeValidationMessage implement
     public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "運動能力未低下認知症高齢者の指標コードを指定してください。");
         private final int no;

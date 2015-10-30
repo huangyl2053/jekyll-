@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.parentdiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.KanryoMessagePnlDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 証回収管理完了メッセージパネルDivを制御します。

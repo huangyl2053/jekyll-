@@ -21,11 +21,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link KogakuShikyuShinsei}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KogakuShikyuShinseiTest extends DbcTestBase {
 
     private static DbT3056KogakuShikyuShinseiEntity KogakuShikyuShinseiEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

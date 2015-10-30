@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class IkenshoShosaiMain {
 
+    private static final int I = 100;
+
     /**
      * 意見書取込み対象者一覧データグリッド上の対象者選択時の処理を表します。
      *
@@ -35,7 +37,7 @@ public class IkenshoShosaiMain {
         ResponseData<IkenshoShosaiMainDiv> response = new ResponseData<>();
         int iSelectId = panel2.getDgIkenshoTorikomiKekka().getClickedRowId();
         setIkenshoKekkaShosaiData(panel, panel2, iSelectId);
-        panel.getIkenshoShosaiImageHyoji().getTxtHyojiBairitsu().setValue(new Decimal(100));
+        panel.getIkenshoShosaiImageHyoji().getTxtHyojiBairitsu().setValue(new Decimal(I));
 
         response.data = panel;
         return response;

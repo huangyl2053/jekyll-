@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 /**
  * 給付実績基本を管理するクラスです。
  */
-public class KyufujissekiKihon extends ModelBase<KyufujissekiKihonIdentifier, DbT3017KyufujissekiKihonEntity, KyufujissekiKihon> implements Serializable {
+public class KyufujissekiKihon 
+extends ModelBase<KyufujissekiKihonIdentifier, 
+        DbT3017KyufujissekiKihonEntity, 
+        KyufujissekiKihon> implements Serializable {
 
     private final DbT3017KyufujissekiKihonEntity entity;
     private final KyufujissekiKihonIdentifier id;
@@ -1005,7 +1008,7 @@ public class KyufujissekiKihon extends ModelBase<KyufujissekiKihonIdentifier, Db
      *
      * @return 保険者保有給付実績情報削除済フラグ
      */
-    public boolean get保険者保有給付実績情報削除済フラグ() {
+    public boolean is保険者保有給付実績情報削除済フラグ() {
         return entity.getHokenshaHoyuKyufujissekiJohoSakujoFlag();
     }
 

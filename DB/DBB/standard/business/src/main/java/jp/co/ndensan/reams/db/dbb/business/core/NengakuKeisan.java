@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.core.I端数調整;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -20,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class NengakuKeisan {
 
     private List<NengakuHokenryoHoji> nengakuHokenryoHojiList = new ArrayList<>();
+    private static final int TAISHOTSUKI = 3;
+    private static final Decimal NENTSUKISU = new Decimal(12);
 
     public 年額計算Output calc年額保険料(保険料段階判定input input) {
 
@@ -29,23 +30,23 @@ public class NengakuKeisan {
         // ①-1 集計
         //List<NengakuHokenryoHoji> nengakuhokenryohoji = new ArrayList<>();
         //NengakuHokenryoHoji nengakuhokenryohoji = new NengakuHokenryoHoji();
-        Map<String, HokenryoDankai> hokenryoDankaiMap = input.get年額賦課根拠().createHokenryoDankaiMap();
-        Map<String, String> rankMap = input.get年額賦課根拠().createRankMap();
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = input.get年額賦課根拠().createHokenryoDankaiMap();
+        Map<RString, RString> rankMap = input.get年額賦課根拠().createRankMap();
 
-        for (String tsuki : hokenryoDankaiMap.keySet()) {
-            if (KikannaiShikakuUmu(input, tsuki)) {
-                DankaiShukei(hokenryoDankaiMap.get(tsuki).getSystemDankai(), rankMap.get(tsuki));
+        for (RString tsuki : hokenryoDankaiMap.keySet()) {
+            if (kikannaiShikakuUmu(input, tsuki)) {
+                dankaiShukei(hokenryoDankaiMap.get(tsuki).getSystemDankai(), rankMap.get(tsuki));
             }
         }
 
         // ①-2 年額保険料算出
         Decimal hokenryoNengaku;
-        hokenryoNengaku = NengakuKeisan(input);
+        hokenryoNengaku = nengakuKeisan(input);
 
         // ②端数処理
         端数調整Factory 端数調整factory = new 端数調整Factory();
         I端数調整 端数調整 = 端数調整factory.getIncetance(input);
-        hokenryoNengaku = 端数調整.Calc端数(hokenryoNengaku);
+        hokenryoNengaku = 端数調整.calc端数(hokenryoNengaku);
 
         // ③出力データ作成
         output = new 年額計算Output();
@@ -55,26 +56,26 @@ public class NengakuKeisan {
         return output;
     }
 
-    private boolean KikannaiShikakuUmu(保険料段階判定input input, String taishotsuki) {
+    private boolean kikannaiShikakuUmu(保険料段階判定input input, RString taishotsuki) {
 
         boolean result = false;
         Calendar taishoYMD = Calendar.getInstance();
         Calendar shutokuYMD = Calendar.getInstance();
         Calendar soshitsuYMD = Calendar.getInstance();
 
-        if (Integer.parseInt(taishotsuki) > 3) {
-            taishoYMD.set(Integer.parseInt(input.get賦課年度()), Integer.parseInt(taishotsuki), 1);
+        if (Integer.parseInt(taishotsuki.toString()) > TAISHOTSUKI) {
+            taishoYMD.set(Integer.parseInt(String.valueOf(input.get賦課年度())), Integer.parseInt(taishotsuki.toString()), 1);
         } else {
-            taishoYMD.set(Integer.parseInt(input.get賦課年度()) + 1, Integer.parseInt(taishotsuki), 1);
+            taishoYMD.set(Integer.parseInt(String.valueOf(input.get賦課年度())) + 1, Integer.parseInt(taishotsuki.toString()), 1);
         }
 
         //shutokuYMD.setTime(input.get年額賦課根拠().get資格取得日());
-        shutokuYMD.set(input.get年額賦課根拠().get資格取得日().getYearValue(),input.get年額賦課根拠().get資格取得日().getMonthValue(),1);
+        shutokuYMD.set(input.get年額賦課根拠().get資格取得日().getYearValue(), input.get年額賦課根拠().get資格取得日().getMonthValue(), 1);
         //shutokuYMD.add(Calendar.MONTH, 1);
 
         if (input.get年額賦課根拠().get資格喪失日() != null) {
             //soshitsuYMD.setTime(input.get年額賦課根拠().get資格喪失日());
-            soshitsuYMD.set(input.get年額賦課根拠().get資格喪失日().getYearValue(),input.get年額賦課根拠().get資格喪失日().getMonthValue(),1);
+            soshitsuYMD.set(input.get年額賦課根拠().get資格喪失日().getYearValue(), input.get年額賦課根拠().get資格喪失日().getMonthValue(), 1);
             if (shutokuYMD.compareTo(taishoYMD) <= 0
                     && taishoYMD.compareTo(soshitsuYMD) < 0) {
                 result = true;
@@ -88,7 +89,7 @@ public class NengakuKeisan {
         return result;
     }
 
-    private void DankaiShukei(String hokenryoDankai, String rank) {
+    private void dankaiShukei(RString hokenryoDankai, RString rank) {
 
         NengakuHokenryoHoji nengakuhokenryohoji;
         int idx;
@@ -124,27 +125,26 @@ public class NengakuKeisan {
 
     }
 
-    private Decimal NengakuKeisan(保険料段階判定input input) {
+    private Decimal nengakuKeisan(保険料段階判定input input) {
 
         Decimal result = new Decimal(0);
         Decimal kosuu;
-        Decimal nentsukisu = new Decimal(12);
         Decimal wariai;
 
         for (NengakuHokenryoHoji nengakuHokenryoHoji : nengakuHokenryoHojiList) {
             kosuu = new Decimal(nengakuHokenryoHoji.getKosuu());
-            wariai = kosuu.divide(nentsukisu);
-            result = result.add(KijunNengakuShutoku(input.get年額制御情報(), nengakuHokenryoHoji).multiply(wariai));
+            wariai = kosuu.divide(NENTSUKISU);
+            result = result.add(kijunNengakuShutoku(input.get年額制御情報(), nengakuHokenryoHoji).multiply(wariai));
 
         }
         return result;
     }
 
-    private Decimal KijunNengakuShutoku(NengakuSeigyoJoho seigyoJoho, NengakuHokenryoHoji nengakuHokenryoHoji) {
+    private Decimal kijunNengakuShutoku(NengakuSeigyoJoho seigyoJoho, NengakuHokenryoHoji nengakuHokenryoHoji) {
 
-        String rank;
+        RString rank;
         if (nengakuHokenryoHoji.getRank() == null || nengakuHokenryoHoji.getRank().isEmpty()) {
-            rank = "1";
+            rank = new RString("1");
         } else {
             rank = nengakuHokenryoHoji.getRank();
         }
@@ -152,7 +152,7 @@ public class NengakuKeisan {
         Rank別基準金額 rankbetsuSeigyoJoho = seigyoJoho.getランク別制御情報().get(rank);
         Decimal result;
 
-        switch (nengakuHokenryoHoji.getDankai()) {
+        switch (String.valueOf(nengakuHokenryoHoji.getDankai())) {
             case "1":
                 result = rankbetsuSeigyoJoho.getランク基準金額1();
                 break;

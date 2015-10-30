@@ -154,7 +154,7 @@ public class KaigoHokensha extends ParentModelBase<KaigoHokenshaIdentifier, DbT7
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7050KaigoHokenshaEntity entity;
         private final KaigoHokenshaIdentifier id;
 

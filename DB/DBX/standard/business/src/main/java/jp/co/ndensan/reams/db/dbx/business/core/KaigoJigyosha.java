@@ -57,7 +57,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
     }
 
     /**
-     * 介護事業者情報のコンストラクタです
+     * 介護事業者情報のコンストラクタです。
      *
      * @param 事業者番号 事業者番号
      * @param 有効開始年月日 有効開始年月日
@@ -285,7 +285,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public KinyuKikanCode get銀行コード() {
-        return KinyuKikanCode.EMPTY;//relateEntity.get事業者エンティティ().getGinkoCode();
+        return KinyuKikanCode.EMPTY;
     }
 
     /**
@@ -295,7 +295,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public KinyuKikanShitenCode get支店コード() {
-        return KinyuKikanShitenCode.EMPTY;//relateEntity.get事業者エンティティ().getShitenCode();
+        return KinyuKikanShitenCode.EMPTY;
     }
 
     /**
@@ -305,7 +305,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public RString get口座種別() {
-        return RString.EMPTY;//relateEntity.get事業者エンティティ().getKozaShubetsu();
+        return RString.EMPTY;
     }
 
     /**
@@ -315,7 +315,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public RString get口座番号() {
-        return RString.EMPTY;//relateEntity.get事業者エンティティ().getKozaNo();
+        return RString.EMPTY;
     }
 
     /**
@@ -325,7 +325,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public AtenaMeisho get口座名義人() {
-        return AtenaMeisho.EMPTY;//relateEntity.get事業者エンティティ().getKozaMeiginin();
+        return AtenaMeisho.EMPTY;
     }
 
     /**
@@ -335,7 +335,7 @@ public class KaigoJigyosha implements IKaigoJigyosha {
      */
     @Override
     public AtenaKanaMeisho get口座名義人カナ() {
-        return AtenaKanaMeisho.EMPTY;//relateEntity.get事業者エンティティ().getKozaMeigininKana();
+        return AtenaKanaMeisho.EMPTY;
     }
 
     /**
@@ -916,7 +916,8 @@ public class KaigoJigyosha implements IKaigoJigyosha {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

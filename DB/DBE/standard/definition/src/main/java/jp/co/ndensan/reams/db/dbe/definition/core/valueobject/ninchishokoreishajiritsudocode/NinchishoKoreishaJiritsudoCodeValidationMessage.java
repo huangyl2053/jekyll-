@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum NinchishoKoreishaJiritsudoCodeValidationMessage implements IValidationMessage {
 
     /**
-     * コードがNullであること
+     * コードがNullであること。
      */
     コードがNullであること(NinchishoKoreishaJiritsudoCodeErrorMessage.コードがNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum NinchishoKoreishaJiritsudoCodeValidationMessage implements IValidati
     public enum NinchishoKoreishaJiritsudoCodeErrorMessage implements IMessageGettable {
 
         /**
-         * コードがNullであること
+         * コードがNullであること。
          */
         コードがNullであること(1, "エラーコードを指定してください。");
         private final int no;

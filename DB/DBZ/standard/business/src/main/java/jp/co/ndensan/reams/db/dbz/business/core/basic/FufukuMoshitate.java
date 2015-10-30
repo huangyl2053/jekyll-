@@ -27,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 不服審査申立情報を管理するクラスです。
  */
-public class FufukuMoshitate extends ParentModelBase<FufukuMoshitateIdentifier, DbT7001FufukuMoshitateEntity, FufukuMoshitate> implements Serializable {
+public class FufukuMoshitate extends
+        ParentModelBase<FufukuMoshitateIdentifier, DbT7001FufukuMoshitateEntity, FufukuMoshitate> implements Serializable {
 
     private final DbT7001FufukuMoshitateEntity entity;
     private final FufukuMoshitateIdentifier id;
@@ -313,7 +314,7 @@ public class FufukuMoshitate extends ParentModelBase<FufukuMoshitateIdentifier, 
      *
      * @return 添付書類等
      */
-    public boolean get添付書類等() {
+    public boolean is添付書類等() {
         return entity.getTempuShoruiTo();
     }
 
@@ -331,7 +332,7 @@ public class FufukuMoshitate extends ParentModelBase<FufukuMoshitateIdentifier, 
      *
      * @return 弁明書登録フラグ
      */
-    public boolean get弁明書登録フラグ() {
+    public boolean is弁明書登録フラグ() {
         return entity.getBemmeishoTorokuFlag();
     }
 

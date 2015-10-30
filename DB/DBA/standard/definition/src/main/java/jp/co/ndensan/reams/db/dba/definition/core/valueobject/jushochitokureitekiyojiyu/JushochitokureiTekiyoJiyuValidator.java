@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureikaijojiyu;
+package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureitekiyojiyu;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
@@ -19,7 +18,7 @@ public class JushochitokureiTekiyoJiyuValidator {
     private final JushochitokureiTekiyoJiyu jushochitokureiTekiyoJiyu;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param jushochitokureiTekiyoJiyu 住所地特例適用事由
      */

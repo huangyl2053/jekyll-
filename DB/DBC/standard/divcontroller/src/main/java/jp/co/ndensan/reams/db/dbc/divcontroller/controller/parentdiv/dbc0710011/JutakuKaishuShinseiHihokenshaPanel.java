@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0710011
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiHihokenshaPanelDiv;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -24,8 +23,8 @@ public class JutakuKaishuShinseiHihokenshaPanel {
      */
     public ResponseData<JutakuKaishuShinseiHihokenshaPanelDiv> onLoad(JutakuKaishuShinseiHihokenshaPanelDiv panel) {
 
-        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
-        int rowId = 0;
+//        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getKaigoAtenaInfo(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
 
         return ResponseData.of(panel).respond();

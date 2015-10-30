@@ -95,7 +95,7 @@ public final class Hokensha implements IHokensha {
      */
     public static final class Builder {
 
-        private final ShoKisaiHokenshaNo hokenshaNo;
+        private ShoKisaiHokenshaNo hokenshaNo;
         private AtenaJusho jusho = AtenaJusho.EMPTY;
         private YubinNo yubinNo = YubinNo.EMPTY;
         private TelNo telNo = TelNo.EMPTY;
@@ -121,7 +121,7 @@ public final class Hokensha implements IHokensha {
          * @param jusho {@link AtenaJusho 住所}
          * @return {@link Builder}
          */
-        public Builder jusho(AtenaJusho jusho) {
+        public Builder getJusho(AtenaJusho jusho) {
             this.jusho = jusho;
             return this;
         }
@@ -133,7 +133,7 @@ public final class Hokensha implements IHokensha {
          * @param yubinNo {@link YubinNo 郵便番号}
          * @return {@link Builder}
          */
-        public Builder yubinNo(YubinNo yubinNo) {
+        public Builder getYubinNo(YubinNo yubinNo) {
             this.yubinNo = yubinNo;
             return this;
         }
@@ -145,7 +145,7 @@ public final class Hokensha implements IHokensha {
          * @param telNo {@link TelNo 電話番号}
          * @return {@link Builder}
          */
-        public Builder telNo(TelNo telNo) {
+        public Builder getTelNo(TelNo telNo) {
             this.telNo = telNo;
             return this;
         }
@@ -157,7 +157,7 @@ public final class Hokensha implements IHokensha {
          * @param gunNamePrint {@link GunNamePrint 群名印字有無}
          * @return {@link Builder}
          */
-        public Builder gunNamePrint(GunNamePrint gunNamePrint) {
+        public Builder getGunNamePrint(GunNamePrint gunNamePrint) {
             this.gunNamePrint = gunNamePrint;
             return this;
         }
@@ -169,7 +169,7 @@ public final class Hokensha implements IHokensha {
          * @param todofukenNamePrint {@link TodofukenNamePrint 都道府県名印字有無}
          * @return {@link Builder}
          */
-        public Builder todofukenNamePrint(TodofukenNamePrint todofukenNamePrint) {
+        public Builder getTodofukenNamePrint(TodofukenNamePrint todofukenNamePrint) {
             this.todofukenNamePrint = todofukenNamePrint;
             return this;
         }
@@ -181,7 +181,7 @@ public final class Hokensha implements IHokensha {
          * @param shichosonNamePrint {@link ShichosonNamePrint 市町村名印字有無}
          * @return {@link Builder}
          */
-        public Builder shichosonNamePrint(ShichosonNamePrint shichosonNamePrint) {
+        public Builder getShichosonNamePrint(ShichosonNamePrint shichosonNamePrint) {
             this.shichosonNamePrint = shichosonNamePrint;
             return this;
         }
@@ -193,7 +193,7 @@ public final class Hokensha implements IHokensha {
          * @param katagakiPrint {@link KatagakiPrint 方書印字有無}
          * @return {@link Builder}
          */
-        public Builder katagakiPrint(KatagakiPrint katagakiPrint) {
+        public Builder getKatagakiPrint(KatagakiPrint katagakiPrint) {
             this.katagakiPrint = katagakiPrint;
             return this;
         }
@@ -204,7 +204,7 @@ public final class Hokensha implements IHokensha {
          * @param howToEditJusho {@link HowToEditJusho 住所編集方法}
          * @return {@link Builder}
          */
-        public Builder howToEditJusho(HowToEditJusho howToEditJusho) {
+        public Builder getHowToEditJusho(HowToEditJusho howToEditJusho) {
             this.howToEditJusho = howToEditJusho;
             return this;
         }

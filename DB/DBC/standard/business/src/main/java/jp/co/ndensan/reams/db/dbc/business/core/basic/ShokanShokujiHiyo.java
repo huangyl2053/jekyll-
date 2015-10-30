@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払請求食事費用を管理するクラスです。
  */
-public class ShokanShokujiHiyo extends ModelBase<ShokanShokujiHiyoIdentifier, DbT3043ShokanShokujiHiyoEntity, ShokanShokujiHiyo> implements Serializable {
+public class ShokanShokujiHiyo 
+extends ModelBase<ShokanShokujiHiyoIdentifier, 
+        DbT3043ShokanShokujiHiyoEntity, 
+        ShokanShokujiHiyo> implements Serializable {
 
     private final DbT3043ShokanShokujiHiyoEntity entity;
     private final ShokanShokujiHiyoIdentifier id;

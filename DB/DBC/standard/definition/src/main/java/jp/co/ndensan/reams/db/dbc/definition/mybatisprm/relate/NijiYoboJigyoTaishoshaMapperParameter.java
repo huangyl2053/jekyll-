@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 二次予防事業対象者を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class NijiYoboJigyoTaishoshaMapperParameter {
+public final class NijiYoboJigyoTaishoshaMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -71,4 +70,25 @@ public class NijiYoboJigyoTaishoshaMapperParameter {
             HokenshaNo 主キー1) {
         return new NijiYoboJigyoTaishoshaMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
     }
+
+    public HokenshaNo get主キー1() {
+        return 主キー1;
+    }
+
+    public HihokenshaNo get主キー2() {
+        return 主キー2;
+    }
+
+    public Decimal get主キー3() {
+        return 主キー3;
+    }
+
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    public boolean isUses主キー2() {
+        return uses主キー2;
+    }
+
 }

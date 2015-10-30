@@ -21,15 +21,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KaigoHokenNyushoShisetsuBunrui {
 
     /**
-     * 介護保険施設
+     * 介護保険施設します。
      */
     介護保険施設("11"),
     /**
-     * 住所地特例対象施設
+     * 住所地特例対象施設します。
      */
     住所地特例対象施設("12"),
     /**
-     * 適用除外施設
+     * 適用除外施設します。
      */
     適用除外施設("21");
     private final RString shubetsuCd;

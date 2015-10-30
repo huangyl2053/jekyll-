@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT7062KaigoJigyoshaDaihyoshaの項目定義クラスです
- *
+ * 介護事業者代表者テーブルの項目定義クラスです。
+ * <br/> 介護サービス事業者の代表者を管理します。
  */
 public enum DbT7062KaigoJigyoshaDaihyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -111,7 +112,7 @@ public enum DbT7062KaigoJigyoshaDaihyosha implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -120,7 +121,7 @@ public enum DbT7062KaigoJigyoshaDaihyosha implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

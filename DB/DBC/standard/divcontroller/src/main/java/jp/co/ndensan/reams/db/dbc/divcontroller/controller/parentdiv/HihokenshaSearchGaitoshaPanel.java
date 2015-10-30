@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.HihokenshaSearc
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.HihokenshaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
@@ -21,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @author n8223
  */
 public class HihokenshaSearchGaitoshaPanel {
+
+    private static final RString ENTITY = new RString("");
 
     /**
      * 福祉用具購入費支給申請 該当者一覧の情報を表示する。
@@ -63,19 +64,19 @@ public class HihokenshaSearchGaitoshaPanel {
                 "女",
                 "長野県長野市1-2-3",
                 "1111111114",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "");
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString(),
+                ENTITY.toString());
         arrayData.add(item);
         return arrayData;
 

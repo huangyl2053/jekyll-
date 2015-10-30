@@ -41,7 +41,7 @@ public class ChiikimitchakugataKaigoRojinfukushishisetsu_JininHaichiKubun implem
     private final Code code;
 
     static {
-        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;;
+        SUB_GYOMU_CODE = SubGyomuCode.DBX介護公開;
         CODE_SHUBETSU = DBXCodeShubetsu.地域密着型介護老人福祉施設_人員配置区分.getCodeShubetsu();
     }
 

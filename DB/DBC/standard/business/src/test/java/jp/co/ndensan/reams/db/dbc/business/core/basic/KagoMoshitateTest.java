@@ -168,12 +168,12 @@ public class KagoMoshitateTest extends DbcTestBase {
 
         @Test
         public void get国保連再送付有フラグは_entityが持つ国保連再送付有フラグを返す() {
-            assertThat(sut.get国保連再送付有フラグ(), is(KagoMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
+            assertThat(sut.is国保連再送付有フラグ(), is(KagoMoshitateEntity.getKokuhirenSaiSofuAriFlag()));
         }
 
         @Test
         public void get同月審査有フラグは_entityが持つ同月審査有フラグを返す() {
-            assertThat(sut.get同月審査有フラグ(), is(KagoMoshitateEntity.getDogetsuShinsaAriFlag()));
+            assertThat(sut.is同月審査有フラグ(), is(KagoMoshitateEntity.getDogetsuShinsaAriFlag()));
         }
 
         @Test

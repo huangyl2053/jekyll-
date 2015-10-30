@@ -168,7 +168,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 計画届出明細(初期表示)のデータ設定
+     * 計画届出明細(初期表示)のデータ設定。
      *
      * @param panel panel
      */
@@ -179,7 +179,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 新規届出を追加するボタン押下時の処理
+     * 新規届出を追加するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -193,7 +193,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 変更届出を追加するボタン押下時の処理
+     * 変更届出を追加するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -207,7 +207,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 履歴一覧で選択ボタン押下時の処理
+     * 履歴一覧で選択ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -228,7 +228,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 届出明細を削除するボタン押下時の処理
+     * 届出明細を削除するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -243,7 +243,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 届出明細をクリアするボタン押下時の処理
+     * 届出明細をクリアするボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -255,7 +255,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 届出明細を確定するボタン押下時の処理
+     * 届出明細を確定するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -306,7 +306,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 届出明細を訂正するボタン押下時の処理
+     * 届出明細を訂正するボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -321,7 +321,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * ボタン表示の有効化処理
+     * ボタン表示の有効化処理。
      *
      */
     private void btnVisible(Button btn) {
@@ -330,7 +330,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * ボタン表示の無効化処理
+     * ボタン表示の無効化処理。
      *
      */
     private void btnInvisible(Button btn) {
@@ -339,7 +339,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 計画届出明細の表示設定
+     * 計画届出明細の表示設定。
      *
      * @param panel panel
      * @param pattern pattern
@@ -384,7 +384,7 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     /**
-     * 計画届出明細のデータ設定
+     * 計画届出明細のデータ設定。
      *
      * @param panel panel
      * @param pattern pattern

@@ -228,12 +228,12 @@ public class KaigoJigyoshaBuilder {
     /**
      * FAX番号を設定します。
      *
-     * @param FAX番号 FAX番号
+     * @param fax番号 FAX番号
      * @return {@link KaigoJigyoshaBuilder}
      */
-    public KaigoJigyoshaBuilder setFAX番号(TelNo FAX番号) {
-        requireNonNull(FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
-        entity.setFaxNo(FAX番号);
+    public KaigoJigyoshaBuilder setFax番号(TelNo fax番号) {
+        requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
+        entity.setFaxNo(fax番号);
         return this;
     }
 
@@ -382,7 +382,7 @@ public class KaigoJigyoshaBuilder {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public KaigoJigyoshaBuilder setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService createKaigoJigyoshaShiteiService) {
+    public KaigoJigyoshaBuilder setKaigoJigyoshaService(KaigoJigyoshaShiteiService createKaigoJigyoshaService) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

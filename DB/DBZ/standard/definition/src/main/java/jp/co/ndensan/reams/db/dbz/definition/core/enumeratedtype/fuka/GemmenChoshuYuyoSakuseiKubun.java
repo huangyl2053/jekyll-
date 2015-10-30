@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 減免・徴収猶予作成区分の列挙型です。
+ * 減免・徴収猶予作成区分の列挙型クラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -17,32 +17,32 @@ public enum GemmenChoshuYuyoSakuseiKubun {
 
     /**
      * 申請 <br />
-     * コード : 0
+     * コード : 0。
      */
     申請("0"),
     /**
      * 決定（承認） <br />
-     * コード : 1
+     * コード : 1。
      */
     決定_承認("1"),
     /**
      * 決定（不承認） <br />
-     * コード : 2
+     * コード : 2。
      */
     決定_不承認("2"),
     /**
      * 取消 <br />
-     * コード : 3
+     * コード : 3。
      */
     取消("3"),
     /**
      * 訂正 <br />
-     * コード : 4
+     * コード : 4。
      */
     訂正("4"),
     /**
      * 論理削除 <br />
-     * コード : 9
+     * コード : 9。
      */
     論理削除("9");
     private final RString code;

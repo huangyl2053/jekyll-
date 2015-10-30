@@ -8,9 +8,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -222,7 +220,7 @@ public class HihokenshaDaichoAliveBuilderTest extends DbxTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbV1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbV1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbV1001HihokenshaDaichoEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

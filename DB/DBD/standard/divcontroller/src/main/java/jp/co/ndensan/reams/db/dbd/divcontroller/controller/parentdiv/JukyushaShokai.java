@@ -68,7 +68,7 @@ public class JukyushaShokai {
         div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(results));
 
         RString hihokenshaNo = clickedItem(results).getHihokenshaNo();
-        RString shikibetsuCode = clickedItem(results).getShikibetsuCode();
+//        RString shikibetsuCode = clickedItem(results).getShikibetsuCode();
 
         div.getTxtHihokenshaNo().setValue(hihokenshaNo);
         _init_ButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
@@ -142,7 +142,7 @@ public class JukyushaShokai {
     }
 
     /**
-     * create ResponseData
+     * create ResponseData。
      *
      * @param div JukyushaShokaiDiv
      * @return ResponseData

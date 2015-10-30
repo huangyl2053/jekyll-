@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.core;
 
 /**
@@ -11,5 +10,6 @@ package jp.co.ndensan.reams.db.dbb.business.core;
  * @author n3336
  */
 public interface 端数調整判定 {
-    public boolean JudgeHasuu(保険料段階判定input input);
+
+    boolean judgeHasuu(保険料段階判定input input);
 }

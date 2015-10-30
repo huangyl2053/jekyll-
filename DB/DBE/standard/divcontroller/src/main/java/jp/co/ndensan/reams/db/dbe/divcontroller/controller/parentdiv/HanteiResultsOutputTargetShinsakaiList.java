@@ -54,7 +54,7 @@ public class HanteiResultsOutputTargetShinsakaiList {
         ControlGenerator cg = new ControlGenerator(map);
         RString kaisaiNo = cg.getAsRString("開催番号");
         TextBoxFlexibleDate kaisaiDate = cg.getAsTextBoxFlexibleDate("開催日");
-        RString gogitaiNo = new RString("00001");
+//        RString gogitaiNo = new RString("00001");
         RString gogitaiMeisho = cg.getAsRString("合議体名称");
         RString kaisaiBasho = cg.getAsRString("開催場所");
         RString yoteiTeiin = cg.getAsRString("予定定員");

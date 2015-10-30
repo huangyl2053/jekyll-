@@ -140,12 +140,12 @@ public class RiyoshaFutanWariaiTest extends DbcTestBase {
 
         @Test
         public void get発行不要フラグは_entityが持つ発行不要フラグを返す() {
-            assertThat(sut.get発行不要フラグ(), is(RiyoshaFutanWariaiEntity.getHakoFuyoFlag()));
+            assertThat(sut.is発行不要フラグ(), is(RiyoshaFutanWariaiEntity.getHakoFuyoFlag()));
         }
 
         @Test
         public void get職権変更フラグは_entityが持つ職権変更フラグを返す() {
-            assertThat(sut.get職権変更フラグ(), is(RiyoshaFutanWariaiEntity.getShokenFlag()));
+            assertThat(sut.is職権変更フラグ(), is(RiyoshaFutanWariaiEntity.getShokenFlag()));
         }
 
         @Test

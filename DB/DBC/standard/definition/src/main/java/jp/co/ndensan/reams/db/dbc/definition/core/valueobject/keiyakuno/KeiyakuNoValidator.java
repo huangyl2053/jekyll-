@@ -18,7 +18,7 @@ public class KeiyakuNoValidator {
     private final KeiyakuNo keiyakuNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param keiyakuNo 受領委任契約番号
      */

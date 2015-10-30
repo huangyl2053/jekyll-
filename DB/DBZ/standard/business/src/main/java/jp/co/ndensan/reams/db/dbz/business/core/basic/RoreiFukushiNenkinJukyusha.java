@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 老齢福祉年金受給者を管理するクラスです。
  */
-public class RoreiFukushiNenkinJukyusha extends ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
+public class RoreiFukushiNenkinJukyusha extends 
+        ParentModelBase<RoreiFukushiNenkinJukyushaIdentifier, 
+        DbT7006RoreiFukushiNenkinJukyushaEntity, RoreiFukushiNenkinJukyusha> implements Serializable {
 
     private final DbT7006RoreiFukushiNenkinJukyushaEntity entity;
     private final RoreiFukushiNenkinJukyushaIdentifier id;
@@ -179,7 +181,7 @@ public class RoreiFukushiNenkinJukyusha extends ParentModelBase<RoreiFukushiNenk
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7006RoreiFukushiNenkinJukyushaEntity entity;
         private final RoreiFukushiNenkinJukyushaIdentifier id;
 

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
+import org.junit.Ignore;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -34,6 +35,7 @@ import static org.mockito.Mockito.when;
  * {link ShokanServicePlan200904Manager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShokanServicePlan200904ManagerTest {
 
     private static DbT3047ShokanServicePlan200904Dac dac;

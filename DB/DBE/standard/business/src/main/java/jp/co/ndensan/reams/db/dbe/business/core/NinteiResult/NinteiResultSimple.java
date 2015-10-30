@@ -34,7 +34,7 @@ public class NinteiResultSimple {
     private final NinteiYukoKikan ninteiYukoKikan;
 
     /**
-     * コンストラクタ
+     * コンストラクタ。
      *
      * @param 要介護度 要介護度
      * @param 認定有効期間 認定有効期間

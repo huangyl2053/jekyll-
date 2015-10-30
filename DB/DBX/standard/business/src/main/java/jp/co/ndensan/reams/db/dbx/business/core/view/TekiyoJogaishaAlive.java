@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 適用除外者台帳管理Aliveを管理するクラスです。
  */
-public class TekiyoJogaishaAlive extends ModelBase<TekiyoJogaishaAliveIdentifier, DbV1002TekiyoJogaishaEntity, TekiyoJogaishaAlive> implements Serializable {
+public class TekiyoJogaishaAlive
+        extends ModelBase<TekiyoJogaishaAliveIdentifier, DbV1002TekiyoJogaishaEntity, TekiyoJogaishaAlive>
+        implements Serializable {
 
     private final DbV1002TekiyoJogaishaEntity entity;
     private final TekiyoJogaishaAliveIdentifier id;
@@ -228,7 +230,7 @@ public class TekiyoJogaishaAlive extends ModelBase<TekiyoJogaishaAliveIdentifier
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class SogoShokaiSearch {
 
-    private static final RString YML_SEARCH = new RString("dbu0600011/SearchData.yml");
+//    private static final RString YML_SEARCH = new RString("dbu0600011/SearchData.yml");
     private static final RString YML_SEARCH_RESULT = new RString("dbu0600011/SearchResultData.yml");
 
     /**
@@ -64,7 +64,7 @@ public class SogoShokaiSearch {
 
     // 検索条件情報を設定する
     private void setSerachInfo(SogoShokaiSearchDiv panel) {
-        HashMap map = getYamlData(YML_SEARCH).get(0);
+//        HashMap map = getYamlData(YML_SEARCH).get(0);
 //        AtenaFinderDiv kojinDiv = panel.getSogoShokaiSearchInfo().getKaigoAtenaFinder();
 //        kojinDiv.getTxtAtenaMeisho().setValue(new RString(map.get("氏名").toString()));
         //kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));

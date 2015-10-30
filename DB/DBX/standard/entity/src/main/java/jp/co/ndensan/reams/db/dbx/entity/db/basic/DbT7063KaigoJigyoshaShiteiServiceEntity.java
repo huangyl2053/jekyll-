@@ -2,104 +2,8 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.JunkyoKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ChiikiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DaikiboJigyoshoGaitoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DoitsuTatemonoKyojuUserGenzanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.EiyoManagementTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByGengoChokakushiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByIshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigoStaffKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigoSupportSemmoninKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKaigojugyoshaKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByKangoStaffKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuByRigakuryohoshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.GenzanJokyoUmuBySagyoryohoshiKetsuin;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.IryoRenkeiTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.IshiHaichiKijun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JakunenseiNinchishoCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JakunenseiNinchishoRiyoshaUkeireKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JigyoshoHyokaKasanKetteiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JigyoshoHyokaKasanMoshideUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JikanEnchoServiceTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JokinSenjuIshiHaichiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JudokaTaioTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JunUnitCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JuryoininUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JushoHifukaiyoShidoKanriUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.JutakuNyushoSogoriyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoStaffShoguKaizenKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KangoStaffHaichiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KangoTaiseiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KansentaisakuShidoKanriUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyuTankinyushoTaiseiKakuhoKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyuUkeireTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinkyujiHomonKaigoKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KinokunrenShidoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KobetsuRehabilitationTeikyoTaiseiUmu_Sonota;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KokuKinoKojoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KyojuhiTaiseku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NichijoSeikatsuKeizokuSupprtKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoCareKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoSemmonCareKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoSemmontoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NinchishoTankiShuchuRehabilitationKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.NyuyokuKaijoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationKasanJokyoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationKinoKyokaUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_RigakuRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_RigakuRyoho3;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SagyoRyoho2;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RehabilitationTeikyoTaiseiUmu_Sonota;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyoTaiseiIjiTokubetsuKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.RyoyoshokuKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SeikatsuKinoKojoGroupKatsudoKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SeishinkaIshiTeikitekiRyoyoshidoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoSekininshaTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ServiceTeikyoTaiseiKyokaKasanForKushoType;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SetsubiKijun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShafukuhojinKeigenJigyoJisshiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShintaikosokuHaishiTorikumiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiKoshinShinseichuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShiteiUmuBySeikatsuhogoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShogaishaSeikatsuSupportTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboJigyoshoKasanInMountainArea_SituationAboutArea;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboJigyoshoKasanInMountainArea_SituationAboutScale;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokiboKyotenShugoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokujiTeikyoJokyo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShokujiTeikyoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ShudanCommunicationRyohoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.SogeiTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TerminalCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ThirdGradeHelperTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuChiikiKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuKanriTaisei;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokubetsuNyuyokuKaijoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TokuteiJigyoshoKasanUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TsuhoTaioFor24HoursKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.UndokiKinoKojoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.UnitCareTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanCareKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanCareUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakanKangoTaiseiUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakinStaffHaichiKasan;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.YakuzaiKanriShidoUmu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.ZaitakuFukkiZaitakuRyoyoSupportKinoKasan;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -113,23 +17,21 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * DbT7063KaigoJigyoshaShiteiServiceの項目定義クラスです
- *
+ * 介護事業者指定サービステーブルのエンティティクラスです。
+ * <br/> 介護事業者単位に利用できるサービスを管理する
  */
-@OnNextSchema("rgdb")
 public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<DbT7063KaigoJigyoshaShiteiServiceEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7063KaigoJigyoshaShiteiService");
+    private static final long serialVersionUID = -9143801098276403915L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -149,7 +51,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     private FlexibleDate idoYMD;
     private RString idoJiyu;
     private RString shiteiNo;
-    private JunkyoKubun kihonJohoJunkyoKubun;
+    private RString kihonJohoJunkyoKubun;
     private FlexibleDate jigyoKaishiYMD;
     private FlexibleDate jigyoKyushiYMD;
     private FlexibleDate jigyoSaikaiYMD;
@@ -162,7 +64,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     private TelNo jigyoshaTelNo;
     private TelNo jigyoshaFaxNo;
     private RString torokuHokenshaNo;
-    private JuryoininUmu juryoininUmu;
+    private Code juryoininUmu;
     private FlexibleDate torokuKaishiYMD;
     private FlexibleDate torokuShuryoYMD;
     private AtenaMeisho kanrishaName;
@@ -170,135 +72,135 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     private YubinNo kanrishaYubinNo;
     private AtenaJusho kanrishaAddress;
     private RString kanrishaAddressKana;
-    private JunkyoKubun kozaJohoJunkyoKubun;
+    private RString kozaJohoJunkyoKubun;
     private KinyuKikanCode ginkoCode;
     private KinyuKikanShitenCode shitenCode;
-    private RString kozaShubetsu;
+    private Code kozaShubetsu;
     private RString kozaNo;
     private AtenaMeisho kozaMeiginin;
     private AtenaKanaMeisho kozaMeigininKana;
-    private ShafukuhojinKeigenJigyoJisshiUmu shakaiFukushihoujinKeigenjigyouJisshi_umu;
-    private ShiteiUmuBySeikatsuhogoho seikatsuhogohouShitei_umu;
+    private Code shakaiFukushihoujinKeigenjigyouJisshi_umu;
+    private Code seikatsuhogohouShitei_umu;
     private Code shisetsunadoKubun;
     private Code jininHaichiKubun;
-    private TokubetsuChiikiKasanUmu tokubetsuChiikiKasan_umu;
-    private KinkyujiHomonKaigoKasanUmu kinkyujiHomonkaigoKasan_umu;
-    private TokubetsuKanriTaisei tokubetsuKanriTaisei;
-    private KinokunrenShidoTaiseiUmu kinoKunrenShidoTaisei_umu;
-    private ShokujiTeikyoTaiseiUmu shokujiTeikyoTaisei_umu;
-    private NyuyokuKaijoTaiseiUmu nyuyokuKaijoTaisei_umu;
-    private TokubetsuNyuyokuKaijoTaiseiUmu tokubetsuNyuyokuKaijoTaisei_umu;
-    private JokinSenjuIshiHaichiUmu joukinsenjuIshiHaichi_umu;
-    private IshiHaichiKijun ishiHaichiKijun;
-    private SeishinkaIshiTeikitekiRyoyoshidoUmu seisinkaIshiTeikitekiRyouyousidou_umu;
+    private Code tokubetsuChiikiKasan_umu;
+    private Code kinkyujiHomonkaigoKasan_umu;
+    private Code tokubetsuKanriTaisei;
+    private Code kinoKunrenShidoTaisei_umu;
+    private Code shokujiTeikyoTaisei_umu;
+    private Code nyuyokuKaijoTaisei_umu;
+    private Code tokubetsuNyuyokuKaijoTaisei_umu;
+    private Code joukinsenjuIshiHaichi_umu;
+    private Code ishiHaichiKijun;
+    private Code seisinkaIshiTeikitekiRyouyousidou_umu;
     private Code yakanKinmuJokenKijun;
-    private NinchishoSemmontoUmu ninchishouSenmontou_umu;
-    private ShokujiTeikyoJokyo shokujiTeikyoJokyo;
-    private SogeiTaisei sougeiTaisei;
-    private RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu rehaTeikyoTaisei_SogoRehaShisetsu_umu;
-    private RehabilitationTeikyoTaiseiUmu_RigakuRyoho2 rehaTeikyoTaisei_RigakuRyohoII_umu;
-    private RehabilitationTeikyoTaiseiUmu_RigakuRyoho3 rehaTeikyoTaisei_RigakuRyohoIII_umu;
-    private RehabilitationTeikyoTaiseiUmu_SagyoRyoho2 rehaTeikyoTaisei_SagyoRyohoII_umu;
-    private RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu;
-    private RehabilitationTeikyoTaiseiUmu_Sonota rehaTeikyoTaisei_Sonota_umu;
-    private RehabilitationKasanJokyoUmu rehabilitationKasanJokyo;
+    private Code ninchishouSenmontou_umu;
+    private Code shokujiTeikyoJokyo;
+    private Code sougeiTaisei;
+    private Code rehaTeikyoTaisei_SogoRehaShisetsu_umu;
+    private Code rehaTeikyoTaisei_RigakuRyohoII_umu;
+    private Code rehaTeikyoTaisei_RigakuRyohoIII_umu;
+    private Code rehaTeikyoTaisei_SagyoRyohoII_umu;
+    private Code rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu;
+    private Code rehaTeikyoTaisei_Sonota_umu;
+    private Code rehabilitationKasanJokyo;
     private Code ryoyoKankyoKijun;
-    private GenzanJokyoUmuByIshiKetsuin ishiKetuinGenzanJokyo_umu;
-    private GenzanJokyoUmuByKangoStaffKetsuin kangoShokuinKetsuinGenzanJokyo_umu;
-    private GenzanJokyoUmuByRigakuryohoshiKetsuin rigakuRyouhousiKetsuinGenzanJokyo_umu;
-    private GenzanJokyoUmuBySagyoryohoshiKetsuin sagyouRyouhousiKetsuinGenzanJokyo_umu;
-    private GenzanJokyoUmuByKaigoStaffKetsuin kaigoShokuinKetsuinGenzanJokyo_umu;
-    private GenzanJokyoUmuByKaigoSupportSemmoninKetsuin kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu;
-    private GenzanJokyoUmuByKaigojugyoshaKetsuin kaigoJujishaKetsuinGenzanJokyo_umu;
-    private KansentaisakuShidoKanriUmu kansenTaisakuSidoKanri_umu;
-    private JushoHifukaiyoShidoKanriUmu jushoHifuKaiyouShidoKanri_umu;
-    private YakuzaiKanriShidoUmu yakuzaiKaniriShido_umu;
-    private ShogaishaSeikatsuSupportTaiseiUmu shogaishaSeikatsuShienTaisei_umu;
-    private ChiikiKubun chiikiKubunCode;
-    private JikanEnchoServiceTaisei jikanEnchoServiceTaisei;
-    private KobetsuRehabilitationTeikyoTaisei kobetsuRehabilitationTeikyoTaisei;
-    private KyojuhiTaiseku kyojuhiTaisaku;
-    private YakanCareUmu yakanCare_umu;
-    private RehabilitationKinoKyokaUmu rehabilitationKinoKyoka_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3 kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1 kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu;
-    private GenzanJokyoUmuByGengoChokakushiKetsuin gengoChokakushiKetsuinGenzanJokyo_umu;
-    private ShafukuhojinKeigenJigyoJisshiUmu eiyouKanriHyoka;
-    private TokuteiJigyoshoKasanUmu tokuteijigyoushoKasan_HomonKaigo_umu;
-    private JakunenseiNinchishoCareTaiseiUmu jakunenseiNinchishoCareTaisei_umu;
-    private UndokiKinoKojoTaiseiUmu undokiKinoKojoTaisei_umu;
-    private EiyoManagementTaiseiUmu eiyoManagement_KaizenTaisei_umu;
-    private KokuKinoKojoTaiseiUmu kokuKinoKojoTaisei_umu;
-    private JigyoshoHyokaKasanMoshideUmu jigyoshoHyokaKasan_Moshide_umu;
-    private JigyoshoHyokaKasanKetteiUmu jigyoshoHyokaKasan_Kettei_umu;
-    private KinkyuUkeireTaiseiUmu kinkyuUkeireTaisei_umu;
-    private YakanKangoTaiseiUmu yakanKangoTaisei_umu;
+    private Code ishiKetuinGenzanJokyo_umu;
+    private Code kangoShokuinKetsuinGenzanJokyo_umu;
+    private Code rigakuRyouhousiKetsuinGenzanJokyo_umu;
+    private Code sagyouRyouhousiKetsuinGenzanJokyo_umu;
+    private Code kaigoShokuinKetsuinGenzanJokyo_umu;
+    private Code kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu;
+    private Code kaigoJujishaKetsuinGenzanJokyo_umu;
+    private Code kansenTaisakuSidoKanri_umu;
+    private Code jushoHifuKaiyouShidoKanri_umu;
+    private Code yakuzaiKaniriShido_umu;
+    private Code shogaishaSeikatsuShienTaisei_umu;
+    private Code chiikiKubunCode;
+    private Code jikanEnchoServiceTaisei;
+    private Code kobetsuRehabilitationTeikyoTaisei;
+    private Code kyojuhiTaisaku;
+    private Code yakanCare_umu;
+    private Code rehabilitationKinoKyoka_umu;
+    private Code kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu;
+    private Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1;
+    private Code kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu;
+    private Code kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu;
+    private Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu;
+    private Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu;
+    private Code gengoChokakushiKetsuinGenzanJokyo_umu;
+    private Code eiyouKanriHyoka;
+    private Code tokuteijigyoushoKasan_HomonKaigo_umu;
+    private Code jakunenseiNinchishoCareTaisei_umu;
+    private Code undokiKinoKojoTaisei_umu;
+    private Code eiyoManagement_KaizenTaisei_umu;
+    private Code kokuKinoKojoTaisei_umu;
+    private Code jigyoshoHyokaKasan_Moshide_umu;
+    private Code jigyoshoHyokaKasan_Kettei_umu;
+    private Code kinkyuUkeireTaisei_umu;
+    private Code yakanKangoTaisei_umu;
     private Code tokuteijigyoshoKasan_Kyotakukaigoshien_umu;
-    private Decimal kaigoShienSemmoninSenjuJokinshaNinsu;
-    private Decimal kaigoSienSemmoninSenjuHijokinshaNinsu;
-    private Decimal kaigoSienSemmoninKemmuJokinshaNinsu;
-    private Decimal kaigoSienSemmoninKemmuHijokinshaNinsu;
-    private Decimal homonkaigoServiceTeikyoSekininshaNinsu;
-    private Decimal homonkaigoSenjuJokinshaNinsu;
-    private Decimal homonkaigoSenjuHijokinshaNinsu;
-    private Decimal homonkaigoKemmuJokinshaNinsu;
-    private Decimal homonkaigoKemmuHijokinshaNinsu;
-    private Decimal homonkaigoJokinKanzangoNinsu;
-    private Decimal riyoTeiinNinsu;
+    private int kaigoShienSemmoninSenjuJokinshaNinsu;
+    private int kaigoSienSemmoninSenjuHijokinshaNinsu;
+    private int kaigoSienSemmoninKemmuJokinshaNinsu;
+    private int kaigoSienSemmoninKemmuHijokinshaNinsu;
+    private int homonkaigoServiceTeikyoSekininshaNinsu;
+    private int homonkaigoSenjuJokinshaNinsu;
+    private int homonkaigoSenjuHijokinshaNinsu;
+    private int homonkaigoKemmuJokinshaNinsu;
+    private int homonkaigoKemmuHijokinshaNinsu;
+    private int homonkaigoJokinKanzangoNinsu;
+    private int riyoTeiinNinsu;
     private FlexibleDate shiteiYukoKaishiYMD;
     private FlexibleDate shiteiYukoShuryoYMD;
-    private ShiteiKoshinShinseichuKubun shiteiKoshinShinseichuKubun;
+    private Code shiteiKoshinShinseichuKubun;
     private FlexibleDate koryokuTeishiKaishiYMD;
     private FlexibleDate koryokuTeishiShuryoYMD;
-    private DaikiboJigyoshoGaitoUmu daikiboJigyoshaGaito_umu;
-    private JunUnitCareTaiseiUmu junUnitCareTaisei_umu;
-    private JudokaTaioTaiseiUmu judokaTaioTaisei_umu;
-    private IryoRenkeiTaiseiUmu iryoRenkeiTaisei_umu;
-    private UnitCareTaiseiUmu unitCareTaisei_umu;
-    private JutakuNyushoSogoriyoTaiseiUmu zaitaku_nyushoSogoRiyoTaisei_umu;
-    private TerminalCareTaiseiUmu terminalCareTaisei_umu;
-    private ShintaikosokuHaishiTorikumiUmu shintaiKosokuHaishiTorikumi_umu;
-    private ShokiboKyotenShugoTaiseiUmu shokiboKyotenShugoTaisei_umu;
-    private NinchishoCareKasanUmu ninchishoCareKasan_umu;
+    private Code daikiboJigyoshaGaito_umu;
+    private Code junUnitCareTaisei_umu;
+    private Code judokaTaioTaisei_umu;
+    private Code iryoRenkeiTaisei_umu;
+    private Code unitCareTaisei_umu;
+    private Code zaitaku_nyushoSogoRiyoTaisei_umu;
+    private Code terminalCareTaisei_umu;
+    private Code shintaiKosokuHaishiTorikumi_umu;
+    private Code shokiboKyotenShugoTaisei_umu;
+    private Code ninchishoCareKasan_umu;
     private Code kobetsuKinoKunrenTaisei_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1 kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho kobetsuRehaTeikyoTaisei_SagyoRyoho_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu;
-    private KobetsuRehabilitationTeikyoTaiseiUmu_Sonota kobetsuRehaTeikyoTaisei_Sonota_umu;
-    private SetsubiKijun setsubiKijun;
-    private RyoyoTaiseiIjiTokubetsuKasan ryoyoTaiseiIjiTokubetsuKasan;
-    private KobetsuRehabilitationTeikyoTaiseiUmu kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu;
-    private ThirdGradeHelperTaisei sankyuHelperTaisei;
-    private ShokiboJigyoshoKasanInMountainArea_SituationAboutArea chuSankanChiikiShokiboJigyoshoKasan_chiiki;
-    private ShokiboJigyoshoKasanInMountainArea_SituationAboutScale chuSankanChiikiShokiboJigyoushoKasan_kibo;
+    private Code kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu;
+    private Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2;
+    private Code kobetsuRehaTeikyoTaisei_SagyoRyoho_umu;
+    private Code kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu;
+    private Code kobetsuRehaTeikyoTaisei_Sonota_umu;
+    private Code setsubiKijun;
+    private Code ryoyoTaiseiIjiTokubetsuKasan;
+    private Code kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu;
+    private Code sankyuHelperTaisei;
+    private Code chuSankanChiikiShokiboJigyoshoKasan_chiiki;
+    private Code chuSankanChiikiShokiboJigyoushoKasan_kibo;
     private Code serviceTeikyoTaiseiKyokaKasan;
-    private NinchishoTankiShuchuRehabilitationKasan ninchishoTankiShuchuRehabilitationKasan;
-    private JakunenseiNinchishoRiyoshaUkeireKasan jakunenseiNinchishoRiyoushaUkeeireKasan;
-    private KangoTaiseiKasan kangoTaiseiKasan;
-    private YakinStaffHaichiKasan yakinShokuinHaichiKasan;
-    private RyoyoshokuKasan ryoyoShokuKasan;
-    private NichijoSeikatsuKeizokuSupprtKasan nichijoSeikatsuKeizokuShienKasan;
-    private NinchishoSemmonCareKasan ninchishoSemmonCareKasan;
-    private TsuhoTaioFor24HoursKasan twentyFourHoursTsuhoTaioKasan;
-    private KangoStaffHaichiKasan kangoShokuinHaichiKasan;
-    private YakanCareKasan yakanCareKasan;
-    private ShudanCommunicationRyohoUmu shudanCommunicationRyoho_umu;
-    private ServiceTeikyoTaiseiKyokaKasanForKushoType serviceTeikyoTaiseiKyokaKasan_Karadokogata;
-    private ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu nitchuShDecimalaikaigoTaise_20funmiman_umu;
-    private ServiceTeikyoSekininshaTaiseiUmu serviceTeikyoSekininshaTaisei_umu;
-    private DoitsuTatemonoKyojuUserGenzanUmu doitsuTatemonoKyojuRiyoshaGenzan_umu;
-    private KinkyuTankinyushoTaiseiKakuhoKasan kinkyuTankiNyushoTaiseiKakuhoKasan;
-    private ZaitakuFukkiZaitakuRyoyoSupportKinoKasan zaitakuFukki_ZaitakuRyoyoShienKinoKasan;
-    private SeikatsuKinoKojoGroupKatsudoKasan seikatuKinoKojoGroupKatsudoKasan;
-    private KaigoStaffShoguKaizenKasan kaigoShokuinShoguKaizenKasan;
+    private Code ninchishoTankiShuchuRehabilitationKasan;
+    private Code jakunenseiNinchishoRiyoushaUkeeireKasan;
+    private Code kangoTaiseiKasan;
+    private Code yakinShokuinHaichiKasan;
+    private Code ryoyoShokuKasan;
+    private Code nichijoSeikatsuKeizokuShienKasan;
+    private Code ninchishoSemmonCareKasan;
+    private Code twentyFourHoursTsuhoTaioKasan;
+    private Code kangoShokuinHaichiKasan;
+    private Code yakanCareKasan;
+    private Code shudanCommunicationRyoho_umu;
+    private Code serviceTeikyoTaiseiKyokaKasan_Karadokogata;
+    private Code nitchuShintaikaigoTaise_20funmiman_umu;
+    private Code serviceTeikyoSekininshaTaisei_umu;
+    private Code doitsuTatemonoKyojuRiyoshaGenzan_umu;
+    private Code kinkyuTankiNyushoTaiseiKakuhoKasan;
+    private Code zaitakuFukki_ZaitakuRyoyoShienKinoKasan;
+    private Code seikatuKinoKojoGroupKatsudoKasan;
+    private Code kaigoShokuinShoguKaizenKasan;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -307,7 +209,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -316,7 +218,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -325,7 +227,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -334,7 +236,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -343,2828 +245,2931 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     }
 
     /**
-     * getJigyoshaNo
+     * 事業者番号のgetメソッドです。
      *
-     * @return jigyoshaNo
+     * @return 事業者番号
      */
     public KaigoJigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
     /**
-     * setJigyoshaNo
+     * 事業者番号のsetメソッドです。
      *
-     * @param jigyoshaNo jigyoshaNo
+     * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull KaigoJigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
-     * getServiceShuruiCode
+     * サービス種類コードのgetメソッドです。
      *
-     * @return serviceShuruiCode
+     * @return サービス種類コード
      */
     public KaigoServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
-     * setServiceShuruiCode
+     * サービス種類コードのsetメソッドです。
      *
-     * @param serviceShuruiCode serviceShuruiCode
+     * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(KaigoServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(@Nonnull KaigoServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
-     * getYukoKaishiYMD
+     * 有効開始日のgetメソッドです。
      *
-     * @return yukoKaishiYMD
+     * @return 有効開始日
      */
     public FlexibleDate getYukoKaishiYMD() {
         return yukoKaishiYMD;
     }
 
     /**
-     * setYukoKaishiYMD
+     * 有効開始日のsetメソッドです。
      *
-     * @param yukoKaishiYMD yukoKaishiYMD
+     * @param yukoKaishiYMD 有効開始日
      */
-    public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
+    public void setYukoKaishiYMD(@Nonnull FlexibleDate yukoKaishiYMD) {
         this.yukoKaishiYMD = yukoKaishiYMD;
     }
 
     /**
-     * getYukoShuryoYMD
+     * 有効終了日のgetメソッドです。
      *
-     * @return yukoShuryoYMD
+     * @return 有効終了日
      */
+    @CheckForNull
     public FlexibleDate getYukoShuryoYMD() {
         return yukoShuryoYMD;
     }
 
     /**
-     * setYukoShuryoYMD
+     * 有効終了日のsetメソッドです。
      *
-     * @param yukoShuryoYMD yukoShuryoYMD
+     * @param yukoShuryoYMD 有効終了日
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
         this.yukoShuryoYMD = yukoShuryoYMD;
     }
 
     /**
-     * getIdoYMD
+     * 異動日のgetメソッドです。
      *
-     * @return idoYMD
+     * @return 異動日
      */
+    @CheckForNull
     public FlexibleDate getIdoYMD() {
         return idoYMD;
     }
 
     /**
-     * setIdoYMD
+     * 異動日のsetメソッドです。
      *
-     * @param idoYMD idoYMD
+     * @param idoYMD 異動日
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
     }
 
     /**
-     * getIdoJiyu
+     * 異動事由のgetメソッドです。
      *
-     * @return idoJiyu
+     * @return 異動事由
      */
+    @CheckForNull
     public RString getIdoJiyu() {
         return idoJiyu;
     }
 
     /**
-     * setIdoJiyu
+     * 異動事由のsetメソッドです。
      *
-     * @param idoJiyu idoJiyu
+     * @param idoJiyu 異動事由
      */
     public void setIdoJiyu(RString idoJiyu) {
         this.idoJiyu = idoJiyu;
     }
 
     /**
-     * getShiteiNo
+     * 指定番号のgetメソッドです。
      *
-     * @return shiteiNo
+     * @return 指定番号
      */
+    @CheckForNull
     public RString getShiteiNo() {
         return shiteiNo;
     }
 
     /**
-     * setShiteiNo
+     * 指定番号のsetメソッドです。
      *
-     * @param shiteiNo shiteiNo
+     * @param shiteiNo 指定番号
      */
     public void setShiteiNo(RString shiteiNo) {
         this.shiteiNo = shiteiNo;
     }
 
     /**
-     * getKihonJohoJunkyoKubun
+     * 基本情報準拠区分のgetメソッドです。
      *
-     * @return kihonJohoJunkyoKubun
+     * @return 基本情報準拠区分
      */
-    public JunkyoKubun getKihonJohoJunkyoKubun() {
+    @CheckForNull
+    public RString getKihonJohoJunkyoKubun() {
         return kihonJohoJunkyoKubun;
     }
 
     /**
-     * setKihonJohoJunkyoKubun
+     * 基本情報準拠区分のsetメソッドです。
      *
-     * @param kihonJohoJunkyoKubun kihonJohoJunkyoKubun
+     * @param kihonJohoJunkyoKubun 基本情報準拠区分
      */
-    public void setKihonJohoJunkyoKubun(JunkyoKubun kihonJohoJunkyoKubun) {
+    public void setKihonJohoJunkyoKubun(RString kihonJohoJunkyoKubun) {
         this.kihonJohoJunkyoKubun = kihonJohoJunkyoKubun;
     }
 
     /**
-     * getJigyoKaishiYMD
+     * 事業開始日のgetメソッドです。
      *
-     * @return jigyoKaishiYMD
+     * @return 事業開始日
      */
+    @CheckForNull
     public FlexibleDate getJigyoKaishiYMD() {
         return jigyoKaishiYMD;
     }
 
     /**
-     * setJigyoKaishiYMD
+     * 事業開始日のsetメソッドです。
      *
-     * @param jigyoKaishiYMD jigyoKaishiYMD
+     * @param jigyoKaishiYMD 事業開始日
      */
     public void setJigyoKaishiYMD(FlexibleDate jigyoKaishiYMD) {
         this.jigyoKaishiYMD = jigyoKaishiYMD;
     }
 
     /**
-     * getJigyoKyushiYMD
+     * 事業休止日のgetメソッドです。
      *
-     * @return jigyoKyushiYMD
+     * @return 事業休止日
      */
+    @CheckForNull
     public FlexibleDate getJigyoKyushiYMD() {
         return jigyoKyushiYMD;
     }
 
     /**
-     * setJigyoKyushiYMD
+     * 事業休止日のsetメソッドです。
      *
-     * @param jigyoKyushiYMD jigyoKyushiYMD
+     * @param jigyoKyushiYMD 事業休止日
      */
     public void setJigyoKyushiYMD(FlexibleDate jigyoKyushiYMD) {
         this.jigyoKyushiYMD = jigyoKyushiYMD;
     }
 
     /**
-     * getJigyoSaikaiYMD
+     * 事業再開日のgetメソッドです。
      *
-     * @return jigyoSaikaiYMD
+     * @return 事業再開日
      */
+    @CheckForNull
     public FlexibleDate getJigyoSaikaiYMD() {
         return jigyoSaikaiYMD;
     }
 
     /**
-     * setJigyoSaikaiYMD
+     * 事業再開日のsetメソッドです。
      *
-     * @param jigyoSaikaiYMD jigyoSaikaiYMD
+     * @param jigyoSaikaiYMD 事業再開日
      */
     public void setJigyoSaikaiYMD(FlexibleDate jigyoSaikaiYMD) {
         this.jigyoSaikaiYMD = jigyoSaikaiYMD;
     }
 
     /**
-     * getJigyoHaishiYMD
+     * 事業廃止日のgetメソッドです。
      *
-     * @return jigyoHaishiYMD
+     * @return 事業廃止日
      */
+    @CheckForNull
     public FlexibleDate getJigyoHaishiYMD() {
         return jigyoHaishiYMD;
     }
 
     /**
-     * setJigyoHaishiYMD
+     * 事業廃止日のsetメソッドです。
      *
-     * @param jigyoHaishiYMD jigyoHaishiYMD
+     * @param jigyoHaishiYMD 事業廃止日
      */
     public void setJigyoHaishiYMD(FlexibleDate jigyoHaishiYMD) {
         this.jigyoHaishiYMD = jigyoHaishiYMD;
     }
 
     /**
-     * getJigyoshaName
+     * 事業者名称のgetメソッドです。
      *
-     * @return jigyoshaName
+     * @return 事業者名称
      */
     public AtenaMeisho getJigyoshaName() {
         return jigyoshaName;
     }
 
     /**
-     * setJigyoshaName
+     * 事業者名称のsetメソッドです。
      *
-     * @param jigyoshaName jigyoshaName
+     * @param jigyoshaName 事業者名称
      */
-    public void setJigyoshaName(AtenaMeisho jigyoshaName) {
+    public void setJigyoshaName(@Nonnull AtenaMeisho jigyoshaName) {
         this.jigyoshaName = jigyoshaName;
     }
 
     /**
-     * getJigyoshaNameKana
+     * 事業者名称カナのgetメソッドです。
      *
-     * @return jigyoshaNameKana
+     * @return 事業者名称カナ
      */
     public AtenaKanaMeisho getJigyoshaNameKana() {
         return jigyoshaNameKana;
     }
 
     /**
-     * setJigyoshaNameKana
+     * 事業者名称カナのsetメソッドです。
      *
-     * @param jigyoshaNameKana jigyoshaNameKana
+     * @param jigyoshaNameKana 事業者名称カナ
      */
-    public void setJigyoshaNameKana(AtenaKanaMeisho jigyoshaNameKana) {
+    public void setJigyoshaNameKana(@Nonnull AtenaKanaMeisho jigyoshaNameKana) {
         this.jigyoshaNameKana = jigyoshaNameKana;
     }
 
     /**
-     * getJigyoshaYubinNo
+     * 事業者郵便番号のgetメソッドです。
      *
-     * @return jigyoshaYubinNo
+     * @return 事業者郵便番号
      */
+    @CheckForNull
     public YubinNo getJigyoshaYubinNo() {
         return jigyoshaYubinNo;
     }
 
     /**
-     * setJigyoshaYubinNo
+     * 事業者郵便番号のsetメソッドです。
      *
-     * @param jigyoshaYubinNo jigyoshaYubinNo
+     * @param jigyoshaYubinNo 事業者郵便番号
      */
     public void setJigyoshaYubinNo(YubinNo jigyoshaYubinNo) {
         this.jigyoshaYubinNo = jigyoshaYubinNo;
     }
 
     /**
-     * getJigyoshaAddress
+     * 事業者住所のgetメソッドです。
      *
-     * @return jigyoshaAddress
+     * @return 事業者住所
      */
+    @CheckForNull
     public AtenaJusho getJigyoshaAddress() {
         return jigyoshaAddress;
     }
 
     /**
-     * setJigyoshaAddress
+     * 事業者住所のsetメソッドです。
      *
-     * @param jigyoshaAddress jigyoshaAddress
+     * @param jigyoshaAddress 事業者住所
      */
     public void setJigyoshaAddress(AtenaJusho jigyoshaAddress) {
         this.jigyoshaAddress = jigyoshaAddress;
     }
 
     /**
-     * getJigyoshaAddressKana
+     * 事業者住所カナのgetメソッドです。
      *
-     * @return jigyoshaAddressKana
+     * @return 事業者住所カナ
      */
+    @CheckForNull
     public RString getJigyoshaAddressKana() {
         return jigyoshaAddressKana;
     }
 
     /**
-     * setJigyoshaAddressKana
+     * 事業者住所カナのsetメソッドです。
      *
-     * @param jigyoshaAddressKana jigyoshaAddressKana
+     * @param jigyoshaAddressKana 事業者住所カナ
      */
     public void setJigyoshaAddressKana(RString jigyoshaAddressKana) {
         this.jigyoshaAddressKana = jigyoshaAddressKana;
     }
 
     /**
-     * getJigyoshaTelNo
+     * 事業者電話番号のgetメソッドです。
      *
-     * @return jigyoshaTelNo
+     * @return 事業者電話番号
      */
+    @CheckForNull
     public TelNo getJigyoshaTelNo() {
         return jigyoshaTelNo;
     }
 
     /**
-     * setJigyoshaTelNo
+     * 事業者電話番号のsetメソッドです。
      *
-     * @param jigyoshaTelNo jigyoshaTelNo
+     * @param jigyoshaTelNo 事業者電話番号
      */
     public void setJigyoshaTelNo(TelNo jigyoshaTelNo) {
         this.jigyoshaTelNo = jigyoshaTelNo;
     }
 
     /**
-     * getJigyoshaFaxNo
+     * 事業者FAX番号のgetメソッドです。
      *
-     * @return jigyoshaFaxNo
+     * @return 事業者FAX番号
      */
+    @CheckForNull
     public TelNo getJigyoshaFaxNo() {
         return jigyoshaFaxNo;
     }
 
     /**
-     * setJigyoshaFaxNo
+     * 事業者FAX番号のsetメソッドです。
      *
-     * @param jigyoshaFaxNo jigyoshaFaxNo
+     * @param jigyoshaFaxNo 事業者FAX番号
      */
     public void setJigyoshaFaxNo(TelNo jigyoshaFaxNo) {
         this.jigyoshaFaxNo = jigyoshaFaxNo;
     }
 
     /**
-     * getTorokuHokenshaNo
+     * 登録保険者番号のgetメソッドです。
      *
-     * @return torokuHokenshaNo
+     * @return 登録保険者番号
      */
+    @CheckForNull
     public RString getTorokuHokenshaNo() {
         return torokuHokenshaNo;
     }
 
     /**
-     * setTorokuHokenshaNo
+     * 登録保険者番号のsetメソッドです。
      *
-     * @param torokuHokenshaNo torokuHokenshaNo
+     * @param torokuHokenshaNo 登録保険者番号
      */
     public void setTorokuHokenshaNo(RString torokuHokenshaNo) {
         this.torokuHokenshaNo = torokuHokenshaNo;
     }
 
     /**
-     * getJuryoininUmu
+     * 受領委任の有無のgetメソッドです。
      *
-     * @return juryoininUmu
+     * @return 受領委任の有無
      */
-    public JuryoininUmu getJuryoininUmu() {
+    @CheckForNull
+    public Code getJuryoininUmu() {
         return juryoininUmu;
     }
 
     /**
-     * setJuryoininUmu
+     * 受領委任の有無のsetメソッドです。
      *
-     * @param juryoininUmu juryoininUmu
+     * @param juryoininUmu 受領委任の有無
      */
-    public void setJuryoininUmu(JuryoininUmu juryoininUmu) {
+    public void setJuryoininUmu(Code juryoininUmu) {
         this.juryoininUmu = juryoininUmu;
     }
 
     /**
-     * getTorokuKaishiYMD
+     * 登録開始日のgetメソッドです。
      *
-     * @return torokuKaishiYMD
+     * @return 登録開始日
      */
+    @CheckForNull
     public FlexibleDate getTorokuKaishiYMD() {
         return torokuKaishiYMD;
     }
 
     /**
-     * setTorokuKaishiYMD
+     * 登録開始日のsetメソッドです。
      *
-     * @param torokuKaishiYMD torokuKaishiYMD
+     * @param torokuKaishiYMD 登録開始日
      */
     public void setTorokuKaishiYMD(FlexibleDate torokuKaishiYMD) {
         this.torokuKaishiYMD = torokuKaishiYMD;
     }
 
     /**
-     * getTorokuShuryoYMD
+     * 登録終了日のgetメソッドです。
      *
-     * @return torokuShuryoYMD
+     * @return 登録終了日
      */
+    @CheckForNull
     public FlexibleDate getTorokuShuryoYMD() {
         return torokuShuryoYMD;
     }
 
     /**
-     * setTorokuShuryoYMD
+     * 登録終了日のsetメソッドです。
      *
-     * @param torokuShuryoYMD torokuShuryoYMD
+     * @param torokuShuryoYMD 登録終了日
      */
     public void setTorokuShuryoYMD(FlexibleDate torokuShuryoYMD) {
         this.torokuShuryoYMD = torokuShuryoYMD;
     }
 
     /**
-     * getKanrishaName
+     * 管理者氏名のgetメソッドです。
      *
-     * @return kanrishaName
+     * @return 管理者氏名
      */
     public AtenaMeisho getKanrishaName() {
         return kanrishaName;
     }
 
     /**
-     * setKanrishaName
+     * 管理者氏名のsetメソッドです。
      *
-     * @param kanrishaName kanrishaName
+     * @param kanrishaName 管理者氏名
      */
-    public void setKanrishaName(AtenaMeisho kanrishaName) {
+    public void setKanrishaName(@Nonnull AtenaMeisho kanrishaName) {
         this.kanrishaName = kanrishaName;
     }
 
     /**
-     * getKanrishaNameKana
+     * 管理者氏名カナのgetメソッドです。
      *
-     * @return kanrishaNameKana
+     * @return 管理者氏名カナ
      */
+    @CheckForNull
     public AtenaKanaMeisho getKanrishaNameKana() {
         return kanrishaNameKana;
     }
 
     /**
-     * setKanrishaNameKana
+     * 管理者氏名カナのsetメソッドです。
      *
-     * @param kanrishaNameKana kanrishaNameKana
+     * @param kanrishaNameKana 管理者氏名カナ
      */
     public void setKanrishaNameKana(AtenaKanaMeisho kanrishaNameKana) {
         this.kanrishaNameKana = kanrishaNameKana;
     }
 
     /**
-     * getKanrishaYubinNo
+     * 管理者住所郵便番号のgetメソッドです。
      *
-     * @return kanrishaYubinNo
+     * @return 管理者住所郵便番号
      */
+    @CheckForNull
     public YubinNo getKanrishaYubinNo() {
         return kanrishaYubinNo;
     }
 
     /**
-     * setKanrishaYubinNo
+     * 管理者住所郵便番号のsetメソッドです。
      *
-     * @param kanrishaYubinNo kanrishaYubinNo
+     * @param kanrishaYubinNo 管理者住所郵便番号
      */
     public void setKanrishaYubinNo(YubinNo kanrishaYubinNo) {
         this.kanrishaYubinNo = kanrishaYubinNo;
     }
 
     /**
-     * getKanrishaAddress
+     * 管理者住所のgetメソッドです。
      *
-     * @return kanrishaAddress
+     * @return 管理者住所
      */
+    @CheckForNull
     public AtenaJusho getKanrishaAddress() {
         return kanrishaAddress;
     }
 
     /**
-     * setKanrishaAddress
+     * 管理者住所のsetメソッドです。
      *
-     * @param kanrishaAddress kanrishaAddress
+     * @param kanrishaAddress 管理者住所
      */
     public void setKanrishaAddress(AtenaJusho kanrishaAddress) {
         this.kanrishaAddress = kanrishaAddress;
     }
 
     /**
-     * getKanrishaAddressKana
+     * 管理者住所カナのgetメソッドです。
      *
-     * @return kanrishaAddressKana
+     * @return 管理者住所カナ
      */
+    @CheckForNull
     public RString getKanrishaAddressKana() {
         return kanrishaAddressKana;
     }
 
     /**
-     * setKanrishaAddressKana
+     * 管理者住所カナのsetメソッドです。
      *
-     * @param kanrishaAddressKana kanrishaAddressKana
+     * @param kanrishaAddressKana 管理者住所カナ
      */
     public void setKanrishaAddressKana(RString kanrishaAddressKana) {
         this.kanrishaAddressKana = kanrishaAddressKana;
     }
 
     /**
-     * getKozaJohoJunkyoKubun
+     * 口座情報準拠区分のgetメソッドです。
      *
-     * @return kozaJohoJunkyoKubun
+     * @return 口座情報準拠区分
      */
-    public JunkyoKubun getKozaJohoJunkyoKubun() {
+    @CheckForNull
+    public RString getKozaJohoJunkyoKubun() {
         return kozaJohoJunkyoKubun;
     }
 
     /**
-     * setKozaJohoJunkyoKubun
+     * 口座情報準拠区分のsetメソッドです。
      *
-     * @param kozaJohoJunkyoKubun kozaJohoJunkyoKubun
+     * @param kozaJohoJunkyoKubun 口座情報準拠区分
      */
-    public void setKozaJohoJunkyoKubun(JunkyoKubun kozaJohoJunkyoKubun) {
+    public void setKozaJohoJunkyoKubun(RString kozaJohoJunkyoKubun) {
         this.kozaJohoJunkyoKubun = kozaJohoJunkyoKubun;
     }
 
     /**
-     * getGinkoCode
+     * 銀行コードのgetメソッドです。
      *
-     * @return ginkoCode
+     * @return 銀行コード
      */
+    @CheckForNull
     public KinyuKikanCode getGinkoCode() {
         return ginkoCode;
     }
 
     /**
-     * setGinkoCode
+     * 銀行コードのsetメソッドです。
      *
-     * @param ginkoCode ginkoCode
+     * @param ginkoCode 銀行コード
      */
     public void setGinkoCode(KinyuKikanCode ginkoCode) {
         this.ginkoCode = ginkoCode;
     }
 
     /**
-     * getShitenCode
+     * 支店コードのgetメソッドです。
      *
-     * @return shitenCode
+     * @return 支店コード
      */
+    @CheckForNull
     public KinyuKikanShitenCode getShitenCode() {
         return shitenCode;
     }
 
     /**
-     * setShitenCode
+     * 支店コードのsetメソッドです。
      *
-     * @param shitenCode shitenCode
+     * @param shitenCode 支店コード
      */
     public void setShitenCode(KinyuKikanShitenCode shitenCode) {
         this.shitenCode = shitenCode;
     }
 
     /**
-     * getKozaShubetsu
+     * 口座種別のgetメソッドです。
      *
-     * @return kozaShubetsu
+     * @return 口座種別
      */
-    public RString getKozaShubetsu() {
+    @CheckForNull
+    public Code getKozaShubetsu() {
         return kozaShubetsu;
     }
 
     /**
-     * setKozaShubetsu
+     * 口座種別のsetメソッドです。
      *
-     * @param kozaShubetsu kozaShubetsu
+     * @param kozaShubetsu 口座種別
      */
-    public void setKozaShubetsu(RString kozaShubetsu) {
+    public void setKozaShubetsu(Code kozaShubetsu) {
         this.kozaShubetsu = kozaShubetsu;
     }
 
     /**
-     * getKozaNo
+     * 口座番号のgetメソッドです。
      *
-     * @return kozaNo
+     * @return 口座番号
      */
+    @CheckForNull
     public RString getKozaNo() {
         return kozaNo;
     }
 
     /**
-     * setKozaNo
+     * 口座番号のsetメソッドです。
      *
-     * @param kozaNo kozaNo
+     * @param kozaNo 口座番号
      */
     public void setKozaNo(RString kozaNo) {
         this.kozaNo = kozaNo;
     }
 
     /**
-     * getKozaMeiginin
+     * 口座名義人のgetメソッドです。
      *
-     * @return kozaMeiginin
+     * @return 口座名義人
      */
+    @CheckForNull
     public AtenaMeisho getKozaMeiginin() {
         return kozaMeiginin;
     }
 
     /**
-     * setKozaMeiginin
+     * 口座名義人のsetメソッドです。
      *
-     * @param kozaMeiginin kozaMeiginin
+     * @param kozaMeiginin 口座名義人
      */
     public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
         this.kozaMeiginin = kozaMeiginin;
     }
 
     /**
-     * getKozaMeigininKana
+     * 口座名義人カナのgetメソッドです。
      *
-     * @return kozaMeigininKana
+     * @return 口座名義人カナ
      */
+    @CheckForNull
     public AtenaKanaMeisho getKozaMeigininKana() {
         return kozaMeigininKana;
     }
 
     /**
-     * setKozaMeigininKana
+     * 口座名義人カナのsetメソッドです。
      *
-     * @param kozaMeigininKana kozaMeigininKana
+     * @param kozaMeigininKana 口座名義人カナ
      */
     public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
         this.kozaMeigininKana = kozaMeigininKana;
     }
 
     /**
-     * getShakaiFukushihoujinKeigenjigyouJisshi_umu
+     * 社会福祉法人軽減事業実施の有無のgetメソッドです。
      *
-     * @return shakaiFukushihoujinKeigenjigyouJisshi_umu
+     * @return 社会福祉法人軽減事業実施の有無
      */
-    public ShafukuhojinKeigenJigyoJisshiUmu getShakaiFukushihoujinKeigenjigyouJisshi_umu() {
+    @CheckForNull
+    public Code getShakaiFukushihoujinKeigenjigyouJisshi_umu() {
         return shakaiFukushihoujinKeigenjigyouJisshi_umu;
     }
 
     /**
-     * setShakaiFukushihoujinKeigenjigyouJisshi_umu
+     * 社会福祉法人軽減事業実施の有無のsetメソッドです。
      *
-     * @param shakaiFukushihoujinKeigenjigyouJisshi_umu
-     * shakaiFukushihoujinKeigenjigyouJisshi_umu
+     * @param shakaiFukushihoujinKeigenjigyouJisshi_umu 社会福祉法人軽減事業実施の有無
      */
-    public void setShakaiFukushihoujinKeigenjigyouJisshi_umu(ShafukuhojinKeigenJigyoJisshiUmu shakaiFukushihoujinKeigenjigyouJisshi_umu) {
+    public void setShakaiFukushihoujinKeigenjigyouJisshi_umu(Code shakaiFukushihoujinKeigenjigyouJisshi_umu) {
         this.shakaiFukushihoujinKeigenjigyouJisshi_umu = shakaiFukushihoujinKeigenjigyouJisshi_umu;
     }
 
     /**
-     * getSeikatsuhogohouShitei_umu
+     * 生活保護法による指定の有無のgetメソッドです。
      *
-     * @return seikatsuhogohouShitei_umu
+     * @return 生活保護法による指定の有無
      */
-    public ShiteiUmuBySeikatsuhogoho getSeikatsuhogohouShitei_umu() {
+    @CheckForNull
+    public Code getSeikatsuhogohouShitei_umu() {
         return seikatsuhogohouShitei_umu;
     }
 
     /**
-     * setSeikatsuhogohouShitei_umu
+     * 生活保護法による指定の有無のsetメソッドです。
      *
-     * @param seikatsuhogohouShitei_umu seikatsuhogohouShitei_umu
+     * @param seikatsuhogohouShitei_umu 生活保護法による指定の有無
      */
-    public void setSeikatsuhogohouShitei_umu(ShiteiUmuBySeikatsuhogoho seikatsuhogohouShitei_umu) {
+    public void setSeikatsuhogohouShitei_umu(Code seikatsuhogohouShitei_umu) {
         this.seikatsuhogohouShitei_umu = seikatsuhogohouShitei_umu;
     }
 
     /**
-     * getShisetsunadoKubun
+     * 施設等の区分のgetメソッドです。
      *
-     * @return shisetsunadoKubun
+     * @return 施設等の区分
      */
+    @CheckForNull
     public Code getShisetsunadoKubun() {
         return shisetsunadoKubun;
     }
 
     /**
-     * setShisetsunadoKubun
+     * 施設等の区分のsetメソッドです。
      *
-     * @param shisetsunadoKubun shisetsunadoKubun
+     * @param shisetsunadoKubun 施設等の区分
      */
     public void setShisetsunadoKubun(Code shisetsunadoKubun) {
         this.shisetsunadoKubun = shisetsunadoKubun;
     }
 
     /**
-     * getJininHaichiKubun
+     * 人員配置区分のgetメソッドです。
      *
-     * @return jininHaichiKubun
+     * @return 人員配置区分
      */
+    @CheckForNull
     public Code getJininHaichiKubun() {
         return jininHaichiKubun;
     }
 
     /**
-     * setJininHaichiKubun
+     * 人員配置区分のsetメソッドです。
      *
-     * @param jininHaichiKubun jininHaichiKubun
+     * @param jininHaichiKubun 人員配置区分
      */
     public void setJininHaichiKubun(Code jininHaichiKubun) {
         this.jininHaichiKubun = jininHaichiKubun;
     }
 
     /**
-     * getTokubetsuChiikiKasan_umu
+     * 特別地域加算の有無のgetメソッドです。
      *
-     * @return tokubetsuChiikiKasan_umu
+     * @return 特別地域加算の有無
      */
-    public TokubetsuChiikiKasanUmu getTokubetsuChiikiKasan_umu() {
+    @CheckForNull
+    public Code getTokubetsuChiikiKasan_umu() {
         return tokubetsuChiikiKasan_umu;
     }
 
     /**
-     * setTokubetsuChiikiKasan_umu
+     * 特別地域加算の有無のsetメソッドです。
      *
-     * @param tokubetsuChiikiKasan_umu tokubetsuChiikiKasan_umu
+     * @param tokubetsuChiikiKasan_umu 特別地域加算の有無
      */
-    public void setTokubetsuChiikiKasan_umu(TokubetsuChiikiKasanUmu tokubetsuChiikiKasan_umu) {
+    public void setTokubetsuChiikiKasan_umu(Code tokubetsuChiikiKasan_umu) {
         this.tokubetsuChiikiKasan_umu = tokubetsuChiikiKasan_umu;
     }
 
     /**
-     * getKinkyujiHomonkaigoKasan_umu
+     * 緊急時訪問介護加算の有無のgetメソッドです。
      *
-     * @return kinkyujiHomonkaigoKasan_umu
+     * @return 緊急時訪問介護加算の有無
      */
-    public KinkyujiHomonKaigoKasanUmu getKinkyujiHomonkaigoKasan_umu() {
+    @CheckForNull
+    public Code getKinkyujiHomonkaigoKasan_umu() {
         return kinkyujiHomonkaigoKasan_umu;
     }
 
     /**
-     * setKinkyujiHomonkaigoKasan_umu
+     * 緊急時訪問介護加算の有無のsetメソッドです。
      *
-     * @param kinkyujiHomonkaigoKasan_umu kinkyujiHomonkaigoKasan_umu
+     * @param kinkyujiHomonkaigoKasan_umu 緊急時訪問介護加算の有無
      */
-    public void setKinkyujiHomonkaigoKasan_umu(KinkyujiHomonKaigoKasanUmu kinkyujiHomonkaigoKasan_umu) {
+    public void setKinkyujiHomonkaigoKasan_umu(Code kinkyujiHomonkaigoKasan_umu) {
         this.kinkyujiHomonkaigoKasan_umu = kinkyujiHomonkaigoKasan_umu;
     }
 
     /**
-     * getTokubetsuKanriTaisei
+     * 特別管理体制のgetメソッドです。
      *
-     * @return tokubetsuKanriTaisei
+     * @return 特別管理体制
      */
-    public TokubetsuKanriTaisei getTokubetsuKanriTaisei() {
+    @CheckForNull
+    public Code getTokubetsuKanriTaisei() {
         return tokubetsuKanriTaisei;
     }
 
     /**
-     * setTokubetsuKanriTaisei
+     * 特別管理体制のsetメソッドです。
      *
-     * @param tokubetsuKanriTaisei tokubetsuKanriTaisei
+     * @param tokubetsuKanriTaisei 特別管理体制
      */
-    public void setTokubetsuKanriTaisei(TokubetsuKanriTaisei tokubetsuKanriTaisei) {
+    public void setTokubetsuKanriTaisei(Code tokubetsuKanriTaisei) {
         this.tokubetsuKanriTaisei = tokubetsuKanriTaisei;
     }
 
     /**
-     * getKinoKunrenShidoTaisei_umu
+     * 機能訓練指導体制の有無のgetメソッドです。
      *
-     * @return kinoKunrenShidoTaisei_umu
+     * @return 機能訓練指導体制の有無
      */
-    public KinokunrenShidoTaiseiUmu getKinoKunrenShidoTaisei_umu() {
+    @CheckForNull
+    public Code getKinoKunrenShidoTaisei_umu() {
         return kinoKunrenShidoTaisei_umu;
     }
 
     /**
-     * setKinoKunrenShidoTaisei_umu
+     * 機能訓練指導体制の有無のsetメソッドです。
      *
-     * @param kinoKunrenShidoTaisei_umu kinoKunrenShidoTaisei_umu
+     * @param kinoKunrenShidoTaisei_umu 機能訓練指導体制の有無
      */
-    public void setKinoKunrenShidoTaisei_umu(KinokunrenShidoTaiseiUmu kinoKunrenShidoTaisei_umu) {
+    public void setKinoKunrenShidoTaisei_umu(Code kinoKunrenShidoTaisei_umu) {
         this.kinoKunrenShidoTaisei_umu = kinoKunrenShidoTaisei_umu;
     }
 
     /**
-     * getShokujiTeikyoTaisei_umu
+     * 食事提供体制の有無のgetメソッドです。
      *
-     * @return shokujiTeikyoTaisei_umu
+     * @return 食事提供体制の有無
      */
-    public ShokujiTeikyoTaiseiUmu getShokujiTeikyoTaisei_umu() {
+    @CheckForNull
+    public Code getShokujiTeikyoTaisei_umu() {
         return shokujiTeikyoTaisei_umu;
     }
 
     /**
-     * setShokujiTeikyoTaisei_umu
+     * 食事提供体制の有無のsetメソッドです。
      *
-     * @param shokujiTeikyoTaisei_umu shokujiTeikyoTaisei_umu
+     * @param shokujiTeikyoTaisei_umu 食事提供体制の有無
      */
-    public void setShokujiTeikyoTaisei_umu(ShokujiTeikyoTaiseiUmu shokujiTeikyoTaisei_umu) {
+    public void setShokujiTeikyoTaisei_umu(Code shokujiTeikyoTaisei_umu) {
         this.shokujiTeikyoTaisei_umu = shokujiTeikyoTaisei_umu;
     }
 
     /**
-     * getNyuyokuKaijoTaisei_umu
+     * 入浴介助体制の有無のgetメソッドです。
      *
-     * @return nyuyokuKaijoTaisei_umu
+     * @return 入浴介助体制の有無
      */
-    public NyuyokuKaijoTaiseiUmu getNyuyokuKaijoTaisei_umu() {
+    @CheckForNull
+    public Code getNyuyokuKaijoTaisei_umu() {
         return nyuyokuKaijoTaisei_umu;
     }
 
     /**
-     * setNyuyokuKaijoTaisei_umu
+     * 入浴介助体制の有無のsetメソッドです。
      *
-     * @param nyuyokuKaijoTaisei_umu nyuyokuKaijoTaisei_umu
+     * @param nyuyokuKaijoTaisei_umu 入浴介助体制の有無
      */
-    public void setNyuyokuKaijoTaisei_umu(NyuyokuKaijoTaiseiUmu nyuyokuKaijoTaisei_umu) {
+    public void setNyuyokuKaijoTaisei_umu(Code nyuyokuKaijoTaisei_umu) {
         this.nyuyokuKaijoTaisei_umu = nyuyokuKaijoTaisei_umu;
     }
 
     /**
-     * getTokubetsuNyuyokuKaijoTaisei_umu
+     * 特別入浴介助体制の有無のgetメソッドです。
      *
-     * @return tokubetsuNyuyokuKaijoTaisei_umu
+     * @return 特別入浴介助体制の有無
      */
-    public TokubetsuNyuyokuKaijoTaiseiUmu getTokubetsuNyuyokuKaijoTaisei_umu() {
+    @CheckForNull
+    public Code getTokubetsuNyuyokuKaijoTaisei_umu() {
         return tokubetsuNyuyokuKaijoTaisei_umu;
     }
 
     /**
-     * setTokubetsuNyuyokuKaijoTaisei_umu
+     * 特別入浴介助体制の有無のsetメソッドです。
      *
-     * @param tokubetsuNyuyokuKaijoTaisei_umu tokubetsuNyuyokuKaijoTaisei_umu
+     * @param tokubetsuNyuyokuKaijoTaisei_umu 特別入浴介助体制の有無
      */
-    public void setTokubetsuNyuyokuKaijoTaisei_umu(TokubetsuNyuyokuKaijoTaiseiUmu tokubetsuNyuyokuKaijoTaisei_umu) {
+    public void setTokubetsuNyuyokuKaijoTaisei_umu(Code tokubetsuNyuyokuKaijoTaisei_umu) {
         this.tokubetsuNyuyokuKaijoTaisei_umu = tokubetsuNyuyokuKaijoTaisei_umu;
     }
 
     /**
-     * getJoukinsenjuIshiHaichi_umu
+     * 常勤専従医師配置の有無のgetメソッドです。
      *
-     * @return joukinsenjuIshiHaichi_umu
+     * @return 常勤専従医師配置の有無
      */
-    public JokinSenjuIshiHaichiUmu getJoukinsenjuIshiHaichi_umu() {
+    @CheckForNull
+    public Code getJoukinsenjuIshiHaichi_umu() {
         return joukinsenjuIshiHaichi_umu;
     }
 
     /**
-     * setJoukinsenjuIshiHaichi_umu
+     * 常勤専従医師配置の有無のsetメソッドです。
      *
-     * @param joukinsenjuIshiHaichi_umu joukinsenjuIshiHaichi_umu
+     * @param joukinsenjuIshiHaichi_umu 常勤専従医師配置の有無
      */
-    public void setJoukinsenjuIshiHaichi_umu(JokinSenjuIshiHaichiUmu joukinsenjuIshiHaichi_umu) {
+    public void setJoukinsenjuIshiHaichi_umu(Code joukinsenjuIshiHaichi_umu) {
         this.joukinsenjuIshiHaichi_umu = joukinsenjuIshiHaichi_umu;
     }
 
     /**
-     * getIshiHaichiKijun
+     * 医師の配置基準のgetメソッドです。
      *
-     * @return ishiHaichiKijun
+     * @return 医師の配置基準
      */
-    public IshiHaichiKijun getIshiHaichiKijun() {
+    @CheckForNull
+    public Code getIshiHaichiKijun() {
         return ishiHaichiKijun;
     }
 
     /**
-     * setIshiHaichiKijun
+     * 医師の配置基準のsetメソッドです。
      *
-     * @param ishiHaichiKijun ishiHaichiKijun
+     * @param ishiHaichiKijun 医師の配置基準
      */
-    public void setIshiHaichiKijun(IshiHaichiKijun ishiHaichiKijun) {
+    public void setIshiHaichiKijun(Code ishiHaichiKijun) {
         this.ishiHaichiKijun = ishiHaichiKijun;
     }
 
     /**
-     * getSeisinkaIshiTeikitekiRyouyousidou_umu
+     * 精神科医師定期的療養指導の有無のgetメソッドです。
      *
-     * @return seisinkaIshiTeikitekiRyouyousidou_umu
+     * @return 精神科医師定期的療養指導の有無
      */
-    public SeishinkaIshiTeikitekiRyoyoshidoUmu getSeisinkaIshiTeikitekiRyouyousidou_umu() {
+    @CheckForNull
+    public Code getSeisinkaIshiTeikitekiRyouyousidou_umu() {
         return seisinkaIshiTeikitekiRyouyousidou_umu;
     }
 
     /**
-     * setSeisinkaIshiTeikitekiRyouyousidou_umu
+     * 精神科医師定期的療養指導の有無のsetメソッドです。
      *
-     * @param seisinkaIshiTeikitekiRyouyousidou_umu
-     * seisinkaIshiTeikitekiRyouyousidou_umu
+     * @param seisinkaIshiTeikitekiRyouyousidou_umu 精神科医師定期的療養指導の有無
      */
-    public void setSeisinkaIshiTeikitekiRyouyousidou_umu(SeishinkaIshiTeikitekiRyoyoshidoUmu seisinkaIshiTeikitekiRyouyousidou_umu) {
+    public void setSeisinkaIshiTeikitekiRyouyousidou_umu(Code seisinkaIshiTeikitekiRyouyousidou_umu) {
         this.seisinkaIshiTeikitekiRyouyousidou_umu = seisinkaIshiTeikitekiRyouyousidou_umu;
     }
 
     /**
-     * getYakanKinmuJokenKijun
+     * 夜間勤務条件基準のgetメソッドです。
      *
-     * @return yakanKinmuJokenKijun
+     * @return 夜間勤務条件基準
      */
+    @CheckForNull
     public Code getYakanKinmuJokenKijun() {
         return yakanKinmuJokenKijun;
     }
 
     /**
-     * setYakanKinmuJokenKijun
+     * 夜間勤務条件基準のsetメソッドです。
      *
-     * @param yakanKinmuJokenKijun yakanKinmuJokenKijun
+     * @param yakanKinmuJokenKijun 夜間勤務条件基準
      */
     public void setYakanKinmuJokenKijun(Code yakanKinmuJokenKijun) {
         this.yakanKinmuJokenKijun = yakanKinmuJokenKijun;
     }
 
     /**
-     * getNinchishouSenmontou_umu
+     * 認知症専門棟の有無のgetメソッドです。
      *
-     * @return ninchishouSenmontou_umu
+     * @return 認知症専門棟の有無
      */
-    public NinchishoSemmontoUmu getNinchishouSenmontou_umu() {
+    @CheckForNull
+    public Code getNinchishouSenmontou_umu() {
         return ninchishouSenmontou_umu;
     }
 
     /**
-     * setNinchishouSenmontou_umu
+     * 認知症専門棟の有無のsetメソッドです。
      *
-     * @param ninchishouSenmontou_umu ninchishouSenmontou_umu
+     * @param ninchishouSenmontou_umu 認知症専門棟の有無
      */
-    public void setNinchishouSenmontou_umu(NinchishoSemmontoUmu ninchishouSenmontou_umu) {
+    public void setNinchishouSenmontou_umu(Code ninchishouSenmontou_umu) {
         this.ninchishouSenmontou_umu = ninchishouSenmontou_umu;
     }
 
     /**
-     * getShokujiTeikyoJokyo
+     * 食事提供の状況のgetメソッドです。
      *
-     * @return shokujiTeikyoJokyo
+     * @return 食事提供の状況
      */
-    public ShokujiTeikyoJokyo getShokujiTeikyoJokyo() {
+    @CheckForNull
+    public Code getShokujiTeikyoJokyo() {
         return shokujiTeikyoJokyo;
     }
 
     /**
-     * setShokujiTeikyoJokyo
+     * 食事提供の状況のsetメソッドです。
      *
-     * @param shokujiTeikyoJokyo shokujiTeikyoJokyo
+     * @param shokujiTeikyoJokyo 食事提供の状況
      */
-    public void setShokujiTeikyoJokyo(ShokujiTeikyoJokyo shokujiTeikyoJokyo) {
+    public void setShokujiTeikyoJokyo(Code shokujiTeikyoJokyo) {
         this.shokujiTeikyoJokyo = shokujiTeikyoJokyo;
     }
 
     /**
-     * getSougeiTaisei
+     * 送迎体制のgetメソッドです。
      *
-     * @return sougeiTaisei
+     * @return 送迎体制
      */
-    public SogeiTaisei getSougeiTaisei() {
+    @CheckForNull
+    public Code getSougeiTaisei() {
         return sougeiTaisei;
     }
 
     /**
-     * setSougeiTaisei
+     * 送迎体制のsetメソッドです。
      *
-     * @param sougeiTaisei sougeiTaisei
+     * @param sougeiTaisei 送迎体制
      */
-    public void setSougeiTaisei(SogeiTaisei sougeiTaisei) {
+    public void setSougeiTaisei(Code sougeiTaisei) {
         this.sougeiTaisei = sougeiTaisei;
     }
 
     /**
-     * getRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * リハビリテーション提供体制（総合リハビリテーション施設）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * @return リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu getRehaTeikyoTaisei_SogoRehaShisetsu_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_SogoRehaShisetsu_umu() {
         return rehaTeikyoTaisei_SogoRehaShisetsu_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * リハビリテーション提供体制（総合リハビリテーション施設）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu
-     * rehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
-    public void setRehaTeikyoTaisei_SogoRehaShisetsu_umu(RehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu rehaTeikyoTaisei_SogoRehaShisetsu_umu) {
+    public void setRehaTeikyoTaisei_SogoRehaShisetsu_umu(Code rehaTeikyoTaisei_SogoRehaShisetsu_umu) {
         this.rehaTeikyoTaisei_SogoRehaShisetsu_umu = rehaTeikyoTaisei_SogoRehaShisetsu_umu;
     }
 
     /**
-     * getRehaTeikyoTaisei_RigakuRyohoII_umu
+     * リハビリテーション提供体制（理学療法Ⅱ）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_RigakuRyohoII_umu
+     * @return リハビリテーション提供体制（理学療法Ⅱ）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_RigakuRyoho2 getRehaTeikyoTaisei_RigakuRyohoII_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_RigakuRyohoII_umu() {
         return rehaTeikyoTaisei_RigakuRyohoII_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_RigakuRyohoII_umu
+     * リハビリテーション提供体制（理学療法Ⅱ）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_RigakuRyohoII_umu
-     * rehaTeikyoTaisei_RigakuRyohoII_umu
+     * @param rehaTeikyoTaisei_RigakuRyohoII_umu リハビリテーション提供体制（理学療法Ⅱ）の有無
      */
-    public void setRehaTeikyoTaisei_RigakuRyohoII_umu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho2 rehaTeikyoTaisei_RigakuRyohoII_umu) {
+    public void setRehaTeikyoTaisei_RigakuRyohoII_umu(Code rehaTeikyoTaisei_RigakuRyohoII_umu) {
         this.rehaTeikyoTaisei_RigakuRyohoII_umu = rehaTeikyoTaisei_RigakuRyohoII_umu;
     }
 
     /**
-     * getRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * リハビリテーション提供体制（理学療法Ⅲ）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_RigakuRyohoIII_umu
+     * @return リハビリテーション提供体制（理学療法Ⅲ）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_RigakuRyoho3 getRehaTeikyoTaisei_RigakuRyohoIII_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_RigakuRyohoIII_umu() {
         return rehaTeikyoTaisei_RigakuRyohoIII_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * リハビリテーション提供体制（理学療法Ⅲ）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_RigakuRyohoIII_umu
-     * rehaTeikyoTaisei_RigakuRyohoIII_umu
+     * @param rehaTeikyoTaisei_RigakuRyohoIII_umu リハビリテーション提供体制（理学療法Ⅲ）の有無
      */
-    public void setRehaTeikyoTaisei_RigakuRyohoIII_umu(RehabilitationTeikyoTaiseiUmu_RigakuRyoho3 rehaTeikyoTaisei_RigakuRyohoIII_umu) {
+    public void setRehaTeikyoTaisei_RigakuRyohoIII_umu(Code rehaTeikyoTaisei_RigakuRyohoIII_umu) {
         this.rehaTeikyoTaisei_RigakuRyohoIII_umu = rehaTeikyoTaisei_RigakuRyohoIII_umu;
     }
 
     /**
-     * getRehaTeikyoTaisei_SagyoRyohoII_umu
+     * リハビリテーション提供体制（作業療法Ⅱ）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_SagyoRyohoII_umu
+     * @return リハビリテーション提供体制（作業療法Ⅱ）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_SagyoRyoho2 getRehaTeikyoTaisei_SagyoRyohoII_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_SagyoRyohoII_umu() {
         return rehaTeikyoTaisei_SagyoRyohoII_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_SagyoRyohoII_umu
+     * リハビリテーション提供体制（作業療法Ⅱ）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_SagyoRyohoII_umu
-     * rehaTeikyoTaisei_SagyoRyohoII_umu
+     * @param rehaTeikyoTaisei_SagyoRyohoII_umu リハビリテーション提供体制（作業療法Ⅱ）の有無
      */
-    public void setRehaTeikyoTaisei_SagyoRyohoII_umu(RehabilitationTeikyoTaiseiUmu_SagyoRyoho2 rehaTeikyoTaisei_SagyoRyohoII_umu) {
+    public void setRehaTeikyoTaisei_SagyoRyohoII_umu(Code rehaTeikyoTaisei_SagyoRyohoII_umu) {
         this.rehaTeikyoTaisei_SagyoRyohoII_umu = rehaTeikyoTaisei_SagyoRyohoII_umu;
     }
 
     /**
-     * getRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
+     * リハビリテーション提供体制（精神科作業療法）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
+     * @return リハビリテーション提供体制（精神科作業療法）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho getRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu() {
         return rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
+     * リハビリテーション提供体制（精神科作業療法）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
-     * rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu
+     * @param rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu リハビリテーション提供体制（精神科作業療法）の有無
      */
-    public void setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(RehabilitationTeikyoTaiseiUmu_SeishinkaSagyoRyoho rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu) {
+    public void setRehaTeikyoTaisei_SeisinkaSagyouRyoho_umu(Code rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu) {
         this.rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu = rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu;
     }
 
     /**
-     * getRehaTeikyoTaisei_Sonota_umu
+     * リハビリテーション提供体制（その他）の有無のgetメソッドです。
      *
-     * @return rehaTeikyoTaisei_Sonota_umu
+     * @return リハビリテーション提供体制（その他）の有無
      */
-    public RehabilitationTeikyoTaiseiUmu_Sonota getRehaTeikyoTaisei_Sonota_umu() {
+    @CheckForNull
+    public Code getRehaTeikyoTaisei_Sonota_umu() {
         return rehaTeikyoTaisei_Sonota_umu;
     }
 
     /**
-     * setRehaTeikyoTaisei_Sonota_umu
+     * リハビリテーション提供体制（その他）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_Sonota_umu rehaTeikyoTaisei_Sonota_umu
+     * @param rehaTeikyoTaisei_Sonota_umu リハビリテーション提供体制（その他）の有無
      */
-    public void setRehaTeikyoTaisei_Sonota_umu(RehabilitationTeikyoTaiseiUmu_Sonota rehaTeikyoTaisei_Sonota_umu) {
+    public void setRehaTeikyoTaisei_Sonota_umu(Code rehaTeikyoTaisei_Sonota_umu) {
         this.rehaTeikyoTaisei_Sonota_umu = rehaTeikyoTaisei_Sonota_umu;
     }
 
     /**
-     * getRehabilitationKasanJokyo
+     * リハビリテーションの加算状況の有無のgetメソッドです。
      *
-     * @return rehabilitationKasanJokyo
+     * @return リハビリテーションの加算状況の有無
      */
-    public RehabilitationKasanJokyoUmu getRehabilitationKasanJokyo() {
+    @CheckForNull
+    public Code getRehabilitationKasanJokyo() {
         return rehabilitationKasanJokyo;
     }
 
     /**
-     * setRehabilitationKasanJokyo
+     * リハビリテーションの加算状況の有無のsetメソッドです。
      *
-     * @param rehabilitationKasanJokyo rehabilitationKasanJokyo
+     * @param rehabilitationKasanJokyo リハビリテーションの加算状況の有無
      */
-    public void setRehabilitationKasanJokyo(RehabilitationKasanJokyoUmu rehabilitationKasanJokyo) {
+    public void setRehabilitationKasanJokyo(Code rehabilitationKasanJokyo) {
         this.rehabilitationKasanJokyo = rehabilitationKasanJokyo;
     }
 
     /**
-     * getRyoyoKankyoKijun
+     * 療養環境基準のgetメソッドです。
      *
-     * @return ryoyoKankyoKijun
+     * @return 療養環境基準
      */
+    @CheckForNull
     public Code getRyoyoKankyoKijun() {
         return ryoyoKankyoKijun;
     }
 
     /**
-     * setRyoyoKankyoKijun
+     * 療養環境基準のsetメソッドです。
      *
-     * @param ryoyoKankyoKijun ryoyoKankyoKijun
+     * @param ryoyoKankyoKijun 療養環境基準
      */
     public void setRyoyoKankyoKijun(Code ryoyoKankyoKijun) {
         this.ryoyoKankyoKijun = ryoyoKankyoKijun;
     }
 
     /**
-     * getIshiKetuinGenzanJokyo_umu
+     * 医師の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return ishiKetuinGenzanJokyo_umu
+     * @return 医師の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByIshiKetsuin getIshiKetuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getIshiKetuinGenzanJokyo_umu() {
         return ishiKetuinGenzanJokyo_umu;
     }
 
     /**
-     * setIshiKetuinGenzanJokyo_umu
+     * 医師の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param ishiKetuinGenzanJokyo_umu ishiKetuinGenzanJokyo_umu
+     * @param ishiKetuinGenzanJokyo_umu 医師の欠員による減算の状況の有無
      */
-    public void setIshiKetuinGenzanJokyo_umu(GenzanJokyoUmuByIshiKetsuin ishiKetuinGenzanJokyo_umu) {
+    public void setIshiKetuinGenzanJokyo_umu(Code ishiKetuinGenzanJokyo_umu) {
         this.ishiKetuinGenzanJokyo_umu = ishiKetuinGenzanJokyo_umu;
     }
 
     /**
-     * getKangoShokuinKetsuinGenzanJokyo_umu
+     * 看護職員の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return kangoShokuinKetsuinGenzanJokyo_umu
+     * @return 看護職員の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByKangoStaffKetsuin getKangoShokuinKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getKangoShokuinKetsuinGenzanJokyo_umu() {
         return kangoShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setKangoShokuinKetsuinGenzanJokyo_umu
+     * 看護職員の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param kangoShokuinKetsuinGenzanJokyo_umu
-     * kangoShokuinKetsuinGenzanJokyo_umu
+     * @param kangoShokuinKetsuinGenzanJokyo_umu 看護職員の欠員による減算の状況の有無
      */
-    public void setKangoShokuinKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKangoStaffKetsuin kangoShokuinKetsuinGenzanJokyo_umu) {
+    public void setKangoShokuinKetsuinGenzanJokyo_umu(Code kangoShokuinKetsuinGenzanJokyo_umu) {
         this.kangoShokuinKetsuinGenzanJokyo_umu = kangoShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getRigakuRyouhousiKetsuinGenzanJokyo_umu
+     * 理学療法士の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return rigakuRyouhousiKetsuinGenzanJokyo_umu
+     * @return 理学療法士の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByRigakuryohoshiKetsuin getRigakuRyouhousiKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getRigakuRyouhousiKetsuinGenzanJokyo_umu() {
         return rigakuRyouhousiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setRigakuRyouhousiKetsuinGenzanJokyo_umu
+     * 理学療法士の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param rigakuRyouhousiKetsuinGenzanJokyo_umu
-     * rigakuRyouhousiKetsuinGenzanJokyo_umu
+     * @param rigakuRyouhousiKetsuinGenzanJokyo_umu 理学療法士の欠員による減算の状況の有無
      */
-    public void setRigakuRyouhousiKetsuinGenzanJokyo_umu(GenzanJokyoUmuByRigakuryohoshiKetsuin rigakuRyouhousiKetsuinGenzanJokyo_umu) {
+    public void setRigakuRyouhousiKetsuinGenzanJokyo_umu(Code rigakuRyouhousiKetsuinGenzanJokyo_umu) {
         this.rigakuRyouhousiKetsuinGenzanJokyo_umu = rigakuRyouhousiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getSagyouRyouhousiKetsuinGenzanJokyo_umu
+     * 作業療法士の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return sagyouRyouhousiKetsuinGenzanJokyo_umu
+     * @return 作業療法士の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuBySagyoryohoshiKetsuin getSagyouRyouhousiKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getSagyouRyouhousiKetsuinGenzanJokyo_umu() {
         return sagyouRyouhousiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setSagyouRyouhousiKetsuinGenzanJokyo_umu
+     * 作業療法士の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param sagyouRyouhousiKetsuinGenzanJokyo_umu
-     * sagyouRyouhousiKetsuinGenzanJokyo_umu
+     * @param sagyouRyouhousiKetsuinGenzanJokyo_umu 作業療法士の欠員による減算の状況の有無
      */
-    public void setSagyouRyouhousiKetsuinGenzanJokyo_umu(GenzanJokyoUmuBySagyoryohoshiKetsuin sagyouRyouhousiKetsuinGenzanJokyo_umu) {
+    public void setSagyouRyouhousiKetsuinGenzanJokyo_umu(Code sagyouRyouhousiKetsuinGenzanJokyo_umu) {
         this.sagyouRyouhousiKetsuinGenzanJokyo_umu = sagyouRyouhousiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getKaigoShokuinKetsuinGenzanJokyo_umu
+     * 介護職員の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return kaigoShokuinKetsuinGenzanJokyo_umu
+     * @return 介護職員の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByKaigoStaffKetsuin getKaigoShokuinKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getKaigoShokuinKetsuinGenzanJokyo_umu() {
         return kaigoShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setKaigoShokuinKetsuinGenzanJokyo_umu
+     * 介護職員の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param kaigoShokuinKetsuinGenzanJokyo_umu
-     * kaigoShokuinKetsuinGenzanJokyo_umu
+     * @param kaigoShokuinKetsuinGenzanJokyo_umu 介護職員の欠員による減算の状況の有無
      */
-    public void setKaigoShokuinKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKaigoStaffKetsuin kaigoShokuinKetsuinGenzanJokyo_umu) {
+    public void setKaigoShokuinKetsuinGenzanJokyo_umu(Code kaigoShokuinKetsuinGenzanJokyo_umu) {
         this.kaigoShokuinKetsuinGenzanJokyo_umu = kaigoShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
+     * 介護支援専門員の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
+     * @return 介護支援専門員の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByKaigoSupportSemmoninKetsuin getKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu() {
         return kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
+     * 介護支援専門員の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
-     * kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
+     * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu 介護支援専門員の欠員による減算の状況の有無
      */
-    public void setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKaigoSupportSemmoninKetsuin kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu) {
+    public void setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(Code kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu) {
         this.kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu = kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getKaigoJujishaKetsuinGenzanJokyo_umu
+     * 介護従業者の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return kaigoJujishaKetsuinGenzanJokyo_umu
+     * @return 介護従業者の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByKaigojugyoshaKetsuin getKaigoJujishaKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getKaigoJujishaKetsuinGenzanJokyo_umu() {
         return kaigoJujishaKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setKaigoJujishaKetsuinGenzanJokyo_umu
+     * 介護従業者の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param kaigoJujishaKetsuinGenzanJokyo_umu
-     * kaigoJujishaKetsuinGenzanJokyo_umu
+     * @param kaigoJujishaKetsuinGenzanJokyo_umu 介護従業者の欠員による減算の状況の有無
      */
-    public void setKaigoJujishaKetsuinGenzanJokyo_umu(GenzanJokyoUmuByKaigojugyoshaKetsuin kaigoJujishaKetsuinGenzanJokyo_umu) {
+    public void setKaigoJujishaKetsuinGenzanJokyo_umu(Code kaigoJujishaKetsuinGenzanJokyo_umu) {
         this.kaigoJujishaKetsuinGenzanJokyo_umu = kaigoJujishaKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getKansenTaisakuSidoKanri_umu
+     * 感染対策指導管理の有無のgetメソッドです。
      *
-     * @return kansenTaisakuSidoKanri_umu
+     * @return 感染対策指導管理の有無
      */
-    public KansentaisakuShidoKanriUmu getKansenTaisakuSidoKanri_umu() {
+    @CheckForNull
+    public Code getKansenTaisakuSidoKanri_umu() {
         return kansenTaisakuSidoKanri_umu;
     }
 
     /**
-     * setKansenTaisakuSidoKanri_umu
+     * 感染対策指導管理の有無のsetメソッドです。
      *
-     * @param kansenTaisakuSidoKanri_umu kansenTaisakuSidoKanri_umu
+     * @param kansenTaisakuSidoKanri_umu 感染対策指導管理の有無
      */
-    public void setKansenTaisakuSidoKanri_umu(KansentaisakuShidoKanriUmu kansenTaisakuSidoKanri_umu) {
+    public void setKansenTaisakuSidoKanri_umu(Code kansenTaisakuSidoKanri_umu) {
         this.kansenTaisakuSidoKanri_umu = kansenTaisakuSidoKanri_umu;
     }
 
     /**
-     * getJushoHifuKaiyouShidoKanri_umu
+     * 重症皮膚潰瘍指導管理の有無のgetメソッドです。
      *
-     * @return jushoHifuKaiyouShidoKanri_umu
+     * @return 重症皮膚潰瘍指導管理の有無
      */
-    public JushoHifukaiyoShidoKanriUmu getJushoHifuKaiyouShidoKanri_umu() {
+    @CheckForNull
+    public Code getJushoHifuKaiyouShidoKanri_umu() {
         return jushoHifuKaiyouShidoKanri_umu;
     }
 
     /**
-     * setJushoHifuKaiyouShidoKanri_umu
+     * 重症皮膚潰瘍指導管理の有無のsetメソッドです。
      *
-     * @param jushoHifuKaiyouShidoKanri_umu jushoHifuKaiyouShidoKanri_umu
+     * @param jushoHifuKaiyouShidoKanri_umu 重症皮膚潰瘍指導管理の有無
      */
-    public void setJushoHifuKaiyouShidoKanri_umu(JushoHifukaiyoShidoKanriUmu jushoHifuKaiyouShidoKanri_umu) {
+    public void setJushoHifuKaiyouShidoKanri_umu(Code jushoHifuKaiyouShidoKanri_umu) {
         this.jushoHifuKaiyouShidoKanri_umu = jushoHifuKaiyouShidoKanri_umu;
     }
 
     /**
-     * getYakuzaiKaniriShido_umu
+     * 薬剤管理指導の有無のgetメソッドです。
      *
-     * @return yakuzaiKaniriShido_umu
+     * @return 薬剤管理指導の有無
      */
-    public YakuzaiKanriShidoUmu getYakuzaiKaniriShido_umu() {
+    @CheckForNull
+    public Code getYakuzaiKaniriShido_umu() {
         return yakuzaiKaniriShido_umu;
     }
 
     /**
-     * setYakuzaiKaniriShido_umu
+     * 薬剤管理指導の有無のsetメソッドです。
      *
-     * @param yakuzaiKaniriShido_umu yakuzaiKaniriShido_umu
+     * @param yakuzaiKaniriShido_umu 薬剤管理指導の有無
      */
-    public void setYakuzaiKaniriShido_umu(YakuzaiKanriShidoUmu yakuzaiKaniriShido_umu) {
+    public void setYakuzaiKaniriShido_umu(Code yakuzaiKaniriShido_umu) {
         this.yakuzaiKaniriShido_umu = yakuzaiKaniriShido_umu;
     }
 
     /**
-     * getShogaishaSeikatsuShienTaisei_umu
+     * 障害者生活支援体制の有無のgetメソッドです。
      *
-     * @return shogaishaSeikatsuShienTaisei_umu
+     * @return 障害者生活支援体制の有無
      */
-    public ShogaishaSeikatsuSupportTaiseiUmu getShogaishaSeikatsuShienTaisei_umu() {
+    @CheckForNull
+    public Code getShogaishaSeikatsuShienTaisei_umu() {
         return shogaishaSeikatsuShienTaisei_umu;
     }
 
     /**
-     * setShogaishaSeikatsuShienTaisei_umu
+     * 障害者生活支援体制の有無のsetメソッドです。
      *
-     * @param shogaishaSeikatsuShienTaisei_umu shogaishaSeikatsuShienTaisei_umu
+     * @param shogaishaSeikatsuShienTaisei_umu 障害者生活支援体制の有無
      */
-    public void setShogaishaSeikatsuShienTaisei_umu(ShogaishaSeikatsuSupportTaiseiUmu shogaishaSeikatsuShienTaisei_umu) {
+    public void setShogaishaSeikatsuShienTaisei_umu(Code shogaishaSeikatsuShienTaisei_umu) {
         this.shogaishaSeikatsuShienTaisei_umu = shogaishaSeikatsuShienTaisei_umu;
     }
 
     /**
-     * getChiikiKubunCode
+     * 地域区分コードのgetメソッドです。
      *
-     * @return chiikiKubunCode
+     * @return 地域区分コード
      */
-    public ChiikiKubun getChiikiKubunCode() {
+    @CheckForNull
+    public Code getChiikiKubunCode() {
         return chiikiKubunCode;
     }
 
     /**
-     * setChiikiKubunCode
+     * 地域区分コードのsetメソッドです。
      *
-     * @param chiikiKubunCode chiikiKubunCode
+     * @param chiikiKubunCode 地域区分コード
      */
-    public void setChiikiKubunCode(ChiikiKubun chiikiKubunCode) {
+    public void setChiikiKubunCode(Code chiikiKubunCode) {
         this.chiikiKubunCode = chiikiKubunCode;
     }
 
     /**
-     * getJikanEnchoServiceTaisei
+     * 時間延長サービス体制のgetメソッドです。
      *
-     * @return jikanEnchoServiceTaisei
+     * @return 時間延長サービス体制
      */
-    public JikanEnchoServiceTaisei getJikanEnchoServiceTaisei() {
+    @CheckForNull
+    public Code getJikanEnchoServiceTaisei() {
         return jikanEnchoServiceTaisei;
     }
 
     /**
-     * setJikanEnchoServiceTaisei
+     * 時間延長サービス体制のsetメソッドです。
      *
-     * @param jikanEnchoServiceTaisei jikanEnchoServiceTaisei
+     * @param jikanEnchoServiceTaisei 時間延長サービス体制
      */
-    public void setJikanEnchoServiceTaisei(JikanEnchoServiceTaisei jikanEnchoServiceTaisei) {
+    public void setJikanEnchoServiceTaisei(Code jikanEnchoServiceTaisei) {
         this.jikanEnchoServiceTaisei = jikanEnchoServiceTaisei;
     }
 
     /**
-     * getKobetsuRehabilitationTeikyoTaisei
+     * 個別リハビリテーション提供体制のgetメソッドです。
      *
-     * @return kobetsuRehabilitationTeikyoTaisei
+     * @return 個別リハビリテーション提供体制
      */
-    public KobetsuRehabilitationTeikyoTaisei getKobetsuRehabilitationTeikyoTaisei() {
+    @CheckForNull
+    public Code getKobetsuRehabilitationTeikyoTaisei() {
         return kobetsuRehabilitationTeikyoTaisei;
     }
 
     /**
-     * setKobetsuRehabilitationTeikyoTaisei
+     * 個別リハビリテーション提供体制のsetメソッドです。
      *
-     * @param kobetsuRehabilitationTeikyoTaisei
-     * kobetsuRehabilitationTeikyoTaisei
+     * @param kobetsuRehabilitationTeikyoTaisei 個別リハビリテーション提供体制
      */
-    public void setKobetsuRehabilitationTeikyoTaisei(KobetsuRehabilitationTeikyoTaisei kobetsuRehabilitationTeikyoTaisei) {
+    public void setKobetsuRehabilitationTeikyoTaisei(Code kobetsuRehabilitationTeikyoTaisei) {
         this.kobetsuRehabilitationTeikyoTaisei = kobetsuRehabilitationTeikyoTaisei;
     }
 
     /**
-     * getKyojuhiTaisaku
+     * 居住費対策のgetメソッドです。
      *
-     * @return kyojuhiTaisaku
+     * @return 居住費対策
      */
-    public KyojuhiTaiseku getKyojuhiTaisaku() {
+    @CheckForNull
+    public Code getKyojuhiTaisaku() {
         return kyojuhiTaisaku;
     }
 
     /**
-     * setKyojuhiTaisaku
+     * 居住費対策のsetメソッドです。
      *
-     * @param kyojuhiTaisaku kyojuhiTaisaku
+     * @param kyojuhiTaisaku 居住費対策
      */
-    public void setKyojuhiTaisaku(KyojuhiTaiseku kyojuhiTaisaku) {
+    public void setKyojuhiTaisaku(Code kyojuhiTaisaku) {
         this.kyojuhiTaisaku = kyojuhiTaisaku;
     }
 
     /**
-     * getYakanCare_umu
+     * 夜間ケアの有無のgetメソッドです。
      *
-     * @return yakanCare_umu
+     * @return 夜間ケアの有無
      */
-    public YakanCareUmu getYakanCare_umu() {
+    @CheckForNull
+    public Code getYakanCare_umu() {
         return yakanCare_umu;
     }
 
     /**
-     * setYakanCare_umu
+     * 夜間ケアの有無のsetメソッドです。
      *
-     * @param yakanCare_umu yakanCare_umu
+     * @param yakanCare_umu 夜間ケアの有無
      */
-    public void setYakanCare_umu(YakanCareUmu yakanCare_umu) {
+    public void setYakanCare_umu(Code yakanCare_umu) {
         this.yakanCare_umu = yakanCare_umu;
     }
 
     /**
-     * getRehabilitationKinoKyoka_umu
+     * リハビリテーション機能強化の有無のgetメソッドです。
      *
-     * @return rehabilitationKinoKyoka_umu
+     * @return リハビリテーション機能強化の有無
      */
-    public RehabilitationKinoKyokaUmu getRehabilitationKinoKyoka_umu() {
+    @CheckForNull
+    public Code getRehabilitationKinoKyoka_umu() {
         return rehabilitationKinoKyoka_umu;
     }
 
     /**
-     * setRehabilitationKinoKyoka_umu
+     * リハビリテーション機能強化の有無のsetメソッドです。
      *
-     * @param rehabilitationKinoKyoka_umu rehabilitationKinoKyoka_umu
+     * @param rehabilitationKinoKyoka_umu リハビリテーション機能強化の有無
      */
-    public void setRehabilitationKinoKyoka_umu(RehabilitationKinoKyokaUmu rehabilitationKinoKyoka_umu) {
+    public void setRehabilitationKinoKyoka_umu(Code rehabilitationKinoKyoka_umu) {
         this.rehabilitationKinoKyoka_umu = rehabilitationKinoKyoka_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * @return 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu getKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu() {
         return kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
-     * kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(KobetsuRehabilitationTeikyoTaiseiUmu_SogoRehabilitationShisetsu kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu) {
+    public void setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(Code kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu) {
         this.kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu = kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
+     * @return 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2 getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1() {
         return kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
-     * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1
      */
-    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1) {
+    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 = kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * 個別リハビリテーション提供体制（理学療法Ⅲ）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * @return 個別リハビリテーション提供体制（理学療法Ⅲ）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3 getKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu() {
         return kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * 個別リハビリテーション提供体制（理学療法Ⅲ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
-     * kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu 個別リハビリテーション提供体制（理学療法Ⅲ）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho3_BeforeH18_3 kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu) {
+    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(Code kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu = kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
+     * 個別リハビリテーション提供体制（作業療法Ⅱ）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
+     * @return 個別リハビリテーション提供体制（作業療法Ⅱ）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1 getKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu() {
         return kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
+     * 個別リハビリテーション提供体制（作業療法Ⅱ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
-     * kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu
+     * @param kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu 個別リハビリテーション提供体制（作業療法Ⅱ）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho1 kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu) {
+    public void setKobetsuRehaTeikyoTaisei_SagyoRyohoII_umu(Code kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu) {
         this.kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu = kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
+     * @return 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2 getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu() {
         return kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
-     * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu) {
+    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
+     * @return 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2 getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu() {
         return kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
-     * kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho2 kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu) {
+    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu;
     }
 
     /**
-     * getGengoChokakushiKetsuinGenzanJokyo_umu
+     * 言語聴覚士の欠員による減算の状況の有無のgetメソッドです。
      *
-     * @return gengoChokakushiKetsuinGenzanJokyo_umu
+     * @return 言語聴覚士の欠員による減算の状況の有無
      */
-    public GenzanJokyoUmuByGengoChokakushiKetsuin getGengoChokakushiKetsuinGenzanJokyo_umu() {
+    @CheckForNull
+    public Code getGengoChokakushiKetsuinGenzanJokyo_umu() {
         return gengoChokakushiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * setGengoChokakushiKetsuinGenzanJokyo_umu
+     * 言語聴覚士の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param gengoChokakushiKetsuinGenzanJokyo_umu
-     * gengoChokakushiKetsuinGenzanJokyo_umu
+     * @param gengoChokakushiKetsuinGenzanJokyo_umu 言語聴覚士の欠員による減算の状況の有無
      */
-    public void setGengoChokakushiKetsuinGenzanJokyo_umu(GenzanJokyoUmuByGengoChokakushiKetsuin gengoChokakushiKetsuinGenzanJokyo_umu) {
+    public void setGengoChokakushiKetsuinGenzanJokyo_umu(Code gengoChokakushiKetsuinGenzanJokyo_umu) {
         this.gengoChokakushiKetsuinGenzanJokyo_umu = gengoChokakushiKetsuinGenzanJokyo_umu;
     }
 
     /**
-     * getEiyouKanriHyoka
+     * 栄養管理の評価のgetメソッドです。
      *
-     * @return eiyouKanriHyoka
+     * @return 栄養管理の評価
      */
-    public ShafukuhojinKeigenJigyoJisshiUmu getEiyouKanriHyoka() {
+    @CheckForNull
+    public Code getEiyouKanriHyoka() {
         return eiyouKanriHyoka;
     }
 
     /**
-     * setEiyouKanriHyoka
+     * 栄養管理の評価のsetメソッドです。
      *
-     * @param eiyouKanriHyoka eiyouKanriHyoka
+     * @param eiyouKanriHyoka 栄養管理の評価
      */
-    public void setEiyouKanriHyoka(ShafukuhojinKeigenJigyoJisshiUmu eiyouKanriHyoka) {
+    public void setEiyouKanriHyoka(Code eiyouKanriHyoka) {
         this.eiyouKanriHyoka = eiyouKanriHyoka;
     }
 
     /**
-     * getTokuteijigyoushoKasan_HomonKaigo_umu
+     * 特定事業所加算（訪問介護）の有無のgetメソッドです。
      *
-     * @return tokuteijigyoushoKasan_HomonKaigo_umu
+     * @return 特定事業所加算（訪問介護）の有無
      */
-    public TokuteiJigyoshoKasanUmu getTokuteijigyoushoKasan_HomonKaigo_umu() {
+    @CheckForNull
+    public Code getTokuteijigyoushoKasan_HomonKaigo_umu() {
         return tokuteijigyoushoKasan_HomonKaigo_umu;
     }
 
     /**
-     * setTokuteijigyoushoKasan_HomonKaigo_umu
+     * 特定事業所加算（訪問介護）の有無のsetメソッドです。
      *
-     * @param tokuteijigyoushoKasan_HomonKaigo_umu
-     * tokuteijigyoushoKasan_HomonKaigo_umu
+     * @param tokuteijigyoushoKasan_HomonKaigo_umu 特定事業所加算（訪問介護）の有無
      */
-    public void setTokuteijigyoushoKasan_HomonKaigo_umu(TokuteiJigyoshoKasanUmu tokuteijigyoushoKasan_HomonKaigo_umu) {
+    public void setTokuteijigyoushoKasan_HomonKaigo_umu(Code tokuteijigyoushoKasan_HomonKaigo_umu) {
         this.tokuteijigyoushoKasan_HomonKaigo_umu = tokuteijigyoushoKasan_HomonKaigo_umu;
     }
 
     /**
-     * getJakunenseiNinchishoCareTaisei_umu
+     * 若年性認知症ケア体制の有無のgetメソッドです。
      *
-     * @return jakunenseiNinchishoCareTaisei_umu
+     * @return 若年性認知症ケア体制の有無
      */
-    public JakunenseiNinchishoCareTaiseiUmu getJakunenseiNinchishoCareTaisei_umu() {
+    @CheckForNull
+    public Code getJakunenseiNinchishoCareTaisei_umu() {
         return jakunenseiNinchishoCareTaisei_umu;
     }
 
     /**
-     * setJakunenseiNinchishoCareTaisei_umu
+     * 若年性認知症ケア体制の有無のsetメソッドです。
      *
-     * @param jakunenseiNinchishoCareTaisei_umu
-     * jakunenseiNinchishoCareTaisei_umu
+     * @param jakunenseiNinchishoCareTaisei_umu 若年性認知症ケア体制の有無
      */
-    public void setJakunenseiNinchishoCareTaisei_umu(JakunenseiNinchishoCareTaiseiUmu jakunenseiNinchishoCareTaisei_umu) {
+    public void setJakunenseiNinchishoCareTaisei_umu(Code jakunenseiNinchishoCareTaisei_umu) {
         this.jakunenseiNinchishoCareTaisei_umu = jakunenseiNinchishoCareTaisei_umu;
     }
 
     /**
-     * getUndokiKinoKojoTaisei_umu
+     * 運動器機能向上体制の有無のgetメソッドです。
      *
-     * @return undokiKinoKojoTaisei_umu
+     * @return 運動器機能向上体制の有無
      */
-    public UndokiKinoKojoTaiseiUmu getUndokiKinoKojoTaisei_umu() {
+    @CheckForNull
+    public Code getUndokiKinoKojoTaisei_umu() {
         return undokiKinoKojoTaisei_umu;
     }
 
     /**
-     * setUndokiKinoKojoTaisei_umu
+     * 運動器機能向上体制の有無のsetメソッドです。
      *
-     * @param undokiKinoKojoTaisei_umu undokiKinoKojoTaisei_umu
+     * @param undokiKinoKojoTaisei_umu 運動器機能向上体制の有無
      */
-    public void setUndokiKinoKojoTaisei_umu(UndokiKinoKojoTaiseiUmu undokiKinoKojoTaisei_umu) {
+    public void setUndokiKinoKojoTaisei_umu(Code undokiKinoKojoTaisei_umu) {
         this.undokiKinoKojoTaisei_umu = undokiKinoKojoTaisei_umu;
     }
 
     /**
-     * getEiyoManagement_KaizenTaisei_umu
+     * 栄養マネジメント（改善）体制の有無のgetメソッドです。
      *
-     * @return eiyoManagement_KaizenTaisei_umu
+     * @return 栄養マネジメント（改善）体制の有無
      */
-    public EiyoManagementTaiseiUmu getEiyoManagement_KaizenTaisei_umu() {
+    @CheckForNull
+    public Code getEiyoManagement_KaizenTaisei_umu() {
         return eiyoManagement_KaizenTaisei_umu;
     }
 
     /**
-     * setEiyoManagement_KaizenTaisei_umu
+     * 栄養マネジメント（改善）体制の有無のsetメソッドです。
      *
-     * @param eiyoManagement_KaizenTaisei_umu eiyoManagement_KaizenTaisei_umu
+     * @param eiyoManagement_KaizenTaisei_umu 栄養マネジメント（改善）体制の有無
      */
-    public void setEiyoManagement_KaizenTaisei_umu(EiyoManagementTaiseiUmu eiyoManagement_KaizenTaisei_umu) {
+    public void setEiyoManagement_KaizenTaisei_umu(Code eiyoManagement_KaizenTaisei_umu) {
         this.eiyoManagement_KaizenTaisei_umu = eiyoManagement_KaizenTaisei_umu;
     }
 
     /**
-     * getKokuKinoKojoTaisei_umu
+     * 口腔機能向上体制の有無のgetメソッドです。
      *
-     * @return kokuKinoKojoTaisei_umu
+     * @return 口腔機能向上体制の有無
      */
-    public KokuKinoKojoTaiseiUmu getKokuKinoKojoTaisei_umu() {
+    @CheckForNull
+    public Code getKokuKinoKojoTaisei_umu() {
         return kokuKinoKojoTaisei_umu;
     }
 
     /**
-     * setKokuKinoKojoTaisei_umu
+     * 口腔機能向上体制の有無のsetメソッドです。
      *
-     * @param kokuKinoKojoTaisei_umu kokuKinoKojoTaisei_umu
+     * @param kokuKinoKojoTaisei_umu 口腔機能向上体制の有無
      */
-    public void setKokuKinoKojoTaisei_umu(KokuKinoKojoTaiseiUmu kokuKinoKojoTaisei_umu) {
+    public void setKokuKinoKojoTaisei_umu(Code kokuKinoKojoTaisei_umu) {
         this.kokuKinoKojoTaisei_umu = kokuKinoKojoTaisei_umu;
     }
 
     /**
-     * getJigyoshoHyokaKasan_Moshide_umu
+     * 事業所評価加算（申出）の有無のgetメソッドです。
      *
-     * @return jigyoshoHyokaKasan_Moshide_umu
+     * @return 事業所評価加算（申出）の有無
      */
-    public JigyoshoHyokaKasanMoshideUmu getJigyoshoHyokaKasan_Moshide_umu() {
+    @CheckForNull
+    public Code getJigyoshoHyokaKasan_Moshide_umu() {
         return jigyoshoHyokaKasan_Moshide_umu;
     }
 
     /**
-     * setJigyoshoHyokaKasan_Moshide_umu
+     * 事業所評価加算（申出）の有無のsetメソッドです。
      *
-     * @param jigyoshoHyokaKasan_Moshide_umu jigyoshoHyokaKasan_Moshide_umu
+     * @param jigyoshoHyokaKasan_Moshide_umu 事業所評価加算（申出）の有無
      */
-    public void setJigyoshoHyokaKasan_Moshide_umu(JigyoshoHyokaKasanMoshideUmu jigyoshoHyokaKasan_Moshide_umu) {
+    public void setJigyoshoHyokaKasan_Moshide_umu(Code jigyoshoHyokaKasan_Moshide_umu) {
         this.jigyoshoHyokaKasan_Moshide_umu = jigyoshoHyokaKasan_Moshide_umu;
     }
 
     /**
-     * getJigyoshoHyokaKasan_Kettei_umu
+     * 事業所評価加算（決定）の有無のgetメソッドです。
      *
-     * @return jigyoshoHyokaKasan_Kettei_umu
+     * @return 事業所評価加算（決定）の有無
      */
-    public JigyoshoHyokaKasanKetteiUmu getJigyoshoHyokaKasan_Kettei_umu() {
+    @CheckForNull
+    public Code getJigyoshoHyokaKasan_Kettei_umu() {
         return jigyoshoHyokaKasan_Kettei_umu;
     }
 
     /**
-     * setJigyoshoHyokaKasan_Kettei_umu
+     * 事業所評価加算（決定）の有無のsetメソッドです。
      *
-     * @param jigyoshoHyokaKasan_Kettei_umu jigyoshoHyokaKasan_Kettei_umu
+     * @param jigyoshoHyokaKasan_Kettei_umu 事業所評価加算（決定）の有無
      */
-    public void setJigyoshoHyokaKasan_Kettei_umu(JigyoshoHyokaKasanKetteiUmu jigyoshoHyokaKasan_Kettei_umu) {
+    public void setJigyoshoHyokaKasan_Kettei_umu(Code jigyoshoHyokaKasan_Kettei_umu) {
         this.jigyoshoHyokaKasan_Kettei_umu = jigyoshoHyokaKasan_Kettei_umu;
     }
 
     /**
-     * getKinkyuUkeireTaisei_umu
+     * 緊急受入体制の有無のgetメソッドです。
      *
-     * @return kinkyuUkeireTaisei_umu
+     * @return 緊急受入体制の有無
      */
-    public KinkyuUkeireTaiseiUmu getKinkyuUkeireTaisei_umu() {
+    @CheckForNull
+    public Code getKinkyuUkeireTaisei_umu() {
         return kinkyuUkeireTaisei_umu;
     }
 
     /**
-     * setKinkyuUkeireTaisei_umu
+     * 緊急受入体制の有無のsetメソッドです。
      *
-     * @param kinkyuUkeireTaisei_umu kinkyuUkeireTaisei_umu
+     * @param kinkyuUkeireTaisei_umu 緊急受入体制の有無
      */
-    public void setKinkyuUkeireTaisei_umu(KinkyuUkeireTaiseiUmu kinkyuUkeireTaisei_umu) {
+    public void setKinkyuUkeireTaisei_umu(Code kinkyuUkeireTaisei_umu) {
         this.kinkyuUkeireTaisei_umu = kinkyuUkeireTaisei_umu;
     }
 
     /**
-     * getYakanKangoTaisei_umu
+     * 夜間看護体制の有無のgetメソッドです。
      *
-     * @return yakanKangoTaisei_umu
+     * @return 夜間看護体制の有無
      */
-    public YakanKangoTaiseiUmu getYakanKangoTaisei_umu() {
+    @CheckForNull
+    public Code getYakanKangoTaisei_umu() {
         return yakanKangoTaisei_umu;
     }
 
     /**
-     * setYakanKangoTaisei_umu
+     * 夜間看護体制の有無のsetメソッドです。
      *
-     * @param yakanKangoTaisei_umu yakanKangoTaisei_umu
+     * @param yakanKangoTaisei_umu 夜間看護体制の有無
      */
-    public void setYakanKangoTaisei_umu(YakanKangoTaiseiUmu yakanKangoTaisei_umu) {
+    public void setYakanKangoTaisei_umu(Code yakanKangoTaisei_umu) {
         this.yakanKangoTaisei_umu = yakanKangoTaisei_umu;
     }
 
     /**
-     * getTokuteijigyoshoKasan_Kyotakukaigoshien_umu
+     * 特定事業所加算（居宅介護支援）の有無のgetメソッドです。
      *
-     * @return tokuteijigyoshoKasan_Kyotakukaigoshien_umu
+     * @return 特定事業所加算（居宅介護支援）の有無
      */
+    @CheckForNull
     public Code getTokuteijigyoshoKasan_Kyotakukaigoshien_umu() {
         return tokuteijigyoshoKasan_Kyotakukaigoshien_umu;
     }
 
     /**
-     * setTokuteijigyoshoKasan_Kyotakukaigoshien_umu
+     * 特定事業所加算（居宅介護支援）の有無のsetメソッドです。
      *
-     * @param tokuteijigyoshoKasan_Kyotakukaigoshien_umu
-     * tokuteijigyoshoKasan_Kyotakukaigoshien_umu
+     * @param tokuteijigyoshoKasan_Kyotakukaigoshien_umu 特定事業所加算（居宅介護支援）の有無
      */
     public void setTokuteijigyoshoKasan_Kyotakukaigoshien_umu(Code tokuteijigyoshoKasan_Kyotakukaigoshien_umu) {
         this.tokuteijigyoshoKasan_Kyotakukaigoshien_umu = tokuteijigyoshoKasan_Kyotakukaigoshien_umu;
     }
 
     /**
-     * getKaigoShienSemmoninSenjuJokinshaNinsu
+     * 介護支援専門員数（専従の常勤者）のgetメソッドです。
      *
-     * @return kaigoShienSemmoninSenjuJokinshaNinsu
+     * @return 介護支援専門員数（専従の常勤者）
      */
-    public Decimal getKaigoShienSemmoninSenjuJokinshaNinsu() {
+    @CheckForNull
+    public int getKaigoShienSemmoninSenjuJokinshaNinsu() {
         return kaigoShienSemmoninSenjuJokinshaNinsu;
     }
 
     /**
-     * setKaigoShienSemmoninSenjuJokinshaNinsu
+     * 介護支援専門員数（専従の常勤者）のsetメソッドです。
      *
-     * @param kaigoShienSemmoninSenjuJokinshaNinsu
-     * kaigoShienSemmoninSenjuJokinshaNinsu
+     * @param kaigoShienSemmoninSenjuJokinshaNinsu 介護支援専門員数（専従の常勤者）
      */
-    public void setKaigoShienSemmoninSenjuJokinshaNinsu(Decimal kaigoShienSemmoninSenjuJokinshaNinsu) {
+    public void setKaigoShienSemmoninSenjuJokinshaNinsu(int kaigoShienSemmoninSenjuJokinshaNinsu) {
         this.kaigoShienSemmoninSenjuJokinshaNinsu = kaigoShienSemmoninSenjuJokinshaNinsu;
     }
 
     /**
-     * getKaigoSienSemmoninSenjuHijokinshaNinsu
+     * 介護支援専門員数（専従の非常勤者）のgetメソッドです。
      *
-     * @return kaigoSienSemmoninSenjuHijokinshaNinsu
+     * @return 介護支援専門員数（専従の非常勤者）
      */
-    public Decimal getKaigoSienSemmoninSenjuHijokinshaNinsu() {
+    @CheckForNull
+    public int getKaigoSienSemmoninSenjuHijokinshaNinsu() {
         return kaigoSienSemmoninSenjuHijokinshaNinsu;
     }
 
     /**
-     * setKaigoSienSemmoninSenjuHijokinshaNinsu
+     * 介護支援専門員数（専従の非常勤者）のsetメソッドです。
      *
-     * @param kaigoSienSemmoninSenjuHijokinshaNinsu
-     * kaigoSienSemmoninSenjuHijokinshaNinsu
+     * @param kaigoSienSemmoninSenjuHijokinshaNinsu 介護支援専門員数（専従の非常勤者）
      */
-    public void setKaigoSienSemmoninSenjuHijokinshaNinsu(Decimal kaigoSienSemmoninSenjuHijokinshaNinsu) {
+    public void setKaigoSienSemmoninSenjuHijokinshaNinsu(int kaigoSienSemmoninSenjuHijokinshaNinsu) {
         this.kaigoSienSemmoninSenjuHijokinshaNinsu = kaigoSienSemmoninSenjuHijokinshaNinsu;
     }
 
     /**
-     * getKaigoSienSemmoninKemmuJokinshaNinsu
+     * 介護支援専門員数（兼務の常勤者）のgetメソッドです。
      *
-     * @return kaigoSienSemmoninKemmuJokinshaNinsu
+     * @return 介護支援専門員数（兼務の常勤者）
      */
-    public Decimal getKaigoSienSemmoninKemmuJokinshaNinsu() {
+    @CheckForNull
+    public int getKaigoSienSemmoninKemmuJokinshaNinsu() {
         return kaigoSienSemmoninKemmuJokinshaNinsu;
     }
 
     /**
-     * setKaigoSienSemmoninKemmuJokinshaNinsu
+     * 介護支援専門員数（兼務の常勤者）のsetメソッドです。
      *
-     * @param kaigoSienSemmoninKemmuJokinshaNinsu
-     * kaigoSienSemmoninKemmuJokinshaNinsu
+     * @param kaigoSienSemmoninKemmuJokinshaNinsu 介護支援専門員数（兼務の常勤者）
      */
-    public void setKaigoSienSemmoninKemmuJokinshaNinsu(Decimal kaigoSienSemmoninKemmuJokinshaNinsu) {
+    public void setKaigoSienSemmoninKemmuJokinshaNinsu(int kaigoSienSemmoninKemmuJokinshaNinsu) {
         this.kaigoSienSemmoninKemmuJokinshaNinsu = kaigoSienSemmoninKemmuJokinshaNinsu;
     }
 
     /**
-     * getKaigoSienSemmoninKemmuHijokinshaNinsu
+     * 介護支援専門員数（兼務の非常勤者）のgetメソッドです。
      *
-     * @return kaigoSienSemmoninKemmuHijokinshaNinsu
+     * @return 介護支援専門員数（兼務の非常勤者）
      */
-    public Decimal getKaigoSienSemmoninKemmuHijokinshaNinsu() {
+    @CheckForNull
+    public int getKaigoSienSemmoninKemmuHijokinshaNinsu() {
         return kaigoSienSemmoninKemmuHijokinshaNinsu;
     }
 
     /**
-     * setKaigoSienSemmoninKemmuHijokinshaNinsu
+     * 介護支援専門員数（兼務の非常勤者）のsetメソッドです。
      *
-     * @param kaigoSienSemmoninKemmuHijokinshaNinsu
-     * kaigoSienSemmoninKemmuHijokinshaNinsu
+     * @param kaigoSienSemmoninKemmuHijokinshaNinsu 介護支援専門員数（兼務の非常勤者）
      */
-    public void setKaigoSienSemmoninKemmuHijokinshaNinsu(Decimal kaigoSienSemmoninKemmuHijokinshaNinsu) {
+    public void setKaigoSienSemmoninKemmuHijokinshaNinsu(int kaigoSienSemmoninKemmuHijokinshaNinsu) {
         this.kaigoSienSemmoninKemmuHijokinshaNinsu = kaigoSienSemmoninKemmuHijokinshaNinsu;
     }
 
     /**
-     * getHomonkaigoServiceTeikyoSekininshaNinsu
+     * 訪問介護サービス提供責任者数のgetメソッドです。
      *
-     * @return homonkaigoServiceTeikyoSekininshaNinsu
+     * @return 訪問介護サービス提供責任者数
      */
-    public Decimal getHomonkaigoServiceTeikyoSekininshaNinsu() {
+    @CheckForNull
+    public int getHomonkaigoServiceTeikyoSekininshaNinsu() {
         return homonkaigoServiceTeikyoSekininshaNinsu;
     }
 
     /**
-     * setHomonkaigoServiceTeikyoSekininshaNinsu
+     * 訪問介護サービス提供責任者数のsetメソッドです。
      *
-     * @param homonkaigoServiceTeikyoSekininshaNinsu
-     * homonkaigoServiceTeikyoSekininshaNinsu
+     * @param homonkaigoServiceTeikyoSekininshaNinsu 訪問介護サービス提供責任者数
      */
-    public void setHomonkaigoServiceTeikyoSekininshaNinsu(Decimal homonkaigoServiceTeikyoSekininshaNinsu) {
+    public void setHomonkaigoServiceTeikyoSekininshaNinsu(int homonkaigoServiceTeikyoSekininshaNinsu) {
         this.homonkaigoServiceTeikyoSekininshaNinsu = homonkaigoServiceTeikyoSekininshaNinsu;
     }
 
     /**
-     * getHomonkaigoSenjuJokinshaNinsu
+     * 訪問介護員数（専従の常勤者）のgetメソッドです。
      *
-     * @return homonkaigoSenjuJokinshaNinsu
+     * @return 訪問介護員数（専従の常勤者）
      */
-    public Decimal getHomonkaigoSenjuJokinshaNinsu() {
+    @CheckForNull
+    public int getHomonkaigoSenjuJokinshaNinsu() {
         return homonkaigoSenjuJokinshaNinsu;
     }
 
     /**
-     * setHomonkaigoSenjuJokinshaNinsu
+     * 訪問介護員数（専従の常勤者）のsetメソッドです。
      *
-     * @param homonkaigoSenjuJokinshaNinsu homonkaigoSenjuJokinshaNinsu
+     * @param homonkaigoSenjuJokinshaNinsu 訪問介護員数（専従の常勤者）
      */
-    public void setHomonkaigoSenjuJokinshaNinsu(Decimal homonkaigoSenjuJokinshaNinsu) {
+    public void setHomonkaigoSenjuJokinshaNinsu(int homonkaigoSenjuJokinshaNinsu) {
         this.homonkaigoSenjuJokinshaNinsu = homonkaigoSenjuJokinshaNinsu;
     }
 
     /**
-     * getHomonkaigoSenjuHijokinshaNinsu
+     * 訪問介護員数（専従の非常勤者）のgetメソッドです。
      *
-     * @return homonkaigoSenjuHijokinshaNinsu
+     * @return 訪問介護員数（専従の非常勤者）
      */
-    public Decimal getHomonkaigoSenjuHijokinshaNinsu() {
+    @CheckForNull
+    public int getHomonkaigoSenjuHijokinshaNinsu() {
         return homonkaigoSenjuHijokinshaNinsu;
     }
 
     /**
-     * setHomonkaigoSenjuHijokinshaNinsu
+     * 訪問介護員数（専従の非常勤者）のsetメソッドです。
      *
-     * @param homonkaigoSenjuHijokinshaNinsu homonkaigoSenjuHijokinshaNinsu
+     * @param homonkaigoSenjuHijokinshaNinsu 訪問介護員数（専従の非常勤者）
      */
-    public void setHomonkaigoSenjuHijokinshaNinsu(Decimal homonkaigoSenjuHijokinshaNinsu) {
+    public void setHomonkaigoSenjuHijokinshaNinsu(int homonkaigoSenjuHijokinshaNinsu) {
         this.homonkaigoSenjuHijokinshaNinsu = homonkaigoSenjuHijokinshaNinsu;
     }
 
     /**
-     * getHomonkaigoKemmuJokinshaNinsu
+     * 訪問介護員数（兼務の常勤者）のgetメソッドです。
      *
-     * @return homonkaigoKemmuJokinshaNinsu
+     * @return 訪問介護員数（兼務の常勤者）
      */
-    public Decimal getHomonkaigoKemmuJokinshaNinsu() {
+    @CheckForNull
+    public int getHomonkaigoKemmuJokinshaNinsu() {
         return homonkaigoKemmuJokinshaNinsu;
     }
 
     /**
-     * setHomonkaigoKemmuJokinshaNinsu
+     * 訪問介護員数（兼務の常勤者）のsetメソッドです。
      *
-     * @param homonkaigoKemmuJokinshaNinsu homonkaigoKemmuJokinshaNinsu
+     * @param homonkaigoKemmuJokinshaNinsu 訪問介護員数（兼務の常勤者）
      */
-    public void setHomonkaigoKemmuJokinshaNinsu(Decimal homonkaigoKemmuJokinshaNinsu) {
+    public void setHomonkaigoKemmuJokinshaNinsu(int homonkaigoKemmuJokinshaNinsu) {
         this.homonkaigoKemmuJokinshaNinsu = homonkaigoKemmuJokinshaNinsu;
     }
 
     /**
-     * getHomonkaigoKemmuHijokinshaNinsu
+     * 訪問介護員数（兼務の非常勤者）のgetメソッドです。
      *
-     * @return homonkaigoKemmuHijokinshaNinsu
+     * @return 訪問介護員数（兼務の非常勤者）
      */
-    public Decimal getHomonkaigoKemmuHijokinshaNinsu() {
+    @CheckForNull
+    public int getHomonkaigoKemmuHijokinshaNinsu() {
         return homonkaigoKemmuHijokinshaNinsu;
     }
 
     /**
-     * setHomonkaigoKemmuHijokinshaNinsu
+     * 訪問介護員数（兼務の非常勤者）のsetメソッドです。
      *
-     * @param homonkaigoKemmuHijokinshaNinsu homonkaigoKemmuHijokinshaNinsu
+     * @param homonkaigoKemmuHijokinshaNinsu 訪問介護員数（兼務の非常勤者）
      */
-    public void setHomonkaigoKemmuHijokinshaNinsu(Decimal homonkaigoKemmuHijokinshaNinsu) {
+    public void setHomonkaigoKemmuHijokinshaNinsu(int homonkaigoKemmuHijokinshaNinsu) {
         this.homonkaigoKemmuHijokinshaNinsu = homonkaigoKemmuHijokinshaNinsu;
     }
 
     /**
-     * getHomonkaigoJokinKanzangoNinsu
+     * 訪問介護員数（常勤換算後の人数）のgetメソッドです。
      *
-     * @return homonkaigoJokinKanzangoNinsu
+     * @return 訪問介護員数（常勤換算後の人数）
      */
-    public Decimal getHomonkaigoJokinKanzangoNinsu() {
+    @CheckForNull
+    public int getHomonkaigoJokinKanzangoNinsu() {
         return homonkaigoJokinKanzangoNinsu;
     }
 
     /**
-     * setHomonkaigoJokinKanzangoNinsu
+     * 訪問介護員数（常勤換算後の人数）のsetメソッドです。
      *
-     * @param homonkaigoJokinKanzangoNinsu homonkaigoJokinKanzangoNinsu
+     * @param homonkaigoJokinKanzangoNinsu 訪問介護員数（常勤換算後の人数）
      */
-    public void setHomonkaigoJokinKanzangoNinsu(Decimal homonkaigoJokinKanzangoNinsu) {
+    public void setHomonkaigoJokinKanzangoNinsu(int homonkaigoJokinKanzangoNinsu) {
         this.homonkaigoJokinKanzangoNinsu = homonkaigoJokinKanzangoNinsu;
     }
 
     /**
-     * getRiyoTeiinNinsu
+     * 利用定員数のgetメソッドです。
      *
-     * @return riyoTeiinNinsu
+     * @return 利用定員数
      */
-    public Decimal getRiyoTeiinNinsu() {
+    @CheckForNull
+    public int getRiyoTeiinNinsu() {
         return riyoTeiinNinsu;
     }
 
     /**
-     * setRiyoTeiinNinsu
+     * 利用定員数のsetメソッドです。
      *
-     * @param riyoTeiinNinsu riyoTeiinNinsu
+     * @param riyoTeiinNinsu 利用定員数
      */
-    public void setRiyoTeiinNinsu(Decimal riyoTeiinNinsu) {
+    public void setRiyoTeiinNinsu(int riyoTeiinNinsu) {
         this.riyoTeiinNinsu = riyoTeiinNinsu;
     }
 
     /**
-     * getShiteiYukoKaishiYMD
+     * 指定有効開始日のgetメソッドです。
      *
-     * @return shiteiYukoKaishiYMD
+     * @return 指定有効開始日
      */
+    @CheckForNull
     public FlexibleDate getShiteiYukoKaishiYMD() {
         return shiteiYukoKaishiYMD;
     }
 
     /**
-     * setShiteiYukoKaishiYMD
+     * 指定有効開始日のsetメソッドです。
      *
-     * @param shiteiYukoKaishiYMD shiteiYukoKaishiYMD
+     * @param shiteiYukoKaishiYMD 指定有効開始日
      */
     public void setShiteiYukoKaishiYMD(FlexibleDate shiteiYukoKaishiYMD) {
         this.shiteiYukoKaishiYMD = shiteiYukoKaishiYMD;
     }
 
     /**
-     * getShiteiYukoShuryoYMD
+     * 指定有効終了日のgetメソッドです。
      *
-     * @return shiteiYukoShuryoYMD
+     * @return 指定有効終了日
      */
+    @CheckForNull
     public FlexibleDate getShiteiYukoShuryoYMD() {
         return shiteiYukoShuryoYMD;
     }
 
     /**
-     * setShiteiYukoShuryoYMD
+     * 指定有効終了日のsetメソッドです。
      *
-     * @param shiteiYukoShuryoYMD shiteiYukoShuryoYMD
+     * @param shiteiYukoShuryoYMD 指定有効終了日
      */
     public void setShiteiYukoShuryoYMD(FlexibleDate shiteiYukoShuryoYMD) {
         this.shiteiYukoShuryoYMD = shiteiYukoShuryoYMD;
     }
 
     /**
-     * getShiteiKoshinShinseichuKubun
+     * 指定更新申請中区分のgetメソッドです。
      *
-     * @return shiteiKoshinShinseichuKubun
+     * @return 指定更新申請中区分
      */
-    public ShiteiKoshinShinseichuKubun getShiteiKoshinShinseichuKubun() {
+    @CheckForNull
+    public Code getShiteiKoshinShinseichuKubun() {
         return shiteiKoshinShinseichuKubun;
     }
 
     /**
-     * setShiteiKoshinShinseichuKubun
+     * 指定更新申請中区分のsetメソッドです。
      *
-     * @param shiteiKoshinShinseichuKubun shiteiKoshinShinseichuKubun
+     * @param shiteiKoshinShinseichuKubun 指定更新申請中区分
      */
-    public void setShiteiKoshinShinseichuKubun(ShiteiKoshinShinseichuKubun shiteiKoshinShinseichuKubun) {
+    public void setShiteiKoshinShinseichuKubun(Code shiteiKoshinShinseichuKubun) {
         this.shiteiKoshinShinseichuKubun = shiteiKoshinShinseichuKubun;
     }
 
     /**
-     * getKoryokuTeishiKaishiYMD
+     * 効力停止開始日のgetメソッドです。
      *
-     * @return koryokuTeishiKaishiYMD
+     * @return 効力停止開始日
      */
+    @CheckForNull
     public FlexibleDate getKoryokuTeishiKaishiYMD() {
         return koryokuTeishiKaishiYMD;
     }
 
     /**
-     * setKoryokuTeishiKaishiYMD
+     * 効力停止開始日のsetメソッドです。
      *
-     * @param koryokuTeishiKaishiYMD koryokuTeishiKaishiYMD
+     * @param koryokuTeishiKaishiYMD 効力停止開始日
      */
     public void setKoryokuTeishiKaishiYMD(FlexibleDate koryokuTeishiKaishiYMD) {
         this.koryokuTeishiKaishiYMD = koryokuTeishiKaishiYMD;
     }
 
     /**
-     * getKoryokuTeishiShuryoYMD
+     * 効力停止終了日のgetメソッドです。
      *
-     * @return koryokuTeishiShuryoYMD
+     * @return 効力停止終了日
      */
+    @CheckForNull
     public FlexibleDate getKoryokuTeishiShuryoYMD() {
         return koryokuTeishiShuryoYMD;
     }
 
     /**
-     * setKoryokuTeishiShuryoYMD
+     * 効力停止終了日のsetメソッドです。
      *
-     * @param koryokuTeishiShuryoYMD koryokuTeishiShuryoYMD
+     * @param koryokuTeishiShuryoYMD 効力停止終了日
      */
     public void setKoryokuTeishiShuryoYMD(FlexibleDate koryokuTeishiShuryoYMD) {
         this.koryokuTeishiShuryoYMD = koryokuTeishiShuryoYMD;
     }
 
     /**
-     * getDaikiboJigyoshaGaito_umu
+     * 大規模事業所該当の有無のgetメソッドです。
      *
-     * @return daikiboJigyoshaGaito_umu
+     * @return 大規模事業所該当の有無
      */
-    public DaikiboJigyoshoGaitoUmu getDaikiboJigyoshaGaito_umu() {
+    @CheckForNull
+    public Code getDaikiboJigyoshaGaito_umu() {
         return daikiboJigyoshaGaito_umu;
     }
 
     /**
-     * setDaikiboJigyoshaGaito_umu
+     * 大規模事業所該当の有無のsetメソッドです。
      *
-     * @param daikiboJigyoshaGaito_umu daikiboJigyoshaGaito_umu
+     * @param daikiboJigyoshaGaito_umu 大規模事業所該当の有無
      */
-    public void setDaikiboJigyoshaGaito_umu(DaikiboJigyoshoGaitoUmu daikiboJigyoshaGaito_umu) {
+    public void setDaikiboJigyoshaGaito_umu(Code daikiboJigyoshaGaito_umu) {
         this.daikiboJigyoshaGaito_umu = daikiboJigyoshaGaito_umu;
     }
 
     /**
-     * getJunUnitCareTaisei_umu
+     * 準ユニットケア体制の有無のgetメソッドです。
      *
-     * @return junUnitCareTaisei_umu
+     * @return 準ユニットケア体制の有無
      */
-    public JunUnitCareTaiseiUmu getJunUnitCareTaisei_umu() {
+    @CheckForNull
+    public Code getJunUnitCareTaisei_umu() {
         return junUnitCareTaisei_umu;
     }
 
     /**
-     * setJunUnitCareTaisei_umu
+     * 準ユニットケア体制の有無のsetメソッドです。
      *
-     * @param junUnitCareTaisei_umu junUnitCareTaisei_umu
+     * @param junUnitCareTaisei_umu 準ユニットケア体制の有無
      */
-    public void setJunUnitCareTaisei_umu(JunUnitCareTaiseiUmu junUnitCareTaisei_umu) {
+    public void setJunUnitCareTaisei_umu(Code junUnitCareTaisei_umu) {
         this.junUnitCareTaisei_umu = junUnitCareTaisei_umu;
     }
 
     /**
-     * getJudokaTaioTaisei_umu
+     * 重度化対応体制の有無のgetメソッドです。
      *
-     * @return judokaTaioTaisei_umu
+     * @return 重度化対応体制の有無
      */
-    public JudokaTaioTaiseiUmu getJudokaTaioTaisei_umu() {
+    @CheckForNull
+    public Code getJudokaTaioTaisei_umu() {
         return judokaTaioTaisei_umu;
     }
 
     /**
-     * setJudokaTaioTaisei_umu
+     * 重度化対応体制の有無のsetメソッドです。
      *
-     * @param judokaTaioTaisei_umu judokaTaioTaisei_umu
+     * @param judokaTaioTaisei_umu 重度化対応体制の有無
      */
-    public void setJudokaTaioTaisei_umu(JudokaTaioTaiseiUmu judokaTaioTaisei_umu) {
+    public void setJudokaTaioTaisei_umu(Code judokaTaioTaisei_umu) {
         this.judokaTaioTaisei_umu = judokaTaioTaisei_umu;
     }
 
     /**
-     * getIryoRenkeiTaisei_umu
+     * 医療連携体制の有無のgetメソッドです。
      *
-     * @return iryoRenkeiTaisei_umu
+     * @return 医療連携体制の有無
      */
-    public IryoRenkeiTaiseiUmu getIryoRenkeiTaisei_umu() {
+    @CheckForNull
+    public Code getIryoRenkeiTaisei_umu() {
         return iryoRenkeiTaisei_umu;
     }
 
     /**
-     * setIryoRenkeiTaisei_umu
+     * 医療連携体制の有無のsetメソッドです。
      *
-     * @param iryoRenkeiTaisei_umu iryoRenkeiTaisei_umu
+     * @param iryoRenkeiTaisei_umu 医療連携体制の有無
      */
-    public void setIryoRenkeiTaisei_umu(IryoRenkeiTaiseiUmu iryoRenkeiTaisei_umu) {
+    public void setIryoRenkeiTaisei_umu(Code iryoRenkeiTaisei_umu) {
         this.iryoRenkeiTaisei_umu = iryoRenkeiTaisei_umu;
     }
 
     /**
-     * getUnitCareTaisei_umu
+     * ユニットケア体制の有無のgetメソッドです。
      *
-     * @return unitCareTaisei_umu
+     * @return ユニットケア体制の有無
      */
-    public UnitCareTaiseiUmu getUnitCareTaisei_umu() {
+    @CheckForNull
+    public Code getUnitCareTaisei_umu() {
         return unitCareTaisei_umu;
     }
 
     /**
-     * setUnitCareTaisei_umu
+     * ユニットケア体制の有無のsetメソッドです。
      *
-     * @param unitCareTaisei_umu unitCareTaisei_umu
+     * @param unitCareTaisei_umu ユニットケア体制の有無
      */
-    public void setUnitCareTaisei_umu(UnitCareTaiseiUmu unitCareTaisei_umu) {
+    public void setUnitCareTaisei_umu(Code unitCareTaisei_umu) {
         this.unitCareTaisei_umu = unitCareTaisei_umu;
     }
 
     /**
-     * getZaitaku_nyushoSogoRiyoTaisei_umu
+     * 在宅・入所相互利用体制の有無のgetメソッドです。
      *
-     * @return zaitaku_nyushoSogoRiyoTaisei_umu
+     * @return 在宅・入所相互利用体制の有無
      */
-    public JutakuNyushoSogoriyoTaiseiUmu getZaitaku_nyushoSogoRiyoTaisei_umu() {
+    @CheckForNull
+    public Code getZaitaku_nyushoSogoRiyoTaisei_umu() {
         return zaitaku_nyushoSogoRiyoTaisei_umu;
     }
 
     /**
-     * setZaitaku_nyushoSogoRiyoTaisei_umu
+     * 在宅・入所相互利用体制の有無のsetメソッドです。
      *
-     * @param zaitaku_nyushoSogoRiyoTaisei_umu zaitaku_nyushoSogoRiyoTaisei_umu
+     * @param zaitaku_nyushoSogoRiyoTaisei_umu 在宅・入所相互利用体制の有無
      */
-    public void setZaitaku_nyushoSogoRiyoTaisei_umu(JutakuNyushoSogoriyoTaiseiUmu zaitaku_nyushoSogoRiyoTaisei_umu) {
+    public void setZaitaku_nyushoSogoRiyoTaisei_umu(Code zaitaku_nyushoSogoRiyoTaisei_umu) {
         this.zaitaku_nyushoSogoRiyoTaisei_umu = zaitaku_nyushoSogoRiyoTaisei_umu;
     }
 
     /**
-     * getTerminalCareTaisei_umu
+     * ターミナルケア体制（看取り介護体制）の有無のgetメソッドです。
      *
-     * @return terminalCareTaisei_umu
+     * @return ターミナルケア体制（看取り介護体制）の有無
      */
-    public TerminalCareTaiseiUmu getTerminalCareTaisei_umu() {
+    @CheckForNull
+    public Code getTerminalCareTaisei_umu() {
         return terminalCareTaisei_umu;
     }
 
     /**
-     * setTerminalCareTaisei_umu
+     * ターミナルケア体制（看取り介護体制）の有無のsetメソッドです。
      *
-     * @param terminalCareTaisei_umu terminalCareTaisei_umu
+     * @param terminalCareTaisei_umu ターミナルケア体制（看取り介護体制）の有無
      */
-    public void setTerminalCareTaisei_umu(TerminalCareTaiseiUmu terminalCareTaisei_umu) {
+    public void setTerminalCareTaisei_umu(Code terminalCareTaisei_umu) {
         this.terminalCareTaisei_umu = terminalCareTaisei_umu;
     }
 
     /**
-     * getShintaiDecimalaiKosokuHaishiTorikumi_umu
+     * 身体拘束廃止取組の有無のgetメソッドです。
      *
-     * @return shintaiKosokuHaishiTorikumi_umu
+     * @return 身体拘束廃止取組の有無
      */
-    public ShintaikosokuHaishiTorikumiUmu getShintaiKosokuHaishiTorikumi_umu() {
+    @CheckForNull
+    public Code getShintaiKosokuHaishiTorikumi_umu() {
         return shintaiKosokuHaishiTorikumi_umu;
     }
 
     /**
-     * setShintaiDecimalaiKosokuHaishiTorikumi_umu
+     * 身体拘束廃止取組の有無のsetメソッドです。
      *
-     * @param shintaiKosokuHaishiTorikumi_umu shintaiKosokuHaishiTorikumi_umu
+     * @param shintaiKosokuHaishiTorikumi_umu 身体拘束廃止取組の有無
      */
-    public void setShintaiKosokuHaishiTorikumi_umu(ShintaikosokuHaishiTorikumiUmu shintaiKosokuHaishiTorikumi_umu) {
+    public void setShintaiKosokuHaishiTorikumi_umu(Code shintaiKosokuHaishiTorikumi_umu) {
         this.shintaiKosokuHaishiTorikumi_umu = shintaiKosokuHaishiTorikumi_umu;
     }
 
     /**
-     * getShokiboKyotenShugoTaisei_umu
+     * 小規模拠点集合体制の有無のgetメソッドです。
      *
-     * @return shokiboKyotenShugoTaisei_umu
+     * @return 小規模拠点集合体制の有無
      */
-    public ShokiboKyotenShugoTaiseiUmu getShokiboKyotenShugoTaisei_umu() {
+    @CheckForNull
+    public Code getShokiboKyotenShugoTaisei_umu() {
         return shokiboKyotenShugoTaisei_umu;
     }
 
     /**
-     * setShokiboKyotenShugoTaisei_umu
+     * 小規模拠点集合体制の有無のsetメソッドです。
      *
-     * @param shokiboKyotenShugoTaisei_umu shokiboKyotenShugoTaisei_umu
+     * @param shokiboKyotenShugoTaisei_umu 小規模拠点集合体制の有無
      */
-    public void setShokiboKyotenShugoTaisei_umu(ShokiboKyotenShugoTaiseiUmu shokiboKyotenShugoTaisei_umu) {
+    public void setShokiboKyotenShugoTaisei_umu(Code shokiboKyotenShugoTaisei_umu) {
         this.shokiboKyotenShugoTaisei_umu = shokiboKyotenShugoTaisei_umu;
     }
 
     /**
-     * getNinchishoCareKasan_umu
+     * 認知症ケア加算の有無のgetメソッドです。
      *
-     * @return ninchishoCareKasan_umu
+     * @return 認知症ケア加算の有無
      */
-    public NinchishoCareKasanUmu getNinchishoCareKasan_umu() {
+    @CheckForNull
+    public Code getNinchishoCareKasan_umu() {
         return ninchishoCareKasan_umu;
     }
 
     /**
-     * setNinchishoCareKasan_umu
+     * 認知症ケア加算の有無のsetメソッドです。
      *
-     * @param ninchishoCareKasan_umu ninchishoCareKasan_umu
+     * @param ninchishoCareKasan_umu 認知症ケア加算の有無
      */
-    public void setNinchishoCareKasan_umu(NinchishoCareKasanUmu ninchishoCareKasan_umu) {
+    public void setNinchishoCareKasan_umu(Code ninchishoCareKasan_umu) {
         this.ninchishoCareKasan_umu = ninchishoCareKasan_umu;
     }
 
     /**
-     * getKobetsuKinoKunrenTaisei_umu
+     * 個別機能訓練体制の有無のgetメソッドです。
      *
-     * @return kobetsuKinoKunrenTaisei_umu
+     * @return 個別機能訓練体制の有無
      */
+    @CheckForNull
     public Code getKobetsuKinoKunrenTaisei_umu() {
         return kobetsuKinoKunrenTaisei_umu;
     }
 
     /**
-     * setKobetsuKinoKunrenTaisei_umu
+     * 個別機能訓練体制の有無のsetメソッドです。
      *
-     * @param kobetsuKinoKunrenTaisei_umu kobetsuKinoKunrenTaisei_umu
+     * @param kobetsuKinoKunrenTaisei_umu 個別機能訓練体制の有無
      */
     public void setKobetsuKinoKunrenTaisei_umu(Code kobetsuKinoKunrenTaisei_umu) {
         this.kobetsuKinoKunrenTaisei_umu = kobetsuKinoKunrenTaisei_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
+     * 個別リハビリテーション提供体制（理学療法Ⅰ）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
+     * @return 個別リハビリテーション提供体制（理学療法Ⅰ）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1 getKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu() {
         return kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
+     * 個別リハビリテーション提供体制（理学療法Ⅰ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
-     * kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu 個別リハビリテーション提供体制（理学療法Ⅰ）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho1 kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu) {
+    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoI_umu(Code kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu = kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
+     * @return 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3 getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2() {
         return kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
-     * kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2
      */
-    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(KobetsuRehabilitationTeikyoTaiseiUmu_RigakuRyoho2_BeforeH21_3 kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2) {
+    public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 = kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_SagyoRyoho_umu
+     * 個別リハビリテーション提供体制（作業療法）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_SagyoRyoho_umu
+     * @return 個別リハビリテーション提供体制（作業療法）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho getKobetsuRehaTeikyoTaisei_SagyoRyoho_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_SagyoRyoho_umu() {
         return kobetsuRehaTeikyoTaisei_SagyoRyoho_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu
+     * 個別リハビリテーション提供体制（作業療法）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_SagyoRyoho_umu
-     * kobetsuRehaTeikyoTaisei_SagyoRyoho_umu
+     * @param kobetsuRehaTeikyoTaisei_SagyoRyoho_umu 個別リハビリテーション提供体制（作業療法）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(KobetsuRehabilitationTeikyoTaiseiUmu_SagyoRyoho kobetsuRehaTeikyoTaisei_SagyoRyoho_umu) {
+    public void setKobetsuRehaTeikyoTaisei_SagyoRyoho_umu(Code kobetsuRehaTeikyoTaisei_SagyoRyoho_umu) {
         this.kobetsuRehaTeikyoTaisei_SagyoRyoho_umu = kobetsuRehaTeikyoTaisei_SagyoRyoho_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
+     * @return 個別リハビリテーション提供体制（言語聴覚療法）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho getKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu() {
         return kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
-     * kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu 個別リハビリテーション提供体制（言語聴覚療法）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(KobetsuRehabilitationTeikyoTaiseiUmu_GengoChokakuRyoho kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu) {
+    public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_Sonota_umu
+     * 個別リハビリテーション提供体制（その他）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_Sonota_umu
+     * @return 個別リハビリテーション提供体制（その他）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu_Sonota getKobetsuRehaTeikyoTaisei_Sonota_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_Sonota_umu() {
         return kobetsuRehaTeikyoTaisei_Sonota_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_Sonota_umu
+     * 個別リハビリテーション提供体制（その他）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_Sonota_umu
-     * kobetsuRehaTeikyoTaisei_Sonota_umu
+     * @param kobetsuRehaTeikyoTaisei_Sonota_umu 個別リハビリテーション提供体制（その他）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_Sonota_umu(KobetsuRehabilitationTeikyoTaiseiUmu_Sonota kobetsuRehaTeikyoTaisei_Sonota_umu) {
+    public void setKobetsuRehaTeikyoTaisei_Sonota_umu(Code kobetsuRehaTeikyoTaisei_Sonota_umu) {
         this.kobetsuRehaTeikyoTaisei_Sonota_umu = kobetsuRehaTeikyoTaisei_Sonota_umu;
     }
 
     /**
-     * getSetsubiKijun
+     * 設備基準のgetメソッドです。
      *
-     * @return setsubiKijun
+     * @return 設備基準
      */
-    public SetsubiKijun getSetsubiKijun() {
+    @CheckForNull
+    public Code getSetsubiKijun() {
         return setsubiKijun;
     }
 
     /**
-     * setSetsubiKijun
+     * 設備基準のsetメソッドです。
      *
-     * @param setsubiKijun setsubiKijun
+     * @param setsubiKijun 設備基準
      */
-    public void setSetsubiKijun(SetsubiKijun setsubiKijun) {
+    public void setSetsubiKijun(Code setsubiKijun) {
         this.setsubiKijun = setsubiKijun;
     }
 
     /**
-     * getRyoyoTaiseiIjiTokubetsuKasan
+     * 療養体制維持特別加算のgetメソッドです。
      *
-     * @return ryoyoTaiseiIjiTokubetsuKasan
+     * @return 療養体制維持特別加算
      */
-    public RyoyoTaiseiIjiTokubetsuKasan getRyoyoTaiseiIjiTokubetsuKasan() {
+    @CheckForNull
+    public Code getRyoyoTaiseiIjiTokubetsuKasan() {
         return ryoyoTaiseiIjiTokubetsuKasan;
     }
 
     /**
-     * setRyoyoTaiseiIjiTokubetsuKasan
+     * 療養体制維持特別加算のsetメソッドです。
      *
-     * @param ryoyoTaiseiIjiTokubetsuKasan ryoyoTaiseiIjiTokubetsuKasan
+     * @param ryoyoTaiseiIjiTokubetsuKasan 療養体制維持特別加算
      */
-    public void setRyoyoTaiseiIjiTokubetsuKasan(RyoyoTaiseiIjiTokubetsuKasan ryoyoTaiseiIjiTokubetsuKasan) {
+    public void setRyoyoTaiseiIjiTokubetsuKasan(Code ryoyoTaiseiIjiTokubetsuKasan) {
         this.ryoyoTaiseiIjiTokubetsuKasan = ryoyoTaiseiIjiTokubetsuKasan;
     }
 
     /**
-     * getKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
+     * 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無のgetメソッドです。
      *
-     * @return kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
+     * @return 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無
      */
-    public KobetsuRehabilitationTeikyoTaiseiUmu getKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu() {
+    @CheckForNull
+    public Code getKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu() {
         return kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu;
     }
 
     /**
-     * setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
+     * 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
-     * kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
+     * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無
      */
-    public void setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(KobetsuRehabilitationTeikyoTaiseiUmu kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu) {
+    public void setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(Code kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu) {
         this.kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu = kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu;
     }
 
     /**
-     * getSankyuHelperTaisei
+     * ３級ヘルパー体制のgetメソッドです。
      *
-     * @return sankyuHelperTaisei
+     * @return ３級ヘルパー体制
      */
-    public ThirdGradeHelperTaisei getSankyuHelperTaisei() {
+    @CheckForNull
+    public Code getSankyuHelperTaisei() {
         return sankyuHelperTaisei;
     }
 
     /**
-     * setSankyuHelperTaisei
+     * ３級ヘルパー体制のsetメソッドです。
      *
-     * @param sankyuHelperTaisei sankyuHelperTaisei
+     * @param sankyuHelperTaisei ３級ヘルパー体制
      */
-    public void setSankyuHelperTaisei(ThirdGradeHelperTaisei sankyuHelperTaisei) {
+    public void setSankyuHelperTaisei(Code sankyuHelperTaisei) {
         this.sankyuHelperTaisei = sankyuHelperTaisei;
     }
 
     /**
-     * getChuSankanChiikiShokiboJigyoshoKasan_chiiki
+     * 中山間地域等における小規模事業所加算（地域に関する状況）のgetメソッドです。
      *
-     * @return chuSankanChiikiShokiboJigyoshoKasan_chiiki
+     * @return 中山間地域等における小規模事業所加算（地域に関する状況）
      */
-    public ShokiboJigyoshoKasanInMountainArea_SituationAboutArea getChuSankanChiikiShokiboJigyoshoKasan_chiiki() {
+    @CheckForNull
+    public Code getChuSankanChiikiShokiboJigyoshoKasan_chiiki() {
         return chuSankanChiikiShokiboJigyoshoKasan_chiiki;
     }
 
     /**
-     * setChuSankanChiikiShokiboJigyoshoKasan_chiiki
+     * 中山間地域等における小規模事業所加算（地域に関する状況）のsetメソッドです。
      *
-     * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki
-     * chuSankanChiikiShokiboJigyoshoKasan_chiiki
+     * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki 中山間地域等における小規模事業所加算（地域に関する状況）
      */
-    public void setChuSankanChiikiShokiboJigyoshoKasan_chiiki(ShokiboJigyoshoKasanInMountainArea_SituationAboutArea chuSankanChiikiShokiboJigyoshoKasan_chiiki) {
+    public void setChuSankanChiikiShokiboJigyoshoKasan_chiiki(Code chuSankanChiikiShokiboJigyoshoKasan_chiiki) {
         this.chuSankanChiikiShokiboJigyoshoKasan_chiiki = chuSankanChiikiShokiboJigyoshoKasan_chiiki;
     }
 
     /**
-     * getChuSankanChiikiShokiboJigyoushoKasan_kibo
+     * 中山間地域等における小規模事業所加算（規模に関する状況）のgetメソッドです。
      *
-     * @return chuSankanChiikiShokiboJigyoushoKasan_kibo
+     * @return 中山間地域等における小規模事業所加算（規模に関する状況）
      */
-    public ShokiboJigyoshoKasanInMountainArea_SituationAboutScale getChuSankanChiikiShokiboJigyoushoKasan_kibo() {
+    @CheckForNull
+    public Code getChuSankanChiikiShokiboJigyoushoKasan_kibo() {
         return chuSankanChiikiShokiboJigyoushoKasan_kibo;
     }
 
     /**
-     * setChuSankanChiikiShokiboJigyoushoKasan_kibo
+     * 中山間地域等における小規模事業所加算（規模に関する状況）のsetメソッドです。
      *
-     * @param chuSankanChiikiShokiboJigyoushoKasan_kibo
-     * chuSankanChiikiShokiboJigyoushoKasan_kibo
+     * @param chuSankanChiikiShokiboJigyoushoKasan_kibo 中山間地域等における小規模事業所加算（規模に関する状況）
      */
-    public void setChuSankanChiikiShokiboJigyoushoKasan_kibo(ShokiboJigyoshoKasanInMountainArea_SituationAboutScale chuSankanChiikiShokiboJigyoushoKasan_kibo) {
+    public void setChuSankanChiikiShokiboJigyoushoKasan_kibo(Code chuSankanChiikiShokiboJigyoushoKasan_kibo) {
         this.chuSankanChiikiShokiboJigyoushoKasan_kibo = chuSankanChiikiShokiboJigyoushoKasan_kibo;
     }
 
     /**
-     * getServiceTeikyoTaiseiKyokaKasan
+     * サービス提供体制強化加算のgetメソッドです。
      *
-     * @return serviceTeikyoTaiseiKyokaKasan
+     * @return サービス提供体制強化加算
      */
+    @CheckForNull
     public Code getServiceTeikyoTaiseiKyokaKasan() {
         return serviceTeikyoTaiseiKyokaKasan;
     }
 
     /**
-     * setServiceTeikyoTaiseiKyokaKasan
+     * サービス提供体制強化加算のsetメソッドです。
      *
-     * @param serviceTeikyoTaiseiKyokaKasan serviceTeikyoTaiseiKyokaKasan
+     * @param serviceTeikyoTaiseiKyokaKasan サービス提供体制強化加算
      */
     public void setServiceTeikyoTaiseiKyokaKasan(Code serviceTeikyoTaiseiKyokaKasan) {
         this.serviceTeikyoTaiseiKyokaKasan = serviceTeikyoTaiseiKyokaKasan;
     }
 
     /**
-     * getNinchishoTankiShuchuRehabilitationKasan
+     * 認知症短期集中リハビリテーション加算のgetメソッドです。
      *
-     * @return ninchishoTankiShuchuRehabilitationKasan
+     * @return 認知症短期集中リハビリテーション加算
      */
-    public NinchishoTankiShuchuRehabilitationKasan getNinchishoTankiShuchuRehabilitationKasan() {
+    @CheckForNull
+    public Code getNinchishoTankiShuchuRehabilitationKasan() {
         return ninchishoTankiShuchuRehabilitationKasan;
     }
 
     /**
-     * setNinchishoTankiShuchuRehabilitationKasan
+     * 認知症短期集中リハビリテーション加算のsetメソッドです。
      *
-     * @param ninchishoTankiShuchuRehabilitationKasan
-     * ninchishoTankiShuchuRehabilitationKasan
+     * @param ninchishoTankiShuchuRehabilitationKasan 認知症短期集中リハビリテーション加算
      */
-    public void setNinchishoTankiShuchuRehabilitationKasan(NinchishoTankiShuchuRehabilitationKasan ninchishoTankiShuchuRehabilitationKasan) {
+    public void setNinchishoTankiShuchuRehabilitationKasan(Code ninchishoTankiShuchuRehabilitationKasan) {
         this.ninchishoTankiShuchuRehabilitationKasan = ninchishoTankiShuchuRehabilitationKasan;
     }
 
     /**
-     * getJakunenseiNinchishoRiyoushaUkeeireKasan
+     * 若年性認知症利用者（入所者・患者）受入加算のgetメソッドです。
      *
-     * @return jakunenseiNinchishoRiyoushaUkeeireKasan
+     * @return 若年性認知症利用者（入所者・患者）受入加算
      */
-    public JakunenseiNinchishoRiyoshaUkeireKasan getJakunenseiNinchishoRiyoushaUkeeireKasan() {
+    @CheckForNull
+    public Code getJakunenseiNinchishoRiyoushaUkeeireKasan() {
         return jakunenseiNinchishoRiyoushaUkeeireKasan;
     }
 
     /**
-     * setJakunenseiNinchishoRiyoushaUkeeireKasan
+     * 若年性認知症利用者（入所者・患者）受入加算のsetメソッドです。
      *
-     * @param jakunenseiNinchishoRiyoushaUkeeireKasan
-     * jakunenseiNinchishoRiyoushaUkeeireKasan
+     * @param jakunenseiNinchishoRiyoushaUkeeireKasan 若年性認知症利用者（入所者・患者）受入加算
      */
-    public void setJakunenseiNinchishoRiyoushaUkeeireKasan(JakunenseiNinchishoRiyoshaUkeireKasan jakunenseiNinchishoRiyoushaUkeeireKasan) {
+    public void setJakunenseiNinchishoRiyoushaUkeeireKasan(Code jakunenseiNinchishoRiyoushaUkeeireKasan) {
         this.jakunenseiNinchishoRiyoushaUkeeireKasan = jakunenseiNinchishoRiyoushaUkeeireKasan;
     }
 
     /**
-     * getKangoTaiseiKasan
+     * 看護体制加算のgetメソッドです。
      *
-     * @return kangoTaiseiKasan
+     * @return 看護体制加算
      */
-    public KangoTaiseiKasan getKangoTaiseiKasan() {
+    @CheckForNull
+    public Code getKangoTaiseiKasan() {
         return kangoTaiseiKasan;
     }
 
     /**
-     * setKangoTaiseiKasan
+     * 看護体制加算のsetメソッドです。
      *
-     * @param kangoTaiseiKasan kangoTaiseiKasan
+     * @param kangoTaiseiKasan 看護体制加算
      */
-    public void setKangoTaiseiKasan(KangoTaiseiKasan kangoTaiseiKasan) {
+    public void setKangoTaiseiKasan(Code kangoTaiseiKasan) {
         this.kangoTaiseiKasan = kangoTaiseiKasan;
     }
 
     /**
-     * getYakinShokuinHaichiKasan
+     * 夜勤職員配置加算のgetメソッドです。
      *
-     * @return yakinShokuinHaichiKasan
+     * @return 夜勤職員配置加算
      */
-    public YakinStaffHaichiKasan getYakinShokuinHaichiKasan() {
+    @CheckForNull
+    public Code getYakinShokuinHaichiKasan() {
         return yakinShokuinHaichiKasan;
     }
 
     /**
-     * setYakinShokuinHaichiKasan
+     * 夜勤職員配置加算のsetメソッドです。
      *
-     * @param yakinShokuinHaichiKasan yakinShokuinHaichiKasan
+     * @param yakinShokuinHaichiKasan 夜勤職員配置加算
      */
-    public void setYakinShokuinHaichiKasan(YakinStaffHaichiKasan yakinShokuinHaichiKasan) {
+    public void setYakinShokuinHaichiKasan(Code yakinShokuinHaichiKasan) {
         this.yakinShokuinHaichiKasan = yakinShokuinHaichiKasan;
     }
 
     /**
-     * getRyoyoShokuKasan
+     * 療養食加算のgetメソッドです。
      *
-     * @return ryoyoShokuKasan
+     * @return 療養食加算
      */
-    public RyoyoshokuKasan getRyoyoShokuKasan() {
+    @CheckForNull
+    public Code getRyoyoShokuKasan() {
         return ryoyoShokuKasan;
     }
 
     /**
-     * setRyoyoShokuKasan
+     * 療養食加算のsetメソッドです。
      *
-     * @param ryoyoShokuKasan ryoyoShokuKasan
+     * @param ryoyoShokuKasan 療養食加算
      */
-    public void setRyoyoShokuKasan(RyoyoshokuKasan ryoyoShokuKasan) {
+    public void setRyoyoShokuKasan(Code ryoyoShokuKasan) {
         this.ryoyoShokuKasan = ryoyoShokuKasan;
     }
 
     /**
-     * getNichijoSeikatsuKeizokuShienKasan
+     * 日常生活継続支援加算のgetメソッドです。
      *
-     * @return nichijoSeikatsuKeizokuShienKasan
+     * @return 日常生活継続支援加算
      */
-    public NichijoSeikatsuKeizokuSupprtKasan getNichijoSeikatsuKeizokuShienKasan() {
+    @CheckForNull
+    public Code getNichijoSeikatsuKeizokuShienKasan() {
         return nichijoSeikatsuKeizokuShienKasan;
     }
 
     /**
-     * setNichijoSeikatsuKeizokuShienKasan
+     * 日常生活継続支援加算のsetメソッドです。
      *
-     * @param nichijoSeikatsuKeizokuShienKasan nichijoSeikatsuKeizokuShienKasan
+     * @param nichijoSeikatsuKeizokuShienKasan 日常生活継続支援加算
      */
-    public void setNichijoSeikatsuKeizokuShienKasan(NichijoSeikatsuKeizokuSupprtKasan nichijoSeikatsuKeizokuShienKasan) {
+    public void setNichijoSeikatsuKeizokuShienKasan(Code nichijoSeikatsuKeizokuShienKasan) {
         this.nichijoSeikatsuKeizokuShienKasan = nichijoSeikatsuKeizokuShienKasan;
     }
 
     /**
-     * getNinchishoSemmonCareKasan
+     * 認知症専門ケア加算のgetメソッドです。
      *
-     * @return ninchishoSemmonCareKasan
+     * @return 認知症専門ケア加算
      */
-    public NinchishoSemmonCareKasan getNinchishoSemmonCareKasan() {
+    @CheckForNull
+    public Code getNinchishoSemmonCareKasan() {
         return ninchishoSemmonCareKasan;
     }
 
     /**
-     * setNinchishoSemmonCareKasan
+     * 認知症専門ケア加算のsetメソッドです。
      *
-     * @param ninchishoSemmonCareKasan ninchishoSemmonCareKasan
+     * @param ninchishoSemmonCareKasan 認知症専門ケア加算
      */
-    public void setNinchishoSemmonCareKasan(NinchishoSemmonCareKasan ninchishoSemmonCareKasan) {
+    public void setNinchishoSemmonCareKasan(Code ninchishoSemmonCareKasan) {
         this.ninchishoSemmonCareKasan = ninchishoSemmonCareKasan;
     }
 
     /**
-     * gettwentyFourHoursTsuhoTaioKasan
+     * ２４時間通報対応加算のgetメソッドです。
      *
-     * @return twentyFourHoursTsuhoTaioKasan
+     * @return ２４時間通報対応加算
      */
-    public TsuhoTaioFor24HoursKasan getTwentyFourHoursTsuhoTaioKasan() {
+    @CheckForNull
+    public Code getTwentyFourHoursTsuhoTaioKasan() {
         return twentyFourHoursTsuhoTaioKasan;
     }
 
     /**
-     * settwentyFourHoursTsuhoTaioKasan
+     * ２４時間通報対応加算のsetメソッドです。
      *
-     * @param twentyFourHoursTsuhoTaioKasan twentyFourHoursTsuhoTaioKasan
+     * @param twentyFourHoursTsuhoTaioKasan ２４時間通報対応加算
      */
-    public void setTwentyFourHoursTsuhoTaioKasan(TsuhoTaioFor24HoursKasan twentyFourHoursTsuhoTaioKasan) {
+    public void setTwentyFourHoursTsuhoTaioKasan(Code twentyFourHoursTsuhoTaioKasan) {
         this.twentyFourHoursTsuhoTaioKasan = twentyFourHoursTsuhoTaioKasan;
     }
 
     /**
-     * getKangoShokuinHaichiKasan
+     * 看護職員配置加算のgetメソッドです。
      *
-     * @return kangoShokuinHaichiKasan
+     * @return 看護職員配置加算
      */
-    public KangoStaffHaichiKasan getKangoShokuinHaichiKasan() {
+    @CheckForNull
+    public Code getKangoShokuinHaichiKasan() {
         return kangoShokuinHaichiKasan;
     }
 
     /**
-     * setKangoShokuinHaichiKasan
+     * 看護職員配置加算のsetメソッドです。
      *
-     * @param kangoShokuinHaichiKasan kangoShokuinHaichiKasan
+     * @param kangoShokuinHaichiKasan 看護職員配置加算
      */
-    public void setKangoShokuinHaichiKasan(KangoStaffHaichiKasan kangoShokuinHaichiKasan) {
+    public void setKangoShokuinHaichiKasan(Code kangoShokuinHaichiKasan) {
         this.kangoShokuinHaichiKasan = kangoShokuinHaichiKasan;
     }
 
     /**
-     * getYakanCareKasan
+     * 夜間ケア加算のgetメソッドです。
      *
-     * @return yakanCareKasan
+     * @return 夜間ケア加算
      */
-    public YakanCareKasan getYakanCareKasan() {
+    @CheckForNull
+    public Code getYakanCareKasan() {
         return yakanCareKasan;
     }
 
     /**
-     * setYakanCareKasan
+     * 夜間ケア加算のsetメソッドです。
      *
-     * @param yakanCareKasan yakanCareKasan
+     * @param yakanCareKasan 夜間ケア加算
      */
-    public void setYakanCareKasan(YakanCareKasan yakanCareKasan) {
+    public void setYakanCareKasan(Code yakanCareKasan) {
         this.yakanCareKasan = yakanCareKasan;
     }
 
     /**
-     * getShudanCommunicationRyoho_umu
+     * 集団コミュニケーション療法の有無のgetメソッドです。
      *
-     * @return shudanCommunicationRyoho_umu
+     * @return 集団コミュニケーション療法の有無
      */
-    public ShudanCommunicationRyohoUmu getShudanCommunicationRyoho_umu() {
+    @CheckForNull
+    public Code getShudanCommunicationRyoho_umu() {
         return shudanCommunicationRyoho_umu;
     }
 
     /**
-     * setShudanCommunicationRyoho_umu
+     * 集団コミュニケーション療法の有無のsetメソッドです。
      *
-     * @param shudanCommunicationRyoho_umu shudanCommunicationRyoho_umu
+     * @param shudanCommunicationRyoho_umu 集団コミュニケーション療法の有無
      */
-    public void setShudanCommunicationRyoho_umu(ShudanCommunicationRyohoUmu shudanCommunicationRyoho_umu) {
+    public void setShudanCommunicationRyoho_umu(Code shudanCommunicationRyoho_umu) {
         this.shudanCommunicationRyoho_umu = shudanCommunicationRyoho_umu;
     }
 
     /**
-     * getServiceTeikyoTaiseiKyokaKasan_Karadokogata
+     * サービス提供体制強化加算（空床型）のgetメソッドです。
      *
-     * @return serviceTeikyoTaiseiKyokaKasan_Karadokogata
+     * @return サービス提供体制強化加算（空床型）
      */
-    public ServiceTeikyoTaiseiKyokaKasanForKushoType getServiceTeikyoTaiseiKyokaKasan_Karadokogata() {
+    @CheckForNull
+    public Code getServiceTeikyoTaiseiKyokaKasan_Karadokogata() {
         return serviceTeikyoTaiseiKyokaKasan_Karadokogata;
     }
 
     /**
-     * setServiceTeikyoTaiseiKyokaKasan_Karadokogata
+     * サービス提供体制強化加算（空床型）のsetメソッドです。
      *
-     * @param serviceTeikyoTaiseiKyokaKasan_Karadokogata
-     * serviceTeikyoTaiseiKyokaKasan_Karadokogata
+     * @param serviceTeikyoTaiseiKyokaKasan_Karadokogata サービス提供体制強化加算（空床型）
      */
-    public void setServiceTeikyoTaiseiKyokaKasan_Karadokogata(ServiceTeikyoTaiseiKyokaKasanForKushoType serviceTeikyoTaiseiKyokaKasan_Karadokogata) {
+    public void setServiceTeikyoTaiseiKyokaKasan_Karadokogata(Code serviceTeikyoTaiseiKyokaKasan_Karadokogata) {
         this.serviceTeikyoTaiseiKyokaKasan_Karadokogata = serviceTeikyoTaiseiKyokaKasan_Karadokogata;
     }
 
     /**
-     * getNitchuShDecimalaikaigoTaise_20funmiman_umu
+     * 日中の身体介護２０分未満体制の有無のgetメソッドです。
      *
-     * @return nitchuShDecimalaikaigoTaise_20funmiman_umu
+     * @return 日中の身体介護２０分未満体制の有無
      */
-    public ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu getNitchuShintaikaigoTaise_20funmiman_umu() {
-        return nitchuShDecimalaikaigoTaise_20funmiman_umu;
+    @CheckForNull
+    public Code getNitchuShintaikaigoTaise_20funmiman_umu() {
+        return nitchuShintaikaigoTaise_20funmiman_umu;
     }
 
     /**
-     * setNitchuShDecimalaikaigoTaise_20funmiman_umu
+     * 日中の身体介護２０分未満体制の有無のsetメソッドです。
      *
-     * @param nitchuShDecimalaikaigoTaise_20funmiman_umu
-     * nitchuShDecimalaikaigoTaise_20funmiman_umu
+     * @param nitchuShintaikaigoTaise_20funmiman_umu 日中の身体介護２０分未満体制の有無
      */
-    public void setNitchuShintaikaigoTaise_20funmiman_umu(ShintaiKaigoUnder20minutesInDaytimeTaiseiUmu nitchuShDecimalaikaigoTaise_20funmiman_umu) {
-        this.nitchuShDecimalaikaigoTaise_20funmiman_umu = nitchuShDecimalaikaigoTaise_20funmiman_umu;
+    public void setNitchuShintaikaigoTaise_20funmiman_umu(Code nitchuShintaikaigoTaise_20funmiman_umu) {
+        this.nitchuShintaikaigoTaise_20funmiman_umu = nitchuShintaikaigoTaise_20funmiman_umu;
     }
 
     /**
-     * getServiceTeikyoSekininshaTaisei_umu
+     * サービス提供責任者体制の有無のgetメソッドです。
      *
-     * @return serviceTeikyoSekininshaTaisei_umu
+     * @return サービス提供責任者体制の有無
      */
-    public ServiceTeikyoSekininshaTaiseiUmu getServiceTeikyoSekininshaTaisei_umu() {
+    @CheckForNull
+    public Code getServiceTeikyoSekininshaTaisei_umu() {
         return serviceTeikyoSekininshaTaisei_umu;
     }
 
     /**
-     * setServiceTeikyoSekininshaTaisei_umu
+     * サービス提供責任者体制の有無のsetメソッドです。
      *
-     * @param serviceTeikyoSekininshaTaisei_umu
-     * serviceTeikyoSekininshaTaisei_umu
+     * @param serviceTeikyoSekininshaTaisei_umu サービス提供責任者体制の有無
      */
-    public void setServiceTeikyoSekininshaTaisei_umu(ServiceTeikyoSekininshaTaiseiUmu serviceTeikyoSekininshaTaisei_umu) {
+    public void setServiceTeikyoSekininshaTaisei_umu(Code serviceTeikyoSekininshaTaisei_umu) {
         this.serviceTeikyoSekininshaTaisei_umu = serviceTeikyoSekininshaTaisei_umu;
     }
 
     /**
-     * getDoitsuTatemonoKyojuRiyoshaGenzan_umu
+     * 同一建物に居住する利用者の減算の有無のgetメソッドです。
      *
-     * @return doitsuTatemonoKyojuRiyoshaGenzan_umu
+     * @return 同一建物に居住する利用者の減算の有無
      */
-    public DoitsuTatemonoKyojuUserGenzanUmu getDoitsuTatemonoKyojuRiyoshaGenzan_umu() {
+    @CheckForNull
+    public Code getDoitsuTatemonoKyojuRiyoshaGenzan_umu() {
         return doitsuTatemonoKyojuRiyoshaGenzan_umu;
     }
 
     /**
-     * setDoitsuTatemonoKyojuRiyoshaGenzan_umu
+     * 同一建物に居住する利用者の減算の有無のsetメソッドです。
      *
-     * @param doitsuTatemonoKyojuRiyoshaGenzan_umu
-     * doitsuTatemonoKyojuRiyoshaGenzan_umu
+     * @param doitsuTatemonoKyojuRiyoshaGenzan_umu 同一建物に居住する利用者の減算の有無
      */
-    public void setDoitsuTatemonoKyojuRiyoshaGenzan_umu(DoitsuTatemonoKyojuUserGenzanUmu doitsuTatemonoKyojuRiyoshaGenzan_umu) {
+    public void setDoitsuTatemonoKyojuRiyoshaGenzan_umu(Code doitsuTatemonoKyojuRiyoshaGenzan_umu) {
         this.doitsuTatemonoKyojuRiyoshaGenzan_umu = doitsuTatemonoKyojuRiyoshaGenzan_umu;
     }
 
     /**
-     * getKinkyuTankiNyushoTaiseiKakuhoKasan
+     * 緊急短期入所体制確保加算のgetメソッドです。
      *
-     * @return kinkyuTankiNyushoTaiseiKakuhoKasan
+     * @return 緊急短期入所体制確保加算
      */
-    public KinkyuTankinyushoTaiseiKakuhoKasan getKinkyuTankiNyushoTaiseiKakuhoKasan() {
+    @CheckForNull
+    public Code getKinkyuTankiNyushoTaiseiKakuhoKasan() {
         return kinkyuTankiNyushoTaiseiKakuhoKasan;
     }
 
     /**
-     * setKinkyuTankiNyushoTaiseiKakuhoKasan
+     * 緊急短期入所体制確保加算のsetメソッドです。
      *
-     * @param kinkyuTankiNyushoTaiseiKakuhoKasan
-     * kinkyuTankiNyushoTaiseiKakuhoKasan
+     * @param kinkyuTankiNyushoTaiseiKakuhoKasan 緊急短期入所体制確保加算
      */
-    public void setKinkyuTankiNyushoTaiseiKakuhoKasan(KinkyuTankinyushoTaiseiKakuhoKasan kinkyuTankiNyushoTaiseiKakuhoKasan) {
+    public void setKinkyuTankiNyushoTaiseiKakuhoKasan(Code kinkyuTankiNyushoTaiseiKakuhoKasan) {
         this.kinkyuTankiNyushoTaiseiKakuhoKasan = kinkyuTankiNyushoTaiseiKakuhoKasan;
     }
 
     /**
-     * getZaitakuFukki_ZaitakuRyoyoShienKinoKasan
+     * 在宅復帰・在宅療養支援機能加算のgetメソッドです。
      *
-     * @return zaitakuFukki_ZaitakuRyoyoShienKinoKasan
+     * @return 在宅復帰・在宅療養支援機能加算
      */
-    public ZaitakuFukkiZaitakuRyoyoSupportKinoKasan getZaitakuFukki_ZaitakuRyoyoShienKinoKasan() {
+    @CheckForNull
+    public Code getZaitakuFukki_ZaitakuRyoyoShienKinoKasan() {
         return zaitakuFukki_ZaitakuRyoyoShienKinoKasan;
     }
 
     /**
-     * setZaitakuFukki_ZaitakuRyoyoShienKinoKasan
+     * 在宅復帰・在宅療養支援機能加算のsetメソッドです。
      *
-     * @param zaitakuFukki_ZaitakuRyoyoShienKinoKasan
-     * zaitakuFukki_ZaitakuRyoyoShienKinoKasan
+     * @param zaitakuFukki_ZaitakuRyoyoShienKinoKasan 在宅復帰・在宅療養支援機能加算
      */
-    public void setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(ZaitakuFukkiZaitakuRyoyoSupportKinoKasan zaitakuFukki_ZaitakuRyoyoShienKinoKasan) {
+    public void setZaitakuFukki_ZaitakuRyoyoShienKinoKasan(Code zaitakuFukki_ZaitakuRyoyoShienKinoKasan) {
         this.zaitakuFukki_ZaitakuRyoyoShienKinoKasan = zaitakuFukki_ZaitakuRyoyoShienKinoKasan;
     }
 
     /**
-     * getSeikatuKinoKojoGroupKatsudoKasan
+     * 生活機能向上グループ活動加算のgetメソッドです。
      *
-     * @return seikatuKinoKojoGroupKatsudoKasan
+     * @return 生活機能向上グループ活動加算
      */
-    public SeikatsuKinoKojoGroupKatsudoKasan getSeikatuKinoKojoGroupKatsudoKasan() {
+    @CheckForNull
+    public Code getSeikatuKinoKojoGroupKatsudoKasan() {
         return seikatuKinoKojoGroupKatsudoKasan;
     }
 
     /**
-     * setSeikatuKinoKojoGroupKatsudoKasan
+     * 生活機能向上グループ活動加算のsetメソッドです。
      *
-     * @param seikatuKinoKojoGroupKatsudoKasan seikatuKinoKojoGroupKatsudoKasan
+     * @param seikatuKinoKojoGroupKatsudoKasan 生活機能向上グループ活動加算
      */
-    public void setSeikatuKinoKojoGroupKatsudoKasan(SeikatsuKinoKojoGroupKatsudoKasan seikatuKinoKojoGroupKatsudoKasan) {
+    public void setSeikatuKinoKojoGroupKatsudoKasan(Code seikatuKinoKojoGroupKatsudoKasan) {
         this.seikatuKinoKojoGroupKatsudoKasan = seikatuKinoKojoGroupKatsudoKasan;
     }
 
     /**
-     * getKaigoShokuinShoguKaizenKasan
+     * 介護職員処遇改善加算のgetメソッドです。
      *
-     * @return kaigoShokuinShoguKaizenKasan
+     * @return 介護職員処遇改善加算
      */
-    public KaigoStaffShoguKaizenKasan getKaigoShokuinShoguKaizenKasan() {
+    @CheckForNull
+    public Code getKaigoShokuinShoguKaizenKasan() {
         return kaigoShokuinShoguKaizenKasan;
     }
 
     /**
-     * setKaigoShokuinShoguKaizenKasan
+     * 介護職員処遇改善加算のsetメソッドです。
      *
-     * @param kaigoShokuinShoguKaizenKasan kaigoShokuinShoguKaizenKasan
+     * @param kaigoShokuinShoguKaizenKasan 介護職員処遇改善加算
      */
-    public void setKaigoShokuinShoguKaizenKasan(KaigoStaffShoguKaizenKasan kaigoShokuinShoguKaizenKasan) {
+    public void setKaigoShokuinShoguKaizenKasan(Code kaigoShokuinShoguKaizenKasan) {
         this.kaigoShokuinShoguKaizenKasan = kaigoShokuinShoguKaizenKasan;
     }
 
     /**
-     * このエンティティの主キーが他の{@literal UrT0521KaigoJigyoshaShiteiServiceEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT7063KaigoJigyoshaShiteiServiceEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal UrT0521KaigoJigyoshaShiteiServiceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7063KaigoJigyoshaShiteiServiceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7063KaigoJigyoshaShiteiServiceEntity other) {
@@ -3185,6 +3190,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT7063KaigoJigyoshaShiteiServiceEntity entity) {
@@ -3335,7 +3342,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
         this.yakanCareKasan = entity.yakanCareKasan;
         this.shudanCommunicationRyoho_umu = entity.shudanCommunicationRyoho_umu;
         this.serviceTeikyoTaiseiKyokaKasan_Karadokogata = entity.serviceTeikyoTaiseiKyokaKasan_Karadokogata;
-        this.nitchuShDecimalaikaigoTaise_20funmiman_umu = entity.nitchuShDecimalaikaigoTaise_20funmiman_umu;
+        this.nitchuShintaikaigoTaise_20funmiman_umu = entity.nitchuShintaikaigoTaise_20funmiman_umu;
         this.serviceTeikyoSekininshaTaisei_umu = entity.serviceTeikyoSekininshaTaisei_umu;
         this.doitsuTatemonoKyojuRiyoshaGenzan_umu = entity.doitsuTatemonoKyojuRiyoshaGenzan_umu;
         this.kinkyuTankiNyushoTaiseiKakuhoKasan = entity.kinkyuTankiNyushoTaiseiKakuhoKasan;
@@ -3351,8 +3358,7 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(jigyoshaNo, serviceShuruiCode, yukoKaishiYMD, yukoShuryoYMD, idoYMD, idoJiyu, shiteiNo, kihonJohoJunkyoKubun, jigyoKaishiYMD, jigyoKyushiYMD, jigyoSaikaiYMD, jigyoHaishiYMD, jigyoshaName, jigyoshaNameKana, jigyoshaYubinNo, jigyoshaAddress, jigyoshaAddressKana, jigyoshaTelNo, jigyoshaFaxNo, torokuHokenshaNo, juryoininUmu, torokuKaishiYMD, torokuShuryoYMD, kanrishaName, kanrishaNameKana, kanrishaYubinNo, kanrishaAddress, kanrishaAddressKana, kozaJohoJunkyoKubun, ginkoCode, shitenCode, kozaShubetsu, kozaNo, kozaMeiginin, kozaMeigininKana, shakaiFukushihoujinKeigenjigyouJisshi_umu, seikatsuhogohouShitei_umu, shisetsunadoKubun, jininHaichiKubun, tokubetsuChiikiKasan_umu, kinkyujiHomonkaigoKasan_umu, tokubetsuKanriTaisei, kinoKunrenShidoTaisei_umu, shokujiTeikyoTaisei_umu, nyuyokuKaijoTaisei_umu, tokubetsuNyuyokuKaijoTaisei_umu, joukinsenjuIshiHaichi_umu, ishiHaichiKijun, seisinkaIshiTeikitekiRyouyousidou_umu, yakanKinmuJokenKijun, ninchishouSenmontou_umu, shokujiTeikyoJokyo, sougeiTaisei, rehaTeikyoTaisei_SogoRehaShisetsu_umu, rehaTeikyoTaisei_RigakuRyohoII_umu, rehaTeikyoTaisei_RigakuRyohoIII_umu, rehaTeikyoTaisei_SagyoRyohoII_umu, rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu, rehaTeikyoTaisei_Sonota_umu, rehabilitationKasanJokyo, ryoyoKankyoKijun, ishiKetuinGenzanJokyo_umu, kangoShokuinKetsuinGenzanJokyo_umu, rigakuRyouhousiKetsuinGenzanJokyo_umu, sagyouRyouhousiKetsuinGenzanJokyo_umu, kaigoShokuinKetsuinGenzanJokyo_umu, kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu, kaigoJujishaKetsuinGenzanJokyo_umu, kansenTaisakuSidoKanri_umu, jushoHifuKaiyouShidoKanri_umu, yakuzaiKaniriShido_umu, shogaishaSeikatsuShienTaisei_umu, chiikiKubunCode, jikanEnchoServiceTaisei, kobetsuRehabilitationTeikyoTaisei, kyojuhiTaisaku, yakanCare_umu, rehabilitationKinoKyoka_umu, kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1, kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu, kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu, gengoChokakushiKetsuinGenzanJokyo_umu, eiyouKanriHyoka, tokuteijigyoushoKasan_HomonKaigo_umu, jakunenseiNinchishoCareTaisei_umu, undokiKinoKojoTaisei_umu, eiyoManagement_KaizenTaisei_umu, kokuKinoKojoTaisei_umu, jigyoshoHyokaKasan_Moshide_umu, jigyoshoHyokaKasan_Kettei_umu, kinkyuUkeireTaisei_umu, yakanKangoTaisei_umu, tokuteijigyoshoKasan_Kyotakukaigoshien_umu, kaigoShienSemmoninSenjuJokinshaNinsu, kaigoSienSemmoninSenjuHijokinshaNinsu, kaigoSienSemmoninKemmuJokinshaNinsu, kaigoSienSemmoninKemmuHijokinshaNinsu, homonkaigoServiceTeikyoSekininshaNinsu, homonkaigoSenjuJokinshaNinsu, homonkaigoSenjuHijokinshaNinsu, homonkaigoKemmuJokinshaNinsu, homonkaigoKemmuHijokinshaNinsu, homonkaigoJokinKanzangoNinsu, riyoTeiinNinsu, shiteiYukoKaishiYMD, shiteiYukoShuryoYMD, shiteiKoshinShinseichuKubun, koryokuTeishiKaishiYMD, koryokuTeishiShuryoYMD, daikiboJigyoshaGaito_umu, junUnitCareTaisei_umu, judokaTaioTaisei_umu, iryoRenkeiTaisei_umu, unitCareTaisei_umu, zaitaku_nyushoSogoRiyoTaisei_umu, terminalCareTaisei_umu, shintaiKosokuHaishiTorikumi_umu, shokiboKyotenShugoTaisei_umu, ninchishoCareKasan_umu, kobetsuKinoKunrenTaisei_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2, kobetsuRehaTeikyoTaisei_SagyoRyoho_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu, kobetsuRehaTeikyoTaisei_Sonota_umu, setsubiKijun, ryoyoTaiseiIjiTokubetsuKasan, kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu, sankyuHelperTaisei, chuSankanChiikiShokiboJigyoshoKasan_chiiki, chuSankanChiikiShokiboJigyoushoKasan_kibo, serviceTeikyoTaiseiKyokaKasan, ninchishoTankiShuchuRehabilitationKasan, jakunenseiNinchishoRiyoushaUkeeireKasan, kangoTaiseiKasan, yakinShokuinHaichiKasan, ryoyoShokuKasan, nichijoSeikatsuKeizokuShienKasan, ninchishoSemmonCareKasan, twentyFourHoursTsuhoTaioKasan, kangoShokuinHaichiKasan, yakanCareKasan, shudanCommunicationRyoho_umu, serviceTeikyoTaiseiKyokaKasan_Karadokogata, nitchuShDecimalaikaigoTaise_20funmiman_umu, serviceTeikyoSekininshaTaisei_umu, doitsuTatemonoKyojuRiyoshaGenzan_umu, kinkyuTankiNyushoTaiseiKakuhoKasan, zaitakuFukki_ZaitakuRyoyoShienKinoKasan, seikatuKinoKojoGroupKatsudoKasan, kaigoShokuinShoguKaizenKasan
-        );
+        return super.toMd5(jigyoshaNo, serviceShuruiCode, yukoKaishiYMD, yukoShuryoYMD, idoYMD, idoJiyu, shiteiNo, kihonJohoJunkyoKubun, jigyoKaishiYMD, jigyoKyushiYMD, jigyoSaikaiYMD, jigyoHaishiYMD, jigyoshaName, jigyoshaNameKana, jigyoshaYubinNo, jigyoshaAddress, jigyoshaAddressKana, jigyoshaTelNo, jigyoshaFaxNo, torokuHokenshaNo, juryoininUmu, torokuKaishiYMD, torokuShuryoYMD, kanrishaName, kanrishaNameKana, kanrishaYubinNo, kanrishaAddress, kanrishaAddressKana, kozaJohoJunkyoKubun, ginkoCode, shitenCode, kozaShubetsu, kozaNo, kozaMeiginin, kozaMeigininKana, shakaiFukushihoujinKeigenjigyouJisshi_umu, seikatsuhogohouShitei_umu, shisetsunadoKubun, jininHaichiKubun, tokubetsuChiikiKasan_umu, kinkyujiHomonkaigoKasan_umu, tokubetsuKanriTaisei, kinoKunrenShidoTaisei_umu, shokujiTeikyoTaisei_umu, nyuyokuKaijoTaisei_umu, tokubetsuNyuyokuKaijoTaisei_umu, joukinsenjuIshiHaichi_umu, ishiHaichiKijun, seisinkaIshiTeikitekiRyouyousidou_umu, yakanKinmuJokenKijun, ninchishouSenmontou_umu, shokujiTeikyoJokyo, sougeiTaisei, rehaTeikyoTaisei_SogoRehaShisetsu_umu, rehaTeikyoTaisei_RigakuRyohoII_umu, rehaTeikyoTaisei_RigakuRyohoIII_umu, rehaTeikyoTaisei_SagyoRyohoII_umu, rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu, rehaTeikyoTaisei_Sonota_umu, rehabilitationKasanJokyo, ryoyoKankyoKijun, ishiKetuinGenzanJokyo_umu, kangoShokuinKetsuinGenzanJokyo_umu, rigakuRyouhousiKetsuinGenzanJokyo_umu, sagyouRyouhousiKetsuinGenzanJokyo_umu, kaigoShokuinKetsuinGenzanJokyo_umu, kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu, kaigoJujishaKetsuinGenzanJokyo_umu, kansenTaisakuSidoKanri_umu, jushoHifuKaiyouShidoKanri_umu, yakuzaiKaniriShido_umu, shogaishaSeikatsuShienTaisei_umu, chiikiKubunCode, jikanEnchoServiceTaisei, kobetsuRehabilitationTeikyoTaisei, kyojuhiTaisaku, yakanCare_umu, rehabilitationKinoKyoka_umu, kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1, kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu, kobetsuRehaTeikyoTaisei_SagyoRyohoII_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu, gengoChokakushiKetsuinGenzanJokyo_umu, eiyouKanriHyoka, tokuteijigyoushoKasan_HomonKaigo_umu, jakunenseiNinchishoCareTaisei_umu, undokiKinoKojoTaisei_umu, eiyoManagement_KaizenTaisei_umu, kokuKinoKojoTaisei_umu, jigyoshoHyokaKasan_Moshide_umu, jigyoshoHyokaKasan_Kettei_umu, kinkyuUkeireTaisei_umu, yakanKangoTaisei_umu, tokuteijigyoshoKasan_Kyotakukaigoshien_umu, kaigoShienSemmoninSenjuJokinshaNinsu, kaigoSienSemmoninSenjuHijokinshaNinsu, kaigoSienSemmoninKemmuJokinshaNinsu, kaigoSienSemmoninKemmuHijokinshaNinsu, homonkaigoServiceTeikyoSekininshaNinsu, homonkaigoSenjuJokinshaNinsu, homonkaigoSenjuHijokinshaNinsu, homonkaigoKemmuJokinshaNinsu, homonkaigoKemmuHijokinshaNinsu, homonkaigoJokinKanzangoNinsu, riyoTeiinNinsu, shiteiYukoKaishiYMD, shiteiYukoShuryoYMD, shiteiKoshinShinseichuKubun, koryokuTeishiKaishiYMD, koryokuTeishiShuryoYMD, daikiboJigyoshaGaito_umu, junUnitCareTaisei_umu, judokaTaioTaisei_umu, iryoRenkeiTaisei_umu, unitCareTaisei_umu, zaitaku_nyushoSogoRiyoTaisei_umu, terminalCareTaisei_umu, shintaiKosokuHaishiTorikumi_umu, shokiboKyotenShugoTaisei_umu, ninchishoCareKasan_umu, kobetsuKinoKunrenTaisei_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoI_umu, kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2, kobetsuRehaTeikyoTaisei_SagyoRyoho_umu, kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu, kobetsuRehaTeikyoTaisei_Sonota_umu, setsubiKijun, ryoyoTaiseiIjiTokubetsuKasan, kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu, sankyuHelperTaisei, chuSankanChiikiShokiboJigyoshoKasan_chiiki, chuSankanChiikiShokiboJigyoushoKasan_kibo, serviceTeikyoTaiseiKyokaKasan, ninchishoTankiShuchuRehabilitationKasan, jakunenseiNinchishoRiyoushaUkeeireKasan, kangoTaiseiKasan, yakinShokuinHaichiKasan, ryoyoShokuKasan, nichijoSeikatsuKeizokuShienKasan, ninchishoSemmonCareKasan, twentyFourHoursTsuhoTaioKasan, kangoShokuinHaichiKasan, yakanCareKasan, shudanCommunicationRyoho_umu, serviceTeikyoTaiseiKyokaKasan_Karadokogata, nitchuShintaikaigoTaise_20funmiman_umu, serviceTeikyoSekininshaTaisei_umu, doitsuTatemonoKyojuRiyoshaGenzan_umu, kinkyuTankiNyushoTaiseiKakuhoKasan, zaitakuFukki_ZaitakuRyoyoShienKinoKasan, seikatuKinoKojoGroupKatsudoKasan, kaigoShokuinShoguKaizenKasan);
     }
 
 // </editor-fold>

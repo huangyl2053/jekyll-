@@ -22,11 +22,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link ShokanTokuteiShinryoTokubetsuRyoyo}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShokanTokuteiShinryoTokubetsuRyoyoTest extends DbcTestBase {
 
     private static DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity ShokanTokuteiShinryoTokubetsuRyoyoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

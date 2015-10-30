@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.helper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * フローIDと親Divに表示するタイトルを対応付けた列挙型です。
+ * フローIDと親Divに表示するタイトルを対応付けた列挙型クラスです。
  *
  * @author n8178 城間篤人
  */
@@ -273,10 +273,6 @@ public enum KaigoMenuType {
     /**
      *
      */
-    所得情報照会("DBBWF99999", "所得情報照会"),
-    /**
-     *
-     */
     特別徴収各種通知照会_個別("DBBWF99999", "特別徴収各種通知照会（個別）"),
     /**
      *
@@ -386,10 +382,6 @@ public enum KaigoMenuType {
      *
      */
     所得情報抽出_連携("DBBWF00000", "所得情報抽出・連携"),
-    /**
-     *
-     */
-    介護保険所得情報一覧表作成("DBBWF99999", "介護保険所得情報一覧表作成"),
     /**
      *
      */
@@ -1394,10 +1386,6 @@ public enum KaigoMenuType {
      *
      */
     要介護認定進捗状況照会("DBEWF11003", "要介護認定進捗状況照会"),
-    /**
-     *
-     */
-    個人状況照会("DBEWF11004", "個人状況照会"),
     /**
      *
      */

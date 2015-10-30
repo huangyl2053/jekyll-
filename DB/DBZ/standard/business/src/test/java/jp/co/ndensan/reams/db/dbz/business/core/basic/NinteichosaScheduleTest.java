@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link NinteichosaSchedule}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class NinteichosaScheduleTest extends DbzTestBase {
 
@@ -168,8 +170,8 @@ public class NinteichosaScheduleTest extends DbzTestBase {
         }
 
         @Test
-        public void get予約可能フラグは_entityが持つ予約可能フラグを返す() {
-            assertThat(sut.get予約可能フラグ(), is(NinteichosaScheduleEntity.getYoyakuKaoFlag()));
+        public void is予約可能フラグは_entityが持つ予約可能フラグを返す() {
+            assertThat(sut.is予約可能フラグ(), is(NinteichosaScheduleEntity.getYoyakuKaoFlag()));
         }
 
         @Test

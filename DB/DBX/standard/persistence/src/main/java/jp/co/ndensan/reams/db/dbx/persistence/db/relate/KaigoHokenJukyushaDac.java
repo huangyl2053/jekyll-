@@ -18,7 +18,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 
 /**
- * 介護保険受給者DACクラスです
+ * 介護保険受給者DACクラスです。
  *
  * @author N2806 太田 智之
  * @jpName 介護保険受給者Dac

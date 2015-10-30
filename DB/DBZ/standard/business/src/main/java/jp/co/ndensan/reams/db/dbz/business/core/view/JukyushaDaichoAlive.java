@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者台帳Aliveを管理するクラスです。
  */
-public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIdentifier, DbV4001JukyushaDaichoEntity, JukyushaDaichoAlive> implements Serializable {
+public class JukyushaDaichoAlive extends
+        ParentModelBase<JukyushaDaichoAliveIdentifier, DbV4001JukyushaDaichoEntity, JukyushaDaichoAlive> implements Serializable {
 
     private final DbV4001JukyushaDaichoEntity entity;
     private final JukyushaDaichoAliveIdentifier id;
@@ -164,7 +165,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
      *
      * @return 直近フラグ
      */
-    public boolean get直近フラグ() {
+    public boolean is直近フラグ() {
         return entity.getChokkinFlag();
     }
 
@@ -632,7 +633,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
      *
      * @return 要支援者認定申請区分
      */
-    public boolean get要支援者認定申請区分() {
+    public boolean is要支援者認定申請区分() {
         return entity.getYoshienshaNinteiShinseiFlag();
     }
 
@@ -794,7 +795,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
      *
      * @return 資格取得前申請フラグ
      */
-    public boolean get資格取得前申請フラグ() {
+    public boolean is資格取得前申請フラグ() {
         return entity.getShikakuShutokuMaeShinseiFlag();
     }
 
@@ -803,7 +804,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
      *
      * @return 旧措置者フラグ
      */
-    public boolean get旧措置者フラグ() {
+    public boolean is旧措置者フラグ() {
         return entity.getKyuSochishaFlag();
     }
 
@@ -812,7 +813,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -887,7 +888,7 @@ public class JukyushaDaichoAlive extends ParentModelBase<JukyushaDaichoAliveIden
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV4001JukyushaDaichoEntity entity;
         private final JukyushaDaichoAliveIdentifier id;
 

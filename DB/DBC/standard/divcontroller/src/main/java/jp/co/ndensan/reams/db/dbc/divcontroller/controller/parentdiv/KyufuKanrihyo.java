@@ -26,6 +26,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuKanrihyo {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int LENTGH_8 = 8;
+
     private List<HashMap> getYaml() {
         return YamlLoader.DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyo.yml"));
     }
@@ -82,11 +87,11 @@ public class KyufuKanrihyo {
             bindInfoGrid(tanki);
         } else if (kugiri.equals(対象期間区切.H1401_H1803)) {
             KyufuKanrihyoInfoDiv info = panel.getKyufuKanrihyoInfoKyotaku();
-            bindInfoDiv(info, row, 3);
+            bindInfoDiv(info, row, INDEX_3);
             bindInfoGrid(info);
         } else {
             KyufuKanrihyoInfoDiv info = panel.getKyufuKanrihyoInfoKyotaku();
-            bindInfoDiv(info, row, 4);
+            bindInfoDiv(info, row, INDEX_4);
             bindInfoGrid(info);
         }
     }
@@ -114,7 +119,7 @@ public class KyufuKanrihyo {
     private void bindInfoGrid(KyufuKanrihyoInfoDiv div) {
         List<dgMeisaiList_Row> dgRowList = div.getDgMeisaiList().getDataSource();
         dgRowList.clear();
-        for (int i = 5; i < 8; i++) {
+        for (int i = INDEX_5; i < LENTGH_8; i++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(i));
             dgRowList.add(new dgMeisaiList_Row(
                     cg.getAsRString("明細"),

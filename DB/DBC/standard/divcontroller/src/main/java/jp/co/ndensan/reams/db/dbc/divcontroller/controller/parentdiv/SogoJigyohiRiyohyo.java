@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoI
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoInfo.ServiceRiyohyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.SogoJigyohiRiyohyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoInfo.dgServiceRiyohyoBeppyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.ServiceRiyohyoInfo.dgServiceRiyohyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.SogoJigyohiRiyohyoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -34,6 +34,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author N8187 久保田 英男
  */
 public class SogoJigyohiRiyohyo {
+    
+            private static final int INDEX_3 = 3;
+            private static final int INDEX_4 = 4;
+            private static final int INDEX_6 = 6;
+            private static final int INDEX_7 = 7;
+            private static final int INDEX_9 = 9;
+            private static final int INDEX_10 = 10;
+            private static final int INDEX_11 = 11;
 
     private enum 別票画面表示 {
 
@@ -61,7 +69,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 「前月の情報をコピー」ボタン押下時の処理
+     * 「前月の情報をコピー」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -79,7 +87,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * サービス利用票Tabの「明細行を追加する」ボタン押下時の処理
+     * サービス利用票Tabの「明細行を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -102,7 +110,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * サービス利用票Tabの明細表の削除ボタン押下時の処理
+     * サービス利用票Tabの明細表の削除ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -118,7 +126,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの「明細情報を追加する」ボタン押下時の処理
+     * 別票Tabの「明細情報を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -133,7 +141,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの「合計情報を追加する」ボタン押下時の処理
+     * 別票Tabの「合計情報を追加する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -148,7 +156,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの明細表の選択ボタン押下時の処理
+     * 別票Tabの明細表の選択ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -173,7 +181,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの明細表の削除ボタン押下時の処理
+     * 別票Tabの明細表の削除ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -189,7 +197,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの「明細情報を確定する」ボタン押下時の処理
+     * 別票Tabの「明細情報を確定する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -206,7 +214,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの「合計情報を確定する」ボタン押下時の処理
+     * 別票Tabの「合計情報を確定する」ボタン押下時の処理。
      *
      * @param panel panel
      * @return ResponseData
@@ -223,7 +231,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 届出日など、Tab以外のデータの設定
+     * 届出日など、Tab以外のデータの設定。
      *
      * @param panel panel
      */
@@ -246,13 +254,13 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 届出日など、Tab以外のデータの設定(前月分)
+     * 届出日など、Tab以外のデータの設定(前月分)。
      *
      * @param panel panel
      */
     private void setSummaryZengetsuData(SogoJigyohiRiyohyoDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
-        int yamlIndex = 3;
+        int yamlIndex = INDEX_3;
         ServiceRiyohyoInfoDiv info = panel.getSogoJigyohiRiyohyoInfo();
         info.getTxtTodokedeYMD().setValue(new RDate(sourceList.get(yamlIndex).get("届出日").toString()));
         info.getTxtTekiyoKikan().setFromValue(new RDate(sourceList.get(yamlIndex).get("適用期間開始日").toString()));
@@ -269,7 +277,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * サービス利用票Tabのデータ設定(前月分)
+     * サービス利用票Tabのデータ設定(前月分)。
      *
      * @param panel panel
      */
@@ -278,7 +286,7 @@ public class SogoJigyohiRiyohyo {
         List<dgServiceRiyohyoList_Row> dgRowList = riyohyo.getDgServiceRiyohyoList().getDataSource();
         dgRowList.clear();
 
-        for (int yamlIndex = 4; yamlIndex < 6; yamlIndex++) {
+        for (int yamlIndex = INDEX_4; yamlIndex < INDEX_6; yamlIndex++) {
             dgServiceRiyohyoList_Row rowItem = createサービス利用票(yamlIndex);
             dgRowList.add(rowItem);
         }
@@ -286,7 +294,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabのデータ設定(前月分)
+     * 別票Tabのデータ設定(前月分)。
      *
      * @param panel panel
      */
@@ -303,7 +311,7 @@ public class SogoJigyohiRiyohyo {
         listRow.clear();
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
-        for (int yamlIndex = 6; yamlIndex < 9; yamlIndex++) {
+        for (int yamlIndex = INDEX_6; yamlIndex < INDEX_9; yamlIndex++) {
             rowItem = create別票一覧リスト(yamlIndex);
             listRow.add(rowItem);
         }
@@ -320,10 +328,10 @@ public class SogoJigyohiRiyohyo {
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getSogoJigyohiRiyohyoInfo().getTabServiceRiyohyo().
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
-        meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
-        meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
-        meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, 6));
-        meisai.getTxtServiceName().setValue(row.getTxtService().substring(7));
+        meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, INDEX_10));
+        meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(INDEX_11));
+        meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, INDEX_6));
+        meisai.getTxtServiceName().setValue(row.getTxtService().substring(INDEX_7));
         meisai.getTxtTani().setValue(new Decimal(row.getTxtTani().toString()));
         meisai.getTxtWaribikigoRitsu().setValue(new Decimal(row.getTxtWaribikigoRitsu().toString()));
         meisai.getTxtWaribikigoTani().setValue(new Decimal(row.getTxtWaribikigoTani().toString()));
@@ -438,7 +446,7 @@ public class SogoJigyohiRiyohyo {
      */
     private void setBeppyoGokeiKakutei(SogoJigyohiRiyohyoDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
-        int yamlIndex = 9;
+        int yamlIndex = INDEX_9;
         ServiceRiyohyoBeppyoListDiv beppyoList = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
         ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getSogoJigyohiRiyohyoInfo().
@@ -510,7 +518,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの明細のデータ初期化
+     * 別票Tabの明細のデータ初期化。
      *
      * @param panel panel
      */
@@ -529,7 +537,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの合計のデータ初期化
+     * 別票Tabの合計のデータ初期化。
      *
      * @param panel panel
      */
@@ -549,13 +557,13 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの明細のデモ向けデータ設定
+     * 別票Tabの明細のデモ向けデータ設定。
      *
      * @param panel panel
      */
     private void setBeppyoMeisaiDemoData(SogoJigyohiRiyohyoDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
-        int yamlIndex = 10;
+        int yamlIndex = INDEX_10;
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(new RString(sourceList.get(yamlIndex).get("事業者コード").toString()));
@@ -570,13 +578,13 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの合計のデモ向けデータ設定
+     * 別票Tabの合計のデモ向けデータ設定。
      *
      * @param panel panel
      */
     private void setBeppyoGokeiDemoData(SogoJigyohiRiyohyoDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyo.yml"));
-        int yamlIndex = 11;
+        int yamlIndex = INDEX_11;
         ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getSogoJigyohiRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         gokei.getTxtShuruiGendoChokaTani().setValue(new Decimal(sourceList.get(yamlIndex).get("種類限度超過単位").toString()));
@@ -592,7 +600,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * サービス利用票Tabの曜日の設定
+     * サービス利用票Tabの曜日の設定。
      *
      * @param panel panel
      */
@@ -610,7 +618,7 @@ public class SogoJigyohiRiyohyo {
     }
 
     /**
-     * 別票Tabの明細Panel、合計Panelの初期化
+     * 別票Tabの明細Panel、合計Panelの初期化。
      *
      * @param panel panel
      */
@@ -635,7 +643,7 @@ public class SogoJigyohiRiyohyo {
 //        }
 //    }
     /**
-     * 別票のPanel表示設定
+     * 別票のPanel表示設定。
      *
      * @param panel panel
      * @param 表示 表示

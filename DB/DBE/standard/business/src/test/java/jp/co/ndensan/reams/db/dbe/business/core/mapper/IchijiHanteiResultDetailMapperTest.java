@@ -39,6 +39,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -49,6 +50,7 @@ import static org.mockito.Mockito.mock;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class IchijiHanteiResultDetailMapperTest {
 
     private static ShinseishoKanriNo 申請書管理番号_01;

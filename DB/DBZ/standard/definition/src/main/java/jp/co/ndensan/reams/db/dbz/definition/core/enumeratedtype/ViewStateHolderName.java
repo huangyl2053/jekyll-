@@ -12,7 +12,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
 public enum ViewStateHolderName {
 
     /**
-     * 国保連情報取込画面で使用されるViewStateHolderです
+     * 国保連情報取込画面で使用されるViewStateHolderです。
      *
      */
     国保連取込情報

@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 利用者負担割合明細を管理するクラスです。
  */
-public class RiyoshaFutanWariaiMeisai extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier, DbT3114RiyoshaFutanWariaiMeisaiEntity, RiyoshaFutanWariaiMeisai> implements Serializable {
+public class RiyoshaFutanWariaiMeisai 
+extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier, 
+        DbT3114RiyoshaFutanWariaiMeisaiEntity, 
+        RiyoshaFutanWariaiMeisai> implements Serializable {
 
     private final DbT3114RiyoshaFutanWariaiMeisaiEntity entity;
     private final RiyoshaFutanWariaiMeisaiIdentifier id;

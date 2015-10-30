@@ -24,10 +24,10 @@ public final class JuchochiTokureiKaijoValidator {
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    public JushochitokureiKaijo NOTHING;
+    //private final JushochitokureiKaijo nothing;
 
-    JuchochiTokureiKaijoValidator(JushochitokureiKaijo jushochitokureiKaijo) {
-        this.NOTHING = jushochitokureiKaijo;
+   private JuchochiTokureiKaijoValidator(JushochitokureiKaijo jushochitokureiKaijo) {
+        //this.nothing = jushochitokureiKaijo;
     }
 
     /**

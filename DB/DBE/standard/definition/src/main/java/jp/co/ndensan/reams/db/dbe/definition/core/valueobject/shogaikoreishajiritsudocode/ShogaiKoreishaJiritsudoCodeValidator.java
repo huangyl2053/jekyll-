@@ -18,7 +18,7 @@ public class ShogaiKoreishaJiritsudoCodeValidator {
     private final ShogaiKoreishaJiritsudoCode shogaiKoreishaJiritsudoCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shogaiKoreishaJiritsudoCode 障害高齢者自立度コード
      */

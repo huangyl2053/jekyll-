@@ -26,7 +26,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績明細を管理するクラスです。
  */
-public class KyufujissekiMeisai extends ModelBase<KyufujissekiMeisaiIdentifier, DbT3018KyufujissekiMeisaiEntity, KyufujissekiMeisai> implements Serializable {
+public class KyufujissekiMeisai 
+extends ModelBase<KyufujissekiMeisaiIdentifier, 
+        DbT3018KyufujissekiMeisaiEntity, 
+        KyufujissekiMeisai> implements Serializable {
 
     private final DbT3018KyufujissekiMeisaiEntity entity;
     private final KyufujissekiMeisaiIdentifier id;

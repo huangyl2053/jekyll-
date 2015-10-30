@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 /**
  * 償還払請求サービス計画200004を管理するクラスです。
  */
-public class ShokanServicePlan200004 extends ModelBase<ShokanServicePlan200004Identifier, DbT3045ShokanServicePlan200004Entity, ShokanServicePlan200004> implements Serializable {
+public class ShokanServicePlan200004 
+extends ModelBase<ShokanServicePlan200004Identifier,
+        DbT3045ShokanServicePlan200004Entity, 
+        ShokanServicePlan200004> implements Serializable {
 
     private final DbT3045ShokanServicePlan200004Entity entity;
     private final ShokanServicePlan200004Identifier id;

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -18,6 +19,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link ChohyoBunruiKanriIdentifier}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class ChohyoBunruiKanriIdentifierTest extends DbzTestBase {
 

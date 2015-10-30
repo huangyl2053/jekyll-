@@ -325,7 +325,7 @@ public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
 
         @Test
         public void get生活保護法による指定の有は_entityが持つ生活保護法による指定の有を返す() {
-            assertThat(sut.get生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
+            assertThat(sut.is生活保護法による指定の有(), is(ShichosonTokubetsuKyufuJigyoshaEntity.getSeikatsuhogoShiteiFlag()));
         }
 
         @Test

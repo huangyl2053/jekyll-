@@ -9,9 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.KaigoDoctorEntity;
 //import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517Ishi;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -24,9 +22,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 public class KaigoDoctorDac implements IKaigoDoctorDac {
     //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
-    @InjectSession
-    private SqlSession session;
-
+//    @InjectSession
+//    private SqlSession session;
     @Override
     public List<KaigoDoctorEntity> select(ITrueFalseCriteria criteria) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -35,8 +32,8 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 //                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
 //                .where(criteria)
 //                .toList(KaigoDoctorEntity.class);
-        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
-        return kaigoDoctorList;
+//        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -79,8 +76,8 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 //                                eq(shichosonCode, 市町村コード),
 //                                eq(kaigoIryokikanCode, 介護医療機関コード)))
 //                .toList(KaigoDoctorEntity.class);
-        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
-        return kaigoDoctorList;
+//        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -94,8 +91,8 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 //                                eq(kaigoIryokikanCode, 介護医療機関コード),
 //                                eq(shujiiJokyo, 医師の状況.有効)))
 //                .toList(KaigoDoctorEntity.class);
-        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
-        return kaigoDoctorList;
+//        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -106,8 +103,8 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 //                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
 //                .where(eq(shichosonCode, 市町村コード))
 //                .toList(KaigoDoctorEntity.class);
-        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
-        return kaigoDoctorList;
+//        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
+        return new ArrayList<>();
     }
 
     @Override
@@ -120,7 +117,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 //                                eq(shichosonCode, 市町村コード),
 //                                eq(shujiiJokyo, 医師の状況.有効)))
 //                .toList(KaigoDoctorEntity.class);
-        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
-        return kaigoDoctorList;
+//        List<KaigoDoctorEntity> kaigoDoctorList = new ArrayList<>();
+        return new ArrayList<>();
     }
 }

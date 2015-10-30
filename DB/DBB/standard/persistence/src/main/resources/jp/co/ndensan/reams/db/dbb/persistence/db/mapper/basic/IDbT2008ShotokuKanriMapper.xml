@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2008ShotokuKanriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： LDNS王肖 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2008ShotokuKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
+     FROM
+         rgdb."DbT2008ShotokuKanri"
+     WHERE
+         rgdb."DbT2008ShotokuKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2008ShotokuKanri">
+         "DbT2008ShotokuKanri"."shotokuNendo" as "dbT2008ShotokuKanri_shotokuNendo",
+         "DbT2008ShotokuKanri"."shikibetsuCode" as "dbT2008ShotokuKanri_shikibetsuCode",
+         "DbT2008ShotokuKanri"."rirekiNo" as "dbT2008ShotokuKanri_rirekiNo",
+         "DbT2008ShotokuKanri"."insertDantaiCd" as "dbT2008ShotokuKanri_insertDantaiCd",
+         "DbT2008ShotokuKanri"."insertTimestamp" as "dbT2008ShotokuKanri_insertTimestamp",
+         "DbT2008ShotokuKanri"."insertReamsLoginId" as "dbT2008ShotokuKanri_insertReamsLoginId",
+         "DbT2008ShotokuKanri"."insertContextId" as "dbT2008ShotokuKanri_insertContextId",
+         "DbT2008ShotokuKanri"."isDeleted" as "dbT2008ShotokuKanri_isDeleted",
+         "DbT2008ShotokuKanri"."updateCount" as "dbT2008ShotokuKanri_updateCount",
+         "DbT2008ShotokuKanri"."lastUpdateTimestamp" as "dbT2008ShotokuKanri_lastUpdateTimestamp",
+         "DbT2008ShotokuKanri"."lastUpdateReamsLoginId" as "dbT2008ShotokuKanri_lastUpdateReamsLoginId",
+         "DbT2008ShotokuKanri"."hiKazeiKubun" as "dbT2008ShotokuKanri_hiKazeiKubun",
+         "DbT2008ShotokuKanri"."hiKazeiKubunGemmenGo" as "dbT2008ShotokuKanri_hiKazeiKubunGemmenGo",
+         "DbT2008ShotokuKanri"."gokeiShotokuGaku" as "dbT20O08ShotokuKanri_gokeiShotokuGaku",
+         "DbT2008ShotokuKanri"."nenkiniShunyuGaku" as "dbT2008ShotokuKanri_nenkiniShunyuGaku",
+         "DbT2008ShotokuKanri"."gekihenKanwaKubun" as "dbT2008ShotokuKanri_gekihenKanwaKubun"
+    </sql>
+
+
+    <!--テーブルDbT2008ShotokuKanriの項目をDbT2008ShotokuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2008ShotokuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2008ShotokuEntity" autoMapping="true">
+        <id property="shotokuNendo" column="dbT2008ShotokuKanri_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="shikibetsuCode" column="dbT2008ShotokuKanri_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="rirekiNo" column="dbT2008ShotokuKanri_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT2008ShotokuKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2008ShotokuKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2008ShotokuKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2008ShotokuKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2008ShotokuKanri_isDeleted" />
+        <result property="updateCount" column="dbT2008ShotokuKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2008ShotokuKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2008ShotokuKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiKazeiKubun" column="dbT2008ShotokuKanri_hiKazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiKazeiKubunGemmenGo" column="dbT2008ShotokuKanri_hiKazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gokeiShotokuGaku" column="dbT2008ShotokuKanri_gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenkiniShunyuGaku" column="dbT2008ShotokuKanri_nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="gekihenKanwaKubun" column="dbT2008ShotokuKanri_gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select id="getEntity" resultMap="ResultMap_DbT2008ShotokuEntity">
+        SELECT
+        <include refid="allColumns_DbT2008ShotokuKanri" />
+        FROM
+        rgdb."DbT2008ShotokuKanri"
+    </select>
+
+</mapper>

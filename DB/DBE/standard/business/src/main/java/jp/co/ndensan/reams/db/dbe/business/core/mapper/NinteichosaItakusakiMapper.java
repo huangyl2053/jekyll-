@@ -10,20 +10,20 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJoh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
- * 認定調査委託先のビジネスクラスとエンティティの変換を行うクラスです
+ * 認定調査委託先のビジネスクラスとエンティティの変換を行うクラスです。
  *
  * @author N1013 松本直樹
  */
 public final class NinteichosaItakusakiMapper {
 
     /**
-     * インスタンス化を防ぐためのプライベートコンストラクタです
+     * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
     private NinteichosaItakusakiMapper() {
     }
 
     /**
-     * 認定調査委託先エンティティから認定調査委託先への対応付けを行います
+     * 認定調査委託先エンティティから認定調査委託先への対応付けを行います。
      *
      * @param 認定調査委託先Entity 認定調査委託先Entity
      * @return 認定調査委託先

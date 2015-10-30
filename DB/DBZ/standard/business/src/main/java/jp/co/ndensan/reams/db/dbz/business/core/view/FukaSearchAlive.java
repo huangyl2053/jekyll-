@@ -204,7 +204,7 @@ public class FukaSearchAlive extends ParentModelBase<FukaSearchAliveIdentifier, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbV7902FukaSearchEntity entity;
         private final FukaSearchAliveIdentifier id;
 

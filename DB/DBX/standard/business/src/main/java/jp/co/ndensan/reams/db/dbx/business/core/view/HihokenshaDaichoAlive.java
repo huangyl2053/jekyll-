@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 被保険者台帳管理Aliveを管理するクラスです。
  */
-public class HihokenshaDaichoAlive extends ModelBase<HihokenshaDaichoAliveIdentifier, DbV1001HihokenshaDaichoEntity, HihokenshaDaichoAlive> implements Serializable {
+public class HihokenshaDaichoAlive
+        extends ModelBase<HihokenshaDaichoAliveIdentifier, DbV1001HihokenshaDaichoEntity, HihokenshaDaichoAlive>
+        implements Serializable {
 
     private final DbV1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoAliveIdentifier id;
@@ -328,7 +330,7 @@ public class HihokenshaDaichoAlive extends ModelBase<HihokenshaDaichoAliveIdenti
      *
      * @return 論理削除フラグ
      */
-    public boolean get論理削除フラグ() {
+    public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 

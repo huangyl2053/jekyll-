@@ -125,25 +125,25 @@ public class KogakuKyufuTaishoshaGokeiBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の境界層対象者フラグは_設定した値と同じ境界層対象者フラグを返す() {
             business = sut.set境界層対象者フラグ(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_境界層対象者フラグ).build();
-            assertThat(business.get境界層対象者フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_境界層対象者フラグ));
+            assertThat(business.is境界層対象者フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_境界層対象者フラグ));
         }
 
         @Test
         public void 戻り値の社会福祉法人軽減対象フラグは_設定した値と同じ社会福祉法人軽減対象フラグを返す() {
             business = sut.set社会福祉法人軽減対象フラグ(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_社会福祉法人軽減対象フラグ).build();
-            assertThat(business.get社会福祉法人軽減対象フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_社会福祉法人軽減対象フラグ));
+            assertThat(business.is社会福祉法人軽減対象フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_社会福祉法人軽減対象フラグ));
         }
 
         @Test
         public void 戻り値の高額対象外フラグは_設定した値と同じ高額対象外フラグを返す() {
             business = sut.set高額対象外フラグ(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_高額対象外フラグ).build();
-            assertThat(business.get高額対象外フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_高額対象外フラグ));
+            assertThat(business.is高額対象外フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_高額対象外フラグ));
         }
 
         @Test
         public void 戻り値の自動償還対象フラグは_設定した値と同じ自動償還対象フラグを返す() {
             business = sut.set自動償還対象フラグ(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_自動償還対象フラグ).build();
-            assertThat(business.get自動償還対象フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_自動償還対象フラグ));
+            assertThat(business.is自動償還対象フラグ(), is(DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.DEFAULT_自動償還対象フラグ));
         }
 
     }

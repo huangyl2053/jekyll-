@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class FutanGendogakuNintei {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div FutanGendogakuNinteiDiv
      * @return ResponseData
@@ -43,7 +43,7 @@ public class FutanGendogakuNintei {
     }
 
     /**
-     * onSelect dgFutanGendogakuNinteiList
+     * onSelect dgFutanGendogakuNinteiList。
      *
      * @param div FutanGendogakuNinteiDiv
      * @return ResponseData
@@ -51,17 +51,16 @@ public class FutanGendogakuNintei {
     public ResponseData<FutanGendogakuNinteiDiv> onSelect_dgFutanGendogakuNinteiList(FutanGendogakuNinteiDiv div) {
         for (dgFutanGendogakuNinteiList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                setUp(div, row);
+                _setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setUp(FutanGendogakuNinteiDiv div, dgFutanGendogakuNinteiList_Row rowValue) {
-        _setUp(div, rowValue);
-    }
-
+//    private void setUp(FutanGendogakuNinteiDiv div, dgFutanGendogakuNinteiList_Row rowValue) {
+//        _setUp(div, rowValue);
+//    }
     private void _setUp(FutanGendogakuNinteiDiv div, dgFutanGendogakuNinteiList_Row rowValue) {
         div.getFutanGendogakuNinteiDetail().getTxtShinseiDate().setValue(rowValue.getShinseiDate().getValue());
         div.getFutanGendogakuNinteiDetail().getTxtShinseiRiyu().setValue(rowValue.getShinseiRiyu());
@@ -101,7 +100,7 @@ public class FutanGendogakuNintei {
     }
 
     /**
-     * creates ResponceData
+     * creates ResponceData。
      *
      * @param div FutanGendogakuNinteiDiv
      * @return ResponseData

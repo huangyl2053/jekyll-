@@ -18,7 +18,7 @@ public class FukaErrorCodeValidator {
     private final FukaErrorCode fukaErrorCode;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param fukaErrorCode 賦課のエラーコード
      */

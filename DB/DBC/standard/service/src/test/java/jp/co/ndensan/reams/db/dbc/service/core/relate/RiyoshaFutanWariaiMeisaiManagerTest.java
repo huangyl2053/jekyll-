@@ -36,6 +36,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -43,6 +44,7 @@ import org.junit.runner.RunWith;
  * {link RiyoshaFutanWariaiMeisaiManager}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class RiyoshaFutanWariaiMeisaiManagerTest {
 
 //    private static RiyoshaFutanWariaiMeisaiDac relateDac;

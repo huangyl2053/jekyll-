@@ -68,7 +68,7 @@ public class ChikuShichosonBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の自地区フラグは_設定した値と同じ自地区フラグを返す() {
             business = sut.set自地区フラグ(DbT5224ChikuShichosonEntityGenerator.DEFAULT_自地区フラグ).build();
-            assertThat(business.get自地区フラグ(), is(DbT5224ChikuShichosonEntityGenerator.DEFAULT_自地区フラグ));
+            assertThat(business.is自地区フラグ(), is(DbT5224ChikuShichosonEntityGenerator.DEFAULT_自地区フラグ));
         }
 
     }

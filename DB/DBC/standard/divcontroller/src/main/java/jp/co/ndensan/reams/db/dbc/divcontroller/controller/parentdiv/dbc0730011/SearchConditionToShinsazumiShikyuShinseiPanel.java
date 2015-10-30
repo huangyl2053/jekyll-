@@ -41,15 +41,15 @@ public class SearchConditionToShinsazumiShikyuShinseiPanel {
     private void setSearchConditionToShinsazumiShikyuShinsei(SearchConditionToShinsazumiShikyuShinseiPanelDiv panel) {
 
         //TO DO
-        String ymlDataName = "ShinsazumiShikyuShinseiSearchCondition.yml";
+        RString ymlDataName = new RString("ShinsazumiShikyuShinseiSearchCondition.yml");
         //TO DO
-        List<HashMap> ymlData = ymlData(ymlDataName);
+        List<HashMap> ymlData = ymlData(ymlDataName.toString());
 
-        String shinsaDateFrom = ymlData.get(0).get("shinsaDateFrom").toString();
-        String shinsaDateTo = ymlData.get(0).get("shinsaDateTo").toString();
+        RString shinsaDateFrom = new RString(ymlData.get(0).get("shinsaDateFrom").toString());
+        RString shinsaDateTo = new RString(ymlData.get(0).get("shinsaDateTo").toString());
 
-        panel.getTxtShinsaDate().setFromValue(new RDate(shinsaDateFrom));
-        panel.getTxtShinsaDate().setToValue(new RDate(shinsaDateTo));
+        panel.getTxtShinsaDate().setFromValue(new RDate(shinsaDateFrom.toString()));
+        panel.getTxtShinsaDate().setToValue(new RDate(shinsaDateTo.toString()));
     }
 
     private List<HashMap> ymlData(String ymlDataName) {

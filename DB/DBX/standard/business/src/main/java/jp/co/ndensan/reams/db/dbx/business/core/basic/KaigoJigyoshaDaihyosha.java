@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護事業者代表者を管理するクラスです。
  */
-public class KaigoJigyoshaDaihyosha extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha> implements Serializable {
+public class KaigoJigyoshaDaihyosha
+        extends ModelBase<KaigoJigyoshaDaihyoshaIdentifier, DbT7062KaigoJigyoshaDaihyoshaEntity, KaigoJigyoshaDaihyosha>
+        implements Serializable {
 
     private final DbT7062KaigoJigyoshaDaihyoshaEntity entity;
     private final KaigoJigyoshaDaihyoshaIdentifier id;

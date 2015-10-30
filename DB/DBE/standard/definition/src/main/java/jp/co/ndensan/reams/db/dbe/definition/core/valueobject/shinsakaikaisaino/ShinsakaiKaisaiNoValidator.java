@@ -18,7 +18,7 @@ public class ShinsakaiKaisaiNoValidator {
     private final ShinsakaiKaisaiNo shinsakaiKaisaiNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 審査会開催番号
      */

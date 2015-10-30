@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -17,6 +18,7 @@ import org.junit.runner.RunWith;
  * {@link DaisanshaKoiSongaiBaishoKinJuryoIdentifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DaisanshaKoiSongaiBaishoKinJuryoIdentifierTest extends DbcTestBase {
 
 //TODO 主キー型と変数名を置換してください

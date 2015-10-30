@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum GogitaiYukoKikanKaishiDateValidationMessage implements IValidationMessage {
 
     /**
-     * 開始年月日がNullであること
+     * 開始年月日がNullであること。
      */
     開始年月日がNullであること(GogitaichoKubunCodeErrorMessage.開始年月日がNullであること);
     private final Message message;
@@ -35,7 +35,7 @@ public enum GogitaiYukoKikanKaishiDateValidationMessage implements IValidationMe
     public enum GogitaichoKubunCodeErrorMessage implements IMessageGettable {
 
         /**
-         * 開始年月日がNullであること
+         * 開始年月日がNullであること。
          */
         開始年月日がNullであること(1, "合議体長区分コードを指定してください。");
         private final int no;

@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 受給者異動送付を管理するクラスです。
  */
-public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo> implements Serializable {
+public class JukyushaIdoRenrakuhyo
+        extends ModelBase<JukyushaIdoRenrakuhyoIdentifier, DbT3001JukyushaIdoRenrakuhyoEntity, JukyushaIdoRenrakuhyo>
+        implements Serializable {
 
     private final DbT3001JukyushaIdoRenrakuhyoEntity entity;
     private final JukyushaIdoRenrakuhyoIdentifier id;
@@ -394,7 +396,7 @@ public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdenti
      *
      * @return 公費負担上限額減額有フラグ
      */
-    public boolean get公費負担上限額減額有フラグ() {
+    public boolean is公費負担上限額減額有フラグ() {
         return entity.getKohiFutanJogenGengakuAriFlag();
     }
 
@@ -538,7 +540,7 @@ public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdenti
      *
      * @return 課税層の特例減額措置対象フラグ
      */
-    public boolean get課税層の特例減額措置対象フラグ() {
+    public boolean is課税層の特例減額措置対象フラグ() {
         return entity.getKaizeisoTokureiGengakuSochiTaishoFlag();
     }
 
@@ -646,7 +648,7 @@ public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdenti
      *
      * @return 小多機能居宅介護利用開始月利用有フラグ
      */
-    public boolean get小多機能居宅介護利用開始月利用有フラグ() {
+    public boolean is小多機能居宅介護利用開始月利用有フラグ() {
         return entity.getShoTakinoKyotakuKaigoRiyozukiRiyoAriFlag();
     }
 
@@ -727,7 +729,7 @@ public class JukyushaIdoRenrakuhyo extends ModelBase<JukyushaIdoRenrakuhyoIdenti
      *
      * @return 訂正連絡票フラグ
      */
-    public boolean get訂正連絡票フラグ() {
+    public boolean is訂正連絡票フラグ() {
         return entity.getTeiseiRenrakuhyoFlag();
     }
 

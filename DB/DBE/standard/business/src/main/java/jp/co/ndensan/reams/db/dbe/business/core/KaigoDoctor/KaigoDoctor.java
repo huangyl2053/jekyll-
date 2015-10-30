@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.KaigoDoctor;
  *
  * @author N8156 宮本 康
  */
-public class KaigoDoctor {// implements IShujii {//, IDoctor {
+public class KaigoDoctor { // implements IShujii {//, IDoctor {
 //
 //    private final IDoctor 医師;
 //    private final IShujii 主治医;

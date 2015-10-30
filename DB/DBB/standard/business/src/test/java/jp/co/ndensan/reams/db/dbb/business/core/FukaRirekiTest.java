@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.when;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class FukaRirekiTest {
 
     private static FukaRireki sut;

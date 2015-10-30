@@ -8,9 +8,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuContr
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7066ChohyoSeigyoKyotsuControlEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -70,7 +68,7 @@ public class ChohyoSeigyoKyotsuControlBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の共通画面使用有無は_設定した値と同じ共通画面使用有無を返す() {
             business = sut.set共通画面使用有無(DbT7066ChohyoSeigyoKyotsuControlEntityGenerator.DEFAULT_共通画面使用有無).build();
-            assertThat(business.get共通画面使用有無(), is(DbT7066ChohyoSeigyoKyotsuControlEntityGenerator.DEFAULT_共通画面使用有無));
+            assertThat(business.is共通画面使用有無(), is(DbT7066ChohyoSeigyoKyotsuControlEntityGenerator.DEFAULT_共通画面使用有無));
         }
 
         @Test

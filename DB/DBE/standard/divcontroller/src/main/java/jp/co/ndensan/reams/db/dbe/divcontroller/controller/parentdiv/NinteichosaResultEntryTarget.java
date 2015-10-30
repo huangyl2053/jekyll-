@@ -163,7 +163,7 @@ public class NinteichosaResultEntryTarget {
 
         private static class NinteichosaResultTaishoshaHolder {
 
-            private static final NinteichosaResultTaishosha instance
+            public static final NinteichosaResultTaishosha INTSTANCE
                     = new NinteichosaResultTaishosha();
         }
 
@@ -176,11 +176,11 @@ public class NinteichosaResultEntryTarget {
         }
 
         static void save(dgNinteichosaResultTaishosha_Row target) {
-            NinteichosaResultTaishoshaHolder.instance.setSavedRow(target);
+            NinteichosaResultTaishoshaHolder.INTSTANCE.setSavedRow(target);
         }
 
         static dgNinteichosaResultTaishosha_Row get() {
-            return NinteichosaResultTaishoshaHolder.instance.getSavedRow();
+            return NinteichosaResultTaishoshaHolder.INTSTANCE.getSavedRow();
         }
     }
 

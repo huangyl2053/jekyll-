@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @author N2810 久保 里史
  */
-public class KokuhorenJohoTorikomiValidationHelper {
+public final class KokuhorenJohoTorikomiValidationHelper {
 
     public static ValidationMessageControlPairs validate(CheckBoxList 同月過誤分, CheckBoxList 通常分, IChohyoShutsuryokujunDiv 出力順) {
         // チェックした際にメッセージが返された際に、該当するコントロールを メッセージとコントロールのペアとしてあらかじめ登録する。
@@ -29,6 +29,10 @@ public class KokuhorenJohoTorikomiValidationHelper {
         // ビジネスパッケージクラスなどでコントロールの値チェックを行い、結果メッセージを受け取る
         IValidationMessages messages = (new KokuhorenJohoTorikomiValidator(同月過誤分, 通常分, 出力順.get出力順ID())).validate();
         return dictionary.check(messages);
+    }
+
+    private KokuhorenJohoTorikomiValidationHelper() {
+
     }
 
 }

@@ -5,28 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.IryoHokenInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.JutokuTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.TaskJutokuTekiyoJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.dgRohukuNenkinRireki_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.dgSeikatsuHogoRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplIryoHokenDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplRofukuNenkinDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplShikakuJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.dba203001t.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.iryohokenrireki.dgIryoHokenRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -38,18 +26,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class TaskJutokuTekiyoJoho {
 
-    private final static RString HIHOKENSHA_DAICHO_DATA = new RString("DBA203001T/shikakuTokuso.yml");
-    private final static RString IRYO_HOKEN_DATA = new RString("DBA203001T/iryoHoken.yml");
-    private final static RString ROFUKU_NENKIN_DATA = new RString("DBA203001T/rofukuNenkin.yml");
-    private final static RString SEIKATSU_HOGO_DATA = new RString("DBA203001T/seikatsuHogo.yml");
-    private final static RString SHISETSU_NYUTAISHO_DATA = new RString("DBA203001T/shisetsuNyutaisho.yml");
+//    private static final RString HIHOKENSHA_DAICHO_DATA = new RString("DBA203001T/shikakuTokuso.yml");
+//    private static final RString IRYO_HOKEN_DATA = new RString("DBA203001T/iryoHoken.yml");
+//    private static final RString ROFUKU_NENKIN_DATA = new RString("DBA203001T/rofukuNenkin.yml");
+//    private static final RString SEIKATSU_HOGO_DATA = new RString("DBA203001T/seikatsuHogo.yml");
+//    private static final RString SHISETSU_NYUTAISHO_DATA = new RString("DBA203001T/shisetsuNyutaisho.yml");
 
-    private final static RString SHIKAKU_ADD = new RString("add");
-    private final static RString SHIKAKU_MODIFY = new RString("modify");
-    private final static RString SHIKAKU_DELETE = new RString("delete");
-    private final static RString IRYO_HOKEN_ADD = new RString("add");
-    private final static RString IRYO_HOKEN_MODIFY = new RString("modify");
-    private final static RString IRYO_HOKEN_DELETE = new RString("delete");
+    private static final RString SHIKAKU_ADD = new RString("add");
+    private static final RString SHIKAKU_MODIFY = new RString("modify");
+    private static final RString SHIKAKU_DELETE = new RString("delete");
+    private static final RString IRYO_HOKEN_ADD = new RString("add");
+    private static final RString IRYO_HOKEN_MODIFY = new RString("modify");
+    private static final RString IRYO_HOKEN_DELETE = new RString("delete");
 
     /**
      * 対象者選択で、住所地特例適用を行う個人が決定された際に実行されます。<br/>
@@ -81,16 +69,16 @@ public class TaskJutokuTekiyoJoho {
      * @param shikibetsuCode 識別コード
      */
     private void setShikakuJoho(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
-        tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
-
-        List<HashMap> hihokenshaDaichoDataList = YamlLoader.DBA.loadAsList(HIHOKENSHA_DAICHO_DATA);
-//        DataGrid<dgShikakuShutokuRireki_Row> grid = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki();
-//        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
-            if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-//                dataSource = createJutokuTekiyoRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
-            }
-        }
+//        tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
+//
+//        List<HashMap> hihokenshaDaichoDataList = YamlLoader.DBA.loadAsList(HIHOKENSHA_DAICHO_DATA);
+////        DataGrid<dgShikakuShutokuRireki_Row> grid = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki();
+////        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
+//            if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+////                dataSource = createJutokuTekiyoRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
+//            }
+//        }
 //        grid.setDataSource(dataSource);
 
 //        if (dataSource.isEmpty()) {
@@ -163,50 +151,50 @@ public class TaskJutokuTekiyoJoho {
      * @param jutokuTekiyoJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setIryoHoken(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
-        tplIryoHokenDiv tplIryoHoken = jutokuTekiyoJohoDiv.getTabInputs().getTplIryoHoken();
+//    private void setIryoHoken(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
+//        tplIryoHokenDiv tplIryoHoken = jutokuTekiyoJohoDiv.getTabInputs().getTplIryoHoken();
+//
+//        List<HashMap> iryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN_DATA);
+//        DataGrid<dgIryoHokenRireki_Row> grid = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki();
+//        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap iryoHokenData : iryoHokenDataList) {
+//            if (iryoHokenData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createDgIryoHokenRirekiList((List<HashMap>) iryoHokenData.get("医療保険"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            jutokuTekiyoJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
+//            setIryoHokenDisabled(tplIryoHoken, false);
+//        } else {
+//            setIryoHokenDisabled(tplIryoHoken, true);
+//        }
+//    }
 
-        List<HashMap> iryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN_DATA);
-        DataGrid<dgIryoHokenRireki_Row> grid = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki();
-        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap iryoHokenData : iryoHokenDataList) {
-            if (iryoHokenData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createDgIryoHokenRirekiList((List<HashMap>) iryoHokenData.get("医療保険"));
-            }
-        }
-        grid.setDataSource(dataSource);
+//    private List<dgIryoHokenRireki_Row> createDgIryoHokenRirekiList(List<HashMap> iryoHokenData) {
+//        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap iryoHokenDataRow : iryoHokenData) {
+//            dataSource.add(createDgIryoHokenRirekiRowFrowHashMap(iryoHokenDataRow));
+//        }
+//        return dataSource;
+//    }
 
-        if (dataSource.isEmpty()) {
-            jutokuTekiyoJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
-            setIryoHokenDisabled(tplIryoHoken, false);
-        } else {
-            setIryoHokenDisabled(tplIryoHoken, true);
-        }
-    }
-
-    private List<dgIryoHokenRireki_Row> createDgIryoHokenRirekiList(List<HashMap> iryoHokenData) {
-        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap iryoHokenDataRow : iryoHokenData) {
-            dataSource.add(createDgIryoHokenRirekiRowFrowHashMap(iryoHokenDataRow));
-        }
-        return dataSource;
-    }
-
-    private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowHashMap(HashMap hihokenshaDaichoData) {
-        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
-        row.setHokenshaNo(generator.getAsRString("保険者番号"));
-        row.setHokenshaMeisho(generator.getAsRString("保険者名称"));
-        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
-        row.setIryoHokenShubetsuKey(generator.getAsRString("保険者種別Key"));
-        row.setIryoHokenShubetsu(generator.getAsRString("保険者種別"));
-        row.getKanyuDate().setValue(generator.getAsFlexibleDate("加入日"));
-        row.getDattaiDate().setValue(generator.getAsFlexibleDate("脱退日"));
-        row.setKigoNo(generator.getAsRString("記号番号"));
-        return row;
-    }
+//    private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowHashMap(HashMap hihokenshaDaichoData) {
+//        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
+//        row.setHokenshaNo(generator.getAsRString("保険者番号"));
+//        row.setHokenshaMeisho(generator.getAsRString("保険者名称"));
+//        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
+//        row.setIryoHokenShubetsuKey(generator.getAsRString("保険者種別Key"));
+//        row.setIryoHokenShubetsu(generator.getAsRString("保険者種別"));
+//        row.getKanyuDate().setValue(generator.getAsFlexibleDate("加入日"));
+//        row.getDattaiDate().setValue(generator.getAsFlexibleDate("脱退日"));
+//        row.setKigoNo(generator.getAsRString("記号番号"));
+//        return row;
+//    }
 
     private void setIryoHokenDisabled(tplIryoHokenDiv tplIryoHoken, boolean disableValue) {
         tplIryoHoken.getIryoHokenInput().setDisabled(disableValue);
@@ -219,48 +207,48 @@ public class TaskJutokuTekiyoJoho {
      * @param jutokuTekiyoJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setRofukuNenkin(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
-        tplRofukuNenkinDiv tplRofukuNenkin = jutokuTekiyoJohoDiv.getTabInputs().getTplRofukuNenkin();
+//    private void setRofukuNenkin(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
+//        tplRofukuNenkinDiv tplRofukuNenkin = jutokuTekiyoJohoDiv.getTabInputs().getTplRofukuNenkin();
+//
+//        List<HashMap> rofukuNenkinDataList = YamlLoader.DBA.loadAsList(ROFUKU_NENKIN_DATA);
+//        DataGrid<dgRohukuNenkinRireki_Row> grid = tplRofukuNenkin.getRohukuNenkin().getDgRohukuNenkinRireki();
+//        List<dgRohukuNenkinRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap rofukuNenkiData : rofukuNenkinDataList) {
+//            if (rofukuNenkiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createRofukuNenkinList((List<HashMap>) rofukuNenkiData.get("老福情報"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            setRofukuNenkinDisabled(tplRofukuNenkin, false);
+//        } else {
+//            setRofukuNenkinDisabled(tplRofukuNenkin, true);
+//        }
+//    }
 
-        List<HashMap> rofukuNenkinDataList = YamlLoader.DBA.loadAsList(ROFUKU_NENKIN_DATA);
-        DataGrid<dgRohukuNenkinRireki_Row> grid = tplRofukuNenkin.getRohukuNenkin().getDgRohukuNenkinRireki();
-        List<dgRohukuNenkinRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap rofukuNenkiData : rofukuNenkinDataList) {
-            if (rofukuNenkiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createRofukuNenkinList((List<HashMap>) rofukuNenkiData.get("老福情報"));
-            }
-        }
-        grid.setDataSource(dataSource);
+//    private List<dgRohukuNenkinRireki_Row> createRofukuNenkinList(List<HashMap> rofukuNenkiData) {
+//        List<dgRohukuNenkinRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap rofukuNenkiDataRow : rofukuNenkiData) {
+//            dataSource.add(createRofukuNenkinRowFromHashMap(rofukuNenkiDataRow));
+//        }
+//        return dataSource;
+//    }
 
-        if (dataSource.isEmpty()) {
-            setRofukuNenkinDisabled(tplRofukuNenkin, false);
-        } else {
-            setRofukuNenkinDisabled(tplRofukuNenkin, true);
-        }
-    }
+//    private dgRohukuNenkinRireki_Row createRofukuNenkinRowFromHashMap(HashMap rofukuNenkiData) {
+//        dgRohukuNenkinRireki_Row row = new dgRohukuNenkinRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
+//
+//        ControlGenerator generator = new ControlGenerator(rofukuNenkiData);
+//        row.setJukyushaNo(generator.getAsRString("受給者番号"));
+//        row.getKaishiDate().setValue(generator.getAsFlexibleDate("開始日"));
+//        row.getShuryoDate().setValue(generator.getAsFlexibleDate("廃止日"));
+//        return row;
+//    }
 
-    private List<dgRohukuNenkinRireki_Row> createRofukuNenkinList(List<HashMap> rofukuNenkiData) {
-        List<dgRohukuNenkinRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap rofukuNenkiDataRow : rofukuNenkiData) {
-            dataSource.add(createRofukuNenkinRowFromHashMap(rofukuNenkiDataRow));
-        }
-        return dataSource;
-    }
-
-    private dgRohukuNenkinRireki_Row createRofukuNenkinRowFromHashMap(HashMap rofukuNenkiData) {
-        dgRohukuNenkinRireki_Row row = new dgRohukuNenkinRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
-
-        ControlGenerator generator = new ControlGenerator(rofukuNenkiData);
-        row.setJukyushaNo(generator.getAsRString("受給者番号"));
-        row.getKaishiDate().setValue(generator.getAsFlexibleDate("開始日"));
-        row.getShuryoDate().setValue(generator.getAsFlexibleDate("廃止日"));
-        return row;
-    }
-
-    private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
-        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
-        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
-    }
+//    private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
+//        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
+//        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
+//    }
 
     /**
      * 生活保護Tabに初期表示する値を設定します。
@@ -268,51 +256,51 @@ public class TaskJutokuTekiyoJoho {
      * @param jutokuTekiyoJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setSeikatsuHogo(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
-        tplSeikatsuHogoDiv tplSeikatsuHogo = jutokuTekiyoJohoDiv.getTabInputs().getTplSeikatsuHogo();
+//    private void setSeikatsuHogo(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
+//        tplSeikatsuHogoDiv tplSeikatsuHogo = jutokuTekiyoJohoDiv.getTabInputs().getTplSeikatsuHogo();
+//
+//        List<HashMap> seikatsuHogoDataList = YamlLoader.DBA.loadAsList(SEIKATSU_HOGO_DATA);
+//        DataGrid<dgSeikatsuHogoRireki_Row> grid = tplSeikatsuHogo.getSeikatsuHogo().getDgSeikatsuHogoRireki();
+//        List<dgSeikatsuHogoRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap seikatsuHogoData : seikatsuHogoDataList) {
+//            if (seikatsuHogoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createSeikatsuHogoList((List<HashMap>) seikatsuHogoData.get("生保情報"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            setSeikatsuHogoDisabled(tplSeikatsuHogo, false);
+//        } else {
+//            setSeikatsuHogoDisabled(tplSeikatsuHogo, true);
+//        }
+//    }
 
-        List<HashMap> seikatsuHogoDataList = YamlLoader.DBA.loadAsList(SEIKATSU_HOGO_DATA);
-        DataGrid<dgSeikatsuHogoRireki_Row> grid = tplSeikatsuHogo.getSeikatsuHogo().getDgSeikatsuHogoRireki();
-        List<dgSeikatsuHogoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap seikatsuHogoData : seikatsuHogoDataList) {
-            if (seikatsuHogoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createSeikatsuHogoList((List<HashMap>) seikatsuHogoData.get("生保情報"));
-            }
-        }
-        grid.setDataSource(dataSource);
+//    private List<dgSeikatsuHogoRireki_Row> createSeikatsuHogoList(List<HashMap> seikatsuHogoData) {
+//        List<dgSeikatsuHogoRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap seikatsuHogoDataRow : seikatsuHogoData) {
+//            dataSource.add(createSeikatsuHogoRowFromHashMap(seikatsuHogoDataRow));
+//        }
+//        return dataSource;
+//    }
 
-        if (dataSource.isEmpty()) {
-            setSeikatsuHogoDisabled(tplSeikatsuHogo, false);
-        } else {
-            setSeikatsuHogoDisabled(tplSeikatsuHogo, true);
-        }
-    }
+//    private dgSeikatsuHogoRireki_Row createSeikatsuHogoRowFromHashMap(HashMap seikatsuHogoData) {
+//        dgSeikatsuHogoRireki_Row row = new dgSeikatsuHogoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        ControlGenerator generator = new ControlGenerator(seikatsuHogoData);
+//        row.setJukyushaNo(generator.getAsRString("受給者番号"));
+//        row.getKaishiDate().setValue(generator.getAsFlexibleDate("開始日"));
+//        row.getShuryoDate().setValue(generator.getAsFlexibleDate("廃止日"));
+//        row.setSeihoShubetsu(generator.getAsRString("種別"));
+//        row.setSeihoShubetsuKey(generator.getAsRString("種別Key"));
+//        return row;
+//    }
 
-    private List<dgSeikatsuHogoRireki_Row> createSeikatsuHogoList(List<HashMap> seikatsuHogoData) {
-        List<dgSeikatsuHogoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap seikatsuHogoDataRow : seikatsuHogoData) {
-            dataSource.add(createSeikatsuHogoRowFromHashMap(seikatsuHogoDataRow));
-        }
-        return dataSource;
-    }
-
-    private dgSeikatsuHogoRireki_Row createSeikatsuHogoRowFromHashMap(HashMap seikatsuHogoData) {
-        dgSeikatsuHogoRireki_Row row = new dgSeikatsuHogoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        ControlGenerator generator = new ControlGenerator(seikatsuHogoData);
-        row.setJukyushaNo(generator.getAsRString("受給者番号"));
-        row.getKaishiDate().setValue(generator.getAsFlexibleDate("開始日"));
-        row.getShuryoDate().setValue(generator.getAsFlexibleDate("廃止日"));
-        row.setSeihoShubetsu(generator.getAsRString("種別"));
-        row.setSeihoShubetsuKey(generator.getAsRString("種別Key"));
-        return row;
-    }
-
-    private void setSeikatsuHogoDisabled(tplSeikatsuHogoDiv tplSeikatsuHogo, boolean disableValue) {
-        tplSeikatsuHogo.getSeikatsuHogo().getSeikatsuHogoInput().setDisabled(disableValue);
-        tplSeikatsuHogo.getSeikatsuHogo().getBtnUpdataSeikatsuHogo().setDisabled(disableValue);
-    }
+//    private void setSeikatsuHogoDisabled(tplSeikatsuHogoDiv tplSeikatsuHogo, boolean disableValue) {
+//        tplSeikatsuHogo.getSeikatsuHogo().getSeikatsuHogoInput().setDisabled(disableValue);
+//        tplSeikatsuHogo.getSeikatsuHogo().getBtnUpdataSeikatsuHogo().setDisabled(disableValue);
+//    }
 
     /**
      * 施設入退所Tabに初期表示する値を設定します。
@@ -320,61 +308,61 @@ public class TaskJutokuTekiyoJoho {
      * @param jutokuTekiyoJohoDiv 資格情報Div
      * @param shikibetsuCode 識別コード
      */
-    private void setShisetsuNyutaisho(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
-        tplShisetsuNyutaishoDiv tplShisetsuNyutaisho = jutokuTekiyoJohoDiv.getTabInputs().getTplShisetsuNyutaisho();
+//    private void setShisetsuNyutaisho(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, RString shikibetsuCode) {
+//        tplShisetsuNyutaishoDiv tplShisetsuNyutaisho = jutokuTekiyoJohoDiv.getTabInputs().getTplShisetsuNyutaisho();
+//
+//        List<HashMap> shisetsuNyutaishoRirekiDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_DATA);
+//        DataGrid<dgShisetsuNyutaishoRireki_Row> grid = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getDgShisetsuNyutaishoRireki();
+//        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap shisetsuNyutaishoRirekiData : shisetsuNyutaishoRirekiDataList) {
+//            if (shisetsuNyutaishoRirekiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createShisetsuNyutaishoList((List<HashMap>) shisetsuNyutaishoRirekiData.get("異動履歴"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, false);
+//        } else {
+//            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
+//        }
+//
+////        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
+////        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
+////        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
+////        rad.setDataSource(rad.getDataSource().subList(0, 2));
+//    }
 
-        List<HashMap> shisetsuNyutaishoRirekiDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_DATA);
-        DataGrid<dgShisetsuNyutaishoRireki_Row> grid = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getDgShisetsuNyutaishoRireki();
-        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap shisetsuNyutaishoRirekiData : shisetsuNyutaishoRirekiDataList) {
-            if (shisetsuNyutaishoRirekiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createShisetsuNyutaishoList((List<HashMap>) shisetsuNyutaishoRirekiData.get("異動履歴"));
-            }
-        }
-        grid.setDataSource(dataSource);
+//    private List<dgShisetsuNyutaishoRireki_Row> createShisetsuNyutaishoList(List<HashMap> shisetsuNyutaishoData) {
+//        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap shisetsuNyutaishoDataRow : shisetsuNyutaishoData) {
+//            dataSource.add(createShisetsuNyutaishoRowFromHashMap(shisetsuNyutaishoDataRow));
+//        }
+//        return dataSource;
+//    }
 
-        if (dataSource.isEmpty()) {
-            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, false);
-        } else {
-            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
-        }
-
-//        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
-//        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
-//        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
-//        rad.setDataSource(rad.getDataSource().subList(0, 2));
-    }
-
-    private List<dgShisetsuNyutaishoRireki_Row> createShisetsuNyutaishoList(List<HashMap> shisetsuNyutaishoData) {
-        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap shisetsuNyutaishoDataRow : shisetsuNyutaishoData) {
-            dataSource.add(createShisetsuNyutaishoRowFromHashMap(shisetsuNyutaishoDataRow));
-        }
-        return dataSource;
-    }
-
-    private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        ControlGenerator generator = new ControlGenerator(seikatsuHogoData);
-        row.getNyushoDate().setValue(generator.getAsFlexibleDate("入所日"));
-        row.getTaishoDate().setValue(generator.getAsFlexibleDate("退所日"));
-        row.setShisetsuCode(generator.getAsRString("施設コード"));
-        row.setShisetsuMeisho(generator.getAsRString("施設名称"));
-        row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
-//        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
-//        row.setTaishoJoho(generator.getAsRString("対象情報"));
-        row.setShisetsuShuruiKey(generator.getAsRString("施設種類Key"));
-        row.setShisetsuShurui(generator.getAsRString("施設種類"));
-        return row;
-    }
-
-    private void setShisetsuNyutaishoDisabled(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho, boolean disableValue) {
-//        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
-//        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
-    }
+//    private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
+//        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        ControlGenerator generator = new ControlGenerator(seikatsuHogoData);
+//        row.getNyushoDate().setValue(generator.getAsFlexibleDate("入所日"));
+//        row.getTaishoDate().setValue(generator.getAsFlexibleDate("退所日"));
+//        row.setShisetsuCode(generator.getAsRString("施設コード"));
+//        row.setShisetsuMeisho(generator.getAsRString("施設名称"));
+//        row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
+////        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
+////        row.setTaishoJoho(generator.getAsRString("対象情報"));
+//        row.setShisetsuShuruiKey(generator.getAsRString("施設種類Key"));
+//        row.setShisetsuShurui(generator.getAsRString("施設種類"));
+//        return row;
+//    }
+//
+//    private void setShisetsuNyutaishoDisabled(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho, boolean disableValue) {
+////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
+////        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
+//    }
 
     /**
      * 資格情報タブ内の処理です。グリッド内の視覚情報修正ボタンがクリックされた際に実行します。<br/>
@@ -385,7 +373,7 @@ public class TaskJutokuTekiyoJoho {
      */
     public ResponseData onSelectOfModifyButton_dgJutokuTekiyoRireki(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv) {
         ResponseData<TaskJutokuTekiyoJohoDiv> response = new ResponseData<>();
-        tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
+//        tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
 
         jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_MODIFY);
 //        jutokuTekiyoJohoDiv.setShikakuSelectRow(
@@ -428,7 +416,7 @@ public class TaskJutokuTekiyoJoho {
     public ResponseData onClick_btnUpdateShikaku(TaskJutokuTekiyoJohoDiv jutokuTekiyoJohoDiv) {
         ResponseData<TaskJutokuTekiyoJohoDiv> response = new ResponseData<>();
         tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
-        int selectRowNum;
+//        int selectRowNum;
 //        dgShikakuShutokuRireki_Row selectRow;
 
         if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_ADD)) {
@@ -436,7 +424,7 @@ public class TaskJutokuTekiyoJoho {
 //            row.setRowState(RowState.Added);
 //            tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().add(0, row);
         } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_MODIFY)) {
-            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
+//            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
 //            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
 //            setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, selectRow);
 //            if (selectRow.getRowState().equals(RowState.Added)) {
@@ -444,7 +432,7 @@ public class TaskJutokuTekiyoJoho {
 //                selectRow.setRowState(RowState.Modified);
 //            }
         } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_DELETE)) {
-            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
+//            selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
 //            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
 //            if (selectRow.getRowState().equals(RowState.Added)) {
 //                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().remove(selectRowNum);

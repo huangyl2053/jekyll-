@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum NinteiYukoKikanTsukisuSpec implements IPredicate<NinteiYukoKikanTsukisu> {
 
     /**
-     * 有効期間月数がNullでないこと
+     * 有効期間月数がNullでないこと。
      */
     有効期間月数がNullでないこと {
                 /**

@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
- * 高額介護サービス費照会 #37963
+ * 高額介護サービス費照会 #37963。
  *
  * @author n8223
  */
 public class ShowResultTwo {
 
     /**
-     * 高額介護サービス費照会 並べて表示
+     * 高額介護サービス費照会 並べて表示。
      *
      * @author n8223
      * @param panel
@@ -37,7 +37,7 @@ public class ShowResultTwo {
         ResponseData<ShowResultTwoDiv> response = new ResponseData<>();
         // 並べて表示 提供年月～世帯集約番号        
         //2014.07.01 追加
-        setKogakuServicehiShowResultTwo(panel,setaiInfopanel);
+        setKogakuServicehiShowResultTwo(panel, setaiInfopanel);
         //判定結果　L
         //2014.07.01 追加
         setKogakuServicehiShowResultTwoJudgementResultL(panel);
@@ -50,7 +50,7 @@ public class ShowResultTwo {
     }
 
     // 並べて表示 提供年月～世帯集約番号の情報を設定する。
-    private void setKogakuServicehiShowResultTwo(ShowResultTwoDiv panel ,SetaiInfoDiv setaiInfopanel) {
+    private void setKogakuServicehiShowResultTwo(ShowResultTwoDiv panel , SetaiInfoDiv setaiInfopanel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiShowResultTwo.yml");
         HashMap hashMap;
         ControlGenerator ymlDt;
@@ -73,7 +73,7 @@ public class ShowResultTwo {
         if (setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().size() > 0) {
 
             for (int i = 0; i < setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().size(); i++) {
-                //dgJudgementResultLR	 判定結果
+                //dgJudgementResultLR 判定結果
                 if (i == 0) {
                   //  panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
                     panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
@@ -88,7 +88,7 @@ public class ShowResultTwo {
             }
 
         } else {
-            //dgJudgementResultLR	 判定結果
+            //dgJudgementResultLR 判定結果
             panel.getTxtHihoNoL().setValue(ymlDt.getAsRString("hihoNoL"));
             panel.getTxtHihoNameR().setValue(ymlDt.getAsRString("hhoNameR"));
             panel.getTxtHihoNoR().setValue(ymlDt.getAsRString("hihoNoR"));
@@ -142,11 +142,11 @@ public class ShowResultTwo {
 //                servicehiListpanel.getDgKogakuServicehiRireki().getClickedItem().getTxtShikyuKingaku().getValue());
     }
 
-    // dgJudgementResultL	 判定結果
+    // dgJudgementResultL 判定結果
     private void setKogakuServicehiShowResultTwoJudgementResultL(ShowResultTwoDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiShowResultTwoJudgementResultL.yml");
 
-        List<dgJudgementResultL_Row> arraydata = createRowKogakuServicehiShowResultTwoJudgementResultLTestData(ymlData );
+        List<dgJudgementResultL_Row> arraydata = createRowKogakuServicehiShowResultTwoJudgementResultLTestData(ymlData);
         DataGrid<dgJudgementResultL_Row> grid = panel.getJudgementResultL().getDgJudgementResultL();
 
         grid.setDataSource(arraydata);
@@ -166,7 +166,7 @@ public class ShowResultTwo {
         return arrayData;
     }
 
-    //gJudgementResultL	 判定結果
+    //gJudgementResultL 判定結果
     private void hashMapResultL(ControlGenerator hashMap, List<dgJudgementResultL_Row> arrayData) {
 
         dgJudgementResultL_Row item;
@@ -193,8 +193,8 @@ public class ShowResultTwo {
             RString shiharaizumiAmount,
             RString kogakuShikyuAmount
     ) {
-        dgJudgementResultL_Row rowKogakuServicehiShowResultLData;
-        rowKogakuServicehiShowResultLData = new dgJudgementResultL_Row(
+        dgJudgementResultL_Row rowKogakuShowResultLData;
+        rowKogakuShowResultLData = new dgJudgementResultL_Row(
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -205,25 +205,25 @@ public class ShowResultTwo {
         );
 
         //事業者
-        rowKogakuServicehiShowResultLData.setTxtJigyosha(jigyosha);
+        rowKogakuShowResultLData.setTxtJigyosha(jigyosha);
         //サービス種類
-        rowKogakuServicehiShowResultLData.setTxtServiceShurui(serviceShurui);
+        rowKogakuShowResultLData.setTxtServiceShurui(serviceShurui);
         //サービス費用合計
-        rowKogakuServicehiShowResultLData.setTxtServiceHiyoTotalAmount(serviceHiyoTotalAmount);
+        rowKogakuShowResultLData.setTxtServiceHiyoTotalAmount(serviceHiyoTotalAmount);
         //利用者<負担額合計
-        rowKogakuServicehiShowResultLData.setTxtRiyoshaFutanTotalAmount(riyoshaFutanTotalAmount);
+        rowKogakuShowResultLData.setTxtRiyoshaFutanTotalAmount(riyoshaFutanTotalAmount);
         //算定基準額
-        rowKogakuServicehiShowResultLData.setTxtSanteiKijunAmount(santeiKijunAmount);
+        rowKogakuShowResultLData.setTxtSanteiKijunAmount(santeiKijunAmount);
         //支払済金額
-        rowKogakuServicehiShowResultLData.setTxtShiharaizumiAmount(shiharaizumiAmount);
+        rowKogakuShowResultLData.setTxtShiharaizumiAmount(shiharaizumiAmount);
         //高額支給額
-        rowKogakuServicehiShowResultLData.setTxtKogakuShikyuAmount(kogakuShikyuAmount);
+        rowKogakuShowResultLData.setTxtKogakuShikyuAmount(kogakuShikyuAmount);
 
-        return rowKogakuServicehiShowResultLData;
+        return rowKogakuShowResultLData;
 
     }
 
-    // dgJudgementResultR	 判定結果
+    // dgJudgementResultR 判定結果
     private void setKogakuServicehiShowResultTwoJudgementResultR(ShowResultTwoDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiShowResultTwoJudgementResultR.yml");
 
@@ -273,8 +273,8 @@ public class ShowResultTwo {
             RString shiharaizumiAmount,
             RString kogakuShikyuAmount
     ) {
-        dgJudgementResultR_Row rowKogakuServicehiShowResultRData;
-        rowKogakuServicehiShowResultRData = new dgJudgementResultR_Row(
+        dgJudgementResultR_Row rowKogakuResultRData;
+        rowKogakuResultRData = new dgJudgementResultR_Row(
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -285,21 +285,21 @@ public class ShowResultTwo {
         );
 
         //事業者
-        rowKogakuServicehiShowResultRData.setTxtJigyosha(jigyosha);
+        rowKogakuResultRData.setTxtJigyosha(jigyosha);
         //サービス種類
-        rowKogakuServicehiShowResultRData.setTxtServiceShurui(serviceShurui);
+        rowKogakuResultRData.setTxtServiceShurui(serviceShurui);
         //サービス費用合計
-        rowKogakuServicehiShowResultRData.setTxtServiceHiyoTotalAmount(serviceHiyoTotalAmount);
+        rowKogakuResultRData.setTxtServiceHiyoTotalAmount(serviceHiyoTotalAmount);
         //利用者<負担額合計
-        rowKogakuServicehiShowResultRData.setTxtRiyoshaFutanTotalAmount(riyoshaFutanTotalAmount);
+        rowKogakuResultRData.setTxtRiyoshaFutanTotalAmount(riyoshaFutanTotalAmount);
         //算定基準額
-        rowKogakuServicehiShowResultRData.setTxtSanteiKijunAmount(santeiKijunAmount);
+        rowKogakuResultRData.setTxtSanteiKijunAmount(santeiKijunAmount);
         //支払済金額
-        rowKogakuServicehiShowResultRData.setTxtShiharaizumiAmount(shiharaizumiAmount);
+        rowKogakuResultRData.setTxtShiharaizumiAmount(shiharaizumiAmount);
         //高額支給額
-        rowKogakuServicehiShowResultRData.setTxtKogakuShikyuAmount(kogakuShikyuAmount);
+        rowKogakuResultRData.setTxtKogakuShikyuAmount(kogakuShikyuAmount);
 
-        return rowKogakuServicehiShowResultRData;
+        return rowKogakuResultRData;
     }
 
     private List<HashMap> ymlData(String ymlData) {

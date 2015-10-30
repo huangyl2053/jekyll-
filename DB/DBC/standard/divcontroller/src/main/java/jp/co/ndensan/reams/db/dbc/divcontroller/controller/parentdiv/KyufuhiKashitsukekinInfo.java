@@ -38,6 +38,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuhiKashitsukekinInfo {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
+    private static final int INDEX_15 = 15;
+
     private List<HashMap> getYaml() {
         return YamlLoader.DBC.loadAsList(new RString("KyufuhiKashitsukekinInfo/KyufuhiKashitsukekinInfo.yml"));
     }
@@ -102,13 +116,11 @@ public class KyufuhiKashitsukekinInfo {
         div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
         div.getTxtShinseishaKana().setValue(cg.getAsRString("カナ"));
         div.getTxtShinseishaKankei().setValue(cg.getAsRString("被保険者との関係"));
-        div.getTxtShinseishaYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
         div.getTxtShinseishaJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtShinseishaTelNo().setValue(cg.getAsRString("電話番号"));
     }
 
     private void setShinseiHoshoninData(tplKashitsukekinShinseiDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_3));
 
         KashitsukeShinseiHoshoninDiv div = tpl.getKashitsukeShinseiHoshonin();
         div.getTxtHoshoninName().setValue(cg.getAsRString("氏名"));
@@ -122,7 +134,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setShinseiKinmuData(tplKashitsukekinShinseiDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_4));
 
         KashitsukeShinseiHoshoninKinmuDiv div = tpl.getKashitsukeShinseiHoshonin().getKashitsukeShinseiHoshoninKinmu();
         div.getTxtHoshoninKinmuName().setValue(cg.getAsRString("名称"));
@@ -131,7 +143,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setShinseiTeishutsuData(tplKashitsukekinShinseiDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_5));
 
         KashitsukeShinseiTeishutsuDiv div = tpl.getKashitsukeShinseiTeishutsu();
         div.getTxtSeikyuRyoshusho().setValue(cg.getAsRString("請求書領収書"));
@@ -141,7 +153,7 @@ public class KyufuhiKashitsukekinInfo {
     private void setKetteiData(KyufuhiKashitsukekinInfoDiv panel) {
         tplKashitsukekinKetteiDiv div = panel.getTabKashitsukekinInfo().getTplKashitsukekinKettei();
 
-        ControlGenerator cg = new ControlGenerator(getYaml().get(6));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_6));
 
         div.getTxtKetteiShoninKubun().setValue(cg.getAsRString("承認区分"));
         div.getTxtKetteiYMD().setValue(cg.getAsRDate("審査決定日"));
@@ -151,7 +163,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setKetteiShoninData(tplKashitsukekinKetteiDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_7));
 
         KashitsukekinKetteiShoninDiv div = tpl.getKashitsukekinKetteiShonin();
         div.getTxtShoninKanriNo().setValue(cg.getAsRString("管理番号"));
@@ -163,7 +175,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setKetteiShiharaiData(tplKashitsukekinKetteiDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(8));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_8));
 
         KashitsukekinKetteiShiharaiDiv div = tpl.getKashitsukekinKetteiShonin().getKashitsukekinKetteiShiharai();
         KashitsukekinKetteiMadoDiv mado = div.getKashitsukekinKetteiMado();
@@ -220,7 +232,7 @@ public class KyufuhiKashitsukekinInfo {
     private void setKariukeData(KyufuhiKashitsukekinInfoDiv panel) {
         tplKashitsukekinKariukeDiv div = panel.getTabKashitsukekinInfo().getTplKashitsukekinKariuke();
 
-        ControlGenerator cg = new ControlGenerator(getYaml().get(9));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_9));
 
         div.getTxtKariukeYMD().setValue(cg.getAsRDate("借受日"));
         setKariukeninData(div);
@@ -228,7 +240,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setKariukeninData(tplKashitsukekinKariukeDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(10));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_10));
 
         KashitsukekinKariukeninDiv div = tpl.getKashitsukekinKariukenin();
         div.getTxtKariukeninName().setValue(cg.getAsRString("氏名"));
@@ -239,7 +251,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setKariukeHoshoData(tplKashitsukekinKariukeDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_11));
 
         KashitsukekinKariukeHoshoDiv div = tpl.getKashitsukekinKariukeHosho();
         div.getTxtKariukeHoshoName().setValue(cg.getAsRString("氏名"));
@@ -252,7 +264,7 @@ public class KyufuhiKashitsukekinInfo {
     private void setHenkoData(KyufuhiKashitsukekinInfoDiv panel) {
         tplKashitsukekinHenkoDiv div = panel.getTabKashitsukekinInfo().getTplKashitsukekinHenko();
 
-        ControlGenerator cg = new ControlGenerator(getYaml().get(12));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_12));
 
         div.getTxtEnchoShinseiYMD().setValue(cg.getAsRDate("延長申請日"));
         div.getTxtEnchoKikan().setFromValue(cg.getAsRDate("延長希望期間開始日"));
@@ -265,7 +277,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setHenkoKariukeData(tplKashitsukekinHenkoDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(13));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_13));
 
         KashitsukekinHenkoKariukeDiv div = tpl.getKashitsukekinHenkoKariuke();
         div.getTxtHenkoKariukeninName().setValue(cg.getAsRString("氏名"));
@@ -276,7 +288,7 @@ public class KyufuhiKashitsukekinInfo {
     }
 
     private void setHenkoKetteiData(tplKashitsukekinHenkoDiv tpl) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(14));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_14));
 
         KashitsukekinHenkoKetteiDiv div = tpl.getKashitsukekinHenkoKettei();
         div.getTxtHenkoShoninKubun().setValue(cg.getAsRString("承認区分"));
@@ -288,7 +300,7 @@ public class KyufuhiKashitsukekinInfo {
     private void setKozaData(KyufuhiKashitsukekinInfoDiv panel) {
         tplKashitsukekinKozaDiv div = panel.getTabKashitsukekinInfo().getTplKashitsukekinKoza();
 
-        ControlGenerator cg = new ControlGenerator(getYaml().get(15));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(INDEX_15));
 
         div.getTxtKojinKinyuKikanCode().setValue(cg.getAsRString("金融機関コード"));
         div.getTxtKojinKinyuKikanName().setValue(cg.getAsRString("金融機関名"));

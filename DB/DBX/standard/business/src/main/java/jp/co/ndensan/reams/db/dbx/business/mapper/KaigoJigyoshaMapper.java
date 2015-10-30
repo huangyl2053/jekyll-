@@ -38,9 +38,9 @@ public final class KaigoJigyoshaMapper {
      */
     public static List<IKaigoJigyosha> toKaigoJigyoshas(List<DbT7060KaigoJigyoshaEntity> jigyoshas) {
         List<IKaigoJigyosha> 事業者s = new ArrayList<>();
-        for (DbT7060KaigoJigyoshaEntity 事業者 : jigyoshas) {
-//            事業者s.add(toKaigoJigyosha(事業者));
-        }
+//        for (DbT7060KaigoJigyoshaEntity 事業者 : jigyoshas) {
+////            事業者s.add(toKaigoJigyosha(事業者));
+//        }
         return 事業者s;
     }
 

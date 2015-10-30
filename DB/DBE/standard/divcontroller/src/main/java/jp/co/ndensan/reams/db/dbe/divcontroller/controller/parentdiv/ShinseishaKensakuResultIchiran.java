@@ -109,10 +109,10 @@ public class ShinseishaKensakuResultIchiran {
             RString jusho,
             RString tel
     ) {
-        dgKensakuKekka_Row rowHihokenshaSearchResultIchiranData = new dgKensakuKekka_Row(
+        dgKensakuKekka_Row rowHihokenshaIchiranData = new dgKensakuKekka_Row(
                 new Button(), hokensha, hihokenNo, shinseibi, shinseiKbn, hihokenshaKbn,
                 shimei, umareYmd, seibetsu, yubinNo, jusho, tel);
-        return rowHihokenshaSearchResultIchiranData;
+        return rowHihokenshaIchiranData;
     }
 
 }

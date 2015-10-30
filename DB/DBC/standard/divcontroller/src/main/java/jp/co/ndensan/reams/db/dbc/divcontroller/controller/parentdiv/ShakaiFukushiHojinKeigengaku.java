@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShakaiFukushiHojinKeigengaku {
 
+    private static final int INDEX_6 = 6;
+
     public ResponseData<ShakaiFukushiHojinKeigengakuDiv> onLoad(ShakaiFukushiHojinKeigengakuDiv panel) {
         ResponseData<ShakaiFukushiHojinKeigengakuDiv> response = new ResponseData<>();
 
@@ -102,7 +104,7 @@ public class ShakaiFukushiHojinKeigengaku {
         if (data == null || !data.isValid()) {
             return RString.EMPTY;
         }
-        return data.wareki().toDateString().substring(0, 6);
+        return data.wareki().toDateString().substring(0, INDEX_6);
     }
 
     private RString setCommFormat(Decimal data) {

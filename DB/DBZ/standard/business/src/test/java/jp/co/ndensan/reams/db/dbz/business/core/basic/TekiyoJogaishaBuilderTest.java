@@ -158,7 +158,7 @@ public class TekiyoJogaishaBuilderTest extends DbzTestBase {
         @Test
         public void 戻り値の論理削除フラグは_設定した値と同じ論理削除フラグを返す() {
             business = sut.set論理削除フラグ(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_論理削除フラグ).build();
-            assertThat(business.get論理削除フラグ(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_論理削除フラグ));
+            assertThat(business.is論理削除フラグ(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_論理削除フラグ));
         }
 
     }

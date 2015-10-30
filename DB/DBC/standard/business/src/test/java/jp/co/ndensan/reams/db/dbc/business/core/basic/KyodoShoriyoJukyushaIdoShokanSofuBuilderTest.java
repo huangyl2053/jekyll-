@@ -127,7 +127,7 @@ public class KyodoShoriyoJukyushaIdoShokanSofuBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の訂正連絡票フラグは_設定した値と同じ訂正連絡票フラグを返す() {
             business = sut.set訂正連絡票フラグ(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_訂正連絡票フラグ).build();
-            assertThat(business.get訂正連絡票フラグ(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_訂正連絡票フラグ));
+            assertThat(business.is訂正連絡票フラグ(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_訂正連絡票フラグ));
         }
 
         @Test

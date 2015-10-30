@@ -15,10 +15,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiy
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 総合事業費サービス利用票登録の履歴一覧のコントロールクラスです。
@@ -41,7 +39,7 @@ public class SogoJigyohiRiyohyoRireki {
     }
 
     /**
-     * 履歴一覧のデータ設定
+     * 履歴一覧のデータ設定。
      */
     private void setRirekiList(SogoJigyohiRiyohyoRirekiDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyoRireki.yml"));

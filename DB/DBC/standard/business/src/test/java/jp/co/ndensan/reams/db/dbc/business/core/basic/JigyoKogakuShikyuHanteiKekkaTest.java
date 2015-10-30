@@ -177,12 +177,12 @@ public class JigyoKogakuShikyuHanteiKekkaTest extends DbcTestBase {
 
         @Test
         public void get再送付フラグは_entityが持つ再送付フラグを返す() {
-            assertThat(sut.get再送付フラグ(), is(JigyoKogakuShikyuHanteiKekkaEntity.getSaiSofuFlag()));
+            assertThat(sut.is再送付フラグ(), is(JigyoKogakuShikyuHanteiKekkaEntity.getSaiSofuFlag()));
         }
 
         @Test
         public void get判定結果送付不要フラグは_entityが持つ判定結果送付不要フラグを返す() {
-            assertThat(sut.get判定結果送付不要フラグ(), is(JigyoKogakuShikyuHanteiKekkaEntity.getHanteiKekkaSofuFuyoFlag()));
+            assertThat(sut.is判定結果送付不要フラグ(), is(JigyoKogakuShikyuHanteiKekkaEntity.getHanteiKekkaSofuFuyoFlag()));
         }
 
         @Test

@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 帳票制御共通コントロールを管理するクラスです。
  */
-public class ChohyoSeigyoKyotsuControl extends ModelBase<ChohyoSeigyoKyotsuControlIdentifier, DbT7066ChohyoSeigyoKyotsuControlEntity, ChohyoSeigyoKyotsuControl> implements Serializable {
+public class ChohyoSeigyoKyotsuControl extends
+        ModelBase<ChohyoSeigyoKyotsuControlIdentifier, DbT7066ChohyoSeigyoKyotsuControlEntity, ChohyoSeigyoKyotsuControl>
+        implements Serializable {
 
     private final DbT7066ChohyoSeigyoKyotsuControlEntity entity;
     private final ChohyoSeigyoKyotsuControlIdentifier id;
@@ -95,7 +97,7 @@ public class ChohyoSeigyoKyotsuControl extends ModelBase<ChohyoSeigyoKyotsuContr
      *
      * @return 共通画面使用有無
      */
-    public boolean get共通画面使用有無() {
+    public boolean is共通画面使用有無() {
         return entity.getKyotsuGamenShiyoUmu();
     }
 

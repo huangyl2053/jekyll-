@@ -21,8 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  * 要介護認定調査の実施場所区分コードを扱うクラスです。
  *
  */
-public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, IDbColumnMappable, IValidatable, ICodeWrapValueObject {
-//public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, IDbColumnMappable, IValidatable, IValueObject<Code> {
+public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, 
+        IDbColumnMappable, IValidatable, ICodeWrapValueObject {
+//public class NinteichosaJisshibashoKubunCode implements Comparable<NinteichosaJisshibashoKubunCode>, 
+//    IDbColumnMappable, IValidatable, IValueObject<Code> {
 
     private final Code code;
 

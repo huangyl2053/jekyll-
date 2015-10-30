@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankai;
-import jp.co.ndensan.reams.db.dbb.business.core.I1段階判定;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiInput;
-import jp.co.ndensan.reams.db.dbb.business.core.HokenryoDankaiOutput;
 import java.util.Calendar;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.Month;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
  * @author N2810
  */
 public class 段階判定_生活保護 implements I1段階判定 {
+
+    private static final int LAST_DAY = 31;
 
     @Override
     public boolean isMatch(HokenryoDankaiInput hokenryoDankaiInput) {
@@ -26,8 +26,8 @@ public class 段階判定_生活保護 implements I1段階判定 {
         Calendar 賦課年度開始日 = Calendar.getInstance();
         Calendar 賦課年度終了日 = Calendar.getInstance();
 
-        賦課年度開始日.set(Integer.parseInt(hokenryoDankaiInput.getFukaNendo()), 4, 1);
-        賦課年度終了日.set(Integer.parseInt(hokenryoDankaiInput.getFukaNendo()) + 1, 3, 31);
+        賦課年度開始日.set(Integer.parseInt(String.valueOf(hokenryoDankaiInput.getFukaNendo())), Month.APRIL.getValue(), 1);
+        賦課年度終了日.set(Integer.parseInt(String.valueOf(hokenryoDankaiInput.getFukaNendo())) + 1, Month.MARCH.getValue(), LAST_DAY);
 
         boolean result = false;
 
@@ -49,7 +49,7 @@ public class 段階判定_生活保護 implements I1段階判定 {
     }
 
     @Override
-    public HokenryoDankaiOutput Dai1dankaiSettei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput) {
+    public HokenryoDankaiOutput dai1dankaiSettei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiOutput hokenryoDankaiOutput) {
 
         Calendar 生活保護開始月 = Calendar.getInstance();
         Calendar 判定年月 = Calendar.getInstance();
@@ -58,31 +58,31 @@ public class 段階判定_生活保護 implements I1段階判定 {
         生活保護開始月.set(生活保護開始月.get(Calendar.YEAR), 生活保護開始月.get(Calendar.MONTH) + 1, 1);
         //生活保護開始月.set(hokenryoDankaiInput.fukaKonkyo.SeihoStartYMD.getYear(), hokenryoDankaiInput.fukaKonkyo.SeihoStartYMD.getMonth(), 1);
 
-        Map<String, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.CreateHokenryoDankaiMap();
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.createHokenryoDankaiMap();
 
-        for (String tsuki : hokenryoDankaiMap.keySet()) {
+        for (RString tsuki : hokenryoDankaiMap.keySet()) {
             判定年月.clear();
-            if (Integer.parseInt(tsuki) <= 3) {
-                判定年月.set(Integer.parseInt(hokenryoDankaiInput.getFukaNendo()) + 1, Integer.parseInt(tsuki), 1);
+            if (Integer.parseInt(tsuki.toString()) <= Month.MARCH.getValue()) {
+                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiInput.getFukaNendo())) + 1, Integer.parseInt(tsuki.toString()), 1);
 
             } else {
-                判定年月.set(Integer.parseInt(hokenryoDankaiInput.getFukaNendo()), Integer.parseInt(tsuki), 1);
+                判定年月.set(Integer.parseInt(String.valueOf(hokenryoDankaiInput.getFukaNendo())), Integer.parseInt(tsuki.toString()), 1);
             }
 
-            if (DateHantei(生活保護開始月, 判定年月)) {
-                hokenryoDankaiMap.get(tsuki).setHokenryoDankai("1");
-                hokenryoDankaiMap.get(tsuki).setSystemDankai("1");
+            if (dateHantei(生活保護開始月, 判定年月)) {
+                hokenryoDankaiMap.get(tsuki).setHokenryoDankai(new RString("1"));
+                hokenryoDankaiMap.get(tsuki).setSystemDankai(new RString("1"));
                 hokenryoDankaiMap.get(tsuki).setTokureiTaisho(false);
             }
         }
 
-        hokenryoDankaiOutput.CreateHokenryoDankaiOutput(hokenryoDankaiMap);
+        hokenryoDankaiOutput.createHokenryoDankaiOutput(hokenryoDankaiMap);
 
         return hokenryoDankaiOutput;
 
     }
 
-    private boolean DateHantei(Calendar 生活保護開始月, Calendar TaishoYMD) {
-        return 生活保護開始月.compareTo(TaishoYMD) <= 0;
+    private boolean dateHantei(Calendar 生活保護開始月, Calendar taishoYMD) {
+        return 生活保護開始月.compareTo(taishoYMD) <= 0;
     }
 }

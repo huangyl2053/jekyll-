@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -31,7 +32,7 @@ public class HokenryoDankaiOutput {
 
     }
 
-    public HokenryoDankaiOutput(String hokenryoDankai) {
+    public HokenryoDankaiOutput(RString hokenryoDankai) {
         保険料段階04月.setHokenryoDankai(hokenryoDankai);
         保険料段階05月.setHokenryoDankai(hokenryoDankai);
         保険料段階06月.setHokenryoDankai(hokenryoDankai);
@@ -59,17 +60,17 @@ public class HokenryoDankaiOutput {
         保険料段階03月.setSystemDankai(hokenryoDankai);
     }
 
-    protected void CreateHokenryoDankaiOutput(Map<String, HokenryoDankai> hokenryoDankaiMap) {
-        //Map<String, HokenryoDankai> hokenryoDankaiOutput = new HashMap<>();
+    protected void createHokenryoDankaiOutput(Map<RString, HokenryoDankai> hokenryoDankaiMap) {
+        //Map<RString, HokenryoDankai> hokenryoDankaiOutput = new HashMap<>();
 
         //mapからkey(段階数)を取得
-        for (String tsuki : hokenryoDankaiMap.keySet()) {
+        for (RString tsuki : hokenryoDankaiMap.keySet()) {
 
             //取得した段階の判定方法を取得
             HokenryoDankai hokenryodankai = hokenryoDankaiMap.get(tsuki);
             //hanteiResult = KakuDankaiHantei(hokenryoDankaiInput,hanteihohoList);
 
-            switch (tsuki) {
+            switch (tsuki.toString()) {
                 case "1":
                     set保険料段階01月(hokenryodankai);
                     break;
@@ -110,21 +111,21 @@ public class HokenryoDankaiOutput {
         }
     }
 
-    protected Map<String, HokenryoDankai> CreateHokenryoDankaiMap() {
-        Map<String, HokenryoDankai> hokenryoDankaiMap = new HashMap<>();
+    protected Map<RString, HokenryoDankai> createHokenryoDankaiMap() {
+        Map<RString, HokenryoDankai> hokenryoDankaiMap = new HashMap<>();
 
-        hokenryoDankaiMap.put("1", get保険料段階01月());
-        hokenryoDankaiMap.put("2", get保険料段階02月());
-        hokenryoDankaiMap.put("3", get保険料段階03月());
-        hokenryoDankaiMap.put("4", get保険料段階04月());
-        hokenryoDankaiMap.put("5", get保険料段階05月());
-        hokenryoDankaiMap.put("6", get保険料段階06月());
-        hokenryoDankaiMap.put("7", get保険料段階07月());
-        hokenryoDankaiMap.put("8", get保険料段階08月());
-        hokenryoDankaiMap.put("9", get保険料段階09月());
-        hokenryoDankaiMap.put("10", get保険料段階10月());
-        hokenryoDankaiMap.put("11", get保険料段階11月());
-        hokenryoDankaiMap.put("12", get保険料段階12月());
+        hokenryoDankaiMap.put(new RString("1"), get保険料段階01月());
+        hokenryoDankaiMap.put(new RString("2"), get保険料段階02月());
+        hokenryoDankaiMap.put(new RString("3"), get保険料段階03月());
+        hokenryoDankaiMap.put(new RString("4"), get保険料段階04月());
+        hokenryoDankaiMap.put(new RString("5"), get保険料段階05月());
+        hokenryoDankaiMap.put(new RString("6"), get保険料段階06月());
+        hokenryoDankaiMap.put(new RString("7"), get保険料段階07月());
+        hokenryoDankaiMap.put(new RString("8"), get保険料段階08月());
+        hokenryoDankaiMap.put(new RString("9"), get保険料段階09月());
+        hokenryoDankaiMap.put(new RString("10"), get保険料段階10月());
+        hokenryoDankaiMap.put(new RString("11"), get保険料段階11月());
+        hokenryoDankaiMap.put(new RString("12"), get保険料段階12月());
 
         return hokenryoDankaiMap;
     }

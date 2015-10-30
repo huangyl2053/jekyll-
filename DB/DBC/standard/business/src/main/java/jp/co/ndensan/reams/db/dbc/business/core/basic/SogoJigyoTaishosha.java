@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 総合事業対象者を管理するクラスです。
  */
-public class SogoJigyoTaishosha extends ModelBase<SogoJigyoTaishoshaIdentifier, DbT3105SogoJigyoTaishoshaEntity, SogoJigyoTaishosha> implements Serializable {
+public class SogoJigyoTaishosha 
+extends ModelBase<SogoJigyoTaishoshaIdentifier, 
+        DbT3105SogoJigyoTaishoshaEntity, 
+        SogoJigyoTaishosha> implements Serializable {
 
     private final DbT3105SogoJigyoTaishoshaEntity entity;
     private final SogoJigyoTaishoshaIdentifier id;

@@ -26,13 +26,13 @@ public enum JushochiTokureishaKubun implements IRStringConvertable {
     /**
      * 住所地特例者<br />
      * コード：1<br />
-     * 名称：住所地特例者（特例中）<br />
+     * 名称：住所地特例者（特例中）。<br />
      */
     住所地特例者("1", "住所地特例者（特例中）"),
     /**
      * 通常資格者<br />
      * コード：無<br />
-     * 名称：通常資格者<br />
+     * 名称：通常資格者。<br />
      */
     通常資格者("", "通常資格者");
     private final RString コード;

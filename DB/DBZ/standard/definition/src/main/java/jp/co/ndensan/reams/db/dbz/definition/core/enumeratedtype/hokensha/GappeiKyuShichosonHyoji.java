@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 合併市町村を表示するか表示しないかの区分です。
+ * 合併市町村を表示するか表示しないかの区分クラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -20,17 +20,17 @@ public enum GappeiKyuShichosonHyoji {
 
     /**
      * 表示する<br/>
-     * コード:"1"
+     * コード:"1"。
      */
     表示する("1"),
     /**
      * 表示しない<br/>
-     * コード:"2"
+     * コード:"2"。
      */
     表示しない("0"),
     /**
      * 設定なし<br/>
-     * コード:"" (空文字)
+     * コード:"" (空文字)。
      */
     設定なし("");
 

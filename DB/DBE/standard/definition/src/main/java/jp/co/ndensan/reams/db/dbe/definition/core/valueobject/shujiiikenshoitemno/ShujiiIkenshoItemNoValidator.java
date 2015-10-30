@@ -18,7 +18,7 @@ public class ShujiiIkenshoItemNoValidator {
     private final ShujiiIkenshoItemNo shujiiIkenshoItemNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param shujiiIkenshoItemNo 主治医意見書の項目番号
      */

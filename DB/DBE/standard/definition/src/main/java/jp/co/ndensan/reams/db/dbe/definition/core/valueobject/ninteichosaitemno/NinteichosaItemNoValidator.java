@@ -13,7 +13,7 @@ public class NinteichosaItemNoValidator {
     private final NinteichosaItemNo ninteichosaItemNo;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninteichosaItemNo 要介護認定調査の調査項目番号
      */

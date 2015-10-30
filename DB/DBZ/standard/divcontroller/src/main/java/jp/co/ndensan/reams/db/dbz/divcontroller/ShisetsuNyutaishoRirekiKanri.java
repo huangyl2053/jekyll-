@@ -6,11 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 施設入退所履歴管理に対応するコントローラです。
@@ -92,11 +89,10 @@ public class ShisetsuNyutaishoRirekiKanri {
         return response;
     }
 
-    private dgShisetsuNyutaishoRireki_Row createNewRow() {
-        return new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-    }
-
+//    private dgShisetsuNyutaishoRireki_Row createNewRow() {
+//        return new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//    }
     /**
      * 施設入退所情報を確定するボタンを押した際に実行されます。<br/>
      * 入力した施設入退所の情報をグリッドに反映させます。入力モードが追加の場合は新規追加、修正の場合は修正対象行のデータが変更されます。<br/>

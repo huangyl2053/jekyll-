@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum HihokenshaShikakuHakkoValidationMessage implements IValidationMessage {
 
     /**
-     * 交付事由が未選択
+     * 交付事由が未選択します。
      */
     交付事由が未選択(DbzErrorMessages.必須項目を入力);
 

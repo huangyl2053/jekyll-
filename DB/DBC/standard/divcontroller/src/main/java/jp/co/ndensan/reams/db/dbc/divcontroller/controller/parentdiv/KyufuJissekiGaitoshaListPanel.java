@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.dgHi
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.SearchToKyufujissekiPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -23,8 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
  */
 public class KyufuJissekiGaitoshaListPanel {
 
-    final static String MessAge = "該当するデータが0件です";
-
+//    private static final RString MESSAGE = new RString("該当するデータが0件です");
     /**
      * 介護給付費過誤申立書登録 給付実積該当一覧の内容をセットします。
      *
@@ -64,47 +62,46 @@ public class KyufuJissekiGaitoshaListPanel {
     /*
      *引数を元にデータグリッド内に挿入する個人データを作成します。
      */
-    private dgHihokenshaSearchGaitosha_Row createRowKyufuJissekiGaitoshaListData(
-            RString jigyoshaNo,
-            RString jigyoshaName,
-            RString hihoNo,
-            RString hihoName,
-            RString kagoForm,
-            RString teikyoYM,
-            RString kyufuJissekiSakuseiKubun,
-            RString kyufuKubun,
-            RString shinsaYM
-    ) {
-
-        dgHihokenshaSearchGaitosha_Row rowKyufuJissekiGaitoshaListData;
-        rowKyufuJissekiGaitoshaListData = new dgHihokenshaSearchGaitosha_Row(
-                new Button(),
-                Boolean.FALSE,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY
-        );
-
-        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaNo(jigyoshaNo);
-        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaName(jigyoshaName);
-        rowKyufuJissekiGaitoshaListData.setTxtHihoNo(hihoNo);
-        rowKyufuJissekiGaitoshaListData.setTxtHihoName(hihoName);
-        rowKyufuJissekiGaitoshaListData.setTxtKagoForm(kagoForm);
-        rowKyufuJissekiGaitoshaListData.setTxtTeikyoYM(teikyoYM);
-//        rowKyufuJissekiGaitoshaListData.setTxtTeikyoYM(setWareki(teikyoYM.toDateString()).substring(0, 6));
-        rowKyufuJissekiGaitoshaListData.setTxtKyufuJissekiSakuseiKubun(kyufuJissekiSakuseiKubun);
-        rowKyufuJissekiGaitoshaListData.setTxtKyufuKubun(kyufuKubun);
-        rowKyufuJissekiGaitoshaListData.setTxtShinsaYM(shinsaYM);
-
-        return rowKyufuJissekiGaitoshaListData;
-    }
-
+//    private dgHihokenshaSearchGaitosha_Row createRowKyufuJissekiGaitoshaListData(
+//            RString jigyoshaNo,
+//            RString jigyoshaName,
+//            RString hihoNo,
+//            RString hihoName,
+//            RString kagoForm,
+//            RString teikyoYM,
+//            RString kyufuJissekiSakuseiKubun,
+//            RString kyufuKubun,
+//            RString shinsaYM
+//    ) {
+//
+//        dgHihokenshaSearchGaitosha_Row rowKyufuJissekiGaitoshaListData;
+//        rowKyufuJissekiGaitoshaListData = new dgHihokenshaSearchGaitosha_Row(
+//                new Button(),
+//                Boolean.FALSE,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY,
+//                RString.EMPTY
+//        );
+//
+//        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaNo(jigyoshaNo);
+//        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaName(jigyoshaName);
+//        rowKyufuJissekiGaitoshaListData.setTxtHihoNo(hihoNo);
+//        rowKyufuJissekiGaitoshaListData.setTxtHihoName(hihoName);
+//        rowKyufuJissekiGaitoshaListData.setTxtKagoForm(kagoForm);
+//        rowKyufuJissekiGaitoshaListData.setTxtTeikyoYM(teikyoYM);
+////        rowKyufuJissekiGaitoshaListData.setTxtTeikyoYM(setWareki(teikyoYM.toDateString()).substring(0, 6));
+//        rowKyufuJissekiGaitoshaListData.setTxtKyufuJissekiSakuseiKubun(kyufuJissekiSakuseiKubun);
+//        rowKyufuJissekiGaitoshaListData.setTxtKyufuKubun(kyufuKubun);
+//        rowKyufuJissekiGaitoshaListData.setTxtShinsaYM(shinsaYM);
+//
+//        return rowKyufuJissekiGaitoshaListData;
+//    }
     /**
      * 介護給付費過誤申立書登録 過誤申立書情報を確定するボタンを押下後、申立者作成の内容をチェック有り。
      *

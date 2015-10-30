@@ -13,11 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoList;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -113,21 +109,21 @@ public final class ShisetsuNyutaishoMapper {
 
         return entity;
     }
-
-    private static YMDHMS toYMDHMS(RDateTime rDateTime) {
-        return new YMDHMS(
-                new RStringBuilder()
-                .append(rDateTime.getDate().toDateString())
-                .append(to2桁(rDateTime.getTime().getHour()))
-                .append(to2桁(rDateTime.getTime().getMinute()))
-                .append(to2桁(rDateTime.getTime().getSecond()))
-                .toRString()
-        );
-    }
-
-    private static RString to2桁(int value) {
-        return new RString(String.format("%1$02d", value));
-    }
+//
+//    private static YMDHMS toYMDHMS(RDateTime rDateTime) {
+//        return new YMDHMS(
+//                new RStringBuilder()
+//                .append(rDateTime.getDate().toDateString())
+//                .append(to2桁(rDateTime.getTime().getHour()))
+//                .append(to2桁(rDateTime.getTime().getMinute()))
+//                .append(to2桁(rDateTime.getTime().getSecond()))
+//                .toRString()
+//        );
+//    }
+//
+//    private static RString to2桁(int value) {
+//        return new RString(String.format("%1$02d", value));
+//    }
 
     private static Range<FlexibleDate> create入所期間(DbT1004ShisetsuNyutaishoEntity entity) {
         return new Range(entity.getNyushoYMD(), entity.getTaishoYMD());

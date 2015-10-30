@@ -155,7 +155,7 @@ public class NinteichosaOCRTorikomiTargetData {
     }
 
     //<editor-fold defaultstate="collapsed" desc="private class MyDemoData{...}">
-    private static class MyDemoData implements IDemoData<dgChosahyoTorikomiKekka_Row> {
+    private static final class MyDemoData implements IDemoData<dgChosahyoTorikomiKekka_Row> {
 
         private final List<HashMap> rawData;
         private final IConverter<dgChosahyoTorikomiKekka_Row> converter;

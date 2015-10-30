@@ -5,28 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2030011;
 
-import jp.co.ndensan.reams.db.dba.business.core.TaishoshaKey;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.HihokenshaHakkoDiv;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.HihokenshashoPrintType;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-//import jp.co.ndensan.reams.ur.urd.entity.basic.UrT0505ShoKofuKaishuEntity;
-//import jp.co.ndensan.reams.ur.urd.model.IShoKofuKaishuKiroku;
-//import jp.co.ndensan.reams.ur.urd.model.ShoKofuKaishuModel;
-//TODO n8235船山洋介 ShoKofuKaishuManager が使用されておらず、大体クラス見つからないため(DC？)コメントアウト
-//import jp.co.ndensan.reams.ur.urd.realservice.IShoKofuKaishuManager;
-//import jp.co.ndensan.reams.ur.urd.realservice.ShoKofuKaishuManagerFactory;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 住所地特例画面における、被保険者証発行Divのイベントを定義したDivControllerです。
@@ -48,7 +33,7 @@ public class HihokenshaHakko {
             hakkoDiv.getRadPrintPosition().setDisplayNone(true);
         }
 
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         //TODO n8187 久保田 画面遷移のためデータ取得処理を一時的にコメントアウト
 //        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), false);
         return ResponseData.of(hakkoDiv).respond();
@@ -69,18 +54,18 @@ public class HihokenshaHakko {
         @Override
         public ResponseData<SourceDataCollection> publish(HihokenshaHakkoDiv div) {
 
-            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-            HihokenshashoPrintPosition position;
-            if (div.getRadPrintPosition().getSelectedValue().equals(new RString("上段"))) {
-                position = HihokenshashoPrintPosition.上部;
-            } else if (div.getRadPrintPosition().getSelectedValue().equals(new RString("下段"))) {
-                position = HihokenshashoPrintPosition.下部;
-            } else {
-                position = HihokenshashoPrintPosition.指定無し;
-            }
+//            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+//            HihokenshashoPrintPosition position;
+//            if (div.getRadPrintPosition().getSelectedValue().equals(new RString("上段"))) {
+//                position = HihokenshashoPrintPosition.上部;
+//            } else if (div.getRadPrintPosition().getSelectedValue().equals(new RString("下段"))) {
+//                position = HihokenshashoPrintPosition.下部;
+//            } else {
+//                position = HihokenshashoPrintPosition.指定無し;
+//            }
 
             //TODO n8187 久保田 画面遷移の確認のために対象者キーにダミーデータを設定
-            taishoshaKey = new TaishoshaKey(new HihokenshaNo("1234567890"), ShikibetsuCode.EMPTY, SetaiCode.EMPTY);
+//            taishoshaKey = new TaishoshaKey(new HihokenshaNo("1234567890"), ShikibetsuCode.EMPTY, SetaiCode.EMPTY);
             //TODO n8178 城間篤人 帳票に必要なクラスをrealServiceからserviceに移行後にコメントアウト解除
 //            HihokenshashoPrinter printer = new HihokenshashoPrinter();
 //            SourceDataCollection sdc = printer.print(

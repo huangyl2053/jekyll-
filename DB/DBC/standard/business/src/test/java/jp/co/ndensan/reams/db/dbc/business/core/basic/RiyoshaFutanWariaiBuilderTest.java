@@ -78,13 +78,13 @@ public class RiyoshaFutanWariaiBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の発行不要フラグは_設定した値と同じ発行不要フラグを返す() {
             business = sut.set発行不要フラグ(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_発行不要フラグ).build();
-            assertThat(business.get発行不要フラグ(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_発行不要フラグ));
+            assertThat(business.is発行不要フラグ(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_発行不要フラグ));
         }
 
         @Test
         public void 戻り値の職権変更フラグは_設定した値と同じ職権変更フラグを返す() {
             business = sut.set職権変更フラグ(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_職権変更フラグ).build();
-            assertThat(business.get職権変更フラグ(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_職権変更フラグ));
+            assertThat(business.is職権変更フラグ(), is(DbT3113RiyoshaFutanWariaiEntityGenerator.DEFAULT_職権変更フラグ));
         }
 
         @Test

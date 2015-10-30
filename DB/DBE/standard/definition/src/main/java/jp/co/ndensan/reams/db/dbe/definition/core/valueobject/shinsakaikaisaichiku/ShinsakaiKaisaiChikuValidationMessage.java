@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShinsakaiKaisaiChikuValidationMessage implements IValidationMessage {
 
     /**
-     * 名称がNullであること
+     * 名称がNullであること。
      */
     名称がNullであること(ShinsakaiKaisaiChikuErrorMessage.名称がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum ShinsakaiKaisaiChikuValidationMessage implements IValidationMessage 
     public enum ShinsakaiKaisaiChikuErrorMessage implements IMessageGettable {
 
         /**
-         * 名称がNullであること
+         * 名称がNullであること。
          */
         名称がNullであること(1, "名称を指定してください。");
         private final int no;

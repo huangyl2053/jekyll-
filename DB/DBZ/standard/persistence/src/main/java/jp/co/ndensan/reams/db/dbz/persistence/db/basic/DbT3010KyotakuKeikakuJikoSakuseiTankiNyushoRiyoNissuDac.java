@@ -24,7 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 居宅給付計画自己作成短期入所利用日数のデータアクセスクラスです。
  */
-public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements ISaveable<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity> {
+public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements
+        ISaveable<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity> {
 
     @InjectSession
     private SqlSession session;

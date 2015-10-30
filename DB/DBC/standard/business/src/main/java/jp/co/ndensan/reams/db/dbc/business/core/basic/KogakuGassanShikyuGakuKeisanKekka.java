@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -19,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額合算支給額計算結果を管理するクラスです。
  */
-public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka> implements Serializable {
+public class KogakuGassanShikyuGakuKeisanKekka
+    extends ModelBase<KogakuGassanShikyuGakuKeisanKekkaIdentifier, DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity, KogakuGassanShikyuGakuKeisanKekka>
+    implements Serializable {
 
     private final DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity;
     private final KogakuGassanShikyuGakuKeisanKekkaIdentifier id;
@@ -70,8 +72,7 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<KogakuGassanShi
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}より{@link KogakuGassanShikyuGakuKeisanKekka}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
+     * @param entity DBより取得した{@link DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity}
      */
     public KogakuGassanShikyuGakuKeisanKekka(DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算支給額計算結果"));
@@ -507,8 +508,7 @@ public class KogakuGassanShikyuGakuKeisanKekka extends ModelBase<KogakuGassanShi
     /**
      * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}を返します。
      *
-     * @return
-     * 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
+     * @return 高額合算支給額計算結果の識別子{@link KogakuGassanShikyuGakuKeisanKekkaIdentifier}
      */
     @Override
     public KogakuGassanShikyuGakuKeisanKekkaIdentifier identifier() {

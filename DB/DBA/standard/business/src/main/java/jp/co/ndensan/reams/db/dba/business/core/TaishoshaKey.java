@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  */
 public class TaishoshaKey implements Serializable {
 
-    public TaishoshaKey(HihokenshaNo hihokenshaNo, ShikibetsuCode EMPTY, SetaiCode EMPTY0) {
+    public TaishoshaKey(HihokenshaNo hihokenshaNo, ShikibetsuCode empty, SetaiCode empty0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

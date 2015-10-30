@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class HizukeConfig {
 
     private final Map<ConfigKeysHizuke, RString> configs;
+    private static final int JUUNI = 12;
 
     /**
      * コンストラクタです。
@@ -258,7 +259,7 @@ public class HizukeConfig {
         list.add(get月別テーブル12());
 
         Integer 月別テーブル13 = Integer.parseInt(get月別テーブル13().toString());
-        if (月別テーブル13 > 12) {
+        if (月別テーブル13 > JUUNI) {
             月別テーブル13 = 月別テーブル12 + 1;
             list.add(new RString(String.valueOf(月別テーブル13)));
         } else {
@@ -266,7 +267,7 @@ public class HizukeConfig {
         }
 
         Integer 月別テーブル14 = Integer.parseInt(get月別テーブル14().toString());
-        if (月別テーブル14 > 12) {
+        if (月別テーブル14 > JUUNI) {
             月別テーブル14 = 月別テーブル13 + 1;
             list.add(new RString(String.valueOf(月別テーブル14)));
         } else {

@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 調査地区グループマスタを管理するクラスです。
  */
-public class ChosaChikuGroup extends ParentModelBase<ChosaChikuGroupIdentifier, DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
+public class ChosaChikuGroup extends 
+        ParentModelBase<ChosaChikuGroupIdentifier, 
+        DbT5225ChosaChikuGroupEntity, ChosaChikuGroup> implements Serializable {
 
     private final DbT5225ChosaChikuGroupEntity entity;
     private final ChosaChikuGroupIdentifier id;
@@ -188,7 +190,7 @@ public class ChosaChikuGroup extends ParentModelBase<ChosaChikuGroupIdentifier, 
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5225ChosaChikuGroupEntity entity;
         private final ChosaChikuGroupIdentifier id;
 

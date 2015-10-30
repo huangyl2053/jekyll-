@@ -8,26 +8,26 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.helper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * モードを表す文字列を管理する列挙型です。
+ * モードを表す文字列を管理する列挙型クラスです。
  *
  * @author n8178 城間篤人
  */
 public enum ModeType {
 
     /**
-     * 照会モード
+     * 照会モード。
      */
     SHOKAI_MODE("shokai"),
     /**
-     * 追加モード
+     * 追加モード。
      */
     ADD_MODE("add"),
     /**
-     * 修正モード
+     * 修正モード。
      */
     MODIFY_MODE("modify"),
     /**
-     * 削除モード
+     * 削除モード。
      */
     DELETE_MODE("delete");
     private final RString mode;

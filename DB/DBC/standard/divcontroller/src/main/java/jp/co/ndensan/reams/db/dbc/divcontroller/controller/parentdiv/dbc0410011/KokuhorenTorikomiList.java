@@ -7,18 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410011
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenJohoTorikomi;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  *
@@ -54,12 +47,12 @@ public class KokuhorenTorikomiList {
 
 //        KokuhorenTorikomiJohoManager realservice = new KokuhorenTorikomiJohoManager();
 //        List<KokuhorenTorikomiJohoModel> KokuhorenTorikomiJoho = realservice.get国保連取込情報(処理年月);
-        List<dgKokuhorenTorikomiList_Row> KokuhorenTorikomiListDataSource = new ArrayList<>();
+        List<dgKokuhorenTorikomiList_Row> kokuhorenTorikomiListDataSource = new ArrayList<>();
 
 //        for (KokuhorenTorikomiJohoModel model : KokuhorenTorikomiJoho) {
 //            KokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model));
 //        }
-        panel.getDgKokuhorenTorikomiList().setDataSource(KokuhorenTorikomiListDataSource);
+        panel.getDgKokuhorenTorikomiList().setDataSource(kokuhorenTorikomiListDataSource);
 
         panel.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
     }

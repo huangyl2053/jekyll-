@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  *
  * @author n8178 城間篤人
  */
-public class JushochiTokureiValidator {
+public final class JushochiTokureiValidator {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
@@ -55,7 +55,7 @@ public class JushochiTokureiValidator {
     private static class _JushochiTokureiValidator implements IValidatable, IJushochiTokureiListSetter {
 
         private final HihokenshaDaicho jushochiTokureiData;
-        private IItemList<HihokenshaDaicho> jushochiTokureiList;
+        //private IItemList<HihokenshaDaicho> jushochiTokureiList;
 
         /**
          * コンストラクタです。
@@ -70,7 +70,7 @@ public class JushochiTokureiValidator {
         @Override
         public IValidatable setJushochiTokureiList(IItemList<HihokenshaDaicho> jushochiTokureiList) {
             requireNonNull(jushochiTokureiList, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例List"));
-            this.jushochiTokureiList = jushochiTokureiList;
+            //this.jushochiTokureiList = jushochiTokureiList;
             return this;
         }
 

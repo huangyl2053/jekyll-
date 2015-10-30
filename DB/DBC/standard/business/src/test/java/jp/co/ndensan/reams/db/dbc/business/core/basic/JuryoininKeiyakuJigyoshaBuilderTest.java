@@ -179,25 +179,25 @@ public class JuryoininKeiyakuJigyoshaBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の住宅改修契約有無は_設定した値と同じ住宅改修契約有無を返す() {
             business = sut.set住宅改修契約有無(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_住宅改修契約有無).build();
-            assertThat(business.get住宅改修契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_住宅改修契約有無));
+            assertThat(business.is住宅改修契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_住宅改修契約有無));
         }
 
         @Test
         public void 戻り値の特定福祉用具販売契約有無は_設定した値と同じ特定福祉用具販売契約有無を返す() {
             business = sut.set特定福祉用具販売契約有無(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_特定福祉用具販売契約有無).build();
-            assertThat(business.get特定福祉用具販売契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_特定福祉用具販売契約有無));
+            assertThat(business.is特定福祉用具販売契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_特定福祉用具販売契約有無));
         }
 
         @Test
         public void 戻り値の償還払給付契約有無は_設定した値と同じ償還払給付契約有無を返す() {
             business = sut.set償還払給付契約有無(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_償還払給付契約有無).build();
-            assertThat(business.get償還払給付契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_償還払給付契約有無));
+            assertThat(business.is償還払給付契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_償還払給付契約有無));
         }
 
         @Test
         public void 戻り値の高額給付契約有無は_設定した値と同じ高額給付契約有無を返す() {
             business = sut.set高額給付契約有無(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_高額給付契約有無).build();
-            assertThat(business.get高額給付契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_高額給付契約有無));
+            assertThat(business.is高額給付契約有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_高額給付契約有無));
         }
 
         @Test
@@ -209,7 +209,7 @@ public class JuryoininKeiyakuJigyoshaBuilderTest extends DbcTestBase {
         @Test
         public void 戻り値の取扱確約書有無は_設定した値と同じ取扱確約書有無を返す() {
             business = sut.set取扱確約書有無(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_取扱確約書有無).build();
-            assertThat(business.get取扱確約書有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_取扱確約書有無));
+            assertThat(business.is取扱確約書有無(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_取扱確約書有無));
         }
 
     }

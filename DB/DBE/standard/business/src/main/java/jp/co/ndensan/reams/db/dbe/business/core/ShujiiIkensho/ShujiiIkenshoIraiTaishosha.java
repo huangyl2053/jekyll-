@@ -35,6 +35,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final RString 住所;
     private final KaigoIryoKikan 主治医医療機関;
     private final KaigoDoctor 主治医;
+    private final RString 主治医意見書依頼対象 = new RString("主治医意見書依頼対象");
 
     /**
      * コンストラクタです。
@@ -50,7 +51,8 @@ public class ShujiiIkenshoIraiTaishosha {
      * @param 住所 住所
      * @param 主治医医療機関 主治医医療機関
      * @param 主治医 主治医
-     * @throws NullPointerException {@code 認定進捗情報}がnullの場合、{@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、
+     * @throws NullPointerException
+     * {@code 認定進捗情報}がnullの場合、{@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、
      * {@code 被保険者番号}がnullの場合、{@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、
      * {@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */
@@ -67,15 +69,15 @@ public class ShujiiIkenshoIraiTaishosha {
             KaigoIryoKikan 主治医医療機関,
             KaigoDoctor 主治医) throws NullPointerException {
 
-        this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", "主治医意見書依頼対象"));
-        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", "主治医意見書依頼対象"));
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("証記載保険者番号", "主治医意見書依頼対象"));
-        this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", "主治医意見書依頼対象"));
-        this.認定申請年月日 = requireNonNull(認定申請年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", "主治医意見書依頼対象"));
-        this.認定申請区分 = requireNonNull(認定申請区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請区分", "主治医意見書依頼対象"));
-        this.個人情報 = requireNonNull(個人情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人情報", "主治医意見書依頼対象"));
-        this.氏名 = requireNonNull(氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("氏名", "主治医意見書依頼対象"));
-        this.住所 = requireNonNull(住所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住所", "主治医意見書依頼対象"));
+        this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", 主治医意見書依頼対象.toString()));
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", 主治医意見書依頼対象.toString()));
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("証記載保険者番号", 主治医意見書依頼対象.toString()));
+        this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", 主治医意見書依頼対象.toString()));
+        this.認定申請年月日 = requireNonNull(認定申請年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", 主治医意見書依頼対象.toString()));
+        this.認定申請区分 = requireNonNull(認定申請区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請区分", 主治医意見書依頼対象.toString()));
+        this.個人情報 = requireNonNull(個人情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人情報", 主治医意見書依頼対象.toString()));
+        this.氏名 = requireNonNull(氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("氏名", 主治医意見書依頼対象.toString()));
+        this.住所 = requireNonNull(住所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住所", 主治医意見書依頼対象.toString()));
         this.主治医医療機関 = 主治医医療機関;
         this.主治医 = 主治医;
     }

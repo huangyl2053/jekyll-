@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.Kash
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
@@ -111,38 +110,38 @@ public class KashitsukeShinseiList {
         dgRowList.add(new dgKyufuhiKashitsukekinList_Row());
     }
 
-    private dgKyufuhiKashitsukekinList_Row create給付費貸付金一覧アイテム(
-            RString txtHihoNo,
-            RString txtHihokenshaName,
-            RString txtHihokenshaKana,
-            RString txtUketsukeYMD,
-            RString txtShinseiYMD,
-            RString txtKaishiYMD,
-            RString txtShuryoYMD,
-            RString txtServiceShurui,
-            RString txtSeikyugaku,
-            RString txtShinseigaku,
-            RString txtKetteiYMD,
-            RString txtShonin,
-            RString txtKariukeYMD,
-            RString txtEnchoShinseiYMD
-    ) {
-        dgKyufuhiKashitsukekinList_Row item = new dgKyufuhiKashitsukekinList_Row(
-                txtHihoNo,
-                txtHihokenshaName,
-                txtHihokenshaKana,
-                txtUketsukeYMD,
-                txtShinseiYMD,
-                txtKaishiYMD,
-                txtShuryoYMD,
-                txtServiceShurui,
-                txtSeikyugaku,
-                txtShinseigaku,
-                txtKetteiYMD,
-                txtShonin,
-                txtKariukeYMD,
-                txtEnchoShinseiYMD
-        );
-        return item;
-    }
+//    private dgKyufuhiKashitsukekinList_Row create給付費貸付金一覧アイテム(
+//            RString txtHihoNo,
+//            RString txtHihokenshaName,
+//            RString txtHihokenshaKana,
+//            RString txtUketsukeYMD,
+//            RString txtShinseiYMD,
+//            RString txtKaishiYMD,
+//            RString txtShuryoYMD,
+//            RString txtServiceShurui,
+//            RString txtSeikyugaku,
+//            RString txtShinseigaku,
+//            RString txtKetteiYMD,
+//            RString txtShonin,
+//            RString txtKariukeYMD,
+//            RString txtEnchoShinseiYMD
+//    ) {
+//        dgKyufuhiKashitsukekinList_Row item = new dgKyufuhiKashitsukekinList_Row(
+//                txtHihoNo,
+//                txtHihokenshaName,
+//                txtHihokenshaKana,
+//                txtUketsukeYMD,
+//                txtShinseiYMD,
+//                txtKaishiYMD,
+//                txtShuryoYMD,
+//                txtServiceShurui,
+//                txtSeikyugaku,
+//                txtShinseigaku,
+//                txtKetteiYMD,
+//                txtShonin,
+//                txtKariukeYMD,
+//                txtEnchoShinseiYMD
+//        );
+//        return item;
+//    }
 }

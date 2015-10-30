@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 給付費貸付金償還期限変更を管理するクラスです。
  */
-public class KyufuhiKashitsukekinShokanKigenHenko extends ModelBase<KyufuhiKashitsukekinShokanKigenHenkoIdentifier, DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity, KyufuhiKashitsukekinShokanKigenHenko> implements Serializable {
+public class KyufuhiKashitsukekinShokanKigenHenko 
+extends ModelBase<KyufuhiKashitsukekinShokanKigenHenkoIdentifier, 
+        DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity, 
+        KyufuhiKashitsukekinShokanKigenHenko> implements Serializable {
 
     private final DbT3089KyufuhiKashitsukekinShokanKigenHenkoEntity entity;
     private final KyufuhiKashitsukekinShokanKigenHenkoIdentifier id;

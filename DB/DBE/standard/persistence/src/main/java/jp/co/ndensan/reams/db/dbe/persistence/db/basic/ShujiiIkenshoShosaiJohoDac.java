@@ -22,7 +22,8 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
  *
  * @author N8156 宮本 康
  */
-public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIkenshoShosaiJohoEntity>, IDeletable<DbT5013ShujiiIkenshoShosaiJohoEntity> {
+public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIkenshoShosaiJohoEntity>,
+        IDeletable<DbT5013ShujiiIkenshoShosaiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -33,8 +34,8 @@ public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIke
         return accessor.select()
                 .table(DbT5013ShujiiIkenshoShosaiJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ikenshoIraiRirekiNo, 意見書履歴番号.value())))
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ikenshoIraiRirekiNo, 意見書履歴番号.value())))
                 .toObject(DbT5013ShujiiIkenshoShosaiJohoEntity.class);
     }
 
@@ -71,8 +72,8 @@ public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIke
         return accessor.select()
                 .table(DbT5013ShujiiIkenshoShosaiJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
-                eq(ikenshoIraiRirekiNo, entity.getIkenshoIraiRirekiNo())))
+                                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
+                                eq(ikenshoIraiRirekiNo, entity.getIkenshoIraiRirekiNo())))
                 .getCount();
     }
 }

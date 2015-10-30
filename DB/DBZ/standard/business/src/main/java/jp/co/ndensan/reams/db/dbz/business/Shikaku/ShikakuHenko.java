@@ -53,44 +53,84 @@ public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
         return this == NOTHING;
     }
 
-    public FlexibleDate 変更日() {
+    /**
+     * get変更日を取得します。
+     *
+     * @return 変更日
+     */
+    public FlexibleDate get変更日() {
         return 変更日;
     }
 
-    public FlexibleDate 取得日() {
+    /**
+     * get取得日を取得します。
+     *
+     * @return 取得日
+     */
+    public FlexibleDate get取得日() {
         return 取得日;
     }
 
-    public FlexibleDate 喪失日() {
+    /**
+     * get喪失日を取得します。
+     *
+     * @return 喪失日
+     */
+    public FlexibleDate get喪失日() {
         return 喪失日;
     }
 
-    public FlexibleDate 最新資格取得日() {
+    /**
+     * get最新資格取得日を取得します。
+     *
+     * @return 最新資格取得日
+     */
+    public FlexibleDate get最新資格取得日() {
         return 最新資格取得日;
     }
 
-    public FlexibleDate 最新資格喪失日() {
+    /**
+     * get最新資格喪失日を取得します。
+     *
+     * @return 最新資格喪失日
+     */
+    public FlexibleDate get最新資格喪失日() {
         return 最新資格喪失日;
     }
 
-    public FlexibleDate 一号資格取得日() {
+    /**
+     * get一号資格取得日を取得します。
+     *
+     * @return 一号資格取得日
+     */
+    public FlexibleDate get一号資格取得日() {
         return 一号資格取得日;
     }
 
-    public FlexibleDate 最新資格変更日() {
+    /**
+     * get最新資格変更日を取得します。
+     *
+     * @return 最新資格変更日
+     */
+    public FlexibleDate get最新資格変更日() {
         return 最新資格変更日;
     }
 
-    public RString 変更事由() {
+    /**
+     * get変更事由を取得します。
+     *
+     * @return 変更事由
+     */
+    public RString get変更事由() {
         return 変更事由;
     }
 
-    public Optional< DbT1001HihokenshaDaichoEntity> get次履歴() {
+    public Optional<DbT1001HihokenshaDaichoEntity> get次履歴() {
 
         return get次履歴();
     }
 
-    public Optional< DbT1001HihokenshaDaichoEntity> get前履歴() {
+    public Optional<DbT1001HihokenshaDaichoEntity> get前履歴() {
         return get前履歴();
     }
 

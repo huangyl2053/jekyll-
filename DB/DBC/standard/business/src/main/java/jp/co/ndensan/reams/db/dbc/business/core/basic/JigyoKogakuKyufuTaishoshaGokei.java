@@ -8,19 +8,21 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 事業高額介護サービス費給付対象者合計を管理するクラスです。
  */
-public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTaishoshaGokeiIdentifier, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity, JigyoKogakuKyufuTaishoshaGokei> implements Serializable {
+public class JigyoKogakuKyufuTaishoshaGokei
+        extends ModelBase<JigyoKogakuKyufuTaishoshaGokeiIdentifier, DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity, JigyoKogakuKyufuTaishoshaGokei>
+        implements Serializable {
 
     private final DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity entity;
     private final JigyoKogakuKyufuTaishoshaGokeiIdentifier id;
@@ -183,7 +185,7 @@ public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTa
      *
      * @return 境界層対象者フラグ
      */
-    public boolean get境界層対象者フラグ() {
+    public boolean is境界層対象者フラグ() {
         return entity.getKyokaisoTaishoshaFlag();
     }
 
@@ -192,7 +194,7 @@ public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTa
      *
      * @return 社会福祉法人軽減対象フラグ
      */
-    public boolean get社会福祉法人軽減対象フラグ() {
+    public boolean is社会福祉法人軽減対象フラグ() {
         return entity.getHojinKeigenTaishoFlag();
     }
 
@@ -201,7 +203,7 @@ public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTa
      *
      * @return 高額対象外フラグ
      */
-    public boolean get高額対象外フラグ() {
+    public boolean is高額対象外フラグ() {
         return entity.getKogakuTaishoGaiFlag();
     }
 
@@ -210,7 +212,7 @@ public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTa
      *
      * @return 自動償還対象フラグ
      */
-    public boolean get自動償還対象フラグ() {
+    public boolean is自動償還対象フラグ() {
         return entity.getJidoShokanTaishoFlag();
     }
 
@@ -227,8 +229,7 @@ public class JigyoKogakuKyufuTaishoshaGokei extends ModelBase<JigyoKogakuKyufuTa
     /**
      * 事業高額介護サービス費給付対象者合計の識別子{@link JigyoKogakuKyufuTaishoshaGokeiIdentifier}を返します。
      *
-     * @return
-     * 事業高額介護サービス費給付対象者合計の識別子{@link JigyoKogakuKyufuTaishoshaGokeiIdentifier}
+     * @return 事業高額介護サービス費給付対象者合計の識別子{@link JigyoKogakuKyufuTaishoshaGokeiIdentifier}
      */
     @Override
     public JigyoKogakuKyufuTaishoshaGokeiIdentifier identifier() {

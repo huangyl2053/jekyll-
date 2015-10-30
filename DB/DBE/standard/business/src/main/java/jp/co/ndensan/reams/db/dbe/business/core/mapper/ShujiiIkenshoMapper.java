@@ -390,7 +390,8 @@ public final class ShujiiIkenshoMapper {
         editor.setResult(ShujiiIkenshoItemKubun.特記事項, entity.getIk_tokkiJiko());
         editor.setResult(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援, entity.getIk_kangoShokuiHomonUmu());
         return new ShujiiIkenshoDetails(
-                entity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()), koroshoIFKubun, editor.getShujiiIkensho());
+                entity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()),
+                koroshoIFKubun, editor.getShujiiIkensho());
 
     }
 }

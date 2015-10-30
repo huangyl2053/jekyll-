@@ -1,32 +1,34 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * DbT7060KaigoJigyoshaの項目定義クラスです
- *
+ * 介護事業者テーブルのエンティティクラスです。
+ * <br/> 介護事業者を管理します。
  */
 public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7060KaigoJigyosha");
+    private static final long serialVersionUID = 8286598893672680244L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -61,9 +63,9 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
     private RString shozaiShichoson;
     private RString serviceJisshiChiiki;
     private Code hojinShubetsu;
-    private Decimal bedSu;
-    private Decimal shozokuNinzu;
-    private Decimal riyoshaSu;
+    private int bedSu;
+    private int shozokuNinzu;
+    private int riyoshaSu;
     private RString biko;
 
     /**
@@ -125,7 +127,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull KaigoJigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -143,7 +145,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param yukoKaishiYMD 有効開始日
      */
-    public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
+    public void setYukoKaishiYMD(@Nonnull FlexibleDate yukoKaishiYMD) {
         this.yukoKaishiYMD = yukoKaishiYMD;
     }
 
@@ -152,6 +154,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 有効終了日
      */
+    @CheckForNull
     public FlexibleDate getYukoShuryoYMD() {
         return yukoShuryoYMD;
     }
@@ -170,6 +173,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 異動日
      */
+    @CheckForNull
     public FlexibleDate getIdoYMD() {
         return idoYMD;
     }
@@ -187,11 +191,11 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 異動事由のgetメソッドです。
      * <br/>
      * <br/>＜Enumで管理＞
-     *
      * <br/>01：固定値
      *
      * @return 異動事由
      */
+    @CheckForNull
     public RString getIdoJiyuCode() {
         return idoJiyuCode;
     }
@@ -200,7 +204,6 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 異動事由のsetメソッドです。
      * <br/>
      * <br/>＜Enumで管理＞
-     *
      * <br/>01：固定値
      *
      * @param idoJiyuCode 異動事由
@@ -214,6 +217,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業開始日
      */
+    @CheckForNull
     public FlexibleDate getJigyoKaishiYMD() {
         return jigyoKaishiYMD;
     }
@@ -232,6 +236,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業休止日
      */
+    @CheckForNull
     public FlexibleDate getJigyoKyushiYMD() {
         return jigyoKyushiYMD;
     }
@@ -250,6 +255,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業再開日
      */
+    @CheckForNull
     public FlexibleDate getJigyoSaikaiYMD() {
         return jigyoSaikaiYMD;
     }
@@ -268,6 +274,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業廃止日
      */
+    @CheckForNull
     public FlexibleDate getJigyoHaishiYMD() {
         return jigyoHaishiYMD;
     }
@@ -295,7 +302,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param jigyoshaName 事業者名称
      */
-    public void setJigyoshaName(AtenaMeisho jigyoshaName) {
+    public void setJigyoshaName(@Nonnull AtenaMeisho jigyoshaName) {
         this.jigyoshaName = jigyoshaName;
     }
 
@@ -313,7 +320,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param jigyoshaNameKana 事業者名称カナ
      */
-    public void setJigyoshaNameKana(AtenaKanaMeisho jigyoshaNameKana) {
+    public void setJigyoshaNameKana(@Nonnull AtenaKanaMeisho jigyoshaNameKana) {
         this.jigyoshaNameKana = jigyoshaNameKana;
     }
 
@@ -322,6 +329,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 郵便番号
      */
+    @CheckForNull
     public YubinNo getYubinNo() {
         return yubinNo;
     }
@@ -340,6 +348,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業者住所
      */
+    @CheckForNull
     public AtenaJusho getJigyoshaAddress() {
         return jigyoshaAddress;
     }
@@ -358,6 +367,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 事業者住所カナ
      */
+    @CheckForNull
     public RString getJigyoshaKanaAddress() {
         return jigyoshaKanaAddress;
     }
@@ -376,6 +386,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 電話番号
      */
+    @CheckForNull
     public TelNo getTelNo() {
         return telNo;
     }
@@ -394,6 +405,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return FAX番号
      */
+    @CheckForNull
     public TelNo getFaxNo() {
         return faxNo;
     }
@@ -412,6 +424,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 宛先部署
      */
+    @CheckForNull
     public RString getAtesakiBusho() {
         return atesakiBusho;
     }
@@ -430,6 +443,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 宛先人名
      */
+    @CheckForNull
     public AtenaMeisho getAtesakininName() {
         return atesakininName;
     }
@@ -448,6 +462,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 宛先人名カナ
      */
+    @CheckForNull
     public AtenaKanaMeisho getAtesakininNamekana() {
         return atesakininNamekana;
     }
@@ -465,25 +480,18 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 指定／基準該当等事業所区分のgetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0009＞
-     *
      * <br/>1:指定事業所
-     *
      * <br/>2:基準該当事業所
-     *
      * <br/>3:相当サービス事業所（地域密着型事業所も含む）
-     *
      * <br/>4:その他
-     *
      * <br/>5:地域密着型事業所
-     *
      * <br/>6:混在型事業所Ⅰ
-     *
      * <br/>7:混在型事業所Ⅱ
-     *
      * <br/>8:介護予防・日常生活支援総合事業事業所
      *
      * @return 指定／基準該当等事業所区分
      */
+    @CheckForNull
     public Code getShiteiKijungaitoJigyoshaKubun() {
         return shiteiKijungaitoJigyoshaKubun;
     }
@@ -492,21 +500,13 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 指定／基準該当等事業所区分のsetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0009＞
-     *
      * <br/>1:指定事業所
-     *
      * <br/>2:基準該当事業所
-     *
      * <br/>3:相当サービス事業所（地域密着型事業所も含む）
-     *
      * <br/>4:その他
-     *
      * <br/>5:地域密着型事業所
-     *
      * <br/>6:混在型事業所Ⅰ
-     *
      * <br/>7:混在型事業所Ⅱ
-     *
      * <br/>8:介護予防・日常生活支援総合事業事業所
      *
      * @param shiteiKijungaitoJigyoshaKubun 指定／基準該当等事業所区分
@@ -520,6 +520,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 所在市町村
      */
+    @CheckForNull
     public RString getShozaiShichoson() {
         return shozaiShichoson;
     }
@@ -538,6 +539,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return サービス実施地域
      */
+    @CheckForNull
     public RString getServiceJisshiChiiki() {
         return serviceJisshiChiiki;
     }
@@ -555,37 +557,24 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 法人等種別のgetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0241＞
-     *
      * <br/>01:社会福祉法人（社協以外）
-     *
      * <br/>02:社会福祉法人（社協）
-     *
      * <br/>03:医療法人
-     *
      * <br/>04:民法法人（社団・財団）
-     *
      * <br/>05:営利法人
-     *
      * <br/>06:非営利法人（ＮＰＯ）
-     *
      * <br/>07:農協
-     *
      * <br/>08:生協
-     *
      * <br/>09:その他法人
-     *
      * <br/>10:地方公共団体（都道府県）
-     *
      * <br/>11:地方公共団体（市町村）
-     *
      * <br/>12:地方公共団体（広域連合・一部事務組合等）
-     *
      * <br/>13:非法人
-     *
      * <br/>99:その他
      *
      * @return 法人等種別
      */
+    @CheckForNull
     public Code getHojinShubetsu() {
         return hojinShubetsu;
     }
@@ -594,33 +583,19 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * 法人等種別のsetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0241＞
-     *
      * <br/>01:社会福祉法人（社協以外）
-     *
      * <br/>02:社会福祉法人（社協）
-     *
      * <br/>03:医療法人
-     *
      * <br/>04:民法法人（社団・財団）
-     *
      * <br/>05:営利法人
-     *
      * <br/>06:非営利法人（ＮＰＯ）
-     *
      * <br/>07:農協
-     *
      * <br/>08:生協
-     *
      * <br/>09:その他法人
-     *
      * <br/>10:地方公共団体（都道府県）
-     *
      * <br/>11:地方公共団体（市町村）
-     *
      * <br/>12:地方公共団体（広域連合・一部事務組合等）
-     *
      * <br/>13:非法人
-     *
      * <br/>99:その他
      *
      * @param hojinShubetsu 法人等種別
@@ -634,7 +609,8 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return ベッド数
      */
-    public Decimal getBedSu() {
+    @CheckForNull
+    public int getBedSu() {
         return bedSu;
     }
 
@@ -643,7 +619,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param bedSu ベッド数
      */
-    public void setBedSu(Decimal bedSu) {
+    public void setBedSu(int bedSu) {
         this.bedSu = bedSu;
     }
 
@@ -652,7 +628,8 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 所属人数
      */
-    public Decimal getShozokuNinzu() {
+    @CheckForNull
+    public int getShozokuNinzu() {
         return shozokuNinzu;
     }
 
@@ -661,7 +638,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param shozokuNinzu 所属人数
      */
-    public void setShozokuNinzu(Decimal shozokuNinzu) {
+    public void setShozokuNinzu(int shozokuNinzu) {
         this.shozokuNinzu = shozokuNinzu;
     }
 
@@ -670,7 +647,8 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 利用者数
      */
-    public Decimal getRiyoshaSu() {
+    @CheckForNull
+    public int getRiyoshaSu() {
         return riyoshaSu;
     }
 
@@ -679,7 +657,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @param riyoshaSu 利用者数
      */
-    public void setRiyoshaSu(Decimal riyoshaSu) {
+    public void setRiyoshaSu(int riyoshaSu) {
         this.riyoshaSu = riyoshaSu;
     }
 
@@ -688,6 +666,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      *
      * @return 備考
      */
+    @CheckForNull
     public RString getBiko() {
         return biko;
     }
@@ -705,8 +684,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * このエンティティの主キーが他の{@literal DbT7060KaigoJigyoshaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7060KaigoJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7060KaigoJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7060KaigoJigyoshaEntity other) {
@@ -724,6 +702,8 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT7060KaigoJigyoshaEntity entity) {

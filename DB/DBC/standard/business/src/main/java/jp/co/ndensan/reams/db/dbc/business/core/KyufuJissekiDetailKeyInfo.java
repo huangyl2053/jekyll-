@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -136,7 +136,7 @@ public class KyufuJissekiDetailKeyInfo {
     }
 
     /**
-     * 前月の情報が存在するか判定する
+     * 前月の情報が存在するか判定する。
      *
      * @return 存在する場合はtrueを返す
      */
@@ -145,7 +145,7 @@ public class KyufuJissekiDetailKeyInfo {
     }
 
     /**
-     * 次月の情報が存在するか判定する
+     * 次月の情報が存在するか判定する。
      *
      * @return 存在する場合はtrueを返す
      */
@@ -154,7 +154,7 @@ public class KyufuJissekiDetailKeyInfo {
     }
 
     /**
-     * 前事業所の情報が存在するか判定する
+     * 前事業所の情報が存在するか判定する。
      *
      * @return 存在する場合はtrueを返す
      */
@@ -163,7 +163,7 @@ public class KyufuJissekiDetailKeyInfo {
     }
 
     /**
-     * 次事業所の情報が存在するか判定する
+     * 次事業所の情報が存在するか判定する。
      *
      * @return 存在する場合はtrueを返す
      */
@@ -172,28 +172,28 @@ public class KyufuJissekiDetailKeyInfo {
     }
 
     /**
-     * キー情報を前月に設定する
+     * キー情報を前月に設定する。
      */
     public void prevMonth() {
         throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * キー情報を次月に設定する
+     * キー情報を次月に設定する。
      */
     public void nextMonth() {
         throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * キー情報を前事業所に設定する
+     * キー情報を前事業所に設定する。
      */
     public void prevJigyosha() {
         throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
-     * キー情報を次事業所に設定する
+     * キー情報を次事業所に設定する。
      */
     public void nextJigyosha() {
         throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.

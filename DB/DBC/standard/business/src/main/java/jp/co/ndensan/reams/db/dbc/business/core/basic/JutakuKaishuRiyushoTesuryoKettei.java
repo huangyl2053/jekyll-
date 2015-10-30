@@ -8,19 +8,21 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 住宅改修理由書作成手数料請求決定を管理するクラスです。
  */
-public class JutakuKaishuRiyushoTesuryoKettei extends ModelBase<JutakuKaishuRiyushoTesuryoKetteiIdentifier, DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity, JutakuKaishuRiyushoTesuryoKettei> implements Serializable {
+public class JutakuKaishuRiyushoTesuryoKettei
+       extends ModelBase<JutakuKaishuRiyushoTesuryoKetteiIdentifier, DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity, JutakuKaishuRiyushoTesuryoKettei>
+       implements Serializable {
 
     private final DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity;
     private final JutakuKaishuRiyushoTesuryoKetteiIdentifier id;
@@ -54,8 +56,7 @@ public class JutakuKaishuRiyushoTesuryoKettei extends ModelBase<JutakuKaishuRiyu
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}より{@link JutakuKaishuRiyushoTesuryoKettei}を生成します。
      *
-     * @param entity
-     * DBより取得した{@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}
+     * @param entity DBより取得した{@link DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}
      */
     public JutakuKaishuRiyushoTesuryoKettei(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修理由書作成手数料請求決定"));
@@ -156,8 +157,7 @@ public class JutakuKaishuRiyushoTesuryoKettei extends ModelBase<JutakuKaishuRiyu
     /**
      * 住宅改修理由書作成手数料請求決定の識別子{@link JutakuKaishuRiyushoTesuryoKetteiIdentifier}を返します。
      *
-     * @return
-     * 住宅改修理由書作成手数料請求決定の識別子{@link JutakuKaishuRiyushoTesuryoKetteiIdentifier}
+     * @return 住宅改修理由書作成手数料請求決定の識別子{@link JutakuKaishuRiyushoTesuryoKetteiIdentifier}
      */
     @Override
     public JutakuKaishuRiyushoTesuryoKetteiIdentifier identifier() {

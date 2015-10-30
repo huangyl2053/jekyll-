@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3080DaisanshaKoiJidanEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護第三者行為示談を管理するクラスです。
  */
-public class DaisanshaKoiJidan extends ModelBase<DaisanshaKoiJidanIdentifier, DbT3080DaisanshaKoiJidanEntity, DaisanshaKoiJidan> implements Serializable {
+public class DaisanshaKoiJidan
+        extends ModelBase<DaisanshaKoiJidanIdentifier, DbT3080DaisanshaKoiJidanEntity, DaisanshaKoiJidan>
+        implements Serializable {
 
     private final DbT3080DaisanshaKoiJidanEntity entity;
     private final DaisanshaKoiJidanIdentifier id;

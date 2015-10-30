@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum KeiyakuNoValidationMessage implements IValidationMessage {
 
     /**
-     * 番号がNullであること
+     * 番号がNullであること。
      */
     番号がNullであること(KeiyakuNoErrorMessage.番号がNullであること);
     private final Message message;
@@ -39,7 +39,7 @@ public enum KeiyakuNoValidationMessage implements IValidationMessage {
     public enum KeiyakuNoErrorMessage implements IMessageGettable {
 
         /**
-         * 番号がNullであること
+         * 番号がNullであること。
          */
         番号がNullであること(1, "契約番号を指定してください。");
         private final int no;

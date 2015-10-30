@@ -22,14 +22,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link DbT5591GogitaiJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5591GogitaiJohoDacTest extends DbeTestDacBase {
 
-    private static final int キー_01 = DEFAULT_合議体番号;
+    private static final int キー_01 = 1;
     private static final int キー_02 = 2;
     private static final int キー_03 = 3;
     private static DbT5591GogitaiJohoDac sut;
@@ -44,7 +46,7 @@ public class DbT5591GogitaiJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_合議体番号,
+                    キー_01,
                     DEFAULT_合議体有効期間開始年月日);
             TestSupport.insert(
                     キー_02,

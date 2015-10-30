@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class SearchResultShoKaishuKanri {
 
-    private final static RString SHO_KOFU_DATA = new RString("dbu0500011/ShoKofuData.yml");
+    private static final RString SHO_KOFU_DATA = new RString("dbu0500011/ShoKofuData.yml");
 
     /**
      * 検索ボタンをクリックした際に実行されます。<br/>
@@ -89,10 +89,8 @@ public class SearchResultShoKaishuKanri {
     private boolean excludeKaishuKirokuZumi(ControlGenerator generator, SearchShoKaishuKanriDiv searchDiv) throws IllegalArgumentException {
         RDate kaishuDate = generator.getAsRDate("回収日");
         CheckBoxList chkKaishuKirokuZumi = searchDiv.getChkKaishuKirokuZumi();
-        if (chkKaishuKirokuZumi.getSelectedItems().isEmpty()) {
-            if (kaishuDate != null) {
-                return true;
-            }
+        if (chkKaishuKirokuZumi.getSelectedItems().isEmpty() && kaishuDate != null) {
+            return true;
         }
         return false;
     }

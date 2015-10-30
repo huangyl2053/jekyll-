@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 境界層措置申請を管理するクラスです。
  */
-public class KyokaisoSochiShinsei extends ModelBase<KyokaisoSochiShinseiIdentifier, DbT1013KyokaisoSochiShinseiEntity, KyokaisoSochiShinsei> implements Serializable {
+public class KyokaisoSochiShinsei extends
+        ModelBase<KyokaisoSochiShinseiIdentifier, DbT1013KyokaisoSochiShinseiEntity, KyokaisoSochiShinsei>
+        implements Serializable {
 
     private final DbT1013KyokaisoSochiShinseiEntity entity;
     private final KyokaisoSochiShinseiIdentifier id;

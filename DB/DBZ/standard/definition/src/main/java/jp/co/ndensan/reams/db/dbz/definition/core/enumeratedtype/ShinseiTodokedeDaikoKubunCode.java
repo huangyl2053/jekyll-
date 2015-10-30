@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 申請届出代行区分の列挙型です。
+ * 申請届出代行区分の列挙型クラスです。
  *
  * @author n8223　朴義一
  */
@@ -18,27 +18,27 @@ public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
 
     /**
      * 本人 <br/>
-     * 本人 : 1
+     * 本人 : 1。
      */
     本人("1"),
     /**
      * 家族 <br/>
-     * 家族 : 2
+     * 家族 : 2。
      */
     家族("2"),
     /**
      * 委任 <br/>
-     * 委任 : 3
+     * 委任 : 3。
      */
     委任("3"),
     /**
      * 代行 <br/>
-     * 代行 : 4
+     * 代行 : 4。
      */
     代行("4"),
     /**
      * その他 <br/>
-     * その他 : 9
+     * その他 : 9。
      */
     その他("9");
     private final RString code;
@@ -61,7 +61,8 @@ public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
      *
      * @param code コード
      * @return 指定のコードに対応するShinseiTodokedeDaikoKubunCode
-     * @throws IllegalArgumentException 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
+     * @throws IllegalArgumentException
+     * 指定のコードに対応するShinseiTodokedeDaikoKubunCodeがないとき
      */
     public static ShinseiTodokedeDaikoKubunCode toValue(RString code) throws IllegalArgumentException {
         for (ShinseiTodokedeDaikoKubunCode target : values()) {

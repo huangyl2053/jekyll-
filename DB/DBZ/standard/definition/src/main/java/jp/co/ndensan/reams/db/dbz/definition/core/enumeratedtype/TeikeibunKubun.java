@@ -10,18 +10,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 定型文区分の列挙型です。
+ * 定型文区分の列挙型クラスです。
  *
  * @author n9606 漢那憲作
  */
 public enum TeikeibunKubun implements IRStringConvertable {
 
     /**
-     * 特記事項 ("0")
+     * 特記事項 ("0")。
      */
     特記事項(new RString("0")),
     /**
-     * 特記事項以外 ("1")
+     * 特記事項以外 ("1")。
      */
     特記事項以外(new RString("1"));
     private final RString code;

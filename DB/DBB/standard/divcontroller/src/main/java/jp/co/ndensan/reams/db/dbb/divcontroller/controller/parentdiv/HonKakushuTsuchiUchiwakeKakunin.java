@@ -26,58 +26,60 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 public class HonKakushuTsuchiUchiwakeKakunin {
 
-    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onLoad(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv) {
+    private static final int LENGTH = 7;
+
+    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onLoad(HonKakushuTsuchiUchiwakeKakuninDiv div) {
         ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> response = new ResponseData<>();
 
-        setParam(honKakushuTsuchiUchiwakeKakuninDiv, new RString("初期"));
+        setParam(div, new RString("初期"));
 
-        response.data = honKakushuTsuchiUchiwakeKakuninDiv;
+        response.data = div;
         return response;
     }
 
-    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onSelect(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv) {
+    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onSelect(HonKakushuTsuchiUchiwakeKakuninDiv div) {
         ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> response = new ResponseData<>();
 
-        setParam(honKakushuTsuchiUchiwakeKakuninDiv, new RString("選択"));
+        setParam(div, new RString("選択"));
 
-        response.data = honKakushuTsuchiUchiwakeKakuninDiv;
+        response.data = div;
         return response;
     }
 
-    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onClick(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv) {
+    public ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> onClick(HonKakushuTsuchiUchiwakeKakuninDiv div) {
         ResponseData<HonKakushuTsuchiUchiwakeKakuninDiv> response = new ResponseData<>();
 
-        setParam(honKakushuTsuchiUchiwakeKakuninDiv, new RString("押下"));
+        setParam(div, new RString("押下"));
 
-        response.data = honKakushuTsuchiUchiwakeKakuninDiv;
+        response.data = div;
         return response;
     }
 
-    private void setParam(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv, RString mode) {
+    private void setParam(HonKakushuTsuchiUchiwakeKakuninDiv div, RString mode) {
 
-        RString No = null;
+        RString no = null;
         if (mode.contains("初期")) {
-            setHonKakushuTsuchiUchiwakeSentaku(honKakushuTsuchiUchiwakeKakuninDiv);
-            No = new RString("1");
+            setHonKakushuTsuchiUchiwakeSentaku(div);
+            no = new RString("1");
 
         } else if (mode.contains("選択")) {
             List<dgKakushuTsuchiUchiwakeSentaku_Row> seletedSettei;
-            seletedSettei = honKakushuTsuchiUchiwakeKakuninDiv.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().getSelectedItems();
+            seletedSettei = div.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().getSelectedItems();
             for (dgKakushuTsuchiUchiwakeSentaku_Row selectData : seletedSettei) {
-                No = selectData.getTxtUchiwake();
+                no = selectData.getTxtUchiwake();
             }
         } else if (mode.contains("押下")) {
 
             dgKakushuTsuchiUchiwakeSentaku_Row clickedItem;
-            clickedItem = honKakushuTsuchiUchiwakeKakuninDiv.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().getClickedItem();
-            No = clickedItem.getTxtUchiwake();
+            clickedItem = div.getHonKakushuTsuchiUchiwakeSentaku().getDgKakushuTsuchiUchiwakeSentaku().getClickedItem();
+            no = clickedItem.getTxtUchiwake();
         }
 
-        setDgTsuchishoSettei(honKakushuTsuchiUchiwakeKakuninDiv, No);
+        setDgTsuchishoSettei(div, no);
     }
 
-    private void setHonKakushuTsuchiUchiwakeSentaku(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv) {
-        HonKakushuTsuchiUchiwakeSentakuDiv uchiwakeSentakuDiv = honKakushuTsuchiUchiwakeKakuninDiv.getHonKakushuTsuchiUchiwakeSentaku();
+    private void setHonKakushuTsuchiUchiwakeSentaku(HonKakushuTsuchiUchiwakeKakuninDiv div) {
+        HonKakushuTsuchiUchiwakeSentakuDiv uchiwakeSentakuDiv = div.getHonKakushuTsuchiUchiwakeSentaku();
 
         List<HashMap> uchiwakeHohoData = YamlLoader.DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/Uchiwake.yml"));
 
@@ -85,11 +87,11 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         dgKakushuTsuchiUchiwakeSentaku_Row item;
 
         for (int i = 1; i <= Integer.parseInt(uchiwakeHohoData.get(0).get("データ数").toString()); i++) {
-            String No = (String) uchiwakeHohoData.get(i).get("内訳No");
-            String 内容 = (String) uchiwakeHohoData.get(i).get("内容");
+            RString no = (RString) uchiwakeHohoData.get(i).get("内訳No");
+            RString 内容 = (RString) uchiwakeHohoData.get(i).get("内容");
 
             item = createRowUchiwakeHoho(
-                    No, 内容);
+                    no, 内容);
             arrayData.add(item);
         }
 
@@ -97,62 +99,62 @@ public class HonKakushuTsuchiUchiwakeKakunin {
         grid.setDataSource(arrayData);
     }
 
-    private void setDgTsuchishoSettei(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv, RString No) {
+    private void setDgTsuchishoSettei(HonKakushuTsuchiUchiwakeKakuninDiv div, RString no) {
         List<HashMap> tsuchishoSetteiData = YamlLoader.DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/TsuchishoSettei.yml"));
 
         List<dgTsuchishoSettei_Row> arrayData = new ArrayList<>();
         dgTsuchishoSettei_Row item;
 
         for (int i = 1; i <= Integer.parseInt(tsuchishoSetteiData.get(0).get("データ数").toString()); i++) {
-            if (No.contains((String) tsuchishoSetteiData.get(i).get("設定No"))) {
-                String 徴収方法 = (String) tsuchishoSetteiData.get(i).get("徴収方法");
-                String 状態 = (String) tsuchishoSetteiData.get(i).get("状態");
-                String 通知書 = (String) tsuchishoSetteiData.get(i).get("通知書");
-                String 対象者 = (String) tsuchishoSetteiData.get(i).get("対象者");
-                String 出力順グループ = (String) tsuchishoSetteiData.get(i).get("出力順グループ");
+            if (no.contains((RString) tsuchishoSetteiData.get(i).get("設定No"))) {
+                RString 徴収方法 = (RString) tsuchishoSetteiData.get(i).get("徴収方法");
+                RString 状態 = (RString) tsuchishoSetteiData.get(i).get("状態");
+                RString 通知書 = (RString) tsuchishoSetteiData.get(i).get("通知書");
+                RString 対象者 = (RString) tsuchishoSetteiData.get(i).get("対象者");
+                RString 出力順グループ = (RString) tsuchishoSetteiData.get(i).get("出力順グループ");
 
                 item = createRowTsuchishoSettei(
                         徴収方法, 状態, 通知書, 対象者, 出力順グループ);
                 arrayData.add(item);
             }
         }
-        DataGrid<dgTsuchishoSettei_Row> grid = honKakushuTsuchiUchiwakeKakuninDiv.getDgTsuchishoSettei();
+        DataGrid<dgTsuchishoSettei_Row> grid = div.getDgTsuchishoSettei();
         grid.setDataSource(arrayData);
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < LENGTH; i++) {
             grid.getDataSource().get(i).getTxtGenkinKozaShitei().setDisabled(true);
         }
     }
 
-    private dgKakushuTsuchiUchiwakeSentaku_Row createRowUchiwakeHoho(String No, String 内容) {
+    private dgKakushuTsuchiUchiwakeSentaku_Row createRowUchiwakeHoho(RString no, RString 内容) {
         dgKakushuTsuchiUchiwakeSentaku_Row rowUchiwakeHohoData = new dgKakushuTsuchiUchiwakeSentaku_Row(new Button(), RString.EMPTY, RString.EMPTY);
 
-        rowUchiwakeHohoData.setTxtJokenMeisho(new RString(内容));
-        rowUchiwakeHohoData.setTxtUchiwake(new RString(No));
+        rowUchiwakeHohoData.setTxtJokenMeisho(内容);
+        rowUchiwakeHohoData.setTxtUchiwake(no);
 
         return rowUchiwakeHohoData;
     }
 
-    private dgTsuchishoSettei_Row createRowTsuchishoSettei(String 徴収方法, String 状態, String 通知書, String 対象者, String 出力順グループ) {
+    private dgTsuchishoSettei_Row createRowTsuchishoSettei(RString 徴収方法, RString 状態, RString 通知書, RString 対象者, RString 出力順グループ) {
         dgTsuchishoSettei_Row rowTsuchishoSetteiData = new dgTsuchishoSettei_Row(RString.EMPTY, RString.EMPTY, new DropDownList(), new DropDownList(), new TextBox());
 
-        if (通知書.equals("決定通知書")) {
-            通知書 = "key0";
-        } else if (通知書.equals("変更兼特徴中止通知書")) {
-            通知書 = "key1";
-        } else if (通知書.equals("発行しない")) {
-            通知書 = "key2";
+        if (new RString("決定通知書").equals(通知書)) {
+            通知書 = new RString("key0");
+        } else if (new RString("変更兼特徴中止通知書").equals(通知書)) {
+            通知書 = new RString("key1");
+        } else if (new RString("発行しない").equals(通知書)) {
+            通知書 = new RString("key2");
         }
 
         if (出力順グループ == null) {
-            出力順グループ = "";
+            出力順グループ = new RString("");
         }
 
-        rowTsuchishoSetteiData.setTxtChosyuHoho(new RString(徴収方法));
-        rowTsuchishoSetteiData.setTxtJotai(new RString(状態));
-        rowTsuchishoSetteiData.getTxtTsuchisyoShitei().setSelectedItem(new RString(通知書));
-        rowTsuchishoSetteiData.getTxtGenkinKozaShitei().setSelectedItem(new RString(対象者));
-        rowTsuchishoSetteiData.getTxtHakkojiGroup().setValue(new RString(出力順グループ));
+        rowTsuchishoSetteiData.setTxtChosyuHoho(徴収方法);
+        rowTsuchishoSetteiData.setTxtJotai(状態);
+        rowTsuchishoSetteiData.getTxtTsuchisyoShitei().setSelectedItem(通知書);
+        rowTsuchishoSetteiData.getTxtGenkinKozaShitei().setSelectedItem(対象者);
+        rowTsuchishoSetteiData.getTxtHakkojiGroup().setValue(出力順グループ);
 
         return rowTsuchishoSetteiData;
     }

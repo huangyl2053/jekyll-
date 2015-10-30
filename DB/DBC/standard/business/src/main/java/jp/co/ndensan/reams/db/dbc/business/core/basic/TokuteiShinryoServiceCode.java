@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 特定診療サービスコードを管理するクラスです。
  */
-public class TokuteiShinryoServiceCode extends ModelBase<TokuteiShinryoServiceCodeIdentifier, DbT7120TokuteiShinryoServiceCodeEntity, TokuteiShinryoServiceCode> implements Serializable {
+public class TokuteiShinryoServiceCode 
+extends ModelBase<TokuteiShinryoServiceCodeIdentifier, 
+        DbT7120TokuteiShinryoServiceCodeEntity, 
+        TokuteiShinryoServiceCode> implements Serializable {
 
     private final DbT7120TokuteiShinryoServiceCodeEntity entity;
     private final TokuteiShinryoServiceCodeIdentifier id;

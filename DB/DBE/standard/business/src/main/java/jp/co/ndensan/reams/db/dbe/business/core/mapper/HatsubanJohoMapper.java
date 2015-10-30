@@ -10,20 +10,20 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5020HatsubanKanriJohoEntity
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
- * 発番情報のビジネスクラスとエンティティの変換を行うクラスです
+ * 発番情報のビジネスクラスとエンティティの変換を行うクラスです。
  *
  * @author N1013 松本直樹
  */
 public final class HatsubanJohoMapper {
 
     /**
-     * インスタンス化を防ぐためのプライベートコンストラクタです
+     * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
     private HatsubanJohoMapper() {
     }
 
     /**
-     * 発番管理情報エンティティから発番情報への対応付けを行います
+     * 発番管理情報エンティティから発番情報への対応付けを行います。
      *
      * @param 発番管理情報Entity 発番管理情報Entity
      * @return 発番情報

@@ -43,7 +43,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N2810 久保 里史
  */
-public class KokuhorenTorikomiConfigKeysFactory {
+public final class KokuhorenTorikomiConfigKeysFactory {
+
+    private KokuhorenTorikomiConfigKeysFactory() {
+
+    }
 
     public static IConfigKeysKokuhorenTorikomi getEnumValues(RString 交換情報識別番号) {
 

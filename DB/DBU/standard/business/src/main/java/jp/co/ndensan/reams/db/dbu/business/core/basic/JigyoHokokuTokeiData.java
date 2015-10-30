@@ -284,8 +284,7 @@ public class JigyoHokokuTokeiData extends ParentModelBase<JigyoHokokuTokeiDataId
     }
 
     /**
-     * 事業報告統計データのみを変更対象とします。<br/>
-     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 事業報告統計データのみを変更対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link JigyoHokokuTokeiData}
      */
@@ -300,8 +299,7 @@ public class JigyoHokokuTokeiData extends ParentModelBase<JigyoHokokuTokeiDataId
     }
 
     /**
-     * 保持する事業報告統計データを削除対象とします。<br/>
-     * {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する事業報告統計データを削除対象とします。<br/> {@link DbT7021JigyoHokokuTokeiDataEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JigyoHokokuTokeiData}
      */
@@ -334,7 +332,8 @@ public class JigyoHokokuTokeiData extends ParentModelBase<JigyoHokokuTokeiDataId
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1;// TODO serialVersionUIDを生成してください
+        // TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1;
         private final DbT7021JigyoHokokuTokeiDataEntity entity;
         private final JigyoHokokuTokeiDataIdentifier id;
 

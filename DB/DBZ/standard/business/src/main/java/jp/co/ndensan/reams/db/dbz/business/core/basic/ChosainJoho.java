@@ -204,7 +204,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 
@@ -279,7 +279,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5913ChosainJohoEntity entity;
         private final ChosainJohoIdentifier id;
 

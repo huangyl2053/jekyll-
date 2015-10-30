@@ -16,12 +16,11 @@ public enum NoryokuMiteikaNinchishoKoreishaShihyoCodeSpec implements IPredicate<
 
                 /**
                  *
-                 * @param noryokuMiteikaNinchishoKoreishaShihyoCode
-                 * 運動能力未低下認知症高齢者の指標コード
+                 * @param noryokuKoreishaShihyoCode 運動能力未低下認知症高齢者の指標コード
                  * @return true：仕様を満たす、false：仕様を満たさない
                  */
                 @Override
-                public boolean apply(NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuMiteikaNinchishoKoreishaShihyoCode) {
+                public boolean apply(NoryokuMiteikaNinchishoKoreishaShihyoCode noryokuKoreishaShihyoCode) {
                     return true;
                 }
             }

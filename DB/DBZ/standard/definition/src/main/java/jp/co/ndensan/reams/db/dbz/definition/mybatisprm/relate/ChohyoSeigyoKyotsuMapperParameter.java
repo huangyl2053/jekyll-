@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 /**
  * 帳票制御共通を特定するためのMyBatis用パラメータクラスです。
  */
-@lombok.Getter
-public class ChohyoSeigyoKyotsuMapperParameter {
+public final class ChohyoSeigyoKyotsuMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
@@ -69,4 +68,41 @@ public class ChohyoSeigyoKyotsuMapperParameter {
             SubGyomuCode 主キー1) {
         return new ChohyoSeigyoKyotsuMapperParameter(主キー1, ReportId.EMPTY, true, false);
     }
+
+    /**
+     * get主キー1。
+     *
+     * @return 主キー1
+     */
+    public SubGyomuCode get主キー1() {
+        return 主キー1;
+    }
+
+    /**
+     * get主キー2。
+     *
+     * @return 主キー2
+     */
+    public ReportId get主キー2() {
+        return 主キー2;
+    }
+
+    /**
+     * isUses主キー1。
+     *
+     * @return uses主キー1
+     */
+    public boolean isUses主キー1() {
+        return uses主キー1;
+    }
+
+    /**
+     * isUses主キー2。
+     *
+     * @return uses主キー2
+     */
+    public boolean isUses主キー2() {
+        return uses主キー2;
+    }
+
 }

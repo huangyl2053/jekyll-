@@ -23,7 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求特定入所者介護サービス費用を管理するクラスです。
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo 
+extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, 
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, 
+        ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
     private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;

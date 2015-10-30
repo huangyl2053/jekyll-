@@ -25,7 +25,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 再審査申立を管理するクラスです。
  */
-public class SaishinsaMoshitate extends ModelBase<SaishinsaMoshitateIdentifier, DbT3062SaishinsaMoshitateEntity, SaishinsaMoshitate> implements Serializable {
+public class SaishinsaMoshitate 
+extends ModelBase<SaishinsaMoshitateIdentifier, 
+        DbT3062SaishinsaMoshitateEntity, 
+        SaishinsaMoshitate> implements Serializable {
 
     private final DbT3062SaishinsaMoshitateEntity entity;
     private final SaishinsaMoshitateIdentifier id;
@@ -215,7 +218,7 @@ public class SaishinsaMoshitate extends ModelBase<SaishinsaMoshitateIdentifier, 
      *
      * @return 国保連再送付有フラグ
      */
-    public boolean get国保連再送付有フラグ() {
+    public boolean is国保連再送付有フラグ() {
         return entity.getKokuhirenSaiSofuAriFlag();
     }
 

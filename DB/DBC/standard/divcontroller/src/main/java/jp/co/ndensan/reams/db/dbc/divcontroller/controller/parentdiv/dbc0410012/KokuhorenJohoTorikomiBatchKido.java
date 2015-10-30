@@ -5,26 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410012;
 
-import java.util.Collections;
-import java.util.Date;
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenJohoTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.helper.KokuhorenJohoTorikomiValidationHelper;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -33,8 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class KokuhorenJohoTorikomiBatchKido {
 
-    private final RString 同月過誤分ファイル名 = new RString("01110000");
-    private final RString 通常分ファイル名 = new RString("11100000");
+//    private final RString 同月過誤分ファイル名 = new RString("01110000");
+//    private final RString 通常分ファイル名 = new RString("11100000");
 
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
@@ -66,7 +59,7 @@ public class KokuhorenJohoTorikomiBatchKido {
 
     public ResponseData validationCheck(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
-        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
+//        KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
         pairs.add(KokuhorenJohoTorikomiValidationHelper.validate(panel.getDogetsuKagobun(), panel.getTsujobun(), panel.getCommonShutsuryokuJun()));
@@ -81,41 +74,41 @@ public class KokuhorenJohoTorikomiBatchKido {
 //        setVisible(selectedrow.get交換識別番号(), panel);
 //        setDisplayData(selectedrow, panel);
 //    }
-    private void setVisible(RString 交換識別番号, KokuhorenJohoTorikomiBatchKidoDiv panel) {
-        switch (交換識別番号.toString()) {
-            case "151":
-            case "152":
-            case "632":
-            case "741":
-            case "121":
-            case "122":
-                panel.getPnlShutsuryokuJun().setDisplayNone(true);
-            case "5C3":
-            case "112":
-            case "161":
-            case "171":
-            case "172":
-            case "651":
-            case "652":
-            case "641":
-            case "533":
-            case "114":
-            case "221":
-            case "222":
-            case "331":
-            case "351":
-            case "37J":
-            case "37H":
-            case "386":
-            case "38B":
-            case "38P":
-            case "175":
-            case "162":
-                panel.getPnlShoritaishoJoho().setDisplayNone(true);
-            case "111":
-            default:
-        }
-    }
+//    private void setVisible(RString 交換識別番号, KokuhorenJohoTorikomiBatchKidoDiv panel) {
+//        switch (交換識別番号.toString()) {
+//            case "151":
+//            case "152":
+//            case "632":
+//            case "741":
+//            case "121":
+//            case "122":
+//                panel.getPnlShutsuryokuJun().setDisplayNone(true);
+//            case "5C3":
+//            case "112":
+//            case "161":
+//            case "171":
+//            case "172":
+//            case "651":
+//            case "652":
+//            case "641":
+//            case "533":
+//            case "114":
+//            case "221":
+//            case "222":
+//            case "331":
+//            case "351":
+//            case "37J":
+//            case "37H":
+//            case "386":
+//            case "38B":
+//            case "38P":
+//            case "175":
+//            case "162":
+//                panel.getPnlShoritaishoJoho().setDisplayNone(true);
+//            case "111":
+//            default:
+//        }
+//    }
 
 //    private void setDisplayData(KokuhorenJohoTorikomiBatchKidoModel selectedrow, KokuhorenJohoTorikomiBatchKidoDiv panel) {
 //      KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();

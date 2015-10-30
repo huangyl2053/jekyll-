@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票_概況調査_施設利用を管理するクラスです。
  */
-public class NinteichosahyoShisetsuRiyo extends ParentModelBase<NinteichosahyoShisetsuRiyoIdentifier, DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo> implements Serializable {
+public class NinteichosahyoShisetsuRiyo extends
+        ParentModelBase<NinteichosahyoShisetsuRiyoIdentifier, 
+        DbT5210NinteichosahyoShisetsuRiyoEntity, NinteichosahyoShisetsuRiyo> implements Serializable {
 
     private final DbT5210NinteichosahyoShisetsuRiyoEntity entity;
     private final NinteichosahyoShisetsuRiyoIdentifier id;
@@ -118,7 +120,7 @@ public class NinteichosahyoShisetsuRiyo extends ParentModelBase<NinteichosahyoSh
      *
      * @return 施設利用フラグ
      */
-    public boolean get施設利用フラグ() {
+    public boolean is施設利用フラグ() {
         return entity.getShisetsuRiyoFlag();
     }
 
@@ -193,7 +195,7 @@ public class NinteichosahyoShisetsuRiyo extends ParentModelBase<NinteichosahyoSh
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5210NinteichosahyoShisetsuRiyoEntity entity;
         private final NinteichosahyoShisetsuRiyoIdentifier id;
 

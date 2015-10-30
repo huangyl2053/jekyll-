@@ -7,13 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.YukoShinsakaiIinInputGuideDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.dgYukoShinsakaiIin_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 現在有効な審査会委員の一覧を表示し、選択することができる入力補助ダイアログの処理です。
@@ -49,21 +46,20 @@ public class YukoShinsakaiIinInputGuide {
         grid.setDataSource(dataSource);
     }
 
-    private dgYukoShinsakaiIin_Row toShinsakaiIinRow(ShinsakaiIin shinsakaiIin) {
-        dgYukoShinsakaiIin_Row row = new dgYukoShinsakaiIin_Row(RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        row.setShinsakaiIinCode(shinsakaiIin.get審査会委員コード().value());
-        row.getKaishiDate().setValue(shinsakaiIin.get委員着任期間().getFrom());
-        row.setGender(shinsakaiIin.get性別().getCommonName());
-        row.setJigyoshaCode(shinsakaiIin.get事業者番号().getColumnValue());
-        row.setJigyoshaMeisho(new RString("testest"));
-        row.setJigyosha(row.getJigyoshaCode().concat(":").concat(row.getJigyoshaMeisho()));
-        row.setJusho(shinsakaiIin.get住所().getColumnValue());
-        row.setShimei(shinsakaiIin.get氏名().getColumnValue());
-        row.setTelNo(shinsakaiIin.get電話番号().getColumnValue());
-        return row;
-    }
-
+//    private dgYukoShinsakaiIin_Row toShinsakaiIinRow(ShinsakaiIin shinsakaiIin) {
+//        dgYukoShinsakaiIin_Row row = new dgYukoShinsakaiIin_Row(RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY,
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//        row.setShinsakaiIinCode(shinsakaiIin.get審査会委員コード().value());
+//        row.getKaishiDate().setValue(shinsakaiIin.get委員着任期間().getFrom());
+//        row.setGender(shinsakaiIin.get性別().getCommonName());
+//        row.setJigyoshaCode(shinsakaiIin.get事業者番号().getColumnValue());
+//        row.setJigyoshaMeisho(new RString("testest"));
+//        row.setJigyosha(row.getJigyoshaCode().concat(":").concat(row.getJigyoshaMeisho()));
+//        row.setJusho(shinsakaiIin.get住所().getColumnValue());
+//        row.setShimei(shinsakaiIin.get氏名().getColumnValue());
+//        row.setTelNo(shinsakaiIin.get電話番号().getColumnValue());
+//        return row;
+//    }
     /**
      * 共有子Divの読み込み時に実行します。 現在有効な審査会委員の情報をグリッドに表示します。
      *

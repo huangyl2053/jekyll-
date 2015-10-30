@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護給付費過誤申立書登録 過誤申立情報を保存する
+ * 介護給付費過誤申立書登録 過誤申立情報を保存する。
  *
  * @author n8223
  */
 public class KagoMoshitatecCommonKiagoKanryoMegPanel {
 
-    final static String Message = "過誤申立書を更新しました。";
+    static final RString MESSAGE = new RString("過誤申立書を更新しました。");
 
     public ResponseData<KagoMoshitatecCommonKiagoKanryoMegPanelDiv> onClick_btnSave(KagoMoshitatecCommonKiagoKanryoMegPanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListPanel) {
         setKagoMoshitatecCommonKiagoKanryoMessg(panel, gaitoshaListPanel);
@@ -30,7 +30,7 @@ public class KagoMoshitatecCommonKiagoKanryoMegPanel {
 
         if (gaitoshaListPanel.getDgHihokenshaSearchGaitosha().getDataSource().size() >= 0) {
 
-            KaigoKanryoMessage.setMessage(panel.getCommonKiagoKanryoMessageChildDiv1(), new RString(Message));
+            KaigoKanryoMessage.setMessage(panel.getCommonKiagoKanryoMessageChildDiv1(), MESSAGE);
         }
     }
 }

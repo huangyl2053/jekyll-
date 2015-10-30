@@ -15,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class GogitaiYukoKikanKaishiDateValidator {
 
-    private final GogitaiYukoKikanKaishiDate GogitaiYukoKikanKaishiDate;
+    private final GogitaiYukoKikanKaishiDate gogitaiYukoKikanKaishiDate;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
-     * @param GogitaiYukoKikanKaishiDate 合議体（介護認定審査会）の長や長代理、委員などの区分コード
+     * @param gogitaiYukoKikanKaishiDate
      */
-    public GogitaiYukoKikanKaishiDateValidator(GogitaiYukoKikanKaishiDate GogitaiYukoKikanKaishiDate) {
-        requireNonNull(GogitaiYukoKikanKaishiDate, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体（介護認定審査会）の長や長代理、委員などの区分コード"));
-        this.GogitaiYukoKikanKaishiDate = GogitaiYukoKikanKaishiDate;
+    public GogitaiYukoKikanKaishiDateValidator(GogitaiYukoKikanKaishiDate gogitaiYukoKikanKaishiDate) {
+        requireNonNull(gogitaiYukoKikanKaishiDate, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体（介護認定審査会）の長や長代理、委員などの区分コード"));
+        this.gogitaiYukoKikanKaishiDate = gogitaiYukoKikanKaishiDate;
     }
 
     /**
@@ -34,7 +34,7 @@ public class GogitaiYukoKikanKaishiDateValidator {
      * @return {@link IValidationMessages}
      */
     public IValidationMessages validate() {
-        return ValidateChain.validateStart(GogitaiYukoKikanKaishiDate)
+        return ValidateChain.validateStart(gogitaiYukoKikanKaishiDate)
                 .messages();
     }
 }

@@ -18,7 +18,7 @@ public class NinteiYukoKikanTsukisuValidator {
     private final NinteiYukoKikanTsukisu ninteiYukoKikanTsukisu;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param ninteiYukoKikanTsukisu 認定有効期間月数
      */

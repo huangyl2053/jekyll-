@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class HonsanteiChohyoHakko2 {
 
     /**
-     * onLoad
+     * onLoad。
      *
      * @param div
      * @return ResponseData

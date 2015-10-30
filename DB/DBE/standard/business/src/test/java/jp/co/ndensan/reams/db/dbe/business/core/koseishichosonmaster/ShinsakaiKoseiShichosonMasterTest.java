@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -23,6 +24,7 @@ import org.junit.runner.RunWith;
  * @author n8223 朴義一
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShinsakaiKoseiShichosonMasterTest extends DbdTestBase {
 
     private static ShinsakaiKoseiShichosonMaster sut;

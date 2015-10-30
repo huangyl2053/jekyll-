@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShoKaishuKanriTaishoshaJoho {
 
-    private final static RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
+    private static final RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
 
     /**
      * 証回収状況検索結果グリッドから、処理の対象とするデータを1つ選んだときに実行されます。<br/>

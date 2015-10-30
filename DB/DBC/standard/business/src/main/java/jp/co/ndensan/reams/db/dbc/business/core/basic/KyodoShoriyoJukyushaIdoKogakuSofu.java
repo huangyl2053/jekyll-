@@ -22,7 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 共同処理用受給者異動高額送付を管理するクラスです。
  */
-public class KyodoShoriyoJukyushaIdoKogakuSofu extends ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier, DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity, KyodoShoriyoJukyushaIdoKogakuSofu> implements Serializable {
+public class KyodoShoriyoJukyushaIdoKogakuSofu 
+extends ModelBase<KyodoShoriyoJukyushaIdoKogakuSofuIdentifier,
+        DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity, 
+        KyodoShoriyoJukyushaIdoKogakuSofu> implements Serializable {
 
     private final DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity entity;
     private final KyodoShoriyoJukyushaIdoKogakuSofuIdentifier id;
@@ -186,7 +189,7 @@ public class KyodoShoriyoJukyushaIdoKogakuSofu extends ModelBase<KyodoShoriyoJuk
      *
      * @return 老齢福祉年金受給有フラグ
      */
-    public boolean get老齢福祉年金受給有フラグ() {
+    public boolean is老齢福祉年金受給有フラグ() {
         return entity.getRoureiFukushiNenkinJukyuAriFlag();
     }
 
@@ -195,7 +198,7 @@ public class KyodoShoriyoJukyushaIdoKogakuSofu extends ModelBase<KyodoShoriyoJuk
      *
      * @return 利用者負担第２段階有フラグ
      */
-    public boolean get利用者負担第２段階有フラグ() {
+    public boolean is利用者負担第２段階有フラグ() {
         return entity.getRiyoshaFutan2DankaiAriFlag();
     }
 
@@ -204,7 +207,7 @@ public class KyodoShoriyoJukyushaIdoKogakuSofu extends ModelBase<KyodoShoriyoJuk
      *
      * @return 支給申請書出力有フラグ
      */
-    public boolean get支給申請書出力有フラグ() {
+    public boolean is支給申請書出力有フラグ() {
         return entity.getShikyuShinseishoOutputAriFlag();
     }
 
@@ -213,7 +216,7 @@ public class KyodoShoriyoJukyushaIdoKogakuSofu extends ModelBase<KyodoShoriyoJuk
      *
      * @return 訂正連絡票フラグ
      */
-    public boolean get訂正連絡票フラグ() {
+    public boolean is訂正連絡票フラグ() {
         return entity.getTeiseiRenrakuhyoFlag();
     }
 

@@ -14,6 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link GeninShikkan}のテストクラスです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class GeninShikkanTest extends DbzTestBase {
 
@@ -113,8 +115,8 @@ public class GeninShikkanTest extends DbzTestBase {
         }
 
         @Test
-        public void get主たる原因疾患フラグは_entityが持つ主たる原因疾患フラグを返す() {
-            assertThat(sut.get主たる原因疾患フラグ(), is(GeninShikkanEntity.getIsShutaruGeninShikkan()));
+        public void is主たる原因疾患フラグは_entityが持つ主たる原因疾患フラグを返す() {
+            assertThat(sut.is主たる原因疾患フラグ(), is(GeninShikkanEntity.getIsShutaruGeninShikkan()));
         }
 
         @Test

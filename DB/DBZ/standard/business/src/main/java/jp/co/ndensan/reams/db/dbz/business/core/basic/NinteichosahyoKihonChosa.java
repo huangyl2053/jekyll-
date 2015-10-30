@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票（基本調査）を管理するクラスです。
  */
-public class NinteichosahyoKihonChosa extends ParentModelBase<NinteichosahyoKihonChosaIdentifier, DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa> implements Serializable {
+public class NinteichosahyoKihonChosa extends 
+        ParentModelBase<NinteichosahyoKihonChosaIdentifier, 
+        DbT5203NinteichosahyoKihonChosaEntity, NinteichosahyoKihonChosa> implements Serializable {
 
     private final DbT5203NinteichosahyoKihonChosaEntity entity;
     private final NinteichosahyoKihonChosaIdentifier id;
@@ -187,7 +189,7 @@ public class NinteichosahyoKihonChosa extends ParentModelBase<NinteichosahyoKiho
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT5203NinteichosahyoKihonChosaEntity entity;
         private final NinteichosahyoKihonChosaIdentifier id;
 

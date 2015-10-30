@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT7052KoseiShichosonShishoMasterの項目定義クラスです
- *
+ * 構成市町村支所マスタテーブルの項目定義クラスです。
+ * <br/> 構成・単独市町村単位の支所を管理する
  */
 public enum DbT7052KoseiShichosonShishoMaster implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -63,7 +64,7 @@ public enum DbT7052KoseiShichosonShishoMaster implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -72,7 +73,7 @@ public enum DbT7052KoseiShichosonShishoMaster implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

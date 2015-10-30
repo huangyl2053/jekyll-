@@ -51,7 +51,7 @@ public final class JushochiTokureiRirekiListValidationHelper {
                 new ValidationMessageControlPair(
                         JushochiTokureiValidationMessage.住所地特例期間と適用除外期間が重複する履歴がある, 住所地特例grid));
 
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         messages.add(JushochiTokureiValidator.setJushochiTokureiData(target)
                 .setJushochiTokureiList(daichoList).validate());

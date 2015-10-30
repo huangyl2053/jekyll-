@@ -23,11 +23,28 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * 世帯情報
+ * 世帯情報。
  *
  * @author n8223
  */
 public class SetaiInfo {
+
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
+    private static final int INDEX_11 = 11;
+    private static final int INDEX_12 = 12;
+    private static final int INDEX_13 = 13;
+    private static final int INDEX_14 = 14;
+    private static final int INDEX_15 = 15;
+    private static final int INDEX_16 = 16;
+    private static final int INDEX_17 = 17;
+    private static final int INDEX_18 = 18;
 
     private static final RString SETAISHOTOKU = new RString("dbc0030011/SetaiShotoku.yml");
     private static final RString OTHER = new RString("dbc0030011/other.yml");
@@ -59,7 +76,7 @@ public class SetaiInfo {
     }
 
     /**
-     * 世帯所得Divのロード
+     * 世帯所得Divのロード。
      *
      * @param
      */
@@ -94,7 +111,7 @@ public class SetaiInfo {
     }
 
     /**
-     * 世帯所得一覧のDataGridの行にデータを代入
+     * 世帯所得一覧のDataGridの行にデータを代入。
      *
      * @param dataGrid
      * @return
@@ -110,44 +127,44 @@ public class SetaiInfo {
         buf.append("<br>");
         buf.append(dataGrid.get(1).toString());
         row.setTxtKetsugo01(new RString(buf.toString()));
-        row.setTxtShimei((RString) dataGrid.get(3));
+        row.setTxtShimei((RString) dataGrid.get(INDEX_3));
 
         //2014.07.07 個人番号
         row.setTxtHihokenshaNo((RString) dataGrid.get(1));
 
-        row.setTxtSonzaiUmuKijunbi((RString) dataGrid.get(7));
-        row.setTxtSonzaiUmuChokkin((RString) dataGrid.get(8));
+        row.setTxtSonzaiUmuKijunbi((RString) dataGrid.get(INDEX_7));
+        row.setTxtSonzaiUmuChokkin((RString) dataGrid.get(INDEX_8));
 
         buf.delete(0, buf.length());
-        buf.append((RString) dataGrid.get(4));
+        buf.append((RString) dataGrid.get(INDEX_4));
         //生年月日と性別の間にスペースを入れる
         buf.append("　");
-        buf.append((RString) dataGrid.get(5));
+        buf.append((RString) dataGrid.get(INDEX_5));
         buf.append("<br>");
-        buf.append((RString) dataGrid.get(6));
+        buf.append((RString) dataGrid.get(INDEX_6));
         row.setTxtKetsugo02(new RString(buf.toString()));
 
         buf.delete(0, buf.length());
-        row.setTxtShubetsu((RString) dataGrid.get(9));
-        row.setTxtIdoYMD((RString) dataGrid.get(10));
-        row.setTxtHaaku((RString) dataGrid.get(11));
-        row.setTxtJuminzei((RString) dataGrid.get(12));
+        row.setTxtShubetsu((RString) dataGrid.get(INDEX_9));
+        row.setTxtIdoYMD((RString) dataGrid.get(INDEX_10));
+        row.setTxtHaaku((RString) dataGrid.get(INDEX_11));
+        row.setTxtJuminzei((RString) dataGrid.get(INDEX_12));
 
-        buf.append((RString) dataGrid.get(13));
+        buf.append((RString) dataGrid.get(INDEX_13));
         buf.append("<br>");
-        buf.append((RString) dataGrid.get(14));
+        buf.append((RString) dataGrid.get(INDEX_14));
         row.setTxtKetsugo03(new RString(buf.toString()));
 
-        row.setTxtJukiIdoJiyu((RString) dataGrid.get(15));
-        row.setTxtJuteiYMD((RString) dataGrid.get(16));
-        row.setTxtJukiIdoJiyu((RString) dataGrid.get(17));
-        row.setTxtDougetsuService((RString) dataGrid.get(18));
+        row.setTxtJukiIdoJiyu((RString) dataGrid.get(INDEX_15));
+        row.setTxtJuteiYMD((RString) dataGrid.get(INDEX_16));
+        row.setTxtJukiIdoJiyu((RString) dataGrid.get(INDEX_17));
+        row.setTxtDougetsuService((RString) dataGrid.get(INDEX_18));
 
         return row;
     }
 
     /**
-     * 世帯所得一覧のYamlを取得
+     * 世帯所得一覧のYamlを取得。
      *
      * @param yamlFileName
      * @return
@@ -175,7 +192,7 @@ public class SetaiInfo {
     }
 
     /**
-     * 世帯所得一覧のYamlをList化
+     * 世帯所得一覧のYamlをList化。
      *
      * @param cg
      * @return
@@ -208,7 +225,7 @@ public class SetaiInfo {
     }
 
     /**
-     * List の 値を確認し、int なら setComma を実行
+     * List の 値を確認し、int なら setComma を実行。
      *
      * @param listData
      * @return
@@ -227,7 +244,7 @@ public class SetaiInfo {
             } else {
                 boolean intCheck = intChecker(checkData);
 
-                if (intCheck == true) {
+                if (intCheck) {
                     formatData.add(setComma((int) listData.get(i)));
                 } else {
                     formatData.add(listData.get(i));
@@ -271,7 +288,7 @@ public class SetaiInfo {
     }
 
     /**
-     * 最新世帯表示のチェックボックスを判断し、一部列の表示、非表示の切り替え
+     * 最新世帯表示のチェックボックスを判断し、一部列の表示、非表示の切り替え。
      *
      * @param div
      */
@@ -298,7 +315,7 @@ public class SetaiInfo {
     }
 
     /**
-     * int をカンマ付で String に変換
+     * int をカンマ付で String に変換。
      *
      * @param intData
      * @return
@@ -310,7 +327,7 @@ public class SetaiInfo {
     }
 
     /**
-     * int かどうかチェック
+     * int かどうかチェック。
      *
      * @param checkData
      * @return

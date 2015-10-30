@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import java.util.TreeMap;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GesshoGetsumatsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
@@ -32,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 public class KyuShichosonShikaku {
 
     private final List<HihokenshaDaicho> 被保険者台帳List;
+    private static final int FOUR = 4;
+    private static final int ELEVEN = 11;
 
     /**
      * コンストラクタです。
@@ -87,8 +87,8 @@ public class KyuShichosonShikaku {
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("基準年度または基準日").evaluate());
         }
 
-        FlexibleDate 開始日 = new FlexibleDate(基準年度.getYearValue(), 4, 1);
-        FlexibleDate 終了日 = get当月末日(開始日.plusMonth(11).getYearMonth());
+        FlexibleDate 開始日 = new FlexibleDate(基準年度.getYearValue(), FOUR, 1);
+        FlexibleDate 終了日 = get当月末日(開始日.plusMonth(ELEVEN).getYearMonth());
         Range<FlexibleDate> 対象期間 = new Range<>(開始日, 終了日);
 
         Map<FlexibleYearMonth, HihokenshaDaicho> map = new TreeMap<>();

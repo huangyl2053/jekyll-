@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum TimeStringValidationMessage implements IValidationMessage {
 
     /**
-     * 桁数が4桁でないこと
+     * 桁数が4桁でないこと。
      */
     桁数が4桁でないこと(TimeStringErrorMessage.桁数が4桁でないこと);
     private final Message message;
@@ -39,7 +39,7 @@ public enum TimeStringValidationMessage implements IValidationMessage {
     public enum TimeStringErrorMessage implements IMessageGettable {
 
         /**
-         * 桁数が4桁ではないこと
+         * 桁数が4桁ではないこと。
          */
         桁数が4桁でないこと(1, "時間は4桁で指定してください");
         private final int no;

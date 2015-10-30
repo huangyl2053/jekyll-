@@ -38,7 +38,7 @@ public class JutakuKaishuhiShikyuKetteishaListPanel {
 
     private void setHakkoDateOutputOrderForKetteishaList(JutakuKaishuhiShikyuKetteishaListPanelDiv panel) {
 
-        String ymlDataName = "ReportPublish.yml";
+        RString ymlDataName = new RString("ReportPublish.yml");
         List<HashMap> ymlData = ymlData(ymlDataName);
 
         //　発行日の初期値を設定する。
@@ -54,7 +54,7 @@ public class JutakuKaishuhiShikyuKetteishaListPanel {
                 .setValue(new RString(ymlData.get(0).get("出力順").toString()));
     }
 
-    private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.DBZ.loadAsList(new RString(ymlDataName));
+    private List<HashMap> ymlData(RString ymlDataName) {
+        return YamlLoader.DBZ.loadAsList(ymlDataName);
     }
 }

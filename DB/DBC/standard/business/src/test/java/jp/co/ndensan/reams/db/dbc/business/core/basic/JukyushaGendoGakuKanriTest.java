@@ -19,11 +19,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 
 /**
  * {@link JukyushaGendoGakuKanri}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class JukyushaGendoGakuKanriTest extends DbcTestBase {
 
     private static DbT7116JukyushaGendoGakuKanriEntity JukyushaGendoGakuKanriEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

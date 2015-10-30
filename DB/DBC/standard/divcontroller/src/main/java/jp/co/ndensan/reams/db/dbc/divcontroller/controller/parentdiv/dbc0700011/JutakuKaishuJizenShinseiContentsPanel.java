@@ -12,9 +12,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.Juta
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011.JutakuKaishuJizenShinseiHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.JutakuKaishuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.ShinseishaInfo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShinseishaInfo.ShinseishaInfoDiv;
-import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaShokaiSimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -100,7 +97,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onChange_ddlShinseishaKubun(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
 
-        String 申請者区分key = panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString();
+//        RString 申請者区分key = new RString(panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString());
 
 //        switch (申請者区分key) {
 //            case "myself":
@@ -135,14 +132,14 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return ResponseData.of(panel).respond();
     }
 
-    private void clearToShinseishaInfo(ShinseishaInfoDiv div) {
-        div.getTxtAddress().clearValue();
-        div.getTxtJigyoshaNo().clearValue();
-        div.getTxtShinseishaName().clearValue();
-        div.getTxtShinseishaNameKana().clearValue();
-        div.getTxtTelNo().clearValue();
-        div.getTxtYubinNo().clearValue();
-    }
+//    private void clearToShinseishaInfo(ShinseishaInfoDiv div) {
+//        div.getTxtAddress().clearValue();
+//        div.getTxtJigyoshaNo().clearValue();
+//        div.getTxtShinseishaName().clearValue();
+//        div.getTxtShinseishaNameKana().clearValue();
+//        div.getTxtTelNo().clearValue();
+//        div.getTxtYubinNo().clearValue();
+//    }
 
 //    private void disableJigyosha(ShinseishaInfoDiv div) {
 //        div.getTxtJigyoshaNo().setDisabled(true);
@@ -158,13 +155,13 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtShinseishaName().setReadOnly(true);
 //        div.getTxtShinseishaNameKana().setReadOnly(true);
 //    }
-    private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
+//    private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
 //        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
 //        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
 //        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
 //        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
-        shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
-    }
+//        shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
+//    }
 
     private void setDefaultData(JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         panel.getJutakuKaishuJizenShinseisha().getTxtShinseiDate().setValue(new RDate("20140711"));
@@ -178,7 +175,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      住宅所有者・被保険者との関係　の初期値をセットします。
      */
 
-    private void setJutakuOwnerData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+//    private void setJutakuOwnerData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
@@ -190,12 +187,12 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
 //        panel.getTxtJutakuOwner().setValue(new RString(jutakuOwner));
 //        panel.getTxtRelationWithHihokensha().setValue(new RString(relationWithHihokensha));
-    }
+//    }
 
     /*
      /住宅改修明細の初期値をセットします。
      */
-    private void setZizenShinseiDetailInput(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+//    private void setZizenShinseiDetailInput(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
@@ -224,19 +221,19 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //
 //        panel.getJutakuJizenShinseiDetailInput().
 //                getJutakuKaishuDetailInput().getTxtEstimatedAmount().setValue(new Decimal(estimatedAmount));
-    }
+//    }
 
     /*
      申請者情報の初期値をセットします。
      */
-    private void setShinseishaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-        ShinseishaInfo.setData(panel.getJutakuKaishuJizenShinseisha(), 0);
-    }
+//    private void setShinseishaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+//        ShinseishaInfo.setData(panel.getJutakuKaishuJizenShinseisha(), 0);
+//    }
 
     /*
      住宅改修理由書の初期値をセットします。
      */
-    private void setShinseiReason(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+//    private void setShinseiReason(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
 //        /////////////////////////////////////////////////////////////////////////////////////////
 //        //JutakuData.xml Read　②
@@ -254,12 +251,12 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        panel.getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName().setValue(new RString(creationJigyoshaName));
 //        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
 //        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorName().setValue(new RString(creatorName));
-    }
+//    }
 
     /*
      口座振替申請情報（UR)の初期値をセットします。
      */
-    private void setShinseiKozaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+//    private void setShinseiKozaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
 //        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
 //
@@ -281,7 +278,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
 //        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
 //        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
-    }
+//    }
 
     private List<dgJutakuKaishuDetail_Row> getShikyuShinseiInputData(JutakuKaishuDetailInputDiv div) {
 

@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.tblKyotakuServi
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -46,97 +44,95 @@ public class KyotakuServiceJikoSakusei {
 
     private List<dgKyotakuServiceJikoSakusei_Row> create居宅サービス一覧() {
         List<dgKyotakuServiceJikoSakusei_Row> arrayData = new ArrayList<>();
-        dgKyotakuServiceJikoSakusei_Row item;
-        Button btn = new Button();
+//        dgKyotakuServiceJikoSakusei_Row item;
+//        Button btn = new Button();
 
         /* ボタン, 事業者No, ｻｰﾋﾞｽｺｰﾄﾞ, 単位, 割引後率, 割引後単位, 回数, サービス単位, 種類限度超過単位, 種類限度内単位, 区分限度超過単位, 区分限度内単位, 単位単価, 費用総額, 給付率, 保険給付額, 利用者負担（保険対象分）, 利用者負担（全額対象分）*/
-        item = createRow(btn, "1234567890", "111111:身体介護１２３４５６７８９", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "53000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567890", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "55000");
-        arrayData.add(item);
-        item = createRow(null, "", "             合計", "", "", "", "", "40000", "5800", "4000", "5000", "4000", "", "40000", "", "36000", "4000", "108000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567891", "111111:身体介護１", "3000", "60", "1800", "30", "54000", "2000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "45000");
-        arrayData.add(item);
-        item = createRow(null, "", "             合計", "", "", "", "", "54000", "2000", "2000", "2500", "2000", "", "20000", "", "18000", "2000", "45000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
-        arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
-        arrayData.add(item);
-        item = createRow(null, "", "             合計", "", "", "", "", "80000", "11600", "8000", "10000", "8000", "", "80000", "", "72000", "8000", "160000");
-        arrayData.add(item);
-
+//        item = createRow(btn, "1234567890", "111111:身体介護１２３４５６７８９", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "53000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567890", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "55000");
+//        arrayData.add(item);
+//        item = createRow(null, "", "             合計", "", "", "", "", "40000", "5800", "4000", "5000", "4000", "", "40000", "", "36000", "4000", "108000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567891", "111111:身体介護１", "3000", "60", "1800", "30", "54000", "2000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "45000");
+//        arrayData.add(item);
+//        item = createRow(null, "", "             合計", "", "", "", "", "54000", "2000", "2000", "2500", "2000", "", "20000", "", "18000", "2000", "45000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
+//        arrayData.add(item);
+//        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
+//        arrayData.add(item);
+//        item = createRow(null, "", "             合計", "", "", "", "", "80000", "11600", "8000", "10000", "8000", "", "80000", "", "72000", "8000", "160000");
+//        arrayData.add(item);
         return arrayData;
     }
 
-    private dgKyotakuServiceJikoSakusei_Row createRow(
-            Button btn,
-            String JigyoshaNo,
-            String ServiceCode,
-            String Unit,
-            String WaribikiRitsu,
-            String WaribikiUnit,
-            String Num,
-            String ServiceUnit,
-            String ShuruiKijunChoka,
-            String ShuruiKijunNai,
-            String KubunKijunChoka,
-            String KubunKijunNai,
-            String UnitTanka,
-            String HiyoTotal,
-            String KyufuRitsu,
-            String HokenKyufuGaku,
-            String HokenFutan,
-            String ZengakuFutan) {
-        dgKyotakuServiceJikoSakusei_Row item = new dgKyotakuServiceJikoSakusei_Row(
-                btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        item.setSelfInfoJigyoshaNo(new RString(JigyoshaNo));
-        item.setSelfInfoServiceCode(new RString(ServiceCode));
-//        if (btn != null) {
-//            item.getSelfInfoBtnSelect().setVisible(true);
-//        } else {
-//            Button button = new Button();
-//            button.setVisible(false);
-//            button.setDisplayNone(true);
-//            button.setDisabled(true);
-//            button.setText(RString.EMPTY);
-//            item.setSelfInfoBtnSelect(button);
-//        }
-        item.setSelfInfoUnit(new RString(stringToKingakuFormat(Unit)));
-        item.setSelfInfoWaribikiRitsu(new RString(WaribikiRitsu));
-        item.setSelfInfoWaribikiUnit(new RString(stringToKingakuFormat(WaribikiUnit)));
-        item.setSelfInfoNum(new RString(Num));
-        item.setSelfInfoServiceUnit(new RString(stringToKingakuFormat(ServiceUnit)));
-        item.setSelfInfoShuruiLimitChokaUnit(new RString(stringToKingakuFormat(ShuruiKijunChoka)));
-        item.setSelfInfoShuruiLimitNaiUnit(new RString(stringToKingakuFormat(ShuruiKijunNai)));
-        item.setSelfInfoKubunLimitChokaUnit(new RString(stringToKingakuFormat(KubunKijunChoka)));
-        item.setSelfInfoKubunLimitNaiUnit(new RString(stringToKingakuFormat(KubunKijunNai)));
-        item.setSelfInfoUnitTanka(new RString(UnitTanka));
-        item.setSelfInfoHiyoTotal(new RString(stringToKingakuFormat(HiyoTotal)));
-        item.setSelfInfoKyufuRitsu(new RString(KyufuRitsu));
-        item.setSelfInfoHokenKyufuGaku(new RString(stringToKingakuFormat(HokenKyufuGaku)));
-        item.setSelfInfoHokenFutan(new RString(stringToKingakuFormat(HokenFutan)));
-        item.setSelfInfoFutanTotal(new RString(stringToKingakuFormat(ZengakuFutan)));
-
-        return item;
-    }
+//    private dgKyotakuServiceJikoSakusei_Row createRow(
+//            Button btn,
+//            String jigyoshaNo,
+//            String serviceCode,
+//            String unit,
+//            String waribikiRitsu,
+//            String waribikiUnit,
+//            String num,
+//            String serviceUnit,
+//            String shuruiKijunChoka,
+//            String shuruiKijunNai,
+//            String kubunKijunChoka,
+//            String kubunKijunNai,
+//            String unitTanka,
+//            String hiyoTotal,
+//            String kyufuRitsu,
+//            String hokenKyufuGaku,
+//            String hokenFutan,
+//            String zengakuFutan) {
+//        dgKyotakuServiceJikoSakusei_Row item = new dgKyotakuServiceJikoSakusei_Row(
+//                btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//        item.setSelfInfoJigyoshaNo(new RString(jigyoshaNo));
+//        item.setSelfInfoServiceCode(new RString(serviceCode));
+////        if (btn != null) {
+////            item.getSelfInfoBtnSelect().setVisible(true);
+////        } else {
+////            Button button = new Button();
+////            button.setVisible(false);
+////            button.setDisplayNone(true);
+////            button.setDisabled(true);
+////            button.setText(RString.EMPTY);
+////            item.setSelfInfoBtnSelect(button);
+////        }
+//        item.setSelfInfoUnit(new RString(stringToKingakuFormat(unit)));
+//        item.setSelfInfoWaribikiRitsu(new RString(waribikiRitsu));
+//        item.setSelfInfoWaribikiUnit(new RString(stringToKingakuFormat(waribikiUnit)));
+//        item.setSelfInfoNum(new RString(num));
+//        item.setSelfInfoServiceUnit(new RString(stringToKingakuFormat(serviceUnit)));
+//        item.setSelfInfoShuruiLimitChokaUnit(new RString(stringToKingakuFormat(shuruiKijunChoka)));
+//        item.setSelfInfoShuruiLimitNaiUnit(new RString(stringToKingakuFormat(shuruiKijunNai)));
+//        item.setSelfInfoKubunLimitChokaUnit(new RString(stringToKingakuFormat(kubunKijunChoka)));
+//        item.setSelfInfoKubunLimitNaiUnit(new RString(stringToKingakuFormat(kubunKijunNai)));
+//        item.setSelfInfoUnitTanka(new RString(unitTanka));
+//        item.setSelfInfoHiyoTotal(new RString(stringToKingakuFormat(hiyoTotal)));
+//        item.setSelfInfoKyufuRitsu(new RString(kyufuRitsu));
+//        item.setSelfInfoHokenKyufuGaku(new RString(stringToKingakuFormat(hokenKyufuGaku)));
+//        item.setSelfInfoHokenFutan(new RString(stringToKingakuFormat(hokenFutan)));
+//        item.setSelfInfoFutanTotal(new RString(stringToKingakuFormat(zengakuFutan)));
+//
+//        return item;
+//    }
 
     /*
      文字列(数字)を金額フォーマットに変更する。
      */
-    private String stringToKingakuFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
-
+//    private String stringToKingakuFormat(String str) {
+//        if (str.isEmpty()) {
+//            return str;
+//        }
+//        return new Decimal(str).toString("##,###,###");
+//    }
     /**
      * 居宅サービス計画情報（自己作成）のデータグリッドで選択した計画を表示する際の処理。
      *

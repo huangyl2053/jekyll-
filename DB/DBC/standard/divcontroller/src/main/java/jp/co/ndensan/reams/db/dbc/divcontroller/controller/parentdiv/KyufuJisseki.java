@@ -66,6 +66,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJisseki {
 
+    private static final int INDEX_6 = 6;
+
     public ResponseData<KyufuJissekiDiv> dispKyufuJisseki(KyufuJissekiDiv panel) {
         ResponseData<KyufuJissekiDiv> response = new ResponseData<>();
 
@@ -268,7 +270,7 @@ public class KyufuJisseki {
 
         for (KyufuJissekiKyotakuService iKyotakuService : kyufuJisseki.getサービス計画費リスト()) {
 
-            RString rsShiteiKijunGaitoJigyoshoKubun = iKyotakuService.get指定基準区分();
+            RString rsShiteiKijunGaitoKubun = iKyotakuService.get指定基準区分();
             RString rsIraiTodokedeYMD = toWareki(iKyotakuService.get届出日());
             RString rsService = iKyotakuService.getサービス();
             RString rsTanisuTanka = toRString(iKyotakuService.get単位数単価());
@@ -284,7 +286,7 @@ public class KyufuJisseki {
             RString rsShinsaYM = toWareki(iKyotakuService.get審査年月());
 
             serviceKeikakuhiList.add(createServiceKeikakuhiFromH2104Row(
-                    rsShiteiKijunGaitoJigyoshoKubun, rsIraiTodokedeYMD, rsService, rsTanisuTanka, rsKettei, rsMeisaiGokei,
+                    rsShiteiKijunGaitoKubun, rsIraiTodokedeYMD, rsService, rsTanisuTanka, rsKettei, rsMeisaiGokei,
                     rsTanisu, rsKaisu, rsServiceTanisu, rsSeikyuKingaku,
                     rsTantoKaigoShienSenmoninNo, rsSaishinsaKaisu, rsKagoKaisu, rsShinsaYM));
         }
@@ -426,11 +428,11 @@ public class KyufuJisseki {
     }
 
     private dgServiceKeikakuhiFromH2104_Row createServiceKeikakuhiFromH2104Row(
-            RString txtShiteiKijunGaitoJigyoshoKubun, RString txtIraiTodokedeYMD, RString txtService,
+            RString txtShiteiKijunGaitoKubun, RString txtIraiTodokedeYMD, RString txtService,
             RString txtTaniTanka, RString txtKettei, RString txtMeisaiGokei, RString txtTanisu, RString txtKaisu, RString txtServiceTanisu,
             RString txtSeikyuKingaku, RString txtTantoKaigoShienSenmoninNo, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
         return new dgServiceKeikakuhiFromH2104_Row(
-                txtShiteiKijunGaitoJigyoshoKubun, txtIraiTodokedeYMD, txtService,
+                txtShiteiKijunGaitoKubun, txtIraiTodokedeYMD, txtService,
                 txtTaniTanka, txtKettei, txtMeisaiGokei, txtTanisu, txtKaisu, txtServiceTanisu,
                 txtSeikyuKingaku, txtTantoKaigoShienSenmoninNo, txtSaishinsaKaisu, txtKagoKaisu, txtShinsaYM, RString.EMPTY);
     }
@@ -508,7 +510,7 @@ public class KyufuJisseki {
         if (data == null || !data.isValid()) {
             return RString.EMPTY;
         }
-        return data.wareki().toDateString().substring(0, 6);
+        return data.wareki().toDateString().substring(0, INDEX_6);
     }
 
     private RString toRString(Decimal data) {

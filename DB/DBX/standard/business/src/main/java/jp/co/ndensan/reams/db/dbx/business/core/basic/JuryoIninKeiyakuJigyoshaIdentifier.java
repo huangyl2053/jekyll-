@@ -35,4 +35,5 @@ public class JuryoIninKeiyakuJigyoshaIdentifier implements Serializable {
         this.受領委任契約開始日 = 受領委任契約開始日;
         this.契約サービス種別 = 契約サービス種別;
     }
+
 }

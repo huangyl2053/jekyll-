@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 新旧被保険者番号変換テーブルを管理するクラスです。
  */
-public class ShinKyuHihokenshaNoHenkan extends ParentModelBase<ShinKyuHihokenshaNoHenkanIdentifier, DbT7026ShinKyuHihokenshaNoHenkanEntity, ShinKyuHihokenshaNoHenkan> implements Serializable {
+public class ShinKyuHihokenshaNoHenkan extends 
+        ParentModelBase<ShinKyuHihokenshaNoHenkanIdentifier, 
+        DbT7026ShinKyuHihokenshaNoHenkanEntity, ShinKyuHihokenshaNoHenkan> implements Serializable {
 
     private final DbT7026ShinKyuHihokenshaNoHenkanEntity entity;
     private final ShinKyuHihokenshaNoHenkanIdentifier id;
@@ -187,7 +189,7 @@ public class ShinKyuHihokenshaNoHenkan extends ParentModelBase<ShinKyuHihokensha
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;// TODO serialVersionUIDを生成してください
+        private static final long serialVersionUID = 1L;
         private final DbT7026ShinKyuHihokenshaNoHenkanEntity entity;
         private final ShinKyuHihokenshaNoHenkanIdentifier id;
 

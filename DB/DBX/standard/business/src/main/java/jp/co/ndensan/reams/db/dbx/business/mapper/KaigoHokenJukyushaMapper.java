@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
- * 介護保険受給者の変換クラスです
+ * 介護保険受給者の変換クラスです。
  *
  * @author N2806 太田 智之
  * @jpName 介護保険受給者マッパー

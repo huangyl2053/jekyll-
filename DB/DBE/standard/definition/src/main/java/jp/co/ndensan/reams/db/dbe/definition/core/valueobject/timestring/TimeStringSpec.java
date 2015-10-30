@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum TimeStringSpec implements IPredicate<TimeString> {
 
     /**
-     * 桁数が4桁であること
+     * 桁数が4桁であること。
      */
     桁数が4桁であること {
                 /**

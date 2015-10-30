@@ -300,7 +300,7 @@ public class KyufujissekiKogakuKaigoServicehiTest extends DbcTestBase {
 
         @Test
         public void get保険者保有給付実績情報削除済フラグは_entityが持つ保険者保有給付実績情報削除済フラグを返す() {
-            assertThat(sut.get保険者保有給付実績情報削除済フラグ(), is(KyufujissekiKogakuKaigoServicehiEntity.getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag()));
+            assertThat(sut.is保険者保有給付実績情報削除済フラグ(), is(KyufujissekiKogakuKaigoServicehiEntity.getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag()));
         }
     }
 

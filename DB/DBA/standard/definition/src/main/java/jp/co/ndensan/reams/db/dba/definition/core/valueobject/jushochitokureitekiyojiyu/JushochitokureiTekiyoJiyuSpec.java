@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureikaijojiyu;
+package jp.co.ndensan.reams.db.dba.definition.core.valueobject.jushochitokureitekiyojiyu;
 
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum JushochitokureiTekiyoJiyuSpec implements IPredicate<JushochitokureiTekiyoJiyu> {
 
     /**
-     * コードがNullでないこと
+     * コードがNullでないこと。
      */
     コードがNullでないこと {
                 /**
@@ -29,7 +29,7 @@ public enum JushochitokureiTekiyoJiyuSpec implements IPredicate<JushochitokureiT
                 }
             },
     /**
-     * 名称がNullでないこと
+     * 名称がNullでないこと。
      */
     名称がNullでないこと {
                 /**

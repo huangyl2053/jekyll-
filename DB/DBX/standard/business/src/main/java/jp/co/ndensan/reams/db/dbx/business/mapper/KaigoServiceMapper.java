@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntit
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 
 /**
- * 介護サービスのコンバーターです
+ * 介護サービスのコンバーターです。
  *
  * @author n8104 小玉　洋一
  * @jpName 介護サービスマッパー

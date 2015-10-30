@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還受領委任契約者を管理するクラスです。
  */
-public class ShokanJuryoininKeiyakusha extends ModelBase<ShokanJuryoininKeiyakushaIdentifier, DbT3078ShokanJuryoininKeiyakushaEntity, ShokanJuryoininKeiyakusha> implements Serializable {
+public class ShokanJuryoininKeiyakusha 
+extends ModelBase<ShokanJuryoininKeiyakushaIdentifier,
+        DbT3078ShokanJuryoininKeiyakushaEntity,
+        ShokanJuryoininKeiyakusha> implements Serializable {
 
     private final DbT3078ShokanJuryoininKeiyakushaEntity entity;
     private final ShokanJuryoininKeiyakushaIdentifier id;

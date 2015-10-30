@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class AtenaJoho {
     //TODO n8178 城間篤人 デモ時の実装のため、現状との不整合が起きている。修正、もしくはオフショアに出すなら破棄の必要があり 2014年11月
 
-    private static final RString FukaKihon = new RString("FukaKihon.yml");
+    private static final RString FUKAKIHON = new RString("FukaKihon.yml");
 
     public ResponseData<AtenaJohoDiv> onLoad(AtenaJohoDiv div) {
         AtenaJohoDiv atenajoho = (AtenaJohoDiv) ViewStateHolder.get("宛名情報", AtenaJohoDiv.class);
@@ -48,7 +48,7 @@ public class AtenaJoho {
         }
 
         //Yaml データ読み込み
-        List<HashMap> yamlArray = YamlLoader.DBB.loadAsList(FukaKihon);
+        List<HashMap> yamlArray = YamlLoader.DBB.loadAsList(FUKAKIHON);
 
         for (HashMap demoData : yamlArray) {
             // コンストラクタにMapを渡して生成。

@@ -53,8 +53,8 @@ public class NinteiShinseiJohoRelateEntity implements Cloneable, Serializable {
      */
     public void initializeMd5ToEntities() {
         this.要介護認定申請情報Entity.initializeMd5();
-        for (NinteichosaIraiJohoRelateEntity RelateEntity : this.認定調査依頼情報RelateEntity) {
-            RelateEntity.initializeMd5ToEntities();
+        for (NinteichosaIraiJohoRelateEntity relateEntity : this.認定調査依頼情報RelateEntity) {
+            relateEntity.initializeMd5ToEntities();
         }
     }
 }

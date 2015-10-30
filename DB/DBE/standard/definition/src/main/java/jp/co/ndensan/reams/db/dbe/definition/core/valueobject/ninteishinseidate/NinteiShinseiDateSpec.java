@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 public enum NinteiShinseiDateSpec implements IPredicate<NinteiShinseiDate> {
 
     /**
-     * 申請年月日がNullでないこと
+     * 申請年月日がNullでないこと。
      */
     申請年月日がNullでないこと {
 

@@ -27,6 +27,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  * @author N8187 久保田 英男
  */
 public class ShokanShikyuTorokuShinseisho {
+    
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_8 = 8;
 
     private List<HashMap> getShokanShikyuTorokuShinseishoYaml() {
         return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseisho.yml"));
@@ -231,7 +237,7 @@ public class ShokanShikyuTorokuShinseisho {
             mado.getTxtShinseiShuryoH().setValue(new Decimal(source.get("終了時").toString()));
             mado.getTxtShinseiShuryoM().setValue(new Decimal(source.get("終了分").toString()));
         } else {
-            HashMap source = getShokanShikyuTorokuShinseishoYamlId(3);
+            HashMap source = getShokanShikyuTorokuShinseishoYamlId(INDEX_3);
             koza.getTxtShinseiKinyuKikanCode().setValue(new RString(source.get("金融機関コード").toString()));
             koza.getTxtShinseiShitenCode().setValue(new RString(source.get("支店コード").toString()));
             koza.getTxtShinseiKozaShubetsu().setValue(new RString(source.get("口座種別").toString()));
@@ -245,7 +251,7 @@ public class ShokanShikyuTorokuShinseisho {
     private void setShomeishoData(ShokanShikyuTorokuShinseishoDiv panel) {
         ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().
                 getShokanShikyuTorokuShomeishoInfo();
-        HashMap source = getShokanShikyuTorokuShinseishoYamlId(4);
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(INDEX_4);
 
         infoDiv.getTxtShinseiTeikyoshoShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
         infoDiv.getTxtShinseiJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
@@ -263,7 +269,7 @@ public class ShokanShikyuTorokuShinseisho {
         Button btnDelete = new Button();
         Button btnGokei = new Button();
         dgRowList.clear();
-        for (int i = 5; i < 6; i++) {
+        for (int i = INDEX_5; i < INDEX_6; i++) {
             dgRowList.add(new dgServiceTeikyoShomeishoList_Row(
                     btnSelect,
                     btnEdit,
@@ -280,7 +286,7 @@ public class ShokanShikyuTorokuShinseisho {
                 getShokanShikyuTorokuShomeishoInfo();
         List<dgServiceTeikyoShomeishoList_Row> dgRowList = infoDiv.getShokanShikyuTorokuShomeishoListInfo().
                 getDgServiceTeikyoShomeishoList().getDataSource();
-        HashMap source = getShokanShikyuTorokuShinseishoYamlId(8);
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(INDEX_8);
         Button btnSelect = new Button();
         Button btnEdit = new Button();
         Button btnDelete = new Button();

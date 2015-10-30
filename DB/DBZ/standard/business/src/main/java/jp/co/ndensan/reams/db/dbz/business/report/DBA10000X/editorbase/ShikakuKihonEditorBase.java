@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.ChohyoKyotsuJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoCommonEditData;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.GunNamePrint;
@@ -45,9 +44,13 @@ public class ShikakuKihonEditorBase {
     private final ChohyoKyotsuJushoEditConfig kyotsuJushoEdit;
 
     private static final int GYOSEIKU_LENGTH;
+    private static final int JUUSAN = 13;
+    private static final int SAN = 3;
+    private static final int YONN = 4;
+    private static final int GO = 5;
 
     static {
-        GYOSEIKU_LENGTH = 13;
+        GYOSEIKU_LENGTH = JUUSAN;
     }
 
     /**
@@ -87,7 +90,7 @@ public class ShikakuKihonEditorBase {
      * @param source 被保険者証帳票ソース
      */
     public void set被保険者番号(IHihokenshashoCommonEditData source) {
-        HihokenshaDaichoModel hihoDaicho = new HihokenshaDaichoModel(hihokenshashoModel.getHihokenshaDaicho());
+        //HihokenshaDaichoModel hihoDaicho = new HihokenshaDaichoModel(hihokenshashoModel.getHihokenshaDaicho());
         RString hihoNo = RString.EMPTY;
 //        RString hihoNo = hihoDaicho.get被保険者番号().value();
 
@@ -221,7 +224,8 @@ public class ShikakuKihonEditorBase {
      */
     public void set交付日(IHihokenshashoCommonEditData source) {
         FlexibleDate kofuDate = hihokenshashoModel.getShikakuHakko().get交付日();
-        Formatted formattedKofuDate = kofuDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).width(Width.HALF);
+        Formatted formattedKofuDate = kofuDate.wareki().eraType(
+                EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).width(Width.HALF);
         source.setKofuymdGengo(formattedKofuDate.getEra());
         source.setKofuymdYy(formattedKofuDate.getYear().replace(formattedKofuDate.getEra(), RString.EMPTY));
         source.setKofuymdMm(formattedKofuDate.getMonth());
@@ -254,9 +258,9 @@ public class ShikakuKihonEditorBase {
         source.setHokenshano1(hokenshaNo.stringAt(0));
         source.setHokenshano2(hokenshaNo.stringAt(1));
         source.setHokenshano3(hokenshaNo.stringAt(2));
-        source.setHokenshano4(hokenshaNo.stringAt(3));
-        source.setHokenshano5(hokenshaNo.stringAt(4));
-        source.setHokenshano6(hokenshaNo.stringAt(5));
+        source.setHokenshano4(hokenshaNo.stringAt(SAN));
+        source.setHokenshano5(hokenshaNo.stringAt(YONN));
+        source.setHokenshano6(hokenshaNo.stringAt(GO));
     }
 
 }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
- * 介護サービス種類のファクトリークラスです
+ * 介護サービス種類のファクトリークラスです。
  *
  * @author n9935 知念 広宰
  * @jpName 介護サービス種類ファクトリー

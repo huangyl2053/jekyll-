@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class ShikakuHenkoValidator {
 
-    public ShikakuHenko NOTHING;
+    private final ShikakuHenko nothing;
 //    private final FlexibleDate 変更日;
 //    private final FlexibleDate 取得日;
 //    private final FlexibleDate 喪失日;
@@ -27,12 +27,13 @@ public class ShikakuHenkoValidator {
 //    private final FlexibleDate 最新資格変更日;
 
     public ShikakuHenkoValidator(ShikakuHenko shikakuHenko) {
-        this.NOTHING = shikakuHenko;
+        this.nothing = shikakuHenko;
     }
 
     /**
      * コンストラクタです。
      *
+     * @return
      */
 //    public ShikakuHenkoValidator(FlexibleDate 変更日, FlexibleDate 取得日, FlexibleDate 喪失日, RString 変更事由,
 //            FlexibleDate 最新資格取得日, FlexibleDate 最新資格喪失日, FlexibleDate 最新資格更新日, FlexibleDate 一号資格取得日) {
@@ -50,7 +51,7 @@ public class ShikakuHenkoValidator {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         messages.add(
-                ValidateChain.validateStart(NOTHING)
+                ValidateChain.validateStart(nothing)
                 .ifNot(ShikakuHenkoSpec.変更日が入力であること)
                 .thenAdd(ShikakuHenkoValidationMessage.変更日が未入力)
                 .ifNot(ShikakuHenkoSpec.変更事由が入力であること)

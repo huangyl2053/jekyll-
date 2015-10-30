@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.Sofu
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class Sofujoho {
 
     /**
-     * 過誤申立書送付情報照会画面 初期表示
+     * 過誤申立書送付情報照会画面 初期表示。
      *
      * @param panel 過誤申立書送付情報照会パネル
      * @return ResponseData
@@ -108,13 +108,13 @@ public class Sofujoho {
         return ResponseData.of(panel).respond();
     }
 
-    private void setSearchSofuzumiList(SofujohoDiv panel) {
-        List<dgSofuIchiran_Row> arraydata = createRowSearchSofuTestData(panel, "dbc0070011/SofujohoSofuzumi.yml");
-
-        DataGrid<dgSofuIchiran_Row> grid = panel.getSofuIchiran().getDgSofuIchiran();
-        grid.setDataSource(arraydata);
-
-    }
+//    private void setSearchSofuzumiList(SofujohoDiv panel) {
+//        List<dgSofuIchiran_Row> arraydata = createRowSearchSofuTestData(panel, "dbc0070011/SofujohoSofuzumi.yml");
+//
+//        DataGrid<dgSofuIchiran_Row> grid = panel.getSofuIchiran().getDgSofuIchiran();
+//        grid.setDataSource(arraydata);
+//
+//    }
 
     private List<dgSofuIchiran_Row> createRowSearchSofuTestData(SofujohoDiv panel, String ymlName) {
         List<dgSofuIchiran_Row> arrayData = new ArrayList<>();

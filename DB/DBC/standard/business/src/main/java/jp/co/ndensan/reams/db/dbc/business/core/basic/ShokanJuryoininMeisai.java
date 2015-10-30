@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払支給受領委任払明細を管理するクラスです。
  */
-public class ShokanJuryoininMeisai extends ModelBase<ShokanJuryoininMeisaiIdentifier, DbT3037ShokanJuryoininMeisaiEntity, ShokanJuryoininMeisai> implements Serializable {
+public class ShokanJuryoininMeisai 
+extends ModelBase<ShokanJuryoininMeisaiIdentifier,
+        DbT3037ShokanJuryoininMeisaiEntity, 
+        ShokanJuryoininMeisai> implements Serializable {
 
     private final DbT3037ShokanJuryoininMeisaiEntity entity;
     private final ShokanJuryoininMeisaiIdentifier id;

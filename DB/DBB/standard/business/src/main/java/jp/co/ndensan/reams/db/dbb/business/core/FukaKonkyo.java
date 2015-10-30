@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core;
 
 import java.util.Date;
-
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -15,140 +15,140 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class FukaKonkyo {
 
-    private Date FukakijunYMD;
-    private Date SeihoStartYMD;
-    private Date SeihoEndYMD;
-    private Date RoreiNenkinStartYMD;
-    private Date RoreiNenkinEndYMD;
-    private String SetaiKazeiKubun;
-    private String HonninKazeiKubun;
-    private Decimal GokeiShotoku;
-    private Decimal KotekiNenkinShunyu;
+    private Date fukakijunYMD;
+    private Date seihoStartYMD;
+    private Date seihoEndYMD;
+    private Date roreiNenkinStartYMD;
+    private Date roreiNenkinEndYMD;
+    private RString setaiKazeiKubun;
+    private RString honninKazeiKubun;
+    private Decimal gokeiShotoku;
+    private Decimal kotekiNenkinShunyu;
 
     /**
-     * @return the FukakijunYMD
+     * @return the fukakijunYMD
      */
     public Date getFukakijunYMD() {
-        return FukakijunYMD;
+        return fukakijunYMD;
     }
 
     /**
-     * @param FukakijunYMD the FukakijunYMD to set
+     * @param fukakijunYMD the FukakijunYMD to set
      */
-    public void setFukakijunYMD(Date FukakijunYMD) {
-        this.FukakijunYMD = FukakijunYMD;
+    public void setFukakijunYMD(Date fukakijunYMD) {
+        this.fukakijunYMD = fukakijunYMD;
     }
 
     /**
-     * @return the SeihoStartYMD
+     * @return the seihoStartYMD
      */
     public Date getSeihoStartYMD() {
-        return SeihoStartYMD;
+        return seihoStartYMD;
     }
 
     /**
-     * @param SeihoStartYMD the SeihoStartYMD to set
+     * @param seihoStartYMD the seihoStartYMD to set
      */
-    public void setSeihoStartYMD(Date SeihoStartYMD) {
-        this.SeihoStartYMD = SeihoStartYMD;
+    public void setSeihoStartYMD(Date seihoStartYMD) {
+        this.seihoStartYMD = seihoStartYMD;
     }
 
     /**
-     * @return the SeihoEndYMD
+     * @return the seihoEndYMD
      */
     public Date getSeihoEndYMD() {
-        return SeihoEndYMD;
+        return seihoEndYMD;
     }
 
     /**
-     * @param SeihoEndYMD the SeihoEndYMD to set
+     * @param seihoEndYMD the seihoEndYMD to set
      */
-    public void setSeihoEndYMD(Date SeihoEndYMD) {
-        this.SeihoEndYMD = SeihoEndYMD;
+    public void setSeihoEndYMD(Date seihoEndYMD) {
+        this.seihoEndYMD = seihoEndYMD;
     }
 
     /**
-     * @return the RoreiNenkinStartYMD
+     * @return the roreiNenkinStartYMD
      */
     public Date getRoreiNenkinStartYMD() {
-        return RoreiNenkinStartYMD;
+        return roreiNenkinStartYMD;
     }
 
     /**
-     * @param RoreiNenkinStartYMD the RoreiNenkinStartYMD to set
+     * @param roreiNenkinStartYMD the roreiNenkinStartYMD to set
      */
-    public void setRoreiNenkinStartYMD(Date RoreiNenkinStartYMD) {
-        this.RoreiNenkinStartYMD = RoreiNenkinStartYMD;
+    public void setRoreiNenkinStartYMD(Date roreiNenkinStartYMD) {
+        this.roreiNenkinStartYMD = roreiNenkinStartYMD;
     }
 
     /**
-     * @return the RoreiNenkinEndYMD
+     * @return the roreiNenkinEndYMD
      */
     public Date getRoreiNenkinEndYMD() {
-        return RoreiNenkinEndYMD;
+        return roreiNenkinEndYMD;
     }
 
     /**
-     * @param RoreiNenkinEndYMD the RoreiNenkinEndYMD to set
+     * @param roreiNenkinEndYMD the roreiNenkinEndYMD to set
      */
-    public void setRoreiNenkinEndYMD(Date RoreiNenkinEndYMD) {
-        this.RoreiNenkinEndYMD = RoreiNenkinEndYMD;
+    public void setRoreiNenkinEndYMD(Date roreiNenkinEndYMD) {
+        this.roreiNenkinEndYMD = roreiNenkinEndYMD;
     }
 
     /**
-     * @return the SetaiKazeiKubun
+     * @return the setaiKazeiKubun
      */
-    public String getSetaiKazeiKubun() {
-        return SetaiKazeiKubun;
+    public RString getSetaiKazeiKubun() {
+        return setaiKazeiKubun;
     }
 
     /**
-     * @param SetaiKazeiKubun the SetaiKazeiKubun to set
+     * @param setaiKazeiKubun the setaiKazeiKubun to set
      */
-    public void setSetaiKazeiKubun(String SetaiKazeiKubun) {
-        this.SetaiKazeiKubun = SetaiKazeiKubun;
+    public void setSetaiKazeiKubun(RString setaiKazeiKubun) {
+        this.setaiKazeiKubun = setaiKazeiKubun;
     }
 
     /**
-     * @return the HonninKazeiKubun
+     * @return the honninKazeiKubun
      */
-    public String getHonninKazeiKubun() {
-        return HonninKazeiKubun;
+    public RString getHonninKazeiKubun() {
+        return honninKazeiKubun;
     }
 
     /**
-     * @param HonninKazeiKubun the HonninKazeiKubun to set
+     * @param honninKazeiKubun the honninKazeiKubun to set
      */
-    public void setHonninKazeiKubun(String HonninKazeiKubun) {
-        this.HonninKazeiKubun = HonninKazeiKubun;
+    public void setHonninKazeiKubun(RString honninKazeiKubun) {
+        this.honninKazeiKubun = honninKazeiKubun;
     }
 
     /**
-     * @return the GokeiShotoku
+     * @return the gokeiShotoku
      */
     public Decimal getGokeiShotoku() {
-        return GokeiShotoku;
+        return gokeiShotoku;
     }
 
     /**
-     * @param GokeiShotoku the GokeiShotoku to set
+     * @param gokeiShotoku the gokeiShotoku to set
      */
-    public void setGokeiShotoku(Decimal GokeiShotoku) {
-        this.GokeiShotoku = GokeiShotoku;
+    public void setGokeiShotoku(Decimal gokeiShotoku) {
+        this.gokeiShotoku = gokeiShotoku;
     }
 
     /**
-     * @return the KotekiNenkinShunyu
+     * @return the kotekiNenkinShunyu
      */
     public Decimal getKotekiNenkinShunyu() {
-        return KotekiNenkinShunyu;
+        return kotekiNenkinShunyu;
     }
 
     /**
-     * @param KotekiNenkinShunyu the KotekiNenkinShunyu to set
+     * @param kotekiNenkinShunyu the kotekiNenkinShunyu to set
      */
-    public void setKotekiNenkinShunyu(Decimal KotekiNenkinShunyu) {
-        this.KotekiNenkinShunyu = KotekiNenkinShunyu;
+    public void setKotekiNenkinShunyu(Decimal kotekiNenkinShunyu) {
+        this.kotekiNenkinShunyu = kotekiNenkinShunyu;
     }
 
 }

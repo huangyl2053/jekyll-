@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 二次予防任意チェックリストを管理するクラスです。
  */
-public class NijiYoboNiniCheckList extends ModelBase<NijiYoboNiniCheckListIdentifier, DbT3102NijiYoboNiniCheckListEntity, NijiYoboNiniCheckList> implements Serializable {
+public class NijiYoboNiniCheckList 
+extends ModelBase<NijiYoboNiniCheckListIdentifier, 
+        DbT3102NijiYoboNiniCheckListEntity, 
+        NijiYoboNiniCheckList> implements Serializable {
 
     private final DbT3102NijiYoboNiniCheckListEntity entity;
     private final NijiYoboNiniCheckListIdentifier id;

@@ -16,36 +16,36 @@ public enum JuchochiTokureiTekiyoSpec implements IPredicate<JushochitokureiTekiy
 
     適用日が資格取得年月日より前 {
                 @Override
-                public boolean apply(JushochitokureiTekiyo NOTHING) {
-                    FlexibleDate target = NOTHING.newestHihokenshaDaicho().get資格取得年月日();
+                public boolean apply(JushochitokureiTekiyo nothing) {
+                    FlexibleDate target = nothing.getNewestHihokenshaDaicho().get資格取得年月日();
                     if (target == null || target.isEmpty()) {
                         return false;
                     }
-                    final FlexibleDate kaijoDate = NOTHING.tekiyoDate();
+                    final FlexibleDate kaijoDate = nothing.getTekiyoDate();
                     return kaijoDate.isBefore(target);
                 }
             },
     最新の資格変更年月日がNullでないこと {
 
                 @Override
-                public boolean apply(JushochitokureiTekiyo NOTHING) {
-                    FlexibleDate target = NOTHING.newestHihokenshaDaicho().get資格変更年月日();
+                public boolean apply(JushochitokureiTekiyo nothing) {
+                    FlexibleDate target = nothing.getNewestHihokenshaDaicho().get資格変更年月日();
                     if (target == null || target.isEmpty()) {
                         return false;
                     }
-                    final FlexibleDate kaijoDate = NOTHING.tekiyoDate();
+                    final FlexibleDate kaijoDate = nothing.getTekiyoDate();
                     return kaijoDate.isBefore(target);
                 }
             },
     最新の解除年月日がNullでないこと {
 
                 @Override
-                public boolean apply(JushochitokureiTekiyo NOTHING) {
-                    FlexibleDate target = NOTHING.newestHihokenshaDaicho().get解除年月日();
+                public boolean apply(JushochitokureiTekiyo nothing) {
+                    FlexibleDate target = nothing.getNewestHihokenshaDaicho().get解除年月日();
                     if (target == null || target.isEmpty()) {
                         return false;
                     }
-                    final FlexibleDate kaijoDate = NOTHING.tekiyoDate();
+                    final FlexibleDate kaijoDate = nothing.getTekiyoDate();
                     return kaijoDate.isBefore(target);
                 }
             },

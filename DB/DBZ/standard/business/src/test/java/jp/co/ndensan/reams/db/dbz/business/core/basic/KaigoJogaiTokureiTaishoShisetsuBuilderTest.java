@@ -9,9 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.KaigoJogaiTokureiTaishoShisetsuB
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -128,7 +126,7 @@ public class KaigoJogaiTokureiTaishoShisetsuBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値のFAX番号は_設定した値と同じFAX番号を返す() {
-            business = sut.setFAX番号(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_FAX番号).build();
+            business = sut.setFax番号(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_FAX番号).build();
             assertThat(business.getFAX番号(), is(DbT1005KaigoJogaiTokureiTaishoShisetsuEntityGenerator.DEFAULT_FAX番号));
         }
 

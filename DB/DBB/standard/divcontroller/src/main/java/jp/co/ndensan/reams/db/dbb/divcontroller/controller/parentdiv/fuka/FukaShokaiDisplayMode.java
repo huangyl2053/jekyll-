@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 public enum FukaShokaiDisplayMode implements IRStringConvertable {
 
     /**
-     * 初回 <br />
-     * コード : 0
+     * 初回。 <br />
+     * コード : 0。
      */
     初回("first"),
     /**
-     * 2回目以降 <br />
-     * コード : 1
+     * 2回目以降。 <br />
+     * コード : 1。
      */
     二回目以降("second");
     private final RString code;
