@@ -25,7 +25,7 @@ public class Dba3030011IryoHokenIchiran {
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onLoad(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
-        iryoHokenRireki.load(LasdecCode.EMPTY, ShikibetsuCode.EMPTY);
+        iryoHokenRireki.initialize(LasdecCode.EMPTY, ShikibetsuCode.EMPTY);
         return Response(panel);
     }
 
