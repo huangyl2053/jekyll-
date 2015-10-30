@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査スケジュール情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaschedule.INinteichosaScheduleMapper">
+
+      <resultMap id="resultMap_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuShichoson.ChikuShichosonRelateEntity" autoMapping="true">
+            <id property="chosaChikuCode" column="DbT5224ChikuShichoson_chosaChikuCode" />
+            <id property="shichosonCode" column="DbT5224ChikuShichoson_shichosonCode" />
+    <association property="DbT5224ChikuShichosonEntity" 
+             resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuShichoson.IDbT5224ChikuShichosonMapper.resultMap_DbT5224ChikuShichosonEntity"/>
+    <collection property="DbT5225ChosaChikuGroupEntity" 
+              resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosaChikuGroup.IDbT5225ChosaChikuGroupMapper.resultMap_DbT5225ChosaChikuGroupEntity"/>
+    <select id="getNinteichosaScheduleRelateEntity"            resultMap="resultMap_NinteichosaScheduleRelateEntity"
+            parameterType=" " fetchSize="500">
+     SELECT 
+        dbT5221NinteichosaSchedule.*,
+        dbT5101NinteiShinseiJoho.*,
+        dbT5222NinteiChosaScheduleMemo.*,
+        dbT5223ChikuNinteiChosain.*,
+        dbT5224ChikuShichoson.*,
+        dbT5225ChosaChikuGroup.*
+     FROM
+     (
+        SELECT 
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule"/>
+        FROM
+        rgbb."DbT5221NinteichosaSchedule"
+        WHERE
+        ninteiChosaYoteiYMD=#{ninteiChosaYoteiYMD}
+        AND
+        ninteiChosaYoteiKaishiTime=#{ninteiChosaYoteiKaishiTime} 
+        AND
+        ninteiChosaYoteiShuryoTime=#{ninteiChosaYoteiShuryoTime}  
+        AND
+        ninteiChosaJikanWaku=#{ninteiChosaJikanWaku}
+        AND
+        chosaChikuCode=#{chosaChikuCode}
+        AND
+        ninteichosaItakusakiCode=#{ninteichosaItakusakiCode}
+        AND
+        ninteiChosainNo=#{ninteiChosainNo}
+        AND
+        shichosonCode=#{shichosonCode}
+        )AS dbT5221NinteichosaSchedule
+        
+        LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        )AS dbT5101NinteiShinseiJoho
+        ON 
+        dbT5221NinteichosaSchedule. "dbT5221NinteichosaSchedule_shinseishoKanriNo"=dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
+        
+         LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        )AS dbT5101NinteiShinseiJoho
+        ON 
+        dbT5221NinteichosaSchedule. "dbT5221NinteichosaSchedule_shinseishoKanriNo"=dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
+
+        
+        
+         LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5222NinteiChosaScheduleMemoMapper.allColumns_DbT5222NinteiChosaScheduleMemo"/>
+        FROM
+        rgdb."DbT5222NinteiChosaScheduleMemo"
+        )AS dbT5222NinteiChosaScheduleMemo
+        ON 
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode"=dbT5222NinteiChosaScheduleMemo."dbT5222NinteiChosaScheduleMemo_chosaChikuCode"
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD"=dbT5222NinteiChosaScheduleMemo."dbT5222NinteiChosaScheduleMemo_ninteiChosaYoteiYMD"
+        
+        
+        LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.allColumns_DbT5223ChikuNinteiChosain"/>
+        FROM
+        rgdb."DbT5223ChikuNinteiChosain"
+        )AS dbT5223ChikuNinteiChosain
+        ON 
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode"=dbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_chosaChikuCode"
+        AND
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaItakusakiCode"=dbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_ninteiChosaItakusakiCode"
+        AND
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosainCode"=dbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_ninteiChosainCode"
+        AND
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_shichosonCode"=dbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_shichosonCode"
+
+
+         LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.allColumns_DbT5224ChikuShichoson"/>
+        FROM
+        rgdb."DbT5224ChikuShichoson"
+        )AS dbT5224ChikuShichoson
+        ON 
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode"=dbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode"
+        AND
+        dbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_shichosonCode"=dbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode"
+        
+        
+        
+         LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.allColumns_DbT5225ChosaChikuGroup"/>
+        FROM
+        rgdb."DbT5225ChosaChikuGroup"
+        )AS dbT5225ChosaChikuGroup
+        ON 
+        dbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode"=dbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosaChikuCode"
+        AND
+        dbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode"=dbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode"
+
+        
+    </select>
+
+
+</mapper>
