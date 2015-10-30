@@ -6,8 +6,11 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -18,23 +21,24 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT2006ChoshuYuyoDac}のテストです。
  */
-@RunWith(Enclosed.class)
 @Ignore
+@RunWith(Enclosed.class)
 public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
 
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final TsuchishoNo 通知書番号_01 = new TsuchishoNo("2");
+    private static final TsuchishoNo 通知書番号_02 = new TsuchishoNo("3");
+    private static final TsuchishoNo 通知書番号_03 = new TsuchishoNo("4");
     private static DbT2006ChoshuYuyoDac sut;
 
     @BeforeClass
@@ -49,19 +53,19 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
             TestSupport.insert(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_01,
                     DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_02,
                     DEFAULT_履歴番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 調定年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_調定年度,
+                    null,
                     DEFAULT_賦課年度,
                     DEFAULT_通知書番号,
                     DEFAULT_履歴番号);
@@ -71,7 +75,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
         public void 賦課年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    null,
                     DEFAULT_通知書番号,
                     DEFAULT_履歴番号);
         }
@@ -81,7 +85,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
             sut.selectByKey(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    null,
                     DEFAULT_履歴番号);
         }
 
@@ -91,7 +95,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
                     DEFAULT_通知書番号,
-                    DEFAULT_履歴番号);
+                    null);
         }
 
         @Test
@@ -99,7 +103,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
             DbT2006ChoshuYuyoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_01,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -109,7 +113,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
             DbT2006ChoshuYuyoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_03,
                     DEFAULT_履歴番号);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -122,12 +126,12 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
             TestSupport.insert(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_01,
                     DEFAULT_履歴番号);
             TestSupport.insert(
                     DEFAULT_調定年度,
                     DEFAULT_賦課年度,
-                    DEFAULT_通知書番号,
+                    通知書番号_02,
                     DEFAULT_履歴番号);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -174,7 +178,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
                     DEFAULT_賦課年度,
                     DEFAULT_通知書番号,
                     DEFAULT_履歴番号);
-            updateRecord.setSakuseiKubun(new RString("2"));
+            updateRecord.setShinseiJiyu(new RString("1"));
 
             sut.save(updateRecord);
 
@@ -184,7 +188,7 @@ public class DbT2006ChoshuYuyoDacTest extends DbbTestDacBase {
                     DEFAULT_通知書番号,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.getSakuseiKubun(), is(updatedRecord.getSakuseiKubun()));
+            assertThat(updateRecord.getShinseiJiyu(), is(updatedRecord.getShinseiJiyu()));
         }
     }
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.fukaerrorcode.FukaErrorCode;
+import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.FukaErrorCode;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

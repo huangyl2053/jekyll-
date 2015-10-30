@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.FukaEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.FukaMapperParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 
 /**
  * 介護賦課のマッパーインタフェースです。

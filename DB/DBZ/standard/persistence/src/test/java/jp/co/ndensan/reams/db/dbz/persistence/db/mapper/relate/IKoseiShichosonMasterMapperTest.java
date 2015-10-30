@@ -5,11 +5,14 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7052KoseiShichosonShishoMasterDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -37,8 +40,6 @@ public class IKoseiShichosonMasterMapperTest {
     private static IKoseiShichosonMasterMapper sut;
     private static DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
     private static DbT7052KoseiShichosonShishoMasterDac 構成市町村支所マスタDac;
-    // TODO 主キー型と変数名と主キー値を適切な値に置換してください
-    // TODO 主キーの数が足りない場合、追加してください。
     private static final RString 主キー11 = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
     private static final RString 主キー12 = new RString("99");
     private static final LasdecCode 主キー21 = DbT7052KoseiShichosonShishoMasterEntityGenerator.DEFAULT_市町村コード;
@@ -52,7 +53,6 @@ public class IKoseiShichosonMasterMapperTest {
         構成市町村支所マスタDac = InstanceProvider.create(DbT7052KoseiShichosonShishoMasterDac.class);
     }
 
-// TODO 検索条件に合わせてのテストケースを追記して下さい。
     public static class select構成市町村マスタByKeyTest extends DbzTestDacBase {
 
         @Before
@@ -69,15 +69,12 @@ public class IKoseiShichosonMasterMapperTest {
             TestSupport.insertDbT7052(主キー22, 主キー32);
         }
 
-        // TODO 見つかる場合、構成市町村マスタEntityを構成している全てのEntityクラスについて特定項目を選択し、一致していることを確認するテストケースを記述して下さい。
-        // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_構成市町村マスタEntity返す() {
             KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件 = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(主キー11);
             assertThat(sut.select構成市町村マスタByKey(構成市町村マスタ検索条件).get構成市町村マスタEntity().getShichosonShokibetsuID(), is(主キー11));
         }
 
-        // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
             KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件 = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(new RString("fadfa"));
@@ -85,6 +82,7 @@ public class IKoseiShichosonMasterMapperTest {
         }
     }
 
+<<<<<<< HEAD
 // TODO 検索条件に合わせてのテストケースを追記して下さい。
 //    public static class select構成市町村マスタ一覧By主キーTest extends DbzTestDacBase {
 //
@@ -120,6 +118,41 @@ public class IKoseiShichosonMasterMapperTest {
 //    }
     // TODO 主キー型と変数名を適切な値に置換してください
     // TODO 主キーの数が足りない場合、追加してください。
+=======
+    public static class select構成市町村マスタ一覧By主キーTest extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            sut = sqlSession.getMapper(IKoseiShichosonMasterMapper.class);
+            TestSupport.insertDbT7051(主キー11);
+            TestSupport.insertDbT7051(主キー11);
+            TestSupport.insertDbT7051(主キー12);
+            TestSupport.insertDbT7051(主キー12);
+
+            TestSupport.insertDbT7052(主キー21, 主キー32);
+            TestSupport.insertDbT7052(主キー21, 主キー32);
+            TestSupport.insertDbT7052(主キー22, 主キー32);
+            TestSupport.insertDbT7052(主キー22, 主キー32);
+        }
+
+        @Test
+        public void データが見つかる検索条件を渡すと_台帳Entityリストを返す() {
+            KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件 = KoseiShichosonMasterMapperParameter.createSelectListParam(主キー11);
+            List<KoseiShichosonMasterRelateEntity> entityList = sut.select構成市町村マスタリストBy主キー1(構成市町村マスタ検索条件);
+            assertThat(entityList.size(), is(2));
+            // 任意の項目が一致するテストケースを記述してください。
+            assertThat(entityList.get(0).get構成市町村マスタEntity().getShichosonShokibetsuID(), is(主キー11));
+            assertThat(entityList.get(1).get構成市町村マスタEntity().getShichosonShokibetsuID(), is(主キー11));
+        }
+
+        @Test
+        public void データが見つかない検索条件を渡すと__空のリストを返す() {
+            KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件 = KoseiShichosonMasterMapperParameter.createSelectListParam(new RString("91"));
+            assertThat(sut.select構成市町村マスタリストBy主キー1(構成市町村マスタ検索条件).isEmpty(), is(true));
+        }
+    }
+
+>>>>>>> a37a03cb61fe8208c8325fbbd875e6e3506d1b41
     private static class TestSupport {
 
         public static void insertDbT7051(
@@ -127,7 +160,7 @@ public class IKoseiShichosonMasterMapperTest {
             DbT7051KoseiShichosonMasterEntity entity = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
             entity.setShichosonShokibetsuID(主キー1);
             entity.setState(EntityDataState.Added);
-//            構成市町村マスタDac.save(entity);
+            構成市町村マスタDac.save(entity);
         }
 
         public static void insertDbT7052(
@@ -137,7 +170,7 @@ public class IKoseiShichosonMasterMapperTest {
             entity.setShichosonCode(主キー1);
             entity.setShishoCode(主キー2);
             entity.setState(EntityDataState.Added);
-//            構成市町村支所マスタDac.save(entity);
+            構成市町村支所マスタDac.save(entity);
         }
     }
 

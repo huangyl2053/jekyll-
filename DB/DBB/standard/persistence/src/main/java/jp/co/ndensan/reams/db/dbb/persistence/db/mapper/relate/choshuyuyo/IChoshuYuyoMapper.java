@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoMapperParameter;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.ChoshuYuyoEntity;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 
 /**
  * 介護賦課徴収猶予のマッパーインタフェースです。
