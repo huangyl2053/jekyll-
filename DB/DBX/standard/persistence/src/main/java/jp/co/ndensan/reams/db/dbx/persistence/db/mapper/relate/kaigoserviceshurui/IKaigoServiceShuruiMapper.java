@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui;
 
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 
 /**
  * 介護サービス種類のマッパーインタフェースです。

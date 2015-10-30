@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui;
 
-import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
@@ -66,11 +64,10 @@ public class KaigoServiceShuruiBuilderTest extends DbxTestBase {
 
         @Test
         public void 介護サービス種類に紐づくことが可能な子テーブル情報をsetSeishinTechoNiniで設定した場合_設定済みの子テーブル情報が返る() {
-            business = sut.setSeishinTechoNini(kaigoServiceNaiyou).build();
+            business = sut.setKaigoServiceNaiyou(kaigoServiceNaiyou).build();
             assertThat(business.getKaigoServiceNaiyouList().size(), is(1));
         }
     }
-    // </editor-fold>
 
     public static class getterSetterTest extends DbxTestBase {
 
