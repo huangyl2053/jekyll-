@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.relate.KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 
 /**
  * 構成市町村マスタのマッパーインタフェースです。
@@ -18,5 +18,5 @@ public interface IKoseiShichosonMasterMapper {
      * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
      * @return KoseiShichosonMasterEntity
      */
-    KoseiShichosonMasterEntity getKoseiShichosonEntity(KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件);
+    KoseiShichosonMasterRelateEntity getKoseiShichosonEntity(KoseiShichosonMasterMapperParameter 構成市町村マスタ検索条件);
 }
