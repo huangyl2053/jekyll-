@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護認定審査会委員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper">
+
+    
+    <select id="getShinsakaiIinJohoRelateEntity"
+            resultMap="resultMap_ShinsakaiIinJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.ShinsakaiIinJohoParameter" fetchSize="500">
+        SELECT
+        dbT5594ShinsakaiIinJoho.*,
+        dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        FROM
+        rgdb."DbT5594ShinsakaiIinJoho"
+        WHERE
+        "shinsakaiIinCode"=#{shinsakaiIinCode}
+        ) AS dbT5594ShinsakaiIinJoho
+        LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
+        FROM
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+        )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
+        ON
+        dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"=dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho."dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode"
+        ;
+    </select>
+
+    <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.ShinsakaiIinJohoEntity" autoMapping="true">
+        <id column="dbT5594ShinsakaiIinJoho_shikibetsuCode"/>
+       
+        <association property="shinsakaiIinJohoEntity" 
+                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.resultMap_DbT5594ShinsakaiIinJohoEntity"/>
+        <collection property="kaigoNinteiShinsakaiIinShozokuKikanJohoEntity" 
+                    ofType="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.resultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity">
+        </collection>
+    </resultMap>
+
+</mapper>
