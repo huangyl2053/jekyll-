@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護事業者のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigojigyosha.IKaigoJigyoshaMapper">
+
+    <resultMap id="resultMap_KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.KaigoJigyoshaEntity" autoMapping="true">
+        <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
+        <collection property="任意項目情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.resultMap_FdT1309SeishinTechoNiniEntity"/>
+    </resultMap>
+     <select id="getEntity" 
+            resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
+            parameterType="">
+        SELECT
+        <include refid="allColumns_DbT7060KaigoJigyosha"/>
+        FROM
+        rgba."DbT7060KaigoJigyosha"
+        WHERE
+        "jigyoshaNo" = #{JigyoshaNo}
+        AND
+        "yukoKaishiYMD"=#{yukoKaishiYMD}
+         AS dbT7060KaigoJigyosha
+        INNER JOIN
+        (SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.allColumns_DbT7062KaigoJigyoshaDaihyosha"/>
+        FROM
+        rgba."DbT7062KaigoJigyoshaDaihyosha"
+        )AS  dbT7062KaigoJigyoshaDaihyosha
+        ON 
+        dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_jigyoshaNo"=dbT7062KaigoJigyoshaDaihyosha."dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo"
+        AND
+        dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_yukoKaishiYMD"=dbT7062KaigoJigyoshaDaihyosha."dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD"
+        INNER JOIN (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.allColumns_DbT7063KaigoJigyoshaShiteiService"/>
+        FROM
+        rgba."DbT7063KaigoJigyoshaShiteiService"
+        )AS dbT7063KaigoJigyoshaShiteiService
+        ON
+        dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_jigyoshaNo"=dbT7063KaigoJigyoshaShiteiService."dbT7063KaigoJigyoshaShiteiService_jigyoshaNo"
+        AN
+        dbT7060KaigoJigyosha."dbT7060KaigoJigyosha_yukoKaishiYMD"=dbT7063KaigoJigyoshaShiteiService."dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD"
+        ;
+     </select>
+
+</mapper>
