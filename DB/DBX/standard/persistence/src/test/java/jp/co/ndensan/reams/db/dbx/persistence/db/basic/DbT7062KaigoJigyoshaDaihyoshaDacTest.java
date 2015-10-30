@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_事業者番号;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.DEFAULT_有効開始日;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;

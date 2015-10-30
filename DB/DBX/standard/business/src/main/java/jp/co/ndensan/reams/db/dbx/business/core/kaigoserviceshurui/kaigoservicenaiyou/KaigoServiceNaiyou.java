@@ -3,27 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 介護サービス内容を管理するクラスです。
  */
-public class KaigoServiceNaiyou extends
-        ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou> 
-        implements Serializable {
+public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou> implements Serializable {
 
     private final DbT7131KaigoServiceNaiyouEntity entity;
     private final KaigoServiceNaiyouIdentifier id;
@@ -38,9 +36,9 @@ public class KaigoServiceNaiyou extends
      * @param 履歴番号 履歴番号
      */
     public KaigoServiceNaiyou(KaigoServiceShuruiCode サービス種類コード,
-            RString サービス項目コード,
-            FlexibleYearMonth 提供開始年月,
-            Decimal 履歴番号) {
+RString サービス項目コード,
+FlexibleYearMonth 提供開始年月,
+Decimal 履歴番号) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス項目コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス項目コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
@@ -51,11 +49,11 @@ public class KaigoServiceNaiyou extends
         this.entity.setTeikyoKaishiYM(提供開始年月);
         this.entity.setRirekiNo(履歴番号);
         this.id = new KaigoServiceNaiyouIdentifier(
-                サービス種類コード,
-                サービス項目コード,
-                提供開始年月,
-                履歴番号
-        );
+        サービス種類コード,
+        サービス項目コード,
+        提供開始年月,
+        履歴番号
+                );
     }
 
     /**
@@ -160,32 +158,167 @@ public class KaigoServiceNaiyou extends
         return entity.getTaniSu();
     }
 
-    /**
-     * 単位数識別を返します。
-     *
-     * @return 単位数識別
-     */
-    public Code get単位数識別() {
-        return entity.getTanisuShikibetsuCode().value();
-    }
-
-    /**
-     * 単位数算定単位を返します。
-     *
-     * @return 単位数算定単位
-     */
-    public Code get単位数算定単位() {
-        return entity.getTanisuSanteiTani().value();
-    }
-
-    /**
-     * 異動事由を返します。
-     *
-     * @return 異動事由
-     */
-    public Code get異動事由() {
-        return entity.getIdouJiyuCode().value();
-    }
+//    /**
+//     * 単位数識別を返します。
+//     *
+//     * @return 単位数識別
+//     */
+//    public Code get単位数識別() {
+//        return entity.getTanisuShikibetsuCode();
+//    }
+//
+//    /**
+//     * 単位数算定単位を返します。
+//     *
+//     * @return 単位数算定単位
+//     */
+//    public Code get単位数算定単位() {
+//        return entity.getTanisuSanteiTaniCode();
+//    }
+//
+//    /**
+//     * 異動事由を返します。
+//     *
+//     * @return 異動事由
+//     */
+//    public Code get異動事由() {
+//        return entity.getIdouJiyuCode();
+//    }
+//
+//    /**
+//     * 限度額対象外フラグを返します。
+//     *
+//     * @return 限度額対象外フラグ
+//     */
+//    public RString get限度額対象外フラグ() {
+//        return entity.getGendogakuTaishogaiFlag();
+//    }
+//
+//    /**
+//     * 外部サービス利用型区分を返します。
+//     *
+//     * @return 外部サービス利用型区分
+//     */
+//    public RString get外部サービス利用型区分() {
+//        return entity.getGaibuServiceRiyoKataKubun();
+//    }
+//
+//    /**
+//     * 特別地域加算フラグを返します。
+//     *
+//     * @return 特別地域加算フラグ
+//     */
+//    public RString get特別地域加算フラグ() {
+//        return entity.getTokubetsuChiikiKasanFlag();
+//    }
+//
+//    /**
+//     * 利用者負担定率・定額区分を返します。
+//     *
+//     * @return 利用者負担定率・定額区分
+//     */
+//    public RString get利用者負担定率・定額区分() {
+//        return entity.getRiyosyaFutanTeiritsuTeigakuKubun();
+//    }
+//
+//    /**
+//     * 更新有無フラグを返します。
+//     *
+//     * @return 更新有無フラグ
+//     */
+//    public RString get更新有無フラグ() {
+//        return entity.getKoshinUmuFoag();
+//    }
+//
+//    /**
+//     * 元点数を返します。
+//     *
+//     * @return 元点数
+//     */
+//    public RString get元点数() {
+//        return entity.getMotoTensu();
+//    }
+//
+//    /**
+//     * 元限度額対象外フラグを返します。
+//     *
+//     * @return 元限度額対象外フラグ
+//     */
+//    public RString get元限度額対象外フラグ() {
+//        return entity.getMotoGendogakuTaishogaiFlag();
+//    }
+//
+//    /**
+//     * 元単位数識別コードを返します。
+//     *
+//     * @return 元単位数識別コード
+//     */
+//    public RString get元単位数識別コード() {
+//        return entity.getMotoTaniShikibetsuCd();
+//    }
+//
+//    /**
+//     * 利用者負担額を返します。
+//     *
+//     * @return 利用者負担額
+//     */
+//    public RString get利用者負担額() {
+//        return entity.getRiyoshaFutanGaku();
+//    }
+//
+//    /**
+//     * 給付率を返します。
+//     *
+//     * @return 給付率
+//     */
+//    public RString get給付率() {
+//        return entity.getKyufuRitsu();
+//    }
+//
+//    /**
+//     * 二次予防事業対象者実施区分（非該当）を返します。
+//     *
+//     * @return 二次予防事業対象者実施区分（非該当）
+//     */
+//    public RString get二次予防事業対象者実施区分（非該当）() {
+//        return entity.getNijiyoboJigyoTaishaJishiKubunHigaito();
+//    }
+//
+//    /**
+//     * 要支援１受給者実施区分を返します。
+//     *
+//     * @return 要支援１受給者実施区分
+//     */
+//    public RString get要支援１受給者実施区分() {
+//        return entity.getYoshien1JukyushaJishiKubun();
+//    }
+//
+//    /**
+//     * 要支援２受給者実施区分を返します。
+//     *
+//     * @return 要支援２受給者実施区分
+//     */
+//    public RString get要支援２受給者実施区分() {
+//        return entity.getYoshien2JukyushaJishiKubun();
+//    }
+//
+//    /**
+//     * 対象事業者実施区分を返します。
+//     *
+//     * @return 対象事業者実施区分
+//     */
+//    public RString get対象事業者実施区分() {
+//        return entity.getTaishoJigyoJishiKubun();
+//    }
+//
+//    /**
+//     * 総合事業サービス区分を返します。
+//     *
+//     * @return 総合事業サービス区分
+//     */
+//    public RString get総合事業サービス区分() {
+//        return entity.getSogoJigyoServiceKubun();
+//    }
 
     /**
      * {@link DbT7131KaigoServiceNaiyouEntity}のクローンを返します。
@@ -208,6 +341,21 @@ public class KaigoServiceNaiyou extends
     }
 
     /**
+     * 介護サービス内容のみを変更対象とします。<br/>
+     * {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoServiceNaiyou}
+     */
+    public KaigoServiceNaiyou modifiedModel() {
+        DbT7131KaigoServiceNaiyouEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KaigoServiceNaiyou(
+                modifiedEntity, id);
+    }
+
+    /**
      * 保持する介護サービス内容を削除対象とします。<br/>
      * {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
@@ -224,7 +372,6 @@ public class KaigoServiceNaiyou extends
         }
         return new KaigoServiceNaiyou(deletedEntity, id);
     }
-
     /**
      * {@link KaigoServiceNaiyou}のシリアライズ形式を提供します。
      *
@@ -237,17 +384,16 @@ public class KaigoServiceNaiyou extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
-
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 2702026391207130486L;
 
         private final DbT7131KaigoServiceNaiyouEntity entity;
         private final KaigoServiceNaiyouIdentifier id;
 
-        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity, KaigoServiceNaiyouIdentifier id) {
+        private _SerializationProxy(DbT7131KaigoServiceNaiyouEntity entity,KaigoServiceNaiyouIdentifier id) {
             this.entity = entity;
             this.id = id;
         }
@@ -267,5 +413,26 @@ public class KaigoServiceNaiyou extends
         return new KaigoServiceNaiyouBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KaigoServiceNaiyou other = (KaigoServiceNaiyou) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }

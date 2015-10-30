@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbx.business.core.basic;
+package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link KaigoServiceShurui}の編集を行うビルダークラスです。
@@ -22,46 +24,26 @@ public class KaigoServiceShuruiBuilder {
     private final DbT7130KaigoServiceShuruiEntity entity;
     private final KaigoServiceShuruiIdentifier id;
 
+    private final Models<KaigoServiceNaiyouIdentifier, KaigoServiceNaiyou> kaigoServiceNaiyou;
+
     /**
      * {@link DbT7130KaigoServiceShuruiEntity}より{@link KaigoServiceShurui}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT7130KaigoServiceShuruiEntity}
      * @param id {@link KaigoServiceShuruiIdentifier}
+     * @param seishinTechoNini {@link Models}
+     * @param todokedesha {@link Models}
      *
      */
     KaigoServiceShuruiBuilder(
             DbT7130KaigoServiceShuruiEntity entity,
-            KaigoServiceShuruiIdentifier id
+            KaigoServiceShuruiIdentifier id,
+            Models<KaigoServiceNaiyouIdentifier, KaigoServiceNaiyou> kaigoServiceNaiyou
     ) {
         this.entity = entity.clone();
         this.id = id;
+        this.kaigoServiceNaiyou = kaigoServiceNaiyou.clone();
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * サービス種類コードを設定します。
-     *
-     * @param サービス種類コード サービス種類コード
-     * @return {@link KaigoServiceShuruiBuilder}
-     */
-    public KaigoServiceShuruiBuilder setサービス種類コード(KaigoServiceShuruiCode サービス種類コード) {
-        requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        entity.setServiceShuruiCd(サービス種類コード);
-        return this;
-    }
-
-    /**
-     * 提供開始年月を設定します。
-     *
-     * @param 提供開始年月 提供開始年月
-     * @return {@link KaigoServiceShuruiBuilder}
-     */
-    public KaigoServiceShuruiBuilder set提供開始年月(FlexibleYearMonth 提供開始年月) {
-        requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
-        entity.setTeikyoKaishiYM(提供開始年月);
-        return this;
     }
 
     /**
@@ -106,22 +88,47 @@ public class KaigoServiceShuruiBuilder {
      * @param サービス分類コード サービス分類コード
      * @return {@link KaigoServiceShuruiBuilder}
      */
-    public KaigoServiceShuruiBuilder setサービス分類コード(Code サービス分類コード) {
+    public KaigoServiceShuruiBuilder setサービス分類コード(KaigoServiceBunruiCode サービス分類コード) {
         requireNonNull(サービス分類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス分類コード"));
-        entity.setServiceBunrruicode(new KaigoServiceBunruiCode(サービス分類コード));
+        entity.setServiceBunrruicode(サービス分類コード);
         return this;
     }
 
+
+    // <editor-fold defaultstate="collapsed" desc="子階層のリレーションテーブルのBusinessをメンバー変数で保持する場合">
+//TODO 子テーブル１「精神手帳任意項目情報 SeishinTechoNini」を適宜置換して下さい。
+    /**
+     * 精神手帳任意項目情報のキー情報について判定します。<br>
+     * 精神手帳情報に関連できる精神手帳任意項目情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は精神手帳任意項目情報リストに精神手帳任意項目情報{@link SeishinTechoNini}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 介護サービス内容 {@link KaigoServiceShurui}
+     * @return {@link KaigoServiceShuruiBuilder}
+     * @throws IllegalStateException キーが一致しない場合
+     */
+    public KaigoServiceShuruiBuilder setSeishinTechoNini(KaigoServiceNaiyou 介護サービス内容) {
+        if (hasSameIdentifier(介護サービス内容.identifier())) {
+            kaigoServiceNaiyou.add(介護サービス内容);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(KaigoServiceNaiyouIdentifier 介護サービス内容の識別子) {
+        return (id.getサービス種類コード().equals(介護サービス内容の識別子.getサービス種類コード())
+                && id.get提供開始年月() == 介護サービス内容の識別子.get提供開始年月());
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="ありの場合">
     /**
      * {@link KaigoServiceShurui}のインスタンスを生成します。
      *
      * @return {@link KaigoServiceShurui}のインスタンス
      */
     public KaigoServiceShurui build() {
-        return new KaigoServiceShurui(entity, id);
+        return new KaigoServiceShurui(entity, id, kaigoServiceNaiyou);
     }
-
-    public KaigoServiceShuruiBuilder setKaigoServiceNaiyou(KaigoServiceNaiyou createKaigoServiceNaiyou) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    // </editor-fold>
 }

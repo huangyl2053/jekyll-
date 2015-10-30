@@ -25,5 +25,10 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxEntity</artifactId>
         </dependency>
+        <!-- テスト -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+        </dependency>
     </dependencies>
 </project>

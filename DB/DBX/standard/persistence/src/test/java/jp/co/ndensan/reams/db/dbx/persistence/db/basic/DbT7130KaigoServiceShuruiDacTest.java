@@ -6,35 +6,33 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_提供開始年月;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7130KaigoServiceShuruiDac}のテストです。
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final KaigoServiceShuruiCode サービス種類コード_01 = new KaigoServiceShuruiCode("01");
+    private static final KaigoServiceShuruiCode サービス種類コード_02 = new KaigoServiceShuruiCode("02");
+    private static final KaigoServiceShuruiCode サービス種類コード_03 = new KaigoServiceShuruiCode("03");
     private static DbT7130KaigoServiceShuruiDac sut;
 
     @BeforeClass
@@ -47,17 +45,17 @@ public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_01,
                     DEFAULT_提供開始年月);
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_02,
                     DEFAULT_提供開始年月);
         }
 
         @Test(expected = NullPointerException.class)
         public void サービス種類コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_サービス種類コード,
+                    null,
                     DEFAULT_提供開始年月);
         }
 
@@ -65,21 +63,21 @@ public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
         public void 提供開始年月がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_提供開始年月);
+                    null);
         }
 
         @Test
-        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+        public void 存在する主サービス種類コードを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7130KaigoServiceShuruiEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_01,
                     DEFAULT_提供開始年月);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
-        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+        public void 存在しない主サービス種類コードを渡すと_selectByKeyは_nullを返す() {
             DbT7130KaigoServiceShuruiEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_03,
                     DEFAULT_提供開始年月);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -90,10 +88,10 @@ public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
         @Test
         public void 介護サービス種類が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_01,
                     DEFAULT_提供開始年月);
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    サービス種類コード_02,
                     DEFAULT_提供開始年月);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -132,7 +130,7 @@ public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
             DbT7130KaigoServiceShuruiEntity updateRecord = sut.selectByKey(
                     DEFAULT_サービス種類コード,
                     DEFAULT_提供開始年月);
-            updateRecord.setTeikyoshuryoYM(new FlexibleYearMonth("201509"));
+            updateRecord.setTeikyoshuryoYM(new FlexibleYearMonth("201409"));
 
             sut.save(updateRecord);
 

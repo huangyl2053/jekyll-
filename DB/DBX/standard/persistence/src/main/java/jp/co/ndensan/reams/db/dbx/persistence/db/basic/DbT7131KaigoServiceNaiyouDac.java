@@ -7,17 +7,19 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.rirekiNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceKoumokuCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.serviceShuruiCode;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -35,10 +37,10 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
     /**
      * 主キーで介護サービス内容を取得します。
      *
-     * @param サービス種類コード ServiceShuruiCode
-     * @param サービス項目コード ServiceKoumokuCode
-     * @param 提供開始年月 TeikyoKaishiYM
-     * @param 履歴番号 RirekiNo
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @param 提供開始年月 提供開始年月
+     * @param 履歴番号 履歴番号
      * @return DbT7131KaigoServiceNaiyouEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -58,17 +60,17 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(
-                                eq(serviceShuruiCode, サービス種類コード),
-                                eq(serviceKoumokuCode, サービス項目コード),
-                                eq(teikyoKaishiYM, 提供開始年月),
-                                eq(rirekiNo, 履歴番号))).
+                eq(serviceShuruiCode, サービス種類コード),
+                eq(serviceKoumokuCode, サービス項目コード),
+                eq(teikyoKaishiYM, 提供開始年月),
+                eq(rirekiNo, 履歴番号))).
                 toObject(DbT7131KaigoServiceNaiyouEntity.class);
     }
 
     /**
      * 介護サービス内容を全件返します。
      *
-     * @return List<DbT7131KaigoServiceNaiyouEntity>
+     * @return DbT7131KaigoServiceNaiyouEntityの{@code list}
      */
     @Transaction
     public List<DbT7131KaigoServiceNaiyouEntity> selectAll() {
@@ -92,9 +94,5 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    public List<DbT7131KaigoServiceNaiyouEntity> selectList(ITrueFalseCriteria makeNaiyoConditions) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

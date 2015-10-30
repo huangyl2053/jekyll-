@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoJigyoshaMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 
 /**
  * 介護事業者のマッパーインタフェースです。

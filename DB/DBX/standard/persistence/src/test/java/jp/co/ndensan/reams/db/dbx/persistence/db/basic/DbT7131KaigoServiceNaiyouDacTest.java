@@ -6,8 +6,11 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス項目コード;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_提供開始年月;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -18,24 +21,22 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT7131KaigoServiceNaiyouDac}のテストです。
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final KaigoServiceShuruiCode キー_01 = DEFAULT_サービス種類コード;
+    private static final KaigoServiceShuruiCode キー_02 = new KaigoServiceShuruiCode("02");
+    private static final KaigoServiceShuruiCode キー_03 = new KaigoServiceShuruiCode("03");
     private static DbT7131KaigoServiceNaiyouDac sut;
 
     @BeforeClass
@@ -53,7 +54,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    キー_02,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
@@ -62,7 +63,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
         @Test(expected = NullPointerException.class)
         public void サービス種類コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_サービス種類コード,
+                    null,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
@@ -72,7 +73,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
         public void サービス項目コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_サービス項目コード,
+                    null,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
         }
@@ -82,7 +83,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
             sut.selectByKey(
                     DEFAULT_サービス種類コード,
                     DEFAULT_サービス項目コード,
-                    DEFAULT_提供開始年月,
+                    null,
                     DEFAULT_履歴番号);
         }
 
@@ -92,7 +93,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
                     DEFAULT_サービス種類コード,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
-                    DEFAULT_履歴番号);
+                    null);
         }
 
         @Test
@@ -108,7 +109,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7131KaigoServiceNaiyouEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_サービス種類コード,
+                    キー_03,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
@@ -121,12 +122,12 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
         @Test
         public void 介護サービス内容が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    キー_01,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
             TestSupport.insert(
-                    DEFAULT_サービス種類コード,
+                    キー_02,
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
@@ -175,7 +176,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
                     DEFAULT_サービス項目コード,
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
-            updateRecord.setServiceName(new RString("サービス名称"));
+            updateRecord.setTeikyoShuryoYM(new FlexibleYearMonth("201409"));
 
             sut.save(updateRecord);
 
@@ -185,7 +186,7 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
                     DEFAULT_提供開始年月,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.getServiceName(), is(updatedRecord.getServiceName()));
+            assertThat(updateRecord.getTeikyoShuryoYM(), is(updatedRecord.getTeikyoShuryoYM()));
         }
     }
 

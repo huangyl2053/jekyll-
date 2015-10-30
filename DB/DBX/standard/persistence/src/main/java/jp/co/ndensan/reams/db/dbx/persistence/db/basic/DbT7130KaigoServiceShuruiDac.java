@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.serviceShuruiCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -50,15 +50,15 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
                 where(and(
-                                eq(serviceShuruiCd, サービス種類コード),
-                                eq(teikyoKaishiYM, 提供開始年月))).
+                eq(serviceShuruiCd, サービス種類コード),
+                eq(teikyoKaishiYM, 提供開始年月))).
                 toObject(DbT7130KaigoServiceShuruiEntity.class);
     }
 
     /**
      * 介護サービス種類を全件返します。
      *
-     * @return List<DbT7130KaigoServiceShuruiEntity>
+     * @return DbT7130KaigoServiceShuruiEntityの{@code list}
      */
     @Transaction
     public List<DbT7130KaigoServiceShuruiEntity> selectAll() {
@@ -80,12 +80,7 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
     public int save(DbT7130KaigoServiceShuruiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    public List<DbT7130KaigoServiceShuruiEntity> selectList(ITrueFalseCriteria makeShuruiConditions) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
