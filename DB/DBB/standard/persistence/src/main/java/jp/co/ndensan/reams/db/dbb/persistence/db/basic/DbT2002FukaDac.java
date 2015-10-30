@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.*;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.rirekiNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -56,17 +59,17 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(tsuchishoNo, 通知書番号),
-                                eq(rirekiNo, 履歴番号))).
+                eq(choteiNendo, 調定年度),
+                eq(fukaNendo, 賦課年度),
+                eq(tsuchishoNo, 通知書番号),
+                eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
     }
 
     /**
      * 介護賦課を全件返します。
      *
-     * @return List<DbT2002FukaEntity>
+     * @return DbT2002FukaEntityの{@code list}
      */
     @Transaction
     public List<DbT2002FukaEntity> selectAll() {
@@ -88,7 +91,7 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
     public int save(DbT2002FukaEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護賦課エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
