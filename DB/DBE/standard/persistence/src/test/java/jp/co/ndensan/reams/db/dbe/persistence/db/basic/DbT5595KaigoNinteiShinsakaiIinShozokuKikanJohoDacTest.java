@@ -19,8 +19,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
 @Ignore
 public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDacTest extends DbeTestDacBase {
 
-    private static final RString キー_01 = DEFAULT_介護認定審査会委員コード;
+    private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
     private static DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac sut;
