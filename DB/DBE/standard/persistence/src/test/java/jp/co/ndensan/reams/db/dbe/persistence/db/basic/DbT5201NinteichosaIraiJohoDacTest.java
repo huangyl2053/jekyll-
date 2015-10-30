@@ -19,8 +19,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
 @Ignore
 public class DbT5201NinteichosaIraiJohoDacTest extends DbeTestDacBase {
 
-    private static final ShinseishoKanriNo キー_01 = DEFAULT_申請書管理番号;
+    private static final ShinseishoKanriNo キー_01 = new ShinseishoKanriNo("01");
     private static final ShinseishoKanriNo キー_02 = new ShinseishoKanriNo("02");
     private static final ShinseishoKanriNo キー_03 = new ShinseishoKanriNo("03");
     private static DbT5201NinteichosaIraiJohoDac sut;

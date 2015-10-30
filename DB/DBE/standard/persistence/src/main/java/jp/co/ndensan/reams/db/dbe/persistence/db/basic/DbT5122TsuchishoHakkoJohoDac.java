@@ -43,7 +43,8 @@ public class DbT5122TsuchishoHakkoJohoDac implements ISaveable<DbT5122TsuchishoH
 
         return accessor.select().
                 table(DbT5122TsuchishoHakkoJoho.class).
-                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
                 toObject(DbT5122TsuchishoHakkoJohoEntity.class);
     }
 

@@ -2,6 +2,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 転入・死亡情報テーブルのエンティティクラスです。
  */
 public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShiboEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5129TennyuShibo");
@@ -36,14 +38,15 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
     private int nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
-    private int shinsakaiKaisaiNo;
+    private FlexibleDate shinsakaiShiryoSakuseiYMD;
+    private RString shinsakaiKaisaiNo;
     private RString shinsakaiIken;
-    private RString ichijiHnateiKekkaHenkoRiyu;
+    private RString ichijiHanteiKekkaHenkoRiyu;
     private Code yokaigoJotaizoReiCode;
     private RString ninteishinsakaiIkenShurui;
     private RString shinsakaiMemo;
     private Code nijiHanteiKekkaInputHoho;
-    private FlexibleDate niniHanteiKekkaInputYMD;
+    private FlexibleDate nijiHanteiKekkaInputYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -108,7 +111,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -126,7 +129,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @param nijiHanteiYMD 二次判定年月日
      */
-    public void setNijiHanteiYMD(FlexibleDate nijiHanteiYMD) {
+    public void setNijiHanteiYMD(@Nonnull FlexibleDate nijiHanteiYMD) {
         this.nijiHanteiYMD = nijiHanteiYMD;
     }
 
@@ -148,7 +151,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @param nijiHanteiYokaigoJotaiKubunCode 二次判定要介護状態区分コード
      */
-    public void setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
+    public void setNijiHanteiYokaigoJotaiKubunCode(@Nonnull Code nijiHanteiYokaigoJotaiKubunCode) {
         this.nijiHanteiYokaigoJotaiKubunCode = nijiHanteiYokaigoJotaiKubunCode;
     }
 
@@ -166,7 +169,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @param nijiHanteiNinteiYukoKikan 二次判定認定有効期間
      */
-    public void setNijiHanteiNinteiYukoKikan(int nijiHanteiNinteiYukoKikan) {
+    public void setNijiHanteiNinteiYukoKikan(@Nonnull int nijiHanteiNinteiYukoKikan) {
         this.nijiHanteiNinteiYukoKikan = nijiHanteiNinteiYukoKikan;
     }
 
@@ -175,6 +178,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 二時判定認定有効開始年月日
      */
+    @CheckForNull
     public FlexibleDate getNijiHanteiNinteiYukoKaishiYMD() {
         return nijiHanteiNinteiYukoKaishiYMD;
     }
@@ -193,6 +197,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 二時判定認定有効終了年月日
      */
+    @CheckForNull
     public FlexibleDate getNijiHanteiNinteiYukoShuryoYMD() {
         return nijiHanteiNinteiYukoShuryoYMD;
     }
@@ -207,13 +212,33 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
     }
 
     /**
+     * 介護認定審査会資料作成年月日のgetメソッドです。
+     *
+     * @return 介護認定審査会資料作成年月日
+     */
+    @CheckForNull
+    public FlexibleDate getShinsakaiShiryoSakuseiYMD() {
+        return shinsakaiShiryoSakuseiYMD;
+    }
+
+    /**
+     * 介護認定審査会資料作成年月日のsetメソッドです。
+     *
+     * @param shinsakaiShiryoSakuseiYMD 介護認定審査会資料作成年月日
+     */
+    public void setShinsakaiShiryoSakuseiYMD(FlexibleDate shinsakaiShiryoSakuseiYMD) {
+        this.shinsakaiShiryoSakuseiYMD = shinsakaiShiryoSakuseiYMD;
+    }
+
+    /**
      * 介護認定審査会開催番号のgetメソッドです。
      * <br/>
      * <br/>介護認定審査会開催予定情報
      *
      * @return 介護認定審査会開催番号
      */
-    public int getShinsakaiKaisaiNo() {
+    @CheckForNull
+    public RString getShinsakaiKaisaiNo() {
         return shinsakaiKaisaiNo;
     }
 
@@ -224,7 +249,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+    public void setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 
@@ -233,6 +258,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 介護認定審査会意見
      */
+    @CheckForNull
     public RString getShinsakaiIken() {
         return shinsakaiIken;
     }
@@ -251,17 +277,18 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 一次判定結果変更理由
      */
-    public RString getIchijiHnateiKekkaHenkoRiyu() {
-        return ichijiHnateiKekkaHenkoRiyu;
+    @CheckForNull
+    public RString getIchijiHanteiKekkaHenkoRiyu() {
+        return ichijiHanteiKekkaHenkoRiyu;
     }
 
     /**
      * 一次判定結果変更理由のsetメソッドです。
      *
-     * @param ichijiHnateiKekkaHenkoRiyu 一次判定結果変更理由
+     * @param ichijiHanteiKekkaHenkoRiyu 一次判定結果変更理由
      */
-    public void setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
-        this.ichijiHnateiKekkaHenkoRiyu = ichijiHnateiKekkaHenkoRiyu;
+    public void setIchijiHanteiKekkaHenkoRiyu(RString ichijiHanteiKekkaHenkoRiyu) {
+        this.ichijiHanteiKekkaHenkoRiyu = ichijiHanteiKekkaHenkoRiyu;
     }
 
     /**
@@ -271,6 +298,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 要介護状態像例コード
      */
+    @CheckForNull
     public Code getYokaigoJotaizoReiCode() {
         return yokaigoJotaizoReiCode;
     }
@@ -293,6 +321,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 認定審査会意見種類
      */
+    @CheckForNull
     public RString getNinteishinsakaiIkenShurui() {
         return ninteishinsakaiIkenShurui;
     }
@@ -313,6 +342,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 審査会メモ
      */
+    @CheckForNull
     public RString getShinsakaiMemo() {
         return shinsakaiMemo;
     }
@@ -333,6 +363,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 二次判定結果入力方法
      */
+    @CheckForNull
     public Code getNijiHanteiKekkaInputHoho() {
         return nijiHanteiKekkaInputHoho;
     }
@@ -353,24 +384,25 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      *
      * @return 二次判定結果入力年月日
      */
-    public FlexibleDate getNiniHanteiKekkaInputYMD() {
-        return niniHanteiKekkaInputYMD;
+    @CheckForNull
+    public FlexibleDate getNijiHanteiKekkaInputYMD() {
+        return nijiHanteiKekkaInputYMD;
     }
 
     /**
      * 二次判定結果入力年月日のsetメソッドです。
      *
-     * @param niniHanteiKekkaInputYMD 二次判定結果入力年月日
+     * @param nijiHanteiKekkaInputYMD 二次判定結果入力年月日
      */
-    public void setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
-        this.niniHanteiKekkaInputYMD = niniHanteiKekkaInputYMD;
+    public void setNijiHanteiKekkaInputYMD(FlexibleDate nijiHanteiKekkaInputYMD) {
+        this.nijiHanteiKekkaInputYMD = nijiHanteiKekkaInputYMD;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5129TennyuShiboEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5129TennyuShiboEntity other) {
@@ -394,14 +426,15 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
         this.nijiHanteiNinteiYukoKikan = entity.nijiHanteiNinteiYukoKikan;
         this.nijiHanteiNinteiYukoKaishiYMD = entity.nijiHanteiNinteiYukoKaishiYMD;
         this.nijiHanteiNinteiYukoShuryoYMD = entity.nijiHanteiNinteiYukoShuryoYMD;
+        this.shinsakaiShiryoSakuseiYMD = entity.shinsakaiShiryoSakuseiYMD;
         this.shinsakaiKaisaiNo = entity.shinsakaiKaisaiNo;
         this.shinsakaiIken = entity.shinsakaiIken;
-        this.ichijiHnateiKekkaHenkoRiyu = entity.ichijiHnateiKekkaHenkoRiyu;
+        this.ichijiHanteiKekkaHenkoRiyu = entity.ichijiHanteiKekkaHenkoRiyu;
         this.yokaigoJotaizoReiCode = entity.yokaigoJotaizoReiCode;
         this.ninteishinsakaiIkenShurui = entity.ninteishinsakaiIkenShurui;
         this.shinsakaiMemo = entity.shinsakaiMemo;
         this.nijiHanteiKekkaInputHoho = entity.nijiHanteiKekkaInputHoho;
-        this.niniHanteiKekkaInputYMD = entity.niniHanteiKekkaInputYMD;
+        this.nijiHanteiKekkaInputYMD = entity.nijiHanteiKekkaInputYMD;
     }
 
     /**
@@ -411,7 +444,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, nijiHanteiYMD, nijiHanteiYokaigoJotaiKubunCode, nijiHanteiNinteiYukoKikan, nijiHanteiNinteiYukoKaishiYMD, nijiHanteiNinteiYukoShuryoYMD, shinsakaiKaisaiNo, shinsakaiIken, ichijiHnateiKekkaHenkoRiyu, yokaigoJotaizoReiCode, ninteishinsakaiIkenShurui, shinsakaiMemo, nijiHanteiKekkaInputHoho, niniHanteiKekkaInputYMD);
+        return super.toMd5(shinseishoKanriNo, nijiHanteiYMD, nijiHanteiYokaigoJotaiKubunCode, nijiHanteiNinteiYukoKikan, nijiHanteiNinteiYukoKaishiYMD, nijiHanteiNinteiYukoShuryoYMD, shinsakaiShiryoSakuseiYMD, shinsakaiKaisaiNo, shinsakaiIken, ichijiHanteiKekkaHenkoRiyu, yokaigoJotaizoReiCode, ninteishinsakaiIkenShurui, shinsakaiMemo, nijiHanteiKekkaInputHoho, nijiHanteiKekkaInputYMD);
     }
 
 // </editor-fold>

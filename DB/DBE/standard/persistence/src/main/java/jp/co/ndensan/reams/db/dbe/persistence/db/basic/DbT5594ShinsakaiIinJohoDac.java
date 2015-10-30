@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

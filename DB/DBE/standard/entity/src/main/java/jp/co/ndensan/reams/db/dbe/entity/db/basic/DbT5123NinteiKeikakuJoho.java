@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定計画情報テーブルの項目定義クラスです。
  */
 public enum DbT5123NinteiKeikakuJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -41,6 +42,7 @@ public enum DbT5123NinteiKeikakuJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
@@ -64,10 +66,6 @@ public enum DbT5123NinteiKeikakuJoho implements IColumnDefinition {
      */
     ichijiHanteiYoteiYMD(2147483647, 0),
     /**
-     * 要介護認定1.5次判定予定年月日
-     */
-    ichiGoHanteiYoteiYMD(2147483647, 0),
-    /**
      * 認定審査会割当予定年月日
      */
     ninteiShinsakaiWariateYoteiYMD(2147483647, 0),
@@ -90,7 +88,7 @@ public enum DbT5123NinteiKeikakuJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -99,7 +97,7 @@ public enum DbT5123NinteiKeikakuJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

@@ -71,8 +71,6 @@ public class DbT5105NinteiKanryoJohoDac implements ISaveable<DbT5105NinteiKanryo
     @Override
     public int save(DbT5105NinteiKanryoJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定完了情報エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

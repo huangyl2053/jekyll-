@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 /**
  * {@link DbT5101NinteiShinseiJohoDac}のテストです。
  */
+@Ignore
 @RunWith(Enclosed.class)
 @Ignore
 public class DbT5101NinteiShinseiJohoDacTest extends DbeTestDacBase {

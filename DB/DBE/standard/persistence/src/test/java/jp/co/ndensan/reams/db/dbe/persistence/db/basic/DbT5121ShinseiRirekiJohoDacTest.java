@@ -4,39 +4,36 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator.DEFAULT_申請管理番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link DbT5121ShinseiRirekiJohoDac}のテストです。
- *
- * @author n8223 朴義一
  */
-@RunWith(Enclosed.class)
 @Ignore
-public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
+@RunWith(Enclosed.class)
 
-    private static final ShinseishoKanriNo 申請管理番号 = new ShinseishoKanriNo("00000000001");
-    private static final ShinseishoKanriNo 申請管理番号00000000001 = new ShinseishoKanriNo("00000000002");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+public class DbT5121ShinseiRirekiJohoDacTest extends DbeTestDacBase {
+
+    private static final ShinseishoKanriNo キー_01 = new ShinseishoKanriNo("01");
+    private static final ShinseishoKanriNo キー_02 = new ShinseishoKanriNo("02");
+    private static final ShinseishoKanriNo キー_03 = new ShinseishoKanriNo("03");
     private static DbT5121ShinseiRirekiJohoDac sut;
 
     @BeforeClass
@@ -44,14 +41,14 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         sut = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbdTestDacBase {
+    public static class selectByKeyのテスト extends DbeTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
-                    申請管理番号);
+                    DEFAULT_申請管理番号);
             TestSupport.insert(
-                    申請管理番号00000000001);
+                    キー_02);
         }
 
         @Test(expected = NullPointerException.class)
@@ -62,83 +59,89 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            Optional<DbT5121ShinseiRirekiJohoEntity> insertedRecord = sut.selectByKey(
-                    申請管理番号);
+            DbT5121ShinseiRirekiJohoEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_申請管理番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            Optional<DbT5121ShinseiRirekiJohoEntity> insertedRecord = sut.selectByKey(
-                    申請管理番号00000000001);
-            assertThat(insertedRecord.isPresent(), is(false));
+            DbT5121ShinseiRirekiJohoEntity insertedRecord = sut.selectByKey(
+                    キー_01);
+            assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    @Ignore("テストデータの件数は可変なので、エラーとしない")
-    public static class selectAllのテスト extends DbdTestDacBase {
+    public static class selectAllのテスト extends DbeTestDacBase {
 
         @Test
         public void 申請履歴情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    申請管理番号);
-            assertThat(sut.selectAll().size(), is(1));
+                    キー_02);
+            TestSupport.insert(
+                    キー_03);
+            assertThat(sut.selectAll().size(), is(2));
         }
 
         @Test
         public void 申請履歴情報が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll().toList(), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
 
-    public static class insertのテスト extends DbdTestDacBase {
+    public static class insertのテスト extends DbeTestDacBase {
 
         @Test
         public void 申請履歴情報エンティティを渡すと_insertは_申請履歴情報を追加する() {
             TestSupport.insert(
-                    申請管理番号);
+                    DEFAULT_申請管理番号);
 
             assertThat(sut.selectByKey(
-                    申請管理番号00000000001), is(notNullValue()));
+                    DEFAULT_申請管理番号), is(notNullValue()));
         }
     }
 
-    public static class updateのテスト extends DbdTestDacBase {
+    public static class updateのテスト extends DbeTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
-                    申請管理番号00000000001);
+                    DEFAULT_申請管理番号);
         }
 
         @Test
         public void 申請履歴情報エンティティを渡すと_updateは_申請履歴情報を更新する() {
-            DbT5121ShinseiRirekiJohoEntity updateRecord = DbT5121ShinseiRirekiJohoEntityGenerator.createDbT5121ShinseiRirekiJohoEntity();
-            updateRecord.setShinseishoKanriNo(申請管理番号00000000001);
+            DbT5121ShinseiRirekiJohoEntity updateRecord = sut.selectByKey(
+                    DEFAULT_申請管理番号);
+            updateRecord.setZenkaiShinseishoKanriNo(new ShinseishoKanriNo("00001"));
 
-            sut.update(updateRecord);
+            sut.save(updateRecord);
 
-            Optional<DbT5121ShinseiRirekiJohoEntity> updatedRecord = sut.selectByKey(
-                    申請管理番号00000000001);
+            DbT5121ShinseiRirekiJohoEntity updatedRecord = sut.selectByKey(
+                    DEFAULT_申請管理番号);
 
-            assertThat(updateRecord.getShinseishoKanriNo(), is(updatedRecord.get().getShinseishoKanriNo()));
+            assertThat(updateRecord.getZenkaiShinseishoKanriNo(), is(updatedRecord.getZenkaiShinseishoKanriNo()));
         }
     }
 
-    public static class deleteのテスト extends DbdTestDacBase {
+    public static class deleteのテスト extends DbeTestDacBase {
 
         @Before
         public void setUp() {
             TestSupport.insert(
-                    申請管理番号);
+                    DEFAULT_申請管理番号);
         }
 
         @Test
         public void 申請履歴情報エンティティを渡すと_deleteは_申請履歴情報を削除する() {
-            sut.delete(sut.selectByKey(
-                    申請管理番号).get());
+            DbT5121ShinseiRirekiJohoEntity deletedEntity = sut.selectByKey(
+                    DEFAULT_申請管理番号);
+            deletedEntity.setState(EntityDataState.Deleted);
+
+            sut.save(deletedEntity);
+
             assertThat(sut.selectByKey(
-                    申請管理番号00000000001).isPresent(), is(false));
+                    DEFAULT_申請管理番号), is(nullValue()));
         }
     }
 
@@ -148,7 +151,7 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
                 ShinseishoKanriNo 申請管理番号) {
             DbT5121ShinseiRirekiJohoEntity entity = DbT5121ShinseiRirekiJohoEntityGenerator.createDbT5121ShinseiRirekiJohoEntity();
             entity.setShinseishoKanriNo(申請管理番号);
-            sut.insert(entity);
+            sut.save(entity);
         }
     }
 }
