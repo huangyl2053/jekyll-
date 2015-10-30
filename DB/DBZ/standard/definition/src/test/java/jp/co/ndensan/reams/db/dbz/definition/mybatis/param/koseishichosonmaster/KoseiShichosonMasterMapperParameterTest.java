@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KoseiShichosonMasterMapperParameterTest extends DbzTestBase {
 
-    private static final LasdecCode shichonCode = new LasdecCode(new RString("302"));
+    private static final LasdecCode shichonCode = new LasdecCode(new RString("302302"));
     private static final boolean usesshichonCode = true;
 
 // テストクラス名は適切に変更してください

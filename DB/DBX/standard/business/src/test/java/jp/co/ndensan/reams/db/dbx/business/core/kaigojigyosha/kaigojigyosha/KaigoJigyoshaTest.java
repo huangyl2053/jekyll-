@@ -372,9 +372,9 @@ public class KaigoJigyoshaTest extends DbxTestBase {
         @Before
         public void setUp() {
             kaigoJigyoshaEntity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
-            事業者番号_1 = new KaigoJigyoshaNo("値_1");
-            事業者番号_2 = new KaigoJigyoshaNo("値_2");
-            事業者番号_3 = new KaigoJigyoshaNo("値_3");
+            事業者番号_1 = new KaigoJigyoshaNo("1234567890");
+            事業者番号_2 = new KaigoJigyoshaNo("1234567891");
+            事業者番号_3 = new KaigoJigyoshaNo("1234567892");
             サービス種類コード = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_サービス種類コード;
         }
 

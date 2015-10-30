@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -36,6 +37,7 @@ public class IDbT7064CareManegerMapperTest extends DbxTestDacBase {
         dbTestHelper = new DbTestHelper();
     }
 
+    @Ignore
     public static class getEntityメソッドTest extends DbxTestDacBase {
 
         @Before

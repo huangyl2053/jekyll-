@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -54,6 +55,7 @@ public class IKoseiShichosonMasterMapperTest {
     }
 
 // TODO 検索条件に合わせてのテストケースを追記して下さい。
+    @Ignore
     public static class select構成市町村マスタByKeyTest extends DbzTestDacBase {
 
         @Before
@@ -87,6 +89,7 @@ public class IKoseiShichosonMasterMapperTest {
     }
 
 // TODO 検索条件に合わせてのテストケースを追記して下さい。
+    @Ignore
     public static class select構成市町村マスタ一覧By主キーTest extends DbzTestDacBase {
 
         @Before

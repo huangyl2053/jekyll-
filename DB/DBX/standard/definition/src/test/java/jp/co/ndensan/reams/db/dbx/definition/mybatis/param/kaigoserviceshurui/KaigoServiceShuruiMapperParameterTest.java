@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,6 +25,7 @@ public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
     private static final KaigoServiceShuruiCode serviceShuruiCd = new KaigoServiceShuruiCode(new RString("113"));
     private static final FlexibleYearMonth teikyoKaishiYM = new FlexibleYearMonth(new RString("11"));
 
+    @Ignore
     public static class createSelectByKeyParamテスト extends DbxTestBase {
 
         @Test(expected = NullPointerException.class)

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,6 +26,7 @@ public class KaigoJigyoshaMapperParameterTest extends DbxTestBase {
     private final static KaigoJigyoshaNo jigyoshaNo = new KaigoJigyoshaNo(new RString("12"));
     private final static FlexibleDate yukoKaishiYMD = new FlexibleDate(new RString("23"));
 
+    @Ignore
     public static class createSelectByKeyParamテスト extends DbxTestBase {
 
         @Test(expected = NullPointerException.class)

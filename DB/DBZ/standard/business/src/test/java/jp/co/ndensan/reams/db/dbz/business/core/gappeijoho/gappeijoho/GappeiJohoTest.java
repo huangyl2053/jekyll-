@@ -294,10 +294,10 @@ public class GappeiJohoTest extends DbzTestBase {
             techoNiniEntity_1 = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
             techoNiniEntity_1.setGappeiYMD(gappeiJohoEntity.getGappeiYMD());
             techoNiniEntity_1.setChiikiNo(gappeiJohoEntity.getChiikiNo());
-            techoNiniEntity_1.setKyuShichosonCode(new LasdecCode("値１"));
+            techoNiniEntity_1.setKyuShichosonCode(new LasdecCode("209007"));
             techoNiniEntity_1.setState(childState);
             techoNiniEntity_2 = techoNiniEntity_1.clone();
-            techoNiniEntity_2.setKyuShichosonCode(new LasdecCode("値２"));
+            techoNiniEntity_2.setKyuShichosonCode(new LasdecCode("209007"));
             niniEntityList.add(techoNiniEntity_1);
             niniEntityList.add(techoNiniEntity_2);
             relateEntity.set合併市町村Entity(niniEntityList);

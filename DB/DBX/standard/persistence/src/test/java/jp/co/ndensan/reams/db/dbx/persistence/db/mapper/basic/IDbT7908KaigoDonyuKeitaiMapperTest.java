@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7908KaigoDonyuKeitaiMapper;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -16,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
  * {@link IDbT7908KaigoDonyuKeitaiMapper}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class IDbT7908KaigoDonyuKeitaiMapperTest extends DbxTestDacBase {
 
     private static DbT7908KaigoDonyuKeitaiEntity entity;
@@ -37,6 +38,7 @@ public class IDbT7908KaigoDonyuKeitaiMapperTest extends DbxTestDacBase {
         dbTestHelper = new DbTestHelper();
     }
 
+    @Ignore
     public static class getEntityメソッドTest extends DbxTestDacBase {
 
         @Before

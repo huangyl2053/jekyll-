@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT7063KaigoJigyoshaShiteiServiceEntityGenerator {
 
     public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0123400001");
-    public static final KaigoServiceShuruiCode DEFAULT_サービス種類コード = new KaigoServiceShuruiCode("0000001");
+    public static final KaigoServiceShuruiCode DEFAULT_サービス種類コード = new KaigoServiceShuruiCode("01");
     public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_有効終了日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_異動日 = new FlexibleDate("20141216");
