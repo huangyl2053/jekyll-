@@ -94,20 +94,17 @@ public class KaigoServiceShuruiBuilder {
         return this;
     }
 
-
-    // <editor-fold defaultstate="collapsed" desc="子階層のリレーションテーブルのBusinessをメンバー変数で保持する場合">
-//TODO 子テーブル１「精神手帳任意項目情報 SeishinTechoNini」を適宜置換して下さい。
     /**
-     * 精神手帳任意項目情報のキー情報について判定します。<br>
-     * 精神手帳情報に関連できる精神手帳任意項目情報である場合、下記の処理に遷移します。<br>
-     * キーが一致する場合は精神手帳任意項目情報リストに精神手帳任意項目情報{@link SeishinTechoNini}をセットします。<br>
+     * 介護サービス内容のキー情報について判定します。<br>
+     * 介護サービスに関連できる介護サービス内容である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は介護サービス内容リストに介護サービス内容{@link KaigoServiceNaiyou}をセットします。<br>
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 介護サービス内容 {@link KaigoServiceShurui}
      * @return {@link KaigoServiceShuruiBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
-    public KaigoServiceShuruiBuilder setSeishinTechoNini(KaigoServiceNaiyou 介護サービス内容) {
+    public KaigoServiceShuruiBuilder setKaigoServiceNaiyou(KaigoServiceNaiyou 介護サービス内容) {
         if (hasSameIdentifier(介護サービス内容.identifier())) {
             kaigoServiceNaiyou.add(介護サービス内容);
             return this;
@@ -119,9 +116,7 @@ public class KaigoServiceShuruiBuilder {
         return (id.getサービス種類コード().equals(介護サービス内容の識別子.getサービス種類コード())
                 && id.get提供開始年月() == 介護サービス内容の識別子.get提供開始年月());
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="ありの場合">
     /**
      * {@link KaigoServiceShurui}のインスタンスを生成します。
      *
@@ -130,5 +125,4 @@ public class KaigoServiceShuruiBuilder {
     public KaigoServiceShurui build() {
         return new KaigoServiceShurui(entity, id, kaigoServiceNaiyou);
     }
-    // </editor-fold>
 }
