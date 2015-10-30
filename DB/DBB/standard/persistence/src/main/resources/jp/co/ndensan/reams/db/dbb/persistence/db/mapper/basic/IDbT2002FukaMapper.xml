@@ -79,7 +79,7 @@
     <resultMap id="ResultMap_DbT2002FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" />
+        <id property="tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id property="rirekiNo" column="dbT2002Fuka_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2002Fuka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2002Fuka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -89,7 +89,7 @@
         <result property="updateCount" column="dbT2002Fuka_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT2002Fuka_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT2002Fuka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hihokenshaNo" column="dbT2002Fuka_hihokenshaNo" />
+        <result property="hihokenshaNo" column="dbT2002Fuka_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="dbT2002Fuka_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="setaiCode" column="dbT2002Fuka_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="setaiInsu" column="dbT2002Fuka_setaiInsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

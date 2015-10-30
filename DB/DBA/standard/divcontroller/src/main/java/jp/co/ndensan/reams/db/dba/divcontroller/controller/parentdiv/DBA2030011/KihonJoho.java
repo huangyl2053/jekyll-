@@ -52,7 +52,7 @@ public class KihonJoho {
 //        lasdecCode = new LasdecCode("209007");
 
         kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
-        kihonDiv.getCcdKaigoShikakuKihon().load(lasdecCode, taishoshaKey.get識別コード());
+        kihonDiv.getCcdKaigoShikakuKihon().initialize(lasdecCode, taishoshaKey.get識別コード());
 
         if (isNot適用対象者(taishoshaKey, controlData)) {
             //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月

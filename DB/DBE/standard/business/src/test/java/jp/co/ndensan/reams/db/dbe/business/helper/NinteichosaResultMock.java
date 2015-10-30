@@ -140,15 +140,10 @@ import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.cho
 import static jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.麻痺等の有無_左下肢;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosajisshibashokubuncode.NinteichosaJisshibashoKubunCode;
-import jp.co.ndensan.reams.db.dbx.business.core.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.core._NinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.KaigoJigyosha;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho._Name;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -224,19 +219,21 @@ public class NinteichosaResultMock {
                         new FlexibleDate("20140101"),
                         new FlexibleDate("20140202"),
                         NinteichosaKubun.新規調査,
-                        new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
+                        null,
+                        //                        new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
                         new NinteichosaJisshibashoKubun(
                                 new NinteichosaJisshibashoKubunCode(new Code(new RString("12345678"))).asCode(), new RString("認定調査実施場所名称"), RString.EMPTY)),
                 editor.getNinteichosahyo()));
     }
 
     private static KaigoJigyosha createKaigoJigyosha() {
-        return new KaigoJigyosha(
-                new KaigoJigyoshaNo("0000000001"), FlexibleDate.MIN, FlexibleDate.MAX,
-                new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
-                new RString("事業者住所カナ"), new RString("異動事由"), FlexibleDate.MIN, new RString("社会福祉法人軽減対象区分"),
-                new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),
-                FlexibleDate.MAX, FlexibleDate.MIN, FlexibleDate.MAX, FlexibleDate.MIN);
+//        return new KaigoJigyosha(
+//                new KaigoJigyoshaNo("0000000001"), FlexibleDate.MIN, FlexibleDate.MAX,
+//                new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
+//                new RString("事業者住所カナ"), new RString("異動事由"), FlexibleDate.MIN, new RString("社会福祉法人軽減対象区分"),
+//                new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),
+//                FlexibleDate.MAX, FlexibleDate.MIN, FlexibleDate.MAX, FlexibleDate.MIN);
+        return new KaigoJigyosha(new KaigoJigyoshaEntity());
     }
 
     /**

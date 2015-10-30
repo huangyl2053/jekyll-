@@ -3,7 +3,7 @@
 <!-- 概要： 介護賦課徴収猶予のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuYuyo.IChoshuYuyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoMapper">
 
     <select id="select介護賦課徴収猶予ByKey" resultMap="resultMap_ChoshuYuyoEntity" fetchSize="500">
         <include refid="selectChoshuYuyoEntity" />
@@ -36,7 +36,7 @@
     </sql>
 
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
-    <resultMap id="resultMap_ChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuYuyo.ChoshuYuyoEntity" autoMapping="true">
+    <resultMap id="resultMap_ChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity" autoMapping="true">
         <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
@@ -84,7 +84,7 @@
     </select>
 
     
-    <resultMap id="resultMap_ChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.ChoshuYuyoEntity" autoMapping="true">
+    <resultMap id="resultMap_ChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity" autoMapping="true">
         <id column="dbT2006ChoshuYuyo_choteiNendo"/>
         <id column="dbT2006ChoshuYuyo_fukaNendo"/>
         <id column="dbT2006ChoshuYuyo_tsuchishoNo"/>

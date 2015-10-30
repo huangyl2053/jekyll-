@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -16,6 +16,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -261,6 +262,7 @@ public class KokuhorenInterfaceKanriTest extends DbcTestBase {
         }
     }
 
+    @Ignore
     public static class SerializationProxyテスト extends DbcTestBase {
 
         private static KokuhorenInterfaceKanri sut;

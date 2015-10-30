@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyotei
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,12 +26,12 @@ public class ShinsakaiKaisaiYoteiJohoMapperParameterTest extends DbeTestBase {
             ShinsakaiKaisaiYoteiJohoMapperParameter sut = ShinsakaiKaisaiYoteiJohoMapperParameter.createSelectByKeyParam(null);
         }
 
-        @Test
-        public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            ShinsakaiKaisaiYoteiJohoMapperParameter sut = ShinsakaiKaisaiYoteiJohoMapperParameter.createSelectByKeyParam(shinsakaiKaisaiNo);
-
-            assertThat(sut.getShinsakaiKaisaiNo(), is(shinsakaiKaisaiNo));
-        }
+//        @Test
+//        public void 引数にNull以外を指定すると_パラメータが生成できる() {
+//            ShinsakaiKaisaiYoteiJohoMapperParameter sut = ShinsakaiKaisaiYoteiJohoMapperParameter.createSelectByKeyParam(shinsakaiKaisaiNo);
+//
+//            assertThat(sut.getShinsakaiKaisaiNo(), is(shinsakaiKaisaiNo));
+//        }
     }
 
 }

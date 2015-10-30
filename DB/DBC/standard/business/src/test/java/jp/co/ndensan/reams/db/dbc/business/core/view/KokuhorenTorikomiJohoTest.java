@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.view;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbV3104KokuhorenTorikomiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbV3104KokuhorenTorikomiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,6 +14,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
  * {@link KokuhorenTorikomiJoho}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KokuhorenTorikomiJohoTest extends DbcTestBase {
 
     private static DbV3104KokuhorenTorikomiJohoEntity KokuhorenTorikomiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

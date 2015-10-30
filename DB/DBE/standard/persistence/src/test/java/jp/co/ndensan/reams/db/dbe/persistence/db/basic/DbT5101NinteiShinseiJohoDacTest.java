@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ import org.junit.runner.RunWith;
  * {@link DbT5101NinteiShinseiJohoDac}のテストです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class DbT5101NinteiShinseiJohoDacTest extends DbeTestDacBase {
 
     private static final ShinseishoKanriNo キー_01 = new ShinseishoKanriNo("01");

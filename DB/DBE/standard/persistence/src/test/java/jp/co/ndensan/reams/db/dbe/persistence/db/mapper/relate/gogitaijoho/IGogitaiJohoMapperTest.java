@@ -29,6 +29,7 @@ import org.junit.AfterClass;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -37,6 +38,7 @@ import org.junit.runner.RunWith;
  * {@link IGogitaiJohoMapper}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class IGogitaiJohoMapperTest {
 
     private static IGogitaiJohoMapper sut;
@@ -59,7 +61,7 @@ public class IGogitaiJohoMapperTest {
     public static void setUpClass() {
         dbTestHelper = new DbTestHelper();
         gogitaiNo = 1;
-        gogitaiYukoKikanKaishiYMD = new FlexibleDate("2015");
+        gogitaiYukoKikanKaishiYMD = new FlexibleDate("20151010");
         shinsakaiKaisaiBashoCode = new RString("123");
         DbeTestDacBase.setUpClassInternal();
 

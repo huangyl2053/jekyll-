@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5593GogitaiWariateIinJohoEntityGenerator.DEFAULT_介護認定審査会委員コード;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;

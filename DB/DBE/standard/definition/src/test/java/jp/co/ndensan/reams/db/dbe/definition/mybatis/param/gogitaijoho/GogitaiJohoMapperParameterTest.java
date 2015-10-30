@@ -26,11 +26,10 @@ public class GogitaiJohoMapperParameterTest extends DbeTestBase {
 
     public static class createSelectByKeyParamテスト extends DbeTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void gogitaiNoにNullを指定すると_NullPointerExceptionが発生する() {
-            GogitaiJohoMapperParameter sut = GogitaiJohoMapperParameter.createSelectByKeyParam(0, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void gogitaiNoにNullを指定すると_NullPointerExceptionが発生する() {
+//            GogitaiJohoMapperParameter sut = GogitaiJohoMapperParameter.createSelectByKeyParam(0, gogitaiYukoKikanKaishiYMD, shinsakaiKaisaiBashoCode);
+//        }
         @Test(expected = NullPointerException.class)
         public void gogitaiYukoKikanKaishiYMDにNullを指定すると_NullPointerExceptionが発生する() {
             GogitaiJohoMapperParameter sut = GogitaiJohoMapperParameter.createSelectByKeyParam(gogitaiNo, null, shinsakaiKaisaiBashoCode);

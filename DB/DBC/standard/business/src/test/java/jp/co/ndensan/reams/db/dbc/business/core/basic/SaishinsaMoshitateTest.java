@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3062SaishinsaMoshitateEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
@@ -20,6 +20,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ import org.junit.runner.RunWith;
  * {@link SaishinsaMoshitate}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class SaishinsaMoshitateTest extends DbcTestBase {
 
     private static DbT3062SaishinsaMoshitateEntity SaishinsaMoshitateEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

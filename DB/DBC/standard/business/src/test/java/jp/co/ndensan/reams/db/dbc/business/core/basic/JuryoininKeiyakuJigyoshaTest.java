@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,6 +17,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -268,6 +269,7 @@ public class JuryoininKeiyakuJigyoshaTest extends DbcTestBase {
         }
     }
 
+    @Ignore
     public static class SerializationProxyテスト extends DbcTestBase {
 
         private static JuryoininKeiyakuJigyosha sut;

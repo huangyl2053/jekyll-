@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3116KijunShunyugakuTekiyoKanriEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -246,6 +247,7 @@ public class KijunShunyugakuTekiyoKanriTest extends DbcTestBase {
         }
     }
 
+    @Ignore
     public static class SerializationProxyテスト extends DbcTestBase {
 
         private static KijunShunyugakuTekiyoKanri sut;

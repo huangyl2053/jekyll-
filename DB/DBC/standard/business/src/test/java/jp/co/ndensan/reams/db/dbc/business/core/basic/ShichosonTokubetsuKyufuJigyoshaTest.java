@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3065ShichosonTokubetsuKyufuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3065ShichosonTokubetsuKyufuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -17,6 +17,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,6 +26,7 @@ import org.junit.runner.RunWith;
  * {@link ShichosonTokubetsuKyufuJigyosha}のテストクラスです。
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShichosonTokubetsuKyufuJigyoshaTest extends DbcTestBase {
 
     private static DbT3065ShichosonTokubetsuKyufuJigyoshaEntity ShichosonTokubetsuKyufuJigyoshaEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。

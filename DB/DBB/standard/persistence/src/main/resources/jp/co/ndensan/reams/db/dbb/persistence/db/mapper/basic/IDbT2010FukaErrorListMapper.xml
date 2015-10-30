@@ -44,7 +44,7 @@
         <id property="subGyomuCode" column="dbT2010FukaErrorList_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="internalReportId" column="dbT2010FukaErrorList_internalReportId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="fukaNendo" column="dbT2010FukaErrorList_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2010FukaErrorList_tsuchishoNo" />
+        <id property="tsuchishoNo" column="dbT2010FukaErrorList_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2010FukaErrorList_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2010FukaErrorList_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT2010FukaErrorList_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -58,7 +58,7 @@
         <result property="batchStartingDateTime" column="dbT2010FukaErrorList_batchStartingDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="shoriKubunCode" column="dbT2010FukaErrorList_shoriKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="errorCode" column="dbT2010FukaErrorList_errorCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="hihokenshaNo" column="dbT2010FukaErrorList_hihokenshaNo" />
+        <result property="hihokenshaNo" column="dbT2010FukaErrorList_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="dbT2010FukaErrorList_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     

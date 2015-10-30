@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koseishichosonmaster;
 
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,27 +21,21 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KoseiShichosonMasterMapperParameterTest extends DbeTestBase {
 
-    private static final RString shichosonShokibetsuID = new RString("22");
-    private static final LasdecCode shichosonCode = new LasdecCode(new RString("23"));
+    private static final LasdecCode shichosonCode = new LasdecCode(new RString("232222"));
 
     public static class createSelectByKeyParamテスト extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 主キー1にNullを指定すると_NullPointerExceptionが発生する() {
-            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichosonShokibetsuID, shichosonCode);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー2にNullを指定すると_NullPointerExceptionが発生する() {
-            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichosonShokibetsuID, shichosonCode);
+            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(null, true);
         }
 
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
-            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichosonShokibetsuID, shichosonCode);
+            KoseiShichosonMasterMapperParameter sut = KoseiShichosonMasterMapperParameter.createSelectByKeyParam(shichosonCode, true);
 
-            assertThat(sut.getShichosonShokibetsuID(), is(shichosonShokibetsuID));
-            assertThat(sut.getShichosonCode(), is(shichosonCode));
+            assertThat(sut.isUsesshichonCode(), is(true));
+            assertThat(sut.getShichonCode(), is(shichosonCode));
 
         }
     }

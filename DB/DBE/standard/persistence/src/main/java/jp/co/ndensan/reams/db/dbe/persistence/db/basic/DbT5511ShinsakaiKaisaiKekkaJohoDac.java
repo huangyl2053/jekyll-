@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5511ShinsakaiKaisaiKekkaJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5511ShinsakaiKaisaiKekkaJoho.shinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101ShinsakaiJoho.shinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

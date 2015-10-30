@@ -47,7 +47,7 @@
     </select>
 
     
-    <resultMap id="resultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.relate.FukaEntity" autoMapping="true">
+    <resultMap id="resultMap_FukaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity" autoMapping="true">
         <id column="dbT2002Fuka_choteiNendo"/>
         <id column="dbT2002Fuka_fukaNendo"/>
         <id column="dbT2002Fuka_tsuchishoNo"/>
@@ -55,7 +55,7 @@
         <association property="DbT2002FukaEntity" 
                      resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka.ResultMap_DbT2002FukaEntity"/>
         <collection property="DbT2003KibetsuEntity" 
-                    ofType="jp.co.ndensan.reams.db.dbb.entity.basic.DbT2003KibetsuEntity"
+                    ofType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity"
                     resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu.ResultMap_DbT2003KibetsuEntity"/>
     </resultMap>
 

@@ -21,8 +21,8 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ChoshuYuyoMapperParameterTest extends DbbTestBase {
 
-    private static final FlexibleYear choteiNendo = new FlexibleYear("20151020");
-    private static final FlexibleYear fukaNendo = new FlexibleYear("20151020");
+    private static final FlexibleYear choteiNendo = new FlexibleYear("2015");
+    private static final FlexibleYear fukaNendo = new FlexibleYear("2015");
     private static final TsuchishoNo tsuchishoNo = new TsuchishoNo("1");
     private static final Decimal rirekiNo = Decimal.TEN;
 

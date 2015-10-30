@@ -8,23 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.KaigoDoctorEntity;
-//import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517Ishi;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigodoctorcode.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigoiryokikancode.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 
 /**
  * 介護医師情報のデータアクセスクラスです。
  *
  * @author N8156 宮本 康
  */
-public class KaigoDoctorDac implements IKaigoDoctorDac {
+public class KaigoDoctorDac {
     //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
 //    @InjectSession
 //    private SqlSession session;
-    @Override
     public List<KaigoDoctorEntity> select(ITrueFalseCriteria criteria) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()
@@ -36,7 +34,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new ArrayList<>();
     }
 
-    @Override
     public KaigoDoctorEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()
@@ -50,7 +47,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new KaigoDoctorEntity();
     }
 
-    @Override
     public KaigoDoctorEntity select(
             LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -66,7 +62,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new KaigoDoctorEntity();
     }
 
-    @Override
     public List<KaigoDoctorEntity> select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()
@@ -80,7 +75,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new ArrayList<>();
     }
 
-    @Override
     public List<KaigoDoctorEntity> select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()
@@ -95,7 +89,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new ArrayList<>();
     }
 
-    @Override
     public List<KaigoDoctorEntity> select(LasdecCode 市町村コード) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()
@@ -107,7 +100,6 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return new ArrayList<>();
     }
 
-    @Override
     public List<KaigoDoctorEntity> select(LasdecCode 市町村コード, IshiJokyo 医師の状況) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.select()

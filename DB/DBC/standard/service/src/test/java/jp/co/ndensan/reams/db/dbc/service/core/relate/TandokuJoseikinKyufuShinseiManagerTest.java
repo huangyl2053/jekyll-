@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.TandokuJoseikinKyufuKettei
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TandokuJoseikinKyufuKetteiBuilder;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TandokuJoseikinKyufuShinsei;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.TandokuJoseikinKyufuShinseiMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3098TandokuJoseikinKyufuShinseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3097TandokuJoseikinKyufuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3098TandokuJoseikinKyufuShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3098TandokuJoseikinKyufuShinseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.TandokuJoseikinKyufuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3098TandokuJoseikinKyufuShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.ITandokuJoseikinKyufuShinseiMapper;
@@ -23,20 +23,17 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.TandokuJoseikinKyufuKetteiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
@@ -277,7 +274,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             TandokuJoseikinKyufuShinsei 市町村単独助成金給付申請 = new TandokuJoseikinKyufuShinsei(主キー1, 主キー2, Decimal.ZERO);
             return 市町村単独助成金給付申請.createBuilderForEdit()
                     // 市町村単独助成金給付決定
-                    .setTandokuJoseikinKyufuKettei(createTandokuJoseikinKyufuKettei(主キー1, 主キー2))
+                    .setTandokuJoseikin(createTandokuJoseikinKyufuKettei(主キー1, 主キー2))
                     .build();
         }
 
@@ -315,7 +312,7 @@ public class TandokuJoseikinKyufuShinseiManagerTest {
             市町村単独助成金給付申請 = 市町村単独助成金給付申請.createBuilderForEdit()
                     .set申請理由(new RString("変更")) // TODO 任意項目の値を変更してください。
                     // 市町村単独助成金給付決定
-                    .setTandokuJoseikinKyufuKettei(TandokuJoseikinKyufuKettei)
+                    .setTandokuJoseikin(TandokuJoseikinKyufuKettei)
                     .build();
             return 市町村単独助成金給付申請.modifiedModel();
         }
