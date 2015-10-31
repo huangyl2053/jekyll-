@@ -200,6 +200,18 @@ public class ShinsakaiWariateJoho extends ModelBase<ShinsakaiWariateJohoIdentifi
         return this.id;
     }
 
+    public NinteiShinseiJoho getNinteiShinseiJoho(NinteiShinseiJohoIdentifier id) {
+        if (ninteiShinseiJoho.contains(id)) {
+            return ninteiShinseiJoho.clone().get(id);
+        }
+        //TODO メッセージの検討
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    public List<NinteiShinseiJoho> getNinteiShinseiJohoList() {
+        return new ArrayList<>(ninteiShinseiJoho.values());
+    }
+
     /**
      * 介護認定審査会割当情報のみを変更対象とします。<br/>
      * {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
