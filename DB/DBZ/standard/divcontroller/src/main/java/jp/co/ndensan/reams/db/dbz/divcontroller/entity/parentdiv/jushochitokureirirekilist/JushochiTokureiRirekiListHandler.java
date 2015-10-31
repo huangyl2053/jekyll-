@@ -8,22 +8,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokure
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.Lists;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbx.definition.core.util.Lists;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -37,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 共有子Div「住所地特例履歴」の状態を変更するクラスです。
