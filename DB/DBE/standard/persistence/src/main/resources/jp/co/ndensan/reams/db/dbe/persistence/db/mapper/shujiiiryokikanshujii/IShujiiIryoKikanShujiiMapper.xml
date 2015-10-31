@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 構成市町村マスタのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper">
+    
+    <!--DbT7051KoseiShichosonMaster-->
+    <!--DbT5911ShujiiIryoKikanJoho-->
+     <resultMap id="resultMap_KoseiShichosonMasterEntity"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanshujii.KoseiShichosonMasterEntity"
+               autoMapping="true">
+        <id column="dbT7051KoseiShichosonMaster_shichosonShokibetsuID"/>
+        <association property="koseiShichosonMasterEntity"
+                     resultMap="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.resultMap_DbT7051KoseiShichosonMasterEntity"/>
+        <collection  property="shujiiIryoKikanJohoEntity"
+                     resultMap="resultMap_shujiiIryoKikanJohoEntity"
+                     ofType="jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity">
+        </collection>
+    </resultMap>
+
+    <!--DbT5911ShujiiIryoKikanJoho-->
+    <resultMap id="resultMap_ShujiiJohoEntity"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.koseishichosonmaster.ShujiiJohoEntity"
+               autoMapping="true">
+        <id column="dbT5912ShujiiJoho_shichosonCode"/>
+        <id column="dbT5912ShujiiJoho_shujiiIryokikanCode"/>
+        <association property="shujiiJohoEntity"
+                     resultMap="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.resultMap_DbT5912ShujiiJohoEntity"/>
+
+        <collection  property="shujiiJohoEntity"
+                     ofType="jp.co.ndensan.reams.ba.baa.entity.db.basic.DbT5912ShujiiJohoEntity"
+                     resultMap="jp.co.ndensan.reams.ba.baa.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.resultMap_DbT5912ShujiiJohoEntity">
+        </collection>
+    </resultMap>
+
+
+
+    <!--DbT7051KoseiShichosonMaster-->
+    <!--DbT5911ShujiiIryoKikanJoho-->
+    <!--DbT5912ShujiiJoho-->
+   <select id="getShujiiIryoKikanShujiiRelateEntity"
+            resultMap="resultMap_KoseiShichosonMasterEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanshujii" fetchSize="500">
+       SELECT
+        dbT7051KoseiShichosonMaster.*
+        dbT5911ShujiiIryoKikanJoho.*
+        dbT5912ShujiiJoho.*
+
+        FROM
+        <!--DbT7051KoseiShichosonMaster-->
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+        FROM
+        rgba."DbT7051KoseiShichosonMaster"
+        WHERE
+        "shichosonShokibetsuID" = #{shichosonShokibetsuID}
+        AND
+        "shichosonCode" = #{shichosonCode}
+         AND
+        "shujiiIryokikanCode" = #{shujiiIryokikanCode}
+        )AS  dbT7051KoseiShichosonMaster
+        <!--DbT5911ShujiiIryoKikanJoho-->
+       LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
+        FROM
+        rgba."DbT5911ShujiiIryoKikanJoho"
+        )AS  dbT5911ShujiiIryoKikanJoho
+        ON
+        dbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode" = dbT5911ShujiiIryoKikanJoho."dbT5592ShinsakaiKaisaiBashoJoho_shichosonCode"    
+
+          <!--DbT5912ShujiiJoho-->
+        LEFT OUTER JOIN
+        (
+        SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
+        FROM
+        rgba."DbT5912ShujiiJoho"
+        )AS  dbT5912ShujiiJoho
+        ON
+         dbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" = dbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode"
+        AND
+         dbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" = dbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode"   
+        ;
+   </select>
+</mapper>
