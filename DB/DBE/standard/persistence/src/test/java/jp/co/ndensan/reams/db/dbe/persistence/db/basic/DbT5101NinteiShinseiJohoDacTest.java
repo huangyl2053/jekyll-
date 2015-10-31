@@ -28,7 +28,6 @@ import org.junit.runner.RunWith;
  */
 @Ignore
 @RunWith(Enclosed.class)
-@Ignore
 public class DbT5101NinteiShinseiJohoDacTest extends DbeTestDacBase {
 
     private static final ShinseishoKanriNo キー_01 = new ShinseishoKanriNo("01");
