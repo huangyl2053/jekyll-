@@ -33,7 +33,7 @@
         ;
     </select>
 
-    <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.ShinsakaiIinJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity" autoMapping="true">
         <id column="dbT5594ShinsakaiIinJoho_shikibetsuCode"/>
        
         <association property="shinsakaiIinJohoEntity" 
