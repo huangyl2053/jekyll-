@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" />
+     FROM
+         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+     WHERE
+         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho">
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."remban" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_remban",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."insertDantaiCd" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertDantaiCd",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."insertTimestamp" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertTimestamp",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."insertReamsLoginId" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertReamsLoginId",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."insertContextId" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertContextId",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."isDeleted" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_isDeleted",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."updateCount" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_updateCount",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."lastUpdateTimestamp" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateTimestamp",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."lastUpdateReamsLoginId" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateReamsLoginId",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."jigyoshaKubun" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_jigyoshaKubun",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shozokuKaishiYMD" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuKaishiYMD",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shozokuShuryoYMD" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuShuryoYMD",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shoKisaiHokenshaNo" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shoKisaiHokenshaNo",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiIryokikanCode",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiCode",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteichosaItakusakiCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_ninteichosaItakusakiCode",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteiChosainNo" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_ninteiChosainNo",
+         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."sonotaKikanCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_sonotaKikanCode"
+    </sql>
+
+
+    <!--テーブルDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoの項目をDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity" autoMapping="true">
+        <id property="shinsakaiIinCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="remban" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_remban" />
+        <result property="insertDantaiCd" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_isDeleted" />
+        <result property="updateCount" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaKubun" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shozokuKaishiYMD" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shozokuShuryoYMD" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="shujiiIryokikanCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaItakusakiCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosainNo" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sonotaKikanCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_sonotaKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
+        FROM
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+    </select>
+</mapper>

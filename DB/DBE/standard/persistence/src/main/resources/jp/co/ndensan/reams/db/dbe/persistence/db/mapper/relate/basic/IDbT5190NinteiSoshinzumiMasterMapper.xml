@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5190NinteiSoshinzumiMasterマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5190NinteiSoshinzumiMasterMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5190NinteiSoshinzumiMaster">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5190NinteiSoshinzumiMasterMapper.allColumns_DbT5190NinteiSoshinzumiMaster" />
+     FROM
+         rgdb."DbT5190NinteiSoshinzumiMaster"
+     WHERE
+         rgdb."DbT5190NinteiSoshinzumiMaster"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5190NinteiSoshinzumiMaster">
+         "DbT5190NinteiSoshinzumiMaster"."shinseishoKanriNo" as "dbT5190NinteiSoshinzumiMaster_shinseishoKanriNo",
+         "DbT5190NinteiSoshinzumiMaster"."insertDantaiCd" as "dbT5190NinteiSoshinzumiMaster_insertDantaiCd",
+         "DbT5190NinteiSoshinzumiMaster"."insertTimestamp" as "dbT5190NinteiSoshinzumiMaster_insertTimestamp",
+         "DbT5190NinteiSoshinzumiMaster"."insertReamsLoginId" as "dbT5190NinteiSoshinzumiMaster_insertReamsLoginId",
+         "DbT5190NinteiSoshinzumiMaster"."insertContextId" as "dbT5190NinteiSoshinzumiMaster_insertContextId",
+         "DbT5190NinteiSoshinzumiMaster"."isDeleted" as "dbT5190NinteiSoshinzumiMaster_isDeleted",
+         "DbT5190NinteiSoshinzumiMaster"."updateCount" as "dbT5190NinteiSoshinzumiMaster_updateCount",
+         "DbT5190NinteiSoshinzumiMaster"."lastUpdateTimestamp" as "dbT5190NinteiSoshinzumiMaster_lastUpdateTimestamp",
+         "DbT5190NinteiSoshinzumiMaster"."lastUpdateReamsLoginId" as "dbT5190NinteiSoshinzumiMaster_lastUpdateReamsLoginId",
+         "DbT5190NinteiSoshinzumiMaster"."doitsuRemban" as "dbT5190NinteiSoshinzumiMaster_doitsuRemban",
+         "DbT5190NinteiSoshinzumiMaster"."isHikiwatashi" as "dbT5190NinteiSoshinzumiMaster_isHikiwatashi",
+         "DbT5190NinteiSoshinzumiMaster"."hikiwatashiYMDHM" as "dbT5190NinteiSoshinzumiMaster_hikiwatashiYMDHM",
+         "DbT5190NinteiSoshinzumiMaster"."hikiwatashiKaijoYMDHM" as "dbT5190NinteiSoshinzumiMaster_hikiwatashiKaijoYMDHM",
+         "DbT5190NinteiSoshinzumiMaster"."hikiwatashiCount" as "dbT5190NinteiSoshinzumiMaster_hikiwatashiCount",
+         "DbT5190NinteiSoshinzumiMaster"."torikomiYMDHM" as "dbT5190NinteiSoshinzumiMaster_torikomiYMDHM",
+         "DbT5190NinteiSoshinzumiMaster"."saiSofuKubun" as "dbT5190NinteiSoshinzumiMaster_saiSofuKubun",
+         "DbT5190NinteiSoshinzumiMaster"."saiChosaSofuKubun" as "dbT5190NinteiSoshinzumiMaster_saiChosaSofuKubun",
+         "DbT5190NinteiSoshinzumiMaster"."saiIkenshoSofuKubun" as "dbT5190NinteiSoshinzumiMaster_saiIkenshoSofuKubun"
+    </sql>
+
+
+    <!--テーブルDbT5190NinteiSoshinzumiMasterの項目をDbT5190NinteiSoshinzumiMasterEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5190NinteiSoshinzumiMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5190NinteiSoshinzumiMasterEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5190NinteiSoshinzumiMaster_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5190NinteiSoshinzumiMaster_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5190NinteiSoshinzumiMaster_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5190NinteiSoshinzumiMaster_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5190NinteiSoshinzumiMaster_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5190NinteiSoshinzumiMaster_isDeleted" />
+        <result property="updateCount" column="dbT5190NinteiSoshinzumiMaster_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5190NinteiSoshinzumiMaster_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5190NinteiSoshinzumiMaster_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="doitsuRemban" column="dbT5190NinteiSoshinzumiMaster_doitsuRemban" />
+        <result property="isHikiwatashi" column="dbT5190NinteiSoshinzumiMaster_isHikiwatashi" />
+        <result property="hikiwatashiYMDHM" column="dbT5190NinteiSoshinzumiMaster_hikiwatashiYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
+        <result property="hikiwatashiKaijoYMDHM" column="dbT5190NinteiSoshinzumiMaster_hikiwatashiKaijoYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
+        <result property="hikiwatashiCount" column="dbT5190NinteiSoshinzumiMaster_hikiwatashiCount" />
+        <result property="torikomiYMDHM" column="dbT5190NinteiSoshinzumiMaster_torikomiYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
+        <result property="saiSofuKubun" column="dbT5190NinteiSoshinzumiMaster_saiSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiChosaSofuKubun" column="dbT5190NinteiSoshinzumiMaster_saiChosaSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="saiIkenshoSofuKubun" column="dbT5190NinteiSoshinzumiMaster_saiIkenshoSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5190NinteiSoshinzumiMasterEntity">
+        SELECT
+        <include refid="allColumns_DbT5190NinteiSoshinzumiMaster"/>
+        FROM
+        rgdb."DbT5190NinteiSoshinzumiMaster"
+    </select>
+</mapper>

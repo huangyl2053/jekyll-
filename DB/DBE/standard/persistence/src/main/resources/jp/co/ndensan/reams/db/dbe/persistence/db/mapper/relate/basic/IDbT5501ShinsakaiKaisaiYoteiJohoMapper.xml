@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5501ShinsakaiKaisaiYoteiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5501ShinsakaiKaisaiYoteiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho" />
+     FROM
+         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+     WHERE
+         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5501ShinsakaiKaisaiYoteiJoho">
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaisaiNo" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."insertDantaiCd" as "dbT5501ShinsakaiKaisaiYoteiJoho_insertDantaiCd",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."insertTimestamp" as "dbT5501ShinsakaiKaisaiYoteiJoho_insertTimestamp",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."insertReamsLoginId" as "dbT5501ShinsakaiKaisaiYoteiJoho_insertReamsLoginId",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."insertContextId" as "dbT5501ShinsakaiKaisaiYoteiJoho_insertContextId",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."isDeleted" as "dbT5501ShinsakaiKaisaiYoteiJoho_isDeleted",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."updateCount" as "dbT5501ShinsakaiKaisaiYoteiJoho_updateCount",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."lastUpdateTimestamp" as "dbT5501ShinsakaiKaisaiYoteiJoho_lastUpdateTimestamp",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."lastUpdateReamsLoginId" as "dbT5501ShinsakaiKaisaiYoteiJoho_lastUpdateReamsLoginId",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaisaiYoteiYMD" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaishiYoteiTime" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiShuryoYoteiTime" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiShuryoYoteiTime",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaisaiYoteiBashoCode" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiBashoCode",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."gogitaiNo" as "dbT5501ShinsakaiKaisaiYoteiJoho_gogitaiNo",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiYoteiTeiin" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiYoteiTeiin",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiSaidaiTeiin" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiSaidaiTeiin",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiJidoWariateTeiin" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiJidoWariateTeiin",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiIinTeiin" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiIinTeiin",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiShiryoSakuseiYMD" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiShiryoSakuseiYMD",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."ShinsakaiShinchokuJokyo" as "dbT5501ShinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiWariateZumiNinzu" as "dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."shiryoSakuseiZumiFlag" as "dbT5501ShinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag",
+         "DbT5501ShinsakaiKaisaiYoteiJoho"."mobileDataOutputYMD" as "dbT5501ShinsakaiKaisaiYoteiJoho_mobileDataOutputYMD"
+    </sql>
+
+
+    <!--テーブルDbT5501ShinsakaiKaisaiYoteiJohoの項目をDbT5501ShinsakaiKaisaiYoteiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
+        <id property="shinsakaiKaisaiNo" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5501ShinsakaiKaisaiYoteiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5501ShinsakaiKaisaiYoteiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5501ShinsakaiKaisaiYoteiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5501ShinsakaiKaisaiYoteiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5501ShinsakaiKaisaiYoteiJoho_isDeleted" />
+        <result property="updateCount" column="dbT5501ShinsakaiKaisaiYoteiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5501ShinsakaiKaisaiYoteiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5501ShinsakaiKaisaiYoteiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYoteiYMD" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinsakaiKaishiYoteiTime" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiShuryoYoteiTime" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYoteiBashoCode" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiYoteiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gogitaiNo" column="dbT5501ShinsakaiKaisaiYoteiJoho_gogitaiNo" />
+        <result property="shinsakaiYoteiTeiin" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiYoteiTeiin" />
+        <result property="shinsakaiSaidaiTeiin" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiSaidaiTeiin" />
+        <result property="shinsakaiJidoWariateTeiin" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiJidoWariateTeiin" />
+        <result property="shinsakaiIinTeiin" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiIinTeiin" />
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ShinsakaiShinchokuJokyo" column="dbT5501ShinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shinsakaiWariateZumiNinzu" column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu" />
+        <result property="shiryoSakuseiZumiFlag" column="dbT5501ShinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag" />
+        <result property="mobileDataOutputYMD" column="dbT5501ShinsakaiKaisaiYoteiJoho_mobileDataOutputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5501ShinsakaiKaisaiYoteiJoho"/>
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+    </select>
+</mapper>

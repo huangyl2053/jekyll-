@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5033ShinsakaiIinHoshuTankaマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5033ShinsakaiIinHoshuTankaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5033ShinsakaiIinHoshuTanka">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5033ShinsakaiIinHoshuTankaMapper.allColumns_DbT5033ShinsakaiIinHoshuTanka" />
+     FROM
+         rgdb."DbT5033ShinsakaiIinHoshuTanka"
+     WHERE
+         rgdb."DbT5033ShinsakaiIinHoshuTanka"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5033ShinsakaiIinHoshuTanka">
+         "DbT5033ShinsakaiIinHoshuTanka"."kaigoNinteiShinsaIinShubetsu" as "dbT5033ShinsakaiIinHoshuTanka_kaigoNinteiShinsaIinShubetsu",
+         "DbT5033ShinsakaiIinHoshuTanka"."kaishiYM" as "dbT5033ShinsakaiIinHoshuTanka_kaishiYM",
+         "DbT5033ShinsakaiIinHoshuTanka"."shuryoYM" as "dbT5033ShinsakaiIinHoshuTanka_shuryoYM",
+         "DbT5033ShinsakaiIinHoshuTanka"."insertDantaiCd" as "dbT5033ShinsakaiIinHoshuTanka_insertDantaiCd",
+         "DbT5033ShinsakaiIinHoshuTanka"."insertTimestamp" as "dbT5033ShinsakaiIinHoshuTanka_insertTimestamp",
+         "DbT5033ShinsakaiIinHoshuTanka"."insertReamsLoginId" as "dbT5033ShinsakaiIinHoshuTanka_insertReamsLoginId",
+         "DbT5033ShinsakaiIinHoshuTanka"."insertContextId" as "dbT5033ShinsakaiIinHoshuTanka_insertContextId",
+         "DbT5033ShinsakaiIinHoshuTanka"."isDeleted" as "dbT5033ShinsakaiIinHoshuTanka_isDeleted",
+         "DbT5033ShinsakaiIinHoshuTanka"."updateCount" as "dbT5033ShinsakaiIinHoshuTanka_updateCount",
+         "DbT5033ShinsakaiIinHoshuTanka"."lastUpdateTimestamp" as "dbT5033ShinsakaiIinHoshuTanka_lastUpdateTimestamp",
+         "DbT5033ShinsakaiIinHoshuTanka"."lastUpdateReamsLoginId" as "dbT5033ShinsakaiIinHoshuTanka_lastUpdateReamsLoginId",
+         "DbT5033ShinsakaiIinHoshuTanka"."tanka" as "dbT5033ShinsakaiIinHoshuTanka_tanka"
+    </sql>
+
+
+    <!--テーブルDbT5033ShinsakaiIinHoshuTankaの項目をDbT5033ShinsakaiIinHoshuTankaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5033ShinsakaiIinHoshuTankaEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5033ShinsakaiIinHoshuTankaEntity" autoMapping="true">
+        <id property="kaigoNinteiShinsaIinShubetsu" column="dbT5033ShinsakaiIinHoshuTanka_kaigoNinteiShinsaIinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeShubetsuTypeHandler"/>
+        <id property="kaishiYM" column="dbT5033ShinsakaiIinHoshuTanka_kaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="shuryoYM" column="dbT5033ShinsakaiIinHoshuTanka_shuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5033ShinsakaiIinHoshuTanka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5033ShinsakaiIinHoshuTanka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5033ShinsakaiIinHoshuTanka_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5033ShinsakaiIinHoshuTanka_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5033ShinsakaiIinHoshuTanka_isDeleted" />
+        <result property="updateCount" column="dbT5033ShinsakaiIinHoshuTanka_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5033ShinsakaiIinHoshuTanka_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5033ShinsakaiIinHoshuTanka_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tanka" column="dbT5033ShinsakaiIinHoshuTanka_tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5033ShinsakaiIinHoshuTankaEntity">
+        SELECT
+        <include refid="allColumns_DbT5033ShinsakaiIinHoshuTanka"/>
+        FROM
+        rgdb."DbT5033ShinsakaiIinHoshuTanka"
+    </select>
+</mapper>

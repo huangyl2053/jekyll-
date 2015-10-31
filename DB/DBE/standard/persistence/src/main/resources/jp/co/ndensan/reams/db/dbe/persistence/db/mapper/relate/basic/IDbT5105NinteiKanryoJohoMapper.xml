@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5105NinteiKanryoJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5105NinteiKanryoJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
+     FROM
+         rgdb."DbT5105NinteiKanryoJoho"
+     WHERE
+         rgdb."DbT5105NinteiKanryoJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5105NinteiKanryoJoho">
+         "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" as "dbT5105NinteiKanryoJoho_shinseishoKanriNo",
+         "DbT5105NinteiKanryoJoho"."insertDantaiCd" as "dbT5105NinteiKanryoJoho_insertDantaiCd",
+         "DbT5105NinteiKanryoJoho"."insertTimestamp" as "dbT5105NinteiKanryoJoho_insertTimestamp",
+         "DbT5105NinteiKanryoJoho"."insertReamsLoginId" as "dbT5105NinteiKanryoJoho_insertReamsLoginId",
+         "DbT5105NinteiKanryoJoho"."insertContextId" as "dbT5105NinteiKanryoJoho_insertContextId",
+         "DbT5105NinteiKanryoJoho"."isDeleted" as "dbT5105NinteiKanryoJoho_isDeleted",
+         "DbT5105NinteiKanryoJoho"."updateCount" as "dbT5105NinteiKanryoJoho_updateCount",
+         "DbT5105NinteiKanryoJoho"."lastUpdateTimestamp" as "dbT5105NinteiKanryoJoho_lastUpdateTimestamp",
+         "DbT5105NinteiKanryoJoho"."lastUpdateReamsLoginId" as "dbT5105NinteiKanryoJoho_lastUpdateReamsLoginId",
+         "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" as "dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" as "dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ninteichosaKanryoYMD" as "dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" as "dbT5105NinteiKanryoJoho_ikenshoSakuseiIraiKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ikenshoTorokuKanryoYMD" as "dbT5105NinteiKanryoJoho_ikenshoTorokuKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ichijiHanteiKanryoYMD" as "dbT5105NinteiKanryoJoho_ichijiHanteiKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."maskingKanryoYMD" as "dbT5105NinteiKanryoJoho_maskingKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" as "dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" as "dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD",
+         "DbT5105NinteiKanryoJoho"."centerSoshinYMD" as "dbT5105NinteiKanryoJoho_centerSoshinYMD"
+    </sql>
+
+
+    <!--テーブルDbT5105NinteiKanryoJohoの項目をDbT5105NinteiKanryoJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5105NinteiKanryoJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5105NinteiKanryoJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5105NinteiKanryoJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5105NinteiKanryoJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5105NinteiKanryoJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5105NinteiKanryoJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5105NinteiKanryoJoho_isDeleted" />
+        <result property="updateCount" column="dbT5105NinteiKanryoJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5105NinteiKanryoJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5105NinteiKanryoJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiJohoTorokuKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteiShinseiJohoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaIraiKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoSakuseiIraiKanryoYMD" column="dbT5105NinteiKanryoJoho_ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoTorokuKanryoYMD" column="dbT5105NinteiKanryoJoho_ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichijiHanteiKanryoYMD" column="dbT5105NinteiKanryoJoho_ichijiHanteiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="maskingKanryoYMD" column="dbT5105NinteiKanryoJoho_maskingKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiShinsakaiWariateKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteiShinsakaiWariateKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiShinsakaiKanryoYMD" column="dbT5105NinteiKanryoJoho_ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="centerSoshinYMD" column="dbT5105NinteiKanryoJoho_centerSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5105NinteiKanryoJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5105NinteiKanryoJoho"/>
+        FROM
+        rgdb."DbT5105NinteiKanryoJoho"
+    </select>
+</mapper>

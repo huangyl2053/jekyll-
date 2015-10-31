@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5051KoseiShichosonMasterマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5051KoseiShichosonMaster">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.allColumns_DbT5051KoseiShichosonMaster" />
+     FROM
+         rgdb."DbT5051KoseiShichosonMaster"
+     WHERE
+         rgdb."DbT5051KoseiShichosonMaster"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5051KoseiShichosonMaster">
+         "DbT5051KoseiShichosonMaster"."shichosonShokibetsuID" as "dbT5051KoseiShichosonMaster_shichosonShokibetsuID",
+         "DbT5051KoseiShichosonMaster"."insertDantaiCd" as "dbT5051KoseiShichosonMaster_insertDantaiCd",
+         "DbT5051KoseiShichosonMaster"."insertTimestamp" as "dbT5051KoseiShichosonMaster_insertTimestamp",
+         "DbT5051KoseiShichosonMaster"."insertReamsLoginId" as "dbT5051KoseiShichosonMaster_insertReamsLoginId",
+         "DbT5051KoseiShichosonMaster"."insertContextId" as "dbT5051KoseiShichosonMaster_insertContextId",
+         "DbT5051KoseiShichosonMaster"."isDeleted" as "dbT5051KoseiShichosonMaster_isDeleted",
+         "DbT5051KoseiShichosonMaster"."updateCount" as "dbT5051KoseiShichosonMaster_updateCount",
+         "DbT5051KoseiShichosonMaster"."lastUpdateTimestamp" as "dbT5051KoseiShichosonMaster_lastUpdateTimestamp",
+         "DbT5051KoseiShichosonMaster"."lastUpdateReamsLoginId" as "dbT5051KoseiShichosonMaster_lastUpdateReamsLoginId",
+         "DbT5051KoseiShichosonMaster"."shichosonCode" as "dbT5051KoseiShichosonMaster_shichosonCode",
+         "DbT5051KoseiShichosonMaster"."shoKisaiHokenshaNo" as "dbT5051KoseiShichosonMaster_shoKisaiHokenshaNo",
+         "DbT5051KoseiShichosonMaster"."kokuhorenKoikiShichosonNo" as "dbT5051KoseiShichosonMaster_kokuhorenKoikiShichosonNo",
+         "DbT5051KoseiShichosonMaster"."shichosonMeisho" as "dbT5051KoseiShichosonMaster_shichosonMeisho",
+         "DbT5051KoseiShichosonMaster"."todofukenMeisho" as "dbT5051KoseiShichosonMaster_todofukenMeisho",
+         "DbT5051KoseiShichosonMaster"."gunMeisho" as "dbT5051KoseiShichosonMaster_gunMeisho",
+         "DbT5051KoseiShichosonMaster"."yubinNo" as "dbT5051KoseiShichosonMaster_yubinNo",
+         "DbT5051KoseiShichosonMaster"."jusho" as "dbT5051KoseiShichosonMaster_jusho",
+         "DbT5051KoseiShichosonMaster"."telNo" as "dbT5051KoseiShichosonMaster_telNo",
+         "DbT5051KoseiShichosonMaster"."yusenChikuCode" as "dbT5051KoseiShichosonMaster_yusenChikuCode",
+         "DbT5051KoseiShichosonMaster"."tyohyoTodoufukenHyojiUmu" as "dbT5051KoseiShichosonMaster_tyohyoTodoufukenHyojiUmu",
+         "DbT5051KoseiShichosonMaster"."tyohyoGunHyojiUmu" as "dbT5051KoseiShichosonMaster_tyohyoGunHyojiUmu",
+         "DbT5051KoseiShichosonMaster"."tyohyoShichosonHyojiUmu" as "dbT5051KoseiShichosonMaster_tyohyoShichosonHyojiUmu",
+         "DbT5051KoseiShichosonMaster"."tyohyoJushoHenshuHouhou" as "dbT5051KoseiShichosonMaster_tyohyoJushoHenshuHouhou",
+         "DbT5051KoseiShichosonMaster"."tyohyoKatagakiHyojiUmu" as "dbT5051KoseiShichosonMaster_tyohyoKatagakiHyojiUmu",
+         "DbT5051KoseiShichosonMaster"."gaikokujinHyojiHouhou" as "dbT5051KoseiShichosonMaster_gaikokujinHyojiHouhou",
+         "DbT5051KoseiShichosonMaster"."rojinhokenShichosonNo" as "dbT5051KoseiShichosonMaster_rojinhokenShichosonNo",
+         "DbT5051KoseiShichosonMaster"."rokenJukyushaNoTaikei" as "dbT5051KoseiShichosonMaster_rokenJukyushaNoTaikei",
+         "DbT5051KoseiShichosonMaster"."tokuchoBunpaishuyaku" as "dbT5051KoseiShichosonMaster_tokuchoBunpaishuyaku",
+         "DbT5051KoseiShichosonMaster"."ikoYMD" as "dbT5051KoseiShichosonMaster_ikoYMD",
+         "DbT5051KoseiShichosonMaster"."kanyuYMD" as "dbT5051KoseiShichosonMaster_kanyuYMD",
+         "DbT5051KoseiShichosonMaster"."ridatsuYMD" as "dbT5051KoseiShichosonMaster_ridatsuYMD",
+         "DbT5051KoseiShichosonMaster"."gappeiKyuShichosonKubun" as "dbT5051KoseiShichosonMaster_gappeiKyuShichosonKubun",
+         "DbT5051KoseiShichosonMaster"."gappeiKyuShichosonHyojiUmu" as "dbT5051KoseiShichosonMaster_gappeiKyuShichosonHyojiUmu",
+         "DbT5051KoseiShichosonMaster"."gappeiChiikiNo" as "dbT5051KoseiShichosonMaster_gappeiChiikiNo",
+         "DbT5051KoseiShichosonMaster"."unyoHokenshaNo" as "dbT5051KoseiShichosonMaster_unyoHokenshaNo",
+         "DbT5051KoseiShichosonMaster"."unyoKaishiYMD" as "dbT5051KoseiShichosonMaster_unyoKaishiYMD",
+         "DbT5051KoseiShichosonMaster"."unyoShuryoYMD" as "dbT5051KoseiShichosonMaster_unyoShuryoYMD",
+         "DbT5051KoseiShichosonMaster"."unyoKeitaiKubun" as "dbT5051KoseiShichosonMaster_unyoKeitaiKubun"
+    </sql>
+
+
+    <!--テーブルDbT5051KoseiShichosonMasterの項目をDbT5051KoseiShichosonMasterEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5051KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity" autoMapping="true">
+        <id property="shichosonShokibetsuID" column="dbT5051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5051KoseiShichosonMaster_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5051KoseiShichosonMaster_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5051KoseiShichosonMaster_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5051KoseiShichosonMaster_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5051KoseiShichosonMaster_isDeleted" />
+        <result property="updateCount" column="dbT5051KoseiShichosonMaster_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5051KoseiShichosonMaster_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5051KoseiShichosonMaster_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT5051KoseiShichosonMaster_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="dbT5051KoseiShichosonMaster_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="kokuhorenKoikiShichosonNo" column="dbT5051KoseiShichosonMaster_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonMeisho" column="dbT5051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="todofukenMeisho" column="dbT5051KoseiShichosonMaster_todofukenMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gunMeisho" column="dbT5051KoseiShichosonMaster_gunMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbT5051KoseiShichosonMaster_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT5051KoseiShichosonMaster_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="dbT5051KoseiShichosonMaster_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="yusenChikuCode" column="dbT5051KoseiShichosonMaster_yusenChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoTodoufukenHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoTodoufukenHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoGunHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoGunHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoShichosonHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoJushoHenshuHouhou" column="dbT5051KoseiShichosonMaster_tyohyoJushoHenshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tyohyoKatagakiHyojiUmu" column="dbT5051KoseiShichosonMaster_tyohyoKatagakiHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaikokujinHyojiHouhou" column="dbT5051KoseiShichosonMaster_gaikokujinHyojiHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rojinhokenShichosonNo" column="dbT5051KoseiShichosonMaster_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="rokenJukyushaNoTaikei" column="dbT5051KoseiShichosonMaster_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuchoBunpaishuyaku" column="dbT5051KoseiShichosonMaster_tokuchoBunpaishuyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikoYMD" column="dbT5051KoseiShichosonMaster_ikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kanyuYMD" column="dbT5051KoseiShichosonMaster_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ridatsuYMD" column="dbT5051KoseiShichosonMaster_ridatsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gappeiKyuShichosonKubun" column="dbT5051KoseiShichosonMaster_gappeiKyuShichosonKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gappeiKyuShichosonHyojiUmu" column="dbT5051KoseiShichosonMaster_gappeiKyuShichosonHyojiUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gappeiChiikiNo" column="dbT5051KoseiShichosonMaster_gappeiChiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="unyoHokenshaNo" column="dbT5051KoseiShichosonMaster_unyoHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="unyoKaishiYMD" column="dbT5051KoseiShichosonMaster_unyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoShuryoYMD" column="dbT5051KoseiShichosonMaster_unyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="unyoKeitaiKubun" column="dbT5051KoseiShichosonMaster_unyoKeitaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="getEntity" resultMap="ResultMap_DbT5051KoseiShichosonMasterEntity">
+        SELECT
+        <include refid="allColumns_DbT5051KoseiShichosonMaster"/>
+        FROM
+        rgdb."DbT5051KoseiShichosonMaster"
+    </select>
+</mapper>

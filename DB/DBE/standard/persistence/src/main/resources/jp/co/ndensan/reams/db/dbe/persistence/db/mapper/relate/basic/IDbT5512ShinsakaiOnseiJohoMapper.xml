@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5512ShinsakaiOnseiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5512ShinsakaiOnseiJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper.allColumns_DbT5512ShinsakaiOnseiJoho" />
+     FROM
+         rgdb."DbT5512ShinsakaiOnseiJoho"
+     WHERE
+         rgdb."DbT5512ShinsakaiOnseiJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5512ShinsakaiOnseiJoho">
+         "DbT5512ShinsakaiOnseiJoho"."shinsakaiKaisaiNo" as "dbT5512ShinsakaiOnseiJoho_shinsakaiKaisaiNo",
+         "DbT5512ShinsakaiOnseiJoho"."renban" as "dbT5512ShinsakaiOnseiJoho_renban",
+         "DbT5512ShinsakaiOnseiJoho"."insertDantaiCd" as "dbT5512ShinsakaiOnseiJoho_insertDantaiCd",
+         "DbT5512ShinsakaiOnseiJoho"."insertTimestamp" as "dbT5512ShinsakaiOnseiJoho_insertTimestamp",
+         "DbT5512ShinsakaiOnseiJoho"."insertReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_insertReamsLoginId",
+         "DbT5512ShinsakaiOnseiJoho"."insertContextId" as "dbT5512ShinsakaiOnseiJoho_insertContextId",
+         "DbT5512ShinsakaiOnseiJoho"."isDeleted" as "dbT5512ShinsakaiOnseiJoho_isDeleted",
+         "DbT5512ShinsakaiOnseiJoho"."updateCount" as "dbT5512ShinsakaiOnseiJoho_updateCount",
+         "DbT5512ShinsakaiOnseiJoho"."lastUpdateTimestamp" as "dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp",
+         "DbT5512ShinsakaiOnseiJoho"."lastUpdateReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId"
+    </sql>
+
+
+    <!--テーブルDbT5512ShinsakaiOnseiJohoの項目をDbT5512ShinsakaiOnseiJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5512ShinsakaiOnseiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity" autoMapping="true">
+        <id property="shinsakaiKaisaiNo" column="dbT5512ShinsakaiOnseiJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT5512ShinsakaiOnseiJoho_renban" />
+        <result property="insertDantaiCd" column="dbT5512ShinsakaiOnseiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5512ShinsakaiOnseiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5512ShinsakaiOnseiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5512ShinsakaiOnseiJoho_isDeleted" />
+        <result property="updateCount" column="dbT5512ShinsakaiOnseiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5512ShinsakaiOnseiJoho"/>
+        FROM
+        rgdb."DbT5512ShinsakaiOnseiJoho"
+    </select>
+</mapper>
