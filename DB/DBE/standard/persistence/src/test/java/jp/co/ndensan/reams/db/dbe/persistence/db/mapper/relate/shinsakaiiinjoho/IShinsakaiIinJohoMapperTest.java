@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
