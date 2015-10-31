@@ -181,7 +181,7 @@
     </select>
     
     <resultMap id="resultMap_NinteiKekkaJohoEntity"
-                   type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteikekkajoho.NinteiKekkaJohoEntity"
+                   type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity"
                    autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo"/>
         <association property="DbT5102NinteiKekkaJohoEntity"
