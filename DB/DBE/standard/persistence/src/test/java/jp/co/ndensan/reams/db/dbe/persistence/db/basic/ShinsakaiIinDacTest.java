@@ -5,18 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.ShinsakaiIinDac;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.db.relate.helper.ShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -25,6 +19,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class ShinsakaiIinDacTest {
 
     private static ShinsakaiIinDac shinsakaiIinDac;
