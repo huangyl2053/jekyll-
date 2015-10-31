@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJoh
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT7010NinteichosaItakusakiJohoEntity}のマッパーIFです。
  *
- * @author nXXXX ○○○○
  */
 public interface IDbT7010NinteichosaItakusakiJohoMapper {
 

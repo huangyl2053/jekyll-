@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEn
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity}のマッパーIFです。
  *
- * @author nXXXX ○○○○
  */
 public interface IDbT5304ShujiiIkenshoIkenItemMapper {
 

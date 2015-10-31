@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEn
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity}のマッパーIFです。
  *
- * @author nXXXX ○○○○
  */
 public interface IDbT5593GogitaiWariateIinJohoMapper {
 
