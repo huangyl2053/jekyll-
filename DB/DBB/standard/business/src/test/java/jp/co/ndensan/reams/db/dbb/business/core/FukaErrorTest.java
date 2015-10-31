@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core;
 
-import jp.co.ndensan.reams.db.dbb.business.core.FukaError;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
+@Ignore
 @RunWith(Enclosed.class)
 public class FukaErrorTest extends DbbTestBase {
 
