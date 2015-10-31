@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.core.basic;
+package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho;
 
-import java.util.ArrayList;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.IchijiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -36,40 +33,6 @@ public class IchijiHanteiKekkaJohoManager {
      */
     IchijiHanteiKekkaJohoManager(DbT5116IchijiHanteiKekkaJohoDac dac) {
         this.dac = dac;
-    }
-
-    /**
-     * 主キーに合致する要介護認定一次判定結果情報を返します。
-     *
-     *
-     * @return IchijiHanteiKekkaJoho
-     */
-    @Transaction
-    public IchijiHanteiKekkaJoho get要介護認定一次判定結果情報() {
-
-        DbT5116IchijiHanteiKekkaJohoEntity entity = dac.selectByKey();
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new IchijiHanteiKekkaJoho(entity);
-    }
-
-    /**
-     * 要介護認定一次判定結果情報を全件返します。
-     *
-     * @return IchijiHanteiKekkaJohoの{@code list}
-     */
-    @Transaction
-    public List<IchijiHanteiKekkaJoho> get要介護認定一次判定結果情報一覧() {
-        List<IchijiHanteiKekkaJoho> businessList = new ArrayList<>();
-
-        for (DbT5116IchijiHanteiKekkaJohoEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new IchijiHanteiKekkaJoho(entity));
-        }
-
-        return businessList;
     }
 
     /**

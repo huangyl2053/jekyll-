@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.core.basic;
+package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ninteikanryojoho;
 
-import java.util.ArrayList;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKanryoJoho;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikanryojoho.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -37,43 +33,6 @@ public class NinteiKanryoJohoManager {
      */
     NinteiKanryoJohoManager(DbT5105NinteiKanryoJohoDac dac) {
         this.dac = dac;
-    }
-
-    /**
-     * 主キーに合致する要介護認定完了情報を返します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return NinteiKanryoJoho
-     */
-    @Transaction
-    public NinteiKanryoJoho get要介護認定完了情報(
-            ShinseishoKanriNo 申請書管理番号) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-
-        DbT5105NinteiKanryoJohoEntity entity = dac.selectByKey(
-                申請書管理番号);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new NinteiKanryoJoho(entity);
-    }
-
-    /**
-     * 要介護認定完了情報を全件返します。
-     *
-     * @return NinteiKanryoJohoの{@code list}
-     */
-    @Transaction
-    public List<NinteiKanryoJoho> get要介護認定完了情報一覧() {
-        List<NinteiKanryoJoho> businessList = new ArrayList<>();
-
-        for (DbT5105NinteiKanryoJohoEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new NinteiKanryoJoho(entity));
-        }
-
-        return businessList;
     }
 
     /**

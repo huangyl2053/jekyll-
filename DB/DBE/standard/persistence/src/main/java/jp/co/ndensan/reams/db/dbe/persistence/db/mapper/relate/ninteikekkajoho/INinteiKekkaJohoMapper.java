@@ -18,5 +18,6 @@ public interface INinteiKekkaJohoMapper {
      * @param 要介護認定結果情報検索条件 要介護認定結果情報検索条件
      * @return NinteiKekkaJohoEntity
      */
-    NinteiShinseiJohoRelateEntity getNinteiShinseiJohoEntity(NinteiKekkaJohoMapperParameter 要介護認定結果情報検索条件);
+    NinteiShinseiJohoRelateEntity getNinteiKekkaJohoEntity(NinteiKekkaJohoMapperParameter 要介護認定結果情報検索条件);
+
 }
