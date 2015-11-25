@@ -6,54 +6,66 @@
                 this.fieldName = fieldName;
                 this.controls = new KaigoShikakuKihon.Controls(fieldName);
             }
-            ModeController.prototype.RenrakusakiAriMode = function () {
-                return new Modes.RenrakusakiAriMode(this.controls);
+            ModeController.prototype.連絡先ボタンを = function () {
+                return new Modes.連絡先ボタンを(this.controls);
             };
 
-            ModeController.prototype.HihokenrirekiNashiMode = function () {
-                return new Modes.HihokenrirekiNashiMode(this.controls);
+            ModeController.prototype.被保履歴ボタンを = function () {
+                return new Modes.被保履歴ボタンを(this.controls);
             };
 
-            ModeController.prototype.NinteirirekiNashiMode = function () {
-                return new Modes.NinteirirekiNashiMode(this.controls);
+            ModeController.prototype.認定履歴ボタンを = function () {
+                return new Modes.認定履歴ボタンを(this.controls);
             };
             return ModeController;
         })();
         KaigoShikakuKihon.ModeController = ModeController;
 
         (function (Modes) {
-            var RenrakusakiAriMode = (function () {
-                function RenrakusakiAriMode(controls) {
+            var 連絡先ボタンを = (function () {
+                function 連絡先ボタンを(controls) {
                     this.controls = controls;
                 }
-                RenrakusakiAriMode.prototype.RenrakusakiAri = function () {
+                連絡先ボタンを.prototype.表示する = function () {
                     this.controls.btnRenrakusaki().displayNone = false;
                 };
-                return RenrakusakiAriMode;
-            })();
-            Modes.RenrakusakiAriMode = RenrakusakiAriMode;
 
-            var HihokenrirekiNashiMode = (function () {
-                function HihokenrirekiNashiMode(controls) {
+                連絡先ボタンを.prototype.表示しない = function () {
+                    this.controls.btnRenrakusaki().displayNone = true;
+                };
+                return 連絡先ボタンを;
+            })();
+            Modes.連絡先ボタンを = 連絡先ボタンを;
+
+            var 被保履歴ボタンを = (function () {
+                function 被保履歴ボタンを(controls) {
                     this.controls = controls;
                 }
-                HihokenrirekiNashiMode.prototype.HihokenrirekiNashi = function () {
+                被保履歴ボタンを.prototype.表示する = function () {
+                    this.controls.btnHihoRireki().displayNone = false;
+                };
+
+                被保履歴ボタンを.prototype.表示しない = function () {
                     this.controls.btnHihoRireki().displayNone = true;
                 };
-                return HihokenrirekiNashiMode;
+                return 被保履歴ボタンを;
             })();
-            Modes.HihokenrirekiNashiMode = HihokenrirekiNashiMode;
+            Modes.被保履歴ボタンを = 被保履歴ボタンを;
 
-            var NinteirirekiNashiMode = (function () {
-                function NinteirirekiNashiMode(controls) {
+            var 認定履歴ボタンを = (function () {
+                function 認定履歴ボタンを(controls) {
                     this.controls = controls;
                 }
-                NinteirirekiNashiMode.prototype.NinteirirekiAri = function () {
+                認定履歴ボタンを.prototype.表示する = function () {
+                    this.controls.btnNinteiRireki().displayNone = false;
+                };
+
+                認定履歴ボタンを.prototype.表示しない = function () {
                     this.controls.btnNinteiRireki().displayNone = true;
                 };
-                return NinteirirekiNashiMode;
+                return 認定履歴ボタンを;
             })();
-            Modes.NinteirirekiNashiMode = NinteirirekiNashiMode;
+            Modes.認定履歴ボタンを = 認定履歴ボタンを;
         })(KaigoShikakuKihon.Modes || (KaigoShikakuKihon.Modes = {}));
         var Modes = KaigoShikakuKihon.Modes;
     })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));

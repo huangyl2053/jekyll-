@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBBUC27111",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴対象者登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0300001",
+     "layoutTitle": "賦課対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2710011",
+     "toLayoutTitle": "特別徴収対象者登録",
+     "toState": "特徴対象者登録"
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2710011",
+     "layoutTitle": "特別徴収対象者登録",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2710011",
+     "layoutTitle": "特別徴収対象者登録",
+     "eventName": "再検索する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2710011",
+     "layoutTitle": "特別徴収対象者登録",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "該当者一覧"
+    }
+   ]
+  }
+ ]
+}

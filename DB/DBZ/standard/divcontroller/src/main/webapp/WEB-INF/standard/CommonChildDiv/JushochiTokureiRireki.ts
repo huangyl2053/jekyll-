@@ -20,9 +20,7 @@ module DBZ {
             public priorities(): Array < string > {
                 return [
                 	"TashichosonDisplayMode",
-                	"TashichosonTeiseiDisplayMode",
-                	"TekiyoJogaiDisplayMode",
-                	"TekiyoJogaiTeiseiDisplayMode"
+                	"TashichosonTeiseiDisplayMode"
                 ];
             }
 
@@ -33,15 +31,6 @@ module DBZ {
             public TashichosonTeiseiDisplayMode() {
                 return new Modes.TashichosonTeiseiDisplayMode(this.controls);
             }
-
-            public TekiyoJogaiDisplayMode() {
-                return new Modes.TekiyoJogaiDisplayMode(this.controls);
-            }
-
-            public TekiyoJogaiTeiseiDisplayMode() {
-                return new Modes.TekiyoJogaiTeiseiDisplayMode(this.controls);
-            }
-
 
         }
         export module Modes {
@@ -152,186 +141,6 @@ module DBZ {
                 }
 
             }
-
-
-
-            export class TekiyoJogaiDisplayMode {
-                private controls: Controls;
-
-                constructor(controls: Controls) {
-                    this.controls = controls;
-                }
-
-                public Shokai(): void {
-                    this.controls.btnAdd().visible = false;
-                    this.controls.btnAdd().displayNone = true;
-                    this.controls.dgJushochiTokureiRireki().readOnly = true;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
-                    
-
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
-                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
-                    var columns = gridSetting.columns;
-
-                    //•ÛŒ¯Ò sochiHokenshaMeisho
-                    columns[6].visible = false;
-                    //”í•Û”Ô† sochiHihokenshaNo
-                    columns[7].visible = false;
-                    //{İí—Ş ShisetsuShurui
-                    columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
-                    columns[11].width = 370;
-
-
-                    gridSetting.columns = columns;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
-
-                }
-
-
-                public IdoToroku(): void {
-                    this.controls.btnAdd().visible = true;
-                    this.controls.btnAdd().displayNone = false;
-                    this.controls.dgJushochiTokureiRireki().readOnly = false;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
-
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
-                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
-                    var columns = gridSetting.columns
-
-                    //•ÛŒ¯Ò
-                    columns[6].visible = false;
-                    //”í•Û”Ô†
-                    columns[7].visible = false;
-                    //{İí—Ş ShisetsuShurui
-                    columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
-                    columns[11].width = 370;
-
-
-                    gridSetting.columns = columns;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
-                }
-            }
-
-            export class TekiyoJogaiTeiseiDisplayMode {
-                private controls: Controls;
-
-                constructor(controls: Controls) {
-                    this.controls = controls;
-                }
-
-                public Shokai(): void {
-
-                    this.controls.btnAdd().displayNone = true;
-
-                    this.controls.dgJushochiTokureiRireki().readOnly = true;
-
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
-                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
-
-                    gridSetting.isShowSelectButtonColumn = false
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
-
-                    var columns = gridSetting.columns;
-
-                    //•ÛŒ¯Ò sochiHokenshaMeisho
-                    columns[6].visible = false;
-                    //”í•Û”Ô† sochiHihokenshaNo
-                    columns[7].visible = false;
-                    //{İí—Ş ShisetsuShurui
-                    columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
-                    columns[11].width = 370;
-
-
-                    gridSetting.columns = columns;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
-
-                }
-
-
-                public IdoToroku(): void {
-                    
-                    this.controls.btnAdd().displayNone = false;
-
-                    this.controls.dgJushochiTokureiRireki().readOnly = false;
-
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
-                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
-
-                    gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = true;
-                    gridSetting.isShowDeleteButtonColumn = true;
-
-                    var columns = gridSetting.columns
-
-                    //•ÛŒ¯Ò
-                    columns[6].visible = false;
-                    //”í•Û”Ô†
-                    columns[7].visible = false;
-                    //{İí—Ş ShisetsuShurui
-                    columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
-                    columns[11].width = 370;
-
-                    gridSetting.columns = columns;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
-                }
-
-
-                public IdoToroku_SelectButton(): void {
-
-                    this.controls.btnAdd().displayNone = true;
-
-                    this.controls.dgJushochiTokureiRireki().readOnly = false;
-
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
-                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
-
-                    gridSetting.isShowSelectButtonColumn = true;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
-
-                    var columns = gridSetting.columns
-
-                    //•ÛŒ¯Ò
-                    columns[6].visible = false;
-                    //”í•Û”Ô†
-                    columns[7].visible = false;
-                    //{İí—Ş ShisetsuShurui
-                    columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
-                    columns[11].width = 370;
-
-                    gridSetting.columns = columns;
-
-                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
-                }
-
-            }
-
         }
     }
 }

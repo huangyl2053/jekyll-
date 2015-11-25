@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC81001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "被保険者番号付番方法",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBAM010011",
+     "toLayoutTitle": "被保険者番号付番方法",
+     "toState": "編集"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBAM010011",
+     "layoutTitle": "被保険者番号付番方法",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

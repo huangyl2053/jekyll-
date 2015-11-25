@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 /// <reference path="../../d.ts/UAXCommonChildDiv.d.ts" />
-/// <reference path="./../kaigosaikinshorisharireki/KaigoSaikinShorishaRireki.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -16,6 +16,10 @@ module DBZ {
 
             public static onClick_btnSearch(): string {
                 return "onClick_btnSearch";
+            }
+
+            public static onBlur_txtMaxNumber(): string {
+                return "onBlur_txtMaxNumber";
             }
 
             public static onClick_btnHihokenshaFinderHyoji(): string {
@@ -87,14 +91,6 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
             }
 
-            public radMinashiNigo(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
-            }
-
-            public chkMinashiNigo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
-            }
-
             public ccdAtenaFinder(): UAX.AtenaFinder.ModeController {
                 return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
             }
@@ -115,8 +111,8 @@ module DBZ {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
             }
 
-            public ccdSaikinShorisha(): DBZ.KaigoSaikinShorishaRireki.ModeController {
-                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            public ccdSaikinShorisha(): URZ.SaikinShorishaRireki.ModeController {
+                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
             }
 
             public btnHihokenshaFinderHyoji(): UZA.Button {

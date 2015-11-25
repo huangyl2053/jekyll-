@@ -1,110 +1,83 @@
 var DBZ;
 (function (DBZ) {
-    (function (IryoHokenRireki) {
+    (function (IryohokenRireki) {
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnAddIryoHoken = function () {
-                return "onClick_btnAddIryoHoken";
-            };
-
-            Events.onSelect_dgIryoHokenRireki = function () {
-                return "onSelect_dgIryoHokenRireki";
-            };
-
-            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
-                return "onSelectByDbClick_dgIryoHokenRireki";
-            };
-
-            Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
-                return "onSelectByModifyButton_dgIryoHokenRireki";
-            };
-
-            Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
-                return "onSelectByDeleteButton_dgIryoHokenRireki";
-            };
-
-            Events.onBlur_txtIryoHokenHokenshaNo = function () {
-                return "onBlur_txtIryoHokenHokenshaNo";
-            };
-
-            Events.onClick_btnIryoHokenKakutei = function () {
-                return "onClick_btnIryoHokenKakutei";
-            };
-
-            Events.onClick_btnIryoHokenTorikeshi = function () {
-                return "onClick_btnIryoHokenTorikeshi";
-            };
             return Events;
         })();
-        IryoHokenRireki.Events = Events;
+        IryohokenRireki.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "IryoHokenRireki";
+                return "IryohokenRireki";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.IryoHokenRireki = function () {
+            Controls.prototype.IryohokenRireki = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.btnAddIryoHoken = function () {
-                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            Controls.prototype.plIryohokenRireki = function () {
+                return new UZA.Panel(this.convFiledName("plIryohokenRireki"));
             };
 
-            Controls.prototype.dgIryoHokenRireki = function () {
-                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            Controls.prototype.btnIryohokenTsuika = function () {
+                return new UZA.Button(this.convFiledName("btnIryohokenTsuika"));
             };
 
-            Controls.prototype.IryoHokenInput = function () {
-                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            Controls.prototype.dgIryohokenIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryohokenIchiran"));
             };
 
-            Controls.prototype.txtIryoHokenKanyuDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            Controls.prototype.pnlIryohokenJoho = function () {
+                return new UZA.Panel(this.convFiledName("pnlIryohokenJoho"));
             };
 
-            Controls.prototype.txtIryoHokenDattaiDate = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            Controls.prototype.tbdKanyubi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("tbdKanyubi"));
             };
 
-            Controls.prototype.ddlIryoHokenShubetsu = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            Controls.prototype.tbdDattabi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("tbdDattabi"));
             };
 
-            Controls.prototype.txtIryoHokenHokenshaNo = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            Controls.prototype.ddlSyubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSyubetsu"));
             };
 
-            Controls.prototype.txtIryoHokenHokenshaMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            Controls.prototype.txtHokensyaKodo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaKodo"));
             };
 
-            Controls.prototype.txtIryoHokenKigoNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            Controls.prototype.txtHokensyaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaMeisho"));
             };
 
-            Controls.prototype.btnIryoHokenKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            Controls.prototype.txtKigoBango = function () {
+                return new UZA.TextBox(this.convFiledName("txtKigoBango"));
             };
 
-            Controls.prototype.btnIryoHokenTorikeshi = function () {
-                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             };
             return Controls;
         })();
-        IryoHokenRireki.Controls = Controls;
-    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
-    var IryoHokenRireki = DBZ.IryoHokenRireki;
+        IryohokenRireki.Controls = Controls;
+    })(DBZ.IryohokenRireki || (DBZ.IryohokenRireki = {}));
+    var IryohokenRireki = DBZ.IryohokenRireki;
 })(DBZ || (DBZ = {}));

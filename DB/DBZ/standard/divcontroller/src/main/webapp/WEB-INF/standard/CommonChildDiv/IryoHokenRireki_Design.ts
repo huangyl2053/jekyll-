@@ -4,41 +4,9 @@
 
 module DBZ {
 
-     export module IryoHokenRireki {
+     export module IryohokenRireki {
 
         export class Events {
-
-            public static onClick_btnAddIryoHoken(): string {
-                return "onClick_btnAddIryoHoken";
-            }
-
-            public static onSelect_dgIryoHokenRireki(): string {
-                return "onSelect_dgIryoHokenRireki";
-            }
-
-            public static onSelectByDbClick_dgIryoHokenRireki(): string {
-                return "onSelectByDbClick_dgIryoHokenRireki";
-            }
-
-            public static onSelectByModifyButton_dgIryoHokenRireki(): string {
-                return "onSelectByModifyButton_dgIryoHokenRireki";
-            }
-
-            public static onSelectByDeleteButton_dgIryoHokenRireki(): string {
-                return "onSelectByDeleteButton_dgIryoHokenRireki";
-            }
-
-            public static onBlur_txtIryoHokenHokenshaNo(): string {
-                return "onBlur_txtIryoHokenHokenshaNo";
-            }
-
-            public static onClick_btnIryoHokenKakutei(): string {
-                return "onClick_btnIryoHokenKakutei";
-            }
-
-            public static onClick_btnIryoHokenTorikeshi(): string {
-                return "onClick_btnIryoHokenTorikeshi";
-            }
 
         }
 
@@ -46,7 +14,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "IryoHokenRireki";
+                return "IryohokenRireki";
             }
 
             constructor(fieldName: string) {
@@ -54,59 +22,63 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.IryohokenRireki.Controls.myType() + "_" + fieldName;
             }
 
-            public IryoHokenRireki(): UZA.Panel {
+            public IryohokenRireki(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public btnAddIryoHoken(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            public plIryohokenRireki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("plIryohokenRireki"));
             }
 
-            public dgIryoHokenRireki(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            public btnIryohokenTsuika(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIryohokenTsuika"));
             }
 
-            public IryoHokenInput(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            public dgIryohokenIchiran(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgIryohokenIchiran"));
             }
 
-            public txtIryoHokenKanyuDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            public pnlIryohokenJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("pnlIryohokenJoho"));
             }
 
-            public txtIryoHokenDattaiDate(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            public tbdKanyubi(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("tbdKanyubi"));
             }
 
-            public ddlIryoHokenShubetsu(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            public tbdDattabi(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("tbdDattabi"));
             }
 
-            public txtIryoHokenHokenshaNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            public ddlSyubetsu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlSyubetsu"));
             }
 
-            public txtIryoHokenHokenshaMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            public txtHokensyaKodo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaKodo"));
             }
 
-            public txtIryoHokenKigoNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            public txtHokensyaMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokensyaMeisho"));
             }
 
-            public btnIryoHokenKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            public txtKigoBango(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKigoBango"));
             }
 
-            public btnIryoHokenTorikeshi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
+
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
             }
 
         }

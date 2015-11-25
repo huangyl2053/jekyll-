@@ -1,0 +1,282 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;Hihosyosai&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;Hihosyosai&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.Hihosyosai"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText UzCommonChildDivPanel Width-G12 UzCompositeChild" id="Hihosyosai" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;Hihosyosai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;Hihosyosai&quot;,&quot;title&quot;:&quot;被保詳細&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;Hihosyosai&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="Hihosyosai_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">被保詳細</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-EraseBoder" id="Hihosyosai_panel_body_area"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-left UzCompositeChild" id="lblSyutokubi" style="width: 80px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyutokubi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;lblSyutokubi&quot;,&quot;text&quot;:&quot;取得日&quot;,&quot;align&quot;:0}"><span>取得日</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSyutokutodokedebi" style="width: 80px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyutokutodokedebi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSyutokutodokedebi&quot;,&quot;text&quot;:&quot;取得届出日&quot;,&quot;align&quot;:0}"><span>取得届出日</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSyutokujiyu" style="width: 100px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyutokujiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSyutokujiyu&quot;,&quot;text&quot;:&quot;取得事由&quot;,&quot;align&quot;:0}"><span>取得事由</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblHihokubun" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblHihokubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblHihokubun&quot;,&quot;text&quot;:&quot;被保区分&quot;,&quot;align&quot;:0}"><span>被保区分</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-left UzCompositeChild" id="lblSyozaiHokensya" style="width: 120px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyozaiHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;selectControlID&quot;:&quot;lblSyozaiHokensya&quot;,&quot;text&quot;:&quot;所在保険者&quot;,&quot;align&quot;:0}"><span>所在保険者</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSotimotoHokensya" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSotimotoHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSotimotoHokensya&quot;,&quot;text&quot;:&quot;措置元保険者&quot;,&quot;align&quot;:0}"><span>措置元保険者</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblKyuHokensya" style="width: 120px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblKyuHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblKyuHokensya&quot;,&quot;text&quot;:&quot;旧保険者&quot;,&quot;align&quot;:0}"><span>旧保険者</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-left UzCompositeChild" id="lblSyoniNichiji" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyoniNichiji&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;selectControlID&quot;:&quot;lblSyoniNichiji&quot;,&quot;text&quot;:&quot;処理日時&quot;,&quot;align&quot;:0}"><span>処理日時</span></span><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtSyutokuYMD" style="width: 85px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSyutokuYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSyutokuYMD_core&quot;,&quot;labelLWidth&quot;:&quot;0px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input class="UzTextBox CoreElement" id="txtSyutokuYMD_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtSyutokutodokedeYMD" style="width: 85px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSyutokutodokedeYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSyutokutodokedeYMD_core&quot;,&quot;labelLWidth&quot;:&quot;0px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input class="UzTextBox CoreElement" id="txtSyutokutodokedeYMD_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSyutokuJiyu" style="width: 108px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSyutokuJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlSyutokuJiyu_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlSyutokuJiyu_core" style="width: 105px;"><option value="key0"></option><option value="key1">value1</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlHihokubun" style="width: 124px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlHihokubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;121px&quot;,&quot;selectControlID&quot;:&quot;ddlHihokubun_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlHihokubun_core" style="width: 121px;"><option value="key0"></option><option value="key1">value1</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSyozaiHokensya" style="width: 124px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSyozaiHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;121px&quot;,&quot;selectControlID&quot;:&quot;ddlSyozaiHokensya_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;A&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlSyozaiHokensya_core" style="width: 121px;"><option value="key0">A</option><option value="key1">value1</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSotimotoHokensya" style="width: 124px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSotimotoHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;121px&quot;,&quot;selectControlID&quot;:&quot;ddlSotimotoHokensya_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlSotimotoHokensya_core" style="width: 121px;"><option value="key0"></option><option value="key1">value1</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlKyuHokensya" style="width: 124px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlKyuHokensya&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;121px&quot;,&quot;selectControlID&quot;:&quot;ddlKyuHokensya_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlKyuHokensya_core" style="width: 121px;"><option value="key0"></option><option value="key1">value1</option></select></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtSyoninichiji1" style="width: 155px; height: 20px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSyoninichiji1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;txtSyoninichiji1_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor" id="txtSyoninichiji1_core" style="width: 150px;" type="text" placeholder=""></div><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat text-align-left UzCompositeChild" id="lblSosichibi" style="width: 80px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSosichibi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lblSosichibi&quot;,&quot;text&quot;:&quot;喪失日&quot;,&quot;align&quot;:0}"><span>喪失日</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSosichiTodokedebi" style="width: 80px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSosichiTodokedebi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSosichiTodokedebi&quot;,&quot;text&quot;:&quot;喪失届出日&quot;,&quot;align&quot;:0}"><span>喪失届出日</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSosichiJiyu" style="width: 100px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSosichiJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSosichiJiyu&quot;,&quot;text&quot;:&quot;喪失事由&quot;,&quot;align&quot;:0}"><span>喪失事由</span></span><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginRight-XS controlMargin-M text-align-left marginLeft-S UzCompositeChild" id="lblSyoninichibi2" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSyoninichibi2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblSyoninichibi2&quot;,&quot;text&quot;:&quot;処理日時&quot;,&quot;align&quot;:0}"><span>処理日時</span></span><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtSosichiYMD" style="width: 85px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSosichiYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSosichiYMD_core&quot;}"><input class="UzTextBox CoreElement" id="txtSosichiYMD_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtSosichiTodokedeYMD" style="width: 85px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSosichiTodokedeYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSosichiTodokedeYMD_core&quot;}"><input class="UzTextBox CoreElement" id="txtSosichiTodokedeYMD_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSosichiJiyu" style="width: 108px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSosichiJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlSosichiJiyu_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><select class="CoreElement" id="ddlSosichiJiyu_core" style="width: 105px;"><option value="key0"></option><option value="key1">value1</option></select></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginRight-XS controlMargin-M marginLeft-XS UzCompositeChild" id="txtSyoninichiji2" style="width: 155px; height: 20px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSyoninichiji2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;txtSyoninichiji2_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor" id="txtSyoninichiji2_core" style="width: 150px;" type="text" placeholder=""></div><div class="UzTabContainer ui-tabs ui-widget ui-widget-content ui-corner-all JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat Width-L UzCompositeChild" id="tabContainerDetail" style="position: relative; opacity: 1;" data-control-type="TabContainer" data-obj="{&quot;fieldName&quot;:&quot;tabContainerDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabContainer&quot;,&quot;width&quot;:&quot;L&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;tabContainerDetail&quot;,&quot;height&quot;:&quot;Auto&quot;,&quot;tabpanelPosition&quot;:[],&quot;initialTab&quot;:&quot;0&quot;}"><ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all ui-sortable" role="tablist"><li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" aria-selected="true" aria-controls="tabPnlJyusyoti" aria-labelledby="ui-id-987"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-987" role="presentation" style="background-color: transparent;" href="#tabPnlJyusyoti">住所地特例</a></li><li tabindex="-1" class="ui-state-default ui-corner-top" role="tab" aria-selected="false" aria-controls="tabPnlShikaku" aria-labelledby="ui-id-988"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-988" role="presentation" style="background-color: transparent;" href="#tabPnlShikaku">資格関連異動</a></li><li tabindex="-1" class="ui-state-default ui-corner-top" role="tab" aria-selected="false" aria-controls="tabPnlShisetu" aria-labelledby="ui-id-989"><a tabindex="-1" class="ui-tabs-anchor" id="ui-id-989" role="presentation" style="background-color: transparent;" href="#tabPnlShisetu">施設入退所</a></li></ul><div class="UzTabPanel JSControl FloatLeft marginLeft-XS marginRight-XS Width-XS controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom ui-droppable ui-sortable UzCompositeChild" id="tabPnlJyusyoti" role="tabpanel" aria-expanded="true" aria-hidden="false" aria-labelledby="ui-id-987" style="width: 1078px; height: 589px; display: block;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tabPnlJyusyoti&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tabPnlJyusyoti&quot;,&quot;title&quot;:&quot;住所地特例&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="ccdJyusyotiTokure" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdJyusyotiTokure&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdJyusyotiTokure&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;jushochitokureirirekilist&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;JushochiTokureiRirekiList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnAdd&quot;},{&quot;eventName&quot;:&quot;onSelect_dgJutoku&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgJutoku&quot;},{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgJutoku&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgJutoku&quot;}],&quot;publicEventsAlias&quot;:[],&quot;DgJutoku_height&quot;:&quot;217px&quot;,&quot;BtnAdd_displayNone&quot;:false,&quot;BtnAdd_disabled&quot;:false,&quot;DdlTekiyoSochimotoHokensha_readOnly&quot;:false,&quot;DdlKaijoSochimotoHokenshsa_readOnly&quot;:false,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;dgJutoku_height&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;btnAdd_displayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;btnAdd_disabled&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;ddlTekiyojiSochimotoHokensha_readOnly&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;ddlKaijojiSochimotoHokenshsa_readOnly&quot;,&quot;editType&quot;:1}]}}" data-is-composite-control="true" data-control-name="DBZ.JushochiTokureiRirekiList"></div></div><div class="UzTabPanel JSControl FloatLeft marginLeft-XS marginRight-XS Width-XS controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom ui-droppable ui-sortable UzCompositeChild" id="tabPnlShikaku" role="tabpanel" aria-expanded="false" aria-hidden="true" aria-labelledby="ui-id-988" style="width: 1078px; height: 589px; display: none;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tabPnlShikaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tabPnlShikaku&quot;,&quot;title&quot;:&quot;資格関連異動&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="ccdShikakuKanrenIdo" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShikakuKanrenIdo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdShikakuKanrenIdo&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;shikakuhenkorireki&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShikakuHenkoRireki&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnAdd&quot;},{&quot;eventName&quot;:&quot;onSelect_dgHenko&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgHenko&quot;},{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgHenko&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgHenko&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShikakuHenkoRireki"></div></div><div class="UzTabPanel JSControl FloatLeft marginLeft-XS marginRight-XS Width-XS controlMargin-M ui-tabs-panel ui-widget-content ui-corner-bottom ui-droppable ui-sortable UzCompositeChild" id="tabPnlShisetu" role="tabpanel" aria-expanded="false" aria-hidden="true" aria-labelledby="ui-id-989" style="width: 1078px; height: 589px; display: none;" data-control-type="TabPanel" data-obj="{&quot;fieldName&quot;:&quot;tabPnlShisetu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TabPanel&quot;,&quot;selectControlID&quot;:&quot;tabPnlShisetu&quot;,&quot;title&quot;:&quot;施設入退所&quot;,&quot;lazyLoadingControls&quot;:{}}"><div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="ccdShisetuNyutaisyo" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShisetuNyutaisyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ccdShisetuNyutaisyo&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShisetsuNyutaishoRirekiKanri&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[{&quot;modeKey&quot;:&quot;表示モード&quot;,&quot;modeValue&quot;:&quot;登録&quot;}],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnAddShisetsuNyutaisho&quot;},{&quot;eventName&quot;:&quot;onSelect_dgShisetsuNyutaishoRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgShisetsuNyutaishoRireki&quot;},{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgShisetsuNyutaishoRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgShisetsuNyutaishoRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgShisetsuNyutaishoRireki&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShisetsuNyutaishoRirekiKanri"></div></div></div></div></div>                
+             
+         
+   
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['HIHOSYOSAI'] = {};
+DBZ['HIHOSYOSAI'].HihosyosaiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_Hihosyosai').getProperty();parameter0.lblSyutokubi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyutokubi').getProperty();parameter0.lblSyutokutodokedebi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyutokutodokedebi').getProperty();parameter0.lblSyutokujiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyutokujiyu').getProperty();parameter0.lblHihokubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblHihokubun').getProperty();parameter0.lblSyozaiHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyozaiHokensya').getProperty();parameter0.lblSotimotoHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSotimotoHokensya').getProperty();parameter0.lblKyuHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblKyuHokensya').getProperty();parameter0.lblSyoniNichiji = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyoniNichiji').getProperty();parameter0.txtSyutokuYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSyutokuYMD').getProperty();parameter0.txtSyutokutodokedeYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSyutokutodokedeYMD').getProperty();parameter0.ddlSyutokuJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSyutokuJiyu').getProperty();parameter0.ddlHihokubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlHihokubun').getProperty();parameter0.ddlSyozaiHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSyozaiHokensya').getProperty();parameter0.ddlSotimotoHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSotimotoHokensya').getProperty();parameter0.ddlKyuHokensya = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlKyuHokensya').getProperty();parameter0.txtSyoninichiji1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSyoninichiji1').getProperty();parameter0.lblSosichibi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSosichibi').getProperty();parameter0.lblSosichiTodokedebi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSosichiTodokedebi').getProperty();parameter0.lblSosichiJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSosichiJiyu').getProperty();parameter0.lblSyoninichibi2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSyoninichibi2').getProperty();parameter0.txtSosichiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSosichiYMD').getProperty();parameter0.txtSosichiTodokedeYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSosichiTodokedeYMD').getProperty();parameter0.ddlSosichiJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSosichiJiyu').getProperty();parameter0.txtSyoninichiji2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSyoninichiji2').getProperty();parameter0.tabContainerDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_tabContainerDetail').getProperty();parameter0.tabContainerDetail.tabPnlJyusyoti = Uz.JSControlUtil.getJSControl(parentFieldName + '_tabPnlJyusyoti').getProperty();parameter0.tabContainerDetail.tabPnlJyusyoti.ccdJyusyotiTokure = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdJyusyotiTokure').getPostParameter();parameter0.tabContainerDetail.tabPnlShikaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_tabPnlShikaku').getProperty();parameter0.tabContainerDetail.tabPnlShikaku.ccdShikakuKanrenIdo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdShikakuKanrenIdo').getPostParameter();parameter0.tabContainerDetail.tabPnlShisetu = Uz.JSControlUtil.getJSControl(parentFieldName + '_tabPnlShisetu').getProperty();parameter0.tabContainerDetail.tabPnlShisetu.ccdShisetuNyutaisyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdShisetuNyutaisyo').getPostParameter();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (Hihosyosai) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        Hihosyosai.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "Hihosyosai";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.Hihosyosai.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.Hihosyosai.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.Hihosyosai = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblSyutokubi = function () {
+                return new UZA.Label(this.convFiledName("lblSyutokubi"));
+            };
+
+            Controls.prototype.lblSyutokutodokedebi = function () {
+                return new UZA.Label(this.convFiledName("lblSyutokutodokedebi"));
+            };
+
+            Controls.prototype.lblSyutokujiyu = function () {
+                return new UZA.Label(this.convFiledName("lblSyutokujiyu"));
+            };
+
+            Controls.prototype.lblHihokubun = function () {
+                return new UZA.Label(this.convFiledName("lblHihokubun"));
+            };
+
+            Controls.prototype.lblSyozaiHokensya = function () {
+                return new UZA.Label(this.convFiledName("lblSyozaiHokensya"));
+            };
+
+            Controls.prototype.lblSotimotoHokensya = function () {
+                return new UZA.Label(this.convFiledName("lblSotimotoHokensya"));
+            };
+
+            Controls.prototype.lblKyuHokensya = function () {
+                return new UZA.Label(this.convFiledName("lblKyuHokensya"));
+            };
+
+            Controls.prototype.lblSyoniNichiji = function () {
+                return new UZA.Label(this.convFiledName("lblSyoniNichiji"));
+            };
+
+            Controls.prototype.txtSyutokuYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyutokuYMD"));
+            };
+
+            Controls.prototype.txtSyutokutodokedeYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyutokutodokedeYMD"));
+            };
+
+            Controls.prototype.ddlSyutokuJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSyutokuJiyu"));
+            };
+
+            Controls.prototype.ddlHihokubun = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHihokubun"));
+            };
+
+            Controls.prototype.ddlSyozaiHokensya = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSyozaiHokensya"));
+            };
+
+            Controls.prototype.ddlSotimotoHokensya = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSotimotoHokensya"));
+            };
+
+            Controls.prototype.ddlKyuHokensya = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKyuHokensya"));
+            };
+
+            Controls.prototype.txtSyoninichiji1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtSyoninichiji1"));
+            };
+
+            Controls.prototype.lblSosichibi = function () {
+                return new UZA.Label(this.convFiledName("lblSosichibi"));
+            };
+
+            Controls.prototype.lblSosichiTodokedebi = function () {
+                return new UZA.Label(this.convFiledName("lblSosichiTodokedebi"));
+            };
+
+            Controls.prototype.lblSosichiJiyu = function () {
+                return new UZA.Label(this.convFiledName("lblSosichiJiyu"));
+            };
+
+            Controls.prototype.lblSyoninichibi2 = function () {
+                return new UZA.Label(this.convFiledName("lblSyoninichibi2"));
+            };
+
+            Controls.prototype.txtSosichiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSosichiYMD"));
+            };
+
+            Controls.prototype.txtSosichiTodokedeYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSosichiTodokedeYMD"));
+            };
+
+            Controls.prototype.ddlSosichiJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSosichiJiyu"));
+            };
+
+            Controls.prototype.txtSyoninichiji2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtSyoninichiji2"));
+            };
+
+            Controls.prototype.tabContainerDetail = function () {
+                return new UZA.TabContainer(this.convFiledName("tabContainerDetail"));
+            };
+
+            Controls.prototype.tabPnlJyusyoti = function () {
+                return new UZA.TabPanel(this.convFiledName("tabPnlJyusyoti"));
+            };
+
+            Controls.prototype.tabPnlShikaku = function () {
+                return new UZA.TabPanel(this.convFiledName("tabPnlShikaku"));
+            };
+
+            Controls.prototype.tabPnlShisetu = function () {
+                return new UZA.TabPanel(this.convFiledName("tabPnlShisetu"));
+            };
+            return Controls;
+        })();
+        Hihosyosai.Controls = Controls;
+    })(DBZ.Hihosyosai || (DBZ.Hihosyosai = {}));
+    var Hihosyosai = DBZ.Hihosyosai;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (Hihosyosai) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new Hihosyosai.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new Hihosyosai.PublicProperties(this.fieldName);
+            };
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayType"
+                ];
+            };
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
+            return ModeController;
+        })();
+        Hihosyosai.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.shokai = function () {
+                    this.controls.txtSyutokuYMD().readOnly = true;
+                    this.controls.txtSyutokutodokedeYMD().readOnly = true;
+                    this.controls.ddlSyutokuJiyu().readOnly = true;
+                    this.controls.ddlHihokubun().readOnly = true;
+                    this.controls.ddlSyozaiHokensya().readOnly = true;
+                    this.controls.ddlSotimotoHokensya().readOnly = true;
+                    this.controls.ddlKyuHokensya().readOnly = true;
+                    this.controls.txtSosichiYMD().readOnly = true;
+                    this.controls.txtSosichiTodokedeYMD().readOnly = true;
+                    this.controls.ddlSosichiJiyu().readOnly = true;
+
+                    this.controls.tabPnlJyusyoti().visible = true;
+                    this.controls.tabPnlShikaku().visible = true;
+                };
+
+                DisplayType.prototype.toroku = function () {
+                    this.controls.txtSyutokuYMD().readOnly = false;
+                    this.controls.txtSyutokutodokedeYMD().readOnly = false;
+                    this.controls.ddlSyutokuJiyu().readOnly = false;
+                    this.controls.ddlHihokubun().readOnly = false;
+                    this.controls.ddlSyozaiHokensya().readOnly = false;
+                    this.controls.ddlSotimotoHokensya().readOnly = false;
+                    this.controls.ddlKyuHokensya().readOnly = false;
+                    this.controls.txtSosichiYMD().readOnly = false;
+                    this.controls.txtSosichiTodokedeYMD().readOnly = false;
+                    this.controls.ddlSosichiJiyu().readOnly = false;
+
+                    this.controls.tabPnlJyusyoti().visible = true;
+                    this.controls.tabPnlShikaku().visible = true;
+                };
+
+                DisplayType.prototype.teiseitoroku_jyusyoti = function () {
+                    this.controls.txtSyutokuYMD().readOnly = false;
+                    this.controls.txtSyutokutodokedeYMD().readOnly = false;
+                    this.controls.ddlSyutokuJiyu().readOnly = false;
+                    this.controls.ddlHihokubun().readOnly = false;
+                    this.controls.ddlSyozaiHokensya().readOnly = false;
+                    this.controls.ddlSotimotoHokensya().readOnly = false;
+                    this.controls.ddlKyuHokensya().readOnly = false;
+                    this.controls.txtSosichiYMD().readOnly = false;
+                    this.controls.txtSosichiTodokedeYMD().readOnly = false;
+                    this.controls.ddlSosichiJiyu().readOnly = false;
+
+                    this.controls.tabPnlJyusyoti().visible = true;
+                    this.controls.tabPnlShikaku().visible = true;
+                };
+
+                DisplayType.prototype.teiseitoroku_shikaku = function () {
+                    this.controls.txtSyutokuYMD().readOnly = false;
+                    this.controls.txtSyutokutodokedeYMD().readOnly = false;
+                    this.controls.ddlSyutokuJiyu().readOnly = false;
+                    this.controls.ddlHihokubun().readOnly = false;
+                    this.controls.ddlSyozaiHokensya().readOnly = false;
+                    this.controls.ddlSotimotoHokensya().readOnly = false;
+                    this.controls.ddlKyuHokensya().readOnly = false;
+                    this.controls.txtSosichiYMD().readOnly = false;
+                    this.controls.txtSosichiTodokedeYMD().readOnly = false;
+                    this.controls.ddlSosichiJiyu().readOnly = false;
+
+                    this.controls.tabPnlJyusyoti().visible = false;
+                    this.controls.tabPnlShikaku().visible = true;
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+        })(Hihosyosai.Modes || (Hihosyosai.Modes = {}));
+        var Modes = Hihosyosai.Modes;
+    })(DBZ.Hihosyosai || (DBZ.Hihosyosai = {}));
+    var Hihosyosai = DBZ.Hihosyosai;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (Hihosyosai) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new Hihosyosai.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        Hihosyosai.PublicProperties = PublicProperties;
+    })(DBZ.Hihosyosai || (DBZ.Hihosyosai = {}));
+    var Hihosyosai = DBZ.Hihosyosai;
+})(DBZ || (DBZ = {}));
+</script></div>

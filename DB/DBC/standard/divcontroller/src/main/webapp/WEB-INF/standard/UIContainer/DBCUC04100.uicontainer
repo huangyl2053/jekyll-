@@ -32,13 +32,17 @@
     },
     {
      "id": "3",
-     "type": "end",
+     "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0410012",
      "layoutTitle": "国保連情報取込バッチ起動",
-     "eventName": "完了",
-     "destroy": false,
-     "condition": ""
+     "eventName": "取込一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0410011",
+     "toLayoutTitle": "国保連情報取込",
+     "toState": ""
     },
     {
      "id": "4",
@@ -46,6 +50,16 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0410011",
      "layoutTitle": "国保連情報取込",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0410012",
+     "layoutTitle": "国保連情報取込バッチ起動",
      "eventName": "完了",
      "destroy": false,
      "condition": ""

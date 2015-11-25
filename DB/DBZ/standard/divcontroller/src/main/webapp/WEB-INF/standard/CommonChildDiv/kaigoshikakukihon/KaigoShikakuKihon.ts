@@ -10,55 +10,65 @@ module DBZ {
                 this.controls = new Controls(fieldName);
             }
 
-            public RenrakusakiAriMode() {
-                return new Modes.RenrakusakiAriMode(this.controls);
+            public 連絡先ボタンを() {
+                return new Modes.連絡先ボタンを(this.controls);
             }
             
-            public HihokenrirekiNashiMode() {
-                return new Modes.HihokenrirekiNashiMode(this.controls);
+            public 被保履歴ボタンを() {
+                return new Modes.被保履歴ボタンを(this.controls);
             }
 
-            public NinteirirekiNashiMode() {
-                return new Modes.NinteirirekiNashiMode(this.controls);
+            public 認定履歴ボタンを() {
+                return new Modes.認定履歴ボタンを(this.controls);
             }
         }
 
         export module Modes {
 
-            export class RenrakusakiAriMode {
+            export class 連絡先ボタンを {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public RenrakusakiAri(): void {
+                public 表示する(): void {
                     this.controls.btnRenrakusaki().displayNone = false;
+                }
 
-                 
+                public 表示しない(): void {
+                    this.controls.btnRenrakusaki().displayNone = true;
                 }
             }
 
-            export class HihokenrirekiNashiMode {
+            export class 被保履歴ボタンを {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public HihokenrirekiNashi(): void {
+                public 表示する(): void {
+                    this.controls.btnHihoRireki().displayNone = false;
+                }
+                
+                public 表示しない(): void {
                     this.controls.btnHihoRireki().displayNone = true;
                 }
             }
 
-            export class NinteirirekiNashiMode {
+            export class 認定履歴ボタンを {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public NinteirirekiAri(): void {
+                public 表示する(): void {
+                    this.controls.btnNinteiRireki().displayNone = false;
+                }
+                
+                public 表示しない(): void {
                     this.controls.btnNinteiRireki().displayNone = true;
                 }
             }

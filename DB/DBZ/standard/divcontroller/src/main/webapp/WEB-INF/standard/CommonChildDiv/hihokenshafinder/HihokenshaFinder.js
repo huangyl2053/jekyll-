@@ -47,8 +47,6 @@
                     this.controls.chkJukyushaDaicho().displayNone = false;
                     this.controls.chkJushochiTokureisha().visible = true;
                     this.controls.chkJushochiTokureisha().displayNone = false;
-                    this.controls.radMinashiNigo().visible = true;
-                    this.controls.radMinashiNigo().displayNone = false;
                 };
 
                 表示モード.prototype.賦課系 = function () {
@@ -60,8 +58,6 @@
                     this.controls.chkJukyushaDaicho().displayNone = true;
                     this.controls.chkJushochiTokureisha().visible = false;
                     this.controls.chkJushochiTokureisha().displayNone = true;
-                    this.controls.radMinashiNigo().visible = false;
-                    this.controls.radMinashiNigo().displayNone = true;
                 };
                 return 表示モード;
             })();

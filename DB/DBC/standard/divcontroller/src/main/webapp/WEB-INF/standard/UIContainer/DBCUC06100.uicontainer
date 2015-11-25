@@ -46,25 +46,11 @@
     },
     {
      "id": "4",
-     "type": "ordinal",
+     "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0610011",
      "layoutTitle": "福祉用具購入費支給申請一括審査・決定",
-     "eventName": "更新",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0610013",
-     "toLayoutTitle": "福祉用具購入費支給申請一括審査・決定",
-     "toState": "更新完了"
-    },
-    {
-     "id": "5",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0610013",
-     "layoutTitle": "福祉用具購入費支給申請一括審査・決定",
-     "eventName": "完了",
+     "eventName": "処理完了",
      "destroy": false,
      "condition": ""
     }

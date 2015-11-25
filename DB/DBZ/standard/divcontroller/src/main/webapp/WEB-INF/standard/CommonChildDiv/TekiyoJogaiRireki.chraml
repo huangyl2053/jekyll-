@@ -1,0 +1,280 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;TekiyoJogaiRireki&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.TekiyoJogaiRireki"><div class="StateChangable UzPanel JSControl FloatLeft UzCommonChildDivPanel Panel-Shadow Width-G12 UzCompositeChild" id="TekiyoJogaiRireki" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TekiyoJogaiRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;TekiyoJogaiRireki&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;TekiyoJogaiRireki&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="TekiyoJogaiRireki_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPadding-M" id="TekiyoJogaiRireki_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow Width-G11 UzCompositeChild" id="panelTekiyoRireki" style="margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelTekiyoRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G11&quot;,&quot;selectControlID&quot;:&quot;panelTekiyoRireki&quot;,&quot;title&quot;:&quot;適用除外情報&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelTekiyoRireki_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">適用除外情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelTekiyoRireki_panel_body_area"><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M Height-S UzCompositeChild" id="datagridTekiyoJogai" style="width: 1000px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;datagridTekiyoJogai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1000px&quot;,&quot;selectControlID&quot;:&quot;datagridTekiyoJogai&quot;,&quot;height&quot;:&quot;S&quot;,&quot;dataSource&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;状態&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;status&quot;},{&quot;columnName&quot;:&quot;適用日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;tekiyoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;tekiyoTodokeDate&quot;},{&quot;columnName&quot;:&quot;適用事由&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:105,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;tekiyoJiyu&quot;},{&quot;columnName&quot;:&quot;解除日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;kayijoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;kaijoTodokeDate&quot;},{&quot;columnName&quot;:&quot;解除事由&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:105,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;kaijoJiyu&quot;},{&quot;columnName&quot;:&quot;入所日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;nyuShoDate&quot;},{&quot;columnName&quot;:&quot;退所日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;taiShoDate&quot;},{&quot;columnName&quot;:&quot;入所施設&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:144,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;nyuShoShisetu&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;適用&quot;,&quot;combineHeaderHtml&quot;:&quot;&quot;,&quot;combineItem&quot;:[&quot;tekiyoDate&quot;,&quot;tekiyoTodokeDate&quot;,&quot;tekiyoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;解除&quot;,&quot;combineHeaderHtml&quot;:&quot;&quot;,&quot;combineItem&quot;:[&quot;kayijoDate&quot;,&quot;kaijoTodokeDate&quot;,&quot;kaijoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;施設情報&quot;,&quot;combineHeaderHtml&quot;:&quot;&quot;,&quot;combineItem&quot;:[&quot;nyuShoDate&quot;,&quot;taiShoDate&quot;,&quot;nyuShoShisetu&quot;]}],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;isShowCancelButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="datagridTekiyoJogai_grid_table" role="" style="width: 1000px; height: 176px; position: relative;"></div><div id="datagridTekiyoJogai_footer" style="width: 1000px; height: 25px;"></div></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow ClearFloat Width-G11 UzCompositeChild" id="panelTekiyoInput" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelTekiyoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G11&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;panelTekiyoInput&quot;,&quot;title&quot;:&quot;適用除外情報&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelTekiyoInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">適用除外情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelTekiyoInput_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtTekiyoDate" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTekiyoDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTekiyoDate_core&quot;,&quot;labelLText&quot;:&quot;適用日&quot;,&quot;labelLWidth&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtTekiyoDate_labelL"><span>適用日</span></span><input class="UzTextBox CoreElement" id="txtTekiyoDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTekiyoTodokeDate" style="width: 167px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTekiyoTodokeDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTekiyoTodokeDate_core&quot;,&quot;labelLText&quot;:&quot;適用届出日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtTekiyoTodokeDate_labelL"><span>適用届出日</span></span><input class="UzTextBox CoreElement" id="txtTekiyoTodokeDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlTekiyoJiyu" style="width: 174px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlTekiyoJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlTekiyoJiyu_core&quot;,&quot;labelLText&quot;:&quot;適用事由&quot;,&quot;labelLWidth&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="ddlTekiyoJiyu_labelL"><span>適用事由</span></span><select class="CoreElement" id="ddlTekiyoJiyu_core" style="width: 105px;"><option value="key0">value0</option><option value="key1">value1</option></select></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNyusyoDate" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNyusyoDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtNyusyoDate_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;入所日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtNyusyoDate_labelL"><span>入所日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtNyusyoDate_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtKayijoDate" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKayijoDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKayijoDate_core&quot;,&quot;labelLText&quot;:&quot;解除日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtKayijoDate_labelL"><span>解除日</span></span><input class="UzTextBox CoreElement" id="txtKayijoDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaijoTodokedeDate" style="width: 167px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaijoTodokedeDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKaijoTodokedeDate_core&quot;,&quot;labelLText&quot;:&quot;解除届出日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtKaijoTodokedeDate_labelL"><span>解除届出日</span></span><input class="UzTextBox CoreElement" id="txtKaijoTodokedeDate_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlKaijyoJiyu" style="width: 174px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlKaijyoJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlKaijyoJiyu_core&quot;,&quot;labelLText&quot;:&quot;解除事由&quot;,&quot;labelLWidth&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="ddlKaijyoJiyu_labelL"><span>解除事由</span></span><select class="CoreElement" id="ddlKaijyoJiyu_core" style="width: 105px;"><option value="key0">value0</option><option value="key1">value1</option></select></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTaisyoDate" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTaisyoDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTaisyoDate_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;退所日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtTaisyoDate_labelL"><span>退所日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtTaisyoDate_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow Width-G11 UzCompositeChild" id="panelTekiyoJokaiTekiInput" style="margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelTekiyoJokaiTekiInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G11&quot;,&quot;selectControlID&quot;:&quot;panelTekiyoJokaiTekiInput&quot;,&quot;title&quot;:&quot;適用除外情報入力&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;TekiyoJogaiRireki_panel_body_area&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelTekiyoJokaiTekiInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">適用除外情報入力</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelTekiyoJokaiTekiInput_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M ClearFloat Width-G1 UzCompositeChild" id="panelJogaisyaTekiyo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelJogaisyaTekiyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;panelJogaisyaTekiyo&quot;,&quot;title&quot;:&quot;除外者適用&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;focusPositionID&quot;:&quot;ui-accordion-WestAccordion-header-0&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="panelJogaisyaTekiyo_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">除外者適用</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-GroupBox" id="panelJogaisyaTekiyo_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNyusyoDateInput" style="width: 167px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNyusyoDateInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtNyusyoDateInput_core&quot;,&quot;labelLText&quot;:&quot;入所日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNyusyoDateInput_labelL" style="width: 80px;"><span>入所日</span></span><input class="UzTextBox CoreElement" id="txtNyusyoDateInput_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTekiyoDateInput" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTekiyoDateInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTekiyoDateInput_core&quot;,&quot;labelLText&quot;:&quot;適用日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtTekiyoDateInput_labelL"><span>適用日</span></span><input class="UzTextBox CoreElement" id="txtTekiyoDateInput_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTkyoTododkDateIn" style="width: 167px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTkyoTododkDateIn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTkyoTododkDateIn_core&quot;,&quot;labelLText&quot;:&quot;適用届出日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtTkyoTododkDateIn_labelL"><span>適用届出日</span></span><input class="UzTextBox CoreElement" id="txtTkyoTododkDateIn_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlTekiyoJiyuInput" style="width: 174px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlTekiyoJiyuInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlTekiyoJiyuInput_core&quot;,&quot;labelLText&quot;:&quot;適用事由&quot;,&quot;labelLWidth&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="ddlTekiyoJiyuInput_labelL"><span>適用事由</span></span><select class="CoreElement" id="ddlTekiyoJiyuInput_core" style="width: 105px;"><option value="key0">value0</option><option value="key1">value1</option></select></div></div></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow ClearFloat Width-G11 UzCompositeChild" id="panelTekiyoJokaiKaiJyoInput" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelTekiyoJokaiKaiJyoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G11&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;panelTekiyoJokaiKaiJyoInput&quot;,&quot;title&quot;:&quot;適用除外情報入力&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;defaultLayout&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="panelTekiyoJokaiKaiJyoInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">適用除外情報入力</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="panelTekiyoJokaiKaiJyoInput_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Width-G1 UzCompositeChild" id="panelJogaisyaKaijo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;panelJogaisyaKaijo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;panelJogaisyaKaijo&quot;,&quot;title&quot;:&quot;除外者解除&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="panelJogaisyaKaijo_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">除外者解除</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-GroupBox" id="panelJogaisyaKaijo_panel_body_area"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTaisyoDateInput" style="width: 167px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTaisyoDateInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtTaisyoDateInput_core&quot;,&quot;labelLText&quot;:&quot;退所日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTaisyoDateInput_labelL" style="width: 80px;"><span>退所日</span></span><input class="UzTextBox CoreElement" id="txtTaisyoDateInput_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaijoDateInput" style="width: 135px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaijoDateInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKaijoDateInput_core&quot;,&quot;labelLText&quot;:&quot;解除日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtKaijoDateInput_labelL"><span>解除日</span></span><input class="UzTextBox CoreElement" id="txtKaijoDateInput_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaijoTododkDateIn" style="width: 167px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaijoTododkDateIn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtKaijoTododkDateIn_core&quot;,&quot;labelLText&quot;:&quot;解除届出日&quot;,&quot;labelLWidth&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="txtKaijoTododkDateIn_labelL"><span>解除届出日</span></span><input class="UzTextBox CoreElement" id="txtKaijoTododkDateIn_core" style="width: 80px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlKaijoJiyuInput" style="width: 174px; height: 20px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlKaijoJiyuInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;105px&quot;,&quot;selectControlID&quot;:&quot;ddlKaijoJiyuInput_core&quot;,&quot;labelLText&quot;:&quot;解除事由&quot;,&quot;labelLWidth&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-" id="ddlKaijoJiyuInput_labelL"><span>解除事由</span></span><select class="CoreElement" id="ddlKaijoJiyuInput_core" style="width: 105px;"><option value="key0">value0</option><option value="key1">value1</option></select></div></div></div></div></div><button class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKakutei" style="width: 200px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKakutei&quot;,&quot;text&quot;:&quot;適用除外情報を確定する&quot;}"><span>適用除外情報を確定する</span></button></div></div>                  
+     
+         
+                   
+   
+   
+   
+       <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['TEKIYOJOGAIRIREKI'] = {};
+DBZ['TEKIYOJOGAIRIREKI'].TekiyoJogaiRirekiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TekiyoJogaiRireki').getProperty();parameter0.panelTekiyoRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelTekiyoRireki').getProperty();parameter0.panelTekiyoRireki.datagridTekiyoJogai = Uz.JSControlUtil.getJSControl(parentFieldName + '_datagridTekiyoJogai').getProperty();parameter0.panelTekiyoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelTekiyoInput').getProperty();parameter0.panelTekiyoInput.txtTekiyoDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTekiyoDate').getProperty();parameter0.panelTekiyoInput.txtTekiyoTodokeDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTekiyoTodokeDate').getProperty();parameter0.panelTekiyoInput.ddlTekiyoJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlTekiyoJiyu').getProperty();parameter0.panelTekiyoInput.txtNyusyoDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNyusyoDate').getProperty();parameter0.panelTekiyoInput.txtKayijoDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKayijoDate').getProperty();parameter0.panelTekiyoInput.txtKaijoTodokedeDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaijoTodokedeDate').getProperty();parameter0.panelTekiyoInput.ddlKaijyoJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlKaijyoJiyu').getProperty();parameter0.panelTekiyoInput.txtTaisyoDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTaisyoDate').getProperty();parameter0.panelTekiyoJokaiTekiInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelTekiyoJokaiTekiInput').getProperty();parameter0.panelTekiyoJokaiTekiInput.panelJogaisyaTekiyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelJogaisyaTekiyo').getProperty();parameter0.panelTekiyoJokaiTekiInput.panelJogaisyaTekiyo.txtNyusyoDateInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNyusyoDateInput').getProperty();parameter0.panelTekiyoJokaiTekiInput.panelJogaisyaTekiyo.txtTekiyoDateInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTekiyoDateInput').getProperty();parameter0.panelTekiyoJokaiTekiInput.panelJogaisyaTekiyo.txtTkyoTododkDateIn = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTkyoTododkDateIn').getProperty();parameter0.panelTekiyoJokaiTekiInput.panelJogaisyaTekiyo.ddlTekiyoJiyuInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlTekiyoJiyuInput').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelTekiyoJokaiKaiJyoInput').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput.panelJogaisyaKaijo = Uz.JSControlUtil.getJSControl(parentFieldName + '_panelJogaisyaKaijo').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput.panelJogaisyaKaijo.txtTaisyoDateInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTaisyoDateInput').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput.panelJogaisyaKaijo.txtKaijoDateInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaijoDateInput').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput.panelJogaisyaKaijo.txtKaijoTododkDateIn = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaijoTododkDateIn').getProperty();parameter0.panelTekiyoJokaiKaiJyoInput.panelJogaisyaKaijo.ddlKaijoJiyuInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlKaijoJiyuInput').getProperty();parameter0.btnKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakutei').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (TekiyoJogaiRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TekiyoJogaiRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TekiyoJogaiRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.TekiyoJogaiRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.TekiyoJogaiRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TekiyoJogaiRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.panelTekiyoRireki = function () {
+                return new UZA.Panel(this.convFiledName("panelTekiyoRireki"));
+            };
+
+            Controls.prototype.datagridTekiyoJogai = function () {
+                return new UZA.DataGrid(this.convFiledName("datagridTekiyoJogai"));
+            };
+
+            Controls.prototype.panelTekiyoInput = function () {
+                return new UZA.Panel(this.convFiledName("panelTekiyoInput"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtTekiyoTodokeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTekiyoTodokeDate"));
+            };
+
+            Controls.prototype.ddlTekiyoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
+            };
+
+            Controls.prototype.txtNyusyoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNyusyoDate"));
+            };
+
+            Controls.prototype.txtKayijoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKayijoDate"));
+            };
+
+            Controls.prototype.txtKaijoTodokedeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaijoTodokedeDate"));
+            };
+
+            Controls.prototype.ddlKaijyoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijyoJiyu"));
+            };
+
+            Controls.prototype.txtTaisyoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTaisyoDate"));
+            };
+
+            Controls.prototype.panelTekiyoJokaiTekiInput = function () {
+                return new UZA.Panel(this.convFiledName("panelTekiyoJokaiTekiInput"));
+            };
+
+            Controls.prototype.panelJogaisyaTekiyo = function () {
+                return new UZA.Panel(this.convFiledName("panelJogaisyaTekiyo"));
+            };
+
+            Controls.prototype.txtNyusyoDateInput = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNyusyoDateInput"));
+            };
+
+            Controls.prototype.txtTekiyoDateInput = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTekiyoDateInput"));
+            };
+
+            Controls.prototype.txtTkyoTododkDateIn = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTkyoTododkDateIn"));
+            };
+
+            Controls.prototype.ddlTekiyoJiyuInput = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyuInput"));
+            };
+
+            Controls.prototype.panelTekiyoJokaiKaiJyoInput = function () {
+                return new UZA.Panel(this.convFiledName("panelTekiyoJokaiKaiJyoInput"));
+            };
+
+            Controls.prototype.panelJogaisyaKaijo = function () {
+                return new UZA.Panel(this.convFiledName("panelJogaisyaKaijo"));
+            };
+
+            Controls.prototype.txtTaisyoDateInput = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTaisyoDateInput"));
+            };
+
+            Controls.prototype.txtKaijoDateInput = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaijoDateInput"));
+            };
+
+            Controls.prototype.txtKaijoTododkDateIn = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaijoTododkDateIn"));
+            };
+
+            Controls.prototype.ddlKaijoJiyuInput = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyuInput"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+            return Controls;
+        })();
+        TekiyoJogaiRireki.Controls = Controls;
+    })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBZ.TekiyoJogaiRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (TekiyoJogaiRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TekiyoJogaiRireki.Controls(fieldName);
+            }
+            ModeController.prototype.ModeA = function () {
+                return new Modes.ModeA(this.controls);
+            };
+
+            ModeController.prototype.ModeB = function () {
+                return new Modes.ModeB(this.controls);
+            };
+
+            ModeController.prototype.ModeC = function () {
+                return new Modes.ModeC(this.controls);
+            };
+
+            ModeController.prototype.ModeD = function () {
+                return new Modes.ModeD(this.controls);
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new TekiyoJogaiRireki.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "ModeA",
+                    "ModeB",
+                    "ModeC",
+                    "ModeD"
+                ];
+            };
+            return ModeController;
+        })();
+        TekiyoJogaiRireki.ModeController = ModeController;
+
+        (function (Modes) {
+            var ModeA = (function () {
+                function ModeA(controls) {
+                    this.controls = controls;
+                }
+                ModeA.prototype.Shinki = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = false;
+
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                };
+                return ModeA;
+            })();
+            Modes.ModeA = ModeA;
+
+            var ModeB = (function () {
+                function ModeB(controls) {
+                    this.controls = controls;
+                }
+                ModeB.prototype.Kaijo = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = false;
+
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                };
+                return ModeB;
+            })();
+            Modes.ModeB = ModeB;
+
+            var ModeC = (function () {
+                function ModeC(controls) {
+                    this.controls = controls;
+                }
+                ModeC.prototype.HenKo = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+
+                    this.controls.panelTekiyoInput().displayNone = false;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().disabled = true;
+
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = true;
+                };
+                return ModeC;
+            })();
+            Modes.ModeC = ModeC;
+
+            var ModeD = (function () {
+                function ModeD(controls) {
+                    this.controls = controls;
+                }
+                ModeD.prototype.Hyoji = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+
+                    this.controls.btnKakutei().displayNone = true;
+                };
+                return ModeD;
+            })();
+            Modes.ModeD = ModeD;
+        })(TekiyoJogaiRireki.Modes || (TekiyoJogaiRireki.Modes = {}));
+        var Modes = TekiyoJogaiRireki.Modes;
+    })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBZ.TekiyoJogaiRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TekiyoJogaiRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TekiyoJogaiRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TekiyoJogaiRireki.PublicProperties = PublicProperties;
+    })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
+    var TekiyoJogaiRireki = DBZ.TekiyoJogaiRireki;
+})(DBZ || (DBZ = {}));
+</script></div>

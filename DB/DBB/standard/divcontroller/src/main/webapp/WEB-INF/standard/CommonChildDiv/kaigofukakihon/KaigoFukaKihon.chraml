@@ -1,4 +1,4 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;kaigofukakihon&quot;,&quot;businessId&quot;:&quot;DBB&quot;,&quot;controlName&quot;:&quot;KaigoFukaKihon&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBB.KaigoFukaKihon"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable ClearFloat UzCommonChildDivPanel UzCompositeChild" id="KaigoFukaKihon" style="margin: 0em; width: 1105px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoFukaKihon&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1105px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KaigoFukaKihon&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoFukaKihon&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoFukaKihon_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KaigoFukaKihon_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat UzCompositeChild" id="txtTsuchishoNo" style="width: 222px; height: 20px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtTsuchishoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;130px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtTsuchishoNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;通知書番号&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;maxLength&quot;:&quot;16&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTsuchishoNo_labelL" style="width: 85px;"><span>通知書番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtTsuchishoNo_core" style="width: 130px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtHihokenshaNo" style="width: 157px; height: 20px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaNo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;maxLength&quot;:&quot;10&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaNo_labelL" style="width: 70px;"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtHihokenshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtHokenryoDankai" style="width: 142px; height: 20px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenryoDankai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;50px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtHokenryoDankai_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;保険料段階&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenryoDankai_labelL" style="width: 85px;"><span>保険料段階</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenryoDankai_core" style="width: 50px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtShutokuYmd" style="width: 157px; height: 20px; margin-right: 0em; margin-left: 0em; position: relative; opacity: 1;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtShutokuYmd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShutokuYmd_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;資格取得&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShutokuYmd_labelL" style="width: 70px;"><span>資格取得</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtShutokuYmd_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtShutokuJiyu" style="width: 90px; height: 20px; margin-right: 0em; margin-left: 0.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShutokuJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;marginLeft&quot;:&quot;0.1em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShutokuJiyu_core&quot;,&quot;readOnly&quot;:true,&quot;labelLWidth&quot;:&quot;74px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShutokuJiyu_core" style="width: 85px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtSoshitsuYmd" style="width: 157px; height: 20px; margin-right: 0em; margin-left: 0em; position: relative; opacity: 1;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtSoshitsuYmd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtSoshitsuYmd_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;資格喪失&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSoshitsuYmd_labelL" style="width: 70px;"><span>資格喪失</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSoshitsuYmd_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-wareki="" data-setcount="0" data-seireki="" data-orgtext="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtSoshitsuJiyu" style="width: 90px; height: 20px; margin-right: 0em; margin-left: 0.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSoshitsuJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;marginLeft&quot;:&quot;0.1em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtSoshitsuJiyu_core&quot;,&quot;readOnly&quot;:true,&quot;labelLWidth&quot;:&quot;74px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSoshitsuJiyu_core" style="width: 85px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><button title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnHihoRireki" style="width: 70px; margin-right: 0em; margin-left: 0.7em;" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnHihoRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;marginLeft&quot;:&quot;0.7em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnHihoRireki&quot;,&quot;text&quot;:&quot;被保履歴&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;dataPassing&quot;:[]}"><span>被保履歴</span></button></div></div> 
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;kaigofukakihon&quot;,&quot;businessId&quot;:&quot;DBB&quot;,&quot;controlName&quot;:&quot;KaigoFukaKihon&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;canOpenAndClose&quot;:true,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;canOpenAndClose&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;eraseBorder&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;backGroundColor&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;btnHihoRireki_visible&quot;,&quot;editType&quot;:1}]},&quot;eraseBorderTop&quot;:true,&quot;backGroundColor&quot;:0,&quot;btnHihoRireki_visible&quot;:true}" data-is-composite-control="true" data-control-name="DBB.KaigoFukaKihon"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel UzCompositeChild" id="KaigoFukaKihon" style="margin: 0em; width: 1115px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoFukaKihon&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1115px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KaigoFukaKihon&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoFukaKihon&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoFukaKihon_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KaigoFukaKihon_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat UzCompositeChild" id="txtTsuchishoNo" style="width: 222px; height: 21px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtTsuchishoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;130px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtTsuchishoNo_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;16&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;通知書番号&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTsuchishoNo_labelL" style="width: 85px;"><span>通知書番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtTsuchishoNo_core" style="width: 130px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtHihokenshaNo" style="width: 157px; height: 21px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtHihokenshaNo_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;10&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaNo_labelL" style="width: 70px;"><span>被保番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtHihokenshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtHokenryoDankai" style="width: 152px; height: 20px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenryoDankai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtHokenryoDankai_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;保険料段階&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenryoDankai_labelL" style="width: 85px;"><span>保険料段階</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenryoDankai_core" style="width: 60px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxFlexibleDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtShutokuYmd" style="width: 157px; height: 21px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtShutokuYmd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShutokuYmd_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;資格取得&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShutokuYmd_labelL" style="width: 70px;"><span>資格取得</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtShutokuYmd_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-orgtext="" data-seireki="" data-setcount="0" data-wareki=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtShutokuJiyu" style="width: 90px; height: 21px; margin-right: 0em; margin-left: 0.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShutokuJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;marginLeft&quot;:&quot;0.1em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShutokuJiyu_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;74px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShutokuJiyu_core" style="width: 85px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxFlexibleDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtSoshitsuYmd" style="width: 157px; height: 21px; margin-right: 0em; margin-left: 0em;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtSoshitsuYmd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtSoshitsuYmd_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;資格喪失&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSoshitsuYmd_labelL" style="width: 70px;"><span>資格喪失</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSoshitsuYmd_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-orgtext="" data-seireki="" data-setcount="0" data-wareki=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M UzCompositeChild" id="txtSoshitsuJiyu" style="width: 90px; height: 21px; margin-right: 0em; margin-left: 0.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSoshitsuJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;marginLeft&quot;:&quot;0.1em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtSoshitsuJiyu_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;5&quot;,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;74px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSoshitsuJiyu_core" style="width: 85px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><button title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnHihoRireki" style="width: 70px; margin-right: 0em; margin-left: 0.7em;" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnHihoRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;marginLeft&quot;:&quot;0.7em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnHihoRireki&quot;,&quot;text&quot;:&quot;被保履歴&quot;,&quot;heightTextBoxMatches&quot;:true,&quot;dataPassing&quot;:[]}"><span>被保履歴</span></button></div></div> 
 <script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -46,66 +46,15 @@ var DBB;
         });
 
 
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderTop", {
+        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorder", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
             },
             set: function (value) {
                 if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
                 } else {
-                    this.layout.items[0]["eraseBorderTop"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderBottom", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderBottom"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderRight", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderRight"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderLeft", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderLeft"] = value;
+                    this.layout.items[0]["eraseBorder"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -152,10 +101,7 @@ var DBB;
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("canOpenAndClose");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("eraseBorder");
             Uz.JSControlUtil.registProperty("backGroundColor");
             Uz.JSControlUtil.registProperty("btnHihoRireki_visible");
         };
@@ -164,10 +110,7 @@ var DBB;
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
             editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["visible"];
 
@@ -183,7 +126,7 @@ var DBB;
                             "fieldName": "txtTsuchishoNo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "130",
+                            "width": "130px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -194,8 +137,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtTsuchishoNo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -218,17 +161,18 @@ var DBB;
                             "value": "",
                             "labelLText": "通知書番号",
                             "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "0",
+                            "labelLWidth": "85px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHihokenshaNo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -239,8 +183,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtHihokenshaNo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -263,17 +207,18 @@ var DBB;
                             "value": "",
                             "labelLText": "被保番号",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHokenryoDankai",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "50",
+                            "width": "50px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -284,8 +229,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtHokenryoDankai_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -308,17 +253,18 @@ var DBB;
                             "value": "",
                             "labelLText": "保険料段階",
                             "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "0",
+                            "labelLWidth": "85px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtShutokuYmd",
                             "items": [],
-                            "controlType": "TextBoxDate",
-                            "width": "80",
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -329,8 +275,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtShutokuYmd_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -347,18 +293,20 @@ var DBB;
                             "value": "",
                             "labelLText": "資格取得",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtShutokuJiyu",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "85",
+                            "width": "85px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -369,8 +317,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.1",
-                            "marginRight": "0",
+                            "marginLeft": "0.1em",
+                            "marginRight": "0em",
                             "selectControlID": "txtShutokuJiyu_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -393,17 +341,18 @@ var DBB;
                             "value": "",
                             "labelLText": "",
                             "labelRText": "",
-                            "labelLWidth": "74",
-                            "labelRWidth": "0",
+                            "labelLWidth": "74px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtSoshitsuYmd",
                             "items": [],
-                            "controlType": "TextBoxDate",
-                            "width": "80",
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -414,8 +363,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtSoshitsuYmd_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -432,18 +381,20 @@ var DBB;
                             "value": "",
                             "labelLText": "資格喪失",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtSoshitsuJiyu",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "85",
+                            "width": "85px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -454,8 +405,8 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.1",
-                            "marginRight": "0",
+                            "marginLeft": "0.1em",
+                            "marginRight": "0em",
                             "selectControlID": "txtSoshitsuJiyu_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -478,17 +429,18 @@ var DBB;
                             "value": "",
                             "labelLText": "",
                             "labelRText": "",
-                            "labelLWidth": "74",
-                            "labelRWidth": "0",
+                            "labelLWidth": "74px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "btnHihoRireki",
                             "items": [],
                             "controlType": "ButtonDialog",
-                            "width": "70",
+                            "width": "70px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -499,17 +451,19 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.7",
-                            "marginRight": "0",
+                            "marginLeft": "0.7em",
+                            "marginRight": "0em",
                             "selectControlID": "btnHihoRireki",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "text": "被保履歴",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "",
                             "appearance": 0,
                             "imageFileUrl": "",
-                            "imageWidth": "",
-                            "imageHeight": "",
                             "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "",
@@ -520,7 +474,7 @@ var DBB;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1105",
+                    "width": "1105px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -531,15 +485,15 @@ var DBB;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "0",
-                    "marginRight": "0",
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
                     "selectControlID": "KaigoFukaKihon",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
                     "title": "",
-                    "marginTop": "0",
-                    "marginBottom": "0",
+                    "marginTop": "0em",
+                    "marginBottom": "0em",
                     "isOpen": true,
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
@@ -558,7 +512,8 @@ var DBB;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -573,16 +528,17 @@ var DBB;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBB",
             "controlName": "KaigoFukaKihon",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
@@ -596,23 +552,8 @@ var DBB;
                 },
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderTop",
-                    "newPropertyName": "eraseBorderTop"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderBottom",
-                    "newPropertyName": "eraseBorderBottom"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderRight",
-                    "newPropertyName": "eraseBorderRight"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderLeft",
-                    "newPropertyName": "eraseBorderLeft"
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
                 },
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
@@ -629,37 +570,174 @@ var DBB;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return KaigoFukaKihon_Design;
     })(Uz.CommonChildDiv);
     DBB.KaigoFukaKihon_Design = KaigoFukaKihon_Design;
+
+    (function (KaigoFukaKihon) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoFukaKihon.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoFukaKihon";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBB.KaigoFukaKihon.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoFukaKihon = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTsuchishoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTsuchishoNo"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtHokenryoDankai = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoDankai"));
+            };
+
+            Controls.prototype.txtShutokuYmd = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShutokuYmd"));
+            };
+
+            Controls.prototype.txtShutokuJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtShutokuJiyu"));
+            };
+
+            Controls.prototype.txtSoshitsuYmd = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuYmd"));
+            };
+
+            Controls.prototype.txtSoshitsuJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSoshitsuJiyu"));
+            };
+
+            Controls.prototype.btnHihoRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
+            };
+            return Controls;
+        })();
+        KaigoFukaKihon.Controls = Controls;
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
 })(DBB || (DBB = {}));
 
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBB;
 (function (DBB) {
-    var KaigoFukaKihon = (function (_super) {
-        __extends(KaigoFukaKihon, _super);
-        function KaigoFukaKihon() {
-            _super.apply(this, arguments);
-        }
-        return KaigoFukaKihon;
-    })(DBB.KaigoFukaKihon_Design);
-    DBB.KaigoFukaKihon = KaigoFukaKihon;
+    (function (KaigoFukaKihon) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoFukaKihon.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoFukaKihon.ModeController = ModeController;
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
+})(DBB || (DBB = {}));
+
+var DBB;
+(function (DBB) {
+    (function (KaigoFukaKihon) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KaigoFukaKihon.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("canOpenAndClose", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("backGroundColor", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnHihoRireki_visible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KaigoFukaKihon().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KaigoFukaKihon().title = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose = function () {
+                return this.controls.KaigoFukaKihon().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose = function (value) {
+                this.controls.KaigoFukaKihon().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.geteraseBorderTop = function () {
+                return this.controls.KaigoFukaKihon().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorderTop = function (value) {
+                this.controls.KaigoFukaKihon().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getbackGroundColor = function () {
+                return this.controls.KaigoFukaKihon().backgroundColor;
+            };
+
+            PublicProperties.prototype.setbackGroundColor = function (value) {
+                this.controls.KaigoFukaKihon().backgroundColor = value;
+            };
+
+            PublicProperties.prototype.getbtnHihoRireki_visible = function () {
+                return this.controls.btnHihoRireki().visible;
+            };
+
+            PublicProperties.prototype.setbtnHihoRireki_visible = function (value) {
+                this.controls.btnHihoRireki().visible = value;
+            };
+            return PublicProperties;
+        })();
+        KaigoFukaKihon.PublicProperties = PublicProperties;
+    })(DBB.KaigoFukaKihon || (DBB.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBB.KaigoFukaKihon;
 })(DBB || (DBB = {}));
 </script>
-       
-   
-   
-   
+  
      
-         <script class="RamlConvert" type="text/javascript">
+   
+   
+   <script class="RamlConvert" type="text/javascript">
 var DBB= DBB? DBB: {};
 DBB['KAIGOFUKAKIHON'] = {};
 DBB['KAIGOFUKAKIHON'].KaigoFukaKihonRequest = function(parentFieldName){ 
@@ -741,6 +819,10 @@ var DBB;
                 this.fieldName = fieldName;
                 this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -760,13 +842,57 @@ var DBB;
     (function (KaigoFukaKihon) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
-                this.fieldName = fieldName;
                 this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("canOpenAndClose", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("backGroundColor", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnHihoRireki_visible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KaigoFukaKihon().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KaigoFukaKihon().title = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose = function () {
+                return this.controls.KaigoFukaKihon().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose = function (value) {
+                this.controls.KaigoFukaKihon().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.geteraseBorderTop = function () {
+                return this.controls.KaigoFukaKihon().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorderTop = function (value) {
+                this.controls.KaigoFukaKihon().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getbackGroundColor = function () {
+                return this.controls.KaigoFukaKihon().backgroundColor;
+            };
+
+            PublicProperties.prototype.setbackGroundColor = function (value) {
+                this.controls.KaigoFukaKihon().backgroundColor = value;
+            };
+
+            PublicProperties.prototype.getbtnHihoRireki_visible = function () {
+                return this.controls.btnHihoRireki().visible;
+            };
+
+            PublicProperties.prototype.setbtnHihoRireki_visible = function (value) {
+                this.controls.btnHihoRireki().visible = value;
             };
             return PublicProperties;
         })();

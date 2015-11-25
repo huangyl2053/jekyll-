@@ -12,6 +12,10 @@ var DBZ;
                 return "onClick_btnSearch";
             };
 
+            Events.onBlur_txtMaxNumber = function () {
+                return "onBlur_txtMaxNumber";
+            };
+
             Events.onClick_btnHihokenshaFinderHyoji = function () {
                 return "onClick_btnHihokenshaFinderHyoji";
             };
@@ -79,14 +83,6 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
             };
 
-            Controls.prototype.radMinashiNigo = function () {
-                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
-            };
-
-            Controls.prototype.chkMinashiNigo = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
-            };
-
             Controls.prototype.ccdAtenaFinder = function () {
                 return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
             };
@@ -108,7 +104,7 @@ var DBZ;
             };
 
             Controls.prototype.ccdSaikinShorisha = function () {
-                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
+                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
             };
 
             Controls.prototype.btnHihokenshaFinderHyoji = function () {

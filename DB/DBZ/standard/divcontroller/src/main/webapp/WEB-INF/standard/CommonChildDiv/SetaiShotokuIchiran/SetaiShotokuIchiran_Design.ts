@@ -12,12 +12,20 @@ module DBZ {
                 return "onClick_Saihyoji";
             }
 
+            public static onClick_chkSetaiIchiranAll(): string {
+                return "onClick_chkSetaiIchiranAll";
+            }
+
             public static onClick_Hikaku(): string {
                 return "onClick_Hikaku";
             }
 
             public static onClick_SetaiinSentaku(): string {
                 return "onClick_SetaiinSentaku";
+            }
+
+            public static onClick_btnRirekiClose(): string {
+                return "onClick_btnRirekiClose";
             }
 
         }
@@ -49,8 +57,8 @@ module DBZ {
                 return new UZA.TextBoxDate(this.convFiledName("txtSetaiIchiranKijunYMD"));
             }
 
-            public txtSetaiIchiranKazeiNendo(): UZA.TextBoxYear {
-                return new UZA.TextBoxYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+            public txtSetaiIchiranKazeiNendo(): UZA.TextBoxFlexibleYear {
+                return new UZA.TextBoxFlexibleYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
             }
 
             public ddlSetaiIchiranKazeiNendo(): UZA.DropDownList {

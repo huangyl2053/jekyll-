@@ -33,10 +33,6 @@ module DBZ {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             }
 
-            public static onBeforeClick_btnShisetsuNyutaishoKakutei(): string {
-                return "onBeforeClick_btnShisetsuNyutaishoKakutei";
-            }
-
             public static onClick_btnShisetsuNyutaishoKakutei(): string {
                 return "onClick_btnShisetsuNyutaishoKakutei";
             }

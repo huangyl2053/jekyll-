@@ -46,25 +46,11 @@
     },
     {
      "id": "4",
-     "type": "ordinal",
+     "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0720011",
      "layoutTitle": "住宅改修費支給申請一括審査・決定",
-     "eventName": "更新完了",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0720013",
-     "toLayoutTitle": "住宅改修費支給申請一括審査・決定",
-     "toState": "審査結果更新完了"
-    },
-    {
-     "id": "5",
-     "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0720013",
-     "layoutTitle": "住宅改修費支給申請一括審査・決定",
-     "eventName": "完了",
+     "eventName": "処理完了",
      "destroy": false,
      "condition": ""
     }

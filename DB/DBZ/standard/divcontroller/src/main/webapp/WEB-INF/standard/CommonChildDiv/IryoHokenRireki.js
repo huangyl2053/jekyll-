@@ -1,199 +1,87 @@
 var DBZ;
 (function (DBZ) {
-    (function (IryoHokenRireki) {
+    (function (IryohokenRireki) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new IryoHokenRireki.Controls(fieldName);
+                this.controls = new IryohokenRireki.Controls(fieldName);
             }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "State"
+                ];
+            };
+
+            ModeController.prototype.State = function () {
+                return new Modes.State(this.controls);
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
             ModeController.prototype.PublicProperties = function () {
-                return new IryoHokenRireki.PublicProperties(this.fieldName);
-            };
-
-            ModeController.prototype.priorities = function () {
-                return [
-                    "DisplayMode",
-                    "WidthMode",
-                    "MeisaiMode"
-                ];
-            };
-
-            ModeController.prototype.DisplayMode = function () {
-                return new Modes.DisplayMode(this.controls);
-            };
-
-            ModeController.prototype.WidthMode = function () {
-                return new Modes.WidthMode(this.controls);
-            };
-
-            ModeController.prototype.MeisaiMode = function () {
-                return new Modes.MeisaiMode(this.controls);
+                return new IryohokenRireki.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
-        IryoHokenRireki.ModeController = ModeController;
+        IryohokenRireki.ModeController = ModeController;
 
         (function (Modes) {
-            var DisplayMode = (function () {
-                function DisplayMode(controls) {
+            var State = (function () {
+                function State(controls) {
                     this.controls = controls;
                 }
-                DisplayMode.prototype.Toroku = function () {
-                    this.controls.dgIryoHokenRireki().readOnly = false;
-                    this.controls.btnAddIryoHoken().displayNone = false;
-
-                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
-                    gridSetting.isShowDeleteButtonColumn = true;
-                    gridSetting.isShowModifyButtonColumn = true;
-                    gridSetting.columns[0].visible = false;
-
-                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
-
-                    this.controls.dgIryoHokenRireki().width = 980;
-
-                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                State.prototype.reference = function () {
+                    this.controls.tbdKanyubi().readOnly = true;
+                    this.controls.tbdDattabi().readOnly = true;
+                    this.controls.ddlSyubetsu().disabled = true;
+                    this.controls.txtHokensyaKodo().readOnly = true;
+                    this.controls.txtHokensyaMeisho().readOnly = true;
+                    this.controls.txtKigoBango().readOnly = true;
+                    this.controls.btnIryohokenTsuika().visible = false;
+                    this.controls.btnKakutei().visible = false;
+                    this.controls.btnCancel().visible = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
                 };
 
-                DisplayMode.prototype.Shokai = function () {
-                    this.controls.dgIryoHokenRireki().readOnly = true;
-                    this.controls.btnAddIryoHoken().displayNone = true;
-
-                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
-                    gridSetting.isShowDeleteButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.columns[0].visible = false;
-
-                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
-
-                    this.controls.dgIryoHokenRireki().width = 940;
-
-                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                State.prototype.registration = function () {
+                    this.controls.tbdKanyubi().readOnly = true;
+                    this.controls.tbdDattabi().readOnly = true;
+                    this.controls.ddlSyubetsu().disabled = true;
+                    this.controls.txtHokensyaKodo().readOnly = true;
+                    this.controls.txtHokensyaMeisho().readOnly = true;
+                    this.controls.txtKigoBango().readOnly = true;
+                    this.controls.btnKakutei().disabled = true;
+                    this.controls.btnCancel().disabled = true;
+                    this.controls.btnIryohokenTsuika().visible = true;
+                    this.controls.btnKakutei().visible = true;
+                    this.controls.btnCancel().visible = true;
+                    this.controls.btnIryohokenTsuika().disabled = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnCancel().disabled = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = true;
                 };
-
-                DisplayMode.prototype.ShikakuIdo = function () {
-                    this.controls.dgIryoHokenRireki().readOnly = false;
-                    this.controls.btnAddIryoHoken().displayNone = false;
-
-                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
-                    gridSetting.isShowDeleteButtonColumn = true;
-                    gridSetting.isShowModifyButtonColumn = true;
-                    gridSetting.columns[0].visible = true;
-
-                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
-
-                    this.controls.dgIryoHokenRireki().width = 980;
-
-                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
-                };
-                return DisplayMode;
+                return State;
             })();
-            Modes.DisplayMode = DisplayMode;
-
-            var WidthMode = (function () {
-                function WidthMode(controls) {
-                    this.controls = controls;
-                }
-                WidthMode.prototype.Width1 = function () {
-                    this.controls.dgIryoHokenRireki().width = 800;
-                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
-                };
-
-                WidthMode.prototype.Width2 = function () {
-                    this.controls.dgIryoHokenRireki().width = 700;
-                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
-                };
-                return WidthMode;
-            })();
-            Modes.WidthMode = WidthMode;
-
-            var MeisaiMode = (function () {
-                function MeisaiMode(controls) {
-                    this.controls = controls;
-                }
-                MeisaiMode.prototype.toroku = function () {
-                    this.controls.IryoHokenInput().readOnly = false;
-                    this.controls.IryoHokenInput().displayNone = false;
-
-                    this.controls.txtIryoHokenKanyuDate().readOnly = false;
-                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
-                    this.controls.txtIryoHokenDattaiDate().readOnly = false;
-                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
-                    this.controls.ddlIryoHokenShubetsu().readOnly = false;
-                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaNo().readOnly = false;
-                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = false;
-                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
-                    this.controls.txtIryoHokenKigoNo().readOnly = false;
-                    this.controls.txtIryoHokenKigoNo().displayNone = false;
-
-                    this.controls.btnIryoHokenKakutei().disabled = false;
-                    this.controls.btnIryoHokenKakutei().displayNone = false;
-                    this.controls.btnIryoHokenTorikeshi().disabled = false;
-                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
-                };
-
-                MeisaiMode.prototype.sakujo = function () {
-                    this.controls.IryoHokenInput().readOnly = false;
-                    this.controls.IryoHokenInput().displayNone = false;
-
-                    this.controls.txtIryoHokenKanyuDate().readOnly = true;
-                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
-                    this.controls.txtIryoHokenDattaiDate().readOnly = true;
-                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
-                    this.controls.ddlIryoHokenShubetsu().readOnly = true;
-                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaNo().readOnly = true;
-                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = true;
-                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
-                    this.controls.txtIryoHokenKigoNo().readOnly = true;
-                    this.controls.txtIryoHokenKigoNo().displayNone = false;
-
-                    this.controls.btnIryoHokenKakutei().disabled = false;
-                    this.controls.btnIryoHokenKakutei().displayNone = false;
-                    this.controls.btnIryoHokenTorikeshi().disabled = false;
-                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
-                };
-
-                MeisaiMode.prototype.setReadOnly = function () {
-                    this.controls.IryoHokenInput().readOnly = true;
-                    this.controls.IryoHokenInput().displayNone = false;
-
-                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
-                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
-                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
-                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
-                    this.controls.txtIryoHokenKigoNo().displayNone = false;
-
-                    this.controls.btnIryoHokenKakutei().displayNone = true;
-                    this.controls.btnIryoHokenTorikeshi().displayNone = true;
-                };
-
-                MeisaiMode.prototype.setDisplayNone = function () {
-                    this.controls.IryoHokenInput().readOnly = true;
-                    this.controls.IryoHokenInput().displayNone = true;
-                };
-                return MeisaiMode;
-            })();
-            Modes.MeisaiMode = MeisaiMode;
-        })(IryoHokenRireki.Modes || (IryoHokenRireki.Modes = {}));
-        var Modes = IryoHokenRireki.Modes;
-    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
-    var IryoHokenRireki = DBZ.IryoHokenRireki;
+            Modes.State = State;
+        })(IryohokenRireki.Modes || (IryohokenRireki.Modes = {}));
+        var Modes = IryohokenRireki.Modes;
+    })(DBZ.IryohokenRireki || (DBZ.IryohokenRireki = {}));
+    var IryohokenRireki = DBZ.IryohokenRireki;
 })(DBZ || (DBZ = {}));
 
 var DBZ;
 (function (DBZ) {
-    (function (IryoHokenRireki) {
+    (function (IryohokenRireki) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
-                this.controls = new IryoHokenRireki.Controls(fieldName);
+                this.fieldName = fieldName;
+                this.controls = new IryohokenRireki.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -202,7 +90,7 @@ var DBZ;
             };
             return PublicProperties;
         })();
-        IryoHokenRireki.PublicProperties = PublicProperties;
-    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
-    var IryoHokenRireki = DBZ.IryoHokenRireki;
+        IryohokenRireki.PublicProperties = PublicProperties;
+    })(DBZ.IryohokenRireki || (DBZ.IryohokenRireki = {}));
+    var IryohokenRireki = DBZ.IryohokenRireki;
 })(DBZ || (DBZ = {}));

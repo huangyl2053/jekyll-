@@ -8,12 +8,20 @@ var DBZ;
                 return "onClick_Saihyoji";
             };
 
+            Events.onClick_chkSetaiIchiranAll = function () {
+                return "onClick_chkSetaiIchiranAll";
+            };
+
             Events.onClick_Hikaku = function () {
                 return "onClick_Hikaku";
             };
 
             Events.onClick_SetaiinSentaku = function () {
                 return "onClick_SetaiinSentaku";
+            };
+
+            Events.onClick_btnRirekiClose = function () {
+                return "onClick_btnRirekiClose";
             };
             return Events;
         })();
@@ -44,7 +52,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSetaiIchiranKazeiNendo = function () {
-                return new UZA.TextBoxYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+                return new UZA.TextBoxFlexibleYear(this.convFiledName("txtSetaiIchiranKazeiNendo"));
             };
 
             Controls.prototype.ddlSetaiIchiranKazeiNendo = function () {
