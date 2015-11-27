@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC90301",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "認定調査員委託先マスタ",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE9030001",
+     "toLayoutTitle": "認定調査委託先マスタ",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE9030001",
+     "layoutTitle": "認定調査委託先マスタ",
+     "eventName": "認定調査員へ遷移",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE9040001",
+     "toLayoutTitle": "認定調査員マスタ",
+     "toState": "一覧_認定調査委託先マスタから遷移"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE9040001",
+     "layoutTitle": "認定調査員マスタ",
+     "eventName": "認定調査委託先マスタに戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE9030001",
+     "toLayoutTitle": "認定調査委託先マスタ",
+     "toState": "詳細"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE9030001",
+     "layoutTitle": "認定調査委託先マスタ",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
