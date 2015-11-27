@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC59101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "一覧表発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5910001",
+     "toLayoutTitle": "主治医医療機関・主治医一覧表発行指示画面",
+     "toState": "一覧表発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5910001",
+     "layoutTitle": "主治医医療機関・主治医一覧表発行指示画面",
+     "eventName": "処理終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

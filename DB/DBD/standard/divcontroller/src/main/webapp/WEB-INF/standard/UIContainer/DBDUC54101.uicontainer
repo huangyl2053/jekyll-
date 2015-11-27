@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBDUC54101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定個人状況照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "申請者検索",
+     "toState": "条件指定"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "申請者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5410001",
+     "toLayoutTitle": "要介護認定個人状況照会",
+     "toState": "default"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "検索に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "申請者検索",
+     "toState": "条件指定"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "申請者検索",
+     "toState": "検索結果一覧"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

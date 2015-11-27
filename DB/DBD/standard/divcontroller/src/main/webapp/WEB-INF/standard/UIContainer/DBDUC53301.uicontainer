@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC53301",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定結果通知",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5330001",
+     "toLayoutTitle": "要介護認定結果通知（主治医）",
+     "toState": "照会"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5330001",
+     "layoutTitle": "要介護認定結果通知（主治医）",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
