@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 
 /**
@@ -20,4 +22,18 @@ public interface IDbT7131KaigoServiceNaiyouMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7131KaigoServiceNaiyouEntity getEntity();
+    
+    /**
+     * サービスコード情報を取得します。
+     * @param parameter
+     * @return 
+     */
+    List<DbT7131KaigoServiceNaiyouEntity> getKaigoServiceNaiyou(SabisuKodoParameter parameter);
+    
+    /**
+     * フォーカスアウトのサービスコード情報を取得します。
+     * @param parameter
+     * @return 
+     */
+    List<DbT7131KaigoServiceNaiyouEntity> getFocusServiceCodeList(SabisuKodoParameter parameter);
 }
