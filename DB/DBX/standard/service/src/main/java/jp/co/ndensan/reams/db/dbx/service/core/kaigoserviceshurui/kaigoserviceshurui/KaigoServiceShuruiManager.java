@@ -4,17 +4,24 @@
  */
 package jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -38,7 +45,7 @@ public class KaigoServiceShuruiManager {
 
     /**
      * 単体テスト用のコンストラクタです。
-     * 
+     *
      * @param mapperProvider mapperProvider
      * @param 介護サービス種類Dac 介護サービス種類Dac
      * @param 介護サービス内容Manager 介護サービス内容Manager
@@ -56,7 +63,8 @@ public class KaigoServiceShuruiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
      */
     public static KaigoServiceShuruiManager createInstance() {
         return InstanceProvider.create(KaigoServiceShuruiManager.class);
@@ -100,9 +108,58 @@ public class KaigoServiceShuruiManager {
         return 1 == 介護サービス種類Dac.save(介護サービス種類.toEntity());
     }
 
-    private void save介護サービス内容リスト(List<KaigoServiceNaiyou> 介護サービス内容List) {    
+    private void save介護サービス内容リスト(List<KaigoServiceNaiyou> 介護サービス内容List) {
         for (KaigoServiceNaiyou 介護サービス内容 : 介護サービス内容List) {
             介護サービス内容Manager.save介護サービス内容(介護サービス内容);
         }
+    }
+
+    /**
+     * サービス種類コードより、サービス種類取得のリストを返します。
+     *
+     * @param 介護サービス種類検索条件 介護サービス種類検索条件
+     * @return KaigoServiceShuruiの{@code list}
+     */
+    @Transaction
+    public List<KaigoServiceShurui> getServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
+        ITrueFalseCriteria makeShuruiConditions;
+        if (介護サービス種類検索条件.getServiceShuruiCd() == null || 介護サービス種類検索条件.getServiceShuruiCd().isEmpty()) {
+            makeShuruiConditions = and(
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, 介護サービス種類検索条件.getTeikyoKaishiYM()),
+                    leq(介護サービス種類検索条件.getTeikyoKaishiYM(), DbT7130KaigoServiceShurui.teikyoshuryoYM));
+        } else {
+            makeShuruiConditions = and(
+                    eq(DbT7130KaigoServiceShurui.serviceShuruiCd, 介護サービス種類検索条件.getServiceShuruiCd()),
+                    leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, 介護サービス種類検索条件.getTeikyoKaishiYM()),
+                    leq(介護サービス種類検索条件.getTeikyoKaishiYM(), DbT7130KaigoServiceShurui.teikyoshuryoYM));
+        }
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.select(makeShuruiConditions);
+        ArrayList<KaigoServiceShurui> 介護サービス種類List = new ArrayList<>();
+        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
+            KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();
+            kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
+            介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
+        }
+        return 介護サービス種類List;
+    }
+
+    /**
+     * サービス種類コードより、フォーカスアウトのサービス種類取得のリストを返します。
+     *
+     * @param 介護サービス種類検索条件 介護サービス種類検索条件
+     * @return KaigoServiceShuruiの{@code list}
+     */
+    @Transaction
+    public List<KaigoServiceShurui> getFocusServiceTypeList(KaigoServiceShuruiMapperParameter 介護サービス種類検索条件) {
+        List<DbT7130KaigoServiceShuruiEntity> サービス種類情報リスト = 介護サービス種類Dac.selectByDate(
+                介護サービス種類検索条件.getServiceShuruiCd(),
+                介護サービス種類検索条件.getTeikyoKaishiYM());
+        ArrayList<KaigoServiceShurui> 介護サービス種類List = new ArrayList<>();
+        for (DbT7130KaigoServiceShuruiEntity entity : サービス種類情報リスト) {
+            KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new KaigoServiceShuruiEntity();
+            kaigoServiceShuruiEntity.set介護サービス種類Entity(entity);
+            介護サービス種類List.add(new KaigoServiceShurui(kaigoServiceShuruiEntity));
+        }
+        return 介護サービス種類List;
     }
 }

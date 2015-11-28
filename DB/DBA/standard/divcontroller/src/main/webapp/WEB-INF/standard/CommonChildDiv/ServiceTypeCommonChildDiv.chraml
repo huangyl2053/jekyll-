@@ -1,0 +1,106 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBA&quot;,&quot;controlName&quot;:&quot;ServiceTypeCommonChildDiv&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;serviceType&quot;,&quot;controlName&quot;:&quot;ServiceTypeCommonChildDiv.serviceType&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnKakutei&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnYameru&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBA.ServiceTypeCommonChildDiv"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText Panel-Shadow UzCommonChildDivPanel Width-G12 UzCompositeChild" id="ServiceTypeCommonChildDiv" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceTypeCommonChildDiv&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ServiceTypeCommonChildDiv&quot;,&quot;title&quot;:&quot;サービス種類一覧&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ServiceTypeCommonChildDiv&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/ServiceTypeCommonChildDiv/onLoad&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnKakutei&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/ServiceTypeCommonChildDiv/onClick_btnKakutei&quot;},{&quot;eventName&quot;:&quot;onClick_btnYameru&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/ServiceTypeCommonChildDiv/onClick_btnYameru&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;serviceType&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceTypeCommonChildDiv_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">サービス種類一覧</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ServiceTypeCommonChildDiv_panel_body_area"><div class="UzDataGrid JSControl FloatLeft controlMargin-M Height-M UzCompositeChild" id="dgServiceType" style="margin: 0px; width: 640px; opacity: 1;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceType&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;640px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;dgServiceType&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;height&quot;:&quot;M&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:true,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;txtServiceShuruiCode&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;txtServiceShuruiCode&quot;},{&quot;columnName&quot;:&quot;名称&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;txtServiceShuruiName&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:480,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;txtServiceShuruiName&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowCancelButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceType_grid_table" role="" style="width: 640px; height: 365px; position: relative;"></div><div id="dgServiceType_footer" style="width: 640px; height: 25px;"></div></div><button class="UzButton JSControl FloatLeft controlMargin-M marginRight-XS Width-S ClearFloat UzCompositeChild" id="btnYameru" style="margin-left: 380px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnYameru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;380px&quot;,&quot;selectControlID&quot;:&quot;btnYameru&quot;,&quot;text&quot;:&quot;やめる&quot;,&quot;onClick&quot;:&quot;onClick_btnYameru&quot;}"><span>やめる</span></button><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnKakutei" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnKakutei&quot;,&quot;text&quot;:&quot;確定&quot;,&quot;onClick&quot;:&quot;onClick_btnKakutei&quot;}"><span>確定</span></button></div></div>          
+   
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBA= DBA? DBA: {};
+DBA['SERVICETYPECOMMONCHILDDIV'] = {};
+DBA['SERVICETYPECOMMONCHILDDIV'].ServiceTypeCommonChildDivRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ServiceTypeCommonChildDiv').getProperty();parameter0.dgServiceType = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceType').getProperty();parameter0.btnYameru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnYameru').getProperty();parameter0.btnKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakutei').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBA;
+(function (DBA) {
+    (function (ServiceTypeCommonChildDiv) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnYameru = function () {
+                return "onClick_btnYameru";
+            };
+
+            Events.onClick_btnKakutei = function () {
+                return "onClick_btnKakutei";
+            };
+            return Events;
+        })();
+        ServiceTypeCommonChildDiv.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceTypeCommonChildDiv";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBA.ServiceTypeCommonChildDiv.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBA.ServiceTypeCommonChildDiv.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceTypeCommonChildDiv = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgServiceType = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceType"));
+            };
+
+            Controls.prototype.btnYameru = function () {
+                return new UZA.Button(this.convFiledName("btnYameru"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+            return Controls;
+        })();
+        ServiceTypeCommonChildDiv.Controls = Controls;
+    })(DBA.ServiceTypeCommonChildDiv || (DBA.ServiceTypeCommonChildDiv = {}));
+    var ServiceTypeCommonChildDiv = DBA.ServiceTypeCommonChildDiv;
+})(DBA || (DBA = {}));
+var DBA;
+(function (DBA) {
+    (function (ServiceTypeCommonChildDiv) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTypeCommonChildDiv.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ServiceTypeCommonChildDiv.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTypeCommonChildDiv.ModeController = ModeController;
+    })(DBA.ServiceTypeCommonChildDiv || (DBA.ServiceTypeCommonChildDiv = {}));
+    var ServiceTypeCommonChildDiv = DBA.ServiceTypeCommonChildDiv;
+})(DBA || (DBA = {}));
+
+var DBA;
+(function (DBA) {
+    (function (ServiceTypeCommonChildDiv) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTypeCommonChildDiv.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ServiceTypeCommonChildDiv.PublicProperties = PublicProperties;
+    })(DBA.ServiceTypeCommonChildDiv || (DBA.ServiceTypeCommonChildDiv = {}));
+    var ServiceTypeCommonChildDiv = DBA.ServiceTypeCommonChildDiv;
+})(DBA || (DBA = {}));
+</script></div>
