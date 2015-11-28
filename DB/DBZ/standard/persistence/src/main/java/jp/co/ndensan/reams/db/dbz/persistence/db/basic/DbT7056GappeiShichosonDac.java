@@ -6,10 +6,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.kyuShichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.chiikiNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.gappeiYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.chiikiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.gappeiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.hyojiUmu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.kyuShichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.unyoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.unyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -17,8 +20,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -58,6 +64,28 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
                                 eq(chiikiNo, 地域番号),
                                 eq(kyuShichosonCode, 旧市町村コード))).
                 toObject(DbT7056GappeiShichosonEntity.class);
+    }
+
+    /**
+     * 合併市町村選択情報を取得します。
+     *
+     * @param 基準日
+     * @return　List<DbT7056GappeiShichosonEntity>
+     *
+     */
+    @Transaction
+    public List<DbT7056GappeiShichosonEntity> selectfor合併市町村選択情報の取得処理(
+            FlexibleDate 基準日) throws NullPointerException {
+        requireNonNull(基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7056GappeiShichoson.class).
+                where(and(eq(hyojiUmu, new RString("1")),
+                                leq(unyoKaishiYMD, 基準日),
+                                leq(基準日, unyoShuryoYMD))).
+                order(by(gappeiYMD, Order.DESC),
+                        by(kyuShichosonCode)).
+                toList(DbT7056GappeiShichosonEntity.class);
     }
 
     /**
