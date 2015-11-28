@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicen
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
+import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -34,7 +36,7 @@ public class KaigoServiceNaiyouManagerTest {
     @BeforeClass
     public static void test() {
         dac = mock(DbT7131KaigoServiceNaiyouDac.class);
-        sut = new KaigoServiceNaiyouManager(dac);
+        sut = new KaigoServiceNaiyouManager(dac, InstanceProvider.create(MapperProvider.class));
     }
 
     public static class save介護サービス内容 extends DbxTestBase {

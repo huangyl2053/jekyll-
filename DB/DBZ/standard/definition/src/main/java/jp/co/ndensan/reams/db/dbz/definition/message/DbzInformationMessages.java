@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.message;
 
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * DBZのインフォメーションメッセージ定義列挙型です。
@@ -18,7 +18,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbzInformationMessages implements IMessageGettable {
 
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    更新終了(4, "更新は正常に終了しました。"),
+    削除終了(5, "削除は正常に終了しました。");
 
     private final Message message;
 
