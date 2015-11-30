@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnSearchTaishosha(): string {
+                return "onClick_btnSearchTaishosha";
+            }
+
         }
 
         export class Controls {
@@ -77,8 +81,8 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radYoyakuJokyo"));
             }
 
-            public btnSearchTaishosha(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnSearchTaishosha"));
+            public btnSearchTaishosha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSearchTaishosha"));
             }
 
             public btnDisplayLatestInformation(): UZA.Button {

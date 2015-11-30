@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnSearchTaishosha = function () {
+                return "onClick_btnSearchTaishosha";
+            };
             return Events;
         })();
         NinteiChosaWariateInput.Events = Events;
@@ -73,7 +76,7 @@ var DBZ;
             };
 
             Controls.prototype.btnSearchTaishosha = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnSearchTaishosha"));
+                return new UZA.Button(this.convFiledName("btnSearchTaishosha"));
             };
 
             Controls.prototype.btnDisplayLatestInformation = function () {
