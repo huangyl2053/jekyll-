@@ -2,11 +2,11 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 /// <reference path="./../kaigoatesakijushosettei/KaigoAtesakiJushoSettei.ts" />
-/// <reference path="./../kaigochohyoshutsuryokujun/KaigoChohyoShutsuryokujun.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
-     export module KaigoChohyoSeigyoMaintenance {
+     export module KaigoChohyoSeigyoKyotsu {
 
         export class Events {
 
@@ -16,7 +16,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "KaigoChohyoSeigyoMaintenance";
+                return "KaigoChohyoSeigyoKyotsu";
             }
 
             constructor(fieldName: string) {
@@ -24,14 +24,14 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.KaigoChohyoSeigyoMaintenance.Controls.myType();
+                return this._myName + "_" + DBZ.KaigoChohyoSeigyoKyotsu.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.KaigoChohyoSeigyoMaintenance.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KaigoChohyoSeigyoKyotsu.Controls.myType() + "_" + fieldName;
             }
 
-            public KaigoChohyoSeigyoMaintenance(): UZA.Panel {
+            public KaigoChohyoSeigyoKyotsu(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
@@ -147,8 +147,8 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnKaigoToiawasesaki"));
             }
 
-            public ccdKaigoChohyoShutsuryokujun(): DBZ.KaigoChohyoShutsuryokujun.ModeController {
-                return new DBZ.KaigoChohyoShutsuryokujun.ModeController(this.convFiledName("ccdKaigoChohyoShutsuryokujun"));
+            public ccdChohyoShutsuryokujun(): URZ.ChohyoShutsuryokujun.ModeController {
+                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
             }
 
         }

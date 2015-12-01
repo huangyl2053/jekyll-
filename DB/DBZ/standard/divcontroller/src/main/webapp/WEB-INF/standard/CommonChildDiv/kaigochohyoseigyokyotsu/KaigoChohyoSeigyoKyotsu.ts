@@ -1,7 +1,7 @@
-/// <reference path='KaigoChohyoSeigyoMaintenance_Design.ts' />
+/// <reference path='KaigoChohyoSeigyoKyotsu_Design.ts' />
 module DBZ
 {
-    export module KaigoChohyoSeigyoMaintenance
+    export module KaigoChohyoSeigyoKyotsu
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBZ
 
 module DBZ
 {
-    export module KaigoChohyoSeigyoMaintenance
+    export module KaigoChohyoSeigyoKyotsu
     {
         export class PublicProperties {
             private controls: Controls;

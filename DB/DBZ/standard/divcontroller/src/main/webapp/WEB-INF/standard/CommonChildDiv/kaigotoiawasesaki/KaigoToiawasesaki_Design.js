@@ -4,20 +4,36 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClickBtnDecide = function () {
-                return "onClickBtnDecide";
+            Events.onClick_btnAddChohyoDokuji = function () {
+                return "onClick_btnAddChohyoDokuji";
             };
 
-            Events.onClickBtnCancel = function () {
-                return "onClickBtnCancel";
+            Events.onClick_dgToiawasesakiControl = function () {
+                return "onClick_dgToiawasesakiControl";
             };
 
-            Events.onClickBtnSave = function () {
-                return "onClickBtnSave";
+            Events.onClick_dgToiawasesakiControl_modify = function () {
+                return "onClick_dgToiawasesakiControl_modify";
             };
 
-            Events.onClickBtnClose = function () {
-                return "onClickBtnClose";
+            Events.onClick_dgToiawasesakiControl_delete = function () {
+                return "onClick_dgToiawasesakiControl_delete";
+            };
+
+            Events.onClick_btnDecide = function () {
+                return "onClick_btnDecide";
+            };
+
+            Events.onClick_btnCancel = function () {
+                return "onClick_btnCancel";
+            };
+
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
+            };
+
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
             };
             return Events;
         })();
@@ -57,6 +73,10 @@ var DBZ;
 
             Controls.prototype.ToiawasesakiShosai = function () {
                 return new UZA.Panel(this.convFiledName("ToiawasesakiShosai"));
+            };
+
+            Controls.prototype.lblHensyuTaisho = function () {
+                return new UZA.Label(this.convFiledName("lblHensyuTaisho"));
             };
 
             Controls.prototype.Detail1 = function () {
