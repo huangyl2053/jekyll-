@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.koseishichosonmaster;
 
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 構成市町村マスタを特定するためのMyBatis用パラメータクラスです。
@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 @lombok.Getter
 public class KoseiShichosonMasterMapperParameter {
 
-    private final LasdecCode shichonCode;
+    private final RString shichosonShokibetsuID;
 
-    private final boolean usesshichonCode;
+    private final boolean useShichosonShokibetsuID;
 
     /**
      * コンストラクタです。
@@ -25,25 +25,23 @@ public class KoseiShichosonMasterMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KoseiShichosonMasterMapperParameter(
-            @lombok.NonNull LasdecCode shichonCode,
-            boolean usesshichonCode) {
+            @lombok.NonNull RString shichosonShokibetsuID,
+            boolean useShichosonShokibetsuID) {
 
-        this.shichonCode = shichonCode;
+        this.shichosonShokibetsuID = shichosonShokibetsuID;
 
-        this.usesshichonCode = usesshichonCode;
+        this.useShichosonShokibetsuID = useShichosonShokibetsuID;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shichonCode shichonCode
-     * @param usesshichonCode usesshichonCode
+     * @param shichosonShokibetsuID shichosonShokibetsuID
      * @return 身体手帳検索パラメータ
      */
     public static KoseiShichosonMasterMapperParameter createSelectByKeyParam(
-            LasdecCode shichonCode,
-            boolean usesshichonCode) {
-        return new KoseiShichosonMasterMapperParameter(shichonCode, usesshichonCode);
+            RString shichosonShokibetsuID) {
+        return new KoseiShichosonMasterMapperParameter(shichosonShokibetsuID, true);
     }
 
 }

@@ -79,17 +79,17 @@ public class GappeiJohoBuilderTest extends DbzTestBase {
             sut = business.createBuilderForEdit();
         }
 
-        @Test
-        public void 戻り値の合併年月日は_設定した値と同じ合併年月日を返す() {
-            business = sut.set合併年月日(DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日).build();
-            assertThat(business.get合併年月日(), is(DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日));
-        }
-
-        @Test
-        public void 戻り値の地域番号は_設定した値と同じ地域番号を返す() {
-            business = sut.set地域番号(DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号).build();
-            assertThat(business.get地域番号(), is(DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号));
-        }
+//        @Test
+//        public void 戻り値の合併年月日は_設定した値と同じ合併年月日を返す() {
+//            business = sut.set合併年月日(DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日).build();
+//            assertThat(business.get合併年月日(), is(DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日));
+//        }
+//
+//        @Test
+//        public void 戻り値の地域番号は_設定した値と同じ地域番号を返す() {
+//            business = sut.set地域番号(DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号).build();
+//            assertThat(business.get地域番号(), is(DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号));
+//        }
 
         @Test
         public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
