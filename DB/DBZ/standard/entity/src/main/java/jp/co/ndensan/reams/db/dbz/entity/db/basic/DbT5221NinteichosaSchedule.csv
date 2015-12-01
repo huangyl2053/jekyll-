@@ -2,11 +2,11 @@
 ninteiChosaYoteiKaishiTime,varchar,RString,,,,,認定調査予定開始時間,A
 ninteiChosaYoteiShuryoTime,varchar,RString,,,,,認定調査予定終了時間,A
 ninteiChosaJikanWaku,UDD035Code,Code,,,,,認定調査時間枠,A
-chosachikuCode,UDD035Code,Code,,,,,調査地区コード,A
-ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
-ninteiChosainNo,varchar,RString,,,,,認定調査員コード,A
-shichosonCode,UDD035Code,Code,,,,,市町村コード,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
+ninteiChosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
 yoyakuJokyo,UDD035Code,Code,,,,,予約状況,A
 yoyakuKaoFlag,bool,boolean,,,,,予約可能フラグ,A
 biko,text,RString,,,,,備考,A

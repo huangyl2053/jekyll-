@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 認定調査スケジュール情報テーブルのエンティティクラスです。
  */
 public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221NinteichosaScheduleEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5221NinteichosaSchedule");
@@ -42,9 +43,9 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     @PrimaryKey
     private Code chosaChikuCode;
     @PrimaryKey
-    private RString ninteichosaItakusakiCode;
+    private RString ninteiChosaItakusakiCode;
     @PrimaryKey
-    private RString ninteiChosainNo;
+    private RString ninteiChosainCode;
     @PrimaryKey
     private LasdecCode shichosonCode;
     private ShinseishoKanriNo shinseishoKanriNo;
@@ -188,7 +189,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
     /**
      * 調査地区コードのsetメソッドです。
      *
-     * @param chosachikucode 調査地区コード
+     * @param chosaChikuCode 調査地区コード
      */
     public void setChosaChikuCode(Code chosaChikuCode) {
         this.chosaChikuCode = chosaChikuCode;
@@ -201,8 +202,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 認定調査委託先コード
      */
-    public RString getNinteichosaItakusakiCode() {
-        return ninteichosaItakusakiCode;
+    public RString getNinteiChosaItakusakiCode() {
+        return ninteiChosaItakusakiCode;
     }
 
     /**
@@ -210,10 +211,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * <br/>
      * <br/>認定調査委託先情報
      *
-     * @param ninteichosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
-        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
+    public void setNinteiChosaItakusakiCode(RString ninteiChosaItakusakiCode) {
+        this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
     /**
@@ -223,8 +224,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 認定調査員コード
      */
-    public RString getNinteiChosainNo() {
-        return ninteiChosainNo;
+    public RString getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     /**
@@ -232,10 +233,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * <br/>
      * <br/>認定調査員情報
      *
-     * @param ninteiChosainNo 認定調査員コード
+     * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChosainNo(RString ninteiChosainNo) {
-        this.ninteiChosainNo = ninteiChosainNo;
+    public void setNinteiChosainCode(RString ninteiChosainCode) {
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     /**
@@ -267,6 +268,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 申請書管理番号
      */
+    @CheckForNull
     public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
@@ -331,6 +333,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 備考
      */
+    @CheckForNull
     public RString getBiko() {
         return biko;
     }
@@ -349,6 +352,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 場所
      */
+    @CheckForNull
     public RString getBasho() {
         return basho;
     }
@@ -367,6 +371,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 駐車場
      */
+    @CheckForNull
     public RString getChushajo() {
         return chushajo;
     }
@@ -385,6 +390,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 立会人１
      */
+    @CheckForNull
     public RString getTachiainin1() {
         return tachiainin1;
     }
@@ -403,6 +409,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 連絡先１
      */
+    @CheckForNull
     public TelNo getRenrakusaki1() {
         return renrakusaki1;
     }
@@ -421,6 +428,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 立会人２
      */
+    @CheckForNull
     public RString getTachiainin2() {
         return tachiainin2;
     }
@@ -439,6 +447,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 連絡先２
      */
+    @CheckForNull
     public TelNo getRenrakusaki2() {
         return renrakusaki2;
     }
@@ -457,6 +466,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      *
      * @return 対象者メモ
      */
+    @CheckForNull
     public RString getTaishoshaMemo() {
         return taishoshaMemo;
     }
@@ -474,8 +484,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      * このエンティティの主キーが他の{@literal DbT5221NinteichosaScheduleEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5221NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5221NinteichosaScheduleEntity other) {
@@ -497,10 +506,10 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
         if (!Objects.equals(this.chosaChikuCode, other.chosaChikuCode)) {
             return false;
         }
-        if (!Objects.equals(this.ninteichosaItakusakiCode, other.ninteichosaItakusakiCode)) {
+        if (!Objects.equals(this.ninteiChosaItakusakiCode, other.ninteiChosaItakusakiCode)) {
             return false;
         }
-        if (!Objects.equals(this.ninteiChosainNo, other.ninteiChosainNo)) {
+        if (!Objects.equals(this.ninteiChosainCode, other.ninteiChosainCode)) {
             return false;
         }
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
@@ -519,8 +528,8 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
         this.ninteiChosaYoteiShuryoTime = entity.ninteiChosaYoteiShuryoTime;
         this.ninteiChosaJikanWaku = entity.ninteiChosaJikanWaku;
         this.chosaChikuCode = entity.chosaChikuCode;
-        this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
-        this.ninteiChosainNo = entity.ninteiChosainNo;
+        this.ninteiChosaItakusakiCode = entity.ninteiChosaItakusakiCode;
+        this.ninteiChosainCode = entity.ninteiChosainCode;
         this.shichosonCode = entity.shichosonCode;
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.yoyakuJokyo = entity.yoyakuJokyo;
@@ -542,7 +551,7 @@ public class DbT5221NinteichosaScheduleEntity extends DbTableEntityBase<DbT5221N
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosaChikuCode, ninteichosaItakusakiCode, ninteiChosainNo, shichosonCode, shinseishoKanriNo, yoyakuJokyo, yoyakuKaoFlag, biko, basho, chushajo, tachiainin1, renrakusaki1, tachiainin2, renrakusaki2, taishoshaMemo);
+        return super.toMd5(ninteiChosaYoteiYMD, ninteiChosaYoteiKaishiTime, ninteiChosaYoteiShuryoTime, ninteiChosaJikanWaku, chosaChikuCode, ninteiChosaItakusakiCode, ninteiChosainCode, shichosonCode, shinseishoKanriNo, yoyakuJokyo, yoyakuKaoFlag, biko, basho, chushajo, tachiainin1, renrakusaki1, tachiainin2, renrakusaki2, taishoshaMemo);
     }
 
 // </editor-fold>

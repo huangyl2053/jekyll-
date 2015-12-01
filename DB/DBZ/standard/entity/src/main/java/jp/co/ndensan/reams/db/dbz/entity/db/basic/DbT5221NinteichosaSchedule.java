@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査スケジュール情報テーブルの項目定義クラスです。
  */
 public enum DbT5221NinteichosaSchedule implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     /**
      * insertDantaiCd
@@ -59,17 +59,17 @@ public enum DbT5221NinteichosaSchedule implements IColumnDefinition {
     /**
      * 調査地区コード
      */
-    chosachikuCode(2147483647, 0),
+    chosaChikuCode(2147483647, 0),
     /**
      * 認定調査委託先コード
      * <br/>認定調査委託先情報
      */
-    ninteichosaItakusakiCode(10, 0),
+    ninteiChosaItakusakiCode(10, 0),
     /**
      * 認定調査員コード
      * <br/>認定調査員情報
      */
-    ninteiChosainNo(8, 0),
+    ninteiChosainCode(8, 0),
     /**
      * 市町村コード
      * <br/>市町村コード

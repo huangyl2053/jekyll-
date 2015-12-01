@@ -50,8 +50,8 @@ public final class DbT5221NinteichosaScheduleEntityGenerator {
         entity.setNinteiChosaYoteiShuryoTime(DEFAULT_認定調査予定終了時間);
         entity.setNinteiChosaJikanWaku(DEFAULT_認定調査時間枠);
         entity.setChosaChikuCode(DEFAULT_調査地区コード);
-        entity.setNinteichosaItakusakiCode(DEFAULT_認定調査委託先コード);
-        entity.setNinteiChosainNo(DEFAULT_認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(DEFAULT_認定調査委託先コード);
+        entity.setNinteiChosainCode(DEFAULT_認定調査員コード);
         entity.setShichosonCode(DEFAULT_市町村コード);
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setYoyakuJokyo(DEFAULT_予約状況);

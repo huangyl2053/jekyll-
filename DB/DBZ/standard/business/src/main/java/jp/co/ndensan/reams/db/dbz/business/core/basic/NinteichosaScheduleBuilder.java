@@ -107,23 +107,23 @@ public class NinteichosaScheduleBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteichosaScheduleBuilder}
      */
-    public NinteichosaScheduleBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        return this;
-    }
-
-    /**
-     * 認定調査員コードを設定します。
-     *
-     * @param 認定調査員コード 認定調査員コード
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査員コード(RString 認定調査員コード) {
-        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainNo(認定調査員コード);
-        return this;
-    }
+//    public NinteichosaScheduleBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
+//        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+//        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
+//        return this;
+//    }
+//
+//    /**
+//     * 認定調査員コードを設定します。
+//     *
+//     * @param 認定調査員コード 認定調査員コード
+//     * @return {@link NinteichosaScheduleBuilder}
+//     */
+//    public NinteichosaScheduleBuilder set認定調査員コード(RString 認定調査員コード) {
+//        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+//        entity.setNinteiChosainNo(認定調査員コード);
+//        return this;
+//    }
 
     /**
      * 市町村コードを設定します。
