@@ -298,7 +298,6 @@ public class KaigoServiceNaiyouBuilder {
 //        entity.setSogoJigyoServiceKubun(総合事業サービス区分);
 //        return this;
 //    }
-
     /**
      * {@link KaigoServiceNaiyou}のインスタンスを生成します。
      *
