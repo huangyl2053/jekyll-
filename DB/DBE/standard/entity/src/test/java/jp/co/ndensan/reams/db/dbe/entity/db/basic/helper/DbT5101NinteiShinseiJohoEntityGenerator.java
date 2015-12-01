@@ -31,7 +31,7 @@ public final class DbT5101NinteiShinseiJohoEntityGenerator {
     public static final FlexibleYear DEFAULT_申請年度 = new FlexibleYear("2015");
     public static final RString DEFAULT_被保険者番号 = new RString("1");
     public static final FlexibleDate DEFAULT_認定申請年月日 = new FlexibleDate("20140402");
-    public static final EdabanCode DEFAULT_認定申請枝番コード = new EdabanCode("1");
+    public static final EdabanCode DEFAULT_認定申請枝番コード = new EdabanCode("123");
     public static final Code DEFAULT_認定申請区分_法令_コード = new Code("1");
     public static final Code DEFAULT_認定申請区分_申請時_コード = new Code("1");
     public static final Code DEFAULT_取下区分コード = new Code("1");
