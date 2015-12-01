@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： DbT7051KoseiShichosonMasterマスタとエンティティのマッピング用XMLです。 -->
-
-<!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.basic.ShichosonSentakuMapper">
-    
-    <resultMap id="ConfigListResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity" autoMapping="true">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.basic.IShichosonSentakuMapper">
+    <resultMap id="shichosonResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity" autoMapping="true">
         <result property="shichosonCode" column="DbT7051Kosei_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="gappeiKyuShichosonKubun" column="DbT7051Kosei_gappeiKyuShichosonKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
         
-    <select id="getEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap = "ConfigListResultMap" fetchSize="500">
+    <select id="getEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap = "shichosonResultMap" fetchSize="500">
         (SELECT
         DbT7051Kosei."shichosonCode" AS DbT7051Kosei_shichosonCode,
         DbT7051Kosei."shichosonMeisho" AS DbT7051Kosei_shichosonMeisho, 

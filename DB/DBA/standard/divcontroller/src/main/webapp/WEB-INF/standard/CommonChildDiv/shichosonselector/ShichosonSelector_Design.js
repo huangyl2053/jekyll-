@@ -4,6 +4,17 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_radShichosonKubun = function () {
+                return "onClick_radShichosonKubun";
+            };
+
+            Events.onClick_modoru = function () {
+                return "onClick_modoru";
+            };
+
+            Events.onClick_sentaku = function () {
+                return "onClick_sentaku";
+            };
             return Events;
         })();
         ShichosonSelector.Events = Events;

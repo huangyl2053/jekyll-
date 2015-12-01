@@ -1,9 +1,10 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.shichosonselector.ShichosonSelectorModel;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.ShichosonSelectorDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.shichosonSelector.ShichosonSelectorHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorHandler;
 import jp.co.ndensan.reams.db.dba.service.ShichosonSentakuFinder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -19,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShichosonSelector {
 
     private final ShichosonSentakuFinder service;
-    private static final RString 市町村モード1 = new RString("1");
-    private static final RString 市町村モード2 = new RString("0");
+    //TODO QA57
+    private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
+    private static final RString KOUSEI_MODO_KYU = new RString("0");
 
     /**
      * コンストラクタです。
@@ -40,23 +42,15 @@ public class ShichosonSelector {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         RString 構成市町村モード = model.getShichosonModel();
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
-        if (市町村モード1.equals(構成市町村モード)) {
-            div.getRadShichosonKubun().setDisplayNone(false);
-        } else {
-            div.getRadShichosonKubun().setDisplayNone(true);
+        List<DbT7056GappeiShichosonEntity> DbT7056List = new ArrayList();
+        List<DbT7051KoseiShichosonMasterEntity> DbT7051List = new ArrayList();
+        if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
+            DbT7056List = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
         }
-        if (市町村モード2.equals(構成市町村モード)) {
-            List<DbT7056GappeiShichosonEntity> list = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
-            getHandler(div).set旧市町村選択情報一覧表示グリッド(list);
-
+        if (KOUSEI_MODO_KOUSEI.equals(構成市町村モード)) {
+            DbT7051List = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
         }
-        if (市町村モード1.equals(構成市町村モード)) {
-            List<DbT7051KoseiShichosonMasterEntity> list = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
-            getHandler(div).set構成市町村情報一覧表示グリッド(list);
-            ShichosonSelectorModel shichosonSelector = new ShichosonSelectorModel();
-            shichosonSelector.setList(list);
-            div.setKyuShichoson(DataPassingConverter.serialize(shichosonSelector));
-        }
+        getHandler(div).set一覧表示グリッド(DbT7056List, DbT7051List);
         response.data = div;
         return response;
     }
@@ -70,7 +64,7 @@ public class ShichosonSelector {
     public ResponseData<ShichosonSelectorDiv> onChange_radShichosonKubun(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
-        getHandler(div).onClick_旧市町村ラジオボタン(model.getList());
+        getHandler(div).set構成市町村情報By市町村モード(model.getList());
         response.data = div;
         return response;
     }
@@ -81,9 +75,8 @@ public class ShichosonSelector {
      * @param div　ShichosonSelectorDiv
      * @return ResponseData<ShichosonSelectorDiv>
      */
-    public ResponseData<ShichosonSelectorDiv> onClick_市町村選択を確定するボタン(ShichosonSelectorDiv div) {
+    public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
-
         ShichosonSelectorModel model = new ShichosonSelectorModel();
         if (!div.getDgShichoson().getSelectedItems().isEmpty()) {
             model.setShichosonCode(div.getDgShichoson().getSelectedItems().get(0).getTxtShichosonCode());
@@ -100,7 +93,7 @@ public class ShichosonSelector {
      * @param div　ShichosonSelectorDiv
      * @return ResponseData<ShichosonSelectorDiv>
      */
-    public ResponseData<ShichosonSelectorDiv> onClick_戻る(ShichosonSelectorDiv div) {
+    public ResponseData<ShichosonSelectorDiv> onClick_btnModoru(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         response.data = div;
         return response;

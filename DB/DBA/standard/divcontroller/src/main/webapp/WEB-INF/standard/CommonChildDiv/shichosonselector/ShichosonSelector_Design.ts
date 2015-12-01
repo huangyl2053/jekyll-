@@ -8,6 +8,18 @@ module DBA {
 
         export class Events {
 
+            public static onClick_radShichosonKubun(): string {
+                return "onClick_radShichosonKubun";
+            }
+
+            public static onClick_modoru(): string {
+                return "onClick_modoru";
+            }
+
+            public static onClick_sentaku(): string {
+                return "onClick_sentaku";
+            }
+
         }
 
         export class Controls {
