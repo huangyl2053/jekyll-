@@ -133,7 +133,6 @@ public class KoseiShichosonShishoMaster extends ModelBase<KoseiShichosonShishoMa
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new KoseiShichosonShishoMaster(deletedEntity, id);
@@ -151,13 +150,11 @@ public class KoseiShichosonShishoMaster extends ModelBase<KoseiShichosonShishoMa
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
-
-        private static final long serialVersionUID = 1L;
-
+        private static final long serialVersionUID = -6021333143329775983L;
         private final DbT7052KoseiShichosonShishoMasterEntity entity;
         private final KoseiShichosonShishoMasterIdentifier id;
 
@@ -202,5 +199,4 @@ public class KoseiShichosonShishoMaster extends ModelBase<KoseiShichosonShishoMa
         }
         return true;
     }
-
 }

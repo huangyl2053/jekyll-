@@ -420,7 +420,6 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
      */
     protected Object writeReplace() {
         return new _SerializationProxy(entity, id, koseiShichosonShishoMaster);
-
     }
 
     @Override
@@ -432,7 +431,6 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         if (koseiShichosonShishoMaster.contains(id)) {
             return koseiShichosonShishoMaster.clone().get(id);
         }
-        //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
@@ -440,9 +438,6 @@ public class KoseiShichosonMaster extends ParentModelBase<KoseiShichosonMasterId
         return new ArrayList<>(koseiShichosonShishoMaster.values());
     }
 
-    public KoseiShichosonMaster modified() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     private static final class _SerializationProxy implements Serializable {
 
