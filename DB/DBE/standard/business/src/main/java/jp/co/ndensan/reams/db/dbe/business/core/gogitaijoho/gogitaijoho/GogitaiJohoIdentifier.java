@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @lombok.Value
 public class GogitaiJohoIdentifier implements Serializable {
 
-    private static final long serialVersionUID = 4931609779265010344L;
-
+    private static final long serialVersionUID = -4747726331880812879L;
     private final int 合議体番号;
     private final FlexibleDate 合議体有効期間開始年月日;
 
@@ -31,4 +30,5 @@ public class GogitaiJohoIdentifier implements Serializable {
         this.合議体番号 = 合議体番号;
         this.合議体有効期間開始年月日 = 合議体有効期間開始年月日;
     }
+
 }

@@ -4,17 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5591GogitaiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.IGogitaiJohoMapper;
-import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -37,7 +38,7 @@ public class GogitaiJohoManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.合議体情報Dac = InstanceProvider.create(DbT5591GogitaiJohoDac.class);
         this.介護認定審査会開催場所情報Manager = new ShinsakaiKaisaiBashoJohoManager();
-        this.合議体割当委員情報Manager = new GogitaiWariateIinJohoManager();
+        this.合議体割当委員情報Manager = GogitaiWariateIinJohoManager.createInstance();
     }
 
     /**
@@ -80,12 +81,34 @@ public class GogitaiJohoManager {
         requireNonNull(合議体情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報検索条件"));
         IGogitaiJohoMapper mapper = mapperProvider.create(IGogitaiJohoMapper.class);
 
-        GogitaiJohoRelateEntity relateEntity = mapper.getGogitaiJohoRelateEntity(合議体情報検索条件);
+        GogitaiJohoRelateEntity relateEntity = mapper.select合議体情報ByKey(合議体情報検索条件);
         if (relateEntity == null) {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
         return new GogitaiJoho(relateEntity);
+    }
+
+    /**
+     * 主キー1に合致する合議体情報のリストを返します。
+     *
+     * @param 合議体情報検索条件 合議体情報検索条件
+     * @return GogitaiJohoの{@code list}
+     */
+    @Transaction
+    public List<GogitaiJoho> get合議体情報リストBy主キー1(GogitaiJohoMapperParameter 合議体情報検索条件) {
+        requireNonNull(合議体情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報検索条件"));
+        IGogitaiJohoMapper mapper = mapperProvider.create(IGogitaiJohoMapper.class);
+
+        List<GogitaiJohoRelateEntity> relateEntityList = mapper.select合議体情報リストBy主キー1(合議体情報検索条件);
+
+        ArrayList<GogitaiJoho> 合議体情報List = new ArrayList<>();
+        for (GogitaiJohoRelateEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            合議体情報List.add(new GogitaiJoho(relateEntity));
+        }
+        return 合議体情報List;
+
     }
 
     /**
@@ -116,7 +139,7 @@ public class GogitaiJohoManager {
 
     private void save合議体割当委員情報リスト(List<GogitaiWariateIinJoho> 合議体割当委員情報List) {
         for (GogitaiWariateIinJoho 合議体割当委員情報 : 合議体割当委員情報List) {
-            合議体割当委員情報Manager.save合議体割当委員情報(合議体割当委員情報);
+            合議体割当委員情報Manager.save(合議体割当委員情報);
         }
     }
 }

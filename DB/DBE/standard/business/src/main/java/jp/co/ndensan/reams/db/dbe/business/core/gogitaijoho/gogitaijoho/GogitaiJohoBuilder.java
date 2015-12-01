@@ -6,16 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link GogitaiJoho}の編集を行うビルダークラスです。
@@ -24,9 +24,8 @@ public class GogitaiJohoBuilder {
 
     private final DbT5591GogitaiJohoEntity entity;
     private final GogitaiJohoIdentifier id;
-
-    private final Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJoho;
     private final Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho;
+    private final Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJoho;
 
     /**
      * {@link DbT5591GogitaiJohoEntity}より{@link GogitaiJoho}の編集用Builderクラスを生成します。
@@ -45,9 +44,8 @@ public class GogitaiJohoBuilder {
     ) {
         this.entity = entity.clone();
         this.id = id;
-
-        this.shinsakaiKaisaiBashoJoho = shinsakaiKaisaiBashoJoho.clone();
-        this.gogitaiWariateIinJoho = gogitaiWariateIinJoho.clone();
+        this.gogitaiWariateIinJoho = gogitaiWariateIinJoho;
+        this.shinsakaiKaisaiBashoJoho = shinsakaiKaisaiBashoJoho;
 
     }
 
@@ -172,35 +170,13 @@ public class GogitaiJohoBuilder {
     }
 
     /**
-     * 介護認定審査会開催場所情報のキー情報について判定します。<br>
-     * 合議体情報に関連できる介護認定審査会開催場所情報である場合、下記の処理に遷移します。<br>
-     * キーが一致する場合は介護認定審査会開催場所情報リストに介護認定審査会開催場所情報{@link ShinsakaiKaisaiBashoJoho}をセットします。<br>
-     * キーが一致しない場合、新たに追加します。<br>
-     *
-     * @param 介護認定審査会開催場所情報 {@link ShinsakaiKaisaiBashoJoho}
-     * @return {@link ShinsakaiKaisaiBashoJohoBuilder}
-     * @throws IllegalStateException キーが一致しない場合
-     */
-    public GogitaiJohoBuilder setShinsakaiKaisaiBashoJoho(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
-        if (hasSameIdentifier(介護認定審査会開催場所情報.identifier())) {
-            shinsakaiKaisaiBashoJoho.add(介護認定審査会開催場所情報);
-            return this;
-        }
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    private boolean hasSameIdentifier(ShinsakaiKaisaiBashoJohoIdentifier 介護認定審査会開催場所情報識別子) {
-        return (entity.getShinsakaiKaisaiBashoCode().equals(介護認定審査会開催場所情報識別子.get介護認定審査会開催場所コード()));
-    }
-
-    /**
      * 合議体割当委員情報のキー情報について判定します。<br>
      * 合議体情報に関連できる合議体割当委員情報である場合、下記の処理に遷移します。<br>
-     * キーが一致する場合は合議体割当委員情報リストに届出者情報{@link GogitaiWariateIinJoho}をセットします。<br>
+     * キーが一致する場合は合議体割当委員情報リストに合議体割当委員情報{@link SeishinTechoNini}をセットします。<br>
      * キーが一致しない場合、新たに追加します。<br>
      *
      * @param 合議体割当委員情報 {@link GogitaiWariateIinJoho}
-     * @return Builder
+     * @return {@link GogitaiJohoBuilder}
      * @throws IllegalStateException キーが一致しない場合
      */
     public GogitaiJohoBuilder setGogitaiWariateIinJoho(GogitaiWariateIinJoho 合議体割当委員情報) {
@@ -212,8 +188,30 @@ public class GogitaiJohoBuilder {
     }
 
     private boolean hasSameIdentifier(GogitaiWariateIinJohoIdentifier 合議体割当委員情報識別子) {
-        return (id.get合議体番号() == 合議体割当委員情報識別子.get合議体番号()
-                && id.get合議体有効期間開始年月日() == 合議体割当委員情報識別子.get合議体有効期間開始年月日());
+        return (id.get合議体番号() == 合議体割当委員情報識別子.get合議体番号())
+                && id.get合議体有効期間開始年月日().equals(合議体割当委員情報識別子.get合議体有効期間開始年月日());
+    }
+
+    /**
+     * 介護認定審査会開催場所情報のキー情報について判定します。<br>
+     * 合議体情報に関連できる介護認定審査会開催場所情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は介護認定審査会開催場所情報リストに介護認定審査会開催場所情報{@link Todokedesha}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 介護認定審査会開催場所情報 {@link Todokedesha}
+     * @return Builder
+     * @throws IllegalStateException キーが一致しない場合
+     */
+    public GogitaiJohoBuilder setTodokedesha(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
+        if (hasSameIdentifier(介護認定審査会開催場所情報.identifier())) {
+            shinsakaiKaisaiBashoJoho.add(介護認定審査会開催場所情報);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(ShinsakaiKaisaiBashoJohoIdentifier 介護認定審査会開催場所情報識別子) {
+        return entity.getShinsakaiKaisaiBashoCode().equals(介護認定審査会開催場所情報識別子.get介護認定審査会開催場所コード());
     }
 
     /**
@@ -224,5 +222,4 @@ public class GogitaiJohoBuilder {
     public GogitaiJoho build() {
         return new GogitaiJoho(entity, id, gogitaiWariateIinJoho, shinsakaiKaisaiBashoJoho);
     }
-
 }

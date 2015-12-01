@@ -20,7 +20,6 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5591GogitaiJoho");
-    private static final long serialVersionUID = 3859660933913339142L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho;
+package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class GogitaiWariateIinJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 8705643393504237713L;
     private final int 合議体番号;
     private final FlexibleDate 合議体有効期間開始年月日;
     private final RString 介護認定審査会委員コード;
