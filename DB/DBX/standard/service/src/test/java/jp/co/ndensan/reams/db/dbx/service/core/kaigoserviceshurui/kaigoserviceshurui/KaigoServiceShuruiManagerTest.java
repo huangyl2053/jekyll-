@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.After;
 import static org.junit.Assert.assertNotNull;
@@ -103,13 +104,13 @@ public class KaigoServiceShuruiManagerTest extends DbxTestDacBase {
 
         @Test
         public void 検索結果が存在する場合() {
-            KaigoServiceShuruiEntity entity = new KaigoServiceShuruiEntity();
-            entity.set介護サービス種類Entity(DbT7130KaigoServiceShuruiEntityGenerator.createDbT7130KaigoServiceShuruiEntity());
+            KaigoServiceShurui 介護サービス種類 = TestSupport.createKaigoServiceShurui(サービス種類コード, 提供開始年月);
+            sut.save(介護サービス種類);
             KaigoServiceShuruiMapperParameter 介護サービス種類検索条件
                     = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(サービス種類コード, 提供開始年月);
             KaigoServiceShurui result = sut.get介護サービス種類(介護サービス種類検索条件);
 
-            assertThat(result.getサービス種類コード().value(), is(DbT7130KaigoServiceShuruiEntityGenerator.DEFAULT_サービス種類コード.value()));
+            assertThat(result, is(notNullValue()));
         }
     }
 

@@ -20,7 +20,7 @@
         AND-->
         "DbT7130KaigoServiceShurui"."teikyoKaishiYM"=#{teikyoKaishiYM})
         AS dbT7130KaigoServiceShurui
-        INNER JOIN
+        LEFT JOIN
         (
         SELECT 
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou"/>
