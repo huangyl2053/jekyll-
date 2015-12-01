@@ -8,14 +8,15 @@ package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link GappeiJoho}の編集を行うビルダークラスです。
@@ -31,6 +32,8 @@ public class GappeiJohoBuilder {
      *
      * @param entity {@link DbT7055GappeiJohoEntity}
      * @param id {@link GappeiJohoIdentifier}
+     * @param gappeiShichoson
+     * {@link Models<GappeiShichosonIdentifier, GappeiShichoson>}
      *
      */
     GappeiJohoBuilder(
@@ -41,30 +44,7 @@ public class GappeiJohoBuilder {
         this.entity = entity.clone();
         this.id = id;
         this.gappeiShichoson = gappeiShichoson.clone();
-    }
 
-    /**
-     * 合併年月日を設定します。
-     *
-     * @param 合併年月日 合併年月日
-     * @return {@link GappeiJohoBuilder}
-     */
-    public GappeiJohoBuilder set合併年月日(FlexibleDate 合併年月日) {
-        requireNonNull(合併年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
-        entity.setGappeiYMD(合併年月日);
-        return this;
-    }
-
-    /**
-     * 地域番号を設定します。
-     *
-     * @param 地域番号 地域番号
-     * @return {@link GappeiJohoBuilder}
-     */
-    public GappeiJohoBuilder set地域番号(RString 地域番号) {
-        requireNonNull(地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
-        entity.setChiikiNo(地域番号);
-        return this;
     }
 
     /**
@@ -136,6 +116,16 @@ public class GappeiJohoBuilder {
         return new GappeiJoho(entity, id, gappeiShichoson);
     }
 
+    /**
+     * 合併市町村情報のキー情報について判定します。<br>
+     * 合併市町村に関連できる合併市町村情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は合併市町村情報リストに合併市町村情報{@link GappeiShichoson}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 合併市町村情報 {@link GappeiShichoson}
+     * @return {@link GappeiShichosonBuilder}
+     * @throws IllegalStateException キーが一致しない場合
+     */
     public GappeiJohoBuilder setGappeiShichoson(GappeiShichoson 合併市町村) {
 
         if (hasSameIdentifier(合併市町村.identifier())) {

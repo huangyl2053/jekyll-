@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -18,12 +17,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 合併市町村を管理するクラスです。
  */
-public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, DbT7056GappeiShichosonEntity, GappeiShichoson> implements Serializable {
+public class GappeiShichoson extends ModelBase<GappeiShichosonIdentifier, DbT7056GappeiShichosonEntity, GappeiShichoson> implements Serializable {
 
     private static final long serialVersionUID = 5427610772528976479L;
 
@@ -234,10 +234,9 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
      *
      * @return 変更対象処理実施後の{@link GappeiShichoson}
      */
-    @Override
     public GappeiShichoson modifiedModel() {
-        DbT7056GappeiShichosonEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+        DbT7056GappeiShichosonEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new GappeiShichoson(
@@ -274,7 +273,7 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -295,7 +294,7 @@ public class GappeiShichoson extends ParentModelBase<GappeiShichosonIdentifier, 
 
     /**
      * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     * 編集後のインスタンスを取得する場合は{@link GappeiShichosonBuilder.createBuilderForEdit#build()}を使用してください。
      *
      * @return Builder
      */

@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,21 +17,29 @@ public class GappeiJohoMapperParameter {
     private final FlexibleDate gappeiYMD;
     private final RString chiikiNo;
 
+    private final boolean usesGappeiYMD;
+    private final boolean usesChiikiNo;
+
     /**
      * コンストラクタです。
      *
-     * @param gappeiYMD gappeiYMD
-     * @param chiikiNo chiikiNo
+     * @param gappeiYMD FlexibleDate
+     * @param chiikiNo RString
+     * @param usesGappeiYMD boolean
+     * @param usesChiikiNo boolean
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private GappeiJohoMapperParameter(
             FlexibleDate gappeiYMD,
-            RString chiikiNo) {
+            RString chiikiNo,
+            boolean usesGappeiYMD,
+            boolean usesChiikiNo) {
 
-        this.gappeiYMD
-                = requireNonNull(gappeiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
-        this.chiikiNo
-                = requireNonNull(chiikiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
+        this.gappeiYMD = gappeiYMD;
+        this.chiikiNo = chiikiNo;
+
+        this.usesChiikiNo = usesChiikiNo;
+        this.usesGappeiYMD = usesGappeiYMD;
 
     }
 
@@ -42,12 +48,20 @@ public class GappeiJohoMapperParameter {
      *
      * @param gappeiYMD gappeiYMD
      * @param chiikiNo chiikiNo
-     * @return 身体手帳検索パラメータ
+     * @return 合併情報検索パラメータ
      */
     public static GappeiJohoMapperParameter createSelectByKeyParam(
             FlexibleDate gappeiYMD,
             RString chiikiNo) {
-        return new GappeiJohoMapperParameter(gappeiYMD, chiikiNo);
+        boolean usesGappeiYMD = true;
+        boolean usesChiikiNo = true;
+        if (gappeiYMD == null || gappeiYMD.isEmpty()) {
+            usesGappeiYMD = false;
+        }
+        if (chiikiNo == null || chiikiNo.isEmpty()) {
+            usesChiikiNo = false;
+        }
+        return new GappeiJohoMapperParameter(gappeiYMD, chiikiNo, usesGappeiYMD, usesChiikiNo);
     }
 
 }

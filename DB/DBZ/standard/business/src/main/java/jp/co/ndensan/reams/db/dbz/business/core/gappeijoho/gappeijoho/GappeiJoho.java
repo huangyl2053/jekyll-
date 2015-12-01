@@ -13,8 +13,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichosonIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
@@ -23,6 +21,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -176,7 +176,8 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 合併情報のみを変更対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 合併情報のみを変更対象とします。<br/>
+     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GappeiJoho}
      */
@@ -191,9 +192,13 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
     }
 
     /**
-     * 保持する合併情報を削除対象とします。<br/> {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 合併情報配下の要素を削除対象とします。<br/>
+     * {@link DbT7055GappeiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 合併情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link GappeiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link GappeiJoho}
+     * @throws IllegalStateException DbT7055GappeiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public GappeiJoho deleted() {
@@ -222,6 +227,13 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
         return hasChangedEntity() || gappeiShichoson.hasAnyChanged();
     }
 
+    /**
+     * 合併情報が保持する合併市町村情報に対して、指定の識別子に該当する合併市町村情報を返します。
+     *
+     * @param id 合併市町村情報の識別子
+     * @return 合併市町村情報
+     * @throws IllegalStateException 指定の識別子に該当する合併市町村情報がない場合
+     */
     public GappeiShichoson getGappeiShichoson(GappeiShichosonIdentifier id) {
         if (gappeiShichoson.contains(id)) {
             return gappeiShichoson.clone().get(id);
@@ -230,6 +242,11 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 合併情報が保持する合併市町村情報をリストで返します。
+     *
+     * @return 合併市町村情報リスト
+     */
     public List<GappeiShichoson> getGappeiShichosonList() {
         return new ArrayList<>(gappeiShichoson.values());
     }
@@ -260,9 +277,9 @@ public class GappeiJoho extends ParentModelBase<GappeiJohoIdentifier, DbT7055Gap
 
     /**
      * このクラスの編集を行うBuilderを取得します。<br/>
-     * 編集後のインスタンスを取得する場合は{@link SeishinTechoNini.createBuilderForEdit#build()}を使用してください。
+     * 編集後のインスタンスを取得する場合は{@link GappeiJohoBuilder#build()}を使用してください。
      *
-     * @return Builder
+     * @return {@link GappeiJohoBuilder}
      */
     public GappeiJohoBuilder createBuilderForEdit() {
         return new GappeiJohoBuilder(entity, id, gappeiShichoson);

@@ -32,8 +32,8 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
     /**
      * 主キーで合併情報を取得します。
      *
-     * @param 合併年月日 GappeiYMD
-     * @param 地域番号 ChiikiNo
+     * @param 合併年月日 FlexibleDate
+     * @param 地域番号 RString
      * @return DbT7055GappeiJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -57,7 +57,7 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
     /**
      * 合併情報を全件返します。
      *
-     * @return List<DbT7055GappeiJohoEntity>
+     * @return DbT7055GappeiJohoEntityの{@code list}
      */
     @Transaction
     public List<DbT7055GappeiJohoEntity> selectAll() {
@@ -81,21 +81,5 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    public int insert(DbT7055GappeiJohoEntity entity) {
-        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int update(DbT7055GappeiJohoEntity entity) {
-        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int delete(DbT7055GappeiJohoEntity entity) {
-        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int deletePhysical(DbT7055GappeiJohoEntity entity) {
-        throw new UnsupportedOperationException(); //To change body of generated methods, choose Tools | Templates.
     }
 }

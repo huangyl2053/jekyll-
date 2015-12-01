@@ -21,7 +21,6 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7055GappeiJoho");
-    private static final long serialVersionUID = 8791282629734452216L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -224,7 +223,8 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * このエンティティの主キーが他の{@literal DbT7055GappeiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7055GappeiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7055GappeiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7055GappeiJohoEntity other) {
