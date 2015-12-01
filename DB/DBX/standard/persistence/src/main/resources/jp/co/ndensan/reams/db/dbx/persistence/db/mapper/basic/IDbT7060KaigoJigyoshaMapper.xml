@@ -61,7 +61,7 @@
         <id property="yukoKaishiYMD" column="dbT7060KaigoJigyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <association property="kaigoJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.resultMap_DbT7060KaigoJigyoshaEntity"/>
         <collection  property="KaigoJigyoshaDaihyoshaEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.resultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"
+            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"
             ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity"/>
         
         <collection property="KaigoJigyoshaShiteiServiceEntity"

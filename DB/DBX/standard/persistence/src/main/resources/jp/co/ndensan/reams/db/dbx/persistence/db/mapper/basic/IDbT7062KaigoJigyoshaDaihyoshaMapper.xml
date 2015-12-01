@@ -69,7 +69,7 @@
         <result property="kaisetsushaTelNo" column="dbT7062KaigoJigyoshaDaihyosha_kaisetsushaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="kaisetsushaFaxNo" column="dbT7062KaigoJigyoshaDaihyosha_kaisetsushaFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="resultMap_DbT7062KaigoJigyoshaDaihyoshaEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity">
         SELECT
         <include refid="allColumns_DbT7062KaigoJigyoshaDaihyosha"/>
         FROM
