@@ -5,42 +5,40 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigoserviceshurui.IKaigoServiceShuruiMapper">
   
-    <select id="getKaigoServiceShuruiEntity" resultMap="resultMap_DbT7130KaigoServiceShuruiEntity"
+    <select id="getKaigoServiceEntity" resultMap="resultMap_KaigoServiceShuruiEntity"
     parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.kaigoserviceshurui.KaigoServiceShuruiMapperParameter" fetchSize="500">
         SELECT
         DbT7130KaigoServiceShurui.*,
         DbT7131KaigoServiceNaiyou.*
         FROM
         (SELECT
-        <include refid="allColumns_DbT7130KaigoServiceShurui"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShurui"/>
         FROM
-        rgba."DbT7130KaigoServiceShurui"
+        rgdb."DbT7130KaigoServiceShurui"
         WHERE
-        serviceShuruiCd=#{serviceShuruiCd}
-        AND
-        teikyoKaishiYM=#{teikyoKaishiYM}
-        AS) dbT7130KaigoServiceShurui
+        <!--"DbT7130KaigoServiceShurui"."serviceShuruiCd"=#{serviceShuruiCd}
+        AND-->
+        "DbT7130KaigoServiceShurui"."teikyoKaishiYM"=#{teikyoKaishiYM})
+        AS dbT7130KaigoServiceShurui
         INNER JOIN
         (
         SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.allColumns_DbT7130KaigoServiceShuruiEntity"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou"/>
         FROM
-        rgba."DbT7131KaigoServiceNaiyou"
+        rgdb."DbT7131KaigoServiceNaiyou"
         )AS dbT7131KaigoServiceNaiyou
         ON
-        dbT7130KaigoServiceShurui."dbT7130KaigoServiceShurui_serviceShuruiCd"=dbT7131KaigoServiceNaiyou."dbT7131KaigoServiceNaiyou_serviceShuruiCd"
-        AND
+        <!--dbT7130KaigoServiceShurui."dbT7130KaigoServiceShurui_serviceShuruiCd"=dbT7131KaigoServiceNaiyou."dbT7131KaigoServiceNaiyou_serviceShuruiCode"
+        AND-->
         dbT7130KaigoServiceShurui."dbT7130KaigoServiceShurui_teikyoKaishiYM"=dbT7131KaigoServiceNaiyou."dbT7131KaigoServiceNaiyou_teikyoKaishiYM"
         ;
     </select>
 
     <resultMap id="resultMap_KaigoServiceShuruiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity" autoMapping="true">
-        <id property="serviceShuruiCd" column="dbT7130KaigoServiceShurui_serviceShuruiCd" />
-        <id property="teikyoKaishiYM" column="dbT7130KaigoServiceShurui_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-       <association property="kaigoServiceShuruiEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
-       <collection  property="kaigoServiceNaiyouEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"
-            ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7131KaigoServiceNaiyouEntity"/>
+        <!--<id column="dbT7130KaigoServiceShurui_serviceShuruiCd" />-->
+        <id column="dbT7130KaigoServiceShurui_teikyoKaishiYM"/>
+       <association property="介護サービス種類Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7130KaigoServiceShuruiMapper.ResultMap_DbT7130KaigoServiceShuruiEntity"/>
+       <collection  property="介護サービス内容Entity" ofType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>
     </resultMap>
 
 </mapper>

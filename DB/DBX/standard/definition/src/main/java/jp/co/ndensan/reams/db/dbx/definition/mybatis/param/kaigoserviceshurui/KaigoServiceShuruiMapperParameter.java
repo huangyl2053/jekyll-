@@ -40,8 +40,8 @@ public class KaigoServiceShuruiMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param KaigoServiceShuruiCode serviceShuruiCd
-     * @param FlexibleYearMonth teikyoKaishiYM
+     * @param serviceShuruiCd KaigoServiceShuruiCode
+     * @param teikyoKaishiYM FlexibleYearMonth
      * @return 身体手帳検索パラメータ
      */
     public static KaigoServiceShuruiMapperParameter createSelectByKeyParam(

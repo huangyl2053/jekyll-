@@ -10,20 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIinJoho.GogitaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -54,7 +54,6 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
                 合議体番号,
                 合議体有効期間開始年月日
         );
-
         this.gogitaiWariateIinJoho = Models.create(new ArrayList<GogitaiWariateIinJoho>());
         this.shinsakaiKaisaiBashoJoho = Models.create(new ArrayList<ShinsakaiKaisaiBashoJoho>());
     }
@@ -70,17 +69,16 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
         this.id = new GogitaiJohoIdentifier(
                 entity.get合議体情報Entity().getGogitaiNo(),
                 entity.get合議体情報Entity().getGogitaiYukoKikanKaishiYMD());
-        List<GogitaiWariateIinJoho> seishinTechoNiniList = new ArrayList<>();
-        for (DbT5593GogitaiWariateIinJohoEntity niniEntity : entity.get合議体割当委員情報Entity()) {
-            seishinTechoNiniList.add(new GogitaiWariateIinJoho(niniEntity));
+        List<GogitaiWariateIinJoho> gogitaiWariateIinJohoList = new ArrayList<>();
+        for (GogitaiWariateIinJohoRelateEntity niniEntity : entity.get合議体割当委員情報Entity()) {
+            gogitaiWariateIinJohoList.add(new GogitaiWariateIinJoho(niniEntity));
         }
-        this.gogitaiWariateIinJoho = Models.create(seishinTechoNiniList);
-
-        List<ShinsakaiKaisaiBashoJoho> todokedeshaList = new ArrayList<>();
-        for (DbT5592ShinsakaiKaisaiBashoJohoEntity todokedeshaEntity : entity.get介護認定審査会開催場所情報Entity()) {
-            todokedeshaList.add(new ShinsakaiKaisaiBashoJoho(todokedeshaEntity));
+        this.gogitaiWariateIinJoho = Models.create(gogitaiWariateIinJohoList);
+        List<ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList = new ArrayList<>();
+        for (DbT5592ShinsakaiKaisaiBashoJohoEntity niniEntity : entity.get介護認定審査会開催場所情報Entity()) {
+            shinsakaiKaisaiBashoJohoList.add(new ShinsakaiKaisaiBashoJoho(niniEntity));
         }
-        this.shinsakaiKaisaiBashoJoho = Models.create(todokedeshaList);
+        this.shinsakaiKaisaiBashoJoho = Models.create(shinsakaiKaisaiBashoJohoList);
     }
 
     /**
@@ -91,14 +89,13 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
      */
     GogitaiJoho(
             DbT5591GogitaiJohoEntity entity,
-            GogitaiJohoIdentifier id,
-            Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho,
+            GogitaiJohoIdentifier id, Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho,
             Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJoho
     ) {
         this.entity = entity;
         this.id = id;
-        this.shinsakaiKaisaiBashoJoho = shinsakaiKaisaiBashoJoho;
         this.gogitaiWariateIinJoho = gogitaiWariateIinJoho;
+        this.shinsakaiKaisaiBashoJoho = shinsakaiKaisaiBashoJoho;
     }
 
     /**
@@ -231,7 +228,7 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
 
     /**
      * 合議体情報配下の要素を削除対象とします。<br/> {@link DbT5591GogitaiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 合議体情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link GogitaiJoho}を返します。
+     * 合議体情報配下の要素である合議体割当委員情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link GogitaiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link GogitaiJoho}
      * @throws IllegalStateException DbT5591GogitaiJohoEntityのデータ状態が変更の場合
@@ -242,7 +239,6 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
         if (!deletedEntity.getState().equals(EntityDataState.Added)) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new GogitaiJoho(
@@ -251,9 +247,7 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
 
     @Override
     public boolean hasChanged() {
-
         return hasChangedEntity() || gogitaiWariateIinJoho.hasAnyChanged() || shinsakaiKaisaiBashoJoho.hasAnyChanged();
-
     }
 
     /**
@@ -282,18 +276,16 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
         if (gogitaiWariateIinJoho.contains(id)) {
             return gogitaiWariateIinJoho.clone().get(id);
         }
-
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
     /**
      * 合議体情報が保持する合議体割当委員情報をリストで返します。
      *
-     * @return 精神手帳任意項目情報リスト
+     * @return 合議体割当委員情報リスト
      */
     public List<GogitaiWariateIinJoho> getGogitaiWariateIinJohoList() {
         return new ArrayList<>(gogitaiWariateIinJoho.values());
-
     }
 
     /**
@@ -307,7 +299,6 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
         if (shinsakaiKaisaiBashoJoho.contains(id)) {
             return shinsakaiKaisaiBashoJoho.clone().get(id);
         }
-        //TODO メッセージの検討
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
@@ -331,7 +322,7 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = -710031961519711799L;
+        private static final long serialVersionUID = 1443846235896519594L;
         private final DbT5591GogitaiJohoEntity entity;
         private final GogitaiJohoIdentifier id;
         private final Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho;
@@ -352,6 +343,7 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
         private Object readResolve() {
             return new GogitaiJoho(this.entity, this.id, this.gogitaiWariateIinJoho, this.shinsakaiKaisaiBashoJoho);
         }
+
     }
 
     /**
@@ -366,8 +358,8 @@ public class GogitaiJoho extends ParentModelBase<GogitaiJohoIdentifier, DbT5591G
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 

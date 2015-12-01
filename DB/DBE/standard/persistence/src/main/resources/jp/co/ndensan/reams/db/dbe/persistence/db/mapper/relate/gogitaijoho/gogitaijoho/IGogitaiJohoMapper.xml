@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho.IGogitaiJohoMapper">
+
+    <select id="select合議体情報ByKey" resultMap="resultMap_GogitaiJohoRelateEntity" fetchSize="500">
+        <include refid="selectGogitaiJohoRelateEntity" />
+    </select>
+
+    <select id="select合議体情報リストBy主キー1" resultMap="resultMap_GogitaiJohoRelateEntity" fetchSize="500">
+        <include refid="selectGogitaiJohoRelateEntity" />
+    </select>
+
+    <sql id="selectGogitaiJohoRelateEntity">
+        SELECT
+        DbT5591GogitaiJoho.*,
+        DbT5592ShinsakaiKaisaiBashoJoho.*,
+        DbT5593GogitaiWariateIinJoho.*,
+        DbT5594ShinsakaiIinJoho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.noDeleted_DbT5591GogitaiJoho" />) AS DbT5591GogitaiJoho
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.noDeleted_DbT5592ShinsakaiKaisaiBashoJoho" />) AS DbT5592ShinsakaiKaisaiBashoJoho
+        ON
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_shinsakaiKaisaiBashoCode" = DbT5592ShinsakaiKaisaiBashoJoho."dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoCode"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.noDeleted_DbT5593GogitaiWariateIinJoho" />) AS DbT5593GogitaiWariateIinJoho
+        ON
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo" =  DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiNo" 
+        AND 
+        DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" =  DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD" 
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.noDeleted_DbT5594ShinsakaiIinJoho" />) AS DbT5594ShinsakaiIinJoho
+        ON
+        DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        <where>
+            <if test="usesGogitaiNo">
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiNo" = #{gogitaiNo}
+            </if>
+            <if test="usesGogitaiYukoKikanKaishiYMD">
+                AND DbT5591GogitaiJoho."dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD" = #{gogitaiYukoKikanKaishiYMD}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_GogitaiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity" autoMapping="true">
+        <id column="dbT5591GogitaiJoho_gogitaiNo"/>
+        <id column="dbT5591GogitaiJoho_gogitaiYukoKikanKaishiYMD"/>
+        <association property="合議体情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5591GogitaiJohoMapper.ResultMap_DbT5591GogitaiJohoEntity"/>
+        <collection property="介護認定審査会開催場所情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"/>
+        <collection property="合議体割当委員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiWariateIinJoho.IGogitaiWariateIinJohoMapper.resultMap_GogitaiWariateIinJohoRelateEntity"/>
+    </resultMap>
+
+</mapper>
