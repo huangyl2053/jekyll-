@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho;
 
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,6 +36,23 @@ public class ChosainJohoManager {
      */
     ChosainJohoManager(DbT5913ChosainJohoDac dac) {
         this.dac = dac;
+    }
+
+    /**
+     * 調査員情報を全件返します。
+     *
+     * @return ChosainJohoの{@code list}
+     */
+    @Transaction
+    public List<ChosainJoho> get調査員情報一覧() {
+        List<ChosainJoho> businessList = new ArrayList<>();
+
+        for (DbT5913ChosainJohoEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new ChosainJoho(entity));
+        }
+
+        return businessList;
     }
 
     /**
