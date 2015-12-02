@@ -53,18 +53,6 @@ public class ShinsakaiIinJohoBuilder {
     }
 
     /**
-     * 介護認定審査会委員コードを設定します。
-     *
-     * @param 介護認定審査会委員コード 介護認定審査会委員コード
-     * @return {@link ShinsakaiIinJohoBuilder}
-     */
-    public ShinsakaiIinJohoBuilder set介護認定審査会委員コード(RString 介護認定審査会委員コード) {
-        requireNonNull(介護認定審査会委員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
-        entity.setShinsakaiIinCode(介護認定審査会委員コード);
-        return this;
-    }
-
-    /**
      * 介護認定審査会委員開始年月日を設定します。
      *
      * @param 介護認定審査会委員開始年月日 介護認定審査会委員開始年月日

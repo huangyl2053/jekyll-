@@ -33,7 +33,7 @@ public class ShinsakaiIinJohoMapperParameter {
      * キー検索用のパラメータを生成します。
      *
      * @param shinsakaiIinCode shinsakaiIinCode
-     * @return 身体手帳検索パラメータ
+     * @return 介護認定審査会委員情報パラメータ
      */
     public static ShinsakaiIinJohoMapperParameter createSelectByKeyParam(
             RString shinsakaiIinCode) {

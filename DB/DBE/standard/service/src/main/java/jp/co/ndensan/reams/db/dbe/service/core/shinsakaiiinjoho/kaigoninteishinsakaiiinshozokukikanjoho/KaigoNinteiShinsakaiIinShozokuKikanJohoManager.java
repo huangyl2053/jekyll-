@@ -40,47 +40,6 @@ public class KaigoNinteiShinsakaiIinShozokuKikanJohoManager {
     }
 
     /**
-     * 主キーに合致する介護認定審査会委員所属機関情報を返します。
-     *
-     * @param 介護認定審査会委員コード 介護認定審査会委員コード
-     * @param 連番 連番
-     * @return KaigoNinteiShinsakaiIinShozokuKikanJoho
-     */
-    @Transaction
-    public KaigoNinteiShinsakaiIinShozokuKikanJoho get介護認定審査会委員所属機関情報(
-            RString 介護認定審査会委員コード,
-            int 連番) {
-        requireNonNull(介護認定審査会委員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-
-        DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity = dac.selectByKey(
-                介護認定審査会委員コード,
-                連番);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new KaigoNinteiShinsakaiIinShozokuKikanJoho(entity);
-    }
-
-    /**
-     * 介護認定審査会委員所属機関情報を全件返します。
-     *
-     * @return KaigoNinteiShinsakaiIinShozokuKikanJohoの{@code list}
-     */
-    @Transaction
-    public List<KaigoNinteiShinsakaiIinShozokuKikanJoho> get介護認定審査会委員所属機関情報一覧() {
-        List<KaigoNinteiShinsakaiIinShozokuKikanJoho> businessList = new ArrayList<>();
-
-        for (DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new KaigoNinteiShinsakaiIinShozokuKikanJoho(entity));
-        }
-
-        return businessList;
-    }
-
-    /**
      * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を保存します。
      *
      * @param 介護認定審査会委員所属機関情報 {@link KaigoNinteiShinsakaiIinShozokuKikanJoho}
