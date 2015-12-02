@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求サービス計画200004テーブルの項目定義クラスです。
  */
 public enum DbT3045ShokanServicePlan200004 implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,9 +60,13 @@ public enum DbT3045ShokanServicePlan200004 implements IColumnDefinition {
      */
     yoshikiNo(4, 0),
     /**
-     * 履歴番号
+     * 明細番号
      */
-    rirekiNo(5, 0),
+    meisaiNo(4, 0),
+    /**
+     * 連番
+     */
+    renban(2, 0),
     /**
      * 指定／基準該当事業者区分コード
      */

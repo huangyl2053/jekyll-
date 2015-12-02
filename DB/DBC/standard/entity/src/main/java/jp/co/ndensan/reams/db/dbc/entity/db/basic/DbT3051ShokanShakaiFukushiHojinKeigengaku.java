@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求社会福祉法人軽減額テーブルの項目定義クラスです。
  */
 public enum DbT3051ShokanShakaiFukushiHojinKeigengaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -60,14 +60,14 @@ public enum DbT3051ShokanShakaiFukushiHojinKeigengaku implements IColumnDefiniti
      */
     yoshikiNo(4, 0),
     /**
-     * 順次番号
+     * 明細番号
      * <br/>複数レコード対応のため
      */
-    junjiNo(4, 0),
+    meisaiNo(4, 0),
     /**
-     * 履歴番号
+     * 連番
      */
-    rirekiNo(5, 0),
+    renban(2, 0),
     /**
      * 軽減率
      */

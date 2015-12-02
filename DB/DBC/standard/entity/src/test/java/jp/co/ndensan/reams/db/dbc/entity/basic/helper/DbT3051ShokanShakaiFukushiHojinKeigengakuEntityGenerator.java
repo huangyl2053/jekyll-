@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -25,7 +25,7 @@ public final class DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator {
     public static final RString DEFAULT_順次番号 = new RString("Data");
     public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
     public static final Decimal DEFAULT_軽減率 = new Decimal(0);
-    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
+    public static final ShinseishoKanriNo DEFAULT_サービス種類コード = new ShinseishoKanriNo("1");
     public static final int DEFAULT_受領すべき利用者負担の総額 = 1;
     public static final int DEFAULT_軽減額 = 1;
     public static final int DEFAULT_軽減後利用者負担額 = 1;
@@ -44,8 +44,6 @@ public final class DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator {
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setJunjiNo(DEFAULT_順次番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setKeigenritsu(DEFAULT_軽減率);
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
         entity.setRiyoshaFutangakuTotal(DEFAULT_受領すべき利用者負担の総額);

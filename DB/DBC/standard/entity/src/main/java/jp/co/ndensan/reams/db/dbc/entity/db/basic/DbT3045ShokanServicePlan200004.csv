@@ -1,12 +1,13 @@
-﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 seiriNp,varchar,RString,,,,,整理番号,A
-jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
+jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業者番号,A
 yoshikiNo,varchar,RString,,,,,様式番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
+meisaiNo,varchar,RString,,,,,明細番号,A
+renban,varchar,RString,,,,,連番,A
 shiteiKijunGaitoJigyoshaKubunCode,varchar,RString,,,,,指定／基準該当事業者区分コード,A
 kyotakuServiceSakuseiIraiYMD,UDD015YMD,FlexibleDate,,,,,居宅サービス計画作成依頼届出年月日,A
-serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,サービスコード,A
+serviceCode,DbUDD007ServiceCode,DbUDD007ServiceCode,,,,,サービスコード,A
 tanisu,int4,int,,,,,単位数,A
 tanisuTanka,numeric,Decimal,,,,,単位数単価,A
 seikyuKingaku,int4,int,,,,,請求金額,A

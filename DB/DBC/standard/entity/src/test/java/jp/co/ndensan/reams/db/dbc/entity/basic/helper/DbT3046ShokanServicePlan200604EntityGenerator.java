@@ -56,7 +56,6 @@ public final class DbT3046ShokanServicePlan200604EntityGenerator {
         entity.setSeiriNp(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShiteiKijunGaitoJigyoshaKubunCode(DEFAULT_指定_基準該当事業者区分コード);
         entity.setKyotakuServiceSakuseiIraiYMD(DEFAULT_居宅サービス計画作成依頼届出年月日);
         entity.setServiceCode(DEFAULT_サービスコード);
