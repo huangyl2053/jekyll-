@@ -38,11 +38,11 @@ public class Kibetsu extends ModelBase<KibetsuIdentifier, DbT2003KibetsuEntity, 
      * @param 期 期
      */
     public Kibetsu(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号,
+            RString 徴収方法,
+            int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -57,13 +57,13 @@ int 期) {
         this.entity.setChoshuHouhou(徴収方法);
         this.entity.setKi(期);
         this.id = new KibetsuIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号,
-        徴収方法,
-        期
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                徴収方法,
+                期
+        );
     }
 
     /**
@@ -212,6 +212,7 @@ int 期) {
         }
         return new Kibetsu(deletedEntity, id);
     }
+
     /**
      * {@link Kibetsu}のシリアライズ形式を提供します。
      *
@@ -233,7 +234,7 @@ int 期) {
         private final DbT2003KibetsuEntity entity;
         private final KibetsuIdentifier id;
 
-        private _SerializationProxy(DbT2003KibetsuEntity entity,KibetsuIdentifier id) {
+        private _SerializationProxy(DbT2003KibetsuEntity entity, KibetsuIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -49,9 +49,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      * @param 履歴番号 履歴番号
      */
     public Fuka(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -62,11 +62,11 @@ Decimal 履歴番号) {
         this.entity.setTsuchishoNo(通知書番号);
         this.entity.setRirekiNo(履歴番号);
         this.id = new FukaIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号
+        );
         this.kibetsu = Models.create(new ArrayList<Kibetsu>());
     }
 
@@ -89,7 +89,6 @@ Decimal 履歴番号) {
         }
         this.kibetsu = Models.create(kibetsuiList);
     }
-
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -547,7 +546,6 @@ Decimal 履歴番号) {
 //    public Decimal get普徴歳出還付額() {
 //        return entity.getFuSaishutsuKampuGaku();
 //    }
-
     /**
      * {@link DbT2002FukaEntity}のクローンを返します。
      *
@@ -647,6 +645,7 @@ Decimal 履歴番号) {
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = 3115036041548252859L;
         private final DbT2002FukaEntity entity;
         private final FukaIdentifier id;
         private final Models<KibetsuIdentifier, Kibetsu> kibetsu;
@@ -664,6 +663,7 @@ Decimal 履歴番号) {
         private Object readResolve() {
             return new Fuka(this.entity, this.id, this.kibetsu);
         }
+
     }
 
     /**
@@ -697,5 +697,4 @@ Decimal 履歴番号) {
         }
         return true;
     }
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

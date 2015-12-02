@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class KibetsuIdentifier implements Serializable {
+
     private static final long serialVersionUID = 4381442664508426243L;
 
     private final FlexibleYear 調定年度;
@@ -37,11 +38,11 @@ public class KibetsuIdentifier implements Serializable {
      * @param 期 期
      */
     public KibetsuIdentifier(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号,
+            RString 徴収方法,
+            int 期) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;

@@ -46,7 +46,7 @@
     <resultMap id="ResultMap_DbT2006ChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2006ChoshuYuyo_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2006ChoshuYuyo_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2006ChoshuYuyo_tsuchishoNo" />
+        <id property="tsuchishoNo" column="dbT2006ChoshuYuyo_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
         <id property="rirekiNo" column="dbT2006ChoshuYuyo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2006ChoshuYuyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2006ChoshuYuyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 介護期別徴収猶予を管理するクラスです。
  */
 public class KibetsuChoshuYuyo extends ModelBase<KibetsuChoshuYuyoIdentifier, DbT2007KibetsuChoshuYuyoEntity, KibetsuChoshuYuyo> implements Serializable {
-    
+
     private final DbT2007KibetsuChoshuYuyoEntity entity;
     private final KibetsuChoshuYuyoIdentifier id;
 
@@ -39,11 +39,11 @@ public class KibetsuChoshuYuyo extends ModelBase<KibetsuChoshuYuyoIdentifier, Db
      * @param 期 期
      */
     public KibetsuChoshuYuyo(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号,
-RString 徴収方法,
-int 期) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号,
+            RString 徴収方法,
+            int 期) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -58,13 +58,13 @@ int 期) {
         this.entity.setChoshuHoho(徴収方法);
         this.entity.setKi(期);
         this.id = new KibetsuChoshuYuyoIdentifier(
-        調定年度,
-        賦課年度,
-        通知書番号,
-        履歴番号,
-        徴収方法,
-        期
-                );
+                調定年度,
+                賦課年度,
+                通知書番号,
+                履歴番号,
+                徴収方法,
+                期
+        );
     }
 
     /**
@@ -222,6 +222,7 @@ int 期) {
         }
         return new KibetsuChoshuYuyo(deletedEntity, id);
     }
+
     /**
      * {@link KibetsuChoshuYuyo}のシリアライズ形式を提供します。
      *
@@ -243,7 +244,7 @@ int 期) {
         private final DbT2007KibetsuChoshuYuyoEntity entity;
         private final KibetsuChoshuYuyoIdentifier id;
 
-        private _SerializationProxy(DbT2007KibetsuChoshuYuyoEntity entity,KibetsuChoshuYuyoIdentifier id) {
+        private _SerializationProxy(DbT2007KibetsuChoshuYuyoEntity entity, KibetsuChoshuYuyoIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

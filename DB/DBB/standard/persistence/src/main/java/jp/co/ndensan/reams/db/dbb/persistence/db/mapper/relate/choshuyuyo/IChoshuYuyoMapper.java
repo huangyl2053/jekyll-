@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 
 /**

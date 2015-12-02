@@ -40,7 +40,7 @@
     <resultMap id="ResultMap_DbT2007KibetsuChoshuYuyoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2007KibetsuChoshuYuyoEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2007KibetsuChoshuYuyo_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2007KibetsuChoshuYuyo_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2007KibetsuChoshuYuyo_tsuchishoNo" />
+        <id property="tsuchishoNo" column="dbT2007KibetsuChoshuYuyo_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
         <id property="rirekiNo" column="dbT2007KibetsuChoshuYuyo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="choshuHoho" column="dbT2007KibetsuChoshuYuyo_choshuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ki" column="dbT2007KibetsuChoshuYuyo_ki" />

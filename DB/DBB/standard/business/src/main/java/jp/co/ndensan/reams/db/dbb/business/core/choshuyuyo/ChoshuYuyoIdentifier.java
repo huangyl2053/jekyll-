@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class ChoshuYuyoIdentifier implements Serializable {
+
     private static final long serialVersionUID = -5952365166792946190L;
 
     private final FlexibleYear 調定年度;
@@ -32,9 +33,9 @@ public class ChoshuYuyoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public ChoshuYuyoIdentifier(FlexibleYear 調定年度,
-FlexibleYear 賦課年度,
-TsuchishoNo 通知書番号,
-Decimal 履歴番号) {
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            Decimal 履歴番号) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;

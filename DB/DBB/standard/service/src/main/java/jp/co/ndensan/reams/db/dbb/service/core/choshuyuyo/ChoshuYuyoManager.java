@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.KibetsuChoshuYuyo;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.ChoshuYuyoMapperParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choshuyuyo.ChoshuYuyoMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2006ChoshuYuyoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoMapper;
@@ -37,7 +37,7 @@ public class ChoshuYuyoManager {
 
     /**
      * 単体テスト用のコンストラクタです。
-     * 
+     *
      * @param mapperProvider mapperProvider
      * @param 介護賦課徴収猶予Dac 介護賦課徴収猶予Dac
      * @param 介護期別徴収猶予Manager 介護期別徴収猶予Manager
@@ -55,7 +55,8 @@ public class ChoshuYuyoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ChoshuYuyoManager}のインスタンス
      */
     public static ChoshuYuyoManager createInstance() {
         return InstanceProvider.create(ChoshuYuyoManager.class);
@@ -99,7 +100,7 @@ public class ChoshuYuyoManager {
         return 1 == 介護賦課徴収猶予Dac.save(介護賦課徴収猶予.toEntity());
     }
 
-    private void save介護期別徴収猶予リスト(List<KibetsuChoshuYuyo> 介護期別徴収猶予List) {    
+    private void save介護期別徴収猶予リスト(List<KibetsuChoshuYuyo> 介護期別徴収猶予List) {
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             介護期別徴収猶予Manager.save介護期別徴収猶予(介護期別徴収猶予);
         }

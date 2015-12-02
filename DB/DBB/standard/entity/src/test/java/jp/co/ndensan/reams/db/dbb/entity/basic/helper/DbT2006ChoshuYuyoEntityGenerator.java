@@ -24,8 +24,8 @@ public final class DbT2006ChoshuYuyoEntityGenerator {
     public static final FlexibleDate DEFAULT_徴収猶予申請年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_徴収猶予決定年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_徴収猶予取消年月日 = new FlexibleDate("19900101");
-    public static final RString DEFAULT_徴収猶予状態区分 = new RString("Data");
-    public static final RString DEFAULT_徴収猶予作成区分 = new RString("Data");
+    public static final RString DEFAULT_徴収猶予状態区分 = new RString("1");
+    public static final RString DEFAULT_徴収猶予作成区分 = new RString("1");
     public static final RString DEFAULT_申請事由 = new RString("Data");
     public static final Code DEFAULT_徴収猶予種類コード = new Code();
     public static final RString DEFAULT_徴収猶予事由 = new RString("Data");
