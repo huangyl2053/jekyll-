@@ -1,30 +1,30 @@
 var DBZ;
 (function (DBZ) {
-    (function (KaigoChohyoSeigyoMaintenance) {
+    (function (KaigoChohyoSeigyoKyotsu) {
         var Events = (function () {
             function Events() {
             }
             return Events;
         })();
-        KaigoChohyoSeigyoMaintenance.Events = Events;
+        KaigoChohyoSeigyoKyotsu.Events = Events;
 
         var Controls = (function () {
             function Controls(fieldName) {
                 this._myName = fieldName;
             }
             Controls.myType = function () {
-                return "KaigoChohyoSeigyoMaintenance";
+                return "KaigoChohyoSeigyoKyotsu";
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.KaigoChohyoSeigyoMaintenance.Controls.myType();
+                return this._myName + "_" + DBZ.KaigoChohyoSeigyoKyotsu.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.KaigoChohyoSeigyoMaintenance.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KaigoChohyoSeigyoKyotsu.Controls.myType() + "_" + fieldName;
             };
 
-            Controls.prototype.KaigoChohyoSeigyoMaintenance = function () {
+            Controls.prototype.KaigoChohyoSeigyoKyotsu = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
@@ -140,12 +140,12 @@ var DBZ;
                 return new UZA.ButtonDialog(this.convFiledName("btnKaigoToiawasesaki"));
             };
 
-            Controls.prototype.ccdKaigoChohyoShutsuryokujun = function () {
-                return new DBZ.KaigoChohyoShutsuryokujun.ModeController(this.convFiledName("ccdKaigoChohyoShutsuryokujun"));
+            Controls.prototype.ccdChohyoShutsuryokujun = function () {
+                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("ccdChohyoShutsuryokujun"));
             };
             return Controls;
         })();
-        KaigoChohyoSeigyoMaintenance.Controls = Controls;
-    })(DBZ.KaigoChohyoSeigyoMaintenance || (DBZ.KaigoChohyoSeigyoMaintenance = {}));
-    var KaigoChohyoSeigyoMaintenance = DBZ.KaigoChohyoSeigyoMaintenance;
+        KaigoChohyoSeigyoKyotsu.Controls = Controls;
+    })(DBZ.KaigoChohyoSeigyoKyotsu || (DBZ.KaigoChohyoSeigyoKyotsu = {}));
+    var KaigoChohyoSeigyoKyotsu = DBZ.KaigoChohyoSeigyoKyotsu;
 })(DBZ || (DBZ = {}));
