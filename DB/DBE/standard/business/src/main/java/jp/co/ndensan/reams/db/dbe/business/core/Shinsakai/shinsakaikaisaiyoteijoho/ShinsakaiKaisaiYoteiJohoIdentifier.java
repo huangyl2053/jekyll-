@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class ShinsakaiKaisaiYoteiJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -7771312999194130485L;
     private final RString 介護認定審査会開催番号;
 
     /**
@@ -25,4 +26,5 @@ public class ShinsakaiKaisaiYoteiJohoIdentifier implements Serializable {
     public ShinsakaiKaisaiYoteiJohoIdentifier(RString 介護認定審査会開催番号) {
         this.介護認定審査会開催番号 = 介護認定審査会開催番号;
     }
+
 }

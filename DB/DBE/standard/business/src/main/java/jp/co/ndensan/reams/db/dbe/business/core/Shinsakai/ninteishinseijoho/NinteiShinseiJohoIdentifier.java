@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 @lombok.Value
 public class NinteiShinseiJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 1598540204956738647L;
     private final ShinseishoKanriNo 申請書管理番号;
 
     /**
@@ -25,4 +26,5 @@ public class NinteiShinseiJohoIdentifier implements Serializable {
     public NinteiShinseiJohoIdentifier(ShinseishoKanriNo 申請書管理番号) {
         this.申請書管理番号 = 申請書管理番号;
     }
+
 }

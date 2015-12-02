@@ -77,7 +77,6 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 申請書管理番号を返します。
      *
