@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.HokenshaJoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.hokenja.Hokensha;
-import jp.co.ndensan.reams.db.dba.business.core.hokenja.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokenja.HokenjaMapperParameter;
+import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
+import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenjaMapperParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA6010012.DataGrid1_Row;
-import jp.co.ndensan.reams.db.dba.service.core.hokenja.HokenshaNyuryokuHojoFinder;
+import jp.co.ndensan.reams.db.dba.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
