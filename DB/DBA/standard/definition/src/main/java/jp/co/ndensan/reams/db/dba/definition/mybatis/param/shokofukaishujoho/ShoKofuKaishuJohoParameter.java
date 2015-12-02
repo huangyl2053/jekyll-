@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.mybatis.param.shokofukaishujoho;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -70,23 +69,6 @@ public class ShoKofuKaishuJohoParameter {
                 kaishuJiyu,
                 kaishuRiyu
         );
-    }
-
-    /**
-     * DbT7037ShoKofuKaishuEntityを返します。
-     *
-     * @param entity
-     * @return DbT7037ShoKofuKaishuEntity
-     */
-    public DbT7037ShoKofuKaishuEntity toDbT7037ShoKofuKaishuEntity(DbT7037ShoKofuKaishuEntity entity) {
-        entity.setKofuYMD(kofuYMD);
-        entity.setYukoKigenYMD(yukoKigenYMD);
-        entity.setKofuJiyu(kofuJiyu);
-        entity.setKofuRiyu(kofuRiyu);
-        entity.setKaishuYMD(kaishuYMD);
-        entity.setKaishuJiyu(kaishuJiyu);
-        entity.setKaishuRiyu(kaishuRiyu);
-        return entity;
     }
 
     public RString getState() {
