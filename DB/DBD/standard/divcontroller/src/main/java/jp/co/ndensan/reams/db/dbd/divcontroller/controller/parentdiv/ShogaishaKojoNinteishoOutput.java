@@ -50,7 +50,7 @@ public class ShogaishaKojoNinteishoOutput {
 
         cg = new ControlGenerator(targetSource.get(1));
 //        panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName().setValue(cg.getAsRString("出力順名"));
-        panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
-        panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSort().setValue(cg.getAsRString("出力順"));
+        panel.getOutputOrder().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
+        panel.getOutputOrder().getTxtSort().setValue(cg.getAsRString("出力順"));
     }
 }
