@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dba.definition.core.shikakukubun;
 
-import jp.co.ndensan.reams.dc.dca.definition.message.DcErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -69,6 +68,6 @@ public enum ShikakuKubun {
                 return shikakuKubun;
             }
         }
-        throw new IllegalArgumentException(DcErrorMessages.E09002.getMessage().getMessage());
+        throw new IllegalArgumentException();
     }
 }

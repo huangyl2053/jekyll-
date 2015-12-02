@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定申請情報の識別子です。
