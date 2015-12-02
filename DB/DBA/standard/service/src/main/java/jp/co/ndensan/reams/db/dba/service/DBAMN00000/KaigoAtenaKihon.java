@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.service.DBAMN00000;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.DBAMN00000.KaigoAtenaKihonEntity;
 import jp.co.ndensan.reams.db.dba.persistence.DBAMN00000.KaigoAtenaKihonMapper;
@@ -34,12 +33,12 @@ public class KaigoAtenaKihon {
      * @param ShikibetsuCode shikibetsuCode
      * @return List DbT1001HihokenshaDaichoEntity
      */
-    // TODO QA-21,QA-33
+    // TODO QA-33
     public List<KaigoAtenaKihonEntity> getKaigoShikakuKihon(ShikibetsuCode shikibetsuCode) {
         KaigoAtenaKihonMapper mapper = mapperProvider.create(KaigoAtenaKihonMapper.class);
         List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByShikibetsuCode(shikibetsuCode);
-        if (kaigoAtenaKihonList.isEmpty()) {
-            return new ArrayList();
+        if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
+            throw new RuntimeException();
         }
         return kaigoAtenaKihonList;
     }
