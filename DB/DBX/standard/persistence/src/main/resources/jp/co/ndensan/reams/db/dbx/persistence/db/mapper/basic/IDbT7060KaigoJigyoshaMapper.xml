@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="allColumns_DbT7060KaigoJigyosha">
-         "DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",
+         <!--"DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",-->
          "DbT7060KaigoJigyosha"."yukoKaishiYMD" as "dbT7060KaigoJigyosha_yukoKaishiYMD",
          "DbT7060KaigoJigyosha"."insertDantaiCd" as "dbT7060KaigoJigyosha_insertDantaiCd",
          "DbT7060KaigoJigyosha"."insertTimestamp" as "dbT7060KaigoJigyosha_insertTimestamp",
@@ -57,17 +57,8 @@
 
     <!--テーブルDbT7060KaigoJigyoshaの項目をDbT7060KaigoJigyoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
-        <id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <!--<id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7060KaigoJigyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <association property="kaigoJigyoshaEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.resultMap_DbT7060KaigoJigyoshaEntity"/>
-        <collection  property="KaigoJigyoshaDaihyoshaEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7062KaigoJigyoshaDaihyoshaMapper.ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity"
-            ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7062KaigoJigyoshaDaihyoshaEntity"/>
-        
-        <collection property="KaigoJigyoshaShiteiServiceEntity"
-            resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7063KaigoJigyoshaShiteiServiceMapper.resultMap_DbT7063KaigoJigyoshaShiteiServiceEntity"
-            ofType="jp.co.ndensan.reams.db.dbx.entity.basic.DbT7063KaigoJigyoshaShiteiServiceEntity"/>
-        
         <result property="insertDantaiCd" column="dbT7060KaigoJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7060KaigoJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT7060KaigoJigyosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -97,9 +88,9 @@
         <result property="shozaiShichoson" column="dbT7060KaigoJigyosha_shozaiShichoson" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceJisshiChiiki" column="dbT7060KaigoJigyosha_serviceJisshiChiiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hojinShubetsu" column="dbT7060KaigoJigyosha_hojinShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="bedSu" column="dbT7060KaigoJigyosha_bedSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="shozokuNinzu" column="dbT7060KaigoJigyosha_shozokuNinzu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoshaSu" column="dbT7060KaigoJigyosha_riyoshaSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="bedSu" column="dbT7060KaigoJigyosha_bedSu" />
+        <result property="shozokuNinzu" column="dbT7060KaigoJigyosha_shozokuNinzu" />
+        <result property="riyoshaSu" column="dbT7060KaigoJigyosha_riyoshaSu" />
         <result property="biko" column="dbT7060KaigoJigyosha_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
         <select id="getEntity" resultMap="ResultMap_DbT7060KaigoJigyoshaEntity">

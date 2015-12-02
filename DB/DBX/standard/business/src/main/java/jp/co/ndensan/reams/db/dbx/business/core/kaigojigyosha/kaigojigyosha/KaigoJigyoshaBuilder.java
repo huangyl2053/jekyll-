@@ -372,6 +372,16 @@ public class KaigoJigyoshaBuilder {
         return this;
     }
 
+    /**
+     * 介護事業者指定サービスのキー情報について判定します。<br>
+     * 介護事業者情報に関連できる介護事業者指定サービス情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は介護事業者指定サービスリストに介護事業者指定サービス情報{@link KaigoJigyoshaDaihyosha}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 介護事業者代表者 {@link KaigoJigyoshaDaihyosha}
+     * @return {@link KaigoJigyoshaBuilder}
+     * @throws IllegalStateException キーが一致しない場合
+     */
     public KaigoJigyoshaBuilder setKaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyosha 介護事業者代表者) {
         if (hasSameIdentifier(介護事業者代表者.identifier())) {
             kaigoJigyoshaDaihyosha.add(介護事業者代表者);
@@ -382,9 +392,19 @@ public class KaigoJigyoshaBuilder {
 
     private boolean hasSameIdentifier(KaigoJigyoshaDaihyoshaIdentifier 介護事業者代表者の識別子) {
         return (id.get事業者番号().equals(介護事業者代表者の識別子.get事業者番号())
-                && id.get有効開始日() == 介護事業者代表者の識別子.get有効開始日());
+                && id.get有効開始日().equals(介護事業者代表者の識別子.get有効開始日()));
     }
 
+    /**
+     * 介護事業者代表者情報のキー情報について判定します。<br>
+     * 介護事業者情報に関連できる介護事業者代表者情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は介護事業者代表者情報リストに介護事業者代表者情報{@link KaigoJigyoshaShiteiService}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 介護事業者指定サービス {@link KaigoJigyoshaShiteiService}
+     * @return KaigoJigyoshaBuilder
+     * @throws IllegalStateException キーが一致しない場合
+     */
     public KaigoJigyoshaBuilder setKaigoJigyoshaShiteiService(KaigoJigyoshaShiteiService 介護事業者指定サービス) {
         if (hasSameIdentifier(介護事業者指定サービス.identifier())) {
             kaigoJigyoshaShiteiService.add(介護事業者指定サービス);
@@ -395,7 +415,7 @@ public class KaigoJigyoshaBuilder {
 
     private boolean hasSameIdentifier(KaigoJigyoshaShiteiServiceIdentifier 介護事業者指定サービスの識別子) {
         return (id.get事業者番号().equals(介護事業者指定サービスの識別子.get事業者番号())
-                && id.get有効開始日() == 介護事業者指定サービスの識別子.get有効開始日());
+                && id.get有効開始日().equals(介護事業者指定サービスの識別子.get有効開始日()));
     }
 
     /**

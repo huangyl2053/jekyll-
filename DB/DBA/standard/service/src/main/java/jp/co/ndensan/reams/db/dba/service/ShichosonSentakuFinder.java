@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dba.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.ShichosonSentakuMapper;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.IShichosonSentakuMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7056GappeiShichosonDac;
@@ -40,7 +40,7 @@ public class ShichosonSentakuFinder {
      * テスト用コンストラクタです。
      *
      * @param dac {@link DbT7056GappeiShichosonDac}
-     * @param dac {@link ShichosonSentakuMapper}
+     * @param dac {@link IShichosonSentakuMapper}
      */
     ShichosonSentakuFinder(DbT7056GappeiShichosonDac dac, MapperProvider mapperProvider) {
         this.dac = dac;
@@ -69,7 +69,7 @@ public class ShichosonSentakuFinder {
      * @return 構成市町村選択情報取得
      */
     public List<DbT7051KoseiShichosonMasterEntity> getKouseiShichosonSentaku(FlexibleDate 基準日) {
-        ShichosonSentakuMapper mapper = mapperProvider.create(ShichosonSentakuMapper.class);
+        IShichosonSentakuMapper mapper = mapperProvider.create(IShichosonSentakuMapper.class);
         List<DbT7051KoseiShichosonMasterEntity> mapperList = mapper.getEntity(基準日);
         if (mapperList.isEmpty()) {
             return new ArrayList();

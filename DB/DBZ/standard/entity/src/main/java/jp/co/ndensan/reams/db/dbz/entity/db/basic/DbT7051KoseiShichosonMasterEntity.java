@@ -26,7 +26,6 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
-    private static final long serialVersionUID = -3103305345770896014L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

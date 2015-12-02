@@ -108,7 +108,6 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         this.kaigoJigyoshaShiteiService = kaigoJigyoshaShiteiService;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 事業者番号を返します。
      *
@@ -373,7 +372,8 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
     }
 
     /**
-     * 保持する介護事業者を削除対象とします。<br/> {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護事業者を削除対象とします。<br/>
+     * {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoJigyosha}
      */
@@ -403,6 +403,12 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         return hasChangedEntity() || kaigoJigyoshaDaihyosha.hasAnyChanged() || kaigoJigyoshaShiteiService.hasAnyChanged();
     }
 
+    /**
+     * 介護事業者のみを変更対象とします。<br/>
+     * {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KaigoJigyosha}
+     */
     @Override
     public KaigoJigyosha modifiedModel() {
         DbT7060KaigoJigyoshaEntity modifiedEntity = entity.clone();
@@ -412,6 +418,13 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         return new KaigoJigyosha(modifiedEntity, id, kaigoJigyoshaDaihyosha, kaigoJigyoshaShiteiService);
     }
 
+    /**
+     * 介護事業者が保持する介護事業者代表者情報に対して、指定の識別子に該当する介護事業者代表者情報を返します。
+     *
+     * @param id 介護事業者代表者情報の識別子
+     * @return 介護事業者代表者情報
+     * @throws IllegalStateException 指定の識別子に該当する精神手帳任意項目情報がない場合
+     */
     public KaigoJigyoshaDaihyosha getKaigoJigyoshaDaihyoshaList(KaigoJigyoshaDaihyoshaIdentifier id) {
         if (kaigoJigyoshaDaihyosha.contains(id)) {
             return kaigoJigyoshaDaihyosha.clone().get(id);
@@ -419,10 +432,22 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護事業者が保持する介護事業者代表者情報をリストで返します。
+     *
+     * @return 介護事業者代表者情報リスト
+     */
     public List<KaigoJigyoshaDaihyosha> getKaigoJigyoshaDaihyoshaList() {
         return new ArrayList<>(kaigoJigyoshaDaihyosha.values());
     }
 
+    /**
+     * 介護事業者が保持する介護事業者指定サービス情報に対して、指定の識別子に該当する介護事業者指定サービス情報を返します。
+     *
+     * @param id 介護事業者指定サービスの識別子
+     * @return 介護事業者指定サービス情報
+     * @throws IllegalStateException 指定の識別子に該当する届出者情報がない場合
+     */
     public KaigoJigyoshaShiteiService getKaigoJigyoshaShiteiServiceList(KaigoJigyoshaShiteiServiceIdentifier id) {
         if (kaigoJigyoshaShiteiService.contains(id)) {
             return kaigoJigyoshaShiteiService.clone().get(id);
@@ -430,6 +455,11 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 介護事業者が保持する介護事業者指定サービス情報をリストで返します。
+     *
+     * @return 介護事業者指定サービスリスト
+     */
     public List<KaigoJigyoshaShiteiService> getKaigoJigyoshaShiteiServiceList() {
         return new ArrayList<>(kaigoJigyoshaShiteiService.values());
     }

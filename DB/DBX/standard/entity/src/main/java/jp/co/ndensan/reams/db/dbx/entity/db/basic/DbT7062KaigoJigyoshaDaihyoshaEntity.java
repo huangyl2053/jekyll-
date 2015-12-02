@@ -27,7 +27,6 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7062KaigoJigyoshaDaihyosha");
-    private static final long serialVersionUID = 3562753921426639498L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;

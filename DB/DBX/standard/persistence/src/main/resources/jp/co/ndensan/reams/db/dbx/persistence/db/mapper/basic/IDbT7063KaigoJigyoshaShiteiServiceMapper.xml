@@ -17,8 +17,8 @@
     </sql>
 
     <sql id="allColumns_DbT7063KaigoJigyoshaShiteiService">
-         "DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaNo",
-         "DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" as "dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode",
+         <!--"DbT7063KaigoJigyoshaShiteiService"."jigyoshaNo" as "dbT7063KaigoJigyoshaShiteiService_jigyoshaNo",-->
+         <!--"DbT7063KaigoJigyoshaShiteiService"."serviceShuruiCode" as "dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode",-->
          "DbT7063KaigoJigyoshaShiteiService"."yukoKaishiYMD" as "dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD",
          "DbT7063KaigoJigyoshaShiteiService"."insertDantaiCd" as "dbT7063KaigoJigyoshaShiteiService_insertDantaiCd",
          "DbT7063KaigoJigyoshaShiteiService"."insertTimestamp" as "dbT7063KaigoJigyoshaShiteiService_insertTimestamp",
@@ -171,9 +171,9 @@
 
 
     <!--テーブルDbT7063KaigoJigyoshaShiteiServiceの項目をDbT7063KaigoJigyoshaShiteiServiceEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity" autoMapping="true">
-        <id property="jigyoshaNo" column="dbT7063KaigoJigyoshaShiteiService_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="serviceShuruiCode" column="dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+    <resultMap id="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity" autoMapping="true">
+        <!--<id property="jigyoshaNo" column="dbT7063KaigoJigyoshaShiteiService_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
+        <!--<id property="serviceShuruiCode" column="dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoServiceShuruiCodeTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7063KaigoJigyoshaShiteiService_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7063KaigoJigyoshaShiteiService_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -187,7 +187,7 @@
         <result property="idoYMD" column="dbT7063KaigoJigyoshaShiteiService_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="idoJiyu" column="dbT7063KaigoJigyoshaShiteiService_idoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shiteiNo" column="dbT7063KaigoJigyoshaShiteiService_shiteiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kihonJohoJunkyoKubun" column="dbT7063KaigoJigyoshaShiteiService_kihonJohoJunkyoKubun" />
+        <result property="kihonJohoJunkyoKubun" column="dbT7063KaigoJigyoshaShiteiService_kihonJohoJunkyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_jigyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jigyoKyushiYMD" column="dbT7063KaigoJigyoshaShiteiService_jigyoKyushiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jigyoSaikaiYMD" column="dbT7063KaigoJigyoshaShiteiService_jigyoSaikaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -200,7 +200,7 @@
         <result property="jigyoshaTelNo" column="dbT7063KaigoJigyoshaShiteiService_jigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="jigyoshaFaxNo" column="dbT7063KaigoJigyoshaShiteiService_jigyoshaFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="torokuHokenshaNo" column="dbT7063KaigoJigyoshaShiteiService_torokuHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="juryoininUmu" column="dbT7063KaigoJigyoshaShiteiService_juryoininUmu" />
+        <result property="juryoininUmu" column="dbT7063KaigoJigyoshaShiteiService_juryoininUmu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="torokuKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_torokuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="torokuShuryoYMD" column="dbT7063KaigoJigyoshaShiteiService_torokuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kanrishaName" column="dbT7063KaigoJigyoshaShiteiService_kanrishaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -208,122 +208,122 @@
         <result property="kanrishaYubinNo" column="dbT7063KaigoJigyoshaShiteiService_kanrishaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="kanrishaAddress" column="dbT7063KaigoJigyoshaShiteiService_kanrishaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="kanrishaAddressKana" column="dbT7063KaigoJigyoshaShiteiService_kanrishaAddressKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kozaJohoJunkyoKubun" column="dbT7063KaigoJigyoshaShiteiService_kozaJohoJunkyoKubun" />
+        <result property="kozaJohoJunkyoKubun" column="dbT7063KaigoJigyoshaShiteiService_kozaJohoJunkyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ginkoCode" column="dbT7063KaigoJigyoshaShiteiService_ginkoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="shitenCode" column="dbT7063KaigoJigyoshaShiteiService_shitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
         <result property="kozaShubetsu" column="dbT7063KaigoJigyoshaShiteiService_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaNo" column="dbT7063KaigoJigyoshaShiteiService_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="dbT7063KaigoJigyoshaShiteiService_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="kozaMeigininKana" column="dbT7063KaigoJigyoshaShiteiService_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="shakaiFukushihoujinKeigenjigyouJisshi_umu" column="dbT7063KaigoJigyoshaShiteiService_shakaiFukushihoujinKeigenjigyouJisshi_umu" />
-        <result property="seikatsuhogohouShitei_umu" column="dbT7063KaigoJigyoshaShiteiService_seikatsuhogohouShitei_umu" />
+        <result property="shakaiFukushihoujinKeigenjigyouJisshi_umu" column="dbT7063KaigoJigyoshaShiteiService_shakaiFukushihoujinKeigenjigyouJisshi_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="seikatsuhogohouShitei_umu" column="dbT7063KaigoJigyoshaShiteiService_seikatsuhogohouShitei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shisetsunadoKubun" column="dbT7063KaigoJigyoshaShiteiService_shisetsunadoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="jininHaichiKubun" column="dbT7063KaigoJigyoshaShiteiService_jininHaichiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="tokubetsuChiikiKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuChiikiKasan_umu" />
-        <result property="kinkyujiHomonkaigoKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_kinkyujiHomonkaigoKasan_umu" />
-        <result property="tokubetsuKanriTaisei" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuKanriTaisei" />
-        <result property="kinoKunrenShidoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kinoKunrenShidoTaisei_umu" />
-        <result property="shokujiTeikyoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoTaisei_umu" />
-        <result property="nyuyokuKaijoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_nyuyokuKaijoTaisei_umu" />
-        <result property="tokubetsuNyuyokuKaijoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuNyuyokuKaijoTaisei_umu" />
-        <result property="joukinsenjuIshiHaichi_umu" column="dbT7063KaigoJigyoshaShiteiService_joukinsenjuIshiHaichi_umu" />
-        <result property="ishiHaichiKijun" column="dbT7063KaigoJigyoshaShiteiService_ishiHaichiKijun" />
-        <result property="seisinkaIshiTeikitekiRyouyousidou_umu" column="dbT7063KaigoJigyoshaShiteiService_seisinkaIshiTeikitekiRyouyousidou_umu" />
+        <result property="tokubetsuChiikiKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuChiikiKasan_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kinkyujiHomonkaigoKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_kinkyujiHomonkaigoKasan_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="tokubetsuKanriTaisei" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuKanriTaisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kinoKunrenShidoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kinoKunrenShidoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shokujiTeikyoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nyuyokuKaijoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_nyuyokuKaijoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="tokubetsuNyuyokuKaijoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_tokubetsuNyuyokuKaijoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="joukinsenjuIshiHaichi_umu" column="dbT7063KaigoJigyoshaShiteiService_joukinsenjuIshiHaichi_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ishiHaichiKijun" column="dbT7063KaigoJigyoshaShiteiService_ishiHaichiKijun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="seisinkaIshiTeikitekiRyouyousidou_umu" column="dbT7063KaigoJigyoshaShiteiService_seisinkaIshiTeikitekiRyouyousidou_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="yakanKinmuJokenKijun" column="dbT7063KaigoJigyoshaShiteiService_yakanKinmuJokenKijun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninchishouSenmontou_umu" column="dbT7063KaigoJigyoshaShiteiService_ninchishouSenmontou_umu" />
-        <result property="shokujiTeikyoJokyo" column="dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoJokyo" />
-        <result property="sougeiTaisei" column="dbT7063KaigoJigyoshaShiteiService_sougeiTaisei" />
-        <result property="rehaTeikyoTaisei_SogoRehaShisetsu_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SogoRehaShisetsu_umu" />
-        <result property="rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu" />
-        <result property="rehaTeikyoTaisei_Sonota_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_Sonota_umu" />
-        <result property="rehabilitationKasanJokyo" column="dbT7063KaigoJigyoshaShiteiService_rehabilitationKasanJokyo" />
+        <result property="ninchishouSenmontou_umu" column="dbT7063KaigoJigyoshaShiteiService_ninchishouSenmontou_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shokujiTeikyoJokyo" column="dbT7063KaigoJigyoshaShiteiService_shokujiTeikyoJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="sougeiTaisei" column="dbT7063KaigoJigyoshaShiteiService_sougeiTaisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rehaTeikyoTaisei_SogoRehaShisetsu_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SogoRehaShisetsu_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_SeisinkaSagyouRyoho_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rehaTeikyoTaisei_Sonota_umu" column="dbT7063KaigoJigyoshaShiteiService_rehaTeikyoTaisei_Sonota_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rehabilitationKasanJokyo" column="dbT7063KaigoJigyoshaShiteiService_rehabilitationKasanJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ryoyoKankyoKijun" column="dbT7063KaigoJigyoshaShiteiService_ryoyoKankyoKijun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ishiKetuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_ishiKetuinGenzanJokyo_umu" />
-        <result property="kangoShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kangoShokuinKetsuinGenzanJokyo_umu" />
-        <result property="rigakuRyouhousiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_rigakuRyouhousiKetsuinGenzanJokyo_umu" />
-        <result property="sagyouRyouhousiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_sagyouRyouhousiKetsuinGenzanJokyo_umu" />
-        <result property="kaigoShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoShokuinKetsuinGenzanJokyo_umu" />
-        <result property="kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu" />
-        <result property="kaigoJujishaKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoJujishaKetsuinGenzanJokyo_umu" />
-        <result property="kansenTaisakuSidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_kansenTaisakuSidoKanri_umu" />
-        <result property="jushoHifuKaiyouShidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_jushoHifuKaiyouShidoKanri_umu" />
-        <result property="yakuzaiKaniriShido_umu" column="dbT7063KaigoJigyoshaShiteiService_yakuzaiKaniriShido_umu" />
-        <result property="shogaishaSeikatsuShienTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shogaishaSeikatsuShienTaisei_umu" />
-        <result property="chiikiKubunCode" column="dbT7063KaigoJigyoshaShiteiService_chiikiKubunCode" />
-        <result property="jikanEnchoServiceTaisei" column="dbT7063KaigoJigyoshaShiteiService_jikanEnchoServiceTaisei" />
-        <result property="kobetsuRehabilitationTeikyoTaisei" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehabilitationTeikyoTaisei" />
-        <result property="kyojuhiTaisaku" column="dbT7063KaigoJigyoshaShiteiService_kyojuhiTaisaku" />
-        <result property="yakanCare_umu" column="dbT7063KaigoJigyoshaShiteiService_yakanCare_umu" />
-        <result property="rehabilitationKinoKyoka_umu" column="dbT7063KaigoJigyoshaShiteiService_rehabilitationKinoKyoka_umu" />
-        <result property="kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu" />
-        <result property="gengoChokakushiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_gengoChokakushiKetsuinGenzanJokyo_umu" />
-        <result property="eiyouKanriHyoka" column="dbT7063KaigoJigyoshaShiteiService_eiyouKanriHyoka" />
-        <result property="tokuteijigyoushoKasan_HomonKaigo_umu" column="dbT7063KaigoJigyoshaShiteiService_tokuteijigyoushoKasan_HomonKaigo_umu" />
-        <result property="jakunenseiNinchishoCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoCareTaisei_umu" />
-        <result property="undokiKinoKojoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_undokiKinoKojoTaisei_umu" />
-        <result property="eiyoManagement_KaizenTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_eiyoManagement_KaizenTaisei_umu" />
-        <result property="kokuKinoKojoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kokuKinoKojoTaisei_umu" />
-        <result property="jigyoshoHyokaKasan_Moshide_umu" column="dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Moshide_umu" />
-        <result property="jigyoshoHyokaKasan_Kettei_umu" column="dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Kettei_umu" />
-        <result property="kinkyuUkeireTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kinkyuUkeireTaisei_umu" />
-        <result property="yakanKangoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_yakanKangoTaisei_umu" />
+        <result property="ishiKetuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_ishiKetuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kangoShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kangoShokuinKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rigakuRyouhousiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_rigakuRyouhousiKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="sagyouRyouhousiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_sagyouRyouhousiKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoShokuinKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoJujishaKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_kaigoJujishaKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kansenTaisakuSidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_kansenTaisakuSidoKanri_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jushoHifuKaiyouShidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_jushoHifuKaiyouShidoKanri_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yakuzaiKaniriShido_umu" column="dbT7063KaigoJigyoshaShiteiService_yakuzaiKaniriShido_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shogaishaSeikatsuShienTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shogaishaSeikatsuShienTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chiikiKubunCode" column="dbT7063KaigoJigyoshaShiteiService_chiikiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jikanEnchoServiceTaisei" column="dbT7063KaigoJigyoshaShiteiService_jikanEnchoServiceTaisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kobetsuRehabilitationTeikyoTaisei" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehabilitationTeikyoTaisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kyojuhiTaisaku" column="dbT7063KaigoJigyoshaShiteiService_kyojuhiTaisaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yakanCare_umu" column="dbT7063KaigoJigyoshaShiteiService_yakanCare_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="rehabilitationKinoKyoka_umu" column="dbT7063KaigoJigyoshaShiteiService_rehabilitationKinoKyoka_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="gengoChokakushiKetsuinGenzanJokyo_umu" column="dbT7063KaigoJigyoshaShiteiService_gengoChokakushiKetsuinGenzanJokyo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="eiyouKanriHyoka" column="dbT7063KaigoJigyoshaShiteiService_eiyouKanriHyoka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="tokuteijigyoushoKasan_HomonKaigo_umu" column="dbT7063KaigoJigyoshaShiteiService_tokuteijigyoushoKasan_HomonKaigo_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jakunenseiNinchishoCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoCareTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="undokiKinoKojoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_undokiKinoKojoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="eiyoManagement_KaizenTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_eiyoManagement_KaizenTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kokuKinoKojoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kokuKinoKojoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jigyoshoHyokaKasan_Moshide_umu" column="dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Moshide_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jigyoshoHyokaKasan_Kettei_umu" column="dbT7063KaigoJigyoshaShiteiService_jigyoshoHyokaKasan_Kettei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kinkyuUkeireTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kinkyuUkeireTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yakanKangoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_yakanKangoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="tokuteijigyoshoKasan_Kyotakukaigoshien_umu" column="dbT7063KaigoJigyoshaShiteiService_tokuteijigyoshoKasan_Kyotakukaigoshien_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="kaigoShienSemmoninSenjuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoShienSemmoninSenjuJokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kaigoSienSemmoninSenjuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninSenjuHijokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kaigoSienSemmoninKemmuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuJokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kaigoSienSemmoninKemmuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuHijokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoServiceTeikyoSekininshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoServiceTeikyoSekininshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoSenjuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuJokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoSenjuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuHijokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoKemmuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuJokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoKemmuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuHijokinshaNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="homonkaigoJokinKanzangoNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoJokinKanzangoNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="riyoTeiinNinsu" column="dbT7063KaigoJigyoshaShiteiService_riyoTeiinNinsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="kaigoShienSemmoninSenjuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoShienSemmoninSenjuJokinshaNinsu" />
+        <result property="kaigoSienSemmoninSenjuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninSenjuHijokinshaNinsu" />
+        <result property="kaigoSienSemmoninKemmuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuJokinshaNinsu" />
+        <result property="kaigoSienSemmoninKemmuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_kaigoSienSemmoninKemmuHijokinshaNinsu" />
+        <result property="homonkaigoServiceTeikyoSekininshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoServiceTeikyoSekininshaNinsu" />
+        <result property="homonkaigoSenjuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuJokinshaNinsu" />
+        <result property="homonkaigoSenjuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoSenjuHijokinshaNinsu" />
+        <result property="homonkaigoKemmuJokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuJokinshaNinsu" />
+        <result property="homonkaigoKemmuHijokinshaNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoKemmuHijokinshaNinsu" />
+        <result property="homonkaigoJokinKanzangoNinsu" column="dbT7063KaigoJigyoshaShiteiService_homonkaigoJokinKanzangoNinsu" />
+        <result property="riyoTeiinNinsu" column="dbT7063KaigoJigyoshaShiteiService_riyoTeiinNinsu" />
         <result property="shiteiYukoKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_shiteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shiteiYukoShuryoYMD" column="dbT7063KaigoJigyoshaShiteiService_shiteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shiteiKoshinShinseichuKubun" column="dbT7063KaigoJigyoshaShiteiService_shiteiKoshinShinseichuKubun" />
+        <result property="shiteiKoshinShinseichuKubun" column="dbT7063KaigoJigyoshaShiteiService_shiteiKoshinShinseichuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="koryokuTeishiKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_koryokuTeishiKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="koryokuTeishiShuryoYMD" column="dbT7063KaigoJigyoshaShiteiService_koryokuTeishiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="daikiboJigyoshaGaito_umu" column="dbT7063KaigoJigyoshaShiteiService_daikiboJigyoshaGaito_umu" />
-        <result property="junUnitCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_junUnitCareTaisei_umu" />
-        <result property="judokaTaioTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_judokaTaioTaisei_umu" />
-        <result property="iryoRenkeiTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_iryoRenkeiTaisei_umu" />
-        <result property="unitCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_unitCareTaisei_umu" />
-        <result property="zaitaku_nyushoSogoRiyoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_zaitaku_nyushoSogoRiyoTaisei_umu" />
-        <result property="terminalCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_terminalCareTaisei_umu" />
-        <result property="shintaiKosokuHaishiTorikumi_umu" column="dbT7063KaigoJigyoshaShiteiService_shintaiKosokuHaishiTorikumi_umu" />
-        <result property="shokiboKyotenShugoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shokiboKyotenShugoTaisei_umu" />
-        <result property="ninchishoCareKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_ninchishoCareKasan_umu" />
+        <result property="daikiboJigyoshaGaito_umu" column="dbT7063KaigoJigyoshaShiteiService_daikiboJigyoshaGaito_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="junUnitCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_junUnitCareTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="judokaTaioTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_judokaTaioTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="iryoRenkeiTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_iryoRenkeiTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="unitCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_unitCareTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zaitaku_nyushoSogoRiyoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_zaitaku_nyushoSogoRiyoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="terminalCareTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_terminalCareTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shintaiKosokuHaishiTorikumi_umu" column="dbT7063KaigoJigyoshaShiteiService_shintaiKosokuHaishiTorikumi_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shokiboKyotenShugoTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_shokiboKyotenShugoTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoCareKasan_umu" column="dbT7063KaigoJigyoshaShiteiService_ninchishoCareKasan_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kobetsuKinoKunrenTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuKinoKunrenTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="kobetsuRehaTeikyoTaisei_SagyoRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SagyoRyoho_umu" />
-        <result property="kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu" />
-        <result property="kobetsuRehaTeikyoTaisei_Sonota_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_Sonota_umu" />
-        <result property="setsubiKijun" column="dbT7063KaigoJigyoshaShiteiService_setsubiKijun" />
-        <result property="ryoyoTaiseiIjiTokubetsuKasan" column="dbT7063KaigoJigyoshaShiteiService_ryoyoTaiseiIjiTokubetsuKasan" />
-        <result property="kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu" />
-        <result property="sankyuHelperTaisei" column="dbT7063KaigoJigyoshaShiteiService_sankyuHelperTaisei" />
-        <result property="chuSankanChiikiShokiboJigyoshoKasan_chiiki" column="dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoshoKasan_chiiki" />
-        <result property="chuSankanChiikiShokiboJigyoushoKasan_kibo" column="dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoushoKasan_kibo" />
+        <result property="kobetsuRehaTeikyoTaisei_SagyoRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_SagyoRyoho_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kobetsuRehaTeikyoTaisei_Sonota_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_Sonota_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="setsubiKijun" column="dbT7063KaigoJigyoshaShiteiService_setsubiKijun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ryoyoTaiseiIjiTokubetsuKasan" column="dbT7063KaigoJigyoshaShiteiService_ryoyoTaiseiIjiTokubetsuKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu" column="dbT7063KaigoJigyoshaShiteiService_kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="sankyuHelperTaisei" column="dbT7063KaigoJigyoshaShiteiService_sankyuHelperTaisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chuSankanChiikiShokiboJigyoshoKasan_chiiki" column="dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoshoKasan_chiiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="chuSankanChiikiShokiboJigyoushoKasan_kibo" column="dbT7063KaigoJigyoshaShiteiService_chuSankanChiikiShokiboJigyoushoKasan_kibo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="serviceTeikyoTaiseiKyokaKasan" column="dbT7063KaigoJigyoshaShiteiService_serviceTeikyoTaiseiKyokaKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninchishoTankiShuchuRehabilitationKasan" column="dbT7063KaigoJigyoshaShiteiService_ninchishoTankiShuchuRehabilitationKasan" />
-        <result property="jakunenseiNinchishoRiyoushaUkeeireKasan" column="dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoRiyoushaUkeeireKasan" />
-        <result property="kangoTaiseiKasan" column="dbT7063KaigoJigyoshaShiteiService_kangoTaiseiKasan" />
-        <result property="yakinShokuinHaichiKasan" column="dbT7063KaigoJigyoshaShiteiService_yakinShokuinHaichiKasan" />
-        <result property="ryoyoShokuKasan" column="dbT7063KaigoJigyoshaShiteiService_ryoyoShokuKasan" />
-        <result property="nichijoSeikatsuKeizokuShienKasan" column="dbT7063KaigoJigyoshaShiteiService_nichijoSeikatsuKeizokuShienKasan" />
-        <result property="ninchishoSemmonCareKasan" column="dbT7063KaigoJigyoshaShiteiService_ninchishoSemmonCareKasan" />
-        <result property="kangoShokuinHaichiKasan" column="dbT7063KaigoJigyoshaShiteiService_kangoShokuinHaichiKasan" />
-        <result property="yakanCareKasan" column="dbT7063KaigoJigyoshaShiteiService_yakanCareKasan" />
-        <result property="shudanCommunicationRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_shudanCommunicationRyoho_umu" />
-        <result property="serviceTeikyoTaiseiKyokaKasan_Karadokogata" column="dbT7063KaigoJigyoshaShiteiService_serviceTeikyoTaiseiKyokaKasan_Karadokogata" />
-        <result property="serviceTeikyoSekininshaTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_serviceTeikyoSekininshaTaisei_umu" />
-        <result property="doitsuTatemonoKyojuRiyoshaGenzan_umu" column="dbT7063KaigoJigyoshaShiteiService_doitsuTatemonoKyojuRiyoshaGenzan_umu" />
-        <result property="kinkyuTankiNyushoTaiseiKakuhoKasan" column="dbT7063KaigoJigyoshaShiteiService_kinkyuTankiNyushoTaiseiKakuhoKasan" />
-        <result property="zaitakuFukki_ZaitakuRyoyoShienKinoKasan" column="dbT7063KaigoJigyoshaShiteiService_zaitakuFukki_ZaitakuRyoyoShienKinoKasan" />
-        <result property="seikatuKinoKojoGroupKatsudoKasan" column="dbT7063KaigoJigyoshaShiteiService_seikatuKinoKojoGroupKatsudoKasan" />
-        <result property="kaigoShokuinShoguKaizenKasan" column="dbT7063KaigoJigyoshaShiteiService_kaigoShokuinShoguKaizenKasan" />
+        <result property="ninchishoTankiShuchuRehabilitationKasan" column="dbT7063KaigoJigyoshaShiteiService_ninchishoTankiShuchuRehabilitationKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="jakunenseiNinchishoRiyoushaUkeeireKasan" column="dbT7063KaigoJigyoshaShiteiService_jakunenseiNinchishoRiyoushaUkeeireKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kangoTaiseiKasan" column="dbT7063KaigoJigyoshaShiteiService_kangoTaiseiKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yakinShokuinHaichiKasan" column="dbT7063KaigoJigyoshaShiteiService_yakinShokuinHaichiKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ryoyoShokuKasan" column="dbT7063KaigoJigyoshaShiteiService_ryoyoShokuKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nichijoSeikatsuKeizokuShienKasan" column="dbT7063KaigoJigyoshaShiteiService_nichijoSeikatsuKeizokuShienKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoSemmonCareKasan" column="dbT7063KaigoJigyoshaShiteiService_ninchishoSemmonCareKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kangoShokuinHaichiKasan" column="dbT7063KaigoJigyoshaShiteiService_kangoShokuinHaichiKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yakanCareKasan" column="dbT7063KaigoJigyoshaShiteiService_yakanCareKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shudanCommunicationRyoho_umu" column="dbT7063KaigoJigyoshaShiteiService_shudanCommunicationRyoho_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="serviceTeikyoTaiseiKyokaKasan_Karadokogata" column="dbT7063KaigoJigyoshaShiteiService_serviceTeikyoTaiseiKyokaKasan_Karadokogata" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="serviceTeikyoSekininshaTaisei_umu" column="dbT7063KaigoJigyoshaShiteiService_serviceTeikyoSekininshaTaisei_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="doitsuTatemonoKyojuRiyoshaGenzan_umu" column="dbT7063KaigoJigyoshaShiteiService_doitsuTatemonoKyojuRiyoshaGenzan_umu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kinkyuTankiNyushoTaiseiKakuhoKasan" column="dbT7063KaigoJigyoshaShiteiService_kinkyuTankiNyushoTaiseiKakuhoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zaitakuFukki_ZaitakuRyoyoShienKinoKasan" column="dbT7063KaigoJigyoshaShiteiService_zaitakuFukki_ZaitakuRyoyoShienKinoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="seikatuKinoKojoGroupKatsudoKasan" column="dbT7063KaigoJigyoshaShiteiService_seikatuKinoKojoGroupKatsudoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="kaigoShokuinShoguKaizenKasan" column="dbT7063KaigoJigyoshaShiteiService_kaigoShokuinShoguKaizenKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="resultMap_DbT7063KaigoJigyoshaShiteiServiceEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity">
         SELECT
         <include refid="allColumns_DbT7063KaigoJigyoshaShiteiService"/>
         FROM

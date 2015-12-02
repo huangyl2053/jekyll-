@@ -31,7 +31,6 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7063KaigoJigyoshaShiteiService");
-    private static final long serialVersionUID = -9143801098276403915L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -1258,7 +1257,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * リハビリテーション提供体制（総合リハビリテーション施設）の有無のsetメソッドです。
      *
-     * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu リハビリテーション提供体制（総合リハビリテーション施設）の有無
+     * @param rehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
     public void setRehaTeikyoTaisei_SogoRehaShisetsu_umu(Code rehaTeikyoTaisei_SogoRehaShisetsu_umu) {
         this.rehaTeikyoTaisei_SogoRehaShisetsu_umu = rehaTeikyoTaisei_SogoRehaShisetsu_umu;
@@ -1505,7 +1505,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 介護支援専門員の欠員による減算の状況の有無のsetメソッドです。
      *
-     * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu 介護支援専門員の欠員による減算の状況の有無
+     * @param kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu
+     * 介護支援専門員の欠員による減算の状況の有無
      */
     public void setKaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu(Code kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu) {
         this.kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu = kaigoSienSenmoninShokuinKetsuinGenzanJokyo_umu;
@@ -1733,7 +1734,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無
+     * @param kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu
+     * 個別リハビリテーション提供体制（総合リハビリテーション施設）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu(Code kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu) {
         this.kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu = kobetsuRehaTeikyoTaisei_SogoRehaShisetsu_umu;
@@ -1752,7 +1754,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無1
      */
     public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1(Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1 = kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu1;
@@ -1771,7 +1774,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅲ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu 個別リハビリテーション提供体制（理学療法Ⅲ）の有無
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu
+     * 個別リハビリテーション提供体制（理学療法Ⅲ）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu(Code kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu = kobetsuRehaTeikyoTaisei_RigakuRyohoIII_umu;
@@ -1809,7 +1813,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅰ）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyohoI_umu;
@@ -1828,7 +1833,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法Ⅱ）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyohoII_umu;
@@ -2607,7 +2613,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2
+     * @param kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2
+     * 個別リハビリテーション提供体制（理学療法Ⅱ）の有無2
      */
     public void setKobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2(Code kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2) {
         this.kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2 = kobetsuRehaTeikyoTaisei_RigakuRyohoII_umu2;
@@ -2645,7 +2652,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（言語聴覚療法）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu 個別リハビリテーション提供体制（言語聴覚療法）の有無
+     * @param kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu
+     * 個別リハビリテーション提供体制（言語聴覚療法）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu(Code kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu) {
         this.kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu = kobetsuRehaTeikyoTaisei_GengoChokakuRyoho_umu;
@@ -2721,7 +2729,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無のsetメソッドです。
      *
-     * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無
+     * @param kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu
+     * 個別リハビリテーション提供体制（リハビリテーション指導管理）の有無
      */
     public void setKobetsuRehaTeikyoTaisei_RehaShidoKanri_umu(Code kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu) {
         this.kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu = kobetsuRehaTeikyoTaisei_RehaShidoKanri_umu;
@@ -2759,7 +2768,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 中山間地域等における小規模事業所加算（地域に関する状況）のsetメソッドです。
      *
-     * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki 中山間地域等における小規模事業所加算（地域に関する状況）
+     * @param chuSankanChiikiShokiboJigyoshoKasan_chiiki
+     * 中山間地域等における小規模事業所加算（地域に関する状況）
      */
     public void setChuSankanChiikiShokiboJigyoshoKasan_chiiki(Code chuSankanChiikiShokiboJigyoshoKasan_chiiki) {
         this.chuSankanChiikiShokiboJigyoshoKasan_chiiki = chuSankanChiikiShokiboJigyoshoKasan_chiiki;
@@ -2778,7 +2788,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceEntity extends DbTableEntityBase<D
     /**
      * 中山間地域等における小規模事業所加算（規模に関する状況）のsetメソッドです。
      *
-     * @param chuSankanChiikiShokiboJigyoushoKasan_kibo 中山間地域等における小規模事業所加算（規模に関する状況）
+     * @param chuSankanChiikiShokiboJigyoushoKasan_kibo
+     * 中山間地域等における小規模事業所加算（規模に関する状況）
      */
     public void setChuSankanChiikiShokiboJigyoushoKasan_kibo(Code chuSankanChiikiShokiboJigyoushoKasan_kibo) {
         this.chuSankanChiikiShokiboJigyoushoKasan_kibo = chuSankanChiikiShokiboJigyoushoKasan_kibo;

@@ -28,7 +28,6 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7060KaigoJigyosha");
-    private static final long serialVersionUID = 8286598893672680244L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -684,7 +683,8 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
      * このエンティティの主キーが他の{@literal DbT7060KaigoJigyoshaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7060KaigoJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7060KaigoJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7060KaigoJigyoshaEntity other) {
