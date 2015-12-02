@@ -38,5 +38,11 @@
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbe</groupId>
+            <artifactId>DbeEntity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
