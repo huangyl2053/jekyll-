@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査委託先情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.tyousai.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper">
+
+    <select id="select認定調査委託先情報ByKey" resultMap="resultMap_NinteichosaItakusakiJohoEntity"  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoMapperParameter" fetchSize="500">
+        <include refid="selectNinteichosaItakusakiJohoEntity" />
+    </select>
+
+    <select id="select認定調査委託先情報リストBy主キー1" resultMap="resultMap_NinteichosaItakusakiJohoEntity"  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoMapperParameter" fetchSize="500">
+        <include refid="selectNinteichosaItakusakiJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectNinteichosaItakusakiJohoEntity">
+        SELECT
+            DbT5910NinteichosaItakusakiJoho.*,
+            DbT5913ChosainJoho.*
+        FROM
+        ( 
+        SELECT 
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
+        FROM rgdb."DbT5910NinteichosaItakusakiJoho" ) AS DbT5910NinteichosaItakusakiJoho
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
+        FROM rgdb."DbT5913ChosainJoho" ) AS DbT5913ChosainJoho
+        ON
+        DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"
+        AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" = DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode"
+        <where>
+            1 = 1
+            <if test="usesShichosonCode">
+                AND "dbT5910NinteichosaItakusakiJoho_shichosonCode" = #{shichosonCode}
+            </if>
+            <if test="usesNinteichosaItakusakiCode">
+                AND "dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+            </if> 
+          </where>
+
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity" autoMapping="true">
+        <id property="認定調査委託先情報Entity.shichosonCode" column="dbT5910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="認定調査委託先情報Entity.ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
+    </resultMap>
+
+</mapper>

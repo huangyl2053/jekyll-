@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -17,12 +16,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 調査員情報を管理するクラスです。
  */
 public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913ChosainJohoEntity, ChosainJoho> implements Serializable {
+
+    private static final long serialVersionUID = 1471570426779306781L;
 
     private final DbT5913ChosainJohoEntity entity;
     private final ChosainJohoIdentifier id;
@@ -236,7 +238,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 調査員情報のみを変更対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査員情報のみを変更対象とします。<br/>
+     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosainJoho}
      */
@@ -250,7 +253,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 保持する調査員情報を削除対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査員情報を削除対象とします。<br/>
+     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosainJoho}
      */
@@ -260,7 +264,6 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ChosainJoho(deletedEntity, id);
@@ -283,6 +286,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
 
     private static final class _SerializationProxy implements Serializable {
 
+        private static final long serialVersionUID = 1471570426779306781L;
         private final DbT5913ChosainJohoEntity entity;
         private final ChosainJohoIdentifier id;
 
@@ -309,7 +313,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -322,10 +326,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
             return false;
         }
         final ChosainJoho other = (ChosainJoho) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
 }
