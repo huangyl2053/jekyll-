@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 認定調査スケジュールメモ情報テーブルのエンティティクラスです。
  */
 public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5222NinteiChosaScheduleMemoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5222NinteiChosaScheduleMemo");
 
@@ -30,7 +32,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
     @PrimaryKey
     private FlexibleDate memoYMD;
     @PrimaryKey
-    private Code chosaChikuCode;
+    private Code chosachikucode;
     @PrimaryKey
     private Code memoKubun;
     @PrimaryKey
@@ -100,7 +102,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @param memoYMD メモ年月日
      */
-    public void setMemoYMD(FlexibleDate memoYMD) {
+    public void setMemoYMD(@Nonnull FlexibleDate memoYMD) {
         this.memoYMD = memoYMD;
     }
 
@@ -109,17 +111,17 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @return 調査地区コード
      */
-    public Code getChosaChikuCode() {
-        return chosaChikuCode;
+    public Code getChosachikucode() {
+        return chosachikucode;
     }
 
     /**
      * 調査地区コードのsetメソッドです。
      * 
-     * @param chosaChikuCode 調査地区コード
+     * @param chosachikucode 調査地区コード
      */
-    public void setChosaChikuCode(Code chosaChikuCode) {
-        this.chosaChikuCode = chosaChikuCode;
+    public void setChosachikucode(@Nonnull Code chosachikucode) {
+        this.chosachikucode = chosachikucode;
     }
 
     /**
@@ -136,7 +138,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @param memoKubun メモ区分
      */
-    public void setMemoKubun(Code memoKubun) {
+    public void setMemoKubun(@Nonnull Code memoKubun) {
         this.memoKubun = memoKubun;
     }
 
@@ -154,7 +156,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @param remban 連番
      */
-    public void setRemban(int remban) {
+    public void setRemban(@Nonnull int remban) {
         this.remban = remban;
     }
 
@@ -165,6 +167,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @return メモ指定調査地区コード
      */
+    @CheckForNull
     public Code getMemoShiteiChosaChikuCode() {
         return memoShiteiChosaChikuCode;
     }
@@ -185,6 +188,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @return 作成者
      */
+    @CheckForNull
     public RString getSakuseisha() {
         return sakuseisha;
     }
@@ -199,20 +203,20 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * メモ重要度のgetメソッドです。
+     * memoPriorityのgetメソッドです。
      * 
-     * @return メモ重要度
+     * @return memoPriority
      */
     public Code getMemoPriority() {
         return memoPriority;
     }
 
     /**
-     * メモ重要度のsetメソッドです。
+     * memoPriorityのsetメソッドです。
      * 
-     * @param memoPriority メモ重要度
+     * @param memoPriority memoPriority
      */
-    public void setMemoPriority(Code memoPriority) {
+    public void setMemoPriority(@Nonnull Code memoPriority) {
         this.memoPriority = memoPriority;
     }
 
@@ -221,6 +225,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * 
      * @return メモ内容
      */
+    @CheckForNull
     public RString getMemoNaiyo() {
         return memoNaiyo;
     }
@@ -238,7 +243,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      * このエンティティの主キーが他の{@literal DbT5222NinteiChosaScheduleMemoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5222NinteiChosaScheduleMemoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -249,7 +254,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
         if (!Objects.equals(this.memoYMD, other.memoYMD)) {
             return false;
         }
-        if (!Objects.equals(this.chosaChikuCode, other.chosaChikuCode)) {
+        if (!Objects.equals(this.chosachikucode, other.chosachikucode)) {
             return false;
         }
         if (!Objects.equals(this.memoKubun, other.memoKubun)) {
@@ -267,7 +272,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
     @Override
     public void shallowCopy(DbT5222NinteiChosaScheduleMemoEntity entity) {
         this.memoYMD = entity.memoYMD;
-        this.chosaChikuCode = entity.chosaChikuCode;
+        this.chosachikucode = entity.chosachikucode;
         this.memoKubun = entity.memoKubun;
         this.remban = entity.remban;
         this.memoShiteiChosaChikuCode = entity.memoShiteiChosaChikuCode;
@@ -282,7 +287,7 @@ public class DbT5222NinteiChosaScheduleMemoEntity extends DbTableEntityBase<DbT5
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(memoYMD, chosaChikuCode, memoKubun, remban, memoShiteiChosaChikuCode, sakuseisha, memoPriority, memoNaiyo);
+        return super.toMd5(memoYMD, chosachikucode, memoKubun, remban, memoShiteiChosaChikuCode, sakuseisha, memoPriority, memoNaiyo);
     }
 
 // </editor-fold>

@@ -1,8 +1,8 @@
 ﻿memoYMD,UDD015YMD,FlexibleDate,,,,,メモ年月日,A
-chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
+chosachikucode,UDD035Code,Code,,,,,調査地区コード,A
 memoKubun,UDD035Code,Code,,,,,メモ区分,A
 remban,int2,int,,,,,連番,A
 memoShiteiChosaChikuCode,UDD035Code,Code,,,,,メモ指定調査地区コード,A
 sakuseisha,varchar,RString,,,,,作成者,A
-memoPriority,UDD035Code,Code,,,,,メモ重要度,A
+memoPriority,UDD035Code,Code,,,,,memoPriority,A
 memoNaiyo,text,RString,,,,,メモ内容,A
