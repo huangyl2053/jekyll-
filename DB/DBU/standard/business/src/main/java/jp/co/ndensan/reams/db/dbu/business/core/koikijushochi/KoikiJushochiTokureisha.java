@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.business.DBUMN00000;
+package jp.co.ndensan.reams.db.dbu.business.core.koikijushochi;
 
 import jp.co.ndensan.reams.db.dbu.business.loiki.KoikiJushochiTokureishaEnum;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.IBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -27,8 +26,7 @@ public class KoikiJushochiTokureisha {
     public KoikinaiJutokuTaishoshaSql getShikibetsuCodeSql(LasdecCode 市町村コード) {
         //requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         SubGyomuCode subGyomuCd = ControlDataHolder.getSubGyomuCD();
-        IBusinessConfig businessConfig = BusinessConfigFactory.createInstance();
-        RString value = businessConfig.get(KoikiJushochiTokureishaEnum.広域内住所地特例者検索制御_措置元_措置先区分_介護共通, subGyomuCd);
+        RString value = BusinessConfig.get(KoikiJushochiTokureishaEnum.広域内住所地特例者検索制御_措置元_措置先区分_介護共通, subGyomuCd.DBU介護統計報告);
 
         StringBuffer sb1 = new StringBuffer("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\"");
         sb1.append("FROM rgdb.\"DbT1001HihokenshaDaicho\" DbT1001HihokenshaDaicho,");
