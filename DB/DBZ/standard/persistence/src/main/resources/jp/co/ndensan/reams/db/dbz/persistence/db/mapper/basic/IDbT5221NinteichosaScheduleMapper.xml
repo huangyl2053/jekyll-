@@ -5,45 +5,45 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5221NinteichosaSchedule">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule" />
-     FROM
-         rg."DbT5221NinteichosaSchedule"
-     WHERE
-         rg."DbT5221NinteichosaSchedule"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule" />
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"
+        WHERE
+        rgdb."DbT5221NinteichosaSchedule"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5221NinteichosaSchedule">
-         "DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD",
-         "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime",
-         "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime",
-         "DbT5221NinteichosaSchedule"."ninteiChosaJikanWaku" as "dbT5221NinteichosaSchedule_ninteiChosaJikanWaku",
-         "DbT5221NinteichosaSchedule"."chosaChikuCode" as "dbT5221NinteichosaSchedule_chosaChikuCode",
-         "DbT5221NinteichosaSchedule"."ninteichosaItakusakiCode" as "dbT5221NinteichosaSchedule_ninteichosaItakusakiCode",
-         "DbT5221NinteichosaSchedule"."ninteiChosainNo" as "dbT5221NinteichosaSchedule_ninteiChosainNo",
-         "DbT5221NinteichosaSchedule"."shichosonCode" as "dbT5221NinteichosaSchedule_shichosonCode",
-         "DbT5221NinteichosaSchedule"."insertDantaiCd" as "dbT5221NinteichosaSchedule_insertDantaiCd",
-         "DbT5221NinteichosaSchedule"."insertTimestamp" as "dbT5221NinteichosaSchedule_insertTimestamp",
-         "DbT5221NinteichosaSchedule"."insertReamsLoginId" as "dbT5221NinteichosaSchedule_insertReamsLoginId",
-         "DbT5221NinteichosaSchedule"."insertContextId" as "dbT5221NinteichosaSchedule_insertContextId",
-         "DbT5221NinteichosaSchedule"."isDeleted" as "dbT5221NinteichosaSchedule_isDeleted",
-         "DbT5221NinteichosaSchedule"."updateCount" as "dbT5221NinteichosaSchedule_updateCount",
-         "DbT5221NinteichosaSchedule"."lastUpdateTimestamp" as "dbT5221NinteichosaSchedule_lastUpdateTimestamp",
-         "DbT5221NinteichosaSchedule"."lastUpdateReamsLoginId" as "dbT5221NinteichosaSchedule_lastUpdateReamsLoginId",
-         "DbT5221NinteichosaSchedule"."shinseishoKanriNo" as "dbT5221NinteichosaSchedule_shinseishoKanriNo",
-         "DbT5221NinteichosaSchedule"."yoyakuJokyo" as "dbT5221NinteichosaSchedule_yoyakuJokyo",
-         "DbT5221NinteichosaSchedule"."yoyakuKaoFlag" as "dbT5221NinteichosaSchedule_yoyakuKaoFlag",
-         "DbT5221NinteichosaSchedule"."biko" as "dbT5221NinteichosaSchedule_biko",
-         "DbT5221NinteichosaSchedule"."basho" as "dbT5221NinteichosaSchedule_basho",
-         "DbT5221NinteichosaSchedule"."chushajo" as "dbT5221NinteichosaSchedule_chushajo",
-         "DbT5221NinteichosaSchedule"."tachiainin1" as "dbT5221NinteichosaSchedule_tachiainin1",
-         "DbT5221NinteichosaSchedule"."renrakusaki1" as "dbT5221NinteichosaSchedule_renrakusaki1",
-         "DbT5221NinteichosaSchedule"."tachiainin2" as "dbT5221NinteichosaSchedule_tachiainin2",
-         "DbT5221NinteichosaSchedule"."renrakusaki2" as "dbT5221NinteichosaSchedule_renrakusaki2",
-         "DbT5221NinteichosaSchedule"."taishoshaMemo" as "dbT5221NinteichosaSchedule_taishoshaMemo"
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiYMD" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD",
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiKaishiTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime",
+        "DbT5221NinteichosaSchedule"."ninteiChosaYoteiShuryoTime" as "dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime",
+        "DbT5221NinteichosaSchedule"."ninteiChosaJikanWaku" as "dbT5221NinteichosaSchedule_ninteiChosaJikanWaku",
+        "DbT5221NinteichosaSchedule"."chosaChikuCode" as "dbT5221NinteichosaSchedule_chosaChikuCode",
+        "DbT5221NinteichosaSchedule"."ninteichosaItakusakiCode" as "dbT5221NinteichosaSchedule_ninteichosaItakusakiCode",
+        "DbT5221NinteichosaSchedule"."ninteiChosainNo" as "dbT5221NinteichosaSchedule_ninteiChosainNo",
+        "DbT5221NinteichosaSchedule"."shichosonCode" as "dbT5221NinteichosaSchedule_shichosonCode",
+        "DbT5221NinteichosaSchedule"."insertDantaiCd" as "dbT5221NinteichosaSchedule_insertDantaiCd",
+        "DbT5221NinteichosaSchedule"."insertTimestamp" as "dbT5221NinteichosaSchedule_insertTimestamp",
+        "DbT5221NinteichosaSchedule"."insertReamsLoginId" as "dbT5221NinteichosaSchedule_insertReamsLoginId",
+        "DbT5221NinteichosaSchedule"."insertContextId" as "dbT5221NinteichosaSchedule_insertContextId",
+        "DbT5221NinteichosaSchedule"."isDeleted" as "dbT5221NinteichosaSchedule_isDeleted",
+        "DbT5221NinteichosaSchedule"."updateCount" as "dbT5221NinteichosaSchedule_updateCount",
+        "DbT5221NinteichosaSchedule"."lastUpdateTimestamp" as "dbT5221NinteichosaSchedule_lastUpdateTimestamp",
+        "DbT5221NinteichosaSchedule"."lastUpdateReamsLoginId" as "dbT5221NinteichosaSchedule_lastUpdateReamsLoginId",
+        "DbT5221NinteichosaSchedule"."shinseishoKanriNo" as "dbT5221NinteichosaSchedule_shinseishoKanriNo",
+        "DbT5221NinteichosaSchedule"."yoyakuJokyo" as "dbT5221NinteichosaSchedule_yoyakuJokyo",
+        "DbT5221NinteichosaSchedule"."yoyakuKaoFlag" as "dbT5221NinteichosaSchedule_yoyakuKaoFlag",
+        "DbT5221NinteichosaSchedule"."biko" as "dbT5221NinteichosaSchedule_biko",
+        "DbT5221NinteichosaSchedule"."basho" as "dbT5221NinteichosaSchedule_basho",
+        "DbT5221NinteichosaSchedule"."chushajo" as "dbT5221NinteichosaSchedule_chushajo",
+        "DbT5221NinteichosaSchedule"."tachiainin1" as "dbT5221NinteichosaSchedule_tachiainin1",
+        "DbT5221NinteichosaSchedule"."renrakusaki1" as "dbT5221NinteichosaSchedule_renrakusaki1",
+        "DbT5221NinteichosaSchedule"."tachiainin2" as "dbT5221NinteichosaSchedule_tachiainin2",
+        "DbT5221NinteichosaSchedule"."renrakusaki2" as "dbT5221NinteichosaSchedule_renrakusaki2",
+        "DbT5221NinteichosaSchedule"."taishoshaMemo" as "dbT5221NinteichosaSchedule_taishoshaMemo"
     </sql>
 
 
@@ -77,11 +77,49 @@
         <result property="renrakusaki2" column="dbT5221NinteichosaSchedule_renrakusaki2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="taishoshaMemo" column="dbT5221NinteichosaSchedule_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
-    SELECT
-    <include refid="allColumns_DbT5221NinteichosaSchedule">
-         FROM
-         rg."DbT5221NinteichosaSchedule"
-    </include>  
-</sleect>
+    <sleect id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
+        SELECT
+        <include refid="allColumns_DbT5221NinteichosaSchedule">
+            FROM
+            rgdb."DbT5221NinteichosaSchedule"
+        </include>
+    </sleect>
+
+    <!--認定調査スケジュール情報取得する-->
+    <select id="getCount" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" resultType="int">
+        SELECT
+        count(0)
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"
+        WHERE
+        "ninteiChosaYoteiYMD" = #{認定調査予定年月日} AND
+        "chosaChikuCode" = #{調査地区コード} AND
+        "ninteiChosaItakusakiCode" = #{認定調査委託先コード} AND
+        "ninteiChosainCode" = #{認定調査員コード} AND
+        "shichosonCode" = #{市町村コード}
+    </select>
+
+    <!--認定調査予定情報削除する-->
+    <delete id="getDelete" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" >
+        DELETE
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"
+        WHERE
+        "ninteiChosaYoteiYMD" = #{認定調査予定年月日} AND
+        "chosaChikuCode" = #{調査地区コード} AND
+        "ninteiChosaItakusakiCode" = #{認定調査委託先コード} AND
+        "ninteiChosainCode" = #{認定調査員コード} AND
+        "shichosonCode" = #{市町村コード}
+    </delete>
+
+    <!--認定調査スケジュール情報インサート処理-->
+    <insert id="getInsert" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" >
+        INSERT INTO
+        rgdb."DbT5221NinteichosaSchedule"("ninteiChosaYoteiYMD","ninteiChosaYoteiKaishiTime","ninteiChosaYoteiShuryoTime","ninteiChosaJikanWaku",
+        "chosaChikuCode","ninteiChosaItakusakiCode","ninteiChosainCode","shichosonCode","shinseishoKanriNo","yoyakuJokyo","yoyakuKaoFlag",
+        "biko","basho","chushajo","tachiainin1","renrakusaki1","tachiainin2","renrakusaki2","taishoshaMemo")
+        VALUES(
+        #{認定調査予定年月日},#{認定調査予定開始時間},#{認定調査予定終了時間},#{認定調査時間枠},#{調査地区コード},#{認定調査委託先コード},#{認定調査員コード},
+        #{市町村コード},#{" "},#{0},#{0},#{" "},#{" "},#{" "},#{" "},#{" "},#{" "},#{" "},#{" "})
+    </insert>
 </mapper>

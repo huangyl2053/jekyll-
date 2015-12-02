@@ -5,9 +5,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.shichosonselector.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.dgShichoson_Row;
 import jp.co.ndensan.reams.db.dba.service.ShichosonSentakuFinder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,11 +80,15 @@ public class ShichosonSelector {
     public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         ShichosonSelectorModel model = new ShichosonSelectorModel();
-        if (!div.getDgShichoson().getSelectedItems().isEmpty()) {
-            model.setShichosonCode(div.getDgShichoson().getSelectedItems().get(0).getTxtShichosonCode());
-            model.setShichosonName(div.getDgShichoson().getSelectedItems().get(0).getTxtShichosonName());
-            div.setKyuShichoson(DataPassingConverter.serialize(model));
+        List<DbT7051KoseiShichosonMasterEntity> list = new ArrayList();
+        for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
+            DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
+            entity.setShichosonCode(new LasdecCode(row.getTxtShichosonCode()));
+            entity.setShichosonMeisho(row.getTxtShichosonName());
+            list.add(entity);
         }
+        model.setList(list);
+        div.setKyuShichoson(DataPassingConverter.serialize(model));
         response.data = div;
         return response;
     }
@@ -102,5 +108,4 @@ public class ShichosonSelector {
     private ShichosonSelectorHandler getHandler(ShichosonSelectorDiv div) {
         return new ShichosonSelectorHandler(div);
     }
-
 }

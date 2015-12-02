@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.konicho.IKoNiChoRelateMapper">
+    
+    <resultMap id="ResultMap_KoNiChoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.konicho.KoNiChoRelateEntity" autoMapping="true">
+        <id property="ninteiChosainNo" column="DbT5913_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.ChosainCodeTypeHandler" />
+        <id property="shichosonCode" column="DbT5913_shichosonCode" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.LasdecCodeTypeHandler" />
+        <id property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.RStringTypeHandler" />
+        <id property="ninteiChosainNo" column="DbT5913_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandlers.ChosainCodeTypeHandler" />
+        <result property="chosainShimei" column="DbT5913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainKanaShimei" column="DbT5913_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteichosaItakusakiCode" column="DbT5910_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seibets" column="DbT5913_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chikuCode" column="DbT5913_chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShikaku" column="DbT5913_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosaKanoNinzuPerMonth" column="DbT5913_chosaKanoNinzuPerMonth" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.IntegerTypeHandler" />
+        <result property="jokyoFlag" column="DbT5913_jokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.BooleanTypeHandler" />
+        <result property="yubinNo" column="DbT5913_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="jusho" column="DbT5913_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="telNo" column="DbT5913_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="faxNo" column="DbT5913_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+   </resultMap>
+   
+<!--認定調査員一覧の該当情報を取得します。-->
+    <select id="getKoNiChoRelateEntity"
+            resultMap="ResultMap_KoNiChoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelateMapperParameter" fetchSize="500">
+     SELECT								
+	DbT5913."shichosonCode"    AS "DbT5913_shichosonCode",							
+	DbT7051."shichosonMeisho"  AS "DbT7051_shichosonMeisho",							
+	DbT5913."ninteiChosainNo"  AS "DbT5913_ninteiChosainNo",							
+        DbT5913."chosainShimei"    AS "DbT5913_chosainShimei",								
+	DbT5913."chosainKanaShimei"AS "DbT5913_chosainKanaShimei",							
+	DbT5910."ninteichosaItakusakiCode"  AS "DbT5910_ninteichosaItakusakiCode",							
+	DbT5910."jigyoshaMeisho"   AS "DbT5910_jigyoshaMeisho",	
+	DbT5913.seibetsu           AS "DbT5913_seibetsu",
+	DbT5913."chikuCode"        AS "DbT5913_chikuCode",
+	DbT5913."chosainShikaku"   AS "DbT5913_chosainShikaku",
+	DbT5913."chosaKanoNinzuPerMonth" AS "DbT5913_chosaKanoNinzuPerMonth",
+	DbT5913."jokyoFlag"        AS "DbT5913_jokyoFlag",
+	DbT5913."yubinNo"          AS "DbT5913_yubinNo",
+	DbT5913.jusho              AS "DbT5913_jusho",
+	DbT5913."telNo"            AS "DbT5913_telNo",
+	DbT5913."faxNo"            AS "DbT5913_faxNo"
+    FROM								
+	                  rgdb."DbT5913ChosainJoho"   AS  DbT5913							
+     INNER JOIN    rgdb."DbT7051KoseiShichosonMaster" AS  DbT7051							
+     ON     
+        DbT7051."shichosonCode" = DbT5913."shichosonCode"						
+     INNER JOIN     rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910	  						
+      ON  
+        t3."shichosonCode" = DbT5913."shichosonCode"						
+	AND t3."ninteichosaItakusakiCode" = DbT5913."ninteichosaItakusakiCode"
+     where          
+            1 = 1
+            <if test="jokyoflag1" >
+               AND
+                   DbT5913."jokyoFlag" = True
+            </if>
+           <if test = "jokyoflag2">
+               AND 
+                  DbT5913."jokyoFlag" = False
+           </if>
+           <if test = "shichosonCodeflag">
+               AND 
+                    DbT5913."shichosonCode"  =   #{shichosonCode}
+           </if>
+           <if test = "ninteichosaItakusakiCodeflagFrom ">
+               AND 
+                    DbT5913."ninteichosaItakusakiCode"  <![CDATA[>=]]> #{ninteichosaItakusakiCodeFrom}
+            </if>
+            <if test = "ninteichosaItakusakiCodeflagTo  ">
+               AND 
+                    DbT5913."ninteichosaItakusakiCode"  <![CDATA[>=]]> #{(ninteichosaItakusakiCodeTo}
+            </if>
+            
+            <if test = "jigyoshaMeishoflag">
+                AND 
+                    DbT5910."jigyoshaMeisho" LIKE  #{jigyoshaMeisho}' || '%'
+             </if>  
+              <if test = "jigyoshaMeishoKanaflag">
+                 AND  
+                    DbT5910."jigyoshaMeishoKana" LIKE   '#{jigyoshaMeishoKana}' || '%'
+              </if>
+              <if test = "ninteiChosainNoflagFrom">
+               AND  
+                    DbT5913."ninteiChosainNo" <![CDATA[>=]]> #{ninteiChosainNoFrom}
+              </if>
+            <if test = " ninteiChosainNoflagTo">
+               AND 
+                    DbT5913."ninteiChosainNo" <![CDATA[<=]]> #{ninteiChosainNoTo}
+           </if>
+           <if test = "chosainShimeiflag">
+               AND 
+                    DbT5913."chosainShimei" LIKE  #{chosainShimei} || '%'
+            </if>
+            <if test = "chosainKanaShimeiflag">
+                AND 
+                    DbT5913."jigyoshaName" LIKE  #{jigyoshaName}' || '%'
+            </if>
+            <if test = "chikuCodeflag">
+                AND
+                    DbT5913."yubinNo"  = #{yubinNo}
+            </if>
+          ORDER BY							
+		DbT5913."shichosonCode",						
+		DbT5913."ninteiChosainNo",						
+	        DbT5913."ninteichosaItakusakiCode"
+	<!--最大表示件数-->
+        LIMIT ${maxKensu};
+    </select>
+    
+    <select id="getKoNiChoSearchResultCount"
+            resultMap="int" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelateMapperParameter" fetchSize="500">
+         SELECT														
+	    COUNT(0)													
+         FROM 														
+	    rgdb."DbT5913ChosainJoho" AS t1													
+         WHERE 														
+	    t1."shichosonCode" = #{shichosonCode} 
+	 AND												
+	    t1."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+         AND												
+	    t1."ninteiChosainNo" = #{ninteiChosainNo}															
+    </select>
+    
+     
+      <select id="getKoNiChobeforeDeleteCount"
+            resultMap="int" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelateMapperParameter" fetchSize="500">
+      SELECT
+	COUNT(0)
+      FROM
+	rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+	INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS  DbT7051
+		ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+      WHERE
+	DbT7051."shichosonCode" = #{shichosonCode}
+	AND　DbT5101."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}														
+	AND　DbT5101."ninteiChosainCode" = #{ninteiChosainCode}														
+    </select>
+    
+    <select id="getKoNiChobeforeDeleteResult"
+            resultMap="int" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelateMapperParameter" fetchSize="500">
+      SELECT
+	COUNT(0)
+      FROM
+	          rgdb."DbT4201NinteichosaIraiJoho"   AS DbT4201
+     INNER JOIN   rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+	ON 
+                 DbT4201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+     INNER JOIN    rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+	ON
+                 DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+     WHERE
+	DbT7051."shichosonCode" = #{shichosonCode}
+	AND DbT4201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+	AND DbT4201."ninteiChosainCode" = #{ninteiChosainCode}												
+    </select>
+    
+     
+ </mapper>
