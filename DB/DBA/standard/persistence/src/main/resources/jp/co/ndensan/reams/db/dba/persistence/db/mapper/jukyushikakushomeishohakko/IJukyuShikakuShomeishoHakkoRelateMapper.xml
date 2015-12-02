@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper">
+ 
+    <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
+        <result property="hihokenshaNo"           column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="idoYMD"                 column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yokaigoJotaiKubunCode"  column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jukyuShinseiYMD"        column="jukyuShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiYukoKikanKaishiYMD"    column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiYukoKikanShuryoYMD"    column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiIken"               column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yoshienshaNinteiShinseiFlag" column="yoshienshaNinteiShinseiFlag"/>
+        <result property="shiteiServiceShurui01" column="shiteiServiceShurui01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui02" column="shiteiServiceShurui02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui03" column="shiteiServiceShurui03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui04" column="shiteiServiceShurui04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui05" column="shiteiServiceShurui05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui06" column="shiteiServiceShurui06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui07" column="shiteiServiceShurui07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui08" column="shiteiServiceShurui08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui09" column="shiteiServiceShurui09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui10" column="shiteiServiceShurui10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui11" column="shiteiServiceShurui11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui12" column="shiteiServiceShurui12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui13" column="shiteiServiceShurui13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui14" column="shiteiServiceShurui14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui15" column="shiteiServiceShurui15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui16" column="shiteiServiceShurui16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui17" column="shiteiServiceShurui17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui18" column="shiteiServiceShurui18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui19" column="shiteiServiceShurui19" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui20" column="shiteiServiceShurui20" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui21" column="shiteiServiceShurui21" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui22" column="shiteiServiceShurui22" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui23" column="shiteiServiceShurui23" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui24" column="shiteiServiceShurui24" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui25" column="shiteiServiceShurui25" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui26" column="shiteiServiceShurui26" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui27" column="shiteiServiceShurui27" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui28" column="shiteiServiceShurui28" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui29" column="shiteiServiceShurui29" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiServiceShurui30" column="shiteiServiceShurui30" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+
+        <result property="serviceShuruiMeisho" column="serviceShuruiMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        
+    </resultMap>
+
+    <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+        SELECT TB1."hihokenshaNo"   AS  "hihokenshaNo"
+               ,COALESCE(D."tenshutsuKakuteiIdoYMD",D."tenshutsuYoteiIdoYMD") AS "idoYMD"
+               ,TB1."yokaigoJotaiKubunCode"  AS "yokaigoJotaiKubunCode"
+               ,TB1."jukyuShinseiYMD"  AS "jukyuShinseiYMD"
+               ,TB1."ninteiYukoKikanKaishiYMD"  AS "ninteiYukoKikanKaishiYMD"
+               ,TB1."ninteiYukoKikanShuryoYMD"  AS "ninteiYukoKikanShuryoYMD"
+               ,C."shinsakaiIken" AS "shinsakaiIken"
+        FROM 
+            (SELECT
+                Jukyusha."hihokenshaNo" AS "hihokenshaNo"
+               ,Jukyusha."shikibetsuCode" AS "shikibetsuCode"
+               ,Jukyusha."shinseishoKanriNo" AS "shinseishoKanriNo"
+	       ,Jukyusha."jukyuShinseiYMD" AS "jukyuShinseiYMD"
+	       ,Jukyusha."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
+	       ,Jukyusha."ninteiYukoKikanKaishiYMD" AS "ninteiYukoKikanKaishiYMD"
+	       ,Jukyusha."ninteiYukoKikanShuryoYMD" AS "ninteiYukoKikanShuryoYMD"
+            FROM
+                rgdb."DbT4001JukyushaDaicho" AS Jukyusha 
+            WHERE
+                Jukyusha."hihokenshaNo" = #{hihokenshaNo}
+                AND Jukyusha."yukoMukoKubun" = '1'
+                AND Jukyusha."isDeleted" = FALSE
+            ORDER BY
+                Jukyusha."rirekiNo",
+                Jukyusha.edaban
+                DESC LIMIT 1
+            ) AS TB1
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS C
+             ON   TB1."shinseishoKanriNo" = C."shinseishoKanriNo" 
+        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','',false,'',false,'','','','','','','','','','','',false,'','','','','','','',false,'','','','','','','','','','','',true,true,false,false,false,false,true,true,true,true,false,'','','','','','','','',false,'','',false,false,false) AS D
+             ON   TB1."shinseishoKanriNo" = D."shikibetsuCode";
+    </select>
+    
+    <select id="getServiceCodeList" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+        SELECT 
+            Jukyusha."shiteiServiceShurui01" AS "shiteiServiceShurui01",
+            Jukyusha."shiteiServiceShurui02" AS "shiteiServiceShurui02",
+            Jukyusha."shiteiServiceShurui03" AS "shiteiServiceShurui03",
+            Jukyusha."shiteiServiceShurui04" AS "shiteiServiceShurui04",
+            Jukyusha."shiteiServiceShurui05" AS "shiteiServiceShurui05",
+            Jukyusha."shiteiServiceShurui06" AS "shiteiServiceShurui06",
+            Jukyusha."shiteiServiceShurui07" AS "shiteiServiceShurui07",
+            Jukyusha."shiteiServiceShurui08" AS "shiteiServiceShurui08",
+            Jukyusha."shiteiServiceShurui09" AS "shiteiServiceShurui09",
+            Jukyusha."shiteiServiceShurui10" AS "shiteiServiceShurui10",
+            Jukyusha."shiteiServiceShurui11" AS "shiteiServiceShurui11",
+            Jukyusha."shiteiServiceShurui12" AS "shiteiServiceShurui12",
+            Jukyusha."shiteiServiceShurui13" AS "shiteiServiceShurui13",
+            Jukyusha."shiteiServiceShurui14" AS "shiteiServiceShurui14",
+            Jukyusha."shiteiServiceShurui15" AS "shiteiServiceShurui15",
+            Jukyusha."shiteiServiceShurui16" AS "shiteiServiceShurui16",
+            Jukyusha."shiteiServiceShurui17" AS "shiteiServiceShurui17",
+            Jukyusha."shiteiServiceShurui18" AS "shiteiServiceShurui18",
+            Jukyusha."shiteiServiceShurui19" AS "shiteiServiceShurui19",
+            Jukyusha."shiteiServiceShurui20" AS "shiteiServiceShurui20",
+            Jukyusha."shiteiServiceShurui21" AS "shiteiServiceShurui21",
+            Jukyusha."shiteiServiceShurui22" AS "shiteiServiceShurui22",
+            Jukyusha."shiteiServiceShurui23" AS "shiteiServiceShurui23",
+            Jukyusha."shiteiServiceShurui24" AS "shiteiServiceShurui24",
+            Jukyusha."shiteiServiceShurui25" AS "shiteiServiceShurui25",
+            Jukyusha."shiteiServiceShurui26" AS "shiteiServiceShurui26",
+            Jukyusha."shiteiServiceShurui27" AS "shiteiServiceShurui27",
+            Jukyusha."shiteiServiceShurui28" AS "shiteiServiceShurui28",
+            Jukyusha."shiteiServiceShurui29" AS "shiteiServiceShurui29",
+            Jukyusha."shiteiServiceShurui30" AS "shiteiServiceShurui30"
+        FROM 
+            rgdb."DbT4001JukyushaDaicho" AS Jukyusha
+        WHERE 
+                Jukyusha."hihokenshaNo" = #{hihokenshaNo}
+          AND   Jukyusha."yukoMukoKubun" = '1'
+          AND   Jukyusha."isDeleted" = FALSE
+        ORDER BY
+                Jukyusha."rirekiNo",
+                Jukyusha.edaban
+        DESC LIMIT 1
+    </select>
+    
+    <select id="getServiceMeiList" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+        SELECT            
+            DbT7130."serviceShuruiMeisho",
+            DbT7130."serviceShuruiRyakusho"
+        FROM 
+            rgdb."DbT7130KaigoServiceShurui" AS DbT7130 
+        WHERE
+            DbT7130."serviceShuruiCd" = #{serviceShuruiCd}
+        AND  DbT7130."teikyoKaishiYM" <![CDATA[<=]]>  #{nowDateYearMonth}
+        AND (DbT7130."teikyoshuryoYM" <![CDATA[>=]]> #{nowDateYearMonth}
+                OR DbT7130."serviceShuruiCd" IS NULL)
+    </select>
+    
+    <select id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+       	SELECT
+                TB2."jukyuShinseiJiyu" AS "jukyuShinseiJiyu"
+               ,TB2."shinseishoKanriNo" AS "shinseishoKanriNo"
+               ,TB2."jukyuShinseiYMD" AS "jukyuShinseiYMD"
+	       ,TB2."yoshienshaNinteiShinseiFlag" AS "yoshienshaNinteiShinseiFlag"
+            FROM
+                rgdb."DbT4001JukyushaDaicho" AS TB2 
+            WHERE
+                TB2."hihokenshaNo" = #{hihokenshaNo}
+                AND TB2."rirekiNo" = '0000'
+                AND TB2."isDeleted" = FALSE
+            ORDER BY
+                TB2.edaban
+            DESC LIMIT 1
+    </select>
+    
+    <select id="getNinTeiChouSaJou" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+       	SELECT
+                E."ninteichosaJisshiYMD" AS "ninteichosaJisshiYMD"
+            FROM
+                rgdb."DbT4202NinteichosahyoGaikyoChosa" AS E 
+            WHERE
+                E."shinseishoKanriNo" =  #{shinseishoKanriNo}
+                AND E."isDeleted" = FALSE
+            ORDER BY
+                E."ninteichosaRirekiNo"
+            DESC LIMIT 1
+    </select>
+    
+</mapper>
