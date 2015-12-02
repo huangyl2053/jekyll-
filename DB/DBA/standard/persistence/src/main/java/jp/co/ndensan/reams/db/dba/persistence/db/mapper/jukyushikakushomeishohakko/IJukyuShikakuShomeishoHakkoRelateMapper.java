@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko;
 
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter;
-import jp.co.ndensan.reams.db.dba.entity.relate.JukyuShikakuShomeishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 
 /**
  * 車両検索用のマッパーインタフェースです。

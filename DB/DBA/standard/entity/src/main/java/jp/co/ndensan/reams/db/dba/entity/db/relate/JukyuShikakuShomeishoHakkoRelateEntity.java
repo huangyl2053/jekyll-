@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.entity.relate;
+package jp.co.ndensan.reams.db.dba.entity.db.relate;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

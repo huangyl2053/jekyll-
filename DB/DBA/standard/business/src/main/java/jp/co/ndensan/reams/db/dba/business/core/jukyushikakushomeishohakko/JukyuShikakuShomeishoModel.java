@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.business.core.jukyushikakushomeishohakko;
 
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dba.entity.relate.JukyuShikakuShomeishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,7 +34,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 交付日
      */
     public RString get交付日() {
-         if (jukyuShikakuShomeishoHakkoEntity != null) {
+        if (jukyuShikakuShomeishoHakkoEntity != null) {
             return FlexibleDate.getNowDate().getYearMonth().wareki().toDateString();
         } else {
             return RString.EMPTY;
@@ -47,7 +47,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 異動予定日
      */
     public RString get異動予定日() {
-        if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getIdoYMD() != null 
+        if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getIdoYMD() != null
                 && jukyuShikakuShomeishoHakkoEntity.getIdoYMD().isEmpty()) {
             return new FlexibleDate(jukyuShikakuShomeishoHakkoEntity.getIdoYMD()).wareki().toDateString();
         } else {
@@ -66,10 +66,10 @@ public class JukyuShikakuShomeishoModel {
         } else {
             return RString.EMPTY;
         }
-        
+
     }
 
-     /**
+    /**
      * 有効期間開始日を取得します。
      *
      * @return 有効期間開始日
@@ -80,9 +80,9 @@ public class JukyuShikakuShomeishoModel {
         } else {
             return RString.EMPTY;
         }
-        
+
     }
-    
+
     /**
      * 受給申請年月日を取得します。
      *
@@ -115,7 +115,7 @@ public class JukyuShikakuShomeishoModel {
      * @return 介護認定審査会意見
      */
     public RString get介護認定審査会意見() {
-       if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken().isEmpty()) {
+        if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken().isEmpty()) {
             return jukyuShikakuShomeishoHakkoEntity.getShinsakaiIken();
         } else {
             return RString.EMPTY;
@@ -128,11 +128,11 @@ public class JukyuShikakuShomeishoModel {
      * @return 介護認定審査会意見
      */
     public RString get備考() {
-       if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getBiko().isEmpty()) {
+        if (jukyuShikakuShomeishoHakkoEntity != null && jukyuShikakuShomeishoHakkoEntity.getBiko().isEmpty()) {
             return jukyuShikakuShomeishoHakkoEntity.getBiko();
         } else {
             return RString.EMPTY;
         }
     }
-    
+
 }

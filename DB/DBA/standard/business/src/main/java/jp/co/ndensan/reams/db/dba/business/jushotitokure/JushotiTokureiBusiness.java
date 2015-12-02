@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.jushotitokure;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -81,7 +79,7 @@ public class JushotiTokureiBusiness implements Serializable {
      *
      * @return 適用事由コード
      */
-    public KaigoShikakuJutokuTekiyoJiyu get適用事由コード() {
+    public RString get適用事由コード() {
         return entity.getJushochitokureiTekiyoJiyuCode();
     }
 
@@ -108,7 +106,7 @@ public class JushotiTokureiBusiness implements Serializable {
      *
      * @return 解除事由コード
      */
-    public KaigoShikakuJutokuKaijoJiyu get解除事由コード() {
+    public RString get解除事由コード() {
         return entity.getJushochitokureiKaijoJiyuCode();
     }
 
