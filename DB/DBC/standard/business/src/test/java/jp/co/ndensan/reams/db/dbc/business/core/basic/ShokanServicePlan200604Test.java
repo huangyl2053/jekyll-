@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -39,7 +38,8 @@ public class ShokanServicePlan200604Test extends DbcTestBase {
     private static RString 主キー名3;
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
-    private static Decimal 主キー名6;
+    private static RString 主キー名6;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -49,7 +49,8 @@ public class ShokanServicePlan200604Test extends DbcTestBase {
         主キー名3 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3046ShokanServicePlan200604EntityGenerator.DEFAULT_連番;
     }
 
     public static class 主キーコンストラクタテスト extends DbcTestBase {
@@ -66,24 +67,24 @@ public class ShokanServicePlan200604Test extends DbcTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanServicePlan200604(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new ShokanServicePlan200604(null, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ShokanServicePlan200604(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new ShokanServicePlan200604(主キー名1, null, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
         }
 
         @Test
         public void 指定したキーが保持するDbT3046ShokanServicePlan200604Entityにセットされている() {
-            sut = new ShokanServicePlan200604(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new ShokanServicePlan200604(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.get被保険者番号(), is(主キー名1));
             assertThat(sut.getサービス提供年月(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するShokanServicePlan200604Identifierにセットされている() {
-            sut = new ShokanServicePlan200604(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6);
+            sut = new ShokanServicePlan200604(主キー名1, 主キー名2, 主キー名3, 主キー名4, 主キー名5, 主キー名6, 主キー名7);
             assertThat(sut.identifier().get被保険者番号(), is(主キー名1));
             assertThat(sut.identifier().getサービス提供年月(), is(主キー名2));
         }
@@ -154,8 +155,8 @@ public class ShokanServicePlan200604Test extends DbcTestBase {
         }
 
         @Test
-        public void get履歴番号は_entityが持つ履歴番号を返す() {
-            assertThat(sut.get履歴番号(), is(ShokanServicePlan200604Entity.getRirekiNo()));
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanServicePlan200604Entity.getMeisaiNo()));
         }
 
         @Test

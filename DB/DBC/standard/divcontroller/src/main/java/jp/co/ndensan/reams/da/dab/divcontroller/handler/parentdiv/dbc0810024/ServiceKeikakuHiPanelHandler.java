@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.dgdYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -137,10 +136,10 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * ボタン表示制御を処理します。
      *
-     * @param entity DbT3118ShikibetsuNoKanriEntity
      */
-    public void setボタン表示制御処理(
-            DbT3118ShikibetsuNoKanriEntity entity) {
+//    public void setボタン表示制御処理(
+//            DbT3118ShikibetsuNoKanriEntity entity) {
+    public void setボタン表示制御処理() {
 
         if (設定不可.equals(//dbt3118Entity.getKihonSetteiKubun()
                 new RString("0"))) {

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -56,8 +55,8 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -67,8 +66,8 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -78,8 +77,8 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             FlexibleYearMonth 主キー2 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス提供年月;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6, 主キー7);
         }
 
@@ -89,8 +88,8 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             FlexibleYearMonth 主キー2 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6, 主キー7);
         }
 
@@ -100,8 +99,8 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             FlexibleYearMonth 主キー2 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6, 主キー7);
         }
 
@@ -112,7 +111,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null, 主キー7);
         }
 
@@ -123,7 +122,7 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
             sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, null);
         }
 
@@ -131,14 +130,14 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(null);
+                    any(RString.class), any(RString.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             ShokanShakaiFukushiHojinKeigengaku result = sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result, is(nullValue()));
@@ -148,14 +147,14 @@ public class ShokanShakaiFukushiHojinKeigengakuManagerTest {
         public void 検索結果が存在する場合() {
             DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.createDbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
             when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleYearMonth.class), any(RString.class), any(JigyoshaNo.class),
-                    any(RString.class), any(RString.class), any(Decimal.class))).thenReturn(entity);
+                    any(RString.class), any(RString.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号;
             FlexibleYearMonth 主キー2 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_サービス提供年月;
             RString 主キー3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
             JigyoshaNo 主キー4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
             RString 主キー5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-            Decimal 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+            RString 主キー7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
             ShokanShakaiFukushiHojinKeigengaku result = sut.get償還払請求社会福祉法人軽減額(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6, 主キー7);
 
             assertThat(result.get被保険者番号().value(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_被保険者番号.value()));

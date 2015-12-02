@@ -23,10 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求サービス計画200904を管理するクラスです。
  */
-public class ShokanServicePlan200904 
-extends ModelBase<ShokanServicePlan200904Identifier, 
-        DbT3047ShokanServicePlan200904Entity, 
-        ShokanServicePlan200904> implements Serializable {
+public class ShokanServicePlan200904
+        extends ModelBase<ShokanServicePlan200904Identifier, DbT3047ShokanServicePlan200904Entity, ShokanServicePlan200904> implements Serializable {
 
     private final DbT3047ShokanServicePlan200904Entity entity;
     private final ShokanServicePlan200904Identifier id;
@@ -40,49 +38,39 @@ extends ModelBase<ShokanServicePlan200904Identifier,
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 履歴番号 履歴番号
-     * @param 指定_基準該当事業者区分コード 指定_基準該当事業者区分コード
-     * @param 明細行番号 明細行番号
-     * @param 居宅サービス計画作成依頼届出年月日 居宅サービス計画作成依頼届出年月日
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanServicePlan200904(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            Decimal 履歴番号,
-            RString 指定_基準該当事業者区分コード,
-            RString 明細行番号,
-            FlexibleDate 居宅サービス計画作成依頼届出年月日) {
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(指定_基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定_基準該当事業者区分コード"));
-        requireNonNull(明細行番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細行番号"));
-        requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3047ShokanServicePlan200904Entity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setRirekiNo(履歴番号);
-        this.entity.setShiteiKijunGaitoJigyoshaKubunCode(指定_基準該当事業者区分コード);
-        this.entity.setMeisaiLineNo(明細行番号);
-        this.entity.setKyotakuServiceSakuseiIraiYMD(居宅サービス計画作成依頼届出年月日);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanServicePlan200904Identifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
                 様式番号,
-                履歴番号,
-                指定_基準該当事業者区分コード,
-                明細行番号,
-                居宅サービス計画作成依頼届出年月日
+                明細番号,
+                連番
         );
     }
 
@@ -100,10 +88,8 @@ extends ModelBase<ShokanServicePlan200904Identifier,
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
                 entity.getYoshikiNo(),
-                entity.getRirekiNo(),
-                entity.getShiteiKijunGaitoJigyoshaKubunCode(),
-                entity.getMeisaiLineNo(),
-                entity.getKyotakuServiceSakuseiIraiYMD());
+                entity.getMeisaiNo(),
+                entity.getRenban());
     }
 
     /**
@@ -167,12 +153,12 @@ extends ModelBase<ShokanServicePlan200904Identifier,
     }
 
     /**
-     * 履歴番号を返します。
+     * 明細番号を返します。
      *
-     * @return 履歴番号
+     * @return 明細番号
      */
-    public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
 
     /**
@@ -185,12 +171,12 @@ extends ModelBase<ShokanServicePlan200904Identifier,
     }
 
     /**
-     * 明細行番号を返します。
+     * 連番を返します。
      *
-     * @return 明細行番号
+     * @return 連番
      */
-    public RString get明細行番号() {
-        return entity.getMeisaiLineNo();
+    public RString get連番() {
+        return entity.getRenban();
     }
 
     /**

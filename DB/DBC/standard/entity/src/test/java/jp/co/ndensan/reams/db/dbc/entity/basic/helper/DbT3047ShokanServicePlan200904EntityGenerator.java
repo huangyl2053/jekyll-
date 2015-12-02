@@ -23,9 +23,9 @@ public final class DbT3047ShokanServicePlan200904EntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final RString DEFAULT_明細番号 = new RString("1");
+    public static final RString DEFAULT_連番 = new RString("1");
     public static final RString DEFAULT_指定_基準該当事業者区分コード = new RString("Data");
-    public static final RString DEFAULT_明細行番号 = new RString("Data");
     public static final FlexibleDate DEFAULT_居宅サービス計画作成依頼届出年月日 = new FlexibleDate("19900101");
     public static final ServiceCode DEFAULT_サービスコード = new ServiceCode("1");
     public static final int DEFAULT_単位数 = 1;
@@ -61,7 +61,8 @@ public final class DbT3047ShokanServicePlan200904EntityGenerator {
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setShiteiKijunGaitoJigyoshaKubunCode(DEFAULT_指定_基準該当事業者区分コード);
-        entity.setMeisaiNo(DEFAULT_明細行番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setKyotakuServiceSakuseiIraiYMD(DEFAULT_居宅サービス計画作成依頼届出年月日);
         entity.setServiceCode(DEFAULT_サービスコード);
         entity.setTanisu(DEFAULT_単位数);

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -35,7 +34,7 @@ public class ShokanShakaiFukushiHojinKeigengakuBuilderTest extends DbcTestBase {
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
     private static RString 主キー名6;
-    private static Decimal 主キー名7;
+    private static RString 主キー名7;
 
     @BeforeClass
     public static void setUpClass() {
@@ -45,8 +44,8 @@ public class ShokanShakaiFukushiHojinKeigengakuBuilderTest extends DbcTestBase {
         主キー名3 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号;
-        主キー名7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号;
+        主キー名7 = DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -97,15 +96,15 @@ public class ShokanShakaiFukushiHojinKeigengakuBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の順次番号は_設定した値と同じ順次番号を返す() {
-            business = sut.set順次番号(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号).build();
-            assertThat(business.get順次番号(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_順次番号));
+        public void 戻り値の明細番号は_設定した値と同じ明細番号を返す() {
+            business = sut.set明細番号(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号).build();
+            assertThat(business.get明細番号(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_明細番号));
         }
 
         @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_履歴番号));
+        public void 戻り値の連番は_設定した値と同じ連番を返す() {
+            business = sut.set連番(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番).build();
+            assertThat(business.get連番(), is(DbT3051ShokanShakaiFukushiHojinKeigengakuEntityGenerator.DEFAULT_連番));
         }
 
         @Test

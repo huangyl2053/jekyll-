@@ -14,10 +14,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -41,10 +39,8 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
      * @param 整理番号 SeiriNp
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 履歴番号 RirekiNo
-     * @param 指定_基準該当事業者区分コード ShiteiKijunGaitoJigyoshaKubunCode
-     * @param 明細行番号 MeisaiLineNo
-     * @param 居宅サービス計画作成依頼届出年月日 KyotakuServiceSakuseiIraiYMD
+     * @param 明細番号 MeisaiNo
+     * @param 連番 Renban
      * @return DbT3047ShokanServicePlan200904Entity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -55,19 +51,15 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            Decimal 履歴番号,
-            RString 指定_基準該当事業者区分コード,
-            RString 明細行番号,
-            FlexibleDate 居宅サービス計画作成依頼届出年月日) throws NullPointerException {
+            RString 明細番号,
+            RString 連番) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        requireNonNull(指定_基準該当事業者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("指定／基準該当事業者区分コード"));
-        requireNonNull(明細行番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細行番号"));
-        requireNonNull(居宅サービス計画作成依頼届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅サービス計画作成依頼届出年月日"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -79,10 +71,8 @@ public class DbT3047ShokanServicePlan200904Dac implements ISaveable<DbT3047Shoka
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
-                                eq(rirekiNo, 履歴番号),
-                                eq(shiteiKijunGaitoJigyoshaKubunCode, 指定_基準該当事業者区分コード),
-                                eq(meisaiLineNo, 明細行番号),
-                                eq(kyotakuServiceSakuseiIraiYMD, 居宅サービス計画作成依頼届出年月日))).
+                                eq(meisaiNo, 明細番号),
+                                eq(renban, 連番))).
                 toObject(DbT3047ShokanServicePlan200904Entity.class);
     }
 

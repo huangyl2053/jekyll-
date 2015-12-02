@@ -8,9 +8,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.serviceKeikakuHi;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3045ShokanServicePlan200004EntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3046ShokanServicePlan200604EntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
@@ -65,9 +62,9 @@ public class ServiceKeikakuHiFinder {
             RString 様式番号) {
         List<DbT3047ShokanServicePlan200904Entity> entity200904List = new ArrayList<>();
         DbT3047ShokanServicePlan200904Entity entity200904
-                = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
+                = new DbT3047ShokanServicePlan200904Entity();
         DbT3047ShokanServicePlan200904Entity entity2009042
-                = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
+                = new DbT3047ShokanServicePlan200904Entity();
         entity2009042.setRenban(new RString("13"));
         entity2009042.setHiHokenshaNo(new HihokenshaNo("1"));
         entity2009042.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));
@@ -112,7 +109,7 @@ public class ServiceKeikakuHiFinder {
             JigyoshaNo 事業者番号,
             RString 様式番号) {
         DbT3046ShokanServicePlan200604Entity entity200604
-                = DbT3046ShokanServicePlan200604EntityGenerator.createDbT3046ShokanServicePlan200604Entity();
+                = new DbT3046ShokanServicePlan200604Entity();
         return new ServiceKeikakuHiRealtEntity(null, entity200604, null);
     }
 
@@ -123,7 +120,7 @@ public class ServiceKeikakuHiFinder {
             JigyoshaNo 事業者番号,
             RString 様式番号) {
         DbT3045ShokanServicePlan200004Entity entity200004
-                = DbT3045ShokanServicePlan200004EntityGenerator.createDbT3045ShokanServicePlan200004Entity();
+                = new DbT3045ShokanServicePlan200004Entity();
         return new ServiceKeikakuHiRealtEntity(null, null, entity200004);
     }
 
@@ -136,7 +133,7 @@ public class ServiceKeikakuHiFinder {
             RString 明細番号,
             RString 連番) {
         DbT3047ShokanServicePlan200904Entity entity200904
-                = DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity();
+                = new DbT3047ShokanServicePlan200904Entity();
         entity200904.setRenban(new RString("13"));
         entity200904.setHiHokenshaNo(new HihokenshaNo("1"));
         entity200904.setServiceTeikyoYM(new FlexibleYearMonth(new RString("200904")));

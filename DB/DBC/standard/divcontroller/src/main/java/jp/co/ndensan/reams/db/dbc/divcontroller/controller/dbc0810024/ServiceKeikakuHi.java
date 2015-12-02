@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.da.dab.divcontroller.handler.parentdiv.dbc0810024.ServiceKeikakuHiPanelHandler;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.serviceKeikakuHi.ServiceKeikakuHiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -64,9 +63,10 @@ public class ServiceKeikakuHi {
         }
 
         // TODO 凌護行 ビジネス設計_DBCMN11006_償還払い状況照会を実装しない
-        DbT3118ShikibetsuNoKanriEntity dbt3118Entity = new DbT3118ShikibetsuNoKanriEntity();
+//        DbT3118ShikibetsuNoKanriEntity dbt3118Entity = new DbT3118ShikibetsuNoKanriEntity();
 //               = ServiceKeikakuHiFinder.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
-        getHandler(div).setボタン表示制御処理(dbt3118Entity);
+//        getHandler(div).setボタン表示制御処理(dbt3118Entity);
+        getHandler(div).setボタン表示制御処理();
 
         if (!サービス年月_200904.isBefore(サービス年月)) {
             List<ServiceKeikakuHiRealtEntity> entity200904List
