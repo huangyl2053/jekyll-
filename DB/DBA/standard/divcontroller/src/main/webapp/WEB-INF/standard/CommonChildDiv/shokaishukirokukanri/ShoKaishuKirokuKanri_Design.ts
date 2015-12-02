@@ -8,6 +8,26 @@ module DBA {
 
         export class Events {
 
+            public static onClick_BtnSenTaKu(): string {
+                return "onClick_BtnSenTaKu";
+            }
+
+            public static onClick_ModifyButton(): string {
+                return "onClick_ModifyButton";
+            }
+
+            public static onClick_DeleteButton(): string {
+                return "onClick_DeleteButton";
+            }
+
+            public static onClick_btnShoKaishuKakutei(): string {
+                return "onClick_btnShoKaishuKakutei";
+            }
+
+            public static onClick_btnShoKaishuTorikeshi(): string {
+                return "onClick_btnShoKaishuTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -65,12 +85,12 @@ module DBA {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
             }
 
-            public txtKaisyuDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
-            }
-
             public ddlKaisyuJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaisyuJiyu"));
+            }
+
+            public txtKaisyuDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
             }
 
             public btnConfirm(): UZA.Button {
