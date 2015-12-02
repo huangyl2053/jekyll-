@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
@@ -79,8 +78,8 @@ public class IKoseiShichosonMasterMapperTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void clearTable(String tableName) {
-            CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, tableName);
+//            CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
+//            csvDataUtil.clearTable(sqlSession, tableName);
         }
 
         public static void insertDbT7051(

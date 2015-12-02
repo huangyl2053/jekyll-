@@ -58,7 +58,7 @@ public class ChosaChikuGroupBuilder {
      */
     public ChosaChikuGroupBuilder set調査地区コード(Code 調査地区コード) {
         requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
-        entity.setChosaChikuCode(調査地区コード);
+        entity.setChosachikucode(調査地区コード);
         return this;
     }
 
@@ -82,7 +82,7 @@ public class ChosaChikuGroupBuilder {
      */
     public ChosaChikuGroupBuilder set調査地区グループ名称(RString 調査地区グループ名称) {
         requireNonNull(調査地区グループ名称, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループ名称"));
-        entity.setChosaChikuGroupName(調査地区グループ名称);
+        entity.setChosachikugroupname(調査地区グループ名称);
         return this;
     }
 

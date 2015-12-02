@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
@@ -184,8 +183,8 @@ public class GappeiJohoManagerTest extends DbzTestDacBase {
         }
 
         public static void clearTable() {
-            CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
-            csvDataUtil.clearTable(sqlSession, DbT7055GappeiJohoEntity.TABLE_NAME.toString());
+//            CSVDataUtilForUseSession csvDataUtil = new CSVDataUtilForUseSession();
+//            csvDataUtil.clearTable(sqlSession, DbT7055GappeiJohoEntity.TABLE_NAME.toString());
         }
 
 //        public static void insertDbT7056(

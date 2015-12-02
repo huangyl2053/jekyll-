@@ -58,7 +58,7 @@ public class NinteiChosaScheduleMemoBuilder {
      */
     public NinteiChosaScheduleMemoBuilder set調査地区コード(Code 調査地区コード) {
         requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
-        entity.setChosaChikuCode(調査地区コード);
+        entity.setChosachikucode(調査地区コード);
         return this;
     }
 

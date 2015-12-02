@@ -7,13 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import org.junit.Before;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -282,10 +280,10 @@ public class HihokenshaDaichoListTest {
 
         entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
 
-        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(Code.EMPTY));
+        entity.setShikakuShutokuJiyuCode(RString.EMPTY);
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
-        entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(Code.EMPTY));
+        entity.setShikakuHenkoJiyuCode(RString.EMPTY);
         entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
         entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
 //        entity.setShoriTimestamp(ShoriTimestamp.of(RDateTime.MAX));
