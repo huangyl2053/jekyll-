@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkori
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
@@ -71,7 +70,7 @@ public class ShikakuHenkoRirekiHandler {
 //        }
 //        HihokenshaDaichoList 被保険者List = new HihokenshaDaichoList(ItemList.of(list));
 
- //       shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(mode);
+        //       shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(mode);
 //        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
 //            case TanitsuGappeiNashi:
 //                break;
@@ -192,8 +191,8 @@ public class ShikakuHenkoRirekiHandler {
         shoriDate.setValue(model.getIdoYMD());
         setRowState(row, model);
         row.setShoriDate(shoriDate);
-        row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode().getColumnValue().value());
-        row.setHenkoJiyu(model.getShikakuHenkoJiyuCode().getMeisho());
+        row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode());
+        row.setHenkoJiyu(model.getShikakuHenkoJiyuCode());
         row.getHenkoDate().setValue(model.getShikakuHenkoYMD());
         row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
         row.setSochimotoHokensha(model.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
@@ -270,8 +269,8 @@ public class ShikakuHenkoRirekiHandler {
         DbT1001HihokenshaDaichoEntity model = new DbT1001HihokenshaDaichoEntity();
         model.setShikakuHenkoYMD(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
         model.setShikakuHenkoTodokedeYMD(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
-        model.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(
-                shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
+        model.setShikakuHenkoJiyuCode(
+                shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey());
         model.setHihokenshaNo(new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
         model.setKyuShichosonCode(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
         model.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
@@ -324,8 +323,8 @@ public class ShikakuHenkoRirekiHandler {
         DbT1001HihokenshaDaichoEntity model = new DbT1001HihokenshaDaichoEntity();
         model.setShikakuHenkoYMD(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
         model.setShikakuHenkoTodokedeYMD(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
-        model.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(
-                shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
+        model.setShikakuHenkoJiyuCode(
+                shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey());
         model.setShichosonCode(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
 
         model.setIdoYMD(new FlexibleDate(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
@@ -518,7 +517,7 @@ public class ShikakuHenkoRirekiHandler {
         if (!targetModel.getShikakuHenkoTodokedeYMD().equals(shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().getValue())) {
             return false;
         }
-        if (!targetModel.getShikakuHenkoJiyuCode().toRString().equals(shikakuHenkoRirekiDiv.getDdlHenkoJiyu().getSelectedKey())) {
+        if (!targetModel.getShikakuHenkoJiyuCode().equals(shikakuHenkoRirekiDiv.getDdlHenkoJiyu().getSelectedKey())) {
             return false;
         }
         if (!targetModel.getKoikinaiTokureiSochimotoShichosonCode().value().equals((shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().getSelectedKey()))) {
