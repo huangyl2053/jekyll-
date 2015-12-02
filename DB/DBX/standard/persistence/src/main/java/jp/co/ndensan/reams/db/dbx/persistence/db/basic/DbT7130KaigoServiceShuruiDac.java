@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -21,6 +22,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -130,6 +132,23 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
                 where(and(eq(DbT7130KaigoServiceShurui.serviceShuruiCd, サービス種類コード),
                                 leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, 提供開始年月),
                                 leq(提供開始年月, DbT7130KaigoServiceShurui.teikyoshuryoYM))).
+                toList(DbT7130KaigoServiceShuruiEntity.class);
+    }
+
+    /**
+     * 介護サービス種類を全件返します。
+     *
+     * @param systemDate システム日付
+     * @return List<DbT7130KaigoServiceShuruiEntity>
+     */
+    @Transaction
+    public List<DbT7130KaigoServiceShuruiEntity> selectServiceShurui(RYearMonth systemDate) {
+        requireNonNull(systemDate, UrSystemErrorMessages.値がnull.getReplacedMessage("システム日付"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7130KaigoServiceShurui.class).
+                where(and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)), leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate), leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM))).
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 }
