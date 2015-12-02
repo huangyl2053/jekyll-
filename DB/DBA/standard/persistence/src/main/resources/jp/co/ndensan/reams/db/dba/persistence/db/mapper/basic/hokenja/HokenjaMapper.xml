@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： UrT0507HokenjaEntityのマッピング用XMLです。 -->
+<!--SelectMethod : getUrT0507HokenjaEntity-->
+<!--ParentResultMap : resultMap_UrT0507HokenjaEntity-->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hokenja.HokenjaMapper">
+
+    <resultMap id="resultMap_UrT0507HokenjaEntity" type="jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity" autoMapping="true">
+        <!--<id property="hokenjaNo"                column="hokenja_hokenjaNo"           typeHandler="jp.co.ndensan.reams.uz.uza.lang.RString" />-->
+        <result property="hokenjaName"          column="hokenja_hokenjaName"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="getHokenshaList"
+            resultMap="resultMap_UrT0507HokenjaEntity" 
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokenja.HokenjaMapperParameter" fetchSize="500">
+        SELECT 
+        Hokenja."hokenjaNo" AS "hokenja_hokenjaNo",
+        Hokenja."hokenjaName" AS "hokenja_hokenjaName"
+        FROM 
+        rgur."UrT0507Hokenja" AS Hokenja
+        WHERE
+        Hokenja."hokenjaShubetsu" = '08'
+        AND Hokenja."hokenjaNo" LIKE #{kenCode} || '%'
+    </select>
+</mapper>

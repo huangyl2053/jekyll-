@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5115Imageマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： nXXXX ○○○○ -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.shujiijoho.IShujiiJohoMapper">
+    <resultMap id="resultMap_ShujiiJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.basic.shujiijoho.ShujiiJohoRelateEntity" autoMapping="true">
+	<id property="shichosonCode" column="DbT5912Shuji_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shichosonMeisho" column="DbT7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<!--<result property="shujiiName" column="DbT5912Shuji_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoHandler" />-->
+	<result property="shujiiKana" column="DbT5912Shuji_shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <!--<id property="shujiiCode" column="DbT5912Shuji_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shujiiIryokikanCode" column="DbT5911Shuji_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->
+        <result property="iryoKikanMeisho" column="DbT5911Shuji_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinryokaName" column="DbT5912Shuji_shinryokaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiiFlag" column="DbT5912Shuji_shiteiiFlag" />
+        <result property="jokyoFlag" column="DbT5912Shuji_jokyoFlag" />
+	<result property="yubinNo" column="DbT5912Shuji_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+	<result property="jusho" column="DbT5912Shuji_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="telNo" column="DbT5912Shuji_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+	<result property="faxNo" column="DbT5912Shuji_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+	<result property="seibetsu" column="DbT5912Shuji_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+   </resultMap>
+    
+    <select id="getShujiiJohoEntity"
+            resultMap="resultMap_ShujiiJohoRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiJohoMapperParameter" fetchSize="500">
+        SELECT																
+	    DbT5912Shuji."shichosonCode" AS "DbT5912Shuji_shichosonCode",
+	    DbT5912Shuji."shichosonCode" AS "DbT5912Shuji_shichosonCode",																    
+	    DbT7051Kosei."shichosonMeisho" AS "DbT7051Kosei_shichosonMeisho",														
+	    DbT5912Shuji."shujiiName" AS "DbT5912Shuji_shujiiName",															
+	    DbT5912Shuji."shujiiKana" AS "DbT5912Shuji_shujiiKana",															
+	    DbT5912Shuji."shujiiCode" AS "DbT5912Shuji_shujiiCode",															
+	    DbT5911Shuji."shujiiIryokikanCode" AS "DbT5911Shuji_shujiiIryokikanCode",															
+	    DbT5911Shuji."iryoKikanMeisho" AS "DbT5911Shuji_iryoKikanMeisho",															
+	    DbT5912Shuji."shinryokaName" AS "DbT5912Shuji_shinryokaName",															
+	    DbT5912Shuji."shiteiiFlag" AS "DbT5912Shuji_shiteiiFlag",															
+	    DbT5912Shuji."jokyoFlag" AS "DbT5912Shuji_jokyoFlag",															
+	    DbT5912Shuji."yubinNo" AS "DbT5912Shuji_yubinNo",															
+	    DbT5912Shuji.jusho AS DbT5912Shuji_jusho,														
+	    DbT5912Shuji."telNo" AS "DbT5912Shuji_telNo",															
+	    DbT5912Shuji."faxNo" AS "DbT5912Shuji_faxNo",
+	    DbT5912Shuji.seibetsu AS DbT5912Shuji_seibetsu															
+	FROM																
+	    rgdb."DbT5912ShujiiJoho" AS DbT5912Shuji															
+	INNER JOIN 
+	    rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei														
+	ON 
+	    DbT5912Shuji."shichosonCode" = DbT5912Shuji."shichosonCode"														
+	INNER JOIN 
+	    rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911Shuji															
+	ON 
+	    DbT5911Shuji."shichosonCode" = DbT5912Shuji."shichosonCode"														
+	AND 
+	    DbT5911Shuji."shujiiIryokikanCode" = DbT5912Shuji."shujiiIryokikanCode"
+	WHERE
+	    1 =1
+	<if test="shichosonCodeFlag">
+	    AND
+	    DbT5912Shuji."shichosonCode" = #{shichosonCode}
+	</if>
+	<if test="jokyoFlag1">
+	    AND
+	    DbT5912Shuji."jokyoFlag" = true
+	</if>
+	<if test="jokyoFlag2">
+	    AND
+	    DbT5912Shuji."jokyoFlag" = false
+	</if>
+	<!--
+	<if test="shujiiIryokikanCodeFromFlag">
+	    AND
+	    DbT5912Shuji."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
+	</if>
+	<if test="shujiiIryokikanCodeToFlag">
+	    AND
+	    DbT5912Shuji."shujiiIryokikanCode" <![CDATA[<=]]> #{shujiiIryokikanCodeTo}
+	</if>
+	-->
+	<if test="iryoKikanMeishoFlag">
+	    AND
+	    DbT5911Shuji."iryoKikanMeisho"  LIKE '%' || '#{iryoKikanMeisho}' || '%'
+	</if>
+	<if test="iryoKikanMeishoKanaFlag">
+	    AND
+	   DbT5911Shuji."iryoKikanMeishoKana"  LIKE '%' || '#{iryoKikanMeishoKana}' || '%'
+	</if>
+	<!--
+	<if test="shujiiCodeFromFlag">
+	    AND
+	    DbT5912Shuji."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+	</if>
+	<if test="shujiiCodeToFlag">
+	    AND
+	    DbT5912Shuji."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+	</if>
+	-->
+	<if test="shujiiNameFlag">
+	    AND
+	    DbT5912Shuji."shujiiName"  LIKE '%' || '#{shujiiName}' || '%'
+	</if>
+	<if test="shujiiKanaFlag">
+	    AND
+	    DbT5912Shuji."shujiiKana"  LIKE '%' || '#{shujiiKana}' || '%'
+	</if>
+    ORDER BY																
+	DbT5912Shuji."shichosonCode",															
+	DbT5912Shuji."shujiiIryokikanCode",															
+	DbT5912Shuji."shujiiCode";
+    </select>
+   
+   <!--<select id="getNinteiShinseiJohoCount"
+            resultMap="java.long.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiJohoMapperParameter">
+	SELECT															
+	    COUNT(0)
+	FROM 															
+	    rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Nintei														
+	INNER JOIN
+	    rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei													
+	ON 
+	    DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo";
+    </select>
+    -->
+     <!--
+    <select id="getShujiiIkenshoIraiJohoCount"
+            resultMap="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiJohoMapperParameter">
+	SELECT																						
+	    COUNT(0)
+	FROM 																						
+	    rgdb."DbT5301ShujiiIkenshoIraiJoho"	AS DbT5301Shuji																			
+	INNER JOIN 
+	    rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Nintei 																					
+	ON 
+	    DbT5301Shuji."shinseishoKanriNo" = DbT5101Nintei."shinseishoKanriNo"																				
+	INNER JOIN 
+	    rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei																					
+	ON 
+	    DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo"																				
+	WHERE 																						
+	    DbT5301Shuji."ikenshoIraiRirekiNo" = 
+	    (select MAX(DbT5301Shuji."ikenshoIraiRirekiNo") from rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301Shuji);
+    </select>
+    -->
+</mapper>
