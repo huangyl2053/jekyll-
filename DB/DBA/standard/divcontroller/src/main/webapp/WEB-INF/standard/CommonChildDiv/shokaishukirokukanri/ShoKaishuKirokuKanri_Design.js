@@ -4,6 +4,25 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnSenTaKu = function () {
+                return "onClick_BtnSenTaKu";
+            };
+
+            Events.onClick_ModifyButton = function () {
+                return "onClick_ModifyButton";
+            };
+
+            Events.onClick_DeleteButton = function () {
+                return "onClick_DeleteButton";
+            };
+
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
+            };
+
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
+            };
             return Events;
         })();
         ShoKaishuKirokuKanri.Events = Events;
@@ -60,12 +79,12 @@ var DBA;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txaKaishuRiyu"));
             };
 
-            Controls.prototype.txtKaisyuDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
-            };
-
             Controls.prototype.ddlKaisyuJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKaisyuJiyu"));
+            };
+
+            Controls.prototype.txtKaisyuDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaisyuDate"));
             };
 
             Controls.prototype.btnConfirm = function () {

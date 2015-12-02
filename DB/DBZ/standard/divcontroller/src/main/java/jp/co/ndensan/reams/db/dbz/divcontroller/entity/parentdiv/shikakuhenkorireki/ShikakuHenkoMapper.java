@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
@@ -41,7 +40,7 @@ public class ShikakuHenkoMapper {
             }
 
             private boolean hasSame資格変更事由(DbT1001HihokenshaDaichoEntity t) {
-                return t.getShikakuHenkoJiyuCode().toRString().equals(rowValue.getHenkoJiyuKey());
+                return t.getShikakuHenkoJiyuCode().equals(rowValue.getHenkoJiyuKey());
             }
 
             private boolean hasSame資格変更年月日(DbT1001HihokenshaDaichoEntity t) {
@@ -92,9 +91,9 @@ public class ShikakuHenkoMapper {
 
                 //TODO n8178 城間篤人 資格変更事由にはEMPTYが入る可能性があるが、コードがそれを考慮する形になっていないためif文で仮対応。
                 //該当する項目が存在しない場合の動作が決まった後に修正。
-                if (!model.getShikakuHenkoJiyuCode().getColumnValue().isEmpty()) {
-                    row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode().getColumnValue().value());
-                    row.setHenkoJiyu(model.getShikakuHenkoJiyuCode().getMeisho());
+                if (!model.getShikakuHenkoJiyuCode().isEmpty()) {
+                    row.setHenkoJiyuKey(model.getShikakuHenkoJiyuCode());
+                    row.setHenkoJiyu(model.getShikakuHenkoJiyuCode());
                 }
                 row.getHenkoDate().setValue(model.getShikakuHenkoYMD());
                 row.getHenkoTodokedeDate().setValue(model.getShikakuHenkoTodokedeYMD());
@@ -123,7 +122,7 @@ public class ShikakuHenkoMapper {
         DbT1001HihokenshaDaichoEntity model = new DbT1001HihokenshaDaichoEntity();
         model.setShikakuHenkoYMD(div.getTxtHenkoDate().getValue());
         model.setShikakuHenkoTodokedeYMD(div.getTxtHenkoTodokedeDate().getValue());
-        model.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(div.getDdlHenkoJiyu().getSelectedKey()));
+        model.setShikakuHenkoJiyuCode(div.getDdlHenkoJiyu().getSelectedKey());
         model.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
         model.setKyuShichosonCode(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
 

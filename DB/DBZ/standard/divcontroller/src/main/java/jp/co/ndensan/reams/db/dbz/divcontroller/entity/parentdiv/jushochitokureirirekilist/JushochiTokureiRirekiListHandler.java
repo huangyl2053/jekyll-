@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Lists;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
@@ -24,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -691,8 +685,7 @@ public class JushochiTokureiRirekiListHandler {
      *
      * @param kyuShichosonCode 旧市町村コード
      * @param exeStatus 実行ステータス。Add・Delete・Modifyのうちのいずれかを設定する。
-     * @param jutokuExeStatsu
-     * 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
+     * @param jutokuExeStatsu 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
      * @param hokenshaJohoDisplayMode 明細表示モード
      */
     public void initialize(LasdecCode kyuShichosonCode, ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
@@ -839,28 +832,28 @@ public class JushochiTokureiRirekiListHandler {
 //        ));
         copy.setShikibetsuCode(new ShikibetsuCode(entity.getShikibetsuCode().getColumnValue().toString()));
 
-        copy.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(new Code(entity.getShikakuShutokuJiyuCode().getColumnValue().toString())));
+        copy.setShikakuShutokuJiyuCode(entity.getShikakuShutokuJiyuCode());
         copy.setShikakuShutokuYMD(new FlexibleDate(entity.getShikakuShutokuYMD().toString()));
         copy.setShikakuShutokuTodokedeYMD(new FlexibleDate(entity.getShikakuShutokuTodokedeYMD().toString()));
 
         copy.setIchigoShikakuShutokuYMD(new FlexibleDate(entity.getIchigoShikakuShutokuYMD().toString()));
         copy.setHihokennshaKubunCode(new RString(entity.getHihokennshaKubunCode().toString()));
 
-        copy.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(new Code(entity.getShikakuSoshitsuJiyuCode().getColumnValue().toString())));
+        copy.setShikakuSoshitsuJiyuCode(entity.getShikakuSoshitsuJiyuCode());
         copy.setShikakuSoshitsuYMD(new FlexibleDate(entity.getShikakuSoshitsuYMD().toString()));
         copy.setShikakuSoshitsuTodokedeYMD(new FlexibleDate(entity.getShikakuSoshitsuTodokedeYMD().toString()));
 
         copy.setJushochiTokureiFlag(new RString(entity.getJushochiTokureiFlag().toString()));
 
-        copy.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(new Code(entity.getShikakuHenkoJiyuCode().getColumnValue().toString())));
+        copy.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
         copy.setShikakuHenkoYMD(new FlexibleDate(entity.getShikakuHenkoYMD().toString()));
         copy.setShikakuHenkoTodokedeYMD(new FlexibleDate(entity.getShikakuHenkoTodokedeYMD().toString()));
 
-        copy.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(new Code(entity.getJushochitokureiTekiyoJiyuCode().getColumnValue().toString())));
+        copy.setJushochitokureiTekiyoJiyuCode(entity.getJushochitokureiTekiyoJiyuCode());
         copy.setJushochitokureiTekiyoYMD(new FlexibleDate(entity.getJushochitokureiTekiyoYMD().toString()));
         copy.setJushochitokureiTekiyoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiTekiyoTodokedeYMD().toString()));
 
-        copy.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(new Code(entity.getJushochitokureiKaijoJiyuCode().getColumnValue().toString())));
+        copy.setJushochitokureiKaijoJiyuCode(entity.getJushochitokureiKaijoJiyuCode());
         copy.setJushochitokureiKaijoYMD(new FlexibleDate(entity.getJushochitokureiKaijoYMD().toString()));
         copy.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate(entity.getJushochitokureiKaijoTodokedeYMD().toString()));
 
