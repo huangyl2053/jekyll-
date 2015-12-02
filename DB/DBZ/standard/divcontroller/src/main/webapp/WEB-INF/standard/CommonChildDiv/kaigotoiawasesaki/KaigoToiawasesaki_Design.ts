@@ -8,20 +8,36 @@ module DBZ {
 
         export class Events {
 
-            public static onClickBtnDecide(): string {
-                return "onClickBtnDecide";
+            public static onClick_btnAddChohyoDokuji(): string {
+                return "onClick_btnAddChohyoDokuji";
             }
 
-            public static onClickBtnCancel(): string {
-                return "onClickBtnCancel";
+            public static onClick_dgToiawasesakiControl(): string {
+                return "onClick_dgToiawasesakiControl";
             }
 
-            public static onClickBtnSave(): string {
-                return "onClickBtnSave";
+            public static onClick_dgToiawasesakiControl_modify(): string {
+                return "onClick_dgToiawasesakiControl_modify";
             }
 
-            public static onClickBtnClose(): string {
-                return "onClickBtnClose";
+            public static onClick_dgToiawasesakiControl_delete(): string {
+                return "onClick_dgToiawasesakiControl_delete";
+            }
+
+            public static onClick_btnDecide(): string {
+                return "onClick_btnDecide";
+            }
+
+            public static onClick_btnCancel(): string {
+                return "onClick_btnCancel";
+            }
+
+            public static onClick_btnSave(): string {
+                return "onClick_btnSave";
+            }
+
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
             }
 
         }
@@ -63,6 +79,10 @@ module DBZ {
 
             public ToiawasesakiShosai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ToiawasesakiShosai"));
+            }
+
+            public lblHensyuTaisho(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHensyuTaisho"));
             }
 
             public Detail1(): UZA.Panel {
