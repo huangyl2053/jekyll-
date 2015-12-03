@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  *
  * サービス種類検索の抽象Handlerクラスです。
  */
-public class ServiceCodeInputCommonChildHandler {
+public class ServiceCodeInputCommonChildDivHandler {
     
     private final ServiceCodeInputCommonChildDivDiv div;
     
@@ -24,7 +24,7 @@ public class ServiceCodeInputCommonChildHandler {
      *
      * @param div
      */
-    public ServiceCodeInputCommonChildHandler(ServiceCodeInputCommonChildDivDiv div) {
+    public ServiceCodeInputCommonChildDivHandler(ServiceCodeInputCommonChildDivDiv div) {
         this.div = div;
     }
     
@@ -38,6 +38,8 @@ public class ServiceCodeInputCommonChildHandler {
         // TODO QA:93 
         if (!focusServiceCodeList.isEmpty()) {
             div.getTxtServiceCodeName().setValue(focusServiceCodeList.get(0).getサービス名称());
+        } else {
+            div.getTxtServiceCodeName().clearValue();
         }
     }
 

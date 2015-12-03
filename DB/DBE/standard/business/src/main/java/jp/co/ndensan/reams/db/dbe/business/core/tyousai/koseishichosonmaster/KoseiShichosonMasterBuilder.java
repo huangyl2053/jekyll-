@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -15,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * {@link KoseiShichosonMaster}の編集を行うビルダークラスです。
@@ -23,20 +27,23 @@ public class KoseiShichosonMasterBuilder {
 
     private final DbT5051KoseiShichosonMasterEntity entity;
     private final KoseiShichosonMasterIdentifier id;
+    private final Models<NinteichosaItakusakiJohoIdentifier, NinteichosaItakusakiJoho> ninteichosaItakusakiJoho;
 
     /**
      * {@link DbT5051KoseiShichosonMasterEntity}より{@link KoseiShichosonMaster}の編集用Builderクラスを生成します。
      *
      * @param entity {@link DbT5051KoseiShichosonMasterEntity}
      * @param id {@link KoseiShichosonMasterIdentifier}
+     * @param ninteichosaItakusakiJoho {@link Models}
      *
      */
     KoseiShichosonMasterBuilder(
             DbT5051KoseiShichosonMasterEntity entity,
-            KoseiShichosonMasterIdentifier id
-    ) {
+            KoseiShichosonMasterIdentifier id,
+            Models<NinteichosaItakusakiJohoIdentifier, NinteichosaItakusakiJoho> ninteichosaItakusakiJoho) {
         this.entity = entity.clone();
         this.id = id;
+        this.ninteichosaItakusakiJoho = ninteichosaItakusakiJoho;
 
     }
 
@@ -389,11 +396,34 @@ public class KoseiShichosonMasterBuilder {
     }
 
     /**
+     * 構成市町村マスタのキー情報について判定します。<br>
+     * 構成市町村マスタに関連できる認定調査委託先情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は認定調査委託先情報リストに認定調査委託先情報{@link NinteichosaItakusakiJoho}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 認定調査委託先情報 {@link NinteichosaItakusakiJoho}
+     * @return {@link SeishinTechoBuilder}
+     * @throws IllegalStateException キーが一致しない場合
+     */
+    public KoseiShichosonMasterBuilder setSeishinTechoNini(NinteichosaItakusakiJoho 認定調査委託先情報) {
+        if (hasSameIdentifier(認定調査委託先情報.identifier())) {
+            ninteichosaItakusakiJoho.add(認定調査委託先情報);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(NinteichosaItakusakiJohoIdentifier 認定調査委託先情報識別子) {
+        return (entity.getShichosonCode().equals(認定調査委託先情報識別子.get市町村コード()));
+    }
+
+    /**
      * {@link KoseiShichosonMaster}のインスタンスを生成します。
      *
      * @return {@link KoseiShichosonMaster}のインスタンス
      */
     public KoseiShichosonMaster build() {
-        return new KoseiShichosonMaster(entity, id);
+        return new KoseiShichosonMaster(entity, id, ninteichosaItakusakiJoho);
     }
+
 }

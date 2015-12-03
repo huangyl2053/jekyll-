@@ -4,59 +4,47 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper">
-<resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterEntity" autoMapping="true">
-        <id property="shichosonShokibetsuID" column="DbT7051KoseiShichosonMaster_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <association property="DbT7051KoseiShichosonMasterEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster.IKoseiShichosonMasterMapper.resultMap_DbT7051KoseiShichosonMasterEntity"/>
-        <collection property="DbT5910NinteichosaItakusakiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaItakusakiJoho.IDbT5910NinteichosaItakusakiJohoEntityMapper.resultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
-    </resultMap>
-    
-    <resultMap id="resultMap_NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaItakusakiJohoEntity.NinteichosaItakusakiJohoEntity" autoMapping="true">
-        <id property="shichosonShokibetsuID" column="DbT7051KoseiShichosonMaster_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="ninteichosaItakusakiCode" column="DbT7051KoseiShichosonMaster_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbe.entity.typehandler.NinteichosaItakusakiCodeTypeHandler"/>
-        <association property="DbT5913ChosainJohohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosainJohoho.IDbT5910NinteichosaItakusakiJohoEntityMapper.resultMap_DbT5913ChosainJohohoEntity"/>
-        <collection property="DbT5910NinteichosaItakusakiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaItakusakiJoho.IDbT5910NinteichosaItakusakiJohoEntityMapper.resultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
-    </resultMap>
+<resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity" autoMapping="true">
+        <id column="dbT5051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.ResultMap_DbT5051KoseiShichosonMasterEntity"/>
+        <collection property="主治医医療機関情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper.resultMap_ShujiiIryoKikanJohoEntity"/>
+</resultMap>
     
     
-    
-    <select id="getChosaItakusakiChosainRelateEntity" type="resultMap_KoseiShichosonMasterEntity"
+    <select id="getKoseiShichosonMasterRelateEntity" resultMap="resultMap_KoseiShichosonMasterEntity"
      parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter" fetchSize="500">
     SELECT
-    dbT7051KoseiShichosonMaster.*,
-    dbT5910NinteichosaItakusakiJoho.*,
-    dbT5913ChosainJoho.*
+        DbT5051KoseiShichosonMaster.*,
+        DbT5911ShujiiIryoKikanJoho.*,
+        DbT5912ShujiiJoho.*
     FROM
     (
     SELECT
-    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koseishichosonmaster.DbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster"/>
+    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5051KoseiShichosonMasterMapper.allColumns_DbT5051KoseiShichosonMaster"/>
     FROM
-    rgdb."DbT7051KoseiShichosonMaster"
+    rgdb."DbT5051KoseiShichosonMaster"
     WHERE
-    shichosonShokibetsuID=#{shichosonShokibetsuID}
-    AND
-    shichosonCode=#{shichosonCode}
-    )AS dbT7051KoseiShichosonMaster
-    LEFT OUTER JOIN
+    "shichosonShokibetsuID"=#{shichosonShokibetsuID}
+    )AS DbT5051KoseiShichosonMaster
+    LEFT JOIN
     (
     SELECT
-    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho"/>
+    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho"/>
     FROM
-    rgdb."DbT5910NinteichosaItakusakiJoho"
-    )AS dbT5910NinteichosaItakusakiJoho
+    rgdb."DbT5911ShujiiIryoKikanJoho"
+    )AS DbT5911ShujiiIryoKikanJoho
     ON
-    dbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"=dbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode"
-    
-     LEFT OUTER JOIN
+    DbT5051KoseiShichosonMaster."dbT5051KoseiShichosonMaster_shichosonCode" = DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode"
+    LEFT JOIN
     (
     SELECT
-    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho"/>
+    <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
     FROM
-    rgdb."DbT5913ChosainJoho"
-    )AS dbT5913ChosainJoho
+    rgdb."DbT5912ShujiiJoho"
+    )AS DbT5912ShujiiJoho
     ON
-    dbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode"=dbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode"
-    AND
-    dbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode"=dbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
+    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" = DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" AND
+    DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" = DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode"
 </select>
 
 </mapper>

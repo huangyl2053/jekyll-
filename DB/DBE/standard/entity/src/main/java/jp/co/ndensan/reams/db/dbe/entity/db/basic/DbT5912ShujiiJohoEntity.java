@@ -24,7 +24,6 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5912ShujiiJoho");
-    private static final long serialVersionUID = 9066233166649566704L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -362,7 +361,8 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      * このエンティティの主キーが他の{@literal DbT5912ShujiiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5912ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5912ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5912ShujiiJohoEntity other) {

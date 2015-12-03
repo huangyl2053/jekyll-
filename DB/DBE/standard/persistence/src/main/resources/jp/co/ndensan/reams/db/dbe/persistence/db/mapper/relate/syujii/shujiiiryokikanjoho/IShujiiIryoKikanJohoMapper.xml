@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 主治医医療機関情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper">
+
+    <select id="select主治医医療機関情報ByKey" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter" resultMap="resultMap_ShujiiIryoKikanJohoEntity" fetchSize="500">
+        <include refid="selectShujiiIryoKikanJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectShujiiIryoKikanJohoEntity">
+        SELECT
+        DbT5911ShujiiIryoKikanJoho.*,
+        DbT5912ShujiiJoho.*
+        FROM
+        (
+        SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
+        FROM 
+            rgdb."DbT5911ShujiiIryoKikanJoho"
+        WHERE
+            "shichosonCode" = #{shichosonCode}
+        AND "shujiiIryokikanCode" = #{shujiiIryokikanCode}
+        ) AS DbT5911ShujiiIryoKikanJoho
+        LEFT JOIN
+        (
+         SELECT 
+            <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
+         FROM 
+            rgdb."DbT5912ShujiiJoho"
+        ) AS DbT5912ShujiiJoho
+        ON
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" = DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" AND
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" = DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode"
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity" autoMapping="true">
+        <id column="dbT5911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="主治医医療機関情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <collection property="主治医情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+    </resultMap>
+
+</mapper>

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCodeCommonChildDiv.ServiceCodeCommonChildDivHandler;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,12 +50,11 @@ public class ServiceCodeCommonChildDiv {
         }
         KaigoServiceShuruiCode サービス種類コード = new KaigoServiceShuruiCode(div.getTxtServiceCode().getValue().substring(0, 2));
         KaigoServiceNaiyouManager service = KaigoServiceNaiyouManager.createInstance();
-        RDate kijunYmDate = new RDate(div.getTxtKijunYM().getValue().toString());
-        FlexibleYearMonth kijunYmFlex = new FlexibleYearMonth(kijunYmDate.getYearMonth().toDateString());
+        FlexibleYearMonth kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
         kijunYmFlex.wareki().fillType(FillType.NONE);
         // TODO 董亜彬 QA:47の回答する、2015/11/30まで
         // サービス項目コード:div.getTxtServiceCode().getValue().substring(2, 6);
-        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(サービス種類コード.getColumnValue(),
+        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(サービス種類コード,
                 new RString("1001"), kijunYmFlex);
         List<KaigoServiceNaiyou> list = service.getServiceCodeList(param);
         getHandler(div).initialize(list);
@@ -87,7 +85,7 @@ public class ServiceCodeCommonChildDiv {
         return ResponseData.of(div).respond();
     }
     
-    private ServiceCodeCommonChildHandler getHandler(ServiceCodeCommonChildDivDiv div) {
-        return new ServiceCodeCommonChildHandler(div);
+    private ServiceCodeCommonChildDivHandler getHandler(ServiceCodeCommonChildDivDiv div) {
+        return new ServiceCodeCommonChildDivHandler(div);
     }
 }

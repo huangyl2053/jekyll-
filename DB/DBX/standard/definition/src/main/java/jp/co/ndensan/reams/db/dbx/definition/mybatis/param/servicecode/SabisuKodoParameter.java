@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode;
 
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class SabisuKodoParameter {
 
-    private final RString serviceShuruiCode;
+    private final KaigoServiceShuruiCode serviceShuruiCode;
     private final boolean isShuruiCodeFlag;
     private final RString serviceKoumokuCode;
     private final boolean isKoumokuCodeFlag;
@@ -21,7 +22,7 @@ public final class SabisuKodoParameter {
     private final boolean isHaakuKijunYMFlag;
 
     private SabisuKodoParameter(
-            RString serviceShuruiCode,
+            KaigoServiceShuruiCode serviceShuruiCode,
             boolean isShuruiCodeFlag,
             RString serviceKoumokuCode,
             boolean isKoumokuCodeFlag,
@@ -44,7 +45,7 @@ public final class SabisuKodoParameter {
      * @return 検索パラメータ
      */
     public static SabisuKodoParameter createSearchParam(
-            RString serviceShuruiCode,
+            KaigoServiceShuruiCode serviceShuruiCode,
             RString serviceKoumokuCode,
             FlexibleYearMonth haakuKijunYM) {
         boolean isShuruiCodeFlag = true;
@@ -73,7 +74,7 @@ public final class SabisuKodoParameter {
      *
      * @return serviceShuruiCode
      */
-    public RString getServiceShuruiCode() {
+    public KaigoServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 

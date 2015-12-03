@@ -68,6 +68,7 @@ public enum ShikakuKubun {
                 return shikakuKubun;
             }
         }
+//        throw new IllegalArgumentException(DcErrorMessages.E09002.getMessage().getMessage());
         throw new IllegalArgumentException();
     }
 }

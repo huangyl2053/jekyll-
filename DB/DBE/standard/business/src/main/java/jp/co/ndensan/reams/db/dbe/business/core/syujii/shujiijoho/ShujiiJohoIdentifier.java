@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class ShujiiJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = -7560238173683851086L;
     private final LasdecCode 市町村コード;
     private final RString 主治医医療機関コード;
     private final RString 主治医コード;

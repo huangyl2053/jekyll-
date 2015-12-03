@@ -9,7 +9,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -20,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShinsakaiWariateIinJohoManager {
 
+    private final MapperProvider mapperProvider;
     private final DbT5503ShinsakaiWariateIinJohoDac dac;
     private final ShinsakaiIinJohoManager 介護認定審査会委員情報Manager;
 
@@ -27,21 +32,55 @@ public class ShinsakaiWariateIinJohoManager {
      * コンストラクタです。
      */
     public ShinsakaiWariateIinJohoManager() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT5503ShinsakaiWariateIinJohoDac.class);
         this.介護認定審査会委員情報Manager = new ShinsakaiIinJohoManager();
     }
 
     /**
-     * テスト用コンストラクタです。
+     * 単体テスト用のコンストラクタです。
      *
-     * @param dac {@link DbT5503ShinsakaiWariateIinJohoDac}
+     * @param mapperProvider mapperProvider
+     * @param dac DbT5503ShinsakaiWariateIinJohoDac
+     * @param 介護認定審査会委員情報Manager 介護認定審査会委員情報Manager
      */
     ShinsakaiWariateIinJohoManager(
+            MapperProvider mapperProvider,
             DbT5503ShinsakaiWariateIinJohoDac dac,
             ShinsakaiIinJohoManager 介護認定審査会委員情報Manager
     ) {
+        this.mapperProvider = mapperProvider;
         this.dac = dac;
         this.介護認定審査会委員情報Manager = 介護認定審査会委員情報Manager;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiWariateIinJohoManager}のインスタンスを返します。
+     *
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiWariateIinJohoManager}のインスタンス
+     */
+    public static ShinsakaiWariateIinJohoManager createInstance() {
+        return InstanceProvider.create(ShinsakaiWariateIinJohoManager.class);
+    }
+
+    /**
+     * 主キーに合致する介護認定審査会割当委員情報を返します。
+     *
+     * @param 介護認定審査会割当委員情報検索条件 介護認定審査会割当委員情報検索条件
+     * @return ShinsakaiWariateIinJoho
+     */
+    @Transaction
+    public ShinsakaiWariateIinJoho get介護認定審査会割当委員情報(ShinsakaiWariateIinJohoMapperParameter 介護認定審査会割当委員情報検索条件) {
+        requireNonNull(介護認定審査会割当委員情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報検索条件"));
+        IShinsakaiWariateIinJohoMapper mapper = mapperProvider.create(IShinsakaiWariateIinJohoMapper.class);
+
+        ShinsakaiWariateIinJohoRelateEntity relateEntity = mapper.select介護認定審査会割当委員情報ByKey(介護認定審査会割当委員情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new ShinsakaiWariateIinJoho(relateEntity);
     }
 
     /**

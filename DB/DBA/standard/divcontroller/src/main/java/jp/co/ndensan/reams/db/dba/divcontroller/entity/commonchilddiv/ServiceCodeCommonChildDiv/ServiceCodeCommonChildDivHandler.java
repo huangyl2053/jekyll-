@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * サービスコード検索の抽象Handlerクラスです。
  *
  */
-public class ServiceCodeCommonChildHandler {
+public class ServiceCodeCommonChildDivHandler {
     
     private final ServiceCodeCommonChildDivDiv div;
     
@@ -29,7 +29,7 @@ public class ServiceCodeCommonChildHandler {
      *
      * @param div
      */
-    public ServiceCodeCommonChildHandler(ServiceCodeCommonChildDivDiv div) {
+    public ServiceCodeCommonChildDivHandler(ServiceCodeCommonChildDivDiv div) {
         this.div = div;
     }
     
@@ -61,7 +61,7 @@ public class ServiceCodeCommonChildHandler {
             sb.append(serviceCode.getサービス項目コード());
             row.setTxtServiceCode(sb.toRString());
             row.setTxtServiceName(serviceCode.getサービス名称());
-            if (serviceCode.getサービス種類コード() == サービス種類コード) {
+            if (serviceCode.getサービス種類コード().equals(サービス種類コード)) {
                 row.setSelected(Boolean.TRUE);
             }
             dataList.add(row);
@@ -75,11 +75,11 @@ public class ServiceCodeCommonChildHandler {
      */
     public void onClick_btnKakutei() {
         ServiceCodeModel serviceCode = new ServiceCodeModel();
-        serviceCode.setサービス種類コード(div.getDgCodeIchiran().getSelectedItems().get(0).getTxtServiceCode().substring(0, 2));
+        serviceCode.setサービス種類コード(div.getDgCodeIchiran().getClickedItem().getTxtServiceCode().substring(0, 2));
         // TODO 董亜彬 QA:47の回答する、2015/11/30まで
         // serviceCode.setサービス項目コード(serviceShuruiCode.substring(2, 6));
         serviceCode.setサービス項目コード(new RString("1001"));
-        serviceCode.setサービス種類名称(div.getDgCodeIchiran().getSelectedItems().get(0).getTxtServiceName());
+        serviceCode.setサービス種類名称(div.getDgCodeIchiran().getClickedItem().getTxtServiceName());
         div.setServiceCodeModel(DataPassingConverter.serialize(serviceCode));
     }
     
