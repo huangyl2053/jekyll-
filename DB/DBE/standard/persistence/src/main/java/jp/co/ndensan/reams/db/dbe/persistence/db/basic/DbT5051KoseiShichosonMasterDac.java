@@ -86,7 +86,7 @@ public class DbT5051KoseiShichosonMasterDac implements ISaveable<DbT5051KoseiShi
      * 所在保険者リスト情報取得。
      *
      * @param systemDate システム年月日
-     * @return @return List<DbT7051KoseiShichosonMasterEntity>
+     * @return List<DbT7051KoseiShichosonMasterEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction

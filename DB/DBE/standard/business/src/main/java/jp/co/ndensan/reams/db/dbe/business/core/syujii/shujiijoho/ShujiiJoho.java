@@ -81,7 +81,6 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -220,7 +219,8 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
     }
 
     /**
-     * 主治医情報のみを変更対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医情報のみを変更対象とします。<br/>
+     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiJoho}
      */
@@ -234,7 +234,8 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
     }
 
     /**
-     * 保持する主治医情報を削除対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する主治医情報を削除対象とします。<br/>
+     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiJoho}
      */

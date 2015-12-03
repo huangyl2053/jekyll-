@@ -10,17 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster.KoseiShichosonMasterIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -32,11 +29,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 主治医医療機関情報を管理するクラスです。
  */
-public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
+public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier, DbT5911ShujiiIryoKikanJohoEntity, ShujiiIryoKikanJoho> implements Serializable {
 
     private final DbT5911ShujiiIryoKikanJohoEntity entity;
     private final ShujiiIryoKikanJohoIdentifier id;
-    private final Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster;
     private final Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho;
 
     /**
@@ -57,7 +53,6 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
                 市町村コード,
                 主治医医療機関コード
         );
-        this.koseiShichosonMaster = Models.create(new ArrayList<KoseiShichosonMaster>());
         this.shujiiJoho = Models.create(new ArrayList<ShujiiJoho>());
     }
 
@@ -72,11 +67,6 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 entity.get主治医医療機関情報Entity().getShichosonCode(),
                 entity.get主治医医療機関情報Entity().getShujiiIryokikanCode());
-        List<KoseiShichosonMaster> koseiShichosonMasterList = new ArrayList<>();
-        for (DbT5051KoseiShichosonMasterEntity koseiShichosonMasterEntity : entity.get構成市町村マスタEntity()) {
-            koseiShichosonMasterList.add(new KoseiShichosonMaster(koseiShichosonMasterEntity));
-        }
-        this.koseiShichosonMaster = Models.create(koseiShichosonMasterList);
 
         List<ShujiiJoho> shujiiJohoList = new ArrayList<>();
         for (DbT5912ShujiiJohoEntity shujiiJohoEntity : entity.get主治医情報Entity()) {
@@ -94,12 +84,10 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
     ShujiiIryoKikanJoho(
             DbT5911ShujiiIryoKikanJohoEntity entity,
             ShujiiIryoKikanJohoIdentifier id,
-            Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster,
             Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho
     ) {
         this.entity = entity;
         this.id = id;
-        this.koseiShichosonMaster = koseiShichosonMaster;
         this.shujiiJoho = shujiiJoho;
     }
 
@@ -234,10 +222,12 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
     /**
      * 主治医医療機関情報配下の要素を削除対象とします。<br/>
      * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
+     * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
-     * @throws IllegalStateException DbT5911ShujiiIryoKikanJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException
+     * DbT5911ShujiiIryoKikanJohoEntityのデータ状態が変更の場合
      */
     @Override
     public ShujiiIryoKikanJoho deleted() {
@@ -249,13 +239,13 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShujiiIryoKikanJoho(
-                deletedEntity, id, koseiShichosonMaster.deleted(), shujiiJoho.deleted());
+                deletedEntity, id, shujiiJoho.deleted());
     }
 
     @Override
     public boolean hasChanged() {
 
-        return hasChangedEntity() || koseiShichosonMaster.hasAnyChanged() || shujiiJoho.hasAnyChanged();
+        return hasChangedEntity() || shujiiJoho.hasAnyChanged();
 
     }
 
@@ -265,39 +255,13 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */
-    @Override
     public ShujiiIryoKikanJoho modifiedModel() {
         DbT5911ShujiiIryoKikanJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ShujiiIryoKikanJoho(
-                modifiedEntity, id, koseiShichosonMaster, shujiiJoho);
-    }
-
-    /**
-     * 主治医医療機関情報が保持する構成市町村マスタに対して、指定の識別子に該当する構成市町村マスタを返します。
-     *
-     * @param id 構成市町村マスタの識別子
-     * @return 構成市町村マスタ
-     * @throws IllegalStateException 指定の識別子に該当する構成市町村マスタがない場合
-     */
-    public KoseiShichosonMaster getKoseiShichosonMaster(KoseiShichosonMasterIdentifier id) {
-        if (koseiShichosonMaster.contains(id)) {
-            return koseiShichosonMaster.clone().get(id);
-        }
-        //TODO メッセージの検討
-        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
-    }
-
-    /**
-     * 主治医医療機関情報が保持する構成市町村マスタをリストで返します。
-     *
-     * @return 構成市町村マスタリスト
-     */
-    public List<KoseiShichosonMaster> getKoseiShichosonMasterList() {
-        return new ArrayList<>(koseiShichosonMaster.values());
-
+                modifiedEntity, id, shujiiJoho);
     }
 
     /**
@@ -330,30 +294,27 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      * @return {@link ShujiiIryoKikanJoho}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, koseiShichosonMaster, shujiiJoho);
+        return new _SerializationProxy(entity, id, shujiiJoho);
     }
 
     private static final class _SerializationProxy implements Serializable {
 
         private final DbT5911ShujiiIryoKikanJohoEntity entity;
         private final ShujiiIryoKikanJohoIdentifier id;
-        private final Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster;
         private final Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho;
 
         private _SerializationProxy(
                 DbT5911ShujiiIryoKikanJohoEntity entity,
                 ShujiiIryoKikanJohoIdentifier id,
-                Models<KoseiShichosonMasterIdentifier, KoseiShichosonMaster> koseiShichosonMaster,
                 Models<ShujiiJohoIdentifier, ShujiiJoho> shujiiJoho
         ) {
             this.entity = entity;
             this.id = id;
-            this.koseiShichosonMaster = koseiShichosonMaster;
             this.shujiiJoho = shujiiJoho;
         }
 
         private Object readResolve() {
-            return new ShujiiIryoKikanJoho(this.entity, this.id, this.koseiShichosonMaster, this.shujiiJoho);
+            return new ShujiiIryoKikanJoho(this.entity, this.id, this.shujiiJoho);
         }
     }
 
@@ -364,7 +325,7 @@ public class ShujiiIryoKikanJoho extends ParentModelBase<ShujiiIryoKikanJohoIden
      * @return {@link ShujiiIryoKikanJohoBuilder}
      */
     public ShujiiIryoKikanJohoBuilder createBuilderForEdit() {
-        return new ShujiiIryoKikanJohoBuilder(entity, id, koseiShichosonMaster, shujiiJoho);
+        return new ShujiiIryoKikanJohoBuilder(entity, id, shujiiJoho);
     }
 
     @Override

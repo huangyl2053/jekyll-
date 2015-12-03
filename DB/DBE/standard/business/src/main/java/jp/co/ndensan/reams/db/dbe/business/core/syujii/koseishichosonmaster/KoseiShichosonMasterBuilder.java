@@ -6,8 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.core.syujii.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -23,6 +27,7 @@ public class KoseiShichosonMasterBuilder {
 
     private final DbT5051KoseiShichosonMasterEntity entity;
     private final KoseiShichosonMasterIdentifier id;
+    private final Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> shujiiIryoKikanJoho;
 
     /**
      * {@link DbT5051KoseiShichosonMasterEntity}より{@link KoseiShichosonMaster}の編集用Builderクラスを生成します。
@@ -33,10 +38,12 @@ public class KoseiShichosonMasterBuilder {
      */
     KoseiShichosonMasterBuilder(
             DbT5051KoseiShichosonMasterEntity entity,
-            KoseiShichosonMasterIdentifier id
+            KoseiShichosonMasterIdentifier id,
+            Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> shujiiIryoKikanJoho
     ) {
         this.entity = entity.clone();
         this.id = id;
+        this.shujiiIryoKikanJoho = shujiiIryoKikanJoho;
 
     }
 
@@ -389,11 +396,33 @@ public class KoseiShichosonMasterBuilder {
     }
 
     /**
+     * 構成市町村マスタ情報のキー情報について判定します。<br>
+     * 構成市町村マスタ情報に関連できる主治医医療機関情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は主治医医療機関情報リストに主治医医療機関情報{@link ShujiiIryoKikanJoho}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     *
+     * @param 主治医医療機関情報 {@link ShujiiIryoKikanJoho}
+     * @return {@link KoseiShichosonMasterBuilder}
+     * @throws IllegalStateException キーが一致しない場合
+     */
+    public KoseiShichosonMasterBuilder setShujiiIryoKikanJoho(ShujiiIryoKikanJoho 主治医医療機関情報) {
+        if (hasSameIdentifier(主治医医療機関情報.identifier())) {
+            shujiiIryoKikanJoho.add(主治医医療機関情報);
+            return this;
+        }
+        throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+    }
+
+    private boolean hasSameIdentifier(ShujiiIryoKikanJohoIdentifier 主治医医療機関情報の識別子) {
+        return (entity.getShichosonCode().equals(主治医医療機関情報の識別子.get市町村コード()));
+    }
+
+    /**
      * {@link KoseiShichosonMaster}のインスタンスを生成します。
      *
      * @return {@link KoseiShichosonMaster}のインスタンス
      */
     public KoseiShichosonMaster build() {
-        return new KoseiShichosonMaster(entity, id);
+        return new KoseiShichosonMaster(entity, id, shujiiIryoKikanJoho);
     }
 }
