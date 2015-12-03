@@ -28,6 +28,10 @@ module DBZ
             public ModeD() {
                 return new Modes.ModeD(this.controls);
             }
+			
+			public ModeShokai() {
+                return new Modes.ModeShokai(this.controls);
+            }
             
             public 除外施設入所適用() {
                 return new Modes.除外施設入所適用(this.controls);
@@ -44,6 +48,7 @@ module DBZ
             public 除外異動訂正() {
                 return new Modes.除外異動訂正(this.controls);
             }
+			
             ////////////////////////////
 
             public Properties() {
@@ -58,7 +63,7 @@ module DBZ
             
             public priorities(): Array<string> {
                 return [
-                    "ModeA","ModeB","ModeC","ModeD",
+                    "ModeA","ModeB","ModeC","ModeD","ModeShokai",
                     "除外施設入所適用","除外施設退所解除","除外施設変更変更","除外異動訂正"
                 ];
             }
@@ -222,6 +227,29 @@ module DBZ
                     this.controls.btnAdd().displayNone = false;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                }
+                
+              }
+			     
+
+
+			 export class ModeShokai {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public shokai(): void {
+				    this.controls.btnAdd().displayNone = true;
+                     this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;                    
+                    this.controls.btnKakutei().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = true;
+					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
+					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
+                 
                 }
                 
               }

@@ -22,6 +22,10 @@ var DBZ;
                 return new Modes.ModeD(this.controls);
             };
 
+            ModeController.prototype.ModeShokai = function () {
+                return new Modes.ModeShokai(this.controls);
+            };
+
             ModeController.prototype.除外施設入所適用 = function () {
                 return new Modes.除外施設入所適用(this.controls);
             };
@@ -52,6 +56,7 @@ var DBZ;
                     "ModeB",
                     "ModeC",
                     "ModeD",
+                    "ModeShokai",
                     "除外施設入所適用",
                     "除外施設退所解除",
                     "除外施設変更変更",
@@ -205,6 +210,25 @@ var DBZ;
                 return 除外異動訂正;
             })();
             Modes.除外異動訂正 = 除外異動訂正;
+
+            var ModeShokai = (function () {
+                function ModeShokai(controls) {
+                    this.controls = controls;
+                }
+                ModeShokai.prototype.shokai = function () {
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = true;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
+                };
+                return ModeShokai;
+            })();
+            Modes.ModeShokai = ModeShokai;
         })(TekiyoJogaiRireki.Modes || (TekiyoJogaiRireki.Modes = {}));
         var Modes = TekiyoJogaiRireki.Modes;
     })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
