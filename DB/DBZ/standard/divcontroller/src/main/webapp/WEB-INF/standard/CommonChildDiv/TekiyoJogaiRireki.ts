@@ -28,6 +28,22 @@ module DBZ
             public ModeD() {
                 return new Modes.ModeD(this.controls);
             }
+            
+            public 除外施設入所適用() {
+                return new Modes.除外施設入所適用(this.controls);
+            }
+            
+            public 除外施設退所解除() {
+                return new Modes.除外施設退所解除(this.controls);
+            }
+            
+            public 除外施設変更変更() {
+                return new Modes.除外施設変更変更(this.controls);
+            }
+            
+            public 除外異動訂正() {
+                return new Modes.除外異動訂正(this.controls);
+            }
             ////////////////////////////
 
             public Properties() {
@@ -42,7 +58,8 @@ module DBZ
             
             public priorities(): Array<string> {
                 return [
-                    "ModeA","ModeB","ModeC","ModeD"
+                    "ModeA","ModeB","ModeC","ModeD",
+                    "除外施設入所適用","除外施設退所解除","除外施設変更変更","除外異動訂正"
                 ];
             }
             ////////////////////////////////////////////////////
@@ -50,7 +67,7 @@ module DBZ
 
         export module Modes {
         //////////////////////////////////
-              //�V�K�i�K�p�j���[�h
+              //新規（適用）モード
               export class ModeA {
                 private controls: Controls;
                 constructor(controls: Controls) {
@@ -64,12 +81,13 @@ module DBZ
                     this.controls.panelTekiyoInput().displayNone = true;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
               
               
               }
               
-              //�폜�i�����j���[�h
+              //削除（解除）モード
               export class ModeB {
                 private controls: Controls;
                 constructor(controls: Controls) {
@@ -85,10 +103,11 @@ module DBZ
                     
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
               }
                 
-              //�ύX���[�h
+              //変更モード
               export class ModeC {
                 private controls: Controls;
                 constructor(controls: Controls) {
@@ -105,10 +124,11 @@ module DBZ
                     
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
                 
               }
-              //�\�����[�h
+              //表示モード
               export class ModeD {
                 private controls: Controls;
                 constructor(controls: Controls) {
@@ -122,10 +142,88 @@ module DBZ
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     
                     this.controls.btnKakutei().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
 
               
               
+              }
+              //除外施設入所により適用モード
+              export class 除外施設入所適用 {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public 適用(): void {
+                  
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = false;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                }
+              }
+              //除外施設退所により解除モード
+              export class 除外施設退所解除 {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public 解除(): void {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = false;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                }
+              }
+              //除外施設変更により変更モード
+              export class 除外施設変更変更 {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public 変更(): void {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                }
+                
+              }
+              //除外異動訂正により訂正モード
+              export class 除外異動訂正 {
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                 public 訂正(): void {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = false;
+                    this.controls.txtNyusyoDate().displayNone = true;
+                    this.controls.txtTaisyoDate().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                }
+                
               }
 
         

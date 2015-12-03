@@ -32,6 +32,10 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("panelTekiyoRireki"));
             };
 
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
             Controls.prototype.datagridTekiyoJogai = function () {
                 return new UZA.DataGrid(this.convFiledName("datagridTekiyoJogai"));
             };
@@ -96,6 +100,10 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyuInput"));
             };
 
+            Controls.prototype.ccdShisetsuJoho = function () {
+                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            };
+
             Controls.prototype.panelTekiyoJokaiKaiJyoInput = function () {
                 return new UZA.Panel(this.convFiledName("panelTekiyoJokaiKaiJyoInput"));
             };
@@ -118,6 +126,14 @@ var DBZ;
 
             Controls.prototype.ddlKaijoJiyuInput = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyuInput"));
+            };
+
+            Controls.prototype.TekiyoJogaiTorokuHenkoIchiran = function () {
+                return new UZA.Panel(this.convFiledName("TekiyoJogaiTorokuHenkoIchiran"));
+            };
+
+            Controls.prototype.ccdShisetsuNyushRirekiKanri = function () {
+                return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetsuNyushRirekiKanri"));
             };
 
             Controls.prototype.btnKakutei = function () {

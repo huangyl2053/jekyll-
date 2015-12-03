@@ -43,12 +43,12 @@ dba/db/dba/HihokenshaHakko/onActive_HihokenshaHakko
 dba/db/dba/HihokenshaShokaiPanelSelect/onClick_btnToDecide
 dba/db/dba/HihokenshaShokaiTaishoSearch/onLoad
 dba/db/dba/HihokenshaShokaiTaishoshaJoho/onClick_btnToDecide
-dba/db/dba/KihonJoho/onLoad
+dba/db/dba/KihonJoho/initialize
+dba/db/dba/ShikakuShosai/initialize
 dba/db/dba/ShikakuShosai/onClick_btnBackGaitoshaIchiran
 dba/db/dba/ShikakuShosai/onClick_btnResearch
 dba/db/dba/ShikakuShosai/onClick_btnUpdate
 dba/db/dba/ShikakuShosai/onClick_btnUpdate_onYes
-dba/db/dba/ShikakuShosai/onLoad
 dba/db/dba/ShikakuShutokuComplete/onClick_btnSave
 dba/db/dba/ShikakuShutokuJoho/onClickAddHihoRireki
 dba/db/dba/ShikakuShutokuJoho/onClickAddIryoHokenRireki
@@ -80,12 +80,6 @@ dba/db/dba/ShisetsuNyutaishoKanriTaishoshaSearch/onLoad
 dba/db/dba/ShisetsuNyutaishoRireki/onClickAddShisetsuNyutaisho
 dba/db/dba/ShisetsuNyutaishoRireki/onClickDeleteShisetsuNyutaisho
 dba/db/dba/ShisetsuNyutaishoRireki/onClickModifyShisetsuNyutaisho
-dba/db/dba/ShoKaishuKirokuKanri/onBeforeClick_btnShoKaishuKakutei
-dba/db/dba/ShoKaishuKirokuKanri/onClick_btnShoKaishuKakutei
-dba/db/dba/ShoKaishuKirokuKanri/onClick_btnShoKaishuTorikeshi
-dba/db/dba/ShoKaishuKirokuKanri/onClick_btnShoKaishuTorikeshi_onYes
-dba/db/dba/ShoKaishuKirokuKanri/onSelectBySelectButton_dgShoKaishuJokyo
-dba/db/dba/ShoKaishuKirokuKanri/onSelect_dgShoKaishuJokyo
 dba/db/dba/TaishoshaKeySetting/onClick_btnNext
 dba/db/dba/TaishoshaKeySetting/onLoad
 dba/db/dba/TajutokuTaishosaJoho/onClick_btnToDecide

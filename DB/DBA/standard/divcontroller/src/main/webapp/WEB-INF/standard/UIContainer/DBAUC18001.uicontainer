@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC18001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "資格取得除外者登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1080011",
+     "toLayoutTitle": "資格取得除外者登録",
+     "toState": "年齢到達条件"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1080011",
+     "layoutTitle": "資格取得除外者登録",
+     "eventName": "終了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

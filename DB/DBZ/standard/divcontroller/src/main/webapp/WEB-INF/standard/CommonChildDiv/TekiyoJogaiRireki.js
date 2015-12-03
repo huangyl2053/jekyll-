@@ -22,6 +22,22 @@ var DBZ;
                 return new Modes.ModeD(this.controls);
             };
 
+            ModeController.prototype.除外施設入所適用 = function () {
+                return new Modes.除外施設入所適用(this.controls);
+            };
+
+            ModeController.prototype.除外施設退所解除 = function () {
+                return new Modes.除外施設退所解除(this.controls);
+            };
+
+            ModeController.prototype.除外施設変更変更 = function () {
+                return new Modes.除外施設変更変更(this.controls);
+            };
+
+            ModeController.prototype.除外異動訂正 = function () {
+                return new Modes.除外異動訂正(this.controls);
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -35,7 +51,11 @@ var DBZ;
                     "ModeA",
                     "ModeB",
                     "ModeC",
-                    "ModeD"
+                    "ModeD",
+                    "除外施設入所適用",
+                    "除外施設退所解除",
+                    "除外施設変更変更",
+                    "除外異動訂正"
                 ];
             };
             return ModeController;
@@ -53,6 +73,7 @@ var DBZ;
                     this.controls.panelTekiyoInput().displayNone = true;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 };
                 return ModeA;
             })();
@@ -70,6 +91,7 @@ var DBZ;
 
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 };
                 return ModeB;
             })();
@@ -88,6 +110,7 @@ var DBZ;
 
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 };
                 return ModeC;
             })();
@@ -103,10 +126,85 @@ var DBZ;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
 
                     this.controls.btnKakutei().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 };
                 return ModeD;
             })();
             Modes.ModeD = ModeD;
+
+            var 除外施設入所適用 = (function () {
+                function 除外施設入所適用(controls) {
+                    this.controls = controls;
+                }
+                除外施設入所適用.prototype.適用 = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = false;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                };
+                return 除外施設入所適用;
+            })();
+            Modes.除外施設入所適用 = 除外施設入所適用;
+
+            var 除外施設退所解除 = (function () {
+                function 除外施設退所解除(controls) {
+                    this.controls = controls;
+                }
+                除外施設退所解除.prototype.解除 = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = false;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                };
+                return 除外施設退所解除;
+            })();
+            Modes.除外施設退所解除 = 除外施設退所解除;
+
+            var 除外施設変更変更 = (function () {
+                function 除外施設変更変更(controls) {
+                    this.controls = controls;
+                }
+                除外施設変更変更.prototype.変更 = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                };
+                return 除外施設変更変更;
+            })();
+            Modes.除外施設変更変更 = 除外施設変更変更;
+
+            var 除外異動訂正 = (function () {
+                function 除外異動訂正(controls) {
+                    this.controls = controls;
+                }
+                除外異動訂正.prototype.訂正 = function () {
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = false;
+                    this.controls.txtNyusyoDate().displayNone = true;
+                    this.controls.txtTaisyoDate().displayNone = true;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
+                    this.controls.btnKakutei().displayNone = false;
+                    this.controls.btnKakutei().disabled = false;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                };
+                return 除外異動訂正;
+            })();
+            Modes.除外異動訂正 = 除外異動訂正;
         })(TekiyoJogaiRireki.Modes || (TekiyoJogaiRireki.Modes = {}));
         var Modes = TekiyoJogaiRireki.Modes;
     })(DBZ.TekiyoJogaiRireki || (DBZ.TekiyoJogaiRireki = {}));
