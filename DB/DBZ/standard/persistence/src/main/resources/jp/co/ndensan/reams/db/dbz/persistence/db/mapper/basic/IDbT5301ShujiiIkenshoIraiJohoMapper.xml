@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5301ShujiiIkenshoIraiJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
      FROM
-         rg."DbT5301ShujiiIkenshoIraiJoho"
+         rgdb."DbT5301ShujiiIkenshoIraiJoho"
      WHERE
-         rg."DbT5301ShujiiIkenshoIraiJoho"."isDeleted" = FALSE
+         rgdb."DbT5301ShujiiIkenshoIraiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5301ShujiiIkenshoIraiJoho">
@@ -50,7 +50,7 @@
 
 
     <!--テーブルDbT5301ShujiiIkenshoIraiJohoの項目をDbT5301ShujiiIkenshoIraiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" />
         <id property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" />
         <result property="insertDantaiCd" column="dbT5301ShujiiIkenshoIraiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -81,11 +81,10 @@
         <result property="ninteiJohoTeikyoYMD" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT5301ShujiiIkenshoIraiJoho_logicalDeletedFlag" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity">
     SELECT
-    <include refid="allColumns_DbT5301ShujiiIkenshoIraiJoho">
-         FROM
-         rg."DbT5301ShujiiIkenshoIraiJoho"
-    </include>  
-</sleect>
+        <include refid="allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+    FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+</select>
 </mapper>
