@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Nov 28 16:50:16 CST 2015 
+ * Thu Dec 03 15:56:29 CST 2015 
  */
 
 

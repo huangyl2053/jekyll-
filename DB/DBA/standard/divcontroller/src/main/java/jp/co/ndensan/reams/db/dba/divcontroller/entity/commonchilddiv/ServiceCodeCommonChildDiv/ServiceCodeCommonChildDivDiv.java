@@ -24,12 +24,14 @@ public class ServiceCodeCommonChildDivDiv extends Panel implements IServiceCodeC
      */
     @JsonProperty("txtServiceCode")
     private TextBoxCode txtServiceCode;
+    @JsonProperty("txtKomokuCode")
+    private TextBoxCode txtKomokuCode;
     @JsonProperty("txtKijunYM")
     private TextBoxDate txtKijunYM;
-    @JsonProperty("dgCodeIchiran")
-    private DataGrid<dgCodeIchiran_Row> dgCodeIchiran;
     @JsonProperty("btnServiceCodeKensaku")
     private Button btnServiceCodeKensaku;
+    @JsonProperty("dgCodeIchiran")
+    private DataGrid<dgCodeIchiran_Row> dgCodeIchiran;
     @JsonProperty("btnYameru")
     private Button btnYameru;
     @JsonProperty("btnKakutei")
@@ -62,6 +64,24 @@ public class ServiceCodeCommonChildDivDiv extends Panel implements IServiceCodeC
     }
 
     /*
+     * gettxtKomokuCode
+     * @return txtKomokuCode
+     */
+    @JsonProperty("txtKomokuCode")
+    public TextBoxCode getTxtKomokuCode() {
+        return txtKomokuCode;
+    }
+
+    /*
+     * settxtKomokuCode
+     * @param txtKomokuCode txtKomokuCode
+     */
+    @JsonProperty("txtKomokuCode")
+    public void setTxtKomokuCode(TextBoxCode txtKomokuCode) {
+        this.txtKomokuCode = txtKomokuCode;
+    }
+
+    /*
      * gettxtKijunYM
      * @return txtKijunYM
      */
@@ -80,24 +100,6 @@ public class ServiceCodeCommonChildDivDiv extends Panel implements IServiceCodeC
     }
 
     /*
-     * getdgCodeIchiran
-     * @return dgCodeIchiran
-     */
-    @JsonProperty("dgCodeIchiran")
-    public DataGrid<dgCodeIchiran_Row> getDgCodeIchiran() {
-        return dgCodeIchiran;
-    }
-
-    /*
-     * setdgCodeIchiran
-     * @param dgCodeIchiran dgCodeIchiran
-     */
-    @JsonProperty("dgCodeIchiran")
-    public void setDgCodeIchiran(DataGrid<dgCodeIchiran_Row> dgCodeIchiran) {
-        this.dgCodeIchiran = dgCodeIchiran;
-    }
-
-    /*
      * getbtnServiceCodeKensaku
      * @return btnServiceCodeKensaku
      */
@@ -113,6 +115,24 @@ public class ServiceCodeCommonChildDivDiv extends Panel implements IServiceCodeC
     @JsonProperty("btnServiceCodeKensaku")
     public void setBtnServiceCodeKensaku(Button btnServiceCodeKensaku) {
         this.btnServiceCodeKensaku = btnServiceCodeKensaku;
+    }
+
+    /*
+     * getdgCodeIchiran
+     * @return dgCodeIchiran
+     */
+    @JsonProperty("dgCodeIchiran")
+    public DataGrid<dgCodeIchiran_Row> getDgCodeIchiran() {
+        return dgCodeIchiran;
+    }
+
+    /*
+     * setdgCodeIchiran
+     * @param dgCodeIchiran dgCodeIchiran
+     */
+    @JsonProperty("dgCodeIchiran")
+    public void setDgCodeIchiran(DataGrid<dgCodeIchiran_Row> dgCodeIchiran) {
+        this.dgCodeIchiran = dgCodeIchiran;
     }
 
     /*

@@ -8,8 +8,8 @@ module DBA {
 
         export class Events {
 
-            public static onClickKensaku(): string {
-                return "onClickKensaku";
+            public static onClick_Kensaku(): string {
+                return "onClick_Kensaku";
             }
 
             public static onClick_btnYameru(): string {
@@ -49,16 +49,20 @@ module DBA {
                 return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
             }
 
+            public txtKomokuCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKomokuCode"));
+            }
+
             public txtKijunYM(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
             }
 
-            public dgCodeIchiran(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgCodeIchiran"));
-            }
-
             public btnServiceCodeKensaku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnServiceCodeKensaku"));
+            }
+
+            public dgCodeIchiran(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgCodeIchiran"));
             }
 
             public btnYameru(): UZA.Button {
