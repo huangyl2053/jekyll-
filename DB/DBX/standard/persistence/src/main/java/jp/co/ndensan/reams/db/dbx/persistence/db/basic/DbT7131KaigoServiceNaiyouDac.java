@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -95,4 +96,27 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+    
+    /**
+     * 
+     * @param サービス種類コード
+     * @param サービス項目コード
+     * @param 提供開始年月
+     * @return DbT7131KaigoServiceNaiyouEntity
+     * @throws NullPointerException 
+     */
+    public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(KaigoServiceShuruiCode サービス種類コード,
+            RString サービス項目コード, FlexibleYearMonth 提供開始年月) throws NullPointerException {
+        
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7131KaigoServiceNaiyou.class).
+                where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCode, サービス種類コード),
+                        eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCode, サービス項目コード),
+                                leq(DbT7131KaigoServiceNaiyou.teikyoKaishiYM, 提供開始年月),
+                                leq(提供開始年月, DbT7131KaigoServiceNaiyou.teikyoShuryoYM))).
+                toList(DbT7131KaigoServiceNaiyouEntity.class);
+        
+    }
+       
 }
