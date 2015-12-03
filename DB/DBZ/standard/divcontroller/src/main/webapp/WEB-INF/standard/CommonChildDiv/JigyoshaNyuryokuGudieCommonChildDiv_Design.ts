@@ -101,6 +101,10 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnTaishoJigyoshaKensaku"));
             }
 
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
+            }
+
             public btnYameru(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnYameru"));
             }
