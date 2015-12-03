@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.servicecode.ServiceCodeModel;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -42,6 +43,7 @@ public class ServiceCodeCommonChildDivHandler {
         ServiceCodeModel serviceCode = DataPassingConverter.deserialize(div.getServiceCodeModel(), ServiceCodeModel.class);
         div.getTxtServiceCode().setValue(serviceCode.getサービス種類コード());
         div.getTxtKomokuCode().setValue(serviceCode.getサービス項目コード());
+        div.getTxtKijunYM().setValue(RDate.getNowDate());
     }
     
     /**
