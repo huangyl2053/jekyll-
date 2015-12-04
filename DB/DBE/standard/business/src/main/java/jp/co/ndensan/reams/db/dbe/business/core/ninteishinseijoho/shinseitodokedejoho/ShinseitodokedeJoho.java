@@ -13,9 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -92,7 +89,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
      *
      * @return 申請届出者氏名
      */
-    public AtenaMeisho get申請届出者氏名() {
+    public RString get申請届出者氏名() {
         return entity.getShinseiTodokedeshaShimei();
     }
 
@@ -101,7 +98,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
      *
      * @return 申請届出者氏名カナ
      */
-    public AtenaKanaMeisho get申請届出者氏名カナ() {
+    public RString get申請届出者氏名カナ() {
         return entity.getShinseiTodokedeshaKanaShimei();
     }
 
@@ -111,7 +108,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
      * @return 申請届出者続柄コード
      */
     public RString get申請届出者続柄コード() {
-        return entity.getShinseiTodokedeshaTsuzukigaraCode();
+        return entity.getShinseiTodokedeshaTsuzukigara();
     }
 
     /**
@@ -146,7 +143,7 @@ public class ShinseitodokedeJoho extends ModelBase<ShinseitodokedeJohoIdentifier
      *
      * @return 申請届出者住所
      */
-    public AtenaJusho get申請届出者住所() {
+    public RString get申請届出者住所() {
         return entity.getShinseiTodokedeshaJusho();
     }
 
