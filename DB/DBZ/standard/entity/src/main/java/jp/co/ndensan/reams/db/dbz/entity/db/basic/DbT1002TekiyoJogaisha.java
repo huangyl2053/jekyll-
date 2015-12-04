@@ -3,11 +3,10 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT1002TekiyoJogaishaの項目定義クラスです
- *
+ * 適用除外者テーブルの項目定義クラスです。
  */
 public enum DbT1002TekiyoJogaisha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */

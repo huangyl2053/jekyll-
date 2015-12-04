@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -47,11 +45,11 @@ public final class DbT1002TekiyoJogaishaEntityGenerator {
         entity.setEdaNo(DEFAULT_枝番);
         entity.setIdoJiyuCode(DEFAULT_異動事由コード);
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setTekiyoJogaiTekiyoJiyuCode(new KaigoJogaiTekiyoJiyu(DEFAULT_適用除外適用事由コード));
+        entity.setTekiyoJogaiTekiyoJiyuCode(DEFAULT_適用除外適用事由コード);
         entity.setTekiyoYMD(DEFAULT_適用年月日);
         entity.setTekiyoTodokedeYMD(DEFAULT_適用届出年月日);
         entity.setTekiyoUketsukeYMD(DEFAULT_適用受付年月日);
-        entity.setTekiyoJogaikaijokaijoJiyuCode(new KaigoJogaiKaijoJiyu(DEFAULT_適用除外解除事由コード));
+        entity.setTekiyoJogaikaijokaijoJiyuCode(DEFAULT_適用除外解除事由コード);
         entity.setKaijoYMD(DEFAULT_解除年月日);
         entity.setKaijoTodokedeYMD(DEFAULT_解除届出年月日);
         entity.setKaijoUketsukeYMD(DEFAULT_解除受付年月日);

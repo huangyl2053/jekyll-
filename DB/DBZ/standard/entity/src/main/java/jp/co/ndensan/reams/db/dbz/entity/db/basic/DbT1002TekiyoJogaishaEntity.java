@@ -2,8 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoJogaiTekiyoJiyu;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -13,14 +12,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import lombok.NonNull;
 
 /**
- * DbT1002TekiyoJogaishaの項目定義クラスです
- *
+ * 適用除外者テーブルのエンティティクラスです。
  */
 public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002TekiyoJogaishaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1002TekiyoJogaisha");
 
@@ -39,13 +37,12 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
     @PrimaryKey
     private RString edaNo;
     private RString idoJiyuCode;
-    @PrimaryKey
     private LasdecCode shichosonCode;
-    private KaigoJogaiTekiyoJiyu tekiyoJogaiTekiyoJiyuCode;
+    private RString tekiyoJogaiTekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private KaigoJogaiKaijoJiyu tekiyoJogaikaijokaijoJiyuCode;
+    private RString tekiyoJogaikaijokaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
@@ -56,7 +53,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -65,7 +62,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -74,7 +71,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -83,16 +80,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -101,7 +99,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 識別コードのgetメソッドです。
-     *
+     * 
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -110,16 +108,16 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 識別コードのsetメソッドです。
-     *
+     * 
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(@NonNull ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
      * 異動日のgetメソッドです。
-     *
+     * 
      * @return 異動日
      */
     public FlexibleDate getIdoYMD() {
@@ -128,16 +126,16 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 異動日のsetメソッドです。
-     *
+     * 
      * @param idoYMD 異動日
      */
-    public void setIdoYMD(FlexibleDate idoYMD) {
+    public void setIdoYMD(@NonNull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
     }
 
     /**
      * 枝番のgetメソッドです。
-     *
+     * 
      * @return 枝番
      */
     public RString getEdaNo() {
@@ -146,16 +144,16 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 枝番のsetメソッドです。
-     *
+     * 
      * @param edaNo 枝番
      */
-    public void setEdaNo(RString edaNo) {
+    public void setEdaNo(@NonNull RString edaNo) {
         this.edaNo = edaNo;
     }
 
     /**
      * 異動事由コードのgetメソッドです。
-     *
+     * 
      * @return 異動事由コード
      */
     public RString getIdoJiyuCode() {
@@ -164,16 +162,16 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 異動事由コードのsetメソッドです。
-     *
+     * 
      * @param idoJiyuCode 異動事由コード
      */
-    public void setIdoJiyuCode(RString idoJiyuCode) {
+    public void setIdoJiyuCode(@NonNull RString idoJiyuCode) {
         this.idoJiyuCode = idoJiyuCode;
     }
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -182,34 +180,34 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@NonNull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 適用除外適用事由コードのgetメソッドです。
-     *
+     * 
      * @return 適用除外適用事由コード
      */
-    public KaigoJogaiTekiyoJiyu getTekiyoJogaiTekiyoJiyuCode() {
+    public RString getTekiyoJogaiTekiyoJiyuCode() {
         return tekiyoJogaiTekiyoJiyuCode;
     }
 
     /**
      * 適用除外適用事由コードのsetメソッドです。
-     *
+     * 
      * @param tekiyoJogaiTekiyoJiyuCode 適用除外適用事由コード
      */
-    public void setTekiyoJogaiTekiyoJiyuCode(KaigoJogaiTekiyoJiyu tekiyoJogaiTekiyoJiyuCode) {
+    public void setTekiyoJogaiTekiyoJiyuCode(@NonNull RString tekiyoJogaiTekiyoJiyuCode) {
         this.tekiyoJogaiTekiyoJiyuCode = tekiyoJogaiTekiyoJiyuCode;
     }
 
     /**
      * 適用年月日のgetメソッドです。
-     *
+     * 
      * @return 適用年月日
      */
     public FlexibleDate getTekiyoYMD() {
@@ -218,25 +216,26 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 適用年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoYMD 適用年月日
      */
-    public void setTekiyoYMD(FlexibleDate tekiyoYMD) {
+    public void setTekiyoYMD(@NonNull FlexibleDate tekiyoYMD) {
         this.tekiyoYMD = tekiyoYMD;
     }
 
     /**
      * 適用届出年月日のgetメソッドです。
-     *
+     * 
      * @return 適用届出年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoTodokedeYMD() {
         return tekiyoTodokedeYMD;
     }
 
     /**
      * 適用届出年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoTodokedeYMD 適用届出年月日
      */
     public void setTekiyoTodokedeYMD(FlexibleDate tekiyoTodokedeYMD) {
@@ -245,16 +244,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 適用受付年月日のgetメソッドです。
-     *
+     * 
      * @return 適用受付年月日
      */
+    @CheckForNull
     public FlexibleDate getTekiyoUketsukeYMD() {
         return tekiyoUketsukeYMD;
     }
 
     /**
      * 適用受付年月日のsetメソッドです。
-     *
+     * 
      * @param tekiyoUketsukeYMD 適用受付年月日
      */
     public void setTekiyoUketsukeYMD(FlexibleDate tekiyoUketsukeYMD) {
@@ -263,34 +263,36 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 適用除外解除事由コードのgetメソッドです。
-     *
+     * 
      * @return 適用除外解除事由コード
      */
-    public KaigoJogaiKaijoJiyu getTekiyoJogaikaijokaijoJiyuCode() {
+    @CheckForNull
+    public RString getTekiyoJogaikaijokaijoJiyuCode() {
         return tekiyoJogaikaijokaijoJiyuCode;
     }
 
     /**
      * 適用除外解除事由コードのsetメソッドです。
-     *
+     * 
      * @param tekiyoJogaikaijokaijoJiyuCode 適用除外解除事由コード
      */
-    public void setTekiyoJogaikaijokaijoJiyuCode(KaigoJogaiKaijoJiyu tekiyoJogaikaijokaijoJiyuCode) {
+    public void setTekiyoJogaikaijokaijoJiyuCode(RString tekiyoJogaikaijokaijoJiyuCode) {
         this.tekiyoJogaikaijokaijoJiyuCode = tekiyoJogaikaijokaijoJiyuCode;
     }
 
     /**
      * 解除年月日のgetメソッドです。
-     *
+     * 
      * @return 解除年月日
      */
+    @CheckForNull
     public FlexibleDate getKaijoYMD() {
         return kaijoYMD;
     }
 
     /**
      * 解除年月日のsetメソッドです。
-     *
+     * 
      * @param kaijoYMD 解除年月日
      */
     public void setKaijoYMD(FlexibleDate kaijoYMD) {
@@ -299,16 +301,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 解除届出年月日のgetメソッドです。
-     *
+     * 
      * @return 解除届出年月日
      */
+    @CheckForNull
     public FlexibleDate getKaijoTodokedeYMD() {
         return kaijoTodokedeYMD;
     }
 
     /**
      * 解除届出年月日のsetメソッドです。
-     *
+     * 
      * @param kaijoTodokedeYMD 解除届出年月日
      */
     public void setKaijoTodokedeYMD(FlexibleDate kaijoTodokedeYMD) {
@@ -317,16 +320,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 解除受付年月日のgetメソッドです。
-     *
+     * 
      * @return 解除受付年月日
      */
+    @CheckForNull
     public FlexibleDate getKaijoUketsukeYMD() {
         return kaijoUketsukeYMD;
     }
 
     /**
      * 解除受付年月日のsetメソッドです。
-     *
+     * 
      * @param kaijoUketsukeYMD 解除受付年月日
      */
     public void setKaijoUketsukeYMD(FlexibleDate kaijoUketsukeYMD) {
@@ -335,16 +339,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 入所通知発行日のgetメソッドです。
-     *
+     * 
      * @return 入所通知発行日
      */
+    @CheckForNull
     public FlexibleDate getNyushoTsuchiHakkoYMD() {
         return nyushoTsuchiHakkoYMD;
     }
 
     /**
      * 入所通知発行日のsetメソッドです。
-     *
+     * 
      * @param nyushoTsuchiHakkoYMD 入所通知発行日
      */
     public void setNyushoTsuchiHakkoYMD(FlexibleDate nyushoTsuchiHakkoYMD) {
@@ -353,16 +358,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 退所通知発行日のgetメソッドです。
-     *
+     * 
      * @return 退所通知発行日
      */
+    @CheckForNull
     public FlexibleDate getTaishoTsuchiHakkoYMD() {
         return taishoTsuchiHakkoYMD;
     }
 
     /**
      * 退所通知発行日のsetメソッドです。
-     *
+     * 
      * @param taishoTsuchiHakkoYMD 退所通知発行日
      */
     public void setTaishoTsuchiHakkoYMD(FlexibleDate taishoTsuchiHakkoYMD) {
@@ -371,16 +377,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 変更通知発行日のgetメソッドです。
-     *
+     * 
      * @return 変更通知発行日
      */
+    @CheckForNull
     public FlexibleDate getHenkoTsuchiHakkoYMD() {
         return henkoTsuchiHakkoYMD;
     }
 
     /**
      * 変更通知発行日のsetメソッドです。
-     *
+     * 
      * @param henkoTsuchiHakkoYMD 変更通知発行日
      */
     public void setHenkoTsuchiHakkoYMD(FlexibleDate henkoTsuchiHakkoYMD) {
@@ -389,16 +396,17 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * 論理削除フラグのgetメソッドです。
-     *
+     * 
      * @return 論理削除フラグ
      */
+    @CheckForNull
     public boolean getLogicalDeletedFlag() {
         return logicalDeletedFlag;
     }
 
     /**
      * 論理削除フラグのsetメソッドです。
-     *
+     * 
      * @param logicalDeletedFlag 論理削除フラグ
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -407,9 +415,10 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * このエンティティの主キーが他の{@literal DbT1002TekiyoJogaishaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1002TekiyoJogaishaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT1002TekiyoJogaishaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1002TekiyoJogaishaEntity other) {
@@ -423,9 +432,6 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
             return false;
         }
         if (!Objects.equals(this.edaNo, other.edaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         return true;
@@ -457,7 +463,6 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

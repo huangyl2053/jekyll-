@@ -130,7 +130,7 @@ public class TekiyoJogaisha extends ModelBase<TekiyoJogaishaIdentifier, DbT1002T
      * @return 適用除外適用事由コード
      */
     public RString get適用除外適用事由コード() {
-        return entity.getTekiyoJogaiTekiyoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getTekiyoJogaiTekiyoJiyuCode();
     }
 
     /**
@@ -166,7 +166,7 @@ public class TekiyoJogaisha extends ModelBase<TekiyoJogaishaIdentifier, DbT1002T
      * @return 適用除外解除事由コード
      */
     public RString get適用除外解除事由コード() {
-        return entity.getTekiyoJogaikaijokaijoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getTekiyoJogaikaijokaijoJiyuCode();
     }
 
     /**
