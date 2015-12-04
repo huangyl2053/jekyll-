@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiMapper.allColumns_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiMapper.allColumns_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai" />
      FROM
-         rg."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"
+         rgdb."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"
      WHERE
-         rg."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"."isDeleted" = FALSE
+         rgdb."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai">
@@ -47,14 +47,14 @@
 
 
     <!--テーブルDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiの項目をDbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_hihokenshaNo" />
+    <resultMap id="ResultMap_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity" autoMapping="true">
+        <!--<id property="hihokenshaNo" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_hihokenshaNo" />-->
         <id property="taishoYM" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="kyotakuServiceKubun" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="serviceTeikyoJigyoshaNo" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo" />
-        <id property="serviceShuruiCode" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" />
-        <id property="serviceKomokuCode" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_serviceKomokuCode" />
+        <!--<id property="serviceShuruiCode" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" />
+        <id property="serviceKomokuCode" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_serviceKomokuCode" />-->
         <result property="insertDantaiCd" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -70,17 +70,17 @@
         <result property="kubunGendoNaiTaniSu_Nissu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_kubunGendoNaiTaniSu_Nissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kubunGendoChokaTaniSu_Nissu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_kubunGendoChokaTaniSu_Nissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="taniSuTanka" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_taniSuTanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="kyufuRitsu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_kyufuRitsu" />
-        <result property="waribikiGoTekiyoRitsu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_waribikiGoTekiyoRitsu" />
+        <!--<result property="kyufuRitsu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_kyufuRitsu" />
+        <result property="waribikiGoTekiyoRitsu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_waribikiGoTekiyoRitsu" />-->
         <result property="waribikiGoTekiyoTaniSu" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_waribikiGoTekiyoTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="teigakuRiyoshaFutanTankaKingaku" column="dbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai_teigakuRiyoshaFutanTankaKingaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"/>
 	FROM
-	rgba."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"
+	rgdb."DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisai"-->
 	</select>
 
 </mapper>

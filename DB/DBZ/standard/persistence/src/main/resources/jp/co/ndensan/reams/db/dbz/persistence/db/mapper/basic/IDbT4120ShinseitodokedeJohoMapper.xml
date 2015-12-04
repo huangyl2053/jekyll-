@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4120ShinseitodokedeJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho" />
      FROM
-         rg."DbT4120ShinseitodokedeJoho"
+         rgdb."DbT4120ShinseitodokedeJoho"
      WHERE
-         rg."DbT4120ShinseitodokedeJoho"."isDeleted" = FALSE
+         rgdb."DbT4120ShinseitodokedeJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4120ShinseitodokedeJoho">
@@ -39,8 +39,8 @@
 
 
     <!--テーブルDbT4120ShinseitodokedeJohoの項目をDbT4120ShinseitodokedeJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4120ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4120ShinseitodokedeJohoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4120ShinseitodokedeJoho_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT4120ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4120ShinseitodokedeJohoEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4120ShinseitodokedeJoho_shinseishoKanriNo" />-->
         <result property="insertDantaiCd" column="dbT4120ShinseitodokedeJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4120ShinseitodokedeJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4120ShinseitodokedeJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -53,7 +53,7 @@
         <result property="shinseiTodokedeshaShimei" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaKanaShimei" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="shinseiTodokedeshaTsuzukigaraCode" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaTsuzukigaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" />
+        <!--<result property="shinseiTodokedeDaikoJigyoshaNo" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeDaikoJigyoshaNo" />-->
         <result property="jigyoshaKubun" column="dbT4120ShinseitodokedeJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiTodokedeshaYubinNo" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="shinseiTodokedeshaJusho" column="dbT4120ShinseitodokedeJoho_shinseiTodokedeshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
@@ -61,10 +61,10 @@
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4120ShinseitodokedeJohoEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT4120ShinseitodokedeJoho"/>
 	FROM
-	rgba."DbT4120ShinseitodokedeJoho"
+	rgdb."DbT4120ShinseitodokedeJoho"-->
 	</select>
 
 </mapper>

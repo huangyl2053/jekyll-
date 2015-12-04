@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4121ShinseiRirekiJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.allColumns_DbT4121ShinseiRirekiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4121ShinseiRirekiJohoMapper.allColumns_DbT4121ShinseiRirekiJoho" />
      FROM
-         rg."DbT4121ShinseiRirekiJoho"
+         rgdb."DbT4121ShinseiRirekiJoho"
      WHERE
-         rg."DbT4121ShinseiRirekiJoho"."isDeleted" = FALSE
+         rgdb."DbT4121ShinseiRirekiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4121ShinseiRirekiJoho">
@@ -31,8 +31,8 @@
 
 
     <!--テーブルDbT4121ShinseiRirekiJohoの項目をDbT4121ShinseiRirekiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4121ShinseiRirekiJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4121ShinseiRirekiJohoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT4121ShinseiRirekiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4121ShinseiRirekiJohoEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_shinseishoKanriNo" />-->
         <result property="insertDantaiCd" column="dbT4121ShinseiRirekiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4121ShinseiRirekiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4121ShinseiRirekiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -41,14 +41,14 @@
         <result property="updateCount" column="dbT4121ShinseiRirekiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4121ShinseiRirekiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4121ShinseiRirekiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="zenkaiShinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" />
+        <!--<result property="zenkaiShinseishoKanriNo" column="dbT4121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" />-->
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4121ShinseiRirekiJohoEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT4121ShinseiRirekiJoho"/>
 	FROM
-	rgba."DbT4121ShinseiRirekiJoho"
+	rgdb."DbT4121ShinseiRirekiJoho"-->
 	</select>
 
 </mapper>

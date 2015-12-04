@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4201NinteichosaIraiJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper.allColumns_DbT4201NinteichosaIraiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4201NinteichosaIraiJohoMapper.allColumns_DbT4201NinteichosaIraiJoho" />
      FROM
-         rg."DbT4201NinteichosaIraiJoho"
+         rgdb."DbT4201NinteichosaIraiJoho"
      WHERE
-         rg."DbT4201NinteichosaIraiJoho"."isDeleted" = FALSE
+         rgdb."DbT4201NinteichosaIraiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4201NinteichosaIraiJoho">
@@ -47,9 +47,9 @@
 
 
     <!--テーブルDbT4201NinteichosaIraiJohoの項目をDbT4201NinteichosaIraiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4201NinteichosaIraiJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4201NinteichosaIraiJohoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4201NinteichosaIraiJoho_shinseishoKanriNo" />
-        <id property="ninteichosaIraiRirekiNo" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" />
+    <resultMap id="ResultMap_DbT4201NinteichosaIraiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4201NinteichosaIraiJohoEntity" autoMapping="true">
+<!--        <id property="shinseishoKanriNo" column="dbT4201NinteichosaIraiJoho_shinseishoKanriNo" />
+        <id property="ninteichosaIraiRirekiNo" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" />-->
         <result property="insertDantaiCd" column="dbT4201NinteichosaIraiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4201NinteichosaIraiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4201NinteichosaIraiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -59,10 +59,10 @@
         <result property="lastUpdateTimestamp" column="dbT4201NinteichosaIraiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4201NinteichosaIraiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT4201NinteichosaIraiJoho_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninteichosaItakusakiCode" column="dbT4201NinteichosaIraiJoho_ninteichosaItakusakiCode" />
+        <!--<result property="ninteichosaItakusakiCode" column="dbT4201NinteichosaIraiJoho_ninteichosaItakusakiCode" />-->
         <result property="ninteiChosainCode" column="dbT4201NinteichosaIraiJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiKubunCode" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninteichosaIraiKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiKaisu" />
+        <!--<result property="ninteichosaIraiKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiKaisu" />-->
         <result property="ninteichosaIraiYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteichosaKigenYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="iraishoShutsuryokuYMD" column="dbT4201NinteichosaIraiJoho_iraishoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -71,16 +71,16 @@
         <result property="jizenChosaFlag" column="dbT4201NinteichosaIraiJoho_jizenChosaFlag" />
         <result property="ninteichosaTokusokuYMD" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteichosaTokusokuHoho" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteichosaTokusokuKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuKaisu" />
+        <!--<result property="ninteichosaTokusokuKaisu" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuKaisu" />-->
         <result property="ninteichosaTokusokuMemo" column="dbT4201NinteichosaIraiJoho_ninteichosaTokusokuMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT4201NinteichosaIraiJoho_logicalDeletedFlag" />
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4201NinteichosaIraiJohoEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT4201NinteichosaIraiJoho"/>
 	FROM
-	rgba."DbT4201NinteichosaIraiJoho"
+	rgdb."DbT4201NinteichosaIraiJoho"-->
 	</select>
 
 </mapper>

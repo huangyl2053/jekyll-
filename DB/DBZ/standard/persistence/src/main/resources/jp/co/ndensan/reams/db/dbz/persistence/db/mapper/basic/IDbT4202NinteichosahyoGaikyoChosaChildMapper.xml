@@ -4,61 +4,61 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaChildMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaChildMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4202NinteichosahyoGaikyoChosaChild">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaChildMapper.allColumns_DbT4202NinteichosahyoGaikyoChosaChild" />
-     FROM
-         rg."DbT4202NinteichosahyoGaikyoChosaChild"
-     WHERE
-         rg."DbT4202NinteichosahyoGaikyoChosaChild"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4202NinteichosahyoGaikyoChosaChildMapper.allColumns_DbT4202NinteichosahyoGaikyoChosaChild" />
+        FROM
+        rgdb."DbT4202NinteichosahyoGaikyoChosaChild"
+        WHERE
+        rgdb."DbT4202NinteichosahyoGaikyoChosaChild"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4202NinteichosahyoGaikyoChosaChild">
-         "DbT4202NinteichosahyoGaikyoChosaChild"."shinseishoKanriNo" as "dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaRirekiNo" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."insertDantaiCd" as "dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."insertTimestamp" as "dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."insertReamsLoginId" as "dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."insertContextId" as "dbT4202NinteichosahyoGaikyoChosaChild_insertContextId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."isDeleted" as "dbT4202NinteichosahyoGaikyoChosaChild_isDeleted",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."updateCount" as "dbT4202NinteichosahyoGaikyoChosaChild_updateCount",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."lastUpdateTimestamp" as "dbT4202NinteichosahyoGaikyoChosaChild_lastUpdateTimestamp",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."lastUpdateReamsLoginId" as "dbT4202NinteichosahyoGaikyoChosaChild_lastUpdateReamsLoginId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."koroshoIfShikibetsuCode" as "dbT4202NinteichosahyoGaikyoChosaChild_koroshoIfShikibetsuCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichousaIraiKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichousaIraiKubunCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaIraiKaisu" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaIraiKaisu",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaJisshiYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJisshiYMD",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaJuryoYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJuryoYMD",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."chosaItakuKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaItakuKubunCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteiChosaKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteiChosaKubunCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."chosaItakusakiCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaItakusakiCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."chosainCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosainCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."chosaJisshiBashoCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."chosaJisshiBashoMeisho" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoMeisho",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."jisshiBashoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_jisshiBashoImageSharedFileId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."genzainoJokyoCode" as "dbT4202NinteichosahyoGaikyoChosaChild_genzainoJokyoCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."serviceKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_serviceKubunCode",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuShimei" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuShimei",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuJusho" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuJusho",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuTelNo" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuTelNo",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuYubinNo" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuYubinNo",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuNameImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuNameImageSharedFileId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuJushoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuJushoImageSharedFileId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuTelNoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuTelNoImageSharedFileId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."tokki" as "dbT4202NinteichosahyoGaikyoChosaChild_tokki",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."tokkiImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkiImageSharedFileId",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."tokkijikoUketsukeYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkijikoUketsukeYMD",
-         "DbT4202NinteichosahyoGaikyoChosaChild"."tokkijikoJuryoYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkijikoJuryoYMD"
+        "DbT4202NinteichosahyoGaikyoChosaChild"."shinseishoKanriNo" as "dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaRirekiNo" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."insertDantaiCd" as "dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."insertTimestamp" as "dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."insertReamsLoginId" as "dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."insertContextId" as "dbT4202NinteichosahyoGaikyoChosaChild_insertContextId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."isDeleted" as "dbT4202NinteichosahyoGaikyoChosaChild_isDeleted",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."updateCount" as "dbT4202NinteichosahyoGaikyoChosaChild_updateCount",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."lastUpdateTimestamp" as "dbT4202NinteichosahyoGaikyoChosaChild_lastUpdateTimestamp",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."lastUpdateReamsLoginId" as "dbT4202NinteichosahyoGaikyoChosaChild_lastUpdateReamsLoginId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."koroshoIfShikibetsuCode" as "dbT4202NinteichosahyoGaikyoChosaChild_koroshoIfShikibetsuCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichousaIraiKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichousaIraiKubunCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaIraiKaisu" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaIraiKaisu",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaJisshiYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJisshiYMD",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaJuryoYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJuryoYMD",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."chosaItakuKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaItakuKubunCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."ninteiChosaKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteiChosaKubunCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."chosaItakusakiCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaItakusakiCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."chosainCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosainCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."chosaJisshiBashoCode" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."chosaJisshiBashoMeisho" as "dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoMeisho",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."jisshiBashoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_jisshiBashoImageSharedFileId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."genzainoJokyoCode" as "dbT4202NinteichosahyoGaikyoChosaChild_genzainoJokyoCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."serviceKubunCode" as "dbT4202NinteichosahyoGaikyoChosaChild_serviceKubunCode",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuShimei" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuShimei",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuJusho" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuJusho",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuTelNo" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuTelNo",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuYubinNo" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuYubinNo",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuNameImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuNameImageSharedFileId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuJushoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuJushoImageSharedFileId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."riyoShisetsuTelNoImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_riyoShisetsuTelNoImageSharedFileId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."tokki" as "dbT4202NinteichosahyoGaikyoChosaChild_tokki",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."tokkiImageSharedFileId" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkiImageSharedFileId",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."tokkijikoUketsukeYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkijikoUketsukeYMD",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."tokkijikoJuryoYMD" as "dbT4202NinteichosahyoGaikyoChosaChild_tokkijikoJuryoYMD"
     </sql>
 
 
     <!--テーブルDbT4202NinteichosahyoGaikyoChosaChildの項目をDbT4202NinteichosahyoGaikyoChosaChildEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4202NinteichosahyoGaikyoChosaChildEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo" />
-        <id property="ninteichosaRirekiNo" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo" />
+    <resultMap id="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4202NinteichosahyoGaikyoChosaChildEntity" autoMapping="true">
+<!--        <id property="shinseishoKanriNo" column="dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo" />
+        <id property="ninteichosaRirekiNo" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo" />-->
         <result property="insertDantaiCd" column="dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -69,12 +69,12 @@
         <result property="lastUpdateReamsLoginId" column="dbT4202NinteichosahyoGaikyoChosaChild_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT4202NinteichosahyoGaikyoChosaChild_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteichousaIraiKubunCode" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichousaIraiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninteichosaIraiKaisu" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaIraiKaisu" />
+        <!--<result property="ninteichosaIraiKaisu" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaIraiKaisu" />-->
         <result property="ninteichosaJisshiYMD" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteichosaJuryoYMD" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="chosaItakuKubunCode" column="dbT4202NinteichosahyoGaikyoChosaChild_chosaItakuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteiChosaKubunCode" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="chosaItakusakiCode" column="dbT4202NinteichosahyoGaikyoChosaChild_chosaItakusakiCode" />
+        <!--<result property="chosaItakusakiCode" column="dbT4202NinteichosahyoGaikyoChosaChild_chosaItakusakiCode" />-->
         <result property="chosainCode" column="dbT4202NinteichosahyoGaikyoChosaChild_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosaJisshiBashoCode" column="dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chosaJisshiBashoMeisho" column="dbT4202NinteichosahyoGaikyoChosaChild_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -94,11 +94,11 @@
         <result property="tokkijikoJuryoYMD" column="dbT4202NinteichosahyoGaikyoChosaChild_tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity">
-	SELECT
-	<include refid="allColumns_DbT4202NinteichosahyoGaikyoChosaChild"/>
-	FROM
-	rgba."DbT4202NinteichosahyoGaikyoChosaChild"
-	</select>
+    <select id="getEntity" resultMap="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity">
+<!--        SELECT
+        <include refid="allColumns_DbT4202NinteichosahyoGaikyoChosaChild"/>
+        FROM
+        rgdb."DbT4202NinteichosahyoGaikyoChosaChild"-->
+    </select>
 
 </mapper>

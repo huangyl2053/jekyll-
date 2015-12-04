@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4115ImageMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4115ImageMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4115Image">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4115ImageMapper.allColumns_DbT4115Image" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4115ImageMapper.allColumns_DbT4115Image" />
      FROM
-         rg."DbT4115Image"
+         rgdb."DbT4115Image"
      WHERE
-         rg."DbT4115Image"."isDeleted" = FALSE
+         rgdb."DbT4115Image"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4115Image">
@@ -33,9 +33,9 @@
 
 
     <!--テーブルDbT4115Imageの項目をDbT4115ImageEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4115ImageEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4115ImageEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4115Image_shinseishoKanriNo" />
-        <id property="torikomiPageNo" column="dbT4115Image_torikomiPageNo" />
+    <resultMap id="ResultMap_DbT4115ImageEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4115ImageEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4115Image_shinseishoKanriNo" />-->
+        <!--<id property="torikomiPageNo" column="dbT4115Image_torikomiPageNo" />-->
         <id property="genponMaskKubun" column="dbT4115Image_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4115Image_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4115Image_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -49,10 +49,10 @@
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4115ImageEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT4115Image"/>
 	FROM
-	rgba."DbT4115Image"
+	rgdb."DbT4115Image"-->
 	</select>
 
 </mapper>

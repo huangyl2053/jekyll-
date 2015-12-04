@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4150RenrakusakiJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.allColumns_DbT4150RenrakusakiJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4150RenrakusakiJohoMapper.allColumns_DbT4150RenrakusakiJoho" />
      FROM
-         rg."DbT4150RenrakusakiJoho"
+         rgdb."DbT4150RenrakusakiJoho"
      WHERE
-         rg."DbT4150RenrakusakiJoho"."isDeleted" = FALSE
+         rgdb."DbT4150RenrakusakiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4150RenrakusakiJoho">
@@ -41,9 +41,9 @@
 
 
     <!--テーブルDbT4150RenrakusakiJohoの項目をDbT4150RenrakusakiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4150RenrakusakiJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4150RenrakusakiJohoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4150RenrakusakiJoho_shinseishoKanriNo" />
-        <id property="renban" column="dbT4150RenrakusakiJoho_renban" />
+    <resultMap id="ResultMap_DbT4150RenrakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4150RenrakusakiJoho_shinseishoKanriNo" />-->
+        <!--<id property="renban" column="dbT4150RenrakusakiJoho_renban" />-->
         <result property="insertDantaiCd" column="dbT4150RenrakusakiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4150RenrakusakiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4150RenrakusakiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -53,7 +53,7 @@
         <result property="lastUpdateTimestamp" column="dbT4150RenrakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4150RenrakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="renrakusakiKubun" column="dbT4150RenrakusakiJoho_renrakusakiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="shishoCode" column="dbT4150RenrakusakiJoho_shishoCode" />
+        <!--<result property="shishoCode" column="dbT4150RenrakusakiJoho_shishoCode" />-->
         <result property="renrakusakiShimei" column="dbT4150RenrakusakiJoho_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="renrakusakiKanaSimei" column="dbT4150RenrakusakiJoho_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="renrakusakiTuzukigara" column="dbT4150RenrakusakiJoho_renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -61,14 +61,14 @@
         <result property="renrakusakiJusho" column="dbT4150RenrakusakiJoho_renrakusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="renrakusakiTelNo" column="dbT4150RenrakusakiJoho_renrakusakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="renrakusakiKeitaiTelNo" column="dbT4150RenrakusakiJoho_renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="priority" column="dbT4150RenrakusakiJoho_priority" />
+        <!--<result property="priority" column="dbT4150RenrakusakiJoho_priority" />-->
     </resultMap>
     
         <select id="getEntity" resultMap="ResultMap_DbT4150RenrakusakiJohoEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT4150RenrakusakiJoho"/>
 	FROM
-	rgba."DbT4150RenrakusakiJoho"
+	rgdb."DbT4150RenrakusakiJoho"-->
 	</select>
 
 </mapper>
