@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT2011RankJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT2011RankJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT2011RankJohoMapper.allColumns_DbT2011RankJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2011RankJohoMapper.allColumns_DbT2011RankJoho" />
      FROM
-         rg."DbT2011RankJoho"
+         rgdb."DbT2011RankJoho"
      WHERE
-         rg."DbT2011RankJoho"."isDeleted" = FALSE
+         rgdb."DbT2011RankJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT2011RankJoho">
@@ -32,9 +32,9 @@
 
 
     <!--テーブルDbT2011RankJohoの項目をDbT2011RankJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2011RankJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT2011RankJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2011RankJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2011RankJohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2011RankJoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="rankKubun" column="dbT2011RankJoho_rankKubun" />
+        <!--<id property="rankKubun" column="dbT2011RankJoho_rankKubun" />-->
         <result property="insertDantaiCd" column="dbT2011RankJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2011RankJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT2011RankJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -50,7 +50,7 @@
 	SELECT
 	<include refid="allColumns_DbT2011RankJoho"/>
 	FROM
-	rgba."DbT2011RankJoho"
+	rgdb."DbT2011RankJoho"
 	</select>
 
 </mapper>

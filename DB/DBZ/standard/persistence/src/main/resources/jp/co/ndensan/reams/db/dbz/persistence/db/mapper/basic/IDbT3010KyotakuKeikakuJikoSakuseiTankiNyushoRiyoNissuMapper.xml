@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper.allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper.allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" />
      FROM
-         rg."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"
+         rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"
      WHERE
-         rg."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."isDeleted" = FALSE
+         rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu">
@@ -34,8 +34,8 @@
 
 
     <!--テーブルDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuの項目をDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_hihokenshaNo" />
+    <resultMap id="ResultMap_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity" autoMapping="true">
+        <!--<id property="hihokenshaNo" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_hihokenshaNo" />-->
         <id property="taishoYM" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -54,6 +54,6 @@
 	SELECT
 	<include refid="allColumns_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"/>
 	FROM
-	rgba."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"
+	rgdb."DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu"
 	</select>
 </mapper>

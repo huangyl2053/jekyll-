@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1006KyokaisoGaitosha">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.allColumns_DbT1006KyokaisoGaitosha" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1006KyokaisoGaitoshaMapper.allColumns_DbT1006KyokaisoGaitosha" />
      FROM
-         rg."DbT1006KyokaisoGaitosha"
+         rgdb."DbT1006KyokaisoGaitosha"
      WHERE
-         rg."DbT1006KyokaisoGaitosha"."isDeleted" = FALSE
+         rgdb."DbT1006KyokaisoGaitosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1006KyokaisoGaitosha">
@@ -45,8 +45,8 @@
 
 
     <!--テーブルDbT1006KyokaisoGaitoshaの項目をDbT1006KyokaisoGaitoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT1006KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT1006KyokaisoGaitoshaEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT1006KyokaisoGaitosha_hihokenshaNo" />
+    <resultMap id="ResultMap_DbT1006KyokaisoGaitoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1006KyokaisoGaitoshaEntity" autoMapping="true">
+        <!--<id property="hihokenshaNo" column="dbT1006KyokaisoGaitosha_hihokenshaNo" />-->
         <id property="rirekiNo" column="dbT1006KyokaisoGaitosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT1006KyokaisoGaitosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT1006KyokaisoGaitosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -76,7 +76,7 @@
 	SELECT
 	<include refid="allColumns_DbT1006KyokaisoGaitosha"/>
 	FROM
-	rgba."DbT1006KyokaisoGaitosha"
+	rgdb."DbT1006KyokaisoGaitosha"
 	</select>
         
 </mapper>

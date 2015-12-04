@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3006KyotakuKeikakuJigyoshaSakusei">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei" />
      FROM
-         rg."DbT3006KyotakuKeikakuJigyoshaSakusei"
+         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"
      WHERE
-         rg."DbT3006KyotakuKeikakuJigyoshaSakusei"."isDeleted" = FALSE
+         rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei">
@@ -39,8 +39,8 @@
 
 
     <!--テーブルDbT3006KyotakuKeikakuJigyoshaSakuseiの項目をDbT3006KyotakuKeikakuJigyoshaSakuseiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3006KyotakuKeikakuJigyoshaSakuseiEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity" autoMapping="true">
-        <id property="hihokenshano" column="dbT3006KyotakuKeikakuJigyoshaSakusei_hihokenshano" />
+    <resultMap id="ResultMap_DbT3006KyotakuKeikakuJigyoshaSakuseiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity" autoMapping="true">
+        <!--<id property="hihokenshano" column="dbT3006KyotakuKeikakuJigyoshaSakusei_hihokenshano" />-->
         <id property="taishoYM" column="dbT3006KyotakuKeikakuJigyoshaSakusei_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3006KyotakuKeikakuJigyoshaSakusei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3006KyotakuKeikakuJigyoshaSakusei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -54,8 +54,8 @@
         <result property="tekiyoKaishiYMD" column="dbT3006KyotakuKeikakuJigyoshaSakusei_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tekiyoShuryoYMD" column="dbT3006KyotakuKeikakuJigyoshaSakusei_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="sakuseiKubunCode" column="dbT3006KyotakuKeikakuJigyoshaSakusei_sakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="keikakuJigyoshaNo" column="dbT3006KyotakuKeikakuJigyoshaSakusei_keikakuJigyoshaNo" />
-        <result property="itakusakiJigyoshaNo" column="dbT3006KyotakuKeikakuJigyoshaSakusei_itakusakiJigyoshaNo" />
+        <!--<result property="keikakuJigyoshaNo" column="dbT3006KyotakuKeikakuJigyoshaSakusei_keikakuJigyoshaNo" />
+        <result property="itakusakiJigyoshaNo" column="dbT3006KyotakuKeikakuJigyoshaSakusei_itakusakiJigyoshaNo" />-->
         <result property="jigyoshaHenkoYMD" column="dbT3006KyotakuKeikakuJigyoshaSakusei_jigyoshaHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jigyoshaHenkoJiyu" column="dbT3006KyotakuKeikakuJigyoshaSakusei_jigyoshaHenkoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
@@ -64,7 +64,7 @@
 	SELECT
 	<include refid="allColumns_DbT3006KyotakuKeikakuJigyoshaSakusei"/>
 	FROM
-	rgba."DbT3006KyotakuKeikakuJigyoshaSakusei"
+	rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei"
 	</select>
 
 </mapper>

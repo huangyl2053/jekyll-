@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3005KyotakuKeikakuTodokede">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper.allColumns_DbT3005KyotakuKeikakuTodokede" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper.allColumns_DbT3005KyotakuKeikakuTodokede" />
      FROM
-         rg."DbT3005KyotakuKeikakuTodokede"
+         rgdb."DbT3005KyotakuKeikakuTodokede"
      WHERE
-         rg."DbT3005KyotakuKeikakuTodokede"."isDeleted" = FALSE
+         rgdb."DbT3005KyotakuKeikakuTodokede"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3005KyotakuKeikakuTodokede">
@@ -41,8 +41,8 @@
 
 
     <!--テーブルDbT3005KyotakuKeikakuTodokedeの項目をDbT3005KyotakuKeikakuTodokedeEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3005KyotakuKeikakuTodokedeEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3005KyotakuKeikakuTodokede_hihokenshaNo" />
+    <resultMap id="ResultMap_DbT3005KyotakuKeikakuTodokedeEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity" autoMapping="true">
+        <!--<id property="hihokenshaNo" column="dbT3005KyotakuKeikakuTodokede_hihokenshaNo" />-->
         <id property="taishoYM" column="dbT3005KyotakuKeikakuTodokede_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3005KyotakuKeikakuTodokede_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3005KyotakuKeikakuTodokede_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -68,7 +68,7 @@
 	SELECT
 	<include refid="allColumns_DbT3005KyotakuKeikakuTodokede"/>
 	FROM
-	rgba."DbT3005KyotakuKeikakuTodokede"
+	rgdb."DbT3005KyotakuKeikakuTodokede"
 	</select>
 
 </mapper>

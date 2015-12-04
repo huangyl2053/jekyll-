@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1001HihokenshaDaicho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
      FROM
-         rg."DbT1001HihokenshaDaicho"
+         rgdb."DbT1001HihokenshaDaicho"
      WHERE
-         rg."DbT1001HihokenshaDaicho"."isDeleted" = FALSE
+         rgdb."DbT1001HihokenshaDaicho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1001HihokenshaDaicho">
@@ -57,7 +57,7 @@
 
 
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" />
         <id property="idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -72,21 +72,21 @@
         <result property="lastUpdateReamsLoginId" column="dbT1001HihokenshaDaicho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="idoJiyuCode" column="dbT1001HihokenshaDaicho_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shikibetsuCode" column="dbT1001HihokenshaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="shikakuShutokuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode" />
+        <!--<result property="shikakuShutokuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode" />-->
         <result property="shikakuShutokuYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuShutokuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ichigoShikakuShutokuYMD" column="dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="hihokennshaKubunCode" column="dbT1001HihokenshaDaicho_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shikakuSoshitsuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" />
+       <!-- <result property="shikakuSoshitsuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" />-->
         <result property="shikakuSoshitsuYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuSoshitsuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shikakuHenkoJiyuCode" column="dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode" />
+        <!--<result property="shikakuHenkoJiyuCode" column="dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode" />-->
         <result property="shikakuHenkoYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shikakuHenkoTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jushochitokureiTekiyoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode" />
+        <!--<result property="jushochitokureiTekiyoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode" />-->
         <result property="jushochitokureiTekiyoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiTekiyoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jushochitokureiKaijoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode" />
+        <!--<result property="jushochitokureiKaijoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode" />-->
         <result property="jushochitokureiKaijoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiKaijoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochiTokureiFlag" column="dbT1001HihokenshaDaicho_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -101,7 +101,6 @@
 	SELECT
 	<include refid="allColumns_DbT1001HihokenshaDaicho"/>
 	FROM
-	rgba."DbT1001HihokenshaDaicho"
+	rgdb."DbT1001HihokenshaDaicho"
 	</select>
-
 </mapper>

@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1008IryohokenKanyuJokyo">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper.allColumns_DbT1008IryohokenKanyuJokyo" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1008IryohokenKanyuJokyoMapper.allColumns_DbT1008IryohokenKanyuJokyo" />
      FROM
-         rg."DbT1008IryohokenKanyuJokyo"
+         rgdb."DbT1008IryohokenKanyuJokyo"
      WHERE
-         rg."DbT1008IryohokenKanyuJokyo"."isDeleted" = FALSE
+         rgdb."DbT1008IryohokenKanyuJokyo"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1008IryohokenKanyuJokyo">
@@ -39,7 +39,7 @@
 
 
     <!--テーブルDbT1008IryohokenKanyuJokyoの項目をDbT1008IryohokenKanyuJokyoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT1008IryohokenKanyuJokyoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT1008IryohokenKanyuJokyoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT1008IryohokenKanyuJokyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1008IryohokenKanyuJokyo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="rirekiNo" column="dbT1008IryohokenKanyuJokyo_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT1008IryohokenKanyuJokyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -64,7 +64,7 @@
 	SELECT
 	<include refid="allColumns_DbT1008IryohokenKanyuJokyo"/>
 	FROM
-	rgba."DbT1008IryohokenKanyuJokyo"
+	rgdb."DbT1008IryohokenKanyuJokyo"
 	</select>
 
 </mapper>
