@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7005RojinHokenJukyushaJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper.allColumns_DbT7005RojinHokenJukyushaJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7005RojinHokenJukyushaJohoMapper.allColumns_DbT7005RojinHokenJukyushaJoho" />
      FROM
-         rg."DbT7005RojinHokenJukyushaJoho"
+         rgdb."DbT7005RojinHokenJukyushaJoho"
      WHERE
-         rg."DbT7005RojinHokenJukyushaJoho"."isDeleted" = FALSE
+         rgdb."DbT7005RojinHokenJukyushaJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7005RojinHokenJukyushaJoho">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT7005RojinHokenJukyushaJohoの項目をDbT7005RojinHokenJukyushaJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7005RojinHokenJukyushaJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7005RojinHokenJukyushaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7005RojinHokenJukyushaJohoEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT7005RojinHokenJukyushaJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7005RojinHokenJukyushaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7005RojinHokenJukyushaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="rojinHokenShichosonCode" column="dbT7005RojinHokenJukyushaJoho_rojinHokenShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="rojinHokenJukyushaNo" column="dbT7005RojinHokenJukyushaJoho_rojinHokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7005RojinHokenJukyushaJohoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7005RojinHokenJukyushaJohoEntity">
     SELECT
-    <include refid="allColumns_DbT7005RojinHokenJukyushaJoho">
-         FROM
-         rg."DbT7005RojinHokenJukyushaJoho"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7005RojinHokenJukyushaJoho" />
+    FROM
+    rgdb."DbT7005RojinHokenJukyushaJoho"
+</select>
 </mapper>

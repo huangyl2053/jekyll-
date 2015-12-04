@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7006RoreiFukushiNenkinJukyusha">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
      FROM
-         rg."DbT7006RoreiFukushiNenkinJukyusha"
+         rgdb."DbT7006RoreiFukushiNenkinJukyusha"
      WHERE
-         rg."DbT7006RoreiFukushiNenkinJukyusha"."isDeleted" = FALSE
+         rgdb."DbT7006RoreiFukushiNenkinJukyusha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7006RoreiFukushiNenkinJukyusha">
@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT7006RoreiFukushiNenkinJukyushaの項目をDbT7006RoreiFukushiNenkinJukyushaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT7006RoreiFukushiNenkinJukyusha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7006RoreiFukushiNenkinJukyusha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,11 +47,10 @@
         <result property="jukyuShuryoYMD" column="dbT7006RoreiFukushiNenkinJukyusha_jukyuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="hihokenshaNo" column="dbT7006RoreiFukushiNenkinJukyusha_hihokenshaNo" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity">
     SELECT
-    <include refid="allColumns_DbT7006RoreiFukushiNenkinJukyusha">
-         FROM
-         rg."DbT7006RoreiFukushiNenkinJukyusha"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7006RoreiFukushiNenkinJukyusha" />
+    FROM
+    rgdb."DbT7006RoreiFukushiNenkinJukyusha"
+</select>
 </mapper>

@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5204NinteichosahyoKihonChosaScoreMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5204NinteichosahyoKihonChosaScoreMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5204NinteichosahyoKihonChosaScore">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5204NinteichosahyoKihonChosaScoreMapper.allColumns_DbT5204NinteichosahyoKihonChosaScore" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5204NinteichosahyoKihonChosaScoreMapper.allColumns_DbT5204NinteichosahyoKihonChosaScore" />
      FROM
-         rg."DbT5204NinteichosahyoKihonChosaScore"
+         rgdb."DbT5204NinteichosahyoKihonChosaScore"
      WHERE
-         rg."DbT5204NinteichosahyoKihonChosaScore"."isDeleted" = FALSE
+         rgdb."DbT5204NinteichosahyoKihonChosaScore"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5204NinteichosahyoKihonChosaScore">
@@ -39,7 +39,7 @@
 
 
     <!--テーブルDbT5204NinteichosahyoKihonChosaScoreの項目をDbT5204NinteichosahyoKihonChosaScoreEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5204NinteichosahyoKihonChosaScoreEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5204NinteichosahyoKihonChosaScoreEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5204NinteichosahyoKihonChosaScoreEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5204NinteichosahyoKihonChosaScoreEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5204NinteichosahyoKihonChosaScore_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5204NinteichosahyoKihonChosaScore_ninteichosaRirekiNo" />
         <result property="insertDantaiCd" column="dbT5204NinteichosahyoKihonChosaScore_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -59,11 +59,10 @@
         <result property="tokutenTotal6gun" column="dbT5204NinteichosahyoKihonChosaScore_tokutenTotal6gun" />
         <result property="tokutenTotal7gun" column="dbT5204NinteichosahyoKihonChosaScore_tokutenTotal7gun" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5204NinteichosahyoKihonChosaScoreEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5204NinteichosahyoKihonChosaScoreEntity">
     SELECT
-    <include refid="allColumns_DbT5204NinteichosahyoKihonChosaScore">
-         FROM
-         rg."DbT5204NinteichosahyoKihonChosaScore"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5204NinteichosahyoKihonChosaScore" />
+    FROM
+    rgdb."DbT5204NinteichosahyoKihonChosaScore"
+</select>
 </mapper>

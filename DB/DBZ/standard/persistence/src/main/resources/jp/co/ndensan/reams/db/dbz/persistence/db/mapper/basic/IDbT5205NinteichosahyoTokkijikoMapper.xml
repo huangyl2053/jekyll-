@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5205NinteichosahyoTokkijiko">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko" />
      FROM
-         rg."DbT5205NinteichosahyoTokkijiko"
+         rgdb."DbT5205NinteichosahyoTokkijiko"
      WHERE
-         rg."DbT5205NinteichosahyoTokkijiko"."isDeleted" = FALSE
+         rgdb."DbT5205NinteichosahyoTokkijiko"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5205NinteichosahyoTokkijiko">
@@ -38,7 +38,7 @@
 
 
     <!--テーブルDbT5205NinteichosahyoTokkijikoの項目をDbT5205NinteichosahyoTokkijikoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5205NinteichosahyoTokkijikoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5205NinteichosahyoTokkijikoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -57,11 +57,10 @@
         <result property="tokkiJikoImageSharedFileId" column="dbT5205NinteichosahyoTokkijiko_tokkiJikoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="tokkiJikoMaskingImageSharedFileId" column="dbT5205NinteichosahyoTokkijiko_tokkiJikoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5205NinteichosahyoTokkijikoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5205NinteichosahyoTokkijikoEntity">
     SELECT
-    <include refid="allColumns_DbT5205NinteichosahyoTokkijiko">
-         FROM
-         rg."DbT5205NinteichosahyoTokkijiko"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5205NinteichosahyoTokkijiko" />
+    FROM
+    rgdb."DbT5205NinteichosahyoTokkijiko"
+</select>
 </mapper>

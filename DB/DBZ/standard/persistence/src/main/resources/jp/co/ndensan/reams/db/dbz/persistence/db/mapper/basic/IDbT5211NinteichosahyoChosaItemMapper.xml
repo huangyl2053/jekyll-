@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5211NinteichosahyoChosaItem">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.allColumns_DbT5211NinteichosahyoChosaItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.allColumns_DbT5211NinteichosahyoChosaItem" />
      FROM
-         rg."DbT5211NinteichosahyoChosaItem"
+         rgdb."DbT5211NinteichosahyoChosaItem"
      WHERE
-         rg."DbT5211NinteichosahyoChosaItem"."isDeleted" = FALSE
+         rgdb."DbT5211NinteichosahyoChosaItem"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5211NinteichosahyoChosaItem">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT5211NinteichosahyoChosaItemの項目をDbT5211NinteichosahyoChosaItemEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5211NinteichosahyoChosaItemEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5211NinteichosahyoChosaItemEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5211NinteichosahyoChosaItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5211NinteichosahyoChosaItem_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5211NinteichosahyoChosaItem_ninteichosaRirekiNo" />
         <id property="remban" column="dbT5211NinteichosahyoChosaItem_remban" />
@@ -49,11 +49,10 @@
         <result property="koroshoIfShikibetsuCode" column="dbT5211NinteichosahyoChosaItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="reserchItem" column="dbT5211NinteichosahyoChosaItem_reserchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5211NinteichosahyoChosaItemEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5211NinteichosahyoChosaItemEntity">
     SELECT
-    <include refid="allColumns_DbT5211NinteichosahyoChosaItem">
-         FROM
-         rg."DbT5211NinteichosahyoChosaItem"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5211NinteichosahyoChosaItem" />
+    FROM
+    rgdb."DbT5211NinteichosahyoChosaItem"
+</select>
 </mapper>

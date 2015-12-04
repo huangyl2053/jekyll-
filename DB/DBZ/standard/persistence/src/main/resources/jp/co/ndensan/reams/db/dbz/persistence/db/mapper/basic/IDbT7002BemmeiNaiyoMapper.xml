@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7002BemmeiNaiyo">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper.allColumns_DbT7002BemmeiNaiyo" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7002BemmeiNaiyoMapper.allColumns_DbT7002BemmeiNaiyo" />
      FROM
-         rg."DbT7002BemmeiNaiyo"
+         rgdb."DbT7002BemmeiNaiyo"
      WHERE
-         rg."DbT7002BemmeiNaiyo"."isDeleted" = FALSE
+         rgdb."DbT7002BemmeiNaiyo"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7002BemmeiNaiyo">
@@ -37,7 +37,7 @@
 
 
     <!--テーブルDbT7002BemmeiNaiyoの項目をDbT7002BemmeiNaiyoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7002BemmeiNaiyoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7002BemmeiNaiyoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7002BemmeiNaiyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT7002BemmeiNaiyo_shoKisaiHokenshaNo" />
         <id property="shikibetsuCode" column="dbT7002BemmeiNaiyo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="genshobunHihokenshaNo" column="dbT7002BemmeiNaiyo_genshobunHihokenshaNo" />
@@ -55,11 +55,10 @@
         <result property="bemmeiNaiyo" column="dbT7002BemmeiNaiyo_bemmeiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="bemmeishoSakuseiTeishutsuYMD" column="dbT7002BemmeiNaiyo_bemmeishoSakuseiTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7002BemmeiNaiyoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7002BemmeiNaiyoEntity">
     SELECT
-    <include refid="allColumns_DbT7002BemmeiNaiyo">
-         FROM
-         rg."DbT7002BemmeiNaiyo"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7002BemmeiNaiyo" />
+    FROM
+    rgdb."DbT7002BemmeiNaiyo"
+</select>
 </mapper>

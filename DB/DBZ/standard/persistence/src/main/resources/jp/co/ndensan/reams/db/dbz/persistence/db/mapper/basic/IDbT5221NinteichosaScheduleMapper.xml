@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper">
 
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5221NinteichosaSchedule">
         SELECT
-        <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule" />
         FROM
         rgdb."DbT5221NinteichosaSchedule"
         WHERE
@@ -48,7 +48,7 @@
 
 
     <!--テーブルDbT5221NinteichosaScheduleの項目をDbT5221NinteichosaScheduleEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5221NinteichosaScheduleEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5221NinteichosaScheduleEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5221NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" autoMapping="true">
         <id property="ninteiChosaYoteiYMD" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="ninteiChosaYoteiKaishiTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ninteiChosaYoteiShuryoTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -77,11 +77,10 @@
         <result property="renrakusaki2" column="dbT5221NinteichosaSchedule_renrakusaki2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="taishoshaMemo" column="dbT5221NinteichosaSchedule_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <sleect id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
+    <select id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
         SELECT
-        <include refid="allColumns_DbT5221NinteichosaSchedule">
-            FROM
-            rgdb."DbT5221NinteichosaSchedule"
-        </include>
-    </sleect>
+        <include refid="allColumns_DbT5221NinteichosaSchedule" />
+        FROM
+        rgdb."DbT5221NinteichosaSchedule"
+    </select>
 </mapper>

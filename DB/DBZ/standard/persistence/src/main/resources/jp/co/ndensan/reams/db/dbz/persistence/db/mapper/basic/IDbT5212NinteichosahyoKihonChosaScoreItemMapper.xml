@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5212NinteichosahyoKihonChosaScoreItemMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5212NinteichosahyoKihonChosaScoreItemMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5212NinteichosahyoKihonChosaScoreItem">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5212NinteichosahyoKihonChosaScoreItemMapper.allColumns_DbT5212NinteichosahyoKihonChosaScoreItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5212NinteichosahyoKihonChosaScoreItemMapper.allColumns_DbT5212NinteichosahyoKihonChosaScoreItem" />
      FROM
-         rg."DbT5212NinteichosahyoKihonChosaScoreItem"
+         rgdb."DbT5212NinteichosahyoKihonChosaScoreItem"
      WHERE
-         rg."DbT5212NinteichosahyoKihonChosaScoreItem"."isDeleted" = FALSE
+         rgdb."DbT5212NinteichosahyoKihonChosaScoreItem"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5212NinteichosahyoKihonChosaScoreItem">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT5212NinteichosahyoKihonChosaScoreItemの項目をDbT5212NinteichosahyoKihonChosaScoreItemEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5212NinteichosahyoKihonChosaScoreItem_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5212NinteichosahyoKihonChosaScoreItem_ninteichosaRirekiNo" />
         <id property="remban" column="dbT5212NinteichosahyoKihonChosaScoreItem_remban" />
@@ -49,11 +49,10 @@
         <result property="koroshoIfShikibetsuCode" column="dbT5212NinteichosahyoKihonChosaScoreItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="reserchItem01" column="dbT5212NinteichosahyoKihonChosaScoreItem_reserchItem01" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5212NinteichosahyoKihonChosaScoreItemEntity">
     SELECT
-    <include refid="allColumns_DbT5212NinteichosahyoKihonChosaScoreItem">
-         FROM
-         rg."DbT5212NinteichosahyoKihonChosaScoreItem"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5212NinteichosahyoKihonChosaScoreItem" />
+    FROM
+    rgdb."DbT5212NinteichosahyoKihonChosaScoreItem"
+</select>
 </mapper>

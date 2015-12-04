@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5209NinteichosahyoKinyuItem">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper.allColumns_DbT5209NinteichosahyoKinyuItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5209NinteichosahyoKinyuItemMapper.allColumns_DbT5209NinteichosahyoKinyuItem" />
      FROM
-         rg."DbT5209NinteichosahyoKinyuItem"
+         rgdb."DbT5209NinteichosahyoKinyuItem"
      WHERE
-         rg."DbT5209NinteichosahyoKinyuItem"."isDeleted" = FALSE
+         rgdb."DbT5209NinteichosahyoKinyuItem"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5209NinteichosahyoKinyuItem">
@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT5209NinteichosahyoKinyuItemの項目をDbT5209NinteichosahyoKinyuItemEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5209NinteichosahyoKinyuItemEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5209NinteichosahyoKinyuItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5209NinteichosahyoKinyuItem_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5209NinteichosahyoKinyuItem_ninteichosaRirekiNo" />
         <id property="remban" column="dbT5209NinteichosahyoKinyuItem_remban" />
@@ -51,11 +51,10 @@
         <result property="serviceJokyoKinyu" column="dbT5209NinteichosahyoKinyuItem_serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceJokyoImageSharedFileId" column="dbT5209NinteichosahyoKinyuItem_serviceJokyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5209NinteichosahyoKinyuItemEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5209NinteichosahyoKinyuItemEntity">
     SELECT
-    <include refid="allColumns_DbT5209NinteichosahyoKinyuItem">
-         FROM
-         rg."DbT5209NinteichosahyoKinyuItem"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5209NinteichosahyoKinyuItem" />
+    FROM
+    rgdb."DbT5209NinteichosahyoKinyuItem"
+</select>
 </mapper>

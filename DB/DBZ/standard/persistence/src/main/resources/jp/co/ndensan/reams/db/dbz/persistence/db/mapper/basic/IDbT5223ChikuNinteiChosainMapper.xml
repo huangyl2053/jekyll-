@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5223ChikuNinteiChosain">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.allColumns_DbT5223ChikuNinteiChosain" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.allColumns_DbT5223ChikuNinteiChosain" />
      FROM
-         rg."DbT5223ChikuNinteiChosain"
+         rgdb."DbT5223ChikuNinteiChosain"
      WHERE
-         rg."DbT5223ChikuNinteiChosain"."isDeleted" = FALSE
+         rgdb."DbT5223ChikuNinteiChosain"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5223ChikuNinteiChosain">
@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT5223ChikuNinteiChosainの項目をDbT5223ChikuNinteiChosainEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5223ChikuNinteiChosainEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5223ChikuNinteiChosainEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5223ChikuNinteiChosainEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosainEntity" autoMapping="true">
         <id property="chosaChikuCode" column="dbT5223ChikuNinteiChosain_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="ninteiChosaItakusakiCode" column="dbT5223ChikuNinteiChosain_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ninteiChosainCode" column="dbT5223ChikuNinteiChosain_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -51,11 +51,10 @@
         <result property="yusenNo" column="dbT5223ChikuNinteiChosain_yusenNo" />
         <result property="biko" column="dbT5223ChikuNinteiChosain_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5223ChikuNinteiChosainEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5223ChikuNinteiChosainEntity">
     SELECT
-    <include refid="allColumns_DbT5223ChikuNinteiChosain">
-         FROM
-         rg."DbT5223ChikuNinteiChosain"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5223ChikuNinteiChosain" />
+    FROM
+    rgdb."DbT5223ChikuNinteiChosain"
+</select>
 </mapper>

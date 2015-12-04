@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5206GaikyoTokki">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper.allColumns_DbT5206GaikyoTokki" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5206GaikyoTokkiMapper.allColumns_DbT5206GaikyoTokki" />
      FROM
-         rg."DbT5206GaikyoTokki"
+         rgdb."DbT5206GaikyoTokki"
      WHERE
-         rg."DbT5206GaikyoTokki"."isDeleted" = FALSE
+         rgdb."DbT5206GaikyoTokki"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5206GaikyoTokki">
@@ -43,7 +43,7 @@
 
 
     <!--テーブルDbT5206GaikyoTokkiの項目をDbT5206GaikyoTokkiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5206GaikyoTokkiEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5206GaikyoTokkiEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5206GaikyoTokkiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5206GaikyoTokki_shinseishoKanriNo" />
         <id property="ninteichosaRirekiNo" column="dbT5206GaikyoTokki_ninteichosaRirekiNo" />
         <result property="insertDantaiCd" column="dbT5206GaikyoTokki_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -67,11 +67,10 @@
         <result property="kikaiKikiImageSharedFileId" column="dbT5206GaikyoTokki_kikaiKikiImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="kikaiKikiMaskingImageSharedFileId" column="dbT5206GaikyoTokki_kikaiKikiMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5206GaikyoTokkiEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5206GaikyoTokkiEntity">
     SELECT
-    <include refid="allColumns_DbT5206GaikyoTokki">
-         FROM
-         rg."DbT5206GaikyoTokki"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5206GaikyoTokki" />
+    FROM
+    rgdb."DbT5206GaikyoTokki"
+</select>
 </mapper>

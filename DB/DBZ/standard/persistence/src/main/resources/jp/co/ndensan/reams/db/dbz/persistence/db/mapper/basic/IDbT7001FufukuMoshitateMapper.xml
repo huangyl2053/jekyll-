@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7001FufukuMoshitateMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7001FufukuMoshitateMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7001FufukuMoshitate">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7001FufukuMoshitateMapper.allColumns_DbT7001FufukuMoshitate" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7001FufukuMoshitateMapper.allColumns_DbT7001FufukuMoshitate" />
      FROM
-         rg."DbT7001FufukuMoshitate"
+         rgdb."DbT7001FufukuMoshitate"
      WHERE
-         rg."DbT7001FufukuMoshitate"."isDeleted" = FALSE
+         rgdb."DbT7001FufukuMoshitate"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7001FufukuMoshitate">
@@ -60,7 +60,7 @@
 
 
     <!--テーブルDbT7001FufukuMoshitateの項目をDbT7001FufukuMoshitateEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7001FufukuMoshitateEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7001FufukuMoshitateEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7001FufukuMoshitateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT7001FufukuMoshitate_shoKisaiHokenshaNo" />
         <id property="shikibetsuCode" column="dbT7001FufukuMoshitate_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="genshobunsHihokennshaNo" column="dbT7001FufukuMoshitate_genshobunsHihokennshaNo" />
@@ -101,11 +101,10 @@
         <result property="saiketsuKekka" column="dbT7001FufukuMoshitate_saiketsuKekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="saiketsuRiyu" column="dbT7001FufukuMoshitate_saiketsuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7001FufukuMoshitateEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7001FufukuMoshitateEntity">
     SELECT
-    <include refid="allColumns_DbT7001FufukuMoshitate">
-         FROM
-         rg."DbT7001FufukuMoshitate"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7001FufukuMoshitate" />
+    FROM
+    rgdb."DbT7001FufukuMoshitate"
+</select>
 </mapper>

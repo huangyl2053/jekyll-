@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7014KaigoSetaiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7014KaigoSetaiMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7014KaigoSetai">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7014KaigoSetaiMapper.allColumns_DbT7014KaigoSetai" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7014KaigoSetaiMapper.allColumns_DbT7014KaigoSetai" />
      FROM
-         rg."DbT7014KaigoSetai"
+         rgdb."DbT7014KaigoSetai"
      WHERE
-         rg."DbT7014KaigoSetai"."isDeleted" = FALSE
+         rgdb."DbT7014KaigoSetai"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7014KaigoSetai">
@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT7014KaigoSetaiの項目をDbT7014KaigoSetaiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7014KaigoSetaiEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7014KaigoSetaiEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7014KaigoSetaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7014KaigoSetaiEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT7014KaigoSetai_hihokenshaNo" />
         <id property="kanriShikibetsuKubun" column="dbT7014KaigoSetai_kanriShikibetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="setaiHaakuKijunYMD" column="dbT7014KaigoSetai_setaiHaakuKijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -51,11 +51,10 @@
         <result property="setaiInshikibetsuCode" column="dbT7014KaigoSetai_setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="honninKubun" column="dbT7014KaigoSetai_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7014KaigoSetaiEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7014KaigoSetaiEntity">
     SELECT
-    <include refid="allColumns_DbT7014KaigoSetai">
-         FROM
-         rg."DbT7014KaigoSetai"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7014KaigoSetai" />
+    FROM
+    rgdb."DbT7014KaigoSetai"
+</select>
 </mapper>

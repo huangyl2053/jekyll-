@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5304ShujiiIkenshoIkenItem">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
      FROM
-         rg."DbT5304ShujiiIkenshoIkenItem"
+         rgdb."DbT5304ShujiiIkenshoIkenItem"
      WHERE
-         rg."DbT5304ShujiiIkenshoIkenItem"."isDeleted" = FALSE
+         rgdb."DbT5304ShujiiIkenshoIkenItem"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5304ShujiiIkenshoIkenItem">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT5304ShujiiIkenshoIkenItemの項目をDbT5304ShujiiIkenshoIkenItemEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo" />
         <id property="ikenshoIraiRirekiNo" column="dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo" />
         <result property="insertDantaiCd" column="dbT5304ShujiiIkenshoIkenItem_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="koroshoIfShikibetsuCode" column="dbT5304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ikenItem" column="dbT5304ShujiiIkenshoIkenItem_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5304ShujiiIkenshoIkenItemEntity">
     SELECT
-    <include refid="allColumns_DbT5304ShujiiIkenshoIkenItem">
-         FROM
-         rg."DbT5304ShujiiIkenshoIkenItem"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5304ShujiiIkenshoIkenItem" />
+    FROM
+    rgdb."DbT5304ShujiiIkenshoIkenItem"
+</select>
 </mapper>

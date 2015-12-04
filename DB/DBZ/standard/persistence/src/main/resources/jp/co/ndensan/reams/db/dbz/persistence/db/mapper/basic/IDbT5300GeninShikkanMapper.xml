@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5300GeninShikkanMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5300GeninShikkan">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5300GeninShikkanMapper.allColumns_DbT5300GeninShikkan" />
      FROM
-         rg."DbT5300GeninShikkan"
+         rgdb."DbT5300GeninShikkan"
      WHERE
-         rg."DbT5300GeninShikkan"."isDeleted" = FALSE
+         rgdb."DbT5300GeninShikkan"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5300GeninShikkan">
@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT5300GeninShikkanの項目をDbT5300GeninShikkanEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5300GeninShikkanEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5300GeninShikkanEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5300GeninShikkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5300GeninShikkanEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5300GeninShikkan_shinseishoKanriNo" />
         <id property="remban" column="dbT5300GeninShikkan_remban" />
         <result property="insertDantaiCd" column="dbT5300GeninShikkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,11 +47,10 @@
         <result property="isShutaruGeninShikkan" column="dbT5300GeninShikkan_isShutaruGeninShikkan" />
         <result property="geninShikkanCode" column="dbT5300GeninShikkan_geninShikkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5300GeninShikkanEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5300GeninShikkanEntity">
     SELECT
-    <include refid="allColumns_DbT5300GeninShikkan">
-         FROM
-         rg."DbT5300GeninShikkan"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5300GeninShikkan" />
+    FROM
+    rgdb."DbT5300GeninShikkan"
+</select>
 </mapper>

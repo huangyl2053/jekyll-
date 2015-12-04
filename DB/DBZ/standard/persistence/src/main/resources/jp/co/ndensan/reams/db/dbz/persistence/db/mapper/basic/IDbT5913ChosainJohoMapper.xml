@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5913ChosainJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5913ChosainJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
      FROM
-         rg."DbT5913ChosainJoho"
+         rgdb."DbT5913ChosainJoho"
      WHERE
-         rg."DbT5913ChosainJoho"."isDeleted" = FALSE
+         rgdb."DbT5913ChosainJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5913ChosainJoho">
@@ -44,10 +44,10 @@
 
 
     <!--テーブルDbT5913ChosainJohoの項目をDbT5913ChosainJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5913ChosainJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5913ChosainJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5913ChosainJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="ninteichosaItakusakiCode" column="dbT5913ChosainJoho_ninteichosaItakusakiCode" />
-        <id property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainNo" />
+        <!--<id property="ninteichosaItakusakiCode" column="dbT5913ChosainJoho_ninteichosaItakusakiCode" />-->
+        <!--<id property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainNo" />-->
         <result property="insertDantaiCd" column="dbT5913ChosainJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5913ChosainJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5913ChosainJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -69,11 +69,10 @@
         <result property="shozokuKikanName" column="dbT5913ChosainJoho_shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5913ChosainJoho_jokyoFlag" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5913ChosainJohoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5913ChosainJohoEntity">
     SELECT
-    <include refid="allColumns_DbT5913ChosainJoho">
-         FROM
-         rg."DbT5913ChosainJoho"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5913ChosainJoho" />
+    FROM
+    rgdb."DbT5913ChosainJoho"
+</select>
 </mapper>

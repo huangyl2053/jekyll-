@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7003BemmeishaJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7003BemmeishaJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7003BemmeishaJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7003BemmeishaJohoMapper.allColumns_DbT7003BemmeishaJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7003BemmeishaJohoMapper.allColumns_DbT7003BemmeishaJoho" />
      FROM
-         rg."DbT7003BemmeishaJoho"
+         rgdb."DbT7003BemmeishaJoho"
      WHERE
-         rg."DbT7003BemmeishaJoho"."isDeleted" = FALSE
+         rgdb."DbT7003BemmeishaJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7003BemmeishaJoho">
@@ -39,7 +39,7 @@
 
 
     <!--テーブルDbT7003BemmeishaJohoの項目をDbT7003BemmeishaJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7003BemmeishaJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7003BemmeishaJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7003BemmeishaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT7003BemmeishaJoho_shoKisaiHokenshaNo" />
         <id property="shikibetsuCode" column="dbT7003BemmeishaJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="genshobunHihokenshaNo" column="dbT7003BemmeishaJoho_genshobunHihokenshaNo" />
@@ -59,11 +59,10 @@
         <result property="yakushoskuName" column="dbT7003BemmeishaJoho_yakushoskuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="bemmeishaShimei" column="dbT7003BemmeishaJoho_bemmeishaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7003BemmeishaJohoEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7003BemmeishaJohoEntity">
     SELECT
-    <include refid="allColumns_DbT7003BemmeishaJoho">
-         FROM
-         rg."DbT7003BemmeishaJoho"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7003BemmeishaJoho" />
+    FROM
+    rgdb."DbT7003BemmeishaJoho"
+</select>
 </mapper>

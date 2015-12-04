@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5225ChosaChikuGroup">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.allColumns_DbT5225ChosaChikuGroup" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.allColumns_DbT5225ChosaChikuGroup" />
      FROM
-         rg."DbT5225ChosaChikuGroup"
+         rgdb."DbT5225ChosaChikuGroup"
      WHERE
-         rg."DbT5225ChosaChikuGroup"."isDeleted" = FALSE
+         rgdb."DbT5225ChosaChikuGroup"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5225ChosaChikuGroup">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT5225ChosaChikuGroupの項目をDbT5225ChosaChikuGroupEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5225ChosaChikuGroupEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5225ChosaChikuGroupEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5225ChosaChikuGroupEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity" autoMapping="true">
         <id property="chosaChikuGroupCode" column="dbT5225ChosaChikuGroup_chosaChikuGroupCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="chosaChikuCode" column="dbT5225ChosaChikuGroup_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <id property="shichosonCode" column="dbT5225ChosaChikuGroup_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="chosaChikuGroupName" column="dbT5225ChosaChikuGroup_chosaChikuGroupName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yusenNo" column="dbT5225ChosaChikuGroup_yusenNo" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
+<select id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
     SELECT
-    <include refid="allColumns_DbT5225ChosaChikuGroup">
-         FROM
-         rg."DbT5225ChosaChikuGroup"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT5225ChosaChikuGroup" />
+    FROM
+    rgdb."DbT5225ChosaChikuGroup"
+</select>
 </mapper>
