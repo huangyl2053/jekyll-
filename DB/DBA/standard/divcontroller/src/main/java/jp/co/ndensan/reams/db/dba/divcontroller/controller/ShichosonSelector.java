@@ -2,13 +2,12 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.shichosonselector.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.dgShichoson_Row;
-import jp.co.ndensan.reams.db.dba.service.ShichosonSentakuFinder;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dba.service.core.shichosonSentaku.ShichosonSentakuFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShichosonSelector {
 
     private final ShichosonSentakuFinder service;
-    //TODO QA57
+    //TODO 張紅麗　QA57　市町村選択モードの確認　2015/12/02まで
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
 
@@ -44,15 +43,14 @@ public class ShichosonSelector {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         RString 構成市町村モード = model.getShichosonModel();
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
-        List<DbT7056GappeiShichosonEntity> DbT7056List = new ArrayList();
-        List<DbT7051KoseiShichosonMasterEntity> DbT7051List = new ArrayList();
+        List<ShichosonSelectorResult> resultList = new ArrayList();
         if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
-            DbT7056List = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
+            resultList = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
         }
         if (KOUSEI_MODO_KOUSEI.equals(構成市町村モード)) {
-            DbT7051List = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
+            resultList = service.getKouseiShichosonSentaku(FlexibleDate.getNowDate());
         }
-        getHandler(div).set一覧表示グリッド(DbT7056List, DbT7051List);
+        getHandler(div).set一覧表示グリッド(resultList);
         response.data = div;
         return response;
     }
@@ -80,12 +78,12 @@ public class ShichosonSelector {
     public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         ShichosonSelectorModel model = new ShichosonSelectorModel();
-        List<DbT7051KoseiShichosonMasterEntity> list = new ArrayList();
+        List<ShichosonSelectorResult> list = new ArrayList();
         for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
-            DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
-            entity.setShichosonCode(new LasdecCode(row.getTxtShichosonCode()));
-            entity.setShichosonMeisho(row.getTxtShichosonName());
-            list.add(entity);
+            ShichosonSelectorResult result = new ShichosonSelectorResult();
+            result.set市町村コード(new LasdecCode(row.getTxtShichosonCode()));
+            result.set市町村名(row.getTxtShichosonName());
+            list.add(result);
         }
         model.setList(list);
         div.setKyuShichoson(DataPassingConverter.serialize(model));
