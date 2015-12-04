@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7032ShinKyuTaTokureiShisetsuNoHenkanMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7032ShinKyuTaTokureiShisetsuNoHenkanMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7032ShinKyuTaTokureiShisetsuNoHenkan">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7032ShinKyuTaTokureiShisetsuNoHenkanMapper.allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7032ShinKyuTaTokureiShisetsuNoHenkanMapper.allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan" />
      FROM
-         rg."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"
+         rgdb."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"
      WHERE
-         rg."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"."isDeleted" = FALSE
+         rgdb."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan">
@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT7032ShinKyuTaTokureiShisetsuNoHenkanの項目をDbT7032ShinKyuTaTokureiShisetsuNoHenkanEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <id property="kyuTaTokureiShisetsuNo" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_kyuTaTokureiShisetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="shichosonCode2" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_shichosonCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuTaTokureiShisetsuNo2" column="dbT7032ShinKyuTaTokureiShisetsuNoHenkan_kyuTaTokureiShisetsuNo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7032ShinKyuTaTokureiShisetsuNoHenkanEntity">
     SELECT
-    <include refid="allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan">
-         FROM
-         rg."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7032ShinKyuTaTokureiShisetsuNoHenkan"/>
+    FROM
+    rgdb."DbT7032ShinKyuTaTokureiShisetsuNoHenkan"
+</select>
 </mapper>

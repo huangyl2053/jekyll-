@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7054KanrenHihokenshaNo">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper.allColumns_DbT7054KanrenHihokenshaNo" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7054KanrenHihokenshaNoMapper.allColumns_DbT7054KanrenHihokenshaNo" />
      FROM
-         rg."DbT7054KanrenHihokenshaNo"
+         rgdb."DbT7054KanrenHihokenshaNo"
      WHERE
-         rg."DbT7054KanrenHihokenshaNo"."isDeleted" = FALSE
+         rgdb."DbT7054KanrenHihokenshaNo"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7054KanrenHihokenshaNo">
@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT7054KanrenHihokenshaNoの項目をDbT7054KanrenHihokenshaNoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7054KanrenHihokenshaNoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7054KanrenHihokenshaNoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7054KanrenHihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7054KanrenHihokenshaNoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT7054KanrenHihokenshaNo_shoKisaiHokenshaNo" />
         <id property="saishinHihokenshaNo" column="dbT7054KanrenHihokenshaNo_saishinHihokenshaNo" />
         <result property="insertDantaiCd" column="dbT7054KanrenHihokenshaNo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -52,7 +52,7 @@
 	SELECT
 	<include refid="allColumns_DbT7054KanrenHihokenshaNo"/>
 	FROM
-	rgba."DbT7054KanrenHihokenshaNo"
+	rgdb."DbT7054KanrenHihokenshaNo"
 	</select>
 
 </mapper>

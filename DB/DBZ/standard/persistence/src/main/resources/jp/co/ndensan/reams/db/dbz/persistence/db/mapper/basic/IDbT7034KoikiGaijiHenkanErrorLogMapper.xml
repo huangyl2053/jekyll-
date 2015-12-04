@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7034KoikiGaijiHenkanErrorLog">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper.allColumns_DbT7034KoikiGaijiHenkanErrorLog" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7034KoikiGaijiHenkanErrorLogMapper.allColumns_DbT7034KoikiGaijiHenkanErrorLog" />
      FROM
-         rg."DbT7034KoikiGaijiHenkanErrorLog"
+         rgdb."DbT7034KoikiGaijiHenkanErrorLog"
      WHERE
-         rg."DbT7034KoikiGaijiHenkanErrorLog"."isDeleted" = FALSE
+         rgdb."DbT7034KoikiGaijiHenkanErrorLog"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7034KoikiGaijiHenkanErrorLog">
@@ -49,7 +49,7 @@
 
 
     <!--テーブルDbT7034KoikiGaijiHenkanErrorLogの項目をDbT7034KoikiGaijiHenkanErrorLogEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7034KoikiGaijiHenkanErrorLogEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7034KoikiGaijiHenkanErrorLogEntity" autoMapping="true">
         <id property="shoriNo" column="dbT7034KoikiGaijiHenkanErrorLog_shoriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="renNo" column="dbT7034KoikiGaijiHenkanErrorLog_renNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="errorHyojiRenban" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -79,11 +79,10 @@
         <result property="errorHyojiKomokuMeisho" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomokuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="errorHyojiKomoku" column="dbT7034KoikiGaijiHenkanErrorLog_errorHyojiKomoku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7034KoikiGaijiHenkanErrorLogEntity">
     SELECT
-    <include refid="allColumns_DbT7034KoikiGaijiHenkanErrorLog">
-         FROM
-         rg."DbT7034KoikiGaijiHenkanErrorLog"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7034KoikiGaijiHenkanErrorLog"/>
+    FROM
+    rgdb."DbT7034KoikiGaijiHenkanErrorLog"
+</select>
 </mapper>

@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7065ChohyoSeigyoKyotsu">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper.allColumns_DbT7065ChohyoSeigyoKyotsu" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7065ChohyoSeigyoKyotsuMapper.allColumns_DbT7065ChohyoSeigyoKyotsu" />
      FROM
-         rg."DbT7065ChohyoSeigyoKyotsu"
+         rgdb."DbT7065ChohyoSeigyoKyotsu"
      WHERE
-         rg."DbT7065ChohyoSeigyoKyotsu"."isDeleted" = FALSE
+         rgdb."DbT7065ChohyoSeigyoKyotsu"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7065ChohyoSeigyoKyotsu">
@@ -51,7 +51,7 @@
 
 
     <!--テーブルDbT7065ChohyoSeigyoKyotsuの項目をDbT7065ChohyoSeigyoKyotsuEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7065ChohyoSeigyoKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7065ChohyoSeigyoKyotsu_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="chohyoBunruiID" column="dbT7065ChohyoSeigyoKyotsu_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7065ChohyoSeigyoKyotsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -88,7 +88,7 @@
 	SELECT
 	<include refid="allColumns_DbT7065ChohyoSeigyoKyotsu"/>
 	FROM
-	rgba."DbT7065ChohyoSeigyoKyotsu"
+	rgdb."DbT7065ChohyoSeigyoKyotsu"
 	</select>
 
 </mapper>

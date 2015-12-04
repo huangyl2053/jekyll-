@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7028KakushuShinKyuNoHenkanMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7028KakushuShinKyuNoHenkanMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7028KakushuShinKyuNoHenkan">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7028KakushuShinKyuNoHenkanMapper.allColumns_DbT7028KakushuShinKyuNoHenkan" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7028KakushuShinKyuNoHenkanMapper.allColumns_DbT7028KakushuShinKyuNoHenkan" />
      FROM
-         rg."DbT7028KakushuShinKyuNoHenkan"
+         rgdb."DbT7028KakushuShinKyuNoHenkan"
      WHERE
-         rg."DbT7028KakushuShinKyuNoHenkan"."isDeleted" = FALSE
+         rgdb."DbT7028KakushuShinKyuNoHenkan"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7028KakushuShinKyuNoHenkan">
@@ -33,7 +33,7 @@
 
 
     <!--テーブルDbT7028KakushuShinKyuNoHenkanの項目をDbT7028KakushuShinKyuNoHenkanEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7028KakushuShinKyuNoHenkanEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7028KakushuShinKyuNoHenkanEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT7028KakushuShinKyuNoHenkan_hihokenshaNo" />
         <id property="noKubun" column="dbT7028KakushuShinKyuNoHenkan_noKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="kyuNo" column="dbT7028KakushuShinKyuNoHenkan_kyuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,11 +47,10 @@
         <result property="lastUpdateReamsLoginId" column="dbT7028KakushuShinKyuNoHenkan_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinNo" column="dbT7028KakushuShinKyuNoHenkan_shinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity">
+<select id="getEntity" resultMap="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity">
     SELECT
-    <include refid="allColumns_DbT7028KakushuShinKyuNoHenkan">
-         FROM
-         rg."DbT7028KakushuShinKyuNoHenkan"
-    </include>  
-</sleect>
+    <include refid="allColumns_DbT7028KakushuShinKyuNoHenkan"/>
+    FROM
+    rgdb."DbT7028KakushuShinKyuNoHenkan"
+</select>
 </mapper>

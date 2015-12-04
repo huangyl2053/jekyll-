@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7211GaibuRenkeiDataoutputJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.allColumns_DbT7211GaibuRenkeiDataoutputJoho" />
      FROM
-         rg."DbT7211GaibuRenkeiDataoutputJoho"
+         rgdb."DbT7211GaibuRenkeiDataoutputJoho"
      WHERE
-         rg."DbT7211GaibuRenkeiDataoutputJoho"."isDeleted" = FALSE
+         rgdb."DbT7211GaibuRenkeiDataoutputJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7211GaibuRenkeiDataoutputJoho">
@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT7211GaibuRenkeiDataoutputJohoの項目をDbT7211GaibuRenkeiDataoutputJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT7211GaibuRenkeiDataoutputJoho_shinseishoKanriNo" />
         <result property="insertDantaiCd" column="dbT7211GaibuRenkeiDataoutputJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7211GaibuRenkeiDataoutputJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -56,7 +56,7 @@
 	SELECT
 	<include refid="allColumns_DbT7211GaibuRenkeiDataoutputJoho"/>
 	FROM
-	rgba."DbT7211GaibuRenkeiDataoutputJoho"
+	rgdb."DbT7211GaibuRenkeiDataoutputJoho"
 	</select>
 
 </mapper>
