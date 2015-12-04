@@ -139,6 +139,10 @@ var DBZ;
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
             };
+
+            Controls.prototype.btnInputClear = function () {
+                return new UZA.Button(this.convFiledName("btnInputClear"));
+            };
             return Controls;
         })();
         TekiyoJogaiRireki.Controls = Controls;

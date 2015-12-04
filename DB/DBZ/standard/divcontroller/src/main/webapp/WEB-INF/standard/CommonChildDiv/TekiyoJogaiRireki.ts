@@ -48,6 +48,9 @@ module DBZ
             public 除外異動訂正() {
                 return new Modes.除外異動訂正(this.controls);
             }
+			 public 履歴訂正() {
+                return new Modes.履歴訂正(this.controls);
+            }
 			
             ////////////////////////////
 
@@ -64,7 +67,7 @@ module DBZ
             public priorities(): Array<string> {
                 return [
                     "ModeA","ModeB","ModeC","ModeD","ModeShokai",
-                    "除外施設入所適用","除外施設退所解除","除外施設変更変更","除外異動訂正"
+                    "除外施設入所適用","除外施設退所解除","除外施設変更変更","除外異動訂正","履歴訂正"
                 ];
             }
             ////////////////////////////////////////////////////
@@ -86,6 +89,7 @@ module DBZ
                     this.controls.panelTekiyoInput().displayNone = true;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
+					this.controls.btnInputClear().displayNone = false;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
               
@@ -108,6 +112,8 @@ module DBZ
                     
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
+					 this.controls.btnInputClear().displayNone = false;
+                    this.controls.btnInputClear().disabled = false;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
               }
@@ -125,10 +131,11 @@ module DBZ
                    
                     this.controls.panelTekiyoInput().displayNone = false;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
-                    this.controls.btnKakutei().disabled = true;
-                    
+                                     
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = true;
+					this.controls.btnInputClear().displayNone = false;
+                    this.controls.btnInputClear().disabled = true;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
                 
@@ -147,6 +154,7 @@ module DBZ
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     
                     this.controls.btnKakutei().displayNone = true;
+					this.controls.btnInputClear().displayNone = true;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
                 }
 
@@ -167,9 +175,13 @@ module DBZ
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
-                    this.controls.btnAdd().displayNone = false;
+					this.controls.btnInputClear().displayNone = false;
+                    this.controls.btnInputClear().disabled = false;
+                    this.controls.btnAdd().displayNone = false;			
+					
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+					this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
                 }
               }
               //除外施設退所により解除モード
@@ -180,14 +192,18 @@ module DBZ
                 }
 
                  public 解除(): void {
+				 
                     this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
                     this.controls.panelTekiyoInput().displayNone = true;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = false;
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
-                    this.controls.btnAdd().displayNone = false;
+					this.controls.btnInputClear().displayNone = false;
+                    this.controls.btnInputClear().disabled = false;
+                    this.controls.btnAdd().displayNone = true;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+					this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
                 }
               }
               //除外施設変更により変更モード
@@ -199,13 +215,26 @@ module DBZ
 
                  public 変更(): void {
                     this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
-                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = false;
+					this.controls.panelTekiyoInput().disabled = true;
+					this.controls.panelTekiyoInput().title = '';
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
-                    this.controls.btnAdd().displayNone = false;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+					this.controls.btnInputClear().displayNone = false;
+                    this.controls.btnInputClear().disabled = false;
+                    this.controls.panelTekiyoRireki().displayNone = true;                
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;	
+					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().登録()　　					
+					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().適用除外者();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
+					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();					
+					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();	
+					this.controls.ccdShisetsuNyushRirekiKanri().施設入退所を追加する().表示しない();	
+					this.controls.txtNyusyoDate().displayNone = true;
+                    this.controls.txtTaisyoDate().displayNone = true;
+					
                 }
                 
               }
@@ -217,7 +246,8 @@ module DBZ
                 }
 
                  public 訂正(): void {
-                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                   
+				    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
                     this.controls.panelTekiyoInput().displayNone = false;
                     this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
@@ -230,8 +260,39 @@ module DBZ
                 }
                 
               }
-			     
+			   export class 履歴訂正{
+                private controls: Controls;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
 
+                 public teisei(): void {               
+				    this.controls.btnAdd().text = '過去の履歴を追加する';
+					this.controls.btnAdd().width = "200";
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = false;
+                    this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;                    
+                    this.controls.btnKakutei().displayNone = true;
+					this.controls.btnInputClear().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
+					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = true;
+					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = true;
+					
+				
+					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().登録();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
+					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();
+					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().適用除外者();
+					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();
+					this.controls.panelTekiyoInput().title = '明細';
+					this.controls.TekiyoJogaiTorokuHenkoIchiran().title = '施設情報';
+					this.controls.txtNyusyoDate().displayNone = true;
+                    this.controls.txtTaisyoDate().displayNone = true;
+                }
+                
+              }
 
 			 export class ModeShokai {
                 private controls: Controls;
@@ -241,15 +302,26 @@ module DBZ
 
                  public shokai(): void {
 				    this.controls.btnAdd().displayNone = true;
-                     this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
-                    this.controls.panelTekiyoInput().displayNone = true;
+                    this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
+                    this.controls.panelTekiyoInput().displayNone = false;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;                    
                     this.controls.btnKakutei().displayNone = true;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+					this.controls.btnInputClear().displayNone = true;
+                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = true;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-                 
+					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().照会();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
+					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
+					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();
+					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().非表示();
+					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();
+					this.controls.panelTekiyoInput().title = '明細';
+					this.controls.TekiyoJogaiTorokuHenkoIchiran().title = '施設情報';
+					this.controls.txtNyusyoDate().displayNone = true;
+                    this.controls.txtTaisyoDate().displayNone = true;
+					                 
                 }
                 
               }

@@ -147,6 +147,10 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
+            public btnInputClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnInputClear"));
+            }
+
         }
 
      }

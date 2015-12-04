@@ -24,6 +24,7 @@ module DBZ {
                     "台帳種別の列を",
                     "明細表示モード",
                     "施設種類の列を",
+					"施設入退所を追加する",					
                     "利用"
                 ];
             }
@@ -62,6 +63,9 @@ module DBZ {
 
             public 利用() {
                 return new Modes.利用(this.controls);
+            }
+			 public 施設入退所を追加する() {
+                return new Modes.施設入退所を追加する(this.controls);
             }
 
 
@@ -313,6 +317,36 @@ module DBZ {
                     this.controls.ShisetsuNyutaishoInput().displayNone = true;
                     this.controls.ShisetsuNyutaishoInput().readOnly = true;
                 }
+				
+				 public 適用除外者(): void {
+				 
+				 this.controls.ccdShisetsuJoho().表示モード().defaultView();
+				 this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
+				 this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+				 this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+			 
+                  			
+					
+                }
+				 public 被保険者(): void {
+				 this.controls.ccdShisetsuJoho().表示モード().defaultView();
+				 this.controls.ccdShisetsuJoho().入力補助().事業者を表示する();
+				 this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+				 this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+                  			
+					
+                }
+				 public 他特例施設者(): void {
+				 this.controls.ccdShisetsuJoho().表示モード().defaultView();
+				 this.controls.ccdShisetsuJoho().入力補助().他特例施設を表示する();
+				 this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+				 this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+                  			
+					
+                }
+				
+				 
+               
             }
 
             
@@ -359,6 +393,21 @@ module DBZ {
             }
 
 
+		export class 施設入退所を追加する {       
+         private controls: Controls;
+                    constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 表示する(): void {
+				
+                }
+
+                public 表示しない(): void {
+				this.controls.btnAddShisetsuNyutaisho().displayNone = true;
+                }
+           
+            }
             export class 利用 {       
          private controls: Controls;
                                 constructor(controls: Controls) {
@@ -371,13 +420,13 @@ module DBZ {
                 public 全施設対象機能(): void {
                 }
 
-                public 被保険者対象機能(): void {
+                public 被保険者対象機能(): void {				
                 }
 
-                public 他市町村住所地特例者対象機能(): void {
+                public 他市町村住所地特例者対象機能(): void {				
                 }
 
-                public 適用除外者対象機能(): void {
+                public 適用除外者対象機能(): void {				
                 }
 
 

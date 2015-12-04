@@ -14,6 +14,7 @@
                     "台帳種別の列を",
                     "明細表示モード",
                     "施設種類の列を",
+                    "施設入退所を追加する",
                     "利用"
                 ];
             };
@@ -52,6 +53,9 @@
 
             ModeController.prototype.利用 = function () {
                 return new Modes.利用(this.controls);
+            };
+            ModeController.prototype.施設入退所を追加する = function () {
+                return new Modes.施設入退所を追加する(this.controls);
             };
             return ModeController;
         })();
@@ -276,6 +280,25 @@
                     this.controls.ShisetsuNyutaishoInput().displayNone = true;
                     this.controls.ShisetsuNyutaishoInput().readOnly = true;
                 };
+
+                明細表示モード.prototype.適用除外者 = function () {
+                    this.controls.ccdShisetsuJoho().表示モード().defaultView();
+                    this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
+                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+                };
+                明細表示モード.prototype.被保険者 = function () {
+                    this.controls.ccdShisetsuJoho().表示モード().defaultView();
+                    this.controls.ccdShisetsuJoho().入力補助().事業者を表示する();
+                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+                };
+                明細表示モード.prototype.他特例施設者 = function () {
+                    this.controls.ccdShisetsuJoho().表示モード().defaultView();
+                    this.controls.ccdShisetsuJoho().入力補助().他特例施設を表示する();
+                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+                };
                 return 明細表示モード;
             })();
             Modes.明細表示モード = 明細表示モード;
@@ -320,6 +343,19 @@
             })();
             Modes.施設種類の列を = 施設種類の列を;
 
+            var 施設入退所を追加する = (function () {
+                function 施設入退所を追加する(controls) {
+                    this.controls = controls;
+                }
+                施設入退所を追加する.prototype.表示する = function () {
+                };
+
+                施設入退所を追加する.prototype.表示しない = function () {
+                    this.controls.btnAddShisetsuNyutaisho().displayNone = true;
+                };
+                return 施設入退所を追加する;
+            })();
+            Modes.施設入退所を追加する = 施設入退所を追加する;
             var 利用 = (function () {
                 function 利用(controls) {
                     this.controls = controls;
