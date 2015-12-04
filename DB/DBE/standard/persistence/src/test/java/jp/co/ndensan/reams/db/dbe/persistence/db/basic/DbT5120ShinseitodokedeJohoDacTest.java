@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5120ShinseitodokedeJ
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -114,7 +114,7 @@ public class DbT5120ShinseitodokedeJohoDacTest extends DbeTestDacBase {
         public void 申請届出情報エンティティを渡すと_updateは_申請届出情報を更新する() {
             DbT5120ShinseitodokedeJohoEntity updateRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号);
-            updateRecord.setShinseiTodokedeshaJusho(new AtenaJusho("0001"));
+            updateRecord.setShinseiTodokedeshaJusho(new RString("0001"));
 
             sut.save(updateRecord);
 

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -43,14 +43,14 @@ public interface IShinseitodokedeJoho {
      *
      * @return 申請届出者氏名
      */
-    AtenaMeisho get申請届出者氏名();
+    RString get申請届出者氏名();
 
     /**
      * 申請届出者氏名カナを返します。
      *
      * @return 申請届出者氏名カナ
      */
-    AtenaKanaMeisho get申請届出者氏名カナ();
+    RString get申請届出者氏名カナ();
 
     /**
      * 申請届出者続柄コードを返します。
@@ -85,7 +85,7 @@ public interface IShinseitodokedeJoho {
      *
      * @return 申請届出者住所
      */
-    AtenaJusho get申請届出者住所();
+    RString get申請届出者住所();
 
     /**
      * 申請届出者電話番号を返します。
