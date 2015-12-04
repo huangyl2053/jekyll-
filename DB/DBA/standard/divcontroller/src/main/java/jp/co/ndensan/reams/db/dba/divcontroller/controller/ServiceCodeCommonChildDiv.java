@@ -51,8 +51,11 @@ public class ServiceCodeCommonChildDiv {
      * @return ResponseData<ServiceCodeCommonChildDivDiv>
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_Kensaku(ServiceCodeCommonChildDivDiv div) {
-        FlexibleYearMonth kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
-        kijunYmFlex.wareki().fillType(FillType.NONE);
+        FlexibleYearMonth kijunYmFlex = FlexibleYearMonth.EMPTY;
+        if (div.getTxtKijunYM().getValue() != null ) {
+            kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
+            kijunYmFlex.wareki().fillType(FillType.NONE);
+        }
         SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(div.getTxtServiceCode().getValue(),
                 div.getTxtKomokuCode().getValue(), kijunYmFlex);
         List<KaigoServiceNaiyou> list = service.getServiceCodeList(param);
