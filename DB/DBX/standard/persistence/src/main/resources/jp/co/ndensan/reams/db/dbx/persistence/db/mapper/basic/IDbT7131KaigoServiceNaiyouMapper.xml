@@ -6,35 +6,26 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper">
     
-    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
-    <sql id="noDeleted_DbT7131KaigoServiceNaiyou">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />
-     FROM
-         rgdb."DbT7131KaigoServiceNaiyou"
-     WHERE
-         rgdb."DbT7131KaigoServiceNaiyou"."isDeleted" = FALSE
-    </sql>
     <sql id="allColumns_DbT7131KaigoServiceNaiyou">
-         "DbT7131KaigoServiceNaiyou"."serviceShuruiCode" as "dbT7131KaigoServiceNaiyou_serviceShuruiCode",
-         "DbT7131KaigoServiceNaiyou"."serviceKoumokuCode" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCode",
-         "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" as "dbT7131KaigoServiceNaiyou_teikyoKaishiYM",
-         "DbT7131KaigoServiceNaiyou"."rirekiNo" as "dbT7131KaigoServiceNaiyou_rirekiNo",
-         "DbT7131KaigoServiceNaiyou"."insertDantaiCd" as "dbT7131KaigoServiceNaiyou_insertDantaiCd",
-         "DbT7131KaigoServiceNaiyou"."insertTimestamp" as "dbT7131KaigoServiceNaiyou_insertTimestamp",
-         "DbT7131KaigoServiceNaiyou"."insertReamsLoginId" as "dbT7131KaigoServiceNaiyou_insertReamsLoginId",
-         "DbT7131KaigoServiceNaiyou"."insertContextId" as "dbT7131KaigoServiceNaiyou_insertContextId",
-         "DbT7131KaigoServiceNaiyou"."isDeleted" as "dbT7131KaigoServiceNaiyou_isDeleted",
-         "DbT7131KaigoServiceNaiyou"."updateCount" as "dbT7131KaigoServiceNaiyou_updateCount",
-         "DbT7131KaigoServiceNaiyou"."lastUpdateTimestamp" as "dbT7131KaigoServiceNaiyou_lastUpdateTimestamp",
-         "DbT7131KaigoServiceNaiyou"."lastUpdateReamsLoginId" as "dbT7131KaigoServiceNaiyou_lastUpdateReamsLoginId",
-         "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" as "dbT7131KaigoServiceNaiyou_teikyoShuryoYM",
-         "DbT7131KaigoServiceNaiyou"."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName",
-         "DbT7131KaigoServiceNaiyou"."serviceNameRyaku" as "dbT7131KaigoServiceNaiyou_serviceNameRyaku",
-         "DbT7131KaigoServiceNaiyou"."taniSu" as "dbT7131KaigoServiceNaiyou_taniSu"
-<!--         "DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode" as "dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode",
-         "DbT7131KaigoServiceNaiyou"."tanisuSanteiTani" as "dbT7131KaigoServiceNaiyou_tanisuSanteiTani",
-         "DbT7131KaigoServiceNaiyou"."idouJiyuCode" as "dbT7131KaigoServiceNaiyou_idouJiyuCode"-->
+        "DbT7131KaigoServiceNaiyou"."serviceShuruiCode" as "dbT7131KaigoServiceNaiyou_serviceShuruiCode",
+        "DbT7131KaigoServiceNaiyou"."serviceKoumokuCode" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCode",
+        "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" as "dbT7131KaigoServiceNaiyou_teikyoKaishiYM",
+        "DbT7131KaigoServiceNaiyou"."rirekiNo" as "dbT7131KaigoServiceNaiyou_rirekiNo",
+        "DbT7131KaigoServiceNaiyou"."insertDantaiCd" as "dbT7131KaigoServiceNaiyou_insertDantaiCd",
+        "DbT7131KaigoServiceNaiyou"."insertTimestamp" as "dbT7131KaigoServiceNaiyou_insertTimestamp",
+        "DbT7131KaigoServiceNaiyou"."insertReamsLoginId" as "dbT7131KaigoServiceNaiyou_insertReamsLoginId",
+        "DbT7131KaigoServiceNaiyou"."insertContextId" as "dbT7131KaigoServiceNaiyou_insertContextId",
+        "DbT7131KaigoServiceNaiyou"."isDeleted" as "dbT7131KaigoServiceNaiyou_isDeleted",
+        "DbT7131KaigoServiceNaiyou"."updateCount" as "dbT7131KaigoServiceNaiyou_updateCount",
+        "DbT7131KaigoServiceNaiyou"."lastUpdateTimestamp" as "dbT7131KaigoServiceNaiyou_lastUpdateTimestamp",
+        "DbT7131KaigoServiceNaiyou"."lastUpdateReamsLoginId" as "dbT7131KaigoServiceNaiyou_lastUpdateReamsLoginId",
+        "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" as "dbT7131KaigoServiceNaiyou_teikyoShuryoYM",
+        "DbT7131KaigoServiceNaiyou"."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName",
+        "DbT7131KaigoServiceNaiyou"."serviceNameRyaku" as "dbT7131KaigoServiceNaiyou_serviceNameRyaku",
+        "DbT7131KaigoServiceNaiyou"."taniSu" as "dbT7131KaigoServiceNaiyou_taniSu"
+        <!--         "DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode" as "dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode",
+        "DbT7131KaigoServiceNaiyou"."tanisuSanteiTani" as "dbT7131KaigoServiceNaiyou_tanisuSanteiTani",
+        "DbT7131KaigoServiceNaiyou"."idouJiyuCode" as "dbT7131KaigoServiceNaiyou_idouJiyuCode"-->
     </sql>
    
     <!--テーブルDbT7131KaigoServiceNaiyouの項目をDbT7131KaigoServiceNaiyouEntityの項目にマッピングします。-->
@@ -56,9 +47,17 @@
         <result property="serviceName" column="dbT7131KaigoServiceNaiyou_serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceNameRyaku" column="dbT7131KaigoServiceNaiyou_serviceNameRyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="taniSu" column="dbT7131KaigoServiceNaiyou_taniSu" />
-<!--        <result property="tanisuShikibetsuCode" column="dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode" />
+        <!--        <result property="tanisuShikibetsuCode" column="dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode" />
         <result property="tanisuSanteiTani" column="dbT7131KaigoServiceNaiyou_tanisuSanteiTani" />
         <result property="idouJiyuCode" column="dbT7131KaigoServiceNaiyou_idouJiyuCode" />-->
     </resultMap>
-      
+    
+    <select id="getEntity" resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou"
+        WHERE
+        rgdb."DbT7131KaigoServiceNaiyou"."isDeleted" = FALSE
+    </select>
 </mapper>

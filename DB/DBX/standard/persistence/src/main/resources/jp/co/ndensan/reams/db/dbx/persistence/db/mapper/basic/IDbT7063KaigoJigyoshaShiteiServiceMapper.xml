@@ -211,7 +211,7 @@
         <result property="kozaJohoJunkyoKubun" column="dbT7063KaigoJigyoshaShiteiService_kozaJohoJunkyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ginkoCode" column="dbT7063KaigoJigyoshaShiteiService_ginkoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
         <result property="shitenCode" column="dbT7063KaigoJigyoshaShiteiService_shitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
-        <result property="kozaShubetsu" column="dbT7063KaigoJigyoshaShiteiService_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <!--<result property="kozaShubetsu" column="dbT7063KaigoJigyoshaShiteiService_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
         <result property="kozaNo" column="dbT7063KaigoJigyoshaShiteiService_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kozaMeiginin" column="dbT7063KaigoJigyoshaShiteiService_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="kozaMeigininKana" column="dbT7063KaigoJigyoshaShiteiService_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
