@@ -42,7 +42,7 @@
 
     <!--テーブルDbT3005KyotakuKeikakuTodokedeの項目をDbT3005KyotakuKeikakuTodokedeEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3005KyotakuKeikakuTodokedeEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity" autoMapping="true">
-        <!--<id property="hihokenshaNo" column="dbT3005KyotakuKeikakuTodokede_hihokenshaNo" />-->
+        <id property="hihokenshaNo" column="dbT3005KyotakuKeikakuTodokede_hihokenshaNo" />
         <id property="taishoYM" column="dbT3005KyotakuKeikakuTodokede_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3005KyotakuKeikakuTodokede_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3005KyotakuKeikakuTodokede_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

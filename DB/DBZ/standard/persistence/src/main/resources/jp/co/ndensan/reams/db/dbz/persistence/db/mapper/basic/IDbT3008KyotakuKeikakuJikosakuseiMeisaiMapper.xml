@@ -48,13 +48,13 @@
 
     <!--テーブルDbT3008KyotakuKeikakuJikosakuseiMeisaiの項目をDbT3008KyotakuKeikakuJikosakuseiMeisaiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity" autoMapping="true">
-        <!--<id property="hihokenshaNo" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_hihokenshaNo" />-->
+        <id property="hihokenshaNo" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_hihokenshaNo" />
         <id property="taishoYM" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="kyotakuServiceKubun" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="serviceTeikyoJigyoshaNo" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceTeikyoJigyoshaNo" />
-        <!--<id property="serviceShuruiCode" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceShuruiCode" />
-        <id property="serviceKomokuCode" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceKomokuCode" />-->
+        <id property="serviceShuruiCode" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceShuruiCode" />
+        <id property="serviceKomokuCode" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceKomokuCode" />
         <result property="insertDantaiCd" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -70,8 +70,8 @@
         <result property="kubunGendoNaiTaniSu_Nissu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kubunGendoNaiTaniSu_Nissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kubunGendoChokaTaniSu_Nissu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kubunGendoChokaTaniSu_Nissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="taniSuTanka" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_taniSuTanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <!--<result property="kyufuRitsu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kyufuRitsu" />
-        <result property="waribikiGoTekiyoRitsu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_waribikiGoTekiyoRitsu" />-->
+        <result property="kyufuRitsu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kyufuRitsu" />
+        <result property="waribikiGoTekiyoRitsu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_waribikiGoTekiyoRitsu" />
         <result property="waribikiGoTekiyoTaniSu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_waribikiGoTekiyoTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kyufuTaishoNissu" column="dbT3008KyotakuKeikakuJikosakuseiMeisai_kyufuTaishoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>

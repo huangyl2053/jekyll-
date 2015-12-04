@@ -37,12 +37,12 @@
 
     <!--テーブルDbT3009KyotakuKeikakuJikoSakuseiGokeiの項目をDbT3009KyotakuKeikakuJikoSakuseiGokeiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity" autoMapping="true">
-        <!--<id property="hihokenshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_hihokenshaNo" />-->
+        <id property="hihokenshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_hihokenshaNo" />
         <id property="taishoYM" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="kyotakuServiceKubun" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<id property="serviceTeikyoJigyoshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo" />
-        <id property="serviceShuruiCode" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceShuruiCode" />-->
+        <id property="serviceTeikyoJigyoshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo" />
+        <id property="serviceShuruiCode" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceShuruiCode" />
         <result property="insertDantaiCd" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
