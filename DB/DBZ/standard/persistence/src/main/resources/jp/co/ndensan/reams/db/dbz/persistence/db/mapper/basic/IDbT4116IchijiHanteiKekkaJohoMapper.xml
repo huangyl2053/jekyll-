@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4116IchijiHanteiKekkaJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper.allColumns_DbT4116IchijiHanteiKekkaJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper.allColumns_DbT4116IchijiHanteiKekkaJoho" />
      FROM
-         rg."DbT4116IchijiHanteiKekkaJoho"
+         rgdb."DbT4116IchijiHanteiKekkaJoho"
      WHERE
-         rg."DbT4116IchijiHanteiKekkaJoho"."isDeleted" = FALSE
+         rgdb."DbT4116IchijiHanteiKekkaJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4116IchijiHanteiKekkaJoho">
@@ -34,8 +34,8 @@
 
 
     <!--テーブルDbT4116IchijiHanteiKekkaJohoの項目をDbT4116IchijiHanteiKekkaJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4116IchijiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4116IchijiHanteiKekkaJohoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4116IchijiHanteiKekkaJoho_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT4116IchijiHanteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4116IchijiHanteiKekkaJohoEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4116IchijiHanteiKekkaJoho_shinseishoKanriNo" />-->
         <result property="insertDantaiCd" column="dbT4116IchijiHanteiKekkaJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4116IchijiHanteiKekkaJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4116IchijiHanteiKekkaJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -54,7 +54,7 @@
 	SELECT
 	<include refid="allColumns_DbT4116IchijiHanteiKekkaJoho"/>
 	FROM
-	rgba."DbT4116IchijiHanteiKekkaJoho"
+	rgdb."DbT4116IchijiHanteiKekkaJoho"
 	</select>
 
 </mapper>
