@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.servicecode.ServiceCodeModel;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ServiceCodeCommonChildDivHandler {
     
     private final ServiceCodeCommonChildDivDiv div;
+    
+    private static final int INDEX_サービス項目コード = 6;
     
     /**
      * コンストラクタです。
@@ -39,10 +41,9 @@ public class ServiceCodeCommonChildDivHandler {
      */
     public void onLoad() {
         ServiceCodeModel serviceCode = DataPassingConverter.deserialize(div.getServiceCodeModel(), ServiceCodeModel.class);
-        RStringBuilder sb = new RStringBuilder();
-        sb.append(serviceCode.getサービス種類コード());
-        // sb.append(serviceCode.getサービス項目コード());
-        div.getTxtServiceCode().setValue(sb.toRString());
+        div.getTxtServiceCode().setValue(serviceCode.getサービス種類コード());
+        div.getTxtKomokuCode().setValue(serviceCode.getサービス項目コード());
+        div.getTxtKijunYM().setValue(RDate.getNowDate());
     }
     
     /**
@@ -57,7 +58,7 @@ public class ServiceCodeCommonChildDivHandler {
         for (KaigoServiceNaiyou serviceCode : list) {
             dgCodeIchiran_Row row = new dgCodeIchiran_Row();
             RStringBuilder sb = new RStringBuilder();
-            sb.append(サービス種類コード.getColumnValue());
+            sb.append(serviceCode.getサービス種類コード().getColumnValue());
             sb.append(serviceCode.getサービス項目コード());
             row.setTxtServiceCode(sb.toRString());
             row.setTxtServiceName(serviceCode.getサービス名称());
@@ -76,9 +77,8 @@ public class ServiceCodeCommonChildDivHandler {
     public void onClick_btnKakutei() {
         ServiceCodeModel serviceCode = new ServiceCodeModel();
         serviceCode.setサービス種類コード(div.getDgCodeIchiran().getClickedItem().getTxtServiceCode().substring(0, 2));
-        // TODO 董亜彬 QA:47の回答する、2015/11/30まで
-        // serviceCode.setサービス項目コード(serviceShuruiCode.substring(2, 6));
-        serviceCode.setサービス項目コード(new RString("1001"));
+        serviceCode.setサービス項目コード(div.getDgCodeIchiran().getClickedItem().getTxtServiceCode().substring(2,
+                INDEX_サービス項目コード));
         serviceCode.setサービス種類名称(div.getDgCodeIchiran().getClickedItem().getTxtServiceName());
         div.setServiceCodeModel(DataPassingConverter.serialize(serviceCode));
     }

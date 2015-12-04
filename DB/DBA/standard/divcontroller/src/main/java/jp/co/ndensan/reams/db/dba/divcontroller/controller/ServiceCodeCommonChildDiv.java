@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -52,10 +51,8 @@ public class ServiceCodeCommonChildDiv {
         KaigoServiceNaiyouManager service = KaigoServiceNaiyouManager.createInstance();
         FlexibleYearMonth kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
         kijunYmFlex.wareki().fillType(FillType.NONE);
-        // TODO 董亜彬 QA:47の回答する、2015/11/30まで
-        // サービス項目コード:div.getTxtServiceCode().getValue().substring(2, 6);
         SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(サービス種類コード,
-                new RString("1001"), kijunYmFlex);
+                div.getTxtKomokuCode().getValue(), kijunYmFlex);
         List<KaigoServiceNaiyou> list = service.getServiceCodeList(param);
         getHandler(div).initialize(list);
         return ResponseData.of(div).respond();

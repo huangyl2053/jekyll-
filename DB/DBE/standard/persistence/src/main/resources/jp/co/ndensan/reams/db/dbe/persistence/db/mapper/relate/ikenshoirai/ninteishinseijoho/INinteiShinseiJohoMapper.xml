@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 要介護認定申請情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoirai.ninteishinseijoho.INinteiShinseiJohoMapper">
+
+    <select id="select要介護認定申請情報ByKey" resultMap="resultMap_NinteiShinseiJohoEntity" fetchSize="500">
+        <include refid="selectNinteiShinseiJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectNinteiShinseiJohoEntity">
+        SELECT
+        DbT5101NinteiShinseiJoho.*,
+        DbT5301ShujiiIkenshoIraiJoho.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM 
+            rgdb."DbT5101NinteiShinseiJoho"
+        WHERE
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
+        ) AS DbT5101NinteiShinseiJoho
+        LEFT JOIN
+        (
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+        FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            
+        ) AS DbT5301ShujiiIkenshoIraiJoho
+        ON
+        DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo"
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_NinteiShinseiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
+    </resultMap>
+
+</mapper>

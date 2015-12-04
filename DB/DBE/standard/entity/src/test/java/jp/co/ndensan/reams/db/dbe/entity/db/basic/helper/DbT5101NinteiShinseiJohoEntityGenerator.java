@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT5101NinteiShinseiJohoEntityGenerator {
 
-    public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("1");
+    public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("900001");
     public static final Code DEFAULT_厚労省IF識別コード = new Code("09A");
     public static final RString DEFAULT_証記載保険者番号 = new RString("2");
     public static final FlexibleYear DEFAULT_申請年度 = new FlexibleYear("2015");

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ServiceCodeInputCommonChildDivHandler {
     
     private final ServiceCodeInputCommonChildDivDiv div;
-    
+
     /**
      * コンストラクタです。
      *

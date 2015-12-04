@@ -20,7 +20,7 @@ public final class DbT5301ShujiiIkenshoIraiJohoEntityGenerator {
     public static final Code DEFAULT_厚労省IF識別コード = new Code("01");
     public static final RString DEFAULT_主治医医療機関コード = new RString("名称");
     public static final RString DEFAULT_主治医コード = new RString("名称");
-    public static final RString DEFAULT_主治医意見書依頼区分 = new RString("名称");
+    public static final RString DEFAULT_主治医意見書依頼区分 = new RString("2");
     public static final int DEFAULT_主治医意見書作成回数 = 1;
     public static final Code DEFAULT_医師区分コード = new Code("01");
     public static final FlexibleDate DEFAULT_主治医意見書作成依頼年月日 = new FlexibleDate("20141030");
@@ -30,7 +30,7 @@ public final class DbT5301ShujiiIkenshoIraiJohoEntityGenerator {
     public static final FlexibleDate DEFAULT_請求書出力年月日 = new FlexibleDate("20141030");
     public static final Code DEFAULT_作成料請求区分 = new Code("01");
     public static final FlexibleDate DEFAULT_主治医意見書作成督促年月日 = new FlexibleDate("20141030");
-    public static final RString DEFAULT_主治医意見書作成督促方法 = new RString("名称");
+    public static final RString DEFAULT_主治医意見書作成督促方法 = new RString("9");
     public static final int DEFAULT_主治医意見書作成督促回数 = 1;
     public static final RString DEFAULT_主治医意見書作成督促メモ = new RString("名称");
     public static final boolean DEFAULT_認定情報提供希望フラグ = false;

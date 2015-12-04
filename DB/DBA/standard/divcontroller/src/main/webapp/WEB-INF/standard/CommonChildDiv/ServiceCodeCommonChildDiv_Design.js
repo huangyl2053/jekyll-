@@ -4,8 +4,8 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
-            Events.onClickKensaku = function () {
-                return "onClickKensaku";
+            Events.onClick_Kensaku = function () {
+                return "onClick_Kensaku";
             };
 
             Events.onClick_btnYameru = function () {
@@ -43,16 +43,20 @@ var DBA;
                 return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
             };
 
+            Controls.prototype.txtKomokuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKomokuCode"));
+            };
+
             Controls.prototype.txtKijunYM = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
             };
 
-            Controls.prototype.dgCodeIchiran = function () {
-                return new UZA.DataGrid(this.convFiledName("dgCodeIchiran"));
-            };
-
             Controls.prototype.btnServiceCodeKensaku = function () {
                 return new UZA.Button(this.convFiledName("btnServiceCodeKensaku"));
+            };
+
+            Controls.prototype.dgCodeIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgCodeIchiran"));
             };
 
             Controls.prototype.btnYameru = function () {
