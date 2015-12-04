@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEn
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +37,7 @@ public class ShisetsuNyutaishoDacTest {
     private static ShisetsuNyutaishoDac sut;
     private static final DbT1004ShisetsuNyutaishoDac insertor = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
     private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("012345678900001");
-    private static final Decimal rirekiNo = new Decimal(111);
+    private static final int rirekiNo = 111;
 
     @BeforeClass
     public static void setUp() {
@@ -59,12 +58,11 @@ public class ShisetsuNyutaishoDacTest {
             fail();
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の履歴番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut.select介護保険施設入退所ByKey(shikibetsuCode, null);
-            fail();
-        }
-
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の履歴番号にnullが渡されたとき_NullPointerExceptionが発生する() {
+//            sut.select介護保険施設入退所ByKey(shikibetsuCode, null);
+//            fail();
+//        }
         @Test
         public void 引数に指定した識別コードと_同一の値を持つModelが取得できる() {
             Optional<DbT1004ShisetsuNyutaishoEntity> result = sut.select介護保険施設入退所ByKey(shikibetsuCode, rirekiNo);
@@ -149,7 +147,7 @@ public class ShisetsuNyutaishoDacTest {
     private static class TestSupport {
 
         public static void insertDbT1004(ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);
