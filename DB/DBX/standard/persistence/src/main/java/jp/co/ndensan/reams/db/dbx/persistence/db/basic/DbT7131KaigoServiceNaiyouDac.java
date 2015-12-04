@@ -118,5 +118,5 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
                 toList(DbT7131KaigoServiceNaiyouEntity.class);
         
     }
-       
+    
 }

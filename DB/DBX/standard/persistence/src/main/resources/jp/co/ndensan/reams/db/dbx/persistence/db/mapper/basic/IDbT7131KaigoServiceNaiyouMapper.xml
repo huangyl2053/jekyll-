@@ -31,7 +31,7 @@
     <!--テーブルDbT7131KaigoServiceNaiyouの項目をDbT7131KaigoServiceNaiyouEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7131KaigoServiceNaiyouEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity" autoMapping="true">
       
-        <!--<id property="serviceShuruiCode" column="dbT7131KaigoServiceNaiyou_serviceShuruiCode" />-->
+        <id property="serviceShuruiCode" column="dbT7131KaigoServiceNaiyou_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <id property="serviceKoumokuCode" column="dbT7131KaigoServiceNaiyou_serviceKoumokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="teikyoKaishiYM" column="dbT7131KaigoServiceNaiyou_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT7131KaigoServiceNaiyou_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -52,6 +52,31 @@
         <result property="idouJiyuCode" column="dbT7131KaigoServiceNaiyou_idouJiyuCode" />-->
     </resultMap>
     
+    <select id="getKaigoServiceNaiyou"  resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter"
+             fetchSize="500">
+        SELECT
+            DbT7131."serviceShuruiCode" AS "serviceShuruiCode",
+            DbT7131."serviceKoumokuCode" AS "serviceKoumokuCode",
+            DbT7131."serviceName" AS "serviceName"
+        FROM 
+            rgdb."DbT7131KaigoServiceNaiyou" AS DbT7131
+        WHERE
+            1 = 1
+        <if test="isShuruiCodeFlag">
+            AND DbT7131."serviceShuruiCode" = #{serviceShuruiCode}
+        </if>
+        <if test="isKoumokuCodeFlag">
+            AND DbT7131."serviceKoumokuCode" = #{serviceKoumokuCode}
+        </if>
+        <if test="isHaakuKijunYMFlag">
+            AND DbT7131."teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
+            AND #{haakuKijunYM} <![CDATA[<=]]>DbT7131."teikyoShuryoYM"
+        </if>
+        ORDER BY
+            DbT7131."serviceShuruiCode", DbT7131."serviceKoumokuCode"
+    </select>
+      
     <select id="getEntity" resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />

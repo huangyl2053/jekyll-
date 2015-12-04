@@ -53,18 +53,14 @@ public class ServiceCodeCommonChildDivHandler {
      * @param list
      */
     public void initialize(List<KaigoServiceNaiyou> list) {
-        KaigoServiceShuruiCode サービス種類コード = new KaigoServiceShuruiCode(div.getTxtServiceCode().getValue().substring(0, 2));
         List<dgCodeIchiran_Row> dataList = new ArrayList();
         for (KaigoServiceNaiyou serviceCode : list) {
             dgCodeIchiran_Row row = new dgCodeIchiran_Row();
             RStringBuilder sb = new RStringBuilder();
-            sb.append(serviceCode.getサービス種類コード().getColumnValue());
+            sb.append(div.getTxtServiceCode().getValue());
             sb.append(serviceCode.getサービス項目コード());
             row.setTxtServiceCode(sb.toRString());
             row.setTxtServiceName(serviceCode.getサービス名称());
-            if (serviceCode.getサービス種類コード().equals(サービス種類コード)) {
-                row.setSelected(Boolean.TRUE);
-            }
             dataList.add(row);
         }
         div.getDgCodeIchiran().setDataSource(dataList);

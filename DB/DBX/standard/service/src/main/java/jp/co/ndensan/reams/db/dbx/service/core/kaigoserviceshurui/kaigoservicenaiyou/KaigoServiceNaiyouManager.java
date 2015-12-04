@@ -14,11 +14,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.service.core.kaigojigyosha.kaigojigyosha.KaigoJigyoshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -30,13 +27,13 @@ public class KaigoServiceNaiyouManager {
     private final DbT7131KaigoServiceNaiyouDac dac;
     
     private final MapperProvider mapperProvider;
-
+    
     /**
      * コンストラクタです。
      */
     public KaigoServiceNaiyouManager() {
         dac = InstanceProvider.create(DbT7131KaigoServiceNaiyouDac.class);
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -75,13 +72,14 @@ public class KaigoServiceNaiyouManager {
     }
     
     /**
-     * サービス内容情報を取得します。
+     * サービスコードのフォーカスアウトを取得します。
      *
      * @param parameter SabisuKodoParameter
-     * @return List<ServiceCode>
+     * @return List<KaigoServiceNaiyou>
      */
-    public List<KaigoServiceNaiyou> getServiceCodeList(SabisuKodoParameter parameter) {
-        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(parameter.getServiceShuruiCode(),
+    public List<KaigoServiceNaiyou> getFouceServiceCodeList(SabisuKodoParameter parameter) {
+        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new KaigoServiceShuruiCode(parameter.
+                getServiceShuruiCode()),
                 parameter.getServiceKoumokuCode(), 
                 parameter.getHaakuKijunYM());
         List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
@@ -90,4 +88,21 @@ public class KaigoServiceNaiyouManager {
         }
         return サービスコード情報検索リスト;
     }
+    
+    /**
+     * サービスコード取得を取得します。
+     *
+     * @param parameter SabisuKodoParameter
+     * @return List<KaigoServiceNaiyou>
+     */
+    public List<KaigoServiceNaiyou> getServiceCodeList(SabisuKodoParameter parameter) {
+        IDbT7131KaigoServiceNaiyouMapper mapper = mapperProvider.create(IDbT7131KaigoServiceNaiyouMapper.class);
+        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = mapper.getKaigoServiceNaiyou(parameter);
+        List<KaigoServiceNaiyou> サービスコード情報検索リスト = new ArrayList<>();
+        for (DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity : サービスコード情報リスト) {
+            サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
+        }
+        return サービスコード情報検索リスト;
+    }
+    
 }

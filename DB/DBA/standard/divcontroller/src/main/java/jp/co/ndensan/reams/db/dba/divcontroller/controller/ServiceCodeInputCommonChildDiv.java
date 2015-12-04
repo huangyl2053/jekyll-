@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ServiceCod
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -25,6 +24,16 @@ public class ServiceCodeInputCommonChildDiv {
     
     private static final int INDEX_6 = 6;
     
+    private final KaigoServiceNaiyouManager service;
+
+    /**
+     * コンストラクタです。
+     */
+    public ServiceCodeInputCommonChildDiv() {
+        service = KaigoServiceNaiyouManager.createInstance();
+    }
+    
+    
      /**
      * 「サービスコードのフォーカスアウト」ボタンをクリックの設定します。
      *
@@ -36,11 +45,10 @@ public class ServiceCodeInputCommonChildDiv {
                 || div.getTxtServiceCode2().getValue().isEmpty()) {
             return ResponseData.of(div).respond();
         }
-        KaigoServiceNaiyouManager service = KaigoServiceNaiyouManager.createInstance();
-        SabisuKodoParameter param  = SabisuKodoParameter.createSearchParam(new KaigoServiceShuruiCode(
-                div.getTxtServiceCode1().getValue()),
+        SabisuKodoParameter param  = SabisuKodoParameter.createSearchParam(
+                div.getTxtServiceCode1().getValue(),
                 div.getTxtServiceCode2().getValue(), new FlexibleYearMonth(RDate.getNowDate().toString().substring(0, INDEX_6)));
-        List<KaigoServiceNaiyou> focusServiceCodeList = service.getServiceCodeList(param);
+        List<KaigoServiceNaiyou> focusServiceCodeList = service.getFouceServiceCodeList(param);
         getHandler(div).initialize(focusServiceCodeList);
         return ResponseData.of(div).respond();
     }

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicen
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -24,6 +23,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
  * サービスコード検索一覧のコントローラです。
  */
 public class ServiceCodeCommonChildDiv {
+    
+    private final KaigoServiceNaiyouManager service;
+
+    /**
+     * コンストラクタです。
+     */
+    public ServiceCodeCommonChildDiv() {
+        service = KaigoServiceNaiyouManager.createInstance();
+    }
     
     /**
      * サービスコード検索一覧初期化の設定します。
@@ -43,15 +51,9 @@ public class ServiceCodeCommonChildDiv {
      * @return ResponseData<ServiceCodeCommonChildDivDiv>
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_Kensaku(ServiceCodeCommonChildDivDiv div) {
-        if (div.getTxtKijunYM().getValue() == null
-                || div.getTxtServiceCode().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
-        }
-        KaigoServiceShuruiCode サービス種類コード = new KaigoServiceShuruiCode(div.getTxtServiceCode().getValue().substring(0, 2));
-        KaigoServiceNaiyouManager service = KaigoServiceNaiyouManager.createInstance();
         FlexibleYearMonth kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
         kijunYmFlex.wareki().fillType(FillType.NONE);
-        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(サービス種類コード,
+        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam(div.getTxtServiceCode().getValue(),
                 div.getTxtKomokuCode().getValue(), kijunYmFlex);
         List<KaigoServiceNaiyou> list = service.getServiceCodeList(param);
         getHandler(div).initialize(list);
@@ -75,7 +77,7 @@ public class ServiceCodeCommonChildDiv {
      * @return ResponseData<ServiceCodeCommonChildDivDiv>
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_btnKakutei(ServiceCodeCommonChildDivDiv div) {
-        if (div.getDgCodeIchiran().getSelectedItems().size() < 1) {
+        if (div.getDgCodeIchiran().getClickedItem() == null) {
             throw new ApplicationException(UrErrorMessages.対象行を選択.getMessage());
         }
         getHandler(div).onClick_btnKakutei();
