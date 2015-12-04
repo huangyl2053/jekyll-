@@ -4,50 +4,50 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4910NinteichosaItakusakiJoho">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho" />
-     FROM
-         rg."DbT4910NinteichosaItakusakiJoho"
-     WHERE
-         rg."DbT4910NinteichosaItakusakiJoho"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho" />
+        FROM
+        rgdb."DbT4910NinteichosaItakusakiJoho"
+        WHERE
+        rgdb."DbT4910NinteichosaItakusakiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4910NinteichosaItakusakiJoho">
-         "DbT4910NinteichosaItakusakiJoho"."shichosonCode" as "dbT4910NinteichosaItakusakiJoho_shichosonCode",
-         "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" as "dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
-         "DbT4910NinteichosaItakusakiJoho"."insertDantaiCd" as "dbT4910NinteichosaItakusakiJoho_insertDantaiCd",
-         "DbT4910NinteichosaItakusakiJoho"."insertTimestamp" as "dbT4910NinteichosaItakusakiJoho_insertTimestamp",
-         "DbT4910NinteichosaItakusakiJoho"."insertReamsLoginId" as "dbT4910NinteichosaItakusakiJoho_insertReamsLoginId",
-         "DbT4910NinteichosaItakusakiJoho"."insertContextId" as "dbT4910NinteichosaItakusakiJoho_insertContextId",
-         "DbT4910NinteichosaItakusakiJoho"."isDeleted" as "dbT4910NinteichosaItakusakiJoho_isDeleted",
-         "DbT4910NinteichosaItakusakiJoho"."updateCount" as "dbT4910NinteichosaItakusakiJoho_updateCount",
-         "DbT4910NinteichosaItakusakiJoho"."lastUpdateTimestamp" as "dbT4910NinteichosaItakusakiJoho_lastUpdateTimestamp",
-         "DbT4910NinteichosaItakusakiJoho"."lastUpdateReamsLoginId" as "dbT4910NinteichosaItakusakiJoho_lastUpdateReamsLoginId",
-         "DbT4910NinteichosaItakusakiJoho"."jigyoshaNo" as "dbT4910NinteichosaItakusakiJoho_jigyoshaNo",
-         "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeisho" as "dbT4910NinteichosaItakusakiJoho_jigyoshaMeisho",
-         "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeishoKana" as "dbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana",
-         "DbT4910NinteichosaItakusakiJoho"."yubinNo" as "dbT4910NinteichosaItakusakiJoho_yubinNo",
-         "DbT4910NinteichosaItakusakiJoho"."jusho" as "dbT4910NinteichosaItakusakiJoho_jusho",
-         "DbT4910NinteichosaItakusakiJoho"."telNo" as "dbT4910NinteichosaItakusakiJoho_telNo",
-         "DbT4910NinteichosaItakusakiJoho"."faxNo" as "dbT4910NinteichosaItakusakiJoho_faxNo",
-         "DbT4910NinteichosaItakusakiJoho"."daihyoshaName" as "dbT4910NinteichosaItakusakiJoho_daihyoshaName",
-         "DbT4910NinteichosaItakusakiJoho"."chosaItakuKubun" as "dbT4910NinteichosaItakusakiJoho_chosaItakuKubun",
-         "DbT4910NinteichosaItakusakiJoho"."waritsukeTeiin" as "dbT4910NinteichosaItakusakiJoho_waritsukeTeiin",
-         "DbT4910NinteichosaItakusakiJoho"."waritsukeChiku" as "dbT4910NinteichosaItakusakiJoho_waritsukeChiku",
-         "DbT4910NinteichosaItakusakiJoho"."autoWaritsukeFlag" as "dbT4910NinteichosaItakusakiJoho_autoWaritsukeFlag",
-         "DbT4910NinteichosaItakusakiJoho"."kikanKubun" as "dbT4910NinteichosaItakusakiJoho_kikanKubun",
-         "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" as "dbT4910NinteichosaItakusakiJoho_jokyoFlag"
+        "DbT4910NinteichosaItakusakiJoho"."shichosonCode" as "dbT4910NinteichosaItakusakiJoho_shichosonCode",
+        "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" as "dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
+        "DbT4910NinteichosaItakusakiJoho"."insertDantaiCd" as "dbT4910NinteichosaItakusakiJoho_insertDantaiCd",
+        "DbT4910NinteichosaItakusakiJoho"."insertTimestamp" as "dbT4910NinteichosaItakusakiJoho_insertTimestamp",
+        "DbT4910NinteichosaItakusakiJoho"."insertReamsLoginId" as "dbT4910NinteichosaItakusakiJoho_insertReamsLoginId",
+        "DbT4910NinteichosaItakusakiJoho"."insertContextId" as "dbT4910NinteichosaItakusakiJoho_insertContextId",
+        "DbT4910NinteichosaItakusakiJoho"."isDeleted" as "dbT4910NinteichosaItakusakiJoho_isDeleted",
+        "DbT4910NinteichosaItakusakiJoho"."updateCount" as "dbT4910NinteichosaItakusakiJoho_updateCount",
+        "DbT4910NinteichosaItakusakiJoho"."lastUpdateTimestamp" as "dbT4910NinteichosaItakusakiJoho_lastUpdateTimestamp",
+        "DbT4910NinteichosaItakusakiJoho"."lastUpdateReamsLoginId" as "dbT4910NinteichosaItakusakiJoho_lastUpdateReamsLoginId",
+        "DbT4910NinteichosaItakusakiJoho"."jigyoshaNo" as "dbT4910NinteichosaItakusakiJoho_jigyoshaNo",
+        "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeisho" as "dbT4910NinteichosaItakusakiJoho_jigyoshaMeisho",
+        "DbT4910NinteichosaItakusakiJoho"."jigyoshaMeishoKana" as "dbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana",
+        "DbT4910NinteichosaItakusakiJoho"."yubinNo" as "dbT4910NinteichosaItakusakiJoho_yubinNo",
+        "DbT4910NinteichosaItakusakiJoho"."jusho" as "dbT4910NinteichosaItakusakiJoho_jusho",
+        "DbT4910NinteichosaItakusakiJoho"."telNo" as "dbT4910NinteichosaItakusakiJoho_telNo",
+        "DbT4910NinteichosaItakusakiJoho"."faxNo" as "dbT4910NinteichosaItakusakiJoho_faxNo",
+        "DbT4910NinteichosaItakusakiJoho"."daihyoshaName" as "dbT4910NinteichosaItakusakiJoho_daihyoshaName",
+        "DbT4910NinteichosaItakusakiJoho"."chosaItakuKubun" as "dbT4910NinteichosaItakusakiJoho_chosaItakuKubun",
+        "DbT4910NinteichosaItakusakiJoho"."waritsukeTeiin" as "dbT4910NinteichosaItakusakiJoho_waritsukeTeiin",
+        "DbT4910NinteichosaItakusakiJoho"."waritsukeChiku" as "dbT4910NinteichosaItakusakiJoho_waritsukeChiku",
+        "DbT4910NinteichosaItakusakiJoho"."autoWaritsukeFlag" as "dbT4910NinteichosaItakusakiJoho_autoWaritsukeFlag",
+        "DbT4910NinteichosaItakusakiJoho"."kikanKubun" as "dbT4910NinteichosaItakusakiJoho_kikanKubun",
+        "DbT4910NinteichosaItakusakiJoho"."jokyoFlag" as "dbT4910NinteichosaItakusakiJoho_jokyoFlag"
     </sql>
 
 
     <!--テーブルDbT4910NinteichosaItakusakiJohoの項目をDbT4910NinteichosaItakusakiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4910NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT4910NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT4910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="ninteichosaItakusakiCode" column="dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" />
+        <!--<id property="ninteichosaItakusakiCode" column="dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" />-->
         <result property="insertDantaiCd" column="dbT4910NinteichosaItakusakiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4910NinteichosaItakusakiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4910NinteichosaItakusakiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -56,7 +56,7 @@
         <result property="updateCount" column="dbT4910NinteichosaItakusakiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4910NinteichosaItakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4910NinteichosaItakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jigyoshaNo" column="dbT4910NinteichosaItakusakiJoho_jigyoshaNo" />
+        <!--<result property="jigyoshaNo" column="dbT4910NinteichosaItakusakiJoho_jigyoshaNo" />-->
         <result property="jigyoshaMeisho" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeishoKana" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="dbT4910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
@@ -71,11 +71,10 @@
         <result property="kikanKubun" column="dbT4910NinteichosaItakusakiJoho_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT4910NinteichosaItakusakiJoho_jokyoFlag" />
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT4910NinteichosaItakusakiJohoEntity">
-    SELECT
-    <include refid="allColumns_DbT4910NinteichosaItakusakiJoho">
-         FROM
-         rg."DbT4910NinteichosaItakusakiJoho"
-    </include>  
-</sleect>
+    <select id="getEntity" resultMap="ResultMap_DbT4910NinteichosaItakusakiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT4910NinteichosaItakusakiJoho"/>
+        FROM
+        rgdb."DbT4910NinteichosaItakusakiJoho"
+    </select>
 </mapper>

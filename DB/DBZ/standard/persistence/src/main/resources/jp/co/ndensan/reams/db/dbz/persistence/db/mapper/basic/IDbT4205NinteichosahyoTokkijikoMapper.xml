@@ -4,41 +4,41 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4205NinteichosahyoTokkijiko">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoMapper.allColumns_DbT4205NinteichosahyoTokkijiko" />
-     FROM
-         rg."DbT4205NinteichosahyoTokkijiko"
-     WHERE
-         rg."DbT4205NinteichosahyoTokkijiko"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4205NinteichosahyoTokkijikoMapper.allColumns_DbT4205NinteichosahyoTokkijiko" />
+        FROM
+        rgdb."DbT4205NinteichosahyoTokkijiko"
+        WHERE
+        rgdb."DbT4205NinteichosahyoTokkijiko"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4205NinteichosahyoTokkijiko">
-         "DbT4205NinteichosahyoTokkijiko"."shinseishoKanriNo" as "dbT4205NinteichosahyoTokkijiko_shinseishoKanriNo",
-         "DbT4205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" as "dbT4205NinteichosahyoTokkijiko_ninteichosaRirekiNo",
-         "DbT4205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" as "dbT4205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo",
-         "DbT4205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRenban" as "dbT4205NinteichosahyoTokkijiko_ninteichosaTokkijikoRenban",
-         "DbT4205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" as "dbT4205NinteichosahyoTokkijiko_tokkijikoTextImageKubun",
-         "DbT4205NinteichosahyoTokkijiko"."genponMaskKubun" as "dbT4205NinteichosahyoTokkijiko_genponMaskKubun",
-         "DbT4205NinteichosahyoTokkijiko"."insertDantaiCd" as "dbT4205NinteichosahyoTokkijiko_insertDantaiCd",
-         "DbT4205NinteichosahyoTokkijiko"."insertTimestamp" as "dbT4205NinteichosahyoTokkijiko_insertTimestamp",
-         "DbT4205NinteichosahyoTokkijiko"."insertReamsLoginId" as "dbT4205NinteichosahyoTokkijiko_insertReamsLoginId",
-         "DbT4205NinteichosahyoTokkijiko"."insertContextId" as "dbT4205NinteichosahyoTokkijiko_insertContextId",
-         "DbT4205NinteichosahyoTokkijiko"."isDeleted" as "dbT4205NinteichosahyoTokkijiko_isDeleted",
-         "DbT4205NinteichosahyoTokkijiko"."updateCount" as "dbT4205NinteichosahyoTokkijiko_updateCount",
-         "DbT4205NinteichosahyoTokkijiko"."lastUpdateTimestamp" as "dbT4205NinteichosahyoTokkijiko_lastUpdateTimestamp",
-         "DbT4205NinteichosahyoTokkijiko"."lastUpdateReamsLoginId" as "dbT4205NinteichosahyoTokkijiko_lastUpdateReamsLoginId",
-         "DbT4205NinteichosahyoTokkijiko"."tokkiJiko" as "dbT4205NinteichosahyoTokkijiko_tokkiJiko",
-         "DbT4205NinteichosahyoTokkijiko"."tokkiJikoImageSharedFileId" as "dbT4205NinteichosahyoTokkijiko_tokkiJikoImageSharedFileId",
-         "DbT4205NinteichosahyoTokkijiko"."tokkiJikoMaskingImageSharedFileId" as "dbT4205NinteichosahyoTokkijiko_tokkiJikoMaskingImageSharedFileId"
+        "DbT4205NinteichosahyoTokkijiko"."shinseishoKanriNo" as "dbT4205NinteichosahyoTokkijiko_shinseishoKanriNo",
+        "DbT4205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" as "dbT4205NinteichosahyoTokkijiko_ninteichosaRirekiNo",
+        "DbT4205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" as "dbT4205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo",
+        "DbT4205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRenban" as "dbT4205NinteichosahyoTokkijiko_ninteichosaTokkijikoRenban",
+        "DbT4205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" as "dbT4205NinteichosahyoTokkijiko_tokkijikoTextImageKubun",
+        "DbT4205NinteichosahyoTokkijiko"."genponMaskKubun" as "dbT4205NinteichosahyoTokkijiko_genponMaskKubun",
+        "DbT4205NinteichosahyoTokkijiko"."insertDantaiCd" as "dbT4205NinteichosahyoTokkijiko_insertDantaiCd",
+        "DbT4205NinteichosahyoTokkijiko"."insertTimestamp" as "dbT4205NinteichosahyoTokkijiko_insertTimestamp",
+        "DbT4205NinteichosahyoTokkijiko"."insertReamsLoginId" as "dbT4205NinteichosahyoTokkijiko_insertReamsLoginId",
+        "DbT4205NinteichosahyoTokkijiko"."insertContextId" as "dbT4205NinteichosahyoTokkijiko_insertContextId",
+        "DbT4205NinteichosahyoTokkijiko"."isDeleted" as "dbT4205NinteichosahyoTokkijiko_isDeleted",
+        "DbT4205NinteichosahyoTokkijiko"."updateCount" as "dbT4205NinteichosahyoTokkijiko_updateCount",
+        "DbT4205NinteichosahyoTokkijiko"."lastUpdateTimestamp" as "dbT4205NinteichosahyoTokkijiko_lastUpdateTimestamp",
+        "DbT4205NinteichosahyoTokkijiko"."lastUpdateReamsLoginId" as "dbT4205NinteichosahyoTokkijiko_lastUpdateReamsLoginId",
+        "DbT4205NinteichosahyoTokkijiko"."tokkiJiko" as "dbT4205NinteichosahyoTokkijiko_tokkiJiko",
+        "DbT4205NinteichosahyoTokkijiko"."tokkiJikoImageSharedFileId" as "dbT4205NinteichosahyoTokkijiko_tokkiJikoImageSharedFileId",
+        "DbT4205NinteichosahyoTokkijiko"."tokkiJikoMaskingImageSharedFileId" as "dbT4205NinteichosahyoTokkijiko_tokkiJikoMaskingImageSharedFileId"
     </sql>
 
 
     <!--テーブルDbT4205NinteichosahyoTokkijikoの項目をDbT4205NinteichosahyoTokkijikoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4205NinteichosahyoTokkijikoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4205NinteichosahyoTokkijikoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT4205NinteichosahyoTokkijikoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4205NinteichosahyoTokkijikoEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT4205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT4205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
         <id property="ninteichosaTokkijikoNo" column="dbT4205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -58,11 +58,11 @@
         <result property="tokkiJikoMaskingImageSharedFileId" column="dbT4205NinteichosahyoTokkijiko_tokkiJikoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
 
-        <select id="getEntity" resultMap="ResultMap_DbT4205NinteichosahyoTokkijikoEntity">
-	SELECT
-	<include refid="allColumns_DbT4205NinteichosahyoTokkijiko"/>
-	FROM
-	rgba."DbT4205NinteichosahyoTokkijiko"
-	</select>
+    <select id="getEntity" resultMap="ResultMap_DbT4205NinteichosahyoTokkijikoEntity">
+        SELECT
+        <include refid="allColumns_DbT4205NinteichosahyoTokkijiko"/>
+        FROM
+        rgdb."DbT4205NinteichosahyoTokkijiko"
+    </select>
         
 </mapper>

@@ -4,38 +4,38 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4304ShujiiIkenshoIkenItemMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4304ShujiiIkenshoIkenItemMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4304ShujiiIkenshoIkenItem">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT4304ShujiiIkenshoIkenItemMapper.allColumns_DbT4304ShujiiIkenshoIkenItem" />
-     FROM
-         rg."DbT4304ShujiiIkenshoIkenItem"
-     WHERE
-         rg."DbT4304ShujiiIkenshoIkenItem"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4304ShujiiIkenshoIkenItemMapper.allColumns_DbT4304ShujiiIkenshoIkenItem" />
+        FROM
+        rgdb."DbT4304ShujiiIkenshoIkenItem"
+        WHERE
+        rgdb."DbT4304ShujiiIkenshoIkenItem"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT4304ShujiiIkenshoIkenItem">
-         "DbT4304ShujiiIkenshoIkenItem"."shinseishoKanriNo" as "dbT4304ShujiiIkenshoIkenItem_shinseishoKanriNo",
-         "DbT4304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" as "dbT4304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo",
-         "DbT4304ShujiiIkenshoIkenItem"."remban" as "dbT4304ShujiiIkenshoIkenItem_remban",
-         "DbT4304ShujiiIkenshoIkenItem"."insertDantaiCd" as "dbT4304ShujiiIkenshoIkenItem_insertDantaiCd",
-         "DbT4304ShujiiIkenshoIkenItem"."insertTimestamp" as "dbT4304ShujiiIkenshoIkenItem_insertTimestamp",
-         "DbT4304ShujiiIkenshoIkenItem"."insertReamsLoginId" as "dbT4304ShujiiIkenshoIkenItem_insertReamsLoginId",
-         "DbT4304ShujiiIkenshoIkenItem"."insertContextId" as "dbT4304ShujiiIkenshoIkenItem_insertContextId",
-         "DbT4304ShujiiIkenshoIkenItem"."isDeleted" as "dbT4304ShujiiIkenshoIkenItem_isDeleted",
-         "DbT4304ShujiiIkenshoIkenItem"."updateCount" as "dbT4304ShujiiIkenshoIkenItem_updateCount",
-         "DbT4304ShujiiIkenshoIkenItem"."lastUpdateTimestamp" as "dbT4304ShujiiIkenshoIkenItem_lastUpdateTimestamp",
-         "DbT4304ShujiiIkenshoIkenItem"."lastUpdateReamsLoginId" as "dbT4304ShujiiIkenshoIkenItem_lastUpdateReamsLoginId",
-         "DbT4304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" as "dbT4304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode",
-         "DbT4304ShujiiIkenshoIkenItem"."ikenItem" as "dbT4304ShujiiIkenshoIkenItem_ikenItem"
+        "DbT4304ShujiiIkenshoIkenItem"."shinseishoKanriNo" as "dbT4304ShujiiIkenshoIkenItem_shinseishoKanriNo",
+        "DbT4304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" as "dbT4304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo",
+        "DbT4304ShujiiIkenshoIkenItem"."remban" as "dbT4304ShujiiIkenshoIkenItem_remban",
+        "DbT4304ShujiiIkenshoIkenItem"."insertDantaiCd" as "dbT4304ShujiiIkenshoIkenItem_insertDantaiCd",
+        "DbT4304ShujiiIkenshoIkenItem"."insertTimestamp" as "dbT4304ShujiiIkenshoIkenItem_insertTimestamp",
+        "DbT4304ShujiiIkenshoIkenItem"."insertReamsLoginId" as "dbT4304ShujiiIkenshoIkenItem_insertReamsLoginId",
+        "DbT4304ShujiiIkenshoIkenItem"."insertContextId" as "dbT4304ShujiiIkenshoIkenItem_insertContextId",
+        "DbT4304ShujiiIkenshoIkenItem"."isDeleted" as "dbT4304ShujiiIkenshoIkenItem_isDeleted",
+        "DbT4304ShujiiIkenshoIkenItem"."updateCount" as "dbT4304ShujiiIkenshoIkenItem_updateCount",
+        "DbT4304ShujiiIkenshoIkenItem"."lastUpdateTimestamp" as "dbT4304ShujiiIkenshoIkenItem_lastUpdateTimestamp",
+        "DbT4304ShujiiIkenshoIkenItem"."lastUpdateReamsLoginId" as "dbT4304ShujiiIkenshoIkenItem_lastUpdateReamsLoginId",
+        "DbT4304ShujiiIkenshoIkenItem"."koroshoIfShikibetsuCode" as "dbT4304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode",
+        "DbT4304ShujiiIkenshoIkenItem"."ikenItem" as "dbT4304ShujiiIkenshoIkenItem_ikenItem"
     </sql>
 
 
     <!--テーブルDbT4304ShujiiIkenshoIkenItemの項目をDbT4304ShujiiIkenshoIkenItemEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT4304ShujiiIkenshoIkenItem_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT4304ShujiiIkenshoIkenItem_shinseishoKanriNo" />-->
         <id property="ikenshoIraiRirekiNo" column="dbT4304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo" />
         <id property="remban" column="dbT4304ShujiiIkenshoIkenItem_remban" />
         <result property="insertDantaiCd" column="dbT4304ShujiiIkenshoIkenItem_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="koroshoIfShikibetsuCode" column="dbT4304ShujiiIkenshoIkenItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ikenItem" column="dbT4304ShujiiIkenshoIkenItem_ikenItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity">
-    SELECT
-    <include refid="allColumns_DbT4304ShujiiIkenshoIkenItem">
-         FROM
-         rg."DbT4304ShujiiIkenshoIkenItem"
-    </include>  
-</sleect>
+    <select id="getEntity" resultMap="ResultMap_DbT4304ShujiiIkenshoIkenItemEntity">
+        SELECT
+        <include refid="allColumns_DbT4304ShujiiIkenshoIkenItem"/>
+        FROM
+        rgdb."DbT4304ShujiiIkenshoIkenItem"
+    </select>
 </mapper>
