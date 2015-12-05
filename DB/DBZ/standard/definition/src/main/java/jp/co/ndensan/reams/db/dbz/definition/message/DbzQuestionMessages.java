@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.message;
 
+import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
 
 /**
  * DBZの質問メッセージ定義列挙型です。
