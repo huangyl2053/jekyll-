@@ -56,9 +56,9 @@
         <result property="bemmeishoSakuseiTeishutsuYMD" column="dbT7002BemmeiNaiyo_bemmeishoSakuseiTeishutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT7002BemmeiNaiyoEntity">
-    SELECT
+<!--    SELECT
     <include refid="allColumns_DbT7002BemmeiNaiyo" />
     FROM
-    rgdb."DbT7002BemmeiNaiyo"
+    rgdb."DbT7002BemmeiNaiyo"-->
 </select>
 </mapper>

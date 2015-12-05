@@ -60,9 +60,9 @@
         <result property="bemmeishaShimei" column="dbT7003BemmeishaJoho_bemmeishaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT7003BemmeishaJohoEntity">
-    SELECT
+<!--    SELECT
     <include refid="allColumns_DbT7003BemmeishaJoho" />
     FROM
-    rgdb."DbT7003BemmeishaJoho"
+    rgdb."DbT7003BemmeishaJoho"-->
 </select>
 </mapper>

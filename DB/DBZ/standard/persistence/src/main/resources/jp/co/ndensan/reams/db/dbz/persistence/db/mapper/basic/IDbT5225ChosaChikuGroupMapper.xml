@@ -50,9 +50,9 @@
         <result property="yusenNo" column="dbT5225ChosaChikuGroup_yusenNo" />
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
-    SELECT
+<!--    SELECT
     <include refid="allColumns_DbT5225ChosaChikuGroup" />
     FROM
-    rgdb."DbT5225ChosaChikuGroup"
+    rgdb."DbT5225ChosaChikuGroup"-->
 </select>
 </mapper>

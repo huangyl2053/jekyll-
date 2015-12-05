@@ -78,9 +78,9 @@
         <result property="taishoshaMemo" column="dbT5221NinteichosaSchedule_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="getEntity" resultMap="ResultMap_DbT5221NinteichosaScheduleEntity">
-        SELECT
+<!--        SELECT
         <include refid="allColumns_DbT5221NinteichosaSchedule" />
         FROM
-        rgdb."DbT5221NinteichosaSchedule"
+        rgdb."DbT5221NinteichosaSchedule"-->
     </select>
 </mapper>

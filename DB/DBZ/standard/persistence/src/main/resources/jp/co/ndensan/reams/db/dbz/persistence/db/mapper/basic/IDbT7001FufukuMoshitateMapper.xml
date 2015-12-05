@@ -102,9 +102,9 @@
         <result property="saiketsuRiyu" column="dbT7001FufukuMoshitate_saiketsuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT7001FufukuMoshitateEntity">
-    SELECT
+<!--    SELECT
     <include refid="allColumns_DbT7001FufukuMoshitate" />
     FROM
-    rgdb."DbT7001FufukuMoshitate"
+    rgdb."DbT7001FufukuMoshitate"-->
 </select>
 </mapper>

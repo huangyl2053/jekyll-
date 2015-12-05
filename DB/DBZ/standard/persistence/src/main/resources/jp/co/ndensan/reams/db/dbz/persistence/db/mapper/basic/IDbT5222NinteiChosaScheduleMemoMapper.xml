@@ -56,9 +56,9 @@
         <result property="memoNaiyo" column="dbT5222NinteiChosaScheduleMemo_memoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5222NinteiChosaScheduleMemoEntity">
-    SELECT
+<!--    SELECT
     <include refid="allColumns_DbT5222NinteiChosaScheduleMemo" />
     FROM
-    rgdb."DbT5222NinteiChosaScheduleMemo"
+    rgdb."DbT5222NinteiChosaScheduleMemo"-->
 </select>
 </mapper>
