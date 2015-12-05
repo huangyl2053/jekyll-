@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Value
 public class KaigoServiceNaiyouIdentifier implements Serializable {
+
     private static final long serialVersionUID = -7180918752677742109L;
 
     private final KaigoServiceShuruiCode サービス種類コード;

@@ -61,7 +61,6 @@ FlexibleYearMonth 提供開始年月) {
      *
      * @param entity DBより取得した{@link DbT7130KaigoServiceShuruiEntity}
      */
-
     public KaigoServiceShurui(KaigoServiceShuruiEntity entity) {
         this.entity = requireNonNull(entity.get介護サービス種類Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類"));
         this.id = new KaigoServiceShuruiIdentifier(
@@ -73,7 +72,6 @@ FlexibleYearMonth 提供開始年月) {
         }
         this.kaigoServiceNaiyou = Models.create(kaigoServiceNaiyouList);
     }
-
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
@@ -274,7 +272,6 @@ FlexibleYearMonth 提供開始年月) {
     public KaigoServiceShuruiBuilder createBuilderForEdit() {
         return new KaigoServiceShuruiBuilder(entity, id, kaigoServiceNaiyou);
     }
-    // </editor-fold>
 
     @Override
     public int hashCode() {

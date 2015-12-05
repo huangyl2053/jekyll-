@@ -113,8 +113,9 @@ public class KaigoServiceShuruiBuilder {
     }
 
     private boolean hasSameIdentifier(KaigoServiceNaiyouIdentifier 介護サービス内容の識別子) {
-        return (id.getサービス種類コード().equals(介護サービス内容の識別子.getサービス種類コード())
-                && id.get提供開始年月() == 介護サービス内容の識別子.get提供開始年月());
+//        return (id.getサービス種類コード().equals(介護サービス内容の識別子.getサービス種類コード())
+//                && id.get提供開始年月().equals(介護サービス内容の識別子.get提供開始年月()));
+        return id.get提供開始年月().equals(介護サービス内容の識別子.get提供開始年月());
     }
 
     /**

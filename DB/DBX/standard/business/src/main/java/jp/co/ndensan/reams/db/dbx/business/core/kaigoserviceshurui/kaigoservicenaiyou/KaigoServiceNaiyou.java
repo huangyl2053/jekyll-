@@ -85,7 +85,6 @@ Decimal 履歴番号) {
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * サービス種類コードを返します。
      *
@@ -319,7 +318,6 @@ Decimal 履歴番号) {
 //    public RString get総合事業サービス区分() {
 //        return entity.getSogoJigyoServiceKubun();
 //    }
-
     /**
      * {@link DbT7131KaigoServiceNaiyouEntity}のクローンを返します。
      *
@@ -372,6 +370,7 @@ Decimal 履歴番号) {
         }
         return new KaigoServiceNaiyou(deletedEntity, id);
     }
+
     /**
      * {@link KaigoServiceNaiyou}のシリアライズ形式を提供します。
      *
@@ -388,6 +387,7 @@ Decimal 履歴番号) {
     }
 
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 2702026391207130486L;
 
         private final DbT7131KaigoServiceNaiyouEntity entity;
