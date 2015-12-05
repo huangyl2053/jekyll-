@@ -7,7 +7,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteiChosaIkkatsu.INinteiChosaIkkatsuInputMapper">
 
     <!--認定調査スケジュール情報取得する-->
-    <select id="getCount" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" resultType="int">
+    <select id="getCount" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" resultType="int">
         SELECT
         count(0)
         FROM
@@ -21,7 +21,7 @@
     </select>
 
     <!--認定調査予定情報削除する-->
-    <delete id="getDelete" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" >
+    <delete id="getDelete" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" >
         DELETE
         FROM
         rgdb."DbT5221NinteichosaSchedule" AS DbT5221
@@ -34,7 +34,7 @@
     </delete>
 
     <!--認定調査スケジュール情報インサート処理-->
-    <insert id="getInsert" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.DbT5221.DbT5221NinteichosaScheduleEntity" >
+    <insert id="getInsert" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" >
         INSERT INTO
         rgdb."DbT5221NinteichosaSchedule" AS DbT5221(
         DbT5221."ninteiChosaYoteiYMD",
