@@ -52,7 +52,7 @@ public class ServiceCodeCommonChildDiv {
      */
     public ResponseData<ServiceCodeCommonChildDivDiv> onClick_Kensaku(ServiceCodeCommonChildDivDiv div) {
         FlexibleYearMonth kijunYmFlex = FlexibleYearMonth.EMPTY;
-        if (div.getTxtKijunYM().getValue() != null ) {
+        if (div.getTxtKijunYM().getValue() != null) {
             kijunYmFlex = new FlexibleYearMonth(div.getTxtKijunYM().getValue().getYearMonth().toDateString());
             kijunYmFlex.wareki().fillType(FillType.NONE);
         }
