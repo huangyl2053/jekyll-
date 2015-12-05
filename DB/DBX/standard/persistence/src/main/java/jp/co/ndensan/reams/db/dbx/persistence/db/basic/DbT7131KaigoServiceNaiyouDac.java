@@ -98,7 +98,7 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
     }
     
     /**
-     * 
+     * サービスコードのフォーカスアウトです。
      * @param サービス種類コード
      * @param サービス項目コード
      * @param 提供開始年月
