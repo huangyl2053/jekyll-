@@ -2,8 +2,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichoson
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku.ShichosonSelectorModel;
-import jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku.ShichosonSelectorResult;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;

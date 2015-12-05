@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku;
+package jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 public class ShichosonSelectorResult implements Serializable {
+
+    private static final long serialVersionUID = 7445846244900566327L;
 
     private LasdecCode 市町村コード;
     private RString 市町村名;

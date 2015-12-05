@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.business.core.shichosonSentaku;
+package jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 public class ShichosonSelectorModel implements Serializable {
+
+    private static final long serialVersionUID = 2676957532196535475L;
 
     private RString shichosonCode;
     private RString shichosonName;

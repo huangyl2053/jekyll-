@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.persistence.mapper.basic;
+package jp.co.ndensan.reams.db.dba.persistence.mapper.basic.shichosonsentaku;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
