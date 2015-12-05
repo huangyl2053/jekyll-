@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4120ShinseitodokedeJoho
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -109,13 +107,13 @@ public class HokenshaShinseitodokedeJohoTest extends DbdTestBase {
 
         @Test
         public void setShinseiTodokedeshaShimeiで設定した値を_生成されたHokenshaShinseitodokedeJohoも保持する() {
-            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaShimei(new AtenaMeisho("申請届出者氏名")).build();
+            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaShimei(new RString("申請届出者氏名")).build();
             assertThat(result.get申請届出者氏名(), is(DbT4120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請届出者氏名));
         }
 
         @Test
         public void setShinseiTodokedeshaKanaShimeiで設定した値を_生成されたHokenshaShinseitodokedeJohoも保持する() {
-            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaKanaShimei(new AtenaKanaMeisho("申請届出者カナ")).build();
+            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaKanaShimei(new RString("申請届出者カナ")).build();
             assertThat(result.get申請届出者氏名カナ(), is(DbT4120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請届出者氏名カナ));
         }
 
@@ -145,7 +143,7 @@ public class HokenshaShinseitodokedeJohoTest extends DbdTestBase {
 
         @Test
         public void setShinseiTodokedeshaJushoで設定した値を_生成されたHokenshaShinseitodokedeJohoも保持する() {
-            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaJusho(new AtenaJusho("申請届出者住所")).build();
+            HokenshaShinseitodokedeJoho result = HokenshaShinseitodokedeJoho.newBuilder().setShinseiTodokedeshaJusho(new RString("申請届出者住所")).build();
             assertThat(result.get申請届出者住所(), is(DbT4120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請届出者住所));
         }
 
