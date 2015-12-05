@@ -174,8 +174,8 @@ public class NinteiShinseiTodokedeshaHandler {
     }
 
     private void setZenkaiJoho(Optional<IShinseitodokedeJoho> shinseitodokedeJoho) {
-        div.getTxtShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名().value());
-        div.getTxtKanaShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名カナ().value());
+        div.getTxtShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名());
+        div.getTxtKanaShimei().setValue(shinseitodokedeJoho.get().get申請届出者氏名カナ());
         //本人と関係性
         div.getTxtHonninKankeisei().setValue(shinseitodokedeJoho.get().get申請届出者続柄コード());
         div.getLblHonninKankeiseiMei().setText(new RString(ShinseiTodokedeshaTsuzukigaraCode.toValue(shinseitodokedeJoho.get().get申請届出者続柄コード()).name()));
