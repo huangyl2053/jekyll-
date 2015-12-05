@@ -4,60 +4,60 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5202NinteichosahyoGaikyoChosa">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa" />
-     FROM
-         rg."DbT5202NinteichosahyoGaikyoChosa"
-     WHERE
-         rg."DbT5202NinteichosahyoGaikyoChosa"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa" />
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"
+        WHERE
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5202NinteichosahyoGaikyoChosa">
-         "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" as "dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo",
-         "DbT5202NinteichosahyoGaikyoChosa"."insertDantaiCd" as "dbT5202NinteichosahyoGaikyoChosa_insertDantaiCd",
-         "DbT5202NinteichosahyoGaikyoChosa"."insertTimestamp" as "dbT5202NinteichosahyoGaikyoChosa_insertTimestamp",
-         "DbT5202NinteichosahyoGaikyoChosa"."insertReamsLoginId" as "dbT5202NinteichosahyoGaikyoChosa_insertReamsLoginId",
-         "DbT5202NinteichosahyoGaikyoChosa"."insertContextId" as "dbT5202NinteichosahyoGaikyoChosa_insertContextId",
-         "DbT5202NinteichosahyoGaikyoChosa"."isDeleted" as "dbT5202NinteichosahyoGaikyoChosa_isDeleted",
-         "DbT5202NinteichosahyoGaikyoChosa"."updateCount" as "dbT5202NinteichosahyoGaikyoChosa_updateCount",
-         "DbT5202NinteichosahyoGaikyoChosa"."lastUpdateTimestamp" as "dbT5202NinteichosahyoGaikyoChosa_lastUpdateTimestamp",
-         "DbT5202NinteichosahyoGaikyoChosa"."lastUpdateReamsLoginId" as "dbT5202NinteichosahyoGaikyoChosa_lastUpdateReamsLoginId",
-         "DbT5202NinteichosahyoGaikyoChosa"."koroshoIfShikibetsuCode" as "dbT5202NinteichosahyoGaikyoChosa_koroshoIfShikibetsuCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteichousaIraiKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_ninteichousaIraiKubunCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaIraiKaisu" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaIraiKaisu",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJisshiYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJisshiYMD",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJuryoYMD",
-         "DbT5202NinteichosahyoGaikyoChosa"."chosaItakuKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakuKubunCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."ninteiChosaKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_ninteiChosaKubunCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."chosaItakusakiCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."chosainCode" as "dbT5202NinteichosahyoGaikyoChosa_chosainCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoMeisho" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho",
-         "DbT5202NinteichosahyoGaikyoChosa"."jisshiBashoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId",
-         "DbT5202NinteichosahyoGaikyoChosa"."genzainoJokyoCode" as "dbT5202NinteichosahyoGaikyoChosa_genzainoJokyoCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."serviceKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuShimei" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJusho" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNo",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuYubinNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuYubinNo",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuNameImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuNameImageSharedFileId",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJushoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJushoImageSharedFileId",
-         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNoImageSharedFileId",
-         "DbT5202NinteichosahyoGaikyoChosa"."tokki" as "dbT5202NinteichosahyoGaikyoChosa_tokki",
-         "DbT5202NinteichosahyoGaikyoChosa"."tokkiImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_tokkiImageSharedFileId",
-         "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoUketsukeYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoUketsukeYMD",
-         "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD"
+        "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" as "dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo",
+        "DbT5202NinteichosahyoGaikyoChosa"."insertDantaiCd" as "dbT5202NinteichosahyoGaikyoChosa_insertDantaiCd",
+        "DbT5202NinteichosahyoGaikyoChosa"."insertTimestamp" as "dbT5202NinteichosahyoGaikyoChosa_insertTimestamp",
+        "DbT5202NinteichosahyoGaikyoChosa"."insertReamsLoginId" as "dbT5202NinteichosahyoGaikyoChosa_insertReamsLoginId",
+        "DbT5202NinteichosahyoGaikyoChosa"."insertContextId" as "dbT5202NinteichosahyoGaikyoChosa_insertContextId",
+        "DbT5202NinteichosahyoGaikyoChosa"."isDeleted" as "dbT5202NinteichosahyoGaikyoChosa_isDeleted",
+        "DbT5202NinteichosahyoGaikyoChosa"."updateCount" as "dbT5202NinteichosahyoGaikyoChosa_updateCount",
+        "DbT5202NinteichosahyoGaikyoChosa"."lastUpdateTimestamp" as "dbT5202NinteichosahyoGaikyoChosa_lastUpdateTimestamp",
+        "DbT5202NinteichosahyoGaikyoChosa"."lastUpdateReamsLoginId" as "dbT5202NinteichosahyoGaikyoChosa_lastUpdateReamsLoginId",
+        "DbT5202NinteichosahyoGaikyoChosa"."koroshoIfShikibetsuCode" as "dbT5202NinteichosahyoGaikyoChosa_koroshoIfShikibetsuCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichousaIraiKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_ninteichousaIraiKubunCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaIraiKaisu" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaIraiKaisu",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJisshiYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJisshiYMD",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_ninteichosaJuryoYMD",
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaItakuKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakuKubunCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."ninteiChosaKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_ninteiChosaKubunCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaItakusakiCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."chosainCode" as "dbT5202NinteichosahyoGaikyoChosa_chosainCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoMeisho" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho",
+        "DbT5202NinteichosahyoGaikyoChosa"."jisshiBashoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId",
+        "DbT5202NinteichosahyoGaikyoChosa"."genzainoJokyoCode" as "dbT5202NinteichosahyoGaikyoChosa_genzainoJokyoCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."serviceKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuShimei" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJusho" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNo",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuYubinNo" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuYubinNo",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuNameImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuNameImageSharedFileId",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJushoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJushoImageSharedFileId",
+        "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuTelNoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuTelNoImageSharedFileId",
+        "DbT5202NinteichosahyoGaikyoChosa"."tokki" as "dbT5202NinteichosahyoGaikyoChosa_tokki",
+        "DbT5202NinteichosahyoGaikyoChosa"."tokkiImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_tokkiImageSharedFileId",
+        "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoUketsukeYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoUketsukeYMD",
+        "DbT5202NinteichosahyoGaikyoChosa"."tokkijikoJuryoYMD" as "dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD"
     </sql>
 
 
     <!--テーブルDbT5202NinteichosahyoGaikyoChosaの項目をDbT5202NinteichosahyoGaikyoChosaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" />-->
         <id property="ninteichosaRirekiNo" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" />
         <result property="insertDantaiCd" column="dbT5202NinteichosahyoGaikyoChosa_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5202NinteichosahyoGaikyoChosa_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -74,7 +74,7 @@
         <result property="ninteichosaJuryoYMD" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="chosaItakuKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaItakuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteiChosaKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_ninteiChosaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="chosaItakusakiCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode" />
+        <!-- <result property="chosaItakusakiCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaItakusakiCode" />-->
         <result property="chosainCode" column="dbT5202NinteichosahyoGaikyoChosa_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosaJisshiBashoCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chosaJisshiBashoMeisho" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -93,11 +93,10 @@
         <result property="tokkijikoUketsukeYMD" column="dbT5202NinteichosahyoGaikyoChosa_tokkijikoUketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tokkijikoJuryoYMD" column="dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity">
-    SELECT
-    <include refid="allColumns_DbT5202NinteichosahyoGaikyoChosa">
-         FROM
-         rg."DbT5202NinteichosahyoGaikyoChosa"
-    </include>  
-</sleect>
+    <select id="getEntity" resultMap="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity">
+        <!--SELECT
+        <include refid="allColumns_DbT5202NinteichosahyoGaikyoChosa"/>
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"-->
+    </select>
 </mapper>

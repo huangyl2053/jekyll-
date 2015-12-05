@@ -4,38 +4,38 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5203NinteichosahyoKihonChosa">
-     SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.allColumns_DbT5203NinteichosahyoKihonChosa" />
-     FROM
-         rg."DbT5203NinteichosahyoKihonChosa"
-     WHERE
-         rg."DbT5203NinteichosahyoKihonChosa"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.allColumns_DbT5203NinteichosahyoKihonChosa" />
+        FROM
+        rgdb."DbT5203NinteichosahyoKihonChosa"
+        WHERE
+        rgdb."DbT5203NinteichosahyoKihonChosa"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5203NinteichosahyoKihonChosa">
-         "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo" as "dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo",
-         "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" as "dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo",
-         "DbT5203NinteichosahyoKihonChosa"."insertDantaiCd" as "dbT5203NinteichosahyoKihonChosa_insertDantaiCd",
-         "DbT5203NinteichosahyoKihonChosa"."insertTimestamp" as "dbT5203NinteichosahyoKihonChosa_insertTimestamp",
-         "DbT5203NinteichosahyoKihonChosa"."insertReamsLoginId" as "dbT5203NinteichosahyoKihonChosa_insertReamsLoginId",
-         "DbT5203NinteichosahyoKihonChosa"."insertContextId" as "dbT5203NinteichosahyoKihonChosa_insertContextId",
-         "DbT5203NinteichosahyoKihonChosa"."isDeleted" as "dbT5203NinteichosahyoKihonChosa_isDeleted",
-         "DbT5203NinteichosahyoKihonChosa"."updateCount" as "dbT5203NinteichosahyoKihonChosa_updateCount",
-         "DbT5203NinteichosahyoKihonChosa"."lastUpdateTimestamp" as "dbT5203NinteichosahyoKihonChosa_lastUpdateTimestamp",
-         "DbT5203NinteichosahyoKihonChosa"."lastUpdateReamsLoginId" as "dbT5203NinteichosahyoKihonChosa_lastUpdateReamsLoginId",
-         "DbT5203NinteichosahyoKihonChosa"."koroshoIfShikibetsuCode" as "dbT5203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode",
-         "DbT5203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
-         "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode"
+        "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo" as "dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo",
+        "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" as "dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo",
+        "DbT5203NinteichosahyoKihonChosa"."insertDantaiCd" as "dbT5203NinteichosahyoKihonChosa_insertDantaiCd",
+        "DbT5203NinteichosahyoKihonChosa"."insertTimestamp" as "dbT5203NinteichosahyoKihonChosa_insertTimestamp",
+        "DbT5203NinteichosahyoKihonChosa"."insertReamsLoginId" as "dbT5203NinteichosahyoKihonChosa_insertReamsLoginId",
+        "DbT5203NinteichosahyoKihonChosa"."insertContextId" as "dbT5203NinteichosahyoKihonChosa_insertContextId",
+        "DbT5203NinteichosahyoKihonChosa"."isDeleted" as "dbT5203NinteichosahyoKihonChosa_isDeleted",
+        "DbT5203NinteichosahyoKihonChosa"."updateCount" as "dbT5203NinteichosahyoKihonChosa_updateCount",
+        "DbT5203NinteichosahyoKihonChosa"."lastUpdateTimestamp" as "dbT5203NinteichosahyoKihonChosa_lastUpdateTimestamp",
+        "DbT5203NinteichosahyoKihonChosa"."lastUpdateReamsLoginId" as "dbT5203NinteichosahyoKihonChosa_lastUpdateReamsLoginId",
+        "DbT5203NinteichosahyoKihonChosa"."koroshoIfShikibetsuCode" as "dbT5203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode",
+        "DbT5203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
+        "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode"
     </sql>
 
 
     <!--テーブルDbT5203NinteichosahyoKihonChosaの項目をDbT5203NinteichosahyoKihonChosaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5203NinteichosahyoKihonChosaEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo" />
+    <resultMap id="ResultMap_DbT5203NinteichosahyoKihonChosaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity" autoMapping="true">
+        <!--<id property="shinseishoKanriNo" column="dbT5203NinteichosahyoKihonChosa_shinseishoKanriNo" />-->
         <id property="ninteichosaRirekiNo" column="dbT5203NinteichosahyoKihonChosa_ninteichosaRirekiNo" />
         <result property="insertDantaiCd" column="dbT5203NinteichosahyoKihonChosa_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5203NinteichosahyoKihonChosa_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -49,11 +49,10 @@
         <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-<sleect id="getEntity" resultMap="ResultMap_DbT5203NinteichosahyoKihonChosaEntity">
-    SELECT
-    <include refid="allColumns_DbT5203NinteichosahyoKihonChosa">
-         FROM
-         rg."DbT5203NinteichosahyoKihonChosa"
-    </include>  
-</sleect>
+    <select id="getEntity" resultMap="ResultMap_DbT5203NinteichosahyoKihonChosaEntity">
+        <!--SELECT
+        <include refid="allColumns_DbT5203NinteichosahyoKihonChosa"/>
+        FROM
+        rgdb."DbT5203NinteichosahyoKihonChosa"-->
+    </select>
 </mapper>
