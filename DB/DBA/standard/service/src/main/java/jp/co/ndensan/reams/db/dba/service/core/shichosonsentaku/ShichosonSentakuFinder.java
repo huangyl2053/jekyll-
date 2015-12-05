@@ -31,7 +31,7 @@ public class ShichosonSentakuFinder {
     /**
      * コンストラクタです。
      *
-     * @return
+     * @return ShichosonSentakuFinder
      */
     public static ShichosonSentakuFinder createInstance() {
         return InstanceProvider.create(ShichosonSentakuFinder.class);
@@ -51,7 +51,7 @@ public class ShichosonSentakuFinder {
     /**
      * 合併市町村選択情報を取得する。
      *
-     * @param 基準日
+     * @param 基準日 基準日
      * @return 旧市町村選択情報取得
      */
     public List<ShichosonSelectorResult> getGapeiShichosonSentaku(FlexibleDate 基準日) {
@@ -73,7 +73,7 @@ public class ShichosonSentakuFinder {
     /**
      * 構成市町村選択情報を取得する。
      *
-     * @param 基準日
+     * @param 基準日 基準日
      * @return 構成市町村選択情報取得
      */
     public List<ShichosonSelectorResult> getKouseiShichosonSentaku(FlexibleDate 基準日) {
