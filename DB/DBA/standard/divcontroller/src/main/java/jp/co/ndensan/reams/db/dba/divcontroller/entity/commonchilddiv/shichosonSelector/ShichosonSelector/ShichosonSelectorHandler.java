@@ -72,22 +72,19 @@ public class ShichosonSelectorHandler {
         DataGrid<dgShichoson_Row> datagrid = div.getDgShichoson();
         List<dgShichoson_Row> rowList = new ArrayList();
         for (ShichosonSelectorResult result : resultList) {
-            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKyo)) {
-                if (KOUSEI_MODO_KOUSEI.equals(result.get合併旧市町村区分())) {
-                    dgShichoson_Row row = new dgShichoson_Row();
-                    row.setTxtShichosonCode(result.get市町村コード().value());
-                    row.setTxtShichosonName(result.get市町村名());
-                    rowList.add(row);
-                }
+            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKyo)
+                    && KOUSEI_MODO_KOUSEI.equals(result.get合併旧市町村区分())) {
+                dgShichoson_Row row = new dgShichoson_Row();
+                row.setTxtShichosonCode(result.get市町村コード().value());
+                row.setTxtShichosonName(result.get市町村名());
+                rowList.add(row);
             }
-
-            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKousei)) {
-                if (KOUSEI_MODO_KYU.equals(result.get合併旧市町村区分())) {
-                    dgShichoson_Row row = new dgShichoson_Row();
-                    row.setTxtShichosonCode(result.get市町村コード().value());
-                    row.setTxtShichosonName(result.get市町村名());
-                    rowList.add(row);
-                }
+            if (div.getRadShichosonKubun().getSelectedKey().equals(selectItemKousei)
+                    && KOUSEI_MODO_KYU.equals(result.get合併旧市町村区分())) {
+                dgShichoson_Row row = new dgShichoson_Row();
+                row.setTxtShichosonCode(result.get市町村コード().value());
+                row.setTxtShichosonName(result.get市町村名());
+                rowList.add(row);
             }
         }
         datagrid.setDataSource(rowList);
