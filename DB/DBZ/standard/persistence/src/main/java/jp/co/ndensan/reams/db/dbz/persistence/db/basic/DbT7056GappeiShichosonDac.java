@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.chiikiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.gappeiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.hyojiUmu;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.kyuHokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.kyuShichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.kyuShichosonMeisho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.unyoKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichoson.unyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
@@ -20,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -69,9 +73,9 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
     /**
      * 合併市町村選択情報を取得します。
      *
-     * @param 基準日
-     * @return　List<DbT7056GappeiShichosonEntity>
-     *
+     * @param 基準日 基準日
+     * @return List<DbT7056GappeiShichosonEntity>
+     * @throw NullPointerException NullPointerException
      */
     @Transaction
     public List<DbT7056GappeiShichosonEntity> selectfor合併市町村選択情報の取得処理(
@@ -116,4 +120,19 @@ public class DbT7056GappeiShichosonDac implements ISaveable<DbT7056GappeiShichos
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 旧市町村コード情報Listを取得する。
+     *
+     * @return 旧市町村コード情報List
+     */
+    @Transaction
+    public List<DbT7056GappeiShichosonEntity> getTannitsuKyuShichosonCodeJohoList() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(kyuShichosonCode, kyuHokenshaNo, kyuShichosonMeisho, chiikiNo).
+                table(DbT7056GappeiShichoson.class).
+                order(new OrderBy(chiikiNo, Order.DESC, NullsOrder.LAST)).
+                toList(DbT7056GappeiShichosonEntity.class);
+    }
+
 }

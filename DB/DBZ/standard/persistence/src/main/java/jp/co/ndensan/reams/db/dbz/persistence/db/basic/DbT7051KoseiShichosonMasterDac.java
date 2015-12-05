@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -73,5 +74,18 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタエンティティ"));
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 旧市町村コード情報Listを取得する。
+     *
+     * @param 地域番号の一桁目 地域番号の一桁目
+     * @return 旧市町村コード情報List
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> getKouikiKyuShichosonCodeJohoList(RString 地域番号の一桁目) {
+        requireNonNull(地域番号の一桁目, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号の一桁目"));
+        IDbT7051KoseiShichosonMasterMapper mapper = session.getMapper(IDbT7051KoseiShichosonMasterMapper.class);
+        return mapper.getKouikiKyuShichosonCodeJohoList(地域番号の一桁目);
     }
 }

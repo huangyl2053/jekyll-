@@ -27,7 +27,7 @@ public class ShichosonSelectorModel implements Serializable {
 
     /**
      *
-     * @param list
+     * @param list list
      */
     public void setList(List<ShichosonSelectorResult> list) {
         this.list = list;
@@ -43,7 +43,7 @@ public class ShichosonSelectorModel implements Serializable {
 
     /**
      *
-     * @param shichosonModel
+     * @param shichosonModel shichosonModel
      */
     public void setShichosonModel(RString shichosonModel) {
         this.shichosonModel = shichosonModel;
@@ -59,7 +59,7 @@ public class ShichosonSelectorModel implements Serializable {
 
     /**
      *
-     * @param shichosonCode
+     * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(RString shichosonCode) {
         this.shichosonCode = shichosonCode;
@@ -75,7 +75,7 @@ public class ShichosonSelectorModel implements Serializable {
 
     /**
      *
-     * @param shichosonName
+     * @param shichosonName shichosonName
      */
     public void setShichosonName(RString shichosonName) {
         this.shichosonName = shichosonName;

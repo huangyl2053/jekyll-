@@ -9,14 +9,19 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.chiikiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.gappeiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -81,5 +86,40 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 最新の地域番号を取得する。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 最新の地域番号
+     */
+    @Transaction
+    public DbT7055GappeiJohoEntity getSaisinNoTiikiNo(RString 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(chiikiNo, shichosonCode).
+                table(DbT7055GappeiJoho.class).
+                where(eq(shichosonCode, 市町村コード)).
+                order(new OrderBy(chiikiNo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
+                toObject(DbT7055GappeiJohoEntity.class);
+    }
+
+    /**
+     * 合併情報Listを取得する。
+     *
+     * @param 地域番号 地域番号
+     * @return 合併情報List
+     */
+    @Transaction
+    public List<DbT7055GappeiJohoEntity> getGappeiJohoList(RString 地域番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(chiikiNo, shichosonCode).
+                table(DbT7055GappeiJoho.class).
+                where(lt(shichosonCode, 地域番号)).
+                order(new OrderBy(chiikiNo, Order.DESC, NullsOrder.LAST)).
+                toList(DbT7055GappeiJohoEntity.class);
     }
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.ShichosonSelectorHandler;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector.dgShichoson_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.ShichosonSelectorDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.ShichosonSelectorHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonSelector.dgShichoson_Row;
 import jp.co.ndensan.reams.db.dba.service.core.shichosonsentaku.ShichosonSentakuFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -58,7 +58,7 @@ public class ShichosonSelector {
     /**
      * 構成市町村モードで呼び出された場合、構成市町村選択情報の取得を処理する。
      *
-     * @param div　ShichosonSelectorDiv
+     * @param div ShichosonSelectorDiv
      * @return ResponseData<ShichosonSelectorDiv>
      */
     public ResponseData<ShichosonSelectorDiv> onChange_radShichosonKubun(ShichosonSelectorDiv div) {
@@ -72,7 +72,7 @@ public class ShichosonSelector {
     /**
      * 市町村選択を確定するボタンを処理する。
      *
-     * @param div　ShichosonSelectorDiv
+     * @param div ShichosonSelectorDiv
      * @return ResponseData<ShichosonSelectorDiv>
      */
     public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
@@ -94,7 +94,7 @@ public class ShichosonSelector {
     /**
      * 「戻る」ボタンを処理する。
      *
-     * @param div　ShichosonSelectorDiv
+     * @param div ShichosonSelectorDiv
      * @return ResponseData<ShichosonSelectorDiv>
      */
     public ResponseData<ShichosonSelectorDiv> onClick_btnModoru(ShichosonSelectorDiv div) {

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.ShichosonSelector;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shichosonselector.shichosonSelector;
 
 import java.util.ArrayList;
 import java.util.List;

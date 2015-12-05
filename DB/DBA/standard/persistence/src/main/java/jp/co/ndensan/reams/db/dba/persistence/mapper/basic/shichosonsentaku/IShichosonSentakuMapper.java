@@ -13,7 +13,7 @@ public interface IShichosonSentakuMapper {
     /**
      * {@link DbT7051KoseiShichosonMasterEntity}を取得します。
      *
-     * @param 基準日
+     * @param 基準日 基準日
      * @return {@link DbT7051KoseiShichosonMasterEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */

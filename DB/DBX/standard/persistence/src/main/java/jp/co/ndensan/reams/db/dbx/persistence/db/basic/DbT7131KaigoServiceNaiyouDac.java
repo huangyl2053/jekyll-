@@ -61,10 +61,10 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(
-                eq(serviceShuruiCode, サービス種類コード),
-                eq(serviceKoumokuCode, サービス項目コード),
-                eq(teikyoKaishiYM, 提供開始年月),
-                eq(rirekiNo, 履歴番号))).
+                                eq(serviceShuruiCode, サービス種類コード),
+                                eq(serviceKoumokuCode, サービス項目コード),
+                                eq(teikyoKaishiYM, 提供開始年月),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT7131KaigoServiceNaiyouEntity.class);
     }
 
@@ -96,27 +96,28 @@ public class DbT7131KaigoServiceNaiyouDac implements ISaveable<DbT7131KaigoServi
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
+
     /**
      * サービスコードのフォーカスアウトです。
-     * @param サービス種類コード
-     * @param サービス項目コード
-     * @param 提供開始年月
+     *
+     * @param サービス種類コード サービス種類コード
+     * @param サービス項目コード サービス項目コード
+     * @param 提供開始年月 提供開始年月
      * @return DbT7131KaigoServiceNaiyouEntity
-     * @throws NullPointerException 
+     * @throws NullPointerException
      */
     public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(KaigoServiceShuruiCode サービス種類コード,
             RString サービス項目コード, FlexibleYearMonth 提供開始年月) throws NullPointerException {
-        
+
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7131KaigoServiceNaiyou.class).
                 where(and(eq(DbT7131KaigoServiceNaiyou.serviceShuruiCode, サービス種類コード),
-                        eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCode, サービス項目コード),
+                                eq(DbT7131KaigoServiceNaiyou.serviceKoumokuCode, サービス項目コード),
                                 leq(DbT7131KaigoServiceNaiyou.teikyoKaishiYM, 提供開始年月),
                                 leq(提供開始年月, DbT7131KaigoServiceNaiyou.teikyoShuryoYM))).
                 toList(DbT7131KaigoServiceNaiyouEntity.class);
-        
+
     }
-    
+
 }

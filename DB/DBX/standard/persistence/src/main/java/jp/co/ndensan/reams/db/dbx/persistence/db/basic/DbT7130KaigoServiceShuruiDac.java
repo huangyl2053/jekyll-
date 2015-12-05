@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.*;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.serviceShuruiCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.persistence.db.ISaveable;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -96,7 +97,7 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
     /**
      * 主キーで介護サービス種類を取得します。
      *
-     * @param makeShuruiCondition
+     * @param makeShuruiCondition makeShuruiCondition
      * @return DbT7130KaigoServiceShuruiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -115,8 +116,8 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
     /**
      * 主キーで介護サービス種類を取得します。
      *
-     * @param サービス種類コード
-     * @param 提供開始年月
+     * @param サービス種類コード サービス種類コード
+     * @param 提供開始年月 提供開始年月
      * @return DbT7130KaigoServiceShuruiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -148,7 +149,9 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
 
         return accessor.select().
                 table(DbT7130KaigoServiceShurui.class).
-                where(and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)), leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate), leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM))).
+                where(and(not(eq(DbT7130KaigoServiceShurui.isDeleted, true)),
+                                leq(DbT7130KaigoServiceShurui.teikyoKaishiYM, systemDate),
+                                leq(systemDate, DbT7130KaigoServiceShurui.teikyoshuryoYM))).
                 toList(DbT7130KaigoServiceShuruiEntity.class);
     }
 }

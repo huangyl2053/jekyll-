@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.core.servicecode;
 
 import java.io.Serializable;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author soft863
  */
-public class ServiceCodeModel implements Serializable  {
-    
+public class ServiceCodeModel implements Serializable {
+
     private RString サービス種類コード;
     private RString サービス項目コード;
     private RString サービス種類名称;
@@ -31,7 +30,7 @@ public class ServiceCodeModel implements Serializable  {
     /**
      * サービス種類コードを設定します。
      *
-     * @param サービス種類コード
+     * @param サービス種類コード サービス種類コード
      */
     public void setサービス種類コード(RString サービス種類コード) {
         this.サービス種類コード = サービス種類コード;
@@ -49,7 +48,7 @@ public class ServiceCodeModel implements Serializable  {
     /**
      * サービス項目コードを設定します。
      *
-     * @param サービス項目コード
+     * @param サービス項目コード サービス項目コード
      */
     public void setサービス項目コード(RString サービス項目コード) {
         this.サービス項目コード = サービス項目コード;
@@ -67,7 +66,7 @@ public class ServiceCodeModel implements Serializable  {
     /**
      * サービス項目コードを設定します。
      *
-     * @param サービス種類名称
+     * @param サービス種類名称 サービス種類名称
      */
     public void setサービス種類名称(RString サービス種類名称) {
         this.サービス種類名称 = サービス種類名称;

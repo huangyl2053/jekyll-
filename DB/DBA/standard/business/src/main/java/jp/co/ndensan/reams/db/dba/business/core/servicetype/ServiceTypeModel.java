@@ -40,7 +40,7 @@ public class ServiceTypeModel implements Serializable {
     /**
      * サービス種類コードを設定します。
      *
-     * @param サービス種類コード
+     * @param サービス種類コード サービス種類コード
      */
     public void setサービス種類コード(RString サービス種類コード) {
         this.サービス種類コード = サービス種類コード;
@@ -49,7 +49,7 @@ public class ServiceTypeModel implements Serializable {
     /**
      * サービス種類名称を設定します。
      *
-     * @param サービス種類名称
+     * @param サービス種類名称 サービス種類名称
      */
     public void setサービス種類名称(RString サービス種類名称) {
         this.サービス種類名称 = サービス種類名称;

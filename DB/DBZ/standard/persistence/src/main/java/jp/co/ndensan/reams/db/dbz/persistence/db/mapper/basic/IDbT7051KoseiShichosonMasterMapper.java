@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -19,4 +21,12 @@ public interface IDbT7051KoseiShichosonMasterMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7051KoseiShichosonMasterEntity getEntity();
+
+    /**
+     * 旧市町村コード情報Listを取得する。
+     *
+     * @param 地域番号の一桁目 地域番号の一桁目
+     * @return 旧市町村コード情報List
+     */
+    List<DbT7051KoseiShichosonMasterEntity> getKouikiKyuShichosonCodeJohoList(RString gappeiChiikiNoItIchiketame);
 }
