@@ -4,16 +4,16 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7053ShinseitodokedeJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams...persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper.allColumns_DbT7053ShinseitodokedeJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7053ShinseitodokedeJohoMapper.allColumns_DbT7053ShinseitodokedeJoho" />
      FROM
-         rg."DbT7053ShinseitodokedeJoho"
+         rgdb."DbT7053ShinseitodokedeJoho"
      WHERE
-         rg."DbT7053ShinseitodokedeJoho"."isDeleted" = FALSE
+         rgdb."DbT7053ShinseitodokedeJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7053ShinseitodokedeJoho">
@@ -43,7 +43,7 @@
 
 
     <!--テーブルDbT7053ShinseitodokedeJohoの項目をDbT7053ShinseitodokedeJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7053ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams...entity.db.basic.DbT7053ShinseitodokedeJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7053ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7053ShinseitodokedeJohoEntity" autoMapping="true">
         <id property="shoKisaiHokenshaNo" column="dbT7053ShinseitodokedeJoho_shoKisaiHokenshaNo" />
         <id property="hihokenshaNo" column="dbT7053ShinseitodokedeJoho_hihokenshaNo" />
         <id property="shinseiTodokedeYMD" column="dbT7053ShinseitodokedeJoho_shinseiTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
@@ -69,10 +69,10 @@
     </resultMap>
     
     <select id="getEntity" resultMap="ResultMap_DbT7053ShinseitodokedeJohoEntity">
-	SELECT
+<!--	SELECT
 	<include refid="allColumns_DbT7053ShinseitodokedeJoho"/>
 	FROM
-	rgba."DbT7053ShinseitodokedeJoho"
+	rgdb."DbT7053ShinseitodokedeJoho"-->
 	</select>
 
 </mapper>
