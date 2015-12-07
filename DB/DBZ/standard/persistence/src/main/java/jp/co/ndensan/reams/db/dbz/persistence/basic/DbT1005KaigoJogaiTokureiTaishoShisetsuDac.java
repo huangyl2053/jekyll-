@@ -99,7 +99,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      * @param 事業者種別 JigyoshaShubetsu
      * @param 事業者番号 JigyoshaNo
      * @param 有効開始年月日 YukoKaishiYMD
-     * @return DbT1005KaigoJogaiTokureiTaishoShisetsuEntity
+     * @return List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction

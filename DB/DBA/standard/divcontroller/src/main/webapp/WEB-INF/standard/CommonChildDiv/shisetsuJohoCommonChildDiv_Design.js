@@ -4,8 +4,12 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
-            Events.onFocus_btn = function () {
-                return "onFocus_btn";
+            Events.onChange_btn = function () {
+                return "onChange_btn";
+            };
+
+            Events.onBlur_btn = function () {
+                return "onBlur_btn";
             };
 
             Events.onOkClose_btnSenTaKu = function () {

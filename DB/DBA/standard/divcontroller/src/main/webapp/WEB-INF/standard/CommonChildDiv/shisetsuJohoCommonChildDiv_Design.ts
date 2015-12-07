@@ -8,8 +8,12 @@ module DBA {
 
         export class Events {
 
-            public static onFocus_btn(): string {
-                return "onFocus_btn";
+            public static onChange_btn(): string {
+                return "onChange_btn";
+            }
+
+            public static onBlur_btn(): string {
+                return "onBlur_btn";
             }
 
             public static onOkClose_btnSenTaKu(): string {

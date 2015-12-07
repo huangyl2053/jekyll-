@@ -89,9 +89,9 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
     /**
      * 入所施設名称の取得。
      *
-     * @param 事業者番号
-     * @param システム日付
-     * @return DbT7060KaigoJigyoshaEntity
+     * @param 事業者番号 KaigoJigyoshaNo
+     * @param システム日付 FlexibleDate
+     * @return List<DbT7060KaigoJigyoshaEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
