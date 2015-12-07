@@ -1,11 +1,11 @@
 ﻿{
- "uiContainerName": "DBAUC41001",
+ "uiContainerName": "DBAUC42001",
  "displayWizard": false,
  "subGyomuCode": "DBA",
  "steps": [
   {
    "id": 1,
-   "name": "被保険者照会",
+   "name": "他市町村住所地特例者照会",
    "transitionList": [
     {
      "id": "1",
@@ -26,16 +26,16 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
-     "toLayoutName": "DBA4010011",
-     "toLayoutTitle": "被保険者照会",
-     "toState": "被保険者照会"
+     "toLayoutName": "DBA4020011",
+     "toLayoutTitle": "他市町村住所地特例者照会",
+     "toState": "他市町村住所特例者照会"
     },
     {
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBA",
-     "layoutName": "DBA4010011",
-     "layoutTitle": "被保険者照会",
+     "layoutName": "DBA4020011",
+     "layoutTitle": "他市町村住所地特例者照会",
      "eventName": "検索条件",
      "destroy": false,
      "condition": "",
@@ -48,8 +48,8 @@
      "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBA",
-     "layoutName": "DBA4010011",
-     "layoutTitle": "被保険者照会",
+     "layoutName": "DBA4020011",
+     "layoutTitle": "他市町村住所地特例者照会",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
