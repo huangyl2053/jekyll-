@@ -17,7 +17,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
     /**
      * 被保険者番号をキーに受給者台帳テーブル、要介護認定結果情報テーブルと宛名識別対象PSMからデータを取得します。
      *
-     * @param 受給資格証明書発行情報をキー
+     * @param 受給資格証明書発行情報をキー JukyuShikakuShomeishoHakkoParameter
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
      JukyuShikakuShomeishoHakkoRelateEntity getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報をキー);
@@ -25,7 +25,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
     /**
      * サービス種類情報検索結果を返します。
      *
-     * @param 受給資格証明書発行情報をキー
+     * @param 受給資格証明書発行情報をキー JukyuShikakuShomeishoHakkoParameter
      * @return 検索結果リスト
      */
      JukyuShikakuShomeishoHakkoRelateEntity getServiceCodeList(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報をキー);
@@ -33,7 +33,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
     /**
      * フォーカスアウトのサービス種類検索結果を返します。
      *
-     * @param 受給資格証明書発行情報をキー
+     * @param 受給資格証明書発行情報をキー JukyuShikakuShomeishoHakkoParameter
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
      JukyuShikakuShomeishoHakkoRelateEntity getServiceMeiList(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報をキー);
@@ -41,7 +41,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
     /**
      * 認定申請中データを取得します。
      *
-     * @param 受給資格証明書発行情報をキー
+     * @param 受給資格証明書発行情報をキー JukyuShikakuShomeishoHakkoParameter
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
      JukyuShikakuShomeishoHakkoRelateEntity getNinTeiShinSeiChuData(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報をキー);
@@ -49,7 +49,7 @@ public interface IJukyuShikakuShomeishoHakkoRelateMapper {
     /**
      * 認定調査情報を取得します。
      *
-     * @param 受給資格証明書発行情報をキー
+     * @param 受給資格証明書発行情報をキー JukyuShikakuShomeishoHakkoParameter
      * @return JukyuShikakuShomeishoHakkoRelateEntity
      */
      JukyuShikakuShomeishoHakkoRelateEntity getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報をキー);

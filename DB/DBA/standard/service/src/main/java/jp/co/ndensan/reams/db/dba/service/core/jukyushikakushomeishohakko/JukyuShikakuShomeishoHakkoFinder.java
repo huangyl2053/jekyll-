@@ -36,6 +36,10 @@ public class JukyuShikakuShomeishoHakkoFinder {
     private final int int_150 = 150;
     private final int int_240 = 240;
 
+    /**
+     * コンストラクタ。
+     *
+     */
     public JukyuShikakuShomeishoHakkoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -52,7 +56,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
     /**
      * 被保険者番号をキーに受給者台帳テーブル、 要介護認定結果情報テーブルと宛名識別対象PSMからデータを取得する。
      *
-     * @param parameter
+     * @param parameter parameter
      * @return JukyuShikakuShomeisho JukyuShikakuShomeishoHakkoParameter
      */
     public JukyuShikakuShomeishoModel getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter parameter) {
