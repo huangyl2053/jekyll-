@@ -1,22 +1,30 @@
 package jp.co.ndensan.reams.db.dba.definition.core.shikakukubun;
 
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 資格区分を表す列挙型です。
  *
- * @author LDNS 作成者漢字名
  */
 public enum ShikakuKubun {
 
     /**
-     * コード:1 名称:１号被保険者 略称:１号
+     * コード:1 名称:_1号被保険者 略称:１号
      */
-    _1号("1", "１号被保険者", "１号"),
+    _１号("1", "_1号被保険者", "１号"),
     /**
-     * コード:2 名称:２号被保険者 略称:２号
+     * コード:2 名称:_2号被保険者 略称:２号
      */
-    _2号("2", "２号被保険者", "２号");
+    _２号("2", "_2号被保険者", "２号"),
+    /**
+     * コード:3 名称:１号被保険者（外国人） 略称:１号外
+     */
+    _１号外("3", "１号被保険者（外国人）", "１号外"),
+    /**
+     * コード:4 名称:２号被保険者（外国人） 略称:２号外
+     */
+    _２号外("4", "２号被保険者（外国人）", "２号外");
 
     private final RString code;
     private final RString fullName;
@@ -62,13 +70,11 @@ public enum ShikakuKubun {
      * @return {@code code} に対応する資格区分
      */
     public static ShikakuKubun toValue(RString code) {
-        //requireNonNull(code, DcErrorMessages.E00001.getMessage().getMessage());
         for (ShikakuKubun shikakuKubun : ShikakuKubun.values()) {
             if (shikakuKubun.code.equals(code)) {
                 return shikakuKubun;
             }
         }
-//        throw new IllegalArgumentException(DcErrorMessages.E09002.getMessage().getMessage());
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格区分"));
     }
 }
