@@ -31,7 +31,7 @@ public class ShinsakaiWariateIinJohoManager {
     /**
      * コンストラクタです。
      */
-    public ShinsakaiWariateIinJohoManager() {
+    ShinsakaiWariateIinJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT5503ShinsakaiWariateIinJohoDac.class);
         this.介護認定審査会委員情報Manager = new ShinsakaiIinJohoManager();

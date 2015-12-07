@@ -49,7 +49,7 @@ public class HihokenshaDaichoManager {
         this.介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
         this.介護保険医療保険加入状況Manager = new IryohokenKanyuJokyoManager();
         this.老齢福祉年金受給者Manager = new RoreiFukushiNenkinJukyushaManager();
-        this.生活保護受給者Manager = new SeikatsuHogoJukyushaManager();
+        this.生活保護受給者Manager = SeikatsuHogoJukyushaManager.createInstance();
     }
 
     /**

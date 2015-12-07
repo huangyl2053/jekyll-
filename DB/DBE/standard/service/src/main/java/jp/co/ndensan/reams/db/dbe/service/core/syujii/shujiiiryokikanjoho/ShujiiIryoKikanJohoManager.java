@@ -30,7 +30,7 @@ public class ShujiiIryoKikanJohoManager {
     /**
      * コンストラクタです。
      */
-    public ShujiiIryoKikanJohoManager() {
+    ShujiiIryoKikanJohoManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.主治医医療機関情報Dac = InstanceProvider.create(DbT5911ShujiiIryoKikanJohoDac.class);
         this.主治医情報Manager = new ShujiiJohoManager();

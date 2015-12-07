@@ -44,8 +44,8 @@ public class ShinsakaiKaisaiYoteiJohoManager {
         this.介護認定審査会開催予定情報Dac = InstanceProvider.create(DbT5501ShinsakaiKaisaiYoteiJohoDac.class);
         this.介護認定審査会開催結果情報Manager = new ShinsakaiKaisaiKekkaJohoManager();
         this.介護認定審査会音声情報Manager = new ShinsakaiOnseiJohoManager();
-        this.介護認定審査会割当委員情報Manager = new ShinsakaiWariateIinJohoManager();
-        this.介護認定審査会割当情報Manager = new ShinsakaiWariateJohoManager();
+        this.介護認定審査会割当委員情報Manager = ShinsakaiWariateIinJohoManager.createInstance();
+        this.介護認定審査会割当情報Manager = ShinsakaiWariateJohoManager.createInstance();
 
     }
 
@@ -78,7 +78,8 @@ public class ShinsakaiKaisaiYoteiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンス
      */
     public static ShinsakaiKaisaiYoteiJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiYoteiJohoManager.class);

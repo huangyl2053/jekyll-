@@ -33,7 +33,7 @@ public class SeikatsuHogoJukyushaManager {
     /**
      * コンストラクタです。
      */
-    public SeikatsuHogoJukyushaManager() {
+    SeikatsuHogoJukyushaManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.生活保護受給者Dac = InstanceProvider.create(UrT0508SeikatsuhogoJukyushaDac.class);
         this.生活保護扶助種類Manager = new SeikatsuHogoFujoShuruiManager();

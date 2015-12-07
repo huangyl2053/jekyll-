@@ -34,7 +34,7 @@ public class KoseiShichosonMasterManager {
     KoseiShichosonMasterManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.構成市町村マスタDac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
-        this.主治医医療機関情報Manager = new ShujiiIryoKikanJohoManager();
+        this.主治医医療機関情報Manager = ShujiiIryoKikanJohoManager.createInstance();
     }
 
     /**
