@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,15 +18,18 @@ public class ShinsakaiIinJohoMapperParameter {
 
     private final RString shinsakaiIinCode;
 
+    private final LasdecCode shichosonCode;
+
     /**
      * コンストラクタです。
      *
      * @param shinsakaiIinCode shinsakaiIinCode
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode) {
+    public ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode, LasdecCode shichosonCode) {
         this.shinsakaiIinCode
                 = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        this.shichosonCode = shichosonCode;
 
     }
 
@@ -37,7 +41,7 @@ public class ShinsakaiIinJohoMapperParameter {
      */
     public static ShinsakaiIinJohoMapperParameter createSelectByKeyParam(
             RString shinsakaiIinCode) {
-        return new ShinsakaiIinJohoMapperParameter(shinsakaiIinCode);
+        return new ShinsakaiIinJohoMapperParameter(shinsakaiIinCode, null);
     }
 
 }
