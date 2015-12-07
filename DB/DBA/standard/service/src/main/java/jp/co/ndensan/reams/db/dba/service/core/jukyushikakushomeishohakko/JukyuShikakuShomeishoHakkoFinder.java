@@ -36,6 +36,10 @@ public class JukyuShikakuShomeishoHakkoFinder {
     private final int int_150 = 150;
     private final int int_240 = 240;
 
+    /**
+     * コンストラクタ。
+     *
+     */
     public JukyuShikakuShomeishoHakkoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -52,7 +56,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
     /**
      * 被保険者番号をキーに受給者台帳テーブル、 要介護認定結果情報テーブルと宛名識別対象PSMからデータを取得する。
      *
-     * @param parameter
+     * @param parameter parameter
      * @return JukyuShikakuShomeisho JukyuShikakuShomeishoHakkoParameter
      */
     public JukyuShikakuShomeishoModel getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter parameter) {
@@ -62,8 +66,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 create(IJukyuShikakuShomeishoHakkoRelateMapper.class);
         JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate = jukyuShikakuShomeishoHakkoMapper.
                 getJukyuShikakuShomeishoHakko(parameter);
-        
-        // TODO 備考←未設定（NULL）確認を待ち
         if (jukyuShikakuShomeishoHakkoRelate == null) {
             return new JukyuShikakuShomeishoModel(null);
         }
@@ -79,7 +81,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
                  .isBefore(new FlexibleDate(jukyuShikakuShomeishoHakkoRelate.getNinteiYukoKikanKaishiYMD()))) {
                 jukyuShikakuShomeishoHakkoRelate.setBiko(get受給資格証明書_備考項目文言());
             } else {
-                // TODO 備考←未設定（NULL）確認を待ち
                 jukyuShikakuShomeishoHakkoRelate.setBiko(RString.EMPTY);
             }
         } else {

@@ -32,8 +32,8 @@ public final class JukyuShikakuShomeishoHakkoParameter {
 
     /**
      *
-     * @param hihokenshaNo
-     * @return
+     * @param hihokenshaNo hihokenshaNo
+     * @return JukyuShikakuShomeishoHakkoParameter
      */
     public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_受給資格証明書発行情報(RString hihokenshaNo) {
         JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(hihokenshaNo, null, null);
@@ -42,8 +42,8 @@ public final class JukyuShikakuShomeishoHakkoParameter {
 
     /**
      *
-     * @param serviceShuruiCd
-     * @return
+     * @param serviceShuruiCd serviceShuruiCd
+     * @return JukyuShikakuShomeishoHakkoParameter
      */
     public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_サービス種類コード(RString serviceShuruiCd) {
         JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null, serviceShuruiCd, null);
@@ -52,8 +52,8 @@ public final class JukyuShikakuShomeishoHakkoParameter {
 
     /**
      *
-     * @param shinseishoKanriNo
-     * @return
+     * @param shinseishoKanriNo shinseishoKanriNo
+     * @return JukyuShikakuShomeishoHakkoParameter
      */
     public static JukyuShikakuShomeishoHakkoParameter createSearchParameter_認定申請中データ情報(RString shinseishoKanriNo) {
         JukyuShikakuShomeishoHakkoParameter parameter = new JukyuShikakuShomeishoHakkoParameter(null, null, shinseishoKanriNo);

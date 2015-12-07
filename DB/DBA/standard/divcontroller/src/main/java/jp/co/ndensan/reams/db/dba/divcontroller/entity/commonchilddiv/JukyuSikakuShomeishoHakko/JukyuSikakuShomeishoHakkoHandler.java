@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  */
 public class JukyuSikakuShomeishoHakkoHandler {
 
-    private JukyuSikakuShomeishoHakkoDiv jukyuSikakuShomeishoHakkoDiv;
+    private final JukyuSikakuShomeishoHakkoDiv jukyuSikakuShomeishoHakkoDiv;
 
     JukyuSikakuShomeishoHakkoHandler(JukyuSikakuShomeishoHakkoDiv div) {
         this.jukyuSikakuShomeishoHakkoDiv = div;

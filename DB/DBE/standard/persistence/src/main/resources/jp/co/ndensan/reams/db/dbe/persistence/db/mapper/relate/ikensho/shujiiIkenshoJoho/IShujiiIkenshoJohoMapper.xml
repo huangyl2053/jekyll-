@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 要介護認定主治医意見書情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoJoho.IShujiiIkenshoJohoMapper">
+
+    <select id="select要介護認定主治医意見書情報ByKey" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
+        <include refid="selectShujiiIkenshoJohoEntity" />
+    </select>
+
+    <select id="select要介護認定主治医意見書情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
+        <include refid="selectShujiiIkenshoJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectShujiiIkenshoJohoEntity">
+        SELECT
+        DbT5302ShujiiIkenshoJoho.*,
+        DbT5303ShujiiIkenshoKinyuItem.*,
+        DbT5304ShujiiIkenshoIkenItem.*
+        FROM
+        (
+        SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho" />
+        FROM rgdb."DbT5302ShujiiIkenshoJoho") AS DbT5302ShujiiIkenshoJoho
+         LEFT JOIN 
+         (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+        FROM rgdb."DbT5303ShujiiIkenshoKinyuItem") AS DbT5303ShujiiIkenshoKinyuItem
+         ON 
+         DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo"
+         AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo"
+         INNER JOIN
+         (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
+        FROM rgdb."DbT5304ShujiiIkenshoIkenItem") AS DbT5304ShujiiIkenshoIkenItem
+         ON 
+         DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo"
+         AND DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo"
+       <where>
+            1 = 1
+            <if test="usesShinseishoKanriNo">
+                AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = #{shinseishoKanriNo}
+            </if>
+            <if  test="usesIkenshoIraiRirekiNo">
+                AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
+            </if>
+        </where>
+    </sql>
+
+   <resultMap id="resultMap_ShujiiIkenshoJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoJoho.ShujiiIkenshoJohoEntity" autoMapping="true">
+        <id property="要介護認定主治医意見書情報Entity.shinseishoKanriNo" column="dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="要介護認定主治医意見書情報Entity.ikenshoIraiRirekiNo" column="dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo"/>
+        <association property="要介護認定主治医意見書情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
+        <collection property="要介護認定主治医意見書記入項目Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity"/>
+        <collection property="要介護認定主治医意見書意見項目Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.ResultMap_DbT5304ShujiiIkenshoIkenItemEntity"/>
+    </resultMap>
+
+</mapper>
