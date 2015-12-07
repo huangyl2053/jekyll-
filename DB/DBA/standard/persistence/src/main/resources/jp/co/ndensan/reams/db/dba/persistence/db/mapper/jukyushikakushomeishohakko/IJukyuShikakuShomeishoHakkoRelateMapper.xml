@@ -3,7 +3,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.jukyushikakushomeishohakko.IJukyuShikakuShomeishoHakkoRelateMapper">
  
-    <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.JukyuShikakuShomeishoHakkoRelateEntity" autoMapping="true">
         <result property="hihokenshaNo"           column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="idoYMD"                 column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="yokaigoJotaiKubunCode"  column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
