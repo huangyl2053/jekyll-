@@ -101,6 +101,24 @@
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
+                表示モード.prototype.照会選択有 = function () {
+                    this.controls.btnAddShisetsuNyutaisho().displayNone = true;
+
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    var columns = gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'state') {
+                            columns[i].visible = false;
+                        }
+                    }
+                    gridSetting.columns = columns;
+
+                    this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
+                    this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                };
 
                 表示モード.prototype.資格異動 = function () {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;

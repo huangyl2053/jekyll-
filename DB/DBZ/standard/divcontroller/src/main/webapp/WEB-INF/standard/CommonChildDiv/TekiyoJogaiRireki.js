@@ -263,6 +263,7 @@ var DBZ;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
                     this.controls.panelTekiyoInput().title = '明細';
+                    this.controls.panelTekiyoInput().disabled = true;
                     this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
                 };
