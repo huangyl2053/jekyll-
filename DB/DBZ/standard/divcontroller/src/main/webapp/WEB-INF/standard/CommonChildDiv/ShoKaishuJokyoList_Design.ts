@@ -45,6 +45,42 @@ module DBZ {
                 return new UZA.DataGrid(this.convFiledName("dgShoKaishuJokyo"));
             }
 
+            public ShoKaishuJokyoShosai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoShosai"));
+            }
+
+            public txtShoKofuShurui(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShoKofuShurui"));
+            }
+
+            public txtKofuDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
+            }
+
+            public txtYukoKigen(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKigen"));
+            }
+
+            public txtKofuJiyu(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKofuJiyu"));
+            }
+
+            public txtKofuRiyu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtKofuRiyu"));
+            }
+
+            public txtKaishuDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaishuDate"));
+            }
+
+            public ddlKaishuJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaishuJiyu"));
+            }
+
+            public txtKaishuRiyu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtKaishuRiyu"));
+            }
+
         }
 
      }

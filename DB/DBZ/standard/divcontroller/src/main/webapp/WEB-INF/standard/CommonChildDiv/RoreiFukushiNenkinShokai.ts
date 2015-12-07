@@ -91,7 +91,7 @@ module DBZ
                   
                      this.controls.panelInput().displayNone = true;
 					 this.controls.btnAdd().displayNone = true;					
-					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
+					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
                      this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
                      this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
 					  

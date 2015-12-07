@@ -55,6 +55,20 @@ var DBZ;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
                 };
+                DisplayMode.prototype.referenceNoSelect = function () {
+                    this.controls.tbdKanyubi().readOnly = true;
+                    this.controls.tbdDattabi().readOnly = true;
+                    this.controls.ddlSyubetsu().disabled = true;
+                    this.controls.txtHokensyaKodo().readOnly = true;
+                    this.controls.txtHokensyaMeisho().readOnly = true;
+                    this.controls.txtKigoBango().readOnly = true;
+                    this.controls.btnIryohokenTsuika().visible = false;
+                    this.controls.btnKakutei().visible = false;
+                    this.controls.btnCancel().visible = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
+                };
 
                 DisplayMode.prototype.registration = function () {
                     this.controls.tbdKanyubi().readOnly = true;
