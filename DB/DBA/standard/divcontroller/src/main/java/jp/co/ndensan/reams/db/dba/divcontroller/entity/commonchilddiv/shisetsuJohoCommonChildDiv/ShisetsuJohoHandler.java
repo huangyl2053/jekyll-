@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 施設情報DivのHandlerクラスです。
  */
-public class shisetsuJohoHandler {
+public class ShisetsuJohoHandler {
 
     private final shisetsuJohoCommonChildDivDiv div;
 
@@ -27,41 +27,22 @@ public class shisetsuJohoHandler {
      *
      * @param div 事業者種類共有子Divのエンティティ
      */
-    public shisetsuJohoHandler(shisetsuJohoCommonChildDivDiv div) {
+    public ShisetsuJohoHandler(shisetsuJohoCommonChildDivDiv div) {
         this.div = div;
     }
 
     /**
      * 施設情報に初期化を設定する。
      *
-     * @param 台帳種別
-     * @param 台帳種別表示
+     * @param 台帳種別表示 RString
+     * @param 台帳種別 RString
      */
-    public void load(RString 台帳種別, RString 台帳種別表示) {
-
-        div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
+    public void load(RString 台帳種別表示, RString 台帳種別) {
 
         if (台帳種別表示.equals(new RString("0"))) {
-            if (台帳種別.equals(DaichoType.被保険者.getCode())) {
-                div.getRadKaigoHokenShisetsu().setVisible(true);
-                div.getRadOtherTokureiShisetsu().setVisible(true);
-                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
-                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
-            }
 
-            if (台帳種別.equals(DaichoType.他市町村住所地特例者.getCode())) {
-                div.getRadKaigoHokenShisetsu().setVisible(true);
-                div.getRadOtherTokureiShisetsu().setVisible(true);
-                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
-                div.getRadOtherTokureiShisetsu().setSelectedKey(ShisetsuType.住所地特例対象施設.getCode());
-            }
-
-            if (台帳種別.equals(DaichoType.適用除外者.getCode())) {
-                div.getRadKaigoHokenShisetsu().setVisible(true);
-                div.getRadOtherTokureiShisetsu().setVisible(true);
-                div.getRadTekiyoJyogaiShisetsu().setVisible(true);
-                div.getRadTekiyoJyogaiShisetsu().setSelectedKey(ShisetsuType.適用除外施設.getCode());
-            }
+            div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
+            div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getCode());
         }
 
         if (台帳種別表示.equals(new RString("1"))) {
@@ -69,10 +50,17 @@ public class shisetsuJohoHandler {
             div.getRadKaigoHokenShisetsu().setVisible(true);
             div.getRadOtherTokureiShisetsu().setVisible(true);
             div.getRadTekiyoJyogaiShisetsu().setVisible(true);
-            if (台帳種別.equals(DaichoType.被保険者.getCode())
-                    || 台帳種別.equals(DaichoType.他市町村住所地特例者.getCode())) {
+            div.getDdlDaichoShubetsu().setVisible(false);
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            if (台帳種別.equals(DaichoType.被保険者.getCode())) {
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
                 div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            }
+
+            if (台帳種別.equals(DaichoType.他市町村住所地特例者.getCode())) {
+
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.住所地特例対象施設.getCode());
             }
             if (台帳種別.equals(DaichoType.適用除外者.getCode())) {
 
@@ -81,7 +69,37 @@ public class shisetsuJohoHandler {
                 div.getRadTekiyoJyogaiShisetsu().setVisible(false);
             }
         }
+    }
 
+    /**
+     * 台帳種別を設定する。
+     *
+     * @param 台帳種別表示有りモード RString
+     */
+    public void onChange(RString 台帳種別表示有りモード) {
+        if (台帳種別表示有りモード.equals(new RString("0"))) {
+
+            if (DaichoType.被保険者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(true);
+                div.getRadOtherTokureiShisetsu().setVisible(true);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+                div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
+            }
+
+            if (DaichoType.他市町村住所地特例者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(true);
+                div.getRadOtherTokureiShisetsu().setVisible(true);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+                div.getRadOtherTokureiShisetsu().setSelectedKey(ShisetsuType.住所地特例対象施設.getCode());
+            }
+
+            if (DaichoType.適用除外者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
+                div.getRadKaigoHokenShisetsu().setVisible(false);
+                div.getRadOtherTokureiShisetsu().setVisible(false);
+                div.getRadTekiyoJyogaiShisetsu().setVisible(false);
+                div.getRadTekiyoJyogaiShisetsu().setSelectedKey(ShisetsuType.適用除外施設.getCode());
+            }
+        }
     }
 
     /**
