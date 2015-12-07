@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 主治医意見書作成依頼情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoIraiJoho.IShujiiIkenshoIraiJohoMapper">
+
+    <select id="select主治医意見書作成依頼情報ByKey" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
+        <include refid="selectShujiiIkenshoIraiJohoEntity" />
+    </select>
+
+    <select id="select主治医意見書作成依頼情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
+        <include refid="selectShujiiIkenshoIraiJohoEntity" />
+    </select>
+
+    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
+    <sql id="selectShujiiIkenshoIraiJohoEntity">
+        SELECT
+        DbT5301ShujiiIkenshoIraiJoho.*,
+        DbT5302ShujiiIkenshoJoho.*,
+        DbT5303ShujiiIkenshoKinyuItem.*,
+        DbT5304ShujiiIkenshoIkenItem
+       FROM
+        (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho") AS DbT5301ShujiiIkenshoIraiJoho
+         LEFT JOIN
+         (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho" />
+        FROM rgdb."DbT5302ShujiiIkenshoJoho") AS DbT5302ShujiiIkenshoJoho
+         ON 
+        DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" = DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo"
+        AND DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" = DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo"
+         INNER JOIN
+         (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+        FROM rgdb."DbT5303ShujiiIkenshoKinyuItem") AS DbT5303ShujiiIkenshoKinyuItem
+         ON 
+         DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo"
+         AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo"
+         INNER JOIN
+         (
+         SELECT
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
+        FROM rgdb."DbT5304ShujiiIkenshoIkenItem") AS DbT5304ShujiiIkenshoIkenItem
+         ON 
+         DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_shinseishoKanriNo"
+         AND DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo" = DbT5304ShujiiIkenshoIkenItem."dbT5304ShujiiIkenshoIkenItem_ikenshoIraiRirekiNo"
+         <where>
+            1 = 1
+            <if test="usesShinseishoKanriNo">
+                AND DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" = #{shinseishoKanriNo}
+            </if>
+            <if  test="usesIkenshoIraiRirekiNo">
+                AND DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
+            </if>
+        </where>
+        
+    </sql>
+
+    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
+    <resultMap id="resultMap_ShujiiIkenshoIraiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.shujiiIkenshoIraiJoho.ShujiiIkenshoIraiJohoEntity" autoMapping="true">
+        <id property="主治医意見書作成依頼情報Entity.shinseishoKanriNo" column="dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="主治医意見書作成依頼情報Entity.ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"/>
+        <association property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
+        <collection property="要介護認定主治医意見書情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
+    </resultMap>
+
+</mapper>
