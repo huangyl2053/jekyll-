@@ -66,8 +66,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 create(IJukyuShikakuShomeishoHakkoRelateMapper.class);
         JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate = jukyuShikakuShomeishoHakkoMapper.
                 getJukyuShikakuShomeishoHakko(parameter);
-        
-        // TODO 備考←未設定（NULL）確認を待ち
         if (jukyuShikakuShomeishoHakkoRelate == null) {
             return new JukyuShikakuShomeishoModel(null);
         }
@@ -83,7 +81,6 @@ public class JukyuShikakuShomeishoHakkoFinder {
                  .isBefore(new FlexibleDate(jukyuShikakuShomeishoHakkoRelate.getNinteiYukoKikanKaishiYMD()))) {
                 jukyuShikakuShomeishoHakkoRelate.setBiko(get受給資格証明書_備考項目文言());
             } else {
-                // TODO 備考←未設定（NULL）確認を待ち
                 jukyuShikakuShomeishoHakkoRelate.setBiko(RString.EMPTY);
             }
         } else {
