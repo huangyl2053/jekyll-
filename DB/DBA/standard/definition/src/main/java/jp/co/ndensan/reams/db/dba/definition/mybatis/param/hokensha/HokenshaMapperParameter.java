@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 保険者情報のパラメータです。
  */
-public final class HokenjaMapperParameter {
+public final class HokenshaMapperParameter {
 
     private final HokenjaNo hokenjaNo;
     private final RString kenCode;
@@ -25,7 +25,7 @@ public final class HokenjaMapperParameter {
      * @param hokenjaNo 保険者番号
      * @param kenCode 県コード
      */
-    private HokenjaMapperParameter(
+    private HokenshaMapperParameter(
             HokenjaNo hokenjaNo,
             RString kenCode) {
         this.hokenjaNo = requireNonNull(hokenjaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
@@ -38,9 +38,9 @@ public final class HokenjaMapperParameter {
      * @param hokenjaNo 保険者番号
      * @return 保険者検索パラメータ
      */
-    public static HokenjaMapperParameter createHokenjaNoParam(
+    public static HokenshaMapperParameter createHokenjaNoParam(
             HokenjaNo hokenjaNo) {
-        return new HokenjaMapperParameter(
+        return new HokenshaMapperParameter(
                 hokenjaNo,
                 RString.EMPTY
         );
@@ -52,9 +52,9 @@ public final class HokenjaMapperParameter {
      * @param kenCode 県コード
      * @return 保険者検索パラメータ
      */
-    public static HokenjaMapperParameter createKenCodeParam(
+    public static HokenshaMapperParameter createKenCodeParam(
             RString kenCode) {
-        return new HokenjaMapperParameter(
+        return new HokenshaMapperParameter(
                 new HokenjaNo(RString.EMPTY),
                 kenCode
         );

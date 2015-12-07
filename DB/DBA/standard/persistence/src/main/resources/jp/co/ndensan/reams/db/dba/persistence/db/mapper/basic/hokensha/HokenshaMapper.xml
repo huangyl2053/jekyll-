@@ -3,7 +3,7 @@
 <!-- 概要： UrT0507HokenjaEntityのマッピング用XMLです。 -->
 <!--SelectMethod : getUrT0507HokenjaEntity-->
 <!--ParentResultMap : resultMap_UrT0507HokenjaEntity-->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hokensha.HokenjaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hokensha.HokenshaMapper">
 
     <resultMap id="resultMap_UrT0507HokenjaEntity" type="jp.co.ndensan.reams.ur.urz.entity.db.basic.hokenja.UrT0507HokenjaEntity" autoMapping="true">
         <!--<id property="hokenjaNo"                column="hokenja_hokenjaNo"           typeHandler="jp.co.ndensan.reams.uz.uza.lang.RString" />-->
@@ -12,7 +12,7 @@
     
     <select id="getHokenshaList"
             resultMap="resultMap_UrT0507HokenjaEntity" 
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenjaMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter" fetchSize="500">
         SELECT 
         Hokenja."hokenjaNo" AS "hokenja_hokenjaNo",
         Hokenja."hokenjaName" AS "hokenja_hokenjaName"

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.service.core.hokensha;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dba.business.core.hokensha.KenCodeJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenjaMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hokensha.HokenshaMapperParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
@@ -48,6 +48,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
     public static final HokenjaNo 保険者番号1 = new HokenjaNo(new RString("101101"));
     public static final HokenjaShubetsu 保険者種別2 = new HokenjaShubetsu(new RString("08"));
     public static final HokenjaNo 保険者番号2 = new HokenjaNo(new RString("102102"));
+    public static final HokenjaShubetsu 保険者種別3 = new HokenjaShubetsu(new RString("07"));
     public static final ZenkokuJushoDataKubun データ区分1 = new ZenkokuJushoDataKubun(1);
     public static final ZenkokuJushoDataKubun データ区分2 = new ZenkokuJushoDataKubun(2);
     public static final RString 都道府県住所コード1 = new RString("01");
@@ -79,8 +80,8 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
 
         @Test
         public void 該当する保険者情報が存在しない場合_getHokenshaは_NULLを返すさせる() {
-            insert_UrT0507Hokenja(保険者種別2, 保険者番号2);
-            HokenjaMapperParameter parameter = HokenjaMapperParameter.createHokenjaNoParam(保険者番号2);
+            insert_UrT0507Hokenja(保険者種別3, 保険者番号2);
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createHokenjaNoParam(保険者番号2);
             Hokensha result = sut.getHokensha(parameter);
             assertThat(result, is(nullValue()));
         }
@@ -88,7 +89,7 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         @Test
         public void 該当する保険者情報が存在した場合_getHokenshaは_保険者名を返すさせる() {
             insert_UrT0507Hokenja(保険者種別1, 保険者番号1);
-            HokenjaMapperParameter parameter = HokenjaMapperParameter.createHokenjaNoParam(保険者番号1);
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createHokenjaNoParam(保険者番号1);
             Hokensha result = sut.getHokensha(parameter);
             assertThat(result.get保険者名(), is(new RString("保険者名")));
         }
@@ -132,25 +133,25 @@ public class HokenshaNyuryokuHojoFinderTest extends DbaTestDacBase {
         }
 
         @Test
-        public void テーブルにレコードが存在しない場合_県コード取得処理は_NULLを返すこと() {
-            HokenjaMapperParameter parameter = HokenjaMapperParameter.createKenCodeParam(new RString("101"));
+        public void テーブルにレコードが存在しない場合_保険者情報取得処理は_NULLを返すこと() {
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("101"));
             List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
             assertThat(hokenjaNoList.size(), is(0));
         }
 
         @Test
-        public void テーブルにレコードが存在する場合_県コード取得処理は_1件を返すこと() {
+        public void テーブルにレコードが存在する場合_保険者情報取得処理は_1件を返すこと() {
             insert_UrT0507Hokenja(保険者種別1, 保険者番号1);
-            HokenjaMapperParameter parameter = HokenjaMapperParameter.createKenCodeParam(new RString("101"));
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("101"));
             List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
             assertThat(hokenjaNoList.size(), is(1));
         }
 
         @Test
-        public void テーブルにレコードが存在する場合_県コード取得処理は_2件を返すこと() {
+        public void テーブルにレコードが存在する場合_保険者情報取得処理は_2件を返すこと() {
             insert_UrT0507Hokenja(保険者種別2, 保険者番号1);
             insert_UrT0507Hokenja(保険者種別2, 保険者番号2);
-            HokenjaMapperParameter parameter = HokenjaMapperParameter.createKenCodeParam(new RString("10"));
+            HokenshaMapperParameter parameter = HokenshaMapperParameter.createKenCodeParam(new RString("10"));
             List<Hokensha> hokenjaNoList = sut.getHokenshaList(parameter);
             assertThat(hokenjaNoList.size(), is(2));
         }
