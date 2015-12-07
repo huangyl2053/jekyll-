@@ -2,7 +2,6 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 /// <reference path="./ShisetsuJoho.ts" />
-/// <reference path="./ShisetsuNyutaishoRirekiKanri.ts" />
 
 module DBZ {
 
@@ -133,14 +132,6 @@ module DBZ {
 
             public ddlKaijoJiyuInput(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyuInput"));
-            }
-
-            public TekiyoJogaiTorokuHenkoIchiran(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TekiyoJogaiTorokuHenkoIchiran"));
-            }
-
-            public ccdShisetsuNyushRirekiKanri(): DBZ.ShisetsuNyutaishoRirekiKanri.ModeController {
-                return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetsuNyushRirekiKanri"));
             }
 
             public btnKakutei(): UZA.Button {

@@ -90,7 +90,7 @@ module DBZ
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
 					this.controls.btnInputClear().displayNone = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                   
                 }
               
               
@@ -114,7 +114,7 @@ module DBZ
                     this.controls.btnKakutei().disabled = false;
 					 this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+            
                 }
               }
                 
@@ -136,7 +136,7 @@ module DBZ
                     this.controls.btnKakutei().disabled = true;
 					this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = true;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                    
                 }
                 
               }
@@ -155,7 +155,7 @@ module DBZ
                     
                     this.controls.btnKakutei().displayNone = true;
 					this.controls.btnInputClear().displayNone = true;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+              
                 }
 
               
@@ -180,7 +180,7 @@ module DBZ
                     this.controls.btnAdd().displayNone = false;			
 					
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                 
 					this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
                 }
               }
@@ -201,8 +201,7 @@ module DBZ
 					this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = false;
                     this.controls.btnAdd().displayNone = true;
-                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = true;
+                    this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;               
 					this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
                 }
               }
@@ -223,15 +222,7 @@ module DBZ
                     this.controls.btnKakutei().disabled = false;
 					this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = false;
-                    this.controls.panelTekiyoRireki().displayNone = true;                
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;	
-					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().登録()　　					
-					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().適用除外者();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
-					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();					
-					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();	
-					this.controls.ccdShisetsuNyushRirekiKanri().施設入退所を追加する().表示しない();	
+                    this.controls.panelTekiyoRireki().displayNone = true;                	
 					this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
 					
@@ -256,7 +247,7 @@ module DBZ
                     this.controls.btnKakutei().disabled = false;
                     this.controls.btnAdd().displayNone = false;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                    
                 }
                 
               }
@@ -273,21 +264,11 @@ module DBZ
                     this.controls.panelTekiyoInput().displayNone = false;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;                    
                     this.controls.btnKakutei().displayNone = true;
-					this.controls.btnInputClear().displayNone = true;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+					this.controls.btnInputClear().displayNone = true;                   
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = true;
-					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = true;
-					
-				
-					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().登録();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
-					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();
-					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().適用除外者();
-					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();
-					this.controls.panelTekiyoInput().title = '明細';
-					this.controls.TekiyoJogaiTorokuHenkoIchiran().title = '施設情報';
+					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = true;									
+					this.controls.panelTekiyoInput().title = '明細';				
 					this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
                 }
@@ -307,18 +288,11 @@ module DBZ
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;                    
                     this.controls.btnKakutei().displayNone = true;
 					this.controls.btnInputClear().displayNone = true;
-                    this.controls.TekiyoJogaiTorokuHenkoIchiran().displayNone = false;
+                 
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = true;
 					this.controls.datagridTekiyoJogai().gridSetting.isShowModifyButtonColumn = false;
-					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;
-					this.controls.ccdShisetsuNyushRirekiKanri().表示モード().照会();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示Heightサイズ().サイズ300();
-					this.controls.ccdShisetsuNyushRirekiKanri().表示widthサイズ().モード5();
-					this.controls.ccdShisetsuNyushRirekiKanri().台帳種別の列を().表示しない();
-					this.controls.ccdShisetsuNyushRirekiKanri().明細表示モード().非表示();
-					this.controls.ccdShisetsuNyushRirekiKanri().施設種類の列を().表示しない();
-					this.controls.panelTekiyoInput().title = '明細';
-					this.controls.TekiyoJogaiTorokuHenkoIchiran().title = '施設情報';
+					this.controls.datagridTekiyoJogai().gridSetting.isShowDeleteButtonColumn = false;				
+					this.controls.panelTekiyoInput().title = '明細';					
 					this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
 					                 

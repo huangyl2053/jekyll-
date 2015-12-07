@@ -128,14 +128,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyuInput"));
             };
 
-            Controls.prototype.TekiyoJogaiTorokuHenkoIchiran = function () {
-                return new UZA.Panel(this.convFiledName("TekiyoJogaiTorokuHenkoIchiran"));
-            };
-
-            Controls.prototype.ccdShisetsuNyushRirekiKanri = function () {
-                return new DBZ.ShisetsuNyutaishoRirekiKanri.ModeController(this.convFiledName("ccdShisetsuNyushRirekiKanri"));
-            };
-
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
             };
