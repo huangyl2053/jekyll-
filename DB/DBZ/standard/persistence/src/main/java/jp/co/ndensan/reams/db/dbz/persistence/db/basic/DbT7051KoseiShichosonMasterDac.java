@@ -7,14 +7,22 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.ridatsuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -88,4 +96,24 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
         IDbT7051KoseiShichosonMasterMapper mapper = session.getMapper(IDbT7051KoseiShichosonMasterMapper.class);
         return mapper.getKouikiKyuShichosonCodeJohoList(地域番号の一桁目);
     }
+
+    /**
+     * 所在保険者リスト情報取得を取得.
+     *
+     * @param systemDate
+     * @return DbT7051KoseiShichosonMasterEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> selectByKoseiShichosonMasterList(RDate systemDate) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(
+                                eq(gappeiKyuShichosonKubun, '0'),
+                                leq(kanyuYMD, systemDate),
+                                not(isNULL(ridatsuYMD)))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
 }

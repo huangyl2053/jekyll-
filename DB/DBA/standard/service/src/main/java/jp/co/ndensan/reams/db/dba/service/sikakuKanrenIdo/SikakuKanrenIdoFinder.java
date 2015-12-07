@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.sikakuKanrenIdo.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.DbT5051KoseiShichosonMasterMapper;
+
 import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.SikakuKanrenIdoMapper;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -63,17 +64,24 @@ public class SikakuKanrenIdoFinder {
         return SikakuKanrenIdoList;
     }
 
+    /**
+     * 所在保険者リスト情報取得
+     *
+     * @param systemDate RDate
+     * @return List<DbT7051KoseiShichosonMasterEntity>
+     */
     @Transaction
-    public List<DbT5051KoseiShichosonMasterEntity> getKoseiShichosonMasterList() {
-        DbT5051KoseiShichosonMasterMapper KoseiShichosonMasterMapper = mapperProvider.create(DbT5051KoseiShichosonMasterMapper.class);
-        List<DbT5051KoseiShichosonMasterEntity> mapperList = KoseiShichosonMasterMapper.getKoseiShichosonMasterList();
-        if (mapperList.isEmpty()) {
+    public List<DbT7051KoseiShichosonMasterEntity> selectByKoseiShichosonMasterList(RDate systemDate) {
+
+        List<DbT7051KoseiShichosonMasterEntity> businessList = new ArrayList<>();
+        List<DbT7051KoseiShichosonMasterEntity> entityList = db7051Dac.selectByKoseiShichosonMasterList(systemDate);
+        if (entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        for (DbT5051KoseiShichosonMasterEntity entity : mapperList) {
-//            KoseiShichosonMaster.add(new KoseiShichosonMaster(entity));
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            //       DbT7051KoseiShichosonMasterEntity.add(new KoseiShichosonMaster(entity));
         }
-        return mapperList;
+        return businessList;
 
     }
 
