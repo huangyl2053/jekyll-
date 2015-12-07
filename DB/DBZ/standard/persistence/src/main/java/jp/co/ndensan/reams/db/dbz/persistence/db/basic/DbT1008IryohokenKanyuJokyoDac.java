@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEnti
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -31,15 +30,15 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     /**
      * 主キーで介護保険医療保険加入状況を取得します。
      *
-     * @param 識別コード ShikibetsuCode
-     * @param 履歴番号 RirekiNo
+     * @param 識別コード 識別コード
+     * @param 履歴番号 履歴番号
      * @return DbT1008IryohokenKanyuJokyoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1008IryohokenKanyuJokyoEntity selectByKey(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -56,7 +55,7 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     /**
      * 介護保険医療保険加入状況を全件返します。
      *
-     * @return List<DbT1008IryohokenKanyuJokyoEntity>
+     * @return DbT1008IryohokenKanyuJokyoEntityの{@code list}
      */
     @Transaction
     public List<DbT1008IryohokenKanyuJokyoEntity> selectAll() {
@@ -78,7 +77,7 @@ public class DbT1008IryohokenKanyuJokyoDac implements ISaveable<DbT1008Iryohoken
     public int save(DbT1008IryohokenKanyuJokyoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険医療保険加入状況エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

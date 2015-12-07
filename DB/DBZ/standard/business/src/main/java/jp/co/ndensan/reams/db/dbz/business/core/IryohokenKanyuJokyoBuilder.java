@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link IryohokenKanyuJokyo}の編集を行うビルダークラスです。
@@ -59,7 +58,7 @@ public class IryohokenKanyuJokyoBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link IryohokenKanyuJokyoBuilder}
      */
-    public IryohokenKanyuJokyoBuilder set履歴番号(Decimal 履歴番号) {
+    public IryohokenKanyuJokyoBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
