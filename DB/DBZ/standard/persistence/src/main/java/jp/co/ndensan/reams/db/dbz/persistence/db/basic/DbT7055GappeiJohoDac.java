@@ -12,6 +12,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.gappe
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -95,7 +96,7 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
      * @return 最新の地域番号
      */
     @Transaction
-    public DbT7055GappeiJohoEntity getSaisinNoTiikiNo(RString 市町村コード) {
+    public DbT7055GappeiJohoEntity getSaisinNoTiikiNo(LasdecCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.selectSpecific(chiikiNo, shichosonCode).
@@ -118,7 +119,7 @@ public class DbT7055GappeiJohoDac implements ISaveable<DbT7055GappeiJohoEntity> 
 
         return accessor.selectSpecific(chiikiNo, shichosonCode).
                 table(DbT7055GappeiJoho.class).
-                where(lt(shichosonCode, 地域番号)).
+                where(lt(chiikiNo, 地域番号)).
                 order(new OrderBy(chiikiNo, Order.DESC, NullsOrder.LAST)).
                 toList(DbT7055GappeiJohoEntity.class);
     }
