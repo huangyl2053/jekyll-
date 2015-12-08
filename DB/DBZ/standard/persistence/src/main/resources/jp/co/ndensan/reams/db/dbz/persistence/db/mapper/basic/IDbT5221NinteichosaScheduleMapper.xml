@@ -65,7 +65,7 @@
         <result property="updateCount" column="dbT5221NinteichosaSchedule_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5221NinteichosaSchedule_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5221NinteichosaSchedule_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseishoKanriNo" column="dbT5221NinteichosaSchedule_shinseishoKanriNo" />
+        <result property="shinseishoKanriNo" column="dbT5221NinteichosaSchedule_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="yoyakuJokyo" column="dbT5221NinteichosaSchedule_yoyakuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="yoyakuKaoFlag" column="dbT5221NinteichosaSchedule_yoyakuKaoFlag" />
         <result property="biko" column="dbT5221NinteichosaSchedule_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

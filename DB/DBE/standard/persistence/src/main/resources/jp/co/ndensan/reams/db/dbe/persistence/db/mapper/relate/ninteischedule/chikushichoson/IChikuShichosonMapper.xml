@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 地区市町村のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.chikushichoson.IChikuShichosonMapper">
+
+    <select id="select地区市町村ByKey" resultMap="resultMap_ChikuShichosonEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikushichoson.ChikuShichosonMapperParameter" fetchSize="500">
+        <include refid="selectChikuShichosonEntity" />
+    </select>
+
+    <sql id="selectChikuShichosonEntity">
+        SELECT
+        DbT5224ChikuShichoson.*,
+        DbT5225ChosaChikuGroup.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.noDeleted_DbT5224ChikuShichoson" />) AS DbT5224ChikuShichoson
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.noDeleted_DbT5225ChosaChikuGroup" />) AS DbT5225ChosaChikuGroup
+        ON
+        DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosachikucode" 
+        AND
+        DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode" 
+        <where>
+            <if test="uses調査地区コード">
+                AND DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode" = #{調査地区コード}
+            </if>
+            <if test="uses市町村コード">
+                AND DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode" = #{市町村コード}
+            </if>
+        </where>
+    </sql>
+
+    <resultMap id="resultMap_ChikuShichosonEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikushichoson.ChikuShichosonEntity" autoMapping="true">
+        <id column="dbT5224ChikuShichoson_chosaChikuCode"/>
+        <id column="dbT5224ChikuShichoson_shichosonCode"/>
+        <association property="地区市町村Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.ResultMap_DbT5224ChikuShichosonEntity"/>
+        <collection property="調査地区グループマスタEntity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.ResultMap_DbT5225ChosaChikuGroupEntity"/>
+    </resultMap>
+</mapper>
