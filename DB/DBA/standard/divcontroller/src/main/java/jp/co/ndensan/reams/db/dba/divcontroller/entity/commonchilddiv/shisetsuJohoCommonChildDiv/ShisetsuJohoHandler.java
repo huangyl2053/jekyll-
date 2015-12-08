@@ -43,6 +43,7 @@ public class ShisetsuJohoHandler {
 
             div.getDdlDaichoShubetsu().setDataSource(ドロップダウンの設定());
             div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getCode());
+            div.getRadKaigoHokenShisetsu().setSelectedKey(ShisetsuType.介護保険施設.getCode());
         }
 
         if (台帳種別表示.equals(new RString("1"))) {
@@ -74,10 +75,10 @@ public class ShisetsuJohoHandler {
     /**
      * 台帳種別を設定する。
      *
-     * @param 台帳種別表示有りモード RString
+     * @param 台帳種別表示 RString
      */
-    public void onChange(RString 台帳種別表示有りモード) {
-        if (台帳種別表示有りモード.equals(new RString("0"))) {
+    public void onChange(RString 台帳種別表示) {
+        if (台帳種別表示.equals(new RString("0"))) {
 
             if (DaichoType.被保険者.getCode().equals(div.getDdlDaichoShubetsu().getSelectedKey())) {
                 div.getRadKaigoHokenShisetsu().setVisible(true);
