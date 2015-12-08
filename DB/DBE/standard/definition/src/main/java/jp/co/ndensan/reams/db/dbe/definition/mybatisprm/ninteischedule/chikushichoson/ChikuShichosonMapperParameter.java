@@ -5,65 +5,39 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikushichoson;
 
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+
 /**
  * 地区市町村を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
 public class ChikuShichosonMapperParameter {
 
-//// TODO 主キー型、主キー名を適切に置換してください。
-//// TODO 主キーの数が足りない場合、処理を追加してください。
-//    private final 主キー型1 主キー1;
-//    private final 主キー型2 主キー2;
-//
-//    private final boolean uses主キー1;
-//    private final boolean uses主キー2;
-//
-//// TODO 用途に応じてアクセス修飾子を修正してください。
-//    /**
-//     * コンストラクタです。
-//     *
-//     * @param 主キー1 主キー1
-//     * @param 主キー2 主キー2
-//     * @param uses主キー1 uses主キー1
-//     * @param uses主キー2 uses主キー2
-//     * @throws NullPointerException 引数のいずれかが{@code null}の場合
-//     */
-//    private ChikuShichosonMapperParameter(
-//            @lombok.Nonnull 主キー型1 主キー1,
-//            @lombok.Nonnull 主キー型2 主キー2,
-//            boolean uses主キー1,
-//            boolean uses主キー2) {
-//
-//        this.主キー1 = 主キー1;
-//        this.主キー2 = 主キー2;
-//
-//        this.uses主キー1 = uses主キー1;
-//        this.uses主キー2 = uses主キー2;
-//    }
-//
-//// TODO 用途に応じたパラメータ生成メソッドを追加、修正してください。
-//    /**
-//     * キー検索用のパラメータを生成します。
-//     *
-//     * @param 主キー1 主キー1
-//     * @param 主キー2 主キー2
-//     * @return 身体手帳検索パラメータ
-//     */
-//    public static ChikuShichosonMapperParameter createSelectByKeyParam(
-//            主キー型1 主キー1,
-//            主キー型2 主キー2) {
-//        return new ChikuShichosonMapperParameter(主キー1, 主キー2, true, true);
-//    }
-//
-//    /**
-//     * 一覧検索用のパラメータを生成します。
-//     *
-//     * @param 主キー1 主キー1
-//     * @return 身体手帳検索パラメータ
-//     */
-//    public static ChikuShichosonMapperParameter createSelectListParam(
-//            主キー型1 主キー1) {
-//        return new ChikuShichosonMapperParameter(主キー1, 主キー型2.ZERO, true, false);
-//    }
+    private final Code 調査地区コード;
+    private final LasdecCode 市町村コード;
+    private final boolean uses調査地区コード;
+    private final boolean uses市町村コード;
+
+    /**
+     * キー検索用のパラメータを生成します。
+     *
+     * @param 調査地区コード 調査地区コード
+     * @param 市町村コード 市町村コード
+     * @return 地区市町村検索パラメータ
+     */
+    public static ChikuShichosonMapperParameter createSelectByKeyParam(
+            Code 調査地区コード, LasdecCode 市町村コード) {
+        return new ChikuShichosonMapperParameter(調査地区コード, 市町村コード, true, true);
+    }
+
+    private ChikuShichosonMapperParameter(Code 調査地区コード,
+            LasdecCode 市町村コード,
+            boolean uses調査地区コード,
+            boolean uses市町村コード) {
+        this.調査地区コード = 調査地区コード;
+        this.市町村コード = 市町村コード;
+        this.uses調査地区コード = uses調査地区コード;
+        this.uses市町村コード = uses市町村コード;
+    }
 }
