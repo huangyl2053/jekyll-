@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.shisetsuJohoCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.shisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -26,15 +28,20 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onLoad(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
+	ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
 
-        ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-        handler.load(台帳種別表示, 台帳種別);
-        responseData.data = requestDiv;
+	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
+	RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
+	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
 
-        return responseData;
+	if (台帳種別 == null || 台帳種別表示 == null) {
+
+	    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+	}
+	handler.load(台帳種別表示, 台帳種別);
+	responseData.data = requestDiv;
+
+	return responseData;
     }
 
     /**
@@ -45,10 +52,10 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onChange_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-        handler.onChange(台帳種別表示);
-        return ResponseData.of(requestDiv).respond();
+	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
+	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
+	handler.onChange(台帳種別表示);
+	return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -59,26 +66,26 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onBeforeOpenDialog_shisetsu(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        JigyoshaMode mode = new JigyoshaMode();
+	JigyoshaMode mode = new JigyoshaMode();
 
-        if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
+	if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
+		&& !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
-            mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
-        }
+	    mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
+	}
 
-        if (!requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+	if (!requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
-            mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
-        }
+	    mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
+	}
 
-        if (!requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+	if (!requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
-            mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
-        }
+	    mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
+	}
 
-        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
-        return ResponseData.of(requestDiv).respond();
+	requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+	return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -89,12 +96,12 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onOkClose_btnSenTaKu(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+	JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
 
-        requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
-        requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
+	requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
+	requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
 
-        return ResponseData.of(requestDiv).respond();
+	return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -105,21 +112,21 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onBlur_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-        if (!requestDiv.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
+	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
+	RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
+	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
+	if (!requestDiv.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
 
-            handler.selectShiSeTuMeiSyo(台帳種別, 台帳種別表示);
-        } else {
+	    handler.selectShiSeTuMeiSyo(台帳種別, 台帳種別表示);
+	} else {
 
-            requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
-        }
+	    requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
+	}
 
-        return ResponseData.of(requestDiv).respond();
+	return ResponseData.of(requestDiv).respond();
     }
 
     private ShisetsuJohoHandler createHandlerOf(shisetsuJohoCommonChildDivDiv requestDiv) {
-        return new ShisetsuJohoHandler(requestDiv);
+	return new ShisetsuJohoHandler(requestDiv);
     }
 }
