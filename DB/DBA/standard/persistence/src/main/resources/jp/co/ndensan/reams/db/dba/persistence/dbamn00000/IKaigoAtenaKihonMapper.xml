@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.dbamn00000.IKaigoAtenaKihonMapper">
+
+    <resultMap id="kaigoAtenaKihon" type="jp.co.ndensan.reams.db.dba.entity.dbamn00000.KaigoAtenaKihonEntity" autoMapping="true">
+        <result column="hihokenshaNo" property="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"></result>
+        <result column="idoYMD" property="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="edaNo" property="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shichosonCode" property="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"></result>
+        <result column="idoJiyuCode" property="idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shikibetsuCode" property="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"></result>
+        <result column="shikakuShutokuJiyuCode" property="shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shikakuShutokuYMD" property="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="shikakuShutokuTodokedeYMD" property="shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="ichigoShikakuShutokuYMD" property="ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="hihokennshaKubunCode" property="hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shikakuSoshitsuJiyuCode" property="shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shikakuSoshitsuYMD" property="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="shikakuSoshitsuTodokedeYMD" property="shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="shikakuHenkoJiyuCode" property="shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="shikakuHenkoYMD" property="shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="shikakuHenkoTodokedeYMD" property="shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="jushochitokureiTekiyoJiyuCode" property="jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="jushochitokureiTekiyoYMD" property="jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="jushochitokureiTekiyoTodokedeYMD" property="chitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="jushochitokureiKaijoJiyuCode" property="jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="jushochitokureiKaijoYMD" property="jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="jushochitokureiKaijoTodokedeYMD" property="chitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="jushochiTokureiFlag" property="jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="koikinaiJushochiTokureiFlag" property="koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"></result>
+        <result column="koikinaiTokureiSochimotoShichosonCode" property="tokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"></result>
+        <result column="kyuShichosonCode" property="kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"></result>
+        <result column="logicalDeletedFlag" property="logicalDeletedFlag"></result>
+        <result column="yokaigoJotaiKubunCode" property="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"></result>
+        <result column="ninteiYukoKikanKaishiYMD" property="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="ninteiYukoKikanShuryoYMD" property="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+        <result column="ninteiYMD" property="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
+    </resultMap>
+
+    <select id="selectKaigoShikakuKihonByShikibetsuCode" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultMap="kaigoAtenaKihon"  fetchSize="500">
+        SELECT
+        DbT1001."hihokenshaNo",
+        DbT1001."idoYMD",
+        DbT1001."edaNo",
+        DbT1001."idoJiyuCode",
+        DbT1001."shichosonCode",
+        DbT1001."shikibetsuCode",
+        DbT1001."shikakuShutokuJiyuCode",
+        DbT1001."shikakuShutokuYMD",
+        DbT1001."shikakuShutokuTodokedeYMD",
+        DbT1001."ichigoShikakuShutokuYMD",
+        DbT1001."hihokennshaKubunCode",
+        DbT1001."shikakuSoshitsuJiyuCode",
+        DbT1001."shikakuSoshitsuYMD",
+        DbT1001."shikakuSoshitsuTodokedeYMD",
+        DbT1001."shikakuHenkoJiyuCode",
+        DbT1001."shikakuHenkoYMD",
+        DbT1001."shikakuHenkoTodokedeYMD",
+        DbT1001."jushochitokureiTekiyoJiyuCode",
+        DbT1001."jushochitokureiTekiyoYMD",
+        DbT1001."jushochitokureiTekiyoTodokedeYMD",
+        DbT1001."jushochitokureiKaijoJiyuCode",
+        DbT1001."jushochitokureiKaijoYMD",
+        DbT1001."jushochitokureiKaijoTodokedeYMD",
+        DbT1001."jushochiTokureiFlag",
+        DbT1001."koikinaiJushochiTokureiFlag",
+        DbT1001."koikinaiTokureiSochimotoShichosonCode",
+        DbT1001."kyuShichosonCode",
+        DbT1001."logicalDeletedFlag",
+        DbT4001."yokaigoJotaiKubunCode",
+        DbT4001."ninteiYukoKikanKaishiYMD",
+        DbT4001."ninteiYukoKikanShuryoYMD",
+        DbT4001."ninteiYMD"
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" DbT1001
+        LEFT JOIN rgdb."DbT4001JukyushaDaicho" DbT4001
+        ON  DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
+        AND DbT4001."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
+        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
+        AND DbT4001."ninteiYMD" IS NOT NULL
+        WHERE DbT1001."shikibetsuCode" = #{shikibetsuCode}
+        ORDER BY
+        DbT1001."hihokenshaNo",
+        DbT1001."idoYMD" DESC,
+        DbT1001."edaNo" DESC
+    </select>
+
+</mapper>
