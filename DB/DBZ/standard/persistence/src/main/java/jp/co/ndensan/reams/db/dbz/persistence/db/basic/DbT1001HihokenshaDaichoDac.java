@@ -110,8 +110,14 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 被保険者番号 被保険者番号
      * @param 取得日 取得日
      * @return 該当する被保険者台帳情報
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public List<DbT1001HihokenshaDaichoEntity> selectListHihokenshaNo(HihokenshaNo 被保険者番号, FlexibleDate 取得日) {
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> selectListHihokenshaNo(HihokenshaNo 被保険者番号,
+            FlexibleDate 取得日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
+
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -132,8 +138,13 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @param 識別コード 識別コード
      * @param 取得日 取得日
      * @return 該当する被保険者台帳情報
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public List<DbT1001HihokenshaDaichoEntity> selectListShikibetsuCode(ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+    public List<DbT1001HihokenshaDaichoEntity> selectListShikibetsuCode(ShikibetsuCode 識別コード,
+            FlexibleDate 取得日) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("取得日"));
+
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
