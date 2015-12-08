@@ -28,10 +28,6 @@ module DBZ {
                 return "onSelectByDeleteButton_dgJutoku";
             }
 
-            public static onBeforeClick_btnJutokuKakutei(): string {
-                return "onBeforeClick_btnJutokuKakutei";
-            }
-
             public static onClick_btnJutokuKakutei(): string {
                 return "onClick_btnJutokuKakutei";
             }
@@ -93,22 +89,6 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             }
 
-            public TekiyojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TekiyojiHokenshaJoho"));
-            }
-
-            public ddlTekiyojiSochimotoHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiSochimotoHokensha"));
-            }
-
-            public ddlTekiyojiKyuHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiKyuHokensha"));
-            }
-
-            public ddlTekiyojiJuminJoho(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiJuminJoho"));
-            }
-
             public JutokuKaijoInput(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("JutokuKaijoInput"));
             }
@@ -123,22 +103,6 @@ module DBZ {
 
             public ddlKaijoJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
-            }
-
-            public KaijojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("KaijojiHokenshaJoho"));
-            }
-
-            public ddlKaijojiSochimotoHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiSochimotoHokensha"));
-            }
-
-            public ddlKaijojiKyuHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiKyuHokensha"));
-            }
-
-            public ddlKaijojiJuminJono(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiJuminJono"));
             }
 
             public btnJutokuKakutei(): UZA.Button {
