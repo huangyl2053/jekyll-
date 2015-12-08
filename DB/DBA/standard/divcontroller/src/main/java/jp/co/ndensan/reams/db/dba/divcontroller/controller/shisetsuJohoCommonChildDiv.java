@@ -23,7 +23,7 @@ public class shisetsuJohoCommonChildDiv {
     /**
      * 施設情報初期化。<br/>
      *
-     * @param requestDiv 該当事業者一覧Div
+     * @param requestDiv 施設情報Div
      * @return レスポンス
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onLoad(shisetsuJohoCommonChildDivDiv requestDiv) {
