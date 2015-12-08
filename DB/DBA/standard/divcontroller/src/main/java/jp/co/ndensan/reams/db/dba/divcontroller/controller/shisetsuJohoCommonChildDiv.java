@@ -41,12 +41,14 @@ public class shisetsuJohoCommonChildDiv {
      * 施設情報に初期化を設定する。
      *
      * @param requestDiv 施設情報Div
+     * @return レスポンス
      */
-    public void onChange_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
+    public ResponseData<shisetsuJohoCommonChildDivDiv> onChange_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
 
         ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
         RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
         handler.onChange(台帳種別表示);
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
