@@ -42,7 +42,7 @@ public class SikakuJiyuShutoku {
         if (!new CodeShubetsu(コード種別_0126).equals(codeShubetsu)) {
 
             List<UzT0007CodeEntity> codeMasterlist = CodeMaster.getCode(codeShubetsu, kijunbi);
-            if (!codeMasterlist.isEmpty()) {
+            if (codeMasterlist != null && !codeMasterlist.isEmpty()) {
                 for (UzT0007CodeEntity list : codeMasterlist) {
                     ShikakuJiyuShutoku shikakuJiyuShutoku = new ShikakuJiyuShutoku();
                     shikakuJiyuShutoku.setCode(list.getコード());
@@ -56,7 +56,7 @@ public class SikakuJiyuShutoku {
         } else {
 
             List<UzT0007CodeEntity> codeMasterlist = CodeMaster.getCode(codeShubetsu, kijunbi);
-            if (!codeMasterlist.isEmpty()) {
+            if (codeMasterlist != null && !codeMasterlist.isEmpty()) {
                 for (UzT0007CodeEntity list : codeMasterlist) {
 
                     ShikakuJiyuShutoku 資格事由 = 資格事由取得(list, dounyuKeitaiCode, gappeiJohoKubun);
