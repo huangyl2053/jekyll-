@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護宛名基本情報を取得するクラスです。
@@ -38,6 +39,7 @@ public class KaigoAtenaKihonFinder {
      * @param 識別コード ShikibetsuCode
      * @return KaigoAtenaKihonFinderBusiness リスト
      */
+    @Transaction
     public List<KaigoAtenaKihonBusiness> getKaigoShikakuKihon(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
