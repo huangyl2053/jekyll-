@@ -4,8 +4,8 @@
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.jigyosha.JigyoshaInputGuideMapper">
  
     <resultMap id="resultMap_serviceJigyoshaInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
-        <!--<result property="jigyoshaNo" column="dbT7060Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KaigoJigyoshaNoTypeHandler" />-->
-        <result property="yukoKaishiYMD" column="dbT7060Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <id property="jigyoshaNo" column="dbT7060Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT7060Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT7060Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jigyoshaName" column="dbT7060Kaigo_jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="jigyoshaNameKana" column="dbT7060Kaigo_jigyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
@@ -13,12 +13,11 @@
         <result property="telNo" column="dbT7060Kaigo_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="serviceShuruiCode" column="dbT7063Kaigo_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="serviceShuruiRyakusho" column="dbT7130Kaigo_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="yubinNo" column="dbT7060Kaigo_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
    </resultMap>
          
     <resultMap id="resultMap_tekiyoJogaiInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
-        <!--<result property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->
-        <result property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -26,8 +25,8 @@
     </resultMap>
     
    <resultMap id="resultMap_otherTokureiInputGuideEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
-        <!--<result property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />-->
-        <result property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <id property="jigyoshaNo" column="dbT1005Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
+        <id property="yukoKaishiYMD" column="dbT1005Kaigo_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="yukoShuryoYMD" column="dbT1005Kaigo_yukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jigyoshaKanaMeisho" column="dbT1005Kaigo_jigyoshaKanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="jigyoshaKanaJusho" column="dbT1005Kaigo_jigyoshaKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

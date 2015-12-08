@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.business.core.jigyosha;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護事業者施設オブジェクトの項目定義クラスです。
  */
-public class ServiceJigyoshaInputGuide  implements Serializable {
+public class ServiceJigyoshaInputGuide implements Serializable {
 
     private final ServiceJigyoshaInputGuideRelateEntity entity;
 

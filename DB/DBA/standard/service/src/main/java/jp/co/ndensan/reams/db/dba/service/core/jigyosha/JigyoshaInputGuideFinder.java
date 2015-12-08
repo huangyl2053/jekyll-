@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -138,7 +139,7 @@ public class JigyoshaInputGuideFinder {
      * @param params JigyoshaInputGuideParameter
      * @return List<ServiceJigyoshaInputGuide> サービス事業者取得リスト
      */
-    public List<ServiceJigyoshaInputGuide> getServiceJigyoshaInputGuide(JigyoshaInputGuideParameter params) {
+    public SearchResult<ServiceJigyoshaInputGuide> getServiceJigyoshaInputGuide(JigyoshaInputGuideParameter params) {
         JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
         List<ServiceJigyoshaInputGuideRelateEntity> サービス事業者取得リスト = jigyoshaInputGuideMapper.getServiceJigyoshaInputGuide(params);
         if (サービス事業者取得リスト == null || サービス事業者取得リスト.isEmpty()) {
@@ -148,7 +149,7 @@ public class JigyoshaInputGuideFinder {
         for (ServiceJigyoshaInputGuideRelateEntity entity : サービス事業者取得リスト) {
             serviceJigyoshaList.add(new ServiceJigyoshaInputGuide(entity));
         }
-        return serviceJigyoshaList;
+        return SearchResult.of(serviceJigyoshaList, serviceJigyoshaList.size(), (params.getLimitCount() < serviceJigyoshaList.size()));
 
     }
 
