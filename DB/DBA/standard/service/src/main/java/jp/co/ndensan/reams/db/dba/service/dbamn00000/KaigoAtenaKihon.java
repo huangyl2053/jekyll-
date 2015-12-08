@@ -45,15 +45,15 @@ public class KaigoAtenaKihon {
         if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
             throw new RuntimeException();
         }
-        HihokenshaNo hihokenshaNo = HihokenshaNo.EMPTY;
-        List<KaigoAtenaKihonBusiness> business = new ArrayList<>();
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        List<KaigoAtenaKihonBusiness> 介護資格基本情報 = new ArrayList<>();
         for (KaigoAtenaKihonEntity entity : kaigoAtenaKihonList) {
-            if (hihokenshaNo.equals(entity.getHihokenshaNo())) {
+            if (被保険者番号.equals(entity.getHihokenshaNo())) {
                 continue;
             }
-            business.add(new KaigoAtenaKihonBusiness(entity));
-            hihokenshaNo = entity.getHihokenshaNo();
+            介護資格基本情報.add(new KaigoAtenaKihonBusiness(entity));
+            被保険者番号 = entity.getHihokenshaNo();
         }
-        return business;
+        return 介護資格基本情報;
     }
 }
