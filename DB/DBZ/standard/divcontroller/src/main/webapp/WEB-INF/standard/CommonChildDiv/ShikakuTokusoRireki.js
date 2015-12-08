@@ -54,9 +54,11 @@ var DBZ;
                 }
                 DisplayType.prototype.shokai = function () {
                     this.controls.dgShikakuShutokuRireki().readOnly = false;
+                    this.controls.btnAddShikakuShutoku().displayNone = true;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                     gridSetting.columns[0].visible = false;
+                    gridSetting.columns[18].visible = true;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
@@ -67,14 +69,16 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
-                DisplayType.prototype.toroku = function () {
+                DisplayType.prototype.shutoku = function () {
                     this.controls.dgShikakuShutokuRireki().readOnly = false;
+                    this.controls.btnAddShikakuShutoku().displayNone = false;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.columns[18].visible = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgShikakuShutokuRireki().width;
 
@@ -83,12 +87,31 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
+                DisplayType.prototype.soshitsu = function () {
+                    this.controls.dgShikakuShutokuRireki().readOnly = false;
+                    this.controls.btnAddShikakuShutoku().displayNone = true;
+
+                    var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
+
+                    gridSetting.columns[0].visible = true;
+                    gridSetting.columns[18].visible = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+
+                    this.controls.dgShikakuShutokuRireki().width;
+
+                    this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
                 DisplayType.prototype.teiseitoroku = function () {
                     this.controls.dgShikakuShutokuRireki().readOnly = false;
+                    this.controls.btnAddShikakuShutoku().displayNone = false;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
+                    gridSetting.columns[18].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
