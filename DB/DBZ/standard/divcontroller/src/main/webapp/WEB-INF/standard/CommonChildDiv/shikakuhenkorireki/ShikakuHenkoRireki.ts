@@ -75,6 +75,7 @@ module DBZ {
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = false;
+                    gridSetting.columns[8].visible = true;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
@@ -89,6 +90,7 @@ module DBZ {
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = true;
+                    gridSetting.columns[8].visible = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
@@ -103,6 +105,7 @@ module DBZ {
                     var gridSetting = this.controls.dgHenko().gridSetting;
 
                     gridSetting.columns[0].visible = true;
+                    gridSetting.columns[8].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
