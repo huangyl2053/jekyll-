@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 被保険者台帳マスタを管理するクラスです。
+ * 住所地特例一覧データ取得するクラスです。
  */
 public class JushotiTokureiFinder {
 
