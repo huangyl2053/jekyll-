@@ -174,7 +174,7 @@ public class KoseiShichosonMasterManager {
      * @return ユーザ判定フラグ ( 市町村識別コードは’00’と合併旧市町村区分　＝'0'の場合true,
      * 合併旧市町村区分＝'0'以外の場合false)
      */
-    public boolean shichosonUserHandan(KoseiShichosonMasterMapperParameter parameter) {
+    public boolean isShichosonUserHandan(KoseiShichosonMasterMapperParameter parameter) {
         DbT7051KoseiShichosonMasterEntity entity = 構成市町村マスタDac.shichosonUserHandan(parameter.getShichosonShokibetsuID());
 
         return 市町村識別コード.equals(entity.getShichosonShokibetsuID())
@@ -260,7 +260,7 @@ public class KoseiShichosonMasterManager {
      * @param 市町村コード LasdecCode
      * @return 検索結果フラグ (検索結果がある場合true,検索結果がない場合false)
      */
-    public boolean shichosonSonzaiHandan(RString 市町村コード) {
+    public boolean isShichosonSonzaiHandan(RString 市町村コード) {
         DbT7051KoseiShichosonMasterEntity entity = 構成市町村マスタDac.shichosonSonzaiHandan(市町村コード);
         return null != entity;
     }
