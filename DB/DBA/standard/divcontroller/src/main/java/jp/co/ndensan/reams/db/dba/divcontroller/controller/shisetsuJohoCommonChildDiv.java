@@ -24,122 +24,118 @@ public class shisetsuJohoCommonChildDiv {
     /**
      * 施設情報初期化。<br/>
      *
-     * @param requestDiv 施設情報Div
-     * @return レスポンス
+     * @param requestDiv shisetsuJohoCommonChildDivDiv
+     * @return ResponseData<shisetsuJohoCommonChildDivDiv>
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onLoad(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-	ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
+        ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
 
-	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-	RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
+        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
+        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
 
-	if (台帳種別表示 == null) {
+        if (台帳種別表示 == null) {
 
-	    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-	}
-	handler.load(台帳種別表示, 台帳種別);
-	responseData.data = requestDiv;
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
+        getHandler(requestDiv).load(台帳種別表示, 台帳種別);
+        responseData.data = requestDiv;
 
-	return responseData;
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
      * 施設情報に初期化を設定する。
      *
-     * @param requestDiv 施設情報Div
-     * @return レスポンス
+     * @param requestDiv shisetsuJohoCommonChildDivDiv
+     * @return ResponseData<shisetsuJohoCommonChildDivDiv>
      */
-    public ResponseData<shisetsuJohoCommonChildDivDiv> onChange_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
+    public ResponseData<shisetsuJohoCommonChildDivDiv> onChange_daichoShubetsu(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-	handler.onChange(台帳種別表示);
-	return ResponseData.of(requestDiv).respond();
+        getHandler(requestDiv).onChange();
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
      * 入所施設検索。<br/>
      *
-     * @param requestDiv 施設情報Div
-     * @return レスポンス
+     * @param requestDiv shisetsuJohoCommonChildDivDiv
+     * @return ResponseData<shisetsuJohoCommonChildDivDiv>
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onBeforeOpenDialog_shisetsu(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-	JigyoshaMode mode = new JigyoshaMode();
+        JigyoshaMode mode = new JigyoshaMode();
 
-	if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
-		&& !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
+        if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
+                && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
-	    mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
-	}
+            mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
+        }
 
-	if (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() != null
-		&& !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+        if (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() != null
+                && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
-	    mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
-	}
+            mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
+        }
 
-	if (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
-		&& !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+        if (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
+                && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
-	    mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
-	}
+            mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
+        }
 
-	if ((requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() == null
-		|| requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
-		&& (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
-		|| requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
-		&& (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
-		|| requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
+        if ((requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() == null
+                || requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
+                && (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
+                || requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
+                && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
+                || requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
 
-	    mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getCode());
-	}
+            mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getCode());
+        }
 
-	requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
-	return ResponseData.of(requestDiv).respond();
+        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
      * 事業者・施設入力ガイドのOKClose時の処理を行います。<br/>
      *
-     * @param requestDiv 施設情報Div
-     * @return レスポンス
+     * @param requestDiv shisetsuJohoCommonChildDivDiv
+     * @return ResponseData<shisetsuJohoCommonChildDivDiv>
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onOkClose_btnSenTaKu(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-	JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
 
-	requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
-	requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
+        requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
+        requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
 
-	return ResponseData.of(requestDiv).respond();
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
      * 施設情報のonBlur時の処理を行います。<br/>
      *
-     * @param requestDiv 施設情報Div
-     * @return レスポンス
+     * @param requestDiv shisetsuJohoCommonChildDivDiv
+     * @return ResponseData<shisetsuJohoCommonChildDivDiv>
      */
-    public ResponseData<shisetsuJohoCommonChildDivDiv> onBlur_btn(shisetsuJohoCommonChildDivDiv requestDiv) {
+    public ResponseData<shisetsuJohoCommonChildDivDiv> onBlur_nyuryokuShisetsuKodo(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-	ShisetsuJohoHandler handler = createHandlerOf(requestDiv);
-	RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-	if (!requestDiv.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
+        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
+        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
+        if (!requestDiv.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
 
-	    handler.selectShiSeTuMeiSyo(台帳種別, 台帳種別表示);
-	} else {
+            getHandler(requestDiv).selectShiSeTuMeiSyo(台帳種別, 台帳種別表示);
+        } else {
 
-	    requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
-	}
+            requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
+        }
 
-	return ResponseData.of(requestDiv).respond();
+        return ResponseData.of(requestDiv).respond();
     }
 
-    private ShisetsuJohoHandler createHandlerOf(shisetsuJohoCommonChildDivDiv requestDiv) {
-	return new ShisetsuJohoHandler(requestDiv);
+    private ShisetsuJohoHandler getHandler(shisetsuJohoCommonChildDivDiv requestDiv) {
+        return new ShisetsuJohoHandler(requestDiv);
     }
 }

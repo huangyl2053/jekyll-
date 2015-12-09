@@ -4,12 +4,12 @@ var DBA;
         var Events = (function () {
             function Events() {
             }
-            Events.onChange_btn = function () {
-                return "onChange_btn";
+            Events.onChange_daichoShubetsu = function () {
+                return "onChange_daichoShubetsu";
             };
 
-            Events.onBlur_btn = function () {
-                return "onBlur_btn";
+            Events.onBlur_nyuryokuShisetsuKodo = function () {
+                return "onBlur_nyuryokuShisetsuKodo";
             };
 
             Events.onOkClose_btnSenTaKu = function () {

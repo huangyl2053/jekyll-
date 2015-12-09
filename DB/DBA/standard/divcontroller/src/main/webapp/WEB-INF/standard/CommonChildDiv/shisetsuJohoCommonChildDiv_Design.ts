@@ -8,12 +8,12 @@ module DBA {
 
         export class Events {
 
-            public static onChange_btn(): string {
-                return "onChange_btn";
+            public static onChange_daichoShubetsu(): string {
+                return "onChange_daichoShubetsu";
             }
 
-            public static onBlur_btn(): string {
-                return "onBlur_btn";
+            public static onBlur_nyuryokuShisetsuKodo(): string {
+                return "onBlur_nyuryokuShisetsuKodo";
             }
 
             public static onOkClose_btnSenTaKu(): string {
