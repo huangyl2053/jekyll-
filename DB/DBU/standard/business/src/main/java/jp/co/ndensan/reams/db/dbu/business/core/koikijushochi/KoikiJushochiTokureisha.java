@@ -9,25 +9,46 @@ import jp.co.ndensan.reams.db.dbx.definition.core.kensakuseigyo.KoikinaiJushochi
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
- * @author soft863
+ * 広住特者住民コードSQL取得するクラスです
  */
 public class KoikiJushochiTokureisha {
 
+    private static final RString 措置元 = new RString("1");
+    private static final RString 措置先 = new RString("2");
+    private static final RString 両方 = new RString("3");
+
     /**
+     * 広住特者住民コードSQL取得
      *
      * @param 市町村コード ShichosonCode
-     *
      * @return KoikinaiJutokuTaishoshaSql
      */
     public KoikinaiJutokuTaishoshaSql getShikibetsuCodeSql(LasdecCode 市町村コード) {
 
         RString value = BusinessConfig.get(KoikinaiJushochitokureiKensakuSeigyo.広域内住所地特例者検索制御_措置元_措置先区分_介護共通, SubGyomuCode.DBU介護統計報告);
+        KoikinaiJutokuTaishoshaSql koikinaiJutokuTaishoshaSql = new KoikinaiJutokuTaishoshaSql();
 
-        StringBuffer sb1 = new StringBuffer("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
+        if (措置元.equals(value)) {
+            koikinaiJutokuTaishoshaSql.set対象者SQL1(getSQL被保険者台帳の市町村コード取得(市町村コード));
+            koikinaiJutokuTaishoshaSql.set対象者SQL2(getSQL被保険者台帳の措置元市町村コード取得(市町村コード));
+        } else if (措置先.equals(value)) {
+            koikinaiJutokuTaishoshaSql.set対象者SQL1(getSQL被保険者台帳の市町村コード取得(市町村コード));
+            koikinaiJutokuTaishoshaSql.set対象者SQL2(getSQL被保険者台帳の市町村コード取得(市町村コード));
+        } else if (両方.equals(value)) {
+            koikinaiJutokuTaishoshaSql.set対象者SQL1(getSQL被保険者台帳の市町村コード取得(市町村コード));
+            koikinaiJutokuTaishoshaSql.set対象者SQL2(getSQL両方取得(市町村コード));
+        }
+        return koikinaiJutokuTaishoshaSql;
+    }
+
+    private RString getSQL被保険者台帳の市町村コード取得(LasdecCode 市町村コード) {
+
+        RStringBuilder sb1 = new RStringBuilder("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
         sb1.append("FROM rgdb.\"DbT1001HihokenshaDaicho\" DbT1001HihokenshaDaicho,");
         sb1.append("(SELECT HihokenshaDaichoA.\"hihokenshaNo\"");
         sb1.append(", MAX(HihokenshaDaichoA.\"idoYMD\" || HihokenshaDaichoA.\"edaNo\") AS \"maxEdaMo\" ");
@@ -38,9 +59,14 @@ public class KoikiJushochiTokureisha {
         sb1.append("AND DbT1001HihokenshaDaicho.\"idoYMD\" || DbT1001HihokenshaDaicho.\"edaNo\"=HihokenshaDaichoT.\"maxEdaMo\" ");
         sb1.append("AND DbT1001HihokenshaDaicho.\"koikinaiJushochiTokureiFlag\"= '1' ");
         sb1.append("AND DbT1001HihokenshaDaicho.\"shichosonCode\" = ");
-        sb1.append(市町村コード.toString());
+        sb1.append("'" + 市町村コード.toString() + "'");
 
-        StringBuffer sb2 = new StringBuffer("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
+        return sb1.toRString();
+    }
+
+    private RString getSQL被保険者台帳の措置元市町村コード取得(LasdecCode 市町村コード) {
+
+        RStringBuilder sb2 = new RStringBuilder("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
         sb2.append("FROM rgdb.\"DbT1001HihokenshaDaicho\" DbT1001HihokenshaDaicho, ");
         sb2.append("(SELECT HihokenshaDaichoA.\"hihokenshaNo\"");
         sb2.append(", MAX(HihokenshaDaichoA.\"idoYMD\" || HihokenshaDaichoA.\"edaNo\") AS \"maxEdaMo\" ");
@@ -51,9 +77,13 @@ public class KoikiJushochiTokureisha {
         sb2.append("AND DbT1001HihokenshaDaicho.\"idoYMD\" || DbT1001HihokenshaDaicho.\"edaNo\"=HihokenshaDaichoT.\"maxEdaMo\" ");
         sb2.append("AND DbT1001HihokenshaDaicho.\"koikinaiJushochiTokureiFlag\"= '1' ");
         sb2.append("AND DbT1001HihokenshaDaicho.\"koikinaiTokureiSochimotoShichosonCode\" = ");
-        sb2.append(市町村コード.toString());
+        sb2.append("'" + 市町村コード.toString() + "'");
 
-        StringBuffer sb3 = new StringBuffer("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
+        return sb2.toRString();
+    }
+
+    private RString getSQL両方取得(LasdecCode 市町村コード) {
+        RStringBuilder sb3 = new RStringBuilder("SELECT DbT1001HihokenshaDaicho.\"shikibetsuCode\" ");
         sb3.append("FROM rgdb.\"DbT1001HihokenshaDaicho\" DbT1001HihokenshaDaicho, ");
         sb3.append("(SELECT HihokenshaDaichoA.\"hihokenshaNo\" ");
         sb3.append(", MAX(HihokenshaDaichoA.\"idoYMD\" || HihokenshaDaichoA.\"edaNo\") AS \"maxEdaMo\" ");
@@ -64,31 +94,11 @@ public class KoikiJushochiTokureisha {
         sb3.append("AND DbT1001HihokenshaDaicho.\"idoYMD\" || DbT1001HihokenshaDaicho.\"edaNo\"=HihokenshaDaichoT.\"maxEdaMo\" ");
         sb3.append("AND DbT1001HihokenshaDaicho.\"koikinaiJushochiTokureiFlag\"= '1' ");
         sb3.append("AND (DbT1001HihokenshaDaicho.\"koikinaiTokureiSochimotoShichosonCode\" = ");
-        sb3.append(市町村コード.toString());
+        sb3.append("'" + 市町村コード.toString() + "'");
         sb3.append(" OR DbT1001HihokenshaDaicho.\"shichosonCode\" = ");
-        sb3.append(市町村コード.toString());
+        sb3.append("'" + 市町村コード.toString() + "'");
         sb3.append(")");
 
-        KoikinaiJutokuTaishoshaSql koikinaiJutokuTaishoshaSql = new KoikinaiJutokuTaishoshaSql();
-
-        if (new RString("1").equals(value)) {
-
-            koikinaiJutokuTaishoshaSql.set対象者SQL1(new RString(sb1.toString()));
-            koikinaiJutokuTaishoshaSql.set対象者SQL2(new RString(sb2.toString()));
-
-        } else if (new RString("2").equals(value)) {
-
-            koikinaiJutokuTaishoshaSql.set対象者SQL1(new RString(sb1.toString()));
-            koikinaiJutokuTaishoshaSql.set対象者SQL2(new RString(sb1.toString()));
-
-        } else if (new RString("3").equals(value)) {
-
-            koikinaiJutokuTaishoshaSql.set対象者SQL1(new RString(sb1.toString()));
-            koikinaiJutokuTaishoshaSql.set対象者SQL2(new RString(sb3.toString()));
-        }
-
-        return koikinaiJutokuTaishoshaSql;
-
+        return sb3.toRString();
     }
-
 }

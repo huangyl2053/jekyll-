@@ -28,13 +28,14 @@
          "DbT5208NinteichosahyoServiceJokyoFlag"."updateCount" as "dbT5208NinteichosahyoServiceJokyoFlag_updateCount",
          "DbT5208NinteichosahyoServiceJokyoFlag"."lastUpdateTimestamp" as "dbT5208NinteichosahyoServiceJokyoFlag_lastUpdateTimestamp",
          "DbT5208NinteichosahyoServiceJokyoFlag"."lastUpdateReamsLoginId" as "dbT5208NinteichosahyoServiceJokyoFlag_lastUpdateReamsLoginId",
-         "DbT5208NinteichosahyoServiceJokyoFlag"."serviceJokyo" as "dbT5208NinteichosahyoServiceJokyoFlag_serviceJokyo"
+         "DbT5208NinteichosahyoServiceJokyoFlag"."koroshoIfShikibetsuCode" as "dbT5208NinteichosahyoServiceJokyoFlag_koroshoIfShikibetsuCode",
+         "DbT5208NinteichosahyoServiceJokyoFlag"."serviceJokyoFlag" as "dbT5208NinteichosahyoServiceJokyoFlag_serviceJokyoFlag"
     </sql>
 
 
     <!--テーブルDbT5208NinteichosahyoServiceJokyoFlagの項目をDbT5208NinteichosahyoServiceJokyoFlagEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5208NinteichosahyoServiceJokyoFlagEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5208NinteichosahyoServiceJokyoFlag_shinseishoKanriNo" />
+        <id property="shinseishoKanriNo" column="dbT5208NinteichosahyoServiceJokyoFlag_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT5208NinteichosahyoServiceJokyoFlag_ninteichosaRirekiNo" />
         <id property="remban" column="dbT5208NinteichosahyoServiceJokyoFlag_remban" />
         <result property="insertDantaiCd" column="dbT5208NinteichosahyoServiceJokyoFlag_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -45,7 +46,8 @@
         <result property="updateCount" column="dbT5208NinteichosahyoServiceJokyoFlag_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5208NinteichosahyoServiceJokyoFlag_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5208NinteichosahyoServiceJokyoFlag_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="serviceJokyo" column="dbT5208NinteichosahyoServiceJokyoFlag_serviceJokyo" />
+        <result property="koroshoIfShikibetsuCode" column="dbT5208NinteichosahyoServiceJokyoFlag_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="serviceJokyoFlag" column="dbT5208NinteichosahyoServiceJokyoFlag_serviceJokyoFlag" />
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5208NinteichosahyoServiceJokyoFlagEntity">
     SELECT

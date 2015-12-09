@@ -122,8 +122,8 @@ public class NinteichosahyoServiceJokyoFlagTest extends DbzTestBase {
         }
 
         @Test
-        public void getサービスの状況は_entityが持つサービスの状況を返す() {
-            assertThat(sut.getサービスの状況(), is(NinteichosahyoServiceJokyoFlagEntity.getServiceJokyo()));
+        public void getサービスの状況フラグは_entityが持つサービスの状況を返す() {
+            assertThat(sut.getサービスの状況フラグ(), is(NinteichosahyoServiceJokyoFlagEntity.getServiceJokyoFlag()));
         }
     }
 

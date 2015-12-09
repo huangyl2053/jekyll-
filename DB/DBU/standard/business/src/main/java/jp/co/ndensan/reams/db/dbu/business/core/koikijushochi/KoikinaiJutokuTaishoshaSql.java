@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbu.business.core.koikijushochi;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * @author soft863
+ * 広住特者住民コードSQL取得のビジュネスクラス
  */
 public class KoikinaiJutokuTaishoshaSql {
 
@@ -27,7 +26,9 @@ public class KoikinaiJutokuTaishoshaSql {
     }
 
     /**
-     * @param 対象者SQL1 the 対象者SQL1 to set
+     * 対象者SQL1のsetメソッドです
+     *
+     * @param 対象者SQL1 RString
      */
     public void set対象者SQL1(RString 対象者SQL1) {
         this.対象者SQL1 = 対象者SQL1;
@@ -43,7 +44,9 @@ public class KoikinaiJutokuTaishoshaSql {
     }
 
     /**
-     * @param 対象者SQL2 the 対象者SQL2 to set
+     * 対象者SQL2のsetメソッドです
+     *
+     * @param 対象者SQL2 RString
      */
     public void set対象者SQL2(RString 対象者SQL2) {
         this.対象者SQL2 = 対象者SQL2;

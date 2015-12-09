@@ -73,14 +73,14 @@ public class NinteichosahyoServiceJokyoFlagBuilder {
     }
 
     /**
-     * サービスの状況を設定します。
+     * サービスの状況フラグを設定します。
      *
-     * @param サービスの状況 サービスの状況
+     * @param サービスの状況フラグ サービスの状況フラグ
      * @return {@link NinteichosahyoServiceJokyoFlagBuilder}
      */
-    public NinteichosahyoServiceJokyoFlagBuilder setサービスの状況(int サービスの状況) {
-        requireNonNull(サービスの状況, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況"));
-        entity.setServiceJokyo(サービスの状況);
+    public NinteichosahyoServiceJokyoFlagBuilder setサービスの状況フラグ(boolean サービスの状況フラグ) {
+        requireNonNull(サービスの状況フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスの状況フラグ"));
+        entity.setServiceJokyoFlag(サービスの状況フラグ);
         return this;
     }
 

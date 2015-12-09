@@ -11,9 +11,11 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMa
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.ridatsuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,6 +25,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -116,4 +119,126 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
+    /**
+     * 合併前の旧市町村と最新の広域構成市町村を含む全部市町村情報を取得します。
+     *
+     * @return List<DbT7051KoseiShichosonMasterEntity> 全部市町村情報
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> zenShichosonJoho() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(or(
+                                eq(gappeiKyuShichosonKubun, '0'),
+                                eq(gappeiKyuShichosonKubun, '1'))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 最新の広域構成市町村を含む現市町村情報を取得します。
+     *
+     * @return List<DbT7051KoseiShichosonMasterEntity> 現市町村情報
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> genShichosonJoho() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(gappeiKyuShichosonKubun, '0')).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 構成市町村リスト情報を取得します。
+     *
+     * @return List<KoseiShichoson> 構成市町村リスト情報のリスト
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> koseiShichosonList() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(gappeiKyuShichosonKubun, '0')).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 構成市町村ユーザ判定のエンティティを取得します。
+     *
+     *
+     * @param 識別ID 市町村識別ID
+     * @return DbT7051KoseiShichosonMasterEntity 構成市町村マスタテーブルのエンティティ
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity shichosonUserHandan(RString 識別ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbT7051KoseiShichosonMasterEntity entity = accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shichosonShokibetsuID, 識別ID)).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
+        return entity;
+    }
+
+    /**
+     * ログインユーザーの属する市町村情報を取得します。
+     *
+     * @param 識別ID 市町村識別ID
+     * @return List<DbT7051KoseiShichosonMasterEntity> ログインユーザーの属する市町村のリスと
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> loginUserShichosonJoho(RString 識別ID) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                // TODO 凌護行　「市町村識別コード」がない、QA回答まち。
+                where(or(
+                                eq(shichosonCode, "00"),
+                                (and(eq(shichosonShokibetsuID, 識別ID),
+                                        eq(gappeiKyuShichosonKubun, "0")
+                                )))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 指定された市町村コードの市町村が広域内の構成市町村エンティティを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return entity 構成市町村マスタテーブルのエンティティ
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity shichosonSonzaiHandan(RString 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbT7051KoseiShichosonMasterEntity entity = accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(
+                                eq(shichosonShokibetsuID, 市町村コード),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
+        return entity;
+
+    }
+
+    /**
+     * 市町村コードによる市町村情報の検索します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスと
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shichosonCode, 市町村コード),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
 }

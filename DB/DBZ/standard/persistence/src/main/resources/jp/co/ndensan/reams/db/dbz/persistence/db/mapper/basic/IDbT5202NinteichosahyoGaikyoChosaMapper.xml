@@ -39,7 +39,6 @@
         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoCode" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode",
         "DbT5202NinteichosahyoGaikyoChosa"."chosaJisshiBashoMeisho" as "dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho",
         "DbT5202NinteichosahyoGaikyoChosa"."jisshiBashoImageSharedFileId" as "dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId",
-        "DbT5202NinteichosahyoGaikyoChosa"."genzainoJokyoCode" as "dbT5202NinteichosahyoGaikyoChosa_genzainoJokyoCode",
         "DbT5202NinteichosahyoGaikyoChosa"."serviceKubunCode" as "dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuShimei" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei",
         "DbT5202NinteichosahyoGaikyoChosa"."riyoShisetsuJusho" as "dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho",
@@ -79,7 +78,6 @@
         <result property="chosaJisshiBashoCode" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chosaJisshiBashoMeisho" column="dbT5202NinteichosahyoGaikyoChosa_chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jisshiBashoImageSharedFileId" column="dbT5202NinteichosahyoGaikyoChosa_jisshiBashoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="genzainoJokyoCode" column="dbT5202NinteichosahyoGaikyoChosa_genzainoJokyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="serviceKubunCode" column="dbT5202NinteichosahyoGaikyoChosa_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="riyoShisetsuShimei" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="riyoShisetsuJusho" column="dbT5202NinteichosahyoGaikyoChosa_riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
