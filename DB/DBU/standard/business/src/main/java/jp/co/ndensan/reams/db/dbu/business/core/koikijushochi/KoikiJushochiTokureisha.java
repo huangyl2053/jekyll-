@@ -75,7 +75,7 @@ public class KoikiJushochiTokureisha {
         sb2.append("GROUP BY HihokenshaDaichoA.\"hihokenshaNo\" ) HihokenshaDaichoT ");
         sb2.append("WHERE DbT1001HihokenshaDaicho.\"hihokenshaNo\" = HihokenshaDaichoT.\"hihokenshaNo\" ");
         sb2.append("AND DbT1001HihokenshaDaicho.\"idoYMD\" || DbT1001HihokenshaDaicho.\"edaNo\"=HihokenshaDaichoT.\"maxEdaMo\" ");
-        sb2.append("AND DbT1001HihokenshaDaicho.\"koikinaiJushochiTokureiFl ag\"= '1' ");
+        sb2.append("AND DbT1001HihokenshaDaicho.\"koikinaiJushochiTokureiFlag\"= '1' ");
         sb2.append("AND DbT1001HihokenshaDaicho.\"koikinaiTokureiSochimotoShichosonCode\" = ");
         sb2.append("'" + 市町村コード.toString() + "'");
 
