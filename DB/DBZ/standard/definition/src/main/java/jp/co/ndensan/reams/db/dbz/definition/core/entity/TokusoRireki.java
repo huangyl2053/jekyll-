@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.definition.core.entity;
+package jp.co.ndensan.reams.db.dbz.definition.core.entity;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
