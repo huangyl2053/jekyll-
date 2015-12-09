@@ -6,11 +6,10 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss.hihokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss.rirekiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss.taishoYM;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.taishoYM;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -28,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 予防給付計画自己作成短期利用日数のデータアクセスクラスです。
  */
 public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
-        implements ISaveable<DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity> {
+        implements ISaveable<DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -43,7 +42,7 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity selectByKey(
+    public DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号) throws NullPointerException {
@@ -54,12 +53,12 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss.class).
+                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoYM, 対象年月),
                                 eq(rirekiNo, 履歴番号))).
-                toObject(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class);
+                toObject(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class);
     }
 
     /**
@@ -68,12 +67,12 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
      * @return List<DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity>
      */
     @Transaction
-    public List<DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity> selectAll() {
+    public List<DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss.class).
-                toList(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity.class);
+                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class).
+                toList(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class);
     }
 
     /**
@@ -84,7 +83,7 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
      */
     @Transaction
     @Override
-    public int save(DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNissEntity entity) {
+    public int save(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成短期利用日数エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);

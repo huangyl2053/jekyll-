@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.basic;
+package jp.co.ndensan.reams.db.dbc.service.core.kyotakukeika.yobokeikakujikosakuseigokei;
 
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.YoboKeikakuJikoSakuseiGokei;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.yobokeikakujikosakuseigokei.YoboKeikakuJikoSakuseiGokei;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3012YoboKeikakuJikoSakuseiGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -47,17 +47,17 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
     /**
      * 主キーに合致する予防給付計画自己作成合計を返します。
      *
-     * @param 被保険者番号 HihokenshaNo
-     * @param 対象年月 TaishoYM
-     * @param 履歴番号 RirekiNo
-     * @param 居宅サービス区分 KyotakuServiceKubun
-     * @param サービス提供事業者番号 ServiceTeikyoJigyoshaNo
-     * @param サービス種類コード ServiceShuruiCode
+     * @param 被保険者番号 被保険者番号
+     * @param 対象年月 対象年月
+     * @param 履歴番号 履歴番号
+     * @param 居宅サービス区分 居宅サービス区分
+     * @param サービス提供事業者番号 サービス提供事業者番号
+     * @param サービス種類コード サービス種類コード
      * @return YoboKeikakuJikoSakuseiGokei
      */
     @Transaction
     public YoboKeikakuJikoSakuseiGokei get予防給付計画自己作成合計(
-            HihokenshaNo 被保険者番号,
+             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
             Decimal 履歴番号,
             RString 居宅サービス区分,
@@ -70,33 +70,33 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
         requireNonNull(サービス提供事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
 
-//        DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
-//                被保険者番号,
-//                対象年月,
-//                履歴番号,
-//                居宅サービス区分,
-//                サービス提供事業者番号,
-//                サービス種類コード);
-//        if (entity == null) {
-//            return null;
-//        }
-//        entity.initializeMd5();
-        return new YoboKeikakuJikoSakuseiGokei(new DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity());
+        DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity = dac.selectByKey(
+                被保険者番号,
+                対象年月,
+                履歴番号,
+                居宅サービス区分,
+                サービス提供事業者番号,
+                サービス種類コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new YoboKeikakuJikoSakuseiGokei(entity);
     }
 
     /**
      * 予防給付計画自己作成合計を全件返します。
      *
-     * @return List<YoboKeikakuJikoSakuseiGokei>
+     * @return YoboKeikakuJikoSakuseiGokeiの{@code list}
      */
     @Transaction
     public List<YoboKeikakuJikoSakuseiGokei> get予防給付計画自己作成合計一覧() {
         List<YoboKeikakuJikoSakuseiGokei> businessList = new ArrayList<>();
 
-//        for (DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
-//            entity.initializeMd5();
-//            businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
-//        }
+        for (DbT3012YoboKeikakuJikoSakuseiGokeiEntity entity : dac.selectAll()) {
+            entity.initializeMd5();
+            businessList.add(new YoboKeikakuJikoSakuseiGokei(entity));
+        }
 
         return businessList;
     }
@@ -113,7 +113,6 @@ public class YoboKeikakuJikoSakuseiGokeiManager {
         if (!予防給付計画自己作成合計.hasChanged()) {
             return false;
         }
-//        return 1 == dac.save(予防給付計画自己作成合計.toEntity());
-        return false;
+        return 1 == dac.save(予防給付計画自己作成合計.toEntity());
     }
 }
