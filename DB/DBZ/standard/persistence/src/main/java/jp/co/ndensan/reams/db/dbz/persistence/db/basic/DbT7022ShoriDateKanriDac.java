@@ -105,4 +105,24 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 処理日付管理マスタテーブルから、抽出期間情報を取得する。
+     *
+     * @return DbT7022ShoriDateKanriEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity selectTaishoYMD() throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(subGyomuCode, "DBU"),
+                                eq(shoriName, "介護住民票個別事項連携情報作成【他社住基】"),
+                                eq(shoriEdaban, "0000"))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }
