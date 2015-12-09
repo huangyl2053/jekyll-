@@ -70,7 +70,6 @@ public final class DbT5202NinteichosahyoGaikyoChosaEntityGenerator {
         entity.setChosaJisshiBashoCode(DEFAULT_認定調査実施場所コード);
         entity.setChosaJisshiBashoMeisho(DEFAULT_認定調査実施場所名称);
         entity.setJisshiBashoImageSharedFileId(DEFAULT_実施場所イメージ共有ファイルID);
-        entity.setGenzainoJokyoCode(DEFAULT_認定調査_現在の状況コード);
         entity.setServiceKubunCode(DEFAULT_認定調査_サービス区分コード);
         entity.setRiyoShisetsuShimei(DEFAULT_利用施設名);
         entity.setRiyoShisetsuJusho(DEFAULT_利用施設住所);

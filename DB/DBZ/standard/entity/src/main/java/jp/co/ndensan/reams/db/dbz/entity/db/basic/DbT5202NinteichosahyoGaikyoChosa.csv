@@ -12,7 +12,6 @@ chosainCode,varchar,RString,,,,,認定調査員コード,A
 chosaJisshiBashoCode,UDD035Code,Code,,,,,認定調査実施場所コード,A
 chosaJisshiBashoMeisho,varchar,RString,,,,,認定調査実施場所名称,A
 jisshiBashoImageSharedFileId,timestamp,RDateTime,,,,,実施場所イメージ共有ファイルID,A
-genzainoJokyoCode,UDD035Code,Code,,,,,認定調査・現在の状況コード,A
 serviceKubunCode,UDD035Code,Code,,,,,認定調査・サービス区分コード,A
 riyoShisetsuShimei,varchar,RString,,,,,利用施設名,A
 riyoShisetsuJusho,UDD046AtenaJusho,AtenaJusho,,,,,利用施設住所,A

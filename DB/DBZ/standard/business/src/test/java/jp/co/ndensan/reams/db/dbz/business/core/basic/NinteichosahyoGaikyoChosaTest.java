@@ -174,11 +174,10 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
             assertThat(sut.get実施場所イメージ共有ファイルID(), is(NinteichosahyoGaikyoChosaEntity.getJisshiBashoImageSharedFileId()));
         }
 
-        @Test
-        public void get認定調査_現在の状況コードは_entityが持つ認定調査_現在の状況コードを返す() {
-            assertThat(sut.get認定調査_現在の状況コード(), is(NinteichosahyoGaikyoChosaEntity.getGenzainoJokyoCode()));
-        }
-
+//        @Test
+//        public void get認定調査_現在の状況コードは_entityが持つ認定調査_現在の状況コードを返す() {
+//            assertThat(sut.get認定調査_現在の状況コード(), is(NinteichosahyoGaikyoChosaEntity.getGenzainoJokyoCode()));
+//        }
         @Test
         public void get認定調査_サービス区分コードは_entityが持つ認定調査_サービス区分コードを返す() {
             assertThat(sut.get認定調査_サービス区分コード(), is(NinteichosahyoGaikyoChosaEntity.getServiceKubunCode()));
