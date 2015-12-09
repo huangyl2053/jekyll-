@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.shisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -34,7 +35,7 @@ public class shisetsuJohoCommonChildDiv {
 	RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
 	RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
 
-	if (台帳種別 == null || 台帳種別表示 == null) {
+	if (台帳種別表示 == null) {
 
 	    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
 	}
@@ -74,14 +75,26 @@ public class shisetsuJohoCommonChildDiv {
 	    mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
 	}
 
-	if (!requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+	if (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() != null
+		&& !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
 	    mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
 	}
 
-	if (!requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+	if (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
+		&& !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
 	    mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
+	}
+
+	if ((requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() == null
+		|| requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
+		&& (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
+		|| requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
+		&& (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
+		|| requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
+
+	    mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getCode());
 	}
 
 	requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
@@ -105,7 +118,7 @@ public class shisetsuJohoCommonChildDiv {
     }
 
     /**
-     * 事業者・施設入力ガイドのonBlur時の処理を行います。<br/>
+     * 施設情報のonBlur時の処理を行います。<br/>
      *
      * @param requestDiv 施設情報Div
      * @return レスポンス
