@@ -3,17 +3,12 @@
 <!-- 概要： 予防給付計画自己作成明細のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika\yobokeikakujikosakuseimeisai.IYoboKeikakuJikoSakuseiMeisaiMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.yobokeikakujikosakuseimeisai.IYoboKeikakuJikoSakuseiMeisaiMapper">
 
-    <select id="select予防給付計画自己作成明細ByKey" resultMap="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" fetchSize="500">
+<!--    <select id="select予防給付計画自己作成明細ByKey" resultMap="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" fetchSize="500">
         <include refid="selectYoboKeikakuJikoSakuseiMeisaiEntity" />
     </select>
 
-    <select id="select予防給付計画自己作成明細リストBy主キー1" resultMap="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" fetchSize="500">
-        <include refid="selectYoboKeikakuJikoSakuseiMeisaiEntity" />
-    </select>
-
-    <!-- TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 -->
     <sql id="selectYoboKeikakuJikoSakuseiMeisaiEntity">
         SELECT
         FdT1301SeishinTecho.*,
@@ -35,12 +30,11 @@
         </where>
     </sql>
 
-    <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika\yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiEntity" autoMapping="true">
         <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
         <collection property="任意項目情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.resultMap_FdT1309SeishinTechoNiniEntity"/>
-    </resultMap>
+    </resultMap>-->
 
 </mapper>
