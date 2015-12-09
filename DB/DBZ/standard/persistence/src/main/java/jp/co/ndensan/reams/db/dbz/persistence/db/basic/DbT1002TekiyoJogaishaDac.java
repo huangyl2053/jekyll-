@@ -4,14 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.entity.Idokikan;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -56,6 +61,37 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
+    }
+
+    /**
+     * 適用除外者テーブルに適用年月日と解除年月日を取得する
+     *
+     * @param 識別コード 識別コード
+     * @return 適用除外者テーブルに適用年月日と解除年月日のリスト
+     * @throws NullPointerException 識別コードがnull
+     */
+    @Transaction
+    public List<Idokikan> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT1002TekiyoJogaishaEntity> tekiyoJogaishaEntityList = accessor.select().
+                table(DbT1002TekiyoJogaisha.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT1002TekiyoJogaishaEntity.class);
+        List<Idokikan> idokikanList = new ArrayList<>();
+        for (DbT1002TekiyoJogaishaEntity tekiyoJogaisha : tekiyoJogaishaEntityList) {
+            Idokikan idokikan = new Idokikan();
+            idokikan.setKaishiYMD(tekiyoJogaisha.getTekiyoYMD());
+            idokikan.setShuryoYMD(tekiyoJogaisha.getKaijoYMD());
+            idokikan.setEdaNo(tekiyoJogaisha.getEdaNo());
+            idokikan.setIdoYMD(tekiyoJogaisha.getIdoYMD());
+            idokikanList.add(idokikan);
+        }
+        return idokikanList;
     }
 
     /**

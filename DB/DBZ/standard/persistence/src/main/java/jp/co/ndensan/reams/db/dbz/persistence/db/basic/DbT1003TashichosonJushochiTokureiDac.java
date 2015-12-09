@@ -4,14 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.entity.Idokikan;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei.*;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei.edaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei.idoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokurei.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -56,6 +61,37 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
+     * 他市町村住所地特例テーブルに適用年月日と解除年月日を取得する
+     *
+     * @param 識別コード 識別コード
+     * @return 他市町村住所地特例テーブルに適用年月日と解除年月日のリスト
+     * @throws NullPointerException 識別コードがnull
+     */
+    public List<Idokikan> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT1003TashichosonJushochiTokureiEntity> tashichosonEntityList = accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
+
+        List<Idokikan> idokikanList = new ArrayList<>();
+        for (DbT1003TashichosonJushochiTokureiEntity tashichosonJushochiTokurei : tashichosonEntityList) {
+            Idokikan idokikan = new Idokikan();
+            idokikan.setKaishiYMD(tashichosonJushochiTokurei.getTekiyoYMD());
+            idokikan.setShuryoYMD(tashichosonJushochiTokurei.getKaijoYMD());
+            idokikan.setIdoYMD(tashichosonJushochiTokurei.getIdoYMD());
+            idokikan.setEdaNo(tashichosonJushochiTokurei.getEdaNo());
+            idokikanList.add(idokikan);
+        }
+        return idokikanList;
     }
 
     /**
