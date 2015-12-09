@@ -30,8 +30,9 @@ public class KoikiJushochiTokureisha {
      */
     public KoikinaiJutokuTaishoshaSql getShikibetsuCodeSql(LasdecCode 市町村コード) {
 
-        RString value = BusinessConfig.get(KoikinaiJushochitokureiKensakuSeigyo.広域内住所地特例者検索制御_措置元_措置先区分_介護共通, SubGyomuCode.DBU介護統計報告);
         KoikinaiJutokuTaishoshaSql koikinaiJutokuTaishoshaSql = new KoikinaiJutokuTaishoshaSql();
+        RString value = BusinessConfig.get(KoikinaiJushochitokureiKensakuSeigyo.広域内住所地特例者検索制御_措置元_措置先区分_介護共通.広域内住所地特例者検索制御_措置元_措置先区分_介護共通,
+                SubGyomuCode.DBU介護統計報告);
 
         if (措置元.equals(value)) {
             koikinaiJutokuTaishoshaSql.set対象者SQL1(getSQL被保険者台帳の市町村コード取得(市町村コード));
