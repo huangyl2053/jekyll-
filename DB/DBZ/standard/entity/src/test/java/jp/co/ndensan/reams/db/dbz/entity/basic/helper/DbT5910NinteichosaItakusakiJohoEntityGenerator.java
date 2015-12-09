@@ -45,7 +45,6 @@ public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
     public static DbT5910NinteichosaItakusakiJohoEntity createDbT5910NinteichosaItakusakiJohoEntity() {
         DbT5910NinteichosaItakusakiJohoEntity entity = new DbT5910NinteichosaItakusakiJohoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setNinteichosaItakusakiCode(DEFAULT_認定調査委託先コード);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setJigyoshaMeisho(DEFAULT_事業者名称);
         entity.setJigyoshaMeishoKana(DEFAULT_事業者名称カナ);
@@ -53,7 +52,6 @@ public final class DbT5910NinteichosaItakusakiJohoEntityGenerator {
         entity.setJusho(DEFAULT_住所);
         entity.setTelNo(DEFAULT_電話番号);
         entity.setFaxNo(DEFAULT_FAX番号);
-        entity.setDaihyoshaName(DEFAULT_代表者名);
         entity.setChosaItakuKubun(DEFAULT_調査委託区分);
         entity.setWaritsukeTeiin(DEFAULT_割付定員);
         entity.setWaritsukeChiku(DEFAULT_割付地区);
