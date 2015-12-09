@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT7035RendoPatternマスタとエンティティのマッピング用XMLです。 -->
-<!-- 作者： n1070 久保裕是 -->
+<!-- 作者：  -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper">
@@ -38,7 +38,8 @@
          "DbT7035RendoPattern"."codeHenkanKubun" as "dbT7035RendoPattern_codeHenkanKubun",
          "DbT7035RendoPattern"."gaijiHenkanKubun" as "dbT7035RendoPattern_gaijiHenkanKubun",
          "DbT7035RendoPattern"."zenkenRendoKubun" as "dbT7035RendoPattern_zenkenRendoKubun",
-         "DbT7035RendoPattern"."rendoKubun" as "dbT7035RendoPattern_rendoKubun"
+         "DbT7035RendoPattern"."rendoKubun" as "dbT7035RendoPattern_rendoKubun",
+         "DbT7035RendoPattern"."renkeiFileName" as "dbT7035RendoPattern_renkeiFileName"
     </sql>
 
 
@@ -61,16 +62,12 @@
         <result property="motoFormatVersion" column="dbT7035RendoPattern_motoFormatVersion" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="motoEncodeKeitai" column="dbT7035RendoPattern_motoEncodeKeitai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sakiFormatVersion" column="dbT7035RendoPattern_sakiFormatVersion" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="sakiEncodeKeitai" column="dbT7035RendoPattern_sakiEncodeKeitai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <resulta property="sakiEncodeKeitai" column="dbT7035RendoPattern_sakiEncodeKeitai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="codeHenkanKubun" column="dbT7035RendoPattern_codeHenkanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gaijiHenkanKubun" column="dbT7035RendoPattern_gaijiHenkanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkenRendoKubun" column="dbT7035RendoPattern_zenkenRendoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rendoKubun" column="dbT7035RendoPattern_rendoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="renkeiFileName" column="dbT7035RendoPattern_renkeiFileName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7035RendoPatternEntity">
-    SELECT
-    <include refid="allColumns_DbT7035RendoPattern"/>
-    FROM
-    rgdb."DbT7035RendoPattern"
-</select>
+
 </mapper>
