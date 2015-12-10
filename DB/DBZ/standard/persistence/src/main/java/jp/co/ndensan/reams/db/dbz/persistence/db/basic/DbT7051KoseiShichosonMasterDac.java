@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.ridatsuYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -188,7 +188,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      * ログインユーザーの属する市町村情報を取得します。
      *
      * @param 識別ID 市町村識別ID
-     * @return List<DbT7051KoseiShichosonMasterEntity> ログインユーザーの属する市町村のリスと
+     * @return List<DbT7051KoseiShichosonMasterEntity> ログインユーザーの属する市町村のリスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> loginUserShichosonJoho(RString 識別ID) {
@@ -229,7 +229,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      * 市町村コードによる市町村情報の検索します。
      *
      * @param 市町村コード 市町村コード
-     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスと
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
@@ -239,6 +239,26 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(eq(shichosonCode, 市町村コード),
                                 eq(gappeiKyuShichosonKubun, "0"))).
+                toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 所在保険者リスト情報取得。
+     *
+     * @param systemDate システム年月日
+     * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスト
+     */
+    @Transaction
+    public List<DbT7051KoseiShichosonMasterEntity> selectByGappeiKyuShichosonKubun(
+            RDate systemDate) throws NullPointerException {
+        requireNonNull(systemDate, UrSystemErrorMessages.値がnull.getReplacedMessage("システム年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(gappeiKyuShichosonKubun, "0"),
+                                leq(kanyuYMD, systemDate),
+                                leq(systemDate, ridatsuYMD))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 }
