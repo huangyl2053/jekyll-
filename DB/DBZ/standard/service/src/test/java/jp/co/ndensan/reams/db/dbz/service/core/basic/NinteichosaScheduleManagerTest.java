@@ -1,40 +1,21 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package jp.co.ndensan.reams.db.dbz.service.core.basic;
-//
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.List;
-//import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5221NinteichosaScheduleEntityGenerator;
-//import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
-//import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-//import jp.co.ndensan.reams.uz.uza.biz.Code;
-//import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-//import jp.co.ndensan.reams.uz.uza.lang.RString;
-//import static org.hamcrest.CoreMatchers.is;
-//import static org.hamcrest.CoreMatchers.nullValue;
-//import static org.junit.Assert.assertThat;
-//import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.Test;
-//import org.junit.experimental.runners.Enclosed;
-//import org.junit.runner.RunWith;
-//import static org.mockito.Matchers.any;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
-//
-///**
-// * {link NinteichosaScheduleManager}のテストクラスです。
-// */
-//@Ignore
-//@RunWith(Enclosed.class)
-//public class NinteichosaScheduleManagerTest {
-//
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.service.core.basic;
+
+import org.junit.Ignore;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+/**
+ * {link NinteichosaScheduleManager}のテストクラスです。
+ */
+@Ignore
+@RunWith(Enclosed.class)
+public class NinteichosaScheduleManagerTest {
+
 //    private static DbT5221NinteichosaScheduleDac dac;
 //    private static NinteichosaScheduleManager sut;
 //
@@ -186,4 +167,4 @@
 //            assertThat(sut.save認定調査スケジュール情報(認定調査スケジュール情報), is(false));
 //        }
 //    }
-//}
+}

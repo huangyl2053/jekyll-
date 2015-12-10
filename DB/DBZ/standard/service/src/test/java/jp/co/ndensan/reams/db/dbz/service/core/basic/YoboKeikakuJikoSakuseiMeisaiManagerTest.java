@@ -1,44 +1,21 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package jp.co.ndensan.reams.db.dbz.service.core.basic;
-//
-//import java.util.Arrays;
-//import java.util.Collections;
-//import java.util.List;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-//import jp.co.ndensan.reams.db.dbz.business.core.basic.YoboKeikakuJikoSakuseiMeisai;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator;
-//import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiDac;
-//import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-//import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-//import jp.co.ndensan.reams.uz.uza.lang.RString;
-//import jp.co.ndensan.reams.uz.uza.math.Decimal;
-//import static org.hamcrest.CoreMatchers.is;
-//import static org.hamcrest.CoreMatchers.nullValue;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.experimental.runners.Enclosed;
-//import org.junit.runner.RunWith;
-//import static org.mockito.Mockito.any;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
-//
-///**
-// * {link YoboKeikakuJikoSakuseiMeisaiManager}のテストクラスです。
-// */
-//@Ignore
-//@RunWith(Enclosed.class)
-//public class YoboKeikakuJikoSakuseiMeisaiManagerTest {
-//
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.service.core.basic;
+
+import org.junit.Ignore;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+/**
+ * {link YoboKeikakuJikoSakuseiMeisaiManager}のテストクラスです。
+ */
+@Ignore
+@RunWith(Enclosed.class)
+public class YoboKeikakuJikoSakuseiMeisaiManagerTest {
+
 //    private static DbT3011YoboKeikakuJikoSakuseiMeisaiDac dac;
 //    private static YoboKeikakuJikoSakuseiMeisaiManager sut;
 //
@@ -267,4 +244,4 @@
 //            assertThat(sut.save予防給付計画自己作成明細(予防給付計画自己作成明細), is(false));
 //        }
 //    }
-//}
+}
