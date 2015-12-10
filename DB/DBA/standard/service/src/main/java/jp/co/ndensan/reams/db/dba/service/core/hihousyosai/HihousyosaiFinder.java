@@ -9,34 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 被保詳細クラスです。
+ * 被保詳細のクラスです。
  */
 public class HihousyosaiFinder {
 
-    private final DbT5051KoseiShichosonMasterDac dbT5051Dac;
+    private final DbT7051KoseiShichosonMasterDac dbT7051Dac;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
 
     public HihousyosaiFinder() {
-        dbT5051Dac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
+        dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
     }
 
-    HihousyosaiFinder(DbT5051KoseiShichosonMasterDac dbT5051Dac,
+    HihousyosaiFinder(
+            DbT7051KoseiShichosonMasterDac dbT7051Dac,
             DbT1001HihokenshaDaichoDac dbT1001dac
     ) {
-        this.dbT5051Dac = dbT5051Dac;
+        this.dbT7051Dac = dbT7051Dac;
         this.dbT1001Dac = dbT1001dac;
     }
 
@@ -55,20 +56,16 @@ public class HihousyosaiFinder {
      * @param systemDate RDate
      * @return List<KoseiShichosonMaster>
      */
-    //TODO 袁献辉 20151120, QA未回復
     @Transaction
     public List<KoseiShichosonMaster> getKoseiShichosonMasterList(RDate systemDate) {
 
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
 
-        List<DbT5051KoseiShichosonMasterEntity> entityList = dbT5051Dac.selectByGappeiKyuShichosonKubun(systemDate);
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun(systemDate);
         if (entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        for (DbT5051KoseiShichosonMasterEntity entity : entityList) {
-            businessList.add((KoseiShichosonMaster) entityList);
-        }
-
+        businessList.add((KoseiShichosonMaster) entityList);
         return businessList;
     }
 

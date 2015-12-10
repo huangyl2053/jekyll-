@@ -9,14 +9,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.service.core.hihousyosai.HihousyosaiFinder;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -41,7 +41,7 @@ import org.junit.runner.RunWith;
 public class HihousyosaiFinderTest extends DbaTestDacBase {
 
     private static HihousyosaiFinder sut;
-    private static DbT5051KoseiShichosonMasterDac dbT5051Dac;
+    private static DbT7051KoseiShichosonMasterDac dbT7051Dac;
     private static DbT1001HihokenshaDaichoDac dbT1001dac;
 
     public static final RString 市町村識別ID = new RString("00");
@@ -59,7 +59,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
     public static void setUpClass() {
         DbaTestDacBase.setUpClass();
         sut = new HihousyosaiFinder();
-        dbT5051Dac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
+        dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         dbT1001dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
 
     }
@@ -68,7 +68,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
 
         @Before
         public void setUp() {
-            dbT5051Dac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
+            dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
             insert_DbT5051KoseiShichosonMaster(市町村識別ID, 加入日, 離脱日);
 
         }
@@ -150,7 +150,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
             RString 市町村識別ID,
             FlexibleDate 加入日,
             FlexibleDate 離脱日) {
-        DbT5051KoseiShichosonMasterEntity entity = new DbT5051KoseiShichosonMasterEntity();
+        DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
         entity.setShichosonShokibetsuID(市町村識別ID);
         entity.setShichosonCode(new LasdecCode("123456"));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo("123456"));
@@ -167,7 +167,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
         entity.setUnyoKaishiYMD(new FlexibleDate("20150402"));
         entity.setUnyoShuryoYMD(new FlexibleDate("20150402"));
         entity.setUnyoKeitaiKubun(new RString("1"));
-        dbT5051Dac.save(entity);
+        dbT7051Dac.save(entity);
     }
 
     private static void insert_DbT1001HihokenshaDaicho(

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 被保詳細クラスです。
  *
- * @author YUANXH
  */
 public class HihousyosaiFinderParameter {
 
