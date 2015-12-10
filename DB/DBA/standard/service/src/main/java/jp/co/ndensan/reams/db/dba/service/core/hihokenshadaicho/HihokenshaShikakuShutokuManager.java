@@ -1,0 +1,213 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho;
+
+import java.util.ArrayList;
+import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaicho.HihokenshaShikakuShutokuMapperParameter;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaicho.HihokenshaShikakuShutokuMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+
+/**
+ *
+ * 被保険者台帳管理（資格取得）情報を管理するサービスクラスです。
+ */
+public class HihokenshaShikakuShutokuManager {
+
+    private final DbT1001HihokenshaDaichoDac dbT1001Dac;
+    private final MapperProvider mapperProvider;
+    private static boolean chickflg = false;
+    private static HihokenshaNo hihokenshaNo;
+    private static ShikibetsuCode shikibetsuCode;
+    private static FlexibleDate idoYMD;
+    private static RString edaNo;
+    private static RString hihokennshaKubunCode;
+    private static FlexibleDate ichigoShikakuShutokuYMD;
+    private static FlexibleDate shikakuShutokuYMD;
+
+    /**
+     * コンストラクタです。
+     */
+    HihokenshaShikakuShutokuManager() {
+        this.dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    }
+
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param DbT1001HihokenshaDaichoDac dbT1001Dac
+     * @paramMapperProvider mapperProvider
+     */
+    HihokenshaShikakuShutokuManager(DbT1001HihokenshaDaichoDac dbT1001Dac, MapperProvider mapperProvider) {
+        this.dbT1001Dac = dbT1001Dac;
+        this.mapperProvider = mapperProvider;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
+     *
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     */
+    public static HihokenshaShikakuShutokuManager createInstance() {
+        return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
+    }
+
+    /**
+     * 被保険者台帳管理リストを取得します。
+     *
+     * @param parameter 被保険者台帳管理のパラメータ
+     * @return List<HihokenshaShutokuJyoho> 被保険者台帳管理リスト
+     */
+    public List<HihokenshaShutokuJyoho> getHihokenshaShutokuJyoho(HihokenshaShikakuShutokuMapperParameter parameter) {
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理のパラメータ"));
+        List<HihokenshaShutokuJyoho> hihokenshaShutokuJyohoList = new ArrayList<>();
+        HihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(HihokenshaShikakuShutokuMapper.class);
+        List<DbT1001HihokenshaDaichoEntity> entitylist = hokenshamapper.getHihokenshaShutokuJyoho(parameter);
+        if (entitylist == null || entitylist.isEmpty()) {
+            return hihokenshaShutokuJyohoList;
+        }
+        for (DbT1001HihokenshaDaichoEntity entity : entitylist) {
+            hihokenshaShutokuJyohoList.add(new HihokenshaShutokuJyoho(entity));
+        }
+        return hihokenshaShutokuJyohoList;
+    }
+
+    /**
+     * 保険者情報リストを取得します。
+     *
+     * @param entity 被保険者台帳管理（資格取得）
+     * @param 生年月日 当該識別対象の生年月日
+     */
+    public void saveHihokenshaShutoku(DbT1001HihokenshaDaichoEntity entity, IDateOfBirth 生年月日) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理（資格取得）Entity"));
+//        shikibetsuCode = entity.getShikibetsuCode();
+        hihokenshaNo = entity.getHihokenshaNo();
+        idoYMD = entity.getIdoYMD();
+//        Hihokenshanotsukiban hihokenshaNo = Hihokenshanotsukiban.createInstance().getHihokenshanotsukiban(shikibetsuCode);
+        HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createHokenjaNoParam(hihokenshaNo, idoYMD);
+        edaNo = getSaidaiEdaban(parameter);
+        shikakuShutokuYMD = entity.getShikakuShutokuYMD();
+        RString age = get年齢(生年月日, shikakuShutokuYMD);
+        if (age.compareTo("65") >= 0) {
+            hihokennshaKubunCode = new RString("1");
+        } else if (age.compareTo("64") <= 0 && age.compareTo("40") >= 0) {
+            hihokennshaKubunCode = new RString("2");
+            ichigoShikakuShutokuYMD = new FlexibleDate("");
+        }
+        entity.setEdaNo(edaNo);
+        entity.setHihokennshaKubunCode(hihokennshaKubunCode);
+        entity.setIchigoShikakuShutokuYMD(ichigoShikakuShutokuYMD);
+        dbT1001Dac.save(entity);
+    }
+
+    /**
+     * 最大枝番を取得します。
+     *
+     * @param parameter 最大枝番取得のパラメータ
+     * @return RString 最大枝番
+     */
+    public RString getSaidaiEdaban(HihokenshaShikakuShutokuMapperParameter parameter) {
+        RString 枝番 = new RString("0001");
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        HihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(HihokenshaShikakuShutokuMapper.class);
+        DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaidaiEdaban(parameter);
+        if (entity == null) {
+            return 枝番;
+        }
+        if (!entity.getEdaNo().isEmpty()) {
+            枝番 = new RString(String.valueOf(Integer.valueOf(entity.getEdaNo().toString().trim()) + 1));
+        }
+        return 枝番;
+    }
+
+    /**
+     * 最新データ情報を取得します。
+     *
+     * @param parameter 最新データ情報のパラメータ
+     * @return HihokenshaShutokuJyoho 最新データ情報
+     */
+    public HihokenshaShutokuJyoho getSaishinDeta(HihokenshaShikakuShutokuMapperParameter parameter) {
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者情報のパラメータ"));
+        HihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(HihokenshaShikakuShutokuMapper.class);
+        DbT1001HihokenshaDaichoEntity entity = hokenshamapper.getSaishinDeta(parameter);
+        if (entity == null) {
+            return null;
+        }
+        return new HihokenshaShutokuJyoho(entity);
+    }
+
+    /**
+     * 資格取得登録チェック処理。
+     *
+     * @param 当該識別対象の生年月日 当該識別対象の生年月日
+     * @param 資格取得日 資格取得日
+     * @param 資格取得事由コード 資格取得事由コード
+     * @return boolean チェックフラグ
+     */
+    public boolean shikakuShutokuTorokuCheck(IDateOfBirth 当該識別対象の生年月日, FlexibleDate 資格取得日, RString 資格取得事由コード) {
+        RString age = get年齢(当該識別対象の生年月日, 資格取得日);
+        //TODO QA152
+        if (true) {
+            if (age.compareTo("65") >= 0) {
+                chickflg = true;
+            } else {
+                chickflg = false;
+            }
+        } else {
+            if (age.compareTo("40") >= 0) {
+                chickflg = true;
+            } else {
+                chickflg = false;
+            }
+        }
+        return chickflg;
+    }
+
+    /**
+     * 資格取得チェック処理。
+     *
+     * @param parameter 最新データ情報のパラメータ
+     * @return boolean チェックフラグ
+     */
+    public boolean shikakuShutokuCheck(HihokenshaShikakuShutokuMapperParameter parameter) {
+        HihokenshaShutokuJyoho hihokenshashutokujyoho = getSaishinDeta(parameter);
+        if (hihokenshashutokujyoho == null) {
+            chickflg = true;
+        } else {
+            if (!hihokenshashutokujyoho.get資格取得年月日().isEmpty() && !hihokenshashutokujyoho.get資格喪失年月日().isEmpty()) {
+                chickflg = true;
+            } else if (hihokenshashutokujyoho.get資格喪失年月日().isEmpty()) {
+                if ("2".equals(hihokenshashutokujyoho.get被保険者区分コード())) {
+                    chickflg = true;
+                } else {
+                    chickflg = false;
+                }
+            }
+        }
+        return chickflg;
+    }
+
+    private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {
+        AgeCalculator ageCalculator = new AgeCalculator(dateOfBirth, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日, shikakuShutokuYMD);
+        return ageCalculator.get年齢();
+    }
+}
