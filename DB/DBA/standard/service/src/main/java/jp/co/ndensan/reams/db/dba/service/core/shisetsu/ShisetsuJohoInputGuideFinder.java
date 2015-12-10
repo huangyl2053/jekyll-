@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
- * 入所施設名称の取得。
+ * 入所施設名称取得のクラス。
  */
 public class ShisetsuJohoInputGuideFinder {
 
@@ -41,7 +41,8 @@ public class ShisetsuJohoInputGuideFinder {
     /**
      * テスト用コンストラクタです。
      *
-     * @param mapperProvider mapper取得
+     * @param dbT1005Dac DbT1005KaigoJogaiTokureiTaishoShisetsuDac
+     * @param dbT7060Dac DbT7060KaigoJigyoshaDac
      */
     ShisetsuJohoInputGuideFinder(DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac,
             DbT7060KaigoJigyoshaDac dbT7060Dac) {
