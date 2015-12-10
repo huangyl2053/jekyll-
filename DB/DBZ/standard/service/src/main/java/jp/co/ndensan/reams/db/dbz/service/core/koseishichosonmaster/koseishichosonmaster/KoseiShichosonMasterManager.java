@@ -122,7 +122,7 @@ public class KoseiShichosonMasterManager {
     /**
      * 合併前の旧市町村と最新の広域構成市町村を含む構成市町村マスタ情報を取得します。
      *
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> getZenShichosonJoho() {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList = 構成市町村マスタDac.zenShichosonJoho();
@@ -136,9 +136,9 @@ public class KoseiShichosonMasterManager {
     }
 
     /**
-     * 構成市町村マスタ情報を取得します。
+     * 現市町村情報を取得します。（旧市町村情報を含みません。）
      *
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> getGenShichosonJoho() {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList = 構成市町村マスタDac.genShichosonJoho();
@@ -154,7 +154,7 @@ public class KoseiShichosonMasterManager {
     /**
      * 構成市町村マスタ情報を作成します。
      *
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> getKoseiShichosonList() {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList = 構成市町村マスタDac.koseiShichosonList();
@@ -184,8 +184,8 @@ public class KoseiShichosonMasterManager {
     /**
      * ログインユーザーの属する市町村情報を取得します。
      *
-     * @param parameter KoseiShichosonMasterMapperParameter
-     * @return List<KoseiShichosonMaster>
+     * @param parameter 構成市町村マスタパラメータ
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> loginUserShichosonJoho(KoseiShichosonMasterMapperParameter parameter) {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList
@@ -202,14 +202,14 @@ public class KoseiShichosonMasterManager {
     /**
      * 市町村情報を取得します。
      *
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> koseiShichosonJoho() {
         List<KoseiShichosonMaster> koseiShichosonMasterList = new ArrayList<>();
         KoseiShichosonMasterRelateEntity koseiShichosonMasterEntity = new KoseiShichosonMasterRelateEntity();
         DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        // TODO 凌護行 テーブルに「市町村識別コード」がない、QA回答まち。
+        // TODO 凌護行 テーブルに「市町村識別コード」がない、QA154回答まち。2015/11/15
         entity.setShichosonShokibetsuID(SHICHOSONSHOKIBETSUID);
         entity.setShichosonCode(new LasdecCode(association.get地方公共団体コード().value()));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(HokenshaJoho.保険者情報_保険者番号,
@@ -232,11 +232,11 @@ public class KoseiShichosonMasterManager {
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告));
         entity.setTyohyoKatagakiHyojiUmu(BusinessConfig.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告));
-//         TODO 凌護行 Enum:ConfigNameDBUクラスに「老人保健情報_市町村番号」がありません。 QA回答まち
+//         TODO 凌護行 Enum:ConfigNameDBUクラスに「老人保健情報_市町村番号」がありません。 QA39回答まち 2015/11/15
 //        entity.setRojinhokenShichosonNo(BusinessConfig.get(ConfigNameDBU.老人保健情報_市町村番号, SubGyomuCode.DBU介護統計報告));
-//         TODO 凌護行 Enum:ConfigNameDBDクラスがありません。 QA回答まち
+//         TODO 凌護行 Enum:ConfigNameDBDクラスがありません。 QA39回答まち 2015/11/15
 //        entity.setRokenJukyushaNoTaikei(BusinessConfig.get(ConfigNameDBD.老人保健情報_管理体系, SubGyomuCode.DBD介護受給));
-//         TODO 凌護行 Enum:ConfigNameDBBクラスがありません。 QA回答まち
+//         TODO 凌護行 Enum:ConfigNameDBBクラスがありません。 QA39回答まち 2015/11/15
 //        entity.setTokuchoBunpaishuyaku(BusinessConfig.get(ConfigNameDBB.動作関連_特徴分配集約システム, SubGyomuCode.DBB介護賦課));
         entity.setIkoYMD(FlexibleDate.EMPTY);
         entity.setKanyuYMD(FlexibleDate.EMPTY);
@@ -269,7 +269,7 @@ public class KoseiShichosonMasterManager {
      * 市町村コードによる市町村情報の検索します。
      *
      * @param 市町村コード LasdecCode
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     public List<KoseiShichosonMaster> shichosonCodeYoriShichosonJoho(LasdecCode 市町村コード) {
         List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList = 構成市町村マスタDac.shichosonCodeYoriShichosonJoho(市町村コード);
