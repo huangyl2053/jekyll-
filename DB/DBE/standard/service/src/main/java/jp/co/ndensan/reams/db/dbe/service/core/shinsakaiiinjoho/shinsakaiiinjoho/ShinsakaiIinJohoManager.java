@@ -72,79 +72,84 @@ public class ShinsakaiIinJohoManager {
      * 資格コードが資格コードを表す列挙型クラスからコード、名称を取得する。
      */
     public List<KeyValueDataSource> get資格コードList() {
-        List<KeyValueDataSource> shikakuCodeList = new ArrayList<>();
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.医師.getコード(), Sikaku.医師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.歯科医師.getコード(), Sikaku.歯科医師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.薬剤師.getコード(), Sikaku.薬剤師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.保健師.getコード(), Sikaku.保健師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.助産師.getコード(), Sikaku.助産師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku._洵_看護師.getコード(), Sikaku._洵_看護師.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.理学療法士.getコード(), Sikaku.理学療法士.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.作業療法士.getコード(), Sikaku.作業療法士.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.社会福祉士.getコード(), Sikaku.社会福祉士.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.介護福祉士.getコード(), Sikaku.介護福祉士.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.ソーシャルワーカー.getコード(), Sikaku.ソーシャルワーカー.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.福祉事務所現業員等.getコード(), Sikaku.福祉事務所現業員等.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.ホームヘルパー.getコード(), Sikaku.ホームヘルパー.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.介護職員.getコード(), Sikaku.介護職員.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.その他福祉関係者.getコード(), Sikaku.その他福祉関係者.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.行政関係者.getコード(), Sikaku.行政関係者.get名称()));
-        shikakuCodeList.add(new KeyValueDataSource(Sikaku.その他.getコード(), Sikaku.その他.get名称()));
+        List<KeyValueDataSource> 資格コード = new ArrayList<>();
+        資格コード.add(new KeyValueDataSource(Sikaku.医師.getコード(), Sikaku.医師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.歯科医師.getコード(), Sikaku.歯科医師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.薬剤師.getコード(), Sikaku.薬剤師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.保健師.getコード(), Sikaku.保健師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.助産師.getコード(), Sikaku.助産師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku._洵_看護師.getコード(), Sikaku._洵_看護師.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.理学療法士.getコード(), Sikaku.理学療法士.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.作業療法士.getコード(), Sikaku.作業療法士.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.社会福祉士.getコード(), Sikaku.社会福祉士.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.介護福祉士.getコード(), Sikaku.介護福祉士.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.ソーシャルワーカー.getコード(), Sikaku.ソーシャルワーカー.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.福祉事務所現業員等.getコード(), Sikaku.福祉事務所現業員等.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.ホームヘルパー.getコード(), Sikaku.ホームヘルパー.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.介護職員.getコード(), Sikaku.介護職員.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.その他福祉関係者.getコード(), Sikaku.その他福祉関係者.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.行政関係者.getコード(), Sikaku.行政関係者.get名称()));
+        資格コード.add(new KeyValueDataSource(Sikaku.その他.getコード(), Sikaku.その他.get名称()));
 
-        return shikakuCodeList;
+        return 資格コード;
     }
 
     /**
      * 審査員郵送区分が審査員郵送区分を表す列挙型クラスからコード、名称を取得する。
      */
     public List<KeyValueDataSource> get審査員郵送区分List() {
-        List<KeyValueDataSource> shikakuCodeList = new ArrayList<>();
-        shikakuCodeList.add(new KeyValueDataSource(ShinsainYusoKubun.自宅.get郵送区分(), new RString(ShinsainYusoKubun.自宅.name())));
-        shikakuCodeList.add(new KeyValueDataSource(ShinsainYusoKubun.所属機関.get郵送区分(), new RString(ShinsainYusoKubun.所属機関.name())));
+        List<KeyValueDataSource> 審査員郵送区分 = new ArrayList<>();
+        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.自宅.get郵送区分(), new RString(ShinsainYusoKubun.自宅.name())));
+        審査員郵送区分.add(new KeyValueDataSource(ShinsainYusoKubun.所属機関.get郵送区分(), new RString(ShinsainYusoKubun.所属機関.name())));
 
-        return shikakuCodeList;
+        return 審査員郵送区分;
     }
 
     /**
      * 審査会委員一覧情報は表示条件で検索を取得する。
+     *
+     * @param 表示条件 RString
+     * @return List<ShinsakaiIinJoho>
      */
     public List<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件) {
-        List<ShinsakaiIinJoho> list = new ArrayList<>();
+        List<ShinsakaiIinJoho> 審査会委員一覧 = new ArrayList<>();
         boolean 全ての審査会委員 = false;
         if (new RString("key1").equals(表示条件)) {
             全ての審査会委員 = true;
         }
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
-        List<ShinsakaiIinJohoEntity> listEntity = mapper.get審査会委員情報ByHaishiFlag(全ての審査会委員);
-        if (listEntity == null || listEntity.isEmpty()) {
-            return list;
+        List<ShinsakaiIinJohoEntity> 審査会委員情報 = mapper.get審査会委員情報ByHaishiFlag(全ての審査会委員);
+        if (審査会委員情報 == null || 審査会委員情報.isEmpty()) {
+            return 審査会委員一覧;
         }
-        for (ShinsakaiIinJohoEntity entity : listEntity) {
-            list.add(new ShinsakaiIinJoho(entity));
+        for (ShinsakaiIinJohoEntity entity : 審査会委員情報) {
+            審査会委員一覧.add(new ShinsakaiIinJoho(entity));
         }
-        return list;
+        return 審査会委員一覧;
     }
 
     /**
      * 所属機関一覧情報はUserInfo．市町村コード、選択行の審査会委員コードで検索を取得する。
      */
-    //    TODO 業務概念テーブル不足
+    // TODO 業務概念テーブル不足
+    @Transaction
     public List<ShozokuKikanIchiranEntity> get所属機関一覧(ShinsakaiIinJohoMapperParameter parameter) {
 
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
-        List<ShozokuKikanIchiranEntity> listEntity = mapper.get所属機関一覧ByParameter(parameter);
-        if (listEntity == null) {
-            return new ArrayList();
+        List<ShozokuKikanIchiranEntity> 所属機関一覧 = mapper.get所属機関一覧ByParameter(parameter);
+        if (所属機関一覧 == null || 所属機関一覧.isEmpty()) {
+            return new ArrayList<>();
         }
-        return listEntity;
+        return 所属機関一覧;
     }
 
     /**
      * 審査会委員カウントを取得する。
      *
-     * @param parameter
-     * @return int 審査会委員カウント
+     * @param parameter ShinsakaiIinJohoMapperParameter
+     * @return int 審査会委員件数
      */
+    @Transaction
     public int get審査会委員カウント(ShinsakaiIinJohoMapperParameter parameter) {
 
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
@@ -152,15 +157,17 @@ public class ShinsakaiIinJohoManager {
     }
 
     /**
-     * 状態が「追加」の場合、新規処理を実施する
+     * 状態が「追加」の場合、新規処理を実施する.
+     *
+     * @param shinsakaiIinJoho ShinsakaiIinJoho
      */
     @Transaction
     public void insert新規処理(ShinsakaiIinJoho shinsakaiIinJoho) {
 
-        介護認定審査会委員情報Dac.save(shinsakaiIinJoho.toEntity());
         for (KaigoNinteiShinsakaiIinShozokuKikanJoho en : shinsakaiIinJoho.getKaigoNinteiShinsakaiIinShozokuKikanJohoList()) {
             介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(en);
         }
+        介護認定審査会委員情報Dac.save(shinsakaiIinJoho.toEntity());
     }
 
     /**

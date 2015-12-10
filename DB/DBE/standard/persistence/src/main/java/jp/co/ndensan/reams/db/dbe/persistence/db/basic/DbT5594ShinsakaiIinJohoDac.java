@@ -74,4 +74,34 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 介護認定審査会委員情報delete件数を返します。
+     *
+     * @param entity 介護認定審査会委員情報テーブルのエンティティ
+     * @return int 削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int delete(DbT5594ShinsakaiIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.delete(entity).execute();
+    }
+
+    /**
+     * 介護認定審査会委員情報更新件数を返します。
+     *
+     * @param entity 介護認定審査会委員情報テーブルのエンティティ
+     * @return int 更新件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int update(DbT5594ShinsakaiIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.update(entity).execute();
+    }
 }
