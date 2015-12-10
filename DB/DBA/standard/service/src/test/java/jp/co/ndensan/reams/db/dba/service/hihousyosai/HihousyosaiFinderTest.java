@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.service.hihousyosai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dba.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -34,8 +34,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- *
- * @author YUANXH
+ * {@link HihousyosaiFinder}のテストクラスです。
  */
 @RunWith(Enclosed.class)
 public class HihousyosaiFinderTest extends DbaTestDacBase {
@@ -69,7 +68,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
         @Before
         public void setUp() {
             dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-            insert_DbT5051KoseiShichosonMaster(市町村識別ID, 加入日, 離脱日);
+            insert_DbT7051KoseiShichosonMaster(市町村識別ID, 加入日, 離脱日);
 
         }
 
@@ -80,7 +79,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
 
         @Test
         public void テーブルにレコードが存在する場合_構成市町村情報取得はは_１件を返すこと() throws Exception {
-            insert_DbT5051KoseiShichosonMaster(市町村識別ID, 加入日, 離脱日);
+            insert_DbT7051KoseiShichosonMaster(市町村識別ID, 加入日, 離脱日);
             List<KoseiShichosonMaster> entityList = sut.getKoseiShichosonMasterList(new RDate("20150102"));
             assertThat(entityList.size(), is(1));
         }
@@ -129,10 +128,6 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
 
     public static class 被保区分リスト情報取得のテスト extends DbaTestDacBase {
 
-        @Before
-        public void setUp() {
-        }
-
         @Test
         public void 取得されたデータが存在しない場合_Enumクラス異常を返返して() throws Exception {
             List<ShikakuKubun> enumList = sut.getHihokubunList(enum0);
@@ -146,7 +141,7 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
         }
     }
 
-    private static void insert_DbT5051KoseiShichosonMaster(
+    private static void insert_DbT7051KoseiShichosonMaster(
             RString 市町村識別ID,
             FlexibleDate 加入日,
             FlexibleDate 離脱日) {
@@ -173,14 +168,12 @@ public class HihousyosaiFinderTest extends DbaTestDacBase {
     private static void insert_DbT1001HihokenshaDaicho(
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
-            RString 枝番
-    ) {
+            RString 枝番) {
 
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setHihokenshaNo(被保険者番号);
         entity.setIdoYMD(異動日);
         entity.setEdaNo(枝番);
-
         entity.setIdoJiyuCode(new RString("01"));
         entity.setShichosonCode(new LasdecCode("209007"));
         entity.setShikibetsuCode(new ShikibetsuCode("01"));

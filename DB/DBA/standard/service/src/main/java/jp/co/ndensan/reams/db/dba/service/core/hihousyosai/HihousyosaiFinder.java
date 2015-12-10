@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.service.core.hihousyosai;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -54,7 +54,7 @@ public class HihousyosaiFinder {
      * 所在保険者リスト情報取得。
      *
      * @param systemDate RDate
-     * @return List<KoseiShichosonMaster>
+     * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     @Transaction
     public List<KoseiShichosonMaster> getKoseiShichosonMasterList(RDate systemDate) {
@@ -82,18 +82,15 @@ public class HihousyosaiFinder {
     /**
      * 得喪情報取得。
      *
-     * @param paramenter
-     * @param 被保険者番号 hihokenshaNo
-     * @param 異動日 idoYMD
-     * @param 枝番 edaNo
+     * @param parameter 被保詳細パラメータ
      * @return 被保険者台帳管理オブジェクト HihokenshaDaicho
      */
     @Transaction
-    public HihokenshaDaicho getTokusouJoho(HihousyosaiFinderParameter paramenter) {
+    public HihokenshaDaicho getTokusouJoho(HihousyosaiFinderParameter parameter) {
         DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.selectByHihokenshaNo(
-                paramenter.getHihokenshaNo(),
-                paramenter.getIdoYMD(),
-                paramenter.getEdaNo());
+                parameter.getHihokenshaNo(),
+                parameter.getIdoYMD(),
+                parameter.getEdaNo());
         if (entity == null) {
             return null;
         }
@@ -104,9 +101,9 @@ public class HihousyosaiFinder {
     /**
      * 被保区分リスト情報取得。
      *
-     * @param 被保険者番号 hihokenshaNo
+     * @param code Code
      *
-     * @return List<ShikakuKubun>
+     * @return List<ShikakuKubun> 資格区分リスト
      */
     @Transaction
     public List<ShikakuKubun> getHihokubunList(RString code) {
