@@ -1,31 +1,20 @@
-///*
-// * To change this template, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package jp.co.ndensan.reams.db.dbz.business.core.basic;
-//
-//import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
-//import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
-//import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-//import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-//import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-//import static org.hamcrest.CoreMatchers.is;
-//import static org.hamcrest.CoreMatchers.not;
-//import static org.junit.Assert.assertThat;
-//import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.Test;
-//import org.junit.experimental.runners.Enclosed;
-//import org.junit.runner.RunWith;
-//
-///**
-// * {@link NinteichosaItakusakiJoho}のテストクラスです。
-// */
-//@Ignore
-//@RunWith(Enclosed.class)
-//public class NinteichosaItakusakiJohoTest extends DbzTestBase {
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.business.core.basic;
+
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import org.junit.Ignore;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+/**
+ * {@link NinteichosaItakusakiJoho}のテストクラスです。
+ */
+@Ignore
+@RunWith(Enclosed.class)
+public class NinteichosaItakusakiJohoTest extends DbzTestBase {
 //
 //    private static DbT5910NinteichosaItakusakiJohoEntity NinteichosaItakusakiJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 ////TODO 主キー型と変数名を置換してください
@@ -271,4 +260,4 @@
 //            return new NinteichosaItakusakiJoho(NinteichosaItakusakiJohoEntity);
 //        }
 //    }
-//}
+}

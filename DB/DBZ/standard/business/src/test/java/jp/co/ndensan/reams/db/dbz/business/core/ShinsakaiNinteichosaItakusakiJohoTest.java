@@ -1,40 +1,23 @@
-///*
-// * To change this template, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package jp.co.ndensan.reams.db.dbz.business.core;
-//
-//import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteichosaItakusakiJoho;
-//import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiNinteichosaItakusakiJoho;
-//import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
-//import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-//import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-//import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-//import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
-//import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-//import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-//import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-//import jp.co.ndensan.reams.uz.uza.lang.RString;
-//import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
-//import static org.hamcrest.CoreMatchers.is;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.junit.Before;
-//import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.experimental.runners.Enclosed;
-//import org.junit.runner.RunWith;
-//
-///**
-// * {@link ShinsakaiNinteichosaItakusakiJoho}のテストクラスです。
-// *
-// * @author n8223 朴義一
-// */
-//@Ignore
-//@RunWith(Enclosed.class)
-//public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
-//
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.business.core;
+
+import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import org.junit.Ignore;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+
+/**
+ * {@link ShinsakaiNinteichosaItakusakiJoho}のテストクラスです。
+ *
+ * @author n8223 朴義一
+ */
+@Ignore
+@RunWith(Enclosed.class)
+public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
+
 //    public static class getterSetterTest extends DbdTestBase {
 //
 //        private static ShinsakaiNinteichosaItakusakiJoho sut;
@@ -241,4 +224,4 @@
 //            assertThat(desirialized.get事業者名称カナ(), is(sut.get事業者名称カナ()));
 //        }
 //    }
-//}
+}

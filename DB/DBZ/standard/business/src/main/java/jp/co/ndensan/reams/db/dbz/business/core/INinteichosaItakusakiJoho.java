@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -28,7 +27,7 @@ public interface INinteichosaItakusakiJoho {
      *
      * @return 認定調査委託先エンティティの情報
      */
-    INinteichosaItakusakiJohoEntity getEntity();
+    //INinteichosaItakusakiJohoEntity getEntity();
 
     /**
      * 市町村コードを返します。
@@ -37,12 +36,12 @@ public interface INinteichosaItakusakiJoho {
      */
     LasdecCode get市町村コード();
 
-    /**
-     * 認定調査委託先コードを返します。
-     *
-     * @return 認定調査委託先コード
-     */
-    ChosaItakusakiCode get認定調査委託先コード();
+//    /**
+//     * 認定調査委託先コードを返します。
+//     *
+//     * @return 認定調査委託先コード
+//     */
+//    ChosaItakusakiCode get認定調査委託先コード();
 
     /**
      * 事業者番号を返します。
@@ -93,12 +92,12 @@ public interface INinteichosaItakusakiJoho {
      */
     TelNo getFAX番号();
 
-    /**
-     * 代表者名を返します。
-     *
-     * @return 代表者名
-     */
-    AtenaMeisho get代表者名();
+//    /**
+//     * 代表者名を返します。
+//     *
+//     * @return 代表者名
+//     */
+//    AtenaMeisho get代表者名();
 
     /**
      * 調査委託区分を返します。

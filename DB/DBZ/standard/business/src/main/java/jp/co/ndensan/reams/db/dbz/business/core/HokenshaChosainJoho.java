@@ -6,16 +6,16 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 調査員情報のビジネスクラスです。
@@ -44,10 +44,10 @@ public class HokenshaChosainJoho implements Serializable, IChosainJoho {
      *
      * @return DbT4913ChosainJohoEntity
      */
-    @Override
-    public DbT4913ChosainJohoEntity getEntity() {
-        return entity;
-    }
+//    @Override
+//    public DbT4913ChosainJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * 市町村コードを返します。
