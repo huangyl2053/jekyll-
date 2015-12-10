@@ -122,6 +122,8 @@ public class ShisetsuJohoHandler {
                 || (台帳種別表示.equals(new RString("1")) && 台帳種別.equals(DaichoType.他市町村住所地特例者.getCode())
                 && div.getRadKaigoHokenShisetsu().getSelectedKey() != null && !div.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())) {
 
+            div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
+            div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             List<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(new KaigoJigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
             if (kaigoJigyosha != null && !kaigoJigyosha.isEmpty()) {
@@ -142,6 +144,8 @@ public class ShisetsuJohoHandler {
                 || (台帳種別表示.equals(new RString("1")) && 台帳種別.equals(DaichoType.他市町村住所地特例者.getCode())
                 && div.getRadOtherTokureiShisetsu().getSelectedKey() != null && !div.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())) {
 
+            div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
+            div.getRadTekiyoJyogaiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             List<KaigoJogaiTokureiTaishoShisetsuInputGuide> kaigoJogaiTokureiTaishoShisetsu = shisetsuJoho.
                     getKaigoJogaiTokureiTaishoShisetsuInputGuide(ShisetsuType.住所地特例対象施設.getCode(), new JigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
@@ -160,6 +164,8 @@ public class ShisetsuJohoHandler {
                 && !div.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())
                 || (台帳種別表示.equals(new RString("1")) && 台帳種別.equals(DaichoType.適用除外者.getCode()))) {
 
+            div.getRadKaigoHokenShisetsu().getDisabledItem().clear();
+            div.getRadOtherTokureiShisetsu().getDisabledItem().clear();
             ShisetsuJohoInputGuideFinder shisetsuJoho = new ShisetsuJohoInputGuideFinder();
             List<KaigoJigyoshaInputGuide> kaigoJigyosha = shisetsuJoho.getKaigoJigyoshaInputGuide(new KaigoJigyoshaNo(div.getTxtNyuryokuShisetsuKodo().getValue()), FlexibleDate.getNowDate());
             if (kaigoJigyosha != null && !kaigoJigyosha.isEmpty()) {
