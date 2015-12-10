@@ -79,10 +79,16 @@
         FROM rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595
         LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" DbT4910
         ON  DbT5595."ninteichosaItakusakiCode" = DbT4910."ninteichosaItakusakiCode"
-        AND DbT4910."shichosonCode" = #{shichosonCode}
+        AND DbT4910."shichosonCode" =
+        (SELECT DbT5051."shichosonCode"
+        FROM rgdb."DbT5051KoseiShichosonMaster" DbT5051
+        WHERE DbT5595."shoKisaiHokenshaNo" = DbT5051."shoKisaiHokenshaNo")
         LEFT JOIN rgdb."DbT4911ShujiiIryoKikanJoho" DbT4911
         ON  DbT5595."shujiiIryokikanCode" = DbT4911."shujiiIryokikanCode"
-        AND DbT4911."shichosonCode" = #{shichosonCode}
+        AND DbT4911."shichosonCode" =
+        (SELECT DbT5051."shichosonCode"
+        FROM rgdb."DbT5051KoseiShichosonMaster" DbT5051
+        WHERE DbT5595."shoKisaiHokenshaNo" = DbT5051."shoKisaiHokenshaNo")
         LEFT JOIN rgdb."DbT5914SonotaKikanJoho" DbT5914
         ON  DbT5595."sonotaKikanCode" = DbT5914."sonotaKikanCode"
         AND DbT5595."shoKisaiHokenshaNo" = DbT5914."shoKisaiHokenshaNo"
@@ -101,7 +107,7 @@
         FROM rgdb."DbT5594ShinsakaiIinJoho" DbT5594
         WHERE DbT5594."shinsakaiIinCode" = #{shinsakaiIinCode}
     </select>
-    
+
     <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity" autoMapping="true">
         <id property="介護認定審査会委員情報Entity.shinsakaiIinCode" column="dbT5594ShinsakaiIinJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 

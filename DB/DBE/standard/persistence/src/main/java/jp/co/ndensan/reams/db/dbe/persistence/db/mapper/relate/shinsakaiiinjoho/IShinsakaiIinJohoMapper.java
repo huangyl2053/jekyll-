@@ -27,7 +27,7 @@ public interface IShinsakaiIinJohoMapper {
      * 介護認定審査会委員情報を廃止フラグ検索でList取得します。
      *
      * @param boolean 廃止フラグ
-     * @return ShinsakaiIinJohoEntity
+     * @return List<ShinsakaiIinJohoEntity>
      */
     List<ShinsakaiIinJohoEntity> get審査会委員情報ByHaishiFlag(@Param(value = "haishiFlag") boolean haishiFlag);
 
@@ -35,15 +35,15 @@ public interface IShinsakaiIinJohoMapper {
      * 所属機関一覧情報をUserInfo．市町村コード、選択行の審査会委員コードでList取得します。
      *
      * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
-     * @return ShinsakaiIinJohoEntity
+     * @return List<ShozokuKikanIchiranEntity>
      */
     List<ShozokuKikanIchiranEntity> get所属機関一覧ByParameter(ShinsakaiIinJohoMapperParameter parameter);
 
     /**
-     * 所属機関一覧情報をUserInfo．市町村コード、選択行の審査会委員コードでList取得します。
+     * 審査会委員コードで件数を取得します。
      *
      * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
-     * @return ShinsakaiIinJohoEntity
+     * @return int 審査会委員カウント
      */
     int get審査会委員カウント(ShinsakaiIinJohoMapperParameter parameter);
 
