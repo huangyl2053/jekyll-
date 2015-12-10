@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1030011",
      "toLayoutTitle": "資格喪失異動",
-     "toState": "default"
+     "toState": "初期状態"
     },
     {
      "id": "3",
@@ -36,21 +36,49 @@
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
-     "eventName": "再検索する",
+     "eventName": "再検索",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": "該当者一覧"
+     "toState": "検索条件"
     },
     {
      "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1030011",
+     "layoutTitle": "資格喪失異動",
+     "eventName": "詳細へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA4010012",
+     "toLayoutTitle": "被保険者資格詳細",
+     "toState": "初期状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA4010012",
+     "layoutTitle": "被保険者資格詳細",
+     "eventName": "被保履歴へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1030011",
+     "toLayoutTitle": "資格喪失異動",
+     "toState": "初期状態"
+    },
+    {
+     "id": "6",
      "type": "end",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
-     "eventName": "終了する",
+     "eventName": "完了",
      "destroy": false,
      "condition": ""
     }
