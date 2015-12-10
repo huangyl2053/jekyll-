@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.ShinsakaiIinJohoToroku;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.shinsakaiiinjohotoroku;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
