@@ -27,19 +27,20 @@
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS DbT5101NinteiShinseiJoho
         ON
          DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
-       (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.noDeleted_DbT5223ChikuNinteiChosain" />) AS DbT5223ChikuNinteiChosain
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.noDeleted_DbT5223ChikuNinteiChosain" />) AS DbT5223ChikuNinteiChosain
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.noDeleted_DbT5224ChikuShichoson" />) AS DbT5224ChikuShichoson
-        ON 
+        ON (
            DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_chosaChikuCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode"
         AND 
-           DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_shichosonCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode"
+           DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_shichosonCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode")
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.noDeleted_DbT5225ChosaChikuGroup" />) AS DbT5225ChosaChikuGroup
-        ON
+        ON (
         DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosachikucode" 
         AND
-        DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode" 
+        DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode" )
         <where>
             <if test="uses認定調査予定年月日">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD" = #{認定調査予定年月日}
