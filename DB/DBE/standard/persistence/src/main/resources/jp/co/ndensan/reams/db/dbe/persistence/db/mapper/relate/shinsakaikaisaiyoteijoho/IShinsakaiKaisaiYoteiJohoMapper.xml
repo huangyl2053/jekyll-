@@ -8,80 +8,138 @@
     <select id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
-     SELECT
-         dbT5501ShinsakaiKaisaiYoteiJoho.*,
-         dbT5512ShinsakaiOnseiJoho.*,
-         dbT5511ShinsakaiKaisaiKekkaJoho.*,
-         dbT5502ShinsakaiWariateJoho.*,
-         dbT5503ShinsakaiWariateIinJoho.*,
-         dbT5101NinteiShinseiJoho.*,
-         dbT5594ShinsakaiIinJoho.*
-     FROM
-     (
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho"/>
-     FROM
-         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
-     WHERE
-          "shinsakaiKaisaiNo"=#{shinsakaiKaisaiNo}
-     ) AS dbT5501ShinsakaiKaisaiYoteiJoho
-     LEFT JOIN
-     (
-      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper.allColumns_DbT5512ShinsakaiOnseiJoho"/>
-      FROM
-         rgdb."DbT5512ShinsakaiOnseiJoho"
-     ) AS dbT5512ShinsakaiOnseiJoho
-     ON
-         dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5512ShinsakaiOnseiJoho."dbT5512ShinsakaiOnseiJoho_shinsakaiKaisaiNo"
-     LEFT JOIN
-     (
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.allColumns_DbT5511ShinsakaiKaisaiKekkaJoho" />
-     FROM
+        SELECT
+        dbT5501ShinsakaiKaisaiYoteiJoho.*,
+        dbT5512ShinsakaiOnseiJoho.*,
+        dbT5511ShinsakaiKaisaiKekkaJoho.*,
+        dbT5502ShinsakaiWariateJoho.*,
+        dbT5503ShinsakaiWariateIinJoho.*,
+        dbT5101NinteiShinseiJoho.*,
+        dbT5594ShinsakaiIinJoho.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.allColumns_DbT5501ShinsakaiKaisaiYoteiJoho"/>
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+        WHERE
+        "shinsakaiKaisaiNo"=#{shinsakaiKaisaiNo}
+        ) AS dbT5501ShinsakaiKaisaiYoteiJoho
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper.allColumns_DbT5512ShinsakaiOnseiJoho"/>
+        FROM
+        rgdb."DbT5512ShinsakaiOnseiJoho"
+        ) AS dbT5512ShinsakaiOnseiJoho
+        ON
+        dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5512ShinsakaiOnseiJoho."dbT5512ShinsakaiOnseiJoho_shinsakaiKaisaiNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.allColumns_DbT5511ShinsakaiKaisaiKekkaJoho" />
+        FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"
-     ) AS  dbT5511ShinsakaiKaisaiKekkaJoho
-     ON
-       dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo" 
-     LEFT JOIN
-     (
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
-     FROM
-         rgdb."DbT5502ShinsakaiWariateJoho"
-     ) AS dbT5502ShinsakaiWariateJoho
-     ON
-       dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo"
-     LEFT JOIN
-     (
-      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho"/>
-      FROM
-         rgdb."DbT5503ShinsakaiWariateIinJoho"
-      ) AS dbT5503ShinsakaiWariateIinJoho
-      ON
-         dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo"
-     LEFT OUTER JOIN
-     (
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
-     FROM
-         rgdb."DbT5101NinteiShinseiJoho"
-     ) AS  dbT5101NinteiShinseiJoho
-     ON
-         dbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" = dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
-     LEFT JOIN
-     (
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
-     FROM
-         rgdb."DbT5594ShinsakaiIinJoho"
-     ) AS dbT5594ShinsakaiIinJoho
-     ON
-        dbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode" = dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode" 
-     ;     
-     </select>
+        ) AS  dbT5511ShinsakaiKaisaiKekkaJoho
+        ON
+        dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        FROM
+        rgdb."DbT5502ShinsakaiWariateJoho"
+        ) AS dbT5502ShinsakaiWariateJoho
+        ON
+        dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinsakaiKaisaiNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho"/>
+        FROM
+        rgdb."DbT5503ShinsakaiWariateIinJoho"
+        ) AS dbT5503ShinsakaiWariateIinJoho
+        ON
+        dbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo" = dbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo"
+        LEFT OUTER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        ) AS  dbT5101NinteiShinseiJoho
+        ON
+        dbT5502ShinsakaiWariateJoho."dbT5502ShinsakaiWariateJoho_shinseishoKanriNo" = dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        FROM
+        rgdb."DbT5594ShinsakaiIinJoho"
+        ) AS dbT5594ShinsakaiIinJoho
+        ON
+        dbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode" = dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        ;
+    </select>
+    <select id="getShinsakaiKaisaiYoteiJohoEntity"
+            resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
 
+        SELECT
+        DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        ,DbT5594ShinsakaiIinJoho."shinsakaiIinShimei"
+        ,DbT5594ShinsakaiIinJoho."seibetsu"
+        ,DbT5594ShinsakaiIinJoho."shinsakaiIinShikakuCode"
+        ,DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode"
+        ,DbT5503ShinsakaiWariateIinJoho."kaigoninteiShinsakaiGichoKubunCode"
+        ,DbT5503ShinsakaiWariateIinJoho."shussekiFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."existChikokuFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."shussekiTime"
+        ,DbT5503ShinsakaiWariateIinJoho."existSotaiFlag"
+        ,DbT5503ShinsakaiWariateIinJoho."taisekiTime"
+        FROM
+        rgdb."DbT5503ShinsakaiWariateIinJoho"  DbT5503ShinsakaiWariateIinJoho
+        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501ShinsakaiKaisaiYoteiJoho
+        ON DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho"  DbT5594ShinsakaiIinJoho
+        ON DbT5594ShinsakaiIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" DbT5593GogitaiWariateIinJoho
+        ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
+        AND DbT5593GogitaiWariateIinJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        WHERE
+        DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" ='1'
+        ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" asc, DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" desc;
+
+    </select>
+    <select id="getShinsakaiKaisaiYoteiJohoEntity"
+            resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
+        SELECT
+        "第" + DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" + "回審査会" AS 審査会名称
+        ,DbT5591GogitaiJoho."gogitaiNo"
+        ,DbT5591GogitaiJoho."gogitaiMei"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"AS shinsakaiWariateZumiNinzu
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiJisshiNinzu" AS shinsakaiJisshiNinzu
+        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaishiYoteiTime"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiShuryoYoteiTime"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD"
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS shinsakaiKaishiTime
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS shinsakaiShuryoTime
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shoyoJikanGokei" AS shoyoJikanGokei
+        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode" AS shinsakaiKaisaiBasho
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
+        LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
+        ON DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LEFT JOIN rgdb."DbT5591GogitaiJoho" DbT5591GogitaiJoho
+        ON DbT5591GogitaiJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+        LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
+        ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
+        WHERE
+        DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = 遷移元.開催番号
+    </select>
     <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
         <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
         <association property="介護認定審査会開催予定情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"/>
