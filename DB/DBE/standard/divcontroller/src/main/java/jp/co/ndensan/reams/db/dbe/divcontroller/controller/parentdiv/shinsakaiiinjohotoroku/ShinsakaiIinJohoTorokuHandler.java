@@ -138,7 +138,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 審査会委員一覧Gridの「修正」ボタンを押下、部品活性状態をセットする。
      */
-    public void set部品状態変化_修正ボタン() {
+    public void set修正部品状態() {
         div.getShinsakaiIinJohoIchiran().getBtnShinsakaiIinAdd().setDisabled(false);
         div.getShinsakaiIinJoho().getTxtShinsaIinYMDFrom().setDisabled(false);
         div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().setDisabled(false);
@@ -165,7 +165,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 「審査会委員を追加する」ボタンを押下、部品活性状態をセットする。
      */
-    public void set部品状態変化_追加ボタン() {
+    public void set追加部品状態() {
         div.getShinsakaiIinJoho().getTxtShinsainCode().setDisabled(false);
         div.getShinsakaiIinJoho().getTxtShinsaIinYMDFrom().setDisabled(false);
         div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().setDisabled(false);
@@ -235,15 +235,36 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 審査会委員詳細情報変更を判断します。
      *
-     * 。
-     *
-     * @return　boolean
+     * @return　boolean hasChanged合議体詳細情報
      */
     public boolean hasChanged合議体詳細情報() {
-        for (dgShinsaInJohoIchiran_Row row : div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource()) {
-            if (div.getShinsakaiIinJoho().getTxtShinsainCode().getValue().equals(row.getShinsainCode())) {
-                return true;
-            }
+        dgShinsaInJohoIchiran_Row row = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem();
+        if (!row.getShinsainCode().equals(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue())) {
+            return true;
+        }
+        if (!row.getShinsakaiIinKaishiYMD().getValue().equals(div.getShinsakaiIinJoho().getTxtShinsaIinYMDFrom().getValue())) {
+            return true;
+        }
+        if (!row.getShinsakaiIinShuryoYMD().getValue().equals(div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue())) {
+            return true;
+        }
+        if (!row.getShimei().equals(div.getShinsakaiIinJoho().getTxtShimei().getValue())) {
+            return true;
+        }
+        if (!row.getKanaShimei().equals(div.getShinsakaiIinJoho().getTxtKanaShimei().getValue())) {
+            return true;
+        }
+        if (!row.getBarthYMD().getValue().wareki().equals(div.getShinsakaiIinJoho().getTxtBirthYMD().getValue().wareki())) {
+            return true;
+        }
+        if (!row.getSeibetsu().equals(div.getShinsakaiIinJoho().getRadSeibetsu().getSelectedValue())) {
+            return true;
+        }
+        if (!row.getShikakuCode().equals(div.getShinsakaiIinJoho().getDdlShikakuCode().getSelectedValue())) {
+            return true;
+        }
+        if (!row.getBiko().equals(div.getShinsakaiIinJoho().getTxtBiko().getValue())) {
+            return true;
         }
         return false;
     }
@@ -251,7 +272,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 「入力内容を更新する」ボタン押下、入力明細エリアの入力内容を審査会委員一覧に反映させる。
      *
-     * @return リスト
+     * @return List<dgShinsaInJohoIchiran_Row>
      */
     public List<dgShinsaInJohoIchiran_Row> set審査会委員詳細To委員一覧() {
         List<dgShinsaInJohoIchiran_Row> list = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource();
@@ -288,7 +309,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     /**
      * 画面で格納される審査会委員情報はＤＢ格納用型に転換します。
      *
-     * @return リスト
+     * @return List<dgShinsaInJohoIchiran_Row>
      */
     public List<dgShinsaInJohoIchiran_Row> set審査会委員一覧情報ToService() {
         for (dgShinsaInJohoIchiran_Row row : div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource()) {
@@ -403,5 +424,4 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getRenrakusakiKinyuKikan().getTxtFaxNo().clearDomain();
         div.getRenrakusakiKinyuKikan().getTxtFaxNo().setDisabled(true);
     }
-
 }

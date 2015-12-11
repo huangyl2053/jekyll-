@@ -22,6 +22,8 @@ public class ShinsakaiIinJohoToroku {
 
     private static final RString 新規モード = new RString("新規");
     private static final RString 更新モード = new RString("更新");
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static RString モード;
 
@@ -108,19 +110,19 @@ public class ShinsakaiIinJohoToroku {
      * @return レスポンス
      */
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
-
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        boolean hasChanged合議体詳細情報 = false;
+
         if (新規モード.equals(モード) || 更新モード.equals(モード)) {
-//            if (div.getShinsakaiIinJoho().) {
-//
-//            }
-        }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            boolean hasChanged合議体詳細情報 = createHandOf(div).hasChanged合議体詳細情報();
+            if (hasChanged合議体詳細情報) {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+                }
+            }
         }
         モード = 更新モード;
-        createHandOf(div).set部品状態変化_修正ボタン();
+//      TODO ２.　所属機関一覧検索
+        createHandOf(div).set修正部品状態();
         response.data = div;
         return response;
     }
@@ -132,17 +134,19 @@ public class ShinsakaiIinJohoToroku {
      * @return レスポンス
      */
     public ResponseData onClick_btnDeleteShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
-            // 画面内部モード設定
         }
-        if (新規モード.equals(div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
+        if (状態_追加.equals(div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
             div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource().
                     remove(div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem());
         } else {
             div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem().setStatus(状態_削除);
         }
-        return onClick_shinsaInJohoIchiranGyo(div);
+        response.data = div;
+        return response;
     }
 
     /**
@@ -154,18 +158,15 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnShinsakaiIinAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-//        if(入力内容が変更する){
-//
-//        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            // 画面内部モード設定
         }
+        モード = 新規モード;
         ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
-        handler.set部品状態変化_追加ボタン();
+        handler.set追加部品状態();
         handler.clear審査会委員詳細情報();
         handler.clear連絡先金融機関();
-        div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().getDataSource().add(new dgShozokuKikanIchiran_Row());
+        div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource().add(new dgShinsaInJohoIchiran_Row());
         response.data = div;
         return response;
     }
@@ -188,9 +189,6 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnShozokuKikanAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbzQuestionMessages.削除の確認.getMessage()).respond();
-        }
         div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().getDataSource().add(new dgShozokuKikanIchiran_Row());
         response.data = div;
         return response;
@@ -204,6 +202,9 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzQuestionMessages.削除の確認.getMessage()).respond();
+        }
         div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().getDataSource().
                 remove(div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().getClickedItem());
         response.data = div;
