@@ -4,10 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.entity.Idokikan;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
@@ -22,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -64,14 +63,14 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
     }
 
     /**
-     * 適用除外者テーブルに適用年月日と解除年月日を取得する
+     * 適用除外者テーブルに適用年月日と解除年月日を取得する。
      *
-     * @param 識別コード 識別コード
-     * @return 適用除外者テーブルに適用年月日と解除年月日のリスト
-     * @throws NullPointerException 識別コードがnull
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbT1002TekiyoJogaishaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<Idokikan> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
+    public List<DbT1002TekiyoJogaishaEntity> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -80,18 +79,9 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                 table(DbT1002TekiyoJogaisha.class).
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
-                                eq(logicalDeletedFlag, false))).
+                                not(eq(logicalDeletedFlag, true)))).
                 toList(DbT1002TekiyoJogaishaEntity.class);
-        List<Idokikan> idokikanList = new ArrayList<>();
-        for (DbT1002TekiyoJogaishaEntity tekiyoJogaisha : tekiyoJogaishaEntityList) {
-            Idokikan idokikan = new Idokikan();
-            idokikan.setKaishiYMD(tekiyoJogaisha.getTekiyoYMD());
-            idokikan.setShuryoYMD(tekiyoJogaisha.getKaijoYMD());
-            idokikan.setEdaNo(tekiyoJogaisha.getEdaNo());
-            idokikan.setIdoYMD(tekiyoJogaisha.getIdoYMD());
-            idokikanList.add(idokikan);
-        }
-        return idokikanList;
+        return tekiyoJogaishaEntityList;
     }
 
     /**
