@@ -186,6 +186,11 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
+    }
+
+    @JsonIgnore
     public Button getBtnupdate() {
         return this.getShinakaiKaisaIbashoShosai().getBtnupdate();
     }
@@ -203,11 +208,6 @@ public class NinteiShinsakaiKaisaibashoTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnback(Button btnback) {
         this.getShinakaiKaisaIbashoShosai().setBtnback(btnback);
-    }
-
-    @JsonIgnore
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return this.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
     }
 
     // </editor-fold>
