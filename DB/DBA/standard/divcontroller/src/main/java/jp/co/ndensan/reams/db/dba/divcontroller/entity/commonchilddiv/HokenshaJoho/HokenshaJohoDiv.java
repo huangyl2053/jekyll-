@@ -28,8 +28,8 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     private ButtonDialog btnHokenshaSelect;
     @JsonProperty("txtHokenshaMeisho")
     private TextBox txtHokenshaMeisho;
-    @JsonProperty("ServiceTypeModel")
-    private RString ServiceTypeModel;
+    @JsonProperty("HokenshaModel")
+    private RString HokenshaModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -92,21 +92,21 @@ public class HokenshaJohoDiv extends Panel implements IHokenshaJohoDiv {
     }
 
     /*
-     * getServiceTypeModel
-     * @return ServiceTypeModel
+     * getHokenshaModel
+     * @return HokenshaModel
      */
-    @JsonProperty("ServiceTypeModel")
-    public RString getServiceTypeModel() {
-        return ServiceTypeModel;
+    @JsonProperty("HokenshaModel")
+    public RString getHokenshaModel() {
+        return HokenshaModel;
     }
 
     /*
-     * setServiceTypeModel
-     * @param ServiceTypeModel ServiceTypeModel
+     * setHokenshaModel
+     * @param HokenshaModel HokenshaModel
      */
-    @JsonProperty("ServiceTypeModel")
-    public void setServiceTypeModel(RString ServiceTypeModel) {
-        this.ServiceTypeModel = ServiceTypeModel;
+    @JsonProperty("HokenshaModel")
+    public void setHokenshaModel(RString HokenshaModel) {
+        this.HokenshaModel = HokenshaModel;
     }
 
     // </editor-fold>

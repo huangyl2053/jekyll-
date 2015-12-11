@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author 863
  */
-public class ServiceTypeModel implements Serializable {
+public class HokenshaModel implements Serializable {
 
     private RString 保険者名;
     private RString 保険者コード;

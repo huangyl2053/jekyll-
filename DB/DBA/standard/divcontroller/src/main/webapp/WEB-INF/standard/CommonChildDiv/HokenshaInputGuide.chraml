@@ -1,0 +1,635 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBA&quot;,&quot;controlName&quot;:&quot;HokenshaInputGuide&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;hokenshaNo&quot;,&quot;controlName&quot;:&quot;HokenshaInputGuide.hokenshaNo&quot;},{&quot;key&quot;:&quot;hokenshaMeisho&quot;,&quot;controlName&quot;:&quot;HokenshaInputGuide.hokenshaMeisho&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onSelectBySelectButton_dgSearchResultHokensha&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnHokenshaReturn&quot;,&quot;heightForDialog&quot;:&quot;Auto&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-control-name="DBA.HokenshaInputGuide" data-is-composite-control="true"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="HokenshaInputGuide" style="width: 460px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HokenshaInputGuide&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;460px&quot;,&quot;selectControlID&quot;:&quot;HokenshaInputGuide&quot;,&quot;title&quot;:&quot;保険者入力ガイド&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HokenshaInputGuide&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/HokenshaInputGuide/onGetHoken&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnSearchGaitoHokensha&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/HokenshaInputGuide/on保険者を表示する&quot;},{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgSearchResultHokensha&quot;,&quot;requestUrl&quot;:&quot;dba/db/dba/HokenshaInputGuide/onSelective&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hokenshaNo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hokenshaMeisho&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;HokenshaModel&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HokenshaInputGuide_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">保険者入力ガイド</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="HokenshaInputGuide_panel_body_area"><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="ddlHokenshaKenCode" style="width: 193px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlHokenshaKenCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;selectControlID&quot;:&quot;ddlHokenshaKenCode_core&quot;,&quot;text&quot;:&quot;&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;15&quot;,&quot;value&quot;:&quot;15 新潟県&quot;},{&quot;key&quot;:&quot;20&quot;,&quot;value&quot;:&quot;20 長野県&quot;},{&quot;key&quot;:&quot;47&quot;,&quot;value&quot;:&quot;47 沖縄県&quot;}],&quot;selectedItem&quot;:&quot;15&quot;,&quot;labelLText&quot;:&quot;県コード&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlHokenshaKenCode_labelL" style="width: 70px;"><span>県コード</span></span><select class="CoreElement" id="ddlHokenshaKenCode_core" style="width: 120px;"><option value="15">15 新潟県</option><option value="20">20 長野県</option><option value="47">47 沖縄県</option></select></div><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnSearchGaitoHokensha" style="width: 140px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSearchGaitoHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;140px&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnSearchGaitoHokensha&quot;,&quot;onClick&quot;:&quot;onClick_btnSearchGaitoHokensha&quot;,&quot;text&quot;:&quot;保険者を表示する&quot;}"><span>保険者を表示する</span></button><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCompositeChild" id="SearchResultHokensha" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SearchResultHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;SearchResultHokensha&quot;,&quot;title&quot;:&quot;保険者一覧&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SearchResultHokensha&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onActive&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;HokenshaModel&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SearchResultHokensha_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">保険者一覧</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SearchResultHokensha_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-S marginRight-XS Height-S UzCompositeChild" id="dgSearchResultHokensha" style="width: 360px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgSearchResultHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;360px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;dgSearchResultHokensha&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;保険者番号&quot;,&quot;dataName&quot;:&quot;hokenshaNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokenshaNo&quot;},{&quot;columnName&quot;:&quot;保険者名称&quot;,&quot;dataName&quot;:&quot;hokenshaMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokenshaMeisho&quot;},{&quot;columnName&quot;:&quot;保険者&quot;,&quot;dataName&quot;:&quot;hokensha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokensha&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;cancelButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectBySelectButton&quot;:&quot;onSelectBySelectButton_dgSearchResultHokensha&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgSearchResultHokensha_grid_table" role="" style="width: 360px; height: 176px; position: relative;"></div><div id="dgSearchResultHokensha_footer" style="width: 360px; height: 25px;"></div></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnHokenshaReturn" style="width: 140px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnHokenshaReturn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;140px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnHokenshaReturn&quot;,&quot;onClick&quot;:&quot;onClick_btnHokenshaReturn&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnSearchGaitoHokensha", {
+                get: function () {
+                    return "onClick_btnSearchGaitoHokensha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgSearchResultHokensha", {
+                get: function () {
+                    return "onSelectBySelectButton_dgSearchResultHokensha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnHokenshaReturn", {
+                get: function () {
+                    return "onClick_btnHokenshaReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HokenshaInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HokenshaInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HokenshaInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlHokenshaKenCode = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokenshaKenCode"));
+            };
+
+            Controls.prototype.btnSearchGaitoHokensha = function () {
+                return new UZA.Button(this.convFiledName("btnSearchGaitoHokensha"));
+            };
+
+            Controls.prototype.SearchResultHokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultHokensha"));
+            };
+
+            Controls.prototype.dgSearchResultHokensha = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultHokensha"));
+            };
+
+            Controls.prototype.btnHokenshaReturn = function () {
+                return new UZA.Button(this.convFiledName("btnHokenshaReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HokenshaInputGuide.Controls = Controls;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
+
+    var HokenshaInputGuide_Design = (function (_super) {
+        __extends(HokenshaInputGuide_Design, _super);
+        function HokenshaInputGuide_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, HokenshaInputGuide_Design.myLayout, fieldName);
+        }
+        HokenshaInputGuide_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        HokenshaInputGuide_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        HokenshaInputGuide_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "HokenshaInputGuide",
+                    "items": [
+                        {
+                            "fieldName": "ddlHokenshaKenCode",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "120",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlHokenshaKenCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "text": "",
+                            "dataSource": [
+                                {
+                                    "key": "15",
+                                    "value": "15 新潟県"
+                                },
+                                {
+                                    "key": "20",
+                                    "value": "20 長野県"
+                                },
+                                {
+                                    "key": "47",
+                                    "value": "47 沖縄県"
+                                }
+                            ],
+                            "onChange": "",
+                            "selectedItem": "15",
+                            "required": false,
+                            "labelLText": "県コード",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "btnSearchGaitoHokensha",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "140",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnSearchGaitoHokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnSearchGaitoHokensha",
+                            "text": "保険者を表示する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "SearchResultHokensha",
+                            "items": [
+                                {
+                                    "fieldName": "dgSearchResultHokensha",
+                                    "items": [],
+                                    "controlType": "DataGrid",
+                                    "width": "360",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "S",
+                                    "marginRight": "XS",
+                                    "selectControlID": "dgSearchResultHokensha",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "height": "S",
+                                    "gridSetting": {
+                                        "rowHeight": 25,
+                                        "isMultiSelectable": false,
+                                        "isShowHeader": true,
+                                        "isShowFooter": true,
+                                        "isShowFilter": false,
+                                        "isShowFilterButton": false,
+                                        "isShowRowState": false,
+                                        "isShowSelectButtonColumn": true,
+                                        "isShowModifyButtonColumn": false,
+                                        "isShowDeleteButtonColumn": false,
+                                        "header": {
+                                            "combineColumns": [],
+                                            "frozenColumn": "",
+                                            "headerHeight": 0
+                                        },
+                                        "columns": [
+                                            {
+                                                "columnName": "保険者番号",
+                                                "dataName": "hokenshaNo",
+                                                "toolTip": "",
+                                                "bgColor": 0,
+                                                "width": 0,
+                                                "visible": false,
+                                                "cellType": 0,
+                                                "cellDetails": null,
+                                                "align": 0,
+                                                "resize": false,
+                                                "isPrivateInfo": false,
+                                                "sortKey": "hokenshaNo"
+                                            },
+                                            {
+                                                "columnName": "保険者名称",
+                                                "dataName": "hokenshaMeisho",
+                                                "toolTip": "",
+                                                "bgColor": 0,
+                                                "width": 0,
+                                                "visible": false,
+                                                "cellType": 0,
+                                                "cellDetails": null,
+                                                "align": 0,
+                                                "resize": false,
+                                                "isPrivateInfo": false,
+                                                "sortKey": "hokenshaMeisho"
+                                            },
+                                            {
+                                                "columnName": "保険者",
+                                                "dataName": "hokensha",
+                                                "toolTip": "",
+                                                "bgColor": 0,
+                                                "width": 300,
+                                                "visible": true,
+                                                "cellType": 0,
+                                                "cellDetails": {
+                                                    "cellType": 0
+                                                },
+                                                "align": 0,
+                                                "resize": true,
+                                                "isPrivateInfo": false,
+                                                "sortKey": "hokensha"
+                                            }
+                                        ]
+                                    },
+                                    "onSort": "",
+                                    "onSelect": "",
+                                    "onSelectByDblClick": "",
+                                    "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultHokensha",
+                                    "onSelectByModifyButton": "",
+                                    "onSelectByDeleteButton": "",
+                                    "onAfterRequest": "",
+                                    "onAfterRequestByDblClick": "",
+                                    "onAfterRequestBySelectButton": "",
+                                    "onAfterRequestByModifyButton": "",
+                                    "onAfterRequestByDeleteButton": "",
+                                    "onOnlyRow": "",
+                                    "onNoRow": "",
+                                    "onMultiRows": "",
+                                    "dataSource": [],
+                                    "sortOrder": "hokensha",
+                                    "isAscending": true,
+                                    "filterList": [],
+                                    "activeRowId": -1
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "950",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SearchResultHokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "保険者一覧",
+                            "marginTop": "XS",
+                            "marginBottom": "XS",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SearchResultHokensha"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": true,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnHokenshaReturn",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "140",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnHokenshaReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnHokenshaReturn",
+                            "text": "閉じる",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "460",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "HokenshaInputGuide",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "保険者入力ガイド",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "HokenshaInputGuide"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onLoad"
+                        },
+                        {
+                            "eventName": "onClick_btnSearchGaitoHokensha",
+                            "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onClick_btnSearchGaitoHokensha"
+                        },
+                        {
+                            "eventName": "onSelectBySelectButton_dgSearchResultHokensha",
+                            "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onSelectBySelectButton_dgSearchResultHokensha"
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "hokenshaNo",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "hokenshaMeisho",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "HokenshaInputGuide",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "hokenshaNo",
+                    "controlName": "HokenshaInputGuide.hokenshaNo"
+                },
+                {
+                    "key": "hokenshaMeisho",
+                    "controlName": "HokenshaInputGuide.hokenshaMeisho"
+                }
+            ],
+            "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultHokensha",
+            "dialogCancelEventNameForDialog": "onClick_btnHokenshaReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
+        };
+        return HokenshaInputGuide_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.HokenshaInputGuide_Design = HokenshaInputGuide_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaInputGuide) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HokenshaInputGuide.ModeController = ModeController;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaInputGuide) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HokenshaInputGuide.PublicProperties = PublicProperties;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
+})(DBZ || (DBZ = {}));
+</script>
+  
+     
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBA= DBA? DBA: {};
+DBA['HOKENSHAINPUTGUIDE'] = {};
+DBA['HOKENSHAINPUTGUIDE'].HokenshaInputGuideRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HokenshaInputGuide').getProperty();parameter0.ddlHokenshaKenCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlHokenshaKenCode').getProperty();parameter0.btnSearchGaitoHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSearchGaitoHokensha').getProperty();parameter0.SearchResultHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchResultHokensha').getProperty();parameter0.SearchResultHokensha.dgSearchResultHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgSearchResultHokensha').getProperty();parameter0.btnHokenshaReturn = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnHokenshaReturn').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBA['HOKENSHAINPUTGUIDE'].SearchResultHokenshaRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchResultHokensha').getProperty();parameter0.dgSearchResultHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgSearchResultHokensha').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBA;
+(function (DBA) {
+    (function (HokenshaInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnSearchGaitoHokensha = function () {
+                return "onClick_btnSearchGaitoHokensha";
+            };
+
+            Events.onSelectBySelectButton_dgSearchResultHokensha = function () {
+                return "onSelectBySelectButton_dgSearchResultHokensha";
+            };
+
+            Events.onClick_btnHokenshaReturn = function () {
+                return "onClick_btnHokenshaReturn";
+            };
+            return Events;
+        })();
+        HokenshaInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HokenshaInputGuide";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBA.HokenshaInputGuide.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBA.HokenshaInputGuide.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HokenshaInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlHokenshaKenCode = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokenshaKenCode"));
+            };
+
+            Controls.prototype.btnSearchGaitoHokensha = function () {
+                return new UZA.Button(this.convFiledName("btnSearchGaitoHokensha"));
+            };
+
+            Controls.prototype.SearchResultHokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultHokensha"));
+            };
+
+            Controls.prototype.dgSearchResultHokensha = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultHokensha"));
+            };
+
+            Controls.prototype.btnHokenshaReturn = function () {
+                return new UZA.Button(this.convFiledName("btnHokenshaReturn"));
+            };
+            return Controls;
+        })();
+        HokenshaInputGuide.Controls = Controls;
+    })(DBA.HokenshaInputGuide || (DBA.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBA.HokenshaInputGuide;
+})(DBA || (DBA = {}));
+var DBA;
+(function (DBA) {
+    (function (HokenshaInputGuide) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new HokenshaInputGuide.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HokenshaInputGuide.ModeController = ModeController;
+    })(DBA.HokenshaInputGuide || (DBA.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBA.HokenshaInputGuide;
+})(DBA || (DBA = {}));
+
+var DBA;
+(function (DBA) {
+    (function (HokenshaInputGuide) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HokenshaInputGuide.PublicProperties = PublicProperties;
+    })(DBA.HokenshaInputGuide || (DBA.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBA.HokenshaInputGuide;
+})(DBA || (DBA = {}));
+</script></div>
