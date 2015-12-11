@@ -11,18 +11,11 @@ import jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenI
 import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 
 import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.sikakukanrenido.ISikakuKanrenIdoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku.SikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
+
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -37,7 +30,7 @@ public class SikakuKanrenIdoFinder {
     private final MapperProvider mapperProvider;
     private final DbT7051KoseiShichosonMasterDac db7051Dac;
     private final SikakuJiyuShutoku sikaku;
-    private final ShichosonSecurityJoho shiho;
+
     private static final RString コード種別_0126 = new RString("0126");
 
     /**
@@ -48,7 +41,6 @@ public class SikakuKanrenIdoFinder {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.db7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.sikaku = InstanceProvider.create(SikakuJiyuShutoku.class);
-        this.shiho = InstanceProvider.create(ShichosonSecurityJoho.class);
 
     }
 
@@ -102,33 +94,5 @@ public class SikakuKanrenIdoFinder {
             return new ArrayList<>();
         }
         return businessList;
-    }
-
-    /**
-     * 市町村セキュリティ取得
-     *
-     * @return List<GappeiShichoson>
-     */
-    public List<GappeiShichoson> getGappeiShichosonList() {
-        List<GappeiShichoson> 旧市町村コード情報List = new ArrayList<>();
-
-        ShichosonSecurityJoho 市町村セキュリティ = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        KyuShichosonCodeJoho 旧市町村コード情報 = KyuShichosonCode.
-                getKyuShichosonCodeJoho(LasdecCode.EMPTY, DonyukeitaiCode.toValue(市町村セキュリティ.get導入形態コード().getKey()));
-        if (旧市町村コード情報 == null) {
-
-            return null;
-        } else {
-            for (KyuShichosonCode entity : 旧市町村コード情報.get旧市町村コード情報List()) {
-                DbT7056GappeiShichosonEntity list = new DbT7056GappeiShichosonEntity();
-                //List<KyuShichosonCodeJoho>
-
-                entity.get旧市町村コード();
-                entity.get旧保険者番号();
-                entity.get旧市町村名称();
-                旧市町村コード情報List.add(new GappeiShichoson(list));
-            }
-            return 旧市町村コード情報List;
-        }
     }
 }
