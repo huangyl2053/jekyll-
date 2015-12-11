@@ -196,9 +196,8 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
         return accessor.
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
-                // TODO 凌護行　「市町村識別コード」がない、QA回答まち。
                 where(or(
-                                eq(shichosonCode, "00"),
+                                eq(shichosonShokibetsuID, "00"),
                                 (and(eq(shichosonShokibetsuID, 識別ID),
                                         eq(gappeiKyuShichosonKubun, "0")
                                 )))).

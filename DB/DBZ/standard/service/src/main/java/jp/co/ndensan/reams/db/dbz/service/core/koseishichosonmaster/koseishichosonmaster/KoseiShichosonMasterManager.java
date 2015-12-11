@@ -209,7 +209,6 @@ public class KoseiShichosonMasterManager {
         KoseiShichosonMasterRelateEntity koseiShichosonMasterEntity = new KoseiShichosonMasterRelateEntity();
         DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        // TODO 凌護行 テーブルに「市町村識別コード」がない、QA154回答まち。2015/11/15
         entity.setShichosonShokibetsuID(SHICHOSONSHOKIBETSUID);
         entity.setShichosonCode(new LasdecCode(association.get地方公共団体コード().value()));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(BusinessConfig.get(HokenshaJoho.保険者情報_保険者番号,
