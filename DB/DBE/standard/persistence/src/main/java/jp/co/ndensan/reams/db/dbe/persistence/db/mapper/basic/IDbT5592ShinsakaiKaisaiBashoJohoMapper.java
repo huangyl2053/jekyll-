@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 
 /**
@@ -20,4 +22,13 @@ public interface IDbT5592ShinsakaiKaisaiBashoJohoMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5592ShinsakaiKaisaiBashoJohoEntity getEntity();
+    
+    /**
+     * {@link DbT5592ShinsakaiKaisaiBashoJohoEntity}を取得します。
+     *
+     * @param param
+     * @return {@link List<DbT5592ShinsakaiKaisaiBashoJohoEntity>}
+     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
+     */
+    List<DbT5592ShinsakaiKaisaiBashoJohoEntity> getYiChiRanEntity(GogitaiJohoMapperParameter param);
 }

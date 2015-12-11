@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper">
     
-    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。-->
     <sql id="noDeleted_DbT5592ShinsakaiKaisaiBashoJoho">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper.allColumns_DbT5592ShinsakaiKaisaiBashoJoho" />
@@ -32,7 +32,6 @@
          "DbT5592ShinsakaiKaisaiBashoJoho"."shinsakaiKaisaiBashoJokyo" as "dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoJokyo"
     </sql>
 
-
     <!--テーブルDbT5592ShinsakaiKaisaiBashoJohoの項目をDbT5592ShinsakaiKaisaiBashoJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity" autoMapping="true">
         <id property="shinsakaiKaisaiBashoCode" column="dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -50,10 +49,29 @@
         <result property="shinsakaiKaisaiBashoTelNo" column="dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="shinsakaiKaisaiBashoJokyo" column="dbT5592ShinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoJokyo" />
     </resultMap>
+    
+    
    <select id="getEntity" resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity">
         SELECT
         <include refid="allColumns_DbT5592ShinsakaiKaisaiBashoJoho"/>
         FROM
         rgdb."DbT5592ShinsakaiKaisaiBashoJoho"
+    </select>
+   
+    <select id="getYiChiRanEntity"
+            resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500" >
+        SELECT
+        <include refid="allColumns_DbT5592ShinsakaiKaisaiBashoJoho"/>
+        FROM
+        rgdb."DbT5592ShinsakaiKaisaiBashoJoho"
+        WHERE
+        rgdb."DbT5592ShinsakaiKaisaiBashoJoho"."isDeleted" = FALSE
+        <if test="shinsakaiKaisaiBashoJokyo">
+             AND
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho"."shinsakaiKaisaiBashoJokyo" = TRUE
+        </if>
+        ORDER BY
+        rgdb."DbT5592ShinsakaiKaisaiBashoJoho"."shinsakaiKaisaiBashoCode"
     </select>
 </mapper>
