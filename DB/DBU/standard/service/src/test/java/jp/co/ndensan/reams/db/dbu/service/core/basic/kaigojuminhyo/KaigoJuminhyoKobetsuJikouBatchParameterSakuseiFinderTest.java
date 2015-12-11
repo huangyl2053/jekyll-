@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo;
 
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
-import jp.co.ndensan.reams.db.dbu.entity.kaigojuminhyo.ChushutsuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
@@ -56,22 +55,22 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinderTest extends Db
     @Test
     public void 検索結果が存在する場合_対象開始日時を返して() {
         insert_DbT7022ShoriDateKanri(サブ業務コード, 処理名, 処理枝番);
-        ChushutsuKikanJohoEntity result = sut.getChushutsukikanJoho();
+        DbT7022ShoriDateKanriEntity result = sut.getChushutsukikanJoho();
         assertEquals(result.getTaishoKaishiYMD().toString(), "20100101");
     }
 
     @Test
     public void 検索結果が存在する場合_対象開始日時にNULLを返して() {
         insert_DbT7022ShoriDateKanriIsEmpty(サブ業務コード, 処理名, 処理枝番);
-        ChushutsuKikanJohoEntity result = sut.getChushutsukikanJoho();
-        assertEquals(result.getTaishoKaishiYMD().isEmpty(), true);
+        DbT7022ShoriDateKanriEntity result = sut.getChushutsukikanJoho();
+        assertEquals(result.getTaishoKaishiYMD() == null, true);
     }
 
     @Test
     public void 検索結果が存在しない場合_NULLを返して() {
         insert_DbT7022ShoriDateKanriNull(サブ業務コード, 処理名, 処理枝番);
-        ChushutsuKikanJohoEntity result = sut.getChushutsukikanJoho();
-        assertEquals(result.getTaishoKaishiYMD().isEmpty(), true);
+        DbT7022ShoriDateKanriEntity result = sut.getChushutsukikanJoho();
+        assertEquals(result == null, true);
     }
 
     private static void insert_DbT7022ShoriDateKanri(
