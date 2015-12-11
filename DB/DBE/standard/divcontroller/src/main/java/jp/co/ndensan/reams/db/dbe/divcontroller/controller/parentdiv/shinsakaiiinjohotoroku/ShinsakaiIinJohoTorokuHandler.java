@@ -270,43 +270,6 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
-     * 「入力内容を更新する」ボタン押下、入力明細エリアの入力内容を審査会委員一覧に反映させる。
-     *
-     * @return List<dgShinsaInJohoIchiran_Row>
-     */
-    public List<dgShinsaInJohoIchiran_Row> set審査会委員詳細To委員一覧() {
-        List<dgShinsaInJohoIchiran_Row> list = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource();
-        int count = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getGridSetting().selectedRowCount();
-        dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
-        row.setShinsainCode(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue());
-        row.getShinsakaiIinKaishiYMD().setValue(div.getShinsakaiIinJoho().getTxtShinsaIinYMDFrom().getValue());
-        row.getShinsakaiIinShuryoYMD().setValue(div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue());
-        row.setShimei(div.getShinsakaiIinJoho().getTxtShimei().getValue());
-        row.setKanaShimei(div.getShinsakaiIinJoho().getTxtKanaShimei().getValue());
-        row.setSeibetsu(div.getShinsakaiIinJoho().getRadSeibetsu().getSelectedValue());
-        row.getBarthYMD().setValue(div.getShinsakaiIinJoho().getTxtBirthYMD().getValue().toRDate());
-        row.setShikakuCode(div.getShinsakaiIinJoho().getDdlShikakuCode().getSelectedValue());
-        row.setBiko(div.getShinsakaiIinJoho().getTxtBiko().getValue());
-        row.setJokyo(div.getTxtHaishiFlag().getValue());
-//        row.setYubinNo(div.getRenrakusakiKinyuKikan().getTxtYubinNo().getValue().value());
-//        row.setYusoKubun(div.getRenrakusakiKinyuKikan().getDdlYusoKubun().getSelectedValue());
-//        row.setJusho(div.getRenrakusakiKinyuKikan().getTxtJusho().getDomain().value());
-//        row.getHaishiYMD().setValue(div.getRenrakusakiKinyuKikan().getTxtHaishiYMD().getValue());
-//        row.setTelNo(div.getRenrakusakiKinyuKikan().getTxtTelNo1().getDomain().value());
-//        row.setFaxNo(div.getRenrakusakiKinyuKikan().getTxtFaxNo().getDomain().value());
-        // TODO 新規モード
-        if (new RString("新規").equals(new RString("新規"))) {
-            row.setStatus(new RString("追加"));
-            list.add(row);
-            // TODO 更新モード
-        } else if (new RString("更新").equals(new RString("更新"))) {
-            row.setStatus(new RString("修正"));
-            list.set(count, row);
-        }
-        return list;
-    }
-
-    /**
      * 画面で格納される審査会委員情報はＤＢ格納用型に転換します。
      *
      * @return List<dgShinsaInJohoIchiran_Row>
