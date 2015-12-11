@@ -186,7 +186,7 @@ public class ShinsakaiKaisaiYoteiJohoManager {
         requireNonNull(介護認定審査会開催予定情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報検索条件"));
         IShinsakaiKaisaiYoteiJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiYoteiJohoMapper.class);
         List<ShinsakaiKaisaiYoteiJoho> businessList = new ArrayList<>();
-        ShinsakaiKaisaiYoteiJohoRelateEntity relateEntity = mapper.getShinsakaiWariateIinJohoEntity(介護認定審査会開催予定情報検索条件);
+        ShinsakaiKaisaiYoteiJohoRelateEntity relateEntity = mapper.getShinsakaiKaisaiYoteiJohoEntity(介護認定審査会開催予定情報検索条件);
         if (relateEntity == null) {
             return null;
         }

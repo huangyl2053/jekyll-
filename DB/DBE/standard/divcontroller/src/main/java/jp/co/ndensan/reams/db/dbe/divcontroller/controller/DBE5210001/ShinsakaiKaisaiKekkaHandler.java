@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * 護認定審査会開催結果登録するクラスです
  *
  */
-public class ShinsakaiKaisaiKekkaHander {
+public class ShinsakaiKaisaiKekkaHandler {
 
     private final ShinsakaiKaisaiKekkaDiv div;
 
@@ -38,7 +38,7 @@ public class ShinsakaiKaisaiKekkaHander {
      *
      * @param div 介護認定審査会開催結果登録Div
      */
-    public ShinsakaiKaisaiKekkaHander(ShinsakaiKaisaiKekkaDiv div) {
+    public ShinsakaiKaisaiKekkaHandler(ShinsakaiKaisaiKekkaDiv div) {
         this.div = div;
     }
 

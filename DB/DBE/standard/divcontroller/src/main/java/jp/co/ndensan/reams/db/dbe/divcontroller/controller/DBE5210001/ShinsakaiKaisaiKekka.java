@@ -153,8 +153,8 @@ public class ShinsakaiKaisaiKekka {
         return responseData;
     }
 
-    private ShinsakaiKaisaiKekkaHander getHandler(ShinsakaiKaisaiKekkaDiv div) {
-        return new ShinsakaiKaisaiKekkaHander(div);
+    private ShinsakaiKaisaiKekkaHandler getHandler(ShinsakaiKaisaiKekkaDiv div) {
+        return new ShinsakaiKaisaiKekkaHandler(div);
     }
 
 }
