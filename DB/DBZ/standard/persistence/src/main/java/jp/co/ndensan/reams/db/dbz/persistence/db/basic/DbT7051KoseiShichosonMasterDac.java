@@ -6,12 +6,14 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.ridatsuYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMaster.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -259,5 +261,22 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
                                 leq(kanyuYMD, systemDate),
                                 leq(systemDate, ridatsuYMD))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 証記載保険者番号による市町村情報の検索します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return DbT7051KoseiShichosonMasterEntity 市町村情報
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity shichosonCode(ShoKisaiHokenshaNo 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(gappeiKyuShichosonKubun, "0"))).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 }
