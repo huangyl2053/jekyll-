@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -18,6 +19,7 @@ public class HihousyosaiFinderParameter {
     private final HihokenshaNo hihokenshaNo;
     private final FlexibleDate idoYMD;
     private final RString edaNo;
+    private final LasdecCode shichosonCode;
 
     /**
      * コンストラクタです。
@@ -29,19 +31,22 @@ public class HihousyosaiFinderParameter {
     private HihousyosaiFinderParameter(
             HihokenshaNo hihokenshaNo,
             FlexibleDate idoYMD,
-            RString edaNo
+            RString edaNo,
+            LasdecCode shichosonCode
     ) {
         this.hihokenshaNo = hihokenshaNo;
         this.idoYMD = idoYMD;
         this.edaNo = edaNo;
+        this.shichosonCode = shichosonCode;
     }
 
     public static HihousyosaiFinderParameter createHihousyosaiFinderParameter(
             HihokenshaNo hihokenshaNo,
             FlexibleDate idoYMD,
-            RString edaNo
+            RString edaNo,
+            LasdecCode shichosonCode
     ) {
-        return new HihousyosaiFinderParameter(hihokenshaNo, idoYMD, edaNo);
+        return new HihousyosaiFinderParameter(hihokenshaNo, idoYMD, edaNo, shichosonCode);
     }
 
     /**
@@ -69,6 +74,15 @@ public class HihousyosaiFinderParameter {
      */
     public RString getEdaNo() {
         return edaNo;
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
     }
 
 }

@@ -7,15 +7,19 @@ package jp.co.ndensan.reams.db.dba.service.core.hihousyosai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dba.business.shichoson.ShichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
+import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -28,11 +32,20 @@ public class HihousyosaiFinder {
     private final DbT7051KoseiShichosonMasterDac dbT7051Dac;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
 
+    /**
+     * コンストラクタです。
+     */
     public HihousyosaiFinder() {
         dbT7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @param dbT7051Dac DbT7051KoseiShichosonMasterDac
+     * @param dbT1001dac DbT1001HihokenshaDaichoDac
+     */
     HihousyosaiFinder(
             DbT7051KoseiShichosonMasterDac dbT7051Dac,
             DbT1001HihokenshaDaichoDac dbT1001dac
@@ -57,15 +70,13 @@ public class HihousyosaiFinder {
      * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     @Transaction
-    public List<KoseiShichosonMaster> getKoseiShichosonMasterList(RDate systemDate) {
-
+    public List<KoseiShichosonMaster> getKoseiShichosonMasterList() {
         List<KoseiShichosonMaster> businessList = new ArrayList<>();
-
-        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun(systemDate);
-        if (entityList.isEmpty()) {
-            return new ArrayList<>();
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbT7051Dac.selectByGappeiKyuShichosonKubun();
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            businessList.add(new KoseiShichosonMaster(entity));
         }
-        businessList.add((KoseiShichosonMaster) entityList);
+
         return businessList;
     }
 
@@ -74,11 +85,25 @@ public class HihousyosaiFinder {
      *
      * @return List<Shichoson>
      */
-    //TODO 袁献辉 20151118,12月対応対象
-//    @Transaction
-//    public List<Shichoson> getGappeiShichosonList(RString 市町村コード) {
-//        return null;
-//    }
+    @Transaction
+    public List<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter parameter) {
+        List<ShichosonBusiness> kyuhokenshaList = new ArrayList<>();
+        ShichosonBusiness business = new ShichosonBusiness();
+        KyuShichosonCodeJoho kyuushichouson = KyuShichosonCode.getKyuShichosonCodeJoho(LasdecCode.EMPTY, DonyukeitaiCode.事務広域);
+        List<KyuShichosonCode> kyuushichousonList = kyuushichouson.get旧市町村コード情報List();
+        if (kyuushichousonList == null) {
+            return null;
+        }
+        if (kyuushichousonList != null) {
+            for (KyuShichosonCode hokenshaList : kyuushichousonList) {
+                business.set旧市町村コード(hokenshaList.get旧市町村コード());
+                business.set旧市町村名称(hokenshaList.get旧市町村名称());
+                kyuhokenshaList.add(business);
+            }
+        }
+        return kyuhokenshaList;
+    }
+
     /**
      * 得喪情報取得。
      *
