@@ -250,16 +250,14 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
      * @return List<DbT7051KoseiShichosonMasterEntity> 市町村コードによる市町村Entityのリスト
      */
     @Transaction
-    public List<DbT7051KoseiShichosonMasterEntity> selectByGappeiKyuShichosonKubun(
-            RDate systemDate) throws NullPointerException {
-        requireNonNull(systemDate, UrSystemErrorMessages.値がnull.getReplacedMessage("システム年月日"));
+    public List<DbT7051KoseiShichosonMasterEntity> selectByGappeiKyuShichosonKubun() {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().table(DbT7051KoseiShichosonMaster.class).
                 where(and(eq(gappeiKyuShichosonKubun, "0"),
-                                leq(kanyuYMD, systemDate),
-                                leq(systemDate, ridatsuYMD))).
+                                leq(kanyuYMD, RDate.getNowDate()),
+                                leq(RDate.getNowDate(), ridatsuYMD))).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
