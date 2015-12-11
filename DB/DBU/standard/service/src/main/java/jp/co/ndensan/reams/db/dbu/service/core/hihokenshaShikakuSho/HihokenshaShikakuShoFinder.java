@@ -51,14 +51,14 @@ public class HihokenshaShikakuShoFinder {
      * @return HihokenshaShikakuShoDataEntity INSERT用データEntity
      */
     public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
-        HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = INSERT用データEntity(hihokenshaShikakuShoDataParameter);
+        HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = insert用データEntity(hihokenshaShikakuShoDataParameter);
         if (hihokenshaShikakuShoDataEntity == null) {
             return null;
         }
         return hihokenshaShikakuShoDataEntity;
     }
 
-    private HihokenshaShikakuShoDataEntity INSERT用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
+    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuShoDataParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
         hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuShoDataParameter.getHihokenshaNo());
         if (hihokenshaShikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120001"))) {
