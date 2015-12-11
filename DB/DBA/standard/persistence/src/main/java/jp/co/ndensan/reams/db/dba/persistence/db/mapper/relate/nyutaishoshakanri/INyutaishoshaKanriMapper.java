@@ -16,7 +16,7 @@ public interface INyutaishoshaKanriMapper {
      * 介護保険施設情報件数を取得する
      *
      * @param 入退所者情報検索条件 入退所者情報検索条件
-     * @return NyutaishoshaKanriMapperParameter
+     * @return 介護保険施設情報件数
      */
     int getHihokenshaDaichoCount(NyutaishoshaKanriMapperParameter 入退所者情報検索条件);
 
@@ -24,7 +24,7 @@ public interface INyutaishoshaKanriMapper {
      * 適用除外施設情報件数を取得する
      *
      * @param 入退所者情報検索条件 入退所者情報検索条件
-     * @return NyutaishoshaKanriMapperParameter
+     * @return 適用除外施設情報件数
      */
     int getTekiyoJogaishaCount(NyutaishoshaKanriMapperParameter 入退所者情報検索条件);
 
@@ -32,7 +32,7 @@ public interface INyutaishoshaKanriMapper {
      * 住所地特例対象施設情報件数を取得する
      *
      * @param 入退所者情報検索条件 入退所者情報検索条件
-     * @return NyutaishoshaKanriMapperParameter
+     * @return 住所地特例対象施設情報件数
      */
     int getTashichosonJushochiTokureiCount(NyutaishoshaKanriMapperParameter 入退所者情報検索条件);
 
