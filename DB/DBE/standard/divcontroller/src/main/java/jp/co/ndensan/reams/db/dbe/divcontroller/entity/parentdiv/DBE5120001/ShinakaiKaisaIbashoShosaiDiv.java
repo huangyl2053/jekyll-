@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -34,12 +35,14 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     private TextBoxTelNo txtTelNumber;
     @JsonProperty("ddlKaisaiBashoJokyo")
     private DropDownList ddlKaisaiBashoJokyo;
+    @JsonProperty("ccdKaisaiChikuCode")
+    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("btnupdate")
     private Button btnupdate;
     @JsonProperty("btnback")
     private Button btnback;
-    @JsonProperty("ccdKaisaiChikuCode")
-    private CodeInputDiv ccdKaisaiChikuCode;
+    @JsonProperty("jyotai")
+    private RString jyotai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -138,6 +141,15 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
+     * getccdKaisaiChikuCode
+     * @return ccdKaisaiChikuCode
+     */
+    @JsonProperty("ccdKaisaiChikuCode")
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return ccdKaisaiChikuCode;
+    }
+
+    /*
      * getbtnupdate
      * @return btnupdate
      */
@@ -174,12 +186,21 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaisaiChikuCode
-     * @return ccdKaisaiChikuCode
+     * getjyotai
+     * @return jyotai
      */
-    @JsonProperty("ccdKaisaiChikuCode")
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return ccdKaisaiChikuCode;
+    @JsonProperty("jyotai")
+    public RString getJyotai() {
+        return jyotai;
+    }
+
+    /*
+     * setjyotai
+     * @param jyotai jyotai
+     */
+    @JsonProperty("jyotai")
+    public void setJyotai(RString jyotai) {
+        this.jyotai = jyotai;
     }
 
     // </editor-fold>
