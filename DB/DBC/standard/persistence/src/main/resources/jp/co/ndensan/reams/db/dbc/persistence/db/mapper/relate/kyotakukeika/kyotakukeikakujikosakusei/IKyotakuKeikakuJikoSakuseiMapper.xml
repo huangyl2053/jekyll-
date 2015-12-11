@@ -5,42 +5,104 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakujikosakusei.IKyotakuKeikakuJikoSakuseiMapper">
 
-<!--    <select id="select居宅給付計画自己作成ByKey" resultMap="resultMap_KyotakuKeikakuJikoSakuseiEntity" fetchSize="500">
+    <select id="select居宅給付計画自己作成ByKey" resultMap="resultMap_KyotakuKeikakuJikoSakuseiEntity" fetchSize="500">
         <include refid="selectKyotakuKeikakuJikoSakuseiEntity" />
     </select>
 
-    <select id="select居宅給付計画自己作成リストBy主キー1" resultMap="resultMap_KyotakuKeikakuJikoSakuseiEntity" fetchSize="500">
-        <include refid="selectKyotakuKeikakuJikoSakuseiEntity" />
-    </select>
-
-     TODO RelateEntityを取得できるSQLに修正してください。where句はMapperParameterクラスに合わせて修正します。 
     <sql id="selectKyotakuKeikakuJikoSakuseiEntity">
         SELECT
-        FdT1301SeishinTecho.*,
-        FdT1309SeishinTechoNini.*
+        DbT3007KyotakuKeikakuJikoSakusei.*,
+        DbT3008KyotakuKeikakuJikosakuseiMeisai.*,
+        DbT3009KyotakuKeikakuJikoSakuseiGokei.*,
+        DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.*,
+        DbT3011YoboKeikakuJikoSakuseiMeisai.*,
+        DbT3012YoboKeikakuJikoSakuseiGokei.*,
+        DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.*
         FROM
-        (<include refid="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.selectFdT1301SeishinTechoNotDeleted" />) AS FdT1301SeishinTecho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3007KyotakuKeikakuJikoSakuseiMapper.noDeleted_DbT3007KyotakuKeikakuJikoSakusei" />) AS DbT3007KyotakuKeikakuJikoSakusei
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.selectFdT1309SeishinTechoNiniNotDeleted" />) AS FdT1309SeishinTechoNini
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3008KyotakuKeikakuJikosakuseiMeisaiMapper.noDeleted_DbT3008KyotakuKeikakuJikosakuseiMeisai" />) AS DbT3008KyotakuKeikakuJikosakuseiMeisai
         ON
-        FdT1301SeishinTecho."fdT1301SeishinTecho_shikibetsuCode" = FdT1309SeishinTechoNini."fdT1309SeishinTechoNini_shikibetsuCode" and
-        FdT1301SeishinTecho."fdT1301SeishinTecho_seishinTechoTimestamp" = FdT1309SeishinTechoNini."fdT1309SeishinTechoNini_seishinTechoTimestamp"
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_hihokenshaNo" = DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_hihokenshaNo"
+        AND
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_taishoYM" = DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_taishoYM"
+        AND
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_rirekiNo" = DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3009KyotakuKeikakuJikoSakuseiGokeiMapper.noDeleted_DbT3009KyotakuKeikakuJikoSakuseiGokei" />) AS DbT3009KyotakuKeikakuJikoSakuseiGokei
+        ON
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_hihokenshaNo" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_hihokenshaNo"
+        AND 
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_taishoYM" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_taishoYM"
+        AND 
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_rirekiNo" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_rirekiNo"
+        AND 
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_kyotakuServiceKubun" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_kyotakuServiceKubun"
+        AND 
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceTeikyoJigyoshaNo" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo"
+        AND 
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_serviceShuruiCode" = DbT3009KyotakuKeikakuJikoSakuseiGokei."dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceShuruiCode"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuMapper.noDeleted_DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu" />) AS DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+        ON     
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_hihokenshaNo" = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_hihokenshaNo"
+        AND
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_taishoYM" = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_taishoYM"
+        AND
+        DbT3008KyotakuKeikakuJikosakuseiMeisai."dbT3008KyotakuKeikakuJikosakuseiMeisai_rirekiNo" = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu."dbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3011YoboKeikakuJikoSakuseiMeisaiMapper.noDeleted_DbT3011YoboKeikakuJikoSakuseiMeisai" />) AS DbT3011YoboKeikakuJikoSakuseiMeisai
+        ON
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_hihokenshaNo" = DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo"
+        AND
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_taishoYM" = DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM"
+        AND
+        DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_rirekiNo" = DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3012YoboKeikakuJikoSakuseiGokeiMapper.noDeleted_DbT3012YoboKeikakuJikoSakuseiGokei" />) AS DbT3012YoboKeikakuJikoSakuseiGokei
+        ON
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_hihokenshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_taishoYM"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_rirekiNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_kyotakuServiceKubun" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_kyotakuServiceKubun"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceTeikyoJigyoshaNo" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_serviceShuruiCode" = DbT3012YoboKeikakuJikoSakuseiGokei."dbT3012YoboKeikakuJikoSakuseiGokei_serviceShuruiCode"
+        LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper.noDeleted_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" />) AS DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu
+        ON
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_hihokenshaNo" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_taishoYM" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM"
+        AND
+        DbT3011YoboKeikakuJikoSakuseiMeisai."dbT3011YoboKeikakuJikoSakuseiMeisai_rirekiNo" = DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu."dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo"
         <where>
-            <if test="uses識別コード != null">
-                AND FdT1301SeishinTecho."fdT1301SeishinTecho_shikibetsuCode" = #{識別コード}
+            <if test="uses被保険者番号">
+                AND DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_hihokenshaNo" = #{被保険者番号}
             </if>
-            <if test="uses精神手帳履歴日時 != null">
-                and FdT1301SeishinTecho."fdT1301SeishinTecho_seishinTechoTimestamp" = #{精神手帳履歴日時}
+            <if test="uses対象年月">
+                AND DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_taishoYM" = #{対象年月}
+            </if>
+            <if test="uses履歴番号">
+                AND DbT3007KyotakuKeikakuJikoSakusei."dbT3007KyotakuKeikakuJikoSakusei_rirekiNo" = #{履歴番号}
             </if>
         </where>
     </sql>
 
-     TODO RelateEntityの形に合わせてマッピング定義を修正してください。 
-    <resultMap id="resultMap_KyotakuKeikakuJikoSakuseiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika\kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiEntity" autoMapping="true">
-        <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <association property="手帳情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1301SeishinTechoMapper.resultMap_FdT1301SeishinTechoEntity"/>
-        <collection property="任意項目情報Entity" resultMap="jp.co.ndensan.reams.fd.fdz.persistence.db.mapper.basic.fda.IFdT1309SeishinTechoNiniMapper.resultMap_FdT1309SeishinTechoNiniEntity"/>
-    </resultMap>-->
-
+    <resultMap id="resultMap_KyotakuKeikakuJikoSakuseiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiEntity" autoMapping="true">
+        <id column="dbT3007KyotakuKeikakuJikoSakusei_hihokenshaNo" />
+        <id column="dbT3007KyotakuKeikakuJikoSakusei_taishoYM" />
+        <id column="dbT3007KyotakuKeikakuJikoSakusei_rirekiNo"/>
+        <association property="居宅給付計画自己作成Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3007KyotakuKeikakuJikoSakuseiMapper.ResultMap_DbT3007KyotakuKeikakuJikoSakuseiEntity"/>
+        <collection property="居宅給付計画自己作成明細Entity" 
+                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakujikosakuseimeisai.KyotakuKeikakuJikosakuseiMeisaiEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.kyotakukeikakujikosakuseimeisai.IKyotakuKeikakuJikosakuseiMeisaiMapper.resultMap_KyotakuKeikakuJikosakuseiMeisaiEntity"/>
+        <collection property="予防給付計画自己作成明細Entity" 
+                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiEntity"
+                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.yobokeikakujikosakuseimeisai.IYoboKeikakuJikoSakuseiMeisaiMapper.resultMap_YoboKeikakuJikoSakuseiMeisaiEntity"/>
+    </resultMap>
 </mapper>

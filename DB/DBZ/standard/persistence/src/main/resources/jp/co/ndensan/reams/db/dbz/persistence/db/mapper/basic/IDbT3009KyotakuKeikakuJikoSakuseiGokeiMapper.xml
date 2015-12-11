@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： DbT3009KyotakuKeikakuJikoSakuseiGokeiマスタとエンティティのマッピング用XMLです。 -->
-<!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3009KyotakuKeikakuJikoSakuseiGokeiMapper">
     
-    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3009KyotakuKeikakuJikoSakuseiGokei">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3009KyotakuKeikakuJikoSakuseiGokeiMapper.allColumns_DbT3009KyotakuKeikakuJikoSakuseiGokei" />
@@ -37,12 +35,12 @@
 
     <!--テーブルDbT3009KyotakuKeikakuJikoSakuseiGokeiの項目をDbT3009KyotakuKeikakuJikoSakuseiGokeiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_hihokenshaNo" />
+        <id property="hihokenshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoYM" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <id property="kyotakuServiceKubun" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="serviceTeikyoJigyoshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo" />
-        <id property="serviceShuruiCode" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceShuruiCode" />
+        <id property="serviceTeikyoJigyoshaNo" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceTeikyoJigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="serviceShuruiCode" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -53,12 +51,5 @@
         <result property="lastUpdateReamsLoginId" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyufuKeikakuTaniSu" column="dbT3009KyotakuKeikakuJikoSakuseiGokei_kyufuKeikakuTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
-        <select id="getEntity" resultMap="ResultMap_DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity">
-	SELECT
-	<include refid="allColumns_DbT3009KyotakuKeikakuJikoSakuseiGokei"/>
-	FROM
-	rgdb."DbT3009KyotakuKeikakuJikoSakuseiGokei"
-	</select>
 
 </mapper>

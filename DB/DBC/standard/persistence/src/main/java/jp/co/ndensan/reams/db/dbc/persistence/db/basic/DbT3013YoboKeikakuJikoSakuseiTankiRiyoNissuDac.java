@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.taishoYM;
@@ -53,7 +54,7 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class).
+                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(taishoYM, 対象年月),
@@ -71,7 +72,7 @@ public class DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuDac
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class).
+                table(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu.class).
                 toList(DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity.class);
     }
 

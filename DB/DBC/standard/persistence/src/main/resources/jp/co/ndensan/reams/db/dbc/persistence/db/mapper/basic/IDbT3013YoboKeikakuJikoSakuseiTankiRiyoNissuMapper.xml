@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuMapper.allColumns_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu" />
+     FROM
+         rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"
+     WHERE
+         rgdb."DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu">
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."hihokenshaNo" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."taishoYM" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."rirekiNo" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertDantaiCd" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertDantaiCd",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertTimestamp" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertTimestamp",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertReamsLoginId" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertReamsLoginId",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."insertContextId" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertContextId",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."isDeleted" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_isDeleted",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."updateCount" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_updateCount",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."lastUpdateTimestamp" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateTimestamp",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."lastUpdateReamsLoginId" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateReamsLoginId",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."zenkaiRiyoNissu" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zenkaiRiyoNissu",
+         "DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu"."konkaiKeikakuRiyoNissu" as "dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_konkaiKeikakuRiyoNissu"
+    </sql>
+
+
+    <!--テーブルDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuの項目をDbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3013YoboKeikakuJikoSakuseiTankiRiyoNissuEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="taishoYM" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_taishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_isDeleted" />
+        <result property="updateCount" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="zenkaiRiyoNissu" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_zenkaiRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="konkaiKeikakuRiyoNissu" column="dbT3013YoboKeikakuJikoSakuseiTankiRiyoNissu_konkaiKeikakuRiyoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>
