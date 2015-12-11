@@ -258,26 +258,29 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnToroku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        boolean is重複コード = createHandOf(div).is重複コード();
-        if (is重複コード) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.既に登録済.getMessage()).respond();
-        } else {
-            ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
-            int count = service.get審査会委員カウント(new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue()));
-            if (0 < count) {
+
+        if (!更新モード.equals(モード)) {
+            boolean is重複コード = createHandOf(div).is重複コード();
+            if (is重複コード) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.既に登録済.getMessage()).respond();
+            } else {
+                ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
+                int count = service.get審査会委員カウント(new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue()));
+                if (0 < count) {
+                    return ResponseData.of(div).addMessage(UrErrorMessages.既に登録済.getMessage()).respond();
+                }
             }
-        }
-        if (div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue().isBefore(div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue())) {
-            return ResponseData.of(div).addMessage(UrErrorMessages.終了日が開始日以前.getMessage()).respond();
-        }
+            if (div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue().isBefore(div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue())) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.終了日が開始日以前.getMessage()).respond();
+            }
 //        UzT0007CodeEntity 開催地区コード
 //                = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系, div.getShinsakaiIinJoho().getCcdshinsakaiChikuCode().getCode());
 //        if (開催地区コード == null || 開催地区コード.isEmpty()) {
 //            return ResponseData.of(div).addMessage(UrErrorMessages.コードマスタなし.getMessage()).respond();
 //        }
+        }
+        set審査会委員詳細To委員一覧(div);
         ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
-        handler.set審査会委員詳細To委員一覧();
 //      TODO 所属機関一覧データは内部記録する
         handler.shinsakaiIinJohoDiv_init();
         handler.shozokuKikanIchiranDiv_init();
@@ -359,6 +362,36 @@ public class ShinsakaiIinJohoToroku {
 //      TODO 内部記録した所属機関一覧データをクリア
         response.data = div;
         return response;
+    }
+
+    private List<dgShinsaInJohoIchiran_Row> set審査会委員詳細To委員一覧(ShinsakaiIinJohoTorokuDiv div) {
+        List<dgShinsaInJohoIchiran_Row> list = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource();
+        int count = div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getGridSetting().selectedRowCount();
+        dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
+        row.setShinsainCode(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue());
+        row.getShinsakaiIinKaishiYMD().setValue(div.getShinsakaiIinJoho().getTxtShinsaIinYMDFrom().getValue());
+        row.getShinsakaiIinShuryoYMD().setValue(div.getShinsakaiIinJoho().getTxtShinsaIinYMDTo().getValue());
+        row.setShimei(div.getShinsakaiIinJoho().getTxtShimei().getValue());
+        row.setKanaShimei(div.getShinsakaiIinJoho().getTxtKanaShimei().getValue());
+        row.setSeibetsu(div.getShinsakaiIinJoho().getRadSeibetsu().getSelectedValue());
+        row.getBarthYMD().setValue(div.getShinsakaiIinJoho().getTxtBirthYMD().getValue().toRDate());
+        row.setShikakuCode(div.getShinsakaiIinJoho().getDdlShikakuCode().getSelectedValue());
+        row.setBiko(div.getShinsakaiIinJoho().getTxtBiko().getValue());
+        row.setJokyo(div.getTxtHaishiFlag().getValue());
+//        row.setYubinNo(div.getRenrakusakiKinyuKikan().getTxtYubinNo().getValue().value());
+//        row.setYusoKubun(div.getRenrakusakiKinyuKikan().getDdlYusoKubun().getSelectedValue());
+//        row.setJusho(div.getRenrakusakiKinyuKikan().getTxtJusho().getDomain().value());
+//        row.getHaishiYMD().setValue(div.getRenrakusakiKinyuKikan().getTxtHaishiYMD().getValue());
+//        row.setTelNo(div.getRenrakusakiKinyuKikan().getTxtTelNo1().getDomain().value());
+//        row.setFaxNo(div.getRenrakusakiKinyuKikan().getTxtFaxNo().getDomain().value());
+        if (新規モード.equals(モード)) {
+            row.setStatus(状態_追加);
+            list.add(row);
+        } else if (更新モード.equals(モード)) {
+            row.setStatus(状態_修正);
+            list.set(count, row);
+        }
+        return list;
     }
 
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {
