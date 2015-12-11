@@ -6,20 +6,20 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7001FufukuMoshitate;
+import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7001FufukuMoshitate.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7001FufukuMoshitate.genshobunsHihokennshaNo;
+import static jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7001FufukuMoshitate.shinsaSeikyuTodokedeYMD;
+import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.genshobunsHihokennshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shinsaSeikyuTodokedeYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitate.shoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -36,7 +36,6 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
     /**
      * 主キーで不服審査申立情報を取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunsHihokennshaNo
      * @param 審査請求届出日 ShinsaSeikyuTodokedeYMD
@@ -45,11 +44,9 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
      */
     @Transaction
     public DbT7001FufukuMoshitateEntity selectByKey(
-            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日) throws NullPointerException {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
@@ -59,7 +56,6 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
         return accessor.select().
                 table(DbT7001FufukuMoshitate.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                                 eq(shikibetsuCode, 識別コード),
                                 eq(genshobunsHihokennshaNo, 原処分被保険者番号),
                                 eq(shinsaSeikyuTodokedeYMD, 審査請求届出日))).
@@ -93,5 +89,27 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+    
+     /**
+     * 主キーで不服審査申立情報を取得します。
+     *
+     * @param 識別コード　ShikibetsuCode
+     * @param 原処分被保険者番号 GenshobunsHihokennshaNo
+     * @return List<DbT7001FufukuMoshitateEntity>
+     */
+    @Transaction
+    public List<DbT7001FufukuMoshitateEntity> select一覧情報取得(ShikibetsuCode 識別コード,
+            HihokenshaNo 原処分被保険者番号) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7001FufukuMoshitate.class).
+                where(and(eq(shikibetsuCode, 識別コード),
+                                eq(genshobunsHihokennshaNo, 原処分被保険者番号))).
+                order(by(DbT7001FufukuMoshitate.shinsaSeikyuTodokedeYMD, Order.DESC)).
+                toList(DbT7001FufukuMoshitateEntity.class);
     }
 }
