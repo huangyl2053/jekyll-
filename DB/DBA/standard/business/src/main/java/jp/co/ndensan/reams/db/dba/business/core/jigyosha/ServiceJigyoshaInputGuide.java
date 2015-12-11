@@ -94,6 +94,33 @@ public class ServiceJigyoshaInputGuide implements Serializable {
     }
 
     /**
+     * 事業者名称を取得します。
+     *
+     * @return 事業者名称
+     */
+    public AtenaMeisho get介護除外住所地特例対象施設_事業者名称() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 事業者名称カナを取得します。
+     *
+     * @return 事業者名称カナ
+     */
+    public AtenaKanaMeisho get介護除外住所地特例対象施設_事業者名称カナ() {
+        return entity.getJigyoshaKanaMeisho();
+    }
+
+    /**
+     * 事業者住所カナを取得します。
+     *
+     * @return 事業者住所カナ
+     */
+    public RString get介護除外住所地特例対象施設_事業者住所カナ() {
+        return entity.getJigyoshaJusho();
+    }
+
+    /**
      * 電話番号を取得します。
      *
      * @return 電話番号

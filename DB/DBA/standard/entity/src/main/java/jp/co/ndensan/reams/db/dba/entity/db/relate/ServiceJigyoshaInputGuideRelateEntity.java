@@ -25,6 +25,7 @@ public class ServiceJigyoshaInputGuideRelateEntity implements IDbAccessable {
     private FlexibleDate yukoKaishiYMD;
     private FlexibleDate yukoShuryoYMD;
     private AtenaMeisho jigyoshaName;
+    private AtenaMeisho jigyoshaMeisho;
     private AtenaKanaMeisho jigyoshaNameKana;
     private RString jigyoshaKanaAddress;
     private TelNo telNo;
