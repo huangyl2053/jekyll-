@@ -10,12 +10,10 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishuk
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishukirokukanri.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shokaishukirokukanri.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
-import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -53,6 +51,7 @@ public class ShoKaishuKirokuKanri {
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_BtnSenTaKu(ShoKaishuKirokuKanriDiv requestDiv) {
         requestDiv.getPanelInput().setVisible(true);
+        //requestDiv.setMode_ModeB(ShoKaishuKirokuKanriDiv.ModeB.Update);
         requestDiv.getDgKoufuKaishu().getGridSetting().selectedRowCount();
         dgKoufuKaishu_Row dgKoufuKaishuRow = requestDiv.getDgKoufuKaishu().getSelectedItems().get(0);
         //requestDiv.getPanelInput().getTxtKoufuType().setValue(dgKoufuKaishuRow.getKoufuType());
@@ -69,9 +68,6 @@ public class ShoKaishuKirokuKanri {
         requestDiv.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         requestDiv.getPanelInput().getTxaKaishuRiyu().setReadOnly(true);
         return createResponseData(requestDiv);
-        
-        
-        
     }
     
      /**
@@ -129,19 +125,8 @@ public class ShoKaishuKirokuKanri {
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuKakutei(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
-        
-        
-//         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//         Message message = DbzErrorMessages.コードマスタなし.getMessage().replace("sasdasd", "22");
-//         IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
-        
-        
-        
-        
-        
         List<dgKoufuKaishu_Row> list =  shoKaishuDiv.getDgKoufuKaishu().getDataSource();
         int count = shoKaishuDiv.getDgKoufuKaishu().getGridSetting().selectedRowCount();
-        
         dgKoufuKaishu_Row row = list.get(count);
         
         //row.setKoufuType(shoKaishuDiv.getPanelInput().getTxtKoufuType().getValue());
@@ -160,6 +145,14 @@ public class ShoKaishuKirokuKanri {
         shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
         shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
         return response;
+    }
+    
+        private void setMsg(){
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPair message = new ValidationMessageControlPair(
+                        DbzErrorMessages.期間が不正_追加メッセージあり２);
+        message.getValidationMessage().getMessage().replace("有効期限","交付日");
+                validationMessages.add(message);
     }
     
     /**
