@@ -15,6 +15,14 @@
     </properties>
     <dependencies>
         <!-- DBU -->
+    <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>DbuBusiness</artifactId>
+    </dependency>
+     <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>DbuService</artifactId>
+    </dependency>
         <!-- DBA -->
         <!-- DBB -->
         <!-- DBC -->
