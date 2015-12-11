@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.service.sikakukanrenidoa;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
-import jp.co.ndensan.reams.db.dba.entity.HenkoJiyu;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity;
 
 import jp.co.ndensan.reams.db.dba.persistence.mapper.basic.sikakukanrenido.ISikakuKanrenIdoMapper;
@@ -19,14 +18,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -106,32 +102,6 @@ public class SikakuKanrenIdoFinder {
             return new ArrayList<>();
         }
         return businessList;
-    }
-
-    /**
-     * 変更事由リスト情報取得
-     *
-     * @return List<UzT0007CodeEntity>
-     */
-    public List<HenkoJiyu> getshikakuJiyuShutoku() {
-
-        List<HenkoJiyu> 変更事由リストList = new ArrayList<>();
-        List<ShikakuJiyuShutoku> list = sikaku
-                .shikakuJiyuShutoku(new CodeShubetsu(コード種別_0126),
-                        FlexibleDate.getNowDate(),
-                        RString.HALF_SPACE, RString.EMPTY);
-        if (list != null && !list.isEmpty()) {
-
-            for (ShikakuJiyuShutoku entity : list) {
-                entity.getCode();
-                entity.getCodeRyakusho();
-                変更事由リストList.add(null);
-            }
-        } else {
-            return new ArrayList<>();
-        }
-        return 変更事由リストList;
-
     }
 
     /**
