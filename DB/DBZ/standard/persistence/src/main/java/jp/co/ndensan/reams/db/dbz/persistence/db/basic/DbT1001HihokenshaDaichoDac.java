@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.entity.Idokikan;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -96,12 +94,12 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     /**
      * 被保険者台帳管理テーブルに資格取得年月日と資格喪失年月日を取得する
      *
-     * @param 識別コード 識別コード
-     * @return 被保険者台帳管理テーブルに資格取得年月日と資格喪失年月日のリスト
-     * @throws NullPointerException 識別コードがnull
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<Idokikan> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
+    public List<DbT1001HihokenshaDaichoEntity> selectIdokikanByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -110,28 +108,25 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
-                                eq(logicalDeletedFlag, false))).
-                order(by(idoYMD, DESC)).
+                                not(eq(logicalDeletedFlag, true)))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         if (entityList.isEmpty()) {
             return Collections.emptyList();
         } else {
-            RString 被保険者番号 = entityList.get(0).getHihokenshaNo().getColumnValue();
-            List<DbT1001HihokenshaDaichoEntity> hihokenshaDaichoEntityList = accessor.select().
-                    table(DbT1001HihokenshaDaicho.class).
-                    where(eq(hihokenshaNo, 被保険者番号)).
-                    toList(DbT1001HihokenshaDaichoEntity.class);
-            List<Idokikan> idokikanList = new ArrayList<>();
-
-            for (DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity : hihokenshaDaichoEntityList) {
-                Idokikan idokikan = new Idokikan();
-                idokikan.setKaishiYMD(hihokenshaDaichoEntity.getShikakuShutokuYMD());
-                idokikan.setShuryoYMD(hihokenshaDaichoEntity.getShikakuSoshitsuYMD());
-                idokikan.setIdoYMD(hihokenshaDaichoEntity.getIdoYMD());
-                idokikan.setEdaNo(hihokenshaDaichoEntity.getEdaNo());
-                idokikanList.add(idokikan);
+            List<DbT1001HihokenshaDaichoEntity> hihokenshaList = new ArrayList<>();
+            RString 被保険者番号 = RString.EMPTY;
+            for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+                if (被保険者番号.equals(entity.getHihokenshaNo().getColumnValue())) {
+                    continue;
+                }
+                List<DbT1001HihokenshaDaichoEntity> hihokenshaDaichoEntityList = accessor.select().
+                        table(DbT1001HihokenshaDaicho.class).
+                        where(eq(hihokenshaNo, entity.getHihokenshaNo().getColumnValue())).
+                        toList(DbT1001HihokenshaDaichoEntity.class);
+                hihokenshaList.addAll(hihokenshaDaichoEntityList);
+                被保険者番号 = entity.getHihokenshaNo().getColumnValue();
             }
-            return idokikanList;
+            return hihokenshaList;
         }
     }
 
@@ -145,7 +140,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
     @Override
     public int save(DbT1001HihokenshaDaichoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者台帳管理エンティティ"));
-	// TODO 物理削除であるかは業務ごとに検討してください。
+        // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
