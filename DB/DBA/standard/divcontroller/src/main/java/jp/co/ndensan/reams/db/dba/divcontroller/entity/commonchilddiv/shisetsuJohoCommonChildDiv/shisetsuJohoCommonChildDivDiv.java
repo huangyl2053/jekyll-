@@ -36,10 +36,6 @@ public class shisetsuJohoCommonChildDivDiv extends Panel implements IshisetsuJoh
     private ButtonDialog btnJigyoshaKensaku;
     @JsonProperty("txtNyuryokuShisetsuMeisho")
     private TextBox txtNyuryokuShisetsuMeisho;
-    @JsonProperty("台帳種別")
-    private RString 台帳種別;
-    @JsonProperty("台帳種別表示")
-    private RString 台帳種別表示;
     @JsonProperty("JigyoshaMode")
     private RString JigyoshaMode;
 
@@ -173,42 +169,6 @@ public class shisetsuJohoCommonChildDivDiv extends Panel implements IshisetsuJoh
     @JsonProperty("txtNyuryokuShisetsuMeisho")
     public void setTxtNyuryokuShisetsuMeisho(TextBox txtNyuryokuShisetsuMeisho) {
         this.txtNyuryokuShisetsuMeisho = txtNyuryokuShisetsuMeisho;
-    }
-
-    /*
-     * get台帳種別
-     * @return 台帳種別
-     */
-    @JsonProperty("台帳種別")
-    public RString get台帳種別() {
-        return 台帳種別;
-    }
-
-    /*
-     * set台帳種別
-     * @param 台帳種別 台帳種別
-     */
-    @JsonProperty("台帳種別")
-    public void set台帳種別(RString 台帳種別) {
-        this.台帳種別 = 台帳種別;
-    }
-
-    /*
-     * get台帳種別表示
-     * @return 台帳種別表示
-     */
-    @JsonProperty("台帳種別表示")
-    public RString get台帳種別表示() {
-        return 台帳種別表示;
-    }
-
-    /*
-     * set台帳種別表示
-     * @param 台帳種別表示 台帳種別表示
-     */
-    @JsonProperty("台帳種別表示")
-    public void set台帳種別表示(RString 台帳種別表示) {
-        this.台帳種別表示 = 台帳種別表示;
     }
 
     /*

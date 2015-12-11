@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.jigyosha;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -142,7 +142,7 @@ public final class JigyoshaInputGuideParameter {
         boolean isZennpouitti = false;
         boolean isGunshiCode = false;
 
-        if (jigyoshaNo != null && !jigyoshaNo.isEmpty()) {
+        if (jigyoshaNo != null && !jigyoshaNo.value().isEmpty()) {
             isJigyoshaNoFlag = true;
         }
         if (yukoKaishiYMDFrom != null && !yukoKaishiYMDFrom.isEmpty()) {

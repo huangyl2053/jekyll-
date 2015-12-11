@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.shisetsuJohoCommonChildDiv.shisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -31,14 +33,12 @@ public class shisetsuJohoCommonChildDiv {
 
         ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
 
-        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
-
-        if (台帳種別表示 == null) {
+        if (ViewStateHolder.get(ViewStateKeys.台帳種別表示有り, RString.class) == null
+                || ViewStateHolder.get(ViewStateKeys.台帳種別表示無し, RString.class) == null) {
 
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        getHandler(requestDiv).load(台帳種別表示, 台帳種別);
+        getHandler(requestDiv).load();
         responseData.data = requestDiv;
 
         return ResponseData.of(requestDiv).respond();
@@ -128,11 +128,9 @@ public class shisetsuJohoCommonChildDiv {
      */
     public ResponseData<shisetsuJohoCommonChildDivDiv> onBlur_nyuryokuShisetsuKodo(shisetsuJohoCommonChildDivDiv requestDiv) {
 
-        RString 台帳種別 = DataPassingConverter.deserialize(requestDiv.get台帳種別(), RString.class);
-        RString 台帳種別表示 = DataPassingConverter.deserialize(requestDiv.get台帳種別表示(), RString.class);
         if (!requestDiv.getTxtNyuryokuShisetsuKodo().getValue().isEmpty()) {
 
-            getHandler(requestDiv).selectShiSeTuMeiSyo(台帳種別, 台帳種別表示);
+            getHandler(requestDiv).selectShiSeTuMeiSyo();
         } else {
 
             requestDiv.getTxtNyuryokuShisetsuMeisho().clearValue();
