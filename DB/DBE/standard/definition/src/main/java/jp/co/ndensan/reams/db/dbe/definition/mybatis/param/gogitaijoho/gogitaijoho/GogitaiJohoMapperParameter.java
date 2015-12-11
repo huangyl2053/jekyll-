@@ -18,6 +18,8 @@ public class GogitaiJohoMapperParameter {
 
     private final boolean usesGogitaiNo;
     private final boolean usesGogitaiYukoKikanKaishiYMD;
+    
+    private final boolean shinsakaiKaisaiBashoJokyo;
 
     /**
      * コンストラクタです。
@@ -32,13 +34,14 @@ public class GogitaiJohoMapperParameter {
             int gogitaiNo,
             @lombok.NonNull FlexibleDate gogitaiYukoKikanKaishiYMD,
             boolean usesGogitaiNo,
-            boolean usesGogitaiYukoKikanKaishiYMD) {
+            boolean usesGogitaiYukoKikanKaishiYMD,
+            boolean shinsakaiKaisaiBashoJokyoFlag) {
 
         this.gogitaiNo = gogitaiNo;
         this.gogitaiYukoKikanKaishiYMD = gogitaiYukoKikanKaishiYMD;
-
         this.usesGogitaiNo = usesGogitaiNo;
         this.usesGogitaiYukoKikanKaishiYMD = usesGogitaiYukoKikanKaishiYMD;
+        this.shinsakaiKaisaiBashoJokyo = shinsakaiKaisaiBashoJokyoFlag;
     }
 
     /**
@@ -50,8 +53,9 @@ public class GogitaiJohoMapperParameter {
      */
     public static GogitaiJohoMapperParameter createSelectByKeyParam(
             int gogitaiNo,
-            FlexibleDate gogitaiYukoKikanKaishiYMD) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true);
+            FlexibleDate gogitaiYukoKikanKaishiYMD
+            ,boolean shinsakaiKaisaiBashoJokyoFlag) {
+        return new GogitaiJohoMapperParameter(gogitaiNo, gogitaiYukoKikanKaishiYMD, true, true, shinsakaiKaisaiBashoJokyoFlag);
     }
 
     /**
@@ -62,6 +66,7 @@ public class GogitaiJohoMapperParameter {
      */
     public static GogitaiJohoMapperParameter createSelectListParam(
             int gogitaiNo) {
-        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false);
+        return new GogitaiJohoMapperParameter(gogitaiNo, FlexibleDate.EMPTY, true, false,false);
     }
+    
 }
