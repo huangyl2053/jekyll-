@@ -3,32 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.sikakuKanrenIdo;
+package jp.co.ndensan.reams.db.dba.definition.shikakutokuso;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
- * @author soft863
+ * 資格得喪履歴補助のParameterクラスです。
  */
-public class SikakuKanrenIdoParameter {
+public final class ShikakuTokusoParameter {
 
-    public final HihokenshaNo hihokenshaNo;
-    public final boolean isHihokenshaNo;
-    public final ShikibetsuCode shikibetsuCode;
-    public final FlexibleDate shikakuShutokuYMD;
+    private final HihokenshaNo hihokenshaNo;
+    private final boolean isHihokenshaNo;
+    private final ShikibetsuCode shikibetsuCode;
 
-    private SikakuKanrenIdoParameter(
+    private ShikakuTokusoParameter(
             HihokenshaNo hihokenshaNo,
             boolean isHihokenshaNo,
-            ShikibetsuCode shikibetsuCode,
-            FlexibleDate shikakuShutokuYMD) {
+            ShikibetsuCode shikibetsuCode) {
         this.hihokenshaNo = hihokenshaNo;
         this.isHihokenshaNo = isHihokenshaNo;
         this.shikibetsuCode = shikibetsuCode;
-        this.shikakuShutokuYMD = shikakuShutokuYMD;
     }
 
     /**
@@ -36,40 +32,48 @@ public class SikakuKanrenIdoParameter {
      *
      * @param hihokenshaNo 被保険者番号
      * @param shikibetsuCode 識別コー
-     * @param shikakuShutokuYMD 取得日
      * @return JigyoshaInputGuideParameter
      */
-    public static SikakuKanrenIdoParameter createParam(
+    public static ShikakuTokusoParameter createParam(
             HihokenshaNo hihokenshaNo,
-            ShikibetsuCode shikibetsuCode,
-            FlexibleDate shikakuShutokuYMD) {
+            ShikibetsuCode shikibetsuCode) {
         boolean isHihokenshaNo = false;
 
         if (hihokenshaNo != null && !hihokenshaNo.isEmpty()) {
             isHihokenshaNo = true;
         }
 
-        return new SikakuKanrenIdoParameter(
+        return new ShikakuTokusoParameter(
                 hihokenshaNo,
                 isHihokenshaNo,
-                shikibetsuCode,
-                shikakuShutokuYMD);
+                shikibetsuCode);
     }
 
+    /**
+     * 保険者番号を返します。
+     *
+     * @return 保険者番号
+     */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
+    /**
+     * 保険者番号があるを返します。
+     *
+     * @return 保険者番号
+     */
     public boolean isIsHihokenshaNo() {
         return isHihokenshaNo;
     }
 
-    public ShikibetsuCode getshikibetsuCode() {
+    /**
+     * 識別コードを返します。
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
-    }
-
-    public FlexibleDate getShikakuShutokuYMD() {
-        return shikakuShutokuYMD;
     }
 
 }

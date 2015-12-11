@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business;
+package jp.co.ndensan.reams.db.dba.business.core.shikakutokuso;
 
-import jp.co.ndensan.reams.db.dba.entity.db.relate.ServiceShikakuJohoRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakutoku.shikakutokuso.ServiceShikakuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -14,18 +14,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author soft863
+ * 資格情報一覧ガイドにＤＢから検索するデータが表示する
  */
 public class ShikakuTokuso {
 
-    private final ServiceShikakuJohoRelateEntity entity;
+    private final ServiceShikakuRelateEntity entity;
 
     /**
      * コンストラクタです.
      *
      * @param entity 資格得喪Entity
      */
-    public ShikakuTokuso(ServiceShikakuJohoRelateEntity entity) {
+    public ShikakuTokuso(ServiceShikakuRelateEntity entity) {
         this.entity = entity;
     }
 

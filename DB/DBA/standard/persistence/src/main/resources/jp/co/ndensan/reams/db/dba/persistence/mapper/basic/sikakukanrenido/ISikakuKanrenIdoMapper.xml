@@ -4,10 +4,10 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.basic.SikakuKanrenIdoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.basic.sikakukanrenido.SikakuKanrenIdoMapper">
                    
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
-    <resultMap id="resultMap_getSikakuKanrenIdo" type="jp.co.ndensan.reams.db.dba.entity.db.relate.SikakuKanrenIdoEntity" autoMapping="true">
+    <resultMap id="resultMap_getSikakuKanrenIdo" type="jp.co.ndensan.reams.db.dba.entity.db.relate.shikakutoku.shikakutokuso.SikakuKanrenIdoEntity" autoMapping="true">
   <!--<result property="hihokenshaNo" column="DbT1001Hiho_hihokenshaNoD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.HihokenshaNoTypeHandler" />-->
     <result property="idoYMD" column="DbT1001Hiho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     <result property="edaNo" column="DbT1001Hiho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -21,7 +21,7 @@
     <result property="kyuShichosonCode" column="DbT7056Gappei_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" /> 
     <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
     </resultMap>
-      <select id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dba.definition.sikakuKanrenIdo.SikakuKanrenIdoParameter" fetchSize="500">
+      <select id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dba.definition.param.sikakukanrenido.SikakuKanrenIdoParameter" fetchSize="500">
 	SELECT
             DbT1001Hiho. "hihokenshaNo" as "DbT1001Hiho_hihokenshaNoD",
             DbT1001Hiho."idoYMD" as "DbT1001Hiho_idoYMD",
