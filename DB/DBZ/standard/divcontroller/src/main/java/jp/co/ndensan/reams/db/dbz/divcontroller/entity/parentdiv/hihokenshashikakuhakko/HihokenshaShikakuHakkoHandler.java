@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoMode
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
-import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
+//import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ContainsKyuShichoson;
+//import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators.NullComparator;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+//import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.被保険者証;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
@@ -52,10 +52,10 @@ public class HihokenshaShikakuHakkoHandler {
     static final KeyValueDataSource KOFUJIYU_TEST = new KeyValueDataSource(new RString("testKey"), new RString("テスト"));
     static final KeyValueDataSource KOFUJIYU_CHOKUZEN = new KeyValueDataSource(new RString("chokuzenKey"), new RString("直前履歴"));
     private static final RString COLLON = new RString(":");
-    private static final RString JIKOSAKUSEI = new RString("自己作成");
-    private final int 終了分記載区分が終了後も記載する場合の給付制限件数 = 3;
-    private final int 終了分記載区分が終了後記載しない場合の給付制限件数 = 1;
-    private final int 給付制限件数 = 3;
+//    private static final RString JIKOSAKUSEI = new RString("自己作成");
+//    private final int 終了分記載区分が終了後も記載する場合の給付制限件数 = 3;
+//    private final int 終了分記載区分が終了後記載しない場合の給付制限件数 = 1;
+//    private final int 給付制限件数 = 3;
 
     /**
      * コンストラクタです。
@@ -125,28 +125,28 @@ public class HihokenshaShikakuHakkoHandler {
 //        }
 //        return 認定申請結果履歴.findFirst();
 //    }
-    private void set保険者(HihokenshaDaichoModel 被保険者台帳) {
-
-        RString 保険者コード = RString.EMPTY;
-        RString 保険者名称 = RString.EMPTY;
+//    private void set保険者(HihokenshaDaichoModel 被保険者台帳) {
+//
+//        RString 保険者コード = RString.EMPTY;
+//        RString 保険者名称 = RString.EMPTY;
 //        LasdecCode 広住特措置元市町村コード = 被保険者台帳.get広住特措置元市町村コード();
-        LasdecCode 広住特措置元市町村コード = null;
-        if (!広住特措置元市町村コード.isEmpty()) {
+//        LasdecCode 広住特措置元市町村コード = null;
+//        if (!広住特措置元市町村コード.isEmpty()) {
 //            IKoikiKoseiShichosonFinder finder = KoikiKoseiShichosonFinderFactory.createInstance();
 //            Optional<IKoikiKoseiShichoson> koiki = finder.find構成市町村(広住特措置元市町村コード, ContainsKyuShichoson.旧市町村を含まない);
 //            if (koiki.isPresent()) {
 //                保険者コード = koiki.get().get証記載保険者番号().value();
 //                保険者名称 = koiki.get().get市町村名();
 //            }
-        } else {
-            HokenshaJohoConfig config = new HokenshaJohoConfig();
-            保険者コード = config.get保険者情報_保険者番号();
-            保険者名称 = config.get保険者情報_保険者名称();
-        }
-
-        RString hokenshaHyoji = new RStringBuilder(保険者コード).append(COLLON).append(保険者名称).toRString();
-        div.getTxtHokensha().setValue(hokenshaHyoji);
-    }
+//        } else {
+//            HokenshaJohoConfig config = new HokenshaJohoConfig();
+//            保険者コード = config.get保険者情報_保険者番号();
+//            保険者名称 = config.get保険者情報_保険者名称();
+//        }
+//
+//        RString hokenshaHyoji = new RStringBuilder(保険者コード).append(COLLON).append(保険者名称).toRString();
+//        div.getTxtHokensha().setValue(hokenshaHyoji);
+//    }
 
 //    private void set有効期限(NinteiShinseiKekkaModel 認定申請結果) {
 //        if (div.getMode_発行証タイプ() == 資格者証) {
@@ -347,20 +347,20 @@ public class HihokenshaShikakuHakkoHandler {
 //        給付制限 = sortKyufuSeigenShutsuryokuList(給付制限);
 //        return 給付制限;
 //    }
-    private List<KyufuSeigenShutsuryoku> create２号被保険者給付制限(
-            HihokenshaNo 被保険者番号) {
-        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
-        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
-        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止記載文言();
+//    private List<KyufuSeigenShutsuryoku> create２号被保険者給付制限(
+//            HihokenshaNo 被保険者番号) {
+//        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
+//        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
+//        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止記載文言();
         //       IItemList<ShiharaiHohoHenkoModel> history = new ShiharaiHohoHenkoManager().get2号差止履歴(被保険者番号);
-
+//
 //        if (差止終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
 //            給付制限.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 差止記載文言));
 //        } else {
 //            給付制限.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後記載しない場合の給付制限件数, 差止記載文言));
 //        }
-        return 給付制限;
-    }
+//        return 給付制限;
+//    }
 
 //    private List<KyufuSeigenShutsuryoku> createKyufuSeigenShutsuryokuList(IItemList<ShiharaiHohoHenkoModel> history,
 //            int historySize, RString 記載文言) {
@@ -372,64 +372,64 @@ public class HihokenshaShikakuHakkoHandler {
 //        }
 //        return result;
 //    }
-    private List<KyufuSeigenShutsuryoku> sortKyufuSeigenShutsuryokuList(List<KyufuSeigenShutsuryoku> kyufuSeigenShutsuryoku) {
+//    private List<KyufuSeigenShutsuryoku> sortKyufuSeigenShutsuryokuList(List<KyufuSeigenShutsuryoku> kyufuSeigenShutsuryoku) {
+//
+//        Collections.sort(kyufuSeigenShutsuryoku, NullComparator.NullsLast.of(new Comparator<KyufuSeigenShutsuryoku>() {
+//            @Override
+//            public int compare(KyufuSeigenShutsuryoku o1, KyufuSeigenShutsuryoku o2) {
+//                if (o1.get制限期間開始日().isEmpty()) {
+//                    return 1;
+//                }
+//                if (o2.get制限期間開始日().isEmpty()) {
+//                    return -1;
+//                }
+//                return o2.get制限期間開始日().compareTo(o1.get制限期間開始日());
+//            }
+//        }));
+//
+//        return kyufuSeigenShutsuryoku;
+//    }
 
-        Collections.sort(kyufuSeigenShutsuryoku, NullComparator.NullsLast.of(new Comparator<KyufuSeigenShutsuryoku>() {
-            @Override
-            public int compare(KyufuSeigenShutsuryoku o1, KyufuSeigenShutsuryoku o2) {
-                if (o1.get制限期間開始日().isEmpty()) {
-                    return 1;
-                }
-                if (o2.get制限期間開始日().isEmpty()) {
-                    return -1;
-                }
-                return o2.get制限期間開始日().compareTo(o1.get制限期間開始日());
-            }
-        }));
+//    private void set給付制限to画面(List<KyufuSeigenShutsuryoku> 給付制限) {
+//        if (!給付制限.isEmpty()) {
+//            div.getTxtKyufuSeigenNaiyo1().setValue(給付制限.get(0).get制限内容());
+//            if (has日付(給付制限.get(0).get制限期間開始日())) {
+//                div.getTxtKyufuSeigenKikan1().setFromValue(new RDate(給付制限.get(0).get制限期間開始日().toString()));
+//            }
+//            if (has日付(給付制限.get(0).get制限期間終了日())) {
+//                div.getTxtKyufuSeigenKikan1().setToValue(new RDate(給付制限.get(0).get制限期間終了日().toString()));
+//            }
+//            if (1 < 給付制限.size()) {
+//                div.getTxtKyufuSeigenNaiyo2().setValue(給付制限.get(1).get制限内容());
+//                if (has日付(給付制限.get(0).get制限期間開始日())) {
+//                    div.getTxtKyufuSeigenKikan2().setFromValue(new RDate(給付制限.get(1).get制限期間開始日().toString()));
+//                }
+//                if (has日付(給付制限.get(1).get制限期間終了日())) {
+//                    div.getTxtKyufuSeigenKikan2().setToValue(new RDate(給付制限.get(1).get制限期間終了日().toString()));
+//                }
+//            }
+//            if (2 < 給付制限.size()) {
+//                div.getTxtKyufuSeigenNaiyo3().setValue(給付制限.get(2).get制限内容());
+//                if (has日付(給付制限.get(0).get制限期間開始日())) {
+//                    div.getTxtKyufuSeigenKikan3().setFromValue(new RDate(給付制限.get(2).get制限期間開始日().toString()));
+//                }
+//                if (has日付(給付制限.get(2).get制限期間終了日())) {
+//                    div.getTxtKyufuSeigenKikan3().setToValue(new RDate(給付制限.get(2).get制限期間終了日().toString()));
+//                }
+//            }
+//        }
+//    }
 
-        return kyufuSeigenShutsuryoku;
-    }
-
-    private void set給付制限to画面(List<KyufuSeigenShutsuryoku> 給付制限) {
-        if (!給付制限.isEmpty()) {
-            div.getTxtKyufuSeigenNaiyo1().setValue(給付制限.get(0).get制限内容());
-            if (has日付(給付制限.get(0).get制限期間開始日())) {
-                div.getTxtKyufuSeigenKikan1().setFromValue(new RDate(給付制限.get(0).get制限期間開始日().toString()));
-            }
-            if (has日付(給付制限.get(0).get制限期間終了日())) {
-                div.getTxtKyufuSeigenKikan1().setToValue(new RDate(給付制限.get(0).get制限期間終了日().toString()));
-            }
-            if (1 < 給付制限.size()) {
-                div.getTxtKyufuSeigenNaiyo2().setValue(給付制限.get(1).get制限内容());
-                if (has日付(給付制限.get(0).get制限期間開始日())) {
-                    div.getTxtKyufuSeigenKikan2().setFromValue(new RDate(給付制限.get(1).get制限期間開始日().toString()));
-                }
-                if (has日付(給付制限.get(1).get制限期間終了日())) {
-                    div.getTxtKyufuSeigenKikan2().setToValue(new RDate(給付制限.get(1).get制限期間終了日().toString()));
-                }
-            }
-            if (2 < 給付制限.size()) {
-                div.getTxtKyufuSeigenNaiyo3().setValue(給付制限.get(2).get制限内容());
-                if (has日付(給付制限.get(0).get制限期間開始日())) {
-                    div.getTxtKyufuSeigenKikan3().setFromValue(new RDate(給付制限.get(2).get制限期間開始日().toString()));
-                }
-                if (has日付(給付制限.get(2).get制限期間終了日())) {
-                    div.getTxtKyufuSeigenKikan3().setToValue(new RDate(給付制限.get(2).get制限期間終了日().toString()));
-                }
-            }
-        }
-    }
-
-    private boolean has日付(FlexibleDate 日付) {
-        if (日付 == null) {
-            return false;
-        }
-        if (日付.equals(FlexibleDate.EMPTY)) {
-            return false;
-        }
-        return true;
-
-    }
+//    private boolean has日付(FlexibleDate 日付) {
+//        if (日付 == null) {
+//            return false;
+//        }
+//        if (日付.equals(FlexibleDate.EMPTY)) {
+//            return false;
+//        }
+//        return true;
+//
+//    }
 
     private static class ShienJigyosha {
 
@@ -511,49 +511,49 @@ public class HihokenshaShikakuHakkoHandler {
 //        }
 //        set支援事業者to画面(list);
 //    }
-    private void set支援事業者to画面(List<ShienJigyosha> 支援事業者List) {
+//    private void set支援事業者to画面(List<ShienJigyosha> 支援事業者List) {
+//
+//        ArrayList<FlexibleDate> 支援事業者適用終了日List = new ArrayList<>();
+//        if (!支援事業者List.isEmpty()) {
+//            div.getTxtJigyosha1().setValue(支援事業者List.get(0).get名称());
+//            div.getTxtTodokedeYMD1().setValue(支援事業者List.get(0).get届出日());
+//            div.getTxtTekiyoStYMD1().setValue(支援事業者List.get(0).get適用開始日());
+//            支援事業者適用終了日List.add(支援事業者List.get(0).get適用終了日());
+//            if (1 < 支援事業者List.size()) {
+//                div.getTxtJigyosha2().setValue(支援事業者List.get(1).get名称());
+//                div.getTxtTodokedeYMD2().setValue(支援事業者List.get(1).get届出日());
+//                div.getTxtTekiyoStYMD2().setValue(支援事業者List.get(1).get適用開始日());
+//                支援事業者適用終了日List.add(支援事業者List.get(1).get適用終了日());
+//            }
+//            if (2 < 支援事業者List.size()) {
+//                div.getTxtJigyosha3().setValue(支援事業者List.get(2).get名称());
+//                div.getTxtTodokedeYMD3().setValue(支援事業者List.get(2).get届出日());
+//                div.getTxtTekiyoStYMD3().setValue(支援事業者List.get(2).get適用開始日());
+//                支援事業者適用終了日List.add(支援事業者List.get(2).get適用終了日());
+//            }
+//        }
+//        PanelSessionAccessor.put(div, new RString("支援事業者適用終了日List"), 支援事業者適用終了日List);
+//    }
 
-        ArrayList<FlexibleDate> 支援事業者適用終了日List = new ArrayList<>();
-        if (!支援事業者List.isEmpty()) {
-            div.getTxtJigyosha1().setValue(支援事業者List.get(0).get名称());
-            div.getTxtTodokedeYMD1().setValue(支援事業者List.get(0).get届出日());
-            div.getTxtTekiyoStYMD1().setValue(支援事業者List.get(0).get適用開始日());
-            支援事業者適用終了日List.add(支援事業者List.get(0).get適用終了日());
-            if (1 < 支援事業者List.size()) {
-                div.getTxtJigyosha2().setValue(支援事業者List.get(1).get名称());
-                div.getTxtTodokedeYMD2().setValue(支援事業者List.get(1).get届出日());
-                div.getTxtTekiyoStYMD2().setValue(支援事業者List.get(1).get適用開始日());
-                支援事業者適用終了日List.add(支援事業者List.get(1).get適用終了日());
-            }
-            if (2 < 支援事業者List.size()) {
-                div.getTxtJigyosha3().setValue(支援事業者List.get(2).get名称());
-                div.getTxtTodokedeYMD3().setValue(支援事業者List.get(2).get届出日());
-                div.getTxtTekiyoStYMD3().setValue(支援事業者List.get(2).get適用開始日());
-                支援事業者適用終了日List.add(支援事業者List.get(2).get適用終了日());
-            }
-        }
-        PanelSessionAccessor.put(div, new RString("支援事業者適用終了日List"), 支援事業者適用終了日List);
-    }
-
-    private void set施設入退所(ShikibetsuCode 識別コード) {
+//    private void set施設入退所(ShikibetsuCode 識別コード) {
         // TODO N8187 久保田 以下の施設入退所情報取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
 //        ShisetsuNyutaishoTokureiTaishoRelateManager manager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
 //        IItemList<ShisetsuNyutaishoRelateModel> modelList = manager.get介護保険施設入退所一覧By主キー1(識別コード);
 //        set施設入退所to画面(modelList);
 
-        ArrayList<RString> 施設入退所コードList = new ArrayList<>();
+//        ArrayList<RString> 施設入退所コードList = new ArrayList<>();
 //        if (!modelList.isEmpty()) {
 //            for (ShisetsuNyutaishoRelateModel model : modelList) {
 //                施設入退所コードList.add(model.get介護保険施設入退所モデル().get入所施設コード());
 //            }
 //        }
         // テスト用コード。
-        施設入退所コードList.add(new RString("1234567891"));
-        施設入退所コードList.add(new RString("1234567892"));
-        施設入退所コードList.add(new RString("1234567893"));
-        PanelSessionAccessor.put(div, new RString("施設入退所コードList"), 施設入退所コードList);
-
-    }
+//        施設入退所コードList.add(new RString("1234567891"));
+//        施設入退所コードList.add(new RString("1234567892"));
+//        施設入退所コードList.add(new RString("1234567893"));
+//        PanelSessionAccessor.put(div, new RString("施設入退所コードList"), 施設入退所コードList);
+//
+//    }
     /*
      private void set施設入退所to画面(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所List) {
 
