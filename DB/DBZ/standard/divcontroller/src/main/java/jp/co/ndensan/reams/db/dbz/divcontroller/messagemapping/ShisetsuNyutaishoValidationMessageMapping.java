@@ -58,15 +58,29 @@ public enum ShisetsuNyutaishoValidationMessageMapping {
         this.message = message;
         this.fieldName = fieldName;
     }
-
+    /**
+     * バリデーションメッセージを取得します
+     *
+     * @return IValidationMessage
+     */
     public IValidationMessage getValidationMessage() {
         return (IValidationMessage) message;
     }
 
+    /**
+     * メッセージを取得します
+     *
+     * @return Message
+     */
     public Message getMessage() {
         return message.getMessage();
     }
 
+    /**
+     * フィールド名称を取得します
+     *
+     * @return fieldName
+     */
     public RString getFieldName() {
         return fieldName;
     }

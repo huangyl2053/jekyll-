@@ -38,6 +38,11 @@ public enum KaigoRowState {
         this.status = new RString(status);
     }
 
+    /**
+     * 状態名称を取得します
+     *
+     * @return status
+     */
     public RString getStateName() {
         return status;
     }
