@@ -39,19 +39,19 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
      */
     @Transaction
     public DbT7006RoreiFukushiNenkinJukyushaEntity selectByKey(
-            ShikibetsuCode 識別コード,
-            FlexibleDate 受給開始年月日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(受給開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
+	    ShikibetsuCode 識別コード,
+	    FlexibleDate 受給開始年月日) throws NullPointerException {
+	requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+	requireNonNull(受給開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
 
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7006RoreiFukushiNenkinJukyusha.class).
-                where(and(
-                                eq(shikibetsuCode, 識別コード),
-                                eq(jukyuKaishiYMD, 受給開始年月日))).
-                toObject(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+	return accessor.select().
+		table(DbT7006RoreiFukushiNenkinJukyusha.class).
+		where(and(
+				eq(shikibetsuCode, 識別コード),
+				eq(jukyuKaishiYMD, 受給開始年月日))).
+		toObject(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
     }
 
     /**
@@ -61,11 +61,11 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
      */
     @Transaction
     public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectAll() {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7006RoreiFukushiNenkinJukyusha.class).
-                toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+	return accessor.select().
+		table(DbT7006RoreiFukushiNenkinJukyusha.class).
+		toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
     }
 
     /**
@@ -77,9 +77,29 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     @Transaction
     @Override
     public int save(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給者エンティティ"));
+	requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給者エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+	//return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+	return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 主キーで老齢福祉年金受給者を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT7006RoreiFukushiNenkinJukyushaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7006RoreiFukushiNenkinJukyushaEntity> select(ShikibetsuCode 識別コード) throws NullPointerException {
+	requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+	return accessor.select().
+		table(DbT7006RoreiFukushiNenkinJukyusha.class).
+		where(eq(shikibetsuCode, 識別コード)).
+		toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+    }
+
 }

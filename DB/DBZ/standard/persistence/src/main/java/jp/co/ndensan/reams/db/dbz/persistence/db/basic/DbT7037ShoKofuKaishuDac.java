@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -44,22 +45,22 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public DbT7037ShoKofuKaishuEntity selectByKey(
-            HihokenshaNo 被保険者番号,
-            RString 交付証種類,
-            int 履歴番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+	    HihokenshaNo 被保険者番号,
+	    RString 交付証種類,
+	    int 履歴番号) throws NullPointerException {
+	requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+	requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+	requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7037ShoKofuKaishu.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(kofuShoShurui, 交付証種類),
-                                eq(rirekiNo, 履歴番号))).
-                toObject(DbT7037ShoKofuKaishuEntity.class);
+	return accessor.select().
+		table(DbT7037ShoKofuKaishu.class).
+		where(and(
+				eq(hihokenshaNo, 被保険者番号),
+				eq(kofuShoShurui, 交付証種類),
+				eq(rirekiNo, 履歴番号))).
+		toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -69,11 +70,11 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public List<DbT7037ShoKofuKaishuEntity> selectAll() {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7037ShoKofuKaishu.class).
-                toList(DbT7037ShoKofuKaishuEntity.class);
+	return accessor.select().
+		table(DbT7037ShoKofuKaishu.class).
+		toList(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -85,13 +86,13 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     @Transaction
     @Override
     public int save(DbT7037ShoKofuKaishuEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+	requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("証交付回収エンティティ"));
+	// TODO 物理削除であるかは業務ごとに検討してください。
+	//return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+	return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
-     /**
+
+    /**
      * 主キーで証交付回収を取得します。
      *
      * @param 被保険者番号 HihokenshaNo
@@ -101,19 +102,19 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public List<DbT7037ShoKofuKaishuEntity> select一覧取得(
-            HihokenshaNo 被保険者番号,
-            boolean 論理削除フラグ) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+	    HihokenshaNo 被保険者番号,
+	    boolean 論理削除フラグ) throws NullPointerException {
+	requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+	requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
 
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7037ShoKofuKaishu.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(logicalDeletedFlag, 論理削除フラグ))).
-                toList(DbT7037ShoKofuKaishuEntity.class);
+	return accessor.select().
+		table(DbT7037ShoKofuKaishu.class).
+		where(and(
+				eq(hihokenshaNo, 被保険者番号),
+				eq(logicalDeletedFlag, 論理削除フラグ))).
+		toList(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -127,22 +128,22 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public DbT7037ShoKofuKaishuEntity select更新処理(
-            RString 交付証種類,
-            HihokenshaNo 被保険者番号,
-            RDateTime 処理日時) throws NullPointerException {
-        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+	    RString 交付証種類,
+	    HihokenshaNo 被保険者番号,
+	    RDateTime 処理日時) throws NullPointerException {
+	requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
+	requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+	requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
-                table(DbT7037ShoKofuKaishu.class).
-                where(and(
-                                eq(kofuShoShurui, 交付証種類),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(hakkoShoriTimestamp, 処理日時))).
-                toObject(DbT7037ShoKofuKaishuEntity.class);
+	return accessor.select().
+		table(DbT7037ShoKofuKaishu.class).
+		where(and(
+				eq(kofuShoShurui, 交付証種類),
+				eq(hihokenshaNo, 被保険者番号),
+				eq(hakkoShoriTimestamp, 処理日時))).
+		toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 
     /**
@@ -153,8 +154,8 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public int update(DbT7037ShoKofuKaishuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.update(entity).execute();
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	return accessor.update(entity).execute();
     }
 
     /**
@@ -165,7 +166,25 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
      */
     @Transaction
     public int delete(DbT7037ShoKofuKaishuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+	return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 主キーで証交付回収を取得します。
+     *
+     * @param makeShuruiCondition
+     * @return DbT7037ShoKofuKaishuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7037ShoKofuKaishuEntity> select(ITrueFalseCriteria makeShuruiCondition) throws NullPointerException {
+
+	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+	return accessor.select().
+		table(DbT7037ShoKofuKaishu.class).
+		where(makeShuruiCondition).
+		toList(DbT7037ShoKofuKaishuEntity.class);
     }
 }
