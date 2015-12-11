@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigoJuminhyo;
+package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo;
 
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
-import jp.co.ndensan.reams.db.dbu.entity.kaigojuminhyo.ChushutsuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -39,29 +39,31 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
     }
 
     /**
-     * 画面入力するデータより、バッチ用パラメータクラスを作成です。
+     * 画面入力するデータより、バッチ用パラメータクラスを作成です。今回開始年月日　今回開始時分秒
      *
-     * @return DbT7022ShoriDateKanriEntity
+     * @param kaishiYMD 今回開始年月日
+     * @param kaishiTimestamp 今回開始時分秒
+     * @return KaigoJuminhyoBatchParameter 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータ
      */
     @Transaction
-    public KaigoJuminhyoBatchParameter getKaigoJuminhyoKobetsuJikouBatchParameter(ChushutsuKikanJohoEntity chushutsuKikanEntity) {
+    public KaigoJuminhyoBatchParameter getKaigoJuminhyoKobetsuJikouBatchParameter(RString kaishiYMD, RString kaishiTimestamp) {
 
-        if (chushutsuKikanEntity == null) {
-            return null;
+        if (kaishiYMD != null) {
+            KaigoJuminhyoBatchParameter kaigoJuminhyoBatchParameter = new KaigoJuminhyoBatchParameter();
+            StringBuilder taishoKaishiYMDHMS = new StringBuilder();
+            taishoKaishiYMDHMS.append(kaishiYMD);
+            taishoKaishiYMDHMS.append(kaishiTimestamp);
+
+            RString ymd = RDate.getNowDate().toDateString();
+            RString time = new RString(RDate.getNowTime().toString());
+            StringBuilder taishoShuryoYMDHMS = new StringBuilder();
+            taishoShuryoYMDHMS.append(ymd);
+            taishoShuryoYMDHMS.append("000000");
+            kaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(new YMDHMS(taishoKaishiYMDHMS.toString()));
+            kaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(new YMDHMS(taishoShuryoYMDHMS.toString()));
+            return kaigoJuminhyoBatchParameter;
         }
-
-        KaigoJuminhyoBatchParameter KaigoJuminhyoBatchParameter = new KaigoJuminhyoBatchParameter();
-        StringBuffer taishoKaishiYMDHMS = new StringBuffer();
-        taishoKaishiYMDHMS.append(chushutsuKikanEntity.getTaishoKaishiYMD());
-        taishoKaishiYMDHMS.append(chushutsuKikanEntity.getTaishoKaishiTimestamp());
-
-        StringBuffer taishoShuryoYMDHMS = new StringBuffer();
-        taishoShuryoYMDHMS.append(chushutsuKikanEntity.getTaishoShuryoYMD());
-        taishoShuryoYMDHMS.append(chushutsuKikanEntity.getTaishoShuryoTimestamp());
-
-        KaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(new YMDHMS(taishoKaishiYMDHMS.toString()));
-        KaigoJuminhyoBatchParameter.setTaishoShuryoYMDHMS(new YMDHMS(taishoShuryoYMDHMS.toString()));
-        return KaigoJuminhyoBatchParameter;
+        return null;
     }
 
     /**
@@ -70,20 +72,10 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
      * @return ChushutsuKikanJohoEntity
      */
     @Transaction
-    public ChushutsuKikanJohoEntity getChushutsukikanJoho() {
+    public DbT7022ShoriDateKanriEntity getChushutsukikanJoho() {
 
         DbT7022ShoriDateKanriEntity dbT7022Entity = dac.selectTaishoYMD();
 
-        if (dbT7022Entity == null) {
-            return null;
-        }
-        dbT7022Entity.initializeMd5();
-
-        ChushutsuKikanJohoEntity chushutsuKikanEntity = new ChushutsuKikanJohoEntity();
-        chushutsuKikanEntity.setTaishoKaishiTimestamp(dbT7022Entity.getTaishoKaishiTimestamp().toDateString());
-        chushutsuKikanEntity.setTaishoKaishiYMD(new RString(dbT7022Entity.getTaishoKaishiYMD().toString()));
-        chushutsuKikanEntity.setTaishoShuryoTimestamp(dbT7022Entity.getTaishoShuryoTimestamp().toDateString());
-        chushutsuKikanEntity.setTaishoShuryoYMD(new RString(dbT7022Entity.getTaishoShuryoYMD().toString()));
-        return chushutsuKikanEntity;
+        return dbT7022Entity;
     }
 }

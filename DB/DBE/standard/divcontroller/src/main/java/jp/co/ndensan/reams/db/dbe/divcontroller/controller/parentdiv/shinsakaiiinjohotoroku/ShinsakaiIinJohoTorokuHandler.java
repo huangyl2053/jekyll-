@@ -233,6 +233,22 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
+     * 審査会委員詳細情報変更を判断します。
+     *
+     * 。
+     *
+     * @return　boolean
+     */
+    public boolean hasChanged合議体詳細情報() {
+        for (dgShinsaInJohoIchiran_Row row : div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getDataSource()) {
+            if (div.getShinsakaiIinJoho().getTxtShinsainCode().getValue().equals(row.getShinsainCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 「入力内容を更新する」ボタン押下、入力明細エリアの入力内容を審査会委員一覧に反映させる。
      *
      * @return リスト
@@ -270,7 +286,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
-     * 画面で格納される審査会委員情報はＤＢ格納用型に転換する。
+     * 画面で格納される審査会委員情報はＤＢ格納用型に転換します。
      *
      * @return リスト
      */
