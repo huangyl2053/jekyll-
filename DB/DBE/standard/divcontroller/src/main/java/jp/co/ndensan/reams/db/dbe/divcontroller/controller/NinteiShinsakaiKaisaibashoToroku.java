@@ -110,7 +110,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
          }
          if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
               &&  ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).set新規モード或いは更新モードの場合開催場所編集エリア活性();
+            getHandler(div).set修正の場合開催場所編集エリア();
             response.data = div;
          }
         return response;
@@ -124,7 +124,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> dataGrid_onSelectBySelectButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> response = new ResponseData<>();
-        getHandler(div).set新規モード或いは更新モードの場合開催場所編集エリア非活性();
+        getHandler(div).set開催場所一覧の参照();
         response.data = div;
         return response;
     }

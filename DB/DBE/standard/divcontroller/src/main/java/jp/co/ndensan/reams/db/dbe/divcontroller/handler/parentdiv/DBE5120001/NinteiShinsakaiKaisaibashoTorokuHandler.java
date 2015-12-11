@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -63,15 +62,16 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     }
 
     /**
-     *開催場所編集エリア状態を設定します。
+     * 開催場所編集エリアを設定します。
      *
      */
     public void set開催場所一覧の追加() {
-       clear開催場所編集エリア();
-       set開催場所編集エリア活性();
-       div.getBtnTsuika().setDisabled(true);
+        div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
+        clear開催場所編集エリア();
+        set開催場所編集エリア活性();
+        div.getBtnTsuika().setDisabled(true);
     }
-    
+
     /**
      * 開催場所一覧の削除を設定しました。
      *
@@ -80,70 +80,47 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
         if (追加モード.equals(clickedItem.getJyotai())) {
-           rowList.remove(div.getDgKaisaibashoIchiran().getClickedRowId());
+            rowList.remove(div.getDgKaisaibashoIchiran().getClickedRowId());
         } else {
             clickedItem.setJyotai(削除);
-           rowList.set(div.getDgKaisaibashoIchiran().getClickedRowId(), clickedItem);
+            rowList.set(div.getDgKaisaibashoIchiran().getClickedRowId(), clickedItem);
         }
         div.getDgKaisaibashoIchiran().setDataSource(rowList);
     }
-    
+
     /**
-     * 新規モード或いは更新モードの場合開催場所編集エリア非活性です。
+     * 開催場所一覧の参照を設定しました。
      *
      */
-    public void set新規モード或いは更新モードの場合開催場所編集エリア非活性() {
+    public void set開催場所一覧の参照() {
         dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
         if (!(更新モード.equals(ClickedItem.getJyotai()) || 追加モード.equals(ClickedItem.getJyotai()))) {
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setValue(ClickedItem.getKaisaibashoCode()); // 開催場所コード
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setValue(ClickedItem.getKaisaibashoMeisho()); // 開催場所名称
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setValue(ClickedItem.getKaisaibashoJusho()); // 開催場所住所
-            div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().setDomain(new TelNo(ClickedItem.getKaisaibashoTelNo())); // 電話番号
-            if (通常.equals(ClickedItem.getKaisaibashoJokyo())) {
-                div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(0); // 開催場所住所状況
-            } else if (削除.equals(ClickedItem.getKaisaibashoJokyo())) {
-                div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(1); // 開催場所住所状況
-            }
-            // 開催地区コード 開催地区内容
-            ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-            codeInput.load(SubGyomuCode.DBE認定支援,new CodeShubetsu("5001"), new Code(ClickedItem.getKaisaiChikuCode()));
+            setSelectItem(ClickedItem);
             set開催場所編集エリア非活性();
         }
     }
-    
+
     /**
      * 新規モード或いは更新モードの場合開催場所編集エリア活性です。
      *
      */
-    public void set新規モード或いは更新モードの場合開催場所編集エリア活性() {
+    public void set修正の場合開催場所編集エリア() {
+        div.getShinakaiKaisaIbashoShosai().setJyotai(更新モード);
         dgKaisaibashoIchiran_Row ClickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        if (!(更新モード.equals(ClickedItem.getJyotai()) || 追加モード.equals(ClickedItem.getJyotai()))) {
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setValue(ClickedItem.getKaisaibashoCode()); // 開催場所コード
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setValue(ClickedItem.getKaisaibashoMeisho()); // 開催場所名称
-            div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setValue(ClickedItem.getKaisaibashoJusho()); // 開催場所住所
-            div.getShinakaiKaisaIbashoShosai().getTxtTelNumber().setDomain(new TelNo(ClickedItem.getKaisaibashoTelNo())); // 電話番号
-            if (通常.equals(ClickedItem.getKaisaibashoJokyo())) {
-                div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(0); // 開催場所住所状況
-            } else if (削除.equals(ClickedItem.getKaisaibashoJokyo())) {
-                div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(1); // 開催場所住所状況
-            }
-            // 開催地区コード 開催地区内容
-            ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-            codeInput.load(SubGyomuCode.DBE認定支援,new CodeShubetsu("5001"), new Code(ClickedItem.getKaisaiChikuCode()));
-            set開催場所編集エリア活性();
-        }
+        setSelectItem(ClickedItem);
+        set開催場所編集エリア活性();
     }
-    
+
     /**
      * 開催場所編集エリア初期化設定します。
      *
      */
     public void set開催場所編集エリアを初期化処理() {
-       clear開催場所編集エリア();
-       set開催場所編集エリア非活性();
-       div.getBtnTsuika().setDisabled(false);
+        clear開催場所編集エリア();
+        set開催場所編集エリア非活性();
+        div.getBtnTsuika().setDisabled(false);
     }
-    
+
     /**
      * 開催場所一覧の更新を設定します。
      *
@@ -152,15 +129,17 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
         int clickedItemId = div.getDgKaisaibashoIchiran().getClickedRowId();
-        if (追加モード.equals(clickedItem.getJyotai())) {
-             clickedItem.setJyotai(追加モード);
-             setSelectItem(clickedItem);
-             rowList.set(clickedItemId, clickedItem);
-        } else if (更新モード.equals(clickedItem.getJyotai()) || clickedItem.getJyotai().isEmpty()) {
-             clickedItem.setJyotai(更新モード);
-             setSelectItem(clickedItem);
-             rowList.set(clickedItemId, clickedItem);
-        } else {
+        RString モード = div.getShinakaiKaisaIbashoShosai().getJyotai();
+        if (更新モード.equals(モード) && 追加モード.equals(clickedItem.getJyotai())) {
+            clickedItem.setJyotai(追加モード);
+            setSelectItem(clickedItem);
+            rowList.set(clickedItemId, clickedItem);
+        } else if (更新モード.equals(モード)
+                && (更新モード.equals(clickedItem.getJyotai()) || clickedItem.getJyotai().isEmpty())) {
+            clickedItem.setJyotai(更新モード);
+            setSelectItem(clickedItem);
+            rowList.set(clickedItemId, clickedItem);
+        } else if (追加モード.equals(モード)) {
             clickedItem.setJyotai(追加モード);
             dgKaisaibashoIchiran_Row clickedItemNew = new dgKaisaibashoIchiran_Row();
             setSelectItem(clickedItemNew);
@@ -171,9 +150,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         clear開催場所編集エリア();
         set開催場所編集エリア非活性();
     }
-    
-    
-    private void setSelectItem(dgKaisaibashoIchiran_Row clickedItem){
+
+    private void setSelectItem(dgKaisaibashoIchiran_Row clickedItem) {
         clickedItem.setKaisaibashoCode(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().getValue()); //開催場所コード
         clickedItem.setKaisaibashoMeisho(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().getValue()); //開催場所名称
         clickedItem.setKaisaibashoJusho(div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().getValue()); //開催場所住所
@@ -184,12 +162,13 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         // 開催場所住所状況
         if (div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().getSelectedIndex() == 0) {
             clickedItem.setKaisaibashoJokyo(通常);
-        } else if (div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().getSelectedIndex() ==1) {
+        } else if (div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().getSelectedIndex() == 1) {
             clickedItem.setKaisaibashoJokyo(削除);
         }
+        get開催地区内容(clickedItem);
     }
-    
-    private void set開催場所編集エリア非活性(){
+
+    private void set開催場所編集エリア非活性() {
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setReadOnly(true); // 開催場所コード
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setReadOnly(true); // 開催場所名称
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setReadOnly(true); // 開催場所住所
@@ -198,8 +177,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getShinakaiKaisaIbashoShosai().getBtnback().setDisabled(true);
         div.getShinakaiKaisaIbashoShosai().getBtnupdate().setDisabled(true);
     }
-    
-    private void set開催場所編集エリア活性(){
+
+    private void set開催場所編集エリア活性() {
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().setReadOnly(false); // 開催場所コード
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().setReadOnly(false); // 開催場所名称
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().setReadOnly(false); // 開催場所住所
@@ -208,8 +187,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getShinakaiKaisaIbashoShosai().getBtnback().setDisabled(false);
         div.getShinakaiKaisaIbashoShosai().getBtnupdate().setDisabled(false);
     }
-    
-    private void clear開催場所編集エリア(){
+
+    private void clear開催場所編集エリア() {
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoCode().clearValue(); // 開催場所コード
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoMeisho().clearValue(); // 開催場所名称
         div.getShinakaiKaisaIbashoShosai().getTxtKaisaibashoJusho().clearValue(); // 開催場所住所
@@ -217,5 +196,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getShinakaiKaisaIbashoShosai().getDdlKaisaiBashoJokyo().setSelectedIndex(0); // 開催場所住所状況
         div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().load(new CodeShubetsu("5001"));
         div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode().clearDisplayedValues();
+    }
+    
+     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
+        ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
+        codeInput.load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), new Code(clickedItem.getKaisaiChikuCode()));
     }
 }
