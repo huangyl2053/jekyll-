@@ -3,19 +3,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.JigyoshaN
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dba.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dba.definition.jigyosha.JigyoshaInputGuideParameter;
-import jp.co.ndensan.reams.db.dba.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dba.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -125,6 +125,7 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
 
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             List<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getOtherTokureiInputGuide(
                     JigyoshaInputGuideParameter.createParam_OtherTokureiInputGuide(new KaigoJigyoshaNo(
                                     div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
@@ -152,8 +153,8 @@ public class JiGyoSyaHandler {
                     dgJigyoshaItiran.setTxtJigyoshaNo(jigyoshaInput.get事業者番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(jigyoshaInput.get有効開始日().toString()));
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(jigyoshaInput.get有効終了日().toString()));
-                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get事業者名称カナ() == null ? RString.EMPTY : jigyoshaInput.get事業者名称カナ().value());
-                    dgJigyoshaItiran.setTxtJusho(jigyoshaInput.get事業者住所カナ());
+                    dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get介護除外住所地特例対象施設_事業者名称() == null ? RString.EMPTY : jigyoshaInput.get介護除外住所地特例対象施設_事業者名称().value());
+                    dgJigyoshaItiran.setTxtJusho(jigyoshaInput.get介護除外住所地特例対象施設_事業者住所カナ());
                     dgJigyoshaItiran.setTxtTelNo(jigyoshaInput.get電話番号() == null ? RString.EMPTY : jigyoshaInput.get電話番号().value());
                     dgJigyoshaItiranList.add(dgJigyoshaItiran);
                 }
@@ -166,6 +167,7 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
 
+            div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             List<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getTekiyoJogaiInputGuide(
                     JigyoshaInputGuideParameter.createParam_TekiyoJogaiInputGuide(new KaigoJigyoshaNo(
                                     div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
@@ -188,7 +190,7 @@ public class JiGyoSyaHandler {
                 for (ServiceJigyoshaInputGuide jigyoshaInput : Jigyosha) {
 
                     dgJigyoshaItiran_Row dgJigyoshaItiran = new dgJigyoshaItiran_Row();
-//                    dgJigyoshaItiran.setTxtJigyoshaNo(jigyoshaInput.get事業者番号().value());
+                    dgJigyoshaItiran.setTxtJigyoshaNo(jigyoshaInput.get事業者番号().value());
                     dgJigyoshaItiran.getTxtYukoKaishibiYMD().setValue(new RDate(jigyoshaInput.get有効開始日().toString()));
                     dgJigyoshaItiran.getTxtYukoShuryobiYMD().setValue(new RDate(jigyoshaInput.get有効終了日().toString()));
                     dgJigyoshaItiran.setTxtMeisho(jigyoshaInput.get事業者名称カナ() == null ? RString.EMPTY : jigyoshaInput.get事業者名称カナ().value());

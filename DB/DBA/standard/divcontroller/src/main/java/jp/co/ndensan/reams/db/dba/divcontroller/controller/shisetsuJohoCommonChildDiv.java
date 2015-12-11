@@ -34,7 +34,7 @@ public class shisetsuJohoCommonChildDiv {
         ResponseData<shisetsuJohoCommonChildDivDiv> responseData = new ResponseData<>();
 
         if (ViewStateHolder.get(ViewStateKeys.台帳種別表示有り, RString.class) == null
-                || ViewStateHolder.get(ViewStateKeys.台帳種別表示無し, RString.class) == null) {
+                && ViewStateHolder.get(ViewStateKeys.台帳種別表示無し, RString.class) == null) {
 
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
