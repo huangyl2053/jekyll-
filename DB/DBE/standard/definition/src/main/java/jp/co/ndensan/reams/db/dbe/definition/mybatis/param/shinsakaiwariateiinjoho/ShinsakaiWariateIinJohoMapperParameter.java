@@ -29,8 +29,8 @@ public class ShinsakaiWariateIinJohoMapperParameter {
             RString shinsakaiKaisaiNo,
             RString shinsakaiIinCode) {
 
-        this.shinsakaiKaisaiNo = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
-        this.shinsakaiIinCode = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        this.shinsakaiKaisaiNo = requireNonNull(shinsakaiKaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        this.shinsakaiIinCode = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
     }
 
     /**
