@@ -29,7 +29,11 @@ public enum ShisetsuNyutaishoValidationMessageMapping {
     /**
      *
      */
-    入所施設が未入力(ShisetsuNyutaishoValidationMessage.入所施設が未入力, new RString("txtShisetsuCode")),
+    入所施設コードが未入力(ShisetsuNyutaishoValidationMessage.入所施設コードが未入力, new RString("txtShisetsuCode")),
+    /**
+     *
+     */
+    入所施設名称が未入力(ShisetsuNyutaishoValidationMessage.入所施設名称が未入力, new RString("txtShisetsuCode")),
     /**
      *
      */
