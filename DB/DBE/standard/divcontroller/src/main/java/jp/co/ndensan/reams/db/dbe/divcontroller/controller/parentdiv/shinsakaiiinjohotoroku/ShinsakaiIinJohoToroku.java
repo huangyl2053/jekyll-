@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -21,11 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class ShinsakaiIinJohoToroku {
 
-    // TODO 新規モード
-    private final RString 新規モード = new RString("新規");
-
-//  private final RString 更新モード = new RString("更新");
-    private final RString 状態_削除 = new RString("削除");
+    private static final RString 新規モード = new RString("新規");
+    private static final RString 更新モード = new RString("更新");
+    private static final RString 状態_削除 = new RString("削除");
+    private static RString モード;
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
@@ -67,16 +65,15 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-//        TODO 「新規モード」或いは「更新モード」の場合
-//        if (!(new RString("update").equals(div.getMoudle()) || new RString("add").equals(div.getMoudle()))) {
-        ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
-        createHandOf(div).setDivShinsakaiIinJoho();
-        createHandOf(div).setDivRenrakusakiKinyuKikan();
-        List<ShozokuKikanIchiranEntity> list = service.get所属機関一覧(
-                new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode(),
-                        new LasdecCode(new RString("111111"))));
-        div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(list));
-//        }
+        if (!(新規モード.equals(モード) || 更新モード.equals(モード))) {
+            ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
+            createHandOf(div).setDivShinsakaiIinJoho();
+            createHandOf(div).setDivRenrakusakiKinyuKikan();
+//            TODO ２.　所属機関一覧検索
+            List<ShozokuKikanIchiranEntity> list = service.get所属機関一覧(
+                    new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJohoIchiran().getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode()));
+            div.getShozokuKikanIchiran().getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(list));
+        }
         response.data = div;
         return response;
     }
@@ -112,14 +109,17 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
 
-//        if(入力内容が変更する){
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        boolean hasChanged合議体詳細情報 = false;
+        if (新規モード.equals(モード) || 更新モード.equals(モード)) {
+//            if (div.getShinsakaiIinJoho().) {
 //
-//        }
+//            }
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            // 画面内部モード設定
         }
-        ResponseData<ShinsakaiIinJohoTorokuDiv> response = onClick_shinsaInJohoIchiranGyo(div);
+        モード = 更新モード;
         createHandOf(div).set部品状態変化_修正ボタン();
         response.data = div;
         return response;
@@ -262,7 +262,7 @@ public class ShinsakaiIinJohoToroku {
             return ResponseData.of(div).addMessage(UrErrorMessages.既に登録済.getMessage()).respond();
         } else {
             ShinsakaiIinJohoManager service = ShinsakaiIinJohoManager.createInstance();
-            int count = service.get審査会委員カウント(new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue(), null));
+            int count = service.get審査会委員カウント(new ShinsakaiIinJohoMapperParameter(div.getShinsakaiIinJoho().getTxtShinsainCode().getValue()));
             if (0 < count) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.既に登録済.getMessage()).respond();
             }
