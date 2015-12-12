@@ -44,7 +44,7 @@
 
 
     <!--テーブルDbT7062KaigoJigyoshaDaihyoshaの項目をDbT7062KaigoJigyoshaDaihyoshaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7062KaigoJigyoshaDaihyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity" autoMapping="true">
         <!--<id property="jigyoshaNo" column="dbT7062KaigoJigyoshaDaihyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7062KaigoJigyoshaDaihyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7062KaigoJigyoshaDaihyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

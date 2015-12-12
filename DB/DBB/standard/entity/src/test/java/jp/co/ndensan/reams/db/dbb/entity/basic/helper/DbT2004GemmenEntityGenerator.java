@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.gemmen.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

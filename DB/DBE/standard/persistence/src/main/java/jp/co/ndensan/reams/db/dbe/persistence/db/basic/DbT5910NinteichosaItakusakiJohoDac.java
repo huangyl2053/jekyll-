@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJoho.shichosonCode;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5006NinteichosaIraiJoho.ninteichosaItakusakiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosain.shichosonCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

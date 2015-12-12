@@ -29,7 +29,7 @@
     </sql>
    
     <!--テーブルDbT7131KaigoServiceNaiyouの項目をDbT7131KaigoServiceNaiyouEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7131KaigoServiceNaiyouEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7131KaigoServiceNaiyouEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigoservice.DbT7131KaigoServiceNaiyouEntity" autoMapping="true">
       
         <id property="serviceShuruiCode" column="dbT7131KaigoServiceNaiyou_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <id property="serviceKoumokuCode" column="dbT7131KaigoServiceNaiyou_serviceKoumokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

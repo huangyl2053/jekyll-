@@ -1,8 +1,0 @@
-﻿jigyoshaNo,UDD060KaigoJigyoshaNo,UDD060KaigoJigyoshaNo,,,,,受領委任契約事業者番号,A
-keiyakuKaishiYMD,UDD015YMD,FlexibleDate,,,,,受領委任契約開始日,A
-keiyakuShuryoYMD,UDD015YMD,FlexibleDate,,,,,受領委任契約終了日,A
-serviceShubetsuCode,varchar,RString,,,,,契約サービス種別,A
-jigyoshaYubinNo,UDD003YubinNo,YubinNo,,,,,契約事業者郵便番号,A
-jigyoshaJusho,UDD046AtenaJusho,AtenaJusho,,,,,契約事業者住所,A
-jigyoshaTelNo,UDD026TelNo,TelNo,,,,,契約事業者電話番号,A
-jigyoshaFaxNo,UDD026TelNo,TelNo,,,,,契約事業者FAX番号,A

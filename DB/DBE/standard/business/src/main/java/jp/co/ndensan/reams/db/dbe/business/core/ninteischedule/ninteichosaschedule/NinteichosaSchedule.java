@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteichosaschedu
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteichosaschedulememo.NinteiChosaScheduleMemoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteichosain.ChikuNinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosaschedule.NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -146,7 +146,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
             Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteishinseijoho,
             Models<NinteiChosaScheduleMemoIdentifier, NinteiChosaScheduleMemo> ninteichosaschedulememo,
             Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> chikuninteichosain) {
-   
+
         this.entity = entity;
         this.id = id;
         this.ninteiShinseiJoho = ninteishinseijoho;
@@ -346,14 +346,11 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
     }
 
     /**
-     * 認定調査スケジュール情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査スケジュール情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteichosaSchedule}を返します。
+     * 認定調査スケジュール情報配下の要素を削除対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査スケジュール情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosaSchedule}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosaSchedule}
-     * @throws IllegalStateException
-     * DbT5221NinteichosaScheduleEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5221NinteichosaScheduleEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosaSchedule deleted() {
@@ -365,7 +362,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteichosaSchedule(
-                deletedEntity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo,chikuNinteiChosain);
+                deletedEntity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo, chikuNinteiChosain);
     }
 
     @Override
@@ -374,8 +371,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
     }
 
     /**
-     * 認定調査スケジュール情報のみを変更対象とします。<br/>
-     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュール情報のみを変更対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaSchedule}
      */
@@ -386,7 +382,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new NinteichosaSchedule(
-                modifiedEntity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo,chikuNinteiChosain);
+                modifiedEntity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo, chikuNinteiChosain);
     }
 
     /**
@@ -417,7 +413,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
     /**
      * 認定調査スケジュール情報が保持する届出者情報に対して、指定の識別子に該当する届出者情報を返します。
      *
-     * @param id  認定調査スケジュールメモ情報の識別子
+     * @param id 認定調査スケジュールメモ情報の識別子
      * @return 認定調査スケジュールメモ情報
      * @throws IllegalStateException 指定の識別子に該当する届出者情報がない場合
      */
@@ -438,10 +434,10 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
         return new ArrayList<>(ninteiChosaScheduleMemo.values());
     }
 
-     /**
+    /**
      * 認定調査スケジュール情報が保持する届出者情報に対して、指定の識別子に該当する届出者情報を返します。
      *
-     * @param id  地区認定調査員の識別子
+     * @param id 地区認定調査員の識別子
      * @return 地区認定調査員情報
      * @throws IllegalStateException 指定の識別子に該当する届出者情報がない場合
      */
@@ -461,14 +457,14 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
     public List<ChikuNinteiChosain> getChikuNinteiChosainList() {
         return new ArrayList<>(chikuNinteiChosain.values());
     }
-    
+
     /**
      * {@link NinteichosaSchedule}のシリアライズ形式を提供します。
      *
      * @return {@link NinteichosaSchedule}のシリアライズ形式
      */
     protected Object writeReplace() {
-        return new _SerializationProxy(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo,chikuNinteiChosain);
+        return new _SerializationProxy(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo, chikuNinteiChosain);
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -486,7 +482,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
                 Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteishinseijoho,
                 Models<NinteiChosaScheduleMemoIdentifier, NinteiChosaScheduleMemo> ninteichosaschedulememo,
                 Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> chikuninteichosain) {
-        
+
             this.entity = entity;
             this.id = id;
             this.ninteiShinseiJoho = ninteishinseijoho;
@@ -495,7 +491,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
         }
 
         private Object readResolve() {
-            return new NinteichosaSchedule(this.entity, this.id, this.ninteiShinseiJoho, this.ninteiChosaScheduleMemo,this.chikuNinteiChosain);
+            return new NinteichosaSchedule(this.entity, this.id, this.ninteiShinseiJoho, this.ninteiChosaScheduleMemo, this.chikuNinteiChosain);
         }
     }
 
@@ -506,7 +502,7 @@ public class NinteichosaSchedule extends ParentModelBase<NinteichosaScheduleIden
      * @return {@link NinteichosaScheduleBuilder}
      */
     public NinteichosaScheduleBuilder createBuilderForEdit() {
-        return new NinteichosaScheduleBuilder(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo,chikuNinteiChosain);
+        return new NinteichosaScheduleBuilder(entity, id, ninteiShinseiJoho, ninteiChosaScheduleMemo, chikuNinteiChosain);
     }
 
     @Override

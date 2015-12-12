@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -45,8 +47,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
         this.entity = new DbT5913ChosainJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        this.entity.setNinteiChosainNo(認定調査員コード);
+        this.entity.setNinteichosaItakusakiCode(new ChosaItakusakiCode(認定調査委託先コード));
+        this.entity.setNinteiChosainNo(new ChosainCode(認定調査員コード));
         this.id = new ChosainJohoIdentifier(
                 市町村コード,
                 認定調査委託先コード,
@@ -64,8 +66,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報"));
         this.id = new ChosainJohoIdentifier(
                 entity.getShichosonCode(),
-                entity.getNinteichosaItakusakiCode(),
-                entity.getNinteiChosainNo());
+                entity.getNinteichosaItakusakiCode().getColumnValue(),
+                entity.getNinteiChosainNo().getColumnValue());
     }
 
     /**
@@ -97,7 +99,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      * @return 認定調査委託先コード
      */
     public RString get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+        return entity.getNinteichosaItakusakiCode().getColumnValue();
     }
 
     /**
@@ -106,7 +108,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      * @return 認定調査員コード
      */
     public RString get認定調査員コード() {
-        return entity.getNinteiChosainNo();
+        return entity.getNinteiChosainNo().getColumnValue();
     }
 
     /**
@@ -238,8 +240,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 調査員情報のみを変更対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査員情報のみを変更対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosainJoho}
      */
@@ -253,8 +254,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 保持する調査員情報を削除対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査員情報を削除対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosainJoho}
      */

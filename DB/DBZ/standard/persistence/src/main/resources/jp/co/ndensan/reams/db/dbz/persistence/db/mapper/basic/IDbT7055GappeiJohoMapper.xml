@@ -36,7 +36,7 @@
 
 
     <!--テーブルDbT7055GappeiJohoの項目をDbT7055GappeiJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7055GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7055GappeiJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7055GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity" autoMapping="true">
         <id property="gappeiYMD" column="dbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="chiikiNo" column="dbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7055GappeiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

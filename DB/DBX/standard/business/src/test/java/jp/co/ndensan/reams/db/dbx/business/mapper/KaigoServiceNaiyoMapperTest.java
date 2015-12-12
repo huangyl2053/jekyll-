@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceNaiyo;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceTani;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;

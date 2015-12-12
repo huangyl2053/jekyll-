@@ -1,39 +1,156 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- 概要： 要介護認定申請情報のマッピング用XMLです。 -->
+ 概要： 要介護認定申請情報のマッピング用XMLです。
 
-<!-- どのマッパーインターフェースと対応するかを指定する -->
+ どのマッパーインターフェースと対応するかを指定する
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper">
 
     <select id="getNinteiShinseiJohoEntity"
-    resultMap="resultMap_NinteiKekkaJohoEntity"
-    parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
+            resultMap="resultMap_NinteiKekkaJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteishinseijoho.NinteiShinseiJohoMapperParameter" fetchSize="500">
         SELECT
-            dbT5101NinteiShinseiJoho.*,
-            dbT5201NinteichosaIraiJoho.*
+        dbT5101NinteiShinseiJoho.*,
+        dbT5201NinteichosaIraiJoho.*
         FROM
         (
-            SELECT
-                <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
-            FROM
-                rgdb."DbT5101NinteiShinseiJoho"
-                WHERE
-                    rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho"
+        WHERE
+        rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
         ) AS dbT5101NinteiShinseiJoho
         LEFT OUTER JOIN
         (
-            SELECT
-                <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
-            FROM
-                rgdb."DbT5201NinteichosaIraiJoho"
-         ) AS dbT5201NinteichosaIraiJoho
-                ON dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
-        
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        ) AS dbT5201NinteichosaIraiJoho
+        ON dbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = dbT5201NinteichosaIraiJoho."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
+
     </select>
     <resultMap id="resultMap_NinteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
-        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo"/> 
-        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
-        <collection  property="認定調査依頼情報Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity" 
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo"/>
+        <association property="DbT5101Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection  property="DbT5201Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity"
                      resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
     </resultMap>
-</mapper>
+
+    <select id="countGaitouDataKenSu13" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu13Parameter" fetchSize="500">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS DbT5051
+        ON
+        DbT5051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN
+        (
+        SELECT
+        DbT5201."shinseishoKanriNo"
+        MAX(DbT5201."ninteichosaIraiRirekiNo")
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+        WHERE
+        DbT5201."logicalDeletedFlag" = FALSE
+        GROUP BY DbT5201."shinseishoKanriNo"
+        ) AS TB1
+        ON
+        TB1."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN DbT5201
+        ON
+        DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."ninteichosaIraiRirekiNo" = TB1."ninteichosaIraiRirekiNo"
+        AND DbT5201."ninteichosaKigenYMD" &lt; (#{temp_ninteichosaKigenYMD})
+        <if test="temp_insatusumiTaishoumono_Equal_1" >
+            AND DbT5201."ninteichosaTokusokuYMD" = ""
+        </if>
+        INNER JOIN DbT5105
+        ON
+        DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" != ""
+        AND DbT5105."ninteichosaIraiKanryoYMD" != ""
+        AND DbT5105."ninteichosaKanryoYMD" = ""
+        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" = ""
+        AND DbT5105."ninteiShinsakaiKanryoYMD" = ""
+        AND DbT5105."centerSoshinYMD" = ""
+        WHERE
+        1 = 1
+        <if test="temp_hokennshaCode_isNotEmpty" >
+            AND DbT5101."shoKisaiHokenshaNo" = #{temp_hokennshaCode}
+        </if>
+        <if test="temp_ninteiChosaItakusakiCode_isNotEmpty" >
+            AND DbT5101.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
+        </if>
+        <if test="temp_ninteiChosainCode_isNotEmpty" >
+            AND DbT5101."ninteiChosainCode" = #{temp_ninteiChosainCode}
+        </if>
+        AND DbT5101."shoriJotaiKubun" != "却下"
+        AND DbT5101."shoriJotaiKubun" != "取下"
+    </select>
+
+    <select id="countGaitouDataKenSu2" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter" fetchSize="500">
+        SELECT
+        COUNT(0)
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        INNER JOIN rgdb."DbT5051KoseiShichosonMaster" AS DbT5051
+        ON DbT5051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN
+        (
+        SELECT
+        DbT5201."shinseishoKanriNo"
+        MAX(DbT5201."ninteichosaIraiRirekiNo")
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+        WHERE
+        DbT5201."logicalDeletedFlag" = FALSE
+        GROUP BY DbT5201."shinseishoKanriNo"
+        )AS TB1
+        ON TB1."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN DbT5201
+        ON
+        DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."ninteichosaIraiRirekiNo" = TB1."ninteichosaIraiRirekiNo"
+
+        <if test="temp_kaishibiAndShuryoubi_isNotNull">
+            AND DbT5201."ninteichosaTokusokuYMD"
+            BETWEEN #{temp_insatuKikanKaishibi} AND #{temp_insatuKikanShuryoubi}
+        </if>
+
+        <if test="temp_kaishibi_isNotNull_huryoubi_isNull">
+            AND DbT5201."ninteichosaTokusokuYMD" &gt;= #{temp_insatuKikanKaishibi}
+        </if>
+
+        <if test="temp_kaishibi_isNull_huryoubi_isNotNull">
+            AND DbT5201."ninteichosaTokusokuYMD" &lt;= #{temp_insatuKikanShuryoubi}
+        </if>
+
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        ON
+        DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" != ""
+        AND DbT5105."ninteichosaIraiKanryoYMD" != ""
+        AND DbT5105."ninteichosaKanryoYMD" = ""
+        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" = ""
+        AND DbT5105."ninteiShinsakaiKanryoYMD" = ""
+        AND DbT5105."centerSoshinYMD" = ""
+        WHERE
+        1=1
+        <if test="temp_hokennshaCode_isNotEmpty">
+            AND DbT5101."ninteichosaIraiRirekiNo" = #{temp_hokennshaCode}
+        </if>
+
+        <if test="temp_ninteiChosaItakusakiCode_isNotEmpty">
+            AND DbT5101."ninteiChosaItakusakiCode" = #{temp_ninteiChosaItakusakiCode}
+        </if>
+
+        <if test="temp_ninteiChosainCode_isNotEmpty">
+            AND DbT5101."ninteiChosainCode" = #{temp_ninteiChosainCode}
+        </if>
+
+        AND DbT5101."shoriJotaiKubun" != "却下"
+        AND DbT5101."shoriJotaiKubun" != "取下"
+    </select>
+</mapper>-->

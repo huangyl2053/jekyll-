@@ -32,7 +32,7 @@
 
 
     <!--テーブルDbT2011RankJohoの項目をDbT2011RankJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2011RankJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2011RankJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2011RankJohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2011RankJoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="rankKubun" column="dbT2011RankJoho_rankKubun" />
         <result property="insertDantaiCd" column="dbT2011RankJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

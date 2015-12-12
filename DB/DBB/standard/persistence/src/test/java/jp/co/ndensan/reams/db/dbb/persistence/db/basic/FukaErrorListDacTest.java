@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.FukaErrorListDac;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.testhelper.FukaErrorListInserter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;

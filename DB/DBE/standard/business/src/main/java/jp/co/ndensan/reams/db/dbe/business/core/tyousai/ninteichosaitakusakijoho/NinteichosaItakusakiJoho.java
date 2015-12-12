@@ -12,9 +12,9 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -130,14 +130,11 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
     }
 
     /**
-     * 認定調査委託先情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 認定調査委託先情報配下の要素である調査員情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link NinteichosaItakusakiJoho}を返します。
+     * 認定調査委託先情報配下の要素を削除対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 認定調査委託先情報配下の要素である調査員情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link NinteichosaItakusakiJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link NinteichosaItakusakiJoho}
-     * @throws IllegalStateException
-     * DbT5910NinteichosaItakusakiJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5910NinteichosaItakusakiJohoEntityのデータ状態が変更の場合
      */
     @Override
     public NinteichosaItakusakiJoho deleted() {
@@ -157,8 +154,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
     }
 
     /**
-     * 認定調査委託先情報のみを変更対象とします。<br/>
-     * {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査委託先情報のみを変更対象とします。<br/> {@link DbT5910NinteichosaItakusakiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaItakusakiJoho}
      */

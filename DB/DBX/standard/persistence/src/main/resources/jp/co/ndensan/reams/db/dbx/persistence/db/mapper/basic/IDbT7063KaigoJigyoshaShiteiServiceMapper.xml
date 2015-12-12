@@ -171,7 +171,7 @@
 
 
     <!--テーブルDbT7063KaigoJigyoshaShiteiServiceの項目をDbT7063KaigoJigyoshaShiteiServiceEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity" autoMapping="true">
         <!--<id property="jigyoshaNo" column="dbT7063KaigoJigyoshaShiteiService_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
         <!--<id property="serviceShuruiCode" column="dbT7063KaigoJigyoshaShiteiService_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoServiceShuruiCodeTypeHandler"/>-->
         <id property="yukoKaishiYMD" column="dbT7063KaigoJigyoshaShiteiService_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

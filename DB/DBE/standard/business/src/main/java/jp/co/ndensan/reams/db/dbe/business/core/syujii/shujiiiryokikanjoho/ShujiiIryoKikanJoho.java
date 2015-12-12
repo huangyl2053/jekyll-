@@ -12,12 +12,13 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -48,7 +49,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         this.entity = new DbT5911ShujiiIryoKikanJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setShujiiIryokikanCode(主治医医療機関コード);
+        this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 市町村コード,
                 主治医医療機関コード
@@ -66,7 +67,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         this.entity = requireNonNull(entity.get主治医医療機関情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関情報"));
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 entity.get主治医医療機関情報Entity().getShichosonCode(),
-                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode());
+                entity.get主治医医療機関情報Entity().getShujiiIryokikanCode().getColumnValue());
 
         List<ShujiiJoho> shujiiJohoList = new ArrayList<>();
         for (DbT5912ShujiiJohoEntity shujiiJohoEntity : entity.get主治医情報Entity()) {
@@ -106,7 +107,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode();
+        return entity.getShujiiIryokikanCode().getColumnValue();
     }
 
     /**
@@ -178,16 +179,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      * @return 代表者名
      */
     public RString get代表者名() {
-        return entity.getDaihyoshaName();
-    }
-
-    /**
-     * 代表者名カナを返します。
-     *
-     * @return 代表者名カナ
-     */
-    public RString get代表者名カナ() {
-        return entity.getDaihyoshaNameKana();
+        return entity.getDaihyoshaName().getColumnValue();
     }
 
     /**
@@ -220,14 +212,11 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報配下の要素を削除対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
+     * 主治医医療機関情報配下の要素を削除対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
-     * @throws IllegalStateException
-     * DbT5911ShujiiIryoKikanJohoEntityのデータ状態が変更の場合
+     * @throws IllegalStateException DbT5911ShujiiIryoKikanJohoEntityのデータ状態が変更の場合
      */
     @Override
     public ShujiiIryoKikanJoho deleted() {
@@ -250,8 +239,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報のみを変更対象とします。<br/>
-     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医医療機関情報のみを変更対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */

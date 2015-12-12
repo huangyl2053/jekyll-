@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.relate.shafukukeigengaku;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.shafukukeigengaku.ShafukuKeigenGakuRealtEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

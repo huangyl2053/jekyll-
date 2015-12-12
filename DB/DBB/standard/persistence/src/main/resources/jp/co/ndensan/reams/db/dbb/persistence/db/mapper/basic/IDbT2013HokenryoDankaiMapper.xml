@@ -35,7 +35,7 @@
 
 
     <!--テーブルDbT2013HokenryoDankaiの項目をDbT2013HokenryoDankaiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2013HokenryoDankaiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2013HokenryoDankaiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankaiEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2013HokenryoDankai_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="dankaiIndex" column="dbT2013HokenryoDankai_dankaiIndex" />
         <id property="rankuKubun" column="dbT2013HokenryoDankai_rankuKubun" />

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusaki
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 
 /**
  * 認定調査委託先情報RelateEntityクラスです。
@@ -48,8 +48,7 @@ public class NinteichosaItakusakiJohoRelateEntity implements Cloneable, Serializ
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * NinteichosaItakusakiJohoEntityが持つ{@link DbT5910NinteichosaItakusakiJohoEntity}と<br/>
-     * {@link DbT5913ChosainJohoEntity}のMD5値を計算し、設定します。
+     * NinteichosaItakusakiJohoEntityが持つ{@link DbT5910NinteichosaItakusakiJohoEntity}と<br/> {@link DbT5913ChosainJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.認定調査委託先情報Entity.initializeMd5();

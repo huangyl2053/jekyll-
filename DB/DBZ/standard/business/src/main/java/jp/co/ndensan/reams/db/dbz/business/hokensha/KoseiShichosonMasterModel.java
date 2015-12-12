@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.GappeiChi
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.KokuhorenKoikiShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.RokenShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.hokensha.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

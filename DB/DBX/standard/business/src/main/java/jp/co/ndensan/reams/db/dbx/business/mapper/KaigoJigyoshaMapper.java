@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.IKaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
 
 /**
  * 介護事業者エンティティを変換するクラスです。

@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJoho;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJoho.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJoho.rankKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2011RankJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2011RankJoho;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2011RankJoho.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2011RankJoho.rankKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT2009RentaiGimushaの項目をDbT2009RentaiGimushaEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2009RentaiGimushaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2009RentaiGimushaEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2009RentaiGimushaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.rentainofugimusha.DbT2009RentaiGimushaEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT2009RentaiGimusha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT2009RentaiGimusha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2009RentaiGimusha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

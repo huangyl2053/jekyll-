@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosasc
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteichosain.ChikuNinteiChosainEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
 
@@ -19,50 +19,37 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo
 @lombok.Getter
 @lombok.Setter
 public class NinteichosaScheduleEntity implements Cloneable, Serializable {
-    
+
     private static final long serialVersionUID = -7403649900478063342L;
 
-
     /**
-     * -- GETTER --
-     * 認定調査スケジュール情報Entityを返します。
+     * -- GETTER -- 認定調査スケジュール情報Entityを返します。
      *
-     * @return 認定調査スケジュール情報Entity
-     * -- SETTER --
-     * 認定調査スケジュール情報Entityを設定します。
+     * @return 認定調査スケジュール情報Entity -- SETTER -- 認定調査スケジュール情報Entityを設定します。
      *
      * @param 認定調査スケジュール情報Entity 認定調査スケジュール情報Entity
      */
     private DbT5221NinteichosaScheduleEntity 認定調査スケジュール情報Entity;
     /**
-     * -- GETTER --
-     * 認定調査スケジュールメモ情報EntityListを返します。
+     * -- GETTER -- 認定調査スケジュールメモ情報EntityListを返します。
      *
-     * @return 認定調査スケジュールメモ情報EntityList
-     * -- SETTER --
-     * 認定調査スケジュールメモ情報EntityListを設定します。
+     * @return 認定調査スケジュールメモ情報EntityList -- SETTER -- 認定調査スケジュールメモ情報EntityListを設定します。
      *
      * @param 認定調査スケジュールメモ情報EntityList 認定調査スケジュールメモ情報EntityList
      */
     private List<DbT5222NinteiChosaScheduleMemoEntity> 認定調査スケジュールメモ情報Entity;
     /**
-     * -- GETTER --
-     * 要介護認定申請情報EntityListを返します。
+     * -- GETTER -- 要介護認定申請情報EntityListを返します。
      *
-     * @return 要介護認定申請情報EntityList
-     * -- SETTER --
-     * 要介護認定申請情報EntityListを設定します。
+     * @return 要介護認定申請情報EntityList -- SETTER -- 要介護認定申請情報EntityListを設定します。
      *
      * @param 要介護認定申請情報EntityList 要介護認定申請情報EntityList
      */
     private List<DbT5101NinteiShinseiJohoEntity> 要介護認定申請情報Entity;
     /**
-     * -- GETTER --
-     * 地区認定調査員EntityListを返します。
+     * -- GETTER -- 地区認定調査員EntityListを返します。
      *
-     * @return 地区認定調査員EntityList
-     * -- SETTER --
-     * 地区認定調査員EntityListを設定します。
+     * @return 地区認定調査員EntityList -- SETTER -- 地区認定調査員EntityListを設定します。
      *
      * @param 地区認定調査員EntityList 地区認定調査員EntityList
      */

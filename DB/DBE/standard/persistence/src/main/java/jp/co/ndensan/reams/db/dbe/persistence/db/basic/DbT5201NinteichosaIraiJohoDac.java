@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5201NinteichosaIraiJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5201NinteichosaIraiJoho.ninteichosaIraiRirekiNo;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5201NinteichosaIraiJoho.shinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5006NinteichosaIraiJoho.ninteichosaIraiRirekiNo;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5009NinteichosahyoJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;

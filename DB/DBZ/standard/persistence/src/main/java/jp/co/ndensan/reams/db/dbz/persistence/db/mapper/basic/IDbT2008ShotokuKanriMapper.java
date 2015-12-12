@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.shotoku.DbT2008ShotokuKanriEntity;
 
 /**
  *
@@ -18,5 +18,5 @@ public interface IDbT2008ShotokuKanriMapper {
      * @return {@linkDbT2008ShotokuKanriEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
-    DbT2008ShotokuEntity getEntity();
+    DbT2008ShotokuKanriEntity getEntity();
 }

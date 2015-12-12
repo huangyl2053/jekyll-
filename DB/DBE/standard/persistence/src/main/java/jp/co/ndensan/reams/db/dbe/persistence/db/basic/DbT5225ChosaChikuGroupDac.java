@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5912ShujiiJoho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosain.chosaChikuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosain.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikuGroupCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
@@ -54,9 +54,9 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
         return accessor.select().
                 table(DbT5225ChosaChikuGroup.class).
                 where(and(
-                eq(chosaChikuGroupCode, 調査地区グループコード),
-                eq(chosaChikuCode, 調査地区コード),
-                eq(shichosonCode, 市町村コード))).
+                                eq(chosaChikuGroupCode, 調査地区グループコード),
+                                eq(chosaChikuCode, 調査地区コード),
+                                eq(shichosonCode, 市町村コード))).
                 toObject(DbT5225ChosaChikuGroupEntity.class);
     }
 

@@ -8,9 +8,13 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoh
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -32,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 要介護認定申請情報を管理するクラスです。
  */
 public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, DbT5101NinteiShinseiJohoEntity, NinteiShinseiJoho> implements Serializable {
+
     private static final long serialVersionUID = -6750659012319427853L;
 
     private final DbT5101NinteiShinseiJohoEntity entity;
@@ -433,7 +438,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteiChosaItakusakiCode();
     }
 
@@ -442,7 +447,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 認定調査員コード
      */
-    public RString get認定調査員コード() {
+    public ChosainCode get認定調査員コード() {
         return entity.getNinteiChosainCode();
     }
 
@@ -460,7 +465,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 主治医医療機関コード
      */
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -469,7 +474,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
      *
      * @return 主治医コード
      */
-    public RString get主治医コード() {
+    public ShujiiCode get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -782,8 +787,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
     }
 
     /**
-     * 要介護認定申請情報のみを変更対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定申請情報のみを変更対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiShinseiJoho}
      */
@@ -797,8 +801,7 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
     }
 
     /**
-     * 保持する要介護認定申請情報を削除対象とします。<br/>
-     * {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定申請情報を削除対象とします。<br/> {@link DbT5101NinteiShinseiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiShinseiJoho}
      */
@@ -824,12 +827,13 @@ public class NinteiShinseiJoho extends ModelBase<NinteiShinseiJohoIdentifier, Db
 
     }
 
-     @Override
+    @Override
     public boolean hasChanged() {
         return hasChangedEntity();
     }
-    
+
     private static final class _SerializationProxy implements Serializable {
+
         private static final long serialVersionUID = 4735000892354765275L;
 
         private final DbT5101NinteiShinseiJohoEntity entity;

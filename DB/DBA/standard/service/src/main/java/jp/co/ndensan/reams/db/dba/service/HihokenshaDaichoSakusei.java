@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.HihokenshaDaichoSakusei.HihokenshaEn
 import jp.co.ndensan.reams.db.dba.entity.db.HihokenshaDaichoSakusei.RoreiFukushiNenkinJukyushaDivisionEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.HihokenshaDaichoSakusei.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.HihokenshaDaichoSakusei.HihokenshaDaichoSakuseiMapper;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;

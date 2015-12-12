@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.mapper.basic.shichosonsentaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

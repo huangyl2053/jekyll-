@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.lang.reflect.Constructor;
 import jp.co.ndensan.reams.db.dbx.business.core.KaigoJigyoshaDaihyosha.Builder;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
