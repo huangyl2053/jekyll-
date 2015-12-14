@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author soft863
+ * サービスコード入力ガイドのダイアログパラメータクラスです。
  */
 public class ServiceCodeModel implements Serializable {
 

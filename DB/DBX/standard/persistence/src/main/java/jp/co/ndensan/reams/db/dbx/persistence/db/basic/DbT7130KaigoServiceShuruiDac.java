@@ -85,8 +85,6 @@ public class DbT7130KaigoServiceShuruiDac implements ISaveable<DbT7130KaigoServi
     @Override
     public int save(DbT7130KaigoServiceShuruiEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス種類エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
