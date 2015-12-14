@@ -66,7 +66,6 @@ public class HihousyosaiFinder {
     /**
      * 所在保険者リスト情報取得。
      *
-     * @param systemDate RDate
      * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
     @Transaction
