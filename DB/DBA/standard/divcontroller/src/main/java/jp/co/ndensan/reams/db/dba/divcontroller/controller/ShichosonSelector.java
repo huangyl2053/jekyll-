@@ -20,10 +20,9 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShichosonSelector {
 
-    private final ShichosonSentakuFinder service;
-    //TODO 張紅麗　QA57　市町村選択モードの確認　2015/12/02まで
     private static final RString KOUSEI_MODO_KOUSEI = new RString("1");
     private static final RString KOUSEI_MODO_KYU = new RString("0");
+    private final ShichosonSentakuFinder service;
 
     /**
      * コンストラクタです。
@@ -43,7 +42,7 @@ public class ShichosonSelector {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         RString 構成市町村モード = model.getShichosonModel();
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
-        List<ShichosonSelectorResult> resultList = new ArrayList();
+        List<ShichosonSelectorResult> resultList = new ArrayList<>();
         if (KOUSEI_MODO_KYU.equals(構成市町村モード)) {
             resultList = service.getGapeiShichosonSentaku(FlexibleDate.getNowDate());
         }
@@ -78,7 +77,7 @@ public class ShichosonSelector {
     public ResponseData<ShichosonSelectorDiv> onClick_btnSentaku(ShichosonSelectorDiv div) {
         ResponseData<ShichosonSelectorDiv> response = new ResponseData<>();
         ShichosonSelectorModel model = new ShichosonSelectorModel();
-        List<ShichosonSelectorResult> list = new ArrayList();
+        List<ShichosonSelectorResult> list = new ArrayList<>();
         for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
             ShichosonSelectorResult result = new ShichosonSelectorResult();
             result.set市町村コード(new LasdecCode(row.getTxtShichosonCode()));

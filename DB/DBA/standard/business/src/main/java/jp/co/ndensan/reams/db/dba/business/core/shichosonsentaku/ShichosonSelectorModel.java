@@ -5,7 +5,7 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 市町村選択ShichosonSelectorModelの作成する。
+ * 市町村選択ShichosonSelectorModelクラスです。
  *
  */
 public class ShichosonSelectorModel implements Serializable {
@@ -18,6 +18,7 @@ public class ShichosonSelectorModel implements Serializable {
     private List<ShichosonSelectorResult> list;
 
     /**
+     * listを取得します。
      *
      * @return list
      */
@@ -26,14 +27,16 @@ public class ShichosonSelectorModel implements Serializable {
     }
 
     /**
+     * listを設定します。
      *
-     * @param list list
+     * @param list List<ShichosonSelectorResult>
      */
     public void setList(List<ShichosonSelectorResult> list) {
         this.list = list;
     }
 
     /**
+     * shichosonModelを取得します。
      *
      * @return shichosonModel
      */
@@ -42,14 +45,16 @@ public class ShichosonSelectorModel implements Serializable {
     }
 
     /**
+     * shichosonModelを設定します。
      *
-     * @param shichosonModel shichosonModel
+     * @param shichosonModel RString
      */
     public void setShichosonModel(RString shichosonModel) {
         this.shichosonModel = shichosonModel;
     }
 
     /**
+     * shichosonCodeを取得します。
      *
      * @return shichosonCode
      */
@@ -58,14 +63,16 @@ public class ShichosonSelectorModel implements Serializable {
     }
 
     /**
+     * shichosonCodeを設定します。
      *
-     * @param shichosonCode shichosonCode
+     * @param shichosonCode RString
      */
     public void setShichosonCode(RString shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
+     * shichosonNameを取得します。
      *
      * @return shichosonName
      */
@@ -74,8 +81,9 @@ public class ShichosonSelectorModel implements Serializable {
     }
 
     /**
+     * shichosonNameを設定します。
      *
-     * @param shichosonName shichosonName
+     * @param shichosonName RString
      */
     public void setShichosonName(RString shichosonName) {
         this.shichosonName = shichosonName;
