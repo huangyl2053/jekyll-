@@ -222,9 +222,10 @@ module DBZ
                     this.controls.btnKakutei().disabled = false;
 					this.controls.btnInputClear().displayNone = false;
                     this.controls.btnInputClear().disabled = false;
-                    this.controls.panelTekiyoRireki().displayNone = true;                	
+                    this.controls.panelTekiyoRireki().displayNone = false;                	
 					this.controls.txtNyusyoDate().displayNone = true;
                     this.controls.txtTaisyoDate().displayNone = true;
+                    this.controls.btnAdd().displayNone = true;
 					
                 }
                 
