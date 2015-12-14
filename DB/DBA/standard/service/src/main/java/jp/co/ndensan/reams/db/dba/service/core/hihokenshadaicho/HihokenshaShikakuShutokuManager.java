@@ -107,7 +107,7 @@ public class HihokenshaShikakuShutokuManager {
         shikibetsuCode = entity.getShikibetsuCode();
         idoYMD = entity.getIdoYMD();
         //TODO 李　Hihokenshanotsukibanクラスがあります。　2015/12/15 まで
-//        hihokenshaNo = Hihokenshanotsukiban.createInstance().getHihokenshanotsukiban(shikibetsuCode);//5
+//        hihokenshaNo = Hihokenshanotsukiban.createInstance().getHihokenshanotsukiban(shikibetsuCode);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
         edaNo = getSaidaiEdaban(parameter);
         shikakuShutokuYMD = entity.getShikakuShutokuYMD();

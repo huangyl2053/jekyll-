@@ -88,7 +88,7 @@ public final class HihokenshaShikakuShutokuMapperParameter {
      * @param shikibetsuCode 識別コード
      * @return 被保険者台帳管理（資格取得）被保険者台帳管理のパラメータ
      */
-    public static HihokenshaShikakuShutokuMapperParameter createParam_HokenshaDaicho(//19
+    public static HihokenshaShikakuShutokuMapperParameter createParam_HokenshaDaicho(
             HihokenshaNo hihokenshaNo,
             ShikibetsuCode shikibetsuCode) {
         return createParam_common(
