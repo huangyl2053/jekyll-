@@ -156,7 +156,7 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     /**
      * 構成市町村リスト情報を取得します。
      *
-     * @return List<KoseiShichoson> 構成市町村リスト情報のリスト
+     * @return List<DbT7051KoseiShichosonMasterEntity> 構成市町村リスト情報のリスト
      */
     @Transaction
     public List<DbT7051KoseiShichosonMasterEntity> koseiShichosonList() {
@@ -164,7 +164,8 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
         return accessor.
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
-                where(eq(gappeiKyuShichosonKubun, '0')).
+                where(
+                        eq(gappeiKyuShichosonKubun, '0')).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
@@ -178,12 +179,11 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonUserHandan(RString 識別ID) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        DbT7051KoseiShichosonMasterEntity entity = accessor.
+        return accessor.
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(eq(shichosonShokibetsuID, 識別ID)).
                 toObject(DbT7051KoseiShichosonMasterEntity.class);
-        return entity;
     }
 
     /**
@@ -215,14 +215,13 @@ public class DbT7051KoseiShichosonMasterDac implements ISaveable<DbT7051KoseiShi
     @Transaction
     public DbT7051KoseiShichosonMasterEntity shichosonSonzaiHandan(RString 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        DbT7051KoseiShichosonMasterEntity entity = accessor.
+        return accessor.
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(
                                 eq(shichosonShokibetsuID, 市町村コード),
                                 eq(gappeiKyuShichosonKubun, "0"))).
                 toObject(DbT7051KoseiShichosonMasterEntity.class);
-        return entity;
 
     }
 
