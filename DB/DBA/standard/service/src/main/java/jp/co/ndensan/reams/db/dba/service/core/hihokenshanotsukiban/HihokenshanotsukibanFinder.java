@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.hihokenshanotsukiban;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshanotsukiban.HihokenshanotsukibanParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -23,7 +23,6 @@ public class HihokenshanotsukibanFinder {
 
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7037ShoKofuKaishuDac dbT7037Dac;
-    private HihokenshaNo 被保険者番号;
 
     /**
      * コンストラクタです。
@@ -50,67 +49,52 @@ public class HihokenshanotsukibanFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshanotsukibanFinder}のインスタンスを返します。
      *
-     * @return{@link InstanceProvider#create}にて生成した{@link HihokenshanotsukibanFinder}のインスタンス
+     * @return HihokenshanotsukibanFinder
      */
     public static HihokenshanotsukibanFinder createInstance() {
         return InstanceProvider.create(HihokenshanotsukibanFinder.class);
     }
 
     /**
-     * 識別コードによって被保険者台帳管理の被保険者番号を得ます。
+     * 識別コードによって被保険者番号を得ます。
      *
-     * @param shikibetuCode shikibetuCode
+     * @param 識別コード ShikibetsuCode
      * @return HihokenshaNo HihokenshaNo
      */
     @Transaction
     public HihokenshaNo getHihokenshanotsukiban(
-            HihokenshanotsukibanParameter shikibetuCode
+            ShikibetsuCode 識別コード
     ) {
-        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.seletHihokenshaNo(shikibetuCode.getShikibetsuCode());
-        if (entity == null || "".isEmpty()) {
-            HihokenshanotsukibanFinder hihokenshanotsukiban = new HihokenshanotsukibanFinder();
-            hihokenshanotsukiban.getNihokenshaNoAkashikouhu(shikibetuCode);
+        HihokenshaNo 被保険者番号;
+
+        DbT1001HihokenshaDaichoEntity entity = dbT1001Dac.seletHihokenshaNo(識別コード);
+        if (entity == null) {
+            DbT7037ShoKofuKaishuEntity entitys = dbT7037Dac.selectHihokenshaNo(識別コード);
+            if (entitys == null) {
+                被保険者番号 = HihokenshanotsukibanFinder.getHubanHouhou(識別コード);
+            }
+            被保険者番号 = entitys.getHihokenshaNo();
         }
-        return entity.getHihokenshaNo();
+        被保険者番号 = entity.getHihokenshaNo();
+        if (被保険者番号.getColumnValue().length() != 10) {
+
+//            throw new ApplicationException(
+//                    UrzErrorMessage.桁数が不正.getMessage());
+        }
+        return 被保険者番号;
     }
 
-    /**
-     * 識別コードによって証交付回収の被保険者番号を取得ます。
-     *
-     * @param shikibetuCode shikibetuCode
-     * @return HihokenshaNo HihokenshaNo
-     */
-    @Transaction
-    public HihokenshaNo getNihokenshaNoAkashikouhu(
-            HihokenshanotsukibanParameter shikibetuCode
-    ) {
-        DbT7037ShoKofuKaishuEntity entity = dbT7037Dac.selectHihokenshaNo(shikibetuCode.getShikibetsuCode());
-        if (entity == null || "".isEmpty()) {
-            HihokenshanotsukibanFinder hihokenshanotsukiban = new HihokenshanotsukibanFinder();
-            hihokenshanotsukiban.getHubanHouhou(shikibetuCode);
-        }
-        return entity.getHihokenshaNo();
-    }
+    private static HihokenshaNo getHubanHouhou(ShikibetsuCode 識別コード) {
 
-    /**
-     * 被保険者番号作成です
-     *
-     * @param shikibetuCode shikibetuCode
-     * @return 被保険者番号 被保険者番号
-     */
-    @Transaction
-    public HihokenshaNo getHubanHouhou(
-            HihokenshanotsukibanParameter shikibetuCode
-    ) {
-
+        HihokenshaNo 被保険者番号 = null;
         // TODO 袁献輝 EnumクラスHihokenshaNoFubanHohoに「付番方法」がない、 QA回答まち。
         RString hubanhouhou = new RString("");
 //                BusinessConfig.get(HihokenshaNoFubanHoho.付番方法, SubGyomuCode.DBA介護資格);
 
         if (new RString("1").equals(hubanhouhou)) {
-            被保険者番号 = new HihokenshaNo(shikibetuCode.getShikibetsuCode().toString().substring(
-                    shikibetuCode.getShikibetsuCode().toString().length() - 10,
-                    shikibetuCode.getShikibetsuCode().toString().length()).trim());
+            被保険者番号 = new HihokenshaNo(識別コード.toString().substring(
+                    識別コード.toString().length() - 10,
+                    識別コード.toString().length()).trim());
 
         }
         if (new RString("2").equals(hubanhouhou)) {
