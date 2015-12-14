@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 履歴期間重複チェックするためのMyBatis用パラメータクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 public final class NyutaishoshaKanriMapperParameter {
 

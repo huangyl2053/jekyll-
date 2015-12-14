@@ -11,16 +11,17 @@ import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 介護保険施設入退所者管理の履歴期間重複チェックです
+ * 介護保険施設入退所者管理の履歴期間重複チェックです。
  */
 public class NyutaishoshaKanriFinder {
 
-    private final MapperProvider mapperProvider;
     private static final RString KAIGOHOHENSHISETSU_VALUE = new RString("11");
     private static final RString JUSHOCHITOKUREITAISHOSHISETSU_VALUE = new RString("12");
     private static final RString TEKIYOJOGAISHISETSU_VALUE = new RString("21");
+    private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
@@ -30,9 +31,9 @@ public class NyutaishoshaKanriFinder {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link JushotiTokureiFinder}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link NyutaishoshaKanriFinder}のインスタンスを返します。
      *
-     * @return JushotiTokureiFinder
+     * @return NyutaishoshaKanriFinder
      */
     public static NyutaishoshaKanriFinder createInstance() {
         return InstanceProvider.create(NyutaishoshaKanriFinder.class);
@@ -55,6 +56,7 @@ public class NyutaishoshaKanriFinder {
      * @param 入所施設種類 入所施設種類
      * @return rirekiKikanJufukuFlag
      */
+    @Transaction
     public Boolean isRirekiKikanJufukuFlag(FlexibleDate 入所年月日, FlexibleDate 退所年月日, RString 入所施設種類) {
         int count = 0;
         INyutaishoshaKanriMapper mapper = mapperProvider.create(INyutaishoshaKanriMapper.class);
@@ -75,8 +77,6 @@ public class NyutaishoshaKanriFinder {
             default:
                 break;
         }
-
         return 2 <= count;
     }
-
 }
