@@ -12,14 +12,12 @@ import jp.co.ndensan.reams.db.dba.business.core.koseishichosonmaster.koseishicho
 import jp.co.ndensan.reams.db.dba.business.shichoson.ShichosonBusiness;
 import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihousyosai.HihousyosaiFinderParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.KyuShichosonCode;
 import jp.co.ndensan.reams.db.dbz.service.kyushichosoncode.KyuShichosonCodeJoho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -64,7 +62,7 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 所在保険者リスト情報取得。
+     * 所在保険者リスト情報取得です。
      *
      * @return List<KoseiShichosonMaster> 構成市町村マスタリスト
      */
@@ -88,7 +86,9 @@ public class HihousyosaiFinder {
     public List<ShichosonBusiness> getGappeiShichosonList(HihousyosaiFinderParameter parameter) {
         List<ShichosonBusiness> kyuhokenshaList = new ArrayList<>();
         ShichosonBusiness business = new ShichosonBusiness();
-        KyuShichosonCodeJoho kyuushichouson = KyuShichosonCode.getKyuShichosonCodeJoho(LasdecCode.EMPTY, DonyukeitaiCode.事務広域);
+        KyuShichosonCodeJoho kyuushichouson = new KyuShichosonCodeJoho();
+        //TODO 方法のパラメータ数が一緻しない QA回答まち。
+//        KyuShichosonCode.getKyuShichosonCodeJoho(LasdecCode.EMPTY, DonyukeitaiCode.事務広域);
         List<KyuShichosonCode> kyuushichousonList = kyuushichouson.get旧市町村コード情報List();
         if (kyuushichousonList == null) {
             return null;
@@ -104,7 +104,7 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 得喪情報取得。
+     * 得喪情報取得です。
      *
      * @param parameter 被保詳細パラメータ
      * @return 被保険者台帳管理オブジェクト HihokenshaDaicho
@@ -123,7 +123,7 @@ public class HihousyosaiFinder {
     }
 
     /**
-     * 被保区分リスト情報取得。
+     * 被保区分リスト情報取得です。
      *
      * @param code Code
      *
