@@ -294,7 +294,7 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
      * @throws 被保険者番号 被保険者番号
      */
     @Transaction
-    public DbT1001HihokenshaDaichoEntity seletHihokenshaNo(
+    public DbT1001HihokenshaDaichoEntity selectHihokenshaNo(
             ShikibetsuCode 識別コード) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
